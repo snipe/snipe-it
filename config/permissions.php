@@ -415,9 +415,7 @@ return array(
             'note'       => '',
             'display'    => true,
         ),
-    ),
-
-
+    ), 
 
     'Suppliers' => array(
         array(

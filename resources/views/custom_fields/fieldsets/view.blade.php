@@ -25,7 +25,10 @@
           name="fieldsets" id="sort" class="table table-responsive todo-list">
           <thead>
             <tr>
+              {{-- Hide the sorting handle if we can't update the fieldset --}}
+              @can('update', $custom_fieldset)
               <th class="col-md-1"></th>
+              @endcan
               <th class="col-md-1">{{ trans('admin/custom_fields/general.order') }}</th>
               <th class="col-md-3">{{ trans('admin/custom_fields/general.field_name') }}</th>
               <th class="col-md-2">{{ trans('admin/custom_fields/general.field_format') }}</th>
@@ -37,7 +40,9 @@
           </thead>
           <tbody>
             @foreach($custom_fieldset->fields as $field)
-            <tr class="cansort" data-index="{{ $field->pivot->custom_field_id }}" id="item_{{ $field->pivot->custom_field_id }}">
+            <tr class="{{ Auth::user()->can('update', $custom_fieldset)?'cansort':'' }}" data-index="{{ $field->pivot->custom_field_id }}" id="item_{{ $field->pivot->custom_field_id }}">
+              {{-- Hide the sorting handle if we can't update the fieldset --}}
+              @can('update', $custom_fieldset)
               <td>
                 <!-- drag handle -->
                 <span class="handle">
@@ -45,6 +50,7 @@
                 <i class="fa fa-ellipsis-v"></i>
                 </span>
               </td>
+              @endcan
               <td class="index">{{$field->pivot->order}}</td>
               <td>{{$field->name}}</td>
               <td>{{$field->format}}</td>
@@ -52,7 +58,9 @@
               <td>{{ $field->field_encrypted=='1' ?  trans('general.yes') : trans('general.no') }}</td>
               <td>{{$field->pivot->required ? "REQUIRED" : "OPTIONAL"}}</td>
               <td>
+                @can('update', $custom_fieldset)
                 <a href="{{ route('fields.disassociate', [$field,$custom_fieldset->id]) }}" class="btn btn-sm btn-danger">Remove</a>
+                @endcan
               </td>
             </tr>
             @endforeach
@@ -60,6 +68,7 @@
           <tfoot>
             <tr>
               <td colspan="5" class="text-right">
+                @can('update', $custom_fieldset)
                 {{ Form::open(['route' =>
                 ["fieldsets.associate",$custom_fieldset->id],
                 'class'=>'form-horizontal',
@@ -70,6 +79,7 @@
                 {{ Form::select("field_id",$custom_fields_list,"",["onchange" => "$('#ordering').submit()"]) }}
                 <span class="alert-msg"><?= $errors->first('field_id'); ?></span>
                 {{ Form::close() }}
+                @endcan
               </td>
             </tr>
           </tfoot>
@@ -82,6 +92,8 @@
 @stop
 
 @section('moar_scripts')
+  @can('update', $custom_fieldset)
+
   <script nonce="{{ csrf_token() }}">
   var fixHelperModified = function(e, tr) {
       var $originals = tr.children();
@@ -119,4 +131,5 @@
       stop: updateIndex
   }).disableSelection();
 </script>
+  @endcan
 @stop

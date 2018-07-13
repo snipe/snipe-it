@@ -8,6 +8,7 @@
 
 @section('content')
 
+@can('view', \App\Models\CustomFieldset::class)
 <div class="row">
   <div class="col-md-9">
     <div class="box box-default">
@@ -15,7 +16,9 @@
       <div class="box-header with-border">
         <h3 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h3>
         <div class="box-tools pull-right">
+          @can('create', \App\Models\CustomFieldset::class)
           <a href="{{ route('fieldsets.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new fieldset">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
+          @endcan
         </div>
       </div><!-- /.box-header -->
 
@@ -62,6 +65,7 @@
                 @endforeach
               </td>
               <td>
+                @can('delete', $fieldset)
                 {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete']) }}
                   @if($fieldset->models->count() > 0)
                   <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
@@ -69,6 +73,7 @@
                   <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                   @endif
                 {{ Form::close() }}
+                @endcan
               </td>
             </tr>
             @endforeach
@@ -85,14 +90,17 @@
     <p>{{ trans('admin/custom_fields/general.about_fieldsets_text') }} </p>
   </div>
 </div> <!-- .row-->
-
+@endcan
+@can('view', \App\Models\CustomField::class)
 <div class="row">
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-header with-border">
         <h3 class="box-title">{{ trans('admin/custom_fields/general.custom_fields') }}</h3>
         <div class="box-tools pull-right">
+          @can('create', \App\Models\CustomField::class)
           <a href="{{ route('fields.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new custom field">{{ trans('admin/custom_fields/general.create_field') }}</a>
+          @endcan
         </div>
 
       </div><!-- /.box-header -->
@@ -147,17 +155,19 @@
                 @endforeach
               </td>
               <td>
-                {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete')) }}
                 <nobr>
+                  @can('update', $field)
                 <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
-
-
+                @endcan               
+                @can('delete', $field)
+                {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
                 @if($field->fieldset->count()>0)
                 <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
                 @else
                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                 @endif
                 {{ Form::close() }}
+                @endcan
                 </nobr>
               </td>
             </tr>
@@ -169,6 +179,7 @@
     </div><!-- /.box -->
   </div> <!-- /.col-md-9-->
 </div>
+@endcan
 
 @stop
 @section('moar_scripts')

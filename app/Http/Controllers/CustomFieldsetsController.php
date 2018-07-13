@@ -38,6 +38,8 @@ class CustomFieldsetsController extends Controller
     {
         $cfset = CustomFieldset::with('fields')->where('id', '=', $id)->orderBy('id', 'ASC')->first();
 
+        $this->authorize('view', $cfset);
+
         if ($cfset) {
             $custom_fields_list = ["" => "Add New Field to Fieldset"] + CustomField::pluck("name", "id")->toArray();
 
@@ -68,6 +70,8 @@ class CustomFieldsetsController extends Controller
     */
     public function create()
     {
+        $this->authorize('create', CustomFieldset::class);
+
         return view("custom_fields.fieldsets.edit");
     }
 
@@ -81,6 +85,8 @@ class CustomFieldsetsController extends Controller
     */
     public function store(Request $request)
     {
+        $this->authorize('create', CustomFieldset::class);
+
         $cfset = new CustomFieldset(
             [
                 "name" => e($request->get("name")),
@@ -141,6 +147,8 @@ class CustomFieldsetsController extends Controller
     {
         $fieldset = CustomFieldset::find($id);
 
+        $this->authorize('delete', $fieldset);
+
         if ($fieldset) {
             $models = AssetModel::where("fieldset_id", "=", $id);
             if ($models->count() == 0) {
@@ -168,6 +176,8 @@ class CustomFieldsetsController extends Controller
     {
 
         $set = CustomFieldset::find($id);
+
+        $this->authorize('update', $set);
 
         foreach ($set->fields as $field) {
             if ($field->id == Input::get('field_id')) {
