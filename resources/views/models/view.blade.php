@@ -172,6 +172,22 @@
                   </li>
               @endif
 
+              @if ($model->min_amt)
+                  <li>
+                      {{ trans('general.min_amt') }}:
+                      {{ $model->min_amt }}
+                  </li>
+              @endif
+
+              @if ($model->normal_amt)
+                  <li>
+                      {{ trans('general.normal_amt') }}:
+                      {{ $model->normal_amt }}
+                  </li>
+              @endif
+
+
+
 
 
               @if  ($model->deleted_at!='')

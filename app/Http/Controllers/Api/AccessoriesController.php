@@ -22,7 +22,7 @@ class AccessoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Accessory::class);
-        $allowed_columns = ['id','name','model_number','eol','notes','created_at','min_amt','company_id'];
+        $allowed_columns = ['id','name','model_number','eol','notes','created_at','min_amt','normal_amt','company_id'];
 
         $accessories = Accessory::whereNull('accessories.deleted_at')->with('category', 'company', 'manufacturer', 'users', 'location');
 

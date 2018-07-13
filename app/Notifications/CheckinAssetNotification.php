@@ -120,6 +120,11 @@ class CheckinAssetNotification extends Notification
             ->subject('Asset checked in');
 
 
+            // get model levels and notify via mail
+            //dd($this->item->model);
+            $notifyLevel = \App\Helpers\Helper::checkModelOrderLevels($this->item->model->id);
+
+
         return $message;
     }
 

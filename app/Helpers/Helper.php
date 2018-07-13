@@ -20,6 +20,7 @@ use App\Models\Consumable;
 use App\Models\Asset;
 use App\Models\Setting;
 use Crypt;
+use Mail;
 use Illuminate\Contracts\Encryption\DecryptException;
 
 class Helper
@@ -456,6 +457,98 @@ class Helper
         return $randomString;
     }
 
+
+    /**
+     * This nasty little method gets the low inventory info for the
+     * alert dropdown
+     *
+     * @author [Patrick Mutwiri] [<patwiri@gmail.com>]
+     * @since [v3.0]
+     * @return Array
+     */
+    public static function checkModelOrderLevels($model_id=0)
+    {
+        if(!empty($model_id)) {
+            $model = AssetModel::find($model_id);
+            $model_name     = $model->name;
+            $model_number   = $model->model_number;
+            $snipesettings  = \App\Models\Setting::getSettings();
+            $min_amt        = $model->min_amt; //danger Re-order zone
+            $normal_amt     = $model->normal_amt; // Normal Re order levels reached
+            $systemMail     = '';
+            $alert_email    = 'patrick.mutwiri@poainternet.net';
+            $admin_cc_email = '';
+            if (is_null($setting = Setting::first())) {
+                return 'no settings found';
+            } else {
+                $alert_email = $setting->alert_email;
+                $admin_cc_email = $setting->admin_cc_email;
+                //can send mail
+            }
+
+            $totalassets = Asset::where([
+                'model_id'      => $model_id,
+                'deleted_at'    => null,
+            ])->count();
+
+            $totalcheckedout  = Asset::where('model_id', $model_id)
+                ->where('assigned_to', '!=', null)
+                ->where('deleted_at', null)
+                ->count();
+
+            $totalunassigned  = Asset::where([
+                'model_id'      => $model_id,
+                'deleted_at'    => null,
+                'assigned_to'   => null
+            ])->count();
+
+            if($totalunassigned <= $min_amt ) {
+                // danger zone Bud
+                $title   = $model_name. ' Levels Critical';
+                $subject = $title;
+                $snipeSettings = $snipesettings;
+                $level = 3;
+
+                Mail::send('notifications.modelminreorder', ['title' => $title, 'snipeSettings' => $snipesettings], function ($message) use ($title, $subject, $snipeSettings, $level, $alert_email, $admin_cc_email, $snipesettings)
+                {
+                    $message->from($alert_email, $snipesettings->site_name);
+                    $message->to($alert_email);
+                    if(!empty($admin_cc_email)) { 
+                        $message->cc($admin_cc_email, $snipesettings->site_name); 
+                    }
+                    $message->subject($subject);
+                    $message->priority($level);
+                });
+
+            } elseif ($totalunassigned <= $normal_amt && $totalunassigned > $min_amt) {
+                // no danger but reorder
+                // danger zone Bud
+                $title   = $model_name. ' Re-order Level';
+                $subject = $title;
+                $snipeSettings = $snipesettings;
+                $level = 3;
+
+                Mail::send('notifications.modelnormalreorder', ['title' => $title, 'snipeSettings' => $snipesettings], function ($message) use ($title, $subject, $snipeSettings, $level, $alert_email, $admin_cc_email, $snipesettings)
+                {
+                    $message->from($alert_email, $snipesettings->site_name);
+                    $message->to($alert_email);
+                    if(!empty($admin_cc_email)) { 
+                        $message->cc($admin_cc_email, $snipesettings->site_name); 
+                    }
+                    $message->subject($subject);
+                    $message->priority($level);
+                });
+
+            } else {
+                // all good. Go along and sing Mkomboti 
+                // :)
+            }
+
+        } else {
+            return 'Model not selected';
+        }
+    }
+    
 
     /**
      * This nasty little method gets the low inventory info for the

@@ -131,7 +131,7 @@
     'manufacturer'			=> 'Ang Tagapagsagawa',
     'manufacturers'			=> 'Ang mga Tagapagsagawa',
     'markdown'				=> 'Ang field na ito ay nagpapahintulot sa iyo na <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored na markdown</a>.',
-    'min_amt'				=> 'Ang Min. QTY',
+    'min_amt'				=> 'Ang Min. Re-Order Level',
     'min_amt_help'	=> 'Ang pinakamababang bilang ng mga aytem na pwedeng magamit bago mag-trigger ang alert.',
     'model_no'				=> 'Ang Model No.',
     'months'				=> 'mga buwan',

@@ -29,7 +29,7 @@
 
 <div class="row">
   <!-- panel -->
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-4 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-teal">
       <div class="inner">
@@ -45,7 +45,7 @@
     </div>
   </div><!-- ./col -->
 
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-4 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-maroon">
       <div class="inner">
@@ -62,7 +62,7 @@
   </div><!-- ./col -->
 
 
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-4 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-orange">
       <div class="inner">
@@ -78,7 +78,7 @@
     </div>
   </div><!-- ./col -->
 
-  <div class="col-lg-3 col-xs-6">
+  <div class="hidden col-lg-4 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-purple">
       <div class="inner">

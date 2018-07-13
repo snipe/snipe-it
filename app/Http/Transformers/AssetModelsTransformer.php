@@ -44,6 +44,8 @@ class AssetModelsTransformer
                 'name'=> e($assetmodel->fieldset->name)
             ]  : null,
             'eol' => ($assetmodel->eol > 0) ? $assetmodel->eol .' months': 'None',
+            'min_amt' => (int) $assetmodel->min_amt,
+            'normal_amt' => (int) $assetmodel->normal_amt,
             'notes' => e($assetmodel->notes),
             'created_at' => Helper::getFormattedDateObject($assetmodel->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($assetmodel->updated_at, 'datetime'),

@@ -491,6 +491,12 @@
                   <span>{{ trans('general.accessories') }}</span>
                 </a>
               </li>
+              <li{!! (Request::is('marketing*') ? ' class="active"' : '') !!}>
+                <a href="{{ route('marketing.index') }}">
+                  <i class="fa fa-share-alt"></i>
+                  <span>{{ trans('general.marketing') }}</span>
+                </a>
+              </li>
               @endcan
               @can('view', \App\Models\Consumable::class)
             <li{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
@@ -663,6 +669,17 @@
                             {{ trans('general.accessory_report') }}
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ url('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }}>
+                            {{ trans('general.reorder_stock_levels_report') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('hardware') }}" {{ (Request::is('hardware') ? ' class="active"' : '') }}>
+                            {{ trans('general.all_asset_report') }}
+                        </a>
+                    </li>
+
                     <li>
                         <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
                             {{ trans('general.custom_report') }}

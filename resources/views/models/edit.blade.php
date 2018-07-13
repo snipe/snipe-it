@@ -15,6 +15,8 @@
 @include ('partials.forms.edit.model_number')
 @include ('partials.forms.edit.depreciation')
 
+@include ('partials.forms.edit.minimum_quantity')
+@include ('partials.forms.edit.normal_quantity')
 <!-- EOL -->
 
 <div class="form-group {{ $errors->has('eol') ? ' has-error' : '' }}">

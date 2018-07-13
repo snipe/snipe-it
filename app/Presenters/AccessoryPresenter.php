@@ -89,6 +89,11 @@ class AccessoryPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('general.min_amt'),
             ], [
+                "field" => "normal_qty",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('general.normal_amt'),
+            ], [
                 "field" => "remaining_qty",
                 "searchable" => false,
                 "sortable" => false,

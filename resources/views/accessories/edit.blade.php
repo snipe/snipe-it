@@ -21,6 +21,7 @@
 @include ('partials.forms.edit.purchase_cost')
 @include ('partials.forms.edit.quantity')
 @include ('partials.forms.edit.minimum_quantity')
+@include ('partials.forms.edit.normal_quantity')
 
 <!-- Image -->
 

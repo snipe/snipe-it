@@ -87,6 +87,15 @@ class SnipeModel extends Model
         return;
     }
 
+    public function setNormalAmtAttribute($value)
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['normal_amt'] = $value;
+        return;
+    }    
+
     public function setParentIdAttribute($value)
     {
         if ($value == '') {

@@ -30,6 +30,9 @@ class AssetModel extends SnipeModel
         'category_id'       => 'required|integer|exists:categories,id',
         'manufacturer_id'   => 'required|integer|exists:manufacturers,id',
         'eol'   => 'integer:min:0|max:240|nullable',
+        'min_amt'   => 'integer:min:0|max:240|nullable',
+        'normal_amt'   => 'integer:min:0|max:240|nullable',
+
     );
 
     /**
@@ -59,6 +62,8 @@ class AssetModel extends SnipeModel
         'category_id',
         'depreciation_id',
         'eol',
+        'min_amt',
+        'normal_amt',
         'fieldset_id',
         'image',
         'manufacturer_id',

@@ -47,6 +47,8 @@ return array(
     'login' => 'Login:',
     'Low_Inventory_Report' => 'Low Inventory Report',
     'min_QTY' => 'Min QTY',
+    'min_amt_message' => 'This model is below normal and minimum re-order level in terms of its assets, please see that new ones have been added, or soon there will be none to check out. Please note, this level is critical',
+    'normal_amt_message' => 'This model is below normal re-order level in terms of its assets, please see that new ones have been added',
     'name' => 'Name',
     'new_item_checked' => 'A new item has been checked out under your name, details are below.',
     'password' => 'Password:',
