@@ -59,7 +59,13 @@ class CustomFieldsController extends Controller
     {
         $this->authorize('edit', CustomField::class);
         $field = CustomField::findOrFail($id);
-        $data = $request->all();
+        
+        /**
+         * Updated values for the field, 
+         * without the "field_encrypted" flag, preventing the change of encryption status
+         * @var array
+         */
+        $data = $request->except(['field_encrypted']);
 
         $validator = Validator::make($data, $field->validationRules());
         if ($validator->fails()) {

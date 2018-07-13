@@ -169,7 +169,6 @@ class CustomFieldsController extends Controller
         $field->name = e($request->get("name"));
         $field->element = e($request->get("element"));
         $field->field_values = e($request->get("field_values"));
-        $field->field_encrypted = e($request->get("field_encrypted", 0));
         $field->user_id = Auth::user()->id;
         $field->help_text = $request->get("help_text");
         $field->show_in_email = $request->get("show_in_email", 0);
