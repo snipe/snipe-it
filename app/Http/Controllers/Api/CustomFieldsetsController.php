@@ -79,7 +79,7 @@ class CustomFieldsetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', CustomFieldset::class);
+        $this->authorize('update', CustomFieldset::class);
         $fieldset = CustomFieldset::findOrFail($id);
         $fieldset->fill($request->all());
 

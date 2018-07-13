@@ -92,7 +92,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Category::class);
+        $this->authorize('update', Category::class);
         $category = Category::findOrFail($id);
         $category->fill($request->all());
 

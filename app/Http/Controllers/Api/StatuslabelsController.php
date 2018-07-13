@@ -101,7 +101,7 @@ class StatuslabelsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Statuslabel::class);
+        $this->authorize('update', Statuslabel::class);
         $statuslabel = Statuslabel::findOrFail($id);
         
         $request->except('deployable', 'pending','archived');
@@ -160,6 +160,7 @@ class StatuslabelsController extends Controller
 
     public function getAssetCountByStatuslabel()
     {
+        $this->authorize('view', Statuslabel::class);
 
         $statuslabels = Statuslabel::with('assets')->groupBy('id')->withCount('assets')->get();
 
@@ -237,6 +238,9 @@ class StatuslabelsController extends Controller
      */
     public function checkIfDeployable($id) {
         $statuslabel = Statuslabel::findOrFail($id);
+
+        $this->authorize('view', $statuslabel);
+
         if ($statuslabel->getStatuslabelType()=='deployable') {
             return '1';
         }

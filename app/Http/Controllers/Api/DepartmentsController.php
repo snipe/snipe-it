@@ -114,6 +114,8 @@ class DepartmentsController extends Controller
     {
         $department = Department::findOrFail($id);
 
+        $this->authorize('delete', $department);
+
         if ($department->users->count() > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/departments/message.assoc_users')));
         }

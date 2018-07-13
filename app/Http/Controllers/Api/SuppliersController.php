@@ -93,7 +93,7 @@ class SuppliersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Supplier::class);
+        $this->authorize('update', Supplier::class);
         $supplier = Supplier::findOrFail($id);
         $supplier->fill($request->all());
 

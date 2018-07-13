@@ -26,6 +26,14 @@ use Illuminate\Http\Request;
  */
 class ReportsController extends Controller
 {
+    /**
+     * Checks for correct permissions
+     */
+    public function __construct() {
+        parent::__construct();
+
+        $this->authorize('reports.view');
+    }
 
     /**
     * Returns a view that displays the accessories report.
