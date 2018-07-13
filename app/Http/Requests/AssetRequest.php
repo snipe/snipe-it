@@ -46,12 +46,13 @@ class AssetRequest extends Request
 
         $rules['asset_tag'] = ($settings->auto_increment_assets == '1') ? 'max:255' : 'required';
 
-        $model = AssetModel::find($this->request->get('model_id'));
+        if($this->request->get('model_id') != '') {
+            $model = AssetModel::find($this->request->get('model_id'));
 
-        if (($model) && ($model->fieldset)) {
-            $rules += $model->fieldset->validation_rules();
+            if (($model) && ($model->fieldset)) {
+                $rules += $model->fieldset->validation_rules();
+            }
         }
-
 
         return $rules;
 
