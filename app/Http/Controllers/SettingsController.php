@@ -807,7 +807,13 @@ class SettingsController extends Controller
             $setting->labels_display_tag = 1;
         } else {
             $setting->labels_display_tag = 0;
-        }
+	}
+
+	 if (Input::has('labels_display_tag')) {
+             $setting->labels_display_tag = 1;
+         } else {
+             $setting->labels_display_tag = 0;
+         }
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
