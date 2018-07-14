@@ -30,6 +30,7 @@ class Asset extends Depreciable
     const ASSET = 'asset';
     const USER = 'user';
 
+    const ACCEPTANCE_PENDING = 'pending';
     /**
      * Set static properties to determine which checkout/checkin handlers we should use
      */
@@ -192,6 +193,17 @@ class Asset extends Depreciable
             }
         }
         
+        /**
+         * Does the user have to confirm that they accept the asset?
+         *
+         * If so, set the acceptance-status to "pending".
+         * This value is used in the unaccepted assets reports, for example
+         * 
+         * @see https://github.com/snipe/snipe-it/issues/5772
+         */
+        if ($this->requireAcceptance() && $target instanceof User) {
+          $this->accepted = self::ACCEPTANCE_PENDING;
+        }
 
         if ($this->save()) {
             $this->logCheckout($note, $target);
