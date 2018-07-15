@@ -202,19 +202,6 @@ class ComponentsController extends Controller
         return redirect()->route('components.index')->with('success', trans('admin/components/message.delete.success'));
     }
 
-    public function postBulk($componentId = null)
-    {
-        //$this->authorize('checkout', $component)
-        echo 'Stubbed - not yet complete';
-    }
-
-    public function postBulkSave($componentId = null)
-    {
-        //$this->authorize('edit', Component::class);
-        echo 'Stubbed - not yet complete';
-    }
-
-
     /**
     * Return a view to display component information.
     *
