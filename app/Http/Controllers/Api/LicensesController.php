@@ -64,8 +64,8 @@ class LicensesController extends Controller
             $licenses->where('supplier_id','=',$request->input('supplier_id'));
         }
 
-        if ($request->has('category_i')) {
-            $licenses->where('category_i','=',$request->input('category_i'));
+        if ($request->has('category_id')) {
+            $licenses->where('category_id','=',$request->input('category_id'));
         }
 
         if ($request->has('depreciation_id')) {
