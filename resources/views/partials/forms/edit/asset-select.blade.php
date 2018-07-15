@@ -9,7 +9,9 @@
                     {{ (\App\Models\Asset::find($asset_id)) ? \App\Models\Asset::find($asset_id)->present()->fullName : '' }}
                 </option>
             @else
-                <option value="">{{ trans('general.select_asset') }}</option>
+                @if(!isset($multiple))
+                    <option value="">{{ trans('general.select_asset') }}</option>
+                @endif
             @endif
         </select>
     </div>
