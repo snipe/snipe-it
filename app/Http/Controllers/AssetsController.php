@@ -110,12 +110,8 @@ class AssetsController extends Controller
     {
         $this->authorize('create', Asset::class);
         $view = View::make('hardware/edit')
-            ->with('supplier_list', Helper::suppliersList())
-            ->with('model_list', Helper::modelList())
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('item', new Asset)
-            ->with('manufacturer', Helper::manufacturerList()) //handled in modal now?
-            ->with('category', Helper::categoryList('asset')) //handled in modal now?
             ->with('statuslabel_types', Helper::statusTypeList());
 
         if ($request->has('model_id')) {
@@ -262,7 +258,6 @@ class AssetsController extends Controller
         $this->authorize($item);
 
         return view('hardware/edit', compact('item'))
-            ->with('model_list', Helper::modelList())
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('statuslabel_types', Helper::statusTypeList());
     }
@@ -1082,11 +1077,7 @@ class AssetsController extends Controller
             } elseif ($request->input('bulk_actions')=='edit') {
                 return view('hardware/bulk')
                 ->with('assets', request('ids'))
-                ->with('statuslabel_list', Helper::statusLabelList())
-                ->with(
-                    'companies_list',
-                    array('' => '') + array('clear' => trans('general.remove_company')) + Helper::companyList()
-                );
+                ->with('statuslabel_list', Helper::statusLabelList());
             }
         }
         return redirect()->back()->with('error', 'No action selected');
@@ -1209,10 +1200,7 @@ class AssetsController extends Controller
     public function getBulkCheckout()
     {
         $this->authorize('checkout', Asset::class);
-        // Filter out assets that are not deployable.
-
-        return view('hardware/bulk-checkout')
-            ->with('users_list', Helper::usersList());
+        return view('hardware/bulk-checkout');
     }
 
     public function postBulkCheckout(Request $request)

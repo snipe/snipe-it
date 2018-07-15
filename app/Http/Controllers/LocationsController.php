@@ -175,8 +175,7 @@ class LocationsController extends Controller
         $location_options = array('' => 'Top Level') + $location_options;
 
         return view('locations/edit', compact('item'))
-            ->with('location_options', $location_options)
-            ->with('manager_list', Helper::managerList());
+            ->with('location_options', $location_options);
     }
 
 

@@ -372,9 +372,7 @@ class AssetModelsController extends Controller
 
         // Show the page
         $view = View::make('models/edit');
-        $view->with('category_list', Helper::categoryList('asset'));
         $view->with('depreciation_list', Helper::depreciationList());
-        $view->with('manufacturer_list', Helper::manufacturerList());
         $view->with('item', $model);
         $view->with('clone_model', $model_to_clone);
         return $view;
@@ -408,7 +406,7 @@ class AssetModelsController extends Controller
      */
     public function postBulkEdit(Request $request)
     {
-        
+
         $models_raw_array = Input::get('ids');
 
         // Make sure some IDs have been selected
@@ -433,13 +431,8 @@ class AssetModelsController extends Controller
                 $nochange = ['NC' => 'No Change'];
                 $fieldset_list = $nochange + Helper::customFieldsetList();
                 $depreciation_list = $nochange + Helper::depreciationList();
-                $category_list = $nochange + Helper::categoryList('asset');
-                $manufacturer_list = $nochange + Helper::manufacturerList();
-
 
                 return view('models/bulk-edit', compact('models'))
-                    ->with('manufacturer_list', $manufacturer_list)
-                    ->with('category_list', $category_list)
                     ->with('fieldset_list', $fieldset_list)
                     ->with('depreciation_list', $depreciation_list);
             }
