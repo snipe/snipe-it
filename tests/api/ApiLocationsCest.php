@@ -34,7 +34,7 @@ class ApiLocationsCest
         $location = App\Models\Location::orderByDesc('created_at')
             ->withCount('assignedAssets', 'assets',  'users')
             ->take(10)->get()->shuffle()->first();
-        $I->seeResponseContainsJson((new LocationsTransformer)->transformLocation($location));
+        $I->seeResponseContainsJson($I->removeTimestamps((new LocationsTransformer)->transformLocation($location)));
     }
 
     /** @test */

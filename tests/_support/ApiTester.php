@@ -43,4 +43,17 @@ class ApiTester extends \Codeception\Actor
 
         return $token;
     }
+
+    /**
+     * Remove Timestamps from transformed array
+     * This fixes false negatives when comparing json due to timestamp second rounding issues
+     * @param  array $array Array returned from the transformer
+     * @return array        Transformed item striped of created_at and updated_at
+     */
+    public function removeTimeStamps($array)
+    {
+        unset($array['created_at']);
+        unset($array['updated_at']);
+        return $array;
+    }
 }

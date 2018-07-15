@@ -33,7 +33,7 @@ class ApiLicensesCest
         $license = App\Models\License::orderByDesc('created_at')
             ->withCount('freeSeats')
             ->take(10)->get()->shuffle()->first();
-        $I->seeResponseContainsJson((new LicensesTransformer)->transformLicense($license));
+        $I->seeResponseContainsJson($I->removeTimestamps((new LicensesTransformer)->transformLicense($license)));
     }
 
     /** @test */
