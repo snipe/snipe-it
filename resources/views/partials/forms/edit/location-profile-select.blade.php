@@ -3,7 +3,7 @@
 
     {{ Form::label('location_id', $translated_name, array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7">
-        <select class="js-data-ajax" data-endpoint="locations" name="location_id" style="width: 100%" id="location_id_location_select">
+        <select class="js-data-ajax" data-endpoint="locations" data-placeholder="{{ trans('general.select_location') }}" name="location_id" style="width: 100%" id="location_id_location_select">
             @if ($location_id = Input::old('location_id', (isset($user)) ? $user->location_id : ''))
                 <option value="{{ $location_id }}" selected="selected">
                     {{ (\App\Models\Location::find($location_id)) ? \App\Models\Location::find($location_id)->name : '' }}
