@@ -71,6 +71,13 @@ class CheckoutConsumableNotification extends Notification
             }
 
             /**
+             * Send an email if the item has a EULA, since the user should always receive it
+             */
+            if ($this->item->getEula()) {
+                $notifyBy[1] = 'mail';
+            }                  
+
+            /**
              * Send an email if an email should be sent at checkin/checkout
              */
             if ($this->item->checkin_email()) {
