@@ -874,6 +874,14 @@ class Asset extends Depreciable
             foreach (CustomField::all() as $field) {
                 $query->orWhere('assets.'.$field->db_column_name(), 'LIKE', "%$search%");
             }
+
+            /**
+             * Search through all specified date columns
+             */
+            foreach($this->getDates() as $dateColumn) {
+              $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
+            }
+
         })->withTrashed()->whereNull("assets.deleted_at"); //workaround for laravel bug
     }
 

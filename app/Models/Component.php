@@ -154,6 +154,13 @@ class Component extends SnipeModel
                             ->orWhere('components.order_number', 'LIKE', '%'.$search.'%')
                             ->orWhere('components.serial', 'LIKE', '%'.$search.'%')
                             ->orWhere('components.purchase_cost', 'LIKE', '%'.$search.'%');
+
+                    /**
+                     * Search through all specified date columns
+                     */
+                    foreach($this->getDates() as $dateColumn) {
+                        $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
+                    }                                 
             }
         });
     }

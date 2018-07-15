@@ -203,6 +203,13 @@ class Consumable extends SnipeModel
                     })->orWhere('consumables.name', 'LIKE', '%'.$search.'%')
                             ->orWhere('consumables.order_number', 'LIKE', '%'.$search.'%')
                             ->orWhere('consumables.purchase_cost', 'LIKE', '%'.$search.'%');
+
+                    /**
+                     * Search through all specified date columns
+                     */
+                    foreach($this->getDates() as $dateColumn) {
+                        $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
+                    }                                 
             }
         });
     }

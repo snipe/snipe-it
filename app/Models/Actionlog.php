@@ -223,6 +223,13 @@ class Actionlog extends SnipeModel
                 })->orWhere('action_type', 'LIKE', '%'.$search.'%')
                     ->orWhere('note', 'LIKE', '%'.$search.'%')
                     ->orWhere('log_meta', 'LIKE', '%'.$search.'%');
+
+                /**
+                 * Search through all specified date columns
+                 */
+                foreach($this->getDates() as $dateColumn) {
+                    $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
+                }                  
             }
 
         });

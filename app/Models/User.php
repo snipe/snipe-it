@@ -454,7 +454,13 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
                 ->orWhere(function ($query) use ($search) {
                     $query->whereRaw(DB::getTablePrefix()."users.manager_id IN (select id from ".DB::getTablePrefix()."users where first_name LIKE ? OR last_name LIKE ?)", ["%$search%", "%$search%"]);
                 });
-
+            
+            /**
+             * Search through all specified date columns
+             */
+            foreach($this->getDates() as $dateColumn) {
+                $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
+            }     
 
         });
 

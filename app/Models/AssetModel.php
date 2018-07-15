@@ -173,7 +173,7 @@ class AssetModel extends SnipeModel
     public function scopeTextSearch($query, $search)
     {
 
-        return $query->where('models.name', 'LIKE', "%$search%")
+        $query = $query->where('models.name', 'LIKE', "%$search%")
             ->orWhere('model_number', 'LIKE', "%$search%")
             ->orWhere(function ($query) use ($search) {
                 $query->whereHas('depreciation', function ($query) use ($search) {
@@ -191,6 +191,14 @@ class AssetModel extends SnipeModel
                 });
             });
 
+        /**
+         * Search through all specified date columns
+         */
+        foreach($this->getDates() as $dateColumn) {
+            $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
+        }     
+
+        return $query;
     }
 
     /**

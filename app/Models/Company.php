@@ -204,8 +204,17 @@ final class Company extends SnipeModel
     public function scopeTextSearch($query, $search)
     {
 
-        return $query->where(function ($query) use ($search) {
+        $query = $query->where(function ($query) use ($search) {
             $query->where('name', 'LIKE', '%'.$search.'%');
         });
+
+        /**
+         * Search through all specified date columns
+         */
+        foreach($this->getDates() as $dateColumn) {
+            $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
+        }     
+
+        return $query;
     }
 }

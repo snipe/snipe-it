@@ -182,7 +182,7 @@ class Location extends SnipeModel
     public function scopeTextsearch($query, $search)
     {
 
-        return $query->where('name', 'LIKE', "%$search%")
+        $query = $query->where('name', 'LIKE', "%$search%")
           ->orWhere('address', 'LIKE', "%$search%")
           ->orWhere('city', 'LIKE', "%$search%")
           ->orWhere('state', 'LIKE', "%$search%")
@@ -201,6 +201,14 @@ class Location extends SnipeModel
                 });
           });
 
+          /**
+           * Search through all specified date columns
+           */
+          foreach($this->getDates() as $dateColumn) {
+              $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
+          }               
+
+          return $query;
     }
 
 

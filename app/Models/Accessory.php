@@ -202,6 +202,13 @@ class Accessory extends SnipeModel
                             ->orWhere('accessories.model_number', 'LIKE', '%'.$search.'%')
                             ->orWhere('accessories.order_number', 'LIKE', '%'.$search.'%');
 
+                    /**
+                     * Search through all specified date columns
+                     */
+                    foreach($this->getDates() as $dateColumn) {
+                        $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
+                    }                         
+
         });
     }
 

@@ -444,6 +444,13 @@ class License extends Depreciable
                     $query->where('companies.name', 'LIKE', '%'.$search.'%');
                 });
             });
+
+            /**
+             * Search through all specified date columns
+             */
+            foreach($this->getDates() as $dateColumn) {
+                $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
+            }                 
         });
     }
 
