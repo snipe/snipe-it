@@ -434,7 +434,6 @@ class License extends Depreciable
                 ->orWhere('licenses.notes', 'LIKE', '%'.$search.'%')
                 ->orWhere('licenses.order_number', 'LIKE', '%'.$search.'%')
                 ->orWhere('licenses.purchase_order', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.purchase_date', 'LIKE', '%'.$search.'%')
                 ->orWhere('licenses.purchase_cost', 'LIKE', '%'.$search.'%')
              ->orWhereHas('manufacturer', function ($query) use ($search) {
                         $query->where(function ($query) use ($search) {
