@@ -26,7 +26,7 @@ class CategoriesController extends Controller
         $categories = Category::select(['id', 'created_at', 'updated_at', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email','image'])
             ->withCount('assets', 'accessories', 'consumables', 'components','licenses');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $categories = $categories->TextSearch($request->input('search'));
         }
 
@@ -148,7 +148,7 @@ class CategoriesController extends Controller
             'image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $categories = $categories->where('name', 'LIKE', '%'.$request->get('search').'%');
         }
 

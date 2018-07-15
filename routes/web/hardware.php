@@ -64,20 +64,20 @@ Route::group(
 
         Route::get('{assetId}/checkout', [
             'as' => 'checkout/hardware',
-            'uses' => 'AssetsController@getCheckout'
+            'uses' => 'AssetCheckoutController@create'
         ]);
         Route::post('{assetId}/checkout', [
             'as' => 'checkout/hardware',
-            'uses' => 'AssetsController@postCheckout'
+            'uses' => 'AssetCheckoutController@store'
         ]);
         Route::get('{assetId}/checkin/{backto?}', [
             'as' => 'checkin/hardware',
-            'uses' => 'AssetsController@getCheckin'
+            'uses' => 'AssetCheckinController@create'
         ]);
 
         Route::post('{assetId}/checkin/{backto?}', [
             'as' => 'checkin/hardware',
-            'uses' => 'AssetsController@postCheckin'
+            'uses' => 'AssetCheckinController@store'
         ]);
         Route::get('{assetId}/view', [
             'as' => 'hardware.view',
@@ -91,17 +91,17 @@ Route::group(
         ]);
         Route::post('{assetId}/upload', [
             'as' => 'upload/asset',
-            'uses' => 'AssetsController@postUpload'
+            'uses' => 'AssetFilesController@store'
         ]);
 
-        Route::get('{assetId}/showfile/{fileId}', [
+        Route::get('{assetId}/showfile/{fileId}/{download?}', [
             'as' => 'show/assetfile',
-            'uses' => 'AssetsController@displayFile'
+            'uses' => 'AssetFilesController@show'
         ]);
 
         Route::delete('{assetId}/showfile/{fileId}/delete', [
             'as' => 'delete/assetfile',
-            'uses' => 'AssetsController@deleteFile'
+            'uses' => 'AssetFilesController@destroy'
         ]);
 
 
@@ -109,32 +109,32 @@ Route::group(
             'bulkedit',
             [
                 'as'   => 'hardware/bulkedit',
-                'uses' => 'AssetsController@postBulkEdit'
+                'uses' => 'BulkAssetsController@edit'
             ]
         );
         Route::post(
             'bulkdelete',
             [
                 'as'   => 'hardware/bulkdelete',
-                'uses' => 'AssetsController@postBulkDelete'
+                'uses' => 'BulkAssetsController@destroy'
             ]
         );
         Route::post(
             'bulksave',
             [
                 'as'   => 'hardware/bulksave',
-                'uses' => 'AssetsController@postBulkSave'
+                'uses' => 'BulkAssetsController@update'
             ]
         );
 
         # Bulk checkout / checkin
          Route::get( 'bulkcheckout',  [
                  'as' => 'hardware/bulkcheckout',
-                 'uses' => 'AssetsController@getBulkCheckout'
+                 'uses' => 'BulkAssetsController@showCheckout'
          ]);
         Route::post( 'bulkcheckout',  [
             'as' => 'hardware/bulkcheckout',
-            'uses' => 'AssetsController@postBulkCheckout'
+            'uses' => 'BulkAssetsController@storeCheckout'
         ]);
 
 

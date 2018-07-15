@@ -78,7 +78,7 @@ class StatuslabelsController extends Controller
         // create a new model instance
         $statusLabel = new Statuslabel();
 
-        if (!$request->has('statuslabel_types')) {
+        if (!$request->filled('statuslabel_types')) {
             return redirect()->back()->withInput()->withErrors(['statuslabel_types' => trans('validation.statuslabel_type')]);
         }
 
@@ -101,35 +101,6 @@ class StatuslabelsController extends Controller
             return redirect()->route('statuslabels.index')->with('success', trans('admin/statuslabels/message.create.success'));
         }
         return redirect()->back()->withInput()->withErrors($statusLabel->getErrors());
-    }
-
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function apiStore(Request $request)
-    {
-        $this->authorize('create', Statuslabel::class);
-        $statuslabel = new Statuslabel();
-        if (!$request->has('statuslabel_types')) {
-            return JsonResponse::create(["error" => trans('validation.statuslabel_type')], 500);
-        }
-        $statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
-        $statuslabel->name            = Input::get('name');
-        $statuslabel->user_id         = Auth::id();
-        $statuslabel->notes           =  '';
-        $statuslabel->deployable      =  $statustype['deployable'];
-        $statuslabel->pending         =  $statustype['pending'];
-        $statuslabel->archived        =  $statustype['archived'];
-
-
-        if ($statuslabel->isValid()) {
-            $statuslabel->save();
-            // Redirect to the new Statuslabel  page
-            return JsonResponse::create($statuslabel);
-        }
-        return JsonResponse::create(["error" => $statuslabel->getErrors()->first()], 500);
-
     }
 
 
@@ -171,7 +142,7 @@ class StatuslabelsController extends Controller
             return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.does_not_exist'));
         }
 
-        if (!$request->has('statuslabel_types')) {
+        if (!$request->filled('statuslabel_types')) {
             return redirect()->back()->withInput()->withErrors(['statuslabel_types' => trans('validation.statuslabel_type')]);
         }
 

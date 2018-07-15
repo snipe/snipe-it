@@ -121,46 +121,6 @@ class AssetModelsController extends Controller
     }
 
     /**
-     * Validates and stores new Asset Model data created from the
-     * modal form on the Asset Creation view.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.0]
-     * @param Request $request
-     * @return String JSON
-     */
-    public function apiStore(Request $request)
-    {
-        //COPYPASTA!!!! FIXME
-        $this->authorize('create', AssetModel::class);
-        $model = new AssetModel;
-
-        $settings=Input::all();
-        $settings['eol']= null;
-
-        $model->name=$request->input('name');
-        $model->manufacturer_id = $request->input('manufacturer_id');
-        $model->category_id = $request->input('category_id');
-        $model->model_number = $request->input('model_number');
-        $model->user_id = Auth::id();
-        $model->notes            = $request->input('notes');
-        $model->eol= null;
-
-        if ($request->input('fieldset_id')=='') {
-            $model->fieldset_id = null;
-        } else {
-            $model->fieldset_id = e($request->input('fieldset_id'));
-        }
-
-        if ($model->save()) {
-            return JsonResponse::create($model);
-        } else {
-            return JsonResponse::create(["error" => "Failed validation: ".print_r($model->getErrors()->all('<li>:message</li>'), true)], 500);
-        }
-    }
-
-
-    /**
     * Returns a view containing the asset model edit form.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -467,10 +427,10 @@ class AssetModelsController extends Controller
         $update_array = array();
 
 
-        if (($request->has('manufacturer_id') && ($request->input('manufacturer_id')!='NC'))) {
+        if (($request->filled('manufacturer_id') && ($request->input('manufacturer_id')!='NC'))) {
             $update_array['manufacturer_id'] = $request->input('manufacturer_id');
         }
-        if (($request->has('category_id') && ($request->input('category_id')!='NC'))) {
+        if (($request->filled('category_id') && ($request->input('category_id')!='NC'))) {
             $update_array['category_id'] = $request->input('category_id');
         }
         if ($request->input('fieldset_id')!='NC') {

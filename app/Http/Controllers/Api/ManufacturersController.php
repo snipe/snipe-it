@@ -32,7 +32,7 @@ class ManufacturersController extends Controller
             $manufacturers->onlyTrashed();
         }
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $manufacturers = $manufacturers->TextSearch($request->input('search'));
         }
 
@@ -145,7 +145,7 @@ class ManufacturersController extends Controller
             'image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $manufacturers = $manufacturers->where('name', 'LIKE', '%'.$request->get('search').'%');
         }
 

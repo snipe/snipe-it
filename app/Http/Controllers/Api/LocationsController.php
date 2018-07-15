@@ -45,7 +45,7 @@ class LocationsController extends Controller
         ->withCount('assets')
         ->withCount('users');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $locations = $locations->TextSearch($request->input('search'));
         }
 
@@ -173,7 +173,7 @@ class LocationsController extends Controller
             'locations.image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $locations = $locations->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
         }
 

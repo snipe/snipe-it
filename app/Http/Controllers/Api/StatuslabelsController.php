@@ -26,7 +26,7 @@ class StatuslabelsController extends Controller
 
         $statuslabels = Statuslabel::withCount('assets');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $statuslabels = $statuslabels->TextSearch($request->input('search'));
         }
 
@@ -55,7 +55,7 @@ class StatuslabelsController extends Controller
         $this->authorize('create', Statuslabel::class);
         $request->except('deployable', 'pending','archived');
 
-        if (!$request->has('type')) {
+        if (!$request->filled('type')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, ["type" => ["Status label type is required."]]),500);
         }
 
@@ -106,7 +106,7 @@ class StatuslabelsController extends Controller
         
         $request->except('deployable', 'pending','archived');
 
-        if (!$request->has('type')) {
+        if (!$request->filled('type')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Status label type is required.'));
         }
 
