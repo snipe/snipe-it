@@ -35,7 +35,9 @@ class License extends Depreciable
         'created_at',
         'updated_at',
         'deleted_at',
-        'purchase_date'
+        'purchase_date',
+        'expiration_date',
+        'termination_date'
     ];
 
 

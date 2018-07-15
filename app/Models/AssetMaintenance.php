@@ -19,7 +19,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
     use ValidatingTrait;
 
 
-    protected $dates = [ 'deleted_at' ];
+    protected $dates = [ 'deleted_at', 'start_date' , 'completion_date'];
     protected $table = 'asset_maintenances';
     // Declaring rules for form validation
     protected $rules = [
