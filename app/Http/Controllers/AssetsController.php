@@ -1232,7 +1232,7 @@ class AssetsController extends Controller
 
         $asset_ids = array_filter(Input::get('selected_assets'));
         foreach ($asset_ids as $asset_id) {
-            if ($target->id == $asset_id) {
+            if ($target->id == $asset_id && request('checkout_to_type')=='asset') {
                 return redirect()->back()->with('error', 'You cannot check an asset out to itself.');
             }
         }
