@@ -193,6 +193,13 @@ $(document).ready(function () {
 
         link.select2({
 
+            /**
+             * Adds an empty placeholder, allowing every select2 instance to be cleared.
+             * This placeholder can be overridden with the "data-placeholder" attribute.
+             */
+            placeholder: '',
+            allowClear: true,
+            
             ajax: {
 
                 // the baseUrl includes a trailing slash
