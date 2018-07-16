@@ -446,45 +446,6 @@ class License extends Depreciable
     }
 
     /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-    public function scopeTextSearch($query, $search)
-    {
-
-        return $query->where(function ($query) use ($search) {
-
-            $query->where('licenses.name', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.serial', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.notes', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.order_number', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.purchase_order', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.purchase_cost', 'LIKE', '%'.$search.'%')
-             ->orWhereHas('manufacturer', function ($query) use ($search) {
-                        $query->where(function ($query) use ($search) {
-                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
-                        });
-             })
-            ->orWhereHas('company', function ($query) use ($search) {
-                $query->where(function ($query) use ($search) {
-                    $query->where('companies.name', 'LIKE', '%'.$search.'%');
-                });
-            });
-
-            /**
-             * Search through all specified date columns
-             */
-            foreach($this->getDates() as $dateColumn) {
-                $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
-            }                 
-        });
-    }
-
-    /**
      * Query builder scope to order on manufacturer
      *
      * @param  Illuminate\Database\Query\Builder  $query  Query builder instance

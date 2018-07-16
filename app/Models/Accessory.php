@@ -195,47 +195,6 @@ class Accessory extends SnipeModel
     }
 
     /**
-    * Query builder scope to search on text
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
-    public function scopeTextSearch($query, $search)
-    {
-
-        return $query->where(function ($query) use ($search) {
-
-                    $query->whereHas('category', function ($query) use ($search) {
-                        $query->where('categories.name', 'LIKE', '%'.$search.'%');
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('company', function ($query) use ($search) {
-                            $query->where('companies.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('manufacturer', function ($query) use ($search) {
-                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('location', function ($query) use ($search) {
-                            $query->where('locations.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere('accessories.name', 'LIKE', '%'.$search.'%')
-                            ->orWhere('accessories.model_number', 'LIKE', '%'.$search.'%')
-                            ->orWhere('accessories.order_number', 'LIKE', '%'.$search.'%');
-
-                    /**
-                     * Search through all specified date columns
-                     */
-                    foreach($this->getDates() as $dateColumn) {
-                        $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
-                    }                         
-
-        });
-    }
-
-    /**
     * Query builder scope to order on company
     *
     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance

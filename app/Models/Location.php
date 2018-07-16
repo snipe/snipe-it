@@ -191,47 +191,6 @@ class Location extends SnipeModel
     }
 
     /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-    public function scopeTextsearch($query, $search)
-    {
-
-        $query = $query->where('name', 'LIKE', "%$search%")
-          ->orWhere('address', 'LIKE', "%$search%")
-          ->orWhere('city', 'LIKE', "%$search%")
-          ->orWhere('state', 'LIKE', "%$search%")
-          ->orWhere('zip', 'LIKE', "%$search%")
-
-          // This doesn't actually work - need to use a table alias maybe?
-          ->orWhere(function ($query) use ($search) {
-              $query->whereHas('parent', function ($query) use ($search) {
-                  $query->where(function ($query) use ($search) {
-                      $query->where('name', 'LIKE', '%'.$search.'%');
-                  });
-              })
-            // Ugly, ugly code because Laravel sucks at self-joins
-                ->orWhere(function ($query) use ($search) {
-                    $query->whereRaw("parent_id IN (select id from ".DB::getTablePrefix()."locations where name LIKE '%".$search."%') ");
-                });
-          });
-
-          /**
-           * Search through all specified date columns
-           */
-          foreach($this->getDates() as $dateColumn) {
-              $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
-          }               
-
-          return $query;
-    }
-
-
-    /**
     * Query builder scope to order on parent
     *
     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance

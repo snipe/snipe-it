@@ -181,46 +181,7 @@ class AssetModel extends SnipeModel
     {
 
         return $query->where('requestable', '1');
-    }
-
-    /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-    public function scopeTextSearch($query, $search)
-    {
-
-        $query = $query->where('models.name', 'LIKE', "%$search%")
-            ->orWhere('model_number', 'LIKE', "%$search%")
-            ->orWhere(function ($query) use ($search) {
-                $query->whereHas('depreciation', function ($query) use ($search) {
-                    $query->where('depreciations.name', 'LIKE', '%'.$search.'%');
-                });
-            })
-            ->orWhere(function ($query) use ($search) {
-                $query->whereHas('category', function ($query) use ($search) {
-                    $query->where('categories.name', 'LIKE', '%'.$search.'%');
-                });
-            })
-            ->orWhere(function ($query) use ($search) {
-                $query->whereHas('manufacturer', function ($query) use ($search) {
-                    $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
-                });
-            });
-
-        /**
-         * Search through all specified date columns
-         */
-        foreach($this->getDates() as $dateColumn) {
-            $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
-        }     
-
-        return $query;
-    }
+    }  
 
     /**
      * Query builder scope to search on text, including catgeory and manufacturer name

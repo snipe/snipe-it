@@ -442,61 +442,6 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         });
     }
 
-
-    /**
-     * Query builder scope to search on text
-     *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $search      Search term
-     *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
-     */
-    public function scopeTextsearch($query, $search)
-    {
-
-        return $query->where(function ($query) use ($search) {
-            $query->where('users.first_name', 'LIKE', "%$search%")
-                ->orWhere('users.last_name', 'LIKE', "%$search%")
-                ->orWhere('users.email', 'LIKE', "%$search%")
-                ->orWhere('users.username', 'LIKE', "%$search%")
-                ->orWhere('users.notes', 'LIKE', "%$search%")
-                ->orWhere('users.phone', 'LIKE', "%$search%")
-                ->orWhere('users.jobtitle', 'LIKE', "%$search%")
-                ->orWhere('users.employee_num', 'LIKE', "%$search%")
-                ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$search%", "%$search%"])
-                ->orWhere(function ($query) use ($search) {
-                    $query->whereHas('userloc', function ($query) use ($search) {
-                        $query->where('locations.name', 'LIKE', '%'.$search.'%');
-                    });
-                })
-                ->orWhere(function ($query) use ($search) {
-                    $query->whereHas('department', function ($query) use ($search) {
-                        $query->where('departments.name', 'LIKE', '%'.$search.'%');
-                    });
-                })
-                ->orWhere(function ($query) use ($search) {
-                    $query->whereHas('groups', function ($query) use ($search) {
-                        $query->where('groups.name', 'LIKE', '%'.$search.'%');
-                    });
-                })
-
-                 //Ugly, ugly code because Laravel sucks at self-joins
-                ->orWhere(function ($query) use ($search) {
-                    $query->whereRaw(DB::getTablePrefix()."users.manager_id IN (select id from ".DB::getTablePrefix()."users where first_name LIKE ? OR last_name LIKE ?)", ["%$search%", "%$search%"]);
-                });
-            
-            /**
-             * Search through all specified date columns
-             */
-            foreach($this->getDates() as $dateColumn) {
-                $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
-            }     
-
-        });
-
-    }
-
-
     /**
      * Query builder scope for Deleted users
      *

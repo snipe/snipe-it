@@ -157,35 +157,8 @@ class AssetMaintenance extends Model implements ICompanyableChild
    * -----------------------------------------------
    * BEGIN QUERY SCOPES
    * -----------------------------------------------
-   **/
-    
+   **/ 
 
-    /**
-      * Query builder scope to search on text
-      *
-      * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-      * @param  text                              $search      Search term
-      *
-      * @return Illuminate\Database\Query\Builder          Modified query builder
-      */
-    public function scopeTextSearch($query, $search)
-    {
-
-         return $query->where(function ($query) use ($search) {
-
-                $query->where('asset_maintenances.title', 'LIKE', '%'.$search.'%')
-                ->orWhere('asset_maintenances.notes', 'LIKE', '%'.$search.'%')
-                ->orWhere('asset_maintenances.asset_maintenance_type', 'LIKE', '%'.$search.'%')
-                ->orWhere('asset_maintenances.cost', 'LIKE', '%'.$search.'%');
-
-                /**
-                 * Search through all specified date columns
-                 */
-                foreach($this->getDates() as $dateColumn) {
-                    $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
-                }                     
-         });
-    }
 
     /**
      * Query builder scope to order on admin user

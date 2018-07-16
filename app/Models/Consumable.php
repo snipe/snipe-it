@@ -186,57 +186,6 @@ class Consumable extends SnipeModel
     }
 
     /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-    /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-    public function scopeTextSearch($query, $search)
-    {
-        $search = explode(' ', $search);
-
-        return $query->where(function ($query) use ($search) {
-        
-            foreach ($search as $search) {
-                    $query->whereHas('category', function ($query) use ($search) {
-                        $query->where('categories.name', 'LIKE', '%'.$search.'%');
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('company', function ($query) use ($search) {
-                            $query->where('companies.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('location', function ($query) use ($search) {
-                            $query->where('locations.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('manufacturer', function ($query) use ($search) {
-                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere('consumables.name', 'LIKE', '%'.$search.'%')
-                            ->orWhere('consumables.order_number', 'LIKE', '%'.$search.'%')
-                            ->orWhere('consumables.purchase_cost', 'LIKE', '%'.$search.'%');
-
-                    /**
-                     * Search through all specified date columns
-                     */
-                    foreach($this->getDates() as $dateColumn) {
-                        $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
-                    }                                 
-            }
-        });
-    }
-
-    /**
     * Query builder scope to order on company
     *
     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance

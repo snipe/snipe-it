@@ -159,31 +159,4 @@ class Category extends SnipeModel
 
         return $query->where('require_acceptance', '=', true);
     }
-
-    /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-    public function scopeTextSearch($query, $search)
-    {
-
-        $query = $query->where(function ($query) use ($search) {
-
-            $query->where('name', 'LIKE', '%'.$search.'%')
-            ->orWhere('category_type', 'LIKE', '%'.$search.'%');
-        });
-
-        /**
-         * Search through all specified date columns
-         */
-        foreach($this->getDates() as $dateColumn) {
-            $query->orWhere($this->getTable() . '.' . $dateColumn, 'LIKE', '%'.$search.'%');
-        }     
-
-        return $query;
-    }
 }
