@@ -4,11 +4,13 @@ namespace App\Models;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use AssetPresenter;
 use Auth;
 use Carbon\Carbon;
 use Config;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
 use Watson\Validating\ValidatingTrait;
@@ -111,7 +113,42 @@ class Asset extends Depreciable
         'warranty_months',
     ];
 
+    use Searchable;
 
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = [
+      'name', 
+      'asset_tag', 
+      'serial', 
+      'order_number', 
+      'purchase_cost', 
+      'notes', 
+      'created_at',
+      'updated_at',      
+      'purchase_date', 
+      'expected_checkin', 
+      'next_audit_date', 
+      'last_audit_date'
+    ];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [
+        'assetstatus'        => ['name'],
+        'supplier'           => ['name'],
+        'company'            => ['name'],
+        'defaultLoc'         => ['name'],
+        'model'              => ['name', 'model_number'],
+        'model.category'     => ['name'],
+        'model.manufacturer' => ['name'],
+    ];     
 
     public function getDisplayNameAttribute()
     {
@@ -580,6 +617,49 @@ class Asset extends Depreciable
         }
     }
 
+    /**
+     * Run additional, advanced searches.
+     * 
+     * @param  Illuminate\Database\Eloquent\Builder $query
+     * @param  string  $term The search term
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function advancedTextSearch(Builder $query, string $term) {
+      /**
+       * Assigned user
+       */
+      $query = $query->leftJoin('users as assets_users',function ($leftJoin) {
+            $leftJoin->on("assets_users.id", "=", "assets.assigned_to")
+                ->where("assets.assigned_type", "=", User::class);
+      });
+      $query = $query
+        ->orWhere('assets_users.first_name', 'LIKE', '%'.$term.'%')
+        ->orWhere('assets_users.last_name', 'LIKE', '%'.$term.'%')
+        ->orWhere('assets_users.username', 'LIKE', '%'.$term.'%')
+        ->orWhereRaw('CONCAT('.DB::getTablePrefix().'assets_users.first_name," ",'.DB::getTablePrefix().'assets_users.last_name) LIKE ?', ["%$term%", "%$term%"]);
+
+      /**
+       * Assigned location
+       */
+      $query = $query->leftJoin('locations as assets_locations',function ($leftJoin) {
+        $leftJoin->on("assets_locations.id","=","assets.assigned_to")
+          ->where("assets.assigned_type","=",Location::class);
+      });
+
+      $query = $query->orWhere('assets_locations.name', 'LIKE', '%'.$term.'%');
+
+      /**
+       * Assigned assets
+       */
+      $query = $query->leftJoin('assets as assigned_assets',function ($leftJoin) {
+        $leftJoin->on('assigned_assets.id', '=', 'assets.assigned_to')
+          ->where('assets.assigned_type', '=', Asset::class);
+      });
+
+      $query = $query->orWhere('assigned_assets.name', 'LIKE', '%'.$term.'%');
+
+      return $query;
+    }
 
   /**
    * -----------------------------------------------
@@ -812,83 +892,6 @@ class Asset extends Depreciable
     {
         return $query->where("accepted", "=", "accepted");
     }
-
-
-    /**
-    * Query builder scope to search on text for complex Bootstrap Tables API.
-    * This is really horrible, but I can't think of a less-awful way to do it.
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
-    public function scopeTextSearch($query, $search)
-    {
-        $search = explode(' OR ', $search);
-
-         return $query->leftJoin('users as assets_users',function ($leftJoin) {
-            $leftJoin->on("assets_users.id", "=", "assets.assigned_to")
-                ->where("assets.assigned_type", "=", User::class);
-        })->leftJoin('locations as assets_locations',function ($leftJoin) {
-            $leftJoin->on("assets_locations.id","=","assets.assigned_to")
-                ->where("assets.assigned_type","=",Location::class);
-        })->leftJoin('assets as assigned_assets',function ($leftJoin) {
-            $leftJoin->on('assigned_assets.id', '=', 'assets.assigned_to')
-                ->where('assets.assigned_type', '=', Asset::class);
-        })->where(function ($query) use ($search) {
-            foreach ($search as $search) {
-                $query->whereHas('model', function ($query) use ($search) {
-                    $query->whereHas('category', function ($query) use ($search) {
-                        $query->where(function ($query) use ($search) {
-                            $query->where('categories.name', 'LIKE', '%'.$search.'%')
-                            ->orWhere('models.name', 'LIKE', '%'.$search.'%')
-                            ->orWhere('models.model_number', 'LIKE', '%'.$search.'%');
-                        });
-                    });
-                })->orWhereHas('model', function ($query) use ($search) {
-                    $query->whereHas('manufacturer', function ($query) use ($search) {
-                        $query->where(function ($query) use ($search) {
-                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
-                        });
-                    });
-
-                })->orWhere(function ($query) use ($search) {
-                    $query->whereHas('assetstatus', function ($query) use ($search) {
-                        $query->where('status_labels.name', 'LIKE', '%'.$search.'%');
-                    });
-                })->orWhere(function ($query) use ($search) {
-                    $query->whereHas('supplier', function ($query) use ($search) {
-                        $query->where('suppliers.name', 'LIKE', '%'.$search.'%');
-                    });
-                })->orWhere(function ($query) use ($search) {
-                    $query->whereHas('company', function ($query) use ($search) {
-                        $query->where('companies.name', 'LIKE', '%' . $search . '%');
-                    });
-                })->orWhere(function ($query) use ($search) {
-                    $query->whereHas('defaultLoc', function ($query) use ($search) {
-                        $query->where('locations.name', 'LIKE', '%'.$search.'%');
-                    });
-                 })->orWhere(function ($query) use ($search) {
-                         $query->where('assets_users.first_name', 'LIKE', '%'.$search.'%')
-                         ->orWhere('assets_users.last_name', 'LIKE', '%'.$search.'%')
-                         ->orWhereRaw('CONCAT('.DB::getTablePrefix().'assets_users.first_name," ",'.DB::getTablePrefix().'assets_users.last_name) LIKE ?', ["%$search%", "%$search%"])
-                         ->orWhere('assets_users.username', 'LIKE', '%'.$search.'%')
-                         ->orWhere('assets_locations.name', 'LIKE', '%'.$search.'%')
-                         ->orWhere('assigned_assets.name', 'LIKE', '%'.$search.'%');
-                })->orWhere('assets.name', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.purchase_cost', 'LIKE', '%'.$search.'%')
-                    ->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
-            }
-            foreach (CustomField::all() as $field) {
-                $query->orWhere('assets.'.$field->db_column_name(), 'LIKE', "%$search%");
-            }
-        })->withTrashed()->whereNull("assets.deleted_at"); //workaround for laravel bug
-    }
-
 
     /**
      * Query builder scope to search on text for complex Bootstrap Tables API.

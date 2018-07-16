@@ -24,7 +24,6 @@ class ConsumablesController extends Controller
         $this->authorize('index', Consumable::class);
         $consumables = Company::scopeCompanyables(
             Consumable::select('consumables.*')
-                ->whereNull('consumables.deleted_at')
                 ->with('company', 'location', 'category', 'users', 'manufacturer')
         );
 
