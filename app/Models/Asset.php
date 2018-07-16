@@ -628,7 +628,7 @@ class Asset extends Depreciable
 
       
       /**
-       * Assigned users
+       * Assigned user
        */
       $query = $query->leftJoin('users as assets_users',function ($leftJoin) {
             $leftJoin->on("assets_users.id", "=", "assets.assigned_to")
