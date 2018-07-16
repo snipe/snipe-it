@@ -974,6 +974,42 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "tilldeeke",
+      "name": "Till Deeke",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1795149?v=4",
+      "profile": "https://tilldeeke.de",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "5quirrel",
+      "name": "5quirrel",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/12634129?v=4",
+      "profile": "https://github.com/5quirrel",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jasonlshelton",
+      "name": "Jason",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/13071957?v=4",
+      "profile": "https://github.com/jasonlshelton",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "chemfy",
+      "name": "Antti",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7128321?v=4",
+      "profile": "https://github.com/chemfy",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

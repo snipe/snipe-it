@@ -88,7 +88,7 @@ class GroupsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Group::class);
+        $this->authorize('update', Group::class);
         $group = Group::findOrFail($id);
         $group->fill($request->all());
 

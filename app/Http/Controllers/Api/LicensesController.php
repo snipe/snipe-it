@@ -168,7 +168,7 @@ class LicensesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->authorize('edit', License::class);
+        $this->authorize('update', License::class);
 
         $license = License::findOrFail($id);
         $license->fill($request->all());
@@ -222,6 +222,8 @@ class LicensesController extends Controller
     {
 
         if ($license = License::find($licenseId)) {
+
+            $this->authorize('view', $license);
 
             $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
 

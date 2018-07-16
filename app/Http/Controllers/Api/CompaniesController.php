@@ -104,7 +104,7 @@ class CompaniesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Company::class);
+        $this->authorize('update', Company::class);
         $company = Company::findOrFail($id);
         $company->fill($request->all());
 

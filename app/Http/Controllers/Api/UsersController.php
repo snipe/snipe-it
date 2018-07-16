@@ -191,7 +191,8 @@ class UsersController extends Controller
      */
     public function store(SaveUserRequest $request)
     {
-        $this->authorize('view', User::class);
+        $this->authorize('create', User::class);
+
         $user = new User;
         $user->fill($request->all());
 
@@ -230,7 +231,8 @@ class UsersController extends Controller
      */
     public function update(SaveUserRequest $request, $id)
     {
-        $this->authorize('edit', User::class);
+        $this->authorize('update', User::class);
+
         $user = User::findOrFail($id);
         $user->fill($request->all());
 
@@ -289,6 +291,7 @@ class UsersController extends Controller
     public function assets($id)
     {
         $this->authorize('view', User::class);
+        $this->authorize('view', Asset::class);
         $assets = Asset::where('assigned_to', '=', $id)->with('model')->get();
         return (new AssetsTransformer)->transformAssets($assets, $assets->count());
     }
@@ -304,7 +307,7 @@ class UsersController extends Controller
     public function postTwoFactorReset(Request $request)
     {
 
-        $this->authorize('edit', User::class);
+        $this->authorize('update', User::class);
 
         if ($request->has('id')) {
             try {

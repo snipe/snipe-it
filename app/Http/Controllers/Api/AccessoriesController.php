@@ -24,7 +24,7 @@ class AccessoriesController extends Controller
         $this->authorize('view', Accessory::class);
         $allowed_columns = ['id','name','model_number','eol','notes','created_at','min_amt','company_id'];
 
-        $accessories = Accessory::whereNull('accessories.deleted_at')->with('category', 'company', 'manufacturer', 'users', 'location');
+        $accessories = Accessory::with('category', 'company', 'manufacturer', 'users', 'location');
 
         if ($request->has('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));

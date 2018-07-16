@@ -476,7 +476,7 @@ class Helper
         $all_count = 0;
 
         foreach ($consumables as $consumable) {
-            $avail = $consumable->qty - $consumable->consumable_assignment_count;  //$consumable->numRemaining();
+            $avail = $consumable->numRemaining();
             if ($avail < ($consumable->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
                 if ($consumable->qty > 0) {
                     $percent = number_format((($avail / $consumable->qty) * 100), 0);

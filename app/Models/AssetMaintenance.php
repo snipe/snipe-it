@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Helpers\Helper;
+use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,7 +20,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
     use ValidatingTrait;
 
 
-    protected $dates = [ 'deleted_at' ];
+    protected $dates = [ 'deleted_at', 'start_date' , 'completion_date'];
     protected $table = 'asset_maintenances';
     // Declaring rules for form validation
     protected $rules = [
@@ -33,6 +34,23 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'notes'                  => 'string|nullable',
         'cost'                   => 'numeric|nullable'
     ];
+
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = ['title', 'notes', 'asset_maintenance_type', 'cost', 'start_date', 'completion_date'];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = []; 
+
 
     public function getCompanyableParents()
     {
@@ -139,30 +157,8 @@ class AssetMaintenance extends Model implements ICompanyableChild
    * -----------------------------------------------
    * BEGIN QUERY SCOPES
    * -----------------------------------------------
-   **/
-    
+   **/ 
 
-    /**
-      * Query builder scope to search on text
-      *
-      * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-      * @param  text                              $search      Search term
-      *
-      * @return Illuminate\Database\Query\Builder          Modified query builder
-      */
-    public function scopeTextSearch($query, $search)
-    {
-
-         return $query->where(function ($query) use ($search) {
-
-                $query->where('asset_maintenances.title', 'LIKE', '%'.$search.'%')
-                ->orWhere('asset_maintenances.notes', 'LIKE', '%'.$search.'%')
-                ->orWhere('asset_maintenances.asset_maintenance_type', 'LIKE', '%'.$search.'%')
-                ->orWhere('asset_maintenances.cost', 'LIKE', '%'.$search.'%')
-                ->orWhere('asset_maintenances.start_date', 'LIKE', '%'.$search.'%')
-                ->orWhere('asset_maintenances.completion_date', 'LIKE', '%'.$search.'%');
-         });
-    }
 
     /**
      * Query builder scope to order on admin user

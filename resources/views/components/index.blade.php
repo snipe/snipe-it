@@ -18,12 +18,6 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
-        {{ Form::open([
-             'method' => 'POST',
-             'route' => ['component/bulk-form'],
-             'class' => 'form-inline' ]) }}
-
-
         <table
                 data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
                 data-cookie-id-table="componentsTable"
@@ -46,8 +40,6 @@
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
         </table>
-
-        {{ Form::close() }}
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>

@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,6 +24,24 @@ class Actionlog extends SnipeModel
     protected $table      = 'action_logs';
     public $timestamps = true;
     protected $fillable   = [ 'created_at', 'item_type','user_id','item_id','action_type','note','target_id', 'target_type' ];
+
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = ['action_type', 'note', 'log_meta'];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [
+        'company' => ['name']
+    ];    
 
     // Overridden from Builder to automatically add the company
     public static function boot()
@@ -199,32 +218,5 @@ class Actionlog extends SnipeModel
                  ->orderBy('item_id', 'asc')
                  ->orderBy('created_at', 'asc')
                  ->get();
-    }
-
-    /**
-     * Query builder scope to search on text for complex Bootstrap Tables API
-     *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $search      Search term
-     *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
-     */
-    public function scopeTextSearch($query, $search)
-    {
-        $search = explode(' OR ', $search);
-
-        return $query->where(function ($query) use ($search) {
-
-            foreach ($search as $search) {
-                $query->where(function ($query) use ($search) {
-                    $query->whereHas('company', function ($query) use ($search) {
-                        $query->where('companies.name', 'LIKE', '%'.$search.'%');
-                    });
-                })->orWhere('action_type', 'LIKE', '%'.$search.'%')
-                    ->orWhere('note', 'LIKE', '%'.$search.'%')
-                    ->orWhere('log_meta', 'LIKE', '%'.$search.'%');
-            }
-
-        });
     }
 }

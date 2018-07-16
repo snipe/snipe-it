@@ -88,7 +88,7 @@ class DepreciationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Depreciation::class);
+        $this->authorize('update', Depreciation::class);
         $depreciation = Depreciation::findOrFail($id);
         $depreciation->fill($request->all());
 

@@ -4,7 +4,7 @@
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
 
     <div class="col-md-7{{  ((isset($required)) && ($required=='true')) ? ' required' : '' }}">
-        <select class="js-data-ajax" data-endpoint="manufacturers" name="{{ $fieldname }}" style="width: 100%" id="manufacturer_select_id">
+        <select class="js-data-ajax" data-endpoint="manufacturers" data-placeholder="{{ trans('general.select_manufacturer') }}" name="{{ $fieldname }}" style="width: 100%" id="manufacturer_select_id">
             @if ($manufacturer_id = Input::old($fieldname,  (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $manufacturer_id }}" selected="selected">
                     {{ (\App\Models\Manufacturer::find($manufacturer_id)) ? \App\Models\Manufacturer::find($manufacturer_id)->name : '' }}

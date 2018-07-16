@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Log;
 use Watson\Validating\ValidatingTrait;
@@ -45,6 +46,22 @@ class Department extends SnipeModel
         'notes',
     ];
 
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = ['name', 'notes'];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [];    
+
 
     public function company()
     {
@@ -76,23 +93,7 @@ class Department extends SnipeModel
     {
         return $this->belongsTo('\App\Models\Location', 'location_id');
     }
-
-
-    /**
-     * Query builder scope to search on text
-     *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $search      Search term
-     *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
-     */
-    public function scopeTextsearch($query, $search)
-    {
-        return $query->where('name', 'LIKE', "%$search%")
-            ->orWhere('notes', 'LIKE', "%$search%");
-
-    }
-
+    
     /**
      * Query builder scope to order on location name
      *

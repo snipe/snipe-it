@@ -5,6 +5,7 @@ use App\Models\Actionlog;
 use App\Models\Company;
 use App\Models\LicenseSeat;
 use App\Models\Loggable;
+use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
 use DB;
@@ -35,7 +36,9 @@ class License extends Depreciable
         'created_at',
         'updated_at',
         'deleted_at',
-        'purchase_date'
+        'purchase_date',
+        'expiration_date',
+        'termination_date'
     ];
 
 
@@ -80,6 +83,34 @@ class License extends Depreciable
         'termination_date',
         'user_id',
     ];
+
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = [
+        'name', 
+        'serial', 
+        'notes', 
+        'order_number', 
+        'purchase_order', 
+        'purchase_cost', 
+        'purchase_date',
+        'expiration_date',
+    ];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [
+      'manufacturer' => ['name'],
+      'company'      => ['name'],
+    ];    
 
     public static function boot()
     {
@@ -412,39 +443,6 @@ class License extends Depreciable
         ->orderBy('expiration_date', 'ASC')
         ->get();
 
-    }
-
-    /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-    public function scopeTextSearch($query, $search)
-    {
-
-        return $query->where(function ($query) use ($search) {
-
-            $query->where('licenses.name', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.serial', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.notes', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.order_number', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.purchase_order', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.purchase_date', 'LIKE', '%'.$search.'%')
-                ->orWhere('licenses.purchase_cost', 'LIKE', '%'.$search.'%')
-             ->orWhereHas('manufacturer', function ($query) use ($search) {
-                        $query->where(function ($query) use ($search) {
-                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
-                        });
-             })
-            ->orWhereHas('company', function ($query) use ($search) {
-                $query->where(function ($query) use ($search) {
-                    $query->where('companies.name', 'LIKE', '%'.$search.'%');
-                });
-            });
-        });
     }
 
     /**
