@@ -25,24 +25,21 @@ trait Searchable {
     {
         $terms = $this->prepeareSearchTerms($search);
 
-        foreach($terms as $term) {
+        /**
+         * Search the attributes of this model
+         */            
+        $query = $this->searchAttributes($query, $terms);
 
-            /**
-             * Search the attributes of this model
-             */            
-            $query = $this->searchAttributes($query, $term);
+        /**
+         * Search through the custom fields of the model
+         */
+        $query = $this->searchCustomFields($query, $terms);                
 
-            /**
-             * Search through the custom fields of the model
-             */
-            $query = $this->searchCustomFields($query, $term);                
+        /**
+         * Search through the relations of the model
+         */
+        $query = $this->searchRelations($query, $terms);
 
-            /**
-             * Search through the relations of the model
-             */
-            $query = $this->searchRelations($query, $term);
-
-        }
         /**
          * Search for additional attributes defined by the model
          */
@@ -61,41 +58,43 @@ trait Searchable {
 	}
 
     /**
-     * Searches the models attributes for the search term
+     * Searches the models attributes for the search terms
      * 
      * @param  Illuminate\Database\Eloquent\Builder $query
-     * @param  string  $term
+     * @param  array  $terms
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function searchAttributes(Builder $query, string $term) {
+    private function searchAttributes(Builder $query, array $terms) {
+        
+        $table = $this->getTable();
 
         foreach($this->getSearchableAttributes() as $column) {
 
-            /**
-             * Making sure to only search in date columns if the search term consists of characters that can make up a MySQL timestamp!
-             *
-             * @see https://github.com/snipe/snipe-it/issues/4590
-             */
-            if (!preg_match('/^[0-9 :-]++$/', $term) && in_array($column, $this->getDates())) {
-                continue;
+            foreach($terms as $term) {
+                /**
+                 * Making sure to only search in date columns if the search term consists of characters that can make up a MySQL timestamp!
+                 *
+                 * @see https://github.com/snipe/snipe-it/issues/4590
+                 */
+                if (!preg_match('/^[0-9 :-]++$/', $term) && in_array($column, $this->getDates())) {
+                    continue;
+                }
+
+                $query = $query->orWhere($table . '.' . $column, 'LIKE', '%'.$term.'%');
             }
-
-            $table = $this->getTable();
-
-            $query = $query->orWhere($table . '.' . $column, 'LIKE', '%'.$term.'%');
         }
 
         return $query;        
     }
 
     /**
-     * Searches the models custom fields for the search term
+     * Searches the models custom fields for the search terms
      *             
      * @param  Illuminate\Database\Eloquent\Builder $query 
-     * @param  string  $term
+     * @param  array  $terms
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function searchCustomFields(Builder $query, string $term) {
+    private function searchCustomFields(Builder $query, array $terms) {
         
         /**
          * If we are searching on something other that an asset, skip custom fields.
@@ -104,51 +103,53 @@ trait Searchable {
             return $query;
         }
 
-        foreach (CustomField::all() as $field) {
-            $query->orWhere($this->getTable() . '.'. $field->db_column_name(), 'LIKE', '%'.$term.'%');
+        $customFields = CustomField::all();
+
+        foreach ($customFields as $field) {
+            foreach($terms as $term) {
+                $query->orWhere($this->getTable() . '.'. $field->db_column_name(), 'LIKE', '%'.$term.'%');
+            }
         }
 
         return $query;        
     }    
 
     /**
-     * Searches the models relations for the search term
+     * Searches the models relations for the search terms
      * 
      * @param  Illuminate\Database\Eloquent\Builder $query
-     * @param  string  $term
+     * @param  array  $terms
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function searchRelations(Builder $query, string $term) {
+    private function searchRelations(Builder $query, array $terms) {
 
         foreach($this->getSearchableRelations() as $relation => $columns) {
 
-            /**
-             * Make the columns into a collection,
-             * for easier handling further down
-             * 
-             * @var Illuminate\Support\Collection
-             */
-            $columns = collect($columns);
-
-            $query = $query->orWhereHas($relation, function($query) use ($relation, $columns, $term) {
+            $query = $query->orWhereHas($relation, function($query) use ($relation, $columns, $terms) {
                 
                 $table = $this->getRelationTable($relation);
-
+                
                 /**
                  * We need to form the query properly, starting with a "where",
                  * otherwise the generated nested select is wrong.
                  *
-                 * We can just choose the last column, since they all get "and where"d in the end.
-                 * (And because using pop saves us from handling the removal of the first element)
+                 * @todo  This does the job, but is inelegant and fragile
                  */
-                $last = $columns->pop();
-                $query->where($table . '.' . $last, 'LIKE', '%'.$term.'%');
+                $firstConditionAdded = false;
 
                 foreach($columns as $column) {
-                   $query->orWhere($table . '.' . $column, 'LIKE', '%'.$term.'%');
+                    foreach($terms as $term) {
+                        if (!$firstConditionAdded) {
+                            $query->where($table . '.' . $column, 'LIKE', '%'.$term.'%');
+                            $firstConditionAdded = true;
+                            continue;
+                        }
+
+                        $query->orWhere($table . '.' . $column, 'LIKE', '%'.$term.'%');
+                    }
                 }
-                
             });
+
         }  
 
         return $query;        
