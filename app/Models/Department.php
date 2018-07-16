@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Log;
 use Watson\Validating\ValidatingTrait;
@@ -44,6 +45,22 @@ class Department extends SnipeModel
         'manager_id',
         'notes',
     ];
+
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = ['name', 'notes'];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [];    
 
 
     public function company()

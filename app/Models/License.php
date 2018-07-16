@@ -5,6 +5,7 @@ use App\Models\Actionlog;
 use App\Models\Company;
 use App\Models\LicenseSeat;
 use App\Models\Loggable;
+use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
 use DB;
@@ -82,6 +83,34 @@ class License extends Depreciable
         'termination_date',
         'user_id',
     ];
+
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = [
+        'name', 
+        'serial', 
+        'notes', 
+        'order_number', 
+        'purchase_order', 
+        'purchase_cost', 
+        'purchase_date',
+        'expiration_date',
+    ];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [
+      'manufacturer' => ['name'],
+      'company'      => ['name'],
+    ];    
 
     public static function boot()
     {

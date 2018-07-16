@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -68,6 +69,35 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'locale'                  => 'max:10|nullable',
     ];
 
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = [
+        'first_name', 
+        'last_name', 
+        'email', 
+        'username', 
+        'notes', 
+        'phone', 
+        'jobtitle', 
+        'employee_num'
+    ];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [
+        'userloc'    => ['name'],
+        'department' => ['name'],
+        'groups'     => ['name'],
+        'manager'    => ['first_name', 'last_name', 'username']
+    ];  
 
     public function hasAccess($section)
     {

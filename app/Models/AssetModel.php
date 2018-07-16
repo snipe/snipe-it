@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Models\Requestable;
 use App\Models\SnipeModel;
+use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -67,6 +68,26 @@ class AssetModel extends SnipeModel
         'notes',
         'user_id',
     ];
+
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = ['name', 'model_number', 'notes', 'eol'];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [
+        'depreciation' => ['name'],
+        'category'     => ['name'],
+        'manufacturer' => ['name'],
+    ];      
 
     public function assets()
     {

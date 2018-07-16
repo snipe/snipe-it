@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Helpers\Helper;
+use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -33,6 +34,23 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'notes'                  => 'string|nullable',
         'cost'                   => 'numeric|nullable'
     ];
+
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = ['title', 'notes', 'asset_maintenance_type', 'cost', 'start_date', 'completion_date'];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = []; 
+
 
     public function getCompanyableParents()
     {

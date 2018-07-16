@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Asset;
 use App\Models\SnipeModel;
+use App\Models\Traits\Searchable;
 use App\Models\User;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
@@ -59,6 +60,24 @@ class Location extends SnipeModel
         'image',
     ];
     protected $hidden = ['user_id'];
+
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = ['name', 'address', 'city', 'state', 'zip', 'created_at'];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [
+      'parent' => ['name']
+    ];
 
     public function users()
     {

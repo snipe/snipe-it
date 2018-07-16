@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\SnipeModel;
+use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Auth;
 use DB;
@@ -35,6 +36,21 @@ final class Company extends SnipeModel
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = ['name', 'created_at', 'updated_at'];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [];   
 
     /**
      * The attributes that are mass assignable.

@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use AssetPresenter;
 use Auth;
@@ -110,7 +111,42 @@ class Asset extends Depreciable
         'warranty_months',
     ];
 
+    use Searchable;
 
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = [
+      'name', 
+      'asset_tag', 
+      'serial', 
+      'order_number', 
+      'purchase_cost', 
+      'notes', 
+      'created_at',
+      'updated_at',      
+      'purchase_date', 
+      'expected_checkin', 
+      'next_audit_date', 
+      'last_audit_date'
+    ];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [
+        'assetstatus'        => ['name'],
+        'supplier'           => ['name'],
+        'company'            => ['name'],
+        'defaultLoc'         => ['name'],
+        'model'              => ['name', 'model_number'],
+        'model.category'     => ['name'],
+        'model.manufacturer' => ['name'],
+    ];     
 
     public function getDisplayNameAttribute()
     {
