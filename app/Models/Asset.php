@@ -621,42 +621,57 @@ class Asset extends Depreciable
      * Run additional, advanced searches.
      * 
      * @param  Illuminate\Database\Eloquent\Builder $query
-     * @param  string  $term The search term
+     * @param  array  $terms The search terms
      * @return Illuminate\Database\Eloquent\Builder
      */
-    public function advancedTextSearch(Builder $query, string $term) {
+    public function advancedTextSearch(Builder $query, array $terms) {
+
+      
       /**
-       * Assigned user
+       * Assigned users
        */
       $query = $query->leftJoin('users as assets_users',function ($leftJoin) {
             $leftJoin->on("assets_users.id", "=", "assets.assigned_to")
                 ->where("assets.assigned_type", "=", User::class);
       });
-      $query = $query
-        ->orWhere('assets_users.first_name', 'LIKE', '%'.$term.'%')
-        ->orWhere('assets_users.last_name', 'LIKE', '%'.$term.'%')
-        ->orWhere('assets_users.username', 'LIKE', '%'.$term.'%')
-        ->orWhereRaw('CONCAT('.DB::getTablePrefix().'assets_users.first_name," ",'.DB::getTablePrefix().'assets_users.last_name) LIKE ?', ["%$term%", "%$term%"]);
+
+      foreach($terms as $term) {
+
+        $query = $query
+          ->orWhere('assets_users.first_name', 'LIKE', '%'.$term.'%')
+          ->orWhere('assets_users.last_name', 'LIKE', '%'.$term.'%')
+          ->orWhere('assets_users.username', 'LIKE', '%'.$term.'%')
+          ->orWhereRaw('CONCAT('.DB::getTablePrefix().'assets_users.first_name," ",'.DB::getTablePrefix().'assets_users.last_name) LIKE ?', ["%$term%", "%$term%"]);      
+
+      }
 
       /**
        * Assigned location
-       */
+       */      
       $query = $query->leftJoin('locations as assets_locations',function ($leftJoin) {
         $leftJoin->on("assets_locations.id","=","assets.assigned_to")
           ->where("assets.assigned_type","=",Location::class);
       });
 
-      $query = $query->orWhere('assets_locations.name', 'LIKE', '%'.$term.'%');
+      foreach($terms as $term) {
+
+        $query = $query->orWhere('assets_locations.name', 'LIKE', '%'.$term.'%');     
+
+      }      
 
       /**
        * Assigned assets
-       */
+       */      
       $query = $query->leftJoin('assets as assigned_assets',function ($leftJoin) {
         $leftJoin->on('assigned_assets.id', '=', 'assets.assigned_to')
           ->where('assets.assigned_type', '=', Asset::class);
       });
 
-      $query = $query->orWhere('assigned_assets.name', 'LIKE', '%'.$term.'%');
+      foreach($terms as $term) {
+
+        $query = $query->orWhere('assigned_assets.name', 'LIKE', '%'.$term.'%');
+                  
+      }
 
       return $query;
     }

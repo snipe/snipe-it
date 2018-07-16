@@ -42,11 +42,11 @@ trait Searchable {
              */
             $query = $this->searchRelations($query, $term);
 
-            /**
-             * Search for additional attributes defined by the model
-             */
-            $query = $this->advancedTextSearch($query, $term);
         }
+        /**
+         * Search for additional attributes defined by the model
+         */
+        $query = $this->advancedTextSearch($query, $terms);
 
         return $query;
     }
@@ -160,12 +160,12 @@ trait Searchable {
      * This is a noop in this trait, but can be overridden in the implementing model, to allow more advanced searches
      * 
      * @param  Illuminate\Database\Eloquent\Builder $query
-     * @param  string  $term The search term
+     * @param  array  $terms The search terms
      * @return Illuminate\Database\Eloquent\Builder
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function advancedTextSearch(Builder $query, string $term) {
+    public function advancedTextSearch(Builder $query, array $terms) {
         return $query;
     }        
 
