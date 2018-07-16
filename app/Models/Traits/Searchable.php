@@ -179,7 +179,7 @@ trait Searchable {
     /**
      * Get the searchable relations, if defined. Otherwise it returns an empty array
      * 
-     * @return array The attributes to search in
+     * @return array The relations to search in
      */    
     private function getSearchableRelations() {
         return isset($this->searchableRelations) ? $this->searchableRelations : [];
