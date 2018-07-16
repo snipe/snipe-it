@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\UniqueUndeletedTrait;
 use Illuminate\Notifications\Notifiable;
@@ -434,6 +435,19 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     {
         return json_decode($this->permissions, true);
     }
+
+    /**
+     * Run additional, advanced searches.
+     * 
+     * @param  Illuminate\Database\Eloquent\Builder $query
+     * @param  string  $term The search term
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function advancedTextSearch(Builder $query, string $term) {
+        $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$term%", "%$term%"]);
+
+        return $query;
+    }     
 
 
     public function scopeByGroup($query, $id) {
