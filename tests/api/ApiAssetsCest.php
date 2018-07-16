@@ -34,7 +34,7 @@ class ApiAssetsCest
         $response = json_decode($I->grabResponse(), true);
         // sample verify
         $asset = Asset::orderByDesc('id')->take(20)->get()->first();
-        $I->seeResponseContainsJson((new AssetsTransformer)->transformAsset($asset));
+        $I->seeResponseContainsJson($I->removeTimestamps((new AssetsTransformer)->transformAsset($asset)));
     }
 
     /** @test */
