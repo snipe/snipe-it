@@ -860,7 +860,7 @@
 
                         <td>
                           @can('update', \App\Models\Asset::class)
-                            <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('delete_confirm', ['item' => $file->filename]) }}"><i class="fa fa-trash icon-white"></i></a>
+                            <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}"><i class="fa fa-trash icon-white"></i></a>
                           @endcan
                         </td>
                       </tr>
