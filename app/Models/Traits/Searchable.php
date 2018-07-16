@@ -162,6 +162,8 @@ trait Searchable {
      * @param  Illuminate\Database\Eloquent\Builder $query
      * @param  string  $term The search term
      * @return Illuminate\Database\Eloquent\Builder
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function advancedTextSearch(Builder $query, string $term) {
         return $query;
