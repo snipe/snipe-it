@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Asset;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,34 +28,25 @@ class BulkAssetsController extends Controller
             return redirect()->back()->with('error', 'No assets selected');
         }
 
-        $asset_raw_array = $request->input('ids');
-        foreach ($asset_raw_array as $asset_id => $value) {
-            $asset_ids[] = $asset_id;
-        }
-
+        $asset_ids = array_keys($request->input('ids'));
 
         if ($request->has('bulk_actions')) {
-            if ($request->input('bulk_actions')=='labels') {
-                $count = 0;
-                return view('hardware/labels')
-                    ->with('assets', Asset::find($asset_ids))
-                    ->with('settings', Setting::getSettings())
-                    ->with('count', $count);
-            } elseif ($request->input('bulk_actions')=='delete') {
-                $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
-                $assets->each(function ($asset) {
-                    $this->authorize('delete', $asset);
-                });
-                return view('hardware/bulk-delete')->with('assets', $assets);
-             // Bulk edit
-            } elseif ($request->input('bulk_actions')=='edit') {
-                return view('hardware/bulk')
-                ->with('assets', request('ids'))
-                ->with('statuslabel_list', Helper::statusLabelList())
-                ->with(
-                    'companies_list',
-                    array('' => '') + array('clear' => trans('general.remove_company')) + Helper::companyList()
-                );
+            switch($request->input('bulk_actions')) {
+                case 'labels':
+                    return view('hardware/labels')
+                        ->with('assets', Asset::find($asset_ids))
+                        ->with('settings', Setting::getSettings())
+                        ->with('count', 0);
+                case 'delete':
+                    $assets = Asset::with('assignedTo', 'location')->find($asset_ids);
+                    $assets->each(function ($asset) {
+                        $this->authorize('delete', $asset);
+                    });
+                    return view('hardware/bulk-delete')->with('assets', $assets);
+                case 'edit':
+                    return view('hardware/bulk')
+                        ->with('assets', request('ids'))
+                        ->with('statuslabel_list', Helper::statusLabelList());
             }
         }
         return redirect()->back()->with('error', 'No action selected');
@@ -74,75 +66,82 @@ class BulkAssetsController extends Controller
 
         \Log::debug($request->input('ids'));
 
-        if (($request->has('ids')) && (count($request->input('ids')) > 0)) {
-            $assets = $request->input('ids');
-            if (($request->has('purchase_date'))
-                ||  ($request->has('purchase_cost'))
-                ||  ($request->has('supplier_id'))
-                ||  ($request->has('order_number'))
-                || ($request->has('warranty_months'))
-                || ($request->has('rtd_location_id'))
-                || ($request->has('requestable'))
-                ||  ($request->has('company_id'))
-                || ($request->has('status_id'))
-                ||  ($request->has('model_id'))
-            ) {
-                foreach ($assets as $key => $value) {
-                    $update_array = array();
+        if(!$request->has('ids') || count($request->input('ids')) <= 0) {
+            return redirect()->route("hardware.index")->with('warning', trans('No assets selected, so nothing was updated.'));
+        }
 
-                    if ($request->has('purchase_date')) {
-                        $update_array['purchase_date'] =  $request->input('purchase_date');
-                    }
-                    if ($request->has('purchase_cost')) {
-                        $update_array['purchase_cost'] =  Helper::ParseFloat($request->input('purchase_cost'));
-                    }
-                    if ($request->has('supplier_id')) {
-                        $update_array['supplier_id'] =  $request->input('supplier_id');
-                    }
-                    if ($request->has('model_id')) {
-                        $update_array['model_id'] =  $request->input('model_id');
-                    }
-                    if ($request->has('company_id')) {
-                        if ($request->input('company_id')=="clear") {
-                            $update_array['company_id'] =  null;
-                        } else {
-                            $update_array['company_id'] =  $request->input('company_id');
-                        }
-                    }
-                    if ($request->has('order_number')) {
-                        $update_array['order_number'] =  $request->input('order_number');
-                    }
-                    if ($request->has('warranty_months')) {
-                        $update_array['warranty_months'] =  $request->input('warranty_months');
-                    }
+        $assets = $request->input('ids');
 
+        if (($request->has('purchase_date'))
+            || ($request->has('purchase_cost'))
+            || ($request->has('supplier_id'))
+            || ($request->has('order_number'))
+            || ($request->has('warranty_months'))
+            || ($request->has('rtd_location_id'))
+            || ($request->has('requestable'))
+            || ($request->has('company_id'))
+            || ($request->has('status_id'))
+            || ($request->has('model_id'))
+        ) {
+            foreach ($assets as $key => $value) {
+                $this->update_array = [];
 
-                    if ($request->has('rtd_location_id')) {
-                        $update_array['rtd_location_id'] = $request->input('rtd_location_id');
-                        if (($request->has('update_real_loc'))
-                            && (($request->input('update_real_loc')) == '1'))
-                        {
-                            $update_array['location_id'] = $request->input('rtd_location_id');
-                        }
-                    }
+                $this->conditionallyAddItem('purchase_date')
+                    ->conditionallyAddItem('model_id')
+                    ->conditionallyAddItem('order_number')
+                    ->conditionallyAddItem('requestable')
+                    ->conditionallyAddItem('status_id')
+                    ->conditionallyAddItem('supplier_id')
+                    ->conditionallyAddItem('warranty_months');
 
-                    if ($request->has('status_id')) {
-                        $update_array['status_id'] = $request->input('status_id');
-                    }
-                    if ($request->has('requestable')) {
-                        $update_array['requestable'] = $request->input('requestable');
-                    }
+                if ($request->has('purchase_cost')) {
+                    $this->update_array['purchase_cost'] =  Helper::ParseFloat($request->input('purchase_cost'));
+                }
 
-                    DB::table('assets')
-                        ->where('id', $key)
-                        ->update($update_array);
-                } // endforeach
-                return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.update.success'));
-            // no values given, nothing to update
-            }
-            return redirect()->route("hardware.index")->with('warning', trans('admin/hardware/message.update.nothing_updated'));
-        } // endif
-        return redirect()->route("hardware.index")->with('warning', trans('No assets selected, so nothing was updated.'));
+                if ($request->has('company_id')) {
+                    if ($request->input('company_id')=="clear") {
+                        $this->update_array['company_id'] =  null;
+                    } else {
+                        $this->update_array['company_id'] =  $request->input('company_id');
+                    }
+                }
+
+                if ($request->has('rtd_location_id')) {
+                    $this->update_array['rtd_location_id'] = $request->input('rtd_location_id');
+                    if (($request->has('update_real_loc'))
+                        && (($request->input('update_real_loc')) == '1'))
+                    {
+                        $this->update_array['location_id'] = $request->input('rtd_location_id');
+                    }
+                }
+
+                DB::table('assets')
+                    ->where('id', $key)
+                    ->update($this->update_array);
+            } // endforeach
+            return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.update.success'));
+        // no values given, nothing to update
+        }
+        return redirect()->route("hardware.index")->with('warning', trans('admin/hardware/message.update.nothing_updated'));
+
+    }
+
+    /**
+     * Array to store update data per item
+     * @var Array
+     */
+    private $update_array;
+    /**
+     * Adds parameter to update array for an item if it exists in request
+     * @param  String  $field        field name
+     * @return this     Model for Chaining
+     */
+    protected function conditionallyAddItem($field)
+    {
+        if(request()->has($field)) {
+            $this->update_array[$field] = request()->input($field);
+        }
+        return $this;
     }
 
     /**

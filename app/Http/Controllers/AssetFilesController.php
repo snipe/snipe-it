@@ -78,14 +78,14 @@ class AssetFilesController extends Controller
 
             if ($download != 'true') {
                   if ($contents = file_get_contents($file)) {
-                      return Response::make($contents)->header('Content-Type', $filetype);
+                      return Response::make($contents)->header('Content-Type', mime_content_type($file));
                   }
                 return JsonResponse::create(["error" => "Failed validation: "], 500);
             }
             return Response::download($file);
         }
         // Prepare the error message
-        $error = trans('admin/hardware/message.does_not_exist', compact('id'));
+        $error = trans('admin/hardware/message.does_not_exist', ['id' => $fileId]);
 
         // Redirect to the hardware management page
         return redirect()->route('hardware.index')->with('error', $error);

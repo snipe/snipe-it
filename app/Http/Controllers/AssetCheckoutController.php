@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
 use App\Models\Location;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,65 +52,74 @@ class AssetCheckoutController extends Controller
      */
     public function store(AssetCheckoutRequest $request, $assetId)
     {
-        // Check if the asset exists
-        if (!$asset = Asset::find($assetId)) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!$asset->availableForCheckout()) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
+        try {
+            // Check if the asset exists
+            if (!$asset = Asset::find($assetId)) {
+                return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+            } elseif (!$asset->availableForCheckout()) {
+                return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
+            }
+            $this->authorize('checkout', $asset);
+            $admin = Auth::user();
+
+            $target = $this->determineCheckoutTarget($asset);
+
+            $checkout_at = date("Y-m-d H:i:s");
+            if (($request->has('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {
+                $checkout_at = $request->get('checkout_at');
+            }
+
+            $expected_checkin = '';
+            if ($request->has('expected_checkin')) {
+                $expected_checkin = $request->get('expected_checkin');
+            }
+
+            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
+                return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
+            }
+
+            // Redirect to the asset management page with error
+            return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
+        } catch (CheckoutNotAllowed $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
-        $this->authorize('checkout', $asset);
-        $admin = Auth::user();
+    }
 
-
-        // This item is checked out to a location
+    /**
+     * Find target for checkout
+     * @param  Asset $asset Asset being checked out
+     * @return SnipeModel        Target asset is being checked out to.
+     */
+    protected function determineCheckoutTarget($asset)
+    {
+          // This item is checked out to a location
         if (request('checkout_to_type')=='location') {
-            $target = Location::find(request('assigned_location'));
-            $asset->location_id = ($target) ? $target->id : '';
+            $target = Location::findOrFail(request('assigned_location'));
+            $asset->location_id = $target->id;
 
         } elseif (request('checkout_to_type')=='asset') {
 
-            if (request('assigned_asset') == $assetId) {
-                return redirect()->back()->with('error', 'You cannot check an asset out to itself.');
+            $target = Asset::findOrFail(request('assigned_asset'));
+            if ($asset->is($target)) {
+                throw new CheckoutNotAllowed('You cannot check an asset out to itself.');
+                // return redirect()->back()->with('error', 'You cannot check an asset out to itself.');
             }
 
-            $target = Asset::where('id','!=',$assetId)->find(request('assigned_asset'));
+            $target = Asset::findOrFail(request('assigned_asset'));
             $asset->location_id = $target->rtd_location_id;
 
             // Override with the asset's location_id if it has one
             if ($target->location_id!='') {
-                $asset->location_id = ($target) ? $target->location_id : '';
+                $asset->location_id = $target->location_id;
             }
 
         } elseif (request('checkout_to_type')=='user') {
             // Fetch the target and set the asset's new location_id
-            $target = User::find(request('assigned_user'));
+            $target = User::findOrFail(request('assigned_user'));
             $asset->location_id = ($target) ? $target->location_id : '';
         }
-
-        // No valid target was found - error out
-        if (!$target) {
-            return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
-        }
-
-
-        if (($request->has('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {
-            $checkout_at = $request->get('checkout_at');
-        } else {
-            $checkout_at = date("Y-m-d H:i:s");
-        }
-
-        if ($request->has('expected_checkin')) {
-            $expected_checkin = $request->get('expected_checkin');
-        } else {
-            $expected_checkin = '';
-        }
-
-
-        if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
-            return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
-        }
-
-        // Redirect to the asset management page with error
-        return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
+        return $target;
     }
 }
