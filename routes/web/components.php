@@ -19,8 +19,6 @@ Route::group([ 'prefix' => 'components','middleware' => ['auth'] ], function () 
         '{componentID}/checkin',
         [ 'as' => 'component.checkin.save', 'uses' => 'ComponentsController@postCheckin' ]
     );
-    Route::post('bulk', [ 'as' => 'component/bulk-form', 'uses' => 'ComponentsController@postBulk' ]);
-    Route::post('bulksave', [ 'as' => 'component/bulk-save', 'uses' => 'ComponentsController@postBulkSave' ]);
 
 });
 
