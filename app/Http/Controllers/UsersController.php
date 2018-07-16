@@ -1011,8 +1011,7 @@ class UsersController extends Controller
             return redirect()->route('users.index')->with('error', $e->getMessage());
         }
 
-        return view('users/ldap')
-              ->with('location_list', Helper::locationsList());
+        return view('users/ldap');
     }
 
 

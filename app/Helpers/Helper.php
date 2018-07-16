@@ -137,95 +137,6 @@ class Helper
         return floatval($floatString);
     }
 
-
-    /**
-     * Get the list of models in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function modelList()
-    {
-        $models = AssetModel::with('manufacturer')->get();
-        $model_array[''] = trans('general.select_model');
-        foreach ($models as $model) {
-            $model_array[$model->id] = $model->present()->modelName();
-        }
-        return $model_array;
-    }
-
-    /**
-     * Get the list of companies in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function companyList()
-    {
-        $company_list = array('' => trans('general.select_company')) + DB::table('companies')
-                ->orderBy('name', 'asc')
-                ->pluck('name', 'id')
-                ->toArray();
-        return $company_list;
-    }
-
-
-    /**
-     * Get the list of categories in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function categoryList($category_type = null)
-    {
-        $categories = Category::orderBy('name', 'asc')
-                ->whereNull('deleted_at')
-                ->orderBy('name', 'asc');
-        if (!empty($category_type)) {
-            $categories = $categories->where('category_type', '=', $category_type);
-        }
-        $category_list = array('' => trans('general.select_category')) + $categories->pluck('name', 'id')->toArray();
-        return $category_list;
-    }
-
-
-    /**
-     * Get the list of categories in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function departmentList()
-    {
-        $departments = Department::orderBy('name', 'asc')
-            ->whereNull('deleted_at')
-            ->orderBy('name', 'asc');
-
-        return array('' => trans('general.select_department')) + $departments->pluck('name', 'id')->toArray();
-
-    }
-    
-
-    /**
-     * Get the list of suppliers in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function suppliersList()
-    {
-        $supplier_list = array('' => trans('general.select_supplier')) + Supplier::orderBy('name', 'asc')
-                ->orderBy('name', 'asc')
-                ->pluck('name', 'id')->toArray();
-        return $supplier_list;
-    }
-
-
     /**
      * Get the list of status labels in an array to make a dropdown menu
      *
@@ -238,37 +149,6 @@ class Helper
         $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('default_label', 'desc')->orderBy('name','asc')->orderBy('deployable','desc')
                 ->pluck('name', 'id')->toArray();
         return $statuslabel_list;
-    }
-
-
-    /**
-     * Get the list of locations in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function locationsList()
-    {
-        $location_list = array('' => trans('general.select_location')) + Location::orderBy('name', 'asc')
-                ->pluck('name', 'id')->toArray();
-        return $location_list;
-    }
-
-
-    /**
-     * Get the list of manufacturers in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function manufacturerList()
-    {
-        $manufacturer_list = array('' => trans('general.select_manufacturer')) +
-            Manufacturer::orderBy('name', 'asc')
-                ->pluck('name', 'id')->toArray();
-        return $manufacturer_list;
     }
 
     /**
@@ -287,24 +167,6 @@ class Helper
             + array('undeployable' => trans('admin/hardware/general.undeployable'))
             + array('archived' => trans('admin/hardware/general.archived'));
         return $statuslabel_types;
-    }
-
-    /**
-     * Get the list of managers in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function managerList()
-    {
-        $manager_list = array('' => trans('general.select_user')) +
-                        User::where('deleted_at', '=', null)
-                        ->orderBy('last_name', 'asc')
-                        ->orderBy('first_name', 'asc')->get()
-                        ->pluck('complete_name', 'id')->toArray();
-
-        return $manager_list;
     }
 
     /**
@@ -340,54 +202,6 @@ class Helper
         );
         return $category_types;
     }
-
-    /**
-     * Get the list of users in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function usersList()
-    {
-        $users_list =   array( '' => trans('general.select_user')) +
-                        Company::scopeCompanyables(User::where('deleted_at', '=', null))
-                        ->where('show_in_list', '=', 1)
-                        ->orderBy('last_name', 'asc')
-                        ->orderBy('first_name', 'asc')->get()
-                        ->pluck('complete_name', 'id')->toArray();
-
-        return $users_list;
-    }
-
-    /**
-     * Get the list of assets in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function assetsList()
-    {
-        $assets_list = array('' => trans('general.select_asset')) + Asset::orderBy('name', 'asc')
-                ->whereNull('deleted_at')
-                ->pluck('name', 'id')->toArray();
-        return $assets_list;
-    }
-
-    /**
-     * Get the detailed list of assets in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return array
-     */
-    public static function detailedAssetList()
-    {
-        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::with('assignedTo', 'model'), 'assets.company_id')->get()->pluck('detailed_name', 'id')->toArray();
-        return $assets;
-    }
-
 
     /**
      * Get the list of custom fields in an array to make a dropdown menu
