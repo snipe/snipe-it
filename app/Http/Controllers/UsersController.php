@@ -287,6 +287,7 @@ class UsersController extends Controller
         $user->city = $request->input('city', null);
         $user->state = $request->input('state', null);
         $user->country = $request->input('country', null);
+        $user->activated = $request->input('activated', 0);
         $user->zip = $request->input('zip', null);
 
 
