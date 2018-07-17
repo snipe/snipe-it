@@ -287,12 +287,6 @@ abstract class Importer
         $first_name = $user_email_array['first_name'];
         $last_name = $user_email_array['last_name'];
         $user_email = User::generateEmailFromFullName($user_name);
-        if (empty($user_email)) {
-            if (Setting::getSettings()->email_domain) {
-                // NOTE: This strips '.' when slugifying, leading to sometimes surprises.  Use with caution.
-                $user_email = str_slug($user_email_array['username']).'@'.Setting::getSettings()->email_domain;
-            }
-        }
 
         if (empty($user_username)) {
             if ($this->usernameFormat =='email') {
