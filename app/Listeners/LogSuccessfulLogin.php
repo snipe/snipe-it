@@ -37,7 +37,7 @@ class LogSuccessfulLogin
                     'user_agent' => request()->header('User-Agent'),
                     'remote_ip' => request()->ip(),
                     'successful' => 1,
-                    'created_at' => $now
+                    'created_at' => $now,
                 ]
             );
         } catch (\Exception $e) {

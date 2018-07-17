@@ -35,7 +35,7 @@ class LogFailedLogin
                     'user_agent' => request()->header('User-Agent'),
                     'remote_ip' => request()->ip(),
                     'successful' => 0,
-                    'created_at' => $now;
+                    'created_at' => $now,
                 ]
             );
         } catch (\Exception $e) {
