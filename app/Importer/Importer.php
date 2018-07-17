@@ -266,8 +266,8 @@ abstract class Importer
             return false;
         }
 
-        if( !empty($user_username)) {
-            // A username was given.
+        if (!empty($user_username)) {
+            // A username was given -- check to see if it exists.
             $user = User::where('username', $user_username)->first();
             if($user) {
                 return $user;
@@ -275,9 +275,9 @@ abstract class Importer
         }
         // A number was given instead of a name
         if (is_numeric($user_name)) {
-            $this->log('User '.$user_name.' is not a name - assume this user already exists');
+            $this->log('User '.$user_name.' is a number - lets see if it matches a user id');
             $user = User::find($user_name);
-            if($user) {
+            if ($user) {
                 return $user;
             }
             $this->log('User with id'.$user_name.' does not exist.  Continuing through our processes');
@@ -286,9 +286,10 @@ abstract class Importer
         $user_email_array = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $user_name);
         $first_name = $user_email_array['first_name'];
         $last_name = $user_email_array['last_name'];
-
+        $user_email = User::generateEmailFromFullName($user_name);
         if (empty($user_email)) {
             if (Setting::getSettings()->email_domain) {
+                // NOTE: This strips '.' when slugifying, leading to sometimes surprises.  Use with caution.
                 $user_email = str_slug($user_email_array['username']).'@'.Setting::getSettings()->email_domain;
             }
         }
@@ -301,30 +302,34 @@ abstract class Importer
                 $user_username = $user_name_array['username'];
             }
         }
-        $user = new User;
-
-        if (!empty($user_username)) {
-
-            if ($user = User::MatchEmailOrUsername($user_username, $user_email)
-                ->whereNotNull('username')->first()) {
-                $this->log('User '.$user_username.' already exists');
-            } elseif (( $first_name != '') && ($last_name != '') && ($user_username != '')) {
-                $user = new User;
-                $user->first_name = $first_name;
-                $user->last_name = $last_name;
-                $user->username = $user_username;
-                $user->email = $user_email;
-                $user->activated = 1;
-                $user->password = $this->tempPassword;
-
-                if ($user->save()) {
-                    $this->log('User '.$first_name.' created');
-                } else {
-                    $this->logError($user, 'User "' . $first_name . '"');
-                }
-            }
+        if(empty($user_username)) {
+            return false;
         }
-        return $user;
+
+        if ($user = User::MatchEmailOrUsername($user_username, $user_email)
+            ->whereNotNull('username')->first()) {
+            $this->log('User '.$user_username.' already exists');
+            return $user;
+        }
+
+        // To create a user, first name and username are required.
+        // Username is guaranteed to be non empty from above.
+        if ( $first_name != '') {
+            $user = new User;
+            $user->first_name = $first_name;
+            $user->last_name = $last_name;
+            $user->username = $user_username;
+            $user->email = $user_email;
+            $user->activated = 1;
+            $user->password = $this->tempPassword;
+
+            if ($user->save()) {
+                $this->log('User '.$first_name.' created');
+                return $user;
+            }
+            $this->logError($user, 'User "' . $first_name . '" was not able to be created.');
+        }
+        return false;
     }
 
     /**
