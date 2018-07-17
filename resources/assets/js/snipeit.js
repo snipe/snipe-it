@@ -361,7 +361,7 @@ $(document).ready(function () {
         var max_size = $('#uploadFile').data('maxsize');
         var total_size = 0;
 
-        for (let i = 0; i < this.files.length; i++) {
+        for (var i = 0; i < this.files.length; i++) {
             total_size += this.files[i].size;
             $('#upload-file-info').append('<span class="label label-default">' + this.files[i].name + ' (' + formatBytes(this.files[i].size) + ')</span> ');
         }
