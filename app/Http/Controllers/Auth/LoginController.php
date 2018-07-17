@@ -69,6 +69,12 @@ class LoginController extends Controller
         $remote_user = $request->server('REMOTE_USER');
         if (Setting::getSettings()->login_remote_user_enabled == "1" && isset($remote_user) && !empty($remote_user)) {
             LOG::debug("Authenticatiing via REMOTE_USER.");
+
+            $pos = strpos($remote_user, '\\');
+            if ($pos > 0) {
+                $remote_user = substr($remote_user, $pos + 1);
+            };
+            
             try {
                 $user = User::where('username', '=', $remote_user)->whereNull('deleted_at')->first();
                 LOG::debug("Remote user auth lookup complete");
