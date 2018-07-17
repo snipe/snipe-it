@@ -440,12 +440,15 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
      * Run additional, advanced searches.
      * 
      * @param  Illuminate\Database\Eloquent\Builder $query
-     * @param  string  $term The search term
+     * @param  array  $term The search terms
      * @return Illuminate\Database\Eloquent\Builder
      */
-    public function advancedTextSearch(Builder $query, string $term) {
-        $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$term%", "%$term%"]);
+    public function advancedTextSearch(Builder $query, array $terms) {
 
+        foreach($terms as $term) {
+            $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$term%", "%$term%"]);
+        }
+        
         return $query;
     }     
 
