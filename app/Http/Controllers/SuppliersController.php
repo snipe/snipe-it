@@ -98,23 +98,6 @@ class SuppliersController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function apiStore(Request $request)
-    {
-        $this->authorize('create', Supplier::class);
-        $supplier = new Supplier;
-        $supplier->name =  $request->input('name');
-        $supplier->user_id              = Auth::id();
-
-        if ($supplier->save()) {
-            return JsonResponse::create($supplier);
-        }
-        return JsonResponse::create(["error" => "Failed validation: ".print_r($supplier->getErrors(), true)], 500);
-    }
-
-    /**
      * Supplier update.
      *
      * @param  int  $supplierId

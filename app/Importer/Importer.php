@@ -95,7 +95,6 @@ abstract class Importer
         if (! ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
         }
-
         // By default the importer passes a url to the file.
         // However, for testing we also support passing a string directly
         if (is_file($file)) {
@@ -113,24 +112,7 @@ abstract class Importer
         $headerRow = $this->csv->fetchOne();
         $results = $this->normalizeInputArray($this->csv->fetchAssoc());
 
-        // Stolen From https://adamwathan.me/2016/07/14/customizing-keys-when-mapping-collections/
-        // This 'inverts' the fields such that we have a collection of fields indexed by name.
-        $cFs = CustomField::All();
-        $this->customFields = $cFs->reduce(function ($nameLookup, $field) {
-            $nameLookup[$field['name']] = $field;
-            return $nameLookup;
-        });
-        // Remove any custom fields that do not exist in the header row.  This prevents nulling out values that shouldn't exist.
-        // In detail, we compare the lower case name of custom fields (indexed by name) to the keys in the header row.  This
-        // results in an array with only custom fields that are in the file.
-        if ($this->customFields) {
-            $this->customFields = array_intersect_key(
-                array_change_key_case($this->customFields),
-                array_change_key_case(array_flip($headerRow))
-            );
-        }
-
-
+        $this->populateCustomFields($headerRow);
 
         DB::transaction(function () use (&$results) {
             Model::unguard();
@@ -146,8 +128,35 @@ abstract class Importer
         });
     }
 
+
     abstract protected function handle($row);
 
+    /**
+     * Fetch custom fields from database and translate/parse them into a format
+     * appropriate for use in the importer.
+     * @return void
+     * @author Daniel Meltzer
+     * @since  5.0
+     */
+    protected function populateCustomFields($headerRow)
+    {
+        // Stolen From https://adamwathan.me/2016/07/14/customizing-keys-when-mapping-collections/
+        // This 'inverts' the fields such that we have a collection of fields indexed by name.
+        $this->customFields = CustomField::All()->reduce(function ($nameLookup, $field) {
+            $nameLookup[$field['name']] = $field;
+            return $nameLookup; 
+        });
+        // Remove any custom fields that do not exist in the header row.  This prevents nulling out values that shouldn't exist.
+        // In detail, we compare the lower case name of custom fields (indexed by name) to the keys in the header row.  This
+        // results in an array with only custom fields that are in the file.
+        if ($this->customFields) {
+            $this->customFields = array_intersect_key(
+                array_change_key_case($this->customFields),
+                array_change_key_case(array_flip($headerRow))
+            );
+        }
+
+    }
     /**
      * Check to see if the given key exists in the array, and trim excess white space before returning it
      *
