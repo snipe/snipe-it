@@ -84,15 +84,13 @@ class ItemImporter extends Importer
      */ 
     protected function determineCheckout($row)
     {
-        // We only supporty checkout-to-location for asset, so short circuit otherw.
+        // We only support checkout-to-location for asset, so short circuit otherw.
         if(get_class($this) != AssetImporter::class) {
             return $this->createOrFetchUser($row);
         }
 
         if ($this->item['checkout_class'] === 'location') {
-            // dd($this->findCsvMatch($row, 'checkout_location'));
             return Location::findOrFail($this->createOrFetchLocation($this->findCsvMatch($row, 'checkout_location')));
-            // dd('here');
         }
 
         return $this->createOrFetchUser($row);
