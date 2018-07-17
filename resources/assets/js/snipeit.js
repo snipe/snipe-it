@@ -344,9 +344,9 @@ $(document).ready(function () {
 
     function formatBytes(bytes) {
         if(bytes < 1024) return bytes + " Bytes";
-        else if(bytes < 1048576) return(bytes / 1024).toFixed(3) + " KB";
-        else if(bytes < 1073741824) return(bytes / 1048576).toFixed(3) + " MB";
-        else return(bytes / 1073741824).toFixed(3) + " GB";
+        else if(bytes < 1048576) return(bytes / 1024).toFixed(2) + " KB";
+        else if(bytes < 1073741824) return(bytes / 1048576).toFixed(2) + " MB";
+        else return(bytes / 1073741824).toFixed(2) + " GB";
     };
 
      // File size validation
@@ -356,18 +356,24 @@ $(document).ready(function () {
         $('.badfile').remove();
         $('.badfile').remove();
         $('.previewSize').hide();
+        $('#upload-file-info').html('');
 
         var max_size = $('#uploadFile').data('maxsize');
-        var actual_size = this.files[0].size;
+        var total_size = 0;
 
-        if (actual_size > max_size) {
-            $('#upload-file-status').addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize">This file is ' + formatBytes(actual_size) + '.</span>');
+        for (let i = 0; i < this.files.length; i++) {
+            total_size += this.files[i].size;
+            $('#upload-file-info').append('<span class="label label-default">' + this.files[i].name + ' (' + formatBytes(this.files[i].size) + ')</span> ');
+        }
+
+        if (total_size > max_size) {
+            $('#upload-file-status').addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
         } else {
             $('#upload-file-status').addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
             readURL(this);
             $('#imagePreview').fadeIn();
         }
-        $('#upload-file-info').html(this.files[0].name);
+
 
     });
 
