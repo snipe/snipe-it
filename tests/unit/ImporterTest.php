@@ -97,6 +97,7 @@ Mildred Gibson,mgibson2@wiley.com,mgibson2,,user,morbi quis tortor id,nunc nisl 
 EOT;
 
         $this->import(new AssetImporter($csv));
+
         $user = User::where('username', 'bnelson0')->firstOrFail();
 
         $this->tester->seeRecord('assets', [
@@ -278,7 +279,6 @@ EOT;
 
         $this->import(new AssetImporter($csv), $customFieldMap);
         // Did we create a user?
-
         $this->tester->seeRecord('users', [
             'first_name' => 'Bonnie',
             'last_name' => 'Nelson',

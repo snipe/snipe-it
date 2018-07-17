@@ -71,20 +71,20 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     ];
 
     use Searchable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = [
-        'first_name', 
-        'last_name', 
-        'email', 
-        'username', 
-        'notes', 
-        'phone', 
-        'jobtitle', 
+        'first_name',
+        'last_name',
+        'email',
+        'username',
+        'notes',
+        'phone',
+        'jobtitle',
         'employee_num'
     ];
 
@@ -201,7 +201,6 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     public function assets()
     {
         return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
-        // return $this->hasMany('\App\Models\Asset', 'assigned_to')->withTrashed();
     }
 
     /**
@@ -342,24 +341,6 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         return $query->whereNull('deleted_at');
     }
 
-    /**
-     * Override the SentryUser getPersistCode method for
-     * multiple logins at one time
-     **/
-    public function getPersistCode()
-    {
-
-        if (!config('session.multi_login') || (!$this->persist_code)) {
-            $this->persist_code = $this->getRandomString();
-
-            // Our code got hashed
-            $persistCode = $this->persist_code;
-            $this->save();
-            return $persistCode;
-        }
-        return $this->persist_code;
-    }
-
     public function scopeMatchEmailOrUsername($query, $user_username, $user_email)
     {
         return $query->where('email', '=', $user_email)
@@ -438,7 +419,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     /**
      * Run additional, advanced searches.
-     * 
+     *
      * @param  Illuminate\Database\Eloquent\Builder $query
      * @param  array  $term The search terms
      * @return Illuminate\Database\Eloquent\Builder
@@ -448,9 +429,9 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         foreach($terms as $term) {
             $query = $query->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$term%", "%$term%"]);
         }
-        
+
         return $query;
-    }     
+    }
 
 
     public function scopeByGroup($query, $id) {
