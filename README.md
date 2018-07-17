@@ -58,6 +58,7 @@ Since the release of the JSON REST API, several third-party developers have been
 - [SnipeSharp - .NET module in C#](https://github.com/barrycarey/SnipeSharp) by [@barrycarey](https://github.com/barrycarey)
 - [InQRy](https://github.com/Microsoft/InQRy) by [@Microsoft](https://github.com/Microsoft)
 - [SnipeitPS](https://github.com/snazy2000/SnipeitPS) by [@snazy2000](https://github.com/snazy2000) - Powershell API Wrapper for Snipe-it
+- [jamf2snipe](https://github.com/ParadoxGuitarist/jamf2snipe) by [@ParadoxGuitarist](https://github.com/ParadoxGuitarist) - Python script to sync assets between a JAMFPro instance and a Snipe-II instance
 
 As these were created by third-parties, Snipe-IT cannot provide support for these project, and you should contact the developers directly if you need assistance. Additionally, Snipe-IT makes no guarantees as to the reliability, accuracy or maintainability of these libraries. Use at your own risk. :) 
 
