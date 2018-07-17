@@ -9,7 +9,7 @@
     "barryvdh/laravel-debugbar": "^2.4",
     "doctrine/cache": "^1.6",
     "doctrine/common": "^2.7",
-    "doctrine/dbal": "v2.5.13",
+    "doctrine/dbal": "^2.5.13",
     "doctrine/inflector": "1.1.*",
     "doctrine/instantiator": "1.0.*",
     "erusev/parsedown": "^1.6",
@@ -38,7 +38,6 @@
   },
     "require-dev": {
     "codeception/codeception": "2.3.6",
-    "codeclimate/php-test-reporter": "^0.4.4",
     "fzaninotto/faker": "~1.4",
     "phpunit/php-token-stream": "1.4.11",
     "phpunit/phpunit": "~5.7",
