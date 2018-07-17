@@ -270,10 +270,6 @@
 
         <div class="tab-pane" id="uploads">
           <div class="table-responsive">
-            <div id="upload-toolbar">
-              <a href="#" data-toggle="modal" data-target="#uploadFileModal" class="btn btn-default"><i class="fa fa-paperclip"></i> {{ trans('button.upload') }}</a>
-            </div>
-
             <table
                 data-cookie-id-table="licenseUploadsTable"
                 data-id-table="licenseUploadsTable"
@@ -390,41 +386,9 @@
   </div>  <!-- /.col -->
 </div> <!-- /.row -->
 
-
-<!-- Modal -->
-<div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
-      </div>
-      {{ Form::open([
-      'method' => 'POST',
-      'route' => ['upload/license', $license->id],
-      'files' => true, 'class' => 'form-horizontal' ]) }}
-      <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-        <div class="modal-body">
-          <p>{{ trans('general.upload_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
-          <div class="form-group col-md-12">
-            <div class="input-group col-md-12">
-              <input class="col-md-12 form-control" type="text" name="notes" id="notes" placeholder="Notes">
-            </div>
-          </div>
-          <div class="form-group col-md-12">
-            <div class="input-group col-md-12">
-             {{ Form::file('licensefile[]', ['multiple' => 'multiple']) }}
-            </div>
-          </div>
-        </div> <!-- /.modal-body-->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('button.cancel') }}</button>
-          <button type="submit" class="btn btn-primary btn-sm">{{ trans('button.upload') }}</button>
-        </div>
-      {{ Form::close() }}
-    </div>
-  </div>
-</div>
+@can('update', \App\Models\License::class)
+  @include ('modals.upload-file', ['item_type' => 'license', 'item_id' => $license->id])
+@endcan
 
 @stop
 

@@ -30,8 +30,8 @@ class AssetFilesController extends Controller
 
         $destinationPath = config('app.private_uploads').'/assets';
 
-        if ($request->hasFile('assetfile')) {
-            foreach ($request->file('assetfile') as $file) {
+        if ($request->hasFile('file')) {
+            foreach ($request->file('file') as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $filename = 'hardware-'.$asset->id.'-'.str_random(8);
                 $filename .= '-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;

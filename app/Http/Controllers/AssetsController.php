@@ -60,14 +60,14 @@ class AssetsController extends Controller
     }
 
     /**
-    * Returns a view that invokes the ajax tables which actually contains
-    * the content for the assets listing, which is generated in getDatatable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see AssetController::getDatatable() method that generates the JSON response
-    * @since [v1.0]
-    * @return View
-    */
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the assets listing, which is generated in getDatatable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see AssetController::getDatatable() method that generates the JSON response
+     * @since [v1.0]
+     * @return View
+     */
     public function index(Request $request)
     {
         $this->authorize('index', Asset::class);
@@ -104,12 +104,12 @@ class AssetsController extends Controller
     }
 
     /**
-    * Validate and process new asset form data.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
-    * @return Redirect
-    */
+     * Validate and process new asset form data.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return Redirect
+     */
     public function store(AssetRequest $request)
     {
         $this->authorize(Asset::class);
@@ -195,7 +195,7 @@ class AssetsController extends Controller
             }
         }
 
-            // Was the asset created?
+        // Was the asset created?
         if ($asset->save()) {
 
 
@@ -223,13 +223,13 @@ class AssetsController extends Controller
     }
 
     /**
-    * Returns a view that presents a form to edit an existing asset.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @since [v1.0]
-    * @return View
-    */
+     * Returns a view that presents a form to edit an existing asset.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v1.0]
+     * @return View
+     */
     public function edit($assetId = null)
     {
         if (!$item = Asset::find($assetId)) {
@@ -246,13 +246,13 @@ class AssetsController extends Controller
 
 
     /**
-    * Returns a view that presents information about an asset for detail view.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @since [v1.0]
-    * @return View
-    */
+     * Returns a view that presents information about an asset for detail view.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v1.0]
+     * @return View
+     */
     public function show($assetId = null)
     {
         $asset = Asset::withTrashed()->find($assetId);
@@ -289,13 +289,13 @@ class AssetsController extends Controller
 
 
     /**
-    * Validate and process asset edit form.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @since [v1.0]
-    * @return Redirect
-    */
+     * Validate and process asset edit form.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v1.0]
+     * @return Redirect
+     */
 
     public function update(AssetRequest $request, $assetId = null)
     {
@@ -404,13 +404,13 @@ class AssetsController extends Controller
     }
 
     /**
-    * Delete a given asset (mark as deleted).
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @since [v1.0]
-    * @return Redirect
-    */
+     * Delete a given asset (mark as deleted).
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v1.0]
+     * @return Redirect
+     */
     public function destroy($assetId)
     {
         // Check if the asset exists
@@ -450,13 +450,13 @@ class AssetsController extends Controller
         return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
     }
     /**
-    * Return a QR code for the asset
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @since [v1.0]
-    * @return Response
-    */
+     * Return a QR code for the asset
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v1.0]
+     * @return Response
+     */
     public function getQrCode($assetId = null)
     {
         $settings = Setting::getSettings();
@@ -516,13 +516,13 @@ class AssetsController extends Controller
     }
 
     /**
-    * Returns a view that presents a form to clone an asset.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @since [v1.0]
-    * @return View
-    */
+     * Returns a view that presents a form to clone an asset.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v1.0]
+     * @return View
+     */
     public function getClone($assetId = null)
     {
         // Check if the asset exists
@@ -540,9 +540,9 @@ class AssetsController extends Controller
         $asset->assigned_to = '';
 
         return view('hardware/edit')
-        ->with('statuslabel_list', Helper::statusLabelList())
-        ->with('statuslabel_types', Helper::statusTypeList())
-        ->with('item', $asset);
+            ->with('statuslabel_list', Helper::statusLabelList())
+            ->with('statuslabel_types', Helper::statusTypeList())
+            ->with('item', $asset);
     }
 
     /**
@@ -641,15 +641,15 @@ class AssetsController extends Controller
                         $item[$asset_tag][$batch_counter]['user_id'] = $user->id;
 
                         Actionlog::firstOrCreate(array(
-                                'item_id' => $asset->id,
-                                'item_type' => Asset::class,
-                                'user_id' =>  Auth::user()->id,
-                                'note' => 'Checkout imported by '.Auth::user()->present()->fullName().' from history importer',
-                                'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
-                                'target_type' => User::class,
-                                'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
-                                'action_type'   => 'checkout',
-                            ));
+                            'item_id' => $asset->id,
+                            'item_type' => Asset::class,
+                            'user_id' =>  Auth::user()->id,
+                            'note' => 'Checkout imported by '.Auth::user()->present()->fullName().' from history importer',
+                            'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
+                            'target_type' => User::class,
+                            'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
+                            'action_type'   => 'checkout',
+                        ));
 
                         $asset->assigned_to = $user->id;
 
@@ -682,14 +682,14 @@ class AssetsController extends Controller
                         $asset_batch[$x]['real_checkin'] = $checkin_date;
 
                         Actionlog::firstOrCreate(array(
-                                'item_id' => $asset_batch[$x]['asset_id'],
-                                'item_type' => Asset::class,
-                                'user_id' => Auth::user()->id,
-                                'note' => 'Checkin imported by ' . Auth::user()->present()->fullName() . ' from history importer',
-                                'target_id' => null,
-                                'created_at' => $checkin_date,
-                                'action_type' => 'checkin'
-                            ));
+                            'item_id' => $asset_batch[$x]['asset_id'],
+                            'item_type' => Asset::class,
+                            'user_id' => Auth::user()->id,
+                            'note' => 'Checkin imported by ' . Auth::user()->present()->fullName() . ' from history importer',
+                            'target_id' => null,
+                            'created_at' => $checkin_date,
+                            'action_type' => 'checkin'
+                        ));
                     }
                 }
             }
@@ -698,13 +698,13 @@ class AssetsController extends Controller
     }
 
     /**
-    * Retore a deleted asset.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @since [v1.0]
-    * @return View
-    */
+     * Retore a deleted asset.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v1.0]
+     * @return View
+     */
     public function getRestore($assetId = null)
     {
         // Get asset information
@@ -775,14 +775,14 @@ class AssetsController extends Controller
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
-                    try {
-                     $destinationPath = config('app.private_uploads').'/audits';
-                     $extension = $file->getClientOriginalExtension();
-                        $filename = 'audit-'.$asset->id.'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-                        $file->move($destinationPath, $filename);
-                    } catch (\Exception $e) {
-                        \Log::error($e);
-                    }
+                try {
+                    $destinationPath = config('app.private_uploads').'/audits';
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = 'audit-'.$asset->id.'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+                    $file->move($destinationPath, $filename);
+                } catch (\Exception $e) {
+                    \Log::error($e);
+                }
             }
 
             $asset->logAudit($request->input('note'), $request->input('location_id'), $filename);
