@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AssetFileRequest;
 use Assets;
 use Illuminate\Support\Facades\Session;
 use Input;
@@ -495,7 +496,7 @@ class LicensesController extends Controller
     * @param int $licenseId
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postUpload(Request $request, $licenseId = null)
+    public function postUpload(AssetFileRequest $request, $licenseId = null)
     {
         $license = License::find($licenseId);
         // the license is valid
@@ -504,18 +505,9 @@ class LicensesController extends Controller
         if (isset($license->id)) {
             $this->authorize('update', $license);
 
-            if (Input::hasFile('licensefile')) {
+            if (Input::hasFile('file')) {
 
-                foreach (Input::file('licensefile') as $file) {
-
-                    $rules = array(
-                    'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar,rtf,xml,lic'
-                    );
-                    $validator = Validator::make(array('licensefile'=> $file), $rules);
-
-                    if ($validator->fails()) {
-                         return redirect()->back()->with('error', trans('admin/licenses/message.upload.invalidfiles'));
-                    }
+                foreach (Input::file('file') as $file) {
                     $extension = $file->getClientOriginalExtension();
                     $filename = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
                     $upload_success = $file->move($destinationPath, $filename);

@@ -25,7 +25,7 @@ class AssetFileRequest extends Request
     {
         $max_file_size = \App\Helpers\Helper::file_upload_max_size();
         return [
-          'file.*' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar|max:'.$max_file_size,
+          'file.*' => 'required|mimes:png,gif,jpg,svg,jpeg,doc,docx,pdf,txt,zip,rar,xls,lic|max:'.$max_file_size,
         ];
     }
 

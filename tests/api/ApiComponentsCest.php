@@ -32,7 +32,7 @@ class ApiComponentsCest
         // sample verify
         $component = App\Models\Component::orderByDesc('created_at')->take(10)->get()->shuffle()->first();
 
-        $I->seeResponseContainsJson((new ComponentsTransformer)->transformComponent($component));
+        $I->seeResponseContainsJson($I->removeTimestamps((new ComponentsTransformer)->transformComponent($component)));
     }
 
     /** @test */

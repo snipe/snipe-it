@@ -114,42 +114,6 @@ class LocationsController extends Controller
         return redirect()->back()->withInput()->withErrors($location->getErrors());
     }
 
-    /**
-    * Validates and stores a new location created via the Create Asset form modal.
-    *
-    * @todo Check if a Form Request would work better here.
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see AssetsController::getCreate() method that makes the form
-    * @since [v1.0]
-    * @return String JSON
-    */
-    public function apiStore(Request $request)
-    {
-        $this->authorize('create', Location::class);
-        $new['currency']=Setting::first()->default_currency;
-
-        // create a new location instance
-        $location = new Location();
-
-        // Save the location data
-        $location->name               = $request->input('name');
-        $location->currency           =  Setting::first()->default_currency; //e(Input::get('currency'));
-        $location->address            = ''; //e(Input::get('address'));
-        // $location->address2			= e(Input::get('address2'));
-        $location->city               = $request->input('city');
-        $location->state          = '';//e(Input::get('state'));
-        $location->country            = $request->input('country');
-        // $location->zip    			= e(Input::get('zip'));
-        $location->user_id          = Auth::id();
-
-        // Was the location created?
-        if ($location->save()) {
-            return JsonResponse::create($location);
-        }
-        // failure
-        return JsonResponse::create(["error" => "Failed validation: ".print_r($location->getErrors(), true)], 500);
-    }
-
 
     /**
     * Makes a form view to edit location information.
@@ -175,8 +139,7 @@ class LocationsController extends Controller
         $location_options = array('' => 'Top Level') + $location_options;
 
         return view('locations/edit', compact('item'))
-            ->with('location_options', $location_options)
-            ->with('manager_list', Helper::managerList());
+            ->with('location_options', $location_options);
     }
 
 

@@ -94,9 +94,11 @@
         <li>
           <a href="#files" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-files-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.files') }}</span></a>
         </li>
-        <li class="pull-right">
-          <!-- <a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip"></i> </a> -->
+        @can('update', \App\Models\Asset::class)
+        <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
+            <i class="fa fa-paperclip"></i> {{ trans('button.upload') }}</a>
         </li>
+        @endcan
       </ul>
       <div class="tab-content">
         <div class="tab-pane fade in active" id="details">
@@ -769,33 +771,6 @@
 
         <div class="tab-pane fade" id="files">
           <div class="row">
-
-            @can('update', \App\Models\Asset::class)
-              {{ Form::open([
-              'method' => 'POST',
-              'route' => ['upload/asset', $asset->id],
-              'files' => true, 'class' => 'form-horizontal' ]) }}
-
-              <div class="col-md-2">
-                <span class="btn btn-default btn-file">Browse for file...
-                    {{ Form::file('assetfile[]', ['multiple' => 'multiple']) }}
-                </span>
-              </div>
-              <div class="col-md-7">
-                {{ Form::text('notes', Input::old('notes', Input::old('notes')), array('class' => 'form-control','placeholder' => 'Notes')) }}
-              </div>
-              <div class="col-md-3">
-                <button type="submit" class="btn btn-primary">{{ trans('button.upload') }}</button>
-              </div>
-
-              <div class="col-md-12">
-                <p>{{ trans('general.upload_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
-                <hr>
-              </div>
-
-              {{ Form::close() }}
-            @endcan
-
             <div class="col-md-12">
               <table
                       class="table table-striped snipe-table"
@@ -860,7 +835,7 @@
 
                         <td>
                           @can('update', \App\Models\Asset::class)
-                            <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('delete_confirm', ['item' => $file->filename]) }}"><i class="fa fa-trash icon-white"></i></a>
+                            <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}"><i class="fa fa-trash icon-white"></i></a>
                           @endcan
                         </td>
                       </tr>
@@ -881,11 +856,14 @@
     </div> <!-- /.nav-tabs-custom -->
   </div> <!-- /. col-md-12 -->
 </div> <!-- /. row -->
+
+@can('update', \App\Models\Asset::class)
+  @include ('modals.upload-file', ['item_type' => 'asset', 'item_id' => $asset->id])
+@endcan
+
 @stop
 
 @section('moar_scripts')
   @include ('partials.bootstrap-table')
-
-
 
 @stop

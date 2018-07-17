@@ -33,7 +33,7 @@ class ApiUsersCest
         $user = App\Models\User::orderByDesc('created_at')
             ->withCount('assets', 'licenses', 'accessories', 'consumables')
             ->take(10)->get()->shuffle()->first();
-        $I->seeResponseContainsJson((new UsersTransformer)->transformUser($user));
+        $I->seeResponseContainsJson($I->removeTimestamps((new UsersTransformer)->transformUser($user)));
     }
 
     /** @test */
@@ -124,6 +124,7 @@ class ApiUsersCest
         // update
         $I->sendPATCH('/users/' . $user->id, $data);
         $I->seeResponseIsJson();
+
         $I->seeResponseCodeIs(200);
 
         $response = json_decode($I->grabResponse());
