@@ -44,7 +44,6 @@ class AssetCheckinController extends Controller
      */
     public function store(AssetCheckinRequest $request, $assetId = null, $backto = null)
     {
-
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
@@ -53,7 +52,6 @@ class AssetCheckinController extends Controller
 
         $this->authorize('checkin', $asset);
 
-        $admin = Auth::user();
         if ($asset->assignedType() == Asset::USER) {
             $user = $asset->assignedTo;
         }

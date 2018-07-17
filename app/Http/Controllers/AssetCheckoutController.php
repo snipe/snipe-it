@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\CheckoutNotAllowed;
+use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
 use App\Models\Location;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AssetCheckoutController extends Controller
 {
+    use CheckInOutRequest;
     /**
     * Returns a view that presents a form to check an asset out to a
     * user.
@@ -63,6 +65,10 @@ class AssetCheckoutController extends Controller
             $admin = Auth::user();
 
             $target = $this->determineCheckoutTarget($asset);
+            if ($asset->is($target)) {
+                throw new CheckoutNotAllowed('You cannot check an asset out to itself.');
+            }
+            $asset = $this->updateAssetLocation($asset, $target);
 
             $checkout_at = date("Y-m-d H:i:s");
             if (($request->has('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {
@@ -87,39 +93,4 @@ class AssetCheckoutController extends Controller
         }
     }
 
-    /**
-     * Find target for checkout
-     * @param  Asset $asset Asset being checked out
-     * @return SnipeModel        Target asset is being checked out to.
-     */
-    protected function determineCheckoutTarget($asset)
-    {
-          // This item is checked out to a location
-        if (request('checkout_to_type')=='location') {
-            $target = Location::findOrFail(request('assigned_location'));
-            $asset->location_id = $target->id;
-
-        } elseif (request('checkout_to_type')=='asset') {
-
-            $target = Asset::findOrFail(request('assigned_asset'));
-            if ($asset->is($target)) {
-                throw new CheckoutNotAllowed('You cannot check an asset out to itself.');
-                // return redirect()->back()->with('error', 'You cannot check an asset out to itself.');
-            }
-
-            $target = Asset::findOrFail(request('assigned_asset'));
-            $asset->location_id = $target->rtd_location_id;
-
-            // Override with the asset's location_id if it has one
-            if ($target->location_id!='') {
-                $asset->location_id = $target->location_id;
-            }
-
-        } elseif (request('checkout_to_type')=='user') {
-            // Fetch the target and set the asset's new location_id
-            $target = User::findOrFail(request('assigned_user'));
-            $asset->location_id = ($target) ? $target->location_id : '';
-        }
-        return $target;
-    }
 }
