@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Accessory;
 use App\Models\Company;
 use App\Models\User;
@@ -10,15 +11,14 @@ use Carbon\Carbon;
 use Config;
 use DB;
 use Gate;
+use Illuminate\Http\Request;
+use Image;
 use Input;
 use Lang;
 use Redirect;
-use Illuminate\Http\Request;
 use Slack;
 use Str;
 use View;
-use Image;
-use App\Http\Requests\ImageUploadRequest;
 
 /** This controller handles all actions related to Accessories for
  * the Snipe-IT Asset Management application.
@@ -27,7 +27,6 @@ use App\Http\Requests\ImageUploadRequest;
  */
 class AccessoriesController extends Controller
 {
-
     /**
     * Returns a view that invokes the ajax tables which actually contains
     * the content for the accessories listing, which is generated in getDatatable.
@@ -86,26 +85,7 @@ class AccessoriesController extends Controller
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
 
-        if ($request->hasFile('image')) {
-
-            if (!config('app.lock_passwords')) {
-                $image = $request->file('image');
-                $ext = $image->getClientOriginalExtension();
-                $file_name = "accessory-".str_random(18).'.'.$ext;
-                $path = public_path('/uploads/accessories');
-                if ($image->getClientOriginalExtension()!='svg') {
-                    Image::make($image->getRealPath())->resize(null, 250, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    })->save($path.'/'.$file_name);
-                } else {
-                    $image->move($path, $file_name);
-                }
-                $accessory->image = $file_name;
-            }
-        }
-
-
+        $accessory = $request->handleImages($accessory);
 
         // Was the accessory created?
         if ($accessory->save()) {
@@ -127,8 +107,7 @@ class AccessoriesController extends Controller
 
         if ($item = Accessory::find($accessoryId)) {
             $this->authorize($item);
-            $category_type = 'accessory';
-            return view('accessories/edit', compact('item'))->with('category_type', $category_type);
+            return view('accessories/edit', compact('item'))->with('category_type', 'accessory');
         }
 
         return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
@@ -165,29 +144,7 @@ class AccessoriesController extends Controller
         $accessory->qty                     = request('qty');
         $accessory->supplier_id             = request('supplier_id');
 
-        if ($request->hasFile('image')) {
-
-            if (!config('app.lock_passwords')) {
-                $image = $request->file('image');
-                $ext = $image->getClientOriginalExtension();
-                $file_name = "accessory-".str_random(18).'.'.$ext;
-                $path = public_path('/uploads/accessories');
-                if ($image->getClientOriginalExtension()!='svg') {
-                    Image::make($image->getRealPath())->resize(null, 250, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    })->save($path.'/'.$file_name);
-                } else {
-                    $image->move($path, $file_name);
-                }
-                if (($accessory->image) && (file_exists($path.'/'.$accessory->image))) {
-                    unlink($path.'/'.$accessory->image);
-                }
-
-                $accessory->image = $file_name;
-            }
-        }
-
+        $accessory = $request->handleImages($accessory);
 
         // Was the accessory updated?
         if ($accessory->save()) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\Setting;
@@ -10,15 +11,14 @@ use App\Models\User;
 use Auth;
 use Config;
 use DB;
+use Gate;
+use Image;
 use Input;
 use Lang;
 use Redirect;
 use Slack;
 use Str;
 use View;
-use Gate;
-use Image;
-use App\Http\Requests\ImageUploadRequest;
 
 /**
  * This controller handles all actions related to Consumables for
@@ -87,16 +87,7 @@ class ConsumablesController extends Controller
         $consumable->user_id                = Auth::id();
 
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/consumables/'.$file_name);
-            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $consumable->image = $file_name;
-        }
+        $consumable = $request->handleImages($consumable);
 
         if ($consumable->save()) {
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.create.success'));
@@ -158,18 +149,7 @@ class ConsumablesController extends Controller
         $consumable->purchase_cost          = Helper::ParseFloat(Input::get('purchase_cost'));
         $consumable->qty                    = Helper::ParseFloat(Input::get('qty'));
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/consumables/'.$file_name);
-            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $consumable->image = $file_name;
-        } elseif ($request->input('image_delete')=='1') {
-            $consumable->image = null;
-        }
+        $consumable = $request->handleImages($consumable);
 
         if ($consumable->save()) {
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.update.success'));

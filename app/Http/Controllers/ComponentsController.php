@@ -4,26 +4,26 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
+use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\CustomField;
 use App\Models\Setting;
 use App\Models\User;
-use App\Models\Asset;
 use Auth;
 use Config;
 use DB;
+use Gate;
+use Illuminate\Http\Request;
+use Image;
 use Input;
 use Lang;
 use Mail;
 use Redirect;
 use Slack;
 use Str;
-use View;
 use Validator;
-use Illuminate\Http\Request;
-use Gate;
-use Image;
+use View;
 
 /**
  * This class controls all actions related to Components for
@@ -91,16 +91,7 @@ class ComponentsController extends Controller
         $component->user_id                = Auth::id();
 
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/components/'.$file_name);
-            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $component->image = $file_name;
-        }
+        $component = $request->handleImages($component);
 
         if ($component->save()) {
             return redirect()->route('components.index')->with('success', trans('admin/components/message.create.success'));
@@ -127,10 +118,6 @@ class ComponentsController extends Controller
             return view('components/edit', compact('item'))->with('category_type', $category_type);
         }
         return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
-
-
-
-
     }
 
 
@@ -164,18 +151,7 @@ class ComponentsController extends Controller
         $component->purchase_cost          = request('purchase_cost');
         $component->qty                    = Input::get('qty');
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/components/'.$file_name);
-            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $component->image = $file_name;
-        } elseif ($request->input('image_delete')=='1') {
-            $component->image = null;
-        }
+        $component = $request->handleImages($component);
 
         if ($component->save()) {
             return redirect()->route('components.index')->with('success', trans('admin/components/message.update.success'));
