@@ -39,6 +39,10 @@ class ComponentsController extends Controller
             $components->where('category_id','=',$request->input('category_id'));
         }
 
+        if ($request->has('location_id')) {
+            $components->where('location_id','=',$request->input('location_id'));
+        }
+
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 
