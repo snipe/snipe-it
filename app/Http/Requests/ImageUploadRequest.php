@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use App\Models\SnipeModel;
 use Intervention\Image\Facades\Image;
 
 class ImageUploadRequest extends Request
@@ -35,20 +35,25 @@ class ImageUploadRequest extends Request
         return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
     }
 
-        /**
+    /**
      * Handle and store any images attached to request
+     * @param SnipeModel $item Item the image is associated with
+     * @param String $path  location for uploaded images, defaults to uploads/plural of item type.
      * @return SnipeModel        Target asset is being checked out to.
      */
-    public function handleImages($item)
+    public function handleImages($item, $path = null)
     {
-        $type = strtolower(class_basename(get_class($item)));
-        $plural = str_plural($type);
+
         if ($this->hasFile('image')) {
             if (!config('app.lock_passwords')) {
+                if(is_null($path)) {
+                    $type = strtolower(class_basename(get_class($item)));
+                    $plural = str_plural($type);
+                    $path = public_path('/uploads/'.$plural);
+                }
                 $image = $this->file('image');
                 $ext = $image->getClientOriginalExtension();
                 $file_name = $type.'-'.str_random(18).'.'.$ext;
-                $path = public_path('/uploads/'.$plural);
                 if ($image->getClientOriginalExtension()!='svg') {
                     Image::make($image->getRealPath())->resize(null, 250, function ($constraint) {
                         $constraint->aspectRatio();

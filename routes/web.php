@@ -59,13 +59,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     /*
-    * Status Labels
-    */
-    Route::resource('components', 'ComponentsController', [
-        'parameters' => ['component' => 'component_id']
-    ]);
-
-    /*
     * Departments
     */
     Route::resource('departments', 'DepartmentsController', [

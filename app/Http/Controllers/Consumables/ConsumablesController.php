@@ -1,24 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Consumables;
 
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Company;
 use App\Models\Consumable;
-use App\Models\Setting;
 use App\Models\User;
-use Auth;
-use Config;
-use DB;
-use Gate;
-use Image;
-use Input;
-use Lang;
-use Redirect;
-use Slack;
-use Str;
-use View;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 /**
  * This controller handles all actions related to Consumables for
@@ -29,12 +20,13 @@ use View;
 class ConsumablesController extends Controller
 {
     /**
-    * Return a view to display component information.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ConsumablesController::getDatatable() method that generates the JSON response
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Return a view to display component information.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ConsumablesController::getDatatable() method that generates the JSON response
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
@@ -44,29 +36,31 @@ class ConsumablesController extends Controller
 
 
     /**
-    * Return a view to display the form view to create a new consumable
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ConsumablesController::postCreate() method that stores the form data
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Return a view to display the form view to create a new consumable
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ConsumablesController::postCreate() method that stores the form data
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
         $this->authorize('create', Consumable::class);
-        $category_type = 'consumable';
-        return view('consumables/edit')->with('category_type', $category_type)
+        return view('consumables/edit')->with('category_type', 'consumable')
             ->with('item', new Consumable);
     }
 
 
     /**
-    * Validate and store new consumable data.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ConsumablesController::getCreate() method that returns the form view
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Validate and store new consumable data.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ConsumablesController::getCreate() method that returns the form view
+     * @since [v1.0]
+     * @param ImageUploadRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ImageUploadRequest $request)
     {
@@ -98,20 +92,20 @@ class ConsumablesController extends Controller
     }
 
     /**
-    * Returns a form view to edit a consumable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param  int $consumableId
-    * @see ConsumablesController::postEdit() method that stores the form data.
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a form view to edit a consumable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $consumableId
+     * @see ConsumablesController::postEdit() method that stores the form data.
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($consumableId = null)
     {
         if ($item = Consumable::find($consumableId)) {
             $this->authorize($item);
-            $category_type = 'consumable';
-            return view('consumables/edit', compact('item'))->with('category_type', $category_type);
+            return view('consumables/edit', compact('item'))->with('category_type', 'consumable');
         }
 
         return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
@@ -120,13 +114,15 @@ class ConsumablesController extends Controller
 
 
     /**
-    * Returns a form view to edit a consumable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param  int $consumableId
-    * @see ConsumablesController::getEdit() method that stores the form data.
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Returns a form view to edit a consumable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param ImageUploadRequest $request
+     * @param  int $consumableId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @see ConsumablesController::getEdit() method that stores the form data.
+     * @since [v1.0]
      */
     public function update(ImageUploadRequest $request,  $consumableId = null)
     {
@@ -158,12 +154,13 @@ class ConsumablesController extends Controller
     }
 
     /**
-    * Delete a consumable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param  int $consumableId
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Delete a consumable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $consumableId
+     * @since [v1.0]
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($consumableId)
     {
@@ -177,13 +174,14 @@ class ConsumablesController extends Controller
     }
 
     /**
-    * Return a view to display component information.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ConsumablesController::getDataView() method that generates the JSON response
-    * @since [v1.0]
-    * @param int $consumableId
-    * @return \Illuminate\Contracts\View\View
+     * Return a view to display component information.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ConsumablesController::getDataView() method that generates the JSON response
+     * @since [v1.0]
+     * @param int $consumableId
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($consumableId = null)
     {
@@ -193,74 +191,6 @@ class ConsumablesController extends Controller
             return view('consumables/view', compact('consumable'));
         }
         return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist', compact('id')));
-    }
-
-    /**
-    * Return a view to checkout a consumable to a user.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ConsumablesController::postCheckout() method that stores the data.
-    * @since [v1.0]
-    * @param int $consumableId
-    * @return \Illuminate\Contracts\View\View
-     */
-    public function getCheckout($consumableId)
-    {
-        if (is_null($consumable = Consumable::find($consumableId))) {
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
-        }
-        $this->authorize('checkout', $consumable);
-        return view('consumables/checkout', compact('consumable'));
-    }
-
-    /**
-    * Saves the checkout information
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ConsumablesController::getCheckout() method that returns the form.
-    * @since [v1.0]
-    * @param int $consumableId
-    * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postCheckout($consumableId)
-    {
-        if (is_null($consumable = Consumable::find($consumableId))) {
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
-        }
-
-        $this->authorize('checkout', $consumable);
-
-        $admin_user = Auth::user();
-        $assigned_to = e(Input::get('assigned_to'));
-
-        // Check if the user exists
-        if (is_null($user = User::find($assigned_to))) {
-            // Redirect to the consumable management page with error
-            return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
-        }
-
-        // Update the consumable data
-        $consumable->assigned_to = e(Input::get('assigned_to'));
-
-        $consumable->users()->attach($consumable->id, [
-            'consumable_id' => $consumable->id,
-            'user_id' => $admin_user->id,
-            'assigned_to' => e(Input::get('assigned_to'))
-        ]);
-
-        $logaction = $consumable->logCheckout(e(Input::get('note')), $user);
-        $data['log_id'] = $logaction->id;
-        $data['eula'] = $consumable->getEula();
-        $data['first_name'] = $user->first_name;
-        $data['item_name'] = $consumable->name;
-        $data['checkout_date'] = $logaction->created_at;
-        $data['note'] = $logaction->note;
-        $data['require_acceptance'] = $consumable->requireAcceptance();
-
-
-      // Redirect to the new consumable page
-        return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));
-
     }
 
 }

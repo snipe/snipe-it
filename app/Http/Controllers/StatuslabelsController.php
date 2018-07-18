@@ -1,20 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
-use Input;
-use Lang;
+use Illuminate\Support\Facades\Input;
 use App\Models\Statuslabel;
-use App\Models\Asset;
-use Redirect;
-use DB;
-use App\Models\Setting;
-use Str;
-use View;
 use App\Helpers\Helper;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * This controller handles all actions related to Status Labels for
@@ -28,6 +19,7 @@ class StatuslabelsController extends Controller
      * Show a list of all the statuslabels.
      *
      * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
 
     public function index()
@@ -47,21 +39,21 @@ class StatuslabelsController extends Controller
     }
 
 
-
     /**
      * Statuslabel create.
      *
      * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
         // Show the page
         $this->authorize('create', Statuslabel::class);
-        $item = new Statuslabel;
-        $use_statuslabel_type = $item->getStatuslabelType();
-        $statuslabel_types = Helper::statusTypeList();
 
-        return view('statuslabels/edit', compact('statuslabel_types', 'item'))->with('use_statuslabel_type', $use_statuslabel_type);
+        return view('statuslabels/edit')
+            ->with('item', new Statuslabel)
+            ->with('statuslabel_types', Helper::statusTypeList())
+            ->with('use_statuslabel_type', $item->getStatuslabelType());
     }
 
 
@@ -70,6 +62,7 @@ class StatuslabelsController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(Request $request)
     {
@@ -106,8 +99,9 @@ class StatuslabelsController extends Controller
     /**
      * Statuslabel update.
      *
-     * @param  int  $statuslabelId
+     * @param  int $statuslabelId
      * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($statuslabelId = null)
     {
@@ -129,8 +123,9 @@ class StatuslabelsController extends Controller
     /**
      * Statuslabel update form processing page.
      *
-     * @param  int  $statuslabelId
+     * @param  int $statuslabelId
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, $statuslabelId = null)
     {
@@ -169,8 +164,9 @@ class StatuslabelsController extends Controller
     /**
      * Delete the given Statuslabel.
      *
-     * @param  int  $statuslabelId
+     * @param  int $statuslabelId
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($statuslabelId)
     {

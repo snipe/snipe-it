@@ -55,4 +55,6 @@ class LicenseSeat extends Model implements ICompanyableChild
         return false;
 
     }
+
+
 }

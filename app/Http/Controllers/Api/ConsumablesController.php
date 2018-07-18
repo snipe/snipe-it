@@ -152,7 +152,7 @@ class ConsumablesController extends Controller
     * Returns a JSON response containing details on the users associated with this consumable.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ConsumablesController::getView() method that returns the form.
+    * @see \App\Http\Controllers\Consumables\ConsumablesController::getView() method that returns the form.
     * @since [v1.0]
     * @param int $consumableId
     * @return array

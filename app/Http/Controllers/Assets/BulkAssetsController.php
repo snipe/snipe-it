@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Assets;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
+use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 class BulkAssetsController extends Controller
 {
     use CheckInOutRequest;
+
     /**
      * Display the bulk edit page.
      *
@@ -21,6 +23,7 @@ class BulkAssetsController extends Controller
      * @return View
      * @internal param int $assetId
      * @since [v2.0]
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(Request $request)
     {
@@ -130,10 +133,11 @@ class BulkAssetsController extends Controller
      * @var Array
      */
     private $update_array;
+
     /**
      * Adds parameter to update array for an item if it exists in request
-     * @param  String  $field        field name
-     * @return this     Model for Chaining
+     * @param  String $field field name
+     * @return BulkAssetsController Model for Chaining
      */
     protected function conditionallyAddItem($field)
     {
@@ -147,7 +151,9 @@ class BulkAssetsController extends Controller
      * Save bulk deleted.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param Request $request
      * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @internal param array $assets
      * @since [v2.0]
      */

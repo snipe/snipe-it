@@ -1,25 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Assets;
 
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckinRequest;
 use App\Models\Asset;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
 
 class AssetCheckinController extends Controller
 {
 
     /**
-    * Returns a view that presents a form to check an asset back into inventory.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @param string $backto
-    * @since [v1.0]
-    * @return View
-    */
+     * Returns a view that presents a form to check an asset back into inventory.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @param string $backto
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @since [v1.0]
+     */
     public function create($assetId, $backto = null)
     {
         // Check if the asset exists
@@ -40,6 +42,7 @@ class AssetCheckinController extends Controller
      * @param int $assetId
      * @param null $backto
      * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.0]
      */
     public function store(AssetCheckinRequest $request, $assetId = null, $backto = null)

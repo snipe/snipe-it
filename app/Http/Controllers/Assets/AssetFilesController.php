@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Assets;
 
-use App\Helpers\Helper;
+
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetFileRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
 class AssetFilesController extends Controller
@@ -19,6 +19,7 @@ class AssetFilesController extends Controller
      * @param int $assetId
      * @return Redirect
      * @since [v1.0]
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(AssetFileRequest $request, $assetId = null)
     {
@@ -45,14 +46,15 @@ class AssetFilesController extends Controller
     }
 
     /**
-    * Check for permissions and display the file.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param  int  $assetId
-    * @param  int  $fileId
-    * @since [v1.0]
-    * @return View
-    */
+     * Check for permissions and display the file.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $assetId
+     * @param  int $fileId
+     * @since [v1.0]
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function show($assetId = null, $fileId = null, $download = true)
     {
         $asset = Asset::find($assetId);
@@ -92,14 +94,15 @@ class AssetFilesController extends Controller
     }
 
     /**
-    * Delete the associated file
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param  int  $assetId
-    * @param  int  $fileId
-    * @since [v1.0]
-    * @return View
-    */
+     * Delete the associated file
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $assetId
+     * @param  int $fileId
+     * @since [v1.0]
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function destroy($assetId = null, $fileId = null)
     {
         $asset = Asset::find($assetId);

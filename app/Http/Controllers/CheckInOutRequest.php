@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Asset;
 use App\Models\Location;
+use App\Models\SnipeModel;
 use App\Models\User;
 
 trait CheckInOutRequest
