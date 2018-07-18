@@ -1137,6 +1137,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "wxcafe",
+      "name": "wxcafé",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3009327?v=4",
+      "profile": "http://wxcafe.net",
+      "contributions": [
+        "translation"
+      ]
     }
   ]
 }
