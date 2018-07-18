@@ -1416,6 +1416,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "stubben",
+      "name": "Martin Stub",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/982885?v=4",
+      "profile": "http://martinstub.dk",
+      "contributions": [
+        "translation"
+      ]
     }
   ]
 }
