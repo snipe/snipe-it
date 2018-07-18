@@ -122,6 +122,8 @@ return array(
     'snipe_version'  			=> 'Snipe-IT változat',
     'support_footer'            => 'Lábjegyzet linkek támogatása ',
     'support_footer_help'       => 'Adja meg, hogy ki láthassa a Snipe-IT támogatási információ és a felhasználói kézikönyv linkjeit',
+    'version_footer'            => 'Version in Footer ',
+    'version_footer_help'       => 'Specify who sees the Snipe-IT version and build number.',
     'system'                    => 'Rendszer információ',
     'update'                    => 'Frissítési beállítások',
     'value'                     => 'Érték',
@@ -177,5 +179,7 @@ return array(
     'bottom'        => 'alsó',
     'vertical'        => 'függőleges',
     'horizontal'        => 'vízszintes',
+    'unique_serial'                => 'Unique serial numbers',
+    'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Az eszközcímkék hossza, beleértve a nem töltöt',
 );

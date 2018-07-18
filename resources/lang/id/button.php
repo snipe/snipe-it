@@ -12,5 +12,5 @@ return array(
     'submit'  	                => 'Kirim',
     'upload'                    => 'Unggah',
 	'select_file'				=> 'Pilih file...',
-    'select_files'				=> 'Select Files...',
+    'select_files'				=> 'Pilih File...',
 );

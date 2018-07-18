@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Majetky přiřazené :name',
     'bulk_update_warn'	=> 'Chystáte se upravit vlastnosti :user_count uživatelů. Nezapomeňte, že pomocí tohoto formuláře nemůžete změnit vlastní atributy uživatele a musíte provádět vlastní úpravy individuálně.',
     'bulk_update_help'	=> 'Tento formulář umožňuje aktualizovat více uživatelů najednou. Vyplňte pouze pole, která potřebujete změnit. Všechna pole, která jsou prázdná, zůstanou nezměněny.',

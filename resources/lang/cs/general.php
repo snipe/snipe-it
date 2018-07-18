@@ -206,7 +206,7 @@
     'unknown_admin'			=> 'Neznámy správce',
     'username_format'		=> 'Formát uživatelského jména',
     'update'                => 'Aktualizace',
-    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar. Max upload size allowed is :size.',
+    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Nahráno',
     'user'					=> 'Uživatel',
     'accepted'			    => 'přijato',

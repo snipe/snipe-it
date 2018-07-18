@@ -122,6 +122,8 @@ return array(
     'snipe_version'  			=> 'Versi Snipe-IT',
     'support_footer'            => 'Link footer pendukung ',
     'support_footer_help'       => 'Tentukan siapa yang melihat tautan ke informasi pendukung dan panduan pengguna Snipe-IT',
+    'version_footer'            => 'Version in Footer ',
+    'version_footer_help'       => 'Specify who sees the Snipe-IT version and build number.',
     'system'                    => 'Informasi Sistem',
     'update'                    => 'Perbarui Setelan',
     'value'                     => 'Jumlah',
@@ -177,5 +179,7 @@ return array(
     'bottom'        => 'bawah',
     'vertical'        => 'tegak lurus',
     'horizontal'        => 'mendatar',
+    'unique_serial'                => 'Unique serial numbers',
+    'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Panjang tag aset, termasuk isian kosong',
 );

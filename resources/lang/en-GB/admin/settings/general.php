@@ -122,6 +122,8 @@ return array(
     'snipe_version'  			=> 'Snipe-IT version',
     'support_footer'            => 'Support Footer Links ',
     'support_footer_help'       => 'Specify who sees the links to the Snipe-IT Support info and Users Manual',
+    'version_footer'            => 'Version in Footer ',
+    'version_footer_help'       => 'Specify who sees the Snipe-IT version and build number.',
     'system'                    => 'System Information',
     'update'                    => 'Update Settings',
     'value'                     => 'Value',
@@ -177,5 +179,7 @@ return array(
     'bottom'        => 'bottom',
     'vertical'        => 'vertical',
     'horizontal'        => 'horizontal',
+    'unique_serial'                => 'Unique serial numbers',
+    'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Length of asset tags, including zerofill',
 );

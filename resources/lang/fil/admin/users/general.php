@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Ang mga asset na nakatalaga sa :name',
     'bulk_update_warn'	=> 'Ikaw ay mag-edit ng mga katangian ng :user_count mga gumagamit. Mangyaring tandaan na hindi mo maaaring mabago ang iyong sariling user attributes gamit ang form na ito, at kinakailangang magsagawa ng pag-edit sa iyong sariling user nang mag-isa.',
     'bulk_update_help'	=> 'Ang form na ito ay nagbibigay sa iyo ng pahintulot para mag-update ng maramihang gumagamit ng isang beses. Lagyan lamang ang mga field na gusto mong baguhin. Anumang mga field na blangko ay mananatiling walang pagbabago.',

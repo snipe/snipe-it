@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Priskirta įranga :name',
     'bulk_update_warn'	=> 'Jūs ketinate redaguoti vartotojų: user_count savybes. Atminkite, kad negalėsite pakeisti savo naudotojo atributų naudodami šią formą ir savo pasirinkimą keisti individualiai.',
     'bulk_update_help'	=> 'Ši forma leidžia vienu metu atnaujinti kelis naudotojus. Užpildykite tik tuos laukelius, kuriuos reikia keisti. Visi tušti laukai lieka nepakeisti.',

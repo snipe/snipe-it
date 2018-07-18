@@ -29,5 +29,5 @@ return array(
     'create_fieldset'         => 'Novo conjunto de campos',
     'create_field'            => 'Novo conjunto de campos personalizado',
     'value_encrypted'      	        => 'O valor deste campo está encriptado na base de dados. apenas administradores poderão ver o valor desencriptado',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Incluir o valor deste campo nos e-mails de checktout enviados ao utilizador? Os campos encriptados não serão incluídos.',
 );

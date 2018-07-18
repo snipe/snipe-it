@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'ทรัพย์สินที่กำหนดให้ :name',
     'bulk_update_warn'	=> 'คุณกำลังแก้ไขคุณสมบัติของ: user_count users โปรดทราบว่าคุณไม่สามารถเปลี่ยนแอตทริบิวต์ผู้ใช้ของคุณเองโดยใช้แบบฟอร์มนี้และต้องแก้ไขผู้ใช้ของคุณเองเป็นรายบุคคล',
     'bulk_update_help'	=> 'ฟอร์มนี้ช่วยให้คุณสามารถอัปเดตผู้ใช้หลายรายพร้อมกัน กรอกข้อมูลในช่องที่คุณต้องการเปลี่ยนเท่านั้น ช่องใด ๆ ที่เว้นไว้จะไม่มีการเปลี่ยนแปลง',

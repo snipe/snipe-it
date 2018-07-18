@@ -122,6 +122,8 @@ return array(
     'snipe_version'  			=> 'Snipe-IT verzija',
     'support_footer'            => 'Podrška poveznica u podnožju ',
     'support_footer_help'       => 'Navedite tko vidi poveznice na informacije o Snipe-IT podršci i korisničkom priručniku',
+    'version_footer'            => 'Version in Footer ',
+    'version_footer_help'       => 'Specify who sees the Snipe-IT version and build number.',
     'system'                    => 'Informacije o sustavu',
     'update'                    => 'Ažuriraj postavke',
     'value'                     => 'Vrijednost',
@@ -177,5 +179,7 @@ return array(
     'bottom'        => 'dno',
     'vertical'        => 'vertikala',
     'horizontal'        => 'vodoravan',
+    'unique_serial'                => 'Unique serial numbers',
+    'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Duljina oznaka za imovinu, uključujući nulte punjenje',
 );

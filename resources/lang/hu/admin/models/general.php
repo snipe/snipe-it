@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Modellek megtekintése',
     'fieldset'                  => 'Mezőcsoport',
     'no_custom_field'           => 'Nincsenek egyedi mezők',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'Alapértelmezett érték megadása',
 );

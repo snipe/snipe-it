@@ -22,7 +22,7 @@ return array(
     'Confirm_Asset_Checkin' => 'ยืนยันการเช็คอินสินทรัพย์',
     'Confirm_Accessory_Checkin' => 'ยืนยันการเช็คอินอุปกรณ์เสริม',
     'Confirm_accessory_delivery' => 'ยืนยันการจัดส่งอุปกรณ์เสริม',
-    'Confirm_license_delivery' => 'Confirm license delivery.',
+    'Confirm_license_delivery' => 'ยืนยันการจัดส่งอุปกรณ์สิ้นเปลือง',
     'Confirm_asset_delivery' => 'ยืนยันการจัดส่งเนื้อหา',
     'Confirm_consumable_delivery' => 'ยืนยันการจัดส่งที่สิ้นเปลือง',
     'current_QTY' => 'QTY ปัจจุบัน',

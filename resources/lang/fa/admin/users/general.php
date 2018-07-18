@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'دارایی ها محول شده به :',
     'bulk_update_warn'	=> 'شما در حال خواندن مشخصات خواص کاربر user_count هستید. لطفا توجه داشته باشید که نمیتوانید ویژگیهای کاربر خود را با استفاده از این فرم تغییر دهید و باید به صورت جداگانه به کاربر خود ویرایش کنید.',
     'bulk_update_help'	=> 'این فرم به شما امکان می دهد چندین بار در یک بار به روز کنید. فقط فیلمی را که باید تغییر دهید را پر کنید. هر فیلدی که خالی باقی می ماند بدون تغییر باقی خواهد ماند.',

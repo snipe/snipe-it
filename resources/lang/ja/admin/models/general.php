@@ -14,5 +14,5 @@ return array(
     'view_models'               => '型番を表示',
     'fieldset'                  => 'フィールドセット',
     'no_custom_field'           => 'カスタム フィールドなし',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'デフォルト値を追加する',
 );

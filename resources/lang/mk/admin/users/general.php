@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Средства задолжени на :name',
     'bulk_update_warn'	=> 'Ќе ажурирате :user_count корисници. Не можете да ги менувате вашите сопствени кориснички атрибути користејќи го овој формулар, и мора да правите измени на вашиот кориснички профил поединечно.',
     'bulk_update_help'	=> 'Оваа форма ви овозможува да ажурирате повеќе корисници одеднаш. Пополнете ги полињата што треба да ги промените. Сите полиња што остануваат празни ќе останат непроменети.',
