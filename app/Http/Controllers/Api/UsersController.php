@@ -142,7 +142,7 @@ class UsersController extends Controller
                 'users.avatar',
                 'users.email',
             ]
-            );
+            )->where('show_in_list', '=', '1');
 
         $users = Company::scopeCompanyables($users);
 
