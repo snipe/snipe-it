@@ -162,7 +162,7 @@ class LocationsController extends Controller
      */
     public function edit($locationId = null)
     {
-        $this->authorize('edit', Location::class);
+        $this->authorize('update', Location::class);
         // Check if the location exists
         if (is_null($item = Location::find($locationId))) {
             return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
@@ -191,7 +191,7 @@ class LocationsController extends Controller
      */
     public function update(ImageUploadRequest $request, $locationId = null)
     {
-        $this->authorize('edit', Location::class);
+        $this->authorize('update', Location::class);
         // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
             return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
