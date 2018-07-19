@@ -6,7 +6,6 @@ use App\Models\Asset;
 use App\Models\License;
 use App\Models\Setting;
 use DB;
-use App\Notifications\Exp;
 use App\Notifications\ExpiringLicenseNotification;
 use App\Notifications\ExpiringAssetsNotification;
 
