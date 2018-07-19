@@ -3,6 +3,7 @@ use App\Importer\AccessoryImporter;
 use App\Importer\AssetImporter;
 use App\Importer\ConsumableImporter;
 use App\Importer\LicenseImporter;
+use App\Importer\UserImporter;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -14,6 +15,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 
 class ImporterTest extends BaseTest
 {
@@ -681,6 +683,36 @@ EOT;
         $this->tester->seeNumRecords(80, 'license_seats');
     }
 
+
+    public function testDefaultUserImport()
+    {
+        Notification::fake();
+        $this->signIn();
+        $csv = <<<'EOT'
+First Name,Last Name,email,Username,Location,Phone Number,Job Title,Employee Number,Company
+Blanche,O'Collopy,bocollopy0@livejournal.com,bocollopy0,Hinapalanan,63-(199)661-2186,Clinical Specialist,7080919053,Morar-Ward
+Jessie,Primo,,jprimo1,Korenovsk,7-(885)578-0266,Paralegal,6284292031,Jast-Stiedemann
+
+EOT;
+        $this->import(new UserImporter($csv));
+
+        $this->tester->seeRecord('users', [
+            'first_name' => 'Blanche',
+            'last_name' => "O'Collopy",
+            'email' => 'bocollopy0@livejournal.com',
+            'username' => 'bocollopy0',
+            'phone' => '63-(199)661-2186',
+            'jobtitle' => 'Clinical Specialist',
+            'employee_num' => '7080919053'
+        ]);
+
+        $this->tester->seeRecord('companies', [
+            'name' => 'Morar-Ward'
+        ]);
+
+        Notification::assertSentTo(User::find(2), \App\Notifications\WelcomeNotification::class);
+        Notification::assertNotSentTo(User::find(3), \App\Notifications\WelcomeNotification::class);
+    }
     private function import($importer, $mappings = null)
     {
         if ($mappings) {

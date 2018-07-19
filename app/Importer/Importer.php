@@ -60,7 +60,12 @@ abstract class Importer
         'warranty_months' => 'warranty',
         'full_name' => 'full name',
         'email' => 'email',
-        'username' => 'username'
+        'username' => 'username',
+        'jobtitle' => 'job title',
+        'employee_num' => 'employee number',
+        'phone_number' => 'phone number',
+        'first_name' => 'first name',
+        'last_name' => 'last name',
     ];
     /**
      * Map of item fields->csv names
