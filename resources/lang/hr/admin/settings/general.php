@@ -86,7 +86,7 @@ return array(
     'login_common_disabled_text' => 'Onemogući druge mehanizme autentikacije',
     'login_common_disabled_help' => 'Ova opcija onemogućuje druge mehanizme autentikacije. Omogućite ovu opciju samo ako ste sigurni da vaša REMOTE_USER prijava već funkcionira',
     'login_remote_user_custom_logout_url_text' => 'Prilagođeni URL za odjavu',
-    'login_remote_user_custom_logout_url_help' => 'Ako je ispunjeno korisnici se preusmjeravaju na ovaj URL nakon što je sesija SnipeIT zatvorena (Odjava). To je korisno za ispravno zatvaranje korisničkih sesija vašeg pružatelja autentikacije.',
+    'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> 'Logo',
     'full_multiple_companies_support_help_text' => 'Ograničavanje korisnika (uključujući administratore) koje tvrtke dodjeljuju imovini tvrtke.',
     'full_multiple_companies_support_text' => 'Potpuna podrška za više tvrtki',

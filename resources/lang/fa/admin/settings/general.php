@@ -87,7 +87,7 @@ return array(
     'login_common_disabled_text' => 'Disable other authentication mechanisms',
     'login_common_disabled_help' => 'This option disables other authentication mechanisms. Just enable this option if you are sure that your REMOTE_USER login is already working',
     'login_remote_user_custom_logout_url_text' => 'Custom logout URL',
-    'login_remote_user_custom_logout_url_help' => 'If filled users will get redirected to this URL after the Session of SnipeIT is closed (Logout). This is useful to close the user sessions of your Authentication provider correctly.',
+    'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> 'لوگو',
     'full_multiple_companies_support_help_text' => 'محدود کردن کاربران (از جمله مدیران) اختصاص داده شده به شرکت ها برای دارایی های شرکت خود را.',
     'full_multiple_companies_support_text' => 'شرکت های متعدد پشتیبانی کامل',

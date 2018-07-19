@@ -86,7 +86,7 @@ return array(
     'login_common_disabled_text' => '다른 인증 메커니즘 비활성화',
     'login_common_disabled_help' => '이 옵션은 다른 인증 메커니즘을 비활성화 합니다. REMOTE_USER 로그인이 이미 작동하고 있다면 이 옵션을 활성화 하세요.',
     'login_remote_user_custom_logout_url_text' => '사용자 정의 로그아웃 URL',
-    'login_remote_user_custom_logout_url_help' => '채워진 사용자는 SnipeIT 세션이 종료된 후에 이 URL로 리디렉션됩니다. 이 기능은 인증 제공자의 사용자 세션을 정확하게 닫는데 유용합니다.',
+    'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> '로고',
     'full_multiple_companies_support_help_text' => '자신이 속한 공급자 자산에 공급자를 할당하는 것을 제한하는 사용자들 (관리자 포함)',
     'full_multiple_companies_support_text' => '전체 다중 공급자들 지원',

@@ -86,7 +86,7 @@ return array(
     'login_common_disabled_text' => 'Изключване на други оторизационни механизми',
     'login_common_disabled_help' => 'Тази опция изключва останалите оторизационни механизми. Преди да включите тази настройка моля проверете дали REMOTE_USER механизмът работи',
     'login_remote_user_custom_logout_url_text' => 'Персонализиран адрес за изход',
-    'login_remote_user_custom_logout_url_help' => 'Ако е попълнено, потребителите ще бъдат пренасочвани към този адрес след затваряне на потребителската им сесия при изход. Полезно е за затваряне на потребителската сесия при използването на външен оторизационен провайдър.',
+    'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> 'Лого',
     'full_multiple_companies_support_help_text' => 'Ограничаване на потребителите (включително административните) до активите на собствената им компания.',
     'full_multiple_companies_support_text' => 'Поддръжка на множество компании',

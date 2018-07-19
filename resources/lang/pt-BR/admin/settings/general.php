@@ -86,7 +86,7 @@ return array(
     'login_common_disabled_text' => 'Desabilitar outros mecanismos de autenticação',
     'login_common_disabled_help' => 'Esta opção desativa outros mecanismos de autenticação. Basta ativar esta opção se tiver certeza de que seu login REMOTE_USER já está funcionando',
     'login_remote_user_custom_logout_url_text' => 'URL de logout personalizado',
-    'login_remote_user_custom_logout_url_help' => 'Se os usuários preenchidos forem redirecionados para este URL após a sessão do SnipeIT ser fechada (Logout). Isso é útil para fechar as sessões do usuário do seu provedor de autenticação corretamente.',
+    'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> 'Logo',
     'full_multiple_companies_support_help_text' => 'Restringir utilizadores (incluindo admins) associados a empresas ao ativos da empresa.',
     'full_multiple_companies_support_text' => 'Suporte multi-empresa completo',

@@ -86,7 +86,7 @@ return array(
     'login_common_disabled_text' => '禁用其他认证机制',
     'login_common_disabled_help' => '该选项将禁用其他身份验证机制。请您确定只有您的REMOTE_USER登录已经可用，才启用此选项',
     'login_remote_user_custom_logout_url_text' => '自定义注销网址',
-    'login_remote_user_custom_logout_url_help' => '在SnipeIT退出后用户将被重定向到此URL。这可以帮助正确关闭认证提供者的用户会话。',
+    'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> '徽标',
     'full_multiple_companies_support_help_text' => '限制归属特定公司的用户（包括管理员）仅能访问该公司资产',
     'full_multiple_companies_support_text' => '完整多企业支持',

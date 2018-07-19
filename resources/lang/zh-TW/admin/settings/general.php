@@ -87,7 +87,7 @@ return array(
     'login_common_disabled_text' => '禁用其他認證機制',
     'login_common_disabled_help' => '該選項禁用其他身份驗證機制。如果您確定您的REMOTE_USER登錄已在使用，請啟用此選項',
     'login_remote_user_custom_logout_url_text' => '自訂登出網址',
-    'login_remote_user_custom_logout_url_help' => '如果有指定值，在SnipeIT登出後，用戶將被重新導向此URL。這用於關閉認證提供者能導向正確頁面。',
+    'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> 'Logo',
     'full_multiple_companies_support_help_text' => '限制使用者（包括管理員） 僅能存取該公司的資產',
     'full_multiple_companies_support_text' => '完整支援多公司',

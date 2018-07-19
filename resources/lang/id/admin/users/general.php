@@ -2,8 +2,8 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
-    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
+    'activated_help_text' => 'Pengguna ini dapat masuk',
+    'activated_disabled_help_text' => 'Anda tidak dapat menyunting status aktivasi akun anda sendiri.',
     'assets_user'       => 'Aset pada :name',
     'bulk_update_warn'	=> 'Anda akan mengedit properti dari: user_count pengguna. Harap perhatikan bahwa Anda tidak dapat mengubah atribut pengguna Anda sendiri menggunakan formulir ini, dan harus melakukan pengeditan kepada pengguna Anda sendiri satu per satu.',
     'bulk_update_help'	=> 'Formulir ini memungkinkan Anda untuk memperbarui beberapa pengguna sekaligus. Isi saja bidang yang perlu Anda ubah. Setiap bidang yang dikosongkan akan tetap tidak berubah.',

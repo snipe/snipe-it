@@ -86,7 +86,7 @@ return array(
     'login_common_disabled_text' => 'その他の認証を無効にします。',
     'login_common_disabled_help' => '他の認証を無効にします。 REMOTE_USERログインが既に動作していることが確かである場合だけ、このオプションを有効にしてください。',
     'login_remote_user_custom_logout_url_text' => 'カスタムログアウトURL',
-    'login_remote_user_custom_logout_url_help' => 'ログインユーザーがSnipeIT セッションを閉じた後 (ログアウト)、このURLにリダイレクトされます。これは、認証プロバイダーのユーザーセッションを正常に終了させる場合に便利です。',
+    'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> 'ロゴ',
     'full_multiple_companies_support_help_text' => 'ユーザー (管理者を含む) に 資産の割り当て を制限します。',
     'full_multiple_companies_support_text' => '複数企業をサポートします。',

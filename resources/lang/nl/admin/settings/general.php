@@ -86,7 +86,7 @@ return array(
     'login_common_disabled_text' => 'Schakel andere authenticatiemechanismen uit',
     'login_common_disabled_help' => 'Met deze optie worden andere authenticatiemechanismen uitgeschakeld. Schakel deze optie alleen in als u zeker weet dat uw REMOTE_USER-login al werkt',
     'login_remote_user_custom_logout_url_text' => 'Aangepaste link voor uitloggen',
-    'login_remote_user_custom_logout_url_help' => 'Wanneer ingevuld worden gebruikers omgeleid naar deze URL nadat de SnipeIT-sessie is beëindigt (uitloggen). Dit is handig om de gebruikerssessies van uw authenticatieprovider op de juiste wijze te sluiten.',
+    'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> 'Logo',
     'full_multiple_companies_support_help_text' => 'Beperk gebruikers (ook admins) die gekoppeld zijn aan hun bedrijf tot hun bedrijfsproducten.',
     'full_multiple_companies_support_text' => 'Volledige meerdere bedrijven ondersteuning',

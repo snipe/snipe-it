@@ -86,7 +86,7 @@ return array(
     'login_common_disabled_text' => 'Egyéb hitelesítési mechanizmusok letiltása',
     'login_common_disabled_help' => 'Ez a beállítás letiltja a többi hitelesítési mechanizmust. Engedélyezd ezt a lehetőséget, ha biztos, hogy a REMOTE_USER bejelentkezés már működik',
     'login_remote_user_custom_logout_url_text' => 'Egyéni kijelentkezési URL',
-    'login_remote_user_custom_logout_url_help' => 'Ha ki van töltve a felhasználók át lesznek irányítva erre az URL-re miután a SnipeIT munkamenete lejárt (kijelentkezés). Ez hasznos lehet a felhasználói munkamenetek megfelelő bezárása miatt hitelesítés kiszolgálókon.',
+    'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> 'logo',
     'full_multiple_companies_support_help_text' => 'A vállalatoknak a vállalat eszközeihez rendelt felhasználók (köztük az adminisztrátorok) korlátozása.',
     'full_multiple_companies_support_text' => 'Teljes több vállalat támogatása',
