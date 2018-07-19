@@ -41,7 +41,7 @@ return array(
                               inventory or will soon be low.',
     'Item_Request_Canceled' => 'Item Request Canceled',
     'Item_Requested' => 'Item Requested',
-    'licenses_expiring' => '{1} license expiring next 60 days.|[2,Inf] licenses expiring next 60 days.',
+    'licenses_expiring' => '{1} license expiring next :threshold days.|[2,Inf] licenses expiring next :threshold days.',
     'link_to_update_password' => 'Please click on the following link to update your :web password:',
     'login_first_admin' => 'Login to your new Snipe-IT installation using the credentials below:',
     'login' => 'Login:',
