@@ -73,6 +73,7 @@
             'fieldname' => 'selected_assets[]',
             'multiple' => true,
             'asset_status_type' => 'RTD',
+            'select_id' => 'assigned_assets_select',
           ])
 
 
