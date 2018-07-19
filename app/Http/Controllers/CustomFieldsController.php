@@ -87,7 +87,7 @@ class CustomFieldsController extends Controller
         ]);
 
 
-        if (!in_array(Input::get('format'), array_keys(CustomField::$PredefinedFormats))) {
+        if ($request->has("custom_format")) {
             $field->format = e($request->get("custom_format"));
         } else {
             $field->format = e($request->get("format"));
@@ -96,7 +96,6 @@ class CustomFieldsController extends Controller
         if ($field->save()) {
             return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.create.success'));
         } else {
-           // dd($field);
             return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.field.create.error'));
         }
 
