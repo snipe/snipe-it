@@ -76,7 +76,7 @@ class LoginController extends Controller
             };
             
             try {
-                $user = User::where('username', '=', $remote_user)->whereNull('deleted_at')->where('active', '=', '1')->first();
+                $user = User::where('username', '=', $remote_user)->whereNull('deleted_at')->where('activated', '=', '1')->first();
                 LOG::debug("Remote user auth lookup complete");
                 if(!is_null($user)) Auth::login($user, true);
             } catch(Exception $e) {
