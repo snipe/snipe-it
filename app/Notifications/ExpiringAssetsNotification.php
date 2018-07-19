@@ -6,8 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-
-class ExpiringLicenseNotification extends Notification
+class ExpiringAssetsNotification extends Notification
 {
     use Queueable;
     /**
@@ -22,7 +21,7 @@ class ExpiringLicenseNotification extends Notification
      */
     public function __construct($params, $threshold)
     {
-        $this->licenses = $params;
+        $this->assets = $params;
         $this->threshold = $threshold;
     }
 
@@ -53,12 +52,12 @@ class ExpiringLicenseNotification extends Notification
     public function toMail($params)
     {
 
-        $message = (new MailMessage)->markdown('notifications.markdown.report-expiring-licenses',
+        $message = (new MailMessage)->markdown('notifications.markdown.report-expiring-assets',
             [
-                'licenses'  => $this->licenses,
+                'assets'  => $this->assets,
                 'threshold'  => $this->threshold,
             ])
-            ->subject(trans('mail.Expiring_Licenses_Report'));
+            ->subject(trans('mail.Expiring_Assets_Report'));
 
         return $message;
 

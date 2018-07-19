@@ -3,7 +3,7 @@
 {{ trans_choice('mail.There_are',$licenses->count()) }} {{ $licenses->count() }} {{ trans_choice('mail.licenses_expiring', $licenses->count(), ['threshold' => $threshold]) }}
 
 @component('mail::table')
-| |{{ trans('mail.name') }} |{{ trans('mail.expires') }} |:{{ trans('mail.Days') }}
+| |{{ trans('mail.name') }} |{{ trans('mail.expires') }} |{{ trans('mail.Days') }}
 |:------------- |:-------------|:--------|
 @foreach ($licenses as $license)
 @php

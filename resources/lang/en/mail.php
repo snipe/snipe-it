@@ -10,8 +10,7 @@ return array(
     'asset_name' => 'Asset Name:',
     'asset_requested' => 'Asset requested',
     'asset_tag' => 'Asset Tag:',
-    'assets_warrantee_expiring' => '{1} asset with warrantee expiring in the next 60 days.|[2,Inf] assets with warrantees
-                                    expiring in the next 60 days.',
+    'assets_warrantee_expiring' => '{1} asset with warrantee expiring in the next :threshold days.|[2,Inf] assets with warrantees expiring in the next :threshold days.',
     'assigned_to' => 'Assigned To',
     'best_regards' => 'Best regards,',
     'canceled' => 'Canceled:',
