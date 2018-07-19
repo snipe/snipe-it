@@ -285,17 +285,16 @@ abstract class Importer
             }
         }
 
-        // If at this point we have not found a username or first name, bail out in shame.
-        if(empty($user_array['username']) || empty($user_array['first_name'])) {
-            return false;
-        }
-
         // Check for a matching user after trying to guess username.
         if($user = User::where('username', $user_array['username'])->first()) {
             $this->log('User '.$user_array['username'].' already exists');
             return $user;
         }
 
+        // If at this point we have not found a username or first name, bail out in shame.
+        if(empty($user_array['username']) || empty($user_array['first_name'])) {
+            return false;
+        }
 
         // No Luck, let's create one.
         $user = new User;
