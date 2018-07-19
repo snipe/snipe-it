@@ -1,6 +1,6 @@
 @component('mail::message')
 
-{{ trans_choice('mail.There_are',count($items)) }} {{ count($items) }} {{ trans_choice('mail.items_below_minimum',count($items)) }}
+{{ trans_choice('mail.low_inventory_alert',count($items)) }}
 
 @component('mail::table')
 |{{ trans('mail.name') }} |{{ trans('mail.type') }} |{{ trans('mail.current_QTY') }}|{{ trans('mail.min_QTY') }}

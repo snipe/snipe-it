@@ -53,16 +53,17 @@ class SendInventoryAlerts extends Command
             $recipient = new \App\Models\Recipients\AlertRecipient();
 
             if (($items) && (count($items) > 0) && ($settings->alert_email!='')) {
+
+                $this->info( trans_choice('mail.low_inventory_alert',count($items)) );
+
                 $recipient->notify(new InventoryAlert($items, $settings->alert_threshold));
             }
 
-
-
         } else {
             if (Setting::getSettings()->alert_email=='') {
-                echo "Could not send email. No alert email configured in settings. \n";
+                $this->error('Could not send email. No alert email configured in settings');
             } elseif (Setting::getSettings()->alerts_enabled!=1) {
-                echo "Alerts are disabled in the settings. No mail will be sent. \n";
+                $this->info('Alerts are disabled in the settings. No mail will be sent');
             }
         }
 

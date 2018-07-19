@@ -1,6 +1,6 @@
 @component('mail::message')
 
-{{ trans_choice('mail.There_are',$assets->count()) }} {{ $assets->count() }} {{ trans_choice('mail.assets_warrantee_expiring', $assets->count(), ['threshold' => $threshold]) }}
+{{ trans_choice('mail.assets_warrantee_alert', $assets->count(), ['count'=>$assets->count(), 'threshold' => $threshold]) }}
 
 @component('mail::table')
 | |{{ trans('mail.name') }} |{{ trans('mail.expires') }} |{{ trans('mail.Days') }}|{{ trans('mail.supplier') }} | {{ trans('mail.assigned_to') }}
