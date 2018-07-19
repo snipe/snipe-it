@@ -46,17 +46,22 @@ class SendExpirationAlerts extends Command
     public function fire()
     {
 
-        $threshold = Setting::getSettings()->alert_interval;
+        $settings = Setting::getSettings();
+        $threshold = $settings->alert_interval;
+
+
         // Expiring Assets
         $assets = Asset::getExpiringWarrantee(Setting::getSettings()->alert_interval);
         $this->info(trans_choice('mail.assets_warrantee_alert', $assets->count(), ['count'=>$assets->count(), 'threshold' => $threshold]));
 
         // Expiring licenses
         $licenses = License::getExpiringLicenses($threshold);
+
         $this->info(trans_choice('mail.license_expiring_alert', $licenses->count(), ['count'=>$licenses->count(), 'threshold' => $threshold]));
+
         $recipient = new \App\Models\Recipients\AlertRecipient();
 
-        if ((Setting::getSettings()->alert_email!='')  && (Setting::getSettings()->alerts_enabled==1)) {
+        if ((Setting::getSettings()->alert_email!='')  && ($settings->alerts_enabled==1)) {
 
             if ($assets->count() > 0) {
                 // Send a rollup to the admin, if settings dictate
@@ -70,9 +75,9 @@ class SendExpirationAlerts extends Command
 
         } else {
 
-            if (Setting::getSettings()->alert_email=='') {
+            if ($settings->alert_email=='') {
                 $this->error('Could not send email. No alert email configured in settings');
-            } elseif (Setting::getSettings()->alerts_enabled!=1) {
+            } elseif ($settings->alerts_enabled!=1) {
                 $this->info('Alerts are disabled in the settings. No mail will be sent');
             }
 
