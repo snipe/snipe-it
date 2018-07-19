@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\SnipeModel;
+use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Auth;
 use DB;
@@ -35,6 +36,21 @@ final class Company extends SnipeModel
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = ['name', 'created_at', 'updated_at'];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [];   
 
     /**
      * The attributes that are mass assignable.
@@ -191,21 +207,5 @@ final class Company extends SnipeModel
     public function components()
     {
         return $this->hasMany(Component::class, 'company_id');
-    }
-
-    /**
-     * Query builder scope to search on text
-     *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $search      Search term
-     *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
-     */
-    public function scopeTextSearch($query, $search)
-    {
-
-        return $query->where(function ($query) use ($search) {
-            $query->where('name', 'LIKE', '%'.$search.'%');
-        });
     }
 }

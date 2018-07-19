@@ -86,6 +86,41 @@
             </div><!-- /.box-body -->
           </div> <!--/.box-->
 
+
+      <div class="box box-default">
+          <div class="box-header with-border">
+              <div class="box-heading">
+                  <h3 class="box-title">{{ trans('general.components') }}</h3>
+              </div>
+          </div>
+          <div class="box-body">
+              <div class="table table-responsive">
+
+                  <table
+                          data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
+                          data-cookie-id-table="componentsTable"
+                          data-pagination="true"
+                          data-id-table="componentsTable"
+                          data-search="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          id="componentsTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{route('api.components.index', ['location_id' => $location->id])}}"
+                          data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-components-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+
+                  </table>
+              </div><!-- /.table-responsive -->
+          </div><!-- /.box-body -->
+      </div> <!--/.box-->
+
+
   </div><!--/.col-md-9-->
 
   <div class="col-md-3">

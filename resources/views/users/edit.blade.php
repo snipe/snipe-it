@@ -320,29 +320,38 @@
 
 
 
-                <!-- Activation Status -->
-                <div class="form-group {{ $errors->has('activated') ? 'has-error' : '' }}">
-                  <label class="col-md-3 control-label" for="activated">{{ trans('admin/users/table.activated') }}</label>
-                  <div class="col-md-8">
-                    <div class="controls">
-                      <select
-                        {{ ($user->id === Auth::user()->id ? ' disabled="disabled"' : '') }}
-                        name="activated"
-                        id="activated"
-                        {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
-                      >
-                        @if ($user->id)
-                        <option value="1"{{ ($user->isActivated() ? ' selected="selected"' : '') }}>{{ trans('general.yes') }}</option>
-                        <option value="0"{{ ( ! $user->isActivated() ? ' selected="selected"' : '') }}>{{ trans('general.no') }}</option>
-                        @else
-                        <option value="1"{{ (Input::old('activated') == 1 ? ' selected="selected"' : '') }}>{{ trans('general.yes') }}</option>
-                        <option value="0">{{ trans('general.no') }}</option>
-                        @endif
-                      </select>
-                      {!! $errors->first('activated', '<span class="alert-msg">:message</span>') !!}
+                  <!-- Activation Status -->
+                  <div class="form-group {{ $errors->has('activated') ? 'has-error' : '' }}">
+
+                      <div class="form-group">
+                          <div class="col-md-3 control-label">
+                              {{ Form::label('activated', trans('admin/users/table.activated')) }}
+                          </div>
+                          <div class="col-md-9">
+                              @if (config('app.lock_passwords'))
+                                  <div class="icheckbox disabled" style="padding-left: 10px;">
+                                      {{ Form::checkbox('activated', '1', old('activated', $user->activated),['class' => 'minimal', 'disabled'=>'disabled']) }}
+                                      {{ trans('admin/users/general.activated_help_text') }}
+                                      <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+                                  </div>
+                              @elseif ($user->id === Auth::user()->id)
+                                  <div class="icheckbox disabled"" style="padding-left: 10px;">
+                                  {{ Form::checkbox('activated', '1', old('activated', $user->activated),['class' => 'minimal', 'disabled'=>'disabled']) }}
+                                      {{ trans('admin/users/general.activated_help_text') }}
+                                      <p class="help-block">{{ trans('admin/users/general.activated_disabled_help_text') }}</p>
+                                  </div>
+                              @else
+                                  <div style="padding-left: 10px;">
+                                  {{ Form::checkbox('activated', '1', old('activated', $user->activated),['class' => 'minimal' ]) }}
+                                  {{ trans('admin/users/general.activated_help_text') }}
+                                  </div>
+                              @endif
+
+                              {!! $errors->first('activated', '<span class="alert-msg">:message</span>') !!}
+
+                      </div>
                     </div>
                   </div>
-                </div>
 
                 @if ($snipeSettings->two_factor_enabled!='')
                   @if ($snipeSettings->two_factor_enabled=='1')
@@ -351,10 +360,17 @@
                       {{ Form::label('two_factor_optin', trans('admin/settings/general.two_factor')) }}
                     </div>
                     <div class="col-md-9">
-                      {{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
-                      {{ trans('admin/settings/general.two_factor_enabled_text') }}
+                        @if (config('app.lock_passwords'))
+                            <div class="icheckbox disabled">
+                            {{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),['class' => 'minimal', 'disabled'=>'disabled']) }} {{ trans('admin/settings/general.two_factor_enabled_text') }}
+                                <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+                            </div>
+                        @else
+                            {{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),['class' => 'minimal']) }} {{ trans('admin/settings/general.two_factor_enabled_text') }}
+                            <p class="help-block">{{ trans('admin/users/general.two_factor_admin_optin_help') }}</p>
 
-                      <p class="help-block">{{ trans('admin/users/general.two_factor_admin_optin_help') }}</p>
+                        @endif
+
                     </div>
                   </div>
                   @endif

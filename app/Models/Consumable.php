@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -67,6 +68,27 @@ class Consumable extends SnipeModel
         'qty',
         'requestable'
     ];
+
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = ['name', 'order_number', 'purchase_cost', 'purchase_date'];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [
+        'category'     => ['name'],
+        'company'      => ['name'],
+        'location'     => ['name'],  
+        'manufacturer' => ['name'],
+    ];     
 
     public function setRequestableAttribute($value)
     {
@@ -161,50 +183,6 @@ class Consumable extends SnipeModel
         $total = $this->qty;
         $remaining = $total - $checkedout;
         return $remaining;
-    }
-
-    /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-    /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-    public function scopeTextSearch($query, $search)
-    {
-        $search = explode(' ', $search);
-
-        return $query->where(function ($query) use ($search) {
-        
-            foreach ($search as $search) {
-                    $query->whereHas('category', function ($query) use ($search) {
-                        $query->where('categories.name', 'LIKE', '%'.$search.'%');
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('company', function ($query) use ($search) {
-                            $query->where('companies.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('location', function ($query) use ($search) {
-                            $query->where('locations.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere(function ($query) use ($search) {
-                        $query->whereHas('manufacturer', function ($query) use ($search) {
-                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
-                        });
-                    })->orWhere('consumables.name', 'LIKE', '%'.$search.'%')
-                            ->orWhere('consumables.order_number', 'LIKE', '%'.$search.'%')
-                            ->orWhere('consumables.purchase_cost', 'LIKE', '%'.$search.'%');
-            }
-        });
     }
 
     /**

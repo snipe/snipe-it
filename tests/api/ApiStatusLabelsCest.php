@@ -34,7 +34,7 @@ class ApiStatuslabelsCest
         $statuslabel = App\Models\Statuslabel::orderByDesc('created_at')
             ->withCount('assets')
             ->take(10)->get()->shuffle()->first();
-        $I->seeResponseContainsJson((new StatuslabelsTransformer)->transformStatuslabel($statuslabel));
+        $I->seeResponseContainsJson($I->removeTimestamps((new StatuslabelsTransformer)->transformStatuslabel($statuslabel)));
     }
 
     /** @test */

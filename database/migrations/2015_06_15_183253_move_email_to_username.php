@@ -13,7 +13,7 @@ class MoveEmailToUsername extends Migration {
 	public function up()
 	{
 		//
-		DB::update('UPDATE `'.DB::getTablePrefix().'users` SET `username`=`email`');
+        DB::update('UPDATE '.DB::getTablePrefix().'users SET username=email');
 	}
 
 	/**

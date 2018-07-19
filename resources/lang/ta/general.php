@@ -206,7 +206,7 @@
     'unknown_admin'			=> 'அறியப்படாத நிர்வாகம்',
     'username_format'		=> 'பயனர்பெயர் வடிவமைப்பு',
     'update'                => 'புதுப்பிக்கப்பட்டது',
-    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar. Max upload size allowed is :size.',
+    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Uploaded',
     'user'					=> 'பயனர்',
     'accepted'			    => 'ஏற்றுக்கொள்ளப்பட்ட',

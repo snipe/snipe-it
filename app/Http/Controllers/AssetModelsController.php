@@ -121,46 +121,6 @@ class AssetModelsController extends Controller
     }
 
     /**
-     * Validates and stores new Asset Model data created from the
-     * modal form on the Asset Creation view.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.0]
-     * @param Request $request
-     * @return String JSON
-     */
-    public function apiStore(Request $request)
-    {
-        //COPYPASTA!!!! FIXME
-        $this->authorize('create', AssetModel::class);
-        $model = new AssetModel;
-
-        $settings=Input::all();
-        $settings['eol']= null;
-
-        $model->name=$request->input('name');
-        $model->manufacturer_id = $request->input('manufacturer_id');
-        $model->category_id = $request->input('category_id');
-        $model->model_number = $request->input('model_number');
-        $model->user_id = Auth::id();
-        $model->notes            = $request->input('notes');
-        $model->eol= null;
-
-        if ($request->input('fieldset_id')=='') {
-            $model->fieldset_id = null;
-        } else {
-            $model->fieldset_id = e($request->input('fieldset_id'));
-        }
-
-        if ($model->save()) {
-            return JsonResponse::create($model);
-        } else {
-            return JsonResponse::create(["error" => "Failed validation: ".print_r($model->getErrors()->all('<li>:message</li>'), true)], 500);
-        }
-    }
-
-
-    /**
     * Returns a view containing the asset model edit form.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -372,9 +332,7 @@ class AssetModelsController extends Controller
 
         // Show the page
         $view = View::make('models/edit');
-        $view->with('category_list', Helper::categoryList('asset'));
         $view->with('depreciation_list', Helper::depreciationList());
-        $view->with('manufacturer_list', Helper::manufacturerList());
         $view->with('item', $model);
         $view->with('clone_model', $model_to_clone);
         return $view;
@@ -408,7 +366,7 @@ class AssetModelsController extends Controller
      */
     public function postBulkEdit(Request $request)
     {
-        
+
         $models_raw_array = Input::get('ids');
 
         // Make sure some IDs have been selected
@@ -433,13 +391,8 @@ class AssetModelsController extends Controller
                 $nochange = ['NC' => 'No Change'];
                 $fieldset_list = $nochange + Helper::customFieldsetList();
                 $depreciation_list = $nochange + Helper::depreciationList();
-                $category_list = $nochange + Helper::categoryList('asset');
-                $manufacturer_list = $nochange + Helper::manufacturerList();
-
 
                 return view('models/bulk-edit', compact('models'))
-                    ->with('manufacturer_list', $manufacturer_list)
-                    ->with('category_list', $category_list)
                     ->with('fieldset_list', $fieldset_list)
                     ->with('depreciation_list', $depreciation_list);
             }

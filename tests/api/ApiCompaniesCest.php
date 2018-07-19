@@ -35,7 +35,7 @@ class ApiCompaniesCest
         $company = App\Models\Company::withCount('assets','licenses','accessories','consumables','components','users')
             ->orderByDesc('created_at')->take(10)->get()->shuffle()->first();
 
-        $I->seeResponseContainsJson((new CompaniesTransformer)->transformCompany($company));
+        $I->seeResponseContainsJson($I->removeTimestamps((new CompaniesTransformer)->transformCompany($company)));
     }
 
     /** @test */

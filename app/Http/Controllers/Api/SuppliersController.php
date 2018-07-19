@@ -26,7 +26,7 @@ class SuppliersController extends Controller
         
         $suppliers = Supplier::select(
                 array('id','name','address','address2','city','state','country','fax', 'phone','email','contact','created_at','updated_at','deleted_at','image','notes')
-            )->withCount('assets')->withCount('licenses')->withCount('accessories')->whereNull('deleted_at');
+            )->withCount('assets')->withCount('licenses')->withCount('accessories');
 
 
         if ($request->has('search')) {
@@ -93,7 +93,7 @@ class SuppliersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Supplier::class);
+        $this->authorize('update', Supplier::class);
         $supplier = Supplier::findOrFail($id);
         $supplier->fill($request->all());
 

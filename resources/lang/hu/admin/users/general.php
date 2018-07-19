@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Eszköz(ök) hozzárendelve: :name',
     'bulk_update_warn'	=> 'A következő felhasználók tulajdonságait szerkesztheti: user_count felhasználók. Kérjük, vegye figyelembe, hogy a saját felhasználói attribútumait nem tudja megváltoztatni ezzel az űrlappal, és személyre kell változtatni a saját felhasználóit.',
     'bulk_update_help'	=> 'Ez az űrlap egyszerre több felhasználó frissítését teszi lehetővé. Csak töltse ki a megváltoztatni kívánt mezőket. Az üresen maradt mezők változatlanok maradnak.',

@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Artigos são itens seguidos por números de serie ou "asset tags". Eles tendem a ser itens de maior valor, onde a identificação de um item específico importa.',
 	'archived'  				=> 'Arquivado',
     'asset'  					=> 'Ativo',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Artigos em checktout',
     'checkin'  					=> 'Devolver Ativo',
     'checkout'  				=> 'Ativo de compras',
     'clone'  					=> 'Clonar Ativo',

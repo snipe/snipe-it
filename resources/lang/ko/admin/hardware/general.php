@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => '자산은 일련 번호나 자산 꼬리표로 추적되는 품목들입니다. 특정 품목의 상황을 파악하는 것이 더 높은 가치를 갖는 추세입니다.',
 	'archived'  				=> '보관됨',
     'asset'  					=> '자산',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => '반출 자산',
     'checkin'  					=> '반입 자산',
     'checkout'  				=> '반출 자산',
     'clone'  					=> '자산 복제',

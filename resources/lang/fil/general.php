@@ -206,7 +206,7 @@
     'unknown_admin'			=> 'Hindi matukoy na Admin',
     'username_format'		=> 'Ang Pormat sa Pangalan ng Gumagamit',
     'update'                => 'I-update',
-    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar. Max upload size allowed is :size.',
+    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Nai-upload',
     'user'					=> 'Ang gumagamit',
     'accepted'			    => 'tinanggap na',

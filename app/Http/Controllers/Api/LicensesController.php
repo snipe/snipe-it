@@ -64,8 +64,8 @@ class LicensesController extends Controller
             $licenses->where('supplier_id','=',$request->input('supplier_id'));
         }
 
-        if ($request->has('category_i')) {
-            $licenses->where('category_i','=',$request->input('category_i'));
+        if ($request->has('category_id')) {
+            $licenses->where('category_id','=',$request->input('category_id'));
         }
 
         if ($request->has('depreciation_id')) {
@@ -168,7 +168,7 @@ class LicensesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->authorize('edit', License::class);
+        $this->authorize('update', License::class);
 
         $license = License::findOrFail($id);
         $license->fill($request->all());
@@ -222,6 +222,8 @@ class LicensesController extends Controller
     {
 
         if ($license = License::find($licenseId)) {
+
+            $this->authorize('view', $license);
 
             $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
 

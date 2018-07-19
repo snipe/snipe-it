@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'لم تتم استعادة الشركة المصنعة، يرجى المحاولة مرة أخرى',
+        'success' => 'تم إستعادة الشركة المصنعة بنجاح.'
     ),
 
     'delete' => array(

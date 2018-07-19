@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Az eszközök a sorszám vagy az eszközcímke által követett elemek. Ezek általában magasabb értékű termékek, amelyekben egy adott elem azonosítása fontos.',
 	'archived'  				=> 'Arhivált',
     'asset'  					=> 'Eszköz',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Eszközök kiadása',
     'checkin'  					=> 'Eszköz visszavétele',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Eszköz klónozása',

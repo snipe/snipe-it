@@ -465,7 +465,7 @@ class AssetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Asset::class);
+        $this->authorize('update', Asset::class);
 
         if ($asset = Asset::find($id)) {
             ($request->has('model_id')) ?
@@ -755,7 +755,8 @@ class AssetsController extends Controller
      */
     public function requestable(Request $request)
     {
-        
+        $this->authorize('viewRequestable', Asset::class);
+
         $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier')->where('assets.requestable', '=', '1');

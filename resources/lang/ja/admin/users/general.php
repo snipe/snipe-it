@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => ':name に資産を割り当てる',
     'bulk_update_warn'	=> ': user_count 人のプロパティを編集しようとしています。このフォームを使用してユーザー属性を変更することはできません。ユーザー個別に編集をする必要があります。',
     'bulk_update_help'	=> 'このフォームは一度に複数利用者を更新することが可能です。変更が必要なフィールドにのみ入力をして下さい。空白のフィールドは変更されません。',

@@ -206,7 +206,7 @@
     'unknown_admin'			=> '未知管理員',
     'username_format'		=> '使用者名稱格式',
     'update'                => '更新',
-    'upload_filetypes_help'      => '允許的文件類型是png，gif，jpg，jpeg，doc，docx，pdf，txt，zip和rar。允許的最大上傳大小是 :size。',
+    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
     'uploaded'              => '已上傳',
     'user'					=> '使用者',
     'accepted'			    => '已接受',

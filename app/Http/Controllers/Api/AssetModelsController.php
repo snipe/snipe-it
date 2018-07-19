@@ -145,7 +145,7 @@ class AssetModelsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', AssetModel::class);
+        $this->authorize('update', AssetModel::class);
         $assetmodel = AssetModel::findOrFail($id);
         $assetmodel->fill($request->all());
         $assetmodel->fieldset_id = $request->get("custom_fieldset_id");

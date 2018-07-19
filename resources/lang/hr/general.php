@@ -206,7 +206,7 @@
     'unknown_admin'			=> 'Nepoznati administrator',
     'username_format'		=> 'Format korisničkog imena',
     'update'                => 'Ažuriraj',
-    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar. Max upload size allowed is :size.',
+    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Uploaded',
     'user'					=> 'Korisnik',
     'accepted'			    => 'priznat',

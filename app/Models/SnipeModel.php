@@ -96,6 +96,77 @@ class SnipeModel extends Model
         return;
     }
 
+    public function setFieldSetIdAttribute($value)
+    {
+        if($value == '') {
+            $value = null;
+        }
+        $this->attributes['fieldset_id'] = $value;
+        return;
+    }
+
+    public function setCompanyIdAttribute($value)
+    {
+        if($value == '') {
+            $value = null;
+        }
+        $this->attributes['company_id'] = $value;
+        return;
+    }
+
+    public function setWarrantyMonthsAttribute($value)
+    {
+        if($value == '') {
+            $value = null;
+        }
+        $this->attributes['warranty_months'] = $value;
+        return;
+    }
+
+    public function setRtdLocationIdAttribute($value)
+    {
+        if($value == '') {
+            $value = null;
+        }
+        $this->attributes['rtd_location_id'] = $value;
+        return;
+    }
+
+    public function setDepartmentIdAttribute($value)
+    {
+        if($value == '') {
+            $value = null;
+        }
+        $this->attributes['department_id'] = $value;
+        return;
+    }
+
+    public function setManagerIdAttribute($value)
+    {
+        if($value == '') {
+            $value = null;
+        }
+        $this->attributes['manager_id'] = $value;
+        return;
+    }
+
+    public function setModelIdAttribute($value)
+    {
+        if($value == '') {
+            $value = null;
+        }
+        $this->attributes['model_id'] = $value;
+        return;
+    }
+
+    public function setStatusIdAttribute($value)
+    {
+        if($value == '') {
+            $value = null;
+        }
+        $this->attributes['status_id'] = $value;
+        return;
+    }
 
     //
     public function getDisplayNameAttribute()

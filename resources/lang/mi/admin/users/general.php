@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Nga taonga kua tohaina ki: ingoa',
     'bulk_update_warn'	=> 'Kei te tata koe ki te whakatika i nga taonga o: kaiwhakamahi kaiwhakamahi_count. Kia mohio koe kaore e taea e koe te whakarereke i a koe ake huanga kaiwhakamahi me te whakamahi i tenei puka, me te whakarereke i to hoa ake.',
     'bulk_update_help'	=> 'Ko tenei puka ka taea e koe te whakahou i nga kaiwhakamahi maha i te wa kotahi. Whakakiia nga mara e hiahia ana koe ki te huri. Ko nga mara katoa e mahue ana ka noho tonu.',

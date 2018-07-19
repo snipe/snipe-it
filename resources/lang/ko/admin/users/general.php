@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => '이 사용자는 로그인 할 수 있음',
+    'activated_disabled_help_text' => '자신의 계정에 대한 활성 상태는 편집 할 수 없습니다.',
     'assets_user'       => '자산 보유자 :name',
     'bulk_update_warn'	=> '당신은 :user_count 사용자의 속성을 수정하려고 합니다. 이 양식을 사용하여 자신의 사용자 속성을 변경할 수 없으며 ,사용자 자신의 개인 정보를 개별적으로 수정해야합니다.',
     'bulk_update_help'	=> '이 양식을 사용하면 한 번에 여러 사용자를 갱신할 수 있습니다. 변경할 필요가 있는 항목만 채우세요. 아무 것도 입력하지 않으면 변경되지 않습니다.',

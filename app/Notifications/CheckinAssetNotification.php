@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Models\Setting;
 use Illuminate\Bus\Queueable;
+use App\Models\User;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -55,8 +56,11 @@ class CheckinAssetNotification extends Notification
             $notifyBy[] = 'slack';
         }
 
-        // Make sure the target is a user and that its appropriate to send them an email
-        if ((($this->target->email!='') && ($this->target_type == 'App\Models\User')) && (($this->item->requireAcceptance() == '1') || ($this->item->getEula())))
+        /**
+         * Only send checkin notifications to users if the category 
+         * has the corresponding checkbox checked.
+         */
+        if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '')
         {
             \Log::debug('use email');
             $notifyBy[] = 'mail';

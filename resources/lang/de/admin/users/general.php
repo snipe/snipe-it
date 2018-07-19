@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Assets zugewiesen an :name',
     'bulk_update_warn'	=> 'Sie sind dabei, die Eigenschaften von :user_count Benutzern zu bearbeiten. Bitte beachten Sie, dass Sie Ihre eigenen Benutzerattribute nicht über dieses Formular ändern können. Sie müssen Ihren eigenen Benutzer einzeln bearbeiten.',
     'bulk_update_help'	=> 'Hier können mehrere Benutzer gleichzeitig bearbeitet werden. Nur Felder ausfüllen, welche geändert werden sollen. Leere Felder werden nicht geändert.',

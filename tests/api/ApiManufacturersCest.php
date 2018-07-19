@@ -34,7 +34,7 @@ class ApiManufacturersCest
         $manufacturer = App\Models\Manufacturer::withCount('assets','accessories','consumables','licenses')
             ->orderByDesc('created_at')->take(10)->get()->shuffle()->first();
 
-        $I->seeResponseContainsJson((new ManufacturersTransformer)->transformManufacturer($manufacturer));
+        $I->seeResponseContainsJson($I->removeTimestamps((new ManufacturersTransformer)->transformManufacturer($manufacturer)));
     }
 
     /** @test */

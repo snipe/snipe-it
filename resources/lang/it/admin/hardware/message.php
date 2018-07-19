@@ -63,7 +63,7 @@ return array(
         'success' 		=> 'Il bene è stato estratto con successo.',
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
         'not_available' => 'Questo prodotto non è disponibile per il checkout!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'È necessario selezionare almeno una risorsa dall\'elenco'
     ),
 
     'checkin' => array(
