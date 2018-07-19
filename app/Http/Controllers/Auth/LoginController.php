@@ -97,7 +97,7 @@ class LoginController extends Controller
         }
 
         // Check if the user already exists in the database and was imported via LDAP
-        $user = User::where('username', '=', Input::get('username'))->whereNull('deleted_at')->where('ldap_import', '=', 1)->where('active', '=', '1')->first();
+        $user = User::where('username', '=', Input::get('username'))->whereNull('deleted_at')->where('ldap_import', '=', 1)->where('activated', '=', '1')->first();
         LOG::debug("Local auth lookup complete");
 
         // The user does not exist in the database. Try to get them from LDAP.
