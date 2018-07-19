@@ -439,7 +439,7 @@ class AssetsController extends Controller
      * @since [v3.0]
      * @return Redirect
      */
-    public function getAssetByTag()
+    public function getAssetByTag(Request $request)
     {
         $topsearch = ($request->get('topsearch')=="true");
 
