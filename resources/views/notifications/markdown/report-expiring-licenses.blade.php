@@ -4,7 +4,7 @@
 
 @component('mail::table')
 | |{{ trans('mail.name') }} |{{ trans('mail.expires') }} |{{ trans('mail.Days') }}
-|:------------- |:-------------|:--------|
+| |:------------- |:-------------|:-------------|
 @foreach ($licenses as $license)
 @php
 $expires = \App\Helpers\Helper::getFormattedDateObject($license->expiration_date, 'date');

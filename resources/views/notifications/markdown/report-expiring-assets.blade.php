@@ -4,7 +4,7 @@
 
 @component('mail::table')
 | |{{ trans('mail.name') }} |{{ trans('mail.expires') }} |{{ trans('mail.Days') }}|{{ trans('mail.supplier') }} | {{ trans('mail.assigned_to') }}
-|:------------- |:-------------|:---------|:---------|:---------|:---------|
+| |:------------- |:-------------|:---------|:---------|:---------|:---------|
 @foreach ($assets as $asset)
 @php
 $expires = \App\Helpers\Helper::getFormattedDateObject($asset->present()->warrantee_expires, 'date');
