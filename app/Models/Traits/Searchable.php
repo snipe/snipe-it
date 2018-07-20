@@ -68,6 +68,8 @@ trait Searchable {
         
         $table = $this->getTable();
 
+        $firstConditionAdded = false;
+
         foreach($this->getSearchableAttributes() as $column) {
 
             foreach($terms as $term) {
@@ -80,6 +82,19 @@ trait Searchable {
                     continue;
                 }
 
+                /**
+                 * We need to form the query properly, starting with a "where",
+                 * otherwise the generated select is wrong.
+                 *
+                 * @todo  This does the job, but is inelegant and fragile
+                 */
+                if (!$firstConditionAdded) {
+                    $query = $query->where($table . '.' . $column, 'LIKE', '%'.$term.'%');
+
+                    $firstConditionAdded = true;
+                    continue;
+                }
+                
                 $query = $query->orWhere($table . '.' . $column, 'LIKE', '%'.$term.'%');
             }
         }
