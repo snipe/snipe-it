@@ -156,6 +156,10 @@ class Consumable extends SnipeModel
         return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->count();
     }
 
+    public function checkin_email()
+    {
+        return $this->category->checkin_email;
+    }    
 
     public function requireAcceptance()
     {
