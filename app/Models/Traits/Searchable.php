@@ -53,7 +53,7 @@ trait Searchable {
      * @param  string $search The search term
      * @return array         An array of search terms
      */
-	private function prepeareSearchTerms(string $search) {
+	private function prepeareSearchTerms($search) {
 		return explode(' OR ', $search);
 	}
 
