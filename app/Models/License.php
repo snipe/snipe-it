@@ -228,7 +228,7 @@ class License extends Depreciable
 
     public function checkin_email()
     {
-        return $this->model->category->checkin_email;
+        return $this->category->checkin_email;
     }
 
     public function requireAcceptance()
