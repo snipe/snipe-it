@@ -47,13 +47,6 @@ class Accessory extends SnipeModel
         'supplier'     => ['name'],
         'location'     => ['name']
     ];
-   
-    /**
-     * Set static properties to determine which checkout/checkin handlers we should use
-     */
-    public static $checkoutClass = CheckoutAccessoryNotification::class;
-    public static $checkinClass = CheckinAccessoryNotification::class;
-
 
     /**
     * Accessory validation rules

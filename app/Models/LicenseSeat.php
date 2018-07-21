@@ -17,12 +17,6 @@ class LicenseSeat extends Model implements ICompanyableChild
     protected $guarded = 'id';
     protected $table = 'license_seats';
 
-    /**
-     * Set static properties to determine which checkout/checkin handlers we should use
-     */
-    public static $checkoutClass = CheckoutLicenseNotification::class;
-    public static $checkinClass = CheckinLicenseNotification::class;
-
     public function getCompanyableParents()
     {
         return ['asset', 'license'];

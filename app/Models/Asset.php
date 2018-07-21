@@ -34,11 +34,6 @@ class Asset extends Depreciable
     const USER = 'user';
 
     const ACCEPTANCE_PENDING = 'pending';
-    /**
-     * Set static properties to determine which checkout/checkin handlers we should use
-     */
-    public static $checkoutClass = CheckoutAssetNotification::class;
-    public static $checkinClass = CheckinAssetNotification::class;
 
 
     /**

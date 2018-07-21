@@ -20,12 +20,6 @@ class Consumable extends SnipeModel
         'requestable' => 'boolean'
     ];
 
-    /**
-     * Set static properties to determine which checkout/checkin handlers we should use
-     */
-    public static $checkoutClass = CheckoutConsumableNotification::class;
-    public static $checkinClass = null;
-
 
     /**
     * Category validation rules
