@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Event;
+use App\Listeners\SendingCheckInNotificationsListener;
+use App\Listeners\SendingCheckOutNotificationsListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -23,6 +25,15 @@ class EventServiceProvider extends ServiceProvider
             ],
         ];
 
+    /**
+     * The subscriber classes to register.
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        SendingCheckOutNotificationsListener::class,
+        SendingCheckInNotificationsListener::class,
+    ];
 
     /**
      * Register any events for your application.
