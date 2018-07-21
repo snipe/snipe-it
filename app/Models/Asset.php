@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Events\AssetCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
@@ -266,7 +267,10 @@ class Asset extends Depreciable
         }
 
         if ($this->save()) {
-            $this->logCheckout($note, $target);
+            $loggedAction = $this->logCheckout($note, $target);
+
+            event(new AssetCheckedOut($this, $target, $loggedAction));
+
             $this->increment('checkout_counter', 1);
             return true;
         }
