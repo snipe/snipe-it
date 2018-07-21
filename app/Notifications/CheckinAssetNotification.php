@@ -2,13 +2,14 @@
 
 namespace App\Notifications;
 
+use App\Models\Asset;
 use App\Models\Setting;
-use Illuminate\Bus\Queueable;
 use App\Models\User;
-use Illuminate\Notifications\Notification;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
+use Illuminate\Notifications\Notification;
 
 class CheckinAssetNotification extends Notification
 {
@@ -20,19 +21,15 @@ class CheckinAssetNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params)
+    public function __construct(Asset $asset, $checkedOutTo, User $checkedInBy, $note)
     {
-        $this->target = $params['target'];
-        $this->item = $params['item'];
-        $this->admin = $params['admin'];
-        $this->note = '';
-        $this->expected_checkin = '';
-        $this->target_type = $params['target_type'];
-        $this->settings = $params['settings'];
+        $this->target = $checkedOutTo;
+        $this->item   = $asset;
+        $this->admin  = $checkedInBy;
+        $this->note   = $note;
 
-        if (array_key_exists('note', $params)) {
-            $this->note = $params['note'];
-        }
+        $this->settings = Setting::getSettings();
+        $this->expected_checkin = '';
 
         if ($this->item->expected_checkin) {
             $this->expected_checkin = \App\Helpers\Helper::getFormattedDateObject($this->item->expected_checkin, 'date',

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\License;
 use App\Models\Setting;
 use App\Models\SnipeModel;
 use App\Models\User;
@@ -25,19 +26,13 @@ class CheckinLicenseNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params)
+    public function __construct(License $license, $checkedOutTo, User $checkedInBy, $note)
     {
-        $this->target = $params['target'];
-        $this->item = $params['item'];
-        $this->admin = $params['admin'];
-        $this->note = '';
-        $this->settings = $params['settings'];
-        $this->target_type = $params['target_type'];
-
-        if (array_key_exists('note', $params)) {
-            $this->note = $params['note'];
-        }
-
+        $this->target = $checkedOutTo;
+        $this->item = $license;
+        $this->admin = $checkedInBy;
+        $this->note = $note;
+        $this->settings = Setting::getSettings();
     }
 
     /**
