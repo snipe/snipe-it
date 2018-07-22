@@ -58,7 +58,6 @@ class GroupsCest
 
     public function allowsDelete(FunctionalTester $I, $scenario)
     {
-        $scenario->incomplete('Fix this test to generate a group for deletes');
         $I->wantTo('Ensure I can delete a group');
 
         // create a group
