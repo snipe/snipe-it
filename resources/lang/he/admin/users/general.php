@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'נכסים שהוקצו ל: שם',
     'bulk_update_warn'	=> 'אתה עומד לערוך את המאפיינים של: user_count משתמשים. שים לב שאינך יכול לשנות את תכונות המשתמש שלך באמצעות טופס זה, ועליך לבצע עריכה למשתמש שלך בנפרד.',
     'bulk_update_help'	=> 'טופס זה מאפשר לך לעדכן מספר משתמשים בו-זמנית. מלא רק את השדות שאתה צריך לשנות. כל השדות שנותרו ריקים יישארו ללא שינוי.',

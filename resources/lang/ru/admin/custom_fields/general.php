@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => 'Новый набор полей',
     'create_field'            => 'Новое настраиваемое поле',
     'value_encrypted'      	        => 'Значение этого поля зашифровано в базе данных. Только администраторам будет доступно для просмотра расшифрованное значение',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Включить значение этого поля в письма, которое будет отправлено пользователю? Зашифрованные поля не могут быть включены в сообщения электронной почты.',
 );

@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => '資産はシリアル番号や資産タグで追跡します。資産は特定することが重要な、高価な物であることが多いです。',
 	'archived'  				=> 'アーカイブ',
     'asset'  					=> '資産',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => '一括チェックアウト',
     'checkin'  					=> '資産をチェックイン',
     'checkout'  				=> '資産をチェックアウト',
     'clone'  					=> '資産を複製',

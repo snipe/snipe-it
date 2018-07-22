@@ -7,8 +7,8 @@ return array(
 	'bulk_update'		=> 'Aggiornamento quantità beni',
 	'bulk_update_help'	=> 'Questo modulo consente di aggiornare più risorse in una sola volta. Riempire solo i campi che è necessario cambiare. Tutti i campi lasciati vuoti rimarranno invariati. ',
 	'bulk_update_warn'	=> 'Stai per modificare le proprietà di :asset_count beni.',
-    'checkedout_to'		=> 'Estratto a',
-    'checkout_date'		=> 'Data di estrazione',
+    'checkedout_to'		=> 'Assegnato a',
+    'checkout_date'		=> 'Data di assegnazione',
     'checkin_date'		=> 'Data di entrata',
     'checkout_to'		=> 'Assegnare a',
     'cost'				=> 'Costo acquisto',
@@ -38,7 +38,7 @@ return array(
     'tag'				=> 'Etichetta bene',
     'update'			=> 'Aggiornamento bene',
     'warranty'			=> 'Garanzia',
-		'warranty_expires'		=> 'Warranty Expires',
+		'warranty_expires'		=> 'Scadenza della garanzia',
     'years'				=> 'anni',
 )
 ;

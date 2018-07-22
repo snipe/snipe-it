@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Serahkan harta kepada :nama',
     'bulk_update_warn'	=> 'Anda akan menyunting sifat: user_count pengguna. Sila ambil perhatian bahawa anda tidak boleh mengubah atribut pengguna anda sendiri menggunakan borang ini, dan mesti membuat pengeditan kepada pengguna anda sendiri secara individu.',
     'bulk_update_help'	=> 'Borang ini membolehkan anda mengemas kini berbilang pengguna sekaligus. Hanya isikan medan yang perlu anda ubah. Mana-mana medan yang dibiarkan kosong akan kekal tidak berubah.',

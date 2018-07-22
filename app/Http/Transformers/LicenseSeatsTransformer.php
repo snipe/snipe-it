@@ -2,6 +2,7 @@
 namespace App\Http\Transformers;
 
 use App\Models\LicenseSeat;
+use App\Models\License;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;

@@ -206,7 +206,7 @@
     'unknown_admin'			=> 'Непознат администратор',
     'username_format'		=> 'Формат на потребителско име',
     'update'                => 'Обновяване',
-    'upload_filetypes_help'      => 'Допустимите типове файлове са png, gif, jpg, jpeg, doc, docx, pdf, txt, zip и rar. Максималният размер за качване е :size.',
+    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Качен',
     'user'					=> 'Потребител',
     'accepted'			    => 'приет',

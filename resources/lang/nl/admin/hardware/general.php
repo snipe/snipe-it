@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Materiaal bestaat uit items die met een serienummer of identificatiesticker geregistreerd zijn. Dit zijn over het algemeen de objecten met een hogere waarde waarbij identificatie belangrijk is.',
 	'archived'  				=> 'Gearchiveerd',
     'asset'  					=> 'Materiaal',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Materiaal uitgeven',
     'checkin'  					=> 'Materiaal uitlenen',
     'checkout'  				=> 'Materiaal uitlenen',
     'clone'  					=> 'Kloon Materiaal',

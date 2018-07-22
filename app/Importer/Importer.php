@@ -60,7 +60,12 @@ abstract class Importer
         'warranty_months' => 'warranty',
         'full_name' => 'full name',
         'email' => 'email',
-        'username' => 'username'
+        'username' => 'username',
+        'jobtitle' => 'job title',
+        'employee_num' => 'employee number',
+        'phone_number' => 'phone number',
+        'first_name' => 'first name',
+        'last_name' => 'last name',
     ];
     /**
      * Map of item fields->csv names
@@ -249,82 +254,82 @@ abstract class Importer
      * @since 3.0
      * @param $row array
      * @return User Model w/ matching name
-     * @internal param string $user_username Username extracted from CSV
-     * @internal param string $user_email Email extracted from CSV
-     * @internal param string $first_name
-     * @internal param string $last_name
+     * @internal param array $user_array User details parsed from csv
      */
     protected function createOrFetchUser($row)
     {
-        $user_name = $this->findCsvMatch($row, "full_name");
-        $user_email = $this->findCsvMatch($row, "email");
-        $user_username = $this->findCsvMatch($row, "username");
-        $first_name = '';
-        $last_name = '';
-        if(empty($user_name) && empty($user_email) && empty($user_username)) {
-            $this->log('No user data provided - skipping user creation, just adding asset');
+        $user_array = [
+            'full_name' => $this->findCsvMatch($row, "full_name"),
+            'email'     => $this->findCsvMatch($row, "email"),
+            'username'  => $this->findCsvMatch($row, "username")
+        ];
+        // If the full name is empty, bail out--we need this to extract first name (at the very least)
+        if(empty($user_array['full_name'])) {
+            $this->log('Insufficient user data provided (Full name is required)- skipping user creation, just adding asset');
             return false;
         }
 
-        if( !empty($user_username)) {
-            // A username was given.
-            $user = User::where('username', $user_username)->first();
-            if($user) {
-                return $user;
+        // Is the user actually an ID?
+        if($user = $this->findUserByNumber($user_array['full_name'])) {
+            return $user;
+        }
+        $this->log('User does not appear to be an id with number: '.$user_array['full_name'].'.  Continuing through our processes');
+
+        // Populate email if it does not exist.
+        if(empty($user_array['email'])) {
+            $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
+        }
+
+        $user_formatted_array = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $user_array['full_name']);
+        $user_array['first_name'] = $user_formatted_array['first_name'];
+        $user_array['last_name'] = $user_formatted_array['last_name'];
+        if (empty($user_array['username'])) {
+            $user_array['username'] = $user_formatted_array['username'];
+            if ($this->usernameFormat =='email') {
+                $user_array['username'] = $user_array['email'];
             }
         }
+
+        // Check for a matching user after trying to guess username.
+        if($user = User::where('username', $user_array['username'])->first()) {
+            $this->log('User '.$user_array['username'].' already exists');
+            return $user;
+        }
+
+        // If at this point we have not found a username or first name, bail out in shame.
+        if(empty($user_array['username']) || empty($user_array['first_name'])) {
+            return false;
+        }
+
+        // No Luck, let's create one.
+        $user = new User;
+        $user->first_name = $user_array['first_name'];
+        $user->last_name = $user_array['last_name'];
+        $user->username = $user_array['username'];
+        $user->email = $user_array['email'];
+        $user->activated = 1;
+        $user->password = $this->tempPassword;
+
+        if ($user->save()) {
+            $this->log('User '.$user_array['username'].' created');
+            return $user;
+        }
+        $this->logError($user, 'User "' . $user_array['username'] . '" was not able to be created.');
+        return false;
+    }
+
+    /**
+     * Matches a user by user_id if user_name provided is a number
+     * @param  string $user_name users full name from csv
+     * @return User           User Matching ID
+     */
+    protected function findUserByNumber($user_name)
+    {
         // A number was given instead of a name
         if (is_numeric($user_name)) {
-            $this->log('User '.$user_name.' is not a name - assume this user already exists');
-            $user = User::find($user_name);
-            if($user) {
-                return $user;
-            }
-            $this->log('User with id'.$user_name.' does not exist.  Continuing through our processes');
+            $this->log('User '.$user_name.' is a number - lets see if it matches a user id');
+            return User::find($user_name);
         }
-        // Generate data based on user name.
-        $user_email_array = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $user_name);
-        $first_name = $user_email_array['first_name'];
-        $last_name = $user_email_array['last_name'];
-
-        if (empty($user_email)) {
-            if (Setting::getSettings()->email_domain) {
-                $user_email = str_slug($user_email_array['username']).'@'.Setting::getSettings()->email_domain;
-            }
-        }
-
-        if (empty($user_username)) {
-            if ($this->usernameFormat =='email') {
-                $user_username = $user_email;
-            } else {
-                $user_name_array = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $user_name);
-                $user_username = $user_name_array['username'];
-            }
-        }
-        $user = new User;
-
-        if (!empty($user_username)) {
-
-            if ($user = User::MatchEmailOrUsername($user_username, $user_email)
-                ->whereNotNull('username')->first()) {
-                $this->log('User '.$user_username.' already exists');
-            } elseif (( $first_name != '') && ($last_name != '') && ($user_username != '')) {
-                $user = new User;
-                $user->first_name = $first_name;
-                $user->last_name = $last_name;
-                $user->username = $user_username;
-                $user->email = $user_email;
-                $user->activated = 1;
-                $user->password = $this->tempPassword;
-
-                if ($user->save()) {
-                    $this->log('User '.$first_name.' created');
-                } else {
-                    $this->logError($user, 'User "' . $first_name . '"');
-                }
-            }
-        }
-        return $user;
     }
 
     /**

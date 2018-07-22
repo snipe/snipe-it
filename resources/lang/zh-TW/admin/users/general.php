@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => '分配給 :name 的資產',
     'bulk_update_warn'	=> '您正在修改 :user_count 位使用者。請注意！您不能透過此表格修改您自己的資訊，您必須單獨編輯您的個人資訊。',
     'bulk_update_help'	=> '此表格允許您同時修改多位使用者。請僅填寫需要修改的欄位，留空的欄位不會做任何修改。',

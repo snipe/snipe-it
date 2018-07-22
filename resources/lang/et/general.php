@@ -206,7 +206,7 @@
     'unknown_admin'			=> 'Tundmatu Admin',
     'username_format'		=> 'Kasutajanime formaat',
     'update'                => 'Uuenda',
-    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar. Max upload size allowed is :size.',
+    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Üles laetud',
     'user'					=> 'Kasutaja',
     'accepted'			    => 'aktsepteeritud',
