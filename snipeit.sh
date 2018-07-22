@@ -134,7 +134,7 @@ create_virtualhost () {
     echo "  <Directory $APP_PATH/public>"
     echo "      Allow From All"
     echo "      AllowOverride All"
-    echo "      Options +Indexes"
+    echo "      Options -Indexes"
     echo "  </Directory>"
     echo ""
     echo "  DocumentRoot $APP_PATH/public"
