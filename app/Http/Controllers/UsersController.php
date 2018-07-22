@@ -250,7 +250,7 @@ class UsersController extends Controller
 
         } catch (ModelNotFoundException $e) {
             return redirect()->route('users.index')
-                ->with('error', trans('admin/users/message.user_not_found', compact('id')))
+                ->with('error', trans('admin/users/message.user_not_found', compact('id')));
         }
 
 
