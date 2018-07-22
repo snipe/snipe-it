@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Relationships\CustomFieldRelationships;
 use Illuminate\Database\Eloquent\Model;
 use Schema;
 use Watson\Validating\ValidatingTrait;
@@ -12,7 +13,7 @@ use Illuminate\Validation\Rule;
 
 class CustomField extends Model
 {
-    use ValidatingTrait, UniqueUndeletedTrait;
+    use ValidatingTrait, UniqueUndeletedTrait, CustomFieldRelationships;
     public $guarded=["id"];
     public static $PredefinedFormats=[
         "ANY" => "",
@@ -138,21 +139,6 @@ class CustomField extends Model
         });
     }
 
-    public function fieldset()
-    {
-        return $this->belongsToMany('\App\Models\CustomFieldset');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('\App\Models\User');
-    }
-
-    public function defaultValues()
-    {
-        return $this->belongsToMany('\App\Models\AssetModel', 'models_custom_fields')->withPivot('default_value');
-    }
-
     /**
      * Returns the default value for a given model using the defaultValues
      * relationship
@@ -188,7 +174,7 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.4]
-     * @return Array
+     * @return array
      */
     public function getFormatAttribute($value)
     {
@@ -205,7 +191,8 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.4]
-     * @return Array
+     * @param $value
+     * @return void
      */
     public function setFormatAttribute($value)
     {
@@ -283,12 +270,11 @@ class CustomField extends Model
     }
 
     /**
-    * Get validation rules for custom fields to use with Validator
-    * @author [V. Cordes] [<volker@fdatek.de>]
-    * @param int $id
-    * @since [v4.1.10]
-    * @return Array
-    */
+     * Get validation rules for custom fields to use with Validator
+     * @author [V. Cordes] [<volker@fdatek.de>]
+     * @return array
+     * @since [v4.1.10]
+     */
     public function validationRules()
     {
         return [

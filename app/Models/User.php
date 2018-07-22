@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Relationships\UserRelationships;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Auth\Authenticatable;
@@ -25,6 +26,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     use UniqueUndeletedTrait;
     use Notifiable;
     use Presentable;
+    use UserRelationships;
     protected $dates = ['deleted_at'];
     protected $hidden = ['password','remember_token','permissions','reset_password_code','persist_code'];
     protected $table = 'users';
@@ -156,16 +158,6 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
 
-    public function company()
-    {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
-    }
-
-    public function department()
-    {
-        return $this->belongsTo('\App\Models\Department', 'department_id');
-    }
-
     public function isActivated()
     {
         return $this->activated ==1;
@@ -190,162 +182,21 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
-        $this->endpoint = \App\Models\Setting::getSettings()->slack_endpoint;
+        $this->endpoint = Setting::getSettings()->slack_endpoint;
         return $this->endpoint;
     }
-
-
-    /**
-     * Get assets assigned to this user
-     */
-    public function assets()
-    {
-        return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
-    }
-
-    /**
-     * Get assets assigned to this user
-     */
-    public function assetmaintenances()
-    {
-        return $this->hasMany('\App\Models\AssetMaintenance', 'user_id')->withTrashed();
-    }
-
-    /**
-     * Get accessories assigned to this user
-     */
-    public function accessories()
-    {
-        return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')->withPivot('id')->withTrashed();
-    }
-
-    /**
-     * Get consumables assigned to this user
-     */
-    public function consumables()
-    {
-        return $this->belongsToMany('\App\Models\Consumable', 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id')->withTrashed();
-    }
-
-    /**
-     * Get licenses assigned to this user
-     */
-    public function licenses()
-    {
-        return $this->belongsToMany('\App\Models\License', 'license_seats', 'assigned_to', 'license_id')->withPivot('id');
-    }
-
-    /**
-     * Get action logs for this user
-     */
-    public function userlog()
-    {
-        return $this->hasMany('\App\Models\Actionlog', 'target_id')->orderBy('created_at', 'DESC')->withTrashed();
-    }
-
-    /**
-     * Get the asset's location based on the assigned user
-     * @todo - this should be removed once we're sure we've switched it
-     * to location()
-     **/
-    public function userloc()
-    {
-        return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
-    }
-
-    /**
-     * Get the asset's location based on the assigned user
-     **/
-    public function location()
-    {
-        return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
-    }
-
-    /**
-     * Get the user's manager based on the assigned user
-     **/
-    public function manager()
-    {
-        return $this->belongsTo('\App\Models\User', 'manager_id')->withTrashed();
-    }
-
-    /**
-     * Get any locations the user manages.
-     **/
-    public function managedLocations()
-    {
-        return $this->hasMany('\App\Models\Location', 'manager_id')->withTrashed();
-    }
-
-    /**
-     * Get user groups
-     */
-    public function groups()
-    {
-        return $this->belongsToMany('\App\Models\Group', 'users_groups');
-    }
-
 
     public function accountStatus()
     {
         if ($this->throttle) {
             if ($this->throttle->suspended==1) {
                 return 'suspended';
-            } elseif ($this->throttle->banned==1) {
-                return 'banned';
-            } else {
-                return false;
             }
-        } else {
-            return false;
+            if ($this->throttle->banned==1) {
+                return 'banned';
+            }
         }
-    }
-
-    public function assetlog()
-    {
-        return $this->hasMany('\App\Models\Asset', 'id')->withTrashed();
-    }
-
-    /**
-     * Get uploads for this asset
-     */
-    public function uploads()
-    {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
-            ->where('item_type', User::class)
-            ->where('action_type', '=', 'uploaded')
-            ->whereNotNull('filename')
-            ->orderBy('created_at', 'desc');
-    }
-
-    /**
-     * Fetch Items User has requested
-     */
-    public function checkoutRequests()
-    {
-        return $this->belongsToMany(Asset::class, 'checkout_requests', 'user_id', 'requestable_id')->whereNull('canceled_at');
-    }
-
-    public function throttle()
-    {
-        return $this->hasOne('\App\Models\Throttle');
-    }
-
-    public function scopeGetDeleted($query)
-    {
-        return $query->withTrashed()->whereNotNull('deleted_at');
-    }
-
-    public function scopeGetNotDeleted($query)
-    {
-        return $query->whereNull('deleted_at');
-    }
-
-    public function scopeMatchEmailOrUsername($query, $user_username, $user_email)
-    {
-        return $query->where('email', '=', $user_email)
-            ->orWhere('username', '=', $user_username)
-            ->orWhere('username', '=', $user_email);
+        return false;
     }
 
     public static function generateEmailFromFullName($name)
@@ -389,8 +240,8 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         $user['username'] = strtolower($username);
         return $user;
 
-
     }
+
 
     /**
      * Check whether two-factor authorization is required and the user has activated it
@@ -451,6 +302,23 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     public function scopeDeleted($query)
     {
         return $query->whereNotNull('deleted_at');
+    }
+
+    public function scopeGetDeleted($query)
+    {
+        return $query->withTrashed()->whereNotNull('deleted_at');
+    }
+
+    public function scopeGetNotDeleted($query)
+    {
+        return $query->whereNull('deleted_at');
+    }
+
+    public function scopeMatchEmailOrUsername($query, $user_username, $user_email)
+    {
+        return $query->where('email', '=', $user_email)
+            ->orWhere('username', '=', $user_username)
+            ->orWhere('username', '=', $user_email);
     }
 
 

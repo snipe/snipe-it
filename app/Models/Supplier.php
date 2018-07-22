@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Relationships\SupplierRelationships;
 use App\Models\SnipeModel;
 use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
@@ -40,6 +41,7 @@ class Supplier extends SnipeModel
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     use UniqueUndeletedTrait;
+    use SupplierRelationships;
 
     use Searchable;
     
@@ -66,36 +68,6 @@ class Supplier extends SnipeModel
     protected $fillable = ['name','address','address2','city','state','country','zip','phone','fax','email','contact','url','notes'];
 
 
-    // Eager load counts.
-    // We do this to eager load the "count" of seats from the controller.  Otherwise calling "count()" on each model results in n+1
-    public function assetsRelation()
-    {
-        return $this->hasMany(Asset::class)->whereNull('deleted_at')->selectRaw('supplier_id, count(*) as count')->groupBy('supplier_id');
-    }
-
-    public function getLicenseSeatsCountAttribute()
-    {
-        if ($this->licenseSeatsRelation->first()) {
-            return $this->licenseSeatsRelation->first()->count;
-        }
-
-        return 0;
-    }
-    public function assets()
-    {
-        return $this->hasMany('\App\Models\Asset', 'supplier_id');
-    }
-
-    public function accessories()
-    {
-        return $this->hasMany('\App\Models\Accessory', 'supplier_id');
-    }
-
-    public function asset_maintenances()
-    {
-        return $this->hasMany('\App\Models\AssetMaintenance', 'supplier_id');
-    }
-
     public function num_assets()
     {
         if ($this->assetsRelation->first()) {
@@ -103,11 +75,6 @@ class Supplier extends SnipeModel
         }
 
         return 0;
-    }
-
-    public function licenses()
-    {
-        return $this->hasMany('\App\Models\License', 'supplier_id');
     }
 
     public function num_licenses()

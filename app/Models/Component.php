@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Models\Relationships\ComponentRelationships;
+use App\Models\Traits\CompanyableTrait;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +19,7 @@ class Component extends SnipeModel
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
+    use ComponentRelationships;
 
     protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'components';
@@ -87,40 +90,6 @@ class Component extends SnipeModel
         'company'      => ['name'],
         'location'     => ['name'],
     ];      
-
-    public function location()
-    {
-        return $this->belongsTo('\App\Models\Location', 'location_id');
-    }
-
-    public function assets()
-    {
-        return $this->belongsToMany('\App\Models\Asset', 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'user_id');
-    }
-
-    public function admin()
-    {
-        return $this->belongsTo('\App\Models\User', 'user_id');
-    }
-
-    public function company()
-    {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
-    }
-
-
-    public function category()
-    {
-        return $this->belongsTo('\App\Models\Category', 'category_id');
-    }
-
-    /**
-    * Get action logs for this consumable
-    */
-    public function assetlog()
-    {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Component::class)->orderBy('created_at', 'desc')->withTrashed();
-    }
 
 
     public function numRemaining()

@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Models\Relationships\ConsumableRelationships;
+use App\Models\Traits\CompanyableTrait;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,6 +15,7 @@ class Consumable extends SnipeModel
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
+    use ConsumableRelationships;
 
     protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'consumables';
@@ -99,61 +102,12 @@ class Consumable extends SnipeModel
         return;
     }
 
-    public function admin()
-    {
-        return $this->belongsTo('\App\Models\User', 'user_id');
-    }
-
-    public function consumableAssignments()
-    {
-        return $this->hasMany('\App\Models\ConsumableAssignment');
-    }
-
-    public function company()
-    {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
-    }
-
-    public function manufacturer()
-    {
-        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
-    }
-
-    public function location()
-    {
-        return $this->belongsTo('\App\Models\Location', 'location_id');
-    }
-
-    public function category()
-    {
-        return $this->belongsTo('\App\Models\Category', 'category_id');
-    }
-
-    /**
-    * Get action logs for this consumable
-    */
-    public function assetlog()
-    {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Consumable::class)->orderBy('created_at', 'desc')->withTrashed();
-    }
-
     public function getImageUrl() {
         if ($this->image) {
             return url('/').'/uploads/consumables/'.$this->image;
         }
         return false;
 
-    }
-
-
-    public function users()
-    {
-        return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
-    }
-
-    public function hasUsers()
-    {
-        return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->count();
     }
 
     public function checkin_email()

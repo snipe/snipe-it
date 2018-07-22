@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Models\Relationships\AccessoryRelationships;
+use App\Models\Traits\CompanyableTrait;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,6 +20,7 @@ class Accessory extends SnipeModel
     protected $presenter = 'App\Presenters\AccessoryPresenter';
     use CompanyableTrait;
     use Loggable, Presentable;
+    use AccessoryRelationships;
     use SoftDeletes;
 
     protected $dates = ['deleted_at', 'purchase_date'];
@@ -100,14 +103,6 @@ class Accessory extends SnipeModel
     ];
 
 
-
-
-    public function supplier()
-    {
-        return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
-    }
-    
-
     public function setRequestableAttribute($value)
     {
         if ($value == '') {
@@ -117,28 +112,6 @@ class Accessory extends SnipeModel
         return;
     }
 
-    public function company()
-    {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
-    }
-
-    public function location()
-    {
-        return $this->belongsTo('\App\Models\Location', 'location_id');
-    }
-
-    public function category()
-    {
-        return $this->belongsTo('\App\Models\Category', 'category_id')->where('category_type', '=', 'accessory');
-    }
-
-    /**
-    * Get action logs for this accessory
-    */
-    public function assetlog()
-    {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Accessory::class)->orderBy('created_at', 'desc')->withTrashed();
-    }
 
     public function getImageUrl() {
         if ($this->image) {
@@ -148,30 +121,18 @@ class Accessory extends SnipeModel
 
     }
 
-    public function users()
-    {
-        return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id')->withTrashed();
-    }
-
-    public function hasUsers()
-    {
-        return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->count();
-    }
-
-    public function manufacturer()
-    {
-        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
-    }
 
     public function checkin_email()
     {
         return $this->category->checkin_email;
     }
 
+
     public function requireAcceptance()
     {
         return $this->category->require_acceptance;
     }
+
 
     public function getEula()
     {
@@ -186,6 +147,7 @@ class Accessory extends SnipeModel
             return null;
     }
 
+
     public function numRemaining()
     {
         $checkedout = $this->users->count();
@@ -193,6 +155,7 @@ class Accessory extends SnipeModel
         $remaining = $total - $checkedout;
         return $remaining;
     }
+
 
     /**
     * Query builder scope to order on company

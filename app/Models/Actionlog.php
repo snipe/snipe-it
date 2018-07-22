@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+use App\Models\Relationships\ActionlogRelationships;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,7 @@ class Actionlog extends SnipeModel
     protected $presenter = "App\Presenters\ActionlogPresenter";
     use SoftDeletes;
     use Presentable;
+    use ActionlogRelationships;
     protected $dates = [ 'deleted_at' ];
 
     protected $table      = 'action_logs';
@@ -60,16 +62,6 @@ class Actionlog extends SnipeModel
             }
         });
     }
-    // Eloquent Relationships below
-    public function item()
-    {
-        return $this->morphTo('item')->withTrashed();
-    }
-
-    public function company()
-    {
-        return $this->hasMany('\App\Models\Company', 'id', 'company_id');
-    }
 
     public function itemType()
     {
@@ -107,45 +99,6 @@ class Actionlog extends SnipeModel
         return $itemroute;
     }
 
-
-
-
-    public function uploads()
-    {
-        return $this->morphTo('item')
-                    ->where('action_type', '=', 'uploaded')
-                    ->withTrashed();
-    }
-
-    public function userlog()
-    {
-        return $this->target();
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id')
-                    ->withTrashed();
-    }
-
-    public function target()
-    {
-        return $this->morphTo('target')->withTrashed();
-    }
-
-    public function childlogs()
-    {
-        return $this->hasMany('\App\Models\ActionLog', 'thread_id');
-    }
-
-    public function parentlog()
-    {
-        return $this->belongsTo('\App\Models\ActionLog', 'thread_id');
-    }
-
-    public function location() {
-        return $this->belongsTo('\App\Models\Location', 'location_id' )->withTrashed();
-    }
 
     /**
        * Check if the file exists, and if it does, force a download

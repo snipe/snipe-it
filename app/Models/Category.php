@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Relationships\CategoryRelationships;
 use App\Models\SnipeModel;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
@@ -22,6 +23,7 @@ class Category extends SnipeModel
     protected $presenter = 'App\Presenters\CategoryPresenter';
     use Presentable;
     use SoftDeletes;
+    use CategoryRelationships;
     protected $dates = ['deleted_at'];
     protected $table = 'categories';
     protected $hidden = ['user_id','deleted_at'];
@@ -80,30 +82,6 @@ class Category extends SnipeModel
      */
     protected $searchableRelations = [];
 
-    public function has_models()
-    {
-        return $this->hasMany('\App\Models\AssetModel', 'category_id')->count();
-    }
-
-    public function accessories()
-    {
-        return $this->hasMany('\App\Models\Accessory');
-    }
-
-    public function licenses()
-    {
-        return $this->hasMany('\App\Models\License');
-    }
-
-    public function consumables()
-    {
-        return $this->hasMany('\App\Models\Consumable');
-    }
-
-    public function components()
-    {
-        return $this->hasMany('\App\Models\Component');
-    }
 
     public function itemCount()
     {
@@ -118,16 +96,6 @@ class Category extends SnipeModel
                 return $this->consumables()->count();
         }
         return '0';
-    }
-
-    public function assets()
-    {
-        return $this->hasManyThrough('\App\Models\Asset', '\App\Models\AssetModel', 'category_id', 'model_id');
-    }
-
-    public function models()
-    {
-        return $this->hasMany('\App\Models\AssetModel', 'category_id');
     }
 
     public function getEula()

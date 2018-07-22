@@ -5,7 +5,11 @@ use App\Models\Actionlog;
 use App\Models\Company;
 use App\Models\LicenseSeat;
 use App\Models\Loggable;
+use App\Models\Relationships\LicenseRelationships;
+use App\Models\Traits\CompanyableTrait;
 use App\Models\Traits\Searchable;
+use App\Notifications\CheckinLicenseNotification;
+use App\Notifications\CheckoutLicenseNotification;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
 use DB;
@@ -27,7 +31,7 @@ class License extends Depreciable
 
     use SoftDeletes;
     use CompanyableTrait;
-    use Loggable, Presentable;
+    use Loggable, Presentable, LicenseRelationships;
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
@@ -211,21 +215,6 @@ class License extends Depreciable
         $this->attributes['termination_date'] = $value;
     }
 
-    public function company()
-    {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
-    }
-
-    public function category()
-    {
-        return $this->belongsTo('\App\Models\Category', 'category_id');
-    }
-
-    public function manufacturer()
-    {
-        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
-    }
-
     public function checkin_email()
     {
         return $this->category->checkin_email;
@@ -244,74 +233,8 @@ class License extends Depreciable
             return $Parsedown->text(e($this->category->eula_text));
         } elseif ($this->category->use_default_eula == '1') {
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
-        } else {
-            return false;
         }
-    }
-
-    /**
-     * Get the assigned user
-     */
-    public function assignedusers()
-    {
-        return $this->belongsToMany('\App\Models\User', 'license_seats', 'assigned_to', 'license_id');
-    }
-
-    /**
-    * Get asset logs for this asset
-    */
-    public function assetlog()
-    {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
-            ->where('item_type', '=', License::class)
-            ->orderBy('created_at', 'desc');
-    }
-
-    /**
-    * Get uploads for this asset
-    */
-    public function uploads()
-    {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
-            ->where('item_type', '=', License::class)
-            ->where('action_type', '=', 'uploaded')
-            ->whereNotNull('filename')
-            ->orderBy('created_at', 'desc');
-    }
-
-
-    /**
-    * Get admin user for this asset
-    */
-    public function adminuser()
-    {
-        return $this->belongsTo('\App\Models\User', 'user_id');
-    }
-
-    /**
-    * Get total licenses
-    */
-    public static function assetcount()
-    {
-        return LicenseSeat::whereNull('deleted_at')
-                   ->count();
-    }
-
-
-    /**
-    * Get total licenses
-    */
-    public function totalSeatsByLicenseID()
-    {
-        return LicenseSeat::where('license_id', '=', $this->id)
-                   ->whereNull('deleted_at')
-                   ->count();
-    }
-
-    // We do this to eager load the "count" of seats from the controller.  Otherwise calling "count()" on each model results in n+1
-    public function licenseSeatsRelation()
-    {
-        return $this->hasMany(LicenseSeat::class)->whereNull('deleted_at')->selectRaw('license_id, count(*) as count')->groupBy('license_id');
+        return false;
     }
 
     public function getLicenseSeatsCountAttribute()
@@ -323,27 +246,6 @@ class License extends Depreciable
         return 0;
     }
 
-    /**
-    * Get total licenses not checked out
-    */
-    public static function availassetcount()
-    {
-        return LicenseSeat::whereNull('assigned_to')
-                   ->whereNull('asset_id')
-                   ->whereNull('deleted_at')
-                   ->count();
-    }
-
-    /**
-     * Get the number of available seats
-     */
-    public function availCount()
-    {
-        return $this->licenseSeatsRelation()
-            ->whereNull('asset_id')
-            ->whereNull('assigned_to')
-            ->whereNull('deleted_at');
-    }
 
     public function getAvailSeatsCountAttribute()
     {
@@ -352,18 +254,6 @@ class License extends Depreciable
         }
 
         return 0;
-    }
-
-    /**
-     * Get the number of assigned seats
-     *
-     */
-    public function assignedCount()
-    {
-        return $this->licenseSeatsRelation()->where(function ($query) {
-            $query->whereNotNull('assigned_to')
-            ->orWhereNotNull('asset_id');
-        });
     }
 
     public function getAssignedSeatsCountAttribute()
@@ -395,19 +285,6 @@ class License extends Depreciable
         return $diff;
     }
 
-    /**
-     * Get license seat data
-     */
-    public function licenseseats()
-    {
-        return $this->hasMany('\App\Models\LicenseSeat');
-    }
-
-    public function supplier()
-    {
-        return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
-    }
-
     /*
      * Get the next available free seat - used by
      * the API to populate next_seat
@@ -422,15 +299,6 @@ class License extends Depreciable
                     })
                     ->orderBy('id', 'asc')
                     ->first();
-    }
-
-    /*
-   * Get the next available free seat - used by
-   * the API to populate next_seat
-   */
-    public function freeSeats()
-    {
-        return $this->hasMany('\App\Models\LicenseSeat')->whereNull('assigned_to')->whereNull('deleted_at')->whereNull('asset_id');
     }
 
     public static function getExpiringLicenses($days = 60)
