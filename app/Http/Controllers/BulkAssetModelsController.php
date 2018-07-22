@@ -41,16 +41,12 @@ class BulkAssetModelsController extends Controller
                 return view('models/bulk-delete', compact('models'))->with('valid_count', $valid_count);
 
             // Otherwise display the bulk edit screen
-            } else {
-
-                $nochange = ['NC' => 'No Change'];
-                $fieldset_list = $nochange + Helper::customFieldsetList();
-                $depreciation_list = $nochange + Helper::depreciationList();
-
-                return view('models/bulk-edit', compact('models'))
-                    ->with('fieldset_list', $fieldset_list)
-                    ->with('depreciation_list', $depreciation_list);
             }
+
+            $nochange = ['NC' => 'No Change'];
+            return view('models/bulk-edit', compact('models'))
+                ->with('fieldset_list', $nochange + Helper::customFieldsetList())
+                ->with('depreciation_list', $nochange + Helper::depreciationList());
         }
 
         return redirect()->route('models.index')
@@ -103,10 +99,9 @@ class BulkAssetModelsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @param Request $request
      * @return Redirect
      */
-    public function destroy(Request $request)
+    public function destroy()
     {
         $models_raw_array = Input::get('ids');
 

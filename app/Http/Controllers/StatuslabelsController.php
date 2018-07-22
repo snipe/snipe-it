@@ -53,7 +53,7 @@ class StatuslabelsController extends Controller
         return view('statuslabels/edit')
             ->with('item', new Statuslabel)
             ->with('statuslabel_types', Helper::statusTypeList())
-            ->with('use_statuslabel_type', $item->getStatuslabelType());
+            ->with('use_statuslabel_type', (new Statuslabel)->getStatuslabelType());
     }
 
 

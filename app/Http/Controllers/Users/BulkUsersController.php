@@ -58,68 +58,71 @@ class BulkUsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        if (($request->has('ids')) && (count($request->input('ids')) > 0)) {
+        if((!$request->has('ids')) || $request->input('ids') <= 0) {
+            return redirect()->back()->with('error', 'No users selected');
+        }
+        $user_raw_array = $request->input('ids');
 
-            $user_raw_array = $request->input('ids');
-            $update_array = array();
-            $manager_conflict = false;
-            $users = User::whereIn('id', $user_raw_array)->where('id', '!=', Auth::user()->id)->get();
+        // Remove the user from any updates.
+        $user_raw_array = array_diff($user_raw_array, [Auth::id()]);
+        $manager_conflict = false;
+        $users = User::whereIn('id', $user_raw_array)->where('id', '!=', Auth::user()->id)->get();
 
-            if ($request->has('location_id')) {
-                $update_array['location_id'] = $request->input('location_id');
-            }
-            if ($request->has('department_id')) {
-                $update_array['department_id'] = $request->input('department_id');
-            }
-            if ($request->has('company_id')) {
-                $update_array['company_id'] = $request->input('company_id');
-            }
-            if ($request->has('locale')) {
-                $update_array['locale'] = $request->input('locale');
-            }
+        $return_array = [
+            'success' => trans('admin/users/message.success.update_bulk')
+        ];
 
 
-            if ($request->has('manager_id')) {
-
-                // Do not allow a manager update if the selected manager is one of the users being
-                // edited.
-                if (!array_key_exists($request->input('manager_id'), $user_raw_array)) {
-                    $update_array['manager_id'] = $request->input('manager_id');
-                } else {
-                    $manager_conflict = true;
-                }
-
-            }
-            if ($request->has('activated')) {
-                $update_array['activated'] = $request->input('activated');
-            }
-
-            // Save the updated info
-            if (count($update_array) > 0) {
-                User::whereIn('id', $user_raw_array)->where('id', '!=', Auth::user()->id)->update($update_array);
-            }
-
-            // Only sync groups if groups were selected
-            if ($request->has('groups')) {
-                foreach ($users as $user) {
-                    $user->groups()->sync($request->input('groups'));
-                }
-            }
-
-            // The users will be updated with everything but the manager.  This might be unintuitive and may need to be rethought
-            if ($manager_conflict) {
-                return redirect()->route('users.index')
-                    ->with('warning', trans('admin/users/message.bulk_manager_warn'));
-            }
-
-            return redirect()->route('users.index')
-                ->with('success', trans('admin/users/message.success.update_bulk'));
+        $this->conditionallyAddItem('location_id')
+            ->conditionallyAddItem('department_id')
+            ->conditionallyAddItem('company_id')
+            ->conditionallyAddItem('locale')
+            ->conditionallyAddItem('activated')
+;
+        // If the manager_id is one of the users being updated, generate a warning.
+        if (array_search($request->input('manager_id'), $user_raw_array)) {
+            $manager_conflict = true;
+            $return_array = [
+                'warning' => trans('admin/users/message.bulk_manager_warn')
+            ];
+        }
+        if (!$manager_conflict) {
+            $this->conditionallyAddItem('manager_id');
         }
 
-        return redirect()->back()->with('error', 'No users selected');
 
+        // Save the updated info
+        User::whereIn('id', $user_raw_array)
+            ->where('id', '!=', Auth::id())->update($this->update_array);
 
+        // Only sync groups if groups were selected
+        if ($request->has('groups')) {
+            foreach ($users as $user) {
+                $user->groups()->sync($request->input('groups'));
+            }
+        }
 
+        return redirect()->route('users.index')
+            ->with($return_array);
+    }
+
+    /**
+     * Array to store update data per item
+     * @var Array
+     */
+    private $update_array = [];
+
+    /**
+     * Adds parameter to update array for an item if it exists in request
+     * @param  String $field field name
+     * @return BulkUsersController Model for Chaining
+     */
+    protected function conditionallyAddItem($field)
+    {
+        if(request()->has($field)) {
+            $this->update_array[$field] = request()->input($field);
+        }
+        return $this;
     }
 
     /**

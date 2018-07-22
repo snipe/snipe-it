@@ -124,7 +124,7 @@ class ConsumablesController extends Controller
      * @see ConsumablesController::getEdit() method that stores the form data.
      * @since [v1.0]
      */
-    public function update(ImageUploadRequest $request,  $consumableId = null)
+    public function update(ImageUploadRequest $request, $consumableId = null)
     {
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
@@ -190,7 +190,8 @@ class ConsumablesController extends Controller
         if (isset($consumable->id)) {
             return view('consumables/view', compact('consumable'));
         }
-        return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist', compact('id')));
+        return redirect()->route('consumables.index')
+            ->with('error', trans('admin/consumables/message.does_not_exist', compact('consumableId')));
     }
 
 }

@@ -6,20 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Accessory;
 use App\Models\Company;
-use App\Models\User;
-use Auth;
-use Carbon\Carbon;
-use Config;
-use DB;
-use Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Image;
-use Input;
-use Lang;
 use Redirect;
-use Slack;
-use Str;
-use View;
 
 /** This controller handles all actions related to Accessories for
  * the Snipe-IT Asset Management application.
@@ -29,28 +18,30 @@ use View;
 class AccessoriesController extends Controller
 {
     /**
-    * Returns a view that invokes the ajax tables which actually contains
-    * the content for the accessories listing, which is generated in getDatatable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see AccessoriesController::getDatatable() method that generates the JSON response
-    * @since [v1.0]
-    * @return View
-    */
-    public function index(Request $request)
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the accessories listing, which is generated in getDatatable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see AccessoriesController::getDatatable() method that generates the JSON response
+     * @since [v1.0]
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function index()
     {
         $this->authorize('index', Accessory::class);
         return view('accessories/index');
     }
 
 
-  /**
-   * Returns a view with a form to create a new Accessory.
-   *
-   * @author [A. Gianotto] [<snipe@snipe.net>]
-   * @return View
-   */
-    public function create(Request $request)
+    /**
+     * Returns a view with a form to create a new Accessory.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function create()
     {
         $this->authorize('create', Accessory::class);
         $category_type = 'accessory';
@@ -59,12 +50,14 @@ class AccessoriesController extends Controller
     }
 
 
-  /**
-   * Validate and save new Accessory from form post
-   *
-   * @author [A. Gianotto] [<snipe@snipe.net>]
-   * @return Redirect
-   */
+    /**
+     * Validate and save new Accessory from form post
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param ImageUploadRequest $request
+     * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function store(ImageUploadRequest $request)
     {
         $this->authorize(Accessory::class);
@@ -96,14 +89,15 @@ class AccessoriesController extends Controller
         return redirect()->back()->withInput()->withErrors($accessory->getErrors());
     }
 
-  /**
-   * Return view for the Accessory update form, prepopulated with existing data
-   *
-   * @author [A. Gianotto] [<snipe@snipe.net>]
-   * @param  int  $accessoryId
-   * @return View
-   */
-    public function edit(Request $request, $accessoryId = null)
+    /**
+     * Return view for the Accessory update form, prepopulated with existing data
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $accessoryId
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function edit($accessoryId = null)
     {
 
         if ($item = Accessory::find($accessoryId)) {
@@ -116,13 +110,15 @@ class AccessoriesController extends Controller
     }
 
 
-  /**
-   * Save edited Accessory from form post
-   *
-   * @author [A. Gianotto] [<snipe@snipe.net>]
-   * @param  int  $accessoryId
-   * @return Redirect
-   */
+    /**
+     * Save edited Accessory from form post
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param ImageUploadRequest $request
+     * @param  int $accessoryId
+     * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(ImageUploadRequest $request, $accessoryId = null)
     {
         if (is_null($accessory = Accessory::find($accessoryId))) {
@@ -154,14 +150,15 @@ class AccessoriesController extends Controller
         return redirect()->back()->withInput()->withErrors($accessory->getErrors());
     }
 
-  /**
-   * Delete the given accessory.
-   *
-   * @author [A. Gianotto] [<snipe@snipe.net>]
-   * @param  int  $accessoryId
-   * @return Redirect
-   */
-    public function destroy(Request $request, $accessoryId)
+    /**
+     * Delete the given accessory.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $accessoryId
+     * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy($accessoryId)
     {
         if (is_null($accessory = Accessory::find($accessoryId))) {
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
@@ -178,24 +175,24 @@ class AccessoriesController extends Controller
     }
 
 
-
-  /**
-  * Returns a view that invokes the ajax table which  contains
-  * the content for the accessory detail view, which is generated in getDataView.
-  *
-  * @author [A. Gianotto] [<snipe@snipe.net>]
-  * @param  int  $accessoryID
-  * @see AccessoriesController::getDataView() method that generates the JSON response
-  * @since [v1.0]
-  * @return View
-  */
-    public function show(Request $request, $accessoryID = null)
+    /**
+     * Returns a view that invokes the ajax table which  contains
+     * the content for the accessory detail view, which is generated in getDataView.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $accessoryID
+     * @see AccessoriesController::getDataView() method that generates the JSON response
+     * @since [v1.0]
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function show($accessoryID = null)
     {
         $accessory = Accessory::find($accessoryID);
         $this->authorize('view', $accessory);
         if (isset($accessory->id)) {
             return view('accessories/view', compact('accessory'));
         }
-        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist', compact('id')));
+        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist', compact('accessoryID')));
     }
 }

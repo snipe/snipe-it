@@ -423,7 +423,7 @@ class UsersController extends Controller
         if(!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
             // Redirect to the user management page
             return redirect()->route('users.index')
-                ->with('error', trans('admin/users/message.user_not_found', compact('id')));
+                ->with('error', trans('admin/users/message.user_not_found', compact('userId')));
         }
 
         $userlog = $user->userlog->load('item');

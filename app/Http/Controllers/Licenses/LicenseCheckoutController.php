@@ -58,6 +58,7 @@ class LicenseCheckoutController extends Controller
 
         // Check that the license is valid
         if ($license = License::where('id',$licenseId)->first()) {
+            $this->authorize('checkout', $license);
 
             // If the license is valid, check that there is an available seat
             if ($license->avail_seats_count < 1) {
@@ -72,28 +73,19 @@ class LicenseCheckoutController extends Controller
             }
 
             if (!$licenseSeat) {
-                // Get the next available seat for this license
-                $next = $license->freeSeat();
-
-                if (!$next) {
-                    return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
-                }
-
-                if (!$licenseSeat = LicenseSeat::where('id', '=', $next->id)->first()) {
-                    return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
+               if (!$licenseSeat = $license->freeSeat()) {
+                return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
                 }
             }
 
             $this->authorize('checkout', $license);
 
             // Declare the rules for the form validation
-            $rules = [
+            // Create a new validator instance from our validation rules
+            $validator = Validator::make(Input::all(), [
                 'note'   => 'string|nullable',
                 'asset_id'  => 'required_without:assigned_to',
-            ];
-
-            // Create a new validator instance from our validation rules
-            $validator = Validator::make(Input::all(), $rules);
+            ]);
 
             // If validation fails, we'll exit the operation now.
             if ($validator->fails()) {
@@ -115,7 +107,7 @@ class LicenseCheckoutController extends Controller
                     $licenseSeat->assigned_to =  $target->assigned_to;
                 }
 
-            } else {
+            } elseif (request('checkout_to_type')=='user') {
 
                 // Fetch the target and set the license user
                 if (is_null($target = User::find(request('assigned_to')))) {
@@ -125,7 +117,6 @@ class LicenseCheckoutController extends Controller
             }
 
             $licenseSeat->user_id = Auth::id();
-
 
             if ($licenseSeat->save()) {
                 $licenseSeat->logCheckout($request->input('note'), $target);

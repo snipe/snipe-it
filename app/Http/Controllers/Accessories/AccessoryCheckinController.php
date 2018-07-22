@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Input;
 
 class AccessoryCheckinController extends Controller
 {
-        /**
+    /**
      * Check the accessory back into inventory
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -20,8 +20,9 @@ class AccessoryCheckinController extends Controller
      * @param string $backto
      * @return View
      * @internal param int $accessoryId
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create(Request $request, $accessoryUserId = null, $backto = null)
+    public function create($accessoryUserId = null, $backto = null)
     {
         // Check if the accessory exists
         if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
@@ -39,13 +40,13 @@ class AccessoryCheckinController extends Controller
      *
      * @uses Accessory::checkin_email() to determine if an email can and should be sent
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param Request $request
-     * @param integer $accessoryUserId
+     * @param null $accessoryUserId
      * @param string $backto
      * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @internal param int $accessoryId
      */
-    public function store(Request $request, $accessoryUserId = null, $backto = null)
+    public function store($accessoryUserId = null, $backto = null)
     {
       // Check if the accessory exists
         if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {

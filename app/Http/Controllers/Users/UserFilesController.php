@@ -92,7 +92,7 @@ class UserFilesController extends Controller
             return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
         }
         // Prepare the error message
-        $error = trans('admin/users/message.does_not_exist', compact('id'));
+        $error = trans('admin/users/message.does_not_exist', compact('userId'));
         // Redirect to the licence management page
         return redirect()->route('users.index')->with('error', $error);
 

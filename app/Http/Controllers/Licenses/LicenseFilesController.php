@@ -34,7 +34,7 @@ class LicenseFilesController extends Controller
             $this->authorize('update', $license);
 
             if (Input::hasFile('file')) {
-
+                $upload_success = false;
                 foreach (Input::file('file') as $file) {
                     $extension = $file->getClientOriginalExtension();
                     $filename = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
@@ -55,8 +55,8 @@ class LicenseFilesController extends Controller
             return redirect()->route('licenses.show', $license->id)->with('error', trans('admin/licenses/message.upload.nofiles'));
         }
         // Prepare the error message
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-        return redirect()->route('licenses.index')->with('error', $error);
+        return redirect()->route('licenses.index')
+            ->with('error', trans('admin/licenses/message.does_not_exist', compact('licenseId')));
     }
 
 
@@ -102,7 +102,7 @@ class LicenseFilesController extends Controller
      * @since [v1.4]
      * @param int $licenseId
      * @param int $fileId
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($licenseId = null, $fileId = null, $download = true)
@@ -140,7 +140,7 @@ class LicenseFilesController extends Controller
         }
 
 
-        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', compact('id')));
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', compact('licenseId')));
     }
 
 

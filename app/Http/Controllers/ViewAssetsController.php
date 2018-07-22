@@ -38,7 +38,7 @@ class ViewAssetsController extends Controller
             'licenses',
             'userloc',
             'userlog'
-        )->withTrashed()->find(Auth::user()->id);
+        )->withTrashed()->find(Auth::id());
 
 
         $userlog = $user->userlog->load('item', 'user', 'target');
@@ -48,7 +48,7 @@ class ViewAssetsController extends Controller
         }
         // Redirect to the user management page
         return redirect()->route('users.index')
-            ->with('error', trans('admin/users/message.user_not_found', compact('id')));
+            ->with('error', trans('admin/users/message.user_not_found', $user->id));
 
     }
 
