@@ -87,7 +87,7 @@ class LicenseFilesController extends Controller
             return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
         }
         // Prepare the error message
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
+        $error = trans('admin/licenses/message.does_not_exist', compact('licenseId'));
 
         // Redirect to the licence management page
         return redirect()->route('licenses.index')->with('error', $error);
