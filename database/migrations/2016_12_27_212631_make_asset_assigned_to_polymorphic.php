@@ -19,8 +19,18 @@ class MakeAssetAssignedToPolymorphic extends Migration
              $table->string('assigned_type')->nullable();
          });
 
-        // Prior to this migration, asset's could only be assigned to users.
-        Asset::whereNotNull('assigned_to')->orWhere('assigned_to', '!=', null)->update(['assigned_type' => User::class]);
+        // Prior to this migration, asset's could only be assigned to users
+        switch($database = config('database.default')) {
+            case 'mysql':
+                // In mysql int may be empty
+                Asset::whereNotNull('assigned_to')->orWhere('assigned_to', '!=', '')->update(['assigned_type' => User::class]);
+                break;
+            case 'pgsql':
+                Asset::whereNotNull('assigned_to')->update(['assigned_type' => User::class]);
+                break;
+            default:
+                throw new Exception('Unsupported database: '. $database);
+        }
     }
 
     /**
