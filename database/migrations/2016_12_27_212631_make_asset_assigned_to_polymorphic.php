@@ -21,6 +21,7 @@ class MakeAssetAssignedToPolymorphic extends Migration
 
         // Prior to this migration, asset's could only be assigned to users
         switch($database = config('database.default')) {
+            case 'sqlite_testing':
             case 'mysql':
                 // In mysql int may be empty
                 Asset::whereNotNull('assigned_to')->orWhere('assigned_to', '!=', '')->update(['assigned_type' => User::class]);
