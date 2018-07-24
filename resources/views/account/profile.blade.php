@@ -37,17 +37,27 @@
         </div>
 
 
+        @can('self.edit_location')
         <!-- Location -->
         @include ('partials.forms.edit.location-profile-select', ['translated_name' => trans('general.location')])
+        @endcan
+
 
         <!-- Language -->
         <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
           <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
           <div class="col-md-9">
-            {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
-            {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
+
+            @if (!config('app.lock_passwords'))
+              {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
+              {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
+            @else
+              <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+            @endif
+
           </div>
         </div>
+
 
 
         <!-- Website URL -->

@@ -112,7 +112,7 @@ class UsersController extends Controller
         $user->last_name = $request->input('last_name');
         $user->locale = $request->input('locale');
         $user->employee_num = $request->input('employee_num');
-        $user->activated = $request->input('activated', $user->activated);
+        $user->activated = $request->input('activated', 0);
         $user->jobtitle = $request->input('jobtitle');
         $user->phone = $request->input('phone');
         $user->location_id = $request->input('location_id', null);
@@ -247,9 +247,10 @@ class UsersController extends Controller
                 }
             }
 
-        } catch (UserNotFoundException $e) {
-            $error = trans('admin/users/message.user_not_found', compact('id'));
-            return redirect()->route('users.index')->with('error', $error);
+
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('users.index')
+                ->with('error', trans('admin/users/message.user_not_found', compact('id')));
         }
 
 
@@ -257,8 +258,6 @@ class UsersController extends Controller
         if (Auth::user()->isSuperUser()) {
             if ($request->has('groups')) {
                 $user->groups()->sync($request->input('groups'));
-            } else {
-                $user->groups()->sync(array());
             }
         }
 
