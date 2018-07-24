@@ -169,7 +169,11 @@ class SettingsController extends Controller
         $settings->alerts_enabled = 1;
         $settings->pwd_secure_min = 10;
         $settings->brand = 1;
-        $settings->locale = $request->input('locale', 'en');
+
+        if (!config('app.lock_passwords')) {
+            $settings->locale = $request->input('locale', 'en');
+        }
+
         $settings->default_currency = $request->input('default_currency', "USD");
         $settings->user_id = 1;
         $settings->email_domain = $request->input('email_domain');

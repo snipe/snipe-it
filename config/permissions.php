@@ -571,6 +571,13 @@ return array(
             'display'    => true,
         ),
 
+        array(
+            'permission' => 'self.edit_location',
+            'label'      => 'Profile Edit Location',
+            'note'       => 'The user may update their own location in their profile. Note that this is not affected by any additional Users permissions you grant to this user or group.',
+            'display'    => true,
+        ),
+
     ),
 
 
