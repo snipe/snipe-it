@@ -791,25 +791,25 @@ class SettingsController extends Controller
 
 
 
-        if (Input::has('labels_display_name')) {
+        if ($request->has('labels_display_name')) {
             $setting->labels_display_name = 1;
         } else {
             $setting->labels_display_name = 0;
         }
 
-        if (Input::has('labels_display_serial')) {
+        if ($request->has('labels_display_serial')) {
             $setting->labels_display_serial = 1;
         } else {
             $setting->labels_display_serial = 0;
         }
 
-        if (Input::has('labels_display_tag')) {
+        if ($request->has('labels_display_tag')) {
             $setting->labels_display_tag = 1;
         } else {
             $setting->labels_display_tag = 0;
-	}
+	    }
 
-	 if (Input::has('labels_display_tag')) {
+	    if ($request->has('labels_display_tag')) {
              $setting->labels_display_tag = 1;
          } else {
              $setting->labels_display_tag = 0;
