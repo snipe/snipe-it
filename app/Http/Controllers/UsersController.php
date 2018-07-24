@@ -112,7 +112,7 @@ class UsersController extends Controller
         $user->last_name = $request->input('last_name');
         $user->locale = $request->input('locale');
         $user->employee_num = $request->input('employee_num');
-        $user->activated = $request->input('activated', $user->activated);
+        $user->activated = $request->input('activated', 0);
         $user->jobtitle = $request->input('jobtitle');
         $user->phone = $request->input('phone');
         $user->location_id = $request->input('location_id', null);
