@@ -82,19 +82,8 @@ class AssetCheckinController extends Controller
 
         // Was the asset updated?
         if ($asset->save()) {
-            $logaction = $asset->logCheckin($target, e(request('note')));
+            $asset->logCheckin($target, e(request('note')));
 
-            $data['log_id'] = $logaction->id;
-            $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';
-            $data['last_name'] = get_class($target) == User::class ? $target->last_name : '';
-            $data['item_name'] = $asset->present()->name();
-            $data['checkin_date'] = $logaction->created_at;
-            $data['item_tag'] = $asset->asset_tag;
-            $data['item_serial'] = $asset->serial;
-            $data['note'] = $logaction->note;
-            $data['manufacturer_name'] = $asset->model->manufacturer->name;
-            $data['model_name'] = $asset->model->name;
-            $data['model_number'] = $asset->model->model_number;
 
             if ($backto=='user') {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));

@@ -108,11 +108,10 @@ class UsersController extends Controller
         $this->authorize('create', User::class);
         $user = new User;
         //Username, email, and password need to be handled specially because the need to respect config values on an edit.
-        $user->email = $data['email'] = e($request->input('email'));
-        $user->username = $data['username'] = e($request->input('username'));
+        $user->email =  e($request->input('email'));
+        $user->username = e($request->input('username'));
         if ($request->has('password')) {
             $user->password = bcrypt($request->input('password'));
-            $data['password'] =  $request->input('password');
         }
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
@@ -423,15 +422,13 @@ class UsersController extends Controller
         if(!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
             // Redirect to the user management page
             return redirect()->route('users.index')
-                ->with('error', trans('admin/users/message.user_not_found', compact('userId')));
+                ->with('error', trans('admin/users/message.user_not_found', ['id' => $userId]));
         }
 
         $userlog = $user->userlog->load('item');
 
-        if (isset($user->id)) {
-            $this->authorize('view', $user);
-            return view('users/view', compact('user', 'userlog'));
-        }
+        $this->authorize('view', $user);
+        return view('users/view', compact('user', 'userlog'));
     }
 
     /**

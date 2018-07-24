@@ -183,6 +183,6 @@ class ComponentsController extends Controller
         }
         // Redirect to the user management page
         return redirect()->route('components.index')
-            ->with('error', trans('admin/components/message.does_not_exist', compact('componentId')));
+            ->with('error', trans('admin/components/message.does_not_exist'));
     }
 }

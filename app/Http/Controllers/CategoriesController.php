@@ -220,8 +220,8 @@ class CategoriesController extends Controller
         }
 
         // Prepare the error message
-        $error = trans('admin/categories/message.does_not_exist', compact('id'));
         // Redirect to the user management page
-        return redirect()->route('categories.index')->with('error', $error);
+        return redirect()->route('categories.index')
+            ->with('error', trans('admin/categories/message.does_not_exist'));
     }
 }

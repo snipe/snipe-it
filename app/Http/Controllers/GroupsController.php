@@ -146,19 +146,19 @@ class GroupsController extends Controller
      * the content for the group detail page.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param $groupId
+     * @param $id
      * @return \Illuminate\Contracts\View\View
      * @since [v4.0.11]
      */
-    public function show($groupId)
+    public function show($id)
     {
-        $group = Group::find($groupId);
+        $group = Group::find($id);
 
         if ($group) {
             return view('groups/view', compact('group'));
         }
 
-        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('groupId')));
+        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
     }
 
 }

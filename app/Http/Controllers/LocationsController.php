@@ -208,19 +208,19 @@ class LocationsController extends Controller
     * the content for the locations detail page.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $locationId
+    * @param int $id
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
-    public function show($locationId = null)
+    public function show($id = null)
     {
-        $location = Location::find($locationId);
+        $location = Location::find($id);
 
         if (isset($location->id)) {
             return view('locations/view', compact('location'));
         }
 
-        return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist', compact('id')));
+        return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
     }
 
 }

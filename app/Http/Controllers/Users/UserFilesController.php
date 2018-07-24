@@ -92,7 +92,7 @@ class UserFilesController extends Controller
             return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
         }
         // Prepare the error message
-        $error = trans('admin/users/message.does_not_exist', compact('userId'));
+        $error = trans('admin/users/message.user_not_found', ['id' => $userId]);
         // Redirect to the licence management page
         return redirect()->route('users.index')->with('error', $error);
 
@@ -121,7 +121,7 @@ class UserFilesController extends Controller
             return Response::download($file);
         }
         // Prepare the error message
-        $error = trans('admin/users/message.does_not_exist', compact('userId'));
+        $error = trans('admin/users/message.user_not_found', ['id' => $userId]);
 
         // Redirect to the licence management page
         return redirect()->route('users.index')->with('error', $error);

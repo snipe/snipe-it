@@ -67,15 +67,7 @@ class ConsumableCheckoutController extends Controller
             'assigned_to' => e(Input::get('assigned_to'))
         ]);
 
-        $logaction = $consumable->logCheckout(e(Input::get('note')), $user);
-        $data['log_id'] = $logaction->id;
-        $data['eula'] = $consumable->getEula();
-        $data['first_name'] = $user->first_name;
-        $data['item_name'] = $consumable->name;
-        $data['checkout_date'] = $logaction->created_at;
-        $data['note'] = $logaction->note;
-        $data['require_acceptance'] = $consumable->requireAcceptance();
-
+        $consumable->logCheckout(e(Input::get('note')), $user);
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));

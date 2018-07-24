@@ -82,7 +82,7 @@ class DepartmentsController extends Controller
         if (isset($department->id)) {
             return view('departments/view', compact('department'));
         }
-        return redirect()->route('departments.index')->with('error', trans('admin/departments/message.does_not_exist', compact('id')));
+        return redirect()->route('departments.index')->with('error', trans('admin/departments/message.does_not_exist'));
     }
 
 

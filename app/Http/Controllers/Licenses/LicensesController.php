@@ -242,7 +242,7 @@ class LicensesController extends Controller
             return view('licenses/view', compact('license'));
         }
         return redirect()->route('licenses.index')
-            ->with('error', trans('admin/licenses/message.does_not_exist', compact('licenseId')));
+            ->with('error', trans('admin/licenses/message.does_not_exist'));
     }
     
 
