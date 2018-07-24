@@ -41,7 +41,6 @@ class AccessoryImporter extends ItemImporter
         $this->log("No Matching Accessory, Creating a new one");
         $accessory = new Accessory();
         $accessory->fill($this->sanitizeItemForStoring($accessory));
-
         //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         // $accessory->unsetEventDispatcher();
         if ($accessory->save()) {
@@ -49,6 +48,7 @@ class AccessoryImporter extends ItemImporter
             $this->log('Accessory ' . $this->item["name"] . ' was created');
             return;
         }
+
         $this->logError($accessory, 'Accessory');
     }
 }

@@ -717,10 +717,79 @@ EOT;
         Notification::assertSentTo(User::find(2), \App\Notifications\WelcomeNotification::class);
         Notification::assertNotSentTo(User::find(3), \App\Notifications\WelcomeNotification::class);
     }
-    private function import($importer, $mappings = null)
+
+    public function testImportWithDefaultValues() {
+        $csv = <<<'EOT'
+Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Requestable,Quantity
+Walter Carter,09/01/2006,95.00,metus. Vivamus,Macromedia,J935H60W,Customers,False,278
+Random Item,,,,,,,,
+EOT;
+
+        $defaultFieldMap = [
+            'category' => 'Default Category',
+            'company' => 'Default Company',
+            'location' => 'Default Location',
+            'purchase_date' => '01/01/2020',
+            'purchase_cost' => "$5.00",
+            'order_number' => '#123456',
+            'requestable' => 'true',
+            'quantity' => '1000'
+        ];
+        $this->import(new AccessoryImporter($csv),null,$defaultFieldMap);
+
+        // Test to make sure we did not override anything in a standard asset..
+        $this->tester->seeRecord('accessories', [
+            'name' => 'Walter Carter',
+            'purchase_date' => '2006-09-01 00:00:01',
+            'purchase_cost' => 95.00,
+            'order_number' => 'J935H60W',
+            'requestable' => 0,
+            'qty' => 278
+        ]);
+
+        $this->tester->seeRecord('locations', [
+            'name' => 'metus. Vivamus'
+        ]);
+
+        $this->tester->seeRecord('companies', [
+            'name' => 'Macromedia'
+        ]);
+
+        $this->tester->seeRecord('categories', [
+            'name' => 'Customers'
+        ]);
+
+         //Test that default values get inserted if blanks are left.
+
+        $this->tester->seeRecord('accessories', [
+            'name' => 'Random Item',
+            'purchase_date' => '2020-01-01 00:00:01',
+            'purchase_cost' => 5.00,
+            'order_number' => '#123456',
+            'requestable' => 1,
+            'qty' => 1000
+        ]);
+
+        $this->tester->seeRecord('locations', [
+            'name' => 'Default Location'
+        ]);
+
+        $this->tester->seeRecord('companies', [
+            'name' => 'Default Company'
+        ]);
+
+        $this->tester->seeRecord('categories', [
+            'name' => 'Default Category'
+        ]);
+    }
+    private function import($importer, $mappings = null,$defaultFieldMap = null)
     {
         if ($mappings) {
             $importer->setFieldMappings($mappings);
+        }
+        if ($defaultFieldMap) {
+            $importer->setDefaultFieldValues($defaultFieldMap);
+
         }
         $importer->setUserId(1)
              ->setUpdating(false)

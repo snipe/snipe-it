@@ -91,6 +91,8 @@ abstract class Importer
      */
     protected $errorCallback;
 
+    private $defaultFieldValues = [];
+
     /**
      * ObjectImporter constructor.
      * @param string $file
@@ -171,6 +173,25 @@ abstract class Importer
         }
 
     }
+
+    /**
+     * @param mixed $defaultFieldValues
+     * @return Importer
+     */
+    public function setDefaultFieldValues($defaultFieldValues)
+    {
+        $this->defaultFieldValues = $defaultFieldValues;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function defaultValues()
+    {
+        return $this->defaultFieldValues;
+    }
+
     /**
      * Check to see if the given key exists in the array, and trim excess white space before returning it
      *
@@ -186,11 +207,17 @@ abstract class Importer
 
         $val = $default;
 
-        $key = $this->lookupCustomKey($key);
-
         $this->log("Custom Key: ${key}");
-        if (array_key_exists($key, $array)) {
-            $val = Encoding::toUTF8(trim($array[ $key ]));
+
+        $csvKey = $this->lookupCustomKey($key);
+
+        if (array_key_exists($csvKey, $array)) {
+            $val = Encoding::toUTF8(trim($array[ $csvKey ]));
+        }
+
+        if(empty($val) && array_key_exists($key,$this->defaultFieldValues)) {
+
+            $val = Encoding::toUTF8(trim($this->defaultFieldValues[$key]));
         }
         // $this->log("${key}: ${val}");
         return $val;
