@@ -11,12 +11,12 @@ Route::group([ 'prefix' => 'licenses', 'middleware' => ['auth'] ], function () {
     'as' => 'licenses.freecheckout',
     'uses' => 'LicensesController@getFreeLicense'
     ]);
-    Route::get('{licenseId}/checkout', [
+    Route::get('{licenseId}/checkout/{seatId?}', [
     'as' => 'licenses.checkout',
     'uses' => 'LicensesController@getCheckout'
     ]);
     Route::post(
-        '{licenseId}/checkout',
+        '{licenseId}/checkout/{seatId?}',
         [ 'as' => 'licenses.checkout', 'uses' => 'LicensesController@postCheckout' ]
     );
     Route::get('{licenseId}/checkin/{backto?}', [
