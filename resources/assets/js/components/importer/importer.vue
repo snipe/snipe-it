@@ -38,7 +38,6 @@
                     vm.progress.currentClass="progress-bar-success";
                     vm.progress.statusText = "Success!";
                     vm.files = data.result.files.concat(vm.files);
-                    console.log(data.result.header_row);
                 },
                 add(e, data) {
                     data.headers = {

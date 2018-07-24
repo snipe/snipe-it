@@ -40,17 +40,25 @@ class ItemImportRequest extends FormRequest
         $classString = "App\\Importer\\{$class}Importer";
         $importer = new $classString($filename);
         $import->field_map  = request('column-mappings');
+        $import->default_values = request('default-values');
         $import->save();
         $fieldMappings=[];
         if ($import->field_map) {
             // We submit as csv field: column, but the importer is happier if we flip it here.
             $fieldMappings = array_change_key_case(array_flip($import->field_map), CASE_LOWER);
-                        // dd($fieldMappings);
+        }
+        // We index by header name for the default values as well. Flip that here.
+        $defaultMappings = [];
+        if ($import->default_values) {
+            foreach($import->default_values as $key => $value) {
+                $defaultMappings[$import->field_map[$key]] = $value;
+            }
         }
         $importer->setCallbacks([$this, 'log'], [$this, 'progress'], [$this, 'errorCallback'])
                  ->setUserId(Auth::id())
                  ->setUpdating($this->has('import-update'))
                  ->setUsernameFormat('firstname.lastname')
+                 ->setDefaultFieldValues($defaultMappings)
                  ->setFieldMappings($fieldMappings);
         // $logFile = storage_path('logs/importer.log');
         // \Log::useFiles($logFile);

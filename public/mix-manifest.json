@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "/js/build/vue.js": "/js/build/vue.js?id=f89ed45026610831d45d",
     "/css/build/AdminLTE.css": "/css/build/AdminLTE.css?id=5002486f605469c322ed",
     "/css/build/app.css": "/css/build/app.css?id=0c4d55f9abe9a4efe526",
@@ -19,3 +20,18 @@
     "/js/dist/bootstrap-table-simple-view.js": "/js/dist/bootstrap-table-simple-view.js?id=3926b8f4aaad6ca20d31",
     "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=8340c60bfbc12c34d2e6"
 }
+=======
+    "/js/build/vue.js": "/js/build/vue.js?id=45f82400a5fd0505bf8e",
+    "/css/AdminLTE.css": "/css/AdminLTE.css?id=dc5078a783e6e5262b34",
+    "/css/app.css": "/css/app.css?id=c73d64eeb75c3c3a0b03",
+    "/css/overrides.css": "/css/overrides.css?id=2d81c3704393bac77011",
+    "/js/build/vue.js.map": "/js/build/vue.js.map?id=f8cf00bb23618e65c600",
+    "/css/AdminLTE.css.map": "/css/AdminLTE.css.map?id=6be7929500c3716cc827",
+    "/css/app.css.map": "/css/app.css.map?id=2d8fd3699fd3f6b8e8f5",
+    "/css/overrides.css.map": "/css/overrides.css.map?id=f7ce9ca49027594ac402",
+    "/css/dist/all.css": "/css/dist/all.css?id=3f68f1b44a73c55711bb",
+    "/js/dist/all.js": "/js/dist/all.js?id=1544a94b2327e37be5da",
+    "/css/build/all.css": "/css/build/all.css?id=3f68f1b44a73c55711bb",
+    "/js/build/all.js": "/js/build/all.js?id=1544a94b2327e37be5da"
+}
+>>>>>>> Importer Default Values: UI Support

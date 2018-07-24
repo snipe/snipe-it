@@ -33,6 +33,7 @@ tr {
                 <th>Header Field</th>
                 <th>Import Field</th>
                 <th>Sample Value</th>
+                <th>Default for Blank Cells</th>
             </thead>
             <tbody>
             <template v-for="(header, index) in file.header_row">
@@ -49,6 +50,9 @@ tr {
                     </td>
                     <td>
                         <div>{{ activeFile.first_row[index] }}</div>
+                    </td>
+                    <td>
+                        <input v-model="defaultValues[header]"/>
                     </td>
                 </tr>
                 </template>
@@ -150,6 +154,7 @@ tr {
                 },
                 columnMappings: this.file.field_map || {},
                 activeColumn: null,
+                defaultValueArray: this.file.default_values || {}
             }
         },
         created() {
@@ -193,6 +198,14 @@ tr {
                 }
                 return 'alert-info';
             },
+            defaultValues() {
+                var defaultValueInternal = this.defaultValueArray;
+                this.file.header_row.forEach((item) => {
+                    if(!defaultValueInternal[item])
+                        defaultValueInternal[item] = '';
+                })
+                return defaultValueInternal;
+            }
         },
         watch: {
             columns() {
@@ -213,7 +226,8 @@ tr {
                 this.$http.post(route('api.imports.importFile', this.file.id), {
                     'import-update': this.options.update,
                     'import-type': this.options.importType,
-                    'column-mappings': this.columnMappings
+                    'column-mappings': this.columnMappings,
+                    'default-values': this.defaultValues
                 }).then( ({body}) => {
                     // Success
                     this.statusType="success";

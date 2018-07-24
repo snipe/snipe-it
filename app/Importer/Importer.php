@@ -216,7 +216,6 @@ abstract class Importer
         }
 
         if(empty($val) && array_key_exists($key,$this->defaultFieldValues)) {
-
             $val = Encoding::toUTF8(trim($this->defaultFieldValues[$key]));
         }
         // $this->log("${key}: ${val}");
