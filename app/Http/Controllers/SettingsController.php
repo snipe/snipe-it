@@ -169,11 +169,7 @@ class SettingsController extends Controller
         $settings->alerts_enabled = 1;
         $settings->pwd_secure_min = 10;
         $settings->brand = 1;
-
-        if (!config('app.lock_passwords')) {
-            $settings->locale = $request->input('locale', 'en');
-        }
-
+        $settings->locale = $request->input('locale', 'en');
         $settings->default_currency = $request->input('default_currency', "USD");
         $settings->user_id = 1;
         $settings->email_domain = $request->input('email_domain');
@@ -405,6 +401,8 @@ class SettingsController extends Controller
         $setting->footer_text = $request->input('footer_text');
         $setting->skin = $request->input('skin');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
+        $setting->logo_print_assets = $request->input('logo_print_assets', '0');
+
 
 
         // Only allow the site name and CSS to be changed if lock_passwords is false
@@ -541,7 +539,9 @@ class SettingsController extends Controller
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
-        $setting->locale = $request->input('locale', 'en');
+        if (!config('app.lock_passwords')) {
+            $setting->locale = $request->input('locale', 'en');
+        }
         $setting->default_currency = $request->input('default_currency', '$');
         $setting->date_display_format = $request->input('date_display_format');
         $setting->time_display_format = $request->input('time_display_format');

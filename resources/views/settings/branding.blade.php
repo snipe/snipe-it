@@ -93,7 +93,20 @@
                                 {!! $errors->first('brand', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
-                        <!-- remote load -->
+
+                        <!-- Include logo in print assets -->
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                {{ Form::label('logo_print_assets', trans('admin/settings/general.logo_print_assets')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::checkbox('logo_print_assets', '1', Input::old('logo_print_assets', $setting->logo_print_assets),array('class' => 'minimal')) }}
+                                {{ trans('admin/settings/general.logo_print_assets_help') }}
+                            </div>
+                        </div>
+
+
+                        <!-- show urls in emails-->
                         <div class="form-group">
                             <div class="col-md-3">
                                 {{ Form::label('show_url_in_emails', trans('admin/settings/general.show_url_in_emails')) }}
