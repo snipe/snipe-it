@@ -58,14 +58,11 @@ class AccessoryCheckinController extends Controller
 
         $this->authorize('checkin', $accessory);
 
-        $return_to = e($accessory_user->assigned_to);
-        $accessory->logCheckin(User::find($return_to), e(Input::get('note')));
-
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
-            if ($backto=='user') {
-                return redirect()->route("users.show", $return_to)->with('success', trans('admin/accessories/message.checkin.success'));
-            }
+            $return_to = e($accessory_user->assigned_to);
+            $accessory->logCheckin(User::find($return_to), e(Input::get('note')));
+
             return redirect()->route("accessories.show", $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
         }
         // Redirect to the accessory management page with error
