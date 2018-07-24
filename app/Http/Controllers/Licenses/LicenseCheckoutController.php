@@ -30,10 +30,10 @@ class LicenseCheckoutController extends Controller
     public function create($licenceId)
     {
         // Check that the license is valid
-        if ($license = License::where('id',$licenceId)->first()) {
+        if ($license = License::find($licenseId)) {
 
             // If the license is valid, check that there is an available seat
-            if ($license->getAvailSeatsCountAttribute() < 1) {
+            if ($license->avail_seats_count < 1) {
                 return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
             }
         }
@@ -63,46 +63,48 @@ class LicenseCheckoutController extends Controller
 
         $this->authorize('checkout', $license);
 
-        // This returns null if seatId is null
-        if (!$licenseSeat = LicenseSeat::find($seatId);) {
-            $licenseSeat = $license->freeSeat();
-        }
-
-        if (!$licenseSeat) {
-            if ($seatId) {
-                return redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.');
-            }
-            return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
-        }
-
-        $target = null;
-
-        // This item is checked out to a an asset
-        if (request('checkout_to_type')=='asset') {
-            if (is_null($target = Asset::find(request('asset_id')))) {
-                return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
-            }
-            $licenseSeat->asset_id = $request->input('asset_id');
-
-            // Override asset's assigned user if available
-            if ($target->checkedOutToUser()) {
-                $licenseSeat->assigned_to =  $target->assigned_to;
-            }
-
-        } elseif (request('checkout_to_type')=='user') {
-
-            // Fetch the target and set the license user
-            if (is_null($target = User::find(request('assigned_to')))) {
-                return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.user_does_not_exist'));
-            }
-            $licenseSeat->assigned_to = request('assigned_to');
-        }
+        $licenseSeat = $request->findLicenseSeatToCheckout($license, $seatId);
 
         $licenseSeat->user_id = Auth::id();
+        $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
 
-        if ($licenseSeat->save()) {
-            $licenseSeat->logCheckout($request->input('note'), $target);
+        if ($this->$checkoutMethod($licenseSeat)) {
             return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
         }
+        return redirect()->route("licenses.index")->with('error', trans('Something went wrong handling this checkout.'));
+    }
+
+    protected function checkoutToAsset($licenseSeat)
+    {
+        if (is_null($target = Asset::find(request('asset_id')))) {
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
+        }
+        $licenseSeat->asset_id = request('asset_id');
+
+        // Override asset's assigned user if available
+        if ($target->checkedOutToUser()) {
+            $licenseSeat->assigned_to =  $target->assigned_to;
+        }
+
+         if ($licenseSeat->save()) {
+            $licenseSeat->logCheckout(request('note'), $target);
+            return true;
+        }
+        return false;
+    }
+
+    protected function checkoutToUser($licenseSeat)
+    {
+        // Fetch the target and set the license user
+        if (is_null($target = User::find(request('assigned_to')))) {
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.user_does_not_exist'));
+        }
+        $licenseSeat->assigned_to = request('assigned_to');
+
+        if ($licenseSeat->save()) {
+            $licenseSeat->logCheckout(request('note'), $target);
+            return true;
+        }
+        return false;
     }
 }
