@@ -2,14 +2,17 @@
     <IfModule mod_negotiation.c>
         Options -MultiViews
     </IfModule>
+   
+    # Hide the Config File
+    <Files ".env*">
+        Require all denied
+    </Files>
 
     RewriteEngine On
 
     # Uncomment these two lines to force SSL redirect in Apache
     # RewriteCond %{HTTPS} off
     # RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-
-
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
