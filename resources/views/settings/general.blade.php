@@ -118,7 +118,7 @@
                         </div>
                         <div class="col-md-9">
                             {{ Form::checkbox('load_remote', '1', Input::old('load_remote', $setting->load_remote),array('class' => 'minimal')) }}
-                            {{ trans('admin/settings/general.load_remote_help_text') }}
+                            <p class="help-block">{{ trans('admin/settings/general.load_remote_help_text') }}</p>
                         </div>
                     </div>
 
