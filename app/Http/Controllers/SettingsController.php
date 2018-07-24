@@ -815,6 +815,12 @@ class SettingsController extends Controller
              $setting->labels_display_tag = 0;
          }
 
+        if ($request->has('labels_display_model')) {
+            $setting->labels_display_model = 1;
+        } else {
+            $setting->labels_display_model = 0;
+        }
+
         if ($setting->save()) {
             return redirect()->route('settings.index')
                 ->with('success', trans('admin/settings/message.update.success'));
