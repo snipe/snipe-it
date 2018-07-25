@@ -42,7 +42,6 @@
     "watson/validating": "^3.0"
   },
   "require-dev": {
-    "barryvdh/laravel-ide-helper": "^2.4",
     "codeception/codeception": "^2.4",
     "filp/whoops": "~2.0",
     "fzaninotto/faker": "~1.4",
@@ -73,11 +72,6 @@
     ]
   },
   "scripts": {
-    "post-update-cmd": [
-      "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-      "php artisan ide-helper:generate",
-      "php artisan ide-helper:meta"
-    ],
     "post-autoload-dump": [
       "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
       "@php artisan package:discover"
