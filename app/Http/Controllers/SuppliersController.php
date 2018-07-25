@@ -154,7 +154,7 @@ class SuppliersController extends Controller
     public function destroy($supplierId)
     {
         $this->authorize('delete', Supplier::class);
-        if (is_null($supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances','assets','licenses')->find($supplierId))) {
+        if (is_null($supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances as asset_maintenances_count','assets as assets_count','licenses as licenses_count')->find($supplierId))) {
             return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.not_found'));
         }
 

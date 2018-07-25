@@ -32,7 +32,7 @@ class ApiStatuslabelsCest
         $response = json_decode($I->grabResponse(), true);
         // sample verify
         $statuslabel = App\Models\Statuslabel::orderByDesc('created_at')
-            ->withCount('assets')
+            ->withCount('assets as assets_count')
             ->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new StatuslabelsTransformer)->transformStatuslabel($statuslabel)));
     }

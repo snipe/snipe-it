@@ -325,7 +325,8 @@ class AssetsController extends Controller
      */
     public function show($id)
     {
-        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->withCount('checkins', 'checkouts', 'userRequests')->findOrFail($id)) {
+        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()
+            ->withCount('checkins as checkins_count', 'checkouts as checkouts_count', 'userRequests as user_requests_count')->findOrFail($id)) {
             $this->authorize('view', $asset);
             return (new AssetsTransformer)->transformAsset($asset);
         }

@@ -25,7 +25,7 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats'));
+        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats as free_seats_count'));
 
 
         if ($request->has('company_id')) {

@@ -33,7 +33,7 @@ class DepartmentsController extends Controller
             'departments.created_at',
             'departments.updated_at',
             'departments.image'
-        ])->with('users')->with('location')->with('manager')->with('company')->withCount('users');
+        ])->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
 
         if ($request->has('search')) {
             $departments = $departments->TextSearch($request->input('search'));
