@@ -115,7 +115,8 @@ abstract class Importer
     public function import()
     {
         $headerRow = $this->csv->fetchOne();
-        $results = $this->normalizeInputArray($this->csv->fetchAssoc());
+        $this->csv->setHeaderOffset(0);
+        $results = $this->normalizeInputArray($this->csv->getRecords());
 
         $this->populateCustomFields($headerRow);
 
