@@ -75,19 +75,19 @@ class LicenseFilesController extends Controller
     public function destroy($licenseId = null, $fileId = null)
     {
         $license = License::find($licenseId);
-        $destinationPath = config('app.private_uploads').'/licenses';
 
-        // the license is valid
+        $rel_path = 'storage/private_uploads/licenses';
+
+        // the asset is valid
         if (isset($license->id)) {
-            $this->authorize('edit', $license);
+            $this->authorize('update', $license);
             $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath.'/'.$log->filename;
-            if (file_exists($full_filename)) {
-                Storage::delete($full_filename);
-               // unlink($destinationPath.'/'.$log->filename);
+            if (file_exists(base_path().'/'.$rel_path.'/'.$log->filename)) {
+                Storage::delete($rel_path.'/'.$log->filename);
             }
             $log->delete();
-            return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
+            return redirect()->back()
+                ->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 
         // Redirect to the licence management page

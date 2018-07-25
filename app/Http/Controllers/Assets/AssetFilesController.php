@@ -107,21 +107,18 @@ class AssetFilesController extends Controller
     {
         $asset = Asset::find($assetId);
         $this->authorize('update', $asset);
-        $destinationPath = config('app.private_uploads').'/imports/assets';
+        $rel_path = 'storage/private_uploads/assets';
 
         // the asset is valid
         if (isset($asset->id)) {
             $this->authorize('update', $asset);
-
             $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath.'/'.$log->filename;
-            if (file_exists($full_filename)) {
-                \Log::debug('Trying to delete '.$full_filename);
-                Storage::delete($full_filename);
-                //unlink($destinationPath.'/'.$log->filename);
+            if (file_exists(base_path().'/'.$rel_path.'/'.$log->filename)) {
+                Storage::delete($rel_path.'/'.$log->filename);
             }
             $log->delete();
-            return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
+            return redirect()->back()
+                ->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 
         // Redirect to the hardware management page
