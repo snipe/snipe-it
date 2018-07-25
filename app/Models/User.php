@@ -352,11 +352,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
     public static function generateEmailFromFullName($name)
     {
-        $username = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $name);
+        $username = User::generateFormattedNameFromFullName($name, Setting::getSettings()->email_format);
         return $username['username'].'@'.Setting::getSettings()->email_domain;
     }
 
-    public static function generateFormattedNameFromFullName($format = 'filastname', $users_name)
+    public static function generateFormattedNameFromFullName($users_name, $format = 'filastname')
     {
 
         // If there was only one name given

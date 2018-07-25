@@ -600,25 +600,25 @@ class AssetsController extends Controller
                 if ($asset = Asset::where('asset_tag', '=', $asset_tag)->first()) {
                     $item[$asset_tag][$batch_counter]['asset_id'] = $asset->id;
 
-                    $base_username = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $item[$asset_tag][$batch_counter]['name']);
+                    $base_username = User::generateFormattedNameFromFullName($item[$asset_tag][$batch_counter]['name'], Setting::getSettings()->username_format);
                     $user = User::where('username', '=', $base_username['username']);
                     $user_query = ' on username '.$base_username['username'];
 
                     if ($request->input('match_firstnamelastname')=='1') {
-                        $firstnamedotlastname = User::generateFormattedNameFromFullName('firstname.lastname', $item[$asset_tag][$batch_counter]['name']);
+                        $firstnamedotlastname = User::generateFormattedNameFromFullName($item[$asset_tag][$batch_counter]['name'], 'firstname.lastname');
                         $item[$asset_tag][$batch_counter]['username'][] = $firstnamedotlastname['username'];
                         $user->orWhere('username', '=', $firstnamedotlastname['username']);
                         $user_query .= ', or on username '.$firstnamedotlastname['username'];
                     }
 
                     if ($request->input('match_flastname')=='1') {
-                        $flastname = User::generateFormattedNameFromFullName('filastname', $item[$asset_tag][$batch_counter]['name']);
+                        $flastname = User::generateFormattedNameFromFullName( $item[$asset_tag][$batch_counter]['name'], 'filastname');
                         $item[$asset_tag][$batch_counter]['username'][] = $flastname['username'];
                         $user->orWhere('username', '=', $flastname['username']);
                         $user_query .= ', or on username '.$flastname['username'];
                     }
                     if ($request->input('match_firstname')=='1') {
-                        $firstname = User::generateFormattedNameFromFullName('firstname', $item[$asset_tag][$batch_counter]['name']);
+                        $firstname = User::generateFormattedNameFromFullName( $item[$asset_tag][$batch_counter]['name'], 'firstname');
                         $item[$asset_tag][$batch_counter]['username'][] = $firstname['username'];
                         $user->orWhere('username', '=', $firstname['username']);
                         $user_query .= ', or on username '.$firstname['username'];

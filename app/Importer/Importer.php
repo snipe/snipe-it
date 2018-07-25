@@ -281,7 +281,7 @@ abstract class Importer
             $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
         }
 
-        $user_formatted_array = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $user_array['full_name']);
+        $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
         $user_array['first_name'] = $user_formatted_array['first_name'];
         $user_array['last_name'] = $user_formatted_array['last_name'];
         if (empty($user_array['username'])) {
