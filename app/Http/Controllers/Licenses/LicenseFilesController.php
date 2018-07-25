@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class LicenseFilesController extends Controller
 {
@@ -38,7 +39,8 @@ class LicenseFilesController extends Controller
                 foreach (Input::file('file') as $file) {
                     $extension = $file->getClientOriginalExtension();
                     $filename = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-                    $upload_success = $file->move($destinationPath, $filename);
+
+                    $upload_success = $file->storeAs('storage/private_uploads/licenses', $filename);
 
                     //Log the upload to the log
                     $license->logUpload($filename, e($request->input('notes')));
@@ -81,7 +83,8 @@ class LicenseFilesController extends Controller
             $log = Actionlog::find($fileId);
             $full_filename = $destinationPath.'/'.$log->filename;
             if (file_exists($full_filename)) {
-                unlink($destinationPath.'/'.$log->filename);
+                Storage::delete($full_filename);
+               // unlink($destinationPath.'/'.$log->filename);
             }
             $log->delete();
             return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));

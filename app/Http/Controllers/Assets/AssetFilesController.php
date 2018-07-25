@@ -8,6 +8,7 @@ use App\Http\Requests\AssetFileRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class AssetFilesController extends Controller
 {
@@ -29,14 +30,13 @@ class AssetFilesController extends Controller
 
         $this->authorize('update', $asset);
 
-        $destinationPath = config('app.private_uploads').'/assets';
-
         if ($request->hasFile('file')) {
             foreach ($request->file('file') as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $filename = 'hardware-'.$asset->id.'-'.str_random(8);
                 $filename .= '-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-                $file->move($destinationPath, $filename);
+
+                $file->storeAs('storage/private_uploads/assets', $filename);
                 $asset->logUpload($filename, e($request->get('notes')));
             }
             return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
@@ -116,7 +116,9 @@ class AssetFilesController extends Controller
             $log = Actionlog::find($fileId);
             $full_filename = $destinationPath.'/'.$log->filename;
             if (file_exists($full_filename)) {
-                unlink($destinationPath.'/'.$log->filename);
+                \Log::debug('Trying to delete '.$full_filename);
+                Storage::delete($full_filename);
+                //unlink($destinationPath.'/'.$log->filename);
             }
             $log->delete();
             return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
