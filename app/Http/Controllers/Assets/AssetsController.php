@@ -1,18 +1,13 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Assets;
 
 use App\Helpers\Helper;
-use App\Http\Requests\AssetCheckinRequest;
-use App\Http\Requests\AssetCheckoutRequest;
-use App\Http\Requests\AssetFileRequest;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetRequest;
-use App\Http\Requests\ItemImportRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
-use App\Models\CustomField;
-use App\Models\Import;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
@@ -34,7 +29,6 @@ use Redirect;
 use Response;
 use Slack;
 use Str;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use TCPDF;
 use Validator;
 use View;
@@ -66,7 +60,9 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see AssetController::getDatatable() method that generates the JSON response
      * @since [v1.0]
+     * @param Request $request
      * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(Request $request)
     {

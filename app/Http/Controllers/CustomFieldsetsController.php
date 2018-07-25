@@ -1,17 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
-use View;
 use App\Models\CustomFieldset;
 use App\Models\CustomField;
-use Input;
-use Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 use Redirect;
 use App\Models\AssetModel;
-use Lang;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Log;
 
 /**
  * This controller handles all actions related to Custom Asset Fields for
@@ -26,17 +23,19 @@ use Log;
 class CustomFieldsetsController extends Controller
 {
 
-        /**
-        * Validates and stores a new custom field.
-        *
-        * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-        * @param int $id
-        * @since [v1.8]
-        * @return View
-        */
+    /**
+     * Validates and stores a new custom field.
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @param int $id
+     * @return \Illuminate\Support\Facades\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @since [v1.8]
+     */
     public function show($id)
     {
-        $cfset = CustomFieldset::with('fields')->where('id', '=', $id)->orderBy('id', 'ASC')->first();
+        $cfset = CustomFieldset::with('fields')
+            ->where('id', '=', $id)->orderBy('id', 'ASC')->first();
 
         $this->authorize('view', $cfset);
 
@@ -53,21 +52,26 @@ class CustomFieldsetsController extends Controller
                 }
             }
 
-            return view("custom_fields.fieldsets.view")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
+            return view("custom_fields.fieldsets.view")
+                ->with("custom_fieldset", $cfset)
+                ->with("maxid", $maxid+1)
+                ->with("custom_fields_list", $custom_fields_list);
         }
 
-        return redirect()->route("fields.index")->with("error", trans('admin/custom_fields/message.fieldset.does_not_exist'));
+        return redirect()->route("fields.index")
+            ->with("error", trans('admin/custom_fields/message.fieldset.does_not_exist'));
 
     }
 
 
     /**
-    * Returns a view with a form for creating a new custom fieldset.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return View
-    */
+     * Returns a view with a form for creating a new custom fieldset.
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @since [v1.8]
+     * @return \Illuminate\Support\Facades\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function create()
     {
         $this->authorize('create', CustomFieldset::class);
@@ -77,29 +81,30 @@ class CustomFieldsetsController extends Controller
 
 
     /**
-    * Validates and stores a new custom fieldset.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return Redirect
-    */
+     * Validates and stores a new custom fieldset.
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @since [v1.8]
+     * @param Request $request
+     * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function store(Request $request)
     {
         $this->authorize('create', CustomFieldset::class);
 
-        $cfset = new CustomFieldset(
-            [
+        $cfset = new CustomFieldset([
                 "name" => e($request->get("name")),
-                "user_id" => Auth::user()->id]
-        );
+                "user_id" => Auth::user()->id
+        ]);
 
         $validator = Validator::make(Input::all(), $cfset->rules);
         if ($validator->passes()) {
             $cfset->save();
-            return redirect()->route("fieldsets.show", [$cfset->id])->with('success', trans('admin/custom_fields/message.fieldset.create.success'));
-        } else {
-            return redirect()->back()->withInput()->withErrors($validator);
+            return redirect()->route("fieldsets.show", [$cfset->id])
+                ->with('success', trans('admin/custom_fields/message.fieldset.create.success'));
         }
+        return redirect()->back()->withInput()->withErrors($validator);
     }
 
 
@@ -136,13 +141,14 @@ class CustomFieldsetsController extends Controller
 
 
     /**
-    * Validates a custom fieldset and then deletes if it has no models associated.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @param  int  $id
-    * @since [v1.8]
-    * @return View
-    */
+     * Validates a custom fieldset and then deletes if it has no models associated.
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @param  int $id
+     * @since [v1.8]
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function destroy($id)
     {
         $fieldset = CustomFieldset::find($id);
@@ -154,9 +160,8 @@ class CustomFieldsetsController extends Controller
             if ($models->count() == 0) {
                 $fieldset->delete();
                 return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.fieldset.delete.success'));
-            } else {
-                return redirect()->route("fields.index")->with("error", trans('admin/custom_fields/message.fieldset.delete.in_use'));
             }
+            return redirect()->route("fields.index")->with("error", trans('admin/custom_fields/message.fieldset.delete.in_use'));
         }
 
         return redirect()->route("fields.index")->with("error", trans('admin/custom_fields/message.fieldset.does_not_exist'));
@@ -166,12 +171,13 @@ class CustomFieldsetsController extends Controller
 
 
     /**
-    * Associate the custom field with a custom fieldset.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return View
-    */
+     * Associate the custom field with a custom fieldset.
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @since [v1.8]
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function associate($id)
     {
 

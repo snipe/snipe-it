@@ -1,21 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
 use Image;
-use App\Models\AssetMaintenance;
-use Input;
-use Lang;
 use App\Models\Supplier;
-use Redirect;
-use App\Models\Setting;
-use Str;
-use View;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
-
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * This controller handles all actions related to Suppliers for
@@ -29,6 +19,7 @@ class SuppliersController extends Controller
      * Show a list of all suppliers
      *
      * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
@@ -45,6 +36,7 @@ class SuppliersController extends Controller
      * Supplier create.
      *
      * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
@@ -56,8 +48,9 @@ class SuppliersController extends Controller
     /**
      * Supplier create form processing.
      *
-     * @param Request $request
+     * @param ImageUploadRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ImageUploadRequest $request)
     {
@@ -80,16 +73,7 @@ class SuppliersController extends Controller
         $supplier->url                  = $supplier->addhttp(request('url'));
         $supplier->user_id              = Auth::id();
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/suppliers/'.$file_name);
-            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $supplier->image = $file_name;
-        }
+        $supplier = $request->handleImages($supplier);
 
         if ($supplier->save()) {
             return redirect()->route('suppliers.index')->with('success', trans('admin/suppliers/message.create.success'));
@@ -100,8 +84,9 @@ class SuppliersController extends Controller
     /**
      * Supplier update.
      *
-     * @param  int  $supplierId
+     * @param  int $supplierId
      * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($supplierId = null)
     {
@@ -120,8 +105,9 @@ class SuppliersController extends Controller
     /**
      * Supplier update form processing page.
      *
-     * @param  int  $supplierId
+     * @param  int $supplierId
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update($supplierId = null, ImageUploadRequest $request)
     {
@@ -147,37 +133,7 @@ class SuppliersController extends Controller
         $supplier->url                  = $supplier->addhttp(request('url'));
         $supplier->notes                = request('notes');
 
-
-        $old_image = $supplier->image;
-
-        // Set the model's image property to null if the image is being deleted
-        if ($request->input('image_delete') == 1) {
-            $supplier->image = null;
-        }
-
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = $supplier->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
-
-            if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save(app('suppliers_upload_path').$file_name);
-            } else {
-                $image->move(app('suppliers_upload_path'), $file_name);
-            }
-            $supplier->image = $file_name;
-
-        }
-
-        if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
-            try  {
-                unlink(app('suppliers_upload_path').$old_image);
-            } catch (\Exception $e) {
-                \Log::error($e);
-            }
-        }
+        $supplier = $request->handleImages($supplier);
 
 
         if ($supplier->save()) {
@@ -191,8 +147,9 @@ class SuppliersController extends Controller
     /**
      * Delete the given supplier.
      *
-     * @param  int  $supplierId
+     * @param  int $supplierId
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($supplierId)
     {
@@ -237,11 +194,8 @@ class SuppliersController extends Controller
         if (isset($supplier->id)) {
                 return view('suppliers/view', compact('supplier'));
         }
-        // Prepare the error message
-        $error = trans('admin/suppliers/message.does_not_exist', compact('id'));
-
         // Redirect to the user management page
-        return redirect()->route('suppliers.index')->with('error', $error);
+        return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.does_not_exist'));
     }
 
 }
