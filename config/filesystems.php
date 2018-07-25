@@ -69,6 +69,16 @@ return [
             'timeout'  => env('FTP_TIMEOUT', 30),
         ],
 
+        'sftp' => [
+            'driver' => 'sftp',
+            'host'     => env('SFTP_HOST', 'sftp.yourhost.com'),
+            'username' => env('SFTP_USERNAME', 'sftp-user'),
+            'password' => env('SFTP_PASSWORD', 'sftp-pass'),
+            'port'     => env('SFTP_PORT', '22'),
+            'root'     => env('SFTP_ROOT', ''),
+            'timeout'  => env('SFTP_TIMEOUT', 30),
+        ],
+
         's3' => [
             'driver' => 's3',
             'key'    => env('AWS_KEY', null),
