@@ -840,12 +840,7 @@
                         </td>
                       </tr>
                     @endforeach
-                  @else
-                    <tr>
-                      <td colspan="4">
-                        {{ trans('general.no_results') }}
-                      </td>
-                    </tr>
+                  
                   @endif
                 </tbody>
               </table>
