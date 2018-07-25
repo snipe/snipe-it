@@ -40,6 +40,7 @@
   },
   "require-dev": {
     "codeception/codeception": "^2.4",
+    "filp/whoops": "~2.0",
     "fzaninotto/faker": "~1.4",
     "roave/security-advisories": "dev-master",
     "squizlabs/php_codesniffer": "*",
@@ -68,6 +69,10 @@
     ]
   },
   "scripts": {
+    "post-autoload-dump": [
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+      "@php artisan package:discover"
+    ],
     "post-root-package-install": [
       "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     ],
