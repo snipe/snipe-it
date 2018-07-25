@@ -63,6 +63,8 @@ class ResetDemoSettings extends Command
         $settings->time_display_format = 'g:iA';
         $settings->thumbnail_max_h = '30';
         $settings->locale = 'en';
+        $settings->version_footer = 'on';
+        $settings->support_footer = 'on';
         $settings->save();
 
         if ($user = User::where('username', '=', 'admin')->first()) {
