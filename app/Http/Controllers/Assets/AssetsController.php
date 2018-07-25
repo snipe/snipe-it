@@ -139,7 +139,7 @@ class AssetsController extends Controller
         }
 
         // Create the image (if one was chosen.)
-        if ($request->filledFile('image')) {
+        if ($request->hasFile('image')) {
             $image = $request->input('image');
 
             // After modification, the image is prefixed by mime info like the following:
@@ -769,7 +769,7 @@ class AssetsController extends Controller
 
             $filename = '';
 
-            if ($request->filledFile('image')) {
+            if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 try {
                     $destinationPath = config('app.private_uploads').'/audits';
