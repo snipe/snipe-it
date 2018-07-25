@@ -54,7 +54,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root'   => storage_path('app'),
+            'root'   => base_path('/'),
         ],
 
         'ftp' => [
@@ -85,7 +85,7 @@ return [
             'secret' => env('AWS_SECRET', null),
             'region' => env('AWS_REGION', null),
             'bucket' => env('AWS_BUCKET', null),
-            
+
             'cache' => [
                 'store' => env('AWS_CACHE_STORE', 'memcached'),
                 'expire' => env('AWS_CACHE_EXPIRES', 600),
