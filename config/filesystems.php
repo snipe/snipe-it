@@ -59,16 +59,14 @@ return [
 
         'ftp' => [
             'driver'   => 'ftp',
-            'host'     => 'ftp.example.com',
-            'username' => 'your-username',
-            'password' => 'your-password',
-
-            // Optional FTP Settings...
-            // 'port'     => 21,
-            // 'root'     => '',
-            // 'passive'  => true,
-            // 'ssl'      => true,
-            // 'timeout'  => 30,
+            'host'     => env('FTP_HOST', 'ftp.yourhost.com'),
+            'username' => env('FTP_USERNAME', 'ftp-user'),
+            'password' => env('FTP_PASSWORD', 'ftp-pass'),
+            'port'     => env('FTP_PORT', '21'),
+            'root'     => env('FTP_ROOT', ''),
+            'passive'  => env('FTP_PASSIVE', true),
+            'ssl'      => env('FTP_SSL', true),
+            'timeout'  => env('FTP_TIMEOUT', 30),
         ],
 
         's3' => [
@@ -79,15 +77,6 @@ return [
             'bucket' => env('AWS_BUCKET', null),
         ],
 
-        'rackspace' => [
-            'driver'    => 'rackspace',
-            'username'  => 'your-username',
-            'key'       => 'your-key',
-            'container' => 'your-container',
-            'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
-            'region'    => 'IAD',
-            'url_type'  => 'publicURL',
-        ],
 
     ],
 
