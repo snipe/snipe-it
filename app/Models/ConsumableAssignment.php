@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Traits\CompanyableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class ConsumableAssignment extends Model

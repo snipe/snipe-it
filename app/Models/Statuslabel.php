@@ -50,13 +50,13 @@ class Statuslabel extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableRelations = [];    
+    protected $searchableRelations = [];
 
 
     /**
      * Get assets with associated status label
      *
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function assets()
     {

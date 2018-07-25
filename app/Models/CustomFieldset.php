@@ -1,12 +1,14 @@
 <?php
 namespace App\Models;
 
+use App\Models\Relationships\CustomFieldsetRelationships;
 use Illuminate\Database\Eloquent\Model;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 
 class CustomFieldset extends Model
 {
+    use CustomFieldsetRelationships;
     protected $guarded=["id"];
 
     public $rules=[
@@ -24,20 +26,6 @@ class CustomFieldset extends Model
     use ValidatingTrait;
     
 
-    public function fields()
-    {
-        return $this->belongsToMany('\App\Models\CustomField')->withPivot(["required","order"])->orderBy("pivot_order");
-    }
-
-    public function models()
-    {
-        return $this->hasMany('\App\Models\AssetModel', "fieldset_id");
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('\App\Models\User'); //WARNING - not all CustomFieldsets have a User!!
-    }
 
     public function validation_rules()
     {

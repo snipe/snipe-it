@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Relationships\AssetRelationships;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use AssetPresenter;
@@ -27,6 +28,7 @@ class Asset extends Depreciable
 {
     protected $presenter = 'App\Presenters\AssetPresenter';
     use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
+    use AssetRelationships;
 
     const LOCATION = 'location';
     const ASSET = 'asset';
@@ -174,10 +176,6 @@ class Asset extends Depreciable
         return null;
     }
 
-    public function company()
-    {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
-    }
 
 
     public function availableForCheckout()
@@ -269,21 +267,6 @@ class Asset extends Depreciable
     }
 
 
-    /**
-   * Set depreciation relationship
-   */
-    public function depreciation()
-    {
-        return $this->model->belongsTo('\App\Models\Depreciation', 'depreciation_id');
-    }
-
-    /**
-     * Get components assigned to this asset
-     */
-    public function components()
-    {
-        return $this->belongsToMany('\App\Models\Component', 'components_assets', 'asset_id', 'component_id')->withPivot('id', 'assigned_qty')->withTrashed();
-    }
 
   /**
    * Get depreciation attribute from associated asset model
@@ -293,18 +276,6 @@ class Asset extends Depreciable
         if (($this->model) && ($this->model->depreciation)) {
             return $this->model->depreciation;
         }
-    }
-
-  /**
-   * Get uploads for this asset
-   */
-    public function uploads()
-    {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
-                  ->where('item_type', '=', Asset::class)
-                  ->where('action_type', '=', 'uploaded')
-                  ->whereNotNull('filename')
-                  ->orderBy('created_at', 'desc');
     }
 
     /**
@@ -368,13 +339,6 @@ class Asset extends Depreciable
     {
         return strtolower(class_basename($this->assigned_type));
     }
-  /**
-   * Get the asset's location based on default RTD location
-   **/
-    public function defaultLoc()
-    {
-        return $this->belongsTo('\App\Models\Location', 'rtd_location_id');
-    }
 
 
     public function getImageUrl()
@@ -388,115 +352,6 @@ class Asset extends Depreciable
     }
 
 
-  /**
-   * Get action logs for this asset
-   */
-    public function assetlog()
-    {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
-                  ->where('item_type', '=', Asset::class)
-                  ->orderBy('created_at', 'desc')
-                  ->withTrashed();
-    }
-
-    /**
-     * Get checkouts
-     */
-    public function checkouts()
-    {
-        return $this->assetlog()->where('action_type', '=', 'checkout')
-            ->orderBy('created_at', 'desc')
-            ->withTrashed();
-    }
-
-    /**
-     * Get checkins
-     */
-    public function checkins()
-    {
-        return $this->assetlog()
-            ->where('action_type', '=', 'checkin from')
-            ->orderBy('created_at', 'desc')
-            ->withTrashed();
-    }
-
-    /**
-     * Get user requests
-     */
-    public function userRequests()
-    {
-        return $this->assetlog()
-            ->where('action_type', '=', 'requested')
-            ->orderBy('created_at', 'desc')
-            ->withTrashed();
-    }
-
-
-  /**
-   * assetmaintenances
-   * Get improvements for this asset
-   *
-   * @return mixed
-   * @author  Vincent Sposato <vincent.sposato@gmail.com>
-   * @version v1.0
-   */
-    public function assetmaintenances()
-    {
-        return $this->hasMany('\App\Models\AssetMaintenance', 'asset_id')
-                  ->orderBy('created_at', 'desc');
-    }
-
-  /**
-   * Get action logs for this asset
-   */
-    public function adminuser()
-    {
-        return $this->belongsTo('\App\Models\User', 'user_id');
-    }
-
-  /**
-   * Get total assets
-   */
-    public static function assetcount()
-    {
-        return Company::scopeCompanyables(Asset::where('physical', '=', '1'))
-               ->whereNull('deleted_at', 'and')
-               ->count();
-    }
-
-  /**
-   * Get total assets not checked out
-   */
-    public static function availassetcount()
-    {
-        return Asset::RTD()
-                  ->whereNull('deleted_at')
-                  ->count();
-    }
-
-  /**
-   * Get requestable assets
-   */
-    public static function getRequestable()
-    {
-        return Asset::Requestable()
-                  ->whereNull('deleted_at')
-                  ->count();
-    }
-
-  /**
-   * Get asset status
-   */
-    public function assetstatus()
-    {
-        return $this->belongsTo('\App\Models\Statuslabel', 'status_id');
-    }
-
-    public function model()
-    {
-        return $this->belongsTo('\App\Models\AssetModel', 'model_id')->withTrashed();
-    }
-
     public static function getExpiringWarrantee($days = 30)
     {
         return Asset::where('archived', '=', '0')
@@ -509,31 +364,6 @@ class Asset extends Depreciable
             ->orderBy('purchase_date', 'ASC')
             ->get();
     }
-
-  /**
-   * Get the license seat information
-   **/
-    public function licenses()
-    {
-        return $this->belongsToMany('\App\Models\License', 'license_seats', 'asset_id', 'license_id');
-    }
-
-    public function licenseseats()
-    {
-        return $this->hasMany('\App\Models\LicenseSeat', 'asset_id');
-    }
-
-    public function supplier()
-    {
-        return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
-    }
-
-
-    public function location()
-    {
-        return $this->belongsTo('\App\Models\Location', 'location_id');
-    }
-
 
 
   /**

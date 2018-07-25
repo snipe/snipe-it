@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Relationships\ManufacturerRelationships;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,6 +12,7 @@ class Manufacturer extends SnipeModel
     protected $presenter = 'App\Presenters\ManufacturerPresenter';
     use Presentable;
     use SoftDeletes;
+    use ManufacturerRelationships;
     protected $dates = ['deleted_at'];
     protected $table = 'manufacturers';
 
@@ -64,35 +66,4 @@ class Manufacturer extends SnipeModel
      */
     protected $searchableRelations = [];    
 
-
-
-    public function has_models()
-    {
-        return $this->hasMany('\App\Models\AssetModel', 'manufacturer_id')->count();
-    }
-
-    public function assets()
-    {
-        return $this->hasManyThrough('\App\Models\Asset', '\App\Models\AssetModel', 'manufacturer_id', 'model_id');
-    }
-
-    public function models()
-    {
-        return $this->hasMany('\App\Models\AssetModel', 'manufacturer_id');
-    }
-
-    public function licenses()
-    {
-        return $this->hasMany('\App\Models\License', 'manufacturer_id');
-    }
-
-    public function accessories()
-    {
-        return $this->hasMany('\App\Models\Accessory', 'manufacturer_id');
-    }
-
-    public function consumables()
-    {
-        return $this->hasMany('\App\Models\Consumable', 'manufacturer_id');
-    }
 }

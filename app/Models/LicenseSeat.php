@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\Loggable;
+use App\Models\Relationships\LicenseSeatRelationships;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Notifications\CheckoutLicenseNotification;
@@ -9,9 +10,7 @@ use App\Notifications\CheckinLicenseNotification;
 
 class LicenseSeat extends Model implements ICompanyableChild
 {
-    use CompanyableChildTrait;
-    use SoftDeletes;
-    use Loggable;
+    use CompanyableChildTrait,SoftDeletes,Loggable,LicenseSeatRelationships;
 
     protected $dates = ['deleted_at'];
     protected $guarded = 'id';
@@ -26,21 +25,6 @@ class LicenseSeat extends Model implements ICompanyableChild
     public function getCompanyableParents()
     {
         return ['asset', 'license'];
-    }
-
-    public function license()
-    {
-        return $this->belongsTo('\App\Models\License', 'license_id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('\App\Models\User', 'assigned_to')->withTrashed();
-    }
-
-    public function asset()
-    {
-        return $this->belongsTo('\App\Models\Asset', 'asset_id')->withTrashed();
     }
 
     public function location()
