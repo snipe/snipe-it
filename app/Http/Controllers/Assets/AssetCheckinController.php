@@ -70,13 +70,13 @@ class AssetCheckinController extends Controller
         $asset->accepted = null;
         $asset->name = e($request->get('name'));
 
-        if ($request->has('status_id')) {
+        if ($request->filled('status_id')) {
             $asset->status_id =  e($request->get('status_id'));
         }
 
         $asset->location_id = $asset->rtd_location_id;
 
-        if ($request->has('location_id')) {
+        if ($request->filled('location_id')) {
             $asset->location_id =  e($request->get('location_id'));
         }
 

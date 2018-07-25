@@ -110,7 +110,7 @@ class UsersController extends Controller
         //Username, email, and password need to be handled specially because the need to respect config values on an edit.
         $user->email =  e($request->input('email'));
         $user->username = e($request->input('username'));
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
         $user->first_name = $request->input('first_name');
@@ -141,13 +141,13 @@ class UsersController extends Controller
 
         if ($user->save()) {
 
-            if ($request->has('groups')) {
+            if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
             } else {
                 $user->groups()->sync(array());
             }
 
-            if (($request->input('email_user') == 1) && ($request->has('email'))) {
+            if (($request->input('email_user') == 1) && ($request->filled('email'))) {
               // Send the credentials through email
                 $data = array();
                 $data['email'] = e($request->input('email'));
@@ -258,13 +258,13 @@ class UsersController extends Controller
 
         // Only save groups if the user is a super user
         if (Auth::user()->isSuperUser()) {
-            if ($request->has('groups')) {
+            if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
             }
         }
 
 
-        if ($request->has('username')) {
+        if ($request->filled('username')) {
             $user->username = $request->input('username');
         }
         $user->email = $request->input('email');
@@ -298,7 +298,7 @@ class UsersController extends Controller
             ->update(['location_id' => $request->input('location_id', null)]);
 
         // Do we want to update the user password?
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
 

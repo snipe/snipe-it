@@ -35,7 +35,7 @@ class DepartmentsController extends Controller
             'departments.image'
         ])->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $departments = $departments->TextSearch($request->input('search'));
         }
 
@@ -76,7 +76,7 @@ class DepartmentsController extends Controller
         $department = new Department;
         $department->fill($request->all());
         $department->user_id = Auth::user()->id;
-        $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
+        $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
 
         if ($department->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.create.success')));
@@ -142,7 +142,7 @@ class DepartmentsController extends Controller
             'image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $departments = $departments->where('name', 'LIKE', '%'.$request->get('search').'%');
         }
 

@@ -30,7 +30,7 @@ class BulkUsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        if (($request->has('ids')) && (count($request->input('ids')) > 0)) {
+        if (($request->filled('ids')) && (count($request->input('ids')) > 0)) {
             $statuslabel_list = Helper::statusLabelList();
             $users = User::whereIn('id', array_keys(request('ids')))
                 ->with('groups', 'assets', 'licenses', 'accessories')->get();
@@ -58,7 +58,7 @@ class BulkUsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        if((!$request->has('ids')) || $request->input('ids') <= 0) {
+        if((!$request->filled('ids')) || $request->input('ids') <= 0) {
             return redirect()->back()->with('error', 'No users selected');
         }
         $user_raw_array = $request->input('ids');
@@ -96,7 +96,7 @@ class BulkUsersController extends Controller
             ->where('id', '!=', Auth::id())->update($this->update_array);
 
         // Only sync groups if groups were selected
-        if ($request->has('groups')) {
+        if ($request->filled('groups')) {
             foreach ($users as $user) {
                 $user->groups()->sync($request->input('groups'));
             }
@@ -138,10 +138,10 @@ class BulkUsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        if ((!$request->has('ids')) || (count($request->input('ids')) == 0)) {
+        if ((!$request->filled('ids')) || (count($request->input('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
         }
-        if ((!$request->has('status_id')) || ($request->input('status_id')=='')) {
+        if ((!$request->filled('status_id')) || ($request->input('status_id')=='')) {
             return redirect()->route('users.index')->with('error', 'No status selected');
         }
 

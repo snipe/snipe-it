@@ -27,15 +27,15 @@ class ConsumablesController extends Controller
                 ->with('company', 'location', 'category', 'users', 'manufacturer')
         );
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $consumables = $consumables->TextSearch(e($request->input('search')));
         }
 
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $consumables->where('company_id','=',$request->input('company_id'));
         }
 
-        if ($request->has('manufacturer_id')) {
+        if ($request->filled('manufacturer_id')) {
             $consumables->where('manufacturer_id','=',$request->input('manufacturer_id'));
         }
 

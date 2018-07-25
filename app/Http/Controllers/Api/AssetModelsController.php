@@ -52,11 +52,11 @@ class AssetModelsController extends Controller
 
 
 
-        if ($request->has('status')) {
+        if ($request->filled('status')) {
             $assetmodels->onlyTrashed();
         }
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $assetmodels->TextSearch($request->input('search'));
         }
 
@@ -210,7 +210,7 @@ class AssetModelsController extends Controller
 
         $settings = \App\Models\Setting::getSettings();
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $assetmodels = $assetmodels->SearchByManufacturerOrCat($request->input('search'));
         }
 

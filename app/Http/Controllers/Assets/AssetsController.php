@@ -67,7 +67,7 @@ class AssetsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('index', Asset::class);
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $company = Company::find($request->input('company_id'));
         } else {
             $company = null;
@@ -92,7 +92,7 @@ class AssetsController extends Controller
             ->with('item', new Asset)
             ->with('statuslabel_types', Helper::statusTypeList());
 
-        if ($request->has('model_id')) {
+        if ($request->filled('model_id')) {
             $selected_model = AssetModel::find($request->input('model_id'));
             $view->with('selected_model', $selected_model);
         }
@@ -139,7 +139,7 @@ class AssetsController extends Controller
         }
 
         // Create the image (if one was chosen.)
-        if ($request->hasFile('image')) {
+        if ($request->filledFile('image')) {
             $image = $request->input('image');
 
             // After modification, the image is prefixed by mime info like the following:
@@ -309,7 +309,7 @@ class AssetsController extends Controller
         $asset->supplier_id = $request->input('supplier_id', null);
 
         // If the box isn't checked, it's not in the request at all.
-        $asset->requestable = $request->has('requestable');
+        $asset->requestable = $request->filled('requestable');
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
 
         if ($asset->assigned_to=='') {
@@ -317,7 +317,7 @@ class AssetsController extends Controller
         }
 
 
-        if ($request->has('image_delete')) {
+        if ($request->filled('image_delete')) {
             try {
                 unlink(public_path().'/uploads/assets/'.$asset->image);
                 $asset->image = '';
@@ -339,7 +339,7 @@ class AssetsController extends Controller
         $asset->physical     = '1';
 
         // Update the image
-        if ($request->has('image')) {
+        if ($request->filled('image')) {
             $image = $request->input('image');
             // See postCreate for more explaination of the following.
             $header = explode(';', $image, 2)[0];
@@ -769,7 +769,7 @@ class AssetsController extends Controller
 
             $filename = '';
 
-            if ($request->hasFile('image')) {
+            if ($request->filledFile('image')) {
                 $file = $request->file('image');
                 try {
                     $destinationPath = config('app.private_uploads').'/audits';
