@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Consumables;
 
+use App\Events\ConsumableCheckedOut;
+use App\Http\Controllers\Controller;
 use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
@@ -67,7 +68,9 @@ class ConsumableCheckoutController extends Controller
             'assigned_to' => e(Input::get('assigned_to'))
         ]);
 
-        $consumable->logCheckout(e(Input::get('note')), $user);
+        $logaction = $consumable->logCheckout(e(Input::get('note')), $user);
+
+        event(new ConsumableCheckedOut($consumable, $user, $logaction));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));

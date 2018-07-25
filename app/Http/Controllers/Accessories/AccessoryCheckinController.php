@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Accessories;
 
+use App\Events\AccessoryCheckedIn;
 use App\Http\Controllers\Controller;
 use App\Models\Accessory;
 use App\Models\User;
@@ -46,7 +47,7 @@ class AccessoryCheckinController extends Controller
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @internal param int $accessoryId
      */
-    public function store($accessoryUserId = null, $backto = null)
+    public function store(Request $request, $accessoryUserId = null, $backto = null)
     {
       // Check if the accessory exists
         if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
@@ -62,6 +63,8 @@ class AccessoryCheckinController extends Controller
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
             $return_to = e($accessory_user->assigned_to);
             $accessory->logCheckin(User::find($return_to), e(Input::get('note')));
+
+            event(new AccessoryCheckedIn($accessory, User::find($return_to), Auth::user(), $request->input('note')));
 
             return redirect()->route("accessories.show", $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
         }
