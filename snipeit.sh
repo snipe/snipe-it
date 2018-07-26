@@ -95,7 +95,7 @@ log () {
 
 install_packages () {
   case $distro in
-    ubuntu|debian)
+    ubuntu|debian|raspbian)
       for p in $PACKAGES; do
         if dpkg -s "$p" >/dev/null 2>&1; then
           echo "  * $p already installed"
@@ -146,7 +146,7 @@ create_virtualhost () {
 create_user () {
   echo "* Creating Snipe-IT user."
 
-  if [ "$distro" == "ubuntu" ] || [ "$distro" == "debian" ] ; then
+  if [ "$distro" == "ubuntu" ] || [ "$distro" == "debian" ] || [ "$distro" == "raspbian" ] ; then
     adduser --quiet --disabled-password --gecos '""' "$APP_USER"
   else
     adduser "$APP_USER"
@@ -292,6 +292,12 @@ case $distro in
   *ubuntu*)
     echo "  The installer has detected $distro version $version codename $codename."
     distro=ubuntu
+    apache_group=www-data
+    apachefile=/etc/apache2/sites-available/$APP_NAME.conf
+    ;;
+  *Raspbian*)
+    echo "  The installer has detected $distro version $version codename $codename."
+    distro=raspbian
     apache_group=www-data
     apachefile=/etc/apache2/sites-available/$APP_NAME.conf
     ;;
@@ -532,7 +538,44 @@ case $distro in
     exit 1
   fi
   ;;
-  centos)
+ raspbian)
+  if [ "$version" == "9.4" ]; then
+    # Install for Raspbian 9.4
+    tzone=$(cat /etc/timezone)
+
+    echo -n "* Updating installed packages."
+    log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
+    progress
+
+    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+    install_packages
+
+    echo "* Configuring Apache."
+    create_virtualhost
+    log "phpenmod mcrypt"
+    log "phpenmod mbstring"
+    log "a2enmod rewrite"
+    log "a2ensite $APP_NAME.conf"
+
+    set_hosts
+
+    echo "* Starting MariaDB."
+    log "systemctl start mariadb.service"
+
+    echo "* Securing MariaDB."
+    /usr/bin/mysql_secure_installation
+
+    install_snipeit
+
+    echo "* Restarting Apache httpd."
+    log "systemctl restart apache2"
+   else
+    echo "Unsupported Raspbian version. Version found: $version"
+    exit 1
+  fi
+  ;;
+ centos)
   if [[ "$version" =~ ^6 ]]; then
     # Install for CentOS/Redhat 6.x
     tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
