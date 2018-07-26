@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Demirbaşlar şu kişiye atandı :name',
     'bulk_update_warn'	=> ': user_count Kullanıcının özelliklerini düzenlemek üzeresiniz. Lütfen, bu formu kullanarak kendi kullanıcı özniteliklerini değiştiremeyeceğinizi ve kendi kullanıcılarınız için ayrı ayrı düzenlemeler yapmanız gerektiğini unutmayın.',
     'bulk_update_help'	=> 'Bu form, birden fazla kullanıcıyı bir kerede güncellemenize olanak tanır. Sadece değiştirmek istediğiniz alanları doldurun. Boş bırakılan alanlar değişmeden kalır.',

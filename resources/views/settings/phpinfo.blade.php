@@ -31,14 +31,13 @@
 
                     # $matches [1]; # Style information
                     # $matches [2]; # Body information
-
+                        
                     echo "<div class='phpinfodisplay'><style type='text/css'>\n",
                     join( "\n",
                         array_map(
-                            create_function(
-                                '$i',
-                                'return ".phpinfodisplay " . preg_replace( "/,/", ",.phpinfodisplay ", $i );'
-                            ),
+                            function ($i) {
+                                return ".phpinfodisplay " . preg_replace( "/,/", ",.phpinfodisplay ", $i );
+                            },
                             preg_split( '/\n/', $matches[1] )
                         )
                     ),

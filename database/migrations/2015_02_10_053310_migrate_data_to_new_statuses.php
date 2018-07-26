@@ -13,8 +13,7 @@ class MigrateDataToNewStatuses extends Migration {
 	public function up()
 	{
 		// get newly added statuses from last migration
-		$statuses = DB::select('select * from ' . DB::getTablePrefix() . 'status_labels where name="Pending" OR name="Ready to Deploy"');
-
+        $statuses = DB::table('status_labels')->where('name', 'Pending')->orWhere('name', 'Ready to Deploy')->get();
 
 		foreach ($statuses as $status) {
 			if ($status->name =="Pending") {
@@ -25,7 +24,8 @@ class MigrateDataToNewStatuses extends Migration {
 		}
 
 		// Pending
-		$pendings = DB::select('select * from ' . DB::getTablePrefix() . 'assets where status_id IS NULL AND physical=1 ');
+        $pendings = DB::table('assets')->where('status_id', null)->where('physical', '1')->get();
+
 
 			foreach ($pendings as $pending) {
 				DB::update('update ' . DB::getTablePrefix() . 'assets set status_id = ? where status_id IS NULL AND physical=1',$pending_id);
@@ -34,7 +34,7 @@ class MigrateDataToNewStatuses extends Migration {
 
 
 		// Ready to Deploy
-		$rtds = DB::select('select * from ' . DB::getTablePrefix() . 'assets where status_id = 0 AND physical=1 ');
+        $rtds = DB::table('assets')->where('status_id', 0)->where('physical', '1')->get();
 
 		foreach ($rtds as $rtd) {
 				//DB::update('update users set votes = 100 where name = ?', array('John'));

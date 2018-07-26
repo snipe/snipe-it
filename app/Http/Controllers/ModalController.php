@@ -13,9 +13,7 @@ class ModalController extends Controller
     }
 
     function model() {
-        return view('modals.model')
-            ->with('manufacturer', Helper::manufacturerList())
-            ->with('category', Helper::categoryList('asset'));
+        return view('modals.model');
     }
 
     function statuslabel() {

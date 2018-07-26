@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Xem model',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Không có trường tùy chỉnh',
-
+    'add_default_values'        => 'Add default values',
 );

@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => ':name に資産を割り当てる',
     'bulk_update_warn'	=> ': user_count 人のプロパティを編集しようとしています。このフォームを使用してユーザー属性を変更することはできません。ユーザー個別に編集をする必要があります。',
     'bulk_update_help'	=> 'このフォームは一度に複数利用者を更新することが可能です。変更が必要なフィールドにのみ入力をして下さい。空白のフィールドは変更されません。',
@@ -16,7 +17,7 @@ return array(
     'restore_user'		=> '復元するには、ここをクリックします。',
     'last_login'        => '最終ログイン',
     'ldap_config_text'  => 'LDAP 構成設定 管理者 > 設定。 選択した場所は、インポートされたすべてのユーザーに対して設定されます。',
-    'print_assigned'    => 'Print All Assigned',
+    'print_assigned'    => '割り当て先をすべて印刷',
     'software_user'     => 'ソフトウェアは :name にチェックアウトしました。',
     'view_user'         => '利用者 :name を表示',
     'usercsv'           => 'CSVファイル',

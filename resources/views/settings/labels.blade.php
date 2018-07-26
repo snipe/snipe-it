@@ -163,7 +163,7 @@
 
                         <div class="form-group">
                             <div class="col-md-3">
-                                {{ Form::label('labels_width', trans('admin/settings/general.label_fields')) }}
+			{{ Form::label('labels_width', trans('admin/settings/general.label_fields')) }}
                             </div>
                             <div class="col-md-9">
                                 <div class="checkbox">
@@ -178,11 +178,16 @@
                                     <label>
                                         {{ Form::checkbox('labels_display_tag', '1', Input::old('labels_display_tag',   $setting->labels_display_tag),['class' => 'minimal']) }}
                                         {{ trans('admin/hardware/form.tag') }}
+				    </label>
+				    <label>
+                                        {{ Form::checkbox('labels_display_model', '1', Input::old('labels_display_model',   $setting->labels_display_model),['class' => 'minimal']) }}
+                                        {{ trans('admin/hardware/form.model') }}
                                     </label>
                                     <label>
                                         {{ Form::checkbox('labels_display_company_name', '1', Input::old('labels_display_company_name',   $setting->labels_display_company_name),['class' => 'minimal']) }}
                                         {{ trans('admin/companies/table.name') }}
-                                    </label>
+				    </label>
+
                                 </div> <!--/.CHECKBOX-->
                             </div> <!--/.col-md-9-->
                         </div> <!--/.form-group-->

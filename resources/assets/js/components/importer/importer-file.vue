@@ -100,9 +100,7 @@ tr {
                         {id: 'company', text: 'Company' },
                         {id: 'checkout_to', text: 'Checked out to' },
                         {id: 'email', text: 'Email' },
-                        {id: 'first_name', text: 'First Name' },
                         {id: 'item_name', text: 'Item Name' },
-                        {id: 'last_name', text: 'Last Name' },
                         {id: 'location', text: 'Location' },
                         {id: 'maintained', text: 'Maintained' },
                         {id: 'manufacturer', text: 'Manufacturer' },
@@ -119,11 +117,17 @@ tr {
                     assets: [
                         {id: 'asset_tag', text: 'Asset Tag' },
                         {id: 'asset_model', text: 'Model Name' },
+                        {id: 'checkout_class', text: 'Checkout Type' },
+                        {id: 'checkout_location', text: 'Checkout Location' },
                         {id: 'image', text: 'Image Filename' },
                         {id: 'model_number', text: 'Model Number' },
                         {id: 'full_name', text: 'Full Name' },
                         {id: 'status', text: 'Status' },
                         {id: 'warranty_months', text: 'Warranty Months' },
+                    ],
+                    consumables: [
+                        {id: 'item_no', text: "Item Number"},
+                        {id: 'model_number', text: "Model Number"},
                     ],
                     licenses: [
                         {id: 'expiration_date', text: 'Expiration Date' },
@@ -135,8 +139,11 @@ tr {
                     ],
                     users: [
                         {id: 'employee_num', text: 'Employee Number' },
+                        {id: 'first_name', text: 'First Name' },
                         {id: 'jobtitle', text: 'Job Title' },
+                        {id: 'last_name', text: 'Last Name' },
                         {id: 'phone_number', text: 'Phone Number' },
+
                     ],
                     customFields: this.customFields,
                 },
@@ -150,13 +157,29 @@ tr {
         },
         computed: {
             columns() {
+                // function to sort objects by their display text.
+                function sorter(a,b) {
+                    if (a.text < b.text)
+                        return -1;
+                    if (a.text > b.text)
+                        return 1;
+                    return 0;
+                }
                 switch(this.options.importType) {
                     case 'asset':
-                        return this.columnOptions.general.concat(this.columnOptions.assets).concat(this.columnOptions.customFields);
+                        return this.columnOptions.general
+                                .concat(this.columnOptions.assets)
+                                .concat(this.columnOptions.customFields)
+                                .sort(sorter);
+
+                    case 'consumable':
+                        return this.columnOptions.general
+                        .concat(this.columnOptions.consumables)
+                        .sort(sorter);
                     case 'license':
-                        return this.columnOptions.general.concat(this.columnOptions.licenses);
+                        return this.columnOptions.general.concat(this.columnOptions.licenses).sort(sorter);
                     case 'user':
-                        return this.columnOptions.general.concat(this.columnOptions.users);
+                        return this.columnOptions.general.concat(this.columnOptions.users).sort(sorter);
                 }
                 return this.columnOptions.general;
             },
@@ -172,7 +195,6 @@ tr {
         },
         watch: {
             columns() {
-                console.log("CHANGED");
                 this.populateSelect2ActiveItems();
             }
         },
@@ -222,7 +244,6 @@ tr {
                     for(var j=0; j < this.columns.length; j++) {
                         let column = this.columns[j];
                         let lower = this.file.header_row.map((value) => value.toLowerCase());
-                        console.dir(lower);
                         let index = lower.indexOf(column.text.toLowerCase())
                         if(index != -1) {
                             this.$set(this.columnMappings, this.file.header_row[index], column.id)
@@ -236,7 +257,6 @@ tr {
                 }
             },
             updateModel(header, value) {
-                console.log(header, value);
                 this.columnMappings[header] = value;
             }
         },

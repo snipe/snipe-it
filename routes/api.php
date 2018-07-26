@@ -16,8 +16,24 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
-    /*--- Accessories API ---*/
+    Route::group(['prefix' => 'account'], function () {
+        Route::get('requestable/hardware',
+            [
+                'as' => 'api.assets.requestable',
+                'uses' => 'AssetsController@requestable'
+            ]
+        );
 
+        Route::get('requests',
+            [
+                'as' => 'api.assets.requested',
+                'uses' => 'ProfileController@requestedAssets'
+            ]
+        );
+
+    });
+
+    /*--- Accessories API ---*/
     Route::resource('accessories', 'AccessoriesController',
         ['names' =>
             [
@@ -241,6 +257,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             [
                 'as' => 'api.fieldsets.fields',
                 'uses' => 'CustomFieldsetsController@fields'
+            ]
+        );
+        Route::get('/{fieldset}/fields/{model}',
+            [
+                'as' => 'api.fieldsets.fields-with-default-value',
+                'uses' => 'CustomFieldsetsController@fieldsWithDefaultValues'
             ]
         );
     });
@@ -652,16 +674,23 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
 
+
     /*--- Users API ---*/
 
-
-
+    
     Route::group([ 'prefix' => 'users' ], function () {
 
         Route::post('two_factor_reset',
             [
                 'as' => 'api.users.two_factor_reset',
                 'uses' => 'UsersController@postTwoFactorReset'
+            ]
+        );
+
+        Route::get('me',
+            [
+                'as' => 'api.users.me',
+                'uses' => 'UsersController@getCurrentUserInfo'
             ]
         );
 
@@ -714,6 +743,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         'reports/activity',
         [ 'as' => 'api.activity.index', 'uses' => 'ReportsController@index' ]
     );
+
 
 
 });

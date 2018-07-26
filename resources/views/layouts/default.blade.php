@@ -54,9 +54,7 @@
         }
         @endif
 
-        @if (($snipeSettings) && ($snipeSettings->custom_css!=''))
-            {!! $snipeSettings->show_custom_css() !!}
-        @endif
+
 
     @media (max-width: 400px) {
       .navbar-left {
@@ -68,6 +66,12 @@
       }
     }
     </style>
+
+      @if (($snipeSettings) && ($snipeSettings->custom_css))
+          <style>
+              {!! $snipeSettings->show_custom_css() !!}
+          </style>
+      @endif
 
     <script nonce="{{ csrf_token() }}">
           window.snipeit = {
@@ -224,7 +228,7 @@
                        @can('create', \App\Models\Component::class)
                        <li {!! (Request::is('components/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('components.create') }}">
-                           <i class="fa fa-hdd-o"></i>
+                           <i class="fa fa-hdd-o fa-fw"></i>
                            {{ trans('general.component') }}
                            </a>
                        </li>
@@ -307,6 +311,16 @@
                              <i class="fa fa-check fa-fw"></i>
                              {{ trans('general.viewassets') }}
                        </a></li>
+
+                     <li {!! (Request::is('account/requested') ? ' class="active"' : '') !!}>
+                         <a href="{{ route('account.requested') }}">
+                             <i class="fa fa-check fa-disk fa-fw"></i>
+                             Requested Assets
+                         </a></li>
+
+
+
+
                      <li>
                           <a href="{{ route('profile') }}">
                              <i class="fa fa-user fa-fw"></i>
@@ -524,13 +538,13 @@
                     </a>
 
                     <ul class="treeview-menu">
-                        @can('view', \App\Models\CustomField::class)
+                        @if(Gate::allows('view', App\Models\CustomField::class) || Gate::allows('view', App\Models\CustomFieldset::class))
                             <li {!! (Request::is('fields*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('fields.index') }}">
                                     {{ trans('admin/custom_fields/general.custom_fields') }}
                                 </a>
                             </li>
-                        @endcan
+                        @endif
 
                         @can('view', \App\Models\Statuslabel::class)
                             <li {!! (Request::is('statuslabels*') ? ' class="active"' : '') !!}>
@@ -731,7 +745,11 @@
       <footer class="main-footer hidden-print">
 
         <div class="pull-right hidden-xs">
-          <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
+          @if ($snipeSettings->version_footer!='off')
+              @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
+                <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
+              @endif
+          @endif
 
           @if ($snipeSettings->support_footer!='off')
               @if (($snipeSettings->support_footer=='on') || (($snipeSettings->support_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
@@ -740,12 +758,18 @@
                  @endif
           @endif
 
+        @if ($snipeSettings->privacy_policy_link!='')
+            <a target="_blank" class="btn btn-default btn-xs" rel="noopener" href="{{  $snipeSettings->privacy_policy_link }}" target="_new">{{ trans('admin/settings/general.privacy_policy') }}</a>
+        @endif
+
+
         </div>
           @if ($snipeSettings->footer_text!='')
               <div class="pull-right">
                   {!!  Parsedown::instance()->text(e($snipeSettings->footer_text))  !!}
               </div>
           @endif
+
 
         <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
       </footer>

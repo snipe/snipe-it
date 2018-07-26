@@ -166,10 +166,8 @@ class AccessoriesController extends Controller
         $accessory->supplier_id             = request('supplier_id');
 
         if ($request->hasFile('image')) {
-            
+
             if (!config('app.lock_passwords')) {
-                
-                
                 $image = $request->file('image');
                 $ext = $image->getClientOriginalExtension();
                 $file_name = "accessory-".str_random(18).'.'.$ext;
@@ -258,10 +256,17 @@ class AccessoriesController extends Controller
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
         }
 
-        $this->authorize('checkout', $accessory);
+        if ($accessory->category) {
 
-        // Get the dropdown of users and then pass it to the checkout view
-        return view('accessories/checkout', compact('accessory'));
+            $this->authorize('checkout', $accessory);
+
+            // Get the dropdown of users and then pass it to the checkout view
+            return view('accessories/checkout', compact('accessory'));
+        }
+
+        return redirect()->back()->with('error', 'The category type for this accessory is not valid. Edit the accessory and select a valid accessory category.');
+
+
 
     }
 

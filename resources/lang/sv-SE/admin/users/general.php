@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Tillgångar tilldelade: namn',
     'bulk_update_warn'	=> 'Du håller på att redigera egenskaperna hos: user_count-användare. Observera att du inte kan ändra dina egna användarattribut med hjälp av det här formuläret, och måste göra ändringar till din egen användare enskilt.',
     'bulk_update_help'	=> 'Den här blanketten låter dig uppdatera flera användare samtidigt. Fyll bara i de fält du behöver ändra. Alla fält som lämnas tomma kommer att förbli oförändrade.',

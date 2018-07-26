@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Bene assegnato a :name',
     'bulk_update_warn'	=> 'Stai per modificare le proprietà di: user_count users. Tieni presente che non puoi modificare i tuoi attributi utente utilizzando questo modulo e devi modificare individualmente il tuo utente.',
     'bulk_update_help'	=> 'Questo modulo consente di aggiornare più utenti contemporaneamente. Inserisci solo i campi che devi modificare. Tutti i campi lasciati vuoti rimarranno invariati.',

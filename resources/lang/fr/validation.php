@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'L\'attribut ":attribute" est invalide.',
     'numeric'              => 'L\'attribut ":attribute" doit être un nombre.',
     'present'              => 'Le champ d\'attribut: doit être présent.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Ce n\'est pas une règle Regex valide. ',
     'regex'                => 'Le format de l\'attribut ":attribute" est invalide.',
     'required'             => 'Le champs :attribute est nécessaire.',
     'required_if'          => 'Le champ :attribute est nécessaire quand :other vaut :value.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'Cet-te :attribute a déjà été pris-e.',
     'uploaded'             => 'L\'attribut: n\'a pas pu télécharger.',
     'url'                  => 'Le format de cet-te :attribute est invalide.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => ":attribute doit être unique.",
 
     /*
     |--------------------------------------------------------------------------

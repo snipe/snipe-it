@@ -1,26 +1,30 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AssetFileRequest;
 use App\Helpers\Helper;
+use App\Http\Requests\AssetFileRequest;
+use App\Http\Requests\SaveUserRequest;
 use App\Models\Accessory;
-use App\Models\LicenseSeat;
 use App\Models\Actionlog;
 use App\Models\Asset;
-use App\Models\Group;
 use App\Models\Company;
-use App\Models\Location;
-use App\Models\License;
-use App\Models\Setting;
-use App\Http\Requests\SaveUserRequest;
-use Symfony\Component\HttpFoundation\StreamedResponse;
-use App\Models\User;
+use App\Models\Group;
 use App\Models\Ldap;
+use App\Models\License;
+use App\Models\LicenseSeat;
+use App\Models\Location;
+use App\Models\Setting;
+use App\Models\User;
+use App\Notifications\WelcomeNotification;
+use Artisan;
 use Auth;
 use Config;
 use Crypt;
 use DB;
+use Gate;
 use HTML;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Input;
 use Lang;
 use League\Csv\Reader;
@@ -29,12 +33,9 @@ use Redirect;
 use Response;
 use Str;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use URL;
 use View;
-use Illuminate\Http\Request;
-use Gate;
-use Artisan;
-use App\Notifications\WelcomeNotification;
 
 /**
  * This controller handles all actions related to Users for
@@ -111,7 +112,7 @@ class UsersController extends Controller
         $user->last_name = $request->input('last_name');
         $user->locale = $request->input('locale');
         $user->employee_num = $request->input('employee_num');
-        $user->activated = $request->input('activated', $user->activated);
+        $user->activated = $request->input('activated', 0);
         $user->jobtitle = $request->input('jobtitle');
         $user->phone = $request->input('phone');
         $user->location_id = $request->input('location_id', null);
@@ -163,68 +164,7 @@ class UsersController extends Controller
         return redirect()->back()->withInput()->withErrors($user->getErrors());
     }
 
-    /**
-    * JSON handler for creating a user through a modal popup
-    *
-    * @todo Handle validation more graciously
-    * @author [B. Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return string JSON
-    */
-    public function apiStore(SaveUserRequest $request)
-    {
-        $this->authorize('create', User::class);
 
-        $user = new User;
-        $inputs = Input::except('csrf_token', 'password_confirm', 'groups', 'email_user');
-        $inputs['activated'] = true;
-
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->username = $request->input('username');
-        $user->email = $request->input('email');
-        $user->department_id = $request->input('department_id', null);
-        if ($request->has('password')) {
-            $user->password = bcrypt($request->input('password'));
-        }
-        $user->activated = true;
-
-        // Was the user created?
-        if ($user->save()) {
-
-            if (Input::get('email_user') == 1) {
-                // Send the credentials through email
-                $data = array();
-                $data['email'] = $request->input('email');
-                $data['username'] = $request->input('username');
-                $data['first_name'] = $request->input('first_name');
-                $data['last_name'] = e($request->input('last_name'));
-                $data['password'] = $request->input('password');
-
-                $user->notify(new WelcomeNotification($data));
-
-                /*Mail::send('emails.send-login', $data, function ($m) use ($user) {
-                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.welcome', ['name' => $user->first_name]));
-                });*/
-            }
-
-            return JsonResponse::create($user);
-
-        }
-        return JsonResponse::create(["error" => "Failed validation: " . print_r($user->getErrors(), true)], 500);
-    }
-
-    /**
-     * Returns a view that displays the edit user form
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v1.0]
-     * @param $permissions
-     * @return View
-     * @internal param int $id
-     */
 
     private function filterDisplayable($permissions)
     {
@@ -237,6 +177,15 @@ class UsersController extends Controller
         return $output;
     }
 
+    /**
+     * Returns a view that displays the edit user form
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @param $permissions
+     * @return View
+     * @internal param int $id
+     */
     public function edit($id)
     {
 
@@ -298,9 +247,10 @@ class UsersController extends Controller
                 }
             }
 
-        } catch (UserNotFoundException $e) {
-            $error = trans('admin/users/message.user_not_found', compact('id'));
-            return redirect()->route('users.index')->with('error', $error);
+
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('users.index')
+                ->with('error', trans('admin/users/message.user_not_found', compact('id')));
         }
 
 
@@ -308,8 +258,6 @@ class UsersController extends Controller
         if (Auth::user()->isSuperUser()) {
             if ($request->has('groups')) {
                 $user->groups()->sync($request->input('groups'));
-            } else {
-                $user->groups()->sync(array());
             }
         }
 
@@ -326,7 +274,7 @@ class UsersController extends Controller
         $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
         $user->locale = $request->input('locale');
         $user->employee_num = $request->input('employee_num');
-        $user->activated = $request->input('activated', $user->activated);
+        $user->activated = $request->input('activated', 0);
         $user->jobtitle = $request->input('jobtitle', null);
         $user->phone = $request->input('phone');
         $user->location_id = $request->input('location_id', null);
@@ -338,6 +286,7 @@ class UsersController extends Controller
         $user->city = $request->input('city', null);
         $user->state = $request->input('state', null);
         $user->country = $request->input('country', null);
+        $user->activated = $request->input('activated', 0);
         $user->zip = $request->input('zip', null);
 
 
@@ -382,7 +331,7 @@ class UsersController extends Controller
     {
         try {
             // Get user information
-            $user = User::find($id);
+            $user = User::findOrFail($id);
             // Authorize takes care of many of our logic checks now.
             $this->authorize('delete', User::class);
 
@@ -392,9 +341,9 @@ class UsersController extends Controller
                 return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
             }
 
-            if (count($user->assets) > 0) {
+            if ($user->assets->count() > 0) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->assets) . ' assets associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->assets->count()) . ' assets associated with them.');
             }
 
             if ($user->licenses()->count() > 0) {
@@ -420,7 +369,7 @@ class UsersController extends Controller
 
             // Redirect to the user management page
             return redirect()->route('users.index')->with('success', $success);
-        } catch (UserNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
             // Redirect to the user management page
@@ -438,23 +387,19 @@ class UsersController extends Controller
     public function postBulkEdit(Request $request)
     {
         $this->authorize('update', User::class);
-        if ((!Input::has('ids')) || (count(Input::input('ids')) == 0)) {
-            return redirect()->back()->with('error', 'No users selected');
-        } else {
 
+        if (($request->has('ids')) && (count($request->input('ids')) > 0)) {
             $statuslabel_list = Helper::statusLabelList();
             $user_raw_array = array_keys(Input::get('ids'));
-            $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
-
             $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses', 'accessories')->get();
-            if ($request->input('bulk_actions')=='edit') {
-
+            if ($request->input('bulk_actions') == 'edit') {
                 return view('users/bulk-edit', compact('users'))
                     ->with('groups', Group::pluck('name', 'id'));
             }
-
             return view('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
         }
+
+        return redirect()->back()->with('error', 'No users selected');
     }
 
 
@@ -468,15 +413,13 @@ class UsersController extends Controller
     public function postBulkEditSave(Request $request)
     {
         $this->authorize('update', User::class);
-        if ((!Input::has('ids')) || (count(Input::input('ids')) == 0)) {
-            return redirect()->back()->with('error', 'No users selected');
-        } else {
 
-            $user_raw_array = Input::get('ids');
+        if (($request->has('ids')) && (count($request->input('ids')) > 0)) {
+
+            $user_raw_array = $request->input('ids');
             $update_array = array();
             $manager_conflict = false;
-
-            $users = User::whereIn('id', $user_raw_array)->where('id','!=',Auth::user()->id)->get();
+            $users = User::whereIn('id', $user_raw_array)->where('id', '!=', Auth::user()->id)->get();
 
             if ($request->has('location_id')) {
                 $update_array['location_id'] = $request->input('location_id');
@@ -492,14 +435,12 @@ class UsersController extends Controller
             }
 
 
-
             if ($request->has('manager_id')) {
 
                 // Do not allow a manager update if the selected manager is one of the users being
                 // edited.
                 if (!array_key_exists($request->input('manager_id'), $user_raw_array)) {
                     $update_array['manager_id'] = $request->input('manager_id');
-
                 } else {
                     $manager_conflict = true;
                 }
@@ -509,8 +450,9 @@ class UsersController extends Controller
                 $update_array['activated'] = $request->input('activated');
             }
 
+            // Save the updated info
             if (count($update_array) > 0) {
-                User::whereIn('id', $user_raw_array)->where('id','!=',Auth::user()->id)->update($update_array);
+                User::whereIn('id', $user_raw_array)->where('id', '!=', Auth::user()->id)->update($update_array);
             }
 
             // Only sync groups if groups were selected
@@ -520,13 +462,17 @@ class UsersController extends Controller
                 }
             }
 
-        }
-        if ($manager_conflict) {
+            if ($manager_conflict) {
+                return redirect()->route('users.index')
+                    ->with('warning', trans('admin/users/message.bulk_manager_warn'));
+            }
+
             return redirect()->route('users.index')
-                ->with('warning', trans('admin/users/message.bulk_manager_warn'));
+                ->with('success', trans('admin/users/message.success.update_bulk'));
         }
-        return redirect()->route('users.index')
-            ->with('success', trans('admin/users/message.success.update_bulk'));
+
+        return redirect()->back()->with('error', 'No users selected');
+
 
 
     }
@@ -538,13 +484,13 @@ class UsersController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function postBulkSave()
+    public function postBulkSave(Request $request)
     {
         $this->authorize('update', User::class);
 
-        if ((!Input::has('ids')) || (count(Input::has('ids')) == 0)) {
+        if ((!$request->has('ids')) || (count($request->input('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
-        } elseif ((!Input::has('status_id')) || (count(Input::has('status_id')) == 0)) {
+        } elseif ((!$request->has('status_id')) || ($request->input('status_id')=='')) {
             return redirect()->route('users.index')->with('error', 'No status selected');
         } else {
 
@@ -554,7 +500,7 @@ class UsersController extends Controller
             if (($key = array_search(Auth::user()->id, $user_raw_array)) !== false) {
                 unset($user_raw_array[$key]);
             }
-            
+
 
             if (!config('app.lock_passwords')) {
 
@@ -766,129 +712,6 @@ class UsersController extends Controller
     }
 
     /**
-    * Return user import view
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
-     */
-    public function getImport()
-    {
-        $this->authorize('update', User::class);
-        // Selected groups
-        $selectedGroups = Input::old('groups', array());
-        // Get all the available permissions
-        $permissions = config('permissions');
-        $selectedPermissions = Input::old('permissions', array('superuser' => -1));
-        // Show the page
-        return view('users/import', compact('selectedGroups', 'permissions', 'selectedPermissions'));
-    }
-
-    /**
-    * Handle user import file
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postImport()
-    {
-        $this->authorize('update', User::class);
-        if (!ini_get("auto_detect_line_endings")) {
-            ini_set("auto_detect_line_endings", '1');
-        }
-
-        $csv = Reader::createFromPath(Input::file('user_import_csv'));
-        $csv->setNewline("\r\n");
-
-        if (Input::get('has_headers') == 1) {
-            $csv->setOffset(1);
-        }
-
-        $duplicates = '';
-
-        $nbInsert = $csv->each(function ($row) use ($duplicates) {
-
-            if (array_key_exists(2, $row)) {
-
-                if (Input::get('activate') == 1) {
-                    $activated = '1';
-                } else {
-                    $activated = '0';
-                }
-
-                $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 15);
-
-                // Location
-                if (array_key_exists('4', $row)) {
-                    $user_location_id = trim($row[4]);
-                    if ($user_location_id=='') {
-                        $user_location_id = null;
-                    }
-                }
-
-
-
-                try {
-                    // Check if this email already exists in the system
-                    $user = User::where('username', $row[2])->first();
-                    if ($user) {
-                        $duplicates .= $row[2] . ', ';
-                    } else {
-
-                        $newuser = array(
-                            'first_name' => trim(e($row[0])),
-                            'last_name' => trim(e($row[1])),
-                            'username' => trim(e($row[2])),
-                            'email' => trim(e($row[3])),
-                            'password' => bcrypt($pass),
-                            'activated' => $activated,
-                            'location_id' => trim(e($user_location_id)),
-                            'phone' => trim(e($row[5])),
-                            'jobtitle' => trim(e($row[6])),
-                            'employee_num' => trim(e($row[7])),
-                            'company_id' => Company::getIdForUser($row[8]),
-                            'permissions' => '{"user":1}',
-                            'notes' => 'Imported user'
-                        );
-
-                        DB::table('users')->insert($newuser);
-
-
-                        if (((Input::get('email_user') == 1) && !config('app.lock_passwords'))) {
-                            // Send the credentials through email
-                            if ($row[3] != '') {
-                                $data = array();
-                                $data['email'] = trim(e($row[4]));
-                                $data['username'] = trim(e($row[2]));
-                                $data['first_name'] = trim(e($row[0]));
-                                $data['last_name'] = trim(e($row[1]));
-                                $data['password'] = $pass;
-
-                                if ($newuser['email']) {
-                                    $user = User::where('username', $row[2])->first();
-                                    $user->notify(new WelcomeNotification($data));
-                                    
-                                    /*Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
-                                        $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
-                                        $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                                        $m->subject(trans('mail.welcome', ['name' => $newuser['first_name']]));
-                                    });*/
-                                }
-                            }
-                        }
-                    }
-                } catch (Exception $e) {
-                    echo 'Caught exception: ', $e->getMessage(), "\n";
-                }
-                return true;
-            }
-        });
-        return redirect()->route('users.index')->with('duplicates', $duplicates)->with('success', 'Success');
-    }
-
-
-    /**
      * Return JSON response with a list of user details for the getIndex() view.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -1014,8 +837,7 @@ class UsersController extends Controller
             return redirect()->route('users.index')->with('error', $e->getMessage());
         }
 
-        return view('users/ldap')
-              ->with('location_list', Helper::locationsList());
+        return view('users/ldap');
     }
 
 

@@ -21,7 +21,7 @@ trait Loggable
 {
 
     /**
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
@@ -32,7 +32,7 @@ trait Loggable
     }
 
     /**
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
@@ -55,7 +55,7 @@ trait Loggable
         if ($log->target_type == Location::class) {
             $log->location_id = $target->id;
         } elseif ($log->target_type == Asset::class) {
-            $log->location_id = $target->rtd_location_id;
+            $log->location_id = $target->location_id;
         } else {
             $log->location_id = $target->location_id;
         }
@@ -106,7 +106,7 @@ trait Loggable
         return $log;
     }
     /**
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
@@ -121,8 +121,17 @@ trait Loggable
             $log->item_type = License::class;
             $log->item_id = $this->license_id;
         } else {
+
             $log->item_type = static::class;
             $log->item_id = $this->id;
+
+            if (static::class == Asset::class) {
+                if ($asset = Asset::find($log->item_id)) {
+                    \Log::debug('Increment the checkin count for asset: '.$log->item_id);
+                    $asset->increment('checkin_counter', 1);
+                }
+            }
+
         }
 
 
@@ -163,7 +172,7 @@ trait Loggable
      * @since [v4.0]
      * @return \App\Models\Actionlog
      */
-    public function logAudit($note, $location_id)
+    public function logAudit($note, $location_id, $filename = null)
     {
         $log = new Actionlog;
         $location = Location::find($location_id);
@@ -177,10 +186,12 @@ trait Loggable
         $log->location_id = ($location_id) ? $location_id : null;
         $log->note = $note;
         $log->user_id = Auth::user()->id;
+        $log->filename = $filename;
         $log->logaction('audit');
 
         $params = [
             'item' => $log->item,
+            'filename' => $log->filename,
             'admin' => $log->user,
             'location' => ($location) ? $location->name : '',
             'note' => $note
@@ -193,7 +204,7 @@ trait Loggable
 
 
     /**
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.5]
      * @return \App\Models\Actionlog
      */
@@ -220,7 +231,7 @@ trait Loggable
     }
 
     /**
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */

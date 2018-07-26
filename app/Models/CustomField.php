@@ -16,6 +16,7 @@ class CustomField extends Model
     public $guarded=["id"];
     public static $PredefinedFormats=[
         "ANY" => "",
+        "CUSTOM REGEX" => "",
         "ALPHA" => "alpha",
         "ALPHA-DASH" => "alpha_dash",
         "NUMERIC" => "numeric",
@@ -41,7 +42,8 @@ class CustomField extends Model
         'format',
         'field_values',
         'field_encrypted',
-        'help_text'
+        'help_text',
+        'show_in_email',
     ];
 
     // This is confusing, since it's actually the custom fields table that
@@ -146,6 +148,26 @@ class CustomField extends Model
         return $this->belongsTo('\App\Models\User');
     }
 
+    public function defaultValues()
+    {
+        return $this->belongsToMany('\App\Models\AssetModel', 'models_custom_fields')->withPivot('default_value');
+    }
+
+    /**
+     * Returns the default value for a given model using the defaultValues
+     * relationship
+     *
+     * @param  int $modelId
+     * @return string
+     */
+    public function defaultValue($modelId)
+    {
+        return $this->defaultValues->filter(function ($item) use ($modelId) {
+            return $item->pivot->asset_model_id == $modelId;
+        })->map(function ($item) {
+            return $item->pivot->default_value;
+        })->first();
+    }
 
     public function check_format($value)
     {

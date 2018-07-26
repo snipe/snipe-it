@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Models\Setting;
 use App\Models\SnipeModel;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -31,6 +32,7 @@ class CheckinLicenseNotification extends Notification
         $this->admin = $params['admin'];
         $this->note = '';
         $this->settings = $params['settings'];
+        $this->target_type = $params['target_type'];
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -52,8 +54,14 @@ class CheckinLicenseNotification extends Notification
             $notifyBy[] = 'slack';
         }
 
-
-        $notifyBy[] = 'mail';
+        /**
+         * Only send checkin notifications to users if the category 
+         * has the corresponding checkbox checked.
+         */
+        if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '')
+        {
+            $notifyBy[] = 'mail';
+        }
 
         return $notifyBy;
     }

@@ -26,6 +26,14 @@ use Illuminate\Http\Request;
  */
 class ReportsController extends Controller
 {
+    /**
+     * Checks for correct permissions
+     */
+    public function __construct() {
+        parent::__construct();
+
+        $this->authorize('reports.view');
+    }
 
     /**
     * Returns a view that displays the accessories report.
@@ -80,136 +88,6 @@ class ReportsController extends Controller
         $response->header('Content-disposition', 'attachment;filename=report.csv');
 
         return $response;
-    }
-
-    /**
-    * Display asset report view.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
-    * @return View
-    */
-    public function getAssetsReport()
-    {
-        $settings = \App\Models\Setting::first();
-        return view('reports/asset', compact('assets'))->with('settings', $settings);
-    }
-
-
-
-    /**
-    * Exports the assets to CSV
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
-    * @return \Illuminate\Http\Response
-    */
-    public function exportAssetReport(Request $request)
-    {
-
-         \Debugbar::disable();
-
-        $customfields = CustomField::get();
-
-        $response = new StreamedResponse(function () use ($customfields, $request) {
-            // Open output stream
-            $handle = fopen('php://output', 'w');
-
-            $assets = Asset::with('assignedTo', 'location','defaultLoc','assignedTo','model','supplier','assetstatus','model.manufacturer');
-
-                // This is used by the sidenav, mostly
-            switch ($request->input('status')) {
-                case 'Deleted':
-                    $assets->withTrashed()->Deleted();
-                    break;
-                case 'Pending':
-                    $assets->Pending();
-                    break;
-                case 'RTD':
-                    $assets->RTD();
-                    break;
-                case 'Undeployable':
-                    $assets->Undeployable();
-                    break;
-                case 'Archived':
-                    $assets->Archived();
-                    break;
-                case 'Requestable':
-                    $assets->RequestableAssets();
-                    break;
-                case 'Deployed':
-                    $assets->Deployed();
-                    break;
-            }
-
-            $headers=[
-                trans('general.company'),
-                trans('admin/hardware/table.asset_tag'),
-                trans('admin/hardware/form.manufacturer'),
-                trans('general.category'),
-                trans('admin/hardware/form.model'),
-                trans('general.model_no'),
-                trans('general.name'),
-                trans('admin/hardware/table.serial'),
-                trans('general.status'),
-                trans('admin/hardware/table.purchase_date'),
-                trans('admin/hardware/table.purchase_cost'),
-                trans('admin/hardware/form.order'),
-                trans('general.supplier'),
-                trans('admin/hardware/table.checkoutto'),
-                trans('general.type'),
-                trans('admin/hardware/table.checkout_date'),
-                trans('admin/hardware/table.location'),
-                trans('general.notes'),
-            ];
-            foreach ($customfields as $field) {
-                $headers[]=$field->name;
-            }
-            fputcsv($handle, $headers);
-
-            $assets->orderBy('created_at', 'DESC')->chunk(500, function($assets) use($handle, $customfields) {
-
-
-                foreach ($assets as $asset) {
-
-                    // Add a new row with data
-                    $values=[
-                        ($asset->company) ? $asset->company->name : '',
-                        $asset->asset_tag,
-                        ($asset->model->manufacturer) ? $asset->model->manufacturer->name : '',
-                        ($asset->model->category) ? $asset->model->category->name : '',
-                        ($asset->model) ? $asset->model->name : '',
-                        ($asset->model->model_number) ? $asset->model->model_number : '',
-                        ($asset->name) ? $asset->name : '',
-                        ($asset->serial) ? $asset->serial : '',
-                        ($asset->assetstatus) ? e($asset->present()->statusText) : '',
-                        ($asset->purchase_date) ? e($asset->purchase_date) : '',
-                        ($asset->purchase_cost > 0) ? Helper::formatCurrencyOutput($asset->purchase_cost) : '',
-                        ($asset->order_number) ? e($asset->order_number) : '',
-                        ($asset->supplier) ? e($asset->supplier->name) : '',
-                        ($asset->checkedOutToUser() && $asset->assigned) ? e($asset->assigned->getFullNameAttribute()) : ($asset->assigned ? e($asset->assigned->display_name) : ''),
-                        ($asset->checkedOutToUser() && $asset->assigned) ? 'user' : e($asset->assignedType()),
-                        ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
-                        ($asset->location) ? e($asset->location->name) : '',
-                        ($asset->notes) ? e($asset->notes) : '',
-                    ];
-                    foreach ($customfields as $field) {
-                        $values[]=$asset->{$field->db_column_name()};
-                    }
-                    fputcsv($handle, $values);
-                }
-            });
-
-            // Close the output stream
-            fclose($handle);
-        }, 200, [
-            'Content-Type' => 'text/csv',
-            'Content-Disposition'
-                => 'attachment; filename="'.(($request->has('status')) ? trim($request->input('status')) : 'all').'-assets-'.date('Y-m-d-his').'.csv"',
-        ]);
-
-        return $response;
-
     }
 
     /**
@@ -503,6 +381,20 @@ class ReportsController extends Controller
                 $header[] = trans('general.zip');
             }
 
+            if ($request->has('rtd_location')) {
+                $header[] = trans('admin/hardware/form.default_location');
+            }
+            
+            if ($request->has('rtd_location_address')) {
+                $header[] = trans('general.address');
+                $header[] = trans('general.address');
+                $header[] = trans('general.city');
+                $header[] = trans('general.state');
+                $header[] = trans('general.country');
+                $header[] = trans('general.zip');
+            }
+
+
             if ($request->has('assigned_to')) {
                 $header[] = trans('admin/hardware/table.checkoutto');
                 $header[] = trans('general.type');
@@ -514,6 +406,14 @@ class ReportsController extends Controller
 
             if ($request->has('employee_num')) {
                 $header[] = 'Employee No.';
+            }
+
+            if ($request->has('manager')) {
+                $header[] = trans('admin/users/table.manager');
+            }
+
+            if ($request->has('department')) {
+                $header[] = trans('general.department');
             }
 
             if ($request->has('status')) {
@@ -575,6 +475,11 @@ class ReportsController extends Controller
                 $assets->where('assets.location_id', $request->input('by_location_id'));
             }
 
+            if ($request->has('by_rtd_location_id')) {
+                \Log::debug('RTD location should match: '.$request->input('by_rtd_location_id'));
+                $assets->where('assets.rtd_location_id', $request->input('by_rtd_location_id'));
+            }
+
             if ($request->has('by_supplier_id')) {
                 $assets->where('assets.supplier_id', $request->input('by_supplier_id'));
             }
@@ -609,6 +514,10 @@ class ReportsController extends Controller
 
             if (($request->has('created_start')) && ($request->has('created_end'))) {
                 $assets->whereBetween('assets.created_at', [$request->input('created_start'), $request->input('created_end')]);
+            }
+
+            if (($request->has('expected_checkin_start')) && ($request->has('expected_checkin_end'))) {
+                $assets->whereBetween('assets.expected_checkin', [$request->input('expected_checkin_start'), $request->input('expected_checkin_end')]);
             }
             
             $assets->orderBy('assets.created_at', 'ASC')->chunk(500, function($assets) use($handle, $customfields, $request) {
@@ -679,6 +588,19 @@ class ReportsController extends Controller
                         $row[] = ($asset->location) ? $asset->location->zip : '';
                     }
 
+                    if ($request->has('rtd_location')) {
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->present()->name() : '';
+                    }
+
+                    if ($request->has('rtd_location_address')) {
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->address : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->address2 : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->city : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->state : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->country : '';
+                        $row[] = ($asset->defaultLoc) ? $asset->defaultLoc->zip : '';
+                    }
+
 
                     if ($request->has('assigned_to')) {
                         $row[] = ($asset->checkedOutToUser() && $asset->assigned) ? e($asset->assigned->getFullNameAttribute()) : ($asset->assigned ? e($asset->assigned->display_name) : '');
@@ -698,6 +620,23 @@ class ReportsController extends Controller
                         // Only works if we're checked out to a user, not anything else.
                         if ($asset->checkedOutToUser()) {
                             $row[] = ($asset->assignedto) ? $asset->assignedto->employee_num : '';
+                        } else {
+                            $row[] = ''; // Empty string if unassigned
+                        }
+                    }
+
+                    if ($request->has('manager')) {
+                        if ($asset->checkedOutToUser()) {
+                            $row[] = (($asset->assignedto) && ($asset->assignedto->manager)) ? $asset->assignedto->manager->present()->fullName : '';
+                        } else {
+                            $row[] = ''; // Empty string if unassigned
+                        }
+                    }
+
+
+                    if ($request->has('department')) {
+                        if ($asset->checkedOutToUser()) {
+                            $row[] = (($asset->assignedto) && ($asset->assignedto->department)) ? $asset->assignedto->department->name : '';
                         } else {
                             $row[] = ''; // Empty string if unassigned
                         }

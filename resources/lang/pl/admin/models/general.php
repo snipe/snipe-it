@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Pokaż Modele',
     'fieldset'                  => 'Zestaw pól',
     'no_custom_field'           => 'Brak niestandardowych pól',
-
+    'add_default_values'        => 'Add default values',
 );

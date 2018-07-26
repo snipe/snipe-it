@@ -126,7 +126,7 @@ View Assets for  {{ $user->present()->fullName() }}
                 <td>{{ $license->name }}</td>
                 <td>
                   @can('viewKeys', $license)
-                    {{ mb_strimwidth($license->serial, 0, 50, "...") }}
+                    {{ $license->serial }}
                   @else
                     ------------
                   @endcan
@@ -205,7 +205,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @endif
 
       <div class="box-body">
-        <!-- checked out licenses table -->
+        <!-- checked out Accessories table -->
 
         <div class="table-responsive">
           <table
@@ -266,7 +266,7 @@ View Assets for  {{ $user->present()->fullName() }}
                 data-show-columns="true"
                 data-show-export="true"
                 data-show-refresh="true"
-                data-sort-order="asc"
+                data-sort-order="desc"
                 id="userActivityReport"
                 class="table table-striped snipe-table"
                 data-url="{{route('api.activity.index', ['target_id' => $user->id, 'target_type' => 'User', 'order' => 'desc']) }}"

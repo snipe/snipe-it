@@ -25,7 +25,7 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier')->withCount('freeSeats'));
+        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats'));
 
 
         if ($request->has('company_id')) {
@@ -64,6 +64,10 @@ class LicensesController extends Controller
             $licenses->where('supplier_id','=',$request->input('supplier_id'));
         }
 
+        if ($request->has('category_id')) {
+            $licenses->where('category_id','=',$request->input('category_id'));
+        }
+
         if ($request->has('depreciation_id')) {
             $licenses->where('depreciation_id','=',$request->input('depreciation_id'));
         }
@@ -90,11 +94,14 @@ class LicensesController extends Controller
             case 'supplier':
                 $licenses = $licenses->leftJoin('suppliers', 'licenses.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
                 break;
+            case 'category':
+                $licenses = $licenses->leftJoin('categories', 'licenses.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
+                break;
             case 'company':
                 $licenses = $licenses->leftJoin('companies', 'licenses.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
                 break;
             default:
-                $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','company','license_name','license_email','free_seats_count','seats'];
+                $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','company','category','license_name','license_email','free_seats_count','seats'];
                 $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
                 $licenses = $licenses->orderBy($sort, $order);
                 break;
@@ -161,7 +168,7 @@ class LicensesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->authorize('edit', License::class);
+        $this->authorize('update', License::class);
 
         $license = License::findOrFail($id);
         $license->fill($request->all());
@@ -215,6 +222,8 @@ class LicensesController extends Controller
     {
 
         if ($license = License::find($licenseId)) {
+
+            $this->authorize('view', $license);
 
             $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
 

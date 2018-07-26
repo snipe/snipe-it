@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Kasutajaga :nimi seotud vahendid',
     'bulk_update_warn'	=> 'Sa oled muutmas :user_count kasutaja andmeid. Palun pane tähele, et saa ei saa selle vormi kaudu muuta enda kasutaja andmeid, neid pead muutma eraldi.',
     'bulk_update_help'	=> 'Selle vormiga saad muuta mitmeid kasutajaid korraga. Täida ainult need väljad, mida on vaja muuta. Tühjaks jäetud väljasid ei muudeta.',

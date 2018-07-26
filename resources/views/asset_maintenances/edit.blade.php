@@ -41,7 +41,7 @@
       </div><!-- /.box-header -->
 
       <div class="box-body">
-        @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/asset_maintenances/table.asset_name'), 'fieldname' => 'asset_id'])
+        @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/asset_maintenances/table.asset_name'), 'fieldname' => 'asset_id', 'required' => 'true'])
         @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id', 'required' => 'true'])
         @include ('partials.forms.edit.maintenance_type')
 
@@ -100,7 +100,13 @@
           <label for="cost" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.cost') }}</label>
           <div class="col-md-2">
             <div class="input-group">
-              <span class="input-group-addon">{{ $snipeSettings->default_currency }}</span>
+              <span class="input-group-addon">
+                @if (($item->asset) && ($item->asset->location) && ($item->asset->location->currency!=''))
+                  {{ $item->asset->location->currency }}
+                @else
+                  {{ $snipeSettings->default_currency }}
+                @endif
+              </span>
               <input class="col-md-2 form-control" type="text" name="cost" id="cost" value="{{ Input::old('cost', \App\Helpers\Helper::formatCurrencyOutput($item->cost)) }}" />
               {!! $errors->first('cost', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
@@ -120,8 +126,9 @@
       <div class="box-footer text-right">
         <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
       </div>
+    </div> <!-- .box-default -->
     </form>
-    </div>
   </div>
+</div>
 
 @stop

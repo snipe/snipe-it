@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Voir les différents modèles',
     'fieldset'                  => 'Ensemble de champs',
     'no_custom_field'           => 'Pas de champs personnalisés',
-
+    'add_default_values'        => 'Add default values',
 );

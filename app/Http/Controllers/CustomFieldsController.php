@@ -37,6 +37,7 @@ class CustomFieldsController extends Controller
     */
     public function index()
     {
+        $this->authorize('view', CustomField::class);
 
         $fieldsets = CustomFieldset::with("fields", "models")->get();
         $fields = CustomField::with("fieldset")->get();
@@ -57,6 +58,7 @@ class CustomFieldsController extends Controller
     */
     public function create()
     {
+        $this->authorize('create', CustomField::class);
 
         return view("custom_fields.fields.edit")->with('field', new CustomField());
     }
@@ -72,6 +74,8 @@ class CustomFieldsController extends Controller
     */
     public function store(CustomFieldRequest $request)
     {
+        $this->authorize('create', CustomField::class);
+
         $field = new CustomField([
             "name" => $request->get("name"),
             "element" => $request->get("element"),
@@ -83,7 +87,7 @@ class CustomFieldsController extends Controller
         ]);
 
 
-        if (!in_array(Input::get('format'), array_keys(CustomField::$PredefinedFormats))) {
+        if ($request->has("custom_format")) {
             $field->format = e($request->get("custom_format"));
         } else {
             $field->format = e($request->get("format"));
@@ -92,7 +96,6 @@ class CustomFieldsController extends Controller
         if ($field->save()) {
             return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.create.success'));
         } else {
-           // dd($field);
             return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.field.create.error'));
         }
 
@@ -109,6 +112,8 @@ class CustomFieldsController extends Controller
     public function deleteFieldFromFieldset($field_id, $fieldset_id)
     {
         $field = CustomField::find($field_id);
+
+        $this->authorize('update', $field);
 
         if ($field->fieldset()->detach($fieldset_id)) {
             return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])->with("success", trans('admin/custom_fields/message.field.delete.success'));
@@ -127,6 +132,8 @@ class CustomFieldsController extends Controller
     public function destroy($field_id)
     {
         $field = CustomField::find($field_id);
+
+        $this->authorize('delete', $field);
 
         if ($field->fieldset->count()>0) {
             return redirect()->back()->withErrors(['message' => "Field is in-use"]);
@@ -149,6 +156,9 @@ class CustomFieldsController extends Controller
     public function edit($id)
     {
         $field = CustomField::find($id);
+
+        $this->authorize('update', $field);
+
         return view("custom_fields.fields.edit")->with('field', $field);
     }
 
@@ -167,19 +177,20 @@ class CustomFieldsController extends Controller
     {
         $field =  CustomField::find($id);
 
+        $this->authorize('update', $field);
+
         $field->name = e($request->get("name"));
         $field->element = e($request->get("element"));
         $field->field_values = e($request->get("field_values"));
-        $field->field_encrypted = e($request->get("field_encrypted", 0));
         $field->user_id = Auth::user()->id;
         $field->help_text = $request->get("help_text");
+        $field->show_in_email = $request->get("show_in_email", 0);
 
         if (!in_array(Input::get('format'), array_keys(CustomField::$PredefinedFormats))) {
             $field->format = e($request->get("custom_format"));
         } else {
             $field->format = e($request->get("format"));
         }
-
 
         if ($field->save()) {
            return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.update.success'));

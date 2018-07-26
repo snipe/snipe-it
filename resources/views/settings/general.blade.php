@@ -118,7 +118,7 @@
                         </div>
                         <div class="col-md-9">
                             {{ Form::checkbox('load_remote', '1', Input::old('load_remote', $setting->load_remote),array('class' => 'minimal')) }}
-                            {{ trans('admin/settings/general.load_remote_help_text') }}
+                            <p class="help-block">{{ trans('admin/settings/general.load_remote_help_text') }}</p>
                         </div>
                     </div>
 
@@ -137,8 +137,23 @@
                            </div>
                        </div>
 
+                       <!-- unique serial -->
+                       <div class="form-group">
+                           <div class="col-md-3">
+                               {{ Form::label('unique_serial', trans('admin/settings/general.unique_serial')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::checkbox('unique_serial', '1', Input::old('unique_serial', $setting->unique_serial),array('class' => 'minimal')) }}
+                               {{ trans('general.yes') }}
+                               {!! $errors->first('unique_serial', '<span class="alert-msg">:message</span>') !!}
+                               <p class="help-block">
+                               {{ trans('admin/settings/general.unique_serial_help_text') }}
+                               </p>
+                           </div>
+                       </div>
 
-                    <!-- Per Page -->
+
+                       <!-- Per Page -->
                     <div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">
                         <div class="col-md-3">
                             {{ Form::label('per_page', trans('admin/settings/general.per_page')) }}
@@ -267,6 +282,25 @@
                            </div>
                        </div>
                        <!-- /.form-group -->
+
+                       <!-- Privacy Policy Footer-->
+                       <div class="form-group {{ $errors->has('privacy_policy_link') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                               {{ Form::label('privacy_policy_link', trans('admin/settings/general.privacy_policy_link')) }}
+                           </div>
+                           <div class="col-md-9">
+                               @if (config('app.lock_passwords'))
+                                   {{ Form::text('privacy_policy_link', Input::old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control disabled', 'disabled' => 'disabled')) }}
+                               @else
+                                   {{ Form::text('privacy_policy_link', Input::old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control')) }}
+
+                               @endif
+
+
+                               <span class="help-block">{{ trans('admin/settings/general.privacy_policy_link_help')  }}</span>
+                               {!! $errors->first('privacy_policy_link', '<span class="alert-msg">:message</span>') !!}
+                           </div>
+                       </div>
                    </div>
 
             </div> <!--/.box-body-->

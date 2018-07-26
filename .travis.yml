@@ -16,7 +16,7 @@ services:
 php:
   - 5.6
   - 7.0
-  # - 7.2 DISABLE Temporarily until we fix the count(null) bugs
+  - 7.2 
   - 7.1.4
 
 # execute any number of scripts before the test run, custom env's are available as variables

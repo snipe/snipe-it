@@ -28,13 +28,22 @@
         @if ($requestedItems->count() > 0)
         <div class="table-responsive">
             <table
-                    name="requested-assets"
+                    name="requestedAssets"
                     data-toolbar="#toolbar"
                     class="table table-striped snipe-table"
-                    id="table"
+                    id="requestedAssets"
                     data-advanced-search="true"
-                    data-id-table="advancedTable"
-                    data-cookie-id-table="requestedAssets">
+                    data-search="true"
+                    data-show-columns="true"
+                    data-show-export="true"
+                    data-pagination="true"
+                    data-id-table="requestedAssets"
+                    data-cookie-id-table="requestedAssets"
+                    data-url="{{ route('api.consumables.index') }}"
+                    data-export-options='{
+                    "fileName": "export-assetrequests-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                    }'>
                 <thead>
                     <tr role="row">
                         <th class="col-md-1">Image</th>
@@ -43,6 +52,7 @@
                         <th class="col-md-2" data-sortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
                         <th class="col-md-3" data-sortable="true">Requesting User</th>
                         <th class="col-md-2">Requested Date</th>
+                        <th class="col-md-1"></th>
                         <th class="col-md-1"></th>
                     </tr>
                 </thead>

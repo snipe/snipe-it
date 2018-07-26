@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Buka amamodeli',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Awekho amasimu wangokwezifiso',
-
+    'add_default_values'        => 'Add default values',
 );

@@ -114,3 +114,18 @@ $factory->state(App\Models\Category::class, 'consumable-ink-category', function 
     ];
 });
 
+
+$factory->state(App\Models\Category::class, 'license-graphics-category', function ($faker) {
+    return [
+        'name' => 'Graphics Software',
+        'category_type' => 'license',
+    ];
+});
+
+
+$factory->state(App\Models\Category::class, 'license-office-category', function ($faker) {
+    return [
+        'name' => 'Office Software',
+        'category_type' => 'license',
+    ];
+});

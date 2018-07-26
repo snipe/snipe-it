@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Models\Requestable;
 use App\Models\SnipeModel;
+use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -68,6 +69,26 @@ class AssetModel extends SnipeModel
         'user_id',
     ];
 
+    use Searchable;
+    
+    /**
+     * The attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableAttributes = ['name', 'model_number', 'notes', 'eol'];
+
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     * 
+     * @var array
+     */
+    protected $searchableRelations = [
+        'depreciation' => ['name'],
+        'category'     => ['name'],
+        'manufacturer' => ['name'],
+    ];      
+
     public function assets()
     {
         return $this->hasMany('\App\Models\Asset', 'model_id');
@@ -96,6 +117,19 @@ class AssetModel extends SnipeModel
     public function fieldset()
     {
         return $this->belongsTo('\App\Models\CustomFieldset', 'fieldset_id');
+    }
+
+    public function defaultValues()
+    {
+        return $this->belongsToMany('\App\Models\CustomField', 'models_custom_fields')->withPivot('default_value');
+    }
+
+
+    public function getImageUrl() {
+        if ($this->image) {
+            return url('/').'/uploads/models/'.$this->image;
+        }
+        return false;
     }
 
     /**
@@ -140,45 +174,14 @@ class AssetModel extends SnipeModel
      * @param       $query
      *
      * @return $query
-     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @version v3.5
      */
     public function scopeRequestableModels($query)
     {
 
         return $query->where('requestable', '1');
-    }
-
-    /**
-    * Query builder scope to search on text
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $search      Search term
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
-    public function scopeTextSearch($query, $search)
-    {
-
-        return $query->where('models.name', 'LIKE', "%$search%")
-            ->orWhere('model_number', 'LIKE', "%$search%")
-            ->orWhere(function ($query) use ($search) {
-                $query->whereHas('depreciation', function ($query) use ($search) {
-                    $query->where('depreciations.name', 'LIKE', '%'.$search.'%');
-                });
-            })
-            ->orWhere(function ($query) use ($search) {
-                $query->whereHas('category', function ($query) use ($search) {
-                    $query->where('categories.name', 'LIKE', '%'.$search.'%');
-                });
-            })
-            ->orWhere(function ($query) use ($search) {
-                $query->whereHas('manufacturer', function ($query) use ($search) {
-                    $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
-                });
-            });
-
-    }
+    }  
 
     /**
      * Query builder scope to search on text, including catgeory and manufacturer name

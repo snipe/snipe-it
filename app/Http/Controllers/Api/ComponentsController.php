@@ -24,7 +24,7 @@ class ComponentsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Component::class);
-        $components = Company::scopeCompanyables(Component::select('components.*')->whereNull('components.deleted_at')
+        $components = Company::scopeCompanyables(Component::select('components.*')
             ->with('company', 'location', 'category'));
 
         if ($request->has('search')) {
@@ -33,6 +33,14 @@ class ComponentsController extends Controller
 
         if ($request->has('company_id')) {
             $components->where('company_id','=',$request->input('company_id'));
+        }
+
+        if ($request->has('category_id')) {
+            $components->where('category_id','=',$request->input('category_id'));
+        }
+
+        if ($request->has('location_id')) {
+            $components->where('location_id','=',$request->input('location_id'));
         }
 
         $offset = request('offset', 0);
@@ -112,7 +120,7 @@ class ComponentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Component::class);
+        $this->authorize('update', Component::class);
         $component = Component::findOrFail($id);
         $component->fill($request->all());
 

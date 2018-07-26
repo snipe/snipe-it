@@ -34,7 +34,8 @@ $factory->state(App\Models\License::class, 'photoshop', function ($faker) {
         'purchase_cost' => '299.99',
         'seats' => 10,
         'purchase_order' => '13503Q',
-        'maintained' => true
+        'maintained' => true,
+        'category_id' => 14,
     ];
     
     return $data;
@@ -49,6 +50,7 @@ $factory->state(App\Models\License::class, 'acrobat', function ($faker) {
         'manufacturer_id' => 9,
         'purchase_cost' => '29.99',
         'seats' => 10,
+        'category_id' => 14,
     ];
     
 
@@ -62,6 +64,7 @@ $factory->state(App\Models\License::class, 'indesign', function ($faker) {
         'manufacturer_id' => 9,
         'purchase_cost' => '199.99',
         'seats' => 10,
+        'category_id' => 14,
     ];
     
 
@@ -76,6 +79,7 @@ $factory->state(App\Models\License::class, 'office', function ($faker) {
         'manufacturer_id' => 2,
         'purchase_cost' => '49.99',
         'seats' => 20,
+        'category_id' => 15,
     ];
 
 

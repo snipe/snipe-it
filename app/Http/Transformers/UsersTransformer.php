@@ -73,7 +73,7 @@ class UsersTransformer
         $array += $permissions_array;
 
 
-        $numGroups = count($user->groups);
+        $numGroups = $user->groups->count();
         if($numGroups > 0)
         {
             $groups["total"] = $numGroups;

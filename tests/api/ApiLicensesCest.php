@@ -33,7 +33,7 @@ class ApiLicensesCest
         $license = App\Models\License::orderByDesc('created_at')
             ->withCount('freeSeats')
             ->take(10)->get()->shuffle()->first();
-        $I->seeResponseContainsJson((new LicensesTransformer)->transformLicense($license));
+        $I->seeResponseContainsJson($I->removeTimestamps((new LicensesTransformer)->transformLicense($license)));
     }
 
     /** @test */
@@ -80,7 +80,7 @@ class ApiLicensesCest
     /** @test */
     public function updateLicenseWithPatch(ApiTester $I, $scenario)
     {
-        $I->wantTo('Update an license with PATCH');
+        $I->wantTo('Update a license with PATCH');
 
         // create
         $license = factory(\App\Models\License::class)->states('acrobat')->create([
@@ -92,8 +92,7 @@ class ApiLicensesCest
 
         $temp_license = factory(\App\Models\License::class)->states('office')->make([
             'company_id' => 3,
-            'depreciation_id' => 2,
-            'company_id' => 4
+            'depreciation_id' => 2
         ]);
 
         $data = [
@@ -114,6 +113,7 @@ class ApiLicensesCest
             'seats' => $temp_license->seats,
             'serial' => $temp_license->serial,
             'supplier_id' => $temp_license->supplier_id,
+            'category_id' => $temp_license->category_id,
             'termination_date' => $temp_license->termination_date,
         ];
 

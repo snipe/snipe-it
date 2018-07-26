@@ -24,7 +24,7 @@
  
  */
 
- $(function () {
+$(function () {
 
 
   //handle modal-add-interstitial calls
@@ -39,11 +39,59 @@
       model = link.data("dependency");
       select = link.data("select");
       $('#createModal').load(link.attr('href'),function () {
-          //do we need to re-select2 this, after load? Probably.
-          $('#createModal').find('select.select2').select2();                
+        //do we need to re-select2 this, after load? Probably.
+        $('#createModal').find('select.select2').select2();
+        // Initialize the ajaxy select2 with images.
+        // This is a copy/paste of the code from snipeit.js, would be great to only have this in one place.
+        $('.js-data-ajax').each( function (i,item) {
+            var link = $(item);
+            var endpoint = link.data("endpoint");
+            var select = link.data("select");
+
+            link.select2({
+                ajax: {
+
+                    // the baseUrl includes a trailing slash
+                    url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                    dataType: 'json',
+                    delay: 250,
+                    headers: {
+                        "X-Requested-With": 'XMLHttpRequest',
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: function (params) {
+                        var data = {
+                            search: params.term,
+                            page: params.page || 1,
+                            assetStatusType: link.data("asset-status-type"),
+                        };
+                        return data;
+                    },
+                    processResults: function (data, params) {
+
+                        params.page = params.page || 1;
+
+                        var answer =  {
+                            results: data.items,
+                            pagination: {
+                                more: "true" //(params.page  < data.page_count)
+                            }
+                        };
+
+                        return answer;
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                templateResult: formatDatalist,
+                templateSelection: formatDataSelection
+            });
+        });
       });
+
   });
 
+ 
 
   $('#createModal').on('click','#modal-save', function () {
     $.ajax({
@@ -102,3 +150,26 @@
     });
   });
 });
+
+function formatDatalist (datalist) {
+    var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+    if (datalist.loading) {
+        return loading_markup;
+    }
+
+    var markup = "<div class='clearfix'>" ;
+    markup +="<div class='pull-left' style='padding-right: 10px;'>";
+    if (datalist.image) {
+        markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;'></div>";
+    } else {
+        markup += "<div style='height: 20px; width: 30px;'></div>";
+    }
+
+    markup += "</div><div>" + datalist.text + "</div>";
+    markup += "</div>";
+    return markup;
+}
+
+function formatDataSelection (datalist) {
+    return datalist.text;
+}

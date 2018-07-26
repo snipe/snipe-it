@@ -8,6 +8,7 @@
 
 @section('content')
 
+@can('view', \App\Models\CustomFieldset::class)
 <div class="row">
   <div class="col-md-9">
     <div class="box box-default">
@@ -15,12 +16,29 @@
       <div class="box-header with-border">
         <h3 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h3>
         <div class="box-tools pull-right">
+          @can('create', \App\Models\CustomFieldset::class)
           <a href="{{ route('fieldsets.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new fieldset">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
+          @endcan
         </div>
       </div><!-- /.box-header -->
 
       <div class="box-body">
-        <table name="fieldsets" id="table" class="table table-responsive table-no-bordered">
+        <table
+                data-cookie-id-table="customFieldsetsTable"
+                data-id-table="customFieldsetsTable"
+                data-search="true"
+                data-side-pagination="client"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                data-sort-name="name"
+                id="customFieldsTable"
+                class="table table-striped snipe-table"
+                data-export-options='{
+                "fileName": "export-fieldsets-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
           <thead>
             <tr>
               <th>{{ trans('general.name') }}</th>
@@ -47,6 +65,7 @@
                 @endforeach
               </td>
               <td>
+                @can('delete', $fieldset)
                 {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete']) }}
                   @if($fieldset->models->count() > 0)
                   <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
@@ -54,6 +73,7 @@
                   <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                   @endif
                 {{ Form::close() }}
+                @endcan
               </td>
             </tr>
             @endforeach
@@ -70,27 +90,48 @@
     <p>{{ trans('admin/custom_fields/general.about_fieldsets_text') }} </p>
   </div>
 </div> <!-- .row-->
-
+@endcan
+@can('view', \App\Models\CustomField::class)
 <div class="row">
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-header with-border">
         <h3 class="box-title">{{ trans('admin/custom_fields/general.custom_fields') }}</h3>
         <div class="box-tools pull-right">
+          @can('create', \App\Models\CustomField::class)
           <a href="{{ route('fields.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new custom field">{{ trans('admin/custom_fields/general.create_field') }}</a>
+          @endcan
         </div>
+
       </div><!-- /.box-header -->
       <div class="box-body">
-        <table name="fieldsets" id="table" class="table table-responsive table-no-bordered">
+
+        <div class="table-responsive">
+        <table
+                data-cookie-id-table="customFieldsTable"
+                data-id-table="customFieldsTable"
+                data-search="true"
+                data-side-pagination="client"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                data-sort-name="name"
+                id="customFieldsTable"
+                class="table table-striped snipe-table"
+                data-export-options='{
+                "fileName": "export-fields-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
           <thead>
             <tr>
-              <th>{{ trans('general.name') }}</th>
-              <th>Help Text</th>
-              <th>Email</th>
-              <th>DB Field</th>
-              <th>{{ trans('admin/custom_fields/general.field_format') }}</th>
-              <th>{{ trans('admin/custom_fields/general.field_element_short') }}</th>
-              <th>{{ trans('admin/custom_fields/general.fieldsets') }}</th>
+              <th data-searchable="true">{{ trans('general.name') }}</th>
+              <th data-searchable="true">Help Text</th>
+              <th data-searchable="true">Email</th>
+              <th data-visible="false">DB Field</th>
+              <th data-searchable="true">{{ trans('admin/custom_fields/general.field_format') }}</th>
+              <th data-searchable="true">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
+              <th data-searchable="true">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
               <th></th>
             </tr>
           </thead>
@@ -114,26 +155,33 @@
                 @endforeach
               </td>
               <td>
-                {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete')) }}
                 <nobr>
+                  @can('update', $field)
                 <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
-
-
+                @endcan               
+                @can('delete', $field)
+                {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
                 @if($field->fieldset->count()>0)
                 <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
                 @else
                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                 @endif
                 {{ Form::close() }}
+                @endcan
                 </nobr>
               </td>
             </tr>
             @endforeach
           </tbody>
         </table>
+        </div>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div> <!-- /.col-md-9-->
 </div>
+@endcan
 
+@stop
+@section('moar_scripts')
+  @include ('partials.bootstrap-table')
 @stop

@@ -32,7 +32,7 @@ class ApiConsumablesCest
         // sample verify
         $consumable = App\Models\Consumable::orderByDesc('created_at')->take(10)->get()->shuffle()->first();
 
-        $I->seeResponseContainsJson((new ConsumablesTransformer)->transformConsumable($consumable));
+        $I->seeResponseContainsJson($I->removeTimestamps((new ConsumablesTransformer)->transformConsumable($consumable)));
     }
 
     /** @test */

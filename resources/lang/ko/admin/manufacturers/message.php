@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => '제조업체가 복원되지 않았습니다. 다시 시도해 주세요',
+        'success' => '제조업체가 복원되었습니다.'
     ),
 
     'delete' => array(

@@ -6,6 +6,7 @@ use App\Models\Setting;
 use DB;
 use Mail;
 use App\Helpers\Helper;
+use App\Notifications\InventoryAlert;
 
 use Illuminate\Console\Command;
 
@@ -42,25 +43,27 @@ class SendInventoryAlerts extends Command
      */
     public function handle()
     {
-        if ((Setting::getSettings()->alert_email!='')  && (Setting::getSettings()->alerts_enabled==1)) {
+        $settings = Setting::getSettings();
 
-            $data['data'] = Helper::checkLowInventory();
-            $data['count'] = count($data['data']);
+        if (($settings->alert_email!='')  && ($settings->alerts_enabled==1)) {
 
-            if (count($data['data']) > 0) {
-                \Mail::send('emails.low-inventory', $data, function ($m) {
-                    $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.Low_Inventory_Report'));
-                });
+            $items = Helper::checkLowInventory();
 
+            // Send a rollup to the admin, if settings dictate
+            $recipient = new \App\Models\Recipients\AlertRecipient();
+
+            if (($items) && (count($items) > 0) && ($settings->alert_email!='')) {
+
+                $this->info( trans_choice('mail.low_inventory_alert',count($items)) );
+
+                $recipient->notify(new InventoryAlert($items, $settings->alert_threshold));
             }
 
         } else {
             if (Setting::getSettings()->alert_email=='') {
-                echo "Could not send email. No alert email configured in settings. \n";
+                $this->error('Could not send email. No alert email configured in settings');
             } elseif (Setting::getSettings()->alerts_enabled!=1) {
-                echo "Alerts are disabled in the settings. No mail will be sent. \n";
+                $this->info('Alerts are disabled in the settings. No mail will be sent');
             }
         }
 

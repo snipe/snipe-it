@@ -249,6 +249,8 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['auth']], function () {
     # View Assets
     Route::get('view-assets', [ 'as' => 'view-assets', 'uses' => 'ViewAssetsController@getIndex' ]);
 
+    Route::get('requested', [ 'as' => 'account.requested', 'uses' => 'ViewAssetsController@getRequestedAssets' ]);
+
     # Accept Asset
     Route::get(
         'accept-asset/{logID}',
@@ -314,11 +316,7 @@ Route::group(['middleware' => ['auth']], function () {
         'reports/export/licenses',
         [ 'as' => 'reports/export/licenses', 'uses' => 'ReportsController@exportLicenseReport' ]
     );
-    Route::get('reports/assets', [ 'as' => 'reports/assets', 'uses' => 'ReportsController@getAssetsReport'    ]);
-    Route::get(
-        'reports/export/assets',
-        [ 'as' => 'reports.export.assets', 'uses' => 'ReportsController@exportAssetReport' ]
-    );
+
     Route::get('reports/accessories', [ 'as' => 'reports/accessories', 'uses' => 'ReportsController@getAccessoryReport' ]);
     Route::get(
         'reports/export/accessories',

@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Amafa abelwe: igama',
     'bulk_update_warn'	=> 'Usuzohlela izakhiwo ze: abasebenzisi be-akhawunti_abasebenzisi. Sicela uqaphele ukuthi awukwazi ukushintsha izimfanelo zakho zomsebenzisi usebenzisa le fomu, futhi kufanele uhlele kumsebenzisi wakho ngamunye.',
     'bulk_update_help'	=> 'Leli fomu ikuvumela ukuba ubuyekeze abasebenzisi abaningi ngesikhathi esisodwa. Gcwalisa kuphela amasimu okudingayo ukuguqula. Noma yiziphi izinkambu ezishiywe zingenakushintshwa.',

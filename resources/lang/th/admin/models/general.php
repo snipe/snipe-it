@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'ดูโมเดล',
     'fieldset'                  => 'fieldset',
     'no_custom_field'           => 'ไม่มีฟิลด์ที่กำหนดเอง',
-
+    'add_default_values'        => 'Add default values',
 );

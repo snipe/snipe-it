@@ -77,11 +77,14 @@ class AssetsTransformer
             'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($asset->purchase_cost),
+            'checkin_counter' => (int) $asset->checkin_counter,
+            'checkout_counter' => (int) $asset->checkout_counter,
+            'requests_counter' => (int) $asset->requests_counter,
             'user_can_checkout' => (bool) $asset->availableForCheckout(),
         ];
 
 
-        if (($asset->model) && ($asset->model->fieldset) && (count($asset->model->fieldset->fields)> 0)) {
+        if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields->count() > 0)) {
             $fields_array = array();
 
             foreach ($asset->model->fieldset->fields as $field) {
@@ -159,5 +162,40 @@ class AssetsTransformer
             'name' => $asset->assigned->display_name,
             'type' => $asset->assignedType()
         ] : null;
+    }
+
+
+    public function transformRequestedAssets(Collection $assets, $total)
+    {
+        $array = array();
+        foreach ($assets as $asset) {
+            $array[] = self::transformRequestedAsset($asset);
+        }
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+
+    public function transformRequestedAsset(Asset $asset) {
+        $array = [
+            'id' => (int) $asset->id,
+            'name' => e($asset->name),
+            'asset_tag' => e($asset->asset_tag),
+            'serial' => e($asset->serial),
+            'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
+            'model' => ($asset->model) ? e($asset->model->name) : null,
+            'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
+            'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
+            'location' => ($asset->location) ? e($asset->location->name) : null,
+            'status'=> ($asset->assetstatus) ? $asset->present()->statusMeta : null,
+        ];
+
+        $permissions_array['available_actions'] = [
+            'cancel' => ($asset->isRequestedBy(\Auth::user())) ? true : false,
+            'request' => ($asset->isRequestedBy(\Auth::user())) ? false : true,
+
+        ];
+
+         $array += $permissions_array;
+        return $array;
+
     }
 }

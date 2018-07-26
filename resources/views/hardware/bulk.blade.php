@@ -86,18 +86,8 @@
 
           <!-- Supplier -->
            @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
-
-
-        <!-- Company -->
-          <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
-            <label for="company_id" class="col-md-3 control-label">
-              {{ trans('general.company') }}
-            </label>
-            <div class="col-md-7">
-              {{ Form::select('company_id', $companies_list , Input::old('company_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
-              {!! $errors->first('company_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-            </div>
-          </div>
+          <!-- Company -->
+          @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 
           <!-- Order Number -->
           <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">

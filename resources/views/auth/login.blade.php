@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input name="remember" type="checkbox" value="Remember Me">{{ trans('auth/general.remember_me')  }}
+                                                <input name="remember" type="checkbox" value="1">{{ trans('auth/general.remember_me')  }}
                                             </label>
                                         </div>
                                     </fieldset>

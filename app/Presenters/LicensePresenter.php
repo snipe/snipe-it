@@ -62,6 +62,14 @@ class LicensePresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('admin/licenses/form.to_name'),
             ], [
+                "field" => "category",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.category'),
+                "visible" => false,
+                "formatter" => "categoriesLinkObjFormatter"
+            ], [
                 "field" => "supplier",
                 "searchable" => true,
                 "sortable" => true,

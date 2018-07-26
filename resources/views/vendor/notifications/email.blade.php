@@ -25,7 +25,7 @@ $style = [
 
     /* Masthead ----------------------- */
 
-    'email-masthead' => 'padding: 25px 0; text-align: left;',
+    'email-masthead' => 'padding: 25px 0; text-align: center;',
     'email-masthead_name' => 'font-size: 16px; font-weight: bold; color: #2F3133; text-decoration: none; text-shadow: 0 1px 0 white;',
 
     'email-body' => 'width: 100%; margin: 0; padding: 0; border-top: 1px solid #EDEFF2; border-bottom: 1px solid #EDEFF2; background-color: #FFF;',
@@ -57,6 +57,7 @@ $style = [
     'button--green' => 'background-color: #22BC66;',
     'button--red' => 'background-color: #dc4d2f;',
     'button--blue' => 'background-color: #3869D4;',
+
 ];
 ?>
 
@@ -71,12 +72,24 @@ $style = [
                     <tr>
                         <td style="{{ $style['email-masthead'] }}">
 
-                            @if ($snipeSettings->logo)
-                                <img src="{{ url('/') }}/{{ $snipeSettings->logo }}">
+                            @if (($snipeSettings->show_images_in_email=='1' ) && ($snipeSettings::setupCompleted()))
+
+                                @if ($snipeSettings->brand == '3')
+                                    @if ($snipeSettings->logo!='')
+                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                                    @endif
+                                    {{ $snipeSettings->site_name }}
+
+                                @elseif ($snipeSettings->brand == '2')
+                                    @if ($snipeSettings->logo!='')
+                                        <img class="navbar-brand-img logo" style="max-width: 50px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                                    @endif
+                                @else
+                                    {{ $snipeSettings->site_name }}
+                                @endif
+                            @else
+                                Snipe-IT
                             @endif
-                            <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
-                                {{ $snipeSettings->site_name }}
-                            </a>
                         </td>
                     </tr>
 
@@ -183,6 +196,13 @@ $style = [
                                             <a style="{{ $style['anchor'] }}" href="{{ url('/') }}" target="_blank">{{ $snipeSettings->site_name }}</a>.
                                             All rights reserved.
                                         </p>
+
+                                        @if ($snipeSettings->privacy_policy_link!='')
+                                            <p style="{{ $style['paragraph-sub'] }}">
+                                                <a href="{{ $snipeSettings->privacy_policy_link }}">{{ trans('admin/settings/general.privacy_policy') }}</a>
+                                            </p>
+
+                                        @endif
                                     </td>
                                 </tr>
                             </table>

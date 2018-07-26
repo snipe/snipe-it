@@ -504,7 +504,7 @@
                             }
 
                         } else {
-                            error_text = bind_errors;
+                            bind_error_text = bind_errors;
                         }
                         $('#ldapteststatus').html(bind_error_text);
                     } else {

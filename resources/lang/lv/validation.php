@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'Atlasītais: atribūts nav derīgs.',
     'numeric'              => 'Atribūts ir jābūt skaitlim.',
     'present'              => 'Atribūta laukam jābūt klāt.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'regex nav derīgs.',
     'regex'                => 'Atribūta formāts nav derīgs.',
     'required'             => 'Atribūta lauks ir nepieciešams.',
     'required_if'          => 'Atribūta lauks ir nepieciešams, ja: cits ir: vērtība.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'Atribūts jau ir pieņemts.',
     'uploaded'             => 'Atribūts neizdevās augšupielādēt.',
     'url'                  => 'Atribūta formāts nav derīgs.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => ":attribute jābūt unikālam.",
 
     /*
     |--------------------------------------------------------------------------

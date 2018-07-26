@@ -137,95 +137,6 @@ class Helper
         return floatval($floatString);
     }
 
-
-    /**
-     * Get the list of models in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function modelList()
-    {
-        $models = AssetModel::with('manufacturer')->get();
-        $model_array[''] = trans('general.select_model');
-        foreach ($models as $model) {
-            $model_array[$model->id] = $model->present()->modelName();
-        }
-        return $model_array;
-    }
-
-    /**
-     * Get the list of companies in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function companyList()
-    {
-        $company_list = array('' => trans('general.select_company')) + DB::table('companies')
-                ->orderBy('name', 'asc')
-                ->pluck('name', 'id')
-                ->toArray();
-        return $company_list;
-    }
-
-
-    /**
-     * Get the list of categories in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function categoryList($category_type = null)
-    {
-        $categories = Category::orderBy('name', 'asc')
-                ->whereNull('deleted_at')
-                ->orderBy('name', 'asc');
-        if (!empty($category_type)) {
-            $categories = $categories->where('category_type', '=', $category_type);
-        }
-        $category_list = array('' => trans('general.select_category')) + $categories->pluck('name', 'id')->toArray();
-        return $category_list;
-    }
-
-
-    /**
-     * Get the list of categories in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function departmentList()
-    {
-        $departments = Department::orderBy('name', 'asc')
-            ->whereNull('deleted_at')
-            ->orderBy('name', 'asc');
-
-        return array('' => trans('general.select_department')) + $departments->pluck('name', 'id')->toArray();
-
-    }
-    
-
-    /**
-     * Get the list of suppliers in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function suppliersList()
-    {
-        $supplier_list = array('' => trans('general.select_supplier')) + Supplier::orderBy('name', 'asc')
-                ->orderBy('name', 'asc')
-                ->pluck('name', 'id')->toArray();
-        return $supplier_list;
-    }
-
-
     /**
      * Get the list of status labels in an array to make a dropdown menu
      *
@@ -238,37 +149,6 @@ class Helper
         $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('default_label', 'desc')->orderBy('name','asc')->orderBy('deployable','desc')
                 ->pluck('name', 'id')->toArray();
         return $statuslabel_list;
-    }
-
-
-    /**
-     * Get the list of locations in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function locationsList()
-    {
-        $location_list = array('' => trans('general.select_location')) + Location::orderBy('name', 'asc')
-                ->pluck('name', 'id')->toArray();
-        return $location_list;
-    }
-
-
-    /**
-     * Get the list of manufacturers in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function manufacturerList()
-    {
-        $manufacturer_list = array('' => trans('general.select_manufacturer')) +
-            Manufacturer::orderBy('name', 'asc')
-                ->pluck('name', 'id')->toArray();
-        return $manufacturer_list;
     }
 
     /**
@@ -287,24 +167,6 @@ class Helper
             + array('undeployable' => trans('admin/hardware/general.undeployable'))
             + array('archived' => trans('admin/hardware/general.archived'));
         return $statuslabel_types;
-    }
-
-    /**
-     * Get the list of managers in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function managerList()
-    {
-        $manager_list = array('' => trans('general.select_user')) +
-                        User::where('deleted_at', '=', null)
-                        ->orderBy('last_name', 'asc')
-                        ->orderBy('first_name', 'asc')->get()
-                        ->pluck('complete_name', 'id')->toArray();
-
-        return $manager_list;
     }
 
     /**
@@ -330,57 +192,16 @@ class Helper
      */
     public static function categoryTypeList()
     {
-        $category_types = array('' => '','accessory' => 'Accessory', 'asset' => 'Asset', 'consumable' => 'Consumable','component' => 'Component');
+        $category_types = array(
+            '' => '',
+            'accessory' => 'Accessory',
+            'asset' => 'Asset',
+            'consumable' => 'Consumable',
+            'component' => 'Component',
+            'license' => 'License'
+        );
         return $category_types;
     }
-
-    /**
-     * Get the list of users in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function usersList()
-    {
-        $users_list =   array( '' => trans('general.select_user')) +
-                        Company::scopeCompanyables(User::where('deleted_at', '=', null))
-                        ->where('show_in_list', '=', 1)
-                        ->orderBy('last_name', 'asc')
-                        ->orderBy('first_name', 'asc')->get()
-                        ->pluck('complete_name', 'id')->toArray();
-
-        return $users_list;
-    }
-
-    /**
-     * Get the list of assets in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return Array
-     */
-    public static function assetsList()
-    {
-        $assets_list = array('' => trans('general.select_asset')) + Asset::orderBy('name', 'asc')
-                ->whereNull('deleted_at')
-                ->pluck('name', 'id')->toArray();
-        return $assets_list;
-    }
-
-    /**
-     * Get the detailed list of assets in an array to make a dropdown menu
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.5]
-     * @return array
-     */
-    public static function detailedAssetList()
-    {
-        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::with('assignedTo', 'model'), 'assets.company_id')->get()->pluck('detailed_name', 'id')->toArray();
-        return $assets;
-    }
-
 
     /**
      * Get the list of custom fields in an array to make a dropdown menu
@@ -406,7 +227,7 @@ class Helper
     {
         $keys = array_keys(CustomField::$PredefinedFormats);
         $stuff = array_combine($keys, $keys);
-        return $stuff+["" => trans('admin/custom_fields/general.custom_format')];
+        return $stuff;
     }
 
     /**
@@ -469,7 +290,7 @@ class Helper
         $all_count = 0;
 
         foreach ($consumables as $consumable) {
-            $avail = $consumable->qty - $consumable->consumable_assignment_count;  //$consumable->numRemaining();
+            $avail = $consumable->numRemaining();
             if ($avail < ($consumable->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
                 if ($consumable->qty > 0) {
                     $percent = number_format((($avail / $consumable->qty) * 100), 0);
@@ -738,6 +559,7 @@ class Helper
         static $max_size = -1;
 
         if ($max_size < 0) {
+
             // Start with post_max_size.
             $post_max_size = Helper::parse_size(ini_get('post_max_size'));
             if ($post_max_size > 0) {
@@ -751,6 +573,7 @@ class Helper
                 $max_size = $upload_max;
             }
         }
+
         return $max_size;
     }
 
@@ -784,6 +607,66 @@ class Helper
         else {
             return round($size);
         }
+    }
+
+
+    public static function filetype_icon($filename) {
+
+        $extension = substr(strrchr($filename,'.'),1);
+
+        if ($extension) {
+            switch ($extension) {
+                case 'jpg':
+                case 'jpeg':
+                case 'gif':
+                case 'png':
+                    return "fa fa-file-image-o";
+                    break;
+                case 'doc':
+                case 'docx':
+                    return "fa fa-file-word-o";
+                    break;
+                case 'xls':
+                case 'xlsx':
+                    return "fa fa-file-excel-o";
+                    break;
+                case 'zip':
+                case 'rar':
+                    return "fa fa-file-archive-o";
+                    break;
+                case 'pdf':
+                    return "fa fa-file-pdf-o";
+                    break;
+                case 'txt':
+                    return "fa fa-file-text-o";
+                    break;
+                case 'lic':
+                    return "fa fa-floppy-o";
+                    break;
+                default:
+                    return "fa fa-file-o";
+            }
+        }
+        return "fa fa-file-o";
+    }
+
+    public static function show_file_inline($filename) {
+
+        $extension = substr(strrchr($filename,'.'),1);
+
+        if ($extension) {
+            switch ($extension) {
+                case 'jpg':
+                case 'jpeg':
+                case 'gif':
+                case 'png':
+                    return true;
+                    break;
+                default:
+                    return false;
+            }
+        }
+        return false;
     }
 
 

@@ -235,6 +235,7 @@
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="table-responsive">
                         <table
                                 data-cookie-id-table="dashCategorySummary"
                                 data-height="400"
@@ -253,9 +254,11 @@
                                 <th class="col-sm-1" data-visible="true" data-field="accessories_count" data-sortable="true"><i class="fa fa-keyboard-o"></i></th>
                                 <th class="col-sm-1" data-visible="true" data-field="consumables_count" data-sortable="true"><i class="fa fa-tint"></i></th>
                                 <th class="col-sm-1" data-visible="true" data-field="components_count" data-sortable="true"><i class="fa fa-hdd-o"></i></th>
+                                <th class="col-sm-1" data-visible="true" data-field="licenses_count" data-sortable="true"><i class="fa fa-floppy-o"></i></th>
                             </tr>
                             </thead>
                         </table>
+                        </div>
                     </div> <!-- /.col -->
                     <div class="col-md-12 text-center" style="padding-top: 10px;">
                         <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm" style="width: 100%">View All</a>

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\CustomField;
+use App\Models\CustomFieldset;
 use App\Models\Department;
 use App\Models\License;
 use App\Models\Location;
@@ -25,6 +26,7 @@ use App\Policies\CategoryPolicy;
 use App\Policies\ComponentPolicy;
 use App\Policies\ConsumablePolicy;
 use App\Policies\CustomFieldPolicy;
+use App\Policies\CustomFieldsetPolicy;
 use App\Policies\DepartmentPolicy;
 use App\Policies\DepreciationPolicy;
 use App\Policies\LicensePolicy;
@@ -56,6 +58,7 @@ class AuthServiceProvider extends ServiceProvider
         Component::class => ComponentPolicy::class,
         Consumable::class => ConsumablePolicy::class,
         CustomField::class => CustomFieldPolicy::class,
+        CustomFieldset::class => CustomFieldsetPolicy::class,
         Department::class => DepartmentPolicy::class,
         Depreciation::class => DepreciationPolicy::class,
         License::class => LicensePolicy::class,
@@ -132,6 +135,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAccess('self.api');
         });
 
+        Gate::define('self.edit_location', function($user) {
+            return $user->hasAccess('self.edit_location');
+        });
+
         Gate::define('backend.interact', function ($user) {
             return $user->can('view', Statuslabel::class)
                 || $user->can('view', AssetModel::class)
@@ -143,6 +150,7 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('view', Company::class)
                 || $user->can('view', Manufacturer::class)
                 || $user->can('view', CustomField::class)
+                || $user->can('view', CustomFieldset::class)                
                 || $user->can('view', Depreciation::class);
         });
     }

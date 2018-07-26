@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Majetky přiřazené :name',
     'bulk_update_warn'	=> 'Chystáte se upravit vlastnosti :user_count uživatelů. Nezapomeňte, že pomocí tohoto formuláře nemůžete změnit vlastní atributy uživatele a musíte provádět vlastní úpravy individuálně.',
     'bulk_update_help'	=> 'Tento formulář umožňuje aktualizovat více uživatelů najednou. Vyplňte pouze pole, která potřebujete změnit. Všechna pole, která jsou prázdná, zůstanou nezměněny.',
@@ -16,7 +17,7 @@ return array(
     'restore_user'		=> 'Klikněte zde pro obnovení.',
     'last_login'        => 'Poslední přihlášení',
     'ldap_config_text'  => 'Nastavení konfigurace LDAP lze nalézt v menu Správce> Nastavení. Vybrané (volitelně) místo bude nastaven pro všechny importované uživatele.',
-    'print_assigned'    => 'Print All Assigned',
+    'print_assigned'    => 'Vypsat všechna přiřazení',
     'software_user'     => 'Software vydaný pro :name',
     'view_user'         => 'Zobraz uživatele',
     'usercsv'           => 'CSV soubor',

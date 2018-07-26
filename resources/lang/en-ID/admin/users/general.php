@@ -2,7 +2,8 @@
 
 
 return array(
-
+    'activated_help_text' => 'This user can login',
+    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Aset ditetapkan untuk :name',
     'bulk_update_warn'	=> 'Anda akan sunting properti dari :user_count pengguna. Silahkan catat anda tidak dapat menggubah atribut pengguna anda sendiri menggunakan formulir ini, dan harus membuat penyuntingan untuk pengguna anda sendiri secara pribadi.',
     'bulk_update_help'	=> 'Formulir ini membolehkan anda perbarui beberapa pengguna sekaligus. Hanya mengisi bidang yang anda perlu ubah. Setiap bidang yang kosong akan tetap tidak berubah.',

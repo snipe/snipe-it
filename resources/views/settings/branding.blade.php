@@ -73,7 +73,8 @@
                                     {{ trans('button.select_file')  }}
                                     <input type="file" name="image" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
                                 </label>
-                                <p class="help-block">{{ trans('general.image_filetypes_help') }}</p>
+
+                                    <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
                                 
                                 {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
                                 {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo'),array('class' => 'minimal')) }} Remove
@@ -88,11 +89,24 @@
                                 {{ Form::label('brand', trans('admin/settings/general.brand')) }}
                             </div>
                             <div class="col-md-9">
-                                {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), Input::old('brand', $setting->brand), array('class' => 'form-control', 'style'=>'width: 150px ;')) !!}
+                                {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), Input::old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
                                 {!! $errors->first('brand', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
-                        <!-- remote load -->
+
+                        <!-- Include logo in print assets -->
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                {{ Form::label('logo_print_assets', trans('admin/settings/general.logo_print_assets')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::checkbox('logo_print_assets', '1', Input::old('logo_print_assets', $setting->logo_print_assets),array('class' => 'minimal')) }}
+                                {{ trans('admin/settings/general.logo_print_assets_help') }}
+                            </div>
+                        </div>
+
+
+                        <!-- show urls in emails-->
                         <div class="form-group">
                             <div class="col-md-3">
                                 {{ Form::label('show_url_in_emails', trans('admin/settings/general.show_url_in_emails')) }}
@@ -158,13 +172,31 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('support_footer', $setting->support_footer), ['class' => 'form-control disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
+                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('support_footer', $setting->support_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
                                 @else
-                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('support_footer', $setting->support_footer), array('class' => 'form-control', 'style'=>'width: 150px ;')) !!}
+                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('support_footer', $setting->support_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
                                 @endif
 
                                 <p class="help-block">{{ trans('admin/settings/general.support_footer_help') }}</p>
                                 {!! $errors->first('support_footer', '<span class="alert-msg">:message</span>') !!}
+                            </div>
+                        </div>
+
+
+                        <!-- Version Footer -->
+                        <div class="form-group {{ $errors->has('version_footer') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('version_footer', trans('admin/settings/general.version_footer')) }}
+                            </div>
+                            <div class="col-md-9">
+                                @if (config('app.lock_passwords')===true)
+                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('version_footer', $setting->version_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
+                                @else
+                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('version_footer', $setting->version_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                @endif
+
+                                <p class="help-block">{{ trans('admin/settings/general.version_footer_help') }}</p>
+                                {!! $errors->first('version_footer', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
 

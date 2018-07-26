@@ -30,12 +30,10 @@ class ApiCategoriesCest
         $I->seeResponseCodeIs(200);
 
         $response = json_decode($I->grabResponse(), true);
-        // dd($response);
         // sample verify
-        $category = App\Models\Category::withCount('assets','accessories','consumables','components')
+        $category = App\Models\Category::withCount('assets','accessories','consumables','components','licenses')
             ->orderByDesc('created_at')->take(10)->get()->shuffle()->first();
-
-        $I->seeResponseContainsJson((new CategoriesTransformer)->transformCategory($category));
+        $I->seeResponseContainsJson($I->removeTimestamps((new CategoriesTransformer)->transformCategory($category)));
     }
 
     /** @test */

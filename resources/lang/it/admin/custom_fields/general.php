@@ -28,4 +28,5 @@ return array(
     'create_fieldset'         => 'Nuovo fieldset',
     'create_field'            => 'Nuovo campo personalizzato',
     'value_encrypted'      	        => 'Il valore di questo campo viene crittografato nel database. Solo gli utenti amministratori saranno in grado di visualizzare il valore decrittografato',
+    'show_in_email'     => 'Includere il valore di questo campo nelle e-mail di checkout inviate all\'utente? I campi crittografati non possono essere inclusi nelle e-mail.',
 );

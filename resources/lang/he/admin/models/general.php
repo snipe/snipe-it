@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'הצג דגמים',
     'fieldset'                  => 'קבוצת שדות',
     'no_custom_field'           => 'אין שדות מותאמים אישית',
-
+    'add_default_values'        => 'Add default values',
 );

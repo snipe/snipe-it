@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Загварыг үзэх',
     'fieldset'                  => 'Талбар',
     'no_custom_field'           => 'Өөрчлөгдсөн талбар байхгүй байна',
-
+    'add_default_values'        => 'Add default values',
 );

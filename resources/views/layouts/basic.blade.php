@@ -33,11 +33,14 @@
         border-color: {{ $snipeSettings->header_color }};
         }
 
-        @if ($snipeSettings->custom_css)
-            {{ $snipeSettings->show_custom_css() }}
-        @endif
         </style>
 
+    @endif
+
+    @if (($snipeSettings) && ($snipeSettings->custom_css))
+        <style>
+            {!! $snipeSettings->show_custom_css() !!}
+        </style>
     @endif
 
 </head>
@@ -46,13 +49,19 @@
 
     @if (($snipeSettings) && ($snipeSettings->logo!=''))
         <center>
-            <img style="padding-top: 20px; padding-bottom: 10px; max-width: 150px" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+            <img id="login-logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
         </center>
     @endif
   <!-- Content -->
   @yield('content')
 
 
+
+    <div class="text-center" style="padding-top: 100px;">
+        @if ($snipeSettings->privacy_policy_link!='')
+        <a target="_blank" rel="noopener" href="{{  $snipeSettings->privacy_policy_link }}" target="_new">{{ trans('admin/settings/general.privacy_policy') }}</a>
+    @endif
+    </div>
 
 </body>
 

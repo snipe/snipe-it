@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'Ang tagapagsagawa ay hindi naibalik sa dati, mangyaring subukan muli',
+        'success' => 'Matagumpay na naibalik sa dati ang tagapagsagawa.'
     ),
 
     'delete' => array(

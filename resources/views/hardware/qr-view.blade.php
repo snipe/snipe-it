@@ -175,7 +175,7 @@
                 <h6>Software Assigned </h6>
                 <br>
                 <!-- checked out assets table -->
-                @if (count($asset->licenses) > 0)
+                @if ($asset->licenses->count()) > 0)
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -220,7 +220,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (count($asset->uploads) > 0)
+                        @if ($asset->uploads->count() > 0)
                         @foreach ($asset->uploads as $file)
                         <tr>
                             <td>

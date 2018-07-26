@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: parallelgrapefruit
- * Date: 12/23/16
- * Time: 12:15 PM
- */
 
 namespace App\Presenters;
 
@@ -71,7 +65,12 @@ class AssetMaintenancesPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('admin/asset_maintenances/form.asset_maintenance_type'),
             ], [
-                "field" => "created_at",
+                "field" => "title",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/asset_maintenances/form.title'),
+            ], [
+                "field" => "start_date",
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/asset_maintenances/form.start_date'),

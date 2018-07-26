@@ -21,5 +21,9 @@
 </head>
 <body>
     @yield('content')
+
+@if ($snipeSettings->privacy_policy_link!='')
+<a href="{{ $snipeSettings->privacy_policy_link }}">{{ trans('admin/settings/general.privacy_policy') }}</a>
+@endif
 </body>
 </html>

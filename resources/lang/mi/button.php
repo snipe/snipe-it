@@ -12,4 +12,5 @@ return array(
     'submit'  	                => 'Tukuna',
     'upload'                    => 'Tukuake',
 	'select_file'				=> 'Tīpako Kōnae ...',
+    'select_files'				=> 'Select Files...',
 );

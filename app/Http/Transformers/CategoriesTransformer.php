@@ -30,17 +30,18 @@ class CategoriesTransformer
                 'eula' => ($category->getEula()) ? true : false,
                 'checkin_email' => ($category->checkin_email =='1') ? true : false,
                 'require_acceptance' => ($category->require_acceptance =='1') ? true : false,
-                'assets_count' => $category->assets_count,
-                'accessories_count' => $category->accessories_count,
-                'consumables_count' => $category->consumables_count,
-                'components_count' => $category->components_count,
+                'assets_count' => (int) $category->assets_count,
+                'accessories_count' => (int) $category->accessories_count,
+                'consumables_count' => (int) $category->consumables_count,
+                'components_count' => (int) $category->components_count,
+                'licenses_count' => (int) $category->licenses_count,
                 'created_at' => Helper::getFormattedDateObject($category->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($category->updated_at, 'datetime'),
             ];
 
             $permissions_array['available_actions'] = [
                 'update' => Gate::allows('update', Category::class) ? true : false,
-                'delete' => (Gate::allows('delete', Category::class) && ($category->assets_count == 0) && ($category->accessories_count == 0) && ($category->consumables_count == 0) && ($category->components_count == 0)) ? true : false,
+                'delete' => (Gate::allows('delete', Category::class) && ($category->assets_count == 0) && ($category->accessories_count == 0) && ($category->consumables_count == 0) && ($category->components_count == 0) && ($category->licenses_count == 0)) ? true : false,
             ];
 
             $array += $permissions_array;

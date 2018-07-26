@@ -91,5 +91,6 @@ $factory->define(App\Models\Setting::class, function ($faker) {
         'default_currency' => $faker->currencyCode,
         'locale' => $faker->locale,
         'pwd_secure_min' => 10, // Match web setup
+        'email_domain' => 'test.com',
     ];
 });

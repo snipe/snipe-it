@@ -20,7 +20,13 @@
         <!-- left column -->
         <div class="col-md-7">
             <div class="box box-default">
-                <form class="form-horizontal" method="post" action="" autocomplete="off">
+
+                {{ Form::open([
+                  'method' => 'POST',
+                  'route' => ['asset.audit.store', $asset->id],
+                  'files' => true,
+                  'class' => 'form-horizontal' ]) }}
+
                     <div class="box-header with-border">
                         <h3 class="box-title"> {{ trans('admin/hardware/form.tag') }} {{ $asset->asset_tag }}</h3>
                     </div>
@@ -69,6 +75,13 @@
                                 {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                             </div>
                         </div>
+
+
+                        <!-- Images -->
+                        @include ('partials.forms.edit.image-upload')
+
+
+
 
 
 

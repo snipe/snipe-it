@@ -110,51 +110,15 @@ class AssetModelsController extends Controller
 
             // Was it created?
         if ($model->save()) {
+            if ($this->shouldAddDefaultValues($request->input())) {
+                $this->assignCustomFieldsDefaultValues($model, $request->input('default_values'));
+            }
+
             // Redirect to the new model  page
             return redirect()->route("models.index")->with('success', trans('admin/models/message.create.success'));
         }
         return redirect()->back()->withInput()->withErrors($model->getErrors());
     }
-
-    /**
-     * Validates and stores new Asset Model data created from the
-     * modal form on the Asset Creation view.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v2.0]
-     * @param Request $request
-     * @return String JSON
-     */
-    public function apiStore(Request $request)
-    {
-        //COPYPASTA!!!! FIXME
-        $this->authorize('create', AssetModel::class);
-        $model = new AssetModel;
-
-        $settings=Input::all();
-        $settings['eol']= null;
-
-        $model->name=$request->input('name');
-        $model->manufacturer_id = $request->input('manufacturer_id');
-        $model->category_id = $request->input('category_id');
-        $model->model_number = $request->input('model_number');
-        $model->user_id = Auth::id();
-        $model->notes            = $request->input('notes');
-        $model->eol= null;
-
-        if ($request->input('fieldset_id')=='') {
-            $model->fieldset_id = null;
-        } else {
-            $model->fieldset_id = e($request->input('fieldset_id'));
-        }
-
-        if ($model->save()) {
-            return JsonResponse::create($model);
-        } else {
-            return JsonResponse::create(["error" => "Failed validation: ".print_r($model->getErrors()->all('<li>:message</li>'), true)], 500);
-        }
-    }
-
 
     /**
     * Returns a view containing the asset model edit form.
@@ -206,10 +170,16 @@ class AssetModelsController extends Controller
         $model->notes               = $request->input('notes');
         $model->requestable         = $request->input('requestable', '0');
 
+        $this->removeCustomFieldsDefaultValues($model);
+
         if ($request->input('custom_fieldset')=='') {
             $model->fieldset_id = null;
         } else {
             $model->fieldset_id = $request->input('custom_fieldset');
+
+            if ($this->shouldAddDefaultValues($request->input())) {
+                $this->assignCustomFieldsDefaultValues($model, $request->input('default_values'));
+            }
         }
 
         $old_image = $model->image;
@@ -362,9 +332,7 @@ class AssetModelsController extends Controller
 
         // Show the page
         $view = View::make('models/edit');
-        $view->with('category_list', Helper::categoryList('asset'));
         $view->with('depreciation_list', Helper::depreciationList());
-        $view->with('manufacturer_list', Helper::manufacturerList());
         $view->with('item', $model);
         $view->with('clone_model', $model_to_clone);
         return $view;
@@ -398,7 +366,7 @@ class AssetModelsController extends Controller
      */
     public function postBulkEdit(Request $request)
     {
-        
+
         $models_raw_array = Input::get('ids');
 
         // Make sure some IDs have been selected
@@ -423,13 +391,8 @@ class AssetModelsController extends Controller
                 $nochange = ['NC' => 'No Change'];
                 $fieldset_list = $nochange + Helper::customFieldsetList();
                 $depreciation_list = $nochange + Helper::depreciationList();
-                $category_list = $nochange + Helper::categoryList('asset');
-                $manufacturer_list = $nochange + Helper::manufacturerList();
-
 
                 return view('models/bulk-edit', compact('models'))
-                    ->with('manufacturer_list', $manufacturer_list)
-                    ->with('category_list', $category_list)
                     ->with('fieldset_list', $fieldset_list)
                     ->with('depreciation_list', $depreciation_list);
             }
@@ -531,4 +494,43 @@ class AssetModelsController extends Controller
 
     }
 
+    /**
+     * Returns true if a fieldset is set, 'add default values' is ticked and if
+     * any default values were entered into the form.
+     *
+     * @param  array  $input
+     * @return boolean
+     */
+    private function shouldAddDefaultValues(array $input)
+    {
+        return !empty($input['add_default_values'])
+            && !empty($input['default_values'])
+            && !empty($input['custom_fieldset']);
+    }
+
+    /**
+     * Adds default values to a model (as long as they are truthy)
+     *
+     * @param  AssetModel $model
+     * @param  array      $defaultValues
+     * @return void
+     */
+    private function assignCustomFieldsDefaultValues(AssetModel $model, array $defaultValues)
+    {
+        foreach ($defaultValues as $customFieldId => $defaultValue) {
+            if ($defaultValue) {
+                $model->defaultValues()->attach($customFieldId, ['default_value' => $defaultValue]);
+            }
+        }
+    }
+
+    /**
+     * Removes all default values
+     *
+     * @return void
+     */
+    private function removeCustomFieldsDefaultValues(AssetModel $model)
+    {
+        $model->defaultValues()->detach();
+    }
 }

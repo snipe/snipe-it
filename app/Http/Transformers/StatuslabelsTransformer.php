@@ -9,13 +9,13 @@ use App\Helpers\Helper;
 class StatuslabelsTransformer
 {
 
-    public function transformStatuslabels (Collection $statuslabels)
+    public function transformStatuslabels (Collection $statuslabels, $total)
     {
         $array = array();
         foreach ($statuslabels as $statuslabel) {
             $array[] = self::transformStatuslabel($statuslabel);
         }
-        return (new DatatablesTransformer)->transformDatatables($array);
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
     public function transformStatuslabel (Statuslabel $statuslabel)

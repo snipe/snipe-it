@@ -24,7 +24,6 @@ class ConsumablesController extends Controller
         $this->authorize('index', Consumable::class);
         $consumables = Company::scopeCompanyables(
             Consumable::select('consumables.*')
-                ->whereNull('consumables.deleted_at')
                 ->with('company', 'location', 'category', 'users', 'manufacturer')
         );
 
@@ -121,7 +120,7 @@ class ConsumablesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Consumable::class);
+        $this->authorize('update', Consumable::class);
         $consumable = Consumable::findOrFail($id);
         $consumable->fill($request->all());
 
