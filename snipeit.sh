@@ -7,6 +7,7 @@
 #/   -v | --verbose    Enable verbose output.
 #/   -h | --help       Show this message.
 
+#test
 ######################################################
 #           Snipe-It Install Script                  #
 #          Script created by Mike Tucker             #
