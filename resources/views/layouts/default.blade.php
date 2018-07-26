@@ -54,9 +54,7 @@
         }
         @endif
 
-        @if (($snipeSettings) && ($snipeSettings->custom_css!=''))
-            {!! $snipeSettings->show_custom_css() !!}
-        @endif
+
 
     @media (max-width: 400px) {
       .navbar-left {
@@ -68,6 +66,12 @@
       }
     }
     </style>
+
+      @if ($snipeSettings->custom_css)
+          <style>
+              {!! $snipeSettings->show_custom_css() !!}
+          </style>
+      @endif
 
     <script nonce="{{ csrf_token() }}">
           window.snipeit = {
