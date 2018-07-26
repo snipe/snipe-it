@@ -292,7 +292,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $this->authorize('view', Asset::class);
-        $assets = Asset::where('assigned_to', '=', $id)->with('model')->get();
+        $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model')->get();
         return (new AssetsTransformer)->transformAssets($assets, $assets->count());
     }
 
