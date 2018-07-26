@@ -35,7 +35,7 @@
         </style>
     @endif
 
-    @if ($snipeSettings->custom_css)
+    @if (($snipeSettings) && ($snipeSettings->custom_css))
         <style>
             {!! $snipeSettings->show_custom_css() !!}
         </style>
