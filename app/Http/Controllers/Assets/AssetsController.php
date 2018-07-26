@@ -573,9 +573,8 @@ class AssetsController extends Controller
         $csv = Reader::createFromPath(Input::file('user_import_csv'));
         $csv->setNewline("\r\n");
         //get the first row, usually the CSV header
-        //$headers = $csv->fetchOne();
-
-        $results = $csv->fetchAssoc();
+        $csv->setHeaderOffset(0);
+        $results = $csv->getRecords();
         $item = array();
         $status = array();
         $status['error'] = array();
