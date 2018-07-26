@@ -54,21 +54,29 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root'   => storage_path('app'),
+            'root'   => base_path(),
         ],
 
         'ftp' => [
             'driver'   => 'ftp',
-            'host'     => 'ftp.example.com',
-            'username' => 'your-username',
-            'password' => 'your-password',
+            'host'     => env('FTP_HOST', 'ftp.yourhost.com'),
+            'username' => env('FTP_USERNAME', 'ftp-user'),
+            'password' => env('FTP_PASSWORD', 'ftp-pass'),
+            'port'     => env('FTP_PORT', '21'),
+            'root'     => env('FTP_ROOT', ''),
+            'passive'  => env('FTP_PASSIVE', true),
+            'ssl'      => env('FTP_SSL', true),
+            'timeout'  => env('FTP_TIMEOUT', 30),
+        ],
 
-            // Optional FTP Settings...
-            // 'port'     => 21,
-            // 'root'     => '',
-            // 'passive'  => true,
-            // 'ssl'      => true,
-            // 'timeout'  => 30,
+        'sftp' => [
+            'driver' => 'sftp',
+            'host'     => env('SFTP_HOST', 'sftp.yourhost.com'),
+            'username' => env('SFTP_USERNAME', 'sftp-user'),
+            'password' => env('SFTP_PASSWORD', 'sftp-pass'),
+            'port'     => env('SFTP_PORT', '22'),
+            'root'     => env('SFTP_ROOT', ''),
+            'timeout'  => env('SFTP_TIMEOUT', 30),
         ],
 
         's3' => [
@@ -77,17 +85,14 @@ return [
             'secret' => env('AWS_SECRET', null),
             'region' => env('AWS_REGION', null),
             'bucket' => env('AWS_BUCKET', null),
+
+            'cache' => [
+                'store' => env('AWS_CACHE_STORE', 'memcached'),
+                'expire' => env('AWS_CACHE_EXPIRES', 600),
+                'prefix' =>  env('AWS_CACHE_PREFIX', 'cache-prefix'),
+            ],
         ],
 
-        'rackspace' => [
-            'driver'    => 'rackspace',
-            'username'  => 'your-username',
-            'key'       => 'your-key',
-            'container' => 'your-container',
-            'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
-            'region'    => 'IAD',
-            'url_type'  => 'publicURL',
-        ],
 
     ],
 

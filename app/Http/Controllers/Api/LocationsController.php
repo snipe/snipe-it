@@ -41,11 +41,11 @@ class LocationsController extends Controller
             'locations.updated_at',
             'locations.image',
             'locations.currency'
-        ])->withCount('assignedAssets')
-        ->withCount('assets')
-        ->withCount('users');
+        ])->withCount('assignedAssets as assigned_assets_count')
+        ->withCount('assets as assets_count')
+        ->withCount('users as users_count');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $locations = $locations->TextSearch($request->input('search'));
         }
 
@@ -173,7 +173,7 @@ class LocationsController extends Controller
             'locations.image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $locations = $locations->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
         }
 

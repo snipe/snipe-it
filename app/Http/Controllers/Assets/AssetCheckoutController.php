@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Assets;
+
 
 use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Controllers\CheckInOutRequest;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
 use App\Models\Location;
@@ -71,12 +73,12 @@ class AssetCheckoutController extends Controller
             $asset = $this->updateAssetLocation($asset, $target);
 
             $checkout_at = date("Y-m-d H:i:s");
-            if (($request->has('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {
+            if (($request->filled('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {
                 $checkout_at = $request->get('checkout_at');
             }
 
             $expected_checkin = '';
-            if ($request->has('expected_checkin')) {
+            if ($request->filled('expected_checkin')) {
                 $expected_checkin = $request->get('expected_checkin');
             }
 

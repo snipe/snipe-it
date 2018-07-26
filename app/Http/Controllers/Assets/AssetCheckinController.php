@@ -1,25 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Assets;
 
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckinRequest;
 use App\Models\Asset;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
 
 class AssetCheckinController extends Controller
 {
 
     /**
-    * Returns a view that presents a form to check an asset back into inventory.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $assetId
-    * @param string $backto
-    * @since [v1.0]
-    * @return View
-    */
+     * Returns a view that presents a form to check an asset back into inventory.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @param string $backto
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @since [v1.0]
+     */
     public function create($assetId, $backto = null)
     {
         // Check if the asset exists
@@ -40,6 +42,7 @@ class AssetCheckinController extends Controller
      * @param int $assetId
      * @param null $backto
      * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.0]
      */
     public function store(AssetCheckinRequest $request, $assetId = null, $backto = null)
@@ -67,31 +70,20 @@ class AssetCheckinController extends Controller
         $asset->accepted = null;
         $asset->name = e($request->get('name'));
 
-        if ($request->has('status_id')) {
+        if ($request->filled('status_id')) {
             $asset->status_id =  e($request->get('status_id'));
         }
 
         $asset->location_id = $asset->rtd_location_id;
 
-        if ($request->has('location_id')) {
+        if ($request->filled('location_id')) {
             $asset->location_id =  e($request->get('location_id'));
         }
 
         // Was the asset updated?
         if ($asset->save()) {
-            $logaction = $asset->logCheckin($target, e(request('note')));
+            $asset->logCheckin($target, e(request('note')));
 
-            $data['log_id'] = $logaction->id;
-            $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';
-            $data['last_name'] = get_class($target) == User::class ? $target->last_name : '';
-            $data['item_name'] = $asset->present()->name();
-            $data['checkin_date'] = $logaction->created_at;
-            $data['item_tag'] = $asset->asset_tag;
-            $data['item_serial'] = $asset->serial;
-            $data['note'] = $logaction->note;
-            $data['manufacturer_name'] = $asset->model->manufacturer->name;
-            $data['model_name'] = $asset->model->name;
-            $data['model_number'] = $asset->model->model_number;
 
             if ($backto=='user') {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));

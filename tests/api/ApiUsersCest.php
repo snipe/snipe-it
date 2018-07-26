@@ -31,7 +31,7 @@ class ApiUsersCest
         $response = json_decode($I->grabResponse(), true);
         // sample verify
         $user = App\Models\User::orderByDesc('created_at')
-            ->withCount('assets', 'licenses', 'accessories', 'consumables')
+            ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count')
             ->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new UsersTransformer)->transformUser($user)));
     }

@@ -31,7 +31,7 @@ class ApiAssetModelsCest
 
         $response = json_decode($I->grabResponse(), true);
         $assetmodel = App\Models\AssetModel::orderByDesc('created_at')
-            ->withCount('assets')->take(10)->get()->shuffle()->first();
+            ->withCount('assets as assets_count')->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new AssetModelsTransformer)->transformAssetModel($assetmodel)));
     }
 

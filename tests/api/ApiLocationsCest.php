@@ -32,7 +32,7 @@ class ApiLocationsCest
         $response = json_decode($I->grabResponse(), true);
         // sample verify
         $location = App\Models\Location::orderByDesc('created_at')
-            ->withCount('assignedAssets', 'assets',  'users')
+            ->withCount('assignedAssets as assigned_assets_count', 'assets as assets_count',  'users as users_count')
             ->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new LocationsTransformer)->transformLocation($location)));
     }

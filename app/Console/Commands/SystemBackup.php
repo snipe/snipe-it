@@ -36,7 +36,7 @@ class SystemBackup extends Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         //
         $this->call('backup:run');

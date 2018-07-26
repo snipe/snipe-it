@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Assets;
 
-use App\Helpers\Helper;
+
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetFileRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class AssetFilesController extends Controller
 {
@@ -19,6 +20,7 @@ class AssetFilesController extends Controller
      * @param int $assetId
      * @return Redirect
      * @since [v1.0]
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(AssetFileRequest $request, $assetId = null)
     {
@@ -28,14 +30,13 @@ class AssetFilesController extends Controller
 
         $this->authorize('update', $asset);
 
-        $destinationPath = config('app.private_uploads').'/assets';
-
         if ($request->hasFile('file')) {
             foreach ($request->file('file') as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $filename = 'hardware-'.$asset->id.'-'.str_random(8);
                 $filename .= '-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-                $file->move($destinationPath, $filename);
+
+                $file->storeAs('storage/private_uploads/assets', $filename);
                 $asset->logUpload($filename, e($request->get('notes')));
             }
             return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
@@ -45,14 +46,15 @@ class AssetFilesController extends Controller
     }
 
     /**
-    * Check for permissions and display the file.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param  int  $assetId
-    * @param  int  $fileId
-    * @since [v1.0]
-    * @return View
-    */
+     * Check for permissions and display the file.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $assetId
+     * @param  int $fileId
+     * @since [v1.0]
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function show($assetId = null, $fileId = null, $download = true)
     {
         $asset = Asset::find($assetId);
@@ -92,31 +94,31 @@ class AssetFilesController extends Controller
     }
 
     /**
-    * Delete the associated file
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param  int  $assetId
-    * @param  int  $fileId
-    * @since [v1.0]
-    * @return View
-    */
+     * Delete the associated file
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $assetId
+     * @param  int $fileId
+     * @since [v1.0]
+     * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function destroy($assetId = null, $fileId = null)
     {
         $asset = Asset::find($assetId);
         $this->authorize('update', $asset);
-        $destinationPath = config('app.private_uploads').'/imports/assets';
+        $rel_path = 'storage/private_uploads/assets';
 
         // the asset is valid
         if (isset($asset->id)) {
             $this->authorize('update', $asset);
-
             $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath.'/'.$log->filename;
-            if (file_exists($full_filename)) {
-                unlink($destinationPath.'/'.$log->filename);
+            if (file_exists(base_path().'/'.$rel_path.'/'.$log->filename)) {
+                Storage::delete($rel_path.'/'.$log->filename);
             }
             $log->delete();
-            return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
+            return redirect()->back()
+                ->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 
         // Redirect to the hardware management page

@@ -43,7 +43,7 @@ class SendExpirationAlerts extends Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
 
         $settings = Setting::getSettings();

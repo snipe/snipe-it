@@ -756,7 +756,7 @@ class Asset extends Depreciable
 
     public function scopeRTD($query)
     {
-        return $query->whereNULL('assets.assigned_to')
+        return $query->whereNull('assets.assigned_to')
                    ->whereHas('assetstatus', function ($query) {
                        $query->where('deployable', '=', 1)
                              ->where('pending', '=', 0)

@@ -27,19 +27,19 @@ class ComponentsController extends Controller
         $components = Company::scopeCompanyables(Component::select('components.*')
             ->with('company', 'location', 'category'));
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
         }
 
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $components->where('company_id','=',$request->input('company_id'));
         }
 
-        if ($request->has('category_id')) {
+        if ($request->filled('category_id')) {
             $components->where('category_id','=',$request->input('category_id'));
         }
 
-        if ($request->has('location_id')) {
+        if ($request->filled('location_id')) {
             $components->where('location_id','=',$request->input('location_id'));
         }
 

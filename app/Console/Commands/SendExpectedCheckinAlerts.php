@@ -42,7 +42,7 @@ class SendExpectedCheckinAlerts extends Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         $settings = Setting::getSettings();
         $whenNotify = Carbon::now()->addDays(7);

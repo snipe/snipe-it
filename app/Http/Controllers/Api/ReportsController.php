@@ -22,25 +22,25 @@ class ReportsController extends Controller
         
         $actionlogs = Actionlog::with('item', 'user', 'target','location');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $actionlogs = $actionlogs->TextSearch(e($request->input('search')));
         }
 
-        if (($request->has('target_type'))  && ($request->has('target_id'))) {
+        if (($request->filled('target_type'))  && ($request->filled('target_id'))) {
             $actionlogs = $actionlogs->where('target_id','=',$request->input('target_id'))
                 ->where('target_type','=',"App\\Models\\".ucwords($request->input('target_type')));
         }
 
-        if (($request->has('item_type'))  && ($request->has('item_id'))) {
+        if (($request->filled('item_type'))  && ($request->filled('item_id'))) {
             $actionlogs = $actionlogs->where('item_id','=',$request->input('item_id'))
                 ->where('item_type','=',"App\\Models\\".ucwords($request->input('item_type')));
         }
 
-        if ($request->has('action_type')) {
+        if ($request->filled('action_type')) {
             $actionlogs = $actionlogs->where('action_type','=',$request->input('action_type'))->orderBy('created_at', 'desc');
         }
 
-        if ($request->has('uploads')) {
+        if ($request->filled('uploads')) {
             $actionlogs = $actionlogs->whereNotNull('filename')->orderBy('created_at', 'desc');
         }
 
