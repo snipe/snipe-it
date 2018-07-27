@@ -262,9 +262,8 @@ class Asset extends Depreciable
         }
 
         if ($this->save()) {
-            $loggedAction = $this->logCheckout($note, $target);
 
-            event(new AssetCheckedOut($this, $target, $loggedAction));
+            event(new AssetCheckedOut($this, $target, Auth::user(), $note));
 
             $this->increment('checkout_counter', 1);
             return true;

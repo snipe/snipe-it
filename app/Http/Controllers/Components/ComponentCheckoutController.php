@@ -87,8 +87,6 @@ class ComponentCheckoutController extends Controller
             'asset_id' => $asset_id
         ]);
 
-        $logaction = $component->logCheckout(e(Input::get('note')), $asset);
-
         event(new ComponentCheckedOut($component, $asset, $request->input('assigned_qty'), Auth::user()));
 
         return redirect()->route('components.index')->with('success', trans('admin/components/message.checkout.success'));

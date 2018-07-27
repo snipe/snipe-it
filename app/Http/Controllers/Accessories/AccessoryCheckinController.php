@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Accessory;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
@@ -62,7 +63,6 @@ class AccessoryCheckinController extends Controller
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
             $return_to = e($accessory_user->assigned_to);
-            $accessory->logCheckin(User::find($return_to), e(Input::get('note')));
 
             event(new AccessoryCheckedIn($accessory, User::find($return_to), Auth::user(), $request->input('note')));
 

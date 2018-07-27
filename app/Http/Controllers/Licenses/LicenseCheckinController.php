@@ -9,6 +9,7 @@ use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -89,7 +90,6 @@ class LicenseCheckinController extends Controller
 
         // Was the asset updated?
         if ($licenseSeat->save()) {
-            $licenseSeat->logCheckin($return_to, e(request('note')));
 
             event(new LicenseCheckedIn($license, $return_to, Auth::user(), $request->input('note')));
 

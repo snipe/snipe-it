@@ -68,8 +68,6 @@ class ConsumableCheckoutController extends Controller
             'assigned_to' => e(Input::get('assigned_to'))
         ]);
 
-        $logaction = $consumable->logCheckout(e(Input::get('note')), $user);
-
         event(new ConsumableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
 
         // Redirect to the new consumable page
