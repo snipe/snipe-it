@@ -30,6 +30,7 @@ class Kernel extends ConsoleKernel
         Commands\SyncAssetLocations::class,
         Commands\RegenerateAssetTags::class,
         Commands\SyncAssetCounters::class,
+        Commands\RestoreDeletedUsers::class,
     ];
 
     /**
