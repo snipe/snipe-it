@@ -47,7 +47,8 @@ class LogListener
     }
 
     public function onComponentCheckedOut(ComponentCheckedOut $event) {
-        $event->component->logCheckout($event->note, $event->checkedOutTo);
+        // Since components don't have a "note" field, submit empty note
+        $event->component->logCheckout(null, $event->checkedOutTo);
     }         
 
     public function onConsumableCheckedOut(ConsumableCheckedOut $event) {
@@ -71,7 +72,7 @@ class LogListener
     {
         $list = [
             'AccessoryCheckedIn',
-            'AccessoryCheckedout',            
+            'AccessoryCheckedOut',            
             'AssetCheckedIn',
             'AssetCheckedOut',
             'ComponentCheckedIn', 

@@ -94,7 +94,7 @@ class ComponentCheckinController extends Controller
                 DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
             }
 
-            event(new ComponentCheckedIn($component, $component_assets, $request->input('checkin_qty'), $request->input('note')));
+            event(new ComponentCheckedIn($component, $component_assets, Auth::user(), $request->input('checkin_qty'), $request->input('note')));
 
             return redirect()->route('components.index')->with('success',
                 trans('admin/components/message.checkout.success'));

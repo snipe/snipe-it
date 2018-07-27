@@ -20,15 +20,14 @@ class CheckoutAccessoryNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(Accessory $accessory, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
+    public function __construct(Accessory $accessory, $checkedOutTo, User $checkedOutBy, $note)
     {
 
         $this->item = $accessory;
         $this->admin = $checkedOutBy;
         $this->note = $note;
         $this->target = $checkedOutTo;
-        $this->acceptance = $acceptance;
-
+        
         $this->settings = Setting::getSettings();
 
     }
