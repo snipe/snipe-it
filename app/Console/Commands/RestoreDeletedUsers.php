@@ -62,7 +62,7 @@ class RestoreDeletedUsers extends Command
         $users = User::whereBetween('deleted_at', [$start_date, $end_date])->withTrashed()->get();
         $this->info('There are '.$users->count().' users deleted between '.$start_date.' and '.$end_date);
         $this->warn('Making a backup!');
-        //Artisan::call('backup:run');
+        Artisan::call('backup:run');
 
         foreach ($users as $user) {
             $user_count++;
@@ -81,7 +81,7 @@ class RestoreDeletedUsers extends Command
                         ->where('id', $user_log->item_id)
                         ->update(['assigned_to' => $user->id, 'assigned_type'=> User::class]);
 
-                    $this->info('  ** Asset '.$user_log->item->id.' ('.$user_log->item->asset_tag.') restored to user '.$user->id.'');
+                    $this->info('      ** Asset '.$user_log->item->id.' ('.$user_log->item->asset_tag.') restored to user '.$user->id.'');
 
                 } elseif ($user_log->item_type==License::class) {
                     $license_totals++;
@@ -89,7 +89,7 @@ class RestoreDeletedUsers extends Command
                     $avail_seat = DB::table('license_seats')->where('license_id','=',$user_log->item->id)
                         ->whereNull('assigned_to')->whereNull('asset_id')->whereBetween('updated_at', [$start_date, $end_date])->first();
                     if ($avail_seat) {
-                        $this->info('  ** Allocating seat '.$avail_seat->id.' for this License');
+                        $this->info('      ** Allocating seat '.$avail_seat->id.' for this License');
 
                         DB::table('license_seats')
                             ->where('id', $avail_seat->id)
