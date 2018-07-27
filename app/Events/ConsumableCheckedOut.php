@@ -22,10 +22,11 @@ class ConsumableCheckedOut
      *
      * @return void
      */
-    public function __construct(Consumable $consumable, $checkedOutTo, Actionlog $logEntry)
+    public function __construct(Consumable $consumable, $checkedOutTo, User $checkedOutBy, $note)
     {
         $this->consumable = $consumable;
         $this->checkedOutTo = $checkedOutTo;
-        $this->logEntry = $logEntry;
+        $this->checkedOutBy = $checkedOutBy;
+        $this->note = $note;
     }
 }

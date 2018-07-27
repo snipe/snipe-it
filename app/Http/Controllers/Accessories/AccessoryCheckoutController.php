@@ -82,7 +82,7 @@ class AccessoryCheckoutController extends Controller
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 
-        event(new AccessoryCheckedOut($accessory, $user, $logaction));
+        event(new AccessoryCheckedOut($accessory, $user, Auth::user(), $request->input('note'));
 
       // Redirect to the new accessory page
         return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.checkout.success'));

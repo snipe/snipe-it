@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Models\Actionlog;
 use App\Models\Component;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
@@ -15,17 +14,18 @@ class ComponentCheckedOut
 
     public $component;
     public $checkedOutTo;
-    public $logEntry;
+    public $checkedOutBy;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Component $component, $checkedOutTo, Actionlog $logEntry)
+    public function __construct(Component $component, $checkedOutTo, $quantity, User $checkedOutBy)
     {
         $this->component = $component;
         $this->checkedOutTo = $checkedOutTo;
-        $this->logEntry = $logEntry;
+        $this->quantity = $quantity;
+        $this->checkedOutBy = $checkedOutBy;
     }
 }

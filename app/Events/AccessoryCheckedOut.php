@@ -22,10 +22,11 @@ class AccessoryCheckedOut
      *
      * @return void
      */
-    public function __construct(Accessory $accessory, $checkedOutTo, Actionlog $logEntry)
+    public function __construct(Accessory $accessory, $checkedOutTo, User $checkedOutBy, $note)
     {
         $this->accessory = $accessory;
         $this->checkedOutTo = $checkedOutTo;
-        $this->logEntry = $logEntry;
+        $this->checkedOutBy = $checkedOutBy;
+        $this->note = $note;
     }
 }

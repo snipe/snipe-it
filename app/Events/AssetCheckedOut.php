@@ -22,10 +22,11 @@ class AssetCheckedOut
      *
      * @return void
      */
-    public function __construct(Asset $asset, $checkedOutTo, Actionlog $logEntry)
+    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $note)
     {
         $this->asset = $asset;
         $this->checkedOutTo = $checkedOutTo;
-        $this->logEntry = $logEntry;
+        $this->checkedOutBy = $checkedOutBy;
+        $this->note = $note;
     }
 }

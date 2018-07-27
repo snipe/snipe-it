@@ -22,10 +22,11 @@ class LicenseCheckedOut
      *
      * @return void
      */
-    public function __construct(License $license, $checkedOutTo, Actionlog $logEntry)
+    public function __construct(License $license, $checkedOutTo, User $checkedOutBy, $note)
     {
         $this->license = $license;
         $this->checkedOutTo = $checkedOutTo;
-        $this->logEntry = $logEntry;
+        $this->checkedOutBy = $checkedOutBy;
+        $this->note = $note;
     }
 }
