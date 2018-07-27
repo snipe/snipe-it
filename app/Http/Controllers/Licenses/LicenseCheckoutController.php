@@ -23,11 +23,11 @@ class LicenseCheckoutController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @param $licenceId
+     * @param $licenseId
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create($licenceId)
+    public function create($licenseId)
     {
         // Check that the license is valid
         if ($license = License::find($licenseId)) {
