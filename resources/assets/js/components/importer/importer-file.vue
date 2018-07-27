@@ -143,6 +143,7 @@ tr {
                         {id: 'jobtitle', text: 'Job Title' },
                         {id: 'last_name', text: 'Last Name' },
                         {id: 'phone_number', text: 'Phone Number' },
+                        {id: 'department', text: 'Department'}
 
                     ],
                     customFields: this.customFields,
