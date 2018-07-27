@@ -3,6 +3,7 @@
 namespace App\Importer;
 
 use App\Helpers\Helper;
+use App\Models\Department;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
 
@@ -39,6 +40,10 @@ class UserImporter extends ItemImporter
         $this->item['phone'] = $this->findCsvMatch($row, 'phone_number');
         $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
+        $user_department = $this->findCsvMatch($row, 'department');
+        if ($this->shouldUpdateField($user_department)) {
+            $this->item["department_id"] = $this->createOrFetchDepartment($user_department);
+        }
         $user = User::where('username', $this->item['username'])->first();
         if ($user) {
             if (!$this->updating) {
@@ -77,5 +82,32 @@ class UserImporter extends ItemImporter
 
         $this->logError($user, 'User');
         return;
+    }
+
+      /**
+     * Fetch an existing department, or create new if it doesn't exist
+     *
+     * @author Daniel Melzter
+     * @since 5.0
+     * @param $department_name string
+     * @return int id of department created/found
+     */
+    public function createOrFetchDepartment($department_name)
+    {
+        $department = Department::where(['name' => $department_name])->first();
+        if ($department) {
+            $this->log('A matching department ' . $department_name . ' already exists');
+            return $department->id;
+        }
+        $department = new department();
+        $department->name = $department_name;
+        $department->user_id = $this->user_id;
+
+        if ($department->save()) {
+            $this->log('department ' . $department_name . ' was created');
+            return $department->id;
+        }
+        $this->logError($department, 'Company');
+        return null;
     }
 }

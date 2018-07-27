@@ -147,7 +147,7 @@ class ItemImporter extends Importer
      * @param $field string
      * @return boolean
      */
-    private function shouldUpdateField($field)
+    protected function shouldUpdateField($field)
     {
         if (empty($field)) {
             return false;

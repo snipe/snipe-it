@@ -66,6 +66,7 @@ abstract class Importer
         'phone_number' => 'phone number',
         'first_name' => 'first name',
         'last_name' => 'last name',
+        'department' => 'department'
     ];
     /**
      * Map of item fields->csv names
@@ -150,7 +151,7 @@ abstract class Importer
         // This 'inverts' the fields such that we have a collection of fields indexed by name.
         $this->customFields = CustomField::All()->reduce(function ($nameLookup, $field) {
             $nameLookup[$field['name']] = $field;
-            return $nameLookup; 
+            return $nameLookup;
         });
         // Remove any custom fields that do not exist in the header row.  This prevents nulling out values that shouldn't exist.
         // In detail, we compare the lower case name of custom fields (indexed by name) to the keys in the header row.  This
