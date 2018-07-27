@@ -95,7 +95,7 @@ log () {
 
 install_packages () {
   case $distro in
-    ubuntu|debian|raspbian)
+    ubuntu|debian)
       for p in $PACKAGES; do
         if dpkg -s "$p" >/dev/null 2>&1; then
           echo "  * $p already installed"
@@ -105,6 +105,17 @@ install_packages () {
         fi
       done;
       ;;
+    raspbian)
+      for p in $PACKAGES; do
+        if dpkg -s "$p" >/dev/null 2>&1; then
+          echo "  * $p already installed"
+        else
+          echo "  * Installing $p"
+          log "DEBIAN_FRONTEND=noninteractive apt-get install -y -t buster $p"
+        fi
+      done;
+      ;;
+
     centos)
       for p in $PACKAGES; do
         if yum list installed "$p" >/dev/null 2>&1; then
@@ -542,13 +553,26 @@ case $distro in
   if [ "$version" == "9.4" ]; then
     # Install for Raspbian 9.4
     tzone=$(cat /etc/timezone)
+    cat >/etc/apt/sources.list.d/10-buster.list <<EOL
+deb http://mirrordirector.raspbian.org/raspbian/ buster main contrib non-free rpi
+EOL
 
+    cat >/etc/apt/preferences.d/10-buster <<EOL
+Package: *
+Pin: release n=stretch
+Pin-Priority: 900
+
+Package: *
+Pin: release n=buster
+Pin-Priority: 750
+EOL
+ 
     echo -n "* Updating installed packages."
     log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
     progress
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php7.2 php7.2-mcrypt php7.2-curl php7.2-mysql php7.2-gd php7.2-ldap php7.2-zip php7.2-mbstring php7.2-xml php7.2-bcmath curl git unzip"
     install_packages
 
     echo "* Configuring Apache."
