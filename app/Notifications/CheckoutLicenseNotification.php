@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\License;
 use App\Models\Setting;
 use App\Models\SnipeModel;
 use App\Models\User;
@@ -25,23 +26,14 @@ class CheckoutLicenseNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params)
+    public function __construct(License $license, $checkedOutTo, User $checkedOutBy, $note)
     {
-        $this->target = $params['target'];
-        $this->item = $params['item'];
-        $this->admin = $params['admin'];
-        $this->log_id = $params['log_id'];
-        $this->note = '';
-        $this->target_type = $params['target_type'];
-        $this->settings = $params['settings'];
-        $this->target_type = $params['target_type'];
+        $this->item = $license;
+        $this->admin = $checkedOutBy;
+        $this->note = $note;
+        $this->target = $checkedOutTo;
 
-        if (array_key_exists('note', $params)) {
-            $this->note = $params['note'];
-        }
-
-
-
+        $this->settings = Setting::getSettings();
     }
 
     /**
@@ -133,7 +125,7 @@ class CheckoutLicenseNotification extends Notification
                 'target'        => $this->target,
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,
-                'accept_url'    =>  url('/').'/account/accept-asset/'.$this->log_id,
+                'accept_url'    => route('account.accept.item', ['license', $this->item->id]),
             ])
             ->subject(trans('mail.Confirm_license_delivery'));
 

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Consumable;
 use App\Models\Setting;
 use App\Models\SnipeModel;
 use App\Models\User;
@@ -25,21 +26,15 @@ class CheckoutConsumableNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params)
+    public function __construct(Consumable $consumable, $checkedOutTo, User $checkedOutBy, $note)
     {
-        $this->target = $params['target'];
-        $this->item = $params['item'];
-        $this->admin = $params['admin'];
-        $this->log_id = $params['log_id'];
-        $this->note = '';
-        $this->last_checkout = '';
-        $this->expected_checkin = '';
-        $this->target_type = $params['target_type'];
-        $this->settings = $params['settings'];
 
-        if (array_key_exists('note', $params)) {
-            $this->note = $params['note'];
-        }
+        $this->item = $consumable;
+        $this->admin = $checkedOutBy;
+        $this->note = $note;
+        $this->target = $checkedOutTo;
+
+        $this->settings = Setting::getSettings();
 
     }
 
@@ -131,11 +126,10 @@ class CheckoutConsumableNotification extends Notification
                 'item'          => $this->item,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
-                'log_id'        => $this->note,
                 'target'        => $this->target,
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,
-                'accept_url'    =>  url('/').'/account/accept-asset/'.$this->log_id,
+                'accept_url'    => route('account.accept.item', ['consumable', $this->item->id]),
             ])
             ->subject(trans('mail.Confirm_consumable_delivery'));
 

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
@@ -13,31 +14,24 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class CheckoutAssetNotification extends Notification
 {
     use Queueable;
-    /**
-     * @var
-     */
-    private $params;
 
     /**
      * Create a new notification instance.
      *
      * @param $params
      */
-    public function __construct($params)
+    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $note)
     {
-        $this->target = $params['target'];
-        $this->item = $params['item'];
-        $this->admin = $params['admin'];
-        $this->log_id = $params['log_id'];
-        $this->note = '';
+
+        $this->item = $asset;
+        $this->admin = $checkedOutBy;
+        $this->note = $note;
+        $this->target = $checkedOutTo;
+
+        $this->settings = Setting::getSettings();
+
         $this->last_checkout = '';
         $this->expected_checkin = '';
-        $this->target_type = $params['target_type'];
-        $this->settings = $params['settings'];
-
-        if (array_key_exists('note', $params)) {
-            $this->note = $params['note'];
-        }
 
         if ($this->item->last_checkout) {
             $this->last_checkout = \App\Helpers\Helper::getFormattedDateObject($this->item->last_checkout, 'date',
@@ -151,12 +145,11 @@ class CheckoutAssetNotification extends Notification
                 'item'          => $this->item,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
-                'log_id'        => $this->note,
                 'target'        => $this->target,
                 'fields'        => $fields,
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,
-                'accept_url'    =>  url('/').'/account/accept-asset/'.$this->log_id,
+                'accept_url'    => route('account.accept.item', ['asset', $this->item->id]),
                 'last_checkout' => $this->last_checkout,
                 'expected_checkin'  => $this->expected_checkin,
             ])
