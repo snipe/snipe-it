@@ -67,7 +67,6 @@ class LicenseCheckoutController extends Controller
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
         if ($this->$checkoutMethod($licenseSeat)) {
-            $licenseSeat->logCheckout(request('note'), $target);
             return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
         }
 
@@ -103,8 +102,11 @@ class LicenseCheckoutController extends Controller
         if ($target->checkedOutToUser()) {
             $licenseSeat->assigned_to =  $target->assigned_to;
         }
-
-         return $licenseSeat->save();
+        if ($licenseSeat->save()) {
+            $licenseSeat->logCheckout(request('note'), $target);
+            return true;
+        }
+        return false;
     }
 
     protected function checkoutToUser($licenseSeat)
@@ -115,6 +117,10 @@ class LicenseCheckoutController extends Controller
         }
         $licenseSeat->assigned_to = request('assigned_to');
 
-        return $licenseSeat->save();
+        if ($licenseSeat->save()) {
+            $licenseSeat->logCheckout(request('note'), $target);
+            return true;
+        }
+        return false;
     }
 }
