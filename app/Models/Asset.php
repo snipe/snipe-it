@@ -5,7 +5,9 @@ use App\Events\AssetCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Contracts\Acceptable as AcceptableContract;
 use App\Models\Traits\Searchable;
+use App\Models\User;
 use App\Presenters\Presentable;
 use AssetPresenter;
 use Auth;
@@ -24,7 +26,7 @@ use App\Notifications\CheckoutAssetNotification;
  *
  * @version    v1.0
  */
-class Asset extends Depreciable
+class Asset extends Depreciable implements AcceptableContract
 {
     protected $presenter = 'App\Presenters\AssetPresenter';
     use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
@@ -34,6 +36,53 @@ class Asset extends Depreciable
     const USER = 'user';
 
     const ACCEPTANCE_PENDING = 'pending';
+
+    /**
+     * Accept the asset
+     * 
+     * @param  User   $acceptedBy The user who accepts the asset
+     * @param  string $signature  The filename of the signature, if provided
+     */
+    public function accept(User $acceptedBy, $signature = null) {
+      $this->accepted = 'accepted';
+      $this->save();
+    }
+
+    /**
+     * Decline the asset
+     * 
+     * @param  User   $declinedBy The user who declines the asset
+     * @param  string $signature  The filename of the signature, if provided
+     */
+    public function decline(User $declinedBy, $signature = null) {
+      $this->assigned_to = null;
+      $this->assigned_type = null;
+      $this->accepted = null;      
+      $this->save();
+    }
+
+    /**
+     * Is the asset already accepted?
+     * 
+     * @return boolean
+     */
+    public function isAccepted() : bool {
+      return $this->accepted != 'pending';
+    }
+
+    /**
+     * Is the asset checked out to this user?
+     *     
+     * @param  User    $user
+     * @return boolean
+     */
+    public function isCheckedOutTo(User $user) {
+        if (is_null($this->assignedTo)) {
+            return false;
+        }
+
+        return $this->assignedTo->is($user);
+    }
 
 
     /**
