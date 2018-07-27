@@ -9,6 +9,8 @@ use App\Events\AssetCheckedOut;
 use App\Events\ComponentCheckedIn;
 use App\Events\ComponentCheckedOut;
 use App\Events\ConsumableCheckedOut;
+use App\Events\ItemAccepted;
+use App\Events\ItemDeclined;
 use App\Events\LicenseCheckedIn;
 use App\Events\LicenseCheckedOut;
 use App\Models\Actionlog;
@@ -63,6 +65,26 @@ class LogListener
         $event->license->logCheckout($event->note, $event->checkedOutTo);
     } 
 
+    public function onItemAccepted(ItemAccepted $event) {
+        $logaction = new Actionlog();
+        $logaction->item()->associate($event->item);
+        $logaction->target()->associate($event->acceptedBy);
+        $logaction->accept_signature = $event->signature;
+        $logaction->action_type = 'accepted';
+
+        $logaction->save();
+    }   
+
+    public function onItemDeclined(ItemDeclined $event) {
+        $logaction = new Actionlog();
+        $logaction->item()->associate($event->item);
+        $logaction->target()->associate($event->declinedBy);
+        $logaction->accept_signature = $event->signature;
+        $logaction->action_type = 'declined';
+
+        $logaction->save();        
+    } 
+
     /**
      * Register the listeners for the subscriber.
      *
@@ -80,6 +102,8 @@ class LogListener
             'ConsumableCheckedOut',  
             'LicenseCheckedIn',
             'LicenseCheckedOut',  
+            'ItemAccepted',
+            'ItemDeclined', 
         ];
 
         foreach($list as $event)  {

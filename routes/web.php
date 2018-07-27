@@ -274,6 +274,15 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['auth']], function () {
     # Account Dashboard
     Route::get('/', [ 'as' => 'account', 'uses' => 'ViewAssetsController@getIndex' ]);
 
+
+    Route::get('accept', 'Account\AcceptanceController@index')
+        ->name('account.accept');
+        
+    Route::get('accept/{type}/{id}', 'Account\AcceptanceController@edit')
+        ->name('account.accept.item');
+
+    Route::post('accept/{type}/{id}', 'Account\AcceptanceController@update');        
+
 });
 
 
