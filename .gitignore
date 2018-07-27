@@ -48,5 +48,6 @@ tests/_support/_generated/*
 /npm-debug.log
 /storage/oauth-private.key
 /storage/oauth-public.key
+public/phpinfo.php
 
 *.cache
