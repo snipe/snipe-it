@@ -29,25 +29,4 @@ class LicenseCheckoutRequest extends FormRequest
             'asset_id'  => 'required_without:assigned_to',
         ];
     }
-
-    public function findLicenseSeatToCheckout($license, $seatId)
-    {
-        // This returns null if seatId is null
-        if (!$licenseSeat = LicenseSeat::find($seatId)) {
-            $licenseSeat = $license->freeSeat();
-        }
-
-        if (!$licenseSeat) {
-            if ($seatId) {
-                return redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.');
-            }
-            return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
-        }
-
-        if(!$licenseSeat->license->is($license)) {
-            return redirect()->route('licenses.index')->with('error', 'The license seat provided does not match the license.');
-        }
-
-        return $licenseSeat;
-    }
 }

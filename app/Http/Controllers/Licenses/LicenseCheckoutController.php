@@ -56,22 +56,39 @@ class LicenseCheckoutController extends Controller
 
     public function store(LicenseCheckoutRequest $request, $licenseId, $seatId = null)
     {
-        $license = License::find($licenseId);
-        if (!$license) {
+        if (!$license = License::find($licenseId)) {
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
         $this->authorize('checkout', $license);
 
-        $licenseSeat = $request->findLicenseSeatToCheckout($license, $seatId);
-
+        $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
         $licenseSeat->user_id = Auth::id();
-        $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
 
+        $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
         if ($this->$checkoutMethod($licenseSeat)) {
             return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
         }
+
         return redirect()->route("licenses.index")->with('error', trans('Something went wrong handling this checkout.'));
+    }
+
+    protected function findLicenseSeatToCheckout($license, $seatId)
+    {
+        $licenseSeat = LicenseSeat::find($seatId) ?? $license->freeSeat();
+
+        if (!$licenseSeat) {
+            if ($seatId) {
+                return redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.');
+            }
+            return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
+        }
+
+        if(!$licenseSeat->license->is($license)) {
+            return redirect()->route('licenses.index')->with('error', 'The license seat provided does not match the license.');
+        }
+
+        return $licenseSeat;
     }
 
     protected function checkoutToAsset($licenseSeat)
@@ -85,8 +102,7 @@ class LicenseCheckoutController extends Controller
         if ($target->checkedOutToUser()) {
             $licenseSeat->assigned_to =  $target->assigned_to;
         }
-
-         if ($licenseSeat->save()) {
+        if ($licenseSeat->save()) {
             $licenseSeat->logCheckout(request('note'), $target);
             return true;
         }
