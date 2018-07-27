@@ -45,6 +45,11 @@ $factory->define(App\Models\Component::class, function (Faker\Generator $faker) 
     ];
 });
 
+$factory->define(App\Models\Group::class, function (Faker\Generator $faker) {
+    return [
+    'name' => $faker->name,
+    ];
+});
 
 $factory->define(App\Models\Location::class, function (Faker\Generator $faker) {
     return [
