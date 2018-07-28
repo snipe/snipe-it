@@ -18,12 +18,24 @@ use Illuminate\Support\Str;
 
 class AcceptanceController extends Controller {
 	
-    public function index(Request $request) {
+    /**
+     * Show a listing of pending checkout acceptances for the current user
+     * 
+     * @return View
+     */
+    public function index() {
         $acceptances = CheckoutAcceptance::forUser(Auth::user())->pending()->get();
 
         return view('account/accept.index', compact('acceptances'));
     }
-	public function create(Request $request, $id) {
+
+    /**
+     * Shows a form to either accept or decline the checkout acceptance
+     * 
+     * @param  int  $id
+     * @return mixed
+     */
+	public function create($id) {
 
         $acceptance = CheckoutAcceptance::find($id);
 
@@ -46,6 +58,13 @@ class AcceptanceController extends Controller {
         return view('account/accept.create', compact('acceptance'));
 	}
 
+    /**
+     * Stores the accept/decline of the checkout acceptance
+     * 
+     * @param  Request $request
+     * @param  int  $id
+     * @return Redirect
+     */
     public function store(Request $request, $id) {
         
         $acceptance = CheckoutAcceptance::find($id);

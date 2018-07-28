@@ -7,7 +7,11 @@ use App\Models\CustomField;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
-
+/**
+ * This trait allows models to have a callback after their checkout gets accepted or declined.
+ *
+ * @author Till Deeke <kontakt@tilldeeke.de>
+ */
 trait Acceptable {
     /**
      * Run after the checkout acceptance was accepted by the user
