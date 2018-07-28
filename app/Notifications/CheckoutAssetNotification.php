@@ -20,13 +20,14 @@ class CheckoutAssetNotification extends Notification
      *
      * @param $params
      */
-    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $note)
+    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
 
         $this->item = $asset;
         $this->admin = $checkedOutBy;
         $this->note = $note;
         $this->target = $checkedOutTo;
+        $this->acceptance = $acceptance;
 
         $this->settings = Setting::getSettings();
 
@@ -140,6 +141,8 @@ class CheckoutAssetNotification extends Notification
             $fields = $this->item->model->fieldset->fields;
         }
 
+        $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
+
         $message = (new MailMessage)->markdown('notifications.markdown.checkout-asset',
             [
                 'item'          => $this->item,
@@ -149,7 +152,7 @@ class CheckoutAssetNotification extends Notification
                 'fields'        => $fields,
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,
-                'accept_url'    => route('account.accept.item', ['asset', $this->item->id]),
+                'accept_url'    => $accept_url,
                 'last_checkout' => $this->last_checkout,
                 'expected_checkin'  => $this->expected_checkin,
             ])

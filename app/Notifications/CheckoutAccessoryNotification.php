@@ -20,13 +20,14 @@ class CheckoutAccessoryNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(Accessory $accessory, $checkedOutTo, User $checkedOutBy, $note)
+    public function __construct(Accessory $accessory, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
 
         $this->item = $accessory;
         $this->admin = $checkedOutBy;
         $this->note = $note;
         $this->target = $checkedOutTo;
+        $this->acceptance = $acceptance;
         
         $this->settings = Setting::getSettings();
 
@@ -119,6 +120,8 @@ class CheckoutAccessoryNotification extends Notification
         $eula =  $this->item->getEula();
         $req_accept = $this->item->requireAcceptance();
 
+        $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
+
         return (new MailMessage)->markdown('notifications.markdown.checkout-accessory',
             [
                 'item'          => $this->item,
@@ -127,7 +130,7 @@ class CheckoutAccessoryNotification extends Notification
                 'target'        => $this->target,
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,
-                'accept_url'    => route('account.accept.item', ['accessory', $this->item->id]),
+                'accept_url'    => $accept_url,
             ])
             ->subject(trans('mail.Confirm_accessory_delivery'));
 

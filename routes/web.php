@@ -278,10 +278,10 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['auth']], function () {
     Route::get('accept', 'Account\AcceptanceController@index')
         ->name('account.accept');
         
-    Route::get('accept/{type}/{id}', 'Account\AcceptanceController@edit')
+    Route::get('accept/{id}', 'Account\AcceptanceController@create')
         ->name('account.accept.item');
 
-    Route::post('accept/{type}/{id}', 'Account\AcceptanceController@update');        
+    Route::post('accept/{id}', 'Account\AcceptanceController@store');        
 
 });
 

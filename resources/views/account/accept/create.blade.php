@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Accept {{ $item->present()->name() }}
+    Accept {{ $acceptance->checkoutable->present()->name() }}
     @parent
 @stop
 
@@ -52,10 +52,10 @@
               </label>
             </div>
 
-            @if ($item->getEula())
+            @if ($acceptance->checkoutable->getEula())
             <div class="col-md-12" style="padding-top: 20px">
               <div id="eula_div">
-                {!!  $item->getEula() !!}
+                {!!  $acceptance->checkoutable->getEula() !!}
               </div>
             </div>
             @endif

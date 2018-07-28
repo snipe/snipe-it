@@ -1,10 +1,13 @@
 <?php 
 namespace App\Http\Controllers\Account;
 
+use App\Events\CheckoutAccepted;
+use App\Events\CheckoutDeclined;
 use App\Events\ItemAccepted;
 use App\Events\ItemDeclined;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\CheckoutAcceptance;
 use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\Contracts\Acceptable;
@@ -16,49 +19,52 @@ use Illuminate\Support\Str;
 class AcceptanceController extends Controller {
 	
     public function index(Request $request) {
-        return '';
+        $acceptances = CheckoutAcceptance::forUser(Auth::user())->pending()->get();
+
+        return view('account/accept.index', compact('acceptances'));
     }
-	public function edit(Request $request, $type, $id) {
+	public function create(Request $request, $id) {
 
-        $item = $this->getItemById($type, $id);
+        $acceptance = CheckoutAcceptance::find($id);
 
-        if (is_null($item)) {
+        if (is_null($acceptance)) {
             return redirect()->reoute('account.accept')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
-        if ($item->isAccepted()) {
+        if (! $acceptance->isPending()) {
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.asset_already_accepted'));
         }        
 
-        if (! $item->isCheckedOutTo(Auth::user())) {
+        if (! $acceptance->isCheckedOutTo(Auth::user())) {
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
-        if (!Company::isCurrentUserHasAccess($item)) {
+        if (!Company::isCurrentUserHasAccess($acceptance->checkoutable)) {
             return redirect()->route('account.accept')->with('error', trans('general.insufficient_permissions'));
         }        
 
-        return view('account/accept', compact('item'));
+        return view('account/accept.create', compact('acceptance'));
 	}
 
-    public function update(Request $request, $type, $id) {
-        $item = $this->getItemById($type, $id);
+    public function store(Request $request, $id) {
+        
+        $acceptance = CheckoutAcceptance::find($id);
 
-        if (is_null($item)) {
+        if (is_null($acceptance)) {
             return redirect()->reoute('account.accept')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
-        if ($item->isAccepted()) {
+        if (! $acceptance->isPending()) {
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.asset_already_accepted'));
-        }      
+        }        
 
-        if (! $item->isCheckedOutTo(Auth::user())) {
+        if (! $acceptance->isCheckedOutTo(Auth::user())) {
             return redirect()->route('account.accept')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
-        if (!Company::isCurrentUserHasAccess($item)) {
+        if (!Company::isCurrentUserHasAccess($acceptance->checkoutable)) {
             return redirect()->route('account.accept')->with('error', trans('general.insufficient_permissions'));
-        }
+        }   
 
         if (!$request->filled('asset_acceptance')) {
             return redirect()->back()->with('error', trans('admin/users/message.error.accept_or_decline'));
@@ -79,41 +85,30 @@ class AcceptanceController extends Controller {
 
         if ($request->input('asset_acceptance') == 'accepted') {
 
-            $item->accept(Auth::user(), $sig_filename);
+            $acceptance->accepted_at = now();
+            $acceptance->signature_filename = $sig_filename;
+            $acceptance->save();
 
-            event(new ItemAccepted($item, Auth::user(), $sig_filename));
+            // TODO: Update state for the checkoutable
+
+            event(new CheckoutAccepted($acceptance));
 
             $return_msg = trans('admin/users/message.accepted');
 
         } else {
 
-            $item->decline(Auth::user(), $sig_filename);
+            $acceptance->declined_at = now();
+            $acceptance->signature_filename = $sig_filename;
+            $acceptance->save();           
 
-            event(new ItemDeclined($item, Auth::user(), $sig_filename));
+            // TODO: Update state for the checkoutable
+
+            event(new CheckoutDeclined($acceptance));
 
             $return_msg = trans('admin/users/message.declined');
 
         }
 
         return redirect()->to('account/accept')->with('success', $return_msg);
-    }
-
-    private function getItemById($type, $id) : ? Acceptable {
-        switch ($type) {
-            case 'asset':
-                $item = Asset::findOrFail($id);
-                break;
-            case 'consumable':
-                $item = Consumable::findOrFail($id);
-                break;
-            case 'license':
-                $item = License::findOrFail($id);
-                break;                  
-            default:
-                $item = null;
-                break;
-        }
-
-        return $item;
     }	
 }

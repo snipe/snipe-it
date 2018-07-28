@@ -4,29 +4,24 @@ namespace App\Events;
 
 use App\Models\Accessory;
 use App\Models\Actionlog;
+use App\Models\CheckoutAcceptance;
 use App\Models\Contracts\Acceptable;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ItemDeclined
+class CheckoutDeclined
 {
     use Dispatchable, SerializesModels;
-
-    public $item;
-    public $declinedBy;
-    public $signature;
     
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Acceptable $item, User $declinedBy, string $signature)
+    public function __construct(CheckoutAcceptance $acceptance)
     {
-        $this->item       = $item;
-        $this->declinedBy = $declinedBy;
-        $this->signature  = $signature;
+        $this->acceptance       = $acceptance;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Models\CheckoutAcceptance;
 use App\Models\Recipients\AdminRecipient;
 use App\Models\Setting;
 use App\Models\User;
@@ -9,6 +10,7 @@ use App\Notifications\CheckoutAccessoryNotification;
 use App\Notifications\CheckoutAssetNotification;
 use App\Notifications\CheckoutConsumableNotification;
 use App\Notifications\CheckoutLicenseNotification;
+use App\Notifications\CheckoutLicenseSeatNotification;
 use Illuminate\Support\Facades\Notification;
 
 class SendingCheckOutNotificationsListener
@@ -24,9 +26,20 @@ class SendingCheckOutNotificationsListener
             return;
         }
 
+        /**
+         * Make a checkout acceptance and attach it in the notification
+         */
+        $acceptance = null;
+        if ($event->consumable->requireAcceptance()) {
+            $acceptance = new CheckoutAcceptance;
+            $acceptance->checkoutable()->associate($event->consumable);
+            $acceptance->assignedTo()->associate($event->checkedOutTo);
+            $acceptance->save();
+        }
+
         Notification::send(
             $this->getNotifiables($event), 
-            new CheckoutConsumableNotification($event->consumable, $event->checkedOutTo, $event->checkedOutBy, $event->note)
+            new CheckoutConsumableNotification($event->consumable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note)
         );
     }
     
@@ -41,16 +54,27 @@ class SendingCheckOutNotificationsListener
             return;
         }
 
+        /**
+         * Make a checkout acceptance and attach it in the notification
+         */
+        $acceptance = null;
+        if ($event->accessory->requireAcceptance()) {
+            $acceptance = new CheckoutAcceptance;
+            $acceptance->checkoutable()->associate($event->accessory);
+            $acceptance->assignedTo()->associate($event->checkedOutTo);
+            $acceptance->save();
+        }        
+
         Notification::send(
             $this->getNotifiables($event), 
-            new CheckoutAccessoryNotification($event->accessory, $event->checkedOutTo, $event->checkedOutBy, $event->note)
+            new CheckoutAccessoryNotification($event->accessory, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note)
         );
     }
 
     /**
      * Notify the user about the checked out license
      */
-    public function onLicenseCheckedOut($event) {
+    public function onLicenseSeatCheckedOut($event) {
         /**
          * When the item wasn't checked out to a user, we can't send notifications
          */
@@ -58,9 +82,20 @@ class SendingCheckOutNotificationsListener
             return;
         }
 
+        /**
+         * Make a checkout acceptance and attach it in the notification
+         */
+        $acceptance = null;
+        if ($event->licenseSeat->license->requireAcceptance()) {
+            $acceptance = new CheckoutAcceptance;
+            $acceptance->checkoutable()->associate($event->licenseSeat);
+            $acceptance->assignedTo()->associate($event->checkedOutTo);
+            $acceptance->save();
+        }    
+
         Notification::send(
             $this->getNotifiables($event), 
-            new CheckoutLicenseNotification($event->license, $event->checkedOutTo, $event->checkedOutBy, $event->note)
+            new CheckoutLicenseSeatNotification($event->licenseSeat, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note)
         ); 
     }   
     
@@ -75,9 +110,20 @@ class SendingCheckOutNotificationsListener
             return;
         }
 
+        /**
+         * Make a checkout acceptance and attach it in the notification
+         */
+        $acceptance = null;
+        if ($event->asset->requireAcceptance()) {
+            $acceptance = new CheckoutAcceptance;
+            $acceptance->checkoutable()->associate($event->asset);
+            $acceptance->assignedTo()->associate($event->checkedOutTo);
+            $acceptance->save();
+        }         
+
         Notification::send(
             $this->getNotifiables($event), 
-            new CheckoutAssetNotification($event->asset, $event->checkedOutTo, $event->checkedOutBy, $event->note)
+            new CheckoutAssetNotification($event->asset, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note)
         );        
     } 
 
@@ -123,8 +169,8 @@ class SendingCheckOutNotificationsListener
         ); 
 
         $events->listen(
-            'App\Events\LicenseCheckedOut',
-            'App\Listeners\SendingCheckOutNotificationsListener@onLicenseCheckedOut'
+            'App\Events\LicenseSeatCheckedOut',
+            'App\Listeners\SendingCheckOutNotificationsListener@onLicenseSeatCheckedOut'
         ); 
 
         $events->listen(

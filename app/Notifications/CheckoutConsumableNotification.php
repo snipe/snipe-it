@@ -26,13 +26,14 @@ class CheckoutConsumableNotification extends Notification
      *
      * @param $params
      */
-    public function __construct(Consumable $consumable, $checkedOutTo, User $checkedOutBy, $note)
+    public function __construct(Consumable $consumable, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
 
         $this->item = $consumable;
         $this->admin = $checkedOutBy;
         $this->note = $note;
         $this->target = $checkedOutTo;
+        $this->acceptance = $acceptance;
 
         $this->settings = Setting::getSettings();
 
@@ -121,6 +122,8 @@ class CheckoutConsumableNotification extends Notification
         $eula =  $this->item->getEula();
         $req_accept = $this->item->requireAcceptance();
 
+        $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
+
         return (new MailMessage)->markdown('notifications.markdown.checkout-consumable',
             [
                 'item'          => $this->item,
@@ -129,7 +132,7 @@ class CheckoutConsumableNotification extends Notification
                 'target'        => $this->target,
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,
-                'accept_url'    => route('account.accept.item', ['consumable', $this->item->id]),
+                'accept_url'    => $accept_url,
             ])
             ->subject(trans('mail.Confirm_consumable_delivery'));
 
