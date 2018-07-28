@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\Setting;
 use App\Models\SnipeModel;
 use App\Models\User;
@@ -13,7 +14,7 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Mail;
 
-class CheckinLicenseNotification extends Notification
+class CheckinLicenseSeatNotification extends Notification
 {
     use Queueable;
     /**
@@ -26,10 +27,10 @@ class CheckinLicenseNotification extends Notification
      *
      * @param $params
      */
-    public function __construct(License $license, $checkedOutTo, User $checkedInBy, $note)
+    public function __construct(LicenseSeat $licenseSeat, $checkedOutTo, User $checkedInBy, $note)
     {
         $this->target = $checkedOutTo;
-        $this->item = $license;
+        $this->item = $licenseSeat->license;
         $this->admin = $checkedInBy;
         $this->note = $note;
         $this->settings = Setting::getSettings();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Licenses;
 
 use App\Events\LicenseCheckedOut;
+use App\Events\LicenseSeatCheckedOut;
 use App\Http\Requests\LicenseCheckoutRequest;
 use App\Models\Asset;
 use App\Models\License;
@@ -105,7 +106,7 @@ class LicenseCheckoutController extends Controller
         }
         if ($licenseSeat->save()) {
 
-            event(new LicenseCheckedOut($licenseSeat->license, $target, Auth::user(), request('note')));
+            event(new LicenseSeatCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
 
             return true;
         }
@@ -122,7 +123,7 @@ class LicenseCheckoutController extends Controller
 
         if ($licenseSeat->save()) {
 
-            event(new LicenseCheckedOut($licenseSeat->license, $target, Auth::user(), request('note')));
+            event(new LicenseSeatCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
 
             return true;
         }

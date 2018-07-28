@@ -4,29 +4,31 @@ namespace App\Events;
 
 use App\Models\Actionlog;
 use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class LicenseCheckedOut
+class LicenseCheckedIn
 {
     use Dispatchable, SerializesModels;
 
-    public $license;
+    public $licenseSeat;
     public $checkedOutTo;
-    public $logEntry;
-
+    public $checkedInBy;
+    public $note;
+    
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(License $license, $checkedOutTo, User $checkedOutBy, $note)
+    public function __construct(LicenseSeat $licenseSeat, $checkedOutTo, User $checkedInBy, $note)
     {
-        $this->license = $license;
+        $this->licenseSeat = $licenseSeat;
         $this->checkedOutTo = $checkedOutTo;
-        $this->checkedOutBy = $checkedOutBy;
+        $this->checkedInBy = $checkedInBy;
         $this->note = $note;
     }
 }

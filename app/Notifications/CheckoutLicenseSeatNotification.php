@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\Setting;
 use App\Models\SnipeModel;
 use App\Models\User;
@@ -13,7 +14,7 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Mail;
 
-class CheckoutLicenseNotification extends Notification
+class CheckoutLicenseSeatNotification extends Notification
 {
     use Queueable;
     /**
@@ -26,12 +27,13 @@ class CheckoutLicenseNotification extends Notification
      *
      * @param $params
      */
-    public function __construct(License $license, $checkedOutTo, User $checkedOutBy, $note)
+    public function __construct(LicenseSeat $licenseSeat, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
-        $this->item = $license;
+        $this->item = $licenseSeat->license;
         $this->admin = $checkedOutBy;
         $this->note = $note;
         $this->target = $checkedOutTo;
+        $this->acceptance = $acceptance;
 
         $this->settings = Setting::getSettings();
     }
@@ -117,6 +119,8 @@ class CheckoutLicenseNotification extends Notification
         $eula =  method_exists($this->item, 'getEula') ? $this->item->getEula() : '';
         $req_accept = method_exists($this->item, 'requireAcceptance') ? $this->item->requireAcceptance() : 0;
 
+        $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
+
         return (new MailMessage)->markdown('notifications.markdown.checkout-license',
             [
                 'item'          => $this->item,
@@ -125,7 +129,7 @@ class CheckoutLicenseNotification extends Notification
                 'target'        => $this->target,
                 'eula'          => $eula,
                 'req_accept'    => $req_accept,
-                'accept_url'    => route('account.accept.item', ['license', $this->item->id]),
+                'accept_url'    => $accept_url,
             ])
             ->subject(trans('mail.Confirm_license_delivery'));
 

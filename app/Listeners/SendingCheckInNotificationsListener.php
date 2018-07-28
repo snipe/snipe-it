@@ -53,7 +53,7 @@ class SendingCheckInNotificationsListener
     /**
      * Notify the user about the checked in license
      */   
-    public function onLicenseCheckedIn($event) {
+    public function onLicenseSeatCheckedIn($event) {
         /**
          * When the item wasn't checked out to a user, we can't send notifications
          */
@@ -63,7 +63,7 @@ class SendingCheckInNotificationsListener
 
         Notification::send(
             $this->getNotifiables($event), 
-            new CheckinLicenseNotification($event->license, $event->checkedOutTo, $event->checkedInBy, $event->note)
+            new CheckinLicenseSeatNotification($event->licenseSeat, $event->checkedOutTo, $event->checkedInBy, $event->note)
         );
     }   
 
@@ -109,8 +109,8 @@ class SendingCheckInNotificationsListener
         ); 
 
         $events->listen(
-            'App\Events\LicenseCheckedIn',
-            'App\Listeners\SendingCheckInNotificationsListener@onLicenseCheckedIn'
+            'App\Events\LicenseSeatCheckedIn',
+            'App\Listeners\SendingCheckInNotificationsListener@onLicenseSeatCheckedIn'
         );         
     }
 

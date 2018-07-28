@@ -2,16 +2,20 @@
 namespace App\Models;
 
 use App\Models\Loggable;
+use App\Notifications\CheckinLicenseNotification;
+use App\Notifications\CheckoutLicenseNotification;
+use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Notifications\CheckoutLicenseNotification;
-use App\Notifications\CheckinLicenseNotification;
 
-class LicenseSeat extends Model implements ICompanyableChild
+class LicenseSeat extends SnipeModel implements ICompanyableChild
 {
     use CompanyableChildTrait;
     use SoftDeletes;
     use Loggable;
+
+    protected $presenter = 'App\Presenters\LicenseSeatPresenter';
+    use Presentable;
 
     protected $dates = ['deleted_at'];
     protected $guarded = 'id';
@@ -22,6 +26,10 @@ class LicenseSeat extends Model implements ICompanyableChild
         return ['asset', 'license'];
     }
 
+    public function getEula() {
+        return $this->license->getEula();
+    }
+    
     /**
      * Establishes the seat -> license relationship
      *
