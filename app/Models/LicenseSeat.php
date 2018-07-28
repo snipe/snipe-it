@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\Loggable;
+use App\Models\Traits\Acceptable;
 use App\Notifications\CheckinLicenseNotification;
 use App\Notifications\CheckoutLicenseNotification;
 use App\Presenters\Presentable;
@@ -20,6 +21,8 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
     protected $dates = ['deleted_at'];
     protected $guarded = 'id';
     protected $table = 'license_seats';
+
+    use Acceptable;
 
     public function getCompanyableParents()
     {

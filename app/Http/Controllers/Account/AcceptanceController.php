@@ -85,11 +85,7 @@ class AcceptanceController extends Controller {
 
         if ($request->input('asset_acceptance') == 'accepted') {
 
-            $acceptance->accepted_at = now();
-            $acceptance->signature_filename = $sig_filename;
-            $acceptance->save();
-
-            // TODO: Update state for the checkoutable
+            $acceptance->accept($sig_filename);
 
             event(new CheckoutAccepted($acceptance));
 
@@ -97,11 +93,7 @@ class AcceptanceController extends Controller {
 
         } else {
 
-            $acceptance->declined_at = now();
-            $acceptance->signature_filename = $sig_filename;
-            $acceptance->save();           
-
-            // TODO: Update state for the checkoutable
+            $acceptance->decline($sig_filename);         
 
             event(new CheckoutDeclined($acceptance));
 

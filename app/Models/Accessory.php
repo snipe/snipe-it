@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,6 +28,8 @@ class Accessory extends SnipeModel
     ];
 
     use Searchable;
+
+    use Acceptable;
     
     /**
      * The attributes that should be included when searching the model.

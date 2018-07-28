@@ -40,6 +40,28 @@ class CheckoutAcceptance extends Model
         return $this->assignedTo->is($user);
     }
 
+    public function accept($signature_filename) {
+        $this->accepted_at        = now();
+        $this->signature_filename = $signature_filename;
+        $this->save();
+
+        /**
+         * Update state for the checked out item
+         */
+        $this->checkoutable->acceptedCheckout($this->assignedTo, $signature_filename);     
+    }
+
+    public function decline($signature_filename) {
+        $this->declined_at        = now();
+        $this->signature_filename = $signature_filename;
+        $this->save();
+
+        /**
+         * Update state for the checked out item
+         */
+        $this->checkoutable->declinedCheckout($this->assignedTo, $signature_filename);
+    }    
+
     public function scopeForUser(Builder $query, User $user) {
         return $query->where('assigned_to_id', $user->id);
     }
