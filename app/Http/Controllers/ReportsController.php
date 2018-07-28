@@ -7,6 +7,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\CustomField;
+use App\Models\CheckoutAcceptance;
 use App\Models\Depreciation;
 use App\Models\License;
 use App\Models\Setting;
@@ -805,7 +806,20 @@ class ReportsController extends Controller
     public function getAssetAcceptanceReport()
     {
         $this->authorize('reports.view');
-        $assetsForReport = Asset::notYetAccepted()->with('company')->get();
+
+        /**
+         * Get all assets with pending checkout acceptances
+         */
+
+        $acceptances = CheckoutAcceptance::pending()->get();
+
+        $assetsForReport = $acceptances
+            ->filter(function($acceptance) {
+                return $acceptance->checkoutable_type == 'App\Models\Asset';
+            })
+            ->map(function($acceptance) {
+                return $acceptance->checkoutable;
+            });
 
         return view('reports/unaccepted_assets', compact('assetsForReport'));
     }

@@ -34,7 +34,6 @@ class Asset extends Depreciable
     const ASSET = 'asset';
     const USER = 'user';
 
-    const ACCEPTANCE_PENDING = 'pending';
     use Acceptable;
 
     /**
@@ -262,18 +261,6 @@ class Asset extends Depreciable
             if($target instanceof Location) {
                 $this->location_id = $target->id;
             }
-        }
-        
-        /**
-         * Does the user have to confirm that they accept the asset?
-         *
-         * If so, set the acceptance-status to "pending".
-         * This value is used in the unaccepted assets reports, for example
-         * 
-         * @see https://github.com/snipe/snipe-it/issues/5772
-         */
-        if ($this->requireAcceptance() && $target instanceof User) {
-          $this->accepted = self::ACCEPTANCE_PENDING;
         }
 
         if ($this->save()) {
