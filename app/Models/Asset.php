@@ -26,7 +26,7 @@ use App\Notifications\CheckoutAssetNotification;
 class Asset extends Depreciable
 {
     protected $presenter = 'App\Presenters\AssetPresenter';
-    use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
+    use Checkoutable, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 
     const LOCATION = 'location';
     const ASSET = 'asset';
@@ -180,79 +180,6 @@ class Asset extends Depreciable
     }
 
 
-    public function availableForCheckout()
-    {
-        if (
-            (empty($this->assigned_to)) &&
-            (empty($this->deleted_at)) &&
-            (($this->assetstatus) && ($this->assetstatus->deployable == 1)))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Checkout asset
-     * @param User $user
-     * @param User $admin
-     * @param Carbon $checkout_at
-     * @param Carbon $expected_checkin
-     * @param string $note
-     * @param null $name
-     * @return bool
-     */
-    //FIXME: The admin parameter is never used. Can probably be removed.
-    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null, $location = null)
-    {
-        if (!$target) {
-            return false;
-        }
-
-        if ($expected_checkin) {
-            $this->expected_checkin = $expected_checkin;
-        }
-
-        $this->last_checkout = $checkout_at;
-
-        $this->assignedTo()->associate($target);
-
-
-        if ($name != null) {
-            $this->name = $name;
-        }
-
-        if ($location != null) {
-            $this->location_id = $location;
-        } else {
-            if($target->location) {
-                $this->location_id = $target->location->id;
-            }
-            if($target instanceof Location) {
-                $this->location_id = $target->id;
-            }
-        }
-        
-        /**
-         * Does the user have to confirm that they accept the asset?
-         *
-         * If so, set the acceptance-status to "pending".
-         * This value is used in the unaccepted assets reports, for example
-         * 
-         * @see https://github.com/snipe/snipe-it/issues/5772
-         */
-        if ($this->requireAcceptance() && $target instanceof User) {
-          $this->accepted = self::ACCEPTANCE_PENDING;
-        }
-
-        if ($this->save()) {
-            $this->logCheckout($note, $target);
-            $this->increment('checkout_counter', 1);
-            return true;
-        }
-        return false;
-    }
-
     public function getDetailedNameAttribute()
     {
         if ($this->assignedto) {
@@ -307,20 +234,6 @@ class Asset extends Depreciable
                   ->orderBy('created_at', 'desc');
     }
 
-    /**
-     * Even though we allow allow for checkout to things beyond users
-     * this method is an easy way of seeing if we are checked out to a user.
-     * @return mixed
-     */
-    public function checkedOutToUser()
-    {
-      return $this->assignedType() === self::USER;
-    }
-
-    public function assignedTo()
-    {
-        return $this->morphTo('assigned', 'assigned_type', 'assigned_to');
-    }
 
     public function assignedAssets()
     {
@@ -364,10 +277,7 @@ class Asset extends Depreciable
         return $this->defaultLoc;
     }
 
-    public function assignedType()
-    {
-        return strtolower(class_basename($this->assigned_type));
-    }
+
   /**
    * Get the asset's location based on default RTD location
    **/
@@ -399,15 +309,6 @@ class Asset extends Depreciable
                   ->withTrashed();
     }
 
-    /**
-     * Get checkouts
-     */
-    public function checkouts()
-    {
-        return $this->assetlog()->where('action_type', '=', 'checkout')
-            ->orderBy('created_at', 'desc')
-            ->withTrashed();
-    }
 
     /**
      * Get checkins
