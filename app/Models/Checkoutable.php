@@ -43,7 +43,7 @@ trait Checkoutable
             return false;
         }
 
-        $locationId = $this->location->id;
+        $locationId = $this->location->id ?? null;
         if ($location != null) {
             $locationId = $location;
         } else {
@@ -55,28 +55,6 @@ trait Checkoutable
             }
         }
 
-        Checkout::create([
-            'item_id' => $this->id,
-            'item_type' => get_class($this),
-            'target_id' => $target->id,
-            'target_type' => get_class($target),
-            'location_id' => $locationId,
-            'expected_checkin' => $expected_checkin,
-            'checkout_at' => $checkout_at,
-            'notes' => $note
-        ]);
-
-        $this->last_checkout = $checkout_at;
-
-//        $this->assignedTo()->associate($target);
-
-
-        if ($name != null) {
-            $this->name = $name;
-        }
-
-
-
         /**
          * Does the user have to confirm that they accept the asset?
          *
@@ -85,14 +63,34 @@ trait Checkoutable
          *
          * @see https://github.com/snipe/snipe-it/issues/5772
          */
+        $accepted = false;
         if ($this->requireAcceptance() && $target instanceof User) {
-            $this->accepted = self::ACCEPTANCE_PENDING;
+            $accepted = self::ACCEPTANCE_PENDING;
+        }
+        Checkout::create([
+            'item_id' => $this->id,
+            'item_type' => get_class($this),
+            'target_id' => $target->id,
+            'target_type' => get_class($target),
+            'location_id' => $locationId,
+            'expected_checkin' => $expected_checkin,
+            'checkout_at' => $checkout_at,
+            'notes' => $note,
+        ]);
+// TODO: Port to new checkout bits.
+//        $this->last_checkout = $checkout_at;
+
+//        $this->assignedTo()->associate($target);
+
+
+        if ($name != null) {
+            $this->name = $name;
         }
 
         if ($this->save()) {
-
             $this->logCheckout($note, $target);
-            $this->increment('checkout_counter', 1);
+            //TODO: Port to new api.
+//            $this->increment('checkout_counter', 1);
             return true;
         }
         return false;

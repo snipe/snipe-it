@@ -160,7 +160,7 @@ class LicenseModel extends Depreciable
         // Else we're adding seats.
         DB::transaction(function () use ($license, $oldSeats, $newSeats) {
             for ($i = $oldSeats; $i < $newSeats; $i++) {
-                $license->licenseSeatsRelation()->save(new License, ['user_id' => Auth::id()]);
+                $license->licenseRelation()->save(new License, ['user_id' => Auth::id()]);
             }
         });
         // On initail create, we shouldn't log the addition of seats.

@@ -1,13 +1,11 @@
 <?php
 namespace App\Models;
 
-use App\Models\Loggable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Notifications\CheckoutLicenseNotification;
 use App\Notifications\CheckinLicenseNotification;
 
-class License extends Model implements ICompanyableChild
+class License extends SnipeModel implements ICompanyableChild
 {
     use Checkoutable;
     use CompanyableChildTrait;
@@ -29,7 +27,7 @@ class License extends Model implements ICompanyableChild
         return ['asset', 'license'];
     }
 
-    public function license()
+    public function model()
     {
         return $this->belongsTo('\App\Models\LicenseModel', 'license_id');
     }
@@ -46,14 +44,14 @@ class License extends Model implements ICompanyableChild
 
     public function location()
     {
-        if (($this->user) && ($this->user->location)) {
-            return $this->user->location;
+        if (($this->user) && ($this->user->location())) {
+            return $this->user->location();
 
-        } elseif (($this->asset) && ($this->asset->location)) {
-            return $this->asset->location;
+        } elseif (($this->asset) && ($this->asset->location())) {
+            return $this->asset->location();
         }
 
-        return false;
+        return $this->belongsTo('\App\Models\Location');
 
     }
 

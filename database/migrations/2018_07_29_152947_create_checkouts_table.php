@@ -22,6 +22,7 @@ class CreateCheckoutsTable extends Migration
             $table->string('target_type');
             $table->unsignedInteger('location_id');
             $table->text('notes')->nullable();
+            $table->boolean('accepted')->default(true);
             $table->dateTime('expected_checkin')->nullable();
             $table->dateTime('checkout_at');
             $table->dateTime('checkin_in')->nullable();

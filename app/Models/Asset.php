@@ -28,11 +28,6 @@ class Asset extends Depreciable
     protected $presenter = 'App\Presenters\AssetPresenter';
     use Checkoutable, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 
-    const LOCATION = 'location';
-    const ASSET = 'asset';
-    const USER = 'user';
-
-    const ACCEPTANCE_PENDING = 'pending';
     /**
      * Set static properties to determine which checkout/checkin handlers we should use
      */
@@ -501,11 +496,6 @@ class Asset extends Depreciable
     public function checkin_email()
     {
         return $this->model->category->checkin_email;
-    }
-
-    public function requireAcceptance()
-    {
-        return $this->model->category->require_acceptance;
     }
 
     public function getEula()
