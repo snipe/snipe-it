@@ -1,7 +1,7 @@
 <?php
 
 use App\Helpers\Helper;
-use App\Http\Transformers\LicensesTransformer;
+use App\Http\Transformers\LicenseModelsTranformer;
 use App\Models\LicenseModel;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +33,7 @@ class ApiLicensesCest
         $license = App\Models\LicenseModel::orderByDesc('created_at')
             ->withCount('freeSeats')
             ->take(10)->get()->shuffle()->first();
-        $I->seeResponseContainsJson($I->removeTimestamps((new LicensesTransformer)->transformLicense($license)));
+        $I->seeResponseContainsJson($I->removeTimestamps((new LicenseModelsTranformer)->transformLicense($license)));
     }
 
     /** @test */
@@ -136,7 +136,7 @@ class ApiLicensesCest
         $I->sendGET('/licenses/' . $license->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
-        $I->seeResponseContainsJson((new LicensesTransformer)->transformLicense($temp_license));
+        $I->seeResponseContainsJson((new LicenseModelsTranformer)->transformLicense($temp_license));
     }
 
     /** @test */

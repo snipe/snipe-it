@@ -8,7 +8,7 @@ use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Group;
-use App\Models\LicenseSeat;
+use App\Models\License;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -162,7 +162,7 @@ class BulkUsersController extends Controller
 
         $this->logItemCheckinAndDelete($assets, Asset::class);
         $this->logItemCheckinAndDelete($accessories, Accessory::class);
-        $this->logItemCheckinAndDelete($licenses, LicenseSeat::class);
+        $this->logItemCheckinAndDelete($licenses, License::class);
 
         Asset::whereIn('id', $assets->pluck('id'))->update([
             'status_id'     => e(request('status_id')),
@@ -171,7 +171,7 @@ class BulkUsersController extends Controller
         ]);
 
 
-        LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
+        License::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
 
         foreach ($users as $user) {
             $user->accessories()->sync([]);

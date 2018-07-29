@@ -25,7 +25,7 @@
       <div class="box-body">
 
           <table
-              data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+              data-columns="{{ \App\Presenters\LicenseModelPresenter::dataTableLayout() }}"
               data-cookie-id-table="licensesTable"
               data-pagination="true"
               data-search="true"

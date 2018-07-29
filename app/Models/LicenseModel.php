@@ -3,7 +3,7 @@ namespace App\Models;
 
 use App\Models\Actionlog;
 use App\Models\Company;
-use App\Models\LicenseSeat;
+use App\Models\License;
 use App\Models\Loggable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
@@ -16,7 +16,7 @@ use Watson\Validating\ValidatingTrait;
 
 class LicenseModel extends Depreciable
 {
-    protected $presenter = 'App\Presenters\LicensePresenter';
+    protected $presenter = 'App\Presenters\LicenseModelPresenter';
 
     /**
      * Set static properties to determine which checkout/checkin handlers we should use
@@ -164,7 +164,7 @@ class LicenseModel extends Depreciable
         // Else we're adding seats.
         DB::transaction(function () use ($license, $oldSeats, $newSeats) {
             for ($i = $oldSeats; $i < $newSeats; $i++) {
-                $license->licenseSeatsRelation()->save(new LicenseSeat, ['user_id' => Auth::id()]);
+                $license->licenseSeatsRelation()->save(new License, ['user_id' => Auth::id()]);
             }
         });
         // On initail create, we shouldn't log the addition of seats.
@@ -293,7 +293,7 @@ class LicenseModel extends Depreciable
     */
     public static function assetcount()
     {
-        return LicenseSeat::whereNull('deleted_at')
+        return License::whereNull('deleted_at')
                    ->count();
     }
 
@@ -303,7 +303,7 @@ class LicenseModel extends Depreciable
     */
     public function totalSeatsByLicenseID()
     {
-        return LicenseSeat::where('license_id', '=', $this->id)
+        return License::where('license_id', '=', $this->id)
                    ->whereNull('deleted_at')
                    ->count();
     }
@@ -311,7 +311,7 @@ class LicenseModel extends Depreciable
     // We do this to eager load the "count" of seats from the controller.  Otherwise calling "count()" on each model results in n+1
     public function licenseSeatsRelation()
     {
-        return $this->hasMany(LicenseSeat::class)->whereNull('deleted_at')->selectRaw('license_id, count(*) as count')->groupBy('license_id');
+        return $this->hasMany(License::class)->whereNull('deleted_at')->selectRaw('license_id, count(*) as count')->groupBy('license_id');
     }
 
     public function getLicenseSeatsCountAttribute()
@@ -328,7 +328,7 @@ class LicenseModel extends Depreciable
     */
     public static function availassetcount()
     {
-        return LicenseSeat::whereNull('assigned_to')
+        return License::whereNull('assigned_to')
                    ->whereNull('asset_id')
                    ->whereNull('deleted_at')
                    ->count();
@@ -376,6 +376,11 @@ class LicenseModel extends Depreciable
         return 0;
     }
 
+    public function getForeignKey()
+    {
+        return 'license_id';
+    }
+
     public function remaincount()
     {
         $total = $this->licenseSeatsCount;
@@ -400,7 +405,7 @@ class LicenseModel extends Depreciable
      */
     public function licenseseats()
     {
-        return $this->hasMany('\App\Models\LicenseSeat');
+        return $this->hasMany('\App\Models\License');
     }
 
     public function supplier()
@@ -430,7 +435,7 @@ class LicenseModel extends Depreciable
    */
     public function freeSeats()
     {
-        return $this->hasMany('\App\Models\LicenseSeat')->whereNull('assigned_to')->whereNull('deleted_at')->whereNull('asset_id');
+        return $this->hasMany('\App\Models\License')->whereNull('assigned_to')->whereNull('deleted_at')->whereNull('asset_id');
     }
 
     public static function getExpiringLicenses($days = 60)

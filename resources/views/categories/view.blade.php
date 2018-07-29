@@ -69,7 +69,7 @@
                       "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                       }'
                 @elseif ($category->category_type=='license')
-                data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+                data-columns="{{ \App\Presenters\LicenseModelPresenter::dataTableLayout() }}"
                 data-cookie-id-table="categoryLicenseTable"
                 id="categoryLicenseTable"
                 data-id-table="categoryLicenseTable"

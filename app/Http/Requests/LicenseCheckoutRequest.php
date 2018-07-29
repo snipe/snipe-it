@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\LicenseSeat;
+use App\Models\License;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LicenseCheckoutRequest extends FormRequest

@@ -8,7 +8,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Consumable;
 use App\Models\Accessory;
-use App\Models\LicenseSeat;
+use App\Models\License;
 use App\Models\LicenseModel;
 use DB;
 use Artisan;

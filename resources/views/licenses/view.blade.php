@@ -43,7 +43,7 @@
               <div class="table-responsive">
 
                 <table
-                        data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayoutSeats() }}"
+                        data-columns="{{ \App\Presenters\LicenseModelPresenter::dataTableLayoutSeats() }}"
                         data-cookie-id-table="seatsTable"
                         data-id-table="seatsTable"
                         id="seatsTable"

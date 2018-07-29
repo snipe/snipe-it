@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Licenses;
 use App\Http\Requests\LicenseCheckoutRequest;
 use App\Models\Asset;
 use App\Models\LicenseModel;
-use App\Models\LicenseSeat;
+use App\Models\License;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -75,7 +75,7 @@ class LicenseCheckoutController extends Controller
 
     protected function findLicenseSeatToCheckout($license, $seatId)
     {
-        $licenseSeat = LicenseSeat::find($seatId) ?? $license->freeSeat();
+        $licenseSeat = License::find($seatId) ?? $license->freeSeat();
 
         if (!$licenseSeat) {
             if ($seatId) {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Licenses;
 
 use App\Models\Asset;
 use App\Models\LicenseModel;
-use App\Models\LicenseSeat;
+use App\Models\License;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,7 +28,7 @@ class LicenseCheckinController extends Controller
     public function create($seatId = null, $backTo = null)
     {
         // Check if the asset exists
-        if (is_null($licenseSeat = LicenseSeat::find($seatId)) || is_null($license = LicenseModel::find($licenseSeat->license_id))) {
+        if (is_null($licenseSeat = License::find($seatId)) || is_null($license = LicenseModel::find($licenseSeat->license_id))) {
             // Redirect to the asset management page with error
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
@@ -52,7 +52,7 @@ class LicenseCheckinController extends Controller
     public function store($seatId = null, $backTo = null)
     {
         // Check if the asset exists
-        if (is_null($licenseSeat = LicenseSeat::find($seatId))) {
+        if (is_null($licenseSeat = License::find($seatId))) {
             // Redirect to the asset management page with error
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }

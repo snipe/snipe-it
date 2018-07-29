@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Transformers\LicenseSeatsTransformer;
 use App\Http\Transformers\LicensesTransformer;
+use App\Http\Transformers\LicenseModelsTranformer;
 use App\Models\Company;
 use App\Models\LicenseModel;
-use App\Models\LicenseSeat;
+use App\Models\License;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -112,7 +112,7 @@ class LicensesController extends Controller
         $total = $licenses->count();
 
         $licenses = $licenses->skip($offset)->take($limit)->get();
-        return (new LicensesTransformer)->transformLicenses($licenses, $total);
+        return (new LicenseModelsTranformer)->transformLicenses($licenses, $total);
 
     }
 
@@ -152,7 +152,7 @@ class LicensesController extends Controller
         $this->authorize('view', LicenseModel::class);
         $license = LicenseModel::findOrFail($id);
         $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
-        return (new LicensesTransformer)->transformLicense($license);
+        return (new LicenseModelsTranformer)->transformLicense($license);
     }
 
 
@@ -225,7 +225,7 @@ class LicensesController extends Controller
 
             $this->authorize('view', $license);
 
-            $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
+            $seats = License::where('license_id', $licenseId)->with('license', 'user', 'asset');
 
             $offset = request('offset', 0);
             $limit = request('limit', 50);
@@ -235,7 +235,7 @@ class LicensesController extends Controller
             $seats = $seats->skip($offset)->take($limit)->get();
 
             if ($seats) {
-                return (new LicenseSeatsTransformer)->transformLicenseSeats($seats, $total);
+                return (new LicensesTransformer)->transformLicenseSeats($seats, $total);
             }
 
         }

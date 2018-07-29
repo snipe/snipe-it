@@ -71,7 +71,7 @@
         <div class="tab-pane fade" id="licenses">
 
           <table
-                  data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+                  data-columns="{{ \App\Presenters\LicenseModelPresenter::dataTableLayout() }}"
                   data-cookie-id-table="licensesTable"
                   data-pagination="true"
                   data-id-table="licensesTable"
