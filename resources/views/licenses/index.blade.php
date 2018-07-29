@@ -8,7 +8,7 @@
 
 
 @section('header_right')
-@can('create', \App\Models\License::class)
+@can('create', \App\Models\LicenseModel::class)
     <a href="{{ route('licenses.create') }}" class="btn btn-primary pull-right">
       {{ trans('general.create') }}
     </a>

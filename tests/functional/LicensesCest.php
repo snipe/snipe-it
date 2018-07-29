@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Models\License;
+use App\Models\LicenseModel;
 
 class LicensesCest
 {
@@ -48,7 +48,7 @@ class LicensesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $license = factory(App\Models\License::class)->states('photoshop')->make([
+        $license = factory(App\Models\LicenseModel::class)->states('photoshop')->make([
             'name' => 'Test License',
             'company_id' => 3,
         ]);
@@ -83,7 +83,7 @@ class LicensesCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a license');
-        $I->sendDelete(route('licenses.destroy', License::doesntHave('assignedUsers')->first()->id), ['_token' => csrf_token()]);
+        $I->sendDelete(route('licenses.destroy', LicenseModel::doesntHave('assignedUsers')->first()->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
 

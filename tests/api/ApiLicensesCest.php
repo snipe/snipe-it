@@ -2,7 +2,7 @@
 
 use App\Helpers\Helper;
 use App\Http\Transformers\LicensesTransformer;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +30,7 @@ class ApiLicensesCest
 
         $response = json_decode($I->grabResponse(), true);
         // sample verify
-        $license = App\Models\License::orderByDesc('created_at')
+        $license = App\Models\LicenseModel::orderByDesc('created_at')
             ->withCount('freeSeats')
             ->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new LicensesTransformer)->transformLicense($license)));
@@ -41,7 +41,7 @@ class ApiLicensesCest
     {
         $I->wantTo('Create a new license');
 
-        $temp_license = factory(\App\Models\License::class)->states('acrobat')->make([
+        $temp_license = factory(\App\Models\LicenseModel::class)->states('acrobat')->make([
             'name' => "Test License Name",
             'depreciation_id' => 3,
             'company_id' => 2
@@ -83,14 +83,14 @@ class ApiLicensesCest
         $I->wantTo('Update a license with PATCH');
 
         // create
-        $license = factory(\App\Models\License::class)->states('acrobat')->create([
+        $license = factory(\App\Models\LicenseModel::class)->states('acrobat')->create([
             'name' => 'Original License Name',
             'depreciation_id' => 3,
             'company_id' => 2
         ]);
-        $I->assertInstanceOf(\App\Models\License::class, $license);
+        $I->assertInstanceOf(\App\Models\LicenseModel::class, $license);
 
-        $temp_license = factory(\App\Models\License::class)->states('office')->make([
+        $temp_license = factory(\App\Models\LicenseModel::class)->states('office')->make([
             'company_id' => 3,
             'depreciation_id' => 2
         ]);
@@ -145,13 +145,13 @@ class ApiLicensesCest
         $I->wantTo('Ensure a license with seats checked out cannot be deleted');
 
         // create
-        $license = factory(\App\Models\License::class)->states('acrobat')->create([
+        $license = factory(\App\Models\LicenseModel::class)->states('acrobat')->create([
             'name' => "Soon to be deleted"
         ]);
         $licenseSeat = $license->freeSeat();
         $licenseSeat->assigned_to = $this->user->id;
         $licenseSeat->save();
-        $I->assertInstanceOf(\App\Models\License::class, $license);
+        $I->assertInstanceOf(\App\Models\LicenseModel::class, $license);
 
         // delete
         $I->sendDELETE('/licenses/' . $license->id);
@@ -169,10 +169,10 @@ class ApiLicensesCest
         $I->wantTo('Delete an license');
 
         // create
-        $license = factory(\App\Models\License::class)->states('acrobat')->create([
+        $license = factory(\App\Models\LicenseModel::class)->states('acrobat')->create([
             'name' => "Soon to be deleted"
         ]);
-        $I->assertInstanceOf(\App\Models\License::class, $license);
+        $I->assertInstanceOf(\App\Models\LicenseModel::class, $license);
 
         // delete
         $I->sendDELETE('/licenses/' . $license->id);

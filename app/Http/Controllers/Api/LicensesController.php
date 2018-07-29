@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\LicenseSeatsTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Models\Company;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\LicenseSeat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,8 +24,8 @@ class LicensesController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats as free_seats_count'));
+        $this->authorize('view', LicenseModel::class);
+        $licenses = Company::scopeCompanyables(LicenseModel::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats as free_seats_count'));
 
 
         if ($request->filled('company_id')) {
@@ -130,8 +130,8 @@ class LicensesController extends Controller
     public function store(Request $request)
     {
         //
-        $this->authorize('create', License::class);
-        $license = new License;
+        $this->authorize('create', LicenseModel::class);
+        $license = new LicenseModel;
         $license->fill($request->all());
 
         if($license->save()) {
@@ -149,8 +149,8 @@ class LicensesController extends Controller
      */
     public function show($id)
     {
-        $this->authorize('view', License::class);
-        $license = License::findOrFail($id);
+        $this->authorize('view', LicenseModel::class);
+        $license = LicenseModel::findOrFail($id);
         $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
         return (new LicensesTransformer)->transformLicense($license);
     }
@@ -168,9 +168,9 @@ class LicensesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->authorize('update', License::class);
+        $this->authorize('update', LicenseModel::class);
 
-        $license = License::findOrFail($id);
+        $license = LicenseModel::findOrFail($id);
         $license->fill($request->all());
 
         if ($license->save()) {
@@ -191,7 +191,7 @@ class LicensesController extends Controller
     public function destroy($id)
     {
         //
-        $license = License::findOrFail($id);
+        $license = LicenseModel::findOrFail($id);
         $this->authorize('delete', $license);
 
         if($license->assigned_seats_count == 0) {
@@ -221,7 +221,7 @@ class LicensesController extends Controller
     public function seats(Request $request, $licenseId)
     {
 
-        if ($license = License::find($licenseId)) {
+        if ($license = LicenseModel::find($licenseId)) {
 
             $this->authorize('view', $license);
 

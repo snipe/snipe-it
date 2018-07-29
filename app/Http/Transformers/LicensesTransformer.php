@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\License;
+use App\Models\LicenseModel;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;
@@ -18,14 +18,14 @@ class LicensesTransformer
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformLicense (License $license)
+    public function transformLicense (LicenseModel $license)
     {
         $array = [
             'id' => (int) $license->id,
             'name' => e($license->name),
             'company' => ($license->company) ? ['id' => (int) $license->company->id,'name'=> e($license->company->name)] : null,
             'manufacturer' =>  ($license->manufacturer) ? ['id' => (int) $license->manufacturer->id,'name'=> e($license->manufacturer->name)] : null,
-            'product_key' => (Gate::allows('viewKeys', License::class)) ? e($license->serial) : '------------',
+            'product_key' => (Gate::allows('viewKeys', LicenseModel::class)) ? e($license->serial) : '------------',
             'order_number' => e($license->order_number),
             'purchase_order' => e($license->purchase_order),
             'purchase_date' => Helper::getFormattedDateObject($license->purchase_date, 'date'),
@@ -45,11 +45,11 @@ class LicensesTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'checkout' => Gate::allows('checkout', License::class) ? true : false,
-            'checkin' => Gate::allows('checkin', License::class) ? true : false,
-            'clone' => Gate::allows('create', License::class) ? true : false,
-            'update' => Gate::allows('update', License::class) ? true : false,
-            'delete' => Gate::allows('delete', License::class) ? true : false,
+            'checkout' => Gate::allows('checkout', LicenseModel::class) ? true : false,
+            'checkin' => Gate::allows('checkin', LicenseModel::class) ? true : false,
+            'clone' => Gate::allows('create', LicenseModel::class) ? true : false,
+            'update' => Gate::allows('update', LicenseModel::class) ? true : false,
+            'delete' => Gate::allows('delete', LicenseModel::class) ? true : false,
         ];
 
         $array += $permissions_array;

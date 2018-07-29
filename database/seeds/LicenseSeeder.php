@@ -1,17 +1,17 @@
 <?php
 use Illuminate\Database\Seeder;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\LicenseSeat;
 
 class LicenseSeeder extends Seeder
 {
     public function run()
     {
-        License::truncate();
+        LicenseModel::truncate();
         LicenseSeat::truncate();
-        factory(License::class, 1)->states('photoshop')->create();
-        factory(License::class, 1)->states('acrobat')->create();
-        factory(License::class, 1)->states('indesign')->create();
-        factory(License::class, 1)->states('office')->create();
+        factory(LicenseModel::class, 1)->states('photoshop')->create();
+        factory(LicenseModel::class, 1)->states('acrobat')->create();
+        factory(LicenseModel::class, 1)->states('indesign')->create();
+        factory(LicenseModel::class, 1)->states('office')->create();
     }
 }

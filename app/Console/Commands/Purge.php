@@ -8,7 +8,7 @@ use \App\Models\Asset;
 use \App\Models\AssetModel;
 use \App\Models\Location;
 use \App\Models\Company;
-use \App\Models\License;
+use \App\Models\LicenseModel;
 use \App\Models\Accessory;
 use \App\Models\Component;
 use \App\Models\Consumable;
@@ -113,7 +113,7 @@ class Purge extends Command
                 $component->forceDelete();
             }
 
-            $licenses = License::whereNotNull('deleted_at')->withTrashed()->get();
+            $licenses = LicenseModel::whereNotNull('deleted_at')->withTrashed()->get();
             $this->info($licenses->count().' licenses purged.');
             foreach ($licenses as $license) {
                 $this->info('- License "'.$license->name.'" deleted.');

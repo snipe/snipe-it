@@ -48,7 +48,7 @@ class CompanyTest extends BaseTest
      public function testACompanyCanHaveLicenses()
      {
          $company = $this->createValidCompany();
-         factory(App\Models\License::class, 1)->states('acrobat')->create([
+         factory(App\Models\LicenseModel::class, 1)->states('acrobat')->create([
              'company_id'=>$company->id,
              'manufacturer_id' => factory(App\Models\Manufacturer::class)->states('adobe')->create()->id,
              'category_id' => factory(App\Models\Category::class)->states('license-office-category')->create()->id

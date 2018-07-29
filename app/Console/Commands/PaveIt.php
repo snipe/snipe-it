@@ -13,7 +13,7 @@ use App\Models\Department;
 use App\Models\Depreciation;
 use App\Models\Group;
 use App\Models\Import;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Manufacturer;
@@ -66,7 +66,7 @@ class PaveIt extends Command
                 Consumable::getQuery()->delete();
                 Department::getQuery()->delete();
                 Depreciation::getQuery()->delete();
-                License::getQuery()->delete();
+                LicenseModel::getQuery()->delete();
                 LicenseSeat::getQuery()->delete();
                 Location::getQuery()->delete();
                 Manufacturer::getQuery()->delete();

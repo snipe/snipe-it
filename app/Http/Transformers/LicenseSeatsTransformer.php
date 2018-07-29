@@ -2,7 +2,7 @@
 namespace App\Http\Transformers;
 
 use App\Models\LicenseSeat;
-use App\Models\License;
+use App\Models\LicenseModel;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;
@@ -44,11 +44,11 @@ class LicenseSeatsTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'checkout' => Gate::allows('checkout', License::class) ? true : false,
-            'checkin' => Gate::allows('checkin', License::class) ? true : false,
-            'clone' => Gate::allows('create', License::class) ? true : false,
-            'update' => Gate::allows('update', License::class) ? true : false,
-            'delete' => Gate::allows('delete', License::class) ? true : false,
+            'checkout' => Gate::allows('checkout', LicenseModel::class) ? true : false,
+            'checkin' => Gate::allows('checkin', LicenseModel::class) ? true : false,
+            'clone' => Gate::allows('create', LicenseModel::class) ? true : false,
+            'update' => Gate::allows('update', LicenseModel::class) ? true : false,
+            'delete' => Gate::allows('delete', LicenseModel::class) ? true : false,
         ];
 
         $array += $permissions_array;

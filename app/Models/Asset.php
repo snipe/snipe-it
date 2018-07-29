@@ -416,7 +416,7 @@ class Asset extends Depreciable
    **/
     public function licenses()
     {
-        return $this->belongsToMany('\App\Models\License', 'license_seats', 'asset_id', 'license_id');
+        return $this->belongsToMany('\App\Models\LicenseModel', 'license_seats', 'asset_id', 'license_id');
     }
 
     public function licenseseats()

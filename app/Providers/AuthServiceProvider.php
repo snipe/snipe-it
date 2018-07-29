@@ -11,7 +11,7 @@ use App\Models\Consumable;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use App\Models\Department;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\Location;
 use App\Models\Depreciation;
 use App\Models\Statuslabel;
@@ -61,7 +61,7 @@ class AuthServiceProvider extends ServiceProvider
         CustomFieldset::class => CustomFieldsetPolicy::class,
         Department::class => DepartmentPolicy::class,
         Depreciation::class => DepreciationPolicy::class,
-        License::class => LicensePolicy::class,
+        LicenseModel::class => LicensePolicy::class,
         Location::class => LocationPolicy::class,
         Statuslabel::class => StatuslabelPolicy::class,
         Supplier::class => SupplierPolicy::class,

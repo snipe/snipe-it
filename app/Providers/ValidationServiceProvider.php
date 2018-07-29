@@ -12,7 +12,7 @@ use App\Observers\AccessoryObserver;
 use App\Observers\ConsumableObserver;
 use App\Observers\ComponentObserver;
 use App\Models\Asset;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\Accessory;
 use App\Models\Consumable;
 use App\Models\Component;

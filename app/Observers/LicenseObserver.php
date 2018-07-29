@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\Setting;
 use App\Models\Actionlog;
 use Auth;
@@ -12,14 +12,14 @@ class LicenseObserver
     /**
      * Listen to the User created event.
      *
-     * @param  License  $license
+     * @param  LicenseModel  $license
      * @return void
      */
-    public function updated(License $license)
+    public function updated(LicenseModel $license)
     {
 
         $logAction = new Actionlog();
-        $logAction->item_type = License::class;
+        $logAction->item_type = LicenseModel::class;
         $logAction->item_id = $license->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
         $logAction->user_id = Auth::id();
@@ -31,14 +31,14 @@ class LicenseObserver
      * Listen to the License created event when
      * a new license is created.
      *
-     * @param  License  $license
+     * @param  LicenseModel  $license
      * @return void
      */
-    public function created(License $license)
+    public function created(LicenseModel $license)
     {
 
         $logAction = new Actionlog();
-        $logAction->item_type = License::class;
+        $logAction->item_type = LicenseModel::class;
         $logAction->item_id = $license->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
         $logAction->user_id = Auth::id();
@@ -49,13 +49,13 @@ class LicenseObserver
     /**
      * Listen to the License deleting event.
      *
-     * @param  License  $license
+     * @param  LicenseModel  $license
      * @return void
      */
-    public function deleting(License $license)
+    public function deleting(LicenseModel $license)
     {
         $logAction = new Actionlog();
-        $logAction->item_type = License::class;
+        $logAction->item_type = LicenseModel::class;
         $logAction->item_id = $license->id;
         $logAction->created_at =  date("Y-m-d H:i:s");
         $logAction->user_id = Auth::id();

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Licenses;
 
 use App\Http\Requests\AssetFileRequest;
 use App\Models\Actionlog;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
@@ -27,7 +27,7 @@ class LicenseFilesController extends Controller
      */
     public function store(AssetFileRequest $request, $licenseId = null)
     {
-        $license = License::find($licenseId);
+        $license = LicenseModel::find($licenseId);
         // the license is valid
         $destinationPath = config('app.private_uploads').'/licenses';
 
@@ -74,7 +74,7 @@ class LicenseFilesController extends Controller
      */
     public function destroy($licenseId = null, $fileId = null)
     {
-        $license = License::find($licenseId);
+        $license = LicenseModel::find($licenseId);
 
         $rel_path = 'storage/private_uploads/licenses';
 
@@ -109,7 +109,7 @@ class LicenseFilesController extends Controller
     public function show($licenseId = null, $fileId = null, $download = true)
     {
 
-        $license = License::find($licenseId);
+        $license = LicenseModel::find($licenseId);
 
         // the license is valid
         if (isset($license->id)) {

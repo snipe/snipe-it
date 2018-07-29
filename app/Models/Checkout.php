@@ -33,7 +33,7 @@ class Checkout extends Model
         Accessory::class,
         Consumable::class,
         Component::class,
-        License::class
+        LicenseModel::class
     ];
     public $rules = [
         'item_id' => 'required',

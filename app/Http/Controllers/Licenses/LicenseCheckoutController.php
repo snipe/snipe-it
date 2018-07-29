@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Licenses;
 
 use App\Http\Requests\LicenseCheckoutRequest;
 use App\Models\Asset;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,7 +30,7 @@ class LicenseCheckoutController extends Controller
     public function create($licenseId)
     {
         // Check that the license is valid
-        if ($license = License::find($licenseId)) {
+        if ($license = LicenseModel::find($licenseId)) {
 
             // If the license is valid, check that there is an available seat
             if ($license->avail_seats_count < 1) {
@@ -56,7 +56,7 @@ class LicenseCheckoutController extends Controller
 
     public function store(LicenseCheckoutRequest $request, $licenseId, $seatId = null)
     {
-        if (!$license = License::find($licenseId)) {
+        if (!$license = LicenseModel::find($licenseId)) {
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 

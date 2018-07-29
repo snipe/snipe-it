@@ -56,6 +56,6 @@ class Depreciation extends SnipeModel
 
     public function has_licenses()
     {
-        return $this->hasMany('\App\Models\License', 'depreciation_id')->count();
+        return $this->hasMany('\App\Models\LicenseModel', 'depreciation_id')->count();
     }     
 }

@@ -5,7 +5,7 @@ namespace App\Importer;
 use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Category;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\Manufacturer;
 
 class LicenseImporter extends ItemImporter
@@ -28,12 +28,12 @@ class LicenseImporter extends ItemImporter
      * @author Daniel Melzter
      * @since 4.0
      * @param array $row
-     * @return License|mixed|null
+     * @return LicenseModel|mixed|null
      */
     public function createLicenseIfNotExists(array $row)
     {
         $editingLicense = false;
-        $license = License::where('name', $this->item['name'])
+        $license = LicenseModel::where('name', $this->item['name'])
                     ->where('serial', $this->item['serial'])
                     ->first();
         if ($license) {
@@ -46,7 +46,7 @@ class LicenseImporter extends ItemImporter
             $editingLicense = true;
         } else {
             $this->log("No Matching License, Creating a new one");
-            $license = new License;
+            $license = new LicenseModel;
         }
         $asset_tag = $this->item['asset_tag'] = $this->findCsvMatch($row, 'asset_tag'); // used for checkout out to an asset.
         $this->item['expiration_date'] = $this->findCsvMatch($row, 'expiration_date');

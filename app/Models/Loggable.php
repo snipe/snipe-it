@@ -96,7 +96,7 @@ trait Loggable
     {
         // We need to special case licenses because of license_seat vs license.  So much for clean polymorphism :
         if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
+            $log->item_type = LicenseModel::class;
             $log->item_id = $this->license_id;
         } else {
             $log->item_type = static::class;
@@ -118,7 +118,7 @@ trait Loggable
         $log->target_id = $target->id;
 
         if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
+            $log->item_type = LicenseModel::class;
             $log->item_id = $this->license_id;
         } else {
 
@@ -177,7 +177,7 @@ trait Loggable
         $log = new Actionlog;
         $location = Location::find($location_id);
         if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
+            $log->item_type = LicenseModel::class;
             $log->item_id = $this->license_id;
         } else {
             $log->item_type = static::class;
@@ -216,7 +216,7 @@ trait Loggable
         }
         $log = new Actionlog;
         if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
+            $log->item_type = LicenseModel::class;
             $log->item_id = $this->license_id;
         } else {
             $log->item_type = static::class;
@@ -239,7 +239,7 @@ trait Loggable
     {
         $log = new Actionlog;
         if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
+            $log->item_type = LicenseModel::class;
             $log->item_id = $this->license_id;
         } else {
             $log->item_type = static::class;

@@ -55,7 +55,7 @@
       <div class="icon">
         <i class="fa fa-floppy-o"></i>
       </div>
-        @can('view', \App\Models\License::class)
+        @can('view', \App\Models\LicenseModel::class)
           <a href="{{ route('licenses.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
         @endcan
     </div>
@@ -126,7 +126,7 @@
                             @endcan
                         </div>
                         <div class="col-md-3">
-                            @can('create', \App\Models\License::class)
+                            @can('create', \App\Models\LicenseModel::class)
                                 <a class="btn bg-maroon" style="width: 100%" href="{{ route('licenses.create') }}">New License</a>
                             @endcan
                         </div>

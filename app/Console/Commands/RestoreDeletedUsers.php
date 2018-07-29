@@ -9,7 +9,7 @@ use App\Models\Asset;
 use App\Models\Consumable;
 use App\Models\Accessory;
 use App\Models\LicenseSeat;
-use App\Models\License;
+use App\Models\LicenseModel;
 use DB;
 use Artisan;
 
@@ -83,7 +83,7 @@ class RestoreDeletedUsers extends Command
 
                     $this->info('      ** Asset '.$user_log->item->id.' ('.$user_log->item->asset_tag.') restored to user '.$user->id.'');
 
-                } elseif ($user_log->item_type==License::class) {
+                } elseif ($user_log->item_type==LicenseModel::class) {
                     $license_totals++;
 
                     $avail_seat = DB::table('license_seats')->where('license_id','=',$user_log->item->id)

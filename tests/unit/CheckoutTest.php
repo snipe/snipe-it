@@ -1,6 +1,6 @@
 <?php
 use App\Models\Asset;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\User;
 
 class CheckoutTest extends BaseTest
@@ -33,7 +33,7 @@ class CheckoutTest extends BaseTest
 
     public function testALicenseCanBeCheckedOutToAUser()
     {
-        $license = factory(License::class)->states('office')->create([
+        $license = factory(LicenseModel::class)->states('office')->create([
             'location_id' => $this->createValidLocation()->id
         ]);
         $user = $this->signIn();

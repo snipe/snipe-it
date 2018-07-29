@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Licenses;
 
 use App\Http\Controllers\Controller;
-use App\Models\License;
+use App\Models\LicenseModel;
 use Illuminate\Support\Facades\DB;
 use App\Models\Company;
 use App\Helpers\Helper;
@@ -30,7 +30,7 @@ class LicensesController extends Controller
      */
     public function index()
     {
-        $this->authorize('view', License::class);
+        $this->authorize('view', LicenseModel::class);
         return view('licenses/index');
     }
 
@@ -46,7 +46,7 @@ class LicensesController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', License::class);
+        $this->authorize('create', LicenseModel::class);
         $maintained_list = [
             '' => 'Maintained',
             '1' => 'Yes',
@@ -56,7 +56,7 @@ class LicensesController extends Controller
         return view('licenses/edit')
             ->with('depreciation_list', Helper::depreciationList())
             ->with('maintained_list', $maintained_list)
-            ->with('item', new License);
+            ->with('item', new LicenseModel);
 
     }
 
@@ -74,9 +74,9 @@ class LicensesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', License::class);
+        $this->authorize('create', LicenseModel::class);
         // create a new model instance
-        $license = new License();
+        $license = new LicenseModel();
         // Save the license data
         $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
         $license->depreciation_id   = $request->input('depreciation_id');
@@ -118,7 +118,7 @@ class LicensesController extends Controller
      */
     public function edit($licenseId = null)
     {
-        if (is_null($item = License::find($licenseId))) {
+        if (is_null($item = LicenseModel::find($licenseId))) {
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
         }
 
@@ -150,7 +150,7 @@ class LicensesController extends Controller
      */
     public function update(Request $request, $licenseId = null)
     {
-        if (is_null($license = License::find($licenseId))) {
+        if (is_null($license = LicenseModel::find($licenseId))) {
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
         }
 
@@ -196,7 +196,7 @@ class LicensesController extends Controller
     public function destroy($licenseId)
     {
         // Check if the license exists
-        if (is_null($license = License::find($licenseId))) {
+        if (is_null($license = LicenseModel::find($licenseId))) {
             // Redirect to the license management page
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
@@ -235,7 +235,7 @@ class LicensesController extends Controller
     public function show($licenseId = null)
     {
 
-        $license = License::with('assignedusers', 'licenseSeats.user', 'licenseSeats.asset')->find($licenseId);
+        $license = LicenseModel::with('assignedusers', 'licenseSeats.user', 'licenseSeats.asset')->find($licenseId);
 
         if ($license) {
             $this->authorize('view', $license);
@@ -248,11 +248,11 @@ class LicensesController extends Controller
 
     public function getClone($licenseId = null)
     {
-        if (is_null($license_to_clone = License::find($licenseId))) {
+        if (is_null($license_to_clone = LicenseModel::find($licenseId))) {
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
         }
 
-        $this->authorize('create', License::class);
+        $this->authorize('create', LicenseModel::class);
 
         $maintained_list = [
             '' => 'Maintained',

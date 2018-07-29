@@ -192,7 +192,7 @@ final class Company extends SnipeModel
 
     public function licenses()
     {
-        return $this->hasMany(License::class, 'company_id');
+        return $this->hasMany(LicenseModel::class, 'company_id');
     }
     public function accessories()
     {

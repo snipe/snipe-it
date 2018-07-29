@@ -386,7 +386,7 @@
   </div>  <!-- /.col -->
 </div> <!-- /.row -->
 
-@can('update', \App\Models\License::class)
+@can('update', \App\Models\LicenseModel::class)
   @include ('modals.upload-file', ['item_type' => 'license', 'item_id' => $license->id])
 @endcan
 
