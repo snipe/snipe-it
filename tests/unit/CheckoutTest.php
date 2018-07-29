@@ -33,22 +33,22 @@ class CheckoutTest extends BaseTest
 
     public function testALicenseCanBeCheckedOutToAUser()
     {
-        $license = factory(LicenseModel::class)->states('office')->create([
+        $licenseModel = factory(LicenseModel::class)->states('office')->create([
             'location_id' => $this->createValidLocation()->id
         ]);
         $user = $this->signIn();
         $user->update(['location_id' => $this->createValidLocation()->id]);
-        $license->checkOut($user);
+        $licenseModel->licenseSecheckOut($user);
 
         $this->tester->seeRecord('checkouts',[
-            'item_id' => $license->id,
+            'item_id' => $licenseModel->id,
             'item_type' => Asset::class,
             'target_id' => $user->id,
             'target_type' => User::class
         ]);
 
-        $this->assertTrue($user->is($license->checkoutTarget()->target));
-        $this->assertTrue($user->location->is($license->checkoutTarget()->location));
+        $this->assertTrue($user->is($licenseModel->checkoutTarget()->target));
+        $this->assertTrue($user->location->is($licenseModel->checkoutTarget()->location));
         $this->tester->seeNumRecords(1, 'checkouts');
     }
 

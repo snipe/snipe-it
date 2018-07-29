@@ -30,10 +30,10 @@ class ApiLicensesCest
 
         $response = json_decode($I->grabResponse(), true);
         // sample verify
-        $license = App\Models\LicenseModel::orderByDesc('created_at')
-            ->withCount('freeSeats')
+        $licenseModel = App\Models\LicenseModel::orderByDesc('created_at')
+            ->withCount('freeLicenses')
             ->take(10)->get()->shuffle()->first();
-        $I->seeResponseContainsJson($I->removeTimestamps((new LicenseModelsTranformer)->transformLicense($license)));
+        $I->seeResponseContainsJson($I->removeTimestamps((new LicenseModelsTranformer)->transformLicense($licenseModel)));
     }
 
     /** @test */
@@ -80,15 +80,15 @@ class ApiLicensesCest
     /** @test */
     public function updateLicenseWithPatch(ApiTester $I, $scenario)
     {
-        $I->wantTo('Update a license with PATCH');
+        $I->wantTo('Update a licenseModel with PATCH');
 
         // create
-        $license = factory(\App\Models\LicenseModel::class)->states('acrobat')->create([
+        $licenseModel = factory(\App\Models\LicenseModel::class)->states('acrobat')->create([
             'name' => 'Original License Name',
             'depreciation_id' => 3,
             'company_id' => 2
         ]);
-        $I->assertInstanceOf(\App\Models\LicenseModel::class, $license);
+        $I->assertInstanceOf(\App\Models\LicenseModel::class, $licenseModel);
 
         $temp_license = factory(\App\Models\LicenseModel::class)->states('office')->make([
             'company_id' => 3,
@@ -117,23 +117,23 @@ class ApiLicensesCest
             'termination_date' => $temp_license->termination_date,
         ];
 
-        $I->assertNotEquals($license->name, $data['name']);
+        $I->assertNotEquals($licenseModel->name, $data['name']);
 
         // update
-        $I->sendPATCH('/licenses/' . $license->id, $data);
+        $I->sendPATCH('/licenses/' . $licenseModel->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
         $response = json_decode($I->grabResponse());
         $I->assertEquals('success', $response->status);
         $I->assertEquals(trans('admin/licenses/message.update.success'), $response->messages);
-        $I->assertEquals($license->id, $response->payload->id); // license id does not change
-        $I->assertEquals($temp_license->name, $response->payload->name); // license name
+        $I->assertEquals($licenseModel->id, $response->payload->id); // licenseModel id does not change
+        $I->assertEquals($temp_license->name, $response->payload->name); // licenseModel name
         $temp_license->created_at = Carbon::parse($response->payload->created_at);
         $temp_license->updated_at = Carbon::parse($response->payload->updated_at);
-        $temp_license->id = $license->id;
+        $temp_license->id = $licenseModel->id;
         // verify
-        $I->sendGET('/licenses/' . $license->id);
+        $I->sendGET('/licenses/' . $licenseModel->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson((new LicenseModelsTranformer)->transformLicense($temp_license));
@@ -145,16 +145,16 @@ class ApiLicensesCest
         $I->wantTo('Ensure a license with seats checked out cannot be deleted');
 
         // create
-        $license = factory(\App\Models\LicenseModel::class)->states('acrobat')->create([
+        $licenseModel = factory(\App\Models\LicenseModel::class)->states('acrobat')->create([
             'name' => "Soon to be deleted"
         ]);
-        $licenseSeat = $license->freeSeat();
+        $licenseSeat = $licenseModel->freeLicense();
         $licenseSeat->assigned_to = $this->user->id;
         $licenseSeat->save();
-        $I->assertInstanceOf(\App\Models\LicenseModel::class, $license);
+        $I->assertInstanceOf(\App\Models\LicenseModel::class, $licenseModel);
 
         // delete
-        $I->sendDELETE('/licenses/' . $license->id);
+        $I->sendDELETE('/licenses/' . $licenseModel->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -166,16 +166,16 @@ class ApiLicensesCest
     /** @test */
     public function deleteLicenseTest(ApiTester $I, $scenario)
     {
-        $I->wantTo('Delete an license');
+        $I->wantTo('Delete an licenseModel');
 
         // create
-        $license = factory(\App\Models\LicenseModel::class)->states('acrobat')->create([
+        $licenseModel = factory(\App\Models\LicenseModel::class)->states('acrobat')->create([
             'name' => "Soon to be deleted"
         ]);
-        $I->assertInstanceOf(\App\Models\LicenseModel::class, $license);
+        $I->assertInstanceOf(\App\Models\LicenseModel::class, $licenseModel);
 
         // delete
-        $I->sendDELETE('/licenses/' . $license->id);
+        $I->sendDELETE('/licenses/' . $licenseModel->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -184,7 +184,7 @@ class ApiLicensesCest
         $I->assertEquals(trans('admin/licenses/message.delete.success'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/licenses/' . $license->id);
+        $I->sendGET('/licenses/' . $licenseModel->id);
 
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();

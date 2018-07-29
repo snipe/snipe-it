@@ -9,6 +9,7 @@ use App\Notifications\CheckinLicenseNotification;
 
 class License extends Model implements ICompanyableChild
 {
+    use Checkoutable;
     use CompanyableChildTrait;
     use SoftDeletes;
     use Loggable;

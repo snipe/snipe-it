@@ -17,10 +17,10 @@ class LicensePolicy extends CheckoutablePermissionsPolicy
      * Determine whether the user can view license keys
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\LicenseModel  $license
+     * @param  \App\Models\LicenseModel  $licenseModel
      * @return mixed
      */
-    public function viewKeys(User $user, LicenseModel $license = null)
+    public function viewKeys(User $user, LicenseModel $licenseModel = null)
     {
         return $user->hasAccess('licenses.keys');
     }

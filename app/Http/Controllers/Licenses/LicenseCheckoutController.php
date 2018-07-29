@@ -30,16 +30,16 @@ class LicenseCheckoutController extends Controller
     public function create($licenseId)
     {
         // Check that the license is valid
-        if ($license = LicenseModel::find($licenseId)) {
+        if ($licenseModel = LicenseModel::find($licenseId)) {
 
             // If the license is valid, check that there is an available seat
-            if ($license->avail_seats_count < 1) {
+            if ($licenseModel->avail_license_count < 1) {
                 return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
             }
         }
 
-        $this->authorize('checkout', $license);
-        return view('licenses/checkout', compact('license'));
+        $this->authorize('checkout', $licenseModel);
+        return view('licenses/checkout', compact('licenseModel'));
     }
 
 
@@ -56,13 +56,13 @@ class LicenseCheckoutController extends Controller
 
     public function store(LicenseCheckoutRequest $request, $licenseId, $seatId = null)
     {
-        if (!$license = LicenseModel::find($licenseId)) {
+        if (!$licenseModel = LicenseModel::find($licenseId)) {
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
-        $this->authorize('checkout', $license);
+        $this->authorize('checkout', $licenseModel);
 
-        $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
+        $licenseSeat = $this->findLicenseSeatToCheckout($licenseModel, $seatId);
         $licenseSeat->user_id = Auth::id();
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
@@ -73,9 +73,9 @@ class LicenseCheckoutController extends Controller
         return redirect()->route("licenses.index")->with('error', trans('Something went wrong handling this checkout.'));
     }
 
-    protected function findLicenseSeatToCheckout($license, $seatId)
+    protected function findLicenseSeatToCheckout($licenseModel, $seatId)
     {
-        $licenseSeat = License::find($seatId) ?? $license->freeSeat();
+        $licenseSeat = License::find($seatId) ?? $licenseModel->freeLicense();
 
         if (!$licenseSeat) {
             if ($seatId) {
@@ -84,7 +84,7 @@ class LicenseCheckoutController extends Controller
             return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
         }
 
-        if(!$licenseSeat->license->is($license)) {
+        if(!$licenseSeat->license->is($licenseModel)) {
             return redirect()->route('licenses.index')->with('error', 'The license seat provided does not match the license.');
         }
 

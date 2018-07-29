@@ -48,27 +48,27 @@ class LicensesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $license = factory(App\Models\LicenseModel::class)->states('photoshop')->make([
+        $licenseModel = factory(App\Models\LicenseModel::class)->states('photoshop')->make([
             'name' => 'Test License',
             'company_id' => 3,
         ]);
         $values = [
-            'company_id'        => $license->company_id,
+            'company_id'        => $licenseModel->company_id,
             'expiration_date'   => '2018-01-01',
-            'license_email'     => $license->license_email,
-            'license_name'      => $license->license_name,
+            'license_email'     => $licenseModel->license_email,
+            'license_name'      => $licenseModel->license_name,
             'maintained'        => true,
-            'manufacturer_id'   => $license->manufacturer_id,
-            'category_id'       => $license->category_id,
-            'name'              => $license->name,
-            'notes'             => $license->notes,
-            'order_number'      => $license->order_number,
-            'purchase_cost'     => $license->purchase_cost,
+            'manufacturer_id'   => $licenseModel->manufacturer_id,
+            'category_id'       => $licenseModel->category_id,
+            'name'              => $licenseModel->name,
+            'notes'             => $licenseModel->notes,
+            'order_number'      => $licenseModel->order_number,
+            'purchase_cost'     => $licenseModel->purchase_cost,
             'purchase_date'     => '2016-01-01',
-            'purchase_order'    => $license->purchase_order,
+            'purchase_order'    => $licenseModel->purchase_order,
             'reassignable'      => true,
-            'seats'             => $license->seats,
-            'serial'            => $license->serial,
+            'seats'             => $licenseModel->seats,
+            'serial'            => $licenseModel->serial,
             'termination_date'  => '2020-01-01',
         ];
 

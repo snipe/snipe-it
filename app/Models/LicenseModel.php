@@ -1,10 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Models\Actionlog;
-use App\Models\Company;
-use App\Models\License;
-use App\Models\Loggable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
@@ -309,12 +305,12 @@ class LicenseModel extends Depreciable
     }
 
     // We do this to eager load the "count" of seats from the controller.  Otherwise calling "count()" on each model results in n+1
-    public function licenseSeatsRelation()
+    public function licenseRelation()
     {
         return $this->hasMany(License::class)->whereNull('deleted_at')->selectRaw('license_id, count(*) as count')->groupBy('license_id');
     }
 
-    public function getLicenseSeatsCountAttribute()
+    public function getLicenseCountAttribute()
     {
         if ($this->licenseSeatsRelation->first()) {
             return $this->licenseSeatsRelation->first()->count;
@@ -339,13 +335,13 @@ class LicenseModel extends Depreciable
      */
     public function availCount()
     {
-        return $this->licenseSeatsRelation()
+        return $this->licenseRelation()
             ->whereNull('asset_id')
             ->whereNull('assigned_to')
             ->whereNull('deleted_at');
     }
 
-    public function getAvailSeatsCountAttribute()
+    public function getAvailLicenseCountAttribute()
     {
         if ($this->availCount->first()) {
             return $this->availCount->first()->count;
@@ -360,13 +356,13 @@ class LicenseModel extends Depreciable
      */
     public function assignedCount()
     {
-        return $this->licenseSeatsRelation()->where(function ($query) {
+        return $this->licenseRelation()->where(function ($query) {
             $query->whereNotNull('assigned_to')
             ->orWhereNotNull('asset_id');
         });
     }
 
-    public function getAssignedSeatsCountAttribute()
+    public function getAssignedLicenseCountAttribute()
     {
         // dd($this->licenseSeatsRelation->first());
         if ($this->assignedCount->first()) {
@@ -384,7 +380,7 @@ class LicenseModel extends Depreciable
     public function remaincount()
     {
         $total = $this->licenseSeatsCount;
-        $taken =  $this->assigned_seats_count;
+        $taken =  $this->assigned_license_count;
         $diff =   ($total - $taken);
         return $diff;
     }
@@ -403,7 +399,7 @@ class LicenseModel extends Depreciable
     /**
      * Get license seat data
      */
-    public function licenseseats()
+    public function licenses()
     {
         return $this->hasMany('\App\Models\License');
     }
@@ -417,9 +413,9 @@ class LicenseModel extends Depreciable
      * Get the next available free seat - used by
      * the API to populate next_seat
      */
-    public function freeSeat()
+    public function freeLicense()
     {
-        return  $this->licenseseats()
+        return  $this->licenses()
                     ->whereNull('deleted_at')
                     ->where(function ($query) {
                         $query->whereNull('assigned_to')
@@ -432,8 +428,8 @@ class LicenseModel extends Depreciable
     /*
    * Get the next available free seat - used by
    * the API to populate next_seat
-   */
-    public function freeSeats()
+
+    public function freeLicenses()
     {
         return $this->hasMany('\App\Models\License')->whereNull('assigned_to')->whereNull('deleted_at')->whereNull('asset_id');
     }
