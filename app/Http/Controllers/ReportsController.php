@@ -8,7 +8,7 @@ use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\CustomField;
 use App\Models\Depreciation;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
@@ -226,7 +226,7 @@ class ReportsController extends Controller
     public function getLicenseReport()
     {
         $this->authorize('reports.view');
-        $licenses = License::with('depreciation')->orderBy('created_at', 'DESC')
+        $licenses = LicenseModel::with('depreciation')->orderBy('created_at', 'DESC')
                            ->with('company')
                            ->get();
 
@@ -244,7 +244,7 @@ class ReportsController extends Controller
     public function exportLicenseReport()
     {
         $this->authorize('reports.view');
-        $licenses = License::orderBy('created_at', 'DESC')->get();
+        $licenses = LicenseModel::orderBy('created_at', 'DESC')->get();
 
         $rows     = [ ];
         $header   = [

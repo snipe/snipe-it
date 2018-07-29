@@ -123,7 +123,7 @@
 
 
                 <table
-                        data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+                        data-columns="{{ \App\Presenters\LicenseModelPresenter::dataTableLayout() }}"
                         data-cookie-id-table="suppliersLicensesTable"
                         data-pagination="true"
                         data-id-table="suppliersLicensesTable"

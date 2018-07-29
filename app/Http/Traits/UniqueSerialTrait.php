@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Traits;
 
+use App\Models\Asset;
+
 trait UniqueSerialTrait
 {
 

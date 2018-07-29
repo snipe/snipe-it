@@ -79,7 +79,7 @@ $factory->defineAs(Actionlog::class, 'asset-checkout-location', function (Faker\
 // This doesn't work - we need to assign a seat
 $factory->defineAs(Actionlog::class, 'license-checkout-asset', function (Faker\Generator $faker) {
     $target = Asset::inRandomOrder()->RTD()->first();
-    $item = License::inRandomOrder()->first();
+    $item = LicenseModel::inRandomOrder()->first();
     $user_id = rand(1,2); // keep it simple - make it one of the two superadmins
 
     return [

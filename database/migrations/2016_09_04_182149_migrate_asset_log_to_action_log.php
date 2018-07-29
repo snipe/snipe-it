@@ -28,7 +28,7 @@ class MigrateAssetLogToActionLog extends Migration
                 if ($log->asset_type == "hardware") {
                     $a->item_type = 'App\\Models\\Asset';
                 } else {
-                    $a->item_type = 'App\\Models\\License';
+                    $a->item_type = 'App\\Models\\LicenseModel';
                 }
             }
             if (!is_null($log->accessory_id)) {

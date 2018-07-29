@@ -6,10 +6,10 @@ use App\Helpers\Helper;
 use Illuminate\Support\Facades\Gate;
 
 /**
- * Class LicensePresenter
+ * Class LicenseModelPresenter
  * @package App\Presenters
  */
-class LicensePresenter extends Presenter
+class LicenseModelPresenter extends Presenter
 {
     /**
      * Json Column Layout for bootstrap table

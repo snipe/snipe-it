@@ -95,8 +95,8 @@ trait Loggable
     private function determineLogItemType($log)
     {
         // We need to special case licenses because of license_seat vs license.  So much for clean polymorphism :
-        if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
+        if (static::class == License::class) {
+            $log->item_type = LicenseModel::class;
             $log->item_id = $this->license_id;
         } else {
             $log->item_type = static::class;
@@ -117,8 +117,8 @@ trait Loggable
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
 
-        if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
+        if (static::class == License::class) {
+            $log->item_type = LicenseModel::class;
             $log->item_id = $this->license_id;
         } else {
 
@@ -176,8 +176,8 @@ trait Loggable
     {
         $log = new Actionlog;
         $location = Location::find($location_id);
-        if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
+        if (static::class == License::class) {
+            $log->item_type = LicenseModel::class;
             $log->item_id = $this->license_id;
         } else {
             $log->item_type = static::class;
@@ -215,8 +215,8 @@ trait Loggable
             $user_id = Auth::user()->id;
         }
         $log = new Actionlog;
-        if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
+        if (static::class == License::class) {
+            $log->item_type = LicenseModel::class;
             $log->item_id = $this->license_id;
         } else {
             $log->item_type = static::class;
@@ -238,8 +238,8 @@ trait Loggable
     public function logUpload($filename, $note)
     {
         $log = new Actionlog;
-        if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
+        if (static::class == License::class) {
+            $log->item_type = LicenseModel::class;
             $log->item_id = $this->license_id;
         } else {
             $log->item_type = static::class;

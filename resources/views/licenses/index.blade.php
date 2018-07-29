@@ -8,7 +8,7 @@
 
 
 @section('header_right')
-@can('create', \App\Models\License::class)
+@can('create', \App\Models\LicenseModel::class)
     <a href="{{ route('licenses.create') }}" class="btn btn-primary pull-right">
       {{ trans('general.create') }}
     </a>
@@ -25,7 +25,7 @@
       <div class="box-body">
 
           <table
-              data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+              data-columns="{{ \App\Presenters\LicenseModelPresenter::dataTableLayout() }}"
               data-cookie-id-table="licensesTable"
               data-pagination="true"
               data-search="true"

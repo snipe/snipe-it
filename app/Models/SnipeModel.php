@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class SnipeModel extends Model
 {
     // Setters that are appropriate across multiple models.
+    public const LOCATION = 'location';
+    public const ASSET = 'asset';
+    public const USER = 'user';
+    public const ACCEPTANCE_PENDING = 'pending';
+
     public function setPurchaseDateAttribute($value)
     {
         if ($value == '') {
@@ -172,5 +177,10 @@ class SnipeModel extends Model
     public function getDisplayNameAttribute()
     {
         return $this->name;
+    }
+
+    public function requireAcceptance()
+    {
+        return $this->model->category->require_acceptance;
     }
 }

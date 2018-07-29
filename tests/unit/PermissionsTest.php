@@ -4,7 +4,7 @@ use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\Component;
 use App\Models\Consumable;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
