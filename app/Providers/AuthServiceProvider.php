@@ -135,6 +135,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAccess('self.api');
         });
 
+        Gate::define('self.edit_location', function($user) {
+            return $user->hasAccess('self.edit_location');
+        });
+
         Gate::define('backend.interact', function ($user) {
             return $user->can('view', Statuslabel::class)
                 || $user->can('view', AssetModel::class)

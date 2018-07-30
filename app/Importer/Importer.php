@@ -66,6 +66,7 @@ abstract class Importer
         'phone_number' => 'phone number',
         'first_name' => 'first name',
         'last_name' => 'last name',
+        'department' => 'department'
     ];
     /**
      * Map of item fields->csv names
@@ -115,7 +116,8 @@ abstract class Importer
     public function import()
     {
         $headerRow = $this->csv->fetchOne();
-        $results = $this->normalizeInputArray($this->csv->fetchAssoc());
+        $this->csv->setHeaderOffset(0);
+        $results = $this->normalizeInputArray($this->csv->getRecords());
 
         $this->populateCustomFields($headerRow);
 
@@ -149,7 +151,7 @@ abstract class Importer
         // This 'inverts' the fields such that we have a collection of fields indexed by name.
         $this->customFields = CustomField::All()->reduce(function ($nameLookup, $field) {
             $nameLookup[$field['name']] = $field;
-            return $nameLookup; 
+            return $nameLookup;
         });
         // Remove any custom fields that do not exist in the header row.  This prevents nulling out values that shouldn't exist.
         // In detail, we compare the lower case name of custom fields (indexed by name) to the keys in the header row.  This
@@ -280,7 +282,7 @@ abstract class Importer
             $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
         }
 
-        $user_formatted_array = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $user_array['full_name']);
+        $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
         $user_array['first_name'] = $user_formatted_array['first_name'];
         $user_array['last_name'] = $user_formatted_array['last_name'];
         if (empty($user_array['username'])) {

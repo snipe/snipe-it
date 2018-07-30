@@ -3,11 +3,11 @@ namespace App\Models;
 
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,7 +17,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use DB;
 
-class User extends SnipeModel implements AuthenticatableContract, CanResetPasswordContract
+
+
+class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
     protected $presenter = 'App\Presenters\UserPresenter';
     use SoftDeletes, ValidatingTrait;
@@ -350,11 +352,11 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     public static function generateEmailFromFullName($name)
     {
-        $username = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $name);
+        $username = User::generateFormattedNameFromFullName($name, Setting::getSettings()->email_format);
         return $username['username'].'@'.Setting::getSettings()->email_domain;
     }
 
-    public static function generateFormattedNameFromFullName($format = 'filastname', $users_name)
+    public static function generateFormattedNameFromFullName($users_name, $format = 'filastname')
     {
 
         // If there was only one name given

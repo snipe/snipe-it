@@ -1,29 +1,18 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
-use App\Models\CheckoutRequest;
 use App\Models\Company;
-use App\Models\Component;
-use App\Models\Consumable;
-use App\Models\License;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\RequestAssetNotification;
 use App\Notifications\RequestAssetCancelationNotification;
-use Auth;
-use Config;
-use DB;
-use Input;
-use Lang;
-use Mail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Redirect;
-use Slack;
-use Validator;
-use View;
 use Illuminate\Http\Request;
 
 /**
@@ -49,24 +38,25 @@ class ViewAssetsController extends Controller
             'licenses',
             'userloc',
             'userlog'
-        )->withTrashed()->find(Auth::user()->id);
+        )->withTrashed()->find(Auth::id());
 
 
         $userlog = $user->userlog->load('item', 'user', 'target');
 
         if (isset($user->id)) {
             return view('account/view-assets', compact('user', 'userlog'));
-        } else {
-            // Prepare the error message
-            $error = trans('admin/users/message.user_not_found', compact('id'));
-
-            // Redirect to the user management page
-            return redirect()->route('users.index')->with('error', $error);
         }
+        // Redirect to the user management page
+        return redirect()->route('users.index')
+            ->with('error', trans('admin/users/message.user_not_found', $user->id));
 
     }
 
 
+    /**
+     * Returns view of requestable items for a user.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getRequestableIndex()
     {
 
@@ -129,24 +119,23 @@ class ViewAssetsController extends Controller
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
 
-        } else {
-            $item->request();
-            if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                $logaction->logaction('requested');
-                $settings->notify(new RequestAssetNotification($data));
-            }
-
-
-
-            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
+        $item->request();
+        if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
+            $logaction->logaction('requested');
+            $settings->notify(new RequestAssetNotification($data));
+        }
+
+
+        return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
     }
 
 
-
-
-
-
+    /**
+     * Process a specific requested asset
+     * @param null $assetId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function getRequestAsset($assetId = null)
     {
 
@@ -156,7 +145,8 @@ class ViewAssetsController extends Controller
         if (is_null($asset = Asset::RequestableAssets()->find($assetId))) {
             return redirect()->route('requestable-assets')
                 ->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
+        }
+        if (!Company::isCurrentUserHasAccess($asset)) {
             return redirect()->route('requestable-assets')
                 ->with('error', trans('general.insufficient_permissions'));
         }
@@ -187,16 +177,15 @@ class ViewAssetsController extends Controller
             $settings->notify(new RequestAssetCancelationNotification($data));
             return redirect()->route('requestable-assets')
                 ->with('success')->with('success', trans('admin/hardware/message.requests.cancel-success'));
-        } else {
-
-            $logaction->logaction('requested');
-            $asset->request();
-            $asset->increment('requests_counter', 1);
-            $settings->notify(new RequestAssetNotification($data));
-
-
-            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
+
+        $logaction->logaction('requested');
+        $asset->request();
+        $asset->increment('requests_counter', 1);
+        $settings->notify(new RequestAssetNotification($data));
+
+
+        return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
 
 
     }
@@ -236,11 +225,11 @@ class ViewAssetsController extends Controller
         if (is_null($item)) {
             // Redirect to the asset management page
             return redirect()->to('account')->with('error', trans('admin/hardware/message.does_not_exist'));
-        } elseif (!Company::isCurrentUserHasAccess($item)) {
-            return redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
-        } else {
-            return view('account/accept-asset', compact('item'))->with('findlog', $findlog)->with('item', $item);
         }
+        if (!Company::isCurrentUserHasAccess($item)) {
+            return redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
+        }
+        return view('account/accept-asset', compact('item'))->with('findlog', $findlog)->with('item', $item);
     }
 
     // Save the acceptance
@@ -269,7 +258,7 @@ class ViewAssetsController extends Controller
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
-        if ($request->has('signature_output')) {
+        if ($request->filled('signature_output')) {
             $path = config('app.private_uploads').'/signatures';
             $sig_filename = "siglog-".$findlog->id.'-'.date('Y-m-d-his').".png";
             $data_uri = e($request->get('signature_output'));
@@ -326,8 +315,8 @@ class ViewAssetsController extends Controller
         if ($update_checkout) {
             return redirect()->to('account/view-assets')->with('success', $return_msg);
 
-        } else {
-            return redirect()->to('account/view-assets')->with('error', 'Something went wrong ');
         }
+        return redirect()->to('account/view-assets')->with('error', 'Something went wrong ');
+
     }
 }

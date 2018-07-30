@@ -277,7 +277,7 @@
     function licenseSeatInOutFormatter(value, row) {
         // The user is allowed to check the license seat out and it's available
         if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
-            return '<a href="{{ url('/') }}/licenses/' + row.license_id + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out">{{ trans('general.checkout') }}</a>';
+            return '<a href="{{ url('/') }}/licenses/' + row.license_id + '/checkout/'+row.id+'" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out">{{ trans('general.checkout') }}</a>';
         } else {
             return '<a href="{{ url('/') }}/licenses/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check in this license seat.">{{ trans('general.checkin') }}</a>';
         }

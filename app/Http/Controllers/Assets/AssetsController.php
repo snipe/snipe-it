@@ -1,18 +1,13 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Assets;
 
 use App\Helpers\Helper;
-use App\Http\Requests\AssetCheckinRequest;
-use App\Http\Requests\AssetCheckoutRequest;
-use App\Http\Requests\AssetFileRequest;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetRequest;
-use App\Http\Requests\ItemImportRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
-use App\Models\CustomField;
-use App\Models\Import;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
@@ -34,7 +29,6 @@ use Redirect;
 use Response;
 use Slack;
 use Str;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use TCPDF;
 use Validator;
 use View;
@@ -66,12 +60,14 @@ class AssetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see AssetController::getDatatable() method that generates the JSON response
      * @since [v1.0]
+     * @param Request $request
      * @return View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(Request $request)
     {
         $this->authorize('index', Asset::class);
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $company = Company::find($request->input('company_id'));
         } else {
             $company = null;
@@ -96,7 +92,7 @@ class AssetsController extends Controller
             ->with('item', new Asset)
             ->with('statuslabel_types', Helper::statusTypeList());
 
-        if ($request->has('model_id')) {
+        if ($request->filled('model_id')) {
             $selected_model = AssetModel::find($request->input('model_id'));
             $view->with('selected_model', $selected_model);
         }
@@ -313,7 +309,7 @@ class AssetsController extends Controller
         $asset->supplier_id = $request->input('supplier_id', null);
 
         // If the box isn't checked, it's not in the request at all.
-        $asset->requestable = $request->has('requestable');
+        $asset->requestable = $request->filled('requestable');
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
 
         if ($asset->assigned_to=='') {
@@ -321,7 +317,7 @@ class AssetsController extends Controller
         }
 
 
-        if ($request->has('image_delete')) {
+        if ($request->filled('image_delete')) {
             try {
                 unlink(public_path().'/uploads/assets/'.$asset->image);
                 $asset->image = '';
@@ -343,7 +339,7 @@ class AssetsController extends Controller
         $asset->physical     = '1';
 
         // Update the image
-        if ($request->has('image')) {
+        if ($request->filled('image')) {
             $image = $request->input('image');
             // See postCreate for more explaination of the following.
             $header = explode(';', $image, 2)[0];
@@ -577,9 +573,8 @@ class AssetsController extends Controller
         $csv = Reader::createFromPath(Input::file('user_import_csv'));
         $csv->setNewline("\r\n");
         //get the first row, usually the CSV header
-        //$headers = $csv->fetchOne();
-
-        $results = $csv->fetchAssoc();
+        $csv->setHeaderOffset(0);
+        $results = $csv->getRecords();
         $item = array();
         $status = array();
         $status['error'] = array();
@@ -604,25 +599,25 @@ class AssetsController extends Controller
                 if ($asset = Asset::where('asset_tag', '=', $asset_tag)->first()) {
                     $item[$asset_tag][$batch_counter]['asset_id'] = $asset->id;
 
-                    $base_username = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $item[$asset_tag][$batch_counter]['name']);
+                    $base_username = User::generateFormattedNameFromFullName($item[$asset_tag][$batch_counter]['name'], Setting::getSettings()->username_format);
                     $user = User::where('username', '=', $base_username['username']);
                     $user_query = ' on username '.$base_username['username'];
 
                     if ($request->input('match_firstnamelastname')=='1') {
-                        $firstnamedotlastname = User::generateFormattedNameFromFullName('firstname.lastname', $item[$asset_tag][$batch_counter]['name']);
+                        $firstnamedotlastname = User::generateFormattedNameFromFullName($item[$asset_tag][$batch_counter]['name'], 'firstname.lastname');
                         $item[$asset_tag][$batch_counter]['username'][] = $firstnamedotlastname['username'];
                         $user->orWhere('username', '=', $firstnamedotlastname['username']);
                         $user_query .= ', or on username '.$firstnamedotlastname['username'];
                     }
 
                     if ($request->input('match_flastname')=='1') {
-                        $flastname = User::generateFormattedNameFromFullName('filastname', $item[$asset_tag][$batch_counter]['name']);
+                        $flastname = User::generateFormattedNameFromFullName( $item[$asset_tag][$batch_counter]['name'], 'filastname');
                         $item[$asset_tag][$batch_counter]['username'][] = $flastname['username'];
                         $user->orWhere('username', '=', $flastname['username']);
                         $user_query .= ', or on username '.$flastname['username'];
                     }
                     if ($request->input('match_firstname')=='1') {
-                        $firstname = User::generateFormattedNameFromFullName('firstname', $item[$asset_tag][$batch_counter]['name']);
+                        $firstname = User::generateFormattedNameFromFullName( $item[$asset_tag][$batch_counter]['name'], 'firstname');
                         $item[$asset_tag][$batch_counter]['username'][] = $firstname['username'];
                         $user->orWhere('username', '=', $firstname['username']);
                         $user_query .= ', or on username '.$firstname['username'];

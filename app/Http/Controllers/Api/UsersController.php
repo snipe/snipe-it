@@ -56,31 +56,31 @@ class UsersController extends Controller
             'users.zip',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department','assets','licenses','accessories','consumables')
-            ->withCount('assets','licenses','accessories','consumables');
+            ->withCount('assets as assets_count','licenses as licneses_count','accessories as accessories_count','consumables as consumables_count');
         $users = Company::scopeCompanyables($users);
 
 
-        if (($request->has('deleted')) && ($request->input('deleted')=='true')) {
+        if (($request->filled('deleted')) && ($request->input('deleted')=='true')) {
             $users = $users->GetDeleted();
         }
 
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $users = $users->where('users.company_id', '=', $request->input('company_id'));
         }
 
-        if ($request->has('location_id')) {
+        if ($request->filled('location_id')) {
             $users = $users->where('users.location_id', '=', $request->input('location_id'));
         }
 
-        if ($request->has('group_id')) {
+        if ($request->filled('group_id')) {
             $users = $users->ByGroup($request->get('group_id'));
         }
 
-        if ($request->has('department_id')) {
+        if ($request->filled('department_id')) {
             $users = $users->where('users.department_id','=',$request->input('department_id'));
         }
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
 
@@ -105,7 +105,7 @@ class UsersController extends Controller
                         'assets','accessories', 'consumables','licenses','groups','activated','created_at',
                         'two_factor_enrolled','two_factor_optin','last_login', 'assets_count', 'licenses_count',
                         'consumables_count', 'accessories_count', 'phone', 'address', 'city', 'state',
-                        'country', 'zip'
+                        'country', 'zip', 'id'
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
@@ -146,7 +146,7 @@ class UsersController extends Controller
 
         $users = Company::scopeCompanyables($users);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $users = $users->where('first_name', 'LIKE', '%'.$request->get('search').'%')
                 ->orWhere('last_name', 'LIKE', '%'.$request->get('search').'%')
                 ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
@@ -199,7 +199,11 @@ class UsersController extends Controller
         $tmp_pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
         $user->password = bcrypt($request->get('password', $tmp_pass));
 
+
         if ($user->save()) {
+            if ($request->filled('groups')) {
+                $user->groups()->sync($request->input('groups'));
+            }
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.create')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
@@ -240,7 +244,7 @@ class UsersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot be your own manager'));
         }
 
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
 
@@ -249,6 +253,9 @@ class UsersController extends Controller
             ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
 
         if ($user->save()) {
+            if ($request->filled('groups')) {
+                $user->groups()->sync($request->input('groups'));
+            }
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
         }
 
@@ -292,7 +299,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
         $this->authorize('view', Asset::class);
-        $assets = Asset::where('assigned_to', '=', $id)->with('model')->get();
+        $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model')->get();
         return (new AssetsTransformer)->transformAssets($assets, $assets->count());
     }
 
@@ -309,7 +316,7 @@ class UsersController extends Controller
 
         $this->authorize('update', User::class);
 
-        if ($request->has('id')) {
+        if ($request->filled('id')) {
             try {
                 $user = User::find($request->get('id'));
                 $user->two_factor_secret = null;

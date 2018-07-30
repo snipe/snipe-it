@@ -5,24 +5,24 @@ Route::group([ 'prefix' => 'components','middleware' => ['auth'] ], function () 
 
     Route::get(
         '{componentID}/checkout',
-        [ 'as' => 'checkout/component', 'uses' => 'ComponentsController@getCheckout' ]
+        [ 'as' => 'checkout/component', 'uses' => 'Components\ComponentCheckoutController@create' ]
     );
     Route::post(
         '{componentID}/checkout',
-        [ 'as' => 'checkout/component', 'uses' => 'ComponentsController@postCheckout' ]
+        [ 'as' => 'checkout/component', 'uses' => 'Components\ComponentCheckoutController@store' ]
     );
     Route::get(
         '{componentID}/checkin',
-        [ 'as' => 'checkin/component', 'uses' => 'ComponentsController@getCheckin' ]
+        [ 'as' => 'checkin/component', 'uses' => 'Components\ComponentCheckinController@create' ]
     );
     Route::post(
         '{componentID}/checkin',
-        [ 'as' => 'component.checkin.save', 'uses' => 'ComponentsController@postCheckin' ]
+        [ 'as' => 'component.checkin.save', 'uses' => 'Components\ComponentCheckinController@store' ]
     );
 
 });
 
-Route::resource('components', 'ComponentsController', [
+Route::resource('components', 'Components\ComponentsController', [
     'middleware' => ['auth'],
     'parameters' => ['component' => 'component_id']
 ]);

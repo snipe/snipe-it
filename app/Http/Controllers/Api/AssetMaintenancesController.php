@@ -40,7 +40,7 @@ class AssetMaintenancesController extends Controller
             $maintenances = $maintenances->TextSearch(e($request->input('search')));
         }
 
-        if ($request->has('asset_id')) {
+        if ($request->filled('asset_id')) {
             $maintenances->where('asset_id', '=', $request->input('asset_id'));
         }
 

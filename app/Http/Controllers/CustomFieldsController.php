@@ -2,18 +2,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomFieldRequest;
-use View;
 use App\Models\CustomFieldset;
 use App\Models\CustomField;
-use Input;
-use Validator;
+use Illuminate\Support\Facades\Input;
 use Redirect;
-use App\Models\AssetModel;
-use Lang;
-use Auth;
-use Illuminate\Http\Request;
-use App\Helpers\Helper;
-use Log;
+use Illuminate\Support\Facades\Auth;
+
 
 /**
  * This controller handles all actions related to Custom Asset Fields for
@@ -29,12 +23,13 @@ class CustomFieldsController extends Controller
 {
 
     /**
-    * Returns a view with a listing of custom fields.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return View
-    */
+     * Returns a view with a listing of custom fields.
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @since [v1.8]
+     * @return \Illuminate\Support\Facades\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function index()
     {
         $this->authorize('view', CustomField::class);
@@ -45,17 +40,15 @@ class CustomFieldsController extends Controller
     }
 
 
-
-
-
     /**
-    * Returns a view with a form to create a new custom field.
-    *
-    * @see CustomFieldsController::storeField()
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return View
-    */
+     * Returns a view with a form to create a new custom field.
+     *
+     * @see CustomFieldsController::storeField()
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @since [v1.8]
+     * @return \Illuminate\Support\Facades\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function create()
     {
         $this->authorize('create', CustomField::class);
@@ -65,13 +58,14 @@ class CustomFieldsController extends Controller
 
 
     /**
-    * Validates and stores a new custom field.
-    *
-    * @see CustomFieldsController::createField()
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return Redirect
-    */
+     * Validates and stores a new custom field.
+     *
+     * @see CustomFieldsController::createField()
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @since [v1.8]
+     * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function store(CustomFieldRequest $request)
     {
         $this->authorize('create', CustomField::class);
@@ -83,21 +77,23 @@ class CustomFieldsController extends Controller
             "field_values" => $request->get("field_values"),
             "field_encrypted" => $request->get("field_encrypted", 0),
             "show_in_email" => $request->get("show_in_email", 0),
-            "user_id" => Auth::user()->id
+            "user_id" => Auth::id()
         ]);
 
 
-        if ($request->has("custom_format")) {
+        if ($request->filled("custom_format")) {
             $field->format = e($request->get("custom_format"));
         } else {
             $field->format = e($request->get("format"));
         }
 
         if ($field->save()) {
+
             return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.create.success'));
-        } else {
-            return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.field.create.error'));
         }
+
+        return redirect()->back()->withInput()
+            ->with('error', trans('admin/custom_fields/message.field.create.error'));
 
     }
 
@@ -108,6 +104,7 @@ class CustomFieldsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function deleteFieldFromFieldset($field_id, $fieldset_id)
     {
@@ -116,19 +113,21 @@ class CustomFieldsController extends Controller
         $this->authorize('update', $field);
 
         if ($field->fieldset()->detach($fieldset_id)) {
-            return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])->with("success", trans('admin/custom_fields/message.field.delete.success'));
+            return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])
+                ->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
 
         return redirect()->back()->withErrors(['message' => "Field is in-use"]);
     }
 
     /**
-    * Delete a custom field.
-    *
-    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-    * @since [v1.8]
-    * @return Redirect
-    */
+     * Delete a custom field.
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @since [v1.8]
+     * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function destroy($field_id)
     {
         $field = CustomField::find($field_id);
@@ -137,22 +136,22 @@ class CustomFieldsController extends Controller
 
         if ($field->fieldset->count()>0) {
             return redirect()->back()->withErrors(['message' => "Field is in-use"]);
-        } else {
-            $field->delete();
-            return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
+        $field->delete();
+        return redirect()->route("fields.index")
+            ->with("success", trans('admin/custom_fields/message.field.delete.success'));
     }
 
 
-
     /**
-    * Return a view to edit a custom field
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param  int  $id
-    * @since [v4.0]
-    * @return View
-    */
+     * Return a view to edit a custom field
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $id
+     * @since [v4.0]
+     * @return \Illuminate\Support\Facades\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function edit($id)
     {
         $field = CustomField::find($id);
@@ -164,15 +163,16 @@ class CustomFieldsController extends Controller
 
 
     /**
-    * Store the updated field
-    *
-    * @todo Allow encrypting/decrypting if encryption status changes
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param  int  $id
-    * @since [v4.0]
-    * @return Redirect
-    */
+     * Store the updated field
+     *
+     * @todo Allow encrypting/decrypting if encryption status changes
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int $id
+     * @since [v4.0]
+     * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(CustomFieldRequest $request, $id)
     {
         $field =  CustomField::find($id);
@@ -182,7 +182,7 @@ class CustomFieldsController extends Controller
         $field->name = e($request->get("name"));
         $field->element = e($request->get("element"));
         $field->field_values = e($request->get("field_values"));
-        $field->user_id = Auth::user()->id;
+        $field->user_id = Auth::id();
         $field->help_text = $request->get("help_text");
         $field->show_in_email = $request->get("show_in_email", 0);
 

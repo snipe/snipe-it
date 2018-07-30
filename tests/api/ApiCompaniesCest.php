@@ -32,7 +32,7 @@ class ApiCompaniesCest
         $response = json_decode($I->grabResponse(), true);
         // dd($response);
         // sample verify
-        $company = App\Models\Company::withCount('assets','licenses','accessories','consumables','components','users')
+        $company = App\Models\Company::withCount('assets as assets_count','licenses as licenses_count','accessories as accessories_count','consumables as consumables_count','components as components_count','users as users_count')
             ->orderByDesc('created_at')->take(10)->get()->shuffle()->first();
 
         $I->seeResponseContainsJson($I->removeTimestamps((new CompaniesTransformer)->transformCompany($company)));

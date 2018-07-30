@@ -80,7 +80,9 @@ class CheckoutConsumableNotification extends Notification
             /**
              * Send an email if an email should be sent at checkin/checkout
              */
+
             if ((method_exists($this->item, 'checkin_email')) && ($this->item->checkin_email())) {
+
                 $notifyBy[1] = 'mail';
             }            
 
