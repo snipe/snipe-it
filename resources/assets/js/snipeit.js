@@ -240,6 +240,93 @@ $(document).ready(function () {
 
     });
 
+	function getSelect2Value(element) {
+		
+		// if the passed object is not a jquery object, assuming 'element' is a selector
+		if (!(element instanceof jQuery)) element = $(element);
+
+		var select = element.data("select2");
+
+		// There's two different locations where the select2-generated input element can be. 
+		searchElement = select.dropdown.$search || select.$container.find(".select2-search__field");
+
+		var value = searchElement.val();
+		return value;
+	}
+	
+	$(".select2-hidden-accessible").on('select2:selecting', function (e) {
+		var data = e.params.args.data;
+		var isMouseUp = false;
+		var element = $(this);
+		var value = getSelect2Value(element);
+		
+		if(e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
+		
+		// if selected item does not match typed text, do not allow it to pass - force close for ajax.
+		if(!isMouseUp) {
+			if(value.toLowerCase() && data.text.toLowerCase().indexOf(value) < 0) {
+				e.preventDefault();
+
+				element.select2('close');
+				
+			// if it does match, we set a flag in the event (which gets passed to subsequent events), telling it not to worry about the ajax
+			} else if(value.toLowerCase() && data.text.toLowerCase().indexOf(value) > -1) {
+				e.params.args.noForceAjax = true;
+			}
+		}
+	});
+	
+	$(".select2-hidden-accessible").on('select2:closing', function (e) {
+		var element = $(this);
+		var value = getSelect2Value(element);
+		var noForceAjax = false;
+		var isMouseUp = false;
+		if(e.params.args.originalSelect2Event) noForceAjax = e.params.args.originalSelect2Event.noForceAjax;
+		if(e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
+		
+		if(value && !noForceAjax && !isMouseUp) {
+			var endpoint = element.data("endpoint");
+			var assetStatusType = element.data("asset-status-type");
+			$.ajax({
+				url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist?search='+value+'&page=1' + (assetStatusType ? '&assetStatusType='+assetStatusType : ''),
+				dataType: 'json',
+				headers: {
+					"X-Requested-With": 'XMLHttpRequest',
+					"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+				},
+			}).done(function(response) {;
+				var currentlySelected = element.select2('data').map(x => +x.id).filter(x => {return x !== 0});
+				
+				// makes sure we're not selecting the same thing twice for multiples
+				var filteredResponse = response.items.filter(function(item) {
+					return currentlySelected.indexOf(+item.id) < 0;
+				});
+
+				var first = (currentlySelected.length > 0) ? filteredResponse[0] : response.items[0];
+				
+				if(first && first.id) {
+					first.selected = true;
+					
+					if($("option[value='" + first.id + "']", element).length < 1) {
+						var option = new Option(first.text, first.id, true, true);
+						element.append(option);
+					} else {
+						var isMultiple = element.attr("multiple") == "multiple";
+						element.val(isMultiple? element.val().concat(first.id) : element.val(first.id));
+					}
+					element.trigger('change');
+
+					element.trigger({
+						type: 'select2:select',
+						params: {
+							data: first
+						}
+					});
+				}
+			});
+		}
+	});
+
     function formatDatalist (datalist) {
         var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
         if (datalist.loading) {
