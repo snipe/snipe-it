@@ -209,8 +209,8 @@ class LicensesController extends Controller
                 ->where('id', $licenseModel->id)
                 ->update(array('assigned_to' => null,'asset_id' => null));
 
-            $licenseSeats = $licenseModel->licenseseats();
-            $licenseSeats->delete();
+            $licenses = $licenseModel->licenseseats();
+            $licenses->delete();
             $licenseModel->delete();
 
             // Redirect to the licenses management page

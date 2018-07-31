@@ -8,7 +8,7 @@ use App\Http\Transformers\LicenseSeatsTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Models\Company;
 use App\Models\LicenseModel;
-use App\Models\LicenseSeat;
+use App\Models\License;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -200,8 +200,8 @@ class LicensesController extends Controller
                 ->where('id', $licenseModel->id)
                 ->update(array('assigned_to' => null,'asset_id' => null));
 
-            $licenseSeats = $licenseModel->licenseseats();
-            $licenseSeats->delete();
+            $license = $licenseModel->licenseseats();
+            $license->delete();
             $licenseModel->delete();
 
             // Redirect to the licenses management page
@@ -225,7 +225,7 @@ class LicensesController extends Controller
 
             $this->authorize('view', $licenseModel);
 
-            $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
+            $seats = License::where('license_id', $licenseId)->with('license', 'user', 'asset');
 
             $offset = request('offset', 0);
             $limit = request('limit', 50);

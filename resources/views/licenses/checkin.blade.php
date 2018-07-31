@@ -17,12 +17,12 @@
     <div class="row">
         <!-- left column -->
         <div class="col-md-7">
-            <form class="form-horizontal" method="post" action="{{ route('licenses.checkin.save', $licenseSeat->id) }}" autocomplete="off">
+            <form class="form-horizontal" method="post" action="{{ route('licenses.checkin.save', $license->id) }}" autocomplete="off">
                 {{csrf_field()}}
 
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title"> {{ $licenseSeat->license->name }}</h3>
+                        <h3 class="box-title"> {{ $license->license->name }}</h3>
                     </div>
                     <div class="box-body">
 
@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.name') }}</label>
                 <div class="col-md-6">
-                    <p class="form-control-static">{{ $licenseSeat->license->name }}</p>
+                    <p class="form-control-static">{{ $license->license->name }}</p>
                 </div>
             </div>
 
@@ -38,7 +38,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.serial') }}</label>
                 <div class="col-md-6">
-                    <p class="form-control-static">{{ $licenseSeat->license->serial }}</p>
+                    <p class="form-control-static">{{ $license->license->serial }}</p>
                 </div>
             </div>
 
@@ -46,7 +46,7 @@
             <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                 <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                 <div class="col-md-7">
-                    <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $licenseSeat->note) }}</textarea>
+                    <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $license->note) }}</textarea>
                     {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                 </div>
             </div>

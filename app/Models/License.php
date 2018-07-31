@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Notifications\CheckoutLicenseNotification;
 use App\Notifications\CheckinLicenseNotification;
 
-class LicenseSeat extends Model implements ICompanyableChild
+class License extends Model implements ICompanyableChild
 {
     use CompanyableChildTrait;
     use SoftDeletes;

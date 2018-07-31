@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Licenses;
 
 use App\Models\Asset;
 use App\Models\LicenseModel;
-use App\Models\LicenseSeat;
+use App\Models\License;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,21 +20,21 @@ class LicenseCheckinController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
-     * @param int $seatId
+     * @param int $licenseId
      * @param string $backTo
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create($seatId = null, $backTo = null)
+    public function create($licenseId = null, $backTo = null)
     {
         // Check if the asset exists
-        if (is_null($licenseSeat = LicenseSeat::find($seatId)) || is_null($licenseModel = LicenseModel::find($licenseSeat->license_id))) {
+        if (is_null($license = License::find($licenseId)) || is_null($licenseModel = LicenseModel::find($license->license_id))) {
             // Redirect to the asset management page with error
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
         $this->authorize('checkout', $licenseModel);
-        return view('licenses/checkin', compact('licenseSeat'))->with('backto', $backTo);
+        return view('licenses/checkin', compact('license'))->with('backto', $backTo);
     }
 
 
@@ -44,20 +44,20 @@ class LicenseCheckinController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see LicenseCheckinController::create() method that provides the form view
      * @since [v1.0]
-     * @param int $seatId
+     * @param int $licenseId
      * @param string $backTo
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store($seatId = null, $backTo = null)
+    public function store($licenseId = null, $backTo = null)
     {
         // Check if the asset exists
-        if (is_null($licenseSeat = LicenseSeat::find($seatId))) {
+        if (is_null($license = License::find($licenseId))) {
             // Redirect to the asset management page with error
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
-        $licenseModel = LicenseModel::find($licenseSeat->license_id);
+        $licenseModel = LicenseModel::find($license->license_id);
         $this->authorize('checkout', $licenseModel);
 
         if (!$licenseModel->reassignable) {
@@ -80,19 +80,19 @@ class LicenseCheckinController extends Controller
             // Ooops.. something went wrong
             return redirect()->back()->withInput()->withErrors($validator);
         }
-        $return_to = User::find($licenseSeat->assigned_to);
+        $return_to = User::find($license->assigned_to);
 
         // Update the asset data
-        $licenseSeat->assigned_to                   = null;
-        $licenseSeat->asset_id                      = null;
+        $license->assigned_to                   = null;
+        $license->asset_id                      = null;
 
         // Was the asset updated?
-        if ($licenseSeat->save()) {
-            $licenseSeat->logCheckin($return_to, e(request('note')));
+        if ($license->save()) {
+            $license->logCheckin($return_to, e(request('note')));
             if ($backTo=='user') {
                 return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
             }
-            return redirect()->route("licenses.show", $licenseSeat->license_id)->with('success', trans('admin/licenses/message.checkin.success'));
+            return redirect()->route("licenses.show", $license->license_id)->with('success', trans('admin/licenses/message.checkin.success'));
         }
 
         // Redirect to the licenseModel page with error

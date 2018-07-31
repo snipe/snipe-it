@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\LicenseSeat;
+use App\Models\License;
 use App\Models\LicenseModel;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,7 +21,7 @@ class LicenseSeatsTransformer
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformLicenseSeat (LicenseSeat $seat, $seat_count)
+    public function transformLicenseSeat (License $seat, $seat_count)
     {
         $array = [
             'id' => (int) $seat->id,

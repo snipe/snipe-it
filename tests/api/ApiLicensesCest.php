@@ -144,9 +144,9 @@ class ApiLicensesCest
         $licenseModel = factory(\App\Models\LicenseModel::class)->states('acrobat')->create([
             'name' => "Soon to be deleted"
         ]);
-        $licenseSeat = $licenseModel->freeSeat();
-        $licenseSeat->assigned_to = $this->user->id;
-        $licenseSeat->save();
+        $license = $licenseModel->freeSeat();
+        $license->assigned_to = $this->user->id;
+        $license->save();
         $I->assertInstanceOf(\App\Models\LicenseModel::class, $licenseModel);
 
         // delete
