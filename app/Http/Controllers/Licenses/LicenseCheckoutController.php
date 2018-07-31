@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Licenses;
 
 use App\Http\Requests\LicenseCheckoutRequest;
 use App\Models\Asset;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,17 +29,17 @@ class LicenseCheckoutController extends Controller
      */
     public function create($licenseId)
     {
-        // Check that the license is valid
-        if ($license = License::find($licenseId)) {
+        // Check that the licenseModel is valid
+        if ($licenseModel = LicenseModel::find($licenseId)) {
 
-            // If the license is valid, check that there is an available seat
-            if ($license->avail_seats_count < 1) {
-                return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
+            // If the licenseModel is valid, check that there is an available seat
+            if ($licenseModel->avail_seats_count < 1) {
+                return redirect()->route('licenses.index')->with('error', 'There are no available seats for this licenseModel');
             }
         }
 
-        $this->authorize('checkout', $license);
-        return view('licenses/checkout', compact('license'));
+        $this->authorize('checkout', $licenseModel);
+        return view('licenses/checkout', compact('licenseModel'));
     }
 
 
@@ -56,13 +56,13 @@ class LicenseCheckoutController extends Controller
 
     public function store(LicenseCheckoutRequest $request, $licenseId, $seatId = null)
     {
-        if (!$license = License::find($licenseId)) {
+        if (!$licenseModel = LicenseModel::find($licenseId)) {
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
-        $this->authorize('checkout', $license);
+        $this->authorize('checkout', $licenseModel);
 
-        $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
+        $licenseSeat = $this->findLicenseSeatToCheckout($licenseModel, $seatId);
         $licenseSeat->user_id = Auth::id();
 
         $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));

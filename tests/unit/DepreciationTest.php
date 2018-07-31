@@ -39,7 +39,7 @@ class DepreciationTest extends BaseTest
      {
          $category = $this->createValidCategory('license-graphics-category');
          $depreciation = $this->createValidDepreciation('computer', ['name' => 'New Depreciation']);
-         $licenses = factory(App\Models\License::class, 5)->states('photoshop')->create([
+         $licenses = factory(App\Models\LicenseModel::class, 5)->states('photoshop')->create([
              'depreciation_id'=>$depreciation->id,
              'category_id' => $category->id
          ]);

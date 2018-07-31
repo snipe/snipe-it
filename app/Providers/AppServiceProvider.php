@@ -2,8 +2,8 @@
 namespace App\Providers;
 
 
+use App\Models\LicenseModel;
 use Illuminate\Support\ServiceProvider;
-use Log;
 use Illuminate\Support\Facades\Schema;
 use App\Observers\AssetObserver;
 use App\Observers\LicenseObserver;
@@ -11,7 +11,6 @@ use App\Observers\AccessoryObserver;
 use App\Observers\ConsumableObserver;
 use App\Observers\ComponentObserver;
 use App\Models\Asset;
-use App\Models\License;
 use App\Models\Accessory;
 use App\Models\Consumable;
 use App\Models\Component;
@@ -40,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
         Accessory::observe(AccessoryObserver::class);
         Component::observe(ComponentObserver::class);
         Consumable::observe(ConsumableObserver::class);
-        License::observe(LicenseObserver::class);
+        LicenseModel::observe(LicenseObserver::class);
 
 
     }

@@ -160,7 +160,7 @@ class Supplier extends SnipeModel
      */
     public function licenses()
     {
-        return $this->hasMany('\App\Models\License', 'supplier_id');
+        return $this->hasMany('\App\Models\LicenseModel', 'supplier_id');
     }
 
     /**

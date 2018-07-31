@@ -47,7 +47,7 @@
                         </thead>
 
                         <tbody>
-                            @foreach ($licenses as $license)
+                            @foreach ($licenseModels as $license)
                             <tr>
                                 <td>{{ is_null($license->company) ? '' : $license->company->name }}</td>
                                 <td>{{ $license->name }}</td>

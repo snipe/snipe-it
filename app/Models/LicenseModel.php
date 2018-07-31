@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Watson\Validating\ValidatingTrait;
 
-class License extends Depreciable
+class LicenseModel extends Depreciable
 {
     protected $presenter = 'App\Presenters\LicensePresenter';
 
@@ -166,7 +166,7 @@ class License extends Depreciable
             }
             // Log Deletion of seats.
             $logAction = new Actionlog;
-            $logAction->item_type = License::class;
+            $logAction->item_type = LicenseModel::class;
             $logAction->item_id = $license->id;
             $logAction->user_id = Auth::id() ?: 1; // We don't have an id while running the importer from CLI.
             $logAction->note = "deleted ${change} seats";
@@ -184,7 +184,7 @@ class License extends Depreciable
         if ($license->id) {
             //Log the addition of license to the log.
             $logAction = new Actionlog();
-            $logAction->item_type = License::class;
+            $logAction->item_type = LicenseModel::class;
             $logAction->item_id = $license->id;
             $logAction->user_id = Auth::id() ?: 1; // Importer.
             $logAction->note = "added ${change} seats";
@@ -192,6 +192,16 @@ class License extends Depreciable
             $logAction->logaction('add seats');
         }
         return true;
+    }
+
+
+    /**
+     * Default Foreign Key relationship--reimplemented because we renamed model compared to table
+     * @return string
+     */
+    public function getForeignKey()
+    {
+        return 'license_id';
     }
 
     /**
@@ -356,7 +366,7 @@ class License extends Depreciable
     public function assetlog()
     {
         return $this->hasMany('\App\Models\Actionlog', 'item_id')
-            ->where('item_type', '=', License::class)
+            ->where('item_type', '=', LicenseModel::class)
             ->orderBy('created_at', 'desc');
     }
 
@@ -370,7 +380,7 @@ class License extends Depreciable
     public function uploads()
     {
         return $this->hasMany('\App\Models\Actionlog', 'item_id')
-            ->where('item_type', '=', License::class)
+            ->where('item_type', '=', LicenseModel::class)
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
             ->orderBy('created_at', 'desc');
@@ -629,7 +639,7 @@ class License extends Depreciable
     public static function getExpiringLicenses($days = 60)
     {
 
-        return License::whereNotNull('expiration_date')
+        return LicenseModel::whereNotNull('expiration_date')
         ->whereNull('deleted_at')
         ->whereRaw(DB::raw('DATE_SUB(`expiration_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) '))
         ->where('expiration_date', '>', date("Y-m-d"))

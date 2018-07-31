@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Licenses;
 
 use App\Http\Requests\AssetFileRequest;
 use App\Models\Actionlog;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
@@ -27,34 +27,34 @@ class LicenseFilesController extends Controller
      */
     public function store(AssetFileRequest $request, $licenseId = null)
     {
-        $license = License::find($licenseId);
-        // the license is valid
+        $licenseModel = LicenseModel::find($licenseId);
+        // the licenseModel is valid
         $destinationPath = config('app.private_uploads').'/licenses';
 
-        if (isset($license->id)) {
-            $this->authorize('update', $license);
+        if (isset($licenseModel->id)) {
+            $this->authorize('update', $licenseModel);
 
             if (Input::hasFile('file')) {
                 $upload_success = false;
                 foreach (Input::file('file') as $file) {
                     $extension = $file->getClientOriginalExtension();
-                    $filename = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+                    $filename = 'license-'.$licenseModel->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
 
                     $upload_success = $file->storeAs('storage/private_uploads/licenses', $filename);
 
                     //Log the upload to the log
-                    $license->logUpload($filename, e($request->input('notes')));
+                    $licenseModel->logUpload($filename, e($request->input('notes')));
                 }
                 // This being called from a modal seems to confuse redirect()->back()
                 // It thinks we should go to the dashboard.  As this is only used
                 // from the modal at present, hardcode the redirect.  Longterm
                 // maybe we evaluate something else.
                 if ($upload_success) {
-                    return redirect()->route('licenses.show', $license->id)->with('success', trans('admin/licenses/message.upload.success'));
+                    return redirect()->route('licenses.show', $licenseModel->id)->with('success', trans('admin/licenses/message.upload.success'));
                 }
-                return redirect()->route('licenses.show', $license->id)->with('error', trans('admin/licenses/message.upload.error'));
+                return redirect()->route('licenses.show', $licenseModel->id)->with('error', trans('admin/licenses/message.upload.error'));
             }
-            return redirect()->route('licenses.show', $license->id)->with('error', trans('admin/licenses/message.upload.nofiles'));
+            return redirect()->route('licenses.show', $licenseModel->id)->with('error', trans('admin/licenses/message.upload.nofiles'));
         }
         // Prepare the error message
         return redirect()->route('licenses.index')
@@ -74,13 +74,13 @@ class LicenseFilesController extends Controller
      */
     public function destroy($licenseId = null, $fileId = null)
     {
-        $license = License::find($licenseId);
+        $licenseModel = LicenseModel::find($licenseId);
 
         $rel_path = 'storage/private_uploads/licenses';
 
         // the asset is valid
-        if (isset($license->id)) {
-            $this->authorize('update', $license);
+        if (isset($licenseModel->id)) {
+            $this->authorize('update', $licenseModel);
             $log = Actionlog::find($fileId);
             if (file_exists(base_path().'/'.$rel_path.'/'.$log->filename)) {
                 Storage::delete($rel_path.'/'.$log->filename);
@@ -109,11 +109,11 @@ class LicenseFilesController extends Controller
     public function show($licenseId = null, $fileId = null, $download = true)
     {
 
-        $license = License::find($licenseId);
+        $licenseModel = LicenseModel::find($licenseId);
 
-        // the license is valid
-        if (isset($license->id)) {
-            $this->authorize('view', $license);
+        // the licenseModel is valid
+        if (isset($licenseModel->id)) {
+            $this->authorize('view', $licenseModel);
             $log = Actionlog::find($fileId);
             $file = $log->get_src('licenses');
 

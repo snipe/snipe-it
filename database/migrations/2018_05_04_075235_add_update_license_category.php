@@ -1,10 +1,10 @@
 <?php
 
+use App\Models\LicenseModel;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use App\Models\Category;
-use App\Models\License;
 
 class AddUpdateLicenseCategory extends Migration
 {
@@ -22,7 +22,7 @@ class AddUpdateLicenseCategory extends Migration
         $category->category_type = 'license';
 
         if ($category->save()) {
-            License::whereNull('category_id')->withTrashed()
+            LicenseModel::whereNull('category_id')->withTrashed()
                 ->update(['category_id' => $category->id]);
         }
 
@@ -38,7 +38,7 @@ class AddUpdateLicenseCategory extends Migration
 
         App\Models\Category::where('name', 'Misc Software')->forceDelete();
 
-        License::whereNotNull('category_id')
+        LicenseModel::whereNotNull('category_id')
             ->update(['category_id' => null]);
     }
 }

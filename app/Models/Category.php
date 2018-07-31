@@ -102,7 +102,7 @@ class Category extends SnipeModel
      */
     public function licenses()
     {
-        return $this->hasMany('\App\Models\License');
+        return $this->hasMany('\App\Models\LicenseModel');
     }
 
     /**

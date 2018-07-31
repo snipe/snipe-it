@@ -9,7 +9,7 @@
 |
 */
 
-$factory->define(App\Models\License::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\LicenseModel::class, function (Faker\Generator $faker) {
 
     return [
         'user_id' => 1,
@@ -27,7 +27,7 @@ $factory->define(App\Models\License::class, function (Faker\Generator $faker) {
 });
 
 // 1
-$factory->state(App\Models\License::class, 'photoshop', function ($faker) {
+$factory->state(App\Models\LicenseModel::class, 'photoshop', function ($faker) {
     $data =  [
         'name' => 'Photoshop',
         'manufacturer_id' => 9,
@@ -43,7 +43,7 @@ $factory->state(App\Models\License::class, 'photoshop', function ($faker) {
 });
 
 // 2
-$factory->state(App\Models\License::class, 'acrobat', function ($faker) {
+$factory->state(App\Models\LicenseModel::class, 'acrobat', function ($faker) {
 
     $data =  [
         'name' => 'Acrobat',
@@ -58,7 +58,7 @@ $factory->state(App\Models\License::class, 'acrobat', function ($faker) {
 });
 
 // 3
-$factory->state(App\Models\License::class, 'indesign', function ($faker) {
+$factory->state(App\Models\LicenseModel::class, 'indesign', function ($faker) {
     $data =  [
         'name' => 'InDesign',
         'manufacturer_id' => 9,
@@ -73,7 +73,7 @@ $factory->state(App\Models\License::class, 'indesign', function ($faker) {
 
 
 // 4
-$factory->state(App\Models\License::class, 'office', function ($faker) {
+$factory->state(App\Models\LicenseModel::class, 'office', function ($faker) {
     $data =  [
         'name' => 'Office',
         'manufacturer_id' => 2,

@@ -8,7 +8,7 @@ use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\CustomField;
 use App\Models\Depreciation;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
@@ -226,11 +226,11 @@ class ReportsController extends Controller
     public function getLicenseReport()
     {
         $this->authorize('reports.view');
-        $licenses = License::with('depreciation')->orderBy('created_at', 'DESC')
+        $licenseModels = LicenseModel::with('depreciation')->orderBy('created_at', 'DESC')
                            ->with('company')
                            ->get();
 
-        return view('reports/licenses', compact('licenses'));
+        return view('reports/licenses', compact('licenseModels'));
     }
 
     /**
@@ -244,7 +244,7 @@ class ReportsController extends Controller
     public function exportLicenseReport()
     {
         $this->authorize('reports.view');
-        $licenses = License::orderBy('created_at', 'DESC')->get();
+        $licenseModels = LicenseModel::orderBy('created_at', 'DESC')->get();
 
         $rows     = [ ];
         $header   = [
@@ -261,17 +261,17 @@ class ReportsController extends Controller
         $header = array_map('trim', $header);
         $rows[] = implode($header, ', ');
 
-        // Row per license
-        foreach ($licenses as $license) {
+        // Row per licenseModel
+        foreach ($licenseModels as $licenseModel) {
             $row   = [ ];
-            $row[] = e($license->name);
-            $row[] = e($license->serial);
-            $row[] = e($license->seats);
-            $row[] = $license->remaincount();
-            $row[] = $license->expiration_date;
-            $row[] = $license->purchase_date;
-            $row[] = ($license->depreciation!='') ? '' : e($license->depreciation->name);
-            $row[] = '"' . Helper::formatCurrencyOutput($license->purchase_cost) . '"';
+            $row[] = e($licenseModel->name);
+            $row[] = e($licenseModel->serial);
+            $row[] = e($licenseModel->seats);
+            $row[] = $licenseModel->remaincount();
+            $row[] = $licenseModel->expiration_date;
+            $row[] = $licenseModel->purchase_date;
+            $row[] = ($licenseModel->depreciation!='') ? '' : e($licenseModel->depreciation->name);
+            $row[] = '"' . Helper::formatCurrencyOutput($licenseModel->purchase_cost) . '"';
 
             $rows[] = implode($row, ',');
         }

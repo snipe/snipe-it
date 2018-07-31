@@ -2,23 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Accessory;
-use App\Models\Asset;
-use App\Models\AssetModel;
-use App\Models\Category;
-use App\Models\Component;
-use App\Models\Consumable;
-use App\Models\CustomField;
-use App\Models\CustomFieldset;
-use App\Models\Department;
-use App\Models\License;
-use App\Models\Location;
-use App\Models\Depreciation;
-use App\Models\Statuslabel;
-use App\Models\Supplier;
-use App\Models\Manufacturer;
-use App\Models\Company;
-use App\Models\User;
+use App\Models;
 use App\Policies\AccessoryPolicy;
 use App\Policies\AssetModelPolicy;
 use App\Policies\AssetPolicy;
@@ -51,23 +35,23 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Accessory::class => AccessoryPolicy::class,
-        Asset::class => AssetPolicy::class,
-        AssetModel::class => AssetModelPolicy::class,
-        Category::class => CategoryPolicy::class,
-        Component::class => ComponentPolicy::class,
-        Consumable::class => ConsumablePolicy::class,
-        CustomField::class => CustomFieldPolicy::class,
-        CustomFieldset::class => CustomFieldsetPolicy::class,
-        Department::class => DepartmentPolicy::class,
-        Depreciation::class => DepreciationPolicy::class,
-        License::class => LicensePolicy::class,
-        Location::class => LocationPolicy::class,
-        Statuslabel::class => StatuslabelPolicy::class,
-        Supplier::class => SupplierPolicy::class,
-        User::class => UserPolicy::class,
-        Manufacturer::class => ManufacturerPolicy::class,
-        Company::class => CompanyPolicy::class,
+        Models\Accessory::class => AccessoryPolicy::class,
+        Models\Asset::class => AssetPolicy::class,
+        Models\AssetModel::class => AssetModelPolicy::class,
+        Models\Category::class => CategoryPolicy::class,
+        Models\Component::class => ComponentPolicy::class,
+        Models\Consumable::class => ConsumablePolicy::class,
+        Models\CustomField::class => CustomFieldPolicy::class,
+        Models\CustomFieldset::class => CustomFieldsetPolicy::class,
+        Models\Department::class => DepartmentPolicy::class,
+        Models\Depreciation::class => DepreciationPolicy::class,
+        Models\LicenseModel::class => LicensePolicy::class,
+        Models\Location::class => LocationPolicy::class,
+        Models\Statuslabel::class => StatuslabelPolicy::class,
+        Models\Supplier::class => SupplierPolicy::class,
+        Models\User::class => UserPolicy::class,
+        Models\Manufacturer::class => ManufacturerPolicy::class,
+        Models\Company::class => CompanyPolicy::class,
     ];
 
     /**
@@ -140,18 +124,18 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('backend.interact', function ($user) {
-            return $user->can('view', Statuslabel::class)
-                || $user->can('view', AssetModel::class)
-                || $user->can('view', Category::class)
-                || $user->can('view', Manufacturer::class)
-                || $user->can('view', Supplier::class)
-                || $user->can('view', Department::class)
-                || $user->can('view', Location::class)
-                || $user->can('view', Company::class)
-                || $user->can('view', Manufacturer::class)
-                || $user->can('view', CustomField::class)
-                || $user->can('view', CustomFieldset::class)                
-                || $user->can('view', Depreciation::class);
+            return $user->can('view', Models\Statuslabel::class)
+                || $user->can('view', Models\AssetModel::class)
+                || $user->can('view', Models\Category::class)
+                || $user->can('view', Models\Manufacturer::class)
+                || $user->can('view', Models\Supplier::class)
+                || $user->can('view', Models\Department::class)
+                || $user->can('view', Models\Location::class)
+                || $user->can('view', Models\Company::class)
+                || $user->can('view', Models\Manufacturer::class)
+                || $user->can('view', Models\CustomField::class)
+                || $user->can('view', Models\CustomFieldset::class)
+                || $user->can('view', Models\Depreciation::class);
         });
     }
 }

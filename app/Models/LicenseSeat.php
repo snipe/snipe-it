@@ -37,7 +37,7 @@ class LicenseSeat extends Model implements ICompanyableChild
      */
     public function license()
     {
-        return $this->belongsTo('\App\Models\License', 'license_id');
+        return $this->belongsTo('\App\Models\LicenseModel', 'license_id');
     }
 
     /**

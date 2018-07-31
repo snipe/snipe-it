@@ -70,6 +70,7 @@ class Depreciation extends SnipeModel
      */
     public function licenses()
     {
-        return $this->hasMany('\App\Models\License', 'depreciation_id');
+
+        return $this->hasMany('\App\Models\LicenseModel', 'depreciation_id');
     }     
 }

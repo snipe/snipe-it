@@ -5,7 +5,7 @@ namespace App\Importer;
 use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Category;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\Manufacturer;
 
 class LicenseImporter extends ItemImporter
@@ -28,25 +28,25 @@ class LicenseImporter extends ItemImporter
      * @author Daniel Melzter
      * @since 4.0
      * @param array $row
-     * @return License|mixed|null
+     * @return LicenseModel|mixed|null
      */
     public function createLicenseIfNotExists(array $row)
     {
         $editingLicense = false;
-        $license = License::where('name', $this->item['name'])
+        $licenseModel = LicenseModel::where('name', $this->item['name'])
                     ->where('serial', $this->item['serial'])
                     ->first();
-        if ($license) {
+        if ($licenseModel) {
             if (!$this->updating) {
-                $this->log('A matching License ' . $this->item['name'] . 'with serial ' . $this->item['serial'] . ' already exists');
+                $this->log('A matching LicenseModel ' . $this->item['name'] . 'with serial ' . $this->item['serial'] . ' already exists');
                 return;
             }
 
-            $this->log("Updating License");
+            $this->log("Updating LicenseModel");
             $editingLicense = true;
         } else {
-            $this->log("No Matching License, Creating a new one");
-            $license = new License;
+            $this->log("No Matching LicenseModel, Creating a new one");
+            $licenseModel = new LicenseModel;
         }
         $asset_tag = $this->item['asset_tag'] = $this->findCsvMatch($row, 'asset_tag'); // used for checkout out to an asset.
         $this->item['expiration_date'] = $this->findCsvMatch($row, 'expiration_date');
@@ -59,21 +59,21 @@ class LicenseImporter extends ItemImporter
         $this->item['termination_date'] = $this->findCsvMatch($row, 'termination_date');
 
         if ($editingLicense) {
-            $license->update($this->sanitizeItemForUpdating($license));
+            $licenseModel->update($this->sanitizeItemForUpdating($licenseModel));
         } else {
-            $license->fill($this->sanitizeItemForStoring($license));
+            $licenseModel->fill($this->sanitizeItemForStoring($licenseModel));
         }
         //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
-        // $license->unsetEventDispatcher();
-        if ($license->save()) {
-            $license->logCreate('Imported using csv importer');
-            $this->log('License ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
+        // $licenseModel->unsetEventDispatcher();
+        if ($licenseModel->save()) {
+            $licenseModel->logCreate('Imported using csv importer');
+            $this->log('LicenseModel ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
 
             // Lets try to checkout seats if the fields exist and we have seats.
-            if ($license->seats > 0) {
+            if ($licenseModel->seats > 0) {
                 $checkout_target = $this->item['checkout_target'];
                 $asset = Asset::where('asset_tag', $asset_tag)->first();
-                $targetLicense = $license->licenseSeats()->first();
+                $targetLicense = $licenseModel->licenseSeats()->first();
                 if ($checkout_target) {
                     $targetLicense->assigned_to = $checkout_target->id;
                     if ($asset) {
@@ -87,6 +87,6 @@ class LicenseImporter extends ItemImporter
             }
             return;
         }
-        $this->logError($license, 'License "' . $this->item['name'].'"');
+        $this->logError($licenseModel, 'LicenseModel "' . $this->item['name'].'"');
     }
 }

@@ -78,7 +78,7 @@ class Manufacturer extends SnipeModel
 
     public function licenses()
     {
-        return $this->hasMany('\App\Models\License', 'manufacturer_id');
+        return $this->hasMany('\App\Models\LicenseModel', 'manufacturer_id');
     }
 
     public function accessories()

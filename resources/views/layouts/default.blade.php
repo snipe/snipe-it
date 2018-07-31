@@ -143,7 +143,7 @@
                       </a>
                   </li>
                   @endcan
-                  @can('view', \App\Models\License::class)
+                  @can('view', \App\Models\LicenseModel::class)
                   <li {!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('licenses.index') }}">
                           <i class="fa fa-floppy-o"></i>
@@ -202,7 +202,7 @@
                               </a>
                       </li>
                        @endcan
-                       @can('create', \App\Models\License::class)
+                       @can('create', \App\Models\LicenseModel::class)
                        <li {!! (Request::is('licenses/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('licenses.create') }}">
                                <i class="fa fa-floppy-o fa-fw"></i>
@@ -480,7 +480,7 @@
                 </ul>
               </li>
               @endcan
-              @can('view', \App\Models\License::class)
+              @can('view', \App\Models\LicenseModel::class)
               <li{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                   <a href="{{ route('licenses.index') }}">
                     <i class="fa fa-floppy-o"></i>

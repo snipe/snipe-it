@@ -21,7 +21,7 @@
 
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> {{ $license->name }}</h3>
+                    <h3 class="box-title"> {{ $licenseModel->name }}</h3>
                 </div>
                 <div class="box-body">
 
@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.name') }}</label>
                         <div class="col-md-6">
-                            <p class="form-control-static">{{ $license->name }}</p>
+                            <p class="form-control-static">{{ $licenseModel->name }}</p>
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.serial') }}</label>
                         <div class="col-md-9">
-                            <p class="form-control-static" style="word-wrap: break-word;">{{ $license->serial }}</p>
+                            <p class="form-control-static" style="word-wrap: break-word;">{{ $licenseModel->serial }}</p>
                         </div>
                     </div>
 
@@ -59,24 +59,24 @@
                 </div>
 
 
-                @if ($license->requireAcceptance() || $license->getEula() || ($snipeSettings->slack_endpoint!=''))
+                @if ($licenseModel->requireAcceptance() || $licenseModel->getEula() || ($snipeSettings->slack_endpoint!=''))
                     <div class="form-group notification-callout">
                         <div class="col-md-8 col-md-offset-3">
                             <div class="callout callout-info">
 
-                                @if ($license->requireAcceptance())
+                                @if ($licenseModel->requireAcceptance())
                                     <i class="fa fa-envelope"></i>
                                     {{ trans('admin/categories/general.required_acceptance') }}
                                     <br>
                                 @endif
 
-                                @if ($license->getEula())
+                                @if ($licenseModel->getEula())
                                     <i class="fa fa-envelope"></i>
                                     {{ trans('admin/categories/general.required_eula') }}
                                     <br>
                                 @endif
 
-                                @if (($license->category) && ($license->category->checkin_email))
+                                @if (($licenseModel->category) && ($licenseModel->category->checkin_email))
                                     <i class="fa fa-envelope"></i>
                                     {{ trans('admin/categories/general.checkin_email_notification') }}
                                     <br>

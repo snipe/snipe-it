@@ -12,7 +12,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Group;
 use App\Models\Ldap;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Setting;

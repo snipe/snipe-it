@@ -3,20 +3,20 @@
 {{-- Page title --}}
 @section('title')
 {{ trans('admin/licenses/general.view') }}
- - {{ $license->name }}
+ - {{ $licenseModel->name }}
 @parent
 @stop
 
 {{-- Right header --}}
 @section('header_right')
 <div class="btn-group pull-right">
-  @can('update', $license)
+  @can('update', $licenseModel)
     <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-        <li><a href="{{ route('licenses.edit', ['license' => $license->id]) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
-        <li><a href="{{ route('clone/license', $license->id) }}">{{ trans('admin/licenses/general.clone') }}</a></li>
+        <li><a href="{{ route('licenses.edit', ['license' => $licenseModel->id]) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
+        <li><a href="{{ route('clone/license', $licenseModel->id) }}">{{ trans('admin/licenses/general.clone') }}</a></li>
     </ul>
    @endcan
 </div>
@@ -56,9 +56,9 @@
                         data-sort-order="asc"
                         data-sort-name="name"
                         class="table table-striped snipe-table"
-                        data-url="{{ route('api.license.seats',['license_id' => $license->id]) }}"
+                        data-url="{{ route('api.license.seats',['license_id' => $licenseModel->id]) }}"
                         data-export-options='{
-                        "fileName": "export-seats-{{ str_slug($license->name) }}-{{ date('Y-m-d') }}",
+                        "fileName": "export-seats-{{ str_slug($licenseModel->name) }}-{{ date('Y-m-d') }}",
                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                         }'>
                 </table>
@@ -71,41 +71,41 @@
               <div class="table">
                 <table class="table">
                   <tbody>
-                    @if (!is_null($license->company))
+                    @if (!is_null($licenseModel->company))
                     <tr>
                       <td>{{ trans('general.company') }}</td>
-                      <td>{{ $license->company->name }}</td>
+                      <td>{{ $licenseModel->company->name }}</td>
                     </tr>
                     @endif
 
-                    @if ($license->manufacturer)
+                    @if ($licenseModel->manufacturer)
                       <tr>
                         <td>{{ trans('admin/hardware/form.manufacturer') }}:</td>
                         <td><p style="line-height: 23px;">
                           @can('view', \App\Models\Manufacturer::class)
-                            <a href="{{ route('manufacturers.show', $license->manufacturer->id) }}">
-                              {{ $license->manufacturer->name }}
+                            <a href="{{ route('manufacturers.show', $licenseModel->manufacturer->id) }}">
+                              {{ $licenseModel->manufacturer->name }}
                             </a>
                           @else
-                            {{ $license->manufacturer->name }}
+                            {{ $licenseModel->manufacturer->name }}
                           @endcan
 
-                          @if ($license->manufacturer->url)
-                            <br><i class="fa fa-globe"></i> <a href="{{ $license->manufacturer->url }}" rel="noopener">{{ $license->manufacturer->url }}</a>
+                          @if ($licenseModel->manufacturer->url)
+                            <br><i class="fa fa-globe"></i> <a href="{{ $licenseModel->manufacturer->url }}" rel="noopener">{{ $licenseModel->manufacturer->url }}</a>
                           @endif
 
-                          @if ($license->manufacturer->support_url)
+                          @if ($licenseModel->manufacturer->support_url)
                             <br><i class="fa fa-life-ring"></i>
-                              <a href="{{ $license->manufacturer->support_url }}"  rel="noopener">{{ $license->manufacturer->support_url }}</a>
+                              <a href="{{ $licenseModel->manufacturer->support_url }}"  rel="noopener">{{ $licenseModel->manufacturer->support_url }}</a>
                           @endif
 
-                          @if ($license->manufacturer->support_phone)
+                          @if ($licenseModel->manufacturer->support_phone)
                             <br><i class="fa fa-phone"></i>
-                              <a href="tel:{{ $license->manufacturer->support_phone }}">{{ $license->manufacturer->support_phone }}</a>
+                              <a href="tel:{{ $licenseModel->manufacturer->support_phone }}">{{ $licenseModel->manufacturer->support_phone }}</a>
                           @endif
 
-                          @if ($license->manufacturer->support_email)
-                            <br><i class="fa fa-envelope"></i> <a href="mailto:{{ $license->manufacturer->support_email }}">{{ $license->manufacturer->support_email }}</a>
+                          @if ($licenseModel->manufacturer->support_email)
+                            <br><i class="fa fa-envelope"></i> <a href="mailto:{{ $licenseModel->manufacturer->support_email }}">{{ $licenseModel->manufacturer->support_email }}</a>
                           @endif
                           </p>
                         </td>
@@ -113,12 +113,12 @@
                     @endif
 
 
-                      @if (!is_null($license->serial))
+                      @if (!is_null($licenseModel->serial))
                       <tr>
                         <td>{{ trans('admin/licenses/form.license_key') }}: </td>
                         <td style="word-wrap: break-word;overflow-wrap: break-word;word-break: break-word;">
-                          @can('viewKeys', $license)
-                            {!! nl2br(e($license->serial)) !!}
+                          @can('viewKeys', $licenseModel)
+                            {!! nl2br(e($licenseModel->serial)) !!}
                           @else
                            ------------
                           @endcan
@@ -127,57 +127,57 @@
                       </tr>
                       @endif
 
-                    @if ($license->category)
+                    @if ($licenseModel->category)
                       <tr>
                         <td>{{ trans('general.category') }}: </td>
                         <td style="word-wrap: break-word;overflow-wrap: break-word;word-break: break-word;">
-                          <a href="{{ route('categories.show', $license->category->id) }}">{{ $license->category->name }}</a>
+                          <a href="{{ route('categories.show', $licenseModel->category->id) }}">{{ $licenseModel->category->name }}</a>
                         </td>
                       </tr>
                     @endif
 
 
-                    @if ($license->license_name!='')
+                    @if ($licenseModel->license_name!='')
                     <tr>
                       <td>{{ trans('admin/licenses/form.to_name') }}: </td>
-                      <td>{{ $license->license_name }}</td>
+                      <td>{{ $licenseModel->license_name }}</td>
                     </tr>
                     @endif
 
-                    @if ($license->license_email!='')
+                    @if ($licenseModel->license_email!='')
                     <tr>
                       <td>{{ trans('admin/licenses/form.to_email') }}:</td>
-                      <td>{{ $license->license_email }}</td>
+                      <td>{{ $licenseModel->license_email }}</td>
                     </tr>
                     @endif
 
-                    @if ($license->supplier_id)
+                    @if ($licenseModel->supplier_id)
                     <tr>
                       <td>{{ trans('general.supplier') }}:
                       </td>
                       <td>
-                        <a href="{{ route('suppliers.show', $license->supplier_id) }}">
-                          {{ $license->supplier->name }}
+                        <a href="{{ route('suppliers.show', $licenseModel->supplier_id) }}">
+                          {{ $licenseModel->supplier->name }}
                         </a>
                       </td>
                     </tr>
                     @endif
 
-                    @if (isset($license->expiration_date))
+                    @if (isset($licenseModel->expiration_date))
                     <tr>
                       <td>{{ trans('admin/licenses/form.expiration') }}:</td>
-                      <td>{{ $license->expiration_date }}</td>
+                      <td>{{ $licenseModel->expiration_date }}</td>
                     </tr>
                     @endif
 
-                    @if ($license->depreciation)
+                    @if ($licenseModel->depreciation)
                       <tr>
                         <td>
                           {{ trans('admin/hardware/form.depreciation') }}:
                         </td>
                         <td>
-                          {{ $license->depreciation->name }}
-                          ({{ $license->depreciation->months }}
+                          {{ $licenseModel->depreciation->name }}
+                          ({{ $licenseModel->depreciation->months }}
                           {{ trans('admin/hardware/form.months') }}
                           )
                         </td>
@@ -187,7 +187,7 @@
                           {{ trans('admin/hardware/form.depreciates_on') }}:
                         </td>
                         <td>
-                          {{ $license->depreciated_date()->format("Y-m-d") }}
+                          {{ $licenseModel->depreciated_date()->format("Y-m-d") }}
                         </td>
                       </tr>
 
@@ -196,68 +196,68 @@
                           {{ trans('admin/hardware/form.fully_depreciated') }}:
                         </td>
                         <td>
-                        @if ($license->time_until_depreciated()->y > 0)
-                          {{ $license->time_until_depreciated()->y }}
+                        @if ($licenseModel->time_until_depreciated()->y > 0)
+                          {{ $licenseModel->time_until_depreciated()->y }}
                           {{ trans('admin/hardware/form.years') }},
                         @endif
-                        {{ $license->time_until_depreciated()->m }}
+                        {{ $licenseModel->time_until_depreciated()->m }}
                         {{ trans('admin/hardware/form.months') }}
                         </td>
                       </tr>
                     @endif
 
-                    @if ($license->purchase_order)
+                    @if ($licenseModel->purchase_order)
                     <tr>
                       <td>
                         {{ trans('admin/licenses/form.purchase_order') }}:
                       </td>
                       <td>
-                        {{ $license->purchase_order }}
+                        {{ $licenseModel->purchase_order }}
                       </td>
                     </tr>
                     @endif
 
-                    @if (isset($license->purchase_date))
+                    @if (isset($licenseModel->purchase_date))
                     <tr>
                       <td>{{ trans('general.purchase_date') }}:</td>
-                      <td>{{ $license->purchase_date }}</td>
+                      <td>{{ $licenseModel->purchase_date }}</td>
                     </tr>
                     @endif
 
-                    @if ($license->purchase_cost > 0)
+                    @if ($licenseModel->purchase_cost > 0)
                     <tr>
                       <td>{{ trans('general.purchase_cost') }}:</td>
                       <td>
                         {{ $snipeSettings->default_currency }}
-                        {{ \App\Helpers\Helper::formatCurrencyOutput($license->purchase_cost) }}
+                        {{ \App\Helpers\Helper::formatCurrencyOutput($licenseModel->purchase_cost) }}
                       </td>
                     </tr>
                     @endif
 
-                    @if ($license->order_number)
+                    @if ($licenseModel->order_number)
                     <tr>
                       <td>{{ trans('general.order_number') }}:</td>
-                      <td>{{ $license->order_number }}</td>
+                      <td>{{ $licenseModel->order_number }}</td>
                     </tr>
                     @endif
 
-                    @if (($license->seats) && ($license->seats) > 0)
+                    @if (($licenseModel->seats) && ($licenseModel->seats) > 0)
                     <tr>
                       <td>{{ trans('admin/licenses/form.seats') }}:</td>
-                      <td>{{ $license->seats }}</td>
+                      <td>{{ $licenseModel->seats }}</td>
                     </tr>
                     @endif
 
                     <tr>
                       <td>{{ trans('admin/licenses/form.reassignable') }}:</td>
-                      <td>{{ $license->reassignable ? 'Yes' : 'No' }}</td>
+                      <td>{{ $licenseModel->reassignable ? 'Yes' : 'No' }}</td>
                     </tr>
 
-                    @if ($license->notes)
+                    @if ($licenseModel->notes)
                     <tr>
                       <td>{{ trans('general.notes') }}:</td>
                       <td>
-                        {!! nl2br(e($license->notes)) !!}
+                        {!! nl2br(e($licenseModel->notes)) !!}
                       </td>
                     </tr>
                     @endif
@@ -286,7 +286,7 @@
                 data-sort-name="name"
                 class="table table-striped snipe-table"
                 data-export-options='{
-                    "fileName": "export-license-uploads-{{ str_slug($license->name) }}-{{ date('Y-m-d') }}",
+                    "fileName": "export-license-uploads-{{ str_slug($licenseModel->name) }}-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
                     }'>
             <thead>
@@ -301,8 +301,8 @@
               </tr>
             </thead>
             <tbody>
-            @if ($license->uploads->count() > 0)
-              @foreach ($license->uploads as $file)
+            @if ($licenseModel->uploads->count() > 0)
+              @foreach ($licenseModel->uploads as $file)
               <tr>
                 <td><i class="{{ \App\Helpers\Helper::filetype_icon($file->filename) }} icon-med"></i></td>
                 <td>
@@ -318,17 +318,17 @@
                 <td>
                 @if ($file->filename)
                     @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('licenses')))
-                      <a href="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
+                      <a href="{{ route('show.licensefile', ['licenseId' => $licenseModel->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $licenseModel->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
                     @endif
                 @endif
                 </td>
                 <td>
                   @if ($file->filename)
-                    <a href="{{ route('show.licensefile', [$license->id, $file->id, 'download' => 'true']) }}" class="btn btn-default"><i class="fa fa-download"></i></a>
+                    <a href="{{ route('show.licensefile', [$licenseModel->id, $file->id, 'download' => 'true']) }}" class="btn btn-default"><i class="fa fa-download"></i></a>
                   @endif
                 </td>
                 <td>
-                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
+                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$licenseModel->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
                 </td>
               </tr>
               @endforeach
@@ -358,10 +358,10 @@
                       data-show-export="true"
                       data-sort-order="desc"
                       data-export-options='{
-                       "fileName": "export-{{ str_slug($license->name) }}-history-{{ date('Y-m-d') }}",
+                       "fileName": "export-{{ str_slug($licenseModel->name) }}-history-{{ date('Y-m-d') }}",
                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                      }'
-                      data-url="{{ route('api.activity.index', ['item_id' => $license->id, 'item_type' => 'license']) }}">
+                      data-url="{{ route('api.activity.index', ['item_id' => $licenseModel->id, 'item_type' => 'license']) }}">
 
                 <thead>
                 <tr>
@@ -386,8 +386,8 @@
   </div>  <!-- /.col -->
 </div> <!-- /.row -->
 
-@can('update', \App\Models\License::class)
-  @include ('modals.upload-file', ['item_type' => 'license', 'item_id' => $license->id])
+@can('update', \App\Models\LicenseModel::class)
+  @include ('modals.upload-file', ['item_type' => 'license', 'item_id' => $licenseModel->id])
 @endcan
 
 @stop

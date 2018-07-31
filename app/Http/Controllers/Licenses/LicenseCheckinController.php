@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Licenses;
 
 use App\Models\Asset;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -28,12 +28,12 @@ class LicenseCheckinController extends Controller
     public function create($seatId = null, $backTo = null)
     {
         // Check if the asset exists
-        if (is_null($licenseSeat = LicenseSeat::find($seatId)) || is_null($license = License::find($licenseSeat->license_id))) {
+        if (is_null($licenseSeat = LicenseSeat::find($seatId)) || is_null($licenseModel = LicenseModel::find($licenseSeat->license_id))) {
             // Redirect to the asset management page with error
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
-        $this->authorize('checkout', $license);
+        $this->authorize('checkout', $licenseModel);
         return view('licenses/checkin', compact('licenseSeat'))->with('backto', $backTo);
     }
 
@@ -57,12 +57,12 @@ class LicenseCheckinController extends Controller
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.not_found'));
         }
 
-        $license = License::find($licenseSeat->license_id);
-        $this->authorize('checkout', $license);
+        $licenseModel = LicenseModel::find($licenseSeat->license_id);
+        $this->authorize('checkout', $licenseModel);
 
-        if (!$license->reassignable) {
+        if (!$licenseModel->reassignable) {
             // Not allowed to checkin
-            Session::flash('error', 'License not reassignable.');
+            Session::flash('error', 'LicenseModel not reassignable.');
             return redirect()->back()->withInput();
         }
 
@@ -95,7 +95,7 @@ class LicenseCheckinController extends Controller
             return redirect()->route("licenses.show", $licenseSeat->license_id)->with('success', trans('admin/licenses/message.checkin.success'));
         }
 
-        // Redirect to the license page with error
+        // Redirect to the licenseModel page with error
         return redirect()->route("licenses.index")->with('error', trans('admin/licenses/message.checkin.error'));
     }
 

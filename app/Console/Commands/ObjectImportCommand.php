@@ -168,7 +168,7 @@ class ObjectImportCommand extends Command
         array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
         array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
         array('logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log') ),
-        array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Accessory, License, or User', 'Asset'),
+        array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Accessory, LicenseModel, or User', 'Asset'),
         array('web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer'),
         array('user_id', null, InputOption::VALUE_REQUIRED, 'ID of user creating items', 1),
         array('update', null, InputOption::VALUE_NONE, 'If a matching item is found, update item information'),

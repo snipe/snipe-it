@@ -4,18 +4,6 @@ namespace App\Providers;
 use Validator;
 use Illuminate\Support\ServiceProvider;
 use DB;
-use Log;
-use Illuminate\Support\Facades\Schema;
-use App\Observers\AssetObserver;
-use App\Observers\LicenseObserver;
-use App\Observers\AccessoryObserver;
-use App\Observers\ConsumableObserver;
-use App\Observers\ComponentObserver;
-use App\Models\Asset;
-use App\Models\License;
-use App\Models\Accessory;
-use App\Models\Consumable;
-use App\Models\Component;
 
 
 /**

@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Asset;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\Setting;
 use DB;
 use App\Notifications\ExpiringLicenseNotification;
@@ -55,9 +55,9 @@ class SendExpirationAlerts extends Command
         $this->info(trans_choice('mail.assets_warrantee_alert', $assets->count(), ['count'=>$assets->count(), 'threshold' => $threshold]));
 
         // Expiring licenses
-        $licenses = License::getExpiringLicenses($threshold);
+        $licenseModels = LicenseModel::getExpiringLicenses($threshold);
 
-        $this->info(trans_choice('mail.license_expiring_alert', $licenses->count(), ['count'=>$licenses->count(), 'threshold' => $threshold]));
+        $this->info(trans_choice('mail.license_expiring_alert', $licenseModels->count(), ['count'=>$licenseModels->count(), 'threshold' => $threshold]));
 
         $recipient = new \App\Models\Recipients\AlertRecipient();
 
@@ -68,8 +68,8 @@ class SendExpirationAlerts extends Command
                 $recipient->notify(new ExpiringAssetsNotification($assets, $threshold));
             }
 
-            if ($licenses->count() > 0) {
-                $recipient->notify(new ExpiringLicenseNotification($licenses, $threshold));
+            if ($licenseModels->count() > 0) {
+                $recipient->notify(new ExpiringLicenseNotification($licenseModels, $threshold));
             }
 
 

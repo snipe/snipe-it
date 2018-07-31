@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\LicenseSeatsTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Models\Company;
-use App\Models\License;
+use App\Models\LicenseModel;
 use App\Models\LicenseSeat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,61 +24,61 @@ class LicensesController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats as free_seats_count'));
+        $this->authorize('view', LicenseModel::class);
+        $licenseModels = Company::scopeCompanyables(LicenseModel::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats as free_seats_count'));
 
 
         if ($request->filled('company_id')) {
-            $licenses->where('company_id','=',$request->input('company_id'));
+            $licenseModels->where('company_id','=',$request->input('company_id'));
         }
 
         if ($request->filled('name')) {
-            $licenses->where('licenses.name','=',$request->input('name'));
+            $licenseModels->where('licenses.name','=',$request->input('name'));
         }
 
         if ($request->filled('product_key')) {
-            $licenses->where('licenses.serial','=',$request->input('product_key'));
+            $licenseModels->where('licenses.serial','=',$request->input('product_key'));
         }
 
         if ($request->filled('order_number')) {
-            $licenses->where('order_number','=',$request->input('order_number'));
+            $licenseModels->where('order_number','=',$request->input('order_number'));
         }
 
         if ($request->filled('purchase_order')) {
-            $licenses->where('purchase_order','=',$request->input('purchase_order'));
+            $licenseModels->where('purchase_order','=',$request->input('purchase_order'));
         }
 
         if ($request->filled('license_name')) {
-            $licenses->where('license_name','=',$request->input('license_name'));
+            $licenseModels->where('license_name','=',$request->input('license_name'));
         }
 
         if ($request->filled('license_email')) {
-            $licenses->where('license_email','=',$request->input('license_email'));
+            $licenseModels->where('license_email','=',$request->input('license_email'));
         }
 
         if ($request->filled('manufacturer_id')) {
-            $licenses->where('manufacturer_id','=',$request->input('manufacturer_id'));
+            $licenseModels->where('manufacturer_id','=',$request->input('manufacturer_id'));
         }
 
         if ($request->filled('supplier_id')) {
-            $licenses->where('supplier_id','=',$request->input('supplier_id'));
+            $licenseModels->where('supplier_id','=',$request->input('supplier_id'));
         }
 
         if ($request->filled('category_id')) {
-            $licenses->where('category_id','=',$request->input('category_id'));
+            $licenseModels->where('category_id','=',$request->input('category_id'));
         }
 
         if ($request->filled('depreciation_id')) {
-            $licenses->where('depreciation_id','=',$request->input('depreciation_id'));
+            $licenseModels->where('depreciation_id','=',$request->input('depreciation_id'));
         }
 
         if ($request->filled('supplier_id')) {
-            $licenses->where('supplier_id','=',$request->input('supplier_id'));
+            $licenseModels->where('supplier_id','=',$request->input('supplier_id'));
         }
 
 
         if ($request->filled('search')) {
-            $licenses = $licenses->TextSearch($request->input('search'));
+            $licenseModels = $licenseModels->TextSearch($request->input('search'));
         }
 
 
@@ -89,30 +89,30 @@ class LicensesController extends Controller
 
         switch ($request->input('sort')) {
                 case 'manufacturer':
-                    $licenses = $licenses->leftJoin('manufacturers', 'licenses.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
+                    $licenseModels = $licenseModels->leftJoin('manufacturers', 'licenses.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
                 break;
             case 'supplier':
-                $licenses = $licenses->leftJoin('suppliers', 'licenses.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
+                $licenseModels = $licenseModels->leftJoin('suppliers', 'licenses.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
                 break;
             case 'category':
-                $licenses = $licenses->leftJoin('categories', 'licenses.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
+                $licenseModels = $licenseModels->leftJoin('categories', 'licenses.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
                 break;
             case 'company':
-                $licenses = $licenses->leftJoin('companies', 'licenses.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
+                $licenseModels = $licenseModels->leftJoin('companies', 'licenses.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
                 break;
             default:
                 $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','company','category','license_name','license_email','free_seats_count','seats'];
                 $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
-                $licenses = $licenses->orderBy($sort, $order);
+                $licenseModels = $licenseModels->orderBy($sort, $order);
                 break;
         }
 
 
 
-        $total = $licenses->count();
+        $total = $licenseModels->count();
 
-        $licenses = $licenses->skip($offset)->take($limit)->get();
-        return (new LicensesTransformer)->transformLicenses($licenses, $total);
+        $licenseModels = $licenseModels->skip($offset)->take($limit)->get();
+        return (new LicensesTransformer)->transformLicenses($licenseModels, $total);
 
     }
 
@@ -130,14 +130,14 @@ class LicensesController extends Controller
     public function store(Request $request)
     {
         //
-        $this->authorize('create', License::class);
-        $license = new License;
-        $license->fill($request->all());
+        $this->authorize('create', LicenseModel::class);
+        $licenseModel = new LicenseModel;
+        $licenseModel->fill($request->all());
 
-        if($license->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $license, trans('admin/licenses/message.create.success')));
+        if($licenseModel->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $licenseModel, trans('admin/licenses/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $license->getErrors()));
+        return response()->json(Helper::formatStandardApiResponse('error', null, $licenseModel->getErrors()));
     }
 
     /**
@@ -149,10 +149,10 @@ class LicensesController extends Controller
      */
     public function show($id)
     {
-        $this->authorize('view', License::class);
-        $license = License::findOrFail($id);
-        $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
-        return (new LicensesTransformer)->transformLicense($license);
+        $this->authorize('view', LicenseModel::class);
+        $licenseModel = LicenseModel::findOrFail($id);
+        $licenseModel = $licenseModel->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
+        return (new LicensesTransformer)->transformLicense($licenseModel);
     }
 
 
@@ -168,16 +168,16 @@ class LicensesController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->authorize('update', License::class);
+        $this->authorize('update', LicenseModel::class);
 
-        $license = License::findOrFail($id);
-        $license->fill($request->all());
+        $licenseModel = LicenseModel::findOrFail($id);
+        $licenseModel->fill($request->all());
 
-        if ($license->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $license, trans('admin/licenses/message.update.success')));
+        if ($licenseModel->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $licenseModel, trans('admin/licenses/message.update.success')));
         }
 
-        return Helper::formatStandardApiResponse('error', null, $license->getErrors());
+        return Helper::formatStandardApiResponse('error', null, $licenseModel->getErrors());
     }
 
     /**
@@ -191,18 +191,18 @@ class LicensesController extends Controller
     public function destroy($id)
     {
         //
-        $license = License::findOrFail($id);
-        $this->authorize('delete', $license);
+        $licenseModel = LicenseModel::findOrFail($id);
+        $this->authorize('delete', $licenseModel);
 
-        if($license->assigned_seats_count == 0) {
-            // Delete the license and the associated license seats
+        if($licenseModel->assigned_seats_count == 0) {
+            // Delete the licenseModel and the associated licenseModel seats
             DB::table('license_seats')
-                ->where('id', $license->id)
+                ->where('id', $licenseModel->id)
                 ->update(array('assigned_to' => null,'asset_id' => null));
 
-            $licenseSeats = $license->licenseseats();
+            $licenseSeats = $licenseModel->licenseseats();
             $licenseSeats->delete();
-            $license->delete();
+            $licenseModel->delete();
 
             // Redirect to the licenses management page
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/licenses/message.delete.success')));
@@ -221,9 +221,9 @@ class LicensesController extends Controller
     public function seats(Request $request, $licenseId)
     {
 
-        if ($license = License::find($licenseId)) {
+        if ($licenseModel = LicenseModel::find($licenseId)) {
 
-            $this->authorize('view', $license);
+            $this->authorize('view', $licenseModel);
 
             $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
 
