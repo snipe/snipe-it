@@ -31,8 +31,12 @@ class BulkUsersController extends Controller
     {
         $this->authorize('update', User::class);
 
+        // Make sure there were users selected
         if (($request->filled('ids')) && (count($request->input('ids')) > 0)) {
+
             $statuslabel_list = Helper::statusLabelList();
+
+            // Get the list of affected users
             $users = User::whereIn('id', array_keys(request('ids')))
                 ->with('groups', 'assets', 'licenses', 'accessories')->get();
 
@@ -46,7 +50,7 @@ class BulkUsersController extends Controller
             } elseif ($request->input('bulk_actions') == 'bulkpasswordreset') {
                 if ($users) {
                     foreach ($users as $user) {
-                        if ($user->email!='') {
+                        if (($user->activated=='1') && ($user->email!='')) {
                             $credentials = ['email' => $user->email];
                             Password::sendResetLink($credentials, function (Message $message) {
                                 $message->subject($this->getEmailSubject());
@@ -54,7 +58,7 @@ class BulkUsersController extends Controller
                         }
                     }
                 }
-                return redirect()->back()->with('success', 'The selected users with email addresses have been sent a password reset link.');
+                return redirect()->back()->with('success', trans('admin/users/message.password_resets_sent'));
 
             }
 
