@@ -225,7 +225,7 @@ class LicensesController extends Controller
 
             $this->authorize('view', $licenseModel);
 
-            $seats = License::where('license_id', $licenseId)->with('license', 'user', 'asset');
+            $seats = License::where('license_id', $licenseId)->with('model', 'user', 'asset');
 
             $offset = request('offset', 0);
             $limit = request('limit', 50);

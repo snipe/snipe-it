@@ -35,7 +35,7 @@ class License extends Model implements ICompanyableChild
      * @since [v1.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function license()
+    public function model()
     {
         return $this->belongsTo('\App\Models\LicenseModel', 'license_id');
     }
