@@ -61,7 +61,7 @@ class AccessoriesTransformer
     }
 
 
-    public function transformCheckedoutAccessory ($accessory_users, $total)
+    public function transformCheckedoutAccessory ($accessory, $accessory_users, $total)
     {
 
 
@@ -75,6 +75,7 @@ class AccessoriesTransformer
                 'first_name'=> e($user->first_name),
                 'last_name'=> e($user->last_name),
                 'employee_number' =>  e($user->employee_num),
+                'checkout_notes' => $accessory->lastCheckoutArray[0]['note'],
                 'type' => 'user',
                 'available_actions' => ['checkin' => true]
             ];

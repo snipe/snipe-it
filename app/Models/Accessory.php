@@ -140,6 +140,39 @@ class Accessory extends SnipeModel
         return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Accessory::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
+    /**
+     * Get the LAST checkout for this accessory.
+     * 
+     * This is kinda gross, but is necessary for how the accessory
+     * pivot stuff works for now.
+     *
+     * It looks like we should be able to use ->first() here and
+     * return an object instead of a collection, but we actually
+     * cannot.
+     *
+     * In short, you cannot execute the query defined when you're eager loading.
+     * and in order to avoid 1001 query problems when displaying the most
+     * recent checkout note, we have to eager load this.
+     *
+     * This means we technically return a collection of one here, and then
+     * in the controller, we convert that collection to an array, so we can
+     * use it in the transformer to display only the notes of the LAST
+     * checkout.
+     *
+     * It's super-mega-assy, but it's the best I could do for now.
+     *
+     * @author  A. Gianotto <snipe@snipe.net>
+     * @since v5.0.0
+     *
+     * @see \App\Http\Controllers\Api\AccessoriesController\checkedout()
+     *
+     */
+    public function lastCheckout()
+    {
+        return $this->assetlog()->where('action_type','=','checkout')->take(1);
+    }
+
+
     public function getImageUrl() {
         if ($this->image) {
             return url('/').'/uploads/accessories/'.$this->image;

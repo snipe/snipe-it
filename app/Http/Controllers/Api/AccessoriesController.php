@@ -136,14 +136,16 @@ class AccessoriesController extends Controller
     {
         $this->authorize('view', Accessory::class);
 
-        $accessory = Accessory::findOrFail($id);
+        $accessory = Accessory::with('lastCheckout')->findOrFail($id);
         if (!Company::isCurrentUserHasAccess($accessory)) {
             return ['total' => 0, 'rows' => []];
         }
+
+        $accessory->lastCheckoutArray = $accessory->lastCheckout->toArray();
         $accessory_users = $accessory->users;
         $total = $accessory_users->count();
 
-        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory_users, $total);
+        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $accessory_users, $total);
     }
 
 
