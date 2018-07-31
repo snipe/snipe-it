@@ -118,7 +118,7 @@ class Purge extends Command
             foreach ($licenseModels as $licenseModel) {
                 $this->info('- LicenseModel "'.$licenseModel->name.'" deleted.');
                 $licenseModel->assetlog()->forceDelete();
-                $licenseModel->licenseseats()->forceDelete();
+                $licenseModel->licenses()->forceDelete();
                 $licenseModel->forceDelete();
             }
 

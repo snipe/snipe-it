@@ -27,7 +27,7 @@ class ApiLicensesCest
         $response = json_decode($I->grabResponse(), true);
         // sample verify
         $licenseModel = App\Models\LicenseModel::orderByDesc('created_at')
-            ->withCount('freeSeats')
+            ->withCount('freeLicenses')
             ->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new LicensesTransformer)->transformLicense($licenseModel)));
     }
@@ -144,7 +144,7 @@ class ApiLicensesCest
         $licenseModel = factory(\App\Models\LicenseModel::class)->states('acrobat')->create([
             'name' => "Soon to be deleted"
         ]);
-        $license = $licenseModel->freeSeat();
+        $license = $licenseModel->freeLicense();
         $license->assigned_to = $this->user->id;
         $license->save();
         $I->assertInstanceOf(\App\Models\LicenseModel::class, $licenseModel);

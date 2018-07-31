@@ -25,7 +25,7 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', LicenseModel::class);
-        $licenseModels = Company::scopeCompanyables(LicenseModel::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats as free_seats_count'));
+        $licenseModels = Company::scopeCompanyables(LicenseModel::with('company', 'manufacturer', 'freeLicenses', 'supplier','category')->withCount('freeLicenses as free_license_count'));
 
 
         if ($request->filled('company_id')) {
@@ -194,13 +194,13 @@ class LicensesController extends Controller
         $licenseModel = LicenseModel::findOrFail($id);
         $this->authorize('delete', $licenseModel);
 
-        if($licenseModel->assigned_seats_count == 0) {
+        if($licenseModel->assigned_license_count == 0) {
             // Delete the licenseModel and the associated licenseModel seats
             DB::table('license_seats')
                 ->where('id', $licenseModel->id)
                 ->update(array('assigned_to' => null,'asset_id' => null));
 
-            $license = $licenseModel->licenseseats();
+            $license = $licenseModel->licenses();
             $license->delete();
             $licenseModel->delete();
 

@@ -122,38 +122,42 @@ class LicenseModel extends Depreciable
     {
         parent::boot();
         // We need to listen for created for the initial setup so that we have a license ID.
-        static::created(function ($license) {
-            $newSeatCount = $license->getAttributes()['seats'];
-            return static::adjustSeatCount($license, $oldSeatCount = 0, $newSeatCount);
+        static::created(function ($licenseModel) {
+            $newSeatCount = $licenseModel->getAttributes()['seats'];
+            return static::adjustLicenseCount($licenseModel, $oldSeatCount = 0, $newSeatCount);
         });
         // However, we listen for updating to be able to prevent the edit if we cannot delete enough seats.
-        static::updating(function ($license) {
-            $newSeatCount = $license->getAttributes()['seats'];
-            $oldSeatCount = isset($license->getOriginal()['seats']) ? $license->getOriginal()['seats'] : 0;
-            return static::adjustSeatCount($license, $oldSeatCount, $newSeatCount);
+        static::updating(function ($licenseModel) {
+            $newSeatCount = $licenseModel->getAttributes()['seats'];
+            $oldSeatCount = $licenseModel->getOriginal()['seats'] ?? 0;
+            return static::adjustLicenseCount($licenseModel, $oldSeatCount, $newSeatCount);
         });
     }
 
     /**
-     * Balance seat counts
+     * Balance license counts
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     * @param LicenseModel $licenseModel
+     * @param $oldCount
+     * @param $newCount
+     * @return bool
+     * @throws \Throwable
      */
-    public static function adjustSeatCount($license, $oldSeats, $newSeats)
+    public static function adjustLicenseCount(LicenseModel $licenseModel, $oldCount, $newCount)
     {
         // If the seats haven't changed, continue on happily.
-        if ($oldSeats==$newSeats) {
+        if ($oldCount==$newCount) {
             return true;
         }
         // On Create, we just make one for each of the seats.
-        $change = abs($oldSeats - $newSeats);
-        if ($oldSeats > $newSeats) {
-            $license->load('licenseseats.user');
+        $change = abs($oldCount - $newCount);
+        if ($oldCount > $newCount) {
+            $licenseModel->load('licenseseats.user');
 
             // Need to delete seats... lets see if if we have enough.
-            $seatsAvailableForDelete = $license->licenseseats->reject(function ($seat) {
+            $seatsAvailableForDelete = $licenseModel->licenses->reject(function ($seat) {
                 return (!! $seat->assigned_to) || (!! $seat->asset_id);
             });
 
@@ -167,7 +171,7 @@ class LicenseModel extends Depreciable
             // Log Deletion of seats.
             $logAction = new Actionlog;
             $logAction->item_type = LicenseModel::class;
-            $logAction->item_id = $license->id;
+            $logAction->item_id = $licenseModel->id;
             $logAction->user_id = Auth::id() ?: 1; // We don't have an id while running the importer from CLI.
             $logAction->note = "deleted ${change} seats";
             $logAction->target_id =  null;
@@ -175,17 +179,17 @@ class LicenseModel extends Depreciable
             return true;
         }
         // Else we're adding seats.
-        DB::transaction(function () use ($license, $oldSeats, $newSeats) {
-            for ($i = $oldSeats; $i < $newSeats; $i++) {
-                $license->licenseSeatsRelation()->save(new License, ['user_id' => Auth::id()]);
+        DB::transaction(function () use ($licenseModel, $oldCount, $newCount) {
+            for ($i = $oldCount; $i < $newCount; $i++) {
+                $licenseModel->licenseRelation()->save(new License, ['user_id' => Auth::id()]);
             }
         });
-        // On initail create, we shouldn't log the addition of seats.
-        if ($license->id) {
+        // On initial create, we shouldn't log the addition of seats.
+        if ($licenseModel->id) {
             //Log the addition of license to the log.
             $logAction = new Actionlog();
             $logAction->item_type = LicenseModel::class;
-            $logAction->item_id = $license->id;
+            $logAction->item_id = $licenseModel->id;
             $logAction->user_id = Auth::id() ?: 1; // Importer.
             $logAction->note = "added ${change} seats";
             $logAction->target_id =  null;
@@ -441,22 +445,22 @@ class LicenseModel extends Depreciable
      * @since [v2.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function licenseSeatsRelation()
+    public function licenseRelation()
     {
         return $this->hasMany(License::class)->whereNull('deleted_at')->selectRaw('license_id, count(*) as count')->groupBy('license_id');
     }
 
     /**
-     * Sets the license seat count attribute
+     * Sets the license count attribute
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v2.0]
      * @return int
      */
-    public function getLicenseSeatsCountAttribute()
+    public function getLicenseCountAttribute()
     {
-        if ($this->licenseSeatsRelation->first()) {
-            return $this->licenseSeatsRelation->first()->count;
+        if ($this->licenseRelation->first()) {
+            return $this->licenseRelation->first()->count;
         }
 
         return 0;
@@ -486,20 +490,20 @@ class LicenseModel extends Depreciable
      */
     public function availCount()
     {
-        return $this->licenseSeatsRelation()
+        return $this->licenseRelation()
             ->whereNull('asset_id')
             ->whereNull('assigned_to')
             ->whereNull('deleted_at');
     }
 
     /**
-     * Sets the available seats attribute
+     * Sets the available license attribute
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v3.0]
      * @return mixed
      */
-    public function getAvailSeatsCountAttribute()
+    public function getAvailLicenseCountAttribute()
     {
         if ($this->availCount->first()) {
             return $this->availCount->first()->count;
@@ -517,20 +521,20 @@ class LicenseModel extends Depreciable
      */
     public function assignedCount()
     {
-        return $this->licenseSeatsRelation()->where(function ($query) {
+        return $this->licenseRelation()->where(function ($query) {
             $query->whereNotNull('assigned_to')
             ->orWhereNotNull('asset_id');
         });
     }
 
     /**
-     * Sets the assigned seats attribute
+     * Sets the assigned license attribute
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v1.0]
      * @return int
      */
-    public function getAssignedSeatsCountAttribute()
+    public function getAssignedLicenseCountAttribute()
     {
         if ($this->assignedCount->first()) {
             return $this->assignedCount->first()->count;
@@ -548,8 +552,8 @@ class LicenseModel extends Depreciable
      */
     public function remaincount()
     {
-        $total = $this->licenseSeatsCount;
-        $taken =  $this->assigned_seats_count;
+        $total = $this->licenseCount;
+        $taken =  $this->assigned_license_count;
         $diff =   ($total - $taken);
         return $diff;
     }
@@ -563,7 +567,7 @@ class LicenseModel extends Depreciable
      */
     public function totalcount()
     {
-        $avail =  $this->availSeatsCount;
+        $avail =  $this->availLicenseCount;
         $taken =  $this->assignedcount();
         $diff =   ($avail + $taken);
         return $diff;
@@ -576,7 +580,7 @@ class LicenseModel extends Depreciable
      * @since [v1.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function licenseseats()
+    public function licenses()
     {
         return $this->hasMany('\App\Models\License');
     }
@@ -602,9 +606,9 @@ class LicenseModel extends Depreciable
      * @since [v3.0]
      * @return mixed
      */
-    public function freeSeat()
+    public function freeLicense()
     {
-        return  $this->licenseseats()
+        return  $this->licenses()
                     ->whereNull('deleted_at')
                     ->where(function ($query) {
                         $query->whereNull('assigned_to')
@@ -622,7 +626,7 @@ class LicenseModel extends Depreciable
      * @since [v1.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function freeSeats()
+    public function freeLicenses()
     {
         return $this->hasMany('\App\Models\License')->whereNull('assigned_to')->whereNull('deleted_at')->whereNull('asset_id');
     }

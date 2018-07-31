@@ -82,7 +82,7 @@ class Supplier extends SnipeModel
     }
 
     /**
-     * Sets the license seat count attribute
+     * Sets the license count attribute
      *
      * @todo I don't see the licenseSeatsRelation here?
      *
@@ -90,10 +90,10 @@ class Supplier extends SnipeModel
      * @since [v1.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function getLicenseSeatsCountAttribute()
+    public function getLicenseCountAttribute()
     {
-        if ($this->licenseSeatsRelation->first()) {
-            return $this->licenseSeatsRelation->first()->count;
+        if ($this->licenseRelation->first()) {
+            return $this->licenseRelation->first()->count;
         }
 
         return 0;

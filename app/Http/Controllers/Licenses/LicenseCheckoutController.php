@@ -33,7 +33,7 @@ class LicenseCheckoutController extends Controller
         if ($licenseModel = LicenseModel::find($licenseId)) {
 
             // If the licenseModel is valid, check that there is an available seat
-            if ($licenseModel->avail_seats_count < 1) {
+            if ($licenseModel->avail_license_count < 1) {
                 return redirect()->route('licenses.index')->with('error', 'There are no available seats for this licenseModel');
             }
         }
@@ -75,7 +75,7 @@ class LicenseCheckoutController extends Controller
 
     protected function findLicenseToCheckout(LicenseModel $licenseModel, $seatId)
     {
-        $license = License::find($seatId) ?? $licenseModel->freeSeat();
+        $license = License::find($seatId) ?? $licenseModel->freeLicense();
 
         if (!$license) {
             if ($seatId) {
