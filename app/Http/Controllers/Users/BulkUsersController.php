@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Password;
 
 class BulkUsersController extends Controller
 {
@@ -34,11 +35,29 @@ class BulkUsersController extends Controller
             $statuslabel_list = Helper::statusLabelList();
             $users = User::whereIn('id', array_keys(request('ids')))
                 ->with('groups', 'assets', 'licenses', 'accessories')->get();
+
             if ($request->input('bulk_actions') == 'edit') {
                 return view('users/bulk-edit', compact('users'))
                     ->with('groups', Group::pluck('name', 'id'));
+
+            } elseif ($request->input('bulk_actions') == 'delete') {
+                return view('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
+
+            } elseif ($request->input('bulk_actions') == 'bulkpasswordreset') {
+                if ($users) {
+                    foreach ($users as $user) {
+                        if ($user->email!='') {
+                            $credentials = ['email' => $user->email];
+                            Password::sendResetLink($credentials, function (Message $message) {
+                                $message->subject($this->getEmailSubject());
+                            });
+                        }
+                    }
+                }
+                return redirect()->back()->with('success', 'The selected users with email addresses have been sent a password reset link.');
+
             }
-            return view('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
+
         }
 
         return redirect()->back()->with('error', 'No users selected');
@@ -200,5 +219,7 @@ class BulkUsersController extends Controller
             $logAction->logaction('checkin from');
         }
     }
+
+
 
 }

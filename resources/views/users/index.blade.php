@@ -50,6 +50,7 @@
                   <select name="bulk_actions" class="form-control select2" style="width: 200px;">
                     <option value="delete">Bulk Checkin &amp; Delete</option>
                     <option value="edit">Bulk Edit</option>
+                    <option value="bulkpasswordreset">Send Password Reset</option>
                   </select>
                   <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
                 </div>
