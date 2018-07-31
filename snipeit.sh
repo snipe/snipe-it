@@ -67,7 +67,7 @@ clear
 
 readonly APP_USER="snipeitapp"
 readonly APP_NAME="snipeit"
-readonly APP_PATH="/var/www/$APP_NAME"
+readonly APP_PATH="/var/www/html/$APP_NAME"
 
 progress () {
   spin[0]="-"
@@ -457,6 +457,8 @@ case $distro in
     log "phpenmod mbstring"
     log "a2enmod rewrite"
     log "a2ensite $APP_NAME.conf"
+    log "mv /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/111-default.conf"
+    log "mv /etc/apache2/sites-enabled/snipeit.conf /etc/apache2/sites-enabled/000-snipeit.conf"
 
     set_hosts
 
