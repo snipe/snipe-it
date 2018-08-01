@@ -110,10 +110,10 @@ class DepreciationsController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete', Depreciation::class);
-        $depreciation = Depreciation::findOrFail($id);
+        $depreciation = Depreciation::withCount('models as models_count')->findOrFail($id);
         $this->authorize('delete', $depreciation);
 
-        if ($depreciation->has_models() > 0) {
+        if ($depreciation->models_count > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', trans('admin/depreciations/message.assoc_users')));
         }
 

@@ -76,10 +76,4 @@ class CreateAdmin extends Command
 
     }
 
-  //   protected function getArguments()
-  // 	{
-  // 		return array(
-  // 			array('username', InputArgument::REQUIRED, 'Username'),
-  // 		);
-    // }
 }

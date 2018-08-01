@@ -150,13 +150,13 @@ class DepreciationsController extends Controller
     public function destroy($depreciationId)
     {
         // Check if the depreciation exists
-        if (is_null($depreciation = Depreciation::find($depreciationId))) {
+        if (is_null($depreciation = Depreciation::withCount('models as models_count')->find($depreciationId))) {
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.not_found'));
         }
 
         $this->authorize('delete', $depreciation);
 
-        if ($depreciation->has_models() > 0) {
+        if ($depreciation->models_count > 0) {
             // Redirect to the asset management page
             return redirect()->route('depreciations.index')->with('error', trans('admin/depreciations/message.assoc_users'));
         }

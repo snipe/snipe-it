@@ -34,7 +34,7 @@ class CategoryTest extends BaseTest
          $category = $this->createValidCategory('asset-desktop-category');
          $models = factory(App\Models\AssetModel::class, 5)->states('mbp-13-model')->create(['category_id' => $category->id]);
 
-         $this->assertEquals(5, $category->has_models());
+         $this->assertEquals(5, $category->models->count());
          $this->assertCount(5, $category->models);
 
          $models->each(function($model) {

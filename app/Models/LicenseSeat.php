@@ -28,21 +28,50 @@ class LicenseSeat extends Model implements ICompanyableChild
         return ['asset', 'license'];
     }
 
+    /**
+     * Establishes the seat -> license relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function license()
     {
         return $this->belongsTo('\App\Models\License', 'license_id');
     }
 
+    /**
+     * Establishes the seat -> assignee relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function user()
     {
         return $this->belongsTo('\App\Models\User', 'assigned_to')->withTrashed();
     }
 
+    /**
+     * Establishes the seat -> asset relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function asset()
     {
         return $this->belongsTo('\App\Models\Asset', 'asset_id')->withTrashed();
     }
 
+    /**
+     * Determines the assigned seat's location based on user
+     * or asset its assigned to
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return string
+     */
     public function location()
     {
         if (($this->user) && ($this->user->location)) {

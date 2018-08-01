@@ -113,6 +113,13 @@ abstract class Importer
     // Cached Values for import lookups
     protected $customFields;
 
+    /**
+     * Sets up the database transaction and logging for the importer
+     *
+     * @return void
+     * @author Daniel Meltzer
+     * @since  5.0
+     */
     public function import()
     {
         $headerRow = $this->csv->fetchOne();

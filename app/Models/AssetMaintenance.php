@@ -22,7 +22,6 @@ class AssetMaintenance extends Model implements ICompanyableChild
 
     protected $dates = [ 'deleted_at', 'start_date' , 'completion_date'];
     protected $table = 'asset_maintenances';
-    // Declaring rules for form validation
     protected $rules = [
         'asset_id'               => 'required|integer',
         'supplier_id'            => 'required|integer',
