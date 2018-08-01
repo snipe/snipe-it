@@ -828,7 +828,7 @@
 
                         <td>
                           @if ($file->created_at)
-                            {{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
+                            {{ \App\Helpers\Helper::getFormattedDateObject($file->created_at, 'datetime', false) }}
                           @endif
                         </td>
 
