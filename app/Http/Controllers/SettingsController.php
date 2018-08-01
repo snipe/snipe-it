@@ -1103,4 +1103,8 @@ class SettingsController extends Controller
         }
 
     }
+
+    public function getLoginAttempts() {
+        return view('settings.logins');
+    }
 }

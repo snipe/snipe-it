@@ -11,6 +11,8 @@ use Mail;
 use App\Notifications\SlackTest;
 use Notification;
 use App\Notifications\MailTest;
+use App\Http\Transformers\LoginAttemptsTransformer;
+use DB;
 
 class SettingsController extends Controller
 {
@@ -140,6 +142,30 @@ class SettingsController extends Controller
             }
         }
         return response()->json(['message' => 'Mail would have been sent, but this application is in demo mode! '], 200);
+
+    }
+
+    /**
+     * Get a list of login attempts
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0.0]
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function showLoginAttempts(Request $request)
+    {
+        $allowed_columns = ['id', 'username', 'remote_ip', 'user_agent','successful','created_at'];
+
+        $login_attempts =  DB::table('login_attempts');
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'created_at';
+
+        $total = $login_attempts->count();
+        $login_attempts->orderBy($sort, $order);
+        $login_attempt_results = $login_attempts->skip(request('offset', 0))->take(request('limit',  20))->get();
+
+        return (new LoginAttemptsTransformer)->transformLoginAttempts($login_attempt_results, $total);
 
     }
 
