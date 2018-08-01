@@ -21,6 +21,7 @@
     "vue-template-compiler": "2.4.4"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.2.0",
     "blueimp-file-upload": "^9.18.0",
     "bootstrap": "^3.3.7",
     "bootstrap-colorpicker": "^2.5.1",

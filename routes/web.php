@@ -166,6 +166,8 @@ Route::group([ 'prefix' => 'admin','middleware' => ['auth', 'authorize:superuser
     Route::get('purge', ['as' => 'settings.purge.index', 'uses' => 'SettingsController@getPurge']);
     Route::post('purge', ['as' => 'settings.purge.save', 'uses' => 'SettingsController@postPurge']);
 
+    Route::get('login-attempts', ['as' => 'settings.logins.index','uses' => 'SettingsController@getLoginAttempts' ]);
+
     # Backups
     Route::group([ 'prefix' => 'backups', 'middleware' => 'auth' ], function () {
 
