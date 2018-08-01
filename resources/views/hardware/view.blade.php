@@ -553,7 +553,7 @@
           <div class="row">
             <div class="col-md-12">
               <!-- Licenses assets table -->
-              @if ($asset->licenses->count() > 0)
+              @if ($asset->licensesModels->count() > 0)
                 <table class="table">
                   <thead>
                     <tr>

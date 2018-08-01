@@ -100,7 +100,7 @@ class Category extends SnipeModel
      * @since [v4.3]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function licenses()
+    public function licenseModels()
     {
         return $this->hasMany('\App\Models\LicenseModel');
     }

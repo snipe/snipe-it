@@ -351,7 +351,7 @@ class UsersController extends Controller
                     ->with('error', 'This user still has ' . $assetsCount . ' assets associated with them.');
             }
 
-            if (($licensesCount = $user->licenses()->count()) > 0) {
+            if (($licensesCount = $user->licenseModels()->count()) > 0) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
                     ->with('error', 'This user still has ' . $licensesCount . ' licenses associated with them.');
@@ -588,7 +588,7 @@ class UsersController extends Controller
                         ($user->userloc) ? $user->userloc->name : '',
                         ($user->department) ? $user->department->name : '',
                         $user->assets->count(),
-                        $user->licenses->count(),
+                        $user->licenseModels->count(),
                         $user->accessories->count(),
                         $user->consumables->count(),
                         $user_groups,
@@ -628,7 +628,7 @@ class UsersController extends Controller
         $accessories = $show_user->accessories()->get();
         $consumables = $show_user->consumables()->get();
         return view('users/print')->with('assets', $assets)
-            ->with('licenses', $show_user->licenses()->get())
+            ->with('licenses', $show_user->licenseModels()->get())
             ->with('accessories', $accessories)
             ->with('consumables', $consumables)
             ->with('show_user', $show_user);

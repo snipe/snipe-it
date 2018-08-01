@@ -76,7 +76,7 @@ Bulk Checkin &amp; Delete
                       {{ number_format($user->accessories()->count())  }}
                     </td>
                     <td>
-                      {{ number_format($user->licenses()->count())  }}
+                      {{ number_format($user->licenseModels()->count())  }}
                     </td>
                   </tr>
                   @endforeach
