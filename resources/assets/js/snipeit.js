@@ -295,7 +295,7 @@ $(document).ready(function () {
 					"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
 				},
 			}).done(function(response) {;
-				var currentlySelected = element.select2('data').map(x => +x.id).filter(x => {return x !== 0});
+				var currentlySelected = element.select2('data').map(function (x){ return +x.id}).filter(function (x) {return x !== 0});
 				
 				// makes sure we're not selecting the same thing twice for multiples
 				var filteredResponse = response.items.filter(function(item) {
