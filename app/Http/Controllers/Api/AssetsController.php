@@ -718,13 +718,21 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
         }
 
+        $settings = Setting::getSettings();
+        $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+
         $asset = Asset::where('asset_tag','=', $request->input('asset_tag'))->first();
 
 
         if ($asset) {
             // We don't want to log this as a normal update, so let's bypass that
             $asset->unsetEventDispatcher();
-            $asset->next_audit_date = $request->input('next_audit_date');
+            $asset->next_audit_date = $dt;
+
+            if ($request->filled('next_audit_date')) {
+                $asset->next_audit_date = $request->input('next_audit_date');
+            }
+
             $asset->last_audit_date = date('Y-m-d h:i:s');
 
             if ($asset->save()) {
@@ -732,7 +740,7 @@ class AssetsController extends Controller
                 return response()->json(Helper::formatStandardApiResponse('success', [
                     'asset_tag'=> e($asset->asset_tag),
                     'note'=> e($request->input('note')),
-                    'next_audit_date' => Helper::getFormattedDateObject($log->calcNextAuditDate())
+                    'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date)
                 ], trans('admin/hardware/message.audit.success')));
             }
         }
