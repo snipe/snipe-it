@@ -101,13 +101,26 @@ class Accessory extends SnipeModel
 
 
 
-
+    /**
+     * Establishes the accessory -> supplier relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function supplier()
     {
         return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
     }
-    
 
+
+    /**
+     * Sets the requestable attribute on the accessory
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return void
+     */
     public function setRequestableAttribute($value)
     {
         if ($value == '') {
@@ -117,24 +130,49 @@ class Accessory extends SnipeModel
         return;
     }
 
+    /**
+     * Establishes the accessory -> company relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function company()
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
+    /**
+     * Establishes the accessory -> location relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function location()
     {
         return $this->belongsTo('\App\Models\Location', 'location_id');
     }
 
+    /**
+     * Establishes the accessory -> category relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function category()
     {
         return $this->belongsTo('\App\Models\Category', 'category_id')->where('category_type', '=', 'accessory');
     }
 
     /**
-    * Get action logs for this accessory
-    */
+     * Returns the action logs associated with the accessory
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function assetlog()
     {
         return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Accessory::class)->orderBy('created_at', 'desc')->withTrashed();
@@ -173,6 +211,16 @@ class Accessory extends SnipeModel
     }
 
 
+    /**
+     * Sets the full image url
+     *
+     * @todo this should probably be moved out of the model and into a
+     * presenter or service provider
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return string
+     */
     public function getImageUrl() {
         if ($this->image) {
             return url('/').'/uploads/accessories/'.$this->image;
@@ -181,31 +229,77 @@ class Accessory extends SnipeModel
 
     }
 
+    /**
+     * Establishes the accessory -> users relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+
     public function users()
     {
         return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id')->withTrashed();
     }
 
+    /**
+     * Checks whether or not the accessory has users
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return int
+     */
     public function hasUsers()
     {
         return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->count();
     }
 
+    /**
+     * Establishes the accessory -> manufacturer relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function manufacturer()
     {
         return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
     }
 
+    /**
+     * Determins whether or not an email should be sent for checkin/checkout of this
+     * accessory based on the category it belongs to.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return boolean
+     */
     public function checkin_email()
     {
         return $this->category->checkin_email;
     }
 
+    /**
+     * Determines whether or not the accessory should require the user to
+     * accept it via email.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return boolean
+     */
     public function requireAcceptance()
     {
         return $this->category->require_acceptance;
     }
 
+    /**
+     * Checks for a category-specific EULA, and if that doesn't exist,
+     * checks for a settings level EULA
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return string
+     */
     public function getEula()
     {
 
@@ -219,6 +313,13 @@ class Accessory extends SnipeModel
             return null;
     }
 
+    /**
+     * Check how many items of an accessory remain
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return int
+     */
     public function numRemaining()
     {
         $checkedout = $this->users->count();

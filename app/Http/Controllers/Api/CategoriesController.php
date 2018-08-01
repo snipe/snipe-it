@@ -114,15 +114,15 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete', Category::class);
-        $category = Category::findOrFail($id);
+        $category = Category::withCount('models as models_count', 'accessories as accessories_count','consumables as consumables_count','components as components_count')->findOrFail($id);
 
-        if ($category->has_models() > 0) {
+        if ($category->models_count > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'model'])));
-        } elseif ($category->accessories()->count() > 0) {
+        } elseif ($category->accessories_count > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'accessory'])));
-        } elseif ($category->consumables()->count() > 0) {
+        } elseif ($category->consumables_count > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'consumable'])));
-        } elseif ($category->components()->count() > 0) {
+        } elseif ($category->components_count > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'component'])));
         }
         $category->delete();

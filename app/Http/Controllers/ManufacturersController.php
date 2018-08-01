@@ -152,14 +152,11 @@ class ManufacturersController extends Controller
     public function destroy($manufacturerId)
     {
         $this->authorize('delete', Manufacturer::class);
-        // Check if the manufacturer exists
-        if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
-            // Redirect to the manufacturers page
+        if (is_null($manufacturer = Manufacturer::withCount('models as models_count')->find($manufacturerId))) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.not_found'));
         }
 
-        if ($manufacturer->has_models() > 0) {
-            // Redirect to the asset management page
+        if ($manufacturer->models_count > 0) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.assoc_users'));
         }
 
@@ -167,7 +164,7 @@ class ManufacturersController extends Controller
             try  {
                 unlink(public_path().'/uploads/manufacturers/'.$manufacturer->image);
             } catch (\Exception $e) {
-                \Log::error($e);
+
             }
         }
 
