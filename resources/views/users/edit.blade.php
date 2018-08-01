@@ -335,14 +335,14 @@
                                       <p class="help-block">{{ trans('general.feature_disabled') }}</p>
                                   </div>
                               @elseif ($user->id === Auth::user()->id)
-                                  <div class="icheckbox disabled"" style="padding-left: 10px;">
+                                  <div class="icheckbox disabled" style="padding-left: 10px;">
                                   {{ Form::checkbox('activated', '1', old('activated', $user->activated),['class' => 'minimal', 'disabled'=>'disabled']) }}
                                       {{ trans('admin/users/general.activated_help_text') }}
                                       <p class="help-block">{{ trans('admin/users/general.activated_disabled_help_text') }}</p>
                                   </div>
                               @else
                                   <div style="padding-left: 10px;">
-                                  {{ Form::checkbox('activated', '1', old('activated', $user->activated),['class' => 'minimal' ]) }}
+                                  {{ Form::checkbox('activated', '1', old('activated', $user->activated),['class' => 'minimal', 'id' => 'user_activated' ]) }}
                                   {{ trans('admin/users/general.activated_help_text') }}
                                   </div>
                               @endif
@@ -352,6 +352,26 @@
                       </div>
                     </div>
                   </div>
+
+                <!-- Email user -->
+                @if (!$user->id)
+                    <div class="form-group" id="email_user_row" style="display: none;">
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="icheckbox disabled" id="email_user_div">
+                                {{ Form::checkbox('email_user', '1', Input::old('email_user'),['class' => 'minimal', 'disabled'=>true, 'id' => 'email_user_checkbox']) }}
+                                Email this user their credentials?
+
+                            </div>
+                            <p class="help-block">
+                                {{ trans('admin/users/general.send_email_help') }}
+                            </p>
+
+
+                        </div>
+                    </div> <!--/form-group-->
+                @endif
 
                 @if ($snipeSettings->two_factor_enabled!='')
                   @if ($snipeSettings->two_factor_enabled=='1')
@@ -443,21 +463,6 @@
                   </div>
 
 
-                <!-- Email user -->
-                @if (!$user->id)
-                <div class="form-group">
-                  <div class="col-sm-3">
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="checkbox">
-                      <label for="email_user">
-                        {{ Form::checkbox('email_user', '1', Input::old('email_user'), array('id'=>'email_user','disabled'=>'disabled')) }}
-                        Email this user their credentials? <span class="help-text" id="email_user_warn">(Cannot send email. No user email address specified.)</span>
-                      </label>
-                    </div>
-                  </div>
-                </div> <!--/form-group-->
-                @endif
               </div> <!--/col-md-12-->
             </div>
           </div><!-- /.tab-pane -->
@@ -587,17 +592,23 @@
 <script nonce="{{ csrf_token() }}">
 $(document).ready(function() {
 
-	$('#email').on('keyup',function(){
+    $('#user_activated').on('ifChecked', function(event){
+        $("#email_user_row").show();
 
-	    if(this.value.length > 0){
-	        $("#email_user").prop("disabled",false);
-			$("#email_user_warn").html("");
-	    } else {
-	        $("#email_user").prop("disabled",true);
-			$("#email_user").prop("checked",false);
-	    }
+        $('#email').on('keyup',function(){
+            event.preventDefault();
 
+            if(this.value.length > 5){
+                $('#email_user_checkbox').iCheck('enable');
+            } else {
+                $('#email_user_checkbox').iCheck('disable').iCheck('uncheck');
+            }
+        });
 	});
+
+    $('#user_activated').on('ifUnchecked', function(event){
+        $("#email_user_row").hide();
+    });
 
 	// Check/Uncheck all radio buttons in the group
     $('tr.header-row input:radio').on('ifClicked', function () {
