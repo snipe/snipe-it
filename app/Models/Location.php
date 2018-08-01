@@ -119,7 +119,7 @@ class Location extends SnipeModel
      * bit in there, but that isn't always correct either (in the case
      * where a user has no location, for example).
      *
-     * In all likelyhood, we need to denorm an "effective_location" column
+     * In all likelihood, we need to denorm an "effective_location" column
      * into Assets to make this slightly less miserable.
      *
      * @author A. Gianotto <snipe@snipe.net>

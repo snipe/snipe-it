@@ -554,7 +554,7 @@ class Asset extends Depreciable
 
 
     /**
-     * Get improvements for this asset
+     * Get maintenances for this asset
      *
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @since 1.0
