@@ -154,7 +154,7 @@ class LicenseModel extends Depreciable
         // On Create, we just make one for each of the seats.
         $change = abs($oldCount - $newCount);
         if ($oldCount > $newCount) {
-            $licenseModel->load('licenseseats.user');
+            $licenseModel->load('licenses.user');
 
             // Need to delete seats... lets see if if we have enough.
             $seatsAvailableForDelete = $licenseModel->licenses->reject(function ($seat) {
@@ -441,7 +441,7 @@ class LicenseModel extends Depreciable
      * We do this to eager load the "count" of seats from the controller.
      * Otherwise calling "count()" on each model results in n+1 sadness.
      *
-     * @author A. Gianotto <snipe@snipe.net>
+     * @author Daniel Meltzer <dmeltzer.devel@gmail.com>
      * @since [v2.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */

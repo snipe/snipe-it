@@ -563,7 +563,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($asset->licenseseats as $seat)
+                    @foreach ($asset->licenses as $seat)
                     <tr>
                       <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
                       <td>

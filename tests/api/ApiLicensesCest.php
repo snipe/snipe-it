@@ -29,6 +29,7 @@ class ApiLicensesCest
         $licenseModel = App\Models\LicenseModel::orderByDesc('created_at')
             ->withCount('freeLicenses')
             ->take(10)->get()->shuffle()->first();
+
         $I->seeResponseContainsJson($I->removeTimestamps((new LicensesTransformer)->transformLicense($licenseModel)));
     }
 

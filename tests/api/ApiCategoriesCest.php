@@ -31,7 +31,7 @@ class ApiCategoriesCest
 
         $response = json_decode($I->grabResponse(), true);
         // sample verify
-        $category = App\Models\Category::withCount('assets as assets_count','accessories as accessories_count','consumables as consumables_count','components as components_count','licenses as licenses_count')
+        $category = App\Models\Category::withCount('assets as assets_count','accessories as accessories_count','consumables as consumables_count','components as components_count','licenseModels as licenses_count')
             ->orderByDesc('id')->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new CategoriesTransformer)->transformCategory($category)));
     }

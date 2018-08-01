@@ -18,30 +18,30 @@ class LicensesTransformer
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformLicense (LicenseModel $license)
+    public function transformLicense (LicenseModel $licenseModel)
     {
         $array = [
-            'id' => (int) $license->id,
-            'name' => e($license->name),
-            'company' => ($license->company) ? ['id' => (int) $license->company->id,'name'=> e($license->company->name)] : null,
-            'manufacturer' =>  ($license->manufacturer) ? ['id' => (int) $license->manufacturer->id,'name'=> e($license->manufacturer->name)] : null,
-            'product_key' => (Gate::allows('viewKeys', LicenseModel::class)) ? e($license->serial) : '------------',
-            'order_number' => e($license->order_number),
-            'purchase_order' => e($license->purchase_order),
-            'purchase_date' => Helper::getFormattedDateObject($license->purchase_date, 'date'),
-            'purchase_cost' => e($license->purchase_cost),
-            'notes' => e($license->notes),
-            'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
-            'seats' => (int) $license->seats,
-            'free_seats_count' => (int) $license->free_license_count,
-            'license_name' =>  e($license->license_name),
-            'license_email' => e($license->license_email),
-            'maintained' => ($license->maintained == 1) ? true : false,
-            'supplier' =>  ($license->supplier) ? ['id' => (int)  $license->supplier->id,'name'=> e($license->supplier->name)] : null,
-            'category' =>  ($license->category) ? ['id' => (int)  $license->category->id,'name'=> e($license->category->name)] : null,
-            'created_at' => Helper::getFormattedDateObject($license->created_at, 'datetime'),
-            'updated_at' => Helper::getFormattedDateObject($license->updated_at, 'datetime'),
-            'user_can_checkout' => (bool) ($license->free_license_count > 0),
+            'id' => (int) $licenseModel->id,
+            'name' => e($licenseModel->name),
+            'company' => ($licenseModel->company) ? ['id' => (int) $licenseModel->company->id,'name'=> e($licenseModel->company->name)] : null,
+            'manufacturer' =>  ($licenseModel->manufacturer) ? ['id' => (int) $licenseModel->manufacturer->id,'name'=> e($licenseModel->manufacturer->name)] : null,
+            'product_key' => (Gate::allows('viewKeys', LicenseModel::class)) ? e($licenseModel->serial) : '------------',
+            'order_number' => e($licenseModel->order_number),
+            'purchase_order' => e($licenseModel->purchase_order),
+            'purchase_date' => Helper::getFormattedDateObject($licenseModel->purchase_date, 'date'),
+            'purchase_cost' => e($licenseModel->purchase_cost),
+            'notes' => e($licenseModel->notes),
+            'expiration_date' => Helper::getFormattedDateObject($licenseModel->expiration_date, 'date'),
+            'seats' => (int) $licenseModel->licenses->count(),
+            'free_seats_count' => (int) $licenseModel->freeLicenses->count(),
+            'license_name' =>  e($licenseModel->license_name),
+            'license_email' => e($licenseModel->license_email),
+            'maintained' => ($licenseModel->maintained == 1) ? true : false,
+            'supplier' =>  ($licenseModel->supplier) ? ['id' => (int)  $licenseModel->supplier->id,'name'=> e($licenseModel->supplier->name)] : null,
+            'category' =>  ($licenseModel->category) ? ['id' => (int)  $licenseModel->category->id,'name'=> e($licenseModel->category->name)] : null,
+            'created_at' => Helper::getFormattedDateObject($licenseModel->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($licenseModel->updated_at, 'datetime'),
+            'user_can_checkout' => (bool) ($licenseModel->freeLicenses->count() > 0),
         ];
 
         $permissions_array['available_actions'] = [

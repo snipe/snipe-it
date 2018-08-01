@@ -151,7 +151,7 @@ class LicensesController extends Controller
     {
         $this->authorize('view', LicenseModel::class);
         $licenseModel = LicenseModel::findOrFail($id);
-        $licenseModel = $licenseModel->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
+        $licenseModel = $licenseModel->load('assignedusers', 'licenses.user', 'licenses.asset');
         return (new LicensesTransformer)->transformLicense($licenseModel);
     }
 

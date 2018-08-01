@@ -235,7 +235,7 @@ class LicensesController extends Controller
     public function show($licenseId = null)
     {
 
-        $licenseModel = LicenseModel::with('assignedusers', 'licenseSeats.user', 'licenseSeats.asset')->find($licenseId);
+        $licenseModel = LicenseModel::with('assignedusers', 'licenses.user', 'licenses.asset')->find($licenseId);
 
         if ($licenseModel) {
             $this->authorize('view', $licenseModel);

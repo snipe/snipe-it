@@ -185,11 +185,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($asset->licenseseats as $seat)
+                        @foreach ($asset->licenses as $license)
                         <tr>
-                            <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
-                            <td>{{ $seat->license->serial }}</td>
-                            <td><a href="{{ route('licenses.checkin', $seat->id) }}" class="btn-flat info">{{ trans('general.checkin') }}</a>
+                            <td><a href="{{ route('licenses.show', $license->licenseModel->id) }}">{{ $license->licenseModel->name }}</a></td>
+                            <td>{{ $license->licenseModel->serial }}</td>
+                            <td><a href="{{ route('licenses.checkin', $license->id) }}" class="btn-flat info">{{ trans('general.checkin') }}</a>
                             </td>
                         </tr>
                         @endforeach

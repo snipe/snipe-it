@@ -645,7 +645,7 @@ class Asset extends Depreciable
      * @since [v4.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function licenseseats()
+    public function licenses()
     {
         return $this->hasMany('\App\Models\License', 'asset_id');
     }
