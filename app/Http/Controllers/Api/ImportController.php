@@ -174,7 +174,7 @@ class ImportController extends Controller
             } catch (\Exception $e) {
                 // If the file delete didn't work, remove it from the database anyway and return a warning
                 $import->delete();
-                return response()->json(Helper::formatStandardApiResponse('warn', null, trans('admin/hardware/message.import.file_not_deleted_warning')), 500);
+                return response()->json(Helper::formatStandardApiResponse('warning', null, trans('admin/hardware/message.import.file_not_deleted_warning')));
             }
         }
 
