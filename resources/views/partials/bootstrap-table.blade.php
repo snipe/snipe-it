@@ -389,6 +389,12 @@
         }
     }
 
+    function externalLinkFormatter(value) {
+        if (value) {
+            return '<a href="' + value + '" target="_blank">' + value + '</a>';
+        }
+    }
+
     function groupsFormatter(value) {
 
         if (value) {
