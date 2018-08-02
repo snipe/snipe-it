@@ -34,10 +34,10 @@ class AssetMaintenancesController extends Controller
      */
     public function index(Request $request)
     {
-        $maintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company', 'admin');
+        $maintenances = AssetMaintenance::with('asset', 'asset.model','asset.location', 'supplier', 'asset.company', 'admin');
 
-        if (Input::has('search')) {
-            $maintenances = $maintenances->TextSearch(e($request->input('search')));
+        if ($request->filled('search')) {
+            $maintenances = $maintenances->TextSearch($request->input('search'));
         }
 
         if ($request->filled('asset_id')) {
