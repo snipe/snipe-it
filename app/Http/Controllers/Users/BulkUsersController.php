@@ -142,7 +142,7 @@ class BulkUsersController extends Controller
      */
     protected function conditionallyAddItem($field)
     {
-        if(request()->has($field)) {
+        if(request()->filled($field)) {
             $this->update_array[$field] = request()->input($field);
         }
         return $this;
