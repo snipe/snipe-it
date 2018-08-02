@@ -114,7 +114,7 @@ class ImportController extends Controller
     /**
      * Processes the specified Import.
      *
-     * @param  \App\Import  $import
+     * @param  int  $import_id
      * @return \Illuminate\Http\Response
      */
     public function process(ItemImportRequest $request, $import_id)
@@ -157,19 +157,25 @@ class ImportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Import  $import
+     * @param  int  $import_id
      * @return \Illuminate\Http\Response
      */
     public function destroy($import_id)
     {
         $this->authorize('create', Asset::class);
         $import = Import::find($import_id);
+
         try {
+            // Try to delete the file
             unlink(config('app.private_uploads').'/imports/'.$import->file_path);
             $import->delete();
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));
+
         } catch (\Exception $e) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.import.file_delete_error')), 500);
+            // If the file delete didn't work, remove it from the database anyway and return a warning
+            $import->delete();
+            return response()->json(Helper::formatStandardApiResponse('warn', null, trans('admin/hardware/message.import.file_not_deleted_warning')), 500);
         }
+
     }
 }

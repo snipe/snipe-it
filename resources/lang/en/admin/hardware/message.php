@@ -43,11 +43,12 @@ return array(
     ),
 
     'import' => array(
-        'error'                 => 'Some items did not import correctly.',
-        'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => "Your file has been imported",
+        'error'                     => 'Some items did not import correctly.',
+        'errorDetail'               => 'The following Items were not imported because of errors.',
+        'success'                   => "Your file has been imported",
         'file_delete_success'   => "Your file has been been successfully deleted",
-        'file_delete_error'      => "The file was unable to be deleted",
+        'file_delete_error'         => "The file was unable to be deleted",
+        'file_not_deleted_warning'  => 'The import record was deleted, however the file was unable to be deleted. Check that the file exists in storage/private_uploads/imports/ and manually delete it.',
     ),
 
 
