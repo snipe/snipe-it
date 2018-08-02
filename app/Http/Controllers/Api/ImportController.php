@@ -163,18 +163,19 @@ class ImportController extends Controller
     public function destroy($import_id)
     {
         $this->authorize('create', Asset::class);
-        $import = Import::find($import_id);
+        
+        if ($import = Import::find($import_id)) {
+            try {
+                // Try to delete the file
+                unlink(config('app.private_uploads').'/imports/'.$import->file_path);
+                $import->delete();
+                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));
 
-        try {
-            // Try to delete the file
-            unlink(config('app.private_uploads').'/imports/'.$import->file_path);
-            $import->delete();
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));
-
-        } catch (\Exception $e) {
-            // If the file delete didn't work, remove it from the database anyway and return a warning
-            $import->delete();
-            return response()->json(Helper::formatStandardApiResponse('warn', null, trans('admin/hardware/message.import.file_not_deleted_warning')), 500);
+            } catch (\Exception $e) {
+                // If the file delete didn't work, remove it from the database anyway and return a warning
+                $import->delete();
+                return response()->json(Helper::formatStandardApiResponse('warn', null, trans('admin/hardware/message.import.file_not_deleted_warning')), 500);
+            }
         }
 
     }
