@@ -272,6 +272,13 @@ abstract class Importer
             'email'     => $this->findCsvMatch($row, "email"),
             'username'  => $this->findCsvMatch($row, "username")
         ];
+
+        // Maybe we're lucky and the user already exists.
+        if($user = User::where('username', $user_array['username'])->first()) {
+            $this->log('User '.$user_array['username'].' already exists');
+            return $user;
+        }
+
         // If the full name is empty, bail out--we need this to extract first name (at the very least)
         if(empty($user_array['full_name'])) {
             $this->log('Insufficient user data provided (Full name is required)- skipping user creation, just adding asset');
