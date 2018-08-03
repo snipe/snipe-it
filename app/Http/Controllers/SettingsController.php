@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Notifications\MailTest;
 use Input;
 use Lang;
 use Illuminate\Http\Request;
@@ -43,7 +44,11 @@ class SettingsController extends Controller
     */
     public function getSetupIndex()
     {
+        $start_settings['php_version_min'] = false;
 
+        if (version_compare(PHP_VERSION, config('app.min_php'), '<')) {
+            return response('<center><h1>This software requires PHP version '.config('app.min_php').' or greater. This server is running '.PHP_VERSION.'. </h1><h2>Please upgrade PHP on this server and try again. </h2></center>', 500);
+        }
 
         try {
             $conn = DB::select('select 2 + 2');
@@ -69,6 +74,7 @@ class SettingsController extends Controller
 
         $start_settings['url_config'] = url('/');
         $start_settings['real_url'] = $pageURL;
+        $start_settings['php_version_min'] = true;
 
         // Curl the .env file to make sure it's not accessible via a browser
         $ch = curl_init($protocol . $host.'/.env');
@@ -80,7 +86,7 @@ class SettingsController extends Controller
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        if ($httpcode == 404 || $httpcode == 403) {
+        if ($httpcode == 404 || $httpcode == 403 || $httpcode == 0) {
             $start_settings['env_exposed'] = false;
         } else {
             $start_settings['env_exposed'] = true;
@@ -195,11 +201,6 @@ class SettingsController extends Controller
                 $data['password'] = $request->input('password');
                 $user->notify(new FirstAdminNotification($data));
 
-                /*Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
-                    $m->to($data['email'], $data['first_name']);
-                    $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                    $m->subject(trans('mail.your_credentials'));
-                });*/
             }
 
 
@@ -1092,11 +1093,14 @@ class SettingsController extends Controller
     public function ajaxTestEmail()
     {
         try {
-            Mail::send('emails.test', [], function ($m) {
-                $m->to(config('mail.from.address'), config('mail.from.name'));
-                $m->replyTo(config('mail.reply_to.address'), config('mail.reply_to.name'));
-                $m->subject(trans('mail.test_email'));
-            });
+
+            (new User)->forceFill([
+                'name' => config('mail.from.name'),
+                'email' => config('mail.from.address')
+            ])->notify(new MailTest());
+
+
+
             return response()->json(Helper::formatStandardApiResponse('success', null, 'Maiol sent!'));
         } catch (Exception $e) {
             return response()->json(Helper::formatStandardApiResponse('success', null, $e->getMessage()));
