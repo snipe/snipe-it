@@ -2,7 +2,7 @@
   "name": "snipe/snipe-it",
   "description": "Open source asset management system built on Laravel.",
   "keywords": ["assets", "asset-management", "laravel"],
-  "license": "AGPL-3",
+  "license": "AGPL-3.0-or-later",
   "type": "project",
     "require": {
     "php": ">=5.6.4",
