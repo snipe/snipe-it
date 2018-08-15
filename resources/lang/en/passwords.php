@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Your password link has been sent!',
-    'user'			=> 'That user does not exist or does not have an email address associated',
+    'user'			=> 'No matching active user found with that email.',
 ];
 
