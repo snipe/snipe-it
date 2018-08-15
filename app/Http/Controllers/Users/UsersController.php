@@ -90,8 +90,11 @@ class UsersController extends Controller
         $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
         $permissions = $this->filterDisplayable($permissions);
 
+        $user = new User;
+        $user->activated = 1;
+
         return view('users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
-            ->with('user', new User);
+            ->with('user', $user);
     }
 
     /**
