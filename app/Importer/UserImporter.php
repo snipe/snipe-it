@@ -68,7 +68,9 @@ class UserImporter extends ItemImporter
                     'last_name' => $user->last_name,
                     'password' => $this->tempPassword,
                 ];
-                $user->notify(new WelcomeNotification($data));
+
+                // UNCOMMENT this to re-enable sending email notifications on user import
+                // $user->notify(new WelcomeNotification($data));
             }
             $user = null;
             $this->item = null;
