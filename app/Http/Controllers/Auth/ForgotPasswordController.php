@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ForgotPasswordController extends Controller
 {
@@ -50,6 +51,12 @@ class ForgotPasswordController extends Controller
     public function sendResetLinkEmail(Request $request)
     {
         $this->validate($request, ['email' => 'required|email']);
+        $valid_user = User::where('email','=',$request->input('email'))->first();
+
+        if ($valid_user->count() == 0 ) {
+            return back()->withErrors('error','This email address does not exist, or is not activated.');
+        }
+
 
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
