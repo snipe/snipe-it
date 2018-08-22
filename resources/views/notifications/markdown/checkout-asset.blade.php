@@ -29,7 +29,7 @@
 @if (isset($last_checkout))
 | **{{ trans('mail.checkout_date') }}** | {{ $last_checkout }} |
 @endif
-@if (isset($expected_checkin))
+@if ((isset($expected_checkin)) && ($expected_checkin!=''))
 | **{{ trans('mail.expecting_checkin_date') }}** | {{ $expected_checkin }} |
 @endif
 @foreach($fields as $field)
