@@ -351,6 +351,8 @@ class SettingsController extends Controller
         $setting->thumbnail_max_h = $request->input('thumbnail_max_h');
         $setting->privacy_policy_link = $request->input('privacy_policy_link');
 
+        $setting->depreciation_method = $request->input('depreciation_method');
+
         if (Input::get('per_page')!='') {
             $setting->per_page = $request->input('per_page');
         } else {
