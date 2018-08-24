@@ -42,6 +42,30 @@ class Depreciable extends SnipeModel
 
     public function getDepreciatedValue()
     {
+        $depreciation = 0;
+        $setting = Setting::first();
+        switch($setting->depreciation_method) {
+            case 'defalut':
+            $depreciation = $this->getLinearDepreciatedValue();
+            break;
+
+            case 'half_1':
+            $depreciation = $this->getHalfYearDepreciatedValue(true);
+            break;
+            
+            case 'half_2':
+            $depreciation = $this->getHalfYearDepreciatedValue(false);
+            break;
+        }
+        return $depreciation;
+    }
+
+    /**
+     * @return float|int
+     */
+
+    public function getLinearDepreciatedValue()
+    {
         if (!$this->get_depreciation()) { // will never happen
             return $this->purchase_cost;
         }
