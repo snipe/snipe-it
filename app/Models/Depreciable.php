@@ -42,6 +42,13 @@ class Depreciable extends SnipeModel
 
     public function getDepreciatedValue()
     {
+        if (!$this->get_depreciation()) { // will never happen
+            return $this->purchase_cost;
+        }
+
+        if ($this->get_depreciation()->months <= 0) {
+            return $this->purchase_cost;
+        }
         $depreciation = 0;
         $setting = Setting::first();
         switch($setting->depreciation_method) {
@@ -66,14 +73,6 @@ class Depreciable extends SnipeModel
 
     public function getLinearDepreciatedValue()
     {
-        if (!$this->get_depreciation()) { // will never happen
-            return $this->purchase_cost;
-        }
-
-        if ($this->get_depreciation()->months <= 0) {
-            return $this->purchase_cost;
-        }
-
         // fraction of value left
         $months_remaining = $this->time_until_depreciated()->m + 12*$this->time_until_depreciated()->y; //UGlY
         $current_value = round(($months_remaining/ $this->get_depreciation()->months) * $this->purchase_cost, 2);
