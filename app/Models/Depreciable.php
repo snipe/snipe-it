@@ -114,7 +114,7 @@ class Depreciable extends SnipeModel
         else if($yearsPast < 0) {
             $yearsPast = 0;
         }
-        return $yearsPast / $deprecationYears * $this->purchase_cost;
+        return round($yearsPast / $deprecationYears * $this->purchase_cost, 2);
     }
     
     /**
