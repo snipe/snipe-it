@@ -52,10 +52,6 @@ class Depreciable extends SnipeModel
         $depreciation = 0;
         $setting = Setting::first();
         switch($setting->depreciation_method) {
-            case 'defalut':
-            $depreciation = $this->getLinearDepreciatedValue();
-            break;
-
             case 'half_1':
             $depreciation = $this->getHalfYearDepreciatedValue(true);
             break;
@@ -63,6 +59,9 @@ class Depreciable extends SnipeModel
             case 'half_2':
             $depreciation = $this->getHalfYearDepreciatedValue(false);
             break;
+
+            default:
+            $depreciation = $this->getLinearDepreciatedValue();
         }
         return $depreciation;
     }
@@ -99,10 +98,8 @@ class Depreciable extends SnipeModel
         if( $onlyHalfFirstYear ) {
             $yearsPast -= 0.5;
         }
-        else {
-            if( !$this->is_first_half_of_year($purchase_date) ) {
-                $yearsPast -= 0.5;
-            }
+        else if( !$this->is_first_half_of_year($purchase_date) ) {
+            $yearsPast -= 0.5;
         }
         if( !$this->is_first_half_of_year($current_date) ) {
             $yearsPast += 0.5;
