@@ -3,7 +3,7 @@
 return array(
 
     'asset_tag'   	=> 'Asset Tag',
-    'asset_model'       => 'Model',
+    'asset_model'   => 'Model',
     'book_value'  	=> 'Value',
     'change' 		=> 'In/Out',
     'checkout_date' => 'Checkout Date',
@@ -18,7 +18,8 @@ return array(
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'image'		    => 'Device Image',
+    'days_without_acceptance' => 'Days Without Acceptance',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

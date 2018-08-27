@@ -3,7 +3,7 @@
 return array(
 
     'asset_tag'   	=> 'Bate-tag',
-    'asset_model'       => 'model',
+    'asset_model'   => 'model',
     'book_value'  	=> 'waarde',
     'change' 		=> 'In uit',
     'checkout_date' => 'Checkout Datum',
@@ -18,7 +18,8 @@ return array(
     'serial'   		=> 'Serial',
     'status'   		=> 'status',
     'title'      	=> 'bate',
-    'image'		=> 'Toestelbeeld',
-    'days_without_acceptance' => 'Dae sonder aanvaarding'
+    'image'		    => 'Toestelbeeld',
+    'days_without_acceptance' => 'Dae sonder aanvaarding',
+    'monthly_depreciation' => 'Maandelikse Waardevermindering'
 
 );
