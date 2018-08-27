@@ -71,7 +71,7 @@
     'delete_confirm'  		=> 'Sei sicuro di voler eliminare :item?',
     'deleted'  				=> 'Eliminata',
     'delete_seats'  		=> 'Posti Cancellati',
-    'departments'           => 'dipartimenti',
+    'departments'           => 'Dipartimenti',
     'department'           => 'Dipartimento',
     'deployed'				=> 'Distribuita',
     'depreciation_report'	=> 'Report degli Obsoleti',
