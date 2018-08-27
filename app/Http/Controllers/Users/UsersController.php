@@ -143,7 +143,6 @@ class UsersController extends Controller
         $user->permissions =  json_encode($permissions_array);
 
         if ($user->save()) {
-
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
             } else {
@@ -151,7 +150,7 @@ class UsersController extends Controller
             }
 
             if (($request->input('email_user') == 1) && ($request->filled('email'))) {
-              // Send the credentials through email
+                // Send the credentials through email
                 $data = array();
                 $data['email'] = e($request->input('email'));
                 $data['username'] = e($request->input('username'));
@@ -172,9 +171,9 @@ class UsersController extends Controller
     {
         $output = null;
         foreach ($permissions as $key => $permission) {
-                $output[$key] = array_filter($permission, function ($p) {
-                    return $p['display'] === true;
-                });
+            $output[$key] = array_filter($permission, function ($p) {
+                return $p['display'] === true;
+            });
         }
         return $output;
     }
@@ -191,9 +190,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-
         if ($user =  User::find($id)) {
-
             $this->authorize('update', $user);
             $permissions = config('permissions');
 
@@ -209,8 +206,6 @@ class UsersController extends Controller
 
         $error = trans('admin/users/message.user_not_found', compact('id'));
         return redirect()->route('users.index')->with('error', $error);
-
-
     }
 
     /**
@@ -235,7 +230,6 @@ class UsersController extends Controller
         }
 
         try {
-
             $user = User::findOrFail($id);
 
             if ($user->id == $request->input('manager_id')) {
@@ -250,9 +244,6 @@ class UsersController extends Controller
                     $orig_superuser = $orig_permissions_array['superuser'];
                 }
             }
-
-
-
         } catch (ModelNotFoundException $e) {
             return redirect()->route('users.index')
                 ->with('error', trans('admin/users/message.user_not_found', compact('id')));
@@ -273,7 +264,7 @@ class UsersController extends Controller
         $user->email = $request->input('email');
 
 
-       // Update the user
+        // Update the user
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
@@ -398,7 +389,7 @@ class UsersController extends Controller
     public function getRestore($id = null)
     {
         $this->authorize('edit', User::class);
-            // Get user information
+        // Get user information
         if (!$user = User::onlyTrashed()->find($id)) {
             return redirect()->route('users.index')->with('error', trans('admin/users/messages.user_not_found'));
         }
@@ -422,7 +413,7 @@ class UsersController extends Controller
      */
     public function show($userId = null)
     {
-        if(!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
+        if (!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
             // Redirect to the user management page
             return redirect()->route('users.index')
                 ->with('error', trans('admin/users/message.user_not_found', ['id' => $userId]));
@@ -536,7 +527,6 @@ class UsersController extends Controller
      */
     public function getExportUserCsv()
     {
-
         $this->authorize('view', User::class);
         \Debugbar::disable();
 
@@ -544,76 +534,74 @@ class UsersController extends Controller
             // Open output stream
             $handle = fopen('php://output', 'w');
 
-            User::with('assets', 'accessories', 'consumables', 'department', 'licenses', 'manager', 'groups', 'userloc', 'company','throttle')
+            User::with('assets', 'accessories', 'consumables', 'department', 'licenses', 'manager', 'groups', 'userloc', 'company')
                 ->orderBy('created_at', 'DESC')
-                ->chunk(500, function($users) use($handle) {
-                $headers=[
-                    // strtolower to prevent Excel from trying to open it as a SYLK file
-                    strtolower(trans('general.id')),
-                    trans('admin/companies/table.title'),
-                    trans('admin/users/table.title'),
-                    trans('admin/users/table.employee_num'),
-                    trans('admin/users/table.name'),
-                    trans('admin/users/table.username'),
-                    trans('admin/users/table.email'),
-                    trans('admin/users/table.manager'),
-                    trans('admin/users/table.location'),
-                    trans('general.department'),
-                    trans('general.assets'),
-                    trans('general.licenses'),
-                    trans('general.accessories'),
-                    trans('general.consumables'),
-                    trans('admin/users/table.groups'),
-                    trans('general.notes'),
-                    trans('admin/users/table.activated'),
-                    trans('general.created_at')
-                ];
-
-                fputcsv($handle, $headers);
-
-                foreach ($users as $user) {
-                    $user_groups = '';
-
-                    foreach ($user->groups as $user_group) {
-                        $user_groups .= $user_group->name.', ';
-                    }
-
-                    // Add a new row with data
-                    $values = [
-                        $user->id,
-                        ($user->company) ? $user->company->name : '',
-                        $user->jobtitle,
-                        $user->employee_num,
-                        $user->present()->fullName(),
-                        $user->username,
-                        $user->email,
-                        ($user->manager) ? $user->manager->present()->fullName() : '',
-                        ($user->userloc) ? $user->userloc->name : '',
-                        ($user->department) ? $user->department->name : '',
-                        $user->assets->count(),
-                        $user->licenses->count(),
-                        $user->accessories->count(),
-                        $user->consumables->count(),
-                        $user_groups,
-                        $user->notes,
-                        ($user->activated=='1') ?  trans('general.yes') : trans('general.no'),
-                        $user->created_at,
-
+                ->chunk(500, function ($users) use ($handle) {
+                    $headers=[
+                        // strtolower to prevent Excel from trying to open it as a SYLK file
+                        strtolower(trans('general.id')),
+                        trans('admin/companies/table.title'),
+                        trans('admin/users/table.title'),
+                        trans('admin/users/table.employee_num'),
+                        trans('admin/users/table.name'),
+                        trans('admin/users/table.username'),
+                        trans('admin/users/table.email'),
+                        trans('admin/users/table.manager'),
+                        trans('admin/users/table.location'),
+                        trans('general.department'),
+                        trans('general.assets'),
+                        trans('general.licenses'),
+                        trans('general.accessories'),
+                        trans('general.consumables'),
+                        trans('admin/users/table.groups'),
+                        trans('general.notes'),
+                        trans('admin/users/table.activated'),
+                        trans('general.created_at')
                     ];
 
-                    fputcsv($handle, $values);
-                }
-            });
+                    fputcsv($handle, $headers);
+
+                    foreach ($users as $user) {
+                        $user_groups = '';
+
+                        foreach ($user->groups as $user_group) {
+                            $user_groups .= $user_group->name.', ';
+                        }
+
+                        // Add a new row with data
+                        $values = [
+                            $user->id,
+                            ($user->company) ? $user->company->name : '',
+                            $user->jobtitle,
+                            $user->employee_num,
+                            $user->present()->fullName(),
+                            $user->username,
+                            $user->email,
+                            ($user->manager) ? $user->manager->present()->fullName() : '',
+                            ($user->userloc) ? $user->userloc->name : '',
+                            ($user->department) ? $user->department->name : '',
+                            $user->assets->count(),
+                            $user->licenses->count(),
+                            $user->accessories->count(),
+                            $user->consumables->count(),
+                            $user_groups,
+                            $user->notes,
+                            ($user->activated=='1') ?  trans('general.yes') : trans('general.no'),
+                            $user->created_at,
+                        ];
+
+                        fputcsv($handle, $values);
+                    }
+                });
 
             // Close the output stream
             fclose($handle);
         }, 200, [
-            'Content-Type' => 'text/csv',
+            'Content-Type' => 'text/csv; charset=UTF-8',
             'Content-Disposition' => 'attachment; filename="users-'.date('Y-m-d-his').'.csv"',
         ]);
 
         return $response;
-
     }
 
     /**
@@ -625,8 +613,7 @@ class UsersController extends Controller
      */
     public function printInventory($id)
     {
-
-        $show_user = User::where('id',$id)->withTrashed()->first();
+        $show_user = User::where('id', $id)->withTrashed()->first();
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
         $accessories = $show_user->accessories()->get();
         $consumables = $show_user->consumables()->get();
@@ -635,7 +622,5 @@ class UsersController extends Controller
             ->with('accessories', $accessories)
             ->with('consumables', $consumables)
             ->with('show_user', $show_user);
-
     }
-
 }
