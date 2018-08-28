@@ -1,24 +1,15 @@
-<script src="{{ asset('js/bootstrap-table.min.js') }}"></script>
-<script src="{{ asset('js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
-<script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
-<script src="{{ asset('js/FileSaver.min.js') }}"></script>
-<script src="{{ asset('js/xlsx.core.min.js') }}"></script>
-<script src="{{ asset('js/jspdf.min.js') }}"></script>
-<script src="{{ asset('js/jspdf.plugin.autotable.js') }}"></script>
-<script src="{{ asset('js/extensions/export/tableExport.min.js') }}"></script>
+@push('css')
+<link rel="stylesheet" href="{{ mix('css/dist/bootstrap-table.css') }}">
+@endpush
 
+@push('js')
+<script src="{{ mix('js/dist/bootstrap-table.js') }}"></script>
 
 @if (!isset($simple_view))
-<script src="{{ asset('js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
-<script src="{{ asset('js/extensions/sticky-header/bootstrap-table-sticky-header.js') }}"></script>
+<script src="{{ mix('js/dist/bootstrap-table-simple-view.js') }}"></script>
 @endif
 
-<script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
-
-
 <script nonce="{{ csrf_token() }}">
-
 
     $(function () {
 
@@ -31,10 +22,8 @@
             stickyHeaderOffsetY += +$('.navbar-fixed-top').css('margin-bottom').replace('px','');
         }
 
-
         $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
             classes: 'table table-responsive table-no-bordered',
-
             ajaxOptions: {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -42,7 +31,6 @@
             },
             stickyHeader: true,
             stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
-
             undefinedText: '',
             iconsPrefix: 'fa',
             cookie: true,
@@ -61,24 +49,17 @@
             formatLoadingMessage: function () {
                 return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
             },
-
             icons: {
                 advancedSearchIcon: 'fa fa-search-plus',
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
                 columns: 'fa-columns',
-                refresh: 'fa-refresh'
+                refresh: 'fa-refresh',
+                export: 'fa-download'
             },
             exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
-
-
         });
-
     });
-
-
-
-
 
     function dateRowCheckStyle(value) {
         if ((value.days_to_next_audit) && (value.days_to_next_audit < {{ $snipeSettings->audit_warning_days ?: 0 }})) {
@@ -86,7 +67,6 @@
         }
         return {};
     }
-
 
     // Handle whether or not the edit button should be disabled
     $('.snipe-table').on('check.bs.table', function () {
@@ -106,7 +86,6 @@
     $('.snipe-table').on('uncheck-all.bs.table', function (e, row) {
         $('#bulkEdit').attr('disabled', 'disabled');
     });
-
 
     // This only works for model index pages because it uses the row's model ID
     function genericRowLinkFormatter(destination) {
@@ -516,7 +495,6 @@
         }
     }
 
-
    function imageFormatter(value) {
         if (value) {
             return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
@@ -572,7 +550,6 @@
         });
     });
 
-
-
-
 </script>
+    
+@endpush
