@@ -51,4 +51,4 @@ tests/_support/_generated/*
 
 *.cache
 
-\.vagrant/
+.vagrant
