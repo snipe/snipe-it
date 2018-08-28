@@ -1686,6 +1686,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Seldaek",
+      "name": "Jordi Boggiano",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/183678?v=4",
+      "profile": "https://seld.be/",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
