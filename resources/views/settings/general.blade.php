@@ -281,6 +281,20 @@
                                {{ Form::checkbox('show_in_model_list[]', 'model_number', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('model_number')),array('class' => 'minimal')) }} {{ trans('general.model_no') }}<br>
                            </div>
                        </div>
+                       
+                       <!-- Depreciation method -->
+                       <div class="form-group {{ $errors->has('depreciation_method') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                                {{ Form::label('depreciation_method', trans('Depreciation method')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::select('depreciation_method', array(
+                                    'default' => 'Linear (default)', 
+                                    'half_1' => 'Half-year convention, always applied', 
+                                    'half_2' => 'Half-year convention, applied with condition', 
+                                ), Input::old('username_format', $setting->depreciation_method)) }}
+                           </div>
+                       </div>
                        <!-- /.form-group -->
 
                        <!-- Privacy Policy Footer-->
