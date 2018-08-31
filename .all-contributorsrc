@@ -1650,6 +1650,60 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "jwhulette",
+      "name": "Wes Hulette",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4930051?v=4",
+      "profile": "http://macfoo.wordpress.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "patrict",
+      "name": "patrict",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/8134591?v=4",
+      "profile": "https://github.com/patrict",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "VELIKII-DIVAN",
+      "name": "Dmitriy Minaev",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2611616?v=4",
+      "profile": "https://github.com/VELIKII-DIVAN",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "liquidhorse",
+      "name": "liquidhorse",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5132245?v=4",
+      "profile": "https://github.com/liquidhorse",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Seldaek",
+      "name": "Jordi Boggiano",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/183678?v=4",
+      "profile": "https://seld.be/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "inietov",
+      "name": "Ivan Nieto",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/653557?v=4",
+      "profile": "https://github.com/inietov",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
