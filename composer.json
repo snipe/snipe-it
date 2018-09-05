@@ -17,7 +17,7 @@
     "fideloper/proxy": "~4.0",
     "intervention/image": "^2.3",
     "javiereguiluz/easyslugger": "^1.0",
-    "laravel/framework": "5.6.30",
+    "laravel/framework": "5.7.0",
     "laravel/passport": "~6.0",
     "laravel/tinker": "^1.0",
     "laravelcollective/html": "^5.3",
