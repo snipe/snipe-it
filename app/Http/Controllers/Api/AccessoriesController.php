@@ -145,7 +145,7 @@ class AccessoriesController extends Controller
         $accessory_users = $accessory->users;
         
         if ($request->filled('search')) {
-            $accessory_users = Accessory::find(1)->users()
+            $accessory_users = $accessory->users()
                                 ->where('first_name', 'like', '%'.$request->input('search').'%')
                                 ->orWhere('last_name', 'like', '%'.$request->input('search').'%')
                                 ->get();
