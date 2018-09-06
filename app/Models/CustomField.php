@@ -87,6 +87,7 @@ class CustomField extends Model
      */
     public static function boot()
     {
+        parent::boot();
         self::created(function ($custom_field) {
 
             // Column already exists on the assets table - nothing to do here.
