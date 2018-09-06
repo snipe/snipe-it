@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "57ad210d5cd379ab6d0f1ec5e546a55e",
+    "content-hash": "3a690057aecb60995a6ad77a3019da2f",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.67.5",
+            "version": "3.67.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "fa7689ba2865e9e00ac44efefc2c3f2ea8424c63"
+                "reference": "3e594391b8c60552cedcb3036c198d63315afc7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fa7689ba2865e9e00ac44efefc2c3f2ea8424c63",
-                "reference": "fa7689ba2865e9e00ac44efefc2c3f2ea8424c63",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3e594391b8c60552cedcb3036c198d63315afc7e",
+                "reference": "3e594391b8c60552cedcb3036c198d63315afc7e",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-09-04T21:04:34+00:00"
+            "time": "2018-09-05T23:24:12+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -1120,6 +1120,61 @@
             "time": "2018-06-06T03:12:17+00:00"
         },
         {
+            "name": "eduardokum/laravel-mail-auto-embed",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eduardokum/laravel-mail-auto-embed.git",
+                "reference": "918c3aff220d965fbaee96ae4d48a09036381bdf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eduardokum/laravel-mail-auto-embed/zipball/918c3aff220d965fbaee96ae4d48a09036381bdf",
+                "reference": "918c3aff220d965fbaee96ae4d48a09036381bdf",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": ">=5.3",
+                "illuminate/mail": ">=5.3",
+                "illuminate/support": ">=5.3",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~5.0|~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Eduardokum\\LaravelMailAutoEmbed\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Eduardokum\\LaravelMailAutoEmbed\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eduardo Gusmão",
+                    "email": "eduguscontra3@hotmail.com"
+                }
+            ],
+            "description": "Library for embed images in emails automatically",
+            "homepage": "https://github.com/eduardokum/laravel-mail-auto-embed",
+            "keywords": [
+                "eduardokum",
+                "laravel-mail-auto-embed"
+            ],
+            "time": "2017-09-21T12:11:32+00:00"
+        },
+        {
             "name": "egulias/email-validator",
             "version": "2.1.5",
             "source": {
@@ -1692,16 +1747,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.7.0",
+            "version": "v5.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "9f313ce9bb5ad49a06ae78d33fbdd1c92a0e21f6"
+                "reference": "4a5955e325faa2054420eeb7320cc2c81111a2f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/9f313ce9bb5ad49a06ae78d33fbdd1c92a0e21f6",
-                "reference": "9f313ce9bb5ad49a06ae78d33fbdd1c92a0e21f6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/4a5955e325faa2054420eeb7320cc2c81111a2f2",
+                "reference": "4a5955e325faa2054420eeb7320cc2c81111a2f2",
                 "shasum": ""
             },
             "require": {
@@ -1828,7 +1883,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2018-09-04T13:13:04+00:00"
+            "time": "2018-09-04T18:28:50+00:00"
         },
         {
             "name": "laravel/passport",
@@ -5975,24 +6030,24 @@
         },
         {
             "name": "watson/validating",
-            "version": "3.1.2",
+            "version": "3.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dwightwatson/validating.git",
-                "reference": "22edd06d45893f5d4f79c9e901bd7fbce174a79f"
+                "reference": "0264ff53f69fc32de480f3105706a4c255ead325"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/22edd06d45893f5d4f79c9e901bd7fbce174a79f",
-                "reference": "22edd06d45893f5d4f79c9e901bd7fbce174a79f",
+                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/0264ff53f69fc32de480f3105706a4c255ead325",
+                "reference": "0264ff53f69fc32de480f3105706a4c255ead325",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": ">=5.3",
-                "illuminate/database": ">=5.3",
-                "illuminate/events": ">=5.3",
-                "illuminate/support": ">=5.3",
-                "illuminate/validation": ">=5.3",
+                "illuminate/contracts": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/database": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/events": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/support": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
+                "illuminate/validation": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.*",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -6021,7 +6076,7 @@
                 "laravel",
                 "validation"
             ],
-            "time": "2017-11-06T21:35:49+00:00"
+            "time": "2018-09-05T23:01:34+00:00"
         },
         {
             "name": "webmozart/assert",
