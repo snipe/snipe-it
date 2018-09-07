@@ -31,6 +31,7 @@ class Kernel extends ConsoleKernel
         Commands\RegenerateAssetTags::class,
         Commands\SyncAssetCounters::class,
         Commands\RestoreDeletedUsers::class,
+        Commands\SendCurrentInventoryToUsers::class,
     ];
 
     /**
