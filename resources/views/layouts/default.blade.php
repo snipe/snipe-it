@@ -803,8 +803,11 @@
     @show
 
     <script nonce="{{ csrf_token() }}">
+
+
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="popover"]').popover();
             $('.select2 span').addClass('needsclick');
 
             // This javascript handles saving the state of the menu (expanded or not)
