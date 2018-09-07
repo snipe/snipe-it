@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a690057aecb60995a6ad77a3019da2f",
+    "content-hash": "7652fb9115a7813a1b3f5c466046a4b5",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.67.6",
+            "version": "3.67.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "3e594391b8c60552cedcb3036c198d63315afc7e"
+                "reference": "002577f67703af64a1be35d65edd6a74842c1e65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3e594391b8c60552cedcb3036c198d63315afc7e",
-                "reference": "3e594391b8c60552cedcb3036c198d63315afc7e",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/002577f67703af64a1be35d65edd6a74842c1e65",
+                "reference": "002577f67703af64a1be35d65edd6a74842c1e65",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-09-05T23:24:12+00:00"
+            "time": "2018-09-06T22:05:51+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -1747,16 +1747,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.7.1",
+            "version": "v5.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "4a5955e325faa2054420eeb7320cc2c81111a2f2"
+                "reference": "86e1f98a6d2aab018e0257a7cb2ef2110d64a873"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/4a5955e325faa2054420eeb7320cc2c81111a2f2",
-                "reference": "4a5955e325faa2054420eeb7320cc2c81111a2f2",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/86e1f98a6d2aab018e0257a7cb2ef2110d64a873",
+                "reference": "86e1f98a6d2aab018e0257a7cb2ef2110d64a873",
                 "shasum": ""
             },
             "require": {
@@ -1844,6 +1844,7 @@
                 "league/flysystem-cached-adapter": "Required to use the Flysystem cache (^1.0).",
                 "league/flysystem-rackspace": "Required to use the Flysystem Rackspace driver (^1.0).",
                 "league/flysystem-sftp": "Required to use the Flysystem SFTP driver (^1.0).",
+                "moontoast/math": "Required to use ordered UUIDs (^1.1).",
                 "nexmo/client": "Required to use the Nexmo transport (^1.0).",
                 "pda/pheanstalk": "Required to use the beanstalk queue driver (^3.0).",
                 "predis/predis": "Required to use the redis cache and queue drivers (^1.0).",
@@ -1883,7 +1884,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2018-09-04T18:28:50+00:00"
+            "time": "2018-09-06T14:01:05+00:00"
         },
         {
             "name": "laravel/passport",
@@ -3980,16 +3981,16 @@
         },
         {
             "name": "rollbar/rollbar",
-            "version": "v1.6.2",
+            "version": "v1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rollbar/rollbar-php.git",
-                "reference": "1deec89b870899d12794bb75377ca60359f18723"
+                "reference": "149590adc3bd5ed1188c48f8159f257aa1bf2d19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/1deec89b870899d12794bb75377ca60359f18723",
-                "reference": "1deec89b870899d12794bb75377ca60359f18723",
+                "url": "https://api.github.com/repos/rollbar/rollbar-php/zipball/149590adc3bd5ed1188c48f8159f257aa1bf2d19",
+                "reference": "149590adc3bd5ed1188c48f8159f257aa1bf2d19",
                 "shasum": ""
             },
             "require": {
@@ -4036,7 +4037,7 @@
                 "logging",
                 "monitoring"
             ],
-            "time": "2018-08-14T23:59:30+00:00"
+            "time": "2018-09-06T21:34:17+00:00"
         },
         {
             "name": "rollbar/rollbar-laravel",
