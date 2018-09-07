@@ -1180,8 +1180,8 @@ class Asset extends Depreciable
      */
     public function scopeInCategory($query, $category_id)
     {
-        return $query->join('models', 'assets.model_id', '=', 'models.id')
-            ->join('categories', 'models.category_id', '=', 'categories.id')->where('models.category_id', '=', $category_id);
+        return $query->join('models as category_models', 'assets.model_id', '=', 'category_models.id')
+            ->join('categories', 'category_models.category_id', '=', 'categories.id')->where('category_models.category_id', '=', $category_id);
     }
 
     /**
