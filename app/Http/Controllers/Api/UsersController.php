@@ -200,6 +200,12 @@ class UsersController extends Controller
         $user->password = bcrypt($request->get('password', $tmp_pass));
 
         if ($user->save()) {
+            if ($request->has('groups')) {
+                $user->groups()->sync($request->input('groups'));
+            } else {
+                $user->groups()->sync(array());
+            }
+            
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.create')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $user->getErrors()));
