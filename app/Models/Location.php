@@ -56,6 +56,7 @@ class Location extends SnipeModel
         'country',
         'zip',
         'ldap_ou',
+        'manager_id',
         'currency',
         'image',
     ];
