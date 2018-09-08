@@ -20,13 +20,13 @@ class Location extends SnipeModel
     protected $dates = ['deleted_at'];
     protected $table = 'locations';
     protected $rules = array(
-      'name'        => 'required|min:2|max:255|unique_undeleted',
-      'city'        => 'min:2|max:255|nullable',
-      'country'     => 'min:2|max:2|nullable',
+      'name'            => 'required|min:2|max:255|unique_undeleted',
+      'city'            => 'min:2|max:255|nullable',
+      'country'         => 'min:2|max:2|nullable',
       'address'         => 'max:80|nullable',
       'address2'        => 'max:80|nullable',
-      'zip'         => 'min:3|max:10|nullable',
-      // 'manager_id'  => 'exists:users'
+      'zip'             => 'min:3|max:10|nullable',
+      'manager_id'      => 'exists:users,id|nullable'
     );
 
     /**
