@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Components;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
 use App\Http\Controllers\Controller;
 use App\Models\Actionlog;
@@ -94,7 +95,9 @@ class ComponentCheckinController extends Controller
                 DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
             }
 
-            event(new ComponentCheckedIn($component, $component_assets, Auth::user(), $request->input('checkin_qty'), $request->input('note')));
+            $asset = Asset::find($component_assets->asset_id);
+
+            event(new CheckoutableCheckedIn($component, $asset, Auth::user(), $request->input('note')));
 
             return redirect()->route('components.index')->with('success',
                 trans('admin/components/message.checkout.success'));

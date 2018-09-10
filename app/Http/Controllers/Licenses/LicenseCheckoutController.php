@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Licenses;
 
-use App\Events\LicenseCheckedOut;
-use App\Events\LicenseSeatCheckedOut;
+use App\Events\CheckoutableCheckedOut;
 use App\Http\Requests\LicenseCheckoutRequest;
 use App\Models\Asset;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class LicenseCheckoutController extends Controller
@@ -106,7 +105,7 @@ class LicenseCheckoutController extends Controller
         }
         if ($licenseSeat->save()) {
 
-            event(new LicenseSeatCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
+            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
 
             return true;
         }
@@ -123,7 +122,7 @@ class LicenseCheckoutController extends Controller
 
         if ($licenseSeat->save()) {
 
-            event(new LicenseSeatCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
+            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
 
             return true;
         }

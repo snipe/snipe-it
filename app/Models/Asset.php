@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Events\AssetCheckedOut;
+use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
@@ -265,7 +266,7 @@ class Asset extends Depreciable
 
         if ($this->save()) {
 
-            event(new AssetCheckedOut($this, $target, Auth::user(), $note));
+            event(new CheckoutableCheckedOut($this, $target, Auth::user(), $note));
 
             $this->increment('checkout_counter', 1);
             return true;

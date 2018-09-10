@@ -8,6 +8,8 @@ use App\Events\AssetCheckedIn;
 use App\Events\AssetCheckedOut;
 use App\Events\CheckoutAccepted;
 use App\Events\CheckoutDeclined;
+use App\Events\CheckoutableCheckedIn;
+use App\Events\CheckoutableCheckedOut;
 use App\Events\ComponentCheckedIn;
 use App\Events\ComponentCheckedOut;
 use App\Events\ConsumableCheckedOut;
@@ -23,50 +25,14 @@ use App\Models\LicenseSeat;
 
 class LogListener
 {
-    public function onAccessoryCheckedIn(AccessoryCheckedIn $event) {
-        $event->accessory->logCheckin($event->checkedOutTo, $event->note);
+
+    public function onCheckoutableCheckedIn(CheckoutableCheckedIn $event) {
+        $event->checkoutable->logCheckin($event->checkedOutTo, $event->note);
     }
 
-    public function onAccessoryCheckedOut(AccessoryCheckedOut $event) {
-        $event->accessory->logCheckout($event->note, $event->checkedOutTo);
+    public function onCheckoutableCheckedOut(CheckoutableCheckedOut $event) {
+        $event->checkoutable->logCheckout($event->note, $event->checkedOutTo);
     }    
-
-    public function onAssetCheckedIn(AssetCheckedIn $event) {
-        $event->asset->logCheckin($event->checkedOutTo, $event->note);
-    }    
-
-    public function onAssetCheckedOut(AssetCheckedOut $event) {
-        $event->asset->logCheckout($event->note, $event->checkedOutTo);
-    }      
-
-    public function onComponentCheckedIn(ComponentCheckedIn $event) {
-            $log = new Actionlog();
-            $log->user_id = $event->checkedInBy->id;
-            $log->action_type = 'checkin from';
-            $log->target_type = Asset::class;
-            $log->target_id = $event->checkedOutTo->asset_id;
-            $log->item_id = $event->checkedOutTo->component_id;
-            $log->item_type = Component::class;
-            $log->note = $event->note;
-            $log->save();
-    }
-
-    public function onComponentCheckedOut(ComponentCheckedOut $event) {
-        // Since components don't have a "note" field, submit empty note
-        $event->component->logCheckout(null, $event->checkedOutTo);
-    }         
-
-    public function onConsumableCheckedOut(ConsumableCheckedOut $event) {
-        $event->consumable->logCheckout($event->note, $event->checkedOutTo);
-    } 
-
-    public function onLicenseCheckedIn(LicenseCheckedIn $event) {
-        $event->license->logCheckin($event->checkedOutTo, $event->note);
-    }
-
-    public function onLicenseCheckedOut(LicenseCheckedOut $event) {
-        $event->license->logCheckout($event->note, $event->checkedOutTo);
-    } 
 
     public function onCheckoutAccepted(CheckoutAccepted $event) {
         $logaction = new Actionlog();
@@ -107,15 +73,8 @@ class LogListener
     public function subscribe($events)
     {
         $list = [
-            'AccessoryCheckedIn',
-            'AccessoryCheckedOut',            
-            'AssetCheckedIn',
-            'AssetCheckedOut',
-            'ComponentCheckedIn', 
-            'ComponentCheckedOut',    
-            'ConsumableCheckedOut',  
-            'LicenseCheckedIn',
-            'LicenseCheckedOut',  
+            'CheckoutableCheckedIn',
+            'CheckoutableCheckedOut',
             'CheckoutAccepted',
             'CheckoutDeclined', 
         ];

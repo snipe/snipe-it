@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Accessories;
 
-use App\Events\AccessoryCheckedOut;
+use App\Events\CheckoutableCheckedOut;
 use App\Http\Controllers\Controller;
 use App\Models\Accessory;
 use App\Models\User;
@@ -80,7 +80,7 @@ class AccessoryCheckoutController extends Controller
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
 
-        event(new AccessoryCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
+        event(new CheckoutableCheckedOut($accessory, $user, Auth::user(), $request->input('note')));
 
       // Redirect to the new accessory page
         return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.checkout.success'));

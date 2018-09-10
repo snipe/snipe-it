@@ -2,32 +2,29 @@
 
 namespace App\Events;
 
-use App\Models\Actionlog;
-use App\Models\Asset;
 use App\Models\User;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AssetCheckedIn
+class CheckoutableCheckedOut
 {
     use Dispatchable, SerializesModels;
 
-    public $asset;
+    public $checkoutable;
     public $checkedOutTo;
-    public $checkedInBy;
+    public $checkedOutBy;
     public $note;
-    
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Asset $asset, $checkedOutTo, User $checkedInBy, $note)
+    public function __construct($checkoutable, $checkedOutTo, User $checkedOutBy, $note)
     {
-        $this->asset = $asset;
+        $this->checkoutable = $checkoutable;
         $this->checkedOutTo = $checkedOutTo;
-        $this->checkedInBy = $checkedInBy;
-        $this->note = $note;
+        $this->checkedOutBy = $checkedOutBy;
+        $this->note         = $note;
     }
 }

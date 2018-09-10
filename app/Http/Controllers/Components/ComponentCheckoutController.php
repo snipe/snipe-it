@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Components;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Events\ComponentCheckedOut;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
@@ -87,7 +88,7 @@ class ComponentCheckoutController extends Controller
             'asset_id' => $asset_id
         ]);
 
-        event(new ComponentCheckedOut($component, $asset, $request->input('assigned_qty'), Auth::user()));
+        event(new CheckoutableCheckedOut($component, $asset, Auth::user(), $request->input('note')));
 
         return redirect()->route('components.index')->with('success', trans('admin/components/message.checkout.success'));
     }

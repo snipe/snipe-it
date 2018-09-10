@@ -3,9 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Event;
+use App\Listeners\CheckoutableListener;
 use App\Listeners\LogListener;
-use App\Listeners\SendingCheckInNotificationsListener;
-use App\Listeners\SendingCheckOutNotificationsListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -32,9 +31,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $subscribe = [
-        SendingCheckOutNotificationsListener::class,
-        SendingCheckInNotificationsListener::class,
-        LogListener::class
+        LogListener::class,
+        CheckoutableListener::class
     ];
 
     /**
