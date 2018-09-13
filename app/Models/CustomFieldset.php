@@ -7,10 +7,16 @@ use Watson\Validating\ValidatingTrait;
 
 class CustomFieldset extends Model
 {
+    use ValidatingTrait;
+
     protected $guarded=["id"];
 
-    public $rules=[
-    "name" => "required|unique:custom_fieldsets"
+    /**
+     * Validation rules
+     * @var array
+     */
+    protected $rules = [
+        "name" => "required|unique:custom_fieldsets"
     ];
 
     /**
@@ -21,7 +27,6 @@ class CustomFieldset extends Model
      * @var boolean
      */
     protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
 
 
     /**
