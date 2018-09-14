@@ -10,26 +10,18 @@
     </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
+    <script nonce="{{ csrf_token() }}">
+      window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+    </script>
 
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
-
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="{{ url(asset('js/plugins/iCheck/all.css')) }}">
-
-    <!-- bootstrap tables CSS -->
-    <link rel="stylesheet" href="{{ url(asset('css/bootstrap-table.css')) }}">
-
-    <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
-
-    <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
-
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <script nonce="{{ csrf_token() }}">
-      window.Laravel = { csrfToken: '{{ csrf_token() }}' };
-
-    </script>
+    <link rel="stylesheet" href="{{ mix('css/dist/all.css') }}">
+    @stack('css')
 
 
       @if (($snipeSettings) && ($snipeSettings->skin!=''))
@@ -805,13 +797,17 @@
 
 
     <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+    @stack('js')
 
     @section('moar_scripts')
     @show
 
     <script nonce="{{ csrf_token() }}">
+
+
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="popover"]').popover();
             $('.select2 span').addClass('needsclick');
 
             // This javascript handles saving the state of the menu (expanded or not)

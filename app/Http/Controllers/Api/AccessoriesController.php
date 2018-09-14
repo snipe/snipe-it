@@ -132,7 +132,7 @@ class AccessoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function checkedout($id)
+    public function checkedout($id, Request $request)
     {
         $this->authorize('view', Accessory::class);
 
@@ -143,8 +143,16 @@ class AccessoriesController extends Controller
 
         $accessory->lastCheckoutArray = $accessory->lastCheckout->toArray();
         $accessory_users = $accessory->users;
-        $total = $accessory_users->count();
+        
+        if ($request->filled('search')) {
+            $accessory_users = $accessory->users()
+                                ->where('first_name', 'like', '%'.$request->input('search').'%')
+                                ->orWhere('last_name', 'like', '%'.$request->input('search').'%')
+                                ->get();
+        }
 
+        $total = $accessory_users->count();
+    
         return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $accessory_users, $total);
     }
 

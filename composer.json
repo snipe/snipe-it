@@ -2,7 +2,7 @@
   "name": "snipe/snipe-it",
   "description": "Open source asset management system built on Laravel.",
   "keywords": ["assets", "asset-management", "laravel"],
-  "license": "AGPL-3",
+  "license": "AGPL-3.0-or-later",
   "type": "project",
   "require": {
     "php": ">=7.1.3",
@@ -13,11 +13,12 @@
     "doctrine/dbal": "^2.8.0",
     "doctrine/inflector": "1.3.*",
     "doctrine/instantiator": "1.1.*",
+    "eduardokum/laravel-mail-auto-embed": "^1.0",
     "erusev/parsedown": "^1.6",
     "fideloper/proxy": "~4.0",
     "intervention/image": "^2.3",
     "javiereguiluz/easyslugger": "^1.0",
-    "laravel/framework": "5.6.16",
+    "laravel/framework": "5.7.*",
     "laravel/passport": "~6.0",
     "laravel/tinker": "^1.0",
     "laravelcollective/html": "^5.3",
@@ -39,7 +40,7 @@
     "tecnickcom/tc-lib-barcode": "^1.15",
     "tightenco/ziggy": "^0.6.3",
     "unicodeveloper/laravel-password": "^1.0",
-    "watson/validating": "^3.0"
+    "watson/validating": "3.1.7"
   },
   "require-dev": {
     "codeception/codeception": "^2.4",

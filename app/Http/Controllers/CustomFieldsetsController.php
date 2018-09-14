@@ -42,14 +42,19 @@ class CustomFieldsetsController extends Controller
         if ($cfset) {
             $custom_fields_list = ["" => "Add New Field to Fieldset"] + CustomField::pluck("name", "id")->toArray();
 
+
             $maxid = 0;
             foreach ($cfset->fields() as $field) {
-                if ($field->pivot->order > $maxid) {
-                    $maxid=$field->pivot->order;
+
+                if ($field) {
+                    if ($field->pivot->order > $maxid) {
+                        $maxid=$field->pivot->order;
+                    }
+                    if (isset($custom_fields_list[$field->id])) {
+                        unset($custom_fields_list[$field->id]);
+                    }
                 }
-                if (isset($custom_fields_list[$field->id])) {
-                    unset($custom_fields_list[$field->id]);
-                }
+
             }
 
             return view("custom_fields.fieldsets.view")

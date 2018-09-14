@@ -88,7 +88,7 @@ echo "--------------------------------------------------------\n\n";
 
 
 if (file_exists('bootstrap/cache/compiled.php')) {
-    echo "-- Deleting bootstrap/cache/compiled.php. It it no longer used.\n";
+    echo "-- Deleting bootstrap/cache/compiled.php. It is no longer used.\n";
     @unlink('bootstrap/cache/compiled.php');
 } else {
     echo "-- No bootstrap/cache/compiled.php, so nothing to delete.\n";

@@ -12,9 +12,14 @@ use Illuminate\Validation\Rule;
 
 class CustomField extends Model
 {
-    use ValidatingTrait, UniqueUndeletedTrait;
-    public $guarded=["id"];
-    public static $PredefinedFormats=[
+    use ValidatingTrait,
+        UniqueUndeletedTrait;
+
+    public $guarded = [
+        "id"
+    ];
+
+    public static $PredefinedFormats = [
         "ANY" => "",
         "CUSTOM REGEX" => "",
         "ALPHA" => "alpha",
@@ -30,6 +35,14 @@ class CustomField extends Model
         "MAC" => "regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/",
         "BOOLEAN" => "boolean",
     ];
+
+    /**
+     * Validation rules.
+     * At least empty array must be provided if using ValidatingTrait.
+     *
+     * @var array
+     */
+    protected $rules = [];
 
     /**
      * The attributes that are mass assignable.
@@ -56,7 +69,6 @@ class CustomField extends Model
      * @since [v3.0]
      */
     public static $table_name = "assets";
-
 
     /**
      * Convert the custom field's name property to a db-safe string.
@@ -87,6 +99,7 @@ class CustomField extends Model
      */
     public static function boot()
     {
+        parent::boot();
         self::created(function ($custom_field) {
 
             // Column already exists on the assets table - nothing to do here.

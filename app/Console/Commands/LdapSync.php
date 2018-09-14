@@ -169,6 +169,11 @@ class LdapSync extends Command
                     $item['activated'] = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
                 } else {
                     $item['activated'] = 0;
+
+                    // If there is no activated flag, assume this is handled via the OU and activate the users
+                    if (empty($ldap_result_active_flag)) {
+                        $item['activated'] = 1;
+                    }
                 }
 
                 // User exists
