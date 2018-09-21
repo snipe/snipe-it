@@ -106,7 +106,26 @@ class LocationsController extends Controller
     public function show($id)
     {
         $this->authorize('view', Location::class);
-        $location = Location::findOrFail($id);
+        $location = Location::with('parent', 'manager', 'childLocations')
+            ->select([
+                'locations.id',
+                'locations.name',
+                'locations.address',
+                'locations.address2',
+                'locations.city',
+                'locations.state',
+                'locations.zip',
+                'locations.country',
+                'locations.parent_id',
+                'locations.manager_id',
+                'locations.created_at',
+                'locations.updated_at',
+                'locations.image',
+                'locations.currency'
+            ])
+            ->withCount('assignedAssets')
+            ->withCount('assets')
+            ->withCount('users')->findOrFail($id);
         return (new LocationsTransformer)->transformLocation($location);
     }
 
