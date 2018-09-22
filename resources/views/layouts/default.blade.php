@@ -309,7 +309,11 @@
                              <i class="fa fa-check fa-disk fa-fw"></i>
                              Requested Assets
                          </a></li>
-
+                     <li {!! (Request::is('account/accept') ? ' class="active"' : '') !!}>
+                         <a href="{{ route('account.accept') }}">
+                             <i class="fa fa-check fa-disk fa-fw"></i>
+                             Accept Assets
+                         </a></li>
 
 
 

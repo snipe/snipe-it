@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Consumables;
 
+use App\Events\CheckoutableCheckedOut;
+use App\Http\Controllers\Controller;
 use App\Models\Consumable;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
@@ -41,7 +42,7 @@ class ConsumableCheckoutController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store($consumableId)
+    public function store(Request $request, $consumableId)
     {
         if (is_null($consumable = Consumable::find($consumableId))) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
@@ -67,7 +68,7 @@ class ConsumableCheckoutController extends Controller
             'assigned_to' => e(Input::get('assigned_to'))
         ]);
 
-        $consumable->logCheckout(e(Input::get('note')), $user);
+        event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));
 
         // Redirect to the new consumable page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.checkout.success'));
