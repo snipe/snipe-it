@@ -125,7 +125,7 @@ class ManufacturersController extends Controller
         $manufacturer = Manufacturer::withCount('assets as assets_count', 'licenses as licenses_count', 'consumables as consumables_count', 'accessories as accessories_count', 'models as models_count'  )->findOrFail($id);
         $this->authorize('delete', $manufacturer);
 
-        if (($manufacturer->assets_count == 0)  && ($manufacturer->licenses_count==0)  && ($manufacturer->consumables_count==0)  && ($manufacturer->accessories_count==0)  && ($manufacturer->models==0)  && ($manufacturer->deleted_at=='')) {
+        if (($manufacturer->assets_count == 0)  && ($manufacturer->licenses_count==0)  && ($manufacturer->consumables_count==0)  && ($manufacturer->accessories_count==0)  && ($manufacturer->models_count==0)  && ($manufacturer->deleted_at=='')) {
             $manufacturer->delete();
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
         }
