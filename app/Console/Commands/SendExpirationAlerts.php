@@ -44,8 +44,10 @@ class SendExpirationAlerts extends Command
         $settings  = Setting::getSettings();
         $threshold = $settings->alert_interval;
 
-        if (('' != $settings->alert_email) && (1 == $settings->alerts_enabled)) {
-            $recipients = collect(explode(',', $settings->alert_email))->map(function($item, $key) {
+        if (($settings->alert_email != '') && ($settings->alerts_enabled == 1)) {
+
+            // Send a rollup to the admin, if settings dictate
+            $recipients = collect(explode(',', $settings->alert_email))->map(function ($item, $key) {
                 return new AlertRecipient($item);
             });
 
@@ -63,7 +65,7 @@ class SendExpirationAlerts extends Command
                 Notification::send($recipients, new ExpiringLicenseNotification($licenses, $threshold));
             }
         } else {
-            if ('' == $settings->alert_email) {
+            if ($settings->alert_email == '') {
                 $this->error('Could not send email. No alert email configured in settings');
             } elseif (1 != $settings->alerts_enabled) {
                 $this->info('Alerts are disabled in the settings. No mail will be sent');

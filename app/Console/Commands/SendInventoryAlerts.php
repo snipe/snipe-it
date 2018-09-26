@@ -42,20 +42,20 @@ class SendInventoryAlerts extends Command
     {
         $settings = Setting::getSettings();
 
-        if (('' != $settings->alert_email) && (1 == $settings->alerts_enabled)) {
+        if (($settings->alert_email != '') && ($settings->alerts_enabled == 1)) {
             $items = Helper::checkLowInventory();
 
-            if (($items) && (count($items) > 0) && ('' != $settings->alert_email)) {
+            if (($items) && (count($items) > 0)) {
                 $this->info(trans_choice('mail.low_inventory_alert', count($items)));
-
-                $recipients = collect(explode(',', $settings->alert_email))->map(function($item, $key) {
+                // Send a rollup to the admin, if settings dictate
+                $recipients = collect(explode(',', $settings->alert_email))->map(function ($item, $key) {
                     return new AlertRecipient($item);
                 });
 
                 Notification::send($recipients, new InventoryAlert($items, $settings->alert_threshold));
             }
         } else {
-            if ('' == $settings->alert_email) {
+            if ($settings->alert_email == '') {
                 $this->error('Could not send email. No alert email configured in settings');
             } elseif (1 != $settings->alerts_enabled) {
                 $this->info('Alerts are disabled in the settings. No mail will be sent');
