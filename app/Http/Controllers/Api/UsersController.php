@@ -203,6 +203,8 @@ class UsersController extends Controller
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
+            } else {
+                $user->groups()->sync(array());
             }
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.create')));
         }

@@ -251,10 +251,6 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['auth']], function () {
         'accept-asset/{logID}',
         [ 'as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset' ]
     );
-    Route::post(
-        'accept-asset/{logID}',
-        [ 'as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset' ]
-    );
 
     # Profile
     Route::get(
@@ -273,6 +269,15 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['auth']], function () {
 
     # Account Dashboard
     Route::get('/', [ 'as' => 'account', 'uses' => 'ViewAssetsController@getIndex' ]);
+
+
+    Route::get('accept', 'Account\AcceptanceController@index')
+        ->name('account.accept');
+        
+    Route::get('accept/{id}', 'Account\AcceptanceController@create')
+        ->name('account.accept.item');
+
+    Route::post('accept/{id}', 'Account\AcceptanceController@store');        
 
 });
 

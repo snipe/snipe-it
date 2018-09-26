@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,17 +15,13 @@ class Consumable extends SnipeModel
     use Loggable, Presentable;
     use SoftDeletes;
 
+    use Acceptable;
+
     protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'consumables';
     protected $casts = [
         'requestable' => 'boolean'
     ];
-
-    /**
-     * Set static properties to determine which checkout/checkin handlers we should use
-     */
-    public static $checkoutClass = CheckoutConsumableNotification::class;
-    public static $checkinClass = null;
 
 
     /**

@@ -83,7 +83,7 @@ class ManufacturersController extends Controller
     public function show($id)
     {
         $this->authorize('view', Manufacturer::class);
-        $manufacturer = Manufacturer::findOrFail($id);
+        $manufacturer = Manufacturer::withCount('assets as assets_count', 'licenses as licenses_count', 'consumables as consumables_count', 'accessories as accessories_count', 'models as models_count'  )->findOrFail($id);
         return (new ManufacturersTransformer)->transformManufacturer($manufacturer);
     }
 
@@ -120,11 +120,21 @@ class ManufacturersController extends Controller
      */
     public function destroy($id)
     {
+
         $this->authorize('delete', Manufacturer::class);
-        $manufacturer = Manufacturer::findOrFail($id);
+        $manufacturer = Manufacturer::withCount('assets as assets_count', 'licenses as licenses_count', 'consumables as consumables_count', 'accessories as accessories_count', 'models as models_count'  )->findOrFail($id);
         $this->authorize('delete', $manufacturer);
-        $manufacturer->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
+
+        if (($manufacturer->assets_count == 0)  && ($manufacturer->licenses_count==0)  && ($manufacturer->consumables_count==0)  && ($manufacturer->accessories_count==0)  && ($manufacturer->models_count==0)  && ($manufacturer->deleted_at=='')) {
+            $manufacturer->delete();
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/manufacturers/message.delete.error')));
+
+
+
+
 
     }
 
