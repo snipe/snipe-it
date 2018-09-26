@@ -50,13 +50,14 @@ class SendInventoryAlerts extends Command
             $items = Helper::checkLowInventory();
 
             // Send a rollup to the admin, if settings dictate
-            $recipient = new \App\Models\Recipients\AlertRecipient();
 
-            if (($items) && (count($items) > 0) && ($settings->alert_email!='')) {
-
-                $this->info( trans_choice('mail.low_inventory_alert',count($items)) );
-
-                $recipient->notify(new InventoryAlert($items, $settings->alert_threshold));
+            if (($items) && (count($items) > 0)) {
+                $this->info(trans_choice('mail.low_inventory_alert', count($items)));
+                // Send a rollup to the admin, if settings dictate
+                $recipients = collect(explode(',', $settings->alert_email))->map(function ($item, $key) {
+                    return new \App\Models\Recipients\AlertRecipient($item);
+                });
+                \Notification::send($recipients, new InventoryAlert($items, $settings->alert_threshold));
             }
 
         } else {
