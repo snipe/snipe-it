@@ -162,11 +162,15 @@ class LdapSync extends Command
                 $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
                 $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
 
+
+                // This is active directory, not regular LDAP
                 if ( array_key_exists('useraccountcontrol', $results[$i]) ) {
                     $enabled_accounts = [
                         '512', '544', '66048', '66080', '262656', '262688', '328192', '328224'
                     ];
                     $item['activated'] = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
+
+                // Fall through to LDAP
                 } else {
                     $item['activated'] = 0;
                 }
