@@ -128,15 +128,21 @@ class LdapSync extends Command
                 $location_users = Ldap::findLdapUsers($ldap_loc["ldap_ou"]);
                 $usernames = array();
                 for ($i = 0; $i < $location_users["count"]; $i++) {
-                    $location_users[$i]["ldap_location_override"] = true;
-                    $location_users[$i]["location_id"] = $ldap_loc["id"];
-                    $usernames[] = $location_users[$i][$ldap_result_username][0];
+
+                    if (array_key_exists($ldap_result_username, $location_users[$i])) {
+                        $location_users[$i]["ldap_location_override"] = true;
+                        $location_users[$i]["location_id"] = $ldap_loc["id"];
+                        $usernames[] = $location_users[$i][$ldap_result_username][0];
+                    }
+
                 }
 
                 // Delete located users from the general group.
                 foreach ($results as $key => $generic_entry) {
-                    if (in_array($generic_entry[$ldap_result_username][0], $usernames)) {
-                        unset($results[$key]);
+                   if ((is_array($generic_entry)) && (array_key_exists($ldap_result_username, $generic_entry))) {
+                        if (in_array($generic_entry[$ldap_result_username][0], $usernames)) {
+                            unset($results[$key]);
+                        }
                     }
                 }
 
