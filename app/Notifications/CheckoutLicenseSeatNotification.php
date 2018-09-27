@@ -2,6 +2,8 @@
 
 namespace App\Notifications;
 
+use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\Setting;
 use App\Models\SnipeModel;
 use App\Models\User;
@@ -12,7 +14,7 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Mail;
 
-class CheckinLicenseNotification extends Notification
+class CheckoutLicenseSeatNotification extends Notification
 {
     use Queueable;
     /**
@@ -25,19 +27,15 @@ class CheckinLicenseNotification extends Notification
      *
      * @param $params
      */
-    public function __construct($params)
+    public function __construct(LicenseSeat $licenseSeat, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
-        $this->target = $params['target'];
-        $this->item = $params['item'];
-        $this->admin = $params['admin'];
-        $this->note = '';
-        $this->settings = $params['settings'];
-        $this->target_type = $params['target_type'];
+        $this->item = $licenseSeat->license;
+        $this->admin = $checkedOutBy;
+        $this->note = $note;
+        $this->target = $checkedOutTo;
+        $this->acceptance = $acceptance;
 
-        if (array_key_exists('note', $params)) {
-            $this->note = $params['note'];
-        }
-
+        $this->settings = Setting::getSettings();
     }
 
     /**
@@ -46,7 +44,7 @@ class CheckinLicenseNotification extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         $notifyBy = [];
 
@@ -55,14 +53,34 @@ class CheckinLicenseNotification extends Notification
         }
 
         /**
-         * Only send checkin notifications to users if the category 
-         * has the corresponding checkbox checked.
+         * Only send notifications to users that have email addresses
          */
-        if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '')
-        {
-            $notifyBy[] = 'mail';
-        }
+        if ($this->target instanceof User && $this->target->email != '') {
 
+            /**
+             * Send an email if the asset requires acceptance, 
+             * so the user can accept or decline the asset
+             */
+            if ($this->item->requireAcceptance()) {
+                $notifyBy[1] = 'mail';
+            }
+
+            /**
+             * Send an email if the item has a EULA, since the user should always receive it
+             */
+            if ($this->item->getEula()) {
+                $notifyBy[1] = 'mail';
+            }                  
+
+            /**
+             * Send an email if an email should be sent at checkin/checkout
+             */
+            if ($this->item->checkin_email()) {
+                $notifyBy[1] = 'mail';
+            }            
+
+        }
+        
         return $notifyBy;
     }
 
@@ -75,16 +93,13 @@ class CheckinLicenseNotification extends Notification
         $note = $this->note;
         $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
-
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
             'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
         ];
 
-
-
         return (new SlackMessage)
-            ->content(':arrow_down: :floppy_disk: License  Checked In')
+            ->content(':arrow_up: :floppy_disk: License Checked Out')
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
@@ -101,14 +116,22 @@ class CheckinLicenseNotification extends Notification
     public function toMail($notifiable)
     {
 
-        return (new MailMessage)->markdown('notifications.markdown.checkin-license',
+        $eula =  method_exists($this->item, 'getEula') ? $this->item->getEula() : '';
+        $req_accept = method_exists($this->item, 'requireAcceptance') ? $this->item->requireAcceptance() : 0;
+
+        $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
+
+        return (new MailMessage)->markdown('notifications.markdown.checkout-license',
             [
                 'item'          => $this->item,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
                 'target'        => $this->target,
+                'eula'          => $eula,
+                'req_accept'    => $req_accept,
+                'accept_url'    => $accept_url,
             ])
-            ->subject('License checked in');
+            ->subject(trans('mail.Confirm_license_delivery'));
 
     }
 

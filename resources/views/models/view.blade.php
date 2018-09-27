@@ -112,7 +112,7 @@
                   {{ $model->manufacturer->name }}
               @endcan
               </li>
-              @endif
+
                   @if ($model->manufacturer->url)
                       <li>
                           <i class="fa fa-globe"></i> <a href="{{ $model->manufacturer->url }}">{{ $model->manufacturer->url }}</a>
@@ -138,7 +138,7 @@
                           <i class="fa fa-envelope"></i> <a href="mailto:{{ $model->manufacturer->support_email }}">{{ $model->manufacturer->support_email }}</a>
                       </li>
                   @endif
-
+                @endif
               @if ($model->model_number)
               <li>
                 {{ trans('general.model_no') }}:
