@@ -5,30 +5,60 @@ const {
 
 // This generates a file called app.css, which we use
 // later on to build all.css
-mix
-    .options({
+mix.options({
         processCssUrls: false,
         processFontUrls: true,
         clearConsole: false
     })
-    .less('resources/assets/less/AdminLTE.less', 'css')
-    .less('resources/assets/less/app.less', 'css')
-    .less('resources/assets/less/overrides.less', 'css')
+    .less('./resources/assets/less/AdminLTE.less', 'css/build')
+    .less('./resources/assets/less/app.less', 'css/build')
     .styles([
-            './resources/assets/css/app.css',
-            'public/css/AdminLTE.css',
-            'resources/assets/css/font-awesome/font-awesome.min.css',
+            './node_modules/select2/dist/css/select2.css',
+            './node_modules/admin-lte/plugins/iCheck/minimal/blue.css',
+            './public/css/build/AdminLTE.css',
+            './public/css/build/app.css',
+            './node_modules/font-awesome/css/font-awesome.css',
             './node_modules/icheck/skins/minimal/minimal.css',
             './node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css',
-            'public/css/overrides.css'
         ],
-        './public/css/dist/all.css')
+        './public/css/all.css');
 
-    // jQuery is loaded from vue.js webpack process
-    // This compiles the vue.js file in the build directory
-    // for later concatenation in the scripts() section below.
-    .js(
+/**
+ * Copy, minify and version skins
+ */
+mix.copyDirectory('./resources/assets/css/skins', './public/css/skins');
+mix.minify([
+    './public/css/skins/skin-green-dark.css',
+    './public/css/skins/skin-orange-dark.css',
+    './public/css/skins/skin-red-dark.css',
+]);
+mix.version([
+    './public/css/skins/skin-green-dark.css',
+    './public/css/skins/skin-orange-dark.css',
+    './public/css/skins/skin-red-dark.css',
+]);
+/**
+ * Copy, minify and version signature-pad.css
+ */
+mix.copy('./resources/assets/css/signature-pad.css', './public/css')
+    .minify('./public/css/signature-pad.css')
+    .version('./public/css/signature-pad.css');
 
+/**
+ * Copy image for iCheck
+ */
+mix.copyDirectory('./node_modules/admin-lte/plugins/iCheck/minimal/blue*.png', './public/css');
+
+/**
+ * Copy Fontawesome fonts to public fonts directory
+ */
+mix.copyDirectory('./node_modules/font-awesome/fonts', './public/fonts');
+
+
+// jQuery is loaded from vue.js webpack process
+// This compiles the vue.js file in the build directory
+// for later concatenation in the scripts() section below.
+mix.js(
         'resources/assets/js/vue.js', // Snipe-IT's initializer for Vue.js
         './public/js/build'
     ).sourceMaps()
@@ -49,7 +79,7 @@ mix
         ],
         './public/js/dist/all.js');
 
-mix.copy('./public/css/dist/all.css', './public/css/build/all.css').copy('./public/js/dist/all.js', './public/js/build/all.js');
+mix.copy('./public/js/dist/all.js', './public/js/build/all.js');
 
 mix.version();
 
@@ -64,7 +94,7 @@ mix.combine([
         'resources/assets/js/extensions/jquery.base64.js',
         'node_modules/tableexport.jquery.plugin/tableExport.js',
         'node_modules/tableexport.jquery.plugin/libs/jsPDF/jspdf.min.js',
-        'node_modules/tableexport.jquery.plugin/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js'        
+        'node_modules/tableexport.jquery.plugin/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js'
     ], 'public/js/dist/bootstrap-table.js')
     .version();
 /**

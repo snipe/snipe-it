@@ -12,29 +12,27 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
+
     <script nonce="{{ csrf_token() }}">
       window.Laravel = { csrfToken: '{{ csrf_token() }}' };
     </script>
 
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
-    <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="{{ url(asset('js/plugins/iCheck/all.css')) }}">
-    <link rel="stylesheet" href="{{ mix('css/dist/all.css') }}">
+    {{-- stylesheets --}}
+    <link rel="stylesheet" href="{{ mix('css/all.css') }}">
+    @if (($snipeSettings) && ($snipeSettings->skin!=''))
+    <link rel="stylesheet" href="{{ mix('css/skins/skin-'.$snipeSettings->skin.'.min.css') }}">
+    @endif
+    {{-- page level css --}}
     @stack('css')
 
-
-      @if (($snipeSettings) && ($snipeSettings->skin!=''))
-          <link rel="stylesheet" href="{{ url('css/skins/skin-'.$snipeSettings->skin) }}.css">
-      @endif
-
+    {{-- Custom header color --}}
+    @if (($snipeSettings) && ($snipeSettings->header_color!=''))
     <style nonce="{{ csrf_token() }}">
-        @if (($snipeSettings) && ($snipeSettings->header_color!=''))
         .main-header .navbar, .main-header .logo {
-        background-color: {{ $snipeSettings->header_color }};
-        background: -webkit-linear-gradient(top,  {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
-        background: linear-gradient(to bottom, {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
-        border-color: {{ $snipeSettings->header_color }};
+            background-color: {{ $snipeSettings->header_color }};
+            background: -webkit-linear-gradient(top,  {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
+            background: linear-gradient(to bottom, {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
+            border-color: {{ $snipeSettings->header_color }};
         }
         .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
           border-left-color: {{ $snipeSettings->header_color }};
@@ -44,26 +42,15 @@
           background-color: {{ $snipeSettings->header_color }};
           border-color: {{ $snipeSettings->header_color }};
         }
-        @endif
-
-
-
-    @media (max-width: 400px) {
-      .navbar-left {
-       margin: 2px;
-      }
-
-      .nav::after {
-        clear: none;
-      }
-    }
     </style>
+    @endif
 
-      @if (($snipeSettings) && ($snipeSettings->custom_css))
-          <style>
-              {!! $snipeSettings->show_custom_css() !!}
-          </style>
-      @endif
+    {{-- Custom CSS --}}
+    @if (($snipeSettings) && ($snipeSettings->custom_css))
+    <style>
+        {!! $snipeSettings->show_custom_css() !!}
+    </style>
+    @endif
 
     <script nonce="{{ csrf_token() }}">
           window.snipeit = {
@@ -74,19 +61,21 @@
     </script>
     <!-- Add laravel routes into javascript  Primarily useful for vue.-->
     @routes
-      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      <!--[if lt IE 9]>
 
-      @if ($snipeSettings->load_remote=='1')
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js" integrity="sha384-qFIkRsVO/J5orlMvxK1sgAt2FXT67og+NyFTITYzvbIP1IJavVEKZM7YWczXkwpB" crossorigin="anonymous"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
 
-       @else
-            <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
-            <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
-       @endif
-       <![endif]-->
+    @if ($snipeSettings->load_remote=='1')
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js" integrity="sha384-qFIkRsVO/J5orlMvxK1sgAt2FXT67og+NyFTITYzvbIP1IJavVEKZM7YWczXkwpB" crossorigin="anonymous"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
+
+    @else
+        <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
+        <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
+    @endif
+    <![endif]-->
+
   </head>
   <body class="sidebar-mini skin-blue {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
     <div class="wrapper">
