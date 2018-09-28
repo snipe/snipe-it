@@ -167,6 +167,13 @@
         "raphael": "^2.2.7",
         "select2": "^4.0.3",
         "slimscroll": "^0.9.1"
+      },
+      "dependencies": {
+        "chart.js": {
+          "version": "1.0.2",
+          "resolved": "https://registry.npmjs.org/chart.js/-/chart.js-1.0.2.tgz",
+          "integrity": "sha1-rVfSIpz9jM9ZVRR+gSG0kR5p3+c="
+        }
       }
     },
     "ajv": {
@@ -1960,6 +1967,11 @@
       "resolved": "https://registry.npmjs.org/charenc/-/charenc-0.0.2.tgz",
       "integrity": "sha1-wKHS86cJLgN3S/qD8UwPxXkKhmc=",
       "dev": true
+    },
+    "charm": {
+      "version": "0.1.2",
+      "resolved": "https://registry.npmjs.org/charm/-/charm-0.1.2.tgz",
+      "integrity": "sha1-BsIe7RobBq62dVPNxT4jJ0usIpY="
     },
     "chart.js": {
       "version": "2.7.2",
@@ -6737,10 +6749,37 @@
         "minimist": "0.0.8"
       }
     },
+    "module-deps": {
+      "version": "6.1.0",
+      "resolved": "https://registry.npmjs.org/module-deps/-/module-deps-6.1.0.tgz",
+      "integrity": "sha512-NPs5N511VD1rrVJihSso/LiBShRbJALYBKzDW91uZYy7BpjnO4bGnZL3HjZ9yKcFdZUWwaYjDz9zxbuP7vKMuQ==",
+      "requires": {
+        "JSONStream": "^1.0.3",
+        "browser-resolve": "^1.7.0",
+        "cached-path-relative": "^1.0.0",
+        "concat-stream": "~1.6.0",
+        "defined": "^1.0.0",
+        "detective": "^5.0.2",
+        "duplexer2": "^0.1.2",
+        "inherits": "^2.0.1",
+        "parents": "^1.0.0",
+        "readable-stream": "^2.0.2",
+        "resolve": "^1.4.0",
+        "stream-combiner2": "^1.1.1",
+        "subarg": "^1.0.0",
+        "through2": "^2.0.0",
+        "xtend": "^4.0.0"
+      }
+    },
     "moment": {
       "version": "2.22.2",
       "resolved": "https://registry.npmjs.org/moment/-/moment-2.22.2.tgz",
       "integrity": "sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y="
+    },
+    "morris.js": {
+      "version": "0.5.0",
+      "resolved": "https://registry.npmjs.org/morris.js/-/morris.js-0.5.0.tgz",
+      "integrity": "sha1-cldnE1z64Fmq51mZuyzmocXRtEs="
     },
     "move-concurrently": {
       "version": "1.0.1",

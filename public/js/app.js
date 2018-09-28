@@ -54174,7 +54174,7 @@ module.exports = Component.exports
  * @return {IIFE}          Immediately invoked. Returns self.
  */
 
-var lineOptions = {
+lineOptions = {
 
     legend: {
         position: "bottom"
@@ -54839,13 +54839,6 @@ Vue.component('fieldset-default-values', __webpack_require__("./resources/assets
 
 /***/ }),
 
-/***/ "./resources/assets/less/overrides.less":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -54853,8 +54846,7 @@ __webpack_require__("./resources/assets/js/vue.js");
 __webpack_require__("./resources/assets/js/snipeit.js");
 __webpack_require__("./resources/assets/js/snipeit_modals.js");
 __webpack_require__("./resources/assets/less/AdminLTE.less");
-__webpack_require__("./resources/assets/less/app.less");
-module.exports = __webpack_require__("./resources/assets/less/overrides.less");
+module.exports = __webpack_require__("./resources/assets/less/app.less");
 
 
 /***/ }),
