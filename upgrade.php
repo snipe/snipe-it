@@ -13,7 +13,7 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 }
 
 
-($argv[1]) ? $branch = $argv[1] : $branch = 'master';
+((array_key_exists('1',$argv[1]))) ? $branch = $argv[1] : $branch = 'master';
 
 echo "Welcome to the Snipe-IT upgrader.\n\n";
 echo "Please note that this script will not download the latest Snipe-IT \n";
