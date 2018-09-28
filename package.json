@@ -30,6 +30,7 @@
     "bootstrap-datepicker": "^1.6.4",
     "bootstrap-less": "^3.3.8",
     "bootstrap-table": "^1.12.1",
+    "chart.js": "^2.7.2",
     "ekko-lightbox": "^5.1.1",
     "font-awesome": "^4.7.0",
     "icheck": "^1.0.2",

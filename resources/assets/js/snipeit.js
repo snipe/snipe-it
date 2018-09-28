@@ -6,7 +6,7 @@
  * @return {IIFE}          Immediately invoked. Returns self.
  */
 
-var lineOptions = {
+lineOptions = {
 
         legend: {
             position: "bottom"
@@ -39,7 +39,7 @@ var lineOptions = {
 
 };
 
-var pieOptions = {
+pieOptions = {
     //Boolean - Whether we should show a stroke on each segment
     segmentShowStroke: true,
     //String - The colour of each segment stroke
