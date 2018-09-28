@@ -15,7 +15,7 @@ class CustomFieldset extends Model
      * Validation rules
      * @var array
      */
-    protected $rules = [
+    public $rules = [
         "name" => "required|unique:custom_fieldsets"
     ];
 
