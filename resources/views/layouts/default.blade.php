@@ -788,8 +788,8 @@
     </div>
 
 
-
-    <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url(mix('js/app.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url(mix('js/vendor.js')) }}" nonce="{{ csrf_token() }}"></script>
     @stack('js')
 
     @section('moar_scripts')

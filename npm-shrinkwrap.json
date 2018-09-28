@@ -5778,10 +5778,10 @@
       "resolved": "https://registry.npmjs.org/jquery-ui/-/jquery-ui-1.12.1.tgz",
       "integrity": "sha1-vLQEXI3QU5wTS8FIjN0+dop6nlE="
     },
-    "jquery-ui-bundle": {
+    "jquery-ui-dist": {
       "version": "1.12.1",
-      "resolved": "https://registry.npmjs.org/jquery-ui-bundle/-/jquery-ui-bundle-1.12.1.tgz",
-      "integrity": "sha1-1r4uTDd0lOI3ixyuKSCpHRGC2MQ="
+      "resolved": "https://registry.npmjs.org/jquery-ui-dist/-/jquery-ui-dist-1.12.1.tgz",
+      "integrity": "sha1-XAgV08xvkP9fqvWyaKbiO0ypBPo="
     },
     "jquery.iframe-transport": {
       "version": "1.0.0",

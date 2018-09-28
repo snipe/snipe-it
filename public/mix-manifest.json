@@ -1,4 +1,5 @@
 {
+<<<<<<< develop
     "/js/build/vue.js": "/js/build/vue.js?id=f89ed45026610831d45d",
     "/css/build/AdminLTE.css": "/css/build/AdminLTE.css?id=5002486f605469c322ed",
     "/css/build/app.css": "/css/build/app.css?id=0c4d55f9abe9a4efe526",
@@ -15,6 +16,17 @@
     "/css/blue@2x.png": "/css/blue@2x.png?id=51135dd4d24f88f5de0b",
     "/js/dist/all.js": "/js/dist/all.js?id=95ade195248bad430b49",
     "/js/build/all.js": "/js/build/all.js?id=95ade195248bad430b49",
+=======
+    "/js/app.js": "/js/app.js?id=f72ed3705ed56421deed",
+    "/css/AdminLTE.css": "/css/AdminLTE.css?id=3f11a229453c98bd7d9d",
+    "/css/app.css": "/css/app.css?id=6c077c0864a66fa68f27",
+    "/css/overrides.css": "/css/overrides.css?id=6b828d7767ff152a582b",
+    "/css/dist/all.css": "/css/dist/all.css?id=52eeb0ac804d01ab930e",
+    "/css/build/all.css": "/css/build/all.css?id=52eeb0ac804d01ab930e",
+    "/js/vendor.js": "/js/vendor.js?id=712f037630011ba2d02c",
+    "/js/html5shiv.min.js": "/js/html5shiv.min.js?id=ba846cb704dbfbc5f1b3",
+    "/js/respond.min.js": "/js/respond.min.js?id=afc1984a3d17110449dc",
+>>>>>>> Cleaned up JS
     "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=7223478ba9bf2c6dfb4f",
     "/js/dist/bootstrap-table-simple-view.js": "/js/dist/bootstrap-table-simple-view.js?id=3926b8f4aaad6ca20d31",
     "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=8340c60bfbc12c34d2e6"
