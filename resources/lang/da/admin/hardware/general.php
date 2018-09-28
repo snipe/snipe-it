@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Aktiver er poster sporet af serienummer eller aktiv tag. De har tendens til at være højere værdi elementer, hvor identifikation af en bestemt genstand betyder noget.',
 	'archived'  				=> 'arkiverede',
     'asset'  					=> 'Asset',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Udtjek aktiv',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Klonaktiver',

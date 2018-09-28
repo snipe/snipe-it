@@ -2,23 +2,23 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
+    'asset_tag'   	=> 'Oznaka imovine',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
-    'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
+    'book_value'  	=> 'Vrednost',
+    'change' 		=> 'U/I',
+    'checkout_date' => 'Datum odjave',
+    'checkoutto' 	=> 'Odjavljen',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Download CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
+    'location' 		=> 'Lokacija',
+    'purchase_cost'	=> 'Cena',
+    'purchase_date'	=> 'Naručeno',
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
-    'image'		=> 'Device Image',
+    'title'      	=> 'Imovina ',
+    'image'		=> 'Slika uređaja',
     'days_without_acceptance' => 'Days Without Acceptance'
 
 );

@@ -60,7 +60,7 @@ return array(
     'test_mail_text' => 'This is a test from the Snipe-IT Asset Management System. If you got this, mail is working :)',
     'the_following_item' => 'The following item has been checked in: ',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'To reset your :web password, complete this form:',
     'type' => 'Type',

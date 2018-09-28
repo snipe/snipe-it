@@ -38,7 +38,7 @@ return array(
     'tag'				=> 'รหัสทรัพย์สิน',
     'update'			=> 'ปรับปรุงสินทรัพย์',
     'warranty'			=> 'การรับประกัน',
-		'warranty_expires'		=> 'Warranty Expires',
+		'warranty_expires'		=> 'การรับประกันหมดอายุ',
     'years'				=> 'ปี',
 )
 ;

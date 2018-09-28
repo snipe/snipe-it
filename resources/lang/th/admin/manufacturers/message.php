@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'ยังไม่ได้ปรับปรุงผู้ผลิต กรุณาลองใหม่อีกครั้ง',
+        'success' => 'กู้คืนข้อมูลผู้ผลิตเรียบร้อยแล้ว'
     ),
 
     'delete' => array(

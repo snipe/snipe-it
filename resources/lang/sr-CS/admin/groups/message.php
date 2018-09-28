@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Grupa već postoji!',
+    'group_not_found'     => 'Grupa [: id] ne postoji.',
+    'group_name_required' => 'Polje naziv je obavezno',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Grupa je uspešno kreirana.',
+        'update' => 'Grupa je uspešno ažurirana.',
+        'delete' => 'Grupa je uspešno izbrisana.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Jeste li sigurni da želite izbrisati ovu grupu?',
+        'create' => 'Došlo je do problema u kreiranju grupe. Molim pokušajte ponovo.',
+        'update' => 'Došlo je do problema s ažuriranjem grupe. Molim pokušajte ponovo.',
+        'delete' => 'Došlo je do problema sa brisanjem grupe. Molim pokušajte ponovo.',
     ),
 
 );

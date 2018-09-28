@@ -2,7 +2,7 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
+    'activated_help_text' => 'Tento uživatel se může přihlásit',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Majetky přiřazené :name',
     'bulk_update_warn'	=> 'Chystáte se upravit vlastnosti :user_count uživatelů. Nezapomeňte, že pomocí tohoto formuláře nemůžete změnit vlastní atributy uživatele a musíte provádět vlastní úpravy individuálně.',

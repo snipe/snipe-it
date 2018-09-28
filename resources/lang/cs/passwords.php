@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Váš odkaz s heslem byl odeslán!',
-    'user'			=> 'Tento uživatel neexistuje nebo nemá přidruženou e-mailovou adresu',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => 'Fieldset ใหม่',
     'create_field'            => 'ฟิลด์ที่กำหนดเองใหม่',
     'value_encrypted'      	        => 'ค่าของฟิลด์นี้ถูกเข้ารหัสในฐานข้อมูล เฉพาะผู้ดูแลระบบเท่านั้นที่สามารถดูค่าที่ถอดรหัสได้',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'ใส่ค่าของฟิลด์นี้ลงในอีเมลเช็คเอาต์ที่ส่งถึงผู้ใช้หรือไม่? ฟิลด์ที่เข้ารหัสไม่สามารถรวมอยู่ในอีเมลได้',
 );

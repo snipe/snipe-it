@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'Zvolený :attribute je neplatný.',
     'numeric'              => ':attribute musí být číslo.',
     'present'              => 'Pole atributu musí být přítomno.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Toto není platný regulární výraz. ',
     'regex'                => 'Formát :attribute je neplatný.',
     'required'             => 'Pole :attribute je požadováno.',
     'required_if'          => 'Položka :attribute je vyžadována, když :other je :value.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute byl již vybrán.',
     'uploaded'             => 'Atribut: se nepodařilo nahrát.',
     'url'                  => 'Formát :attribute je neplatný.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => "Je třeba, aby se :attribute neopakoval.",
 
     /*
     |--------------------------------------------------------------------------

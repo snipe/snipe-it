@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'パスワード リンクが送信されました!',
-    'user'			=> 'そのユーザーが存在しない、または関連付けられている電子メール アドレスが割り当てられていません。',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

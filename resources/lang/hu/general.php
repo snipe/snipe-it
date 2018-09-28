@@ -9,7 +9,7 @@
     'activity_report'		=> 'Tevékenység riport',
     'address'				=> 'Cím',
     'admin'					=> 'Admin',
-    'administrator'			=> 'Administrator',
+    'administrator'			=> 'Adminisztrátor',
     'add_seats'             => 'Hozzáadott ülések',
     'all_assets'			=> 'Összes eszköz',
     'all'       			=> 'Mind',

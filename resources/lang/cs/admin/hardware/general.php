@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Majetky jsou položky sledované sériovým číslem nebo značkou. Mají tendenci mít vyšší hodnotou, tam kde je důležitá identifikace určité položky.',
 	'archived'  				=> 'Archivováno',
     'asset'  					=> 'Majetek',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Vyskladnit majetek',
     'checkin'  					=> 'Převzít majetek',
     'checkout'  				=> 'Pokladní majetek',
     'clone'  					=> 'Klonovat majetek',

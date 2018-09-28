@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Tillgångar är poster som spåras med serienummer eller tillgångstagg. De tenderar att vara mer värdefulla saker där identifiering av en viss sak är viktig.',
 	'archived'  				=> 'arkiveras',
     'asset'  					=> 'Tillgång',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Checkout tillgångar',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Klon tillgång',

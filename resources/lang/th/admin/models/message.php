@@ -34,9 +34,9 @@ return array(
     ),
 
     'bulkdelete' => array(
-        'error'   		    => 'No models were selected, so nothing was deleted.',
-        'success' 		    => ':success_count model(s) deleted!',
-        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
+        'error'   		    => 'ไม่มีการเลือกรายการใด ๆ ดังนั้นจึงไม่มีสิ่งใดถูกลบ',
+        'success' 		    => ': แบบจำลอง success_count ลบ',
+        'success_partial' 	=> ': success_count โมเดลถูกลบแล้วอย่างไรก็ตาม: ไม่สามารถลบข้อมูล fail_count เนื่องจากยังมีเนื้อหาที่เชื่อมโยงอยู่'
     ),
 
 );

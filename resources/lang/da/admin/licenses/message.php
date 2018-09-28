@@ -4,8 +4,8 @@ return array(
 
     'does_not_exist' => 'Licens eksistere ikke.',
     'user_does_not_exist' => 'Bruger eksisterer ikke.',
-    'asset_does_not_exist' 	=> 'Det aktiv, du forsøger at forbinde med denne licens, findes ikke.',
-    'owner_doesnt_match_asset' => 'Det aktiv, du forsøger at associere med denne licens, ejes af andre som den person, der er valgt i den tildelte til dropdown.',
+    'asset_does_not_exist' 	=> 'Aktivet, du forsøger at associere med denne licens, findes ikke.',
+    'owner_doesnt_match_asset' => 'Aktivet, du forsøger at associere med denne licens, ejes af en anden end den person, der er valgt i Tildelt-rullemenuen.',
     'assoc_users'	 => 'Denne licens er i øjeblikket tjekket ud til en bruger og kan ikke slettes. Kontroller venligst licensen først, og prøv derefter at slette igen.',
     'select_asset_or_person' => 'Du skal vælge et aktiv eller en bruger, men ikke begge.',
 

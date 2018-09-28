@@ -12,7 +12,7 @@ return array(
     ),
 
     'update' => array(
-        'error'   => 'La categoria non è stata aggiornata, si prega di rirpovare',
+        'error'   => 'La categoria non è stata aggiornata, si prega di riprovare',
         'success' => 'Categoria aggiornata con successo.'
     ),
 

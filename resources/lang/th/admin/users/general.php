@@ -2,8 +2,8 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
-    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
+    'activated_help_text' => 'ผู้ใช้รายนี้สามารถเข้าระบบได้',
+    'activated_disabled_help_text' => 'คุณไม่สามารถแก้ไขสถานะเปิดใช้งานสำหรับบัญชีของคุณเอง',
     'assets_user'       => 'ทรัพย์สินที่กำหนดให้ :name',
     'bulk_update_warn'	=> 'คุณกำลังแก้ไขคุณสมบัติของ: user_count users โปรดทราบว่าคุณไม่สามารถเปลี่ยนแอตทริบิวต์ผู้ใช้ของคุณเองโดยใช้แบบฟอร์มนี้และต้องแก้ไขผู้ใช้ของคุณเองเป็นรายบุคคล',
     'bulk_update_help'	=> 'ฟอร์มนี้ช่วยให้คุณสามารถอัปเดตผู้ใช้หลายรายพร้อมกัน กรอกข้อมูลในช่องที่คุณต้องการเปลี่ยนเท่านั้น ช่องใด ๆ ที่เว้นไว้จะไม่มีการเปลี่ยนแปลง',
@@ -17,7 +17,7 @@ return array(
     'restore_user'		=> 'คลิกที่นี่เพื่อเรียกคืน',
     'last_login'        => 'เข้าสู่ระบบล่าสุด',
     'ldap_config_text'  => 'คุณสามารถตั้งค่าการกำหนดค่า LDAP ได้ Admin> การตั้งค่า สถานที่ที่เลือก (เลือกได้) จะถูกตั้งค่าสำหรับผู้ใช้ที่นำเข้าทั้งหมด',
-    'print_assigned'    => 'Print All Assigned',
+    'print_assigned'    => 'พิมพ์รายการทั้งหมดที่ได้รับมอบหมาย',
     'software_user'     => 'ซอฟต์แวร์ที่กำหนดให้ :name',
     'view_user'         => 'ดูผู้ใช้ :name',
     'usercsv'           => 'ไฟล์ CSV',

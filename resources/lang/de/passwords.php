@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Ihr Link wurde verschickt!',
-    'user'			=> 'Dieser Benutzer existiert nicht oder hat keine E-Mail Adresse angegeben',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

@@ -2,8 +2,8 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
-    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
+    'activated_help_text' => 'Lietotājs var pieslēgties sistēmai',
+    'activated_disabled_help_text' => 'Jūs nevarat rediģēt sava konta aktivizācijas statusu.',
     'assets_user'       => 'Aktīvi, kas piešķirti: nosaukums',
     'bulk_update_warn'	=> 'Jūs gatavojaties rediģēt lietotāju: user_count īpašības. Lūdzu, ņemiet vērā, ka jūs nevarat mainīt savus lietotāja atribūtus, izmantojot šo veidlapu, un tie ir jārediģē savam lietotājam atsevišķi.',
     'bulk_update_help'	=> 'Šī veidlapa ļauj vienlaikus atjaunināt vairākus lietotājus. Aizpildiet tikai nepieciešamos laukus. Jebkurš tukšs laukums paliek nemainīgs.',

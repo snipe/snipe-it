@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'About Accessori',
+    'about_accessories_title' 			=> 'Info su Accessori',
     'about_accessories_text'  			=> 'Gli accessori sono tutto quello che si rilascia agli utenti, ma che non hanno un numero di serie (o non si cura del loro monitoraggio in modo univoco). Ad esempio, mouse o tastiere.',
     'accessory_category' 				=> 'Categoria Accessorio',
     'accessory_name'  					=> 'Nome Accessorio',

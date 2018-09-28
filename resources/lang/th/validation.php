@@ -67,7 +67,7 @@ return array(
     'not_in'               => ':attribute ที่เลือกไม่ถูกต้อง',
     'numeric'              => ':attribute ต้องเป็นตัวเลขเท่านั้น',
     'present'              => 'ฟิลด์แอ็ตทริบิวต์: ต้องมีอยู่',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'นั่นไม่ใช่ regex ที่ถูกต้อง ',
     'regex'                => 'รูปแบบของ :attribute ไม่ถูกต้อง',
     'required'             => 'กรุณากรอกข้อมูลในฟิลด์ :attribute',
     'required_if'          => 'ฟิลด์ :attribute จำเป็นต้องมีข้อมูล เมื่อ :other เป็น :value',
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute กำลังใช้งานอยู่',
     'uploaded'             => 'แอตทริบิวต์: ล้มเหลวในการอัปโหลด',
     'url'                  => 'รูปแบบของ :attribute ไม่ถูกต้อง',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => "แอตทริบิวต์ต้องไม่ซ้ำกัน",
 
     /*
     |--------------------------------------------------------------------------
