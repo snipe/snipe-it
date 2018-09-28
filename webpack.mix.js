@@ -12,14 +12,14 @@ mix
   .less("./resources/assets/less/app.less", "css/build")
   .styles(
     [
+      "./public/css/build/AdminLTE.css",
       "./node_modules/select2/dist/css/select2.css",
       "./node_modules/admin-lte/plugins/iCheck/minimal/blue.css",
-      "./public/css/build/AdminLTE.css",
-      "./public/css/build/app.css",
       "./node_modules/font-awesome/css/font-awesome.css",
       "./node_modules/icheck/skins/minimal/minimal.css",
       "./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css",
-      "./node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css"
+      "./node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css",
+      "./public/css/build/app.css",
     ],
     "./public/css/all.css"
   );
@@ -32,19 +32,14 @@ mix.minify([
   "./public/css/skins/skin-green-dark.css",
   "./public/css/skins/skin-orange-dark.css",
   "./public/css/skins/skin-red-dark.css"
-]);
-mix.version([
-  "./public/css/skins/skin-green-dark.css",
-  "./public/css/skins/skin-orange-dark.css",
-  "./public/css/skins/skin-red-dark.css"
-]);
+]).version();
 /**
  * Copy, minify and version signature-pad.css
  */
 mix
   .copy("./resources/assets/css/signature-pad.css", "./public/css")
   .minify("./public/css/signature-pad.css")
-  .version("./public/css/signature-pad.css");
+  .version();
 
 /**
  * Copy image for iCheck
