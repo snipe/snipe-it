@@ -330,19 +330,19 @@
                           <div class="col-md-9">
                               @if (config('app.lock_passwords'))
                                   <div class="icheckbox disabled" style="padding-left: 10px;">
-                                      {{ Form::checkbox('activated', '1', old('activated', $user->activated),['class' => 'minimal', 'disabled'=>'disabled']) }}
+                                      <input type="checkbox" value="1" name="activated" class="minimal disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled">
                                       {{ trans('admin/users/general.activated_help_text') }}
                                       <p class="help-block">{{ trans('general.feature_disabled') }}</p>
                                   </div>
                               @elseif ($user->id === Auth::user()->id)
                                   <div class="icheckbox disabled" style="padding-left: 10px;">
-                                  {{ Form::checkbox('activated', '1', old('activated', $user->activated),['class' => 'minimal', 'disabled'=>'disabled']) }}
+                                      <input type="checkbox" value="1" name="activated" class="minimal disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled">
                                       {{ trans('admin/users/general.activated_help_text') }}
                                       <p class="help-block">{{ trans('admin/users/general.activated_disabled_help_text') }}</p>
                                   </div>
                               @else
                                   <div style="padding-left: 10px;">
-                                  {{ Form::checkbox('activated', '1', old('activated', $user->activated),['class' => 'minimal', 'id' => 'user_activated' ]) }}
+                                      <input type="checkbox" value="1" name="activated" class="minimal" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }}>
                                   {{ trans('admin/users/general.activated_help_text') }}
                                   </div>
                               @endif
