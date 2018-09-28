@@ -6,8 +6,8 @@
          Snipe-IT Setup
         @show
       </title>
-        <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
-        <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
+      <link rel="stylesheet" href="{{ mix('css/all.css') }}">
+
 
 
 

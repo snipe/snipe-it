@@ -19,9 +19,6 @@
             padding-right: 40px;
         }
     </style>
-    <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href="{{ asset('js/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
-
 
     {{ Form::open(['method' => 'POST', 'files' => true, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
     <!-- CSRF Token -->
