@@ -10455,16 +10455,18 @@
           "resolved": "https://registry.npmjs.org/jspdf/-/jspdf-1.3.4.tgz",
           "integrity": "sha1-j0uu3Rj1wkYPAQdijHiYxgarKW8=",
           "requires": {
-            "cf-blob.js": "0.0.1"
+            "adler32cs": "github:chick307/adler32cs.js#7fd00ffa24bf173a1eeb987ce7a21ae214eff658",
+            "cf-blob.js": "0.0.1",
+            "filesaver.js": "github:andyinabox/FileSaver.js#973b433b8fbaee9a11d53b9ae423b046742cfe32"
           },
           "dependencies": {
             "adler32cs": {
               "version": "github:chick307/adler32cs.js#7fd00ffa24bf173a1eeb987ce7a21ae214eff658",
-              "from": "github:chick307/adler32cs.js#7fd00ffa24bf173a1eeb987ce7a21ae214eff658"
+              "from": "github:chick307/adler32cs.js"
             },
             "filesaver.js": {
               "version": "github:andyinabox/FileSaver.js#973b433b8fbaee9a11d53b9ae423b046742cfe32",
-              "from": "github:andyinabox/FileSaver.js#973b433b8fbaee9a11d53b9ae423b046742cfe32"
+              "from": "github:andyinabox/FileSaver.js"
             }
           }
         },
