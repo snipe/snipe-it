@@ -1,3 +1,699 @@
+/*! AdminLTE app.js
+ * ================
+ * Main JS application file for AdminLTE v2. This file
+ * should be included in all pages. It controls some layout
+ * options and implements exclusive AdminLTE plugins.
+ *
+ * @Author  Almsaeed Studio
+ * @Support <http://www.almsaeedstudio.com>
+ * @Email   <support@almsaeedstudio.com>
+ * @version 2.3.0
+ * @license MIT <http://opensource.org/licenses/MIT>
+ */
+
+//Make sure jQuery has been loaded before app.js
+if (typeof jQuery === "undefined") {
+    throw new Error("AdminLTE requires jQuery");
+  }
+  
+  
+  /* AdminLTE
+   *
+   * @type Object
+   * @description $.AdminLTE is the main object for the template's app.
+   *              It's used for implementing functions and options related
+   *              to the template. Keeping everything wrapped in an object
+   *              prevents conflict with other plugins and is a better
+   *              way to organize our code.
+   */
+  $.AdminLTE = {};
+  
+  /* --------------------
+   * - AdminLTE Options -
+   * --------------------
+   * Modify these options to suit your implementation
+   */
+  $.AdminLTE.options = {
+    //Add slimscroll to navbar menus
+    //This requires you to load the slimscroll plugin
+    //in every page before app.js
+    navbarMenuSlimscroll: true,
+    navbarMenuSlimscrollWidth: "3px", //The width of the scroll bar
+    navbarMenuHeight: "200px", //The height of the inner menu
+    //General animation speed for JS animated elements such as box collapse/expand and
+    //sidebar treeview slide up/down. This options accepts an integer as milliseconds,
+    //'fast', 'normal', or 'slow'
+    animationSpeed: 500,
+    //Sidebar push menu toggle button selector
+    sidebarToggleSelector: "[data-toggle='offcanvas']",
+    //Activate sidebar push menu
+    sidebarPushMenu: true,
+    //Activate sidebar slimscroll if the fixed layout is set (requires SlimScroll Plugin)
+    sidebarSlimScroll: true,
+    //Enable sidebar expand on hover effect for sidebar mini
+    //This option is forced to true if both the fixed layout and sidebar mini
+    //are used together
+    sidebarExpandOnHover: false,
+    //BoxRefresh Plugin
+    enableBoxRefresh: true,
+    //Bootstrap.js tooltip
+    enableBSToppltip: true,
+    BSTooltipSelector: "[data-toggle='tooltip']",
+    //Enable Fast Click. Fastclick.js creates a more
+    //native touch experience with touch devices. If you
+    //choose to enable the plugin, make sure you load the script
+    //before AdminLTE's app.js
+    enableFastclick: false,
+    //Control Sidebar Options
+    enableControlSidebar: true,
+    controlSidebarOptions: {
+      //Which button should trigger the open/close event
+      toggleBtnSelector: "[data-toggle='control-sidebar']",
+      //The sidebar selector
+      selector: ".control-sidebar",
+      //Enable slide over content
+      slide: true
+    },
+    //Box Widget Plugin. Enable this plugin
+    //to allow boxes to be collapsed and/or removed
+    enableBoxWidget: true,
+    //Box Widget plugin options
+    boxWidgetOptions: {
+      boxWidgetIcons: {
+        //Collapse icon
+        collapse: 'fa-minus',
+        //Open icon
+        open: 'fa-plus',
+        //Remove icon
+        remove: 'fa-times'
+      },
+      boxWidgetSelectors: {
+        //Remove button selector
+        remove: '[data-widget="remove"]',
+        //Collapse button selector
+        collapse: '[data-widget="collapse"]'
+      }
+    },
+    //Direct Chat plugin options
+    directChat: {
+      //Enable direct chat by default
+      enable: true,
+      //The button to open and close the chat contacts pane
+      contactToggleSelector: '[data-widget="chat-pane-toggle"]'
+    },
+    //Define the set of colors to use globally around the website
+    colors: {
+      lightBlue: "#3c8dbc",
+      red: "#f56954",
+      green: "#00a65a",
+      aqua: "#00c0ef",
+      yellow: "#f39c12",
+      blue: "#0073b7",
+      navy: "#001F3F",
+      teal: "#39CCCC",
+      olive: "#3D9970",
+      lime: "#01FF70",
+      orange: "#FF851B",
+      fuchsia: "#F012BE",
+      purple: "#8E24AA",
+      maroon: "#D81B60",
+      black: "#222222",
+      gray: "#d2d6de"
+    },
+    //The standard screen sizes that bootstrap uses.
+    //If you change these in the variables.less file, change
+    //them here too.
+    screenSizes: {
+      xs: 480,
+      sm: 768,
+      md: 992,
+      lg: 1200
+    }
+  };
+  
+  /* ------------------
+   * - Implementation -
+   * ------------------
+   * The next block of code implements AdminLTE's
+   * functions and plugins as specified by the
+   * options above.
+   */
+  $(function () {
+    "use strict";
+  
+    //Fix for IE page transitions
+    $("body").removeClass("hold-transition");
+  
+    //Extend options if external options exist
+    if (typeof AdminLTEOptions !== "undefined") {
+      $.extend(true,
+              $.AdminLTE.options,
+              AdminLTEOptions);
+    }
+  
+    //Easy access to options
+    var o = $.AdminLTE.options;
+  
+    //Set up the object
+    _init();
+  
+    //Activate the layout maker
+    $.AdminLTE.layout.activate();
+  
+    //Enable sidebar tree view controls
+    $.AdminLTE.tree('.sidebar');
+  
+    //Enable control sidebar
+    if (o.enableControlSidebar) {
+      $.AdminLTE.controlSidebar.activate();
+    }
+  
+    //Add slimscroll to navbar dropdown
+    if (o.navbarMenuSlimscroll && typeof $.fn.slimscroll != 'undefined') {
+      $(".navbar .menu").slimscroll({
+        height: o.navbarMenuHeight,
+        alwaysVisible: false,
+        size: o.navbarMenuSlimscrollWidth
+      }).css("width", "100%");
+    }
+  
+    //Activate sidebar push menu
+    if (o.sidebarPushMenu) {
+      $.AdminLTE.pushMenu.activate(o.sidebarToggleSelector);
+    }
+  
+    //Activate Bootstrap tooltip
+    if (o.enableBSToppltip) {
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+      $('body').tooltip({
+        selector: o.BSTooltipSelector
+      });
+  
+    }
+  
+    //Activate box widget
+    if (o.enableBoxWidget) {
+      $.AdminLTE.boxWidget.activate();
+    }
+  
+    //Activate fast click
+    if (o.enableFastclick && typeof FastClick != 'undefined') {
+      FastClick.attach(document.body);
+    }
+  
+    //Activate direct chat widget
+    if (o.directChat.enable) {
+      $(document).on('click', o.directChat.contactToggleSelector, function () {
+        var box = $(this).parents('.direct-chat').first();
+        box.toggleClass('direct-chat-contacts-open');
+      });
+    }
+  
+    /*
+     * INITIALIZE BUTTON TOGGLE
+     * ------------------------
+     */
+    $('.btn-group[data-toggle="btn-toggle"]').each(function () {
+      var group = $(this);
+      $(this).find(".btn").on('click', function (e) {
+        group.find(".btn.active").removeClass("active");
+        $(this).addClass("active");
+        e.preventDefault();
+      });
+  
+    });
+  });
+  
+  /* ----------------------------------
+   * - Initialize the AdminLTE Object -
+   * ----------------------------------
+   * All AdminLTE functions are implemented below.
+   */
+  function _init() {
+    'use strict';
+    /* Layout
+     * ======
+     * Fixes the layout height in case min-height fails.
+     *
+     * @type Object
+     * @usage $.AdminLTE.layout.activate()
+     *        $.AdminLTE.layout.fix()
+     *        $.AdminLTE.layout.fixSidebar()
+     */
+    $.AdminLTE.layout = {
+      activate: function () {
+        var _this = this;
+        _this.fix();
+        _this.fixSidebar();
+        $(window, ".wrapper").resize(function () {
+          _this.fix();
+          _this.fixSidebar();
+        });
+      },
+      fix: function () {
+        //Get window height and the wrapper height
+        var neg = $('.main-header').outerHeight() + $('.main-footer').outerHeight();
+        var window_height = $(window).height();
+        var sidebar_height = $(".sidebar").height();
+        //Set the min-height of the content and sidebar based on the
+        //the height of the document.
+        if ($("body").hasClass("fixed")) {
+          $(".content-wrapper, .right-side").css('min-height', window_height - $('.main-footer').outerHeight());
+        } else {
+          var postSetWidth;
+          if (window_height >= sidebar_height) {
+            $(".content-wrapper, .right-side").css('min-height', window_height - neg);
+            postSetWidth = window_height - neg;
+          } else {
+            $(".content-wrapper, .right-side").css('min-height', sidebar_height);
+            postSetWidth = sidebar_height;
+          }
+  
+          //Fix for the control sidebar height
+          var controlSidebar = $($.AdminLTE.options.controlSidebarOptions.selector);
+          if (typeof controlSidebar !== "undefined") {
+            if (controlSidebar.height() > postSetWidth)
+              $(".content-wrapper, .right-side").css('min-height', controlSidebar.height());
+          }
+  
+        }
+      },
+      fixSidebar: function () {
+        //Make sure the body tag has the .fixed class
+        if (!$("body").hasClass("fixed")) {
+          if (typeof $.fn.slimScroll != 'undefined') {
+            $(".sidebar").slimScroll({destroy: true}).height("auto");
+          }
+          return;
+        } else if (typeof $.fn.slimScroll == 'undefined' && window.console) {
+          window.console.error("Error: the fixed layout requires the slimscroll plugin!");
+        }
+        //Enable slimscroll for fixed layout
+        if ($.AdminLTE.options.sidebarSlimScroll) {
+          if (typeof $.fn.slimScroll != 'undefined') {
+            //Destroy if it exists
+            $(".sidebar").slimScroll({destroy: true}).height("auto");
+            //Add slimscroll
+            $(".sidebar").slimscroll({
+              height: ($(window).height() - $(".main-header").height()) + "px",
+              color: "rgba(0,0,0,0.2)",
+              size: "3px"
+            });
+          }
+        }
+      }
+    };
+  
+    /* PushMenu()
+     * ==========
+     * Adds the push menu functionality to the sidebar.
+     *
+     * @type Function
+     * @usage: $.AdminLTE.pushMenu("[data-toggle='offcanvas']")
+     */
+    $.AdminLTE.pushMenu = {
+      activate: function (toggleBtn) {
+        //Get the screen sizes
+        var screenSizes = $.AdminLTE.options.screenSizes;
+  
+        //Enable sidebar toggle
+        $(toggleBtn).on('click', function (e) {
+          e.preventDefault();
+  
+          //Enable sidebar push menu
+          if ($(window).width() > (screenSizes.sm - 1)) {
+            if ($("body").hasClass('sidebar-collapse')) {
+              $("body").removeClass('sidebar-collapse').trigger('expanded.pushMenu');
+            } else {
+              $("body").addClass('sidebar-collapse').trigger('collapsed.pushMenu');
+            }
+          }
+          //Handle sidebar push menu for small screens
+          else {
+            if ($("body").hasClass('sidebar-open')) {
+              $("body").removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
+            } else {
+              $("body").addClass('sidebar-open').trigger('expanded.pushMenu');
+            }
+          }
+        });
+  
+        $(".content-wrapper").click(function () {
+          //Enable hide menu when clicking on the content-wrapper on small screens
+          if ($(window).width() <= (screenSizes.sm - 1) && $("body").hasClass("sidebar-open")) {
+            $("body").removeClass('sidebar-open');
+          }
+        });
+  
+        //Enable expand on hover for sidebar mini
+        if ($.AdminLTE.options.sidebarExpandOnHover
+                || ($('body').hasClass('fixed')
+                        && $('body').hasClass('sidebar-mini'))) {
+          this.expandOnHover();
+        }
+      },
+      expandOnHover: function () {
+        var _this = this;
+        var screenWidth = $.AdminLTE.options.screenSizes.sm - 1;
+        //Expand sidebar on hover
+        $('.main-sidebar').hover(function () {
+          if ($('body').hasClass('sidebar-mini')
+                  && $("body").hasClass('sidebar-collapse')
+                  && $(window).width() > screenWidth) {
+            _this.expand();
+          }
+        }, function () {
+          if ($('body').hasClass('sidebar-mini')
+                  && $('body').hasClass('sidebar-expanded-on-hover')
+                  && $(window).width() > screenWidth) {
+            _this.collapse();
+          }
+        });
+      },
+      expand: function () {
+        $("body").removeClass('sidebar-collapse').addClass('sidebar-expanded-on-hover');
+      },
+      collapse: function () {
+        if ($('body').hasClass('sidebar-expanded-on-hover')) {
+          $('body').removeClass('sidebar-expanded-on-hover').addClass('sidebar-collapse');
+        }
+      }
+    };
+  
+    /* Tree()
+     * ======
+     * Converts the sidebar into a multilevel
+     * tree view menu.
+     *
+     * @type Function
+     * @Usage: $.AdminLTE.tree('.sidebar')
+     */
+    $.AdminLTE.tree = function (menu) {
+      var _this = this;
+      var animationSpeed = $.AdminLTE.options.animationSpeed;
+      $(document).on('click', menu + ' li a', function (e) {
+        //Get the clicked link and the next element
+        var $this = $(this);
+        var checkElement = $this.next();
+  
+        //Check if the next element is a menu and is visible
+        if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible'))) {
+          //Close the menu
+          checkElement.slideUp(animationSpeed, function () {
+            checkElement.removeClass('menu-open');
+            //Fix the layout in case the sidebar stretches over the height of the window
+            //_this.layout.fix();
+          });
+          checkElement.parent("li").removeClass("active");
+        }
+        //If the menu is not visible
+        else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
+          //Get the parent menu
+          var parent = $this.parents('ul').first();
+          //Close all open menus within the parent
+          var ul = parent.find('ul:visible').slideUp(animationSpeed);
+          //Remove the menu-open class from the parent
+          ul.removeClass('menu-open');
+          //Get the parent li
+          var parent_li = $this.parent("li");
+  
+          //Open the target menu and add the menu-open class
+          checkElement.slideDown(animationSpeed, function () {
+            //Add the class active to the parent li
+            checkElement.addClass('menu-open');
+            parent.find('li.active').removeClass('active');
+            parent_li.addClass('active');
+            //Fix the layout in case the sidebar stretches over the height of the window
+            _this.layout.fix();
+          });
+        }
+        //if this isn't a link, prevent the page from being redirected
+        if (checkElement.is('.treeview-menu')) {
+          e.preventDefault();
+        }
+      });
+    };
+  
+    /* ControlSidebar
+     * ==============
+     * Adds functionality to the right sidebar
+     *
+     * @type Object
+     * @usage $.AdminLTE.controlSidebar.activate(options)
+     */
+    $.AdminLTE.controlSidebar = {
+      //instantiate the object
+      activate: function () {
+        //Get the object
+        var _this = this;
+        //Update options
+        var o = $.AdminLTE.options.controlSidebarOptions;
+        //Get the sidebar
+        var sidebar = $(o.selector);
+        //The toggle button
+        var btn = $(o.toggleBtnSelector);
+  
+        //Listen to the click event
+        btn.on('click', function (e) {
+          e.preventDefault();
+          //If the sidebar is not open
+          if (!sidebar.hasClass('control-sidebar-open')
+                  && !$('body').hasClass('control-sidebar-open')) {
+            //Open the sidebar
+            _this.open(sidebar, o.slide);
+          } else {
+            _this.close(sidebar, o.slide);
+          }
+        });
+  
+        //If the body has a boxed layout, fix the sidebar bg position
+        var bg = $(".control-sidebar-bg");
+        _this._fix(bg);
+  
+        //If the body has a fixed layout, make the control sidebar fixed
+        if ($('body').hasClass('fixed')) {
+          _this._fixForFixed(sidebar);
+        } else {
+          //If the content height is less than the sidebar's height, force max height
+          if ($('.content-wrapper, .right-side').height() < sidebar.height()) {
+            _this._fixForContent(sidebar);
+          }
+        }
+      },
+      //Open the control sidebar
+      open: function (sidebar, slide) {
+        //Slide over content
+        if (slide) {
+          sidebar.addClass('control-sidebar-open');
+        } else {
+          //Push the content by adding the open class to the body instead
+          //of the sidebar itself
+          $('body').addClass('control-sidebar-open');
+        }
+      },
+      //Close the control sidebar
+      close: function (sidebar, slide) {
+        if (slide) {
+          sidebar.removeClass('control-sidebar-open');
+        } else {
+          $('body').removeClass('control-sidebar-open');
+        }
+      },
+      _fix: function (sidebar) {
+        var _this = this;
+        if ($("body").hasClass('layout-boxed')) {
+          sidebar.css('position', 'absolute');
+          sidebar.height($(".wrapper").height());
+          $(window).resize(function () {
+            _this._fix(sidebar);
+          });
+        } else {
+          sidebar.css({
+            'position': 'fixed',
+            'height': 'auto'
+          });
+        }
+      },
+      _fixForFixed: function (sidebar) {
+        sidebar.css({
+          'position': 'fixed',
+          'max-height': '100%',
+          'overflow': 'auto',
+          'padding-bottom': '50px'
+        });
+      },
+      _fixForContent: function (sidebar) {
+        $(".content-wrapper, .right-side").css('min-height', sidebar.height());
+      }
+    };
+  
+    /* BoxWidget
+     * =========
+     * BoxWidget is a plugin to handle collapsing and
+     * removing boxes from the screen.
+     *
+     * @type Object
+     * @usage $.AdminLTE.boxWidget.activate()
+     *        Set all your options in the main $.AdminLTE.options object
+     */
+    $.AdminLTE.boxWidget = {
+      selectors: $.AdminLTE.options.boxWidgetOptions.boxWidgetSelectors,
+      icons: $.AdminLTE.options.boxWidgetOptions.boxWidgetIcons,
+      animationSpeed: $.AdminLTE.options.animationSpeed,
+      activate: function (_box) {
+        var _this = this;
+        if (!_box) {
+          _box = document; // activate all boxes per default
+        }
+        //Listen for collapse event triggers
+        $(_box).on('click', _this.selectors.collapse, function (e) {
+          e.preventDefault();
+          _this.collapse($(this));
+        });
+  
+        //Listen for remove event triggers
+        $(_box).on('click', _this.selectors.remove, function (e) {
+          e.preventDefault();
+          _this.remove($(this));
+        });
+      },
+      collapse: function (element) {
+        var _this = this;
+        //Find the box parent
+        var box = element.parents(".box").first();
+        //Find the body and the footer
+        var box_content = box.find("> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer");
+        if (!box.hasClass("collapsed-box")) {
+          //Convert minus into plus
+          element.children(":first")
+                  .removeClass(_this.icons.collapse)
+                  .addClass(_this.icons.open);
+          //Hide the content
+          box_content.slideUp(_this.animationSpeed, function () {
+            box.addClass("collapsed-box");
+          });
+        } else {
+          //Convert plus into minus
+          element.children(":first")
+                  .removeClass(_this.icons.open)
+                  .addClass(_this.icons.collapse);
+          //Show the content
+          box_content.slideDown(_this.animationSpeed, function () {
+            box.removeClass("collapsed-box");
+          });
+        }
+      },
+      remove: function (element) {
+        //Find the box parent
+        var box = element.parents(".box").first();
+        box.slideUp(this.animationSpeed);
+      }
+    };
+  }
+  
+  /* ------------------
+   * - Custom Plugins -
+   * ------------------
+   * All custom plugins are defined below.
+   */
+  
+  /*
+   * BOX REFRESH BUTTON
+   * ------------------
+   * This is a custom plugin to use with the component BOX. It allows you to add
+   * a refresh button to the box. It converts the box's state to a loading state.
+   *
+   * @type plugin
+   * @usage $("#box-widget").boxRefresh( options );
+   */
+  (function ($) {
+  
+    "use strict";
+  
+    $.fn.boxRefresh = function (options) {
+  
+      // Render options
+      var settings = $.extend({
+        //Refresh button selector
+        trigger: ".refresh-btn",
+        //File source to be loaded (e.g: ajax/src.php)
+        source: "",
+        //Callbacks
+        onLoadStart: function (box) {
+          return box;
+        }, //Right after the button has been clicked
+        onLoadDone: function (box) {
+          return box;
+        } //When the source has been loaded
+  
+      }, options);
+  
+      //The overlay
+      var overlay = $('<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>');
+  
+      return this.each(function () {
+        //if a source is specified
+        if (settings.source === "") {
+          if (window.console) {
+            window.console.log("Please specify a source first - boxRefresh()");
+          }
+          return;
+        }
+        //the box
+        var box = $(this);
+        //the button
+        var rBtn = box.find(settings.trigger).first();
+  
+        //On trigger click
+        rBtn.on('click', function (e) {
+          e.preventDefault();
+          //Add loading overlay
+          start(box);
+  
+          //Perform ajax call
+          box.find(".box-body").load(settings.source, function () {
+            done(box);
+          });
+        });
+      });
+  
+      function start(box) {
+        //Add overlay and loading img
+        box.append(overlay);
+  
+        settings.onLoadStart.call(box);
+      }
+  
+      function done(box) {
+        //Remove overlay and loading img
+        box.find(overlay).remove();
+  
+        settings.onLoadDone.call(box);
+      }
+  
+    };
+  
+  })(jQuery);
+  
+  /*
+   * EXPLICIT BOX ACTIVATION
+   * -----------------------
+   * This is a custom plugin to use with the component BOX. It allows you to activate
+   * a box inserted in the DOM after the app.js was loaded.
+   *
+   * @type plugin
+   * @usage $("#box-widget").activateBox();
+   */
+  (function ($) {
+  
+    'use strict';
+  
+    $.fn.activateBox = function () {
+      $.AdminLTE.boxWidget.activate(this);
+    };
+  
+  })(jQuery);
+  
 /*! jQuery UI - v1.12.1 - 2016-09-14
 * http://jqueryui.com
 * Includes: widget.js, position.js, data.js, disable-selection.js, effect.js, effects/effect-blind.js, effects/effect-bounce.js, effects/effect-clip.js, effects/effect-drop.js, effects/effect-explode.js, effects/effect-fade.js, effects/effect-fold.js, effects/effect-highlight.js, effects/effect-puff.js, effects/effect-pulsate.js, effects/effect-scale.js, effects/effect-shake.js, effects/effect-size.js, effects/effect-slide.js, effects/effect-transfer.js, focusable.js, form-reset-mixin.js, jquery-1-7.js, keycode.js, labels.js, scroll-parent.js, tabbable.js, unique-id.js, widgets/accordion.js, widgets/autocomplete.js, widgets/button.js, widgets/checkboxradio.js, widgets/controlgroup.js, widgets/datepicker.js, widgets/dialog.js, widgets/draggable.js, widgets/droppable.js, widgets/menu.js, widgets/mouse.js, widgets/progressbar.js, widgets/resizable.js, widgets/selectable.js, widgets/selectmenu.js, widgets/slider.js, widgets/sortable.js, widgets/spinner.js, widgets/tabs.js, widgets/tooltip.js
@@ -20915,755 +21611,6 @@ var widgetsTooltip = $.ui.tooltip;
 
 }));
 
-/*! jQuery UI - v1.12.1 - 2018-02-10
- * http://jqueryui.com
- * Includes: widget.js
- * Copyright jQuery Foundation and other contributors; Licensed MIT */
-
-(function( factory ) {
-  if ( typeof define === "function" && define.amd ) {
-
-    // AMD. Register as an anonymous module.
-    define([ "jquery" ], factory );
-  } else {
-
-    // Browser globals
-    factory( jQuery );
-  }
-}(function( $ ) {
-
-  $.ui = $.ui || {};
-
-  var version = $.ui.version = "1.12.1";
-
-
-  /*!
-   * jQuery UI Widget 1.12.1
-   * http://jqueryui.com
-   *
-   * Copyright jQuery Foundation and other contributors
-   * Released under the MIT license.
-   * http://jquery.org/license
-   */
-
-  //>>label: Widget
-  //>>group: Core
-  //>>description: Provides a factory for creating stateful widgets with a common API.
-  //>>docs: http://api.jqueryui.com/jQuery.widget/
-  //>>demos: http://jqueryui.com/widget/
-
-
-
-  var widgetUuid = 0;
-  var widgetSlice = Array.prototype.slice;
-
-  $.cleanData = ( function( orig ) {
-    return function( elems ) {
-      var events, elem, i;
-      for ( i = 0; ( elem = elems[ i ] ) != null; i++ ) {
-        try {
-
-          // Only trigger remove when necessary to save time
-          events = $._data( elem, "events" );
-          if ( events && events.remove ) {
-            $( elem ).triggerHandler( "remove" );
-          }
-
-          // Http://bugs.jquery.com/ticket/8235
-        } catch ( e ) {}
-      }
-      orig( elems );
-    };
-  } )( $.cleanData );
-
-  $.widget = function( name, base, prototype ) {
-    var existingConstructor, constructor, basePrototype;
-
-    // ProxiedPrototype allows the provided prototype to remain unmodified
-    // so that it can be used as a mixin for multiple widgets (#8876)
-    var proxiedPrototype = {};
-
-    var namespace = name.split( "." )[ 0 ];
-    name = name.split( "." )[ 1 ];
-    var fullName = namespace + "-" + name;
-
-    if ( !prototype ) {
-      prototype = base;
-      base = $.Widget;
-    }
-
-    if ( $.isArray( prototype ) ) {
-      prototype = $.extend.apply( null, [ {} ].concat( prototype ) );
-    }
-
-    // Create selector for plugin
-    $.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
-      return !!$.data( elem, fullName );
-    };
-
-    $[ namespace ] = $[ namespace ] || {};
-    existingConstructor = $[ namespace ][ name ];
-    constructor = $[ namespace ][ name ] = function( options, element ) {
-
-      // Allow instantiation without "new" keyword
-      if ( !this._createWidget ) {
-        return new constructor( options, element );
-      }
-
-      // Allow instantiation without initializing for simple inheritance
-      // must use "new" keyword (the code above always passes args)
-      if ( arguments.length ) {
-        this._createWidget( options, element );
-      }
-    };
-
-    // Extend with the existing constructor to carry over any static properties
-    $.extend( constructor, existingConstructor, {
-      version: prototype.version,
-
-      // Copy the object used to create the prototype in case we need to
-      // redefine the widget later
-      _proto: $.extend( {}, prototype ),
-
-      // Track widgets that inherit from this widget in case this widget is
-      // redefined after a widget inherits from it
-      _childConstructors: []
-    } );
-
-    basePrototype = new base();
-
-    // We need to make the options hash a property directly on the new instance
-    // otherwise we'll modify the options hash on the prototype that we're
-    // inheriting from
-    basePrototype.options = $.widget.extend( {}, basePrototype.options );
-    $.each( prototype, function( prop, value ) {
-      if ( !$.isFunction( value ) ) {
-        proxiedPrototype[ prop ] = value;
-        return;
-      }
-      proxiedPrototype[ prop ] = ( function() {
-        function _super() {
-          return base.prototype[ prop ].apply( this, arguments );
-        }
-
-        function _superApply( args ) {
-          return base.prototype[ prop ].apply( this, args );
-        }
-
-        return function() {
-          var __super = this._super;
-          var __superApply = this._superApply;
-          var returnValue;
-
-          this._super = _super;
-          this._superApply = _superApply;
-
-          returnValue = value.apply( this, arguments );
-
-          this._super = __super;
-          this._superApply = __superApply;
-
-          return returnValue;
-        };
-      } )();
-    } );
-    constructor.prototype = $.widget.extend( basePrototype, {
-
-      // TODO: remove support for widgetEventPrefix
-      // always use the name + a colon as the prefix, e.g., draggable:start
-      // don't prefix for widgets that aren't DOM-based
-      widgetEventPrefix: existingConstructor ? ( basePrototype.widgetEventPrefix || name ) : name
-    }, proxiedPrototype, {
-      constructor: constructor,
-      namespace: namespace,
-      widgetName: name,
-      widgetFullName: fullName
-    } );
-
-    // If this widget is being redefined then we need to find all widgets that
-    // are inheriting from it and redefine all of them so that they inherit from
-    // the new version of this widget. We're essentially trying to replace one
-    // level in the prototype chain.
-    if ( existingConstructor ) {
-      $.each( existingConstructor._childConstructors, function( i, child ) {
-        var childPrototype = child.prototype;
-
-        // Redefine the child widget using the same prototype that was
-        // originally used, but inherit from the new version of the base
-        $.widget( childPrototype.namespace + "." + childPrototype.widgetName, constructor,
-          child._proto );
-      } );
-
-      // Remove the list of existing child constructors from the old constructor
-      // so the old child constructors can be garbage collected
-      delete existingConstructor._childConstructors;
-    } else {
-      base._childConstructors.push( constructor );
-    }
-
-    $.widget.bridge( name, constructor );
-
-    return constructor;
-  };
-
-  $.widget.extend = function( target ) {
-    var input = widgetSlice.call( arguments, 1 );
-    var inputIndex = 0;
-    var inputLength = input.length;
-    var key;
-    var value;
-
-    for ( ; inputIndex < inputLength; inputIndex++ ) {
-      for ( key in input[ inputIndex ] ) {
-        value = input[ inputIndex ][ key ];
-        if ( input[ inputIndex ].hasOwnProperty( key ) && value !== undefined ) {
-
-          // Clone objects
-          if ( $.isPlainObject( value ) ) {
-            target[ key ] = $.isPlainObject( target[ key ] ) ?
-              $.widget.extend( {}, target[ key ], value ) :
-
-              // Don't extend strings, arrays, etc. with objects
-              $.widget.extend( {}, value );
-
-            // Copy everything else by reference
-          } else {
-            target[ key ] = value;
-          }
-        }
-      }
-    }
-    return target;
-  };
-
-  $.widget.bridge = function( name, object ) {
-    var fullName = object.prototype.widgetFullName || name;
-    $.fn[ name ] = function( options ) {
-      var isMethodCall = typeof options === "string";
-      var args = widgetSlice.call( arguments, 1 );
-      var returnValue = this;
-
-      if ( isMethodCall ) {
-
-        // If this is an empty collection, we need to have the instance method
-        // return undefined instead of the jQuery instance
-        if ( !this.length && options === "instance" ) {
-          returnValue = undefined;
-        } else {
-          this.each( function() {
-            var methodValue;
-            var instance = $.data( this, fullName );
-
-            if ( options === "instance" ) {
-              returnValue = instance;
-              return false;
-            }
-
-            if ( !instance ) {
-              return $.error( "cannot call methods on " + name +
-                " prior to initialization; " +
-                "attempted to call method '" + options + "'" );
-            }
-
-            if ( !$.isFunction( instance[ options ] ) || options.charAt( 0 ) === "_" ) {
-              return $.error( "no such method '" + options + "' for " + name +
-                " widget instance" );
-            }
-
-            methodValue = instance[ options ].apply( instance, args );
-
-            if ( methodValue !== instance && methodValue !== undefined ) {
-              returnValue = methodValue && methodValue.jquery ?
-                returnValue.pushStack( methodValue.get() ) :
-                methodValue;
-              return false;
-            }
-          } );
-        }
-      } else {
-
-        // Allow multiple hashes to be passed on init
-        if ( args.length ) {
-          options = $.widget.extend.apply( null, [ options ].concat( args ) );
-        }
-
-        this.each( function() {
-          var instance = $.data( this, fullName );
-          if ( instance ) {
-            instance.option( options || {} );
-            if ( instance._init ) {
-              instance._init();
-            }
-          } else {
-            $.data( this, fullName, new object( options, this ) );
-          }
-        } );
-      }
-
-      return returnValue;
-    };
-  };
-
-  $.Widget = function( /* options, element */ ) {};
-  $.Widget._childConstructors = [];
-
-  $.Widget.prototype = {
-    widgetName: "widget",
-    widgetEventPrefix: "",
-    defaultElement: "<div>",
-
-    options: {
-      classes: {},
-      disabled: false,
-
-      // Callbacks
-      create: null
-    },
-
-    _createWidget: function( options, element ) {
-      element = $( element || this.defaultElement || this )[ 0 ];
-      this.element = $( element );
-      this.uuid = widgetUuid++;
-      this.eventNamespace = "." + this.widgetName + this.uuid;
-
-      this.bindings = $();
-      this.hoverable = $();
-      this.focusable = $();
-      this.classesElementLookup = {};
-
-      if ( element !== this ) {
-        $.data( element, this.widgetFullName, this );
-        this._on( true, this.element, {
-          remove: function( event ) {
-            if ( event.target === element ) {
-              this.destroy();
-            }
-          }
-        } );
-        this.document = $( element.style ?
-
-          // Element within the document
-          element.ownerDocument :
-
-          // Element is window or document
-          element.document || element );
-        this.window = $( this.document[ 0 ].defaultView || this.document[ 0 ].parentWindow );
-      }
-
-      this.options = $.widget.extend( {},
-        this.options,
-        this._getCreateOptions(),
-        options );
-
-      this._create();
-
-      if ( this.options.disabled ) {
-        this._setOptionDisabled( this.options.disabled );
-      }
-
-      this._trigger( "create", null, this._getCreateEventData() );
-      this._init();
-    },
-
-    _getCreateOptions: function() {
-      return {};
-    },
-
-    _getCreateEventData: $.noop,
-
-    _create: $.noop,
-
-    _init: $.noop,
-
-    destroy: function() {
-      var that = this;
-
-      this._destroy();
-      $.each( this.classesElementLookup, function( key, value ) {
-        that._removeClass( value, key );
-      } );
-
-      // We can probably remove the unbind calls in 2.0
-      // all event bindings should go through this._on()
-      this.element
-        .off( this.eventNamespace )
-        .removeData( this.widgetFullName );
-      this.widget()
-        .off( this.eventNamespace )
-        .removeAttr( "aria-disabled" );
-
-      // Clean up events and states
-      this.bindings.off( this.eventNamespace );
-    },
-
-    _destroy: $.noop,
-
-    widget: function() {
-      return this.element;
-    },
-
-    option: function( key, value ) {
-      var options = key;
-      var parts;
-      var curOption;
-      var i;
-
-      if ( arguments.length === 0 ) {
-
-        // Don't return a reference to the internal hash
-        return $.widget.extend( {}, this.options );
-      }
-
-      if ( typeof key === "string" ) {
-
-        // Handle nested keys, e.g., "foo.bar" => { foo: { bar: ___ } }
-        options = {};
-        parts = key.split( "." );
-        key = parts.shift();
-        if ( parts.length ) {
-          curOption = options[ key ] = $.widget.extend( {}, this.options[ key ] );
-          for ( i = 0; i < parts.length - 1; i++ ) {
-            curOption[ parts[ i ] ] = curOption[ parts[ i ] ] || {};
-            curOption = curOption[ parts[ i ] ];
-          }
-          key = parts.pop();
-          if ( arguments.length === 1 ) {
-            return curOption[ key ] === undefined ? null : curOption[ key ];
-          }
-          curOption[ key ] = value;
-        } else {
-          if ( arguments.length === 1 ) {
-            return this.options[ key ] === undefined ? null : this.options[ key ];
-          }
-          options[ key ] = value;
-        }
-      }
-
-      this._setOptions( options );
-
-      return this;
-    },
-
-    _setOptions: function( options ) {
-      var key;
-
-      for ( key in options ) {
-        this._setOption( key, options[ key ] );
-      }
-
-      return this;
-    },
-
-    _setOption: function( key, value ) {
-      if ( key === "classes" ) {
-        this._setOptionClasses( value );
-      }
-
-      this.options[ key ] = value;
-
-      if ( key === "disabled" ) {
-        this._setOptionDisabled( value );
-      }
-
-      return this;
-    },
-
-    _setOptionClasses: function( value ) {
-      var classKey, elements, currentElements;
-
-      for ( classKey in value ) {
-        currentElements = this.classesElementLookup[ classKey ];
-        if ( value[ classKey ] === this.options.classes[ classKey ] ||
-          !currentElements ||
-          !currentElements.length ) {
-          continue;
-        }
-
-        // We are doing this to create a new jQuery object because the _removeClass() call
-        // on the next line is going to destroy the reference to the current elements being
-        // tracked. We need to save a copy of this collection so that we can add the new classes
-        // below.
-        elements = $( currentElements.get() );
-        this._removeClass( currentElements, classKey );
-
-        // We don't use _addClass() here, because that uses this.options.classes
-        // for generating the string of classes. We want to use the value passed in from
-        // _setOption(), this is the new value of the classes option which was passed to
-        // _setOption(). We pass this value directly to _classes().
-        elements.addClass( this._classes( {
-          element: elements,
-          keys: classKey,
-          classes: value,
-          add: true
-        } ) );
-      }
-    },
-
-    _setOptionDisabled: function( value ) {
-      this._toggleClass( this.widget(), this.widgetFullName + "-disabled", null, !!value );
-
-      // If the widget is becoming disabled, then nothing is interactive
-      if ( value ) {
-        this._removeClass( this.hoverable, null, "ui-state-hover" );
-        this._removeClass( this.focusable, null, "ui-state-focus" );
-      }
-    },
-
-    enable: function() {
-      return this._setOptions( { disabled: false } );
-    },
-
-    disable: function() {
-      return this._setOptions( { disabled: true } );
-    },
-
-    _classes: function( options ) {
-      var full = [];
-      var that = this;
-
-      options = $.extend( {
-        element: this.element,
-        classes: this.options.classes || {}
-      }, options );
-
-      function processClassString( classes, checkOption ) {
-        var current, i;
-        for ( i = 0; i < classes.length; i++ ) {
-          current = that.classesElementLookup[ classes[ i ] ] || $();
-          if ( options.add ) {
-            current = $( $.unique( current.get().concat( options.element.get() ) ) );
-          } else {
-            current = $( current.not( options.element ).get() );
-          }
-          that.classesElementLookup[ classes[ i ] ] = current;
-          full.push( classes[ i ] );
-          if ( checkOption && options.classes[ classes[ i ] ] ) {
-            full.push( options.classes[ classes[ i ] ] );
-          }
-        }
-      }
-
-      this._on( options.element, {
-        "remove": "_untrackClassesElement"
-      } );
-
-      if ( options.keys ) {
-        processClassString( options.keys.match( /\S+/g ) || [], true );
-      }
-      if ( options.extra ) {
-        processClassString( options.extra.match( /\S+/g ) || [] );
-      }
-
-      return full.join( " " );
-    },
-
-    _untrackClassesElement: function( event ) {
-      var that = this;
-      $.each( that.classesElementLookup, function( key, value ) {
-        if ( $.inArray( event.target, value ) !== -1 ) {
-          that.classesElementLookup[ key ] = $( value.not( event.target ).get() );
-        }
-      } );
-    },
-
-    _removeClass: function( element, keys, extra ) {
-      return this._toggleClass( element, keys, extra, false );
-    },
-
-    _addClass: function( element, keys, extra ) {
-      return this._toggleClass( element, keys, extra, true );
-    },
-
-    _toggleClass: function( element, keys, extra, add ) {
-      add = ( typeof add === "boolean" ) ? add : extra;
-      var shift = ( typeof element === "string" || element === null ),
-        options = {
-          extra: shift ? keys : extra,
-          keys: shift ? element : keys,
-          element: shift ? this.element : element,
-          add: add
-        };
-      options.element.toggleClass( this._classes( options ), add );
-      return this;
-    },
-
-    _on: function( suppressDisabledCheck, element, handlers ) {
-      var delegateElement;
-      var instance = this;
-
-      // No suppressDisabledCheck flag, shuffle arguments
-      if ( typeof suppressDisabledCheck !== "boolean" ) {
-        handlers = element;
-        element = suppressDisabledCheck;
-        suppressDisabledCheck = false;
-      }
-
-      // No element argument, shuffle and use this.element
-      if ( !handlers ) {
-        handlers = element;
-        element = this.element;
-        delegateElement = this.widget();
-      } else {
-        element = delegateElement = $( element );
-        this.bindings = this.bindings.add( element );
-      }
-
-      $.each( handlers, function( event, handler ) {
-        function handlerProxy() {
-
-          // Allow widgets to customize the disabled handling
-          // - disabled as an array instead of boolean
-          // - disabled class as method for disabling individual parts
-          if ( !suppressDisabledCheck &&
-            ( instance.options.disabled === true ||
-              $( this ).hasClass( "ui-state-disabled" ) ) ) {
-            return;
-          }
-          return ( typeof handler === "string" ? instance[ handler ] : handler )
-            .apply( instance, arguments );
-        }
-
-        // Copy the guid so direct unbinding works
-        if ( typeof handler !== "string" ) {
-          handlerProxy.guid = handler.guid =
-            handler.guid || handlerProxy.guid || $.guid++;
-        }
-
-        var match = event.match( /^([\w:-]*)\s*(.*)$/ );
-        var eventName = match[ 1 ] + instance.eventNamespace;
-        var selector = match[ 2 ];
-
-        if ( selector ) {
-          delegateElement.on( eventName, selector, handlerProxy );
-        } else {
-          element.on( eventName, handlerProxy );
-        }
-      } );
-    },
-
-    _off: function( element, eventName ) {
-      eventName = ( eventName || "" ).split( " " ).join( this.eventNamespace + " " ) +
-        this.eventNamespace;
-      element.off( eventName ).off( eventName );
-
-      // Clear the stack to avoid memory leaks (#10056)
-      this.bindings = $( this.bindings.not( element ).get() );
-      this.focusable = $( this.focusable.not( element ).get() );
-      this.hoverable = $( this.hoverable.not( element ).get() );
-    },
-
-    _delay: function( handler, delay ) {
-      function handlerProxy() {
-        return ( typeof handler === "string" ? instance[ handler ] : handler )
-          .apply( instance, arguments );
-      }
-      var instance = this;
-      return setTimeout( handlerProxy, delay || 0 );
-    },
-
-    _hoverable: function( element ) {
-      this.hoverable = this.hoverable.add( element );
-      this._on( element, {
-        mouseenter: function( event ) {
-          this._addClass( $( event.currentTarget ), null, "ui-state-hover" );
-        },
-        mouseleave: function( event ) {
-          this._removeClass( $( event.currentTarget ), null, "ui-state-hover" );
-        }
-      } );
-    },
-
-    _focusable: function( element ) {
-      this.focusable = this.focusable.add( element );
-      this._on( element, {
-        focusin: function( event ) {
-          this._addClass( $( event.currentTarget ), null, "ui-state-focus" );
-        },
-        focusout: function( event ) {
-          this._removeClass( $( event.currentTarget ), null, "ui-state-focus" );
-        }
-      } );
-    },
-
-    _trigger: function( type, event, data ) {
-      var prop, orig;
-      var callback = this.options[ type ];
-
-      data = data || {};
-      event = $.Event( event );
-      event.type = ( type === this.widgetEventPrefix ?
-        type :
-        this.widgetEventPrefix + type ).toLowerCase();
-
-      // The original event may come from any element
-      // so we need to reset the target on the new event
-      event.target = this.element[ 0 ];
-
-      // Copy original event properties over to the new event
-      orig = event.originalEvent;
-      if ( orig ) {
-        for ( prop in orig ) {
-          if ( !( prop in event ) ) {
-            event[ prop ] = orig[ prop ];
-          }
-        }
-      }
-
-      this.element.trigger( event, data );
-      return !( $.isFunction( callback ) &&
-        callback.apply( this.element[ 0 ], [ event ].concat( data ) ) === false ||
-        event.isDefaultPrevented() );
-    }
-  };
-
-  $.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
-    $.Widget.prototype[ "_" + method ] = function( element, options, callback ) {
-      if ( typeof options === "string" ) {
-        options = { effect: options };
-      }
-
-      var hasOptions;
-      var effectName = !options ?
-        method :
-        options === true || typeof options === "number" ?
-        defaultEffect :
-        options.effect || defaultEffect;
-
-      options = options || {};
-      if ( typeof options === "number" ) {
-        options = { duration: options };
-      }
-
-      hasOptions = !$.isEmptyObject( options );
-      options.complete = callback;
-
-      if ( options.delay ) {
-        element.delay( options.delay );
-      }
-
-      if ( hasOptions && $.effects && $.effects.effect[ effectName ] ) {
-        element[ method ]( options );
-      } else if ( effectName !== method && element[ effectName ] ) {
-        element[ effectName ]( options.duration, options.easing, callback );
-      } else {
-        element.queue( function( next ) {
-          $( this )[ method ]();
-          if ( callback ) {
-            callback.call( element[ 0 ] );
-          }
-          next();
-        } );
-      }
-    };
-  } );
-
-  var widget = $.widget;
-
-
-
-
-}));
-
 /*!
  * Bootstrap Colorpicker v2.5.2
  * https://itsjavi.com/bootstrap-colorpicker/
@@ -26203,3 +26150,150 @@ var Lightbox = (function ($) {
     }
   }
 })(window.jQuery || window.Zepto);
+
+/*!
+ * pGenerator jQuery Plugin v1.0.0
+ * http://accountspassword.com/password-generator-jquery-plugin
+ *
+ * Created by AccountsPassword.com
+ * Released under the GPL General Public License (Feel free to copy, modify or redistribute this plugin.)
+ *
+ */
+
+(function($){
+  	var numbers_array = new Array(),
+		upper_letters_array = new Array(),
+		lower_letters_array = new Array(),
+		special_chars_array = new Array(),
+		$pGeneratorElement = null;
+	var methods = {
+		init : function( options, callbacks) {
+
+			var settings = $.extend({
+				'bind': 'click',
+				'passwordElement': null,
+				'displayElement': null,
+				'passwordLength': 16,
+				'uppercase': true,
+				'lowercase': true,
+				'numbers':   true,
+				'specialChars': true,
+				'onPasswordGenerated': function(generatedPassword) { }
+			}, options);
+
+			for(var i = 48; i < 58; i++)
+				numbers_array.push(i);
+			for(i = 65; i < 91; i++)
+				upper_letters_array.push(i);
+			for(i = 97; i < 123; i++)
+				lower_letters_array.push(i);
+			special_chars_array = [33,35,64,36,38,42,91,93,123,125,92,47,63,58,59,95,45,53];
+
+			return this.each(function(){
+
+				$pGeneratorElement = $(this);
+
+				$pGeneratorElement.bind(settings.bind, function(e){
+					e.preventDefault();
+					methods.generatePassword(settings);
+				});
+
+			});
+		},
+		generatePassword: function(settings) {
+
+			var password = new Array(),
+				selOptions = settings.uppercase + settings.lowercase + settings.numbers + settings.specialChars,
+				selected = 0,
+				no_lower_letters = new Array();
+
+			var optionLength = Math.floor(settings.passwordLength / selOptions);
+
+			if(settings.uppercase) {
+				// uppercase letters
+				for(var i = 0; i < optionLength; i++) {
+					password.push(String.fromCharCode(upper_letters_array[randomFromInterval(0, upper_letters_array.length - 1)]));
+				}
+
+				no_lower_letters = no_lower_letters.concat(upper_letters_array);
+
+				selected++;
+			}
+
+			if(settings.numbers) {
+				// numbers letters
+				for(var i = 0; i < optionLength; i++) {
+					password.push(String.fromCharCode(numbers_array[randomFromInterval(0, numbers_array.length - 1)]));
+				}
+
+				no_lower_letters = no_lower_letters.concat(numbers_array);
+
+				selected++;
+			}
+
+			if(settings.specialChars) {
+				// numbers letters
+				for(var i = 0; i < optionLength; i++) {
+					password.push(String.fromCharCode(special_chars_array[randomFromInterval(0, special_chars_array.length - 1)]));
+				}
+
+				no_lower_letters = no_lower_letters.concat(special_chars_array);
+
+				selected++;
+			}
+
+			var remained = settings.passwordLength - (selected * optionLength);
+
+			if(settings.lowercase) {
+
+				for(var i = 0; i < remained; i++) {
+					password.push(String.fromCharCode(lower_letters_array[randomFromInterval(0, lower_letters_array.length - 1)]));
+				}
+
+			} else {
+
+				for(var i = 0; i < remained; i++) {
+					password.push(String.fromCharCode(no_lower_letters[randomFromInterval(0, no_lower_letters.length - 1)]));
+				}
+			}
+			password = shuffle(password);
+			passwordString = password.join('');
+
+			if(settings.passwordElement !== null) {
+				$(settings.passwordElement).val(passwordString);
+			}
+
+			if(settings.displayElement !== null) {
+                if($(settings.displayElement).is("input")) {
+                    $(settings.displayElement).val(passwordString);
+                } else {
+                    $(settings.displayElement).text(passwordString);
+                }
+			}
+
+			settings.onPasswordGenerated(passwordString);
+
+		}
+  	};
+
+	function shuffle(o){ //v1.0
+		for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+		return o;
+	};
+
+	function randomFromInterval(from, to)
+	{
+		return Math.floor(Math.random()*(to-from+1)+from);
+	};
+
+	$.fn.pGenerator = function(method) {
+    	if ( methods[method] ) {
+      		return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    	} else if ( typeof method === 'object' || ! method ) {
+      		return methods.init.apply( this, arguments );
+    	} else {
+      		$.error( 'Method ' +  method + ' does not exist on jQuery.pGenerator' );
+    	}
+  	};
+
+})(jQuery);

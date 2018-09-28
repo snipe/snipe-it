@@ -87,17 +87,18 @@ mix.js([
  * Combine JS
  */
 mix.combine([
+    './node_modules/admin-lte/dist/js/adminlte.min.js',
+    './resources/assets/js/admin-lte-options.js',
     './node_modules/jquery-ui-dist/jquery-ui.js',
     './node_modules/tether/dist/js/tether.min.js',
     './node_modules/jquery-slimscroll/jquery.slimscroll.js',
     './node_modules/jquery.iframe-transport/jquery.iframe-transport.js',
     './node_modules/blueimp-file-upload/js/jquery.fileupload.js',
-    './node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js',
     './node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
     './node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
     './node_modules/ekko-lightbox/dist/ekko-lightbox.js',
-    './node_modules/admin-lte/dist/js/adminlte.min.js',
     './node_modules/icheck/icheck.js',
+    './resources/assets/js/extensions/pGenerator.jquery.js'
 ], 'public/js/vendor.js')
 .version();
 
