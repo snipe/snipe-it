@@ -995,10 +995,9 @@ class SettingsController extends Controller
     public function downloadFile($filename = null)
     {
         if (!config('app.lock_passwords')) {
-            $path = storage_path().'/app/'.config('backup.backup.name');
-            $file = $path.'/'.$filename;
-            if (file_exists($file)) {
-                return Response::download($file);
+
+            if (Storage::exists($filename)) {
+                return Response::download(Storage::url('').e($filename));
             } else {
 
                 // Redirect to the backup page
