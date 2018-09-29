@@ -200,8 +200,8 @@ tr {
             },
             defaultValues() {
                 var defaultValueInternal = this.defaultValueArray;
-                this.file.header_row.forEach((item) => {
-                    if(!defaultValueInternal[item])
+                this.file.header_row.forEach( (item) => {
+                    if(!defaultValueInternal[item]) {
                         defaultValueInternal[item] = '';
                 })
                 return defaultValueInternal;

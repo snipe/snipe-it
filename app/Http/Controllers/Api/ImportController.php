@@ -8,6 +8,9 @@ use App\Http\Requests\ItemImportRequest;
 use App\Http\Transformers\ImportsTransformer;
 use App\Models\Company;
 use App\Models\Import;
+use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
@@ -51,12 +54,7 @@ class ImportController extends Controller
         $results = [];
         $import = new Import;
         foreach ($files as $file) {
-            if (!in_array($file->getMimeType(), array(
-                'application/vnd.ms-excel',
-                'text/csv',
-                'text/plain',
-                'text/comma-separated-values',
-                'text/tsv'))) {
+            if (!$this->fileIsValidCsv($file)) {
                 $results['error']='File type must be CSV';
                 return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
             }
@@ -67,25 +65,7 @@ class ImportController extends Controller
             }
             $reader = Reader::createFromFileObject($file->openFile('r')); //file pointer leak?
             $import->header_row = $reader->fetchOne(0);
-
-            //duplicate headers check
-            $duplicate_headers = [];
-
-            for($i = 0; $i<count($import->header_row); $i++) {
-                $header = $import->header_row[$i];
-                if(in_array($header, $import->header_row)) {
-                    $found_at = array_search($header, $import->header_row);
-                    if($i > $found_at) {
-                        //avoid reporting duplicates twice, e.g. "1 is same as 17! 17 is same as 1!!!"
-                        //as well as "1 is same as 1!!!" (which is always true)
-                        //has to be > because otherwise the first result of array_search will always be $i itself(!)
-                        array_push($duplicate_headers,"Duplicate header '$header' detected, first at column: ".($found_at+1).", repeats at column: ".($i+1));
-                    }
-                }
-            }
-            if(count($duplicate_headers) > 0) {
-                return response()->json(Helper::formatStandardApiResponse('error',null, implode("; ",$duplicate_headers)), 500); //should this be '4xx'?
-            }
+            $this->checkDuplicateHeaders($import); // Can Return Early
 
             // Grab the first row to display via ajax as the user picks fields
             $import->first_row = $reader->fetchOne(1);
@@ -176,12 +156,52 @@ class ImportController extends Controller
                 $import->delete();
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));
 
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 // If the file delete didn't work, remove it from the database anyway and return a warning
                 $import->delete();
                 return response()->json(Helper::formatStandardApiResponse('warning', null, trans('admin/hardware/message.import.file_not_deleted_warning')));
             }
         }
 
+    }
+
+    /**
+     * @param $file
+     * @return bool
+     */
+    private function fileIsValidCsv($file): bool
+    {
+        return in_array($file->getMimeType(), [
+            'application/vnd.ms-excel',
+            'text/csv',
+            'text/plain',
+            'text/comma-separated-values',
+            'text/tsv'
+        ]);
+    }
+
+    /**
+     * Search header row for potential duplicate errors
+     * @param Import $import
+     * @return JsonResponse
+     */
+    private function checkDuplicateHeaders($import)
+    {
+        $duplicate_headers = [];
+        for($i = 0; $i<count($import->header_row); $i++) {
+            $header = $import->header_row[$i];
+            if(in_array($header, $import->header_row)) {
+                $found_at = array_search($header, $import->header_row);
+                if($i > $found_at) {
+                    //avoid reporting duplicates twice, e.g. "1 is same as 17! 17 is same as 1!!!"
+                    //as well as "1 is same as 1!!!" (which is always true)
+                    //has to be > because otherwise the first result of array_search will always be $i itself(!)
+                    array_push($duplicate_headers,"Duplicate header '$header' detected, first at column: ".($found_at+1).", repeats at column: ".($i+1));
+                }
+            }
+        }
+        if (count($duplicate_headers) > 0) {
+            return response()->json(Helper::formatStandardApiResponse('error',null, implode("; ",$duplicate_headers)), 500); //should this be '4xx'?
+        };
     }
 }
