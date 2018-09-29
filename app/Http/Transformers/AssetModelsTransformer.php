@@ -5,6 +5,7 @@ use App\Models\AssetModel;
 use Illuminate\Database\Eloquent\Collection;
 use Gate;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Storage;
 
 class AssetModelsTransformer
 {
@@ -28,7 +29,7 @@ class AssetModelsTransformer
                 'id' => (int) $assetmodel->manufacturer->id,
                 'name'=> e($assetmodel->manufacturer->name)
             ]  : null,
-            'image' => ($assetmodel->image!='') ? app('models_upload_url').e($assetmodel->image) : null,
+            'image' => ($assetmodel->image!='') ? Storage::url(app('models_upload_url').e($assetmodel->image)) : null,
             'model_number' => e($assetmodel->model_number),
             'depreciation' => ($assetmodel->depreciation) ? [
                 'id' => (int) $assetmodel->depreciation->id,

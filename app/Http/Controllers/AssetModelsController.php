@@ -82,7 +82,7 @@ class AssetModelsController extends Controller
             $model->fieldset_id = e($request->input('custom_fieldset'));
         }
 
-        $model = $request->handleImages($model, app('models_upload_path'));
+        $model = $request->handleImages($model);
 
             // Was it created?
         if ($model->save()) {
@@ -161,7 +161,7 @@ class AssetModelsController extends Controller
             }
         }
 
-        $model = $request->handleImages($model, app('models_upload_path'));
+        $model = $request->handleImages($model);
 
         if ($model->save()) {
             return redirect()->route("models.index")->with('success', trans('admin/models/message.update.success'));
@@ -194,7 +194,7 @@ class AssetModelsController extends Controller
 
         if ($model->image) {
             try  {
-                unlink(public_path().'/uploads/models/'.$model->image);
+                Storage::delete('models/'.$model->image);
             } catch (\Exception $e) {
                 \Log::error($e);
             }

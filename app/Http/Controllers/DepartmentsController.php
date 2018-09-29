@@ -7,6 +7,7 @@ use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 use Image;
 use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Storage;
 
 class DepartmentsController extends Controller
 {
@@ -124,7 +125,15 @@ class DepartmentsController extends Controller
             return redirect()->to(route('departments.index'))->with('error', trans('admin/departments/message.assoc_users'));
         }
 
+        if ($department->image) {
+            try  {
+                Storage::delete('departments'.'/'.$department->image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+        }
         $department->delete();
+
         return redirect()->back()->with('success', trans('admin/departments/message.delete.success'));
 
     }
