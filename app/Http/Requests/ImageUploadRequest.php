@@ -43,7 +43,7 @@ class ImageUploadRequest extends Request
      * @param String $path  location for uploaded images, defaults to uploads/plural of item type.
      * @return SnipeModel        Target asset is being checked out to.
      */
-    public function handleImages($item, $path = null)
+    public function handleImages($item, $w = 250, $path = null)
     {
 
         $type = strtolower(class_basename(get_class($item)));
@@ -63,7 +63,7 @@ class ImageUploadRequest extends Request
                 $file_name = $type.'-'.str_random(18).'.'.$ext;
 
                 if ($image->getClientOriginalExtension()!='svg') {
-                    $upload = Image::make($image->getRealPath())->resize(null, 250, function ($constraint) {
+                    $upload = Image::make($image->getRealPath())->resize(null, $w, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     });
