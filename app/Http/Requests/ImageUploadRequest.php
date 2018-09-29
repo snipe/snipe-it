@@ -56,7 +56,6 @@ class ImageUploadRequest extends Request
         if ($this->hasFile('image')) {
             if (!config('app.lock_passwords')) {
 
-                \Log::debug('Using path: '.$path);
                 if(!Storage::disk('public')->exists($path)) Storage::disk('public')->makeDirectory($path, 775);
 
                 $upload = $image = $this->file('image');
@@ -74,15 +73,15 @@ class ImageUploadRequest extends Request
                 Storage::disk('public')->put($path.'/'.$file_name, (string)$upload->encode());
 
                 // Remove Current image if exists
-//                if (($item->image) && (file_exists($path.'/'.$item->image))) {
-//                    Storage::disk('public')->delete($path.'/'.$file_name);
-//                }
+                if (($item->image) && (file_exists($path.'/'.$item->image))) {
+                    Storage::disk('public')->delete($path.'/'.$file_name);
+                }
 
                 $item->image = $file_name;
             }
         } elseif ($this->input('image_delete')=='1') {
-            //Storage::disk('public')->delete($path.'/'.$item->image);
-            //$item->image = null;
+            Storage::disk('public')->delete($path.'/'.$item->image);
+            $item->image = null;
         }
         return $item;
     }
