@@ -46,14 +46,24 @@ class ImageUploadRequest extends Request
     public function handleImages($item, $path = null)
     {
 
+        $type = strtolower(class_basename(get_class($item)));
+
+        if(is_null($path)) {
+            switch (config('filesystems.default')) {
+                case 's3':
+                    // We don't need to use the 'storage' variable here, since it's specified in the config
+                    $path =  str_plural($type);
+                    break;
+                default:
+                    $path =  'public/'.str_plural($type);
+            }
+        }
+
+
         if ($this->hasFile('image')) {
             if (!config('app.lock_passwords')) {
-                $type = strtolower(class_basename(get_class($item)));
-                if(is_null($path)) {
-                    $path = 'public/uploads/'.str_plural($type);
-                }
 
-
+                \Log::debug('Using path: '.$path);
                 if(!Storage::exists($path)) Storage::makeDirectory($path, 775);
 
                 $upload = $image = $this->file('image');
@@ -70,14 +80,15 @@ class ImageUploadRequest extends Request
                 // This requires a string instead of an object, so we use ($string)
                 Storage::put($path.'/'.$file_name, (string)$upload->encode(), 'public');
 
-                // Remove Current imag e if exists.
+                // Remove Current image if exists.
                 if (($item->image) && (file_exists($path.'/'.$item->image))) {
-                    unlink($path.'/'.$item->image);
+                    Storage::delete($path.'/'.$file_name);
                 }
 
                 $item->image = $file_name;
             }
         } elseif ($this->input('image_delete')=='1') {
+            Storage::delete($path.'/'.$item->image);
             $item->image = null;
         }
         return $item;
