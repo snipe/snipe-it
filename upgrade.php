@@ -202,7 +202,7 @@ echo "- Copying files into storage/app/public.\n\n";
 if (rmove('public/uploads','storage/app/public')) {
     echo "- Copy successful.\n\n";
 } else {
-    echo "- Copy failed - you should do this manually by copying the files from public//uploads into the storage/app/public directory.\n\n";
+    echo "- Copy failed - you should do this manually by copying the files from public/uploads into the storage/app/public directory.\n\n";
 }
 
 echo "--------------------------------------------------------\n";
