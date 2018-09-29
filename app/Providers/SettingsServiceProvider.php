@@ -39,76 +39,79 @@ class SettingsServiceProvider extends ServiceProvider
          * Set some common variables so that they're globally available.
          * The paths should always be public (versus private uploads)
          */
+
+
+
         // Model paths and URLs
         \App::singleton('models_upload_path', function(){
-            return 'public/uploads/models/';
+            return 'models/';
         });
 
         \App::singleton('models_upload_url', function(){
-            return 'uploads/models/';
+            return 'assetmodels/';
         });
 
         // Categories
         \App::singleton('categories_upload_path', function(){
-            return 'public/uploads/categories/';
+            return 'categories/';
         });
 
         \App::singleton('categories_upload_url', function(){
-            return 'uploads/categories/';
+            return 'storage/public_uploads/categories/';
         });
 
         // Locations
         \App::singleton('locations_upload_path', function(){
-            return 'public/uploads/locations/';
+            return 'locations/';
         });
 
         \App::singleton('locations_upload_url', function(){
-            return 'uploads/locations/';
+            return 'storage/public_uploads/locations/';
         });
 
         // Users
         \App::singleton('users_upload_path', function(){
-            return 'public/uploads/users/';
+            return 'users/';
         });
 
         \App::singleton('users_upload_url', function(){
-            return 'uploads/users/';
+            return 'public_uploads/users/';
         });
 
         // Manufacturers
         \App::singleton('manufacturers_upload_path', function(){
-            return 'public/uploads/manufacturers/';
+            return 'manufacturers/';
         });
 
         \App::singleton('manufacturers_upload_url', function(){
-            return 'uploads/manufacturers/';
+            return 'public_uploads/manufacturers/';
         });
 
         // Suppliers
         \App::singleton('suppliers_upload_path', function(){
-            return 'public/uploads/suppliers/';
+            return 'suppliers/';
         });
 
         \App::singleton('suppliers_upload_url', function(){
-            return 'uploads/suppliers/';
+            return 'storage/public_uploads/suppliers/';
         });
 
         // Departments
         \App::singleton('departments_upload_path', function(){
-            return 'public/uploads/departments/';
+            return 'departments/';
         });
 
         \App::singleton('departments_upload_url', function(){
-            return 'uploads/departments/';
+            return 'departments/';
         });
 
         // Company paths and URLs
         \App::singleton('companies_upload_path', function(){
-            return 'public/uploads/companies/';
+            return 'companies/';
         });
 
         \App::singleton('companies_upload_url', function(){
-            return 'uploads/companies/';
+            return 'storage/public_uploads/companies/';
         });
 
 
