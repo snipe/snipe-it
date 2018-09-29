@@ -21,6 +21,7 @@ use Watson\Validating\ValidatingTrait;
 use DB;
 use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckoutAssetNotification;
+use Illuminate\Support\Facades\Storage;
 /**
  * Model for Assets.
  *
@@ -486,9 +487,9 @@ class Asset extends Depreciable
     public function getImageUrl()
     {
         if ($this->image && !empty($this->image)) {
-            return url('/').'/uploads/assets/'.$this->image;
+            return Storage::disk('public')->url(app('assets_upload_path').e($this->image));
         } elseif ($this->model && !empty($this->model->image)) {
-            return url('/').'/uploads/models/'.$this->model->image;
+            return Storage::disk('public')->url(app('models_upload_path').e($this->model->image));
         }
         return false;
     }
