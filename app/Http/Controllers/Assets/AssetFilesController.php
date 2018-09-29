@@ -31,12 +31,14 @@ class AssetFilesController extends Controller
         $this->authorize('update', $asset);
 
         if ($request->hasFile('file')) {
-            foreach ($request->file('file') as $file) {
-                $extension = $file->getClientOriginalExtension();
-                $filename = 'hardware-'.$asset->id.'-'.str_random(8);
-                $filename .= '-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
 
-                $file->storeAs('storage/private_uploads/assets', $filename);
+            if (!Storage::exists('private_uploads/assets')) Storage::makeDirectory('private_uploads/assets', 775);
+
+
+            foreach ($request->file('file') as $file) {
+               // \Log::debug('Uploading '.$filename);
+                $filename = $file->store('private_uploads/assets');
+                $filename = str_replace('private_uploads/assets/', '', $filename);
                 $asset->logUpload($filename, e($request->get('notes')));
             }
             return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
@@ -67,24 +69,25 @@ class AssetFilesController extends Controller
                     ->header('Content-Type', 'text/plain');
             }
 
-            $file = $log->get_src('assets');
+            $file = 'private_uploads/assets/'.$log->filename;
+            \Log::debug('Checking for '.$file);
 
             if ($log->action_type =='audit') {
-                $file = $log->get_src('audits');
+                $file = 'private_uploads/audits/'.$log->filename;
             }
 
-            if (!file_exists($file)) {
+            if (!Storage::exists($file)) {
                 return response('File '.$file.' not found on server', 404)
                     ->header('Content-Type', 'text/plain');
             }
 
             if ($download != 'true') {
-                  if ($contents = file_get_contents($file)) {
-                      return Response::make($contents)->header('Content-Type', mime_content_type($file));
+                  if ($contents = file_get_contents(Storage::url($file))) {
+                      return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
                   }
                 return JsonResponse::create(["error" => "Failed validation: "], 500);
             }
-            return Response::download($file);
+            return Storage::download($file);
         }
         // Prepare the error message
         $error = trans('admin/hardware/message.does_not_exist', ['id' => $fileId]);
