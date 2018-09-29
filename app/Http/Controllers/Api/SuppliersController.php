@@ -164,7 +164,7 @@ class SuppliersController extends Controller
         // they may not have a ->name value but we want to display something anyway
         foreach ($suppliers as $supplier) {
             $supplier->use_text = $supplier->name;
-            $supplier->use_image = ($supplier->image) ? url('/').'/uploads/suppliers/'.$supplier->image : null;
+            $supplier->use_image = ($supplier->image) ? Storage::disk('public')->url('suppliers/'.$supplier->image, $supplier->image) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($suppliers);
