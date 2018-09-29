@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use App\Models\SnipeModel;
 use Intervention\Image\Facades\Image;
+use Storage;
+use Illuminate\Support\Facades\File;
 
 class ImageUploadRequest extends Request
 {
@@ -46,24 +48,29 @@ class ImageUploadRequest extends Request
 
         if ($this->hasFile('image')) {
             if (!config('app.lock_passwords')) {
+                $type = strtolower(class_basename(get_class($item)));
                 if(is_null($path)) {
-                    $type = strtolower(class_basename(get_class($item)));
-                    $plural = str_plural($type);
-                    $path = public_path('/uploads/'.$plural);
-                }
-                $image = $this->file('image');
-                $ext = $image->getClientOriginalExtension();
-                $file_name = $type.'-'.str_random(18).'.'.$ext;
-                if ($image->getClientOriginalExtension()!='svg') {
-                    Image::make($image->getRealPath())->resize(null, 250, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    })->save($path.'/'.$file_name);
-                } else {
-                    $image->move($path, $file_name);
+                    $path = 'public/uploads/'.str_plural($type);
                 }
 
-                // Remove Current image if exists.
+
+                if(!Storage::exists($path)) Storage::makeDirectory($path, 775);
+
+                $upload = $image = $this->file('image');
+                $ext = $image->getClientOriginalExtension();
+                $file_name = $type.'-'.str_random(18).'.'.$ext;
+
+                if ($image->getClientOriginalExtension()!='svg') {
+                    $upload = Image::make($image->getRealPath())->resize(null, 250, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                }
+
+                // This requires a string instead of an object, so we use ($string)
+                Storage::put($path.'/'.$file_name, (string)$upload->encode(), 'public');
+
+                // Remove Current imag e if exists.
                 if (($item->image) && (file_exists($path.'/'.$item->image))) {
                     unlink($path.'/'.$item->image);
                 }
