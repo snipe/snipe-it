@@ -9,10 +9,8 @@
     <title>{{ ($snipeSettings) && ($snipeSettings->site_name) ? $snipeSettings->site_name : 'Snipe-IT' }}</title>
 
 
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
-
-    <link rel="stylesheet" href="{{ url(mix('css/all.css')) }}">
+    {{-- stylesheets --}}
+    <link rel="stylesheet" href="{{ mix('css/all.css') }}">
     <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
 
 
