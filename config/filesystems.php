@@ -55,6 +55,7 @@ return [
         'local' => [
             'driver' => 'local',
             'root'   => base_path(),
+            'url' => env('APP_URL'),
         ],
 
         'ftp' => [
@@ -85,12 +86,7 @@ return [
             'secret' => env('AWS_SECRET', null),
             'region' => env('AWS_REGION', null),
             'bucket' => env('AWS_BUCKET', null),
-
-            'cache' => [
-                'store' => env('AWS_CACHE_STORE', 'memcached'),
-                'expire' => env('AWS_CACHE_EXPIRES', 600),
-                'prefix' =>  env('AWS_CACHE_PREFIX', 'cache-prefix'),
-            ],
+            'url'    => env('AWS_URL', null),
         ],
 
 
