@@ -39,8 +39,13 @@ class MoveUploadsToNewDisk extends Command
      */
     public function handle()
     {
-        $delete_local = $this->argument('delete_local');
 
+        if (config('filesystems.default')=='local') {
+            $this->error('Your current disk is set to local so we cannot proceed.');
+            $this->warn("Please configure your .env settings for S3 or Rackspace, \nand change your FILESYSTEM_DISK value to 's3' or 'rackspace'.");
+            return false;
+        }
+        $delete_local = $this->argument('delete_local');
 
         $public_uploads['accessories'] = glob('public/uploads/accessories'."/*.*");
         $public_uploads['assets'] = glob('public/uploads/assets'."/*.*");
