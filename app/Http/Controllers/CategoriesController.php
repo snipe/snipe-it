@@ -17,6 +17,7 @@ use Str;
 use View;
 use Image;
 use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This class controls all actions related to Categories for
