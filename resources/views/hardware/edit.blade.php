@@ -86,7 +86,7 @@
           {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
           </label>
           <div style="margin-top: 0.5em">
-              <img src="{{ url('/') }}/uploads/assets/{{ $item->image }}" class="img-responsive"/>
+              <img src="{{ Storage::url(app('assets_upload_path').e($item->image)) }}" class="img-responsive" />
           </div>
       </div>
   </div>
