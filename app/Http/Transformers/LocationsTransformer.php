@@ -5,6 +5,7 @@ use App\Models\Location;
 use Illuminate\Database\Eloquent\Collection;
 use Gate;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Storage;
 
 class LocationsTransformer
 {
@@ -33,7 +34,7 @@ class LocationsTransformer
             $array = [
                 'id' => (int) $location->id,
                 'name' => e($location->name),
-                'image' =>   ($location->image) ? app('locations_upload_url').e($location->image) : null,
+                'image' =>   ($location->image) ? Storage::disk('public')->url('locations/'.e($location->image)) : null,
                 'address' =>  ($location->address) ? e($location->address) : null,
                 'address2' =>  ($location->address2) ? e($location->address2) : null,
                 'city' =>  ($location->city) ? e($location->city) : null,

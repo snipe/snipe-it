@@ -27,7 +27,7 @@ class ManufacturersTransformer
                 'id' => (int) $manufacturer->id,
                 'name' => e($manufacturer->name),
                 'url' => e($manufacturer->url),
-                'image' =>   ($manufacturer->image) ? Storage::disk('public')->url(app('manufacturers_upload_path').e($manufacturer->image)) : null,
+                'image' =>   ($manufacturer->image) ? Storage::disk('public')->url('manufacturers/'.e($manufacturer->image)) : null,
                 'support_url' => e($manufacturer->support_url),
                 'support_phone' => e($manufacturer->support_phone),
                 'support_email' => e($manufacturer->support_email),
