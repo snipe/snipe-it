@@ -50,7 +50,7 @@ class SettingsServiceProvider extends ServiceProvider
 
 
         \App::singleton('models_upload_path', function(){
-            return 'models/';
+            return 'assetmodels/';
         });
 
         \App::singleton('models_upload_url', function(){
