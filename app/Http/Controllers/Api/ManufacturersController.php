@@ -9,6 +9,7 @@ use App\Models\Manufacturer;
 use App\Http\Transformers\DatatablesTransformer;
 use App\Http\Transformers\ManufacturersTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Support\Facades\Storage;
 
 class ManufacturersController extends Controller
 {

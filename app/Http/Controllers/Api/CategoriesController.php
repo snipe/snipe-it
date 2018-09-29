@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use App\Models\Category;
 use App\Http\Transformers\CategoriesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Support\Facades\Storage;
 
 class CategoriesController extends Controller
 {

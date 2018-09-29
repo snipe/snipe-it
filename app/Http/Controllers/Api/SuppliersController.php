@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use App\Models\Supplier;
 use App\Http\Transformers\SuppliersTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Support\Facades\Storage;
 
 
 class SuppliersController extends Controller

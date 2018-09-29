@@ -9,6 +9,7 @@ use App\Http\Transformers\DepartmentsTransformer;
 use App\Helpers\Helper;
 use Auth;
 use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Support\Facades\Storage;
 
 class DepartmentsController extends Controller
 {
