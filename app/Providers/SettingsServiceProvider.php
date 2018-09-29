@@ -43,6 +43,12 @@ class SettingsServiceProvider extends ServiceProvider
 
 
         // Model paths and URLs
+
+        \App::singleton('assets_upload_path', function(){
+            return 'assets/';
+        });
+
+
         \App::singleton('models_upload_path', function(){
             return 'models/';
         });
