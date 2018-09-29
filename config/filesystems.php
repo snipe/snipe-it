@@ -66,6 +66,16 @@ $config = [
             'root'   => 'storage',
         ],
 
+        'rackspace' => [
+            'driver'    => 'rackspace',
+            'username'  => env('RACKSPACE_USERNAME'),
+            'key'       => env('RACKSPACE_KEY'),
+            'container' => env('RACKSPACE_CONTAINER'),
+            'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
+            'region'    => env('RACKSPACE_REGION'),
+            'url_type'  => env('RACKSPACE_URL_TYPE'),
+        ],
+
     ],
 
 ];

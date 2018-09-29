@@ -25,6 +25,7 @@
     "league/csv": "^9.0",
     "league/flysystem-aws-s3-v3": "~1.0",
     "league/flysystem-cached-adapter": "~1.0",
+    "league/flysystem-rackspace": "^1.0",
     "league/flysystem-sftp": "~1.0",
     "maknz/slack": "^1.7",
     "neitanod/forceutf8": "^2.0",
