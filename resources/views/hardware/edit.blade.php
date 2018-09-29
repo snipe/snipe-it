@@ -170,7 +170,7 @@
             });
         }
     }
-    ;
+
 
     $(function () {
         //grab custom fields for this model whenever model changes.
@@ -184,134 +184,7 @@
             user_add($(".status_id").val());
         });
 
-        $("#create-form").submit(function (event) {
-            event.preventDefault();
-            return sendForm();
-        });
-
-        // Resize Files when chosen
-        //First check to see if there is a file before doing anything else
-
-        var imageData = "";
-        var $fileInput = $('#uploadFile');
-        $fileInput.on('change', function (e) {
-            if ($fileInput != '') {
-                if (window.File && window.FileReader && window.FormData) {
-                    var file = e.target.files[0];
-                    if (file) {
-                        if (/^image\//i.test(file.type)) {
-                            readFile(file);
-                        } else {
-                            alert('Invalid Image File :(');
-                        }
-                    }
-                }
-                else {
-                    console.log("File API not supported, not resizing");
-                }
-            }
-        });
-
-
-        function readFile(file) {
-            var reader = new FileReader();
-
-            reader.onloadend = function () {
-                processFile(reader.result, file.type);
-            }
-
-            reader.onerror = function () {
-                alert("Unable to read file");
-            }
-
-            reader.readAsDataURL(file);
-        }
-
-        function processFile(dataURL, fileType) {
-            var maxWidth = 800;
-            var maxHeight = 800;
-
-            var image = new Image();
-            image.src = dataURL;
-
-            image.onload = function () {
-                var width = image.width;
-                var height = image.height;
-                var shouldResize = (width > maxWidth) || (height > maxHeight);
-
-                if (!shouldResize) {
-                    imageData = dataURL;
-                    return;
-                }
-
-                var newWidth;
-                var newHeight;
-
-                if (width > height) {
-                    newHeight = height * (maxWidth / width);
-                    newWidth = maxWidth;
-                } else {
-                    newWidth = width * (maxHeight / height);
-                    newHeight = maxHeight;
-                }
-                var canvas = document.createElement('canvas');
-
-                canvas.width = newWidth;
-                canvas.height = newHeight;
-
-                var context = canvas.getContext('2d');
-
-                context.drawImage(this, 0, 0, newWidth, newHeight);
-
-                dataURL = canvas.toDataURL(fileType);
-
-                imageData = dataURL;
-
-            };
-
-            image.onerror = function () {
-                alert('Unable to process file :(');
-            }
-        }
-
-        function sendForm() {
-            var form = $("#create-form").get(0);
-            var formData = $('#create-form').serializeArray();
-            formData.push({name: 'image', value: imageData});
-            $.ajax({
-                type: 'POST',
-                url: form.action,
-                headers: {
-                    "X-Requested-With": 'XMLHttpRequest',
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-                },
-                data: formData,
-                dataType: 'json',
-                success: function (data) {
-                    // console.dir(data);
-                    // AssetController flashes success to session, redirect to hardware page.
-                    if (data.redirect_url) {
-                        window.location.href = data.redirect_url;
-                        return true;
-                    }
-                    window.location.reload(true);
-                    return false;
-
-                },
-                error: function (data) {
-                    // AssetRequest Validator will flash all errors to session, this just refreshes to see them.
-                    window.location.reload(true);
-                    // console.log(JSON.stringify(data));
-                    // console.log('error submitting');
-                }
-            });
-
-            return false;
-        }
-
     });
-
-
 
 
 </script>
