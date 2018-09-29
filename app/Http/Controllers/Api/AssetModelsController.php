@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Transformers\AssetModelsTransformer;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Support\Facades\Storage;
 
 
 /**
@@ -234,7 +235,7 @@ class AssetModelsController extends Controller
                 $assetmodel->use_text .=  ' (#'.e($assetmodel->model_number).')';
             }
 
-            $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? url('/').'/uploads/models/'.$assetmodel->image : null;
+            $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? Storage::disk('public')->url('assetmodels/'.e($assetmodel->image)) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($assetmodels);

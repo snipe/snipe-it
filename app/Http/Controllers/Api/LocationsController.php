@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use App\Models\Location;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Support\Facades\Storage;
 
 class LocationsController extends Controller
 {
@@ -203,7 +204,7 @@ class LocationsController extends Controller
         // they may not have a ->name value but we want to display something anyway
         foreach ($locations as $location) {
             $location->use_text = $location->name;
-            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
+            $location->use_image = ($location->image) ? Storage::disk('public')->url('locations/'.$location->image, $location->image): null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($locations);
