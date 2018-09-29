@@ -139,46 +139,7 @@ class AssetsController extends Controller
             $asset->location_id = $request->input('rtd_location_id', null);
         }
 
-
-        // Create the image (if one was chosen.)
-        if ($request->hasFile('image')) {
-            \Log::debug('Image detected. ');
-            $path = 'assets';
-            // Check if the uploads directory exists.  If not, try to create it.
-            if(!Storage::disk('public')->exists($path)) Storage::disk('public')->makeDirectory($path, 775);
-
-            $image = $request->input('image');
-
-            // After modification, the image is prefixed by mime info like the following:
-            // data:image/jpeg;base64,; This causes the image library to be unhappy, so we need to remove it.
-            $header = explode(';', $image, 2)[0];
-            // Grab the image type from the header while we're at it.
-            $extension = substr($header, strpos($header, '/')+1);
-            // Start reading the image after the first comma, postceding the base64.
-            $image = substr($image, strpos($image, ',')+1);
-
-            $file_name = str_random(25).".".$extension;
-
-            if ($extension!='svg') {
-                $upload = Image::make($image->getRealPath())->resize(null, '250', function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-            }
-
-            try {
-                // This requires a string instead of an object, so we use ($string)
-                Storage::disk('public')->put($path.'/'.$file_name, (string)$upload->encode());
-                $asset->image = $file_name;
-            } catch (\Exception $e) {
-                \Input::flash();
-                $messageBag = new \Illuminate\Support\MessageBag();
-                $messageBag->add('image', $e->getMessage());
-                \Session()->flash('errors', \Session::get('errors', new \Illuminate\Support\ViewErrorBag)
-                    ->put('default', $messageBag));
-                return response()->json(['image' => $e->getMessage()], 422);
-            }
-        }
+        $asset = $request->handleImages($asset);
 
 
         // Update custom fields in the database.
@@ -344,49 +305,7 @@ class AssetsController extends Controller
         $asset->notes        = $request->input('notes');
         $asset->physical     = '1';
 
-        \Log::debug('The sky is blue.');
-
-        // Update the image
-        if ($request->hasFile('image')) {
-
-            \Log::debug('Image detected on update.');
-            $path = 'assets';
-            // Check if the uploads directory exists.  If not, try to create it.
-            if(!Storage::disk('public')->exists($path)) Storage::disk('public')->makeDirectory($path, 775);
-
-            $upload = $image = $this->file('image');
-
-            // After modification, the image is prefixed by mime info like the following:
-            // data:image/jpeg;base64,; This causes the image library to be unhappy, so we need to remove it.
-            $header = explode(';', $image, 2)[0];
-            // Grab the image type from the header while we're at it.
-            $extension = substr($header, strpos($header, '/')+1);
-            // Start reading the image after the first comma, postceding the base64.
-            $image = substr($image, strpos($image, ',')+1);
-
-            $file_name = str_random(25).".".$extension;
-
-
-            if ($extension!='svg') {
-                $upload = Image::make($image->getRealPath())->resize(null, '250', function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-            }
-
-            try {
-                // This requires a string instead of an object, so we use ($string)
-                Storage::disk('public')->put($path.'/'.$file_name, (string)$upload->encode());
-                $asset->image = $file_name;
-            } catch (\Exception $e) {
-                \Input::flash();
-                $messageBag = new \Illuminate\Support\MessageBag();
-                $messageBag->add('image', $e->getMessage());
-                \Session()->flash('errors', \Session::get('errors', new \Illuminate\Support\ViewErrorBag)
-                    ->put('default', $messageBag));
-                return response()->json(['image' => $e->getMessage()], 422);
-            }
-        }
+        $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
         // Validation for these fields is handlded through the AssetRequest form request
