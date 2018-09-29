@@ -7,7 +7,6 @@
   "require": {
     "php": ">=7.1.3",
     "bacon/bacon-qr-code": "^1.0",
-    "barryvdh/laravel-debugbar": "^3.1.4",
     "doctrine/cache": "^1.6",
     "doctrine/common": "^2.7",
     "doctrine/dbal": "^2.8.0",
@@ -43,6 +42,7 @@
     "watson/validating": "3.1.7"
   },
   "require-dev": {
+    "barryvdh/laravel-debugbar": "^3.2",
     "codeception/codeception": "^2.4",
     "filp/whoops": "~2.0",
     "fzaninotto/faker": "~1.4",
