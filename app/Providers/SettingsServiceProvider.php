@@ -63,7 +63,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('categories_upload_url', function(){
-            return 'storage/public_uploads/categories/';
+            return 'categories/';
         });
 
         // Locations
