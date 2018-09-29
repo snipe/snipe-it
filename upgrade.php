@@ -182,7 +182,7 @@ echo '-- '.$up."\n\n";
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 11: Checking for v5 public storage directories:\n";
+echo "Step 11: Checking for v5 public storage directories:    \n";
 echo "--------------------------------------------------------\n\n";
 
 
@@ -194,17 +194,16 @@ if ((!file_exists('storage/app/public')) && (!is_dir('storage/app/public'))) {
     $storage_simlink = shell_exec('php artisan storage:link');
     echo $storage_simlink;
 
-    echo "- Copying files into storage/app/public.\n\n";
-    if (rmove('public/uploads','storage/app/public')) {
-        echo "- Copy successful.\n\n";
-    } else {
-        echo "- Copy failed - you should do this manually by copying the files from public//uploads into the storage/app/public directory.\n\n";
-    }
-
 } else {
     echo "- Public storage directory already exists. Skipping...\n\n";
 }
 
+echo "- Copying files into storage/app/public.\n\n";
+if (rmove('public/uploads','storage/app/public')) {
+    echo "- Copy successful.\n\n";
+} else {
+    echo "- Copy failed - you should do this manually by copying the files from public//uploads into the storage/app/public directory.\n\n";
+}
 
 echo "--------------------------------------------------------\n";
 echo "FINISHED! Clear your browser cookies and re-login to use :\n";
