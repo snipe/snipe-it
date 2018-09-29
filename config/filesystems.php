@@ -54,8 +54,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root'   => base_path(),
-            'url' => env('APP_URL'),
+            'root'   => storage_path('app'),
         ],
 
         'ftp' => [
@@ -87,6 +86,7 @@ return [
             'region' => env('AWS_REGION', null),
             'bucket' => env('AWS_BUCKET', null),
             'url'    => env('AWS_URL', null),
+            'root'   => 'storage',
         ],
 
 
