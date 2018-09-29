@@ -13,14 +13,14 @@ class MoveUploadsToNewDisk extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:move-uploads';
+    protected $signature = 'snipeit:move-uploads {delete_local?}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'This will move your uploaded files to whatever your current disk is.';
 
     /**
      * Create a new command instance.
@@ -39,6 +39,8 @@ class MoveUploadsToNewDisk extends Command
      */
     public function handle()
     {
+        $delete_local = $this->argument('delete_local');
+
 
         $public_uploads['accessories'] = glob('public/uploads/accessories'."/*.*");
         $public_uploads['assets'] = glob('public/uploads/assets'."/*.*");
@@ -81,7 +83,6 @@ class MoveUploadsToNewDisk extends Command
         $logos = glob('public/uploads'."/logo*.*");
         $this->info("\nThere are ".count($logos).' files that might be logos.');
         $type_count=0;
-        $this->info(print_r($logos, true));
 
         for ($l = 0; $l < count($logos); $l++) {
             $type_count++;
@@ -122,6 +123,54 @@ class MoveUploadsToNewDisk extends Command
             }
 
         }
+
+
+        if ($delete_local=='true') {
+            $public_delete_count = 0;
+            $private_delete_count = 0;
+
+            $this->info("\n\n");
+            $this->error('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+            $this->warn("\nTHIS WILL DELETE ALL OF YOUR LOCAL UPLOADED FILES. \n\nThis cannot be undone, so you should take a backup of your system before you proceed.\n");
+            $this->error('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+
+            if ($this->confirm("Do you wish to continue?")) {
+
+                foreach($public_uploads as $public_type => $public_upload) {
+
+                    for ($i = 0; $i < count($public_upload); $i++) {
+                        $filename = $public_upload[$i];
+                        try {
+                            unlink($filename);
+                            $public_delete_count++;
+                        } catch (\Exception $e) {
+                            \Log::debug($e);
+                            $this->error($e);
+                        }
+
+                    }
+                }
+
+                foreach($private_uploads as $private_type => $private_upload)
+                {
+
+                    for ($i = 0; $i < count($private_upload); $i++) {
+                        $filename = $private_upload[$i];
+                        try {
+                            unlink($filename);
+                            $private_delete_count++;
+                        } catch (\Exception $e) {
+                            \Log::debug($e);
+                            $this->error($e);
+                        }
+
+                    }
+                }
+
+                $this->info($public_delete_count." PUBLIC local files and ".$private_delete_count." PRIVATE local files were delete from your filesystem.");
+            }
+        }
+
 
 
 
