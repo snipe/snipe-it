@@ -127,9 +127,9 @@ class DepartmentsController extends Controller
 
         if ($department->image) {
             try  {
-                Storage::delete('departments'.'/'.$department->image);
+                Storage::disk('public')->delete('departments'.'/'.$department->image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::debug($e);
             }
         }
         $department->delete();

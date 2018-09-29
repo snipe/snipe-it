@@ -33,6 +33,7 @@ use TCPDF;
 use Validator;
 use View;
 use App\Models\CheckoutRequest;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This class controls all actions related to assets for
@@ -420,6 +421,14 @@ class AssetsController extends Controller
         DB::table('assets')
             ->where('id', $asset->id)
             ->update(array('assigned_to' => null));
+
+        if ($asset->image) {
+            try  {
+                Storage::disk('public')->delete('assets'.'/'.$asset->image);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
+        }
 
         $asset->delete();
 

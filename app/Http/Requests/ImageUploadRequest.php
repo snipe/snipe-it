@@ -49,14 +49,7 @@ class ImageUploadRequest extends Request
         $type = strtolower(class_basename(get_class($item)));
 
         if(is_null($path)) {
-            switch (config('filesystems.default')) {
-                case 's3':
-                    // We don't need to use the 'storage' variable here, since it's specified in the config
-                    $path =  str_plural($type);
-                    break;
-                default:
-                    $path =  'public/'.str_plural($type);
-            }
+            $path =  str_plural($type);
         }
 
 
@@ -64,7 +57,7 @@ class ImageUploadRequest extends Request
             if (!config('app.lock_passwords')) {
 
                 \Log::debug('Using path: '.$path);
-                if(!Storage::exists($path)) Storage::makeDirectory($path, 775);
+                if(!Storage::disk('public')->exists($path)) Storage::disk('public')->makeDirectory($path, 775);
 
                 $upload = $image = $this->file('image');
                 $ext = $image->getClientOriginalExtension();
@@ -78,18 +71,18 @@ class ImageUploadRequest extends Request
                 }
 
                 // This requires a string instead of an object, so we use ($string)
-                Storage::put($path.'/'.$file_name, (string)$upload->encode(), 'public');
+                Storage::disk('public')->put($path.'/'.$file_name, (string)$upload->encode());
 
-                // Remove Current image if exists.
-                if (($item->image) && (file_exists($path.'/'.$item->image))) {
-                    Storage::delete($path.'/'.$file_name);
-                }
+                // Remove Current image if exists
+//                if (($item->image) && (file_exists($path.'/'.$item->image))) {
+//                    Storage::disk('public')->delete($path.'/'.$file_name);
+//                }
 
                 $item->image = $file_name;
             }
         } elseif ($this->input('image_delete')=='1') {
-            Storage::delete($path.'/'.$item->image);
-            $item->image = null;
+            //Storage::disk('public')->delete($path.'/'.$item->image);
+            //$item->image = null;
         }
         return $item;
     }

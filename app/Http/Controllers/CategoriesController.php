@@ -182,7 +182,7 @@ class CategoriesController extends Controller
             return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'component']));
         }
 
-
+        Storage::disk('public')->delete('categories'.'/'.$category->image);
         $category->delete();
         // Redirect to the locations management page
         return redirect()->route('categories.index')->with('success', trans('admin/categories/message.delete.success'));

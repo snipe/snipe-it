@@ -83,7 +83,7 @@ class LicenseFilesController extends Controller
             $this->authorize('update', $license);
             $log = Actionlog::find($fileId);
             if (file_exists(base_path().'/'.$rel_path.'/'.$log->filename)) {
-                Storage::delete($rel_path.'/'.$log->filename);
+                Storage::disk('public')->delete($rel_path.'/'.$log->filename);
             }
             $log->delete();
             return redirect()->back()

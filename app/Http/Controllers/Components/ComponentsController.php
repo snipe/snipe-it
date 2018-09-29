@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This class controls all actions related to Components for
