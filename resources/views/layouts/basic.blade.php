@@ -47,7 +47,7 @@
 
     @if (($snipeSettings) && ($snipeSettings->logo!=''))
         <center>
-            <img id="login-logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+            <img id="login-logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->logo) }}">
         </center>
     @endif
   <!-- Content -->

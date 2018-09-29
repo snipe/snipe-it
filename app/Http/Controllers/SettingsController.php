@@ -24,6 +24,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsLdapRequest;
 use App\Helpers\Helper;
 use App\Notifications\FirstAdminNotification;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This controller handles all actions related to Settings for
@@ -418,25 +419,32 @@ class SettingsController extends Controller
 
         // If the user wants to clear the logo, reset the brand type
         if ($request->input('clear_logo')=='1') {
+            Storage::disk('public')->delete($setting->logo);
             $setting->logo = null;
             $setting->brand = 1;
+
 
         // If they are uploading an image, validate it and upload it
         } elseif ($request->hasFile('image')) {
 
-            if (!config('app.lock_passwords')) {
-                $image = $request->file('image');
-                $file_name = "logo.".$image->getClientOriginalExtension();
-                $path = public_path('uploads');
-                if ($image->getClientOriginalExtension()!='svg') {
-                    Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    })->save($path.'/'.$file_name);
-                } else {
-                    $image->move($path, $file_name);
-                }
-                $setting->logo = $file_name;
+            $image = $request->file('image');
+            $ext = $image->getClientOriginalExtension();
+            $setting->logo = $file_name = 'logo.'.$ext;
+
+            if ($image->getClientOriginalExtension()!='svg') {
+                $upload = Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            }
+
+
+            // This requires a string instead of an object, so we use ($string)
+            Storage::disk('public')->put($file_name, (string)$upload->encode());
+
+            // Remove Current image if exists
+            if (($setting->logo) && (file_exists($file_name))) {
+                Storage::disk('public')->delete($file_name);
             }
         }
 
