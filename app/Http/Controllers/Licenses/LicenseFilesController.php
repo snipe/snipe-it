@@ -35,16 +35,20 @@ class LicenseFilesController extends Controller
             $this->authorize('update', $license);
 
             if (Input::hasFile('file')) {
+
+                if (!Storage::exists('private_uploads/licenses')) Storage::makeDirectory('private_uploads/licenses', 775);
+
                 $upload_success = false;
                 foreach (Input::file('file') as $file) {
                     $extension = $file->getClientOriginalExtension();
-                    $filename = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+                    $file_name = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
 
-                    $upload_success = $file->storeAs('storage/private_uploads/licenses', $filename);
+                    $upload_success = Storage::put('private_uploads/licenses/'.$file_name, $file);
 
                     //Log the upload to the log
-                    $license->logUpload($filename, e($request->input('notes')));
+                    $license->logUpload($file_name, e($request->input('notes')));
                 }
+
                 // This being called from a modal seems to confuse redirect()->back()
                 // It thinks we should go to the dashboard.  As this is only used
                 // from the modal at present, hardcode the redirect.  Longterm
@@ -82,9 +86,16 @@ class LicenseFilesController extends Controller
         if (isset($license->id)) {
             $this->authorize('update', $license);
             $log = Actionlog::find($fileId);
-            if (file_exists(base_path().'/'.$rel_path.'/'.$log->filename)) {
-                Storage::disk('public')->delete($rel_path.'/'.$log->filename);
+
+            // Remove the file if one exists
+            if (Storage::exists('licenses/'.$log->filename)) {
+                try  {
+                    Storage::delete('licenses/'.$log->filename);
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+                }
             }
+
             $log->delete();
             return redirect()->back()
                 ->with('success', trans('admin/hardware/message.deletefile.success'));

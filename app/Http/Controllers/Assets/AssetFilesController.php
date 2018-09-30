@@ -34,12 +34,11 @@ class AssetFilesController extends Controller
 
             if (!Storage::exists('private_uploads/assets')) Storage::makeDirectory('private_uploads/assets', 775);
 
-
             foreach ($request->file('file') as $file) {
-               // \Log::debug('Uploading '.$filename);
-                $filename = $file->store('private_uploads/assets');
-                $filename = str_replace('private_uploads/assets/', '', $filename);
-                $asset->logUpload($filename, e($request->get('notes')));
+                $extension = $file->getClientOriginalExtension();
+                $file_name = 'hardware-'.$asset->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+                Storage::put('private_uploads/assets/'.$file_name, $file);
+                $asset->logUpload($file_name, e($request->get('notes')));
             }
             return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
         }
