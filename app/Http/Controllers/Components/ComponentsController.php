@@ -160,6 +160,16 @@ class ComponentsController extends Controller
         }
 
         $this->authorize('delete', $component);
+
+        // Remove the image if one exists
+        if (Storage::disk('public')->exists('components/'.$component->image)) {
+            try  {
+                Storage::disk('public')->delete('components/'.$component->image);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
+        }
+
         $component->delete();
         return redirect()->route('components.index')->with('success', trans('admin/components/message.delete.success'));
     }

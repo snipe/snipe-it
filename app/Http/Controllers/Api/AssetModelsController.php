@@ -178,7 +178,7 @@ class AssetModelsController extends Controller
 
         if ($assetmodel->image) {
             try  {
-                unlink(public_path().'/uploads/models/'.$assetmodel->image);
+                Storage::disk('public')->delete('assetmodels/'.$assetmodel->image);
             } catch (\Exception $e) {
                 \Log::error($e);
             }
