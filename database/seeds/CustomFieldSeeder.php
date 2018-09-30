@@ -31,6 +31,7 @@ class CustomFieldSeeder extends Seeder
       factory(CustomField::class, 1)->states('phone')->create();
       factory(CustomField::class, 1)->states('ram')->create();
       factory(CustomField::class, 1)->states('cpu')->create();
+      factory(CustomField::class, 1)->states('mac-address')->create();
 
       DB::table('custom_field_custom_fieldset')->insert([
             [
