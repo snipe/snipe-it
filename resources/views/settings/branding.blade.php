@@ -37,7 +37,7 @@
                 <div class="box-body">
 
 
-                    <div class="col-md-11 col-md-offset-1">
+                    <div class="col-md-12">
 
                         <!-- Site name -->
                         <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
@@ -60,22 +60,21 @@
                         <!-- Logo -->
 
                         <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
-                            <label class="col-md-3 control-label" for="image">
-                                {{ Form::label('logo', trans('admin/settings/general.logo')) }}</label>
+                            <label class="col-md-3" for="image">
+                                {{ Form::label('image', trans('admin/settings/general.logo')) }}</label>
+
                             <div class="col-md-9">
-                                @if (config('app.lock_passwords'))
-                                    <p class="help-block">{{ trans('general.lock_passwords') }}</p>
-                                @else
                                 <label class="btn btn-default">
                                     {{ trans('button.select_file')  }}
-                                    <input type="file" name="image" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
+                                    <input type="file" name="image" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none; max-width: 90%">
                                 </label>
+                                <span class='label label-default' id="upload-file-info"></span>
 
-                                    <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
-                                
+                                <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
                                 {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
-                                {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo'),array('class' => 'minimal')) }} Remove
-                               @endif
+                            </div>
+                            <div class="col-md-9 col-md-offset-3">
+                                <img id="imagePreview" style="max-width: 500px; max-height: 50px">
                             </div>
                         </div>
 
@@ -157,7 +156,7 @@
                                     {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS')) }}
                                     {!! $errors->first('custom_css', '<span class="alert-msg">:message</span>') !!}
                                 @endif
-                                <p class="help-block">{{ trans('admin/settings/general.custom_css_help') }}</p>
+                                <p class="help-block">{!! trans('admin/settings/general.custom_css_help') !!}</p>
                             </div>
                         </div>
 
