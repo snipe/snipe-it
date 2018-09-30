@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Assets;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AssetRequest;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -107,7 +107,7 @@ class AssetsController extends Controller
      * @since [v1.0]
      * @return Redirect
      */
-    public function store(AssetRequest $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize(Asset::class);
 
@@ -146,7 +146,7 @@ class AssetsController extends Controller
         // Validation for these fields is handled through the AssetRequest form request
         $model = AssetModel::find($request->get('model_id'));
 
-        if ($model->fieldset) {
+        if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted=='1') {
                     if (Gate::allows('admin')) {
@@ -177,12 +177,11 @@ class AssetsController extends Controller
                 $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')), $location);
             }
             // Redirect to the asset listing page
-            \Session::flash('success', trans('admin/hardware/message.create.success'));
-            return response()->json(['redirect_url' => route('hardware.index')]);
+            return redirect()->route('hardware.index')
+                ->with('success', trans('admin/hardware/message.create.success'));
         }
-        \Input::flash();
-        \Session::flash('errors', $asset->getErrors());
-        return response()->json(['errors' => $asset->getErrors()], 500);
+        return redirect()->back()->withInput()->withErrors($asset->getErrors());
+
     }
 
     /**
@@ -260,7 +259,7 @@ class AssetsController extends Controller
      * @return Redirect
      */
 
-    public function update(AssetRequest $request, $assetId = null)
+    public function update(ImageUploadRequest $request, $assetId = null)
     {
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {

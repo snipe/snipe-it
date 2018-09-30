@@ -160,7 +160,32 @@ class Asset extends Depreciable
         'model'              => ['name', 'model_number'],
         'model.category'     => ['name'],
         'model.manufacturer' => ['name'],
-    ];     
+    ];
+
+
+    /**
+     * This handles the custom field validation for assets
+     *
+     * @var array
+     */
+    public function save($params = [])
+    {
+        $settings = \App\Models\Setting::getSettings();
+
+        // I don't remember why we have this here? Asset tag would always be required, even if auto increment is on...
+        $this->rules['asset_tag'] = ($settings->auto_increment_assets == '1') ? 'max:255' : 'required';
+
+        if($this->model_id != '') {
+            $model = AssetModel::find($this->model_id);
+
+            if (($model) && ($model->fieldset)) {
+                $this->rules += $model->fieldset->validation_rules();
+            }
+        }
+
+        return parent::save($params);
+    }
+
 
     public function getDisplayNameAttribute()
     {
