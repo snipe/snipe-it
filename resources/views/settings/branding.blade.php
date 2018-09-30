@@ -70,8 +70,10 @@
                                 </label>
                                 <span class='label label-default' id="upload-file-info"></span>
 
-                                <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
+                                <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }} {{ trans('general.logo_size') }}</p>
                                 {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
+                                {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo'),array('class' => 'minimal')) }} Remove
+
                             </div>
                             <div class="col-md-9 col-md-offset-3">
                                 <img id="imagePreview" style="max-width: 500px; max-height: 50px">
