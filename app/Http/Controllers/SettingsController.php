@@ -919,28 +919,21 @@ class SettingsController extends Controller
     public function getBackups()
     {
 
-        $path = storage_path().'/app/'.config('backup.backup.name');
+        $path = 'backups';
+        $backup_files = Storage::files($path);
+        $files = [];
 
-        $files = array();
+        if (count($backup_files) > 0) {
 
-        if ($handle = opendir($path)) {
 
-            /* This is the correct way to loop over the directory. */
-            while (false !== ($entry = readdir($handle))) {
-                clearstatcache();
-                if (substr(strrchr($entry, '.'), 1)=='zip') {
-                    $files[] = array(
-                          'filename' => $entry,
-                          'filesize' => Setting::fileSizeConvert(filesize($path.'/'.$entry)),
-                          'modified' => filemtime($path.'/'.$entry)
-                      );
-                }
-
+            for ($f = 0; $f < count($backup_files); $f++) {
+                $files[] = array(
+                    'filename' => basename($backup_files[$f]),
+                    'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
+                    'modified' => Storage::lastModified($backup_files[$f])
+                );
             }
-            closedir($handle);
-            rsort($files);
         }
-
 
         return view('settings/backups', compact('path', 'files'));
     }
@@ -999,7 +992,6 @@ class SettingsController extends Controller
             if (Storage::exists($filename)) {
                 return Response::download(Storage::url('').e($filename));
             } else {
-
                 // Redirect to the backup page
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
@@ -1020,14 +1012,17 @@ class SettingsController extends Controller
     */
     public function deleteFile($filename = null)
     {
-
         if (!config('app.lock_passwords')) {
+            $path = 'backups';
 
-            $path = storage_path().'/app/'.config('backup.backup.name');
-            $file = $path.'/'.$filename;
-            if (file_exists($file)) {
-                unlink($file);
-                return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
+            if (Storage::exists($path.'/'.$filename)) {
+                try  {
+                    Storage::delete($path.'/'.$filename);
+                    return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+                }
+
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }

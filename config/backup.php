@@ -14,8 +14,7 @@ return [
     'backup' => [
 
         /*
-         * The name of this application. You can use this name to monitor
-         * the backups.
+         * I don't know why they call it name - it's used in the path for uploads
          */
         'name' => 'backups',
 
@@ -27,8 +26,6 @@ return [
                  * The list of directories and files that will be included in the backup.
                  */
                 'include' => [
-                    public_path('uploads'),
-                    storage_path('private_uploads'),
                     storage_path('oauth-private.key'),
                     storage_path('oauth-public.key'),
                     (env('BACKUP_ENV')=='true') ? base_path('.env') : base_path('.env.example'),
@@ -76,7 +73,7 @@ return [
              * The disk names on which the backups will be stored.
              */
             'disks' => [
-                'local',
+                env('FILESYSTEM_DISK'),
             ],
         ],
     ],
