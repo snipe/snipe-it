@@ -80,8 +80,6 @@ class LicenseFilesController extends Controller
     {
         $license = License::find($licenseId);
 
-        $rel_path = 'storage/private_uploads/licenses';
-
         // the asset is valid
         if (isset($license->id)) {
             $this->authorize('update', $license);
@@ -125,34 +123,30 @@ class LicenseFilesController extends Controller
         // the license is valid
         if (isset($license->id)) {
             $this->authorize('view', $license);
-            $log = Actionlog::find($fileId);
-            $file = $log->get_src('licenses');
 
-
-            if ($file =='') {
-                return response('File not found on server', 404)
+            if (!$log = Actionlog::find($fileId)) {
+                return response('No matching record for that asset/file', 500)
                     ->header('Content-Type', 'text/plain');
             }
 
-            $mimetype = \File::mimeType($file);
+            $file = 'private_uploads/licenses/'.$log->filename;
+            \Log::debug('Checking for '.$file);
 
-
-            if (!file_exists($file)) {
+            if (!Storage::exists($file)) {
                 return response('File '.$file.' not found on server', 404)
                     ->header('Content-Type', 'text/plain');
             }
 
             if ($download != 'true') {
-                if ($contents = file_get_contents($file)) {
-                    return Response::make($contents)->header('Content-Type', $mimetype);
+                if ($contents = file_get_contents(Storage::url($file))) {
+                    return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
                 }
                 return JsonResponse::create(["error" => "Failed validation: "], 500);
             }
-            return Response::download($file);
+            return Storage::download($file);
         }
+        return redirect()->route('hardware.index')->with('error', trans('admin/licenses/message.does_not_exist', ['id' => $fileId]));
 
-
-        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
     }
 
 
