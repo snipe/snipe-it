@@ -13,6 +13,7 @@ $factory->state(App\Models\CustomField::class, 'imei', function ($faker) {
     return [
         'name' => 'IMEI',
         'help_text' => 'The IMEI number for this device.',
+        'format' => 'regex:/^[0-9]{15}$/',
     ];
 });
 
@@ -41,7 +42,7 @@ $factory->state(App\Models\CustomField::class, 'cpu', function ($faker) {
 $factory->state(App\Models\CustomField::class, 'mac-address', function ($faker) {
     return [
         'name' => 'MAC Address',
-        'help_text' => 'regex:/^[0-9]{15}$/',
+        'format' => 'regex:/^([0-9a-fA-F]{2}[:-]){5}[0-9a-fA-F]{2}$/',
     ];
 });
 
