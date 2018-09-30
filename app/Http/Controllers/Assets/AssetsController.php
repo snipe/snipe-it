@@ -683,7 +683,7 @@ class AssetsController extends Controller
     }
 
 
-    public function auditStore(AssetFileRequest $request, $id)
+    public function auditStore(Request $request, $id)
     {
         $this->authorize('audit', Asset::class);
 
@@ -716,22 +716,15 @@ class AssetsController extends Controller
 
         if ($asset->save()) {
 
+            $path = 'private_uploads/audits';
+            if (!Storage::exists($path)) Storage::makeDirectory($path, 775);
 
-            $filename = '';
+            $upload = $image = $request->file('image');
+            $ext = $image->getClientOriginalExtension();
+            $file_name = 'audit-'.str_random(18).'.'.$ext;
+            Storage::putFileAs($path, $upload, $file_name);
 
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                try {
-                    $destinationPath = config('app.private_uploads').'/audits';
-                    $extension = $file->getClientOriginalExtension();
-                    $filename = 'audit-'.$asset->id.'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-                    $file->move($destinationPath, $filename);
-                } catch (\Exception $e) {
-                    \Log::error($e);
-                }
-            }
-
-            $asset->logAudit($request->input('note'), $request->input('location_id'), $filename);
+            $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.audit.success'));
         }
     }
