@@ -115,11 +115,7 @@
               </div>
             @endif
             <div class="col-md-2 text-center">
-              @if ($user->avatar)
-                <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print">
-              @else
-                <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print">
-              @endif
+                <img src="{{ $user->present()->gravatar }}" class="avatar img-thumbnail hidden-print">
             </div>
 
             <div class="col-md-8">

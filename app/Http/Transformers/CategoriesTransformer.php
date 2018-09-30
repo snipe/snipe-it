@@ -5,6 +5,7 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Gate;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Storage;
 
 class CategoriesTransformer
 {
@@ -25,7 +26,7 @@ class CategoriesTransformer
             $array = [
                 'id' => (int) $category->id,
                 'name' => e($category->name),
-                'image' =>   ($category->image) ? app('categories_upload_url').e($category->image) : null,
+                'image' =>   ($category->image) ? Storage::disk('public')->url('categories/'.e($category->image)) : null,
                 'category_type' => e($category->category_type),
                 'eula' => ($category->getEula()) ? true : false,
                 'checkin_email' => ($category->checkin_email =='1') ? true : false,

@@ -283,6 +283,15 @@ class UsersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete_has_assets')));
         }
 
+        // Remove the user's avatar if they have one
+        if (Storage::disk('public')->exists('avatars/'.$user->avatar)) {
+            try  {
+                Storage::disk('public')->delete('avatars/'.$user->avatar);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
+        }
+
         if ($user->delete()) {
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
         }

@@ -24,6 +24,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsLdapRequest;
 use App\Helpers\Helper;
 use App\Notifications\FirstAdminNotification;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This controller handles all actions related to Settings for
@@ -418,25 +419,32 @@ class SettingsController extends Controller
 
         // If the user wants to clear the logo, reset the brand type
         if ($request->input('clear_logo')=='1') {
+            Storage::disk('public')->delete($setting->logo);
             $setting->logo = null;
             $setting->brand = 1;
+
 
         // If they are uploading an image, validate it and upload it
         } elseif ($request->hasFile('image')) {
 
-            if (!config('app.lock_passwords')) {
-                $image = $request->file('image');
-                $file_name = "logo.".$image->getClientOriginalExtension();
-                $path = public_path('uploads');
-                if ($image->getClientOriginalExtension()!='svg') {
-                    Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    })->save($path.'/'.$file_name);
-                } else {
-                    $image->move($path, $file_name);
-                }
-                $setting->logo = $file_name;
+            $image = $request->file('image');
+            $ext = $image->getClientOriginalExtension();
+            $setting->logo = $file_name = 'logo.'.$ext;
+
+            if ($image->getClientOriginalExtension()!='svg') {
+                $upload = Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            }
+
+
+            // This requires a string instead of an object, so we use ($string)
+            Storage::disk('public')->put($file_name, (string)$upload->encode());
+
+            // Remove Current image if exists
+            if (($setting->logo) && (file_exists($file_name))) {
+                Storage::disk('public')->delete($file_name);
             }
         }
 
@@ -911,28 +919,21 @@ class SettingsController extends Controller
     public function getBackups()
     {
 
-        $path = storage_path().'/app/'.config('backup.backup.name');
+        $path = 'backups';
+        $backup_files = Storage::files($path);
+        $files = [];
 
-        $files = array();
+        if (count($backup_files) > 0) {
 
-        if ($handle = opendir($path)) {
 
-            /* This is the correct way to loop over the directory. */
-            while (false !== ($entry = readdir($handle))) {
-                clearstatcache();
-                if (substr(strrchr($entry, '.'), 1)=='zip') {
-                    $files[] = array(
-                          'filename' => $entry,
-                          'filesize' => Setting::fileSizeConvert(filesize($path.'/'.$entry)),
-                          'modified' => filemtime($path.'/'.$entry)
-                      );
-                }
-
+            for ($f = 0; $f < count($backup_files); $f++) {
+                $files[] = array(
+                    'filename' => basename($backup_files[$f]),
+                    'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
+                    'modified' => Storage::lastModified($backup_files[$f])
+                );
             }
-            closedir($handle);
-            rsort($files);
         }
-
 
         return view('settings/backups', compact('path', 'files'));
     }
@@ -987,12 +988,10 @@ class SettingsController extends Controller
     public function downloadFile($filename = null)
     {
         if (!config('app.lock_passwords')) {
-            $path = storage_path().'/app/'.config('backup.backup.name');
-            $file = $path.'/'.$filename;
-            if (file_exists($file)) {
-                return Response::download($file);
-            } else {
 
+            if (Storage::exists($filename)) {
+                return Response::download(Storage::url('').e($filename));
+            } else {
                 // Redirect to the backup page
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
@@ -1013,14 +1012,17 @@ class SettingsController extends Controller
     */
     public function deleteFile($filename = null)
     {
-
         if (!config('app.lock_passwords')) {
+            $path = 'backups';
 
-            $path = storage_path().'/app/'.config('backup.backup.name');
-            $file = $path.'/'.$filename;
-            if (file_exists($file)) {
-                unlink($file);
-                return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
+            if (Storage::exists($path.'/'.$filename)) {
+                try  {
+                    Storage::delete($path.'/'.$filename);
+                    return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+                }
+
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
