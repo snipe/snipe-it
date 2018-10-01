@@ -94,6 +94,7 @@ class LocationsController extends Controller
         $location->country          = $request->input('country');
         $location->zip              = $request->input('zip');
         $location->ldap_ou          = $request->input('ldap_ou');
+        $location->ldap_filter      = $request->input('ldap_filter');
         $location->manager_id       = $request->input('manager_id');
         $location->user_id          = Auth::id();
 
@@ -171,6 +172,7 @@ class LocationsController extends Controller
         $location->country      = $request->input('country');
         $location->zip          = $request->input('zip');
         $location->ldap_ou      = $request->input('ldap_ou');
+        $location->ldap_filter  = $request->input('ldap_filter');
         $location->manager_id   = $request->input('manager_id');
 
         $old_image = $location->image;
