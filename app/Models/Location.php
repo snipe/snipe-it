@@ -56,7 +56,6 @@ class Location extends SnipeModel
         'country',
         'zip',
         'ldap_ou',
-        'ldap_filter',
         'currency',
         'manager_id',
         'image',
@@ -136,11 +135,6 @@ class Location extends SnipeModel
     public function setLdapOuAttribute($ldap_ou)
     {
         return $this->attributes['ldap_ou'] = empty($ldap_ou) ? null : $ldap_ou;
-    }
-
-    public function setLdapFilterAttribute($ldap_filter)
-    {
-        return $this->attributes['ldap_filter'] = empty($ldap_filter) ? null : $ldap_filter;
     }
 
     public static function getLocationHierarchy($locations, $parent_id = null)
