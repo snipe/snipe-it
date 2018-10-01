@@ -65,6 +65,7 @@ mix.combine([
     './node_modules/icheck/icheck.js',
     './resources/assets/js/extensions/pGenerator.jquery.js',
     './node_modules/chart.js/dist/Chart.js',
+    './resources/assets/js/signature_pad.js',
 ], 'public/js/vendor.js')
 .version();
 
