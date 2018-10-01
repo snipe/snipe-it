@@ -108,7 +108,7 @@ class LdapSync extends Command
         }
 
         /* Process locations with explicitly defined OUs, if doing a full import. */
-        if ($this->option('base_dn')=='' && $this->option('filter')=='')) {
+        if ($this->option('base_dn')=='' && $this->option('filter')=='') {
             // Retrieve locations with a mapped OU, and sort them from the shallowest to deepest OU (see #3993)
             $ldap_ou_locations = Location::where('ldap_ou', '!=', '')->orWhere('ldap_filter', '!=', '')->get()->toArray();
             $ldap_ou_lengths = array();
