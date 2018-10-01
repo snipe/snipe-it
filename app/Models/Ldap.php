@@ -233,7 +233,7 @@ class Ldap extends Model
      * @param $base_dn
      * @return array|bool
      */
-    static function findLdapUsers($base_dn = null)
+    static function findLdapUsers($base_dn = null, $filter = null)
     {
 
         $ldapconn = Ldap::connectToLdap();
@@ -242,7 +242,9 @@ class Ldap extends Model
         if (is_null($base_dn)) {
             $base_dn = Setting::getSettings()->ldap_basedn;
         }
-        $filter = Setting::getSettings()->ldap_filter;
+        if (is_null($filter)) {
+            $filter = Setting::getSettings()->ldap_$filter;
+        }
 
         // Set up LDAP pagination for very large databases
         $page_size = 500;
