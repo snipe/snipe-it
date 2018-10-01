@@ -16,7 +16,7 @@ class LdapSync extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=} {--base_dn=} {--summary} {--json_summary}';
+    protected $signature = 'snipeit:ldap-sync {--location=} {--location_id=} {--base_dn=} {--filter=} {--summary} {--json_summary}';
 
     /**
      * The console command description.
@@ -70,11 +70,17 @@ class LdapSync extends Command
         try {    
             if ($this->option('base_dn') != '') {
                 $search_base = $this->option('base_dn');
-                LOG::debug('Importing users from specified base DN: \"'.$search_base.'\".');                
+                LOG::debug('Importing users from specified base DN: \"'.$search_base.'\".');
             } else {
                 $search_base = null;
             }
-            $results = Ldap::findLdapUsers($search_base);
+            if ($this->option('filter') != '') {
+                $filter = $this->option('filter');
+                LOG::debug('Importing users from specified filter: \"'.$filter.'\".');
+            } else {
+                $filter = null;
+            }
+            $results = Ldap::findLdapUsers($search_base, $filter);
         } catch (\Exception $e) {
             if ($this->option('json_summary')) {
                 $json_summary = [ "error" => true, "error_message" => $e->getMessage(), "summary" => [] ];
@@ -104,17 +110,18 @@ class LdapSync extends Command
         /* Process locations with explicitly defined OUs, if doing a full import. */
         if ($this->option('base_dn')=='') {
             // Retrieve locations with a mapped OU, and sort them from the shallowest to deepest OU (see #3993)
-            $ldap_ou_locations = Location::where('ldap_ou', '!=', '')->get()->toArray();
+            $ldap_ou_locations = Location::where('ldap_ou', '!=', '')->orWhere('ldap_filter', '!=', '')->get()->toArray();
             $ldap_ou_lengths = array();
             
             foreach ($ldap_ou_locations as $location) {
+                $location["ldap_ou"] = $location["ldap_ou"] == "" ? $search_base : $location["ldap_ou"];
                 $ldap_ou_lengths[] = strlen($location["ldap_ou"]);
             }
 
             array_multisort($ldap_ou_lengths, SORT_ASC, $ldap_ou_locations);
 
             if (sizeof($ldap_ou_locations) > 0) {
-                LOG::debug('Some locations have special OUs set. Locations will be automatically set for users in those OUs.');
+                LOG::debug('Some locations have special OUs or Filters set. Locations will be automatically set for users in those OUs.');
             }
 
             // Inject location information fields
@@ -125,7 +132,7 @@ class LdapSync extends Command
 
             // Grab subsets based on location-specific DNs, and overwrite location for these users.
             foreach ($ldap_ou_locations as $ldap_loc) {
-                $location_users = Ldap::findLdapUsers($ldap_loc["ldap_ou"]);
+                $location_users = Ldap::findLdapUsers($ldap_loc["ldap_ou"], $ldap_loc["ldap_filter"]);
                 $usernames = array();
                 for ($i = 0; $i < $location_users["count"]; $i++) {
 
