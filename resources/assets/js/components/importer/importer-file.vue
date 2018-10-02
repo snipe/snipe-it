@@ -75,10 +75,20 @@ tr {
                 </template>
             </tbody>
             </table>
+                <br>
                  <div class="col-md-8 col-md-offset-2 text-right">
                      <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">Cancel</button>
                      <button type="submit" class="btn btn-sm btn-primary" @click="postSave">Import</button>
+                     <br><br>
                  </div>
+
+                <div class="alert col-md-12" style="padding-top: 20px;"
+                     :class="alertClass"
+                     style="text-align:left"
+                     v-if="statusText">
+                    {{ this.statusText }}
+                </div>
+
              </div>
             </div>
 
