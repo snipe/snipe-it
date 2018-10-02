@@ -61,8 +61,8 @@ class ItemImporter extends Importer
             $this->item['department_id'] = $this->createOrFetchDepartment($item_department);
         }
 
-        $item_manager_first_name = $this->findCsvMatch($row, "manage_first_name");
-        $item_manager_last_name = $this->findCsvMatch($row, "manage_last_name");
+        $item_manager_first_name = $this->findCsvMatch($row, "manager_first_name");
+        $item_manager_last_name = $this->findCsvMatch($row, "manager_last_name");
         if ($this->shouldUpdateField($item_manager_first_name)) {
             $this->item['manager_id'] = $this->fetchManager($item_manager_first_name, $item_manager_last_name);
         }

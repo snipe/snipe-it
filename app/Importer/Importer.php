@@ -67,7 +67,7 @@ abstract class Importer
         'first_name' => 'first name',
         'last_name' => 'last name',
         'department' => 'department',
-        'manager_first_name' => 'manager last name',
+        'manager_first_name' => 'manager first name',
         'manager_last_name' => 'manager last name',
     ];
     /**
