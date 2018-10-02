@@ -1,16 +1,20 @@
 | CSV                 | Item             | Applicable Types                          |
 |---------------------|------------------|-------------------------------------------|
+| activated           |                  | User                                      |
 | asset tag           | asset_tag        | Asset                                     |
 | category            | category         | All                                       |
 | company             | company          | All                                       |
+| department_id       |                  | User ? All                                |
 | item name           | item_name        | All                                       |
-| image               | image            | asset                                     |
+| image               | image            | Asset                                     |
+| email               |                  |                                           |
 | expiration date     | expiration_date  | License                                   |
 | location            | location         | All                                       |
 | notes               | notes            | All                                       |
 | licensed to email   | license_email    | License                                   |
 | licensed to name    | license_name     | License                                   |
 | maintained          | maintained       | License                                   |
+| manager_id          |                  | User                                         |
 | manufacturer        | manufacturer     | All                                       |
 | model name          | asset_model      | Asset                                     |
 | model number        | model_number     | Asset                                     |
@@ -22,12 +26,12 @@
 | reassignable        | reassignable     | License                                   |
 | requestable         | requestable      | Asset, Accessory?                         |
 | seats               | seats            | License                                   |
-| serial number       | serial           | asset, license                            |
-| status              | status           | asset ? All                               |
+| serial number       | serial           | Asset, license                            |
+| status              | status           | Asset ? All                               |
 | supplier            | supplier         | Asset ? All                               |
 | termination date    | termination_date | License                                   |
-| warranty months     | warranty_months  | asset                                     |
+| warranty months     | warranty_months  | Asset                                     |
 | User Related Fields | assigned_to      | Asset                                     |
 | name                |                  |                                           |
-| email               |                  |                                           |
 | username            |                  |                                           |
+
