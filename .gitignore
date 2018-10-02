@@ -50,3 +50,4 @@ tests/_support/_generated/*
 /storage/oauth-public.key
 
 *.cache
+/public/storage
