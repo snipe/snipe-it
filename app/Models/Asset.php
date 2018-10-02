@@ -168,7 +168,7 @@ class Asset extends Depreciable
      *
      * @var array
      */
-    public function save($params = [])
+    public function save(array $params = [])
     {
         $settings = \App\Models\Setting::getSettings();
 
