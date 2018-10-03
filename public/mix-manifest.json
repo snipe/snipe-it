@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "/js/build/vue.js": "/js/build/vue.js?id=385b35bd13d097237275",
     "/css/build/AdminLTE.css": "/css/build/AdminLTE.css?id=5002486f605469c322ed",
     "/css/build/app.css": "/css/build/app.css?id=0c4d55f9abe9a4efe526",
@@ -6,15 +7,27 @@
     "/css/build/AdminLTE.css.map": "/css/build/AdminLTE.css.map?id=fa40c591a5b361cb0761",
     "/css/build/app.css.map": "/css/build/app.css.map?id=5a1bc8c3be0d3da37d0a",
     "/css/all.css": "/css/all.css?id=2d7f3b6654a518d7e0c5",
+=======
+    "/js/app.js": "/js/app.js?id=53c985bd6a8f4bf9fe99",
+    "/css/build/AdminLTE.css": "/css/build/AdminLTE.css?id=dad91a899cd02dd115e1",
+    "/css/build/app.css": "/css/build/app.css?id=0218d2aa64219ffbb011",
+    "/css/all.css": "/css/all.css?id=9ce4e1808f9f4abb9180",
+>>>>>>> 1742867df17c19f2aec1fcf08900456006223858
     "/css/skins/skin-green-dark.min.css": "/css/skins/skin-green-dark.min.css?id=1039ae0e198a7f3d8da7",
     "/css/skins/skin-orange-dark.min.css": "/css/skins/skin-orange-dark.min.css?id=9a461970f7ab07f40847",
     "/css/skins/skin-red-dark.min.css": "/css/skins/skin-red-dark.min.css?id=99f90bbd653d7db10795",
     "/css/signature-pad.css": "/css/signature-pad.css?id=6a89d3cd901305e66ced",
     "/css/signature-pad.min.css": "/css/signature-pad.min.css?id=6a89d3cd901305e66ced",
+<<<<<<< HEAD
     "/css/blue.png": "/css/blue.png?id=4c85d6a97173123bd14a",
     "/css/blue@2x.png": "/css/blue@2x.png?id=62c67c6a822439e8a4ac",
     "/js/dist/all.js": "/js/dist/all.js?id=8acd0023559eaaddd6c5",
     "/js/build/all.js": "/js/build/all.js?id=8acd0023559eaaddd6c5",
+=======
+    "/js/vendor.js": "/js/vendor.js?id=346e7071aeba37b24fe5",
+    "/js/html5shiv.min.js": "/js/html5shiv.min.js?id=ba846cb704dbfbc5f1b3",
+    "/js/respond.min.js": "/js/respond.min.js?id=afc1984a3d17110449dc",
+>>>>>>> 1742867df17c19f2aec1fcf08900456006223858
     "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=7223478ba9bf2c6dfb4f",
     "/js/dist/bootstrap-table-simple-view.js": "/js/dist/bootstrap-table-simple-view.js?id=3926b8f4aaad6ca20d31",
     "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=8340c60bfbc12c34d2e6"
