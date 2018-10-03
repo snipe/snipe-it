@@ -9,6 +9,7 @@ use App\Http\Transformers\DepartmentsTransformer;
 use App\Helpers\Helper;
 use Auth;
 use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Support\Facades\Storage;
 
 class DepartmentsController extends Controller
 {
@@ -152,7 +153,7 @@ class DepartmentsController extends Controller
         // This lets us have more flexibility in special cases like assets, where
         // they may not have a ->name value but we want to display something anyway
         foreach ($departments as $department) {
-            $department->use_image = ($department->image) ? url('/').'/uploads/departments/'.$department->image : null;
+            $department->use_image = ($department->image) ? Storage::disk('public')->url('departments/'.$department->image, $department->image) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($departments);

@@ -3,14 +3,14 @@
     <div class="col-md-9">
         <label class="btn btn-default">
             {{ trans('button.select_file')  }}
-            <input type="file" name="image" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none">
+            <input type="file" name="image" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none; max-width: 90%">
         </label>
         <span class='label label-default' id="upload-file-info"></span>
 
         <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
         {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
     </div>
-    <div class="col-md-4">
+    <div class="col-md-9 col-md-offset-3">
         <img id="imagePreview" style="max-width: 200px;">
     </div>
 </div>

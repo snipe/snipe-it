@@ -93,7 +93,6 @@
 
 @section('moar_scripts')
 
-    <script src="{{ asset('js/signature_pad.min.js') }}"></script>
     <script nonce="{{ csrf_token() }}">
         var wrapper = document.getElementById("signature-pad"),
                 clearButton = wrapper.querySelector("[data-action=clear]"),

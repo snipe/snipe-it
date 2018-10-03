@@ -7,6 +7,7 @@ use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 use App\Notifications\CheckoutConsumableNotification;
+use Illuminate\Support\Facades\Storage;
 
 class Consumable extends SnipeModel
 {
@@ -203,7 +204,7 @@ class Consumable extends SnipeModel
      */
     public function getImageUrl() {
         if ($this->image) {
-            return url('/').'/uploads/consumables/'.$this->image;
+            return Storage::disk('public')->url(app('consumables_upload_path').$this->image);
         }
         return false;
 

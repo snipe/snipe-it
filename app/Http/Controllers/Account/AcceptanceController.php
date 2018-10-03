@@ -15,6 +15,7 @@ use App\Models\License;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class AcceptanceController extends Controller {
 	
@@ -40,7 +41,7 @@ class AcceptanceController extends Controller {
         $acceptance = CheckoutAcceptance::find($id);
 
         if (is_null($acceptance)) {
-            return redirect()->reoute('account.accept')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->route('account.accept')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
         if (! $acceptance->isPending()) {
@@ -70,7 +71,7 @@ class AcceptanceController extends Controller {
         $acceptance = CheckoutAcceptance::find($id);
 
         if (is_null($acceptance)) {
-            return redirect()->reoute('account.accept')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->route('account.accept')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
         if (! $acceptance->isPending()) {
@@ -92,13 +93,17 @@ class AcceptanceController extends Controller {
         /**
          * Get the signature and save it
          */
+
+        if (!Storage::exists('private_uploads/signatures'))  Storage::makeDirectory('private_uploads/signatures', 775);
+
+
+
         if ($request->filled('signature_output')) {
-            $path = config('app.private_uploads').'/signatures';
             $sig_filename = "siglog-" .Str::uuid() . '-'.date('Y-m-d-his').".png";
             $data_uri = e($request->input('signature_output'));
             $encoded_image = explode(",", $data_uri);
             $decoded_image = base64_decode($encoded_image[1]);
-            file_put_contents($path."/".$sig_filename, $decoded_image);
+            Storage::put('private_uploads/signatures/'.$sig_filename, (string)$decoded_image);
         }
 
 

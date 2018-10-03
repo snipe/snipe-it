@@ -35,16 +35,20 @@ class LicenseFilesController extends Controller
             $this->authorize('update', $license);
 
             if (Input::hasFile('file')) {
+
+                if (!Storage::exists('private_uploads/licenses')) Storage::makeDirectory('private_uploads/licenses', 775);
+
                 $upload_success = false;
                 foreach (Input::file('file') as $file) {
                     $extension = $file->getClientOriginalExtension();
-                    $filename = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+                    $file_name = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
 
-                    $upload_success = $file->storeAs('storage/private_uploads/licenses', $filename);
+                    $upload_success = Storage::put('private_uploads/licenses/'.$file_name, $file);
 
                     //Log the upload to the log
-                    $license->logUpload($filename, e($request->input('notes')));
+                    $license->logUpload($file_name, e($request->input('notes')));
                 }
+
                 // This being called from a modal seems to confuse redirect()->back()
                 // It thinks we should go to the dashboard.  As this is only used
                 // from the modal at present, hardcode the redirect.  Longterm
@@ -76,15 +80,20 @@ class LicenseFilesController extends Controller
     {
         $license = License::find($licenseId);
 
-        $rel_path = 'storage/private_uploads/licenses';
-
         // the asset is valid
         if (isset($license->id)) {
             $this->authorize('update', $license);
             $log = Actionlog::find($fileId);
-            if (file_exists(base_path().'/'.$rel_path.'/'.$log->filename)) {
-                Storage::delete($rel_path.'/'.$log->filename);
+
+            // Remove the file if one exists
+            if (Storage::exists('licenses/'.$log->filename)) {
+                try  {
+                    Storage::delete('licenses/'.$log->filename);
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+                }
             }
+
             $log->delete();
             return redirect()->back()
                 ->with('success', trans('admin/hardware/message.deletefile.success'));
@@ -114,34 +123,30 @@ class LicenseFilesController extends Controller
         // the license is valid
         if (isset($license->id)) {
             $this->authorize('view', $license);
-            $log = Actionlog::find($fileId);
-            $file = $log->get_src('licenses');
 
-
-            if ($file =='') {
-                return response('File not found on server', 404)
+            if (!$log = Actionlog::find($fileId)) {
+                return response('No matching record for that asset/file', 500)
                     ->header('Content-Type', 'text/plain');
             }
 
-            $mimetype = \File::mimeType($file);
+            $file = 'private_uploads/licenses/'.$log->filename;
+            \Log::debug('Checking for '.$file);
 
-
-            if (!file_exists($file)) {
+            if (!Storage::exists($file)) {
                 return response('File '.$file.' not found on server', 404)
                     ->header('Content-Type', 'text/plain');
             }
 
             if ($download != 'true') {
-                if ($contents = file_get_contents($file)) {
-                    return Response::make($contents)->header('Content-Type', $mimetype);
+                if ($contents = file_get_contents(Storage::url($file))) {
+                    return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
                 }
                 return JsonResponse::create(["error" => "Failed validation: "], 500);
             }
-            return Response::download($file);
+            return Storage::download($file);
         }
+        return redirect()->route('hardware.index')->with('error', trans('admin/licenses/message.does_not_exist', ['id' => $fileId]));
 
-
-        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
     }
 
 

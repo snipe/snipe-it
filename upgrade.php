@@ -174,11 +174,36 @@ echo "\n";
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 9: Taking application out of maintenance mode:\n";
+echo "Step 10: Taking application out of maintenance mode:\n";
 echo "--------------------------------------------------------\n\n";
 
 $up = shell_exec('php artisan up');
 echo '-- '.$up."\n\n";
+
+
+echo "--------------------------------------------------------\n";
+echo "Step 11: Checking for v5 public storage directories:    \n";
+echo "--------------------------------------------------------\n\n";
+
+
+if ((!file_exists('storage/app/public')) && (!is_dir('storage/app/public'))) {
+    echo "- No public directory found in storage/app - creating one.\n\n";
+    if (!mkdir('storage/app/public', 0777, true)) {
+        echo "ERROR: Failed to create directory at storage/app/public. You should do this manually.\n\n";
+    }
+    $storage_simlink = shell_exec('php artisan storage:link');
+    echo $storage_simlink;
+
+} else {
+    echo "- Public storage directory already exists. Skipping...\n\n";
+}
+
+echo "- Copying files into storage/app/public.\n\n";
+if (rmove('public/uploads','storage/app/public')) {
+    echo "- Copy successful.\n\n";
+} else {
+    echo "- Copy failed - you should do this manually by copying the files from public/uploads into the storage/app/public directory.\n\n";
+}
 
 echo "--------------------------------------------------------\n";
 echo "FINISHED! Clear your browser cookies and re-login to use :\n";
@@ -186,4 +211,34 @@ echo "your upgraded Snipe-IT.\n";
 echo "--------------------------------------------------------\n\n";
 
 
+/**
+ * Recursively move files from one directory to another
+ *
+ * @param String $src - Source of files being moved
+ * @param String $dest - Destination of files being moved
+ */
+function rmove($src, $dest){
 
+    // If source is not a directory stop processing
+    if(!is_dir($src)) return false;
+
+    // If the destination directory does not exist create it
+    if(!is_dir($dest)) {
+        if(!mkdir($dest)) {
+            // If the destination directory could not be created stop processing
+            return false;
+        }
+    }
+
+    // Open the source directory to read in files
+    $i = new DirectoryIterator($src);
+    foreach($i as $f) {
+        if($f->isFile()) {
+            rename($f->getRealPath(), "$dest/" . $f->getFilename());
+        } else if(!$f->isDot() && $f->isDir()) {
+            rmove($f->getRealPath(), "$dest/$f");
+            unlink($f->getRealPath());
+        }
+    }
+    unlink($src);
+}
