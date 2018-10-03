@@ -787,17 +787,16 @@
         </div>
     </div>
 
-
-
-    <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+    {{-- Javascript files --}}
+    <script src="{{ url(mix('js/app.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url(mix('js/vendor.js')) }}" nonce="{{ csrf_token() }}"></script>
+    {{-- Page level javascript --}}
     @stack('js')
 
     @section('moar_scripts')
     @show
 
     <script nonce="{{ csrf_token() }}">
-
-
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
             $('[data-toggle="popover"]').popover();

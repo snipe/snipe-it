@@ -587,7 +587,6 @@
 @stop
 
 @section('moar_scripts')
-<script src="{{ asset('js/pGenerator.jquery.js') }}"></script>
 
 <script nonce="{{ csrf_token() }}">
 $(document).ready(function() {

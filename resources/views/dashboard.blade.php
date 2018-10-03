@@ -279,95 +279,36 @@
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['simple_view' => true, 'nopages' => true])
-
-@if ($snipeSettings->load_remote=='1')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-@else
-    <script src="{{ asset('js/plugins/chartjs/Chart.min.js') }}"></script>
-@endif
-
-
-<script nonce="{{ csrf_token() }}">
-
-
-
-
-        /* ChartJS
-         * -------
-         */
-
-        // -----------------------
-        // - LINE CHART -
-        // -----------------------
-
-
-
-        //var ctx = document.getElementById('salesChart').getContext("2d")
-        //var myChart = new Chart(ctx, {
-         //   type: 'line'
-        //});
-
-
-        //$.ajax({
-        //    type: 'GET',
-        //    url: '{{  route('api.statuslabels.assets.bytype') }}',
-        //    headers: {
-        //        "X-Requested-With": 'XMLHttpRequest',
-        //        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-        //    },
-
-        //    dataType: 'json',
-        //   success: function (data) {
-        //       var ctx = new Chart(ctx,{
-        //          type: 'line',
-        //            data: data,
-        //            options: lineOptions
-        //        });
-        //    },
-        //    error: function (data) {
-       //         window.location.reload(true);
-       //     }
-       // });
-
-
-
-
-
-  // ---------------------------
-  // - END MONTHLY SALES CHART -
-  // ---------------------------
-
-
-    var pieChartCanvas = $("#statusPieChart").get(0).getContext("2d");
-    var pieChart = new Chart(pieChartCanvas);
-    var ctx = document.getElementById("statusPieChart");
-
-
-
-    $.ajax({
-        type: 'GET',
-        url: '{{  route('api.statuslabels.assets.bytype') }}',
-        headers: {
-            "X-Requested-With": 'XMLHttpRequest',
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-        },
-
-        dataType: 'json',
-        success: function (data) {
-            var myPieChart = new Chart(ctx,{
-
-                type: 'doughnut',
-                data: data,
-                options: pieOptions
-            });
-        },
-        error: function (data) {
-           // window.location.reload(true);
-        }
-    });
-
-
-</script>
-
-
 @stop
+
+@push('js')
+<script nonce="{{ csrf_token() }}">
+    // ---------------------------
+    // - ASSET STATUS CHART -
+    // ---------------------------
+      var pieChartCanvas = $("#statusPieChart").get(0).getContext("2d");
+      var pieChart = new Chart(pieChartCanvas);
+      var ctx = document.getElementById("statusPieChart");
+  
+      $.ajax({
+          type: 'GET',
+          url: '{{  route('api.statuslabels.assets.bytype') }}',
+          headers: {
+              "X-Requested-With": 'XMLHttpRequest',
+              "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+          },
+  
+          dataType: 'json',
+          success: function (data) {
+              var myPieChart = new Chart(ctx,{
+                  type   : 'doughnut',
+                  data   : data,
+                  options: pieOptions
+              });
+          },
+          error: function (data) {
+             // window.location.reload(true);
+          }
+      });
+</script>
+@endpush
