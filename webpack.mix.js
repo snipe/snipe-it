@@ -19,6 +19,8 @@ mix
       "./node_modules/icheck/skins/minimal/minimal.css",
       "./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css",
       "./node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css",
+      "./node_modules/blueimp-file-upload/css/jquery.fileupload.css",
+      "./node_modules/blueimp-file-upload/css/jquery.fileupload-ui.css",      
       "./public/css/build/app.css",
     ],
     "./public/css/all.css"

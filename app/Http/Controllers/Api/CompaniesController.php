@@ -178,7 +178,7 @@ class CompaniesController extends Controller
         // This lets us have more flexibility in special cases like assets, where
         // they may not have a ->name value but we want to display something anyway
         foreach ($companies as $company) {
-            $company->use_image = ($company->image) ? url('/').'/uploads/companies/'.$company->image : null;
+            $company->use_image = ($company->image) ? Storage::disk('public')->url('companies/'.$company->image, $company->image) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($companies);
