@@ -9,6 +9,7 @@ use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Redirect;
+use Illuminate\Support\Facades\Storage;
 
 /** This controller handles all actions related to Accessories for
  * the Snipe-IT Asset Management application.
@@ -170,6 +171,15 @@ class AccessoriesController extends Controller
         if ($accessory->hasUsers() > 0) {
              return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers())));
         }
+
+        if ($accessory->image) {
+            try  {
+                Storage::disk('public')->delete('accessories'.'/'.$accessory->image);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
+        }
+
         $accessory->delete();
         return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.delete.success'));
     }

@@ -5,6 +5,7 @@ use App\Models\Accessory;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Storage;
 
 class AccessoriesTransformer
 {
@@ -23,6 +24,7 @@ class AccessoriesTransformer
         $array = [
             'id' => $accessory->id,
             'name' => e($accessory->name),
+            'image' => ($accessory->image) ? Storage::disk('public')->url('accessories/'.e($accessory->image)) : null,
             'company' => ($accessory->company) ? ['id' => $accessory->company->id,'name'=> e($accessory->company->name)] : null,
             'manufacturer' => ($accessory->manufacturer) ? ['id' => $accessory->manufacturer->id,'name'=> e($accessory->manufacturer->name)] : null,
             'supplier' => ($accessory->supplier) ? ['id' => $accessory->supplier->id,'name'=> e($accessory->supplier->name)] : null,
@@ -36,7 +38,7 @@ class AccessoriesTransformer
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
             'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
             'remaining_qty' => $accessory->numRemaining(),
-            'image' => ($accessory->image) ? url('/').'/uploads/accessories/'.e($accessory->image) : null,
+
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
 
