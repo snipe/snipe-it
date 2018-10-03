@@ -1,8 +1,8 @@
 {
-    "/js/build/vue.js": "/js/build/vue.js?id=8a5d892d5cd2d6195c15",
+    "/js/build/vue.js": "/js/build/vue.js?id=385b35bd13d097237275",
     "/css/build/AdminLTE.css": "/css/build/AdminLTE.css?id=5002486f605469c322ed",
     "/css/build/app.css": "/css/build/app.css?id=0c4d55f9abe9a4efe526",
-    "/js/build/vue.js.map": "/js/build/vue.js.map?id=770b634768b61b2b8104",
+    "/js/build/vue.js.map": "/js/build/vue.js.map?id=d694e63456d4ed2ba993",
     "/css/build/AdminLTE.css.map": "/css/build/AdminLTE.css.map?id=fa40c591a5b361cb0761",
     "/css/build/app.css.map": "/css/build/app.css.map?id=5a1bc8c3be0d3da37d0a",
     "/css/all.css": "/css/all.css?id=2d7f3b6654a518d7e0c5",
@@ -13,9 +13,9 @@
     "/css/signature-pad.min.css": "/css/signature-pad.min.css?id=6a89d3cd901305e66ced",
     "/css/blue.png": "/css/blue.png?id=4c85d6a97173123bd14a",
     "/css/blue@2x.png": "/css/blue@2x.png?id=62c67c6a822439e8a4ac",
-    "/js/dist/all.js": "/js/dist/all.js?id=f68abd82226bf29870c0",
-    "/js/build/all.js": "/js/build/all.js?id=f68abd82226bf29870c0",
-    "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=6804bda467f56a251e32",
+    "/js/dist/all.js": "/js/dist/all.js?id=8acd0023559eaaddd6c5",
+    "/js/build/all.js": "/js/build/all.js?id=8acd0023559eaaddd6c5",
+    "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=7223478ba9bf2c6dfb4f",
     "/js/dist/bootstrap-table-simple-view.js": "/js/dist/bootstrap-table-simple-view.js?id=3926b8f4aaad6ca20d31",
     "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=8340c60bfbc12c34d2e6"
 }
