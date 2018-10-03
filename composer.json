@@ -13,7 +13,7 @@
     "doctrine/inflector": "1.1.*",
     "doctrine/instantiator": "1.0.*",
     "erusev/parsedown": "^1.6",
-    "fideloper/proxy": "^3.1",
+    "fideloper/proxy": "^3.3",
     "intervention/image": "^2.3",
     "javiereguiluz/easyslugger": "^1.0",
     "laravel/framework": "5.4.35",
@@ -41,7 +41,6 @@
     "fzaninotto/faker": "~1.4",
     "phpunit/php-token-stream": "1.4.11",
     "phpunit/phpunit": "~5.7",
-    "roave/security-advisories": "dev-master",
     "squizlabs/php_codesniffer": "*",
     "symfony/css-selector": "3.1.*",
     "symfony/dom-crawler": "3.1.*"
