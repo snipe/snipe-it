@@ -331,12 +331,16 @@
                               @if (config('app.lock_passwords'))
                                   <div class="icheckbox disabled" style="padding-left: 10px;">
                                       <input type="checkbox" value="1" name="activated" class="minimal disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled">
+                                      <!-- this is necessary because the field is disabled and will reset -->
+                                      <input type="hidden" name="activated" value="{{ $user->activated }}">
                                       {{ trans('admin/users/general.activated_help_text') }}
                                       <p class="help-block">{{ trans('general.feature_disabled') }}</p>
                                   </div>
                               @elseif ($user->id === Auth::user()->id)
                                   <div class="icheckbox disabled" style="padding-left: 10px;">
                                       <input type="checkbox" value="1" name="activated" class="minimal disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled">
+                                      <!-- this is necessary because the field is disabled and will reset -->
+                                      <input type="hidden" name="activated" value="1">
                                       {{ trans('admin/users/general.activated_help_text') }}
                                       <p class="help-block">{{ trans('admin/users/general.activated_disabled_help_text') }}</p>
                                   </div>
