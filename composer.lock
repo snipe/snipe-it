@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d72ff69ffff8e27247b1378e91695e45",
+    "content-hash": "9fa61987a2781f3d44ab2f77449d968e",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -3081,16 +3081,16 @@
         },
         {
             "name": "rollbar/rollbar-laravel",
-            "version": "v2.4.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rollbar/rollbar-php-laravel.git",
-                "reference": "1196442e5e9e80d8a473a41791ad89cb879d6cbf"
+                "reference": "babf54eecde563d9a53fac6405f3b2c789af6feb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rollbar/rollbar-php-laravel/zipball/1196442e5e9e80d8a473a41791ad89cb879d6cbf",
-                "reference": "1196442e5e9e80d8a473a41791ad89cb879d6cbf",
+                "url": "https://api.github.com/repos/rollbar/rollbar-php-laravel/zipball/babf54eecde563d9a53fac6405f3b2c789af6feb",
+                "reference": "babf54eecde563d9a53fac6405f3b2c789af6feb",
                 "shasum": ""
             },
             "require": {
@@ -3145,7 +3145,7 @@
                 "monitoring",
                 "rollbar"
             ],
-            "time": "2018-10-02T14:08:56+00:00"
+            "time": "2018-03-22T05:59:47+00:00"
         },
         {
             "name": "schuppo/password-strength",
