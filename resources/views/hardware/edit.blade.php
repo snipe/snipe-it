@@ -2,7 +2,7 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/hardware/form.create'),
     'updateText' => trans('admin/hardware/form.update'),
-    'helpText' => trans('admin/hardware/general.about_assets_text'),
+    'helpText' => trans('help.assets'),
     'helpPosition' => 'right',
     'formAction' => ($item) ? route('hardware.update', ['hardware' => $item->id]) : route('hardware.store'),
 ])

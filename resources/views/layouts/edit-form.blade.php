@@ -32,7 +32,7 @@
             @if (isset($helpText))
                 @include ('partials.more-info',
                     [
-                        'helpText' => trans('help.audit_help'),
+                        'helpText' => $helpText,
                         'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
                     ])
             @endif

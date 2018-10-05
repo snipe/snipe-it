@@ -1,8 +1,8 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/components/general.create') ,
     'updateText' => trans('admin/components/general.update'),
-    'helpTitle' => trans('admin/components/general.about_components_title'),
-    'helpText' => trans('admin/components/general.about_components_text'),
+    'helpPosition'  => 'right',
+    'helpText' => trans('help.components'),
     'formAction' => ($item) ? route('components.update', ['component' => $item->id]) : route('components.store'),
 
 ])
