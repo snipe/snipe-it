@@ -16,15 +16,28 @@
   <!-- Asset Tag -->
   <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
     <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
-    <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
+
+      <!-- we are editing an existing asset -->
       @if  ($item->id)
-      <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', $item->asset_tag) }}" />
+          <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
+          <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', $item->asset_tag) }}" />
+          </div>
       @else
-      <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}">
+          <!-- we are creating a new asset - let people use more than one asset tag -->
+          <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
+              <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}">
+          </div>
+          <div class="col-md-2 col-sm-12">
+              <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
+          </div>
       @endif
       {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-    </div>
   </div>
+    @include ('partials.forms.edit.serial', ['translated_serial' => trans('admin/hardware/form.serial')])
+
+    <div class="input_fields_wrap">
+    </div>
+
 
     @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'required' => 'true'])
 
@@ -56,7 +69,7 @@
   @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
   @endif
 
-  @include ('partials.forms.edit.serial', ['translated_serial' => trans('admin/hardware/form.serial')])
+
   @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
   @include ('partials.forms.edit.purchase_date')
   @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
@@ -184,6 +197,42 @@
             user_add($(".status_id").val());
         });
 
+    });
+
+
+    // Add another asset tag + serial combination if the plus sign is clicked
+    $(document).ready(function() {
+        var max_fields      = 10; //maximum input boxes allowed
+        var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+        var add_button      = $(".add_field_button"); //Add button ID
+        var box_html        = '';
+
+        var x = 1; //initial text box count
+        $(add_button).click(function(e){ //on add input button click
+            e.preventDefault();
+            if(x < max_fields){ //max input box allowed
+                x++; //text box increment
+
+                box_html += '<div class="form-group"><label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>';
+                box_html += '<div class="col-md-7 col-sm-12 required">';
+                box_html += '<input type="text"  class="form-control" name="asset_tags[' + x + ']">';
+                box_html += '</div><div class="col-md-2 col-sm-12">';
+                box_html += '<a href="#" class="remove_field btn btn-default btn-sm"><i class="fa fa-minus"></i></a>';
+                box_html += '</div>';
+                box_html += '</div>';
+                box_html += '</div>';
+                box_html += '<div class="form-group"><label for="serial" class="col-md-3 control-label">{{ trans('admin/hardware/form.serial') }}</label>';
+                box_html += '<div class="col-md-7 col-sm-12">';
+                box_html += '<input type="text"  class="form-control" name="serials[' + x + ']">';
+                box_html += '</div>';
+                box_html += '</div>';
+                $(wrapper).append(box_html);
+            }
+        });
+
+        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+            e.preventDefault(); $(this).parent('div').parent('div').remove(); x--;
+        })
     });
 
 
