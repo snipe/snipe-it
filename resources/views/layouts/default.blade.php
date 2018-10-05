@@ -801,7 +801,7 @@
 
         $.validate({
             form : '#create-form',
-            modules : 'date,toggleDisabled',
+            modules : 'date,toggleDisabled,security',
             disabledFormFilter : '#create-form',
             showErrorDialogs : true
         });
