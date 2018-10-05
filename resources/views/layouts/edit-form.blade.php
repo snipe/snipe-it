@@ -41,9 +41,11 @@
             {{ $item->display_name }}
             @endif
             </h3>
+                @if (isset($topSubmit))
                 <div class="box-tools pull-right">
                  @include('partials.forms.edit.submit-button')
                 </div>
+                @endif
             </div><!-- /.box-header -->
 
             <div class="box-body">
