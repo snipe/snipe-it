@@ -209,30 +209,36 @@
 
     // Add another asset tag + serial combination if the plus sign is clicked
     $(document).ready(function() {
+
         var max_fields      = 3; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
         var x               = 1; //initial text box count
-        var base_increment  = $("#asset_tag").val();
-        var incremented_tag = base_increment.replace(/[^\d]/g, '');
+
 
 
 
         $(add_button).click(function(e){ //on add input button click
 
             e.preventDefault();
+
+            var auto_tag        = $("#asset_tag").val().replace(/[^\d]/g, '');
             var box_html        = '';
+
 
             // Check that we haven't exceeded the max number of asset fields
             if (x < max_fields) {
+                var auto_tag = parseInt(auto_tag) + parseInt(x);
                 x++; //text box increment
-                incremented_tag++;
-                console.log(x);
+
+                console.log('Auto tag: ' + auto_tag);
+                console.log('X: ' + x);
+                //console.log('Incremented: ' + parseInt(incremented_tag));
 
                 box_html += '<span class="fields_wrapper">';
                 box_html += '<div class="form-group"><label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }} ' + x + '</label>';
                 box_html += '<div class="col-md-7 col-sm-12 required">';
-                box_html += '<input type="text"  class="form-control" name="asset_tags[' + x + ']" value="{{ (($snipeSettings->auto_increment_prefix!='') && ($snipeSettings->auto_increment_assets=='1')) ? $snipeSettings->auto_increment_prefix : '' }}'+ incremented_tag +'" data-validation="required">';
+                box_html += '<input type="text"  class="form-control" name="asset_tags[' + x + ']" value="{{ (($snipeSettings->auto_increment_prefix!='') && ($snipeSettings->auto_increment_assets=='1')) ? $snipeSettings->auto_increment_prefix : '' }}'+ auto_tag +'" data-validation="required">';
                 box_html += '</div>';
                 box_html += '<div class="col-md-2 col-sm-12">';
                 box_html += '<a href="#" class="remove_field btn btn-default btn-sm"><i class="fa fa-minus"></i></a>';
