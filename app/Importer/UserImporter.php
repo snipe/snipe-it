@@ -6,6 +6,15 @@ use App\Helpers\Helper;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
 
+/**
+ * This is ONLY used for the User Import. When we are importing users
+ * via an Asset/etc import, we use createOrFetchUser() in
+ * App\Importer.php. [ALG]
+ *
+ * Class UserImporter
+ * @package App\Importer
+ *
+ */
 class UserImporter extends ItemImporter
 {
     protected $users;
