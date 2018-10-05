@@ -173,7 +173,7 @@ class Asset extends Depreciable
         $settings = \App\Models\Setting::getSettings();
 
         // I don't remember why we have this here? Asset tag would always be required, even if auto increment is on...
-        $this->rules['asset_tag'] = ($settings->auto_increment_assets == '1') ? 'max:255' : 'required';
+        $this->rules['asset_tag'] = (optional($settings)->auto_increment_assets == '1') ? 'max:255' : 'required';
 
         if($this->model_id != '') {
             $model = AssetModel::find($this->model_id);
