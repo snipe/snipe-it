@@ -292,7 +292,7 @@
                                     'default' => 'Linear (default)', 
                                     'half_1' => 'Half-year convention, always applied', 
                                     'half_2' => 'Half-year convention, applied with condition', 
-                                ), Input::old('username_format', $setting->depreciation_method)) }}
+                                ), Input::old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
                            </div>
                        </div>
                        <!-- /.form-group -->
