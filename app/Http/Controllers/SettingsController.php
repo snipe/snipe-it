@@ -19,16 +19,8 @@ use Image;
 use Input;
 use Redirect;
 use Response;
-use Artisan;
-use Crypt;
 use Mail;
-use Auth;
-use App\Models\User;
-use App\Http\Requests\SetupUserRequest;
-use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsLdapRequest;
-use App\Helpers\Helper;
-use App\Notifications\FirstAdminNotification;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -425,7 +417,6 @@ class SettingsController extends Controller
 
         // If they are uploading an image, validate it and upload it
         } elseif ($request->hasFile('image')) {
-
             $image = $request->file('image');
             $ext = $image->getClientOriginalExtension();
             $setting->logo = $file_name = 'logo.'.$ext;
@@ -928,8 +919,6 @@ class SettingsController extends Controller
         $files = [];
 
         if (count($backup_files) > 0) {
-
-
             for ($f = 0; $f < count($backup_files); $f++) {
                 $files[] = array(
                     'filename' => basename($backup_files[$f]),
@@ -988,7 +977,6 @@ class SettingsController extends Controller
     public function downloadFile($filename = null)
     {
         if (!config('app.lock_passwords')) {
-
             if (Storage::exists($filename)) {
                 return Response::download(Storage::url('').e($filename));
             } else {
@@ -1016,13 +1004,12 @@ class SettingsController extends Controller
             $path = 'backups';
 
             if (Storage::exists($path.'/'.$filename)) {
-                try  {
+                try {
                     Storage::delete($path.'/'.$filename);
                     return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
                 } catch (\Exception $e) {
                     \Log::debug($e);
                 }
-
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
