@@ -230,11 +230,7 @@
             if (x < max_fields) {
                 var auto_tag = parseInt(auto_tag) + parseInt(x);
                 x++; //text box increment
-
-                console.log('Auto tag: ' + auto_tag);
-                console.log('X: ' + x);
-                //console.log('Incremented: ' + parseInt(incremented_tag));
-
+                
                 box_html += '<span class="fields_wrapper">';
                 box_html += '<div class="form-group"><label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }} ' + x + '</label>';
                 box_html += '<div class="col-md-7 col-sm-12 required">';
