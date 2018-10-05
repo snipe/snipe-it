@@ -38,7 +38,7 @@ return array(
     'tag'				=> 'Asset Tag',
     'update'			=> 'Aktīvu atjaunošana',
     'warranty'			=> 'Garantija',
-		'warranty_expires'		=> 'Warranty Expires',
+		'warranty_expires'		=> 'Garantija beidzās',
     'years'				=> 'gadiem',
 )
 ;

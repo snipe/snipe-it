@@ -38,7 +38,7 @@ return array(
     'tag'				=> 'Aktiv mærkat',
     'update'			=> 'Aktiv Opdatering',
     'warranty'			=> 'Garanti',
-		'warranty_expires'		=> 'Warranty Expires',
+		'warranty_expires'		=> 'Garantiudløb',
     'years'				=> 'år',
 )
 ;

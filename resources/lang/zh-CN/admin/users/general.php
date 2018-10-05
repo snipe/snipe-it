@@ -2,8 +2,8 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
-    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
+    'activated_help_text' => '该用户可以登录',
+    'activated_disabled_help_text' => '您无法编辑自己帐户的激活状态。',
     'assets_user'       => '分配给:name的资产',
     'bulk_update_warn'	=> '您即将编辑user_count用户的属性。请注意，您不能使用此表单更改您自己的用户属性，必须单独对您自己的用户信息进行编辑。',
     'bulk_update_help'	=> '此表单允许您一次更新多个用户。仅填写您需要更改的字段。留的空的任何字段将保持不变。',

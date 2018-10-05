@@ -88,6 +88,8 @@ return array(
     'login_remote_user_custom_logout_url_text' => 'Prilagođeni URL za odjavu',
     'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> 'Logo',
+    'logo_print_assets'         => 'Use in Print',
+    'logo_print_assets_help'    => 'Use branding on printable asset lists ',
     'full_multiple_companies_support_help_text' => 'Ograničavanje korisnika (uključujući administratore) koje tvrtke dodjeljuju imovini tvrtke.',
     'full_multiple_companies_support_text' => 'Potpuna podrška za više tvrtki',
     'show_in_model_list'   => 'Prikaži u padajućim modelima',

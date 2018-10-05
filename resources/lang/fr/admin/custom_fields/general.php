@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => 'Nouveau Fieldset',
     'create_field'            => 'Nouveau champ personnalisé',
     'value_encrypted'      	        => 'La valeur de ce champ est chiffrée dans la base de donnée. Seuls les administrateurs seront capable de voir les données déchiffrées',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Inclure la valeur de ce champ dans les e-mails envoyés à l\'utilisateur? Les champs cryptés ne peuvent pas être inclus dans les e-mails.',
 );

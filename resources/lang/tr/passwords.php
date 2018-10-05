@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Şifre bağlantısı gönderildi!',
-    'user'			=> 'Kullanıcı mevcut değil veya tanımlı email adresi bulunamadı',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

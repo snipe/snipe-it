@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Send Password Reset Link',
+    'send_password_link'	        => 'Pošalji link za reset lozinke',
     'email_reset_password'			=> 'Email Password Reset',
     'reset_password'			    => 'Reset Password',
-    'login'                         => 'Login',
-    'login_prompt'                  => 'Please Login',
-    'forgot_password'               => 'I forgot my password',
-    'remember_me'                   => 'Remember Me',
+    'login'                         => 'Prijava',
+    'login_prompt'                  => 'Prijavite se',
+    'forgot_password'               => 'Zabooravljena lozinka',
+    'remember_me'                   => 'Zapamti me',
     ];
 

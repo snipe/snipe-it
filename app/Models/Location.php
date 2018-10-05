@@ -26,7 +26,7 @@ class Location extends SnipeModel
       'address'         => 'max:80|nullable',
       'address2'        => 'max:80|nullable',
       'zip'         => 'min:3|max:10|nullable',
-      // 'manager_id'  => 'exists:users'
+      'manager_id'  => 'exists:users,id|nullable'
     );
 
     /**
@@ -57,6 +57,7 @@ class Location extends SnipeModel
         'zip',
         'ldap_ou',
         'currency',
+        'manager_id',
         'image',
     ];
     protected $hidden = ['user_id'];

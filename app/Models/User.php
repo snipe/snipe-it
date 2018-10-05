@@ -166,11 +166,6 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         return $this->belongsTo('\App\Models\Department', 'department_id');
     }
 
-    public function isActivated()
-    {
-        return $this->activated ==1;
-    }
-
     public function getFullNameAttribute()
     {
         return $this->first_name . " " . $this->last_name;

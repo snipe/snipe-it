@@ -2,9 +2,9 @@
 
 return array(
 
-    'actions'	 	=> 'Actions',
-    'action' 		=> 'Action',
+    'actions'	 	=> 'Akcije',
+    'action' 		=> 'Akcija',
     'by'      		=> 'By',
-    'item' 			=> 'Item',
+    'item' 			=> 'Artikal',
 
 );

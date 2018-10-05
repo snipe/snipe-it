@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Eiendeler er sporet av serienummer eller assetsmerke.  De pleier å være høyere verdi f. eks for å identifisere spesielle ting.',
 	'archived'  				=> 'Arkivert',
     'asset'  					=> 'Eiendel',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Sjekk ut Eiendeler',
     'checkin'  					=> 'Sjekk inn eiendel',
     'checkout'  				=> 'Sjekk ut asset',
     'clone'  					=> 'Klon eiendel',

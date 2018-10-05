@@ -2,7 +2,7 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
+    'activated_help_text' => 'Người dùng này có thể đăng nhập',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Tài sản đã được cấp phát đến :name',
     'bulk_update_warn'	=> 'Bạn sắp chỉnh sửa các thuộc tính của: user_count users. Xin lưu ý rằng bạn không thể thay đổi thuộc tính người dùng của mình bằng cách sử dụng biểu mẫu này và phải thực hiện chỉnh sửa cho người dùng riêng của mình.',

@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'لینک رمز عبور شما ارسال شده است!',
-    'user'			=> 'کاربر وجود ندارد  و یا یک آدرس ایمیل مرتبط ندارد ',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

@@ -57,12 +57,12 @@ class SendExpectedCheckinAlerts extends Command
             }
         }
 
-
-        // Send a rollup to the admin, if settings dictate
-        $recipient = new \App\Models\Recipients\AlertRecipient();
-
-        if (($assets) && ($assets->count() > 0) && ($settings->alert_email!='')) {
-            $recipient->notify(new ExpectedCheckinAdminNotification($assets));
+        if (($assets) && ($assets->count() > 0) && ($settings->alert_email != '')) {
+            // Send a rollup to the admin, if settings dictate
+            $recipients = collect(explode(',', $settings->alert_email))->map(function ($item, $key) {
+                return new \App\Models\Recipients\AlertRecipient($item);
+            });
+            \Notification::send($recipients, new ExpectedCheckinAdminNotification($assets));
         }
 
 

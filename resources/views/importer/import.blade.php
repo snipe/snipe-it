@@ -67,7 +67,7 @@
                                     			<td>@{{ currentFile.filesize }}</td>
                                     			<td>
                                     			<button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">Process</button>
-                                    				<button class="btn btn-sm btn-danger" @click="deleteFile(currentFile)"><i class="fa fa-trash icon-white"></i></button>
+                                                    <button class="btn btn-sm btn-danger" @click="deleteFile(currentFile)"><i class="fa fa-trash icon-white"></i></button>
                                     			</td>
                                     		</tr>
                                     			<import-file

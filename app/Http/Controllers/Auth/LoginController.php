@@ -68,7 +68,7 @@ class LoginController extends Controller
     {
         $remote_user = $request->server('REMOTE_USER');
         if (Setting::getSettings()->login_remote_user_enabled == "1" && isset($remote_user) && !empty($remote_user)) {
-            LOG::debug("Authenticatiing via REMOTE_USER.");
+            Log::debug("Authenticatiing via REMOTE_USER.");
 
             $pos = strpos($remote_user, '\\');
             if ($pos > 0) {
@@ -77,45 +77,45 @@ class LoginController extends Controller
             
             try {
                 $user = User::where('username', '=', $remote_user)->whereNull('deleted_at')->where('activated', '=', '1')->first();
-                LOG::debug("Remote user auth lookup complete");
+                Log::debug("Remote user auth lookup complete");
                 if(!is_null($user)) Auth::login($user, true);
             } catch(Exception $e) {
-                LOG::error("There was an error authenticating the Remote user: " . $e->getMessage());
+                Log::error("There was an error authenticating the Remote user: " . $e->getMessage());
             }
         }
     }
 
     private function loginViaLdap(Request $request)
     {
-        LOG::debug("Binding user to LDAP.");
+        Log::debug("Binding user to LDAP.");
         $ldap_user = Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'));
         if (!$ldap_user) {
-            LOG::debug("LDAP user ".$request->input('username')." not found in LDAP or could not bind");
+            Log::debug("LDAP user ".$request->input('username')." not found in LDAP or could not bind");
             throw new \Exception("Could not find user in LDAP directory");
         } else {
-            LOG::debug("LDAP user ".$request->input('username')." successfully bound to LDAP");
+            Log::debug("LDAP user ".$request->input('username')." successfully bound to LDAP");
         }
 
         // Check if the user already exists in the database and was imported via LDAP
         $user = User::where('username', '=', Input::get('username'))->whereNull('deleted_at')->where('ldap_import', '=', 1)->where('activated', '=', '1')->first();
-        LOG::debug("Local auth lookup complete");
+        Log::debug("Local auth lookup complete");
 
         // The user does not exist in the database. Try to get them from LDAP.
         // If user does not exist and authenticates successfully with LDAP we
         // will create it on the fly and sign in with default permissions
         if (!$user) {
-            LOG::debug("Local user ".Input::get('username')." does not exist");
-            LOG::debug("Creating local user ".Input::get('username'));
+            Log::debug("Local user ".Input::get('username')." does not exist");
+            Log::debug("Creating local user ".Input::get('username'));
 
             if ($user = Ldap::createUserFromLdap($ldap_user)) { //this handles passwords on its own
-                LOG::debug("Local user created.");
+                Log::debug("Local user created.");
             } else {
-                LOG::debug("Could not create local user.");
+                Log::debug("Could not create local user.");
                 throw new \Exception("Could not create local user");
             }
             // If the user exists and they were imported from LDAP already
         } else {
-            LOG::debug("Local user ".$request->input('username')." exists in database. Updating existing user against LDAP.");
+            Log::debug("Local user ".$request->input('username')." exists in database. Updating existing user against LDAP.");
 
             $ldap_attr = Ldap::parseAndMapLdapAttributes($ldap_user);
 
@@ -161,7 +161,7 @@ class LoginController extends Controller
 
         // Should we even check for LDAP users?
         if (Setting::getSettings()->ldap_enabled=='1') {
-            LOG::debug("LDAP is enabled.");
+            Log::debug("LDAP is enabled.");
             try {
                 $user = $this->loginViaLdap($request);
                 Auth::login($user, true);
@@ -169,13 +169,13 @@ class LoginController extends Controller
             // If the user was unable to login via LDAP, log the error and let them fall through to
             // local authentication.
             } catch (\Exception $e) {
-                LOG::error("There was an error authenticating the LDAP user: ".$e->getMessage());
+                Log::error("There was an error authenticating the LDAP user: ".$e->getMessage());
             }
         }
 
         // If the user wasn't authenticated via LDAP, skip to local auth
         if (!$user) {
-            LOG::debug("Authenticating user against database.");
+            Log::debug("Authenticating user against database.");
           // Try to log the user in
             if (!Auth::attempt(['username' => $request->input('username'), 'password' => $request->input('password'), 'activated' => 1], $request->input('remember'))) {
 
@@ -183,7 +183,7 @@ class LoginController extends Controller
                     $this->incrementLoginAttempts($request);
                 }
 
-                LOG::debug("Local authentication failed.");
+                Log::debug("Local authentication failed.");
                 return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
             } else {
 

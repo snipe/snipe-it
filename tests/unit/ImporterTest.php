@@ -710,8 +710,13 @@ EOT;
             'name' => 'Morar-Ward'
         ]);
 
-        Notification::assertSentTo(User::find(2), \App\Notifications\WelcomeNotification::class);
-        Notification::assertNotSentTo(User::find(3), \App\Notifications\WelcomeNotification::class);
+        // These are commented out because we've temporarily disabled emailing new users on import,
+        // since some folks shouldn't be emailed.
+        // Uncomment these once the ability to decide that per import or per user via CSV has been
+        // implemented in the importer.
+        // Notification::assertSentTo(User::find(2), \App\Notifications\WelcomeNotification::class);
+        // Notification::assertNotSentTo(User::find(3), \App\Notifications\WelcomeNotification::class);
+        Notification::assertNotSentTo(User::find(2), \App\Notifications\WelcomeNotification::class);
     }
     private function import($importer, $mappings = null)
     {

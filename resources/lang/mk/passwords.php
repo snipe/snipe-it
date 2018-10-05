@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Линкот за вашата лозинка е испратен!',
-    'user'			=> 'Тој корисник не постои или нема е-пошта',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'ลิงค์รหัสผ่านของคุณถูกส่ง!',
-    'user'			=> 'ผู้ใช้รายนั้นไม่มีหรือไม่มีที่อยู่อีเมลที่เชื่อมโยง',
+    'user'			=> 'No matching active user found with that email.',
 ];
 
