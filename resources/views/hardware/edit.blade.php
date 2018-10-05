@@ -28,7 +28,7 @@
       @else
           <!-- we are creating a new asset - let people use more than one asset tag -->
           <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-              <input class="form-control" type="text" name="asset_tags[]" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
+              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
           </div>
           <div class="col-md-2 col-sm-12">
               <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
@@ -210,7 +210,7 @@
     // Add another asset tag + serial combination if the plus sign is clicked
     $(document).ready(function() {
 
-        var max_fields      = 3; //maximum input boxes allowed
+        var max_fields      = 100; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
         var x               = 1; //initial text box count
