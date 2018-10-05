@@ -317,12 +317,14 @@ class AssetsController extends Controller
 
 
         // Update the asset data
+        $asset_tag           =  $request->input('asset_tags');
+        $serial              = $request->input('serials');
         $asset->name         = $request->input('name');
-        $asset->serial       = $request->input('serial');
+        $asset->serial       = $serial[1];
         $asset->company_id   = Company::getIdForCurrentUser($request->input('company_id'));
         $asset->model_id     = $request->input('model_id');
         $asset->order_number = $request->input('order_number');
-        $asset->asset_tag    = $request->input('asset_tag');
+        $asset->asset_tag    = $asset_tag[1];
         $asset->notes        = $request->input('notes');
         $asset->physical     = '1';
 
@@ -347,13 +349,12 @@ class AssetsController extends Controller
 
 
         if ($asset->save()) {
-            // Redirect to the new asset page
-            \Session::flash('success', trans('admin/hardware/message.update.success'));
-            return response()->json(['redirect_url' => route("hardware.show", $assetId)]);
+            return redirect()->route("hardware.show", $assetId)
+                ->with('success', trans('admin/hardware/message.update.success'));
         }
-        \Input::flash();
-        \Session::flash('errors', $asset->getErrors());
-        return response()->json(['errors' => $asset->getErrors()], 500);
+
+        return redirect()->back()->withInput()->withErrors()->with('error', trans('admin/hardware/message.does_not_exist'));
+
     }
 
     /**

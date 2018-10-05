@@ -1,3 +1,5 @@
+@if (($snipeSettings->full_multiple_companies_support=='1') && (Auth::user())->isSuperUser())
+
 <!-- Company -->
 <div id="{{ $fieldname }}" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}">
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
@@ -17,3 +19,14 @@
     {!! $errors->first($fieldname, '<div class="col-md-8 col-md-offset-3"><span class="alert-msg"><i class="fa fa-times"></i> :message</span></div>') !!}
 
 </div>
+
+@else
+    <div class="form-group">
+        {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
+        <div class="col-md-7">
+            <p class="form-control-static">{{ Auth::user()->company->name }}</p>
+            <input type="hidden" name="company_id" value="{{ Auth::user()->company->id }}">
+        </div>
+
+    </div>
+@endif
