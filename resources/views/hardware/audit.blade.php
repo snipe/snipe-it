@@ -60,7 +60,7 @@
                                     <input type="checkbox" value="1" name="update_location" class="minimal" {{ Input::old('update_location') == '1' ? ' checked="checked"' : '' }}> Update asset location
                                 </label>
 
-                                <a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='fa fa-life-ring'></i> More Info" data-html="true" data-content="Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to."><i class="fa fa-life-ring"></i></a>
+                                @include ('partials.more-info', ['helpText' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.'])
 
 
 
