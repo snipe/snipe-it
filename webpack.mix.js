@@ -75,7 +75,8 @@ mix
       "./node_modules/icheck/icheck.js",
       "./resources/assets/js/extensions/pGenerator.jquery.js",
       "./node_modules/chart.js/dist/Chart.js",
-      "./resources/assets/js/signature_pad.js"
+      "./resources/assets/js/signature_pad.js",
+      "./node_modules/jquery-form-validator/form-validator/jquery.form-validator.js"
     ],
     "public/js/vendor.js"
   )
