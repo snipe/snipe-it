@@ -1,1 +1,1 @@
-<a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='fa fa-life-ring'></i> More Info" data-html="true" data-content="{{ (isset($helpText)) ? $helpText : 'Info Missing'  }}"><i class="fa fa-life-ring"></i></a>
+<a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='fa fa-life-ring'></i> {{ trans('help.more_info_title') }}" data-html="true" data-content="{{ (isset($helpText)) ? $helpText : 'Info Missing'  }}"><i class="fa fa-life-ring"></i></a>
