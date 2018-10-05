@@ -15,21 +15,11 @@ use Config;
 use Crypt;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Image;
 use Input;
 use Redirect;
 use Response;
-use Artisan;
-use Crypt;
-use Mail;
-use Auth;
-use App\Models\User;
-use App\Http\Requests\SetupUserRequest;
-use App\Http\Requests\ImageUploadRequest;
-use App\Http\Requests\SettingsLdapRequest;
-use App\Helpers\Helper;
-use App\Notifications\FirstAdminNotification;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * This controller handles all actions related to Settings for
@@ -417,29 +407,26 @@ class SettingsController extends Controller
         }
 
         // If the user wants to clear the logo, reset the brand type
-        if ($request->input('clear_logo')=='1') {
+        if ('1' == $request->input('clear_logo')) {
             Storage::disk('public')->delete($setting->logo);
-            $setting->logo = null;
+            $setting->logo  = null;
             $setting->brand = 1;
-
 
         // If they are uploading an image, validate it and upload it
         } elseif ($request->hasFile('image')) {
+            $image         = $request->file('image');
+            $ext           = $image->getClientOriginalExtension();
+            $setting->logo = $file_name = 'logo.' . $ext;
 
-            $image = $request->file('image');
-            $ext = $image->getClientOriginalExtension();
-            $setting->logo = $file_name = 'logo.'.$ext;
-
-            if ($image->getClientOriginalExtension()!='svg') {
-                $upload = Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
+            if ('svg' != $image->getClientOriginalExtension()) {
+                $upload = Image::make($image->getRealPath())->resize(null, 150, function($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
             }
 
-
             // This requires a string instead of an object, so we use ($string)
-            Storage::disk('public')->put($file_name, (string)$upload->encode());
+            Storage::disk('public')->put($file_name, (string) $upload->encode());
 
             // Remove Current image if exists
             if (($setting->logo) && (file_exists($file_name))) {
@@ -923,19 +910,17 @@ class SettingsController extends Controller
     {
         $path = storage_path() . '/app/' . config('backup.backup.name');
 
-        $path = 'backups';
+        $path         = 'backups';
         $backup_files = Storage::files($path);
-        $files = [];
+        $files        = [];
 
         if (count($backup_files) > 0) {
-
-
-            for ($f = 0; $f < count($backup_files); $f++) {
-                $files[] = array(
+            for ($f = 0; $f < count($backup_files); ++$f) {
+                $files[] = [
                     'filename' => basename($backup_files[$f]),
                     'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
-                    'modified' => Storage::lastModified($backup_files[$f])
-                );
+                    'modified' => Storage::lastModified($backup_files[$f]),
+                ];
             }
         }
 
@@ -987,10 +972,9 @@ class SettingsController extends Controller
      */
     public function downloadFile($filename = null)
     {
-        if (!config('app.lock_passwords')) {
-
+        if (! config('app.lock_passwords')) {
             if (Storage::exists($filename)) {
-                return Response::download(Storage::url('').e($filename));
+                return Response::download(Storage::url('') . e($filename));
             } else {
                 // Redirect to the backup page
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
@@ -1012,17 +996,17 @@ class SettingsController extends Controller
      */
     public function deleteFile($filename = null)
     {
-        if (!config('app.lock_passwords')) {
+        if (! config('app.lock_passwords')) {
             $path = 'backups';
 
-            if (Storage::exists($path.'/'.$filename)) {
-                try  {
-                    Storage::delete($path.'/'.$filename);
+            if (Storage::exists($path . '/' . $filename)) {
+                try {
+                    Storage::delete($path . '/' . $filename);
+
                     return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
                 } catch (\Exception $e) {
                     \Log::debug($e);
                 }
-
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }

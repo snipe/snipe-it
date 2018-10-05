@@ -20,7 +20,7 @@
         }
     </style>
 
-    {{ Form::open(['method' => 'POST', 'files' => true, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    {{ Form::open(['method' => 'POST', 'files' => true, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'create-form' ]) }}
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -45,12 +45,12 @@
                             <div class="col-md-3">
                                 {{ Form::label('site_name', trans('admin/settings/general.site_name')) }}
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-7 required">
                                 @if (config('app.lock_passwords')===true)
                                     {{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Snipe-IT Asset Management')) }}
                                 @else
                                     {{ Form::text('site_name',
-                                        Input::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management')) }}
+                                        Input::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management', 'data-validation' => 'required')) }}
                                 @endif
                                 {!! $errors->first('site_name', '<span class="alert-msg">:message</span>') !!}
                             </div>

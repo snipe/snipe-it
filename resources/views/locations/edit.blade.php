@@ -1,7 +1,8 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/locations/table.create') ,
     'updateText' => trans('admin/locations/table.update'),
-    'helpTitle' => trans('admin/locations/table.about_locations_title'),
+    'topSubmit' => true,
+    'helpPosition' => 'right',
     'helpText' => trans('admin/locations/table.about_locations'),
     'formAction' => ($item) ? route('locations.update', ['location' => $item->id]) : route('locations.store'),
 ])
