@@ -82,9 +82,9 @@
                         <br><br>
                     </div>
 
-                    <div class="alert col-md-12" style="padding-top: 20px;"
+                    <div class="alert col-md-12"
                          :class="alertClass"
-                         style="text-align:left"
+                         style="padding-top: 20px; text-align:left"
                          v-if="statusText">
                         {{ this.statusText }}
                     </div>

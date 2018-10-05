@@ -16,6 +16,7 @@ mix
       "./node_modules/font-awesome/css/font-awesome.css",
       "./node_modules/select2/dist/css/select2.css",
       "./public/css/build/AdminLTE.css",
+      "./node_modules/jquery-ui-dist/jquery-ui.css",
       "./node_modules/admin-lte/plugins/iCheck/minimal/blue.css",
       "./node_modules/icheck/skins/minimal/minimal.css",
       "./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css",

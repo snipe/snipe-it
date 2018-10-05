@@ -14,7 +14,7 @@
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id','category_type' => 'component'])
 @include ('partials.forms.edit.quantity')
 @include ('partials.forms.edit.minimum_quantity')
-@include ('partials.forms.edit.serial')
+@include ('partials.forms.edit.serial', ['fieldname' => 'serial'])
 @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 @include ('partials.forms.edit.order_number')
