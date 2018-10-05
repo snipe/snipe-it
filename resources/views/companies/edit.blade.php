@@ -1,8 +1,8 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/companies/table.create') ,
     'updateText' => trans('admin/companies/table.update'),
-    'helpTitle' => trans('admin/companies/general.about_companies_title'),
-    'helpText' => trans('admin/companies/general.about_companies_text'),
+    'helpPosition'  => 'right',
+    'helpText' => trans('help.companies'),
     'formAction' => ($item) ? route('companies.update', ['company' => $item->id]) : route('companies.store'),
 ])
 

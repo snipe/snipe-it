@@ -1,8 +1,8 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/categories/general.create') ,
     'updateText' => trans('admin/categories/general.update'),
-    'helpTitle' =>  trans('admin/categories/general.about_categories_title'),
-    'helpText' => trans('admin/categories/general.about_categories'),
+    'helpPosition'  => 'right',
+    'helpText' => trans('help.categories'),
     'formAction' => ($item) ? route('categories.update', ['category' => $item->id]) : route('categories.store'),
 ])
 
