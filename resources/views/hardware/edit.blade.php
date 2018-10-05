@@ -34,9 +34,9 @@
               <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
           </div>
       @endif
-      {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+      {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
   </div>
-    @include ('partials.forms.edit.serial', ['translated_serial' => trans('admin/hardware/form.serial')])
+    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
 
     <div class="input_fields_wrap">
     </div>

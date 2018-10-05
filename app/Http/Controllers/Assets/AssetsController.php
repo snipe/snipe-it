@@ -117,12 +117,17 @@ class AssetsController extends Controller
         $asset_tags = $request->input('asset_tags');
 
         $success = false;
+        $serials = $request->input('serials');
+
         for ($a = 1; $a <= count($asset_tags); $a++) {
 
             $asset = new Asset();
             $asset->model()->associate(AssetModel::find($request->input('model_id')));
             $asset->name                    = $request->input('name');
-            $asset->serial                  = $request->input('serial');
+            // Check for a corresponding serial
+            if (($serials) && (array_key_exists($a, $serials))) {
+                $asset->serial                  = $serials[$a];
+            }
             $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
             $asset->model_id                = $request->input('model_id');
             $asset->order_number            = $request->input('order_number');
