@@ -14,6 +14,7 @@ mix
     [
       "./node_modules/select2/dist/css/select2.css",
       "./public/css/build/AdminLTE.css",
+      "./node_modules/jquery-ui-dist/jquery-ui.css",
       "./node_modules/admin-lte/plugins/iCheck/minimal/blue.css",
       "./node_modules/font-awesome/css/font-awesome.css",
       "./node_modules/icheck/skins/minimal/minimal.css",
@@ -54,9 +55,8 @@ mix.js([
  * Combine JS
  */
 mix.combine([
-    './node_modules/admin-lte/dist/js/adminlte.min.js',
-    './resources/assets/js/admin-lte-options.js',
     './node_modules/jquery-ui-dist/jquery-ui.js',
+    './node_modules/admin-lte/dist/js/adminlte.min.js',
     './node_modules/tether/dist/js/tether.min.js',
     './node_modules/jquery-slimscroll/jquery.slimscroll.js',
     './node_modules/jquery.iframe-transport/jquery.iframe-transport.js',
@@ -68,6 +68,7 @@ mix.combine([
     './resources/assets/js/extensions/pGenerator.jquery.js',
     './node_modules/chart.js/dist/Chart.js',
     './resources/assets/js/signature_pad.js',
+    './resources/assets/js/admin-lte-options.js',
 ], 'public/js/vendor.js')
 .version();
 
