@@ -801,9 +801,10 @@
 
         $.validate({
             form : '#create-form',
-            modules : 'date'
+            modules : 'date,toggleDisabled',
+            disabledFormFilter : '#create-form',
+            showErrorDialogs : true
         });
-
 
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
