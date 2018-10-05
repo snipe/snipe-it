@@ -797,6 +797,14 @@
     @show
 
     <script nonce="{{ csrf_token() }}">
+
+
+        $.validate({
+            form : '#create-form',
+            modules : 'date'
+        });
+
+
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
             $('[data-toggle="popover"]').popover();
