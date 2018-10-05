@@ -203,36 +203,59 @@
 
     // Add another asset tag + serial combination if the plus sign is clicked
     $(document).ready(function() {
-        var max_fields      = 10; //maximum input boxes allowed
+        var max_fields      = 3; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
-        var box_html        = '';
+        var x               = 1; //initial text box count
+        var base_increment  = $("#asset_tag").val();
+        var incremented_tag = base_increment.replace(/[^\d]/g, '');
 
-        var x = 1; //initial text box count
+
+
         $(add_button).click(function(e){ //on add input button click
-            e.preventDefault();
-            if(x < max_fields){ //max input box allowed
-                x++; //text box increment
 
-                box_html += '<div class="form-group"><label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>';
+            e.preventDefault();
+            var box_html        = '';
+
+            // Check that we haven't exceeded the max number of asset fields
+            if (x < max_fields) {
+                x++; //text box increment
+                incremented_tag++;
+                console.log(x);
+
+                box_html += '<span class="fields_wrapper">';
+                box_html += '<div class="form-group"><label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }} ' + x + '</label>';
                 box_html += '<div class="col-md-7 col-sm-12 required">';
-                box_html += '<input type="text"  class="form-control" name="asset_tags[' + x + ']">';
-                box_html += '</div><div class="col-md-2 col-sm-12">';
+                box_html += '<input type="text"  class="form-control" name="asset_tags[' + x + ']" value="{{ ($snipeSettings->auto_increment_prefix!='' && $snipeSettings->auto_increment_assets=='1') ? $snipeSettings->auto_increment_prefix : '' }}'+ incremented_tag +'">';
+                box_html += '</div>';
+                box_html += '<div class="col-md-2 col-sm-12">';
                 box_html += '<a href="#" class="remove_field btn btn-default btn-sm"><i class="fa fa-minus"></i></a>';
                 box_html += '</div>';
                 box_html += '</div>';
                 box_html += '</div>';
-                box_html += '<div class="form-group"><label for="serial" class="col-md-3 control-label">{{ trans('admin/hardware/form.serial') }}</label>';
+                box_html += '<div class="form-group"><label for="serial" class="col-md-3 control-label">{{ trans('admin/hardware/form.serial') }} ' + x + '</label>';
                 box_html += '<div class="col-md-7 col-sm-12">';
                 box_html += '<input type="text"  class="form-control" name="serials[' + x + ']">';
                 box_html += '</div>';
                 box_html += '</div>';
+                box_html += '</span>';
                 $(wrapper).append(box_html);
+
+            // We have reached the maximum number of extra asset fields, so disable the button
+            } else {
+                $(".add_field_button").attr('disabled');
+                $(".add_field_button").addClass('disabled');
             }
         });
 
-        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-            e.preventDefault(); $(this).parent('div').parent('div').remove(); x--;
+        $(wrapper).on("click",".remove_field", function(e){ //user clicks on remove text
+            $(".add_field_button").removeAttr('disabled');
+            $(".add_field_button").removeClass('disabled');
+            e.preventDefault();
+            console.log(x);
+
+            $('.fields_wrapper').parent('div').remove();
+            x--;
         })
     });
 
