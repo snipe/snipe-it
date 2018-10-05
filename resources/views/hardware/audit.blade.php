@@ -60,7 +60,7 @@
                                     <input type="checkbox" value="1" name="update_location" class="minimal" {{ Input::old('update_location') == '1' ? ' checked="checked"' : '' }}> Update asset location
                                 </label>
 
-                                @include ('partials.more-info', ['helpText' => trans('help.audit_help')])
+                                @include ('partials.more-info', ['helpText' => trans('help.audit_help'), 'helpPosition' => 'right'])
 
 
 

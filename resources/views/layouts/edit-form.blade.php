@@ -27,15 +27,21 @@
 
         <div class="box box-default">
             <div class="box-header with-border">
+
             <h3 class="box-title" style="min-height: 20px;">
+            @if (isset($helpText))
+                @include ('partials.more-info',
+                    [
+                        'helpText' => trans('help.audit_help'),
+                        'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
+                    ])
+            @endif
+
             @if ($item->id)
             {{ $item->display_name }}
             @endif
             </h3>
                 <div class="box-tools pull-right">
-                @if (isset($helpText))
-                    <button class="slideout-menu-toggle btn btn-box-tool btn-box-tool-lg" data-toggle="tooltip" title="Help"><i class="fa fa-question"></i></button>
-                @endif
                  @include('partials.forms.edit.submit-button')
                 </div>
             </div><!-- /.box-header -->
@@ -55,16 +61,6 @@
         </div>
     </div>
     </form>
-
-    @if ((isset($helpText)) && (isset($helpTitle)))
-    <div class="slideout-menu">
-        <a href="#" class="slideout-menu-toggle pull-right">×</a>
-        <h3>
-            {{ $helpTitle}}
-        </h3>
-        <p>{{ $helpText }} </p>
-    </div>
-    @endif
 </div>
 
 @stop
