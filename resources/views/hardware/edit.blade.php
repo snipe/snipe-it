@@ -228,7 +228,13 @@
 
             // Check that we haven't exceeded the max number of asset fields
             if (x < max_fields) {
-                var auto_tag = parseInt(auto_tag) + parseInt(x);
+
+                if (auto_tag!='') {
+                     auto_tag = parseInt(auto_tag) + parseInt(x);
+                } else {
+                     auto_tag = '';
+                }
+
                 x++; //text box increment
 
                 box_html += '<span class="fields_wrapper">';
