@@ -65,7 +65,6 @@ mix
   .combine(
     [
       "./node_modules/admin-lte/dist/js/adminlte.min.js",
-      "./resources/assets/js/jquery-ui.js", // Custom jquery download without tooltips
       "./node_modules/tether/dist/js/tether.js",
       "./node_modules/jquery-slimscroll/jquery.slimscroll.js",
       "./node_modules/jquery.iframe-transport/jquery.iframe-transport.js",
