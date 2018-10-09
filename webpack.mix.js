@@ -65,8 +65,7 @@ mix
   .combine(
     [
       "./node_modules/admin-lte/dist/js/adminlte.min.js",
-      "./node_modules/jquery-ui-dist/jquery-ui.js",
-      "./node_modules/tether/dist/js/tether.min.js",
+      "./node_modules/tether/dist/js/tether.js",
       "./node_modules/jquery-slimscroll/jquery.slimscroll.js",
       "./node_modules/jquery.iframe-transport/jquery.iframe-transport.js",
       "./node_modules/blueimp-file-upload/js/jquery.fileupload.js",
