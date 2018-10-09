@@ -16,7 +16,7 @@
 @if (isset($item->category))
 | **{{ trans('general.category') }}** | {{ $item->category->name }} |
 @endif
-@if ($target->can('view', $item->serial))
+@if ($target->can('view', $item))
 | **Key** | {{ $item->serial }} |
 @endif
 @if ($note)
