@@ -143,7 +143,7 @@ class AssetsController extends Controller
         }
 
         // Create the image (if one was chosen.)
-        if ($request->hasFile('image')) {
+        if ($request->has('image')) {
             $image = $request->input('image');
 
             // After modification, the image is prefixed by mime info like the following:
