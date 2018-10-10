@@ -10,7 +10,7 @@
         <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
         {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-md-offset-3">
         <img id="imagePreview" style="max-width: 200px;">
     </div>
 </div>
