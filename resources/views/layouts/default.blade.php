@@ -88,7 +88,7 @@
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button above the compact sidenav -->
-          <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
+          <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
           <ul class="nav navbar-nav navbar-left">
@@ -350,7 +350,7 @@
             </ul>
           </div>
       </nav>
-       <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
+       <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
         <i class="fa fa-bars"></i>
       </a>
@@ -362,7 +362,7 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu">
+          <ul class="sidebar-menu" data-widget="tree">
             @can('admin')
             <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!}>
               <a href="{{ route('home') }}">
@@ -754,8 +754,7 @@
                   {!!  Parsedown::instance()->text(e($snipeSettings->footer_text))  !!}
               </div>
           @endif
-
-
+          
         <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
       </footer>
 
@@ -789,7 +788,7 @@
 
     {{-- Javascript files --}}
     <script src="{{ url(mix('js/app.js')) }}" nonce="{{ csrf_token() }}"></script>
-    <script src="{{ url(mix('js/vendor.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url(mix('js/all.js')) }}" nonce="{{ csrf_token() }}"></script>
     {{-- Page level javascript --}}
     @stack('js')
 
@@ -797,8 +796,6 @@
     @show
 
     <script nonce="{{ csrf_token() }}">
-
-
         $.validate({
             form : '#create-form',
             modules : 'date, toggleDisabled',
@@ -807,6 +804,7 @@
         });
 
         $(function () {
+  
             $('[data-toggle="tooltip"]').tooltip();
             $('[data-toggle="popover"]').popover();
             $('.select2 span').addClass('needsclick');
