@@ -29,6 +29,18 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
         return ['asset', 'license'];
     }
 
+    /**
+     * Determine whether the user should be required to accept the license
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return boolean
+     */
+    public function requireAcceptance()
+    {
+        return $this->license->category->require_acceptance;
+    }
+
     public function getEula() {
         return $this->license->getEula();
     }
