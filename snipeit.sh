@@ -166,8 +166,8 @@ run_as_app_user () {
 install_composer () {
   # https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
   EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
-  run_as_app_user php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-  ACTUAL_SIGNATURE="$(run_as_app_user php -r "echo hash_file('SHA384', 'composer-setup.php');")"
+  run_as_app_user php  "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  ACTUAL_SIGNATURE="$(run_as_app_user php  "echo hash_file('SHA384', 'composer-setup.php');")"
 
   if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
   then
