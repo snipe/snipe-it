@@ -324,13 +324,17 @@ class UserPresenter extends Presenter
             return Storage::disk('public')->url('avatars/'.$this->avatar, $this->avatar);
         }
 
-        if ((Setting::getSettings()->load_remote=='1') && ($this->email!='')) {
+        if ($this->email != '') {
+            /**
+             * @see https://en.gravatar.com/site/implement/images/
+             * Return a default [Myster Person] gravatar if the user does not have one
+             */
             $gravatar = md5(strtolower(trim($this->email)));
-            return "//gravatar.com/avatar/".$gravatar;
+            return "//gravatar.com/avatar/".$gravatar.'?d=mp';
         }
 
-        // Set a fun, gender-neutral default icon
-        return url('/').'/img/default-sm.png';
+        // Set a fun, gender-neutral default icon when there is no email
+        return asset('/img/default-sm.png');
 
     }
 
