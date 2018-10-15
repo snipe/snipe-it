@@ -31,7 +31,7 @@
   <!-- panel -->
   <div class="col-lg-3 col-xs-6">
     <!-- small box -->
-    <div class="small-box bg-teal">
+    <div class="small-box bg-teal" style="cursor:pointer;" onclick="document.location='{{ route('hardware.index') }}'">
       <div class="inner">
         <h3>{{ number_format($counts['asset']) }}</h3>
         <p>{{ trans('general.total_assets') }}</p>
@@ -47,7 +47,7 @@
 
   <div class="col-lg-3 col-xs-6">
     <!-- small box -->
-    <div class="small-box bg-maroon">
+    <div class="small-box bg-maroon" style="cursor:pointer;" onclick="document.location='{{ route('licenses.index') }}'">
       <div class="inner">
         <h3>{{ number_format($counts['license']) }}</h3>
         <p>{{ trans('general.total_licenses') }}</p>
@@ -64,7 +64,7 @@
 
   <div class="col-lg-3 col-xs-6">
     <!-- small box -->
-    <div class="small-box bg-orange">
+    <div class="small-box bg-orange" style="cursor:pointer;" onclick="document.location='{{ route('accessories.index') }}'">
       <div class="inner">
         <h3> {{ number_format($counts['accessory']) }}</h3>
           <p>{{ trans('general.total_accessories') }}</p>
@@ -80,7 +80,7 @@
 
   <div class="col-lg-3 col-xs-6">
     <!-- small box -->
-    <div class="small-box bg-purple">
+    <div class="small-box bg-purple" style="cursor:pointer;" onclick="document.location='{{ route('consumables.index') }}'">
       <div class="inner">
         <h3> {{ number_format($counts['consumable']) }}</h3>
           <p>{{ trans('general.total_consumables') }}</p>
