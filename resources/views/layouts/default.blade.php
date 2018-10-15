@@ -788,7 +788,7 @@
 
     {{-- Javascript files --}}
     <script src="{{ url(mix('js/app.js')) }}" nonce="{{ csrf_token() }}"></script>
-    <script src="{{ url(mix('js/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url(mix('js/vendor.js')) }}" nonce="{{ csrf_token() }}"></script>
     {{-- Page level javascript --}}
     @stack('js')
 
