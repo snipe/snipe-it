@@ -330,11 +330,11 @@ class UserPresenter extends Presenter
              * Return a default [Myster Person] gravatar if the user does not have one
              */
             $gravatar = md5(strtolower(trim($this->email)));
-            return "//gravatar.com/avatar/".$gravatar.'?d=mp';
+            // return "//gravatar.com/avatar/".$gravatar.'?d=mp';
         }
 
         // Set a fun, gender-neutral default icon when there is no email
-        return asset('/img/default-sm.png');
+        return url('/img/default-sm.png');
 
     }
 
