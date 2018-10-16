@@ -320,14 +320,14 @@ abstract class Importer
 
         // No Luck, let's create one.
         $user = new User;
-        $user->first_name = $user_array['first_name'];
-        $user->last_name = $user_array['last_name'];
-        $user->username = $user_array['username'];
-        $user->email = $user_array['email'];
-        $user->manager_id = $user_array['manager_id'];
-        $user->department_id = $user_array['department_id'];
-        $user->activated = 1;
-        $user->password = $this->tempPassword;
+        $user->first_name    = $user_array['first_name'];
+        $user->last_name     = $user_array['last_name'];
+        $user->username      = $user_array['username'];
+        $user->email         = $user_array['email'];
+        $user->manager_id    = $user_array['manager_id'] ?? null;
+        $user->department_id = $user_array['department_id'] ?? null;
+        $user->activated     = 1;
+        $user->password      = $this->tempPassword;
 
         if ($user->save()) {
             $this->log('User '.$user_array['username'].' created');
