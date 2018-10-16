@@ -171,8 +171,8 @@ class AssetsController extends Controller
                 }
             }
 
-            // Was the asset created?
-            if ($asset->save()) {
+            // Validate the asset before saving
+            if ($asset->isValid() && $asset->save()) {
 
                 if (request('assigned_user')) {
                     $target = User::find(request('assigned_user'));
