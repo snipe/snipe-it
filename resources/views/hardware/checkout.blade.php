@@ -46,6 +46,15 @@
                     {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                   </div>
                 </div>
+            @else
+                @if ($asset->name!='')
+                    <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
+                        {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
+                        <div class="col-md-8">
+                            <p class="form-control-static">{{ $asset->name }}</p>
+                        </div>
+                    </div>
+                @endif
             @endcan
 
                 @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true'])
