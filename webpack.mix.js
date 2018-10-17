@@ -82,14 +82,6 @@ mix
   )
   .version();
 
-mix.copy(
-  [
-    "./resources/assets/js/html5shiv.min.js",
-    "./resources/assets/js/respond.min.js"
-  ],
-  "./public/js"
-);
-
 /**
  * Combine bootstrap table js
  */
