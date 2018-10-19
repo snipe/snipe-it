@@ -53,8 +53,8 @@ class UserImporter extends ItemImporter
         \Log::debug('UserImporter.php Activated fetchHumanBoolean: '. $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')));
 
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
-        $this->item['department_id'] = $this->createOrFetchDepartment($this->findCsvMatch($row, 'department'));
-        $this->item['manager_id'] = $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name'));
+        $this->item['department_id'] = $this->createOrFetchDepartment($this->findCsvMatch($row, 'department'))  ?? null;
+        $this->item['manager_id'] = $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name')) ?? null;
 
 
         $user = User::where('username', $this->item['username'])->first();
