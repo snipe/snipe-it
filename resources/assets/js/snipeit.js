@@ -464,3 +464,28 @@ $(document).ready(function () {
     });
 
 });
+
+
+/**
+ * Toggle disabled
+ */
+(function($){
+		
+    $.fn.toggleDisabled = function(callback){
+        return this.each(function(){
+            var disabled, $this = $(this);
+            if($this.attr('disabled')){
+                $this.removeAttr('disabled');
+                disabled = false;
+            } else {
+                $this.attr('disabled', 'disabled');
+                disabled = true;
+            }
+
+            if(callback && typeof callback === 'function'){
+                callback(this, disabled);
+            }
+        });
+    };
+    
+})(jQuery);
