@@ -316,8 +316,8 @@ abstract class Importer
         $user->last_name = $user_array['last_name'];
         $user->username = $user_array['username'];
         $user->email = $user_array['email'];
-        $user->manager_id = $user_array['manager_id'] ?? null;
-        $user->department_id = $user_array['department_id'] ?? null;
+        $user->manager_id = $user_array['manager_id'] ?? false;
+        $user->department_id = $user_array['department_id'] ?? false;
         $user->activated = $user_array['activated'];
         $user->password = $this->tempPassword;
 
