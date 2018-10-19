@@ -1,10 +1,14 @@
 <?php
 namespace App\Models;
 
+use App\Events\AssetCheckedOut;
+use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
+use App\Models\User;
 use App\Presenters\Presentable;
 use AssetPresenter;
 use Auth;
@@ -17,7 +21,7 @@ use Watson\Validating\ValidatingTrait;
 use DB;
 use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckoutAssetNotification;
-
+use Illuminate\Support\Facades\Storage;
 /**
  * Model for Assets.
  *
@@ -32,12 +36,20 @@ class Asset extends Depreciable
     const ASSET = 'asset';
     const USER = 'user';
 
-    const ACCEPTANCE_PENDING = 'pending';
+    use Acceptable;
+
     /**
-     * Set static properties to determine which checkout/checkin handlers we should use
-     */
-    public static $checkoutClass = CheckoutAssetNotification::class;
-    public static $checkinClass = CheckinAssetNotification::class;
+     * Run after the checkout acceptance was declined by the user
+     * 
+     * @param  User   $acceptedBy
+     * @param  string $signature
+     */ 
+    public function declinedCheckout(User $declinedBy, $signature) {
+      $this->assigned_to = null;
+      $this->assigned_type = null;
+      $this->accepted = null;      
+      $this->save();        
+    }
 
 
     /**
@@ -148,7 +160,32 @@ class Asset extends Depreciable
         'model'              => ['name', 'model_number'],
         'model.category'     => ['name'],
         'model.manufacturer' => ['name'],
-    ];     
+    ];
+
+
+    /**
+     * This handles the custom field validation for assets
+     *
+     * @var array
+     */
+    public function save(array $params = [])
+    {
+        $settings = \App\Models\Setting::getSettings();
+
+        // I don't remember why we have this here? Asset tag would always be required, even if auto increment is on...
+        $this->rules['asset_tag'] = ($settings->auto_increment_assets == '1') ? 'max:255' : 'required';
+
+        if($this->model_id != '') {
+            $model = AssetModel::find($this->model_id);
+
+            if (($model) && ($model->fieldset)) {
+                $this->rules += $model->fieldset->validation_rules();
+            }
+        }
+
+        return parent::save($params);
+    }
+
 
     public function getDisplayNameAttribute()
     {
@@ -252,21 +289,11 @@ class Asset extends Depreciable
                 $this->location_id = $target->id;
             }
         }
-        
-        /**
-         * Does the user have to confirm that they accept the asset?
-         *
-         * If so, set the acceptance-status to "pending".
-         * This value is used in the unaccepted assets reports, for example
-         * 
-         * @see https://github.com/snipe/snipe-it/issues/5772
-         */
-        if ($this->requireAcceptance() && $target instanceof User) {
-          $this->accepted = self::ACCEPTANCE_PENDING;
-        }
 
         if ($this->save()) {
-            $this->logCheckout($note, $target);
+
+            event(new CheckoutableCheckedOut($this, $target, Auth::user(), $note));
+
             $this->increment('checkout_counter', 1);
             return true;
         }
@@ -485,9 +512,9 @@ class Asset extends Depreciable
     public function getImageUrl()
     {
         if ($this->image && !empty($this->image)) {
-            return url('/').'/uploads/assets/'.$this->image;
+            return Storage::disk('public')->url(app('assets_upload_path').e($this->image));
         } elseif ($this->model && !empty($this->model->image)) {
-            return url('/').'/uploads/models/'.$this->model->image;
+            return Storage::disk('public')->url(app('models_upload_path').e($this->model->image));
         }
         return false;
     }

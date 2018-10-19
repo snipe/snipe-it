@@ -70,6 +70,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'email'                   => 'email|nullable',
         'password'                => 'required|min:6',
         'locale'                  => 'max:10|nullable',
+        'manager_id'              => 'exists:users,id|nullable'
     ];
 
     use Searchable;
@@ -126,12 +127,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
         $user_permissions = json_decode($this->permissions, true);
 
+        $is_user_section_permissions_set = ($user_permissions != '') && array_key_exists($section, $user_permissions);
         //If the user is explicitly granted, return true
-        if (($user_permissions!='') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1'))) {
+        if ($is_user_section_permissions_set && ($user_permissions[$section]=='1')) {
             return true;
         }
         // If the user is explicitly denied, return false
-        if (($user_permissions=='') || array_key_exists($section, $user_permissions) && ($user_permissions[$section]=='-1')) {
+        if ($is_user_section_permissions_set && ($user_permissions[$section]=='-1')) {
             return false;
         }
 

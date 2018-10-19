@@ -203,6 +203,8 @@ class UsersController extends Controller
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
+            } else {
+                $user->groups()->sync(array());
             }
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.create')));
         }
@@ -279,6 +281,15 @@ class UsersController extends Controller
 
         if ($user->assets()->count() > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete_has_assets')));
+        }
+
+        // Remove the user's avatar if they have one
+        if (Storage::disk('public')->exists('avatars/'.$user->avatar)) {
+            try  {
+                Storage::disk('public')->delete('avatars/'.$user->avatar);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
         }
 
         if ($user->delete()) {

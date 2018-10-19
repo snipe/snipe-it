@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Accessory;
 use App\Models\Setting;
 use App\Models\SnipeModel;
 use App\Models\User;
@@ -15,31 +16,19 @@ use Illuminate\Support\Facades\Mail;
 class CheckinAccessoryNotification extends Notification
 {
     use Queueable;
-    /**
-     * @var
-     */
-    private $params;
 
     /**
      * Create a new notification instance.
      *
      * @param $params
      */
-    public function __construct($params)
+    public function __construct(Accessory $accessory, $checkedOutTo, User $checkedInby, $note)
     {
-        $this->target = $params['target'];
-        $this->item = $params['item'];
-        $this->admin = $params['admin'];
-        $this->note = '';
-        $this->target_type = $params['target'];
-        $this->settings = $params['settings'];
-
-        if (array_key_exists('note', $params)) {
-            $this->note = $params['note'];
-        }
-
-
-
+        $this->item     = $accessory;
+        $this->target   = $checkedOutTo;
+        $this->admin    = $checkedInby;
+        $this->note     = $note;
+        $this->settings = Setting::getSettings();
     }
 
     /**

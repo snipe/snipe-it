@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Licenses;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -49,7 +51,7 @@ class LicenseCheckinController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store($seatId = null, $backTo = null)
+    public function store(Request $request, $seatId = null, $backTo = null)
     {
         // Check if the asset exists
         if (is_null($licenseSeat = LicenseSeat::find($seatId))) {
@@ -88,7 +90,9 @@ class LicenseCheckinController extends Controller
 
         // Was the asset updated?
         if ($licenseSeat->save()) {
-            $licenseSeat->logCheckin($return_to, e(request('note')));
+
+            event(new CheckoutableCheckedIn($license, $return_to, Auth::user(), $request->input('note')));
+
             if ($backTo=='user') {
                 return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
             }

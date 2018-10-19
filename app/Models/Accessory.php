@@ -1,12 +1,14 @@
 <?php
 namespace App\Models;
 
+use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckoutAccessoryNotification;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Model for Accessories.
@@ -27,6 +29,8 @@ class Accessory extends SnipeModel
     ];
 
     use Searchable;
+
+    use Acceptable;
     
     /**
      * The attributes that should be included when searching the model.
@@ -47,13 +51,6 @@ class Accessory extends SnipeModel
         'supplier'     => ['name'],
         'location'     => ['name']
     ];
-   
-    /**
-     * Set static properties to determine which checkout/checkin handlers we should use
-     */
-    public static $checkoutClass = CheckoutAccessoryNotification::class;
-    public static $checkinClass = CheckinAccessoryNotification::class;
-
 
     /**
     * Accessory validation rules
@@ -223,7 +220,7 @@ class Accessory extends SnipeModel
      */
     public function getImageUrl() {
         if ($this->image) {
-            return url('/').'/uploads/accessories/'.$this->image;
+            return Storage::disk('public')->url(app('accessories_upload_path').$this->image);
         }
         return false;
 

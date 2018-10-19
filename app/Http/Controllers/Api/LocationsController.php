@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use App\Models\Location;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Support\Facades\Storage;
 
 class LocationsController extends Controller
 {
@@ -106,7 +107,26 @@ class LocationsController extends Controller
     public function show($id)
     {
         $this->authorize('view', Location::class);
-        $location = Location::findOrFail($id);
+        $location = Location::with('parent', 'manager', 'childLocations')
+            ->select([
+                'locations.id',
+                'locations.name',
+                'locations.address',
+                'locations.address2',
+                'locations.city',
+                'locations.state',
+                'locations.zip',
+                'locations.country',
+                'locations.parent_id',
+                'locations.manager_id',
+                'locations.created_at',
+                'locations.updated_at',
+                'locations.image',
+                'locations.currency'
+            ])
+            ->withCount('assignedAssets')
+            ->withCount('assets')
+            ->withCount('users')->findOrFail($id);
         return (new LocationsTransformer)->transformLocation($location);
     }
 
@@ -184,7 +204,7 @@ class LocationsController extends Controller
         // they may not have a ->name value but we want to display something anyway
         foreach ($locations as $location) {
             $location->use_text = $location->name;
-            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
+            $location->use_image = ($location->image) ? Storage::disk('public')->url('locations/'.$location->image, $location->image): null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($locations);

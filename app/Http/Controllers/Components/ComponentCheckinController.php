@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Components;
 
+use App\Events\CheckoutableCheckedIn;
+use App\Events\ComponentCheckedIn;
 use App\Http\Controllers\Controller;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Component;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -86,21 +89,15 @@ class ComponentCheckinController extends Controller
             DB::table('components_assets')->where('id',
                 $component_asset_id)->update(['assigned_qty' => $qty_remaining_in_checkout]);
 
-            $log = new Actionlog();
-            $log->user_id = auth()->id();
-            $log->action_type = 'checkin from';
-            $log->target_type = Asset::class;
-            $log->target_id = $component_assets->asset_id;
-            $log->item_id = $component_assets->component_id;
-            $log->item_type = Component::class;
-            $log->note = $request->input('note');
-            $log->save();
-
             // If the checked-in qty is exactly the same as the assigned_qty,
             // we can simply delete the associated components_assets record
             if ($qty_remaining_in_checkout == 0) {
                 DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
             }
+
+            $asset = Asset::find($component_assets->asset_id);
+
+            event(new CheckoutableCheckedIn($component, $asset, Auth::user(), $request->input('note')));
 
             return redirect()->route('components.index')->with('success',
                 trans('admin/components/message.checkout.success'));

@@ -204,11 +204,11 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('view', Statuslabel::class);
         $this->authorize('index', Asset::class);
-        $assets = Asset::where('status_id','=',$id);
+        $assets = Asset::where('status_id','=',$id)->with('assignedTo');
 
         $allowed_columns = [
             'id',
-            'name'
+            'name',
         ];
 
         $offset = request('offset', 0);
@@ -238,9 +238,6 @@ class StatuslabelsController extends Controller
      */
     public function checkIfDeployable($id) {
         $statuslabel = Statuslabel::findOrFail($id);
-
-        $this->authorize('view', $statuslabel);
-
         if ($statuslabel->getStatuslabelType()=='deployable') {
             return '1';
         }

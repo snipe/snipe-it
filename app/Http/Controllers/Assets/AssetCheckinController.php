@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckinRequest;
 use App\Models\Asset;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 
@@ -82,8 +84,8 @@ class AssetCheckinController extends Controller
 
         // Was the asset updated?
         if ($asset->save()) {
-            $asset->logCheckin($target, e(request('note')));
-
+        
+            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note')));
 
             if ($backto=='user') {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));

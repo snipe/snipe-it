@@ -30,69 +30,78 @@
 <div class="row">
   <!-- panel -->
   <div class="col-lg-3 col-xs-6">
+      <a href="{{ route('hardware.index') }}">
+        <!-- small box -->
+        <div class="small-box bg-teal">
+          <div class="inner">
+            <h3>{{ number_format($counts['asset']) }}</h3>
+            <p>{{ trans('general.total_assets') }}</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-barcode"></i>
+          </div>
+          @can('index', \App\Models\Asset::class)
+            <span class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></span>
+          @endcan
+        </div>
+      </a>
+  </div><!-- ./col -->
+
+  <div class="col-lg-3 col-xs-6">
+     <a href="{{ route('licenses.index') }}">
+        <!-- small box -->
+        <div class="small-box bg-maroon">
+          <div class="inner">
+            <h3>{{ number_format($counts['license']) }}</h3>
+            <p>{{ trans('general.total_licenses') }}</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-floppy-o"></i>
+          </div>
+            @can('view', \App\Models\License::class)
+              <span class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></span>
+            @endcan
+        </div>
+     </a>
+  </div><!-- ./col -->
+
+
+  <div class="col-lg-3 col-xs-6">
     <!-- small box -->
-    <div class="small-box bg-teal">
-      <div class="inner">
-        <h3>{{ number_format($counts['asset']) }}</h3>
-        <p>{{ trans('general.total_assets') }}</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-barcode"></i>
-      </div>
-      @can('index', \App\Models\Asset::class)
-        <a href="{{ route('hardware.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
-      @endcan
-    </div>
+      <a href="{{ route('accessories.index') }}">
+        <div class="small-box bg-orange">
+          <div class="inner">
+            <h3> {{ number_format($counts['accessory']) }}</h3>
+              <p>{{ trans('general.total_accessories') }}</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-keyboard-o"></i>
+          </div>
+          @can('index', \App\Models\Accessory::class)
+              <span class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></span>
+          @endcan
+        </div>
+      </a>
   </div><!-- ./col -->
 
   <div class="col-lg-3 col-xs-6">
     <!-- small box -->
-    <div class="small-box bg-maroon">
-      <div class="inner">
-        <h3>{{ number_format($counts['license']) }}</h3>
-        <p>{{ trans('general.total_licenses') }}</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-floppy-o"></i>
-      </div>
-        @can('view', \App\Models\License::class)
-          <a href="{{ route('licenses.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
-        @endcan
-    </div>
-  </div><!-- ./col -->
 
-
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-orange">
-      <div class="inner">
-        <h3> {{ number_format($counts['accessory']) }}</h3>
-          <p>{{ trans('general.total_accessories') }}</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-keyboard-o"></i>
-      </div>
-      @can('index', \App\Models\Accessory::class)
-          <a href="{{ route('accessories.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
-      @endcan
-    </div>
-  </div><!-- ./col -->
-
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-purple">
-      <div class="inner">
-        <h3> {{ number_format($counts['consumable']) }}</h3>
-          <p>{{ trans('general.total_consumables') }}</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-tint"></i>
-      </div>
-      @can('index', \App\Models\Consumable::class)
-        <a href="{{ route('consumables.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
-      @endcan
-    </div>
-  </div><!-- ./col -->
+      <a href="{{ route('consumables.index') }}">
+        <div class="small-box bg-purple">
+          <div class="inner">
+            <h3> {{ number_format($counts['consumable']) }}</h3>
+              <p>{{ trans('general.total_consumables') }}</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-tint"></i>
+          </div>
+          @can('index', \App\Models\Consumable::class)
+            <span class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></span>
+          @endcan
+        </div>
+    </a>
+</div>
 </div>
 
 @if ($counts['grand_total'] == 0)
@@ -279,95 +288,36 @@
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['simple_view' => true, 'nopages' => true])
-
-@if ($snipeSettings->load_remote=='1')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-@else
-    <script src="{{ asset('js/plugins/chartjs/Chart.min.js') }}"></script>
-@endif
-
-
-<script nonce="{{ csrf_token() }}">
-
-
-
-
-        /* ChartJS
-         * -------
-         */
-
-        // -----------------------
-        // - LINE CHART -
-        // -----------------------
-
-
-
-        //var ctx = document.getElementById('salesChart').getContext("2d")
-        //var myChart = new Chart(ctx, {
-         //   type: 'line'
-        //});
-
-
-        //$.ajax({
-        //    type: 'GET',
-        //    url: '{{  route('api.statuslabels.assets.bytype') }}',
-        //    headers: {
-        //        "X-Requested-With": 'XMLHttpRequest',
-        //        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-        //    },
-
-        //    dataType: 'json',
-        //   success: function (data) {
-        //       var ctx = new Chart(ctx,{
-        //          type: 'line',
-        //            data: data,
-        //            options: lineOptions
-        //        });
-        //    },
-        //    error: function (data) {
-       //         window.location.reload(true);
-       //     }
-       // });
-
-
-
-
-
-  // ---------------------------
-  // - END MONTHLY SALES CHART -
-  // ---------------------------
-
-
-    var pieChartCanvas = $("#statusPieChart").get(0).getContext("2d");
-    var pieChart = new Chart(pieChartCanvas);
-    var ctx = document.getElementById("statusPieChart");
-
-
-
-    $.ajax({
-        type: 'GET',
-        url: '{{  route('api.statuslabels.assets.bytype') }}',
-        headers: {
-            "X-Requested-With": 'XMLHttpRequest',
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-        },
-
-        dataType: 'json',
-        success: function (data) {
-            var myPieChart = new Chart(ctx,{
-
-                type: 'doughnut',
-                data: data,
-                options: pieOptions
-            });
-        },
-        error: function (data) {
-           // window.location.reload(true);
-        }
-    });
-
-
-</script>
-
-
 @stop
+
+@push('js')
+<script nonce="{{ csrf_token() }}">
+    // ---------------------------
+    // - ASSET STATUS CHART -
+    // ---------------------------
+      var pieChartCanvas = $("#statusPieChart").get(0).getContext("2d");
+      var pieChart = new Chart(pieChartCanvas);
+      var ctx = document.getElementById("statusPieChart");
+  
+      $.ajax({
+          type: 'GET',
+          url: '{{  route('api.statuslabels.assets.bytype') }}',
+          headers: {
+              "X-Requested-With": 'XMLHttpRequest',
+              "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+          },
+  
+          dataType: 'json',
+          success: function (data) {
+              var myPieChart = new Chart(ctx,{
+                  type   : 'doughnut',
+                  data   : data,
+                  options: pieOptions
+              });
+          },
+          error: function (data) {
+             // window.location.reload(true);
+          }
+      });
+</script>
+@endpush

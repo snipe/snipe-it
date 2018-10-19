@@ -1,8 +1,8 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/companies/table.create') ,
     'updateText' => trans('admin/companies/table.update'),
-    'helpTitle' => trans('admin/companies/general.about_companies_title'),
-    'helpText' => trans('admin/companies/general.about_companies_text'),
+    'helpPosition'  => 'right',
+    'helpText' => trans('help.companies'),
     'formAction' => ($item) ? route('companies.update', ['company' => $item->id]) : route('companies.store'),
 ])
 
@@ -16,7 +16,7 @@
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
         <div class="col-md-5">
             {{ Form::checkbox('image_delete') }}
-            <img src="{{ url('/') }}/uploads/companies/{{ $item->image }}" />
+            <img src="{{ Storage::disk('public')->url(app('companies_upload_path').e($item->image)) }}" class="img-responsive" />
             {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
         </div>
     </div>

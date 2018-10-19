@@ -1,61 +1,76 @@
 /*!
- *   AdminLTE v2.3.0
+ *   AdminLTE v2.4.8
  *   Author: Almsaeed Studio
- *	 Website: Almsaeed Studio <http://almsaeedstudio.com>
+ *	 Website: Almsaeed Studio <https://adminlte.io>
  *   License: Open source - MIT
  *           Please visit http://opensource.org/licenses/MIT for more information
-!*/
+ */
 
 
-//Bootstrap Variables & Mixins
-//The core bootstrap code have not been modified. These files
-//are included only for reference.
-@import "../less/bootstrap-less/mixins.less";
-@import "../less/bootstrap-less/variables.less";
+// We are going to overide some settings
 
-//MISC
-//----
-@import "core.less";
-@import "variables.less";
-@import "mixins.less";
+// Bootstrap
+//--------------------------------------------------------
+@import (reference) "../../../node_modules/admin-lte/build/bootstrap-less/mixins";
+@import (reference) "../../../node_modules/admin-lte/build/bootstrap-less/variables";
 
-//COMPONENTS
-//-----------
-@import "header.less";
-@import "sidebar.less";
-@import "sidebar-mini.less";
-@import "control-sidebar.less";
-@import "dropdown.less";
-@import "forms.less";
-@import "progress-bars.less";
-@import "small-box.less";
-@import "boxes.less";
-@import "info-box.less";
-@import "buttons.less";
-@import "callout.less";
-@import "alerts.less";
-@import "navs.less";
-@import "table.less";
-@import "labels.less";
-@import "modal.less";
+// MISC
+//--------------------------------------------------------
+@import "../../../node_modules/admin-lte/build/less/core";
+@import "../../../node_modules/admin-lte/build/less/variables";
+@import "../../../node_modules/admin-lte/build/less/mixins";
 
-//HELPERS
-//-----------
+// COMPONENTS
+//--------------------------------------------------------
+@import "../../../node_modules/admin-lte/build/less/header";
+@import "../../../node_modules/admin-lte/build/less/sidebar";
+@import "../../../node_modules/admin-lte/build/less/sidebar-mini";
+@import "../../../node_modules/admin-lte/build/less/control-sidebar";
+@import "../../../node_modules/admin-lte/build/less/dropdown";
+@import "../../../node_modules/admin-lte/build/less/forms";
+@import "../../../node_modules/admin-lte/build/less/progress-bars";
+@import "../../../node_modules/admin-lte/build/less/small-box";
+@import "../../../node_modules/admin-lte/build/less/boxes";
+@import "../../../node_modules/admin-lte/build/less/info-box";
+@import "../../../node_modules/admin-lte/build/less/timeline";
+@import "../../../node_modules/admin-lte/build/less/buttons";
+@import "../../../node_modules/admin-lte/build/less/callout";
+@import "../../../node_modules/admin-lte/build/less/alerts";
+@import "../../../node_modules/admin-lte/build/less/navs";
+@import "../../../node_modules/admin-lte/build/less/products";
+@import "../../../node_modules/admin-lte/build/less/table";
+@import "../../../node_modules/admin-lte/build/less/labels";
+// @import "direct-chat";
+@import "../../../node_modules/admin-lte/build/less/users-list";
+@import "../../../node_modules/admin-lte/build/less/carousel";
+@import "../../../node_modules/admin-lte/build/less/modal";
+@import "../../../node_modules/admin-lte/build/less/social-widgets";
+@import "../../../node_modules/admin-lte/build/less/treeview";
+
+// PAGES
+//--------------------------------------------------------
+@import "../../../node_modules/admin-lte/build/less/mailbox";
+@import "../../../node_modules/admin-lte/build/less/lockscreen";
+@import "../../../node_modules/admin-lte/build/less/login_and_register";
+@import "../../../node_modules/admin-lte/build/less/404_500_errors";
+@import "../../../node_modules/admin-lte/build/less/invoice";
+@import "../../../node_modules/admin-lte/build/less/profile";
+
+// Plugins - Import only the plugins we use
+//--------------------------------------------------------
+// @import "plugins";
+@import "../../../node_modules/admin-lte/build/less/select2.less"; // IMPORTANT  the .less extension is needed
+@import "../../../node_modules/admin-lte/build/less/datepicker";
+
+// Miscellaneous
+//--------------------------------------------------------
+@import "../../../node_modules/admin-lte/build/less/miscellaneous";
+@import "../../../node_modules/admin-lte/build/less/print";
+
+// Theme
+//--------------------------------------------------------
+@import "../../../node_modules/admin-lte/build/less/skins/skin-blue.less";
+
+// Custom
+//--------------------------------------------------------
 @import "spacing.less";
-
-//PAGES
-//------
-@import "login_and_register.less";
-
-//Plugins
-//--------
-// @import "bootstrap-social.less";
-//@import "fullcalendar.less";
-@import "select2.less";
-
-//Miscellaneous
-//-------------
-@import "miscellaneous.less";
-@import "print.less";
-
-@import "skins/skin-blue.less";

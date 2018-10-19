@@ -1,5 +1,4 @@
 {{-- See snipeit_modals.js for what powers this --}}
-<script src="/js/pGenerator.jquery.js"></script>
 
 <script nonce="{{ csrf_token() }}">
     $(document).ready(function () {

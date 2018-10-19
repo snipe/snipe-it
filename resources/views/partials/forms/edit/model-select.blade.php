@@ -4,20 +4,13 @@
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
 
     <div class="col-md-7{{  ((isset($required) && ($required =='true'))) ?  ' required' : '' }}">
-        <select class="js-data-ajax" data-endpoint="models" data-placeholder="{{ trans('general.select_model') }}" name="{{ $fieldname }}" style="width: 100%" id="model_select_id">
-            @if (!isset($multiple) 
-            && ($model_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : '')) )
+        <select class="js-data-ajax" data-endpoint="models" data-placeholder="{{ trans('general.select_model') }}" name="{{ $fieldname }}" style="width: 100%" id="model_select_id" {!!  ((isset($required) && ($required =='true'))) ?  ' data-validation="required"' : '' !!}>
+            @if ($model_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $model_id }}" selected="selected">
                     {{ (\App\Models\AssetModel::find($model_id)) ? \App\Models\AssetModel::find($model_id)->name : '' }}
                 </option>
             @else
-                @if (isset($multiple) && $models)
-                    @foreach ($models as $model)
-                        <option value="{{$model->id}}">{{$model->name}}</option>
-                    @endforeach
-                @else
-                    <option value="">{{ trans('general.select_model') }}</option>
-                @endif
+                <option value="">{{ trans('general.select_model') }}</option>
             @endif
 
         </select>

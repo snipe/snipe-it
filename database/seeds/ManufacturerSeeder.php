@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Database\Seeder;
 use App\Models\Manufacturer;
+use Illuminate\Support\Facades\Storage;
 
 class ManufacturerSeeder extends Seeder
 {
@@ -19,21 +20,30 @@ class ManufacturerSeeder extends Seeder
         factory(Manufacturer::class, 1)->states('avery')->create(); // 10
         factory(Manufacturer::class, 1)->states('crucial')->create(); // 10
 
-        $src = public_path('/img/demo/manufacturers');
-        $dst =  public_path('/uploads/manufacturers');
-
-        $del_files = glob($dst."/*.*");
+        $src = public_path('/img/demo/manufacturers/');
+        $dst = 'manufacturers'.'/';
+        $del_files = Storage::files($dst);
 
         foreach($del_files as $del_file){ // iterate files
-            if(is_file($del_file))
-                unlink($del_file); // delete file
+            $file_to_delete = str_replace($src,'',$del_file);
+            \Log::debug('Deleting: '.$file_to_delete);
+            try  {
+                Storage::disk('public')->delete($dst.$del_file);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
         }
 
 
         $add_files = glob($src."/*.*");
         foreach($add_files as $add_file){
-            $file_to_copy = str_replace($src,$dst,$add_file);
-            copy($add_file, $file_to_copy);
+            $file_to_copy = str_replace($src,'',$add_file);
+            \Log::debug('Copying: '.$file_to_copy);
+            try  {
+                Storage::disk('public')->put($dst.$file_to_copy, file_get_contents($src.$file_to_copy));
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
         }
 
         

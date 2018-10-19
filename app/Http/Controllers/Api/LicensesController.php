@@ -150,7 +150,7 @@ class LicensesController extends Controller
     public function show($id)
     {
         $this->authorize('view', License::class);
-        $license = License::findOrFail($id);
+        $license = License::withCount('freeSeats')->findOrFail($id);
         $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
         return (new LicensesTransformer)->transformLicense($license);
     }
