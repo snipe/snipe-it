@@ -237,37 +237,45 @@
                 <div class="col-md-12">
                   <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.edit') }}</a>
                 </div>
+              @endcan
+              
+              @can('create', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
                   <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.clone') }}</a>
                 </div>
+              @endcan
+
+              @can('view', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
-
-                @can('delete', $user)
-                  @if ($user->deleted_at=='')
-                    <div class="col-md-12" style="padding-top: 5px;">
-                      <form action="{{route('users.destroy',$user->id)}}" method="POST">
-                        {{csrf_field()}}
-                        {{ method_field("DELETE")}}
-                        <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
-                      </form>
-                    </div>
-                    <div class="col-md-12" style="padding-top: 5px;">
-                      <form action="{{ route('users/bulkedit') }}" method="POST">
-                        <!-- CSRF Token -->
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                        <input type="hidden" name="ids[{{ $user->id }}]" value="{{ $user->id }}" />
-                        <button style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('button.checkin_and_delete') }}</button>
-                      </form>
-                    </div>
-                  @else
-                    <div class="col-md-12" style="padding-top: 5px;">
-                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
-                    </div>
-                  @endif
-                @endcan
               @endcan
+
+              @can('delete', $user)
+                @if ($user->deleted_at=='')
+                  <div class="col-md-12" style="padding-top: 5px;">
+                    <form action="{{route('users.destroy',$user->id)}}" method="POST">
+                      {{csrf_field()}}
+                      {{ method_field("DELETE")}}
+                      <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
+                    </form>
+                  </div>
+                  <div class="col-md-12" style="padding-top: 5px;">
+                    <form action="{{ route('users/bulkedit') }}" method="POST">
+                      <!-- CSRF Token -->
+                      <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                      <input type="hidden" name="ids[{{ $user->id }}]" value="{{ $user->id }}" />
+                      <button style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('button.checkin_and_delete') }}</button>
+                    </form>
+                  </div>
+                @else
+                  <div class="col-md-12" style="padding-top: 5px;">
+                    <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
+                  </div>
+                @endif
+              @endcan
+
+
             </div>
             <!-- End button column -->
           </div> <!--/.row-->
