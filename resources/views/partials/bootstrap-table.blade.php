@@ -192,6 +192,52 @@
         };
     }
 
+    // This only works for model index pages because it uses the row's model ID
+    function genericChildActionsFormatter(parent, child) {
+        return function (value,row) {
+
+            var actions = '<nobr>';
+
+            // Add some overrides for any funny urls we have
+            var dest = destination;
+
+            if (destination=='groups') {
+                var dest = 'admin/groups';
+            }
+
+            if (destination=='maintenances') {
+                var dest = 'hardware/maintenances';
+            }
+
+            if ((row.available_actions) && (row.available_actions.clone === true)) {
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-toggle="tooltip" title="Clone"><i class="fa fa-copy"></i></a>&nbsp;';
+            }
+
+            if ((row.available_actions) && (row.available_actions.update === true)) {
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;';
+            }
+
+            if ((row.available_actions) && (row.available_actions.delete === true)) {
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '" '
+                    + ' class="btn btn-danger btn-sm delete-asset"  data-tooltip="true"  '
+                    + ' data-toggle="modal" '
+                    + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
+                    + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
+                    + '<i class="fa fa-trash"></i></a>&nbsp;';
+            } else {
+                actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
+            }
+
+            if ((row.available_actions) && (row.available_actions.restore === true)) {
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Restore"><i class="fa fa-retweet"></i></a>&nbsp;';
+            }
+
+            actions +='</nobr>';
+            return actions;
+
+        };
+    }
+
 
     // This handles the icons and display of polymorphic entries
     function polymorphicItemFormatter(value) {
@@ -320,7 +366,11 @@
         'companies',
         'depreciations',
         'fieldsets',
-        'groups'
+        'groups',
+        'kits',
+        // METODO: проверить, что эти пути работают
+        'kits.models',
+        'kits.licenses',
     ];
 
     for (var i in formatters) {
@@ -329,6 +379,18 @@
         window[formatters[i] + 'ActionsFormatter'] = genericActionsFormatter(formatters[i]);
         window[formatters[i] + 'InOutFormatter'] = genericCheckinCheckoutFormatter(formatters[i]);
     }
+
+    var childFormatters = [
+        ['kits', 'models'],
+        ['kits', 'licenses'],
+    ];
+
+    for (var i in childFormatters) {
+        var parentName = childFormatters[i][0];
+        var childName = childFormatters[i][2];
+        window[childFormatters[i][0] + 'ChildsActionsFormatter'] = genericChildActionsFormatter(childFormatters[i][0], childFormatters[i][1]);
+    }
+
 
 
     // This is  gross, but necessary so that we can package the API response

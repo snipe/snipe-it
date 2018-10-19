@@ -751,6 +751,82 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         [ 'as' => 'api.activity.index', 'uses' => 'ReportsController@index' ]
     );
 
+    // kits
+    Route::resource('kits', 'PredefinedKitsController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.kits.index',
+                    'show' => 'api.kits.show',
+                    'store' => 'api.kits.store',
+                    'update' => 'api.kits.update',
+                    'destroy' => 'api.kits.destroy',
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['kit' => 'kit_id']
+        ]
+    );
 
 
+    Route::group([ 'prefix' => 'kits/{kit_id}' ], function () {
+
+        Route::get('licenses', 
+            [
+                'as' => 'api.kits.licenses.index',
+                'uses' => 'PredefinedKitsController@indexLicenses',
+            ]
+        );
+        
+        Route::post('licenses', 
+            [
+                'as' => 'api.kits.licenses.store',
+                'uses' => 'PredefinedKitsController@storeLicense',
+            ]
+        );
+        
+        Route::put('licenses/{license_id}', 
+            [
+                'as' => 'api.kits.licenses.update',
+                'uses' => 'PredefinedKitsController@updateLicense',
+            ]
+        );
+
+        Route::delete('licenses/{license_id}', 
+            [
+                'as' => 'api.kits.licenses.destroy',
+                'uses' => 'PredefinedKitsController@destroyLicense',
+            ]
+        );
+        
+        
+        Route::get('models', 
+            [
+                'as' => 'api.kits.models.index',
+                'uses' => 'PredefinedKitsController@indexModels',
+            ]
+        );
+        
+        Route::post('models', 
+            [
+                'as' => 'api.kits.models.store',
+                'uses' => 'PredefinedKitsController@storeModel',
+            ]
+        );
+        
+        Route::put('models/{model_id}', 
+            [
+                'as' => 'api.kits.models.update',
+                'uses' => 'PredefinedKitsController@updateModel',
+            ]
+        );
+
+        Route::delete('models/{model_id}', 
+            [
+                'as' => 'api.kits.models.destroy',
+                'uses' => 'PredefinedKitsController@destroyModel',
+            ]
+        );
+
+    }); // kits
+    
 });
