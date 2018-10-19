@@ -552,7 +552,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     /*--- Settings API ---*/
     Route::get('settings/ldaptest', [
         'as' => 'api.settings.ldaptest',
-        'uses' => 'SettingsController@ldaptest'
+        'uses' => 'SettingsController@ldapAdSettingsTest'
     ]);
 
     Route::get('settings/login-attempts', [

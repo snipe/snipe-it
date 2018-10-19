@@ -27,13 +27,17 @@ LDAP User Sync
         <div class="box-body">
           <!-- location_id-->
           <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
-              <!-- Location -->
+            
+            <div class="col-xs-12">
+               <!-- Location -->
               @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
-            <div class="col-md-4">
-              <button type="submit" class="btn btn-warning" id="sync">
-                  <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">Synchronize</span>
-              </button>
             </div>
+            <div class="col-xs-12 text-center">
+                <button type="submit" class="btn btn-warning" id="sync">
+                    <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">Synchronize</span>
+                </button>
+              </div>
+
           </div>
         </div>
       </div>
@@ -43,6 +47,7 @@ LDAP User Sync
     <p>
         {{ trans('admin/users/general.ldap_config_text') }}
     </p>
+  <p><a href="{{ route('settings.ldap.index') }}">LDAP Settings Page</a></p>
   </div>
 </div>
 
@@ -63,7 +68,7 @@ LDAP User Sync
           </tr>
 
           @foreach (Session::get('summary') as $entry)
-          <tr {!! ($entry['status']=='success') ? 'class="success"' : 'class="danger"' !!}>
+          <tr {!! ($entry['status']=='SUCCESS') ? 'class="success"' : 'class="danger"' !!}>
               <td>{{ $entry['username'] }}</td>
               <td>{{ $entry['employee_number'] }}</td>
               <td>{{ $entry['firstname'] }}</td>

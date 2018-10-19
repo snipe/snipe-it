@@ -6,6 +6,7 @@
   "type": "project",
   "require": {
     "php": ">=7.1.3",
+    "adldap2/adldap2": "^9.1",
     "bacon/bacon-qr-code": "^1.0",
     "doctrine/cache": "^1.6",
     "doctrine/common": "^2.7",
