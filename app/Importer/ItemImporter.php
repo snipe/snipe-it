@@ -302,21 +302,24 @@ class ItemImporter extends Importer
      */
     public function createOrFetchDepartment($user_department_name)
     {
-        $department = Department::where('name', '=', $user_department_name)->first();
+        if ($user_department_name!='') {
+            $department = Department::where('name', '=', $user_department_name)->first();
 
-        if ($department) {
-            $this->log('A matching Department ' . $user_department_name . ' already exists');
-            return $department->id;
+            if ($department) {
+                $this->log('A matching Department ' . $user_department_name . ' already exists');
+                return $department->id;
+            }
+
+            $department = new Department();
+            $department->name = $user_department_name;
+
+            if ($department->save()) {
+                $this->log('Department ' . $user_department_name . ' was created');
+                return $department->id;
+            }
+            $this->logError($department, 'Department');
         }
 
-        $department = new Department();
-        $department->name = $user_department_name;
-
-        if ($department->save()) {
-            $this->log('Department ' . $user_department_name . ' was created');
-            return $department->id;
-        }
-        $this->logError($department, 'Department');
         return null;
     }
 
