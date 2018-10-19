@@ -29,6 +29,7 @@ abstract class Importer
      */
     private $defaultFieldMap = [
         'asset_tag' => 'asset tag',
+        'activated' => 'activated',
         'category' => 'category',
         'checkout_class' => 'checkout type', // Supports Location or User for assets.  Using checkout_class instead of checkout_type because type exists on asset already.
         'checkout_location' => 'checkout location',
@@ -181,7 +182,7 @@ abstract class Importer
         $val = $default;
         $key = $this->lookupCustomKey($key);
 
-        $this->log("Custom Key: ${key}");
+        // $this->log("Custom Key: ${key}");
         if (array_key_exists($key, $array)) {
             $val = Encoding::toUTF8(trim($array[ $key ]));
         }
@@ -249,7 +250,10 @@ abstract class Importer
     }
 
     /**
-     * Finds the user matching given data, or creates a new one if there is no match
+     * Finds the user matching given data, or creates a new one if there is no match.
+     * This is NOT used by the User Import, only for Asset/Accessory/etc where
+     * there are users listed and we have to create them and associate them at
+     * the same time. [ALG]
      *
      * @author Daniel Melzter
      * @since 3.0
@@ -262,8 +266,11 @@ abstract class Importer
         $user_array = [
             'full_name' => $this->findCsvMatch($row, "full_name"),
             'email'     => $this->findCsvMatch($row, "email"),
-            'username'  => $this->findCsvMatch($row, "username")
+            'username'  => $this->findCsvMatch($row, "username"),
+            'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
         ];
+        \Log::debug('Importer.php Activated: '.$this->findCsvMatch($row, 'activated'));
+
         // If the full name is empty, bail out--we need this to extract first name (at the very least)
         if(empty($user_array['full_name'])) {
             $this->log('Insufficient user data provided (Full name is required)- skipping user creation, just adding asset');
@@ -291,8 +298,9 @@ abstract class Importer
             }
         }
 
+        // Does this ever actually fire??
         // Check for a matching user after trying to guess username.
-        if($user = User::where('username', $user_array['username'])->first()) {
+        if ($user = User::where('username', $user_array['username'])->first()) {
             $this->log('User '.$user_array['username'].' already exists');
             return $user;
         }
@@ -308,12 +316,15 @@ abstract class Importer
         $user->last_name = $user_array['last_name'];
         $user->username = $user_array['username'];
         $user->email = $user_array['email'];
-        $user->manager_id = $user_array['manager_id'];
-        $user->department_id = $user_array['department_id'];
-        $user->activated = 1;
+        $user->manager_id = $user_array['manager_id'] ?? null;
+        $user->department_id = $user_array['department_id'] ?? null;
+        $user->activated = $user_array['activated'];
         $user->password = $this->tempPassword;
 
+        \Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
+
         if ($user->save()) {
+            \Log::debug('Importer.php  Name: '.$user->first_name.' '.$user->last_name.' ('.$user->username.')');
             $this->log('User '.$user_array['username'].' created');
             return $user;
         }
@@ -423,5 +434,14 @@ abstract class Importer
         $this->usernameFormat = $usernameFormat;
 
         return $this;
+    }
+
+    public function fetchHumanBoolean($value)
+    {
+        if (($value =='1') || (strtolower($value) =='true') || (strtolower($value) =='yes'))
+        {
+            return '1';
+        }
+        return '0';
     }
 }
