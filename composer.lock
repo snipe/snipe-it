@@ -1170,33 +1170,34 @@
         },
         {
             "name": "jakub-onderka/php-console-highlighter",
-            "version": "v0.3.2",
+            "version": "v0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JakubOnderka/PHP-Console-Highlighter.git",
-                "reference": "7daa75df45242c8d5b75a22c00a201e7954e4fb5"
+                "reference": "9f7a229a69d52506914b4bc61bfdb199d90c5547"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JakubOnderka/PHP-Console-Highlighter/zipball/7daa75df45242c8d5b75a22c00a201e7954e4fb5",
-                "reference": "7daa75df45242c8d5b75a22c00a201e7954e4fb5",
+                "url": "https://api.github.com/repos/JakubOnderka/PHP-Console-Highlighter/zipball/9f7a229a69d52506914b4bc61bfdb199d90c5547",
+                "reference": "9f7a229a69d52506914b4bc61bfdb199d90c5547",
                 "shasum": ""
             },
             "require": {
-                "jakub-onderka/php-console-color": "~0.1",
-                "php": ">=5.3.0"
+                "ext-tokenizer": "*",
+                "jakub-onderka/php-console-color": "~0.2",
+                "php": ">=5.4.0"
             },
             "require-dev": {
                 "jakub-onderka/php-code-style": "~1.0",
-                "jakub-onderka/php-parallel-lint": "~0.5",
+                "jakub-onderka/php-parallel-lint": "~1.0",
                 "jakub-onderka/php-var-dump-check": "~0.1",
                 "phpunit/phpunit": "~4.0",
                 "squizlabs/php_codesniffer": "~1.5"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "JakubOnderka\\PhpConsoleHighlighter": "src/"
+                "psr-4": {
+                    "JakubOnderka\\PhpConsoleHighlighter\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1210,7 +1211,8 @@
                     "homepage": "http://www.acci.cz/"
                 }
             ],
-            "time": "2015-04-20T18:58:01+00:00"
+            "description": "Highlight PHP code in terminal",
+            "time": "2018-09-29T18:48:56+00:00"
         },
         {
             "name": "javiereguiluz/easyslugger",
@@ -1442,16 +1444,16 @@
         },
         {
             "name": "laravel/tinker",
-            "version": "v1.0.7",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/tinker.git",
-                "reference": "e3086ee8cb1f54a39ae8dcb72d1c37d10128997d"
+                "reference": "cafbf598a90acde68985660e79b2b03c5609a405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/tinker/zipball/e3086ee8cb1f54a39ae8dcb72d1c37d10128997d",
-                "reference": "e3086ee8cb1f54a39ae8dcb72d1c37d10128997d",
+                "url": "https://api.github.com/repos/laravel/tinker/zipball/cafbf598a90acde68985660e79b2b03c5609a405",
+                "reference": "cafbf598a90acde68985660e79b2b03c5609a405",
                 "shasum": ""
             },
             "require": {
@@ -1501,7 +1503,7 @@
                 "laravel",
                 "psysh"
             ],
-            "time": "2018-05-17T13:42:07+00:00"
+            "time": "2018-10-12T19:39:35+00:00"
         },
         {
             "name": "laravelcollective/html",
@@ -1724,16 +1726,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.47",
+            "version": "1.0.48",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c"
+                "reference": "a6ded5b2f6055e2db97b4b859fdfca2b952b78aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a11e4a75f256bdacf99d20780ce42d3b8272975c",
-                "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a6ded5b2f6055e2db97b4b859fdfca2b952b78aa",
+                "reference": "a6ded5b2f6055e2db97b4b859fdfca2b952b78aa",
                 "shasum": ""
             },
             "require": {
@@ -1804,7 +1806,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2018-09-14T15:30:29+00:00"
+            "time": "2018-10-15T13:53:10+00:00"
         },
         {
             "name": "league/oauth2-server",
@@ -2108,16 +2110,16 @@
         },
         {
             "name": "neitanod/forceutf8",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neitanod/forceutf8.git",
-                "reference": "47c883ab2739e7938a8bb0bfd1c29d48c88858de"
+                "reference": "30980a8ca2787a7730d370eac310b8987eb68229"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/neitanod/forceutf8/zipball/47c883ab2739e7938a8bb0bfd1c29d48c88858de",
-                "reference": "47c883ab2739e7938a8bb0bfd1c29d48c88858de",
+                "url": "https://api.github.com/repos/neitanod/forceutf8/zipball/30980a8ca2787a7730d370eac310b8987eb68229",
+                "reference": "30980a8ca2787a7730d370eac310b8987eb68229",
                 "shasum": ""
             },
             "require": {
@@ -2130,6 +2132,9 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
             "authors": [
                 {
                     "name": "Sebastián Grignoli",
@@ -2138,7 +2143,7 @@
             ],
             "description": "PHP Class Encoding featuring popular Encoding::toUTF8() function --formerly known as forceUTF8()-- that fixes mixed encoded strings.",
             "homepage": "https://github.com/neitanod/forceutf8",
-            "time": "2017-05-22T18:50:57+00:00"
+            "time": "2018-10-10T23:03:52+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -2865,23 +2870,23 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.9.8",
+            "version": "v0.9.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "ed3c32c4304e1a678a6e0f9dc11dd2d927d89555"
+                "reference": "9aaf29575bb8293206bb0420c1e1c87ff2ffa94e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/ed3c32c4304e1a678a6e0f9dc11dd2d927d89555",
-                "reference": "ed3c32c4304e1a678a6e0f9dc11dd2d927d89555",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/9aaf29575bb8293206bb0420c1e1c87ff2ffa94e",
+                "reference": "9aaf29575bb8293206bb0420c1e1c87ff2ffa94e",
                 "shasum": ""
             },
             "require": {
                 "dnoegel/php-xdg-base-dir": "0.1",
                 "ext-json": "*",
                 "ext-tokenizer": "*",
-                "jakub-onderka/php-console-highlighter": "0.3.*",
+                "jakub-onderka/php-console-highlighter": "0.3.*|0.4.*",
                 "nikic/php-parser": "~1.3|~2.0|~3.0|~4.0",
                 "php": ">=5.4.0",
                 "symfony/console": "~2.3.10|^2.4.2|~3.0|~4.0",
@@ -2935,7 +2940,7 @@
                 "interactive",
                 "shell"
             ],
-            "time": "2018-09-05T11:40:09+00:00"
+            "time": "2018-10-13T15:16:03+00:00"
         },
         {
             "name": "ramsey/uuid",
