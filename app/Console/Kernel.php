@@ -13,26 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\PaveIt::class,
-        Commands\CreateAdmin::class,
-        Commands\SendExpirationAlerts::class,
-        Commands\SendInventoryAlerts::class,
-        Commands\SendExpectedCheckinAlerts::class,
-        Commands\ObjectImportCommand::class,
-        Commands\Version::class,
-        Commands\SystemBackup::class,
-        Commands\DisableLDAP::class,
-        Commands\Purge::class,
-        Commands\LdapSync::class,
-        Commands\FixDoubleEscape::class,
-        Commands\RecryptFromMcrypt::class,
-        Commands\ResetDemoSettings::class,
-        Commands\SyncAssetLocations::class,
-        Commands\RegenerateAssetTags::class,
-        Commands\SyncAssetCounters::class,
-        Commands\RestoreDeletedUsers::class,
-        Commands\SendCurrentInventoryToUsers::class,
-        Commands\MoveUploadsToNewDisk::class,
+
     ];
 
     /**
@@ -59,6 +40,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        require base_path('routes/console.php');
+        // Auto register commands in Commands directory
+        $this->load(__DIR__.'/Commands');
     }
 }
