@@ -869,7 +869,7 @@ class SettingsController extends Controller
         $setting->ldap_server             = $request->input('ldap_server');
         $setting->ldap_server_cert_ignore = $request->input('ldap_server_cert_ignore', false);
         $setting->ldap_uname              = $request->input('ldap_uname');
-        if (Input::has('ldap_pword')) {
+        if ($request->input('ldap_pword') !== '') {
             $setting->ldap_pword = Crypt::encrypt($request->input('ldap_pword'));
         }
         $setting->ldap_basedn            = $request->input('ldap_basedn');
@@ -889,7 +889,7 @@ class SettingsController extends Controller
         $setting->custom_forgot_pass_url = $request->input('custom_forgot_pass_url');
 
         if ($setting->save()) {
-            return redirect()->route('settings.index')
+            return redirect()->route('settings.ldap.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }
 
