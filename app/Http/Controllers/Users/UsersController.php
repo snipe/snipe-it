@@ -613,6 +613,7 @@ class UsersController extends Controller
      */
     public function printInventory($id)
     {
+        $this->authorize('view', User::class);
         $show_user = User::where('id', $id)->withTrashed()->first();
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
         $accessories = $show_user->accessories()->get();
