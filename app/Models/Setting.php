@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Watson\Validating\ValidatingTrait;
 use Schema;
+use Illuminate\Support\Collection;
 
 class Setting extends Model
 {
@@ -215,6 +216,40 @@ class Setting extends Model
 
     }
 
+    /**
+     * Get the specific LDAP settings
+     * 
+     * @author Wes Hulette <jwhulette@gmail.com>
+     * 
+     * @since 5.0.0
+     *
+     * @return Collection
+     */
+    public static function getLdapSettings(): Collection
+    {
+        $ldapSettings = self::select([
+            'ldap_enabled', 
+            'ldap_server',
+            'ldap_uname',
+            'ldap_pword',
+            'ldap_basedn',
+            'ldap_filter',
+            'ldap_username_field',
+            'ldap_lname_field',
+            'ldap_fname_field',
+            'ldap_auth_filter_query',
+            'ldap_version',
+            'ldap_active_flag',
+            'ldap_emp_num',
+            'ldap_email',
+            'ldap_server_cert_ignore',
+            'ldap_port',
+            'ldap_tls',
+            'ldap_pw_sync',
+            'is_ad',
+            'ad_domain'
+            ])->first()->getAttributes();
 
-
+        return collect($ldapSettings);
+    }
 }

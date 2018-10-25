@@ -64,16 +64,9 @@ class LdapAdConfiguration
      */
     private function getSnipeItLdapSettings(): Collection
     {
-        $settings     = Setting::getSettings();
-        $ldapSettings = collect($settings->first()->toArray())
-            ->filter(function ($value, $key) {
-                // Get the ldap named settings
-                return false !== strpos($key, 'ldap_');
-            })->merge([
-                'is_ad' => $settings->is_ad,
-                'ad_domain' => $settings->ad_domain,
-            ])->map(function ($item, $key) {
-                // trim the items
+        $ldapSettings = Setting::getLdapSettings()
+            ->map(function ($item, $key) {
+                // Trim the items
                 if (is_string($item)) {
                     $item = trim($item);
                 }
