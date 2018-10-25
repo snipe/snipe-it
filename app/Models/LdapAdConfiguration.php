@@ -48,6 +48,10 @@ class LdapAdConfiguration
 
     /**
      * Merge the default Adlap config with the SnipeIT config.
+     * 
+     * @author Wes Hulette <jwhulette@gmail.com>
+     * 
+     * @since 5.0.0
      */
     private function setSnipeItConfig()
     {
@@ -61,6 +65,8 @@ class LdapAdConfiguration
      * @author Wes Hulette <jwhulette@gmail.com>
      *
      * @since 5.0.0
+     * 
+     * @return \Illuminate\Support\Collection
      */
     private function getSnipeItLdapSettings(): Collection
     {
