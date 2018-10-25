@@ -119,10 +119,10 @@ class LdapAdSync extends Command
         $this->checkLdapConnetion();
         $this->setBaseDn();
         $this->getUserDefaultLocation();
-        /**
+        /*
          * Use the default location if set, this is needed for the LDAP users sync page
          */
-        if (!$this->option('base_dn') && $this->defaultLocation == null) {
+        if (!$this->option('base_dn') && null == $this->defaultLocation) {
             $this->getMappedLocations();
         }
         $this->processLdapUsers();
@@ -148,16 +148,20 @@ class LdapAdSync extends Command
      */
     private function getSummary(): string
     {
-        if ($this->option('summary')) {
-            $this->summary->each(function ($item, $key) {
+        if ($this->option('summary') && null === $this->dryrun) {
+            $this->summary->each(function ($item) {
+                $this->info('USER: '.$item['note']);
+
                 if ('ERROR' === $item['status']) {
                     $this->error('ERROR: '.$item['note']);
-                } else {
-                    $this->info('USER: '.$item['note']);
                 }
             });
         } elseif ($this->option('json_summary')) {
-            $json_summary = ['error' => false, 'error_message' => '', 'summary' => $this->summary->toArray()];
+            $json_summary = [
+                'error' => false,
+                'error_message' => '',
+                'summary' => $this->summary->toArray(),
+            ];
             $this->info(json_encode($json_summary));
         }
 
@@ -191,8 +195,8 @@ class LdapAdSync extends Command
                 $summary['status'] = 'SUCCESS';
             } else {
                 $errors = '';
-                foreach ($user->getErrors()->getMessages() as $key => $err) {
-                    $errors .= $err[0];
+                foreach ($user->getErrors()->getMessages() as  $error) {
+                    $errors .= $error[0];
                 }
                 $summary['note']   = $userMsg.' was not imported. REASON: '.$errors;
                 $summary['status'] = 'ERROR';
@@ -212,13 +216,13 @@ class LdapAdSync extends Command
      *
      * @param int $page The page to get the result set
      */
-    private function processLdapUsers(int $page = 0): void
+    private function processLdapUsers(int $page=0): void
     {
         try {
             $ldapUsers = $this->ldap->getLdapUsers($page);
         } catch (Exception $e) {
             $this->outputError($e);
-            exit(0);
+            exit($e->getMessage());
         }
 
         if (0 == $ldapUsers->count()) {
@@ -227,7 +231,7 @@ class LdapAdSync extends Command
             if ($this->dryrun) {
                 $this->error($msg);
             }
-            exit();
+            exit($msg);
         }
 
         // Process each individual users

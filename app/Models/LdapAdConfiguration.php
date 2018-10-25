@@ -142,7 +142,7 @@ class LdapAdConfiguration
             'account_suffix'   => '',
             'port'             => $this->getPort(),
             'follow_referrals' => false,
-            'use_ssl'          => $this->getSslUse(),
+            'use_ssl'          => $this->isSsl(),
             'use_tls'          => $this->ldapSettings['ldap_tls'],
             'version'          => $this->ldapSettings['ldap_version'] ?? self::DEFAULT_LDAP_VERSION,
             'timeout'          => self::CONNECTION_TIMEOUT,
@@ -206,7 +206,7 @@ class LdapAdConfiguration
      *
      * @return bool
      */
-    private function getSslUse(): bool
+    private function isSsl(): bool
     {
         if ($this->ldapSettings['ldap_server']) {
             $scheme = explode('://', $this->ldapSettings['ldap_server']);
@@ -232,7 +232,7 @@ class LdapAdConfiguration
     private function getServerUrlBase(): array
     {
         if ($this->ldapSettings['is_ad']) {
-            return collect(explode(',', $this->ldapSettings['ad_domain']))->map(function ($item, $key) {
+            return collect(explode(',', $this->ldapSettings['ad_domain']))->map(function ($item) {
                 return trim($item);
             })->toArray();
         }

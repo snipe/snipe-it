@@ -83,7 +83,7 @@ class LdapAd extends LdapAdConfiguration
         }
 
         // Should we sync the logged in user
-        if ($this->getLdapSyncStatus($record)) {
+        if ($this->isLdapSync($record)) {
             try {
                 Log::debug('Attempting to find user in LDAP directory');
                 $record = $this->ldap->search()->findBy($this->ldapSettings['ldap_username_field'], $username);
@@ -93,13 +93,11 @@ class LdapAd extends LdapAdConfiguration
             }
 
             $this->syncUserLdapLogin($record, $password);
-        } else {
-            $user = User::where('username', $username)
-                ->whereNull('deleted_at')->where('ldap_import', '=', 1)
-                ->where('activated', '=', '1')->first();
         }
 
-        return $user;
+        return User::where('username', $username)
+                ->whereNull('deleted_at')->where('ldap_import', '=', 1)
+                ->where('activated', '=', '1')->first();
     }
 
     /**
@@ -115,10 +113,10 @@ class LdapAd extends LdapAdConfiguration
      *
      * @return null|\App\Models\User
      */
-    public function processUser(AdldapUser $user, ?Collection $defaultLocation = null, ?Collection $mappedLocations = null): ?User
+    public function processUser(AdldapUser $user, ?Collection $defaultLocation=null, ?Collection $mappedLocations=null): ?User
     {
         // Only sync active users
-        if ($this->getLdapSyncStatus($user)) {
+        if ($this->isLdapSync($user)) {
             $snipeUser = [];
             $snipeUser['username']        = $user->{$this->ldapSettings['ldap_username_field']}[0] ?? '';
             $snipeUser['employee_number'] = $user->{$this->ldapSettings['ldap_emp_num']}[0] ?? '';
@@ -208,7 +206,7 @@ class LdapAd extends LdapAdConfiguration
      *
      * @return bool
      */
-    private function getLdapSyncStatus(AdldapUser $user): bool
+    private function isLdapSync(AdldapUser $user): bool
     {
         return (false === $this->ldapSettings['ldap_active_flag'])
             || ('true' == strtolower($user->{$this->ldapSettings['ldap_active_flag']}[0]));
@@ -393,7 +391,7 @@ class LdapAd extends LdapAdConfiguration
     {
         $testUsers = collect($this->getLdapUsers()->getResults())->chunk(10)->first();
         if ($testUsers) {
-            return $testUsers->map(function ($item, $key) {
+            return $testUsers->map(function ($item) {
                 return (object) [
                     'username'        => $item->{$this->ldapSettings['ldap_username_field']}[0] ?? null,
                     'employee_number' => $item->{$this->ldapSettings['ldap_emp_num']}[0] ?? null,
@@ -408,7 +406,7 @@ class LdapAd extends LdapAdConfiguration
     }
 
     /**
-     * Query the LDAP server to get the users to process and return a page set
+     * Query the LDAP server to get the users to process and return a page set.
      *
      * @author Wes Hulette <jwhulette@gmail.com>
      *
@@ -418,7 +416,7 @@ class LdapAd extends LdapAdConfiguration
      *
      * @return \Adldap\Query\Paginator
      */
-    public function getLdapUsers(int $page = 0): Paginator
+    public function getLdapUsers(int $page=0): Paginator
     {
         $search = $this->ldap->search()->users()->in($this->getBaseDn());
 
