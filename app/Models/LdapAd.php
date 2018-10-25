@@ -284,7 +284,7 @@ class LdapAd extends LdapAdConfiguration
      *
      * @author Wes Hulette <jwhulette@gmail.com>
      *
-     * @since 1.0.0
+     * @since 5.0.0
      *
      * @return string
      */
