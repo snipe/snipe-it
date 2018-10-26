@@ -62,7 +62,6 @@ class LoginController extends Controller
 
     function showLoginForm(Request $request)
     {
-        $this->loginViaRemoteUser($request);
         if (Auth::check()) {
             return redirect()->intended('dashboard');
         }
@@ -94,27 +93,6 @@ class LoginController extends Controller
         } catch (\Exception $ex) {
             LOG::debug("LDAP user login: " . $ex->getMessage());
             throw new \Exception($ex->getMessage());
-        }
-    }
-
-    private function loginViaRemoteUser(Request $request)
-    {
-        $remote_user = $request->server('REMOTE_USER');
-        if (Setting::getSettings()->login_remote_user_enabled == "1" && isset($remote_user) && !empty($remote_user)) {
-            LOG::debug("Authenticatiing via REMOTE_USER.");
-
-            $pos = strpos($remote_user, '\\');
-            if ($pos > 0) {
-                $remote_user = substr($remote_user, $pos + 1);
-            };
-            
-            try {
-                $user = User::where('username', '=', $remote_user)->whereNull('deleted_at')->where('activated', '=', '1')->first();
-                LOG::debug("Remote user auth lookup complete");
-                if(!is_null($user)) Auth::login($user, true);
-            } catch(Exception $e) {
-                LOG::error("There was an error authenticating the Remote user: " . $e->getMessage());
-            }
         }
     }
 

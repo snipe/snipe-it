@@ -25,6 +25,7 @@ class Kernel extends HttpKernel
         \Fideloper\Proxy\TrustProxies::class,
         \App\Http\Middleware\CheckForSetup::class,
         \App\Http\Middleware\CheckForDebug::class,
+        \App\Http\Middleware\RemoteUserAuthenticate::class,
        // \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
