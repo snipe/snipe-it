@@ -185,12 +185,12 @@ class LdapAd extends LdapAdConfiguration
         }
 
         if ($this->ldapSettings['ldap_pw_sync']) {
-            LOG::debug('Syncing users password with LDAP directory.');
+            Log::debug('Syncing users password with LDAP directory.');
             $user->password = bcrypt($password);
         }
 
         if (!$user->save()) {
-            LOG::debug('Could not save user. '.$user->getErrors());
+            Log::debug('Could not save user. '.$user->getErrors());
             throw new Exception('Could not save user: '.$user->getErrors());
         }
     }
@@ -355,9 +355,9 @@ class LdapAd extends LdapAdConfiguration
     {
         try {
             $this->ldap->search()->ous()->get()->count();
-        } catch (\Throwable $th) {
+        } catch (Exception $th) {
             Log::error($th->getMessage());
-            throw new \Exception('Unable to search LDAP directory!');
+            throw new Exception('Unable to search LDAP directory!');
         }
     }
 
@@ -374,7 +374,7 @@ class LdapAd extends LdapAdConfiguration
             $this->ldap->connect();
         } catch (\Adldap\Auth\BindException $e) {
             Log::error($e);
-            throw new \Exception('Unable to connect to LDAP directory!');
+            throw new Exception('Unable to connect to LDAP directory!');
         }
     }
 
