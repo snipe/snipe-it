@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => '已发送您的密码链接 ！',
-    'user'			=> 'No matching active user found with that email.',
+    'user'			=> '未找到与该电子邮件匹配的活动用户。',
 ];
 

@@ -13,7 +13,7 @@ return array(
     'eula_text_help'					=> 'Þessi reitur gerir þér kleift að sérsníða notendaskilmála fyrir ákveðinn búnað. Ef þú hefur aðeins einn notendaskilmála fyrir allan þinn búnað þá skaltu haka í reitinn fyrir neðan sem notar sömu skilmálana fyrir allann þann búnað.',
     'require_acceptance'				=> 'Kerfjast þess að notendur samþykki viðtöku búnaðs í þessum flokki.',
     'no_default_eula'					=> 'Fann enga sjálfgefna notendaskilmála. Vinsamlegast bættu þeim við í undir "Stillingar"',
-    'total'  							=> 'Heildar',
+    'total'  							=> 'Samtals',
     'remaining'  						=> 'Gagnslaust',
     'update'  							=> 'Uppfæra endabúnað',
     'use_default_eula'					=> 'Notaðu frekar <a href="#" data-toggle="modal" data-target="#eulaModal">',

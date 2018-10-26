@@ -19,9 +19,9 @@ return array(
         'confirm'   => 'Opravdu si přejete odstranit tohoto dodavatele?',
         'error'   => 'Vyskytl se problém při mazání dodavatele. Zkuste to prosím znovu.',
         'success' => 'Dodavatel byl úspěšně smazán.',
-        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
-        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
-        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
+        'assoc_assets'	 => 'Tento dodavatel je v současné době přiřazen k :asset_count položkám majetku a nelze jej smazat. Aktualizujte svůj majetek tak, aby již tento dodavatel nebyl přiřazen a zkuste to znovu. ',
+        'assoc_licenses'	 => 'Tento dodavatel je v současné době spojen s :licenses_count licencemi a nelze jej smazat. Aktualizujte prosím své licence, abyste již tento dodavatel nebyl přiřazen a zkuste to znovu. ',
+        'assoc_maintenances'	 => 'Tento dodavatel je v současné době spojen s údržbou :asset_maintenances_count položek majetku a nemůže být smazán. Aktualizujte prosím údržbu vašeho majetku, aby již tento dodavatel nebyl přiřazen a zkuste to znovu. ',
     )
 
 );
