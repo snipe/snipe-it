@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Twój link do hasła został wysłany!',
-    'user'			=> 'No matching active user found with that email.',
+    'user'			=> 'Brak pasującego aktywnego użytkownika dla tego e-maila.',
 ];
 

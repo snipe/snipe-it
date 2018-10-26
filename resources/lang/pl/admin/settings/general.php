@@ -83,7 +83,7 @@ return array(
     'login_remote_user_text'    => 'Remote User login options',
     'login_remote_user_enabled_text' => 'Enable Login with Remote User Header',
     'login_remote_user_enabled_help' => 'This option enables Authentication via the REMOTE_USER header according to the "Common Gateway Interface (rfc3875)"',
-    'login_common_disabled_text' => 'Disable other authentication mechanisms',
+    'login_common_disabled_text' => 'Wyłącz inne mechanizmy uwierzytelniania',
     'login_common_disabled_help' => 'This option disables other authentication mechanisms. Just enable this option if you are sure that your REMOTE_USER login is already working',
     'login_remote_user_custom_logout_url_text' => 'Niestandardowy adres URL wylogowania',
     'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',

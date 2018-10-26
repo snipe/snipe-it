@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Vis modeller',
     'fieldset'                  => 'Felt',
     'no_custom_field'           => 'Ingen egendefinerte felt',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'Legg til standardverdier',
 );
