@@ -27,14 +27,12 @@ class SettingsController extends Controller
      * 
      * @since 5.0.0
      * 
-     * @param Request $request
+     * @param App\Models\LdapAd $ldap
      * 
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ldapAdSettingsTest(): JsonResponse
+    public function ldapAdSettingsTest(LdapAd $ldap): JsonResponse
     {   
-        $ldap = new LdapAd();
-
         if($ldap->ldapSettings['ldap_enabled'] === false) {
             Log::info('LDAP is not enabled cannot test.');
             return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
