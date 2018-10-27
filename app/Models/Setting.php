@@ -247,7 +247,8 @@ class Setting extends Model
             'ldap_tls',
             'ldap_pw_sync',
             'is_ad',
-            'ad_domain'
+            'ad_domain',
+            'login_remote_user_enabled'
             ])->first()->getAttributes();
 
         return collect($ldapSettings);

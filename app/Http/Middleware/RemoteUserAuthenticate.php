@@ -40,7 +40,17 @@ class RemoteUserAuthenticate
      *
      * @var string
      */
-    const KEY = 'REMOTE_USER';
+    const REMOTE_USER_KEY = 'REMOTE_USER';
+
+    /**
+     * Returns the configured key to use for retrieving
+     * the username from the server global variable.
+     * 
+     * IIS Sometimes sends this
+     *
+     * @var string
+     */
+    const AUTH_USER_KEY = 'AUTH_USER';
 
     /**
      * Constructor.
@@ -124,7 +134,8 @@ class RemoteUserAuthenticate
      */
     protected function account(Request $request): ?string
     {
-        return utf8_encode($request->server(self::KEY));
+        $key = $request->server(self::REMOTE_USER_KEY) ?? $request->server(self::AUTH_USER_KEY);
+        return utf8_encode($key);
     }
 
     /**
