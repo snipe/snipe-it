@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * LDAP configuration merge for Adldap2.
@@ -18,10 +19,11 @@ use Illuminate\Support\Collection;
  */
 class LdapAdConfiguration
 {
-    const LDAP_PORT             = 389;
-    const CONNECTION_TIMEOUT    = 5;
-    const DEFAULT_LDAP_VERSION  = 3;
-    const LDAP_BOOLEAN_SETTINGS = ['ldap_enabled', 'ldap_server_cert_ignore', 'ldap_active_flag', 'ldap_tls', 'ldap_tls', 'ldap_pw_sync', 'is_ad'];
+    const LDAP_SETTING_CACHE_KEY = 'snipeit_ldap_settings';
+    const LDAP_PORT              = 389;
+    const CONNECTION_TIMEOUT     = 5;
+    const DEFAULT_LDAP_VERSION   = 3;
+    const LDAP_BOOLEAN_SETTINGS  = ['ldap_enabled', 'ldap_server_cert_ignore', 'ldap_active_flag', 'ldap_tls', 'ldap_tls', 'ldap_pw_sync', 'is_ad'];
 
     /**
      * Ldap Settings.
@@ -48,9 +50,9 @@ class LdapAdConfiguration
 
     /**
      * Merge the default Adlap config with the SnipeIT config.
-     * 
+     *
      * @author Wes Hulette <jwhulette@gmail.com>
-     * 
+     *
      * @since 5.0.0
      */
     private function setSnipeItConfig()
@@ -65,13 +67,14 @@ class LdapAdConfiguration
      * @author Wes Hulette <jwhulette@gmail.com>
      *
      * @since 5.0.0
-     * 
+     *
      * @return \Illuminate\Support\Collection
      */
     private function getSnipeItLdapSettings(): Collection
     {
-        $ldapSettings = Setting::getLdapSettings()
-            ->map(function ($item, $key) {
+        return Cache::rememberForever(self::LDAP_SETTING_CACHE_KEY, function () {
+            $ldapSettings = Setting::getLdapSettings()
+                ->map(function ($item, $key) {
                 // Trim the items
                 if (is_string($item)) {
                     $item = trim($item);
@@ -92,7 +95,8 @@ class LdapAdConfiguration
                 return $item;
             });
 
-        return $ldapSettings;
+            return $ldapSettings;
+        });
     }
 
     /**
@@ -122,7 +126,7 @@ class LdapAdConfiguration
      * @author Wes Hulette <jwhulette@gmail.com>
      *
      * @since 5.0.0
-     * 
+     *
      * @return array
      */
     private function setLdapConnectionConfiguration(): array

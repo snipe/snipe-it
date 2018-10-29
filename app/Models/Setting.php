@@ -1,18 +1,28 @@
 <?php
 namespace App\Models;
 
+use Schema;
+use App\Events\SettingSaved;
+use Illuminate\Support\Collection;
+use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Watson\Validating\ValidatingTrait;
-use Schema;
-use Illuminate\Support\Collection;
 
 class Setting extends Model
 {
-    use Notifiable;
+    use Notifiable, ValidatingTrait;
+    
     protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
 
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'saved' => SettingSaved::class,
+    ];
+    
     protected $rules = [
           'brand'     => 'required|min:1|numeric',
           'qr_text'         => 'max:31|nullable',
@@ -48,6 +58,7 @@ class Setting extends Model
     ];
 
     protected $fillable = ['site_name','email_domain','email_format','username_format'];
+
 
     public static function getSettings()
     {

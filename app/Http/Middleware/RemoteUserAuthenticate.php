@@ -45,7 +45,7 @@ class RemoteUserAuthenticate
     /**
      * Returns the configured key to use for retrieving
      * the username from the server global variable.
-     * 
+     *
      * IIS Sometimes sends this
      *
      * @var string
@@ -55,8 +55,8 @@ class RemoteUserAuthenticate
     /**
      * Constructor.
      *
-     * @param Guard  $auth
-     * @param LdapAd $ldap
+     * @param \Illuminate\Contracts\Auth\Guard $auth
+     * @param \App\Models\LdapAd               $ldap
      */
     public function __construct(Guard $auth, LdapAd $ldap)
     {
@@ -66,15 +66,15 @@ class RemoteUserAuthenticate
 
     /**
      * Handle an incoming request.
-     * 
+     *
      * @author Wes Hulette <jwhulette@gmail.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @param \Illuminate\Http\Request $request
      * @param \Closure                 $next
      *
-     * @return Closure
+     * @return \Closure
      */
     public function handle($request, Closure $next)
     {
@@ -97,9 +97,9 @@ class RemoteUserAuthenticate
 
     /**
      * Returns the authenticatable user instance if found.
-     * 
+     *
      * @author Wes Hulette <jwhulette@gmail.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @param string $username
@@ -122,10 +122,10 @@ class RemoteUserAuthenticate
     }
 
     /**
-     * Retrieves the users SSO account name from our server.
-     * 
+     * Retrieves the users account name from server variable.
+     *
      * @author Wes Hulette <jwhulette@gmail.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @param Request $request
@@ -135,14 +135,15 @@ class RemoteUserAuthenticate
     protected function account(Request $request): ?string
     {
         $key = $request->server(self::REMOTE_USER_KEY) ?? $request->server(self::AUTH_USER_KEY);
+
         return utf8_encode($key);
     }
 
     /**
      * Retrieves the users username from their full account name.
-     * 
+     *
      * @author Wes Hulette <jwhulette@gmail.com>
-     * 
+     *
      * @since 5.0.0
      *
      * @param string $account
