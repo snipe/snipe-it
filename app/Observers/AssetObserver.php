@@ -57,7 +57,7 @@ class AssetObserver
      */
     public function created(Asset $asset)
     {
-        if ($settings = Setting::first()) {
+        if ($settings = Setting::getSettings()) {
             $settings->increment('next_auto_tag_base');
         }
 

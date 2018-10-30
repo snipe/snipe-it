@@ -173,7 +173,7 @@ class ReportsController extends Controller
             if ($asset->location) {
                 $currency = e($asset->location->currency);
             } else {
-                $currency = e(Setting::first()->default_currency);
+                $currency = e(Setting::getSettings()->default_currency);
             }
 
             $row[] = $asset->purchase_date;
