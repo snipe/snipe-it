@@ -112,7 +112,7 @@ class Ldap extends Model
             return false;
         }
 
-        return $user;
+        return array_change_key_case($user);
 
     }
 
