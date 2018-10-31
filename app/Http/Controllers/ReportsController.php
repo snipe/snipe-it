@@ -500,6 +500,11 @@ class ReportsController extends Controller
                 $assets->InCategory($request->input('by_category_id'));
             }
 
+            if ($request->filled('by_dept_id')) {
+                \Log::debug('Only users in dept '.$request->input('by_dept_id'));
+                $assets->CheckedOutToTargetInDepartment($request->input('by_dept_id'));
+            }
+
             if ($request->filled('by_manufacturer_id')) {
                 $assets->ByManufacturer($request->input('by_manufacturer_id'));
             }

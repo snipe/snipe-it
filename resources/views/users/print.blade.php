@@ -113,16 +113,18 @@
         @endphp
 
         @foreach ($licenses as $license)
+            @if ($license)
+                <tr>
+                    <td>{{ $lcounter }}</td>
+                    <td>{{ $license->name }}</td>
+                    <td>{{ $license->serial }}</td>
+                    <td>{{  $license->assetlog->first()->created_at }}</td>
+                </tr>
+                @php
+                    $lcounter++
+                @endphp
 
-            <tr>
-                <td>{{ $lcounter }}</td>
-                <td>{{ $license->name }}</td>
-                <td>{{ $license->serial }}</td>
-                <td>{{  $license->assetlog->first()->created_at }}</td>
-            </tr>
-            @php
-                $lcounter++
-            @endphp
+            @endif
         @endforeach
     </table>
 @endif
@@ -149,16 +151,17 @@
         @endphp
 
         @foreach ($accessories as $accessory)
-
-            <tr>
-                <td>{{ $acounter }}</td>
-                <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
-                <td>{{ $accessory->category->name }}</td>
-                <td>{{  $accessory->assetlog->first()->created_at }}</td>
-            </tr>
-            @php
-                $acounter++
-            @endphp
+            @if ($accessory)
+                <tr>
+                    <td>{{ $acounter }}</td>
+                    <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
+                    <td>{{ $accessory->category->name }}</td>
+                    <td>{{  $accessory->assetlog->first()->created_at }}</td>
+                </tr>
+                @php
+                    $acounter++
+                @endphp
+            @endif
         @endforeach
     </table>
 @endif
@@ -184,16 +187,17 @@
         @endphp
 
         @foreach ($consumables as $consumable)
-
-            <tr>
-                <td>{{ $ccounter }}</td>
-                <td>{{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}</td>
-                <td>{{ $consumable->category->name }}</td>
-                <td>{{  $consumable->assetlog->first()->created_at }}</td>
-            </tr>
-            @php
-                $ccounter++
-            @endphp
+            @if ($consumable)
+                <tr>
+                    <td>{{ $ccounter }}</td>
+                    <td>{{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}</td>
+                    <td>{{ $consumable->category->name }}</td>
+                    <td>{{  $consumable->assetlog->first()->created_at }}</td>
+                </tr>
+                @php
+                    $ccounter++
+                @endphp
+            @endif
         @endforeach
     </table>
 @endif
