@@ -82,9 +82,6 @@ class UserImporter extends ItemImporter
         $user->fill($this->sanitizeItemForStoring($user));
 
         if ($user->save()) {
-
-            \Log::debug('UserImporter.php New User ' . print_r($user, true));
-
             $this->log("User " . $this->item["name"] . ' was created');
 
             if(($user->email) && ($user->activated=='1')) {
