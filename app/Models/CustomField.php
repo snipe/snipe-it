@@ -15,25 +15,30 @@ class CustomField extends Model
     use ValidatingTrait,
         UniqueUndeletedTrait;
 
+    /**
+     * Custom field predfined formats
+     * 
+     * @var array
+     */
+    const PREDFINED_FORMATS = [
+            'ANY'           => '',
+            'CUSTOM REGEX'  => '',
+            'ALPHA'         => 'alpha',
+            'ALPHA-DASH'    => 'alpha_dash',
+            'NUMERIC'       => 'numeric',
+            'ALPHA-NUMERIC' => 'alpha_num',
+            'EMAIL'         => 'email',
+            'DATE'          => 'date',
+            'URL'           => 'url',
+            'IP'            => 'ip',
+            'IPV4'          => 'ipv4',
+            'IPV6'          => 'ipv6',
+            'MAC'           => 'regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/',
+            'BOOLEAN'       => 'boolean',
+        ];
+
     public $guarded = [
         "id"
-    ];
-
-    public static $PredefinedFormats = [
-        "ANY" => "",
-        "CUSTOM REGEX" => "",
-        "ALPHA" => "alpha",
-        "ALPHA-DASH" => "alpha_dash",
-        "NUMERIC" => "numeric",
-        "ALPHA-NUMERIC" => "alpha_num",
-        "EMAIL" => "email",
-        "DATE" => "date",
-        "URL" => "url",
-        "IP" => "ip",
-        "IPV4" => "ipv4",
-        "IPV6" => "ipv6",
-        "MAC" => "regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/",
-        "BOOLEAN" => "boolean",
     ];
 
     /**
@@ -248,7 +253,7 @@ class CustomField extends Model
      */
     public function getFormatAttribute($value)
     {
-        foreach (self::$PredefinedFormats as $name => $pattern) {
+        foreach (self::PREDFINED_FORMATS as $name => $pattern) {
             if ($pattern === $value || $name === $value) {
                 return $name;
             }
@@ -265,8 +270,8 @@ class CustomField extends Model
      */
     public function setFormatAttribute($value)
     {
-        if (isset(self::$PredefinedFormats[$value])) {
-            $this->attributes['format']=self::$PredefinedFormats[$value];
+        if (isset(self::PREDFINED_FORMATS[$value])) {
+            $this->attributes['format']=self::PREDFINED_FORMATS[$value];
         } else {
             $this->attributes['format']=$value;
         }
@@ -354,7 +359,7 @@ class CustomField extends Model
                 Rule::in(['text', 'listbox'])
             ],
             'format' => [
-                Rule::in(array_merge(array_keys(CustomField::$PredefinedFormats), CustomField::$PredefinedFormats))
+                Rule::in(array_merge(array_keys(CustomField::PREDFINED_FORMATS), CustomField::PREDFINED_FORMATS))
             ],
             'field_encrypted' => "nullable|boolean"
         ];

@@ -27,7 +27,7 @@ class CustomFieldTest extends BaseTest
             'element' => $customfield->element,
         ];
 
-        $this->assertEquals($customfield->getAttributes()['format'], CustomField::$PredefinedFormats['IP']); //this seems undocumented...
+        $this->assertEquals($customfield->getAttributes()['format'], CustomField::PREDFINED_FORMATS['IP']); //this seems undocumented...
         $this->assertEquals($customfield->format, "IP");
     }
 
