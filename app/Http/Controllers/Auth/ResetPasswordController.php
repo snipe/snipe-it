@@ -39,18 +39,42 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    protected function rules()
+    {
+        return [
+            'token' => 'required',
+            'username' => 'required',
+            'password' => 'required|confirmed|min:6',
+        ];
+    }
+
+
+    protected function credentials(Request $request)
+    {
+        return $request->only(
+            'username', 'password', 'password_confirmation', 'token'
+        );
+    }
     
 
     public function showSnipeResetForm(Request $request, $token = null)
     {
         // Check that the user is active
-        if ($user = User::where('email', '=',$request->input('email'))->where('activated','=','1')->count() > 0) {
+        if ($user = User::where('username', '=',$request->input('username'))->where('activated','=','1')->count() > 0) {
             return view('auth.passwords.reset')->with(
-                ['token' => $token, 'email' => $request->email]
+                ['token' => $token, 'username' => $request->username]
             );
 
         }
-        return redirect()->route('password.request')->withErrors(['email' => 'No matching users']);
+        return redirect()->route('password.request')->withErrors(['username' => 'No matching users']);
+    }
+
+    protected function sendResetFailedResponse(Request $request, $response)
+    {
+        return redirect()->back()
+            ->withInput($request->only('username'))
+            ->withErrors(['username' => trans($response)]);
     }
 
 }
