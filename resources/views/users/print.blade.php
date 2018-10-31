@@ -149,7 +149,7 @@
         @endphp
 
         @foreach ($accessories as $accessory)
-
+            @if ($accessory)
             <tr>
                 <td>{{ $acounter }}</td>
                 <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
@@ -159,6 +159,7 @@
             @php
                 $acounter++
             @endphp
+            @endif
         @endforeach
     </table>
 @endif
