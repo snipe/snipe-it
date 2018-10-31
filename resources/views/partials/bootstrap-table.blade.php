@@ -150,20 +150,24 @@
     }
 
     // Make the edit/delete buttons
-    function genericActionsFormatter(destination) {
+    function genericActionsFormatter(owner_name, element_name = '') {
         return function (value,row) {
 
             var actions = '<nobr>';
 
             // Add some overrides for any funny urls we have
-            var dest = destination;
+            var dest = owner_name;
 
-            if (destination=='groups') {
+            if (dest =='groups') {
                 var dest = 'admin/groups';
             }
 
-            if (destination=='maintenances') {
+            if (dest =='maintenances') {
                 var dest = 'hardware/maintenances';
+            }
+
+            if(element_name != '') {
+                dest = dest + '/' + row.owner_id + '/' + element_name;
             }
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
@@ -177,52 +181,6 @@
             if ((row.available_actions) && (row.available_actions.delete === true)) {
                 actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '" '
                     + ' class="btn btn-danger btn-sm delete-asset"  data-toggle="tooltip"  '
-                    + ' data-toggle="modal" '
-                    + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
-                    + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
-                    + '<i class="fa fa-trash"></i></a>&nbsp;';
-            } else {
-                actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
-            }
-
-            if ((row.available_actions) && (row.available_actions.restore === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Restore"><i class="fa fa-retweet"></i></a>&nbsp;';
-            }
-
-            actions +='</nobr>';
-            return actions;
-
-        };
-    }
-
-    // This only works for model index pages because it uses the row's model ID
-    function genericChildActionsFormatter(parent, child) {
-        return function (value,row) {
-
-            var actions = '<nobr>';
-
-            // Add some overrides for any funny urls we have
-            var dest = destination;
-
-            if (destination=='groups') {
-                var dest = 'admin/groups';
-            }
-
-            if (destination=='maintenances') {
-                var dest = 'hardware/maintenances';
-            }
-
-            if ((row.available_actions) && (row.available_actions.clone === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-toggle="tooltip" title="Clone"><i class="fa fa-copy"></i></a>&nbsp;';
-            }
-
-            if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;';
-            }
-
-            if ((row.available_actions) && (row.available_actions.delete === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '" '
-                    + ' class="btn btn-danger btn-sm delete-asset"  data-tooltip="true"  '
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
@@ -370,10 +328,7 @@
         'depreciations',
         'fieldsets',
         'groups',
-        'kits',
-        // METODO: проверить, что эти пути работают
-        'kits.models',
-        'kits.licenses',
+        'kits'
     ];
 
     for (var i in formatters) {
@@ -383,15 +338,15 @@
         window[formatters[i] + 'InOutFormatter'] = genericCheckinCheckoutFormatter(formatters[i]);
     }
 
-    var childFormatters = [
+    var child_formatters = [
         ['kits', 'models'],
         ['kits', 'licenses'],
     ];
 
-    for (var i in childFormatters) {
-        var parentName = childFormatters[i][0];
-        var childName = childFormatters[i][2];
-        window[childFormatters[i][0] + 'ChildsActionsFormatter'] = genericChildActionsFormatter(childFormatters[i][0], childFormatters[i][1]);
+    for (var i in child_formatters) {
+        var owner_name = child_formatters[i][0];
+        var child_name = child_formatters[i][1];
+        window[owner_name + '_' + child_name + 'ActionsFormatter'] = genericActionsFormatter(owner_name, child_name);
     }
 
 

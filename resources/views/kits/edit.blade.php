@@ -6,7 +6,7 @@
 
 {{-- Page content --}}
 @section('inputFields')
-@include ('partials.forms.edit.name')
+@include ('partials.forms.edit.name', ['translated_name' => 'Name']) {{--  TODO: trans  --}}
 @stop
 
 @section('content')
@@ -15,13 +15,14 @@
     <div class="col-md-12">
         <div class="box box-default">
             <div class="box-header with-border">
-                <h3 class="box-title">Models</h3>
+                {{--  <h3 class="box-title"><span>Models  </span><a href="{{ route('modal.kit.model', ['kit' => $item->id]) }}" data-toggle="modal" data-target="#createModal" class="btn btn-sm btn-primary"><i class="fa fa-plus icon-white"></i> Append</a></h3>  --}}
+                <h3 class="box-title"><span>Models  </span></h3>
             </div>
             <div class="box-body">
                 <div class="table-responsive">
                 <table
                 data-cookie-id-table="kitModelsTable"
-                data-columns="{{ \App\Presenters\::modelsDataTableLayout() }}"
+                data-columns="{{ \App\Presenters\PredefinedKitPresenter::dataTableModels() }}"
                 data-pagination="true"
                 data-search="true"
                 data-side-pagination="server"
@@ -32,12 +33,13 @@
                 data-sort-name="name"
                 id="kitModelsTable"
                 class="table table-striped snipe-table"
-                data-url="{{ route('api.kits.models.index') }}"
+                data-url="{{ route('api.kits.models.index', $item->id) }}"
                 data-export-options='{
                 "fileName": "export-kit-models-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
                 </table>
+                <a href="{{ route('modal.kit.model', ['kit' => $item->id]) }}" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append</a>
                 </div>
             </div> <!--.box-body-->
         </div> <!-- /.box.box-default-->
@@ -54,7 +56,7 @@
     
                     <table
                     data-cookie-id-table="kitLicensesTable"
-                    data-columns="{{ \App\Presenters\::licensesDataTableLayout() }}"
+                    data-columns="{{ \App\Presenters\PredefinedKitPresenter::dataTableLicenses() }}"
                     data-pagination="true"
                     data-search="true"
                     data-side-pagination="server"
@@ -65,7 +67,7 @@
                     data-sort-name="name"
                     id="kitLicensesTable"
                     class="table table-striped snipe-table"
-                    data-url="{{ route('api.kits.licenses.index') }}"
+                    data-url="{{ route('api.kits.licenses.index', $item->id) }}"
                     data-export-options='{
                     "fileName": "export-kit-models-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -76,4 +78,8 @@
             </div> <!-- /.box.box-default-->
         </div> <!-- .col-md-12-->
     </div>
+@stop
+
+@section('moar_scripts')
+@include ('partials.bootstrap-table')
 @stop

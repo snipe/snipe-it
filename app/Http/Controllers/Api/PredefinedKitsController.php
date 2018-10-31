@@ -36,7 +36,7 @@ class PredefinedKitsController extends Controller
 
         $total = $kits->count();
         $kits = $kits->skip($offset)->take($limit)->get();
-        return (new PredefinedKitsTransformer)->transformPrdefinedKits($kits, $total);
+        return (new PredefinedKitsTransformer)->transformPredefinedKits($kits, $total);
 
     }
 
@@ -74,7 +74,7 @@ class PredefinedKitsController extends Controller
     {
         $this->authorize('view', PredefinedKit::class);
         $kit = PredefinedKit::findOrFail($id);
-        return (new PredefinedKitsTransformer)->transformPrdefinedKit($kit);
+        return (new PredefinedKitsTransformer)->transformPredefinedKit($kit);
     }
 
 
@@ -247,16 +247,20 @@ class PredefinedKitsController extends Controller
      */
      public function storeModel(Request $request, $kit_id)
      {
+        //return response()->json(Helper::formatStandardApiResponse('error', 'string11', dd($request)));     // TODO: trans
+
          $this->authorize('update', PredefinedKit::class);
          
          $kit = PredefinedKit::findOrFail($kit_id);        
+         
          $quantity = $request->input('quantity', 1);
          if( $quantity < 1) {
              $quantity = 1;
          }
+         //echo $request->get('model');
          $kit->models()->attach( $request->get('model'), ['quantity' => $quantity]);
- 
-         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License added successfull'));     // TODO: trans
+         
+         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Model added successfull'));     // TODO: trans
     }
 
     /**

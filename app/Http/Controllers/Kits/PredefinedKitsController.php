@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Kits;
 
 use App\Models\PredefinedKit;
 use App\Models\AssetModel;
@@ -7,6 +7,11 @@ use App\Models\PredefinedModel;
 use App\Models\License;
 use App\Models\PredefinedLicence;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ImageUploadRequest;
+use App\Models\Accessory;
+use App\Models\SnipeItPivot;
+use Illuminate\Http\Request;
 
 
 /**
@@ -36,7 +41,7 @@ class PredefinedKitsController extends Controller
     {
         //$this->authorize('create', PredefinedKit::class);
 
-        return view('kits/edit')->with('item', new PredefinedKit);
+        return view('kits/create')->with('item', new PredefinedKit);
     }
 
     /**
@@ -83,7 +88,7 @@ class PredefinedKitsController extends Controller
         if(!$success) {
             return redirect()->back()->withInput()->withErrors($kit->getErrors());
         }
-        return redirect()->route("models.index")->with('success', 'Kit was successfully created.'); // TODO: trans()
+        return redirect()->route("kits.index")->with('success', 'Kit was successfully created.'); // TODO: trans()
     }
 
     /**
@@ -91,13 +96,13 @@ class PredefinedKitsController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @param int $kitId
+    * @param int $kit_id
     * @return View
     */
-    public function edit($kitId = null)
+    public function edit($kit_id = null)
     {
         $this->authorize('update', PredefinedKit::class);
-        if ($kit = PredefinedKit::find($kitId)) {
+        if ($kit = PredefinedKit::find($kit_id)) {
             return view('kits/edit')
             ->with('item', $kit)
             ->with('models', $kit->models)
@@ -113,40 +118,21 @@ class PredefinedKitsController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @param int $kitId
+    * @param int $kit_id
     * @return Redirect
     */
-    public function update(ImageUploadRequest $request, $kitId = null)
+    public function update(ImageUploadRequest $request, $kit_id = null)
     {
         $this->authorize('update', PredefinedKit::class);
         // Check if the kit exists
-        if (is_null($kit = PredefinedKit::find($kitId))) {
+        if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
             return redirect()->route('kits.index')->with('error','Kit does not exist');      // TODO: trans
         }
 
         $kit->name                = $request->input('name');
-
-        // update models
-        $new_model_ids = $request->input('models');
-        $old_model_ids = $kit->models()->pluck('id');      // METODO: проверить
-        // для получения ид надо что-то такое https://stackoverflow.com/questions/34308169/eloquent-orm-laravel-5-get-array-of-ids
-        // project built on Laravel 5.4
-        list($add_model_ids, $remove_model_ids) = $this->getAddingDeletingElements($new_model_ids, $old_model_ids);     // METODO: тут ошибка, надо именно ид-шки получать, а не сами модели
-
-        $new_licence_ids = $request->input('licences');
-        $old_licence_ids = $kit->licences()->pluck('id');      // METODO: проверить
-        list($add_licence_ids, $remove_licence_ids) = $this->getAddingDeletingElements($new_licence_ids, $old_licence_ids);
-
-        $success = DB::transaction(function() use($kit, $add_models, $remove_models, $add_licences, $remove_licences) {
-            $kit->models()->detach($remove_models);
-            $kit->models()->attach($add_models);
-            $kit->licenses()->detach($remove_licenses);
-            $kit->licenses()->attach($add_licenses);
-            return $kit->save();
-        });
-
-        if ($success) {
+        
+        if ($kit->save()) {
             return redirect()->route("kits.index")->with('success', 'Kit was successfully updated');        // TODO: trans
         }
         return redirect()->back()->withInput()->withErrors($kit->getErrors());
@@ -158,14 +144,14 @@ class PredefinedKitsController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @param int $kitId
+    * @param int $kit_id
     * @return Redirect
     */
-    public function destroy($kitId)
+    public function destroy($kit_id)
     {
         $this->authorize('delete', PredefinedKit::class);
         // Check if the kit exists
-        if (is_null($kit = PredefinedKit::find($kitId))) {
+        if (is_null($kit = PredefinedKit::find($kit_id))) {
             return redirect()->route('kits.index')->with('error', 'Kit not found');     // TODO: trans
         }
 
@@ -180,27 +166,122 @@ class PredefinedKitsController extends Controller
     }
 
     /**
-    * Get the model information to present to the model view page
+    * Get the kit information to present to the kit view page
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
     * @param int $modelId
     * @return View
     */
-    public function show($modelId = null)
+    public function show($kit_id = null)
     {
-        $this->authorize('view', AssetModel::class);
-        $model = AssetModel::withTrashed()->find($modelId);
+        $this->authorize('view', PredefinedKit::class);
+        $kit = PredefinedKit::find($kit_id);
 
-        if (isset($model->id)) {
-            return view('models/view', compact('model'));
+        if (isset($kit->id)) {
+            return view('kits/view', compact('kit'));
         }
         // Prepare the error message
-        $error = trans('admin/models/message.does_not_exist', compact('id'));
+        $error = 'Kit does not exist.';         // TODO: trans
 
         // Redirect to the user management page
-        return redirect()->route('models.index')->with('error', $error);
+        return redirect()->route('kits.index')->with('error', $error);
     }
+
+    
+    /**
+    * Returns a view containing the Predefined Kit edit form.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $kit_id
+    * @return View
+    */
+    public function editModel($kit_id, $model_id)
+    {   
+        $this->authorize('update', PredefinedKit::class);
+        if (    ($kit = PredefinedKit::find($kit_id)) 
+        &&      ($model = $kit->models()->find($model_id)) ) {
+            // $item = $model->pivot;
+            // $item->name1 = 'tesn1';
+            // dd($item);
+       //dd($model->pivot);
+    //    $item = $model->pivot;
+       
+            return view('kits/model-edit', [
+                'kit' => $kit,
+                'model' => $model,
+                'item' => $model->pivot
+            ]);
+        }
+        return redirect()->route('kits.index')->with('error', 'Kit does not exist');        // TODO: trans
+    }
+
+    /**
+    * Get the kit information to present to the kit view page
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $modelId
+    * @return View
+    */
+    public function updateModel(Request $request, $kit_id) {
+        $this->authorize('update', PredefinedKit::class);
+        if (is_null($kit = PredefinedKit::find($kit_id))) {
+            // Redirect to the kits management page
+            return redirect()->route('kits.index')->with('error','Kit does not exist');      // TODO: trans
+        }
+        //return view('kits/create-model')->with('item', $kit);
+ 
+        
+        // $quantity = $request->input('quantity', 1);
+        // if( $quantity < 1) {
+        //     $quantity = 1;
+        // }
+
+        $validator = \Validator::make($request->all(), $kit->modelRules);
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+        // $kit->models()->sync([$request->input('model_id') => ['quantity' =>  $request->input('quantity')]]);
+        // $kit->models()->updateExistingPivot($request->input('pivot_id'), ['model_id' => $request->input('model_id'), 'quantity' =>  $request->input('quantity')]);
+        // $s = [$request->input('pivot_id') => ['model_id' => $request->input('model_id'), 'quantity' =>  $request->input('quantity')]];
+        //dd($s);
+        // $changes = $kit->models()->syncWithoutDetaching([$request->input('pivot_id') => ['model_id' => $request->input('model_id'), 'quantity' =>  $request->input('quantity')]]);
+        // $changes = $kit->models()->syncWithoutDetaching(['1' => ['model_id' => '2', 'quantity' =>  '35']]);
+        $pivot = $kit->models()->wherePivot('id', $request->input('pivot_id'))->first()->pivot;
+        // $pivot = $kit->models()->newPivotStatement()->find('1');
+        // $ret = $kit->models()->newPivotStatement()->find('1');
+        $pivot->model_id = $request->input('model_id');
+        $pivot->quantity = $request->input('quantity');
+        $pivot->save();
+        
+        // return $this->edit($kit_id)->with('success', 'Model updated successfully.');
+        return redirect()->route('kits.edit', $kit_id)->with('success', 'Model updated successfully.');     // TODO: trans
+    }
+
+    /**
+    * Get the kit information to present to the kit view page
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $modelId
+    * @return View
+    */
+    public function detachModel($kit_id, $model_id) {
+        $this->authorize('update', PredefinedKit::class);
+        if (is_null($kit = PredefinedKit::find($kit_id))) {
+            // Redirect to the kits management page
+            return redirect()->route('kits.index')->with('error','Kit does not exist');      // TODO: trans
+        }
+
+        // Delete childs
+        $kit->models()->detach($model_id);
+        
+        // Redirect to the kit management page
+        return redirect()->route('kits.index')->with('success', 'Kit was successfully deleted'); // TODO: trans
+    }
+
 
     /**
      * Returns true if a fieldset is set, 'add default values' is ticked and if

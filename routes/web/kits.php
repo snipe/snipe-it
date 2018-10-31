@@ -1,7 +1,7 @@
 <?php
 
 // Predefined Kit Management
-Route::resource('kit', 'Kits\PredefinedKitController', [
+Route::resource('kits', 'Kits\PredefinedKitsController', [
     'middleware' => ['auth'],
     'parameters' => ['kit' => 'kit_id']
 ]);
@@ -10,12 +10,12 @@ Route::resource('kit', 'Kits\PredefinedKitController', [
 
 Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function () {
 
-    Route::get('licenses', 
-        [
-            'as' => 'kits.licenses.index',
-            'uses' => 'Kits\PredefinedKitsController@indexLicenses',
-        ]
-    );
+    // Route::get('licenses', 
+    //     [
+    //         'as' => 'kits.licenses.index',
+    //         'uses' => 'Kits\PredefinedKitsController@indexLicenses',
+    //     ]
+    // );
     
     Route::post('licenses', 
         [
@@ -33,18 +33,18 @@ Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function
 
     Route::delete('licenses/{license_id}', 
         [
-            'as' => 'kits.licenses.destroy',
-            'uses' => 'Kits\PredefinedKitsController@destroyLicense',
+            'as' => 'kits.licenses.detach',
+            'uses' => 'Kits\PredefinedKitsController@detachLicense',
         ]
     );
     
     
-    Route::get('models', 
-        [
-            'as' => 'kits.models.index',
-            'uses' => 'Kits\PredefinedKitsController@indexModels',
-        ]
-    );
+    // Route::get('models', 
+    //     [
+    //         'as' => 'kits.models.index',
+    //         'uses' => 'Kits\PredefinedKitsController@indexModels',
+    //     ]
+    // );
     
     Route::post('models', 
         [
@@ -59,11 +59,18 @@ Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function
             'uses' => 'Kits\PredefinedKitsController@updateModel',
         ]
     );
+  
+    Route::get('models/{model_id}/edit', 
+        [
+            'as' => 'kits.models.edit',
+            'uses' => 'Kits\PredefinedKitsController@editModel',
+        ]
+    );
 
     Route::delete('models/{model_id}', 
         [
-            'as' => 'kits.models.destroy',
-            'uses' => 'Kits\PredefinedKitsController@destroyModel',
+            'as' => 'kits.models.detach',
+            'uses' => 'Kits\PredefinedKitsController@detachModel',
         ]
     );
 

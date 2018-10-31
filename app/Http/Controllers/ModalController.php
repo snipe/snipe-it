@@ -36,4 +36,11 @@ class ModalController extends Controller
         return view('modals.manufacturer');
     }
 
+    function kitModel() {
+        return view('modals.kit-model');
+    }
+
+    function kitLicense() {
+        return view('modals.kit-license');
+    }
 }

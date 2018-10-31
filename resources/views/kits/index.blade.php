@@ -21,7 +21,7 @@ Kits
 
             <table
                 data-cookie-id-table="kitsTable"
-                data-columns="{{ \App\Presenters\::dataTableLayout() }}"
+                data-columns="{{ \App\Presenters\PredefinedKitPresenter::dataTableLayout() }}"
                 data-pagination="true"
                 data-search="true"
                 data-side-pagination="server"
@@ -39,6 +39,28 @@ Kits
             }'>
           </table>
         </div>
+        {{--  <h2>Test</h2>
+        <div class="table-responsive">
+          <table
+          data-cookie-id-table="kitModelsTable"
+          data-columns="{{ \App\Presenters\PredefinedKitPresenter::dataTableModels() }}"
+          data-pagination="true"
+          data-search="true"
+          data-side-pagination="server"
+          data-show-columns="true"
+          data-show-export="true"
+          data-show-refresh="true"
+          data-sort-order="asc"
+          data-sort-name="name"
+          id="kitModelsTable"
+          class="table table-striped snipe-table"
+          data-url="{{ route('api.kits.models.index', 1) }}"
+          data-export-options='{
+          "fileName": "export-kit-models-{{ date('Y-m-d') }}",
+          "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+          }'>
+          </table>
+          </div>  --}}
       </div> <!--.box-body-->
     </div> <!-- /.box.box-default-->
   </div> <!-- .col-md-12-->
