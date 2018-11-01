@@ -72,6 +72,6 @@ class ForgotPasswordController extends Controller
 
         // Regardless of response, we do not want to disclose the status of a user account,
         // so we give them a generic "If this exists, we're TOTALLY gonna email you" response
-        return back()->with('success',trans('passwords.sent'));
+        return redirect()->route('login')->with('success',trans('passwords.sent'));
     }
 }
