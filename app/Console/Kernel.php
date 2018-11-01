@@ -13,18 +13,35 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-
+        Commands\PaveIt::class,
+        Commands\CreateAdmin::class,
+        Commands\SendExpirationAlerts::class,
+        Commands\SendInventoryAlerts::class,
+        Commands\SendExpectedCheckinAlerts::class,
+        Commands\ObjectImportCommand::class,
+        Commands\Version::class,
+        Commands\SystemBackup::class,
+        Commands\DisableLDAP::class,
+        Commands\Purge::class,
+        Commands\LdapSync::class,
+        Commands\FixDoubleEscape::class,
+        Commands\RecryptFromMcrypt::class,
+        Commands\ResetDemoSettings::class,
+        Commands\SyncAssetLocations::class,
+        Commands\RegenerateAssetTags::class,
+        Commands\SyncAssetCounters::class,
+        Commands\RestoreDeletedUsers::class,
+        Commands\SendCurrentInventoryToUsers::class,
+        Commands\MoveUploadsToNewDisk::class,
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      */
     protected function schedule(Schedule $schedule)
     {
-
         $schedule->command('snipeit:inventory-alerts')->daily();
         $schedule->command('snipeit:expiring-alerts')->daily();
         $schedule->command('snipeit:expected-checkin')->daily();
@@ -34,13 +51,10 @@ class Kernel extends ConsoleKernel
 
     /**
      * This method is required by Laravel to handle any console routes
-     * that are defined in routes/console.php
-     *
-     * @return void
+     * that are defined in routes/console.php.
      */
     protected function commands()
     {
-        // Auto register commands in Commands directory
-        $this->load(__DIR__.'/Commands');
+        require base_path('routes/console.php');
     }
 }

@@ -87,7 +87,7 @@ class LoginController extends Controller
      * 
      * @throws Exception
      */
-    private function loginByLdap(Request $request): User
+    private function loginViaLdap(Request $request): User
     {
         try {
             return $this->ldapAd->ldapLogin($request->input('username'), $request->input('password'));
@@ -150,7 +150,7 @@ class LoginController extends Controller
             LOG::debug("LDAP is enabled.");
             try {
                 LOG::debug("Attempting to log user in by LDAP authentication.");
-                $user = $this->loginByLdap($request);
+                $user = $this->loginViaLdap($request);
                 Auth::login($user, true);
 
             // If the user was unable to login via LDAP, log the error and let them fall through to
