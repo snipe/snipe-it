@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Redirect;
 use Illuminate\Http\Request;
 use Image;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This controller handles all actions related to Manufacturers for
@@ -72,7 +73,7 @@ class ManufacturersController extends Controller
         $manufacturer->support_email    = $request->input('support_email');
 
 
-        $manufacturer = $request->handleImages($manufacturer);
+        $manufacturer = $request->handleImages($manufacturer,'manufacturers');
 
 
 
@@ -162,9 +163,9 @@ class ManufacturersController extends Controller
 
         if ($manufacturer->image) {
             try  {
-                unlink(public_path().'/uploads/manufacturers/'.$manufacturer->image);
+                Storage::disk('public')->delete('manufacturers/'.$manufacturer->image);
             } catch (\Exception $e) {
-
+                \Log::error($e);
             }
         }
 

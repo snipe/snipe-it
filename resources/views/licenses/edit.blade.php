@@ -1,8 +1,7 @@
 @extends('layouts/edit-form', [
-    'createText' => trans('admin/licenses/form.create') ,
+    'createText' => trans('admin/licenses/form.create'),
     'updateText' => trans('admin/licenses/form.update'),
-    'helpTitle' => trans('admin/licenses/general.about_licenses_title'),
-    'helpText' => trans('admin/licenses/general.about_licenses_text'),
+    'topSubmit' => true,
     'formAction' => ($item) ? route('licenses.update', ['license' => $item->id]) : route('license.store'),
 ])
 

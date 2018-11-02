@@ -63,7 +63,7 @@ class ActionlogsTransformer
             ] : null,
 
             'note'          => ($actionlog->note) ? e($actionlog->note): null,
-            'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
+            'signature_file'   => ($actionlog->signature_filename) ? route('log.signature.view', ['filename' => $actionlog->signature_filename ]) : null,
             'log_meta'          => ($actionlog->log_meta) ? json_decode($actionlog->log_meta): null,
 
 

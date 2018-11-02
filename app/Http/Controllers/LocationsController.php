@@ -6,6 +6,7 @@ use App\Models\Location;
 use Illuminate\Support\Facades\Auth;
 use Image;
 use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This controller handles all actions related to Locations for
@@ -89,7 +90,7 @@ class LocationsController extends Controller
         $location->manager_id       = $request->input('manager_id');
         $location->user_id          = Auth::id();
 
-        $location = $request->handleImages($location);
+        $location = $request->handleImages($location, 'public/uploads/locations');
 
         if ($location->save()) {
             return redirect()->route("locations.index")->with('success', trans('admin/locations/message.create.success'));
@@ -159,7 +160,7 @@ class LocationsController extends Controller
         $location->ldap_ou      = $request->input('ldap_ou');
         $location->manager_id   = $request->input('manager_id');
 
-        $location = $request->handleImages($location);
+        $location = $request->handleImages($location, 'public/uploads/locations');
 
 
         if ($location->save()) {
@@ -198,6 +199,13 @@ class LocationsController extends Controller
 
         }
 
+        if ($location->image) {
+            try  {
+                Storage::disk('public')->delete('locations/'.$location->image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+        }
         $location->delete();
         return redirect()->to(route('locations.index'))->with('success', trans('admin/locations/message.delete.success'));
     }

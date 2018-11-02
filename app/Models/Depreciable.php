@@ -50,7 +50,7 @@ class Depreciable extends SnipeModel
             return $this->purchase_cost;
         }
         $depreciation = 0;
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
         switch($setting->depreciation_method) {
             case 'half_1':
             $depreciation = $this->getHalfYearDepreciatedValue(true);

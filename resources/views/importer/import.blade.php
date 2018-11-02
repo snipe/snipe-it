@@ -8,9 +8,6 @@
 
 {{-- Page content --}}
 @section('content')
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload.css') }}">
-
     {{-- Hide importer until vue has rendered it, if we continue using vue for other things we should move this higher in the style --}}
     <style>
         [v-cloak] {

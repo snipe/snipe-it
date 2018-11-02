@@ -8,6 +8,7 @@ use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Model for Asset Models. Asset Models contain higher level
@@ -175,7 +176,7 @@ class AssetModel extends SnipeModel
      */
     public function getImageUrl() {
         if ($this->image) {
-            return url('/').'/uploads/models/'.$this->image;
+            return Storage::disk('public')->url(app('models_upload_path').$this->image);
         }
         return false;
     }

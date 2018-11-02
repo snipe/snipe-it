@@ -13,7 +13,6 @@ class UserImporter extends ItemImporter
     public function __construct($filename)
     {
         parent::__construct($filename);
-        // $this->users = User::all();
     }
 
     protected function handle($row)
@@ -39,7 +38,11 @@ class UserImporter extends ItemImporter
         $this->item['email'] = $this->findCsvMatch($row, 'email');
         $this->item['phone'] = $this->findCsvMatch($row, 'phone_number');
         $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
+        $this->item['activated'] = $this->findCsvMatch($row, 'activated');
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
+        $this->item['department_id'] = $this->createOrFetchDepartment($this->findCsvMatch($row, 'department'));
+        $this->item['manager_id'] = $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name'));
+
         $user_department = $this->findCsvMatch($row, 'department');
         if ($this->shouldUpdateField($user_department)) {
             $this->item["department_id"] = $this->createOrFetchDepartment($user_department);
@@ -73,7 +76,9 @@ class UserImporter extends ItemImporter
                     'last_name' => $user->last_name,
                     'password' => $this->tempPassword,
                 ];
-                $user->notify(new WelcomeNotification($data));
+                if ($this->send_welcome) {
+                    $user->notify(new WelcomeNotification($data));
+                }
             }
             $user = null;
             $this->item = null;

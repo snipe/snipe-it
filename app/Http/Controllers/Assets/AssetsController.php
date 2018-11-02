@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Assets;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AssetRequest;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -33,6 +33,7 @@ use TCPDF;
 use Validator;
 use View;
 use App\Models\CheckoutRequest;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This class controls all actions related to assets for
@@ -106,116 +107,103 @@ class AssetsController extends Controller
      * @since [v1.0]
      * @return Redirect
      */
-    public function store(AssetRequest $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize(Asset::class);
 
+        // Handle asset tags - there could be one, or potentially many.
+        // This is only necessary on create, not update, since bulk editing is handled
+        // differently
+        $asset_tags = $request->input('asset_tags');
 
-        $asset = new Asset();
-        $asset->model()->associate(AssetModel::find($request->input('model_id')));
+        $success = false;
+        $serials = $request->input('serials');
 
-        $asset->name                    = $request->input('name');
-        $asset->serial                  = $request->input('serial');
-        $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
-        $asset->model_id                = $request->input('model_id');
-        $asset->order_number            = $request->input('order_number');
-        $asset->notes                   = $request->input('notes');
-        $asset->asset_tag               = $request->input('asset_tag');
-        $asset->user_id                 = Auth::id();
-        $asset->archived                = '0';
-        $asset->physical                = '1';
-        $asset->depreciate              = '0';
-        $asset->status_id               = request('status_id', 0);
-        $asset->warranty_months         = request('warranty_months', null);
-        $asset->purchase_cost           = Helper::ParseFloat($request->get('purchase_cost'));
-        $asset->purchase_date           = request('purchase_date', null);
-        $asset->assigned_to             = request('assigned_to', null);
-        $asset->supplier_id             = request('supplier_id', 0);
-        $asset->requestable             = request('requestable', 0);
-        $asset->rtd_location_id         = request('rtd_location_id', null);
+        for ($a = 1; $a <= count($asset_tags); $a++) {
 
-        if ($asset->assigned_to=='') {
-            $asset->location_id = $request->input('rtd_location_id', null);
-        }
-
-        // Create the image (if one was chosen.)
-        if ($request->hasFile('image')) {
-            $image = $request->input('image');
-
-            // After modification, the image is prefixed by mime info like the following:
-            // data:image/jpeg;base64,; This causes the image library to be unhappy, so we need to remove it.
-            $header = explode(';', $image, 2)[0];
-            // Grab the image type from the header while we're at it.
-            $extension = substr($header, strpos($header, '/')+1);
-            // Start reading the image after the first comma, postceding the base64.
-            $image = substr($image, strpos($image, ',')+1);
-
-            $file_name = str_random(25).".".$extension;
-
-            $directory= public_path('uploads/assets/');
-            // Check if the uploads directory exists.  If not, try to create it.
-            if (!file_exists($directory)) {
-                mkdir($directory, 0755, true);
+            $asset = new Asset();
+            $asset->model()->associate(AssetModel::find($request->input('model_id')));
+            $asset->name                    = $request->input('name');
+            // Check for a corresponding serial
+            if (($serials) && (array_key_exists($a, $serials))) {
+                $asset->serial                  = $serials[$a];
             }
-            $path = public_path('uploads/assets/'.$file_name);
-            try {
-                Image::make($image)->resize(500, 500, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save($path);
-                $asset->image = $file_name;
-            } catch (\Exception $e) {
-                \Input::flash();
-                $messageBag = new \Illuminate\Support\MessageBag();
-                $messageBag->add('image', $e->getMessage());
-                \Session()->flash('errors', \Session::get('errors', new \Illuminate\Support\ViewErrorBag)
-                    ->put('default', $messageBag));
-                return response()->json(['image' => $e->getMessage()], 422);
+            $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
+            $asset->model_id                = $request->input('model_id');
+            $asset->order_number            = $request->input('order_number');
+            $asset->notes                   = $request->input('notes');
+            $asset->user_id                 = Auth::id();
+            $asset->archived                = '0';
+            $asset->physical                = '1';
+            $asset->depreciate              = '0';
+            $asset->status_id               = request('status_id', 0);
+            $asset->warranty_months         = request('warranty_months', null);
+            $asset->purchase_cost           = Helper::ParseFloat($request->get('purchase_cost'));
+            $asset->purchase_date           = request('purchase_date', null);
+            $asset->assigned_to             = request('assigned_to', null);
+            $asset->supplier_id             = request('supplier_id', 0);
+            $asset->requestable             = request('requestable', 0);
+            $asset->rtd_location_id         = request('rtd_location_id', null);
+
+            if ($asset->assigned_to=='') {
+                $asset->location_id = $request->input('rtd_location_id', null);
             }
-        }
 
 
-        // Update custom fields in the database.
-        // Validation for these fields is handled through the AssetRequest form request
-        $model = AssetModel::find($request->get('model_id'));
 
-        if ($model->fieldset) {
-            foreach ($model->fieldset->fields as $field) {
-                if ($field->field_encrypted=='1') {
-                    if (Gate::allows('admin')) {
-                        $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+            $asset->asset_tag  = $asset_tags[$a];
+            $asset = $request->handleImages($asset);
+
+
+            // Update custom fields in the database.
+            // Validation for these fields is handled through the AssetRequest form request
+            $model = AssetModel::find($request->get('model_id'));
+
+            if (($model) && ($model->fieldset)) {
+                foreach ($model->fieldset->fields as $field) {
+                    if ($field->field_encrypted=='1') {
+                        if (Gate::allows('admin')) {
+                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                        }
+                    } else {
+                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
                     }
-                } else {
-                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
                 }
             }
+
+            // Validate the asset before saving
+            if ($asset->isValid() && $asset->save()) {
+
+                if (request('assigned_user')) {
+                    $target = User::find(request('assigned_user'));
+                    $location = $target->location_id;
+                } elseif (request('assigned_asset')) {
+                    $target = Asset::find(request('assigned_asset'));
+                    $location = $target->location_id;
+                } elseif (request('assigned_location')) {
+                    $target = Location::find(request('assigned_location'));
+                    $location = $target->id;
+                }
+
+                if (isset($target)) {
+                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')), $location);
+                }
+
+                $success = true;
+
+
+            }
+
         }
 
-        // Was the asset created?
-        if ($asset->save()) {
-
-
-            if (request('assigned_user')) {
-                $target = User::find(request('assigned_user'));
-                $location = $target->location_id;
-            } elseif (request('assigned_asset')) {
-                $target = Asset::find(request('assigned_asset'));
-                $location = $target->location_id;
-            } elseif (request('assigned_location')) {
-                $target = Location::find(request('assigned_location'));
-                $location = $target->id;
-            }
-
-            if (isset($target)) {
-                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')), $location);
-            }
+        if ($success) {
             // Redirect to the asset listing page
-            \Session::flash('success', trans('admin/hardware/message.create.success'));
-            return response()->json(['redirect_url' => route('hardware.index')]);
+            return redirect()->route('hardware.index')
+                ->with('success', trans('admin/hardware/message.create.success'));
         }
-        \Input::flash();
-        \Session::flash('errors', $asset->getErrors());
-        return response()->json(['errors' => $asset->getErrors()], 500);
+
+        return redirect()->back()->withInput()->withErrors($asset->getErrors());
+
     }
 
     /**
@@ -293,7 +281,7 @@ class AssetsController extends Controller
      * @return Redirect
      */
 
-    public function update(AssetRequest $request, $assetId = null)
+    public function update(ImageUploadRequest $request, $assetId = null)
     {
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
@@ -329,47 +317,18 @@ class AssetsController extends Controller
 
 
         // Update the asset data
+        $asset_tag           =  $request->input('asset_tags');
+        $serial              = $request->input('serials');
         $asset->name         = $request->input('name');
-        $asset->serial       = $request->input('serial');
+        $asset->serial       = $serial[1];
         $asset->company_id   = Company::getIdForCurrentUser($request->input('company_id'));
         $asset->model_id     = $request->input('model_id');
         $asset->order_number = $request->input('order_number');
-        $asset->asset_tag    = $request->input('asset_tag');
+        $asset->asset_tag    = $asset_tag[1];
         $asset->notes        = $request->input('notes');
         $asset->physical     = '1';
 
-        // Update the image
-        if ($request->filled('image')) {
-            $image = $request->input('image');
-            // See postCreate for more explaination of the following.
-            $header = explode(';', $image, 2)[0];
-            $extension = substr($header, strpos($header, '/')+1);
-            $image = substr($image, strpos($image, ',')+1);
-
-            $directory= public_path('uploads/assets/');
-            // Check if the uploads directory exists.  If not, try to create it.
-            if (!file_exists($directory)) {
-                mkdir($directory, 0755, true);
-            }
-
-            $file_name = str_random(25).".".$extension;
-            $path = public_path('uploads/assets/'.$file_name);
-            try {
-                Image::make($image)->resize(500, 500, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save($path);
-                $asset->image = $file_name;
-            } catch (\Exception $e) {
-                \Input::flash();
-                $messageBag = new \Illuminate\Support\MessageBag();
-                $messageBag->add('image', $e->getMessage());
-                \Session()->flash('errors', \Session::get('errors', new \Illuminate\Support\ViewErrorBag)
-                    ->put('default', $messageBag));
-                return response()->json(['image' => $e->getMessage()], 422);
-            }
-            $asset->image = $file_name;
-        }
+        $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
         // Validation for these fields is handlded through the AssetRequest form request
@@ -390,13 +349,12 @@ class AssetsController extends Controller
 
 
         if ($asset->save()) {
-            // Redirect to the new asset page
-            \Session::flash('success', trans('admin/hardware/message.update.success'));
-            return response()->json(['redirect_url' => route("hardware.show", $assetId)]);
+            return redirect()->route("hardware.show", $assetId)
+                ->with('success', trans('admin/hardware/message.update.success'));
         }
-        \Input::flash();
-        \Session::flash('errors', $asset->getErrors());
-        return response()->json(['errors' => $asset->getErrors()], 500);
+
+        return redirect()->back()->withInput()->withErrors()->with('error', trans('admin/hardware/message.does_not_exist'));
+
     }
 
     /**
@@ -420,6 +378,14 @@ class AssetsController extends Controller
         DB::table('assets')
             ->where('id', $asset->id)
             ->update(array('assigned_to' => null));
+
+        if ($asset->image) {
+            try  {
+                Storage::disk('public')->delete('assets'.'/'.$asset->image);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
+        }
 
         $asset->delete();
 
@@ -740,7 +706,7 @@ class AssetsController extends Controller
     }
 
 
-    public function auditStore(AssetFileRequest $request, $id)
+    public function auditStore(Request $request, $id)
     {
         $this->authorize('audit', Asset::class);
 
@@ -773,22 +739,15 @@ class AssetsController extends Controller
 
         if ($asset->save()) {
 
+            $path = 'private_uploads/audits';
+            if (!Storage::exists($path)) Storage::makeDirectory($path, 775);
 
-            $filename = '';
+            $upload = $image = $request->file('image');
+            $ext = $image->getClientOriginalExtension();
+            $file_name = 'audit-'.str_random(18).'.'.$ext;
+            Storage::putFileAs($path, $upload, $file_name);
 
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                try {
-                    $destinationPath = config('app.private_uploads').'/audits';
-                    $extension = $file->getClientOriginalExtension();
-                    $filename = 'audit-'.$asset->id.'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
-                    $file->move($destinationPath, $filename);
-                } catch (\Exception $e) {
-                    \Log::error($e);
-                }
-            }
-
-            $asset->logAudit($request->input('note'), $request->input('location_id'), $filename);
+            $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.audit.success'));
         }
     }

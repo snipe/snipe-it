@@ -6,7 +6,7 @@
  * @return {IIFE}          Immediately invoked. Returns self.
  */
 
-var lineOptions = {
+lineOptions = {
 
         legend: {
             position: "bottom"
@@ -39,7 +39,7 @@ var lineOptions = {
 
 };
 
-var pieOptions = {
+pieOptions = {
     //Boolean - Whether we should show a stroke on each segment
     segmentShowStroke: true,
     //String - The colour of each segment stroke
@@ -120,10 +120,6 @@ var pieOptions = {
     });
 }(jQuery, window.snipeit.settings));
 
-
-
-
-
 $(document).ready(function () {
 
     /*
@@ -178,12 +174,11 @@ $(document).ready(function () {
             }
         });
      }
-     $('.datepicker').datepicker();
 
-    var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
-    $.fn.bootstrapDP = datepicker;
-    $('.datepicker').datepicker();
-
+    // $('.datepicker').datepicker();
+    // var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
+    // $.fn.bootstrapDP = datepicker;
+    // $('.datepicker').datepicker();
 
     // Crazy select2 rich dropdowns with images!
     $('.js-data-ajax').each( function (i,item) {
@@ -294,8 +289,12 @@ $(document).ready(function () {
 					"X-Requested-With": 'XMLHttpRequest',
 					"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
 				},
-			}).done(function(response) {;
-				var currentlySelected = element.select2('data').map(function (x){ return +x.id}).filter(function (x) {return x !== 0});
+			}).done(function(response) {
+				var currentlySelected = element.select2('data').map(function (x){ 
+                    return +x.id;
+                }).filter(function (x) {
+                    return x !== 0;
+                });
 				
 				// makes sure we're not selecting the same thing twice for multiples
 				var filteredResponse = response.items.filter(function(item) {
@@ -424,7 +423,7 @@ $(document).ready(function () {
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('#imagePreview').attr('src', e.target.result);
-            }
+            };
             reader.readAsDataURL(input.files[0]);
         }
     }
@@ -434,7 +433,7 @@ $(document).ready(function () {
         else if(bytes < 1048576) return(bytes / 1024).toFixed(2) + " KB";
         else if(bytes < 1073741824) return(bytes / 1048576).toFixed(2) + " MB";
         else return(bytes / 1073741824).toFixed(2) + " GB";
-    };
+    }
 
      // File size validation
     $('#uploadFile').bind('change', function() {
@@ -463,14 +462,5 @@ $(document).ready(function () {
 
 
     });
-
-
-
-
-
-
-
-
-
 
 });

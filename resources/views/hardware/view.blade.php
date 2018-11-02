@@ -497,9 +497,9 @@
 
             <div class="col-md-4">
               @if ($asset->image)
-                <img src="{{ url('/') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg img-responsive">
+                <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" class="assetimg img-responsive">
               @elseif (($asset->model) && ($asset->model->image!=''))
-                <img src="{{ url('/') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
+                <img src="{{ Storage::disk('public')->url(app('models_upload_url').e($asset->model->image )) }}" class="assetimg img-responsive">
               @endif
 
               @if  ($snipeSettings->qr_code=='1')
