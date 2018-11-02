@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckoutAccessoryNotification;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Model for Accessories.
@@ -219,7 +220,7 @@ class Accessory extends SnipeModel
      */
     public function getImageUrl() {
         if ($this->image) {
-            return url('/').'/uploads/accessories/'.$this->image;
+            return Storage::disk('public')->url(app('accessories_upload_path').$this->image);
         }
         return false;
 

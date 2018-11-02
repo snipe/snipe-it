@@ -16,7 +16,6 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Http\Transformers\CustomFieldsTransformer;
 use App\Http\Transformers\CustomFieldsetsTransformer;
-use App\Http\Requests\AssetRequest;
 
 /**
  * This controller handles all actions related to Custom Asset Fieldsets for

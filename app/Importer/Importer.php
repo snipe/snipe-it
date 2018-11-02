@@ -66,7 +66,9 @@ abstract class Importer
         'phone_number' => 'phone number',
         'first_name' => 'first name',
         'last_name' => 'last name',
-        'department' => 'department'
+        'department' => 'department',
+        'manager_first_name' => 'manager last name',
+        'manager_last_name' => 'manager last name',
     ];
     /**
      * Map of item fields->csv names
@@ -207,7 +209,6 @@ abstract class Importer
     public function lookupCustomKey($key)
     {
         if (array_key_exists($key, $this->fieldMap)) {
-            // $this->log("Found a match in our custom map: {$key} is " . $this->fieldMap[$key]);
             return $this->fieldMap[$key];
         }
         // Otherwise no custom key, return original.
@@ -319,12 +320,14 @@ abstract class Importer
 
         // No Luck, let's create one.
         $user = new User;
-        $user->first_name = $user_array['first_name'];
-        $user->last_name = $user_array['last_name'];
-        $user->username = $user_array['username'];
-        $user->email = $user_array['email'];
-        $user->activated = 1;
-        $user->password = $this->tempPassword;
+        $user->first_name    = $user_array['first_name'];
+        $user->last_name     = $user_array['last_name'];
+        $user->username      = $user_array['username'];
+        $user->email         = $user_array['email'];
+        $user->manager_id    = $user_array['manager_id'] ?? null;
+        $user->department_id = $user_array['department_id'] ?? null;
+        $user->activated     = 1;
+        $user->password      = $this->tempPassword;
 
         if ($user->save()) {
             $this->log('User '.$user_array['username'].' created');
@@ -372,6 +375,20 @@ abstract class Importer
     public function setUpdating($updating)
     {
         $this->updating = $updating;
+
+        return $this;
+    }
+
+    /**
+     * Sets whether or not we should notify the user with a welcome email
+     *
+     * @param bool $send_welcome the send-welcome flag
+     *
+     * @return self
+     */
+    public function setShouldNotify($send_welcome)
+    {
+        $this->send_welcome = $send_welcome;
 
         return $this;
     }

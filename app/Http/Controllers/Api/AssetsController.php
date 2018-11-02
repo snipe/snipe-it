@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AssetRequest;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Http\Transformers\AssetsTransformer;
 use App\Models\Asset;
@@ -400,7 +399,7 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function store(AssetRequest $request)
+    public function store(Request $request)
     {
 
         $this->authorize('create', Asset::class);
@@ -431,7 +430,7 @@ class AssetsController extends Controller
         // Update custom fields in the database.
         // Validation for these fields is handled through the AssetRequest form request
         $model = AssetModel::find($request->get('model_id'));
-        if ($model->fieldset) {
+        if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
                 $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug(), null));
             }

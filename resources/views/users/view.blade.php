@@ -115,11 +115,7 @@
               </div>
             @endif
             <div class="col-md-2 text-center">
-              @if ($user->avatar)
-                <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print">
-              @else
-                <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print">
-              @endif
+                <img src="{{ $user->present()->gravatar }}" class="avatar img-thumbnail hidden-print">
             </div>
 
             <div class="col-md-8">
@@ -237,12 +233,19 @@
                 <div class="col-md-12">
                   <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.edit') }}</a>
                 </div>
+              @endcan
+
+              @can('create', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
                   <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.clone') }}</a>
                 </div>
+               @endcan
+
+                @can('view', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
+                @endcan
 
                 @can('delete', $user)
                   @if ($user->deleted_at=='')
@@ -267,7 +270,6 @@
                     </div>
                   @endif
                 @endcan
-              @endcan
             </div>
             <!-- End button column -->
           </div> <!--/.row-->
@@ -421,9 +423,6 @@
                   </div>
               </div>
             </div>
-
-            <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload.css') }}">
-            <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload-ui.css') }}">
 
             <div class="col-md-12 col-sm-12">
               <div class="table-responsive">

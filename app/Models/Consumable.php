@@ -7,6 +7,7 @@ use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 use App\Notifications\CheckoutConsumableNotification;
+use Illuminate\Support\Facades\Storage;
 
 class Consumable extends SnipeModel
 {
@@ -32,7 +33,7 @@ class Consumable extends SnipeModel
         'qty'         => 'required|integer|min:0',
         'category_id' => 'required|integer',
         'company_id'  => 'integer|nullable',
-        'min_amt'     => 'integer|min:1|nullable',
+        'min_amt'     => 'integer|min:0|nullable',
         'purchase_cost'   => 'numeric|nullable',
     );
 
@@ -203,7 +204,7 @@ class Consumable extends SnipeModel
      */
     public function getImageUrl() {
         if ($this->image) {
-            return url('/').'/uploads/consumables/'.$this->image;
+            return Storage::disk('public')->url(app('consumables_upload_path').$this->image);
         }
         return false;
 

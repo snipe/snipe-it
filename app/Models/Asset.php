@@ -21,6 +21,7 @@ use Watson\Validating\ValidatingTrait;
 use DB;
 use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckoutAssetNotification;
+use Illuminate\Support\Facades\Storage;
 /**
  * Model for Assets.
  *
@@ -159,7 +160,32 @@ class Asset extends Depreciable
         'model'              => ['name', 'model_number'],
         'model.category'     => ['name'],
         'model.manufacturer' => ['name'],
-    ];     
+    ];
+
+
+    /**
+     * This handles the custom field validation for assets
+     *
+     * @var array
+     */
+    public function save(array $params = [])
+    {
+        $settings = \App\Models\Setting::getSettings();
+
+        // I don't remember why we have this here? Asset tag would always be required, even if auto increment is on...
+        $this->rules['asset_tag'] = ($settings->auto_increment_assets == '1') ? 'max:255' : 'required';
+
+        if($this->model_id != '') {
+            $model = AssetModel::find($this->model_id);
+
+            if (($model) && ($model->fieldset)) {
+                $this->rules += $model->fieldset->validation_rules();
+            }
+        }
+
+        return parent::save($params);
+    }
+
 
     public function getDisplayNameAttribute()
     {
@@ -486,9 +512,9 @@ class Asset extends Depreciable
     public function getImageUrl()
     {
         if ($this->image && !empty($this->image)) {
-            return url('/').'/uploads/assets/'.$this->image;
+            return Storage::disk('public')->url(app('assets_upload_path').e($this->image));
         } elseif ($this->model && !empty($this->model->image)) {
-            return url('/').'/uploads/models/'.$this->model->image;
+            return Storage::disk('public')->url(app('models_upload_path').e($this->model->image));
         }
         return false;
     }
@@ -1145,6 +1171,26 @@ class Asset extends Depreciable
             foreach (CustomField::all() as $field) {
                 $query->orWhere('assets.'.$field->db_column_name(), 'LIKE', "%$search%");
             }
+        })->withTrashed()->whereNull("assets.deleted_at"); //workaround for laravel bug
+    }
+
+    /**
+     * Query builder scope to search the department ID of users assigned to assets
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @return string | false
+     *
+     * @return \Illuminate\Database\Query\Builder Modified query builder
+     */
+    public function scopeCheckedOutToTargetInDepartment($query, $search)
+    {
+        return $query->leftJoin('users as assets_dept_users',function ($leftJoin) {
+            $leftJoin->on("assets_dept_users.id", "=", "assets.assigned_to")
+                ->where("assets.assigned_type", "=", User::class);
+        })->where(function ($query) use ($search) {
+                    $query->where('assets_dept_users.department_id', '=', $search);
+
         })->withTrashed()->whereNull("assets.deleted_at"); //workaround for laravel bug
     }
 

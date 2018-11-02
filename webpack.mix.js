@@ -12,14 +12,19 @@ mix
   .less("./resources/assets/less/app.less", "css/build")
   .styles(
     [
+      "./node_modules/bootstrap/dist/css/bootstrap.css",
+      "./node_modules/font-awesome/css/font-awesome.css",
       "./node_modules/select2/dist/css/select2.css",
       "./public/css/build/AdminLTE.css",
+      "./node_modules/jquery-ui-dist/jquery-ui.css",
       "./node_modules/admin-lte/plugins/iCheck/minimal/blue.css",
-      "./node_modules/font-awesome/css/font-awesome.css",
       "./node_modules/icheck/skins/minimal/minimal.css",
       "./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css",
       "./node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css",
-      "./public/css/build/app.css",
+      "./node_modules/blueimp-file-upload/css/jquery.fileupload.css",
+      "./node_modules/blueimp-file-upload/css/jquery.fileupload-ui.css",
+      "./node_modules/ekko-lightbox/dist/ekko-lightbox.css",
+      "./public/css/build/app.css"
     ],
     "./public/css/all.css"
   );
@@ -28,11 +33,13 @@ mix
  * Copy, minify and version skins
  */
 mix.copyDirectory("./resources/assets/css/skins", "./public/css/skins");
-mix.minify([
-  "./public/css/skins/skin-green-dark.css",
-  "./public/css/skins/skin-orange-dark.css",
-  "./public/css/skins/skin-red-dark.css"
-]).version();
+mix
+  .minify([
+    "./public/css/skins/skin-green-dark.css",
+    "./public/css/skins/skin-orange-dark.css",
+    "./public/css/skins/skin-red-dark.css"
+  ])
+  .version();
 /**
  * Copy, minify and version signature-pad.css
  */
@@ -41,50 +48,39 @@ mix
   .minify("./public/css/signature-pad.css")
   .version();
 
-/**
- * Copy image for iCheck
- */
-mix.copyDirectory(
-  "./node_modules/admin-lte/plugins/iCheck/minimal/blue*.png",
-  "./public/css"
+// Combine main SnipeIT JS files
+mix.js(
+  [
+    "./resources/assets/js/vue.js",
+    "./resources/assets/js/snipeit.js", //this is the actual Snipe-IT JS
+    "./resources/assets/js/snipeit_modals.js"
+  ],
+  "./public/js/app.js"
 );
 
 /**
- * Copy Fontawesome fonts to public fonts directory
+ * Combine JS
  */
-mix.copyDirectory("./node_modules/font-awesome/fonts", "./public/fonts");
-
-// jQuery is loaded from vue.js webpack process
-// This compiles the vue.js file in the build directory
-// for later concatenation in the scripts() section below.
 mix
-  .js(
-    "resources/assets/js/vue.js", // Snipe-IT's initializer for Vue.js
-    "./public/js/build"
-  )
-  .sourceMaps()
-  .scripts(
+  .combine(
     [
-      "./node_modules/jquery-ui/jquery-ui.js",
-      "./public/js/build/vue.js", //this is the modularized nifty Vue.js thing we just built, above!
-      "./node_modules/tether/dist/js/tether.min.js",
+      "./node_modules/admin-lte/dist/js/adminlte.min.js",
+      "./node_modules/tether/dist/js/tether.js",
       "./node_modules/jquery-slimscroll/jquery.slimscroll.js",
       "./node_modules/jquery.iframe-transport/jquery.iframe-transport.js",
       "./node_modules/blueimp-file-upload/js/jquery.fileupload.js",
       "./node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js",
       "./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js",
-      "./node_modules/icheck/icheck.js",
       "./node_modules/ekko-lightbox/dist/ekko-lightbox.js",
-      "./resources/assets/js/app.js", //this is part of AdminLTE
-      "./resources/assets/js/snipeit.js", //this is the actual Snipe-IT JS
-      "./resources/assets/js/snipeit_modals.js"
+      "./node_modules/icheck/icheck.js",
+      "./resources/assets/js/extensions/pGenerator.jquery.js",
+      "./node_modules/chart.js/dist/Chart.js",
+      "./resources/assets/js/signature_pad.js",
+      "./node_modules/jquery-form-validator/form-validator/jquery.form-validator.js"
     ],
-    "./public/js/dist/all.js"
-  );
-
-mix.copy("./public/js/dist/all.js", "./public/js/build/all.js");
-
-mix.version();
+    "public/js/vendor.js"
+  )
+  .version();
 
 /**
  * Combine bootstrap table js

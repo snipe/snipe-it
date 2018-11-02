@@ -5,6 +5,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use Image;
 use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This controller handles all actions related to Companies for
@@ -142,6 +143,15 @@ final class CompaniesController extends Controller
         }
 
         try {
+
+            if ($company->image) {
+                try  {
+                    Storage::disk('public')->delete('companies'.'/'.$company->image);
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+                }
+            }
+
             $company->delete();
             return redirect()->route('companies.index')
                 ->with('success', trans('admin/companies/message.delete.success'));

@@ -5,6 +5,7 @@ use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Collection;
 use Gate;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Storage;
 
 class SuppliersTransformer
 {
@@ -25,7 +26,7 @@ class SuppliersTransformer
             $array = [
                 'id' => (int) $supplier->id,
                 'name' => e($supplier->name),
-                'image' =>   ($supplier->image) ? app('suppliers_upload_url').e($supplier->image) : null,
+                'image' =>   ($supplier->image) ? Storage::disk('public')->url('suppliers/'.e($supplier->image)) : null,
                 'url' => e($supplier->url),
                 'address' => ($supplier->address) ? e($supplier->address) : null,
                 'address2' => ($supplier->address2) ? e($supplier->address2) : null,

@@ -9,11 +9,6 @@
       <link rel="stylesheet" href="{{ mix('css/all.css') }}">
 
 
-
-
-
-
-
         <script nonce="{{ csrf_token() }}">
             window.snipeit = {
                 settings: {
@@ -119,7 +114,10 @@
                   </div>
               </div>
           </div>
-          <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+          
+        {{-- Javascript files --}}
+        <script src="{{ url(mix('js/app.js')) }}" nonce="{{ csrf_token() }}"></script>
+        <script src="{{ url(mix('js/vendor.js')) }}" nonce="{{ csrf_token() }}"></script>
 
         <script nonce="{{ csrf_token() }}">
             $(function () {

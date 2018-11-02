@@ -15,11 +15,11 @@ use Config;
 use Crypt;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Image;
 use Input;
 use Redirect;
 use Response;
-use View;
 
 /**
  * This controller handles all actions related to Settings for
@@ -267,7 +267,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $settings = Setting::all();
+        $settings = Setting::getSettings();
 
         return view('settings/index', compact('settings'));
     }
@@ -283,7 +283,7 @@ class SettingsController extends Controller
      */
     public function getEdit()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings/general', compact('setting'));
     }
@@ -299,7 +299,7 @@ class SettingsController extends Controller
      */
     public function getSettings()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings/general', compact('setting'));
     }
@@ -315,7 +315,7 @@ class SettingsController extends Controller
      */
     public function postSettings(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -326,7 +326,6 @@ class SettingsController extends Controller
         }
 
         $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
-        $setting->load_remote                     = $request->input('load_remote', '0');
         $setting->unique_serial                   = $request->input('unique_serial', '0');
         $setting->show_images_in_email            = $request->input('show_images_in_email', '0');
         $setting->show_archived_in_list           = $request->input('show_archived_in_list', '0');
@@ -370,7 +369,7 @@ class SettingsController extends Controller
      */
     public function getBranding()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.branding', compact('setting'));
     }
@@ -386,7 +385,7 @@ class SettingsController extends Controller
      */
     public function postBranding(ImageUploadRequest $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -408,24 +407,29 @@ class SettingsController extends Controller
 
         // If the user wants to clear the logo, reset the brand type
         if ('1' == $request->input('clear_logo')) {
+            Storage::disk('public')->delete($setting->logo);
             $setting->logo  = null;
             $setting->brand = 1;
 
         // If they are uploading an image, validate it and upload it
         } elseif ($request->hasFile('image')) {
-            if (! config('app.lock_passwords')) {
-                $image     = $request->file('image');
-                $file_name = 'logo.' . $image->getClientOriginalExtension();
-                $path      = public_path('uploads');
-                if ('svg' != $image->getClientOriginalExtension()) {
-                    Image::make($image->getRealPath())->resize(null, 150, function($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    })->save($path . '/' . $file_name);
-                } else {
-                    $image->move($path, $file_name);
-                }
-                $setting->logo = $file_name;
+            $image         = $request->file('image');
+            $ext           = $image->getClientOriginalExtension();
+            $setting->logo = $file_name = 'logo.' . $ext;
+
+            if ('svg' != $image->getClientOriginalExtension()) {
+                $upload = Image::make($image->getRealPath())->resize(null, 150, function($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            }
+
+            // This requires a string instead of an object, so we use ($string)
+            Storage::disk('public')->put($file_name, (string) $upload->encode());
+
+            // Remove Current image if exists
+            if (($setting->logo) && (file_exists($file_name))) {
+                Storage::disk('public')->delete($file_name);
             }
         }
 
@@ -448,7 +452,7 @@ class SettingsController extends Controller
      */
     public function getSecurity()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.security', compact('setting'));
     }
@@ -464,7 +468,7 @@ class SettingsController extends Controller
      */
     public function postSecurity(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -508,7 +512,7 @@ class SettingsController extends Controller
      */
     public function getLocalization()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.localization', compact('setting'));
     }
@@ -524,7 +528,7 @@ class SettingsController extends Controller
      */
     public function postLocalization(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -554,7 +558,7 @@ class SettingsController extends Controller
      */
     public function getAlerts()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.alerts', compact('setting'));
     }
@@ -570,7 +574,7 @@ class SettingsController extends Controller
      */
     public function postAlerts(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -607,7 +611,7 @@ class SettingsController extends Controller
      */
     public function getSlack()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.slack', compact('setting'));
     }
@@ -623,7 +627,7 @@ class SettingsController extends Controller
      */
     public function postSlack(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -650,7 +654,7 @@ class SettingsController extends Controller
      */
     public function getAssetTags()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.asset_tags', compact('setting'));
     }
@@ -666,7 +670,7 @@ class SettingsController extends Controller
      */
     public function postAssetTags(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -694,7 +698,7 @@ class SettingsController extends Controller
      */
     public function getBarcodes()
     {
-        $setting         = Setting::first();
+        $setting         = Setting::getSettings();
         $is_gd_installed = extension_loaded('gd');
 
         return view('settings.barcodes', compact('setting'))->with('is_gd_installed', $is_gd_installed);
@@ -711,7 +715,7 @@ class SettingsController extends Controller
      */
     public function postBarcodes(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -759,7 +763,7 @@ class SettingsController extends Controller
      */
     public function getLabels()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.labels', compact('setting'));
     }
@@ -775,7 +779,7 @@ class SettingsController extends Controller
      */
     public function postLabels(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
         $setting->labels_per_page             = $request->input('labels_per_page');
@@ -841,7 +845,7 @@ class SettingsController extends Controller
      */
     public function getLdapSettings()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.ldap', compact('setting'));
     }
@@ -857,7 +861,7 @@ class SettingsController extends Controller
      */
     public function postLdapSettings(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -865,7 +869,7 @@ class SettingsController extends Controller
         $setting->ldap_server             = $request->input('ldap_server');
         $setting->ldap_server_cert_ignore = $request->input('ldap_server_cert_ignore', false);
         $setting->ldap_uname              = $request->input('ldap_uname');
-        if (Input::has('ldap_pword')) {
+        if ($request->input('ldap_pword') !== '') {
             $setting->ldap_pword = Crypt::encrypt($request->input('ldap_pword'));
         }
         $setting->ldap_basedn            = $request->input('ldap_basedn');
@@ -905,22 +909,18 @@ class SettingsController extends Controller
     {
         $path = storage_path() . '/app/' . config('backup.backup.name');
 
-        $files = [];
+        $path         = 'backups';
+        $backup_files = Storage::files($path);
+        $files        = [];
 
-        if ($handle = opendir($path)) {
-            /* This is the correct way to loop over the directory. */
-            while (false !== ($entry = readdir($handle))) {
-                clearstatcache();
-                if ('zip' == substr(strrchr($entry, '.'), 1)) {
-                    $files[] = [
-                          'filename' => $entry,
-                          'filesize' => Setting::fileSizeConvert(filesize($path . '/' . $entry)),
-                          'modified' => filemtime($path . '/' . $entry),
-                      ];
-                }
+        if (count($backup_files) > 0) {
+            for ($f = 0; $f < count($backup_files); ++$f) {
+                $files[] = [
+                    'filename' => basename($backup_files[$f]),
+                    'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
+                    'modified' => Storage::lastModified($backup_files[$f]),
+                ];
             }
-            closedir($handle);
-            rsort($files);
         }
 
         return view('settings/backups', compact('path', 'files'));
@@ -972,10 +972,8 @@ class SettingsController extends Controller
     public function downloadFile($filename = null)
     {
         if (! config('app.lock_passwords')) {
-            $path = storage_path() . '/app/' . config('backup.backup.name');
-            $file = $path . '/' . $filename;
-            if (file_exists($file)) {
-                return Response::download($file);
+            if (Storage::exists($filename)) {
+                return Response::download(Storage::url('') . e($filename));
             } else {
                 // Redirect to the backup page
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
@@ -998,12 +996,16 @@ class SettingsController extends Controller
     public function deleteFile($filename = null)
     {
         if (! config('app.lock_passwords')) {
-            $path = storage_path() . '/app/' . config('backup.backup.name');
-            $file = $path . '/' . $filename;
-            if (file_exists($file)) {
-                unlink($file);
+            $path = 'backups';
 
-                return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
+            if (Storage::exists($path . '/' . $filename)) {
+                try {
+                    Storage::delete($path . '/' . $filename);
+
+                    return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+                }
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }

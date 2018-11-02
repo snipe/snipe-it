@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class UserPresenter
@@ -320,16 +321,20 @@ class UserPresenter extends Presenter
     {
 
         if ($this->avatar) {
-            return config('app.url').'/uploads/avatars/'.$this->avatar;
+            return Storage::disk('public')->url('avatars/'.$this->avatar, $this->avatar);
         }
 
-        if ((Setting::getSettings()->load_remote=='1') && ($this->email!='')) {
+        if ($this->email != '') {
+            /**
+             * @see https://en.gravatar.com/site/implement/images/
+             * Return a default [Myster Person] gravatar if the user does not have one
+             */
             $gravatar = md5(strtolower(trim($this->email)));
-            return "//gravatar.com/avatar/".$gravatar;
+            // return "//gravatar.com/avatar/".$gravatar.'?d=mp';
         }
 
-        // Set a fun, gender-neutral default icon
-        return url('/').'/img/default-sm.png';
+        // Set a fun, gender-neutral default icon when there is no email
+        return url('/img/default-sm.png');
 
     }
 

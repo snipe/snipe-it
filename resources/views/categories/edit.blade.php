@@ -1,8 +1,8 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/categories/general.create') ,
     'updateText' => trans('admin/categories/general.update'),
-    'helpTitle' =>  trans('admin/categories/general.about_categories_title'),
-    'helpText' => trans('admin/categories/general.about_categories'),
+    'helpPosition'  => 'right',
+    'helpText' => trans('help.categories'),
     'formAction' => ($item) ? route('categories.update', ['category' => $item->id]) : route('categories.store'),
 ])
 
@@ -79,7 +79,7 @@
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
         <div class="col-md-9">
             {{ Form::checkbox('image_delete') }}
-            <img src="{{ url('/') }}/uploads/categories/{{ $item->image }}" />
+            <img src="{{ Storage::disk('public')->url(app('categories_upload_path').e($item->image)) }}" class="img-responsive" />
             {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
         </div>
     </div>
