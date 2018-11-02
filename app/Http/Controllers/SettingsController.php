@@ -267,7 +267,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $settings = Setting::all();
+        $settings = Setting::getSettings();
 
         return view('settings/index', compact('settings'));
     }
@@ -283,7 +283,7 @@ class SettingsController extends Controller
      */
     public function getEdit()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings/general', compact('setting'));
     }
@@ -299,7 +299,7 @@ class SettingsController extends Controller
      */
     public function getSettings()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings/general', compact('setting'));
     }
@@ -315,7 +315,7 @@ class SettingsController extends Controller
      */
     public function postSettings(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -369,7 +369,7 @@ class SettingsController extends Controller
      */
     public function getBranding()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.branding', compact('setting'));
     }
@@ -385,7 +385,7 @@ class SettingsController extends Controller
      */
     public function postBranding(ImageUploadRequest $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -452,7 +452,7 @@ class SettingsController extends Controller
      */
     public function getSecurity()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.security', compact('setting'));
     }
@@ -468,7 +468,7 @@ class SettingsController extends Controller
      */
     public function postSecurity(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -512,7 +512,7 @@ class SettingsController extends Controller
      */
     public function getLocalization()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.localization', compact('setting'));
     }
@@ -528,7 +528,7 @@ class SettingsController extends Controller
      */
     public function postLocalization(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -558,7 +558,7 @@ class SettingsController extends Controller
      */
     public function getAlerts()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.alerts', compact('setting'));
     }
@@ -574,7 +574,7 @@ class SettingsController extends Controller
      */
     public function postAlerts(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -611,7 +611,7 @@ class SettingsController extends Controller
      */
     public function getSlack()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.slack', compact('setting'));
     }
@@ -627,7 +627,7 @@ class SettingsController extends Controller
      */
     public function postSlack(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -654,7 +654,7 @@ class SettingsController extends Controller
      */
     public function getAssetTags()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.asset_tags', compact('setting'));
     }
@@ -670,7 +670,7 @@ class SettingsController extends Controller
      */
     public function postAssetTags(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -698,7 +698,7 @@ class SettingsController extends Controller
      */
     public function getBarcodes()
     {
-        $setting         = Setting::first();
+        $setting         = Setting::getSettings();
         $is_gd_installed = extension_loaded('gd');
 
         return view('settings.barcodes', compact('setting'))->with('is_gd_installed', $is_gd_installed);
@@ -715,7 +715,7 @@ class SettingsController extends Controller
      */
     public function postBarcodes(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -763,7 +763,7 @@ class SettingsController extends Controller
      */
     public function getLabels()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.labels', compact('setting'));
     }
@@ -779,7 +779,7 @@ class SettingsController extends Controller
      */
     public function postLabels(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
         $setting->labels_per_page             = $request->input('labels_per_page');
@@ -845,7 +845,7 @@ class SettingsController extends Controller
      */
     public function getLdapSettings()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.ldap', compact('setting'));
     }
@@ -861,7 +861,7 @@ class SettingsController extends Controller
      */
     public function postLdapSettings(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -869,7 +869,7 @@ class SettingsController extends Controller
         $setting->ldap_server             = $request->input('ldap_server');
         $setting->ldap_server_cert_ignore = $request->input('ldap_server_cert_ignore', false);
         $setting->ldap_uname              = $request->input('ldap_uname');
-        if (Input::has('ldap_pword')) {
+        if ($request->input('ldap_pword') !== '') {
             $setting->ldap_pword = Crypt::encrypt($request->input('ldap_pword'));
         }
         $setting->ldap_basedn            = $request->input('ldap_basedn');
