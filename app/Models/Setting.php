@@ -103,12 +103,17 @@ class Setting extends Model
      *
      * @since 5.0.0
      *
-     * @return \App\Models\Setting
+     * @return \App\Models\Setting|null
      */
-    public static function getSettings()
+    public static function getSettings(): ?Setting
     {
         return Cache::rememberForever(self::APP_SETTINGS_KEY, function () {
-            return self::first();
+            // Need for setup as no tables exist
+            try {
+                return self::first();
+            } catch (\Throwable $th) {
+                return null;
+            }
         });
     }
 
