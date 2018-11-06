@@ -156,8 +156,8 @@ class PredefinedKitsController extends Controller
         }
 
         // Delete childs
-        $kit->models()->delete();
-        $kit->licenses()->delete();
+        $kit->models()->detach();
+        $kit->licenses()->detach();
         // Delete the kit
         $kit->delete();
 
@@ -225,7 +225,11 @@ class PredefinedKitsController extends Controller
     * @param int $modelId
     * @return View
     */
-    public function updateModel(Request $request, $kit_id) {
+    public function updateModel(Request $request, $kit_id, $model_id) {
+        // $r = $request->all();
+        // $r['__model_id'] = $model_id;
+        // $r['__kit_id'] = $kit_id;
+        // dd($r);
         $this->authorize('update', PredefinedKit::class);
         if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
@@ -239,7 +243,18 @@ class PredefinedKitsController extends Controller
         //     $quantity = 1;
         // }
 
-        $validator = \Validator::make($request->all(), $kit->modelRules);
+        // $validator = \Validator::make($request->all(), $kit->modelRules);
+        $validator = \Validator::make($request->all(), $kit->makeModelRules($model_id));
+        // $pivot_id = $request->input('pivot_id');
+        // $kit->models()->wherePivot('id', '!=', $pivot_id)
+        //     ->wherePivot('id', '!=', $pivot_id)
+            // ->first()->pivot;
+        // $validator->after(function ($validator) use($kit) {
+            
+        //     // if ($this->somethingElseIsInvalid()) {
+        //     //     $validator->errors()->add('field', 'Something is wrong with this field!');
+        //     // }
+        // });
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
         }
@@ -279,7 +294,7 @@ class PredefinedKitsController extends Controller
         $kit->models()->detach($model_id);
         
         // Redirect to the kit management page
-        return redirect()->route('kits.index')->with('success', 'Kit was successfully deleted'); // TODO: trans
+        return redirect()->route('kits.edit', $kit_id)->with('success', 'Model was successfully detached'); // TODO: trans
     }
 
 

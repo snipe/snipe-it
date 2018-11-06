@@ -202,7 +202,7 @@ class PredefinedKitsController extends Controller
          }
          $kit->licenses()->sync([$license_id => ['quantity' =>  $quantity]]);
  
-         return response()->json(Helper::formatStandardApiResponse('success', null, 'License updated'));  // TODO: trans
+         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License updated'));  // TODO: trans
      }
 
      /**
@@ -213,13 +213,13 @@ class PredefinedKitsController extends Controller
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
-    public function destroyLicense($kit_id, $license_id)
+    public function detachLicense($kit_id, $license_id)
     {
         $this->authorize('update', PredefinedKit::class);
         $kit = PredefinedKit::findOrFail($id);
 
         $kit->licenses()->detach($license_id);
-        return response()->json(Helper::formatStandardApiResponse('success', null,  'Delete was successfull'));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
     }
     
     /**
@@ -249,18 +249,23 @@ class PredefinedKitsController extends Controller
      {
         //return response()->json(Helper::formatStandardApiResponse('error', 'string11', dd($request)));     // TODO: trans
 
-         $this->authorize('update', PredefinedKit::class);
-         
-         $kit = PredefinedKit::findOrFail($kit_id);        
-         
-         $quantity = $request->input('quantity', 1);
-         if( $quantity < 1) {
-             $quantity = 1;
-         }
-         //echo $request->get('model');
-         $kit->models()->attach( $request->get('model'), ['quantity' => $quantity]);
-         
-         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Model added successfull'));     // TODO: trans
+        $this->authorize('update', PredefinedKit::class);
+        
+        $kit = PredefinedKit::findOrFail($kit_id);        
+        
+        $model_id = $request->get('model');
+        $quantity = $request->input('quantity', 1);
+        if( $quantity < 1) {
+            $quantity = 1;
+        }
+        //echo $request->get('model');
+        $relation = $kit->models();
+        if( $relation->find($model_id) ) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Model already exists'));
+        }
+        $relation->attach($model_id, ['quantity' => $quantity]);
+        
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Model added successfull'));     // TODO: trans
     }
 
     /**
@@ -280,9 +285,9 @@ class PredefinedKitsController extends Controller
          if( $quantity < 1) {
              $quantity = 1;
          }
-         $kit->models()->sync([$model_id => ['quantity' =>  $quantity]]);
+         $kit->models()->syncWithoutDetaching([$model_id => ['quantity' =>  $quantity]]);
  
-         return response()->json(Helper::formatStandardApiResponse('success', null, 'License updated'));  // TODO: trans
+         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License updated'));  // TODO: trans
      }
 
      /**
@@ -293,12 +298,12 @@ class PredefinedKitsController extends Controller
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
-    public function destroyModel($kit_id, $model_id)
+    public function detachModel($kit_id, $model_id)
     {
         $this->authorize('update', PredefinedKit::class);
         $kit = PredefinedKit::findOrFail($id);
 
         $kit->models()->detach($model_id);
-        return response()->json(Helper::formatStandardApiResponse('success', null,  'Delete was successfull'));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
     }
 }

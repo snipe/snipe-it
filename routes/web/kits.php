@@ -57,6 +57,7 @@ Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function
         [
             'as' => 'kits.models.update',
             'uses' => 'Kits\PredefinedKitsController@updateModel',
+            'parameters' => [2 => 'kit_id', 1 => 'model_id']
         ]
     );
   
@@ -64,6 +65,7 @@ Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function
         [
             'as' => 'kits.models.edit',
             'uses' => 'Kits\PredefinedKitsController@editModel',
+            
         ]
     );
 

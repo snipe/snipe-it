@@ -8,6 +8,7 @@ use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Validation\Rule;
 
 /**
  * Model for Categories. Categories are a higher-level group
@@ -34,9 +35,27 @@ class PredefinedKit extends SnipeModel
 
     public $modelRules = [
         'model_id' => 'required|exists:models,id',
+        // 'model_id' => [
+        //     'required',
+        //     'exists:models,id',
+        //     Rule::unique('kits_models')->where('model_id', $model_id)->whereNot('kit_id', $this->id)
+        // ],
         'quantity' => 'required|integer|min:1',
         'pivot_id' => 'integer|exists:kits_models,id'
     ];
+
+    public function makeModelRules($model_id) {
+        return [
+            // 'model_id' => 'required|exists:models,id',
+            'model_id' => [
+                'required',
+                'exists:models,id',
+                Rule::unique('kits_models')->whereNot('model_id', $model_id)->where('kit_id', $this->id)
+            ],
+            'quantity' => 'required|integer|min:1',
+            'pivot_id' => 'integer|exists:kits_models,id'
+        ];
+    }
 
     public $licenseRules = [
         'license_id' => 'required|exists:licenses,id',
@@ -83,6 +102,11 @@ class PredefinedKit extends SnipeModel
         return $this->belongsToMany('\App\Models\AssetModel', 'kits_models', 'kit_id', 'model_id')->withPivot('id', 'quantity');
     }
 
+    public function assets()
+    {
+        return $this->hasManyThrough('\App\Models\Asset', '\App\Models\AssetModel', 'country_id', 'user_id');
+    }
+
     /**
      * Establishes the kits -> licenses relationship
      *
@@ -96,6 +120,9 @@ class PredefinedKit extends SnipeModel
     }
 
 
+    public function applyToUser(User $user) {
+        $models = $this->models();
+    }
 
     /**
      * -----------------------------------------------

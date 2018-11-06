@@ -794,7 +794,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         Route::delete('licenses/{license_id}', 
             [
                 'as' => 'api.kits.licenses.destroy',
-                'uses' => 'PredefinedKitsController@destroyLicense',
+                'uses' => 'PredefinedKitsController@detachLicense',
             ]
         );
         
@@ -823,7 +823,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         Route::delete('models/{model_id}', 
             [
                 'as' => 'api.kits.models.destroy',
-                'uses' => 'PredefinedKitsController@destroyModel',
+                'uses' => 'PredefinedKitsController@detachModel',
             ]
         );
 
