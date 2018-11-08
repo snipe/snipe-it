@@ -266,6 +266,7 @@ abstract class Importer
         $user_array = [
             'full_name' => $this->findCsvMatch($row, "full_name"),
             'email'     => $this->findCsvMatch($row, "email"),
+            'manager_id'=>  $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name')) ? $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name')) : null,
             'username'  => $this->findCsvMatch($row, "username"),
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
         ];
