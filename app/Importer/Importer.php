@@ -4,6 +4,7 @@ namespace App\Importer;
 use App\Models\CustomField;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Department;
 use ForceUTF8\Encoding;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -266,8 +267,8 @@ abstract class Importer
         $user_array = [
             'full_name' => $this->findCsvMatch($row, "full_name"),
             'email'     => $this->findCsvMatch($row, "email"),
-            'manager_id'=>  $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name')) ? $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name')) : null,
-            'department_id' =>  $this->createOrFetchDepartment($this->findCsvMatch($row, 'department')) ? $this->createOrFetchDepartment($this->findCsvMatch($row, 'department')) : null,
+            'manager_id'=>  '',
+            'department_id' =>  '',
             'username'  => $this->findCsvMatch($row, "username"),
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
         ];
