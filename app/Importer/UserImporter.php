@@ -47,7 +47,7 @@ class UserImporter extends ItemImporter
         $this->item['email'] = $this->findCsvMatch($row, 'email');
         $this->item['phone'] = $this->findCsvMatch($row, 'phone_number');
         $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
-        $this->item['activated'] =  $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated'));
+        $this->item['activated'] =  ($this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')) == 1) ? '1' : 0;
 
         \Log::debug('UserImporter.php Activated: '.$this->findCsvMatch($row, 'activated'));
         \Log::debug('UserImporter.php Activated fetchHumanBoolean: '. $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')));
