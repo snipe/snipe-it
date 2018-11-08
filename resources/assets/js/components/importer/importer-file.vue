@@ -138,6 +138,7 @@ tr {
                         {id: 'serial', text: 'Serial Number' },
                         {id: 'supplier', text: 'Supplier' },
                         {id: 'username', text: 'Username' },
+                        {id: 'department', text: 'Department' },
                     ],
                     assets: [
                         {id: 'asset_tag', text: 'Asset Tag' },
@@ -170,7 +171,6 @@ tr {
                         {id: 'phone_number', text: 'Phone Number' },
                         {id: 'manager_first_name', text: 'Manager First Name' },
                         {id: 'manager_last_name', text: 'Manager Last Name' },
-                        {id: 'department', text: 'Department' },
                         {id: 'activated', text: 'Activated' },
 
                     ],
