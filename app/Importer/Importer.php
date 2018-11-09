@@ -4,6 +4,7 @@ namespace App\Importer;
 use App\Models\CustomField;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Department;
 use ForceUTF8\Encoding;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -266,6 +267,8 @@ abstract class Importer
         $user_array = [
             'full_name' => $this->findCsvMatch($row, "full_name"),
             'email'     => $this->findCsvMatch($row, "email"),
+            'manager_id'=>  '',
+            'department_id' =>  '',
             'username'  => $this->findCsvMatch($row, "username"),
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
         ];
@@ -291,6 +294,7 @@ abstract class Importer
         $user_formatted_array = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $user_array['full_name']);
         $user_array['first_name'] = $user_formatted_array['first_name'];
         $user_array['last_name'] = $user_formatted_array['last_name'];
+
         if (empty($user_array['username'])) {
             $user_array['username'] = $user_formatted_array['username'];
             if ($this->usernameFormat =='email') {
@@ -443,5 +447,56 @@ abstract class Importer
             return '1';
         }
         return '0';
+    }
+
+    /**
+     * Fetch an existing department, or create new if it doesn't exist
+     *
+     * @author A. Gianotto
+     * @since 4.6.5
+     * @param $user_department string
+     * @return int id of company created/found
+     */
+    public function createOrFetchDepartment($user_department_name)
+    {
+        if ($user_department_name!='') {
+            $department = Department::where('name', '=', $user_department_name)->first();
+
+            if ($department) {
+                $this->log('A matching Department ' . $user_department_name . ' already exists');
+                return $department->id;
+            }
+
+            $department = new Department();
+            $department->name = $user_department_name;
+
+            if ($department->save()) {
+                $this->log('Department ' . $user_department_name . ' was created');
+                return $department->id;
+            }
+            $this->logError($department, 'Department');
+        }
+
+        return null;
+    }
+
+    /**
+     * Fetch an existing manager
+     *
+     * @author A. Gianotto
+     * @since 4.6.5
+     * @param $user_manager string
+     * @return int id of company created/found
+     */
+    public function fetchManager($user_manager_first_name, $user_manager_last_name)
+    {
+        $manager = User::where('first_name', '=', $user_manager_first_name)
+            ->where('last_name', '=', $user_manager_last_name)->first();
+        if ($manager) {
+            $this->log('A matching Manager ' . $user_manager_first_name . ' '. $user_manager_last_name . ' already exists');
+            return $manager->id;
+        }
+        $this->log('No matching Manager ' . $user_manager_first_name . ' '. $user_manager_last_name . ' found. If their user account is being created through this import, you should re-process this file again. ');
+        return null;
     }
 }
