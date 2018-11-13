@@ -35,6 +35,16 @@ class PredefinedKitPresenter extends Presenter
         ];
 
         $layout[] = [
+            "field" => "checkincheckout",
+            "searchable" => false,
+            "sortable" => false,
+            "switchable" => true,
+            "title" => trans('general.checkin').'/'.trans('general.checkout'),
+            "visible" => true,
+            "formatter" => "kitsInOutFormatter",
+        ];
+
+        $layout[] = [
             "field" => "actions",
             "searchable" => false,
             "sortable" => false,

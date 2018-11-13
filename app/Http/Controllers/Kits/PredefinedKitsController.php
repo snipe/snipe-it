@@ -39,8 +39,7 @@ class PredefinedKitsController extends Controller
      */
     public function create()
     {
-        //$this->authorize('create', PredefinedKit::class);
-
+        $this->authorize('create', PredefinedKit::class);
         return view('kits/create')->with('item', new PredefinedKit);
     }
 
@@ -53,17 +52,15 @@ class PredefinedKitsController extends Controller
     */
     public function store(ImageUploadRequest $request)
     {
-        //$this->authorize('create', AssetModel::class);
+        $this->authorize('create', PredefinedKit::class);
         // Create a new Predefined Kit
         $kit = new PredefinedKit;
-
-        // Save the model data
         $kit->name                = $request->input('name');
 
         if(!$kit->save()) {
             return redirect()->back()->withInput()->withErrors($kit->getErrors());
         }
-
+        // METODO: удалить
         $model_ids = $request->input('models');
         if (!is_array($model_ids)) {
             $model_ids = [];
@@ -226,52 +223,25 @@ class PredefinedKitsController extends Controller
     * @return View
     */
     public function updateModel(Request $request, $kit_id, $model_id) {
-        // $r = $request->all();
-        // $r['__model_id'] = $model_id;
-        // $r['__kit_id'] = $kit_id;
-        // dd($r);
+
         $this->authorize('update', PredefinedKit::class);
         if (is_null($kit = PredefinedKit::find($kit_id))) {
             // Redirect to the kits management page
             return redirect()->route('kits.index')->with('error','Kit does not exist');      // TODO: trans
         }
-        //return view('kits/create-model')->with('item', $kit);
- 
-        
-        // $quantity = $request->input('quantity', 1);
-        // if( $quantity < 1) {
-        //     $quantity = 1;
-        // }
 
-        // $validator = \Validator::make($request->all(), $kit->modelRules);
         $validator = \Validator::make($request->all(), $kit->makeModelRules($model_id));
-        // $pivot_id = $request->input('pivot_id');
-        // $kit->models()->wherePivot('id', '!=', $pivot_id)
-        //     ->wherePivot('id', '!=', $pivot_id)
-            // ->first()->pivot;
-        // $validator->after(function ($validator) use($kit) {
-            
-        //     // if ($this->somethingElseIsInvalid()) {
-        //     //     $validator->errors()->add('field', 'Something is wrong with this field!');
-        //     // }
-        // });
+
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
         }
-        // $kit->models()->sync([$request->input('model_id') => ['quantity' =>  $request->input('quantity')]]);
-        // $kit->models()->updateExistingPivot($request->input('pivot_id'), ['model_id' => $request->input('model_id'), 'quantity' =>  $request->input('quantity')]);
-        // $s = [$request->input('pivot_id') => ['model_id' => $request->input('model_id'), 'quantity' =>  $request->input('quantity')]];
-        //dd($s);
-        // $changes = $kit->models()->syncWithoutDetaching([$request->input('pivot_id') => ['model_id' => $request->input('model_id'), 'quantity' =>  $request->input('quantity')]]);
-        // $changes = $kit->models()->syncWithoutDetaching(['1' => ['model_id' => '2', 'quantity' =>  '35']]);
+
         $pivot = $kit->models()->wherePivot('id', $request->input('pivot_id'))->first()->pivot;
-        // $pivot = $kit->models()->newPivotStatement()->find('1');
-        // $ret = $kit->models()->newPivotStatement()->find('1');
+
         $pivot->model_id = $request->input('model_id');
         $pivot->quantity = $request->input('quantity');
         $pivot->save();
         
-        // return $this->edit($kit_id)->with('success', 'Model updated successfully.');
         return redirect()->route('kits.edit', $kit_id)->with('success', 'Model updated successfully.');     // TODO: trans
     }
 

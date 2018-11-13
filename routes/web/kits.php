@@ -76,4 +76,17 @@ Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function
         ]
     );
 
+    Route::get('checkout',
+        [
+            'as' => 'kits.checkout.show',
+            'uses' => 'Kits\CheckoutKitController@showCheckout',
+        ]
+    );
+
+    Route::post('checkout',
+        [
+            'as' => 'kits.checkout.store',
+            'uses' => 'Kits\CheckoutKitController@store',
+        ]
+    );
 }); // kits
