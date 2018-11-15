@@ -104,6 +104,7 @@ class License extends Depreciable
     protected $searchableRelations = [
       'manufacturer' => ['name'],
       'company'      => ['name'],
+      'category'     => ['name'],
     ];
 
     /**
