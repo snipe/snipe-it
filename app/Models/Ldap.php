@@ -77,7 +77,8 @@ class Ldap extends Model
         $connection = Ldap::connectToLdap();
         $ldap_username_field     = $settings->ldap_username_field;
         $baseDn      = $settings->ldap_basedn;
-        $userDn      = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
+        $userDn      = '';
+        $filterQuery = $settings->ldap_auth_filter_query . $username;
 
         if ($settings->is_ad =='1') {
             // Check if they are using the userprincipalname for the username field.
@@ -86,15 +87,25 @@ class Ldap extends Model
                 $userDn = $username;
             } else {
                 // In case they haven't added an AD domain
-                    $userDn  = ($settings->ad_domain != '') ?  $username.'@'.$settings->ad_domain : $username.'@'.$settings->email_domain;
+                $userDn  = ($settings->ad_domain != '') ?  $username.'@'.$settings->ad_domain : $username.'@'.$settings->email_domain;
             }
 
+        } else {
+            // bind anonymously, search for user by filter and get dn
+            if (!$ldapbind = @ldap_bind($connection)) {
+                return false;
+            }
+            if (!$results = ldap_search($connection, $baseDn, $filterQuery)) {
+                throw new Exception('Could not search LDAP: ');
+            }
+            if (!$entry = ldap_first_entry($connection, $results)) {
+                return false;
+            }
+            $userDn = ldap_get_dn($connection, $entry);
         }
 
+
         \Log::debug('Attempting to login using distinguished name:'.$userDn);
-
-
-        $filterQuery = $settings->ldap_auth_filter_query . $username;
 
         if (!$ldapbind = @ldap_bind($connection, $userDn, $password)) {
             return false;
@@ -112,7 +123,7 @@ class Ldap extends Model
             return false;
         }
 
-        return array_change_key_case($user);
+        return $user;
 
     }
 
