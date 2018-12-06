@@ -173,7 +173,7 @@ class ReportsController extends Controller
             if ($asset->location) {
                 $currency = e($asset->location->currency);
             } else {
-                $currency = e(Setting::first()->default_currency);
+                $currency = e(Setting::getSettings()->default_currency);
             }
 
             $row[] = $asset->purchase_date;
@@ -498,6 +498,11 @@ class ReportsController extends Controller
 
             if ($request->filled('by_category_id')) {
                 $assets->InCategory($request->input('by_category_id'));
+            }
+
+            if ($request->filled('by_dept_id')) {
+                \Log::debug('Only users in dept '.$request->input('by_dept_id'));
+                $assets->CheckedOutToTargetInDepartment($request->input('by_dept_id'));
             }
 
             if ($request->filled('by_manufacturer_id')) {
