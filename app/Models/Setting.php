@@ -6,7 +6,6 @@ use Parsedown;
 use App\Events\SettingSaved;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
-use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Watson\Validating\ValidatingTrait;
