@@ -100,7 +100,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'userloc'    => ['name'],
         'department' => ['name'],
         'groups'     => ['name'],
-        'company'     => ['name'],
+        'company'    => ['name'],
         'manager'    => ['first_name', 'last_name', 'username']
     ];
 
