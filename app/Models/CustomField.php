@@ -20,7 +20,7 @@ class CustomField extends Model
      * 
      * @var array
      */
-    const PREDFINED_FORMATS = [
+    const PREDEFINED_FORMATS = [
             'ANY'           => '',
             'CUSTOM REGEX'  => '',
             'ALPHA'         => 'alpha',
@@ -253,7 +253,7 @@ class CustomField extends Model
      */
     public function getFormatAttribute($value)
     {
-        foreach (self::PREDFINED_FORMATS as $name => $pattern) {
+        foreach (self::PREDEFINED_FORMATS as $name => $pattern) {
             if ($pattern === $value || $name === $value) {
                 return $name;
             }
@@ -270,8 +270,8 @@ class CustomField extends Model
      */
     public function setFormatAttribute($value)
     {
-        if (isset(self::PREDFINED_FORMATS[$value])) {
-            $this->attributes['format']=self::PREDFINED_FORMATS[$value];
+        if (isset(self::PREDEFINED_FORMATS[$value])) {
+            $this->attributes['format']=self::PREDEFINED_FORMATS[$value];
         } else {
             $this->attributes['format']=$value;
         }
@@ -359,7 +359,7 @@ class CustomField extends Model
                 Rule::in(['text', 'listbox'])
             ],
             'format' => [
-                Rule::in(array_merge(array_keys(CustomField::PREDFINED_FORMATS), CustomField::PREDFINED_FORMATS))
+                Rule::in(array_merge(array_keys(CustomField::PREDEFINED_FORMATS), CustomField::PREDEFINED_FORMATS))
             ],
             'field_encrypted' => "nullable|boolean"
         ];

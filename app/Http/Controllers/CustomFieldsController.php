@@ -160,10 +160,13 @@ class CustomFieldsController extends Controller
 
         $this->authorize('update', $field);
 
-        // Check to see if there is a custom regex format type
+        /**
+         * Check to see if there is a custom regex format type
+         * @see https://github.com/snipe/snipe-it/issues/5896
+         */
         $field->format_type = $field->format;
-        if(stripos($field->format,'regex') === 0 && ($field->format !== CustomField::PREDFINED_FORMATS['MAC'])) {
-                $field->format_type = 'CUSTOM REGEX';
+        if(stripos($field->format,'regex') === 0 && ($field->format !== CustomField::PREDEFINED_FORMATS['MAC'])) {
+            $field->format_type = 'CUSTOM REGEX';
         }
 
         return view("custom_fields.fields.edit",[
@@ -197,7 +200,7 @@ class CustomFieldsController extends Controller
         $field->help_text = $request->get("help_text");
         $field->show_in_email = $request->get("show_in_email", 0);
 
-        if (!in_array(Input::get('format'), array_keys(CustomField::PREDFINED_FORMATS))) {
+        if (!in_array(Input::get('format'), array_keys(CustomField::PREDEFINED_FORMATS))) {
             $field->format = e($request->get("custom_format"));
         } else {
             $field->format = e($request->get("format"));
