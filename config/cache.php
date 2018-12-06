@@ -86,6 +86,6 @@ return [
     |
     */
 
-    'prefix' => 'snipeit',
+    'prefix' => env('CACHE_PREFIX', 'snipeit'),
 
 ];
