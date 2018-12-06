@@ -943,7 +943,7 @@ class SettingsController extends Controller
         $setting->custom_forgot_pass_url = $request->input('custom_forgot_pass_url');
 
         if ($setting->save()) {
-            return redirect()->route('settings.index')
+            return redirect()->route('settings.ldap.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }
 
