@@ -15,25 +15,30 @@ class CustomField extends Model
     use ValidatingTrait,
         UniqueUndeletedTrait;
 
+    /**
+     * Custom field predfined formats
+     * 
+     * @var array
+     */
+    const PREDEFINED_FORMATS = [
+            'ANY'           => '',
+            'CUSTOM REGEX'  => '',
+            'ALPHA'         => 'alpha',
+            'ALPHA-DASH'    => 'alpha_dash',
+            'NUMERIC'       => 'numeric',
+            'ALPHA-NUMERIC' => 'alpha_num',
+            'EMAIL'         => 'email',
+            'DATE'          => 'date',
+            'URL'           => 'url',
+            'IP'            => 'ip',
+            'IPV4'          => 'ipv4',
+            'IPV6'          => 'ipv6',
+            'MAC'           => 'regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/',
+            'BOOLEAN'       => 'boolean',
+        ];
+
     public $guarded = [
         "id"
-    ];
-
-    public static $PredefinedFormats = [
-        "ANY" => "",
-        "CUSTOM REGEX" => "",
-        "ALPHA" => "alpha",
-        "ALPHA-DASH" => "alpha_dash",
-        "NUMERIC" => "numeric",
-        "ALPHA-NUMERIC" => "alpha_num",
-        "EMAIL" => "email",
-        "DATE" => "date",
-        "URL" => "url",
-        "IP" => "ip",
-        "IPV4" => "ipv4",
-        "IPV6" => "ipv6",
-        "MAC" => "regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/",
-        "BOOLEAN" => "boolean",
     ];
 
     /**
@@ -248,11 +253,12 @@ class CustomField extends Model
      */
     public function getFormatAttribute($value)
     {
-        foreach (self::$PredefinedFormats as $name => $pattern) {
+        foreach (self::PREDEFINED_FORMATS as $name => $pattern) {
             if ($pattern === $value || $name === $value) {
                 return $name;
             }
         }
+
         return $value;
     }
 
@@ -265,8 +271,8 @@ class CustomField extends Model
      */
     public function setFormatAttribute($value)
     {
-        if (isset(self::$PredefinedFormats[$value])) {
-            $this->attributes['format']=self::$PredefinedFormats[$value];
+        if (isset(self::PREDEFINED_FORMATS[$value])) {
+            $this->attributes['format']=self::PREDEFINED_FORMATS[$value];
         } else {
             $this->attributes['format']=$value;
         }
@@ -354,9 +360,28 @@ class CustomField extends Model
                 Rule::in(['text', 'listbox'])
             ],
             'format' => [
-                Rule::in(array_merge(array_keys(CustomField::$PredefinedFormats), CustomField::$PredefinedFormats))
+                Rule::in(array_merge(array_keys(CustomField::PREDEFINED_FORMATS), CustomField::PREDEFINED_FORMATS))
             ],
             'field_encrypted' => "nullable|boolean"
         ];
+    }
+
+    /**
+     * Check to see if there is a custom regex format type
+     * @see https://github.com/snipe/snipe-it/issues/5896
+     * 
+     * @author Wes Hulette <jwhulette@gmail.com>    
+     * 
+     * @since 5.0.0
+     * 
+     * @return string
+     */
+    public function getFormatType()
+    {
+        if(stripos($this->format,'regex') === 0 && ($this->format !== self::PREDEFINED_FORMATS['MAC'])) {
+           return 'CUSTOM REGEX';
+        } 
+
+        return $this->format;
     }
 }
