@@ -38,12 +38,10 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      */
     protected function schedule(Schedule $schedule)
     {
-
         $schedule->command('snipeit:inventory-alerts')->daily();
         $schedule->command('snipeit:expiring-alerts')->daily();
         $schedule->command('snipeit:expected-checkin')->daily();
@@ -53,9 +51,7 @@ class Kernel extends ConsoleKernel
 
     /**
      * This method is required by Laravel to handle any console routes
-     * that are defined in routes/console.php
-     *
-     * @return void
+     * that are defined in routes/console.php.
      */
     protected function commands()
     {

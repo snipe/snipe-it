@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ ($snipeSettings) && ($snipeSettings->site_name) ? $snipeSettings->site_name : 'Snipe-IT' }}</title>
 
-
+    <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->favicon) : 'favicon.ico' }} ">
     {{-- stylesheets --}}
     <link rel="stylesheet" href="{{ mix('css/all.css') }}">
-    <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
+
 
 
     @if (($snipeSettings) && ($snipeSettings->header_color))

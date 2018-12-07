@@ -57,6 +57,18 @@
                         </div>
 
 
+
+                        <!-- Branding -->
+                        <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('brand', trans('admin/settings/general.brand')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), Input::old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                {!! $errors->first('brand', '<span class="alert-msg">:message</span>') !!}
+                            </div>
+                        </div>
+
                         <!-- Logo -->
 
                         <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
@@ -70,7 +82,10 @@
                                 </label>
                                 <span class='label label-default' id="upload-file-info"></span>
 
-                                <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }} {{ trans('general.logo_size') }}</p>
+                                <p class="help-block" id="upload-file-status">
+                                    {{ trans('general.logo_size') }}
+                                    {{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}
+                                </p>
                                 {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
 
                             </div>
@@ -87,17 +102,62 @@
                                 @endif
                         </div>
 
+                        <!-- Email Logo -->
+                        <div class="form-group {{ $errors->has('email_logo') ? 'has-error' : '' }}">
+                            <label class="col-md-3" for="image">
+                                {{ Form::label('email_logo', trans('admin/settings/general.email_logo')) }}</label>
 
-                        <!-- Branding -->
-                        <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
-                            <div class="col-md-3">
-                                {{ Form::label('brand', trans('admin/settings/general.brand')) }}
-                            </div>
                             <div class="col-md-9">
-                                {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), Input::old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
-                                {!! $errors->first('brand', '<span class="alert-msg">:message</span>') !!}
+                                <label class="btn btn-default">
+                                    {{ trans('button.select_file')  }}
+                                    <input type="file" name="email_logo" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none; max-width: 90%">
+                                </label>
+                                <span class='label label-default' id="email-upload-file-info"></span>
+
+                                <p class="help-block">
+                                    {{ trans('admin/settings/general.email_logo_size') }}
+                                    {{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }} </p>
+                                {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
+
                             </div>
+
+                            @if ($setting->email_logo!='')
+                                <div class="col-md-9 col-md-offset-3">
+
+                                    {{ Form::checkbox('clear_email_logo', '1', Input::old('clear_email_logo'),array('class' => 'minimal')) }} Remove current image
+
+                                </div>
+                            @endif
                         </div>
+
+                        <!-- Favicon -->
+                        <div class="form-group {{ $errors->has('favicon') ? 'has-error' : '' }}">
+                            <label class="col-md-3" for="image">
+                                {{ Form::label('favicon', trans('admin/settings/general.favicon')) }}</label>
+
+                            <div class="col-md-9">
+                                <label class="btn btn-default">
+                                    {{ trans('button.select_file')  }}
+                                    <input type="file" name="favicon" data-maxsize="1000" accept="image/x-icon,image/gif,image/jpeg,image/png,image/svg" style="display:none; max-width: 90%">
+                                </label>
+                                <span class='label label-default' id="favicon-upload-file-info"></span>
+
+                                <p class="help-block">{{ trans('admin/settings/general.favicon_size') }}
+                                    {{ trans('admin/settings/general.favicon_format') }} </p>
+                                {!! $errors->first('favicon', '<span class="alert-msg">:message</span>') !!}
+
+                            </div>
+
+                            @if ($setting->email_logo!='')
+                                <div class="col-md-9 col-md-offset-3">
+
+                                    {{ Form::checkbox('clear_favicon', '1', Input::old('clear_favicon'),array('class' => 'minimal')) }} Remove current favicon
+
+                                </div>
+                            @endif
+                        </div>
+
+
 
                         <!-- Include logo in print assets -->
                         <div class="form-group">
