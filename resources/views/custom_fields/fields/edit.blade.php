@@ -75,19 +75,18 @@
               {{ trans('admin/custom_fields/general.field_format') }}
             </label>
             <div class="col-md-6 required">
-              {{ Form::select("format",$predefinedFormats, $field->format_type, 
+              {{ Form::select("format",$predefinedFormats, $field->getFormatType(), 
                 array('class'=>'format select2 form-control')) }}
               {!! $errors->first('format', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
           </div>
-
           <!-- Custom Format -->
           <div class="form-group {{ $errors->has('custom_format') ? ' has-error' : '' }}" id="custom_regex" style="display:none;">
             <label for="custom_format" class="col-md-4 control-label">
               {{ trans('admin/custom_fields/general.field_custom_format') }}
             </label>
             <div class="col-md-6 required">
-                {{ Form::text('custom_format', Input::old('custom_format', $field->format), array('class' => 'form-control', 'id' => 'custom_format', 'placeholder'=>'regex:/^[0-9]{15}$/')) }}
+                {{ Form::text('custom_format', Input::old('custom_format', $customFormat), array('class' => 'form-control', 'id' => 'custom_format', 'placeholder'=>'regex:/^[0-9]{15}$/')) }}
                 <p class="help-block">{!! trans('admin/custom_fields/general.field_custom_format_help') !!}</p>
 
               {!! $errors->first('custom_format', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}

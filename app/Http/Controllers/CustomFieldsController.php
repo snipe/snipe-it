@@ -55,7 +55,9 @@ class CustomFieldsController extends Controller
     {
         $this->authorize('create', CustomField::class);
 
-        return view("custom_fields.fields.edit")->with('field', new CustomField());
+        return view("custom_fields.fields.edit",[
+            'predefinedFormats' => Helper::predefined_formats()
+        ])->with('field', new CustomField());
     }
 
 
@@ -160,17 +162,14 @@ class CustomFieldsController extends Controller
 
         $this->authorize('update', $field);
 
-        /**
-         * Check to see if there is a custom regex format type
-         * @see https://github.com/snipe/snipe-it/issues/5896
-         */
-        $field->format_type = $field->format;
-        if(stripos($field->format,'regex') === 0 && ($field->format !== CustomField::PREDEFINED_FORMATS['MAC'])) {
-            $field->format_type = 'CUSTOM REGEX';
+        $customFormat = '';
+        if((stripos($field->format, 'regex') === 0) && ($field->format !== CustomField::PREDEFINED_FORMATS['MAC'])) {
+            $customFormat = $field->format;
         }
 
         return view("custom_fields.fields.edit",[
             'field'             => $field,
+            'customFormat'      => $customFormat,
             'predefinedFormats' => Helper::predefined_formats()
         ]);
     }
@@ -190,17 +189,17 @@ class CustomFieldsController extends Controller
     public function update(CustomFieldRequest $request, $id)
     {
         $field =  CustomField::find($id);
-
+ 
         $this->authorize('update', $field);
 
-        $field->name = e($request->get("name"));
-        $field->element = e($request->get("element"));
-        $field->field_values = e($request->get("field_values"));
-        $field->user_id = Auth::id();
-        $field->help_text = $request->get("help_text");
+        $field->name          = e($request->get("name"));
+        $field->element       = e($request->get("element"));
+        $field->field_values  = e($request->get("field_values"));
+        $field->user_id       = Auth::id();
+        $field->help_text     = $request->get("help_text");
         $field->show_in_email = $request->get("show_in_email", 0);
 
-        if (!in_array(Input::get('format'), array_keys(CustomField::PREDEFINED_FORMATS))) {
+        if ($request->get('format') == 'CUSTOM REGEX') {
             $field->format = e($request->get("custom_format"));
         } else {
             $field->format = e($request->get("format"));

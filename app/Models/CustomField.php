@@ -258,6 +258,7 @@ class CustomField extends Model
                 return $name;
             }
         }
+
         return $value;
     }
 
@@ -363,5 +364,24 @@ class CustomField extends Model
             ],
             'field_encrypted' => "nullable|boolean"
         ];
+    }
+
+    /**
+     * Check to see if there is a custom regex format type
+     * @see https://github.com/snipe/snipe-it/issues/5896
+     * 
+     * @author Wes Hulette <jwhulette@gmail.com>    
+     * 
+     * @since 5.0.0
+     * 
+     * @return string
+     */
+    public function getFormatType()
+    {
+        if(stripos($this->format,'regex') === 0 && ($this->format !== self::PREDEFINED_FORMATS['MAC'])) {
+           return 'CUSTOM REGEX';
+        } 
+
+        return $this->format;
     }
 }
