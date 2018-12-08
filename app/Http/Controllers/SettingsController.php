@@ -433,6 +433,60 @@ class SettingsController extends Controller
             }
         }
 
+        // If the user wants to clear the email logo...
+        if ('1' == $request->input('clear_email_logo')) {
+            Storage::disk('public')->delete($setting->email_logo);
+            $setting->email_logo  = null;
+
+            // If they are uploading an image, validate it and upload it
+        } elseif ($request->hasFile('email_logo')) {
+            $email_image         = $request->file('email_logo');
+            $email_ext           = $image->getClientOriginalExtension();
+            $setting->email_logo = $email_file_name = 'email_logo.' . $email_ext;
+
+            if ('svg' != $email_image->getClientOriginalExtension()) {
+                $email_upload = Image::make($email_image->getRealPath())->resize(null, 100, function($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            }
+
+            // This requires a string instead of an object, so we use ($string)
+            Storage::disk('public')->put($email_file_name, (string) $email_upload->encode());
+
+            // Remove Current image if exists
+            if (($setting->email_logo) && (file_exists($email_file_name))) {
+                Storage::disk('public')->delete($email_file_name);
+            }
+        }
+
+        // If the user wants to clear the favicon...
+        if ('1' == $request->input('clear_favicon')) {
+            Storage::disk('public')->delete($setting->clear_favicon);
+            $setting->favicon  = null;
+
+            // If they are uploading an image, validate it and upload it
+        } elseif ($request->hasFile('favicon')) {
+            $favicon_image         = $request->file('favicon');
+            $favicon_ext           = $favicon_image->getClientOriginalExtension();
+            $setting->favicon       = $favicon_file_name = 'favicon.' . $favicon_ext;
+
+            if ('svg' != $favicon_image->getClientOriginalExtension()) {
+                $favicon_upload = Image::make($favicon_image->getRealPath())->resize(null, 16, function($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            }
+
+            // This requires a string instead of an object, so we use ($string)
+            Storage::disk('public')->put($favicon_file_name, (string) $favicon_upload->encode());
+
+            // Remove Current image if exists
+            if (($setting->favicon) && (file_exists($favicon_file_name))) {
+                Storage::disk('public')->delete($favicon_file_name);
+            }
+        }
+
         if ($setting->save()) {
             return redirect()->route('settings.index')
                 ->with('success', trans('admin/settings/message.update.success'));
@@ -889,7 +943,7 @@ class SettingsController extends Controller
         $setting->custom_forgot_pass_url = $request->input('custom_forgot_pass_url');
 
         if ($setting->save()) {
-            return redirect()->route('settings.index')
+            return redirect()->route('settings.ldap.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }
 
