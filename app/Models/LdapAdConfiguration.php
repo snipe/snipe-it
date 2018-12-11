@@ -81,7 +81,7 @@ class LdapAdConfiguration
                     return boolval($item);
                 }
                 // Decrypt the admin password
-                if ('ldap_pword' === $key) {
+                if (('ldap_pword' === $key) && ($item!='')) {
                     try {
                         return decrypt($item);
                     } catch (Exception $e) {
@@ -236,10 +236,13 @@ class LdapAdConfiguration
             })->toArray();
         }
 
-        $parts = explode('//', $this->ldapSettings['ldap_server']);
+        if ($this->ldapSettings['ldap_server']) {
+            $parts = explode('//', $this->ldapSettings['ldap_server']);
+            return [
+                $parts[1],
+            ];
+        }
 
-        return [
-            $parts[1],
-        ];
+        return [];
     }
 }
