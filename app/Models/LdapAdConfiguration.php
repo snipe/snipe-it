@@ -43,14 +43,16 @@ class LdapAdConfiguration
     public function __construct()
     {
         $this->ldapSettings = $this->getSnipeItLdapSettings();
-        $this->setSnipeItConfig();
+        if ($this->isLdapEnabled()) {
+            $this->setSnipeItConfig();
+        }
     }
 
     /**
      * Merge the default Adlap config with the SnipeIT config.
-     * 
+     *
      * @author Wes Hulette <jwhulette@gmail.com>
-     * 
+     *
      * @since 5.0.0
      */
     private function setSnipeItConfig()
@@ -65,7 +67,7 @@ class LdapAdConfiguration
      * @author Wes Hulette <jwhulette@gmail.com>
      *
      * @since 5.0.0
-     * 
+     *
      * @return \Illuminate\Support\Collection
      */
     private function getSnipeItLdapSettings(): Collection
@@ -80,13 +82,18 @@ class LdapAdConfiguration
                 if (in_array($key, self::LDAP_BOOLEAN_SETTINGS)) {
                     return boolval($item);
                 }
+
                 // Decrypt the admin password
-                if (('ldap_pword' === $key) && ($item!='')) {
+                if ('ldap_pword' === $key && !empty($item)) {
                     try {
                         return decrypt($item);
                     } catch (Exception $e) {
                         throw new Exception('Your app key has changed! Could not decrypt LDAP password using your current app key, so LDAP authentication has been disabled. Login with a local account, update the LDAP password and re-enable it in Admin > Settings.');
                     }
+                }
+
+                if ('ldap_server' === $key) {
+                    return collect(parse_url($item));
                 }
 
                 return $item;
@@ -122,7 +129,7 @@ class LdapAdConfiguration
      * @author Wes Hulette <jwhulette@gmail.com>
      *
      * @since 5.0.0
-     * 
+     *
      * @return array
      */
     private function setLdapConnectionConfiguration(): array
@@ -184,15 +191,10 @@ class LdapAdConfiguration
      */
     private function getPort(): int
     {
-        $ldapUrl = $this->ldapSettings['ldap_server'];
-        if ($ldapUrl) {
-            $port = parse_url($ldapUrl, PHP_URL_PORT);
-
-            if (is_int($port)) {
-                return $port;
-            }
+        $port = $this->getLdapServerData('port');
+        if ($port && is_int($port)) {
+            return $port;
         }
-
         return self::LDAP_PORT;
     }
 
@@ -207,15 +209,10 @@ class LdapAdConfiguration
      */
     private function isSsl(): bool
     {
-        if ($this->ldapSettings['ldap_server']) {
-            $scheme = explode('://', $this->ldapSettings['ldap_server']);
-            if ('ldap' === strtolower($scheme[0])) {
-                return false;
-            }
-
+        $scheme = $this->getLdapServerData('scheme');
+        if ($scheme && 'ldaps' === strtolower($scheme)) {
             return true;
         }
-
         return false;
     }
 
@@ -236,13 +233,43 @@ class LdapAdConfiguration
             })->toArray();
         }
 
-        if ($this->ldapSettings['ldap_server']) {
-            $parts = explode('//', $this->ldapSettings['ldap_server']);
-            return [
-                $parts[1],
-            ];
+        $url = $this->getLdapServerData('host');
+        return $url ? [$url] : [];
+    }
+
+    /**
+     * Get ldap enabled setting
+     *
+     * @author Steffen Buehl <sb@sbuehl.com>
+     *
+     * @since 5.0.0
+     *
+     * @return bool
+     */
+    protected function isLdapEnabled(): bool
+    {
+        return $this->ldapSettings && $this->ldapSettings->get('ldap_enabled');
+    }
+
+    /**
+     * Get parsed ldap server information
+     *
+     * @author Steffen Buehl <sb@sbuehl.com>
+     *
+     * @since 5.0.0
+     *
+     * @param $key
+     * @return mixed|null
+     */
+    protected function getLdapServerData($key)
+    {
+        if ($this->ldapSettings) {
+            $ldapServer = $this->ldapSettings->get('ldap_server');
+            if ($ldapServer && $ldapServer instanceof Collection) {
+                return $ldapServer->get($key);
+            }
         }
 
-        return [];
+        return null;
     }
 }
