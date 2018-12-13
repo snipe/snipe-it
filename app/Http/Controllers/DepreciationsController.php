@@ -34,7 +34,7 @@ class DepreciationsController extends Controller
         $this->authorize('view', Depreciation::class);
 
         // Show the page
-        return view('depreciations/index', compact('depreciations'));
+        return view('depreciations/index');
     }
 
 

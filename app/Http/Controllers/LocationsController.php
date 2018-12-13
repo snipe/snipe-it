@@ -44,7 +44,7 @@ class LocationsController extends Controller
         $locations = Location::orderBy('created_at', 'DESC')->with('parent', 'assets', 'assignedassets')->get();
 
         // Show the page
-        return view('locations/index', compact('locations'));
+        return view('locations/index');
     }
 
 

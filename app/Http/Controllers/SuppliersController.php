@@ -34,10 +34,9 @@ class SuppliersController extends Controller
     {
         // Grab all the suppliers
         $this->authorize('view', Supplier::class);
-        $suppliers = Supplier::orderBy('created_at', 'DESC')->get();
 
         // Show the page
-        return view('suppliers/index', compact('suppliers'));
+        return view('suppliers/index');
     }
 
 

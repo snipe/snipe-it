@@ -73,7 +73,7 @@ class ViewAssetsController extends Controller
         $assets = Asset::with('model', 'defaultLoc', 'location', 'assignedTo', 'requests')->Hardware()->RequestableAssets()->get();
         $models = AssetModel::with('category', 'requests', 'assets')->RequestableModels()->get();
 
-        return view('account/requestable-assets', compact('user', 'assets', 'models'));
+        return view('account/requestable-assets', compact('assets', 'models'));
     }
 
 
