@@ -612,8 +612,8 @@ class ReportsController extends Controller
 
 
                     if ($request->filled('assigned_to')) {
-                        $row[] = ($asset->checkedOutToUser() && $asset->assigned) ? e($asset->assigned->getFullNameAttribute()) : ($asset->assigned ? e($asset->assigned->display_name) : '');
-                        $row[] = ($asset->checkedOutToUser() && $asset->assigned) ? 'user' : e($asset->assignedType());
+                        $row[] = ($asset->checkedOutToUser() && $asset->assigned) ? $asset->assigned->getFullNameAttribute() : ($asset->assigned ? $asset->assigned->display_name : '');
+                        $row[] = ($asset->checkedOutToUser() && $asset->assigned) ? 'user' : $asset->assignedType();
                     }
 
                     if ($request->filled('username')) {
