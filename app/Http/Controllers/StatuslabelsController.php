@@ -25,7 +25,7 @@ class StatuslabelsController extends Controller
     public function index()
     {
         $this->authorize('view', Statuslabel::class);
-        return view('statuslabels.index', compact('statuslabels'));
+        return view('statuslabels.index');
     }
 
     public function show($id)
