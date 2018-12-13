@@ -92,7 +92,7 @@ class LdapAdConfiguration
                     }
                 }
 
-                if ('ldap_server' === $key) {
+                if (($item) && ('ldap_server' === $key)) {
                     return collect(parse_url($item));
                 }
 
