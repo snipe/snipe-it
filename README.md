@@ -64,6 +64,21 @@ As these were created by third-parties, Snipe-IT cannot provide support for thes
 
 -----
 
+### Contributing
+
+Please see the documentation on [contributing and developing for Snipe-IT](https://snipe-it.readme.io/docs/contributing-overview).
+
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+-----
+
+### Security
+
+To report a security vulnerability, please email security@snipeitapp.com instead of using the issue tracker. 
+
+-----
+
 ### Contributors
 
 Thanks goes to all of these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)) who have helped Snipe-IT get this far:
@@ -101,17 +116,3 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
 
------
-
-### Contributing
-
-Please see the documentation on [contributing and developing for Snipe-IT](https://snipe-it.readme.io/docs/contributing-overview).
-
-
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
-
------
-
-### Security
-
-To report a security vulnerability, please email security@snipeitapp.com instead of using the issue tracker. 
