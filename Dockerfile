@@ -4,16 +4,16 @@ MAINTAINER Brady Wetherington <uberbrady@gmail.com>
 RUN apt-get update && apt-get install -y \
 apache2 \
 apache2-bin \
-libapache2-mod-php7.0 \
-php7.0-curl \
-php7.0-ldap \
-php7.0-mysql \
-php7.0-mcrypt \
-php7.0-gd \
-php7.0-xml \
-php7.0-mbstring \
-php7.0-zip \
-php7.0-bcmath \
+libapache2-mod-php7.1.3 \
+php7.1.3-curl \
+php7.1.3-ldap \
+php7.1.3-mysql \
+php7.1.3-mcrypt \
+php7.1.3-gd \
+php7.1.3-xml \
+php7.1.3-mbstring \
+php7.1.3-zip \
+php7.1.3-bcmath \
 patch \
 curl \
 vim \
@@ -28,8 +28,8 @@ RUN phpenmod mcrypt
 RUN phpenmod gd
 RUN phpenmod bcmath
 
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.0/apache2/php.ini
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.0/cli/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.1.3/apache2/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.1.3/cli/php.ini
 
 RUN useradd -m --uid 1000 --gid 50 docker
 
