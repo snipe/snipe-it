@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 MAINTAINER Brady Wetherington <uberbrady@gmail.com>
 
 RUN apt-get update && apt-get install -y \
@@ -8,7 +8,6 @@ libapache2-mod-php7.2 \
 php7.2-curl \
 php7.2-ldap \
 php7.2-mysql \
-php7.2-mcrypt \
 php7.2-gd \
 php7.2-xml \
 php7.2-mbstring \
@@ -21,8 +20,23 @@ git \
 cron \
 mysql-client \
 cron \
+gcc \
+make \
+autoconf \
+libc-dev \
+pkg-config \
+libmcrypt-dev \
+php7.2-dev \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN curl -O http://pear.php.net/go-pear.phar
+RUN php go-pear.phar
+
+RUN pecl install mcrypt-1.0.1
+
+RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/cli/conf.d/mcrypt.ini"
+RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/apache2/conf.d/mcrypt.ini"
 
 RUN phpenmod mcrypt
 RUN phpenmod gd
