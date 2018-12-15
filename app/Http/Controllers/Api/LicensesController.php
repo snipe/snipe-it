@@ -235,8 +235,12 @@ class LicensesController extends Controller
             }
 
             $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-
             $total = $seats->count();
+
+            if($total < $offset){
+                $offset = 0;
+            }
+
             $seats = $seats->skip($offset)->take($limit)->get();
 
             if ($seats) {
