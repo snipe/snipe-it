@@ -225,8 +225,9 @@ class Helper
      */
     public static function predefined_formats()
     {
-        $keys = array_keys(CustomField::$PredefinedFormats);
+        $keys = array_keys(CustomField::PREDEFINED_FORMATS);
         $stuff = array_combine($keys, $keys);
+
         return $stuff;
     }
 

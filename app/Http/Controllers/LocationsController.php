@@ -31,10 +31,8 @@ class LocationsController extends Controller
     {
         // Grab all the locations
         $this->authorize('view', Location::class);
-        $locations = Location::orderBy('created_at', 'DESC')->with('parent', 'assets', 'assignedassets')->get();
-
         // Show the page
-        return view('locations/index', compact('locations'));
+        return view('locations/index');
     }
 
 
