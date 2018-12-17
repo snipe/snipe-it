@@ -53,8 +53,8 @@ class LdapAd extends LdapAdConfiguration
      */
     public function __construct()
     {
-        parent::__construct();
         if($this->isLdapEnabled()) {
+            parent::__construct();
             $this->ldap = new Adldap();
             $this->ldap->addProvider($this->ldapConfig);
         }
