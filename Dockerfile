@@ -1,35 +1,57 @@
-FROM ubuntu:xenial
-MAINTAINER Brady Wetherington <uberbrady@gmail.com>
+FROM ubuntu:bionic
+LABEL maintainer Brady Wetherington <uberbrady@gmail.com>
 
-RUN apt-get update && apt-get install -y \
+RUN export DEBIAN_FRONTEND=noninteractive; \
+    export DEBCONF_NONINTERACTIVE_SEEN=true; \
+    echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections; \
+    echo 'tzdata tzdata/Zones/Etc select UTC' | debconf-set-selections; \
+    apt-get update -qqy \
+ && apt-get install -qqy --no-install-recommends \
+apt-utils \
 apache2 \
 apache2-bin \
-libapache2-mod-php7.0 \
-php7.0-curl \
-php7.0-ldap \
-php7.0-mysql \
-php7.0-mcrypt \
-php7.0-gd \
-php7.0-xml \
-php7.0-mbstring \
-php7.0-zip \
-php7.0-bcmath \
+libapache2-mod-php7.2 \
+php7.2-curl \
+php7.2-ldap \
+php7.2-mysql \
+php7.2-gd \
+php7.2-xml \
+php7.2-mbstring \
+php7.2-zip \
+php7.2-bcmath \
 patch \
 curl \
+wget  \
 vim \
 git \
 cron \
 mysql-client \
 cron \
+gcc \
+make \
+autoconf \
+libc-dev \
+pkg-config \
+libmcrypt-dev \
+php7.2-dev \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+RUN curl -O http://pear.php.net/go-pear.phar
+RUN php go-pear.phar
+
+RUN pecl install mcrypt-1.0.1
+
+RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/cli/conf.d/mcrypt.ini"
+RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/apache2/conf.d/mcrypt.ini"
 
 RUN phpenmod mcrypt
 RUN phpenmod gd
 RUN phpenmod bcmath
 
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.0/apache2/php.ini
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.0/cli/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.2/apache2/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.2/cli/php.ini
 
 RUN useradd -m --uid 1000 --gid 50 docker
 
@@ -74,11 +96,11 @@ RUN \
 ############## DEPENDENCIES via COMPOSER ###################
 
 #global install of composer
-RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.phar /usr/local/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Get dependencies
 USER docker
-RUN cd /var/www/html;composer install && rm -rf /home/docker/.composer/cache
+RUN composer install --no-dev --working-dir=/var/www/html
 USER root
 
 ############### APPLICATION INSTALL/INIT #################
