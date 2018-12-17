@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Services;
 
+use App\Models\Setting;
 use Exception;
 use Illuminate\Support\Collection;
 
@@ -38,10 +39,11 @@ class LdapAdConfiguration
     public $ldapConfig;
 
     /**
-     * __construct.
+     * Initialize LDAP from user settings
+     *
+     * @since 5.0.0
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->ldapSettings = $this->getSnipeItLdapSettings();
         if ($this->isLdapEnabled()) {
             $this->setSnipeItConfig();
@@ -92,7 +94,7 @@ class LdapAdConfiguration
                     }
                 }
 
-                if (($item) && ('ldap_server' === $key)) {
+                if ('ldap_server' === $key) {
                     return collect(parse_url($item));
                 }
 
