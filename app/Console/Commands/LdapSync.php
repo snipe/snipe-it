@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Log;
+use App\Services\LdapAd;
+use Illuminate\Support\Facades\Log;
 use Exception;
-use App\Models\User;
-use App\Models\LdapAd;
 use App\Models\Location;
 use Illuminate\Console\Command;
 use Adldap\Models\User as AdldapUser;
@@ -49,13 +48,6 @@ class LdapSync extends Command
     private $ldap;
 
     /**
-     * LDAP settings collection.
-     *
-     * @var \Illuminate\Support\Collection
-     */
-    private $settings = null;
-
-    /**
      * A default location collection.
      *
      * @var \Illuminate\Support\Collection
@@ -92,13 +84,16 @@ class LdapSync extends Command
 
     /**
      * Create a new command instance.
+     *
+     * @param LdapAd $ldap
      */
     public function __construct(LdapAd $ldap)
     {
+
         parent::__construct();
-        $this->ldap     = $ldap;
-        $this->settings = $this->ldap->ldapSettings;
         $this->summary  = collect();
+
+        $this->ldap = $ldap;
     }
 
     /**
@@ -333,7 +328,7 @@ class LdapSync extends Command
      */
     private function checkIfLdapIsEnabled(): void
     {
-        if (false === $this->settings['ldap_enabled']) {
+        if (!$this->ldap->isLdapEnabled()) {
             $msg = 'LDAP intergration is not enabled. Exiting sync process.';
             $this->info($msg);
             Log::info($msg);

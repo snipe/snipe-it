@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Services\LdapAd;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -38,15 +39,23 @@ class LoginController extends Controller
     protected $redirectTo = '/';
 
     /**
+     * @var LdapAd
+     */
+    protected $ldap;
+
+    /**
      * Create a new authentication controller instance.
      *
+     * @param LdapAd $ldap
+     * 
      * @return void
      */
-    public function __construct()
+    public function __construct(LdapAd $ldap)
     {
         parent::__construct();
         $this->middleware('guest', ['except' => ['logout','postTwoFactorAuth','getTwoFactorAuth','getTwoFactorEnroll']]);
         Session::put('backUrl', \URL::previous());
+        $this->ldap = $ldap;
     }
 
     function showLoginForm(Request $request)
@@ -79,7 +88,7 @@ class LoginController extends Controller
     private function loginViaLdap(Request $request): User
     {
         try {
-            return resolve('LdapAD')->ldapLogin($request->input('username'), $request->input('password'));
+            return $this->ldap->ldapLogin($request->input('username'), $request->input('password'));
         } catch (\Exception $ex) {
             LOG::debug("LDAP user login: " . $ex->getMessage());
             throw new \Exception($ex->getMessage());

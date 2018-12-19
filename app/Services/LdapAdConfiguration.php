@@ -248,7 +248,7 @@ class LdapAdConfiguration
      *
      * @return bool
      */
-    protected function isLdapEnabled(): bool
+    public function isLdapEnabled(): bool
     {
         return $this->ldapSettings && $this->ldapSettings->get('ldap_enabled');
     }
