@@ -50,14 +50,18 @@ class LdapAd extends LdapAdConfiguration
      * Initialize LDAP from user settings
      *
      * @since 5.0.0
+     *
+     * @return bool
      */
-    public function __construct()
+    public function init() : bool
     {
-        parent::__construct();
+        parent::init();
         if($this->isLdapEnabled()) {
             $this->ldap = new Adldap();
             $this->ldap->addProvider($this->ldapConfig);
+            return true;
         }
+        return false;
     }
 
         /**

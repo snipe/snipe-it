@@ -13,7 +13,7 @@ class LdapServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->singleton(LdapAD::class, LdapAD::class);
+        $this->app->singleton(LdapAd::class, LdapAd::class);
     }
 
 

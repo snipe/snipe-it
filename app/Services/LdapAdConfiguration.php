@@ -43,7 +43,7 @@ class LdapAdConfiguration
      *
      * @since 5.0.0
      */
-    public function __construct() {
+    public function init() {
         $this->ldapSettings = $this->getSnipeItLdapSettings();
         if ($this->isLdapEnabled()) {
             $this->setSnipeItConfig();

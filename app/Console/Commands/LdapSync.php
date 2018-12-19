@@ -328,7 +328,7 @@ class LdapSync extends Command
      */
     private function checkIfLdapIsEnabled(): void
     {
-        if (!$this->ldap->isLdapEnabled()) {
+        if (!$this->ldap->init()) {
             $msg = 'LDAP intergration is not enabled. Exiting sync process.';
             $this->info($msg);
             Log::info($msg);

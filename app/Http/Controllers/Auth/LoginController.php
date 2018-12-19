@@ -47,7 +47,7 @@ class LoginController extends Controller
      * Create a new authentication controller instance.
      *
      * @param LdapAd $ldap
-     * 
+     *
      * @return void
      */
     public function __construct(LdapAd $ldap)
@@ -144,7 +144,7 @@ class LoginController extends Controller
         $user = null;
 
         // Should we even check for LDAP users?
-        if (Setting::getSettings()->ldap_enabled=='1') {
+        if ($this->ldap->init()) {
             LOG::debug("LDAP is enabled.");
             try {
                 LOG::debug("Attempting to log user in by LDAP authentication.");

@@ -30,7 +30,7 @@ class SettingsController extends Controller
      */
     public function ldapAdSettingsTest(LdapAd $ldap): JsonResponse
     {
-        if(!$ldap->isLdapEnabled()) {
+        if(!$ldap->init()) {
             Log::info('LDAP is not enabled cannot test.');
             return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
         }
