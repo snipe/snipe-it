@@ -55,6 +55,11 @@ class LdapAd extends LdapAdConfiguration
      */
     public function init() : bool
     {
+        // Already initialized
+        if($this->ldap) {
+            return true;
+        }
+
         parent::init();
         if($this->isLdapEnabled()) {
             $this->ldap = new Adldap();
