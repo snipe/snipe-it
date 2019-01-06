@@ -18,6 +18,7 @@ php:
   - 7.0
   - 7.2 
   - 7.1.4
+  - 7.3
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
