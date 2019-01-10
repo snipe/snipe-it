@@ -500,8 +500,8 @@ class AssetsController extends Controller
                 $asset->requestable = $request->get('requestable') : '';
             ($request->filled('rtd_location_id')) ?
                 $asset->rtd_location_id = $request->get('rtd_location_id') : '';
-            ($request->filled('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : '';
+            ($request->filled('location_id')) ?
+                $asset->location_id = $request->get('location_id') : '';
             ($request->filled('company_id')) ?
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
