@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Services;
 
+use App\Models\User;
 use Exception;
 use Adldap\Adldap;
-use App\Traits\UserTrait;
 use Adldap\Query\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -22,8 +22,6 @@ use Adldap\Models\ModelNotFoundException;
  */
 class LdapAd extends LdapAdConfiguration
 {
-    use UserTrait;
-
     /**
      * @see https://wdmsb.wordpress.com/2014/12/03/descriptions-of-active-directory-useraccountcontrol-value/
      */
@@ -49,18 +47,29 @@ class LdapAd extends LdapAdConfiguration
     protected $ldap;
 
     /**
-     * __construct.
+     * Initialize LDAP from user settings
+     *
+     * @since 5.0.0
+     *
+     * @return bool
      */
-    public function __construct()
+    public function init() : bool
     {
+        // Already initialized
+        if($this->ldap) {
+            return true;
+        }
+
+        parent::init();
         if($this->isLdapEnabled()) {
-            parent::__construct();
             $this->ldap = new Adldap();
             $this->ldap->addProvider($this->ldapConfig);
+            return true;
         }
+        return false;
     }
 
-    /**
+        /**
      * Create a user if they successfully login to the LDAP server.
      *
      * @author Wes Hulette <jwhulette@gmail.com>
@@ -250,7 +259,7 @@ class LdapAd extends LdapAdConfiguration
      *
      * @since 5.0.0
      *
-     * @param Adldap\Models\User $user
+     * @param \Adldap\Models\User $user
      * @param Collection|null    $defaultLocation
      * @param Collection|null    $mappedLocations
      *

@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use DB;
-use Mail;
-use Validator;
-use Notification;
-use App\Models\Ldap;
-use App\Models\LdapAd;
+use App\Services\LdapAd;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Notifications\MailTest;
@@ -32,8 +29,8 @@ class SettingsController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function ldapAdSettingsTest(LdapAd $ldap): JsonResponse
-    {   
-        if($ldap->ldapSettings['ldap_enabled'] === false) {
+    {
+        if(!$ldap->init()) {
             Log::info('LDAP is not enabled cannot test.');
             return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
         }
