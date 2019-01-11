@@ -142,13 +142,14 @@ class LdapSync extends Command
      * @return string
      */
     private function getSummary(): string
-    {
-        if ($this->option('summary') && null === $this->dryrun) {
+    {        
+        if ($this->option('summary') && !$this->dryrun) {
             $this->summary->each(function ($item) {
-                $this->info('USER: '.$item['note']);
-
                 if ('ERROR' === $item['status']) {
                     $this->error('ERROR: '.$item['note']);
+                }
+                else {
+                    $this->info('USER: '.$item['note']);
                 }
             });
         } elseif ($this->option('json_summary')) {
@@ -186,19 +187,19 @@ class LdapSync extends Command
         // Only update the database if is not a dry run
         if (!$this->dryrun) {
             if ($user->save()) {
-                $summary['note']   = ($user->wasRecentlyCreated ? 'CREATED' : 'UPDATED');
+                $summary['note']   = sprintf("'%s' %s", $user->username, ($user->wasRecentlyCreated ? 'CREATED' : 'UPDATED'));
                 $summary['status'] = 'SUCCESS';
             } else {
                 $errors = '';
                 foreach ($user->getErrors()->getMessages() as  $error) {
                     $errors .= $error[0];
                 }
-                $summary['note']   = $userMsg.' was not imported. REASON: '.$errors;
+                $summary['note']   = sprintf("'%s' was not imported. REASON: %s", $user->username, $errors);
                 $summary['status'] = 'ERROR';
             }
         }
 
-        $summary['note'] = ($user->getOriginal('username') ? 'UPDATED' : 'CREATED');
+        //$summary['note'] = ($user->getOriginal('username') ? 'UPDATED' : 'CREATED');
         $this->summary->push($summary);
     }
 

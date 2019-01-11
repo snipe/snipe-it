@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\User;
+use App\Helpers\Helper;
 use Exception;
 use Adldap\Adldap;
 use Adldap\Query\Paginator;
@@ -161,7 +162,7 @@ class LdapAd extends LdapAdConfiguration
                     'username' => $userInfo['username'],
                 ]);
         $user->username     = $user->username ?? trim($userInfo['username']);
-        $user->password     = $user->password ?? $this->generateEncyrptedPassword();
+        $user->password     = $user->password ?? Helper::generateEncyrptedPassword();
         $user->first_name   = trim($userInfo['firstname']);
         $user->last_name    = trim($userInfo['lastname']);
         $user->email        = trim($userInfo['email']);
