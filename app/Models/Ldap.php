@@ -96,8 +96,11 @@ class Ldap extends Model
 
         $filterQuery = $settings->ldap_auth_filter_query . $username;
 
+
         if (!$ldapbind = @ldap_bind($connection, $userDn, $password)) {
-            return false;
+            if(!$ldapbind = Ldap::bindAdminToLdap($connection)){
+                    return false;
+            }
         }
 
         if (!$results = ldap_search($connection, $baseDn, $filterQuery)) {
