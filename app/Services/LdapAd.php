@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\User;
+use App\Helpers\Helper;
 use Exception;
 use Adldap\Adldap;
 use Adldap\Query\Paginator;
@@ -93,16 +94,22 @@ class LdapAd extends LdapAdConfiguration
         }
 
         // Should we sync the logged in user
-        if ($this->isLdapSync($record)) {
-            try {
-                Log::debug('Attempting to find user in LDAP directory');
-                $record = $this->ldap->search()->findBy($this->ldapSettings['ldap_username_field'], $username);
-            } catch (ModelNotFoundException $e) {
-                Log::error($e->getMessage());
-                throw new Exception('Unable to find user in LDAP directory!');
+        try {
+            Log::debug('Attempting to find user in LDAP directory');
+            $record = $this->ldap->search()->findBy($this->ldapSettings['ldap_username_field'], $username);
+            
+            if($record) {
+                if ($this->isLdapSync($record)) {
+                    $this->syncUserLdapLogin($record, $password);
+                }
             }
-
-            $this->syncUserLdapLogin($record, $password);
+            else {
+                Log::error($e->getMessage());
+                throw new Exception('Unable to find user in LDAP directory!');    
+            }            
+        } catch (ModelNotFoundException $e) {
+            Log::error($e->getMessage());
+            throw new Exception('Unable to find user in LDAP directory!');
         }
 
         return User::where('username', $username)
@@ -126,21 +133,19 @@ class LdapAd extends LdapAdConfiguration
     public function processUser(AdldapUser $user, ?Collection $defaultLocation=null, ?Collection $mappedLocations=null): ?User
     {
         // Only sync active users
-        if ($this->isLdapSync($user)) {
-            $snipeUser = [];
-            $snipeUser['username']        = $user->{$this->ldapSettings['ldap_username_field']}[0] ?? '';
-            $snipeUser['employee_number'] = $user->{$this->ldapSettings['ldap_emp_num']}[0] ?? '';
-            $snipeUser['lastname']        = $user->{$this->ldapSettings['ldap_lname_field']}[0] ?? '';
-            $snipeUser['firstname']       = $user->{$this->ldapSettings['ldap_fname_field']}[0] ?? '';
-            $snipeUser['email']           = $user->{$this->ldapSettings['ldap_email']}[0] ?? '';
-            $snipeUser['location_id']     = $this->getLocationId($user, $defaultLocation, $mappedLocations);
-            $snipeUser['activated']       = $this->getActiveStatus($user);
-
-            return $this->setUserModel($snipeUser);
+        if(!$user) {
+            return null;
         }
+        $snipeUser = [];
+        $snipeUser['username']        = $user->{$this->ldapSettings['ldap_username_field']}[0] ?? '';
+        $snipeUser['employee_number'] = $user->{$this->ldapSettings['ldap_emp_num']}[0] ?? '';
+        $snipeUser['lastname']        = $user->{$this->ldapSettings['ldap_lname_field']}[0] ?? '';
+        $snipeUser['firstname']       = $user->{$this->ldapSettings['ldap_fname_field']}[0] ?? '';
+        $snipeUser['email']           = $user->{$this->ldapSettings['ldap_email']}[0] ?? '';
+        $snipeUser['location_id']     = $this->getLocationId($user, $defaultLocation, $mappedLocations);
+        $snipeUser['activated']       = $this->getActiveStatus($user);
 
-        // We are not syncing user info
-        return null;
+        return $this->setUserModel($snipeUser);
     }
 
     /**
@@ -161,7 +166,7 @@ class LdapAd extends LdapAdConfiguration
                     'username' => $userInfo['username'],
                 ]);
         $user->username     = $user->username ?? trim($userInfo['username']);
-        $user->password     = $user->password ?? $this->generateEncyrptedPassword();
+        $user->password     = $user->password ?? Helper::generateEncyrptedPassword();
         $user->first_name   = trim($userInfo['firstname']);
         $user->last_name    = trim($userInfo['lastname']);
         $user->email        = trim($userInfo['email']);
@@ -349,6 +354,7 @@ class LdapAd extends LdapAdConfiguration
             $this->ldapSettings['ldap_lname_field'],
             $this->ldapSettings['ldap_email'],
             $this->ldapSettings['ldap_emp_num'],
+            $this->ldapSettings['ldap_active_flag'],
             'memberOf',
             'useraccountcontrol',
         ];
