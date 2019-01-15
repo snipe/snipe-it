@@ -97,12 +97,19 @@ class LdapAd extends LdapAdConfiguration
         try {
             Log::debug('Attempting to find user in LDAP directory');
             $record = $this->ldap->search()->findBy($this->ldapSettings['ldap_username_field'], $username);
+            
+            if($record) {
+                if ($this->isLdapSync($record)) {
+                    $this->syncUserLdapLogin($record, $password);
+                }
+            }
+            else {
+                Log::error($e->getMessage());
+                throw new Exception('Unable to find user in LDAP directory!');    
+            }            
         } catch (ModelNotFoundException $e) {
             Log::error($e->getMessage());
             throw new Exception('Unable to find user in LDAP directory!');
-        }
-        if ($this->isLdapSync($record)) {
-            $this->syncUserLdapLogin($record, $password);
         }
 
         return User::where('username', $username)
