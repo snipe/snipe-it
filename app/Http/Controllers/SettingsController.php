@@ -531,12 +531,12 @@ class SettingsController extends Controller
                 $setting->two_factor_enabled = null;
             } else {
                 $setting->two_factor_enabled = $request->input('two_factor_enabled');
-
-                // remote user login
-                $setting->login_remote_user_enabled           = (int) $request->input('login_remote_user_enabled');
-                $setting->login_common_disabled               = (int) $request->input('login_common_disabled');
-                $setting->login_remote_user_custom_logout_url = $request->input('login_remote_user_custom_logout_url');
             }
+
+            // remote user login
+            $setting->login_remote_user_enabled           = (int) $request->input('login_remote_user_enabled');
+            $setting->login_common_disabled               = (int) $request->input('login_common_disabled');
+            $setting->login_remote_user_custom_logout_url = $request->input('login_remote_user_custom_logout_url');
         }
 
         $setting->pwd_secure_uncommon   = (int) $request->input('pwd_secure_uncommon');
