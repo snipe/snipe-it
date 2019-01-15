@@ -56,7 +56,8 @@ class CustomFieldsController extends Controller
         $this->authorize('create', CustomField::class);
 
         return view("custom_fields.fields.edit",[
-            'predefinedFormats' => Helper::predefined_formats()
+            'predefinedFormats' => Helper::predefined_formats(),
+	    'customFormat' => ''
         ])->with('field', new CustomField());
     }
 
