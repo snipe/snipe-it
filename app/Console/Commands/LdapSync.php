@@ -176,6 +176,12 @@ class LdapSync extends Command
     private function updateCreateUser(AdldapUser $snipeUser): void
     {
         $user = $this->ldap->processUser($snipeUser, $this->defaultLocation, $this->mappedLocations);
+        if(!$user) {
+            $summary['note']   = sprintf("'%s' was not imported. REASON: User inactive or not found", $snipeUser->ou);
+            $summary['status'] = 'ERROR';
+            $this->summary->push($summary);
+            return;
+        }
         $summary = [
             'firstname'       => $user->first_name,
             'lastname'        => $user->last_name,

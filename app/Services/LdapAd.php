@@ -127,21 +127,19 @@ class LdapAd extends LdapAdConfiguration
     public function processUser(AdldapUser $user, ?Collection $defaultLocation=null, ?Collection $mappedLocations=null): ?User
     {
         // Only sync active users
-        if ($this->isLdapSync($user)) {
-            $snipeUser = [];
-            $snipeUser['username']        = $user->{$this->ldapSettings['ldap_username_field']}[0] ?? '';
-            $snipeUser['employee_number'] = $user->{$this->ldapSettings['ldap_emp_num']}[0] ?? '';
-            $snipeUser['lastname']        = $user->{$this->ldapSettings['ldap_lname_field']}[0] ?? '';
-            $snipeUser['firstname']       = $user->{$this->ldapSettings['ldap_fname_field']}[0] ?? '';
-            $snipeUser['email']           = $user->{$this->ldapSettings['ldap_email']}[0] ?? '';
-            $snipeUser['location_id']     = $this->getLocationId($user, $defaultLocation, $mappedLocations);
-            $snipeUser['activated']       = $this->getActiveStatus($user);
-
-            return $this->setUserModel($snipeUser);
+        if(!$user) {
+            return null;
         }
+        $snipeUser = [];
+        $snipeUser['username']        = $user->{$this->ldapSettings['ldap_username_field']}[0] ?? '';
+        $snipeUser['employee_number'] = $user->{$this->ldapSettings['ldap_emp_num']}[0] ?? '';
+        $snipeUser['lastname']        = $user->{$this->ldapSettings['ldap_lname_field']}[0] ?? '';
+        $snipeUser['firstname']       = $user->{$this->ldapSettings['ldap_fname_field']}[0] ?? '';
+        $snipeUser['email']           = $user->{$this->ldapSettings['ldap_email']}[0] ?? '';
+        $snipeUser['location_id']     = $this->getLocationId($user, $defaultLocation, $mappedLocations);
+        $snipeUser['activated']       = $this->getActiveStatus($user);
 
-        // We are not syncing user info
-        return null;
+        return $this->setUserModel($snipeUser);
     }
 
     /**
@@ -350,6 +348,7 @@ class LdapAd extends LdapAdConfiguration
             $this->ldapSettings['ldap_lname_field'],
             $this->ldapSettings['ldap_email'],
             $this->ldapSettings['ldap_emp_num'],
+            $this->ldapSettings['ldap_active_flag'],
             'memberOf',
             'useraccountcontrol',
         ];
