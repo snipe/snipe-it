@@ -162,6 +162,9 @@ class AssetMaintenancesController extends Controller
             // Redirect to the improvement management page
             return redirect()->route('maintenances.index')
                            ->with('error', trans('admin/asset_maintenances/message.not_found'));
+        } elseif (!$assetMaintenance->asset) {
+            return redirect()->route('maintenances.index')
+                ->with('error', 'The asset associated with this maintenance does not exist.');
         } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }
