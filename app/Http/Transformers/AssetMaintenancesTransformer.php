@@ -28,7 +28,7 @@ class AssetMaintenancesTransformer
                 'asset_tag'=> e($assetmaintenance->asset->asset_tag)
 
             ]  : null,
-            'company' => (($assetmaintenance->asset->company) && ($assetmaintenance->asset)) ? [
+            'company' => (($assetmaintenance->asset) && ($assetmaintenance->asset->company)) ? [
                 'id' => (int) $assetmaintenance->asset->company->id,
                 'name'=> ($assetmaintenance->asset->company->name) ? e($assetmaintenance->asset->company->name) : null,
 
