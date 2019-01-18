@@ -297,6 +297,7 @@ return [
         Unicodeveloper\DumbPassword\DumbPasswordServiceProvider::class,
         Schuppo\PasswordStrength\PasswordStrengthServiceProvider::class,
         Tightenco\Ziggy\ZiggyServiceProvider::class, // Laravel routes in vue
+        Eduardokum\LaravelMailAutoEmbed\ServiceProvider::class,
 
         /*
         * Application Service Providers...
