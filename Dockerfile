@@ -20,7 +20,7 @@ vim \
 git \
 cron \
 mysql-client \
-cron \
+supervisor \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -96,14 +96,8 @@ VOLUME ["/var/lib/snipeit"]
 
 ##### START SERVER
 
-COPY docker/startup.sh /
+COPY docker/startup.sh docker/supervisord.conf /
 RUN chmod +x /startup.sh
-
-# Add Tini
-ENV TINI_VERSION v0.14.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod +x /tini
-ENTRYPOINT ["/tini", "--"]
 
 CMD ["/startup.sh"]
 
