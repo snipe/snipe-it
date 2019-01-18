@@ -131,7 +131,7 @@ class CheckoutableListener
                 $notificationClass = CheckinLicenseSeatNotification::class;
                 break;
         }
-
+ 
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);  
     }
 
