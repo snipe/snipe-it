@@ -80,7 +80,7 @@ class LoginController extends Controller
                 Log::debug("Remote user auth lookup complete");
                 if(!is_null($user)) Auth::login($user, true);
             } catch(Exception $e) {
-                Log::error("There was an error authenticating the Remote user: " . $e->getMessage());
+                Log::debug("There was an error authenticating the Remote user: " . $e->getMessage());
             }
         }
     }
@@ -169,7 +169,7 @@ class LoginController extends Controller
             // If the user was unable to login via LDAP, log the error and let them fall through to
             // local authentication.
             } catch (\Exception $e) {
-                Log::error("There was an error authenticating the LDAP user: ".$e->getMessage());
+                Log::debug("There was an error authenticating the LDAP user: ".$e->getMessage());
             }
         }
 
