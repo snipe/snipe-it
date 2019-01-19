@@ -18,7 +18,6 @@ patch \
 curl \
 vim \
 git \
-cron \
 mysql-client \
 supervisor \
 && apt-get clean \
@@ -71,7 +70,6 @@ RUN \
       && ln -fs "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key" \
       && chown docker "/var/lib/snipeit/keys/" \
       && chmod +x /var/www/html/artisan \
-      && (crontab -l ; echo "* * * * * /var/www/html/artisan schedule:run >> /dev/null 2>&1") | crontab - \
       && echo "Finished setting up application in /var/www/html"
 
 ############## DEPENDENCIES via COMPOSER ###################
