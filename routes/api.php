@@ -684,7 +684,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Users API ---*/
 
-    
+
     Route::group([ 'prefix' => 'users' ], function () {
 
         Route::post('two_factor_reset',
@@ -719,6 +719,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             [
                 'as' => 'api.users.assetlist',
                 'uses' => 'UsersController@assets'
+            ]
+        );
+
+        Route::get('{user}/licenses',
+            [
+                'as' => 'api.users.licenselist',
+                'uses' => 'UsersController@licenses'
             ]
         );
 
