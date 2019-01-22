@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Log;
+use App\Services\LdapAd;
+use Illuminate\Support\Facades\Log;
 use Exception;
-use App\Models\User;
-use App\Models\LdapAd;
 use App\Models\Location;
 use Illuminate\Console\Command;
 use Adldap\Models\User as AdldapUser;
@@ -49,13 +48,6 @@ class LdapSync extends Command
     private $ldap;
 
     /**
-     * LDAP settings collection.
-     *
-     * @var \Illuminate\Support\Collection
-     */
-    private $settings = null;
-
-    /**
      * A default location collection.
      *
      * @var \Illuminate\Support\Collection
@@ -92,13 +84,16 @@ class LdapSync extends Command
 
     /**
      * Create a new command instance.
+     *
+     * @param LdapAd $ldap
      */
     public function __construct(LdapAd $ldap)
     {
+
         parent::__construct();
-        $this->ldap     = $ldap;
-        $this->settings = $this->ldap->ldapSettings;
         $this->summary  = collect();
+
+        $this->ldap = $ldap;
     }
 
     /**
@@ -147,13 +142,14 @@ class LdapSync extends Command
      * @return string
      */
     private function getSummary(): string
-    {
-        if ($this->option('summary') && null === $this->dryrun) {
+    {        
+        if ($this->option('summary') && !$this->dryrun) {
             $this->summary->each(function ($item) {
-                $this->info('USER: '.$item['note']);
-
                 if ('ERROR' === $item['status']) {
                     $this->error('ERROR: '.$item['note']);
+                }
+                else {
+                    $this->info('USER: '.$item['note']);
                 }
             });
         } elseif ($this->option('json_summary')) {
@@ -180,6 +176,12 @@ class LdapSync extends Command
     private function updateCreateUser(AdldapUser $snipeUser): void
     {
         $user = $this->ldap->processUser($snipeUser, $this->defaultLocation, $this->mappedLocations);
+        if(!$user) {
+            $summary['note']   = sprintf("'%s' was not imported. REASON: User inactive or not found", $snipeUser->ou);
+            $summary['status'] = 'ERROR';
+            $this->summary->push($summary);
+            return;
+        }
         $summary = [
             'firstname'       => $user->first_name,
             'lastname'        => $user->last_name,
@@ -191,19 +193,19 @@ class LdapSync extends Command
         // Only update the database if is not a dry run
         if (!$this->dryrun) {
             if ($user->save()) {
-                $summary['note']   = ($user->wasRecentlyCreated ? 'CREATED' : 'UPDATED');
+                $summary['note']   = sprintf("'%s' %s", $user->username, ($user->wasRecentlyCreated ? 'CREATED' : 'UPDATED'));
                 $summary['status'] = 'SUCCESS';
             } else {
                 $errors = '';
                 foreach ($user->getErrors()->getMessages() as  $error) {
                     $errors .= $error[0];
                 }
-                $summary['note']   = $userMsg.' was not imported. REASON: '.$errors;
+                $summary['note']   = sprintf("'%s' was not imported. REASON: %s", $user->username, $errors);
                 $summary['status'] = 'ERROR';
             }
         }
 
-        $summary['note'] = ($user->getOriginal('username') ? 'UPDATED' : 'CREATED');
+        //$summary['note'] = ($user->getOriginal('username') ? 'UPDATED' : 'CREATED');
         $this->summary->push($summary);
     }
 
@@ -333,7 +335,7 @@ class LdapSync extends Command
      */
     private function checkIfLdapIsEnabled(): void
     {
-        if (false === $this->settings['ldap_enabled']) {
+        if (!$this->ldap->init()) {
             $msg = 'LDAP intergration is not enabled. Exiting sync process.';
             $this->info($msg);
             Log::info($msg);

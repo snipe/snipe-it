@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Users;
 
 use App\Models\Ldap;
+use App\Services\LdapAd;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Artisan;
-use App\Models\LdapAd;
 
 class LDAPImportController extends Controller
 {
@@ -24,6 +24,7 @@ class LDAPImportController extends Controller
      */
     public function __construct(LdapAd $ldap)
     {
+        parent::__construct();
         $this->ldap = $ldap;
     }
 

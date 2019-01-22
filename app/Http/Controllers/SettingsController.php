@@ -440,8 +440,8 @@ class SettingsController extends Controller
 
             // If they are uploading an image, validate it and upload it
         } elseif ($request->hasFile('email_logo')) {
-            $email_image         = $request->file('email_logo');
-            $email_ext           = $image->getClientOriginalExtension();
+            $email_image         = $email_upload = $request->file('email_logo');
+            $email_ext           = $email_image->getClientOriginalExtension();
             $setting->email_logo = $email_file_name = 'email_logo.' . $email_ext;
 
             if ('svg' != $email_image->getClientOriginalExtension()) {
@@ -460,6 +460,7 @@ class SettingsController extends Controller
             }
         }
 
+
         // If the user wants to clear the favicon...
         if ('1' == $request->input('clear_favicon')) {
             Storage::disk('public')->delete($setting->clear_favicon);
@@ -467,19 +468,28 @@ class SettingsController extends Controller
 
             // If they are uploading an image, validate it and upload it
         } elseif ($request->hasFile('favicon')) {
-            $favicon_image         = $request->file('favicon');
-            $favicon_ext           = $favicon_image->getClientOriginalExtension();
-            $setting->favicon       = $favicon_file_name = 'favicon.' . $favicon_ext;
 
-            if ('svg' != $favicon_image->getClientOriginalExtension()) {
-                $favicon_upload = Image::make($favicon_image->getRealPath())->resize(null, 16, function($constraint) {
+            $favicon_image         = $favicon_upload = $request->file('favicon');
+            $favicon_ext           = $favicon_image->getClientOriginalExtension();
+            $setting->favicon      = $favicon_file_name = 'favicon-uploaded.' . $favicon_ext;
+
+            if (('ico' != $favicon_image->getClientOriginalExtension()) && ('svg' != $favicon_image->getClientOriginalExtension())) {
+                $favicon_upload = Image::make($favicon_image->getRealPath())->resize(null, 36, function($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
+
+                // This requires a string instead of an object, so we use ($string)
+                Storage::disk('public')->put($favicon_file_name, (string) $favicon_upload->encode());
+            } else {
+                Storage::disk('public')->put($favicon_file_name, file_get_contents($request->file('favicon')));
             }
 
-            // This requires a string instead of an object, so we use ($string)
-            Storage::disk('public')->put($favicon_file_name, (string) $favicon_upload->encode());
+
+
+
+
+
 
             // Remove Current image if exists
             if (($setting->favicon) && (file_exists($favicon_file_name))) {
@@ -531,12 +541,12 @@ class SettingsController extends Controller
                 $setting->two_factor_enabled = null;
             } else {
                 $setting->two_factor_enabled = $request->input('two_factor_enabled');
-
-                // remote user login
-                $setting->login_remote_user_enabled           = (int) $request->input('login_remote_user_enabled');
-                $setting->login_common_disabled               = (int) $request->input('login_common_disabled');
-                $setting->login_remote_user_custom_logout_url = $request->input('login_remote_user_custom_logout_url');
             }
+
+            // remote user login
+            $setting->login_remote_user_enabled           = (int) $request->input('login_remote_user_enabled');
+            $setting->login_common_disabled               = (int) $request->input('login_common_disabled');
+            $setting->login_remote_user_custom_logout_url = $request->input('login_remote_user_custom_logout_url');
         }
 
         $setting->pwd_secure_uncommon   = (int) $request->input('pwd_secure_uncommon');

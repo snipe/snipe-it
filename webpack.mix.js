@@ -29,6 +29,9 @@ mix
     "./public/css/all.css"
   );
 
+mix.copy(["./node_modules/icheck/skins/minimal/blue.png",
+          "./node_modules/icheck/skins/minimal/blue@2x.png"], "./public/css");
+
 /**
  * Copy, minify and version skins
  */

@@ -115,7 +115,6 @@ install_packages () {
         fi
       done;
       ;;
-
     centos)
       for p in $PACKAGES; do
         if yum list installed "$p" >/dev/null 2>&1; then
@@ -551,9 +550,9 @@ case $distro in
     exit 1
   fi
   ;;
- raspbian)
-  if [ "$version" == "9.4" ]; then
-    # Install for Raspbian 9.4
+  raspbian)
+  if [[ "$version" =~ ^9 ]]; then
+    # Install for Raspbian 9.x
     tzone=$(cat /etc/timezone)
     cat >/etc/apt/sources.list.d/10-buster.list <<EOL
 deb http://mirrordirector.raspbian.org/raspbian/ buster main contrib non-free rpi
@@ -568,13 +567,13 @@ Package: *
 Pin: release n=buster
 Pin-Priority: 750
 EOL
- 
+
     echo -n "* Updating installed packages."
     log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
     progress
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php7.2 php7.2-mcrypt php7.2-curl php7.2-mysql php7.2-gd php7.2-ldap php7.2-zip php7.2-mbstring php7.2-xml php7.2-bcmath curl git unzip"
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.2 php7.2 php7.2-mcrypt php7.2-curl php7.2-mysql php7.2-gd php7.2-ldap php7.2-zip php7.2-mbstring php7.2-xml php7.2-bcmath curl git unzip"
     install_packages
 
     echo "* Configuring Apache."
@@ -596,12 +595,12 @@ EOL
 
     echo "* Restarting Apache httpd."
     log "systemctl restart apache2"
-   else
+  else
     echo "Unsupported Raspbian version. Version found: $version"
     exit 1
   fi
   ;;
- centos)
+  centos)
   if [[ "$version" =~ ^6 ]]; then
     # Install for CentOS/Redhat 6.x
     tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
