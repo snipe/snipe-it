@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use Adldap\Schemas\Schema;
 use App\Models\User;
 use App\Helpers\Helper;
 use Exception;
@@ -143,6 +144,7 @@ class LdapAd extends LdapAdConfiguration
         $snipeUser['firstname']       = $user->{$this->ldapSettings['ldap_fname_field']}[0] ?? '';
         $snipeUser['email']           = $user->{$this->ldapSettings['ldap_email']}[0] ?? '';
         $snipeUser['title']           = $user->getTitle() ?? '';
+        $snipeUser['telephonenumber'] = $user->getTelephoneNumber() ?? '';
         $snipeUser['location_id']     = $this->getLocationId($user, $defaultLocation, $mappedLocations);
         $snipeUser['activated']       = $this->getActiveStatus($user);
 
@@ -173,6 +175,7 @@ class LdapAd extends LdapAdConfiguration
         $user->email        = trim($userInfo['email']);
         $user->employee_num = trim($userInfo['employee_number']);
         $user->jobtitle     = trim($userInfo['title']);
+        $user->phone        = trim($userInfo['telephonenumber']);
         $user->activated    = $userInfo['activated'];
         $user->location_id  = $userInfo['location_id'];
         $user->notes        = 'Imported from LDAP';
@@ -350,6 +353,8 @@ class LdapAd extends LdapAdConfiguration
      */
     private function getSelectedFields(): array
     {
+        /** @var Schema $schema */
+        $schema = new $this->ldapConfig['schema'];
         return [
             $this->ldapSettings['ldap_username_field'],
             $this->ldapSettings['ldap_fname_field'],
@@ -357,9 +362,10 @@ class LdapAd extends LdapAdConfiguration
             $this->ldapSettings['ldap_email'],
             $this->ldapSettings['ldap_emp_num'],
             $this->ldapSettings['ldap_active_flag'],
-            'memberOf',
-            'useraccountcontrol',
-            'title'
+            $schema->memberOf(),
+            $schema->userAccountControl(),
+            $schema->title(),
+            $schema->telephone(),
         ];
     }
 
