@@ -304,7 +304,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     /*--- Hardware API ---*/
 
     Route::group(['prefix' => 'hardware'], function () {
-
+    
+        Route::get('{asset_id}/licenses',  [
+            'as' => 'api.assets.licenselist',
+            'uses' => 'AssetsController@licenses'
+        ]);
+        
         Route::get( 'bytag/{tag}',  [
             'as' => 'assets.show.bytag',
             'uses' => 'AssetsController@showByTag'
