@@ -40,10 +40,17 @@ class CheckoutableListener
          */
         $acceptance = $this->getCheckoutAcceptance($event);       
 
-        Notification::send(
-            $this->getNotifiables($event), 
-            $this->getCheckoutNotification($event, $acceptance)
-        );
+        if(!$event->checkedOutTo->locale){
+            Notification::locale(Setting::getSettings()->locale)->send(
+                $this->getNotifiables($event), 
+                $this->getCheckoutNotification($event, $acceptance)
+            );
+        } else {
+            Notification::send(
+                $this->getNotifiables($event), 
+                $this->getCheckoutNotification($event, $acceptance)
+            );
+        }
     }
 
     /**
@@ -60,10 +67,17 @@ class CheckoutableListener
         /**
          * Send the appropriate notification
          */
-        Notification::send(
-            $this->getNotifiables($event), 
-            $this->getCheckinNotification($event)
-        );
+        if(!$event->checkedOutTo->locale){
+            Notification::locale(Setting::getSettings()->locale)->send(
+                $this->getNotifiables($event), 
+                $this->getCheckinNotification($event)
+            );
+        } else {
+            Notification::send(
+                $this->getNotifiables($event), 
+                $this->getCheckinNotification($event)
+            );
+        }
     }      
 
     /**
