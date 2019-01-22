@@ -142,6 +142,7 @@ class LdapAd extends LdapAdConfiguration
         $snipeUser['lastname']        = $user->{$this->ldapSettings['ldap_lname_field']}[0] ?? '';
         $snipeUser['firstname']       = $user->{$this->ldapSettings['ldap_fname_field']}[0] ?? '';
         $snipeUser['email']           = $user->{$this->ldapSettings['ldap_email']}[0] ?? '';
+        $snipeUser['title']           = $user->getTitle() ?? '';
         $snipeUser['location_id']     = $this->getLocationId($user, $defaultLocation, $mappedLocations);
         $snipeUser['activated']       = $this->getActiveStatus($user);
 
@@ -171,6 +172,7 @@ class LdapAd extends LdapAdConfiguration
         $user->last_name    = trim($userInfo['lastname']);
         $user->email        = trim($userInfo['email']);
         $user->employee_num = trim($userInfo['employee_number']);
+        $user->jobtitle     = trim($userInfo['title']);
         $user->activated    = $userInfo['activated'];
         $user->location_id  = $userInfo['location_id'];
         $user->notes        = 'Imported from LDAP';
@@ -357,6 +359,7 @@ class LdapAd extends LdapAdConfiguration
             $this->ldapSettings['ldap_active_flag'],
             'memberOf',
             'useraccountcontrol',
+            'title'
         ];
     }
 
