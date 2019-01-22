@@ -38,7 +38,7 @@ php7.2-dev \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
-RUN curl -O https://raw.githubusercontent.com/pear/pearweb_phars/master/go-pear.phar
+RUN curl -O http://raw.githubusercontent.com/pear/pearweb_phars/master/go-pear.phar
 RUN php go-pear.phar
 
 RUN pecl install mcrypt-1.0.1
