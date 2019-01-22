@@ -97,7 +97,7 @@ class LdapAd extends LdapAdConfiguration
         try {
             Log::debug('Attempting to find user in LDAP directory');
             $record = $this->ldap->search()->findBy($this->ldapSettings['ldap_username_field'], $username);
-            
+
             if($record) {
                 if ($this->isLdapSync($record)) {
                     $this->syncUserLdapLogin($record, $password);
@@ -105,8 +105,8 @@ class LdapAd extends LdapAdConfiguration
             }
             else {
                 Log::error($e->getMessage());
-                throw new Exception('Unable to find user in LDAP directory!');    
-            }            
+                throw new Exception('Unable to find user in LDAP directory!');
+            }
         } catch (ModelNotFoundException $e) {
             Log::error($e->getMessage());
             throw new Exception('Unable to find user in LDAP directory!');
@@ -281,7 +281,7 @@ class LdapAd extends LdapAdConfiguration
         // Check to see if the user is in a mapped location
         if ($mappedLocations) {
             $location = $mappedLocations->filter(function ($value, $key) use ($user) {
-                if ($user->inGroup([$value], true)) {
+                if ($user->inOu($value)) {
                     return $key;
                 }
             });
