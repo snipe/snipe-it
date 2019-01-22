@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetRequest;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\LicensesTransformer;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\CustomField;
+use App\Models\License;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
@@ -332,6 +334,14 @@ class AssetsController extends Controller
 
 
     }
+    public function licenses($id)
+    {
+        $this->authorize('view', Asset::class);
+        $this->authorize('view', License::class);
+        $asset = Asset::where('id', $id)->withTrashed()->first();
+        $licenses = $asset->licenses()->get();
+        return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
+     }
 
 
     /**
