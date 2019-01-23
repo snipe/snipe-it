@@ -1767,6 +1767,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "reuser",
+      "name": "Hubert",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2130159?v=4",
+      "profile": "https://github.com/reuser",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
