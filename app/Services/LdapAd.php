@@ -95,21 +95,15 @@ class LdapAd extends LdapAdConfiguration
         }
 
         // Should we sync the logged in user
-        try {
-            Log::debug('Attempting to find user in LDAP directory');
-            $record = $this->ldap->search()->findBy($this->ldapSettings['ldap_username_field'], $username);
+        Log::debug('Attempting to find user in LDAP directory');
+        $record = $this->ldap->search()->findBy($this->ldapSettings['ldap_username_field'], $username);
 
-            if($record) {
-                if ($this->isLdapSync($record)) {
-                    $this->syncUserLdapLogin($record, $password);
-                }
+        if($record) {
+            if ($this->isLdapSync($record)) {
+                $this->syncUserLdapLogin($record, $password);
             }
-            else {
-                Log::error($e->getMessage());
-                throw new Exception('Unable to find user in LDAP directory!');
-            }
-        } catch (ModelNotFoundException $e) {
-            Log::error($e->getMessage());
+        }
+        else {
             throw new Exception('Unable to find user in LDAP directory!');
         }
 
@@ -228,7 +222,7 @@ class LdapAd extends LdapAdConfiguration
      */
     private function isLdapSync(AdldapUser $user): bool
     {
-        return (false === $this->ldapSettings['ldap_active_flag'])
+        return (false == $this->ldapSettings['ldap_active_flag'])
             || ('true' == strtolower($user->{$this->ldapSettings['ldap_active_flag']}[0]));
     }
 
@@ -250,11 +244,11 @@ class LdapAd extends LdapAdConfiguration
          * Check to see if we are connected to an AD server
          * if so, check the Active Directory User Account Control Flags
          */
-        if ($this->ldapSettings['is_ad']) {
+        if ($user->hasAttribute($user->getSchema()->userAccountControl())) {
             $activeStatus = (in_array($user->getUserAccountControl(), self::AD_USER_ACCOUNT_CONTROL_FLAGS)) ? 1 : 0;
         } else {
             // If there is no activated flag, assume this is handled via the OU and activate the users
-            if (false === $this->ldapSettings['ldap_active_flag']) {
+            if (false == $this->ldapSettings['ldap_active_flag']) {
                 $activeStatus = 1;
             }
         }
