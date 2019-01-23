@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Transformers\LicensesTransformer;
+use App\Models\License;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\UsersTransformer;
@@ -312,6 +314,23 @@ class UsersController extends Controller
         $this->authorize('view', Asset::class);
         $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model')->get();
         return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+    }
+
+    /**
+     * Return JSON containing a list of licenses assigned to a user.
+     *
+     * @author [N. Mathar] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @param $userId
+     * @return string JSON
+     */
+    public function licenses($id)
+    {
+        $this->authorize('view', User::class);
+        $this->authorize('view', License::class);
+        $user = User::where('id', $id)->withTrashed()->first();
+        $licenses = $user->licenses()->get();
+        return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
     }
 
     /**

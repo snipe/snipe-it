@@ -101,14 +101,36 @@ class DepartmentsController extends Controller
         return (new DepartmentsTransformer)->transformDepartment($department);
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->authorize('update', Department::class);
+        $department = Department::findOrFail($id);
+        $department->fill($request->all());
+
+        if ($department->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.update.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
+    }
+
 
 
     /**
-     * Validates and deletes selected location.
+     * Validates and deletes selected department.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $locationId
-     * @since [v1.0]
+     * @since [v4.0]
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)

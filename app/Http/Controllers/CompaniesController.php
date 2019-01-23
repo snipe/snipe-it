@@ -29,7 +29,7 @@ final class CompaniesController extends Controller
     {
         $this->authorize('view', Company::class);
 
-        return view('companies/index')->with('companies', Company::all());
+        return view('companies/index');
     }
 
     /**

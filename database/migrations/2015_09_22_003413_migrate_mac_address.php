@@ -21,7 +21,7 @@ class MigrateMacAddress extends Migration {
 		}
 		$macid=DB::table('custom_fields')->insertGetId([
 			'name' => "MAC Address",
-			'format' => \App\Models\CustomField::$PredefinedFormats['MAC'],
+			'format' => \App\Models\CustomField::PREDEFINED_FORMATS['MAC'],
 			'element'=>'text']);
 		if(!$macid) {
 			throw new Exception("Can't save MAC Custom field: $macid");

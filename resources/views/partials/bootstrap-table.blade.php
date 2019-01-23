@@ -423,7 +423,10 @@
     }
 
     function assetTagLinkFormatter(value, row) {
-        return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.asset_tag + '</a>';
+        if ((row.asset) && (row.asset.id)) {
+            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.asset_tag + '</a>';
+        }
+        return '';
     }
 
     function assetNameLinkFormatter(value, row) {

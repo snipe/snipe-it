@@ -96,7 +96,6 @@ class CheckinLicenseSeatNotification extends Notification
      */
     public function toMail($notifiable)
     {
-
         return (new MailMessage)->markdown('notifications.markdown.checkin-license',
             [
                 'item'          => $this->item,
