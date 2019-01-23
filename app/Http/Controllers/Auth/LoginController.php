@@ -93,17 +93,7 @@ class LoginController extends Controller
             throw new \Exception($ex->getMessage());
         }
     }
-
-    private function loginViaRemoteUser(Request $request)
-    {
-        try {
-            return $this->ldap->ldapLogin($request->input('username'), $request->input('password'));
-        } catch (\Exception $ex) {
-            LOG::debug("LDAP user login: " . $ex->getMessage());
-            throw new \Exception($ex->getMessage());
-        }
-    }
-
+  
     /**
      * Account sign in form processing.
      *
