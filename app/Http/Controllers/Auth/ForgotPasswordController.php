@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ForgotPasswordController extends Controller
 {
@@ -49,27 +50,28 @@ class ForgotPasswordController extends Controller
      */
     public function sendResetLinkEmail(Request $request)
     {
-        $this->validate($request, ['email' => 'required|email']);
+        $this->validate($request, ['username' => 'required'], ['username.required' => 'Please enter your username.']);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
+
+        // Make sure the user is active, and their password is not controlled via LDAP
         $response = $this->broker()->sendResetLink(
             array_merge(
-                $request->only('email'),
-                ['activated' => '1']
+                $request->only('username'),
+                ['activated' => '1'],
+                ['ldap_import' => '0']
             )
         );
 
         if ($response === \Password::RESET_LINK_SENT) {
-            return redirect()->route('login')->with('status', trans($response));
+            \Log::info('Password reset attempt: User '.$request->input('username').' found, password reset sent');
+        } else {
+            \Log::info('Password reset attempt: User '.$request->input('username').' not found or user is inactive');
         }
 
-        // If an error was returned by the password broker, we will get this message
-        // translated so we can notify a user of the problem. We'll redirect back
-        // to where the users came from so they can attempt this process again.
-        return back()->withErrors(
-            ['email' => trans($response)]
-        );
+
+
+        // Regardless of response, we do not want to disclose the status of a user account,
+        // so we give them a generic "If this exists, we're TOTALLY gonna email you" response
+        return redirect()->route('login')->with('success',trans('passwords.sent'));
     }
 }

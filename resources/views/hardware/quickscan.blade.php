@@ -103,18 +103,18 @@
 
                     <table id="audited" class="table table-striped snipe-table">
                         <thead>
-                        <tr>
-                            <th>{{ trans('general.asset_tag') }}</th>
-                            <th>{{ trans('general.bulkaudit_status') }}</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                            <tr>
+                                <th>{{ trans('general.asset_tag') }}</th>
+                                <th>{{ trans('general.bulkaudit_status') }}</th>
+                                <th></th>
+                            </tr>
                             <tr id="audit-loader" style="display: none;">
                                 <td colspan="3">
                                     <i class="fa fa-spinner spin" aria-hidden="true"></i> Processing...
                                 </td>
                             </tr>
+                        </thead>
+                        <tbody>
                         </tbody>
                     </table>
                 </div>
@@ -150,7 +150,7 @@
                 data : formData,
                 success : function (data) {
                     if (data.status == 'success') {
-                        $('#audited tbody').append("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.messages + "</td><td><i class='fa fa-check text-success'></i></td></tr>");
+                        $('#audited tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.messages + "</td><td><i class='fa fa-check text-success'></i></td></tr>");
                         incrementOnSuccess();
                     } else {
                         handleAuditFail(data);
@@ -180,7 +180,7 @@
             } else {
                 var messages = '';
             }
-            $('#audited tbody').append("<tr class='danger'><td>" + asset_tag + "</td><td>" + messages + "</td><td><i class='fa fa-times text-danger'></i></td></tr>");
+            $('#audited tbody').prepend("<tr class='danger'><td>" + asset_tag + "</td><td>" + messages + "</td><td><i class='fa fa-times text-danger'></i></td></tr>");
         }
 
         function incrementOnSuccess() {

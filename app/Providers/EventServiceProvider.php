@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use App\Events\SettingSaved;
 use App\Listeners\LogListener;
-use App\Models\LdapAdConfiguration;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 use App\Listeners\CheckoutableListener;
@@ -52,7 +52,8 @@ class EventServiceProvider extends ServiceProvider
          * Clear the LDAP settings cache when the settings model is saved
          */
         Event::listen(SettingSaved::class, function () {
-            Cache::forget(LdapAdConfiguration::LDAP_SETTING_CACHE_KEY);
+            Cache::forget(Setting::APP_SETTINGS_KEY);
+            Cache::forget(Setting::SETUP_CHECK_KEY);
         });
     }
 }

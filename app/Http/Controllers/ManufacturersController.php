@@ -30,7 +30,7 @@ class ManufacturersController extends Controller
     public function index()
     {
         $this->authorize('index', Manufacturer::class);
-        return view('manufacturers/index', compact('manufacturers'));
+        return view('manufacturers/index');
     }
 
 

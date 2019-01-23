@@ -200,7 +200,7 @@
             </div><!-- /.responsive -->
           </div><!-- /.col -->
           <div class="col-md-12 text-center" style="padding-top: 10px;">
-            <a href="{{ route('reports.activity') }}" class="btn btn-primary btn-sm" style="width: 100%">View All</a>
+            <a href="{{ route('reports.activity') }}" class="btn btn-primary btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
           </div>
         </div><!-- /.row -->
       </div><!-- ./box-body -->
@@ -212,18 +212,18 @@
     <div class="col-md-6">
         <div class="box box-default">
             <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('general.assets') }} by Status</h3>
+                <h3 class="box-title">{{ trans('general.assets') }} {{ trans('general.bystatus') }} </h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
                 </div>
             </div>
             <!-- /.box-header -->
-            <div class="box-body" style="min-height: 400px;">
+            <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="chart-responsive">
-                            <canvas id="statusPieChart" height="120"></canvas>
+                            <canvas id="statusPieChart" width="400" height="300"></canvas>
                         </div> <!-- ./chart-responsive -->
                     </div> <!-- /.col -->
                 </div> <!-- /.row -->
@@ -272,7 +272,7 @@
                         </div>
                     </div> <!-- /.col -->
                     <div class="col-md-12 text-center" style="padding-top: 10px;">
-                        <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm" style="width: 100%">View All</a>
+                        <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
                     </div>
                 </div> <!-- /.row -->
 
@@ -298,7 +298,14 @@
       var pieChartCanvas = $("#statusPieChart").get(0).getContext("2d");
       var pieChart = new Chart(pieChartCanvas);
       var ctx = document.getElementById("statusPieChart");
-  
+      var pieOptions = {
+              legend: {
+                  position: 'top',
+                  responsive: true, 
+                  maintainAspectRatio: true,
+              }
+          };
+
       $.ajax({
           type: 'GET',
           url: '{{  route('api.statuslabels.assets.bytype') }}',
@@ -306,12 +313,48 @@
               "X-Requested-With": 'XMLHttpRequest',
               "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
           },
-  
           dataType: 'json',
           success: function (data) {
               var myPieChart = new Chart(ctx,{
                   type   : 'doughnut',
-                  data   : data,
+                  data   : {
+    "labels": [
+        "Ready to Deploy (1,273)",
+        "Pending (50)",
+        "Archived (50)"
+    ],
+    "datasets": [
+        {
+            "data": [
+                1273,
+                50,
+                50,
+            ],
+            "backgroundColor": [
+                "#f56954",
+                "#00a65a",
+                "#f39c12",
+                "#00c0ef",
+                "#3c8dbc",
+                "#d2d6de",
+                "#3c8dbc",
+                "#3c8dbc",
+                "#3c8dbc"
+            ],
+            "hoverBackgroundColor": [
+                "#f56954",
+                "#00a65a",
+                "#f39c12",
+                "#00c0ef",
+                "#3c8dbc",
+                "#d2d6de",
+                "#3c8dbc",
+                "#3c8dbc",
+                "#3c8dbc"
+            ]
+        }
+    ]
+},
                   options: pieOptions
               });
           },

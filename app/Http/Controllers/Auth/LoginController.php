@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Validator;
+use App\Services\LdapAd;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use App\Models\Setting;
-use App\Models\Ldap;
 use App\Models\User;
-use Auth;
-use Config;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Input;
+use Illuminate\Support\Facades\Input;
 use Redirect;
-use Log;
-use View;
-use PragmaRX\Google2FA\Google2FA;
-use App\Models\LdapAd;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This controller handles authentication for the user, including local
@@ -41,23 +39,23 @@ class LoginController extends Controller
     protected $redirectTo = '/';
 
     /**
-     * An LdapAd instance
-     *
-     * @var \App\Models\LdapAd
+     * @var LdapAd
      */
-    protected $ldapAd;
+    protected $ldap;
 
     /**
      * Create a new authentication controller instance.
      *
+     * @param LdapAd $ldap
+     *
      * @return void
      */
-    public function __construct(LdapAd $ldapAd)
+    public function __construct(LdapAd $ldap)
     {
+        parent::__construct();
         $this->middleware('guest', ['except' => ['logout','postTwoFactorAuth','getTwoFactorAuth','getTwoFactorEnroll']]);
-        \Session::put('backUrl', \URL::previous());
-
-        $this->ldapAd = $ldapAd;
+        Session::put('backUrl', \URL::previous());
+        $this->ldap = $ldap;
     }
 
     function showLoginForm(Request $request)
@@ -84,12 +82,22 @@ class LoginController extends Controller
      * 
      * @return User
      * 
-     * @throws Exception
+     * @throws \Exception
      */
-    private function loginByLdap(Request $request): User
+    private function loginViaLdap(Request $request): User
     {
         try {
-            return $this->ldapAd->ldapLogin($request->input('username'), $request->input('password'));
+            return $this->ldap->ldapLogin($request->input('username'), $request->input('password'));
+        } catch (\Exception $ex) {
+            LOG::debug("LDAP user login: " . $ex->getMessage());
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    private function loginViaRemoteUser(Request $request)
+    {
+        try {
+            return $this->ldap->ldapLogin($request->input('username'), $request->input('password'));
         } catch (\Exception $ex) {
             LOG::debug("LDAP user login: " . $ex->getMessage());
             throw new \Exception($ex->getMessage());
@@ -124,11 +132,11 @@ class LoginController extends Controller
         $user = null;
 
         // Should we even check for LDAP users?
-        if (Setting::getSettings()->ldap_enabled=='1') {
+        if ($this->ldap->init()) {
             LOG::debug("LDAP is enabled.");
             try {
                 LOG::debug("Attempting to log user in by LDAP authentication.");
-                $user = $this->loginByLdap($request);
+                $user = $this->loginViaLdap($request);
                 Auth::login($user, true);
 
             // If the user was unable to login via LDAP, log the error and let them fall through to
@@ -157,8 +165,8 @@ class LoginController extends Controller
         }
 
         if ($user = Auth::user()) {
-            $user->last_login = \Carbon::now();
-            \Log::debug('Last login:'.$user->last_login);
+            $user->last_login = Carbon::now();
+            Log::debug('Last login:'.$user->last_login);
             $user->save();
         }
         // Redirect to the users page
@@ -211,6 +219,8 @@ class LoginController extends Controller
     /**
      * Two factor code submission
      *
+     * @param Request $request
+     *
      * @return Redirect
      */
     public function postTwoFactorAuth(Request $request)
@@ -240,6 +250,8 @@ class LoginController extends Controller
 
     /**
      * Logout page.
+     *
+     * @param Request $request
      *
      * @return Redirect
      */
@@ -305,7 +317,7 @@ class LoginController extends Controller
     * Override the lockout time and duration
     *
     * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\RedirectResponse
+    * @return  bool
     */
     protected function hasTooManyLoginAttempts(Request $request)
     {

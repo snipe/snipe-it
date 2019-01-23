@@ -225,8 +225,9 @@ class Helper
      */
     public static function predefined_formats()
     {
-        $keys = array_keys(CustomField::$PredefinedFormats);
+        $keys = array_keys(CustomField::PREDEFINED_FORMATS);
         $stuff = array_combine($keys, $keys);
+
         return $stuff;
     }
 
@@ -669,7 +670,37 @@ class Helper
         return false;
     }
 
+    /**
+     * Generate a random encrypted password.
+     *
+     * @author Wes Hulette <jwhulette@gmail.com>
+     *
+     * @since 5.0.0
+     *
+     * @return string
+     */
+    public static function generateEncyrptedPassword(): string
+    {
+        return bcrypt(Helper::generateUnencryptedPassword());
+    }
 
+    /**
+     * Get a random unencrypted password.
+     *
+     * @author Steffen Buehl <sb@sbuehl.com>
+     *
+     * @since 5.0.0
+     *
+     * @return string
+     */
+    public static function generateUnencryptedPassword(): string
+    {
+        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-
+        $password = '';
+        for ( $i = 0; $i < 20; $i++ ) {
+            $password .= substr( $chars, random_int( 0, strlen( $chars ) - 1 ), 1 );
+        }
+        return $password;
+    }
 }

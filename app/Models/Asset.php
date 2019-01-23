@@ -1174,6 +1174,26 @@ class Asset extends Depreciable
         })->withTrashed()->whereNull("assets.deleted_at"); //workaround for laravel bug
     }
 
+    /**
+     * Query builder scope to search the department ID of users assigned to assets
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @return string | false
+     *
+     * @return \Illuminate\Database\Query\Builder Modified query builder
+     */
+    public function scopeCheckedOutToTargetInDepartment($query, $search)
+    {
+        return $query->leftJoin('users as assets_dept_users',function ($leftJoin) {
+            $leftJoin->on("assets_dept_users.id", "=", "assets.assigned_to")
+                ->where("assets.assigned_type", "=", User::class);
+        })->where(function ($query) use ($search) {
+                    $query->where('assets_dept_users.department_id', '=', $search);
+
+        })->withTrashed()->whereNull("assets.deleted_at"); //workaround for laravel bug
+    }
+
 
 
     /**

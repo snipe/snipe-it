@@ -81,7 +81,7 @@ $config = [
 ];
 
 // When you're dealing with local file storage, the paths will be different than S3
-if  (env('FILESYSTEM_DISK')!='local')
+if  (env('FILESYSTEM_DISK','local')!='local')
 {
     $config['disks']['public'] = $config['disks'][env('FILESYSTEM_DISK')];
     $config['disks']['public']['visibility'] = 'public';

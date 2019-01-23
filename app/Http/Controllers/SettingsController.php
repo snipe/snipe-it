@@ -267,7 +267,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $settings = Setting::all();
+        $settings = Setting::getSettings();
 
         return view('settings/index', compact('settings'));
     }
@@ -283,7 +283,7 @@ class SettingsController extends Controller
      */
     public function getEdit()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings/general', compact('setting'));
     }
@@ -299,7 +299,7 @@ class SettingsController extends Controller
      */
     public function getSettings()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings/general', compact('setting'));
     }
@@ -315,7 +315,7 @@ class SettingsController extends Controller
      */
     public function postSettings(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -369,7 +369,7 @@ class SettingsController extends Controller
      */
     public function getBranding()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.branding', compact('setting'));
     }
@@ -385,7 +385,7 @@ class SettingsController extends Controller
      */
     public function postBranding(ImageUploadRequest $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -433,6 +433,70 @@ class SettingsController extends Controller
             }
         }
 
+        // If the user wants to clear the email logo...
+        if ('1' == $request->input('clear_email_logo')) {
+            Storage::disk('public')->delete($setting->email_logo);
+            $setting->email_logo  = null;
+
+            // If they are uploading an image, validate it and upload it
+        } elseif ($request->hasFile('email_logo')) {
+            $email_image         = $email_upload = $request->file('email_logo');
+            $email_ext           = $email_image->getClientOriginalExtension();
+            $setting->email_logo = $email_file_name = 'email_logo.' . $email_ext;
+
+            if ('svg' != $email_image->getClientOriginalExtension()) {
+                $email_upload = Image::make($email_image->getRealPath())->resize(null, 100, function($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            }
+
+            // This requires a string instead of an object, so we use ($string)
+            Storage::disk('public')->put($email_file_name, (string) $email_upload->encode());
+
+            // Remove Current image if exists
+            if (($setting->email_logo) && (file_exists($email_file_name))) {
+                Storage::disk('public')->delete($email_file_name);
+            }
+        }
+
+
+        // If the user wants to clear the favicon...
+        if ('1' == $request->input('clear_favicon')) {
+            Storage::disk('public')->delete($setting->clear_favicon);
+            $setting->favicon  = null;
+
+            // If they are uploading an image, validate it and upload it
+        } elseif ($request->hasFile('favicon')) {
+
+            $favicon_image         = $favicon_upload = $request->file('favicon');
+            $favicon_ext           = $favicon_image->getClientOriginalExtension();
+            $setting->favicon      = $favicon_file_name = 'favicon-uploaded.' . $favicon_ext;
+
+            if (('ico' != $favicon_image->getClientOriginalExtension()) && ('svg' != $favicon_image->getClientOriginalExtension())) {
+                $favicon_upload = Image::make($favicon_image->getRealPath())->resize(null, 36, function($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+                // This requires a string instead of an object, so we use ($string)
+                Storage::disk('public')->put($favicon_file_name, (string) $favicon_upload->encode());
+            } else {
+                Storage::disk('public')->put($favicon_file_name, file_get_contents($request->file('favicon')));
+            }
+
+
+
+
+
+
+
+            // Remove Current image if exists
+            if (($setting->favicon) && (file_exists($favicon_file_name))) {
+                Storage::disk('public')->delete($favicon_file_name);
+            }
+        }
+
         if ($setting->save()) {
             return redirect()->route('settings.index')
                 ->with('success', trans('admin/settings/message.update.success'));
@@ -452,7 +516,7 @@ class SettingsController extends Controller
      */
     public function getSecurity()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.security', compact('setting'));
     }
@@ -468,7 +532,7 @@ class SettingsController extends Controller
      */
     public function postSecurity(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -512,7 +576,7 @@ class SettingsController extends Controller
      */
     public function getLocalization()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.localization', compact('setting'));
     }
@@ -528,7 +592,7 @@ class SettingsController extends Controller
      */
     public function postLocalization(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -558,7 +622,7 @@ class SettingsController extends Controller
      */
     public function getAlerts()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.alerts', compact('setting'));
     }
@@ -574,7 +638,7 @@ class SettingsController extends Controller
      */
     public function postAlerts(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -611,7 +675,7 @@ class SettingsController extends Controller
      */
     public function getSlack()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.slack', compact('setting'));
     }
@@ -627,7 +691,7 @@ class SettingsController extends Controller
      */
     public function postSlack(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -654,7 +718,7 @@ class SettingsController extends Controller
      */
     public function getAssetTags()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.asset_tags', compact('setting'));
     }
@@ -670,7 +734,7 @@ class SettingsController extends Controller
      */
     public function postAssetTags(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -698,7 +762,7 @@ class SettingsController extends Controller
      */
     public function getBarcodes()
     {
-        $setting         = Setting::first();
+        $setting         = Setting::getSettings();
         $is_gd_installed = extension_loaded('gd');
 
         return view('settings.barcodes', compact('setting'))->with('is_gd_installed', $is_gd_installed);
@@ -715,7 +779,7 @@ class SettingsController extends Controller
      */
     public function postBarcodes(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
@@ -763,7 +827,7 @@ class SettingsController extends Controller
      */
     public function getLabels()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.labels', compact('setting'));
     }
@@ -779,7 +843,7 @@ class SettingsController extends Controller
      */
     public function postLabels(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
         $setting->labels_per_page             = $request->input('labels_per_page');
@@ -845,7 +909,7 @@ class SettingsController extends Controller
      */
     public function getLdapSettings()
     {
-        $setting = Setting::first();
+        $setting = Setting::getSettings();
 
         return view('settings.ldap', compact('setting'));
     }
@@ -861,7 +925,7 @@ class SettingsController extends Controller
      */
     public function postLdapSettings(Request $request)
     {
-        if (is_null($setting = Setting::first())) {
+        if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 

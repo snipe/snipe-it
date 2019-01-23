@@ -25,7 +25,7 @@ class GroupsController extends Controller
     public function index()
     {
         // Show the page
-        return view('groups/index', compact('groups'));
+        return view('groups/index');
     }
 
     /**

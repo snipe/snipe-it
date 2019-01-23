@@ -120,7 +120,7 @@ class AssetsTransformer
             'clone' => Gate::allows('create', Asset::class) ? true : false,
             'restore' => false,
             'update' => (bool) Gate::allows('update', Asset::class),
-            'delete' => (bool) Gate::allows('delete', Asset::class),
+            'delete' => ($asset->assigned_to=='' && Gate::allows('delete', Asset::class) ? true : false),
         ];
 
         if ($asset->deleted_at!='') {

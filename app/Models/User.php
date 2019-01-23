@@ -15,11 +15,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\UniqueUndeletedTrait;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use DB;
 
 
 
-class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
+class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
     protected $presenter = 'App\Presenters\UserPresenter';
     use SoftDeletes, ValidatingTrait;
@@ -100,6 +101,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'userloc'    => ['name'],
         'department' => ['name'],
         'groups'     => ['name'],
+        'company'    => ['name'],
         'manager'    => ['first_name', 'last_name', 'username']
     ];
 
@@ -641,5 +643,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function scopeOrderDepartment($query, $order)
     {
         return $query->leftJoin('departments as departments_users', 'users.department_id', '=', 'departments_users.id')->orderBy('departments_users.name', $order);
+    }
+
+    public function preferredLocale(){
+        return $this->locale;
     }
 }
