@@ -72,7 +72,7 @@ class GroupsController extends Controller
         if ($group->save()) {
             return redirect()->route("groups.index")->with('success', trans('admin/groups/message.success.create'));
         }
-        return redirect(route('groups.create'))->withInput()->withErrors($group->getErrors());
+        return redirect()->back()->withInput()->withErrors($group->getErrors());
     }
 
     /**
@@ -111,7 +111,7 @@ class GroupsController extends Controller
     {
         $permissions = config('permissions');
         if (!$group = Group::find($id)) {
-            return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
+            return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
         }
         $group->name = e(Input::get('name'));
         $group->permissions = json_encode(Input::get('permission'));
@@ -138,7 +138,7 @@ class GroupsController extends Controller
     {
         if (!config('app.lock_passwords')) {
             if (!$group = Group::find($id)) {
-                return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
+                return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
             }
             $group->delete();
             // Redirect to the group management page
