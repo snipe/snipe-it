@@ -445,7 +445,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     public function scopeDeleted($query)
     {
-        return $query->whereNotNull('deleted_at');
+        return $query->whereNotNull('users.deleted_at');
     }
 
 
