@@ -187,17 +187,6 @@ class AssetModel extends SnipeModel
     * -----------------------------------------------
     **/
 
-    /**
-    * Query builder scope for Deleted assets
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
-
-    public function scopeDeleted($query)
-    {
-        return $query->whereNotNull('deleted_at');
-    }
 
     /**
      * scopeInCategory

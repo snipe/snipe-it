@@ -156,7 +156,7 @@ class AssetsController extends Controller
         // I am sad. :(
         switch ($request->input('status')) {
             case 'Deleted':
-                $assets->withTrashed()->Deleted();
+                $assets->onlyTrashed();
                 break;
             case 'Pending':
                 $assets->join('status_labels AS status_alias',function ($join) {

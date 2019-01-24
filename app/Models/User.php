@@ -440,18 +440,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->belongsToMany(Asset::class, 'checkout_requests', 'user_id', 'requestable_id')->whereNull('canceled_at');
     }
 
-    /**
-     * Query builder scope to return deleted users
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v2.0]
-     *
-     * @param  string $query
-     * @return \Illuminate\Database\Query\Builder
-     */
-    public function scopeGetDeleted($query)
-    {
-        return $query->withTrashed()->whereNotNull('users.deleted_at');
-    }
 
     /**
      * Query builder scope to return NOT-deleted users
@@ -589,18 +577,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $query->whereHas('groups', function ($query) use ($id) {
             $query->where('groups.id', '=', $id);
         });
-    }
-
-    /**
-     * Query builder scope for Deleted users
-     *
-     * @param  \Illuminate\Database\Query\Builder $query Query builder instance
-     * @return \Illuminate\Database\Query\Builder          Modified query builder
-     */
-
-    public function scopeDeleted($query)
-    {
-        return $query->whereNotNull('deleted_at');
     }
 
 
