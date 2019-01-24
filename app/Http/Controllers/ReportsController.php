@@ -431,6 +431,7 @@ class ReportsController extends Controller
             if ($request->filled('depreciation')) {
                 $header[] = 'Value';
                 $header[] = 'Diff';
+                $header[] = 'Fully Depreciated';
             }
 
             if ($request->filled('checkout_date')) {
@@ -667,6 +668,7 @@ class ReportsController extends Controller
                             $diff = ($asset->purchase_cost - $depreciation);
                             $row[]        = Helper::formatCurrencyOutput($depreciation);
                             $row[]        = Helper::formatCurrencyOutput($diff);
+                            $row[]        = ($asset->depreciated_date()!='') ? $asset->depreciated_date()->format('Y-m-d') : '';
                     }
 
                     if ($request->filled('checkout_date')) {
