@@ -26,6 +26,7 @@ class LDAPImportController extends Controller
     {
         parent::__construct();
         $this->ldap = $ldap;
+        $this->ldap->init();
     }
 
     /**

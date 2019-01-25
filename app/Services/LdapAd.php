@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use Adldap\Schemas\Schema;
 use App\Models\User;
 use App\Helpers\Helper;
 use Exception;
@@ -94,21 +95,15 @@ class LdapAd extends LdapAdConfiguration
         }
 
         // Should we sync the logged in user
-        try {
-            Log::debug('Attempting to find user in LDAP directory');
-            $record = $this->ldap->search()->findBy($this->ldapSettings['ldap_username_field'], $username);
-            
-            if($record) {
-                if ($this->isLdapSync($record)) {
-                    $this->syncUserLdapLogin($record, $password);
-                }
+        Log::debug('Attempting to find user in LDAP directory');
+        $record = $this->ldap->search()->findBy($this->ldapSettings['ldap_username_field'], $username);
+
+        if($record) {
+            if ($this->isLdapSync($record)) {
+                $this->syncUserLdapLogin($record, $password);
             }
-            else {
-                Log::error($e->getMessage());
-                throw new Exception('Unable to find user in LDAP directory!');    
-            }            
-        } catch (ModelNotFoundException $e) {
-            Log::error($e->getMessage());
+        }
+        else {
             throw new Exception('Unable to find user in LDAP directory!');
         }
 
@@ -142,6 +137,8 @@ class LdapAd extends LdapAdConfiguration
         $snipeUser['lastname']        = $user->{$this->ldapSettings['ldap_lname_field']}[0] ?? '';
         $snipeUser['firstname']       = $user->{$this->ldapSettings['ldap_fname_field']}[0] ?? '';
         $snipeUser['email']           = $user->{$this->ldapSettings['ldap_email']}[0] ?? '';
+        $snipeUser['title']           = $user->getTitle() ?? '';
+        $snipeUser['telephonenumber'] = $user->getTelephoneNumber() ?? '';
         $snipeUser['location_id']     = $this->getLocationId($user, $defaultLocation, $mappedLocations);
         $snipeUser['activated']       = $this->getActiveStatus($user);
 
@@ -171,6 +168,8 @@ class LdapAd extends LdapAdConfiguration
         $user->last_name    = trim($userInfo['lastname']);
         $user->email        = trim($userInfo['email']);
         $user->employee_num = trim($userInfo['employee_number']);
+        $user->jobtitle     = trim($userInfo['title']);
+        $user->phone        = trim($userInfo['telephonenumber']);
         $user->activated    = $userInfo['activated'];
         $user->location_id  = $userInfo['location_id'];
         $user->notes        = 'Imported from LDAP';
@@ -223,7 +222,7 @@ class LdapAd extends LdapAdConfiguration
      */
     private function isLdapSync(AdldapUser $user): bool
     {
-        return (false === $this->ldapSettings['ldap_active_flag'])
+        return (false == $this->ldapSettings['ldap_active_flag'])
             || ('true' == strtolower($user->{$this->ldapSettings['ldap_active_flag']}[0]));
     }
 
@@ -245,11 +244,11 @@ class LdapAd extends LdapAdConfiguration
          * Check to see if we are connected to an AD server
          * if so, check the Active Directory User Account Control Flags
          */
-        if ($this->ldapSettings['is_ad']) {
+        if ($user->hasAttribute($user->getSchema()->userAccountControl())) {
             $activeStatus = (in_array($user->getUserAccountControl(), self::AD_USER_ACCOUNT_CONTROL_FLAGS)) ? 1 : 0;
         } else {
             // If there is no activated flag, assume this is handled via the OU and activate the users
-            if (false === $this->ldapSettings['ldap_active_flag']) {
+            if (false == $this->ldapSettings['ldap_active_flag']) {
                 $activeStatus = 1;
             }
         }
@@ -281,7 +280,7 @@ class LdapAd extends LdapAdConfiguration
         // Check to see if the user is in a mapped location
         if ($mappedLocations) {
             $location = $mappedLocations->filter(function ($value, $key) use ($user) {
-                if ($user->inGroup([$value], true)) {
+                if ($user->inOu($value)) {
                     return $key;
                 }
             });
@@ -348,6 +347,8 @@ class LdapAd extends LdapAdConfiguration
      */
     private function getSelectedFields(): array
     {
+        /** @var Schema $schema */
+        $schema = new $this->ldapConfig['schema'];
         return [
             $this->ldapSettings['ldap_username_field'],
             $this->ldapSettings['ldap_fname_field'],
@@ -355,8 +356,10 @@ class LdapAd extends LdapAdConfiguration
             $this->ldapSettings['ldap_email'],
             $this->ldapSettings['ldap_emp_num'],
             $this->ldapSettings['ldap_active_flag'],
-            'memberOf',
-            'useraccountcontrol',
+            $schema->memberOf(),
+            $schema->userAccountControl(),
+            $schema->title(),
+            $schema->telephone(),
         ];
     }
 
