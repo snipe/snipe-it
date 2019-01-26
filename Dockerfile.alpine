@@ -43,6 +43,8 @@ COPY . /var/www/html
 
 WORKDIR /var/www/html
 
+COPY docker/docker.env /var/www/html/.env
+
 RUN chown -R apache:apache /var/www/html
 
 RUN \
