@@ -537,9 +537,11 @@ class AssetsController extends Controller
         }
 
         $csv = Reader::createFromPath(Input::file('user_import_csv'));
-        $csv->setNewline("\r\n");
-        //get the first row, usually the CSV header
+
         $csv->setHeaderOffset(0);
+
+        $header = $csv->getHeader();
+
         $results = $csv->getRecords();
         $item = array();
         $status = array();
@@ -563,6 +565,7 @@ class AssetsController extends Controller
                 $item[$asset_tag][$batch_counter]['email'] = Helper::array_smart_fetch($row, "email");
 
                 if ($asset = Asset::where('asset_tag', '=', $asset_tag)->first()) {
+                    //we've found our asset, now lets look for a user
                     $item[$asset_tag][$batch_counter]['asset_id'] = $asset->id;
 
                     $base_username = User::generateFormattedNameFromFullName($item[$asset_tag][$batch_counter]['name'], Setting::getSettings()->username_format);
@@ -612,6 +615,7 @@ class AssetsController extends Controller
                             'action_type'   => 'checkout',
                         ));
 
+                        //
                         $asset->assigned_to = $user->id;
 
                         if ($asset->save()) {
