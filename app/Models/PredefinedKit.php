@@ -120,10 +120,6 @@ class PredefinedKit extends SnipeModel
     }
 
 
-    public function applyToUser(User $user) {
-        $models = $this->models();
-    }
-
     /**
      * -----------------------------------------------
      * BEGIN QUERY SCOPES

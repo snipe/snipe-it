@@ -11,12 +11,13 @@
 
 @section('content')
 @parent
+{{-- Assets by model --}}
 <div class="row">
     <div class="col-md-12">
         <div class="box box-default">
             <div class="box-header with-border">
                 {{--  <h3 class="box-title"><span>Models  </span><a href="{{ route('modal.kit.model', ['kit' => $item->id]) }}" data-toggle="modal" data-target="#createModal" class="btn btn-sm btn-primary"><i class="fa fa-plus icon-white"></i> Append</a></h3>  --}}
-                <h3 class="box-title"><span>Models  </span></h3>
+                <h3 class="box-title"><span>Assets (by models){{-- TODO: trans --}}</span></h3>
             </div>
             <div class="box-body">
                 <div class="table-responsive">
@@ -39,21 +40,21 @@
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
                 </table>
-                <a href="{{ route('modal.kit.model', ['kit' => $item->id]) }}" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append</a>
+                <a href="{{ route('modal.kit.model', ['kit' => $item->id]) }}" data-refresh="kitModelsTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append</a>
                 </div>
             </div> <!--.box-body-->
         </div> <!-- /.box.box-default-->
     </div> <!-- .col-md-12-->
 </div>
+{{-- Licenses --}}
 <div class="row">
         <div class="col-md-12">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Licenses</h3>
+                    <h3 class="box-title">Licenses{{-- TODO: trans --}}</h3>
                 </div>
                 <div class="box-body">
                     <div class="table-responsive">
-    
                     <table
                     data-cookie-id-table="kitLicensesTable"
                     data-columns="{{ \App\Presenters\PredefinedKitPresenter::dataTableLicenses() }}"
@@ -73,6 +74,7 @@
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                     }'>
                     </table>
+                    <a href="{{ route('modal.kit.license', ['kit' => $item->id]) }}" data-refresh="kitLicensesTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append{{-- TODO: trans --}}</a>
                     </div>
                 </div> <!--.box-body-->
             </div> <!-- /.box.box-default-->

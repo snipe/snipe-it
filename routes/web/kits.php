@@ -30,6 +30,14 @@ Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function
             'uses' => 'Kits\PredefinedKitsController@updateLicense',
         ]
     );
+  
+    Route::get('licenses/{license_id}/edit', 
+        [
+            'as' => 'kits.licenses.edit',
+            'uses' => 'Kits\PredefinedKitsController@editLicense',
+            
+        ]
+    );
 
     Route::delete('licenses/{license_id}', 
         [
@@ -37,15 +45,10 @@ Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function
             'uses' => 'Kits\PredefinedKitsController@detachLicense',
         ]
     );
+
     
-    
-    // Route::get('models', 
-    //     [
-    //         'as' => 'kits.models.index',
-    //         'uses' => 'Kits\PredefinedKitsController@indexModels',
-    //     ]
-    // );
-    
+    // Models
+
     Route::post('models', 
         [
             'as' => 'kits.models.store',
@@ -76,6 +79,71 @@ Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function
         ]
     );
 
+
+    // Consumables
+
+    Route::post('consumables', 
+        [
+            'as' => 'kits.consumables.store',
+            'uses' => 'Kits\PredefinedKitsController@storeConsumable',
+        ]
+    );
+    
+    Route::put('consumables/{consumable_id}', 
+        [
+            'as' => 'kits.consumables.update',
+            'uses' => 'Kits\PredefinedKitsController@updateConsumable',
+            'parameters' => [2 => 'kit_id', 1 => 'consumable_id']
+        ]
+    );
+  
+    Route::get('consumables/{consumable_id}/edit', 
+        [
+            'as' => 'kits.consumables.edit',
+            'uses' => 'Kits\PredefinedKitsController@editConsumable',
+            
+        ]
+    );
+
+    Route::delete('consumables/{consumable_id}', 
+        [
+            'as' => 'kits.consumables.detach',
+            'uses' => 'Kits\PredefinedKitsController@detachConsumable',
+        ]
+    );
+
+
+    // Accessories
+
+    Route::post('accessories', 
+        [
+            'as' => 'kits.accessories.store',
+            'uses' => 'Kits\PredefinedKitsController@storeAccessory',
+        ]
+    );
+
+    Route::put('accessories/{accessory_id}', 
+        [
+            'as' => 'kits.accessories.update',
+            'uses' => 'Kits\PredefinedKitsController@updateAccessory',
+            'parameters' => [2 => 'kit_id', 1 => 'accessory_id']
+        ]
+    );
+
+    Route::get('accessories/{accessory_id}/edit', 
+        [
+            'as' => 'kits.accessories.edit',
+            'uses' => 'Kits\PredefinedKitsController@editAccessory',
+            
+        ]
+    );
+
+    Route::delete('accessories/{accessory_id}', 
+        [
+            'as' => 'kits.accessories.detach',
+            'uses' => 'Kits\PredefinedKitsController@detachAccessory',
+        ]
+    );
     Route::get('checkout',
         [
             'as' => 'kits.checkout.show',

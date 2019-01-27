@@ -751,7 +751,8 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         [ 'as' => 'api.activity.index', 'uses' => 'ReportsController@index' ]
     );
 
-    // kits
+    /*--- Kits API ---*/
+
     Route::resource('kits', 'PredefinedKitsController',
         [
             'names' =>
@@ -770,6 +771,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     Route::group([ 'prefix' => 'kits/{kit_id}' ], function () {
 
+        // kit licenses
         Route::get('licenses', 
             [
                 'as' => 'api.kits.licenses.index',
@@ -798,7 +800,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
         
-        
+        // kit models
         Route::get('models', 
             [
                 'as' => 'api.kits.models.index',
@@ -824,6 +826,64 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             [
                 'as' => 'api.kits.models.destroy',
                 'uses' => 'PredefinedKitsController@detachModel',
+            ]
+        );
+
+        // kit accessories
+        Route::get('accessories', 
+            [
+                'as' => 'api.kits.accessories.index',
+                'uses' => 'PredefinedKitsController@indexAccessories',
+            ]
+        );
+        
+        Route::post('accessories', 
+            [
+                'as' => 'api.kits.accessories.store',
+                'uses' => 'PredefinedKitsController@storeAccessory',
+            ]
+        );
+        
+        Route::put('accessories/{accessory_id}', 
+            [
+                'as' => 'api.kits.accessories.update',
+                'uses' => 'PredefinedKitsController@updateAccessory',
+            ]
+        );
+
+        Route::delete('accessories/{accessory_id}', 
+            [
+                'as' => 'api.kits.accessories.destroy',
+                'uses' => 'PredefinedKitsController@detachAccessory',
+            ]
+        );
+
+        // kit consumables
+        Route::get('consumables', 
+            [
+                'as' => 'api.kits.consumables.index',
+                'uses' => 'PredefinedKitsController@indexConsumables',
+            ]
+        );
+        
+        Route::post('consumables', 
+            [
+                'as' => 'api.kits.consumables.store',
+                'uses' => 'PredefinedKitsController@storeConsumable',
+            ]
+        );
+        
+        Route::put('consumables/{consumable_id}', 
+            [
+                'as' => 'api.kits.consumables.update',
+                'uses' => 'PredefinedKitsController@updateConsumable',
+            ]
+        );
+
+        Route::delete('consumables/{consumable_id}', 
+            [
+                'as' => 'api.kits.consumables.destroy',
+                'uses' => 'PredefinedKitsController@detachConsumable',
             ]
         );
 

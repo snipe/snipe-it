@@ -64,7 +64,7 @@ class RouteServiceProvider extends ServiceProvider
             require base_path('routes/web/components.php');
             require base_path('routes/web/users.php');
             require base_path('routes/web/kits.php');
-            require base_path('routes/web/dbtest.php');
+            //require base_path('routes/web/dbtest.php');
             require base_path('routes/web.php');
         });
     }

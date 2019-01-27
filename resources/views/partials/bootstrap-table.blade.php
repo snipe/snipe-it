@@ -341,6 +341,8 @@
     var child_formatters = [
         ['kits', 'models'],
         ['kits', 'licenses'],
+        ['kits', 'consumables'],
+        ['kits', 'accessories'],
     ];
 
     for (var i in child_formatters) {

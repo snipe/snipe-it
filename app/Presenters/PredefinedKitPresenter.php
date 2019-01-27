@@ -145,6 +145,11 @@ class PredefinedKitPresenter extends Presenter
                 "title" => 'Name',                      // TODO: trans
                 "formatter" => "licensesLinkFormatter"
             ], [
+                "field" => "quantity",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => 'Quantity',                      // TODO: trans
+            ], [
                 "field" => "actions",
                 "searchable" => false,
                 "sortable" => false,
@@ -157,6 +162,110 @@ class PredefinedKitPresenter extends Presenter
         return json_encode($layout);
     }
 
+    /**
+    * Json Column Layout for bootstrap table
+    * @return string
+    */
+    public static function dataTableAccessories()
+    {
+        $layout = [
+            [
+                "field" => "id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.id'),
+                "visible" => false
+            ], [
+                "field" => "pivot_id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.id'),
+                "visible" => false
+            ], [
+                "field" => "owner_id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.id'),
+                "visible" => false
+            ], [
+                "field" => "name",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => 'Name',                      // TODO: trans
+                "formatter" => "accessoriesLinkFormatter"       // MYTODO: check
+            ], [
+                "field" => "quantity",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => 'Quantity',                      // TODO: trans
+            ], [
+                "field" => "actions",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => false,
+                "title" => trans('table.actions'),
+                "formatter" => "kits_accessoriesActionsFormatter",       // MYTODO: check
+            ]
+        ];
+
+        return json_encode($layout);
+    }
+
+
+    /**
+    * Json Column Layout for bootstrap table
+    * @return string
+    */
+    public static function dataTableConsumables()
+    {
+        $layout = [
+            [
+                "field" => "id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.id'),
+                "visible" => false
+            ], [
+                "field" => "pivot_id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.id'),
+                "visible" => false
+            ], [
+                "field" => "owner_id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.id'),
+                "visible" => false
+            ], [
+                "field" => "name",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => 'Name',                      // TODO: trans
+                "formatter" => "consumablesLinkFormatter"       // MYTODO: check
+            ], [
+                "field" => "quantity",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => 'Quantity',                      // TODO: trans
+            ], [
+                "field" => "actions",
+                "searchable" => false,
+                "sortable" => false,
+                "switchable" => false,
+                "title" => trans('table.actions'),
+                "formatter" => "kits_consumablesActionsFormatter",       // MYTODO: check
+            ]
+        ];
+
+        return json_encode($layout);
+    }
 
 
     /**
