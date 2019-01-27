@@ -738,14 +738,17 @@ class AssetsController extends Controller
 
 
         if ($asset->save()) {
+            $file_name = '';
+            // Upload an image, if attached
+            if ($request->hasFile('image')) {
+                $path = 'private_uploads/audits';
+                if (!Storage::exists($path)) Storage::makeDirectory($path, 775);
+                $upload = $image = $request->file('image');
+                $ext = $image->getClientOriginalExtension();
+                $file_name = 'audit-'.str_random(18).'.'.$ext;
+                Storage::putFileAs($path, $upload, $file_name);
+            }
 
-            $path = 'private_uploads/audits';
-            if (!Storage::exists($path)) Storage::makeDirectory($path, 775);
-
-            $upload = $image = $request->file('image');
-            $ext = $image->getClientOriginalExtension();
-            $file_name = 'audit-'.str_random(18).'.'.$ext;
-            Storage::putFileAs($path, $upload, $file_name);
 
             $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.audit.success'));

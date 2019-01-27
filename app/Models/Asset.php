@@ -1052,19 +1052,6 @@ class Asset extends Depreciable
     }
 
 
-  /**
-  * Query builder scope for Deleted assets
-  *
-  * @param  \Illuminate\Database\Query\Builder $query Query builder instance
-  *
-  * @return \Illuminate\Database\Query\Builder          Modified query builder
-  */
-
-    public function scopeDeleted($query)
-    {
-        return $query->whereNotNull('assets.deleted_at');
-    }
-
     /**
    * scopeInModelList
    * Get all assets in the provided listing of model ids

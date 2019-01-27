@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Exception;
 use App\Models\User;
-use App\Models\LdapAd;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Contracts\Auth\Guard;
@@ -28,11 +28,11 @@ class RemoteUserAuthenticate
     protected $auth;
 
     /**
-     * The LDAP implementation.
+     * The settings model.
      *
-     * @var LdapAd
+     * @var Setting
      */
-    protected $ldap;
+    protected $setting;
 
     /**
      * Returns the configured key to use for retrieving
@@ -56,12 +56,12 @@ class RemoteUserAuthenticate
      * Constructor.
      *
      * @param \Illuminate\Contracts\Auth\Guard $auth
-     * @param \App\Models\LdapAd               $ldap
+     * @param \App\Models\Setting              $setting
      */
-    public function __construct(Guard $auth, LdapAd $ldap)
+    public function __construct(Guard $auth, Setting $setting)
     {
         $this->auth = $auth;
-        $this->ldap = $ldap;
+        $this->setting = $setting;
     }
 
     /**
@@ -78,7 +78,7 @@ class RemoteUserAuthenticate
      */
     public function handle($request, Closure $next)
     {
-        if (!$this->auth->check() && $this->ldap->ldapSettings['login_remote_user_enabled']) {
+        if (!$this->auth->check() && ($this->setting['login_remote_user_enabled'] === 1)) {
             Log::debug('Authenticatiing via REMOTE_USER.');
             // Retrieve the users account name from the request.
             if ($account = $this->account($request)) {

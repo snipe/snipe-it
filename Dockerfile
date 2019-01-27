@@ -34,17 +34,18 @@ libc-dev \
 pkg-config \
 libmcrypt-dev \
 php7.2-dev \
+ca-certificates \
+unzip \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
-RUN curl -O http://pear.php.net/go-pear.phar
+RUN curl -L -O https://github.com/pear/pearweb_phars/raw/master/go-pear.phar
 RUN php go-pear.phar
 
-RUN pecl install mcrypt-1.0.1
+RUN pecl install mcrypt-1.0.2
 
-RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/cli/conf.d/mcrypt.ini"
-RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/apache2/conf.d/mcrypt.ini"
+RUN bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/mods-available/mcrypt.ini"
 
 RUN phpenmod mcrypt
 RUN phpenmod gd
@@ -62,11 +63,11 @@ COPY docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 #SSL
 RUN mkdir -p /var/lib/snipeit/ssl
-COPY docker/001-default-ssl.conf /etc/apache2/sites-enabled/001-default-ssl.conf
-#COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf
+#COPY docker/001-default-ssl.conf /etc/apache2/sites-enabled/001-default-ssl.conf
+COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf
 
 RUN a2enmod ssl
-#RUN a2ensite 001-default-ssl.conf
+RUN a2ensite 001-default-ssl.conf
 
 COPY . /var/www/html
 
@@ -89,7 +90,7 @@ RUN \
 	rm -r "/var/www/html/storage/private_uploads" && ln -fs "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \
       && rm -rf "/var/www/html/public/uploads" && ln -fs "/var/lib/snipeit/data/uploads" "/var/www/html/public/uploads" \
       && rm -r "/var/www/html/storage/app/backups" && ln -fs "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups" \
-      && mkdir "/var/lib/snipeit/keys" && ln -fs "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key" \
+      && mkdir -p "/var/lib/snipeit/keys" && ln -fs "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key" \
       && ln -fs "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key" \
       && chown docker "/var/lib/snipeit/keys/"
 
