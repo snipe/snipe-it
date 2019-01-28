@@ -73,11 +73,12 @@ class Ldap extends Model
      */
     static function findAndBindUserLdap($username, $password)
     {
-        $settings = Setting::getSettings();
-        $connection = Ldap::connectToLdap();
+        $settings    = Setting::getSettings();
+        $connection  = Ldap::connectToLdap();
         $ldap_username_field     = $settings->ldap_username_field;
         $baseDn      = $settings->ldap_basedn;
         $userDn      = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
+        $filterQuery = $settings->ldap_auth_filter_query . $username;
 
         if ($settings->is_ad =='1') {
             // Check if they are using the userprincipalname for the username field.
@@ -91,18 +92,12 @@ class Ldap extends Model
 
         }
 
-        \Log::debug('Attempting to login using distinguished name:'.$userDn);
-
-
-        $filterQuery = $settings->ldap_auth_filter_query . $username;
-
-
-        if (!$ldapbind = @ldap_bind($connection, $userDn, $password)) {
-            if(!$ldapbind = Ldap::bindAdminToLdap($connection)){
-                    return false;
-            }
+        // Bind as admin
+        if (!$ldapbind = Ldap::bindAdminToLdap($connection)) {
+            return false;
         }
 
+        // Search the directory
         if (!$results = ldap_search($connection, $baseDn, $filterQuery)) {
             throw new Exception('Could not search LDAP: ');
         }
@@ -112,6 +107,14 @@ class Ldap extends Model
         }
 
         if (!$user =  ldap_get_attributes($connection, $entry)) {
+            return false;
+        }
+
+        // Now that the user is confirmed to exist, attempt to bind as that user to confirm their credentials
+
+        \Log::debug('Attempting to login using distinguished name:'.$userDn);
+
+        if (!$ldapbind = @ldap_bind($connection, $userDn, $password)) {
             return false;
         }
 
