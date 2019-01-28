@@ -61,12 +61,15 @@
                             @endif
 
                             <p>
-                               Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag.  We will try to find a matching user based on the user's full name you provide, based on the username format you configured in the Admin &gt; General Settings.
+                                Use this tool to import asset history you may have in CSV format. This information likely will be extracted from your previous asset management system.
+                            </p>
+                            <p>
+                                <i>Asset history</i> is defined as a checkout and subsequent checkin that has happened in the past. The assets and users MUST already exist in SNIPE, or they will be skipped. Matching assets for history import happens against the asset tag.  We will try to find a matching user based on the user's full name you provide, based on the username format you configured in the Admin &gt; General Settings.
                             </p>
 
-                            <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Checkout Date, Checkin Date, User Name, User E-mail (optional)</strong>. Any additional fields will be ignored. </p>
-
-                            <p><strong>History should be ordered by checkout date in ascending order.</strong></p>
+                            <p>
+                                Fields included in the CSV must match <i>exactly</i> these header values: <strong>Asset Tag, Checkout Date, Checkin Date, Full Name</strong>. Any additional fields will be ignored.
+                            </p>
 
                             <div class="form-group">
                                 <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
