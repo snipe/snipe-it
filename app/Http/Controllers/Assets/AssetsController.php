@@ -517,7 +517,7 @@ class AssetsController extends Controller
      */
     public function getImportHistory()
     {
-        $this->authorize('checkout', Asset::class);
+        $this->authorize('admin');
         return view('hardware/history');
     }
 

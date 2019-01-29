@@ -442,6 +442,8 @@
                             {{ trans('general.asset_maintenances') }}
                           </a>
                       </li>
+                    @endcan
+                    @can('admin')
                       <li>
                           <a href="{{ url('hardware/history') }}">
                             {{ trans('general.import-history') }}
