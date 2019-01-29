@@ -65,7 +65,7 @@ class UserImporter extends ItemImporter
         $this->log("No matching user, creating one");
         $user = new User();
         $user->fill($this->sanitizeItemForStoring($user));
-        // dd($user->fill($this->sanitizeItemForStoring($user)));
+
         if ($user->save()) {
             // $user->logCreate('Imported using CSV Importer');
             $this->log("User " . $this->item["name"] . ' was created');
