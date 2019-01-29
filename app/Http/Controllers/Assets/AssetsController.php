@@ -23,6 +23,7 @@ use Input;
 use Lang;
 use League\Csv\Reader;
 use League\Csv\Statement;
+use Illuminate\Support\Facades\Cache;
 use Log;
 use Mail;
 use Paginator;
@@ -557,57 +558,69 @@ class AssetsController extends Controller
         $status['error'] = array();
         $status['success'] = array();
         $base_username = null;
+        $cachetime = 1;
 
         foreach ($results as $batch_counter => $record) {
 
             $asset_tag = $record['Asset Tag'];
+            $username = $record['Full Name'];
 
-            $checkoutdate = Carbon::parse($record['Checkout Date'])->format('Y-m-d H:i:s');
-            $checkindate = Carbon::parse($record['Checkin Date'])->format('Y-m-d H:i:s');
+            try {
+                $checkoutdate = Carbon::parse($record['Checkout Date'])->format('Y-m-d H:i:s');
+                $checkindate = Carbon::parse($record['Checkin Date'])->format('Y-m-d H:i:s');
+            }
+            catch (\Exception $err) {
+                $status['error'][]['asset'][$asset_tag]['msg'] = 'Your dates are screwed up. Format needs to be Y-m-d H:i:s';
+                continue;
+            }
 
-            if ($asset = Asset::where('asset_tag', '=', $asset_tag)->first()) {
+            if ($asset = Cache::remember('asset:' . $asset_tag, $cachetime, function () use( &$asset_tag) {
+                $tocache = Asset::where('asset_tag', '=', $asset_tag)->value('id');
+                return is_null($tocache) ? false : $tocache;}))
+            {
                 //we've found our asset, now lets look for a user
-
                 if($base_username != User::generateFormattedNameFromFullName($record['Full Name'], Setting::getSettings()->username_format)) {
 
                     $base_username = User::generateFormattedNameFromFullName($record['Full Name'], Setting::getSettings()->username_format);
-                    $user = User::where('username', '=', $base_username['username']);
 
-                    if (!$user = $user->first()) {
+                    if (!$user = Cache::remember('user:' . $base_username['username'], $cachetime, function () use( &$base_username) {
+                        $tocache = User::where('username', '=', $base_username['username'])->value('id');
+                        return is_null($tocache) ? false : $tocache;}))
+                    {
                         $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset was found but user (' . $record['Full Name'] . ') not matched';
                         $base_username = null;
                         continue;
                     }
                 }
 
-                if($checkindate && $checkoutdate < $checkindate) {
+                if($checkoutdate < $checkindate) {
 
-                    Actionlog::firstOrCreate(array(
-                        'item_id' => $asset->id,
-                        'item_type' => Asset::class,
-                        'user_id' =>  Auth::user()->id,
-                        'note' => 'Historical record added by '.Auth::user()->present()->fullName(),
-                        'target_id' => $user->id,
-                        'target_type' => User::class,
-                        'created_at' =>  $checkoutdate,
-                        'action_type'   => 'checkout',
-                    ));
+                        Actionlog::firstOrCreate(array(
+                            'item_id' => $asset,
+                            'item_type' => Asset::class,
+                            'user_id' => Auth::user()->id,
+                            'note' => 'Historical record added by ' . Auth::user()->present()->fullName(),
+                            'target_id' => $user,
+                            'target_type' => User::class,
+                            'created_at' => $checkoutdate,
+                            'action_type' => 'checkout',
+                        ));
 
-                    Actionlog::firstOrCreate(array(
-                        'item_id' => $asset->id,
-                        'item_type' => Asset::class,
-                        'user_id' => Auth::user()->id,
-                        'note' => 'Historical record added by '.Auth::user()->present()->fullName(),
-                        'target_id' => $user->id,
-                        'target_type' => User::class,
-                        'created_at' => $checkindate,
-                        'action_type' => 'checkin'
-                    ));
+                        Actionlog::firstOrCreate(array(
+                            'item_id' => $asset,
+                            'item_type' => Asset::class,
+                            'user_id' => Auth::user()->id,
+                            'note' => 'Historical record added by ' . Auth::user()->present()->fullName(),
+                            'target_id' => $user,
+                            'target_type' => User::class,
+                            'created_at' => $checkindate,
+                            'action_type' => 'checkin'
+                        ));
 
                     $status['success'][]['asset'][$asset_tag]['msg'] = 'Asset successfully matched for ' . $record['Full Name'] . ' on ' . $checkoutdate;
                 }
                 else {
-                    $status['error'][]['asset'][$asset_tag]['msg'] = 'Checkin and checkout dates were bad';
+                    $status['error'][]['asset'][$asset_tag]['msg'] = 'Checkin date needs to be after checkout date.';
                 }
             }
             else {
