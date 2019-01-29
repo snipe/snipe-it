@@ -598,7 +598,8 @@ class AssetsController extends Controller
                         'item_type' => Asset::class,
                         'user_id' => Auth::user()->id,
                         'note' => 'Historical record added by '.Auth::user()->present()->fullName(),
-                        'target_id' => null,
+                        'target_id' => $user->id,
+                        'target_type' => User::class,
                         'created_at' => $checkindate,
                         'action_type' => 'checkin'
                     ));
