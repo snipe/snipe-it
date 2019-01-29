@@ -558,12 +558,11 @@ class AssetsController extends Controller
         $status['error'] = array();
         $status['success'] = array();
         $base_username = null;
-        $cachetime = 1;
+        $cachetime = Carbon::now()->addSeconds(120);
 
         foreach ($results as $batch_counter => $record) {
 
             $asset_tag = $record['Asset Tag'];
-            $username = $record['Full Name'];
 
             try {
                 $checkoutdate = Carbon::parse($record['Checkout Date'])->format('Y-m-d H:i:s');
