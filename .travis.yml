@@ -20,9 +20,9 @@ php:
   - 7.2
   - 7.3
 
-  matrix:
+matrix:
   allow_failures:
-  - php: 7.3
+    - php: 7.3
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
