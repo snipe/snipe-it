@@ -246,7 +246,7 @@ class SettingsController extends Controller
         Artisan::call('migrate', ['--force' => true]);
 
         if ((! file_exists(storage_path() . '/oauth-private.key')) || (! file_exists(storage_path() . '/oauth-public.key'))) {
-            Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations']);
+            Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations', '--force' => true]);
             Artisan::call('passport:install');
         }
 
