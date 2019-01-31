@@ -560,7 +560,7 @@ class AssetsController extends Controller
         $base_username = null;
         $cachetime = Carbon::now()->addSeconds(120);
 
-        foreach ($results as $batch_counter => $record) {
+        foreach ($results as $record) {
 
             $asset_tag = $record['Asset Tag'];
 
@@ -573,7 +573,7 @@ class AssetsController extends Controller
                 continue;
             }
 
-            if ($asset = Cache::remember('asset:' . $asset_tag, $cachetime, function () use( &$asset_tag) {
+            if($asset = Cache::remember('asset:' . $asset_tag, $cachetime, function () use( &$asset_tag) {
                 $tocache = Asset::where('asset_tag', '=', $asset_tag)->value('id');
                 return is_null($tocache) ? false : $tocache;}))
             {
@@ -582,7 +582,7 @@ class AssetsController extends Controller
 
                     $base_username = User::generateFormattedNameFromFullName($record['Full Name'], Setting::getSettings()->username_format);
 
-                    if (!$user = Cache::remember('user:' . $base_username['username'], $cachetime, function () use( &$base_username) {
+                    if(!$user = Cache::remember('user:' . $base_username['username'], $cachetime, function () use( &$base_username) {
                         $tocache = User::where('username', '=', $base_username['username'])->value('id');
                         return is_null($tocache) ? false : $tocache;}))
                     {
