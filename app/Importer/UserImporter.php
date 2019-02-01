@@ -38,7 +38,7 @@ class UserImporter extends ItemImporter
         $this->item['email'] = $this->findCsvMatch($row, 'email');
         $this->item['phone'] = $this->findCsvMatch($row, 'phone_number');
         $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
-        $this->item['activated'] = $this->findCsvMatch($row, 'activated');
+        $this->item['activated'] = $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated'));
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
         $this->item['department_id'] = $this->createOrFetchDepartment($this->findCsvMatch($row, 'department'));
         $this->item['manager_id'] = $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name'));
@@ -60,11 +60,12 @@ class UserImporter extends ItemImporter
         }
         // This needs to be applied after the update logic, otherwise we'll overwrite user passwords
         // Issue #5408
-        $this->item['password'] = $this->tempPassword;
+        $this->item['password'] = bcrypt($this->tempPassword);
 
         $this->log("No matching user, creating one");
         $user = new User();
         $user->fill($this->sanitizeItemForStoring($user));
+
         if ($user->save()) {
             // $user->logCreate('Imported using CSV Importer');
             $this->log("User " . $this->item["name"] . ' was created');
