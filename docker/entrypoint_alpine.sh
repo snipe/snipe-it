@@ -44,5 +44,10 @@ if [ ! -f "/var/www/html/database/migrations/*create_oauth*" ]
 then
   cp -a /var/www/html/vendor/laravel/passport/database/migrations/* /var/www/html/database/migrations/
 fi
+
+php artisan migrate --force
+php artisan config:clear
+php artisan config:cache
+
 export APACHE_LOG_DIR=/var/log/apache2
 exec httpd -DNO_DETACH < /dev/null
