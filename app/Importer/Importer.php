@@ -440,4 +440,13 @@ abstract class Importer
 
         return $this;
     }
+
+    public function fetchHumanBoolean($value)
+    {
+        if (($value =='1') || (strtolower($value) =='true') || (strtolower($value) =='yes'))
+        {
+            return '1';
+        }
+        return '0';
+    }
 }
