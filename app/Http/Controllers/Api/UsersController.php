@@ -242,6 +242,16 @@ class UsersController extends Controller
         $this->authorize('update', User::class);
 
         $user = User::findOrFail($id);
+
+        // This is a janky hack to prevent people from changing admin demo user data on the public demo.
+        // The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
+        // Thanks, jerks. You are why we can't have nice things. - snipe
+
+        if ((($id == 1) || ($id == 2)) && (config('app.lock_passwords'))) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Permission denied. You cannot update user information via API on the demo.'));
+        }
+
+
         $user->fill($request->all());
 
         if ($user->id == $request->input('manager_id')) {

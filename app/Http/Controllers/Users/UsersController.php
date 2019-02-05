@@ -224,9 +224,13 @@ class UsersController extends Controller
         // permissions here before we update the user.
         $permissions = $request->input('permissions', array());
         app('request')->request->set('permissions', $permissions);
-        // Only update the email address if locking is set to false
-        if (config('app.lock_passwords')) {
-            return redirect()->route('users.index')->with('error', 'Denied! You cannot update user information on the demo.');
+
+        // This is a janky hack to prevent people from changing admin demo user data on the public demo.
+        // The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
+        // Thanks, jerks. You are why we can't have nice things. - snipe
+
+        if ((($id == 1) || ($id == 2)) && (config('app.lock_passwords'))) {
+            return redirect()->route('users.index')->with('error', 'Permission denied. You cannot update user information for superadmins on the demo.');
         }
 
         try {
