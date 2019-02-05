@@ -152,6 +152,8 @@ class Ldap extends Model
             throw new Exception('Could not bind to LDAP: '.ldap_error($connection));
         }
 
+        return true;
+
     }
 
 
