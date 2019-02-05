@@ -292,7 +292,7 @@ class AssetsController extends Controller
             $this->authorize('view', $asset);
             return (new AssetsTransformer)->transformAsset($asset);
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 404);
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
 
     }
 
@@ -311,7 +311,7 @@ class AssetsController extends Controller
                 $this->authorize('view', $assets);
                 return (new AssetsTransformer)->transformAssets($assets, $assets->count());
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 404);
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
 
     }
 
