@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
                             <div class="col-sm-9">
-                                <input type="file" name="user_import_csv" id="user_import_csv"  {{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
+                                <input type="file" name="user_import_csv" id="user_import_csv" required {{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
                             </div>
                         </div>
 
