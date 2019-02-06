@@ -64,16 +64,16 @@
                            Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user's name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
                         </p>
 
-                        <p>Fields included in the CSV must match the headers: <strong>Date, Tag, Name</strong>. Any additional fields will be ignored. </p>
+                        <p>Fields included in the CSV must match the headers: <strong>Date, Asset Tag, Name</strong>. Any additional fields will be ignored. </p>
 
-                        <p><strong>Date</strong> should be the checkout date. <strong>Tag</strong> should be the asset tag. <strong>Name</strong> should be the user's name (firstname lastname).</p>
+                        <p><strong>Date</strong> should be the checkout date. <strong>Asset Tag</strong> should be the asset tag. <strong>Name</strong> should be the user's name (firstname lastname).</p>
 
                         <p><strong>History should be ordered by date in ascending order.</strong></p>
 
                         <div class="form-group">
                             <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
                             <div class="col-sm-9">
-                                <input type="file" name="user_import_csv" id="user_import_csv"{{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
+                                <input type="file" name="user_import_csv" id="user_import_csv"  {{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
                             </div>
                         </div>
 

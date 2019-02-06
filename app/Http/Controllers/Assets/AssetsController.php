@@ -536,8 +536,9 @@ class AssetsController extends Controller
             ini_set("auto_detect_line_endings", '1');
         }
 
+        $request->validate(['user_import_csv' => 'required']);
+
         $csv = Reader::createFromPath(Input::file('user_import_csv'));
-        $csv->setNewline("\r\n");
         //get the first row, usually the CSV header
         $csv->setHeaderOffset(0);
         $results = $csv->getRecords();
@@ -545,7 +546,6 @@ class AssetsController extends Controller
         $status = array();
         $status['error'] = array();
         $status['success'] = array();
-
 
         foreach ($results as $row) {
             if (is_array($row)) {
