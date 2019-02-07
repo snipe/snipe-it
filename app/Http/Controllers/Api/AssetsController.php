@@ -468,43 +468,15 @@ class AssetsController extends Controller
         $this->authorize('update', Asset::class);
 
         if ($asset = Asset::find($id)) {
-            ($request->has('model_id')) ?
-                $asset->model()->associate(AssetModel::find($request->get('model_id'))) : '';
-            ($request->has('name')) ?
-                $asset->name = $request->get('name') : '';
-            ($request->has('serial')) ?
-                $asset->serial = $request->get('serial') : '';
-            ($request->has('model_id')) ?
-                $asset->model_id = $request->get('model_id') : '';
-            ($request->has('order_number')) ?
-                $asset->order_number = $request->get('order_number') : '';
-            ($request->has('notes')) ?
-                $asset->notes = $request->get('notes') : '';
-            ($request->has('asset_tag')) ?
-                $asset->asset_tag = $request->get('asset_tag') : '';
-            ($request->has('archived')) ?
-                $asset->archived = $request->get('archived') : '';
-            ($request->has('status_id')) ?
-                $asset->status_id = $request->get('status_id') : '';
-            ($request->has('warranty_months')) ?
-                $asset->warranty_months = $request->get('warranty_months') : '';
-            ($request->has('purchase_cost')) ?
-                $asset->purchase_cost = Helper::ParseFloat($request->get('purchase_cost')) : '';
-            ($request->has('purchase_date')) ?
-                $asset->purchase_date = $request->get('purchase_date') : '';
-            ($request->has('assigned_to')) ?
-                $asset->assigned_to = $request->get('assigned_to') : '';
-            ($request->has('supplier_id')) ?
-                $asset->supplier_id = $request->get('supplier_id') : '';
-            ($request->has('requestable')) ?
-                $asset->requestable = $request->get('requestable') : '';
-            ($request->has('rtd_location_id')) ?
-                $asset->rtd_location_id = $request->get('rtd_location_id') : '';
-            ($request->has('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : '';
-            ($request->has('company_id')) ?
-                $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
+            $asset->fill($request->all());
+
+            ($request->has('model_id')) ?
+                $asset->model()->associate(AssetModel::find($request->get('model_id'))) : null;
+            ($request->has('company_id')) ?
+                $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : null;
+            ($request->has('rtd_location_id')) ?
+                $asset->location_id = $request->get('rtd_location_id') : null;
 
             // Update custom fields
             if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
