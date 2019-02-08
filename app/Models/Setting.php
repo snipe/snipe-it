@@ -65,7 +65,7 @@ class Setting extends Model
           'default_currency'                    => 'required',
           'locale'                              => 'required',
           'slack_endpoint'                      => 'url|required_with:slack_channel|nullable',
-          'slack_channel'                       => 'regex:/(?<!\w)#\w+/|required_with:slack_endpoint|nullable',
+          'slack_channel'                       => 'regex:/^[\#\@]?\w+/|required_with:slack_endpoint|nullable',
           'slack_botname'                       => 'string|nullable',
           'labels_per_page'                     => 'numeric',
           'labels_width'                        => 'numeric',
