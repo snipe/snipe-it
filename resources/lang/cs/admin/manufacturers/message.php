@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'Výrobce nebyl obnoven, zkuste to znovu',
+        'success' => 'Výrobce úspěšně obnoven.'
     ),
 
     'delete' => array(

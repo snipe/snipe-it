@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Salasanasi linkki on lähetetty!',
-    'user'			=> 'Tätä käyttäjää ei ole tai sillä ei ole sähköpostiosoitetta',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

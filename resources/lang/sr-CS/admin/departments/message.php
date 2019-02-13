@@ -2,20 +2,20 @@
 
 return array(
 
-    'does_not_exist' => 'Department does not exist.',
-    'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
+    'does_not_exist' => 'Department ne postoji.',
+    'assoc_users'	 => 'Ovaj je department je trenutno povezan s barem jednim korisnikom i ne može se izbrisati. Ažurirajte svoje korisnike da se više ne referenciraju na ovaj department i pokušajte ponovo. ',
     'create' => array(
-        'error'   => 'Department was not created, please try again.',
-        'success' => 'Department created successfully.'
+        'error'   => 'Dep. nije kreiran, pokušajte ponovo.',
+        'success' => 'Dep. uspešno kreiran.'
     ),
     'update' => array(
-        'error'   => 'Department was not updated, please try again',
-        'success' => 'Department updated successfully.'
+        'error'   => 'Dep. nije ažuriran, pokušajte ponovo',
+        'success' => 'Dep. uspešno ažuriran.'
     ),
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this department?',
-        'error'   => 'There was an issue deleting the department. Please try again.',
-        'success' => 'The department was deleted successfully.'
+        'confirm'   	=> 'Da li ste sigurni da želite izbrisati ovaj dep.?',
+        'error'   => 'Došlo je do problema s brisanjem dep. Molim pokušaj te ponovo.',
+        'success' => 'Dep. je uspešno izbrisan.'
     )
 
 );

@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => '귀하의 비밀번호 링크가 전송되었습니다!',
-    'user'			=> '사용자가 존재 하지 않거나 연결된 이메일 주소가 없습니다',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

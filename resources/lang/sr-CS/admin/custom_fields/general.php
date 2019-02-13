@@ -2,7 +2,7 @@
 
 return array(
     'custom_fields'		        => 'Custom Fields',
-    'field'		                => 'Field',
+    'field'		                => 'Polje',
     'about_fieldsets_title'		=> 'About Fieldsets',
     'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used used for specific asset model types.',
     'custom_format'             => 'Custom regex format...',
@@ -12,8 +12,8 @@ return array(
     'fieldset'      	        => 'Fieldset',
     'qty_fields'      	      => 'Qty Fields',
     'fieldsets'      	        => 'Fieldsets',
-    'fieldset_name'           => 'Fieldset Name',
-    'field_name'              => 'Field Name',
+    'fieldset_name'           => 'Naziv grupa polja',
+    'field_name'              => 'Naziv polja',
     'field_values'            => 'Field Values',
     'field_values_help'       => 'Add selectable options, one per line. Blank lines other than the first line will be ignored.',
     'field_element'           => 'Form Element',
@@ -24,7 +24,7 @@ return array(
     'required'   		          => 'Required',
     'req'   		              => 'Req.',
     'used_by_models'   		    => 'Used By Models',
-    'order'   		            => 'Order',
+    'order'   		            => 'Porudžbina',
     'create_fieldset'         => 'New Fieldset',
     'create_field'            => 'New Custom Field',
     'value_encrypted'      	        => 'The value of this field is encrypted in the database. Only admin users will be able to view the decrypted value',

@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Komponenta ne postoji.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Komponenta nije kreirana, pokušajte ponovo.',
+        'success' => 'Komponenta je uspešno kreirana.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Komponenta nije ažurirana, pokušajte ponovo',
+        'success' => 'Komponenta je uspešno ažurirana.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Da li ste sigurni da želite izbrisati ovu komponentu?',
+        'error'   => 'Došlo je do problema s brisanjem komponente. Molim pokušaj te ponovo.',
+        'success' => 'Komponenta je uspješno izbrisana.'
     ),
 
      'checkout' => array(
         'error'   		=> 'Component was not checked out, please try again',
         'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'Korisnik nevažeći. Molim pokušaj te ponovo.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Komponenta nije prijavljena, pokušajte ponovo',
+        'success' 		=> 'Komponenta je uspešno prijavljena.',
+        'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušajte ponovo.'
     )
 
 

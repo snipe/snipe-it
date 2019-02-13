@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'קישור הסיסמה שלך נשלח!',
-    'user'			=> 'משתמש זה אינו קיים או שאין לו כתובת אימייל',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

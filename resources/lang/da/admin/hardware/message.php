@@ -62,7 +62,7 @@ return array(
         'success' 		=> 'Asset tjekket ud med succes.',
         'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.',
         'not_available' => 'Det aktiv er ikke tilgængeligt for kassen!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Du skal vælge mindst ét aktiv fra listen'
     ),
 
     'checkin' => array(

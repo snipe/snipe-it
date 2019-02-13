@@ -88,6 +88,8 @@ return array(
     'login_remote_user_custom_logout_url_text' => 'Custom logout URL',
     'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> 'Ang Logo',
+    'logo_print_assets'         => 'Use in Print',
+    'logo_print_assets_help'    => 'Use branding on printable asset lists ',
     'full_multiple_companies_support_help_text' => 'Pagbabawal sa mga gumagamit (kasama ang mga admin) na nakatalaga sa mga asset ng kanilang kompanya.',
     'full_multiple_companies_support_text' => 'Ang Buong Suporta sa Maramihang Kompanya',
     'show_in_model_list'   => 'Ipakita sa Modelo ng mga Dropdowns',

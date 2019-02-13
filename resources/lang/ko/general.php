@@ -206,7 +206,7 @@
     'unknown_admin'			=> '알수없는 관리자',
     'username_format'		=> '사용자명 형식',
     'update'                => '갱신',
-    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
+    'upload_filetypes_help'      => '허용된 파일 형식은 png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, rar 입니다. 올려놓을 수 있는 최대 크기는 :size 입니다.',
     'uploaded'              => '업로드됨',
     'user'					=> '사용자',
     'accepted'			    => '승인됨',

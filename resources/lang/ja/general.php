@@ -206,7 +206,7 @@
     'unknown_admin'			=> '不明な管理者',
     'username_format'		=> 'ユーザー名の書式',
     'update'                => '更新',
-    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
+    'upload_filetypes_help'      => '使用できるファイルは、png、gif、jpg、jpeg、doc、docx、pdf、xls、txt、lic、zip、およびrarです。許可される最大アップロードサイズは:sizeです。',
     'uploaded'              => 'アップロード完了',
     'user'					=> '利用者',
     'accepted'			    => '承認済',

@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'does_not_exist' => 'Kategorija ne postoji.',
+    'assoc_models'	 => 'Ova je kategorija trenutno povezana sa barem jednim modelom i ne može se izbrisati. Ažurirajte svoje modele da se više ne referenciraju na ovu kategoriju i pokušajte ponovno. ',
+    'assoc_items'	 => 'Ova je kategorija trenutno povezana s najmanje jednim: asset_type i ne može se izbrisati. Ažurirajte svoj: asset_type da se više ne referencira na ovu kategoriju i pokušajte ponovo. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Kategorija nije kreirana, pokušajte ponovo.',
+        'success' => 'Kategorija je uspješno kreirana.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Kategorija nije ažurirana, pokušajte ponovo',
+        'success' => 'Kategorija je uspješno ažurirana.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Da li ste sigurni da želite izbrisati ovu kategoriju?',
+        'error'   => 'Došlo je do problema s brisanjem kategorije. Molim pokušaj te ponovo.',
+        'success' => 'Kategorija je uspešno izbrisana.'
     )
 
 );

@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Vizualizare Modele',
     'fieldset'                  => 'FIELDSET',
     'no_custom_field'           => 'Nu există câmpuri personalizate',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'Adăugați valori implicite',
 );

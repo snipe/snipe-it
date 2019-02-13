@@ -12,5 +12,5 @@ return array(
     'submit'  	                => 'Zatwierdź',
     'upload'                    => 'Wgraj',
 	'select_file'				=> 'Wybierz plik...',
-    'select_files'				=> 'Select Files...',
+    'select_files'				=> 'Wybierz pliki...',
 );

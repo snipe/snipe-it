@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Pribor ne postoji.',
+    'assoc_users'	 => 'Ovaj pribor trenutno ima :count stavku označenu korisnicima. Proverite pribor i pokušajte ponovo. ',
 
     'create' => array(
-        'error'   => 'The accessory was not created, please try again.',
-        'success' => 'The accessory was successfully created.'
+        'error'   => 'Pribor nije kreiran. Pokušajte ponovo.',
+        'success' => 'Pribor je uspešno kreiran.'
     ),
 
     'update' => array(
-        'error'   => 'The accessory was not updated, please try again',
-        'success' => 'The accessory was updated successfully.'
+        'error'   => 'Pribor nije ažuriran. Pokušajte ponovo',
+        'success' => 'Pribor je uspešno ažuriran.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Da li ste sigurni da želite brisanje pribora?',
+        'error'   => 'Došlo je do problema s brisanjem dodatne opreme, pribora. Molim pokušajte ponovo.',
+        'success' => 'Pribor je uspešno izbrisan.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Pribor nije potvrdjen, pokušajte ponovo',
+        'success' 		=> 'Pribor je uspešno proveren.',
+        'user_does_not_exist' => 'Korisnik nevažeći. Molim pokušajte ponovo.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Pribor nije prijavljen, pokušajte ponovo',
+        'success' 		=> 'Pribor je uspešno prijavljen.',
+        'user_does_not_exist' => 'Korisnik nevažeći. Molim pokušaj te ponovo.'
     )
 
 

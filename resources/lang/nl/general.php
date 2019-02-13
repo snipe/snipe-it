@@ -206,7 +206,7 @@
     'unknown_admin'			=> 'Onbekende Beheerder',
     'username_format'		=> 'Gebruikersnaam indeling',
     'update'                => 'Bijwerken',
-    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
+    'upload_filetypes_help'      => 'Toegestane bestandstypen zijn png, gif, jpg, jpeg, doc, docx, pdf, txt, zip en rar. Maximale toegestane bestandsgrootte is: :size.',
     'uploaded'              => 'Geupload',
     'user'					=> 'Gebruiker',
     'accepted'			    => 'geaccepteerd',

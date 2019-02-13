@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Aset adalah item yang dikesan oleh nombor siri atau tag aset. Mereka cenderung menjadi item nilai yang lebih tinggi di mana mengenal pasti perkara-perkara tertentu.',
 	'archived'  				=> 'Diarkibkan',
     'asset'  					=> 'Harta',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Daftar Keluar Aset',
     'checkin'  					=> 'Terima Harta',
     'checkout'  				=> 'Aset Checkout',
     'clone'  					=> 'Pendua Harta',
