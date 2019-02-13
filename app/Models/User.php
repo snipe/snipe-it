@@ -383,7 +383,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function managedLocations()
     {
-        return $this->hasMany('\App\Models\Location', 'manager_id')->withTrashed();
+        return $this->hasMany('\App\Models\Location', 'manager_id');
     }
 
     /**
