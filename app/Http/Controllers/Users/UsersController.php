@@ -256,9 +256,7 @@ class UsersController extends Controller
 
         // Only save groups if the user is a super user
         if (Auth::user()->isSuperUser()) {
-            if ($request->filled('groups')) {
-                $user->groups()->sync($request->input('groups'));
-            }
+            $user->groups()->sync($request->input('groups'));
         }
 
 
