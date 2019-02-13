@@ -95,7 +95,7 @@ class AssetsController extends Controller
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-            'model.category', 'model.manufacturer', 'model.fieldset','supplier');
+                'model.category', 'model.manufacturer', 'model.fieldset','supplier');
 
 
         // These are used by the API to query against specific ID numbers.
@@ -127,7 +127,7 @@ class AssetsController extends Controller
 
         if (($request->has('assigned_to')) && ($request->has('assigned_type'))) {
             $assets->where('assets.assigned_to', '=', $request->input('assigned_to'))
-                    ->where('assets.assigned_type', '=', $request->input('assigned_type'));
+                ->where('assets.assigned_type', '=', $request->input('assigned_type'));
         }
 
         if ($request->has('company_id')) {
@@ -167,12 +167,12 @@ class AssetsController extends Controller
                 break;
             case 'RTD':
                 $assets->whereNull('assets.assigned_to')
-                ->join('status_labels AS status_alias',function ($join) {
-                    $join->on('status_alias.id', "=", "assets.status_id")
-                        ->where('status_alias.deployable','=',1)
-                        ->where('status_alias.pending','=',0)
-                        ->where('status_alias.archived', '=', 0);
-                });
+                    ->join('status_labels AS status_alias',function ($join) {
+                        $join->on('status_alias.id', "=", "assets.status_id")
+                            ->where('status_alias.deployable','=',1)
+                            ->where('status_alias.pending','=',0)
+                            ->where('status_alias.archived', '=', 0);
+                    });
                 break;
             case 'Undeployable':
                 $assets->Undeployable();
@@ -188,11 +188,11 @@ class AssetsController extends Controller
             case 'Requestable':
                 $assets->where('assets.requestable', '=', 1)
                     ->join('status_labels AS status_alias',function ($join) {
-                    $join->on('status_alias.id', "=", "assets.status_id")
-                        ->where('status_alias.deployable','=',1)
-                        ->where('status_alias.pending','=',0)
-                        ->where('status_alias.archived', '=', 0);
-                });
+                        $join->on('status_alias.id', "=", "assets.status_id")
+                            ->where('status_alias.deployable','=',1)
+                            ->where('status_alias.pending','=',0)
+                            ->where('status_alias.archived', '=', 0);
+                    });
 
                 break;
             case 'Deployed':
@@ -207,8 +207,8 @@ class AssetsController extends Controller
                         $join->on('status_alias.id', "=", "assets.status_id")
                             ->where('status_alias.archived', '=', 0);
                     });
-                    
-                // If there is a status ID, don't take show_archived_in_list into consideration
+
+                    // If there is a status ID, don't take show_archived_in_list into consideration
                 } else {
                     $assets->join('status_labels AS status_alias',function ($join) {
                         $join->on('status_alias.id', "=", "assets.status_id");
@@ -233,8 +233,8 @@ class AssetsController extends Controller
         // This handles all of the pivot sorting (versus the assets.* fields
         // in the allowed_columns array)
         $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets.created_at';
-        
-        
+
+
         switch ($sort_override) {
             case 'model':
                 $assets->OrderModels($order);
@@ -307,15 +307,15 @@ class AssetsController extends Controller
     {
         if ($assets = Asset::with('assetstatus')->with('assignedTo')
             ->withTrashed()->where('serial',$serial)->get()) {
-                $this->authorize('view', $assets);
-                return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+            $this->authorize('view', $assets);
+            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
 
     }
 
 
-     /**
+    /**
      * Returns JSON with information about an asset for detail view.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -353,7 +353,7 @@ class AssetsController extends Controller
             'assets.assigned_to',
             'assets.assigned_type',
             'assets.status_id'
-            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived(),'company_id', 'assets');
+        ])->with('model', 'assetstatus', 'assignedTo')->NotArchived(),'company_id', 'assets');
 
         if ($request->has('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
             $assets = $assets->RTD();
@@ -378,7 +378,7 @@ class AssetsController extends Controller
                 $asset->use_text .= ' → '.$asset->assigned->getFullNameAttribute();
             }
 
-            
+
             if ($asset->assetstatus->getStatuslabelType()=='pending') {
                 $asset->use_text .=  '('.$asset->assetstatus->getStatuslabelType().')';
             }
@@ -491,9 +491,9 @@ class AssetsController extends Controller
             if ($asset->save()) {
 
                 if (($request->has('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
-                        $location = $target->location_id;
+                    $location = $target->location_id;
                 } elseif (($request->has('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
-                            $location = $target->location_id;
+                    $location = $target->location_id;
                 } elseif (($request->has('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
                     $location = $target->id;
                 }
@@ -603,7 +603,7 @@ class AssetsController extends Controller
         $expected_checkin = request('expected_checkin', null);
         $note = request('note', null);
         $asset_name = request('name', null);
-        
+
         // Set the location ID to the RTD location id if there is one
         if ($asset->rtd_location_id!='') {
             $asset->location_id = $target->rtd_location_id;
@@ -611,7 +611,7 @@ class AssetsController extends Controller
 
 
 
-        
+
 
         if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
