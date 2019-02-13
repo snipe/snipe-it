@@ -790,7 +790,6 @@
     @section('moar_scripts')
     @show
 
-    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
     <script nonce="{{ csrf_token() }}">
         $.validate({
