@@ -269,7 +269,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
      **/
     public function managedLocations()
     {
-        return $this->hasMany('\App\Models\Location', 'manager_id')->withTrashed();
+        return $this->hasMany('\App\Models\Location', 'manager_id');
     }
 
     /**
