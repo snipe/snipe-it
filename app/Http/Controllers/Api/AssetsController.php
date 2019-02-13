@@ -362,7 +362,7 @@ class AssetsController extends Controller
             'assets.assigned_to',
             'assets.assigned_type',
             'assets.status_id'
-            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived());
+            ])->with('model', 'assetstatus', 'assignedTo')->NotArchived(), 'company_id', 'assets');
 
         if ($request->filled('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
             $assets = $assets->RTD();

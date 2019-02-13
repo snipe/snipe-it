@@ -156,8 +156,9 @@ class AssetsController extends Controller
             $image = $request->input('image');
 
 
-            $asset->asset_tag  = $asset_tags[$a];
+            $asset->asset_tag = $asset_tags[$a];
             $asset = $request->handleImages($asset);
+        }
 
 
             // Update custom fields in the database.
