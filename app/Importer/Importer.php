@@ -341,7 +341,6 @@ abstract class Importer
         \Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
 
         if ($user->save()) {
-            \Log::debug('Importer.php  Name: '.$user->first_name.' '.$user->last_name.' ('.$user->username.')');
             $this->log('User '.$user_array['username'].' created');
             return $user;
         }

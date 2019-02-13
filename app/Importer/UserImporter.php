@@ -44,15 +44,10 @@ class UserImporter extends ItemImporter
         $this->item['username'] = $this->findCsvMatch($row, 'username');
         $this->item['first_name'] = $this->findCsvMatch($row, 'first_name');
         $this->item['last_name'] = $this->findCsvMatch($row, 'last_name');
-        \Log::debug('UserImporter.php  Name: '.$this->item['first_name'].' '.$this->item['last_name'].' ('.$this->item['username'].')');
         $this->item['email'] = $this->findCsvMatch($row, 'email');
         $this->item['phone'] = $this->findCsvMatch($row, 'phone_number');
         $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
         $this->item['activated'] =  ($this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')) == 1) ? '1' : 0;
-
-        \Log::debug('UserImporter.php Activated: '.$this->findCsvMatch($row, 'activated'));
-        \Log::debug('UserImporter.php Activated fetchHumanBoolean: '. $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')));
-
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
         $this->item['department_id'] = $this->createOrFetchDepartment($this->findCsvMatch($row, 'department'));
         $this->item['manager_id'] = $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name'));
