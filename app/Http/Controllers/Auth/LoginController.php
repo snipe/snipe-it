@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Validator;
+use App\Services\LdapAd;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use App\Models\Setting;
-use App\Models\Ldap;
 use App\Models\User;
-use Auth;
-use Config;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Input;
+use Illuminate\Support\Facades\Input;
 use Redirect;
-use Log;
-use View;
-use PragmaRX\Google2FA\Google2FA;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This controller handles authentication for the user, including local
@@ -40,14 +39,23 @@ class LoginController extends Controller
     protected $redirectTo = '/';
 
     /**
+     * @var LdapAd
+     */
+    protected $ldap;
+
+    /**
      * Create a new authentication controller instance.
+     *
+     * @param LdapAd $ldap
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(LdapAd $ldap)
     {
+        parent::__construct();
         $this->middleware('guest', ['except' => ['logout','postTwoFactorAuth','getTwoFactorAuth','getTwoFactorEnroll']]);
-        \Session::put('backUrl', \URL::previous());
+        Session::put('backUrl', \URL::previous());
+        $this->ldap = $ldap;
     }
 
     function showLoginForm(Request $request)
@@ -62,6 +70,29 @@ class LoginController extends Controller
         }
 
         return view('auth.login');
+    }
+
+    /**
+     * Log in a user by LDAP
+     * 
+     * @author Wes Hulette <jwhulette@gmail.com>
+     * 
+     * @since 5.0.0
+     *
+     * @param Request $request
+     * 
+     * @return User
+     * 
+     * @throws \Exception
+     */
+    private function loginViaLdap(Request $request): User
+    {
+        try {
+            return $this->ldap->ldapLogin($request->input('username'), $request->input('password'));
+        } catch (\Exception $ex) {
+            LOG::debug("LDAP user login: " . $ex->getMessage());
+            throw new \Exception($ex->getMessage());
+        }
     }
 
     private function loginViaRemoteUser(Request $request)
@@ -84,53 +115,6 @@ class LoginController extends Controller
             }
         }
     }
-
-    private function loginViaLdap(Request $request)
-    {
-        Log::debug("Binding user to LDAP.");
-        $ldap_user = Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'));
-        if (!$ldap_user) {
-            Log::debug("LDAP user ".$request->input('username')." not found in LDAP or could not bind");
-            throw new \Exception("Could not find user in LDAP directory");
-        } else {
-            Log::debug("LDAP user ".$request->input('username')." successfully bound to LDAP");
-        }
-
-        // Check if the user already exists in the database and was imported via LDAP
-        $user = User::where('username', '=', Input::get('username'))->whereNull('deleted_at')->where('ldap_import', '=', 1)->where('activated', '=', '1')->first();
-        Log::debug("Local auth lookup complete");
-
-        // The user does not exist in the database. Try to get them from LDAP.
-        // If user does not exist and authenticates successfully with LDAP we
-        // will create it on the fly and sign in with default permissions
-        if (!$user) {
-            Log::debug("Local user ".Input::get('username')." does not exist");
-            Log::debug("Creating local user ".Input::get('username'));
-
-            if ($user = Ldap::createUserFromLdap($ldap_user)) { //this handles passwords on its own
-                Log::debug("Local user created.");
-            } else {
-                Log::debug("Could not create local user.");
-                throw new \Exception("Could not create local user");
-            }
-            // If the user exists and they were imported from LDAP already
-        } else {
-            Log::debug("Local user ".$request->input('username')." exists in database. Updating existing user against LDAP.");
-
-            $ldap_attr = Ldap::parseAndMapLdapAttributes($ldap_user);
-
-            if (Setting::getSettings()->ldap_pw_sync=='1') {
-                $user->password = bcrypt($request->input('password'));
-            }
-
-            $user->email = $ldap_attr['email'];
-            $user->first_name = $ldap_attr['firstname'];
-            $user->last_name = $ldap_attr['lastname'];
-            $user->save();
-        } // End if(!user)
-        return $user;
-    }
-
 
     /**
      * Account sign in form processing.
@@ -160,9 +144,10 @@ class LoginController extends Controller
         $user = null;
 
         // Should we even check for LDAP users?
-        if (Setting::getSettings()->ldap_enabled=='1') {
-            Log::debug("LDAP is enabled.");
+        if ($this->ldap->init()) {
+            LOG::debug("LDAP is enabled.");
             try {
+                LOG::debug("Attempting to log user in by LDAP authentication.");
                 $user = $this->loginViaLdap($request);
                 Auth::login($user, true);
 
@@ -192,8 +177,8 @@ class LoginController extends Controller
         }
 
         if ($user = Auth::user()) {
-            $user->last_login = \Carbon::now();
-            \Log::debug('Last login:'.$user->last_login);
+            $user->last_login = Carbon::now();
+            Log::debug('Last login:'.$user->last_login);
             $user->save();
         }
         // Redirect to the users page
@@ -214,7 +199,7 @@ class LoginController extends Controller
         }
 
         $user = Auth::user();
-        $google2fa = app()->make('PragmaRX\Google2FA\Contracts\Google2FA');
+        $google2fa = app()->make('pragmarx.google2fa');
 
         if ($user->two_factor_secret=='') {
             $user->two_factor_secret = $google2fa->generateSecretKey(32);
@@ -222,7 +207,7 @@ class LoginController extends Controller
         }
 
 
-        $google2fa_url = $google2fa->getQRCodeGoogleUrl(
+        $google2fa_url = $google2fa->getQRCodeInline(
             urlencode(Setting::getSettings()->site_name),
             urlencode($user->username),
             $user->two_factor_secret
@@ -246,6 +231,8 @@ class LoginController extends Controller
     /**
      * Two factor code submission
      *
+     * @param Request $request
+     *
      * @return Redirect
      */
     public function postTwoFactorAuth(Request $request)
@@ -257,7 +244,7 @@ class LoginController extends Controller
 
         $user = Auth::user();
         $secret = $request->get('two_factor_secret');
-        $google2fa = app()->make('PragmaRX\Google2FA\Contracts\Google2FA');
+        $google2fa = app()->make('pragmarx.google2fa');
         $valid = $google2fa->verifyKey($user->two_factor_secret, $secret);
 
         if ($valid) {
@@ -275,6 +262,8 @@ class LoginController extends Controller
 
     /**
      * Logout page.
+     *
+     * @param Request $request
      *
      * @return Redirect
      */
@@ -340,7 +329,7 @@ class LoginController extends Controller
     * Override the lockout time and duration
     *
     * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\RedirectResponse
+    * @return  bool
     */
     protected function hasTooManyLoginAttempts(Request $request)
     {

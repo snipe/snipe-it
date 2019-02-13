@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Transformers\AssetModelsTransformer;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Support\Facades\Storage;
 
 
 /**
@@ -48,15 +49,15 @@ class AssetModelsController extends Controller
             'models.updated_at',
          ])
             ->with('category','depreciation', 'manufacturer','fieldset')
-            ->withCount('assets');
+            ->withCount('assets as assets_count');
 
 
 
-        if ($request->has('status')) {
+        if ($request->filled('status')) {
             $assetmodels->onlyTrashed();
         }
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $assetmodels->TextSearch($request->input('search'));
         }
 
@@ -114,7 +115,7 @@ class AssetModelsController extends Controller
     public function show($id)
     {
         $this->authorize('view', AssetModel::class);
-        $assetmodel = AssetModel::withCount('assets')->findOrFail($id);
+        $assetmodel = AssetModel::withCount('assets as assets_count')->findOrFail($id);
         return (new AssetModelsTransformer)->transformAssetModel($assetmodel);
     }
 
@@ -177,7 +178,7 @@ class AssetModelsController extends Controller
 
         if ($assetmodel->image) {
             try  {
-                unlink(public_path().'/uploads/models/'.$assetmodel->image);
+                Storage::disk('public')->delete('assetmodels/'.$assetmodel->image);
             } catch (\Exception $e) {
                 \Log::error($e);
             }
@@ -210,7 +211,7 @@ class AssetModelsController extends Controller
 
         $settings = \App\Models\Setting::getSettings();
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $assetmodels = $assetmodels->SearchByManufacturerOrCat($request->input('search'));
         }
 
@@ -234,7 +235,7 @@ class AssetModelsController extends Controller
                 $assetmodel->use_text .=  ' (#'.e($assetmodel->model_number).')';
             }
 
-            $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? url('/').'/uploads/models/'.$assetmodel->image : null;
+            $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? Storage::disk('public')->url('assetmodels/'.e($assetmodel->image)) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($assetmodels);

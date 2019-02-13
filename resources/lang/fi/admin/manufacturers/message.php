@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'Valmistajaa ei palautettu, ole hyvä ja yritä uudelleen',
+        'success' => 'Valmistaja palautettu onnistuneesti.'
     ),
 
     'delete' => array(

@@ -97,8 +97,4 @@ class UsersTransformer
         return (new DatatablesTransformer)->transformDatatables($users);
     }
 
-
-
-
-
 }

@@ -50,4 +50,10 @@ tests/_support/_generated/*
 /storage/oauth-public.key
 
 *.cache
+
+.vagrant
+
+\.php_cs\.dist
+
+phpmd\.xml
 /public/storage

@@ -88,7 +88,7 @@ return array(
     'login_remote_user_custom_logout_url_text' => 'Персонализиран адрес за изход',
     'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
     'logo'                    	=> 'Лого',
-    'logo_print_assets'         => 'Use in Print',
+    'logo_print_assets'         => 'Използвай при пчат',
     'logo_print_assets_help'    => 'Use branding on printable asset lists ',
     'full_multiple_companies_support_help_text' => 'Ограничаване на потребителите (включително административните) до активите на собствената им компания.',
     'full_multiple_companies_support_text' => 'Поддръжка на множество компании',

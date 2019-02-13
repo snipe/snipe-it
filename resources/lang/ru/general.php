@@ -86,7 +86,7 @@
     'filastname_format'			=> 'Первая буква имени и фамилия (jsmith@example.com)',
     'firstname_lastname_format'	=> 'Имя и фамилия через точку  (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'Имя и фамилия (jane_smith@example.com)',
-    'lastnamefirstinitial_format' =>  'Last Name First Initial (smithj@example.com)',
+    'lastnamefirstinitial_format' =>  'Фамилия и первая буква имени (smithj@example.com)',
     'first'					=> 'В начало',
     'first_name'			=> 'Имя',
     'first_name_format'		=> 'Имя (jane@example.com)',

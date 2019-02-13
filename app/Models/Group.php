@@ -37,17 +37,27 @@ class Group extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableRelations = []; 
+    protected $searchableRelations = [];
 
     /**
-    * Get user groups
-    */
+     * Establishes the groups -> users relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function users()
     {
         return $this->belongsToMany('\App\Models\User', 'users_groups');
     }
 
-
+    /**
+     * Decode JSON permissions into array
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return array
+     */
     public function decodePermissions()
     {
         return json_decode($this->permissions, true);

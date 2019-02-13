@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'Pabrikan tidak dapat dipulihkan, silakan coba kembali',
+        'success' => 'Pabrikan berhasil dipulihkan.'
     ),
 
     'delete' => array(

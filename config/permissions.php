@@ -578,6 +578,13 @@ return array(
             'display'    => true,
         ),
 
+        array(
+            'permission' => 'self.checkout_assets',
+            'label'      => 'Self-Checkout',
+            'note'       => 'This user may check out assets that are marked for self-checkout.',
+            'display'    => true,
+        ),
+
     ),
 
 

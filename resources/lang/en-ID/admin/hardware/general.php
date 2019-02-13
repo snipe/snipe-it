@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Aset adalah item yang dilacak dengan nomor seri atau tag aset. Mereka cenderung menjadi item nilai lebih tinggi di mana mengidentifikasi item tertentu yang penting.',
 	'archived'  				=> 'Diarsipkan',
     'asset'  					=> 'Aset',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Pengeluaran Aset',
     'checkin'  					=> 'Mendaftar aset',
     'checkout'  				=> 'Periksa aset',
     'clone'  					=> 'Gandakan aset',

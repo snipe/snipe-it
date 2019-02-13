@@ -32,18 +32,18 @@ class DepreciationTest extends BaseTest
          $this->createValidAssetModel();
          $depreciation = $this->createValidDepreciation('computer', ['name' => 'New Depreciation']);
          $models = factory(App\Models\AssetModel::class, 5)->states('mbp-13-model')->create(['depreciation_id'=>$depreciation->id]);
-         $this->assertEquals(5,$depreciation->has_models());
+         $this->assertEquals(5,$depreciation->models->count());
      }
 
      public function testADepreciationHasLicenses()
      {
          $category = $this->createValidCategory('license-graphics-category');
          $depreciation = $this->createValidDepreciation('computer', ['name' => 'New Depreciation']);
-         $licenses = factory(App\Models\License::class, 5)->states('photoshop')->create([
+         $licenses = factory(App\Models\LicenseModel::class, 5)->states('photoshop')->create([
              'depreciation_id'=>$depreciation->id,
              'category_id' => $category->id
          ]);
 
-         $this->assertEquals(5,$depreciation->has_licenses());
+         $this->assertEquals(5,$depreciation->licenses()->count());
      }
 }

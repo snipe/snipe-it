@@ -44,7 +44,10 @@
 @section('header_right')
   <a href="{{ route('reports/custom') }}" style="margin-right: 5px;" class="btn btn-default">
     Custom Export</a>
+  @can('create', \App\Models\Asset::class)
   <a href="{{ route('hardware.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
+  @endcan
+
 @stop
 
 {{-- Page content --}}

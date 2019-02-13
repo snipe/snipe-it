@@ -22,7 +22,6 @@ class AssetMaintenance extends Model implements ICompanyableChild
 
     protected $dates = [ 'deleted_at', 'start_date' , 'completion_date'];
     protected $table = 'asset_maintenances';
-    // Declaring rules for form validation
     protected $rules = [
         'asset_id'               => 'required|integer',
         'supplier_id'            => 'required|integer',
@@ -49,7 +48,10 @@ class AssetMaintenance extends Model implements ICompanyableChild
      * 
      * @var array
      */
-    protected $searchableRelations = []; 
+    protected $searchableRelations = [
+        'asset'     => ['name', 'asset_tag'],
+        'asset.model'     => ['name', 'model_number'],
+    ];
 
 
     public function getCompanyableParents()
@@ -155,6 +157,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
                     ->withTrashed();
     }
 
+
     /**
    * -----------------------------------------------
    * BEGIN QUERY SCOPES
@@ -165,10 +168,10 @@ class AssetMaintenance extends Model implements ICompanyableChild
     /**
      * Query builder scope to order on admin user
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order       Order
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
     public function scopeOrderAdmin($query, $order)
     {
@@ -180,10 +183,10 @@ class AssetMaintenance extends Model implements ICompanyableChild
     /**
      * Query builder scope to order on asset tag
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order       Order
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
     public function scopeOrderByTag($query, $order)
     {
@@ -194,14 +197,16 @@ class AssetMaintenance extends Model implements ICompanyableChild
     /**
      * Query builder scope to order on asset tag
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order       Order
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
     public function scopeOrderByAssetName($query, $order)
     {
         return $query->leftJoin('assets', 'asset_maintenances.asset_id', '=', 'assets.id')
             ->orderBy('assets.name', $order);
     }
+
+
 }

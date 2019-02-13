@@ -1,4 +1,9 @@
+@php
+    use App\Models\CustomField;
+@endphp
+
 @extends('layouts/default')
+
 {{-- Page title --}}
 @section('title')
   {{ trans('admin/custom_fields/general.custom_fields') }}
@@ -70,19 +75,18 @@
               {{ trans('admin/custom_fields/general.field_format') }}
             </label>
             <div class="col-md-6 required">
-              {{ Form::select("format",\App\Helpers\Helper::predefined_formats(), $field->format, array('class'=>'format select2 form-control')) }}
+              {{ Form::select("format",$predefinedFormats, $field->getFormatType(), 
+                array('class'=>'format select2 form-control')) }}
               {!! $errors->first('format', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
           </div>
-
           <!-- Custom Format -->
           <div class="form-group {{ $errors->has('custom_format') ? ' has-error' : '' }}" id="custom_regex" style="display:none;">
             <label for="custom_format" class="col-md-4 control-label">
               {{ trans('admin/custom_fields/general.field_custom_format') }}
             </label>
             <div class="col-md-6 required">
-
-                {{ Form::text('custom_format', Input::old('custom_format', (($field->format!='') && (stripos($field->format,'regex')===0)) ? $field->format : ''), array('class' => 'form-control', 'id' => 'custom_format', 'placeholder'=>'regex:/^[0-9]{15}$/')) }}
+                {{ Form::text('custom_format', Input::old('custom_format', $customFormat), array('class' => 'form-control', 'id' => 'custom_format', 'placeholder'=>'regex:/^[0-9]{15}$/')) }}
                 <p class="help-block">{!! trans('admin/custom_fields/general.field_custom_format_help') !!}</p>
 
               {!! $errors->first('custom_format', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
@@ -115,55 +119,45 @@
 
 
       @if (!$field->id)
+        <!-- Encrypted  -->
+        <div class="form-group {{ $errors->has('encrypted') ? ' has-error' : '' }}">
+          <div class="col-md-8 col-md-offset-4">
+            <label for="field_encrypted">
+              <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted" class="minimal"{{ (Input::old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
+              {{ trans('admin/custom_fields/general.encrypt_field') }}
+            </label>
+          </div>
 
-
-
-
-          <!-- Encrypted  -->
-          <div class="form-group {{ $errors->has('encrypted') ? ' has-error' : '' }}">
-            <div class="col-md-8 col-md-offset-4">
-              <label for="field_encrypted">
-                <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted" class="minimal"{{ (Input::old('field_encrypted') || $field->field_encrypted) ? ' checked="checked"' : '' }}>
-                {{ trans('admin/custom_fields/general.encrypt_field') }}
-              </label>
-            </div>
-
-            <div class="col-md-6 col-md-offset-4" id="encrypt_warning" style="display:none;">
-              <div class="callout callout-danger">
-                <p><i class="fa fa-warning"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
-              </div>
+          <div class="col-md-6 col-md-offset-4" id="encrypt_warning" style="display:none;">
+            <div class="callout callout-danger">
+              <p><i class="fa fa-warning"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
             </div>
           </div>
-          @endif
-
+        </div>
+      @endif
 
       </div> <!-- /.box-body-->
+
       <div class="box-footer text-right">
         <button type="submit" class="btn btn-success"> {{ trans('general.save') }}</button>
       </div>
+
     </div> <!--.box.box-default-->
+
       {{ Form::close() }}
   </div> <!--/.col-md-9-->
+
   <div class="col-md-3">
     <h4>About Custom Fields</h4>
     <p>Custom fields allow you to add arbitrary attributes to assets.</p>
   </div>
+  
 </div>
 @stop
 
 @section('moar_scripts')
 <script nonce="{{ csrf_token() }}">
     $(document).ready(function(){
-
-        // Initialize selected index of the format dropdown
-        // If the custom_regex is ever NOT the last element in the format
-        // listbox, we will need to refactor this.
-        if ($('#custom_format').val()!='') {
-            // console.log('value is ' + $('#custom_format').val());
-            $('.format').prop('selectedIndex', $('.format')[0].options.length - 1);
-        }
-
-
         // Only display the custom format field if it's a custom format validation type
         $(".format").change(function(){
             $(this).find("option:selected").each(function(){
@@ -186,8 +180,6 @@
             });
         }).change();
     });
-
-
 
     // Checkbox handling
     $('#field_encrypted').on('ifChecked', function(event){

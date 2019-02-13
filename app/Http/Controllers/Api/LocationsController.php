@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use App\Models\Location;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Support\Facades\Storage;
 
 class LocationsController extends Controller
 {
@@ -41,11 +42,11 @@ class LocationsController extends Controller
             'locations.updated_at',
             'locations.image',
             'locations.currency'
-        ])->withCount('assignedAssets')
-        ->withCount('assets')
-        ->withCount('users');
+        ])->withCount('assignedAssets as assigned_assets_count')
+        ->withCount('assets as assets_count')
+        ->withCount('users as users_count');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $locations = $locations->TextSearch($request->input('search'));
         }
 
@@ -192,7 +193,7 @@ class LocationsController extends Controller
             'locations.image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $locations = $locations->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
         }
 
@@ -203,7 +204,7 @@ class LocationsController extends Controller
         // they may not have a ->name value but we want to display something anyway
         foreach ($locations as $location) {
             $location->use_text = $location->name;
-            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
+            $location->use_image = ($location->image) ? Storage::disk('public')->url('locations/'.$location->image, $location->image): null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($locations);

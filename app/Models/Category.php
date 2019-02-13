@@ -80,31 +80,62 @@ class Category extends SnipeModel
      */
     protected $searchableRelations = [];
 
-    public function has_models()
-    {
-        return $this->hasMany('\App\Models\AssetModel', 'category_id')->count();
-    }
 
+    /**
+     * Establishes the category -> accessories relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function accessories()
     {
         return $this->hasMany('\App\Models\Accessory');
     }
 
+    /**
+     * Establishes the category -> licenses relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.3]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function licenses()
     {
         return $this->hasMany('\App\Models\License');
     }
 
+    /**
+     * Establishes the category -> consumables relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function consumables()
     {
         return $this->hasMany('\App\Models\Consumable');
     }
 
+    /**
+     * Establishes the category -> consumables relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function components()
     {
         return $this->hasMany('\App\Models\Component');
     }
 
+    /**
+     * Get the number of items in the category
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return int
+     */
     public function itemCount()
     {
         switch ($this->category_type) {
@@ -120,16 +151,38 @@ class Category extends SnipeModel
         return '0';
     }
 
+    /**
+     * Establishes the category -> assets relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function assets()
     {
         return $this->hasManyThrough('\App\Models\Asset', '\App\Models\AssetModel', 'category_id', 'model_id');
     }
 
+    /**
+     * Establishes the category -> models relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function models()
     {
         return $this->hasMany('\App\Models\AssetModel', 'category_id');
     }
 
+    /**
+     * Checks for a category-specific EULA, and if that doesn't exist,
+     * checks for a settings level EULA
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return string | null
+     */
     public function getEula()
     {
 
@@ -145,15 +198,22 @@ class Category extends SnipeModel
 
     }
 
+
     /**
-     * scopeRequiresAcceptance
+     * -----------------------------------------------
+     * BEGIN QUERY SCOPES
+     * -----------------------------------------------
+     **/
+
+    /**
+     * Query builder scope for whether or not the category requires acceptance
      *
-     * @param $query
-     *
-     * @return mixed
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
-     * @version v1.0
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
+
     public function scopeRequiresAcceptance($query)
     {
 

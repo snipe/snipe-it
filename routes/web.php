@@ -59,13 +59,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     /*
-    * Status Labels
-    */
-    Route::resource('components', 'ComponentsController', [
-        'parameters' => ['component' => 'component_id']
-    ]);
-
-    /*
     * Departments
     */
     Route::resource('departments', 'DepartmentsController', [
@@ -173,6 +166,8 @@ Route::group([ 'prefix' => 'admin','middleware' => ['auth', 'authorize:superuser
     Route::get('purge', ['as' => 'settings.purge.index', 'uses' => 'SettingsController@getPurge']);
     Route::post('purge', ['as' => 'settings.purge.save', 'uses' => 'SettingsController@postPurge']);
 
+    Route::get('login-attempts', ['as' => 'settings.logins.index','uses' => 'SettingsController@getLoginAttempts' ]);
+
     # Backups
     Route::group([ 'prefix' => 'backups', 'middleware' => 'auth' ], function () {
 
@@ -256,10 +251,6 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['auth']], function () {
         'accept-asset/{logID}',
         [ 'as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset' ]
     );
-    Route::post(
-        'accept-asset/{logID}',
-        [ 'as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset' ]
-    );
 
     # Profile
     Route::get(
@@ -278,6 +269,15 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['auth']], function () {
 
     # Account Dashboard
     Route::get('/', [ 'as' => 'account', 'uses' => 'ViewAssetsController@getIndex' ]);
+
+
+    Route::get('accept', 'Account\AcceptanceController@index')
+        ->name('account.accept');
+        
+    Route::get('accept/{id}', 'Account\AcceptanceController@create')
+        ->name('account.accept.item');
+
+    Route::post('accept/{id}', 'Account\AcceptanceController@store');        
 
 });
 

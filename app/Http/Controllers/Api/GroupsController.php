@@ -22,9 +22,9 @@ class GroupsController extends Controller
         $this->authorize('view', Group::class);
         $allowed_columns = ['id','name','created_at', 'users_count'];
 
-        $groups = Group::select('id','name','permissions','created_at','updated_at')->withCount('users');
+        $groups = Group::select('id','name','permissions','created_at','updated_at')->withCount('users as users_count');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $groups = $groups->TextSearch($request->input('search'));
         }
 

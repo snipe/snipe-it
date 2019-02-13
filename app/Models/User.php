@@ -3,11 +3,11 @@ namespace App\Models;
 
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,9 +15,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Traits\UniqueUndeletedTrait;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use DB;
 
-class User extends SnipeModel implements AuthenticatableContract, CanResetPasswordContract
+
+
+class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
     protected $presenter = 'App\Presenters\UserPresenter';
     use SoftDeletes, ValidatingTrait;
@@ -69,6 +72,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'email'                   => 'email|nullable',
         'password'                => 'required|min:6',
         'locale'                  => 'max:10|nullable',
+        'manager_id'              => 'exists:users,id|nullable'
     ];
 
     use Searchable;
@@ -98,9 +102,20 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'userloc'    => ['name'],
         'department' => ['name'],
         'groups'     => ['name'],
+        'company'    => ['name'],
         'manager'    => ['first_name', 'last_name', 'username']
-    ];  
+    ];
 
+    /**
+     * Check user permissions
+     *
+     * Parses the user and group permission masks to see if the user
+     * is authorized to do the thing
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return boolean
+     */
     public function hasAccess($section)
     {
         if ($this->isSuperUser()) {
@@ -115,12 +130,13 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
         $user_permissions = json_decode($this->permissions, true);
 
+        $is_user_section_permissions_set = ($user_permissions != '') && array_key_exists($section, $user_permissions);
         //If the user is explicitly granted, return true
-        if (($user_permissions!='') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1'))) {
+        if ($is_user_section_permissions_set && ($user_permissions[$section]=='1')) {
             return true;
         }
         // If the user is explicitly denied, return false
-        if (($user_permissions=='') || array_key_exists($section, $user_permissions) && ($user_permissions[$section]=='-1')) {
+        if ($is_user_section_permissions_set && ($user_permissions[$section]=='-1')) {
             return false;
         }
 
@@ -135,6 +151,13 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         return false;
     }
 
+    /**
+     * Checks if the user is a SuperUser
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return boolean
+     */
     public function isSuperUser()
     {
         if (!$user_permissions = json_decode($this->permissions, true)) {
@@ -157,21 +180,63 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
 
+    /**
+     * Establishes the user -> company relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function company()
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
+    /**
+     * Establishes the user -> department relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function department()
     {
         return $this->belongsTo('\App\Models\Department', 'department_id');
     }
 
+    /**
+     * Checks activated status
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return boolean
+     */
+    public function isActivated()
+    {
+        return $this->activated ==1;
+    }
+
+    /**
+     * Returns the full name attribute
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return string
+     */
     public function getFullNameAttribute()
     {
         return $this->first_name . " " . $this->last_name;
     }
 
+    /**
+     * Returns the complete name attribute with username
+     *
+     * @todo refactor this so it's less repetitive and dumb
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return string
+     */
     public function getCompleteNameAttribute()
     {
         return $this->last_name . ", " . $this->first_name . " (" . $this->username . ")";
@@ -192,7 +257,11 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
 
     /**
-     * Get assets assigned to this user
+     * Establishes the user -> assets relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function assets()
     {
@@ -200,7 +269,14 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get assets assigned to this user
+     * Establishes the user -> maintenances relationship
+     *
+     * This would only be used to return maintenances that this user
+     * created.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function assetmaintenances()
     {
@@ -208,7 +284,11 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get accessories assigned to this user
+     * Establishes the user -> accessories relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function accessories()
     {
@@ -216,7 +296,11 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get consumables assigned to this user
+     * Establishes the user -> consumables relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function consumables()
     {
@@ -224,7 +308,11 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get licenses assigned to this user
+     * Establishes the user -> license seats relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function licenses()
     {
@@ -232,78 +320,105 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Get action logs for this user
+     * Establishes the user -> actionlogs relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function userlog()
     {
         return $this->hasMany('\App\Models\Actionlog', 'target_id')->orderBy('created_at', 'DESC')->withTrashed();
     }
 
+
     /**
+     * Establishes the user -> location relationship
+     *
      * Get the asset's location based on the assigned user
-     * @todo - this should be removed once we're sure we've switched it
-     * to location()
-     **/
+     *
+     * @todo - this should be removed once we're sure we've switched it to location()
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+
     public function userloc()
     {
         return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
     }
 
+
     /**
-     * Get the asset's location based on the assigned user
-     **/
+     * Establishes the user -> location relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function location()
     {
         return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
     }
 
+
     /**
-     * Get the user's manager based on the assigned user
-     **/
+     * Establishes the user -> manager relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function manager()
     {
         return $this->belongsTo('\App\Models\User', 'manager_id')->withTrashed();
     }
 
     /**
-     * Get any locations the user manages.
-     **/
+     * Establishes the user -> managed locations relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function managedLocations()
     {
         return $this->hasMany('\App\Models\Location', 'manager_id');
     }
 
     /**
-     * Get user groups
+     * Establishes the user -> groups relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function groups()
     {
         return $this->belongsToMany('\App\Models\Group', 'users_groups');
     }
 
-
-    public function accountStatus()
-    {
-        if ($this->throttle) {
-            if ($this->throttle->suspended==1) {
-                return 'suspended';
-            } elseif ($this->throttle->banned==1) {
-                return 'banned';
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-
+    /**
+     * Establishes the user -> assets relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function assetlog()
     {
         return $this->hasMany('\App\Models\Asset', 'id')->withTrashed();
     }
 
     /**
-     * Get uploads for this asset
+     * Establishes the user -> uploads relationship
+     *
+     * @todo I don't think we use this?
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function uploads()
     {
@@ -315,28 +430,42 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
-     * Fetch Items User has requested
+     * Establishes the user -> requested assets relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function checkoutRequests()
     {
         return $this->belongsToMany(Asset::class, 'checkout_requests', 'user_id', 'requestable_id')->whereNull('canceled_at');
     }
 
-    public function throttle()
-    {
-        return $this->hasOne('\App\Models\Throttle');
-    }
 
-    public function scopeGetDeleted($query)
-    {
-        return $query->withTrashed()->whereNotNull('users.deleted_at');
-    }
-
+    /**
+     * Query builder scope to return NOT-deleted users
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     *
+     * @param  string $query
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function scopeGetNotDeleted($query)
     {
         return $query->whereNull('deleted_at');
     }
 
+    /**
+     * Query builder scope to return users by email or username
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     *
+     * @param  string $query
+     * @param  string $user_username
+     * @param  string $user_email
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function scopeMatchEmailOrUsername($query, $user_username, $user_email)
     {
         return $query->where('email', '=', $user_email)
@@ -344,13 +473,22 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
             ->orWhere('username', '=', $user_email);
     }
 
+    /**
+     * Generate email from full name
+     * 
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     *
+     * @param  string $query
+     * @return string
+     */
     public static function generateEmailFromFullName($name)
     {
-        $username = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $name);
+        $username = User::generateFormattedNameFromFullName($name, Setting::getSettings()->email_format);
         return $username['username'].'@'.Setting::getSettings()->email_domain;
     }
 
-    public static function generateFormattedNameFromFullName($format = 'filastname', $users_name)
+    public static function generateFormattedNameFromFullName($users_name, $format = 'filastname')
     {
 
         // If there was only one name given
@@ -416,9 +554,9 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     /**
      * Run additional, advanced searches.
      *
-     * @param  Illuminate\Database\Eloquent\Builder $query
-     * @param  array  $term The search terms
-     * @return Illuminate\Database\Eloquent\Builder
+     * @param  \Illuminate\Database\Query\Builder $query Query builder instance
+     * @param  array  $terms The search terms
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function advancedTextSearch(Builder $query, array $terms) {
 
@@ -429,34 +567,27 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         return $query;
     }
 
-
+    /**
+     * Query builder scope to return users by group
+     *
+     * @param  \Illuminate\Database\Query\Builder $query Query builder instance
+     * @param  int $id
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function scopeByGroup($query, $id) {
         return $query->whereHas('groups', function ($query) use ($id) {
             $query->where('groups.id', '=', $id);
         });
     }
 
-    /**
-     * Query builder scope for Deleted users
-     *
-     * @param  Illuminate\Database\Query\Builder $query Query builder instance
-     *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
-     */
-
-    public function scopeDeleted($query)
-    {
-        return $query->whereNotNull('users.deleted_at');
-    }
-
 
     /**
      * Query builder scope to order on manager
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order         Order
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param string                              $order         Order
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
     public function scopeOrderManager($query, $order)
     {
@@ -467,10 +598,10 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     /**
      * Query builder scope to order on company
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order         Order
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param string                              $order         Order
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
     public function scopeOrderLocation($query, $order)
     {
@@ -481,13 +612,17 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     /**
      * Query builder scope to order on department
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order         Order
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order         Order
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
     public function scopeOrderDepartment($query, $order)
     {
         return $query->leftJoin('departments as departments_users', 'users.department_id', '=', 'departments_users.id')->orderBy('departments_users.name', $order);
+    }
+
+    public function preferredLocale(){
+        return $this->locale;
     }
 }

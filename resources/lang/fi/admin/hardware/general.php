@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Varat ovat kohteita, joita seuraa sarjanumero tai omaisuuden tunniste. Ne ovat yleensä korkeamman arvon kohteita, joissa yksilöidään tietyn kohteen asiat.',
 	'archived'  				=> 'Arkistoitu',
     'asset'  					=> 'Laite',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Luovuta nimikkeet',
     'checkin'  					=> 'Palauta Laite',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Monista Laite',

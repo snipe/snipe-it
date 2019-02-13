@@ -2,7 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AssetFileRequest extends Request
 {
@@ -25,12 +26,7 @@ class AssetFileRequest extends Request
     {
         $max_file_size = \App\Helpers\Helper::file_upload_max_size();
         return [
-          'file.*' => 'required|mimes:png,gif,jpg,svg,jpeg,doc,docx,pdf,txt,zip,rar,xls,lic|max:'.$max_file_size,
+          'file.*' => 'required|mimes:png,gif,jpg,svg,jpeg,doc,docx,pdf,txt,zip,rar,xls,lic,xml|max:'.$max_file_size,
         ];
-    }
-
-    public function response(array $errors)
-    {
-        return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
     }
 }

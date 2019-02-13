@@ -31,11 +31,11 @@
 
 
 
-                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
-                                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('admin/users/table.email') }}">
-                                            {!! $errors->first('email', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                            <input type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="{{ trans('admin/users/table.username') }}">
+                                            {!! $errors->first('username', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                         </div>
                                     </div>
 

@@ -61,8 +61,9 @@ class ItemImporter extends Importer
             $this->item['department_id'] = $this->createOrFetchDepartment($item_department);
         }
 
-        $item_manager_first_name = $this->findCsvMatch($row, "manager_first_name");
-        $item_manager_last_name = $this->findCsvMatch($row, "manager_last_name");
+        $item_manager_first_name = $this->findCsvMatch($row, "manage_first_name");
+        $item_manager_last_name = $this->findCsvMatch($row, "manage_last_name");
+
         if ($this->shouldUpdateField($item_manager_first_name)) {
             $this->item['manager_id'] = $this->fetchManager($item_manager_first_name, $item_manager_last_name);
         }
@@ -160,7 +161,7 @@ class ItemImporter extends Importer
      * @param $field string
      * @return boolean
      */
-    private function shouldUpdateField($field)
+    protected function shouldUpdateField($field)
     {
         if (empty($field)) {
             return false;
@@ -173,8 +174,7 @@ class ItemImporter extends Importer
      * @author Daniel Melzter
      * @since 3.0
      * @param array
-     * @param $category Category
-     * @param $row Manufacturer
+     * @param $row Row
      * @return int Id of asset model created/found
      * @internal param $asset_modelno string
      */
@@ -292,6 +292,27 @@ class ItemImporter extends Importer
         return null;
     }
 
+
+
+    /**
+     * Fetch an existing manager
+     *
+     * @author A. Gianotto
+     * @since 4.6.5
+     * @param $user_manager string
+     * @return int id of company created/found
+     */
+    public function fetchManager($user_manager_first_name, $user_manager_last_name)
+    {
+        $manager = User::where('first_name', '=', $user_manager_first_name)
+            ->where('last_name', '=', $user_manager_last_name)->first();
+        if ($manager) {
+            $this->log('A matching Manager ' . $user_manager_first_name . ' '. $user_manager_last_name . ' already exists');
+            return $manager->id;
+        }
+        $this->log('No matching Manager ' . $user_manager_first_name . ' '. $user_manager_last_name . ' found. If their user account is being created through this import, you should re-process this file again. ');
+        return null;
+    }
 
 
     /**

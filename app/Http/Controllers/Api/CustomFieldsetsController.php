@@ -16,7 +16,6 @@ use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Http\Transformers\CustomFieldsTransformer;
 use App\Http\Transformers\CustomFieldsetsTransformer;
-use App\Http\Requests\AssetRequest;
 
 /**
  * This controller handles all actions related to Custom Asset Fieldsets for
@@ -43,7 +42,7 @@ class CustomFieldsetsController extends Controller
     public function index()
     {
         $this->authorize('index', CustomFieldset::class);
-        $fieldsets = CustomFieldset::withCount(['fields', 'models'])->get();
+        $fieldsets = CustomFieldset::withCount('fields as fields_count', 'models as models_count')->get();
         return (new CustomFieldsetsTransformer)->transformCustomFieldsets($fieldsets, $fieldsets->count());
 
     }

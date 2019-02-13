@@ -60,18 +60,27 @@ class Department extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableRelations = [];    
+    protected $searchableRelations = [];
 
-
+    /**
+     * Establishes the department -> company relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function company()
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
+
     /**
-     * Even though we allow allow for checkout to things beyond users
-     * this method is an easy way of seeing if we are checked out to a user.
-     * @return mixed
+     * Establishes the department -> users relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function users()
     {
@@ -80,15 +89,24 @@ class Department extends SnipeModel
 
 
     /**
-    * Return the manager in charge of the dept
-    * @return mixed
-    */
+     * Establishes the department -> manager relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function manager()
     {
         return $this->belongsTo('\App\Models\User', 'manager_id');
     }
 
-
+    /**
+     * Establishes the department -> location relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function location()
     {
         return $this->belongsTo('\App\Models\Location', 'location_id');

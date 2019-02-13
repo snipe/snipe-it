@@ -38,7 +38,7 @@ return array(
     'tag'				=> 'Laitetunniste',
     'update'			=> 'Laitepäivitys',
     'warranty'			=> 'Takuu',
-		'warranty_expires'		=> 'Warranty Expires',
+		'warranty_expires'		=> 'Takuu päättyy',
     'years'				=> 'vuotta',
 )
 ;

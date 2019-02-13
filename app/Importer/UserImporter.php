@@ -3,6 +3,7 @@
 namespace App\Importer;
 
 use App\Helpers\Helper;
+use App\Models\Department;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
 
@@ -53,10 +54,13 @@ class UserImporter extends ItemImporter
         \Log::debug('UserImporter.php Activated fetchHumanBoolean: '. $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')));
 
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
-        $this->item['department_id'] = $this->createOrFetchDepartment($this->findCsvMatch($row, 'department')) ? $this->createOrFetchDepartment($this->findCsvMatch($row, 'department')) : null;
-        $this->item['manager_id'] = $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name')) ? $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name')) : null;
+        $this->item['department_id'] = $this->createOrFetchDepartment($this->findCsvMatch($row, 'department'));
+        $this->item['manager_id'] = $this->fetchManager($this->findCsvMatch($row, 'manager_first_name'), $this->findCsvMatch($row, 'manager_last_name'));
 
-
+        $user_department = $this->findCsvMatch($row, 'department');
+        if ($this->shouldUpdateField($user_department)) {
+            $this->item["department_id"] = $this->createOrFetchDepartment($user_department);
+        }
         $user = User::where('username', $this->item['username'])->first();
         if ($user) {
             if (!$this->updating) {
@@ -75,13 +79,14 @@ class UserImporter extends ItemImporter
 
         // This needs to be applied after the update logic, otherwise we'll overwrite user passwords
         // Issue #5408
-        $this->item['password'] = $this->tempPassword;
+        $this->item['password'] = bcrypt($this->tempPassword);
 
         $this->log("No matching user, creating one");
         $user = new User();
         $user->fill($this->sanitizeItemForStoring($user));
 
         if ($user->save()) {
+            // $user->logCreate('Imported using CSV Importer');
             $this->log("User " . $this->item["name"] . ' was created');
 
             if(($user->email) && ($user->activated=='1')) {
@@ -92,11 +97,9 @@ class UserImporter extends ItemImporter
                     'last_name' => $user->last_name,
                     'password' => $this->tempPassword,
                 ];
-
                 if ($this->send_welcome) {
                     $user->notify(new WelcomeNotification($data));
                 }
-
             }
             $user = null;
             $this->item = null;
@@ -105,5 +108,32 @@ class UserImporter extends ItemImporter
 
         $this->logError($user, 'User');
         return;
+    }
+
+      /**
+     * Fetch an existing department, or create new if it doesn't exist
+     *
+     * @author Daniel Melzter
+     * @since 5.0
+     * @param $department_name string
+     * @return int id of department created/found
+     */
+    public function createOrFetchDepartment($department_name)
+    {
+        $department = Department::where(['name' => $department_name])->first();
+        if ($department) {
+            $this->log('A matching department ' . $department_name . ' already exists');
+            return $department->id;
+        }
+        $department = new department();
+        $department->name = $department_name;
+        $department->user_id = $this->user_id;
+
+        if ($department->save()) {
+            $this->log('department ' . $department_name . ' was created');
+            return $department->id;
+        }
+        $this->logError($department, 'Company');
+        return null;
     }
 }

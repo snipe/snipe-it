@@ -14,7 +14,10 @@ class CheckForSetup
     public function handle($request, Closure $next, $guard = null)
     {
 
-        // This is dumb
+        /**
+         * This is dumb
+         * @todo Check on removing this, not sure if it's still needed
+         */
         if ($request->is('_debugbar*')) {
             return $next($request);
         }

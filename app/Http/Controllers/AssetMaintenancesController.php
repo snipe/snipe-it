@@ -165,6 +165,7 @@ class AssetMaintenancesController extends Controller
         } elseif (!$assetMaintenance->asset) {
             return redirect()->route('maintenances.index')
                 ->with('error', 'The asset associated with this maintenance does not exist.');
+
         } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }

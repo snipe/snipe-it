@@ -111,7 +111,7 @@ return array(
     'show_alerts_in_menu'       => 'Figyelmeztetések megjelenítése a felső menüben',
     'show_archived_in_list'     => 'Archivált eszközök',
     'show_archived_in_list_text'     => 'Mutassa az archivált eszközöket az "összes eszköz" listában',
-    'show_images_in_email'     => 'Show images in emails',
+    'show_images_in_email'     => 'Képek használata az email-ekben',
     'show_images_in_email_help'   => 'Uncheck this box if your Snipe-IT installation is behind a VPN or closed network and users outside the network will not be able to load images served from this installation in their emails.',
     'site_name'                 => 'Webhely neve',
     'slack_botname'             => 'Laza botneve',
@@ -181,7 +181,7 @@ return array(
     'bottom'        => 'alsó',
     'vertical'        => 'függőleges',
     'horizontal'        => 'vízszintes',
-    'unique_serial'                => 'Unique serial numbers',
+    'unique_serial'                => 'Egyedi sorozatszámok',
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Az eszközcímkék hossza, beleértve a nem töltöt',
 );

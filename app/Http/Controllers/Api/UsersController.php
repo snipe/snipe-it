@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Transformers\LicensesTransformer;
+use App\Models\License;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\UsersTransformer;
@@ -56,31 +58,31 @@ class UsersController extends Controller
             'users.zip',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department','assets','licenses','accessories','consumables')
-            ->withCount('assets','licenses','accessories','consumables');
+            ->withCount('assets as assets_count','licenses as licneses_count','accessories as accessories_count','consumables as consumables_count');
         $users = Company::scopeCompanyables($users);
 
 
-        if (($request->has('deleted')) && ($request->input('deleted')=='true')) {
-            $users = $users->GetDeleted();
+        if (($request->filled('deleted')) && ($request->input('deleted')=='true')) {
+            $users = $users->onlyTrashed();
         }
 
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $users = $users->where('users.company_id', '=', $request->input('company_id'));
         }
 
-        if ($request->has('location_id')) {
+        if ($request->filled('location_id')) {
             $users = $users->where('users.location_id', '=', $request->input('location_id'));
         }
 
-        if ($request->has('group_id')) {
+        if ($request->filled('group_id')) {
             $users = $users->ByGroup($request->get('group_id'));
         }
 
-        if ($request->has('department_id')) {
+        if ($request->filled('department_id')) {
             $users = $users->where('users.department_id','=',$request->input('department_id'));
         }
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
 
@@ -146,7 +148,7 @@ class UsersController extends Controller
 
         $users = Company::scopeCompanyables($users);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $users = $users->where('first_name', 'LIKE', '%'.$request->get('search').'%')
                 ->orWhere('last_name', 'LIKE', '%'.$request->get('search').'%')
                 ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
@@ -199,6 +201,7 @@ class UsersController extends Controller
         $tmp_pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
         $user->password = bcrypt($request->get('password', $tmp_pass));
 
+
         if ($user->save()) {
             if ($request->has('groups')) {
                 $user->groups()->sync($request->input('groups'));
@@ -240,13 +243,23 @@ class UsersController extends Controller
         $this->authorize('update', User::class);
 
         $user = User::findOrFail($id);
+
+        // This is a janky hack to prevent people from changing admin demo user data on the public demo.
+        // The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
+        // Thanks, jerks. You are why we can't have nice things. - snipe
+
+        if ((($id == 1) || ($id == 2)) && (config('app.lock_passwords'))) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Permission denied. You cannot update user information via API on the demo.'));
+        }
+
+
         $user->fill($request->all());
 
         if ($user->id == $request->input('manager_id')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot be your own manager'));
         }
 
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
 
@@ -255,6 +268,9 @@ class UsersController extends Controller
             ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
 
         if ($user->save()) {
+            if ($request->filled('groups')) {
+                $user->groups()->sync($request->input('groups'));
+            }
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
         }
 
@@ -280,6 +296,15 @@ class UsersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete_has_assets')));
         }
 
+        // Remove the user's avatar if they have one
+        if (Storage::disk('public')->exists('avatars/'.$user->avatar)) {
+            try  {
+                Storage::disk('public')->delete('avatars/'.$user->avatar);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
+        }
+
         if ($user->delete()) {
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
         }
@@ -303,6 +328,23 @@ class UsersController extends Controller
     }
 
     /**
+     * Return JSON containing a list of licenses assigned to a user.
+     *
+     * @author [N. Mathar] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @param $userId
+     * @return string JSON
+     */
+    public function licenses($id)
+    {
+        $this->authorize('view', User::class);
+        $this->authorize('view', License::class);
+        $user = User::where('id', $id)->withTrashed()->first();
+        $licenses = $user->licenses()->get();
+        return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
+    }
+
+    /**
      * Reset the user's two-factor status
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -315,7 +357,7 @@ class UsersController extends Controller
 
         $this->authorize('update', User::class);
 
-        if ($request->has('id')) {
+        if ($request->filled('id')) {
             try {
                 $user = User::find($request->get('id'));
                 $user->two_factor_secret = null;
