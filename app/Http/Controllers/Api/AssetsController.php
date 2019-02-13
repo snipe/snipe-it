@@ -476,39 +476,12 @@ class AssetsController extends Controller
     {
         $this->authorize('update', Asset::class);
 
+        $asset->fill($request->all());
+
+
         if ($asset = Asset::find($id)) {
             ($request->filled('model_id')) ?
-                $asset->model()->associate(AssetModel::find($request->get('model_id'))) : '';
-            ($request->filled('name')) ?
-                $asset->name = $request->get('name') : '';
-            ($request->filled('serial')) ?
-                $asset->serial = $request->get('serial') : '';
-            ($request->filled('model_id')) ?
-                $asset->model_id = $request->get('model_id') : '';
-            ($request->filled('order_number')) ?
-                $asset->order_number = $request->get('order_number') : '';
-            ($request->filled('notes')) ?
-                $asset->notes = $request->get('notes') : '';
-            ($request->filled('asset_tag')) ?
-                $asset->asset_tag = $request->get('asset_tag') : '';
-            ($request->filled('archived')) ?
-                $asset->archived = $request->get('archived') : '';
-            ($request->filled('status_id')) ?
-                $asset->status_id = $request->get('status_id') : '';
-            ($request->filled('warranty_months')) ?
-                $asset->warranty_months = $request->get('warranty_months') : '';
-            ($request->filled('purchase_cost')) ?
-                $asset->purchase_cost = Helper::ParseFloat($request->get('purchase_cost')) : '';
-            ($request->filled('purchase_date')) ?
-                $asset->purchase_date = $request->get('purchase_date') : '';
-            ($request->filled('assigned_to')) ?
-                $asset->assigned_to = $request->get('assigned_to') : '';
-            ($request->filled('supplier_id')) ?
-                $asset->supplier_id = $request->get('supplier_id') : '';
-            ($request->filled('requestable')) ?
-                $asset->requestable = $request->get('requestable') : '';
-            ($request->filled('rtd_location_id')) ?
-                $asset->rtd_location_id = $request->get('rtd_location_id') : '';
+                $asset->model()->associate(AssetModel::find($request->get('model_id'))) : null;
             ($request->filled('rtd_location_id')) ?
                 $asset->location_id = $request->get('rtd_location_id') : '';
             ($request->filled('company_id')) ?
