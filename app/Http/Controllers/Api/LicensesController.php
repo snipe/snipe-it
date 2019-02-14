@@ -82,7 +82,7 @@ class LicensesController extends Controller
         }
 
 
-        $offset = request('offset', 0);
+        $offset = (($licenses) && (request('offset') > $licenses->count())) ? 0 : request('offset', 0);
         $limit = request('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 

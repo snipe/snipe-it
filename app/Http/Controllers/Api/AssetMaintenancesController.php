@@ -44,7 +44,7 @@ class AssetMaintenancesController extends Controller
             $maintenances->where('asset_id', '=', $request->input('asset_id'));
         }
 
-        $offset = request('offset', 0);
+        $offset = (($maintenances) && (request('offset') > $maintenances->count())) ? 0 : request('offset', 0);
         $limit = request('limit', 50);
 
         $allowed_columns = [

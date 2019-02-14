@@ -85,7 +85,7 @@ class UsersController extends Controller
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $offset = request('offset', 0);
+        $offset = (($users) && (request('offset') > $users->count())) ? 0 : request('offset', 0);
         $limit = request('limit',  20);
 
         switch ($request->input('sort')) {

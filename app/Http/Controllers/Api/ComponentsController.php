@@ -43,7 +43,7 @@ class ComponentsController extends Controller
             $components->where('location_id','=',$request->input('location_id'));
         }
 
-        $offset = request('offset', 0);
+        $offset = (($components) && (request('offset') > $components->count())) ? 0 : request('offset', 0);
         $limit = request('limit', 50);
 
         $allowed_columns = ['id','name','min_amt','order_number','serial','purchase_date','purchase_cost','company','category','qty','location','image'];
