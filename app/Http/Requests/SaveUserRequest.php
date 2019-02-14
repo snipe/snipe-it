@@ -58,9 +58,7 @@ class SaveUserRequest extends Request
 
             default:break;
         }
-
-        \Log::debug($rules);
-
+        
         return $rules;
 
     }
