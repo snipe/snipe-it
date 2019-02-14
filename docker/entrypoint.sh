@@ -47,5 +47,9 @@ then
   cp -ax /var/www/html/vendor/laravel/passport/database/migrations/* /var/www/html/database/migrations/
 fi
 
+php artisan migrate --force
+php artisan config:clear
+php artisan config:cache
+
 . /etc/apache2/envvars
 exec apache2 -DNO_DETACH < /dev/null
