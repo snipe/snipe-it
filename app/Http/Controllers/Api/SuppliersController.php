@@ -34,7 +34,7 @@ class SuppliersController extends Controller
             $suppliers = $suppliers->TextSearch($request->input('search'));
         }
 
-        $offset = request('offset', 0);
+        $offset = (($suppliers) && (request('offset') > $suppliers->count())) ? 0 : request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
