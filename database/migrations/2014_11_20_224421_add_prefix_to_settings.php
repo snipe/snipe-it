@@ -15,7 +15,7 @@ class AddPrefixToSettings extends Migration {
 		//
 		Schema::table('settings', function(Blueprint $table) {
 
-			$table->string('auto_increment_prefix')->default(0);
+			$table->string('auto_increment_prefix')->nullable()->default(NULL);
 
 		});
 	}
