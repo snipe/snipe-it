@@ -54,7 +54,7 @@ class UsersCest
             'last_name'         => $user->last_name,
             'username'          => $user->username,
             'password'          => $user->password,
-            'password_confirm'  => $user->password,
+            'password_confirmation'  => $user->password,
             'email'             => $user->email,
             'company_id'        => $user->company_id,
             'locale'            => $user->locale,

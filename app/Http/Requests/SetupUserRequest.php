@@ -29,8 +29,7 @@ class SetupUserRequest extends Request
           'last_name' => 'required|string|min:1',
           'username' => 'required|string|min:2|unique:users,username,NULL,deleted_at',
           'email' => 'email|unique:users,email',
-          'password' => 'required|min:6',
-          'password_confirm' => 'required|min:6|same:password',
+          'password' => 'required|min:6|confirmed',
           'email_domain' => 'required|min:4',
         ];
     }

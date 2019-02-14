@@ -150,7 +150,7 @@ Create a User ::
       <!-- password confirm -->
       <div class="form-group col-lg-6{{  (\App\Helpers\Helper::checkIfRequired(\App\Models\User::class, 'password')) ? ' required' : '' }} {{ $errors->has('password_confirm') ? 'error' : '' }}">
         {{ Form::label('password_confirmation', trans('admin/users/table.password_confirm')) }}
-        {{ Form::password('password_confirm', array('class' => 'form-control')) }}
+        {{ Form::password('password_confirmation', array('class' => 'form-control')) }}
         {!! $errors->first('password_confirmation', '<span class="alert-msg">:message</span>') !!}
       </div>
     </div>

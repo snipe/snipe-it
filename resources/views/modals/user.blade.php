@@ -14,7 +14,7 @@
             'numbers': true,
             'specialChars': true,
             'onPasswordGenerated': function (generatedPassword) {
-                $('#modal-password_confirm').val($('#modal-password').val());
+                $('#modal-password_confirmation').val($('#modal-password').val());
             }
         });
     });
@@ -52,8 +52,8 @@
                     </div>
 
                     <div class="dynamic-form-row">
-                        <div class="col-md-4 col-xs-12"><label for="modal-password_confirm">{{ trans('admin/users/table.password_confirm') }}:</label></div>
-                        <div class="col-md-8 col-xs-12 required"><input type='password' name="password_confirm" id='modal-password_confirm' class="form-control">
+                        <div class="col-md-4 col-xs-12"><label for="modal-password_confirmation">{{ trans('admin/users/table.password_confirm') }}:</label></div>
+                        <div class="col-md-8 col-xs-12 required"><input type='password' name="password_confirmation" id='modal-password_confirmation' class="form-control">
                             <div id="generated-password"></div>
                         </div>
                     </div>

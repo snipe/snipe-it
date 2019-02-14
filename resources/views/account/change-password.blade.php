@@ -37,11 +37,11 @@
     </div>
 
 
-    <div class="form-group {{ $errors->has('password_confirm') ? ' has-error' : '' }}">
+    <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
         <label for="password_confirm" class="col-md-3 control-label">New Password</label>
         <div class="col-md-5 required">
-            <input class="form-control" type="password" name="password_confirm" id="password_confirm"  {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
-            {!! $errors->first('password_confirm', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            <input class="form-control" type="password" name="password_confirmation" id="password_confirmation"  {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
+            {!! $errors->first('password_confirmation', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             @if (config('app.lock_passwords'))
             	<p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
             @endif
