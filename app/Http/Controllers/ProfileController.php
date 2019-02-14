@@ -146,8 +146,7 @@ class ProfileController extends Controller
 
         $rules = array(
             'current_password'     => 'required',
-            'password'         => Setting::passwordComplexityRulesSaving('store'),
-            'password_confirm' => 'required|same:password',
+            'password'         => Setting::passwordComplexityRulesSaving('store').'|confirmed',
         );
 
         $validator = \Validator::make($request->all(), $rules);
