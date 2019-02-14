@@ -387,7 +387,7 @@ class AssetsController extends Controller
                 $asset->use_text .= ' → '.$asset->assigned->getFullNameAttribute();
             }
 
-            
+
             if ($asset->assetstatus->getStatuslabelType()=='pending') {
                 $asset->use_text .=  '('.$asset->assetstatus->getStatuslabelType().')';
             }
@@ -436,6 +436,22 @@ class AssetsController extends Controller
         $asset->requestable             = $request->get('requestable', 0);
         $asset->rtd_location_id         = $request->get('rtd_location_id', null);
 
+        if ($request->has('image_source') && $request->input('image_source') != "") {
+            $saved_image_path = Helper::processUploadedImage(
+                $request->input('image_source'), 'uploads/assets/'
+            );
+
+            if (!$saved_image_path) {
+                return response()->json(Helper::formatStandardApiResponse(
+                        'error',
+                        null,
+                        trans('admin/hardware/message.create.error')
+                    ), 200);
+            }
+
+            $asset->image = $saved_image_path;
+        }
+
         // Update custom fields in the database.
         // Validation for these fields is handled through the AssetRequest form request
         $model = AssetModel::find($request->get('model_id'));
@@ -457,6 +473,11 @@ class AssetsController extends Controller
             if (isset($target)) {
                 $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
             }
+
+            if ($asset->image) {
+                $asset->image = $asset->getImageUrl();
+            }
+
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
         }
 
@@ -487,6 +508,25 @@ class AssetsController extends Controller
             ($request->filled('company_id')) ?
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
+            if ($request->has('image_source')) {
+                if ($request->input('image_source') == "") {
+                    $asset->image = null;
+                } else {
+                    $saved_image_path = Helper::processUploadedImage(
+                        $request->input('image_source'), 'uploads/assets/'
+                    );
+
+                    if (!$saved_image_path) {
+                        return response()->json(Helper::formatStandardApiResponse(
+                            'error',
+                            null,
+                            trans('admin/hardware/message.update.error')
+                        ), 200);
+                    }
+
+                    $asset->image = $saved_image_path;
+                }
+            }
 
             // Update custom fields
             if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
@@ -510,6 +550,10 @@ class AssetsController extends Controller
 
                 if (isset($target)) {
                     $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+                }
+
+                if ($asset->image) {
+                    $asset->image = $asset->getImageUrl();
                 }
 
                 return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));

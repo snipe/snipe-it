@@ -20,6 +20,7 @@ use App\Models\Consumable;
 use App\Models\Asset;
 use App\Models\Setting;
 use Crypt;
+use Image;
 use Illuminate\Contracts\Encryption\DecryptException;
 
 class Helper
@@ -703,4 +704,47 @@ class Helper
         }
         return $password;
     }
+
+    /**
+     * Process base64 encoded image data and save it on supplied path
+     *
+     * @param string $image_data base64 encoded image data with mime type
+     * @param string $save_path path to a folder where the image should be saved
+     * @return string path to uploaded image or false if something went wrong
+     */
+    public static function processUploadedImage(String $image_data, String $save_path) {
+        if ($image_data != null && $save_path != null) {
+            // After modification, the image is prefixed by mime info like the following:
+            // data:image/jpeg;base64,; This causes the image library to be unhappy, so we need to remove it.
+            $header = explode(';', $image_data, 2)[0];
+            // Grab the image type from the header while we're at it.
+            $extension = substr($header, strpos($header, '/')+1);
+            // Start reading the image after the first comma, postceding the base64.
+            $image = substr($image_data, strpos($image_data, ',')+1);
+
+            $file_name = str_random(25).".".$extension;
+
+            $directory= public_path($save_path);
+            // Check if the uploads directory exists.  If not, try to create it.
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            $path = public_path($save_path.$file_name);
+
+            try {
+                Image::make($image)->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
+            } catch (\Exception $e) {
+                return false;
+            }
+
+            return $file_name;
+        }
+
+        return false;
+    }
+
 }
