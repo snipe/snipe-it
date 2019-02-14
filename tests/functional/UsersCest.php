@@ -39,11 +39,10 @@ class UsersCest
         $I->fillField('first_name', 't2');
         $I->fillField('last_name', 't2');
         $I->fillField('username', 'a');
-        $I->fillField('password', '12345'); // Must be 6 chars
+        $I->fillField('password', '12345');
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The password must be at least 10 characters', '.alert-msg');
-        $I->see('The password confirmation does not match.', '.alert-msg');
 
     }
     public function passesCorrectValidation(FunctionalTester $I)
