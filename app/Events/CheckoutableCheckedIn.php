@@ -14,17 +14,19 @@ class CheckoutableCheckedIn
     public $checkedOutTo;
     public $checkedInBy;
     public $note;
+    public $action_date; // Date setted in the hardware.checkin view at the checkin_at input, for the action log
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($checkoutable, $checkedOutTo, User $checkedInBy, $note)
+    public function __construct($checkoutable, $checkedOutTo, User $checkedInBy, $note, $action_date)
     {
         $this->checkoutable = $checkoutable;
         $this->checkedOutTo = $checkedOutTo;
         $this->checkedInBy  = $checkedInBy;
         $this->note         = $note;
+        $this->action_date  = $action_date;
     }
 }
