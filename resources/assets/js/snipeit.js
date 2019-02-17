@@ -418,11 +418,11 @@ $(document).ready(function () {
 
 
     // Image preview
-    function readURL(input) {
+    function readURL(input, $preview) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#imagePreview').attr('src', e.target.result);
+                $preview.attr('src', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
         }
@@ -436,28 +436,32 @@ $(document).ready(function () {
     }
 
      // File size validation
-    $('#uploadFile').bind('change', function() {
-        $('#upload-file-status').removeClass('text-success').removeClass('text-danger');
-        $('.goodfile').remove();
-        $('.badfile').remove();
-        $('.badfile').remove();
-        $('.previewSize').hide();
-        $('#upload-file-info').html('');
+    $('.uploadFile').bind('change', function() {
+        let $this = $(this);
+        let id = '#' + $this.attr('id');
+        let status = id + '-status';
+        let $status = $(status);
+        $status.removeClass('text-success').removeClass('text-danger');
+        $(status + ' .goodfile').remove();
+        $(status + ' .badfile').remove();
+        $(status + ' .previewSize').hide();
+        $(id + '-info').html('');
 
-        var max_size = $('#uploadFile').data('maxsize');
+        var max_size = $this.data('maxsize');
         var total_size = 0;
 
         for (var i = 0; i < this.files.length; i++) {
             total_size += this.files[i].size;
-            $('#upload-file-info').append('<span class="label label-default">' + this.files[i].name + ' (' + formatBytes(this.files[i].size) + ')</span> ');
+            $(id + '-info').append('<span class="label label-default">' + this.files[i].name + ' (' + formatBytes(this.files[i].size) + ')</span> ');
         }
 
         if (total_size > max_size) {
-            $('#upload-file-status').addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
+            $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
         } else {
-            $('#upload-file-status').addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
-            readURL(this);
-            $('#imagePreview').fadeIn();
+            $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
+            let $preview =  $(id + '-imagePreview');
+            readURL(this, $preview);
+            $preview.fadeIn();
         }
 
 

@@ -78,11 +78,11 @@
                             <div class="col-md-9">
                                 <label class="btn btn-default">
                                     {{ trans('button.select_file')  }}
-                                    <input type="file" name="image" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none; max-width: 90%">
+                                    <input type="file" name="image" class="uploadFile" id="uploadLogo" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none; max-width: 90%">
                                 </label>
-                                <span class='label label-default' id="upload-file-info"></span>
+                                <span class='label label-default' id="uploadLogo-info"></span>
 
-                                <p class="help-block" id="upload-file-status">
+                                <p class="help-block" id="uploadLogo-status">
                                     {{ trans('general.logo_size') }}
                                     {{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}
                                 </p>
@@ -90,7 +90,7 @@
 
                             </div>
                             <div class="col-md-9 col-md-offset-3">
-                                <img id="imagePreview" style="max-width: 500px; max-height: 50px">
+                                <img id="uploadLogo-imagePreview" style="max-width: 500px; max-height: 50px">
                             </div>
 
                             @if ($setting->logo!='')
@@ -104,22 +104,27 @@
 
                         <!-- Email Logo -->
                         <div class="form-group {{ $errors->has('email_logo') ? 'has-error' : '' }}">
-                            <label class="col-md-3" for="image">
+                            <label class="col-md-3" for="email_logo">
                                 {{ Form::label('email_logo', trans('admin/settings/general.email_logo')) }}</label>
 
                             <div class="col-md-9">
                                 <label class="btn btn-default">
                                     {{ trans('button.select_file')  }}
-                                    <input type="file" name="email_logo" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none; max-width: 90%">
+                                    <input type="file" name="email_logo" class="uploadFile" id="uploadEmailLogo" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none; max-width: 90%">
                                 </label>
-                                <span class='label label-default' id="email-upload-file-info"></span>
+                                <span class='label label-default' id="uploadEmailLogo-info"></span>
 
-                                <p class="help-block">
+                                <p class="help-block" id="uploadEmailLogo-status">
                                     {{ trans('admin/settings/general.email_logo_size') }}
-                                    {{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }} </p>
+                                    {{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }} 
+                                </p>
                                 {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
 
                             </div>
+
+                            <div class="col-md-9 col-md-offset-3">
+                                    <img id="uploadEmailLogo-imagePreview" style="max-width: 500px; max-height: 50px">
+                                </div>
 
                             @if ($setting->email_logo!='')
                                 <div class="col-md-9 col-md-offset-3">
