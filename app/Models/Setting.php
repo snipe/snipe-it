@@ -215,6 +215,7 @@ class Setting extends Model
         // Needed for modifying the bootstrap nav :(
         $custom_css = str_ireplace('script', 'SCRIPTS-NOT-ALLOWED-HERE', $custom_css);
         $custom_css = str_replace('&gt;', '>', $custom_css);
+        $custom_css = str_replace('&quot;', '"', $custom_css);
 
         return $custom_css;
     }
