@@ -436,7 +436,7 @@ $(document).ready(function () {
     }
 
      // File size validation
-    $('.uploadFile').bind('change', function() {
+    $('.js-uploadFile').bind('change', function() {
         let $this = $(this);
         let id = '#' + $this.attr('id');
         let status = id + '-status';
