@@ -56,11 +56,11 @@
     margin-left: auto;
     margin-right: auto;
   }
-  div.logo {
+  div.label-logo {
     float: right;
     display: inline-block;
   }
-  img.logo {
+  img.label-logo {
     height: 0.5in;
   }
 
@@ -124,7 +124,7 @@
   }
 
   @if ($snipeSettings->custom_css)
-    {{ $snipeSettings->show_custom_css() }}
+    {!! $snipeSettings->show_custom_css() !!}
   @endif
 
   </style>
@@ -134,20 +134,20 @@
   <div class="label"> 
 
       @if ($settings->qr_code=='1')
-    <div class="qr_img">
+    <div class="label-qr_img qr_img">
       <img src="./{{ $asset->id }}/qr_code" class="qr_img">
     </div>
       @endif
 
     <div class="qr_text">
         @if ($settings->label_logo)
-        <div class="logo">
-          <img class="logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->label_logo) }}">
+        <div class="label-logo">
+          <img class="label-logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->label_logo) }}">
         </div>
         @endif
 
         @if ($settings->qr_text!='')
-        <div class="pull-left">
+        <div class="label-qr_text pull-left">
             <strong>{{ $settings->qr_text }}</strong>
             <br>
         </div>
@@ -181,7 +181,7 @@
     </div>
 
     @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
-        <div class="barcode_container">
+        <div class="label-alt_barcode barcode_container">
             <img src="./{{ $asset->id }}/barcode" class="barcode">
         </div>
     @endif
