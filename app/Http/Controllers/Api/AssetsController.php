@@ -441,7 +441,12 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
-                $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug(), null));
+                $field_val = $request->input($field->convertUnicodeDbSlug(), null);
+                // If input value is null, use custom field's default value
+                if($field_val == null){
+                    $field_val = $field->defaultValue($request->get('model_id'));
+                }
+                $asset->{$field->convertUnicodeDbSlug()} = $field_val;
             }
         }
 
