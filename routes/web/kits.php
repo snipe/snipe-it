@@ -48,13 +48,6 @@ Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function
 
     
     // Models
-
-    Route::post('models', 
-        [
-            'as' => 'kits.models.store',
-            'uses' => 'Kits\PredefinedKitsController@storeModel',
-        ]
-    );
     
     Route::put('models/{model_id}', 
         [
@@ -81,14 +74,6 @@ Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function
 
 
     // Consumables
-
-    Route::post('consumables', 
-        [
-            'as' => 'kits.consumables.store',
-            'uses' => 'Kits\PredefinedKitsController@storeConsumable',
-        ]
-    );
-    
     Route::put('consumables/{consumable_id}', 
         [
             'as' => 'kits.consumables.update',
@@ -114,14 +99,6 @@ Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function
 
 
     // Accessories
-
-    Route::post('accessories', 
-        [
-            'as' => 'kits.accessories.store',
-            'uses' => 'Kits\PredefinedKitsController@storeAccessory',
-        ]
-    );
-
     Route::put('accessories/{accessory_id}', 
         [
             'as' => 'kits.accessories.update',

@@ -113,6 +113,12 @@ class PredefinedKitsController extends Controller
         $this->authorize('delete', PredefinedKit::class);
         $kit = PredefinedKit::findOrFail($id);
 
+        // Delete childs
+        $kit->models()->detach();
+        $kit->licenses()->detach();
+        $kit->consumables()->detach();
+        $kit->accessories()->detach();
+
         $kit->delete();
         return response()->json(Helper::formatStandardApiResponse('success', null,  'Delete was successfull'));     // TODO: trans
 
@@ -178,8 +184,14 @@ class PredefinedKitsController extends Controller
          if( $quantity < 1) {
              $quantity = 1;
          }
-         $kit->licenses()->attach( $request->get('license'), ['quantity' => $quantity]);
- 
+
+         $license_id = $request->get('license');
+         $relation = $kit->licenses();
+         if( $relation->find($license_id) ) {
+             return response()->json(Helper::formatStandardApiResponse('error', null, ['license' => 'License already attached to kit']));
+         }
+
+         $relation->attach( $license_id, ['quantity' => $quantity]);
          return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License added successfull'));     // TODO: trans
     }
 
@@ -200,7 +212,7 @@ class PredefinedKitsController extends Controller
          if( $quantity < 1) {
              $quantity = 1;
          }
-         $kit->licenses()->sync([$license_id => ['quantity' =>  $quantity]]);
+         $kit->licenses()->syncWithoutDetaching([$license_id => ['quantity' =>  $quantity]]);
  
          return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License updated'));  // TODO: trans
      }
@@ -258,10 +270,10 @@ class PredefinedKitsController extends Controller
         if( $quantity < 1) {
             $quantity = 1;
         }
-        //echo $request->get('model');
+        
         $relation = $kit->models();
         if( $relation->find($model_id) ) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'Model already exists'));
+            return response()->json(Helper::formatStandardApiResponse('error', null, ['model' => 'Model already attached to kit']));
         }
         $relation->attach($model_id, ['quantity' => $quantity]);
         
@@ -304,6 +316,175 @@ class PredefinedKitsController extends Controller
         $kit = PredefinedKit::findOrFail($id);
 
         $kit->models()->detach($model_id);
+        return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
+    }
+
+
+    
+    /**
+     * Display the specified resource.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function indexConsumables($kit_id) {
+        $this->authorize('view', PredefinedKit::class);
+        $kit = PredefinedKit::findOrFail($kit_id);
+        $consumables = $kit->consumables;
+        return (new PredefinedKitsTransformer)->transformElements($consumables, $consumables->count());
+    }
+
+    
+    /**
+     * Display the specified resource.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     public function storeConsumable(Request $request, $kit_id)
+     {
+         $this->authorize('update', PredefinedKit::class);
+         
+         $kit = PredefinedKit::findOrFail($kit_id);        
+         $quantity = $request->input('quantity', 1);
+         if( $quantity < 1) {
+             $quantity = 1;
+         }
+
+         $consumable_id = $request->get('consumable');
+         $relation = $kit->consumables();
+         if( $relation->find($consumable_id) ) {
+             return response()->json(Helper::formatStandardApiResponse('error', null, ['consumable' => 'Consumable already attached to kit']));
+         }
+
+         $relation->attach( $consumable_id, ['quantity' => $quantity]);
+         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Consumable added successfull'));     // TODO: trans
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     public function updateConsumable(Request $request, $kit_id, $consumable_id)
+     {
+         $this->authorize('update', PredefinedKit::class);
+         $kit = PredefinedKit::findOrFail($id);
+         $quantity = $request->input('quantity', 1);
+         if( $quantity < 1) {
+             $quantity = 1;
+         }
+         $kit->consumables()->syncWithoutDetaching([$consumable_id => ['quantity' =>  $quantity]]);
+ 
+         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Consumable updated'));  // TODO: trans
+     }
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  int  $kit_id
+     * @return \Illuminate\Http\Response
+     */
+    public function detachConsumable($kit_id, $consumable_id)
+    {
+        $this->authorize('update', PredefinedKit::class);
+        $kit = PredefinedKit::findOrFail($id);
+
+        $kit->consumables()->detach($consumable_id);
+        return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
+    }
+
+    
+    /**
+     * Display the specified resource.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function indexAccessories($kit_id) {
+        $this->authorize('view', PredefinedKit::class);
+        $kit = PredefinedKit::findOrFail($kit_id);
+        $accessories = $kit->accessories;
+        return (new PredefinedKitsTransformer)->transformElements($accessories, $accessories->count());
+    }
+
+    
+    /**
+     * Display the specified resource.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     public function storeAccessory(Request $request, $kit_id)
+     {
+         $this->authorize('update', PredefinedKit::class);
+         
+         $kit = PredefinedKit::findOrFail($kit_id);        
+         $quantity = $request->input('quantity', 1);
+         if( $quantity < 1) {
+             $quantity = 1;
+         }
+
+         $accessory_id = $request->get('accessory');
+         $relation = $kit->accessories();
+         if( $relation->find($accessory_id) ) {
+             return response()->json(Helper::formatStandardApiResponse('error', null, ['accessory' => 'Accessory already attached to kit']));
+         }
+
+         $relation->attach( $accessory_id, ['quantity' => $quantity]);
+         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Accessory added successfull'));     // TODO: trans
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     public function updateAccessory(Request $request, $kit_id, $accessory_id)
+     {
+         $this->authorize('update', PredefinedKit::class);
+         $kit = PredefinedKit::findOrFail($id);
+         $quantity = $request->input('quantity', 1);
+         if( $quantity < 1) {
+             $quantity = 1;
+         }
+         $kit->accessories()->syncWithoutDetaching([$accessory_id => ['quantity' =>  $quantity]]);
+ 
+         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Accessory updated'));  // TODO: trans
+     }
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  int  $kit_id
+     * @return \Illuminate\Http\Response
+     */
+    public function detachAccessory($kit_id, $accessory_id)
+    {
+        $this->authorize('update', PredefinedKit::class);
+        $kit = PredefinedKit::findOrFail($id);
+
+        $kit->accessories()->detach($accessory_id);
         return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
     }
 }

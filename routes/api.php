@@ -33,7 +33,23 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     });
 
-    /*--- Accessories API ---*/
+    /*--- Accessories API ---*/    
+    Route::group(['prefix' => 'accessories'], function () {
+
+        Route::get('{accessory}/checkedout',
+            [
+                'as' => 'api.accessories.checkedout',
+                'uses' => 'AccessoriesController@checkedout'
+            ]
+        );
+
+        Route::get('selectlist',
+            [
+                'as' => 'api.accessories.selectlist',
+                'uses'=> 'AccessoriesController@selectlist'
+            ]
+        );
+    }); // Accessories group
     Route::resource('accessories', 'AccessoriesController',
         ['names' =>
             [
@@ -48,15 +64,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     ); // Accessories resource
 
-    Route::group(['prefix' => 'accessories'], function () {
 
-        Route::get('{accessory}/checkedout',
-            [
-                'as' => 'api.accessories.checkedout',
-                'uses' => 'AccessoriesController@checkedout'
-            ]
-        );
-    }); // Accessories group
 
 
     /*--- Categories API ---*/
@@ -174,7 +182,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
 
     /*--- Consumables API ---*/
-
+    Route::get('consumables/selectlist',
+        [
+            'as' => 'api.consumables.selectlist',
+            'uses'=> 'ConsumablesController@selectlist'
+        ]
+    );
     Route::resource('consumables', 'ConsumablesController',
         [
             'names' =>
@@ -414,6 +427,14 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'as' => 'api.license.seats',
             'uses' => 'LicensesController@seats'
         ]);
+        
+        Route::get('selectlist',
+            [
+                'as' => 'api.licenses.selectlist',
+                'uses'=> 'LicensesController@selectlist'
+            ]
+        );
+
     }); // Licenses group
 
     Route::resource('licenses', 'LicensesController',

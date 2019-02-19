@@ -13,7 +13,7 @@ use App\Models\Accessory;
 use App\Models\SnipeItPivot;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CheckInOutRequest;
-use App\Services\PredefinedKitService;
+use App\Services\PredefinedKitCheckoutService;
 use App\Models\User;
 
 
@@ -32,7 +32,7 @@ class CheckoutKitController extends Controller
     use CheckInOutRequest;
 
     
-    public function __construct(PredefinedKitService $kitService) 
+    public function __construct(PredefinedKitCheckoutService $kitService) 
     {
         $this->kitService = $kitService;
     }
@@ -70,9 +70,9 @@ class CheckoutKitController extends Controller
 
         $errors = $this->kitService->checkout($request, $kit, $user);
         if( count($errors) > 0 ) {
-            return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'))->with('error_messages', $errors);
+            return redirect()->back()->with('error', 'Checkout error')->with('error_messages', $errors);  // TODO: trans
         }
-        return redirect()->back()->with('success', trans('admin/hardware/message.checkout.success'));
+        return redirect()->back()->with('success', 'Checkout was successfully');                                   // TODO: trans
 
     }
 }
