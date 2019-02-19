@@ -33,7 +33,7 @@ class BulkAssetsController extends Controller
             return redirect()->back()->with('error', 'No assets selected');
         }
 
-        $asset_ids = array_keys($request->input('ids'));
+        $asset_ids = $request->input('ids');
 
         if ($request->filled('bulk_actions')) {
             switch($request->input('bulk_actions')) {
@@ -75,7 +75,7 @@ class BulkAssetsController extends Controller
             return redirect()->route("hardware.index")->with('warning', trans('No assets selected, so nothing was updated.'));
         }
 
-        $assets = array_keys($request->input('ids'));
+        $assets = $request->input('ids');
 
         if (($request->filled('purchase_date'))
             || ($request->filled('purchase_cost'))
@@ -88,6 +88,7 @@ class BulkAssetsController extends Controller
             || ($request->filled('status_id'))
             || ($request->filled('model_id'))
         ) {
+
             foreach ($assets as $assetId) {
                 $this->update_array = [];
 

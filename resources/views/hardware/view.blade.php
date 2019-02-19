@@ -674,6 +674,7 @@
                         data-show-refresh="true"
                         data-sort-order="asc"
                         id="assetsListingTable"
+                        data-id-field="id"
                         class="table table-striped snipe-table"
                         data-url="{{route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset']) }}"
                         data-export-options='{
