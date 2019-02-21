@@ -13,6 +13,9 @@ class MakeSerialNullable extends Migration
      */
     public function up()
     {
+        $platform = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
+        $platform->registerDoctrineTypeMapping('enum', 'string');
+
         Schema::table('assets', function (Blueprint $table) {
             $table->string('serial')->nullable()->default(null)->change();
         });
