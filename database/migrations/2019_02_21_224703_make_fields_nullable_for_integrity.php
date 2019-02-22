@@ -13,6 +13,8 @@ class MakeFieldsNullableForIntegrity extends Migration
      */
     public function up()
     {
+
+
         Schema::table('locations', function (Blueprint $table) {
             $table->string('city')->nullable()->default(null)->change();
             $table->string('state')->nullable()->default(null)->change();
@@ -20,10 +22,6 @@ class MakeFieldsNullableForIntegrity extends Migration
             $table->integer('user_id')->nullable()->default(null)->change();
             $table->string('address')->nullable()->default(null)->change();
             $table->string('address2')->nullable()->default(null)->change();
-        });
-
-        Schema::table('assets', function (Blueprint $table) {
-            $table->string('city')->nullable()->default(null)->change();
         });
 
         Schema::table('users', function (Blueprint $table) {
@@ -46,7 +44,7 @@ class MakeFieldsNullableForIntegrity extends Migration
 
         Schema::table('licenses', function (Blueprint $table) {
             $table->integer('user_id')->nullable()->default(null)->change();
-            $table->tinyInteger('maintained')->nullable()->default(null)->change();
+            $table->boolean('maintained')->nullable()->default(null)->change();
         });
 
         Schema::table('depreciations', function (Blueprint $table) {
