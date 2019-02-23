@@ -56,6 +56,13 @@
     margin-left: auto;
     margin-right: auto;
   }
+  div.label-logo {
+    float: right;
+    display: inline-block;
+  }
+  img.label-logo {
+    height: 0.5in;
+  }
 
  .qr_text {
     width: {{ $qr_txt_size }}in;
@@ -80,7 +87,21 @@
       margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
   }
 
-
+  .label-model::before {
+    content: "M: "
+  }
+  .label-company::before {
+    content: "C: "
+  }
+  .label-asset_tag::before {
+    content: "T: "
+  }
+  .label-serial::before {
+    content: "S: "
+  }
+  .label-name::before {
+    content: "N: "
+  }  
 
   @media print {
     .noprint {
@@ -103,7 +124,7 @@
   }
 
   @if ($snipeSettings->custom_css)
-    {{ $snipeSettings->show_custom_css() }}
+    {!! $snipeSettings->show_custom_css() !!}
   @endif
 
   </style>
@@ -113,48 +134,54 @@
   <div class="label"> 
 
       @if ($settings->qr_code=='1')
-    <div class="qr_img">
+    <div class="label-qr_img qr_img">
       <img src="./{{ $asset->id }}/qr_code" class="qr_img">
     </div>
       @endif
 
     <div class="qr_text">
+        @if ($settings->label_logo)
+        <div class="label-logo">
+          <img class="label-logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->label_logo) }}">
+        </div>
+        @endif
+
         @if ($settings->qr_text!='')
-        <div class="pull-left">
+        <div class="label-qr_text pull-left">
             <strong>{{ $settings->qr_text }}</strong>
             <br>
         </div>
         @endif
         @if (($settings->labels_display_company_name=='1') && ($asset->company))
-        <div class="pull-left">
-        	C: {{ $asset->company->name }}
+        <div class="label-company pull-left">
+        	{{ $asset->company->name }}
         </div>
         @endif
         @if (($settings->labels_display_name=='1') && ($asset->name!=''))
-        <div class="pull-left">
-            N: {{ $asset->name }}
+        <div class="label-name pull-left">
+            {{ $asset->name }}
         </div>
         @endif
         @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
-	<div class="pull-left">
-            T: {{ $asset->asset_tag }}
+	      <div class="label-asset_tag pull-left">
+            {{ $asset->asset_tag }}
         </div>
         @endif
         @if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
-        <div class="pull-left">
-            S: {{ $asset->serial }}
+        <div class="label-serial pull-left">
+            {{ $asset->serial }}
         </div>
 	@endif
 	@if (($settings->labels_display_model=='1') && ($asset->model->name!=''))
-	<div class="pull-left">
-            M: {{ $asset->model->name }} {{ $asset->model->model_number }}
+	<div class="label-model pull-left">
+            {{ $asset->model->name }} {{ $asset->model->model_number }}
 	</div>
 	@endif
 
     </div>
 
     @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
-        <div class="barcode_container">
+        <div class="label-alt_barcode barcode_container">
             <img src="./{{ $asset->id }}/barcode" class="barcode">
         </div>
     @endif
