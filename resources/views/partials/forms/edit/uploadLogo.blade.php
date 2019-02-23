@@ -4,9 +4,11 @@
 
     <div class="col-md-9">
         <label class="btn btn-default">
-                {{ trans('button.select_file')  }}
-        <input type="file" name="{{ $logoVariable }}" class="js-uploadFile" id="{{ $logoId }}" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="{{ $allowedTypes }}" style="display:none; max-width: 90%">
-            </label>
+            {{ trans('button.select_file')  }}
+            <input type="file" name="{{ $logoVariable }}" class="js-uploadFile" id="{{ $logoId }}"
+                data-maxsize="{{ $maxSize ?? \App\Helpers\Helper::file_upload_max_size() }}"
+                accept="{{ $allowedTypes ?? 'image/gif,image/jpeg,image/png,image/svg'}}" style="display:none; max-width: 90%">
+        </label>
         <span class='label label-default' id="{{ $logoId }}-info"></span>
 
         <p class="help-block" id="{{ $logoId }}-status">

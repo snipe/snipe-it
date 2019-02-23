@@ -74,7 +74,6 @@
                             "logoLabel" => trans('admin/settings/general.logo'),
                             "logoClearVariable" => "clear_logo",
                             "helpBlock" => trans('general.logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
-                            "allowedTypes" => "image/gif,image/jpeg,image/png,image/svg"
                         ])
 
                         <!-- Email Logo -->
@@ -84,7 +83,6 @@
                             "logoLabel" => trans('admin/settings/general.email_logo'),
                             "logoClearVariable" => "clear_email_logo",
                             "helpBlock" => trans('admin/settings/general.email_logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
-                            "allowedTypes" => "image/gif,image/jpeg,image/png,image/svg"
                         ])
 
                         <!-- Label Logo -->
@@ -94,7 +92,6 @@
                             "logoLabel" => trans('admin/settings/general.label_logo'),
                             "logoClearVariable" => "clear_label_logo",
                             "helpBlock" => trans('admin/settings/general.label_logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
-                            "allowedTypes" => "image/gif,image/jpeg,image/png,image/svg"
                         ])
 
                         <!-- Favicon -->
