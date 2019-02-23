@@ -8,13 +8,14 @@ use App\Helpers\Helper;
 use App\Models\PredefinedKit;
 use App\Http\Transformers\PredefinedKitsTransformer;
 
+/**
+ *  @author [D. Minaev.] [<dmitriy.minaev.v@gmail.com>]
+ */
 class PredefinedKitsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -44,8 +45,6 @@ class PredefinedKitsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -65,8 +64,6 @@ class PredefinedKitsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -81,10 +78,8 @@ class PredefinedKitsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $id kit id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -103,8 +98,6 @@ class PredefinedKitsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -128,8 +121,6 @@ class PredefinedKitsController extends Controller
     /**
      * Gets a paginated collection for the select2 menus
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      *
      */
@@ -154,8 +145,6 @@ class PredefinedKitsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -168,10 +157,8 @@ class PredefinedKitsController extends Controller
 
     
     /**
-     * Display the specified resource.
+     * Store the specified resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -198,8 +185,6 @@ class PredefinedKitsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -220,8 +205,6 @@ class PredefinedKitsController extends Controller
      /**
      * Remove the specified resource from storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
@@ -237,8 +220,6 @@ class PredefinedKitsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -250,10 +231,8 @@ class PredefinedKitsController extends Controller
     }
     
     /**
-     * Display the specified resource.
+     * Store the specified resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -283,8 +262,6 @@ class PredefinedKitsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -305,8 +282,6 @@ class PredefinedKitsController extends Controller
      /**
      * Remove the specified resource from storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
@@ -324,8 +299,6 @@ class PredefinedKitsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -338,10 +311,8 @@ class PredefinedKitsController extends Controller
 
     
     /**
-     * Display the specified resource.
+     * Store the specified resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -368,8 +339,6 @@ class PredefinedKitsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -390,8 +359,6 @@ class PredefinedKitsController extends Controller
      /**
      * Remove the specified resource from storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
@@ -408,8 +375,6 @@ class PredefinedKitsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -422,10 +387,8 @@ class PredefinedKitsController extends Controller
 
     
     /**
-     * Display the specified resource.
+     * Store the specified resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -452,8 +415,6 @@ class PredefinedKitsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -474,8 +435,6 @@ class PredefinedKitsController extends Controller
      /**
      * Remove the specified resource from storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0]
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */

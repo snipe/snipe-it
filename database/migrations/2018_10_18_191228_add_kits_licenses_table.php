@@ -20,8 +20,6 @@ class AddKitsLicensesTable extends Migration {
             $table->integer('quantity')->default(1);
             $table->timestamps();
         });
-        
-
 	}
 
 	/**

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Gate;
 class PredefinedKitPresenter extends Presenter
 {
     /**
-     * Json Column Layout for bootstrap table
+     * Json Column Layout for bootstrap table of kits
      * @return string
      */
     public static function dataTableLayout()
@@ -59,7 +59,7 @@ class PredefinedKitPresenter extends Presenter
 
 
     /**
-     * Json Column Layout for bootstrap table
+     * Json Column Layout for bootstrap table of kit models
      * @return string
      */
     public static function dataTableModels()
@@ -111,7 +111,7 @@ class PredefinedKitPresenter extends Presenter
     }
 
     /**
-    * Json Column Layout for bootstrap table
+    * Json Column Layout for bootstrap table of kit licenses
     * @return string
     */
     public static function dataTableLicenses()
@@ -163,7 +163,7 @@ class PredefinedKitPresenter extends Presenter
     }
 
     /**
-    * Json Column Layout for bootstrap table
+    * Json Column Layout for bootstrap table of kit accessories
     * @return string
     */
     public static function dataTableAccessories()
@@ -195,7 +195,7 @@ class PredefinedKitPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => 'Name',                      // TODO: trans
-                "formatter" => "accessoriesLinkFormatter"       // MYTODO: check
+                "formatter" => "accessoriesLinkFormatter"
             ], [
                 "field" => "quantity",
                 "searchable" => false,
@@ -207,7 +207,7 @@ class PredefinedKitPresenter extends Presenter
                 "sortable" => false,
                 "switchable" => false,
                 "title" => trans('table.actions'),
-                "formatter" => "kits_accessoriesActionsFormatter",       // MYTODO: check
+                "formatter" => "kits_accessoriesActionsFormatter",
             ]
         ];
 
@@ -216,7 +216,7 @@ class PredefinedKitPresenter extends Presenter
 
 
     /**
-    * Json Column Layout for bootstrap table
+    * Json Column Layout for bootstrap table of kit consumables
     * @return string
     */
     public static function dataTableConsumables()
@@ -248,7 +248,7 @@ class PredefinedKitPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => 'Name',                      // TODO: trans
-                "formatter" => "consumablesLinkFormatter"       // MYTODO: check
+                "formatter" => "consumablesLinkFormatter"
             ], [
                 "field" => "quantity",
                 "searchable" => false,
@@ -260,7 +260,7 @@ class PredefinedKitPresenter extends Presenter
                 "sortable" => false,
                 "switchable" => false,
                 "title" => trans('table.actions'),
-                "formatter" => "kits_consumablesActionsFormatter",       // MYTODO: check
+                "formatter" => "kits_consumablesActionsFormatter",
             ]
         ];
 
@@ -278,7 +278,6 @@ class PredefinedKitPresenter extends Presenter
     }
 
     /**
-     * Link to this kit Name
      * @return string
      */
     public function fullName()

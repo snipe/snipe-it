@@ -249,10 +249,7 @@ class LicensesController extends Controller
     /**
      * Gets a paginated collection for the select2 menus
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request)
     {

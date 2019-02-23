@@ -12,12 +12,18 @@ use Illuminate\Support\Facades\DB;
 use App\Events\CheckoutableCheckedOut;
 
 
-
+/**
+ * Class incapsulates checkout logic for reuse in different controllers
+ * @author [D. Minaev.] [<dmitriy.minaev.v@gmail.com>]
+ */
 class PredefinedKitCheckoutService
 {
     use AuthorizesRequests;
     /**
-     * @return array [string_error1, string_error2...]
+     * @param Request $request, this function works with fields: checkout_at, expected_checkin, note
+     * @param PredefinedKit $kit kit for checkout
+     * @param User $user checkout target
+     * @return array Empty array if all ok, else [string_error1, string_error2...]
      */
     public function checkout(Request $request, PredefinedKit $kit, User $user) {
         try {
