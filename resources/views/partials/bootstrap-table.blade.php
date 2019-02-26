@@ -537,7 +537,7 @@
 
     $(function () {
         $('#bulkEdit').click(function () {
-            var selectedIds = $('.snipe-table').bootstrapTable('getSelections');
+            var selectedIds = $('#assetsListingTable').bootstrapTable('getSelections');
             $.each(selectedIds, function(key,value) {
                 $( "#bulkForm" ).append($('<input type="hidden" name="ids[' + value.id + ']" value="' + value.id + '">' ));
             });

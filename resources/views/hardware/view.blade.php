@@ -664,9 +664,9 @@
 
                 <table
                         data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
-                        data-cookie-id-table="assetsTable"
+                        data-cookie-id-table="assetsListingTable"
                         data-pagination="true"
-                        data-id-table="assetsTable"
+                        data-id-table="assetsListingTable"
                         data-search="true"
                         data-side-pagination="server"
                         data-show-columns="true"
