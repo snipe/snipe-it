@@ -6,7 +6,7 @@
 
             @if ((!isset($unselect)) && ($accessory_id = Input::old($fieldname, (isset($accessory) ? $accessory->id  : (isset($item) ? $item->{$fieldname} : '')))))
                 <option value="{{ $accessory_id }}" selected="selected">
-                    {{ (\App\Models\Accessory::find($accessory_id)) ? \App\Models\Accessory::find($accessory_id)->present()->fullName : '' }}
+                    {{ (\App\Models\Accessory::find($accessory_id)) ? \App\Models\Accessory::find($accessory_id)->present()->name : '' }}
                 </option>
             @else
                 @if(!isset($multiple))

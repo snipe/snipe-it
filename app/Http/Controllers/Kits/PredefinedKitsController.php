@@ -76,7 +76,7 @@ class PredefinedKitsController extends Controller
      * @param int $kit_id
      * @return View
      */
-    public function edit($kit_id = null)
+    public function edit($kit_id=null)
     {
         $this->authorize('update', PredefinedKit::class);
         if ($kit = PredefinedKit::find($kit_id)) {
@@ -98,7 +98,7 @@ class PredefinedKitsController extends Controller
      * @param int $kit_id
      * @return Redirect
      */
-    public function update(ImageUploadRequest $request, $kit_id = null)
+    public function update(ImageUploadRequest $request, $kit_id=null)
     {
         $this->authorize('update', PredefinedKit::class);
         // Check if the kit exists
@@ -152,7 +152,7 @@ class PredefinedKitsController extends Controller
      * @param int $modelId
      * @return View
      */
-    public function show($kit_id = null)
+    public function show($kit_id=null)
     {
         return $this->edit($kit_id);
     }

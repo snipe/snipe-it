@@ -186,13 +186,13 @@ class PredefinedKitsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
      public function updateLicense(Request $request, $kit_id, $license_id)
      {
          $this->authorize('update', PredefinedKit::class);
-         $kit = PredefinedKit::findOrFail($id);
+         $kit = PredefinedKit::findOrFail($kit_id);
          $quantity = $request->input('quantity', 1);
          if( $quantity < 1) {
              $quantity = 1;
@@ -211,7 +211,7 @@ class PredefinedKitsController extends Controller
     public function detachLicense($kit_id, $license_id)
     {
         $this->authorize('update', PredefinedKit::class);
-        $kit = PredefinedKit::findOrFail($id);
+        $kit = PredefinedKit::findOrFail($kit_id);
 
         $kit->licenses()->detach($license_id);
         return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
@@ -220,7 +220,7 @@ class PredefinedKitsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
      public function indexModels($kit_id) {
@@ -263,13 +263,13 @@ class PredefinedKitsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
      public function updateModel(Request $request, $kit_id, $model_id)
      {
          $this->authorize('update', PredefinedKit::class);
-         $kit = PredefinedKit::findOrFail($id);
+         $kit = PredefinedKit::findOrFail($kit_id);
          $quantity = $request->input('quantity', 1);
          if( $quantity < 1) {
              $quantity = 1;
@@ -288,7 +288,7 @@ class PredefinedKitsController extends Controller
     public function detachModel($kit_id, $model_id)
     {
         $this->authorize('update', PredefinedKit::class);
-        $kit = PredefinedKit::findOrFail($id);
+        $kit = PredefinedKit::findOrFail($kit_id);
 
         $kit->models()->detach($model_id);
         return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
@@ -299,7 +299,7 @@ class PredefinedKitsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
     public function indexConsumables($kit_id) {
@@ -340,13 +340,13 @@ class PredefinedKitsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
      public function updateConsumable(Request $request, $kit_id, $consumable_id)
      {
          $this->authorize('update', PredefinedKit::class);
-         $kit = PredefinedKit::findOrFail($id);
+         $kit = PredefinedKit::findOrFail($kit_id);
          $quantity = $request->input('quantity', 1);
          if( $quantity < 1) {
              $quantity = 1;
@@ -365,7 +365,7 @@ class PredefinedKitsController extends Controller
     public function detachConsumable($kit_id, $consumable_id)
     {
         $this->authorize('update', PredefinedKit::class);
-        $kit = PredefinedKit::findOrFail($id);
+        $kit = PredefinedKit::findOrFail($kit_id);
 
         $kit->consumables()->detach($consumable_id);
         return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
@@ -375,7 +375,7 @@ class PredefinedKitsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
     public function indexAccessories($kit_id) {
@@ -389,7 +389,7 @@ class PredefinedKitsController extends Controller
     /**
      * Store the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
      public function storeAccessory(Request $request, $kit_id)
@@ -416,13 +416,13 @@ class PredefinedKitsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
      public function updateAccessory(Request $request, $kit_id, $accessory_id)
      {
          $this->authorize('update', PredefinedKit::class);
-         $kit = PredefinedKit::findOrFail($id);
+         $kit = PredefinedKit::findOrFail($kit_id);
          $quantity = $request->input('quantity', 1);
          if( $quantity < 1) {
              $quantity = 1;
@@ -441,7 +441,7 @@ class PredefinedKitsController extends Controller
     public function detachAccessory($kit_id, $accessory_id)
     {
         $this->authorize('update', PredefinedKit::class);
-        $kit = PredefinedKit::findOrFail($id);
+        $kit = PredefinedKit::findOrFail($kit_id);
 
         $kit->accessories()->detach($accessory_id);
         return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans

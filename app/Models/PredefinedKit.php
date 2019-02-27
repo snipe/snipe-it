@@ -43,7 +43,7 @@ class PredefinedKit extends SnipeModel
      * @param int $model_id
      * @param bool $new = true if append a new element to kit
      */
-    public function makeModelRules($model_id, $new = false)
+    public function makeModelRules($model_id, $new=false)
     {
         return $this->_makeRuleHelper('models', 'kits_models', 'model_id', $model_id, $new);
     }
@@ -54,7 +54,7 @@ class PredefinedKit extends SnipeModel
      * @param int $license_id
      * @param bool $new = true if append a new element to kit
      */
-    public function makeLicenseRules($license_id, $new = false)
+    public function makeLicenseRules($license_id, $new=false)
     {
         return $this->_makeRuleHelper('licenses', 'kits_licenses', 'license_id', $license_id, $new);
     }
@@ -65,7 +65,7 @@ class PredefinedKit extends SnipeModel
      * @param int $accessoriy_id
      * @param bool $new = true if append a new element to kit
      */
-    public function makeAccessoriesRules($accessory_id, $new = false)
+    public function makeAccessoryRules($accessory_id, $new=false)
     {
         return $this->_makeRuleHelper('accessories', 'kits_accessories', 'accessory_id', $accessory_id, $new);
     }
@@ -76,7 +76,7 @@ class PredefinedKit extends SnipeModel
      * @param int $consumable_id
      * @param bool $new = true if append a new element to kit
      */
-    public function makeConsumablesRules($consumable_id, $new = false)
+    public function makeConsumableRules($consumable_id, $new=false)
     {
         return $this->_makeRuleHelper('consumables', 'kits_consumables', 'consumable_id', $consumable_id, $new);
     }
