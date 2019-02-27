@@ -245,7 +245,7 @@
                 <div class="col-md-12" style="padding-top: 5px;">
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
-
+                @endcan
                 @can('delete', $user)
                   @if ($user->deleted_at=='')
                     <div class="col-md-12" style="padding-top: 5px;">
@@ -380,7 +380,7 @@
               <tbody>
                 @foreach ($user->consumables as $consumable)
                 <tr>
-                  <td>{!! $consumable->present()->nameUrl() !!}</a></td>
+                  <td>{!! $consumable->present()->nameUrl() !!}</td>
                   <td>{{ $consumable->created_at }}</td>
                 </tr>
                 @endforeach
@@ -513,7 +513,7 @@
               <tbody>
                 @foreach ($user->managedLocations as $location)
                 <tr>
-                  <td>{!! $location->present()->nameUrl() !!}</a></td>
+                  <td>{!! $location->present()->nameUrl() !!}</td>
                   <td>{{ $location->created_at }}</td>
                 </tr>
                 @endforeach
