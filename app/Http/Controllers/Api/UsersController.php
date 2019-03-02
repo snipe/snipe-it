@@ -12,6 +12,7 @@ use App\Http\Requests\SaveUserRequest;
 use App\Models\Asset;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Http\Transformers\AccessoriesTransformer;
 
 class UsersController extends Controller
 {
@@ -300,6 +301,23 @@ class UsersController extends Controller
         $this->authorize('view', Asset::class);
         $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model')->get();
         return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+    }
+
+    /**
+     * Return JSON containing a list of accessories assigned to a user.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.6.14]
+     * @param $userId
+     * @return string JSON
+     */
+    public function accessories($id)
+    {
+        $this->authorize('view', User::class);
+        $user = User::findOrFail($id);
+        $this->authorize('view', Accessory::class);
+        $accessories = $user->accessories;
+        return (new AccessoriesTransformer)->transformAccessories($accessories, $accessories->count());
     }
 
     /**
