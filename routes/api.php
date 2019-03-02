@@ -727,7 +727,16 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
 
+
         Route::get('{user}/licenses',
+            [
+                'as' => 'api.users.licenselist',
+                'uses' => 'UsersController@licenses'
+            ]
+        );
+
+
+        Route::get('{user}/accessories',
             [
                 'as' => 'api.users.licenselist',
                 'uses' => 'UsersController@licenses'
