@@ -715,6 +715,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
 
+        Route::get('{user}/accessories',
+            [
+                'as' => 'api.users.accessorieslist',
+                'uses' => 'UsersController@accessories'
+            ]
+        );
+
         Route::post('{user}/upload',
             [
                 'as' => 'api.users.uploads',
