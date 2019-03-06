@@ -414,6 +414,25 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     }
 
     /**
+     * Query builder scope to search user by name with spaces in it.
+     * We don't use the advancedTextSearch() scope because that searches
+     * all of the relations as well, which is more than what we need.
+     *
+     * @param  \Illuminate\Database\Query\Builder $query Query builder instance
+     * @param  array  $terms The search terms
+     * @return \Illuminate\Database\Query\Builder
+     */
+    public function scopeSimpleNameSearch($query,  $search) {
+
+           $query = $query->where('first_name', 'LIKE', '%'.$search.'%')
+               ->orWhere('last_name', 'LIKE', '%'.$search.'%')
+               ->orWhereRaw('CONCAT('.DB::getTablePrefix().'users.first_name," ",'.DB::getTablePrefix().'users.last_name) LIKE ?', ["%$search%", "%$search%"]);
+        return $query;
+    }
+
+
+
+    /**
      * Run additional, advanced searches.
      *
      * @param  Illuminate\Database\Eloquent\Builder $query
