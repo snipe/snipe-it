@@ -27,15 +27,20 @@ class ProfileController extends Controller
 
 
         foreach ($checkoutRequests as $checkoutRequest) {
-            $results['rows'][] = [
-                'image' => $checkoutRequest->itemRequested()->present()->getImageUrl(),
-                'name' => $checkoutRequest->itemRequested()->present()->name(),
-                'type' => $checkoutRequest->itemType(),
-                'qty' => $checkoutRequest->quantity,
-                'location' => ($checkoutRequest->location()) ? $checkoutRequest->location()->name : null,
-                'expected_checkin' => Helper::getFormattedDateObject($checkoutRequest->itemRequested()->expected_checkin, 'datetime'),
-                'request_date' => Helper::getFormattedDateObject($checkoutRequest->created_at, 'datetime'),
-            ];
+
+            // Make sure the asset and request still exist
+            if ($checkoutRequest && $checkoutRequest->itemRequested()) {
+                $results['rows'][] = [
+                    'image' => $checkoutRequest->itemRequested()->present()->getImageUrl(),
+                    'name' => $checkoutRequest->itemRequested()->present()->name(),
+                    'type' => $checkoutRequest->itemType(),
+                    'qty' => $checkoutRequest->quantity,
+                    'location' => ($checkoutRequest->location()) ? $checkoutRequest->location()->name : null,
+                    'expected_checkin' => Helper::getFormattedDateObject($checkoutRequest->itemRequested()->expected_checkin, 'datetime'),
+                    'request_date' => Helper::getFormattedDateObject($checkoutRequest->created_at, 'datetime'),
+                ];
+            }
+
         }
         return $results;
     }
