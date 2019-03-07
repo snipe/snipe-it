@@ -18,9 +18,8 @@ patch \
 curl \
 vim \
 git \
-cron \
 mysql-client \
-cron \
+supervisor \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -69,7 +68,9 @@ RUN \
       && rm -r "/var/www/html/storage/app/backups" && ln -fs "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups" \
       && mkdir "/var/lib/snipeit/keys" && ln -fs "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key" \
       && ln -fs "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key" \
-      && chown docker "/var/lib/snipeit/keys/"
+      && chown docker "/var/lib/snipeit/keys/" \
+      && chmod +x /var/www/html/artisan \
+      && echo "Finished setting up application in /var/www/html"
 
 ############## DEPENDENCIES via COMPOSER ###################
 
@@ -96,16 +97,11 @@ VOLUME ["/var/lib/snipeit"]
 
 ##### START SERVER
 
-COPY docker/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY docker/startup.sh docker/supervisord.conf /
+COPY docker/supervisor-exit-event-listener /usr/bin/supervisor-exit-event-listener
+RUN chmod +x /startup.sh /usr/bin/supervisor-exit-event-listener
 
-# Add Tini
-ENV TINI_VERSION v0.14.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod +x /tini
-ENTRYPOINT ["/tini", "--"]
-
-CMD ["/entrypoint.sh"]
+CMD ["/startup.sh"]
 
 EXPOSE 80
 EXPOSE 443

@@ -5,7 +5,7 @@ if [ -z "$APP_KEY" ]
 then
   echo "Please re-run this container with an environment variable \$APP_KEY"
   echo "An example APP_KEY you could use is: "
-  php artisan key:generate --show
+  /var/www/html/artisan key:generate --show
   exit
 fi
 
@@ -47,5 +47,4 @@ then
   cp -ax /var/www/html/vendor/laravel/passport/database/migrations/* /var/www/html/database/migrations/
 fi
 
-. /etc/apache2/envvars 
-exec apache2 -DNO_DETACH < /dev/null
+exec supervisord -c /supervisord.conf
