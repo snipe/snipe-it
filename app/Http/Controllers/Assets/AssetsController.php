@@ -151,15 +151,14 @@ class AssetsController extends Controller
                 $asset->location_id = $request->input('rtd_location_id', null);
             }
 
-        // Create the image (if one was chosen.)
-        if ($request->hasFile('image')) {
-            $image = $request->input('image');
-
-
             $asset->asset_tag = $asset_tags[$a];
-            $asset = $request->handleImages($asset);
-        }
 
+            // Create the image (if one was chosen.)
+            if ($request->hasFile('image')) {
+                $image = $request->input('image');
+
+                $asset = $request->handleImages($asset);
+            }
 
             // Update custom fields in the database.
             // Validation for these fields is handled through the AssetRequest form request
