@@ -47,7 +47,7 @@
                             {{ Form::label('full_multiple_companies_support', trans('admin/settings/general.full_multiple_companies_support_text')) }}
                         </div>
                         <div class="col-md-9">
-                            {{ Form::checkbox('full_multiple_companies_support', '1', Input::old('full_multiple_companies_support', $setting->full_multiple_companies_support),array('class' => 'minimal')) }}
+                            {{ Form::checkbox('c', '1', Input::old('full_multiple_companies_support', $setting->full_multiple_companies_support),array('class' => 'minimal')) }}
                             {{ trans('admin/settings/general.full_multiple_companies_support_text') }}
                             {!! $errors->first('full_multiple_companies_support', '<span class="alert-msg">:message</span>') !!}
                             <p class="help-block">
@@ -61,7 +61,7 @@
                     <!-- Require signature for acceptance -->
                     <div class="form-group {{ $errors->has('require_accept_signature') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            {{ Form::label('full_multiple_companies_support',
+                            {{ Form::label('require_accept_signature',
                                            trans('admin/settings/general.require_accept_signature')) }}
                         </div>
                         <div class="col-md-9">
