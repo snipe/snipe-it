@@ -179,7 +179,7 @@
                     <!-- Default EULA -->
                    <div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">
                        <div class="col-md-3">
-                           {{ Form::label('per_page', trans('admin/settings/general.default_eula_text')) }}
+                           {{ Form::label('default_eula_text', trans('admin/settings/general.default_eula_text')) }}
                        </div>
                        <div class="col-md-9">
                            {{ Form::textarea('default_eula_text', Input::old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control','placeholder' => 'Add your default EULA text')) }}
