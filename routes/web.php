@@ -22,6 +22,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('locations', 'LocationsController', [
         'parameters' => ['location' => 'location_id']
     ]);
+    
+    Route::get(
+        '{locationId}/printonlyassignedtolocation',
+        [ 'as' => 'locations.printonlyassignedtolocation', 'uses' => 'LocationsController@printOnlyAssignedToLocation' ]
+    );
+    
+    Route::get(
+        '{locationId}/printallassignedtolocation',
+        [ 'as' => 'locations.printallassignedtolocation', 'uses' => 'LocationsController@printAllAssignedToLocation' ]
+    );
 
     /*
     * Manufacturers
