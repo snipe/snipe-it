@@ -269,9 +269,9 @@ class LocationsController extends Controller
     {
 
         $show_location = Location::where('id',$id)->withTrashed()->first();
-		$manager = User::where('id',$show_location->manager_id)->withTrashed()->first();
+	$manager = User::where('id',$show_location->manager_id)->withTrashed()->first();
+	$users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
-        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
         return view('locations/print')->with('assets', $assets)->with('users',$users)->with('show_location', $show_location)->with('manager', $manager);
 
     }
@@ -281,8 +281,8 @@ class LocationsController extends Controller
 
         $show_location = Location::where('id',$id)->withTrashed()->first();
         $manager = User::where('id',$show_location->manager_id)->withTrashed()->first();
+	$users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
         $assets = Asset::where('location_id', $id)->with('model', 'model.category')->get();
-        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
         return view('locations/print')->with('assets', $assets)->with('users',$users)->with('show_location', $show_location)->with('manager', $manager);
 
     }
