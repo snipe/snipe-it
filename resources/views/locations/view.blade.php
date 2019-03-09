@@ -9,10 +9,6 @@
 @parent
 @stop
 
-@section('header_right')
-<a href="{{ route('locations.edit', ['location' => $location->id]) }}" class="btn btn-sm btn-primary pull-right">{{ trans('admin/locations/table.update') }} </a>
-@stop
-
 {{-- Page content --}}
 @section('content')
 
@@ -155,16 +151,21 @@
           </div>
         @endif
 
-
       </div>
 
+		<div class="col-md-12">
+			<a href="{{ route('locations.edit', ['location' => $location->id]) }}" style="width: 60%;" class="btn btn-sm btn-primary pull-left">{{ trans('admin/locations/table.update') }} </a>
+		</div>
+        <div class="col-md-12" style="padding-top: 5px;">
+			<a href="{{ route('locations.printonlyassignedtolocation', ['location' => $location->id]) }}" style="width: 60%;" class="btn btn-sm btn-default pull-left">Print Only Assigned to Location</a>
+		</div>
+		<div class="col-md-12" style="padding-top: 5px;">
+			<a href="{{ route('locations.printallassignedtolocation', ['location' => $location->id]) }}" style="width: 60%;" class="btn btn-sm btn-default pull-left">Print All Assigned to Location</a>
+		</div>
+		
+  </div>
 
   </div>
-</div>
-
-
-
-
 </div>
 
 @stop
