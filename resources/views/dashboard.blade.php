@@ -317,44 +317,7 @@
           success: function (data) {
               var myPieChart = new Chart(ctx,{
                   type   : 'doughnut',
-                  data   : {
-    "labels": [
-        "Ready to Deploy (1,273)",
-        "Pending (50)",
-        "Archived (50)"
-    ],
-    "datasets": [
-        {
-            "data": [
-                1273,
-                50,
-                50,
-            ],
-            "backgroundColor": [
-                "#f56954",
-                "#00a65a",
-                "#f39c12",
-                "#00c0ef",
-                "#3c8dbc",
-                "#d2d6de",
-                "#3c8dbc",
-                "#3c8dbc",
-                "#3c8dbc"
-            ],
-            "hoverBackgroundColor": [
-                "#f56954",
-                "#00a65a",
-                "#f39c12",
-                "#00c0ef",
-                "#3c8dbc",
-                "#d2d6de",
-                "#3c8dbc",
-                "#3c8dbc",
-                "#3c8dbc"
-            ]
-        }
-    ]
-},
+                  data   : data,
                   options: pieOptions
               });
           },
