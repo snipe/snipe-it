@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Consumable;
 use App\Http\Transformers\ConsumablesTransformer;
 use App\Helpers\Helper;
+use App\Http\Transformers\SelectlistTransformer;
 
 class ConsumablesController extends Controller
 {
@@ -190,5 +191,29 @@ class ConsumablesController extends Controller
         $consumableCount = $consumable->users->count();
         $data = array('total' => $consumableCount, 'rows' => $rows);
         return $data;
+    }
+
+    /**
+    * Gets a paginated collection for the select2 menus
+    *
+    * @see \App\Http\Transformers\SelectlistTransformer
+    *
+    */
+    public function selectlist(Request $request)
+    {
+
+        $consumables = Consumable::select([
+            'consumables.id',
+            'consumables.name'
+        ]);
+
+        if ($request->filled('search')) {
+            $consumables = $consumables->where('consumables.name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        $consumables = $consumables->orderBy('name', 'ASC')->paginate(50);
+
+
+        return (new SelectlistTransformer)->transformSelectlist($consumables);
     }
 }

@@ -45,6 +45,19 @@
 </div>
 @endif
 
+@if ($messages = Session::get('error_messages'))
+@foreach ($messages as $message)        
+<div class="col-md-12">
+    <div class="alert alert alert-danger fade in">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <i class="fa fa-exclamation-circle faa-pulse animated"></i>
+        <strong>Error: </strong>
+        {{ $message }}
+    </div>
+</div>
+@endforeach
+@endif
+
 @if ($message = Session::get('warning'))
 <div class="col-md-12">
     <div class="alert alert-warning fade in">

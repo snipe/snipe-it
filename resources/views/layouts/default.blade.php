@@ -664,6 +664,13 @@
             </a>
             </li>
             @endcan
+
+            <li{!! (Request::is('kits') ? ' class="active"' : '') !!}>
+            <a href="{{ route('kits.index') }}">
+            <i class="fa fa-object-group"></i> 
+            <span>Predefined kits{{-- TODO: trans --}}</span>
+            </a>
+            </li>
           </ul>
         </section>
         <!-- /.sidebar -->

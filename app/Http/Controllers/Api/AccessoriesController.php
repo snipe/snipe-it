@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use App\Models\Accessory;
 use App\Http\Transformers\AccessoriesTransformer;
 use App\Models\Company;
+use App\Http\Transformers\SelectlistTransformer;
 
 
 class AccessoriesController extends Controller
@@ -200,5 +201,29 @@ class AccessoriesController extends Controller
         $accessory->delete();
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.delete.success')));
 
+    }
+    
+    /**
+    * Gets a paginated collection for the select2 menus
+    *
+    * @see \App\Http\Transformers\SelectlistTransformer
+    *
+    */
+    public function selectlist(Request $request)
+    {
+
+        $accessories = Accessory::select([
+            'accessories.id',
+            'accessories.name'
+        ]);
+
+        if ($request->filled('search')) {
+            $accessories = $accessories->where('accessories.name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        $accessories = $accessories->orderBy('name', 'ASC')->paginate(50);
+
+
+        return (new SelectlistTransformer)->transformSelectlist($accessories);
     }
 }

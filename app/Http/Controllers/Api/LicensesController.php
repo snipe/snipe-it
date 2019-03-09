@@ -11,6 +11,7 @@ use App\Models\License;
 use App\Models\LicenseSeat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Transformers\SelectlistTransformer;
 
 class LicensesController extends Controller
 {
@@ -251,6 +252,30 @@ class LicensesController extends Controller
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/licenses/message.does_not_exist')), 200);
 
+    }
+
+    
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @see \App\Http\Transformers\SelectlistTransformer
+     */
+    public function selectlist(Request $request)
+    {
+
+        $licenses = License::select([
+            'licenses.id',
+            'licenses.name'
+        ]);
+
+        if ($request->filled('search')) {
+            $licenses = $licenses->where('licenses.name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        $licenses = $licenses->orderBy('name', 'ASC')->paginate(50);
+
+
+        return (new SelectlistTransformer)->transformSelectlist($licenses);
     }
 
 

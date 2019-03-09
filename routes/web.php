@@ -87,6 +87,10 @@ Route::group(['middleware' => 'auth','prefix' => 'modals'], function () {
     Route::get('statuslabel',['as' => 'modal.statuslabel','uses' => 'ModalController@statuslabel']);
     Route::get('supplier',['as' => 'modal.supplier','uses' => 'ModalController@supplier']);
     Route::get('user',['as' => 'modal.user','uses' => 'ModalController@user']);
+    Route::get('kit-model',['as' => 'modal.kit.model','uses' => 'ModalController@kitModel']);
+    Route::get('kit-license',['as' => 'modal.kit.license','uses' => 'ModalController@kitLicense']);
+    Route::get('kit-consumable',['as' => 'modal.kit.consumable','uses' => 'ModalController@kitConsumable']);
+    Route::get('kit-accessory',['as' => 'modal.kit.accessory','uses' => 'ModalController@kitAccessory']);
 });
 
 /*
