@@ -28,7 +28,7 @@ $(function () {
 
 
   //handle modal-add-interstitial calls
-  var model, select;
+  var model, select, refreshSelector;
 
   if($('#createModal').length == 0) {
     $('body').append('<div class="modal fade" id="createModal"></div><!-- /.modal -->');
@@ -38,6 +38,8 @@ $(function () {
       var link = $(event.relatedTarget);
       model = link.data("dependency");
       select = link.data("select");
+      refreshSelector = link.data("refresh");
+      
       $('#createModal').load(link.attr('href'),function () {
         //do we need to re-select2 this, after load? Probably.
         $('#createModal').find('select.select2').select2();
@@ -122,6 +124,12 @@ $(function () {
             }
             $('#createModal').modal('hide');
             $('#createModal').html("");
+
+            var refreshTable = $('#' + refreshSelector);
+
+            if(refreshTable.length > 0) {
+                refreshTable.bootstrapTable('refresh');
+            }
 
             // "select" is the original drop-down menu that someone
             // clicked 'add' on to add a new 'thing'

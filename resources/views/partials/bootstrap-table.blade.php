@@ -150,20 +150,24 @@
     }
 
     // Make the edit/delete buttons
-    function genericActionsFormatter(destination) {
+    function genericActionsFormatter(owner_name, element_name = '') {
         return function (value,row) {
 
             var actions = '<nobr>';
 
             // Add some overrides for any funny urls we have
-            var dest = destination;
+            var dest = owner_name;
 
-            if (destination=='groups') {
+            if (dest =='groups') {
                 var dest = 'admin/groups';
             }
 
-            if (destination=='maintenances') {
+            if (dest =='maintenances') {
                 var dest = 'hardware/maintenances';
+            }
+
+            if(element_name != '') {
+                dest = dest + '/' + row.owner_id + '/' + element_name;
             }
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
@@ -323,7 +327,8 @@
         'companies',
         'depreciations',
         'fieldsets',
-        'groups'
+        'groups',
+        'kits'
     ];
 
     for (var i in formatters) {
@@ -332,6 +337,20 @@
         window[formatters[i] + 'ActionsFormatter'] = genericActionsFormatter(formatters[i]);
         window[formatters[i] + 'InOutFormatter'] = genericCheckinCheckoutFormatter(formatters[i]);
     }
+
+    var child_formatters = [
+        ['kits', 'models'],
+        ['kits', 'licenses'],
+        ['kits', 'consumables'],
+        ['kits', 'accessories'],
+    ];
+
+    for (var i in child_formatters) {
+        var owner_name = child_formatters[i][0];
+        var child_name = child_formatters[i][1];
+        window[owner_name + '_' + child_name + 'ActionsFormatter'] = genericActionsFormatter(owner_name, child_name);
+    }
+
 
 
     // This is  gross, but necessary so that we can package the API response
