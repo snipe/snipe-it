@@ -264,5 +264,27 @@ class LocationsController extends Controller
 
         return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist', compact('id')));
     }
+    
+    public function printOnlyAssignedToLocation($id)
+    {
+
+        $show_location = Location::where('id',$id)->withTrashed()->first();
+		$manager = User::where('id',$show_location->manager_id)->withTrashed()->first();
+        $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
+        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
+        return view('locations/print')->with('assets', $assets)->with('users',$users)->with('show_location', $show_location)->with('manager', $manager);
+
+    }
+    
+    public function printAllAssignedToLocation($id)
+    {
+
+        $show_location = Location::where('id',$id)->withTrashed()->first();
+        $manager = User::where('id',$show_location->manager_id)->withTrashed()->first();
+        $assets = Asset::where('location_id', $id)->with('model', 'model.category')->get();
+        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
+        return view('locations/print')->with('assets', $assets)->with('users',$users)->with('show_location', $show_location)->with('manager', $manager);
+
+    }
 
 }
