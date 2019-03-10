@@ -467,10 +467,9 @@ class AssetsController extends Controller
     {
         $this->authorize('update', Asset::class);
 
-        $asset->fill($request->all());
-
-
         if ($asset = Asset::find($id)) {
+            $asset->fill($request->all());
+
             ($request->filled('model_id')) ?
                 $asset->model()->associate(AssetModel::find($request->get('model_id'))) : null;
             ($request->filled('rtd_location_id')) ?
