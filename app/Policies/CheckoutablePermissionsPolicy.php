@@ -3,7 +3,6 @@ namespace App\Policies;
 
 
 use App\Models\User;
-use App\Policies\SnipePermissionsPolicy;
 
 abstract class CheckoutablePermissionsPolicy extends SnipePermissionsPolicy
 {

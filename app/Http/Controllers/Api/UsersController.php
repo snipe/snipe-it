@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Transformers\LicensesTransformer;
-use App\Models\License;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Transformers\UsersTransformer;
-use App\Models\Company;
-use App\Models\User;
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveUserRequest;
-use App\Models\Asset;
-use App\Http\Transformers\AssetsTransformer;
-use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\AccessoriesTransformer;
+use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\LicensesTransformer;
+use App\Http\Transformers\SelectlistTransformer;
+use App\Http\Transformers\UsersTransformer;
+use App\Models\Asset;
+use App\Models\Company;
+use App\Models\License;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {

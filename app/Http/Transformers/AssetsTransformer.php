@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\Asset;
-use Illuminate\Database\Eloquent\Collection;
-use App\Http\Transformers\UsersTransformer;
-use Gate;
 use App\Helpers\Helper;
+use App\Models\Asset;
+use Gate;
+use Illuminate\Database\Eloquent\Collection;
 
 class AssetsTransformer
 {

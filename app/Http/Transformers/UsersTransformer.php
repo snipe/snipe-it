@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
-use phpDocumentor\Reflection\Types\Integer;
-use Gate;
 use App\Helpers\Helper;
+use App\Models\User;
+use Gate;
+use Illuminate\Database\Eloquent\Collection;
 
 class UsersTransformer
 {

@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\Models\SnipeModel;
 use Intervention\Image\Facades\Image;
 use Storage;
-use Illuminate\Support\Facades\File;
 
 class ImageUploadRequest extends Request
 {

@@ -3,25 +3,20 @@ namespace App\Models;
 
 use App\Events\AssetCheckedOut;
 use App\Events\CheckoutableCheckedOut;
-use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
-use App\Models\User;
 use App\Presenters\Presentable;
 use AssetPresenter;
 use Auth;
 use Carbon\Carbon;
-use Config;
+use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Log;
-use Watson\Validating\ValidatingTrait;
-use DB;
-use App\Notifications\CheckinAssetNotification;
-use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Support\Facades\Storage;
+use Watson\Validating\ValidatingTrait;
+
 /**
  * Model for Assets.
  *

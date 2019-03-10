@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use Adldap\Schemas\Schema;
-use App\Models\User;
-use App\Helpers\Helper;
-use Exception;
 use Adldap\Adldap;
+use Adldap\Models\User as AdldapUser;
 use Adldap\Query\Paginator;
+use Adldap\Schemas\Schema;
+use App\Helpers\Helper;
+use App\Models\User;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use Adldap\Models\User as AdldapUser;
-use Adldap\Models\ModelNotFoundException;
 
 /**
  * LDAP queries.

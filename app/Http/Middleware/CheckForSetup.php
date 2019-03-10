@@ -2,12 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
-use Config;
-use Route;
-use Schema;
-use App\Models\User;
 use App\Models\Setting;
+use Closure;
 
 class CheckForSetup
 {

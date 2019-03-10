@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Transformers;
 
-use Illuminate\Database\Eloquent\Collection;
-use Gate;
 use App\Helpers\Helper;
 
 class LoginAttemptsTransformer

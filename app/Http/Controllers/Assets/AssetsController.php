@@ -7,35 +7,28 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\CheckoutRequest;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
-use Artisan;
 use Auth;
 use Carbon\Carbon;
-use Config;
 use DB;
 use Gate;
 use Illuminate\Http\Request;
-use Image;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use Input;
-use Lang;
 use League\Csv\Reader;
 use League\Csv\Statement;
-use Illuminate\Support\Facades\Cache;
-use Log;
-use Mail;
 use Paginator;
 use Redirect;
 use Response;
 use Slack;
 use Str;
 use TCPDF;
-use Validator;
 use View;
-use App\Models\CheckoutRequest;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * This class controls all actions related to assets for

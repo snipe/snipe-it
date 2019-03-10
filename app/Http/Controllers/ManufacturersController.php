@@ -3,11 +3,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Manufacturer;
-use Illuminate\Support\Facades\Auth;
-use Redirect;
 use Illuminate\Http\Request;
-use Image;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Redirect;
 
 /**
  * This controller handles all actions related to Manufacturers for

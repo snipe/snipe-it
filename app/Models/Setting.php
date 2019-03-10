@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Parsedown;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Watson\Validating\ValidatingTrait;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
+use Parsedown;
+use Watson\Validating\ValidatingTrait;
 
 /**
  * Settings model.

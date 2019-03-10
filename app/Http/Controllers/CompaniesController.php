@@ -1,10 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
-use Image;
-use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
 
 /**

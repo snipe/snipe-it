@@ -4,7 +4,6 @@ namespace App\Models;
 use App\Helpers\Helper;
 use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 

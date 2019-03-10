@@ -2,22 +2,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
-use App\Models\Category as Category;
-use App\Models\Company;
-use App\Models\CustomField;
-use App\Models\Setting;
-use Auth;
-use DB;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Input;
-use Lang;
-use Redirect;
-use Str;
-use View;
-use Image;
 use App\Http\Requests\ImageUploadRequest;
+use App\Models\Category as Category;
+use Auth;
 use Illuminate\Support\Facades\Storage;
+use Str;
 
 /**
  * This class controls all actions related to Categories for

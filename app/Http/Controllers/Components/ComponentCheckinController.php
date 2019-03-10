@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Components;
 use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
 use App\Http\Controllers\Controller;
-use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Component;
 use Illuminate\Http\Request;

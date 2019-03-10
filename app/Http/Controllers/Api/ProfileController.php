@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\CheckoutRequest;
-use App\Http\Controllers\Controller;
-use Auth;
 use App\Helpers\Helper;
-
+use App\Http\Controllers\Controller;
+use App\Models\CheckoutRequest;
+use Auth;
 
 class ProfileController extends Controller
 {

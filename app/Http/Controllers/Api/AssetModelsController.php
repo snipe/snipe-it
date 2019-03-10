@@ -1,16 +1,15 @@
 <?php
 namespace App\Http\Controllers\Api;
 
-use App\Models\AssetModel;
-use App\Models\Asset;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Transformers\AssetModelsTransformer;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Asset;
+use App\Models\AssetModel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
 
 /**
  * This class controls all actions related to asset models for

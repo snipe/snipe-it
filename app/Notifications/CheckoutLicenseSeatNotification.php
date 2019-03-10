@@ -2,17 +2,13 @@
 
 namespace App\Notifications;
 
-use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\Setting;
-use App\Models\SnipeModel;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Mail;
 
 class CheckoutLicenseSeatNotification extends Notification
 {

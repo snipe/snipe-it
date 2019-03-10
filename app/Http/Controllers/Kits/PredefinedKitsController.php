@@ -1,17 +1,12 @@
 <?php
 namespace App\Http\Controllers\Kits;
 
-use App\Models\PredefinedKit;
-use App\Models\AssetModel;
-use App\Models\PredefinedModel;
-use App\Models\License;
-use App\Models\PredefinedLicence;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
-use App\Models\Accessory;
+use App\Models\PredefinedKit;
+use App\Models\PredefinedLicence;
+use App\Models\PredefinedModel;
 use Illuminate\Http\Request;
-
 
 /**
  * This controller handles all access kits management:

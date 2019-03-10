@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Setting;
 use Auth;
 use Closure;
-use App\Models\Setting;
 
 class CheckForTwoFactor
 {

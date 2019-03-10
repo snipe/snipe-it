@@ -9,7 +9,6 @@ use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use Illuminate\Http\Request;
 use Validator;
-use Illuminate\Validation\Rule;
 
 class CustomFieldsController extends Controller
 {

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Services\LdapAd;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use App\Models\Setting;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Services\LdapAd;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Redirect;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use Redirect;
 
 /**
  * This controller handles authentication for the user, including local

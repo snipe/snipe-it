@@ -1,12 +1,7 @@
 <?php
 namespace App\Providers;
 
-use Validator;
 use Illuminate\Support\ServiceProvider;
-use DB;
-use Log;
-
-
 
 /**
  * This service provider handles sharing the snipeSettings variable, and sets

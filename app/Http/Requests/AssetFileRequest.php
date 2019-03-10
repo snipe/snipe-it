@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 
-use Symfony\Component\HttpFoundation\JsonResponse;
-
 class AssetFileRequest extends Request
 {
     /**

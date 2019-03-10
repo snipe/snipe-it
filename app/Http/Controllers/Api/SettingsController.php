@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Services\LdapAd;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Notification;
-use App\Models\Setting;
-use Illuminate\Http\Request;
-use App\Notifications\MailTest;
-use App\Notifications\SlackTest;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\LoginAttemptsTransformer;
+use App\Models\Setting;
+use App\Notifications\MailTest;
+use App\Notifications\SlackTest;
+use App\Services\LdapAd;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
 
 class SettingsController extends Controller
 {

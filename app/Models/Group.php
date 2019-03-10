@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Models\SnipeModel;
 use App\Models\Traits\Searchable;
 use Watson\Validating\ValidatingTrait;
 

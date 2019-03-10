@@ -6,12 +6,12 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\LicenseSeatsTransformer;
 use App\Http\Transformers\LicensesTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Company;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Transformers\SelectlistTransformer;
 
 class LicensesController extends Controller
 {

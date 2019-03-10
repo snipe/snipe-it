@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Services\LdapAd;
-use Illuminate\Support\Facades\Log;
-use Exception;
-use App\Models\Location;
-use Illuminate\Console\Command;
 use Adldap\Models\User as AdldapUser;
+use App\Models\Location;
+use App\Services\LdapAd;
+use Exception;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 /**
  * LDAP / AD sync command.

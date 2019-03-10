@@ -2,10 +2,7 @@
 
 namespace App\Models\Traits;
 
-use App\Models\Asset;
-use App\Models\CustomField;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * This trait allows models to have a callback after their checkout gets accepted or declined.

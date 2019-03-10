@@ -1,12 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use Image;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Supplier;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Http\Requests\ImageUploadRequest;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * This controller handles all actions related to Suppliers for

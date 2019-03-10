@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use App\Models\Manufacturer;
-use App\Http\Transformers\DatatablesTransformer;
+use App\Http\Controllers\Controller;
 use App\Http\Transformers\ManufacturersTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Manufacturer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ManufacturersController extends Controller

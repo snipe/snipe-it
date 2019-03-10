@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Transformers\AssetsTransformer;
-use App\Http\Transformers\ComponentsTransformer;
-use App\Http\Transformers\ComponentsAssetsTransformer;
-use App\Models\Component;
-use App\Models\Company;
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
+use App\Http\Transformers\ComponentsTransformer;
+use App\Models\Company;
+use App\Models\Component;
+use Illuminate\Http\Request;
 
 class ComponentsController extends Controller
 {

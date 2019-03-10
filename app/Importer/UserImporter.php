@@ -2,7 +2,6 @@
 
 namespace App\Importer;
 
-use App\Helpers\Helper;
 use App\Models\Department;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;

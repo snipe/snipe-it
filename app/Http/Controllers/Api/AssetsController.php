@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\LicensesTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
@@ -14,26 +15,16 @@ use App\Models\License;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
-use Artisan;
 use Auth;
 use Carbon\Carbon;
-use Config;
 use DB;
-use Gate;
 use Illuminate\Http\Request;
 use Input;
-use Lang;
-use Log;
-use Mail;
 use Paginator;
-use Response;
 use Slack;
 use Str;
 use TCPDF;
 use Validator;
-use View;
-use App\Http\Transformers\SelectlistTransformer;
-
 
 /**
  * This class controls all actions related to assets for

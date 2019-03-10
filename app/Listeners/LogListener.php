@@ -6,10 +6,10 @@ use App\Events\AccessoryCheckedIn;
 use App\Events\AccessoryCheckedOut;
 use App\Events\AssetCheckedIn;
 use App\Events\AssetCheckedOut;
-use App\Events\CheckoutAccepted;
-use App\Events\CheckoutDeclined;
 use App\Events\CheckoutableCheckedIn;
 use App\Events\CheckoutableCheckedOut;
+use App\Events\CheckoutAccepted;
+use App\Events\CheckoutDeclined;
 use App\Events\ComponentCheckedIn;
 use App\Events\ComponentCheckedOut;
 use App\Events\ConsumableCheckedOut;
@@ -18,10 +18,7 @@ use App\Events\ItemDeclined;
 use App\Events\LicenseCheckedIn;
 use App\Events\LicenseCheckedOut;
 use App\Models\Actionlog;
-use App\Models\Asset;
-use App\Models\Component;
 use App\Models\LicenseSeat;
-
 
 class LogListener
 {

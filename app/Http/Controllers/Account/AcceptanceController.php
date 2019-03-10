@@ -6,16 +6,13 @@ use App\Events\CheckoutDeclined;
 use App\Events\ItemAccepted;
 use App\Events\ItemDeclined;
 use App\Http\Controllers\Controller;
-use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
-use App\Models\Consumable;
 use App\Models\Contracts\Acceptable;
-use App\Models\License;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AcceptanceController extends Controller {
 	

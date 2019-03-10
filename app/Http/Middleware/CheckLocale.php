@@ -2,9 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
-use Config;
 use App\Models\Setting;
+use Closure;
 
 class CheckLocale
 {

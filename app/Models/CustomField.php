@@ -1,14 +1,12 @@
 <?php
 namespace App\Models;
 
+use App\Http\Traits\UniqueUndeletedTrait;
+use EasySlugger\Utf8Slugger;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use Schema;
 use Watson\Validating\ValidatingTrait;
-use App\Http\Traits\UniqueUndeletedTrait;
-use ForceUTF8\Encoding;
-use EasySlugger\Utf8Slugger;
-use Patchwork\Utf8;
-use Illuminate\Validation\Rule;
 
 class CustomField extends Model
 {

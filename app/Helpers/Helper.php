@@ -1,24 +1,14 @@
 <?php
 namespace App\Helpers;
 
-use DB;
-use App\Models\Statuslabel;
-use App\Models\Location;
-use App\Models\Department;
-use App\Models\AssetModel;
-use App\Models\Company;
-use App\Models\User;
-use App\Models\Manufacturer;
-use App\Models\Supplier;
-use App\Models\Category;
-use App\Models\Depreciation;
-use App\Models\CustomFieldset;
-use App\Models\CustomField;
-use App\Models\Component;
 use App\Models\Accessory;
+use App\Models\Component;
 use App\Models\Consumable;
-use App\Models\Asset;
+use App\Models\CustomField;
+use App\Models\CustomFieldset;
+use App\Models\Depreciation;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 

@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 
-use Illuminate\Console\Command;
 use App\Models\Setting;
 use App\Models\User;
+use Illuminate\Console\Command;
 
 class ResetDemoSettings extends Command
 {
