@@ -19,6 +19,8 @@ use App\Notifications\WelcomeNotification;
 class UserImporter extends ItemImporter
 {
     protected $users;
+    protected $send_welcome = false;
+
     public function __construct($filename)
     {
         parent::__construct($filename);
@@ -92,6 +94,7 @@ class UserImporter extends ItemImporter
                     'last_name' => $user->last_name,
                     'password' => $this->tempPassword,
                 ];
+
                 if ($this->send_welcome) {
                     $user->notify(new WelcomeNotification($data));
                 }
@@ -130,5 +133,9 @@ class UserImporter extends ItemImporter
         }
         $this->logError($department, 'Company');
         return null;
+    }
+
+    public function sendWelcome($send = true) {
+        $this->send_welcome = $send;
     }
 }
