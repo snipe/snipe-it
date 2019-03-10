@@ -57,3 +57,5 @@ tests/_support/_generated/*
 
 phpmd\.xml
 /public/storage
+_ide_helper.php
+.phpstorm.meta.php
