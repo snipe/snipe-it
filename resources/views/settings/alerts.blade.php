@@ -43,7 +43,7 @@
                         <!-- Alerts Enabled -->
                         <div class="form-group {{ $errors->has('alert_email') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('alert_email', trans('admin/settings/general.alerts_enabled')) }}
+                                {{ Form::label('alerts_enabled', trans('admin/settings/general.alerts_enabled')) }}
                             </div>
                             <div class="col-md-5">
                                 {{ Form::checkbox('alerts_enabled', '1', Input::old('alerts_enabled', $setting->alerts_enabled),array('class' => 'minimal')) }}
