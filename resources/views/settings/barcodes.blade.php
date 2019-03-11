@@ -66,7 +66,7 @@
                             <!-- barcode -->
                             <div class="form-group">
                                 <div class="col-md-3">
-                                    {{ Form::label('qr_code', trans('admin/settings/general.display_alt_barcode')) }}
+                                    {{ Form::label('alt_barcode_enabled', trans('admin/settings/general.display_alt_barcode')) }}
                                 </div>
                                 <div class="col-md-9">
                                     {{ Form::checkbox('alt_barcode_enabled', '1', Input::old('alt_barcode_enabled', $setting->alt_barcode_enabled),array('class' => 'minimal')) }}
