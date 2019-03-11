@@ -52,7 +52,7 @@
 
                         <div class="form-group {{ $errors->has('labels_width') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('labels_width', trans('admin/settings/general.labels_fontsize')) }}
+                                {{ Form::label('labels_fontsize', trans('admin/settings/general.labels_fontsize')) }}
                             </div>
                             <div class="col-md-2 form-group">
                                 <div class="input-group">
@@ -89,7 +89,7 @@
 
                         <div class="form-group {{ $errors->has('labels_width') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('labels_width', trans('admin/settings/general.label_gutters')) }}
+                                {{ Form::label('labels_display_sgutter', trans('admin/settings/general.label_gutters')) }}
                             </div>
                             <div class="col-md-3 form-group">
                                 <div class="input-group">
@@ -111,7 +111,7 @@
 
                         <div class="form-group {{ $errors->has('labels_width') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('labels_width', trans('admin/settings/general.page_padding')) }}
+                                {{ Form::label('labels_pmargin_top', trans('admin/settings/general.page_padding')) }}
                             </div>
                             <div class="col-md-3 form-group">
                                 <div class="input-group" style="margin-bottom: 15px;">
@@ -141,7 +141,7 @@
 
                         <div class="form-group {{ $errors->has('labels_pageheight') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('labels_width', trans('admin/settings/general.page_dimensions')) }}
+                                {{ Form::label('labels_pagewidth', trans('admin/settings/general.page_dimensions')) }}
                             </div>
                             <div class="col-md-3 form-group">
                                 <div class="input-group">
