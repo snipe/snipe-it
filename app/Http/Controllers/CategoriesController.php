@@ -179,7 +179,7 @@ class CategoriesController extends Controller
             try  {
                 unlink(app('categories_upload_path').$old_image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 

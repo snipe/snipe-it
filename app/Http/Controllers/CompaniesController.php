@@ -148,7 +148,7 @@ final class CompaniesController extends Controller
             try  {
                 unlink(app('companies_upload_path').$old_image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 

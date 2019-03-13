@@ -170,7 +170,7 @@ class ManufacturersController extends Controller
             try  {
                 unlink(app('manufacturers_upload_path').$old_image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 
@@ -207,7 +207,7 @@ class ManufacturersController extends Controller
             try  {
                 unlink(public_path().'/uploads/manufacturers/'.$manufacturer->image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 

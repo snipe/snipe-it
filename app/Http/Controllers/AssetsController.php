@@ -326,7 +326,7 @@ class AssetsController extends Controller
                 unlink(public_path().'/uploads/assets/'.$asset->image);
                 $asset->image = '';
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
 
         }

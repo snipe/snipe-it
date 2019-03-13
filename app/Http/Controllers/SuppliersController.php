@@ -174,7 +174,7 @@ class SuppliersController extends Controller
             try  {
                 unlink(app('suppliers_upload_path').$old_image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 

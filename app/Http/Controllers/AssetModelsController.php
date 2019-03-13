@@ -209,7 +209,7 @@ class AssetModelsController extends Controller
             try  {
                 unlink(app('models_upload_path').$old_image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 
@@ -246,7 +246,7 @@ class AssetModelsController extends Controller
             try  {
                 unlink(public_path().'/uploads/models/'.$model->image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 
