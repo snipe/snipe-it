@@ -59,6 +59,7 @@ class AssetObserver
     {
         if ($settings = Setting::getSettings()) {
             $settings->increment('next_auto_tag_base');
+            $settings->save();
         }
 
         $logAction = new Actionlog();
