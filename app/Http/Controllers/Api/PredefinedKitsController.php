@@ -55,7 +55,7 @@ class PredefinedKitsController extends Controller
         $kit->fill($request->all());
 
         if ($kit->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Created was successfull'));     // TODO: trans
+            return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.create_success')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $kit->getErrors()));
 
@@ -89,7 +89,7 @@ class PredefinedKitsController extends Controller
         $kit->fill($request->all());
 
         if ($kit->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Update was successfull'));      // TODO: trans
+            return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.update_success')));      // TODO: trans
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $kit->getErrors()));
@@ -113,7 +113,7 @@ class PredefinedKitsController extends Controller
         $kit->accessories()->detach();
 
         $kit->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  'Delete was successfull'));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/kits/general.delete_success')));     // TODO: trans
 
     }
 
@@ -214,7 +214,7 @@ class PredefinedKitsController extends Controller
         $kit = PredefinedKit::findOrFail($kit_id);
 
         $kit->licenses()->detach($license_id);
-        return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit,  trans('admin/kits/general.delete_success')));
     }
     
     /**
@@ -238,7 +238,7 @@ class PredefinedKitsController extends Controller
      */
      public function storeModel(Request $request, $kit_id)
      {
-        //return response()->json(Helper::formatStandardApiResponse('error', 'string11', dd($request)));     // TODO: trans
+
 
         $this->authorize('update', PredefinedKit::class);
         
@@ -256,7 +256,7 @@ class PredefinedKitsController extends Controller
         }
         $relation->attach($model_id, ['quantity' => $quantity]);
         
-        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Model added successfull'));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Model added successfull'));
     }
 
     /**
@@ -291,7 +291,7 @@ class PredefinedKitsController extends Controller
         $kit = PredefinedKit::findOrFail($kit_id);
 
         $kit->models()->detach($model_id);
-        return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
+        return response()->json(Helper::formatStandardApiResponse('success', $kit,  trans('admin/kits/general.model_removed_success')));
     }
 
 

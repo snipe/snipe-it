@@ -95,7 +95,7 @@ class PredefinedKitCheckoutService
                 }
             }
             if ($quantity > 0) {
-                $errors[] = "Don't have available assets for model " . $model->name . '. Need ' . $model->pivot->quantity . ' assets.';      // TODO: trans
+                $errors[] = trans('admin/kits/general.none_models', ['model'=> $model->name, 'qty' => $model->pivot->quantity]);
             }
         }
 
@@ -111,7 +111,7 @@ class PredefinedKitCheckoutService
         foreach ($licenses as $license) {
             $quantity = $license->pivot->quantity;
             if ($quantity > count($license->freeSeats)) {
-                $errors[] = "Don't have free seats for license " . $license->name . '. Need ' . $quantity . ' seats.';      // TODO: trans
+                $errors[] = trans('admin/kits/general.none_licenses', ['license'=> $license->name, 'qty' => $license->pivot->quantity]);
             }
             for ($i = 0; $i < $quantity; $i++) {
                 $seats_to_add[] = $license->freeSeats[$i];
@@ -122,11 +122,10 @@ class PredefinedKitCheckoutService
 
     protected function getConsumablesToAdd($kit, &$errors)
     {
-        // $consumables = $kit->consumables()->withCount('consumableAssignments as consumable_assignments_count')->get();
         $consumables = $kit->consumables()->with('users')->get();
         foreach ($consumables as $consumable) {
             if ($consumable->numRemaining() < $consumable->pivot->quantity) {
-                $errors[] = "Don't have available consumable " . $consumable->name . '. Need ' . $consumable->pivot->quantity;      // TODO: trans
+                $errors[] = trans('admin/kits/general.none_consumables', ['consumable'=> $consumable->name, 'qty' => $consumable->pivot->quantity]);
             }
         }
         return $consumables;
@@ -135,9 +134,9 @@ class PredefinedKitCheckoutService
     protected function getAccessoriesToAdd($kit, &$errors)
     {
         $accessories = $kit->accessories()->with('users')->get();
-        foreach ($accessories as $accossory) {
-            if ($accossory->numRemaining() < $accossory->pivot->quantity) {
-                $errors[] = "Don't have available accossory " . $accossory->name . '. Need ' . $accossory->pivot->quantity;      // TODO: trans
+        foreach ($accessories as $accessory) {
+            if ($accessory->numRemaining() < $accessory->pivot->quantity) {
+                $errors[] = trans('admin/kits/general.none_accessory', ['consumable'=> $accessory->name, 'qty' => $accessory->pivot->quantity]);
             }
         }
         return $accessories;

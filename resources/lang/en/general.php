@@ -112,6 +112,7 @@
     'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'insufficient_permissions' => 'Insufficient permissions!',
+    'kits'       			=> 'Predefined Kits',
     'language'				=> 'Language',
     'last'					=> 'Last',
     'last_login'            => 'Last Login',
