@@ -402,12 +402,12 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
      */
     public function two_factor_active () {
 
-        // If the 2FA is optional and the user has opted in and is enrolled
+        // If the 2FA is optional and the user has opted in
         if ((Setting::getSettings()->two_factor_enabled =='1') && ($this->two_factor_optin =='1'))
         {
             return true;
         }
-        // If the 2FA is required and the user has enrolled
+        // If the 2FA is required for everyone so is implicitly active
         elseif (Setting::getSettings()->two_factor_enabled =='2')
         {
             return true;
@@ -437,7 +437,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         {
             return true;
         }
-        // If the 2FA is required and the user has enrolled
+        // If the 2FA is required for everyone and the user has enrolled
         elseif ((Setting::getSettings()->two_factor_enabled =='2') && ($this->two_factor_enrolled))
         {
             return true;
