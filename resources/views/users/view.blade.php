@@ -227,6 +227,11 @@
                     <td>{{ $user->created_at->format('F j, Y h:iA') }}</td>
                   </tr>
                   @endif
+                    <tr>
+                      <td>{{ trans('general.login_enabled') }}</td>
+                      <td>{{ ($user->activated=='1') ? trans('general.yes') : trans('general.no') }}</td>
+                    </tr>
+
                 </table>
               </div>
             </div> <!--/col-md-8-->
