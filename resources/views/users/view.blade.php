@@ -232,6 +232,18 @@
                       <td>{{ ($user->activated=='1') ? trans('general.yes') : trans('general.no') }}</td>
                     </tr>
 
+                    @if ($user->activated=='1')
+                      <tr>
+                        <td>{{ trans('admin/users/general.two_factor_active') }}</td>
+                        <td>{{ ($user->two_factor_active()) ? trans('general.yes') : trans('general.no') }}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ trans('admin/users/general.two_factor_enrolled') }}</td>
+                        <td>{{ ($user->two_factor_active_and_enrolled()) ? trans('general.yes') : trans('general.no') }}</td>
+                      </tr>
+                     @endif
+
+
                 </table>
               </div>
             </div> <!--/col-md-8-->
