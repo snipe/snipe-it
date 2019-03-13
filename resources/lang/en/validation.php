@@ -90,7 +90,7 @@ return array(
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
     "unique_undeleted"     => "The :attribute must be unique.",
-
+    "import_field_empty"   => "The value of the Import Field shouldn't be empty",
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

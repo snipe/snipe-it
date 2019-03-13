@@ -48,7 +48,7 @@ class ItemImportRequest extends FormRequest
                 $errorMessage = null;
 
                 if(is_null($fieldValue)){
-                    $errorMessage = "The Import Field for: " . $field . ", shouldn't be empty";
+                    $errorMessage = trans('validation.import_field_empty');
                     $this->errorCallback($import, $field, $errorMessage);
                     
                     return $this->errors;
