@@ -492,6 +492,15 @@
                 </a>
             </li>
             @endcan
+            @can('view', \App\Models\PredefinedKit::class)
+                <li{!! (Request::is('kits') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('kits.index') }}">
+                        <i class="fa fa-object-group"></i>
+                        <span>{{ trans('general.kits') }}</span>
+                    </a>
+                </li>
+            @endcan
+
             @can('view', \App\Models\User::class)
             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
                   <a href="{{ route('users.index') }}">
@@ -665,12 +674,7 @@
             </li>
             @endcan
 
-            <li{!! (Request::is('kits') ? ' class="active"' : '') !!}>
-            <a href="{{ route('kits.index') }}">
-            <i class="fa fa-object-group"></i> 
-            <span>Predefined kits{{-- TODO: trans --}}</span>
-            </a>
-            </li>
+
           </ul>
         </section>
         <!-- /.sidebar -->

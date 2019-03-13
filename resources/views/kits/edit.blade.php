@@ -1,6 +1,6 @@
 @extends('layouts/edit-form', [
-    'createText' => 'Create kit',
-    'updateText' => 'Update kit',
+    'createText' =>  trans('admin/kits/general.create'),
+    'updateText' =>   trans('admin/kits/general.update'),
     'formAction' => ($item) ? route('kits.update', ['kit' => $item->id]) : route('kits.store'),
 ])
 
@@ -16,8 +16,7 @@
     <div class="col-md-12">
         <div class="box box-default">
             <div class="box-header with-border">
-                {{--  <h3 class="box-title"><span>Models  </span><a href="{{ route('modal.kit.model', ['kit' => $item->id]) }}" data-toggle="modal" data-target="#createModal" class="btn btn-sm btn-primary"><i class="fa fa-plus icon-white"></i> Append</a></h3>  --}}
-                <h3 class="box-title"><span>Assets (by models){{-- TODO: trans --}}</span></h3>
+                <h3 class="box-title"><span>{{ trans('general.asset_models') }}</span></h3>
             </div>
             <div class="box-body">
                 <div class="table-responsive">

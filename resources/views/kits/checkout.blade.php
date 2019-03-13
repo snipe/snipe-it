@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-  Apply predefined kit{{--  TODO: trans  --}}
+  {{ trans('admin/kits/general.checkout') }}
 @parent
 @stop
 
@@ -20,9 +20,6 @@
   <!-- left column -->
   <div class="col-md-7">
     <div class="box box-default">
-      <div class="box-header with-border">
-        <h3 class="box-title"> Apply predefined kit {{ $kit->name }} to user {{-- TODO: trans --}} </h3>
-      </div>
       <div class="box-body">
         <form class="form-horizontal" method="post" action="" autocomplete="off">
           {{ csrf_field() }}
@@ -64,7 +61,7 @@
 
       </div> <!--./box-body-->
       <div class="box-footer">
-        <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
+        <a class="btn btn-link" href="{{ route('kits.index') }}"> {{ trans('button.cancel') }}</a>
         <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkout') }}</button>
       </div>
     </div>
