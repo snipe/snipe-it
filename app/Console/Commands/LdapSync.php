@@ -61,7 +61,7 @@ class LdapSync extends Command
                 $json_summary = [ "error" => true, "error_message" => $e->getMessage(), "summary" => [] ];
                 $this->info(json_encode($json_summary));
             }
-            LOG::error($e);
+            LOG::info($e);
             return [];
         }
 
@@ -80,7 +80,7 @@ class LdapSync extends Command
                 $json_summary = [ "error" => true, "error_message" => $e->getMessage(), "summary" => [] ];
                 $this->info(json_encode($json_summary));
             }
-            LOG::error($e);
+            LOG::info($e);
             return [];
         }
 

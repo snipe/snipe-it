@@ -781,7 +781,7 @@ class AssetsController extends Controller
                     $filename = 'audit-'.$asset->id.'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
                     $file->move($destinationPath, $filename);
                 } catch (\Exception $e) {
-                    \Log::error($e);
+                    \Log::info($e);
                 }
             }
 

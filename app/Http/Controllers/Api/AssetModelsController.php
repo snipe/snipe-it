@@ -179,7 +179,7 @@ class AssetModelsController extends Controller
             try  {
                 unlink(public_path().'/uploads/models/'.$assetmodel->image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 
