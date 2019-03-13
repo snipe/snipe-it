@@ -252,6 +252,41 @@ return array(
 
     ),
 
+    'Kits' => array(
+        array(
+            'permission' => 'kits.view',
+            'label'      => 'View ',
+            'note'       => 'These are predefined kits that can be used to quickly checkout assets, licenses, etc.',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'kits.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'kits.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'kits.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+
+        array(
+            'permission' => 'kits.checkout',
+            'label'      => 'Checkout ',
+            'note'       => '',
+            'display'    => true,
+        ),
+    ),
+
+
     'Users' => array(
         array(
             'permission' => 'users.view',
