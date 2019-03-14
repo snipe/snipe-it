@@ -14,7 +14,7 @@ class AddActionDateToActionlog extends Migration
     public function up()
     {
         Schema::table('action_logs', function (Blueprint $table) {
-            $table->date('action_date')->nullable()->default(null);
+            $table->datetime('action_date')->nullable()->default(null);
         });
 
         $results = DB::table('action_logs')->select('created_at', 'id')->where('action_type', 'checkout')->orWhere('action_type', 'checkin from')->get();
