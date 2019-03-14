@@ -24,7 +24,7 @@ trait Loggable
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
-    public function logCheckout($note, $target, $action_date)
+    public function logCheckout($note, $target, $action_date = null)
     {
         $log = new Actionlog;
         $log = $this->determineLogItemType($log);
@@ -50,6 +50,11 @@ trait Loggable
 
         $log->note = $note;
         $log->action_date = $action_date;
+
+        if (!$log->action_date) {
+            $log->action_date = date('Y-m-d H:i:s');
+        }
+
         $log->logaction('checkout');
 
         return $log;
