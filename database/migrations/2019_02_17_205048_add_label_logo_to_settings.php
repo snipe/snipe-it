@@ -26,7 +26,7 @@ class AddLabelLogoToSettings extends Migration
     public function down()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->dropColumn('email_logo');
+            $table->dropColumn('label_logo');
         });
     }
 }
