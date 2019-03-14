@@ -12,7 +12,7 @@ class ImportsController extends Controller
 {
     public function index()
     {
-        $this->authorize('create', Asset::class);
+        $this->authorize('import');
         $imports = Import::latest()->get();
         $imports = (new ImportsTransformer)->transformImports($imports);
         return view('importer/import')->with('imports', $imports);

@@ -25,7 +25,7 @@ class ImportController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('import');
         $imports = Import::latest()->get();
         return (new ImportsTransformer)->transformImports($imports);
 
@@ -39,10 +39,8 @@ class ImportController extends Controller
      */
     public function store()
     {
-        //
-        if (!Company::isCurrentUserAuthorized()) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-        } elseif (!config('app.lock_passwords')) {
+        $this->authorize('import');
+        if (!config('app.lock_passwords')) {
             $files = Input::file('files');
             $path = config('app.private_uploads').'/imports';
             $results = [];
@@ -119,7 +117,7 @@ class ImportController extends Controller
      */
     public function process(ItemImportRequest $request, $import_id)
     {
-        $this->authorize('create', Asset::class);
+        $this->authorize('import');
         // Run a backup immediately before processing
         Artisan::call('backup:run');
         $errors = $request->import(Import::find($import_id));
@@ -162,7 +160,7 @@ class ImportController extends Controller
      */
     public function destroy($import_id)
     {
-        $this->authorize('create', Asset::class);
+        $this->authorize('import');
         $import = Import::find($import_id);
         try {
             unlink(config('app.private_uploads').'/imports/'.$import->file_path);
