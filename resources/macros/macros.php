@@ -371,6 +371,7 @@ Form::macro('date_display_format', function ($name = "date_display_format", $sel
         'd/m/Y',
         'm/j/Y',
         'd.m.Y',
+        'Y.m.d.',
     ];
 
     foreach ($formats as $format) {
