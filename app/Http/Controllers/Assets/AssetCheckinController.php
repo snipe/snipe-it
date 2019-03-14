@@ -82,10 +82,15 @@ class AssetCheckinController extends Controller
             $asset->location_id =  e($request->get('location_id'));
         }
 
+        $checkin_at = date('Y-m-d');
+        if($request->filled('checkin_at')){
+            $checkin_at = $request->input('checkin_at');
+        }
+
         // Was the asset updated?
         if ($asset->save()) {
         
-            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note')));
+            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
 
             if ($backto=='user') {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));

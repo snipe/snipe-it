@@ -24,7 +24,7 @@ trait Loggable
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
-    public function logCheckout($note, $target /* What are we checking out to? */)
+    public function logCheckout($note, $target, $action_date)
     {
         $log = new Actionlog;
         $log = $this->determineLogItemType($log);
@@ -49,6 +49,7 @@ trait Loggable
         }
 
         $log->note = $note;
+        $log->action_date = $action_date;
         $log->logaction('checkout');
 
         return $log;
@@ -75,7 +76,7 @@ trait Loggable
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
-    public function logCheckin($target, $note)
+    public function logCheckin($target, $note, $action_date)
     {
         $log = new Actionlog;
         $log->target_type = get_class($target);
@@ -91,7 +92,6 @@ trait Loggable
 
             if (static::class == Asset::class) {
                 if ($asset = Asset::find($log->item_id)) {
-                    \Log::debug('Increment the checkin count for asset: '.$log->item_id);
                     $asset->increment('checkin_counter', 1);
                 }
             }
@@ -101,6 +101,7 @@ trait Loggable
 
         $log->location_id = null;
         $log->note = $note;
+        $log->action_date = $action_date;
         $log->user_id = Auth::user()->id;
         $log->logaction('checkin from');
 

@@ -64,7 +64,7 @@ class ActionlogsTransformer
             'note'          => ($actionlog->note) ? e($actionlog->note): null,
             'signature_file'   => ($actionlog->signature_filename) ? route('log.signature.view', ['filename' => $actionlog->signature_filename ]) : null,
             'log_meta'          => ($actionlog->log_meta) ? json_decode($actionlog->log_meta): null,
-
+            'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'date'): null,
 
         ];
 
