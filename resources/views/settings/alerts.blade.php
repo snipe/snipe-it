@@ -41,7 +41,7 @@
                     <div class="col-md-11 col-md-offset-1">
 
                         <!-- Alerts Enabled -->
-                        <div class="form-group {{ $errors->has('alert_email') ? 'error' : '' }}">
+                        <div class="form-group {{ $errors->has('alerts_enabled') ? 'error' : '' }}">
                             <div class="col-md-3">
                                 {{ Form::label('alerts_enabled', trans('admin/settings/general.alerts_enabled')) }}
                             </div>
