@@ -288,7 +288,7 @@ class AssetsController extends Controller
      */
     public function showByTag($tag)
     {
-        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->where('asset_tag',$tag)->first()) {
+        if ($asset = Asset::with('assetstatus')->with('assignedTo')->where('asset_tag',$tag)->first()) {
             $this->authorize('view', $asset);
             return (new AssetsTransformer)->transformAsset($asset);
         }
