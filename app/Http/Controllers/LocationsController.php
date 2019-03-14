@@ -2,10 +2,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Location;
 use Illuminate\Support\Facades\Auth;
-use Image;
-use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
 
 /**

@@ -2,12 +2,11 @@
 namespace App\Importer;
 
 use App\Models\CustomField;
+use App\Models\Department;
 use App\Models\Setting;
 use App\Models\User;
-use App\Models\Department;
 use ForceUTF8\Encoding;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use League\Csv\Reader;
 

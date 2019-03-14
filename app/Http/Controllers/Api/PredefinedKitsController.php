@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use App\Models\PredefinedKit;
+use App\Http\Controllers\Controller;
 use App\Http\Transformers\PredefinedKitsTransformer;
+use App\Models\PredefinedKit;
+use Illuminate\Http\Request;
 
 /**
  *  @author [D. Minaev.] [<dmitriy.minaev.v@gmail.com>]

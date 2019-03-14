@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\Controllers\Licenses;
 
-use App\Http\Controllers\Controller;
-use App\Models\License;
-use Illuminate\Support\Facades\DB;
-use App\Models\Company;
 use App\Helpers\Helper;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\License;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * This controller handles all actions related to Licenses for

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Transformers\CompaniesTransformer;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use App\Models\Company;
+use App\Http\Controllers\Controller;
+use App\Http\Transformers\CompaniesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Company;
+use Illuminate\Http\Request;
 
 class CompaniesController extends Controller
 {

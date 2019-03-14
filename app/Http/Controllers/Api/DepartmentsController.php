@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Department;
-use App\Http\Transformers\DepartmentsTransformer;
 use App\Helpers\Helper;
-use Auth;
+use App\Http\Controllers\Controller;
+use App\Http\Transformers\DepartmentsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Department;
+use Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class DepartmentsController extends Controller

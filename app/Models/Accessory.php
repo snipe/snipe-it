@@ -5,10 +5,8 @@ use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Watson\Validating\ValidatingTrait;
-use App\Notifications\CheckinAccessoryNotification;
-use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Support\Facades\Storage;
+use Watson\Validating\ValidatingTrait;
 
 /**
  * Model for Accessories.

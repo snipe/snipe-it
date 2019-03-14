@@ -2,9 +2,9 @@
 
 namespace App\Observers;
 
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
-use App\Models\Actionlog;
 use Auth;
 
 class AssetObserver

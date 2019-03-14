@@ -2,11 +2,10 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\Helper;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use App\Helpers\Helper;
-use Illuminate\Validation\ValidationException;
 use Log;
 
 class Handler extends ExceptionHandler

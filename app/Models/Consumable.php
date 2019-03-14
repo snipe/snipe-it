@@ -5,9 +5,8 @@ use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Watson\Validating\ValidatingTrait;
-use App\Notifications\CheckoutConsumableNotification;
 use Illuminate\Support\Facades\Storage;
+use Watson\Validating\ValidatingTrait;
 
 class Consumable extends SnipeModel
 {

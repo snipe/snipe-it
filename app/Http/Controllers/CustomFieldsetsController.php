@@ -1,14 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\CustomFieldset;
+use App\Models\AssetModel;
 use App\Models\CustomField;
+use App\Models\CustomFieldset;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
-use App\Models\AssetModel;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to Custom Asset Fields for

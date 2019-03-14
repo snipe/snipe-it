@@ -4,7 +4,6 @@ namespace App\Models;
 use App\Helpers\Helper;
 use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
@@ -75,7 +74,6 @@ class AssetMaintenance extends Model implements ICompanyableChild
             trans('admin/asset_maintenances/general.upgrade')     => trans('admin/asset_maintenances/general.upgrade'),
             'PAT test'      => 'PAT test',
             trans('admin/asset_maintenances/general.calibration')     => trans('admin/asset_maintenances/general.calibration'),
-            'PAT test'      => 'PAT test',
         ];
     }
 

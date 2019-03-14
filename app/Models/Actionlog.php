@@ -2,11 +2,9 @@
 namespace App\Models;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use Illuminate\Database\Eloquent\Model;
+use Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use Response;
-use Carbon;
 
 /**
  * Model for the Actionlog (the table that keeps a historical log of

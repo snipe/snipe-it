@@ -6,18 +6,18 @@ use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
-use App\Models\CustomField;
 use App\Models\CheckoutAcceptance;
+use App\Models\CustomField;
 use App\Models\Depreciation;
 use App\Models\License;
 use App\Models\Setting;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Input;
 use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to Reports for

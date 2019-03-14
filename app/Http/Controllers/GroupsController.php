@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Input;
-use App\Models\Group;
 use App\Helpers\Helper;
+use App\Models\Group;
+use Illuminate\Support\Facades\Input;
 
 /**
  * This controller handles all actions related to User Groups for

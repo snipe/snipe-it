@@ -11,7 +11,6 @@ use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
 use Artisan;
 use Auth;
-use Config;
 use Crypt;
 use DB;
 use Illuminate\Http\Request;

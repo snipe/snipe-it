@@ -1,10 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Models\Actionlog;
-use App\Models\Company;
-use App\Models\LicenseSeat;
-use App\Models\Loggable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;

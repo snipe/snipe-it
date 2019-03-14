@@ -1,14 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
+use App\Http\Requests\ImageUploadRequest;
+use App\Models\AssetModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
-use App\Models\AssetModel;
 use Redirect;
-use App\Helpers\Helper;
-use Illuminate\Http\Request;
-use App\Http\Requests\ImageUploadRequest;
 
 /**
  * This class controls all actions related to asset models for

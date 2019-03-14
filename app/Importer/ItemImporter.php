@@ -2,7 +2,6 @@
 
 namespace App\Importer;
 
-use App\Importer\UserImporter;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
@@ -10,7 +9,6 @@ use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
-use App\Models\Department;
 use App\Models\User;
 
 class ItemImporter extends Importer

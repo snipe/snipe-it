@@ -2,8 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Depreciation;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * This controller handles all actions related to Depreciations for

@@ -1,12 +1,10 @@
 <?php
 namespace App\Models;
 
-use App\Models\Loggable;
 use App\Models\Traits\Acceptable;
 use App\Notifications\CheckinLicenseNotification;
 use App\Notifications\CheckoutLicenseNotification;
 use App\Presenters\Presentable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LicenseSeat extends SnipeModel implements ICompanyableChild

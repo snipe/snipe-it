@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Transformers\ConsumablesTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Company;
 use App\Models\Consumable;
-use App\Http\Transformers\ConsumablesTransformer;
-use App\Helpers\Helper;
-use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Http\Request;
 
 class ConsumablesController extends Controller
 {

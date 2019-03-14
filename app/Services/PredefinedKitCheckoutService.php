@@ -2,15 +2,13 @@
 
 namespace App\Services;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Models\PredefinedKit;
 use App\Models\User;
-use App\Http\Controllers\CheckInOutRequest;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Events\CheckoutableCheckedOut;
-
 
 /**
  * Class incapsulates checkout logic for reuse in different controllers

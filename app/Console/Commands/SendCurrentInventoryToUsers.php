@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Models\Asset;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
+use Illuminate\Console\Command;
 
 class SendCurrentInventoryToUsers extends Command
 {

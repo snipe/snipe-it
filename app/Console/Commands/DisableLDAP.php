@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Setting;
+use Illuminate\Console\Command;
 
 class DisableLDAP extends Command
 {

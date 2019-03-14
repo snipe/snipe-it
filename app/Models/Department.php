@@ -4,12 +4,7 @@ namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
-use Illuminate\Database\Eloquent\Model;
-use Log;
 use Watson\Validating\ValidatingTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\SnipeModel;
-use App\Models\User;
 
 class Department extends SnipeModel
 {

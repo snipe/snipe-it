@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use App\Models\Accessory;
+use App\Http\Controllers\Controller;
 use App\Http\Transformers\AccessoriesTransformer;
-use App\Models\Company;
 use App\Http\Transformers\SelectlistTransformer;
-
+use App\Models\Accessory;
+use App\Models\Company;
+use Illuminate\Http\Request;
 
 class AccessoriesController extends Controller
 {

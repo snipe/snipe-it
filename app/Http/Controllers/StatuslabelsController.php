@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Input;
-use App\Models\Statuslabel;
 use App\Helpers\Helper;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Statuslabel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 /**
  * This controller handles all actions related to Status Labels for

@@ -7,9 +7,8 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Accessory;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use Redirect;
 use Illuminate\Support\Facades\Storage;
+use Redirect;
 
 /** This controller handles all actions related to Accessories for
  * the Snipe-IT Asset Management application.

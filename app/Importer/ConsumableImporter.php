@@ -2,7 +2,6 @@
 
 namespace App\Importer;
 
-use App\Helpers\Helper;
 use App\Models\Consumable;
 
 class ConsumableImporter extends ItemImporter

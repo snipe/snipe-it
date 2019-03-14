@@ -2,13 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Actionlog;
-use App\Models\Asset;
-use App\Models\CheckoutRequest;
-use App\Models\User;
 use App\Notifications\AuditNotification;
 use Illuminate\Support\Facades\Auth;
-
 
 trait Loggable
 {

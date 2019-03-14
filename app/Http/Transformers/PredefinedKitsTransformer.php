@@ -2,9 +2,9 @@
 namespace App\Http\Transformers;
 
 use App\Models\PredefinedKit;
-use Illuminate\Database\Eloquent\Collection;
-use Gate;
 use App\Models\SnipeModel;
+use Gate;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * transforms collection of models to array with simple typres

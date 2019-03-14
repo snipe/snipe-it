@@ -2,12 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\AdminController;
-use App\Models\Actionlog;
-use View;
 use Auth;
-use Redirect;
-use App\Models\Asset;
-use App\Models\Company;
+use View;
 
 /**
  * This controller handles all actions related to the Admin Dashboard

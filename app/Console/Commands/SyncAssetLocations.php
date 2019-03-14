@@ -2,10 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\CustomField;
-use Illuminate\Console\Command;
 use App\Models\Asset;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Console\Command;
 
 class SyncAssetLocations extends Command
 {

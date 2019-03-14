@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Http\Controllers\Controller;
 use App\Models\Ldap;
 use App\Services\LdapAd;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Artisan;
 
 class LDAPImportController extends Controller
