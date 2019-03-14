@@ -58,6 +58,7 @@
     'created'               => 'Item Created',
     'created_asset'			=> 'created asset',
     'created_at' 			=> 'Created at',
+    'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Updated at',
     'currency'  			=> '$', // this is deprecated
     'current'  				=> 'Current',
