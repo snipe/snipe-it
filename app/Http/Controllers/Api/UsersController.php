@@ -52,6 +52,7 @@ class UsersController extends Controller
             'users.phone',
             'users.state',
             'users.two_factor_enrolled',
+            'users.two_factor_optin',
             'users.updated_at',
             'users.username',
             'users.zip',
