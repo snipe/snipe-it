@@ -221,4 +221,5 @@
     'zip'  					=> 'Zip',
     'noimage'					=> 'No image uploaded or image not found.',
     'token_expired'             => 'Your form session has expired. Please try again.',
+    'login_enabled'             => 'Login Enabled',
     ];

@@ -127,22 +127,22 @@
                 <table class="table table-striped">
                   @if (!is_null($user->company))
                     <tr>
-                        <td>{{ trans('general.company') }}</td>
+                        <td class="text-nowrap">{{ trans('general.company') }}</td>
                         <td>{{ $user->company->name }}</td>
                     </tr>
                   @endif
 
                   <tr>
-                    <td>{{ trans('admin/users/table.name') }}</td>
+                    <td class="text-nowrap">{{ trans('admin/users/table.name') }}</td>
                     <td>{{ $user->present()->fullName() }}</td>
                   </tr>
                   <tr>
-                    <td>{{ trans('admin/users/table.username') }}</td>
+                    <td class="text-nowrap">{{ trans('admin/users/table.username') }}</td>
                     <td>{{ $user->username }}</td>
                   </tr>
 
                     <tr>
-                      <td>{{ trans('general.groups') }}</td>
+                      <td class="text-nowrap">{{ trans('general.groups') }}</td>
                       <td>
                         @if ($user->groups->count() > 0)
                             @foreach ($user->groups as $group)
@@ -164,21 +164,21 @@
 
                   @if ($user->jobtitle)
                   <tr>
-                    <td>{{ trans('admin/users/table.job') }}</td>
+                    <td class="text-nowrap">{{ trans('admin/users/table.job') }}</td>
                     <td>{{ $user->jobtitle }}</td>
                   </tr>
                   @endif
 
                   @if ($user->employee_num)
                   <tr>
-                    <td>{{ trans('admin/users/table.employee_num') }}</td>
+                    <td class="text-nowrap">{{ trans('admin/users/table.employee_num') }}</td>
                     <td>{{ $user->employee_num }}</td>
                   </tr>
                   @endif
 
                   @if ($user->manager)
                   <tr>
-                    <td>{{ trans('admin/users/table.manager') }}</td>
+                    <td class="text-nowrap">{{ trans('admin/users/table.manager') }}</td>
                     <td>
                       <a href="{{ route('users.show', $user->manager->id) }}">{{ $user->manager->getFullNameAttribute() }}</a>
 
@@ -188,21 +188,21 @@
 
                   @if ($user->email)
                   <tr>
-                    <td>{{ trans('admin/users/table.email') }}</td>
+                    <td class="text-nowrap">{{ trans('admin/users/table.email') }}</td>
                     <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
                   </tr>
                   @endif
 
                   @if ($user->phone)
                   <tr>
-                    <td>{{ trans('admin/users/table.phone') }}</td>
+                    <td class="text-nowrap">{{ trans('admin/users/table.phone') }}</td>
                     <td><a href="tel:{{ $user->phone }}">{{ $user->phone }}</a></td>
                   </tr>
                   @endif
 
                   @if ($user->userloc)
                   <tr>
-                    <td>{{ trans('admin/users/table.location') }}</td>
+                    <td class="text-nowrap">{{ trans('admin/users/table.location') }}</td>
                     <td>{{ link_to_route('locations.show', $user->userloc->name, [$user->userloc->id]) }}</td>
 
 
@@ -210,14 +210,14 @@
                   @endif
                     @if ($user->last_login)
                       <tr>
-                        <td>{{ trans('general.last_login') }}</td>
+                        <td class="text-nowrap">{{ trans('general.last_login') }}</td>
                         <td>{{ \App\Helpers\Helper::getFormattedDateObject($user->last_login, 'datetime', false) }}</td>
                       </tr>
                     @endif
 
                     @if (!is_null($user->department))
                       <tr>
-                        <td>{{ trans('general.department') }}</td>
+                        <td class="text-nowrap">{{ trans('general.department') }}</td>
                         <td><a href="{{ route('departments.show', $user->department) }}">{{ $user->department->name }}</a></td>
                       </tr>
                     @endif
@@ -227,6 +227,45 @@
                     <td>{{ $user->created_at->format('F j, Y h:iA') }}</td>
                   </tr>
                   @endif
+                    <tr>
+                      <td class="text-nowrap">{{ trans('general.login_enabled') }}</td>
+                      <td>{{ ($user->activated=='1') ? trans('general.yes') : trans('general.no') }}</td>
+                    </tr>
+
+                    @if ($user->activated=='1')
+                      <tr>
+                        <td class="text-nowrap">{{ trans('admin/users/general.two_factor_active') }}</td>
+                        <td>{{ ($user->two_factor_active()) ? trans('general.yes') : trans('general.no') }}</td>
+                      </tr>
+                      <tr>
+                        <td class="text-nowrap">{{ trans('admin/users/general.two_factor_enrolled') }}</td>
+                        <td class="two_factor_resetrow">
+                          <div class="row">
+                          <div class="col-md-1" id="two_factor_reset_toggle">
+                            {{ ($user->two_factor_active_and_enrolled()) ? trans('general.yes') : trans('general.no') }}
+                          </div>
+
+                          @if ((Auth::user()->isSuperUser()) && ($snipeSettings->two_factor_enabled!='0'))
+                            <div class="col-md-11">
+                            <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
+                            <span id="two_factor_reseticon">
+                            </span>
+                            <span id="two_factor_resetresult">
+                            </span>
+                            <span id="two_factor_resetstatus">
+                            </span>
+
+                                <br><br><p class="help-block">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
+                            </div>
+                          </div>
+                       @endif
+
+                        </td>
+                      </tr>
+
+                     @endif
+
+
                 </table>
               </div>
             </div> <!--/col-md-8-->
@@ -542,6 +581,40 @@
   @include ('partials.bootstrap-table', ['simple_view' => true])
 <script nonce="{{ csrf_token() }}">
 $(function () {
+
+  $("#two_factor_reset").click(function(){
+    $("#two_factor_resetrow").removeClass('success');
+    $("#two_factor_resetrow").removeClass('danger');
+    $("#two_factor_resetstatus").html('');
+    $("#two_factor_reseticon").html('<i class="fa fa-spinner spin"></i>');
+    $.ajax({
+      url: '{{ route('api.users.two_factor_reset', ['id'=> $user->id]) }}',
+      type: 'POST',
+      data: {},
+      headers: {
+        "X-Requested-With": 'XMLHttpRequest',
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+      },
+      dataType: 'json',
+
+      success: function (data) {
+        $("#two_factor_reset_toggle").html('').html('{{ trans('general.no') }}');
+        $("#two_factor_reseticon").html('');
+        $("#two_factor_resetstatus").html('<i class="fa fa-check text-success"></i>' + data.message);
+
+      },
+
+      error: function (data) {
+        $("#two_factor_reseticon").html('');
+        $("#two_factor_reseticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+        $('#two_factor_resetstatus').text(data.message);
+      }
+
+
+    });
+  });
+
+
     //binds to onchange event of your input field
     var uploadedFileSize = 0;
     $('#fileupload').bind('change', function() {
