@@ -40,7 +40,7 @@ tr {
                 </div>
                 </div>
             </div>
-            <div class="alert col-md-12 alertClass" style="text-align:left"
+            <div class="alert col-md-12" style="text-align:left"
                  :class="alertClass"
                  v-if="statusText">
                 {{ this.statusText }}
@@ -81,7 +81,7 @@ tr {
                      <br><br>
                  </div>
 
-                <div class="alert col-md-12 alertClass" style="padding-top: 20px;"
+                <div class="alert col-md-12" style="padding-top: 20px;"
                      :class="alertClass"
                      v-if="statusText">
                     {{ this.statusText }}
