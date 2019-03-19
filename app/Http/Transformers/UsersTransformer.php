@@ -24,7 +24,7 @@ class UsersTransformer
         $array = [
                 'id' => (int) $user->id,
                 'avatar' => e($user->present()->gravatar),
-                'name' => e($user->first_name).' '.($user->last_name),
+                'name' => e($user->first_name).' '.e($user->last_name),
                 'first_name' => e($user->first_name),
                 'last_name' => e($user->last_name),
                 'username' => e($user->username),
