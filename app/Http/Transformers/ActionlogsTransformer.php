@@ -25,7 +25,19 @@ class ActionlogsTransformer
         if ($actionlog->filename!='') {
             $icon =  e(\App\Helpers\Helper::filetype_icon($actionlog->filename));
         }
-        $array = [
+
+        // This is necessary since we can't escape special characters within a JSON object
+        if (($actionlog->log_meta) && ($actionlog->log_meta!='')) {
+            $meta_array = json_decode($actionlog->log_meta);
+            foreach ($meta_array as $key => $value) {
+                foreach ($value as $meta_key => $meta_value) {
+                    $clean_meta[$key][$meta_key] = e($meta_value);
+                }
+            }
+        }
+
+
+            $array = [
             'id'          => (int) $actionlog->id,
             'icon'          => $icon,
             'file' => ($actionlog->filename!='') ?
@@ -63,7 +75,7 @@ class ActionlogsTransformer
 
             'note'          => ($actionlog->note) ? e($actionlog->note): null,
             'signature_file'   => ($actionlog->signature_filename) ? route('log.signature.view', ['filename' => $actionlog->signature_filename ]) : null,
-            'log_meta'          => ($actionlog->log_meta) ? json_decode($actionlog->log_meta): null,
+            'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): null,
 
         ];
