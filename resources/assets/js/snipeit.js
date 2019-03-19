@@ -260,7 +260,18 @@ $(document).ready(function () {
     }
 
     function formatDataSelection (datalist) {
-        return datalist.text;
+        // This a heinous workaround for a known bug in Select2.
+        // Without this, the rich selectlists are vulnerable to XSS.
+        // Many thanks to @uberbrady for this fix. It ain't pretty,
+        // but it resolves the issue until Select2 addresses it on their end.
+        //
+        // Bug was reported in 2016 :{
+        // https://github.com/select2/select2/issues/4587
+
+        return datalist.text.replace(/>/g, '&gt;')
+            .replace(/</g, '&lt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
     }
 
     // This handles the radio button selectors for the checkout-to-foo options
