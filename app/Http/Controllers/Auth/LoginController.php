@@ -210,7 +210,7 @@ class LoginController extends Controller
     {
 
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'You must be logged in.');
+            return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
         }
 
 
@@ -218,9 +218,8 @@ class LoginController extends Controller
         $user = Auth::user();
 
         if (($user->two_factor_secret!='') && ($user->two_factor_enrolled==1)) {
-            return redirect()->route('two-factor')->with('error', 'Your device is already enrolled.');
+            return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.already_enrolled'));
         }
-
 
         $google2fa = new Google2FA();
         $secret = $google2fa->generateSecretKey();
@@ -242,7 +241,7 @@ class LoginController extends Controller
     public function getTwoFactorAuth()
     {
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'You must be logged in.');
+            return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
         }
 
         $user = Auth::user();
@@ -263,11 +262,11 @@ class LoginController extends Controller
     {
 
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'You must be logged in.');
+            return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
         }
 
         if (!$request->has('two_factor_secret')) {
-            return redirect()->route('two-factor')->with('error', 'Two-factor code is required.');
+            return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
         }
 
         $user = Auth::user();
@@ -281,8 +280,7 @@ class LoginController extends Controller
             return redirect()->route('home')->with('success', 'You are logged in!');
         }
 
-        \Log::debug('Did not match');
-        return redirect()->route('two-factor')->with('error', 'Invalid two-factor code');
+        return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.invalid_code'));
 
 
     }
@@ -305,7 +303,7 @@ class LoginController extends Controller
             return redirect()->away($customLogoutUrl);
         }
 
-        return redirect()->route('login')->with('success', 'You have successfully logged out!');
+        return redirect()->route('login')->with('success',  trans('auth/general.logout.success'));
     }
 
 
