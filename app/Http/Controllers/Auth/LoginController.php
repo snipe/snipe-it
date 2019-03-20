@@ -213,22 +213,23 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', 'You must be logged in.');
         }
 
-        $user = Auth::user();
-        $google2fa = app()->make('PragmaRX\Google2FA\Contracts\Google2FA');
 
-        if ($user->two_factor_secret=='') {
-            $user->two_factor_secret = $google2fa->generateSecretKey(32);
-            $user->save();
+        $settings = Setting::getSettings();
+        $user = Auth::user();
+
+        if (($user->two_factor_secret!='') && ($user->two_factor_enrolled==1)) {
+            return redirect()->route('two-factor')->with('error', 'Your device is already enrolled.');
         }
 
 
-        $google2fa_url = $google2fa->getQRCodeGoogleUrl(
-            urlencode(Setting::getSettings()->site_name),
-            urlencode($user->username),
-            $user->two_factor_secret
-        );
+        $google2fa = new Google2FA();
+        $secret = $google2fa->generateSecretKey();
+        $user->two_factor_secret = $secret;
+        $user->save();
 
-        return view('auth.two_factor_enroll')->with('google2fa_url', $google2fa_url);
+        $barcode = new \Com\Tecnick\Barcode\Barcode();
+        $barcode_obj =  $barcode->getBarcodeObj('QRCODE', 'otpauth://totp/'.urlencode($settings->site_name).':'.urlencode($user->username).'?secret='.urlencode($secret).'&issuer=Snipe-IT&period=30', 300, 300, 'black', array(-2, -2, -2, -2));
+        return view('auth.two_factor_enroll')->with('barcode_obj', $barcode_obj);
 
     }
 
@@ -240,6 +241,16 @@ class LoginController extends Controller
      */
     public function getTwoFactorAuth()
     {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'You must be logged in.');
+        }
+
+        $user = Auth::user();
+
+        if (($user->two_factor_secret=='') || ($user->two_factor_enrolled!=1)) {
+            return redirect()->route('two-factor-enroll');
+        }
+
         return view('auth.two_factor');
     }
 
@@ -255,18 +266,22 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', 'You must be logged in.');
         }
 
-        $user = Auth::user();
-        $secret = $request->get('two_factor_secret');
-        $google2fa = app()->make('PragmaRX\Google2FA\Contracts\Google2FA');
-        $valid = $google2fa->verifyKey($user->two_factor_secret, $secret);
+        if (!$request->has('two_factor_secret')) {
+            return redirect()->route('two-factor')->with('error', 'Two-factor code is required.');
+        }
 
-        if ($valid) {
+        $user = Auth::user();
+        $google2fa = new Google2FA();
+        $secret = $request->input('two_factor_secret');
+
+        if ($google2fa->verifyKey($user->two_factor_secret, $secret)) {
             $user->two_factor_enrolled = 1;
             $user->save();
             $request->session()->put('2fa_authed', 'true');
             return redirect()->route('home')->with('success', 'You are logged in!');
         }
 
+        \Log::debug('Did not match');
         return redirect()->route('two-factor')->with('error', 'Invalid two-factor code');
 
 
@@ -315,11 +330,11 @@ class LoginController extends Controller
     }
 
     /**
-    * Redirect the user after determining they are locked out.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\RedirectResponse
-    */
+     * Redirect the user after determining they are locked out.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     protected function sendLockoutResponse(Request $request)
     {
         $seconds = $this->limiter()->availableIn(
@@ -330,18 +345,18 @@ class LoginController extends Controller
 
         $message = \Lang::get('auth/message.throttle', ['minutes' => $minutes]);
 
-            return redirect()->back()
+        return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([$this->username() => $message]);
     }
 
 
     /**
-    * Override the lockout time and duration
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\RedirectResponse
-    */
+     * Override the lockout time and duration
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
     protected function hasTooManyLoginAttempts(Request $request)
     {
         $lockoutTime = config('auth.throttle.lockout_duration');
