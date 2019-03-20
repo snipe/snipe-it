@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/users/general.view_user', array('name' => $user->present()->fullName())) }}
+{{ trans('admin/users/general.view_user', ['name' => html_entity_decode($user->present()->fullName(), ENT_QUOTES | ENT_XML1, 'UTF-8')]) }}
 @parent
 @stop
 
@@ -130,7 +130,7 @@
 
                   <tr>
                     <td class="text-nowrap">{{ trans('admin/users/table.name') }}</td>
-                    <td>{{ $user->present()->fullName() }}</td>
+                    <td>{{ html_entity_decode($user->present()->fullName(), ENT_QUOTES | ENT_XML1, 'UTF-8') }}</td>
                   </tr>
                   <tr>
                     <td class="text-nowrap">{{ trans('admin/users/table.username') }}</td>
