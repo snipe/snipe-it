@@ -255,7 +255,7 @@ class LoginController extends Controller
         $user = Auth::user();
 
         // Check whether there is a device enrolled.
-        // This *should* be handled viaq the \App\Http\Middleware\CheckForTwoFactor middleware
+        // This *should* be handled via the \App\Http\Middleware\CheckForTwoFactor middleware
         // but we're just making sure (in case someone edited the database directly, etc)
         if (($user->two_factor_secret=='') || ($user->two_factor_enrolled!=1)) {
             return redirect()->route('two-factor-enroll');
