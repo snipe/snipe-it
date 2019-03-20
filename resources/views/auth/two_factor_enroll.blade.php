@@ -28,7 +28,7 @@
                                 </div>
 
                                 <div class="col-md-12 text-center">
-                                    <img src="{{ $google2fa_url }}" style="padding: 15px 0px 15px 0px">
+                                    {!!  $barcode_obj->getHtmlDiv() !!}
                                 </div>
 
                             </div>
