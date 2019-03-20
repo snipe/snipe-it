@@ -9,9 +9,21 @@ return array(
     'account_banned'         => 'This user account is banned.',
     'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
 
+    'two_factor' => array(
+        'already_enrolled'      => 'Your device is already enrolled.',
+        'success'               => 'You have successfully logged in.',
+        'code_required'         => 'Two-factor code is required.',
+        'invalid_code'          => 'Two-factor code is invalid.',
+    ),
+
     'signin' => array(
         'error'   => 'There was a problem while trying to log you in, please try again.',
         'success' => 'You have successfully logged in.',
+    ),
+
+    'logout' => array(
+        'error'   => 'There was a problem while trying to log you out, please try again.',
+        'success' => 'You have successfully logged out.',
     ),
 
     'signup' => array(

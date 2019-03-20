@@ -199,28 +199,37 @@ class LoginController extends Controller
     public function getTwoFactorEnroll()
     {
 
+        // Make sure the user is logged in
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'You must be logged in.');
+            return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
         }
 
 
         $settings = Setting::getSettings();
         $user = Auth::user();
 
+        // We wouldn't normally see this page if 2FA isn't enforced via the
+        // \App\Http\Middleware\CheckForTwoFactor middleware AND if a device isn't enrolled,
+        // but let's check check anyway in case there's a browser history or back button thing.
+        // While you can access this page directly, enrolling a device when 2FA isn't enforced
+        // won't cause any harm.
+
         if (($user->two_factor_secret!='') && ($user->two_factor_enrolled==1)) {
-            return redirect()->route('two-factor')->with('error', 'Your device is already enrolled.');
+            return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.already_enrolled'));
         }
 
-
-
-        new Otp();
-        $secret = GoogleAuthenticator::generateRandom();
+        $google2fa = new Google2FA();
+        $secret = $google2fa->generateSecretKey();
         $user->two_factor_secret = $secret;
         $user->save();
 
-        $barcode = new \Com\Tecnick\Barcode\Barcode();
-        $barcode_obj =  $barcode->getBarcodeObj('QRCODE', 'otpauth://totp/'.urlencode($settings->site_name).':'.urlencode($user->username).'?secret='.urlencode($secret).'&issuer=Snipe-IT&period=30', 300, 300, 'black', array(-2, -2, -2, -2));
-        return view('auth.two_factor_enroll')->with('barcode_obj', $barcode_obj);
+        $google2fa_url = $google2fa->getQRCodeGoogleUrl(
+            urlencode(Setting::getSettings()->site_name),
+            urlencode($user->username),
+            $user->two_factor_secret
+        );
+
+        return view('auth.two_factor_enroll')->with('google2fa_url', $google2fa_url);
 
     }
 
@@ -232,6 +241,20 @@ class LoginController extends Controller
      */
     public function getTwoFactorAuth()
     {
+        // Check that the user is logged in
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
+        }
+
+        $user = Auth::user();
+
+        // Check whether there is a device enrolled.
+        // This *should* be handled via the \App\Http\Middleware\CheckForTwoFactor middleware
+        // but we're just making sure (in case someone edited the database directly, etc)
+        if (($user->two_factor_secret=='') || ($user->two_factor_enrolled!=1)) {
+            return redirect()->route('two-factor-enroll');
+        }
+
         return view('auth.two_factor');
     }
 
@@ -246,7 +269,11 @@ class LoginController extends Controller
     {
 
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'You must be logged in.');
+            return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
+        }
+
+        if (!$request->has('two_factor_secret')) {
+            return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
         }
 
         if (!$request->has('two_factor_secret')) {
@@ -254,19 +281,17 @@ class LoginController extends Controller
         }
 
         $user = Auth::user();
-        $otp = new Otp();
+        $google2fa = new Google2FA();
+        $secret = $request->input('two_factor_secret');
 
-
-
-        if ($otp->checkTotp(Encoding::base32DecodeUpper($user->two_factor_secret), $request->get('two_factor_secret'))) {
+        if ($google2fa->verifyKey($user->two_factor_secret, $secret)) {
             $user->two_factor_enrolled = 1;
             $user->save();
             $request->session()->put('2fa_authed', 'true');
             return redirect()->route('home')->with('success', 'You are logged in!');
         }
 
-        \Log::debug('Did not match');
-        return redirect()->route('two-factor')->with('error', 'Invalid two-factor code');
+        return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.invalid_code'));
 
 
     }
@@ -291,7 +316,7 @@ class LoginController extends Controller
             return redirect()->away($customLogoutUrl);
         }
 
-        return redirect()->route('login')->with('success', 'You have successfully logged out!');
+        return redirect()->route('login')->with('success',  trans('auth/general.logout.success'));
     }
 
 
@@ -316,11 +341,11 @@ class LoginController extends Controller
     }
 
     /**
-    * Redirect the user after determining they are locked out.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\RedirectResponse
-    */
+     * Redirect the user after determining they are locked out.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     protected function sendLockoutResponse(Request $request)
     {
         $seconds = $this->limiter()->availableIn(
@@ -331,18 +356,18 @@ class LoginController extends Controller
 
         $message = \Lang::get('auth/message.throttle', ['minutes' => $minutes]);
 
-            return redirect()->back()
+        return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([$this->username() => $message]);
     }
 
 
     /**
-    * Override the lockout time and duration
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return  bool
-    */
+     * Override the lockout time and duration
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
     protected function hasTooManyLoginAttempts(Request $request)
     {
         $lockoutTime = config('auth.throttle.lockout_duration');
