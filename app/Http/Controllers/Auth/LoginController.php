@@ -223,7 +223,7 @@ class LoginController extends Controller
         // but let's check check anyway in case there's a browser history or back button thing.
         // While you can access this page directly, enrolling a device when 2FA isn't enforced
         // won't cause any harm.
-        
+
         if (($user->two_factor_secret!='') && ($user->two_factor_enrolled==1)) {
             return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.already_enrolled'));
         }
@@ -247,12 +247,16 @@ class LoginController extends Controller
      */
     public function getTwoFactorAuth()
     {
+        // Check that the user is logged in
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
         }
 
         $user = Auth::user();
 
+        // Check whether there is a device enrolled.
+        // This *should* be handled viaq the \App\Http\Middleware\CheckForTwoFactor middleware
+        // but we're just making sure (in case someone edited the database directly, etc)
         if (($user->two_factor_secret=='') || ($user->two_factor_enrolled!=1)) {
             return redirect()->route('two-factor-enroll');
         }
