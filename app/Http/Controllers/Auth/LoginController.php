@@ -209,6 +209,7 @@ class LoginController extends Controller
     public function getTwoFactorEnroll()
     {
 
+        // Make sure the user is logged in
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
         }
@@ -217,6 +218,12 @@ class LoginController extends Controller
         $settings = Setting::getSettings();
         $user = Auth::user();
 
+        // We wouldn't normally see this page if 2FA isn't enforced via the
+        // \App\Http\Middleware\CheckForTwoFactor middleware AND if a device isn't enrolled,
+        // but let's check check anyway in case there's a browser history or back button thing.
+        // While you can access this page directly, enrolling a device when 2FA isn't enforced
+        // won't cause any harm.
+        
         if (($user->two_factor_secret!='') && ($user->two_factor_enrolled==1)) {
             return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.already_enrolled'));
         }
