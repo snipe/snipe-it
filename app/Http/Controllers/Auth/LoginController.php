@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
+use Log;
+use View;
+use Otp\Otp;
+use Otp\GoogleAuthenticator;
+use ParagonIE\ConstantTime\Encoding;
 
 /**
  * This controller handles authentication for the user, including local
@@ -198,22 +203,24 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', 'You must be logged in.');
         }
 
-        $user = Auth::user();
-        $google2fa = app()->make('pragmarx.google2fa');
 
-        if ($user->two_factor_secret=='') {
-            $user->two_factor_secret = $google2fa->generateSecretKey(32);
-            $user->save();
+        $settings = Setting::getSettings();
+        $user = Auth::user();
+
+        if (($user->two_factor_secret!='') && ($user->two_factor_enrolled==1)) {
+            return redirect()->route('two-factor')->with('error', 'Your device is already enrolled.');
         }
 
 
-        $google2fa_url = $google2fa->getQRCodeInline(
-            urlencode(Setting::getSettings()->site_name),
-            urlencode($user->username),
-            $user->two_factor_secret
-        );
 
-        return view('auth.two_factor_enroll')->with('google2fa_url', $google2fa_url);
+        new Otp();
+        $secret = GoogleAuthenticator::generateRandom();
+        $user->two_factor_secret = $secret;
+        $user->save();
+
+        $barcode = new \Com\Tecnick\Barcode\Barcode();
+        $barcode_obj =  $barcode->getBarcodeObj('QRCODE', 'otpauth://totp/'.urlencode($settings->site_name).':'.urlencode($user->username).'?secret='.urlencode($secret).'&issuer=Snipe-IT&period=30', 300, 300, 'black', array(-2, -2, -2, -2));
+        return view('auth.two_factor_enroll')->with('barcode_obj', $barcode_obj);
 
     }
 
@@ -242,18 +249,23 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', 'You must be logged in.');
         }
 
-        $user = Auth::user();
-        $secret = $request->get('two_factor_secret');
-        $google2fa = app()->make('pragmarx.google2fa');
-        $valid = $google2fa->verifyKey($user->two_factor_secret, $secret);
+        if (!$request->has('two_factor_secret')) {
+            return redirect()->route('two-factor')->with('error', 'Two-factor code is required.');
+        }
 
-        if ($valid) {
+        $user = Auth::user();
+        $otp = new Otp();
+
+
+
+        if ($otp->checkTotp(Encoding::base32DecodeUpper($user->two_factor_secret), $request->get('two_factor_secret'))) {
             $user->two_factor_enrolled = 1;
             $user->save();
             $request->session()->put('2fa_authed', 'true');
             return redirect()->route('home')->with('success', 'You are logged in!');
         }
 
+        \Log::debug('Did not match');
         return redirect()->route('two-factor')->with('error', 'Invalid two-factor code');
 
 

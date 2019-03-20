@@ -27,6 +27,15 @@ return array(
         )
     ),
 
+    'CSV Import' => array(
+        array(
+            'permission' => 'import',
+            'label'      => '',
+            'note'       => 'This will allow users to import even if access to users, assets, etc is denied elsewhere.',
+            'display'    => true,
+        )
+    ),
+
     'Reports' => array(
         array(
             'permission' => 'reports.view',

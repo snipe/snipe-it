@@ -34,6 +34,7 @@
     "league/flysystem-sftp": "~1.0",
     "maknz/slack": "^1.7",
     "neitanod/forceutf8": "^2.0",
+    "paragonie/constant_time_encoding": "^1.0",
     "patchwork/utf8": "~1.2",
     "phpdocumentor/reflection-docblock": "3.2.2",
     "phpspec/prophecy": "1.7.5",

@@ -164,7 +164,7 @@ class ManufacturersController extends Controller
             try  {
                 Storage::disk('public')->delete('manufacturers/'.$manufacturer->image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 

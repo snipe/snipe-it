@@ -179,7 +179,7 @@ class AssetModelsController extends Controller
             try  {
                 Storage::disk('public')->delete('assetmodels/'.$assetmodel->image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 
