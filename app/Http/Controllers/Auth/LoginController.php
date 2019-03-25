@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\User;
 use App\Services\LdapAd;
+use Google2FA;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -13,12 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Redirect;
 use Log;
-use View;
-use Otp\Otp;
-use Otp\GoogleAuthenticator;
-use ParagonIE\ConstantTime\Encoding;
+use Redirect;
 
 /**
  * This controller handles authentication for the user, including local
