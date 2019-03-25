@@ -21,12 +21,17 @@ class CheckoutableCheckedIn
      *
      * @return void
      */
-    public function __construct($checkoutable, $checkedOutTo, User $checkedInBy, $note, $action_date)
+    public function __construct($checkoutable, $checkedOutTo, User $checkedInBy, $note, $action_date = null)
     {
         $this->checkoutable = $checkoutable;
         $this->checkedOutTo = $checkedOutTo;
         $this->checkedInBy  = $checkedInBy;
         $this->note         = $note;
+
+        if (! $action_date) {
+            $action_date = date('Y-m-d');
+        }
+
         $this->action_date  = $action_date;
     }
 }
