@@ -21,7 +21,7 @@ return array(
         'success' => 'The accessory was deleted successfully.'
     ),
 
-     'checkout' => array(
+    'checkout' => array(
         'error'   		=> 'Accessory was not checked out, please try again',
         'success' 		=> 'Accessory checked out successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.'
@@ -30,8 +30,7 @@ return array(
     'checkin' => array(
         'error'   		=> 'Accessory was not checked in, please try again',
         'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'That user is invalid. Please try again.',
+        'not_checkedout' => 'That user did not check out this accessory.'
     )
-
-
 );

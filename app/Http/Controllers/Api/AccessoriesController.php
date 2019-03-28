@@ -9,6 +9,10 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Accessory;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use App\Events\CheckoutableCheckedIn;
+use App\Models\User;
+use DB;
+use Auth;
 
 class AccessoriesController extends Controller
 {
@@ -224,5 +228,44 @@ class AccessoriesController extends Controller
 
 
         return (new SelectlistTransformer)->transformSelectlist($accessories);
+    }
+
+   /**
+     * Checkin an Accessory
+     *
+     * @author [M. Reyes] [<mreyes@schutzwerk.com>]
+     * @param int $accessoryID
+     * @since [v5.0]
+     * @return JsonResponse
+     */
+    public function checkin(Request $request, $accessoryID){
+
+        $this->authorize('checkin', Accessory::class);
+        $accessory = Accessory::findOrFail($accessoryID);
+        $this->authorize('checkin', $accessory);
+            
+        if(! $request->filled('user_id')){
+            // TODO: use proper string
+            return response()->json(Helper::formatStandardApiResponse('error', ['accessory'=> e($accessory->id)], 'DBG: user id required'));
+        }
+
+        $user_id = $request->input('user_id');
+
+        // Check if the accessory_user entry exists
+        
+        if (is_null($accessory_user = DB::table('accessories_users')->where('assigned_to', $user_id)->first())) {
+            // Redirect to the accessory management page with error
+            return response()->json(Helper::formatStandardApiResponse('error', ['accessory'=> e($accessory->id), 'user'=> e($user_id)], trans('admin/accessories/message.checkin.not_checkedout')));
+        }
+
+        // Delete the entry. if the table changed
+        if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
+            // We succeeded
+            event(new CheckoutableCheckedIn($accessory, User::find($user_id), Auth::user(), $request->input('note'), date('Y-m-d H:i:s')));
+            return response()->json(Helper::formatStandardApiResponse('success', ['accessory'=> e($accessory->id)], trans('admin/accessories/message.checkin.success')));
+        }
+        
+        // else we failed
+        return response()->json(Helper::formatStandardApiResponse('success', ['accessory'=> e($asset->asset_tag)], trans('admin/accessories/message.checkin.error')));
     }
 }

@@ -49,6 +49,22 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses'=> 'AccessoriesController@selectlist'
             ]
         );
+
+        /*Route::post('{accessoryID}/checkout',
+            [
+                'as' => 'api.accessories.checkout',
+                'uses' => 'AccessoriesController@checkout'
+            ]
+        );*/
+
+        Route::post('{accessoryID}/checkin',
+            [
+                'as' => 'api.accessories.checkin',
+                'uses' => 'AccessoriesController@checkin'
+            ]
+        );
+
+
     }); // Accessories group
     Route::resource('accessories', 'AccessoriesController',
         ['names' =>
