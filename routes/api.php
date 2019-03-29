@@ -50,12 +50,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
 
-        /*Route::post('{accessoryID}/checkout',
+        Route::post('{accessoryID}/checkout',
             [
                 'as' => 'api.accessories.checkout',
                 'uses' => 'AccessoriesController@checkout'
             ]
-        );*/
+        );
 
         Route::post('{accessoryID}/checkin',
             [
