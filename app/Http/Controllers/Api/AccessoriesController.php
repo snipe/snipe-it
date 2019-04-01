@@ -250,7 +250,7 @@ class AccessoriesController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success',  ['accessory'=> e($accessoryID)],  trans('admin/accessories/message.checkin.accessory_does_not_exist')));
         }
         // check if the user exists
-        if (!$user = User::find($request->input('user_id'))) {
+        if (is_null(User::find($request->input('user_id')))) {
             return response()->json(Helper::formatStandardApiResponse('success',  ['accessory'=> e($accessoryID)],  trans('admin/accessories/message.checkin.user_does_not_exist')));
         }
         // Check if the accessory_user entry exists        
