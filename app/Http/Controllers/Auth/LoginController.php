@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\User;
 use App\Services\LdapAd;
+use Com\Tecnick\Barcode\Barcode;
+use Google2FA;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -13,12 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Redirect;
 use Log;
-use View;
-use Otp\Otp;
-use Otp\GoogleAuthenticator;
-use ParagonIE\ConstantTime\Encoding;
+use Redirect;
 
 /**
  * This controller handles authentication for the user, including local
@@ -217,19 +215,27 @@ class LoginController extends Controller
             return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.already_enrolled'));
         }
 
-        $google2fa = new Google2FA();
-        $secret = $google2fa->generateSecretKey();
+        $secret = Google2FA::generateSecretKey();
         $user->two_factor_secret = $secret;
         $user->save();
 
-        $google2fa_url = $google2fa->getQRCodeGoogleUrl(
-            urlencode(Setting::getSettings()->site_name),
-            urlencode($user->username),
-            $user->two_factor_secret
-        );
+        $barcode = new Barcode();
+        $barcode_obj =
+            $barcode->getBarcodeObj(
+                'QRCODE',
+                sprintf(
+                    'otpauth://totp/%s:%s?secret=%s&issuer=Snipe-IT&period=30',
+                    urlencode($settings->site_name),
+                    urlencode($user->username),
+                    urlencode($secret)
+                ),
+                300,
+                300,
+                'black',
+                [-2, -2, -2, -2]
+            );
 
-        return view('auth.two_factor_enroll')->with('google2fa_url', $google2fa_url);
-
+        return view('auth.two_factor_enroll')->with('barcode_obj', $barcode_obj);
     }
 
 
@@ -280,10 +286,9 @@ class LoginController extends Controller
         }
 
         $user = Auth::user();
-        $google2fa = new Google2FA();
         $secret = $request->input('two_factor_secret');
 
-        if ($google2fa->verifyKey($user->two_factor_secret, $secret)) {
+        if (Google2FA::verifyKey($user->two_factor_secret, $secret)) {
             $user->two_factor_enrolled = 1;
             $user->save();
             $request->session()->put('2fa_authed', 'true');
