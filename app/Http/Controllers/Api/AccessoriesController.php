@@ -141,18 +141,27 @@ class AccessoriesController extends Controller
             return ['total' => 0, 'rows' => []];
         }
 
+        $offset = request('offset', 0);
+        $limit = request('limit', 50);
+
         $accessory->lastCheckoutArray = $accessory->lastCheckout->toArray();
         $accessory_users = $accessory->users;
-        
+        $total = $accessory_users->count();
+
+        if($total < $offset){
+            $offset = 0;
+        }
+
+        $accessory_users = $accessory->users()->skip($offset)->take($limit)->get();
+
         if ($request->filled('search')) {
             $accessory_users = $accessory->users()
                                 ->where('first_name', 'like', '%'.$request->input('search').'%')
                                 ->orWhere('last_name', 'like', '%'.$request->input('search').'%')
                                 ->get();
+            $total = $accessory_users->count();
         }
-
-        $total = $accessory_users->count();
-    
+        
         return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $accessory_users, $total);
     }
 
