@@ -17,6 +17,16 @@
                 <input name="checkout_to_type" value="location" class="active" type="radio"><i class="fa fa-map-marker"></i> {{ trans('general.location') }}
             </label>
             @endif
+            @if ((isset($component_select)) && ($component_select!='false'))
+                <label class="btn btn-default">
+                    <input name="checkout_to_type" value="component" class="active" type="radio"><i class="fa fa-hdd-o"></i> {{ trans('general.component') }}
+                </label>
+            @endif
+            @if ((isset($accessory_select)) && ($accessory_select!='false'))
+                <label class="btn btn-default">
+                    <input name="checkout_to_type" value="accessory" class="active" type="radio"><i class="fa fa-keyboard-o"></i> {{ trans('general.accessory') }}
+                </label>
+            @endif
 
             {!! $errors->first('checkout_to_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
         </div>

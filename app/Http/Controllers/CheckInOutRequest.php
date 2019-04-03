@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Accessory;
 use App\Models\Asset;
+use App\Models\Component;
 use App\Models\Location;
 use App\Models\SnipeModel;
 use App\Models\User;
@@ -23,6 +25,10 @@ trait CheckInOutRequest
                 return Asset::findOrFail(request('assigned_asset'));
             case 'user':
                 return User::findOrFail(request('assigned_user'));
+            case 'component':
+                return Component::findOrFail(request('assigned_component'));
+            case 'accessory':
+                return Accessory::findOrFail(request('assigned_accessory'));
         }
         return null;
     }
