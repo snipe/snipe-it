@@ -152,7 +152,7 @@ class LicensesController extends Controller
     {
         $this->authorize('view', License::class);
         $license = License::withCount('freeSeats')->findOrFail($id);
-        $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
+        $license = $license->load('licenseSeats.assignedTo');
         return (new LicensesTransformer)->transformLicense($license);
     }
 
@@ -199,7 +199,7 @@ class LicensesController extends Controller
             // Delete the license and the associated license seats
             DB::table('license_seats')
                 ->where('id', $license->id)
-                ->update(array('assigned_to' => null,'asset_id' => null));
+                ->update(array('assigned_to' => null, 'assigned_type' => null));
 
             $licenseSeats = $license->licenseseats();
             $licenseSeats->delete();
@@ -226,7 +226,7 @@ class LicensesController extends Controller
 
             $this->authorize('view', $license);
 
-            $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
+            $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'assignedTo');
 
             $offset = request('offset', 0);
             $limit = request('limit', 50);

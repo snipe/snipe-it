@@ -84,13 +84,14 @@ class RestoreDeletedUsers extends Command
                     $license_totals++;
 
                     $avail_seat = DB::table('license_seats')->where('license_id','=',$user_log->item->id)
-                        ->whereNull('assigned_to')->whereNull('asset_id')->whereBetween('updated_at', [$start_date, $end_date])->first();
+                        ->whereNull('assigned_to')->whereBetween('updated_at', [$start_date, $end_date])->first();
                     if ($avail_seat) {
                         $this->info('      ** Allocating seat '.$avail_seat->id.' for this License');
 
                         DB::table('license_seats')
                             ->where('id', $avail_seat->id)
-                            ->update(['assigned_to' => $user->id]);
+                            ->update(['assigned_to' => $user->id])
+                            ->update(['assigned_type' => App\Model\User::class]);
 
                     } else {
                         $this->warn('ERROR: No available seats for '.$user_log->item->name);

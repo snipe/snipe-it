@@ -41,12 +41,17 @@
                         </div>
                     </div>
 
-                    @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'false'])
+                    @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true', 'component_select' => 'true', 'accessory_select' => 'true'])
 
-                    @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_to', 'required'=>'true'])
+                    @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user', 'required'=>'true'])
 
-                    @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/licenses/form.asset'), 'fieldname' => 'asset_id', 'style' => 'display:none;'])
+                    @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/licenses/form.asset'), 'fieldname' => 'assigned_asset', 'style' => 'display:none;'])
 
+                    @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;'])
+
+                    @include ('partials.forms.edit.component-select', ['translated_name' => trans('general.component'), 'fieldname' => 'assigned_component', 'style' => 'display:none;'])
+
+                    @include ('partials.forms.edit.accessory-select', ['translated_name' => trans('general.accessory'), 'fieldname' => 'assigned_accessory', 'style' => 'display:none;'])
 
                     <!-- Note -->
                     <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">

@@ -56,49 +56,24 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
     }
 
     /**
-     * Establishes the seat -> assignee relationship
+     * Get the target this license seat is checked out to
      *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v1.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     * @author [D. Stumm] [@dennis95stumm]
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function user()
+    public function assignedTo()
     {
-        return $this->belongsTo('\App\Models\User', 'assigned_to')->withTrashed();
+        return $this->morphTo('assigned', 'assigned_type', 'assigned_to');
     }
 
     /**
-     * Establishes the seat -> asset relationship
+     * Gets the lowercased name of the type of target the license seat is assigned to
      *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v4.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function asset()
-    {
-        return $this->belongsTo('\App\Models\Asset', 'asset_id')->withTrashed();
-    }
-
-    /**
-     * Determines the assigned seat's location based on user
-     * or asset its assigned to
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v4.0]
+     * @author [D. Stumm] [@dennis95stumm]
      * @return string
      */
-    public function location()
+    public function assignedType()
     {
-        if (($this->user) && ($this->user->location)) {
-            return $this->user->location;
-
-        } elseif (($this->asset) && ($this->asset->location)) {
-            return $this->asset->location;
-        }
-
-        return false;
-
+        return strtolower(class_basename($this->assigned_type));
     }
-
-
 }

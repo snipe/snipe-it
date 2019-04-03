@@ -326,18 +326,6 @@ class License extends Depreciable
     }
 
     /**
-     * Establishes the license -> assigned user relationship
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v2.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function assignedusers()
-    {
-        return $this->belongsToMany('\App\Models\User', 'license_seats', 'assigned_to', 'license_id');
-    }
-
-    /**
      * Establishes the license -> action logs relationship
      *
      * @author A. Gianotto <snipe@snipe.net>
@@ -453,7 +441,6 @@ class License extends Depreciable
     public static function availassetcount()
     {
         return LicenseSeat::whereNull('assigned_to')
-                   ->whereNull('asset_id')
                    ->whereNull('deleted_at')
                    ->count();
     }
@@ -468,7 +455,6 @@ class License extends Depreciable
     public function availCount()
     {
         return $this->licenseSeatsRelation()
-            ->whereNull('asset_id')
             ->whereNull('assigned_to')
             ->whereNull('deleted_at');
     }
@@ -499,8 +485,7 @@ class License extends Depreciable
     public function assignedCount()
     {
         return $this->licenseSeatsRelation()->where(function ($query) {
-            $query->whereNotNull('assigned_to')
-            ->orWhereNotNull('asset_id');
+            $query->whereNotNull('assigned_to');
         });
     }
 
@@ -588,8 +573,7 @@ class License extends Depreciable
         return  $this->licenseseats()
                     ->whereNull('deleted_at')
                     ->where(function ($query) {
-                        $query->whereNull('assigned_to')
-                            ->whereNull('asset_id');
+                        $query->whereNull('assigned_to');
                     })
                     ->orderBy('id', 'asc')
                     ->first();
@@ -605,7 +589,7 @@ class License extends Depreciable
      */
     public function freeSeats()
     {
-        return $this->hasMany('\App\Models\LicenseSeat')->whereNull('assigned_to')->whereNull('deleted_at')->whereNull('asset_id');
+        return $this->hasMany('\App\Models\LicenseSeat')->whereNull('assigned_to')->whereNull('deleted_at');
     }
 
     /**

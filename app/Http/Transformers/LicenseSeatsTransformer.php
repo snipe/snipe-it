@@ -26,20 +26,9 @@ class LicenseSeatsTransformer
             'id' => (int) $seat->id,
             'license_id' => (int) $seat->license->id,
             'name' => 'Seat '.$seat_count,
-            'assigned_user' => ($seat->user) ? [
-                'id' => (int) $seat->user->id,
-                'name'=> e($seat->user->present()->fullName)
-            ] : null,
-            'assigned_asset' => ($seat->asset) ? [
-                'id' => (int) $seat->asset->id,
-                'name'=> e($seat->asset->present()->fullName)
-            ] : null,
-            'location' => ($seat->location()) ? [
-                'id' => (int) $seat->location()->id,
-                'name'=> e($seat->location()->name)
-            ] : null,
+            'assigned_to' => $this->transformAssignedTo($seat),
             'reassignable' => (bool) $seat->license->reassignable,
-            'user_can_checkout' => (($seat->assigned_to=='') && ($seat->asset_id=='')) ? true : false,
+            'user_can_checkout' => $seat->assigned ? false : true,
         ];
 
         $permissions_array['available_actions'] = [
@@ -55,7 +44,32 @@ class LicenseSeatsTransformer
         return $array;
     }
 
-
+    /**
+     * Transforms the assignedTo relationship.
+     *
+     * @author [D. Stumm] [@dennis95stumm]
+     * @param $seat
+     * @return array|null
+     */
+    private function transformAssignedTo($seat)
+    {
+        if ($seat->assignedType()=='user') {
+            return $seat->assigned ? [
+                'id' => (int) $seat->assigned->id,
+                'username' => e($seat->assigned->username),
+                'name' => e($seat->assigned->getFullNameAttribute()),
+                'first_name'=> e($seat->assigned->first_name),
+                'last_name'=> ($seat->assigned->last_name) ? e($seat->assigned->last_name) : null,
+                'employee_number' =>  ($seat->assigned->employee_num) ? e($seat->assigned->employee_num) : null,
+                'type' => 'user'
+            ] : null;
+        }
+        return $seat->assigned ? [
+            'id' => $seat->assigned->id,
+            'name' => $seat->assigned->display_name,
+            'type' => $seat->assignedType()
+        ] : null;
+    }
 
 
 

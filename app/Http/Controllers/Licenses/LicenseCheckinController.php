@@ -81,16 +81,14 @@ class LicenseCheckinController extends Controller
             // Ooops.. something went wrong
             return redirect()->back()->withInput()->withErrors($validator);
         }
-        $return_to = User::find($licenseSeat->assigned_to);
+        $return_to = $licenseSeat->assignedTo;
 
         // Update the asset data
-        $licenseSeat->assigned_to                   = null;
-        $licenseSeat->asset_id                      = null;
+        $licenseSeat->assignedTo()->dissociate();
 
         // Was the asset updated?
         if ($licenseSeat->save()) {
-
-            event(new CheckoutableCheckedIn($licenseSeat, $return_to, Auth::user(), $request->input('note')));
+            event(new CheckoutableCheckedIn($licenseSeat, $return_to, Auth::user(), $request->input('note'), date('Y-m-d')));
 
             if ($backTo=='user') {
                 return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));

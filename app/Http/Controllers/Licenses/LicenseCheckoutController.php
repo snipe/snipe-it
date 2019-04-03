@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Licenses;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LicenseCheckoutRequest;
 use App\Models\Asset;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 
 class LicenseCheckoutController extends Controller
 {
+    use CheckInOutRequest;
+
     /**
      * Provides the form view for checking out a license to a user.
      * Here we pass the license seat ID instead of the license ID,
@@ -63,8 +66,7 @@ class LicenseCheckoutController extends Controller
         $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
         $licenseSeat->user_id = Auth::id();
 
-        $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
-        if ($this->$checkoutMethod($licenseSeat)) {
+        if ($this->checkout($licenseSeat)) {
             return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
         }
 
@@ -89,33 +91,12 @@ class LicenseCheckoutController extends Controller
         return $licenseSeat;
     }
 
-    protected function checkoutToAsset($licenseSeat)
+    protected function checkout($licenseSeat)
     {
-        if (is_null($target = Asset::find(request('asset_id')))) {
-            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
+        if (is_null($target = $this->determineCheckoutTarget())) {
+            return redirect()->route('licenses.index')->with('error', 'The checkout target does not exist!'); // TODO: trans
         }
-        $licenseSeat->asset_id = request('asset_id');
-
-        // Override asset's assigned user if available
-        if ($target->checkedOutToUser()) {
-            $licenseSeat->assigned_to =  $target->assigned_to;
-        }
-        if ($licenseSeat->save()) {
-
-            event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
-
-            return true;
-        }
-        return false;
-    }
-
-    protected function checkoutToUser($licenseSeat)
-    {
-        // Fetch the target and set the license user
-        if (is_null($target = User::find(request('assigned_to')))) {
-            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.user_does_not_exist'));
-        }
-        $licenseSeat->assigned_to = request('assigned_to');
+        $licenseSeat->assignedTo()->associate($target);
 
         if ($licenseSeat->save()) {
 

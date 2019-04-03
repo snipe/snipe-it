@@ -165,29 +165,13 @@ class LicensePresenter extends Presenter
                 "title" => trans('admin/licenses/general.seat'),
                 "visible" => true,
             ], [
-                "field" => "assigned_user",
+                "field" => "assigned_to",
                 "searchable" => false,
                 "sortable" => false,
                 "switchable" => true,
-                "title" => trans('admin/licenses/general.user'),
+                "title" => trans('admin/hardware/form.checkedout_to'),
                 "visible" => true,
-                "formatter" => "usersLinkObjFormatter"
-            ], [
-                "field" => "assigned_asset",
-                "searchable" => false,
-                "sortable" => false,
-                "switchable" => true,
-                "title" => trans('admin/licenses/form.asset'),
-                "visible" => true,
-                "formatter" => "hardwareLinkObjFormatter"
-            ], [
-                "field" => "location",
-                "searchable" => false,
-                "sortable" => false,
-                "switchable" => true,
-                "title" => trans('general.location'),
-                "visible" => true,
-                "formatter" => "locationsLinkObjFormatter"
+                "formatter" => "polymorphicItemFormatter"
             ], [
                 "field" => "checkincheckout",
                 "searchable" => false,
