@@ -508,6 +508,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             } elseif ($format=='lastnamefirstinitial') {
                 $username = str_slug($last_name.substr($first_name, 0, 1));
 
+            } elseif ($format=='firstintial.lastname') {
+                $username = substr($first_name, 0, 1).'.'.str_slug($last_name);
+
             } elseif ($format=='firstname_lastname') {
                 $username = str_slug($first_name).'_'.str_slug($last_name);
 

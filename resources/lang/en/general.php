@@ -89,6 +89,7 @@
     'firstname_lastname_format'	=> 'First Name Last Name (jane.smith@example.com)',
     'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Last Name First Initial (smithj@example.com)',
+    'firstintial_dot_lastname_format' => 'First Initial Last Name (j.smith@example.com)',
     'first'					=> 'First',
     'first_name'			=> 'First Name',
     'first_name_format'		=> 'First Name (jane@example.com)',

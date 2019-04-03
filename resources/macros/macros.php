@@ -463,11 +463,11 @@ Form::macro('username_format', function ($name = "username_format", $selected = 
 
     $formats = array(
         'firstname.lastname' => trans('general.firstname_lastname_format'),
-        'firstname' => trans('general.first_name_format'),
-        'filastname' => trans('general.filastname_format'),
-        'lastnamefirstinitial' => trans('general.lastnamefirstinitial_format'),
         'firstname_lastname' => trans('general.firstname_lastname_underscore_format'),
-
+        'filastname' => trans('general.filastname_format'),
+        'firstintial.lastname' => trans('general.firstintial_dot_lastname_format'),
+        'firstname' => trans('general.first_name_format'),
+        'lastnamefirstinitial' => trans('general.lastnamefirstinitial_format'),
     );
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%">';
