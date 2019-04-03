@@ -106,6 +106,10 @@
                         <div class="col-md-9">
                             {!! Form::username_format('username_format', Input::old('username_format', $setting->username_format), 'select2') !!}
                             {!! $errors->first('username_format', '<span class="alert-msg">:message</span>') !!}
+
+                            <p class="help-block">
+                                {{ trans('admin/settings/general.username_format_help') }}
+                            </p>
                         </div>
                     </div>
 
@@ -118,9 +122,7 @@
                                {{ Form::checkbox('show_images_in_email', '1', Input::old('show_images_in_email', $setting->show_images_in_email),array('class' => 'minimal')) }}
                                {{ trans('general.yes') }}
                                {!! $errors->first('show_images_in_email', '<span class="alert-msg">:message</span>') !!}
-                               <p class="help-block">
-                                   {{ trans('admin/settings/general.show_images_in_email_help') }}
-                               </p>
+
                            </div>
                        </div>
 
