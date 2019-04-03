@@ -141,11 +141,11 @@ class License extends Depreciable
         // On Create, we just make one for each of the seats.
         $change = abs($oldSeats - $newSeats);
         if ($oldSeats > $newSeats) {
-            $license->load('licenseseats.user');
+            $license->load('licenseseats');
 
             // Need to delete seats... lets see if if we have enough.
             $seatsAvailableForDelete = $license->licenseseats->reject(function ($seat) {
-                return (!! $seat->assigned_to) || (!! $seat->asset_id);
+                return (!! $seat->assignedTo);
             });
 
             if ($change > $seatsAvailableForDelete->count()) {
@@ -545,6 +545,13 @@ class License extends Depreciable
     public function licenseseats()
     {
         return $this->hasMany('\App\Models\LicenseSeat');
+    }
+
+    public function assignedSeats()
+    {
+        return $this->hasMany('\App\Models\LicenseSeat')
+            ->whereNotNull('assigned_to')
+            ->whereNotNull('assigned_type');
     }
 
     /**
