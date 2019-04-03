@@ -657,7 +657,8 @@ class Asset extends Depreciable
      */
     public function licenses()
     {
-        return $this->belongsToMany('\App\Models\License', 'license_seats', 'asset_id', 'license_id');
+        return $this->belongsToMany('\App\Models\License', 'license_seats', 'assigned_to', 'license_id')
+            ->where('assigned_type', '=', static::class);
     }
 
     /**
@@ -669,7 +670,7 @@ class Asset extends Depreciable
      */
     public function licenseseats()
     {
-        return $this->hasMany('\App\Models\LicenseSeat', 'asset_id');
+        return $this->morphMany('\App\Models\LicenseSeat', 'assigned', 'assigned_type', 'assigned_to');
     }
 
     /**
