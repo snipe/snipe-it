@@ -83,7 +83,7 @@ class LicensesCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a license');
-        $I->sendDelete(route('licenses.destroy', License::doesntHave('assignedUsers')->first()->id), ['_token' => csrf_token()]);
+        $I->sendDelete(route('licenses.destroy', License::doesntHave('licenseseats')->first()->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }
 

@@ -72,13 +72,13 @@ class LicenseImporter extends ItemImporter
                 $asset = Asset::where('asset_tag', $asset_tag)->first();
                 $targetLicense = $license->licenseSeats()->first();
                 if ($checkout_target) {
-                    $targetLicense->assigned_to = $checkout_target->id;
+                    $targetLicense->assignedTo()->associate($checkout_target);
                     if ($asset) {
-                        $targetLicense->asset_id = $asset->id;
+                        $targetLicense->assignedTo()->associate($asset);
                     }
                     $targetLicense->save();
                 } elseif ($asset) {
-                    $targetLicense->asset_id = $asset->id;
+                    $targetLicense->assignedTo()->associate($asset);
                     $targetLicense->save();
                 }
             }
