@@ -119,8 +119,8 @@
                                     <div class="input-group-addon">{{ trans('admin/settings/general.top') }}</div>
                                 </div>
                                 <div class="input-group">
-                                    {{ Form::text('labels_pmargin_right', Input::old('labels_pmargin_right', $setting->labels_pmargin_right), ['class' => 'form-control']) }}
-                                    <div class="input-group-addon">{{ trans('admin/settings/general.right') }}</div>
+                                    {{ Form::text('labels_pmargin_left', Input::old('labels_pmargin_left', $setting->labels_pmargin_left), ['class' => 'form-control']) }}
+                                    <div class="input-group-addon">{{ trans('admin/settings/general.left') }}</div>
                                 </div>
                             </div>
                             <div class="col-md-3 form-group" style="margin-left: 10px; ">
@@ -129,9 +129,10 @@
                                     <div class="input-group-addon">{{ trans('admin/settings/general.bottom') }}</div>
                                 </div>
                                 <div class="input-group">
-                                    {{ Form::text('labels_pmargin_left', Input::old('labels_pmargin_left', $setting->labels_pmargin_left), ['class' => 'form-control']) }}
-                                    <div class="input-group-addon">{{ trans('admin/settings/general.left') }}</div>
+                                    {{ Form::text('labels_pmargin_right', Input::old('labels_pmargin_right', $setting->labels_pmargin_right), ['class' => 'form-control']) }}
+                                    <div class="input-group-addon">{{ trans('admin/settings/general.right') }}</div>
                                 </div>
+
                             </div>
                             <div class="col-md-9 col-md-offset-3">
                                 {!! $errors->first('labels_width', '<span class="alert-msg">:message</span>') !!}
@@ -139,7 +140,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ (($errors->has('labels_pageheight') || $errors->has('labels_pagewidth')) ? 'error' : '' }}">
+                        <div class="form-group {{ (($errors->has('labels_pageheight')) || $errors->has('labels_pagewidth')) ? 'error' : '' }}">
                             <div class="col-md-3">
                                 {{ Form::label('labels_pagewidth', trans('admin/settings/general.page_dimensions')) }}
                             </div>
