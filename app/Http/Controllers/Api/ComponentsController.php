@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\ComponentsTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Company;
 use App\Models\Component;
 use Illuminate\Http\Request;
@@ -167,5 +168,29 @@ class ComponentsController extends Controller
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
         return (new ComponentsTransformer)->transformCheckedoutComponents($assets, $total);
+    }
+
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @author [D. Stumm] [@dennis95stumm]
+     * @param Request $request
+     * @return array
+     */
+    public function selectlist(Request $request)
+    {
+        $components = Component::select([
+            'components.id',
+            'components.name'
+        ]);
+
+        if ($request->filled('search')) {
+            $components = $components->where('$components.name', 'LIKE', '%' . $request->get('search') . '%');
+        }
+
+        $components = $components->orderBy('name', 'ASC')->paginate(50);
+
+
+        return (new SelectlistTransformer)->transformSelectlist($components);
     }
 }

@@ -155,6 +155,23 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Components API ---*/
 
+    Route::group(['prefix' => 'components'], function () {
+
+        Route::get('{component}/assets',
+            [
+                'as' =>'api.components.assets',
+                'uses' => 'ComponentsController@getAssets',
+            ]
+        );
+
+        Route::get('selectlist',
+            [
+                'as' => 'api.components.selectlist',
+                'uses'=> 'ComponentsController@selectlist'
+            ]
+        );
+    }); // Components group
+
     Route::resource('components', 'ComponentsController',
         [
             'names' =>
@@ -169,17 +186,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'parameters' => ['component' => 'component_id']
         ]
     ); // Components resource
-
-    Route::group(['prefix' => 'components'], function () {
-
-        Route::get('{component}/assets',
-            [
-                'as' =>'api.components.assets',
-                'uses' => 'ComponentsController@getAssets',
-            ]
-        );
-    }); // Components group
-
 
     /*--- Consumables API ---*/
     Route::get('consumables/selectlist',
