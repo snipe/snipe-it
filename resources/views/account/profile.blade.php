@@ -58,7 +58,14 @@
           </div>
         </div>
 
-
+        <!-- Skin -->
+        <div class="form-group {{ $errors->has('skin') ? 'error' : '' }}">
+          <label for="website" class="col-md-3 control-label">{{ Form::label('skin', trans('general.skin')) }}</label>
+          <div class="col-md-8">
+            {!! Form::user_skin('skin', Input::old('skin', $user->skin), 'select2') !!}
+            {!! $errors->first('skin', '<span class="alert-msg">:message</span>') !!}
+          </div>
+        </div>
 
         <!-- Website URL -->
         <div class="form-group {{ $errors->has('website') ? ' has-error' : '' }}">
@@ -107,8 +114,6 @@
             {!! $errors->first('avatar', '<span class="alert-msg">:message</span>') !!}
           </div>
         </div>
-
-
 
         <!-- Two factor opt in -->
         @if ($snipeSettings->two_factor_enabled=='1')

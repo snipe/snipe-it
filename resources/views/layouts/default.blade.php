@@ -19,7 +19,11 @@
 
     {{-- stylesheets --}}
     <link rel="stylesheet" href="{{ mix('css/all.css') }}">
-    @if (($snipeSettings) && ($snipeSettings->skin!=''))
+    @if (Auth::check() && Auth::user()->present()->skin != '')
+        @if (Auth::user()->present()->skin != 'light-blue')
+        <link rel="stylesheet" href="{{ mix('css/skins/skin-'.Auth::user()->present()->skin.'.min.css') }}">
+        @endif
+    @elseif (($snipeSettings) && ($snipeSettings->skin!=''))
     <link rel="stylesheet" href="{{ mix('css/skins/skin-'.$snipeSettings->skin.'.min.css') }}">
     @endif
     {{-- page level css --}}

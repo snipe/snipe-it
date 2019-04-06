@@ -48,6 +48,7 @@ class ProfileController extends Controller
         $user->last_name  = $request->input('last_name');
         $user->website    = $request->input('website');
         $user->gravatar   = $request->input('gravatar');
+        $user->skin   = $request->input('skin');
 
         if (!config('app.lock_passwords')) {
             $user->locale = $request->input('locale', 'en');

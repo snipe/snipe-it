@@ -145,7 +145,7 @@
                             </div>
                         </div>
 
-                        <!-- Email format -->
+                        <!-- Skin -->
                         <div class="form-group {{ $errors->has('skin') ? 'error' : '' }}">
                             <div class="col-md-3">
                                 {{ Form::label('skin', trans('general.skin')) }}
