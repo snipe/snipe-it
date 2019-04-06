@@ -58,6 +58,7 @@
           </div>
         </div>
 
+        @if ($snipeSettings->allow_user_skin=='1')
         <!-- Skin -->
         <div class="form-group {{ $errors->has('skin') ? 'error' : '' }}">
           <label for="website" class="col-md-3 control-label">{{ Form::label('skin', trans('general.skin')) }}</label>
@@ -66,6 +67,7 @@
             {!! $errors->first('skin', '<span class="alert-msg">:message</span>') !!}
           </div>
         </div>
+        @endif
 
         <!-- Website URL -->
         <div class="form-group {{ $errors->has('website') ? ' has-error' : '' }}">
