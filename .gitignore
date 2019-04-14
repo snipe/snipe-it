@@ -52,6 +52,8 @@ tests/_support/_generated/*
 *.cache
 
 .vagrant
+*.log
+*.retry
 
 \.php_cs\.dist
 
