@@ -208,8 +208,7 @@ class LdapSync extends Command
                     }
 
                 }
-
-                $user->notes = 'Imported from LDAP';
+                
                 $user->ldap_import = 1;
 
                 $errors = '';
