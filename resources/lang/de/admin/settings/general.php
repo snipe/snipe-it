@@ -111,7 +111,7 @@ return array(
     'show_alerts_in_menu'       => 'Warnungen im oberen Menü anzeigen',
     'show_archived_in_list'     => 'Archivierte Assets',
     'show_archived_in_list_text'     => 'Zeige archivierte Assets in der "Alle auflisten" Liste',
-    'show_images_in_email'     => 'Verwende Bilder in E-Mals',
+    'show_images_in_email'     => 'Verwende Bilder in E-Mails',
     'show_images_in_email_help'   => 'Deaktivieren Sie dieses Kontrollkästchen, wenn sich Ihre Snipe-IT-Installation hinter einem VPN oder einem geschlossenen Netzwerk befindet und Benutzer außerhalb des Netzwerks keine Bilder von dieser Installation in ihre E-Mails laden können.',
     'site_name'                 => 'Seitenname',
     'slack_botname'             => 'Slack Botname',
