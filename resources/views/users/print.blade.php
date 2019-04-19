@@ -117,7 +117,7 @@
             <tr>
                 <td>{{ $lcounter }}</td>
                 <td>{{ $license->name }}</td>
-                <td>{{ $license->serial }}</td>
+                <td>{{ preg_replace ('/[a-zA-Z\d-]/', 'x', $license->serial, strlen($license->serial) -5) }}</td>
                 <td>{{  $license->assetlog->first()->created_at }}</td>
             </tr>
             @php
