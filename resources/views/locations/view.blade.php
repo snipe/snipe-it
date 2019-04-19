@@ -154,13 +154,13 @@
       </div>
 
 		<div class="col-md-12">
-			<a href="{{ route('locations.edit', ['location' => $location->id]) }}" style="width: 60%;" class="btn btn-sm btn-primary pull-left">{{ trans('admin/locations/table.update') }} </a>
+			<a href="{{ route('locations.edit', ['location' => $location->id]) }}" style="width: 50%;" class="btn btn-sm btn-primary pull-left">{{ trans('admin/locations/table.update') }} </a>
 		</div>
         <div class="col-md-12" style="padding-top: 5px;">
-			<a href="{{ route('locations.print_assigned', ['location' => $location->id]) }}" style="width: 60%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_assigned') }} </a>
+			<a href="{{ route('locations.print_assigned', ['location' => $location->id]) }}" style="width: 50%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_assigned') }} </a>
 		</div>
 		<div class="col-md-12" style="padding-top: 5px;">
-			<a href="{{ route('locations.print_all_assigned', ['location' => $location->id]) }}" style="width: 60%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_all_assigned') }} </a>
+			<a href="{{ route('locations.print_all_assigned', ['location' => $location->id]) }}" style="width: 50%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_all_assigned') }} </a>
 		</div>
 		
   </div>
