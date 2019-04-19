@@ -265,7 +265,7 @@ class LocationsController extends Controller
         return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist', compact('id')));
     }
     
-    public function printOnlyAssignedToLocation($id)
+    public function print_assigned($id)
     {
 
         $show_location = Location::where('id',$id)->withTrashed()->first();
@@ -276,7 +276,7 @@ class LocationsController extends Controller
 
     }
     
-    public function printAllAssignedToLocation($id)
+    public function print_all_assigned($id)
     {
 
         $show_location = Location::where('id',$id)->withTrashed()->first();
