@@ -413,20 +413,7 @@ class LicensesController extends Controller
             return redirect()->back()->withInput();
         }
 
-        // Declare the rules for the form validation
-        $rules = array(
-            'note'   => 'string',
-            'notes'   => 'string',
-        );
 
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
         $return_to = User::find($licenseSeat->assigned_to);
         if (!$return_to) {
             $return_to = Asset::find($licenseSeat->asset_id);
@@ -438,7 +425,7 @@ class LicensesController extends Controller
 
         // Was the asset updated?
         if ($licenseSeat->save()) {
-            $licenseSeat->logCheckin($return_to, e(request('note')));
+            $licenseSeat->logCheckin($license, e(request('note')));
             if ($backTo=='user') {
                 return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
             }
