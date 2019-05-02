@@ -39,11 +39,11 @@ COPY docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 #SSL
 RUN mkdir -p /var/lib/snipeit/ssl
-COPY docker/001-default-ssl.conf /etc/apache2/sites-enabled/001-default-ssl.conf
-#COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf
+#COPY docker/001-default-ssl.conf /etc/apache2/sites-enabled/001-default-ssl.conf
+COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf
 
 RUN a2enmod ssl
-#RUN a2ensite 001-default-ssl.conf
+RUN a2ensite 001-default-ssl.conf
 
 COPY . /var/www/html
 
