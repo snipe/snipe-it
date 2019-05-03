@@ -265,25 +265,27 @@ class LocationsController extends Controller
         return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist', compact('id')));
     }
     
-    public function print_assigned($id)
+public function print_assigned($id)
     {
 
-        $show_location = Location::where('id',$id)->withTrashed()->first();
-	$manager = User::where('id',$show_location->manager_id)->withTrashed()->first();
+        $location = Location::where('id',$id)->first();
+        $parent = Location::where('id',$location->parent_id)->first();
+	$manager = User::where('id',$location->manager_id)->first();
 	$users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
-        return view('locations/print')->with('assets', $assets)->with('users',$users)->with('show_location', $show_location)->with('manager', $manager);
+        return view('locations/print')->with('assets', $assets)->with('users',$users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
 
     }
     
     public function print_all_assigned($id)
     {
 
-        $show_location = Location::where('id',$id)->withTrashed()->first();
-        $manager = User::where('id',$show_location->manager_id)->withTrashed()->first();
-	$users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
+        $location = Location::where('id',$id)->first();
+        $parent = Location::where('id',$location->parent_id)->first();
+        $manager = User::where('id',$location->manager_id)->first();
+        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
         $assets = Asset::where('location_id', $id)->with('model', 'model.category')->get();
-        return view('locations/print')->with('assets', $assets)->with('users',$users)->with('show_location', $show_location)->with('manager', $manager);
+        return view('locations/print')->with('assets', $assets)->with('users',$users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
 
     }
 
