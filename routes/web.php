@@ -24,12 +24,12 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
     
     Route::get(
-        '{locationId}/printonlyassignedtolocation',
+        'locations/{locationId}/printassigned',
         [ 'as' => 'locations.print_assigned', 'uses' => 'LocationsController@print_assigned' ]
     );
     
     Route::get(
-        '{locationId}/printallassignedtolocation',
+        'locations/{locationId}/printallassigned',
         [ 'as' => 'locations.print_all_assigned', 'uses' => 'LocationsController@print_all_assigned' ]
     );
 
