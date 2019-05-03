@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Assigned to {{ $show_location->present()->fullName() }} Location</title>
+    <title>Assigned to {{ $location->present()->fullName() }} Location</title>
     <style>
         body {
             font-family: "Arial, Helvetica", sans-serif;
@@ -50,9 +50,14 @@
 @endif
 
 <h2>Asset Management System</h2>
-
-<b>Assigned To:</b> {{ $show_location->present()->fullName() }} <br>
-<b>Manager:</b> {{ $manager->present()->fullName() }}<br>
+<b>Assigned To:</b> {{ $location->present()->fullName() }}
+    @if ($parent)
+        {{ $parent->present()->fullName() }}
+    @endif
+<br>
+@if ($manager)
+    <b>Manager:</b> {{ $manager->present()->fullName() }}<br>
+@endif
 <b>Current Date:</b> {{ date("d/m/Y h:i:s A") }}<br><br>
 
 @if ($users->count() > 0)
@@ -81,8 +86,8 @@
         <td>{{ $counter }}</td>
         <td>{{ $user->company->name }}</td>
         <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-	    <td>{{ $user->employee_num }}</td>
-	    <td>{{ $user->department->name }}</td>
+	<td>{{ $user->employee_num }}</td>
+	<td>{{ $user->department->name }}</td>
         <td>{{ $user->location->name }}</td>
         </tr>
             @php
@@ -99,7 +104,7 @@
     <table class="inventory">
         <thead>
         <tr>
-            <th colspan="9">{{ trans('general.assets') }}</th>
+            <th colspan="10">{{ trans('general.assets') }}</th>
         </tr>
         </thead>
         <thead>
@@ -107,12 +112,13 @@
             <th style="width: 20px;"></th>
             <th style="width: 10%;">Asset Tag</th>
             <th style="width: 10%;">Name</th>
-            <th style="width: 15%;">Category</th>
-	        <th style="width: 10%;">Manufacturer</th>
-		    <th style="width: 15%;">Model</th>
-		    <th style="width: 15%;">Serial</th>
-		    <th style="width: 10%;">Location</th>
-            <th style="width: 15%;">Checked Out</th>
+            <th style="width: 10%;">Category</th>
+	    <th style="width: 10%;">Manufacturer</th>
+            <th style="width: 15%;">Model</th>
+            <th style="width: 15%;">Serial</th>
+            <th style="width: 10%;">Location</th>
+            <th style="width: 10%;">Checked Out</th>
+            <th style="width: 10%;">Expected Checkin</th>
             </tr>
         </thead>
 		@php
@@ -125,12 +131,13 @@
         <td>{{ $counter }}</td>
         <td>{{ $asset->asset_tag }}</td>
         <td>{{ $asset->name }}</td>
-	    <td>{{ $asset->model->category->name }}</td>
+	<td>{{ $asset->model->category->name }}</td>
         <td>{{ $asset->model->manufacturer->name }}</td>
         <td>{{ $asset->model->name }} {{ $asset->model->model_number }}</td>
-	    <td>{{ $asset->serial }}</td>
-	    <td>{{ $asset->location->name }}</td>
+	<td>{{ $asset->serial }}</td>
+	<td>{{ $asset->location->name }}</td>
         <td>{{ $asset->last_checkout }}</td>
+        <td>{{ $asset->expected_checkin }}</td>
         </tr>
             @php
                 $counter++
@@ -138,8 +145,6 @@
     @endforeach
     </table>
 @endif
-
-
 
 <br>
 <br>
