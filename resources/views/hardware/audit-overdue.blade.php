@@ -6,7 +6,7 @@
         {{ $company->name }}
     @endif
 
-    {{ trans('general.assets') }}
+    {{ trans('general.audit_overdue') }}
 
 @stop
 
@@ -15,9 +15,6 @@
     @yield('title0')  @parent
 @stop
 
-@section('header_right')
-    <a href="{{ route('hardware.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
-@stop
 
 {{-- Page content --}}
 @section('content')
