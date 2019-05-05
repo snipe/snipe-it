@@ -20,6 +20,7 @@ class SendUpcomingAuditNotification extends Notification
     public function __construct($params, $threshold)
     {
         $this->assets = $params;
+        $this->threshold = $threshold;
     }
 
     /**
@@ -44,8 +45,9 @@ class SendUpcomingAuditNotification extends Notification
         $message = (new MailMessage)->markdown('notifications.markdown.upcoming-audits',
             [
                 'assets'  => $this->assets,
+                'threshold'  => $this->threshold,
             ])
-            ->subject(trans_choice('mail.upcoming-audits', $this->assets->count(), ['count' => $this->assets->count()]));
+            ->subject(trans_choice('mail.upcoming-audits', $this->assets->count(), ['count' => $this->assets->count(), 'threshold' => $this->threshold]));
 
         return $message;
     }

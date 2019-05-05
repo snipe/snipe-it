@@ -1,6 +1,6 @@
 @component('mail::message')
 
-### {{ trans_choice('mail.upcoming-audits', $assets->count(), ['count' => $assets->count()]) }}
+### {{ trans_choice('mail.upcoming-audits', $assets->count(), ['count' => $assets->count(), 'threshold' => $threshold]) }}
 
 @component('mail::table')
 | |{{ trans('mail.name') }}|{{ trans('general.last_audit') }}|{{ trans('general.next_audit_date') }}|{{ trans('mail.Days') }}|{{ trans('mail.supplier') }} | {{ trans('mail.assigned_to') }}
