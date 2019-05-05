@@ -47,11 +47,6 @@ class SendUpcomingAuditReport extends Command
     {
         $settings = Setting::getSettings();
 
-        // Threshold sets the very latest date the next audit could be: $settings->audit_warning_days from today
-        $threshold = Carbon::now()->addDays($settings->audit_warning_days);
-
-
-
         if (($settings->alert_email != '') && ($settings->audit_warning_days) && ($settings->alerts_enabled == 1)) {
 
             // Send a rollup to the admin, if settings dictate
@@ -59,15 +54,18 @@ class SendUpcomingAuditReport extends Command
                 return new \App\Models\Recipients\AlertRecipient($item);
             });
 
+
             // Assets due for auditing
-            $assets = Asset::whereDate('next_audit_date', '<=', $threshold)
-                ->orderBy('last_audit_date', 'asc')->get();
+
+            $assets = Asset::whereNotNull('next_audit_date')
+                    ->dueForAudit($settings)
+                    ->orderBy('last_audit_date', 'asc')->get();
 
             if ($assets->count() > 0) {
 
                 $this->info(trans_choice('mail.upcoming-audits', $assets->count(),
-                    ['count' => $assets->count(), 'threshold' => $threshold]));
-                \Notification::send($recipients, new SendUpcomingAuditNotification($assets, $threshold));
+                    ['count' => $assets->count(), 'threshold' => $settings->audit_warning_days]));
+                \Notification::send($recipients, new SendUpcomingAuditNotification($assets, $settings->audit_warning_days));
                 $this->info('Audit report sent to '.$settings->alert_email);
             } else {
                 $this->info('No assets to be audited. No report sent.');
