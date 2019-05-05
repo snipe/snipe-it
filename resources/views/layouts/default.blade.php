@@ -440,6 +440,19 @@
                         </a>
                     </li>
 
+                    @can('audit', \App\Models\Asset::class)
+                        <li>
+                            <a href="{{ route('assets.audit.due') }}">
+                                <i class="fa fa-clock-o text-yellow"></i> Due for Audit
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('assets.audit.overdue') }}">
+                                <i class="fa fa-warning text-red"></i> Overdue for Audit
+                            </a>
+                        </li>
+                    @endcan
+
                   <li class="divider">&nbsp;</li>
                     @can('checkout', \App\Models\Asset::class)
                     <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active>"' : '') !!}>
