@@ -842,7 +842,7 @@ class Asset extends Depreciable
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
 
-    public function scopeOverdueForAudit($query, $settings)
+    public function scopeOverdueForAudit($query)
     {
         return $query->whereNotNull('assets.next_audit_date')
             ->where('assets.next_audit_date', '<', Carbon::now())
