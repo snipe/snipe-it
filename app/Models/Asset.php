@@ -850,6 +850,29 @@ class Asset extends Depreciable
             ->NotArchived();
     }
 
+    /**
+     * Query builder scope for Assets that are due for auditing OR overdue, based on the assets.next_audit_date
+     * and settings.audit_warning_days.
+     *
+     * This is/will be used in the artisan command snipeit:upcoming-audits and also
+     * for an upcoming API call for retrieving a report on assets that will need to be audited.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v4.5.17
+     * @param Setting $settings
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeDueOrOverdueForAudit($query, $settings)
+    {
+        return $query->whereNotNull('assets.next_audit_date')
+            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $settings->audit_warning_days DAY) <= '".Carbon::now()."'")
+            ->where('assets.archived', '=', 0)
+            ->NotArchived();
+    }
+
+
   /**
    * Query builder scope for Archived assets
    *

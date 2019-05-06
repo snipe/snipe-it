@@ -153,7 +153,7 @@ class AssetsController extends Controller
 
             switch ($audit) {
                 case 'due':
-                    $assets->DueForAudit($settings);
+                    $assets->DueOrOverdueForAudit($settings);
                     break;
                 case 'overdue':
                     $assets->overdueForAudit($settings);

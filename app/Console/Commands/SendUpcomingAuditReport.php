@@ -58,7 +58,7 @@ class SendUpcomingAuditReport extends Command
             // Assets due for auditing
 
             $assets = Asset::whereNotNull('next_audit_date')
-                    ->dueForAudit($settings)
+                    ->DueOrOverdueForAudit($settings)
                     ->orderBy('last_audit_date', 'asc')->get();
 
             if ($assets->count() > 0) {
