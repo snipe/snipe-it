@@ -813,7 +813,7 @@ class Asset extends Depreciable
      * now = May 4, 2019
      *
      * @author A. Gianotto <snipe@snipe.net>
-     * @since v4.5.17
+     * @since v4.6.16
      * @param Setting $settings
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
@@ -836,7 +836,7 @@ class Asset extends Depreciable
      * for an upcoming API call for retrieving a report on overdue assets.
      *
      * @author A. Gianotto <snipe@snipe.net>
-     * @since v4.5.17
+     * @since v4.6.16
      * @param Setting $settings
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
@@ -858,7 +858,7 @@ class Asset extends Depreciable
      * for an upcoming API call for retrieving a report on assets that will need to be audited.
      *
      * @author A. Gianotto <snipe@snipe.net>
-     * @since v4.5.17
+     * @since v4.6.16
      * @param Setting $settings
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
