@@ -64,9 +64,11 @@ return array(
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'To reset your :web password, complete this form:',
     'type' => 'Type',
+    'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'User',
     'username' => 'Username',
     'welcome' => 'Welcome :name',
     'welcome_to' => 'Welcome to :web!',
     'your_credentials' => 'Your Snipe-IT credentials',
+
 );

@@ -46,5 +46,8 @@ class DatabaseSeeder extends Seeder
         \Log::info($output);
 
         Model::reguard();
+
+        DB::table('imports')->truncate();
+
     }
 }

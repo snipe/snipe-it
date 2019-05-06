@@ -339,12 +339,16 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'uses' => 'AssetsController@selectlist'
         ]);
 
+        Route::get('audit/{audit}', [
+            'as' => 'api.asset.to-audit',
+            'uses' => 'AssetsController@index'
+        ]);
+
 
         Route::post('audit', [
             'as' => 'api.asset.audit',
             'uses' => 'AssetsController@audit'
         ]);
-
 
         Route::post('{asset_id}/checkout',
             [

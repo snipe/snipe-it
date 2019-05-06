@@ -678,6 +678,18 @@ class AssetsController extends Controller
         return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
 
+    public function dueForAudit()
+    {
+        $this->authorize('audit', Asset::class);
+        return view('hardware/audit-due');
+    }
+
+    public function overdueForAudit()
+    {
+        $this->authorize('audit', Asset::class);
+        return view('hardware/audit-overdue');
+    }
+
 
     public function auditStore(Request $request, $id)
     {

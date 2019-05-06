@@ -8,7 +8,7 @@ use DateTime;
  * Class AssetPresenter
  * @package App\Presenters
  */
-class AssetPresenter extends Presenter
+class AssetAuditPresenter extends Presenter
 {
 
     /**
@@ -18,10 +18,7 @@ class AssetPresenter extends Presenter
     public static function dataTableLayout()
     {
         $layout = [
-            [
-                "field" => "checkbox",
-                "checkbox" => true
-            ], [
+             [
                 "field" => "id",
                 "searchable" => false,
                 "sortable" => true,
@@ -49,7 +46,7 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "switchable" => true,
                 "title" => trans('admin/hardware/table.image'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "imageFormatter"
             ], [
                 "field" => "asset_tag",
@@ -83,7 +80,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('general.category'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "categoriesLinkObjFormatter"
             ], [
                 "field" => "status_label",
@@ -100,13 +97,6 @@ class AssetPresenter extends Presenter
                 "visible" => true,
                 "formatter" => "polymorphicItemFormatter"
             ], [
-                "field" => "employee_number",
-                "searchable" => false,
-                "sortable" => false,
-                "title" => trans('admin/users/table.employee_num'),
-                "visible" => false,
-                "formatter" => "employeeNumFormatter"
-            ],[
                 "field" => "location",
                 "searchable" => true,
                 "sortable" => true,
@@ -127,13 +117,6 @@ class AssetPresenter extends Presenter
                 "title" => trans('general.manufacturer'),
                 "visible" => false,
                 "formatter" => "manufacturersLinkObjFormatter"
-            ],[
-                "field" => "supplier",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('general.supplier'),
-                "visible" => false,
-                "formatter" => "suppliersLinkObjFormatter"
             ], [
                 "field" => "purchase_date",
                 "searchable" => true,
@@ -145,6 +128,7 @@ class AssetPresenter extends Presenter
                 "field" => "purchase_cost",
                 "searchable" => true,
                 "sortable" => true,
+                "visible" => false,
                 "title" => trans('general.purchase_cost'),
                 "footerFormatter" => 'sumFormatter',
             ], [
@@ -234,14 +218,14 @@ class AssetPresenter extends Presenter
                 "field" => "last_audit_date",
                 "searchable" => false,
                 "sortable" => true,
-                "visible" => false,
+                "visible" => true,
                 "title" => trans('general.last_audit'),
                 "formatter" => "dateDisplayFormatter"
             ], [
                 "field" => "next_audit_date",
                 "searchable" => false,
                 "sortable" => true,
-                "visible" => false,
+                "visible" => true,
                 "title" => trans('general.next_audit_date'),
                 "formatter" => "dateDisplayFormatter"
             ],
@@ -263,6 +247,7 @@ class AssetPresenter extends Presenter
                 "field" => 'custom_fields.'.$field->convertUnicodeDbSlug(),
                 "searchable" => true,
                 "sortable" => true,
+                "visible" => false,
                 "switchable" => true,
                 "title" => ($field->field_encrypted=='1') ?'<i class="fa fa-lock"></i> '.e($field->name) : e($field->name),
                 "formatter" => "customFieldsFormatter"
@@ -270,15 +255,6 @@ class AssetPresenter extends Presenter
 
         }
 
-        $layout[] = [
-            "field" => "checkincheckout",
-            "searchable" => false,
-            "sortable" => false,
-            "switchable" => true,
-            "title" => trans('general.checkin').'/'.trans('general.checkout'),
-            "visible" => true,
-            "formatter" => "hardwareInOutFormatter",
-        ];
 
         $layout[] = [
             "field" => "actions",
@@ -286,7 +262,7 @@ class AssetPresenter extends Presenter
             "sortable" => false,
             "switchable" => false,
             "title" => trans('table.actions'),
-            "formatter" => "hardwareActionsFormatter",
+            "formatter" => "hardwareAuditFormatter",
         ];
 
         return json_encode($layout);
@@ -294,220 +270,4 @@ class AssetPresenter extends Presenter
 
 
 
-    /**
-     * Generate html link to this items name.
-     * @return string
-     */
-    public function nameUrl()
-    {
-        return (string) link_to_route('hardware.show', e($this->name), $this->id);
-    }
-
-    public function modelUrl()
-    {
-        if ($this->model->model) {
-            return $this->model->model->present()->nameUrl();
-        }
-        return '';
-    }
-
-    /**
-     * Generate img tag to this items image.
-     * @return mixed|string
-     */
-    public function imageUrl()
-    {
-        $imagePath = '';
-        if ($this->image && !empty($this->image)) {
-            $imagePath = $this->image;
-        } elseif ($this->model && !empty($this->model->image)) {
-            $imagePath = $this->model->image;
-        }
-        $url = config('app.url');
-        if (!empty($imagePath)) {
-            $imagePath = "<img src='{$url}/uploads/assets/{$imagePath}' height=50 width=50>";
-        }
-        return $imagePath;
-    }
-
-    /**
-     * Generate img tag to this items image.
-     * @return mixed|string
-     */
-    public function imageSrc()
-    {
-        $imagePath = '';
-        if ($this->image && !empty($this->image)) {
-            $imagePath = $this->image;
-        } elseif ($this->model && !empty($this->model->image)) {
-            $imagePath = $this->model->image;
-        }
-        if (!empty($imagePath)) {
-            return config('app.url').'/uploads/assets/'.$imagePath;
-        }
-        return $imagePath;
-    }
-
-    /**
-     * Get Displayable Name
-     * @return string
-     **/
-    public function name()
-    {
-
-        if (empty($this->model->name)) {
-            if (isset($this->model->model)) {
-                return $this->model->model->name.' ('.$this->model->asset_tag.')';
-            }
-            return $this->model->asset_tag;
-        }
-        return $this->model->name . ' (' . $this->model->asset_tag . ')';
-
-    }
-
-    /**
-     * Helper for notification polymorphism.
-     * @return mixed
-     */
-    public function fullName()
-    {
-        $str = '';
-        if ($this->model->name) {
-            $str .= $this->name;
-        }
-
-        if ($this->asset_tag) {
-            $str .= ' ('.$this->model->asset_tag.')';
-        }
-        if ($this->model->model) {
-            $str .= ' - '.$this->model->model->name;
-        }
-        return $str;
-    }
-    /**
-     * Returns the date this item hits EOL.
-     * @return false|string
-     */
-    public function eol_date()
-    {
-
-        if (( $this->purchase_date ) && ( $this->model ) && ($this->model->model->eol) ) {
-            $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->model->model->eol . ' months'));
-            return date_format($date, 'Y-m-d');
-        }
-
-    }
-
-    /**
-     * How many months until this asset hits EOL.
-     * @return null
-     */
-    public function months_until_eol()
-    {
-
-        $today = date("Y-m-d");
-        $d1    = new DateTime($today);
-        $d2    = new DateTime($this->eol_date());
-
-        if ($this->eol_date() > $today) {
-            $interval = $d2->diff($d1);
-        } else {
-            $interval = null;
-        }
-
-        return $interval;
-    }
-
-    /**
-     * @return string
-     * This handles the status label "meta" status of "deployed" if
-     * it's assigned. Should maybe deprecate.
-     */
-    public function statusMeta()
-    {
-        if ($this->model->assigned) {
-            return 'deployed';
-        }
-        return $this->model->assetstatus->getStatuslabelType();
-    }
-
-    /**
-     * @return string
-     * This handles the status label "meta" status of "deployed" if
-     * it's assigned. Should maybe deprecate.
-     */
-    public function statusText()
-    {
-        if ($this->model->assigned) {
-            return trans('general.deployed');
-        }
-        return $this->model->assetstatus->name;
-    }
-
-    /**
-     * @return string
-     * This handles the status label "meta" status of "deployed" if
-     * it's assigned. Results look like:
-     *
-     * (if assigned and the status label is "Ready to Deploy"):
-     * (Deployed)
-     *
-     * (f assigned and status label is not "Ready to Deploy":)
-     * Deployed (Another Status Label)
-     *
-     * (if not deployed:)
-     * Another Status Label
-     */
-    public function fullStatusText() {
-        // Make sure the status is valid
-        if ($this->assetstatus) {
-
-            // If the status is assigned to someone or something...
-            if ($this->model->assigned) {
-
-                // If it's assigned and not set to the default "ready to deploy" status
-                if ($this->assetstatus->name != trans('general.ready_to_deploy')) {
-                    return trans('general.deployed'). ' (' . $this->model->assetstatus->name.')';
-                }
-
-                // If it's assigned to the default "ready to deploy" status, just
-                // say it's deployed - otherwise it's confusing to have a status that is
-                // both "ready to deploy" and deployed at the same time.
-                return trans('general.deployed');
-            }
-
-            // Return just the status name
-            return $this->model->assetstatus->name;
-        }
-
-        // This status doesn't seem valid - either data has been manually edited or
-        // the status label was deleted.
-        return 'Invalid status';
-    }
-
-    /**
-     * Date the warantee expires.
-     * @return false|string
-     */
-    public function warrantee_expires()
-    {
-        $date = date_create($this->purchase_date);
-        date_add($date, date_interval_create_from_date_string($this->warranty_months . ' months'));
-        return date_format($date, 'Y-m-d');
-    }
-
-    /**
-     * Url to view this item.
-     * @return string
-     */
-    public function viewUrl()
-    {
-        return route('hardware.show', $this->id);
-    }
-
-    public function glyph()
-    {
-        return '<i class="fa fa-barcode"></i>';
-    }
 }
