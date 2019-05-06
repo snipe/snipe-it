@@ -67,10 +67,10 @@ class LdapSync extends Command
 
         $summary = array();
 
-        try {    
+        try {
             if ($this->option('base_dn') != '') {
                 $search_base = $this->option('base_dn');
-                LOG::debug('Importing users from specified base DN: \"'.$search_base.'\".');                
+                LOG::debug('Importing users from specified base DN: \"'.$search_base.'\".');
             } else {
                 $search_base = null;
             }
@@ -106,7 +106,7 @@ class LdapSync extends Command
             // Retrieve locations with a mapped OU, and sort them from the shallowest to deepest OU (see #3993)
             $ldap_ou_locations = Location::where('ldap_ou', '!=', '')->get()->toArray();
             $ldap_ou_lengths = array();
-            
+
             foreach ($ldap_ou_locations as $location) {
                 $ldap_ou_lengths[] = strlen($location["ldap_ou"]);
             }
@@ -168,34 +168,31 @@ class LdapSync extends Command
                 $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
                 $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
 
-
-                // This is active directory, not regular LDAP
-                if ( array_key_exists('useraccountcontrol', $results[$i]) ) {
-                    $enabled_accounts = [
-                        '512', '544', '66048', '66080', '262656', '262688', '328192', '328224'
-                    ];
-                    $item['activated'] = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
-
-                // Fall through to LDAP
+                $user = User::where('username', $item["username"])->first();
+                if ($user) {
+                    // Updating an existing user.
+                    $item["createorupdate"] = 'updated';
                 } else {
-                    $item['activated'] = 0;
-                }
-
-                // User exists
-                $item["createorupdate"] = 'updated';
-                if (!$user = User::where('username', $item["username"])->first()) {
+                    // Creating a new user.
                     $user = new User;
                     $user->password = $pass;
+                    $user->activated = 0;
                     $item["createorupdate"] = 'created';
                 }
 
-                // Create the user if they don't exist.
                 $user->first_name = e($item["firstname"]);
                 $user->last_name = e($item["lastname"]);
                 $user->username = e($item["username"]);
                 $user->email = e($item["email"]);
                 $user->employee_num = e($item["employee_number"]);
-                $user->activated = $item['activated'];
+
+                // Sync activated state for Active Directory.
+                if ( array_key_exists('useraccountcontrol', $results[$i]) ) {
+                  $enabled_accounts = [
+                    '512', '544', '66048', '66080', '262656', '262688', '328192', '328224'
+                  ];
+                  $user->activated = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
+                }
 
                 if ($item['ldap_location_override'] == true) {
                     $user->location_id = $item['location_id'];
@@ -208,7 +205,7 @@ class LdapSync extends Command
                     }
 
                 }
-                
+
                 $user->ldap_import = 1;
 
                 $errors = '';
