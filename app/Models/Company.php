@@ -80,7 +80,13 @@ final class Company extends SnipeModel
         }
 
         $table = ($table_name) ? DB::getTablePrefix().$table_name."." : '';
-        return $query->where($table.$column, '=', $company_id); 
+
+        if(\Schema::hasColumn($query->getModel()->getTable(), $column)){
+             return $query->where($table.$column, '=', $company_id); 
+        } else {
+            return $query->join('users as users_comp', 'users_comp.id', 'user_id')->where('users_comp.company_id', '=', $company_id); 
+        }
+            
     }
 
     public static function getIdFromInput($unescaped_input)
