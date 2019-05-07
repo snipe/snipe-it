@@ -10,7 +10,10 @@
 @section('inputFields')
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/licenses/form.name')])
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('admin/categories/general.category_name'), 'fieldname' => 'category_id', 'required' => 'true', 'category_type' => 'license'])
+
+
 <!-- Serial-->
+@can('viewKeys', $item)
 <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
     <label for="serial" class="col-md-3 control-label">{{ trans('admin/licenses/form.license_key') }}</label>
     <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'serial')) ? ' required' : '' }}">
@@ -18,6 +21,7 @@
         {!! $errors->first('serial', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
 </div>
+@endcan
 
 <!-- Seats -->
 <div class="form-group {{ $errors->has('seats') ? ' has-error' : '' }}">
