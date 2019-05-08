@@ -179,7 +179,9 @@ class LicensesController extends Controller
         $license->purchase_date     = $request->input('purchase_date');
         $license->purchase_order    = $request->input('purchase_order');
         $license->reassignable      = $request->input('reassignable', 0);
-        $license->serial            = $request->input('serial');
+        if (Gate::allows('viewKeys', $license)) {
+            $license->serial        = $request->input('serial');
+        }
         $license->termination_date  = $request->input('termination_date');
         $license->seats             = e($request->input('seats'));
         $license->manufacturer_id   =  $request->input('manufacturer_id');

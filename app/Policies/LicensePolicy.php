@@ -13,16 +13,27 @@ class LicensePolicy extends CheckoutablePermissionsPolicy
         return 'licenses';
     }
 
-   /**
-     * Determine whether the user can view license keys
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\License  $license
-     * @return mixed
-     */
+    /**
+    * Determine whether the user can view license keys.
+    * This gets a little tricky, UX/logic-wise. If a user has the ability
+    * to create a license (which requires a product key), shouldn't they
+    * have the ability to see the product key as well?
+    *
+    * Example: I create the license, realize I need to change
+    * something (maybe I got the product key wrong), and now I can never
+    * see/edit that product key.
+    *
+    * @see https://github.com/snipe/snipe-it/issues/6956
+    * @param  \App\Models\User  $user
+    * @param  \App\Models\License  $license
+    * @return mixed
+    */
     public function viewKeys(User $user, License $license = null)
     {
-        return $user->hasAccess('licenses.keys');
+        if ($user->hasAccess('licenses.keys') || $user->hasAccess('licenses.create') || $user->hasAccess('licenses.edit')) {
+            return true;
+        }
+        return false;
     }
 
 }
