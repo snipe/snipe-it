@@ -38,7 +38,13 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.serial') }}</label>
                 <div class="col-md-6">
-                    <p class="form-control-static">{{ $licenseSeat->license->serial }}</p>
+                    <p class="form-control-static">
+                        @can('viewKeys', $licenseSeat->license)
+                            {{ $licenseSeat->license->serial }}
+                        @else
+                            ------------
+                        @endcan
+                        </p>
                 </div>
             </div>
 

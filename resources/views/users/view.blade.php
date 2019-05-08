@@ -375,7 +375,11 @@
                     {!! $license->present()->nameUrl() !!}
                   </td>
                   <td>
+                    @can('viewKeys', $license)
                     {!! $license->present()->serialUrl() !!}
+                    @else
+                      ------------
+                    @endcan
                   </td>
                   <td class="hidden-print">
                     @can('update', $license)

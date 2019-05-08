@@ -117,7 +117,13 @@
             <tr>
                 <td>{{ $lcounter }}</td>
                 <td>{{ $license->name }}</td>
-                <td>{{ $license->serial }}</td>
+                <td>
+                    @can('viewKeys', $license)
+                        {{ $license->serial }}
+                    @else
+                        ------------
+                    @endcan
+                </td>
                 <td>{{  $license->assetlog->first()->created_at }}</td>
             </tr>
             @php
