@@ -112,7 +112,7 @@ tr {
                         { id: 'accessory', text: 'Accessories' },
                         { id: 'consumable', text: 'Consumables' },
                         { id: 'component', text: 'Components' },
-                        { id: 'license', text: 'Licenses' },
+                        { id: 'license', text: 'Location' },
                         { id: 'user', text: 'Users' }
                     ],
                     statusText: null,
