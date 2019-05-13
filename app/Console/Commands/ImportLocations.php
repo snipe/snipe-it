@@ -78,7 +78,7 @@ class ImportLocations extends Command
         }
 
         foreach ($results as $index => $row) {
-            
+
             $location = Location::firstOrNew(array('name' => trim($row['Name'])));
             $location->name = trim($row['Name']);
             $location->currency = trim($row['Currency']);
@@ -87,6 +87,8 @@ class ImportLocations extends Command
             $location->city = trim($row['City']);
             $location->state = trim($row['State']);
             $location->zip = trim($row['Zip']);
+            $location->country = trim($row['Country']);
+            $location->ldap_ou = trim($row['OU']);
 
             $this->info('Checking location: '.$location->name);
 
