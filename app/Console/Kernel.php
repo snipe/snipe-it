@@ -33,6 +33,7 @@ class Kernel extends ConsoleKernel
         Commands\SyncAssetCounters::class,
         Commands\RestoreDeletedUsers::class,
         Commands\SendUpcomingAuditReport::class,
+        Commands\ImportLocations::class,
     ];
 
     /**
