@@ -206,7 +206,7 @@
     'unknown_admin'			=> 'Admin tidak diketahui',
     'username_format'		=> 'Format nama pengguna',
     'update'                => 'Perbarui',
-    'upload_filetypes_help'      => 'Tipe file yang diizinkan adalah png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, dan rar. Maksimal ukuran file upload adalah :size.',
+    'upload_filetypes_help'      => 'Tipe file yang diizinkan adalah png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rtf dan rar. Maksimal ukuran file upload adalah :size.',
     'uploaded'              => 'Unggah',
     'user'					=> 'Pengguna',
     'accepted'			    => 'diterima',
