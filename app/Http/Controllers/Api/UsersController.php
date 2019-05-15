@@ -256,6 +256,13 @@ class UsersController extends Controller
             ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
 
         if ($user->save()) {
+
+            if ($request->has('groups')) {
+                $user->groups()->sync($request->input('groups'));
+            } else {
+                $user->groups()->sync(array());
+            }
+
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
         }
 
