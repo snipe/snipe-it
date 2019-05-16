@@ -180,10 +180,10 @@ class LdapSync extends Command
                     $item["createorupdate"] = 'created';
                 }
 
-                $user->first_name = e($item["firstname"]);
-                $user->last_name = e($item["lastname"]);
-                $user->username = e($item["username"]);
-                $user->email = e($item["email"]);
+                $user->first_name = $item["firstname"];
+                $user->last_name = $item["lastname"];
+                $user->username = $item["username"];
+                $user->email = $item["email"];
                 $user->employee_num = e($item["employee_number"]);
 
                 // Sync activated state for Active Directory.
