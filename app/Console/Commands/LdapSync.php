@@ -194,6 +194,11 @@ class LdapSync extends Command
                   $user->activated = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
                 }
 
+                // If we're not using AD, and there isn't an activated flag set, activate all users
+                elseif (empty($ldap_result_active_flag)) {
+                  $user->activated = 1;
+                }
+
                 if ($item['ldap_location_override'] == true) {
                     $user->location_id = $item['location_id'];
                 } elseif ((isset($location)) && (!empty($location))) {
