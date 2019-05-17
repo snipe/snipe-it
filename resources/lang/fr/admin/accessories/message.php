@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'L\'accessoire n\'existe pas.',
-    'assoc_users'	 => 'Cet accessoire à présentement des items d\'attribué à des utilisateurs. S\'il vous plaît vérifier l\'accessoire et veuillez réessayer. ',
+    'assoc_users'	 => 'Cet accessoire a actuellement des items attribués à des utilisateurs. Veuillez vérifier l\'accessoire puis réessayez. ',
 
     'create' => array(
         'error'   => 'L\'accessoire n\'a pas été créé, veuillez réessayer.',
@@ -11,8 +11,8 @@ return array(
     ),
 
     'update' => array(
-        'error'   => 'L\'accessoire n\'a pas été mis-à-jour, veuillez réessayer',
-        'success' => 'L\'accessoire a bien été mis-à-jour.'
+        'error'   => 'L\'accessoire n\'a pas été mis à jour, veuillez réessayer',
+        'success' => 'L\'accessoire a bien été mis à jour.'
     ),
 
     'delete' => array(
