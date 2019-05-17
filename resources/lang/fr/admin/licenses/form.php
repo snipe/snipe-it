@@ -14,7 +14,7 @@ return array(
     'reassignable'      => 'Réattribuables',
     'remaining_seats'   => 'Postes restants',
     'seats'             => 'Postes',
-    'termination_date'  => 'Date d\'expiration',
+    'termination_date'  => 'Date de fin',
     'to_email'          => 'E-mail de la licence',
     'to_name'           => 'Nom de la licence',
     'update'            => 'Mise à jour de la licence',
