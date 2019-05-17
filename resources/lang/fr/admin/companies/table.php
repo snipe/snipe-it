@@ -1,9 +1,9 @@
 <?php
 return array(
-    'companies' => 'Compagnies',
-    'create'    => 'Créer une compagnie',
-    'title'     => 'Compagnie',
-    'update'    => 'Actualiser une compagnie',
-    'name'      => 'Nom de la compagnie',
+    'companies' => 'Entreprises',
+    'create'    => 'Créer une entreprise',
+    'title'     => 'Entreprise',
+    'update'    => 'Actualiser une entreprise',
+    'name'      => 'Nom de L\'entreprise',
     'id'        => 'ID',
 );
