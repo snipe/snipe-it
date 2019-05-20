@@ -503,12 +503,14 @@ class AssetsController extends Controller
             // Update custom fields
             if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
-                    if ($field->field_encrypted=='1') {
-                        if (Gate::allows('admin')) {
-                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                    if ($request->has($field->convertUnicodeDbSlug())) {
+                        if ($field->field_encrypted=='1') {
+                            if (Gate::allows('admin')) {
+                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                            }
+                        } else {
+                            $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
                         }
-                    } else {
-                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
                     }
                 }
             }
