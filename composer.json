@@ -13,7 +13,7 @@
     "doctrine/inflector": "1.1.*",
     "doctrine/instantiator": "1.0.*",
     "eduardokum/laravel-mail-auto-embed": "^1.0",
-    "erusev/parsedown": "^1.6",
+    "erusev/parsedown": "^1.7.3",
     "fideloper/proxy": "^3.3",
     "intervention/image": "^2.3",
     "javiereguiluz/easyslugger": "^1.0",
