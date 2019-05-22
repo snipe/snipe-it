@@ -65,7 +65,7 @@ class ObjectImportCommand extends Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         $filename = $this->argument('filename');
         $class = title_case($this->option('item-type'));
