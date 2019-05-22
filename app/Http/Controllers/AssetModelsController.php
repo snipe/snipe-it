@@ -373,7 +373,7 @@ class AssetModelsController extends Controller
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {
 
 
-            $models = AssetModel::whereIn('id', $models_raw_array)->withCount('assets')->orderBy('assets_count', 'ASC')->get();
+            $models = AssetModel::whereIn('id', $models_raw_array)->withCount('assets as assets_count')->orderBy('assets_count', 'ASC')->get();
 
             // If deleting....
             if ($request->input('bulk_actions')=='delete') {
@@ -461,7 +461,7 @@ class AssetModelsController extends Controller
 
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {
 
-            $models = AssetModel::whereIn('id', $models_raw_array)->withCount('assets')->get();
+            $models = AssetModel::whereIn('id', $models_raw_array)->withCount('assets as assets_count')->get();
 
             $del_error_count = 0;
             $del_count = 0;

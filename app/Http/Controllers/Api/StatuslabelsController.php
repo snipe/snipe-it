@@ -24,7 +24,7 @@ class StatuslabelsController extends Controller
         $this->authorize('view', Statuslabel::class);
         $allowed_columns = ['id','name','created_at', 'assets_count','color','default_label'];
 
-        $statuslabels = Statuslabel::withCount('assets');
+        $statuslabels = Statuslabel::withCount('assets as assets_count');
 
         if ($request->has('search')) {
             $statuslabels = $statuslabels->TextSearch($request->input('search'));
@@ -162,7 +162,7 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('view', Statuslabel::class);
 
-        $statuslabels = Statuslabel::with('assets')->groupBy('id')->withCount('assets')->get();
+        $statuslabels = Statuslabel::with('assets')->groupBy('id')->withCount('assets as assets_count')->get();
 
         $labels=[];
         $points=[];

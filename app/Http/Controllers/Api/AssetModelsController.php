@@ -48,7 +48,7 @@ class AssetModelsController extends Controller
             'models.updated_at',
          ])
             ->with('category','depreciation', 'manufacturer','fieldset')
-            ->withCount('assets');
+            ->withCount('assets as assets_count');
 
 
 
@@ -114,7 +114,7 @@ class AssetModelsController extends Controller
     public function show($id)
     {
         $this->authorize('view', AssetModel::class);
-        $assetmodel = AssetModel::withCount('assets')->findOrFail($id);
+        $assetmodel = AssetModel::withCount('assets as assets_count')->findOrFail($id);
         return (new AssetModelsTransformer)->transformAssetModel($assetmodel);
     }
 
