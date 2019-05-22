@@ -278,6 +278,7 @@ class UsersController extends Controller
         $user->activated = $request->input('activated', 0);
         $user->jobtitle = $request->input('jobtitle', null);
         $user->phone = $request->input('phone');
+        $user->website = $request->input('website', null);
         $user->location_id = $request->input('location_id', null);
         $user->company_id = Company::getIdForUser($request->input('company_id', null));
         $user->manager_id = $request->input('manager_id', null);

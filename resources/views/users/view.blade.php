@@ -193,6 +193,13 @@
                   </tr>
                   @endif
 
+                  @if ($user->website)
+                    <tr>
+                      <td class="text-nowrap">{{ trans('general.website') }}</td>
+                      <td><a href="{{ $user->website }}" target="_blank">{{ $user->website }}</a></td>
+                    </tr>
+                  @endif
+
                   @if ($user->phone)
                   <tr>
                     <td class="text-nowrap">{{ trans('admin/users/table.phone') }}</td>
