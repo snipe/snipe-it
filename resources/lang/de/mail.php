@@ -66,6 +66,6 @@ return array(
     'user' => 'Benutzer',
     'username' => 'Benutzername',
     'welcome' => 'Wilkommen, :name',
-    'welcome_to' => 'Willkommen bei: Web!',
+    'welcome_to' => 'Willkommen bei :web!',
     'your_credentials' => 'Ihre Snipe-IT Anmeldedaten',
 );

@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'Hãng sản xuất chưa được phục hồi, vui lòng thử lại',
+        'success' => 'Hãng sản xuất đã phục hồi thành công.'
     ),
 
     'delete' => array(

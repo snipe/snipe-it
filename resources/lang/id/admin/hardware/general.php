@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Aset adalah barang yang dilacak dengan nomor seri atau tanda aset. Cenderung menjadi barang dengan nilai lebih tinggi dimana identifikasi barang secara spesifik berpengaruh.',
 	'archived'  				=> 'Diarsipkan',
     'asset'  					=> 'Aset',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Pengeluaran Aset',
     'checkin'  					=> 'Pengembalian aset',
     'checkout'  				=> 'Aset Checkout',
     'clone'  					=> 'Klon Aset',
