@@ -351,8 +351,7 @@ class AssetsController extends Controller
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
 
-        return redirect()->back()->withInput()->withErrors()->with('error', trans('admin/hardware/message.does_not_exist'));
-
+        return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 
     /**
