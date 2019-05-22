@@ -6,7 +6,7 @@
 
 This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, handling software licenses, etc.
 
-It is built on [Laravel 5.4](http://laravel.com).
+It is built on [Laravel 5.5](http://laravel.com).
 
 Snipe-IT is actively developed and we're [releasing quite frequently](https://github.com/snipe/snipe-it/releases). ([Check out the live demo here](https://snipeitapp.com/demo/).)
 
