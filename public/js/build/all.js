@@ -7541,7 +7541,7 @@ var pieOptions = {
 //- END PIE CHART -
 //-----------------
 
-
+var baseUrl = $('meta[name="baseUrl"]').attr('content');
 
 (function($, settings) {
     var Components = {};
