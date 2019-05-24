@@ -111,12 +111,16 @@ class AssetFilesController extends Controller
             $this->authorize('update', $asset);
 
             $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath.'/'.$log->filename;
-            if (file_exists($full_filename)) {
-                unlink($destinationPath.'/'.$log->filename);
+            if ($log) {
+                $full_filename = $destinationPath.'/'.$log->filename;
+                if (file_exists($full_filename)) {
+                    unlink($destinationPath.'/'.$log->filename);
+                }
+                $log->delete();
+                return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
             }
-            $log->delete();
-            return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
+            return redirect()->back()->with('error', 'Could not find matching upload log.');
+
         }
 
         // Redirect to the hardware management page
