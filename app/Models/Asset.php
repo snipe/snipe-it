@@ -1038,9 +1038,7 @@ class Asset extends Depreciable
                     ->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
             }
-            foreach (CustomField::all() as $field) {
-                $query->orWhere('assets.'.$field->db_column_name(), 'LIKE', "%$search%");
-            }
+
         })->withTrashed()->whereNull("assets.deleted_at"); //workaround for laravel bug
     }
 
