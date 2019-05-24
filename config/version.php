@@ -1,10 +1,10 @@
 <?php
 return array (
-  'app_version' => 'v4.6.18',
-  'full_app_version' => 'v4.6.18 - build 4036-g21ec67053',
-  'build_version' => '4036',
+  'app_version' => 'v4.7.0',
+  'full_app_version' => 'v4.7.0 - build 4037',
+  'build_version' => '4037',
   'prerelease_version' => '',
-  'hash_version' => 'g21ec67053',
-  'full_hash' => 'v4.6.18-9-g21ec67053',
-  'branch' => 'master',
+  'hash_version' => '',
+  'full_hash' => 'v4.7.0',
+  'branch' => 'v4.7-laravel-5.5-upgrade',
 );
