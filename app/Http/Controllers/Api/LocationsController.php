@@ -41,7 +41,7 @@ class LocationsController extends Controller
             'locations.updated_at',
             'locations.image',
             'locations.currency'
-        ])->withCount('assignedAssets as assignedAssets_count')
+        ])->withCount('assignedAssets as assigned_assets_count')
         ->withCount('assets as assets_count')
         ->withCount('users as users_count');
 
@@ -123,7 +123,7 @@ class LocationsController extends Controller
                 'locations.image',
                 'locations.currency'
             ])
-            ->withCount('assignedAssets as assignedAssets_count')
+            ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
             ->withCount('users as users_count')->findOrFail($id);
         return (new LocationsTransformer)->transformLocation($location);

@@ -281,7 +281,7 @@ class Helper
      */
     public static function checkLowInventory()
     {
-        $consumables = Consumable::withCount('consumableAssignments as consumableAssignments_count')->whereNotNull('min_amt')->get();
+        $consumables = Consumable::withCount('consumableAssignments as consumable_assignments_count')->whereNotNull('min_amt')->get();
         $accessories = Accessory::withCount('users as users_count')->whereNotNull('min_amt')->get();
         $components = Component::withCount('assets as assets_count')->whereNotNull('min_amt')->get();
 
