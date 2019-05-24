@@ -322,7 +322,7 @@ class LdapAd extends LdapAdConfiguration
     private function getFilter(): ?string
     {
         $filter = $this->ldapSettings['ldap_filter'];
-        if ('' === $filter) {
+        if (!$filter) {
             return null;
         }
         // Add surrounding parentheses as needed
