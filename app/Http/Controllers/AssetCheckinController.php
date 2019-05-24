@@ -65,7 +65,7 @@ class AssetCheckinController extends Controller
         $asset->assignedTo()->disassociate($asset);
         $asset->assigned_type = null;
         $asset->accepted = null;
-        $asset->name = e($request->get('name'));
+        $asset->name = $request->get('name');
 
         if ($request->filled('status_id')) {
             $asset->status_id =  e($request->get('status_id'));
