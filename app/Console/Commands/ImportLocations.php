@@ -49,7 +49,7 @@ class ImportLocations extends Command
         $csv = Reader::createFromPath(storage_path('private_uploads/imports/').$filename, 'r');
         $this->info('Attempting to process: '.storage_path('private_uploads/imports/').$filename);
         $csv->setOffset(1); //because we don't want to insert the header
-        $results = $csv->fetchAssoc();
+        $results = $csv->getRecords();
 
         // Import parent location names first if they don't exist
         foreach ($results as $parent_index => $parent_row) {

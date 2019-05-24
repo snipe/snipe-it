@@ -579,7 +579,7 @@ class AssetsController extends Controller
         //get the first row, usually the CSV header
         //$headers = $csv->fetchOne();
 
-        $results = $csv->fetchAssoc();
+        $results = $csv->getRecords();
         $item = array();
         $status = array();
         $status['error'] = array();
