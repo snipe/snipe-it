@@ -100,6 +100,9 @@ class UsersController extends Controller
             case 'department':
                 $users = $users->OrderDepartment($order);
                 break;
+            case 'company':
+                $users = $users->OrderCompany($order);
+                break;
             default:
                 $allowed_columns =
                     [
