@@ -4,9 +4,8 @@ namespace App\Http\Requests;
 
 use App\Models\AssetModel;
 use Session;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use App\Helpers\Helper;
-use App\Http\Requests\Request;
+
+
 use Illuminate\Contracts\Validation\Validator;
 
 class AssetRequest extends Request
@@ -81,33 +80,9 @@ class AssetRequest extends Request
      */
     protected function failedValidation(Validator $validator)
     {
-        // $status, $payload = null, $messages = null
-        //$array['status'] = 'error';
-        //$array['payload'] = null;
-        $array['messages'] = [];
-        //$array['errors'] = [];
-
-        if ($validator->errors()) {
-            foreach ($validator->errors()->messages() as $field => $errors) {
-                    $array['messages'][$field] =  $errors;
-                    //$array['errors'][$field] =  $errors;
-
-            }
-        }
-
-
-//        $errors = $validator->errors();
-//        \Log::debug('failedValidation');
-//        \Log::debug('validator->errors()->all()');
-//        \Log::debug(print_r($validator->errors()->all(), true));
-//        \Log::debug('validator->errors()');
-//        \Log::debug(print_r($validator->errors(), true));
-//        \Log::debug('validator->errors()->messages()');
-//        \Log::debug(print_r($validator->errors()->messages(), true));
-//        \Log::debug('array');
-        \Log::error($array);
-
-        throw new HttpResponseException(response()->json($array, 200));
-
+        return response()->json([
+                'message' => 'The given data is invalid',
+                'errors' => $validator->errors()
+        ], 422);
     }
 }
