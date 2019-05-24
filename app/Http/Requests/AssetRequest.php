@@ -65,4 +65,18 @@ class AssetRequest extends Request
         \Input::flash();
         return parent::response($errors);
     }
+
+    /**
+     * Handle a failed validation attempt.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        \Log::error('failedValidation');
+        throw new HttpResponseException(response()->json($validator->errors(), 'error', 422));
+    }
 }
