@@ -59,11 +59,16 @@ class AccessoryCheckinController extends Controller
 
         $this->authorize('checkin', $accessory);
 
+        $checkin_at = date('Y-m-d');
+        if($request->filled('checkin_at')){
+            $checkin_at = $request->input('checkin_at');
+        }
+
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
             $return_to = e($accessory_user->assigned_to);
 
-            event(new CheckoutableCheckedIn($accessory, User::find($return_to), Auth::user(), $request->input('note')));
+            event(new CheckoutableCheckedIn($accessory, User::find($return_to), Auth::user(), $request->input('note'), $checkin_at));
 
             return redirect()->route("accessories.show", $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
         }

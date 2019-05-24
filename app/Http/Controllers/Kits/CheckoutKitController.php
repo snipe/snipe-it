@@ -9,6 +9,7 @@ use App\Models\PredefinedModel;
 use App\Models\User;
 use App\Services\PredefinedKitCheckoutService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 /**
  * This controller handles all access kits management:
@@ -57,11 +58,14 @@ class CheckoutKitController extends Controller
         $kit = new PredefinedKit();
         $kit->id = $kit_id;
 
-        $errors = $this->kitService->checkout($request, $kit, $user);
-        if (count($errors) > 0) {
-            return redirect()->back()->with('error', 'Checkout error')->with('error_messages', $errors);  // TODO: trans
+        $checkout_result = $this->kitService->checkout($request, $kit, $user);
+        if (Arr::has($checkout_result, 'errors') && count($checkout_result['errors']) > 0 ) {
+            return redirect()->back()->with('error', 'Checkout error')->with('error_messages', $checkout_result['errors']);  // TODO: trans
         }
-        return redirect()->back()->with('success', 'Checkout was successfully');                                   // TODO: trans
+        return redirect()->back()->with('success', 'Checkout was successful')
+            ->with('assets', Arr::get($checkout_result, 'assets', null))
+            ->with('accessories', Arr::get($checkout_result, 'accessories', null))
+            ->with('consumables', Arr::get($checkout_result, 'consumables', null));                                   // TODO: trans
 
     }
 }
