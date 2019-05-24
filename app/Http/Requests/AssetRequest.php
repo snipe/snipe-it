@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use App\Models\AssetModel;
 use Session;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Helpers\Helper;
 
 class AssetRequest extends Request
 {
