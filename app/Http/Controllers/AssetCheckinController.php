@@ -93,7 +93,7 @@ class AssetCheckinController extends Controller
             $data['model_name'] = $asset->model->name;
             $data['model_number'] = $asset->model->model_number;
 
-            if ($backto=='user') {
+            if (($user) && ($backto =='user')) {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
             }
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkin.success'));
