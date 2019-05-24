@@ -548,18 +548,21 @@ class LicensesController extends Controller
         if ($license) {
             $this->authorize('edit', $license);
             $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath.'/'.$log->filename;
-            if (file_exists($full_filename)) {
-                unlink($destinationPath.'/'.$log->filename);
+            if ($log) {
+                $full_filename = $destinationPath.'/'.$log->filename;
+                if (file_exists($full_filename)) {
+                    unlink($destinationPath.'/'.$log->filename);
+                }
+                $log->delete();
+                return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
             }
-            $log->delete();
-            return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
+
+            return redirect()->back()->with('error', 'Could not locate that file.');
+
         }
-        // Prepare the error message
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
         // Redirect to the licence management page
-        return redirect()->route('licenses.index')->with('error', $error);
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', compact('id')));
     }
 
 
