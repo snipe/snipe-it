@@ -585,29 +585,31 @@ class LicensesController extends Controller
         if (isset($license->id)) {
             $this->authorize('view', $license);
             $log = Actionlog::find($fileId);
-            $file = $log->get_src('licenses');
 
+            if ($log) {
 
-            if ($file =='') {
-                return response('File not found on server', 404)
-                    ->header('Content-Type', 'text/plain');
-            }
-
-            $mimetype = \File::mimeType($file);
-
-
-            if (!file_exists($file)) {
-                return response('File '.$file.' not found on server', 404)
-                    ->header('Content-Type', 'text/plain');
-            }
-
-            if ($download != 'true') {
-                if ($contents = file_get_contents($file)) {
-                    return Response::make($contents)->header('Content-Type', $mimetype);
+                $file = $log->get_src('licenses');
+                if ($file =='') {
+                    return response('File not found on server', 404)
+                        ->header('Content-Type', 'text/plain');
                 }
-                return JsonResponse::create(["error" => "Failed validation: "], 500);
+
+                $mimetype = \File::mimeType($file);
+
+                if (!file_exists($file)) {
+                    return response('File '.$file.' not found on server', 404)
+                        ->header('Content-Type', 'text/plain');
+                }
+
+                if ($download != 'true') {
+                    if ($contents = file_get_contents($file)) {
+                        return Response::make($contents)->header('Content-Type', $mimetype);
+                    }
+                    return JsonResponse::create(["error" => "Failed validation: "], 500);
+                }
+                return Response::download($file);
             }
-            return Response::download($file);
+
         }
 
 
