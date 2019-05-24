@@ -275,7 +275,7 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
         }
 
-        if (!$request->has('two_factor_secret')) {
+        if (!$request->filled('two_factor_secret')) {
             return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
         }
 

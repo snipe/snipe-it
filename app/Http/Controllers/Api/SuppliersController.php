@@ -29,7 +29,7 @@ class SuppliersController extends Controller
             )->withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('accessories as accessories_count');
 
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $suppliers = $suppliers->TextSearch($request->input('search'));
         }
 
@@ -153,7 +153,7 @@ class SuppliersController extends Controller
             'image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $suppliers = $suppliers->where('suppliers.name', 'LIKE', '%'.$request->get('search').'%');
         }
 
