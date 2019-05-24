@@ -380,7 +380,7 @@ class AssetsController extends Controller
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
-        if ($model->fieldset) {
+        if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted=='1') {
                     if (Gate::allows('admin')) {
