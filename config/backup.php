@@ -1,5 +1,19 @@
 <?php
 
+// This is janky, but necessary to figure out whether to include the .env in the backup
+$included_dirs = [
+    base_path('public/uploads'),
+    base_path('config'),
+    base_path('storage/private_uploads'),
+    base_path('storage/oauth-private.key'),
+    base_path('storage/oauth-public.key'),
+
+];
+
+if (env('BACKUP_ENV')=='true') {
+    $included_dirs[] = base_path('.env');
+}
+
 return [
 
     'backup' => [
@@ -17,14 +31,7 @@ return [
                 /*
                  * The list of directories and files that will be included in the backup.
                  */
-                'include' => [
-                    base_path('public/uploads'),
-                    base_path('config'),
-                    base_path('storage/private_uploads'),
-                    base_path('storage/oauth-private.key'),
-                    base_path('storage/oauth-public.key'),
-                   // (env('BACKUP_ENV')=='true') ? base_path('.env') : '',
-                ],
+                'include' => $included_dirs,
 
                 /*
                  * These directories and files will be excluded from the backup.
@@ -34,7 +41,6 @@ return [
                 'exclude' => [
                     base_path('vendor'),
                     base_path('node_modules'),
-                    //storage_path('app/backup-temp'),
                 ],
 
                 /*
