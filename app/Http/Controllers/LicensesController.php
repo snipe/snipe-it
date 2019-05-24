@@ -545,7 +545,7 @@ class LicensesController extends Controller
         $destinationPath = config('app.private_uploads').'/licenses';
 
         // the license is valid
-        if (isset($license->id)) {
+        if ($license) {
             $this->authorize('edit', $license);
             $log = Actionlog::find($fileId);
             $full_filename = $destinationPath.'/'.$log->filename;
