@@ -90,7 +90,7 @@
 
       @if ($accessory->image!='')
           <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-              <img src="{{ app('accessories_upload_url') }}/{{ $accessory->image }}" class="img-responsive img-thumbnail" alt="{{ $accessory->name }}">
+              <a href="{{ app('accessories_upload_url') }}{{ $accessory->image }}" data-toggle="lightbox"><img src="{{ app('accessories_upload_url') }}{{ $accessory->image }}" class="img-responsive img-thumbnail" alt="{{ $accessory->name }}"></a>
           </div>
       @endif
 

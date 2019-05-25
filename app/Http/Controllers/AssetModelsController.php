@@ -97,7 +97,7 @@ class AssetModelsController extends Controller
             $path = app('models_upload_path');
 
             if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save($path.'/'.$file_name);
@@ -194,7 +194,7 @@ class AssetModelsController extends Controller
             $file_name = $model->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
 
             if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save(app('models_upload_path').$file_name);

@@ -120,6 +120,25 @@ class SettingsServiceProvider extends ServiceProvider
             return url('/').'/uploads/accessories/';
         });
 
+        // Consumables paths and URLs
+        \App::singleton('consumables_upload_path', function(){
+            return public_path('/uploads/consumables/');
+        });
+
+        \App::singleton('consumables_upload_url', function(){
+            return url('/').'/uploads/consumables/';
+        });
+
+
+        // Components paths and URLs
+        \App::singleton('components_upload_path', function(){
+            return public_path('/uploads/components/');
+        });
+
+        \App::singleton('components_upload_url', function(){
+            return url('/').'/uploads/components/';
+        });
+
 
 
         // Set the monetary locale to the configured locale to make helper::parseFloat work.

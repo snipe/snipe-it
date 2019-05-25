@@ -95,7 +95,7 @@ class ComponentsController extends Controller
             $image = $request->file('image');
             $file_name = str_random(25).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/components/'.$file_name);
-            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+            Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path);
@@ -168,7 +168,7 @@ class ComponentsController extends Controller
             $image = $request->file('image');
             $file_name = str_random(25).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/components/'.$file_name);
-            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+            Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path);

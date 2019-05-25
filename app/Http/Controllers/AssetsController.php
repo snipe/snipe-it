@@ -163,7 +163,7 @@ class AssetsController extends Controller
             }
             $path = public_path('uploads/assets/'.$file_name);
             try {
-                Image::make($image)->resize(500, 500, function ($constraint) {
+                Image::make($image)->resize(800, 800, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save($path);
@@ -359,7 +359,7 @@ class AssetsController extends Controller
             $file_name = str_random(25).".".$extension;
             $path = public_path('uploads/assets/'.$file_name);
             try {
-                Image::make($image)->resize(500, 500, function ($constraint) {
+                Image::make($image)->resize(800, 800, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save($path);

@@ -496,10 +496,15 @@
             </div><!-- /col-md-8 -->
 
             <div class="col-md-4">
+
               @if ($asset->image)
-                <img src="{{ url('/') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg img-responsive">
+                <div class="col-md-12 text-center" style="padding-bottom: 15px;">
+                  <a href="{{ url('/') }}/uploads/assets/{{ $asset->image }}" data-toggle="lightbox"><img src="{{ url('/') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg img-responsive"></a>
+                </div>
               @elseif (($asset->model) && ($asset->model->image!=''))
-                <img src="{{ url('/') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
+                <div class="col-md-12 text-center" style="padding-bottom: 15px;">
+                  <a href="{{ url('/') }}/uploads/models/{{ $asset->model->image }}" data-toggle="lightbox"><img src="{{ url('/') }}/uploads/models/{{ $asset->model->image }}" class="assetimg img-responsive"></a>
+                </div>
               @endif
 
               @if  ($snipeSettings->qr_code=='1')
