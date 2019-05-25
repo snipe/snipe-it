@@ -8,7 +8,7 @@ This is a FOSS project for asset management in IT Operations. Knowing who has wh
 
 It is built on [Laravel 5.5](http://laravel.com).
 
-Snipe-IT is actively developed and we're [releasing quite frequently](https://github.com/snipe/snipe-it/releases). ([Check out the live demo here](https://snipeitapp.com/demo/).)
+Snipe-IT is actively developed and we [release quite frequently](https://github.com/snipe/snipe-it/releases). ([Check out the live demo here](https://snipeitapp.com/demo/).)
 
 __This is web-based software__. This means there is no executable file (aka no .exe files), and it must be run on a web server and accessed through a web browser. It runs on any Mac OSX, flavor of Linux, as well as Windows, and we have a [Docker image](https://snipe-it.readme.io/docs/docker) available if that's what you're into.
 
@@ -65,6 +65,12 @@ As these were created by third-parties, Snipe-IT cannot provide support for thes
 
 -----
 
+### Security
+
+To report a security vulnerability, please email security@snipeitapp.com instead of using the issue tracker. 
+
+-----
+
 ### Contributors
 
 Thanks goes to all of these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)) who have helped Snipe-IT get this far:
@@ -109,9 +115,3 @@ Please see the documentation on [contributing and developing for Snipe-IT](https
 
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
-
------
-
-### Security
-
-To report a security vulnerability, please email security@snipeitapp.com instead of using the issue tracker. 
