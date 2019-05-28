@@ -1,6 +1,8 @@
 FROM ubuntu:xenial
 LABEL maintainer="uberbrady, hinchk"
 
+RUN apt-get update && apt-get install -y software-properties-common
+RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
 RUN apt-get update && apt-get install -y \
 apache2 \
 apache2-bin \
@@ -27,8 +29,8 @@ RUN phpenmod mcrypt
 RUN phpenmod gd
 RUN phpenmod bcmath
 
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.0/apache2/php.ini
-RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.0/cli/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.1/apache2/php.ini
+RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php/7.1/cli/php.ini
 
 RUN useradd -m --uid 1000 --gid 50 docker
 
