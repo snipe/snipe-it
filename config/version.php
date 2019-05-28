@@ -6,5 +6,5 @@ return array (
   'prerelease_version' => '',
   'hash_version' => '',
   'full_hash' => 'v4.7.0',
-  'branch' => 'v4.7-laravel-5.5-upgrade',
+  'branch' => 'master',
 );
