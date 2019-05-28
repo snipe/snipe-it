@@ -1,19 +1,19 @@
 FROM ubuntu:xenial
-MAINTAINER Brady Wetherington <uberbrady@gmail.com>
+LABEL maintainer="uberbrady, hinchk"
 
 RUN apt-get update && apt-get install -y \
 apache2 \
 apache2-bin \
 libapache2-mod-php7.0 \
-php7.0-curl \
-php7.0-ldap \
-php7.0-mysql \
-php7.0-mcrypt \
-php7.0-gd \
-php7.0-xml \
-php7.0-mbstring \
-php7.0-zip \
-php7.0-bcmath \
+php7.1-curl \
+php7.1-ldap \
+php7.1-mysql \
+php7.1-mcrypt \
+php7.1-gd \
+php7.1-xml \
+php7.1-mbstring \
+php7.1-zip \
+php7.1-bcmath \
 patch \
 curl \
 vim \
