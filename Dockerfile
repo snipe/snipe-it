@@ -4,7 +4,7 @@ LABEL maintainer="uberbrady, hinchk"
 RUN apt-get update && apt-get install -y \
 apache2 \
 apache2-bin \
-libapache2-mod-php7.0 \
+libapache2-mod-php7.1 \
 php7.1-curl \
 php7.1-ldap \
 php7.1-mysql \
