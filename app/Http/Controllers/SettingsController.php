@@ -1012,7 +1012,7 @@ class SettingsController extends Controller
 
         if (!config('app.lock_passwords')) {
 
-            $path = storage_path().'/app/'.config('laravel-backup.backup.name');
+            $path = storage_path().'/app/'.config('backup.backup.name');
             $file = $path.'/'.$filename;
             if (file_exists($file)) {
                 unlink($file);
