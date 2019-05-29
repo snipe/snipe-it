@@ -25,7 +25,7 @@
     <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="baseUrl" content="{{ config('app.url') }}/">
+    <meta name="baseUrl" content="{{ url('/') }}/">
 
     <script nonce="{{ csrf_token() }}">
       window.Laravel = { csrfToken: '{{ csrf_token() }}' };
