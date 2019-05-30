@@ -132,7 +132,7 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => 'your@example.com',
+            'to' => env('MAIL_BACKUP_NOTIFICATION_ADDRESS', null),
         ],
 
         'slack' => [
