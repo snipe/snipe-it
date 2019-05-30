@@ -54,7 +54,11 @@ class AssetCheckinController extends Controller
 
         if ($asset->assignedType() == Asset::USER) {
             $user = $asset->assignedTo;
+        } else {
+            $user = null;
         }
+
+
         if (is_null($target = $asset->assignedTo)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
