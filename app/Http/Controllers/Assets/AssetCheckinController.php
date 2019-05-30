@@ -59,7 +59,10 @@ class AssetCheckinController extends Controller
 
         if ($asset->assignedType() == Asset::USER) {
             $user = $asset->assignedTo;
+        } else {
+            $user = null;
         }
+
         if (is_null($target = $asset->assignedTo)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
@@ -92,7 +95,7 @@ class AssetCheckinController extends Controller
         
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
 
-            if ($backto=='user') {
+            if (($user) && ($backto == 'user')) {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
             }
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkin.success'));
