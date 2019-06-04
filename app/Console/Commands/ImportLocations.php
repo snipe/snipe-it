@@ -48,13 +48,13 @@ class ImportLocations extends Command
         $filename = $this->argument('filename');
         $csv = Reader::createFromPath(storage_path('private_uploads/imports/').$filename, 'r');
         $this->info('Attempting to process: '.storage_path('private_uploads/imports/').$filename);
-        $csv->setOffset(1); //because we don't want to insert the header
+        $csv->setHeaderOffset(0); //because we don't want to insert the header
         $results = $csv->getRecords();
 
         // Import parent location names first if they don't exist
         foreach ($results as $parent_index => $parent_row) {
-
             $parent_name = trim($parent_row['Parent Name']);
+            $this->info('- Parent: '.$parent_name.' in row as: '.trim($parent_row['Parent Name']));
             // First create any parents if they don't exist
 
             if ($parent_name!='') {
@@ -78,10 +78,12 @@ class ImportLocations extends Command
 
         }
 
+        $this->info('----- Parents Created.... backfilling additional details... --------');
         // Loop through ALL records and add/update them if there are additional fields
         // besides name
         foreach ($results as $index => $row) {
 
+            $parent_name = trim($row['Parent Name']);
             // Set the location attributes to save
             $location = Location::firstOrNew(array('name' => trim($row['Name'])));
             $location->name = trim($row['Name']);
@@ -96,12 +98,13 @@ class ImportLocations extends Command
 
             $this->info('Checking location: '.$location->name);
 
-            // If a parent name nis provided, we created it earlier in the script,
+            // If a parent name is provided, we created it earlier in the script,
             // so let's grab that ID
             if ($parent_name) {
+                $this->info('-- Searching for Parent Name: '.$parent_name.' - '.$row['Parent Name']);
                 $parent = Location::where('name', '=', $parent_name)->first();
                 $location->parent_id = $parent->id;
-                $this->info('Parent ID: '.$parent->id);
+                $this->info('Parent: '.$parent_name.' - ID: '.$parent->id);
             }
 
             // Make sure the more advanced (non-name) fields pass validation
