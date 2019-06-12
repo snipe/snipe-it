@@ -7,7 +7,7 @@ use Watson\Validating\ValidatingTrait;
 
 class Group extends SnipeModel
 {
-    protected $table = 'groups';
+    protected $table = 'permission_groups';
 
     public $rules = array(
       'name' => 'required|min:3|max:255',
