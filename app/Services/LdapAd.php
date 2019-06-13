@@ -430,11 +430,9 @@ class LdapAd extends LdapAdConfiguration
      *
      * @since 5.0.0
      *
-     * @param int $page The paged results to get
-     *
      * @return \Adldap\Query\Paginator
      */
-    public function getLdapUsers(int $page=0): Paginator
+    public function getLdapUsers(): Paginator
     {
         $search = $this->ldap->search()->users()->in($this->getBaseDn());
 
@@ -444,6 +442,6 @@ class LdapAd extends LdapAdConfiguration
         }
 
         return $search->select($this->getSelectedFields())
-            ->paginate(self::PAGE_SIZE, $page);
+            ->paginate(self::PAGE_SIZE);
     }
 }
