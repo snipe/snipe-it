@@ -25,12 +25,12 @@ class LdapSync extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:ldap-sync 
-                {--location= : A location name } 
-                {--location_id= : A location id} 
-                {--base_dn= : A diffrent base DN to use } 
-                {--summary : Print summary } 
-                {--json_summary : Print summary in json format } 
+    protected $signature = 'snipeit:ldap-sync
+                {--location= : A location name }
+                {--location_id= : A location id}
+                {--base_dn= : A diffrent base DN to use }
+                {--summary : Print summary }
+                {--json_summary : Print summary in json format }
                 {--dryrun : Run the sync process but don\'t update the database}';
 
     /**
@@ -142,7 +142,7 @@ class LdapSync extends Command
      * @return string
      */
     private function getSummary(): string
-    {        
+    {
         if ($this->option('summary') && !$this->dryrun) {
             $this->summary->each(function ($item) {
                 if ('ERROR' === $item['status']) {
@@ -218,33 +218,29 @@ class LdapSync extends Command
      *
      * @param int $page The page to get the result set
      */
-    private function processLdapUsers(int $page=0): void
-    {
-        try {
-            $ldapUsers = $this->ldap->getLdapUsers($page);
-        } catch (Exception $e) {
-            $this->outputError($e);
-            exit($e->getMessage());
-        }
+     private function processLdapUsers(): void
+     {
+         try {
+             $ldapUsers = $this->ldap->getLdapUsers();
+         } catch (Exception $e) {
+             $this->outputError($e);
+             exit($e->getMessage());
+         }
 
-        if (0 == $ldapUsers->count()) {
-            $msg = 'ERROR: No users found!';
-            Log::error($msg);
-            if ($this->dryrun) {
-                $this->error($msg);
-            }
-            exit($msg);
-        }
+         if (0 == count($ldapUsers)) {
+             $msg = 'ERROR: No users found!';
+             Log::error($msg);
+             if ($this->dryrun) {
+                 $this->error($msg);
+             }
+             exit($msg);
+         }
 
-        // Process each individual users
-        foreach ($ldapUsers as $user) {
-            $this->updateCreateUser($user);
-        }
-
-        if ($ldapUsers->getCurrentPage() < $ldapUsers->getPages()) {
-            $this->processLdapUsers($ldapUsers->getCurrentPage() + 1);
-        }
-    }
+         // Process each individual users
+         foreach ($ldapUsers as $user) {
+             $this->updateCreateUser($user);
+         }
+     }
 
     /**
      * Get the mapped locations if a base_dn is provided.
