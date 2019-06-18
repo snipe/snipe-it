@@ -111,52 +111,38 @@
 
 @foreach ($assets as $asset)
 	<?php $count++; ?>
-  <div class="label" style="width: 3in; height: 1.6in;"> 
+  <div class="label"> 
 
       @if ($settings->qr_code=='1')
-    <div class="qr_img" style="margin-left: 0.16in; " >
-     
-      <img src="./{{ $asset->id }}/qr_code" class="qr_img" style="width: 125%; height: 125%;">
-      
+    <div class="qr_img">
+      <img src="./{{ $asset->id }}/qr_code" class="qr_img">
     </div>
       @endif
 
-    
-       
-       
-         
-            
-
-       
-       <div class="qr_text" style="margin-left: 0.15in;">
+    <div class="qr_text">
         @if ($settings->qr_text!='')
         <div class="pull-left">
-            <strong style="font-size: 20px;">{{ $settings->qr_text }}</strong>
+            <strong>{{ $settings->qr_text }}</strong>
             <br>
         </div>
         @endif
         @if (($settings->labels_display_company_name=='1') && ($asset->company))
-        <div class="pull-left" >
-        
+        <div class="pull-left">
         	C: {{ $asset->company->name }}
         </div>
         @endif
-        
+        @if (($settings->labels_display_name=='1') && ($asset->name!=''))
         <div class="pull-left">
-            <strong>Asset:</strong> {{ $asset->name }}
-        </div>
-        
-        
-        
-        @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
-	<div class="pull-left">
-        <strong>Tag:</strong> {{ $asset->asset_tag }}
+            N: {{ $asset->name }}
         </div>
         @endif
-        
+        @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
+	<div class="pull-left">
+            T: {{ $asset->asset_tag }}
+        </div>
+        @endif
         @if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
-        <div class="pull-left" style="font-size: 9px;
-font-weight: bold;">
+        <div class="pull-left">
             S: {{ $asset->serial }}
         </div>
 	@endif
@@ -169,14 +155,12 @@ font-weight: bold;">
     </div>
 
     @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
-        <div class="barcode_container" style="margin-top: 0.1in; margin-bottom: 0.04in;">
+        <div class="barcode_container">
             <img src="./{{ $asset->id }}/barcode" class="barcode">
         </div>
     @endif
 
-<div class="" style="text-align: center;">
-        <strong>WWW.EINBAU.CA | Office: 905-665-3069</strong> 
-        </div>
+
 
 </div>
 

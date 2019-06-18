@@ -1,3 +1,4 @@
+<!--
 <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
     <label class="col-md-3 control-label" for="image">{{ trans('general.image_upload') }}</label>
     <div class="col-md-9">
@@ -14,4 +15,5 @@
         <img id="imagePreview" style="max-width: 200px;">
     </div>
 </div>
+-->
 

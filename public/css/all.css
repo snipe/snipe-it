@@ -6279,6 +6279,8 @@ button.close {
 .visible-lg {
   display: none !important;
 }
+.dyy,
+.mxx,
 .visible-xs-block,
 .visible-xs-inline,
 .visible-xs-inline-block,
@@ -6292,7 +6294,20 @@ button.close {
 .visible-lg-inline,
 .visible-lg-inline-block {
   display: none !important;
-}
+} 
+
+@media (max-width: 991px)  {
+      .mxx {
+          display: block !important;
+           }
+         }
+
+@media (min-width: 991px)  {
+      .dyy {
+          display: block !important;
+             }
+    }
+
 @media (max-width: 767px) {
   .visible-xs {
     display: block !important;
@@ -14479,3 +14494,4 @@ body {
     visibility: visible !important;
   }
 }
+

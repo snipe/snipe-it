@@ -1,0 +1,25 @@
+{
+   "short_name": "ToolTrack",
+   "name": "ToolTrack",
+    
+    
+     "icons": [
+    {
+      "src": "/public/icons-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/public/icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+
+   "start_url": "/public/",
+   "background_color": "#32374f",
+   "display": "standalone",
+   "scope": "/public/",
+   "theme_color": "#32374f"
+
+}

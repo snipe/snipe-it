@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\RestoreDeletedUsers;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -32,7 +31,6 @@ class Kernel extends ConsoleKernel
         Commands\RegenerateAssetTags::class,
         Commands\SyncAssetCounters::class,
         Commands\RestoreDeletedUsers::class,
-        Commands\SendUpcomingAuditReport::class,
     ];
 
     /**
@@ -49,7 +47,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('snipeit:expected-checkin')->daily();
         $schedule->command('snipeit:backup')->weekly();
         $schedule->command('backup:clean')->daily();
-        $schedule->command('snipeit:upcoming-audits')->daily();
     }
 
     protected function commands()

@@ -28,15 +28,26 @@
                 <div class="box">
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-12">
 
                                 <!-- The fileinput-button span is used to style the file input field as button -->
                                 @if (!config('app.lock_passwords'))
-                                <span class="btn btn-info fileinput-button">
+
+                                      <span class="btn btn-info fileinput-button">
                                     <span>Select Import File...</span>
                                     <!-- The file input field used as target for the file upload widget -->
                                     <input id="fileupload" type="file" name="files[]" data-url="{{ route('api.imports.index') }}" accept="text/csv">
                                 </span>
+                                 <span class="btn btn-info fileinput-button" style="background-color: #32374f; border-color: #32374f;">
+                                     <span><i class="fa fa-download"></i><a style="color: #fff;" href="https://tooltrack.ca/public/sample-assets.csv" download> Asset Sample</a></span>
+                                    <!-- The file input field used as target for the file upload widget -->
+
+                                </span>
+                                <span class="btn btn-info fileinput-button" style="background-color: #32374f; border-color: #32374f;">
+                                    <span><i class="fa fa-location-arrow"></i><a style="color: #fff;" href="https://tooltrack.ca/public/sample-location.csv" download>  Job & Location Sample</a></span>
+                                   <!-- The file input field used as target for the file upload widget -->
+
+                               </span>
                                  @endif
 
                             </div>

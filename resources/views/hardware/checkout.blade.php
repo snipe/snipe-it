@@ -88,6 +88,8 @@
               </div>
             </div>
 
+               
+               
                 @if ($asset->requireAcceptance() || $asset->getEula() || ($snipeSettings->slack_endpoint!=''))
                     <div class="form-group notification-callout">
                         <div class="col-md-8 col-md-offset-3">

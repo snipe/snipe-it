@@ -15,6 +15,7 @@
 
         </select>
     </div>
+<!--
     <div class="col-md-1 col-sm-1 text-left">
         @can('create', \App\Models\Category::class)
             @if ((!isset($hide_new)) || ($hide_new!='true'))
@@ -22,6 +23,7 @@
             @endif
         @endcan
     </div>
+-->
 
 
     {!! $errors->first($fieldname, '<div class="col-md-8 col-md-offset-3"><span class="alert-msg"><i class="fa fa-times"></i> :message</span></div>') !!}

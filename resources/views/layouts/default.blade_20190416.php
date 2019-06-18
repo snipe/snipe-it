@@ -12,8 +12,6 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <!-- Select2 -->
-    <link rel="manifest" href="/public/manifest.json">
-    
     <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
 
     <!-- iCheck for checkboxes and radio inputs -->
@@ -107,25 +105,24 @@
 
 
         <!-- Header Navbar: style can be found in header.less -->
-         
-         <nav class="navbar navbar-static-top" role="navigation">
+        <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button above the compact sidenav -->
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
           <ul class="nav navbar-nav navbar-left" >
-              <li class="left-navblock" style="" > 
+              <li class="left-navblock" style="width: 80%;" > 
                  @if ($snipeSettings->brand == '3')
                       <a class="logo navbar-brand no-hover"  href="{{ url('/') }}">
                           @if ($snipeSettings->logo!='')
-                          <img class="navbar-brand-img" style="  padding-top: 15px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                          <img class="navbar-brand-img" style="width: 95%; padding-top: 15px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
                           @endif
                           {{ $snipeSettings->site_name }}
                       </a>
                   @elseif ($snipeSettings->brand == '2')
                       <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
                           @if ($snipeSettings->logo!='')
-                          <img class="navbar-brand-img"  style="  padding-top: 15px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+                          <img class="navbar-brand-img"  style="width: 95%; padding-top: 15px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
                           @endif
                       </a> 
                   @else
@@ -133,23 +130,14 @@
                           {{ $snipeSettings->site_name }}
                       </a>
                   @endif     
-                    
                   
               </li>
-              <a href="#" style="float: right; padding: 20px; padding-right: 15%; color: #fff;" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button"><span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i></a>
-            </ul> 
-             
-              
-              
-             
-    
-              
-             
-             
-             
+              <a href="#" style="float:left; color: #fff;" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button"><span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i></a>
+            </ul>
+            
 
           <!-- Navbar Right Menu -->
-            <div class="hidden-xs  navbar-custom-menu"  >
+            <div class="navbar-custom-menu"  >
               <ul class="nav navbar-nav">
                   @can('index', \App\Models\Asset::class)
 <!--
@@ -192,10 +180,8 @@
                   @endcan
 
                   @can('index', \App\Models\Asset::class)
-                  
-                   
-                     <form class="  navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get" style="padding-top: 10px;">
-                      <div class=" col-xs-12 col-md-12" style="width: 84%;">
+                  <form class=" navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get" style="padding-top: 10px;">
+                      <div class="col-xs-12 col-md-12" style="width: 84%;">
                           <div class="col-xs-12 form-group" >
                               <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
                               <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
@@ -210,7 +196,6 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                   </form>
                   @endcan
  
-                  
                   @can('admin')
                   <li class="dropdown">
 <!--
@@ -237,13 +222,11 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                        </li>
                        @endcan
                        @can('create', \App\Models\Accessory::class)
-<!--
-                           <li {!! (Request::is('accessories/create') ? 'class="active"' : '') !!}>
-                               <a href="{{ route('accessories.create') }}">
-                                   <i class="fa fa-keyboard-o fa-fw"></i>
-                                   {{ trans('general.accessory') }}</a>
-                           </li>
--->
+                       <li {!! (Request::is('accessories/create') ? 'class="active"' : '') !!}>
+                           <a href="{{ route('accessories.create') }}">
+                               <i class="fa fa-keyboard-o fa-fw"></i>
+                               {{ trans('general.accessory') }}</a>
+                       </li>
                        @endcan
                        @can('create', \App\Models\Consumable::class)
 <!--
@@ -256,14 +239,12 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
 --> 
                        @endcan
                        @can('create', \App\Models\Component::class)
-<!--
                        <li {!! (Request::is('components/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('components.create') }}">
                            <i class="fa fa-hdd-o fa-fw"></i>
                            {{ trans('general.component') }}
                            </a>
                        </li>
--->
                        @endcan
                          @can('create', \App\Models\User::class)
                              <li {!! (Request::is('users/create') ? 'class="active"' : '') !!}>
@@ -282,16 +263,35 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
 
                <!-- User Account: style can be found in dropdown.less -->
               
-@if (Auth::check())
+
+
+              
+            </ul>
+          </div>
+      </nav>
+<!--
+       <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </a>
+-->
+       <!-- Sidebar toggle button-->
+      </header>
+
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+           @if (Auth::check())
                <li class="dropdown user user-menu">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                   @if (Auth::user()->present()->gravatar())
-                       <img src="{{ Auth::user()->present()->gravatar() }}" class="user-image" alt="User Image">
-                   @else
+                   
                       <i class="fa fa-user fa-fws"></i>
-                   @endif
+                   
 
-                   <span class="hidden-xs">{{ Auth::user()->first_name }} <b class="caret"></b></span>
+                   <span>System</span>
                  </a>
                  <ul class="dropdown-menu">
                    <!-- User image -->
@@ -307,11 +307,7 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                              Requested Assets
                          </a></li>
 
-<li>
-                   <a href="http://tooltrack.ca/public/admin">
-                       <i class="fa fa-cogs fa-fw"></i> <span>Settings</span>
-                   </a>
-               </li>
+
 
 
                      <li>
@@ -346,109 +342,22 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                  </ul>
                </li>
                @endif
-
-              
-            </ul>
-          </div>
-      </nav>
-      
-<!--
-       <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <i class="fa fa-bars"></i>
-      </a>
--->
-       <!-- Sidebar toggle button-->
-      </header>
-
-      <!-- Left side column. contains the logo and sidebar -->
-      <aside class="main-sidebar">
-       
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-          <!-- sidebar menu: : style can be found in sidebar.less -->
-         
-           
-                     
-       
-          <ul class="sidebar-menu" style="padding-top: 0px;">
-      <li class="visible-xs">
-                  <a data-toggle="modal" data-target="#myModal">
-                    <i class="fa fa-search"></i>
-                    <span>Search</span>
-                    
-                  </a>
-                  
-                  
-              </li>
-              
-              
-          
              
               
               
-             
+              @can('superadmin')
+               <li>
+                   <a href="{{ route('settings.index') }}">
+                       <i class="fa fa-cogs fa-fw"></i> <span>Settings</span>
+                   </a>
+               </li>
+               @endcan
             @can('admin')
             
              <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!}>
               <a href="{{ route('home') }}">
-                <i class="fa fa-dashboard"></i> <span>HOME</span>
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-            </li>
-            @endcan
-             @can('reports.view')
-            <li class="treeview{{ (Request::is('reports*') ? ' active' : '') }}">
-                <a href="#"  class="dropdown-toggle">
-                    <i class="fa fa-bar-chart"></i>
-                    <span>{{ trans('general.reports') }}</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="{{ route('reports.activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }}>
-                            {{ trans('general.activity_report') }}
-                        </a>
-                    </li>
-
-                    <li><a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }}>
-                            {{ trans('general.audit_report') }}</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('reports/depreciation') }}" {{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}>
-                            {{ trans('general.depreciation_report') }}
-                        </a>
-                    </li>
-<!--
-                    <li>
-                        <a href="{{ url('reports/licenses') }}" {{ (Request::is('reports/licenses') ? ' class="active"' : '') }}>
-                            {{ trans('general.license_report') }}
-                        </a>
-                    </li>
--->
-                    <li>
-                        <a href="{{ url('reports/asset_maintenances') }}" {{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }}>
-                            {{ trans('general.asset_maintenance_report') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('reports/unaccepted_assets') }}" {{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }}>
-                            {{ trans('general.unaccepted_asset_report') }}
-                        </a>
-                    </li>
-<!--
-                    <li>
-                        <a href="{{ url('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }}>
-                            {{ trans('general.accessory_report') }}
-                        </a>
-                    </li>
--->
-                    <li>
-                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
-                            {{ trans('general.custom_report') }}
-                        </a>
-                    </li>
-                </ul>
             </li>
             @endcan
             @can('index', \App\Models\Asset::class)
@@ -547,24 +456,20 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
               </li>
               @endcan
               @can('view', \App\Models\License::class)
-<!--
               <li{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                   <a href="{{ route('licenses.index') }}">
                     <i class="fa fa-floppy-o"></i>
                     <span>{{ trans('general.licenses') }}</span>
                   </a>
               </li>
--->
               @endcan
               @can('index', \App\Models\Accessory::class)
-<!--
               <li{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
                 <a href="{{ route('accessories.index') }}">
                   <i class="fa fa-keyboard-o"></i>
                   <span>{{ trans('general.accessories') }}</span>
                 </a>
               </li>
--->
               @endcan
               @can('view', \App\Models\Consumable::class)
             <li{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
@@ -574,12 +479,36 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                 </a>
             </li>
              @endcan
-             
-               @can('backend.interact')
+             @can('view', \App\Models\Component::class)
+            <li{!! (Request::is('components*') ? ' class="active"' : '') !!}>
+                <a href="{{ route('components.index') }}">
+                  <i class="fa fa-hdd-o"></i>
+                  <span>{{ trans('general.components') }}</span>
+                </a>
+            </li>
+            @endcan
+            @can('view', \App\Models\User::class)
+            <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
+                  <a href="{{ route('users.index') }}">
+                      <i class="fa fa-users"></i>
+                      <span>{{ trans('general.people') }}</span>
+                  </a>
+            </li>
+            @endcan
+            @can('import')
+                <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('imports.index') }}">
+                        <i class="fa fa-cloud-download"></i>
+                        <span>{{ trans('general.import') }}</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('backend.interact')
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-gear"></i>
-                        <span>Attributes </span>
+                        <span>{{ trans('general.settings') }}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
 
@@ -670,37 +599,58 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                 </li>
             @endcan
 
-           
-
-             @can('view', \App\Models\Component::class)
-<!--
-            <li{!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                <a href="{{ route('components.index') }}">
-                  <i class="fa fa-hdd-o"></i>
-                  <span>{{ trans('general.components') }}</span>
+            @can('reports.view')
+            <li class="treeview{{ (Request::is('reports*') ? ' active' : '') }}">
+                <a href="#"  class="dropdown-toggle">
+                    <i class="fa fa-bar-chart"></i>
+                    <span>{{ trans('general.reports') }}</span>
+                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
+
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{{ route('reports.activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }}>
+                            {{ trans('general.activity_report') }}
+                        </a>
+                    </li>
+
+                    <li><a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }}>
+                            {{ trans('general.audit_report') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/depreciation') }}" {{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}>
+                            {{ trans('general.depreciation_report') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/licenses') }}" {{ (Request::is('reports/licenses') ? ' class="active"' : '') }}>
+                            {{ trans('general.license_report') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/asset_maintenances') }}" {{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }}>
+                            {{ trans('general.asset_maintenance_report') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/unaccepted_assets') }}" {{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }}>
+                            {{ trans('general.unaccepted_asset_report') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }}>
+                            {{ trans('general.accessory_report') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
+                            {{ trans('general.custom_report') }}
+                        </a>
+                    </li>
+                </ul>
             </li>
--->
-            @endcan
-            @can('view', \App\Models\User::class)
-            <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
-                  <a href="{{ route('users.index') }}">
-                      <i class="fa fa-users"></i>
-                      <span>{{ trans('general.people') }}</span>
-                  </a>
-            </li>
-            @endcan
-            @can('import')
-                <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
-                    <a href="{{ route('imports.index') }}">
-                        <i class="fa fa-cloud-download"></i>
-                        <span>{{ trans('general.import') }}</span>
-                    </a>
-                </li>
             @endcan
 
-           
-          
             @can('viewRequestable', \App\Models\Asset::class)
             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
             <a href="{{ route('requestable-assets') }}">
@@ -708,7 +658,6 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
             <span>{{ trans('admin/hardware/general.requestable') }}</span>
             </a>
             </li>
-            
             @endcan
           </ul>
         </section>
@@ -770,6 +719,34 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
 
       <footer class="main-footer hidden-print">
 
+        <div class="pull-right hidden-xs">
+          @if ($snipeSettings->version_footer!='off')
+              @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
+                <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
+              @endif
+          @endif
+
+          @if ($snipeSettings->support_footer!='off')
+              @if (($snipeSettings->support_footer=='on') || (($snipeSettings->support_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
+                <a target="_blank" class="btn btn-default btn-xs" href="https://snipe-it.readme.io/docs/overview" rel="noopener">User's Manual</a>
+                <a target="_blank" class="btn btn-default btn-xs" href="https://snipeitapp.com/support/" rel="noopener">Report a Bug</a>
+                 @endif
+          @endif
+
+        @if ($snipeSettings->privacy_policy_link!='')
+            <a target="_blank" class="btn btn-default btn-xs" rel="noopener" href="{{  $snipeSettings->privacy_policy_link }}" target="_new">{{ trans('admin/settings/general.privacy_policy') }}</a>
+        @endif
+
+
+        </div>
+          @if ($snipeSettings->footer_text!='')
+              <div class="pull-right">
+                  {!!  Parsedown::instance()->text(e($snipeSettings->footer_text))  !!}
+              </div>
+          @endif
+
+
+        <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
       </footer>
 
 
@@ -848,33 +825,7 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
     </script>
     @endif
 
-<!-- Modal -->
-  <div class="modal fade" style="background: #32374f;" id="myModal" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        
-        <div class="modal-body" style="height: 85px;
-">
-          
-                     <form class="  navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get" style="padding-top: 10px;">
-                      <div class=" col-xs-12 col-md-12" style="width: 100%;">
-                          <div class="col-xs-12 form-group" >
-                              <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
-                              <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
-                              <input type="hidden" name="topsearch" value="true">
-                          </div>
-                          <div class="col-xs-1">
-                              <button type="submit" class="btn btn-primary pull-right" style="background-color: #4a558b;
 
-border-color: #fff;"><i class="fa fa-search"></i></button>
-                          </div> 
-                      </div>
-                  </form>
-        </div>
-        
-      </div>
-    </div>
-  </div>
 
   </body>
 </html>

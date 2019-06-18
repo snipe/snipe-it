@@ -75,7 +75,7 @@
       <ul class="nav nav-tabs">
         
          <li class="active"> 
-          <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-camera"></i></span> <span class="hidden-xs hidden-sm">Wear Record</span></a>
+          <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span></a>
         
         <li>  
          
@@ -631,9 +631,7 @@
     @foreach($asset->uploads as $file)
        <div class="item {{ $loop->first ? 'active' : '' }}">
            @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('assets')))
-                            <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="Note - @if ($file->note)
-                          {{ $file->note }}
-                          @endif" data-footer="{{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
+                            <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
                               <img src="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" style="max-width: 300px;">
                             </a>
                           @endif
@@ -925,26 +923,21 @@
         </div> <!-- /.tab-pane files -->
       </div> <!-- /. tab-content -->
       <div class="col-md-12">
-     <h2 style="text-align: center; font-size: 25px;">Checkin/Checkout</h2>
-      <div style="text-align: center; padding:15px;"> 
+     <h2 style="text-align: center;">Checkin/Checkout</h2>
+      <div style="text-align: center; padding:20px;"> 
     @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
       @if ($asset->assigned_to != '')
         @can('checkin', \App\Models\Asset::class)
-       <a class="btn btn-lg bg-purple" style="font-size: 12px;"  href="{{ route('checkin/hardware', $asset->id) }}">{{ trans('admin/hardware/general.checkin') }}</a> 
+       <a class="btn btn-lg bg-purple"  href="{{ route('checkin/hardware', $asset->id) }}">{{ trans('admin/hardware/general.checkin') }}</a> 
           @endcan
       @else
        @can('checkout', \App\Models\Asset::class) 
-       <a class="btn btn-lg bg-maroon" style="font-size: 12px;"  href="{{ route('checkout/hardware', $asset->id)  }}">{{ trans('admin/hardware/general.checkout') }}</a> 
+       <a class="btn btn-lg bg-maroon" href="{{ route('checkout/hardware', $asset->id)  }}">{{ trans('admin/hardware/general.checkout') }}</a> 
           @endcan
       @endif
     @endif 
       @can('update', \App\Models\Asset::class)
-     <a class="btn btn-lg bg-black lg" style="font-size: 11px;  color: white; background-color: #32374f !important;" href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a>
-      @endcan
-      
-      @can('update', \App\Models\Asset::class)
-      <a style="font-size: 12px;" class="btn btn-lg bg-black lg" href="#" data-toggle="modal" data-target="#uploadFileModal">
-            <i class="fa fa-camera"></i> </a>
+     <a class="btn btn-lg bg-black lg" style="color: white; background-color: #32374f !important;" href="{{ route('hardware.edit', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a>
       @endcan
       @can('create', \App\Models\Asset::class)
 <!--
@@ -952,7 +945,7 @@
       @endcan
       @can('audit', \App\Models\Asset::class)
     <a href="{{ route('asset.audit.create', $asset->id)  }}">{{ trans('general.audit') }}</a> 
---->
+-->
      @endcan
   </div>
        
@@ -962,9 +955,7 @@
       
       
       
-      
-      
-    </div> <!-- /.nav-tabs-custom ---->
+    </div> <!-- /.nav-tabs-custom -->
   </div> <!-- /. col-md-12 -->
 </div> <!-- /. row -->
 

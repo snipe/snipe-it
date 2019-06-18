@@ -10,6 +10,8 @@
 
 
     <!-- Select2 -->
+    <link rel="manifest" href="/public/manifest.json">
+
     <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
 
     <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">

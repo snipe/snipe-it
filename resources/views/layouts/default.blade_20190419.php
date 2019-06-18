@@ -12,8 +12,6 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <!-- Select2 -->
-    <link rel="manifest" href="/public/manifest.json">
-    
     <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
 
     <!-- iCheck for checkboxes and radio inputs -->
@@ -237,13 +235,11 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                        </li>
                        @endcan
                        @can('create', \App\Models\Accessory::class)
-<!--
-                           <li {!! (Request::is('accessories/create') ? 'class="active"' : '') !!}>
-                               <a href="{{ route('accessories.create') }}">
-                                   <i class="fa fa-keyboard-o fa-fw"></i>
-                                   {{ trans('general.accessory') }}</a>
-                           </li>
--->
+                       <li {!! (Request::is('accessories/create') ? 'class="active"' : '') !!}>
+                           <a href="{{ route('accessories.create') }}">
+                               <i class="fa fa-keyboard-o fa-fw"></i>
+                               {{ trans('general.accessory') }}</a>
+                       </li>
                        @endcan
                        @can('create', \App\Models\Consumable::class)
 <!--
@@ -256,14 +252,12 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
 --> 
                        @endcan
                        @can('create', \App\Models\Component::class)
-<!--
                        <li {!! (Request::is('components/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('components.create') }}">
                            <i class="fa fa-hdd-o fa-fw"></i>
                            {{ trans('general.component') }}
                            </a>
                        </li>
--->
                        @endcan
                          @can('create', \App\Models\User::class)
                              <li {!! (Request::is('users/create') ? 'class="active"' : '') !!}>
@@ -396,61 +390,6 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
               </a>
             </li>
             @endcan
-             @can('reports.view')
-            <li class="treeview{{ (Request::is('reports*') ? ' active' : '') }}">
-                <a href="#"  class="dropdown-toggle">
-                    <i class="fa fa-bar-chart"></i>
-                    <span>{{ trans('general.reports') }}</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-
-                <ul class="treeview-menu">
-                    <li>
-                        <a href="{{ route('reports.activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }}>
-                            {{ trans('general.activity_report') }}
-                        </a>
-                    </li>
-
-                    <li><a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }}>
-                            {{ trans('general.audit_report') }}</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('reports/depreciation') }}" {{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}>
-                            {{ trans('general.depreciation_report') }}
-                        </a>
-                    </li>
-<!--
-                    <li>
-                        <a href="{{ url('reports/licenses') }}" {{ (Request::is('reports/licenses') ? ' class="active"' : '') }}>
-                            {{ trans('general.license_report') }}
-                        </a>
-                    </li>
--->
-                    <li>
-                        <a href="{{ url('reports/asset_maintenances') }}" {{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }}>
-                            {{ trans('general.asset_maintenance_report') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('reports/unaccepted_assets') }}" {{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }}>
-                            {{ trans('general.unaccepted_asset_report') }}
-                        </a>
-                    </li>
-<!--
-                    <li>
-                        <a href="{{ url('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }}>
-                            {{ trans('general.accessory_report') }}
-                        </a>
-                    </li>
--->
-                    <li>
-                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
-                            {{ trans('general.custom_report') }}
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            @endcan
             @can('index', \App\Models\Asset::class)
             <li class="treeview{{ (Request::is('hardware*') ? ' active' : '') }}">
                 <a href="#"><i class="fa fa-barcode"></i>
@@ -547,24 +486,20 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
               </li>
               @endcan
               @can('view', \App\Models\License::class)
-<!--
               <li{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                   <a href="{{ route('licenses.index') }}">
                     <i class="fa fa-floppy-o"></i>
                     <span>{{ trans('general.licenses') }}</span>
                   </a>
               </li>
--->
               @endcan
               @can('index', \App\Models\Accessory::class)
-<!--
               <li{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
                 <a href="{{ route('accessories.index') }}">
                   <i class="fa fa-keyboard-o"></i>
                   <span>{{ trans('general.accessories') }}</span>
                 </a>
               </li>
--->
               @endcan
               @can('view', \App\Models\Consumable::class)
             <li{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
@@ -574,12 +509,36 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                 </a>
             </li>
              @endcan
-             
-               @can('backend.interact')
+             @can('view', \App\Models\Component::class)
+            <li{!! (Request::is('components*') ? ' class="active"' : '') !!}>
+                <a href="{{ route('components.index') }}">
+                  <i class="fa fa-hdd-o"></i>
+                  <span>{{ trans('general.components') }}</span>
+                </a>
+            </li>
+            @endcan
+            @can('view', \App\Models\User::class)
+            <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
+                  <a href="{{ route('users.index') }}">
+                      <i class="fa fa-users"></i>
+                      <span>{{ trans('general.people') }}</span>
+                  </a>
+            </li>
+            @endcan
+            @can('import')
+                <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('imports.index') }}">
+                        <i class="fa fa-cloud-download"></i>
+                        <span>{{ trans('general.import') }}</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('backend.interact')
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-gear"></i>
-                        <span>Attributes </span>
+                        <span>{{ trans('general.settings') }}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
 
@@ -670,37 +629,58 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                 </li>
             @endcan
 
-           
-
-             @can('view', \App\Models\Component::class)
-<!--
-            <li{!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                <a href="{{ route('components.index') }}">
-                  <i class="fa fa-hdd-o"></i>
-                  <span>{{ trans('general.components') }}</span>
+            @can('reports.view')
+            <li class="treeview{{ (Request::is('reports*') ? ' active' : '') }}">
+                <a href="#"  class="dropdown-toggle">
+                    <i class="fa fa-bar-chart"></i>
+                    <span>{{ trans('general.reports') }}</span>
+                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
+
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{{ route('reports.activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }}>
+                            {{ trans('general.activity_report') }}
+                        </a>
+                    </li>
+
+                    <li><a href="{{ route('reports.audit') }}" {{ (Request::is('reports.audit') ? ' class="active"' : '') }}>
+                            {{ trans('general.audit_report') }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/depreciation') }}" {{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}>
+                            {{ trans('general.depreciation_report') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/licenses') }}" {{ (Request::is('reports/licenses') ? ' class="active"' : '') }}>
+                            {{ trans('general.license_report') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/asset_maintenances') }}" {{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }}>
+                            {{ trans('general.asset_maintenance_report') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/unaccepted_assets') }}" {{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }}>
+                            {{ trans('general.unaccepted_asset_report') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }}>
+                            {{ trans('general.accessory_report') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>
+                            {{ trans('general.custom_report') }}
+                        </a>
+                    </li>
+                </ul>
             </li>
--->
-            @endcan
-            @can('view', \App\Models\User::class)
-            <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
-                  <a href="{{ route('users.index') }}">
-                      <i class="fa fa-users"></i>
-                      <span>{{ trans('general.people') }}</span>
-                  </a>
-            </li>
-            @endcan
-            @can('import')
-                <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
-                    <a href="{{ route('imports.index') }}">
-                        <i class="fa fa-cloud-download"></i>
-                        <span>{{ trans('general.import') }}</span>
-                    </a>
-                </li>
             @endcan
 
-           
-          
             @can('viewRequestable', \App\Models\Asset::class)
             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
             <a href="{{ route('requestable-assets') }}">

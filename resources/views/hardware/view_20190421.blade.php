@@ -75,7 +75,7 @@
       <ul class="nav nav-tabs">
         
          <li class="active"> 
-          <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-camera"></i></span> <span class="hidden-xs hidden-sm">Wear Record</span></a>
+          <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span></a>
         
         <li>  
          
@@ -631,9 +631,7 @@
     @foreach($asset->uploads as $file)
        <div class="item {{ $loop->first ? 'active' : '' }}">
            @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('assets')))
-                            <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="Note - @if ($file->note)
-                          {{ $file->note }}
-                          @endif" data-footer="{{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
+                            <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
                               <img src="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" style="max-width: 300px;">
                             </a>
                           @endif
