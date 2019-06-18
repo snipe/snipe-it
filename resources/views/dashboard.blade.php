@@ -10,11 +10,12 @@
 {{-- Page content --}}
 @section('content')
 
+<!-- 2019-06-18 v1
 @if ($snipeSettings->dashboard_message!='')
 <div class="row">
     <div class="col-md-12">
         <div class="box">
-            <!-- /.box-header -->
+
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -26,10 +27,13 @@
     </div>
 </div>
 @endif
+-->
+
 
 <div class="row">
+
   <!-- panel -->
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-6 col-xs-6">
     <!-- small box -->
     <div class="small-box bg-teal">
       <div class="inner">
@@ -43,43 +47,28 @@
         <a href="{{ route('hardware.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
       @endcan
     </div>
-  </div><!-- ./col -->
+  </div>
 
-  <div class="col-lg-3 col-xs-6">
+  <!-- ./col -->
+
+
+    <!-- small box small-box bg-maroon -->
+
+
+
+  <!-- ./col -->
+
+
+
     <!-- small box -->
-    <div class="small-box bg-maroon">
-      <div class="inner">
-        <h3>{{ number_format($counts['license']) }}</h3>
-        <p>{{ trans('general.total_licenses') }}</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-floppy-o"></i>
-      </div>
-        @can('view', \App\Models\License::class)
-          <a href="{{ route('licenses.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
-        @endcan
-    </div>
-  </div><!-- ./col -->
 
 
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-orange">
-      <div class="inner">
-        <h3> {{ number_format($counts['accessory']) }}</h3>
-          <p>{{ trans('general.total_accessories') }}</p>
-      </div>
-      <div class="icon">
-        <i class="fa fa-keyboard-o"></i>
-      </div>
-      @can('index', \App\Models\Accessory::class)
-          <a href="{{ route('accessories.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right"></i></a>
-      @endcan
-    </div>
-  </div><!-- ./col -->
 
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
+   <!-- ./col -->
+
+
+  <div class="col-lg-6 col-xs-6">
+    <!-- small box small-box bg-purple -->
     <div class="small-box bg-purple">
       <div class="inner">
         <h3> {{ number_format($counts['consumable']) }}</h3>
@@ -93,6 +82,9 @@
       @endcan
     </div>
   </div><!-- ./col -->
+
+
+
 </div>
 
 @if ($counts['grand_total'] == 0)
@@ -100,9 +92,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">This is your dashboard. There are many like it, but this one is yours.</h3>
-                </div>
+
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
@@ -199,76 +189,32 @@
 
 </div> <!--/row-->
 <div class="row">
-    <div class="col-md-6">
-        <div class="box box-default">
-            <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('general.assets') }} by Status</h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                </div>
-            </div>
+
+
+
+
+
             <!-- /.box-header -->
-            <div class="box-body" style="min-height: 400px;">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="chart-responsive">
-                            <canvas id="statusPieChart" height="120"></canvas>
-                        </div> <!-- ./chart-responsive -->
-                    </div> <!-- /.col -->
-                </div> <!-- /.row -->
-            </div><!-- /.box-body -->
-        </div> <!-- /.box -->
-    </div>
-    <div class="col-md-6">
+             <!-- ./chart-responsive -->
+                     <!-- /.col -->
+                  <!-- /.row -->
+             <!-- /.box-body -->
+         <!-- /.box -->
+
+
 
         <!-- Categories -->
-        <div class="box box-default">
-            <div class="box-header with-border">
-                <h3 class="box-title">Asset {{ trans('general.categories') }}</h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                </div>
-            </div>
+
             <!-- /.box-header -->
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                        <table
-                                data-cookie-id-table="dashCategorySummary"
-                                data-height="400"
-                                data-side-pagination="server"
-                                data-sort-order="desc"
-                                data-sort-field="assets_count"
-                                id="dashCategorySummary"
-                                class="table table-striped snipe-table"
-                                data-url="{{ route('api.categories.index', ['sort' => 'assets_count', 'order' => 'asc']) }}">
 
-                            <thead>
-                            <tr>
-                                <th class="col-sm-3" data-visible="true" data-field="name" data-formatter="categoriesLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
-                                <th class="col-sm-3" data-visible="true" data-field="category_type" data-sortable="true">{{ trans('general.type') }}</th>
-                                <th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true"><i class="fa fa-barcode"></i></th>
-                                <th class="col-sm-1" data-visible="true" data-field="accessories_count" data-sortable="true"><i class="fa fa-keyboard-o"></i></th>
-                                <th class="col-sm-1" data-visible="true" data-field="consumables_count" data-sortable="true"><i class="fa fa-tint"></i></th>
-                                <th class="col-sm-1" data-visible="true" data-field="components_count" data-sortable="true"><i class="fa fa-hdd-o"></i></th>
-                                <th class="col-sm-1" data-visible="true" data-field="licenses_count" data-sortable="true"><i class="fa fa-floppy-o"></i></th>
-                            </tr>
-                            </thead>
-                        </table>
-                        </div>
-                    </div> <!-- /.col -->
-                    <div class="col-md-12 text-center" style="padding-top: 10px;">
-                        <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm" style="width: 100%">View All</a>
-                    </div>
-                </div> <!-- /.row -->
 
-            </div><!-- /.box-body -->
-        </div> <!-- /.box -->
-    </div>
-</div>
+                      <!-- /.col -->
+
+                  <!-- /.row -->
+ <!-- /.box-body -->
+          <!-- /.box -->
+
+
 
 @endif
 
