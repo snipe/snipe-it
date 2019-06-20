@@ -163,12 +163,34 @@ run_as_app_user () {
   fi
 }
 
+install_composer () {
+  # https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
+  EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
+  run_as_app_user php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  ACTUAL_SIGNATURE="$(run_as_app_user php -r "echo hash_file('SHA384', 'composer-setup.php');")"
 
+  if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
+  then
+      >&2 echo 'ERROR: Invalid composer installer signature'
+      run_as_app_user rm composer-setup.php
+      exit 1
+  fi
+
+  run_as_app_user php composer-setup.php
+  run_as_app_user rm composer-setup.php
+
+  mv "$(eval echo ~$APP_USER)"/composer.phar /usr/local/bin/composer
+}
 
 install_snipeit () {
   create_user
 
+  echo "* Creating MariaDB Database/User."
+  echo "* Please Input your MariaDB root password:"
+  mysql -u root -p --execute="CREATE DATABASE snipeit;GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
+  echo "* Cloning Snipe-IT from github to the web directory."
+  log "git clone https://github.com/luism123mb/snipe-it $APP_PATH"
 
   echo "* Configuring .env file."
   cp "$APP_PATH/.env.example" "$APP_PATH/.env"
@@ -182,7 +204,30 @@ install_snipeit () {
   sed -i "s|^\\(DB_PASSWORD=\\).*|\\1$mysqluserpw|" "$APP_PATH/.env"
   sed -i "s|^\\(APP_URL=\\).*|\\1http://$fqdn|" "$APP_PATH/.env"
 
+  echo "* Installing composer."
+  install_composer
 
+  echo "* Setting permissions."
+  for chmod_dir in "$APP_PATH/storage" "$APP_PATH/public/uploads"; do
+    chmod -R 775 "$chmod_dir"
+  done
+
+  chown -R "$APP_USER":"$apache_group" "$APP_PATH"
+
+  echo "* Running composer."
+  # We specify the path to composer because CentOS lacks /usr/local/bin in $PATH when using sudo
+  run_as_app_user /usr/local/bin/composer install --no-dev --prefer-source --working-dir "$APP_PATH"
+
+  sudo chgrp -R "$apache_group" "$APP_PATH/vendor"
+
+  echo "* Generating the application key."
+  log "php $APP_PATH/artisan key:generate --force"
+
+  echo "* Artisan Migrate."
+  log "php $APP_PATH/artisan migrate --force"
+
+  echo "* Creating scheduler cron."
+  (crontab -l ; echo "* * * * * /usr/bin/php $APP_PATH/artisan schedule:run >> /dev/null 2>&1") | crontab -
 }
 
 set_firewall () {
@@ -234,7 +279,7 @@ echo '
        _____       _                  __________
       / ___/____  (_)___  ___        /  _/_  __/
       \__ \/ __ \/ / __ \/ _ \______ / /  / /
-     ___/ / / / / / /_/ /  __/_____// /  / /   by NEKILI a2
+     ___/ / / / / / /_/ /  __/_____// /  / /   by NEKILI v2
     /____/_/ /_/_/ .___/\___/     /___/ /_/
                 /_/
 '
@@ -306,16 +351,88 @@ esac
 done
 
 case $distro in
+  debian)
+  if [[ "$version" =~ ^9 ]]; then
+    # Install for Debian 9.x
+    tzone=$(cat /etc/timezone)
 
+    echo "* Adding PHP repository."
+    log "apt-get install -y apt-transport-https"
+    log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
+    echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
+
+    echo -n "* Updating installed packages."
+    log "apt-get update && apt-get -y upgrade" & pid=$!
+    progress
+
+    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.1 php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip"
+    install_packages
+
+    echo "* Configuring Apache."
+    create_virtualhost
+    log "a2enmod rewrite"
+    log "a2ensite $APP_NAME.conf"
+
+    set_hosts
+
+    echo "* Securing MariaDB."
+    /usr/bin/mysql_secure_installation
+
+    install_snipeit
+
+    echo "* Restarting Apache httpd."
+    log "service apache2 restart"
+  elif [[ "$version" =~ ^8 ]]; then
+    # Install for Debian 8.x
+    tzone=$(cat /etc/timezone)
+
+    echo "* Adding MariaDB and ppa:ondrej/php repositories."
+    log "apt-get install -y software-properties-common apt-transport-https"
+    log "apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db"
+    log "add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/debian $codename main'"
+    log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
+    echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
+
+    echo -n "* Updating installed packages."
+    log "apt-get update && apt-get -y upgrade" & pid=$!
+    progress
+
+    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+    PACKAGES="mariadb-server mariadb-client php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip"
+    install_packages
+
+    echo "* Configuring Apache."
+    create_virtualhost
+    log "a2enmod rewrite"
+    log "a2ensite $APP_NAME.conf"
+
+    set_hosts
+
+    echo "* Securing MariaDB."
+    /usr/bin/mysql_secure_installation
+
+    install_snipeit
+
+    echo "* Restarting Apache httpd."
+    log "service apache2 restart"
+  else
+    echo "Unsupported Debian version. Version found: $version"
+    exit 1
+  fi
+  ;;
   ubuntu)
   if [ "$version" == "18.04" ]; then
     # Install for Ubuntu 18.04
     tzone=$(cat /etc/timezone)
 
-
+    echo -n "* Updating installed packages."
+    log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
     progress
 
-
+    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+    install_packages
 
     echo "* Configuring Apache."
     create_virtualhost
@@ -326,7 +443,13 @@ case $distro in
 
     set_hosts
 
+    echo "* Starting MariaDB."
+    log "systemctl start mariadb.service"
 
+    echo "* Securing MariaDB."
+    /usr/bin/mysql_secure_installation
+
+    install_snipeit
 
     echo "* Restarting Apache httpd."
     log "systemctl restart apache2"
