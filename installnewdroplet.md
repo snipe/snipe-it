@@ -6,6 +6,7 @@ usermod -aG sudo snipeit
 su - snipeit
 
 2) RUN THE FOLLOWING COMMANDS AS A SUDO USER
+https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-18-04#step-1-%E2%80%94-installing-phpmyadmin
 
 sudo wget https://raw.githubusercontent.com/luism123mb/snipe-it/master/snipeit.sh
 sudo chmod 744 snipeit.sh
