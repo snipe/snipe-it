@@ -13,7 +13,7 @@
 
     <!-- Select2 -->
     <link rel="manifest" href="/public/manifest.json">
-    
+
     <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
 
     <!-- iCheck for checkboxes and radio inputs -->
@@ -107,14 +107,14 @@
 
 
         <!-- Header Navbar: style can be found in header.less -->
-         
+
          <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button above the compact sidenav -->
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
           <ul class="nav navbar-nav navbar-left" >
-              <li class="left-navblock" style="" > 
+              <li class="left-navblock" style="" >
                  @if ($snipeSettings->brand == '3')
                       <a class="logo navbar-brand no-hover"  href="{{ url('/') }}">
                           @if ($snipeSettings->logo!='')
@@ -127,26 +127,26 @@
                           @if ($snipeSettings->logo!='')
                           <img class="navbar-brand-img"  style="  padding-top: 15px;" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
                           @endif
-                      </a> 
+                      </a>
                   @else
                       <a class="logo no-hover" href="{{ url('/') }}">
                           {{ $snipeSettings->site_name }}
                       </a>
-                  @endif     
-                    
-                  
+                  @endif
+
+
               </li>
               <a href="#" style="float: right; padding: 20px; padding-right: 15%; color: #fff;" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button"><span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i></a>
-            </ul> 
-             
-              
-              
-             
-    
-              
-             
-             
-             
+            </ul>
+
+
+
+
+
+
+
+
+
 
           <!-- Navbar Right Menu -->
             <div class="hidden-xs  navbar-custom-menu"  >
@@ -173,7 +173,7 @@
                           <i class="fa fa-keyboard-o"></i>
                       </a>
                   </li>
-                  
+
                   @endcan
                   @can('index', \App\Models\Consumable::class)
                   <li {!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
@@ -188,12 +188,12 @@
                           <i class="fa fa-hdd-o"></i>
                       </a>
                   </li>
-                  -->   
+                  -->
                   @endcan
 
                   @can('index', \App\Models\Asset::class)
-                  
-                   
+
+
                      <form class="  navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get" style="padding-top: 10px;">
                       <div class=" col-xs-12 col-md-12" style="width: 84%;">
                           <div class="col-xs-12 form-group" >
@@ -205,12 +205,12 @@
                               <button type="submit" class="btn btn-primary pull-right" style="background-color: #4a558b;
 
 border-color: #fff;"><i class="fa fa-search"></i></button>
-                          </div> 
+                          </div>
                       </div>
                   </form>
                   @endcan
- 
-                  
+
+
                   @can('admin')
                   <li class="dropdown">
 <!--
@@ -253,7 +253,7 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                                {{ trans('general.consumable') }}
                            </a>
                        </li>
---> 
+-->
                        @endcan
                        @can('create', \App\Models\Component::class)
 <!--
@@ -277,11 +277,11 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                 </li>
                @endcan
 
-               
+
 
 
                <!-- User Account: style can be found in dropdown.less -->
-              
+
 @if (Auth::check())
                <li class="dropdown user user-menu">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -308,7 +308,7 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                          </a></li>
 
 <li>
-                   <a href="http://tooltrack.ca/public/admin">
+                   <a href="/admin">
                        <i class="fa fa-cogs fa-fw"></i> <span>Settings</span>
                    </a>
                </li>
@@ -347,11 +347,11 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                </li>
                @endif
 
-              
+
             </ul>
           </div>
       </nav>
-      
+
 <!--
        <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
@@ -363,33 +363,33 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
 
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
-       
+
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- sidebar menu: : style can be found in sidebar.less -->
-         
-           
-                     
-       
+
+
+
+
           <ul class="sidebar-menu" style="padding-top: 0px;">
       <li class="visible-xs">
                   <a data-toggle="modal" data-target="#myModal">
                     <i class="fa fa-search"></i>
                     <span>Search</span>
-                    
+
                   </a>
-                  
-                  
+
+
               </li>
-              
-              
-          
-             
-              
-              
-             
+
+
+
+
+
+
+
             @can('admin')
-            
+
              <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!}>
               <a href="{{ route('home') }}">
                 <i class="fa fa-dashboard"></i> <span>HOME</span>
@@ -574,7 +574,7 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                 </a>
             </li>
              @endcan
-             
+
                @can('backend.interact')
                 <li class="treeview">
                     <a href="#">
@@ -670,7 +670,7 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                 </li>
             @endcan
 
-           
+
 
              @can('view', \App\Models\Component::class)
 <!--
@@ -699,8 +699,8 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                 </li>
             @endcan
 
-           
-          
+
+
             @can('viewRequestable', \App\Models\Asset::class)
             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
             <a href="{{ route('requestable-assets') }}">
@@ -708,7 +708,7 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
             <span>{{ trans('admin/hardware/general.requestable') }}</span>
             </a>
             </li>
-            
+
             @endcan
           </ul>
         </section>
@@ -852,10 +852,10 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
   <div class="modal fade" style="background: #32374f;" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
-        
+
         <div class="modal-body" style="height: 85px;
 ">
-          
+
                      <form class="  navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get" style="padding-top: 10px;">
                       <div class=" col-xs-12 col-md-12" style="width: 100%;">
                           <div class="col-xs-12 form-group" >
@@ -867,11 +867,11 @@ border-color: #fff;"><i class="fa fa-search"></i></button>
                               <button type="submit" class="btn btn-primary pull-right" style="background-color: #4a558b;
 
 border-color: #fff;"><i class="fa fa-search"></i></button>
-                          </div> 
+                          </div>
                       </div>
                   </form>
         </div>
-        
+
       </div>
     </div>
   </div>
