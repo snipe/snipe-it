@@ -50,6 +50,16 @@ class LocationsController extends Controller
             $locations = $locations->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('parent_id')) {
+            if ($request->filled('include_child_locations') && ($request->input('include_child_locations')=='true')) {
+            	  $locationIds = Helper::getLocationIdsRecursive($request->input('parent_id'));
+                $locations = $locations->whereIn('id', array_splice($locationIds, 1));
+            }
+            else {
+                $locations = $locations->where('parent_id', '=', $request->input('parent_id'));
+            }
+        }
+
 
 
         $offset = (($locations) && (request('offset') > $locations->count())) ? 0 : request('offset', 0);

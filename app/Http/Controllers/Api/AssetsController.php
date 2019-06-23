@@ -111,7 +111,12 @@ class AssetsController extends Controller
         }
 
         if ($request->filled('location_id')) {
-            $assets->where('assets.location_id', '=', $request->input('location_id'));
+            if ($request->filled('include_child_locations') && ($request->input('include_child_locations')=='true')) {
+        		    $assets = $assets->whereIn('assets.location_id', Helper::getLocationIdsRecursive($request->input('location_id')));
+            }
+            else {
+                $assets->where('assets.location_id', '=', $request->input('location_id'));
+            }
         }
 
         if ($request->filled('supplier_id')) {

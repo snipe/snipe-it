@@ -38,7 +38,12 @@ class ComponentsController extends Controller
         }
 
         if ($request->filled('location_id')) {
-            $components->where('location_id','=',$request->input('location_id'));
+            if ($request->filled('include_child_locations') && ($request->input('include_child_locations')=='true')) {
+                $components = $components->whereIn('location_id', Helper::getLocationIdsRecursive($request->input('location_id')));
+            }
+            else {
+                $components->where('location_id','=',$request->input('location_id'));
+            }
         }
 
         $offset = (($components) && (request('offset') > $components->count())) ? 0 : request('offset', 0);

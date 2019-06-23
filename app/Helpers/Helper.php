@@ -7,6 +7,7 @@ use App\Models\Consumable;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use App\Models\Depreciation;
+use App\Models\Location;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use Crypt;
@@ -260,6 +261,32 @@ class Helper
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+    
+    
+    /**
+     * Returns the location id's starting with the specified location id and
+     * continuing with the location id's of it's children, grand-children, ...
+     *
+     * @param location_id The id of the location to start with.
+     * @author [S. Lietaer] [<steven@lietaer.be>]
+     * @return Array
+     * @remarks This is a recursive method that can only be recursively called
+     * 256 times (PHP limitation).
+     */
+    public static function getLocationIdsRecursive($location_id)
+    {
+        $result = [];
+        
+        array_push($result, $location_id);
+        
+        $child_location_ids = Location::where('parent_id', $location_id)->pluck('id');
+        
+        foreach ($child_location_ids as $child_location_id) {
+        	$result = array_merge($result, Helper::getLocationIdsRecursive($child_location_id));
+        }
+        
+        return $result;
     }
 
 

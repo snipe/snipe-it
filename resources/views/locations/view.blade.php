@@ -8,7 +8,6 @@
  
 @parent
 @stop
-
 @section('header_right')
 <a href="{{ route('locations.edit', ['location' => $location->id]) }}" class="btn btn-sm btn-primary pull-right">{{ trans('admin/locations/table.update') }} </a>
 @stop
@@ -42,7 +41,7 @@
                         data-sort-order="asc"
                         id="usersTable"
                         class="table table-striped snipe-table"
-                        data-url="{{route('api.users.index', ['location_id' => $location->id])}}"
+                        data-url="{{route('api.users.index', ['location_id' => $location->id, 'include_child_locations' => e(Input::get('include_child_locations'))])}}"
                         data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-users-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -75,7 +74,7 @@
                           data-sort-order="asc"
                           id="assetsListingTable"
                           class="table table-striped snipe-table"
-                          data-url="{{route('api.assets.index', ['location_id' => $location->id]) }}"
+                          data-url="{{route('api.assets.index', ['location_id' => $location->id, 'include_child_locations' => e(Input::get('include_child_locations'))]) }}"
                           data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -109,9 +108,43 @@
                           data-sort-order="asc"
                           id="componentsTable"
                           class="table table-striped snipe-table"
-                          data-url="{{route('api.components.index', ['location_id' => $location->id])}}"
+                          data-url="{{route('api.components.index', ['location_id' => $location->id, 'include_child_locations' => e(Input::get('include_child_locations'))])}}"
                           data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-components-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+
+                  </table>
+              </div><!-- /.table-responsive -->
+          </div><!-- /.box-body -->
+      </div> <!--/.box-->
+
+
+      <div class="box box-default">
+          <div class="box-header with-border">
+              <div class="box-heading">
+                  <h3 class="box-title">{{ trans('general.locations') }}</h3>
+              </div>
+          </div>
+          <div class="box-body">
+              <div class="table table-responsive">
+
+                  <table
+                          data-columns="{{ \App\Presenters\LocationPresenter::dataTableLayout() }}"
+                          data-cookie-id-table="locationsTable"
+                          data-pagination="true"
+                          data-id-table="locationsTable"
+                          data-search="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          id="locationsTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{route('api.locations.index', ['parent_id' => $location->id, 'include_child_locations' => e(Input::get('include_child_locations'))])}}"
+                          data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-locations-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
 
@@ -145,9 +178,20 @@
               <li>{{ trans('admin/users/table.manager') }}: {!! $location->manager->present()->nameUrl() !!}</li>
             @endif
             @if (($location->parent))
-              <li>{{ trans('admin/locations/table.parent') }}: {!! $location->parent->present()->nameUrl() !!}</li>
+              @if (Input::get('include_child_locations'))
+                <li>{{ trans('admin/locations/table.parent') }}: <a href="{{ route('locations.show', ['location' => $location->parent->id, 'include_child_locations' => Input::get('include_child_locations')]) }}">{{ $location->parent->name }}</a></li>
+              @else
+                <li>{{ trans('admin/locations/table.parent') }}: {!! $location->parent->present()->nameUrl() !!}</li>
+              @endif
             @endif
         </ul>
+      <div class="col-md-12 text-center">
+        @if (Input::get('include_child_locations'))
+          <a href="{{ route('locations.show', ['location' => $location->id]) }}" class="btn btn-sm btn-danger">{{ trans('admin/locations/message.exclude_child_locations') }}</a>
+        @else
+          <a href="{{ route('locations.show', ['location' => $location->id, 'include_child_locations' => 'true']) }}" class="btn btn-sm btn-success">{{ trans('admin/locations/message.include_child_locations') }} </a>
+        @endif
+      </div>
 
         @if (($location->state!='') && ($location->country!='') && (config('services.google.maps_api_key')))
           <div class="col-md-12 text-center">
