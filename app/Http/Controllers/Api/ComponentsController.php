@@ -40,7 +40,12 @@ class ComponentsController extends Controller
         }
 
         if ($request->filled('location_id')) {
-            $components->where('location_id','=',$request->input('location_id'));
+            if ($request->filled('include_child_locations') && ($request->input('include_child_locations')=='true')) {
+                $components = $components->whereIn('location_id', Helper::getLocationIdsRecursive($request->input('location_id')));
+            }
+            else {
+                $components->where('location_id','=',$request->input('location_id'));
+            }
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which

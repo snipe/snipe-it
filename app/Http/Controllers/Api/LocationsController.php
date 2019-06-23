@@ -51,6 +51,16 @@ class LocationsController extends Controller
             $locations = $locations->TextSearch($request->input('search'));
         }
 
+        if ($request->filled('parent_id')) {
+            if ($request->filled('include_child_locations') && ($request->input('include_child_locations')=='true')) {
+            	  $locationIds = Helper::getLocationIdsRecursive($request->input('parent_id'));
+                $locations = $locations->whereIn('id', array_splice($locationIds, 1));
+            }
+            else {
+                $locations = $locations->where('parent_id', '=', $request->input('parent_id'));
+            }
+        }
+
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.

@@ -269,6 +269,32 @@ class Helper
         }
         return $randomString;
     }
+    
+    
+    /**
+     * Returns the location id's starting with the specified location id and
+     * continuing with the location id's of it's children, grand-children, ...
+     *
+     * @param location_id The id of the location to start with.
+     * @author [S. Lietaer] [<steven@lietaer.be>]
+     * @return Array
+     * @remarks This is a recursive method that can only be recursively called
+     * 256 times (PHP limitation).
+     */
+    public static function getLocationIdsRecursive($location_id)
+    {
+        $result = [];
+        
+        array_push($result, $location_id);
+        
+        $child_location_ids = Location::where('parent_id', $location_id)->pluck('id');
+        
+        foreach ($child_location_ids as $child_location_id) {
+        	$result = array_merge($result, Helper::getLocationIdsRecursive($child_location_id));
+        }
+        
+        return $result;
+    }
 
 
     /**
