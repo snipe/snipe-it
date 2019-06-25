@@ -42,8 +42,8 @@ NOTE: make sure you put the domain on the line of code
  sudo git clone https://github.com/letsencrypt/letsencrypt
  cd /usr/local/letsencrypt
  sudo ./letsencrypt-auto --apache -d your_domain.tld
- ////////NOTE: make sure you put the domain on the line of code /////////////
- /// Multuple domain //////////
+ ******NOTE: make sure you put the domain on the line of code********
+ *********** Multuple domain *************
  sudo ./letsencrypt-auto --apache -d your_domain.tld  -d www. your_domain.tld
  sudo ls /etc/letsencrypt/live
 Finally, to verify the status of your SSL Certificate visit the following link. Replace the domain name accordingly.
