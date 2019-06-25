@@ -29,3 +29,22 @@ sudo systemctl restart apache2
 3)COPY PASSWORD FROM OLD .ENV FILE
 4) GO TO PHP MY ADMIN USERS TO FIND LOGING DETAILS ( PHPMYADMIN LOGING USER:SAMMY, PW: PASSWORD)
 5)ENJOY
+
+////////////////FREE SSL SERTIFICATE INSTALL ON APACHE/////////
+
+https://www.tecmint.com/install-free-lets-encrypt-ssl-certificate-for-apache-on-debian-and-ubuntu/
+NOTE: make sure you put the domain on the line of code
+
+ sudo a2enmod ssl
+ sudo a2ensite default-ssl.conf
+ sudo service apache2 restart
+ cd /usr/local
+ sudo git clone https://github.com/letsencrypt/letsencrypt
+ cd /usr/local/letsencrypt
+ sudo ./letsencrypt-auto --apache -d your_domain.tld
+ ////////NOTE: make sure you put the domain on the line of code /////////////
+ /// Multuple domain //////////
+ sudo ./letsencrypt-auto --apache -d your_domain.tld  -d www. your_domain.tld
+ sudo ls /etc/letsencrypt/live
+Finally, to verify the status of your SSL Certificate visit the following link. Replace the domain name accordingly.
+https://www.ssllabs.com/ssltest/analyze.html?d=your_domain.tld&latest
