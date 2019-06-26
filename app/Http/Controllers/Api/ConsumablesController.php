@@ -43,6 +43,15 @@ class ConsumablesController extends Controller
             $consumables->where('manufacturer_id','=',$request->input('manufacturer_id'));
         }
 
+        if ($request->filled('location_id')) {
+            if ($request->filled('include_child_locations') && ($request->input('include_child_locations')=='true')) {
+                $consumables = $consumables->whereIn('location_id', Helper::getLocationIdsRecursive($request->input('location_id')));
+            }
+            else {
+                $consumables = $consumables->where('location_id', '=', $request->input('location_id'));
+            }
+        }
+
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.

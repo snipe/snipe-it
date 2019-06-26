@@ -49,14 +49,17 @@ class AccessoriesController extends Controller
             $accessories->where('supplier_id','=',$request->input('supplier_id'));
         }
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($accessories) && ($request->get('offset') > $accessories->count())) ? $accessories->count() : $request->get('offset', 0);
+        if ($request->filled('location_id')) {
+            if ($request->filled('include_child_locations') && ($request->input('include_child_locations')=='true')) {
+                $accessories = $accessories->whereIn('location_id', Helper::getLocationIdsRecursive($request->input('location_id')));
+            }
+            else {
+                $accessories = $accessories->where('location_id', '=', $request->input('location_id'));
+            }
+        }
 
-        // Check to make sure the limit is not higher than the max allowed
-        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
-
-
+        $offset = (($accessories) && (request('offset') > $accessories->count())) ? 0 : request('offset', 0);
+        $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
 

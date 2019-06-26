@@ -36,6 +36,24 @@
         </li>
 
         <li>
+          <a href="#accessories_tab" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="fa fa-keyboard-o"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#consumables_tab" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="fa fa-tint"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>
+          </a>
+        </li>
+
+        <li>
           <a href="#components_tab" data-toggle="tab">
             <span class="hidden-lg hidden-md">
               <i class="fa fa-hdd-o"></i>
@@ -167,13 +185,59 @@
               </div><!-- /.table-responsive -->
         </div><!-- /asset_tab -->
 
-      <div class="box box-default">
-          <div class="box-header with-border">
-              <div class="box-heading">
-                  <h2 class="box-title">{{ trans('general.components') }}</h2>
-              </div>
-          </div>
-          <div class="box-body">
+        <div class="tab-pane" id="accessories_tab">
+              <div class="table table-responsive">
+
+                  <table
+                          data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
+                          data-cookie-id-table="accessoriesTable"
+                          data-pagination="true"
+                          data-id-table="accessoriesTable"
+                          data-search="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          id="accessoriesTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{route('api.accessories.index', ['location_id' => $location->id, 'include_child_locations' => e(Input::get('include_child_locations'))])}}"
+                          data-export-options='{
+                              "fileName": "export-accessories-{{ str_slug($location->name) }}-accessories-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+
+                  </table>
+              </div><!-- /.table-responsive -->
+        </div><!-- /accessories_tab -->
+
+        <div class="tab-pane" id="consumables_tab">
+              <div class="table table-responsive">
+
+                  <table
+                          data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
+                          data-cookie-id-table="consumablesTable"
+                          data-pagination="true"
+                          data-id-table="consumablesTable"
+                          data-search="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          id="consumablesTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{route('api.consumables.index', ['location_id' => $location->id, 'include_child_locations' => e(Input::get('include_child_locations'))])}}"
+                          data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-consumables-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+
+                  </table>
+              </div><!-- /.table-responsive -->
+        </div><!-- /consumables_tab -->
+
+        <div class="tab-pane" id="components_tab">
               <div class="table table-responsive">
 
                   <table
