@@ -46,6 +46,15 @@ class AccessoriesController extends Controller
             $accessories->where('supplier_id','=',$request->input('supplier_id'));
         }
 
+        if ($request->filled('location_id')) {
+            if ($request->filled('include_child_locations') && ($request->input('include_child_locations')=='true')) {
+                $accessories = $accessories->whereIn('location_id', Helper::getLocationIdsRecursive($request->input('location_id')));
+            }
+            else {
+                $accessories = $accessories->where('location_id', '=', $request->input('location_id'));
+            }
+        }
+
         $offset = (($accessories) && (request('offset') > $accessories->count())) ? 0 : request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
