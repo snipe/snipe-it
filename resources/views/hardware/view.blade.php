@@ -282,6 +282,8 @@
                             @else
                               @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                 <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
+                              @elseif (($field->format=='NUMERIC') && ($asset->{$field->db_column_name()}!='') && ($field->name== 'Ticket'))
+                                <a href="{{ 'https://serviceit.uconn.edu/MRcgi/MRlogin.pl?DL='.$asset->{$field->db_column_name()}.'DA31' }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
                               @else
                                 {!! nl2br(e($asset->{$field->db_column_name()})) !!}
                               @endif
