@@ -31,7 +31,7 @@
     "pragmarx/google2fa": "^5.0",
     "pragmarx/google2fa-laravel": "^1.0",
     "predis/predis": "^1.1",
-    "rollbar/rollbar-laravel": "^4.0",
+    "rollbar/rollbar-laravel": "2.*",
     "schuppo/password-strength": "~1.5",
     "spatie/laravel-backup": "^5.12",
     "tecnickcom/tc-lib-barcode": "^1.15",
