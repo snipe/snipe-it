@@ -48,3 +48,6 @@ NOTE: make sure you put the domain on the line of code
  sudo ls /etc/letsencrypt/live
 Finally, to verify the status of your SSL Certificate visit the following link. Replace the domain name accordingly.
 https://www.ssllabs.com/ssltest/analyze.html?d=your_domain.tld&latest
+
+****Redirect DNS*****
+Point A to DNS in other server, add the domain to the other server on the A record
