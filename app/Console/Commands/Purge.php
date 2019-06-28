@@ -33,7 +33,7 @@ class Purge extends Command
      *
      * @var string
      */
-    protected $description = 'Purge all soft-deleted deleted records in the database. This will rewrite history for items that have been edited, or checked in or out. It will also reqrite history for users associated with deleted items.';
+    protected $description = 'Purge all soft-deleted deleted records in the database. This will rewrite history for items that have been edited, or checked in or out. It will also rewrite history for users associated with deleted items.';
 
     /**
      * Create a new command instance.
