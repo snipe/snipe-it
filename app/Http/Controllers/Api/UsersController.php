@@ -269,7 +269,7 @@ class UsersController extends Controller
             // Check if the request has groups passed and has a value
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
-            // The groups value has been passed but it is null, so we should blank it out
+            // The groups field has been passed but it is null, so we should blank it out
             } elseif ($request->has('groups'))  {
                 $user->groups()->sync(array());
             }
