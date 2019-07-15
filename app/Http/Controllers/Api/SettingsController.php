@@ -38,7 +38,7 @@ class SettingsController extends Controller
                 //return response()->json(['message' => $e->getMessage()], 500);
             }
         } catch (\Exception $e) {
-            \Log::debug('Connection failed');
+            \Log::debug('Connection failed but we cannot debug it any further on our end.');
             return response()->json(['message' => $e->getMessage()], 600);
         }
 
