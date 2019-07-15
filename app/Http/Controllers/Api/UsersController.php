@@ -260,11 +260,20 @@ class UsersController extends Controller
 
         if ($user->save()) {
 
+            // Sync group memberships:
+            // This was changed in Snipe-IT v4.6.x to 4.7, since we upgraded to Laravel 5.5
+            // which changes the behavior of has vs filled.
+            // The $request->has method will now return true even if the input value is an empty string or null.
+            // A new $request->filled method has was added that provides the previous behavior of the has method.
+
+            // Check if the request has groups passed and has a value
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
-            } else {
+            // The groups value has been passed but it is null, so we should blank it out
+            } elseif ($request->has('groups'))  {
                 $user->groups()->sync(array());
             }
+
 
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
         }
