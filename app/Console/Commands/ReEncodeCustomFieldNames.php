@@ -35,8 +35,8 @@ class ReEncodeCustomFieldNames extends Command
      * All three of these things must match for the custom fields system to work as expected:
      *
      * - what the system thinks the output of $field->convertUnicodeDbSlug() is
-     * - what the actual db_column_name is in the customfields table is
-     * - what the physical column that was created on the assets table is called
+     * - the actual db_column name in the customfields table
+     * - the physical column name that was created on the assets table
      *
      * For some people who upgraded their version of PHP, the unicode converter now behaves
      * differently in than it did when their custom fields were first created, specifically as it
