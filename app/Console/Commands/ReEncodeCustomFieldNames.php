@@ -95,14 +95,18 @@ class ReEncodeCustomFieldNames extends Command
                         /** Make sure the custom_field_columns array has the ID */
                         if (array_key_exists($field->id, $custom_field_columns)) {
 
-                            /** Update the asset schema to the corrected fieldname that will be recognized by the
-                             *  system elsewhwre that we use $field->convertUnicodeDbSlug()
+                            /**
+                             * Update the asset schema to the corrected fieldname that will be recognized by the
+                             *  system elsewhere that we use $field->convertUnicodeDbSlug()
                              */
                             \Schema::table('assets', function($table) use ($custom_field_columns, $field) {
                                 $table->renameColumn($custom_field_columns[$field->id], $field->convertUnicodeDbSlug());
                             });
 
                             $this->warn('-- ✓ Field updated from '.$custom_field_columns[$field->id].' to '.$field->convertUnicodeDbSlug());
+
+                        } else {
+                            $this->warn('-- X WARNING: There is no field on the assets table ending in  '.$field->id.'. This may require more in-depth investigation and may mean the schema was altered manually.');
                         }
                 }
 
