@@ -78,7 +78,7 @@ class ReEncodeCustomFieldNames extends Command
 
             foreach ($fields as $field) {
 
-                $this->info($field->name .' ('.$field->id.') column should be '. $field->convertUnicodeDbSlug());
+                $this->info($field->name .' ('.$field->id.') column should be '. $field->convertUnicodeDbSlug().'');
 
                 /** The assets table has the column it should have, all is well */
                 if (\Schema::hasColumn('assets', $field->convertUnicodeDbSlug()))
@@ -105,6 +105,12 @@ class ReEncodeCustomFieldNames extends Command
                             $this->warn('-- ✓ Field updated from '.$custom_field_columns[$field->id].' to '.$field->convertUnicodeDbSlug());
                         }
                 }
+
+                /** Update the db_column property in the custom fields table, just in case it doesn't match the other
+                 * things.
+                 */
+                $field->db_column = $field->convertUnicodeDbSlug();
+                $field->save();
 
 
             }
