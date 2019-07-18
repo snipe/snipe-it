@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\AssetModel;
 use Session;
-
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 use Illuminate\Contracts\Validation\Validator;
 
@@ -32,7 +32,7 @@ class AssetRequest extends Request
             'model_id'        => 'required|integer|exists:models,id',
             'status_id'       => 'required|integer|exists:status_labels,id',
             'company_id'      => 'integer|nullable',
-            'warranty_months' => 'numeric|nullable',
+            'warranty_months' => 'numeric|nullable|digits_between:0,240',
             'physical'        => 'integer|nullable',
             'checkout_date'   => 'date',
             'checkin_date'    => 'date',
@@ -48,7 +48,7 @@ class AssetRequest extends Request
 
         $rules['asset_tag'] = ($settings->auto_increment_assets == '1') ? 'max:255' : 'required';
 
-        if($this->request->get('model_id') != '') {
+        if ($this->request->get('model_id') != '') {
             $model = AssetModel::find($this->request->get('model_id'));
 
             if (($model) && ($model->fieldset)) {
@@ -60,13 +60,6 @@ class AssetRequest extends Request
 
     }
 
-    public function response(array $errors)
-    {
-        $this->session()->flash('errors', Session::get('errors', new \Illuminate\Support\ViewErrorBag)
-            ->put('default', new \Illuminate\Support\MessageBag($errors)));
-        \Input::flash();
-        return parent::response($errors);
-    }
 
     /**
      * Handle a failed validation attempt.
@@ -76,13 +69,17 @@ class AssetRequest extends Request
      * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @return void
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Illuminate\Http\Exceptions\HttpResponseException
      */
     protected function failedValidation(Validator $validator)
     {
-        return response()->json([
-                'message' => 'The given data is invalid',
-                'errors' => $validator->errors()
-        ], 422);
+        $this->session()->flash('errors', Session::get('errors', new \Illuminate\Support\ViewErrorBag)
+            ->put('default', new \Illuminate\Support\MessageBag($validator->errors()->toArray())));
+        \Input::flash();
+        throw new HttpResponseException(response()->json([
+            'status' => 'error',
+            'messages' => $validator->errors(),
+            'payload' => null
+        ], 422));
     }
 }

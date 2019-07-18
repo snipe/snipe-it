@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use App\Models\Setting;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
-class SaveUserRequest extends Request
+class SaveUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -62,4 +64,5 @@ class SaveUserRequest extends Request
         return $rules;
 
     }
+
 }
