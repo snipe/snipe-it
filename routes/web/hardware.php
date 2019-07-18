@@ -31,12 +31,12 @@ Route::group(
 
         Route::get('audit/due', [
             'as' => 'assets.audit.due',
-            'uses' => 'AssetsController@dueForAudit'
+            'uses' => 'Assets\AssetsController@dueForAudit'
         ]);
 
         Route::get('audit/overdue', [
             'as' => 'assets.audit.overdue',
-            'uses' => 'AssetsController@overdueForAudit'
+            'uses' => 'Assets\AssetsController@overdueForAudit'
         ]);
 
         Route::get('audit/{id}', [
