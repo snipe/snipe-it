@@ -340,10 +340,11 @@
                 </tr>
               </thead>
               <tbody>
+              @if ($user->assets)
                 @foreach ($user->assets as $asset)
                 <tr>
                   <td>
-                    @if ($asset->physical=='1')
+                    @if (($asset->model) && ($asset->physical=='1'))
                       <a href="{{ route('models.show', $asset->model->id) }}">{{ $asset->model->name }}</a>
                     @endif
                   </td>
@@ -360,6 +361,7 @@
                   </td>
                 </tr>
                 @endforeach
+                @endif
               </tbody>
             </table>
           </div>
