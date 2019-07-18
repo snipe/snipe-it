@@ -73,7 +73,6 @@ class AssetRequest extends Request
      */
     protected function failedValidation(Validator $validator)
     {
-        \Log::debug('failed form validation');
         $this->session()->flash('errors', Session::get('errors', new \Illuminate\Support\ViewErrorBag)
             ->put('default', new \Illuminate\Support\MessageBag($validator->errors()->toArray())));
         \Input::flash();
