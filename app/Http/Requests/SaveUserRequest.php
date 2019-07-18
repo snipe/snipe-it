@@ -35,7 +35,6 @@ class SaveUserRequest extends FormRequest
             // Brand new user
             case 'POST':
             {
-                \Log::debug('New user');
                 $rules['first_name'] = 'required|string|min:1';
                 $rules['username'] = 'required_unless:ldap_import,1|string|min:1';
                 if ($this->request->get('ldap_import') == false)
@@ -61,8 +60,7 @@ class SaveUserRequest extends FormRequest
 
             default:break;
         }
-
-        \Log::debug($rules);
+        
         return $rules;
 
     }
