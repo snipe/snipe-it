@@ -32,7 +32,7 @@ class AssetRequest extends Request
             'model_id'        => 'required|integer|exists:models,id',
             'status_id'       => 'required|integer|exists:status_labels,id',
             'company_id'      => 'integer|nullable',
-            'warranty_months' => 'numeric|nullable|max:240',
+            'warranty_months' => 'numeric|nullable|digits_between:0,240',
             'physical'        => 'integer|nullable',
             'checkout_date'   => 'date',
             'checkin_date'    => 'date',
@@ -55,7 +55,7 @@ class AssetRequest extends Request
                 $rules += $model->fieldset->validation_rules();
             }
         }
-        
+
         return $rules;
 
     }
@@ -73,7 +73,7 @@ class AssetRequest extends Request
      */
     protected function failedValidation(Validator $validator)
     {
-
+        \Log::debug('failed form validation');
         $this->session()->flash('errors', Session::get('errors', new \Illuminate\Support\ViewErrorBag)
             ->put('default', new \Illuminate\Support\MessageBag($validator->errors()->toArray())));
         \Input::flash();
