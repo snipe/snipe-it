@@ -65,22 +65,4 @@ class SaveUserRequest extends FormRequest
 
     }
 
-//    /**
-//     * Handle a failed validation attempt.
-//     *
-//     * public function json($data = [], $status = 200, array $headers = [], $options = 0)
-//     *
-//     * @param  \Illuminate\Contracts\Validation\Validator  $validator
-//     * @return void
-//     *
-//     * @throws \Illuminate\Http\Exceptions\HttpResponseException
-//     */
-//    protected function failedValidation(Validator $validator)
-//    {
-//
-//        throw new HttpResponseException(response()->json([
-//            'message' => 'The given data is invalid',
-//            'errors' => $validator->errors()
-//        ], 422));
-//    }
 }
