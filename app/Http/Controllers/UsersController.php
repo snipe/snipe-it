@@ -340,25 +340,25 @@ class UsersController extends Controller
             // Check if we are not trying to delete ourselves
             if ($user->id === Auth::user()->id) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
+                return redirect()->route('users.index')->with('error', 'You cannot delete yourself.');
             }
 
-            if ($user->assets->count() > 0) {
+            if (($user->assets) && ($user->assets->count() > 0)) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->assets->count()) . ' assets associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets->count() . ' assets associated with them. Use the Checkin and Delete button on the user profile to check these items back in and delete this user.');
             }
 
-            if ($user->licenses()->count() > 0) {
+            if (($user->licenses) && ($user->licenses->count() > 0)) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->licenses->count() . ' license(s associated with them. Use the Checkin and Delete button on the user profile to check these items back in and delete this user.');
             }
 
-            if ($user->accessories()->count() > 0) {
+            if (($user->accessories) && ($user->accessories->count() > 0)) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->accessories()->count() . ' accessories associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->accessories->count() . ' accessories associated with them. Use the Checkin and Delete button on the user profile to check these items back in and delete this user.');
             }
 
-            if ($user->managedLocations()->count() > 0) {
+            if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')->with('error', 'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.');
             }
