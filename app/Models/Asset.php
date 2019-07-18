@@ -1068,8 +1068,14 @@ class Asset extends Depreciable
 
     public function scopeDueOrOverdueForAudit($query, $settings)
     {
+        if(is_null($settings->audit_warning_days)){
+            $days_left = 0;
+        } else {
+            $days_left = $settings->audit_warning_days;
+        }
+
         return $query->whereNotNull('assets.next_audit_date')
-            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $settings->audit_warning_days DAY) <= '".Carbon::now()."'")
+            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $days_left DAY) <= '".Carbon::now()."'")
             ->where('assets.archived', '=', 0)
             ->NotArchived();
     }
