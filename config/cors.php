@@ -2,8 +2,8 @@
 
 /**
  * ---------------------------------------------------------------------
- * THIS IS NOT PART OF THE ORIGINAL CORS PACKAGE. IT IS A MODIFICATION
- * BY SNIPE-IT TO ALLOW ADDING ALLOWED ORIGINS VIA THE ENV.
+ * THIS IS $allowed_origins code IS NOT PART OF THE ORIGINAL CORS PACKAGE.
+ * IT IS A MODIFICATION BY SNIPE-IT TO ALLOW ADDING ALLOWED ORIGINS VIA THE ENV.
  * ---------------------------------------------------------------------
  *
  * Since we don't really want people editing config files (lest they get
@@ -14,11 +14,16 @@
  * after an upgrade from a previous version that didn't include it in the .env.example) or is null,
  * set it to * to allow all. If there is a value, either a single url or a comma-delimited
  * list of urls, explode that out into an array to whitelist just those urls.
- *
  */
 
 $allowed_origins = env('APP_CORS_ALLOWED_ORIGINS') !== null ?
     explode(',', env('APP_CORS_ALLOWED_ORIGINS')) : ['*'];
+
+/**
+ * Original Laravel CORS package config file modifications end here
+ *
+ */
+
 
 return [
 
