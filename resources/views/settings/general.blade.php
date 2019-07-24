@@ -257,6 +257,20 @@
                            </div>
                        </div>
 
+                       <!-- Show assets assigned to user's assets -->
+                       <div class="form-group {{ $errors->has('show_assigned_assets') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                               {{ Form::label('show_assigned_assets',
+                                              trans('admin/settings/general.show_assigned_assets')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::checkbox('show_assigned_assets', '1', Input::old('show_assigned_assets', $setting->show_assigned_assets),array('class' => 'minimal')) }}
+                               {{ trans('general.yes') }}
+                               <p class="help-block">{{ trans('admin/settings/general.show_assigned_assets_help') }}</p>
+                               {!! $errors->first('show_assigned_assets', '<span class="alert-msg">:message</span>') !!}
+                           </div>
+                       </div>
+
                        <!-- Model List prefs -->
                        <div class="form-group {{ $errors->has('show_in_model_list') ? 'error' : '' }}">
                            <div class="col-md-3">
