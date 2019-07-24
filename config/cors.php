@@ -11,7 +11,7 @@
  * installation to modify these values without modifying the code.
  *
  * If APP_CORS_ALLOWED_ORIGINS is not set in the .env or is null (for example if no one added it
- * after amn upgrade from a previous version that didn't include it in the .env.example),
+ * after an upgrade from a previous version that didn't include it in the .env.example),
  * set it to * to allow all. If there is a value, either a single url or a comma-delimited
  * list of urls, explode that out into an array to whitelist just those urls.
  *
