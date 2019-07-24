@@ -42,7 +42,8 @@ class ViewAssetsController extends Controller
         $userlog = $user->userlog->load('item', 'user', 'target');
 
         if (isset($user->id)) {
-            return view('account/view-assets', compact('user', 'userlog'));
+            return view('account/view-assets', compact('user', 'userlog'))
+                ->with('settings', Setting::getSettings());
         }
         // Redirect to the user management page
         return redirect()->route('users.index')

@@ -87,6 +87,28 @@
                 {{ $asset->last_checkout }}</td>
             <td><img height="20%" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}"></img></td>
         </tr>
+            @if($settings->show_assigned_assets)
+                @php
+                    $assignedCounter = 1;
+                @endphp
+                @foreach ($asset->assignedAssets as $asset)
+
+                    <tr>
+                        <td>{{ $counter }}.{{ $assignedCounter }}</td>
+                        <td>{{ $asset->asset_tag }}</td>
+                        <td>{{ $asset->name }}</td>
+                        <td>{{ $asset->model->category->name }}</td>
+                        <td>{{ $asset->model->name }}</td>
+                        <td>{{ $asset->serial }}</td>
+                        <td>
+                            {{ $asset->last_checkout }}</td>
+                        <td><img height="20%" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}"></img></td>
+                    </tr>
+                    @php
+                        $assignedCounter++
+                    @endphp
+                @endforeach
+            @endif
             @php
                 $counter++
             @endphp
