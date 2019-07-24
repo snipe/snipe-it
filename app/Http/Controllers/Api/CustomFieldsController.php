@@ -24,7 +24,7 @@ class CustomFieldsController extends Controller
 
     public function index()
     {
-        $this->authorize('index', CustomFields::class);
+        $this->authorize('index', CustomField::class);
         $fields = CustomField::get();
         return (new CustomFieldsTransformer)->transformCustomFields($fields, $fields->count());
     }
@@ -38,7 +38,7 @@ class CustomFieldsController extends Controller
     */
     public function show($id)
     {
-      $this->authorize('show', CustomField::class);
+      $this->authorize('view', CustomField::class);
         if ($field = CustomField::find($id)) {
             return (new CustomFieldsTransformer)->transformCustomField($field);
         }

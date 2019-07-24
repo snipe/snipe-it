@@ -58,7 +58,7 @@ class CustomFieldsetsController extends Controller
     */
     public function show($id)
     {
-      $this->authorize('show', CustomFieldset::class);
+      $this->authorize('view', CustomFieldset::class);
         if ($fieldset = CustomFieldset::find($id)) {
             return (new CustomFieldsetsTransformer)->transformCustomFieldset($fieldset);
         }
