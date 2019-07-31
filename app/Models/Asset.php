@@ -1167,6 +1167,28 @@ class Asset extends Depreciable
                 }
             }
 
+            /**
+             * THIS CLUNKY BIT IS VERY IMPORTANT
+             *
+             * Although inelegant, this section matters a lot when querying against fields that do not
+             * exist on the asset table. There's probably a better way to do this moving forward, for
+             * example using the Schema:: methods to determine whether or not a column actually exists,
+             * or even just using the $searchableRelations variable earlier in this file.
+             *
+             * In short, this set of statements tells the query builder to ONLY query against an
+             * actual field that's being passed if it doesn't meet known relational fields. This
+             * allows us to query custom fields directly in the assetsv table
+             * (regardless of their name) and *skip* any fields that we already know can only be
+             * searched through relational searches that we do earlier in this method.
+             *
+             * For example, we do not store "location" as a field on the assets table, we store
+             * that relationship through location_id on the assets table, therefore querying
+             * assets.location would fail, as that field doesn't exist -- plus we're already searching
+             * against those relationships earlier in this method.
+             *
+             * - snipe 
+             *
+             */
             if (($fieldname!='category') && ($fieldname!='model_number') && ($fieldname!='rtd_location') && ($fieldname!='location') && ($fieldname!='supplier')
                 && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
                     $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
