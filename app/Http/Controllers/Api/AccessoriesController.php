@@ -8,7 +8,10 @@ use App\Helpers\Helper;
 use App\Models\Accessory;
 use App\Http\Transformers\AccessoriesTransformer;
 use App\Models\Company;
-
+use App\Models\User;
+use Carbon\Carbon;
+use Auth;
+use DB;
 
 class AccessoriesController extends Controller
 {
@@ -191,4 +194,94 @@ class AccessoriesController extends Controller
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.delete.success')));
 
     }
+
+
+    /**
+     * Save the Accessory checkout information.
+     *
+     * If Slack is enabled and/or asset acceptance is enabled, it will also
+     * trigger a Slack message and send an email.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int  $accessoryId
+     * @return Redirect
+     */
+    public function checkout(Request $request, $accessoryId)
+    {
+        // Check if the accessory exists
+        if (is_null($accessory = Accessory::find($accessoryId))) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.does_not_exist')));
+        }
+
+        $this->authorize('checkout', $accessory);
+
+
+        if ($accessory->numRemaining() > 0) {
+
+            if (!$user = User::find($request->input('assigned_to'))) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.checkout.user_does_not_exist')));
+            }
+
+            // Update the accessory data
+            $accessory->assigned_to = $request->input('assigned_to');
+
+            $accessory->users()->attach($accessory->id, [
+                'accessory_id' => $accessory->id,
+                'created_at' => Carbon::now(),
+                'user_id' => Auth::id(),
+                'assigned_to' => $request->get('assigned_to')
+            ]);
+
+            $accessory->logCheckout($request->input('note'), $user);
+
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkout.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'No accessories remaining'));
+
+    }
+
+    /**
+     * Check in the item so that it can be checked out again to someone else
+     *
+     * @uses Accessory::checkin_email() to determine if an email can and should be sent
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param Request $request
+     * @param integer $accessoryUserId
+     * @param string $backto
+     * @return Redirect
+     * @internal param int $accessoryId
+     */
+    public function checkin(Request $request, $accessoryUserId = null)
+    {
+        if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.does_not_exist')));
+        }
+
+        $accessory = Accessory::find($accessory_user->accessory_id);
+        $this->authorize('checkin', $accessory);
+
+        $logaction = $accessory->logCheckin(User::find($accessoryUserId), $request->input('note'));
+
+        // Was the accessory updated?
+        if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
+            if (!is_null($accessory_user->assigned_to)) {
+                $user = User::find($accessory_user->assigned_to);
+            }
+
+            $data['log_id'] = $logaction->id;
+            $data['first_name'] = $user->first_name;
+            $data['last_name'] = $user->last_name;
+            $data['item_name'] = $accessory->name;
+            $data['checkin_date'] = $logaction->created_at;
+            $data['item_tag'] = '';
+            $data['note'] = $logaction->note;
+
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkin.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.checkin.error')));
+
+    }
+
 }
