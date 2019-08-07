@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Crypt;
 use App\Models\Asset;
 use App\Models\Setting;
 use \Illuminate\Encryption\Encrypter;
-use Illuminate\Foundation\Console\KeyGenerateCommand;
 
 class RotateAppKey extends Command
 {
@@ -48,7 +47,8 @@ class RotateAppKey extends Command
 
 
 
-            // Get the existing app_key
+            // Get the existing app_key and ciphers
+            // We put them in a variable since we clear the cache partway through here.
             $old_app_key = config('app.key');
             $cipher = config('app.cipher');
 
@@ -66,8 +66,9 @@ class RotateAppKey extends Command
 
             $this->writeNewEnvironmentFileWith($new_app_key);
 
-            // Create a new encrypter instance so we can encrypt using the newly created key
-            //$oldEncrypter = new Encrypter(base64_decode(substr($old_app_key, 7)), $cipher);
+            // Manually create an old encrypter instance using the old app key
+            // and also create a new encrypter instance so we can re-crypt the field
+            // using the newly generated app key
             $oldEncrypter = new Encrypter(base64_decode(substr($old_app_key, 7)), $cipher);
             $newEncrypter = new Encrypter(base64_decode(substr($new_app_key, 7)), $cipher);
 
@@ -80,11 +81,12 @@ class RotateAppKey extends Command
                 $assets = Asset::whereNotNull($field->db_column)->get();
 
                 foreach ($assets as $asset) {
+
                     $asset->{$field->db_column} = $oldEncrypter->decrypt($asset->{$field->db_column});
-                    $this->line($field->db_column.' : '.$asset->{$field->db_column});
+                    $this->line('DECRYPTED: '. $field->db_column.' : '.$asset->{$field->db_column});
 
                     $asset->{$field->db_column} = $newEncrypter->encrypt($asset->{$field->db_column});
-                    $this->line($field->db_column.' : '.$asset->{$field->db_column});
+                    $this->line('ENCRYPTED: '.$field->db_column.' : '.$asset->{$field->db_column});
                     $asset->save();
 
                 }
