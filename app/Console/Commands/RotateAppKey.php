@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Artisan;
 use App\Models\CustomField;
-use Illuminate\Support\Facades\Crypt;
 use App\Models\Asset;
 use App\Models\Setting;
 use \Illuminate\Encryption\Encrypter;
@@ -76,21 +75,29 @@ class RotateAppKey extends Command
 
 
             foreach ($fields as $field) {
+
                 $assets = Asset::whereNotNull($field->db_column)->get();
 
                 foreach ($assets as $asset) {
 
                     $asset->{$field->db_column} = $oldEncrypter->decrypt($asset->{$field->db_column});
-                    $this->line('DECRYPTED: '. $field->db_column.' : '.$asset->{$field->db_column});
-
+                    $this->line('DECRYPTED: '. $field->db_column);
                     $asset->{$field->db_column} = $newEncrypter->encrypt($asset->{$field->db_column});
-                    $this->line('ENCRYPTED: '.$field->db_column.' : '.$asset->{$field->db_column});
+                    $this->line('ENCRYPTED: '.$field->db_column);
                     $asset->save();
 
                 }
 
             }
 
+            // Handle the LDAP password if one is provided
+            $setting = Setting::first();
+            if ($setting->ldap_pword!='') {
+                $setting->ldap_pword =  $oldEncrypter->decrypt($setting->ldap_pword);
+                $setting->ldap_pword =  $newEncrypter->encrypt($setting->ldap_pword);
+                $setting->save();
+                $this->warn('LDAP password has been re-encrypted.');
+            }
 
 
         } else {
