@@ -55,15 +55,15 @@ class RotateAppKey extends Command
             // Generate a new one
             Artisan::call('key:generate', ['--show' => true]);
             $new_app_key = Artisan::output();
-            // Clear the config cache
-            Artisan::call('config:cache');
 
-            //$new_app_key = substr($new_app_key, 7);
+            // Clear the config cache
+            Artisan::call('config:clear');
 
             $this->warn('Your app cipher is: '.$cipher);
             $this->warn('Your old APP_KEY is: '.$old_app_key);
             $this->warn('Your new APP_KEY is: '.$new_app_key);
 
+            // Write the new app key to the .env file
             $this->writeNewEnvironmentFileWith($new_app_key);
 
             // Manually create an old encrypter instance using the old app key
@@ -71,8 +71,6 @@ class RotateAppKey extends Command
             // using the newly generated app key
             $oldEncrypter = new Encrypter(base64_decode(substr($old_app_key, 7)), $cipher);
             $newEncrypter = new Encrypter(base64_decode(substr($new_app_key, 7)), $cipher);
-
-
 
             $fields = CustomField::where('field_encrypted', '1')->get();
 
