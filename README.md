@@ -61,6 +61,7 @@ Since the release of the JSON REST API, several third-party developers have been
 - [jamf2snipe](https://github.com/ParadoxGuitarist/jamf2snipe) by [@ParadoxGuitarist](https://github.com/ParadoxGuitarist) - Python script to sync assets between a JAMFPro instance and a Snipe-IT instance
 - [Marksman](https://github.com/Scope-IT/marksman) - A Windows agent for Snipe-IT
 - [Snipe-IT plugin for Jira Service Desk (beta)](https://marketplace.atlassian.com/apps/1220379/snipe-it-for-jira-service-desk-beta?hosting=cloud&tab=overview) - for the upcoming Snipe-IT v5 only
+- [Python 3 CSV importer](https://github.com/gastamper/snipeit-csvimporter) - allows importing assets into Snipe-IT based on Item Name rather than Asset Tag.
 
 As these were created by third-parties, Snipe-IT cannot provide support for these project, and you should contact the developers directly if you need assistance. Additionally, Snipe-IT makes no guarantees as to the reliability, accuracy or maintainability of these libraries. Use at your own risk. :) 
 
