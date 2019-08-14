@@ -597,7 +597,9 @@ class AssetsController extends Controller
                 }
                 $batch_counter = count($item[$asset_tag]);
 
-                $item[$asset_tag][$batch_counter]['checkout_date'] = Carbon::parse(Helper::array_smart_fetch($row, "date"))->format('Y-m-d H:i:s');
+                $item[$asset_tag][$batch_counter]['checkout_date'] = Carbon::parse(Helper::array_smart_fetch($row, "checkout date"))->format('Y-m-d H:i:s');
+                $item[$asset_tag][$batch_counter]['checkin_date'] = Carbon::parse(Helper::array_smart_fetch($row, "checkin date"))->format('Y-m-d H:i:s');
+                \Log::debug($item[$asset_tag][$batch_counter]['checkin_date']);
 
                 $item[$asset_tag][$batch_counter]['asset_tag'] = Helper::array_smart_fetch($row, "asset tag");
                 $item[$asset_tag][$batch_counter]['name'] = Helper::array_smart_fetch($row, "name");
@@ -680,9 +682,11 @@ class AssetsController extends Controller
                 // Only do this if a matching user was found
                 if ((array_key_exists('checkedout_to', $asset_batch[$x])) && ($asset_batch[$x]['checkedout_to']!='')) {
                     if (($total_in_batch > 1) && ($x < $total_in_batch) && (array_key_exists($next, $asset_batch))) {
-                        $checkin_date = Carbon::parse($asset_batch[$next]['checkout_date'])->subDay(1)->format('Y-m-d H:i:s');
+                        $checkin_date = Carbon::parse($asset_batch[$next]['checkin_date'])->format('Y-m-d H:i:s');
                         $asset_batch[$x]['real_checkin'] = $checkin_date;
 
+                        \Log::debug($asset_batch[$next]['checkin_date']);
+                        \Log::debug($checkin_date);
                         Actionlog::firstOrCreate(array(
                             'item_id' => $asset_batch[$x]['asset_id'],
                             'item_type' => Asset::class,
