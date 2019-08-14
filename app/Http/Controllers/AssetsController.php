@@ -570,15 +570,17 @@ class AssetsController extends Controller
      */
     public function postImportHistory(Request $request)
     {
+
+        if (!$request->hasFile('user_import_csv')) {
+            return back()->with('error', 'No file provided. Please select a file for import and try again. ');
+        }
+
         if (!ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
         }
 
         $csv = Reader::createFromPath(Input::file('user_import_csv'));
-        $csv->setNewline("\r\n");
-        //get the first row, usually the CSV header
-        //$headers = $csv->fetchOne();
-
+        $csv->setHeaderOffset(0);
         $results = $csv->getRecords();
         $item = array();
         $status = array();
