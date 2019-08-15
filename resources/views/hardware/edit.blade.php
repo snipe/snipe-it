@@ -63,7 +63,7 @@
       @endif
   </div>
 
-  @include ('partials.forms.edit.status')
+  @include ('partials.forms.edit.status', [ 'required' => 'true'])
 
   @if (!$item->id)
       @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true', 'style' => 'display:none;'])
@@ -178,7 +178,7 @@
                         $("#assignto_selector").show();
                         $("#assigned_user").show();
 
-                        $("#selected_status_status").removeClass('text-danger');
+                        $("#selected_status_status").removeClass('alert-msg');
                         $("#selected_status_status").addClass('text-success');
                         $("#selected_status_status").html('<i class="fa fa-check"></i> That status is deployable. This asset can be checked out.');
 
@@ -186,7 +186,7 @@
                     } else {
                         $("#assignto_selector").hide();
                         $("#selected_status_status").removeClass('text-success');
-                        $("#selected_status_status").addClass('text-danger');
+                        $("#selected_status_status").addClass('alert-msg');
                         $("#selected_status_status").html('<i class="fa fa-times"></i> That asset status is not deployable. This asset cannot be checked out. ');
                     }
                 }
