@@ -307,12 +307,18 @@ class ReportsController extends Controller
     public function postCustom(Request $request)
     {
 
+        ini_set('max_execution_time', 12000);
+
+
         \Debugbar::disable();
         $customfields = CustomField::get();
         $response = new StreamedResponse(function () use ($customfields, $request) {
 
+            \Log::debug('Starting streamed response');
+
             // Open output stream
             $handle = fopen('php://output', 'w');
+            stream_set_timeout($handle, 2000);
             
             if ($request->filled('use_bom')) {
                 fprintf($handle, chr(0xEF) . chr(0xBB) . chr(0xBF));
@@ -464,8 +470,12 @@ class ReportsController extends Controller
                 }
             }
 
-
+            $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+            \Log::debug('Starting headers: '.$executionTime);
             fputcsv($handle, $header);
+            $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+            \Log::debug('Added headers: '.$executionTime);
+
 
             $assets = \App\Models\Company::scopeCompanyables(Asset::select('assets.*'))->with(
                 'location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
@@ -520,9 +530,13 @@ class ReportsController extends Controller
                 $assets->whereBetween('assets.expected_checkin', [$request->input('expected_checkin_start'), $request->input('expected_checkin_end')]);
             }
             
-            $assets->orderBy('assets.created_at', 'ASC')->chunk(500, function($assets) use($handle, $customfields, $request) {
+            $assets->orderBy('assets.created_at', 'ASC')->chunk(20, function($assets) use($handle, $customfields, $request) {
 
+                $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+                \Log::debug('Walking results: '.$executionTime);
+                $count = 0;
                 foreach ($assets as $asset) {
+                    $count++;
                     $row = [];
                     
                     if ($request->filled('company')) {
@@ -695,16 +709,23 @@ class ReportsController extends Controller
                         }
                     }
                     fputcsv($handle, $row);
+                    $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+                    \Log::debug('-- Record '.$count.' Asset ID:' .$asset->id. ' in '. $executionTime);
+
                 }
             });
 
             // Close the output stream
             fclose($handle);
+            $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+            \Log::debug('-- SCRIPT COMPLETED IN '. $executionTime);
+
         }, 200, [
             'Content-Type' => 'text/csv',
             'Content-Disposition'
             => 'attachment; filename="custom-assets-report-'.date('Y-m-d-his').'.csv"',
         ]);
+
 
         return $response;
 
