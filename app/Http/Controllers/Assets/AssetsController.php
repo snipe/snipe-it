@@ -119,10 +119,16 @@ class AssetsController extends Controller
             $asset = new Asset();
             $asset->model()->associate(AssetModel::find($request->input('model_id')));
             $asset->name                    = $request->input('name');
+            
             // Check for a corresponding serial
             if (($serials) && (array_key_exists($a, $serials))) {
                 $asset->serial                  = $serials[$a];
             }
+
+            if (($asset_tags) && (array_key_exists($a, $asset_tags))) {
+                $asset->asset_tag                  = $asset_tags[$a];
+            }
+
             $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
             $asset->model_id                = $request->input('model_id');
             $asset->order_number            = $request->input('order_number');
@@ -146,14 +152,12 @@ class AssetsController extends Controller
 
         // Create the image (if one was chosen.)
         if ($request->has('image')) {
-            $image = $request->input('image');
+            $asset = $request->handleImages($asset);
+        }
 
-                $asset = $request->handleImages($asset);
-            }
-
-            // Update custom fields in the database.
-            // Validation for these fields is handled through the AssetRequest form request
-            $model = AssetModel::find($request->get('model_id'));
+        // Update custom fields in the database.
+        // Validation for these fields is handled through the AssetRequest form request
+        $model = AssetModel::find($request->get('model_id'));
 
         if ($model->fieldset) {
             foreach ($model->fieldset->fields as $field) {
