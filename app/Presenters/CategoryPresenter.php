@@ -2,8 +2,6 @@
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-
 /**
  * Class CategoryPresenter
  * @package App\Presenters

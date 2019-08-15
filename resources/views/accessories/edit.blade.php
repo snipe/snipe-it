@@ -1,8 +1,8 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/accessories/general.create') ,
     'updateText' => trans('admin/accessories/general.update'),
-    'helpTitle' => trans('admin/accessories/general.about_accessories_title'),
-    'helpText' => trans('admin/accessories/general.about_accessories_text'),
+    'helpPosition'  => 'right',
+    'helpText' => trans('help.accessories'),
     'formAction' => ($item) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
 ])
 
@@ -24,18 +24,18 @@
 
 
 <!-- Image -->
+
 @if ($item->image)
     <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
         <div class="col-md-5">
             {{ Form::checkbox('image_delete') }}
-            <img src="{{ url('/') }}/uploads/accessories/{{ $item->image }}" />
+            <img src="{{ Storage::disk('public')->url(app('accessories_upload_path').e($item->image)) }}" class="img-responsive" />
             {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
         </div>
     </div>
 @endif
 
 @include ('partials.forms.edit.image-upload')
-
 
 @stop

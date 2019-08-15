@@ -1,16 +1,22 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Gate;
+use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
 
 class CustomFieldset extends Model
 {
+    use ValidatingTrait;
+
     protected $guarded=["id"];
 
-    public $rules=[
-    "name" => "required|unique:custom_fieldsets"
+    /**
+     * Validation rules
+     * @var array
+     */
+    public $rules = [
+        "name" => "required|unique:custom_fieldsets"
     ];
 
     /**
@@ -21,24 +27,52 @@ class CustomFieldset extends Model
      * @var boolean
      */
     protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
-    
 
+
+    /**
+     * Establishes the fieldset -> field relationship
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function fields()
     {
         return $this->belongsToMany('\App\Models\CustomField')->withPivot(["required","order"])->orderBy("pivot_order");
     }
 
+    /**
+     * Establishes the fieldset -> models relationship
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function models()
     {
         return $this->hasMany('\App\Models\AssetModel', "fieldset_id");
     }
 
+    /**
+     * Establishes the fieldset -> admin user relationship
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function user()
     {
         return $this->belongsTo('\App\Models\User'); //WARNING - not all CustomFieldsets have a User!!
     }
 
+    /**
+     * Determine the validation rules we should apply based on the
+     * custom field format
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return array
+     */
     public function validation_rules()
     {
         $rules=[];

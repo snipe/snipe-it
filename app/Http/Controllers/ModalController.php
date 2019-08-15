@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Helpers\Helper;
 
 class ModalController extends Controller
@@ -36,4 +34,19 @@ class ModalController extends Controller
         return view('modals.manufacturer');
     }
 
+    function kitModel() {
+        return view('modals.kit-model');
+    }
+
+    function kitLicense() {
+        return view('modals.kit-license');
+    }
+
+    function kitConsumable() {
+        return view('modals.kit-consumable');
+    }
+
+    function kitAccessory() {
+        return view('modals.kit-accessory');
+    }
 }

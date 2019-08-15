@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Transformers;
 
+use App\Helpers\Helper;
 use App\Models\Actionlog;
 use App\Models\Setting;
-use Gate;
 use Illuminate\Database\Eloquent\Collection;
-use App\Helpers\Helper;
 
 class ActionlogsTransformer
 {
@@ -38,7 +37,7 @@ class ActionlogsTransformer
         }
 
 
-        $array = [
+            $array = [
             'id'          => (int) $actionlog->id,
             'icon'          => $icon,
             'file' => ($actionlog->filename!='') ?
@@ -75,9 +74,9 @@ class ActionlogsTransformer
             ] : null,
 
             'note'          => ($actionlog->note) ? e($actionlog->note): null,
-            'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
+            'signature_file'   => ($actionlog->signature_filename) ? route('log.signature.view', ['filename' => $actionlog->signature_filename ]) : null,
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
-
+            'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): null,
 
         ];
 

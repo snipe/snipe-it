@@ -2,8 +2,6 @@
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-
 /**
  * Class AssetModelPresenter
  * @package App\Presenters
@@ -46,6 +44,14 @@ class AssetMaintenancesPresenter extends Presenter
                 "title" => trans('admin/hardware/table.asset_tag'),
                 "formatter" => "assetTagLinkFormatter"
             ], [
+                "field" => "model",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/hardware/form.model'),
+                "visible" => false,
+                "formatter" => "modelsLinkObjFormatter"
+            ],[
                 "field" => "supplier",
                 "searchable" => true,
                 "sortable" => true,

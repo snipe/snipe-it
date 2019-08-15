@@ -1,25 +1,16 @@
 <?php
 namespace App\Helpers;
 
-use DB;
-use App\Models\Statuslabel;
-use App\Models\Location;
-use App\Models\Department;
-use App\Models\AssetModel;
-use App\Models\Company;
-use App\Models\User;
-use App\Models\Manufacturer;
-use App\Models\Supplier;
-use App\Models\Category;
-use App\Models\Depreciation;
-use App\Models\CustomFieldset;
-use App\Models\CustomField;
-use App\Models\Component;
 use App\Models\Accessory;
+use App\Models\Component;
 use App\Models\Consumable;
-use App\Models\Asset;
+use App\Models\CustomField;
+use App\Models\CustomFieldset;
+use App\Models\Depreciation;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use Crypt;
+use Image;
 use Illuminate\Contracts\Encryption\DecryptException;
 
 class Helper
@@ -225,8 +216,9 @@ class Helper
      */
     public static function predefined_formats()
     {
-        $keys = array_keys(CustomField::$PredefinedFormats);
+        $keys = array_keys(CustomField::PREDEFINED_FORMATS);
         $stuff = array_combine($keys, $keys);
+
         return $stuff;
     }
 
@@ -669,7 +661,80 @@ class Helper
         return false;
     }
 
+    /**
+     * Generate a random encrypted password.
+     *
+     * @author Wes Hulette <jwhulette@gmail.com>
+     *
+     * @since 5.0.0
+     *
+     * @return string
+     */
+    public static function generateEncyrptedPassword(): string
+    {
+        return bcrypt(Helper::generateUnencryptedPassword());
+    }
 
+    /**
+     * Get a random unencrypted password.
+     *
+     * @author Steffen Buehl <sb@sbuehl.com>
+     *
+     * @since 5.0.0
+     *
+     * @return string
+     */
+    public static function generateUnencryptedPassword(): string
+    {
+        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+        $password = '';
+        for ( $i = 0; $i < 20; $i++ ) {
+            $password .= substr( $chars, random_int( 0, strlen( $chars ) - 1 ), 1 );
+        }
+        return $password;
+    }
+
+    /**
+     * Process base64 encoded image data and save it on supplied path
+     *
+     * @param string $image_data base64 encoded image data with mime type
+     * @param string $save_path path to a folder where the image should be saved
+     * @return string path to uploaded image or false if something went wrong
+     */
+    public static function processUploadedImage(String $image_data, String $save_path) {
+        if ($image_data != null && $save_path != null) {
+            // After modification, the image is prefixed by mime info like the following:
+            // data:image/jpeg;base64,; This causes the image library to be unhappy, so we need to remove it.
+            $header = explode(';', $image_data, 2)[0];
+            // Grab the image type from the header while we're at it.
+            $extension = substr($header, strpos($header, '/')+1);
+            // Start reading the image after the first comma, postceding the base64.
+            $image = substr($image_data, strpos($image_data, ',')+1);
+
+            $file_name = str_random(25).".".$extension;
+
+            $directory= public_path($save_path);
+            // Check if the uploads directory exists.  If not, try to create it.
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            $path = public_path($save_path.$file_name);
+
+            try {
+                Image::make($image)->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
+            } catch (\Exception $e) {
+                return false;
+            }
+
+            return $file_name;
+        }
+
+        return false;
+    }
 
 }

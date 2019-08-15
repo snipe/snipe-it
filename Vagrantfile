@@ -81,4 +81,22 @@ Vagrant.configure("2") do |config|
     fedora26.vm.provision :shell, :inline => "wget #{SNIPEIT_SH_URL}"
     fedora26.vm.provision :shell, :inline => "chmod 755 snipeit.sh"
   end
+
+  config.vm.define "freebsd" do |freebsd|
+    freebsd.vm.box = "freebsd/FreeBSD-11.2-RELEASE"
+    freebsd.vm.hostname = 'freebsd12'
+    freebsd.vm.network "forwarded_port", guest: 80, host: 8080
+    freebsd.vm.network "forwarded_port", guest:3306, host:3306 # mysql    
+    freebsd.vm.network "private_network", type: "dhcp"
+    freebsd.ssh.shell = "sh"
+    freebsd.vm.base_mac = "080027D14C66"
+    freebsd.vm.synced_folder ".", "/vagrant", :nfs => true, id: "vagrant-root",
+    :mount_options => ['rw', 'vers=3', 'tcp', 'actimeo=2']    
+    freebsd.vm.provision "shell", inline: <<-SHELL
+        pkg install -y python27;
+    SHELL
+    freebsd.vm.provision "ansible" do |ansible|
+        ansible.playbook = "ansible/freebsd/vagrant_playbook.yml"
+    end    
+  end  
 end

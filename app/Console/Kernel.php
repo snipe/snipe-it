@@ -2,8 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\ImportLocations;
-use App\Console\Commands\RestoreDeletedUsers;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -33,6 +31,8 @@ class Kernel extends ConsoleKernel
         Commands\RegenerateAssetTags::class,
         Commands\SyncAssetCounters::class,
         Commands\RestoreDeletedUsers::class,
+        Commands\SendCurrentInventoryToUsers::class,
+        Commands\MoveUploadsToNewDisk::class,
         Commands\SendUpcomingAuditReport::class,
         Commands\ImportLocations::class,
         Commands\ReEncodeCustomFieldNames::class,
@@ -46,7 +46,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-
         $schedule->command('snipeit:inventory-alerts')->daily();
         $schedule->command('snipeit:expiring-alerts')->daily();
         $schedule->command('snipeit:expected-checkin')->daily();
@@ -55,6 +54,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('snipeit:upcoming-audits')->daily();
     }
 
+    /**
+     * This method is required by Laravel to handle any console routes
+     * that are defined in routes/console.php.
+     */
     protected function commands()
     {
         require base_path('routes/console.php');

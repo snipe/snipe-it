@@ -1,15 +1,15 @@
 <?php
 namespace App\Http\Controllers\Api;
 
-use App\Models\AssetModel;
-use App\Models\Asset;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Transformers\AssetModelsTransformer;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
-
+use App\Models\Asset;
+use App\Models\AssetModel;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This class controls all actions related to asset models for
@@ -177,7 +177,7 @@ class AssetModelsController extends Controller
 
         if ($assetmodel->image) {
             try  {
-                unlink(public_path().'/uploads/models/'.$assetmodel->image);
+                Storage::disk('public')->delete('assetmodels/'.$assetmodel->image);
             } catch (\Exception $e) {
                 \Log::info($e);
             }
@@ -234,7 +234,7 @@ class AssetModelsController extends Controller
                 $assetmodel->use_text .=  ' (#'.e($assetmodel->model_number).')';
             }
 
-            $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? url('/').'/uploads/models/'.$assetmodel->image : null;
+            $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? Storage::disk('public')->url('assetmodels/'.e($assetmodel->image)) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($assetmodels);

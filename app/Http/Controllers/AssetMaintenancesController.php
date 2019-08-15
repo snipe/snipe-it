@@ -1,26 +1,17 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
+use App\Models\Asset;
 use App\Models\AssetMaintenance;
-use Carbon\Carbon;
 use App\Models\Company;
-use DB;
-use Input;
-use Lang;
-use Log;
-use Mail;
-use Response;
+use Auth;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Slack;
 use Str;
 use TCPDF;
-use Validator;
 use View;
-use App\Models\Setting;
-use App\Models\Asset;
-use App\Helpers\Helper;
-use Auth;
-use Gate;
-use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to Asset Maintenance for
@@ -165,6 +156,7 @@ class AssetMaintenancesController extends Controller
         } elseif (!$assetMaintenance->asset) {
             return redirect()->route('maintenances.index')
                 ->with('error', 'The asset associated with this maintenance does not exist.');
+
         } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }

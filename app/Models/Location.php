@@ -2,15 +2,10 @@
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
-use App\Models\Asset;
-use App\Models\SnipeModel;
 use App\Models\Traits\Searchable;
-use App\Models\User;
 use App\Presenters\Presentable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
-use DB;
 
 class Location extends SnipeModel
 {
@@ -20,13 +15,13 @@ class Location extends SnipeModel
     protected $dates = ['deleted_at'];
     protected $table = 'locations';
     protected $rules = array(
-      'name'        => 'required|min:2|max:255|unique_undeleted',
-      'city'        => 'min:2|max:255|nullable',
-      'country'     => 'min:2|max:2|nullable',
+      'name'            => 'required|min:2|max:255|unique_undeleted',
+      'city'            => 'min:2|max:255|nullable',
+      'country'         => 'min:2|max:2|nullable',
       'address'         => 'max:80|nullable',
       'address2'        => 'max:80|nullable',
-      'zip'         => 'min:3|max:10|nullable',
-      'manager_id'  => 'exists:users,id|nullable'
+      'zip'             => 'min:3|max:10|nullable',
+      'manager_id'      => 'exists:users,id|nullable'
     );
 
     /**
@@ -56,6 +51,7 @@ class Location extends SnipeModel
         'country',
         'zip',
         'ldap_ou',
+        'manager_id',
         'currency',
         'manager_id',
         'image',
@@ -80,11 +76,25 @@ class Location extends SnipeModel
       'parent' => ['name']
     ];
 
+    /**
+     * Establishes the location -> users relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function users()
     {
         return $this->hasMany('\App\Models\User', 'location_id');
     }
 
+    /**
+     * Establishes the location -> assets relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function assets()
     {
         return $this->hasMany('\App\Models\Asset', 'location_id')
@@ -95,51 +105,102 @@ class Location extends SnipeModel
             });
     }
 
+    /**
+     * Establishes the location -> asset's RTD relationship
+     *
+     * This used to have an ...->orHas() clause that referred to
+     * assignedAssets, and that was probably incorrect, as well as
+     * definitely was setting fire to the query-planner. So don't do that.
+     *
+     * It is arguable that we should have a '...->whereNull('assigned_to')
+     * bit in there, but that isn't always correct either (in the case
+     * where a user has no location, for example).
+     *
+     * In all likelihood, we need to denorm an "effective_location" column
+     * into Assets to make this slightly less miserable.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function rtd_assets()
     {
-        /* This used to have an ...->orHas() clause that referred to
-           assignedAssets, and that was probably incorrect, as well as
-           definitely was setting fire to the query-planner. So don't do that.
-
-           It is arguable that we should have a '...->whereNull('assigned_to')
-           bit in there, but that isn't always correct either (in the case 
-           where a user has no location, for example).
-
-           In all likelyhood, we need to denorm an "effective_location" column
-           into Assets to make this slightly less miserable.
+        /*
         */
         return $this->hasMany('\App\Models\Asset', 'rtd_location_id');
     }
 
+    /**
+     * Establishes the location -> parent location relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function parent()
     {
         return $this->belongsTo('\App\Models\Location', 'parent_id','id');
     }
 
+    /**
+     * Establishes the location -> manager relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function manager()
     {
         return $this->belongsTo('\App\Models\User', 'manager_id');
     }
 
+    /**
+     * Establishes the location -> child locations relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function childLocations()
     {
         return $this->hasMany('\App\Models\Location', 'parent_id');
     }
 
-    // I don't think we need this anymore since we de-normed location_id in assets?
+    /**
+     * Establishes the location -> assigned assets relationship
+     *
+     * I don't think we need this anymore since we de-normed location_id in assets?
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function assignedAssets()
     {
         return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
+    /**
+     * Sets the location-specific OU attribute
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return mixed
+     */
     public function setLdapOuAttribute($ldap_ou)
     {
         return $this->attributes['ldap_ou'] = empty($ldap_ou) ? null : $ldap_ou;
     }
 
+    /**
+     * Recursion to determine location hierarchy
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return mixed
+     */
     public static function getLocationHierarchy($locations, $parent_id = null)
     {
-
 
         $op = array();
 
@@ -164,7 +225,15 @@ class Location extends SnipeModel
         return $op;
     }
 
-
+    /**
+     * Flattens the location array for display on the front-end
+     *
+     * @todo maybe move to presenters?
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public static function flattenLocationsArray($location_options_array = null)
     {
         $location_options = array();
@@ -194,14 +263,15 @@ class Location extends SnipeModel
     /**
     * Query builder scope to order on parent
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
+    * We have to use a Left join here, or it will only return results with parents
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  string                              $order       Order
+    *
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderParent($query, $order)
     {
-      // Left join here, or it will only return results with parents
         return $query->leftJoin('locations as parent_loc', 'locations.parent_id', '=', 'parent_loc.id')->orderBy('parent_loc.name', $order);
     }
 
@@ -209,7 +279,7 @@ class Location extends SnipeModel
      * Query builder scope to order on manager name
      *
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
+     * @param  string                              $order       Order
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */

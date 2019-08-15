@@ -67,10 +67,10 @@ View Assets for  {{ $user->present()->fullName() }}
                   <td>{{ $asset->serial }}</td>
                   <td>
                     @if (($asset->image) && ($asset->image!=''))
-                      <img src="{{ url('/') }}/uploads/assets/{{ $asset->image }}" height="50" width="50">
+                      <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" height="50" width="50">
 
                     @elseif (($asset->model) && ($asset->model->image!=''))
-                      <img src="{{ url('/') }}/uploads/models/{{ $asset->model->image }}" height="50" width="50">
+                      <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($asset->model->image)) }}" height="50" width="50">
                     @endif
                   </td>
                 </tr>
