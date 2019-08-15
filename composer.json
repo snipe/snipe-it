@@ -27,7 +27,7 @@
     "maknz/slack": "^1.7",
     "neitanod/forceutf8": "^2.0",
     "patchwork/utf8": "^1.3",
-    "phpdocumentor/reflection-docblock": "3.2.2",
+    "phpdocumentor/reflection-docblock": "^4.0",
     "phpspec/prophecy": "^1.8",
     "pragmarx/google2fa": "^5.0",
     "pragmarx/google2fa-laravel": "^1.0",
