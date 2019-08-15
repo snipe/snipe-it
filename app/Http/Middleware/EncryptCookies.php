@@ -18,4 +18,13 @@ class EncryptCookies extends BaseEncrypter
     protected $except = [
         //
     ];
+
+    /**
+     * Indicates if cookies should be serialized.
+     *
+     * @var bool
+     */
+    protected static $serialize = true;
+
+
 }

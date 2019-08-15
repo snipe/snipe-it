@@ -83,7 +83,7 @@ class ManufacturersController extends Controller
     public function show($id)
     {
         $this->authorize('view', Manufacturer::class);
-        $manufacturer = Manufacturer::withCount('assets as assets_count', 'licenses as licenses_count', 'consumables as consumables_count', 'accessories as accessories_count', 'models as models_count'  )->findOrFail($id);
+        $manufacturer = Manufacturer::withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('consumables as consumables_count')->withCount('accessories as accessories_count')->findOrFail($id);
         return (new ManufacturersTransformer)->transformManufacturer($manufacturer);
     }
 

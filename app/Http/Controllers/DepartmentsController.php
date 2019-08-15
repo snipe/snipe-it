@@ -52,8 +52,8 @@ class DepartmentsController extends Controller
         $this->authorize('create', Department::class);
         $department = new Department;
         $department->fill($request->all());
-        $department->user_id = Auth::id();
-        $department->manager_id = $request->input('manager_id', null);
+        $department->user_id = Auth::user()->id;
+        $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
 
         $department = $request->handleImages($department);
 

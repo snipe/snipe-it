@@ -273,6 +273,15 @@
                   </div>
                 </div>
 
+                  <!-- Website URL -->
+                  <div class="form-group {{ $errors->has('website') ? ' has-error' : '' }}">
+                      <label for="website" class="col-md-3 control-label">{{ trans('general.website') }}</label>
+                      <div class="col-md-8">
+                          <input class="form-control" type="text" name="website" id="website" value="{{ Input::old('website', $user->website) }}" />
+                          {!! $errors->first('website', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                      </div>
+                  </div>
+
                   <!-- Address -->
                   <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                       <label class="col-md-3 control-label" for="address">{{ trans('general.address') }}</label>

@@ -464,7 +464,13 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
-                $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug(), null));
+                if ($field->field_encrypted=='1') {
+                    if (Gate::allows('admin')) {
+                        $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                    }
+                } else {
+                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                }
             }
         }
 
@@ -514,7 +520,7 @@ class AssetsController extends Controller
             ($request->filled('company_id')) ?
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
-            if ($request->has('image_source')) {
+            if ($request->filled('image_source')) {
                 if ($request->input('image_source') == "") {
                     $asset->image = null;
                 } else {
@@ -537,8 +543,14 @@ class AssetsController extends Controller
             // Update custom fields
             if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
-                    if ($request->filled($field->convertUnicodeDbSlug())) {
-                        $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
+                    if ($request->has($field->convertUnicodeDbSlug())) {
+                        if ($field->field_encrypted=='1') {
+                            if (Gate::allows('admin')) {
+                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                            }
+                        } else {
+                            $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                        }
                     }
                 }
             }
@@ -706,7 +718,11 @@ class AssetsController extends Controller
         $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
-        $asset->name = Input::get('name');
+
+        if ($request->filled('name')) {
+            $asset->name = $request->input('name');
+        }
+        
         $asset->location_id =  $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {

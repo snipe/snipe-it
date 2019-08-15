@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 
-Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
+Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], function () {
 
     Route::group(['prefix' => 'account'], function () {
         Route::get('requestable/hardware',
@@ -65,6 +65,28 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     ); // Accessories resource
 
 
+        Route::get('{accessory}/checkedout',
+            [
+                'as' => 'api.accessories.checkedout',
+                'uses' => 'AccessoriesController@checkedout'
+            ]
+        );
+
+        Route::post('{accessory}/checkout',
+            [
+                'as' => 'api.accessories.checkout',
+                'uses' => 'AccessoriesController@checkout'
+            ]
+        );
+
+        Route::post('{accessory}/checkin',
+            [
+                'as' => 'api.accessories.checkin',
+                'uses' => 'AccessoriesController@checkin'
+            ]
+        );
+
+    }); // Accessories group
 
 
     /*--- Categories API ---*/

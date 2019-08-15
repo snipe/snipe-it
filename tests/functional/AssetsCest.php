@@ -25,7 +25,6 @@ class AssetsCest
         $I->wantTo("Test Validation Fails with blank elements");
         $I->amOnPage(route('hardware.create'));
         $I->click('Save');
-        $I->seeElement('.alert-danger');
         $I->see('The asset tag field is required.', '.alert-msg');
         $I->see('The model id field is required.', '.alert-msg');
         $I->see('The status id field is required.', '.alert-msg');

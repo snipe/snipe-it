@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\RestoreDeletedUsers;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -35,6 +34,8 @@ class Kernel extends ConsoleKernel
         Commands\SendCurrentInventoryToUsers::class,
         Commands\MoveUploadsToNewDisk::class,
         Commands\SendUpcomingAuditReport::class,
+        Commands\ImportLocations::class,
+        Commands\ReEncodeCustomFieldNames::class,
     ];
 
     /**
@@ -60,5 +61,6 @@ class Kernel extends ConsoleKernel
     protected function commands()
     {
         require base_path('routes/console.php');
+        $this->load(__DIR__.'/Commands');
     }
 }

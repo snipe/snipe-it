@@ -166,7 +166,7 @@ class ConsumablesController extends Controller
     {
         $consumable = Consumable::with(array('consumableAssignments'=>
         function ($query) {
-            $query->orderBy('created_at', 'DESC');
+            $query->orderBy($query->getModel()->getTable().'.created_at', 'DESC');
         },
         'consumableAssignments.admin'=> function ($query) {
         },

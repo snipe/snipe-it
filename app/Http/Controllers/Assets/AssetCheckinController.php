@@ -70,7 +70,7 @@ class AssetCheckinController extends Controller
         $asset->assignedTo()->disassociate($asset);
         $asset->assigned_type = null;
         $asset->accepted = null;
-        $asset->name = e($request->get('name'));
+        $asset->name = $request->get('name');
 
         if ($request->filled('status_id')) {
             $asset->status_id =  e($request->get('status_id'));
@@ -92,7 +92,7 @@ class AssetCheckinController extends Controller
         
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
 
-            if ($backto=='user') {
+            if ((isset($user)) && ($backto =='user')) {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
             }
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkin.success'));

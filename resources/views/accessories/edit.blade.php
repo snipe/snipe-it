@@ -22,6 +22,7 @@
 @include ('partials.forms.edit.quantity')
 @include ('partials.forms.edit.minimum_quantity')
 
+
 <!-- Image -->
 
 @if ($item->image)

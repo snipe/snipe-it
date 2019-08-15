@@ -144,11 +144,9 @@ class AssetsController extends Controller
                 $asset->location_id = $request->input('rtd_location_id', null);
             }
 
-            $asset->asset_tag = $asset_tags[$a];
-
-            // Create the image (if one was chosen.)
-            if ($request->hasFile('image')) {
-                $image = $request->input('image');
+        // Create the image (if one was chosen.)
+        if ($request->has('image')) {
+            $image = $request->input('image');
 
                 $asset = $request->handleImages($asset);
             }
@@ -157,17 +155,17 @@ class AssetsController extends Controller
             // Validation for these fields is handled through the AssetRequest form request
             $model = AssetModel::find($request->get('model_id'));
 
-            if (($model) && ($model->fieldset)) {
-                foreach ($model->fieldset->fields as $field) {
-                    if ($field->field_encrypted=='1') {
-                        if (Gate::allows('admin')) {
-                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
-                        }
-                    } else {
-                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+        if ($model->fieldset) {
+            foreach ($model->fieldset->fields as $field) {
+                if ($field->field_encrypted=='1') {
+                    if (Gate::allows('admin')) {
+                        $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
                     }
+                } else {
+                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
                 }
             }
+        }
 
             // Validate the asset before saving
             if ($asset->isValid() && $asset->save()) {
@@ -333,7 +331,7 @@ class AssetsController extends Controller
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
-        if ($model->fieldset) {
+        if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted=='1') {
                     if (Gate::allows('admin')) {
@@ -530,6 +528,11 @@ class AssetsController extends Controller
      */
     public function postImportHistory(Request $request)
     {
+
+        if (!$request->hasFile('user_import_csv')) {
+            return back()->with('error', 'No file provided. Please select a file for import and try again. ');
+        }
+
         if (!ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
         }
@@ -558,49 +561,105 @@ class AssetsController extends Controller
 
         foreach ($results as $record) {
 
-            $asset_tag = $record['Asset Tag'];
-
-            try {
-                $checkoutdate = Carbon::parse($record['Checkout Date'])->format('Y-m-d H:i:s');
-                $checkindate = Carbon::parse($record['Checkin Date'])->format('Y-m-d H:i:s');
-            }
-            catch (\Exception $err) {
-                $status['error'][]['asset'][$asset_tag]['msg'] = 'Your dates are screwed up. Format needs to be Y-m-d H:i:s';
-                continue;
-            }
-
-            if($asset = Cache::remember('asset:' . $asset_tag, $cachetime, function () use( &$asset_tag) {
-                $tocache = Asset::where('asset_tag', '=', $asset_tag)->value('id');
-                return is_null($tocache) ? false : $tocache;}))
-            {
-                //we've found our asset, now lets look for a user
-                if($base_username != User::generateFormattedNameFromFullName($record['Full Name'], Setting::getSettings()->username_format)) {
-
-                    $base_username = User::generateFormattedNameFromFullName($record['Full Name'], Setting::getSettings()->username_format);
-
-                    if(!$user = Cache::remember('user:' . $base_username['username'], $cachetime, function () use( &$base_username) {
-                        $tocache = User::where('username', '=', $base_username['username'])->value('id');
-                        return is_null($tocache) ? false : $tocache;}))
-                    {
-                        $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset was found but user (' . $record['Full Name'] . ') not matched';
-                        $base_username = null;
-                        continue;
-                    }
+        foreach ($results as $row) {
+            if (is_array($row)) {
+                $row = array_change_key_case($row, CASE_LOWER);
+                $asset_tag = Helper::array_smart_fetch($row, "asset tag");
+                if (!array_key_exists($asset_tag, $item)) {
+                    $item[$asset_tag] = array();
                 }
+                $batch_counter = count($item[$asset_tag]);
 
-                if($checkoutdate < $checkindate) {
+                $item[$asset_tag][$batch_counter]['checkout_date'] = Carbon::parse(Helper::array_smart_fetch($row, "checkout date"))->format('Y-m-d H:i:s');
+                $item[$asset_tag][$batch_counter]['checkin_date'] = Carbon::parse(Helper::array_smart_fetch($row, "checkin date"))->format('Y-m-d H:i:s');
+                \Log::debug($item[$asset_tag][$batch_counter]['checkin_date']);
+
+                $item[$asset_tag][$batch_counter]['asset_tag'] = Helper::array_smart_fetch($row, "asset tag");
+                $item[$asset_tag][$batch_counter]['name'] = Helper::array_smart_fetch($row, "name");
+                $item[$asset_tag][$batch_counter]['email'] = Helper::array_smart_fetch($row, "email");
+
+                if ($asset = Asset::where('asset_tag', '=', $asset_tag)->first()) {
+                    $item[$asset_tag][$batch_counter]['asset_id'] = $asset->id;
+
+                    $base_username = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $item[$asset_tag][$batch_counter]['name']);
+                    $user = User::where('username', '=', $base_username['username']);
+                    $user_query = ' on username '.$base_username['username'];
+
+                    if ($request->input('match_firstnamelastname')=='1') {
+                        $firstnamedotlastname = User::generateFormattedNameFromFullName('firstname.lastname', $item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $firstnamedotlastname['username'];
+                        $user->orWhere('username', '=', $firstnamedotlastname['username']);
+                        $user_query .= ', or on username '.$firstnamedotlastname['username'];
+                    }
+
+                    if ($request->input('match_flastname')=='1') {
+                        $flastname = User::generateFormattedNameFromFullName('filastname', $item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $flastname['username'];
+                        $user->orWhere('username', '=', $flastname['username']);
+                        $user_query .= ', or on username '.$flastname['username'];
+                    }
+                    if ($request->input('match_firstname')=='1') {
+                        $firstname = User::generateFormattedNameFromFullName('firstname', $item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $firstname['username'];
+                        $user->orWhere('username', '=', $firstname['username']);
+                        $user_query .= ', or on username '.$firstname['username'];
+                    }
+                    if ($request->input('match_email')=='1') {
+                        if ($item[$asset_tag][$batch_counter]['email']=='') {
+                            $item[$asset_tag][$batch_counter]['username'][] = $user_email = User::generateEmailFromFullName($item[$asset_tag][$batch_counter]['name']);
+                            $user->orWhere('username', '=', $user_email);
+                            $user_query .= ', or on username '.$user_email;
+                        }
+                    }
+
+                    // A matching user was found
+                    if ($user = $user->first()) {
+                        $item[$asset_tag][$batch_counter]['checkedout_to'] = $user->id;
+                        $item[$asset_tag][$batch_counter]['user_id'] = $user->id;
 
                         Actionlog::firstOrCreate(array(
-                            'item_id' => $asset,
+                            'item_id' => $asset->id,
                             'item_type' => Asset::class,
-                            'user_id' => Auth::user()->id,
-                            'note' => 'Historical record added by ' . Auth::user()->present()->fullName(),
-                            'target_id' => $user,
+                            'user_id' =>  Auth::user()->id,
+                            'note' => 'Checkout imported by '.Auth::user()->present()->fullName().' from history importer',
+                            'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
                             'target_type' => User::class,
-                            'created_at' => $checkoutdate,
-                            'action_type' => 'checkout',
+                            'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
+                            'action_type'   => 'checkout',
                         ));
 
+                        $asset->assigned_to = $user->id;
+
+                        if ($asset->save()) {
+                            $status['success'][]['asset'][$asset_tag]['msg'] = 'Asset successfully matched for '.Helper::array_smart_fetch($row, "name").$user_query.' on '.$item[$asset_tag][$batch_counter]['checkout_date'];
+                        } else {
+                            $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset and user was matched but could not be saved.';
+                        }
+                    } else {
+                        $item[$asset_tag][$batch_counter]['checkedout_to'] = null;
+                        $status['error'][]['user'][Helper::array_smart_fetch($row, "name")]['msg'] = 'User does not exist so no checkin log was created.';
+                    }
+                } else {
+                    $item[$asset_tag][$batch_counter]['asset_id'] = null;
+                    $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset does not exist so no match was attempted.';
+                }
+            }
+        }
+
+        // Loop through and backfill the checkins
+        foreach ($item as $key => $asset_batch) {
+            $total_in_batch = count($asset_batch);
+            for ($x = 0; $x < $total_in_batch; $x++) {
+                $next = $x + 1;
+
+                // Only do this if a matching user was found
+                if ((array_key_exists('checkedout_to', $asset_batch[$x])) && ($asset_batch[$x]['checkedout_to']!='')) {
+                    if (($total_in_batch > 1) && ($x < $total_in_batch) && (array_key_exists($next, $asset_batch))) {
+                        $checkin_date = Carbon::parse($asset_batch[$next]['checkin_date'])->format('Y-m-d H:i:s');
+                        $asset_batch[$x]['real_checkin'] = $checkin_date;
+
+                        \Log::debug($asset_batch[$next]['checkin_date']);
+                        \Log::debug($checkin_date);
                         Actionlog::firstOrCreate(array(
                             'item_id' => $asset,
                             'item_type' => Asset::class,
@@ -678,11 +737,6 @@ class AssetsController extends Controller
         return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
 
-    public function dueForAudit()
-    {
-        $this->authorize('audit', Asset::class);
-        return view('hardware/audit-due');
-    }
 
     public function overdueForAudit()
     {

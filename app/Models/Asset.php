@@ -82,7 +82,7 @@ class Asset extends Depreciable
         'model_id'        => 'required|integer|exists:models,id',
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'integer|nullable',
-        'warranty_months' => 'numeric|nullable',
+        'warranty_months' => 'numeric|nullable|digits_between:0,240',
         'physical'        => 'numeric|max:1|nullable',
         'checkout_date'   => 'date|max:10|min:10|nullable',
         'checkin_date'    => 'date|max:10|min:10|nullable',
@@ -1069,7 +1069,7 @@ class Asset extends Depreciable
     public function scopeDueOrOverdueForAudit($query, $settings)
     {
         $interval = $settings->audit_warning_days ?? 0;
-    
+
         return $query->whereNotNull('assets.next_audit_date')
             ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $interval DAY) <= '".Carbon::now()."'")
             ->where('assets.archived', '=', 0)
@@ -1388,7 +1388,7 @@ class Asset extends Depreciable
              *
              * In short, this set of statements tells the query builder to ONLY query against an
              * actual field that's being passed if it doesn't meet known relational fields. This
-             * allows us to query custom fields directly in the assets table
+             * allows us to query custom fields directly in the assetsv table
              * (regardless of their name) and *skip* any fields that we already know can only be
              * searched through relational searches that we do earlier in this method.
              *
@@ -1397,10 +1397,9 @@ class Asset extends Depreciable
              * assets.location would fail, as that field doesn't exist -- plus we're already searching
              * against those relationships earlier in this method.
              *
-             * - snipe
+             * - snipe 
              *
              */
-
             if (($fieldname!='category') && ($fieldname!='model_number') && ($fieldname!='rtd_location') && ($fieldname!='location') && ($fieldname!='supplier')
                 && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
                     $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');

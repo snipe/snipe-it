@@ -44,18 +44,17 @@ class CustomFieldsetsController extends Controller
 
 
             $maxid = 0;
-            foreach ($cfset->fields() as $field) {
-
-                if ($field) {
-                    if ($field->pivot->order > $maxid) {
-                        $maxid=$field->pivot->order;
-                    }
-                    if (isset($custom_fields_list[$field->id])) {
-                        unset($custom_fields_list[$field->id]);
-                    }
+            foreach ($cfset->fields as $field) {
+                if ($field->pivot->order > $maxid) {
+                    $maxid=$field->pivot->order;
                 }
-
+                if (isset($custom_fields_list[$field->id])) {
+                    unset($custom_fields_list[$field->id]);
+                }
             }
+
+            return view("custom_fields.fieldsets.view")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
+        }
 
             return view("custom_fields.fieldsets.view")
                 ->with("custom_fieldset", $cfset)
@@ -176,14 +175,13 @@ class CustomFieldsetsController extends Controller
 
 
     /**
-     * Associate the custom field with a custom fieldset.
-     *
-     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-     * @since [v1.8]
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function associate($id)
+    * Associate the custom field with a custom fieldset.
+    *
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @since [v1.8]
+    * @return View
+    */
+    public function associate(Request $request, $id)
     {
 
         $set = CustomFieldset::find($id);
@@ -191,12 +189,12 @@ class CustomFieldsetsController extends Controller
         $this->authorize('update', $set);
 
         foreach ($set->fields as $field) {
-            if ($field->id == Input::get('field_id')) {
+            if ($field->id == $request->input('field_id')) {
                 return redirect()->route("fieldsets.show", [$id])->withInput()->withErrors(['field_id' => trans('admin/custom_fields/message.field.already_added')]);
             }
         }
 
-        $results=$set->fields()->attach(Input::get('field_id'), ["required" => (Input::get('required') == "on"),"order" => Input::get('order')]);
+        $results = $set->fields()->attach(Input::get('field_id'), ["required" => ($request->input('required') == "on"),"order" => $request->input('order', 1)]);
 
         return redirect()->route("fieldsets.show", [$id])->with("success", trans('admin/custom_fields/message.field.create.assoc_success'));
     }

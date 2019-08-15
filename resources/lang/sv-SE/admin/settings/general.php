@@ -120,7 +120,7 @@ return array(
     'slack_integration'         => 'Slack Settings',
     'slack_integration_help'    => 'Slak integration är valfri, men ändpunkten och kanalen krävs om du vill använda den. För att konfigurera Slack integration måste du först <a href=":slack_link" target="_new">skapa en inkommande webhook</a> på ditt Slack-konto.',
     'slack_integration_help_button'    => 'När du har sparat din Slack-information visas en testknapp.',
-    'slack_test_help'           => 'Test whether your Slack integration is configured correctly. YOU MUST SAVE YOUR UPDATED SLACK SETTINGS FIRST.',
+    'slack_test_help'           => 'Testa om din Slack-integration är konfigurerad korrekt. DU MÅSTE SPARA DINA UPPDATERADE SLACK-INSTÄLLNINGAR FÖRST.',
     'snipe_version'  			=> 'Snipe-IT-versionen',
     'support_footer'            => 'Stöd länkar i sidfot ',
     'support_footer_help'       => 'Ange vem som kan se länkarna till Snipe-IT Support info och användarmanual',

@@ -115,18 +115,22 @@
         @endphp
 
         @foreach ($licenses as $license)
-            @if ($license)
-                <tr>
-                    <td>{{ $lcounter }}</td>
-                    <td>{{ $license->name }}</td>
-                    <td>{{ $license->serial }}</td>
-                    <td>{{  $license->assetlog->first()->created_at }}</td>
-                </tr>
-                @php
-                    $lcounter++
-                @endphp
 
-            @endif
+            <tr>
+                <td>{{ $lcounter }}</td>
+                <td>{{ $license->name }}</td>
+                <td>
+                    @can('viewKeys', $license)
+                        {{ $license->serial }}
+                    @else
+                        ------------
+                    @endcan
+                </td>
+                <td>{{  $license->assetlog->first()->created_at }}</td>
+            </tr>
+            @php
+                $lcounter++
+            @endphp
         @endforeach
     </table>
 @endif
