@@ -71,6 +71,7 @@ class Setting extends Model
           'login_remote_user_enabled'           => 'numeric|nullable',
           'login_common_disabled'               => 'numeric|nullable',
           'login_remote_user_custom_logout_url' => 'string|nullable',
+          'login_remote_user_header_name'       => 'string|nullable',
           'thumbnail_max_h'                     => 'numeric|max:500|min:25',
           'pwd_secure_min'                      => 'numeric|required|min:5',
           'audit_warning_days'                  => 'numeric|nullable',
