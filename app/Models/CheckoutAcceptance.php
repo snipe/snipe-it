@@ -19,7 +19,6 @@ class CheckoutAcceptance extends Model
     protected $dates = [
     	'accepted_at',
     	'declined_at',
-
     	'deleted_at'
     ];
 
