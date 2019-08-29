@@ -186,7 +186,11 @@
 
     @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))
         <div class="label-alt_barcode barcode_container">
+        @if ($bulkedit==False)
+            <img src="./barcode" class="barcode">
+        @else
             <img src="./{{ $asset->id }}/barcode" class="barcode">
+        @endif
         </div>
     @endif
 
