@@ -135,7 +135,11 @@
 
       @if ($settings->qr_code=='1')
     <div class="label-qr_img qr_img">
+        @if ($bulkedit==False)
+      <img src="./qr_code" class="qr_img">
+        @else
       <img src="./{{ $asset->id }}/qr_code" class="qr_img">
+        @endif
     </div>
       @endif
 
