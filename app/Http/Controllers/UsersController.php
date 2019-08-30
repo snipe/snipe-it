@@ -993,27 +993,37 @@ class UsersController extends Controller
 
     }
 
+    /**
+     * Get data from Gsuite account
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function syncAllWithGSuite()
     {
-        $this->authorize('syncAllWithGSuite', User::class);
+        $this->authorize('create', User::class);
+
+        //creating object of App\Services\GSuiteUserService
         $gsuiteUserService = new GSuiteUserService();
         $gsuiteUserService->fetchAll();
-        $this->updateEmployeeDetailsFromGSuite($gsuiteUserService->getUsers());
-        // return redirect()->back();
+        return $this->updateEmployeeDetailsFromGSuite($gsuiteUserService->getUsers());
     }
 
+    /**
+     * Store users retrieved from gsuite into database and assigning respective user-groups
+     *
+     * @param  array  $gsuiteUsers users retrieved from gsuite
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateEmployeeDetailsFromGSuite(array $gsuiteUsers)
     {
         try {
-            $this->authorize('create', User::class);
             $permissions = config('customdata.default_permission');
             $admins = config('customdata.admin');
+
             foreach ($gsuiteUsers as $gsuiteUser) {
                 $user = User::where('email', $gsuiteUser->getPrimaryEmail())->first();
 
                 if (is_null($user)) {
                     $user = new User;
-
                     $user->email = $gsuiteUser->getPrimaryEmail();
                     $user->username = $gsuiteUser->getName()->fullName;
                     $user->first_name = $gsuiteUser->getName()->givenName;
@@ -1021,12 +1031,10 @@ class UsersController extends Controller
                     $user->activated = 1;
 
                     foreach ($permissions as $key => $value) {
-                        if(in_array($gsuiteUser->getPrimaryEmail(), $admins) && $key !="superuser") {
+                        if (in_array($gsuiteUser->getPrimaryEmail(), $admins) && $key !="superuser") {
                                 $permissions[$key] = "1";
-                        }
-                        else {
-
-                            if(in_array($key, ['assets.view','accessories.view','consumables.view','licenses.view','components.view','users.view','models.view','categories.view','departments.view','statuslabels.view','customfields.view','suppliers.view','manufacturers.view','depreciations.view','locations.view','companies.view',])) {
+                        } else {
+                            if (in_array($key, ['assets.view','accessories.view','consumables.view','licenses.view','components.view','users.view','models.view','categories.view','departments.view','statuslabels.view','customfields.view','suppliers.view','manufacturers.view','depreciations.view','locations.view','companies.view',])) {
                                 $permissions[$key] = "1";
                             }
                         }
@@ -1041,27 +1049,26 @@ class UsersController extends Controller
                     if ($user->save()) {
                         //check if any group exists matching permissions with permissions of user being added
                         $user_group = Group::where('permissions', $user->permissions)->first();
-                        if(is_null($user_group)) {
-                            //for first time when only superadmin exists,below logic is used to create respective user group
+                        if (is_null($user_group)) {
+                            //(for first time when only superadmin exists)below logic is used to create respective user group
                             $user_group = new Group();
-                            $user_group->name = in_array($user->email, $admins) ? 'Admins':'Employees';
+                            $user_group->name = in_array($user->email, $admins) ? 'Admin':'Employee';
                             $user_group->permissions = $user->permissions;
 
                             if (!$user_group->save()) {
-                                return redirect()->back()->withErrors($user_group->getErrors());
+                                return redirect::back()->with('error', trans('admin/users/message.user_sync.error_sync_group'));
                             }
                         }
-
                         $user->groups()->sync($user_group->id);
-
                     } else {
-                        return redirect()->back()->withErrors($user->getErrors());
+                        return redirect::back()->with('error', trans('admin/users/message.user_sync.error_sync'));
                     }
                 }
             }
+            return redirect::route('users.index')->with('success', trans('admin/users/message.user_sync.success'));
         }
         catch(Exception $e) {
-            return 'error';
+            return redirect::back()->with('error', trans('admin/users/message.user_sync.error_exception'));
         }
     }
 

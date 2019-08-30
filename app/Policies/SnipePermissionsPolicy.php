@@ -105,5 +105,4 @@ abstract class SnipePermissionsPolicy
         return $user->hasAccess($this->columnName().'.edit');
     }
 
-
 }

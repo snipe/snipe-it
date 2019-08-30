@@ -23,10 +23,12 @@ class GSuiteUserService
         $client = new Google_Client();
         $client->useApplicationDefaultCredentials();
         $client->setSubject(env('GOOGLE_SERVICE_ACCOUNT_IMPERSONATE'));
-        $client->addScope([
+        $client->addScope(
+            [
             Google_Service_Directory::ADMIN_DIRECTORY_USER,
             Google_Service_Directory::ADMIN_DIRECTORY_USER_READONLY,
-        ]);
+            ]
+        );
         $this->service = new Google_Service_Directory($client);
     }
 
@@ -61,11 +63,13 @@ class GSuiteUserService
         $user->setChangePasswordAtNextLogin(true);
 
         if (isset($params['designation'])) {
-            $user->setOrganizations([
+            $user->setOrganizations(
                 [
-                    'title' => $params['designation'],
-                ],
-            ]);
+                    [
+                        'title' => $params['designation'],
+                    ],
+                ]
+            );
         }
 
         try {

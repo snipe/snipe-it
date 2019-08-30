@@ -386,26 +386,39 @@ class LoginController extends Controller
         return Session::get('backUrl') ? Session::get('backUrl') :   $this->redirectTo;
     }
 
-
-    public function redirectToProvider($provider)
+    /**
+     * This method used to redirect login requests to respective provider
+     *
+     * @param string $provider provider name
+     *
+     * @return RedirectResponse
+     */
+    public function redirectToProvider(string $provider)
     {
         switch ($provider) {
-            case 'google':
-                return Socialite::driver($provider)->with(['hd' =>  env('GOOGLE_CLIENT_HD', '')])->redirect();
-                break;
+        case 'google':
+            return Socialite::driver($provider)->with(['hd' =>  env('GOOGLE_CLIENT_HD', '')])->redirect();
+            break;
 
-            default:
-                return Socialite::driver($provider)->redirect();
-                break;
+        default:
+            return Socialite::driver($provider)->redirect();
+            break;
         }
     }
 
-   public function handleProviderCallback($provider)
+    /**
+     * This method used to do after login validation when response comes on callback url
+     *
+     * @param string $provider provider name
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handleProviderCallback(string $provider)
     {
         try {
             $googleUser = Socialite::driver($provider)->user();
             $existUser = User::where('email', $googleUser->email)->first();
-            // return config('customdata.admin');
+
             if ($existUser) {
                 Auth::login($existUser);
                 if ($existUser = Auth::user()) {
