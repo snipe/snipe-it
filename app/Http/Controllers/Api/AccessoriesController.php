@@ -312,6 +312,7 @@ class AccessoriesController extends Controller
     */
     public function selectlist(Request $request)
     {
+
         $accessories = Accessory::select([
             'accessories.id',
             'accessories.name'

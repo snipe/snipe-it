@@ -158,6 +158,7 @@ class DepartmentsController extends Controller
      */
     public function selectlist(Request $request)
     {
+
         $departments = Department::select([
             'id',
             'name',

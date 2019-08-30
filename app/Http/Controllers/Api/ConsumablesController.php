@@ -201,6 +201,7 @@ class ConsumablesController extends Controller
     */
     public function selectlist(Request $request)
     {
+
         $consumables = Consumable::select([
             'consumables.id',
             'consumables.name'

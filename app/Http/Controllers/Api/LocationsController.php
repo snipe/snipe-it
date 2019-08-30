@@ -186,6 +186,7 @@ class LocationsController extends Controller
      */
     public function selectlist(Request $request)
     {
+
         $locations = Location::select([
             'locations.id',
             'locations.name',

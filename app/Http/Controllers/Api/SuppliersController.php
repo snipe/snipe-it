@@ -146,6 +146,7 @@ class SuppliersController extends Controller
      */
     public function selectlist(Request $request)
     {
+
         $suppliers = Supplier::select([
             'id',
             'name',

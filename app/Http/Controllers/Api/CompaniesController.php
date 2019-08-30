@@ -162,6 +162,7 @@ class CompaniesController extends Controller
      */
     public function selectlist(Request $request)
     {
+
         $companies = Company::select([
             'companies.id',
             'companies.name',

@@ -148,6 +148,7 @@ class ManufacturersController extends Controller
      */
     public function selectlist(Request $request)
     {
+
         $manufacturers = Manufacturer::select([
             'id',
             'name',
