@@ -62,6 +62,7 @@
                         <div class="box-footer">
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
                         </div>
+
                         <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
                             @if ($snipeSettings->custom_forgot_pass_url)
                                 <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.forgot_password')  }}</a>
@@ -69,14 +70,19 @@
                                 <a href="{{ route('password.request')  }}">{{ trans('auth/general.forgot_password')  }}</a>
                             @endif
 
-
                         </div>
+
                     </div> <!-- end login box -->
 
                 </div> <!-- col-md-4 -->
 
             </div> <!-- end row -->
         </div> <!-- end container -->
-    </form>
 
+    </form>
+    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+        <div class="container">
+            <a href="{{ url('auth/google') }}" id="googleBtn" type="button" class="login-button"><img src="img/google_dark_theme.png" alt=""></a>
+        </div>
+    </div>
 @stop

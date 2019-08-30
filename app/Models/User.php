@@ -67,7 +67,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'first_name'              => 'required|string|min:1',
         'username'                => 'required|string|min:1|unique_undeleted',
         'email'                   => 'email|nullable',
-        'password'                => 'required|min:6',
+        'password'                => 'min:6',
         'locale'                  => 'max:10|nullable',
         'website'           => 'url|nullable',
     ];
@@ -92,7 +92,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [
@@ -100,7 +100,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'department' => ['name'],
         'groups'     => ['name'],
         'manager'    => ['first_name', 'last_name', 'username']
-    ];  
+    ];
 
     public function hasAccess($section)
     {

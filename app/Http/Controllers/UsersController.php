@@ -36,6 +36,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use URL;
 use View;
+use App\Services\GSuiteUserService;
 
 /**
  * This controller handles all actions related to Users for
@@ -885,7 +886,7 @@ class UsersController extends Controller
             return redirect()->route('ldap/user')->with('success', "LDAP Import successful.")->with('summary', $ldap_results['summary']);
         }
     }
-    
+
 
     /**
      * Exports users to CSV
@@ -896,7 +897,6 @@ class UsersController extends Controller
      */
     public function getExportUserCsv()
     {
-
         $this->authorize('view', User::class);
         \Debugbar::disable();
 
@@ -991,6 +991,78 @@ class UsersController extends Controller
         $consumables = $show_user->consumables()->get();
         return view('users/print')->with('assets', $assets)->with('licenses',$licenses)->with('accessories', $accessories)->with('consumables', $consumables)->with('show_user', $show_user);
 
+    }
+
+    public function syncAllWithGSuite()
+    {
+        $this->authorize('syncAllWithGSuite', User::class);
+        $gsuiteUserService = new GSuiteUserService();
+        $gsuiteUserService->fetchAll();
+        $this->updateEmployeeDetailsFromGSuite($gsuiteUserService->getUsers());
+        // return redirect()->back();
+    }
+
+    public function updateEmployeeDetailsFromGSuite(array $gsuiteUsers)
+    {
+        try {
+            $this->authorize('create', User::class);
+            $permissions = config('customdata.default_permission');
+            $admins = config('customdata.admin');
+            foreach ($gsuiteUsers as $gsuiteUser) {
+                $user = User::where('email', $gsuiteUser->getPrimaryEmail())->first();
+
+                if (is_null($user)) {
+                    $user = new User;
+
+                    $user->email = $gsuiteUser->getPrimaryEmail();
+                    $user->username = $gsuiteUser->getName()->fullName;
+                    $user->first_name = $gsuiteUser->getName()->givenName;
+                    $user->last_name = $gsuiteUser->getName()->familyName;
+                    $user->activated = 1;
+
+                    foreach ($permissions as $key => $value) {
+                        if(in_array($gsuiteUser->getPrimaryEmail(), $admins) && $key !="superuser") {
+                                $permissions[$key] = "1";
+                        }
+                        else {
+
+                            if(in_array($key, ['assets.view','accessories.view','consumables.view','licenses.view','components.view','users.view','models.view','categories.view','departments.view','statuslabels.view','customfields.view','suppliers.view','manufacturers.view','depreciations.view','locations.view','companies.view',])) {
+                                $permissions[$key] = "1";
+                            }
+                        }
+                    }
+
+                    // Strip out the superuser permission if the user isn't a superadmin
+                    if (!Auth::user()->isSuperUser()) {
+                        unset($permissions['superuser']);
+                    }
+                    $user->permissions =  json_encode($permissions);
+
+                    if ($user->save()) {
+                        //check if any group exists matching permissions with permissions of user being added
+                        $user_group = Group::where('permissions', $user->permissions)->first();
+                        if(is_null($user_group)) {
+                            //for first time when only superadmin exists,below logic is used to create respective user group
+                            $user_group = new Group();
+                            $user_group->name = in_array($user->email, $admins) ? 'Admins':'Employees';
+                            $user_group->permissions = $user->permissions;
+
+                            if (!$user_group->save()) {
+                                return redirect()->back()->withErrors($user_group->getErrors());
+                            }
+                        }
+
+                        $user->groups()->sync($user_group->id);
+
+                    } else {
+                        return redirect()->back()->withErrors($user->getErrors());
+                    }
+                }
+            }
+        }
+        catch(Exception $e) {
+            return 'error';
+        }
     }
 
 }

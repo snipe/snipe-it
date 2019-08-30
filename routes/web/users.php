@@ -49,9 +49,13 @@ Route::group([ 'prefix' => 'users', 'middleware' => ['auth']], function () {
         ]
     );
 
-
+    Route::get('gsuite-sync-all',
+        [
+            'as'   => 'users/gsuite-sync-all',
+            'uses' => 'UsersController@syncAllWithGSuite',
+        ]
+    );
 });
-
 Route::resource('users', 'UsersController', [
     'middleware' => ['auth'],
     'parameters' => ['user' => 'user_id']

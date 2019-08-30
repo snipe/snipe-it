@@ -83,7 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
 |--------------------------------------------------------------------------
 |
 | Routes for various modal dialogs to interstitially create various things
-| 
+|
 */
 
 Route::group(['middleware' => 'auth','prefix' => 'modals'], function () {
@@ -447,6 +447,9 @@ Route::group(['middleware' => 'web'], function () {
             'middleware' => ['web'],
             'uses' => 'Auth\LoginController@showLoginForm' ]
     );
+
+    Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+    Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 
     Route::post(
         'login',

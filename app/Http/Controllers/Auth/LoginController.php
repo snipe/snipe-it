@@ -16,7 +16,7 @@ use Redirect;
 use Log;
 use View;
 use PragmaRX\Google2FA\Google2FA;
-
+use Socialite;
 /**
  * This controller handles authentication for the user, including local
  * database users and LDAP users.
@@ -74,7 +74,7 @@ class LoginController extends Controller
             if ($pos > 0) {
                 $remote_user = substr($remote_user, $pos + 1);
             };
-            
+
             try {
                 $user = User::where('username', '=', $remote_user)->whereNull('deleted_at')->where('activated', '=', '1')->first();
                 Log::debug("Remote user auth lookup complete");
@@ -384,6 +384,45 @@ class LoginController extends Controller
     public function redirectTo()
     {
         return Session::get('backUrl') ? Session::get('backUrl') :   $this->redirectTo;
+    }
+
+
+    public function redirectToProvider($provider)
+    {
+        switch ($provider) {
+            case 'google':
+                return Socialite::driver($provider)->with(['hd' =>  env('GOOGLE_CLIENT_HD', '')])->redirect();
+                break;
+
+            default:
+                return Socialite::driver($provider)->redirect();
+                break;
+        }
+    }
+
+   public function handleProviderCallback($provider)
+    {
+        try {
+            $googleUser = Socialite::driver($provider)->user();
+            $existUser = User::where('email', $googleUser->email)->first();
+            // return config('customdata.admin');
+            if ($existUser) {
+                Auth::login($existUser);
+                if ($existUser = Auth::user()) {
+                    $existUser->last_login = \Carbon::now();
+                    $existUser->save();
+                }
+                \Session::put('user', $existUser->id);
+                return redirect()->intended()->with('success', trans('auth/message.signin.success'));
+            } else {
+                Log::debug("Local authentication failed.");
+                return redirect()->back()->with('error', trans('auth/message.account_not_found'));
+            }
+
+        }
+        catch (Exception $e) {
+            return 'error';
+        }
     }
 
 }

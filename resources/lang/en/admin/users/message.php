@@ -12,7 +12,9 @@ return array(
     'insufficient_permissions'  => 'Insufficient Permissions.',
     'user_deleted_warning'      => 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
     'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
-
+    'user_sync' =>array(
+        'success' => "Users were suceessfully synced",
+    ),
 
     'success' => array(
         'create'    => 'User was successfully created.',

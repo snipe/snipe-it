@@ -29,6 +29,9 @@
     @can('view', \App\Models\User::class)
         <a class="btn btn-default pull-right" href="{{ route('users.export') }}" style="margin-right: 5px;">Export</a>
     @endcan
+    @can('create', \App\Models\User::class)
+        <a class="btn btn-default pull-right" href="{{ route('users/gsuite-sync-all') }}" style="margin-right: 5px;">Import Users from Gsuite</a>
+    @endcan
 @stop
 
 {{-- Page content --}}

@@ -10,4 +10,9 @@ class UserPolicy extends SnipePermissionsPolicy
     {
         return 'users';
     }
+
+    public function syncAllWithGSuite(User $user)
+    {
+        return $user->isSuperUser();
+    }
 }
