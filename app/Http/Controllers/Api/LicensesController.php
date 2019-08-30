@@ -259,7 +259,6 @@ class LicensesController extends Controller
      */
     public function selectlist(Request $request)
     {
-
         $licenses = License::select([
             'licenses.id',
             'licenses.name'

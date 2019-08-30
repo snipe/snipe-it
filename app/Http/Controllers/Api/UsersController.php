@@ -137,7 +137,6 @@ class UsersController extends Controller
      */
     public function selectlist(Request $request)
     {
-
         $users = User::select(
             [
                 'users.id',
@@ -165,16 +164,16 @@ class UsersController extends Controller
         foreach ($users as $user) {
             $name_str = '';
             if ($user->last_name!='') {
-                $name_str .= e($user->last_name).', ';
+                $name_str .= $user->last_name.', ';
             }
-            $name_str .= e($user->first_name);
+            $name_str .= $user->first_name;
 
             if ($user->username!='') {
-                $name_str .= ' ('.e($user->username).')';
+                $name_str .= ' ('.$user->username.')';
             }
 
             if ($user->employee_num!='') {
-                $name_str .= ' - #'.e($user->employee_num);
+                $name_str .= ' - #'.$user->employee_num;
             }
 
             $user->use_text = $name_str;
@@ -334,7 +333,7 @@ class UsersController extends Controller
                 } catch (\Exception $e) {
                     \Log::debug($e);
                }
-
+            }
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete')));

@@ -126,7 +126,6 @@ class PredefinedKitsController extends Controller
      */
     public function selectlist(Request $request)
     {
-
         $kits = PredefinedKit::select([
             'id',
             'name'
