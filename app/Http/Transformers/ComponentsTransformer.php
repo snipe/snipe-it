@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\Component;
-use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;
+use App\Models\Component;
 use Gate;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class ComponentsTransformer
 {
@@ -22,7 +23,7 @@ class ComponentsTransformer
         $array = [
             'id' => (int) $component->id,
             'name' => e($component->name),
-            'image' =>   ($component->image) ? e(url('/').'/uploads/components/'.e($component->image)) : null,
+            'image' =>   ($component->image) ? Storage::disk('public')->url('components/'.e($component->image)) : null,
             'serial' => ($component->serial) ? e($component->serial) : null,
             'location' => ($component->location) ? [
                 'id' => (int) $component->location->id,
@@ -33,10 +34,6 @@ class ComponentsTransformer
             'category' => ($component->category) ? [
                 'id' => (int) $component->category->id,
                 'name' => e($component->category->name)
-            ] : null,
-            'location' => ($component->location) ? [
-                'id' => (int) $component->location->id,
-                'name' => e($component->location->name)
             ] : null,
             'order_number'  => e($component->order_number),
             'purchase_date' =>  Helper::getFormattedDateObject($component->purchase_date, 'date'),

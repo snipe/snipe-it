@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Transformers\AssetsTransformer;
-use App\Http\Transformers\ComponentsTransformer;
-use App\Http\Transformers\ComponentsAssetsTransformer;
-use App\Models\Component;
-use App\Models\Company;
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
+use App\Http\Transformers\ComponentsTransformer;
+use App\Models\Company;
+use App\Models\Component;
+use Illuminate\Http\Request;
 
 class ComponentsController extends Controller
 {
@@ -27,23 +25,23 @@ class ComponentsController extends Controller
         $components = Company::scopeCompanyables(Component::select('components.*')
             ->with('company', 'location', 'category'));
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
         }
 
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $components->where('company_id','=',$request->input('company_id'));
         }
 
-        if ($request->has('category_id')) {
+        if ($request->filled('category_id')) {
             $components->where('category_id','=',$request->input('category_id'));
         }
 
-        if ($request->has('location_id')) {
+        if ($request->filled('location_id')) {
             $components->where('location_id','=',$request->input('location_id'));
         }
 
-        $offset = request('offset', 0);
+        $offset = (($components) && (request('offset') > $components->count())) ? 0 : request('offset', 0);
         $limit = request('limit', 50);
 
         $allowed_columns = ['id','name','min_amt','order_number','serial','purchase_date','purchase_cost','company','category','qty','location','image'];

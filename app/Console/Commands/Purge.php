@@ -2,22 +2,19 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Accessory;
+use App\Models\Asset;
+use App\Models\AssetModel;
+use App\Models\Category;
+use App\Models\Component;
+use App\Models\Consumable;
+use App\Models\License;
+use App\Models\Location;
+use App\Models\Manufacturer;
+use App\Models\Statuslabel;
+use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Console\Command;
-use DB;
-use \App\Models\Asset;
-use \App\Models\AssetModel;
-use \App\Models\Location;
-use \App\Models\Company;
-use \App\Models\License;
-use \App\Models\Accessory;
-use \App\Models\Component;
-use \App\Models\Consumable;
-use \App\Models\Category;
-use \App\Models\User;
-use \App\Models\Supplier;
-use \App\Models\Manufacturer;
-use \App\Models\Depreciation;
-use \App\Models\Statuslabel;
 
 class Purge extends Command
 {
@@ -33,7 +30,7 @@ class Purge extends Command
      *
      * @var string
      */
-    protected $description = 'Purge all soft-deleted deleted records in the database. This will rewrite history for items that have been edited, or checked in or out. It will also reqrite history for users associated with deleted items.';
+    protected $description = 'Purge all soft-deleted deleted records in the database. This will rewrite history for items that have been edited, or checked in or out. It will also rewrite history for users associated with deleted items.';
 
     /**
      * Create a new command instance.

@@ -42,6 +42,7 @@ return array(
     'exists'               => 'The selected :attribute is invalid.',
     'file'                 => 'The :attribute must be a file.',
     'filled'               => 'The :attribute field must have a value.',
+    'hashed_pass'          => 'Your password is incorrect.',
     'image'                => 'The :attribute must be an image.',
     'in'                   => 'The selected :attribute is invalid.',
     'in_array'             => 'The :attribute field does not exist in :other.',
@@ -89,7 +90,7 @@ return array(
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
     "unique_undeleted"     => "The :attribute must be unique.",
-
+    "import_field_empty"   => "The value of the Import Field shouldn't be empty",
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

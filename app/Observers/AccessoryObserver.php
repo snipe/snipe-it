@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\Accessory;
-use App\Models\Setting;
 use App\Models\Actionlog;
 use Auth;
 

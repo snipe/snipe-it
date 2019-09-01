@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Isixhumanisi sakho sephasiwedi sithunyelwe!',
-    'user'			=> 'Lo msebenzisi akekho noma awunalo ikheli le-imeyili elihlotshanisiwe',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

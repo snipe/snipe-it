@@ -25,7 +25,7 @@ class Kernel extends HttpKernel
         \Fideloper\Proxy\TrustProxies::class,
         \App\Http\Middleware\CheckForSetup::class,
         \App\Http\Middleware\CheckForDebug::class,
-       // \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
     /**
@@ -44,7 +44,8 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            'throttle:60,1',
+            \Barryvdh\Cors\HandleCors::class,
+            'throttle:120,1',
             'auth:api',
         ],
     ];

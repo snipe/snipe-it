@@ -31,7 +31,7 @@ class ApiLicensesCest
         $response = json_decode($I->grabResponse(), true);
         // sample verify
         $license = App\Models\License::orderByDesc('created_at')
-            ->withCount('freeSeats')
+            ->withCount('freeSeats as free_seats_count')
             ->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new LicensesTransformer)->transformLicense($license)));
     }

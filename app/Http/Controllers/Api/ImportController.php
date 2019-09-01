@@ -6,15 +6,15 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemImportRequest;
 use App\Http\Transformers\ImportsTransformer;
+use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Import;
-use Illuminate\Http\Request;
+use Artisan;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Artisan;
-use App\Models\Asset;
 
 class ImportController extends Controller
 {
@@ -25,7 +25,7 @@ class ImportController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('import');
         $imports = Import::latest()->get();
         return (new ImportsTransformer)->transformImports($imports);
 
@@ -39,10 +39,8 @@ class ImportController extends Controller
      */
     public function store()
     {
-        //
-        if (!Company::isCurrentUserAuthorized()) {
-            return redirect()->route('hardware.index')->with('error', trans('general.insufficient_permissions'));
-        } elseif (!config('app.lock_passwords')) {
+        $this->authorize('import');
+        if (!config('app.lock_passwords')) {
             $files = Input::file('files');
             $path = config('app.private_uploads').'/imports';
             $results = [];
@@ -114,12 +112,12 @@ class ImportController extends Controller
     /**
      * Processes the specified Import.
      *
-     * @param  \App\Import  $import
+     * @param  int  $import_id
      * @return \Illuminate\Http\Response
      */
     public function process(ItemImportRequest $request, $import_id)
     {
-        $this->authorize('create', Asset::class);
+        $this->authorize('import');
         // Run a backup immediately before processing
         Artisan::call('backup:run');
         $errors = $request->import(Import::find($import_id));
@@ -157,19 +155,26 @@ class ImportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Import  $import
+     * @param  int  $import_id
      * @return \Illuminate\Http\Response
      */
     public function destroy($import_id)
     {
         $this->authorize('create', Asset::class);
-        $import = Import::find($import_id);
-        try {
-            unlink(config('app.private_uploads').'/imports/'.$import->file_path);
-            $import->delete();
-            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));
-        } catch (\Exception $e) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.import.file_delete_error')), 500);
+        
+        if ($import = Import::find($import_id)) {
+            try {
+                // Try to delete the file
+                Storage::delete('imports/'.$import->file_path);
+                $import->delete();
+                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));
+
+            } catch (\Exception $e) {
+                // If the file delete didn't work, remove it from the database anyway and return a warning
+                $import->delete();
+                return response()->json(Helper::formatStandardApiResponse('warning', null, trans('admin/hardware/message.import.file_not_deleted_warning')));
+            }
         }
+
     }
 }

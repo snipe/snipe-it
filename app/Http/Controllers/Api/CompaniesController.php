@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Transformers\CompaniesTransformer;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use App\Models\Company;
+use App\Http\Controllers\Controller;
+use App\Http\Transformers\CompaniesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Company;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CompaniesController extends Controller
 {
@@ -35,13 +36,13 @@ class CompaniesController extends Controller
             'components_count',
         ];
 
-        $companies = Company::withCount('assets','licenses','accessories','consumables','components','users');
+        $companies = Company::withCount('assets as assets_count','licenses as licenses_count','accessories as accessories_count','consumables as consumables_count','components as components_count','users as users_count');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $companies->TextSearch($request->input('search'));
         }
 
-        $offset = $request->input('offset', 0);
+        $offset = (($companies) && (request('offset') > $companies->count())) ? 0 : request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
@@ -168,7 +169,7 @@ class CompaniesController extends Controller
             'companies.image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $companies = $companies->where('companies.name', 'LIKE', '%'.$request->get('search').'%');
         }
 
@@ -178,7 +179,7 @@ class CompaniesController extends Controller
         // This lets us have more flexibility in special cases like assets, where
         // they may not have a ->name value but we want to display something anyway
         foreach ($companies as $company) {
-            $company->use_image = ($company->image) ? url('/').'/uploads/companies/'.$company->image : null;
+            $company->use_image = ($company->image) ? Storage::disk('public')->url('companies/'.$company->image, $company->image) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($companies);

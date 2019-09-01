@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Aktywa są to elementy identyfikowane przez numer seryjny lub etykietę.  Są to przedmioty o większej wartości, gdzie liczy się identyfikacji określonego elementu.',
 	'archived'  				=> 'Zarchiwizowane',
     'asset'  					=> 'Nabytek',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Przypisz aktywa',
     'checkin'  					=> 'Potwierdzanie zasobu/aktywa',
     'checkout'  				=> 'Przypisz zasób',
     'clone'  					=> 'Klonuj zasób',

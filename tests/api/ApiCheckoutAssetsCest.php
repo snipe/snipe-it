@@ -4,6 +4,7 @@ use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use Illuminate\Support\Facades\Auth;
 
 class ApiCheckoutAssetsCest
@@ -56,11 +57,13 @@ class ApiCheckoutAssetsCest
     public function checkoutAssetToAsset(ApiTester $I) {
         $I->wantTo('Check out an asset to an asset');
         //Grab an asset from the database that isn't checked out.
-        $asset = Asset::whereNull('assigned_to')->where('model_id',8)->first();  // We need to make sure that this is an asset/model that doesn't require acceptance
+        $asset = Asset::whereNull('assigned_to')
+            ->where('model_id',8)
+            ->where('status_id', Statuslabel::deployable()->first()->id)
+            ->first();  // We need to make sure that this is an asset/model that doesn't require acceptance
         $targetAsset = factory('App\Models\Asset')->states('desktop-macpro')->create([
             'name' => "Test Asset For Checkout to"
         ]);
-        // dd($targetAsset->model->category);
         $data = [
             'assigned_asset' => $targetAsset->id,
             'checkout_to_type' => 'asset'
@@ -88,11 +91,13 @@ class ApiCheckoutAssetsCest
     public function checkoutAssetToLocation(ApiTester $I) {
         $I->wantTo('Check out an asset to an asset');
         //Grab an asset from the database that isn't checked out.
-        $asset = Asset::whereNull('assigned_to')->where('model_id',8)->first();
+        $asset = Asset::whereNull('assigned_to')
+            ->where('model_id',8)
+            ->where('status_id', Statuslabel::deployable()->first()->id)
+            ->first();  // We need to make sure that this is an asset/model that doesn't require acceptance
         $targetLocation = factory('App\Models\Location')->create([
             'name' => "Test Location for Checkout"
         ]);
-        // dd($targetAsset->model->category);
         $data = [
             'assigned_location' => $targetLocation->id,
             'checkout_to_type' => 'location'

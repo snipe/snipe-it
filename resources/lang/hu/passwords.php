@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'A jelszó linket elküldtük!',
-    'user'			=> 'A felhasználó nem létezik, vagy nincs hozzárendelt e-mail cím',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

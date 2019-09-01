@@ -1,12 +1,9 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\CustomFieldset;
-use App\Models\CustomField;
-use App\Models\AssetModel;
-use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;
-use Gate;
+use App\Models\CustomFieldset;
+use Illuminate\Database\Eloquent\Collection;
 
 class CustomFieldsetsTransformer
 {

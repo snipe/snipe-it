@@ -1,15 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use Config;
-use Input;
-use Lang;
-use Redirect;
-use App\Models\Setting;
-use Validator;
-use View;
-use App\Models\Group;
 use App\Helpers\Helper;
+use App\Models\Group;
+use Illuminate\Support\Facades\Input;
 
 /**
  * This controller handles all actions related to User Groups for
@@ -31,7 +25,7 @@ class GroupsController extends Controller
     public function index()
     {
         // Show the page
-        return view('groups/index', compact('groups'));
+        return view('groups/index');
     }
 
     /**
@@ -72,7 +66,7 @@ class GroupsController extends Controller
         if ($group->save()) {
             return redirect()->route("groups.index")->with('success', trans('admin/groups/message.success.create'));
         }
-        return redirect(route('groups.create'))->withInput()->withErrors($group->getErrors());
+        return redirect()->back()->withInput()->withErrors($group->getErrors());
     }
 
     /**
@@ -109,9 +103,8 @@ class GroupsController extends Controller
      */
     public function update($id = null)
     {
-        $permissions = config('permissions');
         if (!$group = Group::find($id)) {
-            return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
+            return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
         }
         $group->name = e(Input::get('name'));
         $group->permissions = json_encode(Input::get('permission'));
@@ -126,19 +119,20 @@ class GroupsController extends Controller
     }
 
     /**
-    * Validates and deletes the User Group.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @see GroupsController::getEdit()
-    * @param int $id
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Validates and deletes the User Group.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @see GroupsController::getEdit()
+     * @param int $id
+     * @since [v1.0]
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy($id = null)
     {
         if (!config('app.lock_passwords')) {
             if (!$group = Group::find($id)) {
-                return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
+                return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
             }
             $group->delete();
             // Redirect to the group management page
@@ -152,9 +146,9 @@ class GroupsController extends Controller
      * the content for the group detail page.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param int $locationId
-     * @since [v4.0.11]
+     * @param $id
      * @return \Illuminate\Contracts\View\View
+     * @since [v4.0.11]
      */
     public function show($id)
     {

@@ -37,17 +37,36 @@
         </div>
 
 
+        @can('self.edit_location')
         <!-- Location -->
         @include ('partials.forms.edit.location-profile-select', ['translated_name' => trans('general.location')])
+        @endcan
+
 
         <!-- Language -->
         <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
           <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
           <div class="col-md-9">
-            {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
-            {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
+
+            @if (!config('app.lock_passwords'))
+              {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
+              {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
+            @else
+              <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+            @endif
+
           </div>
         </div>
+
+        <!-- Phone -->
+        <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
+          <label class="col-md-3 control-label" for="phone">{{ trans('admin/users/table.phone') }}</label>
+          <div class="col-md-4">
+            <input class="form-control" type="text" name="phone" id="phone" value="{{ Input::old('phone', $user->phone) }}" />
+            {!! $errors->first('phone', '<span class="alert-msg">:message</span>') !!}
+          </div>
+        </div>
+
 
 
         <!-- Website URL -->
@@ -80,7 +99,7 @@
             <label class="col-md-3 control-label" for="avatar_delete">{{ trans('general.avatar_delete') }}</label>
             <div class="col-md-8">
               {{ Form::checkbox('avatar_delete') }}
-              <img src="{{ url('/') }}/uploads/avatars/{{ $user->avatar }}" class="avatar img-circle">
+              <img src="{{ $user->present()->gravatar}}" class="avatar img-circle">
               {!! $errors->first('avatar_delete', '<span class="alert-msg">:message</span>') !!}
             </div>
           </div>

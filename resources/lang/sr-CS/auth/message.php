@@ -2,36 +2,36 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
-    'throttle'               => 'Too many failed login attempts. Please try again in around :minutes minute(s).',
+    'account_already_exists' => 'Nalog sa ovom e-poštom već postoji.',
+    'account_not_found'      => 'Korisničko ime ili lozinka nisu ispravni.',
+    'account_not_activated'  => 'Ovaj korisnički nalog nije aktiviran.',
+    'account_suspended'      => 'Ovaj je korisnički nalog je blokiran.',
+    'account_banned'         => 'Ovaj je korisnički nalog je zabranjen.',
+    'throttle'               => 'Previše neuspelih pokušaja prijave. Pokušajte ponovno za oko :minutes minuta.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Došlo je do problema prilikom pokušaja prijavljivanja, pokušajte ponovo.',
+        'success' => 'Uspešno ste se prijavili.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Došlo je do problema prilikom pokušaja kreiranja naloga, pokušajte ponovo.',
+        'success' => 'Nalog je uspešno kreiran.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Pojavio se problem prilikom pokušaja ponovnog unosa lozinke, pokušajte ponovo.',
+            'success' => 'E-poruka za oporavak lozinke uspješno je poslata.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Problem prilikom resetovanja lozinke, pokušajte ponovo.',
+            'success' => 'Vaša je lozinka uspešno resetovana.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Došlo je do problema prilikom pokušaja aktivacije naloga, pokušajte ponovo.',
+        'success' => 'Vaš je nalog uspešno aktiviran.',
     ),
 
 );

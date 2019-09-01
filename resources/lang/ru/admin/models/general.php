@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Просмотр моделей',
     'fieldset'                  => 'Набор полей',
     'no_custom_field'           => 'Нет пользовательских полей',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'Добавить значения по умолчанию',
 );

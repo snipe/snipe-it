@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Nuoroda atkurti slaptažodį išsiųsta!',
-    'user'			=> 'Šis naudotojas neegzistuoja arba neturi el. Pašto adreso',
+    'user'			=> 'Neaptikta vartotojo su šiuo elektroninio pašto adresu.',
 ];
 

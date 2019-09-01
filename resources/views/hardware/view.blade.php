@@ -496,10 +496,11 @@
             </div><!-- /col-md-8 -->
 
             <div class="col-md-4">
+
               @if ($asset->image)
-                <img src="{{ url('/') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg img-responsive">
+                <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" class="assetimg img-responsive">
               @elseif (($asset->model) && ($asset->model->image!=''))
-                <img src="{{ url('/') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
+                <img src="{{ Storage::disk('public')->url(app('models_upload_url').e($asset->model->image )) }}" class="assetimg img-responsive">
               @endif
 
               @if  ($snipeSettings->qr_code=='1')
@@ -564,19 +565,21 @@
                   </thead>
                   <tbody>
                     @foreach ($asset->licenseseats as $seat)
-                    <tr>
-                      <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
-                      <td>
-                          @can('viewKeys', $seat->license)
-                            {!! nl2br(e($seat->license->serial)) !!}
-                          @else
-                           ------------
-                          @endcan
-                      </td>
-                      <td>
-                        <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('general.checkin') }}</a>
-                      </td>
-                    </tr>
+                      @if ($seat->license)
+                        <tr>
+                          <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
+                          <td>
+                            @can('viewKeys', $seat->license)
+                              {!! nl2br(e($seat->license->serial)) !!}
+                            @else
+                              ------------
+                            @endcan
+                          </td>
+                          <td>
+                            <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('general.checkin') }}</a>
+                          </td>
+                        </tr>
+                        @endif
                     @endforeach
                   </tbody>
                 </table>
@@ -750,11 +753,12 @@
                 <thead>
                 <tr>
                   <th data-field="icon" data-visible="true" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
-                  <th class="col-sm-2" data-visible="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                  <th class="col-sm-2" data-visible="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.record_created') }}</th>
                   <th class="col-sm-1" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-                  <th class="col-sm-1" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                  <th class="col-sm-1" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                  <th class="col-sm-2" data-visible="true" data-field="action_date" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                   <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
                   @if  ($snipeSettings->require_accept_signature=='1')
                     <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
@@ -828,7 +832,7 @@
 
                         <td>
                           @if ($file->created_at)
-                            {{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
+                            {{ \App\Helpers\Helper::getFormattedDateObject($file->created_at, 'datetime', false) }}
                           @endif
                         </td>
 
@@ -840,12 +844,7 @@
                         </td>
                       </tr>
                     @endforeach
-                  @else
-                    <tr>
-                      <td colspan="4">
-                        {{ trans('general.no_results') }}
-                      </td>
-                    </tr>
+                  
                   @endif
                 </tbody>
               </table>

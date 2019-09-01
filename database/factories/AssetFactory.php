@@ -26,7 +26,11 @@ $factory->define(Asset::class, function (Faker\Generator $faker) {
         'purchase_cost' => $faker->randomFloat(2, '299.99', '2999.99'),
         'order_number' => $faker->numberBetween(1000000, 50000000),
         'supplier_id' => 1,
-        'requestable' => $faker->boolean()
+        'requestable' => $faker->boolean(),
+        'assigned_to' => null,
+        'assigned_type' => null,
+        'next_audit_date' => null,
+        'last_checkout' => null,
     ];
 });
 

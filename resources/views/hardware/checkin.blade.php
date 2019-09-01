@@ -46,14 +46,25 @@
             @endif
 
             <!-- Asset Name -->
-            <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
-              {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
-              <div class="col-md-8">
-                <input class="form-control" type="text" name="name" id="name"
-                value="{{ Input::old('name', $asset->name) }}"/>
-                {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            <!-- Only allow an asset name to be changed if the checker-outer has permission to edit the asset -->
+            @can('update', $asset)
+              <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
+                {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
+                <div class="col-md-8">
+                  <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" tabindex="1">
+                  {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                </div>
               </div>
-            </div>
+            @else
+              @if ($asset->name!='')
+                <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
+                  {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
+                  <div class="col-md-8">
+                    <p class="form-control-static">{{ $asset->name }}</p>
+                  </div>
+                </div>
+            @endif
+          @endcan
 
             <!-- Status -->
             <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
@@ -71,7 +82,7 @@
               {{ Form::label('checkin_at', trans('admin/hardware/form.checkin_date'), array('class' => 'col-md-3 control-label')) }}
               <div class="col-md-8">
               <div class="input-group col-md-5 required">
-                <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d" data-autoclose="true">
                   <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkin_at" id="checkin_at" value="{{ Input::old('checkin_at', date('Y-m-d')) }}">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>

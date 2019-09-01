@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use App\Models\Setting;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
-class SaveUserRequest extends Request
+class SaveUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -37,7 +39,7 @@ class SaveUserRequest extends Request
                 $rules['username'] = 'required_unless:ldap_import,1|string|min:1';
                 if ($this->request->get('ldap_import') == false)
                 {
-                    $rules['password'] = Setting::passwordComplexityRulesSaving('store');
+                    $rules['password'] = Setting::passwordComplexityRulesSaving('store').'|confirmed';
                 }
                 break;
             }
@@ -46,7 +48,7 @@ class SaveUserRequest extends Request
             case 'PUT':
                 $rules['first_name'] = 'required|string|min:1';
                 $rules['username'] = 'required_unless:ldap_import,1|string|min:1';
-                $rules['password'] = Setting::passwordComplexityRulesSaving('update');
+                $rules['password'] = Setting::passwordComplexityRulesSaving('update').'|confirmed';
                 break;
 
             // Save only what's passed
@@ -58,10 +60,9 @@ class SaveUserRequest extends Request
 
             default:break;
         }
-
-        $rules['password_confirm'] = 'sometimes|required_with:password';
-
+        
         return $rules;
 
     }
+
 }

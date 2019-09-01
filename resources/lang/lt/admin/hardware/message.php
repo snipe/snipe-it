@@ -62,7 +62,7 @@ return array(
         'success' 		=> 'Įranga išduota sėkmingai.',
         'user_does_not_exist' => 'Netinkamas naudotojas. Prašome bandykite dar kartą.',
         'not_available' => 'Šis turtas negali būti išsiunčiamas!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Jūs turite pasirinkti bent vieną turtą iš sąrašo'
     ),
 
     'checkin' => array(

@@ -2,9 +2,8 @@
 
 namespace App\Observers;
 
-use App\Models\License;
-use App\Models\Setting;
 use App\Models\Actionlog;
+use App\Models\License;
 use Auth;
 
 class LicenseObserver

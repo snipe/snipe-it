@@ -1,15 +1,15 @@
 <?php
 namespace App\Http\Controllers\Api;
 
-use App\Models\AssetModel;
-use App\Models\Asset;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Transformers\AssetModelsTransformer;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
-
+use App\Models\Asset;
+use App\Models\AssetModel;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This class controls all actions related to asset models for
@@ -48,19 +48,19 @@ class AssetModelsController extends Controller
             'models.updated_at',
          ])
             ->with('category','depreciation', 'manufacturer','fieldset')
-            ->withCount('assets');
+            ->withCount('assets as assets_count');
 
 
 
-        if ($request->has('status')) {
+        if ($request->filled('status')) {
             $assetmodels->onlyTrashed();
         }
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $assetmodels->TextSearch($request->input('search'));
         }
 
-        $offset = $request->input('offset', 0);
+        $offset = (($assetmodels) && (request('offset') > $assetmodels->count())) ? 0 : request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'models.created_at';
@@ -114,7 +114,7 @@ class AssetModelsController extends Controller
     public function show($id)
     {
         $this->authorize('view', AssetModel::class);
-        $assetmodel = AssetModel::withCount('assets')->findOrFail($id);
+        $assetmodel = AssetModel::withCount('assets as assets_count')->findOrFail($id);
         return (new AssetModelsTransformer)->transformAssetModel($assetmodel);
     }
 
@@ -177,9 +177,9 @@ class AssetModelsController extends Controller
 
         if ($assetmodel->image) {
             try  {
-                unlink(public_path().'/uploads/models/'.$assetmodel->image);
+                Storage::disk('public')->delete('assetmodels/'.$assetmodel->image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 
@@ -210,7 +210,7 @@ class AssetModelsController extends Controller
 
         $settings = \App\Models\Setting::getSettings();
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $assetmodels = $assetmodels->SearchByManufacturerOrCat($request->input('search'));
         }
 
@@ -234,7 +234,7 @@ class AssetModelsController extends Controller
                 $assetmodel->use_text .=  ' (#'.e($assetmodel->model_number).')';
             }
 
-            $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? url('/').'/uploads/models/'.$assetmodel->image : null;
+            $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? Storage::disk('public')->url('assetmodels/'.e($assetmodel->image)) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($assetmodels);

@@ -26,12 +26,14 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
       'nl'=> "Dutch",
       'en-ID'=> "English, Indonesia",
       'et'=> "Estonian",
+      'fil'=> "Filipino",
       'fi'=> "Finnish",
       'fr'=> "French",
       'de'=> "German",
       'el'=> "Greek",
       'he'=> "Hebrew",
       'hu'=> "Hungarian",
+      'is' => 'Icelandic',
       'id'=> "Indonesian",
       'ga-IE'=> "Irish",
       'it'=> "Italian",
@@ -39,9 +41,9 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
       'ko'=> "Korean",
       'lv'=>'Latvian',
       'lt'=> "Lithuanian",
+      'mk'=> "Macedonian",
       'ms'=> "Malay",
       'mi'=> "Maori",
-      'mk'=> "Macedonian",
       'mn'=> "Mongolian",
       'no'=> "Norwegian",
       'fa'=> "Persian",
@@ -50,9 +52,11 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
       'pt-BR'=> "Portuguese, Brazilian",
       'ro'=> "Romanian",
       'ru'=> "Russian",
+      'sr-CS' => 'Serbian (Latin)',
       'sl'=> "Slovenian",
       'es-ES'=> "Spanish",
       'es-CO'=> "Spanish, Colombia",
+      'es-MX'=> "Spanish, Mexico",
       'es-VE'=> "Spanish, Venezuela",
       'sv-SE'=> "Swedish",
       'tl'=> "Tagalog",
@@ -369,6 +373,7 @@ Form::macro('date_display_format', function ($name = "date_display_format", $sel
         'd/m/Y',
         'm/j/Y',
         'd.m.Y',
+        'Y.m.d.',
     ];
 
     foreach ($formats as $format) {
@@ -460,11 +465,11 @@ Form::macro('username_format', function ($name = "username_format", $selected = 
 
     $formats = array(
         'firstname.lastname' => trans('general.firstname_lastname_format'),
-        'firstname' => trans('general.first_name_format'),
-        'filastname' => trans('general.filastname_format'),
-        'lastnamefirstinitial' => trans('general.lastnamefirstinitial_format'),
         'firstname_lastname' => trans('general.firstname_lastname_underscore_format'),
-
+        'filastname' => trans('general.filastname_format'),
+        'firstintial.lastname' => trans('general.firstintial_dot_lastname_format'),
+        'firstname' => trans('general.first_name_format'),
+        'lastnamefirstinitial' => trans('general.lastnamefirstinitial_format'),
     );
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%">';

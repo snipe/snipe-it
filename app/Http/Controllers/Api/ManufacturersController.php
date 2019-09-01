@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use App\Models\Manufacturer;
-use App\Http\Transformers\DatatablesTransformer;
+use App\Http\Controllers\Controller;
 use App\Http\Transformers\ManufacturersTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Manufacturer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ManufacturersController extends Controller
 {
@@ -26,20 +26,20 @@ class ManufacturersController extends Controller
 
         $manufacturers = Manufacturer::select(
             array('id','name','url','support_url','support_email','support_phone','created_at','updated_at','image', 'deleted_at')
-        )->withCount('assets')->withCount('licenses')->withCount('consumables')->withCount('accessories');
+        )->withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('consumables as consumables_count')->withCount('accessories as accessories_count');
 
         if ($request->input('deleted')=='true') {
             $manufacturers->onlyTrashed();
         }
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $manufacturers = $manufacturers->TextSearch($request->input('search'));
         }
 
 
 
 
-        $offset = request('offset', 0);
+        $offset = (($manufacturers) && (request('offset') > $manufacturers->count())) ? 0 : request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
@@ -83,7 +83,7 @@ class ManufacturersController extends Controller
     public function show($id)
     {
         $this->authorize('view', Manufacturer::class);
-        $manufacturer = Manufacturer::findOrFail($id);
+        $manufacturer = Manufacturer::withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('consumables as consumables_count')->withCount('accessories as accessories_count')->findOrFail($id);
         return (new ManufacturersTransformer)->transformManufacturer($manufacturer);
     }
 
@@ -120,11 +120,21 @@ class ManufacturersController extends Controller
      */
     public function destroy($id)
     {
+
         $this->authorize('delete', Manufacturer::class);
-        $manufacturer = Manufacturer::findOrFail($id);
+        $manufacturer = Manufacturer::withCount('assets as assets_count', 'licenses as licenses_count', 'consumables as consumables_count', 'accessories as accessories_count', 'models as models_count'  )->findOrFail($id);
         $this->authorize('delete', $manufacturer);
-        $manufacturer->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
+
+        if (($manufacturer->assets_count == 0)  && ($manufacturer->licenses_count==0)  && ($manufacturer->consumables_count==0)  && ($manufacturer->accessories_count==0)  && ($manufacturer->models_count==0)  && ($manufacturer->deleted_at=='')) {
+            $manufacturer->delete();
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/manufacturers/message.delete.error')));
+
+
+
+
 
     }
 
@@ -145,7 +155,7 @@ class ManufacturersController extends Controller
             'image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $manufacturers = $manufacturers->where('name', 'LIKE', '%'.$request->get('search').'%');
         }
 
@@ -156,7 +166,7 @@ class ManufacturersController extends Controller
         // they may not have a ->name value but we want to display something anyway
         foreach ($manufacturers as $manufacturer) {
             $manufacturer->use_text = $manufacturer->name;
-            $manufacturer->use_image = ($manufacturer->image) ? url('/').'/uploads/manufacturers/'.$manufacturer->image : null;
+            $manufacturer->use_image = ($manufacturer->image) ? Storage::disk('public')->url('manufacturers/'.$manufacturer->image, $manufacturer->image) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($manufacturers);

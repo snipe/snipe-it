@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Asset;
+use Illuminate\Console\Command;
 
 class SyncAssetCounters extends Command
 {
@@ -39,7 +39,7 @@ class SyncAssetCounters extends Command
     public function handle()
     {
         $start = microtime(true);
-        $assets = Asset::withCount('checkins', 'checkouts', 'userRequests')
+        $assets = Asset::withCount('checkins as checkins_count', 'checkouts as checkouts_count', 'userRequests as user_requests_count')
             ->withTrashed()->get();
 
         if ($assets) {

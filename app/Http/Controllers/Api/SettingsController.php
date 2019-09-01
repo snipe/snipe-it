@@ -2,103 +2,84 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Ldap;
-use Validator;
+use App\Http\Transformers\LoginAttemptsTransformer;
 use App\Models\Setting;
-use Mail;
-use App\Notifications\SlackTest;
-use Notification;
 use App\Notifications\MailTest;
+use App\Notifications\SlackTest;
+use App\Services\LdapAd;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
 
 class SettingsController extends Controller
 {
 
-
-    public function ldaptest()
+    /**
+     * Test the ldap settings
+     * 
+     * @author Wes Hulette <jwhulette@gmail.com>
+     * 
+     * @since 5.0.0
+     * 
+     * @param App\Models\LdapAd $ldap
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ldapAdSettingsTest(LdapAd $ldap): JsonResponse
     {
-
-        if (Setting::getSettings()->ldap_enabled!='1') {
-            \Log::debug('LDAP is not enabled cannot test.');
+        if(!$ldap->init()) {
+            Log::info('LDAP is not enabled cannot test.');
             return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
         }
 
-        \Log::debug('Preparing to test LDAP connection');
+        // The connect, bind and resulting users message
+        $message = [];
 
+        Log::info('Preparing to test LDAP user login');
+        // Test user can connect to the LDAP server
         try {
-            $connection = Ldap::connectToLdap();
-            try {
-                \Log::debug('attempting to bind to LDAP for LDAP test');
-                Ldap::bindAdminToLdap($connection);
-                return response()->json(['message' => 'It worked!'], 200);
-            } catch (\Exception $e) {
-                \Log::debug('Bind failed');
-                return response()->json(['message' => $e->getMessage()], 400);
-                //return response()->json(['message' => $e->getMessage()], 500);
-            }
-        } catch (\Exception $e) {
-            \Log::debug('Connection failed');
-            return response()->json(['message' => $e->getMessage()], 600);
+            $ldap->testLdapAdUserConnection();
+            $message['login'] = [
+                'message' => 'Successfully connected to LDAP server.'
+            ];
+        } catch (\Exception $ex) {
+            return response()->json([
+                'message' => 'Error logging into LDAP server, error: ' . $ex->getMessage() . ' - Verify your that your username and password are correct'
+            ], 400);
         }
 
-
-    }
-
-    public function ldaptestlogin(Request $request)
-    {
-
-        if (Setting::getSettings()->ldap_enabled!='1') {
-            \Log::debug('LDAP is not enabled. Cannot test.');
-            return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
-        }
-
-
-        $rules = array(
-            'ldaptest_user' => 'required',
-            'ldaptest_password' => 'required'
-        );
-
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            \Log::debug('LDAP Validation test failed.');
-            $validation_errors = implode(' ',$validator->errors()->all());
-            return response()->json(['message' => $validator->errors()->all()], 400);
-        }
-        
-
-        \Log::debug('Preparing to test LDAP login');
+        Log::info('Preparing to test LDAP bind connection');
+        // Test user can bind to the LDAP server
         try {
-            $connection = Ldap::connectToLdap();
-            try {
-                Ldap::bindAdminToLdap($connection);
-                \Log::debug('Attempting to bind to LDAP for LDAP test');
-                try {
-                    $ldap_user = Ldap::findAndBindUserLdap($request->input('ldaptest_user'), $request->input('ldaptest_password'));
-                    if ($ldap_user) {
-                        \Log::debug('It worked! '. $request->input('ldaptest_user').' successfully binded to LDAP.');
-                        return response()->json(['message' => 'It worked! '. $request->input('ldaptest_user').' successfully binded to LDAP.'], 200);
-                    }
-                    return response()->json(['message' => 'Login Failed. '. $request->input('ldaptest_user').' did not successfully bind to LDAP.'], 400);
-
-                } catch (\Exception $e) {
-                    \Log::debug('LDAP login failed');
-                    return response()->json(['message' => $e->getMessage()], 400);
-                }
-
-            } catch (\Exception $e) {
-                \Log::debug('Bind failed');
-                return response()->json(['message' => $e->getMessage()], 400);
-                //return response()->json(['message' => $e->getMessage()], 500);
-            }
-        } catch (\Exception $e) {
-            \Log::debug('Connection failed');
-            return response()->json(['message' => $e->getMessage()], 500);
+            $ldap->testLdapAdBindConnection();
+            $message['bind'] = [
+                'message' => 'Successfully binded to LDAP server.'
+            ];
+        } catch (\Exception $ex) {
+            return response()->json([
+                'message' => 'Error binding to LDAP server, error: ' . $ex->getMessage()
+            ], 400);
         }
 
+        Log::info('Preparing to get sample user set from LDAP directory');
+        // Get a sample of 10 users so user can verify the data is correct
+        try {
+            $users = $ldap->testUserImportSync();
+            $message['user_sync']  = [
+                'users' => $users
+            ];
+        } catch (\Exception $ex) {
+            $message['user_sync']  = [
+                'message' => 'Error getting users from LDAP directory, error: ' . $ex->getMessage()
+            ];
+            return response()->json($message, 400);
+        }
 
+        return response()->json($message, 200);
     }
-
 
     public function slacktest()
     {
@@ -140,6 +121,30 @@ class SettingsController extends Controller
             }
         }
         return response()->json(['message' => 'Mail would have been sent, but this application is in demo mode! '], 200);
+
+    }
+
+    /**
+     * Get a list of login attempts
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0.0]
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function showLoginAttempts(Request $request)
+    {
+        $allowed_columns = ['id', 'username', 'remote_ip', 'user_agent','successful','created_at'];
+
+        $login_attempts =  DB::table('login_attempts');
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'created_at';
+
+        $total = $login_attempts->count();
+        $login_attempts->orderBy($sort, $order);
+        $login_attempt_results = $login_attempts->skip(request('offset', 0))->take(request('limit',  20))->get();
+
+        return (new LoginAttemptsTransformer)->transformLoginAttempts($login_attempt_results, $total);
 
     }
 

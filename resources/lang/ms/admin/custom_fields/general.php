@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Elemen',
     'field_format'            => 'Format',
     'field_custom_format'     => 'Format Tersuai',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Medan ini membolehkan anda menggunakan ungkapan regex untuk pengesahan. Ia harus bermula dengan "regex:" - sebagai contoh, untuk mengesahkan bahawa nilai medan khusus mengandungi IMEI yang sah (15 angka numerik), anda akan menggunakan <code>regex: / ^[0-9]{15}$ /</code>.',
     'required'   		          => 'Diperlukan',
     'req'   		              => 'Req.',
     'used_by_models'   		    => 'Digunakan Oleh Model',
@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => 'Fieldset baru',
     'create_field'            => 'Padang Tersuai Baru',
     'value_encrypted'      	        => 'Nilai medan ini disulitkan dalam pangkalan data. Hanya pengguna admin sahaja yang dapat melihat nilai yang disahkrit',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Sertakan nilai medan ini dalam e-mel semak keluar yang dihantar kepada pengguna? Medan yang disulitkan tidak boleh dimasukkan ke dalam e-mel.',
 );

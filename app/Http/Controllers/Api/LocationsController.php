@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use App\Models\Location;
+use App\Http\Controllers\Controller;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Location;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LocationsController extends Controller
 {
@@ -41,17 +42,17 @@ class LocationsController extends Controller
             'locations.updated_at',
             'locations.image',
             'locations.currency'
-        ])->withCount('assignedAssets')
-        ->withCount('assets')
-        ->withCount('users');
+        ])->withCount('assignedAssets as assigned_assets_count')
+        ->withCount('assets as assets_count')
+        ->withCount('users as users_count');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $locations = $locations->TextSearch($request->input('search'));
         }
 
 
 
-        $offset = $request->input('offset', 0);
+        $offset = (($locations) && (request('offset') > $locations->count())) ? 0 : request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
@@ -106,7 +107,26 @@ class LocationsController extends Controller
     public function show($id)
     {
         $this->authorize('view', Location::class);
-        $location = Location::findOrFail($id);
+        $location = Location::with('parent', 'manager', 'childLocations')
+            ->select([
+                'locations.id',
+                'locations.name',
+                'locations.address',
+                'locations.address2',
+                'locations.city',
+                'locations.state',
+                'locations.zip',
+                'locations.country',
+                'locations.parent_id',
+                'locations.manager_id',
+                'locations.created_at',
+                'locations.updated_at',
+                'locations.image',
+                'locations.currency'
+            ])
+            ->withCount('assignedAssets as assigned_assets_count')
+            ->withCount('assets as assets_count')
+            ->withCount('users as users_count')->findOrFail($id);
         return (new LocationsTransformer)->transformLocation($location);
     }
 
@@ -173,7 +193,7 @@ class LocationsController extends Controller
             'locations.image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $locations = $locations->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
         }
 
@@ -184,7 +204,7 @@ class LocationsController extends Controller
         // they may not have a ->name value but we want to display something anyway
         foreach ($locations as $location) {
             $location->use_text = $location->name;
-            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
+            $location->use_image = ($location->image) ? Storage::disk('public')->url('locations/'.$location->image, $location->image): null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($locations);

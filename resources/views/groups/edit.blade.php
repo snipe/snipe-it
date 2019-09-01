@@ -98,12 +98,12 @@
             @else
 
                 <tr class="header-row permissions-row">
-                    <td class="col-md-5 tooltip-base permissions-item  header-name"
+                    <td class="col-md-5 tooltip-base permissions-item header-name"
                         data-toggle="tooltip"
                         data-placement="right"
                         title="{{ $localPermission['note'] }}">
                         <h4>{{ $area . ': ' . $localPermission['label'] }}</h4>
-                        <p>{{ $localPermission['note'] }}</p>
+
 
                     </td>
                     <td class="col-md-1 permissions-item" style="vertical-align: bottom">
@@ -135,9 +135,7 @@
 
                     @endif
                 @endforeach
-                <tr>
-                    <td colspan="3"></td>
-                </tr>
+
             @endif
 
         @endforeach

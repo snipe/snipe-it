@@ -206,7 +206,7 @@
     'unknown_admin'			=> 'Administrador Desconocido',
     'username_format'		=> 'Formato de Nombre de Usuario',
     'update'                => 'Actualizar',
-    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
+    'upload_filetypes_help'      => 'Algunos tipos de archivos permitidos son png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, rtf y rar. Tamaño máximo permitido: :size.',
     'uploaded'              => 'Actualizado',
     'user'					=> 'Usuario',
     'accepted'			    => 'aceptado',

@@ -37,13 +37,26 @@
             @endif
 
             <!-- Asset Name -->
-            <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
-              {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
-              <div class="col-md-8">
-                <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" tabindex="1">
-                {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-              </div>
-            </div>
+            <!-- Only allow an asset name to be changed if the checker-outer has permission to edit the asset -->
+            @can('update', $asset)
+                <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
+                  {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" tabindex="1">
+                    {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                  </div>
+                </div>
+            @else
+                @if ($asset->name!='')
+                    <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
+                        {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
+                        <div class="col-md-8">
+                            <p class="form-control-static">{{ $asset->name }}</p>
+                        </div>
+                    </div>
+                @endif
+            @endcan
+
                 @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true'])
 
                 @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user', 'required'=>'true'])

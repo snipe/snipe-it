@@ -151,6 +151,17 @@
       </div>
     </div>
 
+    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+      <div class="box box-default">
+        <div class="box-body text-center">
+          <a href="{{ route('settings.logins.index') }}" class="btn btn-lg btn-white"><i class="fa fa-sign-in fa-3x"></i></a>
+          <br>
+          Login Attempts
+          <p class="help-block">List of logins</p>
+        </div>
+      </div>
+    </div>
+
 
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">

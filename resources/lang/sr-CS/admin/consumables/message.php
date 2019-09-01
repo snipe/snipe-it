@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Potrošni materijal ne postoji.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Potrošni materijal nije kreiran, pokušajte ponovo.',
+        'success' => 'Potrošni materijal uspešno kreiran.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Potrošni materijal nije ažuriran, pokušajte ponovo',
+        'success' => 'Potrošni materijal uspešno ažuriran.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Da li ste sigurni da želite izbrisati ovaj potrošni materijal?',
+        'error'   => 'Došlo je do problema s brisanjem potrošnog materijala. Molim pokušaj te ponovo.',
+        'success' => 'Potrošni materijal je uspešno izbrisan.'
     ),
 
      'checkout' => array(
         'error'   		=> 'Consumable was not checked out, please try again',
         'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušaj te ponovo.'
     ),
 
     'checkin' => array(
         'error'   		=> 'Consumable was not checked in, please try again',
         'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušaj te ponovo.'
     )
 
 

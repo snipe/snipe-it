@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Veza lozinke je poslana!',
-    'user'			=> 'Taj korisnik ne postoji ili nema povezanu adresu e-pošte',
+    'user'			=> 'No matching active user found with that email.',
 ];
 

@@ -2,9 +2,8 @@
 
 namespace App\Observers;
 
-use App\Models\Component;
-use App\Models\Setting;
 use App\Models\Actionlog;
+use App\Models\Component;
 use Auth;
 
 class ComponentObserver

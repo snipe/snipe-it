@@ -3,7 +3,6 @@ namespace App\Http\Transformers;
 
 use App\Models\Import;
 use App\Models\Setting;
-use Illuminate\Database\Eloquent\Collection;
 
 class ImportsTransformer
 {

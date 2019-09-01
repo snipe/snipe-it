@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+# A supervisor event listener which terminates supervisord if any of its child
+# processes enter the FATAL state.
+# https://stackoverflow.com/a/37527488/119527
+import os
+import signal
+
+from supervisor import childutils
+
+def main():
+    while True:
+        headers, payload = childutils.listener.wait()
+        childutils.listener.ok()
+        if headers['eventname'] != 'PROCESS_STATE_FATAL':
+            continue
+        os.kill(os.getppid(), signal.SIGTERM)
+
+if __name__ == "__main__":
+    main()

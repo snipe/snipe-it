@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Department;
-use App\Http\Transformers\DepartmentsTransformer;
 use App\Helpers\Helper;
-use Auth;
+use App\Http\Controllers\Controller;
+use App\Http\Transformers\DepartmentsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Department;
+use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DepartmentsController extends Controller
 {
@@ -33,13 +34,13 @@ class DepartmentsController extends Controller
             'departments.created_at',
             'departments.updated_at',
             'departments.image'
-        ])->with('users')->with('location')->with('manager')->with('company')->withCount('users');
+        ])->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $departments = $departments->TextSearch($request->input('search'));
         }
 
-        $offset = $request->input('offset', 0);
+        $offset = (($departments) && (request('offset') > $departments->count())) ? 0 : request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
@@ -76,7 +77,7 @@ class DepartmentsController extends Controller
         $department = new Department;
         $department->fill($request->all());
         $department->user_id = Auth::user()->id;
-        $department->manager_id = ($request->has('manager_id' ) ? $request->input('manager_id') : null);
+        $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
 
         if ($department->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.create.success')));
@@ -100,14 +101,36 @@ class DepartmentsController extends Controller
         return (new DepartmentsTransformer)->transformDepartment($department);
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->authorize('update', Department::class);
+        $department = Department::findOrFail($id);
+        $department->fill($request->all());
+
+        if ($department->save()) {
+            return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.update.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, $department->getErrors()));
+    }
+
 
 
     /**
-     * Validates and deletes selected location.
+     * Validates and deletes selected department.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $locationId
-     * @since [v1.0]
+     * @since [v4.0]
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
@@ -142,7 +165,7 @@ class DepartmentsController extends Controller
             'image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $departments = $departments->where('name', 'LIKE', '%'.$request->get('search').'%');
         }
 
@@ -152,7 +175,7 @@ class DepartmentsController extends Controller
         // This lets us have more flexibility in special cases like assets, where
         // they may not have a ->name value but we want to display something anyway
         foreach ($departments as $department) {
-            $department->use_image = ($department->image) ? url('/').'/uploads/departments/'.$department->image : null;
+            $department->use_image = ($department->image) ? Storage::disk('public')->url('departments/'.$department->image, $department->image) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($departments);

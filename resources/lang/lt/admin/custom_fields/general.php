@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Elementas',
     'field_format'            => 'Formatas',
     'field_custom_format'     => 'Pritaikomas formatas',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Šis laukelis leidžia Jums naudoti REGEX validaciją. Tai turėtų prasidėti "regax:" - pavyzdžiui norint validuoti pasirinkto laukelio reikšmę IMEI (15 skaičių), privalote naudoti <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'Privalomas',
     'req'   		              => 'Privaloma.',
     'used_by_models'   		    => 'Naudojama modelių',
@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => 'Nauja laukų grupė',
     'create_field'            => 'Naujas pritaikomas laukelis',
     'value_encrypted'      	        => 'Šio lauko vertė yra užkoduota duomenų bazėje. Tik admin vartotojai galės peržiūrėti iššifruotą vertę',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Įterptos šio laukelio išdavimo reikšmės bus siunčiamos vartotojams? Užšifruoti laukai negali būti įterpti į el. laišką.',
 );

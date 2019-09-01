@@ -2,10 +2,7 @@
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-use App\Models\Setting;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class UserPresenter
@@ -226,14 +223,14 @@ class UserPresenter extends Presenter
             [
                 "field" => "two_factor_enrolled",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "switchable" => true,
                 "title" => trans('admin/users/general.two_factor_enrolled'),
                 "visible" => false,
                 'formatter' => 'trueFalseFormatter'
             ],
             [
-                "field" => "two_factor_active",
+                "field" => "two_factor_activated",
                 "searchable" => false,
                 "sortable" => false,
                 "switchable" => true,
@@ -246,7 +243,7 @@ class UserPresenter extends Presenter
                 "searchable" => false,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => trans('general.activated'),
+                "title" => trans('general.login_enabled'),
                 "visible" => true,
                 'formatter' => 'trueFalseFormatter'
             ],
@@ -320,16 +317,20 @@ class UserPresenter extends Presenter
     {
 
         if ($this->avatar) {
-            return config('app.url').'/uploads/avatars/'.$this->avatar;
+            return Storage::disk('public')->url('avatars/'.$this->avatar, $this->avatar);
         }
 
-        if ((Setting::getSettings()->load_remote=='1') && ($this->email!='')) {
+        if ($this->email != '') {
+            /**
+             * @see https://en.gravatar.com/site/implement/images/
+             * Return a default [Myster Person] gravatar if the user does not have one
+             */
             $gravatar = md5(strtolower(trim($this->email)));
-            return "//gravatar.com/avatar/".$gravatar;
+            // return "//gravatar.com/avatar/".$gravatar.'?d=mp';
         }
 
-        // Set a fun, gender-neutral default icon
-        return url('/').'/img/default-sm.png';
+        // Set a fun, gender-neutral default icon when there is no email
+        return url('/img/default-sm.png');
 
     }
 

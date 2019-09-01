@@ -79,6 +79,7 @@ class PaveIt extends Command
                 DB::statement('delete from accessories_users');
                 DB::statement('delete from asset_logs');
                 DB::statement('delete from asset_maintenances');
+                DB::statement('delete from login_attempts');
                 DB::statement('delete from asset_uploads');
                 DB::statement('delete from action_logs');
                 DB::statement('delete from checkout_requests');

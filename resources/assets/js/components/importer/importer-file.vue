@@ -1,34 +1,54 @@
 <style>
-tr {
-    padding-left:30px;
-}
+    tr {
+        padding-left:30px;
+    }
 </style>
 
 <template>
     <tr v-show="processDetail">
-        <td colspan="3">
+        <td colspan="5">
+            <div class="col-md-2 text-left">
+            </div>
+            <div class="col-md-8 col-md-offset-2 text-center" style="padding-top: 30px; margin: 0 auto;">
+            <div class="col-md-12 text-left">
+
             <h4 class="modal-title">Import File:</h4>
             <div class="dynamic-form-row">
-                <div class="col-md-4 col-xs-12">
+                <div class="col-md-5 col-xs-12">
                     <label for="import-type">Import Type:</label>
                 </div>
-                <div class="col-md-4 col-xs-12">
+                <div class="col-md-7 col-xs-12">
                     <select2 :options="options.importTypes" v-model="options.importType" required>
                         <option disabled value="0"></option>
                     </select2>
                 </div>
             </div>
             <div class="dynamic-form-row">
-                <div class="col-md-4 col-xs-12">
+                <div class="col-md-5 col-xs-12">
                     <label for="import-update">Update Existing Values?:</label>
                 </div>
-                <div class="col-md-4 col-xs-12">
+                <div class="col-md-7 col-xs-12">
                     <input type="checkbox" name="import-update" v-model="options.update">
                 </div>
             </div>
+            <div class="dynamic-form-row">
+                <div class="col-md-5 col-xs-12">
+                    <label for="send-welcome">Send Welcome Email for new Users?</label>
+                </div>
+                <div class="col-md-7 col-xs-12">
+                    <input type="checkbox" name="send-welcome" v-model="options.send_welcome">
+                </div>
+                </div>
+            </div>
+            <div class="alert col-md-12" style="text-align:left"
+                 :class="alertClass"
+                 v-if="statusText">
+                {{ this.statusText }}
+            </div>
 
-            <div class="col-md-12" style="padding-top: 30px;">
-            <table class="table">
+
+            <div class="text-left" style="padding-top: 30px;">
+            <table class="table table-striped snipe-table">
             <thead>
                 <th>Header Field</th>
                 <th>Import Field</th>
@@ -54,21 +74,24 @@ tr {
                 </template>
             </tbody>
             </table>
+                <br>
+                 <div class="col-md-8 col-md-offset-2 text-right">
+                     <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">Cancel</button>
+                     <button type="submit" class="btn btn-sm btn-primary" @click="postSave">Import</button>
+                     <br><br>
+                 </div>
+
+                <div class="alert col-md-12" style="padding-top: 20px; text-align:left; "
+                     :class="alertClass"
+                     v-if="statusText">
+                    {{ this.statusText }}
+                </div>
+
+             </div>
             </div>
+
         </td>
 
-        <td>
-            <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">Cancel</button>
-            <button type="submit" class="btn btn-sm btn-primary" @click="postSave">Import</button>
-            <div 
-                class="alert col-md-5 col-md-offset-1"
-                :class="alertClass"
-                style="text-align:left"
-                v-if="statusText"
-            >
-                {{ this.statusText }}
-            </div>
-        </td>
     </tr>
 </template>
 
@@ -113,6 +136,7 @@ tr {
                         {id: 'serial', text: 'Serial Number' },
                         {id: 'supplier', text: 'Supplier' },
                         {id: 'username', text: 'Username' },
+                        {id: 'department', text: 'Department' },
                     ],
                     assets: [
                         {id: 'asset_tag', text: 'Asset Tag' },
@@ -143,6 +167,10 @@ tr {
                         {id: 'jobtitle', text: 'Job Title' },
                         {id: 'last_name', text: 'Last Name' },
                         {id: 'phone_number', text: 'Phone Number' },
+                        {id: 'manager_first_name', text: 'Manager First Name' },
+                        {id: 'manager_last_name', text: 'Manager Last Name' },
+                        {id: 'department', text: 'Department' },
+                        {id: 'activated', text: 'Activated' },
 
                     ],
                     customFields: this.customFields,
@@ -168,14 +196,14 @@ tr {
                 switch(this.options.importType) {
                     case 'asset':
                         return this.columnOptions.general
-                                .concat(this.columnOptions.assets)
-                                .concat(this.columnOptions.customFields)
-                                .sort(sorter);
+                            .concat(this.columnOptions.assets)
+                            .concat(this.columnOptions.customFields)
+                            .sort(sorter);
 
                     case 'consumable':
                         return this.columnOptions.general
-                        .concat(this.columnOptions.consumables)
-                        .sort(sorter);
+                            .concat(this.columnOptions.consumables)
+                            .sort(sorter);
                     case 'license':
                         return this.columnOptions.general.concat(this.columnOptions.licenses).sort(sorter);
                     case 'user':
@@ -211,6 +239,7 @@ tr {
                 this.statusText = "Processing...";
                 this.$http.post(route('api.imports.importFile', this.file.id), {
                     'import-update': this.options.update,
+                    'send-welcome': this.options.send_welcome,
                     'import-type': this.options.importType,
                     'column-mappings': this.columnMappings
                 }).then( ({body}) => {

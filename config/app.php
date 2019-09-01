@@ -245,6 +245,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Minimum PHP version
+    |--------------------------------------------------------------------------
+    |
+    | Do not change this variable.
+    |
+    */
+
+    'min_php' => '7.1.3',
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -291,12 +303,13 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
-        PragmaRX\Google2FA\Vendor\Laravel\ServiceProvider::class,
+        PragmaRX\Google2FALaravel\ServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Unicodeveloper\DumbPassword\DumbPasswordServiceProvider::class,
         Schuppo\PasswordStrength\PasswordStrengthServiceProvider::class,
         Tightenco\Ziggy\ZiggyServiceProvider::class, // Laravel routes in vue
+        Eduardokum\LaravelMailAutoEmbed\ServiceProvider::class,
 
         /*
         * Application Service Providers...
@@ -313,6 +326,7 @@ return [
         * Custom service provider
         */
         App\Providers\MacroServiceProvider::class,
+        App\Providers\LdapServiceProvider::class,
 
 
     ],
@@ -365,8 +379,8 @@ return [
         'Input' => Illuminate\Support\Facades\Input::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
-        'Google2FA' => PragmaRX\Google2FA\Vendor\Laravel\Facade::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Google2FA' => PragmaRX\Google2FALaravel\Facade::class,
+        // 'Debugbar' => Barryvdh\Debugbar\Facade::class, //autodiscover should handle this
         'Image'     => Intervention\Image\ImageManagerStatic::class,
         'Carbon' => Carbon\Carbon::class,
 

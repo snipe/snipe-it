@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sent'	        => 'Your password link has been sent!',
-    'user'			=> 'That user does not exist or does not have an email address associated',
+    'sent'	        => 'If a matching username and email address is found, a password reset link will be sent!',
+    'user'			=> 'No matching active user found.',
 ];
 

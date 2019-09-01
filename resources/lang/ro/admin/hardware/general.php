@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Activele sunt elemente urmărite prin numărul de serie sau eticheta de activ. Ele tind să fie elemente de valoare mai mare în cazul în care identificarea unui anumit element contează.',
 	'archived'  				=> 'Arhivate',
     'asset'  					=> 'Activ',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Predă activ',
     'checkin'  					=> 'Verifica activ',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Cloneaza activ',

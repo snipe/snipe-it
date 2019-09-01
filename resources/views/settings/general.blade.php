@@ -61,7 +61,7 @@
                     <!-- Require signature for acceptance -->
                     <div class="form-group {{ $errors->has('require_accept_signature') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            {{ Form::label('full_multiple_companies_support',
+                            {{ Form::label('require_accept_signature',
                                            trans('admin/settings/general.require_accept_signature')) }}
                         </div>
                         <div class="col-md-9">
@@ -106,19 +106,10 @@
                         <div class="col-md-9">
                             {!! Form::username_format('username_format', Input::old('username_format', $setting->username_format), 'select2') !!}
                             {!! $errors->first('username_format', '<span class="alert-msg">:message</span>') !!}
-                        </div>
-                    </div>
 
-
-
-                    <!-- remote load -->
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            {{ Form::label('load_remote', trans('admin/settings/general.load_remote_text')) }}
-                        </div>
-                        <div class="col-md-9">
-                            {{ Form::checkbox('load_remote', '1', Input::old('load_remote', $setting->load_remote),array('class' => 'minimal')) }}
-                            {{ trans('admin/settings/general.load_remote_help_text') }}
+                            <p class="help-block">
+                                {{ trans('admin/settings/general.username_format_help') }}
+                            </p>
                         </div>
                     </div>
 
@@ -131,9 +122,7 @@
                                {{ Form::checkbox('show_images_in_email', '1', Input::old('show_images_in_email', $setting->show_images_in_email),array('class' => 'minimal')) }}
                                {{ trans('general.yes') }}
                                {!! $errors->first('show_images_in_email', '<span class="alert-msg">:message</span>') !!}
-                               <p class="help-block">
-                                   {{ trans('admin/settings/general.show_images_in_email_help') }}
-                               </p>
+
                            </div>
                        </div>
 
@@ -179,7 +168,7 @@
                     <!-- Default EULA -->
                    <div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">
                        <div class="col-md-3">
-                           {{ Form::label('per_page', trans('admin/settings/general.default_eula_text')) }}
+                           {{ Form::label('default_eula_text', trans('admin/settings/general.default_eula_text')) }}
                        </div>
                        <div class="col-md-9">
                            {{ Form::textarea('default_eula_text', Input::old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control','placeholder' => 'Add your default EULA text')) }}
@@ -279,6 +268,20 @@
                                {{ Form::checkbox('show_in_model_list[]', 'category', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('category')),array('class' => 'minimal')) }} {{ trans('general.category') }} <br>
                                {{ Form::checkbox('show_in_model_list[]', 'manufacturer', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('manufacturer')),array('class' => 'minimal')) }}  {{ trans('general.manufacturer') }} <br>
                                {{ Form::checkbox('show_in_model_list[]', 'model_number', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('model_number')),array('class' => 'minimal')) }} {{ trans('general.model_no') }}<br>
+                           </div>
+                       </div>
+                       
+                       <!-- Depreciation method -->
+                       <div class="form-group {{ $errors->has('depreciation_method') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                                {{ Form::label('depreciation_method', trans('Depreciation method')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::select('depreciation_method', array(
+                                    'default' => 'Linear (default)', 
+                                    'half_1' => 'Half-year convention, always applied', 
+                                    'half_2' => 'Half-year convention, applied with condition', 
+                                ), Input::old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
                            </div>
                        </div>
                        <!-- /.form-group -->

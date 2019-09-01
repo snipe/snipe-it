@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\LicenseSeatsTransformer;
 use App\Http\Transformers\LicensesTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Company;
 use App\Models\License;
 use App\Models\LicenseSeat;
@@ -25,64 +26,64 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats'));
+        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats as free_seats_count'));
 
 
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $licenses->where('company_id','=',$request->input('company_id'));
         }
 
-        if ($request->has('name')) {
+        if ($request->filled('name')) {
             $licenses->where('licenses.name','=',$request->input('name'));
         }
 
-        if ($request->has('product_key')) {
+        if ($request->filled('product_key')) {
             $licenses->where('licenses.serial','=',$request->input('product_key'));
         }
 
-        if ($request->has('order_number')) {
+        if ($request->filled('order_number')) {
             $licenses->where('order_number','=',$request->input('order_number'));
         }
 
-        if ($request->has('purchase_order')) {
+        if ($request->filled('purchase_order')) {
             $licenses->where('purchase_order','=',$request->input('purchase_order'));
         }
 
-        if ($request->has('license_name')) {
+        if ($request->filled('license_name')) {
             $licenses->where('license_name','=',$request->input('license_name'));
         }
 
-        if ($request->has('license_email')) {
+        if ($request->filled('license_email')) {
             $licenses->where('license_email','=',$request->input('license_email'));
         }
 
-        if ($request->has('manufacturer_id')) {
+        if ($request->filled('manufacturer_id')) {
             $licenses->where('manufacturer_id','=',$request->input('manufacturer_id'));
         }
 
-        if ($request->has('supplier_id')) {
+        if ($request->filled('supplier_id')) {
             $licenses->where('supplier_id','=',$request->input('supplier_id'));
         }
 
-        if ($request->has('category_id')) {
+        if ($request->filled('category_id')) {
             $licenses->where('category_id','=',$request->input('category_id'));
         }
 
-        if ($request->has('depreciation_id')) {
+        if ($request->filled('depreciation_id')) {
             $licenses->where('depreciation_id','=',$request->input('depreciation_id'));
         }
 
-        if ($request->has('supplier_id')) {
+        if ($request->filled('supplier_id')) {
             $licenses->where('supplier_id','=',$request->input('supplier_id'));
         }
 
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $licenses = $licenses->TextSearch($request->input('search'));
         }
 
 
-        $offset = request('offset', 0);
+        $offset = (($licenses) && (request('offset') > $licenses->count())) ? 0 : request('offset', 0);
         $limit = request('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
@@ -150,7 +151,7 @@ class LicensesController extends Controller
     public function show($id)
     {
         $this->authorize('view', License::class);
-        $license = License::findOrFail($id);
+        $license = License::withCount('freeSeats')->findOrFail($id);
         $license = $license->load('assignedusers', 'licenseSeats.user', 'licenseSeats.asset');
         return (new LicensesTransformer)->transformLicense($license);
     }
@@ -227,11 +228,17 @@ class LicensesController extends Controller
 
             $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
 
-            $offset = request('offset', 0);
-            $limit = request('limit', 50);
-            $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+            $offset = (($seats) && (request('offset') > $seats->count())) ? 0 : request('offset', 0);
 
+            $limit = request('limit', 50);
+
+            $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
             $total = $seats->count();
+
+            if($total < $offset){
+                $offset = 0;
+            }
+
             $seats = $seats->skip($offset)->take($limit)->get();
 
             if ($seats) {
@@ -242,6 +249,30 @@ class LicensesController extends Controller
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/licenses/message.does_not_exist')), 200);
 
+    }
+
+    
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @see \App\Http\Transformers\SelectlistTransformer
+     */
+    public function selectlist(Request $request)
+    {
+
+        $licenses = License::select([
+            'licenses.id',
+            'licenses.name'
+        ]);
+
+        if ($request->filled('search')) {
+            $licenses = $licenses->where('licenses.name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        $licenses = $licenses->orderBy('name', 'ASC')->paginate(50);
+
+
+        return (new SelectlistTransformer)->transformSelectlist($licenses);
     }
 
 

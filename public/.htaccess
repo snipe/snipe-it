@@ -35,3 +35,4 @@
     # Header set X-Permitted-Cross-Domain-Policies "master-only"
 
 </IfModule>
+Options -Indexes

@@ -2,8 +2,8 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
-    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
+    'activated_help_text' => 'Este usuário pode efetuar login',
+    'activated_disabled_help_text' => 'Você não pode alterar o status de ativação da sua própria conta.',
     'assets_user'       => 'Bens atribuidos a :name',
     'bulk_update_warn'	=> 'Você está prestes a editar as propriedades de: user_count users. Por favor, note que você não pode alterar seus próprios atributos de usuário usando este formulário e deve fazer edições de seu próprio usuário individualmente.',
     'bulk_update_help'	=> 'Este formulário lhe permite atualizar múltiplos ativos de uma vez. Apenas preencha os campos que você precisa alterar. Qualquer campo deixado em branco permanecerá inalterado.',

@@ -28,7 +28,7 @@ $(function () {
 
 
   //handle modal-add-interstitial calls
-  var model, select;
+  var model, select, refreshSelector;
 
   if($('#createModal').length == 0) {
     $('body').append('<div class="modal fade" id="createModal"></div><!-- /.modal -->');
@@ -38,6 +38,8 @@ $(function () {
       var link = $(event.relatedTarget);
       model = link.data("dependency");
       select = link.data("select");
+      refreshSelector = link.data("refresh");
+      
       $('#createModal').load(link.attr('href'),function () {
         //do we need to re-select2 this, after load? Probably.
         $('#createModal').find('select.select2').select2();
@@ -52,7 +54,7 @@ $(function () {
                 ajax: {
 
                     // the baseUrl includes a trailing slash
-                    url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                    url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist',
                     dataType: 'json',
                     delay: 250,
                     headers: {
@@ -123,6 +125,12 @@ $(function () {
             $('#createModal').modal('hide');
             $('#createModal').html("");
 
+            var refreshTable = $('#' + refreshSelector);
+
+            if(refreshTable.length > 0) {
+                refreshTable.bootstrapTable('refresh');
+            }
+
             // "select" is the original drop-down menu that someone
             // clicked 'add' on to add a new 'thing'
             // this code adds the newly created object to that select
@@ -171,5 +179,8 @@ function formatDatalist (datalist) {
 }
 
 function formatDataSelection (datalist) {
-    return datalist.text;
+    return datalist.text.replace(/>/g, '&gt;')
+        .replace(/</g, '&lt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 }

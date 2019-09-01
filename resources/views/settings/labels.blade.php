@@ -50,9 +50,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('labels_width') ? 'error' : '' }}">
+                        <div class="form-group {{ $errors->has('labels_fontsize') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('labels_width', trans('admin/settings/general.labels_fontsize')) }}
+                                {{ Form::label('labels_fontsize', trans('admin/settings/general.labels_fontsize')) }}
                             </div>
                             <div class="col-md-2 form-group">
                                 <div class="input-group">
@@ -87,9 +87,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('labels_width') ? 'error' : '' }}">
+                        <div class="form-group {{ $errors->has('labels_display_sgutter') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('labels_width', trans('admin/settings/general.label_gutters')) }}
+                                {{ Form::label('labels_display_sgutter', trans('admin/settings/general.label_gutters')) }}
                             </div>
                             <div class="col-md-3 form-group">
                                 <div class="input-group">
@@ -109,9 +109,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('labels_width') ? 'error' : '' }}">
+                        <div class="form-group {{ $errors->has('labels_pmargin_top') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('labels_width', trans('admin/settings/general.page_padding')) }}
+                                {{ Form::label('labels_pmargin_top', trans('admin/settings/general.page_padding')) }}
                             </div>
                             <div class="col-md-3 form-group">
                                 <div class="input-group" style="margin-bottom: 15px;">
@@ -119,8 +119,8 @@
                                     <div class="input-group-addon">{{ trans('admin/settings/general.top') }}</div>
                                 </div>
                                 <div class="input-group">
-                                    {{ Form::text('labels_pmargin_right', Input::old('labels_pmargin_right', $setting->labels_pmargin_right), ['class' => 'form-control']) }}
-                                    <div class="input-group-addon">{{ trans('admin/settings/general.right') }}</div>
+                                    {{ Form::text('labels_pmargin_left', Input::old('labels_pmargin_left', $setting->labels_pmargin_left), ['class' => 'form-control']) }}
+                                    <div class="input-group-addon">{{ trans('admin/settings/general.left') }}</div>
                                 </div>
                             </div>
                             <div class="col-md-3 form-group" style="margin-left: 10px; ">
@@ -129,9 +129,10 @@
                                     <div class="input-group-addon">{{ trans('admin/settings/general.bottom') }}</div>
                                 </div>
                                 <div class="input-group">
-                                    {{ Form::text('labels_pmargin_left', Input::old('labels_pmargin_left', $setting->labels_pmargin_left), ['class' => 'form-control']) }}
-                                    <div class="input-group-addon">{{ trans('admin/settings/general.left') }}</div>
+                                    {{ Form::text('labels_pmargin_right', Input::old('labels_pmargin_right', $setting->labels_pmargin_right), ['class' => 'form-control']) }}
+                                    <div class="input-group-addon">{{ trans('admin/settings/general.right') }}</div>
                                 </div>
+
                             </div>
                             <div class="col-md-9 col-md-offset-3">
                                 {!! $errors->first('labels_width', '<span class="alert-msg">:message</span>') !!}
@@ -139,9 +140,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('labels_pageheight') ? 'error' : '' }}">
+                        <div class="form-group {{ (($errors->has('labels_pageheight')) || $errors->has('labels_pagewidth')) ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('labels_width', trans('admin/settings/general.page_dimensions')) }}
+                                {{ Form::label('labels_pagewidth', trans('admin/settings/general.page_dimensions')) }}
                             </div>
                             <div class="col-md-3 form-group">
                                 <div class="input-group">

@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'actions' 	                => 'Actions',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
-    'delete'  	                => 'Delete',
-    'edit'    	                => 'Edit',
-    'restore' 	                => 'Restore',
-    'request'                   => 'Request',
+    'actions' 	                => 'Akcije',
+    'add'    	                => 'Dodaj Novo',
+    'cancel'                    => 'Otkaži',
+    'checkin_and_delete'  	    => 'Prijava i brisanje korisnika',
+    'delete'  	                => 'Izbrisati',
+    'edit'    	                => 'Uredi',
+    'restore' 	                => 'Vratiti',
+    'request'                   => 'Zahtev',
     'submit'  	                => 'Submit',
     'upload'                    => 'Upload',
-	'select_file'				=> 'Select File...',
-    'select_files'				=> 'Select Files...',
+	'select_file'				=> 'Odaberite datoteku...',
+    'select_files'				=> 'Odaberite datoteke...',
 );
