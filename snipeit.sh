@@ -156,7 +156,7 @@ create_virtualhost () {
 create_user () {
   echo "* Creating Snipe-IT user."
 
-  if [ "$distro" == "ubuntu" ] || [ "$distro" == "debian" ] || [ "$distro" == "raspbian" ] ; then
+  if [[ "$distro" == "ubuntu" ]] || [[ "$distro" == "debian" ]] || [[ "$distro" == "raspbian" ]] ; then
     adduser --quiet --disabled-password --gecos '""' "$APP_USER"
   else
     adduser "$APP_USER"
@@ -265,7 +265,7 @@ set_hosts () {
   echo >> /etc/hosts "127.0.0.1 $(hostname) $fqdn"
 }
 
-if [[ -f /etc/lsb-release || -f /etc/debian_version ]]; then
+if [[ -f /etc/debian_version || -f /etc/lsb-release ]]; then
   distro="$(lsb_release -is)"
   version="$(lsb_release -rs)"
   codename="$(lsb_release -cs)"
@@ -311,7 +311,7 @@ case $distro in
     apache_group=www-data
     apachefile=/etc/apache2/sites-available/$APP_NAME.conf
     ;;
-  *debian*)
+  *Debian|debian*)
     echo "  The installer has detected $distro version $version codename $codename."
     distro=debian
     apache_group=www-data
@@ -330,7 +330,7 @@ case $distro in
     apachefile=/etc/httpd/conf.d/$APP_NAME.conf
     ;;
   *)
-    echo "  The installer was unable to determine your OS. Exiting for safety."
+    echo "   The installer did not detected $distro version $version codename $codename.. Exiting for safety."
     exit 1
     ;;
 esac
@@ -368,7 +368,38 @@ done
 
 case $distro in
   debian)
-  if [[ "$version" =~ ^9 ]]; then
+	if [[ "$version" =~ ^10 ]]; then
+    # Install for Debian 10.x
+    tzone=$(cat /etc/timezone)
+
+    echo "* Adding PHP repository."
+    log "apt-get install -y apt-transport-https"
+    log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
+    echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
+
+    echo -n "* Updating installed packages."
+    log "apt-get update && apt-get -y upgrade" & pid=$!
+    progress
+
+    echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.1 php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip"
+    install_packages
+
+    echo "* Configuring Apache."
+    create_virtualhost
+    log "a2enmod rewrite"
+    log "a2ensite $APP_NAME.conf"
+
+    set_hosts
+
+    echo "* Securing MariaDB."
+    /usr/bin/mysql_secure_installation
+
+    install_snipeit
+
+    echo "* Restarting Apache httpd."
+    log "service apache2 restart"
+  elif [[ "$version" =~ ^9 ]]; then
     # Install for Debian 9.x
     tzone=$(cat /etc/timezone)
 
