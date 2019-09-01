@@ -157,7 +157,7 @@ create_user () {
   echo "* Creating Snipe-IT user."
 
   if [[ "$distro" == "ubuntu" ]] || [[ "$distro" == "debian" ]] || [[ "$distro" == "raspbian" ]] ; then
-    adduser --quiet --disabled-password --gecos '""' "$APP_USER"
+    adduser --quiet --disabled-password --gecos 'Snipe-IT User' "$APP_USER"
   else
     adduser "$APP_USER"
   fi
@@ -264,6 +264,12 @@ set_hosts () {
   echo "* Setting up hosts file."
   echo >> /etc/hosts "127.0.0.1 $(hostname) $fqdn"
 }
+
+rename_default_vhost () {
+    log "mv /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/111-default.conf"
+    log "mv /etc/apache2/sites-enabled/snipeit.conf /etc/apache2/sites-enabled/000-snipeit.conf"
+}
+
 
 if [[ -f /etc/debian_version || -f /etc/lsb-release ]]; then
   distro="$(lsb_release -is)"
@@ -382,13 +388,14 @@ case $distro in
     progress
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="mariadb-server-core-10.3 mariadb-client-core-10.3 apache2 libapache2-mod-php7.3 php7.3 php7.3-mcrypt php7.3-curl php7.3-mysql php7.3-gd php7.3-ldap php7.3-zip php7.3-mbstring php7.3-xml php7.3-bcmath curl git unzip"
+    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.3 php7.3 php7.3-mcrypt php7.3-curl php7.3-mysql php7.3-gd php7.3-ldap php7.3-zip php7.3-mbstring php7.3-xml php7.3-bcmath curl git unzip"
     install_packages
 
     echo "* Configuring Apache."
     create_virtualhost
     log "a2enmod rewrite"
     log "a2ensite $APP_NAME.conf"
+	rename_default_vhost
 
     set_hosts
 
@@ -420,6 +427,7 @@ case $distro in
     create_virtualhost
     log "a2enmod rewrite"
     log "a2ensite $APP_NAME.conf"
+	rename_default_vhost
 
     set_hosts
 
@@ -453,6 +461,7 @@ case $distro in
     create_virtualhost
     log "a2enmod rewrite"
     log "a2ensite $APP_NAME.conf"
+	rename_default_vhost
 
     set_hosts
 
@@ -487,8 +496,7 @@ case $distro in
     log "phpenmod mbstring"
     log "a2enmod rewrite"
     log "a2ensite $APP_NAME.conf"
-    log "mv /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/111-default.conf"
-    log "mv /etc/apache2/sites-enabled/snipeit.conf /etc/apache2/sites-enabled/000-snipeit.conf"
+	rename_default_vhost
 
     set_hosts
 
