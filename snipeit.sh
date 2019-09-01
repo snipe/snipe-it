@@ -330,7 +330,7 @@ case $distro in
     apachefile=/etc/httpd/conf.d/$APP_NAME.conf
     ;;
   *)
-    echo "   The installer did not detected $distro version $version codename $codename.. Exiting for safety."
+    echo "   The installer was unable to determine your OS. Exiting for safety. Exiting for safety."
     exit 1
     ;;
 esac
