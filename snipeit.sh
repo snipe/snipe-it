@@ -368,12 +368,12 @@ done
 
 case $distro in
   debian)
-	if [[ "$version" =~ ^10 ]]; then
+  if [[ "$version" =~ ^10 ]]; then
     # Install for Debian 10.x
     tzone=$(cat /etc/timezone)
 
     echo "* Adding PHP repository."
-    log "apt-get install -y apt-transport-https"
+    log "apt-get install -y apt-transport-https lsb-release ca-certificates"
     log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
     echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
 
@@ -382,7 +382,7 @@ case $distro in
     progress
 
     echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-    PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php7.1 php7.1 php7.1-mcrypt php7.1-curl php7.1-mysql php7.1-gd php7.1-ldap php7.1-zip php7.1-mbstring php7.1-xml php7.1-bcmath curl git unzip"
+    PACKAGES="mariadb-server-core-10.3 mariadb-client-core-10.3 apache2 libapache2-mod-php7.3 php7.3 php7.3-mcrypt php7.3-curl php7.3-mysql php7.3-gd php7.3-ldap php7.3-zip php7.3-mbstring php7.3-xml php7.3-bcmath curl git unzip"
     install_packages
 
     echo "* Configuring Apache."
