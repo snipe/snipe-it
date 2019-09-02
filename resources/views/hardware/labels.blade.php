@@ -50,6 +50,7 @@
   img.qr_img {
     width: 100%;
     height: 100%;
+    padding-top: 7px;
   }
   img.barcode {
     display: block;
