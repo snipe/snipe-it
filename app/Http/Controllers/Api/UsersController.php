@@ -90,7 +90,7 @@ class UsersController extends Controller
         $offset = (($users) && (request('offset') > $users->count())) ? 0 : request('offset', 0);
 
         // Check to make sure the limit is not higher than the max allowed
-        (config('app.max_results') < $request->input('limit')) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+        (config('app.max_results') >= $request->input('limit')) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
 
         switch ($request->input('sort')) {
