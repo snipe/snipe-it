@@ -38,6 +38,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Result Limit
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the max number of results to return, even if a higher limit
+    | is passed in the API request. This is done to prevent server timeouts when
+    | custom scripts are requesting 100k assets at a time.
+    |
+    */
+
+    'max_results' => env('MAX_RESULTS', 500),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Debug Mode
     |--------------------------------------------------------------------------
     |

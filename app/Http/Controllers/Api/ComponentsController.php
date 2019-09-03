@@ -44,7 +44,9 @@ class ComponentsController extends Controller
         }
 
         $offset = (($components) && (request('offset') > $components->count())) ? 0 : request('offset', 0);
-        $limit = request('limit', 50);
+
+        // Check to make sure the limit is not higher than the max allowed
+        (config('app.max_results') < $request->input('limit')) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
         $allowed_columns = ['id','name','min_amt','order_number','serial','purchase_date','purchase_cost','company','category','qty','location','image'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
