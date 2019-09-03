@@ -266,7 +266,6 @@ set_hosts () {
 }
 
 rename_default_vhost () {
-	# Move apache default virtual host
     log "mv /etc/apache2/sites-enabled/000-default.conf /etc/apache2/sites-enabled/111-default.conf"
     log "mv /etc/apache2/sites-enabled/snipeit.conf /etc/apache2/sites-enabled/000-snipeit.conf"
 }
