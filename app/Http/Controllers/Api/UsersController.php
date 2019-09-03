@@ -88,7 +88,10 @@ class UsersController extends Controller
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $offset = (($users) && (request('offset') > $users->count())) ? 0 : request('offset', 0);
-        $limit = request('limit',  20);
+
+        // Check to make sure the limit is not higher than the max allowed
+        (config('app.max_results') < $request->input('limit')) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
 
         switch ($request->input('sort')) {
             case 'manager':

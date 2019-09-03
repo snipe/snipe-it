@@ -32,7 +32,15 @@ class ActionlogsTransformer
             $meta_array = json_decode($actionlog->log_meta);
             foreach ($meta_array as $key => $value) {
                 foreach ($value as $meta_key => $meta_value) {
-                    $clean_meta[$key][$meta_key] = e($meta_value);
+
+                    if (is_array($meta_value)) {
+                        foreach ($meta_value as $meta_value_key => $meta_value_value) {
+                            $clean_meta[$key][$meta_value_key] = e($meta_value_value);
+                        }
+                    } else {
+                        $clean_meta[$key][$meta_key] = e($meta_value);
+                    }
+
                 }
             }
         }
