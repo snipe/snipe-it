@@ -494,7 +494,7 @@ class AssetsController extends Controller
             return view('hardware/labels')
                 ->with('assets', Asset::find($asset))
                 ->with('settings', Setting::getSettings())
-                ->with('bulkedit', False)
+                ->with('bulkedit', false)
                 ->with('count', 0);
         }
     }
