@@ -80,6 +80,11 @@ Route::group(
             'uses' => 'Assets\AssetsController@getClone'
         ]);
 
+        Route::get('{assetId}/label', [
+            'as' => 'label/hardware',
+            'uses' => 'Assets\AssetsController@getLabel'
+        ]);
+
         Route::post('{assetId}/clone', 'Assets\AssetsController@postCreate');
 
         Route::get('{assetId}/checkout', [
