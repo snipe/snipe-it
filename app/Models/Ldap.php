@@ -93,8 +93,12 @@ class Ldap extends Model
 
         \Log::debug('Attempting to login using distinguished name:'.$userDn);
 
-
+        
         $filterQuery = $settings->ldap_auth_filter_query . $username;
+        $filter = Setting::getSettings()->ldap_filter;
+        $filterQuery = "({$filter}({$filterQuery}))";
+
+        \Log::debug('Filter query: '.$filterQuery);
 
 
         if (!$ldapbind = @ldap_bind($connection, $userDn, $password)) {
