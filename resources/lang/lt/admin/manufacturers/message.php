@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'Gamintojas nebuvo atkurtas, prašome bandyti dar kartą',
+        'success' => 'Gamintojas buvo atkurtas sėkmingai.'
     ),
 
     'delete' => array(

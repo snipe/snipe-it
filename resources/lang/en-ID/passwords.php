@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Tautan kata sandi anda sudah dikirim!',
-    'user'			=> 'No matching active user found with that email.',
+    'user'			=> 'Tidak ada satupun pengguna aktif yang menggunakan email ini.',
 ];
 

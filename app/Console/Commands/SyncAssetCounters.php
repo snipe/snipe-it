@@ -39,7 +39,7 @@ class SyncAssetCounters extends Command
     public function handle()
     {
         $start = microtime(true);
-        $assets = Asset::withCount('checkins', 'checkouts', 'userRequests')
+        $assets = Asset::withCount('checkins as checkins_count', 'checkouts as checkouts_count', 'userRequests as user_requests_count')
             ->withTrashed()->get();
 
         if ($assets) {

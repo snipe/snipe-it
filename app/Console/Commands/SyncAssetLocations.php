@@ -64,7 +64,7 @@ class SyncAssetLocations extends Command
         $output['info'][] = 'There are '.$assigned_user_assets->count().' assets checked out to users.';
         foreach ($assigned_user_assets as $assigned_user_asset) {
             if (($assigned_user_asset->assignedTo) && ($assigned_user_asset->assignedTo->userLoc)) {
-                $new_location=$assigned_user_asset->assignedTo->userloc->id;
+                $new_location = $assigned_user_asset->assignedTo->userLoc->id;
                 $output['info'][] ='Setting User Asset ' . $assigned_user_asset->id . ' ('.$assigned_user_asset->asset_tag.') to  ' . $assigned_user_asset->assignedTo->userLoc->name . ' which is id: ' . $new_location;
             } else {
                 $output['warn'][] ='Asset ' . $assigned_user_asset->id . ' ('.$assigned_user_asset->asset_tag.') still has no location! ';

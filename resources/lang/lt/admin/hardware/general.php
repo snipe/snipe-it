@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Turtas - tai daiktai, kurie stebimi serijos numeriu arba turinio žyma. Jie dažniausiai būna vertingesni dalykai, kai svarbu nustatyti konkretų elementą.',
 	'archived'  				=> 'Archyvuota',
     'asset'  					=> 'Įranga',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Išduota įranga',
     'checkin'  					=> 'Išduota įranga',
     'checkout'  				=> 'Patikros turtas',
     'clone'  					=> 'Kopijuoti įrangą',

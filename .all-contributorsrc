@@ -1650,6 +1650,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "timothyfarmer",
+      "name": "Tim Farmer",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/7632599?v=4",
+      "profile": "https://github.com/timothyfarmer",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mskrip",
+      "name": "Marián Skrip",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/17459600?v=4",
+      "profile": "https://github.com/mskrip",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

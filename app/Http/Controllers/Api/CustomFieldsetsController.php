@@ -43,7 +43,7 @@ class CustomFieldsetsController extends Controller
     public function index()
     {
         $this->authorize('index', CustomFieldset::class);
-        $fieldsets = CustomFieldset::withCount(['fields', 'models'])->get();
+        $fieldsets = CustomFieldset::withCount('fields as fields_count', 'models as models_count')->get();
         return (new CustomFieldsetsTransformer)->transformCustomFieldsets($fieldsets, $fieldsets->count());
 
     }
@@ -58,7 +58,7 @@ class CustomFieldsetsController extends Controller
     */
     public function show($id)
     {
-      $this->authorize('show', CustomFieldset::class);
+      $this->authorize('view', CustomFieldset::class);
         if ($fieldset = CustomFieldset::find($id)) {
             return (new CustomFieldsetsTransformer)->transformCustomFieldset($fieldset);
         }

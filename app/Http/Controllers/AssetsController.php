@@ -71,7 +71,7 @@ class AssetsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('index', Asset::class);
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $company = Company::find($request->input('company_id'));
         } else {
             $company = null;
@@ -96,7 +96,7 @@ class AssetsController extends Controller
             ->with('item', new Asset)
             ->with('statuslabel_types', Helper::statusTypeList());
 
-        if ($request->has('model_id')) {
+        if ($request->filled('model_id')) {
             $selected_model = AssetModel::find($request->input('model_id'));
             $view->with('selected_model', $selected_model);
         }
@@ -143,7 +143,7 @@ class AssetsController extends Controller
         }
 
         // Create the image (if one was chosen.)
-        if ($request->has('image')) {
+        if ($request->filled('image')) {
             $image = $request->input('image');
 
             // After modification, the image is prefixed by mime info like the following:
@@ -163,7 +163,7 @@ class AssetsController extends Controller
             }
             $path = public_path('uploads/assets/'.$file_name);
             try {
-                Image::make($image)->resize(500, 500, function ($constraint) {
+                Image::make($image)->resize(800, 800, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save($path);
@@ -183,7 +183,7 @@ class AssetsController extends Controller
         // Validation for these fields is handled through the AssetRequest form request
         $model = AssetModel::find($request->get('model_id'));
 
-        if ($model->fieldset) {
+        if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted=='1') {
                     if (Gate::allows('admin')) {
@@ -313,7 +313,7 @@ class AssetsController extends Controller
         $asset->supplier_id = $request->input('supplier_id', null);
 
         // If the box isn't checked, it's not in the request at all.
-        $asset->requestable = $request->has('requestable');
+        $asset->requestable = $request->filled('requestable');
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
 
         if ($asset->assigned_to=='') {
@@ -321,12 +321,12 @@ class AssetsController extends Controller
         }
 
 
-        if ($request->has('image_delete')) {
+        if ($request->filled('image_delete')) {
             try {
                 unlink(public_path().'/uploads/assets/'.$asset->image);
                 $asset->image = '';
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
 
         }
@@ -343,7 +343,7 @@ class AssetsController extends Controller
         $asset->physical     = '1';
 
         // Update the image
-        if ($request->has('image')) {
+        if ($request->filled('image')) {
             $image = $request->input('image');
             // See postCreate for more explaination of the following.
             $header = explode(';', $image, 2)[0];
@@ -359,7 +359,7 @@ class AssetsController extends Controller
             $file_name = str_random(25).".".$extension;
             $path = public_path('uploads/assets/'.$file_name);
             try {
-                Image::make($image)->resize(500, 500, function ($constraint) {
+                Image::make($image)->resize(800, 800, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save($path);
@@ -380,7 +380,7 @@ class AssetsController extends Controller
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
-        if ($model->fieldset) {
+        if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted=='1') {
                     if (Gate::allows('admin')) {
@@ -570,16 +570,18 @@ class AssetsController extends Controller
      */
     public function postImportHistory(Request $request)
     {
+
+        if (!$request->hasFile('user_import_csv')) {
+            return back()->with('error', 'No file provided. Please select a file for import and try again. ');
+        }
+
         if (!ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
         }
 
         $csv = Reader::createFromPath(Input::file('user_import_csv'));
-        $csv->setNewline("\r\n");
-        //get the first row, usually the CSV header
-        //$headers = $csv->fetchOne();
-
-        $results = $csv->fetchAssoc();
+        $csv->setHeaderOffset(0);
+        $results = $csv->getRecords();
         $item = array();
         $status = array();
         $status['error'] = array();
@@ -595,7 +597,9 @@ class AssetsController extends Controller
                 }
                 $batch_counter = count($item[$asset_tag]);
 
-                $item[$asset_tag][$batch_counter]['checkout_date'] = Carbon::parse(Helper::array_smart_fetch($row, "date"))->format('Y-m-d H:i:s');
+                $item[$asset_tag][$batch_counter]['checkout_date'] = Carbon::parse(Helper::array_smart_fetch($row, "checkout date"))->format('Y-m-d H:i:s');
+                $item[$asset_tag][$batch_counter]['checkin_date'] = Carbon::parse(Helper::array_smart_fetch($row, "checkin date"))->format('Y-m-d H:i:s');
+                \Log::debug($item[$asset_tag][$batch_counter]['checkin_date']);
 
                 $item[$asset_tag][$batch_counter]['asset_tag'] = Helper::array_smart_fetch($row, "asset tag");
                 $item[$asset_tag][$batch_counter]['name'] = Helper::array_smart_fetch($row, "name");
@@ -678,9 +682,11 @@ class AssetsController extends Controller
                 // Only do this if a matching user was found
                 if ((array_key_exists('checkedout_to', $asset_batch[$x])) && ($asset_batch[$x]['checkedout_to']!='')) {
                     if (($total_in_batch > 1) && ($x < $total_in_batch) && (array_key_exists($next, $asset_batch))) {
-                        $checkin_date = Carbon::parse($asset_batch[$next]['checkout_date'])->subDay(1)->format('Y-m-d H:i:s');
+                        $checkin_date = Carbon::parse($asset_batch[$next]['checkin_date'])->format('Y-m-d H:i:s');
                         $asset_batch[$x]['real_checkin'] = $checkin_date;
 
+                        \Log::debug($asset_batch[$next]['checkin_date']);
+                        \Log::debug($checkin_date);
                         Actionlog::firstOrCreate(array(
                             'item_id' => $asset_batch[$x]['asset_id'],
                             'item_type' => Asset::class,
@@ -744,6 +750,18 @@ class AssetsController extends Controller
         return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
 
+    public function dueForAudit()
+    {
+        $this->authorize('audit', Asset::class);
+        return view('hardware/audit-due');
+    }
+
+    public function overdueForAudit()
+    {
+        $this->authorize('audit', Asset::class);
+        return view('hardware/audit-overdue');
+    }
+
 
     public function auditStore(AssetFileRequest $request, $id)
     {
@@ -781,7 +799,7 @@ class AssetsController extends Controller
                     $filename = 'audit-'.$asset->id.'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
                     $file->move($destinationPath, $filename);
                 } catch (\Exception $e) {
-                    \Log::error($e);
+                    \Log::info($e);
                 }
             }
 

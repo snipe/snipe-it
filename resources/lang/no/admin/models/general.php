@@ -5,7 +5,7 @@ return array(
     'about_models_text'           => 'Asset modeller er en måte å gruppere identiske eiendeler. "MBP 2013", "IPhone 6s", etc.',
     'deleted'  					        => 'Denne modellen er slettet. <a href="/hardware/models/:model_id/restore">Klikk her for å gjenopprette</a>.',
     'bulk_delete'               => 'Bulk slett modeller',
-    'bulk_delete_help'               => 'Use the checkboxes below to confirm the deletion of the selected asset models. Asset models that have assets associated with them cannot be deleted until the assets are associated with a different model.',
+    'bulk_delete_help'               => 'Bruk merkeboksene nedenfor til å bekrefte sletting av de merkede modellene. Modeller som har eiendeler tilknyttet kan ikke slettes før eiendelene har blitt tilknyttet en annen modell.',
     'bulk_delete_warn'          => 'Du er i ferd med å slette :model_count modeller.',
     'restore'                   => 'Gjenopprett modell',
     'requestable'               => 'Brukere kan be om denne modellen',

@@ -107,7 +107,7 @@ class UsersController extends Controller
         //Username, email, and password need to be handled specially because the need to respect config values on an edit.
         $user->email = $data['email'] = e($request->input('email'));
         $user->username = $data['username'] = e($request->input('username'));
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
             $data['password'] =  $request->input('password');
         }
@@ -139,13 +139,13 @@ class UsersController extends Controller
 
         if ($user->save()) {
 
-            if ($request->has('groups')) {
+            if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
             } else {
                 $user->groups()->sync(array());
             }
 
-            if (($request->input('email_user') == 1) && ($request->has('email'))) {
+            if (($request->input('email_user') == 1) && ($request->filled('email'))) {
               // Send the credentials through email
                 $data = array();
                 $data['email'] = e($request->input('email'));
@@ -263,7 +263,7 @@ class UsersController extends Controller
         }
 
 
-        if ($request->has('username')) {
+        if ($request->filled('username')) {
             $user->username = $request->input('username');
         }
         $user->email = $request->input('email');
@@ -278,6 +278,7 @@ class UsersController extends Controller
         $user->activated = $request->input('activated', 0);
         $user->jobtitle = $request->input('jobtitle', null);
         $user->phone = $request->input('phone');
+        $user->website = $request->input('website', null);
         $user->location_id = $request->input('location_id', null);
         $user->company_id = Company::getIdForUser($request->input('company_id', null));
         $user->manager_id = $request->input('manager_id', null);
@@ -296,7 +297,7 @@ class UsersController extends Controller
             ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
 
         // Do we want to update the user password?
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
 
@@ -339,25 +340,25 @@ class UsersController extends Controller
             // Check if we are not trying to delete ourselves
             if ($user->id === Auth::user()->id) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
+                return redirect()->route('users.index')->with('error', 'You cannot delete yourself.');
             }
 
-            if ($user->assets->count() > 0) {
+            if (($user->assets) && ($user->assets->count() > 0)) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . count($user->assets->count()) . ' assets associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets->count() . ' assets associated with them. Use the Checkin and Delete button on the user profile to check these items back in and delete this user.');
             }
 
-            if ($user->licenses()->count() > 0) {
+            if (($user->licenses) && ($user->licenses->count() > 0)) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->assets()->count() . ' assets associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->licenses->count() . ' license(s associated with them. Use the Checkin and Delete button on the user profile to check these items back in and delete this user.');
             }
 
-            if ($user->accessories()->count() > 0) {
+            if (($user->accessories) && ($user->accessories->count() > 0)) {
                 // Redirect to the user management page
-                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->accessories()->count() . ' accessories associated with them.');
+                return redirect()->route('users.index')->with('error', 'This user still has ' . $user->accessories->count() . ' accessories associated with them. Use the Checkin and Delete button on the user profile to check these items back in and delete this user.');
             }
 
-            if ($user->managedLocations()->count() > 0) {
+            if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')->with('error', 'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.');
             }
@@ -389,7 +390,7 @@ class UsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        if (($request->has('ids')) && (count($request->input('ids')) > 0)) {
+        if (($request->filled('ids')) && (count($request->input('ids')) > 0)) {
             $statuslabel_list = Helper::statusLabelList();
             $user_raw_array = array_keys(Input::get('ids'));
             $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses', 'accessories')->get();
@@ -415,28 +416,28 @@ class UsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        if (($request->has('ids')) && (count($request->input('ids')) > 0)) {
+        if (($request->filled('ids')) && (count($request->input('ids')) > 0)) {
 
             $user_raw_array = $request->input('ids');
             $update_array = array();
             $manager_conflict = false;
             $users = User::whereIn('id', $user_raw_array)->where('id', '!=', Auth::user()->id)->get();
 
-            if ($request->has('location_id')) {
+            if ($request->filled('location_id')) {
                 $update_array['location_id'] = $request->input('location_id');
             }
-            if ($request->has('department_id')) {
+            if ($request->filled('department_id')) {
                 $update_array['department_id'] = $request->input('department_id');
             }
-            if ($request->has('company_id')) {
+            if ($request->filled('company_id')) {
                 $update_array['company_id'] = $request->input('company_id');
             }
-            if ($request->has('locale')) {
+            if ($request->filled('locale')) {
                 $update_array['locale'] = $request->input('locale');
             }
 
 
-            if ($request->has('manager_id')) {
+            if ($request->filled('manager_id')) {
 
                 // Do not allow a manager update if the selected manager is one of the users being
                 // edited.
@@ -447,7 +448,7 @@ class UsersController extends Controller
                 }
 
             }
-            if ($request->has('activated')) {
+            if ($request->filled('activated')) {
                 $update_array['activated'] = $request->input('activated');
             }
 
@@ -457,7 +458,7 @@ class UsersController extends Controller
             }
 
             // Only sync groups if groups were selected
-            if ($request->has('groups')) {
+            if ($request->filled('groups')) {
                 foreach ($users as $user) {
                     $user->groups()->sync($request->input('groups'));
                 }
@@ -489,9 +490,9 @@ class UsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        if ((!$request->has('ids')) || (count($request->input('ids')) == 0)) {
+        if ((!$request->filled('ids')) || (count($request->input('ids')) == 0)) {
             return redirect()->back()->with('error', 'No users selected');
-        } elseif ((!$request->has('status_id')) || ($request->input('status_id')=='')) {
+        } elseif ((!$request->filled('status_id')) || ($request->input('status_id')=='')) {
             return redirect()->route('users.index')->with('error', 'No status selected');
         } else {
 

@@ -23,6 +23,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
+        \Intervention\Image\Exception\NotSupportedException::class,
     ];
 
     /**
@@ -66,10 +67,6 @@ class Handler extends ExceptionHandler
                 return response()->json(Helper::formatStandardApiResponse('error', null, $className . ' not found'), 200);
             }
 
-            if ($e instanceof \Illuminate\Validation\ValidationException) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, $e->response['messages'], 400));
-            }
-
             if ($this->isHttpException($e)) {
 
                 $statusCode = $e->getStatusCode();
@@ -84,11 +81,6 @@ class Handler extends ExceptionHandler
 
                 }
             }
-            // Try to parse 500 Errors in a bit nicer way when debug is enabled.
-            if (config('app.debug')) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, "An Error has occured! " . $e->getMessage()), 500);
-            }
-
         }
 
 
@@ -116,5 +108,17 @@ class Handler extends ExceptionHandler
         }
 
         return redirect()->guest('login');
+    }
+
+    /**
+     * Convert a validation exception into a JSON response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Validation\ValidationException  $exception
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function invalidJson($request, ValidationException $exception)
+    {
+        return response()->json(Helper::formatStandardApiResponse('error', null, $exception->errors(), 400));
     }
 }

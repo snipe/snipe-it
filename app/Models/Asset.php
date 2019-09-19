@@ -75,7 +75,7 @@ class Asset extends Depreciable
         'model_id'        => 'required|integer|exists:models,id',
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'integer|nullable',
-        'warranty_months' => 'numeric|nullable',
+        'warranty_months' => 'numeric|nullable|digits_between:0,240',
         'physical'        => 'numeric|max:1|nullable',
         'checkout_date'   => 'date|max:10|min:10|nullable',
         'checkin_date'    => 'date|max:10|min:10|nullable',
@@ -796,6 +796,85 @@ class Asset extends Depreciable
         });
     }
 
+    /**
+     * Query builder scope for Assets that are due for auditing, based on the assets.next_audit_date
+     * and settings.audit_warning_days.
+     *
+     * This is/will be used in the artisan command snipeit:upcoming-audits and also
+     * for an upcoming API call for retrieving a report on assets that will need to be audited.
+     *
+     * Due for audit soon:
+     * next_audit_date greater than or equal to now (must be in the future)
+     * and (next_audit_date - threshold days) <= now ()
+     *
+     * Example:
+     * next_audit_date = May 4, 2025
+     * threshold for alerts = 30 days
+     * now = May 4, 2019
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v4.6.16
+     * @param Setting $settings
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeDueForAudit($query, $settings)
+    {
+        return $query->whereNotNull('assets.next_audit_date')
+            ->where('assets.next_audit_date', '>=', Carbon::now())
+            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $settings->audit_warning_days DAY) <= '".Carbon::now()."'")
+            ->where('assets.archived', '=', 0)
+            ->NotArchived();
+    }
+
+    /**
+     * Query builder scope for Assets that are OVERDUE for auditing, based on the assets.next_audit_date
+     * and settings.audit_warning_days. It checks to see if assets.next audit_date is before now
+     *
+     * This is/will be used in the artisan command snipeit:upcoming-audits and also
+     * for an upcoming API call for retrieving a report on overdue assets.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v4.6.16
+     * @param Setting $settings
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeOverdueForAudit($query)
+    {
+        return $query->whereNotNull('assets.next_audit_date')
+            ->where('assets.next_audit_date', '<', Carbon::now())
+            ->where('assets.archived', '=', 0)
+            ->NotArchived();
+    }
+
+    /**
+     * Query builder scope for Assets that are due for auditing OR overdue, based on the assets.next_audit_date
+     * and settings.audit_warning_days.
+     *
+     * This is/will be used in the artisan command snipeit:upcoming-audits and also
+     * for an upcoming API call for retrieving a report on assets that will need to be audited.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since v4.6.16
+     * @param Setting $settings
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeDueOrOverdueForAudit($query, $settings)
+    {
+        $interval = $settings->audit_warning_days ?? 0;
+
+        return $query->whereNotNull('assets.next_audit_date')
+            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $interval DAY) <= '".Carbon::now()."'")
+            ->where('assets.archived', '=', 0)
+            ->NotArchived();
+    }
+
+
   /**
    * Query builder scope for Archived assets
    *
@@ -961,9 +1040,7 @@ class Asset extends Depreciable
                     ->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
             }
-            foreach (CustomField::all() as $field) {
-                $query->orWhere('assets.'.$field->db_column_name(), 'LIKE', "%$search%");
-            }
+
         })->withTrashed()->whereNull("assets.deleted_at"); //workaround for laravel bug
     }
 
@@ -1090,7 +1167,29 @@ class Asset extends Depreciable
                 }
             }
 
-            if (($fieldname!='category') && ($fieldname!='model_number') && ($fieldname!='location') && ($fieldname!='supplier')
+            /**
+             * THIS CLUNKY BIT IS VERY IMPORTANT
+             *
+             * Although inelegant, this section matters a lot when querying against fields that do not
+             * exist on the asset table. There's probably a better way to do this moving forward, for
+             * example using the Schema:: methods to determine whether or not a column actually exists,
+             * or even just using the $searchableRelations variable earlier in this file.
+             *
+             * In short, this set of statements tells the query builder to ONLY query against an
+             * actual field that's being passed if it doesn't meet known relational fields. This
+             * allows us to query custom fields directly in the assetsv table
+             * (regardless of their name) and *skip* any fields that we already know can only be
+             * searched through relational searches that we do earlier in this method.
+             *
+             * For example, we do not store "location" as a field on the assets table, we store
+             * that relationship through location_id on the assets table, therefore querying
+             * assets.location would fail, as that field doesn't exist -- plus we're already searching
+             * against those relationships earlier in this method.
+             *
+             * - snipe 
+             *
+             */
+            if (($fieldname!='category') && ($fieldname!='model_number') && ($fieldname!='rtd_location') && ($fieldname!='location') && ($fieldname!='supplier')
                 && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
                     $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }

@@ -28,7 +28,6 @@ class AssetCheckoutController extends Controller
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find(e($assetId)))) {
-            // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
@@ -39,7 +38,6 @@ class AssetCheckoutController extends Controller
         }
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
 
-        // Get the dropdown of users and then pass it to the checkout view
 
     }
 
@@ -71,12 +69,12 @@ class AssetCheckoutController extends Controller
             $asset = $this->updateAssetLocation($asset, $target);
 
             $checkout_at = date("Y-m-d H:i:s");
-            if (($request->has('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {
+            if (($request->filled('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {
                 $checkout_at = $request->get('checkout_at');
             }
 
             $expected_checkin = '';
-            if ($request->has('expected_checkin')) {
+            if ($request->filled('expected_checkin')) {
                 $expected_checkin = $request->get('expected_checkin');
             }
 

@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Thành phần',
     'field_format'            => 'định dạng',
     'field_custom_format'     => 'Định dạng Tuỳ chỉnh',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Trường này cho phép bạn sử dụng biểu thức regex để xác thực. Nó sẽ bắt đầu bằng "regex:" - ví dụ: để xác thực rằng giá trị trường tùy chỉnh chứa IMEI hợp lệ (15 chữ số), bạn sẽ dùng <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'Cần thiết',
     'req'   		              => 'Req.',
     'used_by_models'   		    => 'Được sử dụng theo mô hình',
@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => 'New Fieldset',
     'create_field'            => 'Trường tùy chỉnh mới',
     'value_encrypted'      	        => 'Giá trị của trường này được mã hóa trong cơ sở dữ liệu. Chỉ những người dùng quản trị mới có thể xem được giá trị được giải mã',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Bao gồm giá trị của trường này trong email thanh toán được gửi tới người dùng? Các trường được mã hóa không thể được bao gồm trong email.',
 );

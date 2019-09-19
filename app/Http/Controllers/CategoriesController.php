@@ -87,7 +87,7 @@ class CategoriesController extends Controller
             $image = $request->file('image');
             $file_name = str_random(25).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/categories/'.$file_name);
-            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+            Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path);
@@ -164,7 +164,7 @@ class CategoriesController extends Controller
             $file_name = $category->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
 
             if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save(app('categories_upload_path').$file_name);
@@ -179,7 +179,7 @@ class CategoriesController extends Controller
             try  {
                 unlink(app('categories_upload_path').$old_image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 

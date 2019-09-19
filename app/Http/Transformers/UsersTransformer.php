@@ -24,7 +24,7 @@ class UsersTransformer
         $array = [
                 'id' => (int) $user->id,
                 'avatar' => e($user->present()->gravatar),
-                'name' => e($user->first_name).' '.($user->last_name),
+                'name' => e($user->first_name).' '.e($user->last_name),
                 'first_name' => e($user->first_name),
                 'last_name' => e($user->last_name),
                 'username' => e($user->username),
@@ -35,6 +35,7 @@ class UsersTransformer
                 ]  : null,
                 'jobtitle' => ($user->jobtitle) ? e($user->jobtitle) : null,
                 'phone' => ($user->phone) ? e($user->phone) : null,
+                'website' => ($user->website) ? e($user->website) : null,
                 'address' => ($user->address) ? e($user->address) : null,
                 'city' => ($user->city) ? e($user->city) : null,
                 'state' => ($user->state) ? e($user->state) : null,
@@ -53,6 +54,8 @@ class UsersTransformer
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated =='1') ? true : false,
                 'two_factor_activated' => ($user->two_factor_active()) ? true : false,
+                'two_factor_enrolled' => ($user->two_factor_active_and_enrolled()) ? true : false,
+
                 'assets_count' => (int) $user->assets_count,
                 'licenses_count' => (int) $user->licenses_count,
                 'accessories_count' => (int) $user->accessories_count,

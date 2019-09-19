@@ -167,6 +167,11 @@
         };
     }
 
+    function hardwareAuditFormatter(value, row) {
+        return '<a href="{{ url('/') }}/hardware/audit/' + row.id + '/" class="btn btn-sm bg-yellow" data-tooltip="true" title="Audit this item">{{ trans('general.audit') }}</a>';
+    }
+
+
     // Make the edit/delete buttons
     function genericActionsFormatter(destination) {
         return function (value,row) {

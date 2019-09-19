@@ -88,13 +88,22 @@
   <!-- side address column -->
   <div class="col-md-3">
 
+      @if ($accessory->image!='')
+          <div class="col-md-12 text-center" style="padding-bottom: 15px;">
+              <a href="{{ app('accessories_upload_url') }}{{ $accessory->image }}" data-toggle="lightbox"><img src="{{ app('accessories_upload_url') }}{{ $accessory->image }}" class="img-responsive img-thumbnail" alt="{{ $accessory->name }}"></a>
+          </div>
+      @endif
+
+      <div class="text-center">
+          @can('checkout', \App\Models\Accessory::class)
+              <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-info btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+          @endcan
+      </div>
+
+
     <h4>{{ trans('admin/accessories/general.about_accessories_title') }}</h4>
     <p>{{ trans('admin/accessories/general.about_accessories_text') }} </p>
-    <div class="text-center">
-      @can('checkout', \App\Models\Accessory::class)
-        <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-info btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
-      @endcan
-    </div>
+
 
   </div>
 </div>

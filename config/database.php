@@ -80,9 +80,13 @@ return [
             'strict'    => false,
             'engine'    => 'InnoDB',
             'unix_socket' => env('DB_SOCKET',''),
-            'dump_command_path' => env('DB_DUMP_PATH', '/usr/local/bin'),  // only the path, so without 'mysqldump'
-            'dump_command_timeout' => 60 * 5, // 5 minute timeout
-            'dump_using_single_transaction' => true, // perform dump using a single transaction
+            'dump' => [
+                'dump_binary_path' => env('DB_DUMP_PATH', '/usr/local/bin'),  // only the path, so without 'mysqldump'
+                'use_single_transaction',
+                'timeout' => 60 * 5, // 5 minute timeout
+                //'exclude_tables' => ['table1', 'table2'],
+                //'add_extra_option' => '--optionname=optionvalue',
+            ],
             'options' => (env('DB_SSL')) ? [
                 PDO::MYSQL_ATTR_SSL_KEY    => env('DB_SSL_KEY_PATH'),  // /path/to/key.pem
                 PDO::MYSQL_ATTR_SSL_CERT   => env('DB_SSL_CERT_PATH'), // /path/to/cert.pem

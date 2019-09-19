@@ -94,7 +94,7 @@ class AccessoriesController extends Controller
                 $file_name = "accessory-".str_random(18).'.'.$ext;
                 $path = public_path('/uploads/accessories');
                 if ($image->getClientOriginalExtension()!='svg') {
-                    Image::make($image->getRealPath())->resize(null, 250, function ($constraint) {
+                    Image::make($image->getRealPath())->resize(null, 800, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })->save($path.'/'.$file_name);
@@ -173,7 +173,7 @@ class AccessoriesController extends Controller
                 $file_name = "accessory-".str_random(18).'.'.$ext;
                 $path = public_path('/uploads/accessories');
                 if ($image->getClientOriginalExtension()!='svg') {
-                    Image::make($image->getRealPath())->resize(null, 250, function ($constraint) {
+                    Image::make($image->getRealPath())->resize(null, 800, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
                     })->save($path.'/'.$file_name);

@@ -219,6 +219,9 @@
     'years'					=> 'years',
     'yes' 					=> 'Yes',
     'zip'  					=> 'Zip',
-    'noimage'					=> 'No image uploaded or image not found.',
-    'token_expired'             => 'Your form session has expired. Please try again.',
+    'noimage'				=> 'No image uploaded or image not found.',
+    'token_expired'         => 'Your form session has expired. Please try again.',
+    'login_enabled'         => 'Login Enabled',
+    'audit_due'             => 'Due for Audit',
+    'audit_overdue'         => 'Overdue for Audit',
     ];

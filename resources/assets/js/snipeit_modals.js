@@ -171,5 +171,8 @@ function formatDatalist (datalist) {
 }
 
 function formatDataSelection (datalist) {
-    return datalist.text;
+    return datalist.text.replace(/>/g, '&gt;')
+        .replace(/</g, '&lt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 }

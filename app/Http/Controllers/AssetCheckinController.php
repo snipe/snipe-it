@@ -65,15 +65,15 @@ class AssetCheckinController extends Controller
         $asset->assignedTo()->disassociate($asset);
         $asset->assigned_type = null;
         $asset->accepted = null;
-        $asset->name = e($request->get('name'));
+        $asset->name = $request->get('name');
 
-        if ($request->has('status_id')) {
+        if ($request->filled('status_id')) {
             $asset->status_id =  e($request->get('status_id'));
         }
 
         $asset->location_id = $asset->rtd_location_id;
 
-        if ($request->has('location_id')) {
+        if ($request->filled('location_id')) {
             $asset->location_id =  e($request->get('location_id'));
         }
 
@@ -93,7 +93,7 @@ class AssetCheckinController extends Controller
             $data['model_name'] = $asset->model->name;
             $data['model_number'] = $asset->model->model_number;
 
-            if ($backto=='user') {
+            if ((isset($user)) && ($backto =='user')) {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
             }
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkin.success'));

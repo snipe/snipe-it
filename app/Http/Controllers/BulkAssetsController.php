@@ -26,13 +26,13 @@ class BulkAssetsController extends Controller
     {
         $this->authorize('update', Asset::class);
 
-        if (!$request->has('ids')) {
+        if (!$request->filled('ids')) {
             return redirect()->back()->with('error', 'No assets selected');
         }
 
         $asset_ids = array_keys($request->input('ids'));
 
-        if ($request->has('bulk_actions')) {
+        if ($request->filled('bulk_actions')) {
             switch($request->input('bulk_actions')) {
                 case 'labels':
                     return view('hardware/labels')
@@ -68,22 +68,22 @@ class BulkAssetsController extends Controller
 
         \Log::debug($request->input('ids'));
 
-        if(!$request->has('ids') || count($request->input('ids')) <= 0) {
+        if(!$request->filled('ids') || count($request->input('ids')) <= 0) {
             return redirect()->route("hardware.index")->with('warning', trans('No assets selected, so nothing was updated.'));
         }
 
         $assets = array_keys($request->input('ids'));
 
-        if (($request->has('purchase_date'))
-            || ($request->has('purchase_cost'))
-            || ($request->has('supplier_id'))
-            || ($request->has('order_number'))
-            || ($request->has('warranty_months'))
-            || ($request->has('rtd_location_id'))
-            || ($request->has('requestable'))
-            || ($request->has('company_id'))
-            || ($request->has('status_id'))
-            || ($request->has('model_id'))
+        if (($request->filled('purchase_date'))
+            || ($request->filled('purchase_cost'))
+            || ($request->filled('supplier_id'))
+            || ($request->filled('order_number'))
+            || ($request->filled('warranty_months'))
+            || ($request->filled('rtd_location_id'))
+            || ($request->filled('requestable'))
+            || ($request->filled('company_id'))
+            || ($request->filled('status_id'))
+            || ($request->filled('model_id'))
         ) {
             foreach ($assets as $assetId) {
                 $this->update_array = [];
@@ -96,20 +96,20 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('supplier_id')
                     ->conditionallyAddItem('warranty_months');
 
-                if ($request->has('purchase_cost')) {
+                if ($request->filled('purchase_cost')) {
                     $this->update_array['purchase_cost'] =  Helper::ParseFloat($request->input('purchase_cost'));
                 }
 
-                if ($request->has('company_id')) {
+                if ($request->filled('company_id')) {
                     $this->update_array['company_id'] =  $request->input('company_id');
                     if ($request->input('company_id')=="clear") {
                         $this->update_array['company_id'] = null;
                     }
                 }
 
-                if ($request->has('rtd_location_id')) {
+                if ($request->filled('rtd_location_id')) {
                     $this->update_array['rtd_location_id'] = $request->input('rtd_location_id');
-                    if (($request->has('update_real_loc')) && (($request->input('update_real_loc')) == '1')) {
+                    if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '1')) {
                         $this->update_array['location_id'] = $request->input('rtd_location_id');
                     }
                 }
@@ -137,7 +137,7 @@ class BulkAssetsController extends Controller
      */
     protected function conditionallyAddItem($field)
     {
-        if(request()->has($field)) {
+        if(request()->filled($field)) {
             $this->update_array[$field] = request()->input($field);
         }
         return $this;
@@ -155,7 +155,7 @@ class BulkAssetsController extends Controller
     {
         $this->authorize('delete', Asset::class);
 
-        if ($request->has('ids')) {
+        if ($request->filled('ids')) {
             $assets = Asset::find($request->get('ids'));
             foreach ($assets as $asset) {
                 $update_array['deleted_at'] = date('Y-m-d H:i:s');
@@ -206,13 +206,13 @@ class BulkAssetsController extends Controller
                 }
             }
             $checkout_at = date("Y-m-d H:i:s");
-            if (($request->has('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {
+            if (($request->filled('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {
                 $checkout_at = e($request->get('checkout_at'));
             }
 
             $expected_checkin = '';
 
-            if ($request->has('expected_checkin')) {
+            if ($request->filled('expected_checkin')) {
                 $expected_checkin = e($request->get('expected_checkin'));
             }
 

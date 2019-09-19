@@ -11,6 +11,11 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="apple-touch-icon" href="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+      <link rel="apple-touch-startup-image" href="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+
+
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
 
@@ -25,6 +30,7 @@
     <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="baseUrl" content="{{ url('/') }}/">
 
     <script nonce="{{ csrf_token() }}">
       window.Laravel = { csrfToken: '{{ csrf_token() }}' };
@@ -440,14 +446,27 @@
                         </a>
                     </li>
 
+                    @can('audit', \App\Models\Asset::class)
+                        <li{!! (Request::is('hardware/audit/due') ? ' class="active"' : '') !!}>
+                            <a href="{{ route('assets.audit.due') }}">
+                                <i class="fa fa-clock-o text-yellow"></i> {{ trans('general.audit_due') }}
+                            </a>
+                        </li>
+                        <li{!! (Request::is('hardware/audit/overdue') ? ' class="active"' : '') !!}>
+                            <a href="{{ route('assets.audit.overdue') }}">
+                                <i class="fa fa-warning text-red"></i> {{ trans('general.audit_overdue') }}
+                            </a>
+                        </li>
+                    @endcan
+
                   <li class="divider">&nbsp;</li>
                     @can('checkout', \App\Models\Asset::class)
-                    <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active>"' : '') !!}>
+                    <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active"' : '') !!}>
                         <a href="{{ route('hardware/bulkcheckout') }}">
                             {{ trans('general.bulk_checkout') }}
                         </a>
                     </li>
-                    <li{!! (Request::is('hardware/requested') ? ' class="active>"' : '') !!}>
+                    <li{!! (Request::is('hardware/requested') ? ' class="active"' : '') !!}>
                         <a href="{{ route('assets.requested') }}">
                             {{ trans('general.requested') }}</a>
                     </li>
@@ -520,7 +539,7 @@
                   </a>
             </li>
             @endcan
-            @can('create', \App\Models\Asset::class)
+            @can('import')
                 <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
                     <a href="{{ route('imports.index') }}">
                         <i class="fa fa-cloud-download"></i>
@@ -747,7 +766,7 @@
         <div class="pull-right hidden-xs">
           @if ($snipeSettings->version_footer!='off')
               @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
-                <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
+                &nbsp; <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
               @endif
           @endif
 

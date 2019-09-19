@@ -97,7 +97,7 @@ class AssetModelsController extends Controller
             $path = app('models_upload_path');
 
             if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save($path.'/'.$file_name);
@@ -194,7 +194,7 @@ class AssetModelsController extends Controller
             $file_name = $model->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
 
             if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save(app('models_upload_path').$file_name);
@@ -209,7 +209,7 @@ class AssetModelsController extends Controller
             try  {
                 unlink(app('models_upload_path').$old_image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 
@@ -246,7 +246,7 @@ class AssetModelsController extends Controller
             try  {
                 unlink(public_path().'/uploads/models/'.$model->image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 
@@ -373,7 +373,7 @@ class AssetModelsController extends Controller
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {
 
 
-            $models = AssetModel::whereIn('id', $models_raw_array)->withCount('assets')->orderBy('assets_count', 'ASC')->get();
+            $models = AssetModel::whereIn('id', $models_raw_array)->withCount('assets as assets_count')->orderBy('assets_count', 'ASC')->get();
 
             // If deleting....
             if ($request->input('bulk_actions')=='delete') {
@@ -420,10 +420,10 @@ class AssetModelsController extends Controller
         $update_array = array();
 
 
-        if (($request->has('manufacturer_id') && ($request->input('manufacturer_id')!='NC'))) {
+        if (($request->filled('manufacturer_id') && ($request->input('manufacturer_id')!='NC'))) {
             $update_array['manufacturer_id'] = $request->input('manufacturer_id');
         }
-        if (($request->has('category_id') && ($request->input('category_id')!='NC'))) {
+        if (($request->filled('category_id') && ($request->input('category_id')!='NC'))) {
             $update_array['category_id'] = $request->input('category_id');
         }
         if ($request->input('fieldset_id')!='NC') {
@@ -461,7 +461,7 @@ class AssetModelsController extends Controller
 
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {
 
-            $models = AssetModel::whereIn('id', $models_raw_array)->withCount('assets')->get();
+            $models = AssetModel::whereIn('id', $models_raw_array)->withCount('assets as assets_count')->get();
 
             $del_error_count = 0;
             $del_count = 0;

@@ -83,7 +83,7 @@ class SuppliersController extends Controller
             $image = $request->file('image');
             $file_name = str_random(25).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/suppliers/'.$file_name);
-            Image::make($image->getRealPath())->resize(200, null, function ($constraint) {
+            Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path);
@@ -159,7 +159,7 @@ class SuppliersController extends Controller
             $file_name = $supplier->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
 
             if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save(app('suppliers_upload_path').$file_name);
@@ -174,7 +174,7 @@ class SuppliersController extends Controller
             try  {
                 unlink(app('suppliers_upload_path').$old_image);
             } catch (\Exception $e) {
-                \Log::error($e);
+                \Log::info($e);
             }
         }
 
@@ -196,7 +196,7 @@ class SuppliersController extends Controller
     public function destroy($supplierId)
     {
         $this->authorize('delete', Supplier::class);
-        if (is_null($supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances','assets','licenses')->find($supplierId))) {
+        if (is_null($supplier = Supplier::with('asset_maintenances', 'assets', 'licenses')->withCount('asset_maintenances as asset_maintenances_count','assets as assets_count','licenses as licenses_count')->find($supplierId))) {
             return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.not_found'));
         }
 

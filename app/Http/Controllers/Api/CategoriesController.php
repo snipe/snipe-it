@@ -24,14 +24,17 @@ class CategoriesController extends Controller
         $allowed_columns = ['id', 'name','category_type', 'category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email', 'assets_count', 'accessories_count', 'consumables_count', 'components_count','licenses_count', 'image'];
 
         $categories = Category::select(['id', 'created_at', 'updated_at', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email','image'])
-            ->withCount('assets', 'accessories', 'consumables', 'components','licenses');
+            ->withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count','licenses as licenses_count');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $categories = $categories->TextSearch($request->input('search'));
         }
 
         $offset = (($categories) && (request('offset') > $categories->count())) ? 0 : request('offset', 0);
-        $limit = $request->input('limit', 50);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets_count';
         $categories->orderBy($sort, $order);
@@ -148,7 +151,7 @@ class CategoriesController extends Controller
             'image',
         ]);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $categories = $categories->where('name', 'LIKE', '%'.$request->get('search').'%');
         }
 

@@ -58,6 +58,15 @@
           </div>
         </div>
 
+        <!-- Phone -->
+        <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
+          <label class="col-md-3 control-label" for="phone">{{ trans('admin/users/table.phone') }}</label>
+          <div class="col-md-4">
+            <input class="form-control" type="text" name="phone" id="phone" value="{{ Input::old('phone', $user->phone) }}" />
+            {!! $errors->first('phone', '<span class="alert-msg">:message</span>') !!}
+          </div>
+        </div>
+
 
 
         <!-- Website URL -->

@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Visa Modeller',
     'fieldset'                  => 'Fältsamling',
     'no_custom_field'           => 'Inga anpassade fält',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'Lägg till standardvärden',
 );

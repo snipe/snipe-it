@@ -24,14 +24,17 @@ class StatuslabelsController extends Controller
         $this->authorize('view', Statuslabel::class);
         $allowed_columns = ['id','name','created_at', 'assets_count','color','default_label'];
 
-        $statuslabels = Statuslabel::withCount('assets');
+        $statuslabels = Statuslabel::withCount('assets as assets_count');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $statuslabels = $statuslabels->TextSearch($request->input('search'));
         }
 
         $offset = (($statuslabels) && (request('offset') > $statuslabels->count())) ? 0 : request('offset', 0);
-        $limit = $request->input('limit', 50);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
         $statuslabels->orderBy($sort, $order);
@@ -55,7 +58,7 @@ class StatuslabelsController extends Controller
         $this->authorize('create', Statuslabel::class);
         $request->except('deployable', 'pending','archived');
 
-        if (!$request->has('type')) {
+        if (!$request->filled('type')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, ["type" => ["Status label type is required."]]),500);
         }
 
@@ -106,7 +109,7 @@ class StatuslabelsController extends Controller
         
         $request->except('deployable', 'pending','archived');
 
-        if (!$request->has('type')) {
+        if (!$request->filled('type')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Status label type is required.'));
         }
 
@@ -162,7 +165,7 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('view', Statuslabel::class);
 
-        $statuslabels = Statuslabel::with('assets')->groupBy('id')->withCount('assets')->get();
+        $statuslabels = Statuslabel::with('assets')->groupBy('id')->withCount('assets as assets_count')->get();
 
         $labels=[];
         $points=[];

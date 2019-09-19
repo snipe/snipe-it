@@ -52,42 +52,46 @@ class UsersController extends Controller
             'users.phone',
             'users.state',
             'users.two_factor_enrolled',
+            'users.two_factor_optin',
             'users.updated_at',
             'users.username',
             'users.zip',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department','assets','licenses','accessories','consumables')
-            ->withCount('assets','licenses','accessories','consumables');
+            ->withCount('assets as assets_count','licenses as licenses_count','accessories as accessories_count','consumables as consumables_count');
         $users = Company::scopeCompanyables($users);
 
 
-        if (($request->has('deleted')) && ($request->input('deleted')=='true')) {
+        if (($request->filled('deleted')) && ($request->input('deleted')=='true')) {
             $users = $users->GetDeleted();
         }
 
-        if ($request->has('company_id')) {
+        if ($request->filled('company_id')) {
             $users = $users->where('users.company_id', '=', $request->input('company_id'));
         }
 
-        if ($request->has('location_id')) {
+        if ($request->filled('location_id')) {
             $users = $users->where('users.location_id', '=', $request->input('location_id'));
         }
 
-        if ($request->has('group_id')) {
+        if ($request->filled('group_id')) {
             $users = $users->ByGroup($request->get('group_id'));
         }
 
-        if ($request->has('department_id')) {
+        if ($request->filled('department_id')) {
             $users = $users->where('users.department_id','=',$request->input('department_id'));
         }
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $offset = (($users) && (request('offset') > $users->count())) ? 0 : request('offset', 0);
-        $limit = request('limit',  20);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
 
         switch ($request->input('sort')) {
             case 'manager':
@@ -98,6 +102,9 @@ class UsersController extends Controller
                 break;
             case 'department':
                 $users = $users->OrderDepartment($order);
+                break;
+            case 'company':
+                $users = $users->OrderCompany($order);
                 break;
             default:
                 $allowed_columns =
@@ -147,7 +154,7 @@ class UsersController extends Controller
 
         $users = Company::scopeCompanyables($users);
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $users = $users->SimpleNameSearch($request->get('search'))
                 ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
                 ->orWhere('employee_num', 'LIKE', '%'.$request->get('search').'%');
@@ -200,7 +207,7 @@ class UsersController extends Controller
         $user->password = bcrypt($request->get('password', $tmp_pass));
 
         if ($user->save()) {
-            if ($request->has('groups')) {
+            if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
             } else {
                 $user->groups()->sync(array());
@@ -246,7 +253,7 @@ class UsersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot be your own manager'));
         }
 
-        if ($request->has('password')) {
+        if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
 
@@ -255,6 +262,22 @@ class UsersController extends Controller
             ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
 
         if ($user->save()) {
+
+            // Sync group memberships:
+            // This was changed in Snipe-IT v4.6.x to 4.7, since we upgraded to Laravel 5.5
+            // which changes the behavior of has vs filled.
+            // The $request->has method will now return true even if the input value is an empty string or null.
+            // A new $request->filled method has was added that provides the previous behavior of the has method.
+
+            // Check if the request has groups passed and has a value
+            if ($request->filled('groups')) {
+                $user->groups()->sync($request->input('groups'));
+            // The groups field has been passed but it is null, so we should blank it out
+            } elseif ($request->has('groups'))  {
+                $user->groups()->sync(array());
+            }
+
+
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
         }
 
@@ -276,9 +299,22 @@ class UsersController extends Controller
         $this->authorize('delete', $user);
 
 
-        if ($user->assets()->count() > 0) {
+        if (($user->assets) && ($user->assets->count() > 0)) {
             return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete_has_assets')));
         }
+
+        if (($user->licenses) && ($user->licenses->count() > 0)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null,  'This user still has ' . $user->licenses->count() . ' license(s) associated with them and cannot be deleted.'));
+        }
+
+        if (($user->accessories) && ($user->accessories->count() > 0)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null,  'This user still has ' . $user->accessories->count() . ' accessories associated with them.'));
+        }
+
+        if (($user->managedLocations()) && ($user->managedLocations()->count() > 0)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null,  'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.'));
+        }
+
 
         if ($user->delete()) {
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
@@ -332,7 +368,7 @@ class UsersController extends Controller
 
         $this->authorize('update', User::class);
 
-        if ($request->has('id')) {
+        if ($request->filled('id')) {
             try {
                 $user = User::find($request->get('id'));
                 $user->two_factor_secret = null;

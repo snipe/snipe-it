@@ -1,14 +1,14 @@
 [![Build Status](https://travis-ci.org/snipe/snipe-it.svg?branch=master)](https://travis-ci.org/snipe/snipe-it) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.svg)](https://crowdin.com/project/snipe-it) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snipe/snipe-it?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/) [![Twitter Follow](https://img.shields.io/twitter/follow/snipeitapp.svg?style=social)](https://twitter.com/snipeitapp)  [![Codacy Badge](https://api.codacy.com/project/badge/Grade/553ce52037fc43ea99149785afcfe641)](https://www.codacy.com/app/snipe/snipe-it?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=snipe/snipe-it&amp;utm_campaign=Badge_Grade)
-[![All Contributors](https://img.shields.io/badge/all_contributors-180-orange.svg?style=flat-square)](#contributors) [![Open Source Helpers](https://www.codetriage.com/snipe/snipe-it/badges/users.svg)](https://www.codetriage.com/snipe/snipe-it)
+[![All Contributors](https://img.shields.io/badge/all_contributors-182-orange.svg?style=flat-square)](#contributors) [![Open Source Helpers](https://www.codetriage.com/snipe/snipe-it/badges/users.svg)](https://www.codetriage.com/snipe/snipe-it)
 
 
 ## Snipe-IT - Open Source Asset Management System
 
 This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, handling software licenses, etc.
 
-It is built on [Laravel 5.4](http://laravel.com).
+It is built on [Laravel 5.5](http://laravel.com).
 
-Snipe-IT is actively developed and we're [releasing quite frequently](https://github.com/snipe/snipe-it/releases). ([Check out the live demo here](https://snipeitapp.com/demo/).)
+Snipe-IT is actively developed and we [release quite frequently](https://github.com/snipe/snipe-it/releases). ([Check out the live demo here](https://snipeitapp.com/demo/).)
 
 __This is web-based software__. This means there is no executable file (aka no .exe files), and it must be run on a web server and accessed through a web browser. It runs on any Mac OSX, flavor of Linux, as well as Windows, and we have a [Docker image](https://snipe-it.readme.io/docs/docker) available if that's what you're into.
 
@@ -58,10 +58,19 @@ Since the release of the JSON REST API, several third-party developers have been
 - [SnipeSharp - .NET module in C#](https://github.com/barrycarey/SnipeSharp) by [@barrycarey](https://github.com/barrycarey)
 - [InQRy](https://github.com/Microsoft/InQRy) by [@Microsoft](https://github.com/Microsoft)
 - [SnipeitPS](https://github.com/snazy2000/SnipeitPS) by [@snazy2000](https://github.com/snazy2000) - Powershell API Wrapper for Snipe-it
-- [jamf2snipe](https://github.com/ParadoxGuitarist/jamf2snipe) by [@ParadoxGuitarist](https://github.com/ParadoxGuitarist) - Python script to sync assets between a JAMFPro instance and a Snipe-II instance
+- [jamf2snipe](https://github.com/ParadoxGuitarist/jamf2snipe) by [@ParadoxGuitarist](https://github.com/ParadoxGuitarist) - Python script to sync assets between a JAMFPro instance and a Snipe-IT instance
 - [Marksman](https://github.com/Scope-IT/marksman) - A Windows agent for Snipe-IT
+- [Snipe-IT plugin for Jira Service Desk (beta)](https://marketplace.atlassian.com/apps/1220379/snipe-it-for-jira-service-desk-beta?hosting=cloud&tab=overview) - for the upcoming Snipe-IT v5 only
+- [Python 3 CSV importer](https://github.com/gastamper/snipeit-csvimporter) - allows importing assets into Snipe-IT based on Item Name rather than Asset Tag.
+- [Snipe-IT Kubernetes Helm Chart](https://github.com/t3n/helm-charts/tree/master/snipeit) - For more information, [click here](https://hub.helm.sh/charts/t3n/snipeit).
 
 As these were created by third-parties, Snipe-IT cannot provide support for these project, and you should contact the developers directly if you need assistance. Additionally, Snipe-IT makes no guarantees as to the reliability, accuracy or maintainability of these libraries. Use at your own risk. :) 
+
+-----
+
+### Security
+
+To report a security vulnerability, please email security@snipeitapp.com instead of using the issue tracker. 
 
 -----
 
@@ -96,7 +105,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
 | [<img src="https://avatars2.githubusercontent.com/u/982885?v=4" width="110px;"/><br /><sub>Martin Stub</sub>](http://martinstub.dk)<br />[🌍](#translation-stubben "Translation") | [<img src="https://avatars2.githubusercontent.com/u/28959963?v=4" width="110px;"/><br /><sub>Meyer Flavio</sub>](https://github.com/meyerf99)<br />[🌍](#translation-meyerf99 "Translation") | [<img src="https://avatars3.githubusercontent.com/u/796443?v=4" width="110px;"/><br /><sub>Micael Rodrigues</sub>](https://github.com/MicaelRodrigues)<br />[🌍](#translation-MicaelRodrigues "Translation") | [<img src="https://avatars0.githubusercontent.com/u/10481331?v=4" width="110px;"/><br /><sub>Mikael Rasmussen</sub>](http://rubixy.com/)<br />[🌍](#translation-mikaelssen "Translation") | [<img src="https://avatars1.githubusercontent.com/u/1544552?v=4" width="110px;"/><br /><sub>IxFail</sub>](https://github.com/IxFail)<br />[🌍](#translation-IxFail "Translation") | [<img src="https://avatars3.githubusercontent.com/u/18483118?v=4" width="110px;"/><br /><sub>Mohammed Fota</sub>](http://www.mohammedfota.com)<br />[🌍](#translation-MohammedFota "Translation") | [<img src="https://avatars0.githubusercontent.com/u/227080?v=4" width="110px;"/><br /><sub>Moayad Alserihi</sub>](https://github.com/omego)<br />[🌍](#translation-omego "Translation") |
 | [<img src="https://avatars0.githubusercontent.com/u/1680266?v=4" width="110px;"/><br /><sub>saymd</sub>](https://github.com/saymd)<br />[🌍](#translation-saymd "Translation") | [<img src="https://avatars0.githubusercontent.com/u/1826808?v=4" width="110px;"/><br /><sub>Patrik Larsson</sub>](https://nordsken.se)<br />[🌍](#translation-pooot "Translation") | [<img src="https://avatars1.githubusercontent.com/u/20584746?v=4" width="110px;"/><br /><sub>drcryo</sub>](https://github.com/drcryo)<br />[🌍](#translation-drcryo "Translation") | [<img src="https://avatars1.githubusercontent.com/u/19408004?v=4" width="110px;"/><br /><sub>pawel1615</sub>](https://github.com/pawel1615)<br />[🌍](#translation-pawel1615 "Translation") | [<img src="https://avatars2.githubusercontent.com/u/23340468?v=4" width="110px;"/><br /><sub>bodrovics</sub>](https://github.com/bodrovics)<br />[🌍](#translation-bodrovics "Translation") | [<img src="https://avatars0.githubusercontent.com/u/3257654?v=4" width="110px;"/><br /><sub>priatna</sub>](https://github.com/priatna)<br />[🌍](#translation-priatna "Translation") | [<img src="https://avatars1.githubusercontent.com/u/5358374?v=4" width="110px;"/><br /><sub>Fan Jiang</sub>](https://amayume.net)<br />[🌍](#translation-ProfFan "Translation") |
 | [<img src="https://avatars1.githubusercontent.com/u/22555451?v=4" width="110px;"/><br /><sub>ragnarcx</sub>](https://github.com/ragnarcx)<br />[🌍](#translation-ragnarcx "Translation") | [<img src="https://avatars2.githubusercontent.com/u/18654582?v=4" width="110px;"/><br /><sub>Rein van Haaren</sub>](http://www.reinvanhaaren.nl/)<br />[🌍](#translation-reinvanhaaren "Translation") | [<img src="https://avatars1.githubusercontent.com/u/386672?v=4" width="110px;"/><br /><sub>Teguh Dwicaksana</sub>](http://dheche.songolimo.net)<br />[🌍](#translation-dheche "Translation") | [<img src="https://avatars2.githubusercontent.com/u/2572552?v=4" width="110px;"/><br /><sub>fraccie</sub>](https://github.com/FRaccie)<br />[🌍](#translation-FRaccie "Translation") | [<img src="https://avatars0.githubusercontent.com/u/35182720?v=4" width="110px;"/><br /><sub>vinzruzell</sub>](https://github.com/vinzruzell)<br />[🌍](#translation-vinzruzell "Translation") | [<img src="https://avatars1.githubusercontent.com/u/7883603?v=4" width="110px;"/><br /><sub>Kevin Austin</sub>](http://kevinaustin.com)<br />[🌍](#translation-vipsystem "Translation") | [<img src="https://avatars3.githubusercontent.com/u/3861828?v=4" width="110px;"/><br /><sub>Wira Sandy</sub>](http://azuraweb.xyz)<br />[🌍](#translation-wira-sandy "Translation") |
-| [<img src="https://avatars2.githubusercontent.com/u/8663789?v=4" width="110px;"/><br /><sub>Илья</sub>](https://github.com/GrayHoax)<br />[🌍](#translation-GrayHoax "Translation") | [<img src="https://avatars3.githubusercontent.com/u/30119111?v=4" width="110px;"/><br /><sub>GodUseVPN</sub>](https://github.com/godusevpn)<br />[🌍](#translation-godusevpn "Translation") | [<img src="https://avatars1.githubusercontent.com/u/745576?v=4" width="110px;"/><br /><sub>周周</sub>](https://github.com/EngrZhou)<br />[🌍](#translation-EngrZhou "Translation") | [<img src="https://avatars3.githubusercontent.com/u/1631095?v=4" width="110px;"/><br /><sub>Sam</sub>](https://github.com/takuy)<br />[💻](https://github.com/snipe/snipe-it/commits?author=takuy "Code") | [<img src="https://avatars1.githubusercontent.com/u/264022?v=4" width="110px;"/><br /><sub>Azerothian</sub>](https://www.illisian.com.au)<br />[💻](https://github.com/snipe/snipe-it/commits?author=Azerothian "Code") |
+| [<img src="https://avatars2.githubusercontent.com/u/8663789?v=4" width="110px;"/><br /><sub>Илья</sub>](https://github.com/GrayHoax)<br />[🌍](#translation-GrayHoax "Translation") | [<img src="https://avatars3.githubusercontent.com/u/30119111?v=4" width="110px;"/><br /><sub>GodUseVPN</sub>](https://github.com/godusevpn)<br />[🌍](#translation-godusevpn "Translation") | [<img src="https://avatars1.githubusercontent.com/u/745576?v=4" width="110px;"/><br /><sub>周周</sub>](https://github.com/EngrZhou)<br />[🌍](#translation-EngrZhou "Translation") | [<img src="https://avatars3.githubusercontent.com/u/1631095?v=4" width="110px;"/><br /><sub>Sam</sub>](https://github.com/takuy)<br />[💻](https://github.com/snipe/snipe-it/commits?author=takuy "Code") | [<img src="https://avatars1.githubusercontent.com/u/264022?v=4" width="110px;"/><br /><sub>Azerothian</sub>](https://www.illisian.com.au)<br />[💻](https://github.com/snipe/snipe-it/commits?author=Azerothian "Code") | [<img src="https://avatars1.githubusercontent.com/u/7632599?v=4" width="110px;"/><br /><sub>Tim Farmer</sub>](https://github.com/timothyfarmer)<br />[💻](https://github.com/snipe/snipe-it/commits?author=timothyfarmer "Code") | [<img src="https://avatars0.githubusercontent.com/u/17459600?v=4" width="110px;"/><br /><sub>Marián Skrip</sub>](https://github.com/mskrip)<br />[💻](https://github.com/snipe/snipe-it/commits?author=mskrip "Code") |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
@@ -109,9 +118,3 @@ Please see the documentation on [contributing and developing for Snipe-IT](https
 
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
-
------
-
-### Security
-
-To report a security vulnerability, please email security@snipeitapp.com instead of using the issue tracker. 

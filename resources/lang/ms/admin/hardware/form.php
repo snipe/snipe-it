@@ -38,7 +38,7 @@ return array(
     'tag'				=> 'Tag Harta',
     'update'			=> 'Kemaskini Harta',
     'warranty'			=> 'Waranti',
-		'warranty_expires'		=> 'Warranty Expires',
+		'warranty_expires'		=> 'Tamat Tempoh Waranti',
     'years'				=> 'tahun',
 )
 ;

@@ -179,7 +179,9 @@ class LicensesController extends Controller
         $license->purchase_date     = $request->input('purchase_date');
         $license->purchase_order    = $request->input('purchase_order');
         $license->reassignable      = $request->input('reassignable', 0);
-        $license->serial            = $request->input('serial');
+        if (Gate::allows('viewKeys', $license)) {
+            $license->serial        = $request->input('serial');
+        }
         $license->termination_date  = $request->input('termination_date');
         $license->seats             = e($request->input('seats'));
         $license->manufacturer_id   =  $request->input('manufacturer_id');
@@ -413,20 +415,7 @@ class LicensesController extends Controller
             return redirect()->back()->withInput();
         }
 
-        // Declare the rules for the form validation
-        $rules = array(
-            'note'   => 'string',
-            'notes'   => 'string',
-        );
 
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
         $return_to = User::find($licenseSeat->assigned_to);
         if (!$return_to) {
             $return_to = Asset::find($licenseSeat->asset_id);
@@ -438,7 +427,7 @@ class LicensesController extends Controller
 
         // Was the asset updated?
         if ($licenseSeat->save()) {
-            $licenseSeat->logCheckin($return_to, e(request('note')));
+            $licenseSeat->logCheckin($license, e(request('note')));
             if ($backTo=='user') {
                 return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
             }
@@ -556,21 +545,24 @@ class LicensesController extends Controller
         $destinationPath = config('app.private_uploads').'/licenses';
 
         // the license is valid
-        if (isset($license->id)) {
+        if ($license) {
             $this->authorize('edit', $license);
             $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath.'/'.$log->filename;
-            if (file_exists($full_filename)) {
-                unlink($destinationPath.'/'.$log->filename);
+            if ($log) {
+                $full_filename = $destinationPath.'/'.$log->filename;
+                if (file_exists($full_filename)) {
+                    unlink($destinationPath.'/'.$log->filename);
+                }
+                $log->delete();
+                return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
             }
-            $log->delete();
-            return redirect()->back()->with('success', trans('admin/licenses/message.deletefile.success'));
+
+            return redirect()->back()->with('error', 'Could not locate that file.');
+
         }
-        // Prepare the error message
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
 
         // Redirect to the licence management page
-        return redirect()->route('licenses.index')->with('error', $error);
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', compact('id')));
     }
 
 
@@ -593,29 +585,31 @@ class LicensesController extends Controller
         if (isset($license->id)) {
             $this->authorize('view', $license);
             $log = Actionlog::find($fileId);
-            $file = $log->get_src('licenses');
 
+            if ($log) {
 
-            if ($file =='') {
-                return response('File not found on server', 404)
-                    ->header('Content-Type', 'text/plain');
-            }
-
-            $mimetype = \File::mimeType($file);
-
-
-            if (!file_exists($file)) {
-                return response('File '.$file.' not found on server', 404)
-                    ->header('Content-Type', 'text/plain');
-            }
-
-            if ($download != 'true') {
-                if ($contents = file_get_contents($file)) {
-                    return Response::make($contents)->header('Content-Type', $mimetype);
+                $file = $log->get_src('licenses');
+                if ($file =='') {
+                    return response('File not found on server', 404)
+                        ->header('Content-Type', 'text/plain');
                 }
-                return JsonResponse::create(["error" => "Failed validation: "], 500);
+
+                $mimetype = \File::mimeType($file);
+
+                if (!file_exists($file)) {
+                    return response('File '.$file.' not found on server', 404)
+                        ->header('Content-Type', 'text/plain');
+                }
+
+                if ($download != 'true') {
+                    if ($contents = file_get_contents($file)) {
+                        return Response::make($contents)->header('Content-Type', $mimetype);
+                    }
+                    return JsonResponse::create(["error" => "Failed validation: "], 500);
+                }
+                return Response::download($file);
             }
-            return Response::download($file);
+
         }
 
 

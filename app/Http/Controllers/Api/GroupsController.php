@@ -22,14 +22,17 @@ class GroupsController extends Controller
         $this->authorize('view', Group::class);
         $allowed_columns = ['id','name','created_at', 'users_count'];
 
-        $groups = Group::select('id','name','permissions','created_at','updated_at')->withCount('users');
+        $groups = Group::select('id','name','permissions','created_at','updated_at')->withCount('users as users_count');
 
-        if ($request->has('search')) {
+        if ($request->filled('search')) {
             $groups = $groups->TextSearch($request->input('search'));
         }
 
         $offset = (($groups) && (request('offset') > $groups->count())) ? 0 : request('offset', 0);
-        $limit = $request->input('limit', 50);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
         $groups->orderBy($sort, $order);
