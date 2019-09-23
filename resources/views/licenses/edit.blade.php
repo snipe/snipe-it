@@ -8,7 +8,7 @@
 {{-- Page content --}}
 @section('inputFields')
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/licenses/form.name')])
-@include ('partials.forms.edit.category-select', ['translated_name' => trans('admin/categories/general.category_name'), 'fieldname' => 'category_id', 'required' => 'true', 'category_type' => 'license'])
+@include ('partials.forms.edit.category-select', ['translated_name' => trans('admin/categories/general.category_name'), 'fieldname' => 'category_id', 'required' => 'true', 'category_type' => $category_type])
 
 
 <!-- Serial-->
