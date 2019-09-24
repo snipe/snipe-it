@@ -73,7 +73,8 @@ class AssetMaintenance extends Model implements ICompanyableChild
             trans('admin/asset_maintenances/general.upgrade')     => trans('admin/asset_maintenances/general.upgrade'),
             'PAT test'      => 'PAT test',
             trans('admin/asset_maintenances/general.calibration')     => trans('admin/asset_maintenances/general.calibration'),
-            'PAT test'      => 'PAT test',
+            'Software Support'      => trans('admin/asset_maintenances/general.software_support'),
+            'Hardware Support'      => trans('admin/asset_maintenances/general.hardware_support'),
         ];
     }
 
