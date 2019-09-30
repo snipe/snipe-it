@@ -5,6 +5,7 @@ use App\Http\Transformers\AccessoriesTransformer;
 use App\Models\Accessory;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ApiAccessoriesCest
 {
@@ -92,6 +93,7 @@ class ApiAccessoriesCest
             'company_id' => $temp_accessory->company->id,
             'location_id' => $temp_accessory->location_id,
             'name' => $temp_accessory->name,
+            'image' => $temp_accessory->image,
             'order_number' => $temp_accessory->order_number,
             'purchase_cost' => $temp_accessory->purchase_cost,
             'purchase_date' => $temp_accessory->purchase_date,
@@ -113,11 +115,11 @@ class ApiAccessoriesCest
         $I->assertEquals('success', $response->status);
         $I->assertEquals(trans('admin/accessories/message.update.success'), $response->messages);
         $I->assertEquals($accessory->id, $response->payload->id); // accessory id does not change
-        $I->assertEquals($temp_accessory->company_id, $response->payload->company_id); // company_id updated
+        $I->assertEquals($temp_accessory->company_id, $response->payload->company->id); // company_id updated
         $I->assertEquals($temp_accessory->name, $response->payload->name); // accessory name updated
-        $I->assertEquals($temp_accessory->location_id, $response->payload->location_id); // accessory location_id updated
-        $temp_accessory->created_at = Carbon::parse($response->payload->created_at);
-        $temp_accessory->updated_at = Carbon::parse($response->payload->updated_at);
+        $I->assertEquals($temp_accessory->location_id, $response->payload->location->id); // accessory location_id updated
+        $temp_accessory->created_at = Carbon::parse($response->payload->created_at->datetime);
+        $temp_accessory->updated_at = Carbon::parse($response->payload->updated_at->datetime);
         $temp_accessory->id = $accessory->id;
         // verify
         $I->sendGET('/accessories/' . $accessory->id);

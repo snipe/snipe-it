@@ -186,6 +186,8 @@ class AccessoriesController extends Controller
         $accessory->fill($request->all());
 
         if ($accessory->save()) {
+            $accessory = (new AccessoriesTransformer)->transformAccessory($accessory);
+            
             return response()->json(Helper::formatStandardApiResponse('success', $accessory, trans('admin/accessories/message.update.success')));
         }
 
