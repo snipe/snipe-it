@@ -5,6 +5,7 @@ use App\Http\Transformers\LicensesTransformer;
 use App\Models\License;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ApiLicensesCest
 {
@@ -132,6 +133,7 @@ class ApiLicensesCest
         $temp_license->created_at = Carbon::parse($response->payload->created_at);
         $temp_license->updated_at = Carbon::parse($response->payload->updated_at);
         $temp_license->id = $license->id;
+        $temp_license->free_seats_count = $license->freeSeats()->count();
         // verify
         $I->sendGET('/licenses/' . $license->id);
         $I->seeResponseIsJson();
