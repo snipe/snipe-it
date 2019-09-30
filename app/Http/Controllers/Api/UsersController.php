@@ -333,7 +333,8 @@ class UsersController extends Controller
                     Storage::disk('public')->delete('avatars/'.$user->avatar);
                 } catch (\Exception $e) {
                     \Log::debug($e);
-               }
+                }
+            }
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
         }
