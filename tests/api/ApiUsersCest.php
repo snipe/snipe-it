@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ApiUsersCest
 {
@@ -43,8 +44,9 @@ class ApiUsersCest
         $I->wantTo('Create a new user');
 
         $temp_user = factory(\App\Models\User::class)->make([
-            'name' => "Test User Name",
+            'first_name' => "Test User Name",
         ]);
+        $password = Str::random(12);
         factory(Group::class, 2)->create();
         $groups = Group::pluck('id');
         // setup
@@ -64,7 +66,8 @@ class ApiUsersCest
             'location_id' => $temp_user->location_id,
             'notes' => $temp_user->notes,
             'manager_id' => $temp_user->manager_id,
-            'password' => $temp_user->password,
+            'password' => $password,
+            'password_confirmation' => $password,
             'phone' => $temp_user->phone,
             'state' => $temp_user->state,
             'username' => $temp_user->username,

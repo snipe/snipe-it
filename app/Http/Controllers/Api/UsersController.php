@@ -328,9 +328,9 @@ class UsersController extends Controller
         if ($user->delete()) {
 
             // Remove the user's avatar if they have one
-            if (Storage::disk('public')->exists('avatars/'.$user->avatar)) {
+            if (\Storage::disk('public')->exists('avatars/'.$user->avatar)) {
                 try  {
-                    Storage::disk('public')->delete('avatars/'.$user->avatar);
+                    \Storage::disk('public')->delete('avatars/'.$user->avatar);
                 } catch (\Exception $e) {
                     \Log::debug($e);
                 }
