@@ -29,7 +29,7 @@ class Category extends SnipeModel
     */
     public $rules = array(
         'user_id' => 'numeric|nullable',
-        'name'   => 'required|min:1|max:255|unique_undeleted',
+        'name'   => 'required|min:1|max:255|unique_with_categories',
         'require_acceptance'   => 'boolean',
         'use_default_eula'   => 'boolean',
         'category_type'   => 'required|in:asset,accessory,consumable,component,license',

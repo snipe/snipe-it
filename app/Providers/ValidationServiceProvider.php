@@ -57,6 +57,10 @@ class ValidationServiceProvider extends ServiceProvider
 
         });
 
+        Validator::extend('unique_with_categories', function($attribute, $value, $parameters, $validator) {
+            $count = DB::table('categories')->select('id')->where($attribute, '=', $value)->whereNull('deleted_at')->where('category_type', '=', $validator->getData()['category_type'])->count();
+            return $count < 1;
+        });
 
         // Yo dawg. I heard you like validators.
         // This validates the custom validator regex in custom fields.
