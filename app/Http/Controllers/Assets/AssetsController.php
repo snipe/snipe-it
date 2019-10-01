@@ -146,6 +146,10 @@ class AssetsController extends Controller
             $asset->requestable             = request('requestable', 0);
             $asset->rtd_location_id         = request('rtd_location_id', null);
 
+            if (!empty($settings->audit_interval)) {
+                $asset->next_audit_date         = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+            }
+
             if ($asset->assigned_to=='') {
                 $asset->location_id = $request->input('rtd_location_id', null);
             }
@@ -476,6 +480,29 @@ class AssetsController extends Controller
             }
         }
     }
+
+
+    /**
+     * Return a label for an individual asset.
+     *
+     * @author [L. Swartzendruber] [<logan.swartzendruber@gmail.com>
+     * @param int $assetId
+     * @return View
+     */
+    public function getLabel($assetId = null)
+    {
+        if (isset($assetId)) {
+            $asset = Asset::find($assetId);
+            $this->authorize('view', $asset);
+
+            return view('hardware/labels')
+                ->with('assets', Asset::find($asset))
+                ->with('settings', Setting::getSettings())
+                ->with('bulkedit', false)
+                ->with('count', 0);
+        }
+    }
+
 
     /**
      * Returns a view that presents a form to clone an asset.

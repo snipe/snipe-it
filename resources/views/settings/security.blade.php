@@ -133,6 +133,13 @@
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_remote_user_enabled_help') }}
                                     </p>
+                                    <!-- Use custom remote user header name -->
+                                    {{ Form::label('login_remote_user_header_name',  trans('admin/settings/general.login_remote_user_header_name_text')) }}
+                                    {{ Form::text('login_remote_user_header_name', Input::old('login_remote_user_header_name', $setting->login_remote_user_header_name),array('class' => 'form-control')) }}
+                                    {!! $errors->first('login_remote_user_header_name', '<span class="alert-msg">:message</span>') !!}
+                                    <p class="help-block">
+                                        {{ trans('admin/settings/general.login_remote_user_header_name_help') }}
+                                    </p>
                                     <!-- Custom logout url to redirect to authentication provider -->
                                     {{ Form::label('login_remote_user_custom_logout_url',  trans('admin/settings/general.login_remote_user_custom_logout_url_text')) }}
                                     {{ Form::text('login_remote_user_custom_logout_url', Input::old('login_remote_user_custom_logout_url', $setting->login_remote_user_custom_logout_url),array('class' => 'form-control')) }}

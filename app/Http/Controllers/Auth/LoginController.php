@@ -99,9 +99,10 @@ class LoginController extends Controller
 
     private function loginViaRemoteUser(Request $request)
     {
-        $remote_user = $request->server('REMOTE_USER');
+        $header_name = Setting::getSettings()->login_remote_user_header_name ?: 'REMOTE_USER';
+        $remote_user = $request->server($header_name);
         if (Setting::getSettings()->login_remote_user_enabled == "1" && isset($remote_user) && !empty($remote_user)) {
-            Log::debug("Authenticatiing via REMOTE_USER.");
+            Log::debug("Authenticating via HTTP header $header_name.");
 
             $pos = strpos($remote_user, '\\');
             if ($pos > 0) {

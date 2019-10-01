@@ -87,6 +87,8 @@ return array(
     'login_common_disabled_help' => 'This option disables other authentication mechanisms. Just enable this option if you are sure that your REMOTE_USER login is already working',
     'login_remote_user_custom_logout_url_text' => 'Anpassad logga ut URL',
     'login_remote_user_custom_logout_url_help' => 'Om en URL tillhandahålls här kommer användarna att omdirigeras till den här webbadressen efter att användaren loggat ut från Snipe-IT. Det här är användbart för att stänga användarsessionerna i din autentiseringsleverantör korrekt.',
+    'login_remote_user_header_name_text' => 'Anpassat headernamn',
+    'login_remote_user_header_name_help' => 'Använd en annan header för inloggning än REMOTE_USER',
     'logo'                    	=> 'Logotyp',
     'logo_print_assets'         => 'Använd vid utskrift',
     'logo_print_assets_help'    => 'Använda branding på utskrivbara tillgångs-listor ',
