@@ -23,7 +23,7 @@ class LocationsTransformer
         if ($location) {
 
             $children_arr = [];
-            foreach($location->childLocations as $child) {
+            foreach($location->children as $child) {
                 $children_arr[] = [
                     'id' => (int) $child->id,
                     'name' => $child->name

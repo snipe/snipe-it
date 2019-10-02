@@ -10,16 +10,8 @@
 @section('inputFields')
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/locations/table.name')])
 
-<!-- Parent-->
-<div class="form-group {{ $errors->has('parent_id') ? ' has-error' : '' }}">
-    <label for="parent_id" class="col-md-3 control-label">
-        {{ trans('admin/locations/table.parent') }}
-    </label>
-    <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($item, 'parent_id')) ? ' required' : '' }}">
-        {!! Form::select('parent_id', $location_options , Input::old('parent_id', $item->parent_id), array('class'=>'select2 parent', 'style'=>'width:350px')) !!}
-        {!! $errors->first('parent_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-    </div>
-</div>
+<!-- parent -->
+@include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/locations/table.parent'), 'fieldname' => 'parent_id'])
 
 <!-- Manager-->
 @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/users/table.manager'), 'fieldname' => 'manager_id'])
