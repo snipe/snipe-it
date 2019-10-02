@@ -29,6 +29,7 @@ use Slack;
 use Str;
 use TCPDF;
 use View;
+use Watson\Validating\ValidationException;
 
 /**
  * This class controls all actions related to assets for
@@ -109,105 +110,94 @@ class AssetsController extends Controller
         // Handle asset tags - there could be one, or potentially many.
         // This is only necessary on create, not update, since bulk editing is handled
         // differently
-        $asset_tags = $request->input('asset_tags');
+        $asset_tags = $request->input('asset_tags', []);
+        $serials = $request->input('serials', []);
+        $asset_model = AssetModel::find($request->input('model_id'));
+        $settings = Setting::getSettings();
 
-        $success = false;
-        $serials = $request->input('serials');
+        $_asset                    = new Asset();
+        $_asset->name              = $request->input('name');
+        $_asset->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
+        $_asset->model_id          = $asset_model ? $asset_model->id : null;
+        $_asset->order_number      = $request->input('order_number');
+        $_asset->notes             = $request->input('notes');
+        $_asset->user_id           = Auth::id();
+        $_asset->archived          = '0';
+        $_asset->physical          = '1';
+        $_asset->depreciate        = '0';
+        $_asset->status_id         = $request->input('status_id', 0);
+        $_asset->warranty_months   = $request->input('warranty_months');
+        $_asset->purchase_cost     = Helper::ParseFloat($request->input('purchase_cost'));
+        $_asset->purchase_date     = $request->input('purchase_date');
+        $_asset->assigned_to       = $request->input('assigned_to');
+        $_asset->supplier_id       = $request->input('supplier_id', 0);
+        $_asset->requestable       = $request->input('requestable', 0);
+        $_asset->rtd_location_id   = $request->input('rtd_location_id');
 
-        for ($a = 1; $a <= count($asset_tags); $a++) {
+        if (!empty($settings->audit_interval)) {
+            $_asset->next_audit_date   = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+        }
 
-            $asset = new Asset();
-            $asset->model()->associate(AssetModel::find($request->input('model_id')));
-            $asset->name                    = $request->input('name');
-            
-            // Check for a corresponding serial
-            if (($serials) && (array_key_exists($a, $serials))) {
-                $asset->serial                  = $serials[$a];
-            }
-
-            if (($asset_tags) && (array_key_exists($a, $asset_tags))) {
-                $asset->asset_tag                  = $asset_tags[$a];
-            }
-
-            $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
-            $asset->model_id                = $request->input('model_id');
-            $asset->order_number            = $request->input('order_number');
-            $asset->notes                   = $request->input('notes');
-            $asset->user_id                 = Auth::id();
-            $asset->archived                = '0';
-            $asset->physical                = '1';
-            $asset->depreciate              = '0';
-            $asset->status_id               = request('status_id', 0);
-            $asset->warranty_months         = request('warranty_months', null);
-            $asset->purchase_cost           = Helper::ParseFloat($request->get('purchase_cost'));
-            $asset->purchase_date           = request('purchase_date', null);
-            $asset->assigned_to             = request('assigned_to', null);
-            $asset->supplier_id             = request('supplier_id', 0);
-            $asset->requestable             = request('requestable', 0);
-            $asset->rtd_location_id         = request('rtd_location_id', null);
-
-            if (!empty($settings->audit_interval)) {
-                $asset->next_audit_date         = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
-            }
-
-            if ($asset->assigned_to=='') {
-                $asset->location_id = $request->input('rtd_location_id', null);
-            }
+        if ($_asset->assigned_to=='') {
+            $_asset->location_id = $request->input('rtd_location_id');
+        }
 
         // Create the image (if one was chosen.)
         if ($request->has('image')) {
-            $asset = $request->handleImages($asset);
+            $_asset = $request->handleImages($_asset);
         }
 
-        // Update custom fields in the database.
-        // Validation for these fields is handled through the AssetRequest form request
-        $model = AssetModel::find($request->get('model_id'));
+        $target = null;
+        $location = null;
 
-        if ($model->fieldset) {
-            foreach ($model->fieldset->fields as $field) {
-                if ($field->field_encrypted=='1') {
-                    if (Gate::allows('admin')) {
-                        $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+        if ($request->input('assigned_user')) {
+            $target = User::find($request->input('assigned_user'));
+            $location = $target->location_id;
+        } elseif (request('assigned_asset')) {
+            $target = Asset::find($request->input('assigned_asset'));
+            $location = $target->location_id;
+        } elseif (request('assigned_location')) {
+            $target = Location::find($request->input('assigned_location'));
+            $location = $target->id;
+        }
+
+        $assets = [];
+
+        foreach ($asset_tags as $i => $asset_tag) {
+            $asset = $_asset->replicate();
+            $asset->asset_tag = $asset_tag;
+
+            if ($serials && array_key_exists($i, $serials)) {
+                $asset->serial = $serials[$i];
+            }
+
+            if ($asset->isInvalid()) {
+                return redirect()->back()->with('error_index', $i)->withInput()->withErrors($asset->getErrors());
+            }
+
+            $assets[] = $asset;
+        }
+
+        try {
+            DB::transaction(function () use ($assets, $target, $location) {
+                foreach ($assets as $asset) {
+                    if ($asset->save()) {
+                        if ($target) {
+                            $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($asset->name), $location);
+                        }
+                    
+                        return true;
                     }
-                } else {
-                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+
+                    throw new \Exception('Failed to save');
                 }
-            }
+            });
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['Internal' => $e->getMessage()]);
         }
 
-            // Validate the asset before saving
-            if ($asset->isValid() && $asset->save()) {
-
-                if (request('assigned_user')) {
-                    $target = User::find(request('assigned_user'));
-                    $location = $target->location_id;
-                } elseif (request('assigned_asset')) {
-                    $target = Asset::find(request('assigned_asset'));
-                    $location = $target->location_id;
-                } elseif (request('assigned_location')) {
-                    $target = Location::find(request('assigned_location'));
-                    $location = $target->id;
-                }
-
-                if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')), $location);
-                }
-
-                $success = true;
-
-
-            }
-
-        }
-
-        if ($success) {
-            // Redirect to the asset listing page
-            return redirect()->route('hardware.index')
+        return redirect()->route('hardware.index')
                 ->with('success', trans('admin/hardware/message.create.success'));
-        }
-
-        return redirect()->back()->withInput()->withErrors($asset->getErrors());
-
     }
 
     /**
