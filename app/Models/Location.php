@@ -150,15 +150,12 @@ class Location extends SnipeModel
 
     public static function indenter($locations_with_children, $parent_id = null, $prefix = '') {
         $results = Array();
-        //static $count = 0;
         
         if (!array_key_exists($parent_id, $locations_with_children)) {
             return [];
         }
 
         foreach ($locations_with_children[$parent_id] as $location) {
-            //$count++;
-            //append this parent node first,
             $location->use_text = $prefix.' '.$location->name;
             $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
             $results[] = $location;
@@ -167,7 +164,6 @@ class Location extends SnipeModel
                 $results = array_merge($results, Location::indenter($locations_with_children, $location->id,$prefix.'--'));
             }
         }
-        //\Log::debug($count);
         return $results;
     }
 
