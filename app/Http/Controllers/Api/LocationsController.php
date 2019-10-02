@@ -202,7 +202,7 @@ class LocationsController extends Controller
      *
      * Many thanks to @uberbrady for the help getting this working better.
      * Recursion still sucks, but I guess he doesn't have to get in the
-     * sea... this time. 
+     * sea... this time.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
@@ -219,10 +219,9 @@ class LocationsController extends Controller
             'locations.image',
         ]);
 
+        $page = 1;
         if ($request->filled('page')) {
             $page = $request->input('page');
-        } else {
-            $page = 1;
         }
 
         if ($request->filled('search')) {
@@ -243,7 +242,7 @@ class LocationsController extends Controller
         $location_options = Location::indenter($locations_with_children);
 
         $locations_formatted = new Collection($location_options);
-        $paginated_results =  new LengthAwarePaginator($locations_formatted->forPage($page, 50), $locations_formatted->count(), 50, $page, []);
+        $paginated_results =  new LengthAwarePaginator($locations_formatted->forPage($page, 500), $locations_formatted->count(), 500, $page, []);
 
         //return [];
         return (new SelectlistTransformer)->transformSelectlist($paginated_results);
