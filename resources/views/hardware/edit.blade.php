@@ -8,42 +8,103 @@
     'formAction' => ($item) ? route('hardware.update', ['hardware' => $item->id]) : route('hardware.store'),
 ])
 
-
 {{-- Page content --}}
 
 @section('inputFields')
 
     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 
+    @if(is_array(old('asset_tags')))
+      @php
+      $first_asset_tag = null;
+      $first_asset_tag_key = null;
 
-  <!-- Asset Tag -->
-  <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
-    <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
+      foreach (old('asset_tags') as $i => $prev_asset_tag) {
+        $first_asset_tag = $prev_asset_tag;
+        $first_asset_tag_key = $i;
+        break;
+      }
 
-      <!-- we are editing an existing asset -->
-      @if  ($item->id)
-          <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Input::old('asset_tag', $item->asset_tag) }}" data-validation="required">
-              {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-              {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-          </div>
-      @else
-          <!-- we are creating a new asset - let people use more than one asset tag -->
-          <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
-              {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-              {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-          </div>
-          <div class="col-md-2 col-sm-12">
-              <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
-          </div>
-      @endif
-  </div>
-    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
+      if (session()->has('error_index')) {
+        $error_index = session('error_index');
+      }
+      @endphp
+      <!-- Asset Tag -->
+      <div class="form-group {{ (! isset($error_index) || $error_index == $first_asset_tag_key) && $errors->has('asset_tag') ? ' has-error' : '' }}">
+        <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
+        <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
+            <input class="form-control" type="text" name="asset_tags[{{ $first_asset_tag_key }}]" id="asset_tag" value="{{ $first_asset_tag }}" data-validation="required">
+            @if (! isset($error_index) || $error_index == $first_asset_tag_key)
+            {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            @endif
+        </div>
+        <div class="col-md-2 col-sm-12">
+            <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
+        </div>
+      </div>
 
-    <div class="input_fields_wrap">
+      @include ('partials.forms.edit.serial', ['fieldname'=> 'serials['.$first_asset_tag_key.']', 'translated_serial' => trans('admin/hardware/form.serial')])
+
+      <div class="input_fields_wrap">
+      @foreach(old('asset_tags') as $i => $prev_asset_tag)
+        @continue($loop->first)
+
+        <span class="fields_wrapper">
+          <div class="form-group{{ (! isset($error_index) || $error_index == $i) && $errors->has('asset_tag') ? ' has-error' : '' }}">
+            <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
+            <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
+                <input class="form-control" type="text" name="asset_tags[{{ $i }}]" id="asset_tag" value="{{ $prev_asset_tag }}" data-validation="required">
+                @if (! isset($error_index) || $error_index == $i)
+                {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                @endif
+            </div>
+            <div class="col-md-2 col-sm-12">
+                <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
+            </div>
+          </div>
+
+
+          @include ('partials.forms.edit.serial', ['fieldname'=> 'serials['.$i.']', 'translated_serial' => trans('admin/hardware/form.serial')])
+        </span>
+      @endforeach
+
+      </div>
+
+
+  @else
+
+    <!-- Asset Tag -->
+    <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
+      <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
+
+        <!-- we are editing an existing asset -->
+        @if  ($item->id)
+            <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
+            <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Input::old('asset_tag', $item->asset_tag) }}" data-validation="required">
+                {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            </div>
+        @else
+            <!-- we are creating a new asset - let people use more than one asset tag -->
+            <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
+                <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
+                {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            </div>
+            <div class="col-md-2 col-sm-12">
+                <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
+            </div>
+        @endif
     </div>
 
+      @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
+
+      <div class="input_fields_wrap">
+      </div>
+
+  @endif
 
     @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'required' => 'true'])
 
