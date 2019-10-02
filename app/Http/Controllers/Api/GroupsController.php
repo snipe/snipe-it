@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\GroupsTransformer;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use App\Http\Requests\SaveGroupRequest;
 
 class GroupsController extends Controller
 {
@@ -45,10 +46,10 @@ class GroupsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\SaveGroupRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveGroupRequest $request)
     {
         $this->authorize('create', Group::class);
         $group = new Group;
@@ -82,11 +83,11 @@ class GroupsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\SaveGroupRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SaveGroupRequest $request, $id)
     {
         $this->authorize('update', Group::class);
         $group = Group::findOrFail($id);
