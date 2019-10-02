@@ -219,10 +219,9 @@ class LocationsController extends Controller
             'locations.image',
         ]);
 
+        $page = 1;
         if ($request->filled('page')) {
             $page = $request->input('page');
-        } else {
-            $page = 1;
         }
 
         if ($request->filled('search')) {
