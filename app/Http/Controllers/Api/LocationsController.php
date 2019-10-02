@@ -234,10 +234,13 @@ class LocationsController extends Controller
 
         $locations_with_children = [];
         foreach ($locations as $location) {
-            $locations_with_children[$location->parent_id] = true;
+            if(!array_key_exists($location->parent_id, $locations_with_children)) {
+                $locations_with_children[$location->parent_id] = []
+            }
+            $locations_with_children[$location->parent_id][] = $location;
         }
 
-        $location_options = Location::indenter($locations, $locations_with_children);
+        $location_options = Location::indenter($locations_with_children);
 
         $locations_formatted = new Collection($location_options);
         $paginated_results =  new LengthAwarePaginator($locations_formatted->forPage($page, 50), $locations_formatted->count(), 50, $page, []);

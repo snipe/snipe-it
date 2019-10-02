@@ -148,24 +148,26 @@ class Location extends SnipeModel
      * @return Illuminate\Database\Query\Builder          Modified query builder
      */
 
-    public static function indenter($locations, $locations_with_children, $parent_id = null, $prefix = '') {
+    public static function indenter($locations_with_children, $parent_id = null, $prefix = '') {
         $results = Array();
-        static $count = 0;
+        //static $count = 0;
+        
+        if (!array_key_exists($parent_id, $locations_with_children)) {
+            return [];
+        }
 
-        foreach ($locations as $location) {
-            $count++;
-            if($location->parent_id == $parent_id) {
-                //append this parent node first,
-                $location->use_text = $prefix.' '.$location->name;
-                $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
-                $results[] = $location;
-                //now append the children. (if we have any)
-                if (array_key_exists($location->id, $locations_with_children)) {
-                    $results = array_merge($results,Location::indenter($locations,$locations_with_children, $location->id,$prefix.'--'));
-                }
+        foreach ($locations[$parent_id] as $location) {
+            //$count++;
+            //append this parent node first,
+            $location->use_text = $prefix.' '.$location->name;
+            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
+            $results[] = $location;
+            //now append the children. (if we have any)
+            if (array_key_exists($location->id, $locations_with_children)) {
+                $results = array_merge($results, Location::indenter($locations_with_children, $location->id,$prefix.'--'));
             }
         }
-        \Log::debug($count);
+        //\Log::debug($count);
         return $results;
     }
 
