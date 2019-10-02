@@ -30,8 +30,10 @@ class AssetsCest
         $I->see('The status id field is required.', '.alert-msg');
     }
 
-    public function passesCreateAndCheckout(FunctionalTester $I)
+    public function passesCreateAndCheckout(FunctionalTester $I, $scenario)
     {
+        $scenario->incomplete('This should be moved to acceptance, since this needs ajax');
+
         $asset = factory(App\Models\Asset::class)->states('laptop-mbp')->make([
             'asset_tag'=>'test tag',
             'name'=> "test asset",
@@ -82,6 +84,7 @@ class AssetsCest
         $I->seeRecord('assets', $seenValues);
         $I->dontSeeElement('.alert-danger'); // We should check for success, but we can't because of the stupid ajaxy way I did things.  FIXME when the asset form is rewritten.
     }
+
 
     public function allowsDelete(FunctionalTester $I)
     {
