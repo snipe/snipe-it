@@ -234,7 +234,7 @@ class LocationsController extends Controller
         $locations_with_children = [];
         foreach ($locations as $location) {
             if(!array_key_exists($location->parent_id, $locations_with_children)) {
-                $locations_with_children[$location->parent_id] = []
+                $locations_with_children[$location->parent_id] = [];
             }
             $locations_with_children[$location->parent_id][] = $location;
         }

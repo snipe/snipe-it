@@ -156,7 +156,7 @@ class Location extends SnipeModel
             return [];
         }
 
-        foreach ($locations[$parent_id] as $location) {
+        foreach ($locations_with_children[$parent_id] as $location) {
             //$count++;
             //append this parent node first,
             $location->use_text = $prefix.' '.$location->name;
