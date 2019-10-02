@@ -26,7 +26,7 @@ class LocationsController extends Controller
                 'updated_at','manager_id','image',
                 'assigned_assets_count','users_count','assets_count','currency'];
 
-        $locations = Location::with('parent', 'manager', 'childLocations')->select([
+        $locations = Location::with('parent', 'manager', 'children')->select([
             'locations.id',
             'locations.name',
             'locations.address',
@@ -109,7 +109,7 @@ class LocationsController extends Controller
     public function show($id)
     {
         $this->authorize('view', Location::class);
-        $location = Location::with('parent', 'manager', 'childLocations')
+        $location = Location::with('parent', 'manager', 'children')
             ->select([
                 'locations.id',
                 'locations.name',

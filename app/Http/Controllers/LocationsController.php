@@ -227,7 +227,7 @@ class LocationsController extends Controller
         if ($location->users->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_users'));
 
-        } elseif ($location->childLocations->count() > 0) {
+        } elseif ($location->children->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_child_loc'));
 
         } elseif ($location->assets->count() > 0) {
