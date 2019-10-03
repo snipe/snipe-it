@@ -19,6 +19,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Arr;
 use Input;
 use League\Csv\Reader;
 use League\Csv\Statement;
@@ -142,11 +143,6 @@ class AssetsController extends Controller
             $_asset->location_id = $request->input('rtd_location_id');
         }
 
-        // Create the image (if one was chosen.)
-        if ($request->has('image')) {
-            $_asset = $request->handleImages($_asset);
-        }
-
         $target = null;
         $location = null;
 
@@ -164,11 +160,17 @@ class AssetsController extends Controller
         $assets = [];
 
         foreach ($asset_tags as $i => $asset_tag) {
-            $asset = $_asset->replicate();
+            $asset = new Asset();
+            $asset->setRawAttributes($_asset->getAttributes());
             $asset->asset_tag = $asset_tag;
 
             if ($serials && array_key_exists($i, $serials)) {
                 $asset->serial = $serials[$i];
+            }
+
+            // Create the image (if one was chosen.)
+            if ($request->has('image')) {
+                $_asset = $request->handleImages($_asset);
             }
 
             if ($asset->isInvalid()) {
@@ -178,23 +180,15 @@ class AssetsController extends Controller
             $assets[] = $asset;
         }
 
-        try {
-            DB::transaction(function () use ($assets, $target, $location) {
-                foreach ($assets as $asset) {
-                    if ($asset->save()) {
-                        if ($target) {
-                            $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($asset->name), $location);
-                        }
-                    
-                        return true;
+        DB::transaction(function () use (&$assets, $target, $location) {
+            foreach ($assets as $asset) {
+                if ($asset->save()) {
+                    if ($target) {
+                        $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($asset->name), $location);
                     }
-
-                    throw new \Exception('Failed to save');
                 }
-            });
-        } catch (\Exception $e) {
-            return redirect()->back()->withInput()->withErrors(['Internal' => $e->getMessage()]);
-        }
+            }
+        });
 
         return redirect()->route('hardware.index')
                 ->with('success', trans('admin/hardware/message.create.success'));
@@ -314,11 +308,11 @@ class AssetsController extends Controller
         $asset_tag           =  $request->input('asset_tags');
         $serial              = $request->input('serials');
         $asset->name         = $request->input('name');
-        $asset->serial       = $serial[1];
+        $asset->serial       = Arr::first($serial);
         $asset->company_id   = Company::getIdForCurrentUser($request->input('company_id'));
         $asset->model_id     = $request->input('model_id');
         $asset->order_number = $request->input('order_number');
-        $asset->asset_tag    = $asset_tag[1];
+        $asset->asset_tag    = Arr::first($asset_tag);
         $asset->notes        = $request->input('notes');
         $asset->physical     = '1';
 

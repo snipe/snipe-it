@@ -13,92 +13,29 @@
 @section('inputFields')
   @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 
-  @if(is_array(old('asset_tags')))
-    @php
-    $first_asset_tag = null;
-    $first_asset_tag_key = null;
-
-    foreach (old('asset_tags') as $i => $prev_asset_tag) {
-      $first_asset_tag = $prev_asset_tag;
-      $first_asset_tag_key = $i;
-      break;
-    }
-
-    if (session()->has('error_index')) {
-      $error_index = session('error_index');
-    }
-    @endphp
-    <!-- Asset Tag -->
-    <div class="form-group {{ (! isset($error_index) || $error_index == $first_asset_tag_key) && $errors->has('asset_tag') ? ' has-error' : '' }}">
-      <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
-      <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-          <input class="form-control" type="text" name="asset_tags[{{ $first_asset_tag_key }}]" id="asset_tag" value="{{ $first_asset_tag }}" data-validation="required">
-          @if (! isset($error_index) || $error_index == $first_asset_tag_key)
-          {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-          {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-          @endif
-      </div>
-      <div class="col-md-2 col-sm-12">
-          <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
-      </div>
-    </div>
-
-    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials['.$first_asset_tag_key.']', 'translated_serial' => trans('admin/hardware/form.serial')])
-
-    <div class="input_fields_wrap">
-    @foreach(old('asset_tags') as $i => $prev_asset_tag)
-      @continue($loop->first)
-
-      <span class="fields_wrapper">
-        <div class="form-group{{ (! isset($error_index) || $error_index == $i) && $errors->has('asset_tag') ? ' has-error' : '' }}">
-          <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
-          <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-              <input class="form-control" type="text" name="asset_tags[{{ $i }}]" id="asset_tag" value="{{ $prev_asset_tag }}" data-validation="required">
-              @if (! isset($error_index) || $error_index == $i)
-              {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-              {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-              @endif
-          </div>
-          <div class="col-md-2 col-sm-12">
-              <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
-          </div>
+  @foreach (old('asset_tags', $item->exists ? [$item->id => $item->asset_tag] : [1 => '']) as $i => $value)
+    <div class="form-group form-asset-tag-group {{ (! session()->has('error_index') || session('error_index') == $i) && $errors->has('asset_tag') ? ' has-error' : '' }}">
+        <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
+        <div class="col-md-7 col-sm-12{{ (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
+            <input class="form-control" type="text" name="asset_tags[{{ $i }}]" id="asset_tag" value="{{ $value }}" data-validation="required">
+            @if (! session()->has('error_index') || session('error_index') == $i)
+            {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            @endif
         </div>
-
-        @include ('partials.forms.edit.serial', ['fieldname'=> 'serials['.$i.']', 'translated_serial' => trans('admin/hardware/form.serial')])
-      </span>
-    @endforeach
-
-    </div>
-  @else
-    <!-- Asset Tag -->
-    <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
-      <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
-
-        <!-- we are editing an existing asset -->
-        @if  ($item->id)
-            <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-            <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Input::old('asset_tag', $item->asset_tag) }}" data-validation="required">
-                {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-            </div>
-        @else
-            <!-- we are creating a new asset - let people use more than one asset tag -->
-            <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-                <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
-                {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-            </div>
-            <div class="col-md-2 col-sm-12">
+        <div class="col-md-2 col-sm-12">
+            @if (!$item->exists)
+                @if ($loop->first)
                 <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
-            </div>
-        @endif
+                @else
+                <button type="button" class="remove_field btn btn-default btn-sm"><i class="fa fa-minus"></i></button>
+                @endif
+            @endif
+        </div>
     </div>
 
-    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
-
-    <div class="input_fields_wrap">
-    </div>
-  @endif
+    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials['.$i.']', 'translated_serial' => trans('admin/hardware/form.serial')])
+  @endforeach
 
   @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'required' => 'true'])
 
@@ -170,12 +107,21 @@
 @stop
 
 @section('moar_scripts')
+<script type="text/template" nonce="{{ csrf_token() }}" data-template="asset_tag">
+<div class="form-group form-asset-tag-group">
+    <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
+    <div class="col-md-7 col-sm-12{{ (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
+        <input class="form-control" type="text" name="asset_tags[%i%]" value="{{ (($snipeSettings->auto_increment_prefix!='') && ($snipeSettings->auto_increment_assets=='1')) ? $snipeSettings->auto_increment_prefix : '' }}%auto_tag%" data-validation="required">
+    </div>
+    <div class="col-md-2 col-sm-12">
+        <button type="button" class="remove_field btn btn-default btn-sm"><i class="fa fa-minus"></i></button>
+    </div>
+</div>
 
-
+@include ('partials.forms.edit.serial', ['fieldname'=> 'serials['.$i.']', 'translated_serial' => trans('admin/hardware/form.serial')])
+</script>
 
 <script nonce="{{ csrf_token() }}">
-
-
     var transformed_oldvals={};
 
     function fetchCustomFields() {
@@ -270,63 +216,42 @@
         var max_fields      = 100; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
-        var x               = 1; //initial text box count
-
-
-
 
         $(add_button).click(function(e){ //on add input button click
 
             e.preventDefault();
 
-            var auto_tag        = $("#asset_tag").val().replace(/[^\d]/g, '');
+            var auto_tag        = $('.form-asset-tag-group:first .form-control').val().replace(/[^\d]/g, '');
             var box_html        = '';
+            var x               = $('.form-asset-tag-group').length + 1;
 
 
             // Check that we haven't exceeded the max number of asset fields
             if (x < max_fields) {
 
                 if (auto_tag!='') {
-                     auto_tag = parseInt(auto_tag) + parseInt(x);
+                    auto_tag = parseInt(auto_tag, 10) + x - 1;
                 } else {
-                     auto_tag = '';
+                    auto_tag = '';
                 }
 
-                x++; //text box increment
+                box_html = $('[data-template="asset_tag"]').html().replace(/%i%/g, x).replace(/%auto_tag%/g, auto_tag);
 
-                box_html += '<span class="fields_wrapper">';
-                box_html += '<div class="form-group"><label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }} ' + x + '</label>';
-                box_html += '<div class="col-md-7 col-sm-12 required">';
-                box_html += '<input type="text"  class="form-control" name="asset_tags[' + x + ']" value="{{ (($snipeSettings->auto_increment_prefix!='') && ($snipeSettings->auto_increment_assets=='1')) ? $snipeSettings->auto_increment_prefix : '' }}'+ auto_tag +'" data-validation="required">';
-                box_html += '</div>';
-                box_html += '<div class="col-md-2 col-sm-12">';
-                box_html += '<a href="#" class="remove_field btn btn-default btn-sm"><i class="fa fa-minus"></i></a>';
-                box_html += '</div>';
-                box_html += '</div>';
-                box_html += '</div>';
-                box_html += '<div class="form-group"><label for="serial" class="col-md-3 control-label">{{ trans('admin/hardware/form.serial') }} ' + x + '</label>';
-                box_html += '<div class="col-md-7 col-sm-12">';
-                box_html += '<input type="text"  class="form-control" name="serials[' + x + ']">';
-                box_html += '</div>';
-                box_html += '</div>';
-                box_html += '</span>';
-                $(wrapper).append(box_html);
+                $('.form-serial-group:last').after(box_html);
 
             // We have reached the maximum number of extra asset fields, so disable the button
             } else {
-                $(".add_field_button").attr('disabled');
-                $(".add_field_button").addClass('disabled');
+                add_button.prop('disabled', true).addClass('disabled');
             }
         });
 
-        $(wrapper).on("click",".remove_field", function(e){ //user clicks on remove text
-            $(".add_field_button").removeAttr('disabled');
-            $(".add_field_button").removeClass('disabled');
+        $(document).on("click", ".form-asset-tag-group .remove_field", function(e){ //user clicks on remove text
+            $(".add_field_button").removeAttr('disabled').removeClass('disabled');
             e.preventDefault();
-            console.log(x);
 
-            $(this).parent('div').parent('div').parent('span').remove();
-            x--;
+            var asset_tag_group = $(this).closest('.form-asset-tag-group');
+            asset_tag_group.next().remove();
+            asset_tag_group.remove();
         })
     });
 
