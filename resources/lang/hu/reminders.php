@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    "password" => "A jelszónak 6 karakteresnek kell lennie és egyeznie kell a megerősítésével.",
+    "password" => "A jelszónak legalább 6 karakteresnek kell lennie, és egyeznie kell a megerősítésével.",
 
     "user"     => "A felhasználónév vagy az e-mail cím téves",
 
