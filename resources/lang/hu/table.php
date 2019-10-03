@@ -2,7 +2,7 @@
 
 return array(
 
-    'actions'	 	=> 'Lehetőség',
+    'actions'	 	=> 'Műveletek',
     'action' 		=> 'Művelet',
     'by'      		=> 'Által',
     'item' 			=> 'Tétel',
