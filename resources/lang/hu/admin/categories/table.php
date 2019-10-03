@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'Végfelhasználói engedély',
+	'eula_text'      			=> 'Felhasználási szabályok',
     'id'      					=> 'ID',
     'parent'   					=> 'Szülő',
     'require_acceptance'      	=> 'Elfogadás',
