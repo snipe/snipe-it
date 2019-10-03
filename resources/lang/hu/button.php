@@ -2,9 +2,9 @@
 
 return array(
     'actions' 	                => 'Műveletek',
-    'add'    	                => 'Új hozzáadása',
-    'cancel'                    => 'Vissza',
-    'checkin_and_delete'  	    => 'Bejelentkezés és Felhasználó törlése',
+    'add'    	                => 'Új',
+    'cancel'                    => 'Mégsem',
+    'checkin_and_delete'  	    => 'Minden visszavételezése és a felhasználó törlése',
     'delete'  	                => 'Törlés',
     'edit'    	                => 'Szerkesztés',
     'restore' 	                => 'Visszaállítás',
