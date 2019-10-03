@@ -2,7 +2,7 @@
 
 return [
     'send_password_link'	        => 'Jelszó visszaállítási link küldése',
-    'email_reset_password'			=> 'Jelsó visszaállítási e-mail',
+    'email_reset_password'			=> 'Jelszó visszaállítási e-mail',
     'reset_password'			    => 'Jelszó visszaállítása',
     'login'                         => 'Belépés',
     'login_prompt'                  => 'Kérem, lépjen be',
