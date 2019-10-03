@@ -19,6 +19,6 @@ return array(
     'no_default_eula'					=> 'Nincs alapértelmezett felhasználási szabály felrögzítve. Adjon hozzá egyet a Beállításokban.',
     'update'  							=> 'Kategória módosítása',
     'use_default_eula'					=> 'Használja inkább az <a href="#" data-toggle="modal" data-target="#eulaModal">alapértelmezett felhasználási szabályt</a>.',
-    'use_default_eula_disabled'			=> '<del>Használja inkább az alapértelmezett felhasználás szabályt.</del> Nincs alapértelmezett felhasználási szabály felrögzítve. Kérem adjon hozzá egyet a Beállításokban.',
+    'use_default_eula_disabled'			=> '<del>Használja inkább az alapértelmezett felhasználási szabályt.</del> Nincs alapértelmezett felhasználási szabály felrögzítve. Kérem adjon hozzá egyet a Beállításokban.',
 
 );
