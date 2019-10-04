@@ -370,7 +370,7 @@ class UsersController extends Controller
      */
     public function getRestore($id = null)
     {
-        $this->authorize('edit', User::class);
+        $this->authorize('update', User::class);
         // Get user information
         if (!$user = User::onlyTrashed()->find($id)) {
             return redirect()->route('users.index')->with('error', trans('admin/users/messages.user_not_found'));
@@ -421,7 +421,7 @@ class UsersController extends Controller
         try {
             // Get user information
             $user = User::findOrFail($id);
-            $this->authorize('edit', $user);
+            $this->authorize('update', $user);
 
             // Check if we are not trying to unsuspend ourselves
             if ($user->id === Auth::id()) {
