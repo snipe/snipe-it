@@ -6,4 +6,5 @@ return array(
     'update'    => 'Update Company',
     'name'      => 'Company Name',
     'id'        => 'ID',
+    'phone'     => 'Company Phone'
 );

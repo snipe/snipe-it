@@ -115,6 +115,8 @@ final class CompaniesController extends Controller
 
         $company = $request->handleImages($company);
 
+        $company->phone = $request->input('phone');
+
         if ($company->save()) {
             return redirect()->route('companies.index')
                 ->with('success', trans('admin/companies/message.update.success'));

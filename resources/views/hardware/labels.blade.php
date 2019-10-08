@@ -82,7 +82,7 @@
       display: inline;
       height: 50px;
   }
-  
+
   .next-padding {
       margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
   }
@@ -101,7 +101,7 @@
   }
   .label-name::before {
     content: "N: "
-  }  
+  }
 
   @media print {
     .noprint {
@@ -131,7 +131,7 @@
 
 @foreach ($assets as $asset)
 	<?php $count++; ?>
-  <div class="label"> 
+  <div class="label">
 
       @if ($settings->qr_code=='1')
     <div class="label-qr_img qr_img">
@@ -153,6 +153,12 @@
         @if ($settings->qr_text!='')
         <div class="label-qr_text pull-left">
             <strong>{{ $settings->qr_text }}</strong>
+            <br>
+        </div>
+        @endif
+        @if (($settings->labels_display_company_phone=='1') && (($asset->company) && ($asset->company->phone!='')) )
+        <div class="label-phone pull-left">
+            <strong>{{$asset->company->phone}}</strong>
             <br>
         </div>
         @endif

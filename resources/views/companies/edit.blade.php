@@ -9,7 +9,7 @@
 {{-- Page content --}}
 @section('inputFields')
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/companies/table.name')])
-
+@include('partials.forms.edit.phone', ['translated_name' => trans('admin/companies/table.phone')])
 <!-- Image -->
 @if ($item->image)
     <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
