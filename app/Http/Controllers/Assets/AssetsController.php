@@ -8,6 +8,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\CheckoutRequest;
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Setting;
@@ -68,7 +69,13 @@ class AssetsController extends Controller
         } else {
             $company = null;
         }
-        return view('hardware/index')->with('company', $company);
+
+        $data = [
+            'company' => $company,
+            'categories' => Category::all()
+        ];
+
+        return view('hardware/index')->with($data);
     }
 
     /**
