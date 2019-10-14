@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Assets;
 
 
+use App\Helpers\Helper;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
@@ -33,7 +34,7 @@ class AssetCheckoutController extends Controller
         $this->authorize('checkout', $asset);
 
         if ($asset->availableForCheckout()) {
-            return view('hardware/checkout', compact('asset'));
+            return view('hardware/checkout', compact('asset'))->with('statusLabel_list', Helper::statusLabelList());
         }
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
 
@@ -66,6 +67,11 @@ class AssetCheckoutController extends Controller
                 throw new CheckoutNotAllowed('You cannot check an asset out to itself.');
             }
             $asset = $this->updateAssetLocation($asset, $target);
+            
+            $status_id ='';
+            if ($request->filled('status_id')) {
+                $status_id = $request->get('status_id');
+            }
 
             $checkout_at = date("Y-m-d H:i:s");
             if (($request->filled('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {
@@ -77,7 +83,7 @@ class AssetCheckoutController extends Controller
                 $expected_checkin = $request->get('expected_checkin');
             }
 
-            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
+            if ($asset->checkOut($target, $admin, $status_id, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
                 return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
             }
 
