@@ -255,10 +255,14 @@ class Asset extends Depreciable
      * @since [v3.0]
      * @return boolean
      */
-    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null, $location = null)
+    public function checkOut($target, $admin = null, $status_id = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null, $location = null)
     {
         if (!$target) {
             return false;
+        }
+        
+        if ($status_id) {
+            $this->status_id = $status_id;
         }
 
         if ($expected_checkin) {
