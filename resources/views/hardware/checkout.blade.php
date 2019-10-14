@@ -65,7 +65,8 @@
                 @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;', 'required'=>'true'])
 
                 @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required'=>'true'])
-
+                {{ Form::label('name', trans('admin/hardware/form.status'), array('class' => 'col-md-3 control-label')) }}
+                {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types')) }} {!! $errors->first('status_id', ' :message') !!}
 
 
             <!-- Checkout/Checkin Date -->
