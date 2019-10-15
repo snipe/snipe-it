@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\Loggable;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class BulkAssetsController extends Controller
 {
-    use CheckInOutRequest;
+    use CheckInOutRequest, Loggable;
 
     /**
      * Display the bulk edit page.
@@ -224,11 +225,17 @@ class BulkAssetsController extends Controller
 
             $errors = [];
             DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids, $request) {
+                $isBulkCheckoutEmail = $request->filled('bulk_email');
+                $note = $request->get('note');
 
-                foreach ($asset_ids as $asset_id) {
+                $assetList = [];
+                foreach ($asset_ids as $key => $asset_id) {
+                    /** @var Asset $asset */
                     $asset = Asset::findOrFail($asset_id);
+                    $assetList[$key] = $asset;
                     $this->authorize('checkout', $asset);
-                    $error = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), null);
+                    $log_id = null;
+                    $error = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($note), null, null, $isBulkCheckoutEmail, $log_id);
 
                     if ($target->location_id!='') {
                         $asset->location_id = $target->location_id;
@@ -236,9 +243,21 @@ class BulkAssetsController extends Controller
                         $asset->save();
                     }
 
+                    // this is used only for bulk notification on BulkCheckoutAssetNotification
+                    /* @see BulkCheckoutAssetNotification::toMail() */
+                    $assetList[$key]['log_id'] = $log_id;
+
                     if ($error) {
                         array_merge_recursive($errors, $asset->getErrors()->toArray());
                     }
+                }
+                // send only 1 email with all assets to approve
+                if ($isBulkCheckoutEmail) {
+                    $checkin_out_dates = [
+                        'checkout' => $checkout_at,
+                        'checkin' => $expected_checkin
+                    ];
+                    $this->logBulkCheckout($target, $note, $assetList, $checkin_out_dates);
                 }
             });
 

@@ -19,7 +19,7 @@ class CheckoutAssetNotification extends Notification
      *
      * @param $params
      */
-    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
+    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $acceptance, $note, $lastCheckout = null, $lastCheckin = null)
     {
 
         $this->item = $asset;

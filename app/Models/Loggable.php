@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Notifications\AuditNotification;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,6 +61,9 @@ trait Loggable
         return $log;
     }
 
+    public function logBulkCheckout ($target, $note, $assets, $dates) {
+        event(new CheckoutableCheckedOut($assets, $target, Auth::user(), $note, true, false, $dates));
+    }
     /**
     * Helper method to determine the log item type
     */

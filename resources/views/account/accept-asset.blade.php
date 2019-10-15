@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Accept {{ $item->present()->name() }}
+    Accept
     @parent
 @stop
 
@@ -23,6 +23,7 @@
     width: 100%;
     height: auto;
     overflow: scroll;
+    background-color: #efefef;
 }
 
 </style>
@@ -31,7 +32,7 @@
 <form class="form-horizontal" method="post" action="" autocomplete="off">
   <!-- CSRF Token -->
   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-  <input type="hidden" name="logId" value="{{ $findlog->id }}" />
+  <input type="hidden" name="logId" value="{{ $ids }}" />
 
 
   <div class="row">
@@ -39,6 +40,12 @@
       <div class="panel box box-default">
         <div class="box-body">
           <div class="col-md-12">
+            <h3>List of assets</h3>
+            <ul>
+              @foreach($assetNames as $name)
+                <li>{{$name}}</li>
+              @endforeach
+            </ul>
             <div class="radio">
               <label>
                 <input type="radio" name="asset_acceptance" id="accepted" value="accepted">
@@ -53,10 +60,12 @@
               </label>
             </div>
 
-            @if ($item->getEula())
+            @if (sizeof($eulaList) > 0)
             <div class="col-md-12" style="padding-top: 20px">
               <div id="eula_div">
-                {!!  $item->getEula() !!}
+                @foreach($eulaList as $eula)
+                  {!! $eula !!}
+                @endforeach
               </div>
             </div>
             @endif

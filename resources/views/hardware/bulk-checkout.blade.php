@@ -34,6 +34,17 @@
           @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;', 'required'=>'true'])
           @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required'=>'true'])
 
+              <!-- Option to send only 1 email with all assets -->
+              <div class="form-group {{ $errors->has('bulk_email') ? 'error' : '' }}">
+                  {{ Form::label('bulk_email', "Bulk email?", array('class' => 'col-md-3 control-label')) }}
+                  <div class="col-md-8">
+                      <div class="col-md-5">
+                          <input type="checkbox" name="bulk_email" id="bulk_email" checked>
+                      </div>
+                      {!! $errors->first('bulk_email', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                  </div>
+              </div>
+
           <!-- Checkout/Checkin Date -->
               <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
                   {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}

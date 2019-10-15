@@ -191,6 +191,10 @@ img {
     padding: 8px 0;
 }
 
+.bulk td {
+    text-align: center;
+}
+
 .content-cell {
     padding: 20px;
 }
