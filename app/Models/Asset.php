@@ -299,8 +299,6 @@ class Asset extends Depreciable
         return false;
     }
 
-
-
     /**
      * Sets the detailedNameAttribute
      *

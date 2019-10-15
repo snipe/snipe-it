@@ -30,10 +30,6 @@ class LogListener
     public function onCheckoutableCheckedOut(CheckoutableCheckedOut $event) {
         if($event->isBulkCheckoutEmail && !$event->isIndividual) {
             return;
-            $logIds = [];
-            foreach ($event->checkoutable as $asset) {
-                $logIds[] = $asset->logCheckout($asset->note, $asset->check, $asset->last_checkout);
-            }
         }
 
         return $event->checkoutable->logCheckout($event->note, $event->checkedOutTo, $event->checkoutable->last_checkout);

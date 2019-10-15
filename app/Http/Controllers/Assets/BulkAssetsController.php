@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
-use App\Models\Loggable;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class BulkAssetsController extends Controller
 {
-    use CheckInOutRequest, Loggable;
+    use CheckInOutRequest;
 
     /**
      * Display the bulk edit page.
@@ -257,8 +257,7 @@ class BulkAssetsController extends Controller
                         'checkout' => $checkout_at,
                         'checkin' => $expected_checkin
                     ];
-                    $this->logBulkCheckout($target, $note, $assetList, $checkin_out_dates);
-                }
+                    event(new CheckoutableCheckedOut($assetList, $target, Auth::user(), $note, true, false, $checkin_out_dates));}
             });
 
             if (!$errors) {
