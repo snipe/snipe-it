@@ -290,6 +290,7 @@ class Asset extends Depreciable
 
         if ($this->save()) {
             $log = event(new CheckoutableCheckedOut($this, $target, Auth::user(), $note, $isBulkCheckoutEmail));
+
             if($isBulkCheckoutEmail) {
                 $logId = $log[0]->id;
             }

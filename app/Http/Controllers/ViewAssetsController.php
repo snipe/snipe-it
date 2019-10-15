@@ -256,6 +256,25 @@ class ViewAssetsController extends Controller
         return view('account/accept-asset', $data);
     }
 
+    // Get the acceptance screen
+    public function getAcceptAsset($logID = null)
+    {
+
+        $findlog = Actionlog::where('id', $logID)->first();
+        if (!$findlog) {
+            return redirect()->to('account/view-assets')->with('error', 'No matching record.');
+        }
+        $this->redirectOnError($findlog);
+        $logObj = array($logID);
+        $data = [
+            "ids" => urlencode(base64_encode(json_encode($logObj))),
+            "eulaList" => $findlog->item->getEula(),
+            "assetNames" => $findlog->item->present()->name()
+        ];
+
+        return view('account/accept-asset', $data);
+    }
+
     public function redirectOnError($log)
     {
         // Check if the asset exists
@@ -280,26 +299,6 @@ class ViewAssetsController extends Controller
         if (($log->item_type==Asset::class) && ($user->id != $log->item->assigned_to)) {
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
-    }
-
-
-    // Get the acceptance screen
-    public function getAcceptAsset($logID = null)
-    {
-
-        $findlog = Actionlog::where('id', $logID)->first();
-        if (!$findlog) {
-            return redirect()->to('account/view-assets')->with('error', 'No matching record.');
-        }
-        $this->redirectOnError($findlog);
-        $logObj = array($logID);
-        $data = [
-            "ids" => urlencode(base64_encode(json_encode($logObj))),
-            "eulaList" => $findlog->item->getEula(),
-            "assetNames" => $findlog->item->present()->name()
-        ];
-
-        return view('account/accept-asset', $data);
     }
 
     private function saveSignature($log, $signatureOutput)
