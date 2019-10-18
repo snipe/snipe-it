@@ -159,7 +159,7 @@
         @if (($settings->labels_display_company_phone=='1') && (($asset->company) && ($asset->company->phone!='')) )
         <div class="label-phone pull-left">
                 <strong>{{'(' . substr($asset->company->phone, 0, 3) . ')-' . substr($asset->company->phone, 3, 3) .
-                '-' . substr($asset->company->phone, 5, 4)
+                '-' . substr($asset->company->phone, 6, 4)
                 }}</strong>
             <br>
         </div>
