@@ -189,7 +189,7 @@ class LdapSync extends Command
                 // Sync activated state for Active Directory.
                 if ( array_key_exists('useraccountcontrol', $results[$i]) ) {
                   $enabled_accounts = [
-                    '512', '544', '66048', '66080', '262656', '262688', '328192', '328224'
+                    '512', '544', '66048', '66080', '262656', '262688', '328192', '328224', '4260352'
                   ];
                   $user->activated = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
                 }
