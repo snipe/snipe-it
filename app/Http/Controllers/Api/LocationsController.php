@@ -148,6 +148,13 @@ class LocationsController extends Controller
     {
         $this->authorize('update', Location::class);
         $location = Location::findOrFail($id);
+
+        if ($request->input('parent_id') == $id) {
+
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'A location cannot be its own parent. Please select a different parent ID.'));
+        }
+
+
         $location->fill($request->all());
 
         if ($location->save()) {
