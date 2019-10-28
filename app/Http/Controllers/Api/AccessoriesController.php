@@ -165,7 +165,7 @@ class AccessoriesController extends Controller
                                 ->get();
             $total = $accessory_users->count();
         }
-        
+
         return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $accessory_users, $total);
     }
 
@@ -181,7 +181,7 @@ class AccessoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Accessory::class);
+        $this->authorize('update', Accessory::class);
         $accessory = Accessory::findOrFail($id);
         $accessory->fill($request->all());
 
@@ -303,7 +303,7 @@ class AccessoriesController extends Controller
 
     }
 
-	 
+
     /**
     * Gets a paginated collection for the select2 menus
     *
