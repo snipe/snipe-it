@@ -334,7 +334,7 @@ class UsersController extends Controller
                 } catch (\Exception $e) {
                     \Log::debug($e);
                }
-
+            }
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete')));
