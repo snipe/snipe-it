@@ -77,7 +77,7 @@ RUN \
 ############## DEPENDENCIES via COMPOSER ###################
 
 #global install of composer
-RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.phar /usr/local/bin/composer
+COPY --from=composer:1 /usr/bin/composer /usr/local/bin/composer
 
 # Get dependencies
 USER docker
