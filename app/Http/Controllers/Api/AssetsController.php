@@ -782,7 +782,7 @@ class AssetsController extends Controller
 
             // Check to see if they checked the box to update the physical location,
             // not just note it in the audit notes
-            if ($request->input('update_location')=='1') {
+            if ($request->input('update_location')=='1' && is_null($target = $asset->assignedTo)) {
                 $asset->location_id = $request->input('location_id');
             }
 
