@@ -256,6 +256,20 @@
 
                            </div>
                        </div>
+                       
+                       
+                       <!-- checkout on audit -->
+                       <div class="form-group">
+                           <div class="col-md-3">
+                               {{ Form::label('checkout_on_audit', trans('admin/settings/general.checkout_on_audit')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::checkbox('checkout_on_audit', '1', Input::old('checkout_on_audit', $setting->checkout_on_audit),array('class' => 'minimal')) }}
+                               {{ trans('general.yes') }}
+                               {!! $errors->first('checkout_on_audit', '<span class="alert-msg">:message</span>') !!}
+                              </div>
+                       </div>
+
 
                        <!-- Model List prefs -->
                        <div class="form-group {{ $errors->has('show_in_model_list') ? 'error' : '' }}">
