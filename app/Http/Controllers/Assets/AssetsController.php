@@ -762,7 +762,7 @@ class AssetsController extends Controller
         // not just note it in the audit notes
         $target = Location::find($request->input('location_id'));
         if ($settings->checkout_on_audit) {
-            if ((Location::find($asset->assignedTo['id']) != $target && $asset->assignedType() == Asset::LOCATION) || $asset->assignedType() == Asset::LOCATION || is_null($asset->assignedTo)) {
+            if ((Location::find($asset->assignedTo['id']) != $target && $asset->assignedType() == Asset::LOCATION) || is_null($asset->assignedTo)) {
                 $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset audit');
             }
         }else if ($request->input('update_location')=='1' && is_null($asset->assignedTo)) {
