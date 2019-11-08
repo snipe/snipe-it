@@ -736,6 +736,7 @@ class AssetsController extends Controller
 
     public function auditStore(Request $request, $id)
     {
+        $settings = Setting::getSettings();
         $this->authorize('audit', Asset::class);
 
         $rules = array(
