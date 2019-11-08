@@ -753,6 +753,7 @@ class AssetsController extends Controller
     public function audit(Request $request) {
 
 
+        $settings = Setting::getSettings();
         $this->authorize('audit', Asset::class);
         $rules = array(
             'asset_tag' => 'required',
