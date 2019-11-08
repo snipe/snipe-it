@@ -41,6 +41,7 @@
     'checkin_from'  		=> 'Checkin from',
     'checkout'  			=> 'Checkout',
     'checkouts_count'       => 'Checkouts',
+    'checkout_on_audit'                       => 'Checkout on Audit',
     'checkins_count'        => 'Checkins',
     'user_requests_count'   => 'Requests',
     'city'  				=> 'City',
