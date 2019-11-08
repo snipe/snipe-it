@@ -782,7 +782,12 @@ class AssetsController extends Controller
 
             // Check to see if they checked the box to update the physical location,
             // not just note it in the audit notes
-            if ($request->input('update_location')=='1' && is_null($target = $asset->assignedTo)) {
+            $target = Location::find($request->input('location_id'));
+            if ($settings->checkout_on_audit) {
+                if ((Location::find($asset->assignedTo['id']) != $target && $asset->assignedType() == Asset::LOCATION) || $asset->assignedType() == Asset::LOCATION || is_null($asset->assignedTo)) {
+                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset audit');
+                }
+            }else if ($request->input('update_location')=='1' && is_null($asset->assignedTo)) {
                 $asset->location_id = $request->input('location_id');
             }
 
