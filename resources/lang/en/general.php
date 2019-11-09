@@ -29,6 +29,7 @@
     'bad_data'      		=> 'Nothing found. Maybe bad data?',
     'bulkaudit'             => 'Bulk Audit',
     'bulkaudit_status'      => 'Audit Status',
+    'bulk_checkin'  		=> 'Bulk Checkin',
     'bulk_checkout'  		=> 'Bulk Checkout',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Cancel',
