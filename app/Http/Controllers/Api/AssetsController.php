@@ -371,12 +371,23 @@ class AssetsController extends Controller
             'assets.status_id'
             ])->with('model', 'assetstatus', 'assignedTo')->NotArchived(), 'company_id', 'assets');
 
-        if ($request->filled('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
-            $assets = $assets->RTD();
-        }
-
-        if ($request->filled('search')) {
-            $assets = $assets->AssignedSearch($request->input('search'));
+        if ($request->filled('assetStatusType')) {
+            switch ( $request->input('assetStatusType')){
+                case 'RTD':
+                    $assets = $assets->RTD();
+                    if ($request->filled('search')) {
+                        $assets = $assets->AssignedSearch($request->input('search'));
+                    }
+                    break;
+                case 'Deployed':
+                    $assets = $assets->Deployed();
+                    if ($request->filled('search')) {
+                        $assets = $assets->DeployedSearch($request->input('search'));
+                    }
+                    break;
+                default:
+                    break;
+            }  
         }
 
 
