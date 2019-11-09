@@ -5,6 +5,7 @@ use App\Models\AssetMaintenance;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;
+use App\Models\Asset;
 
 class AssetMaintenancesTransformer
 {
