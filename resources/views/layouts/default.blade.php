@@ -439,6 +439,14 @@
                     @endcan
 
                   <li class="divider">&nbsp;</li>
+                    @can('checkin', \App\Models\Asset::class)
+                    <li{!! (Request::is('hardware/bulkcheckin') ? ' class="active"' : '') !!}>
+                        <a href="{{ route('hardware/bulkcheckin') }}">
+                            {{ trans('general.bulk_checkin') }}
+                        </a>
+                    </li>
+                    @endcan
+
                     @can('checkout', \App\Models\Asset::class)
                     <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active"' : '') !!}>
                         <a href="{{ route('hardware/bulkcheckout') }}">
