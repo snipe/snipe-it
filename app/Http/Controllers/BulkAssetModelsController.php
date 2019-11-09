@@ -134,5 +134,77 @@ class BulkAssetModelsController extends Controller
             ->with('error', trans('admin/models/message.bulkdelete.error'));
 
     }
+  
+  
+     /**
+     * Show Bulk Checkin Page
+     * @return View View to checkout multiple assets
+     */
+    public function showCheckin()
+    {
+        $this->authorize('checkin', Asset::class);
+        // Filter out assets that are not checked out.
+
+        return view('hardware/bulk-checkin');
+    }
+
+  
+  
+  
+  
+     /**
+     * Process Multiple Checkin Request
+     * @return View
+     */
+    public function storeCheckin(Request $request)
+    {
+        try {
+            $admin = Auth::user();
+
+            $target = $this->determineCheckinTarget();
+
+            if (!is_array($request->get('selected_assets'))) {
+                return redirect()->route('hardware/bulkcheckin')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
+            }
+
+            $asset_ids = array_filter($request->get('selected_assets'));
+
+            $checkin_at = date("Y-m-d H:i:s");
+            if (($request->filled('checkin_at')) && ($request->get('checkin_at')!= date("Y-m-d"))) {
+                $checkin_at = e($request->get('checkin_at'));
+            }
+
+            
+            $errors = [];
+            DB::transaction(function () use ($target, $admin, $checkin_at, $errors, $asset_ids, $request) {
+
+                foreach ($asset_ids as $asset_id) {
+                    $asset = Asset::findOrFail($asset_id);
+                    $this->authorize('checkin', $asset);
+                    $error = $asset->checkIn($target, $admin, $checkin_at, e($request->get('note')), null);
+
+                    
+                        //$asset->location_id = $target->location_id;
+                        //$asset->unsetEventDispatcher();
+                        $asset->save();
+                    
+
+                    if ($error) {
+                        array_merge_recursive($errors, $asset->getErrors()->toArray());
+                    }
+                }
+            });
+
+            if (!$errors) {
+              // Redirect to the new asset page
+                return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkin.success'));
+            }
+            // Redirect to the asset management page with error
+            return redirect()->to("hardware/bulk-checkin")->with('error', trans('admin/hardware/message.checkin.error'))->withErrors($errors);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->to("hardware/bulk-checkin")->with('error', $e->getErrors());
+        }
+    }
+
 
 }
