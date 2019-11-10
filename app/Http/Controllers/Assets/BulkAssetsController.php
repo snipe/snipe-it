@@ -191,7 +191,7 @@ class BulkAssetsController extends Controller
     
     /**
      * Show Bulk Checkin Page
-     * @return View View to checkout multiple assets
+     * @return View View to checkin multiple assets
      */
     public function showCheckin()
     {
