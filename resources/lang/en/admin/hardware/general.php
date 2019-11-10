@@ -3,6 +3,7 @@
 return array(
     'archived'  				=> 'Archived',
     'asset'  					=> 'Asset',
+    'bulk_checkin'             => 'Checkin Assets',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Checkout Asset',
