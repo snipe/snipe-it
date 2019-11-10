@@ -188,6 +188,19 @@ class BulkAssetsController extends Controller
 
         return view('hardware/bulk-checkout');
     }
+    
+    /**
+     * Show Bulk Checkin Page
+     * @return View View to checkout multiple assets
+     */
+    public function showCheckin()
+    {
+        $this->authorize('checkin', Asset::class);
+        // Filter out assets that are not checked out.
+
+        return view('hardware/bulk-checkin');
+    }
+
 
     /**
      * Process Multiple Checkout Request
@@ -252,4 +265,74 @@ class BulkAssetsController extends Controller
             return redirect()->to("hardware/bulk-checkout")->with('error', $e->getErrors());
         }
     }
+    
+     /**
+     * Process Multiple Checkin Request
+     * @return View
+     */
+    public function storeCheckin(Request $request)
+    {
+        try {
+            $admin = Auth::user();
+
+            //$target = $this->determineCheckinTarget();
+
+            if (!is_array($request->get('selected_assets'))) {
+                return redirect()->route('hardware/bulkcheckin')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
+            }
+
+            $asset_ids = array_filter($request->get('selected_assets'));
+
+            $checkin_at = date("Y-m-d H:i:s");
+            if (($request->filled('checkin_at')) && ($request->get('checkin_at')!= date("Y-m-d"))) {
+                $checkin_at = e($request->get('checkin_at'));
+            }
+
+            
+            $errors = [];
+
+
+                foreach ($asset_ids as $asset_id) {
+                    $this->authorize('checkin', Asset::class);
+                    $asset = Asset::findOrFail($asset_id);
+                    $this->authorize('checkin', $asset);
+
+
+                    $user = $asset->assignedUser;
+                    if (is_null($target = $asset->assignedTo)) {
+                        continue;
+                    }
+
+                    $asset->expected_checkin = null;
+                    $asset->last_checkout = null;
+                    $asset->assigned_to = null;
+                    $asset->assignedTo()->disassociate($asset);
+                    $asset->accepted = null;
+
+                            
+                    $asset->location_id =  $asset->rtd_location_id;
+            
+                    if ($request->filled('location_id')) {
+                        $asset->location_id =  $request->get('location_id');
+                    }
+            
+                    
+                    if ($asset->save()) {
+                        $asset->logCheckin($target, e(request('note')));
+                    }
+
+                }
+       
+
+            if (!$errors) {
+              // Redirect to the new asset page
+                return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkin.success'));
+            }
+            // Redirect to the asset management page with error
+            return redirect()->to("hardware/bulk-checkin")->with('error', trans('admin/hardware/message.checkin.error'))->withErrors($errors);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->to("hardware/bulk-checkin")->with('error', $e->getErrors());
+        }
+    }
+
 }
