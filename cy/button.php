@@ -1,14 +1,14 @@
 <?php
 
 return array(
-    'actions' 	                => 'Actions',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
-    'delete'  	                => 'Delete',
-    'edit'    	                => 'Edit',
-    'restore' 	                => 'Restore',
-    'request'                   => 'Cais',
+    'actions' 	                => 'Gweithredoedd',
+    'add'    	                => 'Ychwanegu newydd',
+    'cancel'                    => 'Canslo',
+    'checkin_and_delete'  	    => 'Nodi i fewn a dileu defnyddiwr',
+    'delete'  	                => 'Dileu',
+    'edit'    	                => 'Addasu',
+    'restore' 	                => 'Adfer',
+    'request'                   => 'Gofynnwyd amdano',
     'submit'  	                => 'Cyflwyno',
     'upload'                    => 'Uwchlwytho',
 	'select_file'				=> 'Dewis ffeil...',
