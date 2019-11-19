@@ -689,12 +689,14 @@ EOT;
         Notification::fake();
         $this->signIn();
         $csv = <<<'EOT'
-First Name,Last Name,email,Username,Location,Phone Number,Job Title,Employee Number,Company
-Blanche,O'Collopy,bocollopy0@livejournal.com,bocollopy0,Hinapalanan,63-(199)661-2186,Clinical Specialist,7080919053,Morar-Ward
-Jessie,Primo,,jprimo1,Korenovsk,7-(885)578-0266,Paralegal,6284292031,Jast-Stiedemann
+First Name,Last Name,email,Username,Location,Phone Number,Job Title,Employee Number,Company,Department,activated
+Blanche,O'Collopy,bocollopy0@livejournal.com,bocollopy0,Hinapalanan,63-(199)661-2186,Clinical Specialist,7080919053,Morar-Ward,Management,1
+Jessie,Primo,,jprimo1,Korenovsk,7-(885)578-0266,Paralegal,6284292031,Jast-Stiedemann,1
 
 EOT;
-        $this->import(new UserImporter($csv));
+        $user_importer = new UserImporter($csv);
+        $user_importer->sendWelcome();
+        $this->import($user_importer);
 
         $this->tester->seeRecord('users', [
             'first_name' => 'Blanche',
@@ -710,13 +712,12 @@ EOT;
             'name' => 'Morar-Ward'
         ]);
 
-        // These are commented out because we've temporarily disabled emailing new users on import,
-        // since some folks shouldn't be emailed.
-        // Uncomment these once the ability to decide that per import or per user via CSV has been
-        // implemented in the importer.
-        // Notification::assertSentTo(User::find(2), \App\Notifications\WelcomeNotification::class);
-        // Notification::assertNotSentTo(User::find(3), \App\Notifications\WelcomeNotification::class);
-        Notification::assertNotSentTo(User::find(2), \App\Notifications\WelcomeNotification::class);
+        $this->tester->seeRecord('departments', [
+            'name' => 'Management'
+        ]);
+
+        Notification::assertSentTo(User::find(2), \App\Notifications\WelcomeNotification::class);
+        Notification::assertNotSentTo(User::find(3), \App\Notifications\WelcomeNotification::class);
     }
     private function import($importer, $mappings = null)
     {

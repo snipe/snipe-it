@@ -2,10 +2,7 @@
 
 namespace App\Importer;
 
-use App\Helpers\Helper;
 use App\Models\Asset;
-use App\Models\Category;
-use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 
 class AssetImporter extends ItemImporter

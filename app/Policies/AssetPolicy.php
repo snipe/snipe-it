@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Policies\CheckoutablePermissionsPolicy;
 
 class AssetPolicy extends CheckoutablePermissionsPolicy
 {

@@ -58,7 +58,7 @@
     <table class="inventory">
         <thead>
         <tr>
-            <th colspan="7">{{ trans('general.assets') }}</th>
+            <th colspan="8">{{ trans('general.assets') }}</th>
         </tr>
         </thead>
         <thead>
@@ -70,6 +70,7 @@
                 <th style="width: 20%;">Model</th>
                 <th style="width: 20%;">Serial</th>
                 <th style="width: 10%;">Checked Out</th>
+                <th data-formatter="imageFormatter" style="width: 20%;">{{ trans('general.signature') }}</th>
             </tr>
         </thead>
 
@@ -84,6 +85,7 @@
             <td>{{ $asset->serial }}</td>
             <td>
                 {{ $asset->last_checkout }}</td>
+            <td><img height="20%" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}"></img></td>
         </tr>
             @php
                 $counter++
@@ -155,16 +157,17 @@
         @endphp
 
         @foreach ($accessories as $accessory)
-
-            <tr>
-                <td>{{ $acounter }}</td>
-                <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
-                <td>{{ $accessory->category->name }}</td>
-                <td>{{  $accessory->assetlog->first()->created_at }}</td>
-            </tr>
-            @php
-                $acounter++
-            @endphp
+            @if ($accessory)
+                <tr>
+                    <td>{{ $acounter }}</td>
+                    <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
+                    <td>{{ $accessory->category->name }}</td>
+                    <td>{{  $accessory->assetlog->first()->created_at }}</td>
+                </tr>
+                @php
+                    $acounter++
+                @endphp
+            @endif
         @endforeach
     </table>
 @endif
@@ -190,16 +193,17 @@
         @endphp
 
         @foreach ($consumables as $consumable)
-
-            <tr>
-                <td>{{ $ccounter }}</td>
-                <td>{{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}</td>
-                <td>{{ $consumable->category->name }}</td>
-                <td>{{  $consumable->assetlog->first()->created_at }}</td>
-            </tr>
-            @php
-                $ccounter++
-            @endphp
+            @if ($consumable)
+                <tr>
+                    <td>{{ $ccounter }}</td>
+                    <td>{{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}</td>
+                    <td>{{ $consumable->category->name }}</td>
+                    <td>{{  $consumable->assetlog->first()->created_at }}</td>
+                </tr>
+                @php
+                    $ccounter++
+                @endphp
+            @endif
         @endforeach
     </table>
 @endif

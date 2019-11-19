@@ -2,7 +2,6 @@
 
 namespace App\Importer;
 
-use App\Helpers\Helper;
 use App\Models\Accessory;
 
 class AccessoryImporter extends ItemImporter

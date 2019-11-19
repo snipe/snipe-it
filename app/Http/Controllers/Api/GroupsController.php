@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use App\Models\Group;
+use App\Http\Controllers\Controller;
 use App\Http\Transformers\GroupsTransformer;
+use App\Models\Group;
+use Illuminate\Http\Request;
 
 class GroupsController extends Controller
 {

@@ -2,9 +2,9 @@
 
 namespace App\Observers;
 
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
-use App\Models\Actionlog;
 use Auth;
 
 class AssetObserver
@@ -57,8 +57,9 @@ class AssetObserver
      */
     public function created(Asset $asset)
     {
-        if ($settings = Setting::first()) {
+        if ($settings = Setting::getSettings()) {
             $settings->increment('next_auto_tag_base');
+            $settings->save();
         }
 
         $logAction = new Actionlog();

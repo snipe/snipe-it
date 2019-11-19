@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use Session;
 
 class SettingsLdapRequest extends Request

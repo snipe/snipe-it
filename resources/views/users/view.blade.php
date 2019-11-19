@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/users/general.view_user', array('name' => $user->present()->fullName())) }}
+{{ trans('admin/users/general.view_user', ['name' => html_entity_decode($user->present()->fullName(), ENT_QUOTES | ENT_XML1, 'UTF-8')]) }}
 @parent
 @stop
 
@@ -115,11 +115,7 @@
               </div>
             @endif
             <div class="col-md-2 text-center">
-              @if ($user->avatar)
-                <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print">
-              @else
-                <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print">
-              @endif
+                <img src="{{ $user->present()->gravatar }}" class="avatar img-thumbnail hidden-print">
             </div>
 
             <div class="col-md-8">
@@ -134,7 +130,7 @@
 
                   <tr>
                     <td class="text-nowrap">{{ trans('admin/users/table.name') }}</td>
-                    <td>{{ $user->present()->fullName() }}</td>
+                    <td>{{ html_entity_decode($user->present()->fullName(), ENT_QUOTES | ENT_XML1, 'UTF-8') }}</td>
                   </tr>
                   <tr>
                     <td class="text-nowrap">{{ trans('admin/users/table.username') }}</td>
@@ -284,44 +280,41 @@
                   <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.edit') }}</a>
                 </div>
               @endcan
-              
+
               @can('create', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
                   <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.clone') }}</a>
                 </div>
-              @endcan
+               @endcan
 
-              @can('view', $user)
+                @can('view', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
-              @endcan
-
-              @can('delete', $user)
-                @if ($user->deleted_at=='')
-                  <div class="col-md-12" style="padding-top: 5px;">
-                    <form action="{{route('users.destroy',$user->id)}}" method="POST">
-                      {{csrf_field()}}
-                      {{ method_field("DELETE")}}
-                      <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
-                    </form>
-                  </div>
-                  <div class="col-md-12" style="padding-top: 5px;">
-                    <form action="{{ route('users/bulkedit') }}" method="POST">
-                      <!-- CSRF Token -->
-                      <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                      <input type="hidden" name="ids[{{ $user->id }}]" value="{{ $user->id }}" />
-                      <button style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('button.checkin_and_delete') }}</button>
-                    </form>
-                  </div>
-                @else
-                  <div class="col-md-12" style="padding-top: 5px;">
-                    <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
-                  </div>
-                @endif
-              @endcan
-
-
+                @endcan
+                @can('delete', $user)
+                  @if ($user->deleted_at=='')
+                    <div class="col-md-12" style="padding-top: 5px;">
+                      <form action="{{route('users.destroy',$user->id)}}" method="POST">
+                        {{csrf_field()}}
+                        {{ method_field("DELETE")}}
+                        <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
+                      </form>
+                    </div>
+                    <div class="col-md-12" style="padding-top: 5px;">
+                      <form action="{{ route('users/bulkedit') }}" method="POST">
+                        <!-- CSRF Token -->
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="ids[{{ $user->id }}]" value="{{ $user->id }}" />
+                        <button style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('button.checkin_and_delete') }}</button>
+                      </form>
+                    </div>
+                  @else
+                    <div class="col-md-12" style="padding-top: 5px;">
+                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
+                    </div>
+                  @endif
+                @endcan
             </div>
             <!-- End button column -->
           </div> <!--/.row-->
@@ -439,7 +432,7 @@
               <tbody>
                 @foreach ($user->consumables as $consumable)
                 <tr>
-                  <td>{!! $consumable->present()->nameUrl() !!}</a></td>
+                  <td>{!! $consumable->present()->nameUrl() !!}</td>
                   <td>{{ $consumable->created_at }}</td>
                 </tr>
                 @endforeach
@@ -451,7 +444,7 @@
         <div class="tab-pane" id="files_tab">
           <div class="row">
             <div class="col-md-12 col-sm-12">
-              <p>{{ trans('admin/hardware/general.filetype_info') }}</p>
+              <p>{{ trans('admin/users/general.filetype_info') }}</p>
             </div>
             <div class="col-md-2">
               <!-- The fileinput-button span is used to style the file input field as button -->
@@ -482,12 +475,9 @@
               </div>
             </div>
 
-            <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload.css') }}">
-            <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload-ui.css') }}">
-
             <div class="col-md-12 col-sm-12">
               <div class="table-responsive">
-                <table class="display table table-striped">
+                <table id="files-table" class="display table table-striped">
                   <thead>
                     <tr>
                       <th class="col-md-5">{{ trans('general.notes') }}</th>
@@ -575,7 +565,7 @@
               <tbody>
                 @foreach ($user->managedLocations as $location)
                 <tr>
-                  <td>{!! $location->present()->nameUrl() !!}</a></td>
+                  <td>{!! $location->present()->nameUrl() !!}</td>
                   <td>{{ $location->created_at }}</td>
                 </tr>
                 @endforeach
@@ -654,23 +644,22 @@ $(function () {
 
         done: function (e, data) {
             console.dir(data);
-
             // We use this instead of the fail option, since our API
             // returns a 200 OK status which always shows as "success"
 
-            if (data && data.jqXHR.responseJSON.error && data.jqXHR.responseJSON && data.jqXHR.responseJSON.error) {
-                $('#progress-bar-text').html(data.jqXHR.responseJSON.error);
+            if (data && data.jqXHR && data.jqXHR.responseJSON && data.jqXHR.responseJSON.status === "error") {
+                var errorMessage = data.jqXHR.responseJSON.messages["file.0"];
+                $('#progress-bar-text').html(errorMessage[0]);
                 $('.progress-bar').removeClass('progress-bar-warning').addClass('progress-bar-danger').css('width','100%');
                 $('.progress-checkmark').fadeIn('fast').html('<i class="fa fa-times fa-3x icon-white" style="color: #d9534f"></i>');
-                console.log(data.jqXHR.responseJSON.error);
             } else {
                 $('.progress-bar').removeClass('progress-bar-warning').addClass('progress-bar-success').css('width','100%');
                 $('.progress-checkmark').fadeIn('fast');
                 $('#progress-container').delay(950).css('visibility', 'visible');
                 $('.progress-bar-text').html('Finished!');
                 $('.progress-checkmark').fadeIn('fast').html('<i class="fa fa-check fa-3x icon-white" style="color: green"></i>');
-                $.each(data.result.file, function (index, file) {
-                    $('<tr><td>' + file.notes + '</td><<td>' + file.name + '</td><td>Just now</td><td>' + file.filesize + '</td><td><a class="btn btn-info btn-sm hidden-print" href="import/process/' + file.name + '"><i class="fa fa-spinner process"></i> Process</a></td></tr>').prependTo("#upload-table > tbody");
+                $.each(data.result, function (index, file) {
+                    $('<tr><td>' + file.note + '</td><<td>' + file.filename + '</td></tr>').prependTo("#files-table > tbody");
                 });
             }
             $('#progress').removeClass('active');

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use App\Models\Location;
+use App\Http\Controllers\Controller;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Location;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LocationsController extends Controller
 {
@@ -240,8 +241,8 @@ class LocationsController extends Controller
 
         $locations_with_children = [];
         foreach ($locations as $location) {
-            if(!array_key_exists($location->parent_id, $locations_with_children)) {
-                $locations_with_children[$location->parent_id] = [];
+            $location->use_text = $location->name;
+            $location->use_image = ($location->image) ? Storage::disk('public')->url('locations/'.$location->image, $location->image): null;
             }
             $locations_with_children[$location->parent_id][] = $location;
         }

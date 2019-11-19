@@ -2,11 +2,8 @@
 
 namespace App\Importer;
 
-use App\Helpers\Helper;
 use App\Models\Asset;
-use App\Models\Category;
 use App\Models\License;
-use App\Models\Manufacturer;
 
 class LicenseImporter extends ItemImporter
 {

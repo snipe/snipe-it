@@ -2,14 +2,9 @@
 
 namespace App\Notifications;
 
-use App\Models\Setting;
-use App\Models\SnipeModel;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Mail;
-use Carbon\Carbon;
 
 class ExpectedCheckinAdminNotification extends Notification
 {

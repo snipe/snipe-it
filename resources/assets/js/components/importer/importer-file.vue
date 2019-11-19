@@ -1,7 +1,7 @@
 <style>
-tr {
-    padding-left:30px;
-}
+    tr {
+        padding-left:30px;
+    }
 </style>
 
 <template>
@@ -81,7 +81,7 @@ tr {
                      <br><br>
                  </div>
 
-                <div class="alert col-md-12" style="padding-top: 20px;"
+                <div class="alert col-md-12" style="padding-top: 20px; text-align:left; "
                      :class="alertClass"
                      v-if="statusText">
                     {{ this.statusText }}
@@ -169,6 +169,7 @@ tr {
                         {id: 'phone_number', text: 'Phone Number' },
                         {id: 'manager_first_name', text: 'Manager First Name' },
                         {id: 'manager_last_name', text: 'Manager Last Name' },
+                        {id: 'department', text: 'Department' },
                         {id: 'activated', text: 'Activated' },
 
                     ],
@@ -195,14 +196,14 @@ tr {
                 switch(this.options.importType) {
                     case 'asset':
                         return this.columnOptions.general
-                                .concat(this.columnOptions.assets)
-                                .concat(this.columnOptions.customFields)
-                                .sort(sorter);
+                            .concat(this.columnOptions.assets)
+                            .concat(this.columnOptions.customFields)
+                            .sort(sorter);
 
                     case 'consumable':
                         return this.columnOptions.general
-                        .concat(this.columnOptions.consumables)
-                        .sort(sorter);
+                            .concat(this.columnOptions.consumables)
+                            .sort(sorter);
                     case 'license':
                         return this.columnOptions.general.concat(this.columnOptions.licenses).sort(sorter);
                     case 'user':

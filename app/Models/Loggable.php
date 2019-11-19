@@ -2,20 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Actionlog;
-use App\Models\Asset;
-use App\Models\CheckoutRequest;
-use App\Models\User;
-use App\Notifications\CheckinAssetNotification;
 use App\Notifications\AuditNotification;
-use App\Notifications\CheckoutAssetNotification;
-use App\Notifications\CheckoutAccessoryNotification;
-use App\Notifications\CheckinAccessoryNotification;
-use App\Notifications\CheckoutConsumableNotification;
-use App\Notifications\CheckoutLicenseNotification;
-use App\Notifications\CheckinLicenseNotification;
 use Illuminate\Support\Facades\Auth;
-
 
 trait Loggable
 {
@@ -36,9 +24,8 @@ trait Loggable
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
-    public function logCheckout($note, $target /* What are we checking out to? */)
+    public function logCheckout($note, $target, $action_date = null)
     {
-        $settings = Setting::getSettings();
         $log = new Actionlog;
         $log = $this->determineLogItemType($log);
         if(Auth::user())
@@ -62,30 +49,13 @@ trait Loggable
         }
 
         $log->note = $note;
+        $log->action_date = $action_date;
+
+        if (!$log->action_date) {
+            $log->action_date = date('Y-m-d H:i:s');
+        }
+
         $log->logaction('checkout');
-
-        $params = [
-            'item' => $log->item,
-            'target_type' => $log->target_type,
-            'target' => $target,
-            'admin' => $log->user,
-            'note' => $note,
-            'log_id' => $log->id,
-            'settings' => $settings,
-        ];
-
-        $checkoutClass = null;
-
-        if (method_exists($target, 'notify')) {
-            $target->notify(new static::$checkoutClass($params));
-        }
-
-        // Send to the admin, if settings dictate
-        $recipient = new \App\Models\Recipients\AdminRecipient();
-
-        if (($settings->admin_cc_email!='') && (static::$checkoutClass!='')) {
-            $recipient->notify(new static::$checkoutClass($params));
-        }
 
         return $log;
     }
@@ -111,9 +81,8 @@ trait Loggable
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
-    public function logCheckin($target, $note)
+    public function logCheckin($target, $note, $action_date = null)
     {
-        $settings = Setting::getSettings();
         $log = new Actionlog;
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
@@ -128,7 +97,6 @@ trait Loggable
 
             if (static::class == Asset::class) {
                 if ($asset = Asset::find($log->item_id)) {
-                    \Log::debug('Increment the checkin count for asset: '.$log->item_id);
                     $asset->increment('checkin_counter', 1);
                 }
             }
@@ -138,31 +106,14 @@ trait Loggable
 
         $log->location_id = null;
         $log->note = $note;
+
+        $log->action_date = $action_date;
+
+        if (!$log->action_date) {
+            $log->action_date = date('Y-m-d H:i:s');
+        }
         $log->user_id = Auth::user()->id;
         $log->logaction('checkin from');
-
-        $params = [
-            'target' => $target,
-            'item' => $log->item,
-            'admin' => $log->user,
-            'note' => $note,
-            'target_type' => $log->target_type,
-            'settings' => $settings,
-        ];
-
-
-        $checkinClass = null;
-
-        if (method_exists($target, 'notify')) {
-            $target->notify(new static::$checkinClass($params));
-        }
-
-        // Send to the admin, if settings dictate
-        $recipient = new \App\Models\Recipients\AdminRecipient();
-
-        if (($settings->admin_cc_email!='') && (static::$checkinClass!='')) {
-            $recipient->notify(new static::$checkinClass($params));
-        }
 
         return $log;
     }

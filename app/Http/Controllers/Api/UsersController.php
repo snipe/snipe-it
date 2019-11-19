@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Transformers\UsersTransformer;
-use App\Models\Company;
-use App\Models\User;
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveUserRequest;
-use App\Models\Asset;
-use App\Http\Transformers\AssetsTransformer;
-use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\AccessoriesTransformer;
+use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\LicensesTransformer;
+use App\Http\Transformers\SelectlistTransformer;
+use App\Http\Transformers\UsersTransformer;
+use App\Models\Asset;
+use App\Models\Company;
+use App\Models\License;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -206,6 +208,7 @@ class UsersController extends Controller
         $tmp_pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
         $user->password = bcrypt($request->get('password', $tmp_pass));
 
+
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
@@ -247,6 +250,16 @@ class UsersController extends Controller
         $this->authorize('update', User::class);
 
         $user = User::findOrFail($id);
+
+        // This is a janky hack to prevent people from changing admin demo user data on the public demo.
+        // The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
+        // Thanks, jerks. You are why we can't have nice things. - snipe
+
+        if ((($id == 1) || ($id == 2)) && (config('app.lock_passwords'))) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Permission denied. You cannot update user information via API on the demo.'));
+        }
+
+
         $user->fill($request->all());
 
         if ($user->id == $request->input('manager_id')) {
@@ -315,8 +328,16 @@ class UsersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null,  'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.'));
         }
 
-
         if ($user->delete()) {
+
+            // Remove the user's avatar if they have one
+            if (Storage::disk('public')->exists('avatars/'.$user->avatar)) {
+                try  {
+                    Storage::disk('public')->delete('avatars/'.$user->avatar);
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+               }
+            }
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete')));
@@ -356,6 +377,26 @@ class UsersController extends Controller
     }
 
     /**
+
+     * Return JSON containing a list of licenses assigned to a user.
+     *
+     * @author [N. Mathar] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @param $userId
+     * @return string JSON
+     */
+    public function licenses($id)
+    {
+        $this->authorize('view', User::class);
+        $this->authorize('view', License::class);
+        $user = User::where('id', $id)->withTrashed()->first();
+        $licenses = $user->licenses()->get();
+        return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
+    }
+
+    /**
+
+
      * Reset the user's two-factor status
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

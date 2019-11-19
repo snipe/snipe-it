@@ -53,6 +53,20 @@
                         <!-- Locations -->
                     @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
+                    <!-- Update location -->
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-md-9">
+                                <label>
+                                    <input type="checkbox" value="1" name="update_location" class="minimal" {{ Input::old('update_location') == '1' ? ' checked="checked"' : '' }}> Update asset location
+                                </label>
+
+                                @include ('partials.more-info', ['helpText' => trans('help.audit_help'), 'helpPosition' => 'right'])
+
+
+
+                            </div>
+                        </div>
+
 
                         <!-- Next Audit -->
                         <div class="form-group {{ $errors->has('next_audit_date') ? 'error' : '' }}">

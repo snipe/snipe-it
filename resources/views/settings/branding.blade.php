@@ -19,11 +19,8 @@
             padding-right: 40px;
         }
     </style>
-    <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href="{{ asset('js/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
 
-
-    {{ Form::open(['method' => 'POST', 'files' => true, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    {{ Form::open(['method' => 'POST', 'files' => true, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'create-form' ]) }}
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -40,7 +37,7 @@
                 <div class="box-body">
 
 
-                    <div class="col-md-11 col-md-offset-1">
+                    <div class="col-md-12">
 
                         <!-- Site name -->
                         <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
@@ -48,40 +45,16 @@
                             <div class="col-md-3">
                                 {{ Form::label('site_name', trans('admin/settings/general.site_name')) }}
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-7 required">
                                 @if (config('app.lock_passwords')===true)
                                     {{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Snipe-IT Asset Management')) }}
                                 @else
                                     {{ Form::text('site_name',
-                                        Input::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management')) }}
+                                        Input::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management', 'data-validation' => 'required')) }}
                                 @endif
                                 {!! $errors->first('site_name', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
-
-
-                        <!-- Logo -->
-
-                        <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
-                            <label class="col-md-3 control-label" for="image">
-                                {{ Form::label('logo', trans('admin/settings/general.logo')) }}</label>
-                            <div class="col-md-9">
-                                @if (config('app.lock_passwords'))
-                                    <p class="help-block">{{ trans('general.lock_passwords') }}</p>
-                                @else
-                                <label class="btn btn-default">
-                                    {{ trans('button.select_file')  }}
-                                    <input type="file" name="image" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
-                                </label>
-
-                                    <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
-                                
-                                {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
-                                {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo'),array('class' => 'minimal')) }} Remove
-                               @endif
-                            </div>
-                        </div>
-
 
                         <!-- Branding -->
                         <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
@@ -93,6 +66,44 @@
                                 {!! $errors->first('brand', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
+
+                        <!-- Logo -->
+                        @include('partials/forms/edit/uploadLogo', [
+                            "logoVariable" => "logo",
+                            "logoId" => "uploadLogo",
+                            "logoLabel" => trans('admin/settings/general.logo'),
+                            "logoClearVariable" => "clear_logo",
+                            "helpBlock" => trans('general.logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
+                        ])
+
+                        <!-- Email Logo -->
+                        @include('partials/forms/edit/uploadLogo', [
+                            "logoVariable" => "email_logo",
+                            "logoId" => "uploadEmailLogo",
+                            "logoLabel" => trans('admin/settings/general.email_logo'),
+                            "logoClearVariable" => "clear_email_logo",
+                            "helpBlock" => trans('admin/settings/general.email_logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
+                        ])
+
+                        <!-- Label Logo -->
+                        @include('partials/forms/edit/uploadLogo', [
+                            "logoVariable" => "label_logo",
+                            "logoId" => "uploadLabelLogo",
+                            "logoLabel" => trans('admin/settings/general.label_logo'),
+                            "logoClearVariable" => "clear_label_logo",
+                            "helpBlock" => trans('admin/settings/general.label_logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
+                        ])
+
+                        <!-- Favicon -->
+                        @include('partials/forms/edit/uploadLogo', [
+                            "logoVariable" => "favicon",
+                            "logoId" => "uploadFavicon",
+                            "logoLabel" => trans('admin/settings/general.favicon'),
+                            "logoClearVariable" => "clear_favicon",
+                            "helpBlock" => trans('admin/settings/general.favicon_size') . trans('admin/settings/general.favicon_format'),
+                            "allowedTypes" => "image/x-icon,image/gif,image/jpeg,image/png,image/svg",
+                            "maxSize" => 1000
+                        ])
 
                         <!-- Include logo in print assets -->
                         <div class="form-group">
@@ -160,7 +171,7 @@
                                     {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS')) }}
                                     {!! $errors->first('custom_css', '<span class="alert-msg">:message</span>') !!}
                                 @endif
-                                <p class="help-block">{{ trans('admin/settings/general.custom_css_help') }}</p>
+                                <p class="help-block">{!! trans('admin/settings/general.custom_css_help') !!}</p>
                             </div>
                         </div>
 

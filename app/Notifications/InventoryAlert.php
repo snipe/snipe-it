@@ -33,14 +33,13 @@ class InventoryAlert extends Notification
      */
     public function via($notifiable)
     {
-        $notifyBy = [];
-        $notifyBy[]='mail';
+        $notifyBy[] = 'mail';
+
         return $notifyBy;
     }
 
     public function toSlack($notifiable)
     {
-
     }
 
     /**
@@ -51,17 +50,16 @@ class InventoryAlert extends Notification
      */
     public function toMail($params)
     {
-
-        $message = (new MailMessage)->markdown('notifications.markdown.report-low-inventory',
+        $message = (new MailMessage)->markdown(
+            'notifications.markdown.report-low-inventory',
             [
                 'items'  => $this->items,
                 'threshold'  => $this->threshold,
-            ])
+            ]
+        )
             ->subject(trans('mail.Low_Inventory_Report'));
 
         return $message;
-
-
     }
 
     /**

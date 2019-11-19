@@ -1,12 +1,10 @@
 <?php
 namespace App\Models;
 
-use App\Models\SnipeModel;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Auth;
 use DB;
-use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
 
 /**

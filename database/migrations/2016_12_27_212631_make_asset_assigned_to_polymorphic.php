@@ -18,9 +18,9 @@ class MakeAssetAssignedToPolymorphic extends Migration
          Schema::table('assets', function (Blueprint $table) {
              $table->string('assigned_type')->nullable();
          });
-
-        // Prior to this migration, asset's could only be assigned to users.
-        Asset::whereNotNull('assigned_to')->orWhere('assigned_to', '!=', null)->update(['assigned_type' => User::class]);
+        if(config('database.default') == 'mysql') {
+            Asset::whereNotNull('assigned_to')->orWhere('assigned_to', '!=', '')->update(['assigned_type' => User::class]);
+        }
     }
 
     /**

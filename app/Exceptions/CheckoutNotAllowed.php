@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+
 class CheckoutNotAllowed extends Exception
 {
 
