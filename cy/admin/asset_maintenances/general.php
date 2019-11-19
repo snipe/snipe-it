@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Asset Maintenances',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
-        'repair'             => 'Repair',
-        'maintenance'        => 'Maintenance',
-        'upgrade'            => 'Upgrade',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'asset_maintenances' => 'Cynnal a chadw Ased',
+        'edit'               => 'Golygu Cynnal a Chadw Ased',
+        'delete'             => 'Dileu Cynnal a Chadw Ased',
+        'view'               => 'Gweld manylder Cynnal a Chadw Ased',
+        'repair'             => 'Trwsio',
+        'maintenance'        => 'Cynnal a Chadw',
+        'upgrade'            => 'Uwchraddio',
+        'calibration'        => 'Graddnodi',
+        'software_support'   => 'Cefnogaeth meddalwedd',
+        'hardware_support'   => 'Cefnogaeth caledwedd',
     ];
