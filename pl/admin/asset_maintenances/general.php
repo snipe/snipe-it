@@ -8,7 +8,7 @@
         'repair'             => 'Naprawa',
         'maintenance'        => 'Utrzymanie',
         'upgrade'            => 'Upgrade',
-        'calibration'        => 'Calibration',
+        'calibration'        => 'Kalibracja',
         'software_support'   => 'Software Support',
         'hardware_support'   => 'Hardware Support',
     ];
