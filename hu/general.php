@@ -63,7 +63,7 @@
     'currency'  			=> '$', // this is deprecated
     'current'  				=> 'Current',
     'custom_report'         => 'Custom Asset Report',
-    'dashboard'				=> 'Dashboard',
+    'dashboard'				=> 'Irányítópult',
     'days'      			=> 'days',
     'days_to_next_audit'    => 'Days to Next Audit',
     'date'					=> 'Date',
