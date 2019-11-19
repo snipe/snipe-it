@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Asset Maintenances',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
-        'repair'             => 'Repair',
-        'maintenance'        => 'Maintenance',
+        'asset_maintenances' => 'Asset Wartungen',
+        'edit'               => 'Asset Wartung bearbeiten',
+        'delete'             => 'Asset Wartung löschen',
+        'view'               => 'Wartungsdetails anzeigen',
+        'repair'             => 'Reparatur',
+        'maintenance'        => 'Wartung',
         'upgrade'            => 'Upgrade',
-        'calibration'        => 'Calibration',
+        'calibration'        => 'Kalibrierung',
         'software_support'   => 'Software Support',
         'hardware_support'   => 'Hardware Support',
     ];
