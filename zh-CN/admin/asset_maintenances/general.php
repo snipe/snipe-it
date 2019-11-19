@@ -8,7 +8,7 @@
         'repair'             => '维修',
         'maintenance'        => '维护',
         'upgrade'            => '升级',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => '校准',
+        'software_support'   => '软件支持',
+        'hardware_support'   => '硬件支持',
     ];
