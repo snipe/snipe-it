@@ -2,10 +2,10 @@
 
 return array(
     'ad'				        => 'Active Directory',
-    'ad_domain'				    => 'Active Directory domain',
-    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
-    'admin_cc_email'            => 'CC Email',
-    'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
+    'ad_domain'				    => 'Domena Active Directory',
+    'ad_domain_help'			=> 'Nie musi być, ale zazwyczaj taka sama jak domena w twoim e-mail.',
+    'admin_cc_email'            => 'Kopia do',
+    'admin_cc_email_help'       => 'Jeśli chcesz otrzymywać kopię e-maili przypisań wysyłanych do użytkowników na dodatkowy adres e-mail, wpisz go tutaj. W przeciwnym razie zostaw puste.',
     'is_ad'				        => 'This is an Active Directory server',
     'alert_email'				=> 'Send alerts to',
     'alerts_enabled'			=> 'Email Alerts Enabled',
