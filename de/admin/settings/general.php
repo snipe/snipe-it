@@ -155,7 +155,7 @@ return array(
     'labels_pagewidth'          => 'Etiketten Breite',
     'labels_pageheight'         => 'Etiketten Höhe',
     'label_gutters'        => 'Etikettenabstand (Zoll)',
-    'page_dimensions'        => 'Page dimensions (inches)',
+    'page_dimensions'        => 'Seitengröße (Zoll)',
     'label_fields'          => 'Label visible fields',
     'inches'        => 'inches',
     'width_w'        => 'w',
