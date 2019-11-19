@@ -393,7 +393,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Google2FA' => PragmaRX\Google2FALaravel\Facade::class,
         // 'Debugbar' => Barryvdh\Debugbar\Facade::class, //autodiscover should handle this
-        'Image'     => Intervention\Image\ImageManagerStatic::class,
+        'Image'     => Intervention\Image\ImageServiceProvider::class,
         'Carbon' => Carbon\Carbon::class,
 
 
