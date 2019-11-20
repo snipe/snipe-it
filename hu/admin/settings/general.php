@@ -193,5 +193,5 @@ return array(
     'unique_serial'                => 'Egyedi sorozatszámok',
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Length of asset tags, including zerofill',
-    'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
+    'username_format_help'   => 'Ez a beállítás csak az importálási folyamat által kerül felhasználásra abban az esetben, ha nincs megadva a felhasználónév, és azt a programnak kell generálnia.',
 );
