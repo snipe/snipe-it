@@ -127,7 +127,7 @@ return array(
     'slack_channel'             => 'Slack csatorna',
     'slack_endpoint'            => 'Slack végpont',
     'slack_integration'         => 'Slack beállítások',
-    'slack_integration_help'    => 'Slack integration is optional, however the endpoint and channel are required if you wish to use it. To configure Slack integration, you must first <a href=":slack_link" target="_new" rel="noopener">create an incoming webhook</a> on your Slack account.',
+    'slack_integration_help'    => 'A Slack integráció opcionális, de a végpont és a csatorna szükséges akkor, ha használni szeretné. A Slack integráció beállításához elõször <a href=":slack_link" target="_new" rel="noopener"> létre kell hoznia egy bejövõ webhook</a>-et a Slack fiókján.',
     'slack_integration_help_button'    => 'Once you have saved your Slack information, a test button will appear.',
     'slack_test_help'           => 'Test whether your Slack integration is configured correctly. YOU MUST SAVE YOUR UPDATED SLACK SETTINGS FIRST.',
     'snipe_version'  			=> 'Snipe-IT version',
