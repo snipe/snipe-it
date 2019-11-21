@@ -228,7 +228,7 @@ class LicensesController extends Controller
 
             $this->authorize('view', $license);
 
-            $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
+            $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset', 'user.department');
 
             $offset = (($seats) && (request('offset') > $seats->count())) ? 0 : request('offset', 0);
 
