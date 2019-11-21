@@ -43,6 +43,7 @@
     "league/flysystem-sftp": "~1.0",
     "maknz/slack": "^1.7",
     "neitanod/forceutf8": "^2.0",
+    "nesbot/carbon": "2.26.0",
     "paragonie/constant_time_encoding": "^1.0",
     "patchwork/utf8": "^1.3",
     "phpdocumentor/reflection-docblock": "3.2.2",
@@ -107,7 +108,7 @@
     "optimize-autoloader": true,
     "process-timeout": 3000,
     "platform": {
-      "php": "7.1.3"
+      "php": "7.1.8"
     }
   }
 }
