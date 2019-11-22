@@ -193,9 +193,17 @@
 
             <tr>
                 <td>{{ $ccounter }}</td>
-                <td>{{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}</td>
-                <td>{{ $consumable->category->name }}</td>
-                <td>{{  $consumable->assetlog->first()->created_at }}</td>
+
+
+                <td>
+                    @if ($consumable->deleted_at!='')
+                        <del>{{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}</del>
+                    @else
+                        {{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}
+                    @endif
+                </td>
+                <td>{{ ($consumable->category) ? $consumable->category->name : '' }}</td>
+                <td>{{ ($consumable->assetlog) ? $consumable->assetlog->first()->created_at : '' }}</td>
             </tr>
             @php
                 $ccounter++
