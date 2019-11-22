@@ -178,7 +178,7 @@ class LicensePresenter extends Presenter
             ], [
                 "field" => "department",
                 "searchable" => false,
-                "sortable" => false,
+                "sortable" => true,
                 "switchable" => true,
                 "title" => trans('general.department'),
                 "visible" => false,
