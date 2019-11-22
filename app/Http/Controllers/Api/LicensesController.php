@@ -228,14 +228,21 @@ class LicensesController extends Controller
 
             $this->authorize('view', $license);
 
-            $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
+            $seats = LicenseSeat::where('license_seats.license_id', $licenseId)
+                ->with('license', 'user', 'asset', 'user.department');
 
-            $offset = (($seats) && (request('offset') > $seats->count())) ? 0 : request('offset', 0);
-
-            $limit = request('limit', 50);
             $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
+            if ($request->input('sort')=='department') {
+                $seats->OrderDepartments($order);
+            } else {
+                $seats->orderBy('id', $order);
+            }
+
             $total = $seats->count();
+            $offset = (($seats) && (request('offset') > $total)) ? 0 : request('offset', 0);
+            $limit = request('limit', 50);
+            
             $seats = $seats->skip($offset)->take($limit)->get();
 
             if ($seats) {

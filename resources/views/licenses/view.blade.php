@@ -48,7 +48,7 @@
                         data-id-table="seatsTable-{{ $license->id }}"
                         id="seatsTable-{{$license->id}}"
                         data-pagination="true"
-                        data-search="true"
+                        data-search="false"
                         data-side-pagination="server"
                         data-show-columns="true"
                         data-show-export="true"

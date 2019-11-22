@@ -29,7 +29,14 @@ class LicenseSeatsTransformer
             'name' => 'Seat '.$seat_count,
             'assigned_user' => ($seat->user) ? [
                 'id' => (int) $seat->user->id,
-                'name'=> e($seat->user->present()->fullName)
+                'name'=> e($seat->user->present()->fullName),
+                'department'=>
+                    ($seat->user->department) ?
+                        [
+                            "id" => (int) $seat->user->department->id,
+                            "name" => e($seat->user->department->name)
+
+                        ] : null
             ] : null,
             'assigned_asset' => ($seat->asset) ? [
                 'id' => (int) $seat->asset->id,

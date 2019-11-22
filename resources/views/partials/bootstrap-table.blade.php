@@ -447,6 +447,13 @@
 
     }
 
+    function departmentNameLinkFormatter(value, row) {
+        if ((row.assigned_user) && (row.assigned_user.department) && (row.assigned_user.department.name)) {
+            return '<a href="{{ url('/') }}/department/' + row.assigned_user.department.id + '"> ' + row.assigned_user.department.name + '</a>';
+        }
+
+    }
+
     function assetNameLinkFormatter(value, row) {
         if ((row.asset) && (row.asset.name)) {
             return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.name + '</a>';
