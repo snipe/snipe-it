@@ -821,9 +821,11 @@ class Asset extends Depreciable
 
     public function scopeDueForAudit($query, $settings)
     {
+        $interval = $settings->audit_warning_days ?? 0;
+
         return $query->whereNotNull('assets.next_audit_date')
             ->where('assets.next_audit_date', '>=', Carbon::now())
-            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $settings->audit_warning_days DAY) <= '".Carbon::now()."'")
+            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $interval DAY) <= '".Carbon::now()."'")
             ->where('assets.archived', '=', 0)
             ->NotArchived();
     }
