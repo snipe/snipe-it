@@ -1391,8 +1391,7 @@ class Asset extends Depreciable
 
 
     /**
-     * Query builder scope to search on location ID
-     *
+     * Query builder scope to search on depreciation name
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $search      Search term
      *
