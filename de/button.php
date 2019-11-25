@@ -2,12 +2,12 @@
 
 return array(
     'actions' 	                => 'Aktionen',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
-    'delete'  	                => 'Delete',
-    'edit'    	                => 'Edit',
-    'restore' 	                => 'Restore',
+    'add'    	                => 'Hinzufügen',
+    'cancel'                    => 'Abbrechen',
+    'checkin_and_delete'  	    => 'Zurücknehmen und Benutzer löschen',
+    'delete'  	                => 'Löschen',
+    'edit'    	                => 'Bearbeiten',
+    'restore' 	                => 'Wiederherstellen',
     'request'                   => 'Anfrage',
     'submit'  	                => 'Abschicken',
     'upload'                    => 'Hochladen',
