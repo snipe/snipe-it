@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'actions' 	                => 'Actions',
+    'actions' 	                => 'Aktionen',
     'add'    	                => 'Add New',
     'cancel'                    => 'Cancel',
     'checkin_and_delete'  	    => 'Checkin & Delete User',
