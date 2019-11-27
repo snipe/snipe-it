@@ -1,10 +1,10 @@
 <?php
 
 return array(
-    'ad'				        => 'Active Directory',
-    'ad_domain'				    => 'Active Directory domain',
-    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
-    'admin_cc_email'            => 'CC Email',
+    'ad'				        => 'Aktīvais direktorijs',
+    'ad_domain'				    => 'Aktīvā direktorija domēns',
+    'ad_domain_help'			=> 'Dažreiz tas ir tāds pats kā jūsu e-pasta domēns, bet ne vienmēr.',
+    'admin_cc_email'            => 'E-pasta kopija',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'This is an Active Directory server',
     'alert_email'				=> 'Send alerts to',
@@ -31,7 +31,7 @@ return array(
     'dashboard_message_help'	=> 'This text will appear on the dashboard for anyone with permission to view the dashboard.',
     'default_currency'  		=> 'Default Currency',
     'default_eula_text'			=> 'Default EULA',
-    'default_language'			=> 'Default Language',
+    'default_language'			=> 'Noklusējuma valoda',
     'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'display_asset_name'        => 'Display Asset Name',
     'display_checkout_date'     => 'Display Checkout Date',
