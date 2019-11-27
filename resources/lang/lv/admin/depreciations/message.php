@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Nolietojuma kategorija nepastāv.',
-    'assoc_users'	 => 'Šis nolietojums pašlaik ir saistīts ar vienu vai vairākiem modeļiem, un tos nevar izdzēst. Lūdzu, izdzēsiet modeļus un pēc tam mēģiniet dzēst vēlreiz.',
+    'does_not_exist' => 'Nolietojuma klase neeksistē.',
+    'assoc_users'	 => 'Šis nolietojums pašlaik ir saistīts ar vienu vai vairākiem šabloniem, un tos nevar izdzēst. Lūdzu, izdzēsiet šablonus un pēc tam mēģiniet dzēst vēlreiz.',
 
 
     'create' => array(
-        'error'   => 'Nolietojuma kategorija netika izveidota, lūdzu, mēģiniet vēlreiz. :(',
-        'success' => 'Nolietojuma pakāpe ir veiksmīgi izveidota. :)'
+        'error'   => 'Neizdevās izveidot nolietojuma klasi, lūdzu, mēģiniet vēlreiz. :(',
+        'success' => 'Nolietojuma klase tika veiksmīgi izveidota. :)'
     ),
 
     'update' => array(
-        'error'   => 'Nolietojuma kategorija netika atjaunināta, lūdzu, mēģiniet vēlreiz',
-        'success' => 'Amortizācijas klase ir veiksmīgi atjaunināta.'
+        'error'   => 'Neizdevās atjaunināt nolietojuma klasi, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Nolietojuma klase tika veiksmīgi atjaunināta.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Vai tiešām vēlaties dzēst šo nolietojuma klasi?',
-        'error'   => 'Izdevuma nolietojuma klases dzēšana. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Amortizācijas klase tika veiksmīgi dzēsta.'
+        'confirm'   => 'Vai tiešām vēlaties izdzēst šo nolietojuma klasi?',
+        'error'   => 'Radās kļūda, izdēšot nolietojuma klasi. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Nolietojuma klase tika veiksmīgi izdzēsta.'
     )
 
 );

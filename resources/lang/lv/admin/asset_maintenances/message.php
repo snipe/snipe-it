@@ -1,21 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'Aktīvu uzturēšana, kuru meklējāt, netika atrasta!',
+        'not_found'                    => 'Aktīva apkope, kuru meklējāt, netika atrasta!',
         'delete'                       => [
-            'confirm' => 'Vai tiešām vēlaties dzēst šo līdzekļu uzturēšanu?',
-            'error'   => 'Problēmu novēršanas jautājums tika dzēsts. Lūdzu mēģiniet vēlreiz.',
-            'success' => 'Aktīvu uzturēšana tika veiksmīgi dzēsta.'
+            'confirm' => 'Vai tiešām vēlaties izdzēst šo aktīva apkopi?',
+            'error'   => 'Radās kļūme, idzēšot aktīva apkopi. Lūdzu, mēģiniet vēlreiz.',
+            'success' => 'Aktīva apkope tika veiksmīgi dzēsta.'
         ],
         'create'                       => [
-            'error'   => 'Aktīvu uzturēšana nav izveidota, lūdzu, mēģiniet vēlreiz.',
-            'success' => 'Aktīvu uzturēšana tika veiksmīgi izveidota.'
+            'error'   => 'Neizdevās izveidot aktīva apkopi, lūdzu, mēģiniet vēlreiz.',
+            'success' => 'Aktīvu apkope tika veiksmīgi izveidota.'
         ],
         'edit'                       => [
-            'error'   => 'Aktīvu uzturēšana nav rediģēta, lūdzu, mēģiniet vēlreiz.',
-            'success' => 'Aktīvu uzturēšana veiksmīgi mainīta.'
+            'error'   => 'Neizdevās rediģēt aktīva apkopi, lūdzu, mēģiniet vēlreiz.',
+            'success' => 'Aktīva apkope tika veiksmīgi rediģēta.'
         ],
-        'asset_maintenance_incomplete' => 'Vēl nav pabeigts',
+        'asset_maintenance_incomplete' => 'Vēl nav pabeigta',
         'warranty'                     => 'Garantija',
-        'not_warranty'                 => 'Nav garantija',
+        'not_warranty'                 => 'Bez garantijas',
     ];

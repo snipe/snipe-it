@@ -3,20 +3,20 @@
 return array(
 
     'asset'             => 'Aktīvs',
-    'checkin'           => 'Reģistrēties',
+    'checkin'           => 'Atgriezt',
     'create'            => 'Izveidot licenci',
     'expiration'        => 'Derīguma termiņš',
     'license_key'       => 'Produkta atslēga',
-    'maintained'        => 'Saglabāts',
+    'maintained'        => 'Pagarināts atbalsts',
     'name'              => 'Programmatūras nosaukums',
-    'no_depreciation'   => 'Nepārliecieties',
+    'no_depreciation'   => 'Nenolietojams',
     'purchase_order'    => 'Pirkuma pasūtījuma numurs',
-    'reassignable'      => 'Piešķirt atkārtoti',
-    'remaining_seats'   => 'Atlikušie sēdekļi',
+    'reassignable'      => 'Atkārtoti piešķirams',
+    'remaining_seats'   => 'Atlikušās sēdvietas',
     'seats'             => 'Sēdvietas',
     'termination_date'  => 'Izbeigšanas datums',
-    'to_email'          => 'Licencēta uz e-pastu',
-    'to_name'           => 'Licencēta uz vārdu',
+    'to_email'          => 'Licencēts uz e-pastu',
+    'to_name'           => 'Licencēts uz vārdu',
     'update'            => 'Atjaunināt licenci',
-    'checkout_help'     => 'Jums jāpārbauda licence aparatūras aktīvam vai personai. Jūs varat izvēlēties abus, bet īpašnieka īpašumam ir jāatbilst personai, kurai veicat īpašuma pārbaudi.'
+    'checkout_help'     => 'Jums ir jāpiešķir licence aktīvam vai personai. Jūs varat izvēlēties abus, bet aktīva īpašniekam ir jāatbilst personai, kurai vēlaties piešķirt aktīvu.'
 );

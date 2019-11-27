@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'error'   => 'Jums jāizvēlas vismaz ONE iespēja.'
+    'error'   => 'Jums jāizvēlas vismaz VIENA opcija.'
 );

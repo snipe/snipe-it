@@ -1,13 +1,13 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'Par patēriņa precēm',
-    'about_consumables_text'  			=> 'Izlietojamie materiāli ir kaut kas iegādāts, kas laika gaitā tiks izlietots. Piemēram, printera tinte vai kopētāja papīrs.',
-    'checkout'                          => 'Izrakstīšanās, ko patērē lietotājs',
-    'consumable_name'                   => 'Paturējamais nosaukums',
-    'create'                            => 'Izveidot patērējamu',
-    'item_no'                           => 'Preces Nr.',
-    'remaining' 			            => 'Atlikušais',
+    'about_consumables_title' 			=> 'Par izejmateriāliem',
+    'about_consumables_text'  			=> 'Izejmateriāli ir jebkas iegādāts, kas laika gaitā tiks izlietots. Piemēram, printera tinte vai kopētāja papīrs.',
+    'checkout'                          => 'Izsniegt komponentu lietotājam',
+    'consumable_name'                   => 'Komponenta nosaukums',
+    'create'                            => 'Izveidot komponentu',
+    'item_no'                           => 'Vienuma Nr.',
+    'remaining' 			            => 'Atlikums',
     'total' 			                => 'Kopā',
-    'update'                            => 'Atjaunināt patērējamu',
+    'update'                            => 'Atjaunināt komponentu',
 );

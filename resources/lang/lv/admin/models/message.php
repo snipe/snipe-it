@@ -2,41 +2,41 @@
 
 return array(
 
-    'does_not_exist' => 'Modelis nepastāv.',
-    'assoc_users'	 => 'Šobrīd šis modelis ir saistīts ar vienu vai vairākiem aktīviem, un tos nevar izdzēst. Lūdzu, izdzēsiet aktīvus un pēc tam mēģiniet vēlreiz dzēst.',
+    'does_not_exist' => 'Šablons nepastāv.',
+    'assoc_users'	 => 'Šobrīd šis šablons ir saistīts ar vienu vai vairākiem aktīviem, un to nevar izdzēst. Lūdzu, izdzēsiet aktīvus un pēc tam mēģiniet vēlreiz dzēst.',
 
 
     'create' => array(
-        'error'   => 'Modelis netika izveidots, lūdzu, mēģiniet vēlreiz.',
-        'success' => 'Modelis veiksmīgi izveidots.',
-        'duplicate_set' => 'Aktīvu modelis ar šo nosaukumu, ražotāju un modeļa numuru jau pastāv.',
+        'error'   => 'Neizdevās izveidot šablonu, lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Šablons tika veiksmīgi izveidots.',
+        'duplicate_set' => 'Aktīva šablons ar šo nosaukumu, ražotāju un modeļa numuru jau pastāv.',
     ),
 
     'update' => array(
-        'error'   => 'Modelis nav atjaunināts, lūdzu, mēģiniet vēlreiz',
-        'success' => 'Modelis tika veiksmīgi atjaunināts.'
+        'error'   => 'Neizdevās atjaunināt šablonu, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Šablons tika veiksmīgi atjaunināts.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Vai tiešām vēlaties dzēst šo aktīvu modeli?',
-        'error'   => 'Radās problēma, izdzēšot modeli. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Modelis tika veiksmīgi dzēsts.'
+        'confirm'   => 'Vai tiešām vēlaties izdzēst šo aktīva šablonu?',
+        'error'   => 'Radās problēma, izdzēšot šablonu. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Šablons tika veiksmīgi izdzēsts.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Modelis netika atjaunots, lūdzu, mēģiniet vēlreiz',
-        'success' 		=> 'Veiksmīgi atjaunots modelis.'
+        'error'   		=> 'Neizdevās atjaunot šablonu, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Šablons tika veiksmīgi atjaunots.'
     ),
 
     'bulkedit' => array(
         'error'   		=> 'Neviens laukums netika mainīts, tāpēc nekas netika atjaunināts.',
-        'success' 		=> 'Modeļi ir atjaunināti.'
+        'success' 		=> 'Šabloni tika atjaunināti.'
     ),
 
     'bulkdelete' => array(
-        'error'   		    => 'Nav atlasītu modeļu, tāpēc nekas netika izdzēsts.',
-        'success' 		    => '{1} :success_count modelis dzēsts!|[2,*] :success_count modeļi dzēsti!',
-        'success_partial' 	=> ':success_count modeļi dzēsti, tomēr :fail_count nevarēja tik dzēsti, jo tiem ir piesaistītas aparatūras.'
+        'error'   		    => 'Nav atlasītu šablonu, tāpēc nekas netika izdzēsts.',
+        'success' 		    => '{1} :success_count šablons dzēsts!|[2,*] :success_count šabloni dzēsti!',
+        'success_partial' 	=> ':success_count šablons(-i) dzēsts(-i), tomēr neizdevās idzēst :fail_count šablonus, jo tiem ir piesaistītas aparatūras.'
     ),
 
 );

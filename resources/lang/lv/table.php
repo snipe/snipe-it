@@ -4,7 +4,7 @@ return array(
 
     'actions'	 	=> 'Darbības',
     'action' 		=> 'Darbība',
-    'by'      		=> 'Līdz',
-    'item' 			=> 'Vienums',
+    'by'      		=> 'By',
+    'item' 			=> 'Vienība',
 
 );

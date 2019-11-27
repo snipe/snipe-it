@@ -2,81 +2,81 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Ievadīšana: </strong> Šis īpašums ir atzīmēts kā pašlaik nederīgs. Ja šis statuss ir mainījies, lūdzu, atjauniniet aktīvu statusu.',
+    'undeployable' 		=> '<strong>Brīdinājums: </strong> Šis aktīvs ir atzīmēts kā pašlaik neizvietojams. Ja šis statuss ir mainījies, lūdzu, atjauniniet aktīva statusu.',
     'does_not_exist' 	=> 'Aktīvs neeksistē.',
-    'does_not_exist_or_not_requestable' => 'Labs mēģinājums. Šis īpašums nepastāv vai nav pieprasāms.',
-    'assoc_users'	 	=> 'Šobrīd šis īpašums tiek pārbaudīts lietotājam un to nevar izdzēst. Vispirms pārbaudiet aktīvu, un pēc tam mēģiniet vēlreiz izdzēst.',
+    'does_not_exist_or_not_requestable' => 'Labs mēģinājums. Šis aktīvs neeksistē vai nav pieprasāms.',
+    'assoc_users'	 	=> 'Šobrīd šis aktīvs ir izsniegts lietotājam un to nevar izdzēst. Vispirms pārbaudiet aktīvu, un pēc tam mēģiniet izdzēst vēlreiz.',
 
     'create' => array(
-        'error'   		=> 'Īpašums netika izveidots, lūdzu, mēģiniet vēlreiz. :(',
-        'success' 		=> 'Īpašums veiksmīgi izveidots. :)'
+        'error'   		=> 'Neizdevās izveidot aktīvu, lūdzu, mēģiniet vēlreiz. :(',
+        'success' 		=> 'Aktīvs tika veiksmīgi izveidots. :)'
     ),
 
     'update' => array(
-        'error'   			=> 'Īpašums netika atjaunināts, lūdzu, mēģiniet vēlreiz',
-        'success' 			=> 'Īpašums ir veiksmīgi atjaunināts.',
-        'nothing_updated'	=>  'Lauki nav atlasīti, tāpēc nekas netika atjaunināts.',
+        'error'   			=> 'Neizdevās atjaunināt aktīvu, lūdzu, mēģiniet vēlreiz',
+        'success' 			=> 'Aktīvs tika veiksmīgi atjaunināts.',
+        'nothing_updated'	=>  'Netika atlasīts neviens lauks, tāpēc nekas netika atjaunināts.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Īpašums netika atjaunots, lūdzu, mēģiniet vēlreiz',
-        'success' 		=> 'Aktīvs veiksmīgi atjaunots.'
+        'error'   		=> 'Neizdevās atjaunot aktīvu, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Aktīvs tika veiksmīgi atjaunots.'
     ),
 
     'audit' => array(
-        'error'   		=> 'Aktīvu revīzija bija neveiksmīga. Lūdzu mēģiniet vēlreiz.',
-        'success' 		=> 'Aktīvu audits ir veiksmīgi reģistrēts.'
+        'error'   		=> 'Neizdevās veikt aktīva auditu. Lūdzu, mēģiniet vēlreiz.',
+        'success' 		=> 'Aktīva audits tika veiksmīgi reģistrēts.'
     ),
 
 
     'deletefile' => array(
-        'error'   => 'Fails nav izdzēsts. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Fails veiksmīgi izdzēsts.',
+        'error'   => 'Neizdevās izdzēst datni. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Datne tika veiksmīgi izdzēsta.',
     ),
 
     'upload' => array(
-        'error'   => 'Faili nav augšupielādēti. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Faili (-i) ir veiksmīgi augšupielādēti.',
-        'nofiles' => 'Jūs neesat atlasījis augšupielādējamos failus, vai arī fails, kuru mēģināt augšupielādēt, ir pārāk liels',
-        'invalidfiles' => 'Viens vai vairāki jūsu faili ir pārāk lieli vai nav atļauto faila tipu. Atļautie failu tipi ir png, gif, jpg, doc, docx, pdf un txt.',
+        'error'   => 'Neizdevās augšupielādēt datni(-es). Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Datne(s) tika veiksmīgi augšupielādēta(s).',
+        'nofiles' => 'Jūs neesat atlasījis augšupielādējamās datnes, vai arī datne, kuru mēģināt augšupielādēt, ir pārāk liela',
+        'invalidfiles' => 'Viena vai vairākas jūsu datnes ir pārāk lielas vai neatļauts faila tips. Atļautie failu tipi ir png, gif, jpg, doc, docx, pdf un txt.',
     ),
 
     'import' => array(
-        'error'                 => 'Daži vienumi netika pareizi importēti.',
-        'errorDetail'           => 'Tālāk minētie vienumi netika importēti kļūdu dēļ.',
-        'success'               => "Jūsu fails ir importēts",
-        'file_delete_success'   => "Jūsu fails ir veiksmīgi izdzēsts",
-        'file_delete_error'      => "Failu nevarēja dzēst",
+        'error'                 => 'Dažas vienības netika pareizi importētas.',
+        'errorDetail'           => 'Kļūdu dēļ tālāk minētās vienības netika importētas.',
+        'success'               => "Jūsu datne tika veiksmīgi importēta",
+        'file_delete_success'   => "Jūsu datne tika veiksmīgi izdzēsta",
+        'file_delete_error'      => "Neizdevās izdzēst datni",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Vai tiešām vēlaties dzēst šo īpašumu?',
-        'error'   		=> 'Radās problēma, noņemot aktīvu. Lūdzu mēģiniet vēlreiz.',
-        'nothing_updated'   => 'Netika atlasīti neviens aktīvs, tāpēc nekas netika izdzēsts.',
-        'success' 		=> 'Aktīvs tika veiksmīgi dzēsts.'
+        'confirm'   	=> 'Vai tiešām vēlaties izdzēst šo aktīvu?',
+        'error'   		=> 'Radās problēma, idzēšot aktīvu. Lūdzu, mēģiniet vēlreiz.',
+        'nothing_updated'   => 'Netika atlasīts neviens aktīvs, tāpēc nekas netika izdzēsts.',
+        'success' 		=> 'Aktīvs tika veiksmīgi izdzēsts.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Īpašums netika pārbaudīts, lūdzu, mēģiniet vēlreiz',
-        'success' 		=> 'Aktīvs pārbaudīts veiksmīgi.',
-        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.',
-        'not_available' => 'Šis īpašums nav pieejams izrakstīšanai!',
-        'no_assets_selected' => 'Jums jāizvēlas vismaz vienu aparatūru'
+        'error'   		=> 'Neizdevās izsniegt aktīvu, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Aktīvs tika izsniegts veiksmīgi.',
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu, mēģiniet vēlreiz.',
+        'not_available' => 'Šis aktīvs nav pieejams izsniegšanai!',
+        'no_assets_selected' => 'Jums jāizvēlas no saraksta vismaz viens aktīvs'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Īpašums netika reģistrēts, lūdzu, mēģiniet vēlreiz',
-        'success' 		=> 'Aktīvs ir pārbaudīts veiksmīgi.',
-        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.',
-        'already_checked_in'  => 'Šis aktīvs jau ir reģistrēts.',
+        'error'   		=> 'Neizdevās atgriezt aktīvu, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Aktīvs tika atgriezts veiksmīgi.',
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu, mēģiniet vēlreiz.',
+        'already_checked_in'  => 'Šis aktīvs jau ir atgriezts.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Īpašums netika pieprasīts, lūdzu, mēģiniet vēlreiz',
-        'success' 		=> 'Īpašums pieprasīts veiksmīgi.',
-        'canceled'      => 'Norēķinu pieprasījums ir sekmīgi atcelts'
+        'error'   		=> 'Neizdevās pieprasīt aktīvu, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Aktīvs tika veiksmīgi pieprasīts.',
+        'canceled'      => 'Izsniegšanas pieprasījums tika veiksmīgi atcelts'
     )
 
 );

@@ -2,10 +2,11 @@
 
     return [
         'asset_maintenances' => 'Aktīvu uzturēšana',
-        'edit'               => 'Rediģēt aktīvu uzturēšanu',
-        'delete'             => 'Dzēst īpašuma uzturēšanu',
+        'edit'               => 'Rediģēt apkopes ierakstu',
+        'delete'             => 'Idzēst apkopes ierakstu',
         'view'               => 'Skatīt aktīvu uzturēšanas informāciju',
         'repair'             => 'Remonts',
         'maintenance'        => 'Apkope',
-        'upgrade'            => 'Jaunināt'
+        'upgrade'            => 'Uzlabošana',
+        'calibration'        => 'Kalibrācija'
     ];

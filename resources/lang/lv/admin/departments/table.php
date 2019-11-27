@@ -6,6 +6,6 @@ return array(
     'name'                      => 'Nodaļas nosaukums',
     'manager'                   => 'Vadītājs',
     'location'                  => 'Atrašanās vieta',
-    'create'                    => 'Izveidot departamentu',
-    'update'                    => 'Atjaunināt departamentu',
+    'create'                    => 'Izveidot nodaļu',
+    'update'                    => 'Atjaunināt nodaļu',
     );

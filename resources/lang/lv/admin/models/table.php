@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Izveidot aktīvu modeli',
-    'created_at' 			=> 'Izveidots pie',
+    'create'				=> 'Izveidot šablonu aktīvam',
+    'created_at' 			=> 'Izveidots (kad)',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Modelis Nr.',
-    'name'      			=> 'Aktīva modeļa nosaukums',
+    'modelnumber'   		=> 'Modeļa Nr.',
+    'name'      			=> 'Aktīva šablona nosaukums',
     'numassets' 			=> 'Aktīvi',
-    'title'					=> 'Aktīvu modeļi',
-    'update'				=> 'Atjaunināt aktīvu modeli',
-    'view'					=> 'Skatīt aktīvu modeli',
-    'update'				=> 'Atjaunināt aktīvu modeli',
-    'clone'				=> 'Klona modelis',
-    'edit'				=> 'Rediģēt modeli',
+    'title'					=> 'Aktīvu šabloni',
+    'update'				=> 'Atjaunināt aktīva šablonu',
+    'view'					=> 'Skatīt aktīva šablonu',
+    'update'				=> 'Atjaunināt aktīva šablonu',
+    'clone'				=> 'Klonēt šablonu',
+    'edit'				=> 'Rediģēt šablonu',
 );

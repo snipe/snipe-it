@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    "password" => "Parolēm jābūt sešām rakstzīmēm un jāatbilst apstiprinājumam.",
+    "password" => "Parolēm jābūt vismaz ar sešām rakstzīmēm un jāiziet atbilstības apstiprinājums.",
 
     "user"     => "Lietotājvārds vai e-pasta adrese ir nepareiza",
 

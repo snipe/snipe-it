@@ -2,14 +2,14 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
-    'asset_model'       => 'Modelis',
+    'asset_tag'   	=> 'Aktīva birka',
+    'asset_model'       => 'Šablons',
     'book_value'  	=> 'Vērtība',
-    'change' 		=> 'Iekšā ārā',
-    'checkout_date' => 'Izrakstīšanās datums',
-    'checkoutto' 	=> 'Izrakstīts',
-    'diff' 			=> 'Atšķirība',
-    'dl_csv' 		=> 'Lejupielādējiet CSV',
+    'change' 		=> 'In/Out',
+    'checkout_date' => 'Izsniegšanas datums',
+    'checkoutto' 	=> 'Atgriezts',
+    'diff' 			=> 'Diff',
+    'dl_csv' 		=> 'Lejupielādēt CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
     'location' 		=> 'Atrašanās vieta',
@@ -19,6 +19,6 @@ return array(
     'status'   		=> 'Statuss',
     'title'      	=> 'Aktīvs',
     'image'		=> 'Ierīces attēls',
-    'days_without_acceptance' => 'Dienas bez pieņemšanas'
+    'days_without_acceptance' => 'Dienas bez piekrišanas'
 
 );

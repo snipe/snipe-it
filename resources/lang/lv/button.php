@@ -2,15 +2,15 @@
 
 return array(
     'actions' 	                => 'Darbības',
-    'add'    	                => 'Pievieno jaunu',
+    'add'    	                => 'Pievienot jaunu',
     'cancel'                    => 'Atcelt',
-    'checkin_and_delete'  	    => 'Reģistrēties un dzēst lietotāju',
+    'checkin_and_delete'  	    => 'Atgriezt un dzēst lietotāju',
     'delete'  	                => 'Dzēst',
     'edit'    	                => 'Rediģēt',
     'restore' 	                => 'Atjaunot',
-    'request'                   => 'Pieprasījums',
+    'request'                   => 'Pieprasīt',
     'submit'  	                => 'Iesniegt',
     'upload'                    => 'Augšupielādēt',
-	'select_file'				=> 'Atlasiet failu ...',
-    'select_files'				=> 'Atlasiet datnes...',
+	'select_file'				=> 'Atlasīt datni...',
+    'select_files'				=> 'Atlasīt datnes...',
 );

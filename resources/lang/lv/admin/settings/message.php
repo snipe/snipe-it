@@ -8,10 +8,10 @@ return array(
         'success'               => 'Iestatījumi tika veiksmīgi atjaunināti.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Vai tiešām vēlaties izdzēst šo dublējuma failu? Šo darbību nevar atsaukt.',
+        'delete_confirm'        => 'Vai tiešām vēlaties izdzēst šo dublējuma datni? Šo darbību nevar atsaukt.',
         'file_deleted'          => 'Dublējuma fails tika veiksmīgi izdzēsts.',
         'generated'             => 'Veiksmīgi izveidots jauns dublējuma fails.',
-        'file_not_found'        => 'Šo dublējuma failu nevarēja atrast serverī.',
+        'file_not_found'        => 'Šo dublējuma datni nevarēja atrast serverī.',
     ),
     'purge' => array(
         'error'     => 'Iztīrīšanas laikā radās kļūda.',

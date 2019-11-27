@@ -4,48 +4,48 @@ return array(
 
     'does_not_exist' => 'Licence neeksistē.',
     'user_does_not_exist' => 'Lietotājs neeksistē.',
-    'asset_does_not_exist' 	=> 'Aktīvs, kuru jūs mēģināt saistīt ar šo licenci, nepastāv.',
-    'owner_doesnt_match_asset' => 'Aktīvs, kuru jūs mēģināt saistīt ar šo licenci, ir īpašumā somene, kas nav persona, kas atlasīta nolaižamajā sarakstā piešķirtajam.',
-    'assoc_users'	 => 'Šobrīd šī licence tiek izrakstīta lietotājam un to nevar izdzēst. Vispirms pārbaudiet licenci un pēc tam mēģiniet dzēst vēlreiz.',
+    'asset_does_not_exist' 	=> 'Aktīvs, kuru jūs mēģināt piesaistīt šai licencei, nepastāv.',
+    'owner_doesnt_match_asset' => 'Aktīvs, kuru mēģināt piesaistīt ar šai licencei, pieder kādam citam, nevis personai, kas atlasīta nolaižamajā izvēlnē.',
+    'assoc_users'	 => 'Šobrīd šī licence ir izsniegta lietotājam un to nevar izdzēst. Vispirms pārbaudiet licenci un pēc tam mēģiniet dzēst vēlreiz.',
     'select_asset_or_person' => 'Jums jāizvēlas aktīvs vai lietotājs, bet ne abi.',
 
 
     'create' => array(
-        'error'   => 'Licence netika izveidota, lūdzu, mēģiniet vēlreiz.',
+        'error'   => 'Neizdevās izveidot licenci, lūdzu, mēģiniet vēlreiz.',
         'success' => 'Licence tika veiksmīgi izveidota.'
     ),
 
     'deletefile' => array(
-        'error'   => 'Fails nav izdzēsts. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Fails veiksmīgi izdzēsts.',
+        'error'   => 'Neizdevās dzēst datni. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Datne tika veiksmīgi izdzēsta.',
     ),
 
     'upload' => array(
-        'error'   => 'Faili nav augšupielādēti. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Faili (-i) ir veiksmīgi augšupielādēti.',
-        'nofiles' => 'Jūs neesat atlasījis augšupielādējamos failus, vai arī fails, kuru mēģināt augšupielādēt, ir pārāk liels',
-        'invalidfiles' => 'Viens vai vairāki jūsu faili ir pārāk lieli vai nav atļauto faila tipu. Atļautie failu tipi ir png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml un lic.',
+        'error'   => 'Neizdevās augšupielādēt datni(-es). Lūdzu mēģiniet vēlreiz.',
+        'success' => 'Datne(s) tuika veiksmīgi augšupielādēta(s).',
+        'nofiles' => 'Jūs neesat atlasījis augšupielādējamās datnes, vai arī datni, kuru mēģināt augšupielādēt, ir pārāk liela',
+        'invalidfiles' => 'Viena vai vairākas jūsu datnes ir pārāk lielas vai neatļauts faila tips. Atļautie failu tipi ir png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml un lic.',
     ),
 
     'update' => array(
-        'error'   => 'Licence netika atjaunināta, lūdzu, mēģiniet vēlreiz',
+        'error'   => 'Neizdevās atjaunināt licenci, lūdzu, mēģiniet vēlreiz',
         'success' => 'Licence tika veiksmīgi atjaunināta.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Vai tiešām vēlaties dzēst šo licenci?',
-        'error'   => 'Radās problēma, dzēšot licenci. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Licence tika veiksmīgi dzēsta.'
+        'confirm'   => 'Vai tiešām vēlaties izdzēst šo licenci?',
+        'error'   => 'Radās problēma, izdzēšot licenci. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Licence tika veiksmīgi izdzēsta.'
     ),
 
     'checkout' => array(
-        'error'   => 'Pārbaudot licenci, radās problēma. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Licence tika veiksmīgi pārbaudīta'
+        'error'   => 'Radās problēma, izsniedzot licenci. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Licence tika veiksmīgi izsniegta'
     ),
 
     'checkin' => array(
-        'error'   => 'Licencē tika pārbaudīta problēma. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Licence tika veiksmīgi reģistrēta'
+        'error'   => 'Radās problēma, atgriežot licenci. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Licence tika veiksmīgi izsniegta'
     ),
 
 );

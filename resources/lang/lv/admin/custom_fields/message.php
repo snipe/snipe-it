@@ -7,9 +7,9 @@ return array(
         'already_added'   => 'Lauks jau ir pievienots',
 
         'create' => array(
-            'error'   => 'Lauks nav izveidots, lūdzu, mēģiniet vēlreiz.',
-            'success' => 'Lauks veiksmīgi izveidots.',
-            'assoc_success' => 'Lauks veiksmīgi pievienots lauka laukam.'
+            'error'   => 'Neizdevās izveidot lauku, lūdzu, mēģiniet vēlreiz.',
+            'success' => 'Lauks tika veiksmīgi izveidots.',
+            'assoc_success' => 'Lauks tika veiksmīgi pievienots lauka kopai.'
         ),
 
         'update' => array(
@@ -18,33 +18,33 @@ return array(
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Vai tiešām vēlaties dzēst šo lauku?',
-            'error'   => 'Radās problēma, dzēšot lauku. Lūdzu mēģiniet vēlreiz.',
-            'success' => 'Lauks bija veiksmīgi dzēsts.',
-            'in_use'   => 'Lauks joprojām tiek izmantots.',
+            'confirm'   	=> 'Vai tiešām vēlaties izdzēst šo lauku?',
+            'error'   => 'Radās problēma, dzēšot lauku. Lūdzu, mēģiniet vēlreiz.',
+            'success' => 'Lauks tika veiksmīgi izdzēsts.',
+            'in_use'   => 'Lauks jau tiek izmantots.',
         )
 
     ),
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldset nepastāv',
+        'does_not_exist' => 'Lauku kopa neeksistē',
 
         'create' => array(
-            'error'   => 'Fieldset nav izveidots, lūdzu, mēģiniet vēlreiz.',
-            'success' => 'Fieldset izveidota veiksmīgi.'
+            'error'   => 'Neizdevās izveidot lauku kopu, lūdzu, mēģiniet vēlreiz.',
+            'success' => 'Lauku kopa tika veiksmīgi izveidota.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset nebija atjaunināts, lūdzu, mēģiniet vēlreiz',
-            'success' => 'Fieldset tika veiksmīgi atjaunināta.'
+            'error'   => 'Neizdevās atjaunināt lauku kopu, lūdzu, mēģiniet vēlreiz',
+            'success' => 'Lauku kopa tika veiksmīgi atjaunināta.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Vai tiešām vēlaties dzēst šo lauka iestatījumu?',
-            'error'   => 'Radās problēma, novēršot lauka iestatījumu. Lūdzu mēģiniet vēlreiz.',
-            'success' => 'Fieldset tika veiksmīgi dzēsts.',
-            'in_use'   => 'Fieldset joprojām tiek izmantots.',
+            'confirm'   	=> 'Vai tiešām vēlaties izdzēst šo lauku kopu?',
+            'error'   => 'Radās problēma, dzēšot lauku kopu. Lūdzu, mēģiniet vēlreiz.',
+            'success' => 'Lauku kopa tika veiksmīgi dzēsts.',
+            'in_use'   => 'Lauku kopa jau tiek izmantota.',
         )
 
     ),

@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Piederums neeksistē.',
-    'assoc_users'	 => 'Pašlaik šim piederumam ir: lietotāju skaits tiek pārbaudīts. Lūdzu, pārbaudiet piederumus un mēģiniet vēlreiz.',
+    'does_not_exist' => 'Tāds aksesuārs neeksistē.',
+    'assoc_users'	 => 'Pašlaik lietotājiem ir izsniegti :count šādi veida aksesuāri. Lūdzu, pārbaudiet aksesuārus ierakstus un mēģiniet vēlreiz.',
 
     'create' => array(
-        'error'   => 'Piederums netika izveidots, lūdzu, mēģiniet vēlreiz.',
-        'success' => 'Piederums tika veiksmīgi izveidots.'
+        'error'   => 'Aksesuārs netika pievienots, lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Aksesuārs tika veiksmīgi pievienots.'
     ),
 
     'update' => array(
-        'error'   => 'Piederums netika atjaunināts, lūdzu, mēģiniet vēlreiz',
-        'success' => 'Piederums tika veiksmīgi atjaunināts.'
+        'error'   => 'Neizdevās atjaunināt aksesuāru, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Aksesuārs tika veiksmīgi atjaunināts.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Vai tiešām vēlaties dzēst šo piederumu?',
-        'error'   => 'Radās problēma, noņemot piederumu. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Piederums tika veiksmīgi izdzēsts.'
+        'confirm'   => 'Vai tiešām vēlaties idzēst šo aksesuāru?',
+        'error'   => 'Radās problēma, dzēšot aksesuāru. Lūdzu mēģiniet vēlreiz.',
+        'success' => 'Aksesuārs tika veiksmīgi izdzēsts.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Piederums netika pārbaudīts, lūdzu, mēģiniet vēlreiz',
-        'success' 		=> 'Piederums ir veiksmīgi izrakstīts.',
-        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.'
+        'error'   		=> 'Neizdevās isniegt aksesuāru, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Aksesuārs tika veiksmīgi izsniegts.',
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu, mēģiniet vēlreiz.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Piederums netika atzīmēts, lūdzu, mēģiniet vēlreiz',
-        'success' 		=> 'Piederumi ir pārbaudīti veiksmīgi.',
-        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.'
+        'error'   		=> 'Neizdevās atgriezt aksesuāru, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Aksesuārs tika veiksmīgi atgriezts.',
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu, mēģiniet vēlreiz.'
     )
 
 

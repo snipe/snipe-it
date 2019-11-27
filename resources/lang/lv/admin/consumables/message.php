@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Patērējamais nav.',
+    'does_not_exist' => 'Izejmateriāls neeksistē.',
 
     'create' => array(
-        'error'   => 'Patērējamais nav izveidots, lūdzu, mēģiniet vēlreiz.',
-        'success' => 'Izlietojamie tika veiksmīgi izveidoti.'
+        'error'   => 'Neizdevās izveidot izejmateriālu, lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Izejmateriāls tika veiksmīgi izveidots.'
     ),
 
     'update' => array(
-        'error'   => 'Patērējamais nav atjaunināts, lūdzu, mēģiniet vēlreiz',
-        'success' => 'Izlietojamie tiek veiksmīgi atjaunināti.'
+        'error'   => 'Neizdevās atjaunināt izejmateriālu, lūdzu, mēģiniet vēlreiz',
+        'success' => 'Izejmateriāls tiek veiksmīgi atjaunināts.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Vai tiešām vēlaties izdzēst šo patērējamo?',
-        'error'   => 'Radās problēma, izdzēšot patērējamo. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Palīgmateriāls tika veiksmīgi dzēsts.'
+        'confirm'   => 'Vai tiešām vēlaties izdzēst šo izejmateriālu?',
+        'error'   => 'Radās problēma, izdzēšot izejmateriālu. Lūdzu, mēģiniet vēlreiz.',
+        'success' => 'Izejmateriāls tika veiksmīgi izdzēsts.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Neizdevās izņemt patēriņu, lūdzu, mēģiniet vēlreiz',
-        'success' 		=> 'Izlietojamie izrakstīti veiksmīgi.',
-        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.'
+        'error'   		=> 'Neizdevās izsniegt izejmateriālu, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Izejmateriāls tika veiksmīgi izsniegts.',
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu, mēģiniet vēlreiz.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Paredzētais patēriņš netika reģistrēts, lūdzu, mēģiniet vēlreiz',
-        'success' 		=> 'Izlietojamie tiek veiksmīgi reģistrēti.',
-        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu mēģiniet vēlreiz.'
+        'error'   		=> 'Neizdevās atgriezt izejmateriālu, lūdzu, mēģiniet vēlreiz',
+        'success' 		=> 'Izejmateriāls tika veiksmīgi atgriezts.',
+        'user_does_not_exist' => 'Šis lietotājs ir nederīgs. Lūdzu, mēģiniet vēlreiz.'
     )
 
 

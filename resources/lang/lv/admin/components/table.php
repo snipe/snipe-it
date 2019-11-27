@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'title'      				=> 'Sastāvdaļas nosaukums',
+    'title'      				=> 'Komponenta nosaukums',
 );
