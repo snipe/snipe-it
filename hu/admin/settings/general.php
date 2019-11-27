@@ -26,7 +26,7 @@ return array(
     'custom_css'				=> 'Egyéni CSS',
     'custom_css_help'			=> 'Adjon meg olyan egyedi CSS felülírást, amelyet használni szeretne. Ne tüntesse fel a &lt;style&gt;&lt;/style&gt; címkéket.',
     'custom_forgot_pass_url'	=> 'Egyéni jelszó visszaállítási URL',
-    'custom_forgot_pass_url_help'	=> 'This replaces the built-in forgotten password URL on the login screen, useful to direct people to internal or hosted LDAP password reset functionality. It will effectively disable local user forgotten password functionality.',
+    'custom_forgot_pass_url_help'	=> 'Ez felváltja a beépített elfelejtett jelszó URL-jét a bejelentkezési képernyőn, amely hasznos lehet arra, hogy az embereket belső vagy hosztolt LDAP jelszó-visszaállítási funkciókra irányítsa. Egyéni URL megadásával a helyi felhasználók elfelejtett jelszavát visszaállító funkciót kikapcsolja.',
     'dashboard_message'			=> 'Irányítópult üzenet',
     'dashboard_message_help'	=> 'Ez a szöveg megjelenik a műszerfalon bárki számára, aki engedélyt kapott a vezérlőpult megtekintésére.',
     'default_currency'  		=> 'Alapértelmezett pénznem',
