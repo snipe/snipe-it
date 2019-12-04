@@ -13,7 +13,7 @@ return array(
     'assigned_to' => 'Assigned To',
     'best_regards' => 'Best regards,',
     'canceled' => 'Canceled:',
-    'checkin_date' => 'Checkin Date:',
+    'checkin_date' => 'Visszavét dátuma:',
     'checkout_date' => 'Checkout Date:',
     'click_to_confirm' => 'Please click on the following link to confirm your :web account:',
     'click_on_the_link_accessory' => 'Please click on the link at the bottom to confirm that you have received the accessory.',
