@@ -47,11 +47,11 @@ class SettingsController extends Controller
             ];
         } catch (\Exception $ex) {
             return response()->json([
-                'message' => 'Error logging into LDAP server, error: ' . $ex->getMessage() . ' - Verify your that your username and password are correct'
-            }
+                'message' => 'Error logging into LDAP server, error: ' . $ex->getMessage() . ' - Verify your that your username and password are correct']);
+
         } catch (\Exception $e) {
             \Log::debug('Connection failed but we cannot debug it any further on our end.');
-            ], 400);
+           
         }
 
         Log::info('Preparing to test LDAP bind connection');
