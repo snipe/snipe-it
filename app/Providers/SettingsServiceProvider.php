@@ -48,11 +48,11 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('models_upload_path', function(){
-            return 'assetmodels/';
+            return 'models/';
         });
 
         \App::singleton('models_upload_url', function(){
-            return 'assetmodels/';
+            return 'models/';
         });
 
         // Categories
