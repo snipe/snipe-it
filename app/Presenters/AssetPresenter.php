@@ -258,13 +258,17 @@ class AssetPresenter extends Presenter
             $query->whereHas('models');
         })->get();
 
+
+        // Note: We do not need to e() escape the field names here, as they are already escaped when
+        // they are presented in the blade view. If we escape them here, custom fields with quotes in their
+        // name can break the listings page. - snipe
         foreach ($fields as $field) {
             $layout[] = [
                 "field" => 'custom_fields.'.$field->convertUnicodeDbSlug(),
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => ($field->field_encrypted=='1') ?'<i class="fa fa-lock"></i> '.e($field->name) : e($field->name),
+                "title" => ($field->field_encrypted=='1') ?'<i class="fa fa-lock"></i> '.$field->name : $field->name,
                 "formatter" => "customFieldsFormatter"
             ];
 
