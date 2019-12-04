@@ -191,7 +191,7 @@ return array(
     'vertical'        => 'vertical',
     'horizontal'        => 'horizontal',
     'unique_serial'                => 'Egyedi sorozatszámok',
-    'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
+    'unique_serial_help_text'                => 'Bejelölés esetén az eszközök sorozatszámának egyedinek kell lenni',
     'zerofill_count'        => 'Length of asset tags, including zerofill',
     'username_format_help'   => 'Ez a beállítás csak az importálási folyamat által kerül felhasználásra abban az esetben, ha nincs megadva a felhasználónév, és azt a programnak kell generálnia.',
 );
