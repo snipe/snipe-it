@@ -34,6 +34,7 @@
     "javiereguiluz/easyslugger": "^1.0",
     "laravel/framework": "5.8.*",
     "laravel/passport": "~6.0",
+    "laravel/slack-notification-channel": "^2.0",
     "laravel/tinker": "^1.0",
     "laravelcollective/html": "5.8.*",
     "league/csv": "^9.2",
