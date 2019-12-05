@@ -4,7 +4,7 @@
 
     <div class="col-md-7">
         <select class="js-data-ajax" data-endpoint="departments" data-placeholder="{{ trans('general.select_department') }}" name="{{ $fieldname }}" style="width: 100%" id="department_select">
-            @if ($department_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+            @if ($department_id = Request::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $department_id }}" selected="selected">
                     {{ (\App\Models\Department::find($department_id)) ? \App\Models\Department::find($department_id)->name : '' }}
                 </option>

@@ -102,7 +102,7 @@ class CustomFieldsetsController extends Controller
                 "user_id" => Auth::user()->id
         ]);
 
-        $validator = Validator::make(Input::all(), $cfset->rules);
+        $validator = Validator::make($request->all(), $cfset->rules);
         if ($validator->passes()) {
             $cfset->save();
             return redirect()->route("fieldsets.show", [$cfset->id])

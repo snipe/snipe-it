@@ -18,7 +18,7 @@
 
 
       <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="baseUrl" content="{{ url('/') }}/">
+      <meta name="baseUrl" content="{{ url('/') }}/">
 
     <script nonce="{{ csrf_token() }}">
       window.Laravel = { csrfToken: '{{ csrf_token() }}' };

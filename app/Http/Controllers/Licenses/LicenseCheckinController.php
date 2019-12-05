@@ -74,7 +74,7 @@ class LicenseCheckinController extends Controller
         ];
 
         // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
 
         // If validation fails, we'll exit the operation now.
         if ($validator->fails()) {
