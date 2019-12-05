@@ -191,7 +191,7 @@ return array(
     'vertical'        => 'vertikal',
     'horizontal'        => 'Horizontal',
     'unique_serial'                => 'Eindeutige Seriennummern',
-    'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
-    'zerofill_count'        => 'Length of asset tags, including zerofill',
-    'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
+    'unique_serial_help_text'                => 'Wenn dieses Kästchen aktiviert ist, wird von Asset Seriennummern verlangt, einmalig zu sein',
+    'zerofill_count'        => 'Länge der Asset Tags, inklusive führender Nullen',
+    'username_format_help'   => 'Diese Einstellung wird nur vom Importprozess benutzt, wenn kein Benutzername angegeben wurde und wir einen Benutzernamen für Sie generieren müssen.',
 );
