@@ -42,7 +42,7 @@ class GroupsController extends Controller
         // Get all the available permissions
         $permissions = config('permissions');
         $groupPermissions = Helper::selectedPermissionsArray($permissions, $permissions);
-        $selectedPermissions = Input::old('permissions', $groupPermissions);
+        $selectedPermissions = Request::old('permissions', $groupPermissions);
 
         // Show the page
         return view('groups/edit', compact('permissions', 'selectedPermissions', 'groupPermissions'))->with('group', $group);

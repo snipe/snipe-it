@@ -51,7 +51,7 @@
               <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
                 {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
                 <div class="col-md-8">
-                  <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" tabindex="1">
+                  <input class="form-control" type="text" name="name" id="name" value="{{ Request::old('name', $asset->name) }}" tabindex="1">
                   {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                 </div>
               </div>
@@ -83,7 +83,7 @@
               <div class="col-md-8">
               <div class="input-group col-md-5 required">
                 <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d" data-autoclose="true">
-                  <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkin_at" id="checkin_at" value="{{ Input::old('checkin_at', date('Y-m-d')) }}">
+                  <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkin_at" id="checkin_at" value="{{ Request::old('checkin_at', date('Y-m-d')) }}">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
                 {!! $errors->first('checkin_at', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
@@ -99,7 +99,7 @@
 
                 <div class="col-md-8">
                   <textarea class="col-md-6 form-control" id="note"
-                  name="note">{{ Input::old('note', $asset->note) }}</textarea>
+                  name="note">{{ Request::old('note', $asset->note) }}</textarea>
                   {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                 </div>
               </div>

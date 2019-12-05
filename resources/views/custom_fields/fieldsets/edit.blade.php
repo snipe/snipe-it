@@ -29,7 +29,7 @@
             <i class='fa fa-asterisk'></i>
           </label>
           <div class="col-md-6">
-            <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name') }}" />
+            <input class="form-control" type="text" name="name" id="name" value="{{ Request::old('name') }}" />
             {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
         </div>

@@ -62,12 +62,12 @@ class UsersController extends Controller
 
         $userGroups = collect();
 
-        if (Input::old('groups')) {
-            $userGroups = Group::whereIn('id', Input::old('groups'))->pluck('name', 'id');
+        if (Request::old('groups')) {
+            $userGroups = Group::whereIn('id', Request::old('groups'))->pluck('name', 'id');
         }
 
         $permissions = config('permissions');
-        $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
+        $userPermissions = Helper::selectedPermissionsArray($permissions, Request::old('permissions', array()));
         $permissions = $this->filterDisplayable($permissions);
 
         $user = new User;

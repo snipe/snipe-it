@@ -63,7 +63,7 @@
                                 {{ Form::label('ldap_integration', trans('admin/settings/general.ldap_integration')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('ldap_enabled', '1', Input::old('ldap_enabled', $setting->ldap_enabled), ['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
+                                {{ Form::checkbox('ldap_enabled', '1', Request::old('ldap_enabled', $setting->ldap_enabled), ['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
                                 {{ trans('admin/settings/general.ldap_enabled') }}
                                 {!! $errors->first('ldap_enabled', '<span class="alert-msg">:message</span>') !!}
                             </div>
@@ -75,7 +75,7 @@
                                 {{ Form::label('ldap_pw_sync', trans('admin/settings/general.ldap_pw_sync')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('ldap_pw_sync', '1', Input::old('ldap_pw_sync', $setting->ldap_pw_sync),['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
+                                {{ Form::checkbox('ldap_pw_sync', '1', Request::old('ldap_pw_sync', $setting->ldap_pw_sync),['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
                                 {{ trans('general.yes') }}
                                 <p class="help-block">{{ trans('admin/settings/general.ldap_pw_sync_help') }}</p>
                                 {!! $errors->first('ldap_pw_sync', '<span class="alert-msg">:message</span>') !!}
@@ -88,7 +88,7 @@
                                 {{ Form::label('is_ad', trans('admin/settings/general.ad')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('is_ad', '1', Input::old('is_ad', $setting->is_ad),['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
+                                {{ Form::checkbox('is_ad', '1', Request::old('is_ad', $setting->is_ad),['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
                                 {{ trans('admin/settings/general.is_ad') }}
                                 {!! $errors->first('is_ad', '<span class="alert-msg">:message</span>') !!}
                             </div>
@@ -100,7 +100,7 @@
                                 {{ Form::label('ad_domain', trans('admin/settings/general.ad_domain')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ad_domain', Input::old('ad_domain', $setting->ad_domain), ['class' => 'form-control','placeholder' => 'example.com', $setting->demoMode]) }}
+                                {{ Form::text('ad_domain', Request::old('ad_domain', $setting->ad_domain), ['class' => 'form-control','placeholder' => 'example.com', $setting->demoMode]) }}
                                 <p class="help-block">{{ trans('admin/settings/general.ad_domain_help') }}</p>
                                 {!! $errors->first('ad_domain', '<span class="alert-msg">:message</span>') !!}
                             </div>
@@ -112,7 +112,7 @@
                                 {{ Form::label('ldap_server', trans('admin/settings/general.ldap_server')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), ['class' => 'form-control','placeholder' => 'ldap://ldap.example.com', $setting->demoMode]) }}
+                                {{ Form::text('ldap_server', Request::old('ldap_server', $setting->ldap_server), ['class' => 'form-control','placeholder' => 'ldap://ldap.example.com', $setting->demoMode]) }}
                                 <p class="help-block">{{ trans('admin/settings/general.ldap_server_help') }}</p>
                                 {!! $errors->first('ldap_server', '<span class="alert-msg">:message</span>') !!}
                             </div>
@@ -124,7 +124,7 @@
                                 {{ Form::label('ldap_tls', trans('admin/settings/general.ldap_tls')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('ldap_tls', '1', Input::old('ldap_tls', $setting->ldap_tls),['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
+                                {{ Form::checkbox('ldap_tls', '1', Request::old('ldap_tls', $setting->ldap_tls),['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
                                 {{ trans('admin/settings/general.ldap_tls_help') }}
                                 {!! $errors->first('ldap_tls', '<span class="alert-msg">:message</span>') !!}
                             </div>
@@ -136,7 +136,7 @@
                                 {{ Form::label('ldap_server_cert_ignore', trans('admin/settings/general.ldap_server_cert')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('ldap_server_cert_ignore', '1', Input::old('ldap_server_cert_ignore', $setting->ldap_server_cert_ignore),['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
+                                {{ Form::checkbox('ldap_server_cert_ignore', '1', Request::old('ldap_server_cert_ignore', $setting->ldap_server_cert_ignore),['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
                                 {{ trans('admin/settings/general.ldap_server_cert_ignore') }}
                                 {!! $errors->first('ldap_server_cert_ignore', '<span class="alert-msg">:message</span>') !!}
                                 <p class="help-block">{{ trans('admin/settings/general.ldap_server_cert_help') }}</p>
@@ -149,7 +149,7 @@
                                 {{ Form::label('ldap_uname', trans('admin/settings/general.ldap_uname')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_uname', Input::old('ldap_uname', $setting->ldap_uname), ['class' => 'form-control','placeholder' => 'binduser@example.com', $setting->demoMode]) }}
+                                {{ Form::text('ldap_uname', Request::old('ldap_uname', $setting->ldap_uname), ['class' => 'form-control','placeholder' => 'binduser@example.com', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_uname', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                                 {{ Form::label('ldap_basedn', trans('admin/settings/general.ldap_basedn')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_basedn', Input::old('ldap_basedn', $setting->ldap_basedn), ['class' => 'form-control', 'placeholder' => 'cn=users/authorized,dc=example,dc=com', $setting->demoMode]) }}
+                                {{ Form::text('ldap_basedn', Request::old('ldap_basedn', $setting->ldap_basedn), ['class' => 'form-control', 'placeholder' => 'cn=users/authorized,dc=example,dc=com', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_basedn', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                                 {{ Form::label('ldap_filter', trans('admin/settings/general.ldap_filter')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_filter', Input::old('ldap_filter', $setting->ldap_filter), ['class' => 'form-control','placeholder' => '&(cn=*)', $setting->demoMode]) }}
+                                {{ Form::text('ldap_filter', Request::old('ldap_filter', $setting->ldap_filter), ['class' => 'form-control','placeholder' => '&(cn=*)', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_filter', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -193,7 +193,7 @@
                                 {{ Form::label('ldap_username_field', trans('admin/settings/general.ldap_username_field')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_username_field', Input::old('ldap_username_field', $setting->ldap_username_field), ['class' => 'form-control','placeholder' => 'samaccountname', $setting->demoMode]) }}
+                                {{ Form::text('ldap_username_field', Request::old('ldap_username_field', $setting->ldap_username_field), ['class' => 'form-control','placeholder' => 'samaccountname', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_username_field', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -204,7 +204,7 @@
                                 {{ Form::label('ldap_lname_field', trans('admin/settings/general.ldap_lname_field')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_lname_field', Input::old('ldap_lname_field', $setting->ldap_lname_field), ['class' => 'form-control','placeholder' => 'sn', $setting->demoMode]) }}
+                                {{ Form::text('ldap_lname_field', Request::old('ldap_lname_field', $setting->ldap_lname_field), ['class' => 'form-control','placeholder' => 'sn', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_lname_field', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -215,7 +215,7 @@
                                 {{ Form::label('ldap_fname_field', trans('admin/settings/general.ldap_fname_field')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_fname_field', Input::old('ldap_fname_field', $setting->ldap_fname_field), ['class' => 'form-control', 'placeholder' => 'givenname', $setting->demoMode]) }}
+                                {{ Form::text('ldap_fname_field', Request::old('ldap_fname_field', $setting->ldap_fname_field), ['class' => 'form-control', 'placeholder' => 'givenname', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_fname_field', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -226,7 +226,7 @@
                                 {{ Form::label('ldap_auth_filter_query', trans('admin/settings/general.ldap_auth_filter_query')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_auth_filter_query', Input::old('ldap_auth_filter_query', $setting->ldap_auth_filter_query), ['class' => 'form-control','placeholder' => '"uid="', $setting->demoMode]) }}
+                                {{ Form::text('ldap_auth_filter_query', Request::old('ldap_auth_filter_query', $setting->ldap_auth_filter_query), ['class' => 'form-control','placeholder' => '"uid="', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_auth_filter_query', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -237,7 +237,7 @@
                                 {{ Form::label('ldap_version', trans('admin/settings/general.ldap_version')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_version', Input::old('ldap_version', $setting->ldap_version), ['class' => 'form-control','placeholder' => '3', $setting->demoMode]) }}
+                                {{ Form::text('ldap_version', Request::old('ldap_version', $setting->ldap_version), ['class' => 'form-control','placeholder' => '3', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_version', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -248,7 +248,7 @@
                                 {{ Form::label('ldap_active_flag', trans('admin/settings/general.ldap_active_flag')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_active_flag', Input::old('ldap_active_flag', $setting->ldap_active_flag), ['class' => 'form-control','placeholder' => '', $setting->demoMode]) }}
+                                {{ Form::text('ldap_active_flag', Request::old('ldap_active_flag', $setting->ldap_active_flag), ['class' => 'form-control','placeholder' => '', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_active_flag', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -259,7 +259,7 @@
                                 {{ Form::label('ldap_emp_num', trans('admin/settings/general.ldap_emp_num')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_emp_num', Input::old('ldap_emp_num', $setting->ldap_emp_num), ['class' => 'form-control','placeholder' => '', $setting->demoMode]) }}
+                                {{ Form::text('ldap_emp_num', Request::old('ldap_emp_num', $setting->ldap_emp_num), ['class' => 'form-control','placeholder' => '', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_emp_num', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -270,7 +270,7 @@
                                 {{ Form::label('ldap_email', trans('admin/settings/general.ldap_email')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('ldap_email', Input::old('ldap_email', $setting->ldap_email), ['class' => 'form-control','placeholder' => '', $setting->demoMode]) }}
+                                {{ Form::text('ldap_email', Request::old('ldap_email', $setting->ldap_email), ['class' => 'form-control','placeholder' => '', $setting->demoMode]) }}
                                 {!! $errors->first('ldap_email', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -304,7 +304,7 @@
                                 {{ Form::label('custom_forgot_pass_url', trans('admin/settings/general.custom_forgot_pass_url')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('custom_forgot_pass_url', Input::old('custom_forgot_pass_url', $setting->custom_forgot_pass_url), ['class' => 'form-control','placeholder' => 'https://my.ldapserver-forgotpass.com', $setting->demoMode]) }}
+                                {{ Form::text('custom_forgot_pass_url', Request::old('custom_forgot_pass_url', $setting->custom_forgot_pass_url), ['class' => 'form-control','placeholder' => 'https://my.ldapserver-forgotpass.com', $setting->demoMode]) }}
                                 <p class="help-block">{{ trans('admin/settings/general.custom_forgot_pass_url_help') }}</p>
                                 {!! $errors->first('custom_forgot_pass_url', '<span class="alert-msg">:message</span>') !!}
                             </div>
