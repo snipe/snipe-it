@@ -183,7 +183,7 @@ return array(
     'two_factor_enabled_edit_not_allowed' => 'Der Administrator erlaubt nicht, diese Einstellung zu ändern.',
     'two_factor_enrollment_text'	=> "Zwei-Faktor-Authentifizierung ist erforderlich, Ihr Gerät wurde jedoch noch nicht hinzugefügt. Öffnen Sie die Google Authenticator App und scannen Sie den QR-Code unten, um Ihr Gerät hinzuzufügen. Geben Sie anschließend den Code ein",
     'require_accept_signature'      => 'Unterschrift erforderlich',
-    'require_accept_signature_help_text'      => 'Enabling this feature will require users to physically sign off on accepting an asset.',
+    'require_accept_signature_help_text'      => 'Wenn aktiviert, wird eine physische Unterschrift durch den Benutzer bei der Annahme des Assets notwendig.',
     'left'        => 'links',
     'right'        => 'rechts',
     'top'        => 'oben',
