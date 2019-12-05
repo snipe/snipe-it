@@ -394,6 +394,12 @@ class AssetsController extends Controller
 
 
         if ($asset->save()) {
+
+             // Update any assigned assets with the new location_id from the parent asset
+
+            Asset::where('assigned_type', '\\App\\Models\\Asset')->where('assigned_to', $asset->id)
+                ->update(['location_id' => $asset->location_id]);
+
             // Redirect to the new asset page
             \Session::flash('success', trans('admin/hardware/message.update.success'));
             return response()->json(['redirect_url' => route("hardware.show", $assetId)]);
