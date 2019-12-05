@@ -151,7 +151,7 @@
     'no'  					=> 'Nein',
     'notes'  				=> 'Anmerkungen',
     'order_number'          => 'Bestellnummer',
-    'page_menu'				=> 'Showing _MENU_ items',
+    'page_menu'				=> 'Zeige _MENU_ Elemente',
     'pagination_info'		=> 'Showing _START_ to _END_ of _TOTAL_ items',
     'pending'				=> 'Pending',
     'people'				=> 'People',
