@@ -5,7 +5,7 @@
     'topSubmit' => true,
     'helpText' => trans('help.assets'),
     'helpPosition' => 'right',
-    'formAction' => ($item) ? route('hardware.update', ['hardware' => $item->id]) : route('hardware.store'),
+    'formAction' => ($item->id) ? route('hardware.update', ['hardware' => $item->id]) : route('hardware.store'),
 ])
 
 
