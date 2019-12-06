@@ -9,6 +9,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Group;
 use App\Models\Ldap;
+use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
 use Auth;
@@ -404,7 +405,8 @@ class UsersController extends Controller
         $userlog = $user->userlog->load('item');
 
         $this->authorize('view', $user);
-        return view('users/view', compact('user', 'userlog'));
+        return view('users/view', compact('user', 'userlog'))
+            ->with('settings', Setting::getSettings());
     }
 
     /**
@@ -604,6 +606,7 @@ class UsersController extends Controller
             ->with('licenses', $show_user->licenses()->get())
             ->with('accessories', $accessories)
             ->with('consumables', $consumables)
-            ->with('show_user', $show_user);
+            ->with('show_user', $show_user)
+            ->with('settings', Setting::getSettings());
     }
 }

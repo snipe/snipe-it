@@ -353,6 +353,28 @@
                     @endcan
                   </td>
                 </tr>
+                @if($settings->show_assigned_assets)
+                  @foreach ($asset->assignedAssets as $asset)
+                      <tr>
+                        <td>
+                          @if ($asset->physical=='1')
+                            <a href="{{ route('models.show', $asset->model->id) }}">{{ ' – '.$asset->model->name }}</a>
+                          @endif
+                        </td>
+                        <td>
+                          @can('view', $asset)
+                            <a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->asset_tag }}</a>
+                          @endcan
+                        </td>
+                        <td>{!! $asset->present()->nameUrl() !!}</td>
+                        <td class="hidden-print">
+                          @can('checkin', $asset)
+                            <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
+                          @endcan
+                        </td>
+                      </tr>
+                  @endforeach
+                @endif
                 @endforeach
                 @endif
               </tbody>

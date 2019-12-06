@@ -120,6 +120,8 @@ return array(
     'show_alerts_in_menu'       => 'Show alerts in top menu',
     'show_archived_in_list'     => 'Archived Assets',
     'show_archived_in_list_text'     => 'Show archived assets in the "all assets" listing',
+    'show_assigned_assets'      => 'Show assets assigned to assets',
+    'show_assigned_assets_help' => 'Display assets which were assigned to the other assets in View User -> Assets, View User -> Info -> Print All Assigned and in Account -> View Assigned Assets.',
     'show_images_in_email'     => 'Show images in emails',
     'show_images_in_email_help'   => 'Uncheck this box if your Snipe-IT installation is behind a VPN or closed network and users outside the network will not be able to load images served from this installation in their emails.',
     'site_name'                 => 'Site Name',
