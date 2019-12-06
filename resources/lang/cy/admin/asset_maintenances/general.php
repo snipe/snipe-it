@@ -1,0 +1,11 @@
+<?php
+
+    return [
+        'asset_maintenances' => 'Cynnal a chadw Ased',
+        'edit'               => 'Golygu Cynnal a Chadw Ased',
+        'delete'             => 'Dileu Cynnal a Chadw Ased',
+        'view'               => 'Gweld manylder Cynnal a Chadw Ased',
+        'repair'             => 'Trwsio',
+        'maintenance'        => 'Cynnal a Chadw',
+        'upgrade'            => 'Uwchraddio'
+    ];

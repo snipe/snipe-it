@@ -206,7 +206,7 @@
     'unknown_admin'			=> 'Administrador desconhecido',
     'username_format'		=> 'Formato username',
     'update'                => 'Atualizar',
-    'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is :size.',
+    'upload_filetypes_help'      => 'Os tipos de ficheiros permitidos são png, gif, jpg, jpeg, doc, docx, pdf, txt, zip e rar. O tamanho máximo de upload permitido é: size.',
     'uploaded'              => 'Carregado',
     'user'					=> 'Utilizador',
     'accepted'			    => 'aceite',

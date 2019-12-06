@@ -12,5 +12,5 @@ return array(
     'submit'  	                => 'Kinnita',
     'upload'                    => 'Lae üles',
 	'select_file'				=> 'Vali fail...',
-    'select_files'				=> 'Select Files...',
+    'select_files'				=> 'Vali failid...',
 );

@@ -15,7 +15,7 @@
             'error'   => 'Asset Maintenance was not edited, please try again.',
             'success' => 'Asset Maintenance edited successfully.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'Ekk klárað',
+        'warranty'                     => 'Ábyrgð',
+        'not_warranty'                 => 'Ekki ábyrgð',
     ];

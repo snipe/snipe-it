@@ -2,8 +2,8 @@
 
 return array(
     'about_categories_title' 			=> 'Om kategorier',
-    'about_categories'  				=> 'Kategorier hjälper till att organisera objekt. Exempel på kategorier kan vara &quot;Stationära datorer&quot;, &quot;Bärbara datorer&quot;, &quot;Mobiltelefoner&quot;, &quot;surfplattor&quot; och så vidare, men du kan använda kategorier på valfritt sätt som är meningsfullt för dig.',
-    'asset_categories' 					=> 'Tillgångskategorier',
+    'about_categories'  				=> 'Kategorier hjälper dig att organisera dina objekt. Exempel på kategorier kan vara &quot;Stationära datorer&quot;, &quot;Bärbara datorer&quot;, &quot;Mobiltelefoner&quot;, &quot;surfplattor&quot; och så vidare, men du kan använda kategorier på det sätt som passar bäst för dig.',
+    'asset_categories' 					=> 'Inventariekategorier',
     'category_name'  					=> 'Kategorinamn',
     'checkin_email'                     => 'Skicka e-post till användaren vid incheckning / utcheckning.',
     'checkin_email_notification'        => 'Den här användaren kommer att skickas ett mail vid incheckning / utcheckning.',

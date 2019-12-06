@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Mật khẩu của bạn đã được gửi đi!',
-    'user'			=> 'No matching active user found with that email.',
+    'user'			=> 'Không tìn thấy người dùng được kích hoạt với email này.',
 ];
 

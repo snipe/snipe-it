@@ -2,7 +2,7 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
+    'activated_help_text' => 'Salli kirjautuminen',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Käyttäjälle :name luovutetut laitteet',
     'bulk_update_warn'	=> 'Aiotte muokata: user_count käyttäjille ominaisuuksia. Huomaa, että omia käyttäjätunnuksia ei voi muuttaa tämän lomakkeen avulla, vaan sinun on tehtävä muokkauksia omalle käyttäjälleen erikseen.',

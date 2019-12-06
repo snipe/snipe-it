@@ -182,7 +182,7 @@
     'select_asset'    		=> 'Choisir un bien',
     'settings'				=> 'Préférences',
     'show_deleted'  		=> 'Afficher supprimés',
-    'show_current'  		=> 'Show Current',
+    'show_current'  		=> 'Afficher l\'actuel',
     'sign_in'				=> 'Connexion',
     'signature'             => 'Signature',
     'skin'       			=> 'Habillage',

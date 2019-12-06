@@ -7,7 +7,5 @@
         'view'               => 'Voir les détails de la maintenance d\'actif',
         'repair'             => 'Réparation',
         'maintenance'        => 'Entretien',
-        'upgrade'            => 'Mise à niveau',
-        'software_support'   => 'Support logiciel',
-        'hardware_support'   => 'Support matériel',
+        'upgrade'            => 'Mise à niveau'
     ];

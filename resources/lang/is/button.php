@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'actions' 	                => 'Actions',
-    'add'    	                => 'Add New',
-    'cancel'                    => 'Cancel',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
-    'delete'  	                => 'Delete',
-    'edit'    	                => 'Edit',
-    'restore' 	                => 'Restore',
-    'request'                   => 'Request',
-    'submit'  	                => 'Submit',
-    'upload'                    => 'Upload',
-	'select_file'				=> 'Select File...',
-    'select_files'				=> 'Select Files...',
+    'actions' 	                => 'Aðgerðir',
+    'add'    	                => 'Bæta við nýjum',
+    'cancel'                    => 'Hætta við',
+    'checkin_and_delete'  	    => 'Ská inn og eyða notenda',
+    'delete'  	                => 'Eyða',
+    'edit'    	                => 'Breyta',
+    'restore' 	                => 'Endurheimta',
+    'request'                   => 'Óska eftir',
+    'submit'  	                => 'Staðfesta',
+    'upload'                    => 'Hlaða upp',
+	'select_file'				=> 'Velja skrá...',
+    'select_files'				=> 'Velja skrár...',
 );
