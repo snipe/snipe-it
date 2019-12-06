@@ -94,7 +94,7 @@ class ManufacturersController extends Controller
      */
     public function edit($manufacturerId = null)
     {
-        $this->authorize('edit', Manufacturer::class);
+        $this->authorize('update', Manufacturer::class);
         // Check if the manufacturer exists
         if (is_null($item = Manufacturer::find($manufacturerId))) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
@@ -117,7 +117,7 @@ class ManufacturersController extends Controller
      */
     public function update(ImageUploadRequest $request, $manufacturerId = null)
     {
-        $this->authorize('edit', Manufacturer::class);
+        $this->authorize('update', Manufacturer::class);
         // Check if the manufacturer exists
         if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
             // Redirect to the manufacturer  page
@@ -226,8 +226,4 @@ class ManufacturersController extends Controller
         return redirect()->back()->with('error', trans('admin/manufacturers/message.does_not_exist'));
 
     }
-
-   
-
-
 }

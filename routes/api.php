@@ -14,9 +14,10 @@ use Illuminate\Http\Request;
 */
 
 
-Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
+Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], function () {
 
     Route::group(['prefix' => 'account'], function () {
+
         Route::get('requestable/hardware',
             [
                 'as' => 'api.assets.requestable',
@@ -49,7 +50,9 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses'=> 'AccessoriesController@selectlist'
             ]
         );
-    }); // Accessories group
+    });
+
+    // Accessories group
     Route::resource('accessories', 'AccessoriesController',
         ['names' =>
             [
@@ -62,9 +65,34 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'except' => ['create', 'edit'],
             'parameters' => ['accessory' => 'accessory_id']
         ]
-    ); // Accessories resource
+    );
 
+    // Accessories resource
 
+    Route::group(['prefix' => 'accessories'], function () {
+
+        Route::get('{accessory}/checkedout',
+            [
+                'as' => 'api.accessories.checkedout',
+                'uses' => 'AccessoriesController@checkedout'
+            ]
+        );
+
+        Route::post('{accessory}/checkout',
+            [
+                'as' => 'api.accessories.checkout',
+                'uses' => 'AccessoriesController@checkout'
+            ]
+        );
+
+        Route::post('{accessory}/checkin',
+            [
+                'as' => 'api.accessories.checkin',
+                'uses' => 'AccessoriesController@checkin'
+            ]
+        );
+
+    }); // Accessories group
 
 
     /*--- Categories API ---*/
@@ -78,9 +106,9 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
 
-    }); // Categories group
+    });
 
-
+    // Categories group
     Route::resource('categories', 'CategoriesController',
         [
             'names' =>
@@ -105,6 +133,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     ]);
 
 
+    // Companies resource
     Route::resource('companies', 'CompaniesController',
         [
             'names' =>
@@ -188,6 +217,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'uses'=> 'ConsumablesController@selectlist'
         ]
     );
+
     Route::resource('consumables', 'ConsumablesController',
         [
             'names' =>
@@ -202,6 +232,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'parameters' => ['consumable' => 'consumable_id']
         ]
     ); // Consumables resource
+
     Route::get('consumables/view/{id}/users',
         [
             'as' => 'api.consumables.showUsers',
@@ -606,8 +637,8 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         'settings/mailtest',
         [
             'as'  => 'api.settings.mailtest',
-            'uses' => 'SettingsController@ajaxTestEmail' ]
-    );
+            'uses' => 'SettingsController@ajaxTestEmail'
+    ]);
 
 
     Route::resource('settings', 'SettingsController',
@@ -933,6 +964,8 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
 
-    }); // kits
-    
+    }); // kits group
+
 });
+
+

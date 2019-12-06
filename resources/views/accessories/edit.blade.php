@@ -22,8 +22,8 @@
 @include ('partials.forms.edit.quantity')
 @include ('partials.forms.edit.minimum_quantity')
 
-<!-- Image -->
 
+<!-- Image -->
 @if ($item->image)
     <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>

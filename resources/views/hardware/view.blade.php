@@ -35,6 +35,7 @@
       @can('audit', \App\Models\Asset::class)
       <li role="presentation"><a href="{{ route('asset.audit.create', $asset->id)  }}">{{ trans('general.audit') }}</a></li>
      @endcan
+      <li role="presentation"><a href="{{ route('label/hardware', $asset->id)  }}">{{ trans_choice('button.generate_labels', 1) }}</a></li>
   </ul>
 </div>
 @endcan
@@ -496,10 +497,15 @@
             </div><!-- /col-md-8 -->
 
             <div class="col-md-4">
+
               @if ($asset->image)
+                <div class="col-md-12 text-center" style="padding-bottom: 15px;">
                 <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" class="assetimg img-responsive">
+                </div>
               @elseif (($asset->model) && ($asset->model->image!=''))
+                <div class="col-md-12 text-center" style="padding-bottom: 15px;">
                 <img src="{{ Storage::disk('public')->url(app('models_upload_url').e($asset->model->image )) }}" class="assetimg img-responsive">
+                </div>
               @endif
 
               @if  ($snipeSettings->qr_code=='1')
@@ -564,19 +570,21 @@
                   </thead>
                   <tbody>
                     @foreach ($asset->licenseseats as $seat)
-                    <tr>
-                      <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
-                      <td>
-                          @can('viewKeys', $seat->license)
-                            {!! nl2br(e($seat->license->serial)) !!}
-                          @else
-                           ------------
-                          @endcan
-                      </td>
-                      <td>
-                        <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('general.checkin') }}</a>
-                      </td>
-                    </tr>
+                      @if ($seat->license)
+                        <tr>
+                          <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
+                          <td>
+                            @can('viewKeys', $seat->license)
+                              {!! nl2br(e($seat->license->serial)) !!}
+                            @else
+                              ------------
+                            @endcan
+                          </td>
+                          <td>
+                            <a href="{{ route('licenses.checkin', $seat->id) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('general.checkin') }}</a>
+                          </td>
+                        </tr>
+                        @endif
                     @endforeach
                   </tbody>
                 </table>

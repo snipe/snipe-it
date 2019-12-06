@@ -10,8 +10,15 @@
     </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->favicon) : 'favicon.ico' }} ">
+
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="apple-touch-icon" href="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+      <link rel="apple-touch-startup-image" href="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+      <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->favicon) : 'favicon.ico' }} ">
+
+
+      <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="baseUrl" content="{{ url('/') }}/">
 
     <script nonce="{{ csrf_token() }}">
       window.Laravel = { csrfToken: '{{ csrf_token() }}' };
@@ -751,7 +758,7 @@
         <div class="pull-right hidden-xs">
           @if ($snipeSettings->version_footer!='off')
               @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
-                <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
+                &nbsp; <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
               @endif
           @endif
 

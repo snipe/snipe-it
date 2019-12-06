@@ -8,5 +8,7 @@
         'repair'             => 'Repair',
         'maintenance'        => 'Maintenance',
         'upgrade'            => 'Upgrade',
-        'calibration'        => 'Calibration'
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

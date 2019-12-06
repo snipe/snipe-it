@@ -39,6 +39,26 @@ Route::group(
             'uses' => 'Assets\AssetsController@overdueForAudit'
         ]);
 
+        Route::get('audit/due', [
+            'as' => 'assets.audit.due',
+            'uses' => 'AssetsController@dueForAudit'
+        ]);
+
+        Route::get('audit/overdue', [
+            'as' => 'assets.audit.overdue',
+            'uses' => 'AssetsController@overdueForAudit'
+        ]);
+
+        Route::get('audit/due', [
+            'as' => 'assets.audit.due',
+            'uses' => 'AssetsController@dueForAudit'
+        ]);
+
+        Route::get('audit/overdue', [
+            'as' => 'assets.audit.overdue',
+            'uses' => 'AssetsController@overdueForAudit'
+        ]);
+
         Route::get('audit/{id}', [
             'as' => 'asset.audit.create',
             'uses' => 'Assets\AssetsController@audit'
@@ -68,6 +88,11 @@ Route::group(
         Route::get('{assetId}/clone', [
             'as' => 'clone/hardware',
             'uses' => 'Assets\AssetsController@getClone'
+        ]);
+
+        Route::get('{assetId}/label', [
+            'as' => 'label/hardware',
+            'uses' => 'Assets\AssetsController@getLabel'
         ]);
 
         Route::post('{assetId}/clone', 'Assets\AssetsController@postCreate');

@@ -30,7 +30,7 @@ class AssetModelsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', AssetModel::class);
-        $allowed_columns = ['id','image','name','model_number','eol','notes','created_at','manufacturer','assets_count'];
+        $allowed_columns = ['id','image','name','model_number','eol','notes','created_at','manufacturer','requestable', 'assets_count'];
 
         $assetmodels = AssetModel::select([
             'models.id',
@@ -38,6 +38,7 @@ class AssetModelsController extends Controller
             'models.name',
             'model_number',
             'eol',
+            'requestable',
             'models.notes',
             'models.created_at',
             'category_id',
@@ -61,7 +62,10 @@ class AssetModelsController extends Controller
         }
 
         $offset = (($assetmodels) && (request('offset') > $assetmodels->count())) ? 0 : request('offset', 0);
-        $limit = $request->input('limit', 50);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'models.created_at';
 

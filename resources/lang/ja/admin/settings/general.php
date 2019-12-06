@@ -89,8 +89,8 @@ return array(
     'login_remote_user_custom_logout_url_help' => 'ユーザがログアウトした場合、このURLにリダイレクトします。
 これは認証プロバイダのセッションを正しく終了させる場合に便利です。',
     'logo'                    	=> 'ロゴ',
-    'logo_print_assets'         => 'Use in Print',
-    'logo_print_assets_help'    => 'Use branding on printable asset lists ',
+    'logo_print_assets'         => '印刷に使用',
+    'logo_print_assets_help'    => '印刷可能な資産リストにブランドを使用する。 ',
     'full_multiple_companies_support_help_text' => 'ユーザー (管理者を含む) に 資産の割り当て を制限します。',
     'full_multiple_companies_support_text' => '複数企業をサポートします。',
     'show_in_model_list'   => 'モデルのドロップダウンに表示',

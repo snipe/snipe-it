@@ -69,13 +69,10 @@
   <div class="col-md-3">
 
     @if ($consumable->image!='')
-      <div class="col-md-12" style="padding-bottom: 5px;">
-        <img src="{{ url('/') }}/uploads/consumables/{{ $consumable->image  }}">
+      <div class="col-md-12 text-center" style="padding-bottom: 15px;">
+        <a href="{{ app('consumables_upload_url') }}/{{ $consumable->image }}" data-toggle="lightbox"><img src="{{ app('consumables_upload_url') }}/{{ $consumable->image }}" class="img-responsive img-thumbnail" alt="{{ $consumable->name }}"></a>
       </div>
     @endif
-
-    <h4>{{ trans('admin/consumables/general.about_consumables_title') }}</h4>
-    <p>{{ trans('admin/consumables/general.about_consumables_text') }} </p>
 
     @if ($consumable->purchase_date)
       <div class="col-md-12" style="padding-bottom: 5px;">
@@ -119,6 +116,10 @@
         {{ $consumable->order_number }}
       </div>
     @endif
+      <div class="col-md-12" style="padding-bottom: 5px;">
+        <h4>{{ trans('admin/consumables/general.about_consumables_title') }}</h4>
+        <p>{{ trans('admin/consumables/general.about_consumables_text') }} </p>
+      </div>
   </div> <!-- /.col-md-3-->
 </div> <!-- /.row-->
 

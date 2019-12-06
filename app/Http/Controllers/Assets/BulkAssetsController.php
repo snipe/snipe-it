@@ -40,6 +40,7 @@ class BulkAssetsController extends Controller
                     return view('hardware/labels')
                         ->with('assets', Asset::find($asset_ids))
                         ->with('settings', Setting::getSettings())
+                        ->with('bulkedit', true)
                         ->with('count', 0);
                 case 'delete':
                     $assets = Asset::with('assignedTo', 'location')->find($asset_ids);

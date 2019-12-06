@@ -94,6 +94,8 @@ return array(
     'login_common_disabled_help' => 'This option disables other authentication mechanisms. Just enable this option if you are sure that your REMOTE_USER login is already working',
     'login_remote_user_custom_logout_url_text' => 'Custom logout URL',
     'login_remote_user_custom_logout_url_help' => 'If a url is provided here, users will get redirected to this URL after the user logs out of Snipe-IT. This is useful to close the user sessions of your Authentication provider correctly.',
+    'login_remote_user_header_name_text' => 'Custom user name header',
+    'login_remote_user_header_name_help' => 'Use the specified header instead of REMOTE_USER',
     'logo'                    	=> 'Logo',
     'logo_print_assets'         => 'Use in Print',
     'logo_print_assets_help'    => 'Use branding on printable asset lists ',

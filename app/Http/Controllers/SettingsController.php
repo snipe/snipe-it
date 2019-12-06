@@ -243,8 +243,8 @@ class SettingsController extends Controller
     public function getSetupMigrate()
     {
         Artisan::call('migrate', ['--force' => true]);
-
         if ((! file_exists(storage_path() . '/oauth-private.key')) || (! file_exists(storage_path() . '/oauth-public.key'))) {
+
             Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations', '--force' => true]);
             Artisan::call('passport:install');
         }
@@ -320,7 +320,8 @@ class SettingsController extends Controller
 
         $setting->modellist_displays = '';
 
-        if (($request->filled('show_in_model_list')) && (count($request->input('show_in_model_list')) > 0)) {
+        if (($request->filled('show_in_model_list')) && (count($request->input('show_in_model_list')) > 0))
+        {
             $setting->modellist_displays = implode(',', $request->input('show_in_model_list'));
         }
 
@@ -357,6 +358,7 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
+
 
     /**
      * Return a form to allow a super admin to update settings.
@@ -404,6 +406,7 @@ class SettingsController extends Controller
             $setting->site_name  = $request->input('site_name');
             $setting->custom_css = $request->input('custom_css');
         }
+
 
         // If the user wants to clear the logo, reset the brand type
         if ('1' == $request->input('clear_logo')) {
@@ -530,6 +533,7 @@ class SettingsController extends Controller
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
 
+
     /**
      * Return a form to allow a super admin to update settings.
      *
@@ -560,8 +564,8 @@ class SettingsController extends Controller
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
-
         if (! config('app.lock_passwords')) {
+
             if ('' == $request->input('two_factor_enabled')) {
                 $setting->two_factor_enabled = null;
             } else {
@@ -572,14 +576,16 @@ class SettingsController extends Controller
             $setting->login_remote_user_enabled           = (int) $request->input('login_remote_user_enabled');
             $setting->login_common_disabled               = (int) $request->input('login_common_disabled');
             $setting->login_remote_user_custom_logout_url = $request->input('login_remote_user_custom_logout_url');
+            $setting->login_remote_user_header_name = $request->input('login_remote_user_header_name');
         }
 
         $setting->pwd_secure_uncommon   = (int) $request->input('pwd_secure_uncommon');
         $setting->pwd_secure_min        = (int) $request->input('pwd_secure_min');
         $setting->pwd_secure_complexity = '';
 
+
         if ($request->filled('pwd_secure_complexity')) {
-            $setting->pwd_secure_complexity = implode('|', $request->input('pwd_secure_complexity'));
+            $setting->pwd_secure_complexity =  implode('|', $request->input('pwd_secure_complexity'));
         }
 
         if ($setting->save()) {
@@ -885,6 +891,8 @@ class SettingsController extends Controller
         $setting->labels_pageheight           = $request->input('labels_pageheight');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
 
+
+
         if ($request->filled('labels_display_name')) {
             $setting->labels_display_name = 1;
         } else {
@@ -901,13 +909,13 @@ class SettingsController extends Controller
             $setting->labels_display_tag = 1;
         } else {
             $setting->labels_display_tag = 0;
-        }
+	}
 
-        if ($request->filled('labels_display_tag')) {
-            $setting->labels_display_tag = 1;
-        } else {
-            $setting->labels_display_tag = 0;
-        }
+	    if ($request->filled('labels_display_tag')) {
+             $setting->labels_display_tag = 1;
+         } else {
+             $setting->labels_display_tag = 0;
+         }
 
         if ($request->filled('labels_display_model')) {
             $setting->labels_display_model = 1;

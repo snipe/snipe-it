@@ -34,6 +34,7 @@ class UsersTransformer
                 ]  : null,
                 'jobtitle' => ($user->jobtitle) ? e($user->jobtitle) : null,
                 'phone' => ($user->phone) ? e($user->phone) : null,
+                'website' => ($user->website) ? e($user->website) : null,
                 'address' => ($user->address) ? e($user->address) : null,
                 'city' => ($user->city) ? e($user->city) : null,
                 'state' => ($user->state) ? e($user->state) : null,
