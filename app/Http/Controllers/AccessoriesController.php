@@ -85,26 +85,7 @@ class AccessoriesController extends Controller
         $accessory->qty                     = request('qty');
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
-
-        if ($request->hasFile('image')) {
-
-            if (!config('app.lock_passwords')) {
-                $image = $request->file('image');
-                $ext = $image->getClientOriginalExtension();
-                $file_name = "accessory-".str_random(18).'.'.$ext;
-                $path = public_path('/uploads/accessories');
-                if ($image->getClientOriginalExtension()!='svg') {
-                    Image::make($image->getRealPath())->resize(null, 800, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    })->save($path.'/'.$file_name);
-                } else {
-                    $image->move($path, $file_name);
-                }
-                $accessory->image = $file_name;
-            }
-        }
-
+        $accessory = $request->handleImages($accessory,600, public_path().'/uploads/accessories');
 
 
         // Was the accessory created?
@@ -165,28 +146,7 @@ class AccessoriesController extends Controller
         $accessory->qty                     = request('qty');
         $accessory->supplier_id             = request('supplier_id');
 
-        if ($request->hasFile('image')) {
-
-            if (!config('app.lock_passwords')) {
-                $image = $request->file('image');
-                $ext = $image->getClientOriginalExtension();
-                $file_name = "accessory-".str_random(18).'.'.$ext;
-                $path = public_path('/uploads/accessories');
-                if ($image->getClientOriginalExtension()!='svg') {
-                    Image::make($image->getRealPath())->resize(null, 800, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    })->save($path.'/'.$file_name);
-                } else {
-                    $image->move($path, $file_name);
-                }
-                if (($accessory->image) && (file_exists($path.'/'.$accessory->image))) {
-                    unlink($path.'/'.$accessory->image);
-                }
-
-                $accessory->image = $file_name;
-            }
-        }
+        $accessory = $request->handleImages($accessory,600, public_path().'/uploads/accessories');
 
 
         // Was the accessory updated?

@@ -53,16 +53,7 @@ class DepartmentsController extends Controller
         $department->user_id = Auth::user()->id;
         $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/departments/'.$file_name);
-            Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $department->image = $file_name;
-        }
+        $department = $request->handleImages($department,600, public_path().'/uploads/departments');
 
         if ($department->save()) {
             return redirect()->route("departments.index")->with('success', trans('admin/departments/message.create.success'));
@@ -164,36 +155,7 @@ class DepartmentsController extends Controller
         $department->fill($request->all());
         $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
 
-        $old_image = $department->image;
-
-        // Set the model's image property to null if the image is being deleted
-        if ($request->input('image_delete') == 1) {
-            $department->image = null;
-        }
-
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = $department->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
-
-            if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save(app('departments_upload_path').$file_name);
-            } else {
-                $image->move(app('departments_upload_path'), $file_name);
-            }
-            $department->image = $file_name;
-
-        }
-
-        if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
-            try  {
-                unlink(app('departments_upload_path').$old_image);
-            } catch (\Exception $e) {
-                \Log::info($e);
-            }
-        }
+        $department = $request->handleImages($department,600, public_path().'/uploads/departments');
 
         if ($department->save()) {
             return redirect()->route("departments.index")->with('success', trans('admin/departments/message.update.success'));

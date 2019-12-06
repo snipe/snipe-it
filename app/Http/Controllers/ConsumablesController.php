@@ -87,16 +87,8 @@ class ConsumablesController extends Controller
         $consumable->user_id                = Auth::id();
 
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/consumables/'.$file_name);
-            Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $consumable->image = $file_name;
-        }
+        $consumable = $request->handleImages($consumable,600, public_path().'/uploads/components');
+
 
         if ($consumable->save()) {
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.create.success'));
