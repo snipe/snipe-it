@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Asset Maintenances',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
-        'repair'             => 'Repair',
-        'maintenance'        => 'Maintenance',
-        'upgrade'            => 'Upgrade',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'asset_maintenances' => '資産管理',
+        'edit'               => '資産管理を編集',
+        'delete'             => '資産管理を削除',
+        'view'               => '資産運用の詳細を閲覧',
+        'repair'             => '修復',
+        'maintenance'        => 'メンテナンス',
+        'upgrade'            => 'アップグレード',
+        'calibration'        => 'キャリブレーション',
+        'software_support'   => 'ソフトウェア サポート',
+        'hardware_support'   => 'ハードウェア サポート',
     ];
