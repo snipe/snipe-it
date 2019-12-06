@@ -2,7 +2,7 @@
     'createText' => trans('admin/licenses/form.create'),
     'updateText' => trans('admin/licenses/form.update'),
     'topSubmit' => true,
-    'formAction' => ($item) ? route('licenses.update', ['license' => $item->id]) : route('license.store'),
+    'formAction' => ($item->id) ? route('licenses.update', ['license' => $item->id]) : route('licenses.store'),
 ])
 
 {{-- Page content --}}
