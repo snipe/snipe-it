@@ -293,7 +293,7 @@
 
               @can('view', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print target=_blank rel=noopener">{{ trans('admin/users/general.print_assigned') }}</a>
+                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
               @endcan
 
