@@ -83,17 +83,7 @@ class CategoriesController extends Controller
         $category->checkin_email        = $request->input('checkin_email', '0');
         $category->user_id              = Auth::id();
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/categories/'.$file_name);
-            Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $category->image = $file_name;
-        }
-
+        $category = $request->handleImages($category,600, public_path().'/uploads/categories');
 
         if ($category->save()) {
             return redirect()->route('categories.index')->with('success', trans('admin/categories/message.create.success'));
@@ -159,30 +149,7 @@ class CategoriesController extends Controller
             $category->image = null;
         }
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = $category->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
-
-            if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save(app('categories_upload_path').$file_name);
-            } else {
-                $image->move(app('categories_upload_path'), $file_name);
-            }
-            $category->image = $file_name;
-
-        }
-
-        if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
-            try  {
-                unlink(app('categories_upload_path').$old_image);
-            } catch (\Exception $e) {
-                \Log::info($e);
-            }
-        }
-
+        $category = $request->handleImages($category,600, public_path().'/uploads/categories');
 
         if ($category->save()) {
             // Redirect to the new category page

@@ -90,23 +90,7 @@ class AssetModelsController extends Controller
             $model->fieldset_id = e($request->input('custom_fieldset'));
         }
 
-        if (Input::file('image')) {
-
-            $image = Input::file('image');
-            $file_name = str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
-            $path = app('models_upload_path');
-
-            if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save($path.'/'.$file_name);
-            } else {
-                $image->move($path, $file_name);
-            }
-            $model->image = $file_name;
-
-        }
+        $model = $request->handleImages($model,600, public_path().'/uploads/models');
 
             // Was it created?
         if ($model->save()) {
@@ -182,37 +166,7 @@ class AssetModelsController extends Controller
             }
         }
 
-        $old_image = $model->image;
-
-        // Set the model's image property to null if the image is being deleted
-        if ($request->input('image_delete') == 1) {
-            $model->image = null;
-        }
-
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = $model->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
-
-            if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save(app('models_upload_path').$file_name);
-            } else {
-                $image->move(app('models_upload_path'), $file_name);
-            }
-            $model->image = $file_name;
-
-        }
-
-        if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
-            try  {
-                unlink(app('models_upload_path').$old_image);
-            } catch (\Exception $e) {
-                \Log::info($e);
-            }
-        }
-
+        $model = $request->handleImages($model,600, public_path().'/uploads/models');
 
         if ($model->save()) {
             return redirect()->route("models.index")->with('success', trans('admin/models/message.update.success'));

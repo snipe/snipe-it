@@ -91,16 +91,7 @@ class ComponentsController extends Controller
         $component->user_id                = Auth::id();
 
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/components/'.$file_name);
-            Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $component->image = $file_name;
-        }
+        $component = $request->handleImages($component,600, public_path().'/uploads/components');
 
         if ($component->save()) {
             return redirect()->route('components.index')->with('success', trans('admin/components/message.create.success'));
@@ -164,18 +155,7 @@ class ComponentsController extends Controller
         $component->purchase_cost          = request('purchase_cost');
         $component->qty                    = Input::get('qty');
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/components/'.$file_name);
-            Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $component->image = $file_name;
-        } elseif ($request->input('image_delete')=='1') {
-            $component->image = null;
-        }
+        $component = $request->handleImages($component,600, public_path().'/uploads/components');
 
         if ($component->save()) {
             return redirect()->route('components.index')->with('success', trans('admin/components/message.update.success'));

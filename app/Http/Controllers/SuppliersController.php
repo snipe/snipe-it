@@ -78,17 +78,8 @@ class SuppliersController extends Controller
         $supplier->notes                = request('notes');
         $supplier->url                  = $supplier->addhttp(request('url'));
         $supplier->user_id              = Auth::id();
+        $supplier = $request->handleImages($supplier,600, public_path().'/uploads/suppliers');
 
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/suppliers/'.$file_name);
-            Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $supplier->image = $file_name;
-        }
 
         if ($supplier->save()) {
             return redirect()->route('suppliers.index')->with('success', trans('admin/suppliers/message.create.success'));
@@ -145,39 +136,7 @@ class SuppliersController extends Controller
         $supplier->email                = request('email');
         $supplier->url                  = $supplier->addhttp(request('url'));
         $supplier->notes                = request('notes');
-
-
-        $old_image = $supplier->image;
-
-        // Set the model's image property to null if the image is being deleted
-        if ($request->input('image_delete') == 1) {
-            $supplier->image = null;
-        }
-
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = $supplier->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
-
-            if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save(app('suppliers_upload_path').$file_name);
-            } else {
-                $image->move(app('suppliers_upload_path'), $file_name);
-            }
-            $supplier->image = $file_name;
-
-        }
-
-        if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
-            try  {
-                unlink(app('suppliers_upload_path').$old_image);
-            } catch (\Exception $e) {
-                \Log::info($e);
-            }
-        }
-
+        $supplier = $request->handleImages($supplier,600, public_path().'/uploads/suppliers');
 
         if ($supplier->save()) {
             return redirect()->route('suppliers.index')->with('success', trans('admin/suppliers/message.update.success'));
