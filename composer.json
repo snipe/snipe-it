@@ -33,6 +33,7 @@
     "intervention/image": "^2.4",
     "javiereguiluz/easyslugger": "^1.0",
     "laravel/framework": "^6.0",
+    "laravel/helpers": "^1.1",
     "laravel/passport": "^8.0",
     "laravel/slack-notification-channel": "^2.0",
     "laravel/tinker": "^1.0",
