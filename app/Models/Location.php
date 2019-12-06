@@ -150,10 +150,12 @@ class Location extends SnipeModel
 
     public static function indenter($locations_with_children, $parent_id = null, $prefix = '') {
         $results = Array();
+
         
         if (!array_key_exists($parent_id, $locations_with_children)) {
             return [];
         }
+
 
         foreach ($locations_with_children[$parent_id] as $location) {
             $location->use_text = $prefix.' '.$location->name;
