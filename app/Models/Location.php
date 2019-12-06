@@ -148,12 +148,14 @@ class Location extends SnipeModel
      * @return Illuminate\Database\Query\Builder          Modified query builder
      */
 
-    public static function indenter($locations_with_children, $parent_id = null, $prefix = '') {
+    public static function indenter($locations_with_children, $parent_id = '', $prefix = '') {
         $results = Array();
+
         
-        if (!array_key_exists($parent_id, $locations_with_children)) {
+        if (!array_key_exists($parent_id, $locations_with_children) && $parent_id) {
             return [];
         }
+
 
         foreach ($locations_with_children[$parent_id] as $location) {
             $location->use_text = $prefix.' '.$location->name;
