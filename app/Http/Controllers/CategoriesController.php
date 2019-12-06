@@ -142,8 +142,6 @@ class CategoriesController extends Controller
         $category->require_acceptance   = $request->input('require_acceptance', '0');
         $category->checkin_email        = $request->input('checkin_email', '0');
 
-        $old_image = $category->image;
-
         // Set the model's image property to null if the image is being deleted
         if ($request->input('image_delete') == 1) {
             $category->image = null;

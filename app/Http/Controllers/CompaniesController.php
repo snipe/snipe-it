@@ -112,8 +112,6 @@ final class CompaniesController extends Controller
 
         $company->name = $request->input('name');
 
-        $old_image = $company->image;
-
         // Set the model's image property to null if the image is being deleted
         if ($request->input('image_delete') == 1) {
             $company->image = null;

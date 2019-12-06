@@ -131,9 +131,7 @@ class ManufacturersController extends Controller
         $manufacturer->support_url     = $request->input('support_url');
         $manufacturer->support_phone    = $request->input('support_phone');
         $manufacturer->support_email    = $request->input('support_email');
-
-        $old_image = $manufacturer->image;
-
+        
         // Set the model's image property to null if the image is being deleted
         if ($request->input('image_delete') == 1) {
             $manufacturer->image = null;

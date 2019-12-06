@@ -155,8 +155,6 @@ class DepartmentsController extends Controller
         $department->fill($request->all());
         $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
 
-        $old_image = $department->image;
-
         $department = $request->handleImages($department,600, public_path().'/uploads/departments');
 
         if ($department->save()) {
