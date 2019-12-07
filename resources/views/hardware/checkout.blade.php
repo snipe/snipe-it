@@ -26,15 +26,22 @@
         </div>
         <div class="box-body">
             {{csrf_field()}}
-            @if ($asset->model->name)
-            <!-- Model name -->
-            <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
+            <!-- AssetModel name -->
+            <div class="form-group">
                 {{ Form::label('name', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
-              <div class="col-md-8">
-                <p class="form-control-static">{{ $asset->model->name }}</p>
-              </div>
+                <div class="col-md-8">
+                    <p class="form-control-static">
+                        @if (($asset->model) && ($asset->model->name))
+                            {{ $asset->model->name }}
+
+                        @else
+                            <span class="text-danger text-bold">
+                  <i class="fa fa-exclamation-triangle"></i>This asset's model is invalid!
+                  The asset <a href="{{ route('hardware.edit', $asset->id) }}">should be edited</a> to correct this before attempting to check it in or out.</span>
+                        @endif
+                    </p>
+                </div>
             </div>
-            @endif
 
             <!-- Asset Name -->
             <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
