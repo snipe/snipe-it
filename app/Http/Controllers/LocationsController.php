@@ -199,16 +199,16 @@ class LocationsController extends Controller
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.not_found'));
         }
 
-        if ($location->users()->count() > 0) {
+        if (($location->users()) && ($location->users()->count() > 0)) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_users'));
 
-        } elseif ($location->children->count() > 0) {
+        } elseif (($location->children) && ($location->children->count() > 0)) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_child_loc'));
 
-        } elseif ($location->assets()->count() > 0) {
+        } elseif (($location->assets()) && ($location->assets()->count() > 0)) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
 
-        } elseif ($location->assignedassets()->count() > 0) {
+        } elseif (($location->assignedassets()) && ($location->assignedassets()->count() > 0)) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
 
         }
