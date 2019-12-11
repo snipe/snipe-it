@@ -57,12 +57,12 @@ class GroupsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(Request $request)
     {
         // create a new group instance
         $group = new Group();
-        $group->name = e(Request::get('name'));
-        $group->permissions = json_encode(Request::get('permission'));
+        $group->name = $request->input('name');
+        $group->permissions = json_encode($request->input('permission'));
 
         if ($group->save()) {
             return redirect()->route("groups.index")->with('success', trans('admin/groups/message.success.create'));
@@ -102,13 +102,13 @@ class GroupsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id = null)
+    public function update(Request $request, $id = null)
     {
         if (!$group = Group::find($id)) {
             return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
         }
-        $group->name = e(Request::get('name'));
-        $group->permissions = json_encode(Request::get('permission'));
+        $group->name = $request->input('name');
+        $group->permissions = json_encode($request->input('permission'));
 
         if (!config('app.lock_passwords')) {
             if ($group->save()) {

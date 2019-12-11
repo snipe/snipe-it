@@ -461,12 +461,12 @@ class UsersController extends Controller
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function getClone($id = null)
+    public function getClone(Request $request, $id = null)
     {
         $this->authorize('create', User::class);
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
-        $permissions = Request::get('permissions', array());
+        $permissions = $request->input('permissions', array());
         app('request')->request->set('permissions', $permissions);
 
 

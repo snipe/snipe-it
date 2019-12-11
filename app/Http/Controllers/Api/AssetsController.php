@@ -738,12 +738,12 @@ class AssetsController extends Controller
             $asset->location_id =  $request->input('location_id');
         }
 
-        if (Request::has('status_id')) {
-            $asset->status_id =  Request::get('status_id');
+        if ($request->has('status_id')) {
+            $asset->status_id =  $request->input('status_id');
         }
 
         if ($asset->save()) {
-            $asset->logCheckin($target, e(request('note')));
+            $asset->logCheckin($target, e($request->input('note')));
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
 

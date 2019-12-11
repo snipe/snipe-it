@@ -184,7 +184,7 @@ class SettingsController extends Controller
             Auth::login($user, true);
             $settings->save();
 
-            if ('1' == Request::get('email_creds')) {
+            if ('1' == $request->input('email_creds')) {
                 $data               = [];
                 $data['email']      = $user->email;
                 $data['username']   = $user->username;
@@ -345,7 +345,7 @@ class SettingsController extends Controller
 
         $setting->depreciation_method = $request->input('depreciation_method');
 
-        if ('' != Request::get('per_page')) {
+        if ($request->missing('per_page')) {
             $setting->per_page = $request->input('per_page');
         } else {
             $setting->per_page = 200;
@@ -1134,10 +1134,10 @@ class SettingsController extends Controller
      *
      * @return View
      */
-    public function postPurge()
+    public function postPurge(Request $request)
     {
         if (! config('app.lock_passwords')) {
-            if ('DELETE' == Request::get('confirm_purge')) {
+            if ('DELETE' == $request->input('confirm_purge')) {
                 // Run a backup immediately before processing
                 Artisan::call('backup:run');
                 Artisan::call('snipeit:purge', ['--force' => 'true', '--no-interaction' => true]);

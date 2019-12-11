@@ -125,16 +125,16 @@ class ComponentsController extends Controller
         $this->authorize('update', $component);
 
         // Update the component data
-        $component->name                   = Request::get('name');
-        $component->category_id            = Request::get('category_id');
-        $component->location_id            = Request::get('location_id');
-        $component->company_id             = Company::getIdForCurrentUser(Request::get('company_id'));
-        $component->order_number           = Request::get('order_number');
-        $component->min_amt                = Request::get('min_amt');
-        $component->serial                 = Request::get('serial');
-        $component->purchase_date          = Request::get('purchase_date');
+        $component->name                   = $request->input('name');
+        $component->category_id            = $request->input('category_id');
+        $component->location_id            = $request->input('location_id');
+        $component->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
+        $component->order_number           = $request->input('order_number');
+        $component->min_amt                = $request->input('min_amt');
+        $component->serial                 = $request->input('serial');
+        $component->purchase_date          = $request->input('purchase_date');
         $component->purchase_cost          = request('purchase_cost');
-        $component->qty                    = Request::get('qty');
+        $component->qty                    = $request->input('qty');
 
         $component = $request->handleImages($component);
 

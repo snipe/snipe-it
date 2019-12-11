@@ -306,7 +306,7 @@ class AssetModelsController extends Controller
     public function postBulkEdit(Request $request)
     {
 
-        $models_raw_array = Request::get('ids');
+        $models_raw_array = $request->input('ids');
 
         // Make sure some IDs have been selected
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {
@@ -355,7 +355,7 @@ class AssetModelsController extends Controller
     public function postBulkEditSave(Request $request)
     {
 
-        $models_raw_array = Request::get('ids');
+        $models_raw_array = $request->input('ids');
         $update_array = array();
 
 
@@ -396,7 +396,7 @@ class AssetModelsController extends Controller
      */
     public function postBulkDelete(Request $request)
     {
-        $models_raw_array = Request::get('ids');
+        $models_raw_array = $request->input('ids');
 
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {
 
