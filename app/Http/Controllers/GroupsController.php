@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Group;
-use Request;
+use Illuminate\Http\Request;
 
 
 /**
@@ -37,13 +37,13 @@ class GroupsController extends Controller
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
         $group = new Group;
         // Get all the available permissions
         $permissions = config('permissions');
         $groupPermissions = Helper::selectedPermissionsArray($permissions, $permissions);
-        $selectedPermissions = Request::old('permissions', $groupPermissions);
+        $selectedPermissions = $request->old('permissions', $groupPermissions);
 
         // Show the page
         return view('groups/edit', compact('permissions', 'selectedPermissions', 'groupPermissions'))->with('group', $group);
