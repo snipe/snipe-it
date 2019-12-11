@@ -264,7 +264,7 @@
                                               trans('admin/settings/general.show_assigned_assets')) }}
                            </div>
                            <div class="col-md-9">
-                               {{ Form::checkbox('show_assigned_assets', '1', Input::old('show_assigned_assets', $setting->show_assigned_assets),array('class' => 'minimal')) }}
+                               {{ Form::checkbox('show_assigned_assets', '1', Request::old('show_assigned_assets', $setting->show_assigned_assets),array('class' => 'minimal')) }}
                                {{ trans('general.yes') }}
                                <p class="help-block">{{ trans('admin/settings/general.show_assigned_assets_help') }}</p>
                                {!! $errors->first('show_assigned_assets', '<span class="alert-msg">:message</span>') !!}
