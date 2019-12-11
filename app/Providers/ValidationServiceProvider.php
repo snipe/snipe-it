@@ -90,6 +90,24 @@ class ValidationServiceProvider extends ServiceProvider
 
         });
 
+
+        Validator::extend('letters', function ($attribute, $value, $parameters) {
+            return preg_match('/\pL/', $value);
+        });
+
+        Validator::extend('numbers', function ($attribute, $value, $parameters) {
+            return preg_match('/\pN/', $value);
+        });
+
+        Validator::extend('case_diff', function ($attribute, $value, $parameters) {
+            return preg_match('/(\p{Ll}+.*\p{Lu})|(\p{Lu}+.*\p{Ll})/u', $value);
+        });
+
+        Validator::extend('symbols', function ($attribute, $value, $parameters) {
+            return preg_match('/\p{Z}|\p{S}|\p{P}/', $value);
+        });
+
+
     }
 
     /**
