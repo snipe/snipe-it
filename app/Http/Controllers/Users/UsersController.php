@@ -324,25 +324,25 @@ class UsersController extends Controller
                     ->with('error', 'We would feel really bad if you deleted yourself, please reconsider.');
             }
 
-            if (($assetsCount = $user->assets()->count()) > 0) {
+            if (($user->assets()) && (($assetsCount = $user->assets()->count()) > 0)) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
                     ->with('error', 'This user still has ' . $assetsCount . ' assets associated with them.');
             }
 
-            if (($licensesCount = $user->licenses()->count()) > 0) {
+            if (($user->licenses()) && (($licensesCount = $user->licenses()->count())) > 0) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
                     ->with('error', 'This user still has ' . $licensesCount . ' licenses associated with them.');
             }
 
-            if (($accessoriesCount = $user->accessories()->count()) > 0) {
+            if (($user->accessories()) && (($accessoriesCount = $user->accessories()->count()) > 0)) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
                     ->with('error', 'This user still has ' . $accessoriesCount . ' accessories associated with them.');
             }
 
-            if (($managedLocationsCount = $user->managedLocations()->count()) > 0) {
+            if (($user->managedLocations()) && (($managedLocationsCount = $user->managedLocations()->count())) > 0) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
                     ->with('error', 'This user still has ' . $managedLocationsCount . ' locations that they manage.');
