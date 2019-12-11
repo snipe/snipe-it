@@ -470,7 +470,7 @@ class ReportsController extends Controller
 
 
             foreach ($customfields as $customfield) {
-                if (e(Input::get($customfield->db_column_name())) == '1') {
+                if (e(Request::get($customfield->db_column_name())) == '1') {
                     $header[] = $customfield->name;
                 }
             }

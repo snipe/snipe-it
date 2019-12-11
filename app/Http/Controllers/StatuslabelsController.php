@@ -78,15 +78,15 @@ class StatuslabelsController extends Controller
         $statusType = Statuslabel::getStatuslabelTypesForDB($request->input('statuslabel_types'));
 
         // Save the Statuslabel data
-        $statusLabel->name              = Input::get('name');
+        $statusLabel->name              = Request::get('name');
         $statusLabel->user_id           = Auth::id();
-        $statusLabel->notes             =  Input::get('notes');
+        $statusLabel->notes             =  Request::get('notes');
         $statusLabel->deployable        =  $statusType['deployable'];
         $statusLabel->pending           =  $statusType['pending'];
         $statusLabel->archived          =  $statusType['archived'];
-        $statusLabel->color             =  Input::get('color');
-        $statusLabel->show_in_nav       =  Input::get('show_in_nav', 0);
-        $statusLabel->default_label       =  Input::get('default_label', 0);
+        $statusLabel->color             =  Request::get('color');
+        $statusLabel->show_in_nav       =  Request::get('show_in_nav', 0);
+        $statusLabel->default_label       =  Request::get('default_label', 0);
 
 
         if ($statusLabel->save()) {
@@ -142,15 +142,15 @@ class StatuslabelsController extends Controller
 
 
         // Update the Statuslabel data
-        $statustype                 = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
-        $statuslabel->name              = Input::get('name');
-        $statuslabel->notes          =  Input::get('notes');
+        $statustype                 = Statuslabel::getStatuslabelTypesForDB(Request::get('statuslabel_types'));
+        $statuslabel->name              = Request::get('name');
+        $statuslabel->notes          =  Request::get('notes');
         $statuslabel->deployable          =  $statustype['deployable'];
         $statuslabel->pending          =  $statustype['pending'];
         $statuslabel->archived          =  $statustype['archived'];
-        $statuslabel->color          =  Input::get('color');
-        $statuslabel->show_in_nav          =  Input::get('show_in_nav', 0);
-        $statuslabel->default_label          =  Input::get('default_label', 0);
+        $statuslabel->color          =  Request::get('color');
+        $statuslabel->show_in_nav          =  Request::get('show_in_nav', 0);
+        $statuslabel->default_label          =  Request::get('default_label', 0);
 
 
         // Was the asset created?

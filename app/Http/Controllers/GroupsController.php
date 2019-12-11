@@ -60,8 +60,8 @@ class GroupsController extends Controller
     {
         // create a new group instance
         $group = new Group();
-        $group->name = e(Input::get('name'));
-        $group->permissions = json_encode(Input::get('permission'));
+        $group->name = e(Request::get('name'));
+        $group->permissions = json_encode(Request::get('permission'));
 
         if ($group->save()) {
             return redirect()->route("groups.index")->with('success', trans('admin/groups/message.success.create'));
@@ -106,8 +106,8 @@ class GroupsController extends Controller
         if (!$group = Group::find($id)) {
             return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
         }
-        $group->name = e(Input::get('name'));
-        $group->permissions = json_encode(Input::get('permission'));
+        $group->name = e(Request::get('name'));
+        $group->permissions = json_encode(Request::get('permission'));
 
         if (!config('app.lock_passwords')) {
             if ($group->save()) {

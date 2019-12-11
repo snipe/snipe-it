@@ -62,8 +62,8 @@ class AssetMaintenancesController extends Controller
                                 'asset_name',
                                 'user_id'
                             ];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
+        $order = Request::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Request::get('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
 
         switch ($sort) {
             case 'user_id':
