@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 use Redirect;
 use Request;
+use Storage;
 
 /**
  * This class controls all actions related to asset models for
