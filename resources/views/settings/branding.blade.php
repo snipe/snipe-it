@@ -47,10 +47,10 @@
                             </div>
                             <div class="col-md-7 required">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Snipe-IT Asset Management')) }}
+                                    {{ Form::text('site_name', Request::old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Snipe-IT Asset Management')) }}
                                 @else
                                     {{ Form::text('site_name',
-                                        Input::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management', 'data-validation' => 'required')) }}
+                                        Request::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management', 'data-validation' => 'required')) }}
                                 @endif
                                 {!! $errors->first('site_name', '<span class="alert-msg">:message</span>') !!}
                             </div>
@@ -62,7 +62,7 @@
                                 {{ Form::label('brand', trans('admin/settings/general.brand')) }}
                             </div>
                             <div class="col-md-9">
-                                {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), Input::old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), Request::old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
                                 {!! $errors->first('brand', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                                 {{ Form::label('logo_print_assets', trans('admin/settings/general.logo_print_assets')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('logo_print_assets', '1', Input::old('logo_print_assets', $setting->logo_print_assets),array('class' => 'minimal')) }}
+                                {{ Form::checkbox('logo_print_assets', '1', Request::old('logo_print_assets', $setting->logo_print_assets),array('class' => 'minimal')) }}
                                 {{ trans('admin/settings/general.logo_print_assets_help') }}
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                                 {{ Form::label('show_url_in_emails', trans('admin/settings/general.show_url_in_emails')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('show_url_in_emails', '1', Input::old('show_url_in_emails', $setting->show_url_in_emails),array('class' => 'minimal')) }}
+                                {{ Form::checkbox('show_url_in_emails', '1', Request::old('show_url_in_emails', $setting->show_url_in_emails),array('class' => 'minimal')) }}
                                 {{ trans('general.yes') }}
                                 <p class="help-block">{{ trans('admin/settings/general.show_url_in_emails_help_text') }}</p>
                             </div>
@@ -136,7 +136,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="input-group header-color">
-                                    {{ Form::text('header_color', Input::old('header_color', $setting->header_color), array('class' => 'form-control', 'style' => 'width: 100px;','placeholder' => '#FF0000')) }}
+                                    {{ Form::text('header_color', Request::old('header_color', $setting->header_color), array('class' => 'form-control', 'style' => 'width: 100px;','placeholder' => '#FF0000')) }}
                                     <div class="input-group-addon">
                                         <i></i>
                                     </div>
@@ -151,7 +151,7 @@
                                 {{ Form::label('skin', trans('general.skin')) }}
                             </div>
                             <div class="col-md-9">
-                                {!! Form::skin('skin', Input::old('skin', $setting->skin), 'select2') !!}
+                                {!! Form::skin('skin', Request::old('skin', $setting->skin), 'select2') !!}
                                 {!! $errors->first('skin', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -164,11 +164,11 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS','disabled'=>'disabled')) }}
+                                    {{ Form::textarea('custom_css', Request::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS','disabled'=>'disabled')) }}
                                     {!! $errors->first('custom_css', '<span class="alert-msg">:message</span>') !!}
                                     <p class="help-block">{{ trans('general.lock_passwords') }}</p>
                                 @else
-                                    {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS')) }}
+                                    {{ Form::textarea('custom_css', Request::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS')) }}
                                     {!! $errors->first('custom_css', '<span class="alert-msg">:message</span>') !!}
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.custom_css_help') !!}</p>
@@ -183,9 +183,9 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('support_footer', $setting->support_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
+                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Request::old('support_footer', $setting->support_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
                                 @else
-                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('support_footer', $setting->support_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Request::old('support_footer', $setting->support_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
                                 @endif
 
                                 <p class="help-block">{{ trans('admin/settings/general.support_footer_help') }}</p>
@@ -201,9 +201,9 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('version_footer', $setting->version_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
+                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Request::old('version_footer', $setting->version_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
                                 @else
-                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('version_footer', $setting->version_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Request::old('version_footer', $setting->version_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
                                 @endif
 
                                 <p class="help-block">{{ trans('admin/settings/general.version_footer_help') }}</p>
@@ -218,10 +218,10 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::textarea('footer_text', Input::old('footer_text', $setting->footer_text), array('class' => 'form-control', 'rows' => '4', 'placeholder' => 'Optional footer text','disabled'=>'disabled')) }}
+                                    {{ Form::textarea('footer_text', Request::old('footer_text', $setting->footer_text), array('class' => 'form-control', 'rows' => '4', 'placeholder' => 'Optional footer text','disabled'=>'disabled')) }}
                                     <p class="help-block">{{ trans('general.lock_passwords') }}</p>
                                 @else
-                                    {{ Form::textarea('footer_text', Input::old('footer_text', $setting->footer_text), array('class' => 'form-control','rows' => '4','placeholder' => 'Optional footer text')) }}
+                                    {{ Form::textarea('footer_text', Request::old('footer_text', $setting->footer_text), array('class' => 'form-control','rows' => '4','placeholder' => 'Optional footer text')) }}
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.footer_text_help') !!}</p>
                                  {!! $errors->first('footer_text', '<span class="alert-msg">:message</span>') !!}

@@ -319,7 +319,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Unicodeveloper\DumbPassword\DumbPasswordServiceProvider::class,
-        Schuppo\PasswordStrength\PasswordStrengthServiceProvider::class,
+        //Schuppo\PasswordStrength\PasswordStrengthServiceProvider::class,
         Tightenco\Ziggy\ZiggyServiceProvider::class, // Laravel routes in vue
         Eduardokum\LaravelMailAutoEmbed\ServiceProvider::class,
 
@@ -388,7 +388,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Input' => Illuminate\Support\Facades\Input::class,
+        //'Input' => Illuminate\Support\Facades\Input::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Google2FA' => PragmaRX\Google2FALaravel\Facade::class,

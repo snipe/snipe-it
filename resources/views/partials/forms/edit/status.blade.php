@@ -2,7 +2,7 @@
 <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
     <label for="status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }}</label>
     <div class="col-md-7 col-sm-11{{  (\App\Helpers\Helper::checkIfRequired($item, 'status_id')) ? ' required' : '' }}">
-        {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $item->status_id), ['class'=>'select2 status_id', 'style'=>'width:100%','id'=>'status_select_id', 'placeholder' => trans('general.select_statuslabel'), 'required' => true, 'data-validation' => 'required']) }}
+        {{ Form::select('status_id', $statuslabel_list , Request::old('status_id', $item->status_id), ['class'=>'select2 status_id', 'style'=>'width:100%','id'=>'status_select_id', 'placeholder' => trans('general.select_statuslabel'), 'required' => true, 'data-validation' => 'required']) }}
         {!! $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
     <div class="col-md-2 col-sm-2 text-left">

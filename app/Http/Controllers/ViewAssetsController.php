@@ -94,7 +94,7 @@ class ViewAssetsController extends Controller
         $logaction->target_id = $data['user_id'] = Auth::user()->id;
         $logaction->target_type = User::class;
 
-        $data['item_quantity'] = Input::has('request-quantity') ? e(Input::get('request-quantity')) : 1;
+        $data['item_quantity'] = Request::has('request-quantity') ? e(Request::get('request-quantity')) : 1;
         $data['requested_by'] = $user->present()->fullName();
         $data['item'] = $item;
         $data['item_type'] = $itemType;
@@ -252,7 +252,7 @@ class ViewAssetsController extends Controller
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.asset_already_accepted'));
         }
 
-        if (!Input::has('asset_acceptance')) {
+        if (!Request::has('asset_acceptance')) {
             return redirect()->back()->with('error', trans('admin/users/message.error.accept_or_decline'));
         }
 
@@ -274,7 +274,7 @@ class ViewAssetsController extends Controller
 
         $logaction = new Actionlog();
 
-        if (Input::get('asset_acceptance')=='accepted') {
+        if (Request::get('asset_acceptance')=='accepted') {
             $logaction_msg  = 'accepted';
             $accepted="accepted";
             $return_msg = trans('admin/users/message.accepted');
@@ -288,7 +288,7 @@ class ViewAssetsController extends Controller
 
         // Asset
         if (($findlog->item_id!='') && ($findlog->item_type==Asset::class)) {
-            if (Input::get('asset_acceptance')!='accepted') {
+            if (Request::get('asset_acceptance')!='accepted') {
                 DB::table('assets')
                 ->where('id', $findlog->item_id)
                 ->update(array('assigned_to' => null));
@@ -297,7 +297,7 @@ class ViewAssetsController extends Controller
 
         $logaction->target_id = $findlog->target_id;
         $logaction->target_type = User::class;
-        $logaction->note = e(Input::get('note'));
+        $logaction->note = e(Request::get('note'));
         $logaction->updated_at = date("Y-m-d H:i:s");
 
 

@@ -2,7 +2,7 @@
 
 @section('title0')
 
-    @if ((Input::get('company_id')) && ($company))
+    @if ((Request::get('company_id')) && ($company))
         {{ $company->name }}
     @endif
 

@@ -34,7 +34,7 @@ class LicenseFilesController extends Controller
         if (isset($license->id)) {
             $this->authorize('update', $license);
 
-            if (Input::hasFile('file')) {
+            if (Request::hasFile('file')) {
 
                 if (!Storage::exists('private_uploads/licenses')) Storage::makeDirectory('private_uploads/licenses', 775);
 

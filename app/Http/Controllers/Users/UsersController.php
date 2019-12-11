@@ -19,6 +19,8 @@ use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use View;
+use Request;
+
 
 /**
  * This controller handles all actions related to Users for
@@ -56,19 +58,19 @@ class UsersController extends Controller
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create()
+    public function create(Request $request)
     {
         $this->authorize('create', User::class);
         $groups = Group::pluck('name', 'id');
 
         $userGroups = collect();
 
-        if (Input::old('groups')) {
-            $userGroups = Group::whereIn('id', Input::old('groups'))->pluck('name', 'id');
+        if (Request::old('groups')) {
+            $userGroups = Group::whereIn('id', Request::old('groups'))->pluck('name', 'id');
         }
 
         $permissions = config('permissions');
-        $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
+        $userPermissions = Helper::selectedPermissionsArray($permissions, Request::old('permissions', array()));
         $permissions = $this->filterDisplayable($permissions);
 
         $user = new User;
@@ -464,7 +466,7 @@ class UsersController extends Controller
         $this->authorize('create', User::class);
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
-        $permissions = Input::get('permissions', array());
+        $permissions = Request::get('permissions', array());
         app('request')->request->set('permissions', $permissions);
 
 

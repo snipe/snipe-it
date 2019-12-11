@@ -738,8 +738,8 @@ class AssetsController extends Controller
             $asset->location_id =  $request->input('location_id');
         }
 
-        if (Input::has('status_id')) {
-            $asset->status_id =  Input::get('status_id');
+        if (Request::has('status_id')) {
+            $asset->status_id =  Request::get('status_id');
         }
 
         if ($asset->save()) {

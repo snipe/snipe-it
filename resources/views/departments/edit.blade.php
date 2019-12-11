@@ -1,7 +1,7 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/departments/table.create') ,
     'updateText' => trans('admin/departments/table.update'),
-    'formAction' => ($item) ? route('departments.update', ['department' => $item->id]) : route('departments.store'),
+    'formAction' => (isset($item->id)) ? route('departments.update', ['department' => $item->id]) : route('departments.store'),
 ])
 
 {{-- Page content --}}

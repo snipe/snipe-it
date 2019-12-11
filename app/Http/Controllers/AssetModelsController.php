@@ -75,7 +75,7 @@ class AssetModelsController extends Controller
         $model->category_id         = $request->input('category_id');
         $model->notes               = $request->input('notes');
         $model->user_id             = Auth::id();
-        $model->requestable         = Input::has('requestable');
+        $model->requestable         = Request::has('requestable');
 
         if ($request->input('custom_fieldset')!='') {
             $model->fieldset_id = e($request->input('custom_fieldset'));
@@ -304,7 +304,7 @@ class AssetModelsController extends Controller
     public function postBulkEdit(Request $request)
     {
 
-        $models_raw_array = Input::get('ids');
+        $models_raw_array = Request::get('ids');
 
         // Make sure some IDs have been selected
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {
@@ -353,7 +353,7 @@ class AssetModelsController extends Controller
     public function postBulkEditSave(Request $request)
     {
 
-        $models_raw_array = Input::get('ids');
+        $models_raw_array = Request::get('ids');
         $update_array = array();
 
 
@@ -394,7 +394,7 @@ class AssetModelsController extends Controller
      */
     public function postBulkDelete(Request $request)
     {
-        $models_raw_array = Input::get('ids');
+        $models_raw_array = Request::get('ids');
 
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {
 

@@ -3,7 +3,7 @@
     'updateText' => trans('admin/accessories/general.update'),
     'helpPosition'  => 'right',
     'helpText' => trans('help.accessories'),
-    'formAction' => ($item) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
+    'formAction' => (isset($item->id)) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
 ])
 
 {{-- Page content --}}
