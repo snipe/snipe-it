@@ -1,7 +1,7 @@
 @extends('layouts/edit-form', [
     'createText' => 'Append accessory',          // TODO: trans
     'updateText' => 'Update appended accessory', // TODO: trans
-    'formAction' => ($item) ? route('kits.accessories.update', ['kit_id' => $kit->id, 'accessory_id' => $item->accessory_id]) : route('kits.accessories.store', ['kit_id' => $kit->id]),
+    'formAction' => (isset($item->id)) ? route('kits.accessories.update', ['kit_id' => $kit->id, 'accessory_id' => $item->accessory_id]) : route('kits.accessories.store', ['kit_id' => $kit->id]),
 ])
 
 {{-- Page content --}}

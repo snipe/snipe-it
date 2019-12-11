@@ -4,7 +4,7 @@
     'topSubmit' => true,
     'helpPosition' => 'right',
     'helpText' => trans('admin/models/general.about_models_text'),
-    'formAction' => ($item) ? route('models.update', ['model' => $item->id]) : route('models.store'),
+    'formAction' => (isset($item->id)) ? route('models.update', ['model' => $item->id]) : route('models.store'),
 ])
 
 {{-- Page content --}}

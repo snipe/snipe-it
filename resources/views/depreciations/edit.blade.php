@@ -3,7 +3,7 @@
     'updateText' => trans('admin/depreciations/general.update'),
     'helpPosition'  => 'right',
     'helpText' => trans('help.depreciations'),
-    'formAction' => ($item) ? route('depreciations.update', ['depreciation' => $item->id]) : route('depreciations.store'),
+    'formAction' => (isset($item->id)) ? route('depreciations.update', ['depreciation' => $item->id]) : route('depreciations.store'),
 ])
 
 {{-- Page content --}}

@@ -3,7 +3,7 @@
     'updateText' => trans('admin/categories/general.update'),
     'helpPosition'  => 'right',
     'helpText' => trans('help.categories'),
-    'formAction' => ($item) ? route('categories.update', ['category' => $item->id]) : route('categories.store'),
+    'formAction' => (isset($item->id)) ? route('categories.update', ['category' => $item->id]) : route('categories.store'),
 ])
 
 @section('inputFields')

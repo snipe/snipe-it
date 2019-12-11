@@ -1,7 +1,7 @@
 @extends('layouts/edit-form', [
     'createText' => 'Append model',          // TODO: trans
     'updateText' => 'Update appended model', // TODO: trans
-    'formAction' => ($item) ? route('kits.models.update', ['kit_id' => $kit->id, 'model_id' => $item->model_id]) : route('kits.models.store', ['kit_id' => $kit->id]),
+    'formAction' => (isset($item->id)) ? route('kits.models.update', ['kit_id' => $kit->id, 'model_id' => $item->model_id]) : route('kits.models.store', ['kit_id' => $kit->id]),
 ])
 
 {{-- Page content --}}

@@ -1,7 +1,7 @@
 @extends('layouts/edit-form', [
     'createText' => 'Append consumable',          // TODO: trans
     'updateText' => 'Update appended consumable', // TODO: trans
-    'formAction' => ($item) ? route('kits.consumables.update', ['kit_id' => $kit->id, 'consumable_id' => $item->consumable_id]) : route('kits.consumables.store', ['kit_id' => $kit->id]),
+    'formAction' => (isset($item->id)) ? route('kits.consumables.update', ['kit_id' => $kit->id, 'consumable_id' => $item->consumable_id]) : route('kits.consumables.store', ['kit_id' => $kit->id]),
 ])
 
 {{-- Page content --}}

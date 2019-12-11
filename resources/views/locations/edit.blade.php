@@ -4,7 +4,7 @@
     'topSubmit' => true,
     'helpPosition' => 'right',
     'helpText' => trans('admin/locations/table.about_locations'),
-    'formAction' => ($item) ? route('locations.update', ['location' => $item->id]) : route('locations.store'),
+    'formAction' => (isset($item->id)) ? route('locations.update', ['location' => $item->id]) : route('locations.store'),
 ])
 
 {{-- Page content --}}
