@@ -451,7 +451,7 @@
         <div class="tab-pane" id="files_tab">
           <div class="row">
             <div class="col-md-12 col-sm-12">
-              <p>{{ trans('admin/hardware/general.filetype_info') }}</p>
+              <p>Allowed file types are png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, and rar. Max upload size allowed is 128M.</p>
             </div>
             <div class="col-md-2">
               <!-- The fileinput-button span is used to style the file input field as button -->
