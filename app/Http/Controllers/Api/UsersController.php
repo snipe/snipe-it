@@ -377,7 +377,6 @@ class UsersController extends Controller
     }
 
     /**
-
      * Return JSON containing a list of licenses assigned to a user.
      *
      * @author [N. Mathar] [<snipe@snipe.net>]
