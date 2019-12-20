@@ -229,7 +229,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $this->authorize('view', User::class);
-        $user = User::findOrFail($id);
+        $user = User::withCount('assets as assets_count','licenses as licenses_count','accessories as accessories_count','consumables as consumables_count')->findOrFail($id);
         return (new UsersTransformer)->transformUser($user);
     }
 
