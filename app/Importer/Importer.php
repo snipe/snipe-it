@@ -112,7 +112,7 @@ abstract class Importer
         } else {
             $this->csv = Reader::createFromString($file);
         }
-        $this->tempPassword = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
+        $this->tempPassword = 'password';
     }
     // Cached Values for import lookups
     protected $customFields;
@@ -155,7 +155,7 @@ abstract class Importer
         // This 'inverts' the fields such that we have a collection of fields indexed by name.
         $this->customFields = CustomField::All()->reduce(function ($nameLookup, $field) {
             $nameLookup[$field['name']] = $field;
-            return $nameLookup; 
+            return $nameLookup;
         });
         // Remove any custom fields that do not exist in the header row.  This prevents nulling out values that shouldn't exist.
         // In detail, we compare the lower case name of custom fields (indexed by name) to the keys in the header row.  This
@@ -211,7 +211,7 @@ abstract class Importer
 
     /**
      * Used to lowercase header values to ensure we're comparing values properly.
-     * 
+     *
      * @param $results
      * @return array
      */
@@ -272,6 +272,7 @@ abstract class Importer
             'department_id' =>  '',
             'username'  => $this->findCsvMatch($row, "username"),
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
+            'employee_num' => $this->findCsvMatch($row, "employee_num")
         ];
         \Log::debug('Importer.php Activated: '.$this->findCsvMatch($row, 'activated'));
 
@@ -321,10 +322,11 @@ abstract class Importer
         $user->last_name = $user_array['last_name'];
         $user->username = $user_array['username'];
         $user->email = $user_array['email'];
+        $user->employee_num = $user_array['employee_num'];
         $user->manager_id = (isset($user_array['manager_id']) ? $user_array['manager_id'] : null);
         $user->department_id = (isset($user_array['department_id']) ? $user_array['department_id']:  null);
         $user->activated = $user_array['activated'];
-        $user->password = $this->tempPassword;
+        $user->password = bcrypt($this->tempPassword);
 
         \Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
 
