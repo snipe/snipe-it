@@ -53,7 +53,7 @@
             @foreach($custom_fieldsets AS $fieldset)
             <tr>
               <td>
-                {{ link_to_route("fieldsets.show",$fieldset->name,['id' => $fieldset->id]) }}
+                {{ link_to_route("fieldsets.show",$fieldset->name,['fieldset' => $fieldset->id]) }}
               </td>
               <td>
                 {{ $fieldset->fields->count() }}
