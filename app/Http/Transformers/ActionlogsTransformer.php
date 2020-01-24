@@ -53,22 +53,19 @@ class ActionlogsTransformer
                             
                             foreach ($meta_value as $meta_value_key => $meta_value_value) {
 
-                                \Log::debug('meta value key is '.$meta_value->value);
                                 if ($meta_value_key == 'value') {
                                     $clean_meta[$key]['old'] = null;
-                                    $clean_meta[$key]['new'] = $meta_value->value;
+                                    $clean_meta[$key]['new'] = e($meta_value->value);
                                 } else {
                                     $clean_meta[$meta_value_key]['old'] = null;
-                                    $clean_meta[$meta_value_key]['new'] = $meta_value_value;
+                                    $clean_meta[$meta_value_key]['new'] = e($meta_value_value);
                                 }
-
-                                \Log::debug(print_r($meta_value_value, true));
                             }
 
 
 
                         } else {
-                            $clean_meta[$key][$meta_key] = $meta_value;
+                            $clean_meta[$key][$meta_key] = e($meta_value);
                         }
                     }
 
