@@ -34,9 +34,21 @@
                         <div class="col-md-8 col-xs-12 required"><input type='text' name="first_name" id='modal-first_name' class="form-control"></div>
                     </div>
 
+                    {{--<div class="dynamic-form-row">--}}
+                        {{--<div class="col-md-4 col-xs-12"><label for="modal-last_name">{{ trans('general.last_name') }}:</label></div>--}}
+                        {{--<div class="col-md-8 col-xs-12"><input type='text' name="last_name" id='modal-last_name' class="form-control"> </div>--}}
+                    {{--</div>--}}
+
+                    <!-- Company -->
                     <div class="dynamic-form-row">
-                        <div class="col-md-4 col-xs-12"><label for="modal-last_name">{{ trans('general.last_name') }}:</label></div>
-                        <div class="col-md-8 col-xs-12"><input type='text' name="last_name" id='modal-last_name' class="form-control"> </div>
+                        @if (\App\Models\Company::canManageUsersCompanies())
+                            @include ('partials.forms.edit.company-select-assign', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
+                        @endif
+                    </div>
+
+                    <!--  Department -->
+                    <div class="dynamic-form-row">
+                        @include ('partials.forms.edit.department-select-assign', ['translated_name' => trans('general.department'), 'fieldname' => 'department_id'])
                     </div>
 
                     <div class="dynamic-form-row">
@@ -57,6 +69,8 @@
                             <div id="generated-password"></div>
                         </div>
                     </div>
+
+
                 </form>
             </div>
         <div class="modal-footer">
