@@ -411,6 +411,6 @@ class UsersController extends Controller
      */
     public function getCurrentUserInfo(Request $request)
     {
-        return response()->json($request->user());
+        return (new UsersTransformer)->transformUser($request->user());
     }
 }
