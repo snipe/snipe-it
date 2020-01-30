@@ -196,7 +196,7 @@ class SuppliersController extends Controller
                 return view('suppliers/view', compact('supplier'));
         }
         // Prepare the error message
-        $error = trans('admin/suppliers/message.does_not_exist', compact('id'));
+        $error = trans('admin/suppliers/message.does_not_exist');
 
         // Redirect to the user management page
         return redirect()->route('suppliers.index')->with('error', $error);

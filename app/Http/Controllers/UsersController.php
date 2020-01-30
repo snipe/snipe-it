@@ -607,7 +607,7 @@ class UsersController extends Controller
     public function show($userId = null)
     {
         if(!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId)) {
-            $error = trans('admin/users/message.user_not_found', compact('id'));
+            $error = trans('admin/users/message.user_not_found');
             // Redirect to the user management page
             return redirect()->route('users.index')->with('error', $error);
         }
@@ -783,7 +783,7 @@ class UsersController extends Controller
             return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
         }
         // Prepare the error message
-        $error = trans('admin/users/message.does_not_exist', compact('id'));
+        $error = trans('admin/users/message.does_not_exist');
         // Redirect to the licence management page
         return redirect()->route('users.index')->with('error', $error);
 
@@ -811,7 +811,7 @@ class UsersController extends Controller
             return Response::download($file);
         }
         // Prepare the error message
-        $error = trans('admin/users/message.does_not_exist', compact('id'));
+        $error = trans('admin/users/message.does_not_exist');
 
         // Redirect to the licence management page
         return redirect()->route('users.index')->with('error', $error);

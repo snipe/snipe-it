@@ -58,7 +58,7 @@ class ViewAssetsController extends Controller
             return view('account/view-assets', compact('user', 'userlog'));
         } else {
             // Prepare the error message
-            $error = trans('admin/users/message.user_not_found', compact('id'));
+            $error = trans('admin/users/message.user_not_found');
 
             // Redirect to the user management page
             return redirect()->route('users.index')->with('error', $error);

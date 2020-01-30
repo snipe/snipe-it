@@ -260,7 +260,7 @@ class AssetModelsController extends Controller
             return view('models/view', compact('model'));
         }
         // Prepare the error message
-        $error = trans('admin/models/message.does_not_exist', compact('id'));
+        $error = trans('admin/models/message.does_not_exist');
 
         // Redirect to the user management page
         return redirect()->route('models.index')->with('error', $error);
