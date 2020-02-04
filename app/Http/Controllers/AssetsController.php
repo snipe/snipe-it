@@ -827,4 +827,6 @@ class AssetsController extends Controller
         return view('hardware/requested', compact('requestedItems'));
     }
 
+    //todo: ADD create bulk function
+
 }

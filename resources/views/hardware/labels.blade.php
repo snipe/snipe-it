@@ -28,10 +28,11 @@
 
   .label {
     width: {{ $settings->labels_width }}in;
-    height: {{ $settings->labels_height }}in;
+    /* height: {{ $settings->labels_height }}in; Remove for gsjy label printing */
     padding: 0in;
     margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
-    margin-bottom: {{ $settings->labels_display_bgutter }}in;
+    /* margin-bottom: {{ $settings->labels_display_bgutter }}in; Remove for gsjy label printing  */
+    margin-top: {{ $settings->labels_display_bgutter }}in;  /* Add for gsjy label printing  */
     display: inline-block;
     overflow: hidden;
   }
@@ -42,7 +43,7 @@
 
   div.qr_img {
     width: {{ $qr_size }}in;
-    height: {{ $qr_size }}in;
+    /* height: {{ $qr_size }}in;  Remove for gsjy label printing  */
     float: left;
     display: inline-block;
     padding-right: .04in;

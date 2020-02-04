@@ -207,6 +207,12 @@
                                   {{ trans('general.asset') }}
                               </a>
                       </li>
+                       <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
+                           <a href="{{ route('hardware.create.bulk') }}">
+                               <i class="fa fa-barcode fa-fw"></i>
+                               {{ trans('general.asset_bulk') }}
+                           </a>
+                       </li>
                        @endcan
                        @can('create', \App\Models\License::class)
                        <li {!! (Request::is('licenses/create') ? 'class="active"' : '') !!}>

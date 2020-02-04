@@ -137,6 +137,15 @@ Route::group(
             ]
         );
 
+
+        Route::get(
+            'createbulk',
+            [
+                'as' => 'hardware.create.bulk',
+                'uses' => 'AssetsController@createbulk'
+            ]
+        );
+
         # Bulk checkout / checkin
          Route::get( 'bulkcheckout',  [
                  'as' => 'hardware/bulkcheckout',
