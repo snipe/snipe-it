@@ -3,7 +3,7 @@
     'updateText' => trans('admin/suppliers/table.update'),
     'helpTitle' => trans('admin/suppliers/table.about_suppliers_title'),
     'helpText' => trans('admin/suppliers/table.about_suppliers_text'),
-    'formAction' => ($item) ? route('suppliers.update', ['supplier' => $item->id]) : route('suppliers.store'),
+    'formAction' => (isset($item->id)) ? route('suppliers.update', ['supplier' => $item->id]) : route('suppliers.store'),
 ])
 
 
@@ -16,7 +16,7 @@
 <div class="form-group {{ $errors->has('contact') ? ' has-error' : '' }}">
     {{ Form::label('contact', trans('admin/suppliers/table.contact'), array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7">
-        {{Form::text('contact', Input::old('contact', $item->contact), array('class' => 'form-control')) }}
+        {{Form::text('contact', Request::old('contact', $item->contact), array('class' => 'form-control')) }}
         {!! $errors->first('contact', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
 </div>
@@ -26,7 +26,7 @@
 <div class="form-group {{ $errors->has('fax') ? ' has-error' : '' }}">
     {{ Form::label('fax', trans('admin/suppliers/table.fax'), array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7">
-        {{Form::text('fax', Input::old('fax', $item->fax), array('class' => 'form-control')) }}
+        {{Form::text('fax', Request::old('fax', $item->fax), array('class' => 'form-control')) }}
         {!! $errors->first('fax', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
 </div>
@@ -36,7 +36,7 @@
 <div class="form-group {{ $errors->has('url') ? ' has-error' : '' }}">
     {{ Form::label('url', trans('admin/suppliers/table.url'), array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7">
-        {{Form::text('url', Input::old('url', $item->url), array('class' => 'form-control')) }}
+        {{Form::text('url', Request::old('url', $item->url), array('class' => 'form-control')) }}
         {!! $errors->first('url', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
 </div>

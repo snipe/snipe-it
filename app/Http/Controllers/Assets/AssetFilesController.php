@@ -115,8 +115,12 @@ class AssetFilesController extends Controller
         if (isset($asset->id)) {
             $this->authorize('update', $asset);
             $log = Actionlog::find($fileId);
+            if ($log) {
             if (file_exists(base_path().'/'.$rel_path.'/'.$log->filename)) {
                 Storage::disk('public')->delete($rel_path.'/'.$log->filename);
+                }
+                $log->delete();
+                return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
             }
             $log->delete();
             return redirect()->back()

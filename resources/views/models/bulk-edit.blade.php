@@ -39,7 +39,7 @@
                                 {{ trans('admin/models/general.fieldset') }}
                             </label>
                             <div class="col-md-7">
-                                {{ Form::select('fieldset_id', $fieldset_list , Input::old('fieldset_id', 'NC'), array('class'=>'select2 js-fieldset-field', 'style'=>'width:350px')) }}
+                                {{ Form::select('fieldset_id', $fieldset_list , Request::old('fieldset_id', 'NC'), array('class'=>'select2 js-fieldset-field', 'style'=>'width:350px')) }}
                                 {!! $errors->first('fieldset_id', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                 {{ trans('general.depreciation') }}
                             </label>
                             <div class="col-md-7">
-                                {{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', 'NC'), array('class'=>'select2', 'style'=>'width:350px')) }}
+                                {{ Form::select('depreciation_id', $depreciation_list , Request::old('depreciation_id', 'NC'), array('class'=>'select2', 'style'=>'width:350px')) }}
                                 {!! $errors->first('depreciation_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                             </div>
                         </div>

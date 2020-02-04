@@ -8,8 +8,8 @@ mix
     processFontUrls: true,
     clearConsole: false
   })
-  .less("./resources/assets/less/AdminLTE.less", "css/build")
-  .less("./resources/assets/less/app.less", "css/build")
+  .less("./resources/less/AdminLTE.less", "css/build")
+  .less("./resources/less/app.less", "css/build")
   .styles(
     [
       "./node_modules/bootstrap/dist/css/bootstrap.css",
@@ -35,7 +35,7 @@ mix.copy(["./node_modules/icheck/skins/minimal/blue.png",
 /**
  * Copy, minify and version skins
  */
-mix.copyDirectory("./resources/assets/css/skins", "./public/css/skins");
+mix.copyDirectory("./resources/css/skins", "./public/css/skins");
 mix
   .minify([
     "./public/css/skins/skin-green-dark.css",
@@ -47,16 +47,16 @@ mix
  * Copy, minify and version signature-pad.css
  */
 mix
-  .copy("./resources/assets/css/signature-pad.css", "./public/css")
+  .copy("./resources/css/signature-pad.css", "./public/css")
   .minify("./public/css/signature-pad.css")
   .version();
 
 // Combine main SnipeIT JS files
 mix.js(
   [
-    "./resources/assets/js/vue.js",
-    "./resources/assets/js/snipeit.js", //this is the actual Snipe-IT JS
-    "./resources/assets/js/snipeit_modals.js"
+    "./resources/js/vue.js",
+    "./resources/js/snipeit.js", //this is the actual Snipe-IT JS
+    "./resources/js/snipeit_modals.js"
   ],
   "./public/js/app.js"
 );
@@ -76,9 +76,9 @@ mix
       "./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js",
       "./node_modules/ekko-lightbox/dist/ekko-lightbox.js",
       "./node_modules/icheck/icheck.js",
-      "./resources/assets/js/extensions/pGenerator.jquery.js",
+      "./resources/js/extensions/pGenerator.jquery.js",
       "./node_modules/chart.js/dist/Chart.js",
-      "./resources/assets/js/signature_pad.js",
+      "./resources/js/signature_pad.js",
       "./node_modules/jquery-form-validator/form-validator/jquery.form-validator.js"
     ],
     "public/js/vendor.js"
@@ -95,7 +95,7 @@ mix
       "node_modules/bootstrap-table/dist/extentions/mobile/bootstrap-table-mobile.js",
       "node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js",
       "node_modules/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.js",
-      "resources/assets/js/extensions/jquery.base64.js",
+      "resources/js/extensions/jquery.base64.js",
       "node_modules/tableexport.jquery.plugin/tableExport.js",
       "node_modules/tableexport.jquery.plugin/libs/jsPDF/jspdf.min.js",
       "node_modules/tableexport.jquery.plugin/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"

@@ -84,6 +84,8 @@ return [
                 'dump_binary_path' => env('DB_DUMP_PATH', '/usr/local/bin'),  // only the path, so without 'mysqldump'
                 'use_single_transaction' => false,
                 'timeout' => 60 * 5, // 5 minute timeout
+                //'exclude_tables' => ['table1', 'table2'],
+                //'add_extra_option' => '--optionname=optionvalue',
             ],
 
             'dump_command_timeout' => 60 * 5, // 5 minute timeout

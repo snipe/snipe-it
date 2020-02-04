@@ -1,7 +1,7 @@
 @extends('layouts/edit-form', [
     'createText' =>  trans('admin/kits/general.create'),
     'updateText' =>   trans('admin/kits/general.update'),
-    'formAction' => ($item) ? route('kits.update', ['kit' => $item->id]) : route('kits.store'),
+    'formAction' => (isset($item->id)) ? route('kits.update', ['kit' => $item->id]) : route('kits.store'),
 ])
 
 {{-- Page content --}}

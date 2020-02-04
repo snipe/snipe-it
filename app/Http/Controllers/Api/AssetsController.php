@@ -138,7 +138,10 @@ class AssetsController extends Controller
         $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
 
         $offset = (($assets) && (request('offset') > $assets->count())) ? 0 : request('offset', 0);
-        $limit = $request->input('limit', 50);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
         // This is used by the audit reporting routes
@@ -520,8 +523,14 @@ class AssetsController extends Controller
             ($request->filled('company_id')) ?
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
+($request->filled('rtd_location_id')) ?
+                $asset->location_id = $request->get('rtd_location_id') : null;
+
+
             if ($request->filled('image_source')) {
                 if ($request->input('image_source') == "") {
+            ($request->filled('rtd_location_id')) ?
+                $asset->location_id = $request->get('rtd_location_id') : null;
                     $asset->image = null;
                 } else {
                     $saved_image_path = Helper::processUploadedImage(
@@ -689,7 +698,7 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.error')))->withErrors($asset->getErrors());
+        return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.error')));
     }
 
 
@@ -729,12 +738,12 @@ class AssetsController extends Controller
             $asset->location_id =  $request->input('location_id');
         }
 
-        if (Input::has('status_id')) {
-            $asset->status_id =  Input::get('status_id');
+        if ($request->has('status_id')) {
+            $asset->status_id =  $request->input('status_id');
         }
 
         if ($asset->save()) {
-            $asset->logCheckin($target, e(request('note')));
+            $asset->logCheckin($target, e($request->input('note')));
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
 

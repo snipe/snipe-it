@@ -50,7 +50,7 @@
                         <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
                             <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
                             <div class="col-md-8">
-                                {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
+                                {!! Form::locales('locale', Request::old('locale', $user->locale), 'select2') !!}
                                 {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div>
@@ -64,8 +64,8 @@
                                 <div class="checkbox">
                                     <label for="activated">
                                         {{ Form::radio('activated', '', true) }} Do not change activation status <br>
-                                        {{ Form::radio('activated', '1', Input::old('activated')) }}  User is activated<br>
-                                        {{ Form::radio('activated', '0', Input::old('activated')) }}  User is de-activated
+                                        {{ Form::radio('activated', '1', Request::old('activated')) }}  User is activated<br>
+                                        {{ Form::radio('activated', '0', Request::old('activated')) }}  User is de-activated
 
                                     </label>
                                 </div>

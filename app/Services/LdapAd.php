@@ -86,6 +86,10 @@ class LdapAd extends LdapAdConfiguration
      */
     public function ldapLogin(string $username, string $password): User
     {
+        if ($this->ldapSettings['ad_append_domain']) {
+            $username .= '@' . $this->ldapSettings['ad_domain'];
+        }
+
         try {
             $this->ldap->auth()->attempt($username, $password);
         } catch (Exception $e) {

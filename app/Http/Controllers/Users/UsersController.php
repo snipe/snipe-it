@@ -9,6 +9,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Group;
 use App\Models\Ldap;
+use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
 use Auth;
@@ -18,6 +19,8 @@ use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use View;
+use Request;
+
 
 /**
  * This controller handles all actions related to Users for
@@ -55,19 +58,19 @@ class UsersController extends Controller
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create()
+    public function create(Request $request)
     {
         $this->authorize('create', User::class);
         $groups = Group::pluck('name', 'id');
 
         $userGroups = collect();
 
-        if (Input::old('groups')) {
-            $userGroups = Group::whereIn('id', Input::old('groups'))->pluck('name', 'id');
+        if (Request::old('groups')) {
+            $userGroups = Group::whereIn('id', Request::old('groups'))->pluck('name', 'id');
         }
 
         $permissions = config('permissions');
-        $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
+        $userPermissions = Helper::selectedPermissionsArray($permissions, Request::old('permissions', array()));
         $permissions = $this->filterDisplayable($permissions);
 
         $user = new User;
@@ -321,25 +324,25 @@ class UsersController extends Controller
                     ->with('error', 'We would feel really bad if you deleted yourself, please reconsider.');
             }
 
-            if (($assetsCount = $user->assets()->count()) > 0) {
+            if (($user->assets()) && (($assetsCount = $user->assets()->count()) > 0)) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
                     ->with('error', 'This user still has ' . $assetsCount . ' assets associated with them.');
             }
 
-            if (($licensesCount = $user->licenses()->count()) > 0) {
+            if (($user->licenses()) && (($licensesCount = $user->licenses()->count())) > 0) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
                     ->with('error', 'This user still has ' . $licensesCount . ' licenses associated with them.');
             }
 
-            if (($accessoriesCount = $user->accessories()->count()) > 0) {
+            if (($user->accessories()) && (($accessoriesCount = $user->accessories()->count()) > 0)) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
                     ->with('error', 'This user still has ' . $accessoriesCount . ' accessories associated with them.');
             }
 
-            if (($managedLocationsCount = $user->managedLocations()->count()) > 0) {
+            if (($user->managedLocations()) && (($managedLocationsCount = $user->managedLocations()->count())) > 0) {
                 // Redirect to the user management page
                 return redirect()->route('users.index')
                     ->with('error', 'This user still has ' . $managedLocationsCount . ' locations that they manage.');
@@ -370,7 +373,7 @@ class UsersController extends Controller
      */
     public function getRestore($id = null)
     {
-        $this->authorize('edit', User::class);
+        $this->authorize('update', User::class);
         // Get user information
         if (!$user = User::onlyTrashed()->find($id)) {
             return redirect()->route('users.index')->with('error', trans('admin/users/messages.user_not_found'));
@@ -404,7 +407,8 @@ class UsersController extends Controller
         $userlog = $user->userlog->load('item');
 
         $this->authorize('view', $user);
-        return view('users/view', compact('user', 'userlog'));
+        return view('users/view', compact('user', 'userlog'))
+            ->with('settings', Setting::getSettings());
     }
 
     /**
@@ -421,7 +425,7 @@ class UsersController extends Controller
         try {
             // Get user information
             $user = User::findOrFail($id);
-            $this->authorize('edit', $user);
+            $this->authorize('update', $user);
 
             // Check if we are not trying to unsuspend ourselves
             if ($user->id === Auth::id()) {
@@ -457,12 +461,12 @@ class UsersController extends Controller
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function getClone($id = null)
+    public function getClone(Request $request, $id = null)
     {
         $this->authorize('create', User::class);
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
-        $permissions = Input::get('permissions', array());
+        $permissions = $request->input('permissions', array());
         app('request')->request->set('permissions', $permissions);
 
 
@@ -604,6 +608,7 @@ class UsersController extends Controller
             ->with('licenses', $show_user->licenses()->get())
             ->with('accessories', $accessories)
             ->with('consumables', $consumables)
-            ->with('show_user', $show_user);
+            ->with('show_user', $show_user)
+            ->with('settings', Setting::getSettings());
     }
 }

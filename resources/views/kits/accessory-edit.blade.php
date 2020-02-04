@@ -1,7 +1,7 @@
 @extends('layouts/edit-form', [
     'createText' => 'Append accessory',          // TODO: trans
     'updateText' => 'Update appended accessory', // TODO: trans
-    'formAction' => ($item) ? route('kits.accessories.update', ['kit_id' => $kit->id, 'accessory_id' => $item->accessory_id]) : route('kits.accessories.store', ['kit_id' => $kit->id]),
+    'formAction' => (isset($item->id)) ? route('kits.accessories.update', ['kit_id' => $kit->id, 'accessory_id' => $item->accessory_id]) : route('kits.accessories.store', ['kit_id' => $kit->id]),
 ])
 
 {{-- Page content --}}
@@ -11,13 +11,13 @@
     <label for="quantity" class="col-md-3 control-label">{{ trans('general.quantity') }}</label>
     <div class="col-md-7 required">
         <div class="col-md-2" style="padding-left:0px">
-            <input class="form-control" type="text" name="quantity" id="quantity" value="{{ Input::old('quantity', $item->quantity) }}" />
+            <input class="form-control" type="text" name="quantity" id="quantity" value="{{ Request::old('quantity', $item->quantity) }}" />
         </div>
         {!! $errors->first('quantity', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
 </div>
 
 <input type="hidden" name="pivot_id" value="{{$item->id}}">
-{{-- <input class="form-control" type="text" name="quantity" id="quantity" value="{{ Input::old('quantity', $item->quantity) }}" /> --}}
+{{-- <input class="form-control" type="text" name="quantity" id="quantity" value="{{ Request::old('quantity', $item->quantity) }}" /> --}}
 
 @stop

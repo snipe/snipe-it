@@ -3,7 +3,7 @@
     'updateText' => trans('admin/accessories/general.update'),
     'helpPosition'  => 'right',
     'helpText' => trans('help.accessories'),
-    'formAction' => ($item) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
+    'formAction' => (isset($item->id)) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
 ])
 
 {{-- Page content --}}
@@ -24,7 +24,6 @@
 
 
 <!-- Image -->
-
 @if ($item->image)
     <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>

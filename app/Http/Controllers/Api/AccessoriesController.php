@@ -51,7 +51,11 @@ class AccessoriesController extends Controller
         }
 
         $offset = (($accessories) && (request('offset') > $accessories->count())) ? 0 : request('offset', 0);
-        $limit = $request->input('limit', 50);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
 
@@ -165,7 +169,7 @@ class AccessoriesController extends Controller
                                 ->get();
             $total = $accessory_users->count();
         }
-        
+
         return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $accessory_users, $total);
     }
 
@@ -181,7 +185,7 @@ class AccessoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Accessory::class);
+        $this->authorize('update', Accessory::class);
         $accessory = Accessory::findOrFail($id);
         $accessory->fill($request->all());
 
@@ -214,6 +218,7 @@ class AccessoriesController extends Controller
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.delete.success')));
 
     }
+
 
     /**
      * Save the Accessory checkout information.
@@ -303,7 +308,7 @@ class AccessoriesController extends Controller
 
     }
 
-	 
+
     /**
     * Gets a paginated collection for the select2 menus
     *

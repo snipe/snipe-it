@@ -184,7 +184,7 @@ class SettingsController extends Controller
             Auth::login($user, true);
             $settings->save();
 
-            if ('1' == Input::get('email_creds')) {
+            if ('1' == $request->input('email_creds')) {
                 $data               = [];
                 $data['email']      = $user->email;
                 $data['username']   = $user->username;
@@ -243,8 +243,8 @@ class SettingsController extends Controller
     public function getSetupMigrate()
     {
         Artisan::call('migrate', ['--force' => true]);
-
         if ((! file_exists(storage_path() . '/oauth-private.key')) || (! file_exists(storage_path() . '/oauth-public.key'))) {
+
             Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations', '--force' => true]);
             Artisan::call('passport:install');
         }
@@ -320,7 +320,7 @@ class SettingsController extends Controller
 
         $setting->modellist_displays = '';
 
-        if (($request->has('show_in_model_list')) && (count($request->input('show_in_model_list')) > 0))
+        if (($request->filled('show_in_model_list')) && (count($request->input('show_in_model_list')) > 0))
         {
             $setting->modellist_displays = implode(',', $request->input('show_in_model_list'));
         }
@@ -334,6 +334,7 @@ class SettingsController extends Controller
         $setting->email_format                    = $request->input('email_format');
         $setting->username_format                 = $request->input('username_format');
         $setting->require_accept_signature        = $request->input('require_accept_signature');
+        $setting->show_assigned_assets            = $request->input('show_assigned_assets', '0');
         if (! config('app.lock_passwords')) {
             $setting->login_note = $request->input('login_note');
         }
@@ -344,7 +345,7 @@ class SettingsController extends Controller
 
         $setting->depreciation_method = $request->input('depreciation_method');
 
-        if ('' != Input::get('per_page')) {
+        if ($request->missing('per_page')) {
             $setting->per_page = $request->input('per_page');
         } else {
             $setting->per_page = 200;
@@ -357,6 +358,7 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
+
 
     /**
      * Return a form to allow a super admin to update settings.
@@ -404,6 +406,7 @@ class SettingsController extends Controller
             $setting->site_name  = $request->input('site_name');
             $setting->custom_css = $request->input('custom_css');
         }
+
 
         // If the user wants to clear the logo, reset the brand type
         if ('1' == $request->input('clear_logo')) {
@@ -530,6 +533,7 @@ class SettingsController extends Controller
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
 
+
     /**
      * Return a form to allow a super admin to update settings.
      *
@@ -560,8 +564,8 @@ class SettingsController extends Controller
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
-
         if (! config('app.lock_passwords')) {
+
             if ('' == $request->input('two_factor_enabled')) {
                 $setting->two_factor_enabled = null;
             } else {
@@ -580,7 +584,7 @@ class SettingsController extends Controller
         $setting->pwd_secure_complexity = '';
 
 
-        if ($request->has('pwd_secure_complexity')) {
+        if ($request->filled('pwd_secure_complexity')) {
             $setting->pwd_secure_complexity =  implode('|', $request->input('pwd_secure_complexity'));
         }
 
@@ -889,7 +893,7 @@ class SettingsController extends Controller
 
 
 
-        if ($request->has('labels_display_name')) {
+        if ($request->filled('labels_display_name')) {
             $setting->labels_display_name = 1;
         } else {
             $setting->labels_display_name = 0;
@@ -907,6 +911,11 @@ class SettingsController extends Controller
             $setting->labels_display_tag = 0;
 	}
 
+	    if ($request->filled('labels_display_tag')) {
+             $setting->labels_display_tag = 1;
+         } else {
+             $setting->labels_display_tag = 0;
+         }
 
         if ($request->filled('labels_display_model')) {
             $setting->labels_display_model = 1;
@@ -972,6 +981,7 @@ class SettingsController extends Controller
         $setting->ldap_email             = $request->input('ldap_email');
         $setting->ad_domain              = $request->input('ad_domain');
         $setting->is_ad                  = $request->input('is_ad', '0');
+        $setting->ad_append_domain       = $request->input('ad_append_domain', '0');
         $setting->ldap_tls               = $request->input('ldap_tls', '0');
         $setting->ldap_pw_sync           = $request->input('ldap_pw_sync', '0');
         $setting->custom_forgot_pass_url = $request->input('custom_forgot_pass_url');
@@ -1125,10 +1135,10 @@ class SettingsController extends Controller
      *
      * @return View
      */
-    public function postPurge()
+    public function postPurge(Request $request)
     {
         if (! config('app.lock_passwords')) {
-            if ('DELETE' == Input::get('confirm_purge')) {
+            if ('DELETE' == $request->input('confirm_purge')) {
                 // Run a backup immediately before processing
                 Artisan::call('backup:run');
                 Artisan::call('snipeit:purge', ['--force' => 'true', '--no-interaction' => true]);

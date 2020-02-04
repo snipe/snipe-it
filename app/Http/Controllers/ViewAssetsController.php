@@ -44,13 +44,11 @@ class ViewAssetsController extends Controller
         $userlog = $user->userlog->load('item', 'user', 'target');
 
         if (isset($user->id)) {
-            return view('account/view-assets', compact('user', 'userlog'));
+            return view('account/view-assets', compact('user', 'userlog'))
+                ->with('settings', Setting::getSettings());
         } else {
-            // Prepare the error message
-            $error = trans('admin/users/message.user_not_found', compact('id'));
-
             // Redirect to the user management page
-            return redirect()->route('users.index')->with('error', $error);
+            return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
         }
         // Redirect to the user management page
         return redirect()->route('users.index')
@@ -101,7 +99,7 @@ class ViewAssetsController extends Controller
     }
 
 
-    public function getRequestItem($itemType, $itemId = null)
+    public function getRequestItem(Request $request, $itemType, $itemId = null)
     {
         $item = null;
         $fullItemType = 'App\\Models\\' . studly_case($itemType);
@@ -125,7 +123,7 @@ class ViewAssetsController extends Controller
         $logaction->target_id = $data['user_id'] = Auth::user()->id;
         $logaction->target_type = User::class;
 
-        $data['item_quantity'] = Input::has('request-quantity') ? e(Input::get('request-quantity')) : 1;
+        $data['item_quantity'] = $request->has('request-quantity') ? e($request->input('request-quantity')) : 1;
         $data['requested_by'] = $user->present()->fullName();
         $data['item'] = $item;
         $data['item_type'] = $itemType;
@@ -286,7 +284,7 @@ class ViewAssetsController extends Controller
             // Redirect to the asset management page
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.asset_already_accepted'));
         }
-        if (!Input::has('asset_acceptance')) {
+        if ($request->missing('asset_acceptance')) {
             return redirect()->back()->with('error', trans('admin/users/message.error.accept_or_decline'));
         }
         if (is_null($log->item)) {

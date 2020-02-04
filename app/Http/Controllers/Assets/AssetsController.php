@@ -163,7 +163,7 @@ class AssetsController extends Controller
         // Validation for these fields is handled through the AssetRequest form request
         $model = AssetModel::find($request->get('model_id'));
 
-        if ($model->fieldset) {
+        if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted=='1') {
                     if (Gate::allows('admin')) {
@@ -357,8 +357,7 @@ class AssetsController extends Controller
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
 
-        return redirect()->back()->withInput()->withErrors()->with('error', trans('admin/hardware/message.does_not_exist'));
-
+        return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 
     /**
@@ -559,9 +558,11 @@ class AssetsController extends Controller
      */
     public function postImportHistory(Request $request)
     {
+
         if (!$request->hasFile('user_import_csv')) {
             return back()->with('error', 'No file provided. Please select a file for import and try again. ');
         }
+
         if (!ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
         }
@@ -726,6 +727,11 @@ class AssetsController extends Controller
         return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
 
+    public function dueForAudit()
+    {
+        $this->authorize('audit', Asset::class);
+        return view('hardware/audit-due');
+    }
 
     public function overdueForAudit()
     {

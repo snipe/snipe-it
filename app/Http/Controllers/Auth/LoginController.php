@@ -12,7 +12,6 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Log;
@@ -130,7 +129,7 @@ class LoginController extends Controller
             return view('errors.403');
         }
 
-        $validator = $this->validator(Input::all());
+        $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
@@ -181,7 +180,6 @@ class LoginController extends Controller
 
         if ($user = Auth::user()) {
             $user->last_login = \Carbon::now();
-            \Log::debug('Last login:'.$user->last_login);
             $user->save();
         }
         // Redirect to the users page

@@ -32,7 +32,7 @@ class SettingsSeeder extends Seeder
         $settings->locale = 'en';
         $settings->version_footer = 'on';
         $settings->support_footer = 'on';
-        $settings->pwd_secure_min = '542321';
+        $settings->pwd_secure_min = '8';
         $settings->save();
 
         if ($user = User::where('username', '=', 'admin')->first()) {

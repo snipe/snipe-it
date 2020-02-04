@@ -48,11 +48,11 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('models_upload_path', function(){
-            return 'assetmodels/';
+            return 'models/';
         });
 
         \App::singleton('models_upload_url', function(){
-            return 'assetmodels/';
+            return 'models/';
         });
 
         // Categories
@@ -116,6 +116,34 @@ class SettingsServiceProvider extends ServiceProvider
 
         \App::singleton('companies_upload_url', function(){
             return 'storage/public_uploads/companies/';
+        });
+
+        // Accessories paths and URLs
+        \App::singleton('accessories_upload_path', function(){
+            return public_path('/uploads/accessories/');
+        });
+
+        \App::singleton('accessories_upload_url', function(){
+            return url('/').'/uploads/accessories/';
+        });
+
+        // Consumables paths and URLs
+        \App::singleton('consumables_upload_path', function(){
+            return public_path('/uploads/consumables/');
+        });
+
+        \App::singleton('consumables_upload_url', function(){
+            return url('/').'/uploads/consumables/';
+        });
+
+
+        // Components paths and URLs
+        \App::singleton('components_upload_path', function(){
+            return public_path('/uploads/components/');
+        });
+
+        \App::singleton('components_upload_url', function(){
+            return url('/').'/uploads/components/';
         });
 
         // Accessories paths and URLs

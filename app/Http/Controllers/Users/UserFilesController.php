@@ -45,7 +45,7 @@ class UserFilesController extends Controller
                 $logAction->item_id = $user->id;
                 $logAction->item_type = User::class;
                 $logAction->user_id = Auth::id();
-                $logAction->note = e(Input::get('notes'));
+                $logAction->note = $request->input('notes');
                 $logAction->target_id = null;
                 $logAction->created_at = date("Y-m-d H:i:s");
                 $logAction->filename = $filename;

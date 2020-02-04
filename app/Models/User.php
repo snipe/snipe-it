@@ -68,8 +68,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'first_name'              => 'required|string|min:1',
         'username'                => 'required|string|min:1|unique_undeleted',
         'email'                   => 'email|nullable',
-        'password'                => 'required|min:6',
+        'password'                => 'required|min:8',
         'locale'                  => 'max:10|nullable',
+        'website'                 => 'url|nullable',
     ];
 
     use Searchable;
@@ -101,7 +102,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'groups'     => ['name'],
         'company'    => ['name'],
         'manager'    => ['first_name', 'last_name', 'username']
-    ];
+    ];  
 
     /**
      * Check user permissions
@@ -358,7 +359,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
     }
-
 
     /**
      * Establishes the user -> manager relationship

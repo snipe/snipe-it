@@ -39,7 +39,7 @@
                         <div class="form-group {{ $errors->has('checkin_qty') ? 'error' : '' }}">
                             <label for="note" class="col-md-2 control-label">{{ trans('general.qty') }}</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="checkin_qty" value="{{ Input::old('assigned_qty', $component_assets->assigned_qty) }}">
+                                <input type="text" class="form-control" name="checkin_qty" value="{{ Request::old('assigned_qty', $component_assets->assigned_qty) }}">
                             </div>
                             <div class="col-md-9 col-md-offset-2">
                             <p class="help-block">Must be {{ $component_assets->assigned_qty }} or less.</p>
@@ -52,7 +52,7 @@
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                             <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                             <div class="col-md-7">
-                                <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $component->note) }}</textarea>
+                                <textarea class="col-md-6 form-control" id="note" name="note">{{ Request::old('note', $component->note) }}</textarea>
                                 {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                             </div>
                         </div>

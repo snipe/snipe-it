@@ -22,7 +22,15 @@ class LdapAdConfiguration
     const LDAP_PORT             = 389;
     const CONNECTION_TIMEOUT    = 5;
     const DEFAULT_LDAP_VERSION  = 3;
-    const LDAP_BOOLEAN_SETTINGS = ['ldap_enabled', 'ldap_server_cert_ignore', 'ldap_tls', 'ldap_tls', 'ldap_pw_sync', 'is_ad'];
+    const LDAP_BOOLEAN_SETTINGS = [
+        'ldap_enabled',
+        'ldap_server_cert_ignore',
+        'ldap_tls',
+        'ldap_tls',
+        'ldap_pw_sync',
+        'is_ad',
+        'ad_append_domain',
+    ];
 
     /**
      * Ldap Settings.
