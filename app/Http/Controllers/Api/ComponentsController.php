@@ -43,7 +43,9 @@ class ComponentsController extends Controller
             $components->where('location_id','=',$request->input('location_id'));
         }
 
-        $offset = (($components) && (request('offset') > $components->count())) ? 0 : request('offset', 0);
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($components) && ($request->get('offset') > $components->count())) ? $components->count() : $request->get('offset', 0);
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
