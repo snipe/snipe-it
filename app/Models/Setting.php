@@ -341,7 +341,8 @@ class Setting extends Model
             'ldap_tls',
             'ldap_pw_sync',
             'is_ad',
-            'ad_domain'
+            'ad_domain',
+            'ad_append_domain',
             ])->first()->getAttributes();
 
         return collect($ldapSettings);

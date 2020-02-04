@@ -92,7 +92,7 @@
                                 {{ trans('admin/settings/general.is_ad') }}
                                 {!! $errors->first('is_ad', '<span class="alert-msg">:message</span>') !!}
                             </div>
-                        </div>                        
+                        </div>
 
                         <!-- AD Domain -->
                         <div class="form-group {{ $errors->has('ad_domain') ? 'error' : '' }}">
@@ -105,6 +105,19 @@
                                 {!! $errors->first('ad_domain', '<span class="alert-msg">:message</span>') !!}
                             </div>
                         </div><!-- AD Domain -->
+
+                        <!-- AD Append Domain -->
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                {{ Form::label('ad_append_domain', trans('admin/settings/general.ad_append_domain_label')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::checkbox('ad_append_domain', '1', Request::old('ad_append_domain', $setting->ad_append_domain),['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
+                                {{ trans('admin/settings/general.ad_append_domain') }}
+                                <p class="help-block">{{ trans('admin/settings/general.ad_append_domain_help') }}</p>
+                                {!! $errors->first('is_ad', '<span class="alert-msg">:message</span>') !!}
+                            </div>
+                        </div>
 
                         <!-- LDAP Server -->
                         <div class="form-group {{ $errors->has('ldap_server') ? 'error' : '' }}">
@@ -293,7 +306,7 @@
                                 <div class="col-md-9 col-md-offset-3">
                                     <p class="help-block">{{ trans('admin/settings/general.ldap_login_sync_help') }}</p>
                                 </div>
-    
+
                             </div>
 
                        @endif
@@ -368,7 +381,7 @@
             headers: {
                 "X-Requested-With": 'XMLHttpRequest',
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-            },  
+            },
             data: {},
             dataType: 'json',
 
