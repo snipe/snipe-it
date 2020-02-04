@@ -5,7 +5,7 @@
     'topSubmit' => true,
     'helpText' => trans('help.assets'),
     'helpPosition' => 'right',
-    'formAction' => ($item) ? route('hardware.update', ['hardware' => $item->id]) : route('hardware.store'),
+    'formAction' => ($item->id) ? route('hardware.update', ['hardware' => $item->id]) : route('hardware.store'),
 ])
 
 
@@ -23,14 +23,14 @@
       <!-- we are editing an existing asset -->
       @if  ($item->id)
           <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Input::old('asset_tag', $item->asset_tag) }}" data-validation="required">
+          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Request::old('asset_tag', $item->asset_tag) }}" data-validation="required">
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
       @else
           <!-- we are creating a new asset - let people use more than one asset tag -->
           <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
+              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ Request::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" data-validation="required">
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
@@ -53,8 +53,8 @@
       @if ($item->model && $item->model->fieldset)
       <?php $model=$item->model; ?>
       @endif
-      @if (Input::old('model_id'))
-        <?php $model=\App\Models\AssetModel::find(Input::old('model_id')); ?>
+      @if (Request::old('model_id'))
+        <?php $model=\App\Models\AssetModel::find(Request::old('model_id')); ?>
       @elseif (isset($selected_model))
         <?php $model=$selected_model; ?>
       @endif
@@ -101,7 +101,7 @@
       <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
       <div class="col-md-5">
           <label class="control-label" for="image_delete">
-          <input type="checkbox" value="1" name="image_delete" id="image_delete" class="minimal" {{ Input::old('image_delete') == '1' ? ' checked="checked"' : '' }}>
+          <input type="checkbox" value="1" name="image_delete" id="image_delete" class="minimal" {{ Request::old('image_delete') == '1' ? ' checked="checked"' : '' }}>
           {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
           </label>
           <div style="margin-top: 0.5em">

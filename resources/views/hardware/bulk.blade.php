@@ -32,7 +32,7 @@
           <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
             <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
             <div class="input-group col-md-3">
-              <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date') }}">
+              <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Request::old('purchase_date') }}">
               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
               {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
@@ -44,7 +44,7 @@
               {{ trans('admin/hardware/form.status') }}
             </label>
             <div class="col-md-7">
-              {{ Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
+              {{ Form::select('status_id', $statuslabel_list , Request::old('status_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
               {!! $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
           </div>
@@ -62,8 +62,8 @@
             <div class="col-sm-9">
               <div class="checkbox">
                 <label for="update_real_loc">
-                  {{ Form::radio('update_real_loc', '1', Input::old('update_real_loc')) }} Update default location AND actual location <br>
-                  {{ Form::radio('update_real_loc', '0', true, Input::old('update_real_loc')) }} Only update default location<br>
+                  {{ Form::radio('update_real_loc', '1', Request::old('update_real_loc')) }} Update default location AND actual location <br>
+                  {{ Form::radio('update_real_loc', '0', true, Request::old('update_real_loc')) }} Only update default location<br>
 
                 </label>
               </div>
@@ -79,7 +79,7 @@
             </label>
             <div class="input-group col-md-3">
               <span class="input-group-addon">{{ $snipeSettings->default_currency }}</span>
-                <input type="text" class="form-control" placeholder="{{ trans('admin/hardware/form.cost') }}" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost') }}">
+                <input type="text" class="form-control" placeholder="{{ trans('admin/hardware/form.cost') }}" name="purchase_cost" id="purchase_cost" value="{{ Request::old('purchase_cost') }}">
                 {!! $errors->first('purchase_cost', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
           </div>
@@ -95,7 +95,7 @@
               {{ trans('admin/hardware/form.order') }}
             </label>
             <div class="col-md-7">
-              <input class="form-control" type="text" name="order_number" id="order_number" value="{{ Input::old('order_number') }}" />
+              <input class="form-control" type="text" name="order_number" id="order_number" value="{{ Request::old('order_number') }}" />
               {!! $errors->first('order_number', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
           </div>
@@ -107,7 +107,7 @@
             </label>
             <div class="col-md-2">
               <div class="input-group">
-                <input class="col-md-3 form-control" type="text" name="warranty_months" id="warranty_months" value="{{ Input::old('warranty_months') }}" />
+                <input class="col-md-3 form-control" type="text" name="warranty_months" id="warranty_months" value="{{ Request::old('warranty_months') }}" />
                 <span class="input-group-addon">{{ trans('admin/hardware/form.months') }}</span>
                 {!! $errors->first('warranty_months', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>

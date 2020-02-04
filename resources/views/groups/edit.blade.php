@@ -60,7 +60,7 @@
 <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
     <label for="name" class="col-md-3 control-label">{{ trans('admin/groups/titles.group_name') }}</label>
     <div class="col-md-6 required">
-        <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $group->name) }}" />
+        <input class="form-control" type="text" name="name" id="name" value="{{ Request::old('name', $group->name) }}" />
         {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
     </div>
 </div>

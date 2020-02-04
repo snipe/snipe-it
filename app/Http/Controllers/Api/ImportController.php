@@ -10,7 +10,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Import;
 use Artisan;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use League\Csv\Reader;
@@ -41,7 +41,7 @@ class ImportController extends Controller
     {
         $this->authorize('import');
         if (!config('app.lock_passwords')) {
-            $files = Input::file('files');
+            $files = Request::file('files');
             $path = config('app.private_uploads').'/imports';
             $results = [];
             $import = new Import;

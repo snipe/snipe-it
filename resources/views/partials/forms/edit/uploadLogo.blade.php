@@ -23,7 +23,7 @@
 
     @if ($setting->$logoVariable!='')
     <div class="col-md-9 col-md-offset-3">
-        {{ Form::checkbox($logoClearVariable, '1', Input::old($logoClearVariable),array('class' => 'minimal')) }} Remove current image
+        {{ Form::checkbox($logoClearVariable, '1', Request::old($logoClearVariable),array('class' => 'minimal')) }} Remove current image
     </div>
     @endif
 </div>

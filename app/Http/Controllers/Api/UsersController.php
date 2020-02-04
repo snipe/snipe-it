@@ -90,7 +90,10 @@ class UsersController extends Controller
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $offset = (($users) && (request('offset') > $users->count())) ? 0 : request('offset', 0);
-        $limit = request('limit',  20);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
 
         switch ($request->input('sort')) {
             case 'manager':
@@ -334,7 +337,7 @@ class UsersController extends Controller
                 } catch (\Exception $e) {
                     \Log::debug($e);
                }
-
+            }
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete')));
@@ -374,7 +377,6 @@ class UsersController extends Controller
     }
 
     /**
-
      * Return JSON containing a list of licenses assigned to a user.
      *
      * @author [N. Mathar] [<snipe@snipe.net>]

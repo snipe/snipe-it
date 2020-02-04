@@ -56,12 +56,6 @@ class CustomFieldsetsController extends Controller
             return view("custom_fields.fieldsets.view")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
         }
 
-            return view("custom_fields.fieldsets.view")
-                ->with("custom_fieldset", $cfset)
-                ->with("maxid", $maxid+1)
-                ->with("custom_fields_list", $custom_fields_list);
-        }
-
         return redirect()->route("fields.index")
             ->with("error", trans('admin/custom_fields/message.fieldset.does_not_exist'));
 
@@ -102,7 +96,7 @@ class CustomFieldsetsController extends Controller
                 "user_id" => Auth::user()->id
         ]);
 
-        $validator = Validator::make(Input::all(), $cfset->rules);
+        $validator = Validator::make($request->all(), $cfset->rules);
         if ($validator->passes()) {
             $cfset->save();
             return redirect()->route("fieldsets.show", [$cfset->id])
@@ -194,7 +188,7 @@ class CustomFieldsetsController extends Controller
             }
         }
 
-        $results = $set->fields()->attach(Input::get('field_id'), ["required" => ($request->input('required') == "on"),"order" => $request->input('order', 1)]);
+        $results = $set->fields()->attach($request->input('field_id'), ["required" => ($request->input('required') == "on"),"order" => $request->input('order', 1)]);
 
         return redirect()->route("fieldsets.show", [$id])->with("success", trans('admin/custom_fields/message.field.create.assoc_success'));
     }

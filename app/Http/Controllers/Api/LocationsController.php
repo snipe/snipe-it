@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Helpers\Helper;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Helpers\Helper;
+use App\Models\Location;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
-use App\Models\Location;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class LocationsController extends Controller
 {
@@ -53,7 +52,10 @@ class LocationsController extends Controller
 
 
         $offset = (($locations) && (request('offset') > $locations->count())) ? 0 : request('offset', 0);
-        $limit = $request->input('limit', 50);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
 
@@ -184,28 +186,59 @@ class LocationsController extends Controller
      * @see \App\Http\Transformers\SelectlistTransformer
      *
      */
-    public function selectlist(Request $request)
+    public function selectlist(Request $request, $selected_id = null)
     {
+
+
 
         $locations = Location::select([
             'locations.id',
             'locations.name',
             'locations.image',
-        ]);
+        ])->orderBy('name', 'ASC')->paginate(50)->map(function ($location) {
+            return $location->groupBy('parent_id')
+                ->map(function ($parentName) {
+                return $parentName->map(function ($parent) {
+                    return $parent->game_types->groupBy('parent_id');
+                });
+            });
+        });
 
-        if ($request->filled('search')) {
-            $locations = $locations->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
-        }
 
-        $locations = $locations->orderBy('name', 'ASC')->paginate(50);
+
+//        $locations = Location::select([
+//            'locations.id',
+//            'locations.name',
+//            'locations.image',
+//        ]);
+//
+//        if ($request->filled('search')) {
+//            $locations = $locations->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
+//        }
+//
+//
+//        $locations = $locations->groupBy(function ($locations) {
+//            return $locations->parent_id;
+//        })->orderBy('name', 'ASC')->paginate(50);
+
+
+
+//       // $location_options_array = Location::getLocationHierarchy($locations);
+//        $location_options = Location::flattenLocationsArray($location_options_array);
+//        $location_options = array('' => 'Top Level') + $location_options;
+//
+//        \Log::debug($location_options);
+
+        // Work here to take an argument and see whether we need to not include the current location ID
+        // so that a location can't be its own parent
 
         // Loop through and set some custom properties for the transformer to use.
         // This lets us have more flexibility in special cases like assets, where
         // they may not have a ->name value but we want to display something anyway
-        foreach ($locations as $location) {
-            $location->use_text = $location->name;
-            $location->use_image = ($location->image) ? Storage::disk('public')->url('locations/'.$location->image, $location->image): null;
-        }
+//        foreach ($location_options as $location) {
+//            $location->use_text = $location->name;
+//            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
+//        }
 
         return (new SelectlistTransformer)->transformSelectlist($locations);
 

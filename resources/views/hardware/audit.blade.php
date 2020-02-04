@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-md-9">
                                 <label>
-                                    <input type="checkbox" value="1" name="update_location" class="minimal" {{ Input::old('update_location') == '1' ? ' checked="checked"' : '' }}> Update asset location
+                                    <input type="checkbox" value="1" name="update_location" class="minimal" {{ Request::old('update_location') == '1' ? ' checked="checked"' : '' }}> Update asset location
                                 </label>
 
                                 @include ('partials.more-info', ['helpText' => trans('help.audit_help'), 'helpPosition' => 'right'])
@@ -73,7 +73,7 @@
                             {{ Form::label('name', trans('general.next_audit_date'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-9">
                                 <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                                    <input type="text" class="form-control" placeholder="{{ trans('general.next_audit_date') }}" name="next_audit_date" id="next_audit_date" value="{{ Input::old('next_audit_date', $next_audit_date) }}">
+                                    <input type="text" class="form-control" placeholder="{{ trans('general.next_audit_date') }}" name="next_audit_date" id="next_audit_date" value="{{ Request::old('next_audit_date', $next_audit_date) }}">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                                 {!! $errors->first('next_audit_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
@@ -85,7 +85,7 @@
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                             {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-8">
-                                <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $asset->note) }}</textarea>
+                                <textarea class="col-md-6 form-control" id="note" name="note">{{ Request::old('note', $asset->note) }}</textarea>
                                 {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                             </div>
                         </div>

@@ -47,7 +47,7 @@
                                     {{ Form::label('qr_code', trans('admin/settings/general.display_qr')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    {{ Form::checkbox('qr_code', '1', Input::old('qr_code', $setting->qr_code),array('class' => 'minimal')) }}
+                                    {{ Form::checkbox('qr_code', '1', Request::old('qr_code', $setting->qr_code),array('class' => 'minimal')) }}
                                     {{ trans('general.yes') }}
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                     {{ Form::label('barcode_type', trans('admin/settings/general.barcode_type')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    {!! Form::barcode_types('barcode_type', Input::old('barcode_type', $setting->barcode_type), 'select2') !!}
+                                    {!! Form::barcode_types('barcode_type', Request::old('barcode_type', $setting->barcode_type), 'select2') !!}
                                     {!! $errors->first('barcode_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                     {{ Form::label('qr_code', trans('admin/settings/general.display_alt_barcode')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    {{ Form::checkbox('alt_barcode_enabled', '1', Input::old('alt_barcode_enabled', $setting->alt_barcode_enabled),array('class' => 'minimal')) }}
+                                    {{ Form::checkbox('alt_barcode_enabled', '1', Request::old('alt_barcode_enabled', $setting->alt_barcode_enabled),array('class' => 'minimal')) }}
                                     {{ trans('general.yes') }}
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                     {{ Form::label('alt_barcode', trans('admin/settings/general.alt_barcode_type')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    {!! Form::alt_barcode_types('alt_barcode', Input::old('alt_barcode', $setting->alt_barcode), 'select2') !!}
+                                    {!! Form::alt_barcode_types('alt_barcode', Request::old('alt_barcode', $setting->alt_barcode), 'select2') !!}
                                     {!! $errors->first('barcode_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                 </div>
                             </div>
@@ -99,14 +99,14 @@
                             </div>
                             <div class="col-md-9">
                                 @if ($setting->qr_code == 1)
-                                    {{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'form-control','placeholder' => 'Property of Your Company',
+                                    {{ Form::text('qr_text', Request::old('qr_text', $setting->qr_text), array('class' => 'form-control','placeholder' => 'Property of Your Company',
                                     'rel' => 'txtTooltip',
                                     'title' =>'Extra text that you would like to display on your labels. ',
                                     'data-toggle' =>'tooltip',
                                     'data-placement'=>'top')) }}
                                     {!! $errors->first('qr_text', '<span class="alert-msg">:message</span>') !!}
                                 @else
-                                    {{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Property of Your Company')) }}
+                                    {{ Form::text('qr_text', Request::old('qr_text', $setting->qr_text), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Property of Your Company')) }}
                                     <p class="help-block">{{ trans('admin/settings/general.qr_help') }}</p>
                                 @endif
                             </div>

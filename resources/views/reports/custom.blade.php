@@ -273,7 +273,7 @@
             <div class="form-group">
               <label for="status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }}</label>
               <div class="col-md-7 col-sm-11">
-                {{ Form::select('by_status_id', \App\Helpers\Helper::statusLabelList() , Input::old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%')) }}
+                {{ Form::select('by_status_id', \App\Helpers\Helper::statusLabelList() , Request::old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%')) }}
               </div>
             </div>
 

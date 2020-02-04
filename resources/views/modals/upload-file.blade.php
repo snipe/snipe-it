@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="col-md-12">
-                        {{ Form::textarea('notes', Input::old('notes', Input::old('notes')), ['class' => 'form-control','placeholder' => 'Notes (Optional)', 'rows'=>3]) }}
+                        {{ Form::textarea('notes', Request::old('notes', Request::old('notes')), ['class' => 'form-control','placeholder' => 'Notes (Optional)', 'rows'=>3]) }}
                     </div>
                 </div>
 

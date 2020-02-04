@@ -51,7 +51,7 @@ class ConsumableCheckoutController extends Controller
         $this->authorize('checkout', $consumable);
 
         $admin_user = Auth::user();
-        $assigned_to = e(Input::get('assigned_to'));
+        $assigned_to = e($request->input('assigned_to'));
 
         // Check if the user exists
         if (is_null($user = User::find($assigned_to))) {
@@ -60,12 +60,12 @@ class ConsumableCheckoutController extends Controller
         }
 
         // Update the consumable data
-        $consumable->assigned_to = e(Input::get('assigned_to'));
+        $consumable->assigned_to = e($request->input('assigned_to'));
 
         $consumable->users()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
-            'assigned_to' => e(Input::get('assigned_to'))
+            'assigned_to' => e($request->input('assigned_to'))
         ]);
 
         event(new CheckoutableCheckedOut($consumable, $user, Auth::user(), $request->input('note')));

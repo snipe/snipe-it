@@ -3,7 +3,7 @@
     'updateText' => trans('admin/companies/table.update'),
     'helpPosition'  => 'right',
     'helpText' => trans('help.companies'),
-    'formAction' => ($item) ? route('companies.update', ['company' => $item->id]) : route('companies.store'),
+    'formAction' => (isset($item->id)) ? route('companies.update', ['company' => $item->id]) : route('companies.store'),
 ])
 
 {{-- Page content --}}
