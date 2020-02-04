@@ -981,6 +981,7 @@ class SettingsController extends Controller
         $setting->ldap_email             = $request->input('ldap_email');
         $setting->ad_domain              = $request->input('ad_domain');
         $setting->is_ad                  = $request->input('is_ad', '0');
+        $setting->ad_append_domain       = $request->input('ad_append_domain', '0');
         $setting->ldap_tls               = $request->input('ldap_tls', '0');
         $setting->ldap_pw_sync           = $request->input('ldap_pw_sync', '0');
         $setting->custom_forgot_pass_url = $request->input('custom_forgot_pass_url');
