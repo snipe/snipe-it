@@ -741,6 +741,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
             ]
         );
 
+        Route::get('{user}/licenses',
+            [
+                'as' => 'api.users.licenselist',
+                'uses' => 'UsersController@licenses'
+            ]
+        );
+
         Route::post('{user}/upload',
             [
                 'as' => 'api.users.uploads',

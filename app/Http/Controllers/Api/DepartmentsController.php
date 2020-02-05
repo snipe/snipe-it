@@ -39,7 +39,9 @@ class DepartmentsController extends Controller
             $departments = $departments->TextSearch($request->input('search'));
         }
 
-        $offset = (($departments) && (request('offset') > $departments->count())) ? 0 : request('offset', 0);
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($departments) && ($request->get('offset') > $departments->count())) ? $departments->count() : $request->get('offset', 0);
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
@@ -160,6 +162,29 @@ class DepartmentsController extends Controller
 
         return (new SelectlistTransformer)->transformSelectlist($departments);
 
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->authorize('update', Department::class);
+        $departments = Department::findOrFail($id);
+        $departments->fill($request->all());
+
+        if ($departments->save()) {
+            return response()
+                ->json(Helper::formatStandardApiResponse('success', (new DepartmentsTransformer())->transformdepartment($departments), trans('admin/departments/message.update.success')));
+        }
+
+        return response()
+            ->json(Helper::formatStandardApiResponse('error', null, $departments->getErrors()));
     }
 
 }

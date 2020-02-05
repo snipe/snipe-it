@@ -49,7 +49,9 @@ class AccessoriesController extends Controller
             $accessories->where('supplier_id','=',$request->input('supplier_id'));
         }
 
-        $offset = (($accessories) && (request('offset') > $accessories->count())) ? 0 : request('offset', 0);
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($accessories) && ($request->get('offset') > $accessories->count())) ? $accessories->count() : $request->get('offset', 0);
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');

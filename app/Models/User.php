@@ -16,6 +16,7 @@ use App\Http\Traits\UniqueUndeletedTrait;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use DB;
+use App\Http\Requests\ImageUploadRequest;
 
 class User extends SnipeModel implements AuthenticatableContract, CanResetPasswordContract
 {
