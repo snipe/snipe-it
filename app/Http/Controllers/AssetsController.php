@@ -326,7 +326,7 @@ class AssetsController extends Controller
                 unlink(public_path().'/uploads/assets/'.$asset->image);
                 $asset->image = '';
             } catch (\Exception $e) {
-                \Log::info($e);
+                \Log::debug($e);
             }
 
         }
@@ -505,6 +505,7 @@ class AssetsController extends Controller
         $barcode_file = public_path().'/uploads/barcodes/'.str_slug($settings->alt_barcode).'-'.str_slug($asset->asset_tag).'.png';
 
         if (isset($asset->id, $asset->asset_tag)) {
+
             if (file_exists($barcode_file)) {
                 $header = ['Content-type' => 'image/png'];
                 return response()->file($barcode_file, $header);
@@ -513,10 +514,22 @@ class AssetsController extends Controller
                 $barcode_width = ($settings->labels_width - $settings->labels_display_sgutter) * 96.000000000001;
 
                 $barcode = new \Com\Tecnick\Barcode\Barcode();
-                $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode,$asset->asset_tag,($barcode_width < 300 ? $barcode_width : 300),50);
 
-                file_put_contents($barcode_file, $barcode_obj->getPngData());
-                return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+                try {
+
+                    $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode,$asset->asset_tag,($barcode_width < 300 ? $barcode_width : 300),50);
+
+                    file_put_contents($barcode_file, $barcode_obj->getPngData());
+                    return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+
+                } catch (\Exception $e) {
+                    \Log::debug('Error creating barcode: '.$e->getMessage());
+                    \Log::debug('This usually happens because the asset tags are of a format that is not compatible with the selected barcode type.');
+                    $img = file_get_contents(public_path().'/uploads/barcodes/invalid_barcode.gif');
+                    return response($img)->header('Content-type', 'image/gif');
+                }
+
+
             }
         }
     }
