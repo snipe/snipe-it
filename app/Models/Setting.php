@@ -23,7 +23,7 @@ class Setting extends Model
           'slack_endpoint'   => 'url|required_with:slack_channel|nullable',
           'slack_channel'   => 'regex:/(?<!\w)#\w+/|required_with:slack_endpoint|nullable',
           'slack_botname'   => 'string|nullable',
-          'labels_per_page' => 'numeric',
+          'labels_per_page' => 'numeric|min:1',
           'labels_width' => 'numeric',
           'labels_height' => 'numeric',
           'labels_pmargin_left' => 'numeric|nullable',
