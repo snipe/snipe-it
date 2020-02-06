@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Je hebt met succes dit product geweigerd.',
     'bulk_manager_warn'	        => 'Uw gebruikers zijn succesvol bijgewerkt, de gekozen manager kon echter niet toegepast worden omdat deze persoon ook in de lijst staat, gebruikers mogen niet hun eigen manager zijn. Probeer het nogmaals en selecteer de gebruikers zonder de manager.',
     'user_exists'               => 'Gebruiker bestaat reeds!',
-    'user_not_found'            => 'Gebruiker [:id] bestaat niet.',
+    'user_not_found'            => 'Gebruiker [:userId] bestaat niet.',
     'user_login_required'       => 'Het veld gebruikersnaam is verplicht.',
     'user_password_required'    => 'Het veld wachtwoord is verplicht.',
     'insufficient_permissions'  => 'Onvoldoende rechten.',

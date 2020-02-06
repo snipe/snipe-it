@@ -284,7 +284,7 @@ class AssetsController extends Controller
                 ->with('use_currency', $use_currency)->with('audit_log', $audit_log);
         }
 
-        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist', compact('assetId')));
     }
 
 

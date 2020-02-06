@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Olet onnistunut hylkäsi tämän aineiston.',
     'bulk_manager_warn'	        => 'Käyttäjiäsi on onnistuneesti päivitetty, mutta pääkäyttäjän merkintääsi ei tallennettu, koska valitsemasi hallinnoijan oli myös muokattava käyttäjäluettelossa, eivätkä käyttäjät ole omaa päällikköään. Valitse käyttäjät uudelleen, poislukien johtajan.',
     'user_exists'               => 'Käyttäjää on jo luotu!',
-    'user_not_found'            => 'Käyttäjää [:id] ei löydy.',
+    'user_not_found'            => 'Käyttäjää [:userId] ei löydy.',
     'user_login_required'       => 'Käyttäjätunnus vaaditaan',
     'user_password_required'    => 'Salasana vaaditaan.',
     'insufficient_permissions'  => 'Riittämättömät Oikeudet.',
