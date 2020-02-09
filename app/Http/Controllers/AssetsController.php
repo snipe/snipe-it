@@ -786,7 +786,17 @@ class AssetsController extends Controller
 
         $asset = Asset::findOrFail($id);
 
-        // We don't want to log this as a normal update, so let's bypass that
+        // We don't want to log this as a normal update, so let's bypass that  @include ('partials.forms.edit.status')
+        //
+        //  @if (!$item->id)
+        //      @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true', 'style' => 'display:none;'])
+        //
+        //      @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user', 'style' => 'display:none;', 'required' => 'false'])
+        //
+        //  @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset', 'style' => 'display:none;', 'required' => 'false'])
+        //
+        //  @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
+        //  @endif
         $asset->unsetEventDispatcher();
 
         $asset->next_audit_date = $request->input('next_audit_date');
@@ -829,4 +839,15 @@ class AssetsController extends Controller
 
     //todo: ADD create bulk function
 
+    public function createBulk(Request $request){
+        $this->authorize('create', Asset::class);
+        $view = View::make('hardware/createbulk')
+            ->with('statuslabel_list', Helper::statusLabelList())
+            ->with('item', new Asset)
+            ->with('statuslabel_types', Helper::statusTypeList());
+
+        return $view;
+
+    }
 }
+

@@ -142,7 +142,7 @@ Route::group(
             'createbulk',
             [
                 'as' => 'hardware.create.bulk',
-                'uses' => 'AssetsController@createbulk'
+                'uses' => 'AssetsController@createBulk'
             ]
         );
 
