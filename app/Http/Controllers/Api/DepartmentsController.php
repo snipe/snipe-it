@@ -164,9 +164,9 @@ class DepartmentsController extends Controller
 
     }
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage.git
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [Godfrey Martinez] [<gmartinez@grokability.com>]
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
