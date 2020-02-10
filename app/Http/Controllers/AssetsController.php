@@ -849,5 +849,76 @@ class AssetsController extends Controller
         return $view;
 
     }
+
+    public function storeBulk(Request $request)
+    {
+        $this->authorize(Asset::class);
+
+        $assetName          = $request->input('name');
+        $assetCompanyId     = Company::getIdForCurrentUser($request->input('company_id'));
+        $assetModelId       = $request->input('model_id');
+        $assetNote          = $request->input('notes');
+        $assetStatusId      = request('status_id', 0);
+        $assetWarrantyMon   = request('warranty_months', null);
+        $assetPurchaseDate  = request('purchase_date', null);
+        $assetSupplierId    = request('supplier_id', 0);
+        $assetRequestable   = request('requestable', 0);
+        $assetUserId        = Auth::id();
+        $assetTag           = Asset::autoincrement_asset();
+        $assetSerialArray   = explode(";", $request->input('serial'));
+
+        foreach ($assetSerialArray as $assetSerial) {
+            $asset = new Asset();
+            $asset->model()->associate(AssetModel::find($assetModelId));
+
+            $asset->name                    = $assetName;
+            $asset->serial                  = $assetSerial;
+            $asset->company_id              = $assetCompanyId;
+            $asset->model_id                = $assetModelId;
+            $asset->order_number            = null;
+            $asset->notes                   = $assetNote;
+            $asset->asset_tag               = Asset::autoincrement_asset();
+            $asset->user_id                 = $assetUserId;
+            $asset->archived                = '0';
+            $asset->physical                = '1';
+            $asset->depreciate              = '0';
+            $asset->status_id               = $assetStatusId;
+            $asset->warranty_months         = $assetWarrantyMon;
+            $asset->purchase_cost           = null;
+            $asset->purchase_date           = $assetPurchaseDate;
+            $asset->assigned_to             = null;
+            $asset->supplier_id             = $assetSupplierId;
+            $asset->requestable             = $assetRequestable;
+            $asset->rtd_location_id         = null;
+            $asset->location_id             = null;
+
+            // Update custom fields in the database.
+            // Validation for these fields is handled through the AssetRequest form request
+//            $model = AssetModel::find($assetModelId);
+//
+//            if (($model) && ($model->fieldset)) {
+//                foreach ($model->fieldset->fields as $field) {
+//                    if ($field->field_encrypted=='1') {
+//                        if (Gate::allows('admin')) {
+//                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+//                        }
+//                    } else {
+//                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+//                    }
+//                }
+//            }
+
+            // Was the asset created?
+            if (!$asset->save()) {
+                \Input::flash();
+                \Session::flash('errors', $asset->getErrors());
+                return response()->json(['errors' => $asset->getErrors()], 500);
+            }
+        }
+        // Redirect to the asset listing page
+        \Session::flash('success', trans('admin/hardware/message.create.success'));
+        return response()->json(['redirect_url' => route('hardware.index')]);
+
+    }
 }
 

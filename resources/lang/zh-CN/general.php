@@ -178,6 +178,7 @@
     'select_supplier'		=> '选择供货商',
     'select_user'			=> '选择用户',
     'select_date'			=> '选择日期 (YYYY-MM-DD)',
+    'input_serial_bulk'		=> '输入序列号，以半角分号“;”为分隔符',
     'select_statuslabel'	=> '选择状态',
     'select_company'    	=> '选择公司',
     'select_asset'    		=> '选择资产',

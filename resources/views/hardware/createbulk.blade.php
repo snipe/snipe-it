@@ -3,7 +3,7 @@
     'createText' => trans('admin/hardware/form.createbulk'),
     'helpTitle' => trans('admin/hardware/general.about_assets_title'),
     'helpText' => trans('admin/hardware/general.about_assets_text'),
-    'formAction' => route('hardware.store'),
+    'formAction' => route('hardware.store.bulk'),
 ])
 
 
@@ -27,7 +27,7 @@
   @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/hardware/general.requestable')])
 
 
-    @include ('partials.forms.edit.serial', ['translated_serial' => trans('admin/hardware/form.serial')])
+    @include ('partials.forms.edit.serial-createbulk', ['translated_serial' => trans('admin/hardware/form.serial'), 'required' => 'true'])
 
 @stop
 

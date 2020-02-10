@@ -146,6 +146,14 @@ Route::group(
             ]
         );
 
+        Route::post(
+            'storebulk',
+            [
+                'as' => 'hardware.store.bulk',
+                'uses' => 'AssetsController@storeBulk'
+            ]
+        );
+
         # Bulk checkout / checkin
          Route::get( 'bulkcheckout',  [
                  'as' => 'hardware/bulkcheckout',

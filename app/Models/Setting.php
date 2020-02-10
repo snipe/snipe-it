@@ -62,6 +62,15 @@ class Setting extends Model
 
     }
 
+    public static function getSettingsNoCache()
+    {
+        if (Schema::hasTable('settings')) {
+            return Setting::first();
+        }
+        return "";
+
+    }
+
     public static function setupCompleted()
     {
 
