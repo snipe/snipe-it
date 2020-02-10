@@ -75,7 +75,6 @@
                 'id' => 'ordering']) }}
                 {{ Form::checkbox("required","on") }}
                 {{ trans('admin/custom_fields/general.required') }}
-                {{ Form::text("order",$maxid)}}
                 {{ Form::select("field_id",$custom_fields_list,"",["onchange" => "$('#ordering').submit()"]) }}
                 <span class="alert-msg"><?= $errors->first('field_id'); ?></span>
                 {{ Form::close() }}
