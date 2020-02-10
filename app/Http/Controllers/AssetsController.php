@@ -864,7 +864,6 @@ class AssetsController extends Controller
         $assetSupplierId    = request('supplier_id', 0);
         $assetRequestable   = request('requestable', 0);
         $assetUserId        = Auth::id();
-        $assetTag           = Asset::autoincrement_asset();
         $assetSerialArray   = explode(";", $request->input('serial'));
 
         foreach ($assetSerialArray as $assetSerial) {
