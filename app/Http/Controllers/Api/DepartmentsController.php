@@ -164,7 +164,7 @@ class DepartmentsController extends Controller
 
     }
     /**
-     * Update the specified resource in storage.git
+     * Update the specified resource in storage.
      *
      * @author [Godfrey Martinez] [<gmartinez@grokability.com>]
      * @since [v4.0]
