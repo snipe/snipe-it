@@ -15,7 +15,7 @@ class DepartmentsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @author [Godfrey Martionez] [<snipe@snipe.net>]
+     * @author [Godfrey Martinez] [<snipe@snipe.net>]
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
