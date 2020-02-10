@@ -76,6 +76,7 @@ class AssetImporter extends ItemImporter
         }
 
         $this->item['image'] = $this->findCsvMatch($row, "image");
+        $this->item['requestable'] = (bool) $this->findCsvMatch($row, "requestable");
         $this->item['warranty_months'] = intval($this->findCsvMatch($row, "warranty_months"));
         $this->item['model_id'] = $this->createOrFetchAssetModel($row);
 
