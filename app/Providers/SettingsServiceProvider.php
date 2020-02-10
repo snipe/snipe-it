@@ -2,6 +2,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Setting;
 
 /**
  * This service provider handles sharing the snipeSettings variable, and sets
@@ -26,7 +27,7 @@ class SettingsServiceProvider extends ServiceProvider
 
         // Share common setting variables with all views.
         view()->composer('*', function ($view) {
-            $view->with('snipeSettings', \App\Models\Setting::getSettings());
+            $view->with('snipeSettings', Setting::getSettings());
         });
 
 
