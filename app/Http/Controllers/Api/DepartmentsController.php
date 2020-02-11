@@ -15,7 +15,7 @@ class DepartmentsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @author [Godfrey Martinez] [<snipe@snipe.net>]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
@@ -166,7 +166,7 @@ class DepartmentsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [Godfrey Martinez] [<gmartinez@grokability.com>]
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
