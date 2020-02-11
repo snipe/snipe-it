@@ -443,11 +443,7 @@ abstract class Importer
 
     public function fetchHumanBoolean($value)
     {
-        if (($value =='1') || (strtolower($value) =='true') || (strtolower($value) =='yes'))
-        {
-            return '1';
-        }
-        return '0';
+       return (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**
