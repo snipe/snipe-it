@@ -15,7 +15,7 @@ class DepartmentsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [Godfrey Martinez] [<snipe@snipe.net>]
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
@@ -162,6 +162,29 @@ class DepartmentsController extends Controller
 
         return (new SelectlistTransformer)->transformSelectlist($departments);
 
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @author [Godfrey Martinez] [<gmartinez@grokability.com>]
+     * @since [v4.0]
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->authorize('update', Department::class);
+        $departments = Department::findOrFail($id);
+        $departments->fill($request->all());
+
+        if ($departments->save()) {
+            return response()
+                ->json(Helper::formatStandardApiResponse('success', (new DepartmentsTransformer())->transformdepartment($departments), trans('admin/departments/message.update.success')));
+        }
+
+        return response()
+            ->json(Helper::formatStandardApiResponse('error', null, $departments->getErrors()));
     }
 
 }
