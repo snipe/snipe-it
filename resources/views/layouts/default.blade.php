@@ -12,8 +12,11 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
       <meta name="apple-mobile-web-app-capable" content="yes">
-      <link rel="apple-touch-icon" href="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
-      <link rel="apple-touch-startup-image" href="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+
+
+
+      <link rel="apple-touch-icon" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->logo) : '/img/logo.png' }}">
+      <link rel="apple-touch-startup-image" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->logo) : '/img/logo.png' }}">
       <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->favicon) : 'favicon.ico' }} ">
 
 
