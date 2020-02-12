@@ -407,18 +407,22 @@ class SettingsController extends Controller
             $setting->custom_css = $request->input('custom_css');
         }
 
+        $filedate =  date('U');
+
 
         // If the user wants to clear the logo, reset the brand type
         if ('1' == $request->input('clear_logo')) {
             Storage::disk('public')->delete($setting->logo);
             $setting->logo  = null;
             $setting->brand = 1;
+        }
 
         // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('logo')) {
+        if ($request->hasFile('logo')) {
             $image         = $request->file('logo');
             $ext           = $image->getClientOriginalExtension();
-            $setting->logo = $file_name = 'logo.' . $ext;
+            $setting->logo = $file_name = $filedate.'-logo.' . $ext;
+            \Log::debug('Uploading new logo to '.print_r(Storage::disk('public'), true));
 
             if ('svg' != $image->getClientOriginalExtension()) {
                 $upload = Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
@@ -436,16 +440,19 @@ class SettingsController extends Controller
             }
         }
 
+
+
         // If the user wants to clear the email logo...
         if ('1' == $request->input('clear_email_logo')) {
             Storage::disk('public')->delete($setting->email_logo);
             $setting->email_logo  = null;
+        }
 
         // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('email_logo')) {
+        if ($request->hasFile('email_logo')) {
             $email_image         = $email_upload = $request->file('email_logo');
             $email_ext           = $email_image->getClientOriginalExtension();
-            $setting->email_logo = $email_file_name = 'email_logo.' . $email_ext;
+            $setting->email_logo = $email_file_name = $filedate.'-email_logo.' . $email_ext;
 
             if ('svg' != $email_image->getClientOriginalExtension()) {
                 $email_upload = Image::make($email_image->getRealPath())->resize(null, 100, function ($constraint) {
@@ -467,12 +474,13 @@ class SettingsController extends Controller
         if ('1' == $request->input('clear_label_logo')) {
             Storage::disk('public')->delete($setting->label_logo);
             $setting->label_logo  = null;
+        }
 
         // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('label_logo')) {
+        if ($request->hasFile('label_logo')) {
             $image         = $request->file('label_logo');
             $ext           = $image->getClientOriginalExtension();
-            $setting->label_logo = $label_file_name = 'label_logo.' . $ext;
+            $setting->label_logo = $label_file_name = $filedate.'-label_logo.' . $ext;
 
             if ('svg' != $image->getClientOriginalExtension()) {
                 $upload = Image::make($image->getRealPath())->resize(null, 100, function ($constraint) {
@@ -494,12 +502,13 @@ class SettingsController extends Controller
         if ('1' == $request->input('clear_favicon')) {
             Storage::disk('public')->delete($setting->clear_favicon);
             $setting->favicon  = null;
+        }
 
         // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('favicon')) {
+        if ($request->hasFile('favicon')) {
             $favicon_image         = $favicon_upload = $request->file('favicon');
             $favicon_ext           = $favicon_image->getClientOriginalExtension();
-            $setting->favicon      = $favicon_file_name = 'favicon-uploaded.' . $favicon_ext;
+            $setting->favicon      = $favicon_file_name = $filedate.'-favicon.' . $favicon_ext;
 
             if (('ico' != $favicon_image->getClientOriginalExtension()) && ('svg' != $favicon_image->getClientOriginalExtension())) {
                 $favicon_upload = Image::make($favicon_image->getRealPath())->resize(null, 36, function ($constraint) {
