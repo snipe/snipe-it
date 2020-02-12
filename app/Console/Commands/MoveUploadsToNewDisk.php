@@ -172,7 +172,7 @@ class MoveUploadsToNewDisk extends Command
                     }
                 }
 
-                $this->info($public_delete_count." PUBLIC local files and ".$private_delete_count." PRIVATE local files were delete from your filesystem.");
+                $this->info($public_delete_count." PUBLIC local files and ".$private_delete_count." PRIVATE local files were deleted from your filesystem.");
             }
         }
 
