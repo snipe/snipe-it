@@ -422,7 +422,6 @@ class SettingsController extends Controller
             $image         = $request->file('logo');
             $ext           = $image->getClientOriginalExtension();
             $setting->logo = $file_name = $filedate.'-logo.' . $ext;
-            \Log::debug('Uploading new logo to '.print_r(Storage::disk('public'), true));
 
             if ('svg' != $image->getClientOriginalExtension()) {
                 $upload = Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
