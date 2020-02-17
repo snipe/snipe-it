@@ -45,7 +45,7 @@ return array(
     'footer_text'               => 'További lábjegyzet szöveg ',
     'footer_text_help'          => 'Ez a szöveg a lábléc jobb oldalán fog megjelenni. Linkek használata engedélyezett <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a> formátumban. Sortörések, fejlécek, képek, stb. okozhatnak problémákat a megjelenítés során.',
     'general_settings'			=> 'Általános beállítások',
-	'generate_backup'			=> 'Háttér létrehozása',
+	'generate_backup'			=> 'Biztonsági mentés létrehozása',
     'header_color'              => 'Fejléc színe',
     'info'                      => 'Ezek a beállítások lehetővé teszik a telepítés egyes szempontjainak testreszabását.',
     'laravel'                   => 'Laravel verzió',
