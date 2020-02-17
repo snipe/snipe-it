@@ -11,6 +11,6 @@ return array(
     'request'                   => 'Kérelem',
     'submit'  	                => 'Küldés',
     'upload'                    => 'Feltöltés',
-	'select_file'				=> 'Válaszd ki a fájlt...',
-    'select_files'				=> 'Fájl kiválasztása...',
+	'select_file'				=> 'Fájl kiválasztása...',
+    'select_files'				=> 'Fájlok kiválasztása...',
 );
