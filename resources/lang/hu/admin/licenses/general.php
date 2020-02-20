@@ -11,7 +11,7 @@ return array(
     'clone'  					=> 'Clone License',
     'history_for'  				=> 'A történelem',
     'in_out'  					=> 'Be ki',
-    'info'  					=> 'Licensz információ',
+    'info'  					=> 'Licenc információ',
     'license_seats'  			=> 'Licenc ülések',
     'seat'  					=> 'Ülés',
     'seats'  					=> 'ülések',
