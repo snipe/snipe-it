@@ -221,4 +221,6 @@
     'zip'  					=> 'Irányítószám',
     'noimage'				=> 'Nincs kép feltöltve vagy a kép nem található.',
     'token_expired'         => 'A munkamenet lejárt.',
+    'audit_due'             => 'Audit esedékes',
+    'audit_overdue'         => 'Audit esedékességi időn túli',
     ];
