@@ -89,8 +89,8 @@ class RecryptFromMcrypt extends Command
             $backup_file = 'backups/env-backups/'.'app_key-'.date('Y-m-d-gis');
 
             try {
-                Storage::disk('local')->put($backup_file, 'APP_KEY: '.config('app.key'));
-                Storage::disk('local')->append($backup_file, 'LEGACY_APP_KEY: '.$legacy_key);
+                Storage::put($backup_file, 'APP_KEY: '.config('app.key'));
+                Storage::append($backup_file, 'LEGACY_APP_KEY: '.$legacy_key);
             } catch (\Exception $e) {
                 $this->info('WARNING: Could not backup app keys');
             }
