@@ -25,7 +25,7 @@ class CompanySeeder extends Seeder
             $file_to_delete = str_replace($src,'',$del_file);
             \Log::debug('Deleting: '.$file_to_delete);
             try  {
-                Storage::disk('public')->delete($dst.$del_file);
+                Storage::delete($dst.$del_file);
             } catch (\Exception $e) {
                 \Log::debug($e);
             }

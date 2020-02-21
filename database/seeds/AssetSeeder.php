@@ -39,7 +39,7 @@ class AssetSeeder extends Seeder
       foreach($del_files as $del_file){ // iterate files
           \Log::debug('Deleting: '.$del_files);
           try  {
-              Storage::disk('public')->delete('assets'.'/'.$del_files);
+              Storage::delete('assets'.'/'.$del_files);
           } catch (\Exception $e) {
               \Log::debug($e);
           }
