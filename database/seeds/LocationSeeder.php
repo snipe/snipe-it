@@ -30,7 +30,7 @@ class LocationSeeder extends Seeder
             $file_to_copy = str_replace($src,'',$add_file);
             \Log::debug('Copying: '.$file_to_copy);
             try  {
-                Storage::disk('public')->put($dst.$file_to_copy, file_get_contents($src.$file_to_copy));
+                Storage::put($dst.$file_to_copy, file_get_contents($src.$file_to_copy));
             } catch (\Exception $e) {
                 \Log::debug($e);
             }

@@ -23,7 +23,7 @@ class ComponentsTransformer
         $array = [
             'id' => (int) $component->id,
             'name' => e($component->name),
-            'image' =>   ($component->image) ? Storage::disk('public')->url('components/'.e($component->image)) : null,
+            'image' =>   ($component->image) ? url(app('components_upload_url').e($component->image)) : null,
             'serial' => ($component->serial) ? e($component->serial) : null,
             'location' => ($component->location) ? [
                 'id' => (int) $component->location->id,

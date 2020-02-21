@@ -145,7 +145,7 @@ final class CompaniesController extends Controller
 
             if ($company->image) {
                 try  {
-                    Storage::disk('public')->delete('companies'.'/'.$company->image);
+                    Storage::delete('companies'.'/'.$company->image);
                 } catch (\Exception $e) {
                     \Log::debug($e);
                 }

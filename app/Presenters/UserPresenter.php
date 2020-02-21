@@ -317,7 +317,7 @@ class UserPresenter extends Presenter
     {
 
         if ($this->avatar) {
-            return Storage::disk('public')->url('avatars/'.$this->avatar, $this->avatar);
+            return url('uploads/avatars/'.$this->avatar);
         }
 
         if ($this->email != '') {

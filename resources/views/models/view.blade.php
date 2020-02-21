@@ -96,7 +96,7 @@
           <div class="box-body">
 
               @if ($model->image)
-                  <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($model->image)) }}" class="img-responsive"></li>
+                  <img src="{{ url(app('models_upload_url').e($model->image)) }}" class="img-responsive"></li>
               @endif
 
 

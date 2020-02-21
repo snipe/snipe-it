@@ -203,7 +203,7 @@ class Consumable extends SnipeModel
      */
     public function getImageUrl() {
         if ($this->image) {
-            return Storage::disk('public')->url(app('consumables_upload_path').$this->image);
+            return url(app('consumables_upload_path').$this->image);
         }
         return false;
 

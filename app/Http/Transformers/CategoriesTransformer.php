@@ -26,7 +26,7 @@ class CategoriesTransformer
             $array = [
                 'id' => (int) $category->id,
                 'name' => e($category->name),
-                'image' =>   ($category->image) ? Storage::disk('public')->url('categories/'.e($category->image)) : null,
+                'image' =>   ($category->image) ? url('categories/'.e($category->image)) : null,
                 'category_type' => e($category->category_type),
                 'eula' => ($category->getEula()) ? true : false,
                 'checkin_email' => ($category->checkin_email =='1') ? true : false,

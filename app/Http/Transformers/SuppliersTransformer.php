@@ -26,7 +26,7 @@ class SuppliersTransformer
             $array = [
                 'id' => (int) $supplier->id,
                 'name' => e($supplier->name),
-                'image' =>   ($supplier->image) ? Storage::disk('public')->url('suppliers/'.e($supplier->image)) : null,
+                'image' =>   ($supplier->image) ?  url(app('suppliers_upload_url').e($supplier->image)) : null,
                 'url' => e($supplier->url),
                 'address' => ($supplier->address) ? e($supplier->address) : null,
                 'address2' => ($supplier->address2) ? e($supplier->address2) : null,

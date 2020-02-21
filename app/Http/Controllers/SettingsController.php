@@ -399,6 +399,7 @@ class SettingsController extends Controller
         $setting->skin               = $request->input('skin');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
         $setting->logo_print_assets  = $request->input('logo_print_assets', '0');
+        $path = 'public/uploads';
 
         // Only allow the site name and CSS to be changed if lock_passwords is false
         // Because public demos make people act like dicks
@@ -412,7 +413,7 @@ class SettingsController extends Controller
 
         // If the user wants to clear the logo, reset the brand type
         if ('1' == $request->input('clear_logo')) {
-            Storage::disk('public')->delete($setting->logo);
+            Storage::delete($setting->logo);
             $setting->logo  = null;
             $setting->brand = 1;
         }
@@ -431,11 +432,11 @@ class SettingsController extends Controller
             }
 
             // This requires a string instead of an object, so we use ($string)
-            Storage::disk('public')->put($file_name, (string) $upload->encode());
+            Storage::put($path.'/'.$file_name, (string) $upload->encode(), 'public');
 
             // Remove Current image if exists
             if (($setting->logo) && (file_exists($file_name))) {
-                Storage::disk('public')->delete($file_name);
+                Storage::delete($path.'/'.$file_name);
             }
         }
 
@@ -443,7 +444,7 @@ class SettingsController extends Controller
 
         // If the user wants to clear the email logo...
         if ('1' == $request->input('clear_email_logo')) {
-            Storage::disk('public')->delete($setting->email_logo);
+            Storage::delete($setting->email_logo);
             $setting->email_logo  = null;
         }
 
@@ -461,17 +462,17 @@ class SettingsController extends Controller
             }
 
             // This requires a string instead of an object, so we use ($string)
-            Storage::disk('public')->put($email_file_name, (string) $email_upload->encode());
+            Storage::put($email_file_name, (string) $email_upload->encode(), 'public');
 
             // Remove Current image if exists
             if (($setting->email_logo) && (file_exists($email_file_name))) {
-                Storage::disk('public')->delete($email_file_name);
+                Storage::delete($email_file_name);
             }
         }
 
         // If the user wants to clear the label logo...
         if ('1' == $request->input('clear_label_logo')) {
-            Storage::disk('public')->delete($setting->label_logo);
+            Storage::delete($setting->label_logo);
             $setting->label_logo  = null;
         }
 
@@ -489,17 +490,17 @@ class SettingsController extends Controller
             }
 
             // This requires a string instead of an object, so we use ($string)
-            Storage::disk('public')->put($label_file_name, (string) $upload->encode());
+            Storage::put($label_file_name, (string) $upload->encode(), 'public');
 
             // Remove Current image if exists
             if (($setting->label_logo) && (file_exists($label_file_name))) {
-                Storage::disk('public')->delete($label_file_name);
+                Storage::delete($label_file_name);
             }
         }
 
         // If the user wants to clear the favicon...
         if ('1' == $request->input('clear_favicon')) {
-            Storage::disk('public')->delete($setting->clear_favicon);
+            Storage::delete($setting->clear_favicon);
             $setting->favicon  = null;
         }
 
@@ -516,20 +517,15 @@ class SettingsController extends Controller
                 });
 
                 // This requires a string instead of an object, so we use ($string)
-                Storage::disk('public')->put($favicon_file_name, (string) $favicon_upload->encode());
+                Storage::put($favicon_file_name, (string) $favicon_upload->encode(), 'public');
             } else {
-                Storage::disk('public')->put($favicon_file_name, file_get_contents($request->file('favicon')));
+                Storage::put($favicon_file_name, file_get_contents($request->file('favicon')), 'public');
             }
-
-
-
-
-
 
 
             // Remove Current image if exists
             if (($setting->favicon) && (file_exists($favicon_file_name))) {
-                Storage::disk('public')->delete($favicon_file_name);
+                Storage::delete($favicon_file_name);
             }
         }
 

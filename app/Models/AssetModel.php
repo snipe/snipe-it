@@ -173,7 +173,7 @@ class AssetModel extends SnipeModel
      */
     public function getImageUrl() {
         if ($this->image) {
-            return Storage::disk('public')->url(app('models_upload_path').$this->image);
+            return url(app('models_upload_path').$this->image);
         }
         return false;
     }

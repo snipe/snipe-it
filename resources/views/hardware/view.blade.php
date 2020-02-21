@@ -500,11 +500,11 @@
 
               @if ($asset->image)
                 <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-                <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" class="assetimg img-responsive">
+                <img src="{{ url(app('assets_upload_url').'/'.e($asset->image)) }}" class="assetimg img-responsive">
                 </div>
               @elseif (($asset->model) && ($asset->model->image!=''))
                 <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-                <img src="{{ Storage::disk('public')->url(app('models_upload_url').e($asset->model->image )) }}" class="assetimg img-responsive">
+                <img src="{{ url(app('models_upload_url').'/'.e($asset->model->image )) }}" class="assetimg img-responsive">
                 </div>
               @endif
 

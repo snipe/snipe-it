@@ -71,27 +71,36 @@ class ProfileController extends Controller
 
 
         if ($request->hasFile('avatar')) {
-            $path = 'avatars';
+            $path = 'public/uploads/avatars';
 
-            if(!Storage::disk('public')->exists($path)) Storage::disk('public')->makeDirectory($path, 775);
+            \Log::debug('Uplopading file to '.$path);
+
+            if (!Storage::exists($path)) Storage::makeDirectory($path);
 
             $upload = $image = $request->file('avatar');
             $ext = $image->getClientOriginalExtension();
             $file_name = 'avatar-'.str_random(18).'.'.$ext;
 
             if ($image->getClientOriginalExtension()!='svg') {
-                $upload =  Image::make($image->getRealPath())->resize(84, 84);
+                $upload =  Image::make($image->getRealPath())->resize(150, 150);
             }
 
             // This requires a string instead of an object, so we use ($string)
-            Storage::disk('public')->put($path.'/'.$file_name, (string)$upload->encode());
+            try  {
+                Storage::put($path.'/'.$file_name, (string)$upload->encode(),'public');
 
-            // Remove Current image if exists
-            if (($user->avatar) && (Storage::disk('public')->exists($path.'/'.$user->avatar))) {
-                Storage::disk('public')->delete($path.'/'.$user->avatar);
+                // Remove Current image if exists
+                if (($user->avatar) && (Storage::exists($path.'/'.$user->avatar))) {
+                    Storage::delete($path.'/'.$user->avatar);
+                }
+                $user->avatar = $file_name;
+            } catch (\Exception $e) {
+                \Log::error($e);
             }
 
-            $user->avatar = $file_name;
+
+
+
         }
 
 

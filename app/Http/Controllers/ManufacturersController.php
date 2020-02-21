@@ -162,7 +162,7 @@ class ManufacturersController extends Controller
 
         if ($manufacturer->image) {
             try  {
-                Storage::disk('public')->delete('manufacturers/'.$manufacturer->image);
+                Storage::delete('manufacturers/'.$manufacturer->image);
             } catch (\Exception $e) {
                 \Log::info($e);
             }

@@ -29,7 +29,7 @@ class AssetModelsTransformer
                 'id' => (int) $assetmodel->manufacturer->id,
                 'name'=> e($assetmodel->manufacturer->name)
             ]  : null,
-            'image' => ($assetmodel->image!='') ? Storage::disk('public')->url('models/'.e($assetmodel->image)) : null,
+            'image' => ($assetmodel->image!='') ? url('models/'.e($assetmodel->image)) : null,
             'model_number' => e($assetmodel->model_number),
             'depreciation' => ($assetmodel->depreciation) ? [
                 'id' => (int) $assetmodel->depreciation->id,

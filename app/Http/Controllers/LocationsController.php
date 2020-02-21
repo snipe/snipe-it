@@ -215,7 +215,7 @@ class LocationsController extends Controller
 
         if ($location->image) {
             try  {
-                Storage::disk('public')->delete('locations/'.$location->image);
+                Storage::delete('locations/'.$location->image);
             } catch (\Exception $e) {
                 \Log::error($e);
             }

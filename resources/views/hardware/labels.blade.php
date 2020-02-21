@@ -146,7 +146,7 @@
     <div class="qr_text">
         @if ($settings->label_logo)
         <div class="label-logo">
-          <img class="label-logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->label_logo) }}">
+          <img class="label-logo" src="{{ url('').e($snipeSettings->label_logo) }}">
         </div>
         @endif
 

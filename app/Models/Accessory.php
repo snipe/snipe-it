@@ -218,7 +218,7 @@ class Accessory extends SnipeModel
      */
     public function getImageUrl() {
         if ($this->image) {
-            return Storage::disk('public')->url(app('accessories_upload_path').$this->image);
+            return url(app('accessories_upload_path').$this->image);
         }
         return false;
 

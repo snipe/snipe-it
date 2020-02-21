@@ -173,7 +173,7 @@ class AccessoriesController extends Controller
 
         if ($accessory->image) {
             try  {
-                Storage::disk('public')->delete('accessories'.'/'.$accessory->image);
+                Storage::delete('accessories'.'/'.$accessory->image);
             } catch (\Exception $e) {
                 \Log::debug($e);
             }
