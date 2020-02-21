@@ -45,15 +45,17 @@ $config = [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
-        ],
-
-        // This applies the LOCAL public only, not S3/FTP/etc
-        'public' => [
-            'driver' => 'local',
-            'root' => public_path('uploads'),
-            'url' => env('APP_URL').'/uploads',
-            'visibility' => 'public',
+            'root' => base_path(),
+            'permissions' => [
+                'file' => [
+                    'public' => 0664,
+                    'private' => 0600,
+                ],
+                'dir' => [
+                    'public' => 0775,
+                    'private' => 0700,
+                ],
+            ],
         ],
 
         's3' => [
