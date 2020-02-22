@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetFileRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,31 +69,29 @@ class AssetFilesController extends Controller
                     ->header('Content-Type', 'text/plain');
             }
 
-            $file = 'private_uploads/assets/'.$log->filename;
-            \Log::debug('Checking for '.$file);
+            $filepath = 'private_uploads/assets/'.$log->filename;
+            \Log::debug('Checking for '.$filepath);
 
             if ($log->action_type =='audit') {
-                $file = 'private_uploads/audits/'.$log->filename;
+                $filepath = 'private_uploads/audits/'.$log->filename;
             }
 
-            if (!Storage::exists($file)) {
-                return response('File '.$file.' not found on server', 404)
-                    ->header('Content-Type', 'text/plain');
-            }
 
+            $file = Storage::get($filepath);
+            //$file = Storage::temporaryUrl($filepath, Carbon::now()->addMinutes(5));
+
+            // Display the file, not download
             if ($download != 'true') {
-                  if ($contents = file_get_contents(Storage::url($file))) {
-                      return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
-                  }
-                return JsonResponse::create(["error" => "Failed validation: "], 500);
-            }
-            return Storage::download($file);
-        }
-        // Prepare the error message
-        $error = trans('admin/hardware/message.does_not_exist', ['id' => $fileId]);
 
-        // Redirect to the hardware management page
-        return redirect()->route('hardware.index')->with('error', $error);
+                return response(Storage::get($filepath), 200)
+                    ->header('Content-Type',  Storage::mimeType($filepath))
+                    ->header('Content-Disposition', 'inline');
+
+            }
+            return Storage::download($filepath);
+        }
+
+        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist', ['id' => $fileId]));
     }
 
     /**
