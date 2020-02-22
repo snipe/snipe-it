@@ -399,7 +399,7 @@ class SettingsController extends Controller
         $setting->skin               = $request->input('skin');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
         $setting->logo_print_assets  = $request->input('logo_print_assets', '0');
-        $path = 'public/uploads';
+        $path = 'uploads';
 
         // Only allow the site name and CSS to be changed if lock_passwords is false
         // Because public demos make people act like dicks
@@ -432,7 +432,7 @@ class SettingsController extends Controller
             }
 
             // This requires a string instead of an object, so we use ($string)
-            Storage::put($path.'/'.$file_name, (string) $upload->encode(), 'public');
+            Storage::put($path.'/'.$file_name, (string) $upload->encode());
 
             // Remove Current image if exists
             if (($setting->logo) && (file_exists($file_name))) {
