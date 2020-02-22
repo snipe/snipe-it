@@ -820,7 +820,7 @@
                           @endif
                         </td>
                         <td>
-                          @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('assets')))
+                          @if ( \App\Helpers\Helper::checkUploadIsImage(app('assets_private_upload_url').$file->filename))
                             <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
                               <img src="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
                             </a>
