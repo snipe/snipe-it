@@ -12,6 +12,8 @@ use App\Models\Statuslabel;
 use Crypt;
 use Image;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class Helper
 {
@@ -359,14 +361,15 @@ class Helper
      * @param File $file
      * @return String | Boolean
      */
-    public static function checkUploadIsImage($file)
+    public static function checkUploadIsImage($path)
     {
-        $finfo = @finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
-        $filetype = @finfo_file($finfo, $file);
-        finfo_close($finfo);
 
-        if (($filetype=="image/jpeg") || ($filetype=="image/jpg")   || ($filetype=="image/png") || ($filetype=="image/bmp") || ($filetype=="image/gif")) {
-            return $filetype;
+        $mimetype = Storage::mimeType($path);
+        \Log::debug('mimetype is: '.$mimetype);
+
+
+        if (($mimetype=="image/jpeg") || ($mimetype=="image/jpg")   || ($mimetype=="image/png") || ($mimetype=="image/bmp") || ($mimetype=="image/gif")) {
+            return $mimetype;
         }
 
         return false;
