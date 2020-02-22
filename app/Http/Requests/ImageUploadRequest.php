@@ -48,7 +48,7 @@ class ImageUploadRequest extends Request
         $type = strtolower(class_basename(get_class($item)));
 
         if (is_null($path)) {
-            $path =  'public/uploads/'.str_plural($type);
+            $path =  'uploads/'.str_plural($type);
         }
 
 
