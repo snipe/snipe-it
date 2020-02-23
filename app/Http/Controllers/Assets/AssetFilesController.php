@@ -70,7 +70,6 @@ class AssetFilesController extends Controller
             }
 
             $filepath = 'private_uploads/assets/'.$log->filename;
-            \Log::debug('Checking for '.$filepath);
 
             if ($log->action_type =='audit') {
                 $filepath = 'private_uploads/audits/'.$log->filename;
