@@ -80,6 +80,7 @@ class Asset extends Depreciable
         'checkout_date'   => 'date|max:10|min:10|nullable',
         'checkin_date'    => 'date|max:10|min:10|nullable',
         'supplier_id'     => 'numeric|nullable',
+        'department_id'   => 'integer|nullable|exists:departments,id',
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
         'status'          => 'integer',
         'serial'          => 'unique_serial|nullable',
@@ -110,6 +111,7 @@ class Asset extends Depreciable
         'serial',
         'status_id',
         'supplier_id',
+        'department_id',
         'warranty_months',
     ];
 
@@ -143,6 +145,7 @@ class Asset extends Depreciable
     protected $searchableRelations = [
         'assetstatus'        => ['name'],
         'supplier'           => ['name'],
+        'department'         => ['name'],
         'company'            => ['name'],
         'defaultLoc'         => ['name'],
         'model'              => ['name', 'model_number'],
@@ -152,7 +155,7 @@ class Asset extends Depreciable
 
     public function getDisplayNameAttribute()
     {
-        return $this->present()->name();
+        return $this->present()->name(); 
     }
 
     /**
@@ -178,7 +181,6 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
-
 
     public function availableForCheckout()
     {
@@ -528,6 +530,10 @@ class Asset extends Depreciable
         return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
     }
 
+    public function department()
+    {
+        return $this->belongsTo('\App\Models\Department', 'department_id');
+    }
 
     public function location()
     {
@@ -1173,6 +1179,14 @@ class Asset extends Depreciable
                         });
                     });
                 }
+
+                if ($fieldname =='department') {
+                  $query->where(function ($query) use ($search_val) {
+                      $query->whereHas('department', function ($query) use ($search_val) {
+                          $query->where('departments.name', 'LIKE', '%' . $search_val . '%');
+                      });
+                  });
+                }
             }
 
             /**
@@ -1198,7 +1212,7 @@ class Asset extends Depreciable
              *
              */
             if (($fieldname!='category') && ($fieldname!='model_number') && ($fieldname!='rtd_location') && ($fieldname!='location') && ($fieldname!='supplier')
-                && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
+                && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer') && ($fieldname!='department')) {
                     $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }
 
@@ -1375,6 +1389,19 @@ class Asset extends Depreciable
     public function scopeOrderSupplier($query, $order)
     {
         return $query->leftJoin('suppliers as suppliers_assets', 'assets.supplier_id', '=', 'suppliers_assets.id')->orderBy('suppliers_assets.name', $order);
+    }
+
+        /**
+     * Query builder scope to order on supplier name
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderDepartment($query, $order)
+    {
+        return $query->leftJoin('departments as departments_assets', 'assets.department_id', '=', 'departments_assets.id')->orderBy('departments_assets.name', $order);
     }
 
     /**

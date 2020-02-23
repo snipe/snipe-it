@@ -60,6 +60,10 @@
   @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
   @include ('partials.forms.edit.purchase_date')
   @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
+
+  <!--  Department -->
+  @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.department'), 'fieldname' => 'department_id'])
+
   @include ('partials.forms.edit.order_number')
     <?php
     $currency_type=null;

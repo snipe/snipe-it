@@ -144,6 +144,21 @@
                     </tr>
                     @endif
 
+                    @if ($asset->department)
+                      <tr>
+                        <td>{{ trans('general.department') }}</td>
+                        <td>
+                          @can ('superuser')
+                            <a href="{{ route('departments.show', $asset->department_id) }}">
+                              {{ $asset->department->name }}
+                            </a>
+                          @else
+                            {{ $asset->department->name }}
+                          @endcan
+                        </td>
+                      </tr>
+                    @endif
+
                     @if ($asset->name)
                     <tr>
                       <td>{{ trans('admin/hardware/form.name') }}</td>

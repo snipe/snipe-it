@@ -11,6 +11,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
+use App\Models\Department;
 use App\Models\CustomField;
 use App\Models\Import;
 use App\Models\Location;
@@ -135,6 +136,7 @@ class AssetsController extends Controller
         $asset->purchase_date           = request('purchase_date', null);
         $asset->assigned_to             = request('assigned_to', null);
         $asset->supplier_id             = request('supplier_id', 0);
+        $asset->department_id           = request('department_id', null);
         $asset->requestable             = request('requestable', 0);
         $asset->rtd_location_id         = request('rtd_location_id', null);
 
@@ -311,6 +313,7 @@ class AssetsController extends Controller
         $asset->purchase_cost = Helper::ParseFloat($request->input('purchase_cost', null));
         $asset->purchase_date = $request->input('purchase_date', null);
         $asset->supplier_id = $request->input('supplier_id', null);
+        $asset->department_id = $request->input('department_id', null);
 
         // If the box isn't checked, it's not in the request at all.
         $asset->requestable = $request->filled('requestable');
