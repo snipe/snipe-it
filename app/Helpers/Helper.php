@@ -364,15 +364,24 @@ class Helper
     public static function checkUploadIsImage($path)
     {
 
-        $mimetype = Storage::mimeType($path);
-        \Log::debug('mimetype is: '.$mimetype);
+        try {
 
+            // Get the mimetype to see if we should treat this file like an image
+            $mimetype = Storage::mimeType($path);
 
-        if (($mimetype=="image/jpeg") || ($mimetype=="image/jpg")   || ($mimetype=="image/png") || ($mimetype=="image/bmp") || ($mimetype=="image/gif")) {
-            return $mimetype;
+            if (($mimetype=="image/jpeg") || ($mimetype=="image/jpg")   || ($mimetype=="image/png") || ($mimetype=="image/bmp") || ($mimetype=="image/gif")) {
+                return $mimetype;
+            }
+
+        } catch (\Exception $e) {
+            \Log::error('Error loading image: '.$path);
         }
 
         return false;
+
+
+
+
     }
 
     /**
