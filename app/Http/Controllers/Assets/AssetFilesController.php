@@ -75,10 +75,6 @@ class AssetFilesController extends Controller
                 $filepath = 'private_uploads/audits/'.$log->filename;
             }
 
-
-            $file = Storage::get($filepath);
-            //$file = Storage::temporaryUrl($filepath, Carbon::now()->addMinutes(5));
-
             // Display the file, not download
             if ($download != 'true') {
 
@@ -87,6 +83,8 @@ class AssetFilesController extends Controller
                     ->header('Content-Disposition', 'inline');
 
             }
+
+            // If not a display, download the file
             return Storage::download($filepath);
         }
 
