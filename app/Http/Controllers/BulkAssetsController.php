@@ -77,6 +77,7 @@ class BulkAssetsController extends Controller
         if (($request->filled('purchase_date'))
             || ($request->filled('purchase_cost'))
             || ($request->filled('supplier_id'))
+            || ($request->filled('department_id'))
             || ($request->filled('order_number'))
             || ($request->filled('warranty_months'))
             || ($request->filled('rtd_location_id'))
@@ -94,6 +95,7 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('requestable')
                     ->conditionallyAddItem('status_id')
                     ->conditionallyAddItem('supplier_id')
+                    ->conditionallyAddItem('department_id')
                     ->conditionallyAddItem('warranty_months');
 
                 if ($request->filled('purchase_cost')) {
