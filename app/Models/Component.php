@@ -36,6 +36,7 @@ class Component extends SnipeModel
         'qty'     => 'required|integer|min:1',
         'category_id' => 'required|integer',
         'company_id'  => 'integer|nullable',
+        'department_id' => 'required|integer|exists:departments,id',
         'purchase_date'  => 'date|nullable',
         'purchase_cost'   => 'numeric|nullable',
     );
@@ -58,6 +59,7 @@ class Component extends SnipeModel
     protected $fillable = [
         'category_id',
         'company_id',
+        'department_id',
         'location_id',
         'name',
         'purchase_cost',
@@ -85,6 +87,7 @@ class Component extends SnipeModel
     protected $searchableRelations = [
         'category'     => ['name'],
         'company'      => ['name'],
+        'department'   => ['name'],
         'location'     => ['name'],
     ];      
 
@@ -108,6 +111,10 @@ class Component extends SnipeModel
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
+    public function department()
+    {
+        return $this->belongsTo('\App\Models\Department', 'department_id');
+    }
 
     public function category()
     {

@@ -46,6 +46,10 @@ class ComponentsTransformer
                 'id' => (int) $component->company->id,
                 'name' => e($component->company->name)
             ] : null,
+            'department'   => ($component->department) ? [
+                'id' => (int) $component->department->id,
+                'name' => e($component->department->name)
+            ] : null,
             'created_at' => Helper::getFormattedDateObject($component->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($component->updated_at, 'datetime'),
             'user_can_checkout' =>  ($component->numRemaining() > 0) ? 1 : 0,
