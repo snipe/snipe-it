@@ -78,7 +78,7 @@ class Department extends SnipeModel
      */
     public function users()
     {
-        return $this->hasMany('\App\Models\User', 'department_id');
+        return $this->hasMany(User::class, 'department_id');
     }
 
     /**
@@ -87,7 +87,7 @@ class Department extends SnipeModel
      */
     public function assets()
     {
-        return $this->hasMany('\App\Models\Asset', 'department_id');
+        return $this->hasMany(Asset::class, 'department_id');
     }
     public function licenses()
     {

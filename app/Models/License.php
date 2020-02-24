@@ -80,6 +80,7 @@ class License extends Depreciable
         'seats',
         'serial',
         'supplier_id',
+        'department_id',
         'termination_date',
         'user_id',
     ];
@@ -409,6 +410,11 @@ class License extends Depreciable
         return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
     }
 
+    public function department()
+    {
+        return $this->belongsTo('\App\Models\Department', 'department_id');
+    }
+
     /*
      * Get the next available free seat - used by
      * the API to populate next_seat
@@ -472,6 +478,20 @@ class License extends Depreciable
     {
         return $query->leftJoin('suppliers', 'licenses.supplier_id', '=', 'suppliers.id')->select('licenses.*')
             ->orderBy('suppliers.name', $order);
+    }
+
+        /**
+     * Query builder scope to order on department
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderDepartment($query, $order)
+    {
+        return $query->leftJoin('departments', 'licenses.department_id', '=', 'departments.id')->select('licenses.*')
+            ->orderBy('departments.name', $order);
     }
 
     /**
