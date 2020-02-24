@@ -25,7 +25,7 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats as free_seats_count'));
+        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','department','category')->withCount('freeSeats as free_seats_count'));
 
 
         if ($request->filled('company_id')) {
@@ -63,6 +63,9 @@ class LicensesController extends Controller
         if ($request->filled('supplier_id')) {
             $licenses->where('supplier_id','=',$request->input('supplier_id'));
         }
+        if ($request->filled('department_id')) {
+          $licenses->where('department_id','=',$request->input('department_id'));
+        }
 
         if ($request->filled('category_id')) {
             $licenses->where('category_id','=',$request->input('category_id'));
@@ -70,10 +73,6 @@ class LicensesController extends Controller
 
         if ($request->filled('depreciation_id')) {
             $licenses->where('depreciation_id','=',$request->input('depreciation_id'));
-        }
-
-        if ($request->filled('supplier_id')) {
-            $licenses->where('supplier_id','=',$request->input('supplier_id'));
         }
 
 
@@ -98,6 +97,9 @@ class LicensesController extends Controller
                 break;
             case 'supplier':
                 $licenses = $licenses->leftJoin('suppliers', 'licenses.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
+                break;
+            case 'department':
+                $licenses = $licenses->leftJoin('departments', 'departments.department_id', '=', 'departments.id')->orderBy('departments.name', $order);
                 break;
             case 'category':
                 $licenses = $licenses->leftJoin('categories', 'licenses.category_id', '=', 'categories.id')->orderBy('categories.name', $order);

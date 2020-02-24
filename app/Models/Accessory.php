@@ -43,6 +43,7 @@ class Accessory extends SnipeModel
     protected $searchableRelations = [
         'category'     => ['name'],
         'company'      => ['name'],
+        'department'   => ['name'],
         'manufacturer' => ['name'],
         'supplier'     => ['name'],
         'location'     => ['name']
@@ -94,6 +95,7 @@ class Accessory extends SnipeModel
         'model_number',
         'manufacturer_id',
         'supplier_id',
+        'department_id',
         'image',
         'qty',
         'requestable'
@@ -105,6 +107,11 @@ class Accessory extends SnipeModel
     public function supplier()
     {
         return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('\App\Models\Department', 'department_id');
     }
     
 
@@ -206,6 +213,20 @@ class Accessory extends SnipeModel
     {
         return $query->leftJoin('companies', 'accessories.company_id', '=', 'companies.id')
         ->orderBy('companies.name', $order);
+    }
+
+    /**
+    * Query builder scope to order on company
+    *
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderDepartment($query, $order)
+    {
+        return $query->leftJoin('departments', 'accessories.department_id', '=', 'departments.id')
+        ->orderBy('departments.name', $order);
     }
 
     /**

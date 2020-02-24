@@ -5,6 +5,7 @@ use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Company;
+use App\Models\Department;
 use App\Models\Component;
 use App\Models\CustomField;
 use App\Models\Setting;
@@ -82,6 +83,7 @@ class ComponentsController extends Controller
         $component->category_id            = $request->input('category_id');
         $component->location_id            = $request->input('location_id');
         $component->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
+        $component->department_id          = $request->input('department_id');
         $component->order_number           = $request->input('order_number', null);
         $component->min_amt                = $request->input('min_amt', null);
         $component->serial                 = $request->input('serial', null);
@@ -148,6 +150,7 @@ class ComponentsController extends Controller
         $component->category_id            = Input::get('category_id');
         $component->location_id            = Input::get('location_id');
         $component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
+        $component->department_id          = Input::get('department_id');
         $component->order_number           = Input::get('order_number');
         $component->min_amt                = Input::get('min_amt');
         $component->serial                 = Input::get('serial');

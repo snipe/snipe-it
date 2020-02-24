@@ -41,6 +41,13 @@ class AccessoryPresenter extends Presenter
                 "visible" => false,
                 "formatter" => "companiesLinkObjFormatter"
             ], [
+                "field" => "department",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('general.department'),
+                "visible" => false,
+                "formatter" => "departmentsLinkObjFormatter"
+            ], [
                 "field" => "name",
                 "searchable" => true,
                 "sortable" => true,

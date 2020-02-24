@@ -25,7 +25,7 @@ class ComponentsController extends Controller
     {
         $this->authorize('view', Component::class);
         $components = Company::scopeCompanyables(Component::select('components.*')
-            ->with('company', 'location', 'category'));
+            ->with('company', 'department', 'location', 'category'));
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
@@ -33,6 +33,10 @@ class ComponentsController extends Controller
 
         if ($request->filled('company_id')) {
             $components->where('company_id','=',$request->input('company_id'));
+        }
+
+        if ($request->filled('department_id')) {
+          $components->where('department_id','=',$request->input('department_id'));
         }
 
         if ($request->filled('category_id')) {
@@ -50,7 +54,7 @@ class ComponentsController extends Controller
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
-        $allowed_columns = ['id','name','min_amt','order_number','serial','purchase_date','purchase_cost','company','category','qty','location','image'];
+        $allowed_columns = ['id','name','min_amt','order_number','serial','purchase_date','purchase_cost','company','category','qty','location', 'department','image'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
 
@@ -63,6 +67,9 @@ class ComponentsController extends Controller
                 break;
             case 'company':
                 $components = $components->OrderCompany($order);
+                break;
+            case 'department':
+                $components = $components->OrderDepartment($order);
                 break;
             default:
                 $components = $components->orderBy($sort, $order);

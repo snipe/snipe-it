@@ -22,7 +22,17 @@ class DepartmentsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Department::class);
-        $allowed_columns = ['id','name','image','users_count'];
+        $allowed_columns = [
+          'id',
+          'name',
+          'image',
+          'users_count',
+          'assets_count',
+          'licenses_count',
+          'accessories_count',
+          'consumables_count',
+          'components_count',
+        ];
 
         $departments = Department::select([
             'departments.id',
@@ -33,7 +43,12 @@ class DepartmentsController extends Controller
             'departments.created_at',
             'departments.updated_at',
             'departments.image'
-        ])->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
+        ])
+        ->with('users')
+        ->with('location')
+        ->with('manager')
+        ->with('company')
+        ->withCount('users as users_count','assets as assets_count','licenses as licenses_count','accessories as accessories_count','consumables as consumables_count','components as components_count');
 
         if ($request->filled('search')) {
             $departments = $departments->TextSearch($request->input('search'));

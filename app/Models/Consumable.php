@@ -35,6 +35,7 @@ class Consumable extends SnipeModel
         'qty'         => 'required|integer|min:0',
         'category_id' => 'required|integer',
         'company_id'  => 'integer|nullable',
+        'department_id'  => 'integer|nullable|exists:departments,id',
         'min_amt'     => 'integer|min:0|nullable',
         'purchase_cost'   => 'numeric|nullable',
     );
@@ -57,6 +58,7 @@ class Consumable extends SnipeModel
     protected $fillable = [
         'category_id',
         'company_id',
+        'department_id',
         'item_no',
         'location_id',
         'manufacturer_id',
@@ -86,6 +88,7 @@ class Consumable extends SnipeModel
     protected $searchableRelations = [
         'category'     => ['name'],
         'company'      => ['name'],
+        'department'   => ['name'],
         'location'     => ['name'],  
         'manufacturer' => ['name'],
     ];     
@@ -112,6 +115,11 @@ class Consumable extends SnipeModel
     public function company()
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('\App\Models\Department', 'department_id');
     }
 
     public function manufacturer()
@@ -190,7 +198,7 @@ class Consumable extends SnipeModel
     }
 
     /**
-    * Query builder scope to order on company
+    * Query builder scope to order on category
     *
     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
@@ -240,5 +248,18 @@ class Consumable extends SnipeModel
     public function scopeOrderCompany($query, $order)
     {
         return $query->leftJoin('companies', 'consumables.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
+    }
+
+    /**
+    * Query builder scope to order on department
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderDepartment($query, $order)
+    {
+        return $query->join('departments', 'consumables.department_id', '=', 'departments.id')->orderBy('departments.name', $order);
     }
 }

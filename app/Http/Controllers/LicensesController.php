@@ -108,6 +108,7 @@ class LicensesController extends Controller
         $license->seats             = $request->input('seats');
         $license->serial            = $request->input('serial');
         $license->supplier_id       = $request->input('supplier_id');
+        $license->department_id     = $request->input('department_id');
         $license->category_id       = $request->input('category_id');
         $license->termination_date  = $request->input('termination_date');
         $license->user_id           = Auth::id();
@@ -186,6 +187,7 @@ class LicensesController extends Controller
         $license->seats             = e($request->input('seats'));
         $license->manufacturer_id   =  $request->input('manufacturer_id');
         $license->supplier_id       = $request->input('supplier_id');
+        $license->department_id       = $request->input('department_id');
         $license->category_id       = $request->input('category_id');
 
         if ($license->save()) {

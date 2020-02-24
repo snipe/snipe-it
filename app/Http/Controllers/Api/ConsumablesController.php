@@ -24,7 +24,7 @@ class ConsumablesController extends Controller
         $this->authorize('index', Consumable::class);
         $consumables = Company::scopeCompanyables(
             Consumable::select('consumables.*')
-                ->with('company', 'location', 'category', 'users', 'manufacturer')
+                ->with('company', 'department', 'location', 'category', 'users', 'manufacturer')
         );
 
         if ($request->filled('search')) {
@@ -33,6 +33,10 @@ class ConsumablesController extends Controller
 
         if ($request->filled('company_id')) {
             $consumables->where('company_id','=',$request->input('company_id'));
+        }
+
+        if ($request->filled('department_id')) {
+            $consumables->where('department_id','=',$request->input('department_id'));
         }
 
         if ($request->filled('category_id')) {
@@ -51,7 +55,7 @@ class ConsumablesController extends Controller
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
-        $allowed_columns = ['id','name','order_number','min_amt','purchase_date','purchase_cost','company','category','model_number', 'item_no', 'manufacturer','location','qty','image'];
+        $allowed_columns = ['id','name','order_number','min_amt','purchase_date','purchase_cost','company','category', 'department','model_number', 'item_no', 'manufacturer','location','qty','image'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
 
@@ -59,6 +63,9 @@ class ConsumablesController extends Controller
         switch ($sort) {
             case 'category':
                 $consumables = $consumables->OrderCategory($order);
+                break;
+            case 'department':
+                $consumables = $consumables->OrderDepartment($order);
                 break;
             case 'location':
                 $consumables = $consumables->OrderLocation($order);
