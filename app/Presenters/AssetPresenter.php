@@ -134,6 +134,13 @@ class AssetPresenter extends Presenter
                 "title" => trans('general.supplier'),
                 "visible" => false,
                 "formatter" => "suppliersLinkObjFormatter"
+            ],[
+                "field" => "department",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('general.department'),
+                "visible" => true,
+                "formatter" => "departmentsLinkObjFormatter"
             ], [
                 "field" => "purchase_date",
                 "searchable" => true,

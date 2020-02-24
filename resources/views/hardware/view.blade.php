@@ -710,7 +710,7 @@
               </div>
             </div><!-- /col -->
           </div> <!-- row -->
-        </div> <!-- /.tab-pane software -->
+        </div> <!-- /.tab-pane assets -->
 
 
         <div class="tab-pane fade" id="maintenances">

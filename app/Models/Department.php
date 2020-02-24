@@ -73,7 +73,7 @@ class Department extends SnipeModel
      */
     public function assets()
     {
-        return $this->hasMany('\App\Models\User', 'department_id');
+        return $this->hasMany('\App\Models\Asset', 'department_id');
     }
 
     /**

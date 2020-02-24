@@ -95,8 +95,7 @@ class AssetsController extends Controller
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset','supplier');
-
+                'model.category', 'model.manufacturer', 'model.fieldset','supplier', 'department');
 
         // These are used by the API to query against specific ID numbers.
         // They are also used by the individual searches on detail pages like
@@ -123,6 +122,10 @@ class AssetsController extends Controller
 
         if ($request->filled('supplier_id')) {
             $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if ($request->filled('department_id')) {
+          $assets->where('assets.department_id', '=', $request->input('department_id'));
         }
 
         if (($request->filled('assigned_to')) && ($request->filled('assigned_type'))) {
@@ -279,6 +282,9 @@ class AssetsController extends Controller
                 break;
             case 'supplier':
                 $assets->OrderSupplier($order);
+                break;
+            case 'department':
+                $assets->OrderDepartment($order);
                 break;
             case 'assigned_to':
                 $assets->OrderAssigned($order);
@@ -443,6 +449,7 @@ class AssetsController extends Controller
         $asset->purchase_date           = $request->get('purchase_date', null);
         $asset->assigned_to             = $request->get('assigned_to', null);
         $asset->supplier_id             = $request->get('supplier_id', 0);
+        $asset->department_id           = $request->get('department_id', null);
         $asset->requestable             = $request->get('requestable', 0);
         $asset->rtd_location_id         = $request->get('rtd_location_id', null);
 
@@ -770,7 +777,7 @@ class AssetsController extends Controller
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset','supplier')->where('assets.requestable', '=', '1');
+                'model.category', 'model.manufacturer', 'model.fieldset','supplier', 'department')->where('assets.requestable', '=', '1');
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
