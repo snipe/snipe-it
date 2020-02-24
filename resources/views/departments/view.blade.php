@@ -21,55 +21,42 @@
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                  <li>
-                    <a href="#users_tab" data-toggle="tab">
-                        <span class="hidden-lg hidden-md">
-                        <i class="fa fa-users"></i></span>
-                        <span class="hidden-xs hidden-sm">{{ trans('general.people') }}</span>
-                    </a>
-                </li>
                     <li class="active">
-                      <a href="#assets_tab" data-toggle="tab">
-                          <span class="hidden-lg hidden-md">
-                          <i class="fa fa-barcode"></i>
-                          </span>
-                          <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span>
-                      </a>
-                  </li>
+                        <a href="#users_tab" data-toggle="tab">
+                            <span class="hidden-lg hidden-md"><i class="fa fa-users"></i></span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.people') }}</span>
+                        </a>
+                    </li>
                     <li>
-                      <a href="#licenses_tab" data-toggle="tab">
-                          <span class="hidden-lg hidden-md">
-                          <i class="fa fa-floppy-o"></i>
-                          </span>
-                          <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span>
-                      </a>
-                  </li>
-
-                  <li>
-                      <a href="#accessories_tab" data-toggle="tab">
-                          <span class="hidden-lg hidden-md">
-                          <i class="fa fa-keyboard-o"></i>
-                          </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span>
-                      </a>
-                  </li>
-
-                  <li>
-                      <a href="#consumables_tab" data-toggle="tab">
-                          <span class="hidden-lg hidden-md">
-                          <i class="fa fa-tint"></i></span>
-                          <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>
-                      </a>
-                  </li>
-
-                  <li>
-                      <a href="#components_tab" data-toggle="tab">
-                          <span class="hidden-lg hidden-md">
-                          <i class="fa fa-hdd-o"></i></span>
-                          <span class="hidden-xs hidden-sm">{{ trans('general.components') }}</span>
-                      </a>
-                  </li>
-
-
+                        <a href="#assets_tab" data-toggle="tab">
+                            <span class="hidden-lg hidden-md"><i class="fa fa-barcode"></i></span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#licenses_tab" data-toggle="tab">
+                            <span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#accessories_tab" data-toggle="tab">
+                            <span class="hidden-lg hidden-md"><i class="fa fa-keyboard-o"></i></span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#consumables_tab" data-toggle="tab">
+                            <span class="hidden-lg hidden-md"><i class="fa fa-tint"></i></span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#components_tab" data-toggle="tab">
+                            <span class="hidden-lg hidden-md"><i class="fa fa-hdd-o"></i></span>
+                            <span class="hidden-xs hidden-sm">{{ trans('general.components') }}</span>
+                        </a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="users_tab">
