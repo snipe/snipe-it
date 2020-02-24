@@ -2,9 +2,9 @@
 
 {{-- Page title --}}
 @section('title')
-
+    {{ trans('general.department') }}:
     {{ $department->name }}
-    {{ trans('general.department') }}
+    
     @parent
 @stop
 
@@ -16,14 +16,11 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-9">
 
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#details" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.details') }}</span></a>
-                    </li>
                     <li>
                         <a href="#users" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-users"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.users') }}</span></a>
                     </li>
@@ -33,58 +30,7 @@
 
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane fade in active" id="details">
-                        <div class="row">
-                            <div class="col-md-2 text-center">
-                                <a href="{{ url('/') }}/uploads/departments/{{ $department->image }}" data-toggle="lightbox"><img src="{{ url('/') }}/uploads/departments/{{{ $department->image }}}" class="assetimg img-responsive"></a>
-                            </div>
-                  
-                            <div class="col-md-10">
-                                <div class="table table-responsive" style="margin-top: 10px;">
-                                    <table class="table">
-                                        <tbody>
-                         
-                                            @if ($department->company)
-                                            <tr>
-                                                <td>{{ trans('general.company') }}</td>
-                                                <td><a href="{{ url('/companies/' . $department->company->id) }}">{{ $department->company->name }}</a></td>
-                                            </tr>
-                                            @endif
-
-
-                                            @if ($department->location)
-                                            <tr>
-                                              <td>{{ trans('general.location') }}</td>
-                                              <td>
-                                                @can('superuser')
-                                                  <a href="{{ route('locations.show', ['location' => $department->location->id]) }}">
-                                                    {{ $department->location->name }}
-                                                  </a>
-                                                @else
-                                                  {{ $department->location->name }}
-                                                @endcan
-                                              </td>
-                                            </tr>
-                                            @endif
-
-
-                                            @if ($department->manager)
-                                            <tr>
-                                              <td>{{ trans('admin/users/table.manager') }}</td>
-                                              <td>
-                                                {!! $department->manager->present()->nameUrl() !!}
-                                              </td>
-                                            </tr>
-                                            @endif
-
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="users">
+                    <div class="tab-pane fade in active" id="users">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="table table-responsive" style="margin-top: 10px;">
@@ -145,6 +91,7 @@
                                       data-show-export="true"
                                       data-show-refresh="true"
                                       data-sort-order="asc"
+                                      data-toolbar="#toolbar"
                                       id="assetsListingTable"
                                       class="table table-striped snipe-table"
                                       data-url="{{route('api.assets.index',['department_id' => $department->id]) }}"
@@ -161,10 +108,44 @@
                           </div><!-- /col -->
                         </div> <!-- row -->
                       </div> <!-- /.tab-pane assets -->
+
                 
                 </div>
             </div>
-        </div>
+        </div><!-- left panel -->
+
+        <div class="col-md-3">
+
+            @if ($department->image!='')
+              <div class="col-md-12 text-center" style="padding-bottom: 20px;">
+                <a href="{{ url('/') }}/uploads/departments/{{ $department->image }}" data-toggle="lightbox"><img src="{{ url('/') }}/uploads/departments/{{{ $department->image }}}" class="assetimg img-responsive"></a>
+            </div>
+            @endif
+              <div class="col-md-12">
+                <ul class="list-unstyled" style="line-height: 25px; padding-bottom: 20px;">
+                  @if ($department->company!='')
+                    <li><strong>{{ trans('general.company') }}: </strong><a href="{{ url('/companies/' . $department->company->id) }}">{{ $department->company->name }}</a></li>
+                   @endif
+                    @if ($department->location!='')
+                    <li><strong>{{ trans('general.location') }}: </strong>
+                        @can('superuser')
+                            <a href="{{ route('locations.show', ['location' => $department->location->id]) }}">
+                            {{ $department->location->name }}
+                            </a>
+                        @else
+                            {{ $department->location->name }}
+                        @endcan
+                    </li>
+                    @endif
+                    @if (($department->manager))
+                      <li><strong>{{ trans('admin/users/table.manager') }}: </strong> {!! $department->manager->present()->nameUrl() !!}</li>
+                    @endif
+                </ul>
+      
+        
+              </div>
+        </div><!-- right panel -->
+
     </div>
 
 @stop
