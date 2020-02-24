@@ -26,6 +26,7 @@ class ConsumablesTransformer
             'image' =>   ($consumable->image) ? e(url('/').'/uploads/consumables/'.e($consumable->image)) : null,
             'category'      => ($consumable->category) ? ['id' => $consumable->category->id, 'name' => e($consumable->category->name)] : null,
             'company'   => ($consumable->company) ? ['id' => (int) $consumable->company->id, 'name' => e($consumable->company->name)] : null,
+            'department'      => ($consumable->department) ? ['id' => $consumable->department->id, 'name' => e($consumable->department->name)] : null,
             'item_no'       => e($consumable->item_no),
             'location'      => ($consumable->location) ? ['id' => (int) $consumable->location->id, 'name' => e($consumable->location->name)] : null,
             'manufacturer'  => ($consumable->manufacturer) ? ['id' => (int) $consumable->manufacturer->id, 'name' => e($consumable->manufacturer->name)] : null,
