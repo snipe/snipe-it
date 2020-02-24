@@ -144,6 +144,21 @@
                     </tr>
                     @endif
 
+                    @if ($asset->department)
+                      <tr>
+                        <td>{{ trans('general.department') }}</td>
+                        <td>
+                          @can ('superuser')
+                            <a href="{{ route('departments.show', $asset->department_id) }}">
+                              {{ $asset->department->name }}
+                            </a>
+                          @else
+                            {{ $asset->department->name }}
+                          @endcan
+                        </td>
+                      </tr>
+                    @endif
+
                     @if ($asset->name)
                     <tr>
                       <td>{{ trans('admin/hardware/form.name') }}</td>
@@ -695,7 +710,7 @@
               </div>
             </div><!-- /col -->
           </div> <!-- row -->
-        </div> <!-- /.tab-pane software -->
+        </div> <!-- /.tab-pane assets -->
 
 
         <div class="tab-pane fade" id="maintenances">

@@ -68,6 +68,15 @@ class Department extends SnipeModel
     }
 
     /**
+     * Department in charge of the asset
+     * @return mixed
+     */
+    public function assets()
+    {
+        return $this->hasMany('\App\Models\Asset', 'department_id');
+    }
+
+    /**
      * Even though we allow allow for checkout to things beyond users
      * this method is an easy way of seeing if we are checked out to a user.
      * @return mixed
