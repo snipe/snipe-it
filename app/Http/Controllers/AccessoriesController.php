@@ -85,6 +85,7 @@ class AccessoriesController extends Controller
         $accessory->qty                     = request('qty');
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
+        $accessory->department_id           = request('department_id');
         $accessory = $request->handleImages($accessory,600, public_path().'/uploads/accessories');
 
 
@@ -145,6 +146,7 @@ class AccessoriesController extends Controller
         $accessory->purchase_cost           = request('purchase_cost');
         $accessory->qty                     = request('qty');
         $accessory->supplier_id             = request('supplier_id');
+        $accessory->department_id             = request('department_id');
 
         $accessory = $request->handleImages($accessory,600, public_path().'/uploads/accessories');
 

@@ -24,6 +24,7 @@ class AccessoriesTransformer
             'id' => $accessory->id,
             'name' => e($accessory->name),
             'company' => ($accessory->company) ? ['id' => $accessory->company->id,'name'=> e($accessory->company->name)] : null,
+            'department' => ($accessory->department) ? ['id' => $accessory->department->id,'name'=> e($accessory->department->name)] : null,
             'manufacturer' => ($accessory->manufacturer) ? ['id' => $accessory->manufacturer->id,'name'=> e($accessory->manufacturer->name)] : null,
             'supplier' => ($accessory->supplier) ? ['id' => $accessory->supplier->id,'name'=> e($accessory->supplier->name)] : null,
             'model_number' => ($accessory->model_number) ? e($accessory->model_number) : null,

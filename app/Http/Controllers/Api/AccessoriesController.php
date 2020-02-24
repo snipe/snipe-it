@@ -27,7 +27,7 @@ class AccessoriesController extends Controller
         $this->authorize('view', Accessory::class);
         $allowed_columns = ['id','name','model_number','eol','notes','created_at','min_amt','company_id'];
 
-        $accessories = Accessory::with('category', 'company', 'manufacturer', 'users', 'location');
+        $accessories = Accessory::with('category', 'company', 'department', 'manufacturer', 'users', 'location');
 
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));
@@ -47,6 +47,10 @@ class AccessoriesController extends Controller
 
         if ($request->filled('supplier_id')) {
             $accessories->where('supplier_id','=',$request->input('supplier_id'));
+        }
+
+        if ($request->filled('department_id')) {
+          $accessories->where('department_id','=',$request->input('department_id'));
         }
 
         $offset = (($accessories) && (request('offset') > $accessories->count())) ? 0 : request('offset', 0);
