@@ -16,7 +16,7 @@
 
 
                     <li class="active">
-                        <a href="#asset_tab" data-toggle="tab">
+                        <a href="#assets_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
                             <i class="fa fa-barcode"></i>
                             </span>
@@ -71,7 +71,7 @@
 
                 <div class="tab-content">
 
-                    <div class="tab-pane fade in active" id="asset_tab">
+                    <div class="tab-pane fade in active" id="assets_tab">
                         <!-- checked out assets table -->
                         <div class="table-responsive">
                             <table
