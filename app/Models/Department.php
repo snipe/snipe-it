@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use App\Presenters\Presentable;
 use Log;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -30,6 +31,9 @@ class Department extends SnipeModel
         'company_id'            => 'numeric|nullable',
         'manager_id'            => 'numeric|nullable',
     ];
+
+    protected $presenter = 'App\Presenters\DepartmentPresenter';
+    use Presentable;
 
     /**
      * The attributes that are mass assignable.
@@ -67,6 +71,16 @@ class Department extends SnipeModel
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
+
+    /**
+     * Users assigned to this department
+     * @return mixed
+     */
+    public function users()
+    {
+        return $this->hasMany('\App\Models\User', 'department_id');
+    }
+
     /**
      * Department in charge of the asset
      * @return mixed
@@ -75,16 +89,23 @@ class Department extends SnipeModel
     {
         return $this->hasMany('\App\Models\Asset', 'department_id');
     }
-
-    /**
-     * Even though we allow allow for checkout to things beyond users
-     * this method is an easy way of seeing if we are checked out to a user.
-     * @return mixed
-     */
-    public function users()
+    public function licenses()
     {
-        return $this->hasMany('\App\Models\User', 'department_id');
+        return $this->hasMany(License::class, 'department_id');
     }
+    public function accessories()
+    {
+        return $this->hasMany(Accessory::class, 'department_id');
+    }
+    public function consumables()
+    {
+        return $this->hasMany(Consumable::class, 'department_id');
+    }
+    public function components()
+    {
+        return $this->hasMany(Component::class, 'department_id');
+    }
+
 
 
     /**
