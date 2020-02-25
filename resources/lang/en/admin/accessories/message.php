@@ -24,7 +24,8 @@ return array(
      'checkout' => array(
         'error'   		=> 'Accessory was not checked out, please try again',
         'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'That user is invalid. Please try again.',
+        'not_enough'  => 'The accessory does not have enough quantity to check out',
     ),
 
     'checkin' => array(
