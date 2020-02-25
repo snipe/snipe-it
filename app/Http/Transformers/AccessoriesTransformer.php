@@ -70,6 +70,7 @@ class AccessoriesTransformer
         foreach ($accessory_users as $user) {
             $array[] = [
                 'assigned_pivot_id' => $user->pivot->id,
+                'qty' => $user->pivot->assigned_qty,
                 'id' => (int) $user->id,
                 'username' => e($user->username),
                 'name' => e($user->getFullNameAttribute()),

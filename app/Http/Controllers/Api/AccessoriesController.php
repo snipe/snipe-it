@@ -10,6 +10,7 @@ use App\Http\Transformers\AccessoriesTransformer;
 use App\Models\Company;
 use App\Models\User;
 use Carbon\Carbon;
+use Validator;
 use Auth;
 use DB;
 
@@ -173,6 +174,16 @@ class AccessoriesController extends Controller
     {
         $this->authorize('edit', Accessory::class);
         $accessory = Accessory::findOrFail($id);
+
+        // check the quantity is equal to or greater than the checked out quantity
+        $min_edit = $accessory->qty - $accessory->numRemaining();
+        $validator = Validator::make($request->all(), [
+            "qty"  => "required|numeric|min:$min_edit"
+        ]);
+        if ($validator->fails()) {
+          return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
+        }
+        
         $accessory->fill($request->all());
 
         if ($accessory->save()) {
@@ -225,30 +236,42 @@ class AccessoriesController extends Controller
 
         $this->authorize('checkout', $accessory);
 
+        // Validate quantity and assigned_user ID
+        $max_to_checkout = $accessory->numRemaining();
+        if ($max_to_checkout <= 0) {
+          return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.checkout.not_enough')));
+        }
+        $validator = Validator::make($request->all(), [
+            "assigned_to"   => "required|exists:users,id",
+            "qty"  => "required|numeric|between:1,$max_to_checkout"
+        ]);
+        if ($validator->fails()) {
+          return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
+        }
 
-        if ($accessory->numRemaining() > 0) {
+        if (!$assigned_user = User::find(request('assigned_to'))) {
+          return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.checkout.user_does_not_exist')));
+        }
 
-            if (!$user = User::find($request->input('assigned_to'))) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.checkout.user_does_not_exist')));
-            }
-
-            // Update the accessory data
-            $accessory->assigned_to = $request->input('assigned_to');
-
+        // check if accessory is assigned already and add quantity
+        $checkout_qty = (int)request('qty');
+        $accessory_user = DB::table('accessories_users')->where('assigned_to', '=', request('assigned_to'))->where('accessory_id', '=', $accessory->id)->first();
+        if ($accessory_user) {
+            $updated_qty = $accessory_user->assigned_qty + $checkout_qty;
+            DB::table('accessories_users')->where('id', $accessory_user->id)->update(['assigned_qty' => $updated_qty]);
+        } else {
             $accessory->users()->attach($accessory->id, [
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
                 'user_id' => Auth::id(),
-                'assigned_to' => $request->get('assigned_to')
+                'assigned_to' => request('assigned_to'),
+                'assigned_qty' => $checkout_qty
             ]);
-
-            $accessory->logCheckout($request->input('note'), $user);
-
-            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkout.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null, 'No accessories remaining'));
+        $logaction = $accessory->logCheckout(e(request('note')), $assigned_user);
 
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkout.success')));
     }
 
     /**
@@ -271,27 +294,49 @@ class AccessoriesController extends Controller
         $accessory = Accessory::find($accessory_user->accessory_id);
         $this->authorize('checkin', $accessory);
 
-        $logaction = $accessory->logCheckin(User::find($accessoryUserId), $request->input('note'));
+        $assigned_user = User::find($accessory_user->assigned_to);
 
-        // Was the accessory updated?
-        if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
-            if (!is_null($accessory_user->assigned_to)) {
-                $user = User::find($accessory_user->assigned_to);
+        // Quantity check
+        $max_to_checkin = $accessory_user->assigned_qty;
+        // should never happen
+        if ($max_to_checkin <= 0) {
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.checkin.error')));
+        }
+        //validate
+        $validator = Validator::make($request->all(), [
+            "qty" => "required|numeric|between:1,$max_to_checkin"
+        ]);
+        if ($validator->fails()) {
+          return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
+        }
+        // Quantity check was successful
+
+        // Quantity adjust
+        $checkin_qty = (int)request('qty');
+        $qty_remaining_in_checkout = ($accessory_user->assigned_qty - $checkin_qty);
+        if ($qty_remaining_in_checkout > 0) {
+            // Update to correct checked out quantity
+            DB::table('accessories_users')->where('id', $accessoryUserId)->update(['assigned_qty' => $qty_remaining_in_checkout]);
+        } else {
+            if (is_null(DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete())) {
+              return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.checkin.error')));
             }
-
-            $data['log_id'] = $logaction->id;
-            $data['first_name'] = $user->first_name;
-            $data['last_name'] = $user->last_name;
-            $data['item_name'] = $accessory->name;
-            $data['checkin_date'] = $logaction->created_at;
-            $data['item_tag'] = '';
-            $data['note'] = $logaction->note;
-
-            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkin.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.checkin.error')));
+        $logaction = $accessory->logCheckin($assigned_user, e(request('note')));
 
+        // Unused anywhere ?, should delete ?
+        /*
+        $data['log_id'] = $logaction->id;
+        $data['first_name'] = $user->first_name;
+        $data['last_name'] = $user->last_name;
+        $data['item_name'] = $accessory->name;
+        $data['checkin_date'] = $logaction->created_at;
+        $data['item_tag'] = '';
+        $data['note'] = $logaction->note;
+        */
+
+        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkin.success')));
+        
     }
-
 }
