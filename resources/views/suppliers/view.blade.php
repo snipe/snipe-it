@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/suppliers/table.view') }} -
+{{ trans('admin/suppliers/table.view') }}:
 {{ $supplier->name }}
 @parent
 @stop
