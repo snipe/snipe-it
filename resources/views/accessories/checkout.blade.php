@@ -79,6 +79,16 @@
                      </div>
                  </div>
              @endif
+
+             <div class="form-group {{ $errors->has('qty') ? ' has-error' : '' }}">
+              <label for="qty" class="col-md-3 control-label">{{ trans('general.qty') }}
+                <i class='icon-asterisk'></i></label>
+              <div class="col-md-9">
+                <input class="form-control" type="text" required name="qty" id="qty" style="width: 70px;" value="{{ Input::old('qty', 1) }}" /><span>{{ trans('admin/accessories/general.checkout_qty_help') }}</span>
+                {!! $errors->first('qty', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              </div>
+            </div>
+
           <!-- Note -->
           <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
             <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
