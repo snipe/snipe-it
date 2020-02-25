@@ -46,6 +46,19 @@
                                     </div>
                                     @endif
 
+                                                            <!-- Qty -->
+                        <div class="form-group {{ $errors->has('qty') ? 'error' : '' }}">
+                          <label for="qty" class="col-md-2 control-label">{{ trans('general.qty') }}</label>
+                          <div class="col-md-3">
+                              <input type="text" class="form-control" name="qty" value="{{ Input::old('assigned_qty', $accessory_user->assigned_qty) }}">
+                          </div>
+                          <div class="col-md-9 col-md-offset-2">
+                          <p class="help-block">Must be {{ $accessory_user->assigned_qty }} or less.</p>
+                          {!! $errors->first('qty', '<span class="alert-msg"><i class="fa fa-times"></i>
+                          :message</span>') !!}
+                          </div>
+                      </div>
+
                                     <!-- Note -->
                                     <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                                         <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>

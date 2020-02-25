@@ -150,7 +150,7 @@ class Accessory extends SnipeModel
 
     public function users()
     {
-        return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id')->withTrashed();
+        return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id', 'assigned_qty')->withTrashed();
     }
 
     public function hasUsers()
@@ -188,7 +188,12 @@ class Accessory extends SnipeModel
 
     public function numRemaining()
     {
-        $checkedout = $this->users->count();
+        $checkedout = 0;
+
+        foreach ($this->users as $checkout) {
+            $checkedout += $checkout->pivot->assigned_qty;
+        }
+
         $total = $this->qty;
         $remaining = $total - $checkedout;
         return $remaining;

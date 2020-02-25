@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Slack;
 use Str;
 use View;
+use Validator;
 use Image;
 use App\Http\Requests\ImageUploadRequest;
 
@@ -250,24 +251,45 @@ class AccessoriesController extends Controller
 
         $this->authorize('checkout', $accessory);
 
-        if (!$user = User::find(Input::get('assigned_to'))) {
+        // Validate quantity and assigned_user ID
+        $max_to_checkout = $accessory->numRemaining();
+        if ($max_to_checkout <= 0) {
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.error'));
+        }
+        $validator = Validator::make($request->all(), [
+            "assigned_to"   => "required",
+            "qty"  => "required|numeric|between:1,$max_to_checkout"
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if (!$assigned_user = User::find(request('assigned_to'))) {
             return redirect()->route('checkout/accessory', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'));
         }
 
-      // Update the accessory data
-        $accessory->assigned_to = e(Input::get('assigned_to'));
+        // check if accessory is assigned already and add quantity
+        $checkout_qty = (int)request('qty');
+        $accessory_user = DB::table('accessories_users')->where('assigned_to', '=', request('assigned_to'))->where('accessory_id', '=', $accessory->id)->first();
+        if ($accessory_user) {
+            $updated_qty = $accessory_user->assigned_qty + $checkout_qty;
+            DB::table('accessories_users')->where('id', $accessory_user->id)->update(['assigned_qty' => $updated_qty]);
+        } else {
+            $accessory->users()->attach($accessory->id, [
+                'accessory_id' => $accessory->id,
+                'created_at' => Carbon::now(),
+                'user_id' => Auth::id(),
+                'assigned_to' => request('assigned_to'),
+                'assigned_qty' => $checkout_qty
+            ]);
+        }
 
-        $accessory->users()->attach($accessory->id, [
-            'accessory_id' => $accessory->id,
-            'created_at' => Carbon::now(),
-            'user_id' => Auth::id(),
-            'assigned_to' => $request->get('assigned_to')
-        ]);
+        $logaction = $accessory->logCheckout(e(request('note')), $assigned_user);
 
-        $logaction = $accessory->logCheckout(e(Input::get('note')), $user);
-
-        DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();
-
+        // Not used?  remove?
+        /*
         $data['log_id'] = $logaction->id;
         $data['eula'] = $accessory->getEula();
         $data['first_name'] = $user->first_name;
@@ -277,8 +299,9 @@ class AccessoriesController extends Controller
         $data['expected_checkin'] = '';
         $data['note'] = $logaction->note;
         $data['require_acceptance'] = $accessory->requireAcceptance();
+        */
 
-      // Redirect to the new accessory page
+        // Redirect to the new accessory page
         return redirect()->route('accessories.index')->with('success', trans('admin/accessories/message.checkout.success'));
     }
 
@@ -296,14 +319,21 @@ class AccessoriesController extends Controller
     public function getCheckin(Request $request, $accessoryUserId = null, $backto = null)
     {
         // Check if the accessory exists
-        if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
-            // Redirect to the accessory management page with error
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
+        if ($accessory_user = DB::table('accessories_users')->find($accessoryUserId)) {
+            if (is_null($accessory = Accessory::find($accessory_user->accessory_id))) {
+                return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
+            }
+            if (is_null($user = User::find($accessory_user->assigned_to))) {
+                return redirect()->route('accessories.index')->with('error',
+                    trans('admin/users/message.user_not_found'));
+            }
+            $this->authorize('checkin', $accessory);
+            return view('accessories/checkin', compact('accessory_user', 'accessory', 'user'))->with('backto', $backto);
         }
 
-        $accessory = Accessory::find($accessory_user->accessory_id);
-        $this->authorize('checkin', $accessory);
-        return view('accessories/checkin', compact('accessory'))->with('backto', $backto);
+        // Redirect to the accessory management page with error
+        return redirect()->route('accessories.index')->with('error', trans('admin/components/messages.does_not_exist'));
+
     }
 
 
@@ -327,33 +357,55 @@ class AccessoriesController extends Controller
         }
 
         $accessory = Accessory::find($accessory_user->accessory_id);
-
         $this->authorize('checkin', $accessory);
 
-        $return_to = e($accessory_user->assigned_to);
-        $logaction = $accessory->logCheckin(User::find($return_to), e(Input::get('note')));
+        $assigned_user = User::find($accessory_user->assigned_to);
 
-        // Was the accessory updated?
-        if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
-            if (!is_null($accessory_user->assigned_to)) {
-                $user = User::find($accessory_user->assigned_to);
-            }
-
-            $data['log_id'] = $logaction->id;
-            $data['first_name'] = e($user->first_name);
-            $data['last_name'] = e($user->last_name);
-            $data['item_name'] = e($accessory->name);
-            $data['checkin_date'] = e($logaction->created_at);
-            $data['item_tag'] = '';
-            $data['note'] = e($logaction->note);
-
-            if ($backto=='user') {
-                return redirect()->route("users.show", $return_to)->with('success', trans('admin/accessories/message.checkin.success'));
-            }
-            return redirect()->route("accessories.show", $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
+        // Quantity check
+        $max_to_checkin = $accessory_user->assigned_qty;
+        if ($max_to_checkin <= 0) {
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.error'));
         }
-        // Redirect to the accessory management page with error
-        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkin.error'));
+        $validator = Validator::make($request->all(), [
+            "qty" => "required|numeric|between:1,$max_to_checkin"
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        // Quantity check was successful
+
+        // Quantity adjust
+        $checkin_qty = (int)request('qty');
+        $qty_remaining_in_checkout = ($accessory_user->assigned_qty - $checkin_qty);
+        if ($qty_remaining_in_checkout > 0) {
+            // Update to correct checked out quantity
+            DB::table('accessories_users')->where('id', $accessoryUserId)->update(['assigned_qty' => $qty_remaining_in_checkout]);
+        } else {
+            if (is_null(DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete())) {
+                return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkin.error'));
+            }
+        }
+
+
+        $logaction = $accessory->logCheckin($assigned_user, e(request('note')));
+
+        // Unused anywhere ?, should delete ?
+        /*
+        $data['log_id'] = $logaction->id;
+        $data['first_name'] = e($assigned_user->first_name);
+        $data['last_name'] = e($assigned_user->last_name);
+        $data['item_name'] = e($accessory->name);
+        $data['checkin_date'] = e($logaction->created_at);
+        $data['item_tag'] = '';
+        $data['note'] = e($logaction->note);
+        */
+
+        if ($backto=='user') {
+            return redirect()->route("users.show", $assigned_user->id)->with('success', trans('admin/accessories/message.checkin.success'));
+        }
+        return redirect()->route("accessories.show", $accessory->id)->with('success', trans('admin/accessories/message.checkin.success'));
     }
 
 
