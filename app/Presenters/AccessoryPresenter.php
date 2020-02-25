@@ -139,6 +139,32 @@ class AccessoryPresenter extends Presenter
         return json_encode($layout);
     }
 
+    public static function dataTableCheckoutsLayout()
+    {
+        $layout = [
+            [
+                "field" => "name",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => trans('general.name'),
+                "formatter" => "usersLinkFormatter"
+            ], [
+                "field" => "qty",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => trans('admin/accessories/general.total'),
+            ], [
+                "field" => "actions",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => trans('table.actions'),
+                "formatter" => "accessoriesInOutFormatter",
+            ]
+        ];
+
+        return json_encode($layout);
+    }
+
 
     /**
      * Pregenerated link to this accessories view page.
