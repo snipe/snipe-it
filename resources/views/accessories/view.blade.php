@@ -149,6 +149,10 @@
                 {{ $accessory->qty }}
             </li>
             <li>
+                <strong>{{ trans('general.checkouts_count') }}: </strong>
+                {{ $accessory->qty - $accessory->numRemaining() }}
+            </li>
+            <li>
                 <strong>{{ trans('admin/accessories/general.remaining') }}: </strong>
                 {{ $accessory->numRemaining() }}
             </li>

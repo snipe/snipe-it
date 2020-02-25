@@ -41,6 +41,7 @@
     'checkout'  			=> 'Checkout',
     'checkouts_count'       => 'Checkouts',
     'checkins_count'        => 'Checkins',
+    'checkout_count_message' => 'Currently :count are checked out',
     'user_requests_count'   => 'Requests',
     'city'  				=> 'City',
 	'click_here'			=> 'Click here',

@@ -111,7 +111,8 @@ class AccessoriesController extends Controller
         if ($item = Accessory::find($accessoryId)) {
             $this->authorize($item);
             $category_type = 'accessory';
-            return view('accessories/edit', compact('item'))->with('category_type', $category_type);
+            $min_quantity = $item->qty - $item->numRemaining();
+            return view('accessories/edit', compact('item', 'min_quantity'))->with('category_type', $category_type);
         }
 
         return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
@@ -134,6 +135,17 @@ class AccessoriesController extends Controller
 
         $this->authorize($accessory);
 
+        // check the quantity is equal to or greater than the checked out quantity
+        $min_edit = $accessory->qty - $accessory->numRemaining();
+        $validator = Validator::make($request->all(), [
+            "qty"  => "required|numeric|min:$min_edit"
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         // Update the accessory data
         $accessory->name                    = request('name');
         $accessory->location_id             = request('location_id');
@@ -145,7 +157,7 @@ class AccessoriesController extends Controller
         $accessory->model_number            = request('model_number');
         $accessory->purchase_date           = request('purchase_date');
         $accessory->purchase_cost           = request('purchase_cost');
-        $accessory->qty                     = request('qty');
+        $accessory->qty                     = $new_quantity;
         $accessory->supplier_id             = request('supplier_id');
         $accessory->department_id             = request('department_id');
 
@@ -256,7 +268,7 @@ class AccessoriesController extends Controller
         // Validate quantity and assigned_user ID
         $max_to_checkout = $accessory->numRemaining();
         if ($max_to_checkout <= 0) {
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.error'));
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.not_enough'));
         }
         $validator = Validator::make($request->all(), [
             "assigned_to"   => "required",
@@ -366,7 +378,7 @@ class AccessoriesController extends Controller
         // Quantity check
         $max_to_checkin = $accessory_user->assigned_qty;
         if ($max_to_checkin <= 0) {
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkout.error'));
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.checkin.error'));
         }
         $validator = Validator::make($request->all(), [
             "qty" => "required|numeric|between:1,$max_to_checkin"

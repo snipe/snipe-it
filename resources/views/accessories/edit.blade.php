@@ -20,7 +20,11 @@
 @include ('partials.forms.edit.order_number')
 @include ('partials.forms.edit.purchase_date')
 @include ('partials.forms.edit.purchase_cost')
+@if (isset($min_quantity))
+@include ('partials.forms.edit.quantity', ['note' => trans('general.checkout_count_message', ['count' => $min_quantity])])
+@else
 @include ('partials.forms.edit.quantity')
+@endif
 @include ('partials.forms.edit.minimum_quantity')
 
 
