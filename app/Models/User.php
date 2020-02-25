@@ -213,7 +213,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
      */
     public function accessories()
     {
-        return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')->withPivot('id')->withTrashed();
+        return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')->withPivot('id', 'assigned_qty')->withTrashed();
     }
 
     /**

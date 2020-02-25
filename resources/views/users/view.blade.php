@@ -407,7 +407,8 @@
             <table class="display table table-hover">
               <thead>
                 <tr>
-                  <th class="col-md-5">{{ trans('general.name') }}</th>
+                  <th class="col-md-4">{{ trans('general.name') }}</th>
+                  <th class="col-md-4">{{ trans('admin/accessories/general.total') }}</th>
                   <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
                 </tr>
               </thead>
@@ -415,6 +416,7 @@
                   @foreach ($user->accessories as $accessory)
                   <tr>
                     <td>{!!$accessory->present()->nameUrl()!!}</td>
+                    <td>{{ $accessory->pivot->assigned_qty }}</td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
                         <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
