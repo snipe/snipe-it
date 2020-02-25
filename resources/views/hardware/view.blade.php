@@ -187,7 +187,7 @@
 
                     @if (($asset->model) && ($asset->model->manufacturer))
                     <tr>
-                      <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
+                      <td>{{ trans('general.manufacturer') }}</td>
                       <td>
                         <ul class="list-unstyled" style="line-height: 25px;">
                         @can('view', \App\Models\Manufacturer::class)
