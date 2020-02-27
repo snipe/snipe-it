@@ -156,7 +156,7 @@ class AccessoriesController extends Controller
         $accessory->model_number            = request('model_number');
         $accessory->purchase_date           = request('purchase_date');
         $accessory->purchase_cost           = request('purchase_cost');
-        $accessory->qty                     = $new_quantity;
+        $accessory->qty                     = request('qty');
         $accessory->supplier_id             = request('supplier_id');
 
         $accessory = $request->handleImages($accessory,600, public_path().'/uploads/accessories');
