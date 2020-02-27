@@ -298,7 +298,7 @@ class AccessoriesController extends Controller
             ]);
         }
 
-        $logaction = $accessory->logCheckout(e(request('note')), $assigned_user);
+        $accessory->logCheckout(e(request('note')), $assigned_user);
 
         // Not used?  remove?
         /*
@@ -401,7 +401,7 @@ class AccessoriesController extends Controller
         }
 
 
-        $logaction = $accessory->logCheckin($assigned_user, e(request('note')));
+        $accessory->logCheckin($assigned_user, e(request('note')));
 
         // Unused anywhere ?, should delete ?
         /*
