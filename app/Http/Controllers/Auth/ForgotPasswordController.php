@@ -61,7 +61,7 @@ class ForgotPasswordController extends Controller
         $this->validate($request, ['email' => 'required|email|max:250']);
 
         /**
-         * If we find a matching email with an activated yser, we will
+         * If we find a matching email with an activated user, we will
          * send the password reset link to the user.
          *
          * Once we have attempted to send the link, we will examine the response
