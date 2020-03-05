@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "745e56814dad4b004d4d815075801416",
+    "content-hash": "97bcbb894d4d50de7b4057c72584fc4c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -112,12 +112,12 @@
             "version": "v0.11.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/barryvdh/laravel-cors.git",
+                "url": "https://github.com/fruitcake/laravel-cors.git",
                 "reference": "03492f1a3bc74a05de23f93b94ac7cc5c173eec9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-cors/zipball/03492f1a3bc74a05de23f93b94ac7cc5c173eec9",
+                "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/03492f1a3bc74a05de23f93b94ac7cc5c173eec9",
                 "reference": "03492f1a3bc74a05de23f93b94ac7cc5c173eec9",
                 "shasum": ""
             },
@@ -1288,16 +1288,16 @@
         },
         {
             "name": "enshrined/svg-sanitize",
-            "version": "0.13.0",
+            "version": "0.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/darylldoyle/svg-sanitizer.git",
-                "reference": "4cf8d0f61edf9f00b84e162fc229176a362da247"
+                "reference": "bc66593f255b7d2613d8f22041180036979b6403"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/4cf8d0f61edf9f00b84e162fc229176a362da247",
-                "reference": "4cf8d0f61edf9f00b84e162fc229176a362da247",
+                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/bc66593f255b7d2613d8f22041180036979b6403",
+                "reference": "bc66593f255b7d2613d8f22041180036979b6403",
                 "shasum": ""
             },
             "require": {
@@ -1325,7 +1325,7 @@
                 }
             ],
             "description": "An SVG sanitizer for PHP",
-            "time": "2019-11-07T09:16:31+00:00"
+            "time": "2020-01-20T01:34:17+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -2784,6 +2784,7 @@
                 "cron",
                 "schedule"
             ],
+            "abandoned": "dragonmantank/cron-expression",
             "time": "2017-01-23T04:29:33+00:00"
         },
         {
@@ -6443,6 +6444,7 @@
                 "psr",
                 "psr-7"
             ],
+            "abandoned": "laminas/laminas-diactoros",
             "time": "2019-08-06T17:53:53+00:00"
         }
     ],
