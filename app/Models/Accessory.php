@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\Traits\Searchable;
+use App\Models\Traits\Inventoryable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -18,6 +19,7 @@ class Accessory extends SnipeModel
     protected $presenter = 'App\Presenters\AccessoryPresenter';
     use CompanyableTrait;
     use Loggable, Presentable;
+    use Inventoryable;
     use SoftDeletes;
 
     protected $dates = ['deleted_at', 'purchase_date'];
@@ -248,4 +250,52 @@ class Accessory extends SnipeModel
     {
         return $query->leftJoin('manufacturers', 'accessories.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
     }
+
+    /**
+     * Query builder scope to search on text for complex Bootstrap Tables API.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeAssignedSearch($query, $search)
+    {
+        $search = explode(' OR ', $search);
+
+        return $query->leftJoin('locations as accessories_locations',function ($leftJoin) {
+            $leftJoin->on("assets_locations.id","=","accessories.assigned_to");
+        })->where(function ($query) use ($search) {
+            foreach ($search as $search) {
+                $query->whereHas('model', function ($query) use ($search) {
+                    $query->whereHas('category', function ($query) use ($search) {
+                        $query->where(function ($query) use ($search) {
+                            $query->where('categories.name', 'LIKE', '%'.$search.'%')
+                                ->orWhere('models.name', 'LIKE', '%'.$search.'%')
+                                ->orWhere('models.model_number', 'LIKE', '%'.$search.'%');
+                        });
+                    });
+                })->orWhereHas('model', function ($query) use ($search) {
+                    $query->whereHas('manufacturer', function ($query) use ($search) {
+                        $query->where(function ($query) use ($search) {
+                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
+                        });
+                    });
+                })->orWhere(function ($query) use ($search) {
+                    $query->where('assets_users.first_name', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assets_users.last_name', 'LIKE', '%'.$search.'%')
+                        ->orWhereRaw('CONCAT('.DB::getTablePrefix().'assets_users.first_name," ",'.DB::getTablePrefix().'assets_users.last_name) LIKE ?', ["%$search%", "%$search%"])
+                        ->orWhere('assets_users.username', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assets_locations.name', 'LIKE', '%'.$search.'%')
+                        ->orWhere('assigned_assets.name', 'LIKE', '%'.$search.'%');
+                })->orWhere('assets.name', 'LIKE', '%'.$search.'%')
+                    ->orWhere('assets.asset_tag', 'LIKE', '%'.$search.'%')
+                    ->orWhere('assets.serial', 'LIKE', '%'.$search.'%')
+                    ->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
+                    ->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
+            }
+
+        })->withTrashed()->whereNull("assets.deleted_at"); //workaround for laravel bug
+    }
+
 }

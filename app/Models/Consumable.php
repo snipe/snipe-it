@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use App\Models\Traits\Searchable;
+use App\Models\Traits\Inventoryable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -12,6 +13,7 @@ class Consumable extends SnipeModel
     protected $presenter = 'App\Presenters\ConsumablePresenter';
     use CompanyableTrait;
     use Loggable, Presentable;
+    use Inventoryable;
     use SoftDeletes;
 
     protected $dates = ['deleted_at', 'purchase_date'];

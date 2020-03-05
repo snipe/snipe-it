@@ -5,6 +5,8 @@ use App\Helpers\Helper;
 use App\Models\Accessory;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\Location;
+use App\Enums\States;
 use Auth;
 use Carbon\Carbon;
 use Config;
@@ -254,15 +256,24 @@ class AccessoriesController extends Controller
             return redirect()->route('checkout/accessory', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'));
         }
 
+        $stock_location = null;
+        if (request('stock_location_id') && request('stock_location_id') != 0 && !$stock_location = Location::find(request('stock_location_id'))) {
+          return redirect()->route('checkout/accessory', $accessory->id)->with('error', trans('admin/locations/message.does_not_exist'));
+        }
+        $stock_location_id = $stock_location ? $stock_location->id : 0;
+
       // Update the accessory data
         $accessory->assigned_to = e(Input::get('assigned_to'));
 
         $accessory->users()->attach($accessory->id, [
             'accessory_id' => $accessory->id,
             'created_at' => Carbon::now(),
+            'stock_location_id' => $stock_location_id,
             'user_id' => Auth::id(),
             'assigned_to' => $request->get('assigned_to')
         ]);
+
+        $accessory->invCheckout($stock_location_id, 1, \Carbon::now(), States::IN_STOCK); // quantityt for future addition
 
         $logaction = $accessory->logCheckout(e(Input::get('note')), $user);
 
@@ -327,11 +338,14 @@ class AccessoriesController extends Controller
         }
 
         $accessory = Accessory::find($accessory_user->accessory_id);
+        $stock_location_id = $accessory_user->stock_location_id;
 
         $this->authorize('checkin', $accessory);
 
         $return_to = e($accessory_user->assigned_to);
+
         $logaction = $accessory->logCheckin(User::find($return_to), e(Input::get('note')));
+
 
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
@@ -346,6 +360,8 @@ class AccessoriesController extends Controller
             $data['checkin_date'] = e($logaction->created_at);
             $data['item_tag'] = '';
             $data['note'] = e($logaction->note);
+
+            $accessory->invCheckin($stock_location_id, 1, \Carbon::now(), States::IN_STOCK); // quantityt for future addition
 
             if ($backto=='user') {
                 return redirect()->route("users.show", $return_to)->with('success', trans('admin/accessories/message.checkin.success'));

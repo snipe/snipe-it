@@ -2,6 +2,7 @@
 namespace App\Http\Transformers;
 
 use App\Models\Accessory;
+use App\Enums\States;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;
@@ -39,14 +40,22 @@ class AccessoriesTransformer
             'image' => ($accessory->image) ? url('/').'/uploads/accessories/'.e($accessory->image) : null,
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
-
         ];
+
+        // Add stock states if added
+        foreach (States::$all_states as $value) {
+          if (isset($accessory[$value]))
+            $array[$value] = $accessory->$value;
+        }
 
         $permissions_array['available_actions'] = [
             'checkout' => Gate::allows('checkout', Accessory::class) ? true : false,
             'checkin' =>  false,
             'update' => Gate::allows('update', Accessory::class) ? true : false,
             'delete' => Gate::allows('delete', Accessory::class) ? true : false,
+            'invadjusts' => true,
+            'invreconciles' => true,
+            'invtransfers' => true,
         ];
 
         $permissions_array['user_can_checkout'] = false;

@@ -94,6 +94,31 @@ class AccessoryPresenter extends Presenter
                 "sortable" => false,
                 "title" => trans('admin/accessories/general.remaining'),
             ], [
+                "field" => "in_stock",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/inventory/general.in_stock'),
+            ], [
+                "field" => "checked_out",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/inventory/general.checked_out'),
+            ], [
+                "field" => "pending",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/inventory/general.pending'),
+            ], [
+                "field" => "archived",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/inventory/general.archived'),
+            ], [
+                "field" => "reserved_request",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/inventory/general.reserved_request'),
+            ], [
                 "field" => "purchase_date",
                 "searchable" => true,
                 "sortable" => true,
@@ -106,7 +131,14 @@ class AccessoryPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('general.purchase_cost'),
                 "footerFormatter" => 'sumFormatter',
-            ], [
+          ],[
+            "field" => "adjust",
+            "searchable" => false,
+            "sortable" => false,
+            "visible" => true,
+            "title" => "Adjust",
+            "formatter" => "accessoriesInventoryFormatter",
+          ], [
                 "field" => "order_number",
                 "searchable" => true,
                 "sortable" => true,
@@ -120,12 +152,12 @@ class AccessoryPresenter extends Presenter
                 "title" => trans('general.change'),
                 "formatter" => "accessoriesInOutFormatter",
             ], [
-                "field" => "actions",
-                "searchable" => false,
-                "sortable" => false,
-                "switchable" => false,
-                "title" => trans('table.actions'),
-                "formatter" => "accessoriesActionsFormatter",
+              "field" => "actions",
+              "searchable" => false,
+              "sortable" => false,
+              "switchable" => false,
+              "title" => trans('table.actions'),
+              "formatter" => "accessoriesActionsFormatter",
             ]
         ];
 
@@ -151,8 +183,20 @@ class AccessoryPresenter extends Presenter
         return route('accessories.show', $this->id);
     }
 
-    public function name()
+        /**
+     * Helper for notification polymorphism.
+     * @return mixed
+     */
+    public function fullName()
     {
-        return $this->model->name;
+        $str = '';
+        if ($this->name) {
+            $str .= $this->name;
+        }
+
+        if ($this->model_number) {
+            $str .= ' ('.$this->model_number.')';
+        }
+        return $str;
     }
 }

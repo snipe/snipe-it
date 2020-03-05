@@ -39,7 +39,7 @@
                 data-url="{{route('api.accessories.index') }}"
                 data-export-options='{
                     "fileName": "export-accessories-{{ date('Y-m-d') }}",
-                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                    "ignoreColumn": ["actions","image","adjust","change","checkbox","checkincheckout","icon"]
                     }'>
           </table>
         </div>

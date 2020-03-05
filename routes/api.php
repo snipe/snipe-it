@@ -34,6 +34,35 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
     });
 
     /*--- Accessories API ---*/
+    Route::group(['prefix' => 'accessories'], function () {
+
+      Route::get( 'selectlist',  [
+            'as' => 'accessories.selectlist',
+            'uses' => 'AccessoriesController@selectlist'
+      ]);
+
+      Route::get('{accessory}/checkedout',
+          [
+              'as' => 'api.accessories.checkedout',
+              'uses' => 'AccessoriesController@checkedout'
+          ]
+      );
+
+      Route::post('{accessory}/checkout',
+          [
+              'as' => 'api.accessories.checkout',
+              'uses' => 'AccessoriesController@checkout'
+          ]
+      );
+
+      Route::post('{accessory}/checkin',
+          [
+              'as' => 'api.accessories.checkin',
+              'uses' => 'AccessoriesController@checkin'
+          ]
+      );
+
+  }); // Accessories group
     Route::resource('accessories', 'AccessoriesController',
         ['names' =>
             [
@@ -47,31 +76,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
             'parameters' => ['accessory' => 'accessory_id']
         ]
     ); // Accessories resource
-
-    Route::group(['prefix' => 'accessories'], function () {
-
-        Route::get('{accessory}/checkedout',
-            [
-                'as' => 'api.accessories.checkedout',
-                'uses' => 'AccessoriesController@checkedout'
-            ]
-        );
-
-        Route::post('{accessory}/checkout',
-            [
-                'as' => 'api.accessories.checkout',
-                'uses' => 'AccessoriesController@checkout'
-            ]
-        );
-
-        Route::post('{accessory}/checkin',
-            [
-                'as' => 'api.accessories.checkin',
-                'uses' => 'AccessoriesController@checkin'
-            ]
-        );
-
-    }); // Accessories group
 
 
     /*--- Categories API ---*/

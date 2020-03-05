@@ -289,6 +289,31 @@
 
     }
 
+    function genericInventoryFormatter(destination) {
+      return function (value,row) {
+        var actions = '<nobr>';
+        // Add some overrides for any funny urls we have
+        var dest = destination;
+
+
+        if ((row.available_actions) && (row.available_actions.invadjusts === true)) {
+            actions += '<a href="{{ url('/') }}/invadjusts/create?' + dest + '=' + row.id + '" class="btn btn-sm btn-info" data-tooltip="true" title="{{ trans('general.adjustment') }}"><i class="fa fa-exchange fa-rotate-90"></i></a>&nbsp;';
+        }
+
+        if ((row.available_actions) && (row.available_actions.invtransfers === true)) {
+            actions += '<a href="{{ url('/') }}/invtransfers/create?' + dest + '=' + row.id + '" class="btn btn-sm btn-info" data-tooltip="true" title="{{ trans('general.transfer') }}"><i class="fa fa-exchange"></i></a>&nbsp;';
+        }
+
+        if ((row.available_actions) && (row.available_actions.invreconciles === true)) {
+            actions += '<a href="{{ url('/') }}/invreconciles/create?' + dest + '=' + row.id + '" class="btn btn-sm btn-info" data-tooltip="true" title="{{ trans('general.reconcile') }}"><i class="fa fa-hashtag"></i></a>&nbsp;';
+        }
+
+        actions +='</nobr>';
+        return actions;
+
+      }
+    }
+
     function genericCheckinCheckoutFormatter(destination) {
         return function (value,row) {
 
@@ -354,6 +379,7 @@
         window[formatters[i] + 'LinkObjFormatter'] = genericColumnObjLinkFormatter(formatters[i]);
         window[formatters[i] + 'ActionsFormatter'] = genericActionsFormatter(formatters[i]);
         window[formatters[i] + 'InOutFormatter'] = genericCheckinCheckoutFormatter(formatters[i]);
+        window[formatters[i] + 'InventoryFormatter'] = genericInventoryFormatter(formatters[i]);
     }
 
 

@@ -50,7 +50,7 @@
           @endif
 
           <!-- User -->
-
+          @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.stock_location'), 'fieldname' => 'stock_location_id'])
           @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to'])
 
 
