@@ -35,7 +35,7 @@
                                         <label class="col-md-4 control-label">{{ trans('admin/users/table.email')  }}</label>
 
                                         <div class="col-md-6">
-                                            <input type="email" class="form-control" name="email" value="{{ $email or old('email') }}">
+                                            <input type="email" class="form-control" name="email" maxlength="250" value="{{ $email or old('email') }}">
                                             {!! $errors->first('email', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
 
                             </div>
