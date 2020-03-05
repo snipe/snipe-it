@@ -307,6 +307,32 @@ $(document).ready(function () {
         });
     });
 
+    // This handles the radio button selectors for the inventory-item-selector options
+    // on asset checkout and also on asset edit
+    $(function() {
+      $('input[name=inventory_item_type]').on("change",function () {
+          var item_type = $('input[name=inventory_item_type]:checked').val();
+
+          if (item_type == 'accessory') {
+              //$('#current_assets_box').fadeOut();
+              $('#accessory-select').show();
+              $('#consumable-select').hide();
+              $('#component-select').hide();
+
+          } else if (item_type == 'consumable') {
+              $('#accessory-select').hide();
+              $('#consumable-select').show();
+              $('#component-select').hide();
+        } else {
+              $('#accessory-select').hide();
+              $('#consumable-select').hide();
+              $('#component-select').show();
+
+          }
+      });
+  });
+
+
 
     // ------------------------------------------------
     // Deep linking for Bootstrap tabs
