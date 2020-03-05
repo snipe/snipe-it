@@ -19,7 +19,7 @@ use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use View;
-use Request;
+use Illuminate\Http\Request;
 
 
 /**
