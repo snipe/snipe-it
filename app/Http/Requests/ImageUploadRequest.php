@@ -27,7 +27,7 @@ class ImageUploadRequest extends Request
     public function rules()
     {
         return [
-            'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp',
+            'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml',
             'avatar' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml',
         ];
     }
