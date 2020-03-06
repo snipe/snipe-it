@@ -76,7 +76,7 @@ class SettingsServiceProvider extends ServiceProvider
 
         // Users
         \App::singleton('users_upload_path', function(){
-            return 'users/';
+            return 'avatars/';
         });
 
         \App::singleton('users_upload_url', function(){

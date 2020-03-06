@@ -5,6 +5,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserNotFoundException;
 use App\Http\Requests\SaveUserRequest;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Group;
@@ -19,7 +20,7 @@ use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use View;
-use Request;
+use Illuminate\Http\Request;
 
 
 /**
@@ -65,12 +66,12 @@ class UsersController extends Controller
 
         $userGroups = collect();
 
-        if (Request::old('groups')) {
-            $userGroups = Group::whereIn('id', Request::old('groups'))->pluck('name', 'id');
+        if ($request->old('groups')) {
+            $userGroups = Group::whereIn('id', $request->old('groups'))->pluck('name', 'id');
         }
 
         $permissions = config('permissions');
-        $userPermissions = Helper::selectedPermissionsArray($permissions, Request::old('permissions', array()));
+        $userPermissions = Helper::selectedPermissionsArray($permissions, $request->old('permissions', array()));
         $permissions = $this->filterDisplayable($permissions);
 
         $user = new User;
@@ -124,6 +125,8 @@ class UsersController extends Controller
             unset($permissions_array['superuser']);
         }
         $user->permissions =  json_encode($permissions_array);
+
+        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, '', 'avatar', 'avatars');
 
         if ($user->save()) {
             if ($request->filled('groups')) {
@@ -201,7 +204,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(SaveUserRequest $request, $id = null)
+    public function update(Request $request, $id = null)
     {
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
@@ -218,6 +221,7 @@ class UsersController extends Controller
 
         try {
             $user = User::findOrFail($id);
+            app('App\Http\Requests\SaveUserRequest');
 
             if ($user->id == $request->input('manager_id')) {
                 return redirect()->back()->withInput()->with('error', 'You cannot be your own manager.');
@@ -290,6 +294,9 @@ class UsersController extends Controller
         }
 
         $user->permissions =  json_encode($permissions_array);
+
+        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, '', 'avatar', 'avatars');
+
 
         // Was the user updated?
         if ($user->save()) {

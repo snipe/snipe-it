@@ -67,7 +67,7 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <form class="form-horizontal" method="post" autocomplete="off" action="{{ (isset($user->id)) ? route('users.update', ['user' => $user->id]) : route('users.store') }}" id="userForm">
+    <form class="form-horizontal" method="post" autocomplete="off" action="{{ (isset($user->id)) ? route('users.update', ['user' => $user->id]) : route('users.store') }}" enctype="multipart/form-data" id="userForm">
       {{csrf_field()}}
 
       @if($user->id)
@@ -212,6 +212,22 @@
                 @if (\App\Models\Company::canManageUsersCompanies())
                     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.select_company'), 'fieldname' => 'company_id'])
                 @endif
+
+
+              <!-- Image -->
+                  @if ($user->avatar)
+                      <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
+                          <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
+                          <div class="col-md-5">
+                              {{ Form::checkbox('image_delete') }}
+                              <img src="{{ Storage::disk('public')->url(app('users_upload_path').e($user->avatar)) }}" class="img-responsive" />
+                              {!! $errors->first('image_delete', '<span class="alert-msg"><br>:message</span>') !!}
+                          </div>
+                      </div>
+                  @endif
+
+                  @include ('partials.forms.edit.image-upload', ['fieldname' => 'avatar'])
+
 
                 <!-- language -->
                 <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
