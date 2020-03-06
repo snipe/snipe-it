@@ -14,6 +14,7 @@ use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\AccessoriesTransformer;
 use App\Http\Transformers\LicensesTransformer;
+use Auth;
 
 class UsersController extends Controller
 {
@@ -260,6 +261,16 @@ class UsersController extends Controller
         if ($request->filled('password')) {
             $user->password = bcrypt($request->input('password'));
         }
+
+
+        $permissions_array = $request->input('permissions');
+
+        // Strip out the superuser permission if the user isn't a superadmin
+        if (!Auth::user()->isSuperUser()) {
+            unset($permissions_array['superuser']);
+        }
+        $user->permissions =  json_encode($permissions_array);
+
 
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
