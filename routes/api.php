@@ -320,16 +320,21 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
 
     Route::group(['prefix' => 'hardware'], function () {
 
-        Route::get( 'bytag/{tag}',  [
-            'as' => 'assets.show.bytag',
-            'uses' => 'AssetsController@showByTag'
-        ]);
+        Route::get('bytag/{any}',
+            [
+                'as' => 'api.assets.show.bytag',
+                'uses' => 'AssetsController@showByTag'
+            ]
+        )->where('any', '.*');
 
-        Route::get( 'byserial/{serial}',  [
-            'as' => 'assets.show.byserial',
-            'uses' => 'AssetsController@showBySerial'
-        ]);
 
+        Route::get('byserial/{any}',
+            [
+                'as' => 'api.assets.show.byserial',
+                'uses' => 'AssetsController@showBySerial'
+            ]
+         )->where('any', '.*');
+        
 
         Route::get( 'selectlist',  [
             'as' => 'assets.selectlist',
