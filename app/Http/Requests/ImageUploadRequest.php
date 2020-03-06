@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\SnipeModel;
 use Intervention\Image\Facades\Image;
+use enshrined\svgSanitize\Sanitizer;
 use Storage;
 
 class ImageUploadRequest extends Request
