@@ -5,6 +5,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserNotFoundException;
 use App\Http\Requests\SaveUserRequest;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Group;
@@ -201,7 +202,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(SaveUserRequest $request, $id = null)
+    public function update(Request $request, $id = null)
     {
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
@@ -218,6 +219,7 @@ class UsersController extends Controller
 
         try {
             $user = User::findOrFail($id);
+            app('App\Http\Requests\SaveUserRequest');
 
             if ($user->id == $request->input('manager_id')) {
                 return redirect()->back()->withInput()->with('error', 'You cannot be your own manager.');
@@ -290,6 +292,9 @@ class UsersController extends Controller
         }
 
         $user->permissions =  json_encode($permissions_array);
+
+        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, '', 'avatar', 'avatars');
+
 
         // Was the user updated?
         if ($user->save()) {
