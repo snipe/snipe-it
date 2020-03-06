@@ -60,10 +60,21 @@ Route::group(
             'uses' => 'AssetsController@postImportHistory'
         ]);
 
-        Route::get('/bytag', [
-            'as'   => 'findbytag/hardware',
-            'uses' => 'AssetsController@getAssetByTag'
-        ]);
+        Route::get('bytag/{any?}',
+            [
+                'as'   => 'findbytag/hardware',
+                'uses' => 'AssetsController@getAssetByTag'
+            ]
+        )->where('any', '.*');
+
+        Route::get('byserial/{any?}',
+            [
+                'as'   => 'findbyserial/hardware',
+                'uses' => 'AssetsController@getAssetBySerial'
+            ]
+        )->where('any', '.*');
+
+
 
         Route::get('{assetId}/clone', [
             'as' => 'clone/hardware',

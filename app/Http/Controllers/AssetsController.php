@@ -439,22 +439,63 @@ class AssetsController extends Controller
 
 
     /**
-     * Searches the assets table by asset tag, and redirects if it finds one
+     * Searches the assets table by tag, and redirects if it finds one.
+     *
+     * This is used by the top search box in Snipe-IT, but as of 4.9.x
+     * can also be used as a url segment.
+     *
+     * https://yoursnipe.com/hardware/bytag/?assetTag=foo
+     *
+     * OR
+     *
+     * https://yoursnipe.com/hardware/bytag/foo
+     *
+     * The latter is useful if you're doing home-grown barcodes, or
+     * some other automation where you don't always know the internal ID of
+     * an asset and don't want to query for it.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param string $tag
      * @since [v3.0]
      * @return Redirect
      */
-    public function getAssetByTag(Request $request)
+    public function getAssetByTag(Request $request, $tag = null)
     {
+
         $topsearch = ($request->get('topsearch')=="true");
 
-        if (!$asset = Asset::where('asset_tag', '=', $request->get('assetTag'))->first()) {
+        // We need this part to determine whether a url query parameter has been passed, OR
+        // whether it's the url fragment we need to look at
+        $tag = ($request->get('assetTag')) ? $request->get('assetTag') : $tag;
+
+        if (!$asset = Asset::where('asset_tag', '=', $tag)->first()) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
         $this->authorize('view', $asset);
         return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
     }
+
+
+    /**
+     * Searches the assets table by serial, and redirects if it finds one
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param string $serial
+     * @since [v4.9.1]
+     * @return Redirect
+     */
+    public function getAssetBySerial(Request $request, $serial = null)
+    {
+
+        $serial = ($request->get('serial')) ? $request->get('serial') : $serial;
+        if (!$asset = Asset::where('serial', '=', $serial)->first()) {
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        }
+        $this->authorize('view', $asset);
+        return redirect()->route('hardware.show', $asset->id);
+    }
+
+
     /**
      * Return a QR code for the asset
      *
