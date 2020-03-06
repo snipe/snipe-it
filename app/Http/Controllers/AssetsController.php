@@ -439,7 +439,7 @@ class AssetsController extends Controller
 
 
     /**
-     * Searches the assets table by serial, and redirects if it finds one
+     * Searches the assets table by tag, and redirects if it finds one
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
@@ -461,7 +461,7 @@ class AssetsController extends Controller
 
 
     /**
-     * Searches the assets table by asset tag, and redirects if it finds one
+     * Searches the assets table by serial, and redirects if it finds one
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
