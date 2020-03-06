@@ -66,12 +66,12 @@ class UsersController extends Controller
 
         $userGroups = collect();
 
-        if (Request::old('groups')) {
-            $userGroups = Group::whereIn('id', Request::old('groups'))->pluck('name', 'id');
+        if ($request->old('groups')) {
+            $userGroups = Group::whereIn('id', $request->old('groups'))->pluck('name', 'id');
         }
 
         $permissions = config('permissions');
-        $userPermissions = Helper::selectedPermissionsArray($permissions, Request::old('permissions', array()));
+        $userPermissions = Helper::selectedPermissionsArray($permissions, $request->old('permissions', array()));
         $permissions = $this->filterDisplayable($permissions);
 
         $user = new User;
@@ -125,6 +125,8 @@ class UsersController extends Controller
             unset($permissions_array['superuser']);
         }
         $user->permissions =  json_encode($permissions_array);
+
+        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, '', 'avatar', 'avatars');
 
         if ($user->save()) {
             if ($request->filled('groups')) {
