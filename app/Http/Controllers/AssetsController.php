@@ -455,6 +455,7 @@ class AssetsController extends Controller
      * an asset and don't want to query for it.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param string $tag
      * @since [v3.0]
      * @return Redirect
      */
@@ -479,7 +480,8 @@ class AssetsController extends Controller
      * Searches the assets table by serial, and redirects if it finds one
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v3.0]
+     * @param string $serial
+     * @since [v4.9.1]
      * @return Redirect
      */
     public function getAssetBySerial(Request $request, $serial = null)
