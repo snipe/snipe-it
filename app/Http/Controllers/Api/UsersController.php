@@ -208,6 +208,17 @@ class UsersController extends Controller
         $user = new User;
         $user->fill($request->all());
 
+        if ($request->has('permissions')) {
+
+            $permissions_array = $request->input('permissions');
+
+            // Strip out the superuser permission if the API user isn't a superadmin
+            if (!Auth::user()->isSuperUser()) {
+                unset($permissions_array['superuser']);
+            }
+            $user->permissions =  $permissions_array;
+        }
+
         $tmp_pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
         $user->password = bcrypt($request->get('password', $tmp_pass));
 
@@ -262,14 +273,21 @@ class UsersController extends Controller
             $user->password = bcrypt($request->input('password'));
         }
 
+        // We need to use has()  instead of filled()
+        // here because we need to overwrite permissions
+        // if someone needs to null them out
+        if ($request->has('permissions')) {
 
-        $permissions_array = $request->input('permissions');
+            $permissions_array = $request->input('permissions');
 
-        // Strip out the superuser permission if the user isn't a superadmin
-        if (!Auth::user()->isSuperUser()) {
-            unset($permissions_array['superuser']);
+            // Strip out the superuser permission if the API user isn't a superadmin
+            if (!Auth::user()->isSuperUser()) {
+                unset($permissions_array['superuser']);
+            }
+            $user->permissions =  $permissions_array;
         }
-        $user->permissions =  json_encode($permissions_array);
+
+
 
 
         // Update the location of any assets checked out to this user
