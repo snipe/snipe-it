@@ -439,7 +439,20 @@ class AssetsController extends Controller
 
 
     /**
-     * Searches the assets table by tag, and redirects if it finds one
+     * Searches the assets table by tag, and redirects if it finds one.
+     *
+     * This is used by the top search box in Snipe-IT, but as of 4.9.x
+     * can also be used as a url segment.
+     *
+     * https://yoursnipe.com/hardware/bytag/?assetTag=foo
+     *
+     * OR
+     *
+     * https://yoursnipe.com/hardware/bytag/foo
+     *
+     * The latter is useful if you're doing home-grown barcodes, or
+     * some other automation where you don't always know the internal ID of
+     * an asset and don't want to query for it.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
@@ -450,6 +463,8 @@ class AssetsController extends Controller
 
         $topsearch = ($request->get('topsearch')=="true");
 
+        // We need this part to determine whether a url query parameter has been passed, OR
+        // whether it's the url fragment we need to look at
         $tag = ($request->get('assetTag')) ? $request->get('assetTag') : $tag;
 
         if (!$asset = Asset::where('asset_tag', '=', $tag)->first()) {
