@@ -439,22 +439,46 @@ class AssetsController extends Controller
 
 
     /**
+     * Searches the assets table by serial, and redirects if it finds one
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return Redirect
+     */
+    public function getAssetByTag(Request $request, $tag = null)
+    {
+
+        $topsearch = ($request->get('topsearch')=="true");
+
+        $tag = ($request->get('assetTag')) ? $request->get('assetTag') : $tag;
+
+        if (!$asset = Asset::where('asset_tag', '=', $tag)->first()) {
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        }
+        $this->authorize('view', $asset);
+        return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
+    }
+
+
+    /**
      * Searches the assets table by asset tag, and redirects if it finds one
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @return Redirect
      */
-    public function getAssetByTag(Request $request)
+    public function getAssetBySerial(Request $request, $serial = null)
     {
-        $topsearch = ($request->get('topsearch')=="true");
 
-        if (!$asset = Asset::where('asset_tag', '=', $request->get('assetTag'))->first()) {
+        $serial = ($request->get('serial')) ? $request->get('serial') : $serial;
+        if (!$asset = Asset::where('serial', '=', $serial)->first()) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
         $this->authorize('view', $asset);
-        return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
+        return redirect()->route('hardware.show', $asset->id);
     }
+
+
     /**
      * Return a QR code for the asset
      *
