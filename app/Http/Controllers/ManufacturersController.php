@@ -96,13 +96,14 @@ class ManufacturersController extends Controller
      */
     public function edit($id = null)
     {
+        // Handles manufacturer checks and permissions.
+        $this->authorize('update', Manufacturer::class);
+
         // Check if the manufacturer exists
         if (!$item = Manufacturer::find($id)) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
-        //Handles manufacturer checks and permissions.
-        $this->authorize('update', Manufacturer::class);
-
+        
         // Show the page
         return view('manufacturers/edit', compact('item'));
     }
