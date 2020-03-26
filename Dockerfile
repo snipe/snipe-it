@@ -60,7 +60,7 @@ WORKDIR /var/www/html
 
 #copy all configuration files
 # COPY docker/*.php /var/www/html/app/config/production/
-COPY docker/docker.env /var/www/html/.env
+COPY --chown=docker docker/docker.env /var/www/html/.env
 
 RUN \
 	rm -r "/var/www/html/storage/private_uploads" && ln -fs "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \
