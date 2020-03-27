@@ -835,6 +835,7 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
             $('.select2 span').addClass('needsclick');
+            $('.select2 span').removeAttr('title');
 
             // This javascript handles saving the state of the menu (expanded or not)
             $('body').bind('expanded.pushMenu', function() {
