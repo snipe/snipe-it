@@ -196,7 +196,7 @@
                   @endcan
 
                   @can('admin')
-                  <li class="dropdown">
+                  <li class="dropdown" aria-hidden="true">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       {{ trans('general.create') }}
                       <b class="caret"></b>
