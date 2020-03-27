@@ -145,35 +145,35 @@
             <div class="navbar-custom-menu">
               <ul class="nav navbar-nav">
                   @can('index', \App\Models\Asset::class)
-                  <li {!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
+                  <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
                       <a href="{{ url('hardware') }}">
                           <i class="fa fa-barcode"></i>
                       </a>
                   </li>
                   @endcan
                   @can('view', \App\Models\License::class)
-                  <li {!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
+                  <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('licenses.index') }}">
                           <i class="fa fa-floppy-o"></i>
                       </a>
                   </li>
                   @endcan
                   @can('index', \App\Models\Accessory::class)
-                  <li {!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
+                  <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('accessories.index') }}">
                           <i class="fa fa-keyboard-o"></i>
                       </a>
                   </li>
                   @endcan
                   @can('index', \App\Models\Consumable::class)
-                  <li {!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
+                  <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
                       <a href="{{ url('consumables') }}">
                           <i class="fa fa-tint"></i>
                       </a>
                   </li>
                   @endcan
                   @can('view', \App\Models\Component::class)
-                  <li {!! (Request::is('components*') ? ' class="active"' : '') !!}>
+                  <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('components.index') }}">
                           <i class="fa fa-hdd-o"></i>
                       </a>
@@ -739,7 +739,8 @@
         </section>
 
 
-        <section class="content">
+        <section class="content" id="main" tabindex="-1">
+
           <!-- Notifications -->
           <div class="row">
               @if (config('app.lock_passwords'))
