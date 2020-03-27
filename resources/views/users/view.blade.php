@@ -116,9 +116,9 @@
             @endif
             <div class="col-md-2 text-center">
               @if ($user->avatar)
-                <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print">
+                <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print" alt="{{ $user->present()->fullName() }}">
               @else
-                <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print">
+                <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print" alt="{{ $user->present()->fullName() }}">
               @endif
             </div>
 

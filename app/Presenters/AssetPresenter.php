@@ -324,12 +324,14 @@ class AssetPresenter extends Presenter
         $imagePath = '';
         if ($this->image && !empty($this->image)) {
             $imagePath = $this->image;
+            $imageAlt = $this->name;
         } elseif ($this->model && !empty($this->model->image)) {
             $imagePath = $this->model->image;
+            $imageAlt = $this->model->name;
         }
         $url = config('app.url');
         if (!empty($imagePath)) {
-            $imagePath = "<img src='{$url}/uploads/assets/{$imagePath}' height=50 width=50>";
+            $imagePath = '<img src="'.$url.'/uploads/assets/'.$imagePath.' height="50" width="50" alt="'.$imageAlt.'">';
         }
         return $imagePath;
     }
