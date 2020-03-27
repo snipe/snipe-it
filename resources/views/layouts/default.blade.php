@@ -271,7 +271,7 @@
                      <!-- inner menu: contains the actual data -->
                      <ul class="menu">
 
-                      @for($i=0; count($alert_items) > $i; $i++)
+                      @for($i = 0; count($alert_items) > $i; $i++)
 
                         <li><!-- Task item -->
                           <a href="{{route($alert_items[$i]['type'].'.show', $alert_items[$i]['id'])}}">
@@ -324,10 +324,8 @@
                          <a href="{{ route('account.requested') }}">
                              <i class="fa fa-check fa-disk fa-fw"></i>
                              Requested Assets
-                         </a></li>
-
-
-
+                         </a>
+                     </li>
 
                      <li>
                           <a href="{{ route('profile') }}">
