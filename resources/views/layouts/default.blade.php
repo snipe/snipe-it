@@ -104,6 +104,7 @@
        <![endif]-->
   </head>
   <body class="sidebar-mini skin-blue {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
+  <a class="skip-main" href="#main">Skip to main content</a>
     <div class="wrapper">
 
       <header class="main-header">
