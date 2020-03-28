@@ -59,7 +59,7 @@
   </div>
   <!-- side address column -->
   <div class="col-md-3">
-    <h4>{{ trans('admin/statuslabels/table.about') }}</h4>
+    <h2>{{ trans('admin/statuslabels/table.about') }}</h2>
     <p>{{ trans('admin/statuslabels/table.info') }}</p>
 
       <div class="box box-success">
