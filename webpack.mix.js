@@ -23,7 +23,7 @@ mix
     'public/css/bootstrap-tables-sticky-header.css',
     'public/css/overrides.css'
 ],
-    './public/css/dist/all.css');
+    './public/css/dist/all.css')
 
 // jQuery is loaded from vue.js webpack process
 // This compiles the vue.js file in the build directory

@@ -1,5 +1,5 @@
 /*
- * Skin: Purple
+ * Skin: blue
  * ----------
  */
 @import "../bootstrap-less/mixins.less";
@@ -11,11 +11,11 @@
   //Navbar
   .main-header {
     .navbar {
-      .navbar-variant(@purple; #fff);
+      .navbar-variant(@blue; #fff);
       .sidebar-toggle {
         color: #fff;
         &:hover {
-          background-color: darken(@purple, 5%);
+          background-color: darken(@blue, 5%);
         }
       }
       @media (max-width: @screen-header-collapse) {
@@ -27,7 +27,7 @@
             a {
               color: #fff;
               &:hover {
-                background: darken(@purple, 5%);
+                background: darken(@blue, 5%);
               }
             }
           }
@@ -37,7 +37,7 @@
     //Logo
 
     li.user-header {
-      background-color: @purple;
+      background-color: @blue;
     }
   }
 
@@ -47,7 +47,7 @@
   }
 
   //Create the sidebar skin
-  .skin-dark-sidebar(@purple);
+  .skin-dark-sidebar(@blue);
 }
 
 .skin-blue-dark.layout-top-nav .main-header > .logo {
@@ -62,42 +62,42 @@
 
 
   &.btn-primary, .btn-primary:link {
-    background-color: darken(@purple, 10%);
-    border-color: darken(@purple, 20%);
+    background-color: darken(@blue, 10%);
+    border-color: darken(@blue, 20%);
     color: #fff;
   }
 
 
   &a.btn-primary:hover {
-    background-color: darken(@purple, 20%);
-    border-color: darken(@purple, 20%);
+    background-color: darken(@blue, 20%);
+    border-color: darken(@blue, 20%);
     color: #fff;
   }
 
   &.btn-white:link {
-    background-color: darken(@purple, 10%);
+    background-color: darken(@blue, 10%);
     color: #fff;
   }
 
   &.btn-white:hover {
-    background-color: darken(@purple, 30%);
+    background-color: darken(@blue, 30%);
     color: #fff;
   }
 }
 
 
 a {
-  color: @purple;
+  color: @blue;
   &:hover {
-    color: darken(@purple, 20%);
+    color: darken(@blue, 20%);
   }
   &:visited {
-    color: @purple;
+    color: @blue;
   }
 }
 
 .text-primary {
-  color: darken(@purple, 20%);
+  color: darken(@blue, 20%);
 }
 
 
@@ -107,12 +107,12 @@ a {
   --background: #222;
   --back-main: #333;
   --back-sub: #444;
-  --header: @purple; /* Use same as Header picker */
+  --header: @blue; /* Use same as Header picker */
   --text-main: #FFF;
   --text-sub: #BBB;
-  --link: lighten(@purple, 10%); /* Use same as Header picker */
+  --link: lighten(@blue, 10%); /* Use same as Header picker */
   --nav-link: #FFF; /* Use same as Header picker */
-  --light-link: lighten(@purple, 30%); /* Use same as Header picker */
+  --light-link: lighten(@blue, 30%); /* Use same as Header picker */
 }
 
 .main-header .navbar, .main-header .logo {
