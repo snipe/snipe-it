@@ -86,7 +86,7 @@
   </div> <!-- .col-md-9-->
   <!-- side address column -->
   <div class="col-md-3">
-    <h4>{{ trans('admin/custom_fields/general.about_fieldsets_title') }}</h4>
+    <h2>{{ trans('admin/custom_fields/general.about_fieldsets_title') }}</h2>
     <p>{{ trans('admin/custom_fields/general.about_fieldsets_text') }} </p>
   </div>
 </div> <!-- .row-->
