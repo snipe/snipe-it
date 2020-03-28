@@ -60,7 +60,7 @@
 
 .btn, .btn:hover {
 
-
+  text-decoration: none;
   &.btn-primary, .btn-primary:link {
     background-color: @dark-gray;
     border-color: darken(@gray, 10%);
@@ -75,12 +75,14 @@
   }
 
   &.btn-white:link {
-    color: @black;
     color: #fff;
   }
 
   &.btn-white:hover {
-    color: darken(@black, 30%);
+    color: #fff;
+  }
+
+  &.btn-white:visited {
     color: #fff;
   }
 }
@@ -101,6 +103,6 @@ a {
   color: darken(@black, 20%);
 }
 
-.skin-black .main-header .navbar .nav>li>a {
+.skin-black .main-header .navbar .nav>li>a, .skin-black .main-header .navbar .nav>li>a {
   text-decoration: none;
 }
