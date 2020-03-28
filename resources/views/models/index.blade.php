@@ -45,7 +45,8 @@
 
             @if (Input::get('status')!='deleted')
               <div id="toolbar">
-                <select name="bulk_actions" class="form-control select2" style="width: 300px;">
+                <label for="bulk_actions" class="sr-only">Bulk Actions</label>
+                <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions" style="width: 300px;">
                   <option value="edit">Bulk Edit</option>
                   <option value="delete">Bulk Delete</option>
                 </select>
