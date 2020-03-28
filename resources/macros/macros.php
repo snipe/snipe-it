@@ -530,10 +530,21 @@ Form::macro('customfield_elements', function ($name = "customfield_elements", $s
 Form::macro('skin', function ($name = "skin", $selected = null, $class = null) {
 
     $formats = array(
-        '' => 'Default Blue',
-        'green-dark' => 'Green Dark',
-        'red-dark' => 'Red Dark',
-        'orange-dark' => 'Orange Dark',
+        'blue' => 'Default Blue Dark',
+        'blue-light' => 'Blue Light',
+        'green' => 'Green Dark',
+        'green-light' => 'Green Light',
+        'red' => 'Red Dark',
+        'red-light' => 'Red Light',
+        'orange' => 'Orange Dark',
+        'orange-light' => 'Orange Light',
+        'black' => 'Black',
+        'black-light' => 'Black Light',
+        'purple' => 'Purple',
+        'purple-light' => 'Purple Light',
+        'yellow' => 'Yellow',
+        'yellow-light' => 'Yellow Light',
+        'contrast' => 'High Contrast',
     );
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px">';
