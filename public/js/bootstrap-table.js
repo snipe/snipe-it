@@ -750,7 +750,7 @@
             html.push('<tr>');
 
             if (i === 0 && !that.options.cardView && that.options.detailView) {
-                html.push(sprintf('<th class="detail" rowspan="%s"><div class="fht-cell"></div></th>',
+                html.push(sprintf('<th class="detail" rowspan="%s" scope=”col”><div class="fht-cell"></div></th>',
                     that.options.columns.length));
             }
 
@@ -803,7 +803,7 @@
                     visibleColumns[column.field] = column;
                 }
 
-                html.push('<th' + sprintf(' title="%s"', column.titleTooltip),
+                html.push('<th scope=”col”' + sprintf(' title="%s"', column.titleTooltip),
                     column.checkbox || column.radio ?
                         sprintf(' class="bs-checkbox %s"', column['class'] || '') :
                         class_,
@@ -1117,8 +1117,8 @@
                 var checked = column.visible ? ' checked="checked"' : '';
 
                 if (column.switchable) {
-                    html.push(sprintf('<li role="menuitem">' +
-                        '<label class="sr-only">Check</label><input type="checkbox" data-field="%s" value="%s"%s> %s</label>' +
+                    html.push(sprintf('<li role="menuitem" style="padding-left: 5px;">' +
+                        '<label class="sr-only">' + column.title + '</label><input type="checkbox" data-field="%s" value="%s"%s> %s</label>' +
                         '</li>', column.field, i, checked, column.title));
                     switchableCount++;
                 }
