@@ -44,7 +44,7 @@
               <th>{{ trans('general.name') }}</th>
               <th>{{ trans('admin/custom_fields/general.qty_fields') }}</th>
               <th>{{ trans('admin/custom_fields/general.used_by_models') }}</th>
-              <th><span class="sr-only">Actions</span></th>
+              <th>Actions</th>
             </tr>
           </thead>
 
@@ -132,7 +132,7 @@
               <th data-searchable="true">{{ trans('admin/custom_fields/general.field_format') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
-              <th><span class="sr-only">Actions</span></th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

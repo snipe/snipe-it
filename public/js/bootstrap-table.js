@@ -820,7 +820,7 @@
 
                 if (column.checkbox) {
                     if (!that.options.singleSelect && that.options.checkboxHeader) {
-                        text = '<label for="btSelectAll" class="sr-only">Select All</label><input name="btSelectAll" type="checkbox" />';
+                        text = '<label for="btSelectAll" class="sr-only">Select All</label><input name="btSelectAll" type="checkbox">';
                     }
                     that.header.stateField = column.field;
                 }
