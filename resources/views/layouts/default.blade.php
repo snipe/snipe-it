@@ -735,8 +735,6 @@
         <section class="content-header" style="padding-bottom: 30px;">
           <h1 class="pull-left">
             @yield('title')
-
-
           </h1>
           <div class="pull-right">
             @yield('header_right')
