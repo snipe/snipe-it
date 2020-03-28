@@ -820,7 +820,7 @@
 
                 if (column.checkbox) {
                     if (!that.options.singleSelect && that.options.checkboxHeader) {
-                        text = '<label for="btSelectAll" class="sr-only">Select All</label><input name="btSelectAll" type="checkbox">';
+                        text = '<label><span class="sr-only">Select All</span><input name="btSelectAll" type="checkbox"></label>';
                     }
                     that.header.stateField = column.field;
                 }
@@ -1118,7 +1118,7 @@
 
                 if (column.switchable) {
                     html.push(sprintf('<li role="menuitem" style="padding-left: 5px;">' +
-                        '<label><input type="checkbox" aria-label="' + column.title + '" data-field="%s" value="%s"%s> %s</label>' +
+                        '<fieldset><label><input type="checkbox" aria-label="' + column.title + '" data-field="%s" value="%s"%s> %s</label></fieldset>' +
                         '</li>', column.field, i, checked, column.title));
                     switchableCount++;
                 }
@@ -1173,7 +1173,7 @@
             html = [];
             html.push(
                 '<div class="pull-' + this.options.searchAlign + ' search">',
-                sprintf('<label for="search" class="sr-only">Search</label><input name="search" class="form-control' +
+                sprintf('<label for="search" class="sr-only">Search</label><input name="search" aria-label="search" class="form-control' +
                     sprintf(' input-%s', this.options.iconSize) +
                     '" type="text" placeholder="%s">',
                     this.options.formatSearch()),
@@ -1746,7 +1746,7 @@
                 type = column.radio ? 'radio' : type;
 
                 text = [sprintf(that.options.cardView ?
-                    '<div class="card-view %s">' : '<td class="bs-checkbox %s">', column['class'] || ''),
+                    '<div class="card-view %s">' : '<td class="bs-checkbox %s"><label><span class="sr-only">Select</span>', column['class'] || ''),
                     '<input' +
                     sprintf(' data-index="%s"', i) +
                     sprintf(' name="%s"', that.options.selectItemName) +
@@ -1756,7 +1756,7 @@
                     (value_ || value && value.checked) ? 'checked' : undefined) +
                     sprintf(' disabled="%s"', !column.checkboxEnabled ||
                     (value && value.disabled) ? 'disabled' : undefined) +
-                    ' />',
+                    ' /></label>',
                     that.header.formatters[j] && typeof value === 'string' ? value : '',
                     that.options.cardView ? '</div>' : '</td>'
                 ].join('');
