@@ -820,7 +820,7 @@
 
                 if (column.checkbox) {
                     if (!that.options.singleSelect && that.options.checkboxHeader) {
-                        text = '<input name="btSelectAll" type="checkbox" />';
+                        text = '<label for="btSelectAll" class="sr-only">Select All</label><input name="btSelectAll" type="checkbox" />';
                     }
                     that.header.stateField = column.field;
                 }
@@ -1078,7 +1078,7 @@
                 sprintf(' btn-%s', this.options.iconSize) +
                 '" type="button" name="refresh" aria-label="refresh" title="%s">',
                 this.options.formatRefresh()),
-                sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.refresh),
+                sprintf('<i class="%s %s"></i><span class="sr-only">Refresh</span>', this.options.iconsPrefix, this.options.icons.refresh),
                 '</button>');
         }
 
@@ -1088,7 +1088,7 @@
                 sprintf(' btn-%s', this.options.iconSize) +
                 '" type="button" name="toggle" aria-label="toggle" title="%s">',
                 this.options.formatToggle()),
-                sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.toggle),
+                sprintf('<i class="%s %s"></i><span class="sr-only">Toggle</span>', this.options.iconsPrefix, this.options.icons.toggle),
                 '</button>');
         }
 
@@ -1100,6 +1100,7 @@
                 sprintf(' btn-%s', this.options.iconSize) +
                 ' dropdown-toggle" data-toggle="dropdown">',
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.columns),
+                ' <span class="sr-only">Select Columns</span>',
                 ' <span class="caret"></span>',
                 '</button>',
                 '<ul class="dropdown-menu" role="menu">');
@@ -1117,7 +1118,7 @@
 
                 if (column.switchable) {
                     html.push(sprintf('<li role="menuitem">' +
-                        '<label><input type="checkbox" data-field="%s" value="%s"%s> %s</label>' +
+                        '<label class="sr-only">Check</label><input type="checkbox" data-field="%s" value="%s"%s> %s</label>' +
                         '</li>', column.field, i, checked, column.title));
                     switchableCount++;
                 }
@@ -1172,7 +1173,7 @@
             html = [];
             html.push(
                 '<div class="pull-' + this.options.searchAlign + ' search">',
-                sprintf('<input class="form-control' +
+                sprintf('<label for="search" class="sr-only">Search</label><input class="form-control' +
                     sprintf(' input-%s', this.options.iconSize) +
                     '" type="text" placeholder="%s">',
                     this.options.formatSearch()),
@@ -1368,6 +1369,7 @@
                 '<span class="page-size">',
                 $allSelected ? this.options.formatAllRows() : this.options.pageSize,
                 '</span>',
+                ' <span class="sr-only">Page</span>',
                 ' <span class="caret"></span>',
                 '</button>',
                 '<ul class="dropdown-menu" role="menu">'

@@ -46,6 +46,7 @@
                     '<button class="btn btn-default dropdown-toggle" ' +
                     'data-toggle="dropdown" type="button">',
                     '<i class="fa fa-download"></i> ',
+                    '<span class="sr-only">Export</span>',
                     '<span class="caret"></span>',
                     '</button>',
                     '<ul class="dropdown-menu" role="menu">',
