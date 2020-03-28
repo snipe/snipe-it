@@ -1,5 +1,5 @@
 /*
- * Skin: light-blue
+ * Skin: Orange
  * ----------
  */
 @import "../bootstrap-less/mixins.less";
@@ -7,15 +7,15 @@
 @import "../variables.less";
 @import "../mixins.less";
 
-.skin-light-blue {
+.skin-orange {
   //Navbar
   .main-header {
     .navbar {
-      .navbar-variant(@light-blue; #fff);
+      .navbar-variant(@orange; #fff);
       .sidebar-toggle {
         color: #fff;
         &:hover {
-          background-color: darken(@light-blue, 5%);
+          background-color: darken(@orange, 5%);
         }
       }
       @media (max-width: @screen-header-collapse) {
@@ -27,7 +27,7 @@
             a {
               color: #fff;
               &:hover {
-                background: darken(@light-blue, 5%);
+                background: darken(@orange, 5%);
               }
             }
           }
@@ -37,7 +37,7 @@
     //Logo
 
     li.user-header {
-      background-color: @light-blue;
+      background-color: @orange;
     }
   }
 
@@ -47,10 +47,10 @@
   }
 
   //Create the sidebar skin
-  .skin-dark-sidebar(@light-blue);
+  .skin-dark-sidebar(@orange);
 }
 
-.skin-light-blue.layout-top-nav .main-header > .logo {
+.skin-orange.layout-top-nav .main-header > .logo {
   .logo-variant {
     background-color: none;
   }
@@ -62,41 +62,41 @@
 
 
   &.btn-primary, .btn-primary:link {
-    background-color: darken(@light-blue, 10%);
-    border-color: darken(@light-blue, 20%);
+    background-color: darken(@orange, 10%);
+    border-color: darken(@orange, 20%);
     color: #fff;
   }
 
 
   &a.btn-primary:hover {
-    background-color: darken(@light-blue, 20%);
-    border-color: darken(@light-blue, 20%);
+    background-color: darken(@orange, 20%);
+    border-color: darken(@orange, 20%);
     color: #fff;
   }
 
   &.btn-white:link {
-    color: darken(@light-blue, 10%);
+    color: darken(@orange, 10%);
     color: #fff;
   }
 
   &.btn-white:hover {
-    color: darken(@light-blue, 30%);
+    color: darken(@orange, 30%);
     color: #fff;
   }
 }
 
 
 a {
-  color: @light-blue;
+  color: @orange;
   &:hover {
-    color: darken(@light-blue, 20%);
+    color: darken(@orange, 20%);
   }
   &:visited {
-    color: @light-blue;
+    color: @orange;
   }
 }
 
 .text-primary {
-  color: darken(@light-blue, 20%);
+  color: darken(@orange, 20%);
 }
 

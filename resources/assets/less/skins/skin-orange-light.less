@@ -1,33 +1,34 @@
 /*
- * Skin: Blue
- * ----------
+ * Skin: orange
+ * ---------
  */
+
 @import "../bootstrap-less/mixins.less";
 @import "../bootstrap-less/variables.less";
 @import "../variables.less";
 @import "../mixins.less";
 
-.skin-blue-light {
+.skin-orange-light {
   //Navbar
   .main-header {
     .navbar {
-      .navbar-variant(@light-blue; #fff);
+      .navbar-variant(@orange; #fff);
       .sidebar-toggle {
         color: #fff;
         &:hover {
-          background-color: darken(@light-blue, 5%);
+          background-color: darken(@orange, 5%);
         }
       }
-      @media (max-width: @screen-header-collapse) {
+      @media(max-width: @screen-header-collapse) {
         .dropdown-menu {
           li {
             &.divider {
-              background-color: rgba(255, 255, 255, 0.1);
+              background-color: rgba(255,255,255,0.1);
             }
             a {
               color: #fff;
               &:hover {
-                background: darken(@light-blue, 5%);
+                background: darken(@orange, 5%);
               }
             }
           }
@@ -36,11 +37,11 @@
     }
     //Logo
     .logo {
-      .logo-variant(@light-blue);
+      .logo-variant(@orange);
     }
 
     li.user-header {
-      background-color: @light-blue;
+      background-color: @orange;
     }
   }
 
@@ -50,12 +51,5 @@
   }
 
   //Create the sidebar skin
-  .skin-light-sidebar(@light-blue);
-  .main-footer {
-    border-top-color: @gray;
-  }
-}
-
-.skin-blue.layout-top-nav .main-header > .logo {
-  .logo-variant(@light-blue);
+  .skin-light-sidebar(@orange);
 }
