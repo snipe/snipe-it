@@ -1118,7 +1118,7 @@
 
                 if (column.switchable) {
                     html.push(sprintf('<li role="menuitem" style="padding-left: 5px;">' +
-                        '<label class="sr-only">' + column.title + '</label><input type="checkbox" data-field="%s" value="%s"%s> %s</label>' +
+                        '<label><input type="checkbox" aria-label="' + column.title + '" data-field="%s" value="%s"%s> %s</label>' +
                         '</li>', column.field, i, checked, column.title));
                     switchableCount++;
                 }
@@ -1173,7 +1173,7 @@
             html = [];
             html.push(
                 '<div class="pull-' + this.options.searchAlign + ' search">',
-                sprintf('<label for="search" class="sr-only">Search</label><input class="form-control' +
+                sprintf('<label for="search" class="sr-only">Search</label><input name="search" class="form-control' +
                     sprintf(' input-%s', this.options.iconSize) +
                     '" type="text" placeholder="%s">',
                     this.options.formatSearch()),

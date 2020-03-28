@@ -45,7 +45,7 @@
                     '<div class="export btn-group">',
                     '<button class="btn btn-default dropdown-toggle" ' +
                     'data-toggle="dropdown" type="button">',
-                    '<i class="fa fa-download"></i> ',
+                    '<i class="fa fa-download" aria-hidden="true"></i> ',
                     '<span class="sr-only">Export</span>',
                     '<span class="caret"></span>',
                     '</button>',
@@ -66,7 +66,7 @@
                 }
                 $.each(exportTypes, function (i, type) {
                     if (TYPE_NAME.hasOwnProperty(type)) {
-                        $menu.append(['<li data-type="' + type + '">',
+                        $menu.append(['<li role="menuitem" data-type="' + type + '">',
                             '<a href="javascript:void(0)">',
                             TYPE_NAME[type],
                             '</a>',
