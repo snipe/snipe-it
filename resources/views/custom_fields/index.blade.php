@@ -44,7 +44,7 @@
               <th>{{ trans('general.name') }}</th>
               <th>{{ trans('admin/custom_fields/general.qty_fields') }}</th>
               <th>{{ trans('admin/custom_fields/general.used_by_models') }}</th>
-              <th></th>
+              <th><span class="sr-only">Actions</span></th>
             </tr>
           </thead>
 
@@ -132,7 +132,7 @@
               <th data-searchable="true">{{ trans('admin/custom_fields/general.field_format') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
-              <th></th>
+              <th><span class="sr-only">Actions</span></th>
             </tr>
           </thead>
           <tbody>
@@ -157,14 +157,22 @@
               <td>
                 <nobr>
                   @can('update', $field)
-                <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+                <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                  <span class="sr-only">Edit</span>
+                </a>
                 @endcan               
                 @can('delete', $field)
                 {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
                 @if($field->fieldset->count()>0)
-                <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
+                <button type="submit" class="btn btn-danger btn-sm disabled" disabled>
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <span class="sr-only">Delete</span></button>
                 @else
-                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                <button type="submit" class="btn btn-danger btn-sm">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <span class="sr-only">Delete</span>
+                </button>
                 @endif
                 {{ Form::close() }}
                 @endcan
