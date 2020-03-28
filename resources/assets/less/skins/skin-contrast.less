@@ -1,5 +1,5 @@
 /*
- * Skin: Blue
+ * Skin: navy
  * ----------
  */
 @import "../bootstrap-less/mixins.less";
@@ -55,3 +55,48 @@
     background-color: none;
   }
 }
+
+
+
+.btn, .btn:hover {
+
+
+  &.btn-primary, .btn-primary:link {
+    background-color: darken(@navy, 10%);
+    border-color: darken(@navy, 20%);
+    color: #fff;
+  }
+
+
+  &a.btn-primary:hover {
+    background-color: darken(@navy, 20%);
+    border-color: darken(@navy, 20%);
+    color: #fff;
+  }
+
+  &.btn-white:link {
+    background-color: darken(@navy, 10%);
+    color: #fff;
+  }
+
+  &.btn-white:hover {
+    background-color: darken(@navy, 30%);
+    color: #fff;
+  }
+}
+
+
+a {
+  color: @navy;
+  &:hover {
+    color: darken(@navy, 20%);
+  }
+  &:visited {
+    color: @navy;
+  }
+}
+
+.text-primary {
+  color: darken(@navy, 20%);
+}
+
