@@ -51,7 +51,7 @@
         background: linear-gradient(to bottom, {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
         border-color: {{ $snipeSettings->header_color }};
         }
-        .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
+        .skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} .sidebar-menu > li:hover > a, .skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} .sidebar-menu > li.active > a {
           border-left-color: {{ $snipeSettings->header_color }};
         }
 
@@ -103,7 +103,7 @@
        @endif
        <![endif]-->
   </head>
-  <body class="sidebar-mini skin-blue {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
+  <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
   <a class="skip-main" href="#main">Skip to main content</a>
     <div class="wrapper">
 
@@ -148,6 +148,7 @@
                   <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
                       <a href="{{ url('hardware') }}">
                           <i class="fa fa-barcode"></i>
+                          <span class="sr-only">Assets</span>
                       </a>
                   </li>
                   @endcan
@@ -155,6 +156,7 @@
                   <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('licenses.index') }}">
                           <i class="fa fa-floppy-o"></i>
+                          <span class="sr-only">Licenses</span>
                       </a>
                   </li>
                   @endcan
@@ -162,6 +164,7 @@
                   <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('accessories.index') }}">
                           <i class="fa fa-keyboard-o"></i>
+                          <span class="sr-only">Accessories</span>
                       </a>
                   </li>
                   @endcan
@@ -169,6 +172,7 @@
                   <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
                       <a href="{{ url('consumables') }}">
                           <i class="fa fa-tint"></i>
+                          <span class="sr-only">Consumables</span>
                       </a>
                   </li>
                   @endcan
@@ -176,6 +180,7 @@
                   <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
                       <a href="{{ route('components.index') }}">
                           <i class="fa fa-hdd-o"></i>
+                          <span class="sr-only">Components</span>
                       </a>
                   </li>
                   @endcan
@@ -186,10 +191,13 @@
                           <div class="col-xs-12 form-group">
                               <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
                               <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
-                              <input type="hidden" name="topsearch" value="true">
+                              <input type="hidden" name="topsearch" value="true" id="search">
                           </div>
                           <div class="col-xs-1">
-                              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-search"></i></button>
+                              <button type="submit" class="btn btn-primary pull-right">
+                                  <i class="fa fa-search"></i>
+                                  <span class="sr-only">Search</span>
+                              </button>
                           </div>
                       </div>
                   </form>
@@ -205,7 +213,7 @@
                      @can('create', \App\Models\Asset::class)
                       <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
                               <a href="{{ route('hardware.create') }}">
-                                  <i class="fa fa-barcode fa-fw"></i>
+                                  <i class="fa fa-barcode fa-fw" aria-hidden="true"></i>
                                   {{ trans('general.asset') }}
                               </a>
                       </li>
@@ -213,7 +221,7 @@
                        @can('create', \App\Models\License::class)
                        <li {!! (Request::is('licenses/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('licenses.create') }}">
-                               <i class="fa fa-floppy-o fa-fw"></i>
+                               <i class="fa fa-floppy-o fa-fw" aria-hidden="true"></i>
                                {{ trans('general.license') }}
                            </a>
                        </li>
@@ -221,14 +229,14 @@
                        @can('create', \App\Models\Accessory::class)
                        <li {!! (Request::is('accessories/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('accessories.create') }}">
-                               <i class="fa fa-keyboard-o fa-fw"></i>
+                               <i class="fa fa-keyboard-o fa-fw" aria-hidden="true"></i>
                                {{ trans('general.accessory') }}</a>
                        </li>
                        @endcan
                        @can('create', \App\Models\Consumable::class)
                        <li {!! (Request::is('consunmables/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('consumables.create') }}">
-                               <i class="fa fa-tint fa-fw"></i>
+                               <i class="fa fa-tint fa-fw" aria-hidden="true"></i>
                                {{ trans('general.consumable') }}
                            </a>
                        </li>
@@ -236,7 +244,7 @@
                        @can('create', \App\Models\Component::class)
                        <li {!! (Request::is('components/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('components.create') }}">
-                           <i class="fa fa-hdd-o fa-fw"></i>
+                           <i class="fa fa-hdd-o fa-fw" aria-hidden="true"></i>
                            {{ trans('general.component') }}
                            </a>
                        </li>
@@ -244,7 +252,7 @@
                          @can('create', \App\Models\User::class)
                              <li {!! (Request::is('users/create') ? 'class="active"' : '') !!}>
                                  <a href="{{ route('users.create') }}">
-                                     <i class="fa fa-user fa-fw"></i>
+                                     <i class="fa fa-user fa-fw" aria-hidden="true"></i>
                                      {{ trans('general.user') }}
                                  </a>
                              </li>
@@ -307,7 +315,7 @@
                    @if (Auth::user()->present()->gravatar())
                        <img src="{{ Auth::user()->present()->gravatar() }}" class="user-image" alt="User Image">
                    @else
-                      <i class="fa fa-user fa-fws"></i>
+                      <i class="fa fa-user fa-fws" aria-hidden="true"></i>
                    @endif
 
                    <span class="hidden-xs">{{ Auth::user()->first_name }} <b class="caret"></b></span>
@@ -316,26 +324,26 @@
                    <!-- User image -->
                      <li {!! (Request::is('account/profile') ? ' class="active"' : '') !!}>
                        <a href="{{ route('view-assets') }}">
-                             <i class="fa fa-check fa-fw"></i>
+                             <i class="fa fa-check fa-fw" aria-hidden="true"></i>
                              {{ trans('general.viewassets') }}
                        </a></li>
 
                      <li {!! (Request::is('account/requested') ? ' class="active"' : '') !!}>
                          <a href="{{ route('account.requested') }}">
-                             <i class="fa fa-check fa-disk fa-fw"></i>
+                             <i class="fa fa-check fa-disk fa-fw" aria-hidden="true"></i>
                              Requested Assets
                          </a>
                      </li>
 
                      <li>
                           <a href="{{ route('profile') }}">
-                             <i class="fa fa-user fa-fw"></i>
+                             <i class="fa fa-user fa-fw" aria-hidden="true"></i>
                               {{ trans('general.editprofile') }}
                          </a>
                      </li>
                      <li>
                          <a href="{{ route('account.password.index') }}">
-                             <i class="fa fa-asterisk fa-fw"></i>
+                             <i class="fa fa-asterisk fa-fw" aria-hidden="true"></i>
                              {{ trans('general.changepassword') }}
                          </a>
                      </li>
@@ -345,14 +353,14 @@
                      @can('self.api')
                      <li>
                          <a href="{{ route('user.api') }}">
-                             <i class="fa fa-user-secret fa-fw"></i> Manage API Keys
+                             <i class="fa fa-user-secret fa-fw" aria-hidden="true"></i> Manage API Keys
                          </a>
                      </li>
                      @endcan
                      <li class="divider"></li>
                      <li>
                          <a href="{{ url('/logout') }}">
-                             <i class="fa fa-sign-out fa-fw"></i>
+                             <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>
                              {{ trans('general.logout') }}
                          </a>
                      </li>
@@ -364,7 +372,8 @@
                @can('superadmin')
                <li>
                    <a href="{{ route('settings.index') }}">
-                       <i class="fa fa-cogs fa-fw"></i>
+                       <i class="fa fa-cogs fa-fw" aria-hidden="true"></i>
+                       <span class="sr-only">{{ trans('general.admin') }}</span>
                    </a>
                </li>
                @endcan
@@ -551,7 +560,7 @@
             @can('backend.interact')
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-gear"></i>
+                        <i class="fa fa-gear" aria-hidden="true"></i>
                         <span>{{ trans('general.settings') }}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
