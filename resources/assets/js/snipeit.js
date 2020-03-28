@@ -248,7 +248,7 @@ $(document).ready(function () {
         var markup = "<div class='clearfix'>" ;
         markup +="<div class='pull-left' style='padding-right: 10px;'>";
         if (datalist.image) {
-            markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;'></div>";
+            markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;' alt='" +  datalist.text + "'></div>";
         } else {
             markup += "<div style='height: 20px; width: 30px;'></div>";
         }
