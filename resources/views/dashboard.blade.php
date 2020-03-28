@@ -156,7 +156,8 @@
         <h3 class="box-title">{{ trans('general.recent_activity') }}</h3>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
-                <i class="fa fa-minus"></i>
+                <i class="fa fa-minus" aria-hidden="true"></i>
+                <span class="sr-only">Collapse</span>
             </button>
         </div>
       </div><!-- /.box-header -->
@@ -206,7 +207,8 @@
                 <h3 class="box-title">{{ trans('general.assets') }} by Status</h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
-                        <i class="fa fa-minus"></i>
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                        <span class="sr-only">Collapse</span>
                     </button>
                 </div>
             </div>
@@ -229,7 +231,9 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Asset {{ trans('general.categories') }}</h3>
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus" aria-hidden="true"></i>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                        <span class="sr-only">Collapse</span>
                     </button>
                 </div>
             </div>
