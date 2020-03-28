@@ -35,7 +35,7 @@ a, a:link, a:visited, .btn-primary.hover {
     background-color: var(--back-sub);
     color: var(--header);
 }
-.btn-primary, .btn-primary.hover, .btn-primary:active, .btn-primary:hover, .text-blue {
+.btn-primary, .btn-primary.hover, .btn-primary:active, .btn-primary:hover, .text-green {
     color: var(--text-main)!important;
 }
 #componentsTable>tbody>tr>td>nobr>a>i.fa {
@@ -130,10 +130,10 @@ input[type=text], input[type=search] {
     background-color: var(--back-main);
     color: var(--text-main);
 }
-.skin-blue .main-header .navbar .dropdown-menu li a {
+.skin-green .main-header .navbar .dropdown-menu li a {
     color: var(--header);
 }
-.skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
+.skin-green .sidebar-menu>li.active>a, .skin-green .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
     background-color: var(--header)!important;
 }
 .tab-content, .tab-pane {
