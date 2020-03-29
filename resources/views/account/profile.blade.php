@@ -87,7 +87,7 @@
             <input class="form-control" type="text" name="gravatar" id="gravatar" value="{{ Input::old('gravatar', $user->gravatar) }}" />
             {!! $errors->first('gravatar', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             <p>
-              <img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" width="30" height="30" alt="{{ $user->present()->fullName() }}">
+              <img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" width="30" height="30" alt="{{ $user->present()->fullName() }} avatar image">
               <a href="http://gravatar.com"><small>Change your avatar at Gravatar.com</small></a>.
             </p>
           </div>
@@ -99,7 +99,7 @@
             <label class="col-md-3 control-label" for="avatar_delete">{{ trans('general.avatar_delete') }}</label>
             <div class="col-md-8">
               {{ Form::checkbox('avatar_delete') }}
-              <img src="{{ url('/') }}/uploads/avatars/{{ $user->avatar }}" class="avatar img-circle">
+              <img src="{{ url('/') }}/uploads/avatars/{{ $user->avatar }}" class="avatar img-circle" alt="{{ $user->present()->fullName() }} avatar image">
               {!! $errors->first('avatar_delete', '<span class="alert-msg">:message</span>') !!}
             </div>
           </div>
