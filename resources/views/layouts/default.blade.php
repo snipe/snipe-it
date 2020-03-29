@@ -207,7 +207,7 @@
                   <li class="dropdown" aria-hidden="true">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       {{ trans('general.create') }}
-                      <b class="caret"></b>
+                      <b class="caret"></strong>
                     </a>
                    <ul class="dropdown-menu">
                      @can('create', \App\Models\Asset::class)
@@ -319,7 +319,7 @@
                       <i class="fa fa-user fa-fws" aria-hidden="true"></i>
                    @endif
 
-                   <span class="hidden-xs">{{ Auth::user()->first_name }} <b class="caret"></b></span>
+                   <span class="hidden-xs">{{ Auth::user()->first_name }} <b class="caret"></strong></span>
                  </a>
                  <ul class="dropdown-menu">
                    <!-- User image -->
@@ -775,7 +775,7 @@
         <div class="pull-right hidden-xs">
           @if ($snipeSettings->version_footer!='off')
               @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
-                &nbsp; <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
+                &nbsp; <strong>Version</strong> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
               @endif
           @endif
 

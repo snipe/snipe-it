@@ -23,7 +23,7 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         @foreach ($models as $model)
-                            <span class="box-title"><b>{{ $model->display_name }}</b> ({{ $model->model_number }})</span><br />
+                            <span class="box-title"><strong>{{ $model->display_name }}</strong> ({{ $model->model_number }})</span><br />
                         @endforeach
                     </div>
                     <div class="box-body">
