@@ -207,7 +207,7 @@
                   <li class="dropdown" aria-hidden="true">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       {{ trans('general.create') }}
-                      <b class="caret"></strong>
+                      <strong class="caret"></strong>
                     </a>
                    <ul class="dropdown-menu">
                      @can('create', \App\Models\Asset::class)
@@ -319,7 +319,7 @@
                       <i class="fa fa-user fa-fws" aria-hidden="true"></i>
                    @endif
 
-                   <span class="hidden-xs">{{ Auth::user()->first_name }} <b class="caret"></strong></span>
+                   <span class="hidden-xs">{{ Auth::user()->first_name }} <strong class="caret"></strong></span>
                  </a>
                  <ul class="dropdown-menu">
                    <!-- User image -->
