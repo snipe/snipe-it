@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # fix key if needed
 if [ -z "$APP_KEY" ]
@@ -42,9 +42,10 @@ chown -R docker:root /var/lib/snipeit/dumps
 chown -R docker:root /var/lib/snipeit/keys
 
 # Fix php settings
-if [ -v PHP_UPLOAD_LIMIT ]
+if [ -v "PHP_UPLOAD_LIMIT" ]
 then
-    sed -i 's/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_LIMIT}M/' /etc/php/*/apache2/php.ini
+    echo "Changing upload limit to ${PHP_UPLOAD_LIMIT}"
+    sed -i "s/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_LIMIT}M/" /etc/php/*/apache2/php.ini
 fi
 
 
