@@ -64,7 +64,7 @@
             @if ($snipeSettings->require_accept_signature=='1')
             <div class="col-md-12 col-sm-12 text-center" style="padding-top: 20px">
 
-              <h3>Sign below to indicate that you agree to the terms of service:</h3>
+              <h2>Sign below to indicate that you agree to the terms of service:</h3>
 
               <div id="signature-pad" class="m-signature-pad">
                 <div class="m-signature-pad--body col-md-12 col-sm-12 col-lg-12 col-xs-12">

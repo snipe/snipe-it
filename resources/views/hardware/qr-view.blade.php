@@ -11,7 +11,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <h3 class="name">
+        <h2 class="name">
             {{ trans('admin/hardware/general.view') }}
             {{ $asset->asset_tag }}
             @if ($asset->name)

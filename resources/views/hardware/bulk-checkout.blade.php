@@ -21,7 +21,7 @@
   <div class="col-md-7">
     <div class="box box-default">
       <div class="box-header with-border">
-        <h3 class="box-title"> {{ trans('admin/hardware/form.tag') }} </h3>
+        <h2 class="box-title"> {{ trans('admin/hardware/form.tag') }} </h3>
       </div>
       <div class="box-body">
         <form class="form-horizontal" method="post" action="" autocomplete="off">
@@ -90,7 +90,7 @@
   <div class="col-md-5" id="current_assets_box" style="display:none;">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">{{ trans('admin/users/general.current_assets') }}</h3>
+        <h2 class="box-title">{{ trans('admin/users/general.current_assets') }}</h3>
       </div>
       <div class="box-body">
         <div id="current_assets_content">

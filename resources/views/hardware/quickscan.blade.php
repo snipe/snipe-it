@@ -23,7 +23,7 @@
         <div class="col-md-6">
             <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title"> {{ trans('general.bulkaudit') }} </h3>
+                        <h2 class="box-title"> {{ trans('general.bulkaudit') }} </h3>
                     </div>
                     <div class="box-body">
                     {{csrf_field()}}
@@ -87,7 +87,7 @@
         <div class="col-md-6">
             <div class="box box-default" id="audited-div" style="display: none">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> {{ trans('general.bulkaudit_status') }} (<span id="audit-counter">0</span> assets audited) </h3>
+                    <h2 class="box-title"> {{ trans('general.bulkaudit_status') }} (<span id="audit-counter">0</span> assets audited) </h3>
                 </div>
                 <div class="box-body">
 

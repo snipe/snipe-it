@@ -22,7 +22,7 @@
 
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title"> {{ $component->name }}</h3>
+                        <h2 class="box-title"> {{ $component->name }}</h3>
                     </div>
                     <div class="box-body">
 

@@ -34,7 +34,7 @@
 @if ($snipeSettings->logo_print_assets=='1')
     @if ($snipeSettings->brand == '3')
 
-        <h3>
+        <h2>
         @if ($snipeSettings->logo!='')
             <img class="print-logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
         @endif
@@ -45,7 +45,7 @@
             <img class="print-logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
         @endif
     @else
-      <h3>{{ $snipeSettings->site_name }}</h3>
+      <h2>{{ $snipeSettings->site_name }}</h3>
     @endif
 @endif
 

@@ -13,7 +13,7 @@
 
                     <div class="box login-box">
                         <div class="box-header">
-                            <h3 class="box-title"> {{ trans('admin/settings/general.two_factor')  }}</h3>
+                            <h2 class="box-title"> {{ trans('admin/settings/general.two_factor')  }}</h3>
                         </div>
 
 

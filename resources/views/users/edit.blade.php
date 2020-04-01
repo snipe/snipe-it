@@ -532,7 +532,7 @@
 
                 <tr class="header-row permissions-row">
                   <td class="col-md-5 header-name">
-                    <h3>{{ $area }}</h3>
+                    <h2>{{ $area }}</h3>
                   </td>
                   <td class="col-md-1 permissions-item">
                     {{ Form::radio("$area", '1',false,['value'=>"grant", 'class'=>'minimal', 'data-checker-group' => str_slug($area)]) }}

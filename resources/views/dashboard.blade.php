@@ -33,7 +33,7 @@
     <!-- small box -->
     <div class="small-box bg-teal">
       <div class="inner">
-        <h3>{{ number_format($counts['asset']) }}</h3>
+        <h2>{{ number_format($counts['asset']) }}</h3>
         <p>{{ trans('general.total_assets') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
@@ -49,7 +49,7 @@
     <!-- small box -->
     <div class="small-box bg-maroon">
       <div class="inner">
-        <h3>{{ number_format($counts['license']) }}</h3>
+        <h2>{{ number_format($counts['license']) }}</h3>
         <p>{{ trans('general.total_licenses') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
@@ -66,7 +66,7 @@
     <!-- small box -->
     <div class="small-box bg-orange">
       <div class="inner">
-        <h3> {{ number_format($counts['accessory']) }}</h3>
+        <h2> {{ number_format($counts['accessory']) }}</h3>
           <p>{{ trans('general.total_accessories') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
@@ -82,7 +82,7 @@
     <!-- small box -->
     <div class="small-box bg-purple">
       <div class="inner">
-        <h3> {{ number_format($counts['consumable']) }}</h3>
+        <h2> {{ number_format($counts['consumable']) }}</h3>
           <p>{{ trans('general.total_consumables') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
@@ -101,7 +101,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">This is your dashboard. There are many like it, but this one is yours.</h3>
+                    <h2 class="box-title">This is your dashboard. There are many like it, but this one is yours.</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -153,7 +153,7 @@
   <div class="col-md-12">
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title">{{ trans('general.recent_activity') }}</h3>
+        <h2 class="box-title">{{ trans('general.recent_activity') }}</h3>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
                 <i class="fa fa-minus" aria-hidden="true"></i>
@@ -204,7 +204,7 @@
     <div class="col-md-6">
         <div class="box box-default">
             <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('general.assets') }} by Status</h3>
+                <h2 class="box-title">{{ trans('general.assets') }} by Status</h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
                         <i class="fa fa-minus" aria-hidden="true"></i>
@@ -229,7 +229,7 @@
         <!-- Categories -->
         <div class="box box-default">
             <div class="box-header with-border">
-                <h3 class="box-title">Asset {{ trans('general.categories') }}</h3>
+                <h2 class="box-title">Asset {{ trans('general.categories') }}</h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                         <i class="fa fa-minus" aria-hidden="true"></i>

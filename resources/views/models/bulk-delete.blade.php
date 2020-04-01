@@ -21,7 +21,7 @@
                 {{csrf_field()}}
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title" style="color: red">{{ trans('admin/models/general.bulk_delete_warn', ['model_count' => $valid_count]) }}</h3>
+                        <h2 class="box-title" style="color: red">{{ trans('admin/models/general.bulk_delete_warn', ['model_count' => $valid_count]) }}</h3>
                     </div>
 
                     <div class="box-body">

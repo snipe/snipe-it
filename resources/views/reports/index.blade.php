@@ -14,7 +14,7 @@
         <a href="{{ route('reports/export') }}" class="btn btn-flat gray pull-right"><i class="fa fa-download icon-white"></i>
         {{ trans('admin/hardware/table.dl_csv') }}</a>
         </div>
-    <h3>{{ trans('general.depreciation_report') }}</h3>
+    <h2>{{ trans('general.depreciation_report') }}</h3>
 </div>
 
 <div class="row">

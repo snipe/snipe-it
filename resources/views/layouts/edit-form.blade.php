@@ -25,7 +25,7 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="box box-default">
             <div class="box-header with-border">
-            <h3 class="box-title">
+            <h2 class="box-title">
             @if ($item->id)
             {{ $item->display_name }}
             @endif
@@ -57,7 +57,7 @@
     @if ((isset($helpText)) && (isset($helpTitle)))
     <div class="slideout-menu">
         <a href="#" class="slideout-menu-toggle pull-right">×</a>
-        <h3>
+        <h2>
             {{ $helpTitle}}
         </h3>
         <p>{{ $helpText }} </p>

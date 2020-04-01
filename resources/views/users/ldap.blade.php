@@ -52,7 +52,7 @@ LDAP User Sync
 
     <div class="box box-default">
       <div class="box-header with-border">
-        <h3 class="box-title">Synchronization Results</h3>
+        <h2 class="box-title">Synchronization Results</h3>
       </div><!-- /.box-header -->
       <div class="box-body">
         <table class="table table-bordered">

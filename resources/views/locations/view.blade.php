@@ -23,7 +23,7 @@
     <div class="box box-default">
     <div class="box-header with-border">
         <div class="box-heading">
-            <h3 class="box-title">{{ trans('general.users') }}</h3>
+            <h2 class="box-title">{{ trans('general.users') }}</h3>
         </div>
     </div>
       <div class="box-body">
@@ -56,7 +56,7 @@
       <div class="box box-default">
         <div class="box-header with-border">
           <div class="box-heading">
-            <h3 class="box-title">{{ trans('general.assets') }}</h3>
+            <h2 class="box-title">{{ trans('general.assets') }}</h3>
           </div>
         </div>
         <div class="box-body">
@@ -90,7 +90,7 @@
       <div class="box box-default">
           <div class="box-header with-border">
               <div class="box-heading">
-                  <h3 class="box-title">{{ trans('general.components') }}</h3>
+                  <h2 class="box-title">{{ trans('general.components') }}</h3>
               </div>
           </div>
           <div class="box-body">

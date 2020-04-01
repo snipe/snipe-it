@@ -17,7 +17,7 @@
 
                     <div class="box login-box" style="width: 100%">
                         <div class="box-header">
-                            <h3 class="box-title"> {{ trans('auth/general.reset_password')  }}</h3>
+                            <h2 class="box-title"> {{ trans('auth/general.reset_password')  }}</h3>
                         </div>
 
 

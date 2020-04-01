@@ -21,7 +21,7 @@
   <div class="col-md-9">
     <div class="box box-default">
       <div class="box-header with-border">
-        <h3 class="box-title">{{ trans('admin/hardware/form.tag') }} {{ $asset->asset_tag }}</h3>
+        <h2 class="box-title">{{ trans('admin/hardware/form.tag') }} {{ $asset->asset_tag }}</h3>
       </div><!-- /.box-header -->
 
       <div class="box-body">

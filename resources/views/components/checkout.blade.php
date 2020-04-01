@@ -19,7 +19,7 @@
         @if ($component->id)
         <div class="box-header with-border">
           <div class="box-heading">
-            <h3 class="box-title">{{ $component->name }}  ({{ $component->numRemaining()  }}  {{ trans('admin/components/general.remaining') }})</h3>
+            <h2 class="box-title">{{ $component->name }}  ({{ $component->numRemaining()  }}  {{ trans('admin/components/general.remaining') }})</h3>
           </div>
         </div><!-- /.box-header -->
         @endif

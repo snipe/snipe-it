@@ -17,9 +17,9 @@
                 <div class="row">
                     <div class="col-md-3">
 
-                        <label class="btn btn-default">
+                        <label class="btn btn-default" for="file[]">
                             {{ trans('button.select_file')  }}
-                            <input type="file" name="file[]" multiple="true" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/*,.csv,.zip,.rar,.doc,.docx,.xls,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,text/plain,.pdf" style="display:none">
+                            <input type="file" name="file[]" multiple="true" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" aria-label="file[]" accept="image/*,.csv,.zip,.rar,.doc,.docx,.xls,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,text/plain,.pdf" style="display:none">
                         </label>
 
                     </div>
@@ -27,11 +27,14 @@
                         <span id="upload-file-info"></span>
                     </div>
                     <div class="col-md-12">
-                        <p class="help-block" id="upload-file-status">{{ trans('general.upload_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
+                        <p class="help-block" id="upload-file-status">
+                            {{ trans('general.upload_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}
+                        </p>
                     </div>
 
                     <div class="col-md-12">
-                        {{ Form::textarea('notes', Input::old('notes', Input::old('notes')), ['class' => 'form-control','placeholder' => 'Notes (Optional)', 'rows'=>3]) }}
+                        <label for="notes">Notes</label>
+                        {{ Form::textarea('notes', Input::old('notes', Input::old('notes')), ['class' => 'form-control','placeholder' => 'Notes (Optional)', 'rows'=>3, 'aria-label' => 'notes']) }}
                     </div>
                 </div>
 
