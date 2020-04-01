@@ -21,7 +21,7 @@
           </label>
           <div class="col-md-8 required">
             <input class="form-control" type="text" name="first_name" id="first_name" value="{{ Input::old('first_name', $user->first_name) }}" />
-            {!! $errors->first('first_name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('first_name', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -32,7 +32,7 @@
           </label>
           <div class="col-md-8 required">
             <input class="form-control" type="text" name="last_name" id="last_name" value="{{ Input::old('last_name', $user->last_name) }}" />
-            {!! $errors->first('last_name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('last_name', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -74,7 +74,7 @@
           <label for="website" class="col-md-3 control-label">{{ trans('general.website') }}</label>
           <div class="col-md-8">
             <input class="form-control" type="text" name="website" id="website" value="{{ Input::old('website', $user->website) }}" />
-            {!! $errors->first('website', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('website', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -85,7 +85,7 @@
           </label>
           <div class="col-md-8">
             <input class="form-control" type="text" name="gravatar" id="gravatar" value="{{ Input::old('gravatar', $user->gravatar) }}" />
-            {!! $errors->first('gravatar', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('gravatar', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             <p>
               <img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" width="30" height="30" alt="{{ $user->present()->fullName() }} avatar image">
               <a href="http://gravatar.com"><small>Change your avatar at Gravatar.com</small></a>.

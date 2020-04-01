@@ -51,7 +51,7 @@
                                         <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                                         <div class="col-md-7">
                                             <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $accessory->note) }}</textarea>
-                                            {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                            {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                         </div>
                                     </div>
                               </div>

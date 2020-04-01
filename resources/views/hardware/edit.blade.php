@@ -22,7 +22,7 @@
       @else
       <input class="form-control" type="text" name="asset_tag" aria-label="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}">
       @endif
-      {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+      {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
   </div>
 

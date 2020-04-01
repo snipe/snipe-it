@@ -60,7 +60,7 @@
           $errormessage=$errors->first($field->db_column_name());
           if ($errormessage) {
               $errormessage=preg_replace('/ snipeit /', '', $errormessage);
-              print('<span class="alert-msg"><i class="fa fa-times"></i> '.$errormessage.'</span>');
+              print('<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> '.$errormessage.'</span>');
           }
             ?>
       </div>

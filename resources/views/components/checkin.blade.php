@@ -43,7 +43,7 @@
                             </div>
                             <div class="col-md-9 col-md-offset-2">
                             <p class="help-block">Must be {{ $component_assets->assigned_qty }} or less.</p>
-                            {!! $errors->first('checkin_qty', '<span class="alert-msg"><i class="fa fa-times"></i>
+                            {!! $errors->first('checkin_qty', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i>
                             :message</span>') !!}
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                             <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                             <div class="col-md-7">
                                 <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $component->note) }}</textarea>
-                                {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
                         <div class="box-footer">

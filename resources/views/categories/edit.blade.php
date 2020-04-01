@@ -15,7 +15,7 @@
     <label for="category_type" class="col-md-3 control-label">{{ trans('general.type') }}</label>
     <div class="col-md-7 required">
         {{ Form::select('category_type', $category_types , Input::old('category_type', $item->category_type), array('class'=>'select2', 'style'=>'min-width:350px', $item->itemCount() > 0 ? 'disabled' : '')) }}
-        {!! $errors->first('category_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+        {!! $errors->first('category_type', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
 

@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     {!! Form::barcode_types('barcode_type', Input::old('barcode_type', $setting->barcode_type), 'select2') !!}
-                                    {!! $errors->first('barcode_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                    {!! $errors->first('barcode_type', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                 </div>
                             </div>
 
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     {!! Form::alt_barcode_types('alt_barcode', Input::old('alt_barcode', $setting->alt_barcode), 'select2') !!}
-                                    {!! $errors->first('barcode_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                    {!! $errors->first('barcode_type', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                 </div>
                             </div>
                         @else

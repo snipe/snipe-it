@@ -12,7 +12,7 @@
 
         </div>
         <div class="col-md-12">
-           {!! $errors->first('min_amt', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+           {!! $errors->first('min_amt', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
 </div>

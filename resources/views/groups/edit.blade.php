@@ -61,7 +61,7 @@
     <label for="name" class="col-md-3 control-label">{{ trans('admin/groups/titles.group_name') }}</label>
     <div class="col-md-6 required">
         <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $group->name) }}" />
-        {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+        {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
 <div class="col-md-12">

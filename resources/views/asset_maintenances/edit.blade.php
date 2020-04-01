@@ -52,7 +52,7 @@
           </label>
           <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'title')) ? ' required' : '' }}">
             <input class="form-control" type="text" name="title" id="title" value="{{ Input::old('title', $item->title) }}" />
-            {!! $errors->first('title', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('title', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -65,7 +65,7 @@
               <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="start_date" id="start_date" value="{{ Input::old('start_date', $item->start_date) }}">
               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
-            {!! $errors->first('start_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('start_date', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -80,7 +80,7 @@
               <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="completion_date" id="completion_date" value="{{ Input::old('completion_date', $item->completion_date) }}">
               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
-            {!! $errors->first('completion_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('completion_date', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -108,7 +108,7 @@
                 @endif
               </span>
               <input class="col-md-2 form-control" type="text" name="cost" id="cost" value="{{ Input::old('cost', \App\Helpers\Helper::formatCurrencyOutput($item->cost)) }}" />
-              {!! $errors->first('cost', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              {!! $errors->first('cost', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@
           <label for="notes" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.notes') }}</label>
           <div class="col-md-7">
             <textarea class="col-md-6 form-control" id="notes" name="notes">{{ Input::old('notes', $item->notes) }}</textarea>
-            {!! $errors->first('notes', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('notes', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
       </div> <!-- .box-body -->

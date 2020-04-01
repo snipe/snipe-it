@@ -52,7 +52,7 @@
                             </label>
                             <div class="col-md-7">
                                 {{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', 'NC'), array('class'=>'select2', 'style'=>'width:350px')) }}
-                                {!! $errors->first('depreciation_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                {!! $errors->first('depreciation_id', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
 

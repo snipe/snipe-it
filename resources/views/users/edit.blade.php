@@ -280,7 +280,7 @@
                       <label for="website" class="col-md-3 control-label">{{ trans('general.website') }}</label>
                       <div class="col-md-8">
                           <input class="form-control" type="text" name="website" id="website" value="{{ Input::old('website', $user->website) }}" />
-                          {!! $errors->first('website', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                          {!! $errors->first('website', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                       </div>
                   </div>
 
@@ -413,7 +413,7 @@
                   <label for="notes" class="col-md-3 control-label">{{ trans('admin/users/table.notes') }}</label>
                   <div class="col-md-8">
                     <textarea class="form-control" id="notes" name="notes">{{ Input::old('notes', $user->notes) }}</textarea>
-                    {!! $errors->first('notes', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                    {!! $errors->first('notes', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                   </div>
                 </div>
 
