@@ -440,22 +440,25 @@ h4 {
 
 .row-striped {
   vertical-align: top;
-  line-height: 2;
+  line-height: 2.6;
   padding: 0px;
   margin-left: 20px;
   box-sizing: border-box;
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
+  //border-left: 1px solid #dddddd;
+  //border-right: 1px solid #dddddd;
+  display: table;
 
 }
 
 .row-striped .row:nth-of-type(odd) div {
   background-color: #f9f9f9;
   border-top: 1px solid #dddddd;
+  display: table-cell;
 
 }
 
 .row-striped .row:nth-of-type(even) div {
   background: #FFFFFF;
   border-top: 1px solid #dddddd;
+  display: table-cell;
 }
