@@ -31,7 +31,7 @@
 
             <div class="panel box box-default">
                 <div class="box-header with-border">
-                    <h4 class="box-title">
+                    <h2 class="box-title">
                         <i class="fa fa-list-ol"></i> Asset Tags
                     </h4>
                 </div>

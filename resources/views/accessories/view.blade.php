@@ -102,7 +102,7 @@
       </div>
 
 
-    <h4>{{ trans('admin/accessories/general.about_accessories_title') }}</h4>
+    <h2>{{ trans('admin/accessories/general.about_accessories_title') }}</h4>
     <p>{{ trans('admin/accessories/general.about_accessories_text') }} </p>
 
 

@@ -59,7 +59,7 @@
             pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
             paginationVAlign: 'both',
             formatLoadingMessage: function () {
-                return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+                return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
             },
 
             icons: {

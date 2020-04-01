@@ -12,7 +12,7 @@
     <div>
         <div v-if="tokens.length > 0">
             <div class="panel panel-default">
-                <div class="panel-heading">Authorized Applications</div>
+                <h2 class="panel-heading">Authorized Applications</h2>
 
                 <div class="panel-body">
                     <!-- Authorized Tokens -->
@@ -21,7 +21,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Scopes</th>
-                                <th></th>
+                                <th><span class="sr-only">Delete</span></th>
                             </tr>
                         </thead>
 

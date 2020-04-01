@@ -71,7 +71,7 @@
   @if (!$asset->model)
     <div class="col-md-12">
       <div class="callout callout-danger">
-        <h4>NO MODEL ASSOCIATED</h4>
+        <h2>NO MODEL ASSOCIATED</h4>
         <p>This will break things in weird and horrible ways. Edit this asset now to assign it a model. </p>
       </div>
     </div>
@@ -735,7 +735,7 @@
               @endif
 
               @if (($asset->assignedTo) && ($asset->deleted_at==''))
-                <h4>{{ trans('admin/hardware/form.checkedout_to') }}</h4>
+                <h2>{{ trans('admin/hardware/form.checkedout_to') }}</h4>
                 <p>
                   @if($asset->checkedOutToUser()) <!-- Only users have avatars currently-->
                   <img src="{{ $asset->assignedTo->present()->gravatar() }}" class="user-image-inline" alt="{{ $asset->assignedTo->present()->fullName() }}">

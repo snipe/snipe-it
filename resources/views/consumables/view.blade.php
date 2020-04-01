@@ -117,7 +117,7 @@
       </div>
     @endif
       <div class="col-md-12" style="padding-bottom: 5px;">
-        <h4>{{ trans('admin/consumables/general.about_consumables_title') }}</h4>
+        <h2>{{ trans('admin/consumables/general.about_consumables_title') }}</h4>
         <p>{{ trans('admin/consumables/general.about_consumables_text') }} </p>
       </div>
   </div> <!-- /.col-md-3-->

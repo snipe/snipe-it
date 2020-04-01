@@ -12,7 +12,7 @@ tr {
             <div class="col-md-8 col-md-offset-2 text-center" style="padding-top: 30px; margin: 0 auto;">
             <div class="col-md-12 text-left">
 
-            <h4 class="modal-title">Import File:</h4>
+            <h2 class="modal-title">Import File:</h4>
             <div class="dynamic-form-row">
                 <div class="col-md-5 col-xs-12">
                     <label for="import-type">Import Type:</label>

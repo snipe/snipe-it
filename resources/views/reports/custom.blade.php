@@ -199,7 +199,7 @@
 
             <!-- User fields -->
             <div class="checkbox col-md-12">
-              <h4>Checked Out To Fields:</h4>
+              <h2>Checked Out To Fields:</h4>
             </div>
             <div class="checkbox col-md-12">
               <label>
@@ -241,7 +241,7 @@
 
             @if ($customfields->count() > 0)
               <div class="checkbox col-md-12">
-                <h4>Custom Fields:</h4>
+                <h2>Custom Fields:</h4>
               </div>
               @foreach ($customfields as $customfield)
                 <div class="checkbox col-md-12">

@@ -49,7 +49,7 @@
     @endif
 @endif
 
-<h4>Assigned to {{ $show_user->present()->fullName() }}</h4>
+<h2>Assigned to {{ $show_user->present()->fullName() }}</h4>
 
 @if ($assets->count() > 0)
     @php

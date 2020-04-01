@@ -48,7 +48,7 @@
 
             <div class="panel box box-default">
                 <div class="box-header with-border">
-                    <h4 class="box-title">
+                    <h2 class="box-title">
                         <i class="fa fa-sitemap"></i> LDAP/AD
                     </h4>
                 </div>

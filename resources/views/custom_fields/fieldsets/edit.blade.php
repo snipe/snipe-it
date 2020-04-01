@@ -43,7 +43,7 @@
     {{ Form::close() }}
   </div>
   <div class="col-md-3">
-    <h4>About Fieldsets</h4>
+    <h2>About Fieldsets</h4>
     <p>Fieldsets work like containers of the custom fields you've created. This allows you to group commonly used custom attributes together for easy associations. </p>
   </div>
 </div>
