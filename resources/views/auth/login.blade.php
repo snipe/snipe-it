@@ -41,7 +41,7 @@
 
 
                                     <fieldset>
-                                        <legend class="sr-only">Personalia:</legend>
+
                                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                                             <label for="username">{{ trans('admin/users/table.username')  }}</label>
                                             <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" id="username" autocomplete="off" autofocus>
