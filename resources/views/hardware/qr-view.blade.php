@@ -242,7 +242,7 @@
                                 data-html="false" data-toggle="modal"
                                 data-title="{{ trans('admin/hardware/message.deletefile.confirm') }}"
                                 data-content="{{ trans('admin/hardware/message.deletefile.confirm-more',array('filename' => $file->filename)) }} " onClick="return false;">
-                                <i class="fa fa-trash icon-white"></i>
+                                <i class="fa fa-trash icon-white" aria-hidden="true"></i>
                                 </a>
                             </td>
                         </tr>

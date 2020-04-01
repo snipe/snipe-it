@@ -330,7 +330,7 @@
 
         </div> <!-- /.box-body-->
         <div class="box-footer text-right">
-          <button type="submit" class="btn btn-success"><i class="fa fa-download icon-white"></i> {{ trans('general.generate') }}</button>
+          <button type="submit" class="btn btn-success"><i class="fa fa-download icon-white" aria-hidden="true"></i> {{ trans('general.generate') }}</button>
         </div>
       </div> <!--/.box.box-default-->
     {{ Form::close() }}

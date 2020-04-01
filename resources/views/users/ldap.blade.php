@@ -31,7 +31,7 @@ LDAP User Sync
               @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
             <div class="col-md-4">
               <button type="submit" class="btn btn-warning" id="sync">
-                  <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">Synchronize</span>
+                  <i id="sync-button-icon" class="fa fa-refresh icon-white" aria-hidden="true"></i> <span id="sync-button-text">Synchronize</span>
               </button>
             </div>
           </div>
