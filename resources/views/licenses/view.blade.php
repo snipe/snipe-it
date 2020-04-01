@@ -375,7 +375,7 @@
                     }'>
             <thead>
               <tr>
-                <th data-visible="true"></th>
+                <th data-visible="true" aria-hidden="true"><span class="sr-only">Icon</span></th>
                 <th class="col-md-4" data-field="file_name" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.file_name') }}</th>
                 <th class="col-md-4" data-field="notes" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.notes') }}</th>
                 <th class="col-md-2" data-field="created_at" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.created_at') }}</th>
@@ -388,7 +388,11 @@
             @if ($license->uploads->count() > 0)
               @foreach ($license->uploads as $file)
               <tr>
-                <td><i class="{{ \App\Helpers\Helper::filetype_icon($file->filename) }} icon-med"></i></td>
+                <td>
+                  <i class="{{ \App\Helpers\Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
+                  <span class="sr-only">{{ \App\Helpers\Helper::filetype_icon($file->filename) }}</span>
+
+                </td>
                 <td>
                   {{ $file->filename }}
 
@@ -408,11 +412,17 @@
                 </td>
                 <td>
                   @if ($file->filename)
-                    <a href="{{ route('show.licensefile', [$license->id, $file->id, 'download' => 'true']) }}" class="btn btn-default"><i class="fa fa-download"></i></a>
+                    <a href="{{ route('show.licensefile', [$license->id, $file->id, 'download' => 'true']) }}" class="btn btn-default">
+                      <i class="fa fa-download" aria-hidden="true"></i>
+                      <span class="sr-only">Download</span>
+                    </a>
                   @endif
                 </td>
                 <td>
-                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
+                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?">
+                    <i class="fa fa-trash icon-white" aria-hidden="true"></i>
+                    <span class="sr-only">Delete</span>
+                  </a>
                 </td>
               </tr>
               @endforeach
