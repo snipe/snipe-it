@@ -80,7 +80,7 @@
   @if ($asset->deleted_at!='')
     <div class="col-md-12">
       <div class="alert alert-danger">
-        <i class="fa fa-exclamation-circle faa-pulse animated"></i>
+        <i class="fa fa-exclamation-circle faa-pulse animated" aria-hidden="true"></i>
         <strong>WARNING: </strong>
         This asset has been deleted.
         You must <a href="{{ route('restore/hardware', $asset->id) }}">restore it</a> before you can assign it to someone.
@@ -97,29 +97,81 @@
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
         <li class="active">
-          <a href="#details" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.details') }}</span></a>
+          <a href="#details" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">
+              {{ trans('general.details') }}
+            </span>
+          </a>
         </li>
         <li>
-          <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span></a>
+          <a href="#software" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">
+              {{ trans('general.licenses') }}
+            </span>
+          </a>
         </li>
         <li>
-          <a href="#components" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-hdd-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.components') }}</span></a>
+          <a href="#components" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="fa fa-hdd-o" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">
+              {{ trans('general.components') }}
+            </span>
+          </a>
         </li>
         <li>
-          <a href="#assets" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-barcode"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span></a>
+          <a href="#assets" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="fa fa-barcode" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">
+              {{ trans('general.assets') }}
+            </span>
+          </a>
         </li>
         <li>
-          <a href="#maintenances" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-wrench"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}</span></a>
+          <a href="#maintenances" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="fa fa-wrench" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">
+              {{ trans('general.maintenances') }}
+            </span>
+          </a>
         </li>
         <li>
-          <a href="#history" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-history"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span></a>
+          <a href="#history" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="fa fa-history" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">
+              {{ trans('general.history') }}
+            </span>
+          </a>
         </li>
         <li>
-          <a href="#files" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-files-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.files') }}</span></a>
-        </li>
+          <a href="#files" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="fa fa-files-o" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">
+              {{ trans('general.files') }}
+            </span>
+          </a>
+        </li><
         @can('update', \App\Models\Asset::class)
-        <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
-            <i class="fa fa-paperclip"></i> {{ trans('button.upload') }}</a>
+        <li class="pull-right">
+          <a href="#" data-toggle="modal" data-target="#uploadFileModal">
+            <i class="fa fa-paperclip" aria-hidden="true"></i>
+            {{ trans('button.upload') }}
+          </a>
         </li>
         @endcan
       </ul>
