@@ -1,5 +1,5 @@
 /*
- * Skin: blue
+ * Skin: orange
  * ----------
  */
 @import "../bootstrap-less/mixins.less";
@@ -11,11 +11,11 @@
   //Navbar
   .main-header {
     .navbar {
-      .navbar-variant(@navy; #fff);
+      .navbar-variant(@blue; #fff);
       .sidebar-toggle {
         color: #fff;
         &:hover {
-          background-color: darken(@navy, 5%);
+          background-color: darken(@blue, 5%);
         }
       }
       @media (max-width: @screen-header-collapse) {
@@ -28,7 +28,7 @@
             a {
               color: #fff;
               &:hover {
-                background: darken(@navy, 5%);
+                background: darken(@blue, 5%);
                 color: #fff;
               }
             }
@@ -39,7 +39,7 @@
     //Logo
 
     li.user-header {
-      background-color: @navy;
+      background-color: @blue;
     }
   }
 
@@ -49,7 +49,7 @@
   }
 
   //Create the sidebar skin
-  .skin-dark-sidebar(@navy);
+  .skin-dark-sidebar(@blue);
 }
 
 .skin-blue-dark.layout-top-nav .main-header > .logo {
@@ -64,25 +64,25 @@
   color: #fff;
 
   &.btn-primary, .btn-primary:link {
-    background-color: darken(@navy, 10%);
-    border-color: darken(@navy, 20%);
+    background-color: darken(@blue, 10%);
+    border-color: darken(@blue, 20%);
     color: #fff;
   }
 
 
   &a.btn-primary:hover {
-    background-color: darken(@navy, 20%);
-    border-color: darken(@navy, 20%);
+    background-color: darken(@blue, 20%);
+    border-color: darken(@blue, 20%);
     color: #fff;
   }
 
   &.btn-white:link {
-    background-color: darken(@navy, 10%);
+    background-color: darken(@blue, 10%);
     color: #fff;
   }
 
   &.btn-white:hover {
-    background-color: darken(@navy, 30%);
+    background-color: darken(@blue, 30%);
     color: #fff;
   }
 }
@@ -108,10 +108,10 @@ a {
   --background: #222;
   --back-main: #333;
   --back-sub: #444;
-  --header: @navy; /* Use same as Header picker */
+  --header: @blue; /* Use same as Header picker */
   --text-main: #FFF;
   --text-sub: #BBB;
-  --link: lighten(@navy, 50%); /* Use same as Header picker */
+  --link: lighten(@blue, 50%); /* Use same as Header picker */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
@@ -280,7 +280,7 @@ input[type=text], input[type=search] {
 .skin-blue-dark .main-header .navbar .dropdown-menu li a {
   color: var(--header);
 }
-.skin-blue-dark .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
+.fixed-table-body thead th .th-inner, .skin-blue-dark .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
   background-color: var(--header)!important;
 }
 .tab-content, .tab-pane {
