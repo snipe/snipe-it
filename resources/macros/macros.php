@@ -514,7 +514,7 @@ Form::macro('customfield_elements', function ($name = "customfield_elements", $s
      //   'radio' => 'Radio Buttons',
     );
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
         $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
     }
