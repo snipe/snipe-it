@@ -750,7 +750,7 @@
             html.push('<tr>');
 
             if (i === 0 && !that.options.cardView && that.options.detailView) {
-                html.push(sprintf('<th class="detail" rowspan="%s" scope=”col”><div class="fht-cell"></div></th>',
+                html.push(sprintf('<th class="detail" rowspan="%s" scope="col"><div class="fht-cell"></div></th>',
                     that.options.columns.length));
             }
 
@@ -803,7 +803,7 @@
                     visibleColumns[column.field] = column;
                 }
 
-                html.push('<th scope=”col”' + sprintf(' title="%s"', column.titleTooltip),
+                html.push('<th scope="col"' + sprintf(' title="%s"', column.titleTooltip),
                     column.checkbox || column.radio ?
                         sprintf(' class="bs-checkbox %s"', column['class'] || '') :
                         class_,
