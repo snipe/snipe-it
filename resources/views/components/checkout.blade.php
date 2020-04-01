@@ -43,7 +43,7 @@
                 <i class='icon-asterisk'></i></label>
               <div class="col-md-9">
                 <input class="form-control" type="text" name="assigned_qty" id="assigned_qty" style="width: 70px;" value="{{ Input::old('assigned_qty') }}" />
-                {!! $errors->first('assigned_qty', '<br><span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                {!! $errors->first('assigned_qty', '<br><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
             </div>
 

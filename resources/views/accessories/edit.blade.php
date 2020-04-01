@@ -30,7 +30,7 @@
         <div class="col-md-5">
             {{ Form::checkbox('image_delete') }}
             <img src="{{ url('/') }}/uploads/accessories/{{ $item->image }}" alt="{{ $item->name }}">
-            {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+            {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
         </div>
     </div>
 @endif

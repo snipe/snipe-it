@@ -270,48 +270,48 @@
 
           <!-- Status -->
             <div class="form-group">
-              <label for="status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }}</label>
+              <label for="by_status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }}</label>
               <div class="col-md-7 col-sm-11">
-                {{ Form::select('by_status_id', \App\Helpers\Helper::statusLabelList() , Input::old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%')) }}
+                {{ Form::select('by_status_id', \App\Helpers\Helper::statusLabelList() , Input::old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'by_status_id')) }}
               </div>
             </div>
 
 
             <!-- Order Number -->
             <div class="form-group">
-              <label for="order_number" class="col-md-3 control-label">{{ trans('general.order_number') }}</label>
+              <label for="by_order_number" class="col-md-3 control-label">{{ trans('general.order_number') }}</label>
               <div class="col-md-5 col-sm-8">
-                <input class="form-control" type="text" name="by_order_number" value="">
+                <input class="form-control" type="text" name="by_order_number" value="" aria-label="by_order_number">
               </div>
             </div>
 
           <!-- Purchase Date -->
             <div class="form-group purchase-range">
-              <label for="purchase_date" class="col-md-3 control-label">{{ trans('general.purchase_date') }} Range</label>
+              <label for="purchase_start" class="col-md-3 control-label">{{ trans('general.purchase_date') }} Range</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
-                <input type="text" class="input-sm form-control" name="purchase_start" />
+                <input type="text" class="input-sm form-control" name="purchase_start" aria-label="purchase_start">
                 <span class="input-group-addon">to</span>
-                <input type="text" class="input-sm form-control" name="purchase_end" />
+                <input type="text" class="input-sm form-control" name="purchase_end" aria-label="purchase_end">
               </div>
             </div>
 
             <!-- Created Date -->
             <div class="form-group purchase-range">
-              <label for="purchase_date" class="col-md-3 control-label">{{ trans('general.created_at') }} Range</label>
+              <label for="created_start" class="col-md-3 control-label">{{ trans('general.created_at') }} Range</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
-                <input type="text" class="input-sm form-control" name="created_start" />
+                <input type="text" class="input-sm form-control" name="created_start" aria-label="created_start">
                 <span class="input-group-addon">to</span>
-                <input type="text" class="input-sm form-control" name="created_end" />
+                <input type="text" class="input-sm form-control" name="created_end" aria-label="created_end">
               </div>
             </div>
 
             <!-- Expected Checkin Date -->
             <div class="form-group expected_checkin-range">
-              <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
+              <label for="expected_checkin_start" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
-                <input type="text" class="input-sm form-control" name="expected_checkin_start" />
+                <input type="text" class="input-sm form-control" name="expected_checkin_start" aria-label="expected_checkin_start">
                 <span class="input-group-addon">to</span>
-                <input type="text" class="input-sm form-control" name="expected_checkin_end" />
+                <input type="text" class="input-sm form-control" name="expected_checkin_end" aria-label="expected_checkin_end">
               </div>
             </div>
 

@@ -380,7 +380,7 @@ Form::macro('date_display_format', function ($name = "date_display_format", $sel
 
         $date_display_formats[$format] = Carbon::parse(date('Y').'-'.date('m').'-25')->format($format);
     }
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:250px">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:250px" aria-label="'.$name.'">';
     foreach ($date_display_formats as $format => $date_display_format) {
         $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$date_display_format.'</option> ';
     }
@@ -402,7 +402,7 @@ Form::macro('time_display_format', function ($name = "time_display_format", $sel
     foreach ($formats as $format) {
         $time_display_formats[$format] = Carbon::now()->format($format);
     }
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:150px">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:150px" aria-label="'.$name.'">';
     foreach ($time_display_formats as $format => $time_display_format) {
         $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$time_display_format.'</option> ';
     }
@@ -426,7 +426,7 @@ Form::macro('alt_barcode_types', function ($name = "alt_barcode", $selected = nu
 
     );
 
-    $select = '<select name="'.$name.'" class="'.$class.'">';
+    $select = '<select name="'.$name.'" class="'.$class.'" aria-label="'.$name.'">';
     foreach ($barcode_types as $barcode_type) {
         $select .= '<option value="'.$barcode_type.'"'.($selected == $barcode_type ? ' selected="selected"' : '').'>'.$barcode_type.'</option> ';
     }
@@ -450,7 +450,7 @@ Form::macro('barcode_types', function ($name = "barcode_type", $selected = null,
 
     );
 
-    $select = '<select name="'.$name.'" class="'.$class.'">';
+    $select = '<select name="'.$name.'" class="'.$class.'" aria-label="'.$name.'">';
     foreach ($barcode_types as $barcode_type) {
         $select .= '<option value="'.$barcode_type.'"'.($selected == $barcode_type ? ' selected="selected"' : '').'>'.$barcode_type.'</option> ';
     }
@@ -472,7 +472,7 @@ Form::macro('username_format', function ($name = "username_format", $selected = 
 
     );
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
         $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
     }
@@ -492,7 +492,7 @@ Form::macro('two_factor_options', function ($name = "two_factor_enabled", $selec
 
     );
 
-    $select = '<select name="'.$name.'" class="'.$class.'">';
+    $select = '<select name="'.$name.'" class="'.$class.'" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
         $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
     }
@@ -547,7 +547,7 @@ Form::macro('skin', function ($name = "skin", $selected = null, $class = null) {
         'contrast' => 'High Contrast',
     );
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px">';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
         $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
     }

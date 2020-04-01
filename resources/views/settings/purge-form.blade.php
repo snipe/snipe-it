@@ -34,7 +34,7 @@
                         @else
                             {{ Form::text('confirm_purge', Input::old('confirm_purge'), array('class' => 'form-control')) }}
                         @endif
-                        {!! $errors->first('ldap_version', '<span class="alert-msg">:message</span>') !!}
+                        {!! $errors->first('ldap_version', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                     </div>
                 </div>
                 <div class="box-footer text-right">

@@ -23,7 +23,7 @@
     </label>
     <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($item, 'currency')) ? ' required' : '' }}">
         {{ Form::text('currency', Input::old('currency', $item->currency), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;', 'aria-label'=>'currency')) }}
-        {!! $errors->first('currency', '<span class="alert-msg">:message</span>') !!}
+        {!! $errors->first('currency', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
 </div>
 
@@ -37,7 +37,7 @@
         </label>
         <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'ldap_ou')) ? ' required' : '' }}">
             {{ Form::text('ldap_ou', Input::old('ldap_ou', $item->ldap_ou), array('class' => 'form-control')) }}
-            {!! $errors->first('ldap_ou', '<span class="alert-msg">:message</span>') !!}
+            {!! $errors->first('ldap_ou', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
         </div>
     </div>
 @endif
@@ -52,7 +52,7 @@
             </label>
             <br>
             <img src="{{ url('/') }}/uploads/locations/{{ $item->image }}" alt="Image for {{ $item->name }}">
-            {!! $errors->first('image_delete', '<span class="alert-msg"><br>:message</span>') !!}
+            {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true"><br>:message</span>') !!}
         </div>
     </div>
 @endif

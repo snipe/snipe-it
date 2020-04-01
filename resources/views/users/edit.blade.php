@@ -89,7 +89,7 @@
                   <label class="col-md-3 control-label" for="first_name">{{ trans('general.first_name') }}</label>
                   <div class="col-md-8 {{  (\App\Helpers\Helper::checkIfRequired($user, 'first_name')) ? ' required' : '' }}">
                     <input class="form-control" type="text" name="first_name" id="first_name" value="{{ Input::old('first_name', $user->first_name) }}" />
-                    {!! $errors->first('first_name', '<span class="alert-msg">:message</span>') !!}
+                    {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
 
@@ -98,7 +98,7 @@
                   <label class="col-md-3 control-label" for="last_name">{{ trans('general.last_name') }} </label>
                   <div class="col-md-8{{  (\App\Helpers\Helper::checkIfRequired($user, 'last_name')) ? ' required' : '' }}">
                     <input class="form-control" type="text" name="last_name" id="last_name" value="{{ Input::old('last_name', $user->last_name) }}" />
-                    {!! $errors->first('last_name', '<span class="alert-msg">:message</span>') !!}
+                    {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
 
@@ -127,7 +127,7 @@
 
                     @endif
 
-                    {!! $errors->first('username', '<span class="alert-msg">:message</span>') !!}
+                    {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
 
@@ -152,7 +152,7 @@
                       (Managed via LDAP)
                     @endif
                     <span id="generated-password"></span>
-                    {!! $errors->first('password', '<span class="alert-msg">:message</span>') !!}
+                    {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                   <div class="col-md-4">
                     @if ($user->ldap_import!='1')
@@ -183,7 +183,7 @@
                     @if (config('app.lock_passwords') && ($user->id))
                     <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
                     @endif
-                    {!! $errors->first('password_confirmation', '<span class="alert-msg">:message</span>') !!}
+                    {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
                 @endif
@@ -205,7 +205,7 @@
                     @if (config('app.lock_passwords') && ($user->id))
                     <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
                     @endif
-                    {!! $errors->first('email', '<span class="alert-msg">:message</span>') !!}
+                    {!! $errors->first('email', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
 
@@ -219,7 +219,7 @@
                   <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
                   <div class="col-md-8">
                     {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
-                    {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
+                    {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
 
@@ -235,7 +235,7 @@
                       id="employee_num"
                       value="{{ Input::old('employee_num', $user->employee_num) }}"
                     />
-                    {!! $errors->first('employee_num', '<span class="alert-msg">:message</span>') !!}
+                    {!! $errors->first('employee_num', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
 
@@ -251,7 +251,7 @@
                       id="jobtitle"
                       value="{{ Input::old('jobtitle', $user->jobtitle) }}"
                     />
-                    {!! $errors->first('jobtitle', '<span class="alert-msg">:message</span>') !!}
+                    {!! $errors->first('jobtitle', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
 
@@ -271,7 +271,7 @@
                   <label class="col-md-3 control-label" for="phone">{{ trans('admin/users/table.phone') }}</label>
                   <div class="col-md-4">
                     <input class="form-control" type="text" name="phone" id="phone" value="{{ Input::old('phone', $user->phone) }}" />
-                    {!! $errors->first('phone', '<span class="alert-msg">:message</span>') !!}
+                    {!! $errors->first('phone', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
                 </div>
 
@@ -280,7 +280,7 @@
                       <label for="website" class="col-md-3 control-label">{{ trans('general.website') }}</label>
                       <div class="col-md-8">
                           <input class="form-control" type="text" name="website" id="website" value="{{ Input::old('website', $user->website) }}" />
-                          {!! $errors->first('website', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                          {!! $errors->first('website', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                       </div>
                   </div>
 
@@ -289,7 +289,7 @@
                       <label class="col-md-3 control-label" for="address">{{ trans('general.address') }}</label>
                       <div class="col-md-4">
                           <input class="form-control" type="text" name="address" id="address" value="{{ Input::old('address', $user->address) }}" />
-                          {!! $errors->first('address', '<span class="alert-msg">:message</span>') !!}
+                          {!! $errors->first('address', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                       </div>
                   </div>
 
@@ -298,7 +298,7 @@
                       <label class="col-md-3 control-label" for="city">{{ trans('general.city') }}</label>
                       <div class="col-md-4">
                           <input class="form-control" type="text" name="city" id="city" aria-label="city" value="{{ Input::old('city', $user->city) }}" />
-                          {!! $errors->first('city', '<span class="alert-msg">:message</span>') !!}
+                          {!! $errors->first('city', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                       </div>
                   </div>
 
@@ -307,7 +307,7 @@
                       <label class="col-md-3 control-label" for="state">{{ trans('general.state') }}</label>
                       <div class="col-md-4">
                           <input class="form-control" type="text" name="state" id="state" value="{{ Input::old('state', $user->state) }}" maxlength="3" />
-                          {!! $errors->first('state', '<span class="alert-msg">:message</span>') !!}
+                          {!! $errors->first('state', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                       </div>
                   </div>
 
@@ -316,7 +316,7 @@
                       <label class="col-md-3 control-label" for="country">{{ trans('general.country') }}</label>
                       <div class="col-md-4">
                           {!! Form::countries('country', Input::old('country', $user->country), 'select2') !!}
-                          {!! $errors->first('country', '<span class="alert-msg">:message</span>') !!}
+                          {!! $errors->first('country', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                       </div>
                   </div>
 
@@ -325,7 +325,7 @@
                       <label class="col-md-3 control-label" for="zip">{{ trans('general.zip') }}</label>
                       <div class="col-md-4">
                           <input class="form-control" type="text" name="zip" id="zip" value="{{ Input::old('zip', $user->zip) }}" maxlength="10" />
-                          {!! $errors->first('zip', '<span class="alert-msg">:message</span>') !!}
+                          {!! $errors->first('zip', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                       </div>
                   </div>
 
@@ -363,7 +363,7 @@
                                   </div>
                               @endif
 
-                              {!! $errors->first('activated', '<span class="alert-msg">:message</span>') !!}
+                              {!! $errors->first('activated', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
 
                       </div>
                     </div>
@@ -413,7 +413,7 @@
                   <label for="notes" class="col-md-3 control-label">{{ trans('admin/users/table.notes') }}</label>
                   <div class="col-md-8">
                     <textarea class="form-control" id="notes" name="notes">{{ Input::old('notes', $user->notes) }}</textarea>
-                    {!! $errors->first('notes', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                    {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                   </div>
                 </div>
 

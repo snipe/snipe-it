@@ -13,7 +13,7 @@
             </span>
         </div>
         <div class="col-md-9" style="padding-left: 0px;">
-            {!! $errors->first('purchase_cost', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('purchase_cost', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
 

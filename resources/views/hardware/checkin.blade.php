@@ -60,7 +60,7 @@
               <div class="col-md-8">
                 <input class="form-control" type="text" name="name" aria-label="name" id="name"
                 value="{{ Input::old('name', $asset->name) }}"/>
-                {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
             </div>
 
@@ -69,7 +69,7 @@
               {{ Form::label('status_id', trans('admin/hardware/form.status'), array('class' => 'col-md-3 control-label')) }}
               <div class="col-md-7 required">
                 {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types', 'aria-label'=>'status_id')) }}
-                {!! $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
             </div>
 
@@ -84,7 +84,7 @@
                   <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkin_at" id="checkin_at" value="{{ Input::old('checkin_at', date('Y-m-d')) }}">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
-                {!! $errors->first('checkin_at', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                {!! $errors->first('checkin_at', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
               </div>
             </div>
@@ -98,7 +98,7 @@
                 <div class="col-md-8">
                   <textarea class="col-md-6 form-control" id="note"
                   name="note">{{ Input::old('note', $asset->note) }}</textarea>
-                  {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                  {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                 </div>
               </div>
             <div class="box-footer">

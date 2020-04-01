@@ -51,7 +51,7 @@
                             <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
                             <div class="col-md-8">
                                 {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
-                                {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 

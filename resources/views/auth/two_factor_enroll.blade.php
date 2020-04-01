@@ -41,7 +41,7 @@
                             <fieldset>
                                 <div class="form-group{{ $errors->has('secret') ? ' has-error' : '' }}">
                                     <input class="form-control" placeholder="{{ trans('admin/settings/general.two_factor_secret')  }}" name="two_factor_secret" type="text" autofocus>
-                                    {!! $errors->first('two_factor_secret', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                    {!! $errors->first('two_factor_secret', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                 </div>
                             </fieldset>
                                 </div>

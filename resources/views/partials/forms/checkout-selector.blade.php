@@ -18,7 +18,7 @@
             </label>
             @endif
 
-            {!! $errors->first('checkout_to_type', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('checkout_to_type', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
 </div>

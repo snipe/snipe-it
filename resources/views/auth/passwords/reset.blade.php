@@ -36,7 +36,7 @@
 
                                         <div class="col-md-6">
                                             <input type="email" class="form-control" name="email" maxlength="250" value="{{ $email or old('email') }}">
-                                            {!! $errors->first('email', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                            {!! $errors->first('email', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
 
                             </div>
                         </div>
@@ -46,7 +46,7 @@
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password">
-                                {!! $errors->first('password', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
 
@@ -54,7 +54,7 @@
                             <label class="col-md-4 control-label">{{ trans('admin/users/table.password_confirm')  }}</label>
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password_confirmation">
-                                {!! $errors->first('password_confirmation', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
 
                             </div>
                         </div>
