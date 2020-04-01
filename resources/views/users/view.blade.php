@@ -24,7 +24,7 @@
         </li>
 
         <li>
-          <a href="#asset_tab" data-toggle="tab">
+          <a href="#asset" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-barcode"></i>
             </span>
@@ -33,7 +33,7 @@
         </li>
 
         <li>
-          <a href="#licenses_tab" data-toggle="tab">
+          <a href="#licenses" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-floppy-o"></i>
             </span>
@@ -42,7 +42,7 @@
         </li>
 
         <li>
-          <a href="#accessories_tab" data-toggle="tab">
+          <a href="#accessories" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-keyboard-o"></i>
             </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span>
@@ -50,7 +50,7 @@
         </li>
 
         <li>
-          <a href="#consumables_tab" data-toggle="tab">
+          <a href="#consumables" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-tint"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>
@@ -58,7 +58,7 @@
         </li>
 
         <li>
-          <a href="#files_tab" data-toggle="tab">
+          <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-paperclip"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}</span>
@@ -66,7 +66,7 @@
         </li>
 
         <li>
-          <a href="#history_tab" data-toggle="tab">
+          <a href="#history" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-clock-o"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
@@ -75,7 +75,7 @@
 
         @if ($user->managedLocations()->count() >= 0 )
         <li>
-          <a href="#managed_tab" data-toggle="tab">
+          <a href="#managed" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-clock-o"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}</span>
@@ -333,7 +333,7 @@
           </div> <!--/.row-->
         </div><!-- /.tab-pane -->
 
-        <div class="tab-pane" id="asset_tab">
+        <div class="tab-pane" id="asset">
           <!-- checked out assets table -->
           <div class="table-responsive">
             <table class="display table table-striped">
@@ -371,9 +371,9 @@
               </tbody>
             </table>
           </div>
-        </div><!-- /asset_tab -->
+        </div><!-- /asset -->
 
-        <div class="tab-pane" id="licenses_tab">
+        <div class="tab-pane" id="licenses">
           <div class="table-responsive">
             <table class="display table table-hover">
               <thead>
@@ -408,7 +408,7 @@
           </div>
         </div><!-- /licenses-tab -->
 
-        <div class="tab-pane" id="accessories_tab">
+        <div class="tab-pane" id="accessories">
           <div class="table-responsive">
             <table class="display table table-hover">
               <thead>
@@ -433,7 +433,7 @@
           </div>
         </div><!-- /accessories-tab -->
 
-        <div class="tab-pane" id="consumables_tab">
+        <div class="tab-pane" id="consumables">
           <div class="table-responsive">
             <table class="display table table-striped">
               <thead>
@@ -454,7 +454,7 @@
           </div>
         </div><!-- /consumables-tab -->
 
-        <div class="tab-pane" id="files_tab">
+        <div class="tab-pane" id="files">
           <div class="row">
             <div class="col-md-12 col-sm-12">
 
@@ -500,9 +500,9 @@
               </div>
             </div>
           </div> <!--/ROW-->
-        </div><!--/FILES_TAB-->
+        </div><!--/FILES-->
 
-        <div class="tab-pane" id="history_tab">
+        <div class="tab-pane" id="history">
           <div class="table-responsive">
 
             <table
@@ -539,7 +539,7 @@
           </div>
         </div><!-- /.tab-pane -->
 
-        <div class="tab-pane" id="managed_tab">
+        <div class="tab-pane" id="managed">
           <div class="table-responsive">
             <table class="display table table-striped">
               <thead>
