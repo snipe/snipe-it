@@ -748,9 +748,10 @@ class UsersController extends Controller
                     $logAction = new Actionlog();
                     $logAction->item_id = $user->id;
                     $logAction->item_type = User::class;
+                    $logAction->target_type = User::class;
+                    $logAction->target_id = $user->id;
                     $logAction->user_id = Auth::user()->id;
                     $logAction->note = $request->input('notes');
-                    $logAction->target_id = null;
                     $logAction->created_at = date("Y-m-d H:i:s");
                     $logAction->filename = $filename;
                     $logAction->action_type = 'uploaded';
