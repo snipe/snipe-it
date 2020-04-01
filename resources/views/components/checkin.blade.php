@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    {{ trans('admin/licenses/general.checkin') }}
+    {{ trans('admin/components/general.checkin') }}
     @parent
 @stop
 
@@ -37,9 +37,9 @@
 
                         <!-- Qty -->
                         <div class="form-group {{ $errors->has('checkin_qty') ? 'error' : '' }}">
-                            <label for="note" class="col-md-2 control-label">{{ trans('general.qty') }}</label>
+                            <label for="checkin_qty" class="col-md-2 control-label">{{ trans('general.qty') }}</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="checkin_qty" value="{{ Input::old('assigned_qty', $component_assets->assigned_qty) }}">
+                                <input type="text" class="form-control" name="checkin_qty" aria-label="checkin_qty" value="{{ Input::old('assigned_qty', $component_assets->assigned_qty) }}">
                             </div>
                             <div class="col-md-9 col-md-offset-2">
                             <p class="help-block">Must be {{ $component_assets->assigned_qty }} or less.</p>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="box-footer">
                             <a class="btn btn-link" href="{{ route('components.index') }}">{{ trans('button.cancel') }}</a>
-                            <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkin') }}</button>
+                            <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
                         </div>
                     </div> <!-- /.box-->
             </form>

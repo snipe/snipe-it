@@ -57,7 +57,7 @@
                               </div>
                         <div class="box-footer">
                             <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-                            <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i>
+                            <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i>
                                 {{ trans('general.checkin') }}</button>
                         </div>
                 </div> <!-- .box.box-default -->

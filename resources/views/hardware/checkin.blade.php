@@ -38,7 +38,7 @@
 
           <!-- AssetModel name -->
             <div class="form-group">
-              {{ Form::label('name', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
+              {{ Form::label('model', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
               <div class="col-md-8">
                 <p class="form-control-static">
                   @if (($asset->model) && ($asset->model->name))
@@ -58,7 +58,7 @@
             <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
               {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
               <div class="col-md-8">
-                <input class="form-control" type="text" name="name" id="name"
+                <input class="form-control" type="text" name="name" aria-label="name" id="name"
                 value="{{ Input::old('name', $asset->name) }}"/>
                 {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
@@ -66,9 +66,9 @@
 
             <!-- Status -->
             <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
-              {{ Form::label('name', trans('admin/hardware/form.status'), array('class' => 'col-md-3 control-label')) }}
+              {{ Form::label('status_id', trans('admin/hardware/form.status'), array('class' => 'col-md-3 control-label')) }}
               <div class="col-md-7 required">
-                {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types')) }}
+                {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types', 'aria-label'=>'status_id')) }}
                 {!! $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
             </div>
@@ -103,7 +103,7 @@
               </div>
             <div class="box-footer">
               <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-              <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkin') }}</button>
+              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
             </div>
           </form>
         </div> <!--/.col-md-12-->

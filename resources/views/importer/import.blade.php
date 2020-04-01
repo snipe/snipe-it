@@ -32,10 +32,11 @@
 
                                 <!-- The fileinput-button span is used to style the file input field as button -->
                                 @if (!config('app.lock_passwords'))
-                                <span class="btn btn-info fileinput-button">
+                                <span class="btn btn-primary fileinput-button">
                                     <span>Select Import File...</span>
                                     <!-- The file input field used as target for the file upload widget -->
-                                    <input id="fileupload" type="file" name="files[]" data-url="{{ route('api.imports.index') }}" accept="text/csv">
+                                    <label for="files[]"><span class="sr-only">Select file</span></label>
+                                    <input id="fileupload" type="file" name="files[]" data-url="{{ route('api.imports.index') }}" accept="text/csv" aria-label="files[]">
                                 </span>
                                  @endif
 
@@ -57,7 +58,7 @@
                                         <th>File</th>
                                         <th>Created</th>
                                         <th>Size</th>
-                                        <th></th>
+                                        <th><span class="sr-only">Delete</span></th>
                                     </thead>
                                     <tbody>
                                     	<template v-for="currentFile in files">
