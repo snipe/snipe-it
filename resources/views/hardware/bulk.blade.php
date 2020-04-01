@@ -80,7 +80,7 @@
             </label>
             <div class="input-group col-md-3">
               <span class="input-group-addon">{{ $snipeSettings->default_currency }}</span>
-                <input type="text" class="form-control" placeholder="{{ trans('admin/hardware/form.cost') }}" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost') }}">
+                <input type="text" class="form-control"  maxlength="10" placeholder="{{ trans('admin/hardware/form.cost') }}" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost') }}">
                 {!! $errors->first('purchase_cost', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -96,7 +96,7 @@
               {{ trans('admin/hardware/form.order') }}
             </label>
             <div class="col-md-7">
-              <input class="form-control" type="text" name="order_number" id="order_number" value="{{ Input::old('order_number') }}" />
+              <input class="form-control" type="text" maxlength="20" name="order_number" id="order_number" value="{{ Input::old('order_number') }}" />
               {!! $errors->first('order_number', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -106,9 +106,9 @@
             <label for="warranty_months" class="col-md-3 control-label">
               {{ trans('admin/hardware/form.warranty') }}
             </label>
-            <div class="col-md-2">
+            <div class="col-md-3">
               <div class="input-group">
-                <input class="col-md-3 form-control" type="text" name="warranty_months" id="warranty_months" value="{{ Input::old('warranty_months') }}" />
+                <input class="col-md-3 form-control" maxlength="4" type="text" name="warranty_months" id="warranty_months" value="{{ Input::old('warranty_months') }}" />
                 <span class="input-group-addon">{{ trans('admin/hardware/form.months') }}</span>
                 {!! $errors->first('warranty_months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
