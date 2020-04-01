@@ -33,7 +33,8 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h4 class="box-title">
-                        <i class="fa fa-wrench"></i> {{ trans('admin/settings/general.general_settings') }}
+                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                        {{ trans('admin/settings/general.general_settings') }}
                     </h4>
                 </div>
 
