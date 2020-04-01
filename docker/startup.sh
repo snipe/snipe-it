@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # fix key if needed
 if [ -z "$APP_KEY" ]
@@ -40,6 +40,14 @@ done
 chown -R docker:root /var/lib/snipeit/data/*
 chown -R docker:root /var/lib/snipeit/dumps
 chown -R docker:root /var/lib/snipeit/keys
+
+# Fix php settings
+if [ -v "PHP_UPLOAD_LIMIT" ]
+then
+    echo "Changing upload limit to ${PHP_UPLOAD_LIMIT}"
+    sed -i "s/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_LIMIT}M/" /etc/php/*/apache2/php.ini
+fi
+
 
 # If the Oauth DB files are not present copy the vendor files over to the db migrations
 if [ ! -f "/var/www/html/database/migrations/*create_oauth*" ]
