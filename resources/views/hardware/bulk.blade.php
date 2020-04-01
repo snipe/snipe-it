@@ -56,8 +56,9 @@
 
         <!-- Update actual location  -->
           <div class="form-group">
-            <div class="col-sm-9 col-sm-offset-3 ">
-              <div class="checkbox">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+
                 <label for="update_real_loc">
                   {{ Form::radio('update_real_loc', '1', Input::old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_real_loc']) }}
                   Update default location AND actual location
@@ -67,7 +68,7 @@
                   {{ Form::radio('update_real_loc', '0', Input::old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_default_loc']) }}
                   Update only default location
                 </label>
-              </div>
+
             </div>
           </div> <!--/form-group-->
 
@@ -117,18 +118,18 @@
 
           <!-- Requestable -->
           <div class="form-group {{ $errors->has('requestable') ? ' has-error' : '' }}">
-            <label for="requestable" class="col-md-3 control-label">
-              {{ trans('admin/hardware/form.requestable') }}
-            </label>
-            <div class="col-md-7 col-md-offset-3">
+            <div class="control-label col-md-3">
+              <strong>{{ trans('admin/hardware/form.requestable') }}</strong>
+            </div>
+            <div class="col-md-7">
               <label class="radio">
-                <input type="radio" name="requestable" value="1"> Yes
+                <input type="radio" class="minimal" name="requestable" value="1"> Yes
               </label>
               <label class="radio">
-                <input type="radio" name="requestable" value="0"> No
+                <input type="radio" class="minimal" name="requestable" value="0"> No
               </label>
               <label class="radio">
-                <input type="radio" name="requestable" value=""> Do Not Change
+                <input type="radio" class="minimal" name="requestable" value=""> Do Not Change
               </label>
             </div>
           </div>
