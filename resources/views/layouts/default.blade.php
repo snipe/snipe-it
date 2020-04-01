@@ -9,7 +9,7 @@
       :: {{ $snipeSettings->site_name }}
     </title>
     <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
       <meta name="apple-mobile-web-app-capable" content="yes">
       <link rel="apple-touch-icon" href="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
@@ -144,24 +144,24 @@
             <div class="navbar-custom-menu">
               <ul class="nav navbar-nav">
                   @can('index', \App\Models\Asset::class)
-                  <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
-                      <a href="{{ url('hardware') }}">
+                  <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
+                      <a href="{{ url('hardware') }}" tabindex="-1">
                           <i class="fa fa-barcode"></i>
                           <span class="sr-only">Assets</span>
                       </a>
                   </li>
                   @endcan
                   @can('view', \App\Models\License::class)
-                  <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
-                      <a href="{{ route('licenses.index') }}">
+                  <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!} tabindex="-1">
+                      <a href="{{ route('licenses.index') }}" tabindex="-1">
                           <i class="fa fa-floppy-o"></i>
                           <span class="sr-only">Licenses</span>
                       </a>
                   </li>
                   @endcan
                   @can('index', \App\Models\Accessory::class)
-                  <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
-                      <a href="{{ route('accessories.index') }}">
+                  <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!} tabindex="-1">
+                      <a href="{{ route('accessories.index') }}" tabindex="-1">
                           <i class="fa fa-keyboard-o"></i>
                           <span class="sr-only">Accessories</span>
                       </a>
@@ -169,7 +169,7 @@
                   @endcan
                   @can('index', \App\Models\Consumable::class)
                   <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
-                      <a href="{{ url('consumables') }}">
+                      <a href="{{ url('consumables') }}" tabindex="-1">
                           <i class="fa fa-tint"></i>
                           <span class="sr-only">Consumables</span>
                       </a>
@@ -177,7 +177,7 @@
                   @endcan
                   @can('view', \App\Models\Component::class)
                   <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                      <a href="{{ route('components.index') }}">
+                      <a href="{{ route('components.index') }}" tabindex="-1">
                           <i class="fa fa-hdd-o"></i>
                           <span class="sr-only">Components</span>
                       </a>
@@ -194,7 +194,7 @@
                           </div>
                           <div class="col-xs-1">
                               <button type="submit" class="btn btn-primary pull-right">
-                                  <i class="fa fa-search"></i>
+                                  <i class="fa fa-search" aria-hidden="true"></i>
                                   <span class="sr-only">Search</span>
                               </button>
                           </div>
@@ -204,14 +204,14 @@
 
                   @can('admin')
                   <li class="dropdown" aria-hidden="true">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" tabindex="-1">
                       {{ trans('general.create') }}
                       <strong class="caret"></strong>
                     </a>
                    <ul class="dropdown-menu">
                      @can('create', \App\Models\Asset::class)
                       <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
-                              <a href="{{ route('hardware.create') }}">
+                              <a href="{{ route('hardware.create') }}" tabindex="-1">
                                   <i class="fa fa-barcode fa-fw" aria-hidden="true"></i>
                                   {{ trans('general.asset') }}
                               </a>
@@ -219,7 +219,7 @@
                        @endcan
                        @can('create', \App\Models\License::class)
                        <li {!! (Request::is('licenses/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('licenses.create') }}">
+                           <a href="{{ route('licenses.create') }}" tabindex="-1">
                                <i class="fa fa-floppy-o fa-fw" aria-hidden="true"></i>
                                {{ trans('general.license') }}
                            </a>
@@ -227,14 +227,14 @@
                        @endcan
                        @can('create', \App\Models\Accessory::class)
                        <li {!! (Request::is('accessories/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('accessories.create') }}">
+                           <a href="{{ route('accessories.create') }}" tabindex="-1">
                                <i class="fa fa-keyboard-o fa-fw" aria-hidden="true"></i>
                                {{ trans('general.accessory') }}</a>
                        </li>
                        @endcan
                        @can('create', \App\Models\Consumable::class)
                        <li {!! (Request::is('consunmables/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('consumables.create') }}">
+                           <a href="{{ route('consumables.create') }}" tabindex="-1">
                                <i class="fa fa-tint fa-fw" aria-hidden="true"></i>
                                {{ trans('general.consumable') }}
                            </a>
@@ -242,7 +242,7 @@
                        @endcan
                        @can('create', \App\Models\Component::class)
                        <li {!! (Request::is('components/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('components.create') }}">
+                           <a href="{{ route('components.create') }}" tabindex="-1">
                            <i class="fa fa-hdd-o fa-fw" aria-hidden="true"></i>
                            {{ trans('general.component') }}
                            </a>
@@ -250,7 +250,7 @@
                        @endcan
                          @can('create', \App\Models\User::class)
                              <li {!! (Request::is('users/create') ? 'class="active"' : '') !!}>
-                                 <a href="{{ route('users.create') }}">
+                                 <a href="{{ route('users.create') }}" tabindex="-1">
                                      <i class="fa fa-user fa-fw" aria-hidden="true"></i>
                                      {{ trans('general.user') }}
                                  </a>
@@ -396,7 +396,7 @@
             @can('admin')
             <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!}>
               <a href="{{ route('home') }}">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <i class="fa fa-dashboard" aria-hidden="true"></i> <span>Dashboard</span>
               </a>
             </li>
             @endcan
