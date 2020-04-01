@@ -83,6 +83,8 @@
                                 @else
                                     <div class="controls">
                                         <select name="groups[]" id="groups[]" multiple="multiple" class="form-control">
+                                            <option value="">Remove Group Memberships </option>
+
                                   @foreach ($groups as $id => $group)
                                         <option value="{{ $id }}">{{ $group }} </option>
                                     @endforeach
