@@ -601,7 +601,7 @@
           </div><!-- /.tab-pane -->
         </div><!-- /.tab-content -->
         <div class="box-footer text-right">
-          <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
         </div>
       </div><!-- nav-tabs-custom -->
     </form>
