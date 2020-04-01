@@ -26,7 +26,7 @@
 <div class="form-group{{ $errors->has('statuslabel_types') ? ' has-error' : '' }}">
     <label for="statuslabel_types" class="col-md-3 control-label">{{ trans('admin/statuslabels/table.status_type') }} </label>
     <div class="col-md-7 required">
-        {{ Form::select('statuslabel_types', $statuslabel_types, $item->getStatuslabelType(), array('class'=>'select2', 'style'=>'min-width:400px')) }}
+        {{ Form::select('statuslabel_types', $statuslabel_types, $item->getStatuslabelType(), array('class'=>'select2', 'style'=>'min-width:400px', 'aria-label'=>'statuslabel_types')) }}
         {!! $errors->first('statuslabel_types', '<span class="alert-msg"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>

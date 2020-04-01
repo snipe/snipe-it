@@ -3,7 +3,7 @@
     <div class="col-md-9">
         <label class="btn btn-default">
             {{ trans('button.select_file')  }}
-            <input type="file" name="image" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none">
+            <input type="file" name="image" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none" aria-label="image">
         </label>
         <span class='label label-default' id="upload-file-info"></span>
 
@@ -11,7 +11,7 @@
         {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
     </div>
     <div class="col-md-4 col-md-offset-3">
-        <img id="imagePreview" style="max-width: 200px;" alt="Uploaded image thumbnail">
+        <img id="imagePreview" style="max-width: 200px; display: none;" alt="Uploaded image thumbnail">
     </div>
 </div>
 
