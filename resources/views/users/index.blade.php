@@ -47,7 +47,8 @@
             @if (Input::get('status')!='deleted')
               @can('delete', \App\Models\User::class)
                 <div id="toolbar">
-                  <select name="bulk_actions" class="form-control select2" style="width: 200px;">
+                    <label for="bulk_actions" class="sr-only">Bulk Actions</label>
+                  <select name="bulk_actions" class="form-control select2" style="width: 200px;" aria-label="bulk_actions">
                     <option value="delete">Bulk Checkin &amp; Delete</option>
                     <option value="edit">Bulk Edit</option>
                   </select>
