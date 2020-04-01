@@ -11,11 +11,11 @@
   //Navbar
   .main-header {
     .navbar {
-      .navbar-variant(@blue; #fff);
+      .navbar-variant(@navy; #fff);
       .sidebar-toggle {
         color: #fff;
         &:hover {
-          background-color: darken(@blue, 5%);
+          background-color: darken(@navy, 5%);
         }
       }
       @media (max-width: @screen-header-collapse) {
@@ -23,11 +23,13 @@
           li {
             &.divider {
               background-color: rgba(255, 255, 255, 0.1);
+              color: #fff;
             }
             a {
               color: #fff;
               &:hover {
-                background: darken(@blue, 5%);
+                background: darken(@navy, 5%);
+                color: #fff;
               }
             }
           }
@@ -37,7 +39,7 @@
     //Logo
 
     li.user-header {
-      background-color: @blue;
+      background-color: @navy;
     }
   }
 
@@ -47,7 +49,7 @@
   }
 
   //Create the sidebar skin
-  .skin-dark-sidebar(@blue);
+  .skin-dark-sidebar(@navy);
 }
 
 .skin-blue-dark.layout-top-nav .main-header > .logo {
@@ -59,45 +61,44 @@
 
 
 .btn, .btn:hover {
-
+  color: #fff;
 
   &.btn-primary, .btn-primary:link {
-    background-color: darken(@blue, 10%);
-    border-color: darken(@blue, 20%);
+    background-color: darken(@navy, 10%);
+    border-color: darken(@navy, 20%);
     color: #fff;
   }
 
 
   &a.btn-primary:hover {
-    background-color: darken(@blue, 20%);
-    border-color: darken(@blue, 20%);
+    background-color: darken(@navy, 20%);
+    border-color: darken(@navy, 20%);
     color: #fff;
   }
 
   &.btn-white:link {
-    background-color: darken(@blue, 10%);
+    background-color: darken(@navy, 10%);
     color: #fff;
   }
 
   &.btn-white:hover {
-    background-color: darken(@blue, 30%);
+    background-color: darken(@navy, 30%);
     color: #fff;
   }
 }
 
 
 a {
-  color: @blue;
   &:hover {
-    color: darken(@blue, 20%);
+    color: #fff;
   }
   &:visited {
-    color: @blue;
+    color: #fff;
   }
 }
 
 .text-primary {
-  color: darken(@blue, 20%);
+  color: #fff;
 }
 
 
@@ -107,12 +108,12 @@ a {
   --background: #222;
   --back-main: #333;
   --back-sub: #444;
-  --header: @blue; /* Use same as Header picker */
+  --header: @navy; /* Use same as Header picker */
   --text-main: #FFF;
   --text-sub: #BBB;
-  --link: lighten(@blue, 10%); /* Use same as Header picker */
+  --link: lighten(@navy, 50%); /* Use same as Header picker */
   --nav-link: #FFF; /* Use same as Header picker */
-  --light-link: lighten(@blue, 30%); /* Use same as Header picker */
+  --light-link: #fff; /* Use same as Header picker */
 }
 
 .main-header .navbar, .main-header .logo {
@@ -194,7 +195,7 @@ body {
 }
 .dropdown-menu, .dropdown-menu>li>a {
   background-color: var(--back-sub);
-  color: var(--header);
+  color: var(--text-main);
 }
 .dropdown-menu>li>a:hover {
   background-color: var(--back-main);
@@ -305,3 +306,31 @@ a {
     color: var(--link);
   }
 }
+
+.row-striped {
+  vertical-align: top;
+  line-height: 2.6;
+  padding: 0px;
+  margin-left: 20px;
+  box-sizing: border-box;
+  //border-left: 1px solid #dddddd;
+  //border-right: 1px solid #dddddd;
+  display: table;
+
+}
+
+.row-striped .row:nth-of-type(odd) div {
+  background-color: var(--back-sub);
+  color: var(--text-main);
+  border-top: 1px solid #dddddd;
+  display: table-cell;
+
+}
+
+.row-striped .row:nth-of-type(even) div {
+  background-color: var(--back-sub);
+  color: var(--text-main);
+  border-top: 1px solid #dddddd;
+  display: table-cell;
+}
+

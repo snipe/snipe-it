@@ -23,11 +23,13 @@
           li {
             &.divider {
               background-color: rgba(255, 255, 255, 0.1);
+              color: #fff;
             }
             a {
               color: #fff;
               &:hover {
                 background: darken(@red, 5%);
+                color: #fff;
               }
             }
           }
@@ -59,7 +61,7 @@
 
 
 .btn, .btn:hover {
-
+  color: #fff;
 
   &.btn-primary, .btn-primary:link {
     background-color: darken(@red, 10%);
@@ -87,17 +89,16 @@
 
 
 a {
-  color: @red;
   &:hover {
-    color: darken(@red, 20%);
+    color: #fff;
   }
   &:visited {
-    color: @red;
+    color: #fff;
   }
 }
 
 .text-primary {
-  color: darken(@red, 20%);
+  color: #fff;
 }
 
 
@@ -110,9 +111,9 @@ a {
   --header: @red; /* Use same as Header picker */
   --text-main: #FFF;
   --text-sub: #BBB;
-  --link: lighten(@red, 10%); /* Use same as Header picker */
+  --link: lighten(@red, 50%); /* Use same as Header picker */
   --nav-link: #FFF; /* Use same as Header picker */
-  --light-link: lighten(@red, 30%); /* Use same as Header picker */
+  --light-link: #fff; /* Use same as Header picker */
 }
 
 .main-header .navbar, .main-header .logo {
@@ -194,7 +195,7 @@ body {
 }
 .dropdown-menu, .dropdown-menu>li>a {
   background-color: var(--back-sub);
-  color: var(--header);
+  color: var(--text-main);
 }
 .dropdown-menu>li>a:hover {
   background-color: var(--back-main);
@@ -276,10 +277,10 @@ input[type=text], input[type=search] {
   background-color: var(--back-main);
   color: var(--text-main);
 }
-.skin-red-dark .main-header .navbar .dropdown-menu li a {
+.skin-blue-dark .main-header .navbar .dropdown-menu li a {
   color: var(--header);
 }
-.skin-red-dark .sidebar-menu>li.active>a, .skin-red .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
+.skin-blue-dark .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a, .sidebar-toggle:hover {
   background-color: var(--header)!important;
 }
 .tab-content, .tab-pane {
@@ -305,3 +306,31 @@ a {
     color: var(--link);
   }
 }
+
+.row-striped {
+  vertical-align: top;
+  line-height: 2.6;
+  padding: 0px;
+  margin-left: 20px;
+  box-sizing: border-box;
+  //border-left: 1px solid #dddddd;
+  //border-right: 1px solid #dddddd;
+  display: table;
+
+}
+
+.row-striped .row:nth-of-type(odd) div {
+  background-color: var(--back-sub);
+  color: var(--text-main);
+  border-top: 1px solid #dddddd;
+  display: table-cell;
+
+}
+
+.row-striped .row:nth-of-type(even) div {
+  background-color: var(--back-sub);
+  color: var(--text-main);
+  border-top: 1px solid #dddddd;
+  display: table-cell;
+}
+
