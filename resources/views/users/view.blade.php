@@ -464,8 +464,8 @@
                     <tr>
                       <th class="col-md-5">{{ trans('general.notes') }}</th>
                       <th class="col-md-5"><span class="line"></span>{{ trans('general.file_name') }}</th>
-                      <th class="col-md-2"></th>
-                      <th class="col-md-2"></th>
+                      <th class="col-md-2">{{ trans('general.download') }}</th>
+                      <th class="col-md-2">{{ trans('general.delete') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -486,7 +486,7 @@
                       </td>
                       <td>
                         @can('update', $user)
-                        <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
+                        <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white" aria-hidden="true"></i><span class="sr-only">Delete</span></a>
                         @endcan
                       </td>
                     </tr>
@@ -522,7 +522,7 @@
                 }'>
               <thead>
               <tr>
-                <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
+                <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"><span class="sr-only">Icon</span></th>
                 <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter" data-sortable="true">{{ trans('general.date') }}</th>
                 <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                 <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
