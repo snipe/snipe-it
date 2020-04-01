@@ -63,9 +63,9 @@
                             <div class="col-sm-9">
                                 <div class="checkbox">
                                     <label for="activated">
-                                        {{ Form::radio('activated', '', true) }} Do not change activation status <br>
-                                        {{ Form::radio('activated', '1', Input::old('activated')) }}  User is activated<br>
-                                        {{ Form::radio('activated', '0', Input::old('activated')) }}  User is de-activated
+                                        {{ Form::radio('activated', '', true, ['aria-label'=>'activated']) }} Do not change activation status <br>
+                                        {{ Form::radio('activated', '1', Input::old('activated'), ['aria-label'=>'activated']) }}  User is activated<br>
+                                        {{ Form::radio('activated', '0', Input::old('activated'), ['aria-label'=>'activated']) }}  User is de-activated
 
                                     </label>
                                 </div>
@@ -82,7 +82,9 @@
                                     <span class="help-block">Only superadmins may edit group memberships.</p>
                                 @else
                                     <div class="controls">
-                                        <select name="groups[]" id="groups[]" multiple="multiple" class="form-control">
+                                        <select name="groups[]" id="groups[]" multiple="multiple" class="form-control" aria-label="groups">
+                                        <option value="">Remove Group Memberships </option>
+
                                   @foreach ($groups as $id => $group)
                                         <option value="{{ $id }}">{{ $group }} </option>
                                     @endforeach

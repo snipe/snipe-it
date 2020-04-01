@@ -32,7 +32,7 @@
           <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
             <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
             <div class="input-group col-md-3">
-              <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date') }}">
+              <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date') }}" arial-label="purchase_date">
               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
               {!! $errors->first('purchase_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
@@ -44,7 +44,7 @@
               {{ trans('admin/hardware/form.status') }}
             </label>
             <div class="col-md-7">
-              {{ Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
+              {{ Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:350px', 'aria-label'=>'status_id')) }}
               {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -56,15 +56,16 @@
 
         <!-- Update actual location  -->
           <div class="form-group">
-            <div class="col-sm-3 control-label">
-
-            </div>
-            <div class="col-sm-9">
+            <div class="col-sm-9 col-sm-offset-3 ">
               <div class="checkbox">
                 <label for="update_real_loc">
-                  {{ Form::radio('update_real_loc', '1', Input::old('update_real_loc')) }} Update default location AND actual location <br>
-                  {{ Form::radio('update_real_loc', '0', true, Input::old('update_real_loc')) }} Only update default location<br>
-
+                  {{ Form::radio('update_real_loc', '1', Input::old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_real_loc']) }}
+                  Update default location AND actual location
+                </label>
+                <br>
+                <label for="update_default_loc">
+                  {{ Form::radio('update_real_loc', '0', Input::old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_default_loc']) }}
+                  Update only default location
                 </label>
               </div>
             </div>
