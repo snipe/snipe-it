@@ -29,7 +29,7 @@
             @if ($item->id)
             {{ $item->display_name }}
             @endif
-            </h3>
+            </h2>
                 @if (isset($helpText))
                     <div class="box-tools pull-right">
                         <button class="slideout-menu-toggle btn btn-box-tool btn-box-tool-lg" data-toggle="tooltip" title="Help"><i class="fa fa-question"></i></button>
@@ -59,7 +59,7 @@
         <a href="#" class="slideout-menu-toggle pull-right">×</a>
         <h2>
             {{ $helpTitle}}
-        </h3>
+        </h2>
         <p>{{ $helpText }} </p>
     </div>
     @endif

@@ -25,7 +25,7 @@
     <div class="box box-default">
       <div class="box-header with-border">
         <div class="box-heading">
-          <h2 class="box-title"> {{ trans('general.assets') }}</h3>
+          <h2 class="box-title"> {{ trans('general.assets') }}</h2>
         </div>
       </div><!-- /.box-header -->
 
@@ -75,7 +75,7 @@
 
           <div class="box-header with-border">
             <div class="box-heading">
-              <h2 class="box-title"> {{ trans('general.accessories') }}</h3>
+              <h2 class="box-title"> {{ trans('general.accessories') }}</h2>
             </div>
           </div><!-- /.box-header -->
 
@@ -113,7 +113,7 @@
             @if ($supplier->id)
               <div class="box-header with-border">
                 <div class="box-heading">
-                  <h2 class="box-title"> {{ trans('general.licenses') }}</h3>
+                  <h2 class="box-title"> {{ trans('general.licenses') }}</h2>
                 </div>
               </div><!-- /.box-header -->
             @endif
@@ -155,7 +155,7 @@
           @if ($supplier->id)
             <div class="box-header with-border">
               <div class="box-heading">
-                <h2 class="box-title"> Improvements</h3>
+                <h2 class="box-title"> Improvements</h2>
               </div>
             </div><!-- /.box-header -->
           @endif

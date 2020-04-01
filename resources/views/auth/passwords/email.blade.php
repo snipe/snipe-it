@@ -19,7 +19,7 @@
 
                 <div class="box login-box" style="width: 100%">
                         <div class="box-header">
-                            <h2 class="box-title"> {{ trans('auth/general.send_password_link')  }}</h3>
+                            <h2 class="box-title"> {{ trans('auth/general.send_password_link')  }}</h2>
                         </div>
 
 

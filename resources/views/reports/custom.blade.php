@@ -24,7 +24,7 @@
     <!-- Horizontal Form -->
       <div class="box box-default">
         <div class="box-header with-border">
-          <h2 class="box-title">Customize Report</h3>
+          <h2 class="box-title">Customize Report</h2>
         </div><!-- /.box-header -->
 
         <div class="box-body">

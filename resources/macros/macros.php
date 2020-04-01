@@ -72,7 +72,7 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
     if($id) {
       $idclause=" id='$id'";
     }
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px"'.$idclause.'>';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px"'.$idclause.' aria-label="'.$name.'">';
 
     foreach ($locales as $abbr => $locale) {
         $select .= '<option value="'.$abbr.'"'.($selected == $abbr ? ' selected="selected"' : '').'>'.$locale.'</option> ';
@@ -346,7 +346,7 @@ Form::macro('countries', function ($name = "country", $selected = null, $class =
     if($id) {
       $idclause=" id='$id'";
     }
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px"'.$idclause.'>';
+    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px"'.$idclause.' aria-label="'.$name.'">';
 
     foreach ($countries as $abbr => $country) {
         $select .= '<option value="'.strtoupper($abbr).'"'.(strtoupper($selected)== strtoupper($abbr) ? ' selected="selected"' : '').'>'.$country.'</option> ';

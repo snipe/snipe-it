@@ -37,7 +37,7 @@
           @if ($item)
           {{ $item->name }}
           @endif
-        </h3>
+        </h2>
       </div><!-- /.box-header -->
 
       <div class="box-body">

@@ -21,7 +21,7 @@
 
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h2 class="box-title"> {{ $license->name }}</h3>
+                    <h2 class="box-title"> {{ $license->name }}</h2>
                 </div>
                 <div class="box-body">
 

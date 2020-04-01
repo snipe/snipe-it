@@ -14,7 +14,7 @@
     <div class="box box-default">
 
       <div class="box-header with-border">
-        <h2 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h3>
+        <h2 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h2>
         <div class="box-tools pull-right">
           @can('create', \App\Models\CustomFieldset::class)
           <a href="{{ route('fieldsets.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new fieldset">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
@@ -96,7 +96,7 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-header with-border">
-        <h2 class="box-title">{{ trans('admin/custom_fields/general.custom_fields') }}</h3>
+        <h2 class="box-title">{{ trans('admin/custom_fields/general.custom_fields') }}</h2>
         <div class="box-tools pull-right">
           @can('create', \App\Models\CustomField::class)
           <a href="{{ route('fields.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new custom field">{{ trans('admin/custom_fields/general.create_field') }}</a>

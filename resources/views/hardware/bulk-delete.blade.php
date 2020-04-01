@@ -21,7 +21,7 @@
       {{csrf_field()}}
       <div class="box box-default">
         <div class="box-header with-border">
-          <h2 class="box-title" style="color: red">{{ trans('admin/hardware/form.bulk_delete_warn', ['asset_count' => count($assets)]) }}</h3>
+          <h2 class="box-title" style="color: red">{{ trans('admin/hardware/form.bulk_delete_warn', ['asset_count' => count($assets)]) }}</h2>
         </div>
 
         <div class="box-body">

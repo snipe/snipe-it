@@ -26,7 +26,7 @@
                 <div class="box box-default">
                     @if ($accessory->id)
                         <div class="box-header with-border">
-                            <h2 class="box-title">{{ $accessory->name }}</h3>
+                            <h2 class="box-title">{{ $accessory->name }}</h2>
                         </div><!-- /.box-header -->
                     @endif
 

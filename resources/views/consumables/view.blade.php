@@ -22,7 +22,7 @@
       @if ($consumable->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h2 class="box-title"> {{ $consumable->name }}</h3>
+          <h2 class="box-title"> {{ $consumable->name }}</h2>
         </div>
       </div><!-- /.box-header -->
       @endif

@@ -39,13 +39,13 @@
             <img class="print-logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
         @endif
         {{ $snipeSettings->site_name }}
-        </h3>
+        </h2>
     @elseif ($snipeSettings->brand == '2')
         @if ($snipeSettings->logo!='')
             <img class="print-logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
         @endif
     @else
-      <h2>{{ $snipeSettings->site_name }}</h3>
+      <h2>{{ $snipeSettings->site_name }}</h2>
     @endif
 @endif
 

@@ -17,7 +17,7 @@
             @if ($asset->name)
             ({{ $asset->name }})
             @endif
-        </h3>
+        </h2>
 
         <div class="btn-group pull-right">
             <div class="dropdown">

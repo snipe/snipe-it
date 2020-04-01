@@ -16,7 +16,7 @@ use Carbon\Carbon;
     <h2 class="title">
       {{ trans('admin/asset_maintenances/general.view') }}
       {{ " - " . $assetMaintenance->title }}
-    </h3>
+    </h2>
 
     <div class="btn-group pull-right">
       <div class="dropdown">

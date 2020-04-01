@@ -16,7 +16,7 @@ View Assets for  {{ $user->present()->fullName() }}
         @if ($user->id)
           <div class="box-header with-border">
             <div class="box-heading">
-              <h2 class="box-title"> {{ trans('admin/users/general.assets_user', array('name' => $user->first_name)) }}</h3>
+              <h2 class="box-title"> {{ trans('admin/users/general.assets_user', array('name' => $user->first_name)) }}</h2>
             </div>
           </div><!-- /.box-header -->
         @endif
@@ -89,7 +89,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @if ($user->id)
         <div class="box-header with-border">
           <div class="box-heading">
-            <h2 class="box-title"> {{ trans('admin/users/general.software_user', array('name' => $user->first_name)) }}</h3>
+            <h2 class="box-title"> {{ trans('admin/users/general.software_user', array('name' => $user->first_name)) }}</h2>
           </div>
         </div><!-- /.box-header -->
       @endif
@@ -147,7 +147,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @if ($user->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h2 class="box-title"> {{ trans('general.consumables') }} </h3>
+          <h2 class="box-title"> {{ trans('general.consumables') }} </h2>
         </div>
       </div><!-- /.box-header -->
       @endif
@@ -199,7 +199,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @if ($user->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h2 class="box-title"> {{ trans('general.accessories') }}</h3>
+          <h2 class="box-title"> {{ trans('general.accessories') }}</h2>
         </div>
       </div><!-- /.box-header -->
       @endif
@@ -250,7 +250,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @if ($user->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h2 class="box-title"> History</h3>
+          <h2 class="box-title"> History</h2>
         </div>
       </div><!-- /.box-header -->
       @endif

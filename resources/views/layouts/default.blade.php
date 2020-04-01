@@ -288,7 +288,7 @@
                               <small class="pull-right">
                                 {{ $alert_items[$i]['remaining'] }} remaining
                               </small>
-                            </h3>
+                            </h2>
                             <div class="progress xs">
                               <div class="progress-bar progress-bar-yellow" style="width: {{ $alert_items[$i]['percent'] }}%" role="progressbar" aria-valuenow="{{ $alert_items[$i]['percent'] }}" aria-valuemin="0" aria-valuemax="100">
                                 <span class="sr-only">{{ $alert_items[$i]['percent'] }}% Complete</span>
