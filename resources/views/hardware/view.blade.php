@@ -740,12 +740,10 @@
                 </table>
                 @else
 
-                <div class="col-md-12">
                   <div class="alert alert-info alert-block">
                     <i class="fa fa-info-circle"></i>
                     {{ trans('general.no_results') }}
                   </div>
-                </div>
               @endif
             </div><!-- /col -->
           </div> <!-- row -->
@@ -803,6 +801,10 @@
         <div class="tab-pane fade" id="assets">
           <div class="row">
             <div class="col-md-12">
+
+              @if ($asset->assignedAssets->count() > 0)
+
+
               {{ Form::open([
                         'method' => 'POST',
                         'route' => ['hardware/bulkedit'],
@@ -845,6 +847,16 @@
 
                 {{ Form::close() }}
               </div>
+
+                @else
+
+                  <div class="alert alert-info alert-block">
+                    <i class="fa fa-info-circle"></i>
+                    {{ trans('general.no_results') }}
+                  </div>
+                @endif
+
+
             </div><!-- /col -->
           </div> <!-- row -->
         </div> <!-- /.tab-pane software -->
@@ -1008,12 +1020,10 @@
 
               @else
 
-              <div class="col-md-12">
                 <div class="alert alert-info alert-block">
                   <i class="fa fa-info-circle"></i>
                   {{ trans('general.no_results') }}
                 </div>
-              </div>
               @endif
 
             </div> <!-- /.col-md-12 -->
