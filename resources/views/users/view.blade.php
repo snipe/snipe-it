@@ -98,6 +98,12 @@
             </ul>
           </li>
         @endcan
+
+        @can('update', \App\Models\User::class)
+          <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
+              <i class="fa fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
+          </li>
+        @endcan
       </ul>
 
       <div class="tab-content">
@@ -451,39 +457,9 @@
         <div class="tab-pane" id="files_tab">
           <div class="row">
             <div class="col-md-12 col-sm-12">
-              <p>{{ trans('admin/hardware/general.filetype_info') }}</p>
-            </div>
-            <div class="col-md-2">
-              <!-- The fileinput-button span is used to style the file input field as button -->
-              @can('update', $user)
-              <span class="btn btn-info fileinput-button hidden-print">
-                <i class="fa fa-plus icon-white"></i>
-                <span>{{ trans('button.select_file') }}</span>
-                <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="file[]" data-url="{{ route('upload/user', $user->id) }}">
-              </span>
-              @endcan
-            </div>
-            <div class="col-md-4">
-              <input id="notes" type="text" name="notes">
-            </div>
-            <div class="col-md-6" id="progress-container" style="visibility: hidden; padding-bottom: 20px;">
-              <!-- The global progress bar -->
-              <div class="col-md-11">
-                <div id="progress" class="progress progress-striped active" style="margin-top: 8px;">
-                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                      <span id="progress-bar-text">0% {{ trans('general.complete') }}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-1">
-                  <div class="pull-right progress-checkmark" style="display: none;">
-                  </div>
-              </div>
-            </div>
 
-            <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload.css') }}">
-            <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload-ui.css') }}">
+              <!-- start striped rows -->
+
 
             <div class="col-md-12 col-sm-12">
               <div class="table-responsive">
@@ -588,7 +564,13 @@
   </div>
 </div>
 
-@stop
+  @can('update', \App\Models\User::class)
+    @include ('modals.upload-file', ['item_type' => 'user', 'item_id' => $user->id])
+  @endcan
+
+
+
+  @stop
 
 @section('moar_scripts')
   @include ('partials.bootstrap-table', ['simple_view' => true])

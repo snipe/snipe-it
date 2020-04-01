@@ -731,30 +731,37 @@ class UsersController extends Controller
         if (isset($user->id)) {
             $this->authorize('update', $user);
 
-            foreach (Input::file('file') as $file) {
+            if (!$request->has('file')) {
+                \Log::debug('No file selected: ');
+                \Log::debug(print_r($request, true));
+                return redirect()->back()->with('error', 'No file submitted.');
 
-                $extension = $file->getClientOriginalExtension();
-                $filename = 'user-' . $user->id . '-' . str_random(8);
-                $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
-                $upload_success = $file->move($destinationPath, $filename);
+            } else {
+                foreach ($request->file('file') as $file) {
 
-                //Log the uploaded file to the log
-                $logAction = new Actionlog();
-                $logAction->item_id = $user->id;
-                $logAction->item_type = User::class;
-                $logAction->user_id = Auth::user()->id;
-                $logAction->note = e(Input::get('notes'));
-                $logAction->target_id = null;
-                $logAction->created_at = date("Y-m-d H:i:s");
-                $logAction->filename = $filename;
-                $logAction->action_type = 'uploaded';
-                $logAction->save();
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = 'user-' . $user->id . '-' . str_random(8);
+                    $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
+                    $upload_success = $file->move($destinationPath, $filename);
 
+                    //Log the uploaded file to the log
+                    $logAction = new Actionlog();
+                    $logAction->item_id = $user->id;
+                    $logAction->item_type = User::class;
+                    $logAction->user_id = Auth::user()->id;
+                    $logAction->note = $request->input('notes');
+                    $logAction->target_id = null;
+                    $logAction->created_at = date("Y-m-d H:i:s");
+                    $logAction->filename = $filename;
+                    $logAction->action_type = 'uploaded';
+                    $logAction->save();
+
+                }
+                return redirect()->back()->with('success', 'File uploaded');
             }
-            return JsonResponse::create($logAction);
 
         }
-        return JsonResponse::create(["error" => "Failed validation: ".print_r($logAction->getErrors(), true)], 500);
+        return redirect()->route('users.index')->with('error', 'Error uploading files');
     }
 
 
