@@ -19,13 +19,13 @@
 
         /* Rules for the div table */
         .tbl_head {
-            font-weight: bold
+            font-weight: bold;
         }
         .div_tbl {
-            display: table
+            display: table;
         }
         .div_tbl_row {
-            display: table-row
+            display: table-row;
         }
         .div_tbl_cell {
             display: table-cell;
@@ -68,20 +68,20 @@
                         <div class="row">
                             <div class="col-md-12" style="padding-top: 30px;">
                                 <div class="table table-striped" id="upload-table">
-                                    <div class="div_tbl_row">
-                                        <div class="tbl_head">File</div>
-                                        <div class="tbl_head">Created</div>
-                                        <div class="tbl_head">Size</div>
-                                        <div class="tbl_head"></div>
+                                    <div class="div_tbl_row col-md-12">
+                                        <div class="tbl_head col-md-5">File</div>
+                                        <div class="tbl_head col-md-3">Created</div>
+                                        <div class="tbl_head col-md-2">Size</div>
+                                        <div class="tbl_head col-md-2"></div>
                                     </div>
 
                                     <template v-for="currentFile in files">
-                                    		<div class="div_tbl_row">
-                                    			<div class="div_tbl_cell">@{{ currentFile.file_path }}</div>
-                                    			<div class="div_tbl_cell">@{{ currentFile.created_at }} </div>
-                                    			<div class="div_tbl_cell">@{{ currentFile.filesize }}</div>
+                                    		<div class="div_tbl_row col-md-12">
+                                    			<div class="div_tbl_cell col-md-5">@{{ currentFile.file_path }}</div>
+                                    			<div class="div_tbl_cell col-md-3">@{{ currentFile.created_at }} </div>
+                                    			<div class="div_tbl_cell col-md-2">@{{ currentFile.filesize }}</div>
 
-                                                <div class="div_tbl_cell">
+                                                <div class="div_tbl_cell col-md-2">
                                     			    <button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">Process</button>
                                                     <button class="btn btn-sm btn-danger" @click="deleteFile(currentFile)"><i class="fa fa-trash icon-white"></i></button>
                                     			</div>
