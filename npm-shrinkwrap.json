@@ -130,11 +130,6 @@
         }
       }
     },
-    "almond": {
-      "version": "0.3.3",
-      "resolved": "https://registry.npmjs.org/almond/-/almond-0.3.3.tgz",
-      "integrity": "sha1-oOfJWsdiTWQXtElLHmi/9pMWiiA="
-    },
     "alphanum-sort": {
       "version": "1.0.2",
       "resolved": "https://registry.npmjs.org/alphanum-sort/-/alphanum-sort-1.0.2.tgz",
@@ -6711,11 +6706,6 @@
       "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.3.1.tgz",
       "integrity": "sha1-lYzinoHJeQ8xvneS311NlfxX+8o="
     },
-    "jquery-mousewheel": {
-      "version": "3.1.13",
-      "resolved": "https://registry.npmjs.org/jquery-mousewheel/-/jquery-mousewheel-3.1.13.tgz",
-      "integrity": "sha1-BvAzXxbjU6aV5yBr9QUDy1I6buU="
-    },
     "jquery-slimscroll": {
       "version": "1.3.8",
       "resolved": "https://registry.npmjs.org/jquery-slimscroll/-/jquery-slimscroll-1.3.8.tgz",
@@ -11209,13 +11199,9 @@
       "dev": true
     },
     "select2": {
-      "version": "4.0.5",
-      "resolved": "https://registry.npmjs.org/select2/-/select2-4.0.5.tgz",
-      "integrity": "sha1-eqxQaSVhmFs007guxV4ib4lg1Ao=",
-      "requires": {
-        "almond": "~0.3.1",
-        "jquery-mousewheel": "~3.1.13"
-      }
+      "version": "4.0.13",
+      "resolved": "https://registry.npmjs.org/select2/-/select2-4.0.13.tgz",
+      "integrity": "sha512-1JeB87s6oN/TDxQQYCvS5EFoQyvV6eYMZZ0AeA4tdFDYWN3BAGZ8npr17UBFddU0lgAt3H0yjX3X6/ekOj1yjw=="
     },
     "selfsigned": {
       "version": "1.10.2",
