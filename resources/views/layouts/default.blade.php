@@ -117,28 +117,29 @@
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
-          <ul class="nav navbar-nav navbar-left">
-              <li class="left-navblock">
+          <div class="nav navbar-nav navbar-left">
+              <div class="left-navblock">
                  @if ($snipeSettings->brand == '3')
                       <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
                           @if ($snipeSettings->logo!='')
-                          <img class="navbar-brand-img" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}" alt="{{ $snipeSettings->site_name }} logo image">
+                          <img class="navbar-brand-img" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}" alt="">
                           @endif
                           {{ $snipeSettings->site_name }}
                       </a>
                   @elseif ($snipeSettings->brand == '2')
                       <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
                           @if ($snipeSettings->logo!='')
-                          <img class="navbar-brand-img" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}" alt="{{ $snipeSettings->site_name }} logo image">
+                          <img class="navbar-brand-img" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}" alt="">
                           @endif
+                          <span class="sr-only">{{ $snipeSettings->site_name }}</span>
                       </a>
                   @else
                       <a class="logo no-hover" href="{{ url('/') }}">
                           {{ $snipeSettings->site_name }}
                       </a>
                   @endif
-              </li>
-            </ul>
+              </div>
+            </div>
 
           <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
@@ -146,7 +147,7 @@
                   @can('index', \App\Models\Asset::class)
                   <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
                       <a href="{{ url('hardware') }}" tabindex="-1">
-                          <i class="fa fa-barcode"></i>
+                          <i class="fa fa-barcode" aria-hidden="true"></i>
                           <span class="sr-only">Assets</span>
                       </a>
                   </li>
@@ -185,6 +186,7 @@
                   @endcan
 
                   @can('index', \App\Models\Asset::class)
+                  <li>
                   <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
                       <div class="col-xs-12 col-md-12">
                           <div class="col-xs-12 form-group">
@@ -200,6 +202,7 @@
                           </div>
                       </div>
                   </form>
+                  </li>
                   @endcan
 
                   @can('admin')
@@ -313,7 +316,7 @@
                <li class="dropdown user user-menu">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    @if (Auth::user()->present()->gravatar())
-                       <img src="{{ Auth::user()->present()->gravatar() }}" class="user-image" alt="User Image">
+                       <img src="{{ Auth::user()->present()->gravatar() }}" class="user-image" alt="">
                    @else
                       <i class="fa fa-user fa-fws" aria-hidden="true"></i>
                    @endif
@@ -402,7 +405,7 @@
             @endcan
             @can('index', \App\Models\Asset::class)
             <li class="treeview{{ (Request::is('hardware*') ? ' active' : '') }}">
-                <a href="#"><i class="fa fa-barcode"></i>
+                <a href="#"><i class="fa fa-barcode" aria-hidden="true"></i>
                   <span>{{ trans('general.assets') }}</span>
                   <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -719,7 +722,7 @@
 
       <!-- Content Wrapper. Contains page content -->
 
-      <div class="content-wrapper">
+      <div class="content-wrapper" role="main">
 
           @if ($debug_in_production)
               <div class="row" style="margin-bottom: 0px; background-color: red; color: white; font-size: 15px;">

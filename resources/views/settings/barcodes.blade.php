@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-barcode"></i> Barcodes
+                        <i class="fa fa-barcode" aria-hidden="true"></i> Barcodes
                     </h2>
                 </div>
                 <div class="box-body">

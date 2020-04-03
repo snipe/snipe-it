@@ -5,11 +5,11 @@
     <div class="col-md-7{{  ((isset($required)) && ($required=='true')) ? ' required' : '' }}">
         <select class="js-data-ajax" data-endpoint="suppliers" data-placeholder="{{ trans('general.select_supplier') }}" name="{{ $fieldname }}" style="width: 100%" id="supplier_select" aria-label="{{ $fieldname }}">
             @if ($supplier_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                <option value="{{ $supplier_id }}" selected="selected">
+                <option value="{{ $supplier_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\Supplier::find($supplier_id)) ? \App\Models\Supplier::find($supplier_id)->name : '' }}
                 </option>
             @else
-                <option value="">{{ trans('general.select_supplier') }}</option>
+                <option value=""  role="option">{{ trans('general.select_supplier') }}</option>
             @endif
         </select>
     </div>

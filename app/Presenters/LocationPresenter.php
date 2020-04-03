@@ -190,7 +190,7 @@ class LocationPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fa fa-map-marker"></i>';
+        return '<i class="fa fa-map-marker" aria-hidden="true"></i>';
     }
     
     public function fullName() {

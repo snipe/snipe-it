@@ -349,7 +349,7 @@ Form::macro('countries', function ($name = "country", $selected = null, $class =
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px"'.$idclause.' aria-label="'.$name.'">';
 
     foreach ($countries as $abbr => $country) {
-        $select .= '<option value="'.strtoupper($abbr).'"'.(strtoupper($selected)== strtoupper($abbr) ? ' selected="selected"' : '').'>'.$country.'</option> ';
+        $select .= '<option value="'.strtoupper($abbr).'"'.(strtoupper($selected)== strtoupper($abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
     }
 
     $select .= '</select>';
@@ -382,7 +382,7 @@ Form::macro('date_display_format', function ($name = "date_display_format", $sel
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:250px" aria-label="'.$name.'">';
     foreach ($date_display_formats as $format => $date_display_format) {
-        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$date_display_format.'</option> ';
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'">'.$date_display_format.'</option> ';
     }
 
     $select .= '</select>';
@@ -404,7 +404,7 @@ Form::macro('time_display_format', function ($name = "time_display_format", $sel
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:150px" aria-label="'.$name.'">';
     foreach ($time_display_formats as $format => $time_display_format) {
-        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$time_display_format.'</option> ';
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$time_display_format.'</option> ';
     }
 
     $select .= '</select>';
@@ -428,7 +428,7 @@ Form::macro('alt_barcode_types', function ($name = "alt_barcode", $selected = nu
 
     $select = '<select name="'.$name.'" class="'.$class.'" aria-label="'.$name.'">';
     foreach ($barcode_types as $barcode_type) {
-        $select .= '<option value="'.$barcode_type.'"'.($selected == $barcode_type ? ' selected="selected"' : '').'>'.$barcode_type.'</option> ';
+        $select .= '<option value="'.$barcode_type.'"'.($selected == $barcode_type ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$barcode_type.'</option> ';
     }
 
     $select .= '</select>';
@@ -452,7 +452,7 @@ Form::macro('barcode_types', function ($name = "barcode_type", $selected = null,
 
     $select = '<select name="'.$name.'" class="'.$class.'" aria-label="'.$name.'">';
     foreach ($barcode_types as $barcode_type) {
-        $select .= '<option value="'.$barcode_type.'"'.($selected == $barcode_type ? ' selected="selected"' : '').'>'.$barcode_type.'</option> ';
+        $select .= '<option value="'.$barcode_type.'"'.($selected == $barcode_type ?' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$barcode_type.'</option> ';
     }
 
     $select .= '</select>';
@@ -474,7 +474,7 @@ Form::macro('username_format', function ($name = "username_format", $selected = 
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
-        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$label.'</option> '."\n";
     }
 
     $select .= '</select>';
@@ -494,7 +494,7 @@ Form::macro('two_factor_options', function ($name = "two_factor_enabled", $selec
 
     $select = '<select name="'.$name.'" class="'.$class.'" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
-        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$label.'</option> '."\n";
     }
 
     $select .= '</select>';
@@ -516,7 +516,7 @@ Form::macro('customfield_elements', function ($name = "customfield_elements", $s
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
-        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$label.'</option> '."\n";
     }
 
     $select .= '</select>';
@@ -549,7 +549,7 @@ Form::macro('skin', function ($name = "skin", $selected = null, $class = null) {
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
-        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$label.'</option> '."\n";
     }
 
     $select .= '</select>';

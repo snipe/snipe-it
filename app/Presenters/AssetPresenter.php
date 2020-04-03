@@ -518,6 +518,6 @@ class AssetPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fa fa-barcode"></i>';
+        return '<i class="fa fa-barcode" aria-hidden="true"></i>';
     }
 }

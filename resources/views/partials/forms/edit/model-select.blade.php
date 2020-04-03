@@ -10,7 +10,7 @@
                     {{ (\App\Models\AssetModel::find($model_id)) ? \App\Models\AssetModel::find($model_id)->name : '' }}
                 </option>
             @else
-                <option value="">{{ trans('general.select_model') }}</option>
+                <option value=""  role="option">{{ trans('general.select_model') }}</option>
             @endif
 
         </select>
@@ -19,7 +19,9 @@
         @can('create', \App\Models\AssetModel::class)
             @if ((!isset($hide_new)) || ($hide_new!='true'))
                 <a href='{{ route('modal.model') }}' data-toggle="modal"  data-target="#createModal" data-select='model_select_id' class="btn btn-sm btn-default">New</a>
-                <span class="mac_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
+                <span class="mac_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;">
+                    <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                </span>
             @endif
         @endcan
     </div>

@@ -37,7 +37,7 @@
         <p>{{ trans('general.total_assets') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
-        <i class="fa fa-barcode"></i>
+        <i class="fa fa-barcode" aria-hidden="true"></i>
       </div>
       @can('index', \App\Models\Asset::class)
         <a href="{{ route('hardware.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>

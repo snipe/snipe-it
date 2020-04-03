@@ -4,11 +4,11 @@
     <div class="col-md-7">
         <select class="js-data-ajax" data-endpoint="companies" data-placeholder="{{ trans('general.select_company') }}" name="{{ $fieldname }}" style="width: 100%" id="company_select" aria-label="{{ $fieldname }}">
             @if ($company_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
-                <option value="{{ $company_id }}" selected="selected">
+                <option value="{{ $company_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\Company::find($company_id)) ? \App\Models\Company::find($company_id)->name : '' }}
                 </option>
             @else
-                <option value="">{{ trans('general.select_company') }}</option>
+                <option value="" role="option">{{ trans('general.select_company') }}</option>
             @endif
         </select>
     </div>

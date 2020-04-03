@@ -26,7 +26,7 @@
         <li>
           <a href="#asset" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-barcode"></i>
+            <i class="fa fa-barcode" aria-hidden="true"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span>
           </a>

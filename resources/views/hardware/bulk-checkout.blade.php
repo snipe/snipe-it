@@ -40,7 +40,7 @@
                   <div class="col-md-8">
                       <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d">
                           <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkout_at" id="checkout_at" value="{{ Input::old('checkout_at') }}">
-                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                          <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                       </div>
                       {!! $errors->first('checkout_at', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                   </div>
@@ -52,7 +52,7 @@
                   <div class="col-md-8">
                       <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-start-date="0d">
                           <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ Input::old('expected_checkin') }}">
-                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                          <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                       </div>
                       {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                   </div>
