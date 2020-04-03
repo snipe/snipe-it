@@ -76,7 +76,7 @@ tr {
             </table>
                 <br>
                  <div class="col-md-8 col-md-offset-2 text-right">
-                     <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">Cancel</button>
+                     <button type="button" class="btn btn-sm btn-primary" @click="processDetail = false">Cancel</button>
                      <button type="submit" class="btn btn-sm btn-primary" @click="postSave">Import</button>
                      <br><br>
                  </div>

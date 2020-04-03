@@ -72,7 +72,7 @@
                     <input type="hidden" name="signature_output" id="signature_output">
                 </div>
                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center">
-                  <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">Clear Signature</button>
+                  <button type="button" class="btn btn-sm btn-primary clear" data-action="clear" id="clear_button">Clear Signature</button>
                 </div>
               </div>
             </div> <!-- .col-md-12.text-center-->
