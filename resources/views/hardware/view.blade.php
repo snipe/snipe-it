@@ -165,7 +165,7 @@
               {{ trans('general.files') }}
             </span>
           </a>
-        </li><
+        </li>
         @can('update', \App\Models\Asset::class)
         <li class="pull-right">
           <a href="#" data-toggle="modal" data-target="#uploadFileModal">
