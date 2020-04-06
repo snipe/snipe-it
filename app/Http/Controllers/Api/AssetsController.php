@@ -616,16 +616,14 @@ class AssetsController extends Controller
             $target = Asset::where('id','!=',$asset_id)->find(request('assigned_asset'));
             $asset->location_id = $target->rtd_location_id;
             // Override with the asset's location_id if it has one
-            if ($target->location_id!='') {
-                $asset->location_id = ($target) ? $target->location_id : '';
-            }
+            $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_asset');
             $error_payload['target_type'] = 'asset';
 
         } elseif (request('checkout_to_type')=='user') {
             // Fetch the target and set the asset's new location_id
             $target = User::find(request('assigned_user'));
-            $asset->location_id = ($target) ? $target->location_id : '';
+            $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_user');
             $error_payload['target_type'] = 'user';
         }
