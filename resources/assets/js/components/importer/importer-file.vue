@@ -5,15 +5,12 @@ tr {
 </style>
 
 <template>
-    <tr v-show="processDetail">
-        <td colspan="5">
-            <div class="col-md-2 text-left">
-            </div>
-            <div class="col-md-8 col-md-offset-2 text-center" style="padding-top: 30px; margin: 0 auto;">
-            <div class="col-md-12 text-left">
+    <div v-show="processDetail">
 
-            <h4 class="modal-title">Import File:</h4>
-            <div class="dynamic-form-row">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" style="padding-top: 30px; margin: 0 auto;">
+                <div class="dynamic-form-row">
                 <div class="col-md-5 col-xs-12">
                     <label for="import-type">Import Type:</label>
                 </div>
@@ -40,59 +37,59 @@ tr {
                 </div>
                 </div>
             </div>
-            <div class="alert col-md-12" style="text-align:left"
+            <div class="alert col-md-8 col-md-offset-2" style="text-align:left"
                  :class="alertClass"
                  v-if="statusText">
                 {{ this.statusText }}
             </div>
-
-
-            <div class="text-left" style="padding-top: 30px;">
-            <table class="table table-striped snipe-table">
-            <thead>
-                <th>Header Field</th>
-                <th>Import Field</th>
-                <th>Sample Value</th>
-            </thead>
-            <tbody>
-            <template v-for="(header, index) in file.header_row">
-                <tr>
-                    <td>
-                    <label :for="header" class="controllabel">{{ header }}</label>
-                    </td>
-                    <td>
-                        <div required>
-                            <select2 :options="columns" v-model="columnMappings[header]">
-                                <option value="0">Do Not Import</option>
-                            </select2>
-                        </div>
-                    </td>
-                    <td>
-                        <div>{{ activeFile.first_row[index] }}</div>
-                    </td>
-                </tr>
-                </template>
-            </tbody>
-            </table>
-                <br>
-                 <div class="col-md-8 col-md-offset-2 text-right">
-                     <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">Cancel</button>
-                     <button type="submit" class="btn btn-sm btn-primary" @click="postSave">Import</button>
-                     <br><br>
-                 </div>
-
-                <div class="alert col-md-12" style="padding-top: 20px;"
-                     :class="alertClass"
-                     v-if="statusText">
-                    {{ this.statusText }}
+        </div>
+                <div class="row">
+                     <div class="col-md-2"></div>
+                     <div class="col-md-8" style="padding-top: 30px;">
+                         <div class="col-md-4 text-right"><h4>Header Field</h4></div>
+                         <div class="col-md-4"><h4>Import Field</h4></div>
+                         <div class="col-md-4"><h4>Sample Value</h4></div>
+                    </div>
                 </div>
 
+                <template v-for="(header, index) in file.header_row">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="col-md-4 text-right">
+                                <label :for="header" class="control-label">{{ header }}</label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <div required>
+                                    <select2 :options="columns" v-model="columnMappings[header]">
+                                        <option value="0">Do Not Import</option>
+                                    </select2>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="form-control-static">{{ activeFile.first_row[index] }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    </template>
+
+                <div class="row">
+                     <div class="col-md-6 col-md-offset-2 text-right" style="padding-top: 20px;">
+                         <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">Cancel</button>
+                         <button type="submit" class="btn btn-sm btn-primary" @click="postSave">Import</button>
+                         <br><br>
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="alert col-md-8 col-md-offset-2" style="padding-top: 20px;"
+                         :class="alertClass"
+                         v-if="statusText">
+                        {{ this.statusText }}
+                    </div>
              </div>
+
+
             </div>
-
-        </td>
-
-    </tr>
 </template>
 
 <script>
