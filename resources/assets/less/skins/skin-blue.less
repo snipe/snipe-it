@@ -58,7 +58,7 @@
 
 
 
-.btn, .btn:hover {
+.btn, btn-sm, .btn:hover {
 
 
   &.btn-primary, .btn-primary:link {
@@ -83,7 +83,21 @@
     background-color: darken(@light-blue, 30%);
     color: #fff;
   }
+
+  &.btn-white:visited {
+    background-color: darken(@light-blue, 30%);
+    color: #fff;
+  }
 }
+
+
+
+.btn-warning, .btn-warning:link, a.btn-warning:hover, .btn-warning:link, .btn-warning:visited,
+.btn-danger, .btn-danger:link, a.btn-danger:hover, .btn-danger:link, .btn-danger:visited
+{
+    color: #fff;
+}
+
 
 
 a {
