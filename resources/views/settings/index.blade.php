@@ -302,8 +302,9 @@
         <h2 class="box-title">{{ trans('admin/settings/general.system') }}</h2>
       </div>
       <div class="box-body">
+        <div class="container row-striped col-md-11">
 
-        <div class="container row-striped">
+          <!-- row -->
           <div class="row">
             <div class="col-md-2">
               <strong>{{ trans('admin/settings/general.snipe_version') }}</strong>
@@ -311,9 +312,7 @@
             <div class="col-md-4">
             {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
             </div>
-          </div>
 
-          <div class="row">
             <div class="col-md-2">
               <strong>{{ trans('admin/settings/general.license') }}</strong>
             </div>
@@ -321,24 +320,27 @@
               <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" rel="noopener">AGPL3</a>
            </div>
           </div>
+          <!-- / row -->
 
+          <!-- row -->
           <div class="row">
-
             <div class="col-md-2">
               <strong>{{ trans('admin/settings/general.php') }}</strong>
             </div>
             <div class="col-md-4">
               {{ phpversion() }}
             </div>
-          </div>
-          <div class="row">
+
             <div class="col-md-2">
               <strong>{{ trans('admin/settings/general.laravel') }}</strong>
             </div>
             <div class="col-md-4">
               {{ $snipeSettings->lar_ver() }}
             </div>
+
           </div>
+          <!--/ row -->
+        </div>
       </div> <!-- /box-body-->
     </div> <!--/box-default-->
   </div><!--/col-md-8-->
