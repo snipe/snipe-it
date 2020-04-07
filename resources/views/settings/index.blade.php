@@ -48,11 +48,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5 class="name">
+          <h5>
           <a href="{{ route('settings.branding.index') }}">
             <i class="fa fa-copyright fa-4x" aria-hidden="true"></i>
             <br><br>
-            Branding
+            <span class="name">Branding</span>
             <span class="keywords" aria-hidden="true" style="display:none">footer, logo, print, theme, skin, header, colors, color, css</span>
           </a>
           </h5>
@@ -65,11 +65,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5 class="name">
+          <h5>
             <a href="{{ route('settings.general.index') }}">
               <i class="fa fa-wrench fa-4x" aria-hidden="true"></i>
               <br><br>
-             General Settings
+              <span class="name"> General Settings</span>
               <span class="keywords" aria-hidden="true" style="display:none">company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula,  tos, dashboard, privacy</span>
             </a>
           </h5>
@@ -82,11 +82,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
             <a href="{{ route('settings.security.index') }}">
               <i class="fa fa-lock fa-4x" aria-hidden="true"></i>
               <br><br>
-              Security
+              <span class="name">Security</span>
               <span class="keywords" aria-hidden="true" style="display:none">password, passwords, requirements, two factor, two-factor, common passwords, remote login, logout, authentication</span>
             </a>
           </h5>
@@ -98,11 +98,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
             <a href="{{ route('groups.index') }}">
               <i class="fa fa-group fa-4x" aria-hidden="true"></i>
               <br><br>
-              Groups
+              <span class="name">Groups</span>
               <span class="keywords" aria-hidden="true" style="display:none">permissions, permission groups, authorization</span>
               </a>
           </h5>
@@ -115,11 +115,12 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
             <a href="{{ route('settings.localization.index') }}">
               <i class="fa fa-globe fa-4x" aria-hidden="true"></i>
               <br><br>
-              Localization
+              <span class="name">Localization</span>
+              <span class="keywords" aria-hidden="true" style="display:none">localization, currency, local, locale, time zone, timezone, international, internatinalization, language, languages, translation</span>
             </a>
           </h5>
           <p class="help-block">Language, date display</p>
@@ -132,11 +133,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
             <a href="{{ route('settings.alerts.index') }}">
               <i class="fa fa-bell fa-4x" aria-hidden="true"></i>
               <br><br>
-              Notifications
+              <span class="name">Notifications</span>
             </a>
           </h5>
           <p class="help-block">Email alerts</p>
@@ -147,11 +148,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
             <a href="{{ route('settings.slack.index') }}">
               <i class="fa fa-slack fa-4x" aria-hidden="true"></i>
               <br><br>
-              Slack
+              <span class="name">Slack</span>
             </a>
           </h5>
           <p class="help-block">Slack settings</p>
@@ -162,11 +163,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
             <a href="{{ route('settings.asset_tags.index') }}">
               <i class="fa fa-list-ol fa-4x" aria-hidden="true"></i>
               <br><br>
-             Asset Tags
+              <span class="name">Asset Tags</span>
             </a>
           </h5>
           <p class="help-block">Incrementing and prefixes</p>
@@ -177,11 +178,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
             <a href="{{ route('settings.barcodes.index') }}">
               <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
               <br><br>
-              Barcodes
+              <span class="name">Barcodes</span>
             </a>
           </h5>
           <p class="help-block">Barcode &amp; QR settings</p>
@@ -192,11 +193,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
             <a href="{{ route('settings.labels.index') }}">
               <i class="fa fa-tags fa-4x" aria-hidden="true"></i>
               <br><br>
-              Labels
+              <span class="name">Labels</span>
             </a>
           </h5>
           <p class="help-block">Label sizes &amp; settings</p>
@@ -208,11 +209,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
             <a href="{{ route('settings.ldap.index') }}">
               <i class="fa fa-sitemap fa-4x" aria-hidden="true"></i>
               <br><br>
-              LDAP
+              <span class="name">LDAP</span>
             </a>
           </h5>
           <p class="help-block">LDAP/Active Directory</p>
@@ -223,11 +224,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
             <a href="{{ route('settings.backups.index') }}">
               <i class="fa fa-cloud-download fa-4x" aria-hidden="true"></i>
               <br><br>
-              Backups
+              <span class="name">Backups</span>
             </a>
           </h5>
           <p class="help-block">Download files &amp; Data</p>
@@ -239,11 +240,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
           <a href="{{ route('settings.oauth.index') }}">
             <i class="fa fa-user-secret fa-4x" aria-hidden="true"></i>
             <br><br>
-            OAuth
+            <span class="name">OAuth</span>
           </a>
           </h5>
           <p class="help-block">Oauth Endpoint Settings</p>
@@ -255,13 +256,13 @@
       <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
         <div class="box box-default">
           <div class="box-body text-center">
-            <h5  class="name">
-            <a href="{{ route('settings.phpinfo.index') }}">
+            <h5>
+              <a href="{{ route('settings.phpinfo.index') }}">
                 <i class="fa fa-server fa-4x" aria-hidden="true"></i>
-              <br><br>
-              PHP
-              <span class="keywords" aria-hidden="true" style="display:none">phpinfo</span>
-            </a>
+                <br><br>
+                <span class="name">PHP</span>
+                <span class="keywords" aria-hidden="true" style="display:none">phpinfo, system, info</span>
+              </a>
             </h5>
             <p class="help-block">PHP System Info</p>
           </div>
@@ -272,11 +273,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-danger">
         <div class="box-body text-center">
-          <h5  class="name">
+          <h5>
             <a href="{{ route('settings.purge.index') }}">
               <i class="fa fa-trash fa-4x" aria-hidden="true"></i>
               <br><br>
-              Purge
+              <span class="name">Purge</span>
               <span class="keywords" aria-hidden="true" style="display:none">permanently delete</span>
             </a>
           </h5>
@@ -285,6 +286,8 @@
       </div>
     </div>
 
+
+    </div>
   </div>
 
 
