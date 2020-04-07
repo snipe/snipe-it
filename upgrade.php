@@ -109,6 +109,10 @@ echo "--------------------------------------------------------\n\n";
 // Composer install
 if (file_exists('composer.phar')) {
     echo "-- Local composer.phar detected, so we'll use that.\n\n";
+    echo "-- Updating local composer.phar\n\n";
+    $composer_update = shell_exec('php composer.phar self-update');
+    echo $composer_update."\n\n";
+
     $composer_dump = shell_exec('php composer.phar dump');
     $composer = shell_exec('php composer.phar install --no-dev --prefer-source');
 
