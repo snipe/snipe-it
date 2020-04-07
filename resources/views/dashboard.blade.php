@@ -33,7 +33,7 @@
     <!-- small box -->
     <div class="small-box bg-teal">
       <div class="inner">
-        <h2>{{ number_format($counts['asset']) }}</h2>
+        <h3>{{ number_format($counts['asset']) }}</h3>
         <p>{{ trans('general.total_assets') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
@@ -49,7 +49,7 @@
     <!-- small box -->
     <div class="small-box bg-maroon">
       <div class="inner">
-        <h2>{{ number_format($counts['license']) }}</h2>
+        <h3>{{ number_format($counts['license']) }}</h3>
         <p>{{ trans('general.total_licenses') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
@@ -66,7 +66,7 @@
     <!-- small box -->
     <div class="small-box bg-orange">
       <div class="inner">
-        <h2> {{ number_format($counts['accessory']) }}</h2>
+        <h3> {{ number_format($counts['accessory']) }}</h3>
           <p>{{ trans('general.total_accessories') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
@@ -82,7 +82,7 @@
     <!-- small box -->
     <div class="small-box bg-purple">
       <div class="inner">
-        <h2> {{ number_format($counts['consumable']) }}</h2>
+        <h3> {{ number_format($counts['consumable']) }}</h3>
           <p>{{ trans('general.total_consumables') }}</p>
       </div>
       <div class="icon" aria-hidden="true">
