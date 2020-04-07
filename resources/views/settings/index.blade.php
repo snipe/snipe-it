@@ -31,11 +31,13 @@
   <div class="row" id="setting-list">
 
     <div class="col-md-3 col-md-offset-9 form-group">
-      <form>
+      <form onsubmit="return false;">
 
         <div class="btn-group">
           <input id="searchinput" name="search" type="search" class="search form-control" placeholder="Filter by setting keyword">
           <span id="searchclear" class="fa fa-times" aria-hidden="true"></span>
+          <button type="submit" disabled style="display: none" aria-hidden="true"></button>
+
         </div>
 
       </form>
