@@ -11,16 +11,47 @@
 
 
 
-  <div class="row">
+  <style>
+    #searchinput {
+      width: 200px;
+    }
+    #searchclear {
+      position: absolute;
+      right: 5px;
+      top: 0;
+      bottom: 0;
+      height: 14px;
+      margin: auto;
+      font-size: 14px;
+      cursor: pointer;
+      color: #ccc;
+    }
+  </style>
+
+  <div class="row" id="setting-list">
+
+    <div class="col-md-3 col-md-offset-9 form-group">
+      <form>
+
+        <div class="btn-group">
+          <input id="searchinput" name="search" type="search" class="search form-control" placeholder="Filter by setting keyword">
+          <span id="searchclear" class="fa fa-times" aria-hidden="true"></span>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="list">
 
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5 class="name">
           <a href="{{ route('settings.branding.index') }}">
             <i class="fa fa-copyright fa-4x" aria-hidden="true"></i>
             <br><br>
             Branding
+            <span class="keywords" aria-hidden="true" style="display:none">footer, logo, print, theme, skin, header, colors, color, css</span>
           </a>
           </h5>
           <p class="help-block">Logo, Site Name</p>
@@ -32,11 +63,12 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5 class="name">
             <a href="{{ route('settings.general.index') }}">
               <i class="fa fa-wrench fa-4x" aria-hidden="true"></i>
               <br><br>
-              General Settings
+             General Settings
+              <span class="keywords" aria-hidden="true" style="display:none">company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula,  tos, dashboard, privacy</span>
             </a>
           </h5>
           <p class="help-block">Default EULA and more</p>
@@ -48,11 +80,12 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
             <a href="{{ route('settings.security.index') }}">
               <i class="fa fa-lock fa-4x" aria-hidden="true"></i>
               <br><br>
               Security
+              <span class="keywords" aria-hidden="true" style="display:none">password, passwords, requirements, two factor, two-factor, common passwords, remote login, logout, authentication</span>
             </a>
           </h5>
           <p class="help-block">Two-factor, Password Restrictions</p>
@@ -63,11 +96,12 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
             <a href="{{ route('groups.index') }}">
               <i class="fa fa-group fa-4x" aria-hidden="true"></i>
               <br><br>
               Groups
+              <span class="keywords" aria-hidden="true" style="display:none">permissions, permission groups, authorization</span>
               </a>
           </h5>
           <p class="help-block">Account permission groups</p>
@@ -79,7 +113,7 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
             <a href="{{ route('settings.localization.index') }}">
               <i class="fa fa-globe fa-4x" aria-hidden="true"></i>
               <br><br>
@@ -96,7 +130,7 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
             <a href="{{ route('settings.alerts.index') }}">
               <i class="fa fa-bell fa-4x" aria-hidden="true"></i>
               <br><br>
@@ -111,7 +145,7 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
             <a href="{{ route('settings.slack.index') }}">
               <i class="fa fa-slack fa-4x" aria-hidden="true"></i>
               <br><br>
@@ -126,11 +160,11 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
             <a href="{{ route('settings.asset_tags.index') }}">
               <i class="fa fa-list-ol fa-4x" aria-hidden="true"></i>
               <br><br>
-              Asset Tags
+             Asset Tags
             </a>
           </h5>
           <p class="help-block">Incrementing and prefixes</p>
@@ -141,7 +175,7 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
             <a href="{{ route('settings.barcodes.index') }}">
               <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
               <br><br>
@@ -156,7 +190,7 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
             <a href="{{ route('settings.labels.index') }}">
               <i class="fa fa-tags fa-4x" aria-hidden="true"></i>
               <br><br>
@@ -172,7 +206,7 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
             <a href="{{ route('settings.ldap.index') }}">
               <i class="fa fa-sitemap fa-4x" aria-hidden="true"></i>
               <br><br>
@@ -187,7 +221,7 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
             <a href="{{ route('settings.backups.index') }}">
               <i class="fa fa-cloud-download fa-4x" aria-hidden="true"></i>
               <br><br>
@@ -203,7 +237,7 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-default">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
           <a href="{{ route('settings.oauth.index') }}">
             <i class="fa fa-user-secret fa-4x" aria-hidden="true"></i>
             <br><br>
@@ -219,11 +253,12 @@
       <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
         <div class="box box-default">
           <div class="box-body text-center">
-            <h5>
+            <h5  class="name">
             <a href="{{ route('settings.phpinfo.index') }}">
                 <i class="fa fa-server fa-4x" aria-hidden="true"></i>
               <br><br>
               PHP
+              <span class="keywords" aria-hidden="true" style="display:none">phpinfo</span>
             </a>
             </h5>
             <p class="help-block">PHP System Info</p>
@@ -235,11 +270,12 @@
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-danger">
         <div class="box-body text-center">
-          <h5>
+          <h5  class="name">
             <a href="{{ route('settings.purge.index') }}">
               <i class="fa fa-trash fa-4x" aria-hidden="true"></i>
               <br><br>
               Purge
+              <span class="keywords" aria-hidden="true" style="display:none">permanently delete</span>
             </a>
           </h5>
           <p class="help-block">Purge Deleted Records</p>
@@ -304,7 +340,26 @@
   </div><!--/col-md-8-->
 </div><!--/row-->
 
+  @section('moar_scripts')
+<script nonce="{{ csrf_token() }}">
 
+
+
+  var options = {
+    valueNames: [ 'name', 'keywords', 'summary', 'help-block']
+  };
+
+  var userList = new List('setting-list', options);
+
+  $("#searchclear").click(function(){
+    $("#searchinput").val('');
+    userList.search();
+  });
+
+
+
+</script>
+  @endsection
 
 @stop
 

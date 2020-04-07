@@ -7140,6 +7140,14 @@
         "pify": "^3.0.0"
       }
     },
+    "list.js": {
+      "version": "1.5.0",
+      "resolved": "https://registry.npmjs.org/list.js/-/list.js-1.5.0.tgz",
+      "integrity": "sha1-pMv8goHd78Av2y0wyHSL+uJfvNo=",
+      "requires": {
+        "string-natural-compare": "^2.0.2"
+      }
+    },
     "load-json-file": {
       "version": "1.1.0",
       "resolved": "https://registry.npmjs.org/load-json-file/-/load-json-file-1.1.0.tgz",
@@ -11913,6 +11921,11 @@
       "version": "1.1.0",
       "resolved": "https://registry.npmjs.org/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz",
       "integrity": "sha1-J5siXfHVgrH1TmWt3UNS4Y+qBxM="
+    },
+    "string-natural-compare": {
+      "version": "2.0.3",
+      "resolved": "https://registry.npmjs.org/string-natural-compare/-/string-natural-compare-2.0.3.tgz",
+      "integrity": "sha512-4Kcl12rNjc+6EKhY8QyDVuQTAlMWwRiNbsxnVwBUKFr7dYPQuXVrtNU4sEkjF9LHY0AY6uVbB3ktbkIH4LC+BQ=="
     },
     "string-width": {
       "version": "2.1.1",
