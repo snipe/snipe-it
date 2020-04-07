@@ -38,9 +38,7 @@
     </script>
 
 
-      @if (($snipeSettings) && ($snipeSettings->skin!=''))
-          <link rel="stylesheet" href="{{ url('css/skins/skin-'.$snipeSettings->skin) }}.css">
-      @endif
+      <link rel="stylesheet" href="{{ url('css/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css') }}">
 
     <style nonce="{{ csrf_token() }}">
         @if (($snipeSettings) && ($snipeSettings->header_color!=''))
@@ -92,14 +90,10 @@
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
 
-      @if ($snipeSettings->load_remote=='1')
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js" integrity="sha384-qFIkRsVO/J5orlMvxK1sgAt2FXT67og+NyFTITYzvbIP1IJavVEKZM7YWczXkwpB" crossorigin="anonymous"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
 
-       @else
-            <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
-            <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
-       @endif
+        <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
+        <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
+
        <![endif]-->
   </head>
   <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
