@@ -121,6 +121,10 @@ class AssetsController extends Controller
             $assets->where('assets.location_id', '=', $request->input('location_id'));
         }
 
+        if ($request->filled('rtd_location_id')) {
+            $assets->where('assets.rtd_location_id', '=', $request->input('rtd_location_id'));
+        }
+
         if ($request->filled('supplier_id')) {
             $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
         }
