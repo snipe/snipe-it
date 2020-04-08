@@ -645,14 +645,24 @@ class SettingsController extends Controller
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
-        $setting->slack_endpoint = $request->input('slack_endpoint');
-        $setting->slack_channel = $request->input('slack_channel');
-        $setting->slack_botname = $request->input('slack_botname');
+        $validatedData = $request->validate([
+            'slack_endpoint'   => 'url|required_with:slack_channel|nullable',
+            'slack_channel'   => 'regex:/(?<!\w)#\w+/|required_with:slack_endpoint|nullable',
+            'slack_botname'   => 'string|nullable',
+        ]);
 
-        if ($setting->save()) {
+        if ($validatedData) {
+
+            $setting->slack_endpoint = $request->input('slack_endpoint');
+            $setting->slack_channel = $request->input('slack_channel');
+            $setting->slack_botname = $request->input('slack_botname');
+
+            $setting->save();
             return redirect()->route('settings.index')
                 ->with('success', trans('admin/settings/message.update.success'));
+
         }
+
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
 
     }
