@@ -17,7 +17,7 @@
 
                     <div class="box login-box" style="width: 100%">
                         <div class="box-header">
-                            <h3 class="box-title"> {{ trans('auth/general.reset_password')  }}</h3>
+                            <h2 class="box-title"> {{ trans('auth/general.reset_password')  }}</h2>
                         </div>
 
 
@@ -32,29 +32,29 @@
                                     <input type="hidden" name="token" value="{{ $token }}">
 
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <label class="col-md-4 control-label">{{ trans('admin/users/table.email')  }}</label>
+                                        <label class="col-md-4 control-label" for="email">{{ trans('admin/users/table.email')  }}</label>
 
                                         <div class="col-md-6">
-                                            <input type="email" class="form-control" name="email" maxlength="250" value="{{ $email or old('email') }}">
-                                            {!! $errors->first('email', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                            <input type="email" class="form-control" name="email" maxlength="250" value="{{ $email or old('email') }}" aria-label="email">
+                                            {!! $errors->first('email', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
 
                             </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">{{ trans('admin/users/table.password')  }}</label>
+                            <label class="col-md-4 control-label" for="password">{{ trans('admin/users/table.password')  }}</label>
 
                             <div class="col-md-6">
-                                <input type="password" class="form-control" name="password">
-                                {!! $errors->first('password', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                <input type="password" class="form-control" name="password" aria-label="password">
+                                {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">{{ trans('admin/users/table.password_confirm')  }}</label>
+                            <label class="col-md-4 control-label" for="password_confirmation">{{ trans('admin/users/table.password_confirm')  }}</label>
                             <div class="col-md-6">
-                                <input type="password" class="form-control" name="password_confirmation">
-                                {!! $errors->first('password_confirmation', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                <input type="password" class="form-control" name="password_confirmation" aria-label="password_confirmation">
+                                {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
 
                             </div>
                         </div>

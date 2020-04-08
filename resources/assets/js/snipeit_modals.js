@@ -11,14 +11,14 @@
 
  Create a Button looking like this:
 
- <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-select='assigned_to' class="btn btn-sm btn-default">New</a>
+ <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-select='assigned_to' class="btn btn-sm btn-primary">New</a>
 
  If you don't have access to Blade commands (like {{ and }}, etc), you can hard-code a URL as the 'href'
 
  data-toggle="modal" - required for Bootstrap Modals
  data-target="#createModal" - fixed ID for the modal, do not change
  data-select="assigned_to" - What is the *ID* of the select-dropdown that you're going to be adding to, if the modal-create was a success? Be on the lookout for duplicate ID's, it will confuse this library!
- class="btn btn-sm btn-default" - makes it look button-ey, feel free to change :)
+ class="btn btn-sm btn-primary" - makes it look button-ey, feel free to change :)
  
  If you want to pass additional variables to the modal (In the Category Create one, for example, you can pass category_id), you can encode them as URL variables in the href
  
@@ -160,7 +160,7 @@ function formatDatalist (datalist) {
     var markup = "<div class='clearfix'>" ;
     markup +="<div class='pull-left' style='padding-right: 10px;'>";
     if (datalist.image) {
-        markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;'></div>";
+        markup += "<div style='width: 30px;'><img src='" + datalist.image + "' alt='"+ datalist.tex + "' style='max-height: 20px; max-width: 30px;'></div>";
     } else {
         markup += "<div style='height: 20px; width: 30px;'></div>";
     }

@@ -8,8 +8,8 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
         <!-- this is a hack to prevent Chrome from trying to autocomplete fields -->
-        <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
-        <input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
+        <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" aria-hidden="true">
+        <input type="password" name="password_fake" id="password_fake" value="" style="display:none;" aria-hidden="true">
 
         <div class="container">
             <div class="row">
@@ -18,7 +18,7 @@
 
                     <div class="box login-box">
                         <div class="box-header">
-                            <h3 class="box-title"> {{ trans('auth/general.login_prompt')  }}</h3>
+                            <h1 class="box-title"> {{ trans('auth/general.login_prompt')  }}</h1>
                         </div>
 
 
@@ -41,13 +41,16 @@
 
 
                                     <fieldset>
+
                                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                                            <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text"  autocomplete="off" autofocus>
-                                            {!! $errors->first('username', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                            <label for="username">{{ trans('admin/users/table.username')  }}</label>
+                                            <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" id="username" autocomplete="off" autofocus>
+                                            {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                         </div>
                                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                            <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" autocomplete="off">
-                                            {!! $errors->first('password', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                            <label for="password">{{ trans('admin/users/table.password')  }}</label>
+                                            <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" id="password" autocomplete="off">
+                                            {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                         </div>
                                         <div class="checkbox">
                                             <label>

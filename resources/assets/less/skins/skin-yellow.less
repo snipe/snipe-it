@@ -1,10 +1,9 @@
 /*
  * Skin: Yellow
- * ------------
+ * ----------
  */
-
-@import "../../bootstrap-less/mixins.less";
-@import "../../bootstrap-less/variables.less";
+@import "../bootstrap-less/mixins.less";
+@import "../bootstrap-less/variables.less";
 @import "../variables.less";
 @import "../mixins.less";
 
@@ -19,11 +18,11 @@
           background-color: darken(@yellow, 5%);
         }
       }
-      @media(max-width: @screen-header-collapse) {
+      @media (max-width: @screen-header-collapse) {
         .dropdown-menu {
           li {
             &.divider {
-              background-color: rgba(255,255,255,0.1);
+              background-color: rgba(255, 255, 255, 0.1);
             }
             a {
               color: #fff;
@@ -36,9 +35,6 @@
       }
     }
     //Logo
-    .logo {
-      .logo-variant(darken(@yellow, 5%));
-    }
 
     li.user-header {
       background-color: @yellow;
@@ -52,4 +48,58 @@
 
   //Create the sidebar skin
   .skin-dark-sidebar(@yellow);
+}
+
+.skin-yellow.layout-top-nav .main-header > .logo {
+  .logo-variant {
+    background-color: none;
+  }
+}
+
+
+
+.btn, .btn:hover {
+
+
+  &.btn-primary, .btn-primary:link {
+    background-color: darken(@yellow, 10%);
+    border-color: darken(@yellow, 20%);
+    color: #fff;
+  }
+
+
+  &a.btn-primary:hover {
+    background-color: darken(@yellow, 20%);
+    border-color: darken(@yellow, 20%);
+    color: #fff;
+  }
+
+  &.btn-white:link {
+    background-color: darken(@yellow, 10%);
+    color: #fff;
+  }
+
+  &.btn-white:hover {
+    background-color: darken(@yellow, 30%);
+    color: #fff;
+  }
+}
+
+
+a {
+  color: @yellow;
+  &:hover {
+    color: darken(@yellow, 20%);
+  }
+  &:visited {
+    color: @yellow;
+  }
+}
+
+.text-primary {
+  color: darken(@yellow, 20%);
+}
+
+.fixed-table-container tbody .selected td {
+  background-color: #fff8af;
 }

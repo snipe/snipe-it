@@ -750,7 +750,7 @@
             html.push('<tr>');
 
             if (i === 0 && !that.options.cardView && that.options.detailView) {
-                html.push(sprintf('<th class="detail" rowspan="%s"><div class="fht-cell"></div></th>',
+                html.push(sprintf('<th class="detail" rowspan="%s" scope="col"><div class="fht-cell"></div></th>',
                     that.options.columns.length));
             }
 
@@ -803,7 +803,7 @@
                     visibleColumns[column.field] = column;
                 }
 
-                html.push('<th' + sprintf(' title="%s"', column.titleTooltip),
+                html.push('<th scope="col"' + sprintf(' title="%s"', column.titleTooltip),
                     column.checkbox || column.radio ?
                         sprintf(' class="bs-checkbox %s"', column['class'] || '') :
                         class_,
@@ -820,7 +820,7 @@
 
                 if (column.checkbox) {
                     if (!that.options.singleSelect && that.options.checkboxHeader) {
-                        text = '<input name="btSelectAll" type="checkbox" />';
+                        text = '<label><span class="sr-only">Select All</span><input name="btSelectAll" type="checkbox"></label>';
                     }
                     that.header.stateField = column.field;
                 }
@@ -1078,7 +1078,7 @@
                 sprintf(' btn-%s', this.options.iconSize) +
                 '" type="button" name="refresh" aria-label="refresh" title="%s">',
                 this.options.formatRefresh()),
-                sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.refresh),
+                sprintf('<i class="%s %s"></i><span class="sr-only">Refresh</span>', this.options.iconsPrefix, this.options.icons.refresh),
                 '</button>');
         }
 
@@ -1088,7 +1088,7 @@
                 sprintf(' btn-%s', this.options.iconSize) +
                 '" type="button" name="toggle" aria-label="toggle" title="%s">',
                 this.options.formatToggle()),
-                sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.toggle),
+                sprintf('<i class="%s %s"></i><span class="sr-only">Toggle</span>', this.options.iconsPrefix, this.options.icons.toggle),
                 '</button>');
         }
 
@@ -1100,6 +1100,7 @@
                 sprintf(' btn-%s', this.options.iconSize) +
                 ' dropdown-toggle" data-toggle="dropdown">',
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.columns),
+                ' <span class="sr-only">Select Columns</span>',
                 ' <span class="caret"></span>',
                 '</button>',
                 '<ul class="dropdown-menu" role="menu">');
@@ -1116,8 +1117,8 @@
                 var checked = column.visible ? ' checked="checked"' : '';
 
                 if (column.switchable) {
-                    html.push(sprintf('<li role="menuitem">' +
-                        '<label><input type="checkbox" data-field="%s" value="%s"%s> %s</label>' +
+                    html.push(sprintf('<li role="menuitem" style="padding-left: 5px;">' +
+                        '<fieldset><label><input type="checkbox" aria-label="' + column.title + '" data-field="%s" value="%s"%s> %s</label></fieldset>' +
                         '</li>', column.field, i, checked, column.title));
                     switchableCount++;
                 }
@@ -1172,7 +1173,7 @@
             html = [];
             html.push(
                 '<div class="pull-' + this.options.searchAlign + ' search">',
-                sprintf('<input class="form-control' +
+                sprintf('<label for="search" class="sr-only">Search</label><input name="search" aria-label="search" class="form-control' +
                     sprintf(' input-%s', this.options.iconSize) +
                     '" type="text" placeholder="%s">',
                     this.options.formatSearch()),
@@ -1368,6 +1369,7 @@
                 '<span class="page-size">',
                 $allSelected ? this.options.formatAllRows() : this.options.pageSize,
                 '</span>',
+                ' <span class="sr-only">Page</span>',
                 ' <span class="caret"></span>',
                 '</button>',
                 '<ul class="dropdown-menu" role="menu">'
@@ -1744,7 +1746,7 @@
                 type = column.radio ? 'radio' : type;
 
                 text = [sprintf(that.options.cardView ?
-                    '<div class="card-view %s">' : '<td class="bs-checkbox %s">', column['class'] || ''),
+                    '<div class="card-view %s">' : '<td class="bs-checkbox %s"><label><span class="sr-only">Select</span>', column['class'] || ''),
                     '<input' +
                     sprintf(' data-index="%s"', i) +
                     sprintf(' name="%s"', that.options.selectItemName) +
@@ -1754,7 +1756,7 @@
                     (value_ || value && value.checked) ? 'checked' : undefined) +
                     sprintf(' disabled="%s"', !column.checkboxEnabled ||
                     (value && value.disabled) ? 'disabled' : undefined) +
-                    ' />',
+                    ' /></label>',
                     that.header.formatters[j] && typeof value === 'string' ? value : '',
                     that.options.cardView ? '</div>' : '</td>'
                 ].join('');

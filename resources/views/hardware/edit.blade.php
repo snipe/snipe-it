@@ -18,11 +18,11 @@
     <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
     <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
       @if  ($item->id)
-      <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', $item->asset_tag) }}" />
+      <input class="form-control" type="text" name="asset_tag" aria-label="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', $item->asset_tag) }}" />
       @else
-      <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}">
+      <input class="form-control" type="text" name="asset_tag" aria-label="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}">
       @endif
-      {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+      {!! $errors->first('asset_tag', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
   </div>
 
@@ -83,10 +83,10 @@
       <div class="col-md-5">
           <label class="control-label" for="image_delete">
           <input type="checkbox" value="1" name="image_delete" id="image_delete" class="minimal" {{ Input::old('image_delete') == '1' ? ' checked="checked"' : '' }}>
-          {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+          {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
           </label>
           <div style="margin-top: 0.5em">
-              <img src="{{ url('/') }}/uploads/assets/{{ $item->image }}" class="img-responsive"/>
+              <img src="{{ url('/') }}/uploads/assets/{{ $item->image }}" class="img-responsive" alt="Existing uploaded image thumbnail">
           </div>
       </div>
   </div>

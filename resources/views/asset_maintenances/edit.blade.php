@@ -33,11 +33,11 @@
 
     <div class="box box-default">
       <div class="box-header with-border">
-        <h3 class="box-title">
+        <h2 class="box-title">
           @if ($item)
           {{ $item->name }}
           @endif
-        </h3>
+        </h2>
       </div><!-- /.box-header -->
 
       <div class="box-body">
@@ -52,7 +52,7 @@
           </label>
           <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'title')) ? ' required' : '' }}">
             <input class="form-control" type="text" name="title" id="title" value="{{ Input::old('title', $item->title) }}" />
-            {!! $errors->first('title', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('title', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -63,9 +63,9 @@
           <div class="input-group col-md-3{{  (\App\Helpers\Helper::checkIfRequired($item, 'start_date')) ? ' required' : '' }}">
             <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
               <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="start_date" id="start_date" value="{{ Input::old('start_date', $item->start_date) }}">
-              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
             </div>
-            {!! $errors->first('start_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('start_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -78,9 +78,9 @@
           <div class="input-group col-md-3{{  (\App\Helpers\Helper::checkIfRequired($item, 'completion_date')) ? ' required' : '' }}">
             <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
               <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="completion_date" id="completion_date" value="{{ Input::old('completion_date', $item->completion_date) }}">
-              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
             </div>
-            {!! $errors->first('completion_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('completion_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -108,7 +108,7 @@
                 @endif
               </span>
               <input class="col-md-2 form-control" type="text" name="cost" id="cost" value="{{ Input::old('cost', \App\Helpers\Helper::formatCurrencyOutput($item->cost)) }}" />
-              {!! $errors->first('cost', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              {!! $errors->first('cost', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
         </div>
@@ -118,13 +118,13 @@
           <label for="notes" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.notes') }}</label>
           <div class="col-md-7">
             <textarea class="col-md-6 form-control" id="notes" name="notes">{{ Input::old('notes', $item->notes) }}</textarea>
-            {!! $errors->first('notes', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
       </div> <!-- .box-body -->
 
       <div class="box-footer text-right">
-        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
       </div>
     </div> <!-- .box-default -->
     </form>

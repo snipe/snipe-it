@@ -21,7 +21,7 @@
           </label>
           <div class="col-md-8 required">
             <input class="form-control" type="text" name="first_name" id="first_name" value="{{ Input::old('first_name', $user->first_name) }}" />
-            {!! $errors->first('first_name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -32,7 +32,7 @@
           </label>
           <div class="col-md-8 required">
             <input class="form-control" type="text" name="last_name" id="last_name" value="{{ Input::old('last_name', $user->last_name) }}" />
-            {!! $errors->first('last_name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -50,7 +50,7 @@
 
             @if (!config('app.lock_passwords'))
               {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
-              {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
+              {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
             @else
               <p class="help-block">{{ trans('general.feature_disabled') }}</p>
             @endif
@@ -63,7 +63,7 @@
           <label class="col-md-3 control-label" for="phone">{{ trans('admin/users/table.phone') }}</label>
           <div class="col-md-4">
             <input class="form-control" type="text" name="phone" id="phone" value="{{ Input::old('phone', $user->phone) }}" />
-            {!! $errors->first('phone', '<span class="alert-msg">:message</span>') !!}
+            {!! $errors->first('phone', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
           </div>
         </div>
 
@@ -74,7 +74,7 @@
           <label for="website" class="col-md-3 control-label">{{ trans('general.website') }}</label>
           <div class="col-md-8">
             <input class="form-control" type="text" name="website" id="website" value="{{ Input::old('website', $user->website) }}" />
-            {!! $errors->first('website', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('website', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -85,9 +85,9 @@
           </label>
           <div class="col-md-8">
             <input class="form-control" type="text" name="gravatar" id="gravatar" value="{{ Input::old('gravatar', $user->gravatar) }}" />
-            {!! $errors->first('gravatar', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('gravatar', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             <p>
-              <img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" width="30" height="30" />
+              <img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" width="30" height="30" alt="{{ $user->present()->fullName() }} avatar image">
               <a href="http://gravatar.com"><small>Change your avatar at Gravatar.com</small></a>.
             </p>
           </div>
@@ -99,8 +99,8 @@
             <label class="col-md-3 control-label" for="avatar_delete">{{ trans('general.avatar_delete') }}</label>
             <div class="col-md-8">
               {{ Form::checkbox('avatar_delete') }}
-              <img src="{{ url('/') }}/uploads/avatars/{{ $user->avatar }}" class="avatar img-circle">
-              {!! $errors->first('avatar_delete', '<span class="alert-msg">:message</span>') !!}
+              <img src="{{ url('/') }}/uploads/avatars/{{ $user->avatar }}" class="avatar img-circle" alt="{{ $user->present()->fullName() }} avatar image">
+              {!! $errors->first('avatar_delete', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
             </div>
           </div>
         @endif
@@ -113,7 +113,7 @@
               <input type="file" name="avatar" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
             </label>
             <p class="help-block">{{ trans('general.image_filetypes_help') }}</p>
-            {!! $errors->first('avatar', '<span class="alert-msg">:message</span>') !!}
+            {!! $errors->first('avatar', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
           </div>
         </div>
 
@@ -146,7 +146,7 @@
       </div> <!-- .box-body -->
       <div class="box-footer text-right">
         <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
       </div>
     </div> <!-- .box-default -->
     {{ Form::close() }}

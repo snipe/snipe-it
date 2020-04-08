@@ -198,7 +198,7 @@ class AccessoriesController extends Controller
         if (isset($accessory->id)) {
             return view('accessories/view', compact('accessory'));
         }
-        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist', compact('id')));
+        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
     }
 
   /**

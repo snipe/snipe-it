@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('settings.index') }}" class="btn btn-default"> {{ trans('general.back') }}</a>
+    <a href="{{ route('settings.index') }}" class="btn btn-primary"> {{ trans('general.back') }}</a>
 @stop
 
 
@@ -31,9 +31,9 @@
 
             <div class="panel box box-default">
                 <div class="box-header with-border">
-                    <h4 class="box-title">
+                    <h2 class="box-title">
                         <i class="fa fa-slack"></i> Slack
-                    </h4>
+                    </h2>
                 </div>
                 <div class="box-body">
 
@@ -61,7 +61,7 @@
                                 @else
                                     {{ Form::text('slack_endpoint', Input::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX')) }}
                                 @endif
-                                {!! $errors->first('slack_endpoint', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('slack_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -76,7 +76,7 @@
                                 @else
                                     {{ Form::text('slack_channel', Input::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','placeholder' => '#IT-Ops')) }}
                                 @endif
-                                {!! $errors->first('slack_channel', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('slack_channel', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -91,7 +91,7 @@
                                 @else
                                     {{ Form::text('slack_botname', Input::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','placeholder' => 'Snipe-Bot')) }}
                                 @endif
-                                {!! $errors->first('slack_botname', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('slack_botname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -121,7 +121,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

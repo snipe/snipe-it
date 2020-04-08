@@ -22,7 +22,7 @@
       @if ($consumable->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h3 class="box-title"> {{ $consumable->name }}</h3>
+          <h2 class="box-title"> {{ $consumable->name }}</h2>
         </div>
       </div><!-- /.box-header -->
       @endif
@@ -117,7 +117,7 @@
       </div>
     @endif
       <div class="col-md-12" style="padding-bottom: 5px;">
-        <h4>{{ trans('admin/consumables/general.about_consumables_title') }}</h4>
+        <h2>{{ trans('admin/consumables/general.about_consumables_title') }}</h4>
         <p>{{ trans('admin/consumables/general.about_consumables_text') }} </p>
       </div>
   </div> <!-- /.col-md-3-->

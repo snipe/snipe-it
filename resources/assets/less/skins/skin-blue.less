@@ -1,9 +1,9 @@
 /*
- * Skin: Blue
+ * Skin: light-blue
  * ----------
  */
-@import "../../less/bootstrap-less/mixins.less";
-@import "../../less/bootstrap-less/variables.less";
+@import "../bootstrap-less/mixins.less";
+@import "../bootstrap-less/variables.less";
 @import "../variables.less";
 @import "../mixins.less";
 
@@ -54,4 +54,67 @@
   .logo-variant {
     background-color: none;
   }
+}
+
+
+
+.btn, btn-sm, .btn:hover {
+
+
+  &.btn-primary, .btn-primary:link {
+    background-color: darken(@light-blue, 10%);
+    border-color: darken(@light-blue, 20%);
+    color: #fff;
+  }
+
+
+  &a.btn-primary:hover {
+    background-color: darken(@light-blue, 20%);
+    border-color: darken(@light-blue, 20%);
+    color: #fff;
+  }
+
+  &.btn-white:link {
+    background-color: darken(@light-blue, 10%);
+    color: #fff;
+  }
+
+  &.btn-white:hover {
+    background-color: darken(@light-blue, 30%);
+    color: #fff;
+  }
+
+  &.btn-white:visited {
+    background-color: darken(@light-blue, 30%);
+    color: #fff;
+  }
+}
+
+
+
+.btn-warning, .btn-warning:link, a.btn-warning:hover, .btn-warning:link, .btn-warning:visited,
+.btn-danger, .btn-danger:link, a.btn-danger:hover, .btn-danger:link, .btn-danger:visited
+{
+    color: #fff;
+}
+
+
+
+a {
+  color: @light-blue;
+  &:hover {
+    color: darken(@light-blue, 20%);
+  }
+  &:visited {
+    color: @light-blue;
+  }
+}
+
+.text-primary {
+  color: darken(@light-blue, 20%);
+}
+
+
+.fixed-table-container tbody .selected td {
+  background-color: #fff8af;
 }

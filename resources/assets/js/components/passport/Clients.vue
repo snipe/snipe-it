@@ -13,9 +13,9 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span>
+                    <h2>
                         OAuth Clients
-                    </span>
+                    </h2>
 
                     <a class="action-link" @click="showCreateClientForm">
                         Create New Client
@@ -35,8 +35,8 @@
                             <th>Client ID</th>
                             <th>Name</th>
                             <th>Secret</th>
-                            <th></th>
-                            <th></th>
+                            <th><span class="sr-only">Edit</span></th>
+                            <th><span class="sr-only">Delete</span></th>
                         </tr>
                     </thead>
 
@@ -83,7 +83,7 @@
                     <div class="modal-header">
                         <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-                        <h4 class="modal-title">
+                        <h2 class="modal-title">
                             Create Client
                         </h4>
                     </div>
@@ -104,10 +104,10 @@
                         <form class="form-horizontal" role="form">
                             <!-- Name -->
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Name</label>
+                                <label class="col-md-3 control-label" for="create-client-name">Name</label>
 
                                 <div class="col-md-7">
-                                    <input id="create-client-name" type="text" class="form-control"
+                                    <input id="create-client-name" type="text" aria-label="create-client-name" class="form-control"
                                                                 @keyup.enter="store" v-model="createForm.name">
 
                                     <span class="help-block">
@@ -118,10 +118,10 @@
 
                             <!-- Redirect URL -->
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Redirect URL</label>
+                                <label class="col-md-3 control-label" for="redirect">Redirect URL</label>
 
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" name="redirect"
+                                    <input type="text" class="form-control" aria-label="redirect" name="redirect"
                                                     @keyup.enter="store" v-model="createForm.redirect">
 
                                     <span class="help-block">
@@ -151,7 +151,7 @@
                     <div class="modal-header">
                         <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-                        <h4 class="modal-title">
+                        <h2 class="modal-title">
                             Edit Client
                         </h4>
                     </div>
@@ -172,10 +172,10 @@
                         <form class="form-horizontal" role="form">
                             <!-- Name -->
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Name</label>
+                                <label class="col-md-3 control-label" for="edit-client-name">Name</label>
 
                                 <div class="col-md-7">
-                                    <input id="edit-client-name" type="text" class="form-control"
+                                    <input id="edit-client-name" type="text" aria-label="edit-client-name" class="form-control"
                                                                 @keyup.enter="update" v-model="editForm.name">
 
                                     <span class="help-block">
@@ -186,10 +186,10 @@
 
                             <!-- Redirect URL -->
                             <div class="form-group">
-                                <label class="col-md-3 control-label">Redirect URL</label>
+                                <label class="col-md-3 control-label" for="redirect">Redirect URL</label>
 
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" name="redirect"
+                                    <input type="text" class="form-control" name="redirect" aria-label="redirect"
                                                     @keyup.enter="update" v-model="editForm.redirect">
 
                                     <span class="help-block">

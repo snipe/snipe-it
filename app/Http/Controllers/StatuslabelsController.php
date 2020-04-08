@@ -43,7 +43,7 @@ class StatuslabelsController extends Controller
             return view('statuslabels.view')->with('statuslabel', $statuslabel);
         }
 
-        return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.does_not_exist', compact('id')));
+        return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.does_not_exist'));
     }
 
 

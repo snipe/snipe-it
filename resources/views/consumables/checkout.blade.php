@@ -21,7 +21,7 @@
         @if ($consumable->id)
           <div class="box-header with-border">
             <div class="box-heading">
-              <h3 class="box-title">{{ $consumable->name }} </h3>
+              <h2 class="box-title">{{ $consumable->name }} </h2>
             </div>
           </div><!-- /.box-header -->
         @endif
@@ -71,13 +71,13 @@
             <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
             <div class="col-md-7">
               <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $consumable->note) }}</textarea>
-              {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
         </div> <!-- .box-body -->
         <div class="box-footer">
           <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkout') }}</button>
+          <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
        </div>
       </div>
     </form>

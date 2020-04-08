@@ -16,7 +16,7 @@ View Assets for  {{ $user->present()->fullName() }}
         @if ($user->id)
           <div class="box-header with-border">
             <div class="box-heading">
-              <h3 class="box-title"> {{ trans('admin/users/general.assets_user', array('name' => $user->first_name)) }}</h3>
+              <h2 class="box-title"> {{ trans('admin/users/general.assets_user', array('name' => $user->first_name)) }}</h2>
             </div>
           </div><!-- /.box-header -->
         @endif
@@ -67,10 +67,10 @@ View Assets for  {{ $user->present()->fullName() }}
                   <td>{{ $asset->serial }}</td>
                   <td>
                     @if (($asset->image) && ($asset->image!=''))
-                      <img src="{{ url('/') }}/uploads/assets/{{ $asset->image }}" height="50" width="50">
+                      <img src="{{ url('/') }}/uploads/assets/{{ $asset->image }}" height="50" width="50" alt="{{ $asset->present()->name() }}">
 
                     @elseif (($asset->model) && ($asset->model->image!=''))
-                      <img src="{{ url('/') }}/uploads/models/{{ $asset->model->image }}" height="50" width="50">
+                      <img src="{{ url('/') }}/uploads/models/{{ $asset->model->image }}" height="50" width="50" alt="{{ $asset->present()->name() }}">
                     @endif
                   </td>
                 </tr>
@@ -89,7 +89,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @if ($user->id)
         <div class="box-header with-border">
           <div class="box-heading">
-            <h3 class="box-title"> {{ trans('admin/users/general.software_user', array('name' => $user->first_name)) }}</h3>
+            <h2 class="box-title"> {{ trans('admin/users/general.software_user', array('name' => $user->first_name)) }}</h2>
           </div>
         </div><!-- /.box-header -->
       @endif
@@ -147,7 +147,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @if ($user->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h3 class="box-title"> {{ trans('general.consumables') }} </h3>
+          <h2 class="box-title"> {{ trans('general.consumables') }} </h2>
         </div>
       </div><!-- /.box-header -->
       @endif
@@ -199,7 +199,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @if ($user->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h3 class="box-title"> {{ trans('general.accessories') }}</h3>
+          <h2 class="box-title"> {{ trans('general.accessories') }}</h2>
         </div>
       </div><!-- /.box-header -->
       @endif
@@ -250,7 +250,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @if ($user->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h3 class="box-title"> History</h3>
+          <h2 class="box-title"> History</h2>
         </div>
       </div><!-- /.box-header -->
       @endif
@@ -276,7 +276,7 @@ View Assets for  {{ $user->present()->fullName() }}
                 }'>
             <thead>
             <tr>
-              <th data-switchable="true" data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
+              <th data-switchable="true" data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"><span class="sr-only">Icon</span></th>
               <th data-switchable="true" data-visible="true" class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
               <th data-switchable="true" data-visible="true" class="col-sm-3" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
               <th data-switchable="true" data-visible="true" class="col-sm-3" data-field="action_type">{{ trans('general.action') }}</th>

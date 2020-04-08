@@ -1,4 +1,4 @@
-<script src="{{ asset('js/bootstrap-table.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap-table.js') }}"></script>
 <script src="{{ asset('js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
 <script src="{{ asset('js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
 <script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
@@ -59,7 +59,7 @@
             pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
             paginationVAlign: 'both',
             formatLoadingMessage: function () {
-                return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+                return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
             },
 
             icons: {
@@ -159,7 +159,7 @@
                 // Add some overrides for any funny urls we have
                 var dest = destination;
                 if (destination=='fieldsets') {
-                    var dest = 'fields/fieldsets';
+                    var dpolymorphicItemFormatterest = 'fields/fieldsets';
                 }
 
                 return '<nobr><a href="{{ url('/') }}/' + dest + '/' + value.id + '"> ' + value.name + '</a></span>';
@@ -190,11 +190,11 @@
             }
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone"><i class="fa fa-copy"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="fa fa-copy" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update Item"><i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">Update</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
@@ -203,7 +203,7 @@
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
-                    + '<i class="fa fa-trash"></i></a>&nbsp;';
+                    + '<i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span></a>&nbsp;';
             } else {
                 actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
             }
@@ -250,7 +250,7 @@
                 item_icon = 'fa-map-marker';
             }
 
-            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-blue"></i> ' + value.name + '</a></nobr>';
+            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
 
         } else {
             return '';
@@ -527,9 +527,19 @@
     }
 
 
-   function imageFormatter(value) {
+   function imageFormatter(value, row) {
+
+
+
         if (value) {
-            return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
+
+            if (row.name) {
+                var altName = row.name;
+            }
+                else if ((row) && (row.model)) {
+                var altName = row.model.name;
+           }
+            return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="' + altName + '"></a>';
         }
     }
 

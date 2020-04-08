@@ -23,7 +23,7 @@
         <div class="col-md-6">
             <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title"> {{ trans('general.bulkaudit') }} </h3>
+                        <h2 class="box-title"> {{ trans('general.bulkaudit') }} </h2>
                     </div>
                     <div class="box-body">
                     {{csrf_field()}}
@@ -36,7 +36,7 @@
                                     <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag') }}">
 
                                 </div>
-                                {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                {!! $errors->first('asset_tag', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
 
@@ -52,9 +52,9 @@
                             <div class="col-md-9">
                                 <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                                     <input type="text" class="form-control" placeholder="{{ trans('general.next_audit_date') }}" name="next_audit_date" id="next_audit_date" value="{{ Input::old('next_audit_date', $next_audit_date) }}">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                 </div>
-                                {!! $errors->first('next_audit_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
 
@@ -64,7 +64,7 @@
                             {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
                             <div class="col-md-8">
                                 <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note') }}</textarea>
-                                {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
 
@@ -73,7 +73,7 @@
                     </div> <!--/.box-body-->
                     <div class="box-footer">
                         <a class="btn btn-link" href="{{ route('hardware.index') }}"> {{ trans('button.cancel') }}</a>
-                        <button type="submit" id="audit_button" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.audit') }}</button>
+                        <button type="submit" id="audit_button" class="btn btn-success pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.audit') }}</button>
                     </div>
 
 
@@ -87,7 +87,7 @@
         <div class="col-md-6">
             <div class="box box-default" id="audited-div" style="display: none">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> {{ trans('general.bulkaudit_status') }} (<span id="audit-counter">0</span> assets audited) </h3>
+                    <h2 class="box-title"> {{ trans('general.bulkaudit_status') }} (<span id="audit-counter">0</span> assets audited) </h2>
                 </div>
                 <div class="box-body">
 

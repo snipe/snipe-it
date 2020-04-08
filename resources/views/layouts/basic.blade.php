@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
 
@@ -33,6 +33,7 @@
         border-color: {{ $snipeSettings->header_color }};
         }
 
+
         </style>
 
     @endif
@@ -49,7 +50,7 @@
 
     @if (($snipeSettings) && ($snipeSettings->logo!=''))
         <center>
-            <img id="login-logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+            <img id="login-logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}" alt="{{ ($snipeSettings) && ($snipeSettings->site_name) ? $snipeSettings->site_name : 'Snipe-IT' }} logo">
         </center>
     @endif
   <!-- Content -->

@@ -17,7 +17,7 @@
     {{ Form::label('contact', trans('admin/suppliers/table.contact'), array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7">
         {{Form::text('contact', Input::old('contact', $item->contact), array('class' => 'form-control')) }}
-        {!! $errors->first('contact', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+        {!! $errors->first('contact', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
 
@@ -27,7 +27,7 @@
     {{ Form::label('fax', trans('admin/suppliers/table.fax'), array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7">
         {{Form::text('fax', Input::old('fax', $item->fax), array('class' => 'form-control')) }}
-        {!! $errors->first('fax', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+        {!! $errors->first('fax', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
 
@@ -37,7 +37,7 @@
     {{ Form::label('url', trans('admin/suppliers/table.url'), array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7">
         {{Form::text('url', Input::old('url', $item->url), array('class' => 'form-control')) }}
-        {!! $errors->first('url', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+        {!! $errors->first('url', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
 
@@ -51,7 +51,7 @@
     <div class="col-md-5">
         {{ Form::checkbox('image_delete') }}
         <img src="{{ url('/') }}/uploads/suppliers/{{ $item->image }}" />
-        {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+        {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
 </div>
 @endif
@@ -64,7 +64,7 @@
             <input type="file" name="image" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
         </label>
         <p class="help-block">Accepted filetypes are jpg, png, gif and svg</p>
-        {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
+        {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
 </div>
 

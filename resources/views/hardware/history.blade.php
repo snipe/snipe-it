@@ -148,7 +148,7 @@
                     <div class="col-md-12">
                         <div class="box box-default">
                             <div class="box-header with-border">
-                                <h3 class="box-title"> {{ count($status['error']) }} Error Messages </h3>
+                                <h2 class="box-title"> {{ count($status['error']) }} Error Messages </h2>
                             </div>
                             <div class="box-body">
                                 <div style="height : 400px; overflow : auto;">
@@ -175,7 +175,7 @@
                             <div class="col-md-12">
                                 <div class="box box-default">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title"> {{ count($status['success']) }} Success Messages </h3>
+                                        <h2 class="box-title"> {{ count($status['success']) }} Success Messages </h2>
                                     </div>
                                     <div class="box-body">
                                         <div style="height : 400px; overflow : auto;">

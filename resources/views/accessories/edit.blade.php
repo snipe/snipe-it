@@ -29,8 +29,8 @@
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
         <div class="col-md-5">
             {{ Form::checkbox('image_delete') }}
-            <img src="{{ url('/') }}/uploads/accessories/{{ $item->image }}" />
-            {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+            <img src="{{ url('/') }}/uploads/accessories/{{ $item->image }}" alt="{{ $item->name }}">
+            {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
         </div>
     </div>
 @endif

@@ -30,20 +30,20 @@
           </label>
           <div class="col-md-6">
             <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name') }}" />
-            {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
       </div> <!-- /.box-body-->
       <div class="box-footer text-right">
-        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
       </div>
 
     </div> <!-- /.box.box-default-->
     {{ Form::close() }}
   </div>
   <div class="col-md-3">
-    <h4>About Fieldsets</h4>
+    <h2>About Fieldsets</h4>
     <p>Fieldsets work like containers of the custom fields you've created. This allows you to group commonly used custom attributes together for easy associations. </p>
   </div>
 </div>

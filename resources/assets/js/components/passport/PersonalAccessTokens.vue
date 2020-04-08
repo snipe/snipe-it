@@ -14,9 +14,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span>
+                        <h2>
                             Personal Access Tokens
-                        </span>
+                        </h2>
 
                         <a class="action-link" @click="showCreateTokenForm">
                             Create New Token
@@ -35,7 +35,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th></th>
+                                <th><span class="sr-only">Delete</span></th>
                             </tr>
                         </thead>
 
@@ -66,7 +66,7 @@
                     <div class="modal-header">
                         <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-                        <h4 class="modal-title">
+                        <h2 class="modal-title">
                             Create Token
                         </h4>
                     </div>
@@ -87,10 +87,10 @@
                         <form class="form-horizontal" role="form" @submit.prevent="store">
                             <!-- Name -->
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Name</label>
+                                <label class="col-md-4 control-label" for="name">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="create-token-name" type="text" class="form-control" name="name" v-model="form.name">
+                                    <input id="create-token-name" type="text" aria-label="name" class="form-control" name="name" v-model="form.name">
                                 </div>
                             </div>
 
@@ -117,7 +117,7 @@
 
                     <!-- Modal Actions -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn primary" data-dismiss="modal">Close</button>
 
                         <button type="button" class="btn btn-primary" @click="store">
                             Create
@@ -134,7 +134,7 @@
                     <div class="modal-header">
                         <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-                        <h4 class="modal-title">
+                        <h2 class="modal-title">
                             Personal Access Token
                         </h4>
                     </div>

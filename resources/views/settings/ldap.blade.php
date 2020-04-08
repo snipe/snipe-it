@@ -48,7 +48,7 @@
 
             <div class="panel box box-default">
                 <div class="box-header with-border">
-                    <h4 class="box-title">
+                    <h2 class="box-title">
                         <i class="fa fa-sitemap"></i> LDAP/AD
                     </h4>
                 </div>
@@ -70,7 +70,7 @@
                                 @endcan
 
                                 {{ trans('admin/settings/general.ldap_enabled') }}
-                                {!! $errors->first('ldap_enabled', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -87,7 +87,7 @@
                                 @endif
 
                                 {{ trans('admin/settings/general.is_ad') }}
-                                {!! $errors->first('is_ad', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('is_ad', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -106,7 +106,7 @@
 
                                 {{ trans('general.yes') }}
                                 <p class="help-block">{{ trans('admin/settings/general.ldap_pw_sync_help') }}</p>
-                                {!! $errors->first('ldap_pw_sync', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_pw_sync', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -122,7 +122,7 @@
                                     {{ Form::text('ad_domain', Input::old('ad_domain', $setting->ad_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
                                 @endif
                                 <p class="help-block">{{ trans('admin/settings/general.ad_domain_help') }}</p>
-                                {!! $errors->first('ad_domain', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ad_domain', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div><!-- AD Domain -->
 
@@ -138,7 +138,7 @@
                                     {{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control','placeholder' => 'ldap://ldap.example.com')) }}
                                 @endif
                                 <p class="help-block">{{ trans('admin/settings/general.ldap_server_help') }}</p>
-                                {!! $errors->first('ldap_server', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_server', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div><!-- LDAP Server -->
 
@@ -156,7 +156,7 @@
 
 
                                 {{ trans('admin/settings/general.ldap_tls_help') }}
-                                {!! $errors->first('ldap_tls', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_tls', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -174,7 +174,7 @@
 
 
                                 {{ trans('admin/settings/general.ldap_server_cert_ignore') }}
-                                {!! $errors->first('ldap_server_cert_ignore', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_server_cert_ignore', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 <p class="help-block">{{ trans('admin/settings/general.ldap_server_cert_help') }}</p>
                             </div>
                         </div>
@@ -190,7 +190,7 @@
                                 @else
                                     {{ Form::text('ldap_uname', Input::old('ldap_uname', $setting->ldap_uname), array('class' => 'form-control','placeholder' => 'binduser@example.com')) }}
                                 @endif
-                                {!! $errors->first('ldap_uname', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_uname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -205,7 +205,7 @@
                                 @else
                                     {{ Form::password('ldap_pword', array('class' => 'form-control','placeholder' => 'binduserpassword')) }}
                                 @endif
-                                {!! $errors->first('ldap_pword', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_pword', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -220,7 +220,7 @@
                                 @else
                                     {{ Form::text('ldap_basedn', Input::old('ldap_basedn', $setting->ldap_basedn), array('class' => 'form-control','placeholder' => 'cn=users/authorized,dc=example,dc=com')) }}
                                 @endif
-                                {!! $errors->first('ldap_basedn', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_basedn', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -235,7 +235,7 @@
                                 @else
                                     {{ Form::text('ldap_filter', Input::old('ldap_filter', $setting->ldap_filter), array('class' => 'form-control','placeholder' => '&(cn=*)')) }}
                                 @endif
-                                {!! $errors->first('ldap_filter', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_filter', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -250,7 +250,7 @@
                                 @else
                                     {{ Form::text('ldap_username_field', Input::old('ldap_username_field', $setting->ldap_username_field), array('class' => 'form-control','placeholder' => 'samaccountname')) }}
                                 @endif
-                                {!! $errors->first('ldap_username_field', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_username_field', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -265,7 +265,7 @@
                                 @else
                                     {{ Form::text('ldap_lname_field', Input::old('ldap_lname_field', $setting->ldap_lname_field), array('class' => 'form-control','placeholder' => 'sn')) }}
                                 @endif
-                                {!! $errors->first('ldap_lname_field', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_lname_field', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -280,7 +280,7 @@
                                 @else
                                     {{ Form::text('ldap_fname_field', Input::old('ldap_fname_field', $setting->ldap_fname_field), array('class' => 'form-control','placeholder' => 'givenname')) }}
                                 @endif
-                                {!! $errors->first('ldap_fname_field', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_fname_field', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -295,7 +295,7 @@
                                 @else
                                     {{ Form::text('ldap_auth_filter_query', Input::old('ldap_auth_filter_query', $setting->ldap_auth_filter_query), array('class' => 'form-control','placeholder' => '"uid="')) }}
                                 @endif
-                                {!! $errors->first('ldap_auth_filter_query', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_auth_filter_query', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -310,7 +310,7 @@
                                 @else
                                     {{ Form::text('ldap_version', Input::old('ldap_version', $setting->ldap_version), array('class' => 'form-control','placeholder' => '3')) }}
                                 @endif
-                                {!! $errors->first('ldap_version', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_version', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -325,7 +325,7 @@
                                 @else
                                     {{ Form::text('ldap_active_flag', Input::old('ldap_active_flag', $setting->ldap_active_flag), array('class' => 'form-control','placeholder' => '')) }}
                                 @endif
-                                {!! $errors->first('ldap_active_flag', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_active_flag', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -340,7 +340,7 @@
                                 @else
                                     {{ Form::text('ldap_emp_num', Input::old('ldap_emp_num', $setting->ldap_emp_num), array('class' => 'form-control','placeholder' => '')) }}
                                 @endif
-                                {!! $errors->first('ldap_emp_num', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_emp_num', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -355,7 +355,7 @@
                                 @else
                                     {{ Form::text('ldap_email', Input::old('ldap_email', $setting->ldap_email), array('class' => 'form-control','placeholder' => '')) }}
                                 @endif
-                                {!! $errors->first('ldap_email', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('ldap_email', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -423,7 +423,7 @@
                                     {{ Form::text('custom_forgot_pass_url', Input::old('custom_forgot_pass_url', $setting->custom_forgot_pass_url), array('class' => 'form-control','placeholder' => 'https://my.ldapserver-forgotpass.com')) }}
                                 @endif
                                 <p class="help-block">{{ trans('admin/settings/general.custom_forgot_pass_url_help') }}</p>
-                                {!! $errors->first('custom_forgot_pass_url', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('custom_forgot_pass_url', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div><!-- LDAP Server -->
 
@@ -435,7 +435,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

@@ -51,7 +51,7 @@
                             <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
                             <div class="col-md-8">
                                 {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
-                                {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -63,9 +63,9 @@
                             <div class="col-sm-9">
                                 <div class="checkbox">
                                     <label for="activated">
-                                        {{ Form::radio('activated', '', true) }} Do not change activation status <br>
-                                        {{ Form::radio('activated', '1', Input::old('activated')) }}  User is activated<br>
-                                        {{ Form::radio('activated', '0', Input::old('activated')) }}  User is de-activated
+                                        {{ Form::radio('activated', '', true, ['aria-label'=>'activated']) }} Do not change activation status <br>
+                                        {{ Form::radio('activated', '1', Input::old('activated'), ['aria-label'=>'activated']) }}  User is activated<br>
+                                        {{ Form::radio('activated', '0', Input::old('activated'), ['aria-label'=>'activated']) }}  User is de-activated
 
                                     </label>
                                 </div>
@@ -82,8 +82,8 @@
                                     <span class="help-block">Only superadmins may edit group memberships.</p>
                                 @else
                                     <div class="controls">
-                                        <select name="groups[]" id="groups[]" multiple="multiple" class="form-control">
-                                            <option value="">Remove Group Memberships </option>
+                                        <select name="groups[]" id="groups[]" multiple="multiple" class="form-control" aria-label="groups">
+                                        <option value="">Remove Group Memberships </option>
 
                                   @foreach ($groups as $id => $group)
                                         <option value="{{ $id }}">{{ $group }} </option>
@@ -105,7 +105,7 @@
                     </div> <!--/.box-body-->
 
                     <div class="box-footer text-right">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
                 </div> <!--/.box.box-default-->
             </form>

@@ -16,25 +16,26 @@
 @section('header_right')
     @can('manage', \App\Models\Accessory::class)
         <div class="dropdown pull-right">
-          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
+          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              {{ trans('button.actions') }}
               <span class="caret"></span>
           </button>
-          <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+          <ul class="dropdown-menu pull-right" role="menu">
             @if ($accessory->assigned_to != '')
               @can('checkin', \App\Models\Accessory::class)
-              <li role="presentation">
+              <li role="menuitem">
                 <a href="{{ route('checkin/accessory', $accessory->id) }}">{{ trans('admin/accessories/general.checkin') }}</a>
               </li>
               @endcan
             @else
               @can('checkout', \App\Models\Accessory::class)
-              <li role="presentation">
+              <li role="menuitem">
                 <a href="{{ route('checkout/accessory', $accessory->id)  }}">{{ trans('admin/accessories/general.checkout') }}</a>
               </li>
               @endcan
             @endif
             @can('update', \App\Models\Accessory::class)
-            <li role="presentation">
+            <li role="menuitem">
               <a href="{{ route('accessories.edit', $accessory->id) }}">{{ trans('admin/accessories/general.edit') }}</a>
             </li>
             @endcan
@@ -96,12 +97,12 @@
 
       <div class="text-center">
           @can('checkout', \App\Models\Accessory::class)
-              <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-info btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+              <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
           @endcan
       </div>
 
 
-    <h4>{{ trans('admin/accessories/general.about_accessories_title') }}</h4>
+    <h2>{{ trans('admin/accessories/general.about_accessories_title') }}</h4>
     <p>{{ trans('admin/accessories/general.about_accessories_text') }} </p>
 
 

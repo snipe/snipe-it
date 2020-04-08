@@ -20,7 +20,7 @@
             <input class="form-control" type="text" name="months" id="months" value="{{ Input::old('months', $item->months) }}" style="width: 80px;" />
         </div>
     </div>
-    {!! $errors->first('months', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+    {!! $errors->first('months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
 </div>
 
 @stop

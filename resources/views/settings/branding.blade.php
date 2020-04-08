@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('settings.index') }}" class="btn btn-default"> {{ trans('general.back') }}</a>
+    <a href="{{ route('settings.index') }}" class="btn btn-primary"> {{ trans('general.back') }}</a>
 @stop
 
 
@@ -33,9 +33,9 @@
 
             <div class="panel box box-default">
                 <div class="box-header with-border">
-                    <h4 class="box-title">
+                    <h2 class="box-title">
                         <i class="fa fa-copyright"></i> Branding
-                    </h4>
+                    </h2>
                 </div>
                 <div class="box-body">
 
@@ -55,7 +55,7 @@
                                     {{ Form::text('site_name',
                                         Input::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management')) }}
                                 @endif
-                                {!! $errors->first('site_name', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('site_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -76,8 +76,11 @@
 
                                     <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
                                 
-                                {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
-                                {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo'),array('class' => 'minimal')) }} Remove
+                                {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                <label for="clear_logo">
+                                {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo'),array('class' => 'minimal', 'aria-label'=>'clear_logo')) }}
+                                    {{ trans('general.delete') }}
+                                </label>
                                @endif
                             </div>
                         </div>
@@ -90,7 +93,7 @@
                             </div>
                             <div class="col-md-9">
                                 {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), Input::old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
-                                {!! $errors->first('brand', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('brand', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -100,8 +103,9 @@
                                 {{ Form::label('logo_print_assets', trans('admin/settings/general.logo_print_assets')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('logo_print_assets', '1', Input::old('logo_print_assets', $setting->logo_print_assets),array('class' => 'minimal')) }}
-                                {{ trans('admin/settings/general.logo_print_assets_help') }}
+                                {{ Form::checkbox('logo_print_assets', '1', Input::old('logo_print_assets', $setting->logo_print_assets),array('class' => 'minimal', 'aria-label'=>'logo_print_assets')) }}
+                                    {{ trans('admin/settings/general.logo_print_assets_help') }}
+
                             </div>
                         </div>
 
@@ -112,8 +116,8 @@
                                 {{ Form::label('show_url_in_emails', trans('admin/settings/general.show_url_in_emails')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('show_url_in_emails', '1', Input::old('show_url_in_emails', $setting->show_url_in_emails),array('class' => 'minimal')) }}
-                                {{ trans('general.yes') }}
+                                    {{ Form::checkbox('show_url_in_emails', '1', Input::old('show_url_in_emails', $setting->show_url_in_emails),array('class' => 'minimal', 'aria-label'=>'show_url_in_emails')) }}
+                                    {{ trans('general.yes') }}
                                 <p class="help-block">{{ trans('admin/settings/general.show_url_in_emails_help_text') }}</p>
                             </div>
                         </div>
@@ -125,12 +129,12 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="input-group header-color">
-                                    {{ Form::text('header_color', Input::old('header_color', $setting->header_color), array('class' => 'form-control', 'style' => 'width: 100px;','placeholder' => '#FF0000')) }}
+                                    {{ Form::text('header_color', Input::old('header_color', $setting->header_color), array('class' => 'form-control', 'style' => 'width: 100px;','placeholder' => '#FF0000', 'aria-label'=>'header_color')) }}
                                     <div class="input-group-addon">
                                         <i></i>
                                     </div>
                                 </div><!-- /.input group -->
-                                {!! $errors->first('header_color', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('header_color', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -141,7 +145,7 @@
                             </div>
                             <div class="col-md-9">
                                 {!! Form::skin('skin', Input::old('skin', $setting->skin), 'select2') !!}
-                                {!! $errors->first('skin', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('skin', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -153,12 +157,12 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS','disabled'=>'disabled')) }}
-                                    {!! $errors->first('custom_css', '<span class="alert-msg">:message</span>') !!}
+                                    {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS','disabled'=>'disabled', 'aria-label'=>'custom_css')) }}
+                                    {!! $errors->first('custom_css', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">{{ trans('general.lock_passwords') }}</p>
                                 @else
-                                    {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS')) }}
-                                    {!! $errors->first('custom_css', '<span class="alert-msg">:message</span>') !!}
+                                    {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS', 'aria-label'=>'custom_css')) }}
+                                    {!! $errors->first('custom_css', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @endif
                                 <p class="help-block">{{ trans('admin/settings/general.custom_css_help') }}</p>
                             </div>
@@ -178,7 +182,7 @@
                                 @endif
 
                                 <p class="help-block">{{ trans('admin/settings/general.support_footer_help') }}</p>
-                                {!! $errors->first('support_footer', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('support_footer', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -196,14 +200,14 @@
                                 @endif
 
                                 <p class="help-block">{{ trans('admin/settings/general.version_footer_help') }}</p>
-                                {!! $errors->first('version_footer', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('version_footer', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
                         <!-- Additional footer -->
                         <div class="form-group {{ $errors->has('footer_text') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('custom_css', trans('admin/settings/general.footer_text')) }}
+                                {{ Form::label('footer_text', trans('admin/settings/general.footer_text')) }}
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
@@ -213,7 +217,7 @@
                                     {{ Form::textarea('footer_text', Input::old('footer_text', $setting->footer_text), array('class' => 'form-control','rows' => '4','placeholder' => 'Optional footer text')) }}
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.footer_text_help') !!}</p>
-                                 {!! $errors->first('footer_text', '<span class="alert-msg">:message</span>') !!}
+                                 {!! $errors->first('footer_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
 
                             </div>
                         </div>
@@ -229,7 +233,7 @@
                             <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                         </div>
                         <div class="text-right col-md-6">
-                            <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                         </div>
 
                     </div>

@@ -63,7 +63,8 @@
             <div class="col-md-12">
               @if (Input::get('status')!='Deleted')
               <div id="toolbar">
-                <select name="bulk_actions" class="form-control select2">
+                <label for="bulk_actions"><span class="sr-only">Bulk Actions</span></label>
+                <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions">
                   <option value="edit">Edit</option>
                   <option value="delete">Delete</option>
                   <option value="labels">Generate Labels</option>

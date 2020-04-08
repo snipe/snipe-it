@@ -11,188 +11,285 @@
 
 
 
-  <div class="row">
+  <style>
+    #searchinput {
+      width: 200px;
+    }
+    #searchclear {
+      position: absolute;
+      right: 5px;
+      top: 0;
+      bottom: 0;
+      height: 14px;
+      margin: auto;
+      font-size: 14px;
+      cursor: pointer;
+      color: #ccc;
+    }
+  </style>
 
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.branding.index') }}" class="btn btn-lg btn-white"><i class="fa fa-copyright fa-3x"></i></a>
-          <br>
-          Branding
-          <p class="help-block">Logo, Site Name</p>
+  <div class="row" id="setting-list">
+
+    <!-- search filter box -->
+    <div class="col-md-3 col-md-offset-9 form-group">
+      <form onsubmit="return false;">
+        <div class="btn-group">
+          <input id="searchinput" name="search" type="search" class="search form-control" placeholder="Filter by setting keyword">
+          <span id="searchclear" class="fa fa-times" aria-hidden="true"></span>
+          <button type="submit" disabled style="display: none" aria-hidden="true"></button>
         </div>
-      </div>
+      </form>
     </div>
+    <!--/ search filter box -->
 
 
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.general.index') }}" class="btn btn-lg btn-white"><i class="fa fa-wrench fa-3x"></i></a>
-          <br>
-          General Settings
-          <p class="help-block">Default EULA and more</p>
-        </div>
-      </div>
-    </div>
+    <!-- search filter list -->
+    <div class="list">
 
-
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.security.index') }}" class="btn btn-lg btn-white"><i class="fa fa-lock fa-3x"></i></a>
-          <br>
-          Security
-          <p class="help-block">Two-factor, Password Restrictions</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('groups.index') }}" class="btn btn-lg btn-white"><i class="fa fa-group fa-3x"></i></a>
-          <br>
-          Groups
-          <p class="help-block">Account permission groups</p>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.localization.index') }}" class="btn btn-lg btn-white"><i class="fa fa-globe fa-3x"></i></a>
-          <br>
-          Localization
-          <p class="help-block">Language, date display</p>
-
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.alerts.index') }}" class="btn btn-lg btn-white"><i class="fa fa-bell fa-3x"></i></a>
-          <br>
-          Notifications
-          <p class="help-block">Email alerts</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.slack.index') }}" class="btn btn-lg btn-white"><i class="fa fa-slack fa-3x"></i></a>
-          <br>
-          Slack
-          <p class="help-block">Slack settings</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.asset_tags.index') }}" class="btn btn-lg btn-white"><i class="fa fa-list-ol fa-3x"></i></a>
-          <br>
-          Asset Tags
-          <p class="help-block">Incrementing and prefixes</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.barcodes.index') }}" class="btn btn-lg btn-white"><i class="fa fa-barcode fa-3x"></i></a>
-          <br>
-          Barcodes
-          <p class="help-block">Barcode &amp; QR settings</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.labels.index') }}" class="btn btn-lg btn-white"><i class="fa fa-tags fa-3x"></i></a>
-          <br>
-          Labels
-          <p class="help-block">Label sizes &amp; settings</p>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.ldap.index') }}" class="btn btn-lg btn-white"><i class="fa fa-sitemap fa-3x"></i></a>
-          <br>
-          LDAP
-          <p class="help-block">LDAP/Active Directory</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.backups.index') }}" class="btn btn-lg btn-white"><i class="fa fa-cloud-download fa-3x"></i></a>
-          <br>
-          Backups
-          <p class="help-block">Download files &amp; Data</p>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-      <div class="box box-default">
-        <div class="box-body text-center">
-          <a href="{{ route('settings.oauth.index') }}" class="btn btn-lg btn-white"><i class="fa fa-user-secret fa-3x"></i></a>
-          <br>
-          OAuth
-          <p class="help-block">Oauth Endpoint Settings</p>
-        </div>
-      </div>
-    </div>
-
-    @if (config('app.debug')=== true)
-      <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-        <div class="box box-default">
-          <div class="box-body text-center">
-            <a href="{{ route('settings.phpinfo.index') }}" class="btn btn-lg btn-white"><i class="fa fa-server fa-3x"></i></a>
-            <br>
-            PHP
-            <p class="help-block">PHP System Info</p>
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+              <a href="{{ route('settings.branding.index') }}">
+                <i class="fa fa-copyright fa-4x" aria-hidden="true"></i>
+                <br><br>
+                <span class="name">Branding</span>
+                <span class="keywords" aria-hidden="true" style="display:none">footer, logo, print, theme, skin, header, colors, color, css</span>
+              </a>
+              </h5>
+              <p class="help-block">Logo, Site Name</p>
+            </div>
           </div>
         </div>
-      </div>
-    @endif
+
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('settings.general.index') }}">
+                  <i class="fa fa-wrench fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name"> General Settings</span>
+                  <span class="keywords" aria-hidden="true" style="display:none">company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula,  tos, dashboard, privacy</span>
+                </a>
+              </h5>
+              <p class="help-block">Default EULA and more</p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('settings.security.index') }}">
+                  <i class="fa fa-lock fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name">Security</span>
+                  <span class="keywords" aria-hidden="true" style="display:none">password, passwords, requirements, two factor, two-factor, common passwords, remote login, logout, authentication</span>
+                </a>
+              </h5>
+              <p class="help-block">Two-factor, Password Restrictions</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('groups.index') }}">
+                  <i class="fa fa-group fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name">Groups</span>
+                  <span class="keywords" aria-hidden="true" style="display:none">permissions, permission groups, authorization</span>
+                  </a>
+              </h5>
+              <p class="help-block">Account permission groups</p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('settings.localization.index') }}">
+                  <i class="fa fa-globe fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name">Localization</span>
+                  <span class="keywords" aria-hidden="true" style="display:none">localization, currency, local, locale, time zone, timezone, international, internatinalization, language, languages, translation</span>
+                </a>
+              </h5>
+              <p class="help-block">Language, date display</p>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('settings.alerts.index') }}">
+                  <i class="fa fa-bell fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name">Notifications</span>
+                </a>
+              </h5>
+              <p class="help-block">Email alerts</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('settings.slack.index') }}">
+                  <i class="fa fa-slack fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name">Slack</span>
+                </a>
+              </h5>
+              <p class="help-block">Slack settings</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('settings.asset_tags.index') }}">
+                  <i class="fa fa-list-ol fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name">Asset Tags</span>
+                </a>
+              </h5>
+              <p class="help-block">Incrementing and prefixes</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('settings.barcodes.index') }}">
+                  <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name">Barcodes</span>
+                </a>
+              </h5>
+              <p class="help-block">Barcode &amp; QR settings</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('settings.labels.index') }}">
+                  <i class="fa fa-tags fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name">Labels</span>
+                </a>
+              </h5>
+              <p class="help-block">Label sizes &amp; settings</p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('settings.ldap.index') }}">
+                  <i class="fa fa-sitemap fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name">LDAP</span>
+                </a>
+              </h5>
+              <p class="help-block">LDAP/Active Directory</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('settings.backups.index') }}">
+                  <i class="fa fa-cloud-download fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name">Backups</span>
+                </a>
+              </h5>
+              <p class="help-block">Download files &amp; Data</p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+              <a href="{{ route('settings.oauth.index') }}">
+                <i class="fa fa-user-secret fa-4x" aria-hidden="true"></i>
+                <br><br>
+                <span class="name">OAuth</span>
+              </a>
+              </h5>
+              <p class="help-block">Oauth Endpoint Settings</p>
+            </div>
+          </div>
+        </div>
+
+        @if (config('app.debug')=== true)
+          <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+            <div class="box box-default">
+              <div class="box-body text-center">
+                <h5>
+                  <a href="{{ route('settings.phpinfo.index') }}">
+                    <i class="fa fa-server fa-4x" aria-hidden="true"></i>
+                    <br><br>
+                    <span class="name">PHP</span>
+                    <span class="keywords" aria-hidden="true" style="display:none">phpinfo, system, info</span>
+                  </a>
+                </h5>
+                <p class="help-block">PHP System Info</p>
+              </div>
+            </div>
+          </div>
+        @endif
 
     <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
       <div class="box box-danger">
         <div class="box-body text-center">
-          <a href="{{ route('settings.purge.index') }}" class="btn btn-lg btn-white text-danger"><i class="fa fa-trash fa-3x"></i></a>
-          <br>
-          Purge
+          <h5>
+            <a href="{{ route('settings.purge.index') }}">
+              <i class="fa fa-trash fa-4x" aria-hidden="true"></i>
+              <br><br>
+              <span class="name">Purge</span>
+              <span class="keywords" aria-hidden="true" style="display:none">permanently delete</span>
+            </a>
+          </h5>
           <p class="help-block">Purge Deleted Records</p>
         </div>
       </div>
     </div>
 
+
+    </div>
   </div>
-
-
-
-
-
 
 
 
@@ -202,48 +299,73 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-header">
-        <h3 class="box-title">{{ trans('admin/settings/general.system') }}</h3>
+        <h2 class="box-title">{{ trans('admin/settings/general.system') }}</h2>
       </div>
       <div class="box-body">
-        <div class="table-responsive">
+        <div class="container row-striped col-md-11">
 
-          <table class="table table-striped">
-            <tbody>
-              <tr>
-                <td class="col-md-4">{{ trans('admin/settings/general.snipe_version') }}</td>
-                <td class="col-md-8">
-                    {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
-                </td>
-              </tr>
-              <tr>
-                <td>{{ trans('admin/settings/general.license') }}</td>
-                <td>
-                  <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" rel="noopener">AGPL3</a>
-                </td>
-              </tr>
-              <tr>
-                <td>{{ trans('admin/settings/general.php') }}</td>
-                <td> {{ phpversion() }}</td>
-              </tr>
-              <tr>
-                <td>{{ trans('admin/settings/general.laravel') }}</td>
-                <td>
-                    {{ $snipeSettings->lar_ver() }}
-                </td>
-              </tr>
+          <!-- row -->
+          <div class="row">
+            <div class="col-md-2">
+              <strong>{{ trans('admin/settings/general.snipe_version') }}</strong>
+            </div>
+            <div class="col-md-4">
+            {{ config('version.app_version') }}  build {{ config('version.build_version') }} ({{ config('version.hash_version') }})
+            </div>
 
+            <div class="col-md-2">
+              <strong>{{ trans('admin/settings/general.license') }}</strong>
+            </div>
+          <div class="col-md-4">
+              <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" rel="noopener">AGPL3</a>
+           </div>
+          </div>
+          <!-- / row -->
 
+          <!-- row -->
+          <div class="row">
+            <div class="col-md-2">
+              <strong>{{ trans('admin/settings/general.php') }}</strong>
+            </div>
+            <div class="col-md-4">
+              {{ phpversion() }}
+            </div>
 
+            <div class="col-md-2">
+              <strong>{{ trans('admin/settings/general.laravel') }}</strong>
+            </div>
+            <div class="col-md-4">
+              {{ $snipeSettings->lar_ver() }}
+            </div>
 
-            </tbody>
-          </table>
+          </div>
+          <!--/ row -->
         </div>
       </div> <!-- /box-body-->
     </div> <!--/box-default-->
   </div><!--/col-md-8-->
 </div><!--/row-->
 
+  @section('moar_scripts')
+<script nonce="{{ csrf_token() }}">
 
+
+
+  var options = {
+    valueNames: [ 'name', 'keywords', 'summary', 'help-block']
+  };
+
+  var userList = new List('setting-list', options);
+
+  $("#searchclear").click(function(){
+    $("#searchinput").val('');
+    userList.search();
+  });
+
+
+
+</script>
+  @endsection
 
 @stop
 

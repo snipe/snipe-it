@@ -31,7 +31,7 @@ LDAP User Sync
               @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
             <div class="col-md-4">
               <button type="submit" class="btn btn-warning" id="sync">
-                  <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">Synchronize</span>
+                  <i id="sync-button-icon" class="fa fa-refresh icon-white" aria-hidden="true"></i> <span id="sync-button-text">Synchronize</span>
               </button>
             </div>
           </div>
@@ -52,7 +52,7 @@ LDAP User Sync
 
     <div class="box box-default">
       <div class="box-header with-border">
-        <h3 class="box-title">Synchronization Results</h3>
+        <h2 class="box-title">Synchronization Results</h2>
       </div><!-- /.box-header -->
       <div class="box-body">
         <table class="table table-bordered">
@@ -73,7 +73,7 @@ LDAP User Sync
                 @if ($entry['status']=='success')
                   <i class="fa fa-check"></i> {!! $entry['note'] !!}
                 @else
-                  <span class="alert-msg">{!! $entry['note'] !!}</span>
+                  <span class="alert-msg" aria-hidden="true">{!! $entry['note'] !!}</span>
                 @endif
 
                 </td>

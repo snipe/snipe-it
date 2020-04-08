@@ -11,13 +11,13 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <h3 class="name">
+        <h2 class="name">
             {{ trans('admin/hardware/general.view') }}
             {{ $asset->asset_tag }}
             @if ($asset->name)
             ({{ $asset->name }})
             @endif
-        </h3>
+        </h2>
 
         <div class="btn-group pull-right">
             <div class="dropdown">
@@ -242,7 +242,7 @@
                                 data-html="false" data-toggle="modal"
                                 data-title="{{ trans('admin/hardware/message.deletefile.confirm') }}"
                                 data-content="{{ trans('admin/hardware/message.deletefile.confirm-more',array('filename' => $file->filename)) }} " onClick="return false;">
-                                <i class="fa fa-trash icon-white"></i>
+                                <i class="fa fa-trash icon-white" aria-hidden="true"></i>
                                 </a>
                             </td>
                         </tr>
@@ -412,7 +412,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
+        <h2 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
       </div>
       {{ Form::open([
       'method' => 'POST',

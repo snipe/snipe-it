@@ -35,9 +35,9 @@
       @if ($model->id)
         <div class="box-header with-border">
           <div class="box-heading">
-            <h3 class="box-title"> {{ $model->name }}
+            <h2 class="box-title"> {{ $model->name }}
                 {{ ($model->model_number) ? '(#'.$model->model_number.')' : '' }}
-            </h3>
+            </h2>
           </div>
         </div><!-- /.box-header -->
       @endif
@@ -90,7 +90,7 @@
       <div class="box box-default">
               <div class="box-header with-border">
                   <div class="box-heading">
-                      <h3 class="box-title"> More Info:</h3>
+                      <h2 class="box-title"> More Info:</h2>
                   </div>
               </div><!-- /.box-header -->
           <div class="box-body">

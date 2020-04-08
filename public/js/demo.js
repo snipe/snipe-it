@@ -50,7 +50,7 @@
 
   //Layout options
   demo_settings.append(
-          "<h4 class='control-sidebar-heading'>"
+          "<h2 class='control-sidebar-heading'>"
           + "Layout Options"
           + "</h4>"
           //Fixed layout
@@ -204,7 +204,7 @@
                   + "<p class='text-center no-margin' style='font-size: 12px;'>Yellow Light</p>");
   skins_list.append(skin_yellow_light);
 
-  demo_settings.append("<h4 class='control-sidebar-heading'>Skins</h4>");
+  demo_settings.append("<h2 class='control-sidebar-heading'>Skins</h4>");
   demo_settings.append(skins_list);
 
   tab_pane.append(demo_settings);
