@@ -219,10 +219,7 @@ class CategoriesController extends Controller
                 ->with('category_type_route',$category_type_route);
         }
 
-        // Prepare the error message
-        $error = trans('admin/categories/message.does_not_exist', compact('id'));
-        // Redirect to the user management page
-        return redirect()->route('categories.index')->with('error', $error);
+        return redirect()->route('categories.index')->with('error', trans('admin/categories/message.does_not_exist'));
     }
 
 

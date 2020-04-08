@@ -455,7 +455,7 @@ class LicensesController extends Controller
             $this->authorize('view', $license);
             return view('licenses/view', compact('license'));
         }
-        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', compact('id')));
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
     }
     
 
@@ -524,9 +524,8 @@ class LicensesController extends Controller
             }
             return redirect()->route('licenses.show', $license->id)->with('error', trans('admin/licenses/message.upload.nofiles'));
         }
-        // Prepare the error message
-        $error = trans('admin/licenses/message.does_not_exist', compact('id'));
-        return redirect()->route('licenses.index')->with('error', $error);
+
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
     }
 
 
@@ -562,7 +561,7 @@ class LicensesController extends Controller
         }
 
         // Redirect to the licence management page
-        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', compact('id')));
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
     }
 
 
@@ -613,7 +612,7 @@ class LicensesController extends Controller
         }
 
 
-        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', compact('id')));
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
     }
 
 
