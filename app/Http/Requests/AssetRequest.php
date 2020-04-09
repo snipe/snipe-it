@@ -51,7 +51,7 @@ class AssetRequest extends Request
         if ($this->request->get('model_id') != '') {
             $model = AssetModel::find($this->request->get('model_id'));
 
-            if (($model) && ($model->fieldset)) {
+            if (($model) && (isset($model->fieldset)) && ($model->fieldset)) {
                 $rules += $model->fieldset->validation_rules();
             }
         }
