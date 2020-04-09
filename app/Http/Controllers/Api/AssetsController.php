@@ -646,11 +646,14 @@ class AssetsController extends Controller
         $asset_name = request('name', null);
 
         // Set the location ID to the RTD location id if there is one
-        if ((isset($target->rtd_location_id)) && ($asset->rtd_location_id!='')) {
-            $asset->location_id = $target->rtd_location_id;
-        }
+        // Wait, why are we doing this? This overrides the stuff we set further up, which makes no sense.
+        // TODO: Follow up here. WTF. Commented out for now. 
 
-        
+//        if ((isset($target->rtd_location_id)) && ($asset->rtd_location_id!='')) {
+//            $asset->location_id = $target->rtd_location_id;
+//        }
+
+
 
         if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
