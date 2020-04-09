@@ -128,7 +128,7 @@
                           <span class="sr-only">{{ $snipeSettings->site_name }}</span>
                       </a>
                   @else
-                      <a class="logo no-hover" href="{{ url('/') }}">
+                      <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
                           {{ $snipeSettings->site_name }}
                       </a>
                   @endif
