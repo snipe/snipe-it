@@ -20,8 +20,8 @@ class SettingsController extends Controller
     {
 
         if (Setting::getSettings()->ldap_enabled!='1') {
-            \Log::debug('LDAP is not enabled cannot test.');
-            return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
+            \Log::debug('LDAP is not enabled so cannot test.');
+            return response()->json(['message' => 'LDAP is not enabled, so we cannot test LDAP connections.'], 400);
         }
 
         \Log::debug('Preparing to test LDAP connection');
@@ -33,13 +33,13 @@ class SettingsController extends Controller
                 Ldap::bindAdminToLdap($connection);
                 return response()->json(['message' => 'It worked!'], 200);
             } catch (\Exception $e) {
-                \Log::debug('Bind failed');
+                \Log::debug('LDAP connected but Bind failed. Please check your LDAP settings and try again.');
                 return response()->json(['message' => $e->getMessage()], 400);
                 //return response()->json(['message' => $e->getMessage()], 500);
             }
         } catch (\Exception $e) {
-            \Log::debug('Connection failed but we cannot debug it any further on our end.');
-            return response()->json(['message' => $e->getMessage()], 600);
+            \Log::info('LDAP connection failed but we cannot debug it any further on our end.');
+            return response()->json(['message' => 'The LDAP connection failed but we cannot debug it any further on our end. The error from the server is: '.$e->getMessage()], 500);
         }
 
 
