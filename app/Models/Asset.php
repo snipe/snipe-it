@@ -226,10 +226,10 @@ class Asset extends Depreciable
         if ($location != null) {
             $this->location_id = $location;
         } else {
-            if($target->location) {
+            if (isset($target->location)) {
                 $this->location_id = $target->location->id;
             }
-            if($target instanceof Location) {
+            if ($target instanceof Location) {
                 $this->location_id = $target->id;
             }
         }
