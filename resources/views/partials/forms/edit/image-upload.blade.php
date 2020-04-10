@@ -2,7 +2,7 @@
     <label class="col-md-3 control-label" for="image">{{ trans('general.image_upload') }}</label>
     <div class="col-md-9">
 
-        <input type="file" id="image" name="image" aria-label="image">
+        <input type="file" id="image" name="image" aria-label="image" class="sr-only">
 
         <label class="btn btn-default" aria-hidden="true">
             {{ trans('button.select_file')  }}
