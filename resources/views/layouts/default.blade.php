@@ -182,18 +182,16 @@
                   @can('index', \App\Models\Asset::class)
                   <li>
                   <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
-                      <div class="col-xs-12 col-md-12">
-                          <div class="col-xs-12 form-group">
-                              <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
-                              <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
-                              <input type="hidden" name="topsearch" value="true" id="search">
-                          </div>
-                          <div class="col-xs-1">
-                              <button type="submit" class="btn btn-primary pull-right">
+                      <div class="form-group input-group">
+                          <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
+                          <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
+                          <input type="hidden" name="topsearch" value="true" id="search">
+                          <span class="input-group-btn>
+                              <button type="submit" class="btn btn-primary">
                                   <i class="fa fa-search" aria-hidden="true"></i>
-                                  <span class="sr-only">Search</span>
+                                  <span class="sr-only">{{ trans('general.search') }}</span>
                               </button>
-                          </div>
+                          </span>
                       </div>
                   </form>
                   </li>
