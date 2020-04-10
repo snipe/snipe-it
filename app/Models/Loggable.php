@@ -45,12 +45,12 @@ trait Loggable
             $log->user_id = Auth::user()->id;
 
         if (!isset($target)) {
-            throw new Exception('All checkout logs require a target.');
+            throw new \Exception('All checkout logs require a target.');
             return;
         }
 
         if (!isset($target->id)) {
-            throw new Exception('That target seems invalid (no target ID available).');
+            throw new \Exception('That target seems invalid (no target ID available).');
             return;
         }
 
