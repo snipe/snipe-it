@@ -52,7 +52,8 @@ mix
 ],
     './public/js/dist/all.js');
 
-mix.copy('./public/css/dist/all.css', './public/css/build/all.css').copy('./public/js/dist/all.js', './public/js/build/all.js');
+mix.copy('./public/css/dist/all.css', './public/css/build/all.css')
+    .copy('./public/js/dist/all.js', './public/js/build/all.js');
 
 mix.version();
 
