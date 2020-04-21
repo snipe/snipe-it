@@ -30,7 +30,7 @@
     {{-- stylesheets --}}
     <link rel="stylesheet" href="{{ url('css/all.css') }}">
     @if (($snipeSettings) && ($snipeSettings->skin!=''))
-    <link rel="stylesheet" href="{{ url('css/skins/skin-'.$snipeSettings->skin.'.min.css') }}">
+    <link rel="stylesheet" href="{{ url('css/skins/skin-'.$snipeSettings->skin.'.css') }}">
     @endif
     {{-- page level css --}}
     @stack('css')
@@ -835,7 +835,7 @@
     </div>
 
     {{-- Javascript files --}}
-    <script src="{{ url('js/app.js') }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url('js/dist/all.js') }}" nonce="{{ csrf_token() }}"></script>
     <script src="{{ url('js/vendor.js') }}" nonce="{{ csrf_token() }}"></script>
     {{-- Page level javascript --}}
     @stack('js')
