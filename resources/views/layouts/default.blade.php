@@ -835,8 +835,8 @@
     </div>
 
     {{-- Javascript files --}}
-    <script src="{{ url('/').('js/app.js') }}" nonce="{{ csrf_token() }}"></script>
-    <script src="{{ url('/').('js/vendor.js') }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url('js/app.js') }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url('js/vendor.js') }}" nonce="{{ csrf_token() }}"></script>
     {{-- Page level javascript --}}
     @stack('js')
 

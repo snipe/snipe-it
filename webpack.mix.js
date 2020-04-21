@@ -34,6 +34,7 @@ mix
         './public/js/build'
     ).sourceMaps()
     .scripts([
+            './node_modules/jquery/jquery.js',
             './node_modules/jquery-ui/jquery-ui.js',
             './public/js/build/vue.js', //this is the modularized nifty Vue.js thing we just built, above!
             './node_modules/tether/dist/js/tether.min.js',
