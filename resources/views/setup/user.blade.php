@@ -101,7 +101,7 @@ Create a User ::
       <!-- email format  -->
       <div class="form-group col-lg-6{{  (\App\Helpers\Helper::checkIfRequired(\App\Models\User::class, 'email_format')) ? ' required' : '' }} {{ $errors->has('email_format') ? 'error' : '' }}">
         {{ Form::label('email_format', trans('general.email_format')) }}
-        {!! Form::username_format('email_format', Input::old('email_format', 'filastname'), 'select2') !!}
+        {!! Form::username_format('email_format', old('email_format', 'filastname'), 'select2') !!}
         {!! $errors->first('email_format', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
     </div>
@@ -111,14 +111,14 @@ Create a User ::
       <!-- first name -->
       <div class="form-group col-lg-6{{  (\App\Helpers\Helper::checkIfRequired(\App\Models\User::class, 'first_name')) ? ' required' : '' }} {{ $errors->has('first_name') ? 'error' : '' }}">
         {{ Form::label('first_name', trans('general.first_name')) }}
-        {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control','placeholder' => 'Jane')) }}
+        {{ Form::text('first_name', old('first_name'), array('class' => 'form-control','placeholder' => 'Jane')) }}
         {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
 
       <!-- last name -->
       <div class="form-group col-lg-6 required {{ $errors->has('last_name') ? 'error' : '' }}">
         {{ Form::label('last_name', trans('general.last_name')) }}
-        {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control','placeholder' => 'Smith')) }}
+        {{ Form::text('last_name', old('last_name'), array('class' => 'form-control','placeholder' => 'Smith')) }}
         {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
     </div>
@@ -134,7 +134,7 @@ Create a User ::
       <!-- username -->
       <div class="form-group col-lg-6{{  (\App\Helpers\Helper::checkIfRequired(\App\Models\User::class, 'username')) ? ' required' : '' }} {{ $errors->has('username') ? 'error' : '' }}">
         {{ Form::label('username', trans('admin/users/table.username')) }}
-        {{ Form::text('username', Input::old('username'), array('class' => 'form-control','placeholder' => 'jsmith')) }}
+        {{ Form::text('username', old('username'), array('class' => 'form-control','placeholder' => 'jsmith')) }}
         {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
     </div>

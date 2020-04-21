@@ -20,7 +20,7 @@
           <label for="first_name" class="col-md-3 control-label">{{ trans('general.first_name') }}
           </label>
           <div class="col-md-8 required">
-            <input class="form-control" type="text" name="first_name" id="first_name" value="{{ Input::old('first_name', $user->first_name) }}" />
+            <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}" />
             {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
@@ -31,7 +31,7 @@
             {{ trans('general.last_name') }}
           </label>
           <div class="col-md-8 required">
-            <input class="form-control" type="text" name="last_name" id="last_name" value="{{ Input::old('last_name', $user->last_name) }}" />
+            <input class="form-control" type="text" name="last_name" id="last_name" value="{{ old('last_name', $user->last_name) }}" />
             {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
@@ -49,7 +49,7 @@
           <div class="col-md-9">
 
             @if (!config('app.lock_passwords'))
-              {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
+              {!! Form::locales('locale', old('locale', $user->locale), 'select2') !!}
               {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
             @else
               <p class="help-block">{{ trans('general.feature_disabled') }}</p>
@@ -62,7 +62,7 @@
         <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
           <label class="col-md-3 control-label" for="phone">{{ trans('admin/users/table.phone') }}</label>
           <div class="col-md-4">
-            <input class="form-control" type="text" name="phone" id="phone" value="{{ Input::old('phone', $user->phone) }}" />
+            <input class="form-control" type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" />
             {!! $errors->first('phone', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
           </div>
         </div>
@@ -73,7 +73,7 @@
         <div class="form-group {{ $errors->has('website') ? ' has-error' : '' }}">
           <label for="website" class="col-md-3 control-label">{{ trans('general.website') }}</label>
           <div class="col-md-8">
-            <input class="form-control" type="text" name="website" id="website" value="{{ Input::old('website', $user->website) }}" />
+            <input class="form-control" type="text" name="website" id="website" value="{{ old('website', $user->website) }}" />
             {!! $errors->first('website', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
@@ -84,7 +84,7 @@
             <small>(Private)</small>
           </label>
           <div class="col-md-8">
-            <input class="form-control" type="text" name="gravatar" id="gravatar" value="{{ Input::old('gravatar', $user->gravatar) }}" />
+            <input class="form-control" type="text" name="gravatar" id="gravatar" value="{{ old('gravatar', $user->gravatar) }}" />
             {!! $errors->first('gravatar', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             <p>
               <img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" width="30" height="30" alt="{{ $user->present()->fullName() }} avatar image">

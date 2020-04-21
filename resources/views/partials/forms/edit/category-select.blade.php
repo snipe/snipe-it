@@ -5,7 +5,7 @@
 
     <div class="col-md-7{{  ((isset($required)) && ($required=='true')) ? ' required' : '' }}">
         <select class="js-data-ajax" data-endpoint="categories/{{ (isset($category_type)) ? $category_type : 'assets' }}" data-placeholder="{{ trans('general.select_category') }}" name="{{ $fieldname }}" style="width: 100%" id="category_select_id" aria-label="{{ $fieldname }}">
-            @if ($category_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+            @if ($category_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $category_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\Category::find($category_id)) ? \App\Models\Category::find($category_id)->name : '' }}
                 </option>

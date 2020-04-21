@@ -86,7 +86,7 @@
                 <div class="form-group col-md-2" style="vertical-align: middle;">
 
                   <label for="required">
-                    {{ Form::checkbox('required', 'on', Input::old('required'), array('class' => 'minimal', 'aria-label'=>'required')) }}
+                    {{ Form::checkbox('required', 'on', old('required'), array('class' => 'minimal', 'aria-label'=>'required')) }}
                     {{ trans('admin/custom_fields/general.required') }}
                   </label>
 

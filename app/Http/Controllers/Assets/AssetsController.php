@@ -119,7 +119,7 @@ class AssetsController extends Controller
             $asset = new Asset();
             $asset->model()->associate(AssetModel::find($request->input('model_id')));
             $asset->name                    = $request->input('name');
-            
+
             // Check for a corresponding serial
             if (($serials) && (array_key_exists($a, $serials))) {
                 $asset->serial                  = $serials[$a];
@@ -154,27 +154,26 @@ class AssetsController extends Controller
                 $asset->location_id = $request->input('rtd_location_id', null);
             }
 
-        // Create the image (if one was chosen.)
-        if ($request->has('image')) {
-            $asset = $request->handleImages($asset);
-        }
+            // Create the image (if one was chosen.)
+            if ($request->has('image')) {
+                $asset = $request->handleImages($asset);
+            }
 
+            // Update custom fields in the database.
+            // Validation for these fields is handled through the AssetRequest form request
+            $model = AssetModel::find($request->get('model_id'));
 
-        // Update custom fields in the database.
-        // Validation for these fields is handled through the AssetRequest form request
-        $model = AssetModel::find($request->get('model_id'));
-
-        if (($model) && ($model->fieldset)) {
-            foreach ($model->fieldset->fields as $field) {
-                if ($field->field_encrypted=='1') {
-                    if (Gate::allows('admin')) {
-                        $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+            if (($model) && ($model->fieldset)) {
+                foreach ($model->fieldset->fields as $field) {
+                    if ($field->field_encrypted=='1') {
+                        if (Gate::allows('admin')) {
+                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                        }
+                    } else {
+                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
                     }
-                } else {
-                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
                 }
             }
-        }
 
             // Validate the asset before saving
             if ($asset->isValid() && $asset->save()) {
@@ -202,8 +201,6 @@ class AssetsController extends Controller
         }
 
         if ($success) {
-                $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')), $location);
-            }
             // Redirect to the asset listing page
             return redirect()->route('hardware.index')
                 ->with('success', trans('admin/hardware/message.create.success'));
@@ -317,7 +314,7 @@ class AssetsController extends Controller
                 unlink(public_path().'/uploads/assets/'.$asset->image);
                 $asset->image = '';
             } catch (\Exception $e) {
-                \Log::debug($e);
+                \Log::info($e);
             }
 
         }
@@ -356,18 +353,6 @@ class AssetsController extends Controller
 
 
         if ($asset->save()) {
-
- // Update any assigned assets with the new location_id from the parent asset
-
-            Asset::where('assigned_type', '\\App\\Models\\Asset')->where('assigned_to', $asset->id)
-                ->update(['location_id' => $asset->location_id]);
-
-            // Redirect to the new asset page
-            \Session::flash('success', trans('admin/hardware/message.update.success'));
-            return response()->json(['redirect_url' => route("hardware.show", $assetId)]);
-        }
-        \Input::flash();
-        \Session::flash('errors', $asset->getErrors());
             return redirect()->route("hardware.show", $assetId)
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
@@ -413,63 +398,22 @@ class AssetsController extends Controller
 
 
     /**
-     * Searches the assets table by tag, and redirects if it finds one.
-     *
-     * This is used by the top search box in Snipe-IT, but as of 4.9.x
-     * can also be used as a url segment.
-     *
-     * https://yoursnipe.com/hardware/bytag/?assetTag=foo
-     *
-     * OR
-     *
-     * https://yoursnipe.com/hardware/bytag/foo
-     *
-     * The latter is useful if you're doing home-grown barcodes, or
-     * some other automation where you don't always know the internal ID of
-     * an asset and don't want to query for it.
+     * Searches the assets table by asset tag, and redirects if it finds one
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param string $tag
      * @since [v3.0]
      * @return Redirect
      */
-    public function getAssetByTag(Request $request, $tag = null)
+    public function getAssetByTag(Request $request)
     {
-
         $topsearch = ($request->get('topsearch')=="true");
 
-        // We need this part to determine whether a url query parameter has been passed, OR
-        // whether it's the url fragment we need to look at
-        $tag = ($request->get('assetTag')) ? $request->get('assetTag') : $tag;
-
-        if (!$asset = Asset::where('asset_tag', '=', $tag)->first()) {
+        if (!$asset = Asset::where('asset_tag', '=', $request->get('assetTag'))->first()) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
         $this->authorize('view', $asset);
         return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
     }
-
-
-    /**
-     * Searches the assets table by serial, and redirects if it finds one
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param string $serial
-     * @since [v4.9.1]
-     * @return Redirect
-     */
-    public function getAssetBySerial(Request $request, $serial = null)
-    {
-
-        $serial = ($request->get('serial')) ? $request->get('serial') : $serial;
-        if (!$asset = Asset::where('serial', '=', $serial)->first()) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
-        $this->authorize('view', $asset);
-        return redirect()->route('hardware.show', $asset->id);
-    }
-
-
     /**
      * Return a QR code for the asset
      *
@@ -520,7 +464,6 @@ class AssetsController extends Controller
         $barcode_file = public_path().'/uploads/barcodes/'.str_slug($settings->alt_barcode).'-'.str_slug($asset->asset_tag).'.png';
 
         if (isset($asset->id, $asset->asset_tag)) {
-
             if (file_exists($barcode_file)) {
                 $header = ['Content-type' => 'image/png'];
                 return response()->file($barcode_file, $header);
@@ -529,14 +472,14 @@ class AssetsController extends Controller
                 $barcode_width = ($settings->labels_width - $settings->labels_display_sgutter) * 96.000000000001;
 
                 $barcode = new \Com\Tecnick\Barcode\Barcode();
+                $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode,$asset->asset_tag,($barcode_width < 300 ? $barcode_width : 300),50);
 
-                try {
+                file_put_contents($barcode_file, $barcode_obj->getPngData());
                 return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
             }
         }
     }
 
-                    $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode,$asset->asset_tag,($barcode_width < 300 ? $barcode_width : 300),50);
 
     /**
      * Return a label for an individual asset.
@@ -545,24 +488,20 @@ class AssetsController extends Controller
      * @param int $assetId
      * @return View
      */
-                    file_put_contents($barcode_file, $barcode_obj->getPngData());
+    public function getLabel($assetId = null)
     {
         if (isset($assetId)) {
             $asset = Asset::find($assetId);
-                    return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+            $this->authorize('view', $asset);
 
-
-
+            return view('hardware/labels')
+                ->with('assets', Asset::find($asset))
                 ->with('settings', Setting::getSettings())
-                    \Log::debug('This usually happens because the asset tags are of a format that is not compatible with the selected barcode type.');
-                    $img = file_get_contents(public_path().'/uploads/barcodes/invalid_barcode.gif');
-                    return response($img)->header('Content-type', 'image/gif');
-                }
-
-
-            }
+                ->with('bulkedit', false)
+                ->with('count', 0);
         }
     }
+
 
     /**
      * Returns a view that presents a form to clone an asset.
@@ -843,6 +782,7 @@ class AssetsController extends Controller
                 $file_name = 'audit-'.str_random(18).'.'.$ext;
                 Storage::putFileAs($path, $upload, $file_name);
             }
+
 
             $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
             return redirect()->to("hardware")->with('success', trans('admin/hardware/message.audit.success'));

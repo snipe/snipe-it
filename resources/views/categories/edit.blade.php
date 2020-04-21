@@ -14,7 +14,7 @@
 <div class="form-group {{ $errors->has('category_type') ? ' has-error' : '' }}">
     <label for="category_type" class="col-md-3 control-label">{{ trans('general.type') }}</label>
     <div class="col-md-7 required">
-        {{ Form::select('category_type', $category_types , Input::old('category_type', $item->category_type), array('class'=>'select2', 'style'=>'min-width:350px', 'aria-label'=>'category_type', $item->itemCount() > 0 ? 'disabled' : '')) }}
+        {{ Form::select('category_type', $category_types , old('category_type', $item->category_type), array('class'=>'select2', 'style'=>'min-width:350px', 'aria-label'=>'category_type', $item->itemCount() > 0 ? 'disabled' : '')) }}
         {!! $errors->first('category_type', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
@@ -23,7 +23,7 @@
 <div class="form-group {{ $errors->has('eula_text') ? 'error' : '' }}">
     <label for="eula_text" class="col-md-3 control-label">{{ trans('admin/categories/general.eula_text') }}</label>
     <div class="col-md-7">
-        {{ Form::textarea('eula_text', Input::old('eula_text', $item->eula_text), array('class' => 'form-control', 'aria-label'=>'eula_text')) }}
+        {{ Form::textarea('eula_text', old('eula_text', $item->eula_text), array('class' => 'form-control', 'aria-label'=>'eula_text')) }}
         <p class="help-block">{!! trans('admin/categories/general.eula_text_help') !!} </p>
         <p class="help-block">{!! trans('admin/settings/general.eula_markdown') !!} </p>
 

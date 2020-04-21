@@ -70,7 +70,7 @@
                                 {{ Form::label('alert_email', trans('admin/settings/general.alert_email')) }}
                             </div>
                             <div class="col-md-7">
-                                {{ Form::text('alert_email', Input::old('alert_email', $setting->alert_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
+                                {{ Form::text('alert_email', old('alert_email', $setting->alert_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
                                 {!! $errors->first('alert_email', '<span class="alert-msg" aria-hidden="true">:message</span><br>') !!}
 
                                 <p class="help-block">Email addresses or distribution lists you want alerts to be sent to, comma separated</p>
@@ -86,7 +86,7 @@
                                 {{ Form::label('admin_cc_email', trans('admin/settings/general.admin_cc_email')) }}
                             </div>
                             <div class="col-md-7">
-                                {{ Form::text('admin_cc_email', Input::old('admin_cc_email', $setting->admin_cc_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
+                                {{ Form::text('admin_cc_email', old('admin_cc_email', $setting->admin_cc_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
                                 {!! $errors->first('admin_cc_email', '<span class="alert-msg" aria-hidden="true">:message</span><br>') !!}
 
                                 <p class="help-block">{{ trans('admin/settings/general.admin_cc_email_help') }}</p>
@@ -101,7 +101,7 @@
                                 {{ Form::label('alert_interval', trans('admin/settings/general.alert_interval')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('alert_interval', Input::old('alert_interval', $setting->alert_interval), array('class' => 'form-control','placeholder' => '30', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {{ Form::text('alert_interval', old('alert_interval', $setting->alert_interval), array('class' => 'form-control','placeholder' => '30', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                                 {!! $errors->first('alert_interval', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                                 {{ Form::label('alert_threshold', trans('admin/settings/general.alert_inv_threshold')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('alert_threshold', Input::old('alert_threshold', $setting->alert_threshold), array('class' => 'form-control','placeholder' => '5', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {{ Form::text('alert_threshold', old('alert_threshold', $setting->alert_threshold), array('class' => 'form-control','placeholder' => '5', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                                 {!! $errors->first('alert_threshold', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>

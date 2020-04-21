@@ -92,7 +92,7 @@
               <div class="col-md-8">
               <div class="input-group col-md-5 required">
                 <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
-                  <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkin_at" id="checkin_at" value="{{ Input::old('checkin_at', date('Y-m-d')) }}">
+                  <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkin_at" id="checkin_at" value="{{ old('checkin_at', date('Y-m-d')) }}">
                   <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                 </div>
                 {!! $errors->first('checkin_at', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -108,7 +108,7 @@
 
                 <div class="col-md-8">
                   <textarea class="col-md-6 form-control" id="note"
-                  name="note">{{ Input::old('note', $asset->note) }}</textarea>
+                  name="note">{{ old('note', $asset->note) }}</textarea>
                   {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                 </div>
               </div>

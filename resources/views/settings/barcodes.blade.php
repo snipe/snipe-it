@@ -47,7 +47,7 @@
                                     {{ Form::label('qr_code', trans('admin/settings/general.display_qr')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    {{ Form::checkbox('qr_code', '1', Input::old('qr_code', $setting->qr_code),array('class' => 'minimal', 'aria-label'=>'qr_code')) }}
+                                    {{ Form::checkbox('qr_code', '1', old('qr_code', $setting->qr_code),array('class' => 'minimal', 'aria-label'=>'qr_code')) }}
                                     {{ trans('general.yes') }}
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                     {{ Form::label('barcode_type', trans('admin/settings/general.barcode_type')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    {!! Form::barcode_types('barcode_type', Input::old('barcode_type', $setting->barcode_type), 'select2') !!}
+                                    {!! Form::barcode_types('barcode_type', old('barcode_type', $setting->barcode_type), 'select2') !!}
                                     {!! $errors->first('barcode_type', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                     {{ Form::label('alt_barcode_enabled', trans('admin/settings/general.display_alt_barcode')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    {{ Form::checkbox('alt_barcode_enabled', '1', Input::old('alt_barcode_enabled', $setting->alt_barcode_enabled),array('class' => 'minimal', 'aria-label'=>'alt_barcode_enabled')) }}
+                                    {{ Form::checkbox('alt_barcode_enabled', '1', old('alt_barcode_enabled', $setting->alt_barcode_enabled),array('class' => 'minimal', 'aria-label'=>'alt_barcode_enabled')) }}
                                     {{ trans('general.yes') }}
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                     {{ Form::label('alt_barcode', trans('admin/settings/general.alt_barcode_type')) }}
                                 </div>
                                 <div class="col-md-9">
-                                    {!! Form::alt_barcode_types('alt_barcode', Input::old('alt_barcode', $setting->alt_barcode), 'select2') !!}
+                                    {!! Form::alt_barcode_types('alt_barcode', old('alt_barcode', $setting->alt_barcode), 'select2') !!}
                                     {!! $errors->first('barcode_type', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                 </div>
                             </div>
