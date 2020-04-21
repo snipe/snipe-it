@@ -23,10 +23,11 @@ class Location extends SnipeModel
       'name'        => 'required|min:2|max:255|unique_undeleted',
       'city'        => 'min:2|max:255|nullable',
       'country'     => 'min:2|max:2|nullable',
-      'address'         => 'max:80|nullable',
-      'address2'        => 'max:80|nullable',
+      'address'         => 'max:255|nullable',
+      'address2'        => 'max:255|nullable',
       'zip'         => 'min:3|max:10|nullable',
-      'manager_id'  => 'exists:users,id|nullable'
+      'manager_id'  => 'exists:users,id|nullable',
+        'bitrix_id'  => 'min:1|max:10|nullable'
     );
 
     /**
@@ -59,6 +60,7 @@ class Location extends SnipeModel
         'currency',
         'manager_id',
         'image',
+        'bitrix_id',
     ];
     protected $hidden = ['user_id'];
 

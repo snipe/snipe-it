@@ -51,6 +51,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
         'state',
         'username',
         'zip',
+        'bitrix_id'
     ];
 
     protected $casts = [

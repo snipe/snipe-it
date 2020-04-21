@@ -26,6 +26,13 @@ class LocationPresenter extends Presenter
                 "switchable" => true,
                 "title" => trans('general.id'),
                 "visible" => false
+            ],            [
+                "field" => "bitrix_id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => "Bitrix id",
+                "visible" => true
             ],
             [
                 "field" => "name",
