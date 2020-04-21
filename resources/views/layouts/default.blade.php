@@ -15,9 +15,9 @@
 
 
 
-      <link rel="apple-touch-icon" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->logo) : '/img/logo.png' }}">
-      <link rel="apple-touch-startup-image" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->logo) : '/img/logo.png' }}">
-      <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->favicon) : 'favicon.ico' }} ">
+      <link rel="apple-touch-icon" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) : '/img/logo.png' }}">
+      <link rel="apple-touch-startup-image" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) : '/img/logo.png' }}">
+      <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->favicon)) : 'favicon.ico' }} ">
 
 
       <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -28,15 +28,16 @@
     </script>
 
     {{-- stylesheets --}}
-    <link rel="stylesheet" href="{{ mix('css/all.css') }}">
+    <link rel="stylesheet" href="{{ url('css/all.css') }}">
     @if (($snipeSettings) && ($snipeSettings->skin!=''))
-    <link rel="stylesheet" href="{{ mix('css/skins/skin-'.$snipeSettings->skin.'.min.css') }}">
+    <link rel="stylesheet" href="{{ url('css/skins/skin-'.$snipeSettings->skin.'.min.css') }}">
     @endif
     {{-- page level css --}}
     @stack('css')
 
       <link rel="stylesheet" href="{{ url('css/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css') }}">
 
+    @if (($snipeSettings) && ($snipeSettings->header_color!=''))
     <style nonce="{{ csrf_token() }}">
         .main-header .navbar, .main-header .logo {
             background-color: {{ $snipeSettings->header_color }};
@@ -81,7 +82,7 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
         <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
-    <![endif]-->
+
 
   </head>
   <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
@@ -834,8 +835,8 @@
     </div>
 
     {{-- Javascript files --}}
-    <script src="{{ url(mix('js/app.js')) }}" nonce="{{ csrf_token() }}"></script>
-    <script src="{{ url(mix('js/vendor.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url('/').('js/app.js') }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url('/').('js/vendor.js') }}" nonce="{{ csrf_token() }}"></script>
     {{-- Page level javascript --}}
     @stack('js')
 

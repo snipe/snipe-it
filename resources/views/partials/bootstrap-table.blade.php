@@ -1,12 +1,12 @@
 @push('css')
-<link rel="stylesheet" href="{{ mix('css/dist/bootstrap-table.css') }}">
+<link rel="stylesheet" href="{{ url('css/dist/bootstrap-table.css') }}">
 @endpush
 
 @push('js')
-<script src="{{ mix('js/dist/bootstrap-table.js') }}"></script>
+<script src="{{ url('js/dist/bootstrap-table.js') }}"></script>
 
 @if (!isset($simple_view))
-<script src="{{ mix('js/dist/bootstrap-table-simple-view.js') }}"></script>
+<script src="{{ url('js/dist/bootstrap-table-simple-view.js') }}"></script>
 @endif
 
 <script nonce="{{ csrf_token() }}">
