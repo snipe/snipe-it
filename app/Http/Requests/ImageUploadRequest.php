@@ -81,7 +81,7 @@ class ImageUploadRequest extends Request
                     $upload = Image::make($image->getRealPath())->resize(null, $w, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
-                     })
+                     });
 
                     // This requires a string instead of an object, so we use ($string)
                     Storage::disk('public')->put($path.'/'.$file_name, (string)$upload->encode());
@@ -117,18 +117,17 @@ class ImageUploadRequest extends Request
 
         // If the user isn't uploading anything new but wants to delete their old image, do so
         } elseif ($this->input('image_delete')=='1') {
-            Storage::disk('public')->delete($path.'/'.$item->{$fieldname});
-            $item->{$fieldname} = null;
-        }
 
             try {
-                unlink($path.'/'.$item->image);
+                Storage::disk('public')->delete($path.'/'.$item->{$fieldname});
+                $item->{$fieldname} = null;
             } catch (\Exception $e) {
                 \Log::debug($e);
             }
 
-            $item->image = null;
         }
+
+
         return $item;
     }
 }
