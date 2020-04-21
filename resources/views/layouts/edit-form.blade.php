@@ -49,11 +49,7 @@
             @endif
 
                 @if (isset($helpText))
-                    <div class="box-tools pull-right">
-                        <button class="slideout-menu-toggle btn btn-box-tool btn-box-tool-lg" data-toggle="tooltip" title="Help"><i class="fa fa-question" aria-hidden="true"></i>
-                        <span class="sr-only">Help</span>
                  @include('partials.forms.edit.submit-button')
-                </div>
                 @endif
             </div><!-- /.box-header -->
 
