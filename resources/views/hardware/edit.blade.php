@@ -35,7 +35,9 @@
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
           <div class="col-md-2 col-sm-12">
-              <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
+              <button class="add_field_button btn btn-default btn-sm">
+                  <i class="fa fa-plus"></i>
+              </button>
           </div>
       @endif
   </div>
@@ -75,7 +77,7 @@
   @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
   @endif
 
-  @include ('partials.forms.edit.serial', ['translated_serial' => trans('admin/hardware/form.serial')])
+  @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]','translated_serial' => trans('admin/hardware/form.serial')])
   @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
   @include ('partials.forms.edit.purchase_date')
   @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
