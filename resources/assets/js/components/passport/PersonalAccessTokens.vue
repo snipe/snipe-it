@@ -136,7 +136,7 @@
 
                         <h2 class="modal-title">
                             Personal Access Token
-                        </h4>
+                        </h2>
                     </div>
 
                     <div class="modal-body">
