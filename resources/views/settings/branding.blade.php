@@ -67,19 +67,19 @@
                                 @if (config('app.lock_passwords'))
                                     <p class="help-block">{{ trans('general.lock_passwords') }}</p>
                                 @else
-                                <label class="btn btn-default">
-                                    {{ trans('button.select_file')  }}
-                                    <input type="file" name="image" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
-                                </label>
+                                    <label class="btn btn-default">
+                                        {{ trans('button.select_file')  }}
+                                        <input type="file" name="image" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
+                                    </label>
 
                                     <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
-                                
-                                {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                <label for="clear_logo">
-                                {{ Form::checkbox('clear_logo', '1', old('clear_logo'),array('class' => 'minimal', 'aria-label'=>'clear_logo')) }}
-                                    {{ trans('general.delete') }}
-                                </label>
-                               @endif
+
+                                    {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                    <label for="clear_logo">
+                                        {{ Form::checkbox('clear_logo', '1', old('clear_logo'),array('class' => 'minimal', 'aria-label'=>'clear_logo')) }}
+                                        {{ trans('general.delete') }}
+                                    </label>
+                                @endif
                             </div>
                         </div>
 
@@ -96,51 +96,51 @@
                         </div>
 
                         <!-- Logo -->
-                        @include('partials/forms/edit/uploadLogo', [
-                            "logoVariable" => "logo",
-                            "logoId" => "uploadLogo",
-                            "logoLabel" => trans('admin/settings/general.logo'),
-                            "logoClearVariable" => "clear_logo",
-                            "helpBlock" => trans('general.logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
-                        ])
+                    @include('partials/forms/edit/uploadLogo', [
+                        "logoVariable" => "logo",
+                        "logoId" => "uploadLogo",
+                        "logoLabel" => trans('admin/settings/general.logo'),
+                        "logoClearVariable" => "clear_logo",
+                        "helpBlock" => trans('general.logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
+                    ])
 
-                        <!-- Email Logo -->
-                        @include('partials/forms/edit/uploadLogo', [
-                            "logoVariable" => "email_logo",
-                            "logoId" => "uploadEmailLogo",
-                            "logoLabel" => trans('admin/settings/general.email_logo'),
-                            "logoClearVariable" => "clear_email_logo",
-                            "helpBlock" => trans('admin/settings/general.email_logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
-                        ])
+                    <!-- Email Logo -->
+                    @include('partials/forms/edit/uploadLogo', [
+                        "logoVariable" => "email_logo",
+                        "logoId" => "uploadEmailLogo",
+                        "logoLabel" => trans('admin/settings/general.email_logo'),
+                        "logoClearVariable" => "clear_email_logo",
+                        "helpBlock" => trans('admin/settings/general.email_logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
+                    ])
 
-                        <!-- Label Logo -->
-                        @include('partials/forms/edit/uploadLogo', [
-                            "logoVariable" => "label_logo",
-                            "logoId" => "uploadLabelLogo",
-                            "logoLabel" => trans('admin/settings/general.label_logo'),
-                            "logoClearVariable" => "clear_label_logo",
-                            "helpBlock" => trans('admin/settings/general.label_logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
-                        ])
+                    <!-- Label Logo -->
+                    @include('partials/forms/edit/uploadLogo', [
+                        "logoVariable" => "label_logo",
+                        "logoId" => "uploadLabelLogo",
+                        "logoLabel" => trans('admin/settings/general.label_logo'),
+                        "logoClearVariable" => "clear_label_logo",
+                        "helpBlock" => trans('admin/settings/general.label_logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
+                    ])
 
-                        <!-- Favicon -->
-                        @include('partials/forms/edit/uploadLogo', [
-                            "logoVariable" => "favicon",
-                            "logoId" => "uploadFavicon",
-                            "logoLabel" => trans('admin/settings/general.favicon'),
-                            "logoClearVariable" => "clear_favicon",
-                            "helpBlock" => trans('admin/settings/general.favicon_size') . trans('admin/settings/general.favicon_format'),
-                            "allowedTypes" => "image/x-icon,image/gif,image/jpeg,image/png,image/svg",
-                            "maxSize" => 1000
-                        ])
+                    <!-- Favicon -->
+                    @include('partials/forms/edit/uploadLogo', [
+                        "logoVariable" => "favicon",
+                        "logoId" => "uploadFavicon",
+                        "logoLabel" => trans('admin/settings/general.favicon'),
+                        "logoClearVariable" => "clear_favicon",
+                        "helpBlock" => trans('admin/settings/general.favicon_size') . trans('admin/settings/general.favicon_format'),
+                        "allowedTypes" => "image/x-icon,image/gif,image/jpeg,image/png,image/svg",
+                        "maxSize" => 1000
+                    ])
 
-                        <!-- Include logo in print assets -->
+                    <!-- Include logo in print assets -->
                         <div class="form-group">
                             <div class="col-md-3">
                                 {{ Form::label('logo_print_assets', trans('admin/settings/general.logo_print_assets')) }}
                             </div>
                             <div class="col-md-9">
                                 {{ Form::checkbox('logo_print_assets', '1', old('logo_print_assets', $setting->logo_print_assets),array('class' => 'minimal', 'aria-label'=>'logo_print_assets')) }}
-                                    {{ trans('admin/settings/general.logo_print_assets_help') }}
+                                {{ trans('admin/settings/general.logo_print_assets_help') }}
 
                             </div>
                         </div>
@@ -152,8 +152,8 @@
                                 {{ Form::label('show_url_in_emails', trans('admin/settings/general.show_url_in_emails')) }}
                             </div>
                             <div class="col-md-9">
-                                    {{ Form::checkbox('show_url_in_emails', '1', old('show_url_in_emails', $setting->show_url_in_emails),array('class' => 'minimal', 'aria-label'=>'show_url_in_emails')) }}
-                                    {{ trans('general.yes') }}
+                                {{ Form::checkbox('show_url_in_emails', '1', old('show_url_in_emails', $setting->show_url_in_emails),array('class' => 'minimal', 'aria-label'=>'show_url_in_emails')) }}
+                                {{ trans('general.yes') }}
                                 <p class="help-block">{{ trans('admin/settings/general.show_url_in_emails_help_text') }}</p>
                             </div>
                         </div>
@@ -253,7 +253,7 @@
                                     {{ Form::textarea('footer_text', Request::old('footer_text', $setting->footer_text), array('class' => 'form-control','rows' => '4','placeholder' => 'Optional footer text')) }}
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.footer_text_help') !!}</p>
-                                 {!! $errors->first('footer_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                {!! $errors->first('footer_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
 
                             </div>
                         </div>
@@ -263,16 +263,16 @@
 
                     </div>
 
-                    </div> <!--/.box-body-->
-                    <div class="box-footer">
-                        <div class="text-left col-md-6">
-                            <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
-                        </div>
-                        <div class="text-right col-md-6">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
-                        </div>
-
+                </div> <!--/.box-body-->
+                <div class="box-footer">
+                    <div class="text-left col-md-6">
+                        <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
+                    <div class="text-right col-md-6">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                    </div>
+
+                </div>
             </div> <!-- /box -->
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
