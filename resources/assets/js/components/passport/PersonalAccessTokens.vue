@@ -68,7 +68,7 @@
 
                         <h2 class="modal-title">
                             Create Token
-                        </h4>
+                        </h2>
                     </div>
 
                     <div class="modal-body">
