@@ -29,13 +29,14 @@
 
     {{-- stylesheets --}}
     <link rel="stylesheet" href="{{ url('css/all.css') }}">
-    @if (($snipeSettings) && ($snipeSettings->skin!=''))
-    <link rel="stylesheet" href="{{ url('css/skins/skin-'.$snipeSettings->skin.'.css') }}">
-    @endif
-    {{-- page level css --}}
+      <link rel="stylesheet" href="{{ url('css/overrides.css') }}">
+    <link rel="stylesheet" href="{{ url('css/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css') }}">
+
+
+      {{-- page level css --}}
     @stack('css')
 
-      <link rel="stylesheet" href="{{ url('css/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css') }}">
+
 
     @if (($snipeSettings) && ($snipeSettings->header_color!=''))
     <style nonce="{{ csrf_token() }}">
