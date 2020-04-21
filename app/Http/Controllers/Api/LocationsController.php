@@ -8,8 +8,6 @@ use App\Helpers\Helper;
 use App\Models\Location;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 
 class LocationsController extends Controller
 {
@@ -28,7 +26,7 @@ class LocationsController extends Controller
                 'updated_at','manager_id','image',
                 'assigned_assets_count','users_count','assets_count','currency'];
 
-        $locations = Location::with('parent', 'manager', 'children')->select([
+        $locations = Location::with('parent', 'manager', 'childLocations')->select([
             'locations.id',
             'locations.name',
             'locations.address',
@@ -112,7 +110,7 @@ class LocationsController extends Controller
     public function show($id)
     {
         $this->authorize('view', Location::class);
-        $location = Location::with('parent', 'manager', 'children')
+        $location = Location::with('parent', 'manager', 'childLocations')
             ->select([
                 'locations.id',
                 'locations.name',
@@ -149,13 +147,6 @@ class LocationsController extends Controller
     {
         $this->authorize('update', Location::class);
         $location = Location::findOrFail($id);
-
-        if ($request->input('parent_id') == $id) {
-
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'A location cannot be its own parent. Please select a different parent ID.'));
-        }
-
-
         $location->fill($request->all());
 
         if ($location->save()) {
@@ -208,35 +199,49 @@ class LocationsController extends Controller
      * the entire data set, and then invoke a paginator manually and pass that
      * through to the SelectListTransformer.
      *
-     * Many thanks to @uberbrady for the help getting this working better.
-     * Recursion still sucks, but I guess he doesn't have to get in the
-     * sea... this time.
-     *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      *
      */
-    public function selectlist(Request $request)
+    public function selectlist(Request $request, $selected_id = null)
     {
+
+
 
         $locations = Location::select([
             'locations.id',
             'locations.name',
-            'locations.parent_id',
             'locations.image',
-        ]);
+        ])->orderBy('name', 'ASC')->paginate(50)->map(function ($location) {
+            return $location->groupBy('parent_id')
+                ->map(function ($parentName) {
+                return $parentName->map(function ($parent) {
+                    return $parent->game_types->groupBy('parent_id');
+                });
+            });
+        });
 
         $page = 1;
         if ($request->filled('page')) {
             $page = $request->input('page');
         }
 
-        if ($request->filled('search')) {
-            $locations = $locations->where('locations.name', 'LIKE', '%'.$request->input('search').'%');
-        }
 
-        $locations = $locations->orderBy('name', 'ASC')->get();
+//        $locations = Location::select([
+//            'locations.id',
+//            'locations.name',
+//            'locations.image',
+//        ]);
+//
+//        if ($request->filled('search')) {
+//            $locations = $locations->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
+//        }
+//
+//
+//        $locations = $locations->groupBy(function ($locations) {
+//            return $locations->parent_id;
+//        })->orderBy('name', 'ASC')->paginate(50);
 
         $locations_with_children = [];
 
@@ -254,13 +259,18 @@ class LocationsController extends Controller
             $locations_formatted = new Collection($location_options);
 
         }
+        // so that a location can't be its own parent
 
-        $paginated_results =  new LengthAwarePaginator($locations_formatted->forPage($page, 500), $locations_formatted->count(), 500, $page, []);
+        // Loop through and set some custom properties for the transformer to use.
+        // This lets us have more flexibility in special cases like assets, where
+        // they may not have a ->name value but we want to display something anyway
+//        foreach ($location_options as $location) {
+//            $location->use_text = $location->name;
+//            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
+//        }
 
-        //return [];
-        return (new SelectlistTransformer)->transformSelectlist($paginated_results);
+        return (new SelectlistTransformer)->transformSelectlist($locations);
 
     }
-
 
 }

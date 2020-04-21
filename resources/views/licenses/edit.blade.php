@@ -1,9 +1,8 @@
 @extends('layouts/edit-form', [
-    'createText' => trans('admin/licenses/form.create') ,
+    'createText' => trans('admin/licenses/form.create'),
     'updateText' => trans('admin/licenses/form.update'),
-    'helpTitle' => trans('admin/licenses/general.about_licenses_title'),
-    'helpText' => trans('admin/licenses/general.about_licenses_text'),
-    'formAction' => ($item) ? route('licenses.update', ['license' => $item->id]) : route('license.store'),
+    'topSubmit' => true,
+    'formAction' => ($item->id) ? route('licenses.update', ['license' => $item->id]) : route('licenses.store'),
 ])
 
 {{-- Page content --}}
@@ -28,7 +27,7 @@
     <label for="seats" class="col-md-3 control-label">{{ trans('admin/licenses/form.seats') }}</label>
     <div class="col-md-7 col-sm-12 required">
         <div class="col-md-2" style="padding-left:0px">
-            <input class="form-control" type="text" name="seats" id="seats" value="{{ Input::old('seats', $item->seats) }}" />
+            <input class="form-control" type="text" name="seats" id="seats" value="{{ Request::old('seats', $item->seats) }}" />
         </div>
     </div>
     {!! $errors->first('seats', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span></div>') !!}

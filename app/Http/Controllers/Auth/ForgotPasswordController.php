@@ -52,6 +52,7 @@ class ForgotPasswordController extends Controller
      */
     public function sendResetLinkEmail(Request $request)
     {
+        $this->validate($request, ['username' => 'required'], ['username.required' => 'Please enter your username.']);
 
         /**
          * Let's set a max character count here to prevent potential
@@ -69,13 +70,16 @@ class ForgotPasswordController extends Controller
          */
         $response = $this->broker()->sendResetLink(
             array_merge(
-                $request->only('email'),
-                ['activated' => '1']
+                $request->only('username'),
+                ['activated' => '1'],
+                ['ldap_import' => '0']
             )
         );
 
         if ($response === \Password::RESET_LINK_SENT) {
-            return redirect()->route('login')->with('status', trans($response));
+            \Log::info('Password reset attempt: User '.$request->input('username').' found, password reset sent');
+        } else {
+            \Log::info('Password reset attempt: User '.$request->input('username').' not found or user is inactive');
         }
 
 
@@ -92,9 +96,9 @@ class ForgotPasswordController extends Controller
          * It's bad UX, but better security. The compromises we sometimes have to make.
         */
 
-        if ($response == 'passwords.user') {
-            \Log::debug('User with email '.$request->input('email').' attempted a password reset request but was not found. No email was sent.');
-            return redirect()->route('login')->with('success', trans('passwords.user_inactive'));
+        // Regardless of response, we do not want to disclose the status of a user account,
+        // so we give them a generic "If this exists, we're TOTALLY gonna email you" response
+        return redirect()->route('login')->with('success',trans('passwords.sent'));
         }
 
         return back()->withErrors(

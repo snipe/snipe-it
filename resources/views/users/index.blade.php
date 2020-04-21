@@ -3,7 +3,7 @@
 {{-- Page title --}}
 @section('title')
 
-@if (Input::get('status')=='deleted')
+@if (Request::get('status')=='deleted')
     {{ trans('general.deleted') }}
 @else
     {{ trans('general.current') }}
@@ -21,7 +21,7 @@
       <a href="{{ route('users.create') }}" class="btn btn-primary pull-right" style="margin-right: 5px;">  {{ trans('general.create') }}</a>
     @endcan
 
-    @if (Input::get('status')=='deleted')
+    @if (Request::get('status')=='deleted')
       <a class="btn btn-default pull-right" href="{{ route('users.index') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_current') }}</a>
     @else
       <a class="btn btn-default pull-right" href="{{ route('users.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
@@ -44,13 +44,14 @@
                'class' => 'form-inline',
                 'id' => 'bulkForm']) }}
 
-            @if (Input::get('status')!='deleted')
+            @if (Request::get('status')!='deleted')
               @can('delete', \App\Models\User::class)
                 <div id="toolbar">
                     <label for="bulk_actions" class="sr-only">Bulk Actions</label>
                   <select name="bulk_actions" class="form-control select2" style="width: 200px;" aria-label="bulk_actions">
                     <option value="delete">Bulk Checkin &amp; Delete</option>
                     <option value="edit">Bulk Edit</option>
+                    <option value="bulkpasswordreset">Send Password Reset</option>
                   </select>
                   <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
                 </div>
@@ -74,7 +75,7 @@
                     id="usersTable"
                     class="table table-striped snipe-table"
                     data-url="{{ route('api.users.index',
-              array('deleted'=> (Input::get('status')=='deleted') ? 'true' : 'false','company_id'=>e(Input::get('company_id')))) }}"
+              array('deleted'=> (Request::get('status')=='deleted') ? 'true' : 'false','company_id'=>e(Request::get('company_id')))) }}"
                     data-export-options='{
                 "fileName": "export-users-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]

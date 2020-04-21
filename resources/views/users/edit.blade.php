@@ -67,7 +67,7 @@
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <form class="form-horizontal" method="post" autocomplete="off" action="{{ ($user) ? route('users.update', ['user' => $user->id]) : route('users.store') }}" id="userForm">
+    <form class="form-horizontal" method="post" autocomplete="off" action="{{ (isset($user->id)) ? route('users.update', ['user' => $user->id]) : route('users.store') }}" enctype="multipart/form-data" id="userForm">
       {{csrf_field()}}
 
       @if($user->id)
@@ -112,7 +112,7 @@
                         type="text"
                         name="username"
                         id="username"
-                        value="{{ Input::old('username', $user->username) }}"
+                        value="{{ Request::old('username', $user->username) }}"
                         autocomplete="off"
                         readonly
                         onfocus="this.removeAttribute('readonly');"
@@ -123,7 +123,7 @@
                       @endif
                     @else
                       (Managed via LDAP)
-                          <input type="hidden" name="username" value="{{ Input::old('username', $user->username) }}">
+                          <input type="hidden" name="username" value="{{ Request::old('username', $user->username) }}">
 
                     @endif
 
@@ -197,7 +197,7 @@
                       type="text"
                       name="email"
                       id="email"
-                      value="{{ Input::old('email', $user->email) }}"
+                      value="{{ Request::old('email', $user->email) }}"
                       {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                       autocomplete="off"
                       readonly
@@ -213,6 +213,22 @@
                 @if (\App\Models\Company::canManageUsersCompanies())
                     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.select_company'), 'fieldname' => 'company_id'])
                 @endif
+
+
+              <!-- Image -->
+                  @if ($user->avatar)
+                      <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
+                          <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
+                          <div class="col-md-5">
+                              {{ Form::checkbox('image_delete') }}
+                              <img src="{{ Storage::disk('public')->url(app('users_upload_path').e($user->avatar)) }}" class="img-responsive" />
+                              {!! $errors->first('image_delete', '<span class="alert-msg"><br>:message</span>') !!}
+                          </div>
+                      </div>
+                  @endif
+
+                  @include ('partials.forms.edit.image-upload', ['fieldname' => 'avatar'])
+
 
                 <!-- language -->
                 <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
@@ -233,7 +249,7 @@
                       aria-label="employee_num"
                       name="employee_num"
                       id="employee_num"
-                      value="{{ Input::old('employee_num', $user->employee_num) }}"
+                      value="{{ Request::old('employee_num', $user->employee_num) }}"
                     />
                     {!! $errors->first('employee_num', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
@@ -249,7 +265,7 @@
                       type="text"
                       name="jobtitle"
                       id="jobtitle"
-                      value="{{ Input::old('jobtitle', $user->jobtitle) }}"
+                      value="{{ Request::old('jobtitle', $user->jobtitle) }}"
                     />
                     {!! $errors->first('jobtitle', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
@@ -350,7 +366,7 @@
                                   </div>
                               @elseif ($user->id === Auth::user()->id)
                                   <div class="icheckbox disabled" style="padding-left: 10px;">
-                                      <input type="checkbox" value="1" name="activated" class="minimal disabled"  checked="checked" disabled="disabled">
+                                      <input type="checkbox" value="1" name="activated" class="minimal disabled" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} disabled="disabled">
                                       <!-- this is necessary because the field is disabled and will reset -->
                                       <input type="hidden" name="activated" value="1" aria-label="activated">
                                       {{ trans('admin/users/general.activated_help_text') }}
@@ -369,6 +385,26 @@
                     </div>
                   </div>
 
+                <!-- Email user -->
+                @if (!$user->id)
+                    <div class="form-group" id="email_user_row" style="display: none;">
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-md-9">
+                            <div class="icheckbox disabled" id="email_user_div">
+                                {{ Form::checkbox('email_user', '1', Request::old('email_user'),['class' => 'minimal', 'disabled'=>true, 'id' => 'email_user_checkbox']) }}
+                                Email this user their credentials?
+
+                            </div>
+                            <p class="help-block">
+                                {{ trans('admin/users/general.send_email_help') }}
+                            </p>
+
+
+                        </div>
+                    </div> <!--/form-group-->
+                @endif
+
                 @if ($snipeSettings->two_factor_enabled!='')
                   @if ($snipeSettings->two_factor_enabled=='1')
                   <div class="form-group">
@@ -378,11 +414,11 @@
                     <div class="col-md-9">
                         @if (config('app.lock_passwords'))
                             <div class="icheckbox disabled">
-                            {{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),['class' => 'minimal', 'disabled'=>'disabled']) }} {{ trans('admin/settings/general.two_factor_enabled_text') }}
+                            {{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),['class' => 'minimal', 'disabled'=>'disabled']) }} {{ trans('admin/settings/general.two_factor_enabled_text') }}
                                 <p class="help-block">{{ trans('general.feature_disabled') }}</p>
                             </div>
                         @else
-                            {{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),['class' => 'minimal']) }} {{ trans('admin/settings/general.two_factor_enabled_text') }}
+                            {{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),['class' => 'minimal']) }} {{ trans('admin/settings/general.two_factor_enabled_text') }}
                             <p class="help-block">{{ trans('admin/users/general.two_factor_admin_optin_help') }}</p>
 
                         @endif
@@ -460,21 +496,6 @@
                   </div>
 
 
-                <!-- Email user -->
-                @if (!$user->id)
-                <div class="form-group">
-                  <div class="col-sm-3">
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="checkbox">
-                      <label for="email_user">
-                        {{ Form::checkbox('email_user', '1', Input::old('email_user'), array('id'=>'email_user','disabled'=>'disabled')) }}
-                        Email this user their credentials? <span class="help-text" id="email_user_warn">(Cannot send email. No user email address specified.)</span>
-                      </label>
-                    </div>
-                  </div>
-                </div> <!--/form-group-->
-                @endif
               </div> <!--/col-md-12-->
             </div>
           </div><!-- /.tab-pane -->
@@ -610,22 +631,27 @@
 @stop
 
 @section('moar_scripts')
-<script src="{{ asset('js/pGenerator.jquery.js') }}"></script>
 
 <script nonce="{{ csrf_token() }}">
 $(document).ready(function() {
 
-	$('#email').on('keyup',function(){
+    $('#user_activated').on('ifChecked', function(event){
+        $("#email_user_row").show();
 
-	    if(this.value.length > 0){
-	        $("#email_user").prop("disabled",false);
-			$("#email_user_warn").html("");
-	    } else {
-	        $("#email_user").prop("disabled",true);
-			$("#email_user").prop("checked",false);
-	    }
+        $('#email').on('keyup',function(){
+            event.preventDefault();
 
+            if(this.value.length > 5){
+                $('#email_user_checkbox').iCheck('enable');
+            } else {
+                $('#email_user_checkbox').iCheck('disable').iCheck('uncheck');
+            }
+        });
 	});
+
+    $('#user_activated').on('ifUnchecked', function(event){
+        $("#email_user_row").hide();
+    });
 
 	// Check/Uncheck all radio buttons in the group
     $('tr.header-row input:radio').on('ifClicked', function () {

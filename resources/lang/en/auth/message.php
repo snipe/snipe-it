@@ -41,9 +41,5 @@ return array(
         'success' => 'Your password has been successfully reset.',
     ),
 
-    'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
-    ),
 
 );

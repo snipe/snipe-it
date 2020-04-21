@@ -21,6 +21,7 @@ $factory->state(App\Models\Accessory::class, 'apple-bt-keyboard', function ($fak
 
     return [
         'name' => 'Bluetooth Keyboard',
+        'image' => 'bluetooth.jpg',
         'category_id' => 8,
         'manufacturer_id' => 1,
         'qty' => 10,
@@ -34,6 +35,7 @@ $factory->state(App\Models\Accessory::class, 'apple-usb-keyboard', function ($fa
 
     return [
         'name' => 'USB Keyboard',
+        'image' => 'usb-keyboard.jpg',
         'category_id' => 8,
         'manufacturer_id' => 1,
         'qty' => 15,
@@ -47,6 +49,7 @@ $factory->state(App\Models\Accessory::class, 'apple-mouse', function ($faker) {
 
     return [
         'name' => 'Magic Mouse',
+        'image' => 'magic-mouse.jpg',
         'category_id' => 9,
         'manufacturer_id' => 1,
         'qty' => 13,
@@ -60,6 +63,7 @@ $factory->state(App\Models\Accessory::class, 'microsoft-mouse', function ($faker
 
     return [
         'name' => 'Sculpt Comfort Mouse',
+        'image' => 'comfort-mouse.jpg',
         'category_id' => 9,
         'manufacturer_id' => 2,
         'qty' => 13,

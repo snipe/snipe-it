@@ -1,22 +1,9 @@
 <?php
 namespace App\Providers;
 
-use Validator;
-use Illuminate\Support\ServiceProvider;
 use DB;
-use Log;
-use Illuminate\Support\Facades\Schema;
-use App\Observers\AssetObserver;
-use App\Observers\LicenseObserver;
-use App\Observers\AccessoryObserver;
-use App\Observers\ConsumableObserver;
-use App\Observers\ComponentObserver;
-use App\Models\Asset;
-use App\Models\License;
-use App\Models\Accessory;
-use App\Models\Consumable;
-use App\Models\Component;
-
+use Illuminate\Support\ServiceProvider;
+use Validator;
 
 /**
  * This service provider handles a few custom validation rules.
@@ -102,6 +89,24 @@ class ValidationServiceProvider extends ServiceProvider
             return true;
 
         });
+
+
+        Validator::extend('letters', function ($attribute, $value, $parameters) {
+            return preg_match('/\pL/', $value);
+        });
+
+        Validator::extend('numbers', function ($attribute, $value, $parameters) {
+            return preg_match('/\pN/', $value);
+        });
+
+        Validator::extend('case_diff', function ($attribute, $value, $parameters) {
+            return preg_match('/(\p{Ll}+.*\p{Lu})|(\p{Lu}+.*\p{Ll})/u', $value);
+        });
+
+        Validator::extend('symbols', function ($attribute, $value, $parameters) {
+            return preg_match('/\p{Z}|\p{S}|\p{P}/', $value);
+        });
+
 
     }
 

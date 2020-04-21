@@ -1,9 +1,6 @@
 <?php
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-use Illuminate\Support\Facades\Gate;
-
 /**
  * Class AccessoryPresenter
  * @package App\Presenters

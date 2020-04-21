@@ -1,9 +1,6 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\Location;
-
-
 class DatatablesTransformer
 {
 

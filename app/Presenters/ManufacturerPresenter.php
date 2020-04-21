@@ -2,8 +2,6 @@
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-
 /**
  * Class ManufacturerPresenter
  * @package App\Presenters

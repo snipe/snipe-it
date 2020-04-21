@@ -3,7 +3,7 @@
     'updateText' => trans('admin/manufacturers/table.update'),
     'helpTitle' => trans('admin/manufacturers/table.about_manufacturers_title'),
     'helpText' => trans('admin/manufacturers/table.about_manufacturers_text'),
-    'formAction' => ($item) ? route('manufacturers.update', ['manufacturer' => $item->id]) : route('manufacturers.store'),
+    'formAction' => (isset($item->id)) ? route('manufacturers.update', ['manufacturer' => $item->id]) : route('manufacturers.store'),
 ])
 
 

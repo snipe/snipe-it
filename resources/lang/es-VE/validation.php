@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'El :attribute fallo al cargar.',
     'url'                  => 'El formato :attribute es inválido.',
     "unique_undeleted"     => "El :atrribute debe ser único.",
+    "import_field_empty"   => "El valor del Import Field no puede estar vacío.",
 
     /*
     |--------------------------------------------------------------------------

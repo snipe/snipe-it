@@ -2,9 +2,8 @@
 
 namespace App\Observers;
 
-use App\Models\Consumable;
-use App\Models\Setting;
 use App\Models\Actionlog;
+use App\Models\Consumable;
 use Auth;
 
 class ConsumableObserver

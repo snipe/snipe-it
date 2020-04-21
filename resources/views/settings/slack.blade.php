@@ -38,7 +38,7 @@
                 <div class="box-body">
 
 
-                    <p style="border-bottom: 0px;">
+                    <p style="padding: 20px;">
                         {!! trans('admin/settings/general.slack_integration_help',array('slack_link' => 'https://my.slack.com/services/new/incoming-webhook')) !!}
 
                     @if (($setting->slack_channel=='') && ($setting->slack_endpoint==''))
@@ -55,11 +55,11 @@
                             <div class="col-md-3">
                                 {{ Form::label('slack_endpoint', trans('admin/settings/general.slack_endpoint')) }}
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::text('slack_endpoint', Input::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX')) }}
+                                    {{ Form::text('slack_endpoint', Request::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX')) }}
                                 @else
-                                    {{ Form::text('slack_endpoint', Input::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX')) }}
+                                    {{ Form::text('slack_endpoint', Request::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX')) }}
                                 @endif
                                 {!! $errors->first('slack_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
@@ -70,11 +70,11 @@
                             <div class="col-md-3">
                                 {{ Form::label('slack_channel', trans('admin/settings/general.slack_channel')) }}
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::text('slack_channel', Input::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','disabled'=>'disabled','placeholder' => '#IT-Ops')) }}
+                                    {{ Form::text('slack_channel', Request::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','disabled'=>'disabled','placeholder' => '#IT-Ops')) }}
                                 @else
-                                    {{ Form::text('slack_channel', Input::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','placeholder' => '#IT-Ops')) }}
+                                    {{ Form::text('slack_channel', Request::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','placeholder' => '#IT-Ops')) }}
                                 @endif
                                 {!! $errors->first('slack_channel', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
@@ -85,11 +85,11 @@
                             <div class="col-md-3">
                                 {{ Form::label('slack_botname', trans('admin/settings/general.slack_botname')) }}
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::text('slack_botname', Input::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'Snipe-Bot')) }}
+                                    {{ Form::text('slack_botname', Request::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'Snipe-Bot')) }}
                                 @else
-                                    {{ Form::text('slack_botname', Input::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','placeholder' => 'Snipe-Bot')) }}
+                                    {{ Form::text('slack_botname', Request::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','placeholder' => 'Snipe-Bot')) }}
                                 @endif
                                 {!! $errors->first('slack_botname', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
@@ -100,10 +100,10 @@
                             <div class="col-md-3">
                                 {{ Form::label('est_slack', 'Test Slack') }}
                             </div>
-                            <div class="col-md-9" id="slacktestrow">
+                            <div class="col-md-8" id="slacktestrow">
                                 <a class="btn btn-default btn-sm pull-left" id="slacktest" style="margin-right: 10px;">Test <i class="fa fa-slack"></i> Integration</a>
                             </div>
-                            <div class="col-md-9 col-md-offset-3">
+                            <div class="col-md-8 col-md-offset-3">
                                 <span id="slacktesticon"></span>
                                 <span id="slacktestresult"></span>
                                 <span id="slackteststatus"></span>

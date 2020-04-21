@@ -66,11 +66,6 @@ class Manufacturer extends SnipeModel
 
 
 
-    public function has_models()
-    {
-        return $this->hasMany('\App\Models\AssetModel', 'manufacturer_id')->count();
-    }
-
     public function assets()
     {
         return $this->hasManyThrough('\App\Models\Asset', '\App\Models\AssetModel', 'manufacturer_id', 'model_id');

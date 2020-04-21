@@ -258,6 +258,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Minimum PHP version
+    |--------------------------------------------------------------------------
+    |
+    | Do not change this variable.
+    |
+    */
+
+    'min_php' => '7.1.3',
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -307,7 +319,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Unicodeveloper\DumbPassword\DumbPasswordServiceProvider::class,
-        Schuppo\PasswordStrength\PasswordStrengthServiceProvider::class,
+        //Schuppo\PasswordStrength\PasswordStrengthServiceProvider::class,
         Tightenco\Ziggy\ZiggyServiceProvider::class, // Laravel routes in vue
         Eduardokum\LaravelMailAutoEmbed\ServiceProvider::class,
 
@@ -326,6 +338,7 @@ return [
         * Custom service provider
         */
         App\Providers\MacroServiceProvider::class,
+        App\Providers\LdapServiceProvider::class,
 
 
     ],
@@ -375,12 +388,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Input' => Illuminate\Support\Facades\Input::class,
+        //'Input' => Illuminate\Support\Facades\Input::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
-        'Google2FA' => PragmaRX\Google2FA\Vendor\Laravel\Facade::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Image'     => Intervention\Image\ImageManagerStatic::class,
+        'Google2FA' => PragmaRX\Google2FALaravel\Facade::class,
+        // 'Debugbar' => Barryvdh\Debugbar\Facade::class, //autodiscover should handle this
+        'Image'     => Intervention\Image\ImageServiceProvider::class,
         'Carbon' => Carbon\Carbon::class,
 
 

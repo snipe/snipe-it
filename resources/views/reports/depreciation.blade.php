@@ -51,9 +51,10 @@
                 <th class="col-sm-1">{{ trans('admin/hardware/table.location') }}</th>
                 <th class="col-sm-1">{{ trans('admin/hardware/table.purchase_date') }}</th>
                 <th class="col-sm-1">{{ trans('admin/hardware/table.eol') }}</th>
-                <th class="col-sm-1">{{ trans('admin/hardware/table.purchase_cost') }}</th>
-                <th class="col-sm-1">{{ trans('admin/hardware/table.book_value') }}</th>
-                <th class="col-sm-1">{{ trans('admin/hardware/table.diff') }}</th>
+                <th class="col-sm-1 align-right">{{ trans('admin/hardware/table.purchase_cost') }}</th>
+                <th class="col-sm-1 align-right">{{ trans('admin/hardware/table.book_value') }}</th>
+                <th class="col-sm-1 align-right">{{ trans('admin/hardware/table.monthly_depreciation') }}</th>
+                <th class="col-sm-1 align-right">{{ trans('admin/hardware/table.diff') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -130,6 +131,17 @@
                     {{ \App\Helpers\Helper::formatCurrencyOutput($asset->getDepreciatedValue()) }}
                   </td>
                   <td class="align-right">
+                    @if ($asset->model->depreciation)
+                      @if ($asset->location && $asset->location->currency)
+                      {{ $asset->location->currency }}
+                      @else
+                      {{ $snipeSettings->default_currency }}
+                      @endif
+
+                      {{ \App\Helpers\Helper::formatCurrencyOutput(($asset->model->eol > 0 ? ($asset->purchase_cost / $asset->model->eol) : 0)) }}
+                    @endif
+                  </td>
+                  <td class="align-right">
                     @if ($asset->location && $asset->location->currency)
                     {{ $asset->location->currency }}
                     @else
@@ -139,6 +151,7 @@
                     -{{ \App\Helpers\Helper::formatCurrencyOutput(($asset->purchase_cost - $asset->getDepreciatedValue())) }}
                   </td>
                 @else
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

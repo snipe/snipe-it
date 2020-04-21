@@ -19,11 +19,9 @@
             padding-right: 40px;
         }
     </style>
-    <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href="{{ asset('js/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
 
 
-    {{ Form::open(['method' => 'POST', 'files' => true, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    {{ Form::open(['method' => 'POST', 'files' => true, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'create-form' ]) }}
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -40,7 +38,7 @@
                 <div class="box-body">
 
 
-                    <div class="col-md-11 col-md-offset-1">
+                    <div class="col-md-12">
 
                         <!-- Site name -->
                         <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
@@ -48,12 +46,12 @@
                             <div class="col-md-3">
                                 {{ Form::label('site_name', trans('admin/settings/general.site_name')) }}
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-7 required">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Snipe-IT Asset Management')) }}
+                                    {{ Form::text('site_name', Request::old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Snipe-IT Asset Management')) }}
                                 @else
                                     {{ Form::text('site_name',
-                                        Input::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management')) }}
+                                        Request::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management', 'data-validation' => 'required')) }}
                                 @endif
                                 {!! $errors->first('site_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
@@ -96,6 +94,44 @@
                                 {!! $errors->first('brand', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
+
+                        <!-- Logo -->
+                        @include('partials/forms/edit/uploadLogo', [
+                            "logoVariable" => "logo",
+                            "logoId" => "uploadLogo",
+                            "logoLabel" => trans('admin/settings/general.logo'),
+                            "logoClearVariable" => "clear_logo",
+                            "helpBlock" => trans('general.logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
+                        ])
+
+                        <!-- Email Logo -->
+                        @include('partials/forms/edit/uploadLogo', [
+                            "logoVariable" => "email_logo",
+                            "logoId" => "uploadEmailLogo",
+                            "logoLabel" => trans('admin/settings/general.email_logo'),
+                            "logoClearVariable" => "clear_email_logo",
+                            "helpBlock" => trans('admin/settings/general.email_logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
+                        ])
+
+                        <!-- Label Logo -->
+                        @include('partials/forms/edit/uploadLogo', [
+                            "logoVariable" => "label_logo",
+                            "logoId" => "uploadLabelLogo",
+                            "logoLabel" => trans('admin/settings/general.label_logo'),
+                            "logoClearVariable" => "clear_label_logo",
+                            "helpBlock" => trans('admin/settings/general.label_logo_size') . trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]),
+                        ])
+
+                        <!-- Favicon -->
+                        @include('partials/forms/edit/uploadLogo', [
+                            "logoVariable" => "favicon",
+                            "logoId" => "uploadFavicon",
+                            "logoLabel" => trans('admin/settings/general.favicon'),
+                            "logoClearVariable" => "clear_favicon",
+                            "helpBlock" => trans('admin/settings/general.favicon_size') . trans('admin/settings/general.favicon_format'),
+                            "allowedTypes" => "image/x-icon,image/gif,image/jpeg,image/png,image/svg",
+                            "maxSize" => 1000
+                        ])
 
                         <!-- Include logo in print assets -->
                         <div class="form-group">
@@ -164,7 +200,7 @@
                                     {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS', 'aria-label'=>'custom_css')) }}
                                     {!! $errors->first('custom_css', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @endif
-                                <p class="help-block">{{ trans('admin/settings/general.custom_css_help') }}</p>
+                                <p class="help-block">{!! trans('admin/settings/general.custom_css_help') !!}</p>
                             </div>
                         </div>
 
@@ -176,9 +212,9 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('support_footer', $setting->support_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
+                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Request::old('support_footer', $setting->support_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
                                 @else
-                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('support_footer', $setting->support_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Request::old('support_footer', $setting->support_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
                                 @endif
 
                                 <p class="help-block">{{ trans('admin/settings/general.support_footer_help') }}</p>
@@ -194,9 +230,9 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('version_footer', $setting->version_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
+                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Request::old('version_footer', $setting->version_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
                                 @else
-                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Input::old('version_footer', $setting->version_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), Request::old('version_footer', $setting->version_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
                                 @endif
 
                                 <p class="help-block">{{ trans('admin/settings/general.version_footer_help') }}</p>
@@ -211,10 +247,10 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::textarea('footer_text', Input::old('footer_text', $setting->footer_text), array('class' => 'form-control', 'rows' => '4', 'placeholder' => 'Optional footer text','disabled'=>'disabled')) }}
+                                    {{ Form::textarea('footer_text', Request::old('footer_text', $setting->footer_text), array('class' => 'form-control', 'rows' => '4', 'placeholder' => 'Optional footer text','disabled'=>'disabled')) }}
                                     <p class="help-block">{{ trans('general.lock_passwords') }}</p>
                                 @else
-                                    {{ Form::textarea('footer_text', Input::old('footer_text', $setting->footer_text), array('class' => 'form-control','rows' => '4','placeholder' => 'Optional footer text')) }}
+                                    {{ Form::textarea('footer_text', Request::old('footer_text', $setting->footer_text), array('class' => 'form-control','rows' => '4','placeholder' => 'Optional footer text')) }}
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.footer_text_help') !!}</p>
                                  {!! $errors->first('footer_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}

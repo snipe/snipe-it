@@ -132,6 +132,7 @@
                                     {{ Form::text('labels_pmargin_left', Input::old('labels_pmargin_left', $setting->labels_pmargin_left), ['class' => 'form-control', 'aria-label'=>'labels_pmargin_left']) }}
                                     <div class="input-group-addon">{{ trans('admin/settings/general.left') }}</div>
                                 </div>
+
                             </div>
                             <div class="col-md-9 col-md-offset-3">
                                 {!! $errors->first('labels_width', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -139,7 +140,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('labels_pageheight') ? 'error' : '' }}">
+                        <div class="form-group {{ (($errors->has('labels_pageheight')) || $errors->has('labels_pagewidth')) ? 'error' : '' }}">
                             <div class="col-md-3">
                                 {{ Form::label('labels_pagewidth', trans('admin/settings/general.page_dimensions')) }}
                             </div>

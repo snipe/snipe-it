@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
+use App\Listeners\CheckoutableListener;
+use App\Listeners\LogListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -13,26 +14,22 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\LogSuccessfulLogin',
+        ],
 
-            'Illuminate\Auth\Events\Login' => [
-                'App\Listeners\LogSuccessfulLogin',
-            ],
-
-            'Illuminate\Auth\Events\Failed' => [
-                'App\Listeners\LogFailedLogin',
-            ],
-        ];
-
+        'Illuminate\Auth\Events\Failed' => [
+            'App\Listeners\LogFailedLogin',
+        ],
+    ];
 
     /**
-     * Register any events for your application.
+     * The subscriber classes to register.
      *
-     * @return void
+     * @var array
      */
-    public function boot()
-    {
-        parent::boot();
-
-        //
-    }
+    protected $subscribe = [
+        LogListener::class,
+        CheckoutableListener::class
+    ];
 }

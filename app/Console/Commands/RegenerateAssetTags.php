@@ -2,11 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Asset;
 use App\Models\Setting;
-use DB;
 use Artisan;
+use Illuminate\Console\Command;
 
 class RegenerateAssetTags extends Command
 {

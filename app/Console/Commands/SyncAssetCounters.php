@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Asset;
+use Illuminate\Console\Command;
 
 class SyncAssetCounters extends Command
 {

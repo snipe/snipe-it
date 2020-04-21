@@ -124,9 +124,9 @@
         <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
           <div class="col-md-7 col-md-offset-3">
             @can('self.two_factor')
-              <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
+              <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
             @else
-                <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Input::old('two_factor_optin', $user->two_factor_optin),['class' => 'disabled minimal', 'disabled' => 'disabled']) }}
+                <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),['class' => 'disabled minimal', 'disabled' => 'disabled']) }}
             @endcan
 
             {{ trans('admin/settings/general.two_factor_enabled_text') }}</label>

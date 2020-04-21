@@ -2,9 +2,7 @@
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
-use App\Models\SnipeModel;
 use App\Models\Traits\Searchable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
@@ -50,19 +48,28 @@ class Statuslabel extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableRelations = [];    
+    protected $searchableRelations = [];
 
 
     /**
-     * Get assets with associated status label
+     * Establishes the status label -> assets relationship
      *
-     * @return \Illuminate\Support\Collection
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function assets()
     {
         return $this->hasMany('\App\Models\Asset', 'status_id');
     }
 
+    /**
+     * Gets the status label type
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return string
+     */
     public function getStatuslabelType()
     {
 
@@ -78,6 +85,11 @@ class Statuslabel extends SnipeModel
 
     }
 
+    /**
+     * Query builder scope to for pending status types
+     *
+     * @return \Illuminate\Database\Query\Builder Modified query builder
+     */
     public function scopePending()
     {
         return $this->where('pending', '=', 1)
@@ -85,6 +97,11 @@ class Statuslabel extends SnipeModel
                     ->where('deployable', '=', 0);
     }
 
+    /**
+     * Query builder scope for archived status types
+     *
+     * @return \Illuminate\Database\Query\Builder Modified query builder
+     */
     public function scopeArchived()
     {
         return $this->where('pending', '=', 0)
@@ -92,6 +109,11 @@ class Statuslabel extends SnipeModel
             ->where('deployable', '=', 0);
     }
 
+    /**
+     * Query builder scope for deployable status types
+     *
+     * @return \Illuminate\Database\Query\Builder Modified query builder
+     */
     public function scopeDeployable()
     {
         return $this->where('pending', '=', 0)
@@ -99,7 +121,13 @@ class Statuslabel extends SnipeModel
             ->where('deployable', '=', 1);
     }
 
-
+    /**
+     * Helper function to determine type attributes
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return string
+     */
     public static function getStatuslabelTypesForDB($type)
     {
 
