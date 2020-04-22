@@ -447,10 +447,10 @@ $(document).ready(function () {
 
      // File size validation
     $('.js-uploadFile').bind('change', function() {
-        let $this = $(this);
-        let id = '#' + $this.attr('id');
-        let status = id + '-status';
-        let $status = $(status);
+        var $this = $(this);
+        var id = '#' + $this.attr('id');
+        var status = id + '-status';
+        var $status = $(status);
         $status.removeClass('text-success').removeClass('text-danger');
         $(status + ' .goodfile').remove();
         $(status + ' .badfile').remove();
@@ -469,7 +469,7 @@ $(document).ready(function () {
             $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
         } else {
             $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
-            let $preview =  $(id + '-imagePreview');
+            var $preview =  $(id + '-imagePreview');
             readURL(this, $preview);
             $preview.fadeIn();
         }
