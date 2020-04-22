@@ -71,6 +71,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'password'                => 'required|min:8',
         'locale'                  => 'max:10|nullable',
         'website'                 => 'url|nullable',
+        'manager_id'              => 'nullable|different:id',
     ];
 
     use Searchable;
