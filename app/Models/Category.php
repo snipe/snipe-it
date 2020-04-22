@@ -24,6 +24,12 @@ class Category extends SnipeModel
     protected $table = 'categories';
     protected $hidden = ['user_id','deleted_at'];
 
+
+    protected $casts = [
+        'user_id'      => 'integer',
+    ];
+
+
     /**
     * Category validation rules
     */

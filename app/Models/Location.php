@@ -27,8 +27,13 @@ class Location extends SnipeModel
         'address2'      => 'max:80|nullable',
         'zip'           => 'min:3|max:10|nullable',
         'manager_id'    => 'exists:users,id|nullable',
-        'parent_id'     => 'nullable|different:id',
+        'parent_id'     => 'nullable|exists:locations,id|different:id',
     );
+
+    protected $casts = [
+        'parent_id'     => 'integer',
+        'manager_id'    => 'integer',
+    ];
 
     /**
     * Whether the model should inject it's identifier to the unique
