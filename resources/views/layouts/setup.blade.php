@@ -118,7 +118,6 @@
           
         {{-- Javascript files --}}
         <script src="{{ url(mix('js/app.js')) }}" nonce="{{ csrf_token() }}"></script>
-        <script src="{{ url(mix('js/vendor.js')) }}" nonce="{{ csrf_token() }}"></script>
 
         <script nonce="{{ csrf_token() }}">
             $(function () {
