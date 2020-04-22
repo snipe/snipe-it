@@ -28,9 +28,9 @@
     </script>
 
     {{-- stylesheets --}}
-    <link rel="stylesheet" href="{{ url('css/all.css') }}">
-      <link rel="stylesheet" href="{{ url('css/overrides.css') }}">
-    <link rel="stylesheet" href="{{ url('css/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css') }}">
+
+    <link rel="stylesheet" href="{{ url('css/dist/all.css') }}">
+    <link rel="stylesheet" href="{{ url('css/dist/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css') }}">
 
 
       {{-- page level css --}}
@@ -819,7 +819,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h2 class="modal-title" id="myModalLabel">&nbps;</h4>
+                    <h2 class="modal-title" id="myModalLabel">&nbsp;</h4>
                 </div>
                 <div class="modal-body"></div>
                 <div class="modal-footer">
@@ -837,7 +837,6 @@
 
     {{-- Javascript files --}}
     <script src="{{ url('js/dist/all.js') }}" nonce="{{ csrf_token() }}"></script>
-    <script src="{{ url('js/vendor.js') }}" nonce="{{ csrf_token() }}"></script>
     {{-- Page level javascript --}}
     @stack('js')
 
