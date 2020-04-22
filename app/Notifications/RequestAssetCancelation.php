@@ -7,7 +7,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 
-class RequestAssetCancelationNotification extends Notification
+class RequestAssetCancelation extends Notification
 {
     /**
      * @var

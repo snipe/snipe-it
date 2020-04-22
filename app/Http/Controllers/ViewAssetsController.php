@@ -7,7 +7,7 @@ use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Setting;
 use App\Models\User;
-use App\Notifications\RequestAssetCancelationNotification;
+use App\Notifications\RequestAssetCancelation;
 use App\Notifications\RequestAssetNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -116,7 +116,7 @@ class ViewAssetsController extends Controller
            $logaction->logaction('request_canceled');
 
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                $settings->notify(new RequestAssetCancelationNotification($data));
+                $settings->notify(new RequestAssetCancelation($data));
             }
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
@@ -178,7 +178,7 @@ class ViewAssetsController extends Controller
             $asset->decrement('requests_counter', 1);
             
             $logaction->logaction('request canceled');
-            $settings->notify(new RequestAssetCancelationNotification($data));
+            $settings->notify(new RequestAssetCancelation($data));
             return redirect()->route('requestable-assets')
                 ->with('success')->with('success', trans('admin/hardware/message.requests.cancel-success'));
         }
