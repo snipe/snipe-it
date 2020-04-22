@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\View;
 use Redirect;
 use Request;
 use Storage;
-use App\Http\Requests\ImageUploadRequest;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
