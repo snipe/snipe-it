@@ -61,6 +61,8 @@
     "codeception/codeception": "^4.1",
     "codeception/module-asserts": "^1.2",
     "codeception/module-laravel5": "^1.1",
+    "codeception/module-rest": "^1.2",
+    "codeception/module-webdriver": "^1.0",
     "fzaninotto/faker": "^1.9",
     "phpunit/php-token-stream": "^3.1",
     "phpunit/phpunit": "^8.5",
