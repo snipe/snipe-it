@@ -83,14 +83,14 @@ Route::group(
         Route::get('bytag/{any?}',
             [
                 'as'   => 'findbytag/hardware',
-                'uses' => 'AssetsController@getAssetByTag'
+                'uses' => 'Assets\AssetsController@getAssetByTag'
             ]
         )->where('any', '.*');
 
         Route::get('byserial/{any?}',
             [
                 'as'   => 'findbyserial/hardware',
-                'uses' => 'AssetsController@getAssetBySerial'
+                'uses' => 'Assets\AssetsController@getAssetBySerial'
             ]
         )->where('any', '.*');
 
