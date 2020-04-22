@@ -8,6 +8,8 @@ use App\Helpers\Helper;
 use App\Models\Location;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class LocationsController extends Controller
 {
@@ -22,11 +24,11 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Location::class);
         $allowed_columns = [
-                'id','name','address','address2','city','state','country','zip','created_at',
-                'updated_at','manager_id','image',
-                'assigned_assets_count','users_count','assets_count','currency'];
+            'id','name','address','address2','city','state','country','zip','created_at',
+            'updated_at','manager_id','image',
+            'assigned_assets_count','users_count','assets_count','currency'];
 
-        $locations = Location::with('parent', 'manager', 'childLocations')->select([
+        $locations = Location::with('parent', 'manager', 'children')->select([
             'locations.id',
             'locations.name',
             'locations.address',
@@ -42,17 +44,16 @@ class LocationsController extends Controller
             'locations.image',
             'locations.currency'
         ])->withCount('assignedAssets as assigned_assets_count')
-        ->withCount('assets as assets_count')
-        ->withCount('users as users_count');
+            ->withCount('assets as assets_count')
+            ->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $locations = $locations->TextSearch($request->input('search'));
         }
 
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($locations) && ($request->get('offset') > $locations->count())) ? $locations->count() : $request->get('offset', 0);
+
+        $offset = (($locations) && (request('offset') > $locations->count())) ? 0 : request('offset', 0);
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
@@ -110,7 +111,7 @@ class LocationsController extends Controller
     public function show($id)
     {
         $this->authorize('view', Location::class);
-        $location = Location::with('parent', 'manager', 'childLocations')
+        $location = Location::with('parent', 'manager', 'children')
             ->select([
                 'locations.id',
                 'locations.name',
@@ -141,15 +142,19 @@ class LocationsController extends Controller
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
         $this->authorize('update', Location::class);
         $location = Location::findOrFail($id);
+
         $location->fill($request->all());
 
-        if ($location->save()) {
+
+        if ($location->isValid()) {
+
+            $location->save();
             return response()->json(
                 Helper::formatStandardApiResponse(
                     'success',
@@ -199,49 +204,35 @@ class LocationsController extends Controller
      * the entire data set, and then invoke a paginator manually and pass that
      * through to the SelectListTransformer.
      *
+     * Many thanks to @uberbrady for the help getting this working better.
+     * Recursion still sucks, but I guess he doesn't have to get in the
+     * sea... this time.
+     *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      *
      */
-    public function selectlist(Request $request, $selected_id = null)
+    public function selectlist(Request $request)
     {
-
-
 
         $locations = Location::select([
             'locations.id',
             'locations.name',
+            'locations.parent_id',
             'locations.image',
-        ])->orderBy('name', 'ASC')->paginate(50)->map(function ($location) {
-            return $location->groupBy('parent_id')
-                ->map(function ($parentName) {
-                return $parentName->map(function ($parent) {
-                    return $parent->game_types->groupBy('parent_id');
-                });
-            });
-        });
+        ]);
 
         $page = 1;
         if ($request->filled('page')) {
             $page = $request->input('page');
         }
 
+        if ($request->filled('search')) {
+            $locations = $locations->where('locations.name', 'LIKE', '%'.$request->input('search').'%');
+        }
 
-//        $locations = Location::select([
-//            'locations.id',
-//            'locations.name',
-//            'locations.image',
-//        ]);
-//
-//        if ($request->filled('search')) {
-//            $locations = $locations->where('locations.name', 'LIKE', '%'.$request->get('search').'%');
-//        }
-//
-//
-//        $locations = $locations->groupBy(function ($locations) {
-//            return $locations->parent_id;
-//        })->orderBy('name', 'ASC')->paginate(50);
+        $locations = $locations->orderBy('name', 'ASC')->get();
 
         $locations_with_children = [];
 
@@ -259,18 +250,13 @@ class LocationsController extends Controller
             $locations_formatted = new Collection($location_options);
 
         }
-        // so that a location can't be its own parent
 
-        // Loop through and set some custom properties for the transformer to use.
-        // This lets us have more flexibility in special cases like assets, where
-        // they may not have a ->name value but we want to display something anyway
-//        foreach ($location_options as $location) {
-//            $location->use_text = $location->name;
-//            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
-//        }
+        $paginated_results =  new LengthAwarePaginator($locations_formatted->forPage($page, 500), $locations_formatted->count(), 500, $page, []);
 
-        return (new SelectlistTransformer)->transformSelectlist($locations);
+        //return [];
+        return (new SelectlistTransformer)->transformSelectlist($paginated_results);
 
     }
+
 
 }
