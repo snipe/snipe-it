@@ -326,7 +326,7 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.4]
-     * @return boolean
+     * @return string
      */
     public function convertUnicodeDbSlug($original = null)
     {
@@ -336,7 +336,7 @@ class CustomField extends Model
         if (!function_exists('transliterator_transliterate')) {
             $long_slug = '_snipeit_' . str_slug(\Patchwork\Utf8::utf8_encode(trim($name)), '_');
         } else {
-            $long_slug =  '_snipeit_' . str_slug($name, '_');
+            $long_slug =  '_snipeit_' . Utf8Slugger::slugify($name, '_');
         }
 
         return substr($long_slug, 0, 50) . '_' . $id;

@@ -32,6 +32,7 @@
     "fideloper/proxy": "^4.3",
     "guzzlehttp/guzzle": "^6.5",
     "intervention/image": "^2.5",
+    "javiereguiluz/easyslugger": "^1.0",
     "laravel/framework": "^6.0",
     "laravel/helpers": "^1.2",
     "laravel/passport": "^8.4",
@@ -58,6 +59,8 @@
   },
   "require-dev": {
     "codeception/codeception": "^4.1",
+    "codeception/module-asserts": "^1.2",
+    "codeception/module-laravel5": "^1.1",
     "fzaninotto/faker": "^1.9",
     "phpunit/php-token-stream": "^3.1",
     "phpunit/phpunit": "^8.5",
