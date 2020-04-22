@@ -47,7 +47,7 @@ class AccessoryTest extends BaseTest
         $this->assertFalse($a->isValid());
         $errors = $a->getErrors();
         foreach ($fields as $field => $fieldTitle) {
-            $this->assertContains("The ${fieldTitle} must be at least", $errors->get($field)[0]);
+            $this->assertStringContainsString("The ${fieldTitle} must be at least", $errors->get($field)[0]);
         }
     }
 
@@ -64,7 +64,7 @@ class AccessoryTest extends BaseTest
         $accessory->save();
 
         $this->assertFalse($accessory->isValid());
-        $this->assertContains("The selected category id is invalid.", $accessory->getErrors()->get('category_id')[0]);
+        $this->assertStringContainsString("The selected category id is invalid.", $accessory->getErrors()->get('category_id')[0]);
     }
 
     public function testAnAccessoryBelongsToACompany()
