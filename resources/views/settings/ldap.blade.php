@@ -25,13 +25,13 @@
             <div class="col-md-12">
                 <div class="col-md-12">
                     <div class="alert alert-danger">
-                       It doesn't look like the LDAP extension is installed or enabled on this server. :(
+                       It doesn't look like the LDAP extension is installed or enabled on this server. You can still save your settings, but you will need to enable the LDAP extension for PHP before LDAP syncing or login will work.
                     </div>
                 </div>
             </div>
         </div>
 
-    @else
+    @endif
 
 
     {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'false', 'class' => 'form-horizontal', 'role' => 'form']) }}
@@ -341,122 +341,115 @@
     </div> <!-- /.row-->
 
     {{Form::close()}}
-   @endif
+
 
 @stop
 
 @push('js')
-<script nonce="{{ csrf_token() }}">
+    <script nonce="{{ csrf_token() }}">
 
-    /**
-     * Check to see if is_ad is checked, if not disable the ad_domain field
-     */
-    $(function() {
-        if( $('#is_ad').prop('checked') === false) {
-            $('#ad_domain').prop('disabled', 'disabled');
-        } else {
-            $('#ldap_server').prop('disabled', 'disabled');
-        }
-    });
-
-    /**
-     * Toggle the server info based on the is_ad checkbox
-     */
-    $('#is_ad').on('ifClicked', function(){
-        $('#ad_domain').toggleDisabled();
-        $('#ldap_server').toggleDisabled();
-    });
-
-
-    /**
-     * Test the LDAP connection settings
-     */
-    $("#ldaptest").click(function () {
-        $("#ldapad_test_results").removeClass('hidden text-success text-danger');
-        $("#ldapad_test_results").html('');
-        $("#ldapad_test_results").html('<i class="fa fa-spinner spin"></i> Testing LDAP Connection, Binding & Query ...');
-        $.ajax({
-            url: '{{ route('api.settings.ldaptest') }}',
-            type: 'GET',
-            headers: {
-                "X-Requested-With": 'XMLHttpRequest',
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {},
-            dataType: 'json',
-
-            success: function (data) {
-                $("#ldapad_test_results").html('');
-                let html = buildLdapTestResults(data)
-                $("#ldapad_test_results").html(
-                    html
-                );
-            },
-
-            error: function (data) {
-                $("#ldapad_test_results").html('');
-                    } else if (data.status == 400) {
-
-                $("#ldapad_test_results").addClass('text-danger');
-
-                let errorIcon = '<i class="fa fa-exclamation-triangle text-danger"></i>' + ' ';
-                if (data.status == 500) {
-                    $('#ldapad_test_results').html(errorIcon + '500 Server Error');
-                                }
-
-                            }
-
-                } else if (data.status == 400) {
-                    let errorMessage = '';
-                    if( typeof data.responseJSON.user_sync !== 'undefined') {
-                        errorMessage =  data.responseJSON.user_sync.message;
-                    }
-                    if( typeof data.responseJSON.message !== 'undefined') {
-                        errorMessage =  data.responseJSON.message;
-                    }
-                    $('#ldapad_test_results').html(errorIcon + errorMessage);
-                } else {
-                    $('#ldapad_test_results').html(errorIcon + data.responseText.message);
-                }
+        /**
+         * Check to see if is_ad is checked, if not disable the ad_domain field
+         */
+        $(function() {
+            if( $('#is_ad').prop('checked') === false) {
+                $('#ad_domain').prop('disabled', 'disabled');
+            } else {
+                $('#ldap_server').prop('disabled', 'disabled');
             }
         });
-    });
 
-    /**
-     * Build the results html table
-     */
-    function buildLdapTestResults(results) {
-        let html = '<ul style="list-style: none;padding-left: 5px;">'
-        html += '<li class="text-success"><i class="fa fa-check" aria-hidden="true"></i> ' + results.login.message + ' </li>'
-        html += '<li class="text-success"><i class="fa fa-check" aria-hidden="true"></i> ' + results.bind.message + ' </li>'
-        html += '</ul>'
-        html += '<div>A sample of 10 users returned from the LDAP server based on your settings:</div>'
-        html += '<table class="table table-bordered table-condensed" style="background-color: #fff">'
-        html += buildLdapResultsTableHeader()
-        html += buildLdapResultsTableBody(results.user_sync.users)
-        html += '<table>'
-        return html;
-    }
+        /**
+         * Toggle the server info based on the is_ad checkbox
+         */
+        $('#is_ad').on('ifClicked', function(){
+            $('#ad_domain').toggleDisabled();
+            $('#ldap_server').toggleDisabled();
+        });
 
-    function buildLdapResultsTableHeader(user)
-    {
-        var keys = ['Employee Number', 'Username', 'First Name', 'Last Name','Email']
-        let header = '<thead><tr>'
-        for (var i in keys) {
-            header += '<th>' + keys[i] + '</th>'
+
+        /**
+         * Test the LDAP connection settings
+         */
+        $("#ldaptest").click(function () {
+            $("#ldapad_test_results").removeClass('hidden text-success text-danger');
+            $("#ldapad_test_results").html('');
+            $("#ldapad_test_results").html('<i class="fa fa-spinner spin"></i> Testing LDAP Connection, Binding & Query ...');
+            $.ajax({
+                url: '{{ route('api.settings.ldaptest') }}',
+                type: 'GET',
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {},
+                dataType: 'json',
+
+                success: function (data) {
+                    $("#ldapad_test_results").html('');
+                    let html = buildLdapTestResults(data)
+                    $("#ldapad_test_results").html(
+                        html
+                    );
+                },
+
+                error: function (data) {
+                    $("#ldapad_test_results").html('');
+                    $("#ldapad_test_results").addClass('text-danger');
+                    let errorIcon = '<i class="fa fa-exclamation-triangle text-danger"></i>' + ' ';
+                    if (data.status == 500) {
+                        $('#ldapad_test_results').html(errorIcon + '500 Server Error');
+                    } else if (data.status == 400) {
+                        let errorMessage = '';
+                        if( typeof data.responseJSON.user_sync !== 'undefined') {
+                            errorMessage =  data.responseJSON.user_sync.message;
+                        }
+                        if( typeof data.responseJSON.message !== 'undefined') {
+                            errorMessage =  data.responseJSON.message;
+                        }
+                        $('#ldapad_test_results').html(errorIcon + errorMessage);
+                    } else {
+                        $('#ldapad_test_results').html(errorIcon + data.responseText.message);
+                    }
+                }
+            });
+        });
+
+        /**
+         * Build the results html table
+         */
+        function buildLdapTestResults(results) {
+            let html = '<ul style="list-style: none;padding-left: 5px;">'
+            html += '<li class="text-success"><i class="fa fa-check" aria-hidden="true"></i> ' + results.login.message + ' </li>'
+            html += '<li class="text-success"><i class="fa fa-check" aria-hidden="true"></i> ' + results.bind.message + ' </li>'
+            html += '</ul>'
+            html += '<div>A sample of 10 users returned from the LDAP server based on your settings:</div>'
+            html += '<table class="table table-bordered table-condensed" style="background-color: #fff">'
+            html += buildLdapResultsTableHeader()
+            html += buildLdapResultsTableBody(results.user_sync.users)
+            html += '<table>'
+            return html;
         }
-        header += "</tr></thead>"
-        return header;
-    }
+
+        function buildLdapResultsTableHeader(user)
+        {
+            var keys = ['Employee Number', 'Username', 'First Name', 'Last Name','Email']
+            let header = '<thead><tr>'
+            for (var i in keys) {
+                header += '<th>' + keys[i] + '</th>'
+            }
+            header += "</tr></thead>"
+            return header;
+        }
 
         function buildLdapResultsTableBody(users)
-    {
-        let body = '<tbody>'
-        for (var i in users) {
-            body += '<tr><td>' + users[i].employee_number + '</td><td>' + users[i].username + '</td><td>' + users[i].firstname + '</td><td>' + users[i].lastname + '</td><td>' + users[i].email + '</td></tr>'
+        {
+            let body = '<tbody>'
+            for (var i in users) {
+                body += '<tr><td>' + users[i].employee_number + '</td><td>' + users[i].username + '</td><td>' + users[i].firstname + '</td><td>' + users[i].lastname + '</td><td>' + users[i].email + '</td></tr>'
+            }
+            body += "</tbody>"
+            return body;
         }
-        body += "</tbody>"
-        return body;
-    }
-</script>
+    </script>
 @endpush
