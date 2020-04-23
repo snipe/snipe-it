@@ -370,7 +370,7 @@ class LdapAd extends LdapAdConfiguration
      * Test the bind user connection.
      *
      * @author Wes Hulette <jwhulette@gmail.com>
-     *
+     * @throws \Exception
      * @since 5.0.0
      */
     public function testLdapAdBindConnection(): void
@@ -387,7 +387,7 @@ class LdapAd extends LdapAdConfiguration
      * Test the user can connect to the LDAP server.
      *
      * @author Wes Hulette <jwhulette@gmail.com>
-     *
+     * @throws \Exception
      * @since 5.0.0
      */
     public function testLdapAdUserConnection(): void
