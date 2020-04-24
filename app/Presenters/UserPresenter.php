@@ -171,21 +171,22 @@ class UserPresenter extends Presenter
                 "formatter" => "usersLinkObjFormatter"
             ],
             [
-                "field" => "assets_count",
-                "searchable" => false,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => ' <span class="hidden-md hidden-lg">Assets</span>'
-                            .'<span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>',
-                "visible" => true,
+                'field' => 'assets_count',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'escape' => true,
+                'class' => 'css-barcode',
+                'title' => 'Assets',
+                'visible' => true,
             ],
             [
                 "field" => "licenses_count",
                 "searchable" => false,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => ' <span class="hidden-md hidden-lg">Licenses</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-floppy-o fa-lg"></i></span>',
+                'class' => 'css-license',
+                "title" => 'License',
                 "visible" => true,
             ],
             [
@@ -193,8 +194,8 @@ class UserPresenter extends Presenter
                 "searchable" => false,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => ' <span class="hidden-md hidden-lg">Consumables</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-tint fa-lg"></i></span>',
+                'class' => 'css-consumable',
+                "title" => 'Consumables',
                 "visible" => true,
             ],
             [
@@ -202,8 +203,8 @@ class UserPresenter extends Presenter
                 "searchable" => false,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => ' <span class="hidden-md hidden-lg">Accessories</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-keyboard-o fa-lg"></i></span>',
+                'class' => 'css-accessory',
+                "title" => 'Accessories',
                 "visible" => true,
             ],
             [

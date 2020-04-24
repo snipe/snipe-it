@@ -14,6 +14,59 @@
 @stop
 
 @section('header_right')
+
+<style>
+
+    th.css-barcode > .th-inner,
+    th.css-license > .th-inner,
+    th.css-consumable > .th-inner,
+    th.css-accessory > .th-inner
+    {
+        font-size: 0px;
+        line-height: 0;
+        line-height: 4!important;
+        text-align: center;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+
+    th.css-barcode > .th-inner::before,
+    th.css-license > .th-inner::before,
+    th.css-consumable > .th-inner::before,
+    th.css-accessory > .th-inner::before
+
+    {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 20px;
+    }
+
+
+    th.css-barcode > .th-inner::before
+    {
+    content: "\f02a";
+    }
+
+    th.css-license > .th-inner::before
+    {
+        content: "\f0c7";
+    }
+
+    th.css-consumable > .th-inner::before
+    {
+        content: "\f043";
+    }
+
+    th.css-accessory > .th-inner::before
+    {
+        content: "\f11c";
+    }
+
+
+</style>
+
     @can('create', \App\Models\User::class)
       @if ($snipeSettings->ldap_enabled == 1)
       <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-sitemap"></span> LDAP Sync</a>
@@ -90,7 +143,9 @@
 
 @stop
 
-@section('moar_scripts')
+@section('moar_scripts')val
+
+
 @include ('partials.bootstrap-table')
 
 
