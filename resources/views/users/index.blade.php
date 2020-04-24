@@ -152,7 +152,7 @@
 
 @stop
 
-@section('moar_scripts')val
+@section('moar_scripts')
 
 
 @include ('partials.bootstrap-table')
