@@ -16,7 +16,16 @@
 @section('header_right')
 
 <style>
+    /**
+    This is kind of weird, but it is necessary to prevent the column-selector code from barfing, since
+    any HTML used in the UserPresenter "title" attribute breaks the HTML.
 
+    Instead, we use CSS to add the icon into the table header, which leaves the column selector
+    "title" text as-is.
+
+    See https://github.com/snipe/snipe-it/issues/7989
+
+     */
     th.css-barcode > .th-inner,
     th.css-license > .th-inner,
     th.css-consumable > .th-inner,
