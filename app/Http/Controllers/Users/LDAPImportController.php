@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ldap;
 use App\Services\LdapAd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -45,7 +44,7 @@ class LDAPImportController extends Controller
     {
         $this->authorize('update', User::class);
         try {
-            $this->ldap->testLdapAdUserConnection();
+            $this->ldap->connect();
         } catch (\Exception $e) {
             return redirect()->route('users.index')->with('error', $e->getMessage());
         }
@@ -57,6 +56,7 @@ class LDAPImportController extends Controller
      * LDAP form processing.
      *
      * @author Aladin Alaily
+     * @author A. Gianotto <snipe@snipe.net>
      * @author Wes Hulette <jwhulette@gmail.com>
      *
      * @since 5.0.0
