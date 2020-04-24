@@ -58,11 +58,13 @@ class SettingsController extends Controller
         Log::info('Preparing to test LDAP bind connection');
         // Test user can bind to the LDAP server
         try {
+            Log::info('Testing Bind');
             $ldap->testLdapAdBindConnection();
             $message['bind'] = [
                 'message' => 'Successfully binded to LDAP server.'
             ];
         } catch (\Exception $ex) {
+            Log::info('LDAP Bind failed');
             return response()->json([
                 'message' => 'Error binding to LDAP server, error: ' . $ex->getMessage()
             ], 400);
@@ -72,11 +74,13 @@ class SettingsController extends Controller
         Log::info('Preparing to get sample user set from LDAP directory');
         // Get a sample of 10 users so user can verify the data is correct
         try {
+            Log::info('Testing LDAP sync');
             $users = $ldap->testUserImportSync();
             $message['user_sync']  = [
                 'users' => $users
             ];
         } catch (\Exception $ex) {
+            Log::info('LDAP sync failed');
             $message['user_sync']  = [
                 'message' => 'Error getting users from LDAP directory, error: ' . $ex->getMessage()
             ];
