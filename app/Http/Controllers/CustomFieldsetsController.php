@@ -194,4 +194,44 @@ class CustomFieldsetsController extends Controller
 
 
     }
+
+    /**
+     * Set the field in a fieldset to required
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     */
+    public function makeFieldRequired($fieldset_id, $field_id)
+    {
+
+        $this->authorize('update', CustomFieldset::class);
+        $field = CustomField::findOrFail($field_id);
+        $fieldset = CustomFieldset::findOrFail($fieldset_id);
+        $fields[$field->id] = ['required' => 1];
+        $fieldset->fields()->syncWithoutDetaching($fields);
+
+        return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])
+            ->with("success", trans('Field successfully set to required'));
+
+    }
+
+    /**
+     * Set the field in a fieldset to optional
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     */
+    public function makeFieldOptional($fieldset_id, $field_id)
+    {
+        $this->authorize('update', CustomFieldset::class);
+        $field = CustomField::findOrFail($field_id);
+        $fieldset = CustomFieldset::findOrFail($fieldset_id);
+        $fields[$field->id] = ['required' => 0];
+        $fieldset->fields()->syncWithoutDetaching($fields);
+
+        return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])
+            ->with("success", trans('Field successfully set to optional'));
+
+    }
+
 }
