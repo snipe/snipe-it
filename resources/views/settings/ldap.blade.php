@@ -331,7 +331,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>
@@ -398,7 +398,7 @@
                     $("#ldapad_test_results").addClass('text-danger');
                     let errorIcon = '<i class="fa fa-exclamation-triangle text-danger"></i>' + ' ';
                     if (data.status == 500) {
-                        $('#ldapad_test_results').html(errorIcon + '500 Server Error');
+                        $('#ldapad_test_results').html(errorIcon + '500 Server Error. Please check your server logs for more information.');
                     } else if (data.status == 400) {
                         let errorMessage = '';
                         if( typeof data.responseJSON.user_sync !== 'undefined') {
@@ -409,9 +409,12 @@
                         }
                         $('#ldapad_test_results').html(errorIcon + errorMessage);
                     } else {
-                        $('#ldapad_test_results').html(errorIcon + data.responseText.message);
+                        $('#ldapad_test_results').html('farts');
+                       // $('#ldapad_test_results').html(errorIcon + data.responseText.message);
                     }
                 }
+
+
             });
         });
 
