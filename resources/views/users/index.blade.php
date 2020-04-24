@@ -18,7 +18,7 @@
 <style>
     /**
     This is kind of weird, but it is necessary to prevent the column-selector code from barfing, since
-    any HTML used in the UserPresenter "title" attribute breaks the HTML.
+    any HTML used in the UserPresenter "title" attribute breaks the column selector HTML.
 
     Instead, we use CSS to add the icon into the table header, which leaves the column selector
     "title" text as-is.
@@ -32,9 +32,8 @@
     th.css-accessory > .th-inner
     {
         font-size: 0px;
-        line-height: 0;
         line-height: 4!important;
-        text-align: center;
+        text-align: left;
         text-rendering: auto;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -55,7 +54,7 @@
 
     th.css-barcode > .th-inner::before
     {
-    content: "\f02a";
+        content: "\f02a";
     }
 
     th.css-license > .th-inner::before
