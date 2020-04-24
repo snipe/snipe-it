@@ -28,21 +28,24 @@ LDAP User Sync
           <!-- location_id-->
           <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
             
-            <div class="col-xs-12">
+            <div class="col-md-12">
                <!-- Location -->
               @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
-            <div class="col-md-4">
-              <button type="submit" class="btn btn-warning" id="sync">
-                  <i id="sync-button-icon" class="fa fa-refresh icon-white" aria-hidden="true"></i> <span id="sync-button-text">Synchronize</span>
-              </button>
             </div>
-            <div class="col-xs-12 text-center">
-                <button type="submit" class="btn btn-warning" id="sync">
-                    <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">Synchronize</span>
-                </button>
-              </div>
-
           </div>
+
+            <div class="box-footer">
+                <div class="text-left col-md-6">
+                    <a class="btn btn-link" href="{{ route('users.index') }}">{{ trans('button.cancel') }}</a>
+                </div>
+                <div class="text-right col-md-6">
+                    <button type="submit" class="btn btn-primary" id="sync">
+                        <i id="sync-button-icon" class="fa fa-refresh icon-white" aria-hidden="true"></i> <span id="sync-button-text">Synchronize</span>
+                    </button>
+                </div>
+
+            </div>
+
         </div>
       </div>
     </form>
