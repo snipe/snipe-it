@@ -77,7 +77,6 @@
   @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
   @endif
 
-  @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]','translated_serial' => trans('admin/hardware/form.serial')])
   @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
   @include ('partials.forms.edit.purchase_date')
   @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
@@ -155,7 +154,7 @@
                         if(transformed_oldvals[elem.name]) {
                             $(elem).val(transformed_oldvals[elem.name]).trigger('change'); //the trigger is for select2-based objects, if we have any
                         }
-                        
+
                     });
                 }
             });
