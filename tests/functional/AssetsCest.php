@@ -24,6 +24,8 @@ class AssetsCest
     {
         $I->wantTo("Test Validation Fails with blank elements");
         $I->amOnPage(route('hardware.create'));
+        // Settings factory can enable auto prefixes, which generate a random asset id.  Lets clear it out for the sake of this test.
+        $I->fillField('#asset_tag', '');
         $I->click('Save');
         $I->see('The asset tag field is required.', '.alert-msg');
         $I->see('The model id field is required.', '.alert-msg');
@@ -40,7 +42,7 @@ class AssetsCest
          ]);
         $userId = $I->getUserId();
         $values = [
-            'asset_tag'         => $asset->asset_tag,
+            'asset_tags[1]'         => $asset->asset_tag,
             'assigned_user'     => $userId,
             'company_id'        => $asset->company_id,
             'model_id'          => $asset->model_id,
@@ -51,7 +53,7 @@ class AssetsCest
             'purchase_date'     => '2016-01-01',
             'requestable'       => $asset->requestable,
             'rtd_location_id'   => $asset->rtd_location_id,
-            'serial'            => $asset->serial,
+            'serials[1]'        => $asset->serial,
             'status_id'         => $asset->status_id,
             'supplier_id'       => $asset->supplier_id,
             'warranty_months'   => $asset->warranty_months,
@@ -67,7 +69,7 @@ class AssetsCest
             'notes'             => $asset->notes,
             'order_number'      => $asset->order_number,
             'purchase_cost'     => $asset->purchase_cost,
-            'purchase_date'     => Carbon::parse('2016-01-01'),
+            'purchase_date'     => '2016-01-01',
             'requestable'       => $asset->requestable,
             'rtd_location_id'   => $asset->rtd_location_id,
             'serial'            => $asset->serial,
@@ -80,7 +82,7 @@ class AssetsCest
         $I->amOnPage(route('hardware.create'));
         $I->submitForm('form#create-form', $values);
         $I->seeRecord('assets', $seenValues);
-        $I->dontSeeElement('.alert-danger'); // We should check for success, but we can't because of the stupid ajaxy way I did things.  FIXME when the asset form is rewritten.
+        $I->seeResponseCodeIs(200);
     }
 
     public function allowsDelete(FunctionalTester $I)
