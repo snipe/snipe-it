@@ -7,7 +7,7 @@
          Snipe-IT Setup
         @show
       </title>
-      <link rel="stylesheet" href="{{ mix('css/all.css') }}">
+      <link rel="stylesheet" href="{{ url('css/all.css') }}">
 
 
         <script nonce="{{ csrf_token() }}">
@@ -117,7 +117,7 @@
           </div>
           
         {{-- Javascript files --}}
-        <script src="{{ url(mix('js/app.js')) }}" nonce="{{ csrf_token() }}"></script>
+          <script src="{{ url('js/dist/all.js') }}" nonce="{{ csrf_token() }}"></script>
 
         <script nonce="{{ csrf_token() }}">
             $(function () {
