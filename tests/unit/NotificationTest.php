@@ -21,15 +21,15 @@ class NotificationTest extends BaseTest
 
      public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()
      {
-         $admin = factory(User::class)->states('superuser')->create();
-         Auth::login($admin);
-         $cat = $this->createValidCategory('asset-laptop-category', ['require_acceptance' => true]);
-         $model = $this->createValidAssetModel('mbp-13-model', ['category_id' => $cat->id]);
-         $asset = $this->createValidAsset(['model_id' => $model->id]);
-         $user = factory(User::class)->create();
-         Notification::fake();
-         $asset->checkOut($user, 1);
+        $admin = factory(User::class)->states('superuser')->create();
+        Auth::login($admin);
+        $cat = $this->createValidCategory('asset-laptop-category', ['require_acceptance' => true]);
+        $model = $this->createValidAssetModel('mbp-13-model', ['category_id' => $cat->id]);
+        $asset = $this->createValidAsset(['model_id' => $model->id]);
+        $user = $this->createValidUser();
 
-         Notification::assertSentTo($user, CheckoutAssetNotification::class);
+        Notification::fake();
+        $asset->checkOut($user, 1);
+        Notification::assertSentTo($user, CheckoutAssetNotification::class);
      }
 }

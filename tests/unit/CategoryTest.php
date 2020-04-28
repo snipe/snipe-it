@@ -38,7 +38,8 @@ class CategoryTest extends BaseTest
          $this->assertCount(5, $category->models);
 
          $models->each(function($model) {
-             factory(App\Models\Asset::class, 2)->create(['model_id' => $model->id]);
+             // factory(App\Models\Asset::class, 2)->create(['model_id' => $model->id]);
+             $this->createValidAsset(['model_id' => $model->id], 2);
          });
          $this->assertEquals(10, $category->itemCount());
      }
