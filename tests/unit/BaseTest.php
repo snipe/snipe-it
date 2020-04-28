@@ -87,11 +87,11 @@ class BaseTest extends \Codeception\TestCase\Test
         );
     }
 
-    protected function createValidAsset($overrides = [], $qty = 1)
+    protected function createValidAsset($overrides = [])
     {
         $locId = $this->createValidLocation()->id;
         $this->createValidAssetModel();
-        return factory(\App\Models\Asset::class, $qty)->states('laptop-mbp')->create(
+        return factory(\App\Models\Asset::class)->states('laptop-mbp')->create(
             array_merge([
                 'rtd_location_id' => $locId,
                 'location_id' => $locId,
