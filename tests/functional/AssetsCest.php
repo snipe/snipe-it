@@ -22,7 +22,6 @@ class AssetsCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-
         $I->wantTo("Test Validation Fails with blank elements");
         $I->amOnPage(route('hardware.create'));
         // Settings factory can enable auto prefixes, which generate a random asset id.  Lets clear it out for the sake of this test.
@@ -54,7 +53,7 @@ class AssetsCest
             'purchase_date'     => '2016-01-01',
             'requestable'       => $asset->requestable,
             'rtd_location_id'   => $asset->rtd_location_id,
-            'serials[1]'            => $asset->serial,
+            'serials[1]'        => $asset->serial,
             'status_id'         => $asset->status_id,
             'supplier_id'       => $asset->supplier_id,
             'warranty_months'   => $asset->warranty_months,

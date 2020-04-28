@@ -38,6 +38,7 @@ class CategoryTest extends BaseTest
          $this->assertCount(5, $category->models);
 
          $models->each(function($model) {
+            // This is intentionally run twice to generate the ten imagined assets, done this way to keep it in sync with createValidAsset rather than using the factory directly.
              $this->createValidAsset(['model_id' => $model->id]);
              $this->createValidAsset(['model_id' => $model->id]);
          });
