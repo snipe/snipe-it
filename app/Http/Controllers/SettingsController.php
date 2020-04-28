@@ -409,17 +409,10 @@ class SettingsController extends Controller
         }
 
 
-        // If the user wants to clear the logo, reset the brand type
-        if ('1' == $request->input('clear_logo')) {
-            Storage::disk('public')->delete($setting->logo);
-            $setting->logo  = null;
-            $setting->brand = 1;
-
-            // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('logo')) {
+        if ($request->hasFile('logo')) {
             $image         = $request->file('logo');
             $ext           = $image->getClientOriginalExtension();
-            $setting->logo = $file_name = 'logo.' . $ext;
+            $setting->logo = $file_name = 'logo-.'.date('Y-m-d').'.'. $ext;
 
             if ('svg' != $image->getClientOriginalExtension()) {
                 $upload = Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
@@ -435,15 +428,15 @@ class SettingsController extends Controller
             if (($setting->logo) && (file_exists($file_name))) {
                 Storage::disk('public')->delete($file_name);
             }
+
+        } elseif ('1' == $request->input('clear_logo')) {
+                Storage::disk('public')->delete($setting->logo);
+                $setting->logo  = null;
+                $setting->brand = 1;
         }
 
-        // If the user wants to clear the email logo...
-        if ('1' == $request->input('clear_email_logo')) {
-            Storage::disk('public')->delete($setting->email_logo);
-            $setting->email_logo  = null;
 
-            // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('email_logo')) {
+        if ($request->hasFile('email_logo')) {
             $email_image         = $email_upload = $request->file('email_logo');
             $email_ext           = $email_image->getClientOriginalExtension();
             $setting->email_logo = $email_file_name = 'email_logo.' . $email_ext;
@@ -462,15 +455,15 @@ class SettingsController extends Controller
             if (($setting->email_logo) && (file_exists($email_file_name))) {
                 Storage::disk('public')->delete($email_file_name);
             }
+        } elseif ('1' == $request->input('clear_email_logo')) {
+            Storage::disk('public')->delete($setting->email_logo);
+            $setting->email_logo  = null;
+            // If they are uploading an image, validate it and upload it
         }
 
-        // If the user wants to clear the label logo...
-        if ('1' == $request->input('clear_label_logo')) {
-            Storage::disk('public')->delete($setting->label_logo);
-            $setting->label_logo  = null;
 
-            // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('label_logo')) {
+        // If the user wants to clear the label logo...
+        if ($request->hasFile('label_logo')) {
             $image         = $request->file('label_logo');
             $ext           = $image->getClientOriginalExtension();
             $setting->label_logo = $label_file_name = 'label_logo.' . $ext;
@@ -489,15 +482,15 @@ class SettingsController extends Controller
             if (($setting->label_logo) && (file_exists($label_file_name))) {
                 Storage::disk('public')->delete($label_file_name);
             }
+        } elseif ('1' == $request->input('clear_label_logo')) {
+            Storage::disk('public')->delete($setting->label_logo);
+            $setting->label_logo  = null;
+
+            // If they are uploading an image, validate it and upload it
         }
 
         // If the user wants to clear the favicon...
-        if ('1' == $request->input('clear_favicon')) {
-            Storage::disk('public')->delete($setting->clear_favicon);
-            $setting->favicon  = null;
-
-            // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('favicon')) {
+         if ($request->hasFile('favicon')) {
             $favicon_image         = $favicon_upload = $request->file('favicon');
             $favicon_ext           = $favicon_image->getClientOriginalExtension();
             $setting->favicon      = $favicon_file_name = 'favicon-uploaded.' . $favicon_ext;
@@ -524,7 +517,12 @@ class SettingsController extends Controller
             if (($setting->favicon) && (file_exists($favicon_file_name))) {
                 Storage::disk('public')->delete($favicon_file_name);
             }
-        }
+        } elseif ('1' == $request->input('clear_favicon')) {
+             Storage::disk('public')->delete($setting->clear_favicon);
+             $setting->favicon  = null;
+
+             // If they are uploading an image, validate it and upload it
+         }
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
@@ -899,6 +897,7 @@ class SettingsController extends Controller
         $setting->labels_fontsize             = $request->input('labels_fontsize');
         $setting->labels_pagewidth            = $request->input('labels_pagewidth');
         $setting->labels_pageheight           = $request->input('labels_pageheight');
+        $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
 
 

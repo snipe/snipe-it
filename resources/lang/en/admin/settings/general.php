@@ -144,6 +144,7 @@ return array(
     'update'                    => 'Update Settings',
     'value'                     => 'Value',
     'brand'                     => 'Branding',
+    'web_brand'                 => 'Web Branding Type',
     'about_settings_title'      => 'About Settings',
     'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',
     'labels_per_page'           => 'Labels per page',

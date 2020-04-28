@@ -58,36 +58,11 @@
                         </div>
 
 
-                        <!-- Logo -->
-
-                        <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
-                            <label class="col-md-3 control-label" for="image">
-                                {{ Form::label('logo', trans('admin/settings/general.logo')) }}</label>
-                            <div class="col-md-9">
-                                @if (config('app.lock_passwords'))
-                                    <p class="help-block">{{ trans('general.lock_passwords') }}</p>
-                                @else
-                                    <label class="btn btn-default">
-                                        {{ trans('button.select_file')  }}
-                                        <input type="file" name="image" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
-                                    </label>
-
-                                    <p class="help-block" id="upload-file-status">{{ trans('general.image_filetypes_help', ['size' => \App\Helpers\Helper::file_upload_max_size_readable()]) }}</p>
-
-                                    {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                    <label for="clear_logo">
-                                        {{ Form::checkbox('clear_logo', '1', old('clear_logo'),array('class' => 'minimal', 'aria-label'=>'clear_logo')) }}
-                                        {{ trans('general.delete') }}
-                                    </label>
-                                @endif
-                            </div>
-                        </div>
-
 
                         <!-- Branding -->
                         <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('brand', trans('admin/settings/general.brand')) }}
+                                 {{ Form::label('brand', trans('admin/settings/general.web_brand')) }}
                             </div>
                             <div class="col-md-9">
                                 {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
