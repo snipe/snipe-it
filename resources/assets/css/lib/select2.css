@@ -15,14 +15,14 @@ Version: @@ver@@ Timestamp: @@timestamp@@
 .select2-drop,
 .select2-search,
 .select2-search input {
-  /*
-    Force border-box so that % widths fit the parent
-    container without overlap because of margin/padding.
-    More Info : http://www.quirksmode.org/css/box.html
-  */
-  -webkit-box-sizing: border-box; /* webkit */
-     -moz-box-sizing: border-box; /* firefox */
-          box-sizing: border-box; /* css3 */
+    /*
+      Force border-box so that % widths fit the parent
+      container without overlap because of margin/padding.
+      More Info : http://www.quirksmode.org/css/box.html
+    */
+    -webkit-box-sizing: border-box; /* webkit */
+    -moz-box-sizing: border-box; /* firefox */
+    box-sizing: border-box; /* css3 */
 }
 
 .select2-container .select2-choice {
@@ -43,10 +43,10 @@ Version: @@ver@@ Timestamp: @@timestamp@@
     background-clip: padding-box;
 
     -webkit-touch-callout: none;
-      -webkit-user-select: none;
-         -moz-user-select: none;
-          -ms-user-select: none;
-              user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     background-color: #fff;
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.5, #fff));
@@ -141,7 +141,7 @@ Version: @@ver@@ Timestamp: @@timestamp@@
     border-radius: 0 0 4px 4px;
 
     -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
-            box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
 }
 
 .select2-drop.select2-drop-above {
@@ -152,7 +152,7 @@ Version: @@ver@@ Timestamp: @@timestamp@@
     border-radius: 4px 4px 0 0;
 
     -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
-            box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+    box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
 }
 
 .select2-drop-active {
@@ -230,7 +230,7 @@ Version: @@ver@@ Timestamp: @@timestamp@@
     border-radius: 0;
 
     -webkit-box-shadow: none;
-            box-shadow: none;
+    box-shadow: none;
 
     background: #fff url('../../../img/select2/select2.png') no-repeat 100% -22px;
     background: url('../../../img/select2/select2.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #fff), color-stop(0.99, #eee));
@@ -257,13 +257,13 @@ Version: @@ver@@ Timestamp: @@timestamp@@
     outline: none;
 
     -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .3);
-            box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
 }
 
 .select2-dropdown-open .select2-choice {
     border-bottom-color: transparent;
     -webkit-box-shadow: 0 1px 0 #fff inset;
-            box-shadow: 0 1px 0 #fff inset;
+    box-shadow: 0 1px 0 #fff inset;
 
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -339,10 +339,10 @@ Version: @@ver@@ Timestamp: @@timestamp@@
     min-height: 1em;
 
     -webkit-touch-callout: none;
-      -webkit-user-select: none;
-         -moz-user-select: none;
-          -ms-user-select: none;
-              user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .select2-results .select2-highlighted {
@@ -382,9 +382,9 @@ disabled look for disabled choices in the results dropdown
     cursor: default;
 }
 .select2-results .select2-disabled {
-  background: #f4f4f4;
-  display: list-item;
-  cursor: default;
+    background: #f4f4f4;
+    display: list-item;
+    cursor: default;
 }
 
 .select2-results .select2-selected {
@@ -441,7 +441,7 @@ disabled look for disabled choices in the results dropdown
 }
 
 .select2-locked {
-  padding: 3px 5px 3px 5px !important;
+    padding: 3px 5px 3px 5px !important;
 }
 
 .select2-container-multi .select2-choices {
@@ -453,7 +453,7 @@ disabled look for disabled choices in the results dropdown
     outline: none;
 
     -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .3);
-            box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
 }
 .select2-container-multi .select2-choices li {
     float: left;
@@ -479,7 +479,7 @@ html[dir="rtl"] .select2-container-multi .select2-choices li
     outline: 0;
     border: 0;
     -webkit-box-shadow: none;
-            box-shadow: none;
+    box-shadow: none;
     background: transparent !important;
 }
 
@@ -504,15 +504,15 @@ html[dir="rtl"] .select2-container-multi .select2-choices li
     border-radius: 3px;
 
     -webkit-box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-            box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0, 0, 0, 0.05);
 
     background-clip: padding-box;
 
     -webkit-touch-callout: none;
-      -webkit-user-select: none;
-         -moz-user-select: none;
-          -ms-user-select: none;
-              user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     background-color: #e4e4e4;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
@@ -555,7 +555,7 @@ html[dir="rtl"] .select2-search-choice-close {
 }
 
 .select2-container-multi .select2-choices .select2-search-choice .select2-search-choice-close:hover {
-  background-position: right -11px;
+    background-position: right -11px;
 }
 .select2-container-multi .select2-choices .select2-search-choice-focus .select2-search-choice-close {
     background-position: right -11px;
@@ -616,12 +616,12 @@ html[dir="rtl"] .select2-search-choice-close {
 /* Retina-ize icons */
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi)  {
-  .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice .select2-arrow b {
-      background-image: url('select2x2.png') !important;
-      background-repeat: no-repeat !important;
-      background-size: 60px 40px !important;
-  }
-  .select2-search input {
-      background-position: 100% -21px !important;
-  }
+    .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice .select2-arrow b {
+        background-image: url('select2x2.png') !important;
+        background-repeat: no-repeat !important;
+        background-size: 60px 40px !important;
+    }
+    .select2-search input {
+        background-position: 100% -21px !important;
+    }
 }

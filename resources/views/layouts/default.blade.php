@@ -29,8 +29,9 @@
 
     {{-- stylesheets --}}
 
-    <link rel="stylesheet" href="{{ url('css/dist/all.css') }}">
-    <link rel="stylesheet" href="{{ url('css/dist/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css') }}">
+    <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
+    <link rel="stylesheet" href="{{ url(mix('css/dist/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css')) }}">
+
 
 
       {{-- page level css --}}
@@ -69,6 +70,7 @@
               {!! $snipeSettings->show_custom_css() !!}
           </style>
       @endif
+
 
     <script nonce="{{ csrf_token() }}">
           window.snipeit = {
@@ -836,7 +838,7 @@
     </div>
 
     {{-- Javascript files --}}
-    <script src="{{ url('js/dist/all.js') }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
     {{-- Page level javascript --}}
     @stack('js')
 
