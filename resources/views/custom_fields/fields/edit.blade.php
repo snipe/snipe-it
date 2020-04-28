@@ -75,7 +75,6 @@
               {{ trans('admin/custom_fields/general.field_format') }}
             </label>
             <div class="col-md-6 required">
-              {{ Form::select("format",$predefinedFormats, $field->getFormatType(), 
               {{ Form::select("format",\App\Helpers\Helper::predefined_formats(), $field->format, array('class'=>'format select2 form-control', 'aria-label'=>'format')) }}
               {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
