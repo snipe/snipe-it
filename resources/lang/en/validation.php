@@ -44,6 +44,9 @@ return array(
     'exists'               => 'The selected :attribute is invalid.',
     'file'                 => 'The :attribute must be a file.',
     'filled'               => 'The :attribute field must have a value.',
+    'gt'                   => [
+        'numeric' => 'The :attribute field must be greater than :value.'
+    ],
     'hashed_pass'          => 'Your password is incorrect.',
     'image'                => 'The :attribute must be an image.',
     'in'                   => 'The selected :attribute is invalid.',
