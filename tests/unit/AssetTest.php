@@ -287,6 +287,11 @@ class AssetTest extends BaseTest
              'target_id'     => $target->id
          ]);
 
+         // An Asset cannot be checked out to itself.
+         $target = $this->createValidAsset();
+         $this->expectException(CheckoutNotAllowed::class);
+         $target->checkOut($target, $adminUser);
+
          // An Asset Can be checked out to a location, and this should be logged.
          $target = $this->createValidLocation();
 

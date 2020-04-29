@@ -14,8 +14,9 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\License;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
