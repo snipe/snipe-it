@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Events\AssetCheckedOut;
 use App\Events\CheckoutableCheckedOut;
+use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
@@ -270,6 +271,9 @@ class Asset extends Depreciable
     {
         if (!$target) {
             return false;
+        }
+        if ($this->is($target)) {
+            throw new CheckoutNotAllowed('You cannot check an asset out to itself.');
         }
 
         if ($expected_checkin) {
