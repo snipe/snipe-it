@@ -338,7 +338,7 @@
                         data-sort-order="asc"
                         data-sort-name="name"
                         class="table table-striped snipe-table"
-                        data-url="{{ route('api.license.seats',['license_id' => $license->id]) }}"
+                        data-url="{{ route('api.license.seats', $license->id) }}"
                         data-export-options='{
                         "fileName": "export-seats-{{ str_slug($license->name) }}-{{ date('Y-m-d') }}",
                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
