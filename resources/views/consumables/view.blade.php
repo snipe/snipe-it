@@ -67,7 +67,6 @@
     </div> <!-- /.box.box-default-->
   </div> <!-- /.col-md-9-->
   <div class="col-md-3">
-
     @if ($consumable->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 15px;">
         <a href="{{ app('consumables_upload_url') }}/{{ $consumable->image }}" data-toggle="lightbox"><img src="{{ app('consumables_upload_url') }}/{{ $consumable->image }}" class="img-responsive img-thumbnail" alt="{{ $consumable->name }}"></a>
@@ -116,10 +115,12 @@
         {{ $consumable->order_number }}
       </div>
     @endif
-      <div class="col-md-12" style="padding-bottom: 5px;">
-        <h2>{{ trans('admin/consumables/general.about_consumables_title') }}</h4>
-        <p>{{ trans('admin/consumables/general.about_consumables_text') }} </p>
-      </div>
+
+    @can('checkout', \App\Models\Accessory::class)
+    <div class="col-md-12">
+        <a href="{{ route('checkout/consumable', $consumable->id) }}" style="padding-bottom:5px;" class="btn btn-primary btn-sm" {{ (($consumable->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+    </div>
+    @endcan
   </div> <!-- /.col-md-3-->
 </div> <!-- /.row-->
 
