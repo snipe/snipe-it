@@ -52,14 +52,15 @@ class ForgotPasswordController extends Controller
      */
     public function sendResetLinkEmail(Request $request)
     {
-        $this->validate($request, ['username' => 'required'], ['username.required' => 'Please enter your username.']);
 
         /**
          * Let's set a max character count here to prevent potential
          * buffer overflow issues with attackers sending very large
          * payloads through.
          */
-        $this->validate($request, ['email' => 'required|email|max:250']);
+        $this->validate($request->validate([
+            'email' => 'required|email|max:255']));
+
 
         /**
          * If we find a matching email with an activated user, we will
@@ -70,16 +71,16 @@ class ForgotPasswordController extends Controller
          */
         $response = $this->broker()->sendResetLink(
             array_merge(
-                $request->only('username'),
+                $request->only('email'),
                 ['activated' => '1'],
                 ['ldap_import' => '0']
             )
         );
 
         if ($response === \Password::RESET_LINK_SENT) {
-            \Log::info('Password reset attempt: User '.$request->input('username').' found, password reset sent');
+            \Log::info('Password reset attempt: User '.$request->input('email').' found, password reset sent');
         } else {
-            \Log::info('Password reset attempt: User '.$request->input('username').' not found or user is inactive');
+            \Log::info('Password reset attempt: User '.$request->input('email').' not found or user is inactive');
         }
 
 
@@ -101,8 +102,5 @@ class ForgotPasswordController extends Controller
         return redirect()->route('login')->with('success',trans('passwords.sent'));
         }
 
-        return back()->withErrors(
-            ['email' => trans($response)]
-        );
-    }
+
 }
