@@ -154,7 +154,19 @@ class AssetModelsController extends Controller
         $this->authorize('update', AssetModel::class);
         $assetmodel = AssetModel::findOrFail($id);
         $assetmodel->fill($request->all());
-        $assetmodel->fieldset_id = $request->get("custom_fieldset_id");
+
+        /**
+         * Allow custom_fieldset_id to override and populate fieldset_id.
+         * This is stupid, but required for legacy API support.
+         *
+         * I have no idea why we manually overrode that field name
+         * in previous versions. I assume there was a good reason for
+         * it, but I'll be damned if I can think of one. - snipe
+         */
+        if ($request->filled('custom_fieldset_id')) {
+            $assetmodel->fieldset_id = $request->get("custom_fieldset_id");
+        }
+
 
         if ($assetmodel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $assetmodel, trans('admin/models/message.update.success')));
