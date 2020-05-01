@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\Component;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -96,12 +97,12 @@ class ComponentCheckinController extends Controller
 
             $asset = Asset::find($component_assets->asset_id);
 
-            event(new CheckoutableCheckedIn($component, $asset, Auth::user(), $request->input('note')));
+            event(new CheckoutableCheckedIn($component, $asset, Auth::user(), $request->input('note'), Carbon::now()));
 
             return redirect()->route('components.index')->with('success',
-                trans('admin/components/message.checkout.success'));
+                trans('admin/components/message.checkin.success'));
         }
-        return redirect()->route('components.index')->with('error', trans('admin/components/message.not_found'));
+        return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
     }
 
 }
