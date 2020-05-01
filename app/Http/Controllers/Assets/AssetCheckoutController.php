@@ -62,9 +62,7 @@ class AssetCheckoutController extends Controller
             $admin = Auth::user();
 
             $target = $this->determineCheckoutTarget($asset);
-            if ($asset->is($target)) {
-                throw new CheckoutNotAllowed('You cannot check an asset out to itself.');
-            }
+
             $asset = $this->updateAssetLocation($asset, $target);
 
             $checkout_at = date("Y-m-d H:i:s");
