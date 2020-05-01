@@ -58,8 +58,11 @@ class ForgotPasswordController extends Controller
          * buffer overflow issues with attackers sending very large
          * payloads through.
          */
-        $this->validate($request->validate([
-            'email' => 'required|email|max:255']));
+
+        $request->validate([
+            'email' => ['required', 'email', 'max:255'],
+        ]);
+        
 
 
         /**
