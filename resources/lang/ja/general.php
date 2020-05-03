@@ -88,7 +88,7 @@
     'firstname_lastname_underscore_format' => '名 姓 (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  '姓 イニシャル（smithj@example.com）',
     'first'					=> '最初',
-    'first_name'			=> '姓',
+    'first_name'			=> '名',
     'first_name_format'		=> '名 (jane@example.com)',
     'files'                 => 'ファイル',
     'file_name'				=> 'ファイル',
