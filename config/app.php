@@ -339,6 +339,7 @@ return [
         */
         App\Providers\MacroServiceProvider::class,
         App\Providers\LdapServiceProvider::class,
+        App\Providers\SamlServiceProvider::class,
 
 
     ],
