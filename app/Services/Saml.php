@@ -4,6 +4,7 @@ namespace App\Services;
 
 use OneLogin\Saml2\Auth as OneLogin_Saml2_Auth;
 use OneLogin\Saml2\IdPMetadataParser as OneLogin_Saml2_IdPMetadataParser;
+use OneLogin\Saml2\Settings as OneLogin_Saml2_Settings;
 use App\Models\Setting;
 use App\Models\User;
 use Exception;
@@ -131,10 +132,6 @@ class Saml
         try {
             $this->_auth = new OneLogin_Saml2_Auth($this->_settings);
         } catch (Exception $e) {
-            if ($this->isEnabled()) {
-                throw $e;
-            }
-
             $this->_enabled = false;
         }
     }
@@ -321,6 +318,31 @@ class Saml
         }
 
         return $this->_auth;
+    }
+
+    /**
+     * Gets the SP metadata. The XML representation.
+     *
+     * @param bool $alwaysPublishEncryptionCert When 'true', the returned
+     * metadata will always include an 'encryption' KeyDescriptor. Otherwise,
+     * the 'encryption' KeyDescriptor will only be included if
+     * $advancedSettings['security']['wantNameIdEncrypted'] or
+     * $advancedSettings['security']['wantAssertionsEncrypted'] are enabled.
+     * @param int|null      $validUntil    Metadata's valid time
+     * @param int|null      $cacheDuration Duration of the cache in seconds
+     *
+     * @return string  SP metadata (xml)
+     */
+    public function getSPMetadata($alwaysPublishEncryptionCert = false, $validUntil = null, $cacheDuration = null)
+    {
+        try {
+            $settings = new OneLogin_Saml2_Settings($this->_settings , true);
+            $metadata = $settings->getSPMetadata($alwaysPublishEncryptionCert, $validUntil, $cacheDuration);
+    
+            return $metadata;
+        } catch (Exception $e) {
+            return "";
+        }
     }
 
     /**

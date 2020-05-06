@@ -48,12 +48,10 @@ class SamlController extends Controller
      */
     public function metadata(Request $request)
     {
-        $auth = $this->saml->getAuth();
-        $settings = $auth->getSettings();
-        $metadata = $settings->getSPMetadata(true);
+        $metadata = $this->saml->getSPMetadata();
 
-        if (is_null($metadata)) {
-            return response($metadata, 403);
+        if (empty($metadata)) {
+            return response()->view('errors.403', [], 403);
         }
 
         return response($metadata)->header('Content-Type', 'text/xml');

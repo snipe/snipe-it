@@ -33,7 +33,6 @@ class SettingsSamlRequest extends FormRequest
     public function rules()
     {
         return [
-            "saml_idp_metadata" => 'sometimes|required_if:saml_enabled,1',
         ];
     }
 
@@ -41,11 +40,11 @@ class SettingsSamlRequest extends FormRequest
     {
         $validator->after(function ($validator) {
             if ($this->input('saml_enabled') == '1') {
-                if ($this->has('saml_idp_metadata')) {
-                    $idpMetadata = $this->input('saml_idp_metadata');
+                
+                $idpMetadata = $this->input('saml_idp_metadata');
+                if (!empty($idpMetadata)) {
                     try {
                         if (filter_var($idpMetadata, FILTER_VALIDATE_URL)) {
-                            $url = $idpMetadata;
                             $metadataInfo = OneLogin_Saml2_IdPMetadataParser::parseRemoteXML($idpMetadata);
                         } else {
                             $metadataInfo = OneLogin_Saml2_IdPMetadataParser::parseXML($idpMetadata);
