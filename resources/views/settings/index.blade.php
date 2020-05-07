@@ -222,6 +222,21 @@
           </div>
         </div>
 
+      <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+        <div class="box box-default">
+          <div class="box-body text-center">
+            <h5>
+              <a href="{{ route('settings.saml.index') }}">
+                <i class="fa fa-sign-in fa-4x" aria-hidden="true"></i>
+                <br><br>
+                <span class="name">SAML</span>
+              </a>
+            </h5>
+            <p class="help-block">SAML settings</p>
+          </div>
+        </div>
+      </div>
+
         <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
           <div class="box box-default">
             <div class="box-body text-center">

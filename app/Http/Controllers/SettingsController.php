@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use enshrined\svgSanitize\Sanitizer;
 use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
+use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
 use App\Models\Setting;
 use App\Models\User;
@@ -996,6 +997,56 @@ class SettingsController extends Controller
 
         if ($setting->save()) {
             return redirect()->route('settings.ldap.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+    }
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author Johnson Yi <jyi.dev@outlook.com>
+     *
+     * @since v5.0.0
+     *
+     * @return View
+     */
+    public function getSamlSettings()
+    {
+        $setting = Setting::getSettings();
+
+        return view('settings.saml', compact('setting'));
+    }
+
+    /**
+     * Saves settings from form.
+     *
+     * @author Johnson Yi <jyi.dev@outlook.com>
+     *
+     * @since v5.0.0
+     *
+     * @return View
+     */
+    public function postSamlSettings(SettingsSamlRequest $request)
+    {
+        if (is_null($setting = Setting::getSettings())) {
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
+
+        $setting->saml_enabled                  = $request->input('saml_enabled', '0');
+        $setting->saml_idp_metadata             = $request->input('saml_idp_metadata');
+        $setting->saml_attr_mapping_username    = $request->input('saml_attr_mapping_username');
+        $setting->saml_forcelogin               = $request->input('saml_forcelogin', '0');
+        $setting->saml_slo                      = $request->input('saml_slo', '0');
+        if (!empty($request->input('saml_sp_privatekey'))) {
+            $setting->saml_sp_x509cert          = $request->input('saml_sp_x509cert');
+            $setting->saml_sp_privatekey        = $request->input('saml_sp_privatekey');
+        }
+        $setting->saml_custom_settings          = $request->input('saml_custom_settings');
+
+        if ($setting->save()) {
+            return redirect()->route('settings.saml.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }
 
