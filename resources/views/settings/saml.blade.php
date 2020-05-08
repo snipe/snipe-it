@@ -30,9 +30,6 @@
     <input type="password" name="password_fake" id="password_fake" value="" style="display:none;" />
 
 
-    @if (!empty($setting->saml_sp_x509cert))
-        {{ Form::hidden('saml_sp_x509cert', $setting->saml_sp_x509cert) }}
-    @endif
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
@@ -57,8 +54,30 @@
                             <div class="col-md-9">
                                 {{ Form::checkbox('saml_enabled', '1', Request::old('saml_enabled', $setting->saml_enabled), ['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
                                 {{ trans('admin/settings/general.saml_enabled') }}
+                                <p class="help-block"></p>
                                 @if ($setting->saml_enabled)
-                                    <p class="help-block"><a href="{{ route('saml.metadata') }}" target="_blank">{{ route('saml.metadata') }}</a></p>
+                                    <!-- SAML SP Details -->
+                                    <!-- SAML SP Entity ID -->
+                                    {{ Form::label('saml_sp_entitiyid', trans('admin/settings/general.saml_sp_entityid')) }}
+                                    {{ Form::text('saml_sp_entitiyid', url('/'), ['class' => 'form-control', 'readonly']) }}
+                                    <br>
+                                    <!-- SAML SP ACS -->
+                                    {{ Form::label('saml_sp_acs_url', trans('admin/settings/general.saml_sp_acs_url')) }}
+                                    {{ Form::text('saml_sp_acs_url', route('saml.acs'), ['class' => 'form-control', 'readonly']) }}
+                                    <br>
+                                    <!-- SAML SP SLS -->
+                                    {{ Form::label('saml_sp_sls_url', trans('admin/settings/general.saml_sp_sls_url')) }}
+                                    {{ Form::text('saml_sp_sls_url', route('saml.sls'), ['class' => 'form-control', 'readonly']) }}
+                                    <br>
+                                    <!-- SAML SP Certificate -->
+                                    @if (!empty($setting->saml_sp_x509cert))
+                                        {{ Form::label('saml_sp_x509cert', trans('admin/settings/general.saml_sp_x509cert')) }}
+                                        {{ Form::textarea('saml_sp_x509cert', $setting->saml_sp_x509cert, ['class' => 'form-control', 'wrap' => 'off', 'readonly']) }}
+                                        <br>
+                                    @endif
+                                    <p class="help-block">
+                                        <a href="{{ route('saml.metadata') }}" target="_blank" class="btn btn-default" style="margin-right: 5px;">View Metadata</a>
+                                    </p>
                                 @endif
                                 {!! $errors->first('saml_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
@@ -91,7 +110,7 @@
                                 <p class="help-block">{{ trans('admin/settings/general.saml_attr_mapping_username_help') }}</p>
                                 {!! $errors->first('saml_attr_mapping_username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
-                        </div><!-- AD Domain -->
+                        </div>
 
                         <!-- SAML Force Login -->
                         <div class="form-group">
