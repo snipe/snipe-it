@@ -158,8 +158,6 @@ class Saml
             data_set($settings, 'sp.singleLogoutService.url', route('saml.sls'));
             data_set($settings, 'sp.x509cert', $setting->saml_sp_x509cert);
             data_set($settings, 'sp.privateKey', $setting->saml_sp_privatekey);
-            data_set($settings, 'security.wantAssertionsSigned', true);
-            data_set($settings, 'security.requestedAuthnContext', false);
 
             if (!empty(data_get($settings, 'sp.privateKey'))) {
                 data_set($settings, 'security.logoutRequestSigned', true);
@@ -167,31 +165,33 @@ class Saml
             }
 
             $idpMetadata = $setting->saml_idp_metadata;
-            $updatedAt = $setting->updated_at->timestamp;
-            $metadataCache = Cache::get('saml_idp_metadata_cache');
-            try {
-                $url = null;
-                $metadataInfo = null;
+            if (!empty($idpMetadata)) {
+                $updatedAt = $setting->updated_at->timestamp;
+                $metadataCache = Cache::get('saml_idp_metadata_cache');
+                try {
+                    $url = null;
+                    $metadataInfo = null;
 
-                if (empty($metadataCache) || $metadataCache['updated_at'] != $updatedAt) {
-                    if (filter_var($idpMetadata, FILTER_VALIDATE_URL)) {
-                        $url = $idpMetadata;
-                        $metadataInfo = OneLogin_Saml2_IdPMetadataParser::parseRemoteXML($idpMetadata);
+                    if (empty($metadataCache) || $metadataCache['updated_at'] != $updatedAt) {
+                        if (filter_var($idpMetadata, FILTER_VALIDATE_URL)) {
+                            $url = $idpMetadata;
+                            $metadataInfo = OneLogin_Saml2_IdPMetadataParser::parseRemoteXML($idpMetadata);
+                        } else {
+                            $metadataInfo = OneLogin_Saml2_IdPMetadataParser::parseXML($idpMetadata);
+                        }
+
+                        Cache::put('saml_idp_metadata_cache', [
+                            'updated_at' => $updatedAt,
+                            'url' => $url,
+                            'metadata_info' => $metadataInfo,
+                        ]);
                     } else {
-                        $metadataInfo = OneLogin_Saml2_IdPMetadataParser::parseXML($idpMetadata);
+                        $metadataInfo = $metadataCache['metadata_info'];
                     }
 
-                    Cache::put('saml_idp_metadata_cache', [
-                        'updated_at' => $updatedAt,
-                        'url' => $url,
-                        'metadata_info' => $metadataInfo,
-                    ], 604800);
-                } else {
-                    $metadataInfo = $metadataCache['metadata_info'];
+                    $settings = OneLogin_Saml2_IdPMetadataParser::injectIntoSettings($settings, $metadataInfo);
+                } catch (Exception $e) {
                 }
-
-                $settings = OneLogin_Saml2_IdPMetadataParser::injectIntoSettings($settings, $metadataInfo);
-            } catch (Exception $e) {
             }
         
             $custom_settings = preg_split('/\r\n|\r|\n/', $setting->saml_custom_settings);
