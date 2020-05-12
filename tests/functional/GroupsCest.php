@@ -39,7 +39,7 @@ class GroupsCest
         $I->wantTo("Test Validation Fails with short name");
         $I->amOnPage(route('groups.create'));
         $I->seeResponseCodeIs(200);
-        $I->fillField('name', 't2');
+        $I->fillField('name', 't');
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name must be at least 3 characters', '.alert-msg');
