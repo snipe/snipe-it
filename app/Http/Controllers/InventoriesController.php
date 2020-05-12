@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Transformers\ImportsTransformer;
 use App\Models\Import;
 use App\Models\Inventory;
+use App\Models\Location;
 
 class InventoriesController extends Controller
 {
     public function index()
     {
-//        $this->authorize('import');
+        // Grab all the locations
+        $this->authorize('view', Location::class);
         return view('inventories/index');
     }
 
@@ -25,6 +27,9 @@ class InventoriesController extends Controller
      */
     public function show($inventoryId = null)
     {
+        // Grab all the locations
+        $this->authorize('view', Location::class);
+        
         $inventory = Inventory::find($inventoryId);
 
         if (isset($inventory->id)) {
