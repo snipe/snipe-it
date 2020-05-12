@@ -27,6 +27,9 @@ class AssetRequest extends Request
      */
     public function rules()
     {
+        // Below, asset_tag is duplicated here and in the model, largely because
+        // the functional tests will fail because of the way Form Requests work in
+        // Laravel.
         $rules = [
             'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
             'name'            => 'max:255|nullable',
@@ -46,7 +49,7 @@ class AssetRequest extends Request
         ];
 
         $settings = \App\Models\Setting::getSettings();
-        
+
         if ($this->request->get('model_id') != '') {
             $model = AssetModel::find($this->request->get('model_id'));
 
