@@ -32,7 +32,7 @@
                 </div>
                 <div class="dynamic-form-row">
                     <div class="col-md-5 col-xs-12">
-                        <label for="send-welcome">Backup before importing?</label>
+                        <label for="run-backup">Backup before importing?</label>
                     </div>
                     <div class="col-md-7 col-xs-12">
                         <input type="checkbox" class="minimal" name="run-backup" v-model="options.run_backup">
