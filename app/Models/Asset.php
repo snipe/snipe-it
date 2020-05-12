@@ -1411,5 +1411,9 @@ class Asset extends Depreciable
 
     }
 
+    public function inventory_items() {
+        return $this->hasMany('\App\Models\InventoryItem');
+    }
+
 
 }

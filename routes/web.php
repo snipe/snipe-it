@@ -227,6 +227,28 @@ Route::group([ 'prefix' => 'import', 'middleware' => ['auth']], function () {
 
 /*
 |--------------------------------------------------------------------------
+| Invent Routes
+|--------------------------------------------------------------------------
+|
+|
+|
+*/
+//Route::group([ 'prefix' => 'inventories', 'middleware' => ['auth']], function () {
+//    Route::get('/', [
+//        'as' => 'inventories.index',
+//        'uses' => 'InventoriesController@index'
+//    ]);
+//});
+/*
+* Locations
+*/
+Route::resource('inventories', 'InventoriesController', [
+    'parameters' => ['inventory' => 'inventory_id']
+]);
+
+
+/*
+|--------------------------------------------------------------------------
 | Account Routes
 |--------------------------------------------------------------------------
 |

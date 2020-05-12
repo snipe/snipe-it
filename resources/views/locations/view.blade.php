@@ -18,18 +18,15 @@
 
 <div class="row">
   <div class="col-md-9">
-
-
-    <div class="box box-default">
-    <div class="box-header with-border">
-        <div class="box-heading">
-            <h2 class="box-title">{{ trans('general.users') }}</h2>
-        </div>
-    </div>
-      <div class="box-body">
-            <div class="table table-responsive">
-
-                <table
+      <div class="box box-default">
+          <div class="box-header with-border">
+              <div class="box-heading">
+                  <h2 class="box-title">{{ trans('general.users') }}</h2>
+              </div>
+          </div>
+          <div class="box-body">
+              <div class="table table-responsive">
+                  <table
                         data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}"
                         data-cookie-id-table="usersTable"
                         data-pagination="true"
@@ -49,19 +46,17 @@
                               }'>
 
                 </table>
-            </div><!-- /.table-responsive -->
+              </div><!-- /.table-responsive -->
           </div><!-- /.box-body -->
-        </div> <!--/.box-->
-
+      </div> <!--/.box-->
       <div class="box box-default">
-        <div class="box-header with-border">
-          <div class="box-heading">
-            <h2 class="box-title">{{ trans('general.assets') }}</h2>
+          <div class="box-header with-border">
+              <div class="box-heading">
+                  <h2 class="box-title">{{ trans('general.assets') }}</h2>
+              </div>
           </div>
-        </div>
-        <div class="box-body">
+          <div class="box-body">
               <div class="table table-responsive">
-
                   <table
                           data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
                           data-cookie-id-table="assetsListingTable"
@@ -81,12 +76,9 @@
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                   </table>
-
               </div><!-- /.table-responsive -->
-            </div><!-- /.box-body -->
-          </div> <!--/.box-->
-
-
+          </div><!-- /.box-body -->
+      </div> <!--/.box-->
       <div class="box box-default">
           <div class="box-header with-border">
               <div class="box-heading">
@@ -95,7 +87,6 @@
           </div>
           <div class="box-body">
               <div class="table table-responsive">
-
                   <table
                           data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
                           data-cookie-id-table="componentsTable"
@@ -119,8 +110,37 @@
               </div><!-- /.table-responsive -->
           </div><!-- /.box-body -->
       </div> <!--/.box-->
+      <div class="box box-default">
+          <div class="box-header with-border">
+              <div class="box-heading">
+                  <h2 class="box-title">Инвентаризации</h2>
+              </div>
+          </div>
+          <div class="box-body">
+              <div class="table table-responsive">
+                  <table
+                          data-columns="{{ \App\Presenters\InventoryPresenter::dataTableLayout() }}"
+                          data-cookie-id-table="inventoriesTable"
+                          data-pagination="true"
+                          data-id-table="inventoriesTable"
+                          data-search="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          id="inventoriesTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{route('api.inventories.index', ['location_id' => $location->id])}}"
+                          data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-components-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
 
-
+                  </table>
+              </div><!-- /.table-responsive -->
+          </div><!-- /.box-body -->
+      </div> <!--/.box-->
   </div><!--/.col-md-9-->
 
   <div class="col-md-3">

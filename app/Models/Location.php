@@ -200,4 +200,8 @@ class Location extends SnipeModel
     {
         return $query->leftJoin('users as location_user', 'locations.manager_id', '=', 'location_user.id')->orderBy('location_user.first_name', $order)->orderBy('location_user.last_name', $order);
     }
+
+    public function inventories() {
+        return $this->hasMany('\App\Models\Inventory');
+    }
 }
