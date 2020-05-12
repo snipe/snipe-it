@@ -66,9 +66,9 @@
                     <div class="modal-header">
                         <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-                        <h2 class="modal-title">
+                        <h4 class="modal-title">
                             Create Token
-                        </h2>
+                        </h4>
                     </div>
 
                     <div class="modal-body">
@@ -134,9 +134,9 @@
                     <div class="modal-header">
                         <button type="button " class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-                        <h2 class="modal-title">
+                        <h4 class="modal-title">
                             Personal Access Token
-                        </h2>
+                        </h4>
                     </div>
 
                     <div class="modal-body">

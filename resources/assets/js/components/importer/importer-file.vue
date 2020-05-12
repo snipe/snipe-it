@@ -22,21 +22,31 @@ tr {
             </div>
             <div class="dynamic-form-row">
                 <div class="col-md-5 col-xs-12">
-                    <label for="import-update">Update Existing Values?:</label>
+                    <label for="import-update">Update Existing Values?</label>
                 </div>
                 <div class="col-md-7 col-xs-12">
-                    <input type="checkbox" name="import-update" v-model="options.update">
+                    <input type="checkbox" class="minimal" name="import-update" v-model="options.update">
                 </div>
             </div>
+
             <div class="dynamic-form-row">
                 <div class="col-md-5 col-xs-12">
                     <label for="send-welcome">Send Welcome Email for new Users?</label>
                 </div>
                 <div class="col-md-7 col-xs-12">
-                    <input type="checkbox" name="send-welcome" v-model="options.send_welcome">
-                </div>
+                    <input type="checkbox" class="minimal" name="send-welcome" v-model="options.send_welcome">
                 </div>
             </div>
+
+            <div class="dynamic-form-row">
+                <div class="col-md-5 col-xs-12">
+                    <label for="run-backup">Backup before importing?</label>
+                </div>
+                <div class="col-md-7 col-xs-12">
+                    <input type="checkbox" class="minimal" name="run-backup" v-model="options.run_backup">
+                </div>
+            </div>
+
             <div class="alert col-md-8 col-md-offset-2" style="text-align:left"
                  :class="alertClass"
                  v-if="statusText">
@@ -238,6 +248,7 @@ tr {
                     'import-update': this.options.update,
                     'send-welcome': this.options.send_welcome,
                     'import-type': this.options.importType,
+                    'run-backup': this.options.run_backup,
                     'column-mappings': this.columnMappings
                 }).then( ({body}) => {
                     // Success
