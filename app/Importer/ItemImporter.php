@@ -85,7 +85,6 @@ class ItemImporter extends Importer
         if(get_class($this) !== UserImporter::class) {
             // $this->item["user"] = $this->createOrFetchUser($row);
             $this->item["checkout_target"] = $this->determineCheckout($row);
-
         }
     }
 
