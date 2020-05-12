@@ -1,5 +1,5 @@
 {
-    "/js/build/app.js": "/js/build/app.js?id=f1cc6a7ff104c9cbd2e4",
+    "/js/build/app.js": "/js/build/app.js?id=b6b7fb0548a3b41f9c29",
     "/css/build/AdminLTE.css": "/css/build/AdminLTE.css?id=59413334823616b81341",
     "/css/build/app.css": "/css/build/app.css?id=3911a887c2bdc7d0b528",
     "/css/build/overrides.css": "/css/build/overrides.css?id=688f59cd273484405f9b",
@@ -19,8 +19,8 @@
     "/css/dist/skins/skin-orange-dark.css": "/css/dist/skins/skin-orange-dark.css?id=71c178700d68294e3413",
     "/css/dist/skins/skin-orange.css": "/css/dist/skins/skin-orange.css?id=b4fc4a74e1f6367dc3e2",
     "/css/dist/all.css": "/css/dist/all.css?id=cd644954b1fc39b7f25b",
-    "/css/blue.png": "/css/blue.png?id=4c85d6a97173123bd14a",
-    "/css/blue@2x.png": "/css/blue@2x.png?id=62c67c6a822439e8a4ac",
+    "/css/blue.png": "/css/blue.png?id=e83a6c29e04fe851f212",
+    "/css/blue@2x.png": "/css/blue@2x.png?id=51135dd4d24f88f5de0b",
     "/css/dist/skins/skin-green-dark.min.css": "/css/dist/skins/skin-green-dark.min.css?id=0cfa39cacd9c83b4f53b",
     "/css/dist/skins/skin-black-dark.min.css": "/css/dist/skins/skin-black-dark.min.css?id=6bd9c2420a41eaf96f0b",
     "/css/dist/skins/skin-blue-dark.min.css": "/css/dist/skins/skin-blue-dark.min.css?id=2f665cf40d7348b3f94c",
@@ -34,5 +34,5 @@
     "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=a534edb9f7179f6dcf62",
     "/js/build/vendor.js": "/js/build/vendor.js?id=ac70ab5fd89efc2aa7d0",
     "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=9407782198cbc29f23d1",
-    "/js/dist/all.js": "/js/dist/all.js?id=43e4e9e0ddff773e54b2"
+    "/js/dist/all.js": "/js/dist/all.js?id=abd573b5d5ffa3b96e14"
 }

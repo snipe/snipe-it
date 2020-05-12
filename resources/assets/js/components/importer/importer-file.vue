@@ -11,13 +11,14 @@ tr {
             <div class="col-md-2"></div>
             <div class="col-md-8" style="padding-top: 30px; margin: 0 auto;">
                 <div class="dynamic-form-row">
-                <div class="col-md-5 col-xs-12">
-                    <label for="import-type">Import Type:</label>
-                </div>
-                <div class="col-md-7 col-xs-12">
-                    <select2 :options="options.importTypes" v-model="options.importType" required>
-                        <option disabled value="0"></option>
-                    </select2>
+                    <div class="col-md-5 col-xs-12">
+                        <label for="import-type">Import Type:</label>
+                    </div>
+                    <div class="col-md-7 col-xs-12">
+                        <select2 :options="options.importTypes" v-model="options.importType" required>
+                            <option disabled value="0"></option>
+                        </select2>
+                    </div>
                 </div>
             </div>
             <div class="dynamic-form-row">
@@ -128,7 +129,6 @@ tr {
                     general: [
                         {id: 'category', text: 'Category' },
                         {id: 'company', text: 'Company' },
-                        {id: 'checkout_to', text: 'Checked out to' },
                         {id: 'email', text: 'Email' },
                         {id: 'item_name', text: 'Item Name' },
                         {id: 'location', text: 'Location' },
@@ -161,7 +161,9 @@ tr {
                         {id: 'model_number', text: "Model Number"},
                     ],
                     licenses: [
+                        {id: 'asset_tag', text: 'Assigned To Asset'},
                         {id: 'expiration_date', text: 'Expiration Date' },
+                        {id: 'full_name', text: 'Full Name' },
                         {id: 'license_email', text: 'Licensed To Email' },
                         {id: 'license_name', text: 'Licensed To Name' },
                         {id: 'purchase_order', text: 'Purchase Order' },
