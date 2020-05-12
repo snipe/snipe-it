@@ -245,10 +245,12 @@ class LicensesController extends Controller
             $offset = (($seats) && (request('offset') > $seats->count())) ? 0 : request('offset', 0);
             $limit = request('limit', 50);
             
+            $total = $seats->count();
+
             $seats = $seats->skip($offset)->take($limit)->get();
 
             if ($seats) {
-                return (new LicenseSeatsTransformer)->transformLicenseSeats($seats, $seats->count());
+                return (new LicenseSeatsTransformer)->transformLicenseSeats($seats, $total);
             }
 
         }

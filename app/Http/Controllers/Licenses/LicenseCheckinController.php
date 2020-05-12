@@ -69,8 +69,7 @@ class LicenseCheckinController extends Controller
 
         // Declare the rules for the form validation
         $rules = [
-            'note'   => 'string',
-            'notes'   => 'string',
+            'note'   => 'string|nullable',
         ];
 
         // Create a new validator instance from our validation rules

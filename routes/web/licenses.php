@@ -18,7 +18,7 @@ Route::group([ 'prefix' => 'licenses', 'middleware' => ['auth'] ], function () {
         '{licenseId}/checkout/{seatId?}',
         [ 'as' => 'licenses.checkout', 'uses' => 'Licenses\LicenseCheckoutController@store' ]
     );
-    Route::get('{licenseId}/checkin/{backto?}', [
+    Route::get('{licenseSeatId}/checkin/{backto?}', [
     'as' => 'licenses.checkin',
     'uses' => 'Licenses\LicenseCheckinController@create'
     ]);
