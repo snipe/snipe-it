@@ -382,8 +382,8 @@ class LoginController extends Controller
         if (!empty($sloRequestUrl)) {
             return redirect()->away($sloRequestUrl);
         }
-    
-        $request->session()->forget('2fa_authed');
+
+        $request->session()->regenerate(true);
 
         Auth::logout();
 
