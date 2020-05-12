@@ -346,7 +346,8 @@
         'companies',
         'depreciations',
         'fieldsets',
-        'groups'
+        'groups',
+        'inventories'
     ];
 
     for (var i in formatters) {
@@ -459,6 +460,61 @@
             return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.name + '</a>';
         }
 
+    }
+
+    function inventoryStatusFormatter(value, row) {
+        if ((row.status)) {
+            switch (row.status) {
+                case 'START':
+                    return '<span class="label label-info">Начата</span>';
+                    break;
+                case 'FINISH_OK':
+                    return '<span class="label label-success">Завершена успешно</span>';
+                    break;
+                case 'FINISH_BAD':
+                    return '<span class="label label-danger">Завершена не полностью</span>';
+                    break;
+            }
+        }
+
+    }
+    function checkFormatter(value, row) {
+        if ((value) && ((value == 'true') || (value == '1'))) {
+            return '<i class="fa fa-check fa-lg text-success"></i>';
+        }else{
+            return '<i class="fa fa-times fa-lg text-danger"></i>';
+        }
+
+    }
+    function assetObjLinkFormatter(value, row) {
+        if ((value) && ((value == 'true') || (value == '1'))) {
+            return '<i class="fa fa-check fa-lg text-success"></i>';
+        }else{
+            return '<i class="fa fa-times fa-lg text-danger"></i>';
+        }
+
+    }
+
+    function inventoryCountFormatter(value, row) {
+        if (row.total >=0 && row.checked >=0) {
+            var destination = 'inventories';
+            if (row.total == row.checked){
+                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '" style="color: green"> ' + row.checked + '/' + row.total + '</a>';
+            }else{
+                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '"> ' + row.checked + '/' + row.total + '</a>';
+            }
+        }
+
+    }
+
+    function inventoriesResultFormatter(value, row) {
+        if (row.total >=0 && row.checked >=0) {
+            if (row.total == row.checked){
+                return '<a href="#" style="color: green"> ' + row.checked + '/' + row.total + '</a>';
+            }else{
+                return '<a href="#"> ' + row.checked + '/' + row.total + '</a>';
+            }
+        }
     }
 
     function trueFalseFormatter(value) {

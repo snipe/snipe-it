@@ -701,6 +701,13 @@
             </li>
             @endcan
 
+                <li{!! (Request::is('inventories/*') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('inventories.index') }}">
+                        <i class="fa fa-list-alt"></i>
+                        <span>Инвентаризация</span>
+                    </a>
+                </li>
+
             @can('viewRequestable', \App\Models\Asset::class)
             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
             <a href="{{ route('requestable-assets') }}">

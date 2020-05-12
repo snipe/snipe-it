@@ -551,6 +551,27 @@ class Helper
 
     }
 
+    public static function getFormattedStatus($status) {
+
+        if ($status=='') {
+            return null;
+        }
+        $status_text = "";
+        switch ($status) {
+            case "START":
+                $status_text = "Начата";
+                break;
+            case "FINISH_OK":
+                $status_text = "Завершена успешно";
+                break;
+            case "FINISH_BAD":
+                $status_text = "Завершена не полностью";
+                break;
+        }
+        return $status_text;
+
+    }
+
 
     // Nicked from Drupal :)
     // Returns a file size limit in bytes based on the PHP upload_max_filesize

@@ -782,6 +782,36 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
         [ 'as' => 'api.activity.index', 'uses' => 'ReportsController@index' ]
     );
 
+    /*--- Inventory API ---*/
 
 
+    Route::resource('inventories', 'InventoriesController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.inventories.index',
+                    'show' => 'api.inventories.show',
+                    'store' => 'api.inventories.store',
+                    'update' => 'api.inventories.update',
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['inventory' => 'inventory_id']
+        ]
+    ); // Inventory resource
+
+    /*--- InventoryItem API ---*/
+
+
+    Route::resource('inventory_items', 'InventoryItemController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.inventory_items.index',
+                    'show' => 'api.inventory_items.show',
+                    'update' => 'api.inventory_items.update',
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['inventory_item' => 'inventory_item_id']
+        ]
+    ); // Inventory resource
 });
