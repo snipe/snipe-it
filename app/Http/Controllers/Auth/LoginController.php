@@ -303,8 +303,8 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        $request->session()->forget('2fa_authed');
 
+        $request->session()->regenerate(true);
         Auth::logout();
 
         $settings = Setting::getSettings();
