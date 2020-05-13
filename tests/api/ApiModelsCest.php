@@ -88,7 +88,6 @@ class ApiAssetModelsCest
             'model_number' => $temp_assetmodel->model_number,
             'name' => $temp_assetmodel->name,
             'notes' => $temp_assetmodel->notes,
-            'fieldset' => null,
         ];
 
         $I->assertNotEquals($assetmodel->name, $data['name']);
