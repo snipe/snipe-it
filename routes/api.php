@@ -152,7 +152,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
 
     /*--- Departments API ---*/
 
-    /*--- Suppliers API ---*/
     Route::group(['prefix' => 'departments'], function () {
 
 
