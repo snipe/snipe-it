@@ -60,7 +60,15 @@ class LicenseSeatsController extends Controller
     {
         //
         $this->authorize('view', License::class);
-        $licenseSeat = LicenseSeat::findOrFail($seatId);
+        // sanity checks:
+        // 1. does the license seat exist?
+        if (!$licenseSeat = LicenseSeat::find($seatId)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Seat not found'));
+        }
+        // 2. does the seat belong to the specified license?
+        if (!$license = $licenseSeat->license()->first() || $license->id != intval($licenseId)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Seat does not belong to the specified license'));
+        }
         return (new LicenseSeatsTransformer)->transformLicenseSeat($licenseSeat);
     }
 
