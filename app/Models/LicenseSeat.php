@@ -20,6 +20,16 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
     protected $guarded = 'id';
     protected $table = 'license_seats';
 
+    /**
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
+    protected $fillable = [
+        'assigned_to',
+        'asset_id'
+    ];
+
     use Acceptable;
 
     public function getCompanyableParents()
