@@ -91,34 +91,28 @@ class LicenseSeatsController extends Controller
         $licenseSeat->user_id = Auth::user()->id;
         
         // check if this update is a checkin operation
-        $touched = FALSE;
-        $is_checkin = FALSE;
         // 1. are relevant fields touched at all?
         $dirty = $licenseSeat->getDirty();
-        if (isset($dirty->assigned_to) || isset($dirty->asset_id)) {
-            $touched = TRUE;
-            // 2. are they cleared? if yes then this is a checkin operation
-            $is_checkin = ($licenseSeat->assigned_to === null && $licenseSeat->asset_id === null);
-        }
+        $touched = (isset($dirty->assigned_to) || isset($dirty->asset_id));
+        // 2. are they cleared? if yes then this is a checkin operation
+        $is_checkin = ($touched && $licenseSeat->assigned_to === null && $licenseSeat->asset_id === null);
 
         if ($licenseSeat->save()) {
-            if ($touched) {
-                // the logging functions expect only one "target". if both asset and user are present in the request,
-                // we simply let assets take precedence over users...
-                if (isset($dirty->assigned_to)) {
-                    $target = User::find($dirty->assigned_to);
-                }
-                if (isset($dirty->assigned_to)) {
-                    $target = Asset::find($dirty->assigned_to);
-                }
+            // the logging functions expect only one "target". if both asset and user are present in the request,
+            // we simply let assets take precedence over users...
+            if ($touched && isset($dirty->assigned_to)) {
+                $target = User::find($dirty->assigned_to);
+            }
+            if ($touched && isset($dirty->assigned_to)) {
+                $target = Asset::find($dirty->assigned_to);
+            }
 
-                if ($is_checkin) {
-                    $licenseSeat->logCheckin($target, $request->input('note'));
-                }
-                else {
-                    // in this case, relevant fields are touched but it's not a checkin operation. so it must be a checkout operation.
-                    $licenseSeat->logCheckout($request->input('note'), $target);
-                }
+            if ($is_checkin) {
+                $licenseSeat->logCheckin($target, $request->input('note'));
+            }
+            elseif ($touched) {
+                // in this case, relevant fields are touched but it's not a checkin operation. so it must be a checkout operation.
+                $licenseSeat->logCheckout($request->input('note'), $target);
             }
 
             return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
