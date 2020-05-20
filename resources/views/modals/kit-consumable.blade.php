@@ -16,7 +16,7 @@
                     <div class="col-md-4 col-xs-12"><label for="modal-consumable_id">{{ trans('general.consumable') }}:
                         </label></div>
                     <div class="col-md-8 col-xs-12 required">
-                        <select class="js-data-ajax" data-endpoint="consumables" name="consumable" style="width: 100%" id="modal-consumable_id" />
+                        <select class="js-data-ajax" data-endpoint="consumables" name="consumable" style="width: 100%" id="modal-consumable_id"></select>
                     </div>
                 </div>
 
