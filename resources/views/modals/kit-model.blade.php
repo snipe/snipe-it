@@ -16,7 +16,7 @@
                     <div class="col-md-4 col-xs-12"><label for="modal-model_id">{{ trans('general.asset_model') }}:
                         </label></div>
                     <div class="col-md-8 col-xs-12 required">
-                        <select class="js-data-ajax" data-endpoint="models" name="model" style="width: 100%" id="modal-model_id" />
+                        <select class="js-data-ajax" data-endpoint="models" name="model" style="width: 100%" id="modal-model_id"></select>
                     </div>
                 </div>
 
