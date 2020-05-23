@@ -63,11 +63,7 @@ class AssetsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('index', Asset::class);
-        if ($request->filled('company_id')) {
-            $company = Company::find($request->input('company_id'));
-        } else {
-            $company = null;
-        }
+        $company = Company::find($request->input('company_id'));
         return view('hardware/index')->with('company', $company);
     }
 
