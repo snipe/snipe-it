@@ -25,7 +25,7 @@ class CheckoutAccessoryNotification extends Notification
         $this->note = $note;
         $this->target = $checkedOutTo;
         $this->acceptance = $acceptance;
-        
+
         $this->settings = Setting::getSettings();
 
     }
@@ -33,10 +33,9 @@ class CheckoutAccessoryNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
 
         $notifyBy = [];
@@ -52,7 +51,7 @@ class CheckoutAccessoryNotification extends Notification
         if ($this->target instanceof User && $this->target->email != '') {
 
             /**
-             * Send an email if the asset requires acceptance, 
+             * Send an email if the asset requires acceptance,
              * so the user can accept or decline the asset
              */
             if ($this->item->requireAcceptance()) {
@@ -71,17 +70,15 @@ class CheckoutAccessoryNotification extends Notification
              */
             if ($this->item->checkin_email()) {
                 $notifyBy[1] = 'mail';
-            }            
+            }
 
         }
 
         return $notifyBy;
     }
 
-    public function toSlack($notifiable)
+    public function toSlack()
     {
-
-
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
@@ -92,8 +89,6 @@ class CheckoutAccessoryNotification extends Notification
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
             'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
         ];
-
-
 
         return (new SlackMessage)
             ->content(':arrow_up: :keyboard: Accessory Checked Out')
@@ -107,12 +102,10 @@ class CheckoutAccessoryNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
-
         \Log::debug($this->item->getImageUrl());
         $eula =  $this->item->getEula();
         $req_accept = $this->item->requireAcceptance();
@@ -131,18 +124,5 @@ class CheckoutAccessoryNotification extends Notification
             ])
             ->subject(trans('mail.Confirm_accessory_delivery'));
 
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

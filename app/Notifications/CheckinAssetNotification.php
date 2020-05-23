@@ -39,7 +39,6 @@ class CheckinAssetNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
     public function via()
@@ -53,7 +52,7 @@ class CheckinAssetNotification extends Notification
         }
 
         /**
-         * Only send checkin notifications to users if the category 
+         * Only send checkin notifications to users if the category
          * has the corresponding checkbox checked.
          */
         if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '')
@@ -78,7 +77,7 @@ class CheckinAssetNotification extends Notification
             trans('general.status') => $item->assetstatus->name,
             trans('general.location') => ($item->location) ? $item->location->name : '',
         ];
-        
+
         return (new SlackMessage)
             ->content(':arrow_down: :computer: Asset Checked In')
             ->from($botname)
@@ -94,13 +93,10 @@ class CheckinAssetNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail()
     {
-
-
         $fields = [];
 
         // Check if the item has custom fields associated with it
