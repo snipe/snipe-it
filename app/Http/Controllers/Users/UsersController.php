@@ -382,7 +382,7 @@ class UsersController extends Controller
     {
         $this->authorize('update', User::class);
         // Get user information
-        if (!$user = User::onlyTrashed()->find($id)) {
+        if (!User::onlyTrashed()->find($id)) {
             return redirect()->route('users.index')->with('error', trans('admin/users/messages.user_not_found'));
         }
 
