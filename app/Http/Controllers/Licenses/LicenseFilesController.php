@@ -28,8 +28,6 @@ class LicenseFilesController extends Controller
     public function store(AssetFileRequest $request, $licenseId = null)
     {
         $license = License::find($licenseId);
-        // the license is valid
-        $destinationPath = config('app.private_uploads').'/licenses';
 
         if (isset($license->id)) {
             $this->authorize('update', $license);
