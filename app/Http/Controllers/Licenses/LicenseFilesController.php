@@ -34,12 +34,12 @@ class LicenseFilesController extends Controller
         if (isset($license->id)) {
             $this->authorize('update', $license);
 
-            if (Request::hasFile('file')) {
+            if ($request->hasFile('file')) {
 
                 if (!Storage::exists('private_uploads/licenses')) Storage::makeDirectory('private_uploads/licenses', 775);
 
                 $upload_success = false;
-                foreach (Input::file('file') as $file) {
+                foreach ($request->file('file') as $file) {
                     $extension = $file->getClientOriginalExtension();
                     $file_name = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
 
