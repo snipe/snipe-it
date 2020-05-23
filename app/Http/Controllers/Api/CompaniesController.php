@@ -48,7 +48,7 @@ class CompaniesController extends Controller
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
-        
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
         $companies->orderBy($sort, $order);
@@ -133,28 +133,17 @@ class CompaniesController extends Controller
      */
     public function destroy($id)
     {
-       $this->authorize('delete', Company::class);
-       $company = Company::findOrFail($id);
-            $this->authorize('delete', $company);
+        $this->authorize('delete', Company::class);
+        $company = Company::findOrFail($id);
+        $this->authorize('delete', $company);
 
-        try {
-            $company->delete();
+        if ( !$company->isDeletable() ) {
             return response()
-                ->json(Helper::formatStandardApiResponse('success', null,  trans('admin/companies/message.delete.success')));
-        } catch (\Illuminate\Database\QueryException $exception) {
-            /*
-                 * NOTE: This happens when there's a foreign key constraint violation
-                 * For example when rows in other tables are referencing this company
-                 */
-            if ($exception->getCode() == 23000) {
-                return response()
                     ->json(Helper::formatStandardApiResponse('error', null,  trans('admin/companies/message.assoc_users')));
-
-            } else {
-                throw $exception;
-            }
         }
-
+        $company->delete();
+        return response()
+            ->json(Helper::formatStandardApiResponse('success', null,  trans('admin/companies/message.delete.success')));
     }
 
     /**

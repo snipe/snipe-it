@@ -48,8 +48,8 @@ class SuppliersTransformer
             ];
 
             $permissions_array['available_actions'] = [
-                'update' => Gate::allows('update', Supplier::class) ? true : false,
-                'delete' => (Gate::allows('delete', Supplier::class) && ($supplier->assets_count == 0) && ($supplier->licenses_count == 0)  && ($supplier->accessories_count == 0)) ? true : false,
+                'update' => Gate::allows('update', Supplier::class),
+                'delete' => (Gate::allows('delete', Supplier::class) && ($supplier->assets_count == 0) && ($supplier->licenses_count == 0)  && ($supplier->accessories_count == 0)),
             ];
 
             $array += $permissions_array;

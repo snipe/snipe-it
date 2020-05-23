@@ -5,6 +5,7 @@ use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 
 /**
@@ -69,21 +70,34 @@ class Category extends SnipeModel
     ];
 
     use Searchable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['name', 'category_type'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [];
 
+
+    /**
+     * Checks if category can be deleted
+     *
+     * @author [Dan Meltzer] [<dmeltzer.devel@gmail.com>]
+     * @since [v5.0]
+     * @return bool
+     */
+    public function isDeletable()
+    {
+         return (Gate::allows('delete', $this)
+                && ($this->itemCount() == 0));
+    }
 
     /**
      * Establishes the category -> accessories relationship

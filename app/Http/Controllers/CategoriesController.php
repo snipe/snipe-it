@@ -159,18 +159,12 @@ class CategoriesController extends Controller
     {
         $this->authorize('delete', Category::class);
         // Check if the category exists
-        if (is_null($category = Category::withCount('models as models_count', 'accessories as accessories_count','consumables as consumables_count','components as components_count')->findOrFail($categoryId))) {
+        if (is_null($category = Category::findOrFail($categoryId))) {
             return redirect()->route('categories.index')->with('error', trans('admin/categories/message.not_found'));
         }
 
-        if ($category->models_count > 0) {
-            return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'model']));
-        } elseif ($category->accessories_count > 0) {
-            return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'accessory']));
-        } elseif ($category->consumables_count > 0) {
-            return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'consumable']));
-        } elseif ($category->components_count > 0) {
-            return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'component']));
+        if (!$category->isDeletable()) {
+            return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=> $category->category_type ]));
         }
 
         Storage::disk('public')->delete('categories'.'/'.$category->image);
