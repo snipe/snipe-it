@@ -51,7 +51,6 @@ trait Loggable
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
 
-
         // Figure out what the target is
         if ($log->target_type == Location::class) {
             $log->location_id = $target->id;
@@ -76,15 +75,19 @@ trait Loggable
 
         $checkoutClass = null;
 
-        if (method_exists($target, 'notify')) {
-            $target->notify(new static::$checkoutClass($params));
-        }
+        try {
+	        if (method_exists($target, 'notify')) {
+	            $target->notify(new static::$checkoutClass($params));
+	        }
 
-        // Send to the admin, if settings dictate
-        $recipient = new \App\Models\Recipients\AdminRecipient();
+	        // Send to the admin, if settings dictate
+	        $recipient = new \App\Models\Recipients\AdminRecipient();
 
-        if (($settings->admin_cc_email!='') && (static::$checkoutClass!='')) {
-            $recipient->notify(new static::$checkoutClass($params));
+	        if (($settings->admin_cc_email!='') && (static::$checkoutClass!='')) {
+	            $recipient->notify(new static::$checkoutClass($params));
+	        }
+        } catch(\Swift_TransportException $e) {
+            // no valid Recipients
         }
 
         return $log;
