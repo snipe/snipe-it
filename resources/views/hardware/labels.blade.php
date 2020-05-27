@@ -17,7 +17,6 @@ $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .
 ?>
 
 <style>
-
     body {
         font-family: arial, helvetica, sans-serif;
         width: {{ $settings->labels_pagewidth }}in;
@@ -25,7 +24,6 @@ $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .
         margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
         font-size: {{ $settings->labels_fontsize }}pt;
     }
-
     .label {
         width: {{ $settings->labels_width }}in;
         height: {{ $settings->labels_height }}in;
@@ -35,7 +33,6 @@ $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .
         display: inline-block;
         overflow: hidden;
     }
-
     .page-break  {
         page-break-after:always;
     }
@@ -85,9 +82,6 @@ $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .
     .next-padding {
         margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
     }
-
-
-
     @media print {
         .noprint {
             display: none !important;
@@ -97,7 +91,6 @@ $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .
             font-size: 0;
         }
     }
-
     @media screen {
         .label {
             outline: .02in black solid; /* outline doesn't occupy space like border does */
@@ -107,11 +100,9 @@ $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .
             padding-bottom: 15px;
         }
     }
-
     @if ($snipeSettings->custom_css)
         {{ $snipeSettings->show_custom_css() }}
     @endif
-
 </style>
 
 @foreach ($assets as $asset)
