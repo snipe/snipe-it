@@ -324,9 +324,14 @@ class UserPresenter extends Presenter
             return config('app.url').'/uploads/avatars/'.$this->avatar;
         }
 
-        if ((Setting::getSettings()->load_remote=='1') && ($this->email!='')) {
-            $gravatar = md5(strtolower(trim($this->email)));
-            return "//gravatar.com/avatar/".$gravatar;
+        if (Setting::getSettings()->load_remote=='1') {
+            if ($this->model->gravatar!='') {
+                $gravatar = md5(strtolower(trim($this->model->gravatar)));
+                return "//gravatar.com/avatar/".$gravatar;
+            } elseif ($this->email!='') {
+                $gravatar = md5(strtolower(trim($this->email)));
+                return "//gravatar.com/avatar/".$gravatar;
+            }
         }
 
         // Set a fun, gender-neutral default icon
