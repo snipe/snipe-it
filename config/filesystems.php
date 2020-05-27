@@ -58,13 +58,13 @@ $config = [
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'root'   => env('AWS_BUCKET_ROOT'),
-            //'visibility' => 'public'
+            'key' => env('PUBLIC_AWS_ACCESS_KEY_ID'),
+            'secret' => env('PUBLIC_AWS_SECRET_ACCESS_KEY'),
+            'region' => env('PUBLIC_AWS_DEFAULT_REGION'),
+            'bucket' => env('PUBLIC_AWS_BUCKET'),
+            'url' => env('PUBLIC_AWS_URL'),
+            'root'   => env('PUBLIC_AWS_BUCKET_ROOT'),
+            'visibility' => 'public'
         ],
 
         's3_private' => [
