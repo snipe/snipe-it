@@ -91,7 +91,11 @@ abstract class SnipePermissionsPolicy
      */
     public function delete(User $user, $item = null)
     {
-        return $user->hasAccess($this->columnName().'.delete');
+        $itemConditional = true;
+        if ($item) {
+            $itemConditional =  empty($item->deleted_at);
+        }
+        return $itemConditional && $user->hasAccess($this->columnName().'.delete');
     }
 
      /**

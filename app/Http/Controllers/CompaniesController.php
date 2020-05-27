@@ -113,7 +113,7 @@ final class CompaniesController extends Controller
 
         $company->name = $request->input('name');
 
-       
+
         $company = $request->handleImages($company,600, public_path().'/uploads/companies');
 
 
@@ -140,34 +140,24 @@ final class CompaniesController extends Controller
             return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.not_found'));
         }
-        
+
         $this->authorize('delete', $company);
-
-        try {
-
-            if ($company->image) {
-                try  {
-                    Storage::disk('public')->delete('companies'.'/'.$company->image);
-                } catch (\Exception $e) {
-                    \Log::debug($e);
-                }
-            }
-
-            $company->delete();
+        if(!$company->isDeletable()) {
             return redirect()->route('companies.index')
-                ->with('success', trans('admin/companies/message.delete.success'));
-        } catch (\Illuminate\Database\QueryException $exception) {
-        /*
-             * NOTE: This happens when there's a foreign key constraint violation
-             * For example when rows in other tables are referencing this company
-             */
-            if ($exception->getCode() == 23000) {
-                return redirect()->route('companies.index')
                     ->with('error', trans('admin/companies/message.assoc_users'));
-            }
-
-            throw $exception;
         }
+
+        if ($company->image) {
+            try  {
+                Storage::disk('public')->delete('companies'.'/'.$company->image);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
+        }
+
+        $company->delete();
+        return redirect()->route('companies.index')
+            ->with('success', trans('admin/companies/message.delete.success'));
     }
 
     public function show($id) {

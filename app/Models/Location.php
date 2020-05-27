@@ -7,10 +7,11 @@ use App\Models\SnipeModel;
 use App\Models\Traits\Searchable;
 use App\Models\User;
 use App\Presenters\Presentable;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
-use DB;
 
 class Location extends SnipeModel
 {
@@ -85,6 +86,14 @@ class Location extends SnipeModel
     protected $searchableRelations = [
       'parent' => ['name']
     ];
+
+    public function isDeletable()
+    {
+        return Gate::allows('delete', $this)
+                && ($this->assignedAssets()->count()===0)
+                && ($this->assets()->count()===0)
+                && ($this->users()->count()===0);
+    }
 
     public function users()
     {

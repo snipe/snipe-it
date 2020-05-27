@@ -33,25 +33,12 @@ class SlackTest extends Notification
     }
 
     /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        return [
-            //
-        ];
-    }
-
-    /**
      * Get the Slack representation of the notification.
      *
      * @param  mixed  $notifiable
      * @return SlackMessage
      */
-    public function toSlack($notifiable)
+    public function toSlack()
     {
         $settings = Setting::getSettings();
         return (new SlackMessage)
@@ -61,17 +48,4 @@ class SlackTest extends Notification
             ->content('Oh hai! Looks like your Slack integration with Snipe-IT is working!');
     }
 
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

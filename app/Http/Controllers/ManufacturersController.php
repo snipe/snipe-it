@@ -162,7 +162,7 @@ class ManufacturersController extends Controller
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.not_found'));
         }
 
-        if ($manufacturer->models_count > 0) {
+        if (!$manufacturer->isDeletable()) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.assoc_users'));
         }
 
@@ -173,7 +173,6 @@ class ManufacturersController extends Controller
                 \Log::info($e);
             }
         }
-
 
         // Delete the manufacturer
         $manufacturer->delete();

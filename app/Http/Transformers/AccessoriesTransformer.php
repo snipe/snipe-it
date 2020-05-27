@@ -45,10 +45,10 @@ class AccessoriesTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'checkout' => Gate::allows('checkout', Accessory::class) ? true : false,
+            'checkout' => Gate::allows('checkout', Accessory::class),
             'checkin' =>  false,
-            'update' => Gate::allows('update', Accessory::class) ? true : false,
-            'delete' => Gate::allows('delete', Accessory::class) ? true : false,
+            'update' => Gate::allows('update', Accessory::class) ,
+            'delete' => Gate::allows('delete', Accessory::class),
         ];
 
         $permissions_array['user_can_checkout'] = false;

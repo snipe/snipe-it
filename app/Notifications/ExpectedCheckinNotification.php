@@ -28,10 +28,9 @@ class ExpectedCheckinNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         $notifyBy = [];
         $item = $this->params['item'];
@@ -40,18 +39,12 @@ class ExpectedCheckinNotification extends Notification
         return $notifyBy;
     }
 
-    public function toSlack($notifiable)
-    {
-
-    }
-
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $asset
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($params)
+    public function toMail()
     {
         $formatted_due = Carbon::parse($this->params->expected_checkin)->format('D,  M j, Y');
         return (new MailMessage)
@@ -63,20 +56,6 @@ class ExpectedCheckinNotification extends Notification
             ->line('Serial: '.$this->params->serial)
             ->line('Asset Tag: '.$this->params->asset_tag)
             ->action('View Your Assets', route('view-assets'));
-
-
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

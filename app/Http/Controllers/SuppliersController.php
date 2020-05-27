@@ -106,7 +106,7 @@ class SuppliersController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update($supplierId = null, ImageUploadRequest $request)
+    public function update($supplierId, ImageUploadRequest $request)
     {
         $this->authorize('update', Supplier::class);
         // Check if the supplier exists

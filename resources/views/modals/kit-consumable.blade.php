@@ -7,11 +7,11 @@
             <h4 class="modal-title">Append consumable{{-- TODO: trans --}}</h4>
         </div>
         <div class="modal-body">
-            <form action="{{ route('api.kits.consumables.store', ['kit_id' => request('kit')]) }}" onsubmit="return false">
+            <form action="{{ route('api.kits.consumables.store', $kitId) }}" onsubmit="return false">
                 {{ csrf_field() }}
                 <div class="alert alert-danger" id="modal_error_msg" style="display:none">
                 </div>
-                
+
                 <div class="dynamic-form-row">
                     <div class="col-md-4 col-xs-12"><label for="modal-consumable_id">{{ trans('general.consumable') }}:
                         </label></div>
