@@ -12,8 +12,6 @@ $settings->labels_width = $settings->labels_width - $settings->labels_display_sg
 $settings->labels_height = $settings->labels_height - $settings->labels_display_bgutter;
 // Leave space on bottom for 1D barcode if necessary
 $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='') ? $settings->labels_height - .3 : $settings->labels_height - .3;
-// Leave space on left for QR code if necessary
-$qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .1: $settings->labels_width);
 ?>
 
 <style>
@@ -46,8 +44,8 @@ $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .
     }
     img.qr_img {
 
-        width: 130.79%;
-        height: 130.79%;
+        width: 120.79%;
+        height: 120.79%;
         margin-top: -6.9%;
         margin-left: -6.9%;
         padding-bottom: .04in;
@@ -63,6 +61,7 @@ $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .
         height: auto;
         padding-top: {{$settings->labels_display_bgutter}}in;
         font-family: arial, helvetica, sans-serif;
+        font-size: x-small;
         padding-right: .01in;
         overflow: hidden !important;
         display: inline;
