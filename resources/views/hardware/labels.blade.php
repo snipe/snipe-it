@@ -36,7 +36,6 @@ $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .
     .page-break  {
         page-break-after:always;
     }
-
     div.qr_img {
         width: {{ $qr_size }}in;
         height: {{ $qr_size }}in;
@@ -59,7 +58,6 @@ $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .
         padding-top: .11in;
         width: 100%;
     }
-
     .qr_text {
         width: 100%;
         height: auto;
@@ -71,14 +69,12 @@ $qr_txt_size = ($settings->qr_code=='1' ? $settings->labels_width - $qr_size - .
         word-wrap: break-word;
         word-break: break-all;
     }
-
     div.barcode_container {
 
         width: 100%;
         display: inline;
         overflow: hidden;
     }
-
     .next-padding {
         margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
     }
