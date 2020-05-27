@@ -413,7 +413,7 @@ class SettingsController extends Controller
         if ($request->hasFile('logo')) {
             $image         = $request->file('logo');
             $ext           = $image->getClientOriginalExtension();
-            $setting->logo = $file_name = 'logo-.'.date('Y-m-d').'.'. $ext;
+            $setting->logo = $file_name = 'logo-'.date('U').'.'. $ext;
 
             if ('svg' != $image->getClientOriginalExtension()) {
                 $upload = Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
