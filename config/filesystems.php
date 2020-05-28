@@ -13,7 +13,7 @@ $config = [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('PRIVATE_FILESYSTEM_DISK', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ $config = [
             'visibility' => 'public',
         ],
 
-        's3' => [
+        's3_public' => [
             'driver' => 's3',
             'key' => env('PUBLIC_AWS_ACCESS_KEY_ID'),
             'secret' => env('PUBLIC_AWS_SECRET_ACCESS_KEY'),
@@ -68,8 +68,10 @@ $config = [
         ],
 
         's3_private' => [
-            // This bucket (if different than the 's3' bucket above) can be configured within AWS to *never* permit public documents
-            // For security reasons, its best to use separate buckets for public and private documents in S3
+            // This bucket (if different than the 's3' bucket above) can be
+            // configured within AWS to *never* permit public documents
+            // For security reasons, its best to use separate buckets for
+            // public and private documents in S3
             'driver' => 's3',
             'key' => env('PRIVATE_AWS_ACCESS_KEY_ID'),
             'secret' => env('PRIVATE_AWS_SECRET_ACCESS_KEY'),
