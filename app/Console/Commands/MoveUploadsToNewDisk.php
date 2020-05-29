@@ -42,7 +42,7 @@ class MoveUploadsToNewDisk extends Command
 
         if (config('filesystems.default')=='local') {
             $this->error('Your current disk is set to local so we cannot proceed.');
-            $this->warn("Please configure your .env settings for S3 or Rackspace, \nand change your FILESYSTEM_DISK value to 's3' or 'rackspace'.");
+            $this->warn("Please configure your .env settings for S3. \nChange your PUBLIC_FILESYSTEM_DISK value to 's3_public' and your PRIVATE_FILESYSTEM_DISK to s3_public.");
             return false;
         }
         $delete_local = $this->argument('delete_local');
@@ -50,7 +50,6 @@ class MoveUploadsToNewDisk extends Command
         $public_uploads['accessories'] = glob('storage/app/public/accessories'."/*.*");
         $public_uploads['assets'] = glob('storage/app/public/assets'."/*.*");
         $public_uploads['avatars'] = glob('storage/app/public/avatars'."/*.*");
-        $public_uploads['barcodes'] = glob('storage/app/public/barcodes'."/*.*");
         $public_uploads['categories'] = glob('storage/app/public/categories'."/*.*");
         $public_uploads['companies'] = glob('storage/app/public/companies'."/*.*");
         $public_uploads['components'] = glob('storage/app/public/components'."/*.*");
