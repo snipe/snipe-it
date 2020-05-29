@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,68 +33,54 @@ Route::group([
     });
 
     /*--- Accessories API ---*/
-    Route::group(['prefix' => 'accessories'], function () {
-
-        Route::get('{accessory}/checkedout', [
-                'as' => 'accessories.checkedout',
-                'uses' => 'AccessoriesController@checkedout'
-            ]);
-
-        Route::get('selectlist', [
-                'as' => 'accessories.selectlist',
-                'uses'=> 'AccessoriesController@selectlist'
-            ]);
-    });
-
-    // Accessories group
+    // Accessories resource
     Route::apiResource('accessories', 'AccessoriesController', [
         'parameters' => ['accessory' => 'accessory_id']
     ]);
 
-    // Accessories resource
-
+    // Accessories group
     Route::group(['prefix' => 'accessories'], function () {
 
         Route::get('{accessory}/checkedout', [
-                'as' => 'accessories.checkedout',
-                'uses' => 'AccessoriesController@checkedout'
-            ]);
+            'as' => 'accessories.checkedout',
+            'uses' => 'AccessoriesController@checkedout'
+        ]);
 
         Route::post('{accessory}/checkout', [
-                'as' => 'accessories.checkout',
-                'uses' => 'AccessoriesController@checkout'
-            ]);
+            'as' => 'accessories.checkout',
+            'uses' => 'AccessoriesController@checkout'
+        ]);
 
         Route::post('{accessory}/checkin', [
-                'as' => 'accessories.checkin',
-                'uses' => 'AccessoriesController@checkin'
-            ]);
+            'as' => 'accessories.checkin',
+            'uses' => 'AccessoriesController@checkin'
+        ]);
+
+        Route::get('selectlist', [
+            'as' => 'accessories.selectlist',
+            'uses' => 'AccessoriesController@selectlist'
+        ]);
     }); // Accessories group
 
 
     /*--- Categories API ---*/
-
     Route::group(['prefix' => 'categories'], function () {
-
         Route::get('{item_type}/selectlist', [
                 'as' => 'categories.selectlist',
                 'uses' => 'CategoriesController@selectlist'
             ]);
-    });
+    }); // Categories group
 
-    // Categories group
     Route::apiResource('categories', 'CategoriesController', [
         'parameters' => ['category' => 'category_id']
     ]); // Categories resource
 
 
     /*--- Companies API ---*/
-
     Route::get('companies/selectlist', [
         'as' => 'companies.selectlist',
         'uses' => 'CompaniesController@selectlist'
     ]);
-
 
     // Companies resource
     Route::apiResource('companies', 'CompaniesController', [
@@ -104,33 +88,12 @@ Route::group([
     ]); // Companies resource
 
 
-    /*--- Departments API ---*/
-
-    /*--- Suppliers API ---*/
-    Route::group(['prefix' => 'departments'], function () {
-
-
-        Route::get('selectlist', [
-            'as' => 'departments.selectlist',
-            'uses' => 'DepartmentsController@selectlist'
-        ]);
-    }); // Departments group
-
-
-
-    Route::apiResource('departments', 'DepartmentsController', [
-        'parameters' => ['department' => 'department_id']
-    ]); // Departments resource
-
-
     /*--- Components API ---*/
-
     Route::apiResource('components', 'ComponentsController', [
         'parameters' => ['component' => 'component_id']
     ]); // Components resource
 
     Route::group(['prefix' => 'components'], function () {
-
         Route::get('{component}/assets', [
             'as' =>'components.assets',
             'uses' => 'ComponentsController@getAssets',
@@ -139,29 +102,43 @@ Route::group([
 
 
     /*--- Consumables API ---*/
-    Route::get('consumables/selectlist', [
-        'as' => 'consumables.selectlist',
-        'uses'=> 'ConsumablesController@selectlist'
-    ]);
+    Route::group(['prefix' => 'consumables'], function () {
+        Route::get('selectlist', [
+            'as' => 'consumables.selectlist',
+            'uses' => 'ConsumablesController@selectlist'
+        ]);
+
+        Route::get('view/{id}/users', [
+            'as' => 'consumables.showUsers',
+            'uses' => 'ConsumablesController@getDataView'
+        ]);
+    });
 
     Route::apiResource('consumables', 'ConsumablesController', [
         'parameters' => ['consumable' => 'consumable_id']
     ]); // Consumables resource
 
-    Route::get('consumables/view/{id}/users', [
-        'as' => 'consumables.showUsers',
-        'uses' => 'ConsumablesController@getDataView'
-    ]);
+
+    /*--- Departments API ---*/
+    Route::group(['prefix' => 'departments'], function () {
+        Route::get('selectlist', [
+            'as' => 'departments.selectlist',
+            'uses' => 'DepartmentsController@selectlist'
+        ]);
+    }); // Departments group
+
+    Route::apiResource('departments', 'DepartmentsController', [
+        'parameters' => ['department' => 'department_id']
+    ]); // Departments resource
+
 
     /*--- Depreciations API ---*/
-
     Route::apiResource('depreciations', 'DepreciationsController', [
         'parameters' => ['depreciation' => 'depreciation_id']
     ]); // Depreciations resource
 
 
     /*--- Fields API ---*/
-
     Route::apiResource('fields', 'CustomFieldsController', [
         'parameters' => [ 'field' => 'field_id' ]
     ]);
@@ -201,16 +178,13 @@ Route::group([
 
 
     /*--- Groups API ---*/
-
     Route::apiResource('groups', 'GroupsController', [
         'parameters' => ['group' => 'group_id']
     ]); // Groups resource
 
 
     /*--- Hardware API ---*/
-
     Route::group(['prefix' => 'hardware'], function () {
-
         Route::get('{asset_id}/licenses', [
             'as' => 'assets.licenselist',
             'uses' => 'AssetsController@licenses'
@@ -257,12 +231,6 @@ Route::group([
         ]);
     });
 
-    /*--- Asset Maintenances API ---*/
-    Route::apiResource('maintenances', 'AssetMaintenancesController', [
-        'parameters' => ['maintenance' => 'maintenance_id']
-    ]); // Consumables resource
-
-
     Route::apiResource('hardware', 'AssetsController', [
         // Names need to remain here as laravel defaults to 'hardware' given the routes used.
         'names' => [
@@ -277,13 +245,11 @@ Route::group([
 
 
     /*--- Imports API ---*/
-
     Route::apiResource('imports', 'ImportController', [
         'parameters' => ['import' => 'import_id']
-    ]); // Imports resource
+    ]);
 
     Route::group(['prefix' => 'imports'], function () {
-
         Route::post('process/{import}', [
             'as' => 'imports.importFile',
             'uses'=> 'ImportController@process'
@@ -292,7 +258,6 @@ Route::group([
 
 
     /*--- Licenses API ---*/
-
     Route::group(['prefix' => 'licenses'], function () {
         Route::get('{licenseId}/seats', [
             'as' => 'license.seats',
@@ -310,11 +275,8 @@ Route::group([
     ]); // Licenses resource
 
 
-
     /*--- Locations API ---*/
-
     Route::group(['prefix' => 'locations'], function () {
-
         Route::get('{location}/users', [
             'as'=>'locations.viewusers',
             'uses'=>'LocationsController@getDataViewUsers'
@@ -337,30 +299,29 @@ Route::group([
         ]);
     }); // Locations group
 
-
-
     Route::apiResource('locations', 'LocationsController', [
         'parameters' => ['location' => 'location_id']
-    ]); // Locations resource
+    ]);
 
+    /*--- Asset Maintenances API ---*/
+    Route::apiResource('maintenances', 'AssetMaintenancesController', [
+        'parameters' => ['maintenance' => 'maintenance_id']
+    ]); // Consumables resource
 
     /*--- Manufacturers API ---*/
-
     Route::group(['prefix' => 'manufacturers'], function () {
         Route::get('selectlist', [
             'as' => 'manufacturers.selectlist',
             'uses' => 'ManufacturersController@selectlist'
         ]);
-    }); // Locations group
-
+    }); // Manufacturers group
 
     Route::apiResource('manufacturers', 'ManufacturersController', [
         'parameters' => ['manufacturer' => 'manufacturer_id']
-    ]); // Manufacturers resource
+    ]);
 
 
     /*--- Models API ---*/
-
     Route::group(['prefix' => 'models'], function () {
         Route::get('assets', [
             'as' => 'models.assets',
@@ -372,49 +333,46 @@ Route::group([
         ]);
     }); // Models group
 
-
     Route::apiResource('models', 'AssetModelsController', [
         'parameters' => ['model' => 'model_id']
-    ]); // Models resource
+    ]);
 
     /*--- Settings API ---*/
-    Route::get('settings/ldaptest', [
-        'as' => 'settings.ldaptest',
-        'uses' => 'SettingsController@ldapAdSettingsTest'
-    ]);
+    Route::group(['prefix' => 'settings'], function () {
+        Route::get('ldaptest', [
+            'as' => 'settings.ldaptest',
+            'uses' => 'SettingsController@ldapAdSettingsTest'
+        ]);
 
-    Route::get('settings/login-attempts', [
-        'middleware' => ['auth', 'authorize:superuser'],
-        'as' => 'settings.login_attempts',
-        'uses' => 'SettingsController@showLoginAttempts'
-    ]);
+        Route::get('login-attempts', [
+            'middleware' => ['auth', 'authorize:superuser'],
+            'as' => 'settings.login_attempts',
+            'uses' => 'SettingsController@showLoginAttempts'
+        ]);
 
+        Route::post('ldaptestlogin', [
+            'as' => 'settings.ldaptestlogin',
+            'uses' => 'SettingsController@ldaptestlogin'
+        ]);
 
-    Route::post('settings/ldaptestlogin', [
-        'as' => 'settings.ldaptestlogin',
-        'uses' => 'SettingsController@ldaptestlogin'
-    ]);
+        Route::post('slacktest', [
+            'as' => 'settings.slacktest',
+            'uses' => 'SettingsController@slacktest'
+        ]);
 
-    Route::post('settings/slacktest', [
-        'as' => 'settings.slacktest',
-        'uses' => 'SettingsController@slacktest'
-    ]);
-
-    Route::post('settings/mailtest', [
-        'as'  => 'settings.mailtest',
-        'uses' => 'SettingsController@ajaxTestEmail'
-    ]);
-
+        Route::post('mailtest', [
+            'as'  => 'settings.mailtest',
+            'uses' => 'SettingsController@ajaxTestEmail'
+        ]);
+    }); // Settings group
 
     Route::apiResource('settings', 'SettingsController', [
         'except' => ['destroy'],
         'parameters' => ['setting' => 'setting_id']
-    ]); // Settings resource
+    ]);
 
 
     /*--- Status Labels API ---*/
-
-
     Route::group(['prefix' => 'statuslabels'], function () {
 
         // Pie chart for dashboard
@@ -432,13 +390,11 @@ Route::group([
             'as' => 'statuslabels.deployable',
             'uses' => 'StatuslabelsController@checkIfDeployable'
         ]);
-    });
+    });  // Status labels group
 
     Route::apiResource('statuslabels', 'StatuslabelsController', [
         'parameters' => ['statuslabel' => 'statuslabel_id']
     ]);
-
-    // Status labels group
 
 
     /*--- Suppliers API ---*/
@@ -449,17 +405,12 @@ Route::group([
         ]);
     }); // Suppliers group
 
-
     Route::apiResource('suppliers', 'SuppliersController', [
         'parameters' => ['supplier' => 'supplier_id']
-    ]); // Suppliers resource
-
-
+    ]);
 
 
     /*--- Users API ---*/
-
-
     Route::group([ 'prefix' => 'users' ], function () {
 
         Route::post('two_factor_reset', [
@@ -480,11 +431,6 @@ Route::group([
         Route::get('{user}/assets', [
             'as' => 'users.assetlist',
             'uses' => 'UsersController@assets'
-        ]);
-
-        Route::get('{user}/licenses', [
-            'as' => 'users.licenselist',
-            'uses' => 'UsersController@licenses'
         ]);
 
         Route::get('{user}/licenses', [
@@ -591,7 +537,7 @@ Route::group([
             'uses' => 'PredefinedKitsController@storeConsumable',
         ]);
 
-        Route::put('consumables/{consumable_id}', [
+        Route::put('{consumable_id}', [
             'as' => 'kits.consumables.update',
             'uses' => 'PredefinedKitsController@updateConsumable',
         ]);
