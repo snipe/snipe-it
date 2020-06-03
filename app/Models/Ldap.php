@@ -286,7 +286,7 @@ class Ldap extends Model
         // Clean up after search
         $result_set['count'] = $global_count;
         $results = $result_set;
-        ldap_control_paged_result($ldapconn, 0);
+        @ldap_control_paged_result($ldapconn, 0);
 
         return $results;
 
