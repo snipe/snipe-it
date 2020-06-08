@@ -104,6 +104,7 @@ class InventoryItemController extends Controller
     {
 //        $this->authorize('update', Location::class);
         $inventory_item = InventoryItem::findOrFail($id);
+
         $inventory_item->fill($request->all());
 
 
@@ -113,6 +114,24 @@ class InventoryItemController extends Controller
                 $asset->last_audit_date = date('Y-m-d h:i:s');
                 $asset->save();
             }
+
+            /** @var Inventory $inventory */
+            $inventory  = $inventory_item->inventory;
+            $inventory_items = $inventory->inventory_items;
+            $finished = true;
+            foreach ($inventory_items as $item) {
+                /** @var InventoryItem $item */
+                if  ($item->checked == false){
+                    $finished = false;
+                    break;
+                }
+            }
+            if ($finished){
+                $inventory->status = "FINISH_OK";
+                $inventory->save();
+            }
+
+
             return response()->json(
                 Helper::formatStandardApiResponse(
                     'success',
