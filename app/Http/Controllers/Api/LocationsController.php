@@ -39,6 +39,7 @@ class LocationsController extends Controller
             'locations.country',
             'locations.parent_id',
             'locations.manager_id',
+            'locations.bitrix_id',
             'locations.created_at',
             'locations.updated_at',
             'locations.image',

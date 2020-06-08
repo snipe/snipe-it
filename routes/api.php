@@ -814,4 +814,21 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
             'parameters' => ['inventory_item' => 'inventory_item_id']
         ]
     ); // Inventory resource
+
+
+    /*--- Purchases API ---*/
+
+    Route::resource('purchases', 'PurchasesController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.purchases.index',
+                    'show' => 'api.purchases.show',
+                    'store' => 'api.purchases.store',
+                    'update' => 'api.purchases.update',
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['purchase' => 'purchase_id']
+        ]
+    ); // Purchases resource
 });

@@ -347,7 +347,8 @@
         'depreciations',
         'fieldsets',
         'groups',
-        'inventories'
+        'inventories',
+        'purchases'
     ];
 
     for (var i in formatters) {
@@ -604,6 +605,12 @@
             return '<a href="' + value.url + '" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
         } else if ((value) && (value.url)) {
             return '<a href="' + value.url + '" class="btn btn-default"><i class="fa fa-download"></i></a>';
+        }
+    }
+
+    function fileFormatter(value){
+        if (value) {
+            return '<a href="' + value + '" class="btn btn-default btn-sm"><i class="fa fa-download">Скачать</i></a>'
         }
     }
 

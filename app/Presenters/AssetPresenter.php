@@ -155,6 +155,13 @@ class AssetPresenter extends Presenter
                 "title" => trans('general.order_number'),
                 'formatter' => "orderNumberObjFilterFormatter"
             ], [
+                "field" => "purchase_id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => "ID закупки",
+                "visible" => false
+            ], [
                 "field" => "eol",
                 "searchable" => false,
                 "sortable" => false,

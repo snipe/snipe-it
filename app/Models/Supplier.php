@@ -28,6 +28,7 @@ class Supplier extends SnipeModel
         'email'             => 'email|max:150|nullable',
         'zip'               => 'max:10|nullable',
         'url'               => 'sometimes|nullable|string|max:250',
+        'bitrix_id'         => 'min:1|max:10|nullable'
     );
 
     /**
@@ -63,7 +64,7 @@ class Supplier extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name','address','address2','city','state','country','zip','phone','fax','email','contact','url','notes'];
+    protected $fillable = ['name','address','address2','city','state','country','zip','phone','fax','email','contact','url','notes','bitrix_id',];
 
 
     // Eager load counts.
@@ -121,5 +122,9 @@ class Supplier extends SnipeModel
             $url = "http://" . $url;
         }
         return $url;
+    }
+
+    public function purchases() {
+        return $this->hasMany('\App\Models\Purchase');
     }
 }

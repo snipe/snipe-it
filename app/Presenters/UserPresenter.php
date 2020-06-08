@@ -25,6 +25,13 @@ class UserPresenter extends Presenter
             [
                 "field" => "checkbox",
                 "checkbox" => true
+            ],[
+                "field" => "bitrix_id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => "Bitrix id",
+                "visible" => true
             ],
             [
                 "field" => "id",
