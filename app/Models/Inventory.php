@@ -67,6 +67,7 @@ final class Inventory extends SnipeModel
         'log',
         'comment',
         'location_id',
+        'status'
     ];
 
 
