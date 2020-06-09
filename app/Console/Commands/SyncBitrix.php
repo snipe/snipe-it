@@ -58,6 +58,10 @@ class SyncBitrix extends Command
         foreach ($bitrix_objects as &$value) {
             if($value["TABEL_ID"] && $value["UF_TYPE"] == 455 && $value["DELETED"] != 1){
                 $count++;
+
+                $bitrix_user =  $value["ASSIGNED_BY_ID"];
+                /** @var User $sklad_user */
+                $sklad_user = User::where('bitrix_id', $bitrix_user)->first();
                 $location = Location::updateOrCreate(
                     ['bitrix_id' =>  $value["ID"]],
                     [
@@ -65,8 +69,10 @@ class SyncBitrix extends Command
                         'city' => $value["ADDRESS_CITY"],
                         'address' => $value["ADDRESS"],
                         'address2' => $value["ADDRESS_2"],
-                 ]
+                    ]
                 );
+                $location->manager_id = $sklad_user->id;
+                $location->save();
             }
         }
         print("Синхрониизтрованно ".$count." объектов Битрикс\n");
