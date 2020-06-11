@@ -465,17 +465,19 @@
 
     function inventoryStatusFormatter(value, row) {
         if ((row.status)) {
+            $label=" label-default";
             switch (row.status) {
                 case 'START':
-                    return '<span class="label label-info">Начата</span>';
+                    $label="label-info";
                     break;
                 case 'FINISH_OK':
-                    return '<span class="label label-success">Завершена успешно</span>';
+                    $label="label-success";
                     break;
                 case 'FINISH_BAD':
-                    return '<span class="label label-danger">Завершена не полностью</span>';
+                    $label="label-danger";
                     break;
             }
+            return '<span class="label '+$label+'">'+row.status_text+'</span>';
         }
 
     }
