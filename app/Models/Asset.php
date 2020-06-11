@@ -75,6 +75,7 @@ class Asset extends Depreciable
         'model_id'        => 'required|integer|exists:models,id',
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'integer|nullable',
+        'purchase_id'      => 'integer|nullable',
         'warranty_months' => 'numeric|nullable|digits_between:0,240',
         'physical'        => 'numeric|max:1|nullable',
         'checkout_date'   => 'date|max:10|min:10|nullable',
@@ -112,6 +113,7 @@ class Asset extends Depreciable
         'supplier_id',
         'warranty_months',
         'requestable',
+        'purchase_id',
     ];
 
     use Searchable;
@@ -1413,6 +1415,11 @@ class Asset extends Depreciable
 
     public function inventory_items() {
         return $this->hasMany('\App\Models\InventoryItem');
+    }
+
+    public function purchase()
+    {
+        return $this->belongsTo('\App\Models\Purchase');
     }
 
 

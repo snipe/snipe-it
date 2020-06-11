@@ -64,6 +64,7 @@ class UsersTransformer
                 'created_at' => Helper::getFormattedDateObject($user->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($user->updated_at, 'datetime'),
                 'last_login' => Helper::getFormattedDateObject($user->last_login, 'datetime'),
+                'bitrix_id'=> e($user->bitrix_id),
             ];
 
         $permissions_array['available_actions'] = [

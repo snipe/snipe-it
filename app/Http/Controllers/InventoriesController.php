@@ -29,7 +29,7 @@ class InventoriesController extends Controller
     {
         // Grab all the locations
         $this->authorize('view', Location::class);
-        
+
         $inventory = Inventory::find($inventoryId);
 
         if (isset($inventory->id)) {

@@ -707,6 +707,12 @@
                         <span>Инвентаризация</span>
                     </a>
                 </li>
+                <li{!! (Request::is('purchases/*') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('purchases.index') }}">
+                        <i class="fa fa-usd"></i>
+                        <span>Закупки</span>
+                    </a>
+                </li>
 
             @can('viewRequestable', \App\Models\Asset::class)
             <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>

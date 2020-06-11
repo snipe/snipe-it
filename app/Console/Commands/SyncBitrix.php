@@ -6,6 +6,7 @@ use App\Models\CustomField;
 use App\Models\Supplier;
 use Illuminate\Console\Command;
 use App\Models\Asset;
+use App\Models\Supplier;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -114,7 +115,6 @@ class SyncBitrix extends Command
         print("Синхрониизтрованно ".count($bitrix_users_final)." пользователей Битрикс\n");
 
 
-
         $response = $client->request('GET', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/crm.company.list?FILTER[COMPANY_TYPE]=1');
         $response = $response->getBody()->getContents();
         $bitrix_suppliers = json_decode($response, true);
@@ -123,6 +123,7 @@ class SyncBitrix extends Command
         foreach ($bitrix_suppliers as &$value) {
             $count++;
             $supplier = Supplier::updateOrCreate(
+
                 ['bitrix_id' =>  $value["ID"]],
                 [
                     'name' => $value["TITLE"],
@@ -132,9 +133,9 @@ class SyncBitrix extends Command
                     'address2' => $value["ADDRESS_2"],
                 ]
             );
+
         }
         print("Синхрониизтрованно ".$count." поставщиков \n");
-
 
         if (($this->option('output')=='all') || ($this->option('output')=='info')) {
             foreach ($output['info'] as $key => $output_text) {

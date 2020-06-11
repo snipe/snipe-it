@@ -52,7 +52,6 @@ class LocationsTransformer
                 ] : null,
                 'manager' => ($location->manager) ? (new UsersTransformer)->transformUser($location->manager) : null,
                 'bitrix_id' =>  ($location->bitrix_id) ? (int) $location->bitrix_id : null,
-
                 'children' => $children_arr,
             ];
 

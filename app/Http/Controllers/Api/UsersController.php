@@ -49,6 +49,7 @@ class UsersController extends Controller
             'users.last_name',
             'users.location_id',
             'users.manager_id',
+            'users.bitrix_id',
             'users.notes',
             'users.permissions',
             'users.phone',
