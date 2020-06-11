@@ -6,7 +6,6 @@ use App\Models\CustomField;
 use App\Models\Supplier;
 use Illuminate\Console\Command;
 use App\Models\Asset;
-use App\Models\Supplier;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
