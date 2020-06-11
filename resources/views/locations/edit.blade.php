@@ -29,6 +29,8 @@
 
 @include ('partials.forms.edit.address')
 
+@include ('partials.forms.edit.notes', ['translated_name' => trans('admin/locations/table.general.notes')])
+
 <!-- LDAP Search OU -->
 @if ($snipeSettings->ldap_enabled == 1)
     <div class="form-group {{ $errors->has('ldap_ou') ? ' has-error' : '' }}">
@@ -89,6 +91,7 @@ success: function(data) {
     $("#address2").val(json.address2);
     $("#state").val(json.state);
     $("#zip").val(json.zip);
+    $("#notes").val(json.notes);
     $(".country").select2("val",json.country);
 }
 });
@@ -98,6 +101,7 @@ success: function(data) {
     $("#address2").val('');
     $("#state").val('');
     $("#zip").val('');
+    $("#notes").val('');
     $(".country").select2("val",'');
 }
 

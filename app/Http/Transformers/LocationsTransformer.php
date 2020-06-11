@@ -53,6 +53,7 @@ class LocationsTransformer
                 'manager' => ($location->manager) ? (new UsersTransformer)->transformUser($location->manager) : null,
                 'bitrix_id' =>  ($location->bitrix_id) ? (int) $location->bitrix_id : null,
                 'children' => $children_arr,
+                'notes' =>  ($location->notes) ? e($location->notes) : null,
             ];
 
             $permissions_array['available_actions'] = [

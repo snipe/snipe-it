@@ -43,7 +43,8 @@ class LocationsController extends Controller
             'locations.created_at',
             'locations.updated_at',
             'locations.image',
-            'locations.currency'
+            'locations.currency',
+            'locations.notes',
         ])->withCount('assignedAssets as assigned_assets_count')
         ->withCount('assets as assets_count')
         ->withCount('users as users_count');
@@ -128,7 +129,8 @@ class LocationsController extends Controller
                 'locations.created_at',
                 'locations.updated_at',
                 'locations.image',
-                'locations.currency'
+                'locations.currency',
+                'locations.notes'
             ])
             ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
