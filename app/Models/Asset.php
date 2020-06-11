@@ -114,6 +114,7 @@ class Asset extends Depreciable
         'warranty_months',
         'requestable',
         'purchase_id',
+        'nds'
     ];
 
     use Searchable;

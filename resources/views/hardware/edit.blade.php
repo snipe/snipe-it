@@ -68,6 +68,7 @@
     }
     ?>
   @include ('partials.forms.edit.purchase_cost', ['currency_type' => $currency_type])
+    @include ('partials.forms.edit.nds')
   @include ('partials.forms.edit.warranty')
   @include ('partials.forms.edit.notes')
 

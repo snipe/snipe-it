@@ -81,6 +81,7 @@ class AssetsController extends Controller
             'checkin_counter',
             'requests_counter',
             'purchase_id',
+            'nds'
 
         ];
 

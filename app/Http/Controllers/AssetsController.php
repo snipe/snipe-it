@@ -116,6 +116,7 @@ class AssetsController extends Controller
 
 
         $asset = new Asset();
+        $asset->nds=20;
         $asset->model()->associate(AssetModel::find($request->input('model_id')));
 
         $asset->name                    = $request->input('name');

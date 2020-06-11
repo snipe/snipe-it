@@ -251,6 +251,13 @@ class AssetPresenter extends Presenter
                 "visible" => false,
                 "title" => trans('general.next_audit_date'),
                 "formatter" => "dateDisplayFormatter"
+            ], [
+                "field" => "nds",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => "НДС",
+                "visible" => false
             ],
         ];
 
