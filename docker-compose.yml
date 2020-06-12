@@ -14,7 +14,7 @@ services:
     container_name: snipe-mysql
     image: mysql:5.6    #use official image
     env_file:
-      - ./.snipe-it.env         #get enviroment values from file
+      - ./.snipe-it-prod.env         #get enviroment values from file
     volumes:
       - snipesql-vol:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password
@@ -30,7 +30,7 @@ services:
       context: .
       dockerfile: Dockerfile
     env_file:
-      - ./.snipe-it.env            #get enviroment values from file
+      - ./.snipe-it-prod.env            #get enviroment values from file
     ports:
       - "3051:80"                  #get the thing out and visible
     depends_on:
