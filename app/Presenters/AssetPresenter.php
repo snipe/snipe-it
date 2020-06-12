@@ -29,6 +29,68 @@ class AssetPresenter extends Presenter
                 "title" => trans('general.id'),
                 "visible" => false
             ], [
+                "field" => "assigned_to",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/hardware/form.checkedout_to'),
+                "visible" => true,
+                "formatter" => "polymorphicItemFormatter"
+           ], [
+                "field" => "category",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('general.category'),
+                "visible" => true,
+                "formatter" => "categoriesLinkObjFormatter"
+            ], [
+                "field" => "manufacturer",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('general.manufacturer'),
+                "visible" => false,
+                "formatter" => "manufacturersLinkObjFormatter"
+            ], [
+               "field" => "model",
+               "searchable" => true,
+               "sortable" => true,
+               "title" => trans('admin/hardware/form.model'),
+               "visible" => true,
+               "formatter" => "modelsLinkObjFormatter"
+           ], [
+               "field" => "model_number",
+               "searchable" => true,
+               "sortable" => true,
+               "title" => trans('admin/models/table.modelnumber'),
+               "visible" => false
+           ], [
+               "field" => "serial",
+               "searchable" => true,
+               "sortable" => true,
+               "title" => trans('admin/hardware/form.serial'),
+               "visible" => true,
+               "formatter" => "hardwareLinkFormatter"
+           ], [
+               "field" => "status_label",
+               "searchable" => true,
+               "sortable" => true,
+               "title" => trans('admin/hardware/table.status'),
+               "visible" => true,
+               "formatter" => "statuslabelsLinkObjFormatter"
+           ], [
+               "field" => "location",
+               "searchable" => true,
+               "sortable" => true,
+               "title" => trans('admin/hardware/table.location'),
+               "visible" => true,
+               "formatter" => "deployedLocationFormatter"
+           ], [
+               "field" => "notes",
+               "searchable" => true,
+               "sortable" => true,
+               "visible" => true,
+               "title" => trans('general.notes'),
+
+           ], [
                 "field" => "company",
                 "searchable" => true,
                 "sortable" => true,
@@ -41,7 +103,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/hardware/form.name'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "hardwareLinkFormatter"
             ], [
                 "field" => "image",
@@ -49,7 +111,7 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "switchable" => true,
                 "title" => trans('admin/hardware/table.image'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "imageFormatter"
             ], [
                 "field" => "asset_tag",
@@ -59,47 +121,6 @@ class AssetPresenter extends Presenter
                 "visible" => true,
                 "formatter" => "hardwareLinkFormatter"
             ], [
-                "field" => "serial",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('admin/hardware/form.serial'),
-                "visible" => true,
-                "formatter" => "hardwareLinkFormatter"
-            ],  [
-                "field" => "model",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('admin/hardware/form.model'),
-                "visible" => true,
-                "formatter" => "modelsLinkObjFormatter"
-            ], [
-                "field" => "model_number",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('admin/models/table.modelnumber'),
-                "visible" => false
-            ], [
-                "field" => "category",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('general.category'),
-                "visible" => true,
-                "formatter" => "categoriesLinkObjFormatter"
-            ], [
-                "field" => "status_label",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('admin/hardware/table.status'),
-                "visible" => true,
-                "formatter" => "statuslabelsLinkObjFormatter"
-            ], [
-                "field" => "assigned_to",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('admin/hardware/form.checkedout_to'),
-                "visible" => true,
-                "formatter" => "polymorphicItemFormatter"
-            ], [
                 "field" => "employee_number",
                 "searchable" => false,
                 "sortable" => false,
@@ -107,13 +128,6 @@ class AssetPresenter extends Presenter
                 "visible" => false,
                 "formatter" => "employeeNumFormatter"
             ],[
-                "field" => "location",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('admin/hardware/table.location'),
-                "visible" => true,
-                "formatter" => "deployedLocationFormatter"
-            ], [
                 "field" => "rtd_location",
                 "searchable" => true,
                 "sortable" => true,
@@ -121,13 +135,6 @@ class AssetPresenter extends Presenter
                 "visible" => false,
                 "formatter" => "deployedLocationFormatter"
             ], [
-                "field" => "manufacturer",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('general.manufacturer'),
-                "visible" => false,
-                "formatter" => "manufacturersLinkObjFormatter"
-            ],[
                 "field" => "supplier",
                 "searchable" => true,
                 "sortable" => true,
@@ -167,20 +174,13 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('admin/hardware/form.warranty')
-            ],[
+            ], [
                 "field" => "warranty_expires",
                 "searchable" => false,
                 "sortable" => false,
                 "visible" => false,
                 "title" => trans('admin/hardware/form.warranty_expires'),
                 "formatter" => "dateDisplayFormatter"
-            ],[
-                "field" => "notes",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => false,
-                "title" => trans('general.notes'),
-
             ], [
                 "field" => "checkout_counter",
                 "searchable" => false,
@@ -188,7 +188,7 @@ class AssetPresenter extends Presenter
                 "visible" => false,
                 "title" => trans('general.checkouts_count')
 
-            ],[
+            ], [
                 "field" => "checkin_counter",
                 "searchable" => false,
                 "sortable" => true,
