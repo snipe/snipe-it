@@ -1,0 +1,67 @@
+version: '3'
+#https://snipe-it.readme.io/docs/docker
+#https://github.com/petr-toman/snipe-it
+#docker-compose up --build -d
+# watch: SELINUX and volumes usage - mapped volumes at hosting system should be like:
+#sudo chcon -Rt svirt_sandbox_file_t /path/to/html/snipe-it
+#or better:
+#sudo semanage fcontext -a -t svirt_sandbox_file_t "/path/to/html/snipe-it(/.*)?"
+#sudo restorecon -R /path/to/html/snipe-it & ll -Z
+#https://www.projectatomic.io/blog/2015/06/using-volumes-with-docker-can-cause-problems-with-selinux/
+
+services:
+
+  snipe-mysql:
+    container_name: snipe-mysql
+    image: mysql:5.6    #use official image
+    env_file:
+      - ./.snipe-it.env         #get enviroment values from file
+    volumes:
+      - snipesql-vol:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    expose:
+       - "3306"
+    ports:
+      - "3306"
+
+  snipe-http:
+    container_name: snipe-http
+    image: toman/snipe-it  #get it from repo, or build own from dockerfile
+    env_file:
+      - ./.snipe-it.env            #get enviroment values from file
+    ports:
+      - "3051:80"                  #get the thing out and visible
+    depends_on:
+      - snipe-mysql                #yey, doesnot run wihtout DB connection
+
+volumes:
+      snipesql-vol:                  #internal volume storage in docker VM.
+
+
+#docker-compose
+#Commands:
+#  build              Build or rebuild services
+#  config             Validate and view the Compose file
+#  create             Create services
+#  down               Stop and remove containers, networks, images, and volumes
+#  events             Receive real time events from containers
+#  exec               Execute a command in a running container
+#  help               Get help on a command
+#  images             List images
+#  kill               Kill containers
+#  logs               View output from containers
+#  pause              Pause services
+#  port               Print the public port for a port binding
+#  ps                 List containers
+#  pull               Pull service images
+#  push               Push service images
+#  restart            Restart services
+#  rm                 Remove stopped containers
+#  run                Run a one-off command
+#  scale              Set number of containers for a service
+#  start              Start services
+#  stop               Stop services
+#  top                Display the running processes
+#  unpause            Unpause services
+#  up                 Create and start containers
+#  version            Show the Docker-Compose version information
