@@ -26,6 +26,7 @@ services:
   snipe-http:
     container_name: snipe-http
     image: toman/snipe-it  #get it from repo, or build own from dockerfile
+    build: Dockerfile
     env_file:
       - ./.snipe-it.env            #get enviroment values from file
     ports:
