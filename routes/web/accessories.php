@@ -22,7 +22,6 @@ Route::group([ 'prefix' => 'accessories', 'middleware' => ['auth']], function ()
         '{accessoryID}/checkin/{backto?}',
         [ 'as' => 'checkin/accessory', 'uses' => 'AccessoriesController@postCheckin' ]
     );
-
 });
 
 Route::resource('accessories', 'AccessoriesController', [

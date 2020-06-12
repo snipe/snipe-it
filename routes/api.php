@@ -459,7 +459,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
     /*--- Locations API ---*/
 
     Route::group(['prefix' => 'locations'], function () {
-
+      
         Route::get('{location}/users',
             [
                 'as'=>'api.locations.viewusers',
@@ -486,6 +486,19 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
             'as' => 'locations.selectlist',
             'uses' => 'LocationsController@selectlist'
         ]);
+
+        
+        Route::get( 'itembystate',  [
+          'as' => 'api.locations.itembystate',
+          'uses' => 'LocationsController@itembystate'
+        ]);
+
+        Route::get('{location_id}/item/{item_type}/{item_id}',
+            [
+                'as' => 'api.locations.check',
+                'uses' => 'LocationsController@iteminfo'
+            ]
+        );
     }); // Locations group
 
 

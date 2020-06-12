@@ -29,7 +29,8 @@ class AccessoriesController extends Controller
         $this->authorize('view', Accessory::class);
         $allowed_columns = ['id','name','model_number','eol','notes','created_at','min_amt','company_id'];
 
-        $accessories = Accessory::with('category', 'company', 'manufacturer', 'users', 'location')->WithQuantity();
+        $accessories = Accessory::with('category', 'company', 'manufacturer', 'users', 'location')->WithQuantityByState();
+        return $accessories->get();
 
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));
@@ -223,8 +224,12 @@ class AccessoriesController extends Controller
 
         $this->authorize('checkout', $accessory);
 
+        if (is_null($stock_location = Location::find(request('stock_location_id')))) {
+          return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/locations/message.does_not_exist')));
+        }
 
-        if ($accessory->numRemaining() > 0) {
+
+        if ($accessory->itemStockRemainingInLocation($stock_location->id) > 0) {
 
             if (!$user = User::find($request->input('assigned_to'))) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.checkout.user_does_not_exist')));

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Enums\AssetTypes;
+use App\Enums\States;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Location;
@@ -10,6 +12,7 @@ use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use DB;
 
 class LocationsController extends Controller
 {
@@ -28,7 +31,13 @@ class LocationsController extends Controller
                 'updated_at','manager_id','image',
                 'assigned_assets_count','users_count','assets_count','currency'];
 
-        $locations = Location::with('parent', 'manager', 'children')->select([
+        $wheres = [];
+        if (request('accessory_id')) {
+          $wheres['item_type'] = [ AssetTypes::ACCESSORY ];
+          $wheres['item_id'] = request('accessory_id');
+        }
+
+        $locations = Location::AddDefaultLocation()->WithQuantityByItem($wheres)->with('parent', 'manager', 'children')->select([
             'locations.id',
             'locations.name',
             'locations.address',
@@ -46,6 +55,15 @@ class LocationsController extends Controller
         ])->withCount('assignedAssets as assigned_assets_count')
         ->withCount('assets as assets_count')
         ->withCount('users as users_count');
+
+        // add quantity fields by item
+        //dd($wheres['item_type']);
+        foreach (AssetTypes::$typePluralNames as $key => $value) {
+          if (!isset($wheres['item_type']) || in_array($key, $wheres['item_type']) )
+           $locations->addSelect(DB::raw("COALESCE({$value}, 0) as {$value}"));
+        }
+        $locations->addSelect(DB::raw("COALESCE(total, 0) as total"));
+        //dd($locations->toSql());
 
         if ($request->filled('search')) {
             $locations = $locations->TextSearch($request->input('search'));
@@ -74,11 +92,133 @@ class LocationsController extends Controller
                 break;
         }
 
-
         $total = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
         return (new LocationsTransformer)->transformLocations($locations, $total);
     }
+
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @author [Peter Brink]
+     * @since [v4.0]
+     * @return \Illuminate\Http\Response
+     */
+    public function itembystate(Request $request)
+    {
+        $this->authorize('view', Location::class);
+        $allowed_columns = ['id','name','manager_id','image'];
+
+        $wheres = [];
+        if (request('accessory_id')) {
+          $wheres['item_type'] = AssetTypes::ACCESSORY;
+          $wheres['item_id'] = request('accessory_id');
+        }
+        if (request('consumable_id')) {
+          $wheres['item_type'] = AssetTypes::CONSUMABLE;
+          $wheres['item_id'] = request('consumable_id');
+        }
+        if (request('component_id')) {
+          $wheres['item_type'] = AssetTypes::COMPONENT;
+          $wheres['item_id'] = request('component_id');
+        }
+        if (!$wheres['item_type'] || !$wheres['item_id']) {
+          return response()->json(Helper::formatStandardApiResponse('error', null, 'A accessory_id, consumable_id or component_id must be supplied'));
+        }
+
+        $locations = Location::AddDefaultLocation()->ItemLocations($wheres['item_type'], $wheres['item_id'])->WithQuantityByState($wheres)->with('parent', 'manager')->addSelect([
+            'locations.id',
+            'locations.name',
+            'locations.parent_id',
+            'locations.manager_id',
+            'locations.image',
+        ]);
+
+        // Add stock states if added
+        foreach (States::$main_states as $value) {
+            $locations->addSelect(DB::raw('ifnull('.$value.',0) as '.$value));
+        }
+
+        if ($request->filled('search')) {
+            $locations = $locations->TextSearch($request->input('search'));
+        }
+
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($locations) && ($request->get('offset') > $locations->count())) ? $locations->count() : $request->get('offset', 0);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'locations.created_at';
+
+        switch ($request->input('sort')) {
+            case 'parent':
+                $locations->OrderParent($order);
+                break;
+            case 'manager':
+                $locations->OrderManager($order);
+                break;
+            default:
+                $locations->orderBy($sort, $order);
+                break;
+        }
+
+        $total = $locations->count();
+        $locations = $locations->skip($offset)->take($limit)->get();
+        return (new LocationsTransformer)->transformItemLocations($locations, $total);
+    }
+
+    
+        /**
+     * Display a listing of the resource.
+     *
+     * @author [Peter Brink]
+     * @since [v4.0]
+     * @return \Illuminate\Http\Response
+     */
+    public function iteminfo(Request $request, $location_id, $item_type, $item_id)
+    {
+        $this->authorize('view', Location::class);
+        $allowed_columns = ['id','name','manager_id','image'];
+
+        $wheres = [];
+        if ($item_type == 'accessory') {
+          $wheres['item_type'] = AssetTypes::ACCESSORY;
+          $wheres['item_id'] = $item_id;
+        }
+        if ($item_type == 'consumable') {
+          $wheres['item_type'] = AssetTypes::CONSUMABLE;
+          $wheres['item_id'] = $item_id;
+        }
+        if ($item_type == 'component') {
+          $wheres['item_type'] = AssetTypes::COMPONENT;
+          $wheres['item_id'] = $item_id;
+        }
+        $wheres['stock_location_id'] = $location_id;
+
+        $location = Location::AddDefaultLocation()->WithQuantityByState($wheres)->with('parent', 'manager')->select([
+            'locations.id',
+            'locations.name',
+            'locations.parent_id',
+            'locations.manager_id',
+            'locations.image',
+        ])->where('locations.id', '=', $location_id);
+
+        //return $location->toSql();
+        // Add stock states if added
+        foreach (States::$main_states as $value) {
+            $location->addSelect($value);
+        }
+
+        $location = $location->first();
+        return $location;
+
+        return (new LocationsTransformer)->transformItemLocation($location);
+    }
+
 
 
     /**
@@ -112,7 +252,7 @@ class LocationsController extends Controller
     public function show($id)
     {
         $this->authorize('view', Location::class);
-        $location = Location::with('parent', 'manager', 'children')
+        $location = Location::AddDefaultLocation()->WithQuantityByState($wheres)->with('parent', 'manager', 'children')
             ->select([
                 'locations.id',
                 'locations.name',
@@ -131,7 +271,14 @@ class LocationsController extends Controller
             ])
             ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
-            ->withCount('users as users_count')->findOrFail($id);
+            ->withCount('users as users_count');
+
+                    // Add stock states if added
+        foreach (States::$main_states as $value) {
+          $location->addSelect($value);
+        }
+
+        $location->findOrFail($id);
         return (new LocationsTransformer)->transformLocation($location);
     }
 

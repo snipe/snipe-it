@@ -2,6 +2,8 @@
 namespace App\Http\Transformers;
 
 use App\Models\Location;
+use App\Enums\AssetTypes;
+use App\Enums\States;
 use Illuminate\Database\Eloquent\Collection;
 use Gate;
 use App\Helpers\Helper;
@@ -56,6 +58,16 @@ class LocationsTransformer
                 'children' => $children_arr,
             ];
 
+            // Add stock items if added
+            foreach (AssetTypes::$typePluralNames as $key => $value) {
+              if (isset($location->$value))
+                $array[$value] = (int)$location->$value;
+            }
+
+            // Add total
+            if (isset($location->total))
+              $array['total'] = $location->total;
+
             $permissions_array['available_actions'] = [
                 'update' => Gate::allows('update', Location::class) ? true : false,
                 'delete' => (Gate::allows('delete', Location::class) && ($location->assigned_assets_count==0) && ($location->assets_count==0) && ($location->users_count==0) && ($location->deleted_at=='')) ? true : false,
@@ -65,10 +77,57 @@ class LocationsTransformer
 
             return $array;
         }
-
-
     }
 
+    public function transformItemLocations(Collection $locations, $total)
+    {
+        $array = array();
+        foreach ($locations as $location) {
+            $array[] = self::transformItemLocation($location);
+        }
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
 
+    public function transformItemLocation(Location $location = null)
+    {
+        if ($location) {    
+            $array = [
+                'id' => (int) $location->id,
+                'name' => e($location->name),
+                'image' =>   ($location->image) ? app('locations_upload_url').e($location->image) : null,
+                'manager' => ($location->manager) ? (new UsersTransformer)->transformUser($location->manager) : null,
+                'item_type' => $location->item_type,
+                'item_id' => $location->item_id,
+            ];
+    
+            // Add stock states if added
+            foreach (States::$all_states as $value) {
+              if (isset($location->$value))
+              $array[$value] = (int)$location->$value;
+            }
 
+            // Add total
+            if (isset($location->total))
+              $array['total'] = $location->total;
+
+            $permissions_array['available_actions'] = [
+                'checkout' => Gate::allows('checkout', Accessory::class) ? true : false,
+                'checkin' =>  false,    
+                'invadjusts' => true,
+                'invreconciles' => true,
+                'invtransfers' => true,    
+            ];
+
+            $permissions_array['user_can_checkout'] = false;
+
+            $in_stock_name = States::IN_STOCK;
+            if ($location->$in_stock_name > 0) {
+                $permissions_array['user_can_checkout'] = true;
+            }
+
+            $array += $permissions_array;
+
+            return $array;
+        }
+    }
 }

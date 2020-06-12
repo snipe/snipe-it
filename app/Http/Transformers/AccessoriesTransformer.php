@@ -31,12 +31,10 @@ class AccessoriesTransformer
             'category' => ($accessory->category) ? ['id' => $accessory->category->id,'name'=> e($accessory->category->name)] : null,
             'location' => ($accessory->location) ? ['id' => $accessory->location->id,'name'=> e($accessory->location->name)] : null,
             'notes' => ($accessory->notes) ? e($accessory->notes) : null,
-            'qty' => ($accessory->qty) ? (int) $accessory->qty : null,
             'purchase_date' => ($accessory->purchase_date) ? Helper::getFormattedDateObject($accessory->purchase_date, 'date') : null,
             'purchase_cost' => Helper::formatCurrencyOutput($accessory->purchase_cost),
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
             'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
-            'remaining_qty' => $accessory->numRemaining(),
             'image' => ($accessory->image) ? url('/').'/uploads/accessories/'.e($accessory->image) : null,
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
@@ -60,7 +58,7 @@ class AccessoriesTransformer
 
         $permissions_array['user_can_checkout'] = false;
 
-        if ($accessory->numRemaining() > 0) {
+        if ($accessory->itemStockRemaining() > 0) {
             $permissions_array['user_can_checkout'] = true;
         }
 

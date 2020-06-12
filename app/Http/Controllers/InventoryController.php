@@ -6,6 +6,7 @@ use App\Models\Accessory;
 use App\Models\Company;
 use App\Models\User;
 use App\Models\Location;
+use App\Models\Inventory;
 use App\Enums\States;
 use Auth;
 use Carbon\Carbon;
@@ -27,7 +28,7 @@ use App\Http\Requests\ImageUploadRequest;
  *
  * @version    v1.0
  */
-class AccessoriesController extends Controller
+class InventoryController extends Controller
 {
 
     /**
@@ -205,9 +206,11 @@ class AccessoriesController extends Controller
   * @since [v1.0]
   * @return View
   */
-    public function show(Request $request, $accessoryID = null)
+    public function show(Request $request, $id = null)
     {
-        $accessory = Accessory::find($accessoryID);
+      return Carbon::now()->toDateTimeLocalString('millisecond');
+        $inventory = Inventory::find($id);
+        return $inventory;
         //testing
         return $accessory->with('locations')->whereHas('locations', function ($query) {
           $query->where('stock_location_id', '=', 1);

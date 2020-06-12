@@ -113,6 +113,7 @@
     'invtransfer'  => 'Inventory Transfer',
     'invreconcile' => 'Inventory Reconcile',
     'invcount'    =>  'Inventory Count',
+    'inventory'   => 'Inventory',
     'item'  				=> 'Item',
     'insufficient_permissions' => 'Insufficient permissions!',
     'language'				=> 'Language',

@@ -71,6 +71,38 @@ class LocationPresenter extends Presenter
                 "visible" => true,
             ],
             [
+                "field" => "accessories",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" =>  trans('general.accessories'),
+                "visible" => true,
+            ],
+            [
+                "field" => "consumables",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" =>  trans('general.consumables'),
+                "visible" => true,
+            ],
+            [
+                "field" => "components",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" =>  trans('general.components'),
+                "visible" => true,
+            ],
+            [
+                "field" => "total",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" =>  trans('general.total'),
+                "visible" => true,
+            ],
+            [
                 "field" => "users_count",
                 "searchable" => false,
                 "sortable" => true,
@@ -158,6 +190,93 @@ class LocationPresenter extends Presenter
 
         return json_encode($layout);
     }
+
+        /**
+     * Json Column Layout for bootstrap table
+     * @return string
+     */
+    public static function dataTableItemLayout()
+    {
+        $layout = [
+
+            [
+                "field" => "id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.id'),
+                "visible" => false
+            ],
+            [
+                "field" => "name",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => trans('admin/locations/table.name'),
+                "visible" => true,
+                "formatter" => "locationsLinkFormatter"
+            ],
+            [
+                "field" => "image",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.image'),
+                "visible" => true,
+                "formatter" => "imageFormatter"
+            ],
+            [
+                "field" => "parent",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/locations/table.parent'),
+                "visible" => true,
+                "formatter" => "locationsLinkObjFormatter"
+            ], [
+                "field" => "in_stock",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/inventory/general.in_stock'),
+            ], [
+                "field" => "checked_out",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/inventory/general.checked_out'),
+            ], [
+                "field" => "pending",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/inventory/general.pending'),
+            ], [
+                "field" => "archived",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/inventory/general.archived'),
+            ], [
+                "field" => "reserved_request",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/inventory/general.reserved_request'),
+            ], [
+              "field" => "adjust",
+              "searchable" => false,
+              "sortable" => false,
+              "visible" => true,
+              "title" => trans('table.adjusts'),
+              "formatter" => "locationItemAdjust",
+            ], [
+              "field" => "change",
+              "searchable" => false,
+              "sortable" => false,
+              "visible" => true,
+              "title" => trans('general.change'),
+              "formatter" => "locationItemInOutFormatter",
+            ],
+        ];
+
+        return json_encode($layout);
+    }
+
 
 
 

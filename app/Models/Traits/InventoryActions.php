@@ -40,6 +40,25 @@ trait InventoryActions
         return null;
     }
 
+          /**
+     * Find target for checkout
+     * @return SnipeModel   Type for inventory
+     */
+    protected function determineTypeClassToName($string)
+    {
+        // This item is checked out to a location
+        switch($string)
+        {
+            case Accessory::class:
+                return 'accessories';
+            case Consumable::class:
+                return 'consumables';
+            case Component::class:
+                return 'components';
+        }
+        return null;
+    }
+
     /**
      * @author  Peter Brink <pbrink231@gmail.com>
      * @since [v4.8]

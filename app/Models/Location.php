@@ -198,4 +198,60 @@ class Location extends SnipeModel
     {
         return $query->leftJoin('users as location_user', 'locations.manager_id', '=', 'location_user.id')->orderBy('location_user.first_name', $order)->orderBy('location_user.last_name', $order);
     }
+
+    public function scopeAddDefaultLocation($query)
+    {
+      return $query->from(DB::raw("(
+                        SELECT * from `locations` as full
+                        UNION
+                        (select '0' AS id, 'Default' AS name, NULL AS city, NULL AS state, NULL AS country, NULL AS created_at, NULL AS updated_at, NULL AS user_id, NULL AS address, NULL AS address2, NULL AS zip, NULL AS deleted_at, NULL AS parent_id, NULL AS currency, NULL AS ldap_ou, NULL AS manager_id, NULL AS image, 1 AS is_stockable)
+                        ) as `locations`"));
+    }
+
+    public function scopeItemLocations($query, $item_type, $item_id) {
+      $query->join('inventory_items_locations', function($join) use ($item_type, $item_id) {
+        $join->where('inventory_items_locations.item_type', '=', $item_type);
+        $join->where('inventory_items_locations.item_id', '=', $item_id);
+        $join->on('inventory_items_locations.stock_location_id', '=', 'locations.id');
+      });
+      $query->addSelect('inventory_items_locations.item_type');
+      $query->addSelect('inventory_items_locations.item_id');
+    }
+
+    public function scopeWithQuantityByState($query, $wheres = [], $tableName = null) 
+    {
+      $sub = (new InventoryCount)->recentQuantitiesByState(['stock_location_id'], $wheres);
+      //dd($sub->get());
+
+      $tableName = $this->getTable();
+      //dd($tableName);
+  
+      $query->leftJoin(DB::raw("({$sub->toSql()}) AS ss"), function($join) use ($sub, $tableName) {
+            $join->on("ss.stock_location_id", '=', "{$tableName}.id")
+                 ->addBinding($sub->getBindings());  
+                 // bindings for sub-query WHERE added
+      });
+
+      return $query;
+    }
+
+    public function scopeWithQuantityByItem($query, $wheres = null, $tableName = null) 
+    {
+      // determine group based on class?
+      $sub = (new InventoryCount)->recentQuantitiesByItem(['stock_location_id'], $wheres);
+      //dd($sub->get());
+
+      $tableName = $this->getTable();
+      //dd($tableName);
+  
+      $query->leftJoin(DB::raw("({$sub->toSql()}) AS ss"), function($join) use ($sub, $tableName) {
+            $join->on("ss.stock_location_id", '=', "{$tableName}.id")
+                 ->addBinding($sub->getBindings());  
+                 // bindings for sub-query WHERE added
+      });
+
+      return $query;
+    }
+
+
 }

@@ -42,10 +42,9 @@
 
       <div class="box-body">
         @include ('partials.forms.inventory-item-selector')
-
+        @include ('partials.forms.edit.location-select', ['hide_new' => true, 'translated_name' => trans('general.location'), 'fieldname' => 'stock_location_id'])
         @include ('partials.forms.edit.inventory-from-state-select', ['translated_name' => trans('admin/inventory/general.from_state'), 'fieldname' => 'from_state', 'required' => 'true'])
         @include ('partials.forms.edit.inventory-to-state-select', ['translated_name' => trans('admin/inventory/general.to_state'), 'fieldname' => 'to_state', 'required' => 'true'])
-        @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'stock_location_id'])
         @include ('partials.forms.edit.quantity')
         @include ('partials.forms.edit.occurred_at')
         @include ('partials.forms.edit.price')
@@ -60,6 +59,22 @@
       </div> <!-- .box-default -->
     </form>
   </div>
+  <!-- Side bar data -->
+  <div class="col-md-3">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">{{ trans('admin/locations/general.item_location_quantity') }}</h3>
+      </div>
+      <div class="box-body">
+        <div id="current_item_location_qty_content">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+@stop
+
+@section('moar_scripts')
+@include('partials/item-location-inventory')
 @stop

@@ -2,7 +2,7 @@
 <div id="consumable-select" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}"{!!  (isset($style)) ? ' style="'.e($style).'"' : ''  !!}>
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7{{  ((isset($required) && ($required =='true'))) ?  ' required' : '' }}">
-        <select class="js-data-ajax select2" data-endpoint="accessories" data-placeholder="{{ trans('general.select_consumable') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ (isset($select_id)) ? $select_id : 'assigned_consumable_select' }}"{{ (isset($multiple)) ? ' multiple' : '' }}>
+        <select class="js-data-ajax select2" data-endpoint="consumables" data-placeholder="{{ trans('general.select_consumable') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ (isset($select_id)) ? $select_id : 'assigned_consumable_select' }}"{{ (isset($multiple)) ? ' multiple' : '' }}>
 
             @if ((!isset($unselect)) && ($consumable_id = Input::old($fieldname, (isset($consumable) ? $consumable->id  : (isset($item) ? $item->{$fieldname} : '')))))
                 <option value="{{ $consumable_id }}" selected="selected">

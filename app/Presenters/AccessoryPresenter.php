@@ -132,12 +132,12 @@ class AccessoryPresenter extends Presenter
                 "title" => trans('general.purchase_cost'),
                 "footerFormatter" => 'sumFormatter',
           ],[
-            "field" => "adjust",
-            "searchable" => false,
-            "sortable" => false,
-            "visible" => true,
-            "title" => "Adjust",
-            "formatter" => "accessoriesInventoryFormatter",
+                "field" => "adjust",
+                "searchable" => false,
+                "sortable" => false,
+                "visible" => true,
+                "title" => trans('table.adjusts'),
+                "formatter" => "accessoriesInventoryFormatter",
           ], [
                 "field" => "order_number",
                 "searchable" => true,

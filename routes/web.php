@@ -73,32 +73,24 @@ Route::group(['middleware' => 'auth'], function () {
     ]);
 
     /**
+     * Inventory
+     */
+    Route::resource('inventory', 'InventoryController');
+
+    /**
      * Inventory Adjustments
      */
-    Route::resource('invadjusts', 'InventoryAdjustmentsController', [
-      'parameters' => ['accessoryinvadjust' => 'accessory_invadjust_id']
-    ]);
+    Route::resource('invadjusts', 'InventoryAdjustmentsController');
 
     /**
      * Inventory Reconciles
      */
-    Route::resource('invreconciles', 'InventoryReconcilesController', [
-      'parameters' => ['accessoryinvadjust' => 'accessory_invadjust_id']
-    ]);
+    Route::resource('invreconciles', 'InventoryReconcilesController');
 
     /**
      * Inventory Transfers
      */
-    Route::resource('invtransfers', 'InventoryTransfersController', [
-      'parameters' => ['accessoryinvadjust' => 'accessory_invadjust_id']
-    ]);
-
-        /**
-     * Inventory Counts
-     */
-    Route::resource('invcounts', 'InventoryCountsController', [
-      'parameters' => ['accessoryinvadjust' => 'accessory_invadjust_id']
-    ]);
+    Route::resource('invtransfers', 'InventoryTransfersController');
 });
 
 

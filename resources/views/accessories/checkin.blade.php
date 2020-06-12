@@ -46,6 +46,14 @@
                                     </div>
                                     @endif
 
+                                    <!-- Stock Location -->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">{{ trans('general.stock_location') }}</label>
+                                        <div class="col-md-6">
+                                          <p class="form-control-static">{{ $location->name }}</p>
+                                        </div>
+                                    </div>
+
                                     <!-- Note -->
                                     <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                                         <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>

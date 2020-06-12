@@ -21,7 +21,7 @@ class CreateInventoryCounts extends Migration
             $table->string('state')->index();
             $table->integer('stock_location_id')->default(0)->index();
             $table->integer('qty');
-            $table->dateTime('occurred_at')->index();
+            $table->dateTime('occurred_at', 3)->index();
             $table->timestamps();
             $table->index(['item_type', 'item_id']);  
             $table->index(['item_type', 'item_id', 'state', 'stock_location_id'], 'index_item_location_state_index');

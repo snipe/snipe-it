@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Http\Controllers\InventoryRequest;
 use App\Models\Accessory;
+use App\Models\Consumable;
+use App\Models\Component;
+use App\Models\Location;
 use App\Models\InventoryAdjustment;
 use App\Models\InventoryCount;
 use App\Models\User;
@@ -31,6 +34,24 @@ use App\Http\Requests\ImageUploadRequest;
 class InventoryAdjustmentsController extends Controller
 {
   use InventoryRequest;
+
+      /**
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content for the locations listing, which is generated in getDatatable.
+    *
+    * @author [Peter Brink] [<pbrink231@gmail.com>]
+    * @see LocationsController::getDatatable() method that generates the JSON response
+    * @since [v1.0]
+    * @return \Illuminate\Contracts\View\View
+     */
+    public function index()
+    {
+        $this->authorize('view', InventoryAdjustment::class);
+        // Show the page
+        return view('inventory/adjustments/index');
+    }
+
+
   /**
    * Returns a view with a form to create a new Accessory Inventory Adjustment.
    *
@@ -42,17 +63,27 @@ class InventoryAdjustmentsController extends Controller
         $this->authorize('create', InventoryAdjustment::class);
 
         $item = new InventoryAdjustment;
-        if (request('accessories')) {
-          $accessory = Accessory::find(request('accessories'));
-          $item->
-
+        if (request('location')) {
+          $item->stock_location_id = request('location');
+          $location = Location::AddDefaultLocation()->where('id', '=', request('location'))->first();
         }
 
-        
+        // item selector updates
+        if (request('accessories')) {
+          $item->inventory_item_type = 'accessory';
+          $item->accessory_id = request('accessories');
+        }
+        if (request('consumables')) {
+          $item->inventory_item_type = 'consumable';
+          $consumable = Consumable::find(request('consumables'));
+        }
+        if (request('components')) {
+          $item->inventory_item_type = 'component';
+          $component = Component::find(request('components'));
+        }
+
         $item->occurred_at = date_format(new \Carbon(), 'Y-m-d H:i:s');
-        return view('accessories/inventory/adjustment')
-          ->with('accessory', $accessory)
-          ->with('item', $item)
+        return view('inventory/adjustments/edit', compact('accessory', 'consumable', 'component', 'item'))
           ->with('states', new States);
     }
 
@@ -74,8 +105,11 @@ class InventoryAdjustmentsController extends Controller
           return redirect()->back()->withInput()->with('error', trans('message.not_found', ['attribute' => request('inventory_item_type')]) );
 
         if (request('from_state') == request('to_state'))
-          return redirect()->back()->withInput()->with('from_state', trans('admin/inventory/message.cannot_move_same_state') );
+          return redirect()->back()->withInput()->withError('from_state', trans('admin/inventory/message.cannot_move_same_state') );
 
+        if (request('from_state') == States::NONE && in_array(States::$wasted_states)) {
+          return redirect()->back()->withInput()->with('error', trans('admin/inventory/message.new_cannot_be_wasted') );
+        }
 
 
         $addedFields = [];
@@ -97,21 +131,22 @@ class InventoryAdjustmentsController extends Controller
           'occurred_at' => 'nullable', // |date_format:'.\DateTime::ISO8601,
         );
         $validator = \Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+          return redirect()->back()->withInput()->withErrors($validator);
+        }
+
         $stock_location_id = request('stock_location_id');
         if (!$stock_location_id) {
           // set occurred at to now
           $stock_location_id = 0;
         }
+
         $occurred_at = request('occurred_at');
         if (!$occurred_at) {
           // set occurred at to now
           $occurred_at = Carbon::now();
         }
 
-
-        if ($validator->fails()) {
-          return redirect()->back()->withInput()->withErrors($validator);
-        }
 
         $fromInventoryItem = [
           'item_type'         => request('item_type'),
@@ -128,9 +163,9 @@ class InventoryAdjustmentsController extends Controller
 
         // check if quantity is available to move
         if (request('from_state') != States::NONE) {
-          $currentFromCount = (new InventoryCount)->lastCount(request('item_type'), request('item_id'), $stock_location_id, request('from_state'))->first();
+          $currentFromCount = (new InventoryCount)->lastCount(request('item_type'), request('item_id'), $stock_location_id, request('from_state'));
           if (!$currentFromCount || $currentFromCount->qty < request('qty')) {
-            return redirect()->back()->withInput()->with('qty', trans('admin/inventory/message.not_enough_in_state') );
+            return redirect()->back()->withInput()->with('error', trans('admin/inventory/message.not_enough_in_state') );
           }
         }
 

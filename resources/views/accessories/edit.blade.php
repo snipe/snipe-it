@@ -14,13 +14,15 @@
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id', 'required' => 'true','category_type' => 'accessory'])
 @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
 @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id', 'required' => 'true'])
-@include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 @include ('partials.forms.edit.model_number')
 @include ('partials.forms.edit.order_number')
 @include ('partials.forms.edit.purchase_date')
 @include ('partials.forms.edit.purchase_cost')
-@include ('partials.forms.edit.quantity')
 @include ('partials.forms.edit.minimum_quantity')
+@if (!$item->id)
+@include ('partials.forms.edit.location-select', ['translated_name' => trans('general.stock_location'), 'fieldname' => 'location_id'])
+@include ('partials.forms.edit.quantity')
+@endif
 
 
 <!-- Image -->

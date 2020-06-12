@@ -46,7 +46,7 @@
                                     <td>{{ is_null($accessory->company) ? '' : $accessory->company->name }}</td>
                                     <td>{{ $accessory->name }}</td>
                                     <td>{{ $accessory->qty }}</td>
-                                    <td>{{ $accessory->numRemaining() }}</td>
+                                    <td>{{ $accessory->itemStockRemainingInLocation() }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

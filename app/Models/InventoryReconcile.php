@@ -82,4 +82,23 @@ class InventoryReconcile extends Model
           
 
     }
+
+    public function saveAndCount($force = false)
+    {
+      return $this->addReconcile($force);
+    }
+
+    private function addReconcile($force = false)
+    {
+      if ($force) {
+        $this->forceSave(); // skips validation rule
+      } else {
+        if (!$this->save())
+          return false;
+      }
+      // create a new inventory count for each state
+      $this->makeInvCount($this->item_type, $this->item_id, $this->stock_location_id, $this->state);
+      return true;
+    }
+
 }

@@ -10,6 +10,7 @@ use Redirect;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Asset;
+use App\Models\InventoryCount;
 use DB;
 use Str;
 use Validator;
@@ -39,6 +40,12 @@ class LocationsController extends Controller
      */
     public function index()
     {
+        // Testing
+        //return (new InventoryCount)->lastCounts()->get();
+        //return (new InventoryCount)->recentQuantitiesByItem(['stock_location_id'])->get();
+        //return Location::WithQuantityByItem()->toSql();  //AddDefaultLocation()->
+        // End Testing
+
         // Grab all the locations
         $this->authorize('view', Location::class);
         // Show the page

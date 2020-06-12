@@ -1,7 +1,9 @@
 <?php
 namespace App\Models;
 
+use App\Models\Traits\InventoryActions;
 use App\Enums\States;
+use App\Enums\AssetTypes;
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
 use DB;
@@ -49,6 +51,11 @@ class InventoryCount extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function invcountable()
+    {
+        return $this->morphTo();
+    }
+
     public function lastCount($item_type, $item_id, $stock_location_id, $state)
     {
       return InventoryCount::select('s1.id', 's1.item_type', 's1.item_id', 's1.stock_location_id', 's1.state', 's1.occurred_at', 's1.qty')
@@ -86,16 +93,8 @@ class InventoryCount extends Model
       return $counts;
     }
 
-    public function recentQuantitiesByGroup($group = null, $wheres = null, $states = null)
+    public function recentQuantitiesByState($group = null, $wheres = null)
     {
-      // by item_type
-      // by item_type, item_id
-      // by item_type, item_id, location_id
-      // by item_type, item_id, location_id, state
-      // by item_type, state
-      // by location_id
-      // by location_id, state
-      // by state
       $sub = $this->lastCounts();
 
       if (!$group) {
@@ -105,7 +104,12 @@ class InventoryCount extends Model
         if (!$wheres) 
           $wheres = [];
 
-        $wheres['state'] = States::$default_view_states;
+        $wheres['state'] = States::$main_states;
+      }
+      if (!is_array($wheres['state'])) {
+        $wheres['state'] = [
+          $wheres['state']
+        ];
       }
 
       // start query
@@ -121,9 +125,10 @@ class InventoryCount extends Model
 
       // add quantities sums based on states
       foreach ($wheres['state'] as $key => $value) {
-        $query->addSelect(DB::raw("SUM(CASE WHEN `state` = '{$value}' THEN `qty` ELSE 0 END) AS {$value}"));
+        // Have to CAST because otherwise decimal returns as a string
+        $query->addSelect(DB::raw("CAST(SUM(CASE WHEN `state` = '{$value}' THEN `qty` ELSE 0 END) AS INTEGER) AS {$value}"));
       }
-      $query->addSelect(DB::raw("SUM(`qty`) AS total"));
+      $query->addSelect(DB::raw("CAST(SUM(`qty`) AS INTEGER) AS total"));
 
       // From current actual qantities
       $query->from(DB::raw("({$sub->toSql()}) as sub"));
@@ -146,76 +151,65 @@ class InventoryCount extends Model
       return $query;
     }
 
-        //public function recen
 
-    /* another counting option
-    SELECT `ic`.`id`, `ic`.`item_type`, `ic`.`item_id`, `ic`.`stock_location_id`, `ic`.`state`, `ic`.`qty`
-FROM
-(SELECT `item_type`, `item_id`, `stock_location_id`, `state`, max(`occurred_at`) as occurred_at
-FROM `inventory_counts`
-GROUP BY `item_type`, `item_id`, `stock_location_id`, `state`) as rc
-join `inventory_counts` as ic ON
-`ic`.`item_type` = `rc`.`item_type`
-and `ic`.`item_id` = `rc`.`item_id`
-and `ic`.`stock_location_id` = `rc`.`stock_location_id`
-and `ic`.`state` = `rc`.`state`
-and `ic`.`occurred_at` = `rc`.`occurred_at`
-*/
+    public function recentQuantitiesByItem($group = null, $wheres = null, $states = null)
+    {
+      $sub = $this->lastCounts();
 
-/* by specific item / location
-SELECT `ic`.`id`, `ic`.`item_type`, `ic`.`item_id`, `ic`.`stock_location_id`,
-	sum(case when `ic`.`state` = 'in_stock' then `ic`.`qty` else 0 end) as In_Stock,
-	sum(case when `ic`.`state` = 'checked_out' then `ic`.`qty` else 0 end) as Checked_Out,
-	sum(case when `ic`.`state` = 'pending' then `ic`.`qty` else 0 end) as Pending
-FROM
-(SELECT `item_type`, `item_id`, `stock_location_id`, `state`, max(`occurred_at`) as occurred_at
-FROM `inventory_counts`
-GROUP BY `item_type`, `item_id`, `stock_location_id`, `state`) as rc
-join `inventory_counts` as ic ON
-`ic`.`item_type` = `rc`.`item_type`
-and `ic`.`item_id` = `rc`.`item_id`
-and `ic`.`stock_location_id` = `rc`.`stock_location_id`
-and `ic`.`state` = `rc`.`state`
-and `ic`.`occurred_at` = `rc`.`occurred_at`
-GROUP BY `ic`.`item_type`, `ic`.`item_id`, `ic`.`stock_location_id`, `ic`.`state`
-*/
+      if (!$group) {
+        $group = ['item_type', 'item_id', 'stock_location_id'];
+      }
+      if (!$wheres || !array_key_exists('item_type', $wheres)) {
+        if (!$wheres) 
+          $wheres = [];
 
-/* By a certain item type_type
-select `accessories`.`id`, `accessories`.`name`, quantities.in_stock, quantities.checked_out, quantities.pending
-from `accessories`
-left join (
- SELECT `ic`.`id`, `ic`.`item_id`,
-	sum(case when `ic`.`state` = 'in_stock' then `ic`.`qty` else 0 end) as in_stock,
-	sum(case when `ic`.`state` = 'checked_out' then `ic`.`qty` else 0 end) as checked_out,
-	sum(case when `ic`.`state` = 'pending' then `ic`.`qty` else 0 end) as pending
-FROM
-(SELECT `item_id`,`state`, max(`occurred_at`) as occurred_at
-FROM `inventory_counts`
-where item_type = 'App\\\Models\\\Accessory'
-GROUP BY `item_id`, `state`) as rc
-join `inventory_counts` as ic
-on `ic`.`item_id` = `rc`.`item_id`
-and `ic`.`state` = `rc`.`state`
-and `ic`.`occurred_at` = `rc`.`occurred_at`
-GROUP BY `ic`.`item_id`
-) as quantities
-on quantities.item_id = `accessories`.`id`
-*/
+        $wheres['item_type'] = AssetTypes::$allAssetTypes;
+      }
+      if (!is_array($wheres['item_type'])) {
+        $wheres['item_type'] = [ $wheres['item_type'] ];
+      }
 
-/*
-SELECT `item_type`, `item_id`, `stock_location_id`, `state`, max(`occurred_at`) as occurred_at
-FROM `inventory_counts`
-GROUP BY `item_type`, `item_id`, `stock_location_id`, `state`
 
-$sub = InventoryCount::select('item_type', 'item_id', 'stock_location_id', 'state', )
-    ->selectSub('MAX(`balances`.`created_at`)', 'refreshDate')
-    ->join('balances', 'characters.id', '=', 'balances.character')
-    ->whereNotNull('characters.refreshToken')
-    ->groupBy('characters.id');
+      // start query
+      $query = InventoryCount::query();
 
-DB::table(DB::raw("($sub->toSql()) as t1"))
-    ->mergeBindings($sub)
-    ->where('refreshDate', '<', '2017-03-29')
-    ->get();
-*/
+      // Add selects based on grouping
+      if (in_array('item_id', $group))
+        $query->addSelect('item_id');
+      if (in_array('stock_location_id', $group))
+        $query->addSelect('stock_location_id');
+      if (in_array('state', $group))
+        $query->addSelect('item_type');
+
+
+      // add quantities sums based on states
+      foreach ($wheres['item_type'] as $key => $value) {
+        $matchString = str_replace('\\', "\\\\", $value);
+        $name = AssetTypes::$typePluralNames[$value];
+        // Have to CAST because otherwise decimal returns as a string
+        $query->addSelect(DB::raw("CAST(SUM(CASE WHEN `item_type` = '{$matchString}' THEN `qty` ELSE 0 END) AS INTEGER) AS '{$name}'"));
+      }
+      //dd($query->toSql());
+      $query->addSelect(DB::raw("CAST(SUM(`qty`) AS INTEGER) AS total"));
+
+      // From current actual qantities
+      $query->from(DB::raw("({$sub->toSql()}) as sub"));
+      //->mergeBindings($sub->getQuery())  // need to merge bindings if there are any?
+
+      // filter based on wheres
+      if ($wheres) {
+        foreach ($wheres as $key => $value) {
+          if (is_array($value)) {
+            $query->whereIn('sub.'.$key, $value);
+          } else {
+            $query->where('sub.'.$key, '=', $value);
+          }
+        }
+      }
+
+      // group query based on group
+      $query->groupBy($group);
+
+      return $query;
+    }
 }

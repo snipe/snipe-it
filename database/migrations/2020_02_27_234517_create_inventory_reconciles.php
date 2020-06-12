@@ -21,7 +21,7 @@ class CreateInventoryReconciles extends Migration
             $table->string('state')->index();
             $table->integer('stock_location_id')->default(0)->index();
             $table->integer('qty');
-            $table->dateTime('occurred_at')->index();
+            $table->dateTime('occurred_at', 3)->index();
             $table->integer('user_id')->unsigned()->index();
             $table->integer('source_id')->index()->nullable()->default(null);
             $table->integer('reference_id')->index()->nullable()->default(null);

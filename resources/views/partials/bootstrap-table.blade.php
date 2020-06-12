@@ -289,7 +289,7 @@
 
     }
 
-    function genericInventoryFormatter(destination) {
+    function genericItemInventoryFormatter(destination) {
       return function (value,row) {
         var actions = '<nobr>';
         // Add some overrides for any funny urls we have
@@ -314,7 +314,51 @@
       }
     }
 
-    function genericCheckinCheckoutFormatter(destination) {
+    function paramsToString(paramsObj) {
+      if (paramsObj == undefined) {
+        return ''
+      }
+      params = []
+      Object.keys(paramsObj).forEach((key)=>{
+        params.push(key + '=' + paramsObj[key])
+      })
+      paramString = ''
+      if (params.length > 0) {
+        paramString = '&' + params.join('&')
+      }
+      return paramString
+    }
+
+    function genericLocationAdjustFormatter(paramsObj) {
+      paramString = paramsToString(paramsObj)
+      console.log('test param string', paramString)
+      return function (value,row) {
+
+      
+        var actions = '<nobr>';
+
+        if ((row.available_actions) && (row.available_actions.invadjusts === true)) {
+            actions += '<a href="{{ url('/') }}/invadjusts/create?location=' + row.id + paramString + '" class="btn btn-sm btn-info" data-tooltip="true" title="{{ trans('general.adjustment') }}"><i class="fa fa-exchange fa-rotate-90"></i></a>&nbsp;';
+        }
+
+        if ((row.available_actions) && (row.available_actions.invtransfers === true)) {
+            actions += '<a href="{{ url('/') }}/invtransfers/create?location=' + row.id + paramString + '" class="btn btn-sm btn-info" data-tooltip="true" title="{{ trans('general.transfer') }}"><i class="fa fa-exchange"></i></a>&nbsp;';
+        }
+
+        if ((row.available_actions) && (row.available_actions.invreconciles === true)) {
+            actions += '<a href="{{ url('/') }}/invreconciles/create?location=' + row.id + paramString + '" class="btn btn-sm btn-info" data-tooltip="true" title="{{ trans('general.reconcile') }}"><i class="fa fa-hashtag"></i></a>&nbsp;';
+        }
+
+        actions +='</nobr>';
+        return actions;
+
+      }
+    }
+
+
+    function genericItemCheckinCheckoutFormatter(destination, paramsObj) {
+      paramString = paramsToString(paramsObj)
+
         return function (value,row) {
 
             // The user is allowed to check items out, AND the item is deployable
@@ -332,12 +376,34 @@
                 } else if (row.assigned_pivot_id) {
                     return '<a href="{{ url('/') }}/' + destination + '/' + row.assigned_pivot_id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
                 }
-
             }
-
         }
+    }
 
+    function genericLocationCheckinCheckoutFormatter(item_name, item_id) {
+      console.log('testing here')
+      var url = "{{ url('/') }}";
+        return function (value,row) {
+          console.log('current row', row);
 
+            // The user is allowed to check items out, AND the item is deployable
+            if ((row.available_actions.checkout == true) && (row.user_can_checkout == true)) {
+                    return '<a href="' + url + '/' + item_name + '/' + item_id + '/checkout?locations=' + row.id + '" class="btn btn-sm bg-maroon" data-tooltip="true" title="Check this item out">{{ trans('general.checkout') }}</a>';
+
+            
+            // The user is allowed to check items out, but the item is not deployable
+            } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true)) {
+                return '<div  data-tooltip="true" title="This item has a status label that is undeployable and cannot be checked out at this time."><a class="btn btn-sm bg-maroon disabled">{{ trans('general.checkout') }}</a></div>';
+
+            // The user is allowed to check items in
+            } else if (row.available_actions.checkin == true)  {
+                if (row.assigned_to) {
+                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
+                } else if (row.assigned_pivot_id) {
+                    return '<a href="{{ url('/') }}/' + destination + '/' + row.assigned_pivot_id + '/checkin" class="btn btn-sm bg-purple" data-tooltip="true" title="Check this item in so it is available for re-imaging, re-issue, etc.">{{ trans('general.checkin') }}</a>';
+                }
+            }
+        }
     }
 
 
@@ -378,8 +444,8 @@
         window[formatters[i] + 'LinkFormatter'] = genericRowLinkFormatter(formatters[i]);
         window[formatters[i] + 'LinkObjFormatter'] = genericColumnObjLinkFormatter(formatters[i]);
         window[formatters[i] + 'ActionsFormatter'] = genericActionsFormatter(formatters[i]);
-        window[formatters[i] + 'InOutFormatter'] = genericCheckinCheckoutFormatter(formatters[i]);
-        window[formatters[i] + 'InventoryFormatter'] = genericInventoryFormatter(formatters[i]);
+        window[formatters[i] + 'InOutFormatter'] = genericItemCheckinCheckoutFormatter(formatters[i]);
+        window[formatters[i] + 'InventoryFormatter'] = genericItemInventoryFormatter(formatters[i]);
     }
 
 

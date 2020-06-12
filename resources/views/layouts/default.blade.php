@@ -531,6 +531,14 @@
                 </a>
             </li>
             @endcan
+            @can('view', \App\Models\Invnetory::class)
+            <li{!! (Request::is('inventory*') ? ' class="active"' : '') !!}>
+                  <a href="{{ route('inventory.index') }}">
+                      <i class="fa fa-th"></i>
+                      <span>{{ trans('general.inventory') }}</span>
+                  </a>
+            </li>
+            @endcan            
             @can('view', \App\Models\User::class)
             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
                   <a href="{{ route('users.index') }}">

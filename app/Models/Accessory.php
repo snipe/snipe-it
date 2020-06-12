@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Models\Traits\Searchable;
 use App\Models\Traits\Inventoryable;
+use App\Enums\States;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -129,6 +130,14 @@ class Accessory extends SnipeModel
         return $this->belongsTo('\App\Models\Location', 'location_id');
     }
 
+    /**
+     * Get all of the accessory locations.
+     */
+    public function locations()
+    {
+        return $this->morphMany(Inventory::class, 'item');
+    }
+
     public function category()
     {
         return $this->belongsTo('\App\Models\Category', 'category_id')->where('category_type', '=', 'accessory');
@@ -165,6 +174,14 @@ class Accessory extends SnipeModel
         return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
     }
 
+    /**
+     * all accessory inventory counts.
+     */
+    public function invcounts()
+    {
+        return $this->morphMany(Accessory::class, 'invcountable');
+    }
+
     public function checkin_email()
     {
         return $this->category->checkin_email;
@@ -186,14 +203,6 @@ class Accessory extends SnipeModel
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
         }
             return null;
-    }
-
-    public function numRemaining()
-    {
-        $checkedout = $this->users->count();
-        $total = $this->qty;
-        $remaining = $total - $checkedout;
-        return $remaining;
     }
 
     /**

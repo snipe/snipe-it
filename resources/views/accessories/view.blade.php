@@ -48,67 +48,123 @@
 
 
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-12">
+        <!-- Custom Tabs -->
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#inventory" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.inventory') }}</span></a>
+            </li>
+            <li>
+              <a href="#checkouts" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.checkout') }}</span></a>
+            </li>
+          </ul>
+          <!-- Custom Tabs Content -->
+          <div class="tab-content">
+            <div class="tab-pane fade in active" id="inventory">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="table-responsive" style="margin-top: 10px;">
+                    <table
+                      data-columns="{{ \App\Presenters\LocationPresenter::dataTableItemLayout() }}"
+                      data-cookie-id-table="locationAccessoryTable"
+                      data-pagination="true"
+                      data-id-table="locationAccessoryTable"
+                      data-search="true"
+                      data-show-footer="true"
+                      data-side-pagination="server"
+                      data-show-columns="true"
+                      data-show-export="true"
+                      data-show-refresh="true"
+                      data-sort-order="asc"
+                      data-query-params="locationTableParams"
+                      id="locationTable"
+                      class="table table-striped snipe-table"
+                      data-url="{{ route('api.locations.itembystate') }}"
+                      data-export-options='{
+                      "fileName": "export-locations-{{ date('Y-m-d') }}",
+                      "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                      }'>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="checkouts">
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="table-responsive" style="margin-top: 10px;">
+    
+                  <table
+                          data-cookie-id-table="usersTable"
+                          data-pagination="true"
+                          data-id-table="usersTable"
+                          data-search="true"
+                          data-side-pagination="server"
+                          data-show-columns="true"
+                          data-show-export="true"
+                          data-show-refresh="true"
+                          data-sort-order="asc"
+                          id="usersTable"
+                          class="table table-striped snipe-table"
+                          data-url="{{ route('api.accessories.checkedout', $accessory->id) }}"
+                          data-export-options='{
+                          "fileName": "export-accessories-{{ str_slug($accessory->name) }}-users-{{ date('Y-m-d') }}",
+                          "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                          }'>
+                      <thead>
+                      <tr>
+                          <th data-searchable="false" data-formatter="usersLinkFormatter" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                          <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
+                      </tr>
+                      </thead>
 
-    <div class="box box-default">
-      <div class="box-body">
-        <div class="table table-responsive">
+                  </table>
+              </div>
+            </div>
+            <!-- side address column -->
+            <div class="col-md-3">
 
-            <table
-                    data-cookie-id-table="usersTable"
-                    data-pagination="true"
-                    data-id-table="usersTable"
-                    data-search="true"
-                    data-side-pagination="server"
-                    data-show-columns="true"
-                    data-show-export="true"
-                    data-show-refresh="true"
-                    data-sort-order="asc"
-                    id="usersTable"
-                    class="table table-striped snipe-table"
-                    data-url="{{ route('api.accessories.checkedout', $accessory->id) }}"
-                    data-export-options='{
-                    "fileName": "export-accessories-{{ str_slug($accessory->name) }}-users-{{ date('Y-m-d') }}",
-                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                    }'>
-                <thead>
-                <tr>
-                    <th data-searchable="false" data-formatter="usersLinkFormatter" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
-                </tr>
-                </thead>
+              @if ($accessory->image!='')
+                  <div class="col-md-12 text-center" style="padding-bottom: 15px;">
+                      <a href="{{ app('accessories_upload_url') }}{{ $accessory->image }}" data-toggle="lightbox"><img src="{{ app('accessories_upload_url') }}{{ $accessory->image }}" class="img-responsive img-thumbnail" alt="{{ $accessory->name }}"></a>
+                  </div>
+              @endif
 
-            </table>
-        </div>
-      </div>
-    </div>
-  </div>
+              <div class="text-center">
+                  @can('checkout', \App\Models\Accessory::class)
+                      <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-info btn-sm" {{ (($accessory->itemStockRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+                  @endcan
+              </div>
 
 
-  <!-- side address column -->
-  <div class="col-md-3">
+              <h4>{{ trans('admin/accessories/general.about_accessories_title') }}</h4>
+              <p>{{ trans('admin/accessories/general.about_accessories_text') }} </p>
 
-      @if ($accessory->image!='')
-          <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-              <a href="{{ app('accessories_upload_url') }}{{ $accessory->image }}" data-toggle="lightbox"><img src="{{ app('accessories_upload_url') }}{{ $accessory->image }}" class="img-responsive img-thumbnail" alt="{{ $accessory->name }}"></a>
+
+            </div>
+              
           </div>
-      @endif
-
-      <div class="text-center">
-          @can('checkout', \App\Models\Accessory::class)
-              <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-info btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
-          @endcan
-      </div>
-
-
-    <h4>{{ trans('admin/accessories/general.about_accessories_title') }}</h4>
-    <p>{{ trans('admin/accessories/general.about_accessories_text') }} </p>
-
-
+        </div>
   </div>
+
+
+
 </div>
 @stop
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table')
+<script>
+  function locationTableParams(params) {
+    params.accessory_id = {{ $accessory->id }}
+    return params
+  }
+  
+  data = {
+      accessories: {{ $accessory->id }}
+  }
+  window['locationItemAdjust'] = genericLocationAdjustFormatter(data);
+  window['locationItemInOutFormatter'] = genericLocationCheckinCheckoutFormatter('accessories', {{ $accessory->id }})
+</script>
 @stop
