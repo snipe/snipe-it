@@ -1,5 +1,5 @@
 FROM ubuntu:xenial
-LABEL maintainer="uberbrady, hinchk"
+LABEL maintainer="petr-toman"
 
 RUN apt-get update && apt-get install -y software-properties-common
 RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
