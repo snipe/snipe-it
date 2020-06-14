@@ -55,7 +55,7 @@
 @endif
 @endcomponent
 
-Thanks,
+**{{ trans('mail.thanks') }}**
 
 {{ $snipeSettings->site_name }}
 

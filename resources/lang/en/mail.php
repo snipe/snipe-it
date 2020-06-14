@@ -58,6 +58,7 @@ return array(
     'tag' => 'Tag',
     'test_email' => 'Test Email from Snipe-IT',
     'test_mail_text' => 'This is a test from the Snipe-IT Asset Management System. If you got this, mail is working :)',
+    'thanks' => 'thanks,',
     'the_following_item' => 'The following item has been checked in: ',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
     'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',

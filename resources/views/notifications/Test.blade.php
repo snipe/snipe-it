@@ -2,6 +2,7 @@
 
 {{ trans('mail.test_mail_text') }}
 
-Thanks,
-Snipe-IT
+{{ trans('mail.thanks') }}
+
+{{ $snipeSettings->site_name }}
 @endcomponent

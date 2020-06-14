@@ -57,6 +57,7 @@ return array(
     'tag' => 'Kennzeichnung',
     'test_email' => 'Test E-Mail von Snipe-IT',
     'test_mail_text' => 'Dies ist ein Test von Snipe-IT-Asset-Management-System. Wenn Sie das erhalten haben, funktioniert das Senden von Mails :)',
+    'thanks' => 'mit freundlichen Grüßen,',
     'the_following_item' => 'Der folgende Gegenstand wurde eingecheckt: ',
     'low_inventory_alert' => 'Es gibt :count Artikel, der unter dem Minimum ist oder kurz davor ist.|Es gibt :count Artikel, die unter dem Minimum sind oder kurz davor sind.',
     'assets_warrantee_alert' => 'Es gibt :count Asset mit einer auslaufenden Garantie in den nächsten :threshold Tagen.| Es gibt :count Assets mit auslaufenden Garantien in den nächsten :threshold Tagen.',
