@@ -91,9 +91,11 @@ class AssetsController extends Controller
     public function create(Request $request)
     {
         $this->authorize('create', Asset::class);
+        $asset = new Asset;
+        $asset->nds = 20;
         $view = View::make('hardware/edit')
             ->with('statuslabel_list', Helper::statusLabelList())
-            ->with('item', new Asset)
+            ->with('item', $asset)
             ->with('statuslabel_types', Helper::statusTypeList());
 
         if ($request->filled('model_id')) {
@@ -116,7 +118,6 @@ class AssetsController extends Controller
 
 
         $asset = new Asset();
-        $asset->nds=20;
         $asset->model()->associate(AssetModel::find($request->input('model_id')));
 
         $asset->name                    = $request->input('name');
@@ -126,6 +127,7 @@ class AssetsController extends Controller
         $asset->order_number            = $request->input('order_number');
         $asset->notes                   = $request->input('notes');
         $asset->asset_tag               = $request->input('asset_tag');
+        $asset->nds                     = intval(request('nds', 0));
         $asset->user_id                 = Auth::id();
         $asset->archived                = '0';
         $asset->physical                = '1';
@@ -138,6 +140,7 @@ class AssetsController extends Controller
         $asset->supplier_id             = request('supplier_id', 0);
         $asset->requestable             = request('requestable', 0);
         $asset->rtd_location_id         = request('rtd_location_id', null);
+
 
         if ($asset->assigned_to=='') {
             $asset->location_id = $request->input('rtd_location_id', null);
@@ -312,6 +315,7 @@ class AssetsController extends Controller
         $asset->purchase_cost = Helper::ParseFloat($request->input('purchase_cost', null));
         $asset->purchase_date = $request->input('purchase_date', null);
         $asset->supplier_id = $request->input('supplier_id', null);
+        $asset->nds                     = intval(request('nds', 0));
 
         // If the box isn't checked, it's not in the request at all.
         $asset->requestable = $request->filled('requestable');

@@ -3,7 +3,7 @@
     <label for="nds" class="col-md-3 control-label">НДС</label>
     <div class="col-md-9">
         <div class="input-group col-md-4" style="padding-left: 0px;">
-            <input class="form-control" type="text" name="nds" aria-label="nds" id="nds" value="{{  isset($item->nds) ? $item->nds : 20}}" />
+            <input class="form-control" type="text" name="nds" aria-label="nds" id="nds" value="{{  $item->nds }}" />
             <span class="input-group-addon">
                 %
             </span>
