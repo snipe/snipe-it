@@ -25,7 +25,9 @@ jobs:
         username: andres-baller
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com
-        repository: andres-baller/snipe-it
+        repository: andres-baller/snipe-it/ballertv-snipeit
+        
+        
         tags: latest
 
     # Runs a set of commands using the runners shell
