@@ -45,11 +45,12 @@ class ImageUploadRequest extends Request
      */
     public function handleImages($item, $w = 550, $fieldname = 'image', $path = null)
     {
-
+        \Log::debug('Handle file upload');
         $type = strtolower(class_basename(get_class($item)));
 
         if (is_null($path)) {
-            $path =  str_plural($type);
+            $path =  'public/uploads/'.str_plural($type);
+            \Log::info('Path is: '.$path);
         }
 
         \Log::debug('Image path is: '.$path);
@@ -62,22 +63,26 @@ class ImageUploadRequest extends Request
 
             if (!config('app.lock_passwords')) {
 
-                if (!Storage::disk('public')->exists($path)) Storage::disk('public')->makeDirectory($path, 775);
+                if (!Storage::disk('public')->exists($path))
+                {
+                    \Log::debug($path);
+                   // Storage::disk('public')->makeDirectory($path, 775);
+                }
 
                 if (!is_dir($path)) {
-                    \Log::debug($path.' does not exist');
-                    mkdir($path);
+                    \Log::info($path.' does not exist');
+                    //mkdir($path);
                 }
 
                 $image = $this->file($fieldname);
                 $ext = $image->getClientOriginalExtension();
                 $file_name = $type.'-'.str_random(18).'.'.$ext;
 
-                \Log::debug('File name will be: '.$file_name);
+                \Log::info('File name will be: '.$file_name);
 
                 if ($image->getClientOriginalExtension()!=='svg') {
-                    \Log::debug('Not an SVG - resize');
-                    \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
+                    \Log::info('Not an SVG - resize');
+                    \Log::info('Trying to upload to: '.$path.'/'.$file_name);
                     $upload = Image::make($image->getRealPath())->resize(null, $w, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
@@ -88,13 +93,13 @@ class ImageUploadRequest extends Request
 
                 // If the file is an SVG, we need to clean it and NOT encode it
                 } else {
-                    \Log::debug('This is an SVG');
+                    \Log::info('This is an SVG');
                     $sanitizer = new Sanitizer();
                     $dirtySVG = file_get_contents($image->getRealPath());
                     $cleanSVG = $sanitizer->sanitize($dirtySVG);
 
                     try {
-                        \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
+                        \Log::info('Trying to upload to: '.$path.'/'.$file_name);
                     Storage::disk('public')->put($path.'/'.$file_name, $cleanSVG);
                     } catch (\Exception $e) {
                         \Log::debug($e);

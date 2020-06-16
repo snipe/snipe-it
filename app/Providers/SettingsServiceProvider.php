@@ -45,7 +45,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('accessories_upload_path', function() {
-            return 'accessories/';
+            return 'public/uploads/accessories/';
         });
 
         \App::singleton('models_upload_path', function(){

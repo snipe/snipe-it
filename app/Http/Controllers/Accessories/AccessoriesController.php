@@ -79,7 +79,7 @@ class AccessoriesController extends Controller
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
 
-        $accessory = $request->handleImages($accessory);
+        $accessory = $request->handleImages($accessory, 500, 'image', 'public/uploads');
 
         // Was the accessory created?
         if ($accessory->save()) {

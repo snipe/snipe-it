@@ -107,6 +107,8 @@ class AssetsController extends Controller
         // differently
         $asset_tags = $request->input('asset_tags');
 
+        $settings = Setting::getSettings();
+
         $success = false;
         $serials = $request->input('serials');
 
