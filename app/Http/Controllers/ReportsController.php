@@ -472,7 +472,7 @@ class ReportsController extends Controller
 
             $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
             \Log::debug('Starting headers: '.$executionTime);
-            fputcsv($handle, $header);
+            fputcsv($handle, $header,';');
             $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
             \Log::debug('Added headers: '.$executionTime);
 
@@ -709,7 +709,7 @@ class ReportsController extends Controller
                         }
                     }
 
-                    fputcsv($handle, $row);
+                    fputcsv($handle, $row,";");
                     $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
                     \Log::debug('-- Record '.$count.' Asset ID:' .$asset->id. ' in '. $executionTime);
 
