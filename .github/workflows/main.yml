@@ -26,4 +26,4 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com
         repository: andres-baller/snipe-it/ballertv-snipeit
-        tags: latest,action-test
+        tags: latest
