@@ -48,6 +48,7 @@ class LicenseImporter extends ItemImporter
         }
         $asset_tag = $this->item['asset_tag'] = $this->findCsvMatch($row, 'asset_tag'); // used for checkout out to an asset.
         $this->item['expiration_date'] = $this->findCsvMatch($row, 'expiration_date');
+        $this->item['renewal_date'] = $this->findCsvMatch($row, 'renewal_date');
         $this->item['license_email'] = $this->findCsvMatch($row, "license_email");
         $this->item['license_name'] = $this->findCsvMatch($row, "license_name");
         $this->item['maintained'] = $this->findCsvMatch($row, 'maintained');

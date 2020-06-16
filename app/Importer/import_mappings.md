@@ -9,6 +9,7 @@
 | image               | image            | Asset                                     |
 | department_id       |                  | User ? All                                |
 | expiration date     | expiration_date  | License                                   |
+| renewal_date        | renewal_date     | License                                   |
 | location            | location         | All                                       |
 | notes               | notes            | All                                       |
 | licensed to email   | license_email    | License                                   |

@@ -254,6 +254,7 @@ class ReportsController extends Controller
             trans('admin/licenses/form.seats'),
             trans('admin/licenses/form.remaining_seats'),
             trans('admin/licenses/form.expiration'),
+            trans('admin/licenses/form.renewal_date'),
             trans('general.purchase_date'),
             trans('general.depreciation'),
             trans('general.purchase_cost')
@@ -270,6 +271,7 @@ class ReportsController extends Controller
             $row[] = e($license->seats);
             $row[] = $license->remaincount();
             $row[] = $license->expiration_date;
+            $row[] = $license->renewal_date;
             $row[] = $license->purchase_date;
             $row[] = ($license->depreciation!='') ? '' : e($license->depreciation->name);
             $row[] = '"' . Helper::formatCurrencyOutput($license->purchase_cost) . '"';

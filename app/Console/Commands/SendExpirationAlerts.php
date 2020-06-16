@@ -8,6 +8,7 @@ use App\Models\Recipients\AlertRecipient;
 use App\Models\Setting;
 use App\Notifications\ExpiringAssetsNotification;
 use App\Notifications\ExpiringLicenseNotification;
+use App\Notifications\RenewalLicenseNotification;
 use Illuminate\Console\Command;
 
 class SendExpirationAlerts extends Command
@@ -55,14 +56,21 @@ class SendExpirationAlerts extends Command
             $assets = Asset::getExpiringWarrantee($threshold);
             if ($assets->count() > 0) {
                 $this->info(trans_choice('mail.assets_warrantee_alert', $assets->count(), ['count' => $assets->count(), 'threshold' => $threshold]));
-                Notification::send($recipients, new ExpiringAssetsNotification($assets, $threshold));
+                \Notification::send($recipients, new ExpiringAssetsNotification($assets, $threshold));
             }
 
             // Expiring licenses
             $licenses = License::getExpiringLicenses($threshold);
             if ($licenses->count() > 0) {
                 $this->info(trans_choice('mail.license_expiring_alert', $licenses->count(), ['count' => $licenses->count(), 'threshold' => $threshold]));
-                Notification::send($recipients, new ExpiringLicenseNotification($licenses, $threshold));
+                \Notification::send($recipients, new ExpiringLicenseNotification($licenses, $threshold));
+            }
+
+            // Upcoming renewal for licenses
+            $licenses_renewal = License::getRenewalLicenses($threshold);
+            if ($licenses_renewal->count() > 0) {
+                $this->info(trans_choice('mail.license_renewal_alert', $licenses_renewal->count(), ['count' => $licenses_renewal->count(), 'threshold' => $threshold]));
+                \Notification::send($recipients, new RenewalLicenseNotification($licenses_renewal, $threshold));
             }
         } else {
             if ($settings->alert_email == '') {

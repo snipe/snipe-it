@@ -32,6 +32,7 @@ class LicensesTransformer
             'purchase_cost' => e($license->purchase_cost),
             'notes' => e($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
+            'renewal_date' => Helper::getFormattedDateObject($license->renewal_date, 'date'),
             'seats' => (int) $license->seats,
             'free_seats_count' => (int) $license->free_seats_count,
             'license_name' =>  e($license->license_name),

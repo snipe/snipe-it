@@ -81,6 +81,7 @@ class LicensesController extends Controller
         $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
         $license->depreciation_id   = $request->input('depreciation_id');
         $license->expiration_date   = $request->input('expiration_date');
+        $license->renewal_date   = $request->input('renewal_date');
         $license->license_email     = $request->input('license_email');
         $license->license_name      = $request->input('license_name');
         $license->maintained        = $request->input('maintained', 0);
@@ -159,6 +160,7 @@ class LicensesController extends Controller
         $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
         $license->depreciation_id   = $request->input('depreciation_id');
         $license->expiration_date   = $request->input('expiration_date');
+        $license->renewal_date   = $request->input('renewal_date');
         $license->license_email     = $request->input('license_email');
         $license->license_name      = $request->input('license_name');
         $license->maintained        = $request->input('maintained',0);

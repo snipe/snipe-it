@@ -28,6 +28,7 @@ class License extends Depreciable
         'deleted_at',
         'purchase_date',
         'expiration_date',
+        'renewal_date',
         'termination_date'
     ];
 
@@ -62,6 +63,7 @@ class License extends Depreciable
         'company_id',
         'depreciation_id',
         'expiration_date',
+        'renewal_date',
         'license_email',
         'license_name', //actually licensed_to
         'maintained',
@@ -97,6 +99,7 @@ class License extends Depreciable
         'purchase_cost', 
         'purchase_date',
         'expiration_date',
+        'renewal_date',
     ];
 
     /**
@@ -232,6 +235,23 @@ class License extends Depreciable
             $value = (new Carbon($value))->toDateString();
         }
         $this->attributes['expiration_date'] = $value;
+    }
+
+    /**
+     * Sets renewal date attribute
+     *
+     * @author M. Mair <office@mjmair.com>
+     * @return mixed
+     */
+    public function setRenewalDateAttribute($value)
+    {
+
+        if ($value == '' || $value == '0000-00-00') {
+            $value = null;
+        } else {
+            $value = (new Carbon($value))->toDateString();
+        }
+        $this->attributes['renewal_date'] = $value;
     }
 
     /**
@@ -632,6 +652,24 @@ class License extends Depreciable
         ->whereRaw(DB::raw('DATE_SUB(`expiration_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) '))
         ->where('expiration_date', '>', date("Y-m-d"))
         ->orderBy('expiration_date', 'ASC')
+        ->get();
+
+    }
+
+    /**
+     * Returns licenses that need to be renewed
+     *
+     * @author M. Mair <office@mjmair.com>
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public static function getRenewalLicenses($days = 60)
+    {
+
+        return License::whereNotNull('renewal_date')
+        ->whereNull('deleted_at')
+        ->whereRaw(DB::raw('DATE_SUB(`renewal_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) '))
+        ->where('renewal_date', '>', date("Y-m-d"))
+        ->orderBy('renewal_date', 'ASC')
         ->get();
 
     }

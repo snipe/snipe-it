@@ -6,6 +6,7 @@ return array(
     'checkin'           => 'Zurücknehmen',
     'create'            => 'Lizenz erstellen',
     'expiration'        => 'Ablaufdatum',
+    'renewal_date'        => 'Vertragsverlängerung',
     'license_key'       => 'Produktschlüssel',
     'maintained'        => 'Verwaltet',
     'name'              => 'Software Name',

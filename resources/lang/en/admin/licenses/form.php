@@ -6,6 +6,7 @@ return array(
     'checkin'           => 'Checkin',
     'create'            => 'Create License',
     'expiration'        => 'Expiration Date',
+    'renewal_date'        => 'Renewal Date',
     'license_key'       => 'Product Key',
     'maintained'        => 'Maintained',
     'name'              => 'Software Name',

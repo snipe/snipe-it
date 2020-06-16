@@ -172,6 +172,19 @@
                 </div>
                 @endif
 
+                @if (isset($license->renewal_date))
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>
+                      {{ trans('admin/licenses/form.renewal_date') }}
+                    </strong>
+                  </div>
+                  <div class="col-md-8">
+                    {{ $license->renewal_date }}
+                  </div>
+                </div>
+                @endif
+
 
                 @if ($license->depreciation)
                 <div class="row">
