@@ -246,17 +246,23 @@ class LicensesController extends Controller
      */
     public function getCheckout($licenceId)
     {
+
         // Check that the license is valid
         if ($license = License::where('id',$licenceId)->first()) {
+
+            $this->authorize('checkout', $license);
 
             // If the license is valid, check that there is an available seat
             if ($license->getAvailSeatsCountAttribute() < 1) {
                 return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
             }
+            return view('licenses/checkout', compact('license'));
         }
 
-        $this->authorize('checkout', $license);
-        return view('licenses/checkout', compact('license'));
+        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
+
+
+
     }
 
 
