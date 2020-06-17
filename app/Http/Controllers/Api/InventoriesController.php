@@ -48,7 +48,7 @@ class InventoriesController extends Controller
                 'inventories.comment',
                 'inventories.location_id',
                 'inventories.created_at',
-                'inventories.deleted_at',
+                'inventories.updated_at',
             ])
             ->withCount([
                 'inventory_items as total',
@@ -107,7 +107,6 @@ class InventoriesController extends Controller
                 'inventories.location_id',
                 'inventories.created_at',
                 'inventories.updated_at',
-                'inventories.deleted_at',
             ])
             ->withCount([
                 'inventory_items as total',
