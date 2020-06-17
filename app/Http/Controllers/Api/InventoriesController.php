@@ -106,6 +106,7 @@ class InventoriesController extends Controller
                 'inventories.comment',
                 'inventories.location_id',
                 'inventories.created_at',
+                'inventories.updated_at',
                 'inventories.deleted_at',
             ])
             ->withCount([

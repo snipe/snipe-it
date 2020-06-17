@@ -51,6 +51,7 @@ class InventoryItemController extends Controller
                 'inventory_items.inventory_id',
                 'inventory_items.asset_id',
                 'inventory_items.created_at',
+                'inventory_items.updated_at',
                 'inventory_items.deleted_at',
             ]);
 

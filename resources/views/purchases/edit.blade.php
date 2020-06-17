@@ -31,12 +31,94 @@
 {{--@endif--}}
 
 @include ('partials.forms.edit.invoice_file')
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table table-responsive">
+            <div id="toolbar">
+                <div class="button"></div>
+                <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#myModal">Добавить</button>
+            </div>
+            <table id="table" class="table table-striped snipe-table"></table>
+        </div><!-- /.table-responsive -->
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 @stop
 
 @if (!$item->id)
 @section('moar_scripts')
+    @include ('partials.bootstrap-table')
 <script nonce="{{ csrf_token() }}">
-
+    var table = $('#table');
+    $(function() {
+        var data = [
+            {
+                'id': 0,
+                'name': 'Item 0',
+                'price': '$0'
+            },
+            {
+                'id': 1,
+                'name': 'Item 1',
+                'price': '$1'
+            },
+            {
+                'id': 2,
+                'name': 'Item 2',
+                'price': '$2'
+            },
+            {
+                'id': 3,
+                'name': 'Item 3',
+                'price': '$3'
+            },
+            {
+                'id': 4,
+                'name': 'Item 4',
+                'price': '$4'
+            },
+            {
+                'id': 5,
+                'name': 'Item 5',
+                'price': '$5'
+            }
+        ];
+        table.bootstrapTable('destroy').bootstrapTable({
+            data: data,
+            search:true,
+            toolbar:'#toolbar',
+            columns: [{
+                field: 'id',
+                name:'id',
+                align: 'center',
+                valign: 'middle'
+            },{
+                field: 'name',
+                name: 'name',
+                align: 'center',
+                valign: 'middle'
+            }]
+        })
+    });
 </script>
 @stop
 @endif
