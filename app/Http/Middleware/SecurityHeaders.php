@@ -24,11 +24,19 @@ class SecurityHeaders
     {
         $this->removeUnwantedHeaders($this->unwantedHeaderList);
         $response = $next($request);
-        
-        $response->headers->set('Referrer-Policy', config('app.referrer_policy'));
+
         $response->headers->set('X-Content-Type-Options', 'nosniff');
         $response->headers->set('X-XSS-Protection', '1; mode=block');
         $response->headers->set('Feature-Policy', 'self');
+
+        // Defaults to same-origin if REFERRER_POLICY is not set in the .env
+        $response->headers->set('Referrer-Policy', config('app.referrer_policy'));
+
+        // The .env var ALLOW_IFRAMING  defaults to false (which disallows IFRAMING)
+        // if not present, but some unique cases require this to be enabled.
+        // For example, some IT depts have IFRAMED Snipe-IT into their IT portal
+        // for convenience so while it is normally disallowed, there is
+        // an override that exists.
 
         if (config('app.allow_iframing') == false) {
             $response->headers->set('X-Frame-Options', 'DENY');
@@ -46,6 +54,7 @@ class SecurityHeaders
 
         // We have to exclude debug mode here because debugbar pulls from a CDN or two
         // and it will break things.
+
         if ((config('app.debug')!='true')  || (config('app.enable_csp')=='true')) {
             $policy[] = "default-src 'self'";
             $policy[] = "style-src 'self' 'unsafe-inline'";
