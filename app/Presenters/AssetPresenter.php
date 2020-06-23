@@ -269,10 +269,10 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "switchable" => true,
                 "title" => $field->name,
-                'formatter' => 'customFieldsFormatter',
-                'escape' => true,
-                'class' => ($field->field_encrypted=='1') ? 'css-padlock' : '',
-                'visible' => true,
+                "formatter"=> 'customFieldsFormatter',
+                "escape" => true,
+                "class" => ($field->field_encrypted=='1') ? 'css-padlock' : '',
+                "visible" => true,
             ];
 
         }
