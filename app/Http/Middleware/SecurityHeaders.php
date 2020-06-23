@@ -14,9 +14,7 @@ class SecurityHeaders
      * @return mixed
      */
 
-    // Enumerate headers which you do not want in your application's responses.
-    // Great starting point would be to go check out @Scott_Helme's:
-    // https://securityheaders.com/
+    // See https://securityheaders.com/
     private $unwantedHeaderList = [
         'X-Powered-By',
         'Server',
