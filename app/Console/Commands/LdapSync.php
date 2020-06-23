@@ -7,6 +7,9 @@ use App\Models\Setting;
 use App\Models\Ldap;
 use App\Models\User;
 use App\Models\Location;
+use App\Helpers\Helber;
+use Config;
+use Input;
 use Log;
 
 class LdapSync extends Command
@@ -51,7 +54,10 @@ class LdapSync extends Command
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
-
+        
+        $permissions = config('permissions');
+		$permissions_array = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
+        
         try {
             $ldapconn = Ldap::connectToLdap();
             Ldap::bindAdminToLdap($ldapconn);
@@ -177,6 +183,7 @@ class LdapSync extends Command
                     $user->password = $pass;
                     $user->activated = 0;
                     $item["createorupdate"] = 'created';
+                    $user->permissions =  json_encode($permissions_array);
                 }
 
                 $user->first_name = $item["firstname"];
