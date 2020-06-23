@@ -62,7 +62,6 @@ class SecurityHeaders
         $feature_policy[] = "picture-in-picture 'none'";
         $feature_policy[] = "publickey-credentials 'none'";
         $feature_policy[] = "sync-xhr 'none'";
-        $feature_policy[] = "unoptimized-images 'none'";
         $feature_policy[] = "unsized-media 'none'";
         $feature_policy[] = "usb 'none'";
         $feature_policy[] = "vibrate 'none'";
