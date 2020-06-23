@@ -7,7 +7,7 @@ use App\Models\Setting;
 use App\Models\Ldap;
 use App\Models\User;
 use App\Models\Location;
-use App\Helpers\Helber;
+use App\Helpers\Helper;
 use Config;
 use Input;
 use Log;
