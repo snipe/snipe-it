@@ -51,32 +51,6 @@ class SyncBitrix extends Command
         /** @var \GuzzleHttp\Client $client */
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->request('GET', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/legis_crm.object.list/?select%5B0%5D=UF_*&select%5B1%5D=*');
-        $response = $response->getBody()->getContents();
-        $bitrix_objects = json_decode($response, true);
-        $bitrix_objects = $bitrix_objects["result"];
-        $count = 0 ;
-        foreach ($bitrix_objects as &$value) {
-            if($value["TABEL_ID"] && $value["UF_TYPE"] == 455 && $value["DELETED"] != 1){
-                $count++;
-
-                $bitrix_user =  $value["ASSIGNED_BY_ID"];
-                /** @var User $sklad_user */
-                $sklad_user = User::where('bitrix_id', $bitrix_user)->first();
-                $location = Location::updateOrCreate(
-                    ['bitrix_id' =>  $value["ID"]],
-                    [
-                        'name' => $value["NAME"],
-                        'city' => $value["ADDRESS_CITY"],
-                        'address' => $value["ADDRESS"],
-                        'address2' => $value["ADDRESS_2"],
-                    ]
-                );
-                $location->manager_id = $sklad_user->id;
-                $location->save();
-            }
-        }
-        print("Синхрониизтрованно ".$count." объектов Битрикс\n");
 
         /**
          * Начинаем с нуля или с какого то предыдущего шага
@@ -113,6 +87,32 @@ class SyncBitrix extends Command
         }
         print("Синхрониизтрованно ".count($bitrix_users_final)." пользователей Битрикс\n");
 
+        $response = $client->request('GET', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/legis_crm.object.list/?select%5B0%5D=UF_*&select%5B1%5D=*');
+        $response = $response->getBody()->getContents();
+        $bitrix_objects = json_decode($response, true);
+        $bitrix_objects = $bitrix_objects["result"];
+        $count = 0 ;
+        foreach ($bitrix_objects as &$value) {
+            if($value["TABEL_ID"] && $value["UF_TYPE"] == 455 && $value["DELETED"] != 1){
+                $count++;
+
+                $bitrix_user =  $value["ASSIGNED_BY_ID"];
+                /** @var User $sklad_user */
+                $sklad_user = User::where('bitrix_id', $bitrix_user)->first();
+                $location = Location::updateOrCreate(
+                    ['bitrix_id' =>  $value["ID"]],
+                    [
+                        'name' => $value["NAME"],
+                        'city' => $value["ADDRESS_CITY"],
+                        'address' => $value["ADDRESS"],
+                        'address2' => $value["ADDRESS_2"],
+                    ]
+                );
+                $location->manager_id = $sklad_user->id;
+                $location->save();
+            }
+        }
+        print("Синхрониизтрованно ".$count." объектов Битрикс\n");
 
         $response = $client->request('GET', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/crm.company.list?FILTER[COMPANY_TYPE]=1');
         $response = $response->getBody()->getContents();

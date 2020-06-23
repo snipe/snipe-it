@@ -16,5 +16,4 @@
             {!! $errors->first('purchase_cost', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
-
 </div>

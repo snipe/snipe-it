@@ -35,6 +35,7 @@ class PurchasesTransformer
                 'id' => (int) $purchase->supplier->id,
                 'name'=> e($purchase->supplier->name)
             ]  : null,
+            'assets_count' => (int) $purchase->assets_count,
             'comment' =>  ($purchase->comment) ? e($purchase->comment) : null,
             'created_at' => Helper::getFormattedDateObject($purchase->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($purchase->updated_at, 'datetime'),

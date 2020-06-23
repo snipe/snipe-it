@@ -36,7 +36,7 @@ class PurchasesController extends Controller
     {
 //        $this->authorize('view', User::class);
 
-        $purchases = Purchase::with('supplier')
+        $purchases = Purchase::with('supplier','assets')
             ->select([
                 'purchases.id',
                 'purchases.invoice_number',
@@ -48,6 +48,8 @@ class PurchasesController extends Controller
                 'purchases.comment',
                 'purchases.created_at',
                 'purchases.deleted_at',
+            ]) ->withCount([
+                'assets as assets_count',
             ])
         ;
 

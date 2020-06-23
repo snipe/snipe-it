@@ -36,6 +36,12 @@ class PurchasePresenter extends Presenter
                 "visible" => false,
                 "formatter" => "suppliersLinkObjFormatter"
             ],[
+                "field" => "assets_count",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => "Активов",
+                "visible" => true,
+            ],[
                 "field" => "invoice_file",
                 "searchable" => true,
                 "sortable" => true,
