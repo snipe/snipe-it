@@ -57,11 +57,11 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         width: 100%;
     }
     .qr_text {
-        width: 100%;
-        height: auto;
+        width: {{ $settings->labels_width }}in;
+        height: {{ $settings->labels_height }}in;
         padding-top: {{$settings->labels_display_bgutter}}in;
         font-family: arial, helvetica, sans-serif;
-        font-size: x-small;
+        font-size: {{$settings->labels_fontsize}};
         padding-right: .01in;
         overflow: hidden !important;
         display: inline;
