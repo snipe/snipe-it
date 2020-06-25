@@ -183,13 +183,11 @@ $(document).ready(function () {
     $.fn.bootstrapDP = datepicker;
     $('.datepicker').datepicker();
 
-
     // Crazy select2 rich dropdowns with images!
     $('.js-data-ajax').each( function (i,item) {
         var link = $(item);
         var endpoint = link.data("endpoint");
         var select = link.data("select");
-
         link.select2({
 
             /**

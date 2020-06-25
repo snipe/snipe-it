@@ -31,10 +31,14 @@ class PurchasesTransformer
             'bitrix_id' =>  ($purchase->bitrix_id) ? e($purchase->bitrix_id) : null,
             'final_price' =>  ($purchase->final_price) ? e($purchase->final_price) : null,
             'paid' =>  ($purchase->paid) ? e($purchase->paid) : null,
+            'currency' =>  ($purchase->currency) ? e($purchase->currency) : null,
             'supplier' => ($purchase->supplier) ? [
                 'id' => (int) $purchase->supplier->id,
                 'name'=> e($purchase->supplier->name)
             ]  : null,
+            'legal_person' => ($purchase->legal_person) ? e($purchase->legal_person->name) : null,
+            'invoice_type' => ($purchase->invoice_type) ? e($purchase->invoice_type->name) : null,
+
             'assets_count' => (int) $purchase->assets_count,
             'comment' =>  ($purchase->comment) ? e($purchase->comment) : null,
             'created_at' => Helper::getFormattedDateObject($purchase->created_at, 'datetime'),

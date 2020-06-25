@@ -78,8 +78,23 @@ class PurchasesController extends Controller
         $purchase->invoice_number      = $request->input('invoice_number');
         $purchase->final_price         = $request->input('final_price');
         $purchase->supplier_id         = $request->input('supplier_id');
+        $purchase->legal_person_id     = $request->input('legal_person_id');
+        $purchase->invoice_type_id     = $request->input('invoice_type_id');
         $purchase->comment             = $request->input('comment');
-        $assets             = json_decode($request->input('assets'), true);
+        $currency_id = $request->input('currency_id');
+
+        switch ($currency_id) {
+            case 341:
+                $purchase->currency = "руб";
+                break;
+            case 342:
+                $purchase->currency = "usd";
+                break;
+            case 343:
+                $purchase->currency = "eur";
+                break;
+        }
+        $assets = json_decode($request->input('assets'), true);
         $purchase = $request->handleFile($purchase, public_path().'/uploads/purchases');
         $status = Statuslabel::updateOrCreate(
             ['name' =>"В закупке"],
@@ -125,19 +140,54 @@ class PurchasesController extends Controller
                     }
                 }
             }
+            $data = "";
 
+            $file_data = file_get_contents(public_path().'/uploads/purchases/'.$purchase->invoice_file);
+
+// Encode the image string data into base64
+            $file_data_base64 = base64_encode($file_data);
+
+            /** @var \GuzzleHttp\Client $client */
+            $client = new \GuzzleHttp\Client();
+            $params = [
+                'headers' => [
+                    'Content-Type' => 'multipart/form-data',
+                ],
+                'form_params' => [
+                    "IBLOCK_TYPE_ID" => "lists",
+                    "IBLOCK_ID" => 52,
+                    "ELEMENT_CODE" =>"warehouse_buy_".$purchase->id,
+                    "FIELDS[NAME]" => $purchase->invoice_number,
+                    "FIELDS[PROPERTY_758]" => $purchase->invoice_type->bitrix_id, // тип платежа
+                    "FIELDS[PROPERTY_141]" => $purchase->comment , //описание
+                    "FIELDS[PROPERTY_142]" => $purchase->final_price , //сумма
+                    "FIELDS[PROPERTY_156]" => $currency_id , //валюта
+                    "FIELDS[PROPERTY_790]" => $purchase->legal_person->bitrix_id , //Юр. лицо
+                    "FIELDS[PROPERTY_158]" => $purchase->supplier->name , //Поставщик название
+                    "FIELDS[PROPERTY_824]" => $purchase->supplier->bitrix_id , //Поставщик bitrix_id
+                    "FIELDS[PROPERTY_1119]" => $data , // что покупаем
+                    "FIELDS[PROPERTY_1120]" => $purchase->id , //id заказа
+                    "FIELDS[PROPERTY_143][0]" => $purchase->invoice_file , //файл имя
+                    "FIELDS[PROPERTY_143][1]" => $file_data_base64 , //файл base64
+
+                    //2. На боевом есть еще одно поле PROPERTY_1120=Y - надо передать любое значение, означает что создана из snipe_it
+                ]
+            ];
+            $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
+            $response = $response->getBody()->getContents();
+            $bitrix_result = json_decode($response, true);
+            $bitrix_id = $bitrix_result["result"];
+            $purchase->bitrix_id = $bitrix_id;
+            $purchase->save();
             return redirect()->route("purchases.index")->with('success', trans('admin/locations/message.create.success'));
         }
         return redirect()->back()->withInput()->withErrors($purchase->getErrors());
     }
 
 
-    public function sendInvoice(Purchase $purchase){
-        /** @var \GuzzleHttp\Client $client */
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/?select%5B0%5D=UF_*&select%5B1%5D=*');
-        $response = $response->getBody()->getContents();
+    public function sendInvoice(Purchase $purchase, $currency_id, $data){
     }
+
     /**
      * Makes a form view to edit location information.
      *

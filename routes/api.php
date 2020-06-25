@@ -831,4 +831,26 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
             'parameters' => ['purchase' => 'purchase_id']
         ]
     ); // Purchases resource
+
+
+    /*--- InvoiceTypes API ---*/
+
+    Route::group(['prefix' => 'invoice_types'], function () {
+
+        Route::get( 'selectlist',  [
+            'as' => 'invoice_types.selectlist',
+            'uses' => 'InvoiceTypesController@selectlist'
+        ]);
+    });
+
+    /*--- LegalPersons API ---*/
+
+    Route::group(['prefix' => 'legal_persons'], function () {
+
+        Route::get( 'selectlist',  [
+            'as' => 'legal_persons.selectlist',
+            'uses' => 'LegalPersonsController@selectlist'
+        ]);
+    });
+
 });

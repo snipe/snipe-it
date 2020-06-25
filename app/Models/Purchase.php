@@ -47,6 +47,7 @@ class Purchase extends SnipeModel
         'paid',
         'supplier_id',
         'comment',
+        "currency"
     ];
 
     use Searchable;
@@ -81,6 +82,16 @@ class Purchase extends SnipeModel
     public function supplier()
     {
         return $this->belongsTo('\App\Models\Supplier');
+    }
+
+    public function invoice_type()
+    {
+        return $this->belongsTo('\App\Models\InvoiceType');
+    }
+
+    public function legal_person()
+    {
+        return $this->belongsTo('\App\Models\LegalPerson');
     }
 
 

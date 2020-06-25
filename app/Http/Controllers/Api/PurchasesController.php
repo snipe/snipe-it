@@ -36,7 +36,7 @@ class PurchasesController extends Controller
     {
 //        $this->authorize('view', User::class);
 
-        $purchases = Purchase::with('supplier','assets')
+        $purchases = Purchase::with('supplier','assets','invoice_type','legal_person')
             ->select([
                 'purchases.id',
                 'purchases.invoice_number',
@@ -45,7 +45,10 @@ class PurchasesController extends Controller
                 'purchases.final_price',
                 'purchases.paid',
                 'purchases.supplier_id',
+                'purchases.legal_person_id',
+                'purchases.invoice_type_id',
                 'purchases.comment',
+                'purchases.currency',
                 'purchases.created_at',
                 'purchases.deleted_at',
             ]) ->withCount([
@@ -57,8 +60,10 @@ class PurchasesController extends Controller
             $purchases = $purchases->TextSearch($request->input('search'));
         }
 
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-
+//        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+//        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+//
+//        $purchases->orderBy($sort, $order);
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($purchases) && ($request->get('offset') > $purchases->count())) ? $purchases->count() : $request->get('offset', 0);

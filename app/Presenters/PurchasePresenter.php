@@ -25,7 +25,7 @@ class PurchasePresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => "Номер счета",
+                "title" => "Название",
                 "visible" => true,
                 "formatter" => "purchasesLinkFormatter"
             ],[
@@ -35,6 +35,20 @@ class PurchasePresenter extends Presenter
                 "title" => trans('general.supplier'),
                 "visible" => false,
                 "formatter" => "suppliersLinkObjFormatter"
+            ],[
+                "field" => "invoice_type",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => "Тип счета",
+                "visible" => false,
+               // "formatter" => "suppliersLinkObjFormatter"
+            ],[
+                "field" => "legal_person",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => "Юр. лицо",
+                "visible" => false,
+              //  "formatter" => "suppliersLinkObjFormatter"
             ],[
                 "field" => "assets_count",
                 "searchable" => true,
@@ -62,6 +76,14 @@ class PurchasePresenter extends Presenter
                 "sortable" => true,
                 "switchable" => true,
                 "title" => "Цена",
+                "visible" => true,
+//                "formatter" => 'companiesLinkFormatter',
+            ],[
+                "field" => "currency",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => "Валюта",
                 "visible" => true,
 //                "formatter" => 'companiesLinkFormatter',
             ],[

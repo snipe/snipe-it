@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use App\Models\CustomField;
 use App\Models\Supplier;
+use App\Models\LegalPerson;
+use App\Models\InvoiceType;
 use Illuminate\Console\Command;
 use App\Models\Asset;
 use App\Models\Location;
@@ -135,6 +137,44 @@ class SyncBitrix extends Command
 
         }
         print("Синхрониизтрованно ".$count." поставщиков \n");
+
+
+        $response = $client->request('GET', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.get?IBLOCK_TYPE_ID=lists&IBLOCK_ID=77');
+        $response = $response->getBody()->getContents();
+        $bitrix_legal_persons = json_decode($response, true);
+        $bitrix_legal_persons = $bitrix_legal_persons["result"];
+        $count = 0 ;
+        foreach ($bitrix_legal_persons as &$value) {
+            $count++;
+            $legal_person = LegalPerson::updateOrCreate(
+
+                ['bitrix_id' =>  $value["ID"]],
+                [
+                    'name' => $value["NAME"],
+                ]
+            );
+
+        }
+        print("Синхрониизтрованно ".$count." юр. лиц \n");
+
+
+        $response = $client->request('GET', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.get?IBLOCK_TYPE_ID=lists&IBLOCK_ID=166');
+        $response = $response->getBody()->getContents();
+        $bitrix_invoice_types = json_decode($response, true);
+        $bitrix_invoice_types = $bitrix_invoice_types["result"];
+        $count = 0 ;
+        foreach ($bitrix_invoice_types as &$value) {
+            $count++;
+            $invoice_type = InvoiceType::updateOrCreate(
+
+                ['bitrix_id' =>  $value["ID"]],
+                [
+                    'name' => $value["NAME"],
+                ]
+            );
+
+        }
+        print("Синхрониизтрованно ".$count." типов закупок \n");
 
         if (($this->option('output')=='all') || ($this->option('output')=='info')) {
             foreach ($output['info'] as $key => $output_text) {

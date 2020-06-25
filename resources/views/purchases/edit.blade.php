@@ -7,13 +7,20 @@
 {{-- Page content --}}
 @section('inputFields')
 
-@include ('partials.forms.edit.invoice_number', ['translated_name' => "Номер счета"])
+@include ('partials.forms.edit.invoice_number', ['translated_name' => "Название"])
 
 @include ('partials.forms.edit.final_price', ['translated_name' => "Цена"])
+
+@include ('partials.forms.edit.currency-select', ['translated_name' => "Валюта", 'fieldname' => 'currency_id'])
 
 @include ('partials.forms.edit.comment', ['translated_name' => "Комментарий"])
 
 @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
+
+@include ('partials.forms.edit.invoice-type-select', ['translated_name' => "Тип счета", 'fieldname' => 'invoice_type_id'])
+
+@include ('partials.forms.edit.legal_person-select', ['translated_name' => "Юр. лицо", 'fieldname' => 'legal_person_id'])
+
 
 @include ('partials.forms.edit.invoice_file')
 <input type="hidden" id="assets" name="assets" value="">
@@ -70,6 +77,11 @@
 <script nonce="{{ csrf_token() }}">
     var table = $('#table');
     $(function() {
+        $('.js-data-no-ajax').each( function (i,item) {
+            var link = $(item);
+            console.log(link);
+            link.select2();
+        });
         var data = [];
         table.bootstrapTable('destroy').bootstrapTable({
             data: data,
