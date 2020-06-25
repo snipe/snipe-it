@@ -469,6 +469,9 @@ Form::macro('username_format', function ($name = "username_format", $selected = 
         'filastname' => trans('general.filastname_format'),
         'lastnamefirstinitial' => trans('general.lastnamefirstinitial_format'),
         'firstname_lastname' => trans('general.firstname_lastname_underscore_format'),
+        'firstinitial.lastname' => trans('general.firstinitial.lastname'),
+        'lastname_firstinitial' => trans('general.lastname_firstinitial'),
+        'firstnamelastname' => trans('general.firstnamelastname'),
 
     );
 
