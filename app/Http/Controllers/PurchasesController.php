@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Models\Purchase;
 use App\Models\Location;
 use App\Models\Statuslabel;
+use App\Models\User;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 
@@ -105,20 +106,23 @@ class PurchasesController extends Controller
             ]
         );
 
-
         if ($purchase->save()) {
+            $asset_tag = Asset::autoincrement_asset();
+            $data_list = "";
             foreach ($assets as &$value) {
+                $model= $value["model"];
                 $model_id = $value["model_id"];
                 $purchase_cost = $value["purchase_cost"];
                 $nds = $value["nds"];
                 $warranty = $value["warranty"];
                 $quantity = $value["quantity"];
+                $data_list .= "[".$value["id"]."] ".$model." - Количество: ".$quantity." Цена: ".$purchase_cost."\n";
+
                 $dt = new DateTime();
-                $id = Asset::autoincrement_asset();
                 for ($i = 1; $i <= $quantity; $i++) {
                     $asset = new Asset();
                     $asset->model()->associate(AssetModel::find((int) $model_id));
-                    $asset->asset_tag               =  $id;
+                    $asset->asset_tag               = $asset_tag;
                     $asset->model_id                = $model_id;
                     $asset->order_number            = $purchase->invoice_number;
                     $asset->archived                = '0';
@@ -132,21 +136,29 @@ class PurchasesController extends Controller
                     $asset->supplier_id             = $purchase->supplier_id;
                     $asset->purchase_id             = $purchase->id;
                     $asset->user_id                 = Auth::id();
+                    $settings = \App\Models\Setting::getSettings();
                     if($asset->save()){
-                        $id++;
+                        if ($settings->zerofill_count > 0) {
+                            $asset_tag_digits = preg_replace('/\D/', '', $asset_tag);
+                            $asset_tag = preg_replace('/^0*/', '', $asset_tag_digits);
+                            $asset_tag++;
+                            $asset_tag =  $settings->auto_increment_prefix.Asset::zerofill($asset_tag, $settings->zerofill_count);
+                        }else{
+                            $asset_tag = $settings->auto_increment_prefix.$asset_tag;
+                        }
                     }else{
-                        dd($asset);
                         dd($asset->getErrors());
                     }
                 }
             }
-            $data = "";
 
             $file_data = file_get_contents(public_path().'/uploads/purchases/'.$purchase->invoice_file);
 
 // Encode the image string data into base64
             $file_data_base64 = base64_encode($file_data);
 
+            $user = User::find($asset->user_id);
+            dump($data_list);
             /** @var \GuzzleHttp\Client $client */
             $client = new \GuzzleHttp\Client();
             $params = [
@@ -158,6 +170,7 @@ class PurchasesController extends Controller
                     "IBLOCK_ID" => 52,
                     "ELEMENT_CODE" =>"warehouse_buy_".$purchase->id,
                     "FIELDS[NAME]" => $purchase->invoice_number,
+                    "FIELDS[CREATED_BY]" => $user->bitrix_id,
                     "FIELDS[PROPERTY_758]" => $purchase->invoice_type->bitrix_id, // тип платежа
                     "FIELDS[PROPERTY_141]" => $purchase->comment , //описание
                     "FIELDS[PROPERTY_142]" => $purchase->final_price , //сумма
@@ -165,15 +178,20 @@ class PurchasesController extends Controller
                     "FIELDS[PROPERTY_790]" => $purchase->legal_person->bitrix_id , //Юр. лицо
                     "FIELDS[PROPERTY_158]" => $purchase->supplier->name , //Поставщик название
                     "FIELDS[PROPERTY_824]" => $purchase->supplier->bitrix_id , //Поставщик bitrix_id
-                    "FIELDS[PROPERTY_1119]" => $data , // что покупаем
-                    "FIELDS[PROPERTY_1120]" => $purchase->id , //id заказа
                     "FIELDS[PROPERTY_143][0]" => $purchase->invoice_file , //файл имя
                     "FIELDS[PROPERTY_143][1]" => $file_data_base64 , //файл base64
+//                    "FIELDS[PROPERTY_1122]" => $data_list , // что покупаем
+//                    "FIELDS[PROPERTY_1123]" => $purchase->id."" , //id заказа
+//                    "FIELDS[PROPERTY_1121]" => "1" , //покупка из системы
+                    "FIELDS[PROPERTY_1127]" => $data_list , // что покупаем
+                    "FIELDS[PROPERTY_1128]" => $purchase->id."" , //id заказа
+                    "FIELDS[PROPERTY_1120]" => "1" , //покупка из системы
 
                     //2. На боевом есть еще одно поле PROPERTY_1120=Y - надо передать любое значение, означает что создана из snipe_it
                 ]
             ];
-            $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
+//            $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
+            $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/',$params);
             $response = $response->getBody()->getContents();
             $bitrix_result = json_decode($response, true);
             $bitrix_id = $bitrix_result["result"];

@@ -19,6 +19,13 @@ class Purchase extends SnipeModel
     protected $table = 'purchases';
     protected $rules = array(
         'invoice_number'        => 'required|min:1|max:255|unique_undeleted',
+        'final_price'        => 'required',
+        'supplier_id'        => 'required',
+        'comment'        => 'required',
+        'currency'        => 'required',
+        'legal_person_id'=> 'required',
+        'invoice_type_id'=> 'required',
+        'invoice_file'=> 'required',
         'bitrix_id'  => 'min:1|max:10|nullable'
     );
 
@@ -46,6 +53,8 @@ class Purchase extends SnipeModel
         'final_price',
         'paid',
         'supplier_id',
+        'legal_person_id',
+        'invoice_type_id',
         'comment',
         "currency"
     ];

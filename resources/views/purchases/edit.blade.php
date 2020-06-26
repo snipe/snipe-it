@@ -32,6 +32,7 @@
                 <div class="button"></div>
                 <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#myModal">Добавить</button>
             </div>
+            <p class="activ text-center text-bold text-danger hidden">Заполните хотябы один актив</p>
             <table id="table" class="table table-striped snipe-table"></table>
         </div><!-- /.table-responsive -->
     </div>
@@ -193,10 +194,14 @@
         })
         $("#create-form").on("submit", function(){
             var data = table.bootstrapTable('getData');
-            $('#assets').val(JSON.stringify(data));
-
-            console.log(JSON.stringify(data));
-            return true;
+            if (data.length>0){
+                $('#assets').val(JSON.stringify(data));
+                $('.activ').addClass("hidden");
+                return true;
+            }else{
+                $('.activ').removeClass("hidden");
+                return false;
+            }
         })
     });
 </script>

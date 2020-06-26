@@ -4,7 +4,7 @@
 
     <div class="col-md-7{{  ((isset($required)) && ($required=='true')) ? ' required' : '' }}">
         <select class="js-data-ajax" data-endpoint="legal_persons" data-placeholder="Выберите юр. лицо" name="{{ $fieldname }}" style="width: 100%" id="legal_person_select" aria-label="{{ $fieldname }}">
-            @if ($legal_person = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+            @if ($legal_person_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $legal_person_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\LegalPerson::find($legal_person_id)) ? \App\Models\LegalPerson::find($legal_person_id)->name : '' }}
                 </option>
