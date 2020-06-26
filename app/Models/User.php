@@ -237,7 +237,7 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
      */
     public function userlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'target_id')->orderBy('created_at', 'DESC')->withTrashed();
+        return $this->hasMany('\App\Models\Actionlog', 'target_id')->where('target_type', '=', 'App\Models\User')->orderBy('created_at', 'DESC')->withTrashed();
     }
 
     /**
