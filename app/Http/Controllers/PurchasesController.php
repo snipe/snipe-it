@@ -158,7 +158,6 @@ class PurchasesController extends Controller
             $file_data_base64 = base64_encode($file_data);
 
             $user = User::find($asset->user_id);
-            dump($data_list);
             /** @var \GuzzleHttp\Client $client */
             $client = new \GuzzleHttp\Client();
             $params = [
