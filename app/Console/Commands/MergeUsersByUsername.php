@@ -4,10 +4,6 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\User;
-use App\Models\Actionlog;
-use App\Models\Asset;
-use App\Models\LicenseSeat;
-use App\Models\Consumable;
 use Carbon\Carbon;
 
 
