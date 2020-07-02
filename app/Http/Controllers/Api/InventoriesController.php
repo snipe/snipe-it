@@ -61,8 +61,9 @@ class InventoriesController extends Controller
         if ($request->filled('location_id')) {
             $inventories->where('inventories.location_id', '=', $request->input('location_id'));
         }
+
         if ($request->filled('bitrix_id')) {
-            $location = Location::where('bitrix_id', $request->filled('bitrix_id'))->first();
+            $location = Location::where('bitrix_id', $request->input('bitrix_id'))->first();
             if($location){
                 $inventories->where('inventories.location_id', '=', $location->id);
             } else{
