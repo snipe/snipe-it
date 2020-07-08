@@ -9,7 +9,7 @@
 {{-- Page content --}}
 @section('inputFields')
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/locations/table.name')])
-
+@include ('partials.forms.edit.bitrix_id')
 <!-- parent -->
 @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/locations/table.parent'), 'fieldname' => 'parent_id'])
 

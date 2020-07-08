@@ -86,6 +86,7 @@ class LocationsController extends Controller
         $location->zip              = $request->input('zip');
         $location->ldap_ou          = $request->input('ldap_ou');
         $location->manager_id       = $request->input('manager_id');
+        $location->bitrix_id        = $request->input('bitrix_id');
         $location->user_id          = Auth::id();
         $location->notes            = $request->input('notes');
 
@@ -154,6 +155,7 @@ class LocationsController extends Controller
         $location->zip          = $request->input('zip');
         $location->ldap_ou      = $request->input('ldap_ou');
         $location->manager_id   = $request->input('manager_id');
+        $location->bitrix_id        = $request->input('bitrix_id');
         $location->notes            = $request->input('notes');
         $location = $request->handleImages($location,600, public_path().'/uploads/locations');
 
