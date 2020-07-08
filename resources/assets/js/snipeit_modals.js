@@ -44,6 +44,7 @@ $(function () {
         // Initialize the ajaxy select2 with images.
         // This is a copy/paste of the code from snipeit.js, would be great to only have this in one place.
         $('.js-data-ajax').each( function (i,item) {
+            console.log("js-data-ajax createModal")
             var link = $(item);
             var endpoint = link.data("endpoint");
             var select = link.data("select");

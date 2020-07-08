@@ -52,8 +52,8 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form>
-                            @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'required' => 'true'])
+                        <form class="form-horizontal">
+                            @include ('partials.forms.edit.model-select2', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'required' => 'true'])
                             <p class="duble text-center text-bold text-danger hidden">Такая модель уже есть</p>
                             @include ('partials.forms.edit.purchase_cost')
                             @include ('partials.forms.edit.nds')
@@ -148,7 +148,99 @@
             }]
         });
         var count = 0;
-        $('#modalAdd').click(function(e){
+        // $('#myModal').on('shown.bs.modal', function () {
+        //     console.log('shown.bs.modal');
+        // });
+
+        //handle modal-add-interstitial calls
+        var model, select;
+
+    $('#myModal').on("show.bs.modal", function (event) {
+        // Crazy select2 rich dropdowns with images!
+        var link = $(event.relatedTarget);
+        model = link.data("dependency");
+        select = link.data("select");
+
+        $('#myModal').find('select.select2').select2();
+        $('.js-data-ajax2').each( function (i,item) {
+            console.log("js-data-ajax createModal")
+            var link = $(item);
+            var endpoint = link.data("endpoint");
+            var select = link.data("select");
+
+            console.log(link)
+            console.log(endpoint)
+            console.log(select)
+
+            link.select2({
+                dropdownParent: $("#myModal"),
+                ajax: {
+
+                    // the baseUrl includes a trailing slash
+                    url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                    dataType: 'json',
+                    delay: 250,
+                    headers: {
+                        "X-Requested-With": 'XMLHttpRequest',
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: function (params) {
+                        var data = {
+                            search: params.term,
+                            page: params.page || 1,
+                            assetStatusType: link.data("asset-status-type"),
+                        };
+                        return data;
+                    },
+                    processResults: function (data, params) {
+                        console.log(data)
+                        params.page = params.page || 1;
+
+                        var answer =  {
+                            results: data.items,
+                            pagination: {
+                                more: "true" //(params.page  < data.page_count)
+                            }
+                        };
+
+                        return answer;
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                templateResult: formatDatalist,
+                templateSelection: formatDataSelection
+            });
+        });
+
+    });
+    function formatDatalist (datalist) {
+        var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+        if (datalist.loading) {
+            return loading_markup;
+        }
+
+        var markup = "<div class='clearfix'>" ;
+        markup +="<div class='pull-left' style='padding-right: 10px;'>";
+        if (datalist.image) {
+            markup += "<div style='width: 30px;'><img src='" + datalist.image + "' alt='"+ datalist.tex + "' style='max-height: 20px; max-width: 30px;'></div>";
+        } else {
+            markup += "<div style='height: 20px; width: 30px;'></div>";
+        }
+
+        markup += "</div><div>" + datalist.text + "</div>";
+        markup += "</div>";
+        return markup;
+    }
+
+    function formatDataSelection (datalist) {
+        return datalist.text.replace(/>/g, '&gt;')
+            .replace(/</g, '&lt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    $('#modalAdd').click(function(e){
             e.preventDefault();
             var model_id = $('select[name=model_id] option').filter(':selected').val();
             var model_name = $('select[name=model_id] option').filter(':selected').text();

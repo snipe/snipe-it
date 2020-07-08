@@ -185,6 +185,7 @@ $(document).ready(function () {
 
     // Crazy select2 rich dropdowns with images!
     $('.js-data-ajax').each( function (i,item) {
+        console.log("js-data-ajax")
         var link = $(item);
         var endpoint = link.data("endpoint");
         var select = link.data("select");
