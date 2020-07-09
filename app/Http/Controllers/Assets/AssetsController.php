@@ -186,7 +186,7 @@ class AssetsController extends Controller
                 }
 
                 if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')), $location);
+                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', e($request->get('name')), $location);
                 }
 
                 $success = true;
@@ -295,6 +295,7 @@ class AssetsController extends Controller
         $asset->purchase_cost = Helper::ParseFloat($request->input('purchase_cost', null));
         $asset->purchase_date = $request->input('purchase_date', null);
         $asset->supplier_id = $request->input('supplier_id', null);
+        $asset->expected_checkin = $request->input('expected_checkin', null);
 
         // If the box isn't checked, it's not in the request at all.
         $asset->requestable = $request->filled('requestable');
