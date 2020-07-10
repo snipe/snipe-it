@@ -75,11 +75,8 @@ class CheckoutLicenseToAllUsers extends Command
             }
 
             // Get the seat ID
-            $next = $license->freeSeat();
-            if (!$licenseSeat = LicenseSeat::where('id', '=', $next->id)->first()) {
-                $this->error('ERROR: No available seats');
-                return false;
-            }
+            $licenseSeat = $license->freeSeat();
+
 
             // Update the seat with checkout info,
            $licenseSeat->assigned_to = $user->id;
