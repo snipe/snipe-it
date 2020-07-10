@@ -51,11 +51,12 @@ class CheckoutLicenseToAllUsers extends Command
         }
 
 
-        if (!$license = License::where('id','=',$license_id)->first()) {
+        if (!$license = License::where('id','=',$license_id)->with('assignedusers')->first()) {
             $this->error('Invalid license ID');
             return false;
         }
-        $users = User::whereNull('deleted_at')->get();
+
+        $users = User::whereNull('deleted_at')->with('licenses')->get();
 
         if ($users->count() > $license->getAvailSeatsCountAttribute()) {
             $this->info('You do not have enough free seats to complete this task, so we will check out as many as we can. ');
@@ -68,6 +69,16 @@ class CheckoutLicenseToAllUsers extends Command
         }
 
         foreach ($users as $user) {
+
+            // Check to make sure this user doesn't already have this license checked out
+            // to them
+
+            if ($user->licenses->where('id', '=', $license_id)->count()) {
+                $this->info($user->username .' already has this license checked out to them. Skipping... ');
+                continue;
+            }
+
+            
             // If the license is valid, check that there is an available seat
             if ($license->availCount()->count() < 1) {
                 $this->error('ERROR: No available seats');
