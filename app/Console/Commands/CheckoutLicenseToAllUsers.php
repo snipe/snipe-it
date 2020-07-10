@@ -51,7 +51,7 @@ class CheckoutLicenseToAllUsers extends Command
         }
 
 
-        if (!$license = License::find($license_id)->first()) {
+        if (!$license = License::where('id','=',$license_id)->first()) {
             $this->error('Invalid license ID');
             return false;
         }
@@ -69,11 +69,12 @@ class CheckoutLicenseToAllUsers extends Command
 
         foreach ($users as $user) {
             // If the license is valid, check that there is an available seat
-            if ($license->getAvailSeatsCountAttribute() < 1) {
+            if ($license->availCount()->count() < 1) {
                 $this->error('ERROR: No available seats');
                 return false;
             }
 
+            $this->info($license->availCount()->count().' seats left');
             // Get the seat ID
             $licenseSeat = $license->freeSeat();
 
@@ -89,7 +90,7 @@ class CheckoutLicenseToAllUsers extends Command
 
                 // Log the checkout
                 $licenseSeat->logCheckout('Checked out via cli tool', $user);
-                $this->info('License '.$license_id.' checked out to '.$user->username);
+                $this->info('License '.$license_id.' seat '.$licenseSeat->id.' checked out to '.$user->username);
             }
 
         }
