@@ -128,9 +128,12 @@ final class Company extends SnipeModel
         } elseif (!static::isFullMultipleCompanySupportEnabled()) {
             return true;
         } else {
-            $current_user_company_id = Auth::user()->company_id;
-            $companyable_company_id = $companyable->company_id;
-            return ($current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser());
+            if (Auth::user()) {
+                $current_user_company_id = Auth::user()->company_id;
+                $companyable_company_id = $companyable->company_id;
+                return ($current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser());
+            }
+
         }
     }
 
