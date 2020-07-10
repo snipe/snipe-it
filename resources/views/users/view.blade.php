@@ -244,6 +244,13 @@
                       <td class="text-nowrap">{{ trans('general.login_enabled') }}</td>
                       <td>{{ ($user->activated=='1') ? trans('general.yes') : trans('general.no') }}</td>
                     </tr>
+                    @if ($user->ldap_import!='1')
+                    <tr>
+                      <td class="text-nowrap">LDAP</td>
+                      <td>{{  trans('general.yes') }}</td>
+                    </tr>
+                    @endif
+
 
                     @if ($user->activated=='1')
                       <tr>
