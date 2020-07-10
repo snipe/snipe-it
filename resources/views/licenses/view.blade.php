@@ -375,7 +375,7 @@
                     }'>
             <thead>
               <tr>
-                <th data-visible="true" aria-hidden="true"><span class="sr-only">Icon</span></th>
+                <th data-visible="true" aria-hidden="true">Icon</th>
                 <th class="col-md-4" data-field="file_name" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.file_name') }}</th>
                 <th class="col-md-4" data-field="notes" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.notes') }}</th>
                 <th class="col-md-2" data-field="created_at" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.created_at') }}</th>
