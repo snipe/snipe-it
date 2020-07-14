@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\Location;
 use App\Helpers\Helper;
 use Config;
-use Input;
 use Log;
 
 class LdapSync extends Command
