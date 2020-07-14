@@ -24,7 +24,12 @@
       @endif
       {!! $errors->first('asset_tag', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
+      <div class="col-md-1 col-sm-1 text-left">
+          <a id="scan_button" class="btn btn-sm btn-primary">Scan</a>
+{{--          <span class="mac_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></span>--}}
+      </div>
   </div>
+
 
     @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'required' => 'true'])
 
@@ -174,6 +179,45 @@
     ;
 
     $(function () {
+
+        $('#scan_button').click(function() {
+            console.log("test click");
+            // $.get( "http://localhost:8181/read", function( data ) {
+            //     console.log(data);
+            // });
+            $.ajax('http://localhost:8181/write/'+'{{$item->id}}', {
+                success: function(data, textStatus, xhr) {
+                    console.log(xhr.status);
+                    if(xhr.status === 200){
+                        console.log(data);
+                        console.log(data.tid);
+                        if (data.hasOwnProperty('tid')){
+                            $('#asset_tag').val(data.tid);
+                            // $.notify({
+                            //     // options
+                            //     message: 'Успешно считана метка'
+                            // },{
+                            //     // settings
+                            //     type: 'success'
+                            // });
+                        }
+                    }else{
+                        // $.notify({
+                        //     // options
+                        //     message: 'Считыватель не подключен'
+                        // },{
+                        //     // settings
+                        //     type: 'danger'
+                        // });
+                        console.log(data);
+                    }
+                },
+                error: function() {
+                    console.log("error");
+                }
+            });
+        });
+
         //grab custom fields for this model whenever model changes.
         $('#model_select_id').on("change", fetchCustomFields);
 

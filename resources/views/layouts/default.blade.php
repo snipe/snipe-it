@@ -181,7 +181,7 @@
 
                   @can('index', \App\Models\Asset::class)
                   <li>
-                  <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
+                  <form class="navbar-form navbar-left form-horizontal"  id="search_form" role="search" action="{{ route('findbytag/hardware') }}" method="get">
                       <div class="col-xs-12 col-md-12">
                           <div class="col-xs-12 form-group">
                               <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
@@ -194,9 +194,23 @@
                                   <span class="sr-only">Search</span>
                               </button>
                           </div>
+{{--                          <div class="col-xs-1">--}}
+{{--                              <button class="btn btn-primary pull-right search_by_tag">--}}
+{{--                                  <i class="fa fa-qrcode" aria-hidden="true"></i>--}}
+{{--                                  <span class="sr-only">Scan</span>--}}
+{{--                              </button>--}}
+{{--                          </div>--}}
                       </div>
                   </form>
                   </li>
+                          <li>
+                              <div class="navbar-form navbar-left form-horizontal">
+                                  <button class="btn btn-primary pull-right search_by_tag">
+                                      <i class="fa fa-qrcode" aria-hidden="true"></i>
+                                      <span class="sr-only">Scan</span>
+                                  </button>
+                              </div>
+                          </li>
                   @endcan
 
                   @can('admin')
@@ -848,6 +862,31 @@
 
     <script nonce="{{ csrf_token() }}">
         $(function () {
+            $('.search_by_tag').click(function() {
+                console.log("test click");
+                // $.get( "http://localhost:8181/read", function( data ) {
+                //     console.log(data);
+                // });
+                $.ajax('http://localhost:8181/read', {
+                    success: function(data, textStatus, xhr) {
+                        console.log(xhr.status);
+                        if(xhr.status === 200){
+                            console.log(data);
+                            console.log(data.tid);
+                            if (data.hasOwnProperty('tid')){
+                                $('#tagSearch').val(data.tid);
+                                $('#search_form').submit();
+                            }
+                        }else{
+                            console.log(data);
+                        }
+                    },
+                    error: function() {
+                        console.log("error");
+                    }
+                });
+            });
+
             $('[data-toggle="tooltip"]').tooltip();
             $('.select2 span').addClass('needsclick');
             $('.select2 span').removeAttr('title');

@@ -302,6 +302,7 @@
 @include ('partials.bootstrap-table', ['simple_view' => true, 'nopages' => true])
 
     <script src="{{ asset('js/plugins/chartjs/Chart.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap-notify.js') }}"></script>
 
 
 
