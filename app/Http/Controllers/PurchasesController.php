@@ -181,8 +181,8 @@ class PurchasesController extends Controller
 //                    "FIELDS[PROPERTY_1122]" => $data_list , // что покупаем
 //                    "FIELDS[PROPERTY_1123]" => $purchase->id."" , //id заказа
 //                    "FIELDS[PROPERTY_1121]" => "1" , //покупка из системы
-                    "FIELDS[PROPERTY_1127]" => $data_list , // что покупаем
-                    "FIELDS[PROPERTY_1128]" => $purchase->id."" , //id заказа
+                    "FIELDS[PROPERTY_1132]" => $data_list , // что покупаем
+                    "FIELDS[PROPERTY_1134]" => $purchase->id."" , //id заказа
                     "FIELDS[PROPERTY_1120]" => "1" , //покупка из системы
 
                     //2. На боевом есть еще одно поле PROPERTY_1120=Y - надо передать любое значение, означает что создана из snipe_it
