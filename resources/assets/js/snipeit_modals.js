@@ -69,7 +69,7 @@ $(function () {
                         };
                         return data;
                     },
-                    processResults: function (data, params) {
+                    /* processResults: function (data, params) {
 
                         params.page = params.page || 1;
 
@@ -81,7 +81,7 @@ $(function () {
                         };
 
                         return answer;
-                    },
+                    }, */
                     cache: true
                 },
                 escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
