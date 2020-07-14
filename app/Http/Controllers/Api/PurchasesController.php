@@ -7,7 +7,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Transformers\InventoriesTransformer;
 use App\Http\Transformers\InventoryItemTransformer;
 use App\Http\Transformers\LocationsTransformer;
+use App\Models\Asset;
 use App\Models\Location;
+use App\Models\Statuslabel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\PurchasesTransformer;
@@ -87,6 +89,12 @@ class PurchasesController extends Controller
         $purchase = Purchase::findOrFail($purchaseId);
         $purchase->paid = true;
         if ($purchase->save()) {
+            $status = Statuslabel::where('name', 'Доступные')->first();
+            $assets = Asset::where('purchase_id', $purchase->id)->get();
+            foreach ($assets as &$value) {
+                $value->status_id  =  $status->id;
+                $value->save();
+            }
             return response()->json(
                 Helper::formatStandardApiResponse(
                     'success',
