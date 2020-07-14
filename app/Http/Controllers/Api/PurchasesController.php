@@ -34,7 +34,7 @@ class PurchasesController extends Controller
      */
     public function index(Request $request)
     {
-//        $this->authorize('view', User::class);
+        $this->authorize('view', Location::class);
 
         $purchases = Purchase::with('supplier','assets','invoice_type','legal_person')
             ->select([
@@ -75,6 +75,28 @@ class PurchasesController extends Controller
         $total = $purchases->count();
         $purchases = $purchases->skip($offset)->take($limit)->get();
         return (new PurchasesTransformer)->transformPurchases($purchases, $total);
+    }
+
+    /**
+     * Display a listing of the resource.
+     * @return \Illuminate\Http\Response
+     */
+    public function payed(Request $request, $purchaseId = null)
+    {
+        $this->authorize('view', Location::class);
+        $purchase = Purchase::findOrFail($purchaseId);
+        $purchase->paid = true;
+        if ($purchase->save()) {
+            return response()->json(
+                Helper::formatStandardApiResponse(
+                    'success',
+                    (new PurchasesTransformer)->transformPurchase($purchase),
+                    trans('admin/locations/message.update.success')
+                )
+            );
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, $purchase->getErrors()));
     }
 
 }

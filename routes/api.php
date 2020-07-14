@@ -832,6 +832,16 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
         ]
     ); // Purchases resource
 
+    Route::group([ 'prefix' => 'purchases' ], function () {
+
+        Route::post('{purchase}/payed',
+            [
+                'as' => 'api.purchases.payed',
+                'uses' => 'PurchasesController@payed'
+            ]
+        );
+    }); // Users group
+
 
     /*--- InvoiceTypes API ---*/
 
