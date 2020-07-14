@@ -21,7 +21,7 @@ class PurchasesController extends Controller
     {
         // Grab all the locations
         $this->authorize('view', Location::class);
-        return view('purchases/index');
+       return view('purchases/index');
     }
 
     /**
@@ -35,7 +35,6 @@ class PurchasesController extends Controller
      */
     public function show($purchaseId = null)
     {
-        // Grab all the locations
         $this->authorize('view', Location::class);
 
         $purchase = Purchase::find($purchaseId);
@@ -58,7 +57,7 @@ class PurchasesController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Purchase::class);
+        $this->authorize('view', Location::class);
         return view('purchases/edit')
             ->with('item', new Purchase);
     }
@@ -74,7 +73,7 @@ class PurchasesController extends Controller
      */
     public function store(FileUploadRequest $request)
     {
-//        $this->authorize('create', Location::class);
+        $this->authorize('view', Location::class);
         $purchase = new Purchase();
         $purchase->invoice_number      = $request->input('invoice_number');
         $purchase->final_price         = $request->input('final_price');
@@ -216,7 +215,7 @@ class PurchasesController extends Controller
      */
     public function edit($purchaseId = null)
     {
-//        $this->authorize('update', Location::class);
+        $this->authorize('view', Location::class);
         // Check if the location exists
         if (is_null($item = Purchase::find($purchaseId))) {
             return redirect()->route('purchases.index')->with('error', trans('admin/locations/message.does_not_exist'));
