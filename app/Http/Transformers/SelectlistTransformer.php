@@ -33,7 +33,7 @@ class SelectlistTransformer
         }
 
         $results = [
-            'items' => $items_array,
+            'results' => $items_array,
             'pagination' =>
                 [
                     'more' => ($select_items->currentPage() >= $select_items->lastPage()) ? false : true,
