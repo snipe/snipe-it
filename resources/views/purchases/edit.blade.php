@@ -49,7 +49,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Добавить</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body2">
                 <div class="row">
                     <div class="col-md-12">
                         <form class="form-horizontal">
@@ -70,14 +70,62 @@
         </div>
     </div>
 </div>
+    <style>
+        .modal-body2 {
+            position: relative;
+            padding: 15px;
+        }
+    </style>
 @stop
 
 @if (!$item->id)
 @section('moar_scripts')
     @include ('partials.bootstrap-table')
 <script nonce="{{ csrf_token() }}">
+
+
+    function fetchCustomFields() {
+        //save custom field choices
+        var oldvals = $('#custom_fields_content').find('input,select').serializeArray();
+        for(var i in oldvals) {
+            transformed_oldvals[oldvals[i].name]=oldvals[i].value;
+        }
+
+        var modelid = $('#model_select_id').val();
+        if (modelid == '') {
+            $('#custom_fields_content').html("");
+        } else {
+
+            $.ajax({
+                type: 'GET',
+                url: "{{url('/') }}/models/" + modelid + "/custom_fields",
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
+                _token: "{{ csrf_token() }}",
+                dataType: 'html',
+                success: function (data) {
+                    $('#custom_fields_content').html(data);
+                    $('#custom_fields_content select').select2(); //enable select2 on any custom fields that are select-boxes
+                    //now re-populate the custom fields based on the previously saved values
+                    $('#custom_fields_content').find('input,select').each(function (index,elem) {
+                        if(transformed_oldvals[elem.name]) {
+                            $(elem).val(transformed_oldvals[elem.name]).trigger('change'); //the trigger is for select2-based objects, if we have any
+                        }
+
+                    });
+                }
+            });
+        }
+    }
+
     var table = $('#table');
     $(function() {
+
+        //grab custom fields for this model whenever model changes.
+        $('#model_select_id').on("change", fetchCustomFields);
+
         $('.js-data-no-ajax').each( function (i,item) {
             var link = $(item);
             console.log(link);
