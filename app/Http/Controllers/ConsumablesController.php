@@ -83,7 +83,7 @@ class ConsumablesController extends Controller
         $consumable->item_no                = $request->input('item_no');
         $consumable->purchase_date          = $request->input('purchase_date');
         $consumable->purchase_cost          = Helper::ParseFloat($request->input('purchase_cost'));
-        $consumable->qty                    = $request->input('qty');
+        $consumable->qty                    = $request->input('quantity');
         $consumable->user_id                = Auth::id();
 
 
