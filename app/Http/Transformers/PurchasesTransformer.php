@@ -30,7 +30,7 @@ class PurchasesTransformer
             'invoice_file' => ($purchase->getInvoiceFile()) ? $purchase->getInvoiceFile() : null,
             'bitrix_id' =>  ($purchase->bitrix_id) ? e($purchase->bitrix_id) : null,
             'final_price' =>  ($purchase->final_price) ? e($purchase->final_price) : null,
-            'paid' =>  ($purchase->paid) ? e($purchase->paid) : null,
+            'status' =>  ($purchase->status) ? e($purchase->status) : null,
             'currency' =>  ($purchase->currency) ? e($purchase->currency) : null,
             'supplier' => ($purchase->supplier) ? [
                 'id' => (int) $purchase->supplier->id,

@@ -45,7 +45,7 @@ class PurchasesController extends Controller
                 'purchases.invoice_file',
                 'purchases.bitrix_id',
                 'purchases.final_price',
-                'purchases.paid',
+                'purchases.status',
                 'purchases.supplier_id',
                 'purchases.legal_person_id',
                 'purchases.invoice_type_id',
@@ -83,13 +83,41 @@ class PurchasesController extends Controller
      * Display a listing of the resource.
      * @return \Illuminate\Http\Response
      */
-    public function payed(Request $request, $purchaseId = null)
+    public function paid(Request $request, $purchaseId = null)
     {
         $this->authorize('view', Location::class);
         $purchase = Purchase::findOrFail($purchaseId);
-        $purchase->paid = true;
+        $purchase->status = "paid";
         if ($purchase->save()) {
             $status = Statuslabel::where('name', 'Доступные')->first();
+            $assets = Asset::where('purchase_id', $purchase->id)->get();
+            foreach ($assets as &$value) {
+                $value->status_id  =  $status->id;
+                $value->save();
+            }
+            return response()->json(
+                Helper::formatStandardApiResponse(
+                    'success',
+                    (new PurchasesTransformer)->transformPurchase($purchase),
+                    trans('admin/locations/message.update.success')
+                )
+            );
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, $purchase->getErrors()));
+    }
+
+    /**
+     * Display a listing of the resource.
+     * @return \Illuminate\Http\Response
+     */
+    public function reject(Request $request, $purchaseId = null)
+    {
+        $this->authorize('view', Location::class);
+        $purchase = Purchase::findOrFail($purchaseId);
+        $purchase->status = "rejected";
+        if ($purchase->save()) {
+            $status = Statuslabel::where('name', 'Отклонено')->first();
             $assets = Asset::where('purchase_id', $purchase->id)->get();
             foreach ($assets as &$value) {
                 $value->status_id  =  $status->id;

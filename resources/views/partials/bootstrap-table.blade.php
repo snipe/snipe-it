@@ -489,6 +489,25 @@
         }
 
     }
+
+    function purchaseStatusFormatter(value, row) {
+        if (value) {
+            switch (value) {
+                case "rejected":
+                    return '<span class="label label-danger">Отклонено</span>';
+                    break;
+                case "paid":
+                    return '<span class="label label-success">Оплачено</span>';
+                    break;
+                case "inprogress":
+                    return '<span class="label label-primary">На согласовании</span>';
+                    break;
+            }
+        }else{
+            return 'error';
+        }
+
+    }
     function assetObjLinkFormatter(value, row) {
         if ((value) && ((value == 'true') || (value == '1'))) {
             return '<i class="fa fa-check fa-lg text-success"></i>';

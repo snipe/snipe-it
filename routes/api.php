@@ -834,10 +834,17 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
 
     Route::group([ 'prefix' => 'purchases' ], function () {
 
-        Route::post('{purchase}/payed',
+        Route::post('{purchase}/paid',
             [
-                'as' => 'api.purchases.payed',
-                'uses' => 'PurchasesController@payed'
+                'as' => 'api.purchases.paid',
+                'uses' => 'PurchasesController@paid'
+            ]
+        );
+
+        Route::post('{purchase}/reject',
+            [
+                'as' => 'api.purchases.reject',
+                'uses' => 'PurchasesController@reject'
             ]
         );
     }); // Users group

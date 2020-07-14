@@ -56,7 +56,8 @@ class Purchase extends SnipeModel
         'legal_person_id',
         'invoice_type_id',
         'comment',
-        "currency"
+        "currency",
+        "status"
     ];
 
     use Searchable;

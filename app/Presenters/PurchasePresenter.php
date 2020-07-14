@@ -87,13 +87,13 @@ class PurchasePresenter extends Presenter
                 "visible" => true,
 //                "formatter" => 'companiesLinkFormatter',
             ],[
-                "field" => "paid",
+                "field" => "status",
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => "Оплачено",
+                "title" => "Статус",
                 "visible" => true,
-                "formatter" => 'checkFormatter',
+                "formatter" => 'purchaseStatusFormatter',
             ],[
                 "field" => "comment",
                 "searchable" => true,

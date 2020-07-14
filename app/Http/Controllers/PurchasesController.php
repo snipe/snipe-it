@@ -81,6 +81,7 @@ class PurchasesController extends Controller
         $purchase->legal_person_id     = $request->input('legal_person_id');
         $purchase->invoice_type_id     = $request->input('invoice_type_id');
         $purchase->comment             = $request->input('comment');
+        $purchase->status             = "inprogress";
         $currency_id = $request->input('currency_id');
 
         switch ($currency_id) {
