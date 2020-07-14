@@ -240,6 +240,12 @@ class UsersController extends Controller
             if ($user->id == $request->input('manager_id')) {
                 return redirect()->back()->withInput()->with('error', 'You cannot be your own manager.');
             }
+
+            // If the user isn't a superuser, don't let them edit their own permissions
+            if ((!Auth::user()->isSuperUser()) && ($user->id == Auth::user()->id)) {
+                return redirect()->back()->withInput()->with('error', 'You cannot edit your own permissions. Please contact an administrator.');
+            }
+
             $this->authorize('update', $user);
             // Figure out of this user was an admin before this edit
             $orig_permissions_array = $user->decodePermissions();
