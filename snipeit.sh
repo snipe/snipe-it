@@ -422,7 +422,7 @@ case $distro in
   fi
   ;;
   ubuntu)
-  if [ "$version" == "18.04" ]; then
+  if [ "$version" -ge "18.04" ]; then
     # Install for Ubuntu 18.04
     tzone=$(cat /etc/timezone)
 
