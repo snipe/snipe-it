@@ -56,7 +56,7 @@ class LdapSync extends Command
         $ldap_result_email = Setting::getSettings()->ldap_email;
         
         $permissions = config('permissions');
-		$permissions_array = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
+	$permissions_array = Helper::selectedPermissionsArray($permissions);
         
         try {
             $ldapconn = Ldap::connectToLdap();
