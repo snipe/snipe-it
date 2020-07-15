@@ -70,5 +70,8 @@ return array(
     'welcome' => 'Welcome :name',
     'welcome_to' => 'Welcome to :web!',
     'your_credentials' => 'Your Snipe-IT credentials',
-
+    'Accessory_Checkin_Notification' => 'Accessory checked in',
+    'Asset_Checkin_Notification' => 'Asset checked in',
+    'License_Checkin_Notification' => 'License checked in',
+    'Expected_Checkin_Report' => 'Expected asset checkin report'
 );
