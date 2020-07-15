@@ -14,7 +14,7 @@ $checkin = \App\Helpers\Helper::getFormattedDateObject($asset->expected_checkin,
 @endforeach
 @endcomponent
 
-Thanks,
+{{ trans('mail.best_regards') }}
 
 {{ $snipeSettings->site_name }}
 
