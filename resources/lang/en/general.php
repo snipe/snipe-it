@@ -231,4 +231,9 @@
     'login_enabled'         => 'Login Enabled',
     'audit_due'             => 'Due for Audit',
     'audit_overdue'         => 'Overdue for Audit',
+    'accept'                => 'Accept :asset',
+    'i_accept'              => 'I accept',
+    'i_decline'             => 'I decline',
+    'sign_tos'              => 'Sign below to indicate that you agree to the terms of service:',
+    'clear_signature'       => 'Clear Signature'
     ];
