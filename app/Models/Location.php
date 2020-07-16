@@ -205,4 +205,13 @@ class Location extends SnipeModel
     public function inventories() {
         return $this->hasMany('\App\Models\Inventory');
     }
+
+    /**
+     * Get consumables assigned to this user
+     */
+    public function consumables()
+    {
+        return $this->belongsToMany('\App\Models\Consumable', 'consumables_locations', 'assigned_to', 'consumable_id')->withPivot('id')->withTrashed();
+    }
+
 }

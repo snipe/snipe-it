@@ -146,15 +146,26 @@ class Consumable extends SnipeModel
     }
 
 
-    public function users()
+//    public function users()
+//    {
+//        return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
+//    }
+//
+//    public function hasUsers()
+//    {
+//        return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->count();
+//    }
+
+    public function locations()
     {
-        return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
+        return $this->belongsToMany('\App\Models\Location', 'consumables_locations', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
     }
 
-    public function hasUsers()
+    public function hasLocations()
     {
-        return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->count();
+        return $this->belongsToMany('\App\Models\Location', 'consumables_locations', 'consumable_id', 'assigned_to')->count();
     }
+
 
     public function checkin_email()
     {
@@ -183,7 +194,12 @@ class Consumable extends SnipeModel
 
     public function numRemaining()
     {
-        $checkedout = $this->users->count();
+        $consumable = ConsumableAssignment::where('consumable_id', $this->id)
+            ->get();
+        $checkedout = 0 ;
+        foreach ($consumable as &$consumabl) {
+            $checkedout += $consumabl->quantity;
+        }
         $total = $this->qty;
         $remaining = $total - $checkedout;
         return $remaining;
