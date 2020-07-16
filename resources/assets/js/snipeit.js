@@ -212,19 +212,19 @@ $(document).ready(function () {
                     };
                     return data;
                 },
-                /* processResults: function (data, params) {
+                processResults: function (data, params) {
 
                     params.page = params.page || 1;
 
                     var answer =  {
                         results: data.items,
                         pagination: {
-                            more: "true" //(params.page  < data.page_count)
+                            more: data.pagination.more
                         }
                     };
 
                     return answer;
-                }, */
+                },
                 cache: true
             },
             escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
