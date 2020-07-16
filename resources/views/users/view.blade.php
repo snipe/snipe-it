@@ -49,13 +49,13 @@
           </a>
         </li>
 
-        <li>
-          <a href="#consumables" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-            <i class="fa fa-tint"></i></span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>
-          </a>
-        </li>
+{{--        <li>--}}
+{{--          <a href="#consumables" data-toggle="tab">--}}
+{{--            <span class="hidden-lg hidden-md">--}}
+{{--            <i class="fa fa-tint"></i></span>--}}
+{{--            <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>--}}
+{{--          </a>--}}
+{{--        </li>--}}
 
         <li>
           <a href="#files" data-toggle="tab">
@@ -433,26 +433,26 @@
           </div>
         </div><!-- /accessories-tab -->
 
-        <div class="tab-pane" id="consumables">
-          <div class="table-responsive">
-            <table class="display table table-striped">
-              <thead>
-                <tr>
-                  <th class="col-md-8">{{ trans('general.name') }}</th>
-                  <th class="col-md-4">{{ trans('general.date') }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($user->consumables as $consumable)
-                <tr>
-                  <td>{!! $consumable->present()->nameUrl() !!}</a></td>
-                  <td>{{ $consumable->created_at }}</td>
-                </tr>
-                @endforeach
-              </tbody>
-          </table>
-          </div>
-        </div><!-- /consumables-tab -->
+{{--        <div class="tab-pane" id="consumables">--}}
+{{--          <div class="table-responsive">--}}
+{{--            <table class="display table table-striped">--}}
+{{--              <thead>--}}
+{{--                <tr>--}}
+{{--                  <th class="col-md-8">{{ trans('general.name') }}</th>--}}
+{{--                  <th class="col-md-4">{{ trans('general.date') }}</th>--}}
+{{--                </tr>--}}
+{{--              </thead>--}}
+{{--              <tbody>--}}
+{{--                @foreach ($user->consumables as $consumable)--}}
+{{--                <tr>--}}
+{{--                  <td>{!! $consumable->present()->nameUrl() !!}</a></td>--}}
+{{--                  <td>{{ $consumable->created_at }}</td>--}}
+{{--                </tr>--}}
+{{--                @endforeach--}}
+{{--              </tbody>--}}
+{{--          </table>--}}
+{{--          </div>--}}
+{{--        </div><!-- /consumables-tab -->--}}
 
         <div class="tab-pane" id="files">
           <div class="row">

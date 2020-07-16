@@ -44,7 +44,7 @@ class ViewAssetsController extends Controller
 
         $user = User::with(
             'assets.model',
-            'consumables',
+//            'consumables',
             'accessories',
             'licenses',
             'userloc',

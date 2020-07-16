@@ -56,13 +56,24 @@ class ConsumablesTransformer
         return $array;
     }
 
+//
+//    public function transformCheckedoutConsumables (Collection $consumables_users, $total)
+//    {
+//
+//        $array = array();
+//        foreach ($consumables_users as $user) {
+//            $array[] = (new UsersTransformer)->transformUser($user);
+//        }
+//        return (new DatatablesTransformer)->transformDatatables($array, $total);
+//    }
 
-    public function transformCheckedoutConsumables (Collection $consumables_users, $total)
+
+    public function transformCheckedoutConsumables (Collection $consumables_locations, $total)
     {
 
         $array = array();
-        foreach ($consumables_users as $user) {
-            $array[] = (new UsersTransformer)->transformUser($user);
+        foreach ($consumables_locations as $location) {
+            $array[] = (new LocationsTransformer)->transformLocation($location);
         }
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }

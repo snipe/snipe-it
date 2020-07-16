@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Company;
 use App\Models\Consumable;
+use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
 use Auth;
@@ -148,7 +149,7 @@ class ConsumablesController extends Controller
         $consumable->item_no                = $request->input('item_no');
         $consumable->purchase_date          = $request->input('purchase_date');
         $consumable->purchase_cost          = Helper::ParseFloat(Input::get('purchase_cost'));
-        $consumable->qty                    = Helper::ParseFloat(Input::get('qty'));
+        $consumable->qty                    = Helper::ParseFloat(Input::get('quantity'));
 
         if ($request->file('image')) {
             $image = $request->file('image');
@@ -244,26 +245,35 @@ class ConsumablesController extends Controller
 
         $admin_user = Auth::user();
         $assigned_to = e(Input::get('assigned_to'));
+        $quantity = e(Input::get('quantity'));
 
-        // Check if the user exists
-        if (is_null($user = User::find($assigned_to))) {
+//        // Check if the user exists
+//        if (is_null($user = User::find($assigned_to))) {
+//            // Redirect to the consumable management page with error
+//            return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
+//        }
+
+        // Check if the location exists
+        if (is_null($location = Location::find($assigned_to))) {
             // Redirect to the consumable management page with error
-            return redirect()->route('checkout/consumable', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'));
+            return redirect()->route('checkout/consumable', $consumable)->with('error', "Местоположение не найдено");
         }
 
         // Update the consumable data
         $consumable->assigned_to = e(Input::get('assigned_to'));
 
-        $consumable->users()->attach($consumable->id, [
+        $consumable->locations()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
             'user_id' => $admin_user->id,
+            'quantity' => $quantity,
             'assigned_to' => e(Input::get('assigned_to'))
         ]);
 
-        $logaction = $consumable->logCheckout(e(Input::get('note')), $user);
+        $logaction = $consumable->logCheckout(e(Input::get('note')), $location);
+
         $data['log_id'] = $logaction->id;
         $data['eula'] = $consumable->getEula();
-        $data['first_name'] = $user->first_name;
+//        $data['first_name'] = $user->first_name;
         $data['item_name'] = $consumable->name;
         $data['checkout_date'] = $logaction->created_at;
         $data['note'] = $logaction->note;

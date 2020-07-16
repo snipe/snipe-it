@@ -46,16 +46,17 @@
                       data-sort-name="name"
                       id="consumablesCheckedoutTable"
                       class="table table-striped snipe-table"
-                      data-url="{{route('api.consumables.showUsers', $consumable->id)}}"
+                      data-url="{{route('api.consumables.showLocations', $consumable->id)}}"
                       data-export-options='{
                 "fileName": "export-consumables-{{ str_slug($consumable->name) }}-checkedout-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
                 <thead>
                   <tr>
-                    <th data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="name">Выдано на объект</th>
+                      <th data-searchable="false" data-sortable="false" data-field="quantity">Количество</th>
                     <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                    <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="admin">Выдал</th>
                   </tr>
                 </thead>
               </table>

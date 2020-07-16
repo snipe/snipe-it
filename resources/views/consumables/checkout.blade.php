@@ -37,8 +37,10 @@
           </div>
           @endif
 
-          <!-- User -->
-            @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])
+          @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_to', 'style' => '', 'required'=>'true'])
+            @include ('partials.forms.edit.quantity_max')
+{{--          <!-- User -->--}}
+{{--            @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.select_user'), 'fieldname' => 'assigned_to', 'required'=> 'true'])--}}
 
 
             @if ($consumable->requireAcceptance() || $consumable->getEula() || ($snipeSettings->slack_endpoint!=''))
@@ -66,6 +68,8 @@
                 </div>
               </div>
             @endif
+
+
           <!-- Note -->
           <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
             <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>

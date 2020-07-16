@@ -204,10 +204,24 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
             'parameters' => ['consumable' => 'consumable_id']
         ]
     ); // Consumables resource
-    Route::get('consumables/view/{id}/users',
+//    Route::get('consumables/view/{id}/users',
+//        [
+//            'as' => 'api.consumables.showUsers',
+//            'uses' => 'ConsumablesController@getDataView'
+//        ]
+//    );
+
+    Route::get('consumables/view/{id}/locations',
         [
-            'as' => 'api.consumables.showUsers',
+            'as' => 'api.consumables.showLocations',
             'uses' => 'ConsumablesController@getDataView'
+        ]
+    );
+
+    Route::get('consumables/view/{id}/location',
+        [
+            'as' => 'api.consumables.showLocation',
+            'uses' => 'ConsumablesController@getDataViewLocation'
         ]
     );
 

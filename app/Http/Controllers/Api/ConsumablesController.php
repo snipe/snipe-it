@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\ConsumableAssignment;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
@@ -24,7 +26,8 @@ class ConsumablesController extends Controller
         $this->authorize('index', Consumable::class);
         $consumables = Company::scopeCompanyables(
             Consumable::select('consumables.*')
-                ->with('company', 'location', 'category', 'users', 'manufacturer')
+//                ->with('company', 'location', 'category', 'users', 'manufacturer')
+                ->with('company', 'location', 'category', 'locations', 'manufacturer')
         );
 
         if ($request->filled('search')) {
@@ -174,7 +177,7 @@ class ConsumablesController extends Controller
         },
         'consumableAssignments.admin'=> function ($query) {
         },
-        'consumableAssignments.user'=> function ($query) {
+        'consumableAssignments.location'=> function ($query) {
         },
         ))->find($consumableId);
 
@@ -184,16 +187,71 @@ class ConsumablesController extends Controller
         $this->authorize('view', Consumable::class);
         $rows = array();
 
+//        foreach ($consumable->consumableAssignments as $consumable_assignment) {
+//            $rows[] = [
+//                'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
+//                'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
+//                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : '',
+//            ];
+//        }
+
         foreach ($consumable->consumableAssignments as $consumable_assignment) {
             $rows[] = [
-                'name' => ($consumable_assignment->user) ? $consumable_assignment->user->present()->nameUrl() : 'Deleted User',
+                'name' => ($consumable_assignment->location) ? $consumable_assignment->location->present()->nameUrl() : 'Deleted Location',
                 'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
+                'quantity' =>($consumable_assignment->quantity) ? $consumable_assignment->quantity: '',
                 'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : '',
             ];
         }
 
-        $consumableCount = $consumable->users->count();
+        $consumableCount = $consumable->locations->count();
         $data = array('total' => $consumableCount, 'rows' => $rows);
+        return $data;
+    }
+
+    /**
+     * Returns a JSON response containing details on the users associated with this consumable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see ConsumablesController::getDataViewLocation() method that returns the form.
+     * @since [v1.0]
+     * @param int $locationId
+     * @return array
+     */
+    public function getDataViewLocation($locationId)
+    {
+
+//        $location = Location::findOrFail($locationId);
+        $consumableAssignments = ConsumableAssignment::where('assigned_to', $locationId)->get();
+//        $location = Location::with(array('consumables'=>
+//            function ($query) {
+//                $query->orderBy($query->getModel()->getTable().'.created_at', 'DESC');
+//            },
+//            'consumables.admin'=> function ($query) {
+//            },
+//            'consumables.location'=> function ($query) {
+//            },
+////            'consumables.consumable'=> function ($query) {
+////            },
+//        ))->find($locationId);
+
+        $this->authorize('view', Consumable::class);
+        $rows = array();
+
+
+        foreach ($consumableAssignments as $consumable_assignment) {
+            $rows[] = [
+//                'name' => ($consumable_assignment->location) ? $consumable_assignment->location->present()->nameUrl() : 'Deleted Location',
+                'name' => ($consumable_assignment->consumable) ? $consumable_assignment->consumable->present()->nameUrl() : 'Deleted Location',
+                'created_at' => Helper::getFormattedDateObject($consumable_assignment->created_at, 'datetime'),
+                'quantity' =>($consumable_assignment->quantity) ? $consumable_assignment->quantity: '',
+                'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->present()->nameUrl() : '',
+            ];
+        }
+
+//        $locationCount = $location->consumables->count();
+        $locationCount = $consumableAssignments->count();
+        $data = array('total' => $locationCount, 'rows' => $rows);
         return $data;
     }
 }

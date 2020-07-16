@@ -141,6 +141,69 @@
               </div><!-- /.table-responsive -->
           </div><!-- /.box-body -->
       </div> <!--/.box-->
+
+      <div class="box box-default">
+          <div class="box-header with-border">
+              <div class="box-heading">
+                  <h2 class="box-title">Расходники</h2>
+              </div>
+          </div>
+{{--          <div class="box-body">--}}
+{{--              <div class="table table-responsive">--}}
+{{--                  <table--}}
+{{--                          data-columns="{{ \App\Presenters\ConsumableAssignmentPresenter::dataTableLayout() }}"--}}
+{{--                          data-cookie-id-table="inventoriesTable"--}}
+{{--                          data-pagination="true"--}}
+{{--                          data-id-table="сonsumableAssignmentTable"--}}
+{{--                          data-search="true"--}}
+{{--                          data-side-pagination="server"--}}
+{{--                          data-show-columns="true"--}}
+{{--                          data-show-export="true"--}}
+{{--                          data-show-refresh="true"--}}
+{{--                          data-sort-order="asc"--}}
+{{--                          id="сonsumableAssignmentTable"--}}
+{{--                          class="table table-striped snipe-table"--}}
+{{--                          data-url="{{route('api.inventories.index', ['location_id' => $location->id])}}"--}}
+{{--                          >--}}
+
+{{--                  </table>--}}
+{{--              </div><!-- /.table-responsive -->--}}
+{{--          </div><!-- /.box-body -->--}}
+          <div class="box-body">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="table table-responsive">
+
+                          <table
+                                  data-cookie-id-table="consumablesCheckedoutTable"
+                                  data-pagination="true"
+                                  data-id-table="consumablesCheckedoutTable"
+                                  data-search="false"
+                                  data-side-pagination="server"
+                                  data-show-columns="true"
+                                  data-show-export="true"
+                                  data-show-footer="true"
+                                  data-show-refresh="true"
+                                  data-sort-order="asc"
+                                  data-sort-name="name"
+                                  id="consumablesCheckedoutTable"
+                                  class="table table-striped snipe-table"
+                                  data-url="{{route('api.consumables.showLocation', $location->id)}}">
+                              <thead>
+                              <tr>
+                                  <th data-searchable="false" data-sortable="false" data-field="name">Выдано на объект</th>
+                                  <th data-searchable="false" data-sortable="false" data-field="quantity">Количество</th>
+                                  <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                                  <th data-searchable="false" data-sortable="false" data-field="admin">Выдал</th>
+                              </tr>
+                              </thead>
+                          </table>
+                      </div>
+                  </div> <!-- /.col-md-12-->
+
+              </div>
+          </div>
+      </div> <!--/.box-->
   </div><!--/.col-md-9-->
 
   <div class="col-md-3">

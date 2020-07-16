@@ -606,7 +606,8 @@ class UsersController extends Controller
      */
     public function show($userId = null)
     {
-        if (!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')
+//        if (!$user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')
+        if (!$user = User::with('assets', 'assets.model', 'accessories', 'licenses', 'userloc')
             ->withTrashed()
             ->find($userId))
         {
@@ -957,7 +958,7 @@ class UsersController extends Controller
                         $user->assets->count(),
                         $user->licenses->count(),
                         $user->accessories->count(),
-                        $user->consumables->count(),
+//                        $user->consumables->count(),
                         $user_groups,
                         $user->notes,
                         ($user->activated=='1') ?  trans('general.yes') : trans('general.no'),
@@ -994,8 +995,9 @@ class UsersController extends Controller
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
         $licenses = $show_user->licenses()->get();
         $accessories = $show_user->accessories()->get();
-        $consumables = $show_user->consumables()->get();
-        return view('users/print')->with('assets', $assets)->with('licenses',$licenses)->with('accessories', $accessories)->with('consumables', $consumables)->with('show_user', $show_user);
+//        $consumables = $show_user->consumables()->get();
+        return view('users/print')->with('assets', $assets)->with('licenses',$licenses)->with('accessories', $accessories)->with('show_user', $show_user);
+//        return view('users/print')->with('assets', $assets)->with('licenses',$licenses)->with('accessories', $accessories)->with('consumables', $consumables)->with('show_user', $show_user);
 
     }
 
