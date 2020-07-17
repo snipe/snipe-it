@@ -33,7 +33,7 @@ class LdapTroubleshooter extends Command
      *
      * @var string
      */
-    protected $signature = 'ldap:troubleshoot 
+    protected $signature = 'ldap:troubleshoot
                             {--force : Skip the interactive yes/no prompt for confirmation}';
 
     /**
@@ -148,6 +148,77 @@ class LdapTroubleshooter extends Command
         if(count($open_ports) == 0) {
             $this->error("ERROR - no open ports. ABORTING.");
             exit(-1);
+        }
+
+        $this->info("STAGE 3: Determine encryption algorithm, if any");
+
+        $ldap_urls = [];
+        foreach($open_ports as $port) {
+            $this->line("Trying TLS first for port $port");
+            $ldap_url = "ldaps://".$parsed['host'].":$port";
+            if($this->test_anonymous_bind($ldap_url)) {
+                $this->info("Anonymous bind succesful to $ldap_url!");
+                $ldap_urls[] = [ $ldap_url, true, false ];
+                continue; // TODO - lots of copypasta in these if(test_anonymous_bind()) routines...
+            } else {
+                $this->error("WARNING: Failed to bind to $ldap_url - trying without certificate checks.");
+            }
+
+            if($this->test_anonymous_bind($ldap_url, false)) {
+                $this->info("Anonymous bind succesful to $ldap_url with certifcate-checks disabled");
+                $ldap_urls[] = [ $ldap_url, false, false ]; 
+                continue;
+            } else {
+                $this->error("WARNING: Failed to bind to $ldap_url with certificate checks disabled. Trying unencrypted with STARTTLS");
+            }
+
+            $ldap_url = "ldap://".$parsed['host'].":$port";
+            if($this->test_anonymous_bind($ldap_url, true, true)) {
+                $this->info("Plain connection to $ldap_url with STARTTLS succesful!");
+                $ldap_urls[] = [ $ldap_url, true, false ];
+                continue;
+            } else {
+                $this->error("WARNING: Failed to bind to $ldap_url with STARTTLS enabled. Trying without STARTTLS");
+            }
+
+            if($this->test_anonymous_bind($ldap_url)) {
+                $this->info("Plain connection to $ldap_url succesful!");
+                $ldap_urls[] = [ $ldap_url, true, false ];
+                continue;
+            } else {
+                $this->error("WARNING: Failed to bind to $ldap_url. Giving up on port $port");
+            }
+        }
+
+        if(count($ldap_urls) > 0 ) {
+            $this->info("Found working LDAP URL's: ");
+            foreach($ldap_urls as $ldap_url) { // TODO maybe do this as a $this->table() instead?
+                $this->info($ldap_url[0]. ($ldap_url[1] ? " certificate checks enabled" : " certificate checks disabled"). $ldap_url[2] ? " STARTTLS Enabled ": " STARTTLS Disabled");
+            }
+        }
+    }
+
+    public function test_anonymous_bind($ldap_url, $check_cert = true, $start_tls = false)
+    {
+        try {
+            $lconn = ldap_connect($ldap_url);
+            if(!$check_cert) {
+                ldap_set_option($lconn, LDAP_OPT_X_TLS_REQUIRE_CERT, 0);
+            }
+            if($start_tls) {
+                if(!ldap_start_tls($lconn)) {
+                    $this->error("WARNING: Unable to start TLS");
+                    return false;
+                }
+            }
+            if(!$lconn) {
+                $this->error("WARNING: Failed to generate connection string - using: ".$ldap_url);
+                return false;
+            }
+            return ldap_bind($lconn);
+        } catch (Exception $e) {
+            $this->error("WARNING: Exception caught during bind - ".$e->getMessage());
+            return false;
         }
     }
 }
