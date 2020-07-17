@@ -76,6 +76,14 @@ class UsersController extends Controller
             $users = $users->where('users.location_id', '=', $request->input('location_id'));
         }
 
+        if ($request->filled('email')) {
+            $users = $users->where('users.email', '=', $request->input('email'));
+        }
+
+        if ($request->filled('username')) {
+            $users = $users->where('users.username', '=', $request->input('username'));
+        }
+
         if ($request->filled('group_id')) {
             $users = $users->ByGroup($request->get('group_id'));
         }
