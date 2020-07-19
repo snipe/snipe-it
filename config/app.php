@@ -197,18 +197,32 @@ return [
 
 
     /*
-    |--------------------------------------------------------------------------
-    | ALLOW I-FRAMING
-    |--------------------------------------------------------------------------
-    |
-    | Normal users will never need to edit this. This option lets you run
-    | Snipe-IT within an I-Frame, which is normally disabled by default for
-    | security reasons, to prevent clickjacking. It should normally be set to false.
-    |
-    */
+   |--------------------------------------------------------------------------
+   | ALLOW I-FRAMING
+   |--------------------------------------------------------------------------
+   |
+   | Normal users will never need to edit this. This option lets you run
+   | Snipe-IT within an I-Frame, which is normally disabled by default for
+   | security reasons, to prevent clickjacking. It should normally be set to false.
+   |
+   */
 
     'allow_iframing' => env('ALLOW_IFRAMING', false),
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | ENABLE HTTP Strict Transport Security (HSTS)
+    |--------------------------------------------------------------------------
+    |
+    | This is set to default false for backwards compatibilty but should be
+    | set to true if the hosting environment allows it.
+    |
+    | See https://scotthelme.co.uk/hsts-the-missing-link-in-tls/
+    |
+    */
+
+    'enable_hsts' => env('ENABLE_HSTS', false),
 
     /*
     |--------------------------------------------------------------------------

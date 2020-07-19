@@ -15,66 +15,6 @@
 
 @section('header_right')
 
-<style>
-    /**
-    This is kind of weird, but it is necessary to prevent the column-selector code from barfing, since
-    any HTML used in the UserPresenter "title" attribute breaks the column selector HTML.
-
-    Instead, we use CSS to add the icon into the table header, which leaves the column selector
-    "title" text as-is.
-
-    See https://github.com/snipe/snipe-it/issues/7989
-
-     */
-    th.css-barcode > .th-inner,
-    th.css-license > .th-inner,
-    th.css-consumable > .th-inner,
-    th.css-accessory > .th-inner
-    {
-        font-size: 0px;
-        line-height: 4!important;
-        text-align: left;
-        text-rendering: auto;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
-
-    th.css-barcode > .th-inner::before,
-    th.css-license > .th-inner::before,
-    th.css-consumable > .th-inner::before,
-    th.css-accessory > .th-inner::before
-
-    {
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: 20px;
-    }
-
-
-    th.css-barcode > .th-inner::before
-    {
-        content: "\f02a";
-    }
-
-    th.css-license > .th-inner::before
-    {
-        content: "\f0c7";
-    }
-
-    th.css-consumable > .th-inner::before
-    {
-        content: "\f043";
-    }
-
-    th.css-accessory > .th-inner::before
-    {
-        content: "\f11c";
-    }
-
-
-</style>
-
     @can('create', \App\Models\User::class)
       @if ($snipeSettings->ldap_enabled == 1)
       <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-sitemap"></span> LDAP Sync</a>
