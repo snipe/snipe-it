@@ -224,7 +224,7 @@ $(document).ready(function () {
                     var answer =  {
                         results: data.items,
                         pagination: {
-                            more: "true" //(params.page  < data.page_count)
+                            more: data.pagination.more
                         }
                     };
 

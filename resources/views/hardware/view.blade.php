@@ -995,7 +995,7 @@
                       data-cookie-id-table="assetHistory">
                 <thead>
                 <tr>
-                  <th data-field="icon" data-visible="true" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"><span class="sr-only">Icon</span></th>
+                  <th data-visible="true" style="width: 40px;" class="hidden-xs">Icon</th>
                   <th class="col-sm-2" data-visible="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                   <th class="col-sm-1" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                   <th class="col-sm-1" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
@@ -1039,7 +1039,7 @@
                       data-cookie-id-table="assetFileHistory">
                 <thead>
                   <tr>
-                    <th data-visible="true" data-field="icon"><span class="sr-only">Icon</span></th>
+                    <th data-visible="true" data-field="icon">Icon</th>
                     <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes">{{ trans('general.notes') }}</th>
                     <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
                     <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename">{{ trans('general.file_name') }}</th>

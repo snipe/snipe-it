@@ -137,6 +137,7 @@ class AssetsController extends Controller
         $asset->supplier_id             = request('supplier_id', 0);
         $asset->requestable             = request('requestable', 0);
         $asset->rtd_location_id         = request('rtd_location_id', null);
+        
 
         if ($asset->assigned_to=='') {
             $asset->location_id = $request->input('rtd_location_id', null);
