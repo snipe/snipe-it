@@ -285,6 +285,13 @@
 
                      @endif
 
+                    @if ($user->notes)
+                      <tr>
+                        <td class="text-nowrap">{{ trans('admin/users/table.notes') }}</td>
+                        <td>{{ $user->notes }}</td>
+                      </tr>
+                    @endif
+
 
                 </table>
               </div>
