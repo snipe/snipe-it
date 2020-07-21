@@ -55,6 +55,15 @@
                             </div>
                         </div>
 
+                        <!-- City -->
+                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                            <label class="col-md-3 control-label" for="city">{{ trans('general.city') }}</label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="text" name="city" id="city" aria-label="city" />
+                                {!! $errors->first('city', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                            </div>
+                        </div>
+
                         <!-- activated -->
                         <div class="form-group">
                             <div class="col-sm-3 control-label">
