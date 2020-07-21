@@ -143,6 +143,10 @@
                     <td>{{ $user->present()->fullName() }}</td>
                   </tr>
 
+                  <tr>
+                    <td class="text-nowrap">{{ trans('admin/users/table.username') }}</td>
+                    <td>{{ $user->username }}</td>
+                  </tr>
                     @if (($user->address) || ($user->city) || ($user->state) || ($user->country))
                       <tr>
                         <td class="text-nowrap">{{ trans('general.address') }}</td>
@@ -159,14 +163,10 @@
                           @if ($user->country)
                             {{ $user->country }}
                           @endif
+                        </td>
+                      </tr>
 
                     @endif
-
-                  <tr>
-                    <td class="text-nowrap">{{ trans('admin/users/table.username') }}</td>
-                    <td>{{ $user->username }}</td>
-                  </tr>
-
                     <tr>
                       <td class="text-nowrap">{{ trans('general.groups') }}</td>
                       <td>
