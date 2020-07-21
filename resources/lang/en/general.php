@@ -90,7 +90,7 @@
      'first'					=> 'First',
     'firstnamelastname'    => 'First Name Last Name (janesmith@example.com)',
     'lastname_firstinitial' => 'Last Name First Initial (smith_f@example.com)',
-    'firstinitial.lastname' => 'First Initial Last Name (jane.smith@example.com)',
+    'firstinitial.lastname' => 'First Initial Last Name (j.smith@example.com)',
     'first_name'			=> 'First Name',
     'first_name_format'		=> 'First Name (jane@example.com)',
     'files'                 => 'Files',
