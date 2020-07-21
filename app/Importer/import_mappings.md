@@ -14,7 +14,7 @@
 | licensed to email   | license_email    | License                                   |
 | licensed to name    | license_name     | License                                   |
 | maintained          | maintained       | License                                   |
-| manager_id          |                  | User                                         |
+| manager_id          |                  | User                                      |
 | manufacturer        | manufacturer     | All                                       |
 | model name          | asset_model      | Asset                                     |
 | model number        | model_number     | Asset                                     |
@@ -34,4 +34,8 @@
 | User Related Fields | assigned_to      | Asset                                     |
 | name                |                  |                                           |
 | username            |                  |                                           |
+| address             | address          |  User                                     |
+| city                | city             |  User                                     |
+| state               | state            |  User                                     |
+| country             | country          |  User                                     |
 
