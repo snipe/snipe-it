@@ -142,11 +142,31 @@
                     <td class="text-nowrap">{{ trans('admin/users/table.name') }}</td>
                     <td>{{ $user->present()->fullName() }}</td>
                   </tr>
+
                   <tr>
                     <td class="text-nowrap">{{ trans('admin/users/table.username') }}</td>
                     <td>{{ $user->username }}</td>
                   </tr>
+                    @if (($user->address) || ($user->city) || ($user->state) || ($user->country))
+                      <tr>
+                        <td class="text-nowrap">{{ trans('general.address') }}</td>
+                        <td>
+                          @if ($user->address)
+                            {{ $user->address }} <br>
+                          @endif
+                          @if ($user->city)
+                            {{ $user->city }}
+                          @endif
+                          @if ($user->state)
+                            {{ $user->state }}
+                          @endif
+                          @if ($user->country)
+                            {{ $user->country }}
+                          @endif
+                        </td>
+                      </tr>
 
+                    @endif
                     <tr>
                       <td class="text-nowrap">{{ trans('general.groups') }}</td>
                       <td>
@@ -304,7 +324,7 @@
                   <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.edit') }}</a>
                 </div>
               @endcan
-              
+
               @can('create', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
                   <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>

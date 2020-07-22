@@ -435,6 +435,10 @@ class UsersController extends Controller
             if ($request->filled('department_id')) {
                 $update_array['department_id'] = $request->input('department_id');
             }
+            if ($request->filled('city')) {
+                $update_array['city'] = $request->input('city');
+            }
+
             if ($request->filled('company_id')) {
                 $update_array['company_id'] = $request->input('company_id');
             }
