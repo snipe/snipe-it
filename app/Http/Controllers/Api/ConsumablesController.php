@@ -209,7 +209,7 @@ class ConsumablesController extends Controller
     public function checkout(Request $request, $id)
     {
         // Check if the consumable exists
-        if (is_null($consumable = Consumable::find($id))) { // TODO -> message
+        if (is_null($consumable = Consumable::find($id))) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/consumables/message.does_not_exist')));
         }
 
