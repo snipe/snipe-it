@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'O :attribute falhou no upload.',
     'url'                  => 'O formato de :attribute é inválido.',
     "unique_undeleted"     => "O :attribute deve ser único.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

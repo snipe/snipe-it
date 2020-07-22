@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'Атрибут: не удалось загрузить.',
     'url'                  => 'Неправильный формат :attribute.',
     "unique_undeleted"     => "Свойство :attribute должно быть уникальным.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

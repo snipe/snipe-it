@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'Attribuutti ei onnistunut lataamaan.',
     'url'                  => ':attribute muotoilu on virheellinen.',
     "unique_undeleted"     => ":attribute on oltava ainutlaatuinen.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

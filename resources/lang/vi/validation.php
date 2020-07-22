@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'Thuộc tính: không thể tải lên.',
     'url'                  => 'Định dạng :attribute thì không hợp lý.',
     "unique_undeleted"     => "Thuộc tính: phải là duy nhất.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

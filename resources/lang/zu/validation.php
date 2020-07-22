@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'I: imfanelo ayihlulekile ukulayisha.',
     'url'                  => 'I: ifomethi yokwaziswa ayivumelekile.',
     "unique_undeleted"     => "The :attribute must be unique.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

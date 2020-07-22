@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'Uploaden van :attribute is mislukt.',
     'url'                  => 'Het formaat van :attribute is ongeldig.',
     "unique_undeleted"     => "De :attribute moet uniek zijn. ",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

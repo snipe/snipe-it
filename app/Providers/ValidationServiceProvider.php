@@ -71,6 +71,44 @@ class ValidationServiceProvider extends ServiceProvider
         });
 
 
+        // Prevent circular references
+        //
+        // Example usage in Location model where parent_id references another Location:
+        //
+        //   protected $rules = array(
+        //     'parent_id' => 'non_circular:locations,id'
+        //   );
+        //
+        Validator::extend('non_circular', function ($attribute, $value, $parameters, $validator) {
+            if (count($parameters) < 2) {
+                throw new \Exception('Required validator parameters: <table>,<primary key>');
+            }
+
+            // Parameters from the rule implementation ($pk will likely be 'id')
+            list($table, $pk) = $parameters;
+
+            // Data from the edited model
+            $data = $validator->getData();
+
+            // The primary key value from the edited model
+            $data_pk = array_get($data, $pk);
+            $value_pk = $value;
+
+            // If we’re editing an existing model and there is a parent value set… 
+            while ($data_pk && $value_pk) {
+                // It’s not valid for any parent id to be equel to the existing model’s id
+                if ($data_pk == $value_pk) {
+                    return false;
+                }
+
+                // Traverse up the parents to get the next parent id
+                $value_pk = DB::table($table)->select($attribute)->where($pk, '=', $value_pk)->value($attribute);
+            }
+
+            return true;
+        });
+
+
         // Yo dawg. I heard you like validators.
         // This validates the custom validator regex in custom fields.
         // We're just checking that the regex won't throw an exception, not
