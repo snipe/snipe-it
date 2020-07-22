@@ -132,7 +132,6 @@ class LocationsController extends Controller
             return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
-
         // Update the location data
         $location->name         = $request->input('name');
         $location->parent_id    = $request->input('parent_id', null);
