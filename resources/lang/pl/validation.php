@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'Nie udało się przesłać atrybutu:.',
     'url'                  => 'Format pola :attribute jest niewłaściwy.',
     "unique_undeleted"     => "Wartość :attribute musi być unikalna.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

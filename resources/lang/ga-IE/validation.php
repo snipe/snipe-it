@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'The: theip ar an tréith a uaslódáil.',
     'url'                  => 'Tá an fhormáid tréithbhail neamhbhailí.',
     "unique_undeleted"     => "The :attribute must be unique.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

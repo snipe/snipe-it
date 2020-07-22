@@ -89,6 +89,7 @@ return array(
     'uploaded'             => '：属性无法上传。',
     'url'                  => ':attribute 格式无效',
     "unique_undeleted"     => ":attribute 属性必须唯一。",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

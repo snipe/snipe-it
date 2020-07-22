@@ -89,6 +89,7 @@ return array(
     'uploaded'             => ':attribute는 업로드 하지 못했습니다.',
     'url'                  => ':attribute 형식이 부정확 합니다.',
     "unique_undeleted"     => ":attribute 는 고유의 값만 가져야 합니다.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

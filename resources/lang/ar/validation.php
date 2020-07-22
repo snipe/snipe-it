@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'لقد فشل تحميل :attribute.',
     'url'                  => 'ان تنسيق :attribute غير صالح.',
     "unique_undeleted"     => ":attribute يجب ان تكون فريدة.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

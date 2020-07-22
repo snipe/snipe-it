@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'Atribūts neizdevās augšupielādēt.',
     'url'                  => 'Atribūta formāts nav derīgs.',
     "unique_undeleted"     => ":attribute jābūt unikālam.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

@@ -88,7 +88,8 @@ return array(
     'unique'               => ':attribute er allerede taget.',
     'uploaded'             => 'Attributtet kunne ikke uploades.',
     'url'                  => ':attribute formatet er ugyldigt.',
-    "unique_undeleted"     => ":attribute skal være unik.",
+    "unique_undeleted"     => "The :attribute must be unique.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

@@ -89,6 +89,7 @@ return array(
     'uploaded'             => ': பண்புக்கூறு பதிவேற்றத் தவறியது.',
     'url'                  => 'பண்புக்கூறு வடிவமைப்பு தவறானது.',
     "unique_undeleted"     => "The :attribute must be unique.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
