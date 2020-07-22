@@ -63,10 +63,17 @@ class PurchasesController extends Controller
             $purchases = $purchases->TextSearch($request->input('search'));
         }
 
-//        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-//        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-//
-//        $purchases->orderBy($sort, $order);
+        $allowed_columns =
+            [
+                'id','invoice_number','bitrix_id','final_price','status','created_at',
+                'deleted_at'
+            ];
+
+
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+
+        $purchases->orderBy($sort, $order);
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($purchases) && ($request->get('offset') > $purchases->count())) ? $purchases->count() : $request->get('offset', 0);
