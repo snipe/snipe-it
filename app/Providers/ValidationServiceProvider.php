@@ -63,16 +63,18 @@ class ValidationServiceProvider extends ServiceProvider
         // Example usage in Location model where parent_id references another Location:
         //
         //   protected $rules = array(
-        //     'parent_id' => 'non_circular:locations,id'
+        //     'parent_id' => 'non_circular:locations,id,10'
         //   );
         //
         Validator::extend('non_circular', function ($attribute, $value, $parameters, $validator) {
             if (count($parameters) < 2) {
-                throw new \Exception('Required validator parameters: <table>,<primary key>');
+                throw new \Exception('Required validator parameters: <table>,<primary key>[,depth]');
             }
 
             // Parameters from the rule implementation ($pk will likely be 'id')
-            list($table, $pk) = $parameters;
+            $table = array_get($parameters, 0);
+            $pk = array_get($parameters, 1);
+            $depth = (int) array_get($parameters, 2, 50);
 
             // Data from the edited model
             $data = $validator->getData();
@@ -83,12 +85,18 @@ class ValidationServiceProvider extends ServiceProvider
 
             // If we’re editing an existing model and there is a parent value set… 
             while ($data_pk && $value_pk) {
+
                 // It’s not valid for any parent id to be equal to the existing model’s id
                 if ($data_pk == $value_pk) {
                     return false;
                 }
 
-                // Traverse up the parents to get the next parent id
+                // Avoid accidental infinite loops
+                if (--$depth < 0) {
+                    return false;
+                }
+
+                // Get the next parent id
                 $value_pk = DB::table($table)->select($attribute)->where($pk, '=', $value_pk)->value($attribute);
             }
 
