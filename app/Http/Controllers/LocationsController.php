@@ -136,11 +136,6 @@ class LocationsController extends Controller
             return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
-        if ($request->input('parent_id') == $locationId) {
-            return redirect()->back()->withInput()->with('error', 'A location cannot be its own parent. Please select a different parent location.');
-        }
-
-
         // Update the location data
         $location->name         = $request->input('name');
         $location->parent_id    = $request->input('parent_id', null);
