@@ -89,7 +89,6 @@ return array(
     'uploaded'             => 'Үүнд: атрибут байршуулах боломжгүй байна.',
     'url'                  => 'Агуулга формат буруу байна.',
     "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
