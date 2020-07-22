@@ -74,7 +74,7 @@ class UserTest extends BaseTest
     public function testFirstInitialUnderscoreLastName()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
-        $expected_username = 'natalia_allanovna-romanova-oshostakova';
+        $expected_username = 'n_allanovna-romanova-oshostakova';
         $user = User::generateFormattedNameFromFullName('firstname_lastname', $fullname);
         $this->assertEquals($expected_username, $user['username']);
     }
@@ -86,6 +86,33 @@ class UserTest extends BaseTest
         $user = User::generateFormattedNameFromFullName('firstname_lastname', $fullname);
         $this->assertEquals($expected_username, $user['username']);
     }
-
+    public function firstInitialDotLastname()
+    {
+        $fullname = "Natalia Allanovna Romanova-O'Shostakova";
+        $expected_username = 'n.allanovnaromanovaoshostakova';
+        $user = User::generateFormattedNameFromFullName('firstinitial.lastname', $fullname);
+        $this->assertEquals($expected_username, $user['username']);
+    }
+    public function lastNameUnderscoreFirstInitial()
+    {
+        $fullname = "Natalia Allanovna Romanova-O'Shostakova";
+        $expected_username = 'allanovnaromanovaoshostakova_n';
+        $user = User::generateFormattedNameFromFullName('lastname_firstinitial', $fullname);
+        $this->assertEquals($expected_username, $user['username']);
+    }
+    public function firstNameLastName()
+    {
+        $fullname = "Natalia Allanovna Romanova-O'Shostakova";
+        $expected_username = 'nataliaallanovnaromanovaoshostakova';
+        $user = User::generateFormattedNameFromFullName('firstnamelastname', $fullname);
+        $this->assertEquals($expected_username, $user['username']);
+    }
+    public function firstNameLastInitial()
+    {
+        $fullname = "Natalia Allanovna Romanova-O'Shostakova";
+        $expected_username = 'nataliaa';
+        $user = User::generateFormattedNameFromFullName('firstnamelastinitial', $fullname);
+        $this->assertEquals($expected_username, $user['username']);
+    }
 
 }
