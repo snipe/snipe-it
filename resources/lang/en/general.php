@@ -89,7 +89,7 @@
     'lastnamefirstinitial_format' =>  'Last Name First Initial (smithj@example.com)',
     'first'					=> 'First',
     'firstnamelastname'     => 'First Name Last Name (janesmith@example.com)',
-    'lastname_firstinitial' => 'Last Name First Initial (smith_f@example.com)',
+    'lastname_firstinitial' => 'Last Name First Initial (smith_j@example.com)',
     'firstinitial.lastname' => 'First Initial Last Name (j.smith@example.com)',
     'firstnamelastinitial'  => 'First Name Last Initial (janes@example.com)',
     'first'					=> 'First',
