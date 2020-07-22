@@ -96,7 +96,7 @@ class ValidationServiceProvider extends ServiceProvider
 
             // If we’re editing an existing model and there is a parent value set… 
             while ($data_pk && $value_pk) {
-                // It’s not valid for any parent id to be equel to the existing model’s id
+                // It’s not valid for any parent id to be equal to the existing model’s id
                 if ($data_pk == $value_pk) {
                     return false;
                 }
