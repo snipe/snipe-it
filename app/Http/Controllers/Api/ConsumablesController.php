@@ -38,8 +38,12 @@ class ConsumablesController extends Controller
             $consumables->where('company_id','=',$request->input('company_id'));
         }
 
-        if ($request->filled('category_id')) {
-            $consumables->where('category_id','=',$request->input('category_id'));
+        if ($request->filled('company_id')) {
+            $consumables->where('company_id','=',$request->input('company_id'));
+        }
+
+        if ($request->filled('purchase_id')) {
+            $consumables->where('purchase_id','=',$request->input('purchase_id'));
         }
 
         if ($request->filled('manufacturer_id')) {

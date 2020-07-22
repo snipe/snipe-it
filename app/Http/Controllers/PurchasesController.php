@@ -81,6 +81,7 @@ class PurchasesController extends Controller
         $purchase->legal_person_id     = $request->input('legal_person_id');
         $purchase->invoice_type_id     = $request->input('invoice_type_id');
         $purchase->comment             = $request->input('comment');
+        $purchase->consumables_json    = $request->input('consumables');
         $purchase->status             = "inprogress";
         $currency_id = $request->input('currency_id');
 
@@ -96,6 +97,7 @@ class PurchasesController extends Controller
                 break;
         }
         $assets = json_decode($request->input('assets'), true);
+        $consumables = json_decode($request->input('consumables'), true);
         $purchase = $request->handleFile($purchase, public_path().'/uploads/purchases');
         $status = Statuslabel::updateOrCreate(
             ['name' =>"В закупке"],
@@ -107,57 +109,71 @@ class PurchasesController extends Controller
         );
 
         if ($purchase->save()) {
-            $asset_tag = Asset::autoincrement_asset();
             $data_list = "";
-            foreach ($assets as &$value) {
-                $model= $value["model"];
-                $model_id = $value["model_id"];
-                $purchase_cost = $value["purchase_cost"];
-                $nds = $value["nds"];
-                $warranty = $value["warranty"];
-                $quantity = $value["quantity"];
-                $data_list .= "[".$value["id"]."] ".$model." - Количество: ".$quantity." Цена: ".$purchase_cost."\n";
+            if (count($assets)>0) {
+                $asset_tag = Asset::autoincrement_asset();
+                $data_list .= "Активы:"."\n";
+                foreach ($assets as &$value) {
+                    $model= $value["model"];
+                    $model_id = $value["model_id"];
+                    $purchase_cost = $value["purchase_cost"];
+                    $nds = $value["nds"];
+                    $warranty = $value["warranty"];
+                    $quantity = $value["quantity"];
+                    $data_list .= "[".$value["id"]."] ".$model." - Количество: ".$quantity." Цена: ".$purchase_cost."\n";
 
-                $dt = new DateTime();
-                for ($i = 1; $i <= $quantity; $i++) {
-                    $asset = new Asset();
-                    $asset->model()->associate(AssetModel::find((int) $model_id));
-                    $asset->asset_tag               = $asset_tag;
-                    $asset->model_id                = $model_id;
-                    $asset->order_number            = $purchase->invoice_number;
-                    $asset->archived                = '0';
-                    $asset->physical                = '1';
-                    $asset->depreciate              = '0';
-                    $asset->status_id               = $status->id;
-                    $asset->warranty_months         = $warranty;
-                    $asset->purchase_cost           = $purchase_cost;
-                    $asset->nds                     = $nds;
-                    $asset->purchase_date           = $dt->format('Y-m-d H:i:s');
-                    $asset->supplier_id             = $purchase->supplier_id;
-                    $asset->purchase_id             = $purchase->id;
-                    $asset->user_id                 = Auth::id();
-                    $settings = \App\Models\Setting::getSettings();
-                    if($asset->save()){
-                        if ($settings->zerofill_count > 0) {
-                            $asset_tag_digits = preg_replace('/\D/', '', $asset_tag);
-                            $asset_tag = preg_replace('/^0*/', '', $asset_tag_digits);
-                            $asset_tag++;
-                            $asset_tag =  $settings->auto_increment_prefix.Asset::zerofill($asset_tag, $settings->zerofill_count);
+                    $dt = new DateTime();
+                    for ($i = 1; $i <= $quantity; $i++) {
+                        $asset = new Asset();
+                        $asset->model()->associate(AssetModel::find((int) $model_id));
+                        $asset->asset_tag               = $asset_tag;
+                        $asset->model_id                = $model_id;
+                        $asset->order_number            = $purchase->invoice_number;
+                        $asset->archived                = '0';
+                        $asset->physical                = '1';
+                        $asset->depreciate              = '0';
+                        $asset->status_id               = $status->id;
+                        $asset->warranty_months         = $warranty;
+                        $asset->purchase_cost           = $purchase_cost;
+                        $asset->nds                     = $nds;
+                        $asset->purchase_date           = $dt->format('Y-m-d H:i:s');
+                        $asset->supplier_id             = $purchase->supplier_id;
+                        $asset->purchase_id             = $purchase->id;
+                        $asset->user_id                 = Auth::id();
+                        $settings = \App\Models\Setting::getSettings();
+                        if($asset->save()){
+                            if ($settings->zerofill_count > 0) {
+                                $asset_tag_digits = preg_replace('/\D/', '', $asset_tag);
+                                $asset_tag = preg_replace('/^0*/', '', $asset_tag_digits);
+                                $asset_tag++;
+                                $asset_tag =  $settings->auto_increment_prefix.Asset::zerofill($asset_tag, $settings->zerofill_count);
+                            }else{
+                                $asset_tag = $settings->auto_increment_prefix.$asset_tag;
+                            }
                         }else{
-                            $asset_tag = $settings->auto_increment_prefix.$asset_tag;
+                            dd($asset->getErrors());
                         }
-                    }else{
-                        dd($asset->getErrors());
                     }
+                }
+                $data_list .="\n";
+            }
+            if (count($consumables)>0) {
+                $data_list .= "Компоненты:"."\n";
+                foreach ($consumables as &$consumable) {
+                    $name = $consumable["name"];
+                    $category_name= $consumable["category_name"];
+                    $purchase_cost = $consumable["purchase_cost"];
+                    $quantity = $consumable["quantity"];
+                    $data_list .= "[".$consumable["id"]."] ".$category_name." - ".$name." - Количество: ".$quantity." Цена: ".$purchase_cost."\n";
                 }
             }
 
             $file_data = file_get_contents(public_path().'/uploads/purchases/'.$purchase->invoice_file);
 
-// Encode the image string data into base64
+            // Encode the image string data into base64
             $file_data_base64 = base64_encode($file_data);
 
-            $user = User::find($asset->user_id);
+            $user =  Auth::user();
             /** @var \GuzzleHttp\Client $client */
             $client = new \GuzzleHttp\Client();
             $params = [
@@ -189,7 +205,7 @@ class PurchasesController extends Controller
                     //2. На боевом есть еще одно поле PROPERTY_1120=Y - надо передать любое значение, означает что создана из snipe_it
                 ]
             ];
-//            $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
+           // $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
             $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/',$params);
             $response = $response->getBody()->getContents();
             $bitrix_result = json_decode($response, true);
@@ -201,9 +217,6 @@ class PurchasesController extends Controller
         return redirect()->back()->withInput()->withErrors($purchase->getErrors());
     }
 
-
-    public function sendInvoice(Purchase $purchase, $currency_id, $data){
-    }
 
     /**
      * Makes a form view to edit location information.

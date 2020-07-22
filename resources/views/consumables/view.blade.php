@@ -62,9 +62,9 @@
               </table>
             </div>
           </div> <!-- /.col-md-12-->
-
         </div>
       </div>
+
     </div> <!-- /.box.box-default-->
   </div> <!-- /.col-md-9-->
   <div class="col-md-3">

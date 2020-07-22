@@ -21,19 +21,31 @@
 
 @include ('partials.forms.edit.legal_person-select', ['translated_name' => "Юр. лицо", 'fieldname' => 'legal_person_id'])
 
-
 @include ('partials.forms.edit.invoice_file')
+
 <input type="hidden" id="assets" name="assets" value="">
+
+<input type="hidden" id="consumables" name="consumables" value="">
 
 <div class="row">
     <div class="col-md-12">
         <div class="table table-responsive">
-            <div id="toolbar">
-                <div class="button"></div>
-                <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#myModal">Добавить</button>
+            <div id="toolbar_asset">
+                <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal_asset">Добавить актив</button>
             </div>
-            <p class="activ text-center text-bold text-danger hidden">Заполните хотябы один актив</p>
-            <table id="table" class="table table-striped snipe-table"></table>
+            <p class="activ text-center text-bold text-danger hidden">Добавте хотя бы один актив</p>
+            <table id="table_asset" class="table table-striped snipe-table"></table>
+        </div><!-- /.table-responsive -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="table table-responsive">
+            <div id="toolbar_consumables">
+                <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#modal_consumables">Добавить расходник</button>
+            </div>
+            <p class="activ text-center text-bold text-danger hidden">Добавте хотя бы один расходник</p>
+            <table id="table_consumables" class="table table-striped snipe-table"></table>
         </div><!-- /.table-responsive -->
     </div>
 </div>
@@ -41,9 +53,9 @@
 
 @section('content')
     @parent
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <!-- Modal Актив -->
+    <div class="modal fade" id="modal_asset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -65,11 +77,43 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-primary" id="modalAdd">Добавить</button>
+                <button type="button" class="btn btn-primary" id="addAssetButton">Добавить</button>
             </div>
         </div>
     </div>
-</div>
+    </div>
+
+    <!-- Modal Расходник -->
+    <div class="modal fade" id="modal_consumables" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Добавить</h4>
+                </div>
+                <div class="modal-body2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="form-horizontal">
+                                @include ('partials.forms.edit.name', ['translated_name' => trans('admin/consumables/table.title')])
+                                @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id', 'required' => 'true', 'category_type' => 'consumable'])
+                                <p class="duble text-center text-bold text-danger hidden">Такая категория уже есть</p>
+                                @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id', 'required' => 'true'])
+                                @include ('partials.forms.edit.model_number')
+                                @include ('partials.forms.edit.purchase_cost')
+                                @include ('partials.forms.edit.nds')
+                                @include ('partials.forms.edit.quantity')
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary" id="addСonsumablesButton">Добавить</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <style>
         .modal-body2 {
             position: relative;
@@ -79,63 +123,23 @@
 @stop
 
 @if (!$item->id)
-@section('moar_scripts')
+    @section('moar_scripts')
     @include ('partials.bootstrap-table')
 <script nonce="{{ csrf_token() }}">
+    var table_asset = $('#table_asset');
+    var table_consumables = $('#table_consumables');
 
-
-    function fetchCustomFields() {
-        //save custom field choices
-        var oldvals = $('#custom_fields_content').find('input,select').serializeArray();
-        for(var i in oldvals) {
-            transformed_oldvals[oldvals[i].name]=oldvals[i].value;
-        }
-
-        var modelid = $('#model_select_id').val();
-        if (modelid == '') {
-            $('#custom_fields_content').html("");
-        } else {
-
-            $.ajax({
-                type: 'GET',
-                url: "{{url('/') }}/models/" + modelid + "/custom_fields",
-                headers: {
-                    "X-Requested-With": 'XMLHttpRequest',
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-                },
-                _token: "{{ csrf_token() }}",
-                dataType: 'html',
-                success: function (data) {
-                    $('#custom_fields_content').html(data);
-                    $('#custom_fields_content select').select2(); //enable select2 on any custom fields that are select-boxes
-                    //now re-populate the custom fields based on the previously saved values
-                    $('#custom_fields_content').find('input,select').each(function (index,elem) {
-                        if(transformed_oldvals[elem.name]) {
-                            $(elem).val(transformed_oldvals[elem.name]).trigger('change'); //the trigger is for select2-based objects, if we have any
-                        }
-
-                    });
-                }
-            });
-        }
-    }
-
-    var table = $('#table');
     $(function() {
-
-        //grab custom fields for this model whenever model changes.
-        $('#model_select_id').on("change", fetchCustomFields);
-
+        //select2 for no ajax lists activate
         $('.js-data-no-ajax').each( function (i,item) {
             var link = $(item);
-            console.log(link);
             link.select2();
         });
-        var data = [];
-        table.bootstrapTable('destroy').bootstrapTable({
-            data: data,
+        //generate tables vith raw data
+        table_asset.bootstrapTable('destroy').bootstrapTable({
+            data: [],
             search:true,
-            toolbar:'#toolbar',
+            toolbar:'#toolbar_asset',
             columns: [{
                 field: 'id',
                 name:'#',
@@ -171,11 +175,11 @@
                 valign: 'middle',
                 events: {
                     'click .remove': function (e, value, row, index) {
-                        table.bootstrapTable('remove', {
+                        table_asset.bootstrapTable('remove', {
                             field: 'id',
                             values: [row.id]
                         });
-                        var data = table.bootstrapTable('getData');
+                        var data = table_asset.bootstrapTable('getData');
                         var newData = [];
                         var count = 0 ;
                         data.forEach(function callback(currentValue, index, array) {
@@ -183,7 +187,7 @@
                             currentValue.id = count;
                             newData.push(currentValue);
                         });
-                        table.bootstrapTable('load',newData);
+                        table_asset.bootstrapTable('load',newData);
                     }
                 },
                 formatter: function (value, row, index) {
@@ -195,74 +199,198 @@
                 }
             }]
         });
-        var count = 0;
-        // $('#myModal').on('shown.bs.modal', function () {
-        //     console.log('shown.bs.modal');
-        // });
-
-        //handle modal-add-interstitial calls
-        var model, select;
-
-    $('#myModal').on("show.bs.modal", function (event) {
-        // Crazy select2 rich dropdowns with images!
-        var link = $(event.relatedTarget);
-        model = link.data("dependency");
-        select = link.data("select");
-
-        $('#myModal').find('select.select2').select2();
-        $('.js-data-ajax2').each( function (i,item) {
-            console.log("js-data-ajax createModal")
-            var link = $(item);
-            var endpoint = link.data("endpoint");
-            var select = link.data("select");
-
-            console.log(link)
-            console.log(endpoint)
-            console.log(select)
-
-            link.select2({
-                dropdownParent: $("#myModal"),
-                ajax: {
-
-                    // the baseUrl includes a trailing slash
-                    url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
-                    dataType: 'json',
-                    delay: 250,
-                    headers: {
-                        "X-Requested-With": 'XMLHttpRequest',
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: function (params) {
-                        var data = {
-                            search: params.term,
-                            page: params.page || 1,
-                            assetStatusType: link.data("asset-status-type"),
-                        };
-                        return data;
-                    },
-                    processResults: function (data, params) {
-                        console.log(data)
-                        params.page = params.page || 1;
-
-                        var answer =  {
-                            results: data.items,
-                            pagination: {
-                                more: "true" //(params.page  < data.page_count)
-                            }
-                        };
-
-                        return answer;
-                    },
-                    cache: true
+        table_consumables.bootstrapTable('destroy').bootstrapTable({
+            data: [],
+            search:true,
+            toolbar:'#toolbar_consumables',
+            columns: [{
+                field: 'id',
+                name:'#',
+                align: 'left',
+                valign: 'middle'
+            },{
+                field: 'name',
+                name:'Назвние',
+                align: 'left',
+                valign: 'middle'
+            },{
+                field: 'manufacturer_name',
+                name:'Производитель',
+                align: 'left',
+                valign: 'middle'
+            },{
+                field: 'category_name',
+                name:'Категория',
+                align: 'left',
+                valign: 'middle'
+            },{
+                field: 'model_number',
+                name:'Модель',
+                align: 'left',
+                valign: 'middle'
+            },{
+                field: 'purchase_cost',
+                name: 'Закупочная цена',
+                align: 'center',
+                valign: 'middle'
+            },{
+                field: 'nds',
+                name: 'НДС',
+                align: 'center',
+                valign: 'middle'
+            },{
+                field: 'quantity',
+                name: 'Количество',
+                align: 'center',
+                valign: 'middle'
+            },{
+                align: 'center',
+                valign: 'middle',
+                events: {
+                    'click .remove': function (e, value, row, index) {
+                        table_consumables.bootstrapTable('remove', {
+                            field: 'id',
+                            values: [row.id]
+                        });
+                        var data = table_consumables.bootstrapTable('getData');
+                        var newData = [];
+                        var count = 0 ;
+                        data.forEach(function callback(currentValue, index, array) {
+                            count++;
+                            currentValue.id = count;
+                            newData.push(currentValue);
+                        });
+                        table_consumables.bootstrapTable('load',newData);
+                    }
                 },
-                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-                templateResult: formatDatalist,
-                templateSelection: formatDataSelection
-            });
+                formatter: function (value, row, index) {
+                    return [
+                        '<a class="remove text-danger"  href="javascript:void(0)" title="Убрать">',
+                        '<i class="remove fa fa-times fa-lg"></i>',
+                        '</a>'
+                    ].join('')
+                }
+            }]
         });
 
-    });
-    function formatDatalist (datalist) {
+        $('#modal_asset').on("show.bs.modal", function (event) {
+            var modal = $(this);
+            $("#model_id").removeClass("has-error");
+            $("#model_select_id").val('');
+            $('#model_select_id').trigger('change');
+            modal.find('#purchase_cost').val('');
+            modal.find('#nds').val(20);
+            modal.find('#warranty_months').val(12);
+            modal.find('#quantity').val(1);
+            $('.duble').addClass('hidden');
+
+            modal.find('select.select2').select2();
+            $('.js-data-ajax2').each( function (i,item) {
+                var link = $(item);
+                var endpoint = link.data("endpoint");
+                link.select2({
+                    dropdownParent: modal,
+                    ajax: {
+
+                        // the baseUrl includes a trailing slash
+                        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                        dataType: 'json',
+                        delay: 250,
+                        headers: {
+                            "X-Requested-With": 'XMLHttpRequest',
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: function (params) {
+                            var data = {
+                                search: params.term,
+                                page: params.page || 1,
+                                assetStatusType: link.data("asset-status-type"),
+                            };
+                            return data;
+                        },
+                        processResults: function (data, params) {
+                            console.log(data)
+                            params.page = params.page || 1;
+
+                            var answer =  {
+                                results: data.items,
+                                pagination: {
+                                    more: "true" //(params.page  < data.page_count)
+                                }
+                            };
+
+                            return answer;
+                        },
+                        cache: true
+                    },
+                    escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                    templateResult: formatDatalist,
+                    templateSelection: formatDataSelection
+                });
+            });
+        });
+        $('#modal_consumables').on("show.bs.modal", function (event) {
+            var modal = $(this);
+            modal.find('#name').val("");
+
+            $("#model_id").removeClass("has-error");
+            $("#category_select_id").val('');
+            $('#category_select_id').trigger('change');
+            $("#manufacturer_select_id").val('');
+            $('#manufacturer_select_id').trigger('change');
+            modal.find('#model_number').val('');
+            modal.find('#purchase_cost').val('');
+            modal.find('#nds').val(20);
+            modal.find('#quantity').val(1);
+            $('.duble').addClass('hidden');
+
+            $('#modal_consumables').find('select.select2').select2();
+            $('.js-data-ajax2').each( function (i,item) {
+                var link = $(item);
+                var endpoint = link.data("endpoint");
+                link.select2({
+                    dropdownParent: modal,
+                    ajax: {
+                        // the baseUrl includes a trailing slash
+                        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                        dataType: 'json',
+                        delay: 250,
+                        headers: {
+                            "X-Requested-With": 'XMLHttpRequest',
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: function (params) {
+                            var data = {
+                                search: params.term,
+                                page: params.page || 1,
+                                assetStatusType: link.data("asset-status-type"),
+                            };
+                            return data;
+                        },
+                        processResults: function (data, params) {
+                            console.log(data)
+                            params.page = params.page || 1;
+
+                            var answer =  {
+                                results: data.items,
+                                pagination: {
+                                    more: "true" //(params.page  < data.page_count)
+                                }
+                            };
+
+                            return answer;
+                        },
+                        cache: true
+                    },
+                    escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                    templateResult: formatDatalist,
+                    templateSelection: formatDataSelection
+                });
+            });
+
+        });
+
+        function formatDatalist (datalist) {
         var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
         if (datalist.loading) {
             return loading_markup;
@@ -280,39 +408,41 @@
         markup += "</div>";
         return markup;
     }
+        function formatDataSelection (datalist) {
+            return datalist.text.replace(/>/g, '&gt;')
+                .replace(/</g, '&lt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
 
-    function formatDataSelection (datalist) {
-        return datalist.text.replace(/>/g, '&gt;')
-            .replace(/</g, '&lt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-    }
-
-    $('#modalAdd').click(function(e){
+        $('#addAssetButton').click(function(e){
             e.preventDefault();
             var model_id = $('select[name=model_id] option').filter(':selected').val();
             var model_name = $('select[name=model_id] option').filter(':selected').text();
-            var data = table.bootstrapTable('getData');
+            var purchase_cost =  $('#modal_asset').find('#purchase_cost').val();
+            var nds = $('#modal_asset').find('#nds').val();
+            var warranty = $('#modal_asset').find('#warranty_months').val();
+            var quantity = $('#modal_asset').find('#quantity').val();
+            var table_data = table_asset.bootstrapTable('getData');
             if (model_id>0){
                 var rez = true;
-                data.forEach(function callback(currentValue, index, array) {
+                table_data.forEach(function callback(currentValue, index, array) {
                     if (currentValue.model_id == model_id){
                         rez = false;
                     }
                 });
                 if(rez) {
-                    count++;
-                    data = {
-                        id: count,
+                    var data = {
+                        id: table_data.length+1,
                         model_id: model_id,
                         model: model_name,
-                        purchase_cost: $('#purchase_cost').val(),
-                        nds: $('#nds').val(),
-                        warranty: $('#warranty_months').val(),
-                        quantity: $('#quantity').val(),
+                        purchase_cost: purchase_cost,
+                        nds: nds,
+                        warranty:warranty,
+                        quantity: quantity,
                     };
-                    table.bootstrapTable('append', data);
-                    $('#myModal').modal('hide');
+                    table_asset.bootstrapTable('append', data);
+                    $('#modal_asset').modal('hide');
                     $('.duble').addClass('hidden');
                 }else{
                     $('.duble').removeClass('hidden');
@@ -321,21 +451,47 @@
                 $("#model_id").addClass("has-error");
             }
         });
-        $('#myModal').on('show.bs.modal', function (event) {
-            var modal = $(this);
-            $("#model_id").removeClass("has-error");
-            $("#model_select_id").val('');
-            $('#model_select_id').trigger('change');
-            modal.find('#purchase_cost').val('');
-            modal.find('#nds').val(20);
-            modal.find('#warranty_months').val(12);
-            modal.find('#quantity').val(1);
-            $('.duble').addClass('hidden');
-        })
+        $('#addСonsumablesButton').click(function(e){
+            e.preventDefault();
+            var name = $('#modal_consumables').find('#name').val();
+            var category_id = $('select[name=category_id] option').filter(':selected').val();
+            var category_name = $('select[name=category_id] option').filter(':selected').text();
+            var manufacturer_id = $('select[name=manufacturer_id] option').filter(':selected').val();
+            var manufacturer_name = $('select[name=manufacturer_id] option').filter(':selected').text();
+            var model_number = $('#modal_consumables').find('#model_number').val();
+            var purchase_cost = $('#modal_consumables').find('#purchase_cost').val();
+            var nds = $('#modal_consumables').find('#nds').val();
+            var quantity = $('#modal_consumables').find('#quantity').val();
+
+            var tabele_data = table_consumables.bootstrapTable('getData');
+
+            if (category_id>0 && name.length>0){
+                var data = {
+                    id: tabele_data.length+1,
+                    name: name,
+                    category_id: category_id,
+                    category_name: category_name,
+                    manufacturer_id: manufacturer_id,
+                    manufacturer_name: manufacturer_name,
+                    model_number: model_number,
+                    purchase_cost: purchase_cost,
+                    nds: nds,
+                    quantity: quantity,
+                };
+                table_consumables.bootstrapTable('append', data);
+                $('#modal_consumables').modal('hide');
+            }else{
+                $("#category_id").addClass("has-error");
+                $("#name").addClass("has-error");
+            }
+        });
+
         $("#create-form").on("submit", function(){
-            var data = table.bootstrapTable('getData');
-            if (data.length>0){
-                $('#assets').val(JSON.stringify(data));
+            var data_asset = table_asset.bootstrapTable('getData');
+            var data_consumables = table_consumables.bootstrapTable('getData');
+            if (data_asset.length>0 || data_consumables.length>0){
+                $('#assets').val(JSON.stringify(data_asset));
+                $('#consumables').val(JSON.stringify(data_consumables));
                 $('.activ').addClass("hidden");
                 return true;
             }else{

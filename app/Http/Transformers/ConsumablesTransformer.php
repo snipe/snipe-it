@@ -33,6 +33,7 @@ class ConsumablesTransformer
             'model_number'  => ($consumable->model_number!='') ? e($consumable->model_number) : null,
             'remaining'  => $consumable->numRemaining(),
             'order_number'  => e($consumable->order_number),
+            'purchase_id'  => e($consumable->purchase_id),
             'purchase_cost'  => Helper::formatCurrencyOutput($consumable->purchase_cost),
             'purchase_date'  => Helper::getFormattedDateObject($consumable->purchase_date, 'date'),
             'qty'           => (int) $consumable->qty,

@@ -8,6 +8,7 @@ use App\Http\Transformers\InventoriesTransformer;
 use App\Http\Transformers\InventoryItemTransformer;
 use App\Http\Transformers\LocationsTransformer;
 use App\Models\Asset;
+use App\Models\Consumable;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use Illuminate\Http\Request;
@@ -89,11 +90,32 @@ class PurchasesController extends Controller
         $purchase = Purchase::findOrFail($purchaseId);
         $purchase->status = "paid";
         if ($purchase->save()) {
-            $status = Statuslabel::where('name', 'Доступные')->first();
             $assets = Asset::where('purchase_id', $purchase->id)->get();
-            foreach ($assets as &$value) {
-                $value->status_id  =  $status->id;
-                $value->save();
+            if (count($assets)>0){
+                $status = Statuslabel::where('name', 'Доступные')->first();
+                foreach ($assets as &$value) {
+                    $value->status_id  =  $status->id;
+                    $value->save();
+                }
+            }
+            $consumables_server = Consumable::where('purchase_id', $purchase->id)->get();
+            $consumables = json_decode($purchase->consumables_json, true);
+            if ($purchase->consumables_json != null && count($consumables)>0 && count($consumables_server) == 0){
+                foreach ($consumables as &$consumable_new) {
+                    $consumable_server = new Consumable();
+                    $consumable_server->name = $consumable_new["name"];
+                    $consumable_server->category_id = $consumable_new["category_id"];
+//                    $consumable_server->location_id = 1;
+//                    $consumable_server->company_id = $consumable_new["company_id"];
+                    $consumable_server->order_number = $purchase->id;
+                    $consumable_server->manufacturer_id = $consumable_new["manufacturer_id"];
+                    $consumable_server->model_number = $consumable_new["model_number"];
+                    $consumable_server->purchase_date =  $purchase->created_at;
+                    $consumable_server->purchase_cost = Helper::ParseFloat($consumable_new["purchase_cost"]);
+                    $consumable_server->qty =  Helper::ParseFloat($consumable_new["quantity"]);
+                    $consumable_server->purchase_id = $purchase->id;
+                    $consumable_server->save();
+                }
             }
             return response()->json(
                 Helper::formatStandardApiResponse(

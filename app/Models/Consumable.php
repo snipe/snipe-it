@@ -66,7 +66,8 @@ class Consumable extends SnipeModel
         'purchase_cost',
         'purchase_date',
         'qty',
-        'requestable'
+        'requestable',
+        'consumables_json'
     ];
 
     use Searchable;
@@ -257,4 +258,10 @@ class Consumable extends SnipeModel
     {
         return $query->leftJoin('companies', 'consumables.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
     }
+
+    public function purchase()
+    {
+        return $this->belongsTo('\App\Models\Purchase');
+    }
+
 }

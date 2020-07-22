@@ -89,6 +89,11 @@ class Purchase extends SnipeModel
             });
     }
 
+    public function consumables()
+    {
+        return $this->hasMany('\App\Models\Consumable', 'purchase_id');
+    }
+
     public function supplier()
     {
         return $this->belongsTo('\App\Models\Supplier');
