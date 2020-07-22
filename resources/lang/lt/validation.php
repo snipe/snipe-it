@@ -89,7 +89,6 @@ return array(
     'uploaded'             => 'Nepavyko įkelti atributo.',
     'url'                  => ':attribute formatas neteisingas.',
     "unique_undeleted"     => ":attribute turi būti unikalus.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

@@ -89,7 +89,6 @@ return array(
     'uploaded'             => ':attribute konnte nicht hochgeladen werden.',
     'url'                  => ':attribute Format ist ungültig.',
     "unique_undeleted"     => "Die Variable :attribute muss eindeutig sein.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

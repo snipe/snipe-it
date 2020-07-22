@@ -89,7 +89,6 @@ return array(
     'uploaded'             => 'Atribbutet :attribute kunne ikke lastes opp.',
     'url'                  => 'Attributt-formatet :attribute er ugyldig.',
     "unique_undeleted"     => ":attribute må være unikt.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

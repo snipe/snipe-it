@@ -89,7 +89,6 @@ return array(
     'uploaded'             => 'L\'attribut: n\'a pas pu télécharger.',
     'url'                  => 'Le format de cet-te :attribute est invalide.',
     "unique_undeleted"     => ":attribute doit être unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

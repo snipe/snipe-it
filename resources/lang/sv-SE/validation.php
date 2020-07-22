@@ -89,7 +89,6 @@ return array(
     'uploaded'             => 'Uppladdningen av :attribute misslyckades.',
     'url'                  => ':attribute Formatet är ogiltigt.',
     "unique_undeleted"     => ":attribute måste vara unikt.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

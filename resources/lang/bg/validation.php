@@ -89,7 +89,6 @@ return array(
     'uploaded'             => 'Атрибутът: не успя да качи.',
     'url'                  => 'Форматът на :attribute е невалиден.',
     "unique_undeleted"     => ":attribute трябва да бъде уникален.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
