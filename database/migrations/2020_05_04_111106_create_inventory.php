@@ -41,7 +41,7 @@ class CreateInventory extends Migration
             $table->string('manufacturer')->nullable();
             $table->string('serial_number')->nullable();
             $table->string('tag');
-            $table->binary('photo')->nullable();
+            $table->string('photo')->nullable();
             $table->boolean('checked')->default(false);
             $table->boolean('broken')->default(false);
             $table->dateTime('checked_at', 0)->nullable();

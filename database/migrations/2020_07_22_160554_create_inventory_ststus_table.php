@@ -25,10 +25,9 @@ class CreateInventoryStstusTable extends Migration
             $table->softDeletes();
             $table->engine = 'InnoDB';
         });
-
+        
         Schema::table('inventory_items', function (Blueprint $table) {
             $table->dropColumn('broken');
-            $table->dropColumn('photo');
             $table->string('photo')->nullable();
             $table->integer('status_id')->unsigned()->nullable();
             $table->foreign('status_id')->references('id')->on('inventory_status_labels')
