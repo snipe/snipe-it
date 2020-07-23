@@ -39,6 +39,7 @@ class InventoriesTransformer
             'name' => e($inventory->name),
             'device' =>  ($inventory->device) ? e($inventory->device) : null,
             'responsible' =>  ($inventory->responsible) ? e($inventory->responsible) : null,
+            'responsible_photo' =>  ($inventory->responsible_photo) ? e($inventory->responsible_photo_url()) : null,
             'coords' =>  ($inventory->coords) ? e($inventory->coords) : null,
             'log' =>  ($inventory->log) ? e($inventory->log) : null,
             'comment' =>  ($inventory->comment) ? e($inventory->comment) : null,

@@ -52,6 +52,12 @@
                 <img src="https://static-maps.yandex.ru/1.x/?ll={{ $inventory->coords}}&size=500,300&z=15&l=map&pt=37.620070,55.753630,pmwtm1~37.64,55.76363,pmwtm99" class="img-responsive img-thumbnail" alt="Map">
             </div>
         @endif
+
+            @if ($inventory->responsible_photo)
+                <div class="col-md-12 text-center">
+                    <img src="{{$inventory->responsible_photo_url()}}" class="img-responsive img-thumbnail" alt="Map">
+                </div>
+            @endif
     </div><!--/.col-md-3-->
 </div>
 

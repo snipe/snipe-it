@@ -48,13 +48,16 @@ final class InventoryItem extends SnipeModel
         'tag',
         'photo',
         'checked',
-        'broken',
         'checked_at',
         'inventory_id',
+        'status_id',
         'asset_id',
         'notes',
     ];
-
+    public function photo_url()
+    {
+        return '/uploads/inventory_items/'.$this->photo;
+    }
     public function inventory()
     {
         return $this->belongsTo('\App\Models\Inventory');
@@ -64,5 +67,8 @@ final class InventoryItem extends SnipeModel
     {
         return $this->belongsTo('\App\Models\Asset');
     }
-
+    public function status()
+    {
+        return $this->belongsTo('\App\Models\InventoryStatuslabel');
+    }
 }

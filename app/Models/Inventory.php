@@ -70,6 +70,10 @@ final class Inventory extends SnipeModel
         'status'
     ];
 
+    public function responsible_photo_url()
+    {
+        return '/uploads/inventories/'.$this->responsible_photo;
+    }
 
     public function inventory_items() {
         return $this->hasMany('\App\Models\InventoryItem');

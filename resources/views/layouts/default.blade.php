@@ -593,6 +593,14 @@
                             </li>
                         @endcan
 
+                            @can('view', \App\Models\Statuslabel::class)
+                                <li {!! (Request::is('inventorystatuslabels*') ? ' class="active"' : '') !!}>
+                                    <a href="{{ route('inventorystatuslabels.index') }}">
+                                        Статусы инвенторизаций
+                                    </a>
+                                </li>
+                            @endcan
+
                         @can('view', \App\Models\AssetModel::class)
                             <li>
                                 <a href="{{ route('models.index') }}" {{ (Request::is('/assetmodels') ? ' class="active"' : '') }}>

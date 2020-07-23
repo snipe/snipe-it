@@ -673,6 +673,21 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
         ]
     );
 
+    Route::resource('inventorystatuslabels', 'InventoryStatuslabelsController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.inventorystatuslabels.index',
+                    'store' => 'api.inventorystatuslabels.store',
+                    'show' => 'api.inventorystatuslabels.show',
+                    'update' => 'api.inventorystatuslabels.update',
+                    'destroy' => 'api.inventorystatuslabels.destroy'
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['inventorystatuslabel' => 'inventorystatuslabel_id']
+        ]
+    );
+
     // Status labels group
 
 

@@ -57,6 +57,13 @@ Route::group(['middleware' => 'auth'], function () {
           'parameters' => ['statuslabel' => 'statuslabel_id']
       ]);
 
+    /*
+    * inventory Status Labels
+     */
+    Route::resource('inventorystatuslabels', 'InventoryStatuslabelsController', [
+        'parameters' => ['inventorystatuslabel' => 'inventorystatuslabel_id']
+    ]);
+
 
     /*
     * Status Labels

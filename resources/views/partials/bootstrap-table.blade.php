@@ -348,7 +348,8 @@
         'fieldsets',
         'groups',
         'inventories',
-        'purchases'
+        'purchases',
+        "inventorystatuslabels"
     ];
 
     for (var i in formatters) {

@@ -22,6 +22,7 @@ use App\Http\Transformers\AccessoriesTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use Auth;
 use App\Models\AssetModel;
+use Image;
 
 class InventoryItemController extends Controller
 {
@@ -34,7 +35,7 @@ class InventoryItemController extends Controller
     {
 //        $this->authorize('view', User::class);
 
-        $inventory_items = InventoryItem::with('asset','inventory')
+        $inventory_items = InventoryItem::with('asset','inventory','status')
             ->select([
                 'inventory_items.id',
                 'inventory_items.notes',
@@ -46,10 +47,10 @@ class InventoryItemController extends Controller
                 'inventory_items.tag',
                 'inventory_items.photo',
                 'inventory_items.checked',
-                'inventory_items.broken',
                 'inventory_items.checked_at',
                 'inventory_items.inventory_id',
                 'inventory_items.asset_id',
+                'inventory_items.status_id',
                 'inventory_items.created_at',
                 'inventory_items.updated_at',
             ]);
@@ -106,6 +107,17 @@ class InventoryItemController extends Controller
         $inventory_item = InventoryItem::findOrFail($id);
 
         $inventory_item->fill($request->all());
+
+        if ($request['photo']){
+            $destinationPath = public_path().'/uploads/inventory_items/';
+
+            $file = base64_decode($inventory_item->photo);
+            $filename = 'items-'.$inventory_item->id.'-'.str_random(8).".jpg";
+            $success = file_put_contents($destinationPath.$filename, $file);
+            if ($success>0){
+                $inventory_item->photo = $filename;
+            }
+        }
 
 
         if ($inventory_item->save()) {

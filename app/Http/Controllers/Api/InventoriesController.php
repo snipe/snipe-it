@@ -158,6 +158,17 @@ class InventoriesController extends Controller
         $inventory->name = $location->name ."_".date("d.m.Y H:i:s");
         $inventory->location_id = $location->id;
         $inventory->fill($request->all());
+
+
+        if ($request['responsible_photo']){
+            $destinationPath = public_path().'/uploads/inventories/';
+            $file = base64_decode($inventory->responsible_photo);
+            $filename = 'inventories-'.$inventory->id.'-'.str_random(8).".jpg";
+            $success = file_put_contents($destinationPath.$filename, $file);
+            if ($success>0){
+                $inventory->responsible_photo = $filename;
+            }
+        }
         if ($inventory->save()) {
             foreach ($assets as &$asset) {
                 $inventory_item = new InventoryItem;
@@ -191,6 +202,15 @@ class InventoriesController extends Controller
         $inventory = Inventory::findOrFail($id);
         $inventory->fill($request->all());
 
+        if ($request['responsible_photo']){
+            $destinationPath = public_path().'/uploads/inventories/';
+            $file = base64_decode($inventory->responsible_photo);
+            $filename = 'inventories-'.$inventory->id.'-'.str_random(8).".jpg";
+            $success = file_put_contents($destinationPath.$filename, $file);
+            if ($success>0){
+                $inventory->responsible_photo = $filename;
+            }
+        }
 
         if ($inventory->save()) {
             return response()->json(
