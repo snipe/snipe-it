@@ -553,6 +553,20 @@
             return  value.formatted;
         }
     }
+    function photoDisplayFormatter(value) {
+        if (value) {
+            // return  '<img height="50" src="'+value+'" class="img-responsive img-thumbnail">';
+            return  '<a href="'+value+'" data-lightbox="roadtrip"><i class="fa fa-camera fa-lg" aria-hidden="true"></i></a>';
+        }
+    }
+
+
+    function statusInventoryItemFormatter(value) {
+        console.log(value);
+        if(value){
+            return '<span class="label label-default" style="background-color:'+value.color+'; color:white">'+value.name+'</span>';
+        }
+    }
 
     function iconFormatter(value) {
         if (value) {

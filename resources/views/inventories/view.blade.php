@@ -75,7 +75,9 @@
 
             @if ($inventory->responsible_photo)
                 <div class="row">
+                    <a href="{{$inventory->responsible_photo_url()}}" data-lightbox="inv">
                     <img src="{{$inventory->responsible_photo_url()}}" class="img-responsive img-thumbnail">
+                    </a>
                 </div>
             @endif
     </div><!--/.col-md-3-->

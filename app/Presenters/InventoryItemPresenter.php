@@ -31,6 +31,21 @@ class InventoryItemPresenter extends Presenter
                 "visible" => true,
                 "formatter" => 'checkFormatter',
             ],[
+                "field" => "status",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => "Статус",
+                "visible" => true,
+                "formatter" => 'statusInventoryItemFormatter',
+            ],[
+                "field" => "photo",
+                "searchable" => false,
+                "sortable" => false,
+                "visible" => false,
+                "title" => "Фото",
+                "formatter" => "photoDisplayFormatter"
+            ],[
                 "field" => "checked_at",
                 "searchable" => false,
                 "sortable" => true,
