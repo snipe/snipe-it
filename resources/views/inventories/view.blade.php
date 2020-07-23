@@ -47,15 +47,35 @@
     </div><!--/.col-md-9-->
     <div class="col-md-3">
 
-        @if (($inventory->coords!='') && (config('services.google.maps_api_key')))
-            <div class="col-md-12 text-center">
-                <img src="https://static-maps.yandex.ru/1.x/?ll={{ $inventory->coords}}&size=500,300&z=15&l=map&pt=37.620070,55.753630,pmwtm1~37.64,55.76363,pmwtm99" class="img-responsive img-thumbnail" alt="Map">
+        @if (($inventory->coords!='') && (config('services.yandex.maps_api_key')))
+            <div class="row">
+                <div lass="col-md-12">
+                <div id="map" style="width: 100%; height: 500px; padding: 0; margin: 0;"></div>
+                </div>
             </div>
+            <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey={{config('services.yandex.maps_api_key')}}" type="text/javascript"></script>
+            <script type="text/javascript">
+                ymaps.ready(init);
+                function init() {
+                    var myMap = new ymaps.Map("map", {
+                            center: [{{$inventory->coords}}],
+                            zoom: 13
+                        });
+                    myMap.geoObjects
+                        .add(new ymaps.Placemark([{{$inventory->coords}}], {
+                            balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
+                        }, {
+                            preset: 'islands#icon',
+                            iconColor: '#0095b6'
+                        }));
+                }
+
+            </script>
         @endif
 
             @if ($inventory->responsible_photo)
-                <div class="col-md-12 text-center">
-                    <img src="{{$inventory->responsible_photo_url()}}" class="img-responsive img-thumbnail" alt="Map">
+                <div class="row">
+                    <img src="{{$inventory->responsible_photo_url()}}" class="img-responsive img-thumbnail">
                 </div>
             @endif
     </div><!--/.col-md-3-->
