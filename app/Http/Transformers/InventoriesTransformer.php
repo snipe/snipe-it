@@ -47,6 +47,7 @@ class InventoriesTransformer
             'updated_at' => Helper::getFormattedDateObject($inventory->updated_at, 'datetime'),
             'total' => (int) $inventory->total,
             'checked' => (int) $inventory->checked,
+            'successfully' => (int) $inventory->successfully,
             'location' => ($inventory->location) ? (new LocationsTransformer)->transformLocation($inventory->location) : null,
             'inventory_items' => $inventory_items_arr,
         ];

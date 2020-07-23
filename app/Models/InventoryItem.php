@@ -53,6 +53,7 @@ final class InventoryItem extends SnipeModel
         'status_id',
         'asset_id',
         'notes',
+        'successfully',
     ];
     public function photo_url()
     {

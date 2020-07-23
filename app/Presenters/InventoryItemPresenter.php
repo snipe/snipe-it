@@ -14,6 +14,7 @@ class InventoryItemPresenter extends Presenter
      */
     public static function dataTableLayout()
     {
+
         $layout = [
             [
                 "field" => "id",
@@ -28,6 +29,14 @@ class InventoryItemPresenter extends Presenter
                 "sortable" => true,
                 "switchable" => true,
                 "title" => "Проверено",
+                "visible" => true,
+                "formatter" => 'checkFormatter',
+            ],[
+                "field" => "successfully",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => "Успешно",
                 "visible" => true,
                 "formatter" => 'checkFormatter',
             ],[

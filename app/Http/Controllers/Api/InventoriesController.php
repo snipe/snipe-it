@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Transformers\InventoriesTransformer;
 use App\Http\Transformers\InventoryItemTransformer;
 use App\Http\Transformers\LocationsTransformer;
+use App\Models\InventoryStatuslabel;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -54,6 +55,9 @@ class InventoriesController extends Controller
                 'inventory_items as total',
                 'inventory_items as checked' => function (Builder $query) {
                     $query->where('checked', true);
+                },
+                'inventory_items as successfully' => function (Builder $query) {
+                    $query->where('successfully', true);
                 },
             ])
             ;
@@ -107,7 +111,6 @@ class InventoriesController extends Controller
     public function show($id)
     {
 //        $this->authorize('view', Location::class);
-//        $inventory = Inventory::findOrFail($id);
 
         $inventory = Inventory::with('inventory_items','location')
             ->select([
@@ -129,6 +132,9 @@ class InventoriesController extends Controller
                 'inventory_items as total',
                 'inventory_items as checked' => function (Builder $query) {
                     $query->where('checked', true);
+                },
+                'inventory_items as successfully' => function (Builder $query) {
+                    $query->where('successfully', true);
                 },
             ])
             ->findOrFail($id);

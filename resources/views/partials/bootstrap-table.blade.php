@@ -530,6 +530,18 @@
 
     }
 
+    function inventorySuccessfullyFormatter(value, row) {
+        console.log(row)
+        if (row.total >=0 && row.successfully >=0) {
+            var destination = 'inventories';
+            if (row.total == row.successfully){
+                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '" style="color: green"> ' + row.successfully + '/' + row.total + '</a>';
+            }else{
+                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '"> ' + row.successfully + '/' + row.total + '</a>';
+            }
+        }
+
+    }
     function inventoriesResultFormatter(value, row) {
         if (row.total >=0 && row.checked >=0) {
             if (row.total == row.checked){

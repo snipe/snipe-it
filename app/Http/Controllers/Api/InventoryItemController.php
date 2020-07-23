@@ -53,6 +53,7 @@ class InventoryItemController extends Controller
                 'inventory_items.status_id',
                 'inventory_items.created_at',
                 'inventory_items.updated_at',
+                'inventory_items.successfully',
             ]);
 
         if ($request->filled('inventory_id')) {
@@ -116,6 +117,11 @@ class InventoryItemController extends Controller
             $success = file_put_contents($destinationPath.$filename, $file);
             if ($success>0){
                 $inventory_item->photo = $filename;
+            }
+        }
+        if ($inventory_item->status){
+            if($inventory_item->status->success){
+                $inventory_item->successfully= true;
             }
         }
 

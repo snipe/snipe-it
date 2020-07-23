@@ -54,6 +54,14 @@ class InventoryPresenter extends Presenter
                 "visible" => true,
                 "formatter" => 'inventoryCountFormatter',
             ],[
+                "field" => "total2",
+                "searchable" => false,
+                "sortable" => false,
+//                "switchable" => false,
+                "title" => "Успешно/Всего",
+                "visible" => true,
+                "formatter" => 'inventorySuccessfullyFormatter',
+            ],[
                 "field" => "responsible",
                 "searchable" => true,
                 "sortable" => true,

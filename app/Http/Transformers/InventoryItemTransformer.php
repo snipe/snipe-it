@@ -42,6 +42,7 @@ class InventoryItemTransformer
             'tag' =>  ($inventory_item->tag) ? e($inventory_item->tag) : null,
             'photo' =>  ($inventory_item->photo) ? e($inventory_item->photo_url()) : null,
             'checked' =>  (bool) $inventory_item->checked,
+            'successfully' =>  (bool) $inventory_item->successfully,
             'checked_at' => Helper::getFormattedDateObject($inventory_item->checked_at, 'datetime'),
             'asset_id' =>   (int) $inventory_item->asset_id,
 //            'asset' => ($inventory_item->asset_id) ? (new AssetsTransformer)->transformAsset($inventory_item->asset) : null,
