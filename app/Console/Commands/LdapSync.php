@@ -187,8 +187,33 @@ class LdapSync extends Command
 
                 // Sync activated state for Active Directory.
                 if ( array_key_exists('useraccountcontrol', $results[$i]) ) {
+                    /* The following is _probably_ the correct logic, but we can't use it because
+                       some users may have been dependent upon the previous behavior, and this
+                       could cause additional access to be available to users they don't want
+                       to allow to log in.
+
+                    $useraccountcontrol = $results[$i]['useraccountcontrol'][0];
+                    if(
+                        // based on MS docs at: https://support.microsoft.com/en-us/help/305144/how-to-use-useraccountcontrol-to-manipulate-user-account-properties
+                        ($useraccountcontrol & 0x200) && // is a NORMAL_ACCOUNT
+                        !($useraccountcontrol & 0x02) && // *and* _not_ ACCOUNTDISABLE
+                        !($useraccountcontrol & 0x10)    // *and* _not_ LOCKOUT
+                    ) {
+                        $user->activated = 1;
+                    } else {
+                        $user->activated = 0;
+                    } */
                   $enabled_accounts = [
-                    '512', '544', '66048', '66080', '262656', '262688', '328192', '328224', '4260352'
+                    '512',    // 0x200    NORMAL_ACCOUNT
+                    '544',    // 0x220    NORMAL_ACCOUNT, PASSWD_NOTREQD
+                    '66048',  // 0x10200  NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
+                    '66080',  // 0x10220  NORMAL_ACCOUNT, PASSWD_NOTREQD, DONT_EXPIRE_PASSWORD
+                    '262656', // 0x40200  NORMAL_ACCOUNT, SMARTCARD_REQUIRED
+                    '262688', // 0x40220  NORMAL_ACCOUNT, PASSWD_NOTREQD, SMARTCARD_REQUIRED
+                    '328192', // 0x50200  NORMAL_ACCOUNT, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
+                    '328224', // 0x50220  NORMAL_ACCOUNT, PASSWD_NOT_REQD, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
+                    '4260352',// 0x410200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, DONT_REQ_PREAUTH
+                    '1049088',// 0x100200 NORMAL_ACCOUNT, NOT_DELEGATED
                   ];
                   $user->activated = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
                 }
