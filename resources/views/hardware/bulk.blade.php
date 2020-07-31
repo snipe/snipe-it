@@ -32,11 +32,25 @@
           <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
             <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
             <div class="input-group col-md-3">
-              <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ old('purchase_date') }}" arial-label="purchase_date">
-              <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-              {!! $errors->first('purchase_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date') }}">
+                <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+              </div>
+              {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
           </div>
+          <!-- Expected Checkin Date -->
+          <div class="form-group {{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
+             <label for="expected_checkin" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
+             <div class="input-group col-md-3">
+                  <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                      <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ Input::old('expected_checkin') }}">
+                      <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                 </div>
+                 {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+             </div>
+          </div>
+
 
           <!-- Status -->
           <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
