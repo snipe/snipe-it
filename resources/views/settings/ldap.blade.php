@@ -409,7 +409,7 @@
                         }
                         $('#ldapad_test_results').html(errorIcon + errorMessage);
                     } else {
-                        $('#ldapad_test_results').html('farts');
+                        $('#ldapad_test_results').html('Something went wrong :( ');
                        // $('#ldapad_test_results').html(errorIcon + data.responseText.message);
                     }
                 }
