@@ -66,7 +66,7 @@ final class InventoryItem extends SnipeModel
 
     public function asset()
     {
-        return $this->belongsTo('\App\Models\Asset');
+        return $this->belongsTo('\App\Models\Asset')->withTrashed();
     }
     public function status()
     {
