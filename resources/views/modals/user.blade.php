@@ -2,11 +2,8 @@
 
 
 <script nonce="{{ csrf_token() }}">
-    console.log('Fart');
 
     window.setTimeout(function () {
-
-        console.log('Dom is ready');
         $('#modal-genPassword').pGenerator({
             'bind': 'click',
             'passwordElement': '#modal-password',
@@ -17,7 +14,6 @@
             'numbers': true,
             'specialChars': true,
             'onPasswordGenerated': function (generatedPassword) {
-                console.log('WTF?');
                 $('#modal-password_confirmation').val($('#modal-password').val());
             }
         });
