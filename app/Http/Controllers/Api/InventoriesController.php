@@ -125,6 +125,7 @@ class InventoriesController extends Controller
                 'inventories.log',
                 'inventories.comment',
                 'inventories.location_id',
+                'inventories.asset_id',
                 'inventories.created_at',
                 'inventories.updated_at',
             ])
