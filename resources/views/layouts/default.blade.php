@@ -829,6 +829,7 @@
 
 
     <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script src="/js/pGenerator.jquery.js"></script>
 
     @section('moar_scripts')
     @show
