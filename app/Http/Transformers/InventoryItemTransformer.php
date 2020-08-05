@@ -52,7 +52,7 @@ class InventoryItemTransformer
             'updated_at' => Helper::getFormattedDateObject($inventory_item->updated_at, 'datetime'),
         ];
         if ($vsAsset){
-            dd($inventory_item->asset_id);
+            dump($inventory_item->asset_id);
             $array["asset"] = ($inventory_item->asset_id) ? (new AssetsTransformer)->transformAsset($inventory_item->asset) : null;
         }
 
