@@ -35,7 +35,7 @@ class InventoriesController extends Controller
     {
 //        $this->authorize('view', User::class);
 
-        $inventories = Inventory::with('inventory_items','location','asset')
+        $inventories = Inventory::with('inventory_items','location')
             ->select([
                 'inventories.id',
                 'inventories.status',
@@ -47,7 +47,6 @@ class InventoriesController extends Controller
                 'inventories.coords',
                 'inventories.log',
                 'inventories.comment',
-                'inventories.asset_id',
                 'inventories.location_id',
                 'inventories.created_at',
                 'inventories.updated_at',
@@ -113,7 +112,7 @@ class InventoriesController extends Controller
     {
 //        $this->authorize('view', Location::class);
 
-        $inventory = Inventory::with('inventory_items','location','asset')
+        $inventory = Inventory::with('inventory_items','location')
             ->select([
                 'inventories.id',
                 'inventories.status',
@@ -126,7 +125,6 @@ class InventoriesController extends Controller
                 'inventories.log',
                 'inventories.comment',
                 'inventories.location_id',
-                'inventories.asset_id',
                 'inventories.created_at',
                 'inventories.updated_at',
             ])
