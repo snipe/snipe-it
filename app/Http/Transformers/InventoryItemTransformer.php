@@ -53,7 +53,6 @@ class InventoryItemTransformer
         ];
         if ($vsAsset){
             $array["asset"] = ($inventory_item->asset_id) ? (new AssetsTransformer)->transformAsset($inventory_item->asset) : null;
-
         }
 
         return $array;
