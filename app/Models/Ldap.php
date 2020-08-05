@@ -261,8 +261,12 @@ class Ldap extends Model
                 throw new Exception('Problem with your LDAP connection. Try checking the Use TLS setting in Admin > Settings. ');
             }
 
-
-            $search_results = ldap_search($ldapconn, $base_dn, '('.$filter.')');
+            try {
+                $search_results = ldap_search($ldapconn, $base_dn, '('.$filter.')');
+            } catch (Exception $e) {
+                \Log::error("Unable to perform LDAP search in: '".$base_dn."'");
+                $search_results = false;
+            }
 
             if (!$search_results) {
                 return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
