@@ -36,6 +36,7 @@ class InventoryItemController extends Controller
 //        $this->authorize('view', User::class);
 
         $inventory_items = InventoryItem::with('asset','inventory','status')
+            ->withTrashed()
             ->select([
                 'inventory_items.id',
                 'inventory_items.notes',
