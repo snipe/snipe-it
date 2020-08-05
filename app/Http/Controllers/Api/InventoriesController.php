@@ -112,7 +112,7 @@ class InventoriesController extends Controller
     {
 //        $this->authorize('view', Location::class);
 
-        $inventory = Inventory::with('inventory_items','location')
+        $inventory = Inventory::with('inventory_items','location','asset')
             ->select([
                 'inventories.id',
                 'inventories.status',
