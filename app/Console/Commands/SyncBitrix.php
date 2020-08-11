@@ -116,10 +116,22 @@ class SyncBitrix extends Command
         }
         print("Синхрониизтрованно ".$count." объектов Битрикс\n");
 
-        $response = $client->request('GET', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/crm.company.list?FILTER[COMPANY_TYPE]=1');
-        $response = $response->getBody()->getContents();
-        $bitrix_suppliers = json_decode($response, true);
-        $bitrix_suppliers = $bitrix_suppliers["result"];
+        $next = 0;
+        $finish = false;
+        $bitrix_suppliers = [];
+        while ($finish == false){
+            $response = $client->request('GET', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/crm.company.list?FILTER[COMPANY_TYPE]=1&start='."$next");
+            $response = $response->getBody()->getContents();
+            $suppliers_response = json_decode($response, true);
+            $suppliers_data = $suppliers_response["result"];
+            $bitrix_suppliers = array_merge($bitrix_suppliers, $suppliers_data);
+            if (array_key_exists("next", $suppliers_response)) {
+                $next =  $suppliers_response["next"];
+            }else{
+                $finish = true;
+            }
+        }
+
         $count = 0 ;
         foreach ($bitrix_suppliers as &$value) {
             $count++;
@@ -137,6 +149,7 @@ class SyncBitrix extends Command
 
         }
         print("Синхрониизтрованно ".$count." поставщиков \n");
+
 
 
         $response = $client->request('GET', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.get?IBLOCK_TYPE_ID=lists&IBLOCK_ID=77');
