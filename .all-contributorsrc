@@ -1731,17 +1731,6 @@
       "contributions": [
         "code"
       ]
-    },
-    {
-      "login": "PeterUpfold",
-      "name": "Peter Upfold",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/1255375?v=4",
-      "profile": "https://peter.upfold.org.uk/",
-      "contributions": [
-        "code"
-      ]
     }
-  ],
-  "repoType": "github",
-  "commitConvention": "none"
+  ]
 }
