@@ -128,7 +128,7 @@ class LdapSync extends Command
                     $location_users = Ldap::findLdapUsers($ldap_loc["ldap_ou"]);
                 } catch (\Exception $e) { // FIXME: this is stolen from line 77 or so above
                     if ($this->option('json_summary')) {
-                        $json_summary = [ "error" => true, "error_message" => "Location ID: ".$ldap_loc['id']." (".$ldap_loc['name'].") cannot connect to \"".$ldap_loc["ldap_ou"]."\" - ".$e->getMessage(), "summary" => [] ];
+                        $json_summary = [ "error" => true, "error_message" => trans('admin/users/message.error.ldap_could_not_search')." Location: ".$ldap_loc['name']." (ID: ".$ldap_loc['id'].") cannot connect to \"".$ldap_loc["ldap_ou"]."\" - ".$e->getMessage(), "summary" => [] ];
                         $this->info(json_encode($json_summary));
                     }
                     LOG::info($e);
