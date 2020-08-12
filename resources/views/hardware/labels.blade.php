@@ -51,9 +51,9 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         padding-bottom: .04in;
     }
     img.barcode {
-        display:block;
-
-        padding-top: .11in;
+        display: block;
+        height: 30px;
+        margin-top: -.10in;
         width: 100%;
     }
     .qr_text {
