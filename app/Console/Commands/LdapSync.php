@@ -124,7 +124,16 @@ class LdapSync extends Command
 
             // Grab subsets based on location-specific DNs, and overwrite location for these users.
             foreach ($ldap_ou_locations as $ldap_loc) {
-                $location_users = Ldap::findLdapUsers($ldap_loc["ldap_ou"]);
+                try {
+                    $location_users = Ldap::findLdapUsers($ldap_loc["ldap_ou"]);
+                } catch (\Exception $e) { // FIXME: this is stolen from line 77 or so above
+                    if ($this->option('json_summary')) {
+                        $json_summary = [ "error" => true, "error_message" => trans('admin/users/message.error.ldap_could_not_search')." Location: ".$ldap_loc['name']." (ID: ".$ldap_loc['id'].") cannot connect to \"".$ldap_loc["ldap_ou"]."\" - ".$e->getMessage(), "summary" => [] ];
+                        $this->info(json_encode($json_summary));
+                    }
+                    LOG::info($e);
+                    return [];
+                }
                 $usernames = array();
                 for ($i = 0; $i < $location_users["count"]; $i++) {
 
@@ -264,7 +273,7 @@ class LdapSync extends Command
                 }
             }
         } else if ($this->option('json_summary')) {
-            $json_summary = [ "error" => false, "error_message" => "", "summary" => $summary ];
+            $json_summary = [ "error" => false, "error_message" => "", "summary" => $summary ]; // hardcoding the error to false and the error_message to blank seems a bit weird
             $this->info(json_encode($json_summary));
         } else {
             return $summary;
