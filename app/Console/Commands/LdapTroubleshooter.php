@@ -226,7 +226,7 @@ class LdapTroubleshooter extends Command
                 }
                 $username = $this->ask("Username");
                 $password = $this->secret("Password");
-                $this->test_authed_bind($ldap_url[0], $ldap_url[1], $ldap_url[2], $username, $password);
+                $this->test_authed_bind($ldap_url[0], $ldap_url[1], $ldap_url[2], $username, $password); // FIXME - should do some other stuff here, maybe with the concatenating or something?
             }
         }
 
@@ -237,7 +237,7 @@ class LdapTroubleshooter extends Command
     {
         $lconn = ldap_connect($ldap_url);
         ldap_set_option($lconn,LDAP_OPT_PROTOCOL_VERSION,3); // should we 'test' different protocol versions here? Does anyone even use anything other than LDAPv3?
-                                                          // no - it's formally deprecated: https://tools.ietf.org/html/rfc3494
+                                                             // no - it's formally deprecated: https://tools.ietf.org/html/rfc3494
         if(!$check_cert) {
             ldap_set_option($lconn, LDAP_OPT_X_TLS_REQUIRE_CERT, 0);
         }
