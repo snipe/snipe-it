@@ -103,7 +103,7 @@ class ReportsController extends Controller
         $this->authorize('reports.view');
         $depreciations = Depreciation::get();
         // Grab all the assets
-        $assets = Asset::with( 'assignedTo', 'assetstatus', 'defaultLoc', 'location', 'assetlog', 'company', 'model.category', 'model.depreciation')
+        $assets = Asset::with( 'assignedTo', 'assetstatus', 'defaultLoc', 'location', 'company', 'model.category', 'model.depreciation')
                        ->orderBy('created_at', 'DESC')->get();
 
         return view('reports/depreciation', compact('assets'))->with('depreciations',$depreciations);
