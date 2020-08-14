@@ -76,10 +76,18 @@ class CheckinLicenseNotification extends Notification
         $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
 
-        $fields = [
-            'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
-            'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
-        ];
+        if ($admin) {
+            $fields = [
+                'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
+                'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
+            ];
+        } else {
+            $fields = [
+                'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
+                'By' => 'CLI tool',
+            ];
+        }
+
 
 
 
