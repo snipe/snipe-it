@@ -72,14 +72,15 @@ class CheckinLicensesFromAllUsers extends Command
 
         foreach ($licenseSeats as $seat) {
             $this->info($seat->user->username .' has a license seat for '.$license->name);
-
-            if (!$notify) {
-                $seat->user->email = null;
-            }
-
             $seat->assigned_to = null;
 
             if ($seat->save()) {
+
+                // Override the email address so we don't notify on checkin
+                if (!$notify) {
+                    $seat->user->email = null;
+                }
+
                 // Log the checkin
                 $seat->logCheckin($seat->user, 'Checked in via cli tool');
             }
