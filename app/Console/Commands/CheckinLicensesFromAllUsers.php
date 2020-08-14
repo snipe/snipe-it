@@ -81,7 +81,7 @@ class CheckinLicensesFromAllUsers extends Command
 
             if ($seat->save()) {
                 // Log the checkin
-                $seat->logCheckin($license, 'Checked in via cli tool');
+                $seat->logCheckin($seat->user, 'Checked in via cli tool');
             }
 
 
