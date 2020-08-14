@@ -41,8 +41,9 @@ trait Loggable
         $settings = Setting::getSettings();
         $log = new Actionlog;
         $log = $this->determineLogItemType($log);
-        if(Auth::user())
+        if (Auth::user()) {
             $log->user_id = Auth::user()->id;
+        }
 
         if (!isset($target)) {
             throw new \Exception('All checkout logs require a target.');
@@ -144,9 +145,11 @@ trait Loggable
 
         $log->location_id = null;
         $log->note = $note;
-        if(Auth::user())
-            $log->user_id = Auth::user()->id;
 
+        if (Auth::user()) {
+            $log->user_id = Auth::user()->id;
+        }
+        
         $log->logaction('checkin from');
 
         $params = [
