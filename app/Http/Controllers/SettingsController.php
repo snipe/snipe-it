@@ -1043,6 +1043,11 @@ class SettingsController extends Controller
             $setting->saml_sp_x509cert          = $request->input('saml_sp_x509cert');
             $setting->saml_sp_privatekey        = $request->input('saml_sp_privatekey');
         }
+        if (!empty($request->input('saml_sp_x509certNew'))) {
+            $setting->saml_sp_x509certNew       = $request->input('saml_sp_x509certNew');
+        } else {
+            $setting->saml_sp_x509certNew       = "";
+        }
         $setting->saml_custom_settings          = $request->input('saml_custom_settings');
 
         if ($setting->save()) {

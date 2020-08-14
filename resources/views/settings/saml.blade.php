@@ -145,7 +145,9 @@
                             {{ Form::label('saml_custom_settings', trans('admin/settings/general.saml_custom_settings')) }}
                         </div>
                         <div class="col-md-9">
-                            {{ Form::textarea('saml_custom_settings', old('saml_custom_settings', $setting->saml_custom_settings), ['class' => 'form-control','placeholder' => 'example.option=false', 'wrap' => 'off', $setting->demoMode]) }}
+                            {{ Form::textarea('saml_custom_settings', old('saml_custom_settings', $setting->saml_custom_settings), ['class' => 'form-control','placeholder' => 'example.option=false
+sp_x509cert=file:///...
+sp_private_key=file:///', 'wrap' => 'off', $setting->demoMode]) }}
                             <p class="help-block">{{ trans('admin/settings/general.saml_custom_settings_help') }}</p>
                             {!! $errors->first('saml_custom_settings', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                         </div>
