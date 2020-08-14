@@ -144,7 +144,9 @@ trait Loggable
 
         $log->location_id = null;
         $log->note = $note;
-        $log->user_id = Auth::user()->id;
+        if(Auth::user())
+            $log->user_id = Auth::user()->id;
+
         $log->logaction('checkin from');
 
         $params = [
