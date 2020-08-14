@@ -44,7 +44,7 @@ class LDAPImportController extends Controller
     {
         $this->authorize('update', User::class);
         try {
-            $this->ldap->connect();
+            //$this->ldap->connect(); I don't think this actually exists in LdapAd.php, and we don't really 'persist' LDAP connections anyways...right?
         } catch (\Exception $e) {
             return redirect()->route('users.index')->with('error', $e->getMessage());
         }

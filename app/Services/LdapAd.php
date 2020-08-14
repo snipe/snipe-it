@@ -52,9 +52,9 @@ class LdapAd extends LdapAdConfiguration
      *
      * @since 5.0.0
      *
-     * @return bool
+     * @return void
      */
-    public function init() : bool
+    public function init()
     {
         // Already initialized
         if($this->ldap) {
@@ -68,6 +68,10 @@ class LdapAd extends LdapAdConfiguration
             return true;
         }
         return false;
+    }
+
+    public function __construct() {
+        $this->init();
     }
 
         /**
@@ -376,7 +380,7 @@ class LdapAd extends LdapAdConfiguration
     public function testLdapAdBindConnection(): void
     {
         try {
-            $this->ldap->search()->ous()->get()->count();
+            $this->ldap->search()->ous()->get()->count(); //it's saying this is null?
         } catch (Exception $th) {
             Log::error($th->getMessage());
             throw new Exception('Unable to search LDAP directory!');
@@ -393,7 +397,7 @@ class LdapAd extends LdapAdConfiguration
     public function testLdapAdUserConnection(): void
     {
         try {
-            $this->ldap->connect();
+            $this->ldap->connect(); //uh, this doesn't seem to exist :/
         } catch (\Adldap\Auth\BindException $e) {
             Log::error($e);
             throw new Exception('Unable to connect to LDAP directory!');
@@ -438,7 +442,7 @@ class LdapAd extends LdapAdConfiguration
      */
     public function getLdapUsers(): Paginator
     {
-        $search = $this->ldap->search()->users()->in($this->getBaseDn());
+        $search = $this->ldap->search()->users()->in($this->getBaseDn()); //this looks wrong; we should instead have a passable parameter that does this, and use this as a 'sane' default, yeah?
 
         $filter = $this->getFilter();
         if (!is_null($filter)) {
