@@ -36,6 +36,7 @@ public/uploads/companies/*
 public/uploads/categories/*
 public/uploads/users/*
 storage/app/private_uploads/users/*
+storage/backups
 public/uploads/departments/*
 storage/debugbar/
 storage/dumps/*

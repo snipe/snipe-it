@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fe8a441e49d1299687346810b350e00",
+    "content-hash": "68763457c0dcf2fe7789d3810128e040",
     "packages": [
         {
             "name": "adldap2/adldap2",
-            "version": "v10.2.3",
+            "version": "v10.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Adldap2/Adldap2.git",
-                "reference": "2baffac2dfef308f0a94afa360b6a77540730fd2"
+                "reference": "1294c92746e3fb3bb59cd7756ca7838a1e705a2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Adldap2/Adldap2/zipball/2baffac2dfef308f0a94afa360b6a77540730fd2",
-                "reference": "2baffac2dfef308f0a94afa360b6a77540730fd2",
+                "url": "https://api.github.com/repos/Adldap2/Adldap2/zipball/1294c92746e3fb3bb59cd7756ca7838a1e705a2a",
+                "reference": "1294c92746e3fb3bb59cd7756ca7838a1e705a2a",
                 "shasum": ""
             },
             "require": {
@@ -63,7 +63,7 @@
                 "ldap",
                 "windows"
             ],
-            "time": "2020-03-08T23:04:47+00:00"
+            "time": "2020-05-04T21:10:15+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -2884,6 +2884,12 @@
                 "s3",
                 "sftp",
                 "storage"
+            ],
+            "funding": [
+                {
+                    "url": "https://offset.earth/frankdejonge",
+                    "type": "other"
+                }
             ],
             "time": "2020-04-16T13:21:26+00:00"
         },
@@ -8893,6 +8899,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
@@ -8975,6 +8982,16 @@
                 "phpunit",
                 "testing",
                 "xunit"
+            ],
+            "funding": [
+                {
+                    "url": "https://phpunit.de/donate.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
             ],
             "time": "2020-03-31T08:52:04+00:00"
         },
@@ -9558,6 +9575,20 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-03-30T11:41:10+00:00"
         },
         {

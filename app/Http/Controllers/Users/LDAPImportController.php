@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Users;
 use App\Services\LdapAd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -44,7 +45,7 @@ class LDAPImportController extends Controller
     {
         $this->authorize('update', User::class);
         try {
-            $this->ldap->connect();
+            $this->ldap->testLdapAdUserConnection();
         } catch (\Exception $e) {
             return redirect()->route('users.index')->with('error', $e->getMessage());
         }

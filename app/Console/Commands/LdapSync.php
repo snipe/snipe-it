@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Setting;
-use App\Models\Ldap;
+use App\Services\LdapAd;
 use App\Models\User;
 use App\Models\Location;
 use Log;
@@ -53,8 +53,8 @@ class LdapSync extends Command
         $ldap_result_email = Setting::getSettings()->ldap_email;
 
         try {
-            $ldapconn = Ldap::connectToLdap();
-            Ldap::bindAdminToLdap($ldapconn);
+            $ldap = new LdapAd();
+            $ldap->init();
         } catch (\Exception $e) {
             if ($this->option('json_summary')) {
                 $json_summary = [ "error" => true, "error_message" => $e->getMessage(), "summary" => [] ];
@@ -68,12 +68,14 @@ class LdapSync extends Command
 
         try {
             if ($this->option('base_dn') != '') {
-                $search_base = $this->option('base_dn');
-                LOG::debug('Importing users from specified base DN: \"'.$search_base.'\".');
+                $ldap->baseDn = $this->option('base_dn');
+                LOG::debug('Importing users from specified base DN: \"'.$this->option('base_dn').'\".');
             } else {
                 $search_base = null;
             }
-            $results = Ldap::findLdapUsers($search_base);
+            $ldapusers = $ldap->getLdapUsers();
+            $results = $ldapusers->getResults();
+            $results["count"] = $ldapusers->count();
         } catch (\Exception $e) {
             if ($this->option('json_summary')) {
                 $json_summary = [ "error" => true, "error_message" => $e->getMessage(), "summary" => [] ];
@@ -128,7 +130,7 @@ class LdapSync extends Command
                 $usernames = array();
                 for ($i = 0; $i < $location_users["count"]; $i++) {
 
-                    if (array_key_exists($ldap_result_username, $location_users[$i])) {
+                    if (isset($location_users[$i][$ldap_result_username])) {
                         $location_users[$i]["ldap_location_override"] = true;
                         $location_users[$i]["location_id"] = $ldap_loc["id"];
                         $usernames[] = $location_users[$i][$ldap_result_username][0];
@@ -138,7 +140,7 @@ class LdapSync extends Command
 
                 // Delete located users from the general group.
                 foreach ($results as $key => $generic_entry) {
-                   if ((is_array($generic_entry)) && (array_key_exists($ldap_result_username, $generic_entry))) {
+                   if ((is_array($generic_entry)) && (isset($generic_entry[$ldap_result_username]))) {
                         if (in_array($generic_entry[$ldap_result_username][0], $usernames)) {
                             unset($results[$key]);
                         }
@@ -164,7 +166,7 @@ class LdapSync extends Command
                 $item["lastname"] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : "";
                 $item["firstname"] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : "";
                 $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
-                $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
+                $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"][0]:"";
                 $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
 
                 $user = User::where('username', $item["username"])->first();
@@ -186,7 +188,7 @@ class LdapSync extends Command
                 $user->employee_num = e($item["employee_number"]);
 
                 // Sync activated state for Active Directory.
-                if ( array_key_exists('useraccountcontrol', $results[$i]) ) {
+                if ( isset($results[$i]['useraccountcontrol']) ) {
                   $enabled_accounts = [
                     '512', '544', '66048', '66080', '262656', '262688', '328192', '328224', '4260352'
                   ];
@@ -202,7 +204,7 @@ class LdapSync extends Command
                     $user->location_id = $item['location_id'];
                 } elseif ((isset($location)) && (!empty($location))) {
 
-                    if ((is_array($location)) && (array_key_exists('id', $location))) {
+                    if ((is_array($location)) && (isset($location['id']))) {
                         $user->location_id = $location['id'];
                     } elseif (is_object($location)) {
                         $user->location_id = $location->id;
@@ -213,7 +215,6 @@ class LdapSync extends Command
                 $user->ldap_import = 1;
 
                 $errors = '';
-
                 if ($user->save()) {
                     $item["note"] = $item["createorupdate"];
                     $item["status"]='success';
