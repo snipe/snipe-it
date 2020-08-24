@@ -55,7 +55,7 @@ class DepartmentsController extends Controller
         $department->user_id = Auth::user()->id;
         $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
 
-        $department = $request->handleImages($department,600, public_path().'/uploads/departments');
+        $department = $request->handleImages($department);
 
         if ($department->save()) {
             return redirect()->route("departments.index")->with('success', trans('admin/departments/message.create.success'));
@@ -169,8 +169,8 @@ class DepartmentsController extends Controller
         $department->fill($request->all());
         $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
 
-        $department = $request->handleImages($department,600, public_path().'/uploads/departments');
-
+        $department = $request->handleImages($department);
+        
         if ($department->save()) {
             return redirect()->route("departments.index")->with('success', trans('admin/departments/message.update.success'));
         }
