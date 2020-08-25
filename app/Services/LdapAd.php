@@ -63,6 +63,8 @@ class LdapAd extends LdapAdConfiguration
 
         parent::init();
         if($this->isLdapEnabled()) {
+            $this->ldapConfig['account_prefix'] = 'uid=';
+            $this->ldapConfig['account_suffix'] = ','.$this->ldapConfig['base_dn'];
             $this->ldap = new Adldap();
             $this->ldap->addProvider($this->ldapConfig);
             return true;
@@ -90,12 +92,9 @@ class LdapAd extends LdapAdConfiguration
             $username .= '@' . $this->ldapSettings['ad_domain'];
         }
 
-        try {
-            $this->ldap->auth()->attempt($username, $password);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
+        if ($this->ldap->auth()->attempt($username, $password, true) === false) {
             throw new Exception('Unable to validate user credentials!');
-        }
+        }    
 
         // Should we sync the logged in user
         Log::debug('Attempting to find user in LDAP directory');
