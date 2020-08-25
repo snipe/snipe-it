@@ -10,8 +10,51 @@
 
 
 @if (!isset($simple_view))
+<script>var _initSearch = $.fn.bootstrapTable.Constructor.prototype.initSearch;</script>
 <script src="{{ asset('js/extensions/toolbar/bootstrap-table-toolbar.js') }}"></script>
 <script src="{{ asset('js/extensions/sticky-header/bootstrap-table-sticky-header.js') }}"></script>
+<script>
+    // The bootstrap-table-toolbar initSearch had to be rewritten to allow us to
+    // filter assets using custom fields
+    $.fn.bootstrapTable.Constructor.prototype.initSearch = function () {
+        _initSearch.apply(this, Array.prototype.slice.apply(arguments));
+
+        if (!this.options.advancedSearch) {
+            return;
+        }
+
+        var that = this;
+        var fp = $.isEmptyObject(this.filterColumnsPartial) ? null : this.filterColumnsPartial;
+
+        this.data = fp ? $.grep(this.data, function (item, i) {
+            for (var key in fp) {
+                var fval = fp[key].toLowerCase();
+                var value = item[key];
+                value = $.fn.bootstrapTable.utils.calculateObjectValue(that.header,
+                    that.header.formatters[$.inArray(key, that.header.fields)],
+                    [value, item, i], value);
+
+                // The if statement below is the only code changed from bootstrap-table-toolbar
+                // initSearch as it was not considering filters done by custom fields since
+                // they are not flatten properties in the root of the item object
+                if (!value) {
+                    for (const field of Object.keys(item.custom_fields)) {
+                        if (`custom_fields.${item.custom_fields[field].field}` === key) {
+                            value = item.custom_fields[field].value;
+                        }
+                    }
+                }
+
+                if (!($.inArray(key, that.header.fields) !== -1 &&
+                        (typeof value === 'string' || typeof value === 'number') &&
+                        (value + '').toLowerCase().indexOf(fval) !== -1)) {
+                    return false;
+                }
+            }
+            return true;
+        }) : this.data;
+    };
+</script>
 @endif
 
 <script src="{{ asset('js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
