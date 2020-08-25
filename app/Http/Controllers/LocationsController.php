@@ -81,7 +81,7 @@ class LocationsController extends Controller
         $location->manager_id       = $request->input('manager_id');
         $location->user_id          = Auth::id();
 
-        $location = $request->handleImages($location,600, public_path().'/uploads/locations');
+        $location = $request->handleImages($location);
 
         if ($location->save()) {
             return redirect()->route("locations.index")->with('success', trans('admin/locations/message.create.success'));
@@ -146,7 +146,7 @@ class LocationsController extends Controller
         $location->ldap_ou      = $request->input('ldap_ou');
         $location->manager_id   = $request->input('manager_id');
 
-        $location = $request->handleImages($location,600, public_path().'/uploads/locations');
+        $location = $request->handleImages($location);
 
 
         if ($location->save()) {
