@@ -121,13 +121,17 @@ class ImageUploadRequest extends Request
             }
 
         // If the user isn't uploading anything new but wants to delete their old image, do so
-        } elseif ($this->input('image_delete')=='1') {
+        } else {
+            \Log::debug('No image was passed - not sure what to do now.');
+            if ($this->input('image_delete')=='1') {
 
-            try {
-                Storage::disk('public')->delete($path.'/'.$item->{$fieldname});
-                $item->{$fieldname} = null;
-            } catch (\Exception $e) {
-                \Log::debug($e);
+
+                try {
+                    Storage::disk('public')->delete($path . '/' . $item->{$fieldname});
+                    $item->{$fieldname} = null;
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+                }
             }
 
         }
