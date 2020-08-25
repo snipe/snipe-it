@@ -5,13 +5,11 @@ tr {
 </style>
 
 <template>
-    <div v-show="processDetail">
+    <div v-show="processDetail" class="col-md-6 col-md-offset-3">
 
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8" style="padding-top: 30px; margin: 0 auto;">
                 <div class="dynamic-form-row">
-                    <div class="col-md-5 col-xs-12">
+                  <div class="col-md-5 col-xs-12">
                         <label for="import-type">Import Type:</label>
                     </div>
                     <div class="col-md-7 col-xs-12">
@@ -20,7 +18,8 @@ tr {
                         </select2>
                     </div>
                 </div>
-            </div>
+        </div>
+      <div class="row">
             <div class="dynamic-form-row">
                 <div class="col-md-5 col-xs-12">
                     <label for="import-update">Update Existing Values?</label>
@@ -29,7 +28,8 @@ tr {
                     <input type="checkbox" class="minimal" name="import-update" v-model="options.update">
                 </div>
             </div>
-
+      </div>
+      <div class="row">
             <div class="dynamic-form-row">
                 <div class="col-md-5 col-xs-12">
                     <label for="send-welcome">Send Welcome Email for new Users?</label>
@@ -38,6 +38,8 @@ tr {
                     <input type="checkbox" class="minimal" name="send-welcome" v-model="options.send_welcome">
                 </div>
             </div>
+      </div>
+      <div class="row">
 
             <div class="dynamic-form-row">
                 <div class="col-md-5 col-xs-12">
@@ -47,7 +49,8 @@ tr {
                     <input type="checkbox" class="minimal" name="run-backup" v-model="options.run_backup">
                 </div>
             </div>
-
+      </div>
+      <div class="row">
             <div class="alert col-md-8 col-md-offset-2" style="text-align:left"
                  :class="alertClass"
                  v-if="statusText">
@@ -55,18 +58,16 @@ tr {
             </div>
         </div>
                 <div class="row">
-                     <div class="col-md-2"></div>
-                     <div class="col-md-8" style="padding-top: 30px;">
+                     <div class="col-md-12" style="padding-top: 30px;">
                          <div class="col-md-4 text-right"><h4>Header Field</h4></div>
-                         <div class="col-md-4"><h4>Import Field</h4></div>
-                         <div class="col-md-4"><h4>Sample Value</h4></div>
+                         <div class="col-md-4 text-left"><h4>Import Field</h4></div>
+                         <div class="col-md-4 text-left"><h4>Sample Value</h4></div>
                     </div>
                 </div>
 
                 <template v-for="(header, index) in file.header_row">
                     <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="col-md-4 text-right">
                                 <label :for="header" class="control-label">{{ header }}</label>
                             </div>
@@ -77,7 +78,7 @@ tr {
                                     </select2>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 text-left">
                                 <p class="form-control-static">{{ activeFile.first_row[index] }}</p>
                             </div>
                         </div>
@@ -92,7 +93,7 @@ tr {
                      </div>
                 </div>
                 <div class="row">
-                    <div class="alert col-md-8 col-md-offset-2" style="padding-top: 20px;"
+                    <div class="alert col-md-12" style="padding-top: 20px;"
                          :class="alertClass"
                          v-if="statusText">
                         {{ this.statusText }}
