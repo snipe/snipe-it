@@ -43,49 +43,48 @@ class ImageUploadRequest extends Request
      * @param String $path  location for uploaded images, defaults to uploads/plural of item type.
      * @return SnipeModel        Target asset is being checked out to.
      */
-    public function handleImages($item, $w = 600, $fieldname = 'image', $path = null, $db_fieldname = 'image')
+    public function handleImages($item, $w = 600, $form_fieldname = null, $path = null, $db_fieldname = 'image')
     {
-        \Log::debug('Handle file upload');
-
 
         $type = strtolower(class_basename(get_class($item)));
 
         if (is_null($path)) {
-            $path =  str_plural($type);
+            $path = str_plural($type);
 
-            if ($type=='assetmodel') {
-                \Log::debug('This is an asset model! Override the path');
+            if ($type == 'assetmodel') {
                 $path =  'models';
             }
 
-            if ($type=='user') {
-                \Log::debug('This is a user! Override the path');
+            if ($type == 'user') {
                 $path =  'avatars';
             }
         }
 
-        \Log::info('Path is: '.$path);
+        if (is_null($form_fieldname)) {
+            $form_fieldname = 'image';
+        }
+
+        // This is dumb, but we need it for overriding field names for exceptions like avatars and logo uploads
+        if (is_null($db_fieldname)) {
+            $use_db_field = $form_fieldname;
+        } else {
+            $use_db_field = $db_fieldname;
+        }
+
+
+        \Log::info('Image path is: '.$path);
         \Log::debug('Type is: '.$type);
-        \Log::debug('Image path is: '.$path);
-        \Log::debug('Image fieldname is: '.$fieldname);
+        \Log::debug('Form fieldname is: '.$form_fieldname);
+        \Log::debug('DB fieldname is: '.$use_db_field);
         \Log::debug('Trying to upload to '. $path);
 
-        if ($this->hasFile($fieldname)) {
+        \Log::debug($this->file());
+
+        if ($this->hasFile($form_fieldname)) {
 
             if (!config('app.lock_passwords')) {
 
-                if (!Storage::disk('public')->exists($path))
-                {
-                    \Log::debug($path);
-                   // Storage::disk('public')->makeDirectory($path, 775);
-                }
-
-                if (!is_dir($path)) {
-                    \Log::info($path.' does not exist');
-                    //mkdir($path);
-                }
-
-                $image = $this->file($fieldname);
+                $image = $this->file($form_fieldname);
                 $ext = $image->getClientOriginalExtension();
                 $file_name = $type.'-'.str_random(18).'.'.$ext;
 
@@ -120,40 +119,32 @@ class ImageUploadRequest extends Request
 
 
                  // Remove Current image if exists
-                if (($item->{$fieldname}) && (Storage::disk('public')->exists($path.'/'.$item->{$fieldname}))) {
-                    \Log::debug('A file already exists that we are replacing - we should delete the old one.');
+                if (Storage::disk('public')->exists($path.'/'.$item->{$use_db_field})) {
 
-                    // Assign the new filename as the fieldname
-                    if (is_null($db_fieldname)) {
-                        $item->{$fieldname} = $file_name;
-                    } else {
-                        $item->{$db_fieldname} = $file_name;
-                    }
+                    \Log::debug('A file already exists that we are replacing - we should delete the old one.');
                     try {
-                         Storage::disk('public')->delete($path.'/'.$item->{$fieldname});
+                         Storage::disk('public')->delete($path.'/'.$item->{$use_db_field});
+                         \Log::debug('Old file '.$path.'/'.$file_name.' has been deleted.');
                     } catch (\Exception $e) {
-                        \Log::debug('Could not delete old file. '.$path.'/'.$item->{$fieldname}.' does not exist?');
+                        \Log::debug('Could not delete old file. '.$path.'/'.$file_name.' does not exist?');
 
                     }
                 }
+
+                $item->{$use_db_field} = $file_name;
 
             }
 
         // If the user isn't uploading anything new but wants to delete their old image, do so
         } else {
-
+            \Log::debug('No file passed for '.$form_fieldname);
             if ($this->input('image_delete')=='1') {
 
+                \Log::debug('Deleting image');
                 try {
 
-
-                    if (is_null($db_fieldname)) {
-                        $item->{$fieldname} = null;
-                        Storage::disk('public')->delete($path . '/' . $item->{$fieldname});
-                    } else {
-                        $item->{$db_fieldname} = null;
-                        Storage::disk('public')->delete($path . '/' . $item->{$fieldname});
-                    }
+                        Storage::disk('public')->delete($path . '/' . $item->{$use_db_field});
+                        $item->{$use_db_field} = null;
 
                 } catch (\Exception $e) {
                     \Log::debug($e);
@@ -161,7 +152,6 @@ class ImageUploadRequest extends Request
             }
 
         }
-
 
 
         return $item;

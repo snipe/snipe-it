@@ -410,27 +410,9 @@ class SettingsController extends Controller
         }
 
 
-        if ($request->hasFile('logo')) {
-            $image         = $request->file('logo');
-            $ext           = $image->getClientOriginalExtension();
-            $setting->logo = $file_name = 'logo-'.date('U').'.'. $ext;
+        $setting = $request->handleImages('logo',600,'logo','', 'logo');
 
-            if ('svg' != $image->getClientOriginalExtension()) {
-                $upload = Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-            }
-
-            // This requires a string instead of an object, so we use ($string)
-            Storage::disk('public')->put($file_name, (string) $upload->encode());
-
-            // Remove Current image if exists
-            if (($setting->logo) && (file_exists($file_name))) {
-                Storage::disk('public')->delete($file_name);
-            }
-
-        } elseif ('1' == $request->input('clear_logo')) {
+        if ('1' == $request->input('clear_logo')) {
                 Storage::disk('public')->delete($setting->logo);
                 $setting->logo  = null;
                 $setting->brand = 1;

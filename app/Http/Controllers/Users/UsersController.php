@@ -291,9 +291,11 @@ class UsersController extends Controller
 
         $user->permissions =  json_encode($permissions_array);
 
-        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
+        // Handle uploaded avatar
+        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
 
 
+        //\Log::debug(print_r($user, true));
 
         // Was the user updated?
         if ($user->save()) {

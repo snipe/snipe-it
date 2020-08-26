@@ -85,7 +85,7 @@ class AssetModelsController extends Controller
             $model->fieldset_id = e($request->input('custom_fieldset'));
         }
 
-        $model = $request->handleImages($model,600,null,null, public_path().'/uploads/models');
+        $model = $request->handleImages($model,600,'image', public_path().'/uploads/models', 'image');
 
             // Was it created?
         if ($model->save()) {
