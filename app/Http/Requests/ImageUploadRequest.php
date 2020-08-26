@@ -122,6 +122,13 @@ class ImageUploadRequest extends Request
                  // Remove Current image if exists
                 if (($item->{$fieldname}) && (Storage::disk('public')->exists($path.'/'.$item->{$fieldname}))) {
                     \Log::debug('A file already exists that we are replacing - we should delete the old one.');
+
+                    // Assign the new filename as the fieldname
+                    if (is_null($db_fieldname)) {
+                        $item->{$fieldname} = $file_name;
+                    } else {
+                        $item->{$db_fieldname} = $file_name;
+                    }
                     try {
                          Storage::disk('public')->delete($path.'/'.$item->{$fieldname});
                     } catch (\Exception $e) {
@@ -130,29 +137,22 @@ class ImageUploadRequest extends Request
                     }
                 }
 
-                // Assign the new filename as the fieldname
-                if (is_null($db_fieldname)) {
-                    $item->{$fieldname} = $file_name;
-                } else {
-                    $item->{$db_fieldname} = $file_name;
-                }
-
-
             }
 
         // If the user isn't uploading anything new but wants to delete their old image, do so
         } else {
-            \Log::debug($item->{$fieldname});
-            \Log::debug('No image was passed - not sure what to do now.');
+
             if ($this->input('image_delete')=='1') {
 
                 try {
-                    Storage::disk('public')->delete($path . '/' . $item->{$fieldname});
+
 
                     if (is_null($db_fieldname)) {
                         $item->{$fieldname} = null;
+                        Storage::disk('public')->delete($path . '/' . $item->{$fieldname});
                     } else {
                         $item->{$db_fieldname} = null;
+                        Storage::disk('public')->delete($path . '/' . $item->{$fieldname});
                     }
 
                 } catch (\Exception $e) {
