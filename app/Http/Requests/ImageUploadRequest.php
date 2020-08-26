@@ -43,20 +43,31 @@ class ImageUploadRequest extends Request
      * @param String $path  location for uploaded images, defaults to uploads/plural of item type.
      * @return SnipeModel        Target asset is being checked out to.
      */
-    public function handleImages($item, $w = 550, $fieldname = 'image', $path = null)
+    public function handleImages($item, $w = 600, $fieldname = 'image', $path = null, $db_fieldname = 'image')
     {
         \Log::debug('Handle file upload');
+
+
         $type = strtolower(class_basename(get_class($item)));
 
         if (is_null($path)) {
             $path =  str_plural($type);
-            \Log::info('Path is: '.$path);
+
+            if ($type=='assetmodel') {
+                \Log::debug('This is an asset model! Override the path');
+                $path =  'models';
+            }
+
+            if ($type=='user') {
+                \Log::debug('This is a user! Override the path');
+                $path =  'avatars';
+            }
         }
 
+        \Log::info('Path is: '.$path);
+        \Log::debug('Type is: '.$type);
         \Log::debug('Image path is: '.$path);
         \Log::debug('Image fieldname is: '.$fieldname);
-
-
         \Log::debug('Trying to upload to '. $path);
 
         if ($this->hasFile($fieldname)) {
@@ -81,8 +92,8 @@ class ImageUploadRequest extends Request
                 \Log::info('File name will be: '.$file_name);
 
                 if ($image->getClientOriginalExtension()!=='svg') {
-                    \Log::info('Not an SVG - resize');
-                    \Log::info('Trying to upload to: '.$path.'/'.$file_name);
+                    \Log::debug('Not an SVG - resize');
+                    \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
                     $upload = Image::make($image->getRealPath())->resize(null, $w, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
@@ -93,15 +104,16 @@ class ImageUploadRequest extends Request
 
                 // If the file is an SVG, we need to clean it and NOT encode it
                 } else {
-                    \Log::info('This is an SVG');
+                    \Log::debug('This is an SVG');
                     $sanitizer = new Sanitizer();
                     $dirtySVG = file_get_contents($image->getRealPath());
                     $cleanSVG = $sanitizer->sanitize($dirtySVG);
 
                     try {
-                        \Log::info('Trying to upload to: '.$path.'/'.$file_name);
-                    Storage::disk('public')->put($path.'/'.$file_name, $cleanSVG);
+                        \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
+                        Storage::disk('public')->put($path.'/'.$file_name, $cleanSVG);
                     } catch (\Exception $e) {
+                        \Log::debug('Upload no workie :( ');
                         \Log::debug($e);
                     }
                 }
@@ -109,32 +121,47 @@ class ImageUploadRequest extends Request
 
                  // Remove Current image if exists
                 if (($item->{$fieldname}) && (Storage::disk('public')->exists($path.'/'.$item->{$fieldname}))) {
+                    \Log::debug('A file already exists that we are replacing - we should delete the old one.');
                     try {
-                         Storage::disk('public')->delete($path.'/'.$item->{$fieldname});                    } catch (\Exception $e) {
+                         Storage::disk('public')->delete($path.'/'.$item->{$fieldname});
+                    } catch (\Exception $e) {
                         \Log::debug('Could not delete old file. '.$path.'/'.$item->{$fieldname}.' does not exist?');
 
                     }
                 }
 
                 // Assign the new filename as the fieldname
-                $item->{$fieldname} = $file_name;
+                if (is_null($db_fieldname)) {
+                    $item->{$fieldname} = $file_name;
+                } else {
+                    $item->{$db_fieldname} = $file_name;
+                }
+
+
             }
 
         // If the user isn't uploading anything new but wants to delete their old image, do so
         } else {
+            \Log::debug($item->{$fieldname});
             \Log::debug('No image was passed - not sure what to do now.');
             if ($this->input('image_delete')=='1') {
 
-
                 try {
                     Storage::disk('public')->delete($path . '/' . $item->{$fieldname});
-                    $item->{$fieldname} = null;
+
+                    if (is_null($db_fieldname)) {
+                        $item->{$fieldname} = null;
+                    } else {
+                        $item->{$db_fieldname} = null;
+                    }
+
                 } catch (\Exception $e) {
                     \Log::debug($e);
                 }
             }
 
         }
+
 
 
         return $item;

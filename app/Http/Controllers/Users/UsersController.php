@@ -128,7 +128,7 @@ class UsersController extends Controller
 
 
         // we have to invoke the
-        app('App\Http\Requests\ImageUploadRequest')->handleImages($user);
+        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
 
         if ($user->save()) {
             if ($request->filled('groups')) {
@@ -208,6 +208,7 @@ class UsersController extends Controller
      */
     public function update(SaveUserRequest $request, $id = null)
     {
+
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
         $permissions = $request->input('permissions', array());
@@ -290,7 +291,8 @@ class UsersController extends Controller
 
         $user->permissions =  json_encode($permissions_array);
 
-        app('App\Http\Requests\ImageUploadRequest')->handleImages($user);
+        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
+
 
 
         // Was the user updated?
