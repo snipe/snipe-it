@@ -153,7 +153,7 @@ class LdapAdConfiguration
             'password'         => $this->ldapSettings['ldap_pword'],
 
             // Optional Configuration Options
-            'schema'           => $this->getSchema(),
+            'schema'           => $this->getSchema(), // FIXME - we probably ought not to be using this, right?
             'account_prefix'   => '',
             'account_suffix'   => '',
             'port'             => $this->getPort(),
@@ -180,7 +180,7 @@ class LdapAdConfiguration
      *
      * @return string
      */
-    private function getSchema(): string
+    private function getSchema(): string //wait, what? This is a little weird, since we have completely separate variables for this; we probably shoulnd't be using any 'schema' at all
     {
         $schema = \Adldap\Schemas\OpenLDAP::class;
         if ($this->ldapSettings['is_ad']) {
