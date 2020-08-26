@@ -86,9 +86,10 @@ class ImageUploadRequest extends Request
 
                 $image = $this->file($form_fieldname);
                 $ext = $image->getClientOriginalExtension();
-                $file_name = $type.'-'.str_random(18).'.'.$ext;
+                $file_name = $type.'-'.$form_fieldname.'-'.str_random(10).'.'.$ext;
 
                 \Log::info('File name will be: '.$file_name);
+                \Log::debug('File extension is: '. $ext);
 
                 if ($image->getClientOriginalExtension()!=='svg') {
                     \Log::debug('Not an SVG - resize');
@@ -100,6 +101,7 @@ class ImageUploadRequest extends Request
 
                     // This requires a string instead of an object, so we use ($string)
                     Storage::disk('public')->put($path.'/'.$file_name, (string)$upload->encode());
+
 
                 // If the file is an SVG, we need to clean it and NOT encode it
                 } else {
