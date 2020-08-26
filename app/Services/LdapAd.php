@@ -63,7 +63,7 @@ class LdapAd extends LdapAdConfiguration
 
         parent::init();
         if($this->isLdapEnabled()) {
-            $this->ldapConfig['account_prefix'] = 'uid=';
+            $this->ldapConfig['account_prefix'] = $this->ldapSettings['ldap_auth_filter_query'];
             $this->ldapConfig['account_suffix'] = ','.$this->ldapConfig['base_dn'];
             $this->ldap = new Adldap();
             $this->ldap->addProvider($this->ldapConfig);
