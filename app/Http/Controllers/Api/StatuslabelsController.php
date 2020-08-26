@@ -209,7 +209,7 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('view', Statuslabel::class);
         $this->authorize('index', Asset::class);
-        $assets = Asset::where('status_id','=',$id);
+        $assets = Asset::where('status_id','=',$id)->with('assignedTo');
 
         $allowed_columns = [
             'id',
