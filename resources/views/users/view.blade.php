@@ -442,7 +442,7 @@
                     <td>{!!$accessory->present()->nameUrl()!!}</td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
-                        <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
+                        <a href="{{ route('checkin/accessory', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
                       @endcan
                     </td>
                   </tr>
