@@ -1008,19 +1008,28 @@ class SettingsController extends Controller
      */
     public function getBackups()
     {
-        $path = storage_path() . '/app/' . config('backup.backup.name');
 
-        $path         = 'backups';
+        $path         = 'app/backups';
         $backup_files = Storage::files($path);
         $files        = [];
 
         if (count($backup_files) > 0) {
             for ($f = 0; $f < count($backup_files); ++$f) {
-                $files[] = [
-                    'filename' => basename($backup_files[$f]),
-                    'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
-                    'modified' => Storage::lastModified($backup_files[$f]),
-                ];
+
+                // Skip dotfiles like .gitignore and .DS_STORE
+                if ((substr(basename($backup_files[$f]), 0, 1) != '.')) {
+                    \Log::debug(basename($backup_files[$f]));
+                    \Log::debug($backup_files[$f]. ' is dotfileish?');
+
+                    $files[] = [
+                        'filename' => basename($backup_files[$f]),
+                        'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
+                        'modified' => Storage::lastModified($backup_files[$f]),
+                    ];
+
+                }
+
+
             }
         }
 
