@@ -1075,7 +1075,7 @@ class SettingsController extends Controller
      *
      * @since [v1.8]
      *
-     * @return Redirect
+     * @return Storage
      */
     public function downloadFile($filename = null)
     {
