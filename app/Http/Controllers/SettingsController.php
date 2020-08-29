@@ -1018,8 +1018,6 @@ class SettingsController extends Controller
 
                 // Skip dotfiles like .gitignore and .DS_STORE
                 if ((substr(basename($backup_files[$f]), 0, 1) != '.')) {
-                    \Log::debug(basename($backup_files[$f]));
-                    \Log::debug($backup_files[$f]. ' is dotfileish?');
 
                     $files[] = [
                         'filename' => basename($backup_files[$f]),
@@ -1081,9 +1079,11 @@ class SettingsController extends Controller
      */
     public function downloadFile($filename = null)
     {
+        $path = 'app/backups';
+
         if (! config('app.lock_passwords')) {
-            if (Storage::exists($filename)) {
-                return Response::download(Storage::url('') . e($filename));
+            if (Storage::exists($path . '/' . $filename)) {
+                return Storage::download($path . '/' . $filename);
             } else {
                 // Redirect to the backup page
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
@@ -1106,12 +1106,11 @@ class SettingsController extends Controller
     public function deleteFile($filename = null)
     {
         if (! config('app.lock_passwords')) {
-            $path = 'backups';
+            $path = 'app/backups';
 
             if (Storage::exists($path . '/' . $filename)) {
                 try {
                     Storage::delete($path . '/' . $filename);
-
                     return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
                 } catch (\Exception $e) {
                     \Log::debug($e);

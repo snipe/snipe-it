@@ -29,7 +29,11 @@
             <tbody>
             @foreach ($files as $file)
             <tr>
-              <td><a href="{{ Storage::url('backups/'.e($file['filename'])) }}">{{ $file['filename'] }}</a></td>
+              <td>
+                  <a href="{{ route('settings.backups.download', [$file['filename']]) }}">
+                      {{ $file['filename'] }}
+                  </a>
+              </td>
               <td>{{ date("M d, Y g:i A", $file['modified']) }} </td>
               <td>{{ $file['filesize'] }}</td>
               <td>
