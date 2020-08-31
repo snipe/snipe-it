@@ -409,86 +409,35 @@ class SettingsController extends Controller
             $setting->custom_css = $request->input('custom_css');
         }
 
+        $setting = $request->handleImages($setting,600,'logo','', 'logo');
 
-        if ($request->hasFile('logo')) {
-            $image         = $request->file('logo');
-            $ext           = $image->getClientOriginalExtension();
-            $setting->logo = $file_name = 'logo-'.date('U').'.'. $ext;
 
-            if ('svg' != $image->getClientOriginalExtension()) {
-                $upload = Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-            }
-
-            // This requires a string instead of an object, so we use ($string)
-            Storage::disk('public')->put($file_name, (string) $upload->encode());
-
-            // Remove Current image if exists
-            if (($setting->logo) && (file_exists($file_name))) {
-                Storage::disk('public')->delete($file_name);
-            }
-
-        } elseif ('1' == $request->input('clear_logo')) {
+        if ('1' == $request->input('clear_logo')) {
                 Storage::disk('public')->delete($setting->logo);
                 $setting->logo  = null;
                 $setting->brand = 1;
         }
 
 
-        if ($request->hasFile('email_logo')) {
-            $email_image         = $email_upload = $request->file('email_logo');
-            $email_ext           = $email_image->getClientOriginalExtension();
-            $setting->email_logo = $email_file_name = 'email_logo.' . $email_ext;
+        $setting = $request->handleImages($setting,600,'email_logo','', 'email_logo');
 
-            if ('svg' != $email_image->getClientOriginalExtension()) {
-                $email_upload = Image::make($email_image->getRealPath())->resize(null, 100, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-            }
 
-            // This requires a string instead of an object, so we use ($string)
-            Storage::disk('public')->put($email_file_name, (string) $email_upload->encode());
-
-            // Remove Current image if exists
-            if (($setting->email_logo) && (file_exists($email_file_name))) {
-                Storage::disk('public')->delete($email_file_name);
-            }
-        } elseif ('1' == $request->input('clear_email_logo')) {
+       if ('1' == $request->input('clear_email_logo')) {
             Storage::disk('public')->delete($setting->email_logo);
             $setting->email_logo  = null;
             // If they are uploading an image, validate it and upload it
         }
 
 
-        // If the user wants to clear the label logo...
-        if ($request->hasFile('label_logo')) {
-            $image         = $request->file('label_logo');
-            $ext           = $image->getClientOriginalExtension();
-            $setting->label_logo = $label_file_name = 'label_logo.' . $ext;
+        $setting = $request->handleImages($setting,600,'label_logo','', 'label_logo');
 
-            if ('svg' != $image->getClientOriginalExtension()) {
-                $upload = Image::make($image->getRealPath())->resize(null, 100, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-            }
 
-            // This requires a string instead of an object, so we use ($string)
-            Storage::disk('public')->put($label_file_name, (string) $upload->encode());
-
-            // Remove Current image if exists
-            if (($setting->label_logo) && (file_exists($label_file_name))) {
-                Storage::disk('public')->delete($label_file_name);
-            }
-        } elseif ('1' == $request->input('clear_label_logo')) {
+        if ('1' == $request->input('clear_label_logo')) {
             Storage::disk('public')->delete($setting->label_logo);
             $setting->label_logo  = null;
 
-            // If they are uploading an image, validate it and upload it
         }
+
 
         // If the user wants to clear the favicon...
          if ($request->hasFile('favicon')) {
@@ -496,7 +445,7 @@ class SettingsController extends Controller
             $favicon_ext           = $favicon_image->getClientOriginalExtension();
             $setting->favicon      = $favicon_file_name = 'favicon-uploaded.' . $favicon_ext;
 
-            if (('ico' != $favicon_image->getClientOriginalExtension()) && ('svg' != $favicon_image->getClientOriginalExtension())) {
+            if (($favicon_image->getClientOriginalExtension()!='ico') && ($favicon_image->getClientOriginalExtension()!='svg')) {
                 $favicon_upload = Image::make($favicon_image->getRealPath())->resize(null, 36, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
@@ -507,11 +456,6 @@ class SettingsController extends Controller
             } else {
                 Storage::disk('public')->put($favicon_file_name, file_get_contents($request->file('favicon')));
             }
-
-
-
-
-
 
 
             // Remove Current image if exists
@@ -1064,19 +1008,26 @@ class SettingsController extends Controller
      */
     public function getBackups()
     {
-        $path = storage_path() . '/app/' . config('backup.backup.name');
 
-        $path         = 'backups';
+        $path         = 'app/backups';
         $backup_files = Storage::files($path);
         $files        = [];
 
         if (count($backup_files) > 0) {
             for ($f = 0; $f < count($backup_files); ++$f) {
-                $files[] = [
-                    'filename' => basename($backup_files[$f]),
-                    'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
-                    'modified' => Storage::lastModified($backup_files[$f]),
-                ];
+
+                // Skip dotfiles like .gitignore and .DS_STORE
+                if ((substr(basename($backup_files[$f]), 0, 1) != '.')) {
+
+                    $files[] = [
+                        'filename' => basename($backup_files[$f]),
+                        'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
+                        'modified' => Storage::lastModified($backup_files[$f]),
+                    ];
+
+                }
+
+
             }
         }
 
@@ -1124,13 +1075,15 @@ class SettingsController extends Controller
      *
      * @since [v1.8]
      *
-     * @return Redirect
+     * @return Storage
      */
     public function downloadFile($filename = null)
     {
+        $path = 'app/backups';
+
         if (! config('app.lock_passwords')) {
-            if (Storage::exists($filename)) {
-                return Response::download(Storage::url('') . e($filename));
+            if (Storage::exists($path . '/' . $filename)) {
+                return Storage::download($path . '/' . $filename);
             } else {
                 // Redirect to the backup page
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
@@ -1153,12 +1106,11 @@ class SettingsController extends Controller
     public function deleteFile($filename = null)
     {
         if (! config('app.lock_passwords')) {
-            $path = 'backups';
+            $path = 'app/backups';
 
             if (Storage::exists($path . '/' . $filename)) {
                 try {
                     Storage::delete($path . '/' . $filename);
-
                     return redirect()->route('settings.backups.index')->with('success', trans('admin/settings/message.backup.file_deleted'));
                 } catch (\Exception $e) {
                     \Log::debug($e);

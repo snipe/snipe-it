@@ -92,6 +92,11 @@ $config = [
             'url_type'  => env('RACKSPACE_URL_TYPE'),
         ],
 
+        'backup' => [
+            'driver' => env('PRIVATE_FILESYSTEM_DISK', 'local'),
+            'root' => storage_path('app'),
+        ],
+
     ],
 
 ];
