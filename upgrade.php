@@ -69,9 +69,11 @@ $git_version = shell_exec('git --version');
 
 if ((strpos('git version', $git_version)) === false) {
     echo "Git is installed. \n";
+    $git_fetch = shell_exec('git fetch');
     $git_checkout = shell_exec('git checkout '.$branch);
     $git_stash = shell_exec('git stash');
     $git_pull = shell_exec('git pull');
+    echo '-- '.$git_fetch;
     echo '-- '.$git_stash;
     echo '-- '.$git_checkout;
     echo '-- '.$git_pull;
@@ -127,6 +129,10 @@ echo "--------------------------------------------------------\n\n";
 // Composer install
 if (file_exists('composer.phar')) {
     echo "-- Local composer.phar detected, so we'll use that.\n\n";
+    echo "-- Updating local composer.phar\n\n";
+    $composer_update = shell_exec('php composer.phar self-update');
+    echo $composer_update."\n\n";
+
     $composer_dump = shell_exec('php composer.phar dump');
     $composer = shell_exec('php composer.phar install --no-dev --prefer-source');
 

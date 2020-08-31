@@ -16,7 +16,7 @@ class DepartmentsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [Godfrey Martinez] [<snipe@snipe.net>]
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
@@ -40,8 +40,13 @@ class DepartmentsController extends Controller
             $departments = $departments->TextSearch($request->input('search'));
         }
 
-        $offset = (($departments) && (request('offset') > $departments->count())) ? 0 : request('offset', 0);
-        $limit = $request->input('limit', 50);
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($departments) && ($request->get('offset') > $departments->count())) ? $departments->count() : $request->get('offset', 0);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
 

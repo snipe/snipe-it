@@ -83,8 +83,13 @@ class LicensesController extends Controller
         }
 
 
-        $offset = (($licenses) && (request('offset') > $licenses->count())) ? 0 : request('offset', 0);
-        $limit = request('limit', 50);
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($licenses) && ($request->get('offset') > $licenses->count())) ? $licenses->count() : $request->get('offset', 0);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
 
@@ -226,17 +231,21 @@ class LicensesController extends Controller
 
             $this->authorize('view', $license);
 
-            $seats = LicenseSeat::where('license_id', $licenseId)->with('license', 'user', 'asset');
-
-            $offset = request('offset', 0);
-            $limit = request('limit', 50);
+            $seats = LicenseSeat::with('license', 'user', 'asset', 'user.department')
+                ->where('license_seats.license_id', $licenseId);
 
             $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-            $total = $seats->count();
 
-            if($total < $offset){
-                $offset = 0;
+            if ($request->input('sort')=='department') {
+                $seats->OrderDepartments($order);
+            } else {
+                $seats->orderBy('id', $order);
             }
+
+            $offset = (($seats) && (request('offset') > $seats->count())) ? 0 : request('offset', 0);
+            $limit = request('limit', 50);
+            
+            $total = $seats->count();
 
             $seats = $seats->skip($offset)->take($limit)->get();
 

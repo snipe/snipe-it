@@ -3,9 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Statuslabel;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to Status Labels for
@@ -52,8 +51,7 @@ class StatuslabelsController extends Controller
 
         return view('statuslabels/edit')
             ->with('item', new Statuslabel)
-            ->with('statuslabel_types', Helper::statusTypeList())
-            ->with('use_statuslabel_type', (new Statuslabel)->getStatuslabelType());
+            ->with('statuslabel_types', Helper::statusTypeList());
     }
 
 
@@ -71,22 +69,22 @@ class StatuslabelsController extends Controller
         // create a new model instance
         $statusLabel = new Statuslabel();
 
-        if (!$request->filled('statuslabel_types')) {
+        if ($request->missing('statuslabel_types')) {
             return redirect()->back()->withInput()->withErrors(['statuslabel_types' => trans('validation.statuslabel_type')]);
         }
 
         $statusType = Statuslabel::getStatuslabelTypesForDB($request->input('statuslabel_types'));
 
         // Save the Statuslabel data
-        $statusLabel->name              = Input::get('name');
+        $statusLabel->name              = $request->input('name');
         $statusLabel->user_id           = Auth::id();
-        $statusLabel->notes             =  Input::get('notes');
+        $statusLabel->notes             =  $request->input('notes');
         $statusLabel->deployable        =  $statusType['deployable'];
         $statusLabel->pending           =  $statusType['pending'];
         $statusLabel->archived          =  $statusType['archived'];
-        $statusLabel->color             =  Input::get('color');
-        $statusLabel->show_in_nav       =  Input::get('show_in_nav', 0);
-        $statusLabel->default_label       =  Input::get('default_label', 0);
+        $statusLabel->color             =  $request->input('color');
+        $statusLabel->show_in_nav       =  $request->input('show_in_nav', 0);
+        $statusLabel->default_label     =  $request->input('default_label', 0);
 
 
         if ($statusLabel->save()) {
@@ -142,15 +140,15 @@ class StatuslabelsController extends Controller
 
 
         // Update the Statuslabel data
-        $statustype                 = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
-        $statuslabel->name              = Input::get('name');
-        $statuslabel->notes          =  Input::get('notes');
+        $statustype                 = Statuslabel::getStatuslabelTypesForDB($request->input('statuslabel_types'));
+        $statuslabel->name              = $request->input('name');
+        $statuslabel->notes          =  $request->input('notes');
         $statuslabel->deployable          =  $statustype['deployable'];
         $statuslabel->pending          =  $statustype['pending'];
         $statuslabel->archived          =  $statustype['archived'];
-        $statuslabel->color          =  Input::get('color');
-        $statuslabel->show_in_nav          =  Input::get('show_in_nav', 0);
-        $statuslabel->default_label          =  Input::get('default_label', 0);
+        $statuslabel->color          =  $request->input('color');
+        $statuslabel->show_in_nav          =  $request->input('show_in_nav', 0);
+        $statuslabel->default_label          =  $request->input('default_label', 0);
 
 
         // Was the asset created?

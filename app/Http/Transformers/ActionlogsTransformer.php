@@ -29,10 +29,49 @@ class ActionlogsTransformer
         // This is necessary since we can't escape special characters within a JSON object
         if (($actionlog->log_meta) && ($actionlog->log_meta!='')) {
             $meta_array = json_decode($actionlog->log_meta);
-            foreach ($meta_array as $key => $value) {
-                foreach ($value as $meta_key => $meta_value) {
-                    $clean_meta[$key][$meta_key] = e($meta_value);
+
+            if ($meta_array) {
+                foreach ($meta_array as $key => $value) {
+                    foreach ($value as $meta_key => $meta_value) {
+
+                        if (is_array($meta_value)) {
+                            foreach ($meta_value as $meta_value_key => $meta_value_value) {
+                                $clean_meta[$key][$meta_value_key] = e($meta_value_value);
+                            }
+                        } else {
+
+                            // This object stuff is weird, and is used to make up for the fact that
+                            // older data can get strangely formatted if an asset existed,
+                            // then a new custom field is added, and the asset is saved again.
+                            // It can result in funnily-formatted strings like:
+                            //
+                            // {"_snipeit_right_sized_fault_tolerant_localareanetwo_1":
+                            // {"old":null,"new":{"value":"1579490695972","_snipeit_new_field_2":2,"_snipeit_new_field_3":"Monday, 20 January 2020 2:24:55 PM"}}
+                            // so we have to walk down that next level
+
+                            if (is_object($meta_value)) {
+
+                                foreach ($meta_value as $meta_value_key => $meta_value_value) {
+
+                                    if ($meta_value_key == 'value') {
+                                        $clean_meta[$key]['old'] = null;
+                                        $clean_meta[$key]['new'] = e($meta_value->value);
+                                    } else {
+                                        $clean_meta[$meta_value_key]['old'] = null;
+                                        $clean_meta[$meta_value_key]['new'] = e($meta_value_value);
+                                    }
+                                }
+
+
+
+                            } else {
+                                $clean_meta[$key][$meta_key] = e($meta_value);
+                            }
+                        }
+
+                    }
                 }
+
             }
         }
 
@@ -49,7 +88,7 @@ class ActionlogsTransformer
 
             'item' => ($actionlog->item) ? [
                 'id' => (int) $actionlog->item->id,
-                'name' => e($actionlog->item->getDisplayNameAttribute()),
+                'name' => ($actionlog->itemType()=='user') ? $actionlog->filename : e($actionlog->item->getDisplayNameAttribute()),
                 'type' => e($actionlog->itemType()),
             ] : null,
             'location' => ($actionlog->location) ? [

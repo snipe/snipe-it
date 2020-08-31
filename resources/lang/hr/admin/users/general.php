@@ -2,8 +2,8 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
-    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
+    'activated_help_text' => 'Ovaj korisnik se može prijaviti',
+    'activated_disabled_help_text' => 'Ne možete mijenjati status aktivacije za svoj vlastiti račun.',
     'assets_user'       => 'Imovina dodijeljena za: ime',
     'bulk_update_warn'	=> 'Namjeravate uređivati ​​svojstva korisnika: user_count. Imajte na umu da ne možete mijenjati vlastite korisničke atribute pomoću ovog obrasca i morati sami uređivati ​​vlastiti korisnik.',
     'bulk_update_help'	=> 'Ovaj vam obrazac omogućuje ažuriranje više korisnika odjednom. Popunite polja koja su vam potrebna za promjenu. Sva polja koja su ostala prazna ostat će nepromijenjena.',

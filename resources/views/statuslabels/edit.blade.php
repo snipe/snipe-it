@@ -3,7 +3,7 @@
     'updateText' => trans('admin/statuslabels/table.update'),
     'helpTitle' => trans('admin/statuslabels/table.about'),
     'helpText' => trans('admin/statuslabels/table.info'),
-    'formAction' => ($item) ? route('statuslabels.update', ['statuslabel' => $item->id]) : route('statuslabels.store'),
+    'formAction' => (isset($item->id)) ? route('statuslabels.update', ['statuslabel' => $item->id]) : route('statuslabels.store'),
 ])
 
 {{-- Page content --}}
@@ -25,8 +25,8 @@
 <div class="form-group{{ $errors->has('statuslabel_types') ? ' has-error' : '' }}">
     <label for="statuslabel_types" class="col-md-3 control-label">{{ trans('admin/statuslabels/table.status_type') }} </label>
     <div class="col-md-7 required">
-        {{ Form::select('statuslabel_types', $statuslabel_types, $item->getStatuslabelType(), array('class'=>'select2', 'style'=>'min-width:400px')) }}
-        {!! $errors->first('statuslabel_types', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+        {{ Form::select('statuslabel_types', $statuslabel_types, $item->getStatuslabelType(), array('class'=>'select2', 'style'=>'min-width:400px', 'aria-label'=>'statuslabel_types')) }}
+        {!! $errors->first('statuslabel_types', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
 
@@ -35,10 +35,10 @@
     {{ Form::label('color', trans('admin/statuslabels/table.color'), ['class' => 'col-md-3 control-label']) }}
     <div class="col-md-2">
         <div class="input-group color">
-            {{ Form::text('color', Input::old('color', $item->color), array('class' => 'form-control', 'style' => 'width: 100px;', 'maxlength'=>'10')) }}
+            {{ Form::text('color', Request::old('color', $item->color), array('class' => 'form-control', 'style' => 'width: 100px;', 'maxlength'=>'10')) }}
             <div class="input-group-addon"><i></i></div>
         </div><!-- /.input group -->
-        {!! $errors->first('header_color', '<span class="alert-msg">:message</span>') !!}
+        {!! $errors->first('header_color', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
 </div>
 
@@ -48,7 +48,7 @@
 <div class="form-group{{ $errors->has('notes') ? ' has-error' : '' }}">
 
     <label class="col-md-offset-3" style="padding-left: 15px;">
-        <input type="checkbox" value="1" name="show_in_nav" id="show_in_nav" class="minimal" {{ Input::old('show_in_nav', $item->show_in_nav) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/statuslabels/table.show_in_nav') }}
+        <input type="checkbox" value="1" name="show_in_nav" id="show_in_nav" class="minimal" {{ Request::old('show_in_nav', $item->show_in_nav) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/statuslabels/table.show_in_nav') }}
     </label>
 </div>
 
@@ -56,7 +56,7 @@
 <div class="form-group{{ $errors->has('default_label') ? ' has-error' : '' }}">
 
     <label class="col-md-offset-3" style="padding-left: 15px;">
-        <input type="checkbox" value="1" name="default_label" id="default_label" class="minimal" {{ Input::old('default_label', $item->default_label) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/statuslabels/table.default_label') }}
+        <input type="checkbox" value="1" name="default_label" id="default_label" class="minimal" {{ Request::old('default_label', $item->default_label) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/statuslabels/table.default_label') }}
     </label>
     <p class="col-md-offset-3 help-block"> {{ trans('admin/statuslabels/table.default_label_help') }}</p>
 </div>

@@ -69,7 +69,7 @@ class ComponentCheckoutController extends Controller
         }
 
         $admin_user = Auth::user();
-        $asset_id = e(Input::get('asset_id'));
+        $asset_id = e($request->input('asset_id'));
 
         // Check if the user exists
         if (is_null($asset = Asset::find($asset_id))) {
@@ -84,7 +84,7 @@ class ComponentCheckoutController extends Controller
             'component_id' => $component->id,
             'user_id' => $admin_user->id,
             'created_at' => date('Y-m-d H:i:s'),
-            'assigned_qty' => Input::get('assigned_qty'),
+            'assigned_qty' => $request->input('assigned_qty'),
             'asset_id' => $asset_id
         ]);
 

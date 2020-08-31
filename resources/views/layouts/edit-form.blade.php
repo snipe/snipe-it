@@ -31,26 +31,41 @@
         <!-- box -->
         <div class="box box-default">
             <!-- box-header -->
-            <div class="box-header with-border">
+            <div class="box-header{{  ($item->id) ? ' with-border' : ''  }}">
 
-            <h3 class="box-title" style="min-height: 20px;">
-            @if (isset($helpText))
-                @include ('partials.more-info',
-                    [
-                        'helpText' => $helpText,
-                        'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
-                    ])
-            @endif
+            <div class="box-title col-md-12" style="min-height: 20px;">
 
-            @if ($item->id)
-            {{ $item->display_name }}
-            @endif
-            </h3>
-                @if (isset($topSubmit))
-                <div class="box-tools pull-right">
-                 @include('partials.forms.edit.submit-button')
-                </div>
-                @endif
+                <div class="col-md-12">
+
+                    @if (isset($helpText))
+                        <div class="col-md-1 text-left" style="horiz-align: center;">
+                        @include ('partials.more-info',
+                            [
+                                'helpText' => $helpText,
+                                'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
+                            ])
+                        </div>
+                    @endif
+
+                        @if ($item->id)
+                            <div class="col-md-9">
+                                <h2 class="box-title">
+                                    {{ $item->display_name }}
+                                </h2>
+                            </div>
+                        @endif
+
+                        @if ((isset($topSubmit)) && ($topSubmit =='true'))
+                            <div class="col-md-2 text-right">
+                            @include('partials.forms.edit.submit-button')
+                            </div>
+                        @endif
+
+                </div> <!-- /div.row -->
+
+
+
+            </div><!-- /.box-header -->
             </div><!-- /.box-header -->
 
             <!-- box-body -->

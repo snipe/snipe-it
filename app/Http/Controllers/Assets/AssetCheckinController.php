@@ -55,13 +55,13 @@ class AssetCheckinController extends Controller
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
+        if (is_null($target = $asset->assignedTo)) {
+            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
+        }
         $this->authorize('checkin', $asset);
 
         if ($asset->assignedType() == Asset::USER) {
             $user = $asset->assignedTo;
-        }
-        if (is_null($target = $asset->assignedTo)) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
 
         $asset->expected_checkin = null;
@@ -70,7 +70,7 @@ class AssetCheckinController extends Controller
         $asset->assignedTo()->disassociate($asset);
         $asset->assigned_type = null;
         $asset->accepted = null;
-        $asset->name = e($request->get('name'));
+        $asset->name = $request->get('name');
 
         if ($request->filled('status_id')) {
             $asset->status_id =  e($request->get('status_id'));
@@ -89,10 +89,9 @@ class AssetCheckinController extends Controller
 
         // Was the asset updated?
         if ($asset->save()) {
-        
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
 
-            if ($backto=='user') {
+            if ((isset($user)) && ($backto =='user')) {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
             }
             return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkin.success'));

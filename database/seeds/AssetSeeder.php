@@ -35,7 +35,7 @@ class AssetSeeder extends Seeder
       factory(Asset::class, 10)->states('ultrasharp')->create();
 
 
-      $del_files = Storage::files('companies');
+      $del_files = Storage::files('assets');
       foreach($del_files as $del_file){ // iterate files
           \Log::debug('Deleting: '.$del_files);
           try  {

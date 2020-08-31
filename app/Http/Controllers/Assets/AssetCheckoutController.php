@@ -27,7 +27,6 @@ class AssetCheckoutController extends Controller
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find(e($assetId)))) {
-            // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
@@ -38,7 +37,6 @@ class AssetCheckoutController extends Controller
         }
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
 
-        // Get the dropdown of users and then pass it to the checkout view
 
     }
 
@@ -64,9 +62,7 @@ class AssetCheckoutController extends Controller
             $admin = Auth::user();
 
             $target = $this->determineCheckoutTarget($asset);
-            if ($asset->is($target)) {
-                throw new CheckoutNotAllowed('You cannot check an asset out to itself.');
-            }
+
             $asset = $this->updateAssetLocation($asset, $target);
 
             $checkout_at = date("Y-m-d H:i:s");

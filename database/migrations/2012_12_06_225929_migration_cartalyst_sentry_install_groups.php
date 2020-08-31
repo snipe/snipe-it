@@ -29,7 +29,7 @@ class MigrationCartalystSentryInstallGroups extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('groups', function($table)
+		Schema::create('permission_groups', function($table)
 		{
 			$table->increments('id');
 			$table->string('name');
@@ -46,7 +46,7 @@ class MigrationCartalystSentryInstallGroups extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('groups');
+		Schema::drop('permission_groups');
 	}
 
 }

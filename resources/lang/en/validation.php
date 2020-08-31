@@ -30,6 +30,7 @@ return array(
         'array'   => 'The :attribute must have between :min and :max items.',
     ],
     'boolean'              => 'The :attribute must be true or false.',
+    'case_diff'            => 'The :attribute must contain at least one uppercase and one lowercase letter.',
     'confirmed'            => 'The :attribute confirmation does not match.',
     'date'                 => 'The :attribute is not a valid date.',
     'date_format'          => 'The :attribute does not match the format :format.',
@@ -38,10 +39,14 @@ return array(
     'digits_between'       => 'The :attribute must be between :min and :max digits.',
     'dimensions'           => 'The :attribute has invalid image dimensions.',
     'distinct'             => 'The :attribute field has a duplicate value.',
+    'dumbpwd'             => 'That password is too common. Please choose another one.',
     'email'                => 'The :attribute format is invalid.',
     'exists'               => 'The selected :attribute is invalid.',
     'file'                 => 'The :attribute must be a file.',
     'filled'               => 'The :attribute field must have a value.',
+    'gt'                   => [
+        'numeric' => 'The :attribute field must be greater than :value.'
+    ],
     'hashed_pass'          => 'Your password is incorrect.',
     'image'                => 'The :attribute must be an image.',
     'in'                   => 'The selected :attribute is invalid.',
@@ -59,6 +64,7 @@ return array(
     ],
     'mimes'                => 'The :attribute must be a file of type: :values.',
     'mimetypes'            => 'The :attribute must be a file of type: :values.',
+    'letters'              => 'The :attribute must contain letters',
     'min'                  => [
         'numeric' => 'The :attribute must be at least :min.',
         'file'    => 'The :attribute must be at least :min kilobytes.',
@@ -67,6 +73,7 @@ return array(
     ],
     'not_in'               => 'The selected :attribute is invalid.',
     'numeric'              => 'The :attribute must be a number.',
+    'numbers'              => 'The :attribute must contain at least one number.',
     'present'              => 'The :attribute field must be present.',
     'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'The :attribute format is invalid.',
@@ -85,23 +92,13 @@ return array(
         'array'   => 'The :attribute must contain :size items.',
     ],
     'string'               => 'The :attribute must be a string.',
+    'symbols'              => 'The :attribute must contain at least one symbol.',
     'timezone'             => 'The :attribute must be a valid zone.',
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
     "unique_undeleted"     => "The :attribute must be unique.",
     "import_field_empty"   => "The value of the Import Field shouldn't be empty",
-    /*
-    |--------------------------------------------------------------------------
-    | Custom Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
-    | specify a specific custom language line for a given attribute rule.
-    |
-    */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -118,7 +115,6 @@ return array(
         'alpha_space' => "The :attribute field contains a character that is not allowed.",
         "email_array"      => "One or more email addresses is invalid.",
         "hashed_pass"      => "Your current password is incorrect",
-        'dumbpwd'          => 'That password is too common.',
         "statuslabel_type" => "You must select a valid status label type",
     ],
 

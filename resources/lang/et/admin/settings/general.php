@@ -4,7 +4,7 @@ return array(
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory domeen',
     'ad_domain_help'			=> 'See on mõnikord sama kui teie e-posti domeen, kuid mitte alati.',
-    'admin_cc_email'            => 'CC Email',
+    'admin_cc_email'            => 'CC e-mail',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'See on Active Directory server',
 	'alert_email'				=> 'Saada hoiatusi',

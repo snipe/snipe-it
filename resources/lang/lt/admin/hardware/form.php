@@ -38,7 +38,7 @@ return array(
     'tag'				=> 'Įrangos pavadinimas',
     'update'			=> 'Įrangos atnaujinimas',
     'warranty'			=> 'Garantija',
-		'warranty_expires'		=> 'Warranty Expires',
+		'warranty_expires'		=> 'Garantija baigiasi',
     'years'				=> 'metai',
 )
 ;

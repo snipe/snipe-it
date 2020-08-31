@@ -4,7 +4,7 @@ return array(
 
     'accepted'                  => 'Du har framgångsrikt godkänt den här tillgången.',
     'declined'                  => 'Du har framgångsrikt nekat den här tillgången.',
-    'bulk_manager_warn'	        => 'Dina användare har blivit uppdaterade, men din administratörsinmatning sparades inte eftersom den chef du valde också var i användarlistan som ska redigeras, och användare kanske inte är deras egen chef. Vänligen välj dina användare igen, med undantag av chefen.',
+    'bulk_manager_warn'	        => 'Dina användare har uppdaterats, men chefsfältet sparades inte eftersom den chef du valt även finns i användarlistan, en användare kanske inte ange sig själv som chef. Vänligen välj dina användare igen, med undantag av chefen.',
     'user_exists'               => 'Användaren existerar redan!',
     'user_not_found'            => 'Användare [: id] existerar inte.',
     'user_login_required'       => 'Inloggningsfältet krävs',

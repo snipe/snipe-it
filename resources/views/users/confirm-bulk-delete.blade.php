@@ -84,7 +84,7 @@ Bulk Checkin &amp; Delete
                 <tfoot>
                   <tr>
                     <td colspan="6" class="warning">
-                      {{ Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
+                      {{ Form::select('status_id', $statuslabel_list , Request::old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
                       <label>Update all assets for these users to this status</label>
                     </td>
                   </tr>
@@ -100,7 +100,7 @@ Bulk Checkin &amp; Delete
         </div> <!--/box-body-->
         <div class="box-footer text-right">
           <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('button.submit') }}</button>
+          <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
         </div><!-- /.box-footer -->
       </form>
     </div>

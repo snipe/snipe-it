@@ -51,7 +51,13 @@
                             <tr>
                                 <td>{{ is_null($license->company) ? '' : $license->company->name }}</td>
                                 <td>{{ $license->name }}</td>
-                                <td>{{ mb_strimwidth($license->serial, 0, 50, "...") }}</td>
+                                <td>
+                                    @can('viewKeys', $license)
+                                        {{ $license->serial }}
+                                    @else
+                                        ------------
+                                    @endcan
+                                </td>
                                 <td>{{ $license->seats }}</td>
                                 <td>{{ $license->remaincount() }}</td>
                                 <td>{{ $license->expiration_date }}</td>

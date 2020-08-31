@@ -34,6 +34,7 @@ class UsersTransformer
                 ]  : null,
                 'jobtitle' => ($user->jobtitle) ? e($user->jobtitle) : null,
                 'phone' => ($user->phone) ? e($user->phone) : null,
+                'website' => ($user->website) ? e($user->website) : null,
                 'address' => ($user->address) ? e($user->address) : null,
                 'city' => ($user->city) ? e($user->city) : null,
                 'state' => ($user->state) ? e($user->state) : null,
@@ -65,10 +66,10 @@ class UsersTransformer
             ];
 
         $permissions_array['available_actions'] = [
-            'update' => (Gate::allows('update', User::class) && ($user->deleted_at==''))  ? true : false,
-            'delete' => (Gate::allows('delete', User::class) && ($user->deleted_at=='') && ($user->assets_count == 0) && ($user->licenses_count == 0)  && ($user->accessories_count == 0)  && ($user->consumables_count == 0)) ? true : false,
+            'update' => (Gate::allows('update', User::class) && ($user->deleted_at=='')),
+            'delete' => (Gate::allows('delete', User::class) && ($user->assets_count == 0) && ($user->licenses_count == 0)  && ($user->accessories_count == 0)  && ($user->consumables_count == 0)),
             'clone' => (Gate::allows('create', User::class) && ($user->deleted_at=='')) ,
-            'restore' => (Gate::allows('create', User::class) && ($user->deleted_at!='')) ? true : false,
+            'restore' => (Gate::allows('create', User::class) && ($user->deleted_at!='')),
         ];
 
         $array += $permissions_array;

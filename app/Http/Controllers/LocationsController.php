@@ -47,14 +47,7 @@ class LocationsController extends Controller
     public function create()
     {
         $this->authorize('create', Location::class);
-        $locations = Location::orderBy('name', 'ASC')->get();
-
-        $location_options_array = Location::getLocationHierarchy($locations);
-        $location_options = Location::flattenLocationsArray($location_options_array);
-        $location_options = array('' => 'Top Level') + $location_options;
-
         return view('locations/edit')
-            ->with('location_options', $location_options)
             ->with('item', new Location);
     }
 
@@ -74,6 +67,7 @@ class LocationsController extends Controller
     {
         $this->authorize('create', Location::class);
         $location = new Location();
+        $location->id               = null; // This is required to make Laravels different validation work, it errors if the parameter doesn't exist (maybe a bug)?
         $location->name             = $request->input('name');
         $location->parent_id        = $request->input('parent_id', null);
         $location->currency         = $request->input('currency', '$');
@@ -87,7 +81,7 @@ class LocationsController extends Controller
         $location->manager_id       = $request->input('manager_id');
         $location->user_id          = Auth::id();
 
-        $location = $request->handleImages($location, 'public/uploads/locations');
+        $location = $request->handleImages($location);
 
         if ($location->save()) {
             return redirect()->route("locations.index")->with('success', trans('admin/locations/message.create.success'));
@@ -114,14 +108,8 @@ class LocationsController extends Controller
             return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
-        // Show the page
-        $locations = Location::orderBy('name', 'ASC')->get();
-        $location_options_array = Location::getLocationHierarchy($locations);
-        $location_options = Location::flattenLocationsArray($location_options_array);
-        $location_options = array('' => 'Top Level') + $location_options;
 
-        return view('locations/edit', compact('item'))
-            ->with('location_options', $location_options);
+        return view('locations/edit', compact('item'));
     }
 
 
@@ -144,6 +132,7 @@ class LocationsController extends Controller
             return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
+
         // Update the location data
         $location->name         = $request->input('name');
         $location->parent_id    = $request->input('parent_id', null);
@@ -157,7 +146,7 @@ class LocationsController extends Controller
         $location->ldap_ou      = $request->input('ldap_ou');
         $location->manager_id   = $request->input('manager_id');
 
-        $location = $request->handleImages($location, 'public/uploads/locations');
+        $location = $request->handleImages($location);
 
 
         if ($location->save()) {
@@ -184,16 +173,12 @@ class LocationsController extends Controller
 
         if ($location->users()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_users'));
-
-        } elseif ($location->childLocations()->count() > 0) {
+        } elseif ($location->children()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_child_loc'));
-
         } elseif ($location->assets()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
-
         } elseif ($location->assignedassets()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
-
         }
 
         if ($location->image) {

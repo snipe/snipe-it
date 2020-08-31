@@ -23,7 +23,7 @@ class CustomFieldsController extends Controller
 
     public function index()
     {
-        $this->authorize('index', CustomFields::class);
+        $this->authorize('index', CustomField::class);
         $fields = CustomField::get();
         return (new CustomFieldsTransformer)->transformCustomFields($fields, $fields->count());
     }
@@ -37,7 +37,7 @@ class CustomFieldsController extends Controller
     */
     public function show($id)
     {
-      $this->authorize('show', CustomField::class);
+      $this->authorize('view', CustomField::class);
         if ($field = CustomField::find($id)) {
             return (new CustomFieldsTransformer)->transformCustomField($field);
         }
@@ -58,9 +58,9 @@ class CustomFieldsController extends Controller
     {
         $this->authorize('update', CustomField::class);
         $field = CustomField::findOrFail($id);
-        
+
         /**
-         * Updated values for the field, 
+         * Updated values for the field,
          * without the "field_encrypted" flag, preventing the change of encryption status
          * @var array
          */

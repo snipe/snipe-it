@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
 
@@ -10,8 +10,11 @@
 
     <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->favicon) : 'favicon.ico' }} ">
     {{-- stylesheets --}}
-    <link rel="stylesheet" href="{{ mix('css/all.css') }}">
+    <link rel="stylesheet" href="{{ url('css/all.css') }}">
 
+
+    <link rel="stylesheet" href="{{ url('css/dist/all.css') }}">
+    <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
 
 
     @if (($snipeSettings) && ($snipeSettings->header_color))
@@ -30,6 +33,8 @@
         background-color: {{ $snipeSettings->header_color }};
         border-color: {{ $snipeSettings->header_color }};
         }
+
+
         </style>
     @endif
 

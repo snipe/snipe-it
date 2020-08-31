@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Adldap\Models\User as AdldapUser;
-use App\Models\Location;
-use App\Services\LdapAd;
+use Log;
 use Exception;
+use App\Models\User;
+use App\Services\LdapAd;
+use App\Models\Location;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
+use Adldap\Models\User as AdldapUser;
 
 /**
  * LDAP / AD sync command.
@@ -48,6 +49,13 @@ class LdapSync extends Command
     private $ldap;
 
     /**
+     * LDAP settings collection.
+     *
+     * @var \Illuminate\Support\Collection
+     */
+    private $settings = null;
+
+    /**
      * A default location collection.
      *
      * @var \Illuminate\Support\Collection
@@ -84,16 +92,13 @@ class LdapSync extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @param LdapAd $ldap
      */
     public function __construct(LdapAd $ldap)
     {
-
         parent::__construct();
+        $this->ldap     = $ldap;
+        $this->settings = $this->ldap->ldapSettings;
         $this->summary  = collect();
-
-        $this->ldap = $ldap;
     }
 
     /**
@@ -105,11 +110,12 @@ class LdapSync extends Command
     {
         ini_set('max_execution_time', '600'); //600 seconds = 10 minutes
         ini_set('memory_limit', '500M');
+        $old_error_reporting = error_reporting(); // grab old error_reporting .ini setting, for later re-enablement
+        error_reporting($old_error_reporting & ~E_DEPRECATED); // disable deprecation warnings, for LDAP in PHP 7.4 (and greater)
 
         if ($this->option('dryrun')) {
             $this->dryrun = true;
         }
-
         $this->checkIfLdapIsEnabled();
         $this->checkLdapConnetion();
         $this->setBaseDn();
@@ -121,7 +127,6 @@ class LdapSync extends Command
             $this->getMappedLocations();
         }
         $this->processLdapUsers();
-
         // Print table of users
         if ($this->dryrun) {
             $this->info('The following users will be synced!');
@@ -129,6 +134,7 @@ class LdapSync extends Command
             $this->table($headers, $this->summary->toArray());
         }
 
+        error_reporting($old_error_reporting); // re-enable deprecation warnings.
         return $this->getSummary();
     }
 
@@ -142,14 +148,13 @@ class LdapSync extends Command
      * @return string
      */
     private function getSummary(): string
-    {        
-        if ($this->option('summary') && !$this->dryrun) {
+    {
+        if ($this->option('summary') && null === $this->dryrun) {
             $this->summary->each(function ($item) {
+                $this->info('USER: '.$item['note']);
+
                 if ('ERROR' === $item['status']) {
                     $this->error('ERROR: '.$item['note']);
-                }
-                else {
-                    $this->info('USER: '.$item['note']);
                 }
             });
         } elseif ($this->option('json_summary')) {
@@ -176,12 +181,6 @@ class LdapSync extends Command
     private function updateCreateUser(AdldapUser $snipeUser): void
     {
         $user = $this->ldap->processUser($snipeUser, $this->defaultLocation, $this->mappedLocations);
-        if(!$user) {
-            $summary['note']   = sprintf("'%s' was not imported. REASON: User inactive or not found", $snipeUser->ou);
-            $summary['status'] = 'ERROR';
-            $this->summary->push($summary);
-            return;
-        }
         $summary = [
             'firstname'       => $user->first_name,
             'lastname'        => $user->last_name,
@@ -193,19 +192,19 @@ class LdapSync extends Command
         // Only update the database if is not a dry run
         if (!$this->dryrun) {
             if ($user->save()) {
-                $summary['note']   = sprintf("'%s' %s", $user->username, ($user->wasRecentlyCreated ? 'CREATED' : 'UPDATED'));
+                $summary['note']   = ($user->wasRecentlyCreated ? 'CREATED' : 'UPDATED');
                 $summary['status'] = 'SUCCESS';
             } else {
                 $errors = '';
                 foreach ($user->getErrors()->getMessages() as  $error) {
                     $errors .= $error[0];
                 }
-                $summary['note']   = sprintf("'%s' was not imported. REASON: %s", $user->username, $errors);
+                $summary['note']   = $userMsg.' was not imported. REASON: '.$errors;
                 $summary['status'] = 'ERROR';
             }
         }
 
-        //$summary['note'] = ($user->getOriginal('username') ? 'UPDATED' : 'CREATED');
+        $summary['note'] = ($user->getOriginal('username') ? 'UPDATED' : 'CREATED');
         $this->summary->push($summary);
     }
 
@@ -241,7 +240,7 @@ class LdapSync extends Command
             $this->updateCreateUser($user);
         }
 
-        if ($ldapUsers->getCurrentPage() < $ldapUsers->getPages()) {
+        if ($ldapUsers->getCurrentPage() < $ldapUsers->getPages()-1) {
             $this->processLdapUsers($ldapUsers->getCurrentPage() + 1);
         }
     }
@@ -335,7 +334,7 @@ class LdapSync extends Command
      */
     private function checkIfLdapIsEnabled(): void
     {
-        if (!$this->ldap->init()) {
+        if (false === $this->settings['ldap_enabled']) {
             $msg = 'LDAP intergration is not enabled. Exiting sync process.';
             $this->info($msg);
             Log::info($msg);

@@ -73,7 +73,7 @@ pieOptions = {
 //- END PIE CHART -
 //-----------------
 
-
+var baseUrl = $('meta[name="baseUrl"]').attr('content');
 
 (function($, settings) {
     var Components = {};
@@ -126,7 +126,6 @@ $(document).ready(function () {
     * Slideout help menu
     */
      $('.slideout-menu-toggle').on('click', function(event){
-       console.log('clicked');
         event.preventDefault();
         // create menu variables
         var slideoutMenu = $('.slideout-menu');
@@ -220,7 +219,7 @@ $(document).ready(function () {
                     var answer =  {
                         results: data.items,
                         pagination: {
-                            more: "true" //(params.page  < data.page_count)
+                            more: data.pagination.more
                         }
                     };
 
@@ -335,7 +334,7 @@ $(document).ready(function () {
         var markup = "<div class='clearfix'>" ;
         markup +="<div class='pull-left' style='padding-right: 10px;'>";
         if (datalist.image) {
-            markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;'></div>";
+            markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;' alt='" +  datalist.text + "'></div>";
         } else {
             markup += "<div style='height: 20px; width: 30px;'></div>";
         }
@@ -448,10 +447,10 @@ $(document).ready(function () {
 
      // File size validation
     $('.js-uploadFile').bind('change', function() {
-        let $this = $(this);
-        let id = '#' + $this.attr('id');
-        let status = id + '-status';
-        let $status = $(status);
+        var $this = $(this);
+        var id = '#' + $this.attr('id');
+        var status = id + '-status';
+        var $status = $(status);
         $status.removeClass('text-success').removeClass('text-danger');
         $(status + ' .goodfile').remove();
         $(status + ' .badfile').remove();
@@ -470,7 +469,7 @@ $(document).ready(function () {
             $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
         } else {
             $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
-            let $preview =  $(id + '-imagePreview');
+            var $preview =  $(id + '-imagePreview');
             readURL(this, $preview);
             $preview.fadeIn();
         }

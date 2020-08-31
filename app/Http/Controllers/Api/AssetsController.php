@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Gate;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
@@ -26,6 +27,7 @@ use Str;
 use TCPDF;
 use Validator;
 
+
 /**
  * This class controls all actions related to assets for
  * the Snipe-IT Asset Management application.
@@ -44,7 +46,7 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request, $audit = null)
     {
 
         $this->authorize('index', Asset::class);
@@ -113,6 +115,10 @@ class AssetsController extends Controller
             $assets->where('assets.location_id', '=', $request->input('location_id'));
         }
 
+        if ($request->filled('rtd_location_id')) {
+            $assets->where('assets.rtd_location_id', '=', $request->input('rtd_location_id'));
+        }
+
         if ($request->filled('supplier_id')) {
             $assets->where('assets.supplier_id', '=', $request->input('supplier_id'));
         }
@@ -135,10 +141,33 @@ class AssetsController extends Controller
         }
 
         $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
-
         $offset = (($assets) && (request('offset') > $assets->count())) ? 0 : request('offset', 0);
-        $limit = $request->input('limit', 50);
+
+
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($assets) && ($request->get('offset') > $assets->count())) ? $assets->count() : $request->get('offset', 0);
+
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+
+        // This is used by the audit reporting routes
+        if (Gate::allows('audit', Asset::class)) {
+
+            switch ($audit) {
+                case 'due':
+                    $assets->DueOrOverdueForAudit($settings);
+                    break;
+                case 'overdue':
+                    $assets->overdueForAudit($settings);
+                    break;
+            }
+        }
+
+
 
         // This is used by the sidenav, mostly
 
@@ -262,6 +291,7 @@ class AssetsController extends Controller
                 break;
         }
 
+
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
         // dd($assets);
@@ -333,6 +363,7 @@ class AssetsController extends Controller
         $licenses = $asset->licenses()->get();
         return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
      }
+
 
     /**
      * Gets a paginated collection for the select2 menus
@@ -448,7 +479,13 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
-                $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug(), null));
+                if ($field->field_encrypted=='1') {
+                    if (Gate::allows('admin')) {
+                        $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                    }
+                } else {
+                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                }
             }
         }
 
@@ -498,8 +535,14 @@ class AssetsController extends Controller
             ($request->filled('company_id')) ?
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
-            if ($request->has('image_source')) {
+($request->filled('rtd_location_id')) ?
+                $asset->location_id = $request->get('rtd_location_id') : null;
+
+
+            if ($request->filled('image_source')) {
                 if ($request->input('image_source') == "") {
+            ($request->filled('rtd_location_id')) ?
+                $asset->location_id = $request->get('rtd_location_id') : null;
                     $asset->image = null;
                 } else {
                     $saved_image_path = Helper::processUploadedImage(
@@ -521,8 +564,14 @@ class AssetsController extends Controller
             // Update custom fields
             if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
-                    if ($request->filled($field->convertUnicodeDbSlug())) {
-                        $asset->{$field->convertUnicodeDbSlug()} = e($request->input($field->convertUnicodeDbSlug()));
+                    if ($request->has($field->convertUnicodeDbSlug())) {
+                        if ($field->field_encrypted=='1') {
+                            if (Gate::allows('admin')) {
+                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                            }
+                        } else {
+                            $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                        }
                     }
                 }
             }
@@ -533,7 +582,11 @@ class AssetsController extends Controller
                 if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
                         $location = $target->location_id;
                 } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
-                            $location = $target->location_id;
+                    $location = $target->location_id;
+
+                    Asset::where('assigned_type', '\\App\\Models\\Asset')->where('assigned_to', $id)
+                        ->update(['location_id' => $target->location_id]);
+
                 } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
                     $location = $target->id;
                 }
@@ -621,16 +674,14 @@ class AssetsController extends Controller
             $target = Asset::where('id','!=',$asset_id)->find(request('assigned_asset'));
             $asset->location_id = $target->rtd_location_id;
             // Override with the asset's location_id if it has one
-            if ($target->location_id!='') {
-                $asset->location_id = ($target) ? $target->location_id : '';
-            }
+            $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_asset');
             $error_payload['target_type'] = 'asset';
 
         } elseif (request('checkout_to_type')=='user') {
             // Fetch the target and set the asset's new location_id
             $target = User::find(request('assigned_user'));
-            $asset->location_id = ($target) ? $target->location_id : '';
+            $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_user');
             $error_payload['target_type'] = 'user';
         }
@@ -649,11 +700,13 @@ class AssetsController extends Controller
         $asset_name = request('name', null);
 
         // Set the location ID to the RTD location id if there is one
-        if ($asset->rtd_location_id!='') {
-            $asset->location_id = $target->rtd_location_id;
-        }
+        // Wait, why are we doing this? This overrides the stuff we set further up, which makes no sense.
+        // TODO: Follow up here. WTF. Commented out for now. 
 
 
+//        if ((isset($target->rtd_location_id)) && ($asset->rtd_location_id!='')) {
+//            $asset->location_id = $target->rtd_location_id;
+//        }
 
 
 
@@ -661,7 +714,7 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.error')))->withErrors($asset->getErrors());
+        return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.error')));
     }
 
 
@@ -690,19 +743,23 @@ class AssetsController extends Controller
         $asset->assigned_to = null;
         $asset->assignedTo()->disassociate($asset);
         $asset->accepted = null;
-        $asset->name = Input::get('name');
+
+        if ($request->filled('name')) {
+            $asset->name = $request->input('name');
+        }
+        
         $asset->location_id =  $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
             $asset->location_id =  $request->input('location_id');
         }
 
-        if (Input::has('status_id')) {
-            $asset->status_id =  Input::get('status_id');
+        if ($request->has('status_id')) {
+            $asset->status_id =  $request->input('status_id');
         }
 
         if ($asset->save()) {
-            $asset->logCheckin($target, e(request('note')));
+            $asset->logCheckin($target, e($request->input('note')));
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
 

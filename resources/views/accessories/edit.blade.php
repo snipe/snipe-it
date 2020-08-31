@@ -3,7 +3,7 @@
     'updateText' => trans('admin/accessories/general.update'),
     'helpPosition'  => 'right',
     'helpText' => trans('help.accessories'),
-    'formAction' => ($item) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
+    'formAction' => (isset($item->id)) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
 ])
 
 {{-- Page content --}}
@@ -22,15 +22,15 @@
 @include ('partials.forms.edit.quantity')
 @include ('partials.forms.edit.minimum_quantity')
 
-<!-- Image -->
 
+<!-- Image -->
 @if ($item->image)
     <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
         <div class="col-md-5">
             {{ Form::checkbox('image_delete') }}
-            <img src="{{ Storage::disk('public')->url(app('accessories_upload_path').e($item->image)) }}" class="img-responsive" />
-            {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+            <img src="{{  Storage::disk('public')->url('accessories/'.e($item->image)) }}" class="img-responsive" />
+            {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
         </div>
     </div>
 @endif

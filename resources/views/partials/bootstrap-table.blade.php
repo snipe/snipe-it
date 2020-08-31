@@ -1,14 +1,9 @@
 @push('css')
-<link rel="stylesheet" href="{{ mix('css/dist/bootstrap-table.css') }}">
+<link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
 @endpush
 
 @push('js')
-<script src="{{ mix('js/dist/bootstrap-table.js') }}"></script>
-
-@if (!isset($simple_view))
-<script src="{{ mix('js/dist/bootstrap-table-simple-view.js') }}"></script>
-@endif
-
+<script src="{{ asset(mix('js/dist/bootstrap-table.js')) }}"></script>
 <script nonce="{{ csrf_token() }}">
 
     $(function () {
@@ -21,6 +16,7 @@
         if ( $('.navbar-fixed-top').css('margin-bottom') ) {
             stickyHeaderOffsetY += +$('.navbar-fixed-top').css('margin-bottom').replace('px','');
         }
+
 
         $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
             classes: 'table table-responsive table-no-bordered',
@@ -47,7 +43,7 @@
             pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
             paginationVAlign: 'both',
             formatLoadingMessage: function () {
-                return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+                return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
             },
             icons: {
                 advancedSearchIcon: 'fa fa-search-plus',
@@ -64,12 +60,17 @@
         });
     });
 
+
+
+
+
     function dateRowCheckStyle(value) {
         if ((value.days_to_next_audit) && (value.days_to_next_audit < {{ $snipeSettings->audit_warning_days ?: 0 }})) {
             return { classes : "danger" }
         }
         return {};
     }
+
 
     // Handle whether or not the edit button should be disabled
     $('.snipe-table').on('check.bs.table', function () {
@@ -141,13 +142,18 @@
                 // Add some overrides for any funny urls we have
                 var dest = destination;
                 if (destination=='fieldsets') {
-                    var dest = 'fields/fieldsets';
+                    var dpolymorphicItemFormatterest = 'fields/fieldsets';
                 }
 
                 return '<nobr><a href="{{ url('/') }}/' + dest + '/' + value.id + '"> ' + value.name + '</a></span>';
             }
         };
     }
+
+    function hardwareAuditFormatter(value, row) {
+        return '<a href="{{ url('/') }}/hardware/audit/' + row.id + '/" class="btn btn-sm bg-yellow" data-tooltip="true" title="Audit this item">{{ trans('general.audit') }}</a>';
+    }
+
 
     // Make the edit/delete buttons
     function genericActionsFormatter(owner_name, element_name = '') {
@@ -171,11 +177,11 @@
             }
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-toggle="tooltip" title="Clone"><i class="fa fa-copy"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="fa fa-copy" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update Item"><i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">Update</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
@@ -184,7 +190,7 @@
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
-                    + '<i class="fa fa-trash"></i></a>&nbsp;';
+                    + '<i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span></a>&nbsp;';
             } else {
                 actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
             }
@@ -231,7 +237,7 @@
                 item_icon = 'fa-map-marker';
             }
 
-            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-toggle="tooltip" title="' + value.type + '"><i class="fa ' + item_icon + ' text-blue"></i> ' + value.name + '</a></nobr>';
+            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
 
         } else {
             return '';
@@ -446,6 +452,14 @@
             return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.asset_tag + '</a>';
         }
         return '';
+
+    }
+
+    function departmentNameLinkFormatter(value, row) {
+        if ((row.assigned_user) && (row.assigned_user.department) && (row.assigned_user.department.name)) {
+            return '<a href="{{ url('/') }}/department/' + row.assigned_user.department.id + '"> ' + row.assigned_user.department.name + '</a>';
+        }
+
     }
 
     function assetNameLinkFormatter(value, row) {
@@ -520,9 +534,20 @@
         }
     }
 
-   function imageFormatter(value) {
+
+   function imageFormatter(value, row) {
+
+
+
         if (value) {
-            return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
+
+            if (row.name) {
+                var altName = row.name;
+            }
+                else if ((row) && (row.model)) {
+                var altName = row.model.name;
+           }
+            return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="' + altName + '"></a>';
         }
     }
 

@@ -64,7 +64,7 @@
             @if ($snipeSettings->require_accept_signature=='1')
             <div class="col-md-12 col-sm-12 text-center" style="padding-top: 20px">
 
-              <h3>Sign below to indicate that you agree to the terms of service:</h3>
+              <h2>Sign below to indicate that you agree to the terms of service:</h2>
 
               <div id="signature-pad" class="m-signature-pad">
                 <div class="m-signature-pad--body col-md-12 col-sm-12 col-lg-12 col-xs-12">
@@ -72,7 +72,7 @@
                     <input type="hidden" name="signature_output" id="signature_output">
                 </div>
                <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center">
-                  <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">Clear Signature</button>
+                  <button type="button" class="btn btn-sm btn-primary clear" data-action="clear" id="clear_button">Clear Signature</button>
                 </div>
               </div>
             </div> <!-- .col-md-12.text-center-->
@@ -82,7 +82,7 @@
 
         </div> <!-- / box-body -->
         <div class="box-footer text-right">
-            <button type="submit" class="btn btn-success" id="submit-button"><i class="fa fa-check icon-white"></i> {{ trans('general.submit') }}</button>
+            <button type="submit" class="btn btn-success" id="submit-button"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.submit') }}</button>
         </div><!-- /.box-footer -->
       </div> <!-- / box-default -->
     </div> <!-- / col -->

@@ -19,9 +19,14 @@ class Department extends SnipeModel
 
     use ValidatingTrait, UniqueUndeletedTrait;
 
+    protected $casts = [
+        'manager_id'   => 'integer',
+        'location_id'  => 'integer',
+        'company_id'   => 'integer',
+    ];
+
     protected $rules = [
         'name'                  => 'required|max:255',
-        'user_id'               => 'nullable|exists:users,id',
         'location_id'           => 'numeric|nullable',
         'company_id'            => 'numeric|nullable',
         'manager_id'            => 'numeric|nullable',

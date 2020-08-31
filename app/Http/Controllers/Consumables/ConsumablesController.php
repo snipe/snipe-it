@@ -141,8 +141,8 @@ class ConsumablesController extends Controller
         $consumable->model_number           = $request->input('model_number');
         $consumable->item_no                = $request->input('item_no');
         $consumable->purchase_date          = $request->input('purchase_date');
-        $consumable->purchase_cost          = Helper::ParseFloat(Input::get('purchase_cost'));
-        $consumable->qty                    = Helper::ParseFloat(Input::get('qty'));
+        $consumable->purchase_cost          = Helper::ParseFloat($request->input('purchase_cost'));
+        $consumable->qty                    = Helper::ParseFloat($request->input('qty'));
 
         $consumable = $request->handleImages($consumable);
 

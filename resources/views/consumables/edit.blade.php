@@ -3,7 +3,7 @@
     'updateText' => trans('admin/consumables/general.update'),
     'helpPosition'  => 'right',
     'helpText' => trans('help.consumables'),
-    'formAction' => ($item) ? route('consumables.update', ['accessory' => $item->id]) : route('consumables.store'),
+    'formAction' => (isset($item->id)) ? route('consumables.update', ['consumable' => $item->id]) : route('consumables.store'),
 ])
 {{-- Page content --}}
 @section('inputFields')

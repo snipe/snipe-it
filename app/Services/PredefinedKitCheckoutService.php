@@ -29,7 +29,7 @@ class PredefinedKitCheckoutService
 
             // Check if the user exists
             if (is_null($user)) {
-                return [trans('admin/users/message.user_not_found')];
+                return ['errors' => trans('admin/users/message.user_not_found')];
             }
 
             $errors = [];
@@ -40,7 +40,7 @@ class PredefinedKitCheckoutService
             $accessories_to_add = $this->getAccessoriesToAdd($kit, $errors);
 
             if (count($errors) > 0) {
-                return $errors;
+                return ['errors' => $errors];
             }
 
             $checkout_at = date("Y-m-d H:i:s");
@@ -58,11 +58,12 @@ class PredefinedKitCheckoutService
             $note = e($request->get('note'));
 
             $errors = $this->saveToDb($user, $admin, $checkout_at, $expected_checkin, $errors, $assets_to_add, $license_seats_to_add, $consumables_to_add, $accessories_to_add, $note);
-            return $errors;
+
+            return ['errors' => $errors, 'assets' => $assets_to_add, 'accessories' => $accessories_to_add, 'consumables' => $consumables_to_add ];
         } catch (ModelNotFoundException $e) {
-            return [$e->getMessage()];
+            return ['errors' => [$e->getMessage()]];
         } catch (CheckoutNotAllowed $e) {
-            return [$e->getMessage()];
+            return ['errors' => [$e->getMessage()]];
         }
     }
 
@@ -134,7 +135,7 @@ class PredefinedKitCheckoutService
         $accessories = $kit->accessories()->with('users')->get();
         foreach ($accessories as $accessory) {
             if ($accessory->numRemaining() < $accessory->pivot->quantity) {
-                $errors[] = trans('admin/kits/general.none_accessory', ['consumable'=> $accessory->name, 'qty' => $accessory->pivot->quantity]);
+                $errors[] = trans('admin/kits/general.none_accessory', ['accessory'=> $accessory->name, 'qty' => $accessory->pivot->quantity]);
             }
         }
         return $accessories;

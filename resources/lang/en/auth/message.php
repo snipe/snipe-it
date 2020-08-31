@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-        'success' => 'Password recovery email successfully sent.',
+        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
     ),
 
     'forgot-password-confirm' => array(

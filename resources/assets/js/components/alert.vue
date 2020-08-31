@@ -6,7 +6,7 @@
         <div class="col-md-12" :class="alertType">
             <div class="alert" :class="alertClassName">
                 <button type="button" class="close" @click="hideEvent">&times;</button>
-                <i class="fa fa-check faa-pulse animated" v-show="alertType == 'success'"></i>
+                <i class="fa fa-check faa-pulse animated" aria-hidden="true" v-show="alertType == 'success'"></i>
                 <strong>{{ title }} </strong>
                 <slot></slot>
             </div>

@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Elements',
     'field_format'            => 'Formāts',
     'field_custom_format'     => 'Pielāgotais formāts',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Šajā laukā var izmantot regulāro izteiksmi, lai pārbaudītu. Tai ir jāsākas ar "regex:". Piemēram, lai pārbaudītu, ka pielāgotais lauks satur derīgu IMEI (15 cipari), būtu jāizmanto vērtība <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'Obligāts',
     'req'   		              => 'Req.',
     'used_by_models'   		    => 'Izmantoti modeļi',
@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => 'Jauns lauka laukums',
     'create_field'            => 'Jauna pielāgota lauks',
     'value_encrypted'      	        => 'Šī lauka vērtība ir šifrēta datu bāzē. Tikai admin lietotāji varēs apskatīt atšifrēto vērtību',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Vai iekļaut šī lauka vērtību lietotājiem nosūtītajos e-pasta paziņojumos? Šifrētie lauki nevar būt iekļauti e-pasta ziņojumos.',
 );

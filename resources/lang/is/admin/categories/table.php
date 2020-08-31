@@ -1,10 +1,10 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'parent'   					=> 'Parent',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+	'eula_text'      			=> 'Notendaskilmálar',
+    'id'      					=> 'Auðkenni',
+    'parent'   					=> 'Yfir',
+    'require_acceptance'      	=> 'Samþykki',
+    'title'      				=> 'Flokkur búnaðar',
 
 );

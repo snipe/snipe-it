@@ -8,6 +8,7 @@ use App\Models\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * This class controls all actions related to Components for
@@ -121,20 +122,30 @@ class ComponentsController extends Controller
         if (is_null($component = Component::find($componentId))) {
             return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
         }
+        $min = $component->numCHeckedOut();
+        $validator = Validator::make($request->all(), [
+            "qty" => "required|numeric|gt:$min"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $this->authorize('update', $component);
 
         // Update the component data
-        $component->name                   = Input::get('name');
-        $component->category_id            = Input::get('category_id');
-        $component->location_id            = Input::get('location_id');
-        $component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
-        $component->order_number           = Input::get('order_number');
-        $component->min_amt                = Input::get('min_amt');
-        $component->serial                 = Input::get('serial');
-        $component->purchase_date          = Input::get('purchase_date');
+        $component->name                   = $request->input('name');
+        $component->category_id            = $request->input('category_id');
+        $component->location_id            = $request->input('location_id');
+        $component->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
+        $component->order_number           = $request->input('order_number');
+        $component->min_amt                = $request->input('min_amt');
+        $component->serial                 = $request->input('serial');
+        $component->purchase_date          = $request->input('purchase_date');
         $component->purchase_cost          = request('purchase_cost');
-        $component->qty                    = Input::get('qty');
+        $component->qty                    = $request->input('qty');
 
         $component = $request->handleImages($component);
 

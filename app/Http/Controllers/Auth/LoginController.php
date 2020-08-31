@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\User;
 use App\Services\LdapAd;
+use App\Services\Saml;
 use Com\Tecnick\Barcode\Barcode;
 use Google2FA;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Log;
@@ -46,25 +46,37 @@ class LoginController extends Controller
     protected $ldap;
 
     /**
+     * @var Saml
+     */
+    protected $saml;
+
+    /**
      * Create a new authentication controller instance.
      *
      * @param LdapAd $ldap
+     * @param Saml $saml
      *
      * @return void
      */
-    public function __construct(LdapAd $ldap)
+    public function __construct(LdapAd $ldap, Saml $saml)
     {
         parent::__construct();
         $this->middleware('guest', ['except' => ['logout','postTwoFactorAuth','getTwoFactorAuth','getTwoFactorEnroll']]);
         Session::put('backUrl', \URL::previous());
         $this->ldap = $ldap;
+        $this->saml = $saml;
     }
 
     function showLoginForm(Request $request)
     {
         $this->loginViaRemoteUser($request);
+        $this->loginViaSaml($request);
         if (Auth::check()) {
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/');
+        }
+
+        if ($this->saml->isEnabled() && Setting::getSettings()->saml_forcelogin == "1" && !($request->has('nosaml') || $request->session()->has('error'))) {
+            return redirect()->route('saml.login');
         }
 
         if (Setting::getSettings()->login_common_disabled == "1") {
@@ -72,6 +84,47 @@ class LoginController extends Controller
         }
 
         return view('auth.login');
+    }
+
+    /**
+     * Log in a user by SAML
+     * 
+     * @author Johnson Yi <jyi.dev@outlook.com>
+     * 
+     * @since 5.0.0
+     *
+     * @param Request $request
+     * 
+     * @return User
+     * 
+     * @throws \Exception
+     */
+    private function loginViaSaml(Request $request)
+    {
+        $saml = $this->saml;
+        $samlData = $request->session()->get('saml_login');
+        if ($saml->isEnabled() && !empty($samlData)) {
+            try {
+                LOG::debug("Attempting to log user in by SAML authentication.");
+                $user = $saml->samlLogin($samlData);
+                if(!is_null($user)) {
+                    Auth::login($user, true);
+                } else {
+                    $username = $saml->getUsername();
+                    LOG::debug("SAML user '$username' could not be found in database.");
+                    $request->session()->flash('error', trans('auth/message.signin.error'));
+                    $saml->clearData();
+                }
+
+                if ($user = Auth::user()) {
+                    $user->last_login = \Carbon::now();
+                    $user->save();
+                }
+            } catch (\Exception $e) {
+                LOG::debug("There was an error authenticating the SAML user: " . $e->getMessage());
+                throw new \Exception($e->getMessage());
+            }
+        }
     }
 
     /**
@@ -99,9 +152,10 @@ class LoginController extends Controller
 
     private function loginViaRemoteUser(Request $request)
     {
-        $remote_user = $request->server('REMOTE_USER');
+        $header_name = Setting::getSettings()->login_remote_user_header_name ?: 'REMOTE_USER';
+        $remote_user = $request->server($header_name);
         if (Setting::getSettings()->login_remote_user_enabled == "1" && isset($remote_user) && !empty($remote_user)) {
-            Log::debug("Authenticatiing via REMOTE_USER.");
+            Log::debug("Authenticating via HTTP header $header_name.");
 
             $pos = strpos($remote_user, '\\');
             if ($pos > 0) {
@@ -129,7 +183,7 @@ class LoginController extends Controller
             return view('errors.403');
         }
 
-        $validator = $this->validator(Input::all());
+        $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
             return redirect()->back()->withInput()->withErrors($validator);
@@ -179,8 +233,7 @@ class LoginController extends Controller
         }
 
         if ($user = Auth::user()) {
-            $user->last_login = Carbon::now();
-            Log::debug('Last login:'.$user->last_login);
+            $user->last_login = \Carbon::now();
             $user->save();
         }
         // Redirect to the users page
@@ -277,7 +330,7 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error', trans('auth/general.login_prompt'));
         }
 
-        if (!$request->has('two_factor_secret')) {
+        if (!$request->filled('two_factor_secret')) {
             return redirect()->route('two-factor')->with('error', trans('auth/message.two_factor.code_required'));
         }
 
@@ -310,17 +363,40 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        $request->session()->forget('2fa_authed');
+        $settings = Setting::getSettings();
+        $saml = $this->saml;
+        $sloRedirectUrl = null;
+        $sloRequestUrl = null;
+
+        if ($saml->isEnabled()) {
+            $auth = $saml->getAuth();
+            $sloRedirectUrl = $request->session()->get('saml_slo_redirect_url');
+            
+            if (!empty($auth->getSLOurl()) && $settings->saml_slo == '1' && $saml->isAuthenticated()  && empty($sloRedirectUrl)) {
+                $sloRequestUrl = $auth->logout(null, array(), $saml->getNameId(), $saml->getSessionIndex(), true, $saml->getNameIdFormat(), $saml->getNameIdNameQualifier(), $saml->getNameIdSPNameQualifier());
+            }
+
+            $saml->clearData();
+        }
+
+        if (!empty($sloRequestUrl)) {
+            return redirect()->away($sloRequestUrl);
+        }
+
+        $request->session()->regenerate(true);
 
         Auth::logout();
 
-        $settings = Setting::getSettings();
+        if (!empty($sloRedirectUrl)) {
+            return redirect()->away($sloRedirectUrl);
+        }
+
         $customLogoutUrl = $settings->login_remote_user_custom_logout_url ;
         if ($settings->login_remote_user_enabled == '1' && $customLogoutUrl != '') {
             return redirect()->away($customLogoutUrl);
         }
 
-        return redirect()->route('login')->with('success',  trans('auth/general.logout.success'));
+        return redirect()->route('login')->with(['success' => trans('auth/message.logout.success'), 'loggedout' => true]);
     }
 
 

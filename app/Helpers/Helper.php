@@ -606,38 +606,32 @@ class Helper
 
         $extension = substr(strrchr($filename,'.'),1);
 
-        if ($extension) {
-            switch ($extension) {
-                case 'jpg':
-                case 'jpeg':
-                case 'gif':
-                case 'png':
-                    return "fa fa-file-image-o";
-                    break;
-                case 'doc':
-                case 'docx':
-                    return "fa fa-file-word-o";
-                    break;
-                case 'xls':
-                case 'xlsx':
-                    return "fa fa-file-excel-o";
-                    break;
-                case 'zip':
-                case 'rar':
-                    return "fa fa-file-archive-o";
-                    break;
-                case 'pdf':
-                    return "fa fa-file-pdf-o";
-                    break;
-                case 'txt':
-                    return "fa fa-file-text-o";
-                    break;
-                case 'lic':
-                    return "fa fa-floppy-o";
-                    break;
-                default:
-                    return "fa fa-file-o";
-            }
+        $allowedExtensionMap = [
+            // Images
+            'jpg'   => 'fa fa-file-image-o',
+            'jpeg'   => 'fa fa-file-image-o',
+            'gif'   => 'fa fa-file-image-o',
+            'png'   => 'fa fa-file-image-o',
+            // word
+            'doc'   => 'fa fa-file-word-o',
+            'docx'   => 'fa fa-file-word-o',
+            // Excel
+            'xls'   => 'fa fa-file-excel-o',
+            'xlsx'   => 'fa fa-file-excel-o',
+            // archive
+            'zip'   => 'fa fa-file-archive-o',
+            'rar'   => 'fa fa-file-archive-o',
+            //Text
+            'txt'   => 'fa fa-file-text-o',
+            'rtf'   => 'fa fa-file-text-o',
+            'xml'   => 'fa fa-file-text-o',
+            // Misc
+            'pdf'   => 'fa fa-file-pdf-o',
+            'lic'   => 'fa fa-file-floppy-o',
+        ];
+
+        if ($extension && array_key_exists($extension, $allowedExtensionMap)) {
+            return $allowedExtensionMap[$extension];
         }
         return "fa fa-file-o";
     }

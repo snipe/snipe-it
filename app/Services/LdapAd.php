@@ -52,9 +52,9 @@ class LdapAd extends LdapAdConfiguration
      *
      * @since 5.0.0
      *
-     * @return bool
+     * @return void
      */
-    public function init() : bool
+    public function init()
     {
         // Already initialized
         if($this->ldap) {
@@ -63,11 +63,17 @@ class LdapAd extends LdapAdConfiguration
 
         parent::init();
         if($this->isLdapEnabled()) {
+            $this->ldapConfig['account_prefix'] = $this->ldapSettings['ldap_auth_filter_query'];
+            $this->ldapConfig['account_suffix'] = ','.$this->ldapConfig['base_dn'];
             $this->ldap = new Adldap();
             $this->ldap->addProvider($this->ldapConfig);
             return true;
         }
         return false;
+    }
+
+    public function __construct() {
+        $this->init();
     }
 
         /**
@@ -86,12 +92,13 @@ class LdapAd extends LdapAdConfiguration
      */
     public function ldapLogin(string $username, string $password): User
     {
-        try {
-            $this->ldap->auth()->attempt($username, $password);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-            throw new Exception('Unable to validate user credentials!');
+        if ($this->ldapSettings['ad_append_domain']) {
+            $username .= '@' . $this->ldapSettings['ad_domain'];
         }
+
+        if ($this->ldap->auth()->attempt($username, $password, true) === false) {
+            throw new Exception('Unable to validate user credentials!');
+        }    
 
         // Should we sync the logged in user
         Log::debug('Attempting to find user in LDAP directory');
@@ -322,7 +329,7 @@ class LdapAd extends LdapAdConfiguration
     private function getFilter(): ?string
     {
         $filter = $this->ldapSettings['ldap_filter'];
-        if ('' === $filter) {
+        if (!$filter) {
             return null;
         }
         // Add surrounding parentheses as needed
@@ -366,13 +373,13 @@ class LdapAd extends LdapAdConfiguration
      * Test the bind user connection.
      *
      * @author Wes Hulette <jwhulette@gmail.com>
-     *
+     * @throws \Exception
      * @since 5.0.0
      */
     public function testLdapAdBindConnection(): void
     {
         try {
-            $this->ldap->search()->ous()->get()->count();
+            $this->ldap->search()->ous()->get()->count(); //it's saying this is null?
         } catch (Exception $th) {
             Log::error($th->getMessage());
             throw new Exception('Unable to search LDAP directory!');
@@ -383,13 +390,13 @@ class LdapAd extends LdapAdConfiguration
      * Test the user can connect to the LDAP server.
      *
      * @author Wes Hulette <jwhulette@gmail.com>
-     *
+     * @throws \Exception
      * @since 5.0.0
      */
     public function testLdapAdUserConnection(): void
     {
         try {
-            $this->ldap->connect();
+            $this->ldap->connect(); //uh, this doesn't seem to exist :/
         } catch (\Adldap\Auth\BindException $e) {
             Log::error($e);
             throw new Exception('Unable to connect to LDAP directory!');
@@ -430,13 +437,11 @@ class LdapAd extends LdapAdConfiguration
      *
      * @since 5.0.0
      *
-     * @param int $page The paged results to get
-     *
      * @return \Adldap\Query\Paginator
      */
-    public function getLdapUsers(int $page=0): Paginator
+    public function getLdapUsers(): Paginator
     {
-        $search = $this->ldap->search()->users()->in($this->getBaseDn());
+        $search = $this->ldap->search()->users()->in($this->getBaseDn()); //this looks wrong; we should instead have a passable parameter that does this, and use this as a 'sane' default, yeah?
 
         $filter = $this->getFilter();
         if (!is_null($filter)) {
@@ -444,6 +449,6 @@ class LdapAd extends LdapAdConfiguration
         }
 
         return $search->select($this->getSelectedFields())
-            ->paginate(self::PAGE_SIZE, $page);
+            ->paginate(self::PAGE_SIZE);
     }
 }

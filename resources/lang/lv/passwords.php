@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Jūsu paroles saite ir nosūtīta!',
-    'user'			=> 'No matching active user found with that email.',
+    'user'			=> 'Lietotājs ar tādu e-pasta adresi netika atrasts.',
 ];
 

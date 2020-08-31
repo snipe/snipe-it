@@ -326,7 +326,7 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.4]
-     * @return boolean
+     * @return string
      */
     public function convertUnicodeDbSlug($original = null)
     {

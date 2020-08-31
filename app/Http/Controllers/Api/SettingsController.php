@@ -46,32 +46,41 @@ class SettingsController extends Controller
                 'message' => 'Successfully connected to LDAP server.'
             ];
         } catch (\Exception $ex) {
+                \Log::debug('LDAP connected but Bind failed. Please check your LDAP settings and try again.');
             return response()->json([
-                'message' => 'Error logging into LDAP server, error: ' . $ex->getMessage() . ' - Verify your that your username and password are correct'
-            ], 400);
+                'message' => 'Error logging into LDAP server, error: ' . $ex->getMessage() . ' - Verify your that your username and password are correct']);
+
+        } catch (\Exception $e) {
+            \Log::info('LDAP connection failed but we cannot debug it any further on our end.');
+            return response()->json(['message' => 'The LDAP connection failed but we cannot debug it any further on our end. The error from the server is: '.$e->getMessage()], 500);
         }
 
         Log::info('Preparing to test LDAP bind connection');
         // Test user can bind to the LDAP server
         try {
+            Log::info('Testing Bind');
             $ldap->testLdapAdBindConnection();
             $message['bind'] = [
                 'message' => 'Successfully binded to LDAP server.'
             ];
         } catch (\Exception $ex) {
+            Log::info('LDAP Bind failed');
             return response()->json([
                 'message' => 'Error binding to LDAP server, error: ' . $ex->getMessage()
             ], 400);
         }
 
+
         Log::info('Preparing to get sample user set from LDAP directory');
         // Get a sample of 10 users so user can verify the data is correct
         try {
+            Log::info('Testing LDAP sync');
             $users = $ldap->testUserImportSync();
             $message['user_sync']  = [
                 'users' => $users
             ];
         } catch (\Exception $ex) {
+            Log::info('LDAP sync failed');
             $message['user_sync']  = [
                 'message' => 'Error getting users from LDAP directory, error: ' . $ex->getMessage()
             ];

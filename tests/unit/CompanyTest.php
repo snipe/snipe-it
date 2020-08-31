@@ -31,17 +31,14 @@ class CompanyTest extends BaseTest
      public function testACompanyCanHaveUsers()
      {
          $company = $this->createValidCompany();
-         factory(App\Models\User::class, 1)->create(['company_id'=>$company->id]);
+         $user = $this->createValidUser(['company_id'=>$company->id]);
          $this->assertCount(1, $company->users);
      }
 
      public function testACompanyCanHaveAssets()
      {
          $company = $this->createValidCompany();
-         factory(App\Models\Asset::class, 1)->states('laptop-mbp')->create([
-            'company_id' => $company->id,
-            'model_id' => $this->createValidAssetModel()->id
-         ]);
+         $this->createValidAsset(['company_id' => $company->id]);
          $this->assertCount(1, $company->assets);
      }
 

@@ -13,7 +13,7 @@ $config = [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('PRIVATE_FILESYSTEM_DISK', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -45,25 +45,41 @@ $config = [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path(),
         ],
 
         // This applies the LOCAL public only, not S3/FTP/etc
-        'public' => [
+        'local_public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'root' => public_path('uploads'),
+            'url' => env('APP_URL').'/uploads',
             'visibility' => 'public',
         ],
 
-        's3' => [
+        's3_public' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'root'   => env('AWS_BUCKET_ROOT'),
+            'key' => env('PUBLIC_AWS_ACCESS_KEY_ID'),
+            'secret' => env('PUBLIC_AWS_SECRET_ACCESS_KEY'),
+            'region' => env('PUBLIC_AWS_DEFAULT_REGION'),
+            'bucket' => env('PUBLIC_AWS_BUCKET'),
+            'url' => env('PUBLIC_AWS_URL'),
+            'root'   => env('PUBLIC_AWS_BUCKET_ROOT'),
+            'visibility' => 'public'
+        ],
+
+        's3_private' => [
+            // This bucket (if different than the 's3' bucket above) can be
+            // configured within AWS to *never* permit public documents
+            // For security reasons, its best to use separate buckets for
+            // public and private documents in S3
+            'driver' => 's3',
+            'key' => env('PRIVATE_AWS_ACCESS_KEY_ID'),
+            'secret' => env('PRIVATE_AWS_SECRET_ACCESS_KEY'),
+            'region' => env('PRIVATE_AWS_DEFAULT_REGION'),
+            'bucket' => env('PRIVATE_AWS_BUCKET'),
+            'url' => env('PRIVATE_AWS_URL'),
+            'root'   => env('PRIVATE_AWS_BUCKET_ROOT'),
+            'visibility' => 'private'
         ],
 
         'rackspace' => [
@@ -80,11 +96,8 @@ $config = [
 
 ];
 
-// When you're dealing with local file storage, the paths will be different than S3
-if  (env('FILESYSTEM_DISK','local')!='local')
-{
-    $config['disks']['public'] = $config['disks'][env('FILESYSTEM_DISK')];
-    $config['disks']['public']['visibility'] = 'public';
-}
+// copy the selected PUBLIC_FILESYSTEM_DISK's configuration to the 'public' key for easy use
+// (by default, the PUBLIC_FILESYSTEM DISK is 'local_public', in the public/uploads directory)
+$config['disks']['public'] = $config['disks'][env('PUBLIC_FILESYSTEM_DISK','local_public')];
 
 return $config;

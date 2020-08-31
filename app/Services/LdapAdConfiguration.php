@@ -22,7 +22,15 @@ class LdapAdConfiguration
     const LDAP_PORT             = 389;
     const CONNECTION_TIMEOUT    = 5;
     const DEFAULT_LDAP_VERSION  = 3;
-    const LDAP_BOOLEAN_SETTINGS = ['ldap_enabled', 'ldap_server_cert_ignore', 'ldap_tls', 'ldap_tls', 'ldap_pw_sync', 'is_ad'];
+    const LDAP_BOOLEAN_SETTINGS = [
+        'ldap_enabled',
+        'ldap_server_cert_ignore',
+        'ldap_tls',
+        'ldap_tls',
+        'ldap_pw_sync',
+        'is_ad',
+        'ad_append_domain',
+    ];
 
     /**
      * Ldap Settings.
@@ -145,7 +153,7 @@ class LdapAdConfiguration
             'password'         => $this->ldapSettings['ldap_pword'],
 
             // Optional Configuration Options
-            'schema'           => $this->getSchema(),
+            'schema'           => $this->getSchema(), // FIXME - we probably ought not to be using this, right?
             'account_prefix'   => '',
             'account_suffix'   => '',
             'port'             => $this->getPort(),
@@ -172,7 +180,7 @@ class LdapAdConfiguration
      *
      * @return string
      */
-    private function getSchema(): string
+    private function getSchema(): string //wait, what? This is a little weird, since we have completely separate variables for this; we probably shoulnd't be using any 'schema' at all
     {
         $schema = \Adldap\Schemas\OpenLDAP::class;
         if ($this->ldapSettings['is_ad']) {

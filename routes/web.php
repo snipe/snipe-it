@@ -80,17 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
 */
 
 Route::group(['middleware' => 'auth','prefix' => 'modals'], function () {
-    Route::get('location',['as' => 'modal.location','uses' => 'ModalController@location']);
-    Route::get('category',['as' => 'modal.category','uses' => 'ModalController@category']);
-    Route::get('manufacturer',['as' => 'modal.manufacturer','uses' => 'ModalController@manufacturer']);
-    Route::get('model',['as' => 'modal.model','uses' => 'ModalController@model']);
-    Route::get('statuslabel',['as' => 'modal.statuslabel','uses' => 'ModalController@statuslabel']);
-    Route::get('supplier',['as' => 'modal.supplier','uses' => 'ModalController@supplier']);
-    Route::get('user',['as' => 'modal.user','uses' => 'ModalController@user']);
-    Route::get('kit-model',['as' => 'modal.kit.model','uses' => 'ModalController@kitModel']);
-    Route::get('kit-license',['as' => 'modal.kit.license','uses' => 'ModalController@kitLicense']);
-    Route::get('kit-consumable',['as' => 'modal.kit.consumable','uses' => 'ModalController@kitConsumable']);
-    Route::get('kit-accessory',['as' => 'modal.kit.accessory','uses' => 'ModalController@kitAccessory']);
+    Route::get('{type}/{itemId?}',['as' => 'modal.show', 'uses' => 'ModalController@show']);
 });
 
 /*

@@ -161,6 +161,7 @@ class LicensePresenter extends Presenter
                 "field" => "name",
                 "searchable" => false,
                 "sortable" => false,
+                "sorter"   => "numericOnly",
                 "switchable" => true,
                 "title" => trans('admin/licenses/general.seat'),
                 "visible" => true,
@@ -173,6 +174,15 @@ class LicensePresenter extends Presenter
                 "visible" => true,
                 "formatter" => "usersLinkObjFormatter"
             ], [
+                "field" => "department",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.department'),
+                "visible" => false,
+                "formatter" => "departmentNameLinkFormatter"
+            ],
+            [
                 "field" => "assigned_asset",
                 "searchable" => false,
                 "sortable" => false,
@@ -188,7 +198,8 @@ class LicensePresenter extends Presenter
                 "title" => trans('general.location'),
                 "visible" => true,
                 "formatter" => "locationsLinkObjFormatter"
-            ], [
+            ],
+            [
                 "field" => "checkincheckout",
                 "searchable" => false,
                 "sortable" => false,

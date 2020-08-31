@@ -24,16 +24,16 @@
         </li>
 
         <li>
-          <a href="#asset_tab" data-toggle="tab">
+          <a href="#asset" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-barcode"></i>
+            <i class="fa fa-barcode" aria-hidden="true"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span>
           </a>
         </li>
 
         <li>
-          <a href="#licenses_tab" data-toggle="tab">
+          <a href="#licenses" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-floppy-o"></i>
             </span>
@@ -42,7 +42,7 @@
         </li>
 
         <li>
-          <a href="#accessories_tab" data-toggle="tab">
+          <a href="#accessories" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-keyboard-o"></i>
             </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span>
@@ -50,7 +50,7 @@
         </li>
 
         <li>
-          <a href="#consumables_tab" data-toggle="tab">
+          <a href="#consumables" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-tint"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>
@@ -58,7 +58,7 @@
         </li>
 
         <li>
-          <a href="#files_tab" data-toggle="tab">
+          <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-paperclip"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}</span>
@@ -66,7 +66,7 @@
         </li>
 
         <li>
-          <a href="#history_tab" data-toggle="tab">
+          <a href="#history" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-clock-o"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
@@ -75,7 +75,7 @@
 
         @if ($user->managedLocations()->count() >= 0 )
         <li>
-          <a href="#managed_tab" data-toggle="tab">
+          <a href="#managed" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-clock-o"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}</span>
@@ -98,6 +98,12 @@
             </ul>
           </li>
         @endcan
+
+        @can('update', \App\Models\User::class)
+          <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
+              <i class="fa fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
+          </li>
+        @endcan
       </ul>
 
       <div class="tab-content">
@@ -115,7 +121,11 @@
               </div>
             @endif
             <div class="col-md-2 text-center">
-                <img src="{{ $user->present()->gravatar }}" class="avatar img-thumbnail hidden-print">
+              @if ($user->avatar)
+                <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print" alt="{{ $user->present()->fullName() }}">
+              @else
+                <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print" alt="{{ $user->present()->fullName() }}">
+              @endif
             </div>
 
             <div class="col-md-8">
@@ -130,7 +140,7 @@
 
                   <tr>
                     <td class="text-nowrap">{{ trans('admin/users/table.name') }}</td>
-                    <td>{{ html_entity_decode($user->present()->fullName(), ENT_QUOTES | ENT_XML1, 'UTF-8') }}</td>
+                    <td>{{ $user->present()->fullName() }}</td>
                   </tr>
                   <tr>
                     <td class="text-nowrap">{{ trans('admin/users/table.username') }}</td>
@@ -187,6 +197,13 @@
                     <td class="text-nowrap">{{ trans('admin/users/table.email') }}</td>
                     <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
                   </tr>
+                  @endif
+
+                  @if ($user->website)
+                    <tr>
+                      <td class="text-nowrap">{{ trans('general.website') }}</td>
+                      <td><a href="{{ $user->website }}" target="_blank">{{ $user->website }}</a></td>
+                    </tr>
                   @endif
 
                   @if ($user->phone)
@@ -270,19 +287,19 @@
             <div class="col-md-2">
               @can('update', $user)
                 <div class="col-md-12">
-                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.edit') }}</a>
+                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.edit') }}</a>
                 </div>
               @endcan
 
               @can('create', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.clone') }}</a>
+                  <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>
                 </div>
                @endcan
 
                 @can('view', $user)
                 <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default hidden-print">{{ trans('admin/users/general.print_assigned') }}</a>
+                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
                 @endcan
                 @can('delete', $user)
@@ -313,7 +330,7 @@
           </div> <!--/.row-->
         </div><!-- /.tab-pane -->
 
-        <div class="tab-pane" id="asset_tab">
+        <div class="tab-pane" id="asset">
           <!-- checked out assets table -->
           <div class="table-responsive">
             <table class="display table table-striped">
@@ -326,10 +343,11 @@
                 </tr>
               </thead>
               <tbody>
+              @if ($user->assets)
                 @foreach ($user->assets as $asset)
                 <tr>
                   <td>
-                    @if ($asset->physical=='1')
+                    @if (($asset->model) && ($asset->physical=='1'))
                       <a href="{{ route('models.show', $asset->model->id) }}">{{ $asset->model->name }}</a>
                     @endif
                   </td>
@@ -345,13 +363,36 @@
                     @endcan
                   </td>
                 </tr>
+                @if($settings->show_assigned_assets)
+                  @foreach ($asset->assignedAssets as $asset)
+                      <tr>
+                        <td>
+                          @if ($asset->physical=='1')
+                            <a href="{{ route('models.show', $asset->model->id) }}">{{ ' – '.$asset->model->name }}</a>
+                          @endif
+                        </td>
+                        <td>
+                          @can('view', $asset)
+                            <a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->asset_tag }}</a>
+                          @endcan
+                        </td>
+                        <td>{!! $asset->present()->nameUrl() !!}</td>
+                        <td class="hidden-print">
+                          @can('checkin', $asset)
+                            <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
+                          @endcan
+                        </td>
+                      </tr>
+                  @endforeach
+                @endif
                 @endforeach
+                @endif
               </tbody>
             </table>
           </div>
-        </div><!-- /asset_tab -->
+        </div><!-- /asset -->
 
-        <div class="tab-pane" id="licenses_tab">
+        <div class="tab-pane" id="licenses">
           <div class="table-responsive">
             <table class="display table table-hover">
               <thead>
@@ -368,11 +409,15 @@
                     {!! $license->present()->nameUrl() !!}
                   </td>
                   <td>
+                    @can('viewKeys', $license)
                     {!! $license->present()->serialUrl() !!}
+                    @else
+                      ------------
+                    @endcan
                   </td>
                   <td class="hidden-print">
                     @can('update', $license)
-                      <a href="{{ route('licenses.checkin', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
+                      <a href="{{ route('licenses.checkin', array('licenseSeatId'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
                      @endcan
                   </td>
                 </tr>
@@ -382,7 +427,7 @@
           </div>
         </div><!-- /licenses-tab -->
 
-        <div class="tab-pane" id="accessories_tab">
+        <div class="tab-pane" id="accessories">
           <div class="table-responsive">
             <table class="display table table-hover">
               <thead>
@@ -407,7 +452,7 @@
           </div>
         </div><!-- /accessories-tab -->
 
-        <div class="tab-pane" id="consumables_tab">
+        <div class="tab-pane" id="consumables">
           <div class="table-responsive">
             <table class="display table table-striped">
               <thead>
@@ -428,39 +473,8 @@
           </div>
         </div><!-- /consumables-tab -->
 
-        <div class="tab-pane" id="files_tab">
+        <div class="tab-pane" id="files">
           <div class="row">
-            <div class="col-md-12 col-sm-12">
-              <p>{{ trans('admin/users/general.filetype_info') }}</p>
-            </div>
-            <div class="col-md-2">
-              <!-- The fileinput-button span is used to style the file input field as button -->
-              @can('update', $user)
-              <span class="btn btn-info fileinput-button hidden-print">
-                <i class="fa fa-plus icon-white"></i>
-                <span>{{ trans('button.select_file') }}</span>
-                <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="file[]" data-url="{{ route('upload/user', $user->id) }}">
-              </span>
-              @endcan
-            </div>
-            <div class="col-md-4">
-              <input id="notes" type="text" name="notes">
-            </div>
-            <div class="col-md-6" id="progress-container" style="visibility: hidden; padding-bottom: 20px;">
-              <!-- The global progress bar -->
-              <div class="col-md-11">
-                <div id="progress" class="progress progress-striped active" style="margin-top: 8px;">
-                  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                      <span id="progress-bar-text">0% {{ trans('general.complete') }}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-1">
-                  <div class="pull-right progress-checkmark" style="display: none;">
-                  </div>
-              </div>
-            </div>
 
             <div class="col-md-12 col-sm-12">
               <div class="table-responsive">
@@ -469,8 +483,8 @@
                     <tr>
                       <th class="col-md-5">{{ trans('general.notes') }}</th>
                       <th class="col-md-5"><span class="line"></span>{{ trans('general.file_name') }}</th>
-                      <th class="col-md-2"></th>
-                      <th class="col-md-2"></th>
+                      <th class="col-md-2">{{ trans('general.download') }}</th>
+                      <th class="col-md-2">{{ trans('general.delete') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -491,7 +505,7 @@
                       </td>
                       <td>
                         @can('update', $user)
-                        <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white"></i></a>
+                        <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white" aria-hidden="true"></i><span class="sr-only">Delete</span></a>
                         @endcan
                       </td>
                     </tr>
@@ -501,9 +515,9 @@
               </div>
             </div>
           </div> <!--/ROW-->
-        </div><!--/FILES_TAB-->
+        </div><!--/FILES-->
 
-        <div class="tab-pane" id="history_tab">
+        <div class="tab-pane" id="history">
           <div class="table-responsive">
 
             <table
@@ -527,7 +541,7 @@
                 }'>
               <thead>
               <tr>
-                <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
+                <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"><span class="sr-only">Icon</span></th>
                 <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter" data-sortable="true">{{ trans('general.date') }}</th>
                 <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                 <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
@@ -540,7 +554,7 @@
           </div>
         </div><!-- /.tab-pane -->
 
-        <div class="tab-pane" id="managed_tab">
+        <div class="tab-pane" id="managed">
           <div class="table-responsive">
             <table class="display table table-striped">
               <thead>
@@ -565,7 +579,13 @@
   </div>
 </div>
 
-@stop
+  @can('update', \App\Models\User::class)
+    @include ('modals.upload-file', ['item_type' => 'user', 'item_id' => $user->id])
+  @endcan
+
+
+
+  @stop
 
 @section('moar_scripts')
   @include ('partials.bootstrap-table', ['simple_view' => true])

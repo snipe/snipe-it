@@ -31,7 +31,6 @@ class CheckinAccessoryNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
     public function via()
@@ -65,13 +64,10 @@ class CheckinAccessoryNotification extends Notification
         $note = $this->note;
         $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
-
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
             'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
         ];
-
-
 
         return (new SlackMessage)
             ->content(':arrow_down: :keyboard: Accessory Checked In')
@@ -88,10 +84,8 @@ class CheckinAccessoryNotification extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
-
-
         return (new MailMessage)->markdown('notifications.markdown.checkin-accessory',
             [
                 'item'          => $this->item,
@@ -101,18 +95,5 @@ class CheckinAccessoryNotification extends Notification
             ])
             ->subject('Accessory checked in');
 
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

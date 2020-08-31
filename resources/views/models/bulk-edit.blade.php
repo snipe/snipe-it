@@ -23,7 +23,7 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         @foreach ($models as $model)
-                            <span class="box-title"><b>{{ $model->display_name }}</b> ({{ $model->model_number }})</span><br />
+                            <span class="box-title"><strong>{{ $model->display_name }}</strong> ({{ $model->model_number }})</span><br />
                         @endforeach
                     </div>
                     <div class="box-body">
@@ -39,8 +39,8 @@
                                 {{ trans('admin/models/general.fieldset') }}
                             </label>
                             <div class="col-md-7">
-                                {{ Form::select('fieldset_id', $fieldset_list , Input::old('fieldset_id', 'NC'), array('class'=>'select2 js-fieldset-field', 'style'=>'width:350px')) }}
-                                {!! $errors->first('fieldset_id', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
+                                {{ Form::select('fieldset_id', $fieldset_list , old('fieldset_id', 'NC'), array('class'=>'select2 js-fieldset-field', 'style'=>'width:350px')) }}
+                                {!! $errors->first('fieldset_id', '<span class="alert-msg" aria-hidden="true"><br><i class="fa fa-times"></i> :message</span>') !!}
                             </div>
                         </div>
 
@@ -51,8 +51,8 @@
                                 {{ trans('general.depreciation') }}
                             </label>
                             <div class="col-md-7">
-                                {{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', 'NC'), array('class'=>'select2', 'style'=>'width:350px')) }}
-                                {!! $errors->first('depreciation_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                {{ Form::select('depreciation_id', $depreciation_list , old('depreciation_id', 'NC'), array('class'=>'select2', 'style'=>'width:350px')) }}
+                                {!! $errors->first('depreciation_id', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
 
@@ -62,7 +62,7 @@
                     </div> <!--/.box-body-->
 
                     <div class="box-footer text-right">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
                 </div> <!--/.box.box-default-->
             </form>

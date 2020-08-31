@@ -25,7 +25,7 @@
     <div class="box box-default">
       <div class="box-header with-border">
         <div class="box-heading">
-          <h3 class="box-title"> {{ trans('general.assets') }}</h3>
+          <h2 class="box-title"> {{ trans('general.assets') }}</h2>
         </div>
       </div><!-- /.box-header -->
 
@@ -75,7 +75,7 @@
 
           <div class="box-header with-border">
             <div class="box-heading">
-              <h3 class="box-title"> {{ trans('general.accessories') }}</h3>
+              <h2 class="box-title"> {{ trans('general.accessories') }}</h2>
             </div>
           </div><!-- /.box-header -->
 
@@ -113,7 +113,7 @@
             @if ($supplier->id)
               <div class="box-header with-border">
                 <div class="box-heading">
-                  <h3 class="box-title"> {{ trans('general.licenses') }}</h3>
+                  <h2 class="box-title"> {{ trans('general.licenses') }}</h2>
                 </div>
               </div><!-- /.box-header -->
             @endif
@@ -155,7 +155,7 @@
           @if ($supplier->id)
             <div class="box-header with-border">
               <div class="box-heading">
-                <h3 class="box-title"> Improvements</h3>
+                <h2 class="box-title"> Improvements</h2>
               </div>
             </div><!-- /.box-header -->
           @endif
@@ -193,7 +193,7 @@
                       <td>{{ $improvement->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
                       <td>{{ sprintf( $snipeSettings->default_currency. '%01.2f', $improvement->cost) }}</td>
                         <?php $totalCost += $improvement->cost; ?>
-                      <td><a href="{{ route('maintenances.edit', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
+                      <td><a href="{{ route('maintenances.edit', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white" aria-hidden="true"></i></a>
                       </td>
                     </tr>
                   @endif
@@ -229,7 +229,7 @@
 
     <ul class="list-unstyled" style="line-height: 25px; padding-bottom: 20px; padding-top: 20px;">
       @if ($supplier->contact)
-      <li><i class="fa fa-user"></i> {{ $supplier->contact }}</li>
+      <li><i class="fa fa-user" aria-hidden="true"></i> {{ $supplier->contact }}</li>
       @endif
       @if ($supplier->phone)
       <li><i class="fa fa-phone"></i>

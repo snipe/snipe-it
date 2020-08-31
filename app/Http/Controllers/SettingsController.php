@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use enshrined\svgSanitize\Sanitizer;
 use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
+use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
 use App\Models\Setting;
 use App\Models\User;
@@ -120,11 +122,11 @@ class SettingsController extends Controller
         }
 
         if ((is_writable(storage_path()))
-        && (is_writable(storage_path() . '/framework'))
-        && (is_writable(storage_path() . '/framework/cache'))
-        && (is_writable(storage_path() . '/framework/sessions'))
-        && (is_writable(storage_path() . '/framework/views'))
-        && (is_writable(storage_path() . '/logs'))
+            && (is_writable(storage_path() . '/framework'))
+            && (is_writable(storage_path() . '/framework/cache'))
+            && (is_writable(storage_path() . '/framework/sessions'))
+            && (is_writable(storage_path() . '/framework/views'))
+            && (is_writable(storage_path() . '/logs'))
         ) {
             $start_settings['writable'] = true;
         } else {
@@ -134,9 +136,9 @@ class SettingsController extends Controller
         $start_settings['gd'] = extension_loaded('gd');
 
         return view('setup/index')
-        ->with('step', 1)
-        ->with('start_settings', $start_settings)
-        ->with('section', 'Pre-Flight Check');
+            ->with('step', 1)
+            ->with('start_settings', $start_settings)
+            ->with('section', 'Pre-Flight Check');
     }
 
     /**
@@ -210,8 +212,8 @@ class SettingsController extends Controller
     public function getSetupUser()
     {
         return view('setup/user')
-        ->with('step', 3)
-        ->with('section', 'Create a User');
+            ->with('step', 3)
+            ->with('section', 'Create a User');
     }
 
     /**
@@ -226,8 +228,8 @@ class SettingsController extends Controller
     public function getSetupDone()
     {
         return view('setup/done')
-        ->with('step', 4)
-        ->with('section', 'Done!');
+            ->with('step', 4)
+            ->with('section', 'Done!');
     }
 
     /**
@@ -243,16 +245,16 @@ class SettingsController extends Controller
     public function getSetupMigrate()
     {
         Artisan::call('migrate', ['--force' => true]);
-
         if ((! file_exists(storage_path() . '/oauth-private.key')) || (! file_exists(storage_path() . '/oauth-public.key'))) {
+
             Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations', '--force' => true]);
             Artisan::call('passport:install');
         }
 
         return view('setup/migrate')
-        ->with('output', 'Databases installed!')
-        ->with('step', 2)
-        ->with('section', 'Create Database Tables');
+            ->with('output', 'Databases installed!')
+            ->with('step', 2)
+            ->with('section', 'Create Database Tables');
     }
 
     /**
@@ -320,7 +322,8 @@ class SettingsController extends Controller
 
         $setting->modellist_displays = '';
 
-        if (($request->filled('show_in_model_list')) && (count($request->input('show_in_model_list')) > 0)) {
+        if (($request->filled('show_in_model_list')) && (count($request->input('show_in_model_list')) > 0))
+        {
             $setting->modellist_displays = implode(',', $request->input('show_in_model_list'));
         }
 
@@ -333,6 +336,7 @@ class SettingsController extends Controller
         $setting->email_format                    = $request->input('email_format');
         $setting->username_format                 = $request->input('username_format');
         $setting->require_accept_signature        = $request->input('require_accept_signature');
+        $setting->show_assigned_assets            = $request->input('show_assigned_assets', '0');
         if (! config('app.lock_passwords')) {
             $setting->login_note = $request->input('login_note');
         }
@@ -356,6 +360,7 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
+
 
     /**
      * Return a form to allow a super admin to update settings.
@@ -404,17 +409,11 @@ class SettingsController extends Controller
             $setting->custom_css = $request->input('custom_css');
         }
 
-        // If the user wants to clear the logo, reset the brand type
-        if ('1' == $request->input('clear_logo')) {
-            Storage::disk('public')->delete($setting->logo);
-            $setting->logo  = null;
-            $setting->brand = 1;
 
-        // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('logo')) {
+        if ($request->hasFile('logo')) {
             $image         = $request->file('logo');
             $ext           = $image->getClientOriginalExtension();
-            $setting->logo = $file_name = 'logo.' . $ext;
+            $setting->logo = $file_name = 'logo-'.date('U').'.'. $ext;
 
             if ('svg' != $image->getClientOriginalExtension()) {
                 $upload = Image::make($image->getRealPath())->resize(null, 150, function ($constraint) {
@@ -430,15 +429,15 @@ class SettingsController extends Controller
             if (($setting->logo) && (file_exists($file_name))) {
                 Storage::disk('public')->delete($file_name);
             }
+
+        } elseif ('1' == $request->input('clear_logo')) {
+                Storage::disk('public')->delete($setting->logo);
+                $setting->logo  = null;
+                $setting->brand = 1;
         }
 
-        // If the user wants to clear the email logo...
-        if ('1' == $request->input('clear_email_logo')) {
-            Storage::disk('public')->delete($setting->email_logo);
-            $setting->email_logo  = null;
 
-        // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('email_logo')) {
+        if ($request->hasFile('email_logo')) {
             $email_image         = $email_upload = $request->file('email_logo');
             $email_ext           = $email_image->getClientOriginalExtension();
             $setting->email_logo = $email_file_name = 'email_logo.' . $email_ext;
@@ -457,15 +456,15 @@ class SettingsController extends Controller
             if (($setting->email_logo) && (file_exists($email_file_name))) {
                 Storage::disk('public')->delete($email_file_name);
             }
+        } elseif ('1' == $request->input('clear_email_logo')) {
+            Storage::disk('public')->delete($setting->email_logo);
+            $setting->email_logo  = null;
+            // If they are uploading an image, validate it and upload it
         }
 
-        // If the user wants to clear the label logo...
-        if ('1' == $request->input('clear_label_logo')) {
-            Storage::disk('public')->delete($setting->label_logo);
-            $setting->label_logo  = null;
 
-        // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('label_logo')) {
+        // If the user wants to clear the label logo...
+        if ($request->hasFile('label_logo')) {
             $image         = $request->file('label_logo');
             $ext           = $image->getClientOriginalExtension();
             $setting->label_logo = $label_file_name = 'label_logo.' . $ext;
@@ -484,15 +483,15 @@ class SettingsController extends Controller
             if (($setting->label_logo) && (file_exists($label_file_name))) {
                 Storage::disk('public')->delete($label_file_name);
             }
+        } elseif ('1' == $request->input('clear_label_logo')) {
+            Storage::disk('public')->delete($setting->label_logo);
+            $setting->label_logo  = null;
+
+            // If they are uploading an image, validate it and upload it
         }
 
         // If the user wants to clear the favicon...
-        if ('1' == $request->input('clear_favicon')) {
-            Storage::disk('public')->delete($setting->clear_favicon);
-            $setting->favicon  = null;
-
-        // If they are uploading an image, validate it and upload it
-        } elseif ($request->hasFile('favicon')) {
+         if ($request->hasFile('favicon')) {
             $favicon_image         = $favicon_upload = $request->file('favicon');
             $favicon_ext           = $favicon_image->getClientOriginalExtension();
             $setting->favicon      = $favicon_file_name = 'favicon-uploaded.' . $favicon_ext;
@@ -519,7 +518,12 @@ class SettingsController extends Controller
             if (($setting->favicon) && (file_exists($favicon_file_name))) {
                 Storage::disk('public')->delete($favicon_file_name);
             }
-        }
+        } elseif ('1' == $request->input('clear_favicon')) {
+             Storage::disk('public')->delete($setting->clear_favicon);
+             $setting->favicon  = null;
+
+             // If they are uploading an image, validate it and upload it
+         }
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
@@ -528,6 +532,7 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
+
 
     /**
      * Return a form to allow a super admin to update settings.
@@ -559,8 +564,8 @@ class SettingsController extends Controller
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
-
         if (! config('app.lock_passwords')) {
+
             if ('' == $request->input('two_factor_enabled')) {
                 $setting->two_factor_enabled = null;
             } else {
@@ -571,14 +576,16 @@ class SettingsController extends Controller
             $setting->login_remote_user_enabled           = (int) $request->input('login_remote_user_enabled');
             $setting->login_common_disabled               = (int) $request->input('login_common_disabled');
             $setting->login_remote_user_custom_logout_url = $request->input('login_remote_user_custom_logout_url');
+            $setting->login_remote_user_header_name = $request->input('login_remote_user_header_name');
         }
 
         $setting->pwd_secure_uncommon   = (int) $request->input('pwd_secure_uncommon');
         $setting->pwd_secure_min        = (int) $request->input('pwd_secure_min');
         $setting->pwd_secure_complexity = '';
 
+
         if ($request->filled('pwd_secure_complexity')) {
-            $setting->pwd_secure_complexity = implode('|', $request->input('pwd_secure_complexity'));
+            $setting->pwd_secure_complexity =  implode('|', $request->input('pwd_secure_complexity'));
         }
 
         if ($setting->save()) {
@@ -719,9 +726,18 @@ class SettingsController extends Controller
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
-        $setting->slack_endpoint = $request->input('slack_endpoint');
-        $setting->slack_channel  = $request->input('slack_channel');
-        $setting->slack_botname  = $request->input('slack_botname');
+        $validatedData = $request->validate([
+            'slack_channel'   => 'regex:/(?<!\w)#\w+/|required_with:slack_endpoint|nullable',
+        ]);
+
+
+        if ($validatedData) {
+
+            $setting->slack_endpoint = $request->input('slack_endpoint');
+            $setting->slack_channel = $request->input('slack_channel');
+            $setting->slack_botname = $request->input('slack_botname');
+
+        }
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
@@ -883,6 +899,9 @@ class SettingsController extends Controller
         $setting->labels_pagewidth            = $request->input('labels_pagewidth');
         $setting->labels_pageheight           = $request->input('labels_pageheight');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
+        $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
+
+
 
         if ($request->filled('labels_display_name')) {
             $setting->labels_display_name = 1;
@@ -978,6 +997,56 @@ class SettingsController extends Controller
 
         if ($setting->save()) {
             return redirect()->route('settings.ldap.index')
+                ->with('success', trans('admin/settings/message.update.success'));
+        }
+
+        return redirect()->back()->withInput()->withErrors($setting->getErrors());
+    }
+
+    /**
+     * Return a form to allow a super admin to update settings.
+     *
+     * @author Johnson Yi <jyi.dev@outlook.com>
+     *
+     * @since v5.0.0
+     *
+     * @return View
+     */
+    public function getSamlSettings()
+    {
+        $setting = Setting::getSettings();
+
+        return view('settings.saml', compact('setting'));
+    }
+
+    /**
+     * Saves settings from form.
+     *
+     * @author Johnson Yi <jyi.dev@outlook.com>
+     *
+     * @since v5.0.0
+     *
+     * @return View
+     */
+    public function postSamlSettings(SettingsSamlRequest $request)
+    {
+        if (is_null($setting = Setting::getSettings())) {
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
+        }
+
+        $setting->saml_enabled                  = $request->input('saml_enabled', '0');
+        $setting->saml_idp_metadata             = $request->input('saml_idp_metadata');
+        $setting->saml_attr_mapping_username    = $request->input('saml_attr_mapping_username');
+        $setting->saml_forcelogin               = $request->input('saml_forcelogin', '0');
+        $setting->saml_slo                      = $request->input('saml_slo', '0');
+        if (!empty($request->input('saml_sp_privatekey'))) {
+            $setting->saml_sp_x509cert          = $request->input('saml_sp_x509cert');
+            $setting->saml_sp_privatekey        = $request->input('saml_sp_privatekey');
+        }
+        $setting->saml_custom_settings          = $request->input('saml_custom_settings');
+
+        if ($setting->save()) {
+            return redirect()->route('settings.saml.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }
 
@@ -1135,7 +1204,7 @@ class SettingsController extends Controller
                 $output = Artisan::output();
 
                 return view('settings/purge')
-                ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
+                    ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
             } else {
                 return redirect()->back()->with('error', trans('admin/settings/message.purge.validation_failed'));
             }

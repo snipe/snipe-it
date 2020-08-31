@@ -4,7 +4,7 @@
 return array(
     'activated_help_text' => 'Ten użytkownik może się zalogować',
     'activated_disabled_help_text' => 'Nie możesz edytować statusu aktywacji dla własnego konta.',
-    'assets_user'       => 'Aktwo przypisane do :name',
+    'assets_user'       => 'Aktywa przypisane do :name',
     'bulk_update_warn'	=> 'Zamierzasz edytować właściwości: user_count użytkowników. Należy pamiętać, że nie można zmienić własne atrybuty użytkownika, korzystając z tego formularza i musi przeprowadzić edycję własnych użytkownika indywidualnie.',
     'bulk_update_help'	=> 'Ten formularz umożliwia zbiorczą aktualizację wielu aktywów na raz. Wypełnij tylko te pola, które chcesz zmienić. Puste pola pozostaną niezmienione.',
     'current_assets'    => 'Aktywo obecnie jest przypisane do tego użytkownika',

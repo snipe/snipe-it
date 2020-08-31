@@ -158,7 +158,7 @@
     'purchase_date'         => '購入日',
     'qty'		            => '数量',
     'quantity'		        => '数量',
-    'ready_to_deploy'		=> '配備完了',
+    'ready_to_deploy'		=> '配備可能',
     'recent_activity'		=> '最近のアクティビティ',
     'remove_company'        => '会社の団体を取り除く',
     'reports'				=> 'レポート',

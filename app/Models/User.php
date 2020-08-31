@@ -55,7 +55,10 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     ];
 
     protected $casts = [
-        'activated' => 'boolean',
+        'activated'    => 'boolean',
+        'manager_id'   => 'integer',
+        'location_id'  => 'integer',
+        'company_id'   => 'integer',
     ];
 
     /**
@@ -68,9 +71,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'first_name'              => 'required|string|min:1',
         'username'                => 'required|string|min:1|unique_undeleted',
         'email'                   => 'email|nullable',
-        'password'                => 'required|min:6',
+        'password'                => 'required|min:8',
         'locale'                  => 'max:10|nullable',
-        'manager_id'              => 'exists:users,id|nullable'
+        'website'                 => 'url|nullable',
+        'manager_id'              => 'nullable|exists:users,id|different:users.id',
+        'location_id'             => 'exists:locations,id|nullable',
     ];
 
     use Searchable;
@@ -102,7 +107,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'groups'     => ['name'],
         'company'    => ['name'],
         'manager'    => ['first_name', 'last_name', 'username']
-    ];
+    ];  
 
     /**
      * Check user permissions
@@ -359,7 +364,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
     }
-
 
     /**
      * Establishes the user -> manager relationship
@@ -635,7 +639,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function scopeByGroup($query, $id) {
         return $query->whereHas('groups', function ($query) use ($id) {
-            $query->where('groups.id', '=', $id);
+            $query->where('permission_groups.id', '=', $id);
         });
     }
 
@@ -681,7 +685,22 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $query->leftJoin('departments as departments_users', 'users.department_id', '=', 'departments_users.id')->orderBy('departments_users.name', $order);
     }
 
+    /**
+     * Query builder scope to order on company
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderCompany($query, $order)
+    {
+        return $query->leftJoin('companies as companies_user', 'users.company_id', '=', 'companies_user.id')->orderBy('companies_user.name', $order);
+    }
+
     public function preferredLocale(){
         return $this->locale;
     }
+
+
 }

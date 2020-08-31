@@ -2,12 +2,13 @@
 
 namespace App\Notifications;
 
+use App\Helpers\Helper;
 use App\Models\Setting;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 
-class RequestAssetCancelationNotification extends Notification
+class RequestAssetCancelation extends Notification
 {
     /**
      * @var
@@ -27,7 +28,7 @@ class RequestAssetCancelationNotification extends Notification
         $this->last_checkout = '';
         $this->item_quantity = $params['item_quantity'];
         $this->expected_checkin = '';
-        $this->requested_date = \App\Helpers\Helper::getFormattedDateObject($params['requested_date'], 'datetime',
+        $this->requested_date = Helper::getFormattedDateObject($params['requested_date'], 'datetime',
             false);
         $this->settings = Setting::getSettings();
 
@@ -36,16 +37,14 @@ class RequestAssetCancelationNotification extends Notification
         }
 
         if ($this->item->last_checkout) {
-            $this->last_checkout = \App\Helpers\Helper::getFormattedDateObject($this->item->last_checkout, 'date',
+            $this->last_checkout = Helper::getFormattedDateObject($this->item->last_checkout, 'date',
                 false);
         }
 
         if ($this->item->expected_checkin) {
-            $this->expected_checkin = \App\Helpers\Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
+            $this->expected_checkin = Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
                 false);
         }
-
-
     }
 
     /**
@@ -72,8 +71,6 @@ class RequestAssetCancelationNotification extends Notification
 
     public function toSlack()
     {
-
-
         $target = $this->target;
         $item = $this->item;
         $note = $this->note;
@@ -130,8 +127,6 @@ class RequestAssetCancelationNotification extends Notification
 
 
         return $message;
-
-
     }
 
 }

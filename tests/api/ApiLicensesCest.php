@@ -31,7 +31,7 @@ class ApiLicensesCest
         $response = json_decode($I->grabResponse(), true);
         // sample verify
         $license = App\Models\License::orderByDesc('created_at')
-            ->withCount('freeSeats')
+            ->withCount('freeSeats as free_seats_count')
             ->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new LicensesTransformer)->transformLicense($license)));
     }
@@ -116,7 +116,8 @@ class ApiLicensesCest
             'category_id' => $temp_license->category_id,
             'termination_date' => $temp_license->termination_date,
         ];
-
+        // We aren't checking anyhting out in this test, so this fakes the withCount() that happens on a normal db fetch.
+        $temp_license->free_seats_count = $temp_license->seats;
         $I->assertNotEquals($license->name, $data['name']);
 
         // update

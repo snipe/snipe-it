@@ -14,10 +14,9 @@ services:
 
 # list any PHP version you want to test against
 php:
-  - 7.1.3
-  - 7.1.4
   - 7.2
   - 7.3.0
+  - 7.4
 
 
 # execute any number of scripts before the test run, custom env's are available as variables

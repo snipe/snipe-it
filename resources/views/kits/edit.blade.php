@@ -1,7 +1,7 @@
 @extends('layouts/edit-form', [
     'createText' =>  trans('admin/kits/general.create'),
     'updateText' =>   trans('admin/kits/general.update'),
-    'formAction' => ($item) ? route('kits.update', ['kit' => $item->id]) : route('kits.store'),
+    'formAction' => (isset($item->id)) ? route('kits.update', ['kit' => $item->id]) : route('kits.store'),
 ])
 
 {{-- Page content --}}
@@ -39,7 +39,7 @@
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
                 </table>
-                <a href="{{ route('modal.kit.model', ['kit' => $item->id]) }}" data-refresh="kitModelsTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append</a>
+                <a href="{{ route('modal.show', ['type' => 'kit-model', 'itemId' => $item->id]) }}" data-refresh="kitModelsTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append</a>
                 </div>
             </div> <!--.box-body-->
         </div> <!-- /.box.box-default-->
@@ -73,7 +73,7 @@
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                     }'>
                     </table>
-                    <a href="{{ route('modal.kit.license', ['kit' => $item->id]) }}" data-refresh="kitLicensesTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append{{-- TODO: trans --}}</a>
+                    <a href="{{ route('modal.show', [ 'type' => 'kit-license', 'itemId' => $item->id]) }}" data-refresh="kitLicensesTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append{{-- TODO: trans --}}</a>
                     </div>
                 </div> <!--.box-body-->
             </div> <!-- /.box.box-default-->
@@ -107,7 +107,7 @@
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                     }'>
                     </table>
-                    <a href="{{ route('modal.kit.consumable', ['kit' => $item->id]) }}" data-refresh="kitConsumablesTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append{{-- TODO: trans --}}</a>
+                    <a href="{{ route('modal.show', ['type' => 'kit-consumable', 'itemId' => $item->id]) }}" data-refresh="kitConsumablesTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append{{-- TODO: trans --}}</a>
                     </div>
                 </div> <!--.box-body-->
             </div> <!-- /.box.box-default-->
@@ -141,7 +141,7 @@
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                     }'>
                     </table>
-                    <a href="{{ route('modal.kit.accessory', ['kit' => $item->id]) }}" data-refresh="kitAccessoriesTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append{{-- TODO: trans --}}</a>
+                    <a href="{{ route('modal.show', ['type' => 'kit-accessory', 'itemId' => $item->id]) }}" data-refresh="kitAccessoriesTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fa fa-plus icon-white"></i> Append{{-- TODO: trans --}}</a>
                     </div>
                 </div> <!--.box-body-->
             </div> <!-- /.box.box-default-->

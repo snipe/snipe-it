@@ -8,6 +8,10 @@ use App\Http\Transformers\AccessoriesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Accessory;
 use App\Models\Company;
+use App\Models\User;
+use Carbon\Carbon;
+use Auth;
+use DB;
 use Illuminate\Http\Request;
 
 class AccessoriesController extends Controller
@@ -46,8 +50,14 @@ class AccessoriesController extends Controller
             $accessories->where('supplier_id','=',$request->input('supplier_id'));
         }
 
-        $offset = (($accessories) && (request('offset') > $accessories->count())) ? 0 : request('offset', 0);
-        $limit = $request->input('limit', 50);
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($accessories) && ($request->get('offset') > $accessories->count())) ? $accessories->count() : $request->get('offset', 0);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
 
@@ -161,7 +171,7 @@ class AccessoriesController extends Controller
                                 ->get();
             $total = $accessory_users->count();
         }
-        
+
         return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $accessory_users, $total);
     }
 
@@ -177,7 +187,7 @@ class AccessoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('edit', Accessory::class);
+        $this->authorize('update', Accessory::class);
         $accessory = Accessory::findOrFail($id);
         $accessory->fill($request->all());
 
@@ -210,7 +220,97 @@ class AccessoriesController extends Controller
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.delete.success')));
 
     }
-    
+
+
+    /**
+     * Save the Accessory checkout information.
+     *
+     * If Slack is enabled and/or asset acceptance is enabled, it will also
+     * trigger a Slack message and send an email.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param  int  $accessoryId
+     * @return Redirect
+     */
+    public function checkout(Request $request, $accessoryId)
+    {
+        // Check if the accessory exists
+        if (is_null($accessory = Accessory::find($accessoryId))) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.does_not_exist')));
+        }
+
+        $this->authorize('checkout', $accessory);
+
+
+        if ($accessory->numRemaining() > 0) {
+
+            if (!$user = User::find($request->input('assigned_to'))) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.checkout.user_does_not_exist')));
+            }
+
+            // Update the accessory data
+            $accessory->assigned_to = $request->input('assigned_to');
+
+            $accessory->users()->attach($accessory->id, [
+                'accessory_id' => $accessory->id,
+                'created_at' => Carbon::now(),
+                'user_id' => Auth::id(),
+                'assigned_to' => $request->get('assigned_to')
+            ]);
+
+            $accessory->logCheckout($request->input('note'), $user);
+
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkout.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, 'No accessories remaining'));
+
+    }
+
+    /**
+     * Check in the item so that it can be checked out again to someone else
+     *
+     * @uses Accessory::checkin_email() to determine if an email can and should be sent
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param Request $request
+     * @param integer $accessoryUserId
+     * @param string $backto
+     * @return Redirect
+     * @internal param int $accessoryId
+     */
+    public function checkin(Request $request, $accessoryUserId = null)
+    {
+        if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.does_not_exist')));
+        }
+
+        $accessory = Accessory::find($accessory_user->accessory_id);
+        $this->authorize('checkin', $accessory);
+
+        $logaction = $accessory->logCheckin(User::find($accessoryUserId), $request->input('note'));
+
+        // Was the accessory updated?
+        if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
+            if (!is_null($accessory_user->assigned_to)) {
+                $user = User::find($accessory_user->assigned_to);
+            }
+
+            $data['log_id'] = $logaction->id;
+            $data['first_name'] = $user->first_name;
+            $data['last_name'] = $user->last_name;
+            $data['item_name'] = $accessory->name;
+            $data['checkin_date'] = $logaction->created_at;
+            $data['item_tag'] = '';
+            $data['note'] = $logaction->note;
+
+            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkin.success')));
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.checkin.error')));
+
+    }
+
+
     /**
     * Gets a paginated collection for the select2 menus
     *
@@ -234,4 +334,7 @@ class AccessoriesController extends Controller
 
         return (new SelectlistTransformer)->transformSelectlist($accessories);
     }
+
+
+
 }

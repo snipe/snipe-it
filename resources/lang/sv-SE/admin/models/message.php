@@ -36,7 +36,7 @@ return array(
     'bulkdelete' => array(
         'error'   		    => 'Inga tillgångar valdes, så ingenting togs bort.',
         'success' 		    => ': success_count modell (er) borttagen!',
-        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
+        'success_partial' 	=> ':success_count modell(erna) raderades, men :fail_count kunde inte raderas eftersom de fortfarande har tillgångar kopplade till sig.'
     ),
 
 );

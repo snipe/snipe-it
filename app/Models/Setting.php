@@ -54,6 +54,7 @@ class Setting extends Model
           'default_currency'                    => 'required',
           'locale'                              => 'required',
           'slack_endpoint'                      => 'url|required_with:slack_channel|nullable',
+          'labels_per_page'                     => 'numeric',
           'slack_channel'                       => 'regex:/^[\#\@]?\w+/|required_with:slack_endpoint|nullable',
           'slack_botname'                       => 'string|nullable',
           'labels_per_page'                     => 'numeric',
@@ -71,6 +72,7 @@ class Setting extends Model
           'login_remote_user_enabled'           => 'numeric|nullable',
           'login_common_disabled'               => 'numeric|nullable',
           'login_remote_user_custom_logout_url' => 'string|nullable',
+          'login_remote_user_header_name'       => 'string|nullable',
           'thumbnail_max_h'                     => 'numeric|max:500|min:25',
           'pwd_secure_min'                      => 'numeric|required|min:5',
           'audit_warning_days'                  => 'numeric|nullable',
@@ -106,7 +108,7 @@ class Setting extends Model
                 return null;
             }
         });
-    }
+        }
 
     /**
      * Check to see if setup process is complete.
@@ -124,7 +126,7 @@ class Setting extends Model
                 return $usercount > 0 && $settingsCount > 0;
             } catch (\Throwable $th) {
                 // Catche the error if the tables dont exit
-            }
+        }
 
             return false;
         });
@@ -188,9 +190,9 @@ class Setting extends Model
      * Escapes the custom CSS, and then un-escapes the greater-than symbol
      * so it can work with direct descendant characters for bootstrap
      * menu overrides like:.
-     *
+     * 
      * .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a
-     *
+     * 
      * Important: Do not remove the e() escaping here, as we output raw in the blade.
      *
      * @return string escaped CSS
@@ -211,14 +213,14 @@ class Setting extends Model
     }
 
     /**
-     * Converts bytes into human readable file size.
+    * Converts bytes into human readable file size.
+    *
+    * @param string $bytes
      *
-     * @param string $bytes
+    * @return string human readable file size (2,87 Мб)
      *
-     * @return string human readable file size (2,87 Мб)
-     *
-     * @author Mogilev Arseny
-     */
+    * @author Mogilev Arseny
+    */
     public static function fileSizeConvert($bytes): string
     {
         $bytes = floatval($bytes);
@@ -245,15 +247,15 @@ class Setting extends Model
                 ],
             ];
 
-        foreach ($arBytes as $arItem) {
+            foreach ($arBytes as $arItem) {
             if ($bytes >= $arItem['VALUE']) {
                 $result = $bytes / $arItem['VALUE'];
                 $result = round($result, 2).$arItem['UNIT'];
-                break;
+                    break;
+                }
             }
-        }
 
-        return $result;
+            return $result;
     }
 
     /**
@@ -340,7 +342,8 @@ class Setting extends Model
             'ldap_tls',
             'ldap_pw_sync',
             'is_ad',
-            'ad_domain'
+            'ad_domain',
+            'ad_append_domain',
             ])->first()->getAttributes();
 
         return collect($ldapSettings);

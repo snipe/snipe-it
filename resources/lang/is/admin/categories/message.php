@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'does_not_exist' => 'Vöruflokkur er ekki til.',
+    'assoc_models'	 => 'Þessi vöruflokkur er tengdur við eitt módel og ekki er hægt að eyða honum. Vinsamlegast uppfærðu módelin, þannig að þau tengist ekki þessum vöruflokk og reyndu aftur. ',
+    'assoc_items'	 => 'Þessi vöruflokkur er tengdur við eina tegund búnaðar og ekki er hægt að eyða honum. Vinsamlegast uppfærðu tegund búnaðar (asset_type), þannig að þau tengist ekki þessum vöruflokk og reyndu aftur. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Vöruflokkur var ekki skráður, vinsamlegast reyndu aftur.',
+        'success' => 'Vöruflokkur var stofnaður.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Vöruflokkur var ekki uppfærður, vinsamlegast reyndu aftur',
+        'success' => 'Vöruflokkur var uppfærður.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Ertu viss um að þú viljir eyða vöruflokk?',
+        'error'   => 'Það var villa við að eyða vöruflokk. Vinsamlegast reyndu aftur.',
+        'success' => 'Vöruflokk var eytt.'
     )
 
 );

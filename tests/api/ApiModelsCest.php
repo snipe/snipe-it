@@ -77,6 +77,7 @@ class ApiAssetModelsCest
 
         $temp_assetmodel = factory(\App\Models\AssetModel::class)->states('polycomcx-model')->make([
             'name' => "updated AssetModel name",
+            'fieldset_id' => 2,
         ]);
 
         $data = [
@@ -88,6 +89,7 @@ class ApiAssetModelsCest
             'model_number' => $temp_assetmodel->model_number,
             'name' => $temp_assetmodel->name,
             'notes' => $temp_assetmodel->notes,
+            'fieldset' => $temp_assetmodel->fieldset->id,
         ];
 
         $I->assertNotEquals($assetmodel->name, $data['name']);

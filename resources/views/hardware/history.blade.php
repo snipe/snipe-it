@@ -49,114 +49,170 @@
             <div class="box box-default">
                 <div class="box-body">
                     <div class="col-md-12">
-                        <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="">
-                            <!-- CSRF Token -->
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="">
+                        <!-- CSRF Token -->
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                            @if (Session::get('message'))
-                                <p class="alert-danger">
-                                    You have an error in your CSV file:<br />
-                                    {{ Session::get('message') }}
-                                </p>
-                            @endif
-
-                            <p>
-                                Use this tool to import asset history you may have in CSV format. This information likely will be extracted from your previous asset management system.
+                        @if (Session::get('message'))
+                            <p class="alert-danger">
+                                You have an error in your CSV file:<br />
+                                {{ Session::get('message') }}
                             </p>
-                            <p>
-                                <i>Asset history</i> is defined as a checkout and subsequent checkin that has happened in the past. The assets and users MUST already exist in SNIPE, or they will be skipped. Matching assets for history import happens against the asset tag.  We will try to find a matching user based on the user's full name you provide, based on the username format you configured in the Admin &gt; General Settings.
-                            </p>
+                        @endif
 
-                            <p>
-                                Fields included in the CSV must match <i>exactly</i> these header values: <strong>Asset Tag, Checkout Date, Checkin Date, Full Name</strong>. Any additional fields will be ignored.
-                            </p>
+                        <p>
+                           Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user's name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+                        </p>
 
-                            <div class="form-group">
-                                <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
-                                <div class="col-sm-9">
-                                    <input type="file" name="user_import_csv" id="user_import_csv"{{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
-                                </div>
+                        <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Checkout Date, Checkin Date, Name</strong>. Any additional fields will be ignored. </p>
+
+
+                        <p><strong>History should be ordered by date in ascending order.</strong></p>
+
+                        <div class="form-group">
+                            <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
+                            <div class="col-sm-9">
+                                <input type="file" name="user_import_csv" id="user_import_csv"{{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
                             </div>
+                        </div>
 
 
-                            <!-- Form Actions -->
-                            <div class="box-footer text-right">
-                                @if (config('app.lock_passwords')===true)
-                                    <div class="col-md-12">
-                                        <div class="callout callout-info">
-                                            {{ trans('general.feature_disabled') }}
-                                        </div>
-                                    </div>
 
-                                @else
-                                    <button type="submit" class="btn btn-default">{{ trans('button.submit') }}</button>
-                                 @endif
+
+                <!-- Match firstname.lastname -->
+                <div class="form-group">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        {{ Form::checkbox('match_firstnamelastname', '1', Request::old('match_firstnamelastname')) }} Try to match users by firstname.lastname (jane.smith) format
+                    </div>
+                </div>
+
+                <!-- Match flastname -->
+                <div class="form-group">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        {{ Form::checkbox('match_flastname', '1', Request::old('match_flastname')) }} Try to match users by first initial last name (jsmith) format
+                    </div>
+                </div>
+
+                <!-- Match firstname -->
+                <div class="form-group">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        {{ Form::checkbox('match_firstname', '1', Request::old('match_firstname')) }} Try to match users by first name (jane) format
+                    </div>
+                </div>
+
+                <!-- Match email -->
+                <div class="form-group">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        {{ Form::checkbox('match_email', '1', Request::old('match_email')) }} Try to match users by email as username
+                    </div>
+                </div>
+
+
+               </div>
+
+
+
+        </div>
+
+    <!-- Form Actions -->
+    <div class="box-footer text-right">
+        @if (config('app.lock_passwords')===true)
+            <div class="col-md-12">
+                <div class="callout callout-info">
+                    {{ trans('general.feature_disabled') }}
+                </div>
+            </div>
+
+        @else
+            <button type="submit" class="btn btn-default">{{ trans('button.submit') }}</button>
+         @endif
+    </div>
+
+</form>
+
+ </div>
+
+            @if (isset($status))
+
+
+                @if (count($status['error']) > 0)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h2 class="box-title"> {{ count($status['error']) }} Error Messages </h2>
                             </div>
+                            <div class="box-body">
+                                <div style="height : 400px; overflow : auto;">
+                                    <table class="table">
+                                        @for ($x = 0; $x < count($status['error']); $x++)
+                                            @foreach($status['error'][$x] as $object_type => $message)
+                                            <tr class="danger">
+                                                <td><strong>{{ ucwords($object_type)  }} {{ key($message)  }}:</strong></td>
+                                                <td>{{ $message[key($message)]['msg']  }}</td>
+                                            </tr>
+                                            @endforeach
+                                        @endfor
+                                    </table>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                        </form>
+                @endif
 
-
-                    @if (isset($status))
-
-
-                        @if (count($status['error']) > 0)
+                @if (count($status['success']) > 0)
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box box-default">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title"> {{ count($status['error']) }} Error Messages </h3>
+                                        <h2 class="box-title"> {{ count($status['success']) }} Success Messages </h2>
                                     </div>
                                     <div class="box-body">
                                         <div style="height : 400px; overflow : auto;">
                                             <table class="table">
-                                                @for ($x = 0; $x < count($status['error']); $x++)
-                                                    @foreach($status['error'][$x] as $object_type => $message)
-                                                    <tr class="danger">
-                                                        <td><strong>{{ ucwords($object_type)  }} {{ key($message)  }}:</strong></td>
-                                                        <td>{{ $message[key($message)]['msg']  }}</td>
-                                                    </tr>
+                                                @for ($x = 0; $x < count($status['success']); $x++)
+                                                    @foreach($status['success'][$x] as $object_type => $message)
+                                                        <tr class="success">
+                                                            <td><strong>{{ ucwords($object_type)  }} {{ key($message)  }}:</strong></td>
+                                                            <td>{{ $message[key($message)]['msg']  }}</td>
+                                                        </tr>
                                                     @endforeach
                                                 @endfor
                                             </table>
-                                       </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                @endif
+            @endif
 
-                        @endif
+        </div></div></div>
+<script nonce="{{ csrf_token() }}">
+$(document).ready(function(){
 
-                        @if (count($status['success']) > 0)
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="box box-default">
-                                            <div class="box-header with-border">
-                                                <h3 class="box-title"> {{ count($status['success']) }} Success Messages </h3>
-                                            </div>
-                                            <div class="box-body">
-                                                <div style="height : 400px; overflow : auto;">
-                                                    <table class="table">
-                                                        @for ($x = 0; $x < count($status['success']); $x++)
-                                                            @foreach($status['success'][$x] as $object_type => $message)
-                                                                <tr class="success">
-                                                                    <td><strong>{{ ucwords($object_type)  }} {{ key($message)  }}:</strong></td>
-                                                                    <td>{{ $message[key($message)]['msg']  }}</td>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endfor
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        @endif
-                    @endif
+    $('#generate-password').pGenerator({
+        'bind': 'click',
+        'passwordElement': '#password',
+        'displayElement': '#password-display',
+        'passwordLength': 10,
+        'uppercase': true,
+        'lowercase': true,
+        'numbers':   true,
+        'specialChars': false,
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    });
+});
 
-            @stop
+</script>
+@stop

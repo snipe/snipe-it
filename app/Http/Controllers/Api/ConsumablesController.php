@@ -45,8 +45,13 @@ class ConsumablesController extends Controller
         }
 
 
-        $offset = (($consumables) && (request('offset') > $consumables->count())) ? 0 : request('offset', 0);
-        $limit = request('limit', 50);
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($consumables) && ($request->get('offset') > $consumables->count())) ? $consumables->count() : $request->get('offset', 0);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
         $allowed_columns = ['id','name','order_number','min_amt','purchase_date','purchase_cost','company','category','model_number', 'item_no', 'manufacturer','location','qty','image'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
@@ -166,7 +171,7 @@ class ConsumablesController extends Controller
     {
         $consumable = Consumable::with(array('consumableAssignments'=>
         function ($query) {
-            $query->orderBy('created_at', 'DESC');
+            $query->orderBy($query->getModel()->getTable().'.created_at', 'DESC');
         },
         'consumableAssignments.admin'=> function ($query) {
         },
