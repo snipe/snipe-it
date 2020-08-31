@@ -157,9 +157,7 @@ class UsersController extends Controller
     public function selectlist(Request $request)
     {
         $users = self::getUserSelectList($request);
-
         $users = self::prepareForSelectList($users);
-
         return (new SelectlistTransformer)->transformSelectlist($users);
 
     }
