@@ -53,6 +53,18 @@
 
                     @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/licenses/form.asset'), 'fieldname' => 'asset_id', 'style' => 'display:none;'])
 
+                    @if (request('seatId') == null)
+                    <!-- QTY -->
+                    <div class="form-group {{ $errors->has('qty') ? ' has-error' : '' }}">
+                         <label for="qty" class="col-md-3 control-label">{{ trans('general.quantity') }}</label>
+                         <div class="col-md-7">
+                           <div class="col-md-2" style="padding-left:0px">
+                               <input class="form-control" type="number" name="qty" aria-label="qty" id="qty" value="{{ old('qty', 1) }}" min="1" step="1" />
+                           </div>
+                           {!! $errors->first('qty', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                       </div>
+                    </div>
+                    @endif
 
                     <!-- Note -->
                     <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">

@@ -28,6 +28,15 @@ Route::group([ 'prefix' => 'licenses', 'middleware' => ['auth'] ], function () {
     'uses' => 'Licenses\LicenseCheckinController@store'
     ]);
 
+    Route::get('{licenseId}/bulkcheckin/{backto?}', [
+    'as' => 'licenses.bulkcheckin',
+    'uses' => 'Licenses\LicenseCheckinController@bulkcreate'
+    ]);
+    Route::post('{licenseId}/bulkcheckin/{backto?}', [
+    'as' => 'licenses.bulkcheckin.save',
+    'uses' => 'Licenses\LicenseCheckinController@bulkstore'
+    ]);
+
     Route::post(
     '{licenseId}/upload',
     [ 'as' => 'upload/license', 'uses' => 'Licenses\LicenseFilesController@store' ]

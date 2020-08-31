@@ -156,7 +156,22 @@ class UsersController extends Controller
      */
     public function selectlist(Request $request)
     {
+        $users = self::getUserSelectList($request);
 
+        $users = self::prepareForSelectList($users);
+
+        return (new SelectlistTransformer)->transformSelectlist($users);
+
+    }
+
+    /**
+     * Gets a prepared list for users to use in select2 menus
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     */
+    public static function getUserSelectList(Request $request)
+    {
         $users = User::select(
             [
                 'users.id',
@@ -177,7 +192,11 @@ class UsersController extends Controller
                 ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
                 ->orWhere('employee_num', 'LIKE', '%'.$request->get('search').'%');
         }
+        return $users;
+    }
 
+    public static function prepareForSelectList($users)
+    {
         $users = $users->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
         $users = $users->paginate(50);
 
@@ -200,8 +219,7 @@ class UsersController extends Controller
             $user->use_image = ($user->present()->gravatar) ? $user->present()->gravatar : null;
         }
 
-        return (new SelectlistTransformer)->transformSelectlist($users);
-
+        return $users;
     }
 
 

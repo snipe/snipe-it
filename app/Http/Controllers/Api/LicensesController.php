@@ -283,5 +283,82 @@ class LicensesController extends Controller
         return (new SelectlistTransformer)->transformSelectlist($licenses);
     }
 
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @see \App\Http\Transformers\SelectlistTransformer
+     */
+    public function assignedUsers(Request $request, $licenseId)
+    {
+        $license = License::find($licenseId);
+        if (is_null($license)) {
+            return Helper::formatStandardApiResponse('error', null, 'invalid license');
+        }
+
+        $this->authorize('view', $license);
+
+        //get list of users
+        $users = UsersController::getUserSelectList($request);
+
+        //get number of assigned license seats of the provided license per user
+        $licenseSeatsPerUser = LicenseSeat::select(DB::raw('count(assigned_to) as qty, assigned_to, license_id'))
+            ->where('license_seats.license_id', '=', $licenseId)
+            ->groupBy('assigned_to')->groupBy('license_id');
+
+        $users->joinSub(
+            $licenseSeatsPerUser,
+            'assigned_seats',
+            function($join) {
+                $join->on('assigned_seats.assigned_to','=','users.id');
+            })
+        ->addSelect('assigned_seats.qty');
+
+        //convert user info for display in select2 list
+        $users = UsersController::prepareForSelectList($users);
+        foreach ($users as $user) {
+            $user->use_text = $user->use_text .' ['. $user->qty . ']';
+        }
+
+        return (new SelectlistTransformer)->transformSelectlist($users);
+    }
+
+    /**
+     * Gets a paginated collection for the select2 menus
+     *
+     * @see \App\Http\Transformers\SelectlistTransformer
+     */
+    public function assignedAssets(Request $request, $licenseId)
+    {
+        $license = License::find($licenseId);
+        if (is_null($license)) {
+            return Helper::formatStandardApiResponse('error', null, 'invalid license');
+        }
+
+        $this->authorize('view', $license);
+
+        //get list of assets
+        $assets = AssetsController::getAssetSelectList($request);
+
+        //get number of assigned license seats of the provided license per asset
+        $licenseSeatsPerAsset = LicenseSeat::select(DB::raw('count(asset_id) as qty, asset_id, license_id'))
+            ->where('license_seats.license_id', '=', $licenseId)
+            ->groupBy('asset_id')->groupBy('license_id');
+
+        $assets->joinSub(
+            $licenseSeatsPerAsset,
+            'assigned_seats',
+            function($join) {
+                $join->on('assigned_seats.asset_id','=','assets.id');
+            })
+        ->addSelect('assigned_seats.qty');
+
+        //convert asset info for display in select2 list
+        $assets = AssetsController::prepareForSelectList($assets);
+        foreach ($assets as $asset) {
+            $asset->use_text = $asset->use_text .' ['. $asset->qty . ']';
+        }
+
+        return (new SelectlistTransformer)->transformSelectlist($assets);
+    }
 
 }

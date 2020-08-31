@@ -493,6 +493,18 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
                 'uses'=> 'LicensesController@selectlist'
             ]
         );
+        Route::get('assignedUsers/{licenseId}/selectlist',
+            [
+                'as' => 'api.license.assignedusers',
+                'uses' => 'LicensesController@assignedusers'
+            ]
+        );
+        Route::get('assignedAssets/{licenseId}/selectlist',
+            [
+                'as' => 'api.license.assignedassets',
+                'uses' => 'LicensesController@assignedassets'
+            ]
+        );
 
     }); // Licenses group
 
