@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Seeder;
 use App\Models\Asset;
-
+use Illuminate\Support\Facades\Storage;
 
 class AssetSeeder extends Seeder
 {
@@ -35,13 +35,14 @@ class AssetSeeder extends Seeder
       factory(Asset::class, 10)->states('ultrasharp')->create();
 
 
-      $dst =  public_path('/uploads/assets');
-
-      $del_files = glob($dst."/*.*");
-
+      $del_files = Storage::files('assets');
       foreach($del_files as $del_file){ // iterate files
-          if(is_file($del_file))
-              unlink($del_file); // delete file
+          \Log::debug('Deleting: '.$del_files);
+          try  {
+              Storage::disk('public')->delete('assets'.'/'.$del_files);
+          } catch (\Exception $e) {
+              \Log::debug($e);
+          }
       }
 
       DB::table('checkout_requests')->truncate();

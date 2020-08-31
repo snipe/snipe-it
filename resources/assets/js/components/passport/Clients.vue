@@ -85,7 +85,7 @@
 
                         <h4 class="modal-title">
                             Create Client
-                        </h4>
+                        </h2>
                     </div>
 
                     <div class="modal-body">
@@ -153,7 +153,7 @@
 
                         <h4 class="modal-title">
                             Edit Client
-                        </h4>
+                        </h2>
                     </div>
 
                     <div class="modal-body">

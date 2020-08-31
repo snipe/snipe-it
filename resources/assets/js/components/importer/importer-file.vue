@@ -1,9 +1,7 @@
 <template>
-    <div v-show="processDetail">
+    <div v-show="processDetail" class="col-md-6 col-md-offset-3">
 
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8" style="padding-top: 30px; margin: 0 auto;">
                 <div class="dynamic-form-row">
                     <div class="col-md-5 col-xs-12">
                         <label for="import-type">Import Type:</label>
@@ -120,7 +118,6 @@
                     general: [
                         {id: 'category', text: 'Category' },
                         {id: 'company', text: 'Company' },
-                        {id: 'checkout_to', text: 'Checked out to' },
                         {id: 'email', text: 'Email' },
                         {id: 'item_name', text: 'Item Name' },
                         {id: 'location', text: 'Location' },
@@ -153,7 +150,9 @@
                         {id: 'model_number', text: "Model Number"},
                     ],
                     licenses: [
+                        {id: 'asset_tag', text: 'Assigned To Asset'},
                         {id: 'expiration_date', text: 'Expiration Date' },
+                        {id: 'full_name', text: 'Full Name' },
                         {id: 'license_email', text: 'Licensed To Email' },
                         {id: 'license_name', text: 'Licensed To Name' },
                         {id: 'purchase_order', text: 'Purchase Order' },
@@ -168,6 +167,7 @@
                         {id: 'phone_number', text: 'Phone Number' },
                         {id: 'manager_first_name', text: 'Manager First Name' },
                         {id: 'manager_last_name', text: 'Manager Last Name' },
+                        {id: 'department', text: 'Department' },
                         {id: 'activated', text: 'Activated' },
                         {id: 'address', text: 'Address' },
                         {id: 'city', text: 'City' },

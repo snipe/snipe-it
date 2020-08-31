@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\Asset;
-use Illuminate\Database\Eloquent\Collection;
-use App\Http\Transformers\UsersTransformer;
-use Gate;
 use App\Helpers\Helper;
+use App\Models\Asset;
+use Gate;
+use Illuminate\Database\Eloquent\Collection;
 
 class AssetsTransformer
 {
@@ -115,20 +114,20 @@ class AssetsTransformer
         }
 
         $permissions_array['available_actions'] = [
-            'checkout' => (bool) Gate::allows('checkout', Asset::class),
-            'checkin' => (bool) Gate::allows('checkin', Asset::class),
-            'clone' => Gate::allows('create', Asset::class) ? true : false,
+            'checkout' => Gate::allows('checkout', Asset::class),
+            'checkin' => Gate::allows('checkin', Asset::class),
+            'clone' => Gate::allows('create', Asset::class),
             'restore' => false,
             'update' => (bool) Gate::allows('update', Asset::class),
-            'delete' => (bool) Gate::allows('delete', Asset::class),
+            'delete' => ($asset->assigned_to=='' && Gate::allows('delete', Asset::class)),
         ];
 
         if ($asset->deleted_at!='') {
             $permissions_array['available_actions'] = [
                 'checkout' => true,
                 'checkin' => false,
-                'clone' => Gate::allows('create', Asset::class) ? true : false,
-                'restore' => Gate::allows('create', Asset::class) ? true : false,
+                'clone' => Gate::allows('create', Asset::class),
+                'restore' => Gate::allows('create', Asset::class),
                 'update' => false,
                 'delete' => false,
             ];

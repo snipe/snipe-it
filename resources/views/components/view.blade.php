@@ -108,7 +108,8 @@
   <div class="col-md-3">
     @if ($component->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-        <a href="{{ app('components_upload_url') }}{{ $component->image }}" data-toggle="lightbox"><img src="{{ app('components_upload_url') }}{{ $component->image }}" class="img-responsive img-thumbnail" alt="{{ $component->name }}"></a>
+        <a href="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" data-toggle="lightbox">
+          <img src="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" class="img-responsive img-thumbnail" alt="{{ $component->name }}"></a>
       </div>
 
     @endif

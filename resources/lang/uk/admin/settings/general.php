@@ -92,6 +92,8 @@ return array(
     'logo_print_assets_help'    => 'Use branding on printable asset lists ',
     'full_multiple_companies_support_help_text' => 'Restricting users (including admins) assigned to companies to their company\'s assets.',
     'full_multiple_companies_support_text' => 'Full Multiple Companies Support',
+    'show_assigned_assets'      => 'Показувати активи які призначені іншим активам',
+    'show_assigned_assets_help' => 'Відображати активи які призначені іншим активам у: Перегляд коритувача -> Активи, Перегляд коритувача -> Інфо -> Друкувати всі призначення та Аккаунт -> Показати прив\'язані активи.',
     'show_in_model_list'   => 'Show in Model Dropdowns',
     'optional'					=> 'optional',
     'per_page'                  => 'Results Per Page',

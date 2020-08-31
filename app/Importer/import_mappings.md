@@ -33,6 +33,7 @@
 | warranty months     | warranty_months  | Asset                                     |
 | User Related Fields | assigned_to      | Asset                                     |
 | name                |                  |                                           |
+| email               |                  |                                           |
 | username            |                  |                                           |
 | address             | address          |  User                                     |
 | city                | city             |  User                                     |

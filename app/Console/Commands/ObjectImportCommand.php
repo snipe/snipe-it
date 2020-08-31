@@ -1,31 +1,9 @@
 <?php
 namespace App\Console\Commands;
 
-use App\Helpers\Helper;
-use App\Importer\AccessoryImporter;
-use App\Importer\AssetImporter;
-use App\Importer\ConsumableImporter;
-use App\Importer\Importer;
-use App\Models\Accessory;
-use App\Models\Asset;
-use App\Models\AssetModel;
-use App\Models\Category;
-use App\Models\Company;
-use App\Models\Consumable;
-use App\Models\CustomField;
-use App\Models\Location;
-use App\Models\Manufacturer;
-use App\Models\Setting;
-use App\Models\Statuslabel;
-use App\Models\Supplier;
-use App\Models\User;
-use DB;
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Model;
-use League\Csv\Reader;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use ForceUTF8\Encoding;
 
 ini_set('max_execution_time', 600); //600 seconds = 10 minutes
 ini_set('memory_limit', '500M');

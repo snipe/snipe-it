@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\AssetModel;
-use Illuminate\Database\Eloquent\Collection;
-use Gate;
 use App\Helpers\Helper;
+use App\Models\AssetModel;
+use Gate;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class AssetModelsTransformer
 {
@@ -28,7 +29,7 @@ class AssetModelsTransformer
                 'id' => (int) $assetmodel->manufacturer->id,
                 'name'=> e($assetmodel->manufacturer->name)
             ]  : null,
-            'image' => ($assetmodel->image!='') ? app('models_upload_url').e($assetmodel->image) : null,
+            'image' => ($assetmodel->image!='') ? Storage::disk('public')->url('models/'.e($assetmodel->image)) : null,
             'model_number' => e($assetmodel->model_number),
             'depreciation' => ($assetmodel->depreciation) ? [
                 'id' => (int) $assetmodel->depreciation->id,
@@ -44,6 +45,7 @@ class AssetModelsTransformer
                 'name'=> e($assetmodel->fieldset->name)
             ]  : null,
             'eol' => ($assetmodel->eol > 0) ? $assetmodel->eol .' months': 'None',
+            'requestable' => ($assetmodel->requestable =='1') ? true : false,
             'notes' => e($assetmodel->notes),
             'created_at' => Helper::getFormattedDateObject($assetmodel->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($assetmodel->updated_at, 'datetime'),
@@ -52,10 +54,10 @@ class AssetModelsTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'update' => (Gate::allows('update', AssetModel::class) && ($assetmodel->deleted_at==''))  ? true : false,
-            'delete' => (Gate::allows('delete', AssetModel::class) && ($assetmodel->assets_count==0) && ($assetmodel->deleted_at=='')) ? true : false,
-            'clone' => (Gate::allows('create', AssetModel::class) && ($assetmodel->deleted_at=='')) ,
-            'restore' => (Gate::allows('create', AssetModel::class) && ($assetmodel->deleted_at!='')) ? true : false,
+            'update' => (Gate::allows('update', AssetModel::class) && ($assetmodel->deleted_at=='')),
+            'delete' => (Gate::allows('delete', AssetModel::class) && ($assetmodel->assets_count==0)),
+            'clone' => (Gate::allows('create', AssetModel::class) && ($assetmodel->deleted_at=='')),
+            'restore' => (Gate::allows('create', AssetModel::class) && ($assetmodel->deleted_at!='')),
         ];
 
         $array += $permissions_array;

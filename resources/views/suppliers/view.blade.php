@@ -278,7 +278,7 @@
     </ul>
       @if ($supplier->image!='')
         <div class="col-md-12 text-center" style="padding-bottom: 20px;">
-          <img src="{{ app('suppliers_upload_url') }}/{{ $supplier->image }}" class="img-responsive img-thumbnail" alt="{{ $supplier->name }}">
+          <img src="{{ Storage::disk('public')->url(app('suppliers_upload_url').e($supplier->image)) }}" class="img-responsive img-thumbnail" alt="{{ $supplier->name }}">
         </div>
       @endif
 

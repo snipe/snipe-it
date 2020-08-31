@@ -2,50 +2,35 @@
 
 namespace App\Notifications;
 
+use App\Models\Accessory;
 use App\Models\Setting;
-use App\Models\SnipeModel;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Mail;
 
 class CheckinAccessoryNotification extends Notification
 {
     use Queueable;
-    /**
-     * @var
-     */
-    private $params;
 
     /**
      * Create a new notification instance.
      *
      * @param $params
      */
-    public function __construct($params)
+    public function __construct(Accessory $accessory, $checkedOutTo, User $checkedInby, $note)
     {
-        $this->target = $params['target'];
-        $this->item = $params['item'];
-        $this->admin = $params['admin'];
-        $this->note = '';
-        $this->target_type = $params['target'];
-        $this->settings = $params['settings'];
-
-        if (array_key_exists('note', $params)) {
-            $this->note = $params['note'];
-        }
-
-
-
+        $this->item     = $accessory;
+        $this->target   = $checkedOutTo;
+        $this->admin    = $checkedInby;
+        $this->note     = $note;
+        $this->settings = Setting::getSettings();
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
     public function via()
@@ -79,13 +64,10 @@ class CheckinAccessoryNotification extends Notification
         $note = $this->note;
         $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
-
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
             'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
         ];
-
-
 
         return (new SlackMessage)
             ->content(':arrow_down: :keyboard: Accessory Checked In')
@@ -102,10 +84,8 @@ class CheckinAccessoryNotification extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
-
-
         return (new MailMessage)->markdown('notifications.markdown.checkin-accessory',
             [
                 'item'          => $this->item,
@@ -115,18 +95,5 @@ class CheckinAccessoryNotification extends Notification
             ])
             ->subject('Accessory checked in');
 
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

@@ -2,9 +2,6 @@
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-use Illuminate\Support\Facades\Gate;
-
 /**
  * Class LicensePresenter
  * @package App\Presenters
@@ -164,6 +161,7 @@ class LicensePresenter extends Presenter
                 "field" => "name",
                 "searchable" => false,
                 "sortable" => false,
+                "sorter"   => "numericOnly",
                 "switchable" => true,
                 "title" => trans('admin/licenses/general.seat'),
                 "visible" => true,

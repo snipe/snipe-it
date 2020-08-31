@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'El atributo: no se pudo cargar.',
     'url'                  => ':attribute formato incorrecto.',
     "unique_undeleted"     => "El :atrribute debe ser único.",
+    "import_field_empty"   => "El valor del Import Field no puede estar vacío.",
 
     /*
     |--------------------------------------------------------------------------

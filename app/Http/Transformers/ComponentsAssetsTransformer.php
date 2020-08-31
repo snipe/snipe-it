@@ -2,10 +2,8 @@
 namespace App\Http\Transformers;
 
 use App\Models\Asset;
-use Illuminate\Database\Eloquent\Collection;
-use App\Http\Transformers\UsersTransformer;
 use Gate;
-
+use Illuminate\Database\Eloquent\Collection;
 
 class ComponentsAssetsTransformer
 {
@@ -30,10 +28,10 @@ class ComponentsAssetsTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'checkout' => Gate::allows('checkout', Asset::class) ? true : false,
-            'checkin' => Gate::allows('checkin', Asset::class) ? true : false,
-            'update' => Gate::allows('update', Asset::class) ? true : false,
-            'delete' => Gate::allows('delete', Asset::class) ? true : false,
+            'checkout' => Gate::allows('checkout', Asset::class),
+            'checkin' => Gate::allows('checkin', Asset::class),
+            'update' => Gate::allows('update', Asset::class),
+            'delete' => Gate::allows('delete', Asset::class),
         ];
 
 

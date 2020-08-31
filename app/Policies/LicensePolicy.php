@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\License;
 use App\Models\User;
-use App\Policies\CheckoutablePermissionsPolicy;
 
 class LicensePolicy extends CheckoutablePermissionsPolicy
 {

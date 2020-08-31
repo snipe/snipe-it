@@ -1,11 +1,12 @@
 <?php
 namespace App\Models;
 
+use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
-use App\Notifications\CheckoutConsumableNotification;
 
 class Consumable extends SnipeModel
 {
@@ -14,17 +15,18 @@ class Consumable extends SnipeModel
     use Loggable, Presentable;
     use SoftDeletes;
 
+    use Acceptable;
+
     protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'consumables';
     protected $casts = [
-        'requestable' => 'boolean'
+        'requestable'    => 'boolean',
+        'category_id'    => 'integer',
+        'company_id'     => 'integer',
+        'qty'            => 'integer',
+        'min_amt'        => 'integer',
     ];
 
-    /**
-     * Set static properties to determine which checkout/checkin handlers we should use
-     */
-    public static $checkoutClass = CheckoutConsumableNotification::class;
-    public static $checkinClass = null;
 
 
     /**
@@ -88,8 +90,21 @@ class Consumable extends SnipeModel
         'company'      => ['name'],
         'location'     => ['name'],  
         'manufacturer' => ['name'],
-    ];     
+    ];
 
+    /**
+     * Sets the attribute of whether or not the consumable is requestable
+     *
+     * This isn't really implemented yet, as you can't currently request a consumable
+     * however it will be implemented in the future, and we needed to include
+     * this method here so all of our polymorphic methods don't break.
+     *
+     * @todo Update this comment once it's been implemented
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function setRequestableAttribute($value)
     {
         if ($value == '') {
@@ -99,73 +114,152 @@ class Consumable extends SnipeModel
         return;
     }
 
+    /**
+     * Establishes the consumable -> admin user relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function admin()
     {
         return $this->belongsTo('\App\Models\User', 'user_id');
     }
 
+    /**
+     * Establishes the component -> assignments relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function consumableAssignments()
     {
         return $this->hasMany('\App\Models\ConsumableAssignment');
     }
 
+    /**
+     * Establishes the component -> company relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function company()
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
+    /**
+     * Establishes the component -> manufacturer relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function manufacturer()
     {
         return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
     }
 
+    /**
+     * Establishes the component -> location relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function location()
     {
         return $this->belongsTo('\App\Models\Location', 'location_id');
     }
 
+    /**
+     * Establishes the component -> category relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function category()
     {
         return $this->belongsTo('\App\Models\Category', 'category_id');
     }
 
+
     /**
-    * Get action logs for this consumable
-    */
+     * Establishes the component -> action logs relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function assetlog()
     {
         return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Consumable::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
+    /**
+     * Gets the full image url for the consumable
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return string | false
+     */
     public function getImageUrl() {
         if ($this->image) {
-            return url('/').'/uploads/consumables/'.$this->image;
+            return Storage::disk('public')->url(app('consumables_upload_path').$this->image);
         }
         return false;
 
     }
 
-
+    /**
+     * Establishes the component -> users relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function users()
     {
         return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
     }
 
-    public function hasUsers()
-    {
-        return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->count();
-    }
 
+    /**
+     * Determine whether to send a checkin/checkout email based on
+     * asset model category
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return boolean
+     */
     public function checkin_email()
     {
         return $this->category->checkin_email;
-    }    
+    }
 
+    /**
+     * Determine whether this asset requires acceptance by the assigned user
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return boolean
+     */
     public function requireAcceptance()
     {
         return $this->category->require_acceptance;
     }
 
+    /**
+     * Checks for a category-specific EULA, and if that doesn't exist,
+     * checks for a settings level EULA
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return string | false
+     */
     public function getEula()
     {
 
@@ -181,6 +275,13 @@ class Consumable extends SnipeModel
 
     }
 
+    /**
+     * Checks the number of available consumables
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return int
+     */
     public function numRemaining()
     {
         $checkedout = $this->users->count();
@@ -192,10 +293,10 @@ class Consumable extends SnipeModel
     /**
     * Query builder scope to order on company
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  string                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderCategory($query, $order)
     {
@@ -205,10 +306,10 @@ class Consumable extends SnipeModel
     /**
     * Query builder scope to order on location
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderLocation($query, $order)
     {
@@ -218,10 +319,10 @@ class Consumable extends SnipeModel
     /**
      * Query builder scope to order on manufacturer
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string   $order       Order
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
     public function scopeOrderManufacturer($query, $order)
     {
@@ -232,10 +333,10 @@ class Consumable extends SnipeModel
     /**
     * Query builder scope to order on company
     *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  string                              $order       Order
     *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeOrderCompany($query, $order)
     {

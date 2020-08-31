@@ -21,52 +21,70 @@
 
 @section('content')
 
+<!-- row -->
 <div class="row">
+    <!-- col-md-8 -->
     <div class="col-md-8 col-md-offset-2">
+
+        <form id="create-form" class="form-horizontal" method="post" action="{{ (isset($formAction)) ? $formAction : \Request::url()  }}" autocomplete="off" role="form" enctype="multipart/form-data">
+
+        <!-- box -->
         <div class="box box-default">
+            <!-- box-header -->
             <div class="box-header{{  ($item->id) ? ' with-border' : ''  }}">
 
-            @if ($item->id)
-                    <h2 class="box-title">
-                        {{ $item->display_name }}
-                    </h2>
-            @endif
+            <div class="box-title col-md-12" style="min-height: 20px;">
 
-                @if (isset($helpText))
-                    <div class="box-tools pull-right">
-                        <button class="slideout-menu-toggle btn btn-box-tool btn-box-tool-lg" data-toggle="tooltip" title="Help"><i class="fa fa-question" aria-hidden="true"></i>
-                        <span class="sr-only">Help</span>
-                        </button>
-                    </div>
-                @endif
+                <div class="col-md-12">
+
+                    @if (isset($helpText))
+                        <div class="col-md-1 text-left" style="horiz-align: center;">
+                        @include ('partials.more-info',
+                            [
+                                'helpText' => $helpText,
+                                'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
+                            ])
+                        </div>
+                    @endif
+
+                        @if ($item->id)
+                            <div class="col-md-9">
+                                <h2 class="box-title">
+                                    {{ $item->display_name }}
+                                </h2>
+                            </div>
+                        @endif
+
+                        @if ((isset($topSubmit)) && ($topSubmit =='true'))
+                            <div class="col-md-2 text-right">
+                            @include('partials.forms.edit.submit-button')
+                            </div>
+                        @endif
+
+                </div> <!-- /div.row -->
+
+
+
+            </div><!-- /.box-header -->
             </div><!-- /.box-header -->
 
+            <!-- box-body -->
             <div class="box-body">
-                <form id="create-form" class="form-horizontal" method="post" action="{{ (isset($formAction)) ? $formAction : \Request::url()  }}" autocomplete="off" role="form" enctype="multipart/form-data">
 
                     @if ($item->id)
                     {{ method_field('PUT') }}
                     @endif
 
-
                     <!-- CSRF Token -->
                     {{ csrf_field() }}
                     @yield('inputFields')
                     @include('partials.forms.edit.submit')
-                </form>
-            </div>
-        </div>
-    </div>
 
-    @if ((isset($helpText)) && (isset($helpTitle)))
-    <div class="slideout-menu">
-        <a href="#" class="slideout-menu-toggle pull-right">×</a>
-        <h2>
-            {{ $helpTitle}}
-        </h2>
-        <p>{{ $helpText }} </p>
-    </div>
-    @endif
-</div>
+            </div> <!-- ./box-body -->
+        </div> <!-- box -->
+        </form>
+    </div> <!-- col-md-8 -->
+
+</div><!-- ./row -->
 
 @stop
