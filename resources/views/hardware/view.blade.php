@@ -991,48 +991,48 @@
                          "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                        }'
 
-                                        data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}"
-                                        data-cookie-id-table="assetHistory">
-                                    <thead>
-                                    <tr>
-                                        <th data-field="icon" data-visible="true" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"><span class="sr-only">Icon</span></th>
-                                        <th class="col-sm-2" data-visible="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                                        <th class="col-sm-1" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
-                                        <th class="col-sm-1" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
-                                        <th class="col-sm-2" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                                        <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
-                                        <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
-                                        @if  ($snipeSettings->require_accept_signature=='1')
-                                            <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
-                                        @endif
-                                        <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
-                                        <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">Changed</th>
-                                    </tr>
-                                    </thead>
-                                </table>
+                      data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}"
+                      data-cookie-id-table="assetHistory">
+                <thead>
+                <tr>
+                  <th data-visible="true" style="width: 40px;" class="hidden-xs">Icon</th>
+                  <th class="col-sm-2" data-visible="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                  <th class="col-sm-1" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th class="col-sm-1" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
+                  <th class="col-sm-2" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
+                  <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
+                  <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
+                  @if  ($snipeSettings->require_accept_signature=='1')
+                    <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                  @endif
+                  <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
+                  <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">Changed</th>
+                </tr>
+                </thead>
+              </table>
 
-                            </div>
-                        </div> <!-- /.row -->
-                    </div> <!-- /.tab-pane history -->
+            </div>
+          </div> <!-- /.row -->
+        </div> <!-- /.tab-pane history -->
 
-                    <div class="tab-pane fade" id="files">
-                        <div class="row">
-                            <div class="col-md-12">
+        <div class="tab-pane fade" id="files">
+          <div class="row">
+            <div class="col-md-12">
 
-                                @if ($asset->uploads->count() > 0)
-                                    <table
-                                            class="table table-striped snipe-table"
-                                            id="assetFileHistory"
-                                            data-pagination="true"
-                                            data-id-table="assetFileHistory"
-                                            data-search="true"
-                                            data-side-pagination="client"
-                                            data-show-columns="true"
-                                            data-show-refresh="true"
-                                            data-sort-order="desc"
-                                            data-sort-name="created_at"
-                                            data-show-export="true"
-                                            data-export-options='{
+              @if ($asset->uploads->count() > 0)
+              <table
+                      class="table table-striped snipe-table"
+                      id="assetFileHistory"
+                      data-pagination="true"
+                      data-id-table="assetFileHistory"
+                      data-search="true"
+                      data-side-pagination="client"
+                      data-show-columns="true"
+                      data-show-refresh="true"
+                      data-sort-order="desc"
+                      data-sort-name="created_at"
+                      data-show-export="true"
+                      data-export-options='{
                          "fileName": "export-asset-{{ $asset->id }}-files",
                          "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                        }'

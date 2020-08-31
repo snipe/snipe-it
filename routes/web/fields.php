@@ -17,7 +17,6 @@ Route::group([ 'prefix' => 'fields','middleware' => ['auth'] ], function () {
             'as' => 'fields.optional']
     );
 
-
     Route::get('{field_id}/fieldset/{fieldset_id}/disassociate',
         ['uses' => 'CustomFieldsController@deleteFieldFromFieldset',
         'as' => 'fields.disassociate']

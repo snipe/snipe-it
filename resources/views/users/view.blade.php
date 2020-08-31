@@ -142,11 +142,31 @@
                     <td class="text-nowrap">{{ trans('admin/users/table.name') }}</td>
                     <td>{{ $user->present()->fullName() }}</td>
                   </tr>
+
                   <tr>
                     <td class="text-nowrap">{{ trans('admin/users/table.username') }}</td>
                     <td>{{ $user->username }}</td>
                   </tr>
+                    @if (($user->address) || ($user->city) || ($user->state) || ($user->country))
+                      <tr>
+                        <td class="text-nowrap">{{ trans('general.address') }}</td>
+                        <td>
+                          @if ($user->address)
+                            {{ $user->address }} <br>
+                          @endif
+                          @if ($user->city)
+                            {{ $user->city }}
+                          @endif
+                          @if ($user->state)
+                            {{ $user->state }}
+                          @endif
+                          @if ($user->country)
+                            {{ $user->country }}
+                          @endif
+                        </td>
+                      </tr>
 
+                    @endif
                     <tr>
                       <td class="text-nowrap">{{ trans('general.groups') }}</td>
                       <td>
@@ -244,6 +264,13 @@
                       <td class="text-nowrap">{{ trans('general.login_enabled') }}</td>
                       <td>{{ ($user->activated=='1') ? trans('general.yes') : trans('general.no') }}</td>
                     </tr>
+                    @if ($user->ldap_import!='1')
+                    <tr>
+                      <td class="text-nowrap">LDAP</td>
+                      <td>{{  trans('general.yes') }}</td>
+                    </tr>
+                    @endif
+
 
                     @if ($user->activated=='1')
                       <tr>
@@ -277,6 +304,13 @@
                       </tr>
 
                      @endif
+
+                    @if ($user->notes)
+                      <tr>
+                        <td class="text-nowrap">{{ trans('admin/users/table.notes') }}</td>
+                        <td>{{ $user->notes }}</td>
+                      </tr>
+                    @endif
 
 
                 </table>
@@ -541,7 +575,7 @@
                 }'>
               <thead>
               <tr>
-                <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"><span class="sr-only">Icon</span></th>
+                <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">Icon</th>
                 <th class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter" data-sortable="true">{{ trans('general.date') }}</th>
                 <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                 <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
