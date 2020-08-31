@@ -27,8 +27,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use ForceUTF8\Encoding;
 
-ini_set('max_execution_time', 600); //600 seconds = 10 minutes
-ini_set('memory_limit', '500M');
+ini_set('max_execution_time', env('IMPORT_TIME_LIM', 600)); //600 seconds = 10 minutes
+ini_set('memory_limit', env('IMPORT_MEM_LIM', '500M'));
 
 /**
  * Class ObjectImportCommand

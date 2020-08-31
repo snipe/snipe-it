@@ -307,7 +307,7 @@ class ReportsController extends Controller
     public function postCustom(Request $request)
     {
 
-        ini_set('max_execution_time', 12000);
+        ini_set('max_execution_time', env('REPORT_TIME_LIM', 12000)); //12000 seconds = 200 minutes
 
 
         \Debugbar::disable();
