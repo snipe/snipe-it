@@ -233,12 +233,21 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
         ]
     ); // Consumables resource
 
-    Route::get('consumables/view/{id}/users',
-        [
-            'as' => 'api.consumables.showUsers',
-            'uses' => 'ConsumablesController@getDataView'
-        ]
-    );
+    Route::group(['prefix' => 'consumables'], function () {
+        Route::get('view/{id}/users',
+            [
+                'as' => 'api.consumables.showUsers',
+                'uses' => 'ConsumablesController@getDataView'
+            ]
+        );
+
+        Route::post('{consumable}/checkout',
+            [
+                'as' => 'api.consumables.checkout',
+                'uses' => 'ConsumablesController@checkout'
+            ]
+        );
+    });
 
     /*--- Depreciations API ---*/
 

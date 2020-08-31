@@ -457,6 +457,7 @@ class AssetsController extends Controller
         $asset->supplier_id             = $request->get('supplier_id', 0);
         $asset->requestable             = $request->get('requestable', 0);
         $asset->rtd_location_id         = $request->get('rtd_location_id', null);
+        $asset->location_id             = $request->get('rtd_location_id', null);
 
         if ($request->has('image_source') && $request->input('image_source') != "") {
             $saved_image_path = Helper::processUploadedImage(
