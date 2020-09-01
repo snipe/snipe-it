@@ -45,7 +45,7 @@
                'class' => 'form-inline',
                 'id' => 'bulkForm']) }}
 
-            @if (Input::get('status')!='deleted')
+            @if (request('status')!='deleted')
               @can('delete', \App\Models\User::class)
                 <div id="toolbar">
                     <label for="bulk_actions" class="sr-only">Bulk Actions</label>
