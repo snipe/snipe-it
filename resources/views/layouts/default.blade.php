@@ -742,7 +742,17 @@
         <section class="content-header" style="padding-bottom: 30px;">
           <h1 class="pull-left">
             @yield('title')
+
+
           </h1>
+
+            @if (isset($helpText))
+            @include ('partials.more-info',
+                                   [
+                                       'helpText' => $helpText,
+                                       'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
+                                   ])
+            @endif
           <div class="pull-right">
             @yield('header_right')
           </div>
