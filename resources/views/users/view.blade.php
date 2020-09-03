@@ -366,62 +366,29 @@
 
         <div class="tab-pane" id="asset">
           <!-- checked out assets table -->
-          <div class="table-responsive">
-            <table class="display table table-striped">
-              <thead>
-                <tr>
-                  <th class="col-md-3">{{ trans('admin/hardware/table.asset_model') }}</th>
-                  <th class="col-md-2">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                  <th class="col-md-2">{{ trans('general.name') }}</th>
-                  <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
-                </tr>
-              </thead>
-              <tbody>
-              @if ($user->assets)
-                @foreach ($user->assets as $asset)
-                <tr>
-                  <td>
-                    @if (($asset->model) && ($asset->physical=='1'))
-                      <a href="{{ route('models.show', $asset->model->id) }}">{{ $asset->model->name }}</a>
-                    @endif
-                  </td>
-                  <td>
-                    @can('view', $asset)
-                      <a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->asset_tag }}</a>
-                    @endcan
-                  </td>
-                  <td>{!! $asset->present()->nameUrl() !!}</td>
-                  <td class="hidden-print">
-                    @can('checkin', $asset)
-                      <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
-                    @endcan
-                  </td>
-                </tr>
-                @if($settings->show_assigned_assets)
-                  @foreach ($asset->assignedAssets as $asset)
-                      <tr>
-                        <td>
-                          @if ($asset->physical=='1')
-                            <a href="{{ route('models.show', $asset->model->id) }}">{{ ' – '.$asset->model->name }}</a>
-                          @endif
-                        </td>
-                        <td>
-                          @can('view', $asset)
-                            <a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->asset_tag }}</a>
-                          @endcan
-                        </td>
-                        <td>{!! $asset->present()->nameUrl() !!}</td>
-                        <td class="hidden-print">
-                          @can('checkin', $asset)
-                            <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
-                          @endcan
-                        </td>
-                      </tr>
-                  @endforeach
-                @endif
-                @endforeach
-                @endif
-              </tbody>
+          <div class="table-responsive table-striped">
+            <table
+                    data-click-to-select="true"
+                    data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                    data-cookie-id-table="userAssetsListingTable"
+                    data-pagination="true"
+                    data-id-table="userAssetsListingTable"
+                    data-search="true"
+                    data-side-pagination="server"
+                    data-show-columns="true"
+                    data-show-export="true"
+                    data-show-footer="true"
+                    data-show-refresh="true"
+                    data-sort-order="asc"
+                    data-sort-name="name"
+                    data-toolbar="#toolbar"
+                    id="userAssetsListingTable"
+                    class="table table-striped snipe-table"
+                    data-url="{{ route('api.assets.index',['assigned_to' => e($user->id), 'assigned_type' => 'App\Models\User']) }}"
+                    data-export-options='{
+                "fileName": "export-{{ str_slug($user->present()->fullName()) }}-assets-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                }'>
             </table>
           </div>
         </div><!-- /asset -->
