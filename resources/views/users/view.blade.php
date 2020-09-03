@@ -285,7 +285,7 @@
                             {{ ($user->two_factor_active_and_enrolled()) ? trans('general.yes') : trans('general.no') }}
                           </div>
 
-                          @if ((Auth::user()->isSuperUser()) && ($snipeSettings->two_factor_enabled!='0'))
+                          @if ((Auth::user()->isSuperUser()) && ($snipeSettings->two_factor_enabled!='0') && ($snipeSettings->two_factor_enabled!=''))
                             <div class="col-md-11">
                             <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
                             <span id="two_factor_reseticon">
