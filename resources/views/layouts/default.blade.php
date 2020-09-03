@@ -861,12 +861,20 @@
 
 
     <script nonce="{{ csrf_token() }}">
+
+
+        // ignore: 'input[type=hidden]' is required here to validate the select2 lists
         $.validate({
             form : '#create-form',
             modules : 'date, toggleDisabled',
             disabledFormFilter : '#create-form',
-            showErrorDialogs : true
+            showErrorDialogs : true,
+            ignore: 'input[type=hidden]'
         });
+
+
+
+
 
         $(function () {
   
