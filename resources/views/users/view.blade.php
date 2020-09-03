@@ -262,27 +262,31 @@
                   @endif
                     <tr>
                       <td class="text-nowrap">{{ trans('general.login_enabled') }}</td>
-                      <td>{{ ($user->activated=='1') ? trans('general.yes') : trans('general.no') }}</td>
+                      <td>
+                        {!! ($user->activated=='1') ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                     </tr>
-                    @if ($user->ldap_import!='1')
                     <tr>
                       <td class="text-nowrap">LDAP</td>
-                      <td>{{  trans('general.yes') }}</td>
+                      <td>
+                        {!! ($user->ldap_import=='1') ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+
+                        </td>
                     </tr>
-                    @endif
 
 
                     @if ($user->activated=='1')
                       <tr>
                         <td class="text-nowrap">{{ trans('admin/users/general.two_factor_active') }}</td>
-                        <td>{{ ($user->two_factor_active()) ? trans('general.yes') : trans('general.no') }}</td>
+                        <td>
+                          {!! ($user->two_factor_active()) ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        </td>
                       </tr>
                       <tr>
                         <td class="text-nowrap">{{ trans('admin/users/general.two_factor_enrolled') }}</td>
                         <td class="two_factor_resetrow">
                           <div class="row">
                           <div class="col-md-1" id="two_factor_reset_toggle">
-                            {{ ($user->two_factor_active_and_enrolled()) ? trans('general.yes') : trans('general.no') }}
+                            {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                           </div>
 
                           @if ((Auth::user()->isSuperUser()) && ($snipeSettings->two_factor_enabled!='0') && ($snipeSettings->two_factor_enabled!=''))
