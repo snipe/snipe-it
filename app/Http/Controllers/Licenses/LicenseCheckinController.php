@@ -105,23 +105,7 @@ class LicenseCheckinController extends Controller
     {
         $license = License::find($licenseId);
 
-        // Declare the rules for the form validation
-        $rules = [
-            'checkout_to_type' => 'in:asset,user',
-            'note'             => 'string|nullable',
-            'qty'              => 'int',
-            'asset_id'         => 'required_if:checkout_to_type,==,asset|nullable',
-            'assigned_to'      => 'required_if:checkout_to_type,==,user|nullable',
-        ];
-
-        if (($request->checkout_to_type == 'asset' && empty($request->asset_id)) ||
-            ($request->checkout_to_type == 'user'  && empty($request->assigned_to)) ||
-            ($request->checkout_to_type != 'asset' && $request->checkout_to_type != 'user')) {
-
-            return redirect()->back()->withInput()->with('error', 'Invalid formular');
-        }
-
-        $requestValid = $this->validateStoreRequest($request, $license, $rules);
+        $requestValid = $this->validateBulkStoreRequest($request, $license);
         if ($requestValid !== true) {
             return $requestValid;
         }
@@ -140,7 +124,7 @@ class LicenseCheckinController extends Controller
         //check if the number of license seats we found matches the requested number
         $licenseSeatsToCheckin = $licenseSeatsToCheckin->take($request->qty)->get();
         if ($licenseSeatsToCheckin->count() != $request->qty) {
-            return redirect()->route('licenses.show', $license->id)->with('error', 'Not enough license seat assigned to be checked in: only ' . $licenseSeatsToCheckin->count() .'/' . $request->qty);
+            return redirect()->route('licenses.show', $license->id)->with('error', 'Not enough license seats assigned to be checked in: only ' . $licenseSeatsToCheckin->count() .'/' . $request->qty);
         }
 
         //unassign the license seats
@@ -152,7 +136,7 @@ class LicenseCheckinController extends Controller
         }
 
         if ($backTo=='user') {
-            return redirect()->route("users.show", $return_to->id)->with('success', trans('admin/licenses/message.checkin.success'));
+            return redirect()->route("users.show", $return_from->id)->with('success', trans('admin/licenses/message.checkin.success'));
         }
 
         return redirect()->route("licenses.show", $licenseSeat->license_id)->with('success', trans('admin/licenses/message.checkin.success'));
@@ -179,6 +163,27 @@ class LicenseCheckinController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
         return true;
+    }
+
+    protected function validateBulkStoreRequest($request, $license)
+    {
+        // Declare the rules for the form validation
+        $rules = [
+            'checkout_to_type' => 'in:asset,user',
+            'note'             => 'string|nullable',
+            'qty'              => 'int',
+            'asset_id'         => 'required_if:checkout_to_type,==,asset|nullable',
+            'assigned_to'      => 'required_if:checkout_to_type,==,user|nullable',
+        ];
+
+        if (($request->checkout_to_type == 'asset' && empty($request->asset_id)) ||
+            ($request->checkout_to_type == 'user'  && empty($request->assigned_to)) ||
+            ($request->checkout_to_type != 'asset' && $request->checkout_to_type != 'user')) {
+
+            return redirect()->back()->withInput()->with('error', 'Invalid formular');
+        }
+
+        return $this->validateStoreRequest($request, $license, $rules);
     }
 
     protected function unassignLicenseSeat($licenseSeat, $return_from, $note)
