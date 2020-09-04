@@ -9,8 +9,7 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\User;
-use App\Http\Transformers\ConsumablesTransformer;
-use App\Helpers\Helper;
+use Illuminate\Http\Request;
 
 class ConsumablesController extends Controller
 {
