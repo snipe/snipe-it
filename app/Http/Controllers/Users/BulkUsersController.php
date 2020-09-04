@@ -42,7 +42,8 @@ class BulkUsersController extends Controller
                     ->with('groups', Group::pluck('name', 'id'));
 
             } elseif ($request->input('bulk_actions') == 'delete') {
-                return view('users/confirm-bulk-delete', compact('users',  Helper::statusLabelList()));
+                return view('users/confirm-bulk-delete')->with('users', $users)->with('statuslabel_list',  Helper::statusLabelList());
+
 
             } elseif ($request->input('bulk_actions') == 'bulkpasswordreset') {
                 foreach ($users as $user) {
