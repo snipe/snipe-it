@@ -36,6 +36,7 @@ class LicensesTransformer
             'free_seats_count' => (int) $license->free_seats_count,
             'license_name' =>  e($license->license_name),
             'license_email' => e($license->license_email),
+            'reassignable' => ($license->reassignable == 1) ? true : false,
             'maintained' => ($license->maintained == 1) ? true : false,
             'supplier' =>  ($license->supplier) ? ['id' => (int)  $license->supplier->id,'name'=> e($license->supplier->name)] : null,
             'category' =>  ($license->category) ? ['id' => (int)  $license->category->id,'name'=> e($license->category->name)] : null,

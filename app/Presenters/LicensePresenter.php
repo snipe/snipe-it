@@ -98,6 +98,21 @@ class LicensePresenter extends Presenter
                 "title" => trans('general.purchase_date'),
                 'formatter' => 'dateDisplayFormatter'
             ], [
+                "field" => "maintained",
+                "searchable" => false,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/licenses/form.maintained'),
+                "formatter" => "trueFalseFormatter"
+            ], [
+                "field" => "reassignable",
+                "searchable" => false,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/licenses/form.reassignable'),
+                "formatter" => "trueFalseFormatter"
+            ],
+            [
                 "field" => "purchase_cost",
                 "searchable" => true,
                 "sortable" => true,
