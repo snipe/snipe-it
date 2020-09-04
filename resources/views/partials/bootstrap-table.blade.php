@@ -391,8 +391,8 @@
 
 
     function createdAtFormatter(value) {
-        if ((value) && (value.date)) {
-            return value.date;
+        if ((value) && (value.formatted)) {
+            return value.formatted;
         }
     }
 
