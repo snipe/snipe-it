@@ -27,7 +27,6 @@ mix
             './node_modules/ekko-lightbox/dist/ekko-lightbox.css',
             './node_modules/bootstrap-table/dist/bootstrap-table.css',
             './public/css/build/app.css',
-            //'./resources/assets/css/lib/select2.css',
             './node_modules/select2/dist/css/select2.css',
             './public/css/build/overrides.css'
         ],
