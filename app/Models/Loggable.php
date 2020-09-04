@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Notifications\AuditNotification;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Setting;
 
 trait Loggable
 {
@@ -90,6 +91,7 @@ trait Loggable
      */
     public function logCheckin($target, $note, $action_date = null)
     {
+        $settings = Setting::getSettings();
         $log = new Actionlog;
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
