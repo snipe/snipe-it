@@ -57,7 +57,7 @@ class LdapAd extends LdapAdConfiguration
     public function init()
     {
         // Already initialized
-        if($this->ldap) {
+        if ($this->ldap) {
             return true;
         }
 

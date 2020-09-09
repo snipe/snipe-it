@@ -52,10 +52,19 @@ class LdapAdConfiguration
      * @since 5.0.0
      */
     public function init() {
-        $this->ldapSettings = $this->getSnipeItLdapSettings();
-        if ($this->isLdapEnabled()) {
-            $this->setSnipeItConfig();
+
+        // This try/catch is dumb, but is necessary to run initial migrations, since
+        // this service provider is booted even during migrations. :( - snipe
+        try {
+            $this->ldapSettings = $this->getSnipeItLdapSettings();
+            if ($this->isLdapEnabled()) {
+                $this->setSnipeItConfig();
+            }
+        } catch (\Exception $e) {
+            \Log::debug($e);
+            $this->ldapSettings = null;
         }
+
     }
 
     /**
@@ -82,33 +91,35 @@ class LdapAdConfiguration
      */
     private function getSnipeItLdapSettings(): Collection
     {
-        $ldapSettings = Setting::getLdapSettings()
-            ->map(function ($item, $key) {
-                // Trim the items
-                if (is_string($item)) {
-                    $item = trim($item);
-                }
-                // Get the boolean value of the LDAP setting, makes it easier to work with them
-                if (in_array($key, self::LDAP_BOOLEAN_SETTINGS)) {
-                    return boolval($item);
-                }
-
-                // Decrypt the admin password
-                if ('ldap_pword' === $key && !empty($item)) {
-                    try {
-                        return decrypt($item);
-                    } catch (Exception $e) {
-                        throw new Exception('Your app key has changed! Could not decrypt LDAP password using your current app key, so LDAP authentication has been disabled. Login with a local account, update the LDAP password and re-enable it in Admin > Settings.');
+        $ldapSettings = collect();
+        if(Setting::first()) { // during early migration steps, there may be no settings table entry to start with
+            $ldapSettings = Setting::getLdapSettings()
+                ->map(function ($item, $key) {
+                    // Trim the items
+                    if (is_string($item)) {
+                        $item = trim($item);
                     }
-                }
+                    // Get the boolean value of the LDAP setting, makes it easier to work with them
+                    if (in_array($key, self::LDAP_BOOLEAN_SETTINGS)) {
+                        return boolval($item);
+                    }
 
-                if ($item && 'ldap_server' === $key) {
-                    return collect(parse_url($item));
-                }
+                    // Decrypt the admin password
+                    if ('ldap_pword' === $key && !empty($item)) {
+                        try {
+                            return decrypt($item);
+                        } catch (Exception $e) {
+                            throw new Exception('Your app key has changed! Could not decrypt LDAP password using your current app key, so LDAP authentication has been disabled. Login with a local account, update the LDAP password and re-enable it in Admin > Settings.');
+                        }
+                    }
 
-                return $item;
-            });
+                    if ($item && 'ldap_server' === $key) {
+                        return collect(parse_url($item));
+                    }
 
+                    return $item;
+                });
+        }
         return $ldapSettings;
     }
 
