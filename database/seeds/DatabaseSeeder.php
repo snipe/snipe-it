@@ -49,6 +49,8 @@ class DatabaseSeeder extends Seeder
 
         DB::table('imports')->truncate();
         DB::table('asset_maintenances')->truncate();
+        DB::table('requested_assets')->truncate();
+
 
     }
 }
