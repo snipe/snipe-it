@@ -75,6 +75,7 @@ class SettingsController extends Controller
         // Get a sample of 10 users so user can verify the data is correct
         try {
             Log::info('Testing LDAP sync');
+            error_reporting(E_ALL & ~E_DEPRECATED); // workaround for php7.4, which deprecates ldap_control_paged_result
             $users = $ldap->testUserImportSync();
             $message['user_sync']  = [
                 'users' => $users
