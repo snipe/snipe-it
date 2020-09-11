@@ -399,28 +399,50 @@
 
         <div class="tab-pane" id="licenses">
           <div class="table-responsive">
-            <table class="display table table-hover">
+            <table
+                    data-cookie-id-table="userLicenseTable"
+                    data-id-table="userLicenseTable"
+                    id="userLicenseTable"
+                    data-search="true"
+                    data-pagination="true"
+                    data-side-pagination="client"
+                    data-show-columns="true"
+                    data-show-export="true"
+                    data-show-footer="true"
+                    data-show-refresh="true"
+                    data-sort-order="asc"
+                    data-sort-name="name"
+                    class="table table-striped snipe-table table-hover"
+                    data-export-options='{
+                    "fileName": "export-license-{{ str_slug($user->username) }}-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
+                    }'>
+
               <thead>
                 <tr>
                   <th class="col-md-5">{{ trans('general.name') }}</th>
                   <th class="col-md-6">{{ trans('admin/hardware/form.serial') }}</th>
+                  <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                   <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($user->licenses as $license)
                 <tr>
-                  <td>
+                  <td class="col-md-4">
                     {!! $license->present()->nameUrl() !!}
                   </td>
-                  <td>
+                  <td class="col-md-4">
                     @can('viewKeys', $license)
                     {!! $license->present()->serialUrl() !!}
                     @else
                       ------------
                     @endcan
                   </td>
-                  <td class="hidden-print">
+                  <td class="col-md-2">
+                    {!! $license->purchase_cost !!}
+                  </td>
+                  <td class="hidden-print col-md-2">
                     @can('update', $license)
                       <a href="{{ route('licenses.checkin', array('licenseSeatId'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
                      @endcan
@@ -434,10 +456,28 @@
 
         <div class="tab-pane" id="accessories">
           <div class="table-responsive">
-            <table class="display table table-hover">
+            <table
+                    data-cookie-id-table="userAccessoryTable"
+                    data-id-table="userAccessoryTable"
+                    id="userAccessoryTable"
+                    data-search="true"
+                    data-pagination="true"
+                    data-side-pagination="client"
+                    data-show-columns="true"
+                    data-show-export="true"
+                    data-show-footer="true"
+                    data-show-refresh="true"
+                    data-sort-order="asc"
+                    data-sort-name="name"
+                    class="table table-striped snipe-table table-hover"
+                    data-export-options='{
+                    "fileName": "export-accessory-{{ str_slug($user->username) }}-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
+                    }'>
               <thead>
                 <tr>
                   <th class="col-md-5">{{ trans('general.name') }}</th>
+                  <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                   <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
                 </tr>
               </thead>
@@ -445,6 +485,9 @@
                   @foreach ($user->accessories as $accessory)
                   <tr>
                     <td>{!!$accessory->present()->nameUrl()!!}</td>
+                    <td>
+                      {!! $accessory->purchase_cost !!}
+                    </td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
                         <a href="{{ route('checkin/accessory', array('accessoryID'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
@@ -459,10 +502,28 @@
 
         <div class="tab-pane" id="consumables">
           <div class="table-responsive">
-            <table class="display table table-striped">
+            <table
+                    data-cookie-id-table="userConsumableTable"
+                    data-id-table="userConsumableTable"
+                    id="userConsumableTable"
+                    data-search="true"
+                    data-pagination="true"
+                    data-side-pagination="client"
+                    data-show-columns="true"
+                    data-show-export="true"
+                    data-show-footer="true"
+                    data-show-refresh="true"
+                    data-sort-order="asc"
+                    data-sort-name="name"
+                    class="table table-striped snipe-table table-hover"
+                    data-export-options='{
+                    "fileName": "export-consumable-{{ str_slug($user->username) }}-{{ date('Y-m-d') }}",
+                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
+                    }'>
               <thead>
                 <tr>
-                  <th class="col-md-8">{{ trans('general.name') }}</th>
+                  <th class="col-md-6">{{ trans('general.name') }}</th>
+                  <th class="col-md-2" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                   <th class="col-md-4">{{ trans('general.date') }}</th>
                 </tr>
               </thead>
@@ -470,6 +531,9 @@
                 @foreach ($user->consumables as $consumable)
                 <tr>
                   <td>{!! $consumable->present()->nameUrl() !!}</td>
+                  <td>
+                    {!! $consumable->purchase_cost !!}
+                  </td>
                   <td>{{ $consumable->created_at }}</td>
                 </tr>
                 @endforeach
