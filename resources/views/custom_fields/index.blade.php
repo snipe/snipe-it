@@ -60,7 +60,7 @@
               </td>
               <td>
                 @foreach($fieldset->models as $model)
-                  <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}</a>
+                  <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}{{ ($model->model_number) ? ' ('.$model->model_number.')' : '' }}</a>
 
                 @endforeach
               </td>
