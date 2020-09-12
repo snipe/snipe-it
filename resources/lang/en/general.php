@@ -136,7 +136,7 @@
     'licenses'				=> 'Licenses',
     'list_all'				=> 'List All',
     'loading'				=> 'Loading',
-    'lock_passwords'        => 'This field cannot be edited in this installation.',
+    'lock_passwords'        => 'This field value will not be saved in a demo installation.',
     'feature_disabled'      => 'This feature has been disabled for the demo installation.',
     'location'              => 'Location',
     'locations'				=> 'Locations',

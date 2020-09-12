@@ -14,6 +14,10 @@
         <p class="help-block" id="{{ $logoId }}-status">
             {{ $helpBlock }}
         </p>
+
+        @if (config('app.lock_passwords')===true)
+            <p class="text-warning"><i class="fa fa-warning"></i>{{ trans('general.feature_disabled') }}</p>
+        @endif
         {!! $errors->first($logoVariable, '<span class="alert-msg">:message</span>') !!}
 
     </div>
