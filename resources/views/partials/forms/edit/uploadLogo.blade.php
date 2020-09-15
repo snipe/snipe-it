@@ -22,12 +22,12 @@
 
     </div>
     <div class="col-md-9 col-md-offset-3">
-        <img id="{{ $logoId }}-imagePreview" style="max-width: 500px; max-height: 50px">
+        <img id="{{ $logoId }}-imagePreview" style="max-width: 500px; max-height: 50px;">
     </div>
 
     @if ($setting->$logoVariable!='')
     <div class="col-md-9 col-md-offset-3">
-        {{ Form::checkbox($logoClearVariable, '1', Request::old($logoClearVariable),array('class' => 'minimal')) }} Remove current image
+        {{ Form::checkbox($logoClearVariable, '1', Request::old($logoClearVariable),array('class' => 'minimal')) }} Remove current {{ str_replace('_', ' ', $logoVariable) }} image
     </div>
     @endif
 </div>
