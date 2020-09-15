@@ -1,7 +1,8 @@
 <?php
 
 return array(
-    'about_kits'                        => 'About Predefined Kits',
+    'about_kits_title'                  => 'About Predefined Kits',
+    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
     'checkout'                          => 'Checkout Kit ',
     'create_success'                    => 'Kit was successfully created.',
     'create'                            => 'Create Predefined Kit',
