@@ -1,8 +1,16 @@
 <div class="form-group {{ $errors->has($logoVariable) ? 'has-error' : '' }}">
     <label class="col-md-3" for="{{ $logoVariable }}">
-            {{ Form::label($logoVariable, $logoLabel) }}</label>
+        {{ Form::label($logoVariable, $logoLabel) }}</label>
 
-    <div class="col-md-9">
+        @if ($setting->$logoVariable!='')
+
+            <div class="col-md-9">
+                {{ Form::checkbox($logoClearVariable, '1', Request::old($logoClearVariable),array('class' => 'minimal')) }} Remove current {{ str_replace('_', ' ', $logoVariable) }} image
+            </div>
+        @endif
+
+    <div class="col-md-9 col-md-offset-3">
+
         <label class="btn btn-default">
             {{ trans('button.select_file')  }}
             <input type="file" name="{{ $logoVariable }}" class="js-uploadFile" id="{{ $logoId }}"
@@ -25,9 +33,5 @@
         <img id="{{ $logoId }}-imagePreview" style="max-width: 500px; max-height: 50px;">
     </div>
 
-    @if ($setting->$logoVariable!='')
-    <div class="col-md-9 col-md-offset-3">
-        {{ Form::checkbox($logoClearVariable, '1', Request::old($logoClearVariable),array('class' => 'minimal')) }} Remove current {{ str_replace('_', ' ', $logoVariable) }} image
-    </div>
-    @endif
+
 </div>
