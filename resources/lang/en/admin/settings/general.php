@@ -150,7 +150,7 @@ return array(
     'slack_channel'             => 'Slack Channel',
     'slack_endpoint'            => 'Slack Endpoint',
     'slack_integration'         => 'Slack Settings',
-    'slack_integration_help'    => 'Slack integration is optional, however the endpoint and channel are required if you wish to use it. To configure Slack integration, you must first <a href=":slack_link" target="_new" rel="noopener">create an incoming webhook</a> on your Slack account.',
+    'slack_integration_help'    => 'Slack integration is optional, however the endpoint and channel are required if you wish to use it. To configure Slack integration, you must first <a href=":slack_link" target="_new" rel="noopener">create an incoming webhook</a> on your Slack account. Click on the <strong>Test Slack Integration</strong> button to confirm your settings are correct before saving. ',
     'slack_integration_help_button'    => 'Once you have saved your Slack information, a test button will appear.',
     'slack_test_help'           => 'Test whether your Slack integration is configured correctly. YOU MUST SAVE YOUR UPDATED SLACK SETTINGS FIRST.',
     'snipe_version'  			=> 'Snipe-IT version',
