@@ -65,8 +65,8 @@
           </p>
 
            @if (config('app.lock_passwords'))
-              <p class="help-block">{{ trans('general.feature_disabled') }}</p>
-           @endif
+              <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+          @endif
 
 
       </form>

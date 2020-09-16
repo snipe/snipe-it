@@ -190,7 +190,7 @@
 
                                 <textarea class="form-control disabled" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2" aria-label="login_note" readonly>{{ old('login_note', $setting->login_note) }}</textarea>
                                 {!! $errors->first('login_note', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                <p class="help-block">{{ trans('general.lock_passwords') }}</p>
+                                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                             @else
                                 <textarea class="form-control" name="login_note" aria-label="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2">{{ old('login_note', $setting->login_note) }}</textarea>
                                 {!! $errors->first('login_note', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -230,7 +230,7 @@
 
                                    <textarea class="form-control disabled" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2" aria-label="dashboard_message" readonly>{{ old('dashboard_message', $setting->login_note) }}</textarea>
                                    {!! $errors->first('dashboard_message', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                   <p class="help-block">{{ trans('general.lock_passwords') }}</p>
+                                   <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                @else
                                    <textarea class="form-control" aria-label="dashboard_message" name="dashboard_message" rows="2">{{ old('login_note', $setting->dashboard_message) }}</textarea>
                                    {!! $errors->first('dashboard_message', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -317,6 +317,11 @@
 
                                <span class="help-block">{{ trans('admin/settings/general.privacy_policy_link_help')  }}</span>
                                {!! $errors->first('privacy_policy_link', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+
+                               @if (config('app.lock_passwords')===true)
+                                   <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                               @endif
+
                            </div>
                        </div>
                    </div>

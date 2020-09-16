@@ -47,7 +47,7 @@
                                 <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_warning') }}</p>
 
                                 @if (config('app.lock_passwords'))
-                                    <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
 
                                 {!! $errors->first('two_factor_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -127,7 +127,7 @@
                                 <!--  Enable Remote User Login -->
 
                                 @if (config('app.lock_passwords'))
-                                    <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
                                     {{ Form::checkbox('login_remote_user_enabled', '1', old('login_remote_user_enabled', $setting->login_remote_user_enabled),array('class' => 'minimal', 'aria-label'=>'login_remote_user')) }}
                                     {{ Form::label('login_remote_user_enabled',  trans('admin/settings/general.login_remote_user_enabled_text')) }}
