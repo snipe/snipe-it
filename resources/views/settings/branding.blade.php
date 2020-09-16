@@ -104,7 +104,7 @@
                         "logoId" => "uploadFavicon",
                         "logoLabel" => trans('admin/settings/general.favicon'),
                         "logoClearVariable" => "clear_favicon",
-                        "helpBlock" => trans('admin/settings/general.favicon_size') . trans('admin/settings/general.favicon_format'),
+                        "helpBlock" => trans('admin/settings/general.favicon_size') .' '. trans('admin/settings/general.favicon_format'),
                         "allowedTypes" => "image/x-icon,image/gif,image/jpeg,image/png,image/svg",
                         "maxSize" => 1000
                     ])
