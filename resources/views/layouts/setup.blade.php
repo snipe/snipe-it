@@ -7,7 +7,7 @@
          Snipe-IT Setup
         @show
       </title>
-      <link rel="stylesheet" href="{{ url('css/all.css') }}">
+        <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
 
 
         <script nonce="{{ csrf_token() }}">

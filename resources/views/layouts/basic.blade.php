@@ -10,7 +10,7 @@
 
     <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->favicon) : 'favicon.ico' }} ">
     {{-- stylesheets --}}
-    <link rel="stylesheet" href="{{ url('css/all.css') }}">
+    <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
 
 
     <link rel="stylesheet" href="{{ url('css/dist/all.css') }}">
