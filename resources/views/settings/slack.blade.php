@@ -51,7 +51,7 @@
 
 
                         <!-- slack endpoint -->
-                        <div class="form-group {{ $errors->has('slack_endpoint') ? 'error' : '' }}">
+                        <div class="form-group required {{ $errors->has('slack_endpoint') ? 'error' : '' }}">
                             <div class="col-md-2">
                                 {{ Form::label('slack_endpoint', trans('admin/settings/general.slack_endpoint')) }}
                             </div>
@@ -66,7 +66,7 @@
                         </div>
 
                         <!-- slack channel -->
-                        <div class="form-group {{ $errors->has('slack_channel') ? 'error' : '' }}">
+                        <div class="form-group required {{ $errors->has('slack_channel') ? 'error' : '' }}">
                             <div class="col-md-2">
                                 {{ Form::label('slack_channel', trans('admin/settings/general.slack_channel')) }}
                             </div>
@@ -81,7 +81,7 @@
                         </div>
 
                         <!-- slack botname -->
-                        <div class="form-group {{ $errors->has('slack_botname') ? 'error' : '' }}">
+                        <div class="form-group required {{ $errors->has('slack_botname') ? 'error' : '' }}">
                             <div class="col-md-2">
                                 {{ Form::label('slack_botname', trans('admin/settings/general.slack_botname')) }}
                             </div>
@@ -133,12 +133,10 @@
 
 @push('js')
     <script nonce="{{ csrf_token() }}">
+
+
+
         $("#slacktest").click(function() {
-
-            $("slack_channel").click(function(){
-                $("input:text").val("Glenn Quagmire");
-            });
-
 
             $("#slacktestrow").removeClass('text-success');
             $("#slacktestrow").removeClass('text-danger');
