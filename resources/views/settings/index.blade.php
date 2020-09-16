@@ -258,7 +258,7 @@
           <div class="box-body text-center">
             <h5>
               <a href="{{ route('settings.logins.index') }}">
-                <i class="fa fa-sign-in fa-4x" aria-hidden="true"></i>
+                <i class="fa fa-crosshairs fa-4x" aria-hidden="true"></i>
                 <br><br>
                 <span class="name">Login Attempts</span>
               </a>
