@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\LoginAttemptsTransformer;
 use App\Models\Setting;
 use App\Notifications\MailTest;
-use App\Notifications\SlackTest;
 use App\Services\LdapAd;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
+use GuzzleHttp\Client;
 
 class SettingsController extends Controller
 {
@@ -91,24 +91,33 @@ class SettingsController extends Controller
         return response()->json($message, 200);
     }
 
-    public function slacktest()
+    public function slacktest(Request $request)
     {
 
-        if ($settings = Setting::getSettings()->slack_channel=='') {
-            \Log::debug('Slack is not enabled. Cannot test.');
-            return response()->json(['message' => 'Slack is not enabled, cannot test.'], 400);
-        }
+        $slack = new Client([
+            'base_url' => e($request->input('slack_endpoint')),
+            'defaults' => [
+                'exceptions' => false
+            ]
+        ]);
 
-        \Log::debug('Preparing to test slack connection');
+
+        $payload = json_encode(
+            [
+                'channel'    => e($request->input('slack_channel')),
+                'text'       => trans('general.slack_test_msg'),
+                'username'    => e($request->input('slack_botname')),
+                'icon_emoji' => ':heart:'
+            ]);
 
         try {
-            Notification::send($settings = Setting::getSettings(), new SlackTest());
+            $slack->post($request->input('slack_endpoint'),['body' => $payload]);
             return response()->json(['message' => 'Success'], 200);
         } catch (\Exception $e) {
-            \Log::debug('Slack connection failed');
-            return response()->json(['message' => $e->getMessage()], 400);
+            return response()->json(['message' => 'Oops! Please check the channel name and webhook endpoint URL. Slack responded with: '.$e->getMessage()], 400);
         }
 
+        return response()->json(['message' => 'Something went wrong :( '], 400);
 
     }
 

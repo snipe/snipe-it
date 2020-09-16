@@ -202,6 +202,7 @@
     'sign_in'				=> 'Sign in',
     'signature'             => 'Signature',
     'skin'       			=> 'Skin',
+    'slack_test_msg'        => 'Oh hai! Looks like your Slack integration with Snipe-IT is working!',
     'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
     'site_name'				=> 'Site Name',
     'state'  				=> 'State',
