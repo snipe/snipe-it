@@ -101,8 +101,7 @@
                             </div>
                         </div>
 
-                        @if (($setting->slack_channel!='') && ($setting->slack_endpoint))
-                        <div class="form-group">
+                        <div class="form-group" id="slacktestcontainer" style="display: none">
                             <div class="col-md-2">
                                 {{ Form::label('test_slack', 'Test Slack') }}
                             </div>
@@ -117,7 +116,6 @@
 
 
                         </div>
-                         @endif
                     </div> <!--/-->
                 </div> <!--/.box-body-->
                 <div class="box-footer">
@@ -139,7 +137,26 @@
 
 @push('js')
     <script nonce="{{ csrf_token() }}">
+        var fieldcheck = function (event) {
+            if($('#slack_endpoint').val() != "" && $('#slack_channel').val() != "" && $('#slack_botname').val() != "") {
+                //enable test button *only* if all three fields are filled in
+                $('#slacktestcontainer').fadeIn(500);
+            } else {
+                //otherwise it's hidden
+                $('#slacktestcontainer').fadeOut(500);
+            }
 
+            if(event) { //on 'initial load' we don't *have* an 'event', but in the regular keyup callback, we *do*. So this only fires on 'real' callback events, not on first load
+                if($('#slack_endpoint').val() == "" && $('#slack_channel').val() == "" && $('#slack_botname').val() == "") {
+                    // if all three fields are blank, the user may want to disable Slack integration; enable the Save button
+                    $('#save_slack').removeAttr('disabled');
+                }
+            }
+        };
+
+        fieldcheck(); //run our field-checker once on page-load to set the initial state correctly.
+
+        $('input:text').keyup(fieldcheck); // if *any* text field changes, we recalculate button states
 
 
         $("#slacktest").click(function() {
@@ -215,6 +232,7 @@
 
 
             });
+            return false;
         });
 
     </script>
