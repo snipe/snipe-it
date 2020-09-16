@@ -58,6 +58,8 @@
                             <div class="col-md-8">
                                 @if (config('app.lock_passwords')===true)
                                     {{ Form::text('slack_endpoint', Request::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX')) }}
+                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+
                                 @else
                                     {{ Form::text('slack_endpoint', Request::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX')) }}
                                 @endif
@@ -73,6 +75,8 @@
                             <div class="col-md-8">
                                 @if (config('app.lock_passwords')===true)
                                     {{ Form::text('slack_channel', Request::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','disabled'=>'disabled','placeholder' => '#IT-Ops')) }}
+                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+
                                 @else
                                     {{ Form::text('slack_channel', Request::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','placeholder' => '#IT-Ops')) }}
                                 @endif
@@ -88,6 +92,8 @@
                             <div class="col-md-8">
                                 @if (config('app.lock_passwords')===true)
                                     {{ Form::text('slack_botname', Request::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'Snipe-Bot')) }}
+                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+
                                 @else
                                     {{ Form::text('slack_botname', Request::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','placeholder' => 'Snipe-Bot')) }}
                                 @endif
