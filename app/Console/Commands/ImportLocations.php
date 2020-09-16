@@ -120,7 +120,7 @@ class ImportLocations extends Command
             if (array_key_exists('Country', $row)) {
                 $location->country = trim($row['Country']);
             }
-            if (array_key_exists('Country', $row)) {
+            if (array_key_exists('OU', $row)) {
                 $location->ldap_ou = trim($row['OU']);
             }
 
