@@ -25,7 +25,7 @@ return array(
     'backups'					=> 'Backups',
     'barcode_settings'			=> 'Barcode Settings',
     'confirm_purge'			    => 'Confirm Purge',
-    'confirm_purge_help'		=> 'Enter the text "DELETE" in the box below to purge your deleted records. This action cannot be undone.',
+    'confirm_purge_help'		=> 'Enter the text "DELETE" in the box below to purge your deleted records. This action cannot be undone and will PERMANENTLY delete all soft-deleted items and users. (You should make a backup first, just to be safe.)',
     'custom_css'				=> 'Custom CSS',
     'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
     'custom_forgot_pass_url'	=> 'Custom Password Reset URL',
