@@ -93,12 +93,9 @@ class SettingsController extends Controller
 
     public function slacktest(Request $request)
     {
-        \Log::debug($request->input('slack_channel'));
-        \Log::debug($request->input('slack_endpoint'));
-        \Log::debug($request->input('slack_botname'));
 
         $slack = new Client([
-            'base_url' => $request->input('slack_endpoint'),
+            'base_url' => e($request->input('slack_endpoint')),
             'defaults' => [
                 'exceptions' => false
             ]
@@ -107,9 +104,9 @@ class SettingsController extends Controller
 
         $payload = json_encode(
             [
-                'channel'    => $request->input('slack_channel'),
+                'channel'    => e($request->input('slack_channel')),
                 'text'       => trans('general.slack_test_msg'),
-                'username'    => $request->input('slack_botname'),
+                'username'    => e($request->input('slack_botname')),
                 'icon_emoji' => ':heart:'
             ]);
 
