@@ -355,7 +355,7 @@
             if( $('#is_ad').prop('checked') === false) {
                 $('#ad_domain').prop('disabled', 'disabled');
             } else {
-                $('#ldap_server').prop('disabled', 'disabled');
+                //$('#ldap_server').prop('disabled', 'disabled');
             }
         });
 
@@ -364,7 +364,7 @@
          */
         $('#is_ad').on('ifClicked', function(){
             $('#ad_domain').toggleDisabled();
-            $('#ldap_server').toggleDisabled();
+            //$('#ldap_server').toggleDisabled();
         });
 
 
