@@ -6,6 +6,7 @@ use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
+use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -79,6 +80,25 @@ class AssetCheckoutController extends Controller
             }
 
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
+                // Check if there are any license seats associated with the asset
+                if (!empty($asset->licenseseats)) {
+                    $failed_ids = [];
+                    // Associate the license seats to the user
+                    foreach ($asset->licenseseats as $seat) {
+                        if (!is_null($licenseSeat = LicenseSeat::where('id', '=', $seat->id)->first())) {
+                            $licenseSeat->assigned_to = $asset->assignedTo->id;
+                            if (!$licenseSeat->save()) {
+                                $failed_ids[] = $seat->id;
+                            }
+                        }
+                    }
+                    
+                    if (count($failed_ids) > 0) {
+                        //return redirect()->route("hardware.index")->with('error', 'Failed to check out the following license seat IDs to the user: ' . implode( ', ', $failed_ids));
+                        return redirect()->route("hardware.index")->with('error', trans('admin/hardware/message.checkout.license_seat_error'));
+                    }
+                }
+    
                 return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
             }
 

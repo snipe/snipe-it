@@ -63,7 +63,8 @@ return array(
         'success' 		=> 'Asset checked out successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.',
         'not_available' => 'That asset is not available for checkout!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'You must select at least one asset from the list',
+        'license_seat_error' => 'Failed to check out all licenses associated with asset to the new user'
     ),
 
     'checkin' => array(
@@ -71,7 +72,7 @@ return array(
         'success' 		=> 'Asset checked in successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.',
         'already_checked_in'  => 'That asset is already checked in.',
-
+        'license_seat_error' => 'Failed to check in all licenses associated with asset from the user'
     ),
 
     'requests' => array(

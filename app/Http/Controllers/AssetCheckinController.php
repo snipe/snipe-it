@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Http\Requests\AssetCheckinRequest;
 use App\Models\Asset;
+use App\Models\LicenseSeat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -92,6 +93,30 @@ class AssetCheckinController extends Controller
             $data['manufacturer_name'] = $asset->model->manufacturer->name;
             $data['model_name'] = $asset->model->name;
             $data['model_number'] = $asset->model->model_number;
+
+            // Check if there are any license seats allocated to this asset
+            if (!empty($asset->licenseseats)) {
+                $failed_ids = [];
+                // Disassociate the license seats from the user
+                foreach ($asset->licenseseats as $seat) {
+                    if (!is_null($licenseSeat = LicenseSeat::where('id', '=', $seat->id)->first())) {
+                        $licenseSeat->assigned_to = null;
+                        if (!$licenseSeat->save()) {
+                            $failed_ids[] = $seat->id;
+                        }
+                    }
+                }
+
+                if (count($failed_ids) > 0) {
+                    if ((isset($user)) && ($backto =='user')) {
+                        //return redirect()->route('users.show', $user->id)->with('error', 'Failed to check in the following license seat IDs from the user: ' . implode( ', ', $failed_ids));
+                        return redirect()->route('users.show', $user->id)->with('error', trans('admin/hardware/message.checkin.license_seat_error'));
+                    } else {
+                        //return redirect()->route('hardware.index')->with('error', 'Failed to check in the following license seat IDs from the user: ' . implode( ', ', $failed_ids));
+                        return redirect()->route("hardware.index")->with('error', trans('admin/hardware/message.checkin.license_seat_error'));
+                    }
+                }
+            }
 
             if ((isset($user)) && ($backto =='user')) {
                 return redirect()->route("users.show", $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
