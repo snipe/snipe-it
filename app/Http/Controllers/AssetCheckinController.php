@@ -111,10 +111,9 @@ class AssetCheckinController extends Controller
                     if ((isset($user)) && ($backto =='user')) {
                         //return redirect()->route('users.show', $user->id)->with('error', 'Failed to check in the following license seat IDs from the user: ' . implode( ', ', $failed_ids));
                         return redirect()->route('users.show', $user->id)->with('error', trans('admin/hardware/message.checkin.license_seat_error'));
-                    } else {
-                        //return redirect()->route('hardware.index')->with('error', 'Failed to check in the following license seat IDs from the user: ' . implode( ', ', $failed_ids));
-                        return redirect()->route("hardware.index")->with('error', trans('admin/hardware/message.checkin.license_seat_error'));
                     }
+                    //return redirect()->route('hardware.index')->with('error', 'Failed to check in the following license seat IDs from the user: ' . implode( ', ', $failed_ids));
+                    return redirect()->route("hardware.index")->with('error', trans('admin/hardware/message.checkin.license_seat_error'));
                 }
             }
 
