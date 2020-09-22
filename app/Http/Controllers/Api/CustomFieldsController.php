@@ -9,7 +9,6 @@ use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use Illuminate\Http\Request;
 use Validator;
-use Illuminate\Validation\Rule;
 
 class CustomFieldsController extends Controller
 {
@@ -59,9 +58,9 @@ class CustomFieldsController extends Controller
     {
         $this->authorize('update', CustomField::class);
         $field = CustomField::findOrFail($id);
-        
+
         /**
-         * Updated values for the field, 
+         * Updated values for the field,
          * without the "field_encrypted" flag, preventing the change of encryption status
          * @var array
          */

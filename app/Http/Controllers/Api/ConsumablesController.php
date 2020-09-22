@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Transformers\ConsumablesTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\User;
-use App\Http\Transformers\ConsumablesTransformer;
-use App\Helpers\Helper;
+use Illuminate\Http\Request;
 
 class ConsumablesController extends Controller
 {
@@ -162,7 +163,7 @@ class ConsumablesController extends Controller
     * Returns a JSON response containing details on the users associated with this consumable.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see ConsumablesController::getView() method that returns the form.
+    * @see \App\Http\Controllers\Consumables\ConsumablesController::getView() method that returns the form.
     * @since [v1.0]
     * @param int $consumableId
     * @return array
@@ -247,5 +248,29 @@ class ConsumablesController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, 'No consumables remaining'));
+    }
+
+    /**
+    * Gets a paginated collection for the select2 menus
+    *
+    * @see \App\Http\Transformers\SelectlistTransformer
+    *
+    */
+    public function selectlist(Request $request)
+    {
+
+        $consumables = Consumable::select([
+            'consumables.id',
+            'consumables.name'
+        ]);
+
+        if ($request->filled('search')) {
+            $consumables = $consumables->where('consumables.name', 'LIKE', '%'.$request->get('search').'%');
+        }
+
+        $consumables = $consumables->orderBy('name', 'ASC')->paginate(50);
+
+
+        return (new SelectlistTransformer)->transformSelectlist($consumables);
     }
 }

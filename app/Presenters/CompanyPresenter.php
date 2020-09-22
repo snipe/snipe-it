@@ -82,12 +82,14 @@ class CompanyPresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.updated_at'),
+                "formatter" => 'createdAtFormatter',
             ],[
                 "field" => "created_at",
                 "searchable" => false,
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.created_at'),
+                "formatter" => 'createdAtFormatter',
             ],[
                 "field" => "actions",
                 "searchable" => false,

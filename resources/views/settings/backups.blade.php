@@ -29,7 +29,11 @@
             <tbody>
             @foreach ($files as $file)
             <tr>
-              <td><a href="backups/download/{{ $file['filename'] }}">{{ $file['filename'] }}</a></td>
+              <td>
+                  <a href="{{ route('settings.backups.download', [$file['filename']]) }}">
+                      {{ $file['filename'] }}
+                  </a>
+              </td>
               <td>{{ date("M d, Y g:i A", $file['modified']) }} </td>
               <td>{{ $file['filesize'] }}</td>
               <td>
@@ -61,8 +65,8 @@
           </p>
 
            @if (config('app.lock_passwords'))
-              <p class="help-block">{{ trans('general.feature_disabled') }}</p>
-           @endif
+              <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+          @endif
 
 
       </form>

@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class UserPresenter
@@ -320,8 +321,9 @@ class UserPresenter extends Presenter
     public function gravatar()
     {
 
+
         if ($this->avatar) {
-            return config('app.url').'/uploads/avatars/'.$this->avatar;
+            return Storage::disk('public')->url('avatars/'.e($this->avatar));
         }
 
         if (Setting::getSettings()->load_remote=='1') {

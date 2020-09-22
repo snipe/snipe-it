@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 
 class Manufacturer extends SnipeModel
@@ -49,26 +50,29 @@ class Manufacturer extends SnipeModel
     ];
 
     use Searchable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['name', 'created_at'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
-    protected $searchableRelations = [];    
+    protected $searchableRelations = [];
 
 
-
-    public function has_models()
+    public function isDeletable()
     {
-        return $this->hasMany('\App\Models\AssetModel', 'manufacturer_id')->count();
+        return (Gate::allows('delete', $this)
+            && ($this->assets()->count()  === 0)
+            && ($this->licenses()->count() === 0)
+            && ($this->consumables()->count() === 0)
+            && ($this->accessories()->count() === 0));
     }
 
     public function assets()

@@ -12,14 +12,31 @@ class LocationTest extends BaseTest
     */
     protected $tester;
 
-    // public function testAssetAdd()
-    // {
-    //     $location = factory(Location::class)->make();
-    //     $values = [
-    //     'name' => $location->name,
-    //     ];
+    public function testPassesIfNotSelfParent() {
+        $this->createValidLocation(['id' => 10]);
 
-    //     Location::create($values);
-    //     $this->tester->seeRecord('locations', $values);
-    // }
+        $a = factory(Location::class)->make([
+            'name' => 'Test Location',
+            'id' => 1,
+            'parent_id' => 10,
+        ]);
+
+        $this->assertTrue($a->isValid());
+
+    }
+
+    public function testFailsIfSelfParent() {
+
+        $a = factory(Location::class)->make([
+            'name' => 'Test Location',
+            'id' => 1,
+            'parent_id' => 1,
+        ]);
+
+        $this->assertFalse($a->isValid());
+        $this->assertStringContainsString("The parent id and id must be different", $a->getErrors());
+
+
+    }
+
 }

@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Transformers;
 
+use App\Helpers\Helper;
 use App\Models\AssetMaintenance;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
-use App\Helpers\Helper;
 use App\Models\Asset;
 
 class AssetMaintenancesTransformer
@@ -28,6 +28,10 @@ class AssetMaintenancesTransformer
                 'name'=> ($assetmaintenance->asset->name) ? e($assetmaintenance->asset->name) : null,
                 'asset_tag'=> e($assetmaintenance->asset->asset_tag)
 
+            ]  : null,
+            'model' => (($assetmaintenance->asset) && ($assetmaintenance->asset->model)) ? [
+                'id' => (int) $assetmaintenance->asset->model->id,
+                'name'=> ($assetmaintenance->asset->model->name) ? e($assetmaintenance->asset->model->name).' '.e($assetmaintenance->asset->model->model_number)  : null
             ]  : null,
             'company' => (($assetmaintenance->asset) && ($assetmaintenance->asset->company)) ? [
                 'id' => (int) $assetmaintenance->asset->company->id,
@@ -54,8 +58,8 @@ class AssetMaintenancesTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'update' => (bool) Gate::allows('update', Asset::class),
-            'delete' => (bool) Gate::allows('delete', Asset::class),
+            'update' => Gate::allows('update', Asset::class),
+            'delete' => Gate::allows('delete', Asset::class),
         ];
 
         $array += $permissions_array;

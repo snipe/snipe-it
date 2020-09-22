@@ -11,7 +11,6 @@
 |        |          |
 | ------------- | ------------- |
 | **{{ trans('mail.asset_name') }}** | {{ $item->name }} |
-| **{{ trans('mail.asset_tag') }}** | {{ $item->asset_tag }} |
 @if (isset($item->manufacturer))
 | **{{ trans('general.manufacturer') }}** | {{ $item->manufacturer->name }} |
 @endif

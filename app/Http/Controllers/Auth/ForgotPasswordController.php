@@ -58,7 +58,12 @@ class ForgotPasswordController extends Controller
          * buffer overflow issues with attackers sending very large
          * payloads through.
          */
-        $this->validate($request, ['email' => 'required|email|max:250']);
+
+        $request->validate([
+            'email' => ['required', 'email', 'max:255'],
+        ]);
+        
+
 
         /**
          * If we find a matching email with an activated user, we will
@@ -70,12 +75,15 @@ class ForgotPasswordController extends Controller
         $response = $this->broker()->sendResetLink(
             array_merge(
                 $request->only('email'),
-                ['activated' => '1']
+                ['activated' => '1'],
+                ['ldap_import' => '0']
             )
         );
 
         if ($response === \Password::RESET_LINK_SENT) {
-            return redirect()->route('login')->with('status', trans($response));
+            \Log::info('Password reset attempt: User '.$request->input('email').' found, password reset sent');
+        } else {
+            \Log::info('Password reset attempt: User '.$request->input('email').' not found or user is inactive');
         }
 
 
@@ -92,13 +100,10 @@ class ForgotPasswordController extends Controller
          * It's bad UX, but better security. The compromises we sometimes have to make.
         */
 
-        if ($response == 'passwords.user') {
-            \Log::debug('User with email '.$request->input('email').' attempted a password reset request but was not found. No email was sent.');
-            return redirect()->route('login')->with('success', trans('passwords.user_inactive'));
+        // Regardless of response, we do not want to disclose the status of a user account,
+        // so we give them a generic "If this exists, we're TOTALLY gonna email you" response
+        return redirect()->route('login')->with('success',trans('passwords.sent'));
         }
 
-        return back()->withErrors(
-            ['email' => trans($response)]
-        );
-    }
+
 }

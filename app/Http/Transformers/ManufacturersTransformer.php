@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\Manufacturer;
-use Illuminate\Database\Eloquent\Collection;
-use Gate;
 use App\Helpers\Helper;
+use App\Models\Manufacturer;
+use Gate;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class ManufacturersTransformer
 {
@@ -26,7 +27,7 @@ class ManufacturersTransformer
                 'id' => (int) $manufacturer->id,
                 'name' => e($manufacturer->name),
                 'url' => e($manufacturer->url),
-                'image' =>   ($manufacturer->image) ? app('manufacturers_upload_url').e($manufacturer->image) : null,
+                'image' =>   ($manufacturer->image) ? Storage::disk('public')->url('manufacturers/'.e($manufacturer->image)) : null,
                 'support_url' => e($manufacturer->support_url),
                 'support_phone' => e($manufacturer->support_phone),
                 'support_email' => e($manufacturer->support_email),
@@ -40,9 +41,9 @@ class ManufacturersTransformer
             ];
 
             $permissions_array['available_actions'] = [
-                'update' => (($manufacturer->deleted_at=='') && (Gate::allows('update', Manufacturer::class))) ? true : false,
-                'restore' => (($manufacturer->deleted_at!='') && (Gate::allows('create', Manufacturer::class))) ? true : false,
-                'delete' => (Gate::allows('delete', Manufacturer::class) && ($manufacturer->assets_count == 0)  && ($manufacturer->licenses_count==0)  && ($manufacturer->consumables_count==0)  && ($manufacturer->accessories_count==0)  && ($manufacturer->deleted_at=='')) ? true : false,
+                'update' => (($manufacturer->deleted_at=='') && (Gate::allows('update', Manufacturer::class))),
+                'restore' => (($manufacturer->deleted_at!='') && (Gate::allows('create', Manufacturer::class))),
+                'delete' => $manufacturer->isDeletable(),
             ];
 
             $array += $permissions_array;

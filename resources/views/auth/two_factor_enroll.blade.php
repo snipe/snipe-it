@@ -28,7 +28,7 @@
                                 </div>
 
                                 <div class="col-md-12 text-center">
-                                    {!!  $barcode_obj->getHtmlDiv() !!}
+                                   {!!  $barcode_obj->getHtmlDiv() !!}
                                 </div>
 
                             </div>

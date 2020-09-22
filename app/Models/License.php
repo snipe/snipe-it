@@ -1,10 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Models\Actionlog;
-use App\Models\Company;
-use App\Models\LicenseSeat;
-use App\Models\Loggable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
@@ -17,12 +13,6 @@ use Watson\Validating\ValidatingTrait;
 class License extends Depreciable
 {
     protected $presenter = 'App\Presenters\LicensePresenter';
-
-    /**
-     * Set static properties to determine which checkout/checkin handlers we should use
-     */
-    public static $checkoutClass = CheckoutLicenseNotification::class;
-    public static $checkinClass = CheckinLicenseNotification::class;
 
 
     use SoftDeletes;
@@ -46,6 +36,13 @@ class License extends Depreciable
 
     protected $guarded = 'id';
     protected $table = 'licenses';
+
+    protected $casts = [
+        'seats'   => 'integer',
+        'category_id'  => 'integer',
+        'company_id'   => 'integer',
+    ];
+
     protected $rules = array(
         'name'   => 'required|string|min:3|max:255',
         'seats'   => 'required|min:1|max:999|integer',
@@ -111,8 +108,14 @@ class License extends Depreciable
       'manufacturer' => ['name'],
       'company'      => ['name'],
       'category'     => ['name'],
-    ];    
+    ];
 
+    /**
+     * Update seat counts when the license is updated
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     */
     public static function boot()
     {
         parent::boot();
@@ -129,6 +132,13 @@ class License extends Depreciable
         });
     }
 
+    /**
+     * Balance seat counts
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public static function adjustSeatCount($license, $oldSeats, $newSeats)
     {
         // If the seats haven't changed, continue on happily.
@@ -182,15 +192,37 @@ class License extends Depreciable
         return true;
     }
 
+    /**
+     * Sets the attribute for whether or not the license is maintained
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return mixed
+     */
     public function setMaintainedAttribute($value)
     {
         $this->attributes['maintained'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
+
+    /**
+     * Sets the reassignable attribute
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return mixed
+     */
     public function setReassignableAttribute($value)
     {
         $this->attributes['reassignable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
+    /**
+     * Sets expiration date attribute
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return mixed
+     */
     public function setExpirationDateAttribute($value)
     {
 
@@ -202,6 +234,13 @@ class License extends Depreciable
         $this->attributes['expiration_date'] = $value;
     }
 
+    /**
+     * Sets termination date attribute
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return mixed
+     */
     public function setTerminationDateAttribute($value)
     {
         if ($value == '' || $value == '0000-00-00') {
@@ -212,31 +251,74 @@ class License extends Depreciable
         $this->attributes['termination_date'] = $value;
     }
 
+    /**
+     * Establishes the license -> company relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function company()
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
+    /**
+     * Establishes the license -> category relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function category()
     {
         return $this->belongsTo('\App\Models\Category', 'category_id');
     }
 
+    /**
+     * Establishes the license -> manufacturer relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function manufacturer()
     {
         return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
     }
 
+    /**
+     * Determine whether the user should be emailed on checkin/checkout
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return boolean
+     */
     public function checkin_email()
     {
         return $this->category->checkin_email;
     }
 
+    /**
+     * Determine whether the user should be required to accept the license
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v4.0]
+     * @return boolean
+     */
     public function requireAcceptance()
     {
         return $this->category->require_acceptance;
     }
 
+    /**
+     * Checks for a category-specific EULA, and if that doesn't exist,
+     * checks for a settings level EULA
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return string | false
+     */
     public function getEula()
     {
         $Parsedown = new \Parsedown();
@@ -251,7 +333,11 @@ class License extends Depreciable
     }
 
     /**
-     * Get the assigned user
+     * Establishes the license -> assigned user relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function assignedusers()
     {
@@ -259,8 +345,12 @@ class License extends Depreciable
     }
 
     /**
-    * Get asset logs for this asset
-    */
+     * Establishes the license -> action logs relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function assetlog()
     {
         return $this->hasMany('\App\Models\Actionlog', 'item_id')
@@ -269,8 +359,12 @@ class License extends Depreciable
     }
 
     /**
-    * Get uploads for this asset
-    */
+     * Establishes the license -> action logs -> uploads relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function uploads()
     {
         return $this->hasMany('\App\Models\Actionlog', 'item_id')
@@ -282,16 +376,26 @@ class License extends Depreciable
 
 
     /**
-    * Get admin user for this asset
-    */
+     * Establishes the license -> admin user relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function adminuser()
     {
         return $this->belongsTo('\App\Models\User', 'user_id');
     }
 
     /**
-    * Get total licenses
-    */
+     * Returns the total number of all license seats
+     *
+     * @todo this can probably be refactored at some point. We don't need counting methods.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return int
+     */
     public static function assetcount()
     {
         return LicenseSeat::whereNull('deleted_at')
@@ -300,8 +404,14 @@ class License extends Depreciable
 
 
     /**
-    * Get total licenses
-    */
+     * Return the number of seats for this asset
+     *
+     * @todo this can also probably be refactored at some point.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function totalSeatsByLicenseID()
     {
         return LicenseSeat::where('license_id', '=', $this->id)
@@ -309,12 +419,28 @@ class License extends Depreciable
                    ->count();
     }
 
-    // We do this to eager load the "count" of seats from the controller.  Otherwise calling "count()" on each model results in n+1
+    /**
+     * Establishes the license -> seat relationship
+     *
+     * We do this to eager load the "count" of seats from the controller.
+     * Otherwise calling "count()" on each model results in n+1 sadness.
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function licenseSeatsRelation()
     {
         return $this->hasMany(LicenseSeat::class)->whereNull('deleted_at')->selectRaw('license_id, count(*) as count')->groupBy('license_id');
     }
 
+    /**
+     * Sets the license seat count attribute
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return int
+     */
     public function getLicenseSeatsCountAttribute()
     {
         if ($this->licenseSeatsRelation->first()) {
@@ -325,8 +451,12 @@ class License extends Depreciable
     }
 
     /**
-    * Get total licenses not checked out
-    */
+     * Returns the number of total available seats across all licenses
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return int
+     */
     public static function availassetcount()
     {
         return LicenseSeat::whereNull('assigned_to')
@@ -336,7 +466,11 @@ class License extends Depreciable
     }
 
     /**
-     * Get the number of available seats
+     * Returns the number of total available seats for this license
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function availCount()
     {
@@ -346,6 +480,13 @@ class License extends Depreciable
             ->whereNull('deleted_at');
     }
 
+    /**
+     * Sets the available seats attribute
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return mixed
+     */
     public function getAvailSeatsCountAttribute()
     {
         if ($this->availCount->first()) {
@@ -356,8 +497,11 @@ class License extends Depreciable
     }
 
     /**
-     * Get the number of assigned seats
+     * Retuns the number of assigned seats for this asset
      *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function assignedCount()
     {
@@ -367,9 +511,15 @@ class License extends Depreciable
         });
     }
 
+    /**
+     * Sets the assigned seats attribute
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return int
+     */
     public function getAssignedSeatsCountAttribute()
     {
-        // dd($this->licenseSeatsRelation->first());
         if ($this->assignedCount->first()) {
             return $this->assignedCount->first()->count;
         }
@@ -377,6 +527,13 @@ class License extends Depreciable
         return 0;
     }
 
+    /**
+     * Calculates the number of remaining seats
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return int
+     */
     public function remaincount()
     {
         $total = $this->licenseSeatsCount;
@@ -386,7 +543,11 @@ class License extends Depreciable
     }
 
     /**
-     * Get the total number of seats
+     * Returns the total number of seats for this license
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return int
      */
     public function totalcount()
     {
@@ -397,21 +558,37 @@ class License extends Depreciable
     }
 
     /**
-     * Get license seat data
+     * Establishes the license -> seats relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function licenseseats()
     {
         return $this->hasMany('\App\Models\LicenseSeat');
     }
 
+    /**
+     * Establishes the license -> supplier relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function supplier()
     {
         return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
     }
 
-    /*
-     * Get the next available free seat - used by
+
+    /**
+     * Gets the next available free seat - used by
      * the API to populate next_seat
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return mixed
      */
     public function freeSeat()
     {
@@ -425,15 +602,28 @@ class License extends Depreciable
                     ->first();
     }
 
-    /*
-   * Get the next available free seat - used by
-   * the API to populate next_seat
-   */
+
+    /**
+     * Establishes the license -> free seats relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function freeSeats()
     {
         return $this->hasMany('\App\Models\LicenseSeat')->whereNull('assigned_to')->whereNull('deleted_at')->whereNull('asset_id');
     }
 
+    /**
+     * Returns expiring licenses
+     *
+     * @todo should refactor. I don't like get() in model methods
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public static function getExpiringLicenses($days = 60)
     {
 
@@ -449,10 +639,10 @@ class License extends Depreciable
     /**
      * Query builder scope to order on manufacturer
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order         Order
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order         Order
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
     public function scopeOrderManufacturer($query, $order)
     {
@@ -464,7 +654,7 @@ class License extends Depreciable
      * Query builder scope to order on supplier
      *
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order         Order
+     * @param  string                              $order         Order
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
@@ -477,10 +667,10 @@ class License extends Depreciable
     /**
      * Query builder scope to order on company
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $order         Order
      *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
     public function scopeOrderCompany($query, $order)
     {

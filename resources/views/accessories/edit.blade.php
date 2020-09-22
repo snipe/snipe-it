@@ -1,9 +1,9 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/accessories/general.create') ,
     'updateText' => trans('admin/accessories/general.update'),
-    'helpTitle' => trans('admin/accessories/general.about_accessories_title'),
-    'helpText' => trans('admin/accessories/general.about_accessories_text'),
-    'formAction' => ($item) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
+    'helpPosition'  => 'right',
+    'helpText' => trans('help.accessories'),
+    'formAction' => (isset($item->id)) ? route('accessories.update', ['accessory' => $item->id]) : route('accessories.store'),
 ])
 
 {{-- Page content --}}
@@ -13,7 +13,7 @@
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/accessories/general.accessory_name')])
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id', 'required' => 'true','category_type' => 'accessory'])
 @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
-@include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id', 'required' => 'true'])
+@include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id'])
 @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 @include ('partials.forms.edit.model_number')
 @include ('partials.forms.edit.order_number')
@@ -29,13 +29,12 @@
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
         <div class="col-md-5">
             {{ Form::checkbox('image_delete') }}
-            <img src="{{ url('/') }}/uploads/accessories/{{ $item->image }}" alt="{{ $item->name }}">
+            <img src="{{  Storage::disk('public')->url('accessories/'.e($item->image)) }}" class="img-responsive" />
             {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
         </div>
     </div>
 @endif
 
 @include ('partials.forms.edit.image-upload')
-
 
 @stop

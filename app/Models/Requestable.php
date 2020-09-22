@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\CheckoutRequest;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 // $asset->requests

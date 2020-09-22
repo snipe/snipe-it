@@ -1,6 +1,5 @@
 {{-- See snipeit_modals.js for what powers this --}}
 
-
 <script nonce="{{ csrf_token() }}">
 
     window.setTimeout(function () {

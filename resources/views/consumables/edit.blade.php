@@ -1,9 +1,9 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/consumables/general.create') ,
     'updateText' => trans('admin/consumables/general.update'),
-    'helpTitle' => trans('admin/consumables/general.about_consumables_title'),
-    'helpText' => trans('admin/consumables/general.about_consumables_text'),
-    'formAction' => ($item) ? route('consumables.update', ['accessory' => $item->id]) : route('consumables.store'),
+    'helpPosition'  => 'right',
+    'helpText' => trans('help.consumables'),
+    'formAction' => (isset($item->id)) ? route('consumables.update', ['consumable' => $item->id]) : route('consumables.store'),
 ])
 {{-- Page content --}}
 @section('inputFields')
@@ -11,7 +11,7 @@
 @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/consumables/table.title')])
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id', 'required' => 'true', 'category_type' => 'consumable'])
-@include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id', 'required' => 'true'])
+@include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id'])
 @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 @include ('partials.forms.edit.model_number')
 @include ('partials.forms.edit.item_number')
@@ -27,8 +27,8 @@
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
         <div class="col-md-5">
             {{ Form::checkbox('image_delete') }}
-            <img src="{{ url('/') }}/uploads/consumables/{{ $item->image }}" />
-            {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+            <img src="{{ Storage::disk('public')->url(app('consumables_upload_path').e($item->image)) }}"  class="img-responsive" />
+            {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
         </div>
     </div>
 @endif

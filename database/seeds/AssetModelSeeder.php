@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\AssetModel;
+use Illuminate\Support\Facades\Storage;
 
 class AssetModelSeeder extends Seeder
 {
@@ -39,21 +40,30 @@ class AssetModelSeeder extends Seeder
         factory(AssetModel::class, 1)->states('ultrafine')->create(); // 17
         factory(AssetModel::class, 1)->states('ultrasharp')->create(); // 18
 
-        $src = public_path('/img/demo/models');
-        $dst =  public_path('/uploads/models');
-
-        $del_files = glob($dst."/*.*");
+        $src = public_path('/img/demo/models/');
+        $dst = 'models'.'/';
+        $del_files = Storage::files($dst);
 
         foreach($del_files as $del_file){ // iterate files
-            if(is_file($del_file))
-                unlink($del_file); // delete file
+            $file_to_delete = str_replace($src,'',$del_file);
+            \Log::debug('Deleting: '.$file_to_delete);
+            try  {
+                Storage::disk('public')->delete($dst.$del_file);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
         }
 
 
         $add_files = glob($src."/*.*");
         foreach($add_files as $add_file){
-            $file_to_copy = str_replace($src,$dst,$add_file);
-            copy($add_file, $file_to_copy);
+            $file_to_copy = str_replace($src,'',$add_file);
+            \Log::debug('Copying: '.$file_to_copy);
+            try  {
+                Storage::disk('public')->put($dst.$file_to_copy, file_get_contents($src.$file_to_copy));
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
         }
 
 

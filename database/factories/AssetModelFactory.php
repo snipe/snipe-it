@@ -33,6 +33,7 @@ $factory->state(App\Models\AssetModel::class, 'mbp-13-model', function ($faker) 
         'eol' => '36',
         'depreciation_id' => 1,
         'image' => 'mbp.jpg',
+        'fieldset_id' => 2,
     ];
 });
 
@@ -45,6 +46,7 @@ $factory->state(App\Models\AssetModel::class, 'mbp-air-model', function ($faker)
         'eol' => '36',
         'depreciation_id' => 1,
         'image' => 'macbookair.jpg',
+        'fieldset_id' => 2,
     ];
 });
 
@@ -57,6 +59,7 @@ $factory->state(App\Models\AssetModel::class, 'surface-model', function ($faker)
         'eol' => '36',
         'depreciation_id' => 1,
         'image' => 'surface.jpg',
+        'fieldset_id' => 2,
     ];
 });
 
@@ -69,6 +72,7 @@ $factory->state(App\Models\AssetModel::class, 'xps13-model', function ($faker) {
         'eol' => '36',
         'depreciation_id' => 1,
         'image' => 'xps.jpg',
+        'fieldset_id' => 2,
     ];
 });
 
@@ -81,6 +85,7 @@ $factory->state(App\Models\AssetModel::class, 'zenbook-model', function ($faker)
         'eol' => '36',
         'depreciation_id' => 1,
         'image' => 'zenbook.jpg',
+        'fieldset_id' => 2,
     ];
 });
 
@@ -93,6 +98,7 @@ $factory->state(App\Models\AssetModel::class, 'spectre-model', function ($faker)
         'eol' => '36',
         'depreciation_id' => 1,
         'image' => 'spectre.jpg',
+        'fieldset_id' => 2,
     ];
 });
 
@@ -105,6 +111,7 @@ $factory->state(App\Models\AssetModel::class, 'yoga-model', function ($faker) {
         'eol' => '36',
         'depreciation_id' => 1,
         'image' => 'yoga.png',
+        'fieldset_id' => 2,
     ];
 });
 
@@ -123,6 +130,7 @@ $factory->state(App\Models\AssetModel::class, 'macpro-model', function ($faker) 
         'eol' => '24',
         'depreciation_id' => 1,
         'image' => 'imacpro.jpg',
+        'fieldset_id' => 2,
     ];
 });
 
@@ -134,6 +142,7 @@ $factory->state(App\Models\AssetModel::class, 'lenovo-i5-model', function ($fake
         'eol' => '24',
         'depreciation_id' => 1,
         'image' => 'lenovoi5.png',
+        'fieldset_id' => 2,
     ];
 });
 
@@ -146,6 +155,7 @@ $factory->state(App\Models\AssetModel::class, 'optiplex-model', function ($faker
         'eol' => '24',
         'depreciation_id' => 1,
         'image' => 'optiplex.jpg',
+        'fieldset_id' => 2,
     ];
 });
 
@@ -224,6 +234,7 @@ $factory->state(App\Models\AssetModel::class, 'iphone6s-model', function ($faker
         'eol' => '12',
         'depreciation_id' => 3,
         'image' => 'iphone6.jpg',
+        'fieldset_id' => 1,
     ];
 });
 
@@ -235,6 +246,7 @@ $factory->state(App\Models\AssetModel::class, 'iphone7-model', function ($faker)
         'eol' => '12',
         'depreciation_id' => 1,
         'image' => 'iphone7.jpg',
+        'fieldset_id' => 1,
     ];
 });
 

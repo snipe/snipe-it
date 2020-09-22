@@ -61,6 +61,14 @@
                                 </div> <!-- end col-md-12 -->
 
                             </div> <!-- end row -->
+
+                            @if ($snipeSettings->saml_enabled)
+                            <div class="row ">
+                                <div class="col-md-12 text-right">
+                                    <a href="{{ route('saml.login')  }}">{{ trans('auth/general.saml_login')  }}</a>
+                                </div>
+                            </div>
+                            @endif
                         </div>
                         <div class="box-footer">
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>

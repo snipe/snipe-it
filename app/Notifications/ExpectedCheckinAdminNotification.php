@@ -2,14 +2,9 @@
 
 namespace App\Notifications;
 
-use App\Models\Setting;
-use App\Models\SnipeModel;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Mail;
-use Carbon\Carbon;
 
 class ExpectedCheckinAdminNotification extends Notification
 {
@@ -32,28 +27,21 @@ class ExpectedCheckinAdminNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         $notifyBy = [];
         $notifyBy[]='mail';
         return $notifyBy;
     }
 
-    public function toSlack($notifiable)
-    {
-
-    }
-
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $asset
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($params)
+    public function toMail()
     {
 
         $message = (new MailMessage)->markdown('notifications.markdown.report-expected-checkins',
@@ -67,16 +55,4 @@ class ExpectedCheckinAdminNotification extends Notification
 
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

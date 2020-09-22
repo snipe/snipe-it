@@ -98,6 +98,7 @@ class ApiAccessoriesCest
             'model_number' => $temp_accessory->model_number,
             'manufacturer_id' => $temp_accessory->manufacturer_id,
             'supplier_id' => $temp_accessory->supplier_id,
+            'image' => $temp_accessory->image,
             'qty' => $temp_accessory->qty,
         ];
 

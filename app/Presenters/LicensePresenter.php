@@ -2,9 +2,6 @@
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-use Illuminate\Support\Facades\Gate;
-
 /**
  * Class LicensePresenter
  * @package App\Presenters
@@ -101,6 +98,21 @@ class LicensePresenter extends Presenter
                 "title" => trans('general.purchase_date'),
                 'formatter' => 'dateDisplayFormatter'
             ], [
+                "field" => "maintained",
+                "searchable" => false,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/licenses/form.maintained'),
+                "formatter" => "trueFalseFormatter"
+            ], [
+                "field" => "reassignable",
+                "searchable" => false,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/licenses/form.reassignable'),
+                "formatter" => "trueFalseFormatter"
+            ],
+            [
                 "field" => "purchase_cost",
                 "searchable" => true,
                 "sortable" => true,
@@ -164,6 +176,7 @@ class LicensePresenter extends Presenter
                 "field" => "name",
                 "searchable" => false,
                 "sortable" => false,
+                "sorter"   => "numericOnly",
                 "switchable" => true,
                 "title" => trans('admin/licenses/general.seat'),
                 "visible" => true,
