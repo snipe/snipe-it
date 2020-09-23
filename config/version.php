@@ -1,5 +1,6 @@
 <?php
 return array (
+
   'app_version' => 'v5.0.0-beta-4',
   'full_app_version' => 'v5.0.0-beta-4 - build 4482-g5b68a321a',
   'build_version' => '4482',
