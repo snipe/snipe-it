@@ -157,14 +157,14 @@
 @push('js')
 
     <script nonce="{{ csrf_token() }}">
-        // Test Mail
+        // Delete barcodes
         $("#purgebarcodes").click(function(){
             $("#purgebarcodesrow").removeClass('text-success');
             $("#purgebarcodesrow").removeClass('text-danger');
             $("#purgebarcodesicon").html('');
             $("#purgebarcodesstatus").html('');
             $('#purgebarcodesstatus-error').html('');
-            $("#purgebarcodesicon").html('<i class="fa fa-spinner spin"></i> Sending Test Email...');
+            $("#purgebarcodesicon").html('<i class="fa fa-spinner spin"></i> Attempting to delete files...');
             $.ajax({
                 url: '{{ route('api.settings.purgebarcodes') }}',
                 type: 'POST',
