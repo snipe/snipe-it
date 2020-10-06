@@ -112,7 +112,7 @@
                             </div>
                         </div>
 
-                        <!-- Nule barcodes -->
+                        <!-- Nuke barcode cache -->
                         <div class="form-group">
                             <div class="col-md-3">
                                 {{ Form::label('purge_barcodes', 'Purge Barcodes') }}
