@@ -635,6 +635,11 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
         'uses' => 'SettingsController@ldapAdSettingsTest'
     ]);
 
+    Route::post('settings/purge_barcodes', [
+        'as' => 'api.settings.purgebarcodes',
+        'uses' => 'SettingsController@purgeBarcodes'
+    ]);
+
     Route::get('settings/login-attempts', [
         'middleware' => ['auth', 'authorize:superuser'],
         'as' => 'api.settings.login_attempts',
