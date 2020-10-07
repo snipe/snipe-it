@@ -19,7 +19,6 @@ return array(
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
     'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'days_without_acceptance' => 'Days Without Acceptance'
 
 );

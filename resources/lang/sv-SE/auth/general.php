@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Skicka lösenord Återställ länk',
-    'email_reset_password'			=> 'E-post Lösenord Återställ',
+    'send_password_link'	        => 'Skicka länk för lösenordsåterställning',
+    'email_reset_password'			=> 'Skicka',
     'reset_password'			    => 'Återställ lösenord',
     'login'                         => 'Logga in',
     'login_prompt'                  => 'Vänligen logga in',

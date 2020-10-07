@@ -12,5 +12,5 @@ return array(
     'submit'  	                => 'Trimiteti',
     'upload'                    => 'Incarca',
 	'select_file'				=> 'Selectați Fișier ...',
-    'select_files'				=> 'Select Files...',
+    'select_files'				=> 'Selectați fișierele',
 );

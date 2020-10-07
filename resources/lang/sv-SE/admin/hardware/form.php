@@ -22,7 +22,7 @@ return array(
     'expected_checkin'  => 'Förväntad incheckningsdatum',
     'expires'			=> 'Förfaller',
     'fully_depreciated'	=> 'Helt avskrivna',
-    'help_checkout'		=> 'Om du vill tilldela denna tillgång direkt, välj "Klar för att distribuera" från statuslistan ovan.',
+    'help_checkout'		=> 'Om du vill tilldela denna tillgång omedelbart, välj "Redo att distribuera" från statuslistan ovan. ',
     'mac_address'		=> 'MAC-adress',
     'manufacturer'		=> 'Tillverkare',
     'model'				=> 'Modell',

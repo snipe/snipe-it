@@ -21,7 +21,7 @@ return array(
     'software_user'     => 'Programvara Kontrollerad till: namn',
     'view_user'         => 'Visa användare: namn',
     'usercsv'           => 'CSV-fil',
-    'two_factor_admin_optin_help' => 'Dina nuvarande administrativa inställningar tillåter selektiv tillämpning av tvåfaktors autentisering.',
+    'two_factor_admin_optin_help' => 'Dina nuvarande administratörsinställningar tillåter selektiv tillämpning av tvåfaktorsautentisering.  ',
     'two_factor_enrolled' => '2FA-enhet inskriven',
     'two_factor_active'   => '2FA Aktiv',
     );

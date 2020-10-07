@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Στοιχείο',
     'field_format'            => 'Τύπος',
     'field_custom_format'     => 'Προσαρμοσμένος τύπος',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Το πεδίο επιτρέπει την χρήση εκφράσεων regex για επικύρωση. Πρέπει να ξεκινάει με "regex:" - για παράδειγμα, για την επικύρωση ενός προσαρμοσμένου πεδίου IMEI (15 αριθμητικά ψηφία), θα ήταν <code>regex:/^[0-9]{15}$/</code>.',
     'required'   		          => 'Απαιτείται',
     'req'   		              => 'Req.',
     'used_by_models'   		    => 'Χρησιμοποιήθηκε από τα μοντέλα',
@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => 'Νέο σύνολο πεδίων',
     'create_field'            => 'Νέο προσαρμοσμένο πεδίο',
     'value_encrypted'      	        => 'Η τιμή αυτού του πεδίου είναι κρυπτογραφημένη στη βάση δεδομένων. Μόνο οι διαχειριστές θα μπορούν να δουν την αποκρυπτογραφημένη τιμή',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Να περιλαμβάνεται η τιμή αυτού του πεδίου στα emails χρέωσης ου αποστέλονται στους χρήστες; Κρυπτογραφημένα πεδία δεν μπορούν να περιληφθούν σε emails.',
 );
