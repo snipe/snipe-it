@@ -9,10 +9,12 @@ use App\Notifications\MailTest;
 use App\Services\LdapAd;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
@@ -142,6 +144,51 @@ class SettingsController extends Controller
         return response()->json(['message' => 'Mail would have been sent, but this application is in demo mode! '], 200);
 
     }
+
+
+    /**
+     * Delete server-cached barcodes
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0.0]
+     * @return Response
+     */
+    public function purgeBarcodes()
+    {
+
+        $file_count = 0;
+        $files = Storage::disk('public')->files('barcodes');
+
+        foreach ($files as $file) { // iterate files
+
+            $file_parts = explode(".", $file);
+            $extension = end($file_parts);
+            \Log::debug($extension);
+
+            // Only generated barcodes would have a .png file extension
+            if ($extension =='png') {
+
+                \Log::debug('Deleting: '.$file);
+
+
+                try  {
+                    Storage::disk('public')->delete($file);
+                    \Log::debug('Deleting: '.$file);
+                    $file_count++;
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+                }
+            }
+
+        }
+
+        return response()->json(['message' => 'Deleted '.$file_count.' barcodes'], 200);
+
+    }
+
+
+
+
 
     /**
      * Get a list of login attempts
