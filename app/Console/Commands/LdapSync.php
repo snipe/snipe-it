@@ -197,14 +197,14 @@ class LdapSync extends Command
             } else {
                 $errors = '';
                 foreach ($user->getErrors()->getMessages() as  $error) {
-                    $errors .= $error[0];
+                    $errors .= implode(", ",$error);
                 }
-                $summary['note']   = $userMsg.' was not imported. REASON: '.$errors;
+                $summary['note']   = $snipeUser->getDN().' was not imported. REASON: '.$errors;
                 $summary['status'] = 'ERROR';
             }
         }
 
-        $summary['note'] = ($user->getOriginal('username') ? 'UPDATED' : 'CREATED');
+        // $summary['note'] = ($user->getOriginal('username') ? 'UPDATED' : 'CREATED'); // this seems, kinda, like, superfluous, relative to the $summary['note'] thing above, yeah?
         $this->summary->push($summary);
     }
 
@@ -265,7 +265,7 @@ class LdapSync extends Command
                 $this->info($msg);
             }
 
-            $this->mappedLocations = $locations->pluck('ldap_ou', 'id');
+            $this->mappedLocations = $locations->pluck('ldap_ou', 'id'); // TODO: this seems ok-ish, but the key-> value is going location_id -> OU name, and the primary action here is the opposite of that - going from OU's to location ID's.
         }
     }
 

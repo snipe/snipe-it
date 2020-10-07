@@ -248,11 +248,14 @@ class LdapAdConfiguration
      */
     private function getServerUrlBase(): array
     {
-        if ($this->ldapSettings['is_ad']) {
+        /* if ($this->ldapSettings['is_ad']) {
             return collect(explode(',', $this->ldapSettings['ad_domain']))->map(function ($item) {
                 return trim($item);
             })->toArray();
-        }
+        } */ // <- this was the *original* intent of the PR for AdLdap2, but we've been moving away from having
+             // two separate fields - one for "ldap_host" and one for "ad_domain" - towards just using "ldap_host"
+             // ad_domain for us just means "append this domain to your usernames for login, if you click that checkbox"
+             // that's all, nothing more (I hope).
 
         $url = $this->getLdapServerData('host');
         return $url ? [$url] : [];

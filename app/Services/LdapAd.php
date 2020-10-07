@@ -286,13 +286,15 @@ class LdapAd extends LdapAdConfiguration
         // Check to see if the user is in a mapped location
         if ($mappedLocations) {
             $location = $mappedLocations->filter(function ($value, $key) use ($user) {
-                if ($user->inOu($value)) {
-                    return $key;
+                //if ($user->inOu($value)) { // <----- *THIS* seems not to be working, and it seems more 'intelligent' - but it's literally just a strpos() call, and it doesn't work quite right against plain strings
+                $user_ou = substr($user->getDn(), -strlen($value)); // get the LAST chars of the user's DN, the count of those chars being the length of the thing we're checking against
+                if(strcasecmp($user_ou, $value) === 0) { // case *IN*sensitive comparision - some people say OU=blah, some say ou=blah. returns 0 when strings are identical (which is a little odd, yeah)
+                    return $key; // WARNING: we are doing a 'filter' - not a regular for-loop. So the answer(s) get "return"ed into the $location array
                 }
             });
 
             if ($location->count() > 0) {
-                $locationId = $location->keys()->first();
+                $locationId = $location->keys()->first(); // from the returned $location array from the ->filter() method above, we return the first match - there should be only one
             }
         }
 
