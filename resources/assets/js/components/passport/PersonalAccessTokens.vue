@@ -13,12 +13,9 @@
         <div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <h2>
-                            Personal Access Tokens
-                        </h2>
+                    <div class="text-right" style="display: flex; justify-content: space-between; align-items: center;">
 
-                        <a class="action-link" @click="showCreateTokenForm">
+                        <a class="btn btn-info btn-sm action-link pull-right" @click="showCreateTokenForm">
                             Create New Token
                         </a>
                     </div>
@@ -34,8 +31,8 @@
                     <table class="table table-borderless m-b-none" v-if="tokens.length > 0">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th><span class="sr-only">Delete</span></th>
+                                <th class="col-md-9">Name</th>
+                                <th class="col-md-3"><span class="sr-only">Delete</span></th>
                             </tr>
                         </thead>
 
@@ -47,9 +44,9 @@
                                 </td>
 
                                 <!-- Delete Button -->
-                                <td style="vertical-align: middle;">
-                                    <a class="action-link text-danger" @click="revoke(token)">
-                                        Delete
+                                <td style="vertical-align: middle;" class="text-right">
+                                    <a class="action-link btn btn-danger btn-sm" @click="revoke(token)">
+                                      <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>
