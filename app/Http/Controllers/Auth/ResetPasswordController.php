@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,7 @@ class ResetPasswordController extends Controller
         return [
             'token' => 'required',
             'username' => 'required',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|confirmed|'.Setting::passwordComplexityRulesSaving('update'),
         ];
     }
 
@@ -59,14 +60,17 @@ class ResetPasswordController extends Controller
     public function showResetForm(Request $request, $token = null)
     {
         return view('auth.passwords.reset')->with(
-            ['token' => $token, 'username' => $request->input('username')]
+            [
+                'token' => $token,
+                'username' => $request->input('username')
+            ]
         );
     }
 
     protected function sendResetFailedResponse(Request $request, $response)
     {
         return redirect()->back()
-            ->withInput(['username'=>$request->input('username')])
+            ->withInput(['username'=> $request->input('username')])
             ->withErrors(['username' => trans($response)]);
     }
 
