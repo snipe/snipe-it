@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Producenten blev ikke gendannet, prøv igen',
-        'success' => 'Producenten blev genoprettet med succes.'
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
     ),
 
     'delete' => array(

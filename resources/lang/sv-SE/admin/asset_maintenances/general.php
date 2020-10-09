@@ -1,10 +1,10 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Underhåll av tillgångar',
-        'edit'               => 'Redigera underhåll av tillgångar',
-        'delete'             => 'Radera underhåll av tillgång',
-        'view'               => 'Visa detaljer för underhåll av tillgångar',
+        'asset_maintenances' => 'Asset Maintenances',
+        'edit'               => 'Redigera inventarieunderhåll',
+        'delete'             => 'Radera inventarieunderhåll',
+        'view'               => 'Visa detaljer ang. inventarieunderhåll',
         'repair'             => 'Reparera',
         'maintenance'        => 'Underhåll',
         'upgrade'            => 'Uppgradera'

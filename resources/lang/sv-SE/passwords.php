@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sent'	        => 'Din lösenordslänk har skickats!',
+    'sent'	        => 'Ditt lösenord länk har skickats!',
     'user'			=> 'Ingen aktiv användare med denna e-postadress hittades.',
 ];
 

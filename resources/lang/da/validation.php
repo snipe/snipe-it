@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'Den valgte :attribute er ugyldig.',
     'numeric'              => ':attribute skal være et tal.',
     'present'              => 'Attributfeltet skal være til stede.',
-    'valid_regex'          => 'Det er ikke et validt regex. ',
+    'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => ':attribute formatet er ugyldigt.',
     'required'             => ':attribute feltet er krævet.',
     'required_if'          => ':attribute feltet er krævet når :other er :value.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute er allerede taget.',
     'uploaded'             => 'Attributtet kunne ikke uploades.',
     'url'                  => ':attribute formatet er ugyldigt.',
-    "unique_undeleted"     => ":attribute skal være unik.",
+    "unique_undeleted"     => "The :attribute must be unique.",
 
     /*
     |--------------------------------------------------------------------------

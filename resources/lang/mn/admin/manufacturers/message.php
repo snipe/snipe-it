@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Үйлдвэрлэгч сэргэгдээгүй тул дахин оролдоно уу',
-        'success' => 'Үйлдвэрлэгч амжилттай сэргээгдсэн.'
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
     ),
 
     'delete' => array(

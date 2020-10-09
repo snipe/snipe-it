@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'a_user_canceled' => 'Un utente ha annullato una richiesta di articolo sul sito web',
-    'a_user_requested' => 'Un utente ha richiesto un elemento tramite il sito web',
+    'a_user_canceled' => 'Un utente ha annullato una richiesta di elemento sul sito web',
+    'a_user_requested' => 'Un utente ha richiesto un elemento sul sito web',
     'accessory_name' => 'Nome accessorio:',
     'additional_notes' => 'Note aggiuntive:',
     'admin_has_created' => 'Un amministratore ha creato un account per il tuo sito web: web.',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'Questo è un test del Snipe-IT Asset Management System. Se hai questo, la posta è in funzione :)',
     'the_following_item' => 'La seguente voce è stata selezionata:',
     'low_inventory_alert' => 'C\'è :count elemento che è al di sotto del livello di scorta minima o lo sarà a breve. |Ci sono :count elementi che sono al di sotto del livello di scorta minima o lo saranno a breve.',
-    'assets_warrantee_alert' => 'C\'è :count bene con una garanzia in scadenza tra :threshold giorni.|Ci sono :count beni che hanno le garanzie in scandenza tra :threshold giorni.',
+    'assets_warrantee_alert' => 'Tra :threshold giorni è in scadenza la garanzia per :count bene. |Tra :threshold giorni sono in scadenza le garanzie per :count beni.',
     'license_expiring_alert' => 'Tra :threshold giorni sta per scadere :count licenza. |Tra :threshold giorni stanno per scadere :count licenze.',
     'to_reset' => 'Per reimpostare la tua password web, compila questo modulo:',
     'type' => 'Tipo',

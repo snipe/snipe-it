@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Ο κατασκευαστής δεν αποκαταστάθηκε. Δοκιμάστε ξανά',
-        'success' => 'Ο κατασκευαστής δημιουργήθηκε με επιτυχία.'
+        'error'   => 'Manufacturer was not restored, please try again',
+        'success' => 'Manufacturer restored successfully.'
     ),
 
     'delete' => array(
