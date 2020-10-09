@@ -31,12 +31,12 @@
 
                                     <input type="hidden" name="token" value="{{ $token }}">
 
-                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                        <label class="col-md-4 control-label" for="email">{{ trans('admin/users/table.email')  }}</label>
+                                    <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                                        <label class="col-md-4 control-label" for="username">{{ trans('admin/users/table.username')  }}</label>
 
                                         <div class="col-md-6">
-                                            <input type="email" class="form-control" name="email" maxlength="250" value="{{ $email or old('email') }}" aria-label="email">
-                                            {!! $errors->first('email', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                            <input type="username" class="form-control" name="username" maxlength="250" value="{{  old('username', $username) }}" aria-label="username">
+                                            {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
 
                             </div>
                         </div>
