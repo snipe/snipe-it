@@ -63,8 +63,15 @@ class LdapAd extends LdapAdConfiguration
 
         parent::init();
         if($this->isLdapEnabled()) {
-            $this->ldapConfig['account_prefix'] = $this->ldapSettings['ldap_auth_filter_query'];
-            $this->ldapConfig['account_suffix'] = ','.$this->ldapConfig['base_dn'];
+            if($this->ldapSettings['is_ad'] == 0 ) { //only for NON-AD setups!
+                $this->ldapConfig['account_prefix'] = $this->ldapSettings['ldap_auth_filter_query'];
+                $this->ldapConfig['account_suffix'] = ','.$this->ldapConfig['base_dn'];
+            } /*
+            To the point mentioned in ldapLogin(), we might want to add an 'else' clause here that
+            sets up an 'account_suffix' of '@'.$this->ldapSettings['ad_domain'] *IF* the user has
+            $this->ldapSettings['ad_append_domain'] enabled.
+            That code in ldapLogin gets simplified, in exchange for putting all the weirdness here only.
+            */
             $this->ldap = new Adldap();
             $this->ldap->addProvider($this->ldapConfig);
             return true;
@@ -92,11 +99,13 @@ class LdapAd extends LdapAdConfiguration
      */
     public function ldapLogin(string $username, string $password): User
     {
-        if ($this->ldapSettings['ad_append_domain']) {
-            $username .= '@' . $this->ldapSettings['ad_domain'];
+        if ($this->ldapSettings['ad_append_domain']) { //if you're using 'userprincipalname', don't check the ad_append_domain checkbox
+            $login_username = $username . '@' . $this->ldapSettings['ad_domain']; // I feel like could can be solved with the 'suffix' feature? Then this would be easier.
+        } else {
+            $login_username = $username;
         }
 
-        if ($this->ldap->auth()->attempt($username, $password, true) === false) {
+        if ($this->ldap->auth()->attempt($login_username, $password, true) === false) {
             throw new Exception('Unable to validate user credentials!');
         }    
 
