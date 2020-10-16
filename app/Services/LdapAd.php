@@ -446,7 +446,7 @@ class LdapAd extends LdapAdConfiguration
     public function testLdapAdUserConnection(): void
     {
         try {
-            $this->ldap->connect(); //uh, this doesn't seem to exist :/
+            $this->ldap->connect();
         } catch (\Adldap\Auth\BindException $e) {
             Log::error($e);
             throw new Exception('Unable to connect to LDAP directory!');
