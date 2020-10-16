@@ -28,8 +28,9 @@ class PassportUpgrade extends Migration
     public function down()
     {
         if (Schema::hasTable('oauth_clients')) {
-            Schema::table('oauth_clients', function (Blueprint $table) {
-                $table->string('secret', 100)->change();
+            Schema::table('oauth_clients', function(Blueprint $table)
+            {
+                $table->dropColumn('secret');
             });
         }
     }
