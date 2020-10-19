@@ -1,5 +1,5 @@
 {
-    "/js/build/app.js": "/js/build/app.js?id=59a0bef2700228bfcb09",
+    "/js/build/app.js": "/js/build/app.js?id=fc54bb0c7977c14f519b",
     "/css/build/AdminLTE.css": "/css/build/AdminLTE.css?id=59413334823616b81341",
     "/css/build/app.css": "/css/build/app.css?id=032fd8c3fce99c7fd862",
     "/css/build/overrides.css": "/css/build/overrides.css?id=0b4aefd7ef0c117ef23a",
@@ -18,9 +18,9 @@
     "/css/dist/skins/skin-blue-dark.css": "/css/dist/skins/skin-blue-dark.css?id=2f665cf40d7348b3f94c",
     "/css/dist/skins/skin-orange-dark.css": "/css/dist/skins/skin-orange-dark.css?id=71c178700d68294e3413",
     "/css/dist/skins/skin-orange.css": "/css/dist/skins/skin-orange.css?id=b4fc4a74e1f6367dc3e2",
-    "/css/dist/all.css": "/css/dist/all.css?id=23029d15778815d3c35a",
-    "/css/blue.png": "/css/blue.png?id=4c85d6a97173123bd14a",
-    "/css/blue@2x.png": "/css/blue@2x.png?id=62c67c6a822439e8a4ac",
+    "/css/dist/all.css": "/css/dist/all.css?id=6e3b75006f2b19d69f37",
+    "/css/blue.png": "/css/blue.png?id=e83a6c29e04fe851f212",
+    "/css/blue@2x.png": "/css/blue@2x.png?id=51135dd4d24f88f5de0b",
     "/css/dist/skins/skin-green-dark.min.css": "/css/dist/skins/skin-green-dark.min.css?id=0cfa39cacd9c83b4f53b",
     "/css/dist/skins/skin-black-dark.min.css": "/css/dist/skins/skin-black-dark.min.css?id=6bd9c2420a41eaf96f0b",
     "/css/dist/skins/skin-blue-dark.min.css": "/css/dist/skins/skin-blue-dark.min.css?id=2f665cf40d7348b3f94c",
@@ -31,8 +31,8 @@
     "/css/dist/skins/skin-contrast.min.css": "/css/dist/skins/skin-contrast.min.css?id=d7996d850e8bcdc4e167",
     "/css/dist/signature-pad.css": "/css/dist/signature-pad.css?id=6a89d3cd901305e66ced",
     "/css/build/signature-pad.min.css": "/css/build/signature-pad.min.css?id=d41d8cd98f00b204e980",
-    "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=a534edb9f7179f6dcf62",
-    "/js/build/vendor.js": "/js/build/vendor.js?id=ac70ab5fd89efc2aa7d0",
-    "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=9407782198cbc29f23d1",
-    "/js/dist/all.js": "/js/dist/all.js?id=8a05165e62950089cb29"
+    "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=1e77fde04b3f42432581",
+    "/js/build/vendor.js": "/js/build/vendor.js?id=aff75d5aad5e7b429723",
+    "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=58d95c93430f2ae33392",
+    "/js/dist/all.js": "/js/dist/all.js?id=0a2c2c95ab18fa16faa1"
 }
