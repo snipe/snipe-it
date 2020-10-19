@@ -237,8 +237,17 @@ class LdapAd extends LdapAdConfiguration
      */
     private function isLdapSync(AdldapUser $user): bool
     {
-        return (false == $this->ldapSettings['ldap_active_flag'])
-            || ('true' == strtolower($user->{$this->ldapSettings['ldap_active_flag']}[0]));
+        if ( !$this->ldapSettings['ldap_active_flag']) {
+            return true; // always sync if you didn't define an 'active' flag
+        }
+       
+        if ( $user->{$this->ldapSettings['ldap_active_flag']} &&                           // if your LDAP user has the aforementioned flag as an attribute *AND* 
+             count($user->{$this->ldapSettings['ldap_active_flag']}) == 1 &&               // if that attribute has exactly one value *AND* 
+             strtolower($user->{$this->ldapSettings['ldap_active_flag']}[0]) == 'false') { // that value is the string 'false' (regardless of case), 
+            return false;                                                                  // then your user is *INACTIVE* - return false
+        }
+        // otherwise, return true
+        return true;
     }
 
     /**
