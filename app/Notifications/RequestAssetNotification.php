@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Helpers\Helper;
 use App\Models\Setting;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
@@ -28,7 +29,7 @@ class RequestAssetNotification extends Notification
         $this->note = '';
         $this->last_checkout = '';
         $this->expected_checkin = '';
-        $this->requested_date = \App\Helpers\Helper::getFormattedDateObject($params['requested_date'], 'datetime',
+        $this->requested_date = Helper::getFormattedDateObject($params['requested_date'], 'datetime',
             false);
         $this->settings = Setting::getSettings();
 
@@ -37,12 +38,12 @@ class RequestAssetNotification extends Notification
         }
 
         if ($this->item->last_checkout) {
-            $this->last_checkout = \App\Helpers\Helper::getFormattedDateObject($this->item->last_checkout, 'date',
+            $this->last_checkout = Helper::getFormattedDateObject($this->item->last_checkout, 'date',
                 false);
         }
 
         if ($this->item->expected_checkin) {
-            $this->expected_checkin = \App\Helpers\Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
+            $this->expected_checkin = Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
                 false);
         }
 
@@ -73,8 +74,6 @@ class RequestAssetNotification extends Notification
 
     public function toSlack()
     {
-
-
         $target = $this->target;
         $qty = $this->item_quantity;
         $item = $this->item;
@@ -98,7 +97,6 @@ class RequestAssetNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail()
@@ -127,8 +125,6 @@ class RequestAssetNotification extends Notification
 
 
         return $message;
-
-
     }
 
 }

@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\Consumable;
-use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\Helper;
+use App\Models\Consumable;
 use Gate;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class ConsumablesTransformer
 {
@@ -23,7 +24,7 @@ class ConsumablesTransformer
         $array = [
             'id'            => (int) $consumable->id,
             'name'          => e($consumable->name),
-            'image' =>   ($consumable->image) ? e(url('/').'/uploads/consumables/'.e($consumable->image)) : null,
+            'image' =>   ($consumable->image) ? Storage::disk('public')->url('consumables/'.e($consumable->image)) : null,
             'category'      => ($consumable->category) ? ['id' => $consumable->category->id, 'name' => e($consumable->category->name)] : null,
             'company'   => ($consumable->company) ? ['id' => (int) $consumable->company->id, 'name' => e($consumable->company->name)] : null,
             'item_no'       => e($consumable->item_no),
@@ -47,10 +48,10 @@ class ConsumablesTransformer
         }
 
         $permissions_array['available_actions'] = [
-            'checkout' => Gate::allows('checkout', Consumable::class) ? true : false,
-            'checkin' => Gate::allows('checkin', Consumable::class) ? true : false,
-            'update' => Gate::allows('update', Consumable::class) ? true : false,
-            'delete' => Gate::allows('delete', Consumable::class) ? true : false,
+            'checkout' => Gate::allows('checkout', Consumable::class),
+            'checkin' => Gate::allows('checkin', Consumable::class),
+            'update' => Gate::allows('update', Consumable::class),
+            'delete' => Gate::allows('delete', Consumable::class),
         ];
         $array += $permissions_array;
         return $array;

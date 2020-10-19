@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
-use phpDocumentor\Reflection\Types\Integer;
-use Gate;
 use App\Helpers\Helper;
+use App\Models\User;
+use Gate;
+use Illuminate\Database\Eloquent\Collection;
 
 class UsersTransformer
 {
@@ -67,10 +66,10 @@ class UsersTransformer
             ];
 
         $permissions_array['available_actions'] = [
-            'update' => (Gate::allows('update', User::class) && ($user->deleted_at==''))  ? true : false,
-            'delete' => (Gate::allows('delete', User::class) && ($user->deleted_at=='') && ($user->assets_count == 0) && ($user->licenses_count == 0)  && ($user->accessories_count == 0)  && ($user->consumables_count == 0)) ? true : false,
+            'update' => (Gate::allows('update', User::class) && ($user->deleted_at=='')),
+            'delete' => (Gate::allows('delete', User::class) && ($user->assets_count == 0) && ($user->licenses_count == 0)  && ($user->accessories_count == 0)  && ($user->consumables_count == 0)),
             'clone' => (Gate::allows('create', User::class) && ($user->deleted_at=='')) ,
-            'restore' => (Gate::allows('create', User::class) && ($user->deleted_at!='')) ? true : false,
+            'restore' => (Gate::allows('create', User::class) && ($user->deleted_at!='')),
         ];
 
         $array += $permissions_array;
@@ -99,9 +98,5 @@ class UsersTransformer
     public function transformUsersDatatable($users) {
         return (new DatatablesTransformer)->transformDatatables($users);
     }
-
-
-
-
 
 }

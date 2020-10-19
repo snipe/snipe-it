@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-
 class ExpiringLicenseNotification extends Notification
 {
     use Queueable;
@@ -32,16 +31,11 @@ class ExpiringLicenseNotification extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         $notifyBy = [];
         $notifyBy[]='mail';
         return $notifyBy;
-    }
-
-    public function toSlack($notifiable)
-    {
-
     }
 
     /**
@@ -50,7 +44,7 @@ class ExpiringLicenseNotification extends Notification
      * @param  mixed  $asset
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($params)
+    public function toMail()
     {
 
         $message = (new MailMessage)->markdown('notifications.markdown.report-expiring-licenses',
@@ -65,16 +59,4 @@ class ExpiringLicenseNotification extends Notification
 
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

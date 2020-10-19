@@ -222,7 +222,7 @@
 
     @if (($supplier->state!='') && ($supplier->country!='') && (config('services.google.maps_api_key')))
       <div class="col-md-12 text-center" style="padding-bottom: 20px;">
-        <img src="https://maps.googleapis.com/maps/api/staticmap?center={{ urlencode($supplier->city.','.$supplier->city.' '.$supplier->state.' '.$supplier->country.' '.$supplier->zip) }}&size=500x300&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-responsive img-thumbnail" alt="Map">
+        <img src="https://maps.googleapis.com/maps/api/staticmap?markers={{ urlencode($supplier->address.','.$supplier->city.' '.$supplier->state.' '.$supplier->country.' '.$supplier->zip) }}&size=500x300&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-responsive img-thumbnail" alt="Map">
       </div>
     @endif
 
@@ -278,7 +278,7 @@
     </ul>
       @if ($supplier->image!='')
         <div class="col-md-12 text-center" style="padding-bottom: 20px;">
-          <img src="{{ app('suppliers_upload_url') }}/{{ $supplier->image }}" class="img-responsive img-thumbnail" alt="{{ $supplier->name }}">
+          <img src="{{ Storage::disk('public')->url(app('suppliers_upload_url').e($supplier->image)) }}" class="img-responsive img-thumbnail" alt="{{ $supplier->name }}">
         </div>
       @endif
 

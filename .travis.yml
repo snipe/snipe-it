@@ -14,13 +14,10 @@ services:
 
 # list any PHP version you want to test against
 php:
-  - 7.1.2
   - 7.2
-  - 7.3
+  - 7.3.0
+  - 7.4
 
-matrix:
-  allow_failures:
-    - php: 7.3
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
@@ -31,6 +28,7 @@ before_script:
   - mysql -e 'CREATE USER "travis'@'localhost";'
   - mysql -e 'GRANT ALL PRIVILEGES ON * . * TO "travis'@'localhost";'
   - mysql -e 'FLUSH PRIVILEGES;'
+  - cp .env.testing-ci .env
   - composer self-update
   - composer install -n --prefer-source
   - chmod -R 777 storage

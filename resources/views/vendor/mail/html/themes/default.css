@@ -105,6 +105,7 @@ img {
 .header {
     padding: 25px 0;
     text-align: center;
+    font-size: 20px;
 }
 
 .header a {
@@ -186,8 +187,8 @@ img {
 .table td {
     color: #74787E;
     font-size: 15px;
-    line-height: 18px;
-    padding: 10px 0;
+    line-height: 15px;
+    padding: 8px 0;
 }
 
 .content-cell {
@@ -282,3 +283,16 @@ img {
     font-size: 15px;
     text-align: center;
 }
+
+.logo-text {
+    max-width: 150px;
+    max-height: 150px;
+    vertical-align:middle;
+}
+
+.logo-only {
+    max-width: 640px;
+    max-height: 150px;
+    vertical-align:middle;
+}
+

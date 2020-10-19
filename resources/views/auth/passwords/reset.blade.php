@@ -32,11 +32,11 @@
                                     <input type="hidden" name="token" value="{{ $token }}">
 
                                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                                        <label class="col-md-4 control-label" for="username">{{ trans('admin/users/table.username')  }}</label>
+                                        <label class="col-md-4 control-label">{{ trans('admin/users/table.username')  }}</label>
 
                                         <div class="col-md-6">
-                                            <input type="username" class="form-control" name="username" maxlength="250" value="{{  old('username', $username) }}" aria-label="username">
-                                            {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                            <input type="text" class="form-control" name="username" value="{{ old('username', $username) }}">
+                                            {!! $errors->first('username', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
 
                             </div>
                         </div>

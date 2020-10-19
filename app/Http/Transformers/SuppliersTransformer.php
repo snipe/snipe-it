@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\Supplier;
-use Illuminate\Database\Eloquent\Collection;
-use Gate;
 use App\Helpers\Helper;
+use App\Models\Supplier;
+use Gate;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class SuppliersTransformer
 {
@@ -25,17 +26,18 @@ class SuppliersTransformer
             $array = [
                 'id' => (int) $supplier->id,
                 'name' => e($supplier->name),
-                'image' =>   ($supplier->image) ? app('suppliers_upload_url').e($supplier->image) : null,
-                'address' => ($supplier->address) ? e($supplier->address) : null,
-                'address2' => ($supplier->address2) ? e($supplier->address2) : null,
-                'city' => ($supplier->city) ? e($supplier->city) : null,
-                'state' => ($supplier->state) ? e($supplier->state) : null,
-                'country' => ($supplier->country) ? e($supplier->country) : null,
-                'zip' => ($supplier->zip) ? e($supplier->zip) : null,
-                'fax' => ($supplier->fax) ? e($supplier->fax) : null,
-                'phone' => ($supplier->phone) ? e($supplier->phone) : null,
-                'email' => ($supplier->email) ? e($supplier->email) : null,
-                'contact' => ($supplier->contact) ? e($supplier->contact) : null,
+                'image' =>   ($supplier->image) ? Storage::disk('public')->url('suppliers/'.e($supplier->image)) : null,
+                'url' => e($supplier->url),
+                'address' => e($supplier->address),
+                'address2' => e($supplier->address2),
+                'city' => e($supplier->city),
+                'state' => e($supplier->state),
+                'country' => e($supplier->country),
+                'zip' => e($supplier->zip),
+                'fax' => e($supplier->fax),
+                'phone' => e($supplier->phone),
+                'email' => e($supplier->email),
+                'contact' => e($supplier->contact),
                 'assets_count' => (int) $supplier->assets_count,
                 'accessories_count' => (int) $supplier->accessories_count,
                 'licenses_count' => (int) $supplier->licenses_count,
@@ -46,8 +48,8 @@ class SuppliersTransformer
             ];
 
             $permissions_array['available_actions'] = [
-                'update' => Gate::allows('update', Supplier::class) ? true : false,
-                'delete' => (Gate::allows('delete', Supplier::class) && ($supplier->assets_count == 0) && ($supplier->licenses_count == 0)  && ($supplier->accessories_count == 0)) ? true : false,
+                'update' => Gate::allows('update', Supplier::class),
+                'delete' => (Gate::allows('delete', Supplier::class) && ($supplier->assets_count == 0) && ($supplier->licenses_count == 0)  && ($supplier->accessories_count == 0)),
             ];
 
             $array += $permissions_array;

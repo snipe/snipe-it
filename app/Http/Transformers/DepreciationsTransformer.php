@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\Depreciation;
-use Illuminate\Database\Eloquent\Collection;
-use Gate;
 use App\Helpers\Helper;
+use App\Models\Depreciation;
+use Gate;
+use Illuminate\Database\Eloquent\Collection;
 
 class DepreciationsTransformer
 {
@@ -29,8 +29,8 @@ class DepreciationsTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'update' => Gate::allows('update', Depreciation::class) ? true : false,
-            'delete' => Gate::allows('delete', Depreciation::class) ? true : false,
+            'update' => Gate::allows('update', Depreciation::class),
+            'delete' => Gate::allows('delete', Depreciation::class),
         ];
 
         $array += $permissions_array;

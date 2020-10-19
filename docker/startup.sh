@@ -56,3 +56,10 @@ then
 fi
 
 exec supervisord -c /supervisord.conf
+
+php artisan migrate --force
+php artisan config:clear
+php artisan config:cache
+
+. /etc/apache2/envvars
+exec apache2 -DNO_DETACH < /dev/null

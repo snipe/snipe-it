@@ -42,21 +42,18 @@ class ItemImportRequest extends FormRequest
         $import->field_map  = request('column-mappings');
         $import->save();
         $fieldMappings=[];
-        if ($import->field_map) {
 
-            // This checks to make sure the field header has been mapped.
-            // If it hasn't been, it will throw an array_flip error
+        if ($import->field_map) {
             foreach ($import->field_map as $field => $fieldValue) {
                 $errorMessage = null;
 
                 if(is_null($fieldValue)){
-                    $errorMessage = 'All import fields must be mapped.';
+                    $errorMessage = trans('validation.import_field_empty');
                     $this->errorCallback($import, $field, $errorMessage);
-
+                    
                     return $this->errors;
                 }
             }
-
             // We submit as csv field: column, but the importer is happier if we flip it here.
             $fieldMappings = array_change_key_case(array_flip($import->field_map), CASE_LOWER);
                         // dd($fieldMappings);

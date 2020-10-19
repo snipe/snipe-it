@@ -42,7 +42,7 @@ class UsersCest
         $I->fillField('password', '12345');
         $I->click('Save');
         $I->seeElement('.alert-danger');
-        $I->see('The password must be at least 10 characters', '.alert-msg');
+        $I->see('The password must be at least 8 characters', '.alert-msg');
 
     }
     public function passesCorrectValidation(FunctionalTester $I)

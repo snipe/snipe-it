@@ -1,0 +1,260 @@
+---
+- name: Set up local server
+  hosts: all
+  remote_user: vagrant
+  become_user: root
+  become_method: sudo
+  vars:
+    - ansible_python_interpreter: /usr/local/bin/python2.7
+  gather_facts: no
+
+# Tasks    
+  tasks:
+
+    #
+    # Update the PKG database
+    #
+    - name: Upgrade PKG database
+      raw: sudo pkg upgrade -y  
+
+    #
+    # Mount the shared folders
+    #
+    - name: Update Vagrant Shared Folders
+      command:  "{{ item }}"
+      with_items:
+        - sysrc rpc_lockd_enable=YES
+        - sysrc rpc_statd_enable=YES
+      become: true   
+
+    #
+    # Install required utilities
+    #
+    - name: Install Utilities
+      pkgng:
+        name: "{{ item }}"
+        state: present 
+      with_items: 
+        - openssl
+        - node
+        - npm
+        - git
+        - nano
+        - wget
+        - bash
+      become: true          
+
+    #
+    # Install php and php dependancies
+    #
+    - name: Install PHP dependancies
+      pkgng:
+        name: "{{ item }}"
+        state: present
+      with_items: 
+        - php72
+        - php72-zip    
+        - php72-zlib   
+        - php72-extensions 
+        - php72-mbstring 
+        - php72-openssl 
+        # - php72-mysqli 
+        - php72-curl 
+        - php72-soap 
+        - php72-pdo_mysql 
+        # - php72-pdo_pgsql
+        - php72-ldap
+        - php72-curl
+        - php72-fileinfo
+        - php72-bcmath
+        - php72-gd
+      become: true
+
+    #
+    # Create a php.ini file
+    #
+    - name: PHP INI check
+      stat:
+        path: /usr/local/etc/php.ini
+      register: php_ini_exits
+
+    - name: Create PHP ini
+      command: cp /usr/local/etc/php.ini-development /usr/local/etc/php.ini
+      become: true
+      when: not php_ini_exits.stat.exists
+
+    - name: Enable PHP-FPM auto-start
+      command: sysrc php_fpm_enable=YES
+      become: true
+
+    - name: Start PHP-FPM service
+      service:
+        name: php-fpm
+        state: started
+      become: true   
+
+    #
+    # Install the lastest version of composer
+    #
+    - name: Composer check
+      stat:
+        path: /usr/local/bin/composer
+      register: composer_exits
+
+    - name: Install Composer
+      shell: |
+        EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig)
+        php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+        ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');")
+
+        if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
+        then
+            >&2 echo 'ERROR: Invalid installer signature'
+            rm composer-setup.php
+            exit 1
+        fi
+
+        php composer-setup.php --quiet
+        RESULT=$?
+        rm composer-setup.php
+        mv composer.phar /usr/local/bin/composer
+        exit $RESULT
+      when: not composer_exits.stat.exists
+      become: true
+
+    #
+    # Install MySQL Server
+    
+    - name: Install MySQL 5.7
+      pkgng:
+        name: mysql57-server
+        state: present
+      become: true    
+      register: sql_server
+
+    - name: Start MySQL server
+      service:
+        name: mysql-server
+        state: started
+      become: true 
+
+    - name: MySQL 5.7 auto-start
+      command: sysrc mysql_enable=YES
+      become: true
+      when: sql_server.changed == true
+      
+    - name: Get MySQL root password
+      command: tail -1 /root/.mysql_secret
+      register: myql_root_pwd
+      become: true 
+      when: sql_server.changed == true
+
+    - name: Change MySQL root password
+      command: mysqladmin -u root -p'{{myql_root_pwd.stdout}}' password vagrant
+      when: sql_server.changed == true
+
+    - name: Enable remote mysql
+      replace:
+        path: /usr/local/etc/mysql/my.cnf
+        regexp: "127.0.0.1"
+        replace: "0.0.0.0" 
+      become: true         
+      when: sql_server.changed == true 
+
+    - name: Grant user vagrant privelages
+      shell: mysql -u root -pvagrant -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'vagrant' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+      become: true 
+      when: sql_server.changed == true
+      ignore_errors: true
+
+    - name: Restart MySQL server
+      service:
+        name: mysql-server
+        state: restarted
+      become: true          
+
+
+    #  
+    # Install Apache Web Server
+    #
+    - name: Install Apache 2.4
+      pkgng:
+        name: apache24
+        state: present
+      become: true    
+      register: apache24_server     
+
+    - name: Apache 2.4 auto-start
+      command: sysrc apache24_enable=YES
+      become: true
+      when: apache24_server.changed == true 
+
+    - name: Enable Apache modules
+      replace:
+        path: /usr/local/etc/apache24/httpd.conf
+        regexp: "#{{ item }}"
+        replace: "{{ item }}" 
+      become: true 
+      with_items: 
+        - LoadModule rewrite_module libexec/apache24/mod_rewrite.so
+        - LoadModule vhost_alias_module libexec/apache24/mod_vhost_alias.so
+        - LoadModule deflate_module libexec/apache24/mod_deflate.so
+        - LoadModule expires_module libexec/apache24/mod_expires.so
+        - LoadModule mpm_worker_module libexec/apache24/mod_mpm_worker.so
+        - LoadModule proxy_fcgi_module libexec/apache24/mod_proxy_fcgi.so
+        - LoadModule proxy_module libexec/apache24/mod_proxy.so      
+        - Include etc/apache24/extra/httpd-vhosts.conf
+      when: apache24_server.changed == true  
+
+    - name: Disable Apache modules
+      replace:
+        path: /usr/local/etc/apache24/httpd.conf
+        regexp: "{{ item }}"
+        replace: "#{{ item }}" 
+      become: true 
+      with_items: 
+        - LoadModule mpm_prefork_module libexec/apache24/mod_mpm_prefork.so
+      when: apache24_server.changed == true            
+
+    - name: Backup vhosts
+      command: cp /usr/local/etc/apache24/extra/httpd-vhosts.conf /usr/local/etc/apache24/extra/httpd-vhosts.conf.bak
+      become: true
+      when: apache24_server.changed == true 
+
+    - name: Truncate vhosts
+      command: truncate -s 0 /usr/local/etc/apache24/extra/httpd-vhosts.conf
+      become: true
+      when: apache24_server.changed == true 
+
+    - name: Set up vhost
+      blockinfile:
+        path: "/usr/local/etc/apache24/extra/httpd-vhosts.conf"    
+        block: |
+          <VirtualHost *>
+              DocumentRoot /usr/local/www/apache24/data/public
+              ServerName vagrant.app              
+              ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/usr/local/www/apache24/data/public/$1
+              DirectoryIndex /index.php index.php
+              <Directory /usr/local/www/apache24/data/public>
+                  Options -Indexes +FollowSymLinks
+                  AllowOverride All
+                  Require all granted
+              </Directory>
+            </VirtualHost>
+      become: true
+      when: apache24_server.changed == true 
+
+    - name: Map apache dir to local folder
+      shell: |
+        if ! [ -L /var/www ]; then
+          rm -rf /usr/local/www/apache24/data;
+          ln -fs /vagrant /usr/local/www/apache24/data;
+        fi
+      become: true
+      when: apache24_server.changed == true
+
+    - name: Start Apache 2.4 server
+      service:
+        name: apache24
+        state: started
+      become: true     

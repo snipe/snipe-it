@@ -2,21 +2,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
-use App\Models\Category as Category;
-use App\Models\Company;
-use App\Models\CustomField;
-use App\Models\Setting;
-use Auth;
-use DB;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Input;
-use Lang;
-use Redirect;
-use Str;
-use View;
-use Image;
 use App\Http\Requests\ImageUploadRequest;
+use App\Models\Category as Category;
+use Auth;
+use Illuminate\Support\Facades\Storage;
+use Str;
 
 /**
  * This class controls all actions related to Categories for
@@ -29,13 +19,14 @@ class CategoriesController extends Controller
 {
 
     /**
-    * Returns a view that invokes the ajax tables which actually contains
-    * the content for the categories listing, which is generated in getDatatable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CategoriesController::getDatatable() method that generates the JSON response
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the categories listing, which is generated in getDatatable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see CategoriesController::getDatatable() method that generates the JSON response
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
@@ -46,30 +37,32 @@ class CategoriesController extends Controller
 
 
     /**
-    * Returns a form view to create a new category.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CategoriesController::store() method that stores the data
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a form view to create a new category.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see CategoriesController::store() method that stores the data
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
         // Show the page
         $this->authorize('create', Category::class);
-         $category_types= Helper::categoryTypeList();
         return view('categories/edit')->with('item', new Category)
-            ->with('category_types', $category_types);
+            ->with('category_types', Helper::categoryTypeList());
     }
 
 
     /**
-    * Validates and stores the new category data.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CategoriesController::create() method that makes the form.
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Validates and stores the new category data.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see CategoriesController::create() method that makes the form.
+     * @since [v1.0]
+     * @param ImageUploadRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ImageUploadRequest $request)
     {
@@ -83,8 +76,7 @@ class CategoriesController extends Controller
         $category->checkin_email        = $request->input('checkin_email', '0');
         $category->user_id              = Auth::id();
 
-        $category = $request->handleImages($category,600, public_path().'/uploads/categories');
-
+        $category = $request->handleImages($category);
         if ($category->save()) {
             return redirect()->route('categories.index')->with('success', trans('admin/categories/message.create.success'));
         }
@@ -93,24 +85,23 @@ class CategoriesController extends Controller
     }
 
     /**
-    * Returns a view that makes a form to update a category.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CategoriesController::postEdit() method saves the data
-    * @param int $categoryId
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that makes a form to update a category.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see CategoriesController::postEdit() method saves the data
+     * @param int $categoryId
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($categoryId = null)
     {
-        $this->authorize('edit', Category::class);
+        $this->authorize('update', Category::class);
         if (is_null($item = Category::find($categoryId))) {
             return redirect()->route('categories.index')->with('error', trans('admin/categories/message.does_not_exist'));
         }
-        $category_types= Helper::categoryTypeList();
-
         return view('categories/edit', compact('item'))
-        ->with('category_types', $category_types);
+        ->with('category_types', Helper::categoryTypeList());
     }
 
 
@@ -119,14 +110,15 @@ class CategoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @see CategoriesController::getEdit() method that makes the form.
-     * @param Request $request
+     * @param ImageUploadRequest $request
      * @param int $categoryId
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v1.0]
      */
     public function update(ImageUploadRequest $request, $categoryId = null)
     {
-        $this->authorize('edit', Category::class);
+        $this->authorize('update', Category::class);
         if (is_null($category = Category::find($categoryId))) {
             // Redirect to the categories management page
             return redirect()->to('admin/categories')->with('error', trans('admin/categories/message.does_not_exist'));
@@ -142,12 +134,8 @@ class CategoriesController extends Controller
         $category->require_acceptance   = $request->input('require_acceptance', '0');
         $category->checkin_email        = $request->input('checkin_email', '0');
 
-        // Set the model's image property to null if the image is being deleted
-        if ($request->input('image_delete') == 1) {
-            $category->image = null;
-        }
 
-        $category = $request->handleImages($category,600, public_path().'/uploads/categories');
+        $category = $request->handleImages($category);
 
         if ($category->save()) {
             // Redirect to the new category page
@@ -158,31 +146,27 @@ class CategoriesController extends Controller
     }
 
     /**
-    * Validates and marks a category as deleted.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @since [v1.0]
-    * @param int $categoryId
-    * @return \Illuminate\Http\RedirectResponse
+     * Validates and marks a category as deleted.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @param int $categoryId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($categoryId)
     {
         $this->authorize('delete', Category::class);
         // Check if the category exists
-        if (is_null($category = Category::find($categoryId))) {
+        if (is_null($category = Category::findOrFail($categoryId))) {
             return redirect()->route('categories.index')->with('error', trans('admin/categories/message.not_found'));
         }
 
-        if ($category->has_models() > 0) {
-            return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'model']));
-        } elseif ($category->accessories()->count() > 0) {
-                return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'accessory']));
-        } elseif ($category->consumables()->count() > 0) {
-                return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'consumable']));
-        } elseif ($category->components()->count() > 0) {
-                return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'component']));
+        if (!$category->isDeletable()) {
+            return redirect()->route('categories.index')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=> $category->category_type ]));
         }
 
+        Storage::disk('public')->delete('categories'.'/'.$category->image);
         $category->delete();
         // Redirect to the locations management page
         return redirect()->route('categories.index')->with('success', trans('admin/categories/message.delete.success'));
@@ -190,14 +174,15 @@ class CategoriesController extends Controller
 
 
     /**
-    * Returns a view that invokes the ajax tables which actually contains
-    * the content for the categories detail view, which is generated in getDataView.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CategoriesController::getDataView() method that generates the JSON response
-    * @param int $categoryId
-    * @since [v1.8]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the categories detail view, which is generated in getDataView.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see CategoriesController::getDataView() method that generates the JSON response
+     * @param $id
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @since [v1.8]
      */
     public function show($id)
     {
@@ -221,6 +206,4 @@ class CategoriesController extends Controller
 
         return redirect()->route('categories.index')->with('error', trans('admin/categories/message.does_not_exist'));
     }
-
-
 }

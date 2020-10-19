@@ -34,9 +34,8 @@
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
-                                            <label for="email">Email</label>
                                             <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('admin/users/table.email') }}" aria-label="email">
-                                            {!! $errors->first('email', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                            {!! $errors->first('email', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                         </div>
                                     </div>
 

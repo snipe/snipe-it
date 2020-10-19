@@ -6,8 +6,18 @@ window._ = require('lodash');
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
  */
-
 window.$ = window.jQuery = require('jquery');
+
+/**
+ * jQuery UI is loaded here and then the tooltip is assigned another funtion name
+ * This resolves the issue of jquery-ui & bootstrap tooltip conflict
+ */
+require('jquery-ui');
+jQuery.fn.uitooltip = jQuery.fn.tooltip; 
+
+/**
+ * Load boostrap
+ */
 require('bootstrap-less');
 
 /**
@@ -26,7 +36,7 @@ require('vue-resource');
  * included with Laravel will automatically verify the header's value.
  */
 
-Vue.http.interceptors.push((request, next) => {
+Vue.http.interceptors.push(function (request, next) {
     request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
 
     next();

@@ -263,6 +263,7 @@
             @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'by_company_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'by_location_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'by_rtd_location_id', 'hide_new' => 'true'])
+          @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.department'), 'fieldname' => 'by_dept_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'by_supplier_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.model-select', ['translated_name' => trans('general.asset_model'), 'fieldname' => 'by_model_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'by_manufacturer_id', 'hide_new' => 'true'])
@@ -272,7 +273,7 @@
             <div class="form-group">
               <label for="by_status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }}</label>
               <div class="col-md-7 col-sm-11">
-                {{ Form::select('by_status_id', \App\Helpers\Helper::statusLabelList() , Input::old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'by_status_id')) }}
+                {{ Form::select('by_status_id', \App\Helpers\Helper::statusLabelList() , old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'by_status_id')) }}
               </div>
             </div>
 

@@ -3,7 +3,7 @@
 {{-- Page title --}}
 @section('title')
 
-  @if (Input::get('status')=='deleted')
+  @if (Request::get('status')=='deleted')
     {{ trans('admin/models/general.view_deleted') }}
     {{ trans('admin/models/table.title') }}
     @else
@@ -18,7 +18,7 @@
     <a href="{{ route('models.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
   @endcan
 
-  @if (Input::get('status')=='deleted')
+  @if (Request::get('status')=='deleted')
     <a class="btn btn-default pull-right" href="{{ route('models.index') }}" style="margin-right: 5px;">{{ trans('admin/models/general.view_models') }}</a>
   @else
     <a class="btn btn-default pull-right" href="{{ route('models.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/models/general.view_deleted') }}</a>
@@ -43,7 +43,7 @@
         <div class="row">
           <div class="col-md-12">
 
-            @if (Input::get('status')!='deleted')
+            @if (Request::get('status')!='deleted')
               <div id="toolbar">
                 <label for="bulk_actions" class="sr-only">Bulk Actions</label>
                 <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions" style="width: 300px;">
@@ -66,7 +66,7 @@
                   data-show-refresh="true"
                   data-sort-order="asc"
                   id="modelsTable"
-                  data-url="{{ route('api.models.index', ['status'=> e(Input::get('status'))]) }}"
+                  data-url="{{ route('api.models.index', ['status'=> e(Request::get('status'))]) }}"
                   class="table table-striped snipe-table"
                   data-export-options='{
                 "fileName": "export-asset-models-{{ date('Y-m-d') }}",

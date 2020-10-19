@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 
-use Illuminate\Console\Command;
 use App\Models\Setting;
 use App\Models\User;
+use Illuminate\Console\Command;
 
 class ResetDemoSettings extends Command
 {
@@ -51,9 +51,9 @@ class ResetDemoSettings extends Command
         $settings->header_color = null;
         $settings->barcode_type = 'QRCODE';
         $settings->default_currency = 'USD';
-        $settings->brand = 3;
+        $settings->brand = 2;
         $settings->ldap_enabled = 0;
-        $settings->full_multiple_companies_support = 1;
+        $settings->full_multiple_companies_support = 0;
         $settings->alt_barcode = 'C128';
         $settings->skin = '';
         $settings->email_domain = 'snipeitapp.com';
@@ -65,6 +65,18 @@ class ResetDemoSettings extends Command
         $settings->locale = 'en';
         $settings->version_footer = 'on';
         $settings->support_footer = 'on';
+        $settings->saml_enabled = '0';
+        $settings->saml_sp_entitiyid = '0';
+        $settings->saml_sp_acs_url = null;
+        $settings->saml_sp_sls_url = null;
+        $settings->saml_sp_x509cert = null;
+        $settings->saml_idp_metadata = null;
+        $settings->saml_attr_mapping_username = null;
+        $settings->saml_forcelogin = '0';
+        $settings->saml_slo = null;
+        $settings->saml_custom_settings = null;
+
+
         $settings->save();
 
         if ($user = User::where('username', '=', 'admin')->first()) {

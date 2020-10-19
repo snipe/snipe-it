@@ -32,11 +32,25 @@
           <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
             <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
             <div class="input-group col-md-3">
-              <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date') }}" arial-label="purchase_date">
-              <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-              {!! $errors->first('purchase_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" value="{{ old('purchase_date') }}">
+                <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+              </div>
+              {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
           </div>
+          <!-- Expected Checkin Date -->
+          <div class="form-group {{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
+             <label for="expected_checkin" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
+             <div class="input-group col-md-3">
+                  <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                      <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
+                      <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                 </div>
+                 {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+             </div>
+          </div>
+
 
           <!-- Status -->
           <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
@@ -44,7 +58,7 @@
               {{ trans('admin/hardware/form.status') }}
             </label>
             <div class="col-md-7">
-              {{ Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:350px', 'aria-label'=>'status_id')) }}
+              {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:350px', 'aria-label'=>'status_id')) }}
               {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -60,12 +74,12 @@
             <div class="col-md-9">
 
                 <label for="update_real_loc">
-                  {{ Form::radio('update_real_loc', '1', Input::old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_real_loc']) }}
+                  {{ Form::radio('update_real_loc', '1', old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_real_loc']) }}
                   Update default location AND actual location
                 </label>
                 <br>
                 <label for="update_default_loc">
-                  {{ Form::radio('update_real_loc', '0', Input::old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_default_loc']) }}
+                  {{ Form::radio('update_real_loc', '0', old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_default_loc']) }}
                   Update only default location
                 </label>
 
@@ -81,7 +95,7 @@
             </label>
             <div class="input-group col-md-3">
               <span class="input-group-addon">{{ $snipeSettings->default_currency }}</span>
-                <input type="text" class="form-control"  maxlength="10" placeholder="{{ trans('admin/hardware/form.cost') }}" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost') }}">
+                <input type="text" class="form-control"  maxlength="10" placeholder="{{ trans('admin/hardware/form.cost') }}" name="purchase_cost" id="purchase_cost" value="{{ old('purchase_cost') }}">
                 {!! $errors->first('purchase_cost', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -97,7 +111,7 @@
               {{ trans('admin/hardware/form.order') }}
             </label>
             <div class="col-md-7">
-              <input class="form-control" type="text" maxlength="20" name="order_number" id="order_number" value="{{ Input::old('order_number') }}" />
+              <input class="form-control" type="text" maxlength="20" name="order_number" id="order_number" value="{{ old('order_number') }}" />
               {!! $errors->first('order_number', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -109,7 +123,7 @@
             </label>
             <div class="col-md-3">
               <div class="input-group">
-                <input class="col-md-3 form-control" maxlength="4" type="text" name="warranty_months" id="warranty_months" value="{{ Input::old('warranty_months') }}" />
+                <input class="col-md-3 form-control" maxlength="4" type="text" name="warranty_months" id="warranty_months" value="{{ old('warranty_months') }}" />
                 <span class="input-group-addon">{{ trans('admin/hardware/form.months') }}</span>
                 {!! $errors->first('warranty_months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>

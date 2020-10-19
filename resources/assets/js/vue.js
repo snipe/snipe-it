@@ -4,7 +4,6 @@
  * include Vue and Vue Resource. This gives a great starting point for
  * building robust, powerful web applications using Vue and Laravel.
  */
-require('../../../node_modules/jquery-ui-bundle/jquery-ui.min.js');
 require('./bootstrap');
 
 /**

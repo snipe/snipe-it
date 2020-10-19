@@ -6,23 +6,24 @@ use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use App\Models\Department;
+use App\Models\Depreciation;
 use App\Models\License;
 use App\Models\Location;
-use App\Models\Depreciation;
+use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
-use App\Models\Manufacturer;
-use App\Models\Company;
 use App\Models\User;
 use App\Policies\AccessoryPolicy;
 use App\Policies\AssetModelPolicy;
 use App\Policies\AssetPolicy;
 use App\Policies\CategoryPolicy;
+use App\Policies\CompanyPolicy;
 use App\Policies\ComponentPolicy;
 use App\Policies\ConsumablePolicy;
 use App\Policies\CustomFieldPolicy;
@@ -31,11 +32,10 @@ use App\Policies\DepartmentPolicy;
 use App\Policies\DepreciationPolicy;
 use App\Policies\LicensePolicy;
 use App\Policies\LocationPolicy;
+use App\Policies\ManufacturerPolicy;
 use App\Policies\StatuslabelPolicy;
 use App\Policies\SupplierPolicy;
 use App\Policies\UserPolicy;
-use App\Policies\ManufacturerPolicy;
-use App\Policies\CompanyPolicy;
 use Carbon\Carbon;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -89,6 +89,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes();
         Passport::tokensExpireIn(Carbon::now()->addYears(20));
         Passport::refreshTokensExpireIn(Carbon::now()->addYears(20));
+        Passport::withCookieSerialization();
 
 
         // --------------------------------
@@ -145,6 +146,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('self.edit_location', function($user) {
             return $user->hasAccess('self.edit_location');
+        });
+
+        Gate::define('self.checkout_assets', function($user) {
+            return $user->hasAccess('self.checkout_assets');
         });
 
         Gate::define('backend.interact', function ($user) {

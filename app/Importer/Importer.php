@@ -2,12 +2,12 @@
 namespace App\Importer;
 
 use App\Models\CustomField;
+use App\Models\Department;
 use App\Models\Setting;
 use App\Models\User;
-use App\Models\Department;
+use Illuminate\Support\Facades\Auth;
 use ForceUTF8\Encoding;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use League\Csv\Reader;
 
@@ -121,6 +121,13 @@ abstract class Importer
     // Cached Values for import lookups
     protected $customFields;
 
+    /**
+     * Sets up the database transaction and logging for the importer
+     *
+     * @return void
+     * @author Daniel Meltzer
+     * @since  5.0
+     */
     public function import()
     {
         $headerRow = $this->csv->fetchOne();
@@ -159,7 +166,7 @@ abstract class Importer
         // This 'inverts' the fields such that we have a collection of fields indexed by name.
         $this->customFields = CustomField::All()->reduce(function ($nameLookup, $field) {
             $nameLookup[$field['name']] = $field;
-            return $nameLookup; 
+            return $nameLookup;
         });
         // Remove any custom fields that do not exist in the header row.  This prevents nulling out values that shouldn't exist.
         // In detail, we compare the lower case name of custom fields (indexed by name) to the keys in the header row.  This
@@ -277,7 +284,12 @@ abstract class Importer
             'username'  => $this->findCsvMatch($row, "username"),
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
         ];
-        \Log::debug('Importer.php Activated: '.$this->findCsvMatch($row, 'activated'));
+
+        // Maybe we're lucky and the user already exists.
+        if($user = User::where('username', $user_array['username'])->first()) {
+            $this->log('User '.$user_array['username'].' already exists');
+            return $user;
+        }
 
         // If the full name is empty, bail out--we need this to extract first name (at the very least)
         if(empty($user_array['full_name'])) {
@@ -296,7 +308,7 @@ abstract class Importer
             $user_array['email'] = User::generateEmailFromFullName($user_array['full_name']);
         }
 
-        $user_formatted_array = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $user_array['full_name']);
+        $user_formatted_array = User::generateFormattedNameFromFullName($user_array['full_name'], Setting::getSettings()->username_format);
         $user_array['first_name'] = $user_formatted_array['first_name'];
         $user_array['last_name'] = $user_formatted_array['last_name'];
 
@@ -321,19 +333,18 @@ abstract class Importer
 
         // No Luck, let's create one.
         $user = new User;
-        $user->first_name = $user_array['first_name'];
-        $user->last_name = $user_array['last_name'];
-        $user->username = $user_array['username'];
-        $user->email = $user_array['email'];
-        $user->manager_id = (isset($user_array['manager_id']) ? $user_array['manager_id'] : null);
-        $user->department_id = (isset($user_array['department_id']) ? $user_array['department_id']:  null);
-        $user->activated = $user_array['activated'];
-        $user->password = $this->tempPassword;
+        $user->first_name    = $user_array['first_name'];
+        $user->last_name     = $user_array['last_name'];
+        $user->username      = $user_array['username'];
+        $user->email         = $user_array['email'];
+        $user->manager_id    = $user_array['manager_id'] ?? null;
+        $user->department_id = $user_array['department_id'] ?? null;
+        $user->activated     = 1;
+        $user->password      = $this->tempPassword;
 
         \Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
 
         if ($user->save()) {
-            \Log::debug('Importer.php  Name: '.$user->first_name.' '.$user->last_name.' ('.$user->username.')');
             $this->log('User '.$user_array['username'].' created');
             return $user;
         }
@@ -384,9 +395,9 @@ abstract class Importer
     }
 
     /**
-     * Sets the Are we updating items in the import.
+     * Sets whether or not we should notify the user with a welcome email
      *
-     * @param bool $updating the updating
+     * @param bool $send_welcome the send-welcome flag
      *
      * @return self
      */

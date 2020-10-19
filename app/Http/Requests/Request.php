@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 use App\Helpers\Helper;
-
 use Illuminate\Foundation\Http\FormRequest;
 
 abstract class Request extends FormRequest

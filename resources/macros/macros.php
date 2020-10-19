@@ -65,6 +65,7 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
       'tr'=> "Turkish",
       'uk'=> "Ukranian",
       'vi'=> "Vietnamese",
+      'cy'=> "Welsh",
       'zu'=> "Zulu",
     );
 
@@ -371,7 +372,6 @@ Form::macro('date_display_format', function ($name = "date_display_format", $sel
         'm/d/Y',
         'n/d/y',
         'd/m/Y',
-        'm/j/Y',
         'd.m.Y',
         'Y.m.d.',
     ];

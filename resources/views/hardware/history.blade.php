@@ -73,6 +73,9 @@
                             <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
                             <div class="col-sm-9">
                                 <input type="file" name="user_import_csv" id="user_import_csv"{{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
                             </div>
                         </div>
 
@@ -84,7 +87,7 @@
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-10">
-                        {{ Form::checkbox('match_firstnamelastname', '1', Input::old('match_firstnamelastname')) }} Try to match users by firstname.lastname (jane.smith) format
+                        {{ Form::checkbox('match_firstnamelastname', '1', Request::old('match_firstnamelastname')) }} Try to match users by firstname.lastname (jane.smith) format
                     </div>
                 </div>
 
@@ -93,7 +96,7 @@
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-10">
-                        {{ Form::checkbox('match_flastname', '1', Input::old('match_flastname')) }} Try to match users by first initial last name (jsmith) format
+                        {{ Form::checkbox('match_flastname', '1', Request::old('match_flastname')) }} Try to match users by first initial last name (jsmith) format
                     </div>
                 </div>
 
@@ -102,7 +105,7 @@
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-10">
-                        {{ Form::checkbox('match_firstname', '1', Input::old('match_firstname')) }} Try to match users by first name (jane) format
+                        {{ Form::checkbox('match_firstname', '1', Request::old('match_firstname')) }} Try to match users by first name (jane) format
                     </div>
                 </div>
 
@@ -111,7 +114,7 @@
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-10">
-                        {{ Form::checkbox('match_email', '1', Input::old('match_email')) }} Try to match users by email as username
+                        {{ Form::checkbox('match_email', '1', Request::old('match_email')) }} Try to match users by email as username
                     </div>
                 </div>
 
