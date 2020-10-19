@@ -117,18 +117,20 @@ class Setting extends Model
      */
     public static function setupCompleted(): bool
     {
-        return Cache::rememberForever(self::SETUP_CHECK_KEY, function () {
             try {
                 $usercount = User::withTrashed()->count();
                 $settingsCount = self::count();
-
+                \Log::debug('User table and settings table exist and have records.');
+                \Log::debug('Settings: '.$settingsCount );
+                \Log::debug('Users: '.$usercount );
                 return $usercount > 0 && $settingsCount > 0;
             } catch (\Throwable $th) {
-                // Catche the error if the tables dont exit
-        }
+                \Log::debug('User table and settings table DO NOT exist or DO NOT have records');
+                // Catch the error if the tables dont exit
+                return false;
+            }
 
-            return false;
-        });
+
     }
 
     /**
