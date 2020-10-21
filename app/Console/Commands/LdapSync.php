@@ -191,21 +191,27 @@ class LdapSync extends Command
         ];
         // Only update the database if is not a dry run
         if (!$this->dryrun) {
-            if ($user->save()) {
-                $summary['note']   = ($user->wasRecentlyCreated ? 'CREATED' : 'UPDATED');
-                $summary['status'] = 'SUCCESS';
-            } else {
-                $errors = '';
-                foreach ($user->getErrors()->getMessages() as  $error) {
-                    $errors .= implode(", ",$error);
+            if ($user->isDirty()) { //if nothing on the user changed, don't bother trying to save anything nor put anything in the summary
+                if ($user->save()) {
+                    $summary['note']   = ($user->wasRecentlyCreated ? 'CREATED' : 'UPDATED');
+                    $summary['status'] = 'SUCCESS';
+                } else {
+                    $errors = '';
+                    foreach ($user->getErrors()->getMessages() as  $error) {
+                        $errors .= implode(", ",$error);
+                    }
+                    $summary['note']   = $snipeUser->getDN().' was not imported. REASON: '.$errors;
+                    $summary['status'] = 'ERROR';
                 }
-                $summary['note']   = $snipeUser->getDN().' was not imported. REASON: '.$errors;
-                $summary['status'] = 'ERROR';
+            } else {
+                $summary = null;
             }
         }
 
         // $summary['note'] = ($user->getOriginal('username') ? 'UPDATED' : 'CREATED'); // this seems, kinda, like, superfluous, relative to the $summary['note'] thing above, yeah?
-        $this->summary->push($summary);
+        if($summary) { //if the $user wasn't dirty, $summary was set to null so that we will skip the following push()
+            $this->summary->push($summary);
+        }
     }
 
     /**
