@@ -128,7 +128,7 @@
                                 <div id="purgebarcodesstatus-error" class="text-danger"></div>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
-                                <p class="help-block">This will attempt to delete cached barcodes. This would typically only be used if your barcode dettings have changed, or if your Snipe-IT URL has changed. Barcodes will be re-generated when accessed next.</p>
+                                <p class="help-block">This will attempt to delete cached barcodes. This would typically only be used if your barcode settings have changed, or if your Snipe-IT URL has changed. Barcodes will be re-generated when accessed next.</p>
                             </div>
 
                         </div>
