@@ -94,28 +94,25 @@
         </div>
 
         <!-- Avatar -->
+
         @if ($user->avatar)
-          <div class="form-group {{ $errors->has('avatar_delete') ? 'has-error' : '' }}">
-            <label class="col-md-3 control-label" for="avatar_delete">{{ trans('general.avatar_delete') }}</label>
-            <div class="col-md-8">
-              {{ Form::checkbox('avatar_delete') }}
-              <img src="{{ url('/') }}/uploads/avatars/{{ $user->avatar }}" class="avatar img-circle" alt="{{ $user->present()->fullName() }} avatar image">
-              {!! $errors->first('avatar_delete', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+          <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
+            <label class="col-md-3 control-label" for="avatar_delete">{{ trans('general.image_delete') }}</label>
+            <div class="col-md-9">
+              <label for="avatar_delete">
+                {{ Form::checkbox('avatar_delete', '1', old('avatar_delete'), array('class' => 'minimal')) }}
+              </label>
+              <br>
+              <img src="{{ url('/') }}/uploads/avatars/{{  $user->avatar }}" alt="{{ $user->present()->fullName() }} avatar image">
+              {!! $errors->first('avatar_delete', '<span class="alert-msg" aria-hidden="true"><br>:message</span>') !!}
             </div>
           </div>
         @endif
 
-        <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
-          <label class="col-md-3 control-label" for="avatar">{{ trans('general.image_upload') }}</label>
-          <div class="col-md-5">
-            <label class="btn btn-default">
-              {{ trans('button.select_file')  }}
-              <input type="file" name="avatar" accept="image/gif,image/jpeg,image/png,image/svg" hidden>
-            </label>
-            <p class="help-block">{{ trans('general.image_filetypes_help') }}</p>
-            {!! $errors->first('avatar', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-          </div>
-        </div>
+
+        @include ('partials.forms.edit.image-upload', ['fieldname' => 'avatar'])
+
+
 
 
 
