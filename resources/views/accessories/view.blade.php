@@ -76,6 +76,7 @@
                 <tr>
                     <th data-searchable="false" data-formatter="usersLinkFormatter" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="checkout_notes">{{ trans('general.notes') }}</th>
+                    <th data-searchable="false" data-formatter="dateDisplayFormatter" data-sortable="false" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
                 </tr>
                 </thead>
