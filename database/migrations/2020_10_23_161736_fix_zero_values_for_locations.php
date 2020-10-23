@@ -15,30 +15,15 @@ class FixZeroValuesForLocations extends Migration
      */
     public function up()
     {
-        $assets = Asset::where('location_id', '=', '0')->orWhere('rtd_location_id', '=', '0')->get();
-        $users = User::where('location_id', '=', '0')->get();
+        App\Models\Asset::where('location_id', '=', '0')
+            ->update(['location_id' => null]);
 
-        foreach ($assets as $asset) {
+        App\Models\Asset::where('rtd_location_id', '=', '0')
+            ->update(['rtd_location_id' => null]);
 
-            if ($asset->location_id == '0') {
-                $asset->location_id = '';
-            }
+        App\Models\User::where('location_id', '0')
+            ->update(['location_id' => null]);
 
-            if ($asset->rtd_location_id == '0') {
-                $asset->rtd_location_id = '';
-            }
-
-            $asset->save();
-
-        }
-
-        foreach ($users as $user) {
-            if ($user->location_id == '0') {
-                $user->location_id = '';
-            }
-
-            $user->save();
-        }
     }
 
     /**
