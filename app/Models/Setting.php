@@ -120,9 +120,6 @@ class Setting extends Model
             try {
                 $usercount = User::withTrashed()->count();
                 $settingsCount = self::count();
-                \Log::debug('User table and settings table exist and have records.');
-                \Log::debug('Settings: '.$settingsCount );
-                \Log::debug('Users: '.$usercount );
                 return $usercount > 0 && $settingsCount > 0;
             } catch (\Throwable $th) {
                 \Log::debug('User table and settings table DO NOT exist or DO NOT have records');
