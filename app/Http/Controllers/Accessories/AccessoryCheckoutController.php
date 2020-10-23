@@ -75,7 +75,8 @@ class AccessoryCheckoutController extends Controller
             'accessory_id' => $accessory->id,
             'created_at' => Carbon::now(),
             'user_id' => Auth::id(),
-            'assigned_to' => $request->get('assigned_to')
+            'assigned_to' => $request->get('assigned_to'),
+            'note' => $request->input('note')
         ]);
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();

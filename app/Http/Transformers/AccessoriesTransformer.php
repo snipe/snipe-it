@@ -68,8 +68,13 @@ class AccessoriesTransformer
 
 
         $array = array();
+
+
         foreach ($accessory_users as $user) {
+            \Log::debug(print_r($user->pivot, true));
+            \Log::debug(print_r($user->pivot, true));
             $array[] = [
+
                 'assigned_pivot_id' => $user->pivot->id,
                 'id' => (int) $user->id,
                 'username' => e($user->username),
@@ -77,7 +82,8 @@ class AccessoriesTransformer
                 'first_name'=> e($user->first_name),
                 'last_name'=> e($user->last_name),
                 'employee_number' =>  e($user->employee_num),
-                'checkout_notes' => $accessory->lastCheckoutArray[0]['note'],
+                'checkout_notes' => $user->pivot->note,
+                'last_checkout' => Helper::getFormattedDateObject($user->pivot->created_at, 'datetime'),
                 'type' => 'user',
                 'available_actions' => ['checkin' => true]
             ];
