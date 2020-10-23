@@ -21,7 +21,7 @@ class FixZeroValuesForLocations extends Migration
         App\Models\Asset::where('rtd_location_id', '=', '0')
             ->update(['rtd_location_id' => null]);
 
-        App\Models\User::where('location_id', '0')
+        App\Models\User::where('location_id', '=', '0')
             ->update(['location_id' => null]);
 
     }
