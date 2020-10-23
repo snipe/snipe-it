@@ -39,7 +39,6 @@
                     data-pagination="true"
                     data-id-table="requestedAssets"
                     data-cookie-id-table="requestedAssets"
-                    data-url="{{ route('api.consumables.index') }}"
                     data-export-options='{
                     "fileName": "export-assetrequests-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
