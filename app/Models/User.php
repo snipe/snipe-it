@@ -295,7 +295,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function accessories()
     {
-        return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')->withPivot('id')->withTrashed();
+        return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')
+            ->withPivot('id', 'created_at', 'note')->withTrashed();
     }
 
     /**
