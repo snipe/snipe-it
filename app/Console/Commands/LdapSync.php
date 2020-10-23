@@ -117,7 +117,7 @@ class LdapSync extends Command
             $this->dryrun = true;
         }
         $this->checkIfLdapIsEnabled();
-        $this->checkLdapConnetion();
+        $this->checkLdapConnection();
         $this->setBaseDn();
         $this->getUserDefaultLocation();
         /*
@@ -247,7 +247,9 @@ class LdapSync extends Command
         }
 
         if ($ldapUsers->getCurrentPage() < $ldapUsers->getPages()-1) {
-            $this->processLdapUsers($ldapUsers->getCurrentPage() + 1);
+            $current_page = $ldapUsers->getCurrentPage();
+            unset($ldapUsers); //deliberately unset the variable so we don't OOM
+            $this->processLdapUsers($current_page + 1); //this recursive call means that the $ldapUsers variable is not going to get GC'ed until everything returns. Blech.
         }
     }
 
@@ -355,7 +357,7 @@ class LdapSync extends Command
      *
      * @since 5.0.0
      */
-    private function checkLdapConnetion(): void
+    private function checkLdapConnection(): void
     {
         try {
             $this->ldap->testLdapAdUserConnection();
