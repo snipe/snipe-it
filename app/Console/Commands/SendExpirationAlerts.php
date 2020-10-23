@@ -55,14 +55,14 @@ class SendExpirationAlerts extends Command
             $assets = Asset::getExpiringWarrantee($threshold);
             if ($assets->count() > 0) {
                 $this->info(trans_choice('mail.assets_warrantee_alert', $assets->count(), ['count' => $assets->count(), 'threshold' => $threshold]));
-                Notification::send($recipients, new ExpiringAssetsNotification($assets, $threshold));
+                \Notification::send($recipients, new ExpiringAssetsNotification($assets, $threshold));
             }
 
             // Expiring licenses
             $licenses = License::getExpiringLicenses($threshold);
             if ($licenses->count() > 0) {
                 $this->info(trans_choice('mail.license_expiring_alert', $licenses->count(), ['count' => $licenses->count(), 'threshold' => $threshold]));
-                Notification::send($recipients, new ExpiringLicenseNotification($licenses, $threshold));
+                \Notification::send($recipients, new ExpiringLicenseNotification($licenses, $threshold));
             }
         } else {
             if ($settings->alert_email == '') {

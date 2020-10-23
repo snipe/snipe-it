@@ -58,7 +58,7 @@ class SendExpectedCheckinAlerts extends Command
             $recipients = collect(explode(',', $settings->alert_email))->map(function ($item, $key) {
                 return new AlertRecipient($item);
             });
-            Notification::send($recipients, new ExpectedCheckinAdminNotification($assets));
+            \Notification::send($recipients, new ExpectedCheckinAdminNotification($assets));
         }
     }
 }
