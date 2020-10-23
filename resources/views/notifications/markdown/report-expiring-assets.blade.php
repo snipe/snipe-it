@@ -1,20 +1,17 @@
 @component('mail::message')
-
 {{ trans_choice('mail.assets_warrantee_alert', $assets->count(), ['count'=>$assets->count(), 'threshold' => $threshold]) }}
-
 @component('mail::table')
-| |{{ trans('mail.name') }} |{{ trans('mail.expires') }} |{{ trans('mail.Days') }}|{{ trans('mail.supplier') }} | {{ trans('mail.assigned_to') }}
-| |:------------- |:-------------|:---------|:---------|:---------|:---------|
+
+<table width="100%">
+<tr><td>&nbsp;</td><td>{{ trans('mail.name') }}</td><td>{{ trans('mail.Days') }}</td><td>{{ trans('mail.expires') }}</td><td>{{ trans('mail.supplier') }}</td><td>{{ trans('mail.assigned_to') }}</td></tr>
 @foreach ($assets as $asset)
 @php
 $expires = \App\Helpers\Helper::getFormattedDateObject($asset->present()->warrantee_expires, 'date');
 $diff = round(abs(strtotime($asset->present()->warrantee_expires) - strtotime(date('Y-m-d')))/86400);
 $icon = ($diff <= ($threshold / 2)) ? '🚨' : (($diff <= $threshold) ? '⚠️' : ' ');
-
 @endphp
-|{{ $icon }}| [{{ $asset->present()->name }}]({{ route('hardware.show', $asset->id) }}) | {{ $expires['formatted'] }} | {{ $diff }} {{ trans('mail.Days') }} | {{ ($asset->supplier ? e($asset->supplier->name) : '') }}|{{ ($asset->assignedTo ? e($asset->assignedTo->present()->name()) : '') }}
+<tr><td>{{ $icon }} </td><td> <a href="{{ route('hardware.show', $asset->id) }}">{{ $asset->present()->name }}</a> </td><td> {{ $diff }} {{ trans('mail.Days') }} </td><td> {{ $expires['formatted'] }} </td><td> {{ ($asset->supplier ? e($asset->supplier->name) : '') }} </td><td> {{ ($asset->assignedTo ? e($asset->assignedTo->present()->name()) : '') }} </td></tr>
 @endforeach
+</table>
 @endcomponent
-
-
 @endcomponent
