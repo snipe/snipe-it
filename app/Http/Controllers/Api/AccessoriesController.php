@@ -154,7 +154,6 @@ class AccessoriesController extends Controller
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 
-        $accessory->lastCheckoutArray = $accessory->lastCheckout->toArray();
         $accessory_users = $accessory->users;
         $total = $accessory_users->count();
 
