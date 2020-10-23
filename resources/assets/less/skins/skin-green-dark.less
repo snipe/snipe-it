@@ -144,6 +144,10 @@ a, a:link, a:visited, .btn-primary.hover {
 #assetsListingTable>tbody>tr.selected>td {
   background-color: var(--back-main);
 }
+#assetsListingTable>tbody>tr>td {
+  color: var(--link);
+}
+
 body {
   color: var(--text-main);
 }
@@ -201,6 +205,13 @@ body {
   background-color: var(--back-main);
   color: var(--text-main);
 }
+.dynamic-form-row{
+  color: @green;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: var(--header);
+}
 .form-control {
   background-color: var(--back-main);
   color: var(--text-main);
@@ -218,6 +229,9 @@ input[type=text], input[type=search] {
 .input-group, .input-group-addon {
   background-color: var(--back-sub)!important;
   color: var(--text-main);
+}
+li.select2-results__option{
+  color:@green;
 }
 #licensesTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
@@ -293,7 +307,9 @@ input[type=text], input[type=search] {
 #webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa {
   color: var(--text-main);
 }
-
+#webui>#app>.row>.col-md-12>.box>.box-body>.row>.col-md-12 {
+  color:@green;
+}
 a {
   color: var(--link);
   &:link {
@@ -333,4 +349,3 @@ a {
   border-top: 1px solid #dddddd;
   display: table-cell;
 }
-
