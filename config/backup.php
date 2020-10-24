@@ -48,6 +48,7 @@ return [
                  */
                 'exclude' => [
                     base_path('vendor'),
+                    base_path('config'),
                     base_path('node_modules'),
                 ],
 
