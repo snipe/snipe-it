@@ -139,9 +139,10 @@
                   <i class="fa fa-bell fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">Notifications</span>
+
                 </a>
               </h5>
-              <p class="help-block">Email alerts</p>
+              <p class="help-block">Email alerts, audit settings</p>
             </div>
           </div>
         </div>
