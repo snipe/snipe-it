@@ -117,6 +117,7 @@ return array(
         "hashed_pass"      => "Your current password is incorrect",
         "statuslabel_type" => "You must select a valid status label type",
     ],
+    'cant_manage_self'  => "A user cannot be their own manager",
 
     /*
     |--------------------------------------------------------------------------
