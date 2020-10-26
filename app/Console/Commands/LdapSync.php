@@ -221,12 +221,11 @@ class LdapSync extends Command
      *
      * @since 5.0.0
      *
-     * @param int $page The page to get the result set
      */
-    private function processLdapUsers(int $page=0): void
+    private function processLdapUsers(): void
     {
         try {
-            $ldapUsers = $this->ldap->getLdapUsers($page);
+            $ldapUsers = $this->ldap->getLdapUsers();
         } catch (Exception $e) {
             $this->outputError($e);
             exit($e->getMessage());
@@ -242,14 +241,8 @@ class LdapSync extends Command
         }
 
         // Process each individual users
-        foreach ($ldapUsers as $user) {
+        foreach ($ldapUsers->getResults() as $user) { // AdLdap2's paginate() method is weird, it gets *everything* and ->getResults() returns *everything*
             $this->updateCreateUser($user);
-        }
-
-        if ($ldapUsers->getCurrentPage() < $ldapUsers->getPages()-1) {
-            $current_page = $ldapUsers->getCurrentPage();
-            unset($ldapUsers); //deliberately unset the variable so we don't OOM
-            $this->processLdapUsers($current_page + 1); //this recursive call means that the $ldapUsers variable is not going to get GC'ed until everything returns. Blech.
         }
     }
 
