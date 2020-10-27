@@ -171,7 +171,7 @@ class PurchasesController extends Controller
      */
     public function resend(Request $request, $purchaseId = null)
     {
-//        $this->authorize('view', Location::class);
+        $this->authorize('view', Location::class);
         $purchase = Purchase::findOrFail($purchaseId);
 
         $params_json = $purchase->bitrix_send_json;
