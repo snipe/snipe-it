@@ -565,4 +565,13 @@ class User extends SnipeModel implements AuthenticatableContract, CanResetPasswo
     {
         return $query->leftJoin('companies as companies_user', 'users.company_id', '=', 'companies_user.id')->orderBy('companies_user.name', $order);
     }
+
+
+    /**
+     * Get any locations the user manages.
+     **/
+    public function purchases()
+    {
+        return $this->hasMany('\App\Models\Purchase', 'user_id');
+    }
 }

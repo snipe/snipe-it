@@ -41,6 +41,7 @@ class PurchasesTransformer
 
             'assets_count' => (int) $purchase->assets_count,
             'comment' =>  ($purchase->comment) ? e($purchase->comment) : null,
+            'user' => ($purchase->user) ? (new UsersTransformer)->transformUser($purchase->user) : null,
             'created_at' => Helper::getFormattedDateObject($purchase->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($purchase->updated_at, 'datetime'),
         ];

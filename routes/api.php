@@ -876,6 +876,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
                 'uses' => 'PurchasesController@reject'
             ]
         );
+        Route::post('{purchase}/resend',
+            [
+                'as' => 'api.purchases.resend',
+                'uses' => 'PurchasesController@resend'
+            ]
+        );
     }); // Users group
 
 

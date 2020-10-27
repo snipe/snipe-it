@@ -57,7 +57,10 @@ class Purchase extends SnipeModel
         'invoice_type_id',
         'comment',
         "currency",
-        "status"
+        "status",
+        "assets_json",
+        "bitrix_send_json",
+        "user_id",
     ];
 
     use Searchable;
@@ -117,5 +120,11 @@ class Purchase extends SnipeModel
         }
         return false;
     }
+
+    public function user()
+    {
+        return $this->belongsTo('\App\Models\User', 'user_id');
+    }
+
 
 }

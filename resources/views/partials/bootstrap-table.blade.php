@@ -667,6 +667,7 @@
         console.dir(value);
         if ((value) && (value.filename) && (value.url)) {
             return '<a href="' + value.url + '">' + value.filename + '</a>';
+
         }
     }
 
@@ -680,6 +681,19 @@
         }
         return 'not an array';
     }
+    function bitrixIdFormatter(value, row){
+        if (value){
+            return value;
+        }else{
+            if (row.user){
+                {{--return '<a href="{{ url('/') }}/api/v1/purchases/' + row.id + '/resend"> Отправить заново</a>';--}}
+                return '<button type="button"  class="btn btn-default resend">Отправить заново</button>'
+            }else{
+                return' ';
+            }
+            // return '<button type="button" id="resend" class="btn btn-default">Отправить заново</button>'
+        }
+    }
 
 
     $(function () {
@@ -692,6 +706,20 @@
         });
     });
 
+    $(function () {
+        operateEvents = {
+            'click .resend': function (e, value, row, index) {
+                console.log(row)
+                $.ajax({
+                    url:'{{ url('/') }}/api/v1/purchases/' + row.id + '/resend',
+                    method: "POST",
+                    success: function(){
+                        $( ".table" ).bootstrapTable('refresh');
+                    }
+                });
+            },
+        }
+    });
 
     // This is necessary to make the bootstrap tooltips work inside of the
     // wenzhixin/bootstrap-table formatters

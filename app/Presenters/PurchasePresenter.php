@@ -69,7 +69,8 @@ class PurchasePresenter extends Presenter
 //                "switchable" => false,
                 "title" => "ID заявки Bitrix",
                 "visible" => true,
-  //              "formatter" => 'inventoriesLinkFormatter',
+                "formatter" => 'bitrixIdFormatter',
+                "events"=> "operateEvents"
             ],[
                 "field" => "final_price",
                 "searchable" => true,
@@ -86,6 +87,14 @@ class PurchasePresenter extends Presenter
                 "title" => "Валюта",
                 "visible" => true,
 //                "formatter" => 'companiesLinkFormatter',
+            ],[
+                "field" => "user",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => "Добавил",
+                "visible" => true,
+                "formatter" => 'usersLinkObjFormatter',
             ],[
                 "field" => "status",
                 "searchable" => true,

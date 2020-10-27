@@ -135,6 +135,11 @@
             var link = $(item);
             link.select2();
         });
+        $('input.float').on('input', function() {
+            this.value = this.value.replace(',', '.')
+            this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+            // $(this).val() // get the current value of the input field.
+        });
         //generate tables vith raw data
         table_asset.bootstrapTable('destroy').bootstrapTable({
             data: [],
