@@ -178,8 +178,8 @@ class PurchasesController extends Controller
         $params = json_decode($params_json);
 
         /** @var \GuzzleHttp\Client $client */
-        $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
-//        $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/', $params);
+//        $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
+        $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/', $params);
         $response = $response->getBody()->getContents();
         $bitrix_result = json_decode($response, true);
         $bitrix_id = $bitrix_result["result"];
