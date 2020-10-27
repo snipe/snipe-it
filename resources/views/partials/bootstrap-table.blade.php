@@ -705,14 +705,17 @@
 
         });
     });
-
     $(function () {
         operateEvents = {
             'click .resend': function (e, value, row, index) {
-                console.log(row)
                 $.ajax({
-                    url:'{{ url('/') }}/api/v1/purchases/' + row.id + '/resend',
+                    url:'/api/v1/purchases/' + row.id + '/resend',
+                    {{--url: '{{ route('api.purchases.resend', ['id'=> row.id]) }}',--}}
                     method: "POST",
+                    headers: {
+                        "X-Requested-With": 'XMLHttpRequest',
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    },
                     success: function(){
                         $( ".table" ).bootstrapTable('refresh');
                     }

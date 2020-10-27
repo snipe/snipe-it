@@ -175,9 +175,9 @@ class PurchasesController extends Controller
         $purchase = Purchase::findOrFail($purchaseId);
 
         $params_json = $purchase->bitrix_send_json;
-        $params = json_decode($params_json);
-
+        $params = json_decode($params_json, true);
         /** @var \GuzzleHttp\Client $client */
+        $client = new \GuzzleHttp\Client();
 //        $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
         $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/', $params);
         $response = $response->getBody()->getContents();
