@@ -70,16 +70,16 @@ class Purchase extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['invoice_number', 'bitrix_id', 'supplier_id', 'created_at'];
+    protected $searchableAttributes = ['invoice_number', 'comment'];
 
-    /**
-     * The relations and their attributes that should be included when searching the model.
-     *
-     * @var array
-     */
-    protected $searchableRelations = [
-        'parent' => ['name']
-    ];
+//    /**
+//     * The relations and their attributes that should be included when searching the model.
+//     *
+//     * @var array
+//     */
+//    protected $searchableRelations = [
+//        'parent' => ['name']
+//    ];
 
 
     public function assets()
