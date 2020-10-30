@@ -210,9 +210,11 @@ class PurchasesController extends Controller
             $params_json = json_encode($params);
 //            \Log::debug($params_json);
             $purchase->bitrix_send_json= $params_json;
+            $purchase->save();
 //            $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
             $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/',$params);
             $response = $response->getBody()->getContents();
+            $purchase->bitrix_result = $response;
             $bitrix_result = json_decode($response, true);
             $bitrix_id = $bitrix_result["result"];
             $purchase->bitrix_id = $bitrix_id;
