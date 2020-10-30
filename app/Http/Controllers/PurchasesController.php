@@ -215,6 +215,7 @@ class PurchasesController extends Controller
             $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/',$params);
             $response = $response->getBody()->getContents();
             $purchase->bitrix_result = $response;
+            $purchase->save();
             $bitrix_result = json_decode($response, true);
             $bitrix_id = $bitrix_result["result"];
             $purchase->bitrix_id = $bitrix_id;
