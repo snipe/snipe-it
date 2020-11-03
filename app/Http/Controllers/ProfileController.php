@@ -166,7 +166,7 @@ class ProfileController extends Controller
             // There may be a more elegant way to do this in the future.
 
             // First let's see if that option is enabled in the settings
-            if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields')) {
+            if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== FALSE) {
                 if (($request->input('password') == $user->username) ||
                     ($request->input('password') == $user->email) ||
                     ($request->input('password') == $user->first_name) ||
