@@ -156,6 +156,16 @@ class ProfileController extends Controller
             if (!Hash::check($request->input('current_password'), $user->password)) {
                 $validator->errors()->add('current_password', trans('validation.hashed_pass'));
             }
+
+            if (($request->input('password') == $user->username) ||
+                ($request->input('password') == $user->email) ||
+                ($request->input('password') == $user->first_name) ||
+                ($request->input('password') == $user->last_name))
+            {
+                $validator->errors()->add('password', trans('validation.disallow_same_pwd_as_user_fields'));
+            }
+
+
             
         });
 
