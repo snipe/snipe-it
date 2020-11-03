@@ -808,10 +808,10 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
         );
 
 
-        Route::get('{user}/licenses',
+        Route::get('{user}/accessories',
             [
-                'as' => 'api.users.licenselist',
-                'uses' => 'UsersController@licenses'
+                'as' => 'api.users.accessorieslist',
+                'uses' => 'UsersController@accessories'
             ]
         );
 
