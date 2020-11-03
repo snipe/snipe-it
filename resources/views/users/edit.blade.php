@@ -374,7 +374,7 @@
                                   </div>
                               @else
                                   <div style="padding-left: 10px;">
-                                      <input type="checkbox" value="1" name="activated" class="minimal" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} aria-label="activated">
+                                      <input type="checkbox" value="1" id="activated" name="activated" class="minimal" {{ (old('activated', $user->activated)) == '1' ? ' checked="checked"' : '' }} aria-label="activated">
                                   {{ trans('admin/users/general.activated_help_text') }}
                                   </div>
                               @endif
@@ -387,7 +387,7 @@
 
                 <!-- Email user -->
                 @if (!$user->id)
-                    <div class="form-group" id="email_user_row" style="display: none;">
+                    <div class="form-group" id="email_user_row">
                         <div class="col-sm-3">
                         </div>
                         <div class="col-md-9">
@@ -534,23 +534,25 @@
 <script nonce="{{ csrf_token() }}">
 $(document).ready(function() {
 
-    $('#user_activated').on('ifChecked', function(event){
+    $('#activated').on('ifChecked', function(event){
+        console.log('user activated is checked');
         $("#email_user_row").show();
-
-        $('#email').on('keyup',function(){
-            event.preventDefault();
-
-            if(this.value.length > 5){
-                $('#email_user_checkbox').iCheck('enable');
-            } else {
-                $('#email_user_checkbox').iCheck('disable').iCheck('uncheck');
-            }
-        });
 	});
 
-    $('#user_activated').on('ifUnchecked', function(event){
+    $('#activated').on('ifUnchecked', function(event){
         $("#email_user_row").hide();
     });
+
+    $('#email').on('keyup',function(){
+        event.preventDefault();
+
+        if(this.value.length > 5){
+            $('#email_user_checkbox').iCheck('enable');
+        } else {
+            $('#email_user_checkbox').iCheck('disable').iCheck('uncheck');
+        }
+    });
+
 
 	// Check/Uncheck all radio buttons in the group
     $('tr.header-row input:radio').on('ifClicked', function () {
