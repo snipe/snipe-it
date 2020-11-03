@@ -10,8 +10,7 @@ use App\Models\User;
 use App\Notifications\RequestAssetCancelation;
 use App\Notifications\RequestAssetNotification;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
-use Redirect;
+use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to the ability for users
