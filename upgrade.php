@@ -122,7 +122,7 @@ echo "\n";
 
 echo "--------------------------------------------------------\n";
 echo "Step 6: Updating composer dependencies:\n";
-echo "(This may take an moment.)\n";
+echo "(This may take a moment.)\n";
 echo "--------------------------------------------------------\n\n";
 
 
