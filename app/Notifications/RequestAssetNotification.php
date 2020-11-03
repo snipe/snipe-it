@@ -62,10 +62,8 @@ class RequestAssetNotification extends Notification
         $notifyBy = [];
 
         if (Setting::getSettings()->slack_endpoint!='') {
-            \Log::debug('use slack');
             $notifyBy[] = 'slack';
         }
-
 
         $notifyBy[] = 'mail';
 
