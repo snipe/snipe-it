@@ -65,7 +65,6 @@ class ResetPasswordController extends Controller
 
     public function showResetForm(Request $request, $token = null)
     {
-        \Log::debug(print_r($this->rules(),true));
         return view('auth.passwords.reset')->with(
             [
                 'token' => $token,
@@ -82,14 +81,13 @@ class ResetPasswordController extends Controller
             'password.not_in' => trans('validation.disallow_same_pwd_as_user_fields'),
         ];
 
-        $validator = $request->validate($this->rules(), $request->all(), $this->validationErrorMessages());
+        $request->validate($this->rules(), $request->all(), $this->validationErrorMessages());
 
         // Check to see if the user even exists
         $user = User::where('username', '=', $request->input('username'))->first();
 
         $broker = $this->broker();
         if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== FALSE) {
-            \Log::debug('disallow_same_pwd_as_user_fields is active on the password settings');
             $request->validate(
                 [
                 'password' => 'required|notIn:["'.$user->email.'","'.$user->username.'","'.$user->first_name.'","'.$user->last_name.'"'
@@ -100,7 +98,6 @@ class ResetPasswordController extends Controller
 
         $response = $broker->reset(
             $this->credentials($request), function ($user, $password) {
-                \Log::debug('resetting the password to '.$password);
                 $this->resetPassword($user, $password);
             }
         );
