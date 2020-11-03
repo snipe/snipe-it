@@ -91,6 +91,42 @@ class ValidationServiceProvider extends ServiceProvider
         });
 
 
+        // This ONLY works for create/update user forms, since the Update Profile Password form doesn't
+        // include any of these additional validator fields
+        Validator::extend('disallow_same_pwd_as_user_fields', function ($attribute, $value, $parameters, $validator) {
+            
+            $data = $validator->getData();
+
+            if (array_key_exists("username", $data)) {
+                if ($data['username'] == $data['password']) {
+                    return false;
+                }
+            }
+
+            if (array_key_exists("email", $data)) {
+                if ($data['email'] == $data['password']) {
+                    return false;
+                }
+            }
+
+            if (array_key_exists("first_name", $data)) {
+                if ($data['first_name'] == $data['password']) {
+                    return false;
+                }
+            }
+
+            if (array_key_exists("last_name", $data)) {
+                if ($data['last_name'] == $data['password']) {
+                    return false;
+                }
+            }
+
+
+           return true;
+
+
+        });
+
         Validator::extend('letters', function ($attribute, $value, $parameters) {
             return preg_match('/\pL/', $value);
         });

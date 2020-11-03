@@ -99,7 +99,7 @@
                             </div>
                             <div class="col-md-9">
 
-                                {{ Form::checkbox("pwd_secure_complexity['same_pwd_as_user_fields']", 'same_pwd_as_user_fields', old('same_pwd_as_user_fields', strpos($setting->pwd_secure_complexity, 'same_pwd_as_user_fields')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
+                                {{ Form::checkbox("pwd_secure_complexity['disallow_same_pwd_as_user_fields']", 'disallow_same_pwd_as_user_fields', old('disallow_same_pwd_as_user_fields', strpos($setting->pwd_secure_complexity, 'disallow_same_pwd_as_user_fields')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
                                 Password cannot be the same as first name, last name, email, or username<br>
 
 
