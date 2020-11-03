@@ -102,7 +102,7 @@ return [
             'provider' => 'users',
             'email' => 'auth.emails.password',
             'table' => 'password_resets',
-            'expire' => env('LOGIN_LOCKOUT_DURATION', 60),
+            'expire' => env('RESET_PASSWORD_LINK_EXPIRES', 900),
             'throttle' => env('LOGIN_MAX_ATTEMPTS', 60),
         ],
     ],
@@ -119,5 +119,6 @@ return [
     */
 
     'password_timeout' => 10800,
+
 
 ];

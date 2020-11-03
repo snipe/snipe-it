@@ -99,6 +99,7 @@ return array(
     'url'                  => 'The :attribute format is invalid.',
     "unique_undeleted"     => "The :attribute must be unique.",
     "import_field_empty"   => "The value of the Import Field shouldn't be empty",
+    "disallow_same_pwd_as_user_fields" => 'The password cannot be the same as the username, email address, or first or last name.',
 
     /*
     |--------------------------------------------------------------------------

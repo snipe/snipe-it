@@ -67,7 +67,9 @@ class UsersController extends Controller
 
 
         if (($request->filled('deleted')) && ($request->input('deleted')=='true')) {
-            $users = $users->GetDeleted();
+            $users = $users->onlyTrashed();
+        } elseif (($request->filled('all')) && ($request->input('deleted')=='true')) {
+            $users = $users->withTrashed();
         }
 
         if ($request->filled('company_id')) {

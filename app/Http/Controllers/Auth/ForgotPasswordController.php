@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class ForgotPasswordController extends Controller
 {
@@ -60,7 +59,7 @@ class ForgotPasswordController extends Controller
          */
 
         $request->validate([
-            'email' => ['required', 'email', 'max:255'],
+            'username' => ['required', 'max:255'],
         ]);
         
 
@@ -74,16 +73,16 @@ class ForgotPasswordController extends Controller
          */
         $response = $this->broker()->sendResetLink(
             array_merge(
-                $request->only('email'),
+                $request->only('username'),
                 ['activated' => '1'],
                 ['ldap_import' => '0']
             )
         );
 
         if ($response === \Password::RESET_LINK_SENT) {
-            \Log::info('Password reset attempt: User '.$request->input('email').' found, password reset sent');
+            \Log::info('Password reset attempt: User '.$request->input('username').' WAS found, password reset sent');
         } else {
-            \Log::info('Password reset attempt: User '.$request->input('email').' not found or user is inactive');
+            \Log::info('Password reset attempt: User matching username '.$request->input('username').' NOT FOUND or user is inactive');
         }
 
 
