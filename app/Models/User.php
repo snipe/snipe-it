@@ -26,10 +26,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     use UniqueUndeletedTrait;
     use Notifiable;
     use Presentable;
+    use Searchable;
+
     protected $dates = ['deleted_at'];
     protected $hidden = ['password','remember_token','permissions','reset_password_code','persist_code'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
+
     protected $fillable = [
         'activated',
         'address',
@@ -78,7 +81,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'location_id'             => 'exists:locations,id|nullable',
     ];
 
-    use Searchable;
 
     /**
      * The attributes that should be included when searching the model.
@@ -107,7 +109,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'groups'     => ['name'],
         'company'    => ['name'],
         'manager'    => ['first_name', 'last_name', 'username']
-    ];  
+    ];
+
 
     /**
      * Check user permissions
