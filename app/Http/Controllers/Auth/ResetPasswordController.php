@@ -29,6 +29,8 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = '/';
 
+    protected $username = 'username';
+
     /**
      * Create a new controller instance.
      *
@@ -44,7 +46,7 @@ class ResetPasswordController extends Controller
         return [
             'token' => 'required',
             'username' => 'required',
-            'password' => 'required|confirmed|'.Setting::passwordComplexityRulesSaving('update'),
+            'password' => 'confirmed|'.Setting::passwordComplexityRulesSaving('store'),
         ];
     }
 
@@ -59,6 +61,7 @@ class ResetPasswordController extends Controller
 
     public function showResetForm(Request $request, $token = null)
     {
+        \Log::debug(print_r($this->rules(),true));
         return view('auth.passwords.reset')->with(
             [
                 'token' => $token,
@@ -66,6 +69,30 @@ class ResetPasswordController extends Controller
             ]
         );
     }
+
+
+//    public function reset(Request $request)
+//    {
+//        $this->validate($request, $this->rules(), $this->validationErrorMessages());
+//
+//        // These two lines below allow you to bypass the default validation.
+//        $broker = $this->broker();
+//        $broker->validate(function () {
+//            return true;
+//        });
+//
+//        $response->reset(
+//            $this->credentials($request), function ($user, $password) {
+//                \Log::debug('resetting the password to '.$password);
+//                $this->resetPassword($user, $password);
+//            }
+//        );
+//
+//        return $response == \Password::PASSWORD_RESET
+//            ? $this->sendResetResponse($response)
+//            : $this->sendResetFailedResponse($request, $response);
+//    }
+
 
     protected function sendResetFailedResponse(Request $request, $response)
     {
