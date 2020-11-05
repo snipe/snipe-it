@@ -26,7 +26,7 @@ class LdapAd extends LdapAdConfiguration
     /**
      * @see https://wdmsb.wordpress.com/2014/12/03/descriptions-of-active-directory-useraccountcontrol-value/
      */
-    const AD_USER_ACCOUNT_CONTROL_FLAGS = ['512', '544', '66048', '66080', '262656', '262688', '328192', '328224'];
+    const AD_USER_ACCOUNT_CONTROL_FLAGS = ['512', '544', '66048', '66080', '262656', '262688', '328192', '328224', '1049088'];
 
     /**
      * The LDAP results per page.
