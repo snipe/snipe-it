@@ -56,8 +56,15 @@ class BitrixSyncController extends Controller
             );
         }
 
-
-        return "Синхрониизтрованно ".count($bitrix_users_final)." пользователей Битрикс";
+        $count = count($bitrix_users_final);
+//        return "Синхрониизтрованно ".count($bitrix_users_final)." пользователей Битрикс";
+        $res = [
+            'type'=> 'users',
+            'result' => true,
+            'all' => $count,
+//            'new' => $new_count,
+        ];
+        return json_encode($res);
     }
 
     public function syncLocations(Request $request)
@@ -70,6 +77,7 @@ class BitrixSyncController extends Controller
         $bitrix_objects = json_decode($response, true);
         $bitrix_objects = $bitrix_objects["result"];
         $count = 0 ;
+        $new_count = 0 ;
         foreach ($bitrix_objects as &$value) {
             if($value["TABEL_ID"] && $value["UF_TYPE"] == 455 && $value["DELETED"] != 1){
                 $count++;
@@ -87,10 +95,19 @@ class BitrixSyncController extends Controller
                     ]
                 );
                 $location->manager_id = $sklad_user->id;
+                if ($location->isDirty()){
+                    $new_count++;
+                }
                 $location->save();
             }
         }
-        return ("Синхрониизтрованно ".$count." объектов Битрикс");
+        $res = [
+            'type'=> 'locations',
+            'result' => true,
+            'all' => $count,
+//            'new' => $new_count,
+        ];
+        return json_encode($res);
     }
 
 
@@ -132,7 +149,14 @@ class BitrixSyncController extends Controller
             );
 
         }
-        return ("Синхрониизтрованно ".$count." поставщиков \n");
+//        return ("Синхрониизтрованно ".$count." поставщиков \n");
+        $res = [
+            'type'=> 'suppliers',
+            'result' => true,
+            'all' => $count,
+//            'new' => $new_count,
+        ];
+        return json_encode($res);
 
     }
 
@@ -157,7 +181,14 @@ class BitrixSyncController extends Controller
             );
 
         }
-        return("Синхрониизтрованно ".$count." юр. лиц \n");
+//        return("Синхрониизтрованно ".$count." юр. лиц \n");
+        $res = [
+            'type'=> 'legal_persons',
+            'result' => true,
+            'all' => $count,
+//            'new' => $new_count,
+        ];
+        return json_encode($res);
 
     }
 
@@ -183,7 +214,14 @@ class BitrixSyncController extends Controller
             );
 
         }
-        return ("Синхрониизтрованно ".$count." типов закупок \n");
+//        return ("Синхрониизтрованно ".$count." типов закупок \n");
+        $res = [
+            'type'=> 'invoice_types',
+            'result' => true,
+            'all' => $count,
+//            'new' => $new_count,
+        ];
+        return json_encode($res);
 
     }
 }
