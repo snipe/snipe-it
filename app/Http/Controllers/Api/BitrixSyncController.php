@@ -90,22 +90,23 @@ class BitrixSyncController extends Controller
                     [
                         'name' => $value["NAME"],
                         'city' => $value["ADDRESS_CITY"],
-                        'address' => $value["ADDRESS"],
-                        'address2' => $value["ADDRESS_2"],
+                        'address' => mb_substr($value["ADDRESS"], 0, 49),
+                        'address2' => mb_substr($value["ADDRESS_2"], 0, 49),
+                        'manager_id'=> $sklad_user->id,
                     ]
                 );
-                $location->manager_id = $sklad_user->id;
-                if ($location->isDirty()){
+                if ($location->wasChanged()){
                     $new_count++;
                 }
-                $location->save();
+//                $location->manager_id = $sklad_user->id;
+//                $location->save();
             }
         }
         $res = [
             'type'=> 'locations',
             'result' => true,
             'all' => $count,
-//            'new' => $new_count,
+            'new' => $new_count,
         ];
         return json_encode($res);
     }
@@ -134,6 +135,7 @@ class BitrixSyncController extends Controller
         }
 
         $count = 0 ;
+        $new_count = 0 ;
         foreach ($bitrix_suppliers as &$value) {
             $count++;
             $supplier = Supplier::updateOrCreate(
@@ -143,10 +145,14 @@ class BitrixSyncController extends Controller
                     'name' => $value["TITLE"],
                     'city' => $value["ADDRESS_CITY"],
                     'notes'=> $value["COMMENTS"],
-                    'address' => $value["ADDRESS"],
-                    'address2' => $value["ADDRESS_2"],
+                    'address' => mb_substr($value["ADDRESS"], 0, 49),
+                    'address2' => mb_substr($value["ADDRESS_2"], 0, 49),
                 ]
             );
+
+            if ($supplier->isDirty()){
+                $new_count++;
+            }
 
         }
 //        return ("Синхрониизтрованно ".$count." поставщиков \n");
@@ -154,7 +160,7 @@ class BitrixSyncController extends Controller
             'type'=> 'suppliers',
             'result' => true,
             'all' => $count,
-//            'new' => $new_count,
+            'new' => $new_count,
         ];
         return json_encode($res);
 
