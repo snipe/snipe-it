@@ -7,5 +7,8 @@
         'view'               => 'Toon materiaal onderhoud details',
         'repair'             => 'Reparatie',
         'maintenance'        => 'Onderhoud',
-        'upgrade'            => 'Upgrade'
+        'upgrade'            => 'Upgrade',
+        'calibration'        => 'Calibratie',
+        'software_support'   => 'Software-ondersteuning',
+        'hardware_support'   => 'Hardware-ondersteuning',
     ];

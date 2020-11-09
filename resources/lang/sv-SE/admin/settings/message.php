@@ -5,7 +5,7 @@ return array(
 
     'update' => array(
         'error'                 => 'Ett fel har uppstått under uppdateringen.',
-        'success'               => 'Inställningarna uppdateras framgångsrikt.'
+        'success'               => 'Inställningarna uppdaterades framgångsrikt.'
     ),
     'backup' => array(
         'delete_confirm'        => 'Är du säker på att du vill ta bort den här säkerhetskopieringsfilen? Den här åtgärden kan inte ångras.',

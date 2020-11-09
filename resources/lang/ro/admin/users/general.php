@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Setările de configurare LDAP pot fi găsite pe Administrator> Setări. Locația selectată (opțional) va fi setată pentru toți utilizatorii importați.',
     'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Software predat catre :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Vezi utilizator :name',
     'usercsv'           => 'Fișier CSV',
     'two_factor_admin_optin_help' => 'Setările dvs. actuale de administrare permit executarea selectivă a autentificării cu două factori.',

@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'เกี่ยวกับประเภท',
-    'about_categories'  				=> 'หมวดหมู่ช่วยคุณจัดระเบียบรายการของคุณ หมวดหมู่ตัวอย่างบางประเภทอาจเป็น &quot;Desktops&quot;, &quot; แล็ปท็อป&quot;, &quot; โทรศัพท์มือถือ&quot;, &quot;Tablets&quot; เป็นต้นและคุณสามารถใช้งานประเภทต่างๆที่เหมาะสมกับคุณได้',
     'asset_categories' 					=> 'หมวดหมู่ทรัพย์สิน',
     'category_name'  					=> 'ชื่อหมวดหมู่',
     'checkin_email'                     => 'ส่งอีเมลไปยังผู้ใช้เมื่อเช็คอิน / เช็คเอาต์',

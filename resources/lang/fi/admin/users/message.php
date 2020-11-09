@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Riittämättömät Oikeudet.',
     'user_deleted_warning'      => 'Käyttäjä on jo poistettu. Mikäli haluat muokata tai luovuttaa laitteita hänelle sinun tulee palauttaa käyttäjä.',
     'ldap_not_configured'        => 'LDAP-integraatiota ei ole määritetty tässä asennuksessa.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

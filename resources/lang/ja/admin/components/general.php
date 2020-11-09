@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> '構成部品名',
-    'about_components_text'  			=> '構成部品名は 資産の一部となるアイテムです。(例 HDD, RAM など)',
     'component_name'                  => '構成部品名',
     'checkin'                             => '構成品のチェックイン',
     'checkout'                             => '構成部品のチェックアウト',

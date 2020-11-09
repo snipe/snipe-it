@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Κατάσταση',
     'title'      	=> 'Πάγιο ',
     'image'		=> 'Φωτογραφία συσκευής',
-    'days_without_acceptance' => 'Ημέρες χωρίς αποδοχή'
+    'days_without_acceptance' => 'Ημέρες χωρίς αποδοχή',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

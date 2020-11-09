@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Phụ kiện này hiện không có sẵn.',
+    'does_not_exist' => 'Phụ kiện [:id] Không tồn tại.',
     'assoc_users'	 => 'Phụ kiện này hiện có :count cái đã giao cho người dùng. Bạn hãy nhập lại vào trong phần phụ kiện và thử lại lần nữa. ',
 
     'create' => array(

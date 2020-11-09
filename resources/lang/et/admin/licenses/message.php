@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Vara, mida proovite selle litsentsiga siduda, kuulub somene-le, välja arvatud rippmenüüs määratud isik.',
     'assoc_users'	 => 'See litsents on kasutaja jaoks praegu välja jäetud ja seda ei saa kustutada. Kontrollige kõigepealt litsentsi ja seejärel proovige uuesti kustutada.',
     'select_asset_or_person' => 'Peate valima vara või kasutaja, kuid mitte mõlemad.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

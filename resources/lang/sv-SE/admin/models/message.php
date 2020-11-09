@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Modellen finns inte.',
-    'assoc_users'	 => 'Denna modell är redan associerad med en eller flera inventarier och kan inte tas bort. Ta bort inventarierna och försök sedan igen. ',
+    'assoc_users'	 => 'Denna modell är redan associerad med en eller flera tillgångar och kan inte tas bort. Ta bort tillgången och försök sedan igen. ',
 
 
     'create' => array(
@@ -30,7 +30,7 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Inga fält ändrades, så ingenting uppdaterades.',
-        'success' 		=> 'Modeller uppdaterade.'
+        'success' 		=> 'Modeller uppdaterades.'
     ),
 
     'bulkdelete' => array(

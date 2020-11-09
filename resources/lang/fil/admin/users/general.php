@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Pwedeng makita ang configuration settings ng LDAP Admin > Settings. Ang (opsyonal) napiling lokasyon ay itatakda para sa lahat ng mga na-import na mga gumagamit o user.',
     'print_assigned'    => 'I-print ang Lahat ng Nakatalaga',
     'software_user'     => 'Ang Software ay Nai-check out sa :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Tingnan ang User :name',
     'usercsv'           => 'Ang CSV file',
     'two_factor_admin_optin_help' => 'Ang iyong kasalukuyang mga admin settings ay napapahintulot ng selektibong pagpapatupad ng two-factor authentication.  ',

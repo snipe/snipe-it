@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Kategooriatest',
-    'about_categories'  				=> 'Kategooriad aitavad sul asju organiseerida. Kategooriad võivad olla näitelks &quot;Lauaarvutid&quot;,&quot;Sülearvutid&quot;,&quot;Mobiiltelefonid&quot;,&quot;Tahvelarvutid&quot; ja nõnda edasi, kuid võid kasutada kategooriaid igal kombel, mis tundub sulle endale mõistlik.',
     'asset_categories' 					=> 'Vahendite kategooriad',
     'category_name'  					=> 'Kategooria nimi',
     'checkin_email'                     => 'Saada kasutajale e-kiri vara liikumise kohta.',

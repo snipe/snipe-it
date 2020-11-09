@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Izimvume ezinganele.',
     'user_deleted_warning'      => 'Lo msebenzisi ususiwe. Kuzodingeka ubuyisele lo msebenzisi ukuwahlela noma ubanikeze amafa amasha.',
     'ldap_not_configured'        => 'Ukuhlanganiswa kwe-LDAP akulungiselelwe lokhu kufakwa.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

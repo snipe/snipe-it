@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Laitteen jolle yrität määrittää tämän lisenssin omistaa joku muu kuin se, jonka olet valinnut alasvetovalikosta.',
     'assoc_users'	 => 'Lisenssin on luovutettu käyttäjälle eikä sitä voida poistaa. Palauta lisenssin ensin käyttäjältä, ja yritä sitten uudelleen. ',
     'select_asset_or_person' => 'Sinun on valittava omaisuus tai käyttäjä, mutta ei molempia.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

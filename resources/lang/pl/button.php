@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Wgraj',
 	'select_file'				=> 'Wybierz plik...',
     'select_files'				=> 'Wybierz pliki...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

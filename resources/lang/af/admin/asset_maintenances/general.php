@@ -7,5 +7,8 @@
         'view'               => 'Bekyk Bate Onderhoud Besonderhede',
         'repair'             => 'herstel',
         'maintenance'        => 'onderhoud',
-        'upgrade'            => 'opgradering'
+        'upgrade'            => 'opgradering',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

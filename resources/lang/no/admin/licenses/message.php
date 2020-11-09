@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Eiendelen du prøver å koble til denne lisensen er eid av noen andre enn personen du har valgt i tildelt til-nedtrekkslista.',
     'assoc_users'	 => 'Denne lisensen er sjekket ut til en bruker og kan ikke slettes. Vennligst sjekk inn lisensen først, og forsøk sletting på nytt. ',
     'select_asset_or_person' => 'Du må velge en ressurs eller en bruker, men ikke begge.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

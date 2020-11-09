@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> 'கூறுகள் பற்றி',
-    'about_components_text'  			=> 'கூறுகள் ஒரு சொத்தின் பகுதியாக இருக்கும், எடுத்துக்காட்டாக HDD, ரேம், போன்றவை.',
     'component_name'                  => 'கூறு பெயர்',
     'checkin'                             => 'செக்கோன் உபகரண',
     'checkout'                             => 'புதுப்பிப்பு உபகரண',

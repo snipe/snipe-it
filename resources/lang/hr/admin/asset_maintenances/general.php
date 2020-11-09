@@ -7,5 +7,8 @@
         'view'               => 'Prikaz pojedinosti o održavanju imovine',
         'repair'             => 'Popravak',
         'maintenance'        => 'Održavanje',
-        'upgrade'            => 'nadogradnja'
+        'upgrade'            => 'nadogradnja',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Amdan Ategolion',
-    'about_accessories_text'  			=> 'Mae ategolion yn unrhyw offer sydd yn cael eu ddosbarthu i defnyddwyr ond ddim hefo rhif cofrestru. (Neu nid oes angen tracio). Er enghraifft, llygod, ategolion.',
     'accessory_category' 				=> 'Categori Ategolyn',
     'accessory_name'  					=> 'Enw Ategolyn',
     'checkout'  							=> 'Cofnodi ategolyn allan',

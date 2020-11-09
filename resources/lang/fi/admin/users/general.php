@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP-määritysasetukset löytyvät Järjestelmänvalvoja> Asetukset. Valinnainen (valinnainen) sijainti määritetään kaikille tuodulle käyttäjälle.',
     'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Käyttäjälle :name luovutetut ohjelmistot',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Näytä Käyttäjä :name',
     'usercsv'           => 'CSV-tiedosto',
     'two_factor_admin_optin_help' => 'Nykyiset järjestelmänvalvojasi asetukset mahdollistavat kaksitekijärjestelmän todentamisen valikoivan täytäntöönpanon.',

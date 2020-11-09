@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> '부품이란',
-    'about_components_text'  			=> '부품들은 HDD, RAM 같은, 한개의 자산의 일부분입니다.',
     'component_name'                  => '부품명',
     'checkin'                             => '반입 부품',
     'checkout'                             => '반출 부품',

@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'A kategóriákról',
-    'about_categories'  				=> 'A kategóriák segítenek rendezni a dolgait. Néhány példa kategória lehet "Desktop-ok", "Laptopok", "Mobiltelefonok", "Tabletek", és így tovább, de bármilyen más kategóriát használhat, ami releváns önnek.',
     'asset_categories' 					=> 'Eszköz kategóriák',
     'category_name'  					=> 'Kategória név',
     'checkin_email'                     => 'E-mail küldése a felhasználónak, eszköz kiadás / visszavétel esetén.',

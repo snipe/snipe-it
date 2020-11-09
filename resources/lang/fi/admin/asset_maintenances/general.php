@@ -7,5 +7,8 @@
         'view'               => 'Näytä laitteen huoltotiedot',
         'repair'             => 'Korjaus',
         'maintenance'        => 'Huoltotila',
-        'upgrade'            => 'Päivitä'
+        'upgrade'            => 'Päivitä',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

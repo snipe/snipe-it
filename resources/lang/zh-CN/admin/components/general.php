@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> '关于组件',
-    'about_components_text'  			=> '组件为资产的一部分，例如硬盘、内存等。',
     'component_name'                  => '名称',
     'checkin'                             => '借入组件',
     'checkout'                             => '借出组件',

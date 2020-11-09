@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Feltöltés',
 	'select_file'				=> 'Válaszd ki a fájlt...',
     'select_files'				=> 'Fájl kiválasztása...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

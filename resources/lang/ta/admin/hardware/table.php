@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'நிலைமை',
     'title'      	=> 'சொத்து',
     'image'		=> 'சாதன படம்',
-    'days_without_acceptance' => 'ஏற்றுக்கொள்ளாத நாட்கள்'
+    'days_without_acceptance' => 'ஏற்றுக்கொள்ளாத நாட்கள்',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

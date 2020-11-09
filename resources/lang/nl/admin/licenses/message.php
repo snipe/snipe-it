@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Het product wat jij probeert te koppelen met deze licentie is in eigendom van iemand anders dan geselecteerd.',
     'assoc_users'	 => 'Deze licentie is momenteel uitgecheckt aan een gebruiker en kan daarom niet worden verwijderd. Controleer je licentie eerst en probeer het later nog eens. ',
     'select_asset_or_person' => 'U moet een actief of een gebruiker selecteren, maar niet allebei.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

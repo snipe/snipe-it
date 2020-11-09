@@ -7,5 +7,8 @@
         'view'               => 'Преглед на поддръжка на актив',
         'repair'             => 'Ремонт',
         'maintenance'        => 'Поддръжка',
-        'upgrade'            => 'Upgrade'
+        'upgrade'            => 'Upgrade',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

@@ -20,7 +20,7 @@ return array(
     'field_element_short'     => 'Бүрэлдэхүүн',
     'field_format'            => 'Формат',
     'field_custom_format'     => 'Гаалийн формат',
-    'field_custom_format_help'     => 'This field allows you to use a regex expression for validation. It should start with "regex:" - for example, to validate that a custom field value contains a valid IMEI (15 numeric digits), you would use <code>regex:/^[0-9]{15}$/</code>.',
+    'field_custom_format_help'     => 'Энэ талбар дээр regex илэрхийлэл ашиглан баталгаажуулалт хийх боломжтой. "regex:"-ээр эхлэх ёстой. Жишээ нь, өөрийн тохируулсан талбарын утга нь бодит IMEI (15 оронтой тоо) агуулж байгааг баталгаажуулахын тулд та <code>regex:/^[0-9]{15}$/</code> ашиглана.',
     'required'   		          => 'Шаардлагатай',
     'req'   		              => 'Req.',
     'used_by_models'   		    => 'Загвар ашиглана',
@@ -28,5 +28,5 @@ return array(
     'create_fieldset'         => 'Шинэ талбарт',
     'create_field'            => 'Шинэ Гаалийн талбар',
     'value_encrypted'      	        => 'Энэ талбарын үнэ цэнийг мэдээллийн санд шифрлэдэг. Зөвхөн админ хэрэглэгч нар нь буцаагдсан утгыг харах боломжтой байна',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
+    'show_in_email'     => 'Хэрэглэгчид илгээсэн олголтын имэйлд энэ талбарын утгыг оруулах уу? Шифрлэгдсэн талбаруудыг имэйлд оруулах боломжгүй.',
 );

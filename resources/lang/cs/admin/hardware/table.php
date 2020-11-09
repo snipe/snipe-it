@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Stav',
     'title'      	=> 'Majetek ',
     'image'		=> 'Obrázek zařízení',
-    'days_without_acceptance' => 'Dní bez schválení'
+    'days_without_acceptance' => 'Dní bez schválení',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

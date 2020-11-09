@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'درباره گروهها',
-    'about_categories'  				=> 'دستهها به شما کمک می کنند که موارد خود را سازماندهی کنید. بعضی از دسته های مثال ممکن است &quot;Desktops&quot;، &quot;Laptops&quot;، &quot; تلفنهای موبایل&quot;، &quot;Tablets&quot; و غیره باشد، اما شما می توانید از هر نوع دسته ای استفاده کنید که برای شما مناسب است.',
     'asset_categories' 					=> 'دسته بندی های دارایی',
     'category_name'  					=> 'نام دسته بندی',
     'checkin_email'                     => 'ارسال ایمیل به کاربر در تحویل و استرداد.',

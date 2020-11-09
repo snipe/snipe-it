@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Om kategorier',
-    'about_categories'  				=> 'Kategorier hjelper deg med å organisere ting. Eksempeler på kategorier kan være "Skrivebord", "Bærbare", "Mobiltelefon", "Tablet" og så videre, men du kan bruke kategorier som gir mening for deg.',
     'asset_categories' 					=> 'Kategorier',
     'category_name'  					=> 'Navn',
     'checkin_email'                     => 'Send epost til bruker ved innsjekking/utsjekking.',

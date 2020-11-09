@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Postavi',
 	'select_file'				=> 'Odaberite datoteku ...',
     'select_files'				=> 'Odaberite datoteke...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

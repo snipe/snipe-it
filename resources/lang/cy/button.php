@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Uwchlwytho',
 	'select_file'				=> 'Dewis ffeil...',
     'select_files'				=> 'Dewis ffeiliau...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Despre Accesorii',
-    'about_accessories_text'  			=> 'Accesoriile reprezinta produsele distribuite utilizatorilor, dar care nu au un numar serial (sau nu este de interes unica lor inregistrare). De exemplu, mausurile sau tastaturile.',
     'accessory_category' 				=> 'Categorie Accesorii',
     'accessory_name'  					=> 'Nume Accesoriu',
     'checkout'  							=> 'Predare accesoriu',

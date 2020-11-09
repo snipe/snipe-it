@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Estado',
     'title'      	=> 'Activo ',
     'image'		=> 'Imagen de dispositivo',
-    'days_without_acceptance' => 'Días sin Aceptación'
+    'days_without_acceptance' => 'Días sin Aceptación',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Ustawienia konfiguracji LDAP mogą być znalezione w Administracja -> Ustawienia. Opcjonalnie wybierz lokalizacje, która będzie ustawiona dla zaimportowanych użytkowników.',
     'print_assigned'    => 'Drukuj wszystko przypisane',
     'software_user'     => 'Oprogramowanie przypisane do :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Zobacz Użytkownika :name',
     'usercsv'           => 'plik CSV',
     'two_factor_admin_optin_help' => 'Bieżące ustawienia administracyjne pozwalają na wybiórcze rejestrowanie uwierzytelniania dwuskładnikowego.  ',

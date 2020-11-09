@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Zubehör existiert nicht.',
+    'does_not_exist' => 'Das Zubehör [:id] existiert nicht.',
     'assoc_users'	 => 'Dieses Zubehör ist derzeit an :count Benutzern zur Verwendung ausgegeben worden. Bitte buchen Sie das Zubehör wieder ein und versuchen es dann erneut. ',
 
     'create' => array(

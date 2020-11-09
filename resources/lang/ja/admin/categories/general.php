@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'カテゴリについて',
-    'about_categories'  				=> 'カテゴリーはアイテムを整理するのに役立ちます。カテゴリーの例としては &quot;デスクトップ&quot;、&quot; ラップトップ&quot;、&quot； 携帯電話 &quot;、&quot; タブレット&quot; などがあります。資産カテゴリは任意に設定することができます。',
     'asset_categories' 					=> '資産カテゴリー',
     'category_name'  					=> 'カテゴリー名',
     'checkin_email'                     => 'チェックイン/チェックアウト時、ユーザーに電子メールを送信します。',

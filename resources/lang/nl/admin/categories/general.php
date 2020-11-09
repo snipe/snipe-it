@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Over categorieën',
-    'about_categories'  				=> 'Met categorieën kunt u uw items ordenen. Sommige categorieën kunnen bijvoorbeeld zijn: "Desktops", "Laptops", "Mobiele telefoons", en zo verder, maar je kan categorieën gebruiken op de manier die voor jou zinvol zijn.',
     'asset_categories' 					=> 'Bezit Categorieën',
     'category_name'  					=> 'Categorie Naam',
     'checkin_email'                     => 'Stuur een E-mail naar de gebruiker bij in- of uitchecken.',

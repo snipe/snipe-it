@@ -7,5 +7,8 @@
         'view'               => 'Vizualizați detaliile de întreținere a activelor',
         'repair'             => 'Reparație',
         'maintenance'        => 'întreținere',
-        'upgrade'            => 'Actualizare'
+        'upgrade'            => 'Actualizare',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

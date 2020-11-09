@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Onvoldoende rechten.',
     'user_deleted_warning'      => 'Deze gebruiker werd verwijderd. Om deze gebruiker te bewerken of toe te wijzen aan materiaal, zal deze opnieuw geactiveerd moeten worden.',
     'ldap_not_configured'        => 'LDAP integratie is niet geconfigureerd voor deze installatie.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Activul pe care incercati sa-l asociati cu aceasta licenta apartine unei alte persoane decat cea selectata.',
     'assoc_users'	 => 'Aceasta licenta este momentan predata catre un utilizator si nu poate fi stearsa. Va rugam verificati licenta mai intai si dupa incercati s-o stergeti iar. ',
     'select_asset_or_person' => 'Trebuie să selectați un material sau un utilizator, dar nu ambele.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => '您正在授权的资产已经被占用，请选择其他人。',
     'assoc_users'	 => '此许可证已经分配给某个用户，目前不能被删除，请检查资产信息，然后再尝试删除。',
     'select_asset_or_person' => '您必须选择资产或用户，但不能同时选择两者。',
+    'not_found' => 'License not found',
 
 
     'create' => array(

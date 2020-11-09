@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Postavke LDAP konfiguracije mogu se pronaći u Administrator> Postavke. Odabrana lokacija (opcionalno) će biti podešena za sve importovane korisnike.',
     'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Software Checked out to :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Prikaži korisnika :name',
     'usercsv'           => 'CSV file',
     'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',

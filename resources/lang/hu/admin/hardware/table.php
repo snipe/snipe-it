@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Állapot',
     'title'      	=> 'Eszköz ',
     'image'		=> 'Készülék kép',
-    'days_without_acceptance' => 'Nem elfogadás óta eltelt napok száma'
+    'days_without_acceptance' => 'Nem elfogadás óta eltelt napok száma',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Ang asset na sinusubukan nong iugnay sa lisensyang ito ay pag-aari ng isang tao maliban sa taong piniling maitalaga sa dropdown.',
     'assoc_users'	 => 'Ang lisensyang ito ay kasalukuyang nai-check out sa isang user at hindi maaaring mai-delete. Mangyaring suriin muna na naka in ang lisensya, at pagkatapos subukang i-delete muli. ',
     'select_asset_or_person' => 'Dapat kang pumili ng isang asset o isang user, pero hindi ang dalawa.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

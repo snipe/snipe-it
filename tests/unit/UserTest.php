@@ -104,7 +104,7 @@ class UserTest extends BaseTest
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'nataliaallanovnaromanovaoshostakova';
-        $user = User::generateFormattedNameFromFullName($fullname, 'firstnamelastname)';
+        $user = User::generateFormattedNameFromFullName($fullname, 'firstnamelastname');
         $this->assertEquals($expected_username, $user['username']);
     }
     public function firstNameLastInitial()

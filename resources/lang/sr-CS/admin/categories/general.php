@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'O kategorijama',
-    'about_categories'  				=> 'Kategorije vam pomažu da organizujete stavke. Primer kategorija može biti &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot; i tako dalje, ali kategorije možete koristiti i na bilo koji drugi način koji ima smisla za vas.',
     'asset_categories' 					=> 'Kategorije resursa',
     'category_name'  					=> 'Naziv kategorije',
     'checkin_email'                     => 'Send email to user on checkin/checkout.',

@@ -7,5 +7,8 @@
         'view'               => 'Se aktiv vedligeholdelse detaljer',
         'repair'             => 'Reparér',
         'maintenance'        => 'Vedligeholdelse',
-        'upgrade'            => 'Opgradér'
+        'upgrade'            => 'Opgradér',
+        'calibration'        => 'Kalibrering',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware support',
     ];

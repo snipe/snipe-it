@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'ไม่พบอุปกรณ์เสริม',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'อุปกรณ์เสริมนี้ได้เช็คเอ้าท์ให้ผู้ใช้งานแล้วจำนวน :count รายการในปัจจุบัน กรุณาเช็คอินอุปกรณ์เสริม และลองอีกครั้ง ',
 
     'create' => array(

@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Аксесуар не существует.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Данный аксессуар выдан пользователям в количестве :count. Сделайте возврат аксессуара и попробуйте снова. ',
 
     'create' => array(
