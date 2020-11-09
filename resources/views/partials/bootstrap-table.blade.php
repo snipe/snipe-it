@@ -17,6 +17,16 @@
             stickyHeaderOffsetY += +$('.navbar-fixed-top').css('margin-bottom').replace('px','');
         }
 
+        var blockedFields = "searchable,sortable,switchable,title,visible,formatter,class".split(",");
+
+        var keyBlocked = function(key) {
+            for(var j in blockedFields) {
+                if(key === blockedFields[j]) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
             classes: 'table table-responsive table-no-bordered',
@@ -42,6 +52,15 @@
             pageList: ['10','20', '30','50','100','150','200', '500'],
             pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
             paginationVAlign: 'both',
+            queryParams: function (params) {
+                var newParams = {};
+                for(var i in params) {
+                    if(!keyBlocked(i)) { // only send the field if it's not in blockedFields
+                        newParams[i] = params[i];
+                    }
+                }
+                return newParams;
+            },
             formatLoadingMessage: function () {
                 return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
             },
