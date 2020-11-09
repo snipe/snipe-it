@@ -87,7 +87,7 @@ class ComponentsController extends Controller
         $component->serial                 = $request->input('serial', null);
         $component->purchase_date          = $request->input('purchase_date', null);
         $component->purchase_cost          = $request->input('purchase_cost', null);
-        $component->qty                    = $request->input('qty');
+        $component->qty                    = $request->input('quantity');
         $component->user_id                = Auth::id();
 
 
