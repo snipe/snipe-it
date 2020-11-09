@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Die LDAP Konfigurations Einstellungen finden Sie hier Admin -> Einstellungen. Der (optional) wählbare Standort wird für alle importierten Benutzer gesetzt.',
     'print_assigned'    => 'Alles zugewiesene drucken',
     'software_user'     => 'Software herausgegeben an :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Benutzer :name ansehen',
     'usercsv'           => 'CSV Datei',
     'two_factor_admin_optin_help' => 'Ihre aktuellen Administrator-Einstellungen erlauben die selektive Durchführung der zwei-Faktor-Authentifizierung.  ',

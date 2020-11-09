@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Nid y defnyddiwr sydd wedi nodi yw perchenog yr ased rydych yn ceisio perthnasu ir trwydded yma.',
     'assoc_users'	 => 'Ar hyn o bryd mae\'r trwydded yma allan gan ddefnyddiwr ac ni ellir ei ddileu. Cofnodwch yr trwyddedyn ol i fewn yn gyntaf, ac yna ceisiwch ei ddileu eto. ',
     'select_asset_or_person' => 'Rhaid i chi ddewis ased neu defnyddiwr ond nid y ddau.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Про аксесуари',
-    'about_accessories_text'  			=> 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
     'accessory_category' 				=> 'Категорія аксесуарів',
     'accessory_name'  					=> 'Назва аксесуара',
     'checkout'  							=> 'Видати аксесуар',

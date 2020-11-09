@@ -7,11 +7,23 @@ return array(
     'account_not_activated'  => 'Esta conta de usuário não está ativada.',
     'account_suspended'      => 'Esta conta de usuário está suspensa.',
     'account_banned'         => 'Esta conta de usuário está banida.',
-    'throttle'               => 'Muitas tentativas com falha de login. Por favor, tente novamente no próximo(s) :minutes minuto(s).',
+    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+
+    'two_factor' => array(
+        'already_enrolled'      => 'Your device is already enrolled.',
+        'success'               => 'You have successfully logged in.',
+        'code_required'         => 'Two-factor code is required.',
+        'invalid_code'          => 'Two-factor code is invalid.',
+    ),
 
     'signin' => array(
         'error'   => 'Houve um problema ao tentar-lhe entrar, tente novamente.',
         'success' => 'Você entrou com sucesso.',
+    ),
+
+    'logout' => array(
+        'error'   => 'There was a problem while trying to log you out, please try again.',
+        'success' => 'You have successfully logged out.',
     ),
 
     'signup' => array(
@@ -19,19 +31,15 @@ return array(
         'success' => 'Conta criada com sucesso.',
     ),
 
-        'forgot-password' => array(
-            'error'   => 'Houve um problema ao tentar obter um código de redefinição da senha, tente novamente.',
-            'success' => 'E-mail de recuperação de senha enviado com sucesso.',
-        ),
-
-        'forgot-password-confirm' => array(
-            'error'   => 'Houve um problema ao tentar redefinir sua senha, tente novamente.',
-            'success' => 'Sua senha foi redefinida com sucesso.',
-        ),
-
-    'activate' => array(
-        'error'   => 'Houve um problema ao tentar ativar sua conta, tente novamente.',
-        'success' => 'Sua conta foi ativada com sucesso.',
+    'forgot-password' => array(
+        'error'   => 'Houve um problema ao tentar obter um código de redefinição da senha, tente novamente.',
+        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
     ),
+
+    'forgot-password-confirm' => array(
+        'error'   => 'Houve um problema ao tentar redefinir sua senha, tente novamente.',
+        'success' => 'Sua senha foi redefinida com sucesso.',
+    ),
+
 
 );

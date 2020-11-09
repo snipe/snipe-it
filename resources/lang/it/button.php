@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Carica / Upload',
 	'select_file'				=> 'Seleziona il file...',
     'select_files'				=> 'Seleziona i file...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

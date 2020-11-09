@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Lisävarustetta ei ole olemassa.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Tällä lisävarusteella on tällä hetkellä: laskea kohteet, jotka on tarkistettu käyttäjille. Tarkista lisävarusteet ja yritä uudelleen.',
 
     'create' => array(

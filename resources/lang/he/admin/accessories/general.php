@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'אודות האביזרים',
-    'about_accessories_text'  			=> 'עזרים הם כל דבר שאתה מנפיק למשתמשים אבל אין להם מק"ט (או שאינך מעוניין לעקוב אחריהם לפי יחידה). לדוגמא, מקלדות ועכברים.',
     'accessory_category' 				=> 'סוג האביזר',
     'accessory_name'  					=> 'שם אביזר',
     'checkout'  							=> 'נפק עזר',

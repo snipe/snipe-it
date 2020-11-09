@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Verstuur',
 	'select_file'				=> 'Bestand selecteren...',
     'select_files'				=> 'Bestanden selecteren...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

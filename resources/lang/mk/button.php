@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Прикачи',
 	'select_file'				=> 'Избери датотека...',
     'select_files'				=> 'Избери датотека...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

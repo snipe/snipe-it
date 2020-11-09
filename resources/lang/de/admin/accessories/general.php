@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Über Zubehör',
-    'about_accessories_text'  			=> 'Ein Zubehör ist alles was Sie an einen Benutzer ausgeben können, jedoch keine Seriennummer besitzt (oder es keinen Sinn macht diese zu verwalten). Zum Beispiel: Mäuse und Tastaturen.',
     'accessory_category' 				=> 'Zubehörkategorie',
     'accessory_name'  					=> 'Zubehör-Name',
     'checkout'  							=> 'Zubehör herausgeben',

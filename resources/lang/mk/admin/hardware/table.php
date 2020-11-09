@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Состојба',
     'title'      	=> 'Основно средство ',
     'image'		=> 'Слика',
-    'days_without_acceptance' => 'Денови без прифаќање'
+    'days_without_acceptance' => 'Денови без прифаќање',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

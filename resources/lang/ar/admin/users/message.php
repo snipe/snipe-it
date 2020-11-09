@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'صلاحيات غير كافية.',
     'user_deleted_warning'      => 'تم حذف المستخدم. سيكون عليك استعادة هذا المستخدم اذا ارت التعديل عليه او تسليمه اجهزة جديدة.',
     'ldap_not_configured'        => 'لم يتم تكوين دمج لداب لهذا التثبيت.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

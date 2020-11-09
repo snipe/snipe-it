@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'הרשאות לא מספיקות.',
     'user_deleted_warning'      => 'משתמש זה נמחק. יהיה עליך לשחזר משתמש זה כדי לערוך אותם או להקצות להם נכסים חדשים.',
     'ldap_not_configured'        => 'שילוב LDAP לא הוגדר עבור התקנה זו.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

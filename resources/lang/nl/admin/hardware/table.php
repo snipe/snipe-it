@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
     'image'		=> 'Product afbeelding',
-    'days_without_acceptance' => 'Dagen zonder acceptatie'
+    'days_without_acceptance' => 'Dagen zonder acceptatie',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

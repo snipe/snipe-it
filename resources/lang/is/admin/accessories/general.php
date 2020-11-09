@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Um aukabúnað',
-    'about_accessories_text'  			=> 'Aukabúnaður er allur sá búnaður sem hefur ekki raðnúmer eða það sem þarf ekki að halda utan um. T.d. tölvumús eða lyklaborð.',
     'accessory_category' 				=> 'Flokkur aukabúnaðs',
     'accessory_name'  					=> 'Nafn aukabúnaðs',
     'checkout'  							=> 'Afgreiða aukabúnað',

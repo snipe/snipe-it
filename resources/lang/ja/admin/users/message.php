@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => '権限が不足しています。',
     'user_deleted_warning'      => '利用者が削除されました。これらを編集するにはユーザーを復旧するか、新しい資産を割り当てなければなりません。',
     'ldap_not_configured'        => 'LDAPの統合は、インストール時に設定されません。',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

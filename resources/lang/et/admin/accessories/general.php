@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Lisavarustuse kohta',
-    'about_accessories_text'  			=> 'Aksessuaarid on kõik, mida kasutajad teate, kuid kellel ei ole seerianumbrit (või te ei hooli nende jälgimisest unikaalselt). Näiteks arvutihiirid või klaviatuurid.',
     'accessory_category' 				=> 'Lisatarvikute kategooria',
     'accessory_name'  					=> 'Lisaseade Nimi',
     'checkout'  							=> 'Checkout Lisavarustus',

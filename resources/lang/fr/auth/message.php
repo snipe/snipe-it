@@ -7,11 +7,23 @@ return array(
     'account_not_activated'  => 'Ce compte n\'est pas activé.',
     'account_suspended'      => 'Ce compte est suspendu.',
     'account_banned'         => 'Ce compte est banni.',
-    'throttle'               => 'Trop de tentatives de connexion échouées. S\'il vous plait réessayez à nouveau dans quelques minutes.',
+    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+
+    'two_factor' => array(
+        'already_enrolled'      => 'Your device is already enrolled.',
+        'success'               => 'You have successfully logged in.',
+        'code_required'         => 'Two-factor code is required.',
+        'invalid_code'          => 'Two-factor code is invalid.',
+    ),
 
     'signin' => array(
         'error'   => 'Un problème a eu lieu pendant votre connexion, veuillez essayer à nouveau.',
         'success' => 'Vous avez été connecté avec succès.',
+    ),
+
+    'logout' => array(
+        'error'   => 'There was a problem while trying to log you out, please try again.',
+        'success' => 'You have successfully logged out.',
     ),
 
     'signup' => array(
@@ -19,19 +31,15 @@ return array(
         'success' => 'Le compte a été créé avec succès.',
     ),
 
-        'forgot-password' => array(
-            'error'   => 'Un problème a eu lieu pendant la récupération du code de réinitialisation de mot de passe, veuillez essayer à nouveau.',
-            'success' => 'L\'e-mail de réinitialisation de mot de passe a été envoyé avec succès.',
-        ),
-
-        'forgot-password-confirm' => array(
-            'error'   => 'Un problème a eu lieu pendant la réinitialisation de votre mot de passe, veuillez essayer à nouveau.',
-            'success' => 'Votre mot de passe a été réinitialisé avec succès.',
-        ),
-
-    'activate' => array(
-        'error'   => 'Un problème a eu lieu pendant l\'activation de votre compte, veuillez essayer à nouveau.',
-        'success' => 'Votre compte a été activé avec succès.',
+    'forgot-password' => array(
+        'error'   => 'Un problème a eu lieu pendant la récupération du code de réinitialisation de mot de passe, veuillez essayer à nouveau.',
+        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
     ),
+
+    'forgot-password-confirm' => array(
+        'error'   => 'Un problème a eu lieu pendant la réinitialisation de votre mot de passe, veuillez essayer à nouveau.',
+        'success' => 'Votre mot de passe a été réinitialisé avec succès.',
+    ),
+
 
 );

@@ -4,6 +4,7 @@ return [
     'send_password_link'	        => 'Sūtīt paroles atiestatīšanas saiti',
     'email_reset_password'			=> 'E-pasts paroles atiestatīšana',
     'reset_password'			    => 'Atiestatīt paroli',
+    'saml_login'                    => 'Login via SAML',
     'login'                         => 'Pieslēgties',
     'login_prompt'                  => 'Lūdzu, piesakieties',
     'forgot_password'               => 'Es aizmirsu savu paroli',

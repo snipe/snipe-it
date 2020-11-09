@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'El activo al que estás intentando asociar con esta licencia está asignado a un usuario diferente al de la persona seleccionada para retirar.',
     'assoc_users'	 => 'Esta licencia está actualmente asignada a un usuario y no puede ser borrada. Por favor, revisa la licencia primero y luego intenta borrarla. ',
     'select_asset_or_person' => 'Debes seleccionar un activo o un usuario, pero no ambos.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

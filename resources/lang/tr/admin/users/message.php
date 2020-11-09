@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Yetersiz izinler.',
     'user_deleted_warning'      => 'Bu kullanıcı silindi. Bunları düzenlemek veya onları yeni varlıklar atamak için bu kullanıcı geri yüklemek gerekir.',
     'ldap_not_configured'        => 'LDAP entegrasyonu bu yükleme için yapılandırılmamış.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

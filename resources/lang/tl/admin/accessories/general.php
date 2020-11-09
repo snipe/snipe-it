@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Tungkol sa accessory',
-    'about_accessories_text'  			=> 'Ang mga accessory na kahit ano pang ini-issue mo sa mga user ngunit walang numero na serial (o wala Kang pakialam tungkol sa pag-track sakanila bilang kakaiba). Halimbawa, kompyuter mice o keyboards.',
     'accessory_category' 				=> 'Kategorya ng accessory',
     'accessory_name'  					=> 'Pangalan ng accessory',
     'checkout'  							=> 'Checkout Accessory',

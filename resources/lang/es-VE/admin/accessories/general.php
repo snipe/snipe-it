@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Sobre los Accesorios',
-    'about_accessories_text'  			=> 'Los accesorios son cualquier cosa que entregas a los usuarios pero que no tiene un número de serial (o que no te importa seguirlos a cada uno). Por ejemplo, ratones o teclados.',
     'accessory_category' 				=> 'Categoría de Accesorios',
     'accessory_name'  					=> 'Nombre de Accesorio',
     'checkout'  							=> 'Accesorio de Salida',

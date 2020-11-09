@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Статус',
     'title'      	=> 'Актив',
     'image'		=> 'Төхөөрөмжийн дүрс',
-    'days_without_acceptance' => 'Хүлээн зөвшөөрөхгүй өдрүүд'
+    'days_without_acceptance' => 'Хүлээн зөвшөөрөхгүй өдрүүд',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

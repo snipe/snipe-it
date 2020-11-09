@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Tietoja luokista',
-    'about_categories'  				=> 'Kategoriat auttavat sinua järjestämään kohteita. Joitakin esimerkkiluokkia voivat olla &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot; ja niin edelleen, mutta voit käyttää luokkia millä tahansa tavalla, mikä on järkevää sinulle.',
     'asset_categories' 					=> 'Laiteluokat',
     'category_name'  					=> 'Luokan Nimi',
     'checkin_email'                     => 'Lähetä käyttäjälle sähköposti palautuksesta/luovutuksesta.',

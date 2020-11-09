@@ -7,5 +7,8 @@
         'view'               => 'Controlla Dettagli Manutenzione Prodotto',
         'repair'             => 'Ripara',
         'maintenance'        => 'Manutenzione',
-        'upgrade'            => 'Aggiorna'
+        'upgrade'            => 'Aggiorna',
+        'calibration'        => 'Calibrazione',
+        'software_support'   => 'Supporto Software',
+        'hardware_support'   => 'Supporto Hardware',
     ];

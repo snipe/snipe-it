@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP configuratie kan worden gevonden in Admin > Instellingen. De (optioneel) geselecteerde locatie zal voor alle geimporteerde gebruikers ingesteld worden.',
     'print_assigned'    => 'Print alles wat toegewezen is',
     'software_user'     => 'Software toegekend aan :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Bekijk gebruiker :name',
     'usercsv'           => 'CSV bestand',
     'two_factor_admin_optin_help' => 'De huidige beheer instellingen staan selectief gebruik van twee factor authenticatie toe.  ',

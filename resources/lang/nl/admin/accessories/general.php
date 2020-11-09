@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Over Accessoires',
-    'about_accessories_text'  			=> 'Accessoires zijn alles wat je uitgeeft aan gebruikers maar welke geen serienummer hebben (of welke niet interessant genoeg zijn om individueel te volgen) Bij voorbeeld computer muizen of toetsenborden.',
     'accessory_category' 				=> 'Accessoire Categorie',
     'accessory_name'  					=> 'Accessoire Naam',
     'checkout'  							=> 'Checkout accessoire',

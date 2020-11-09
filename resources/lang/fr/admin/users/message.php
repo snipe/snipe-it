@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Droits insuffisants.',
     'user_deleted_warning'      => 'Cet utilisateur a été supprimé. Vous devez le restaurer pour pouvoir l\'éditer ou lui assigner de nouveaux actifs.',
     'ldap_not_configured'        => 'L\'intégration LDAP n\'a pas été configuré pour cette installation .',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

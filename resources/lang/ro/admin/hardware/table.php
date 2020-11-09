@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Statut',
     'title'      	=> 'Activ ',
     'image'		=> 'Imagine dispozitiv',
-    'days_without_acceptance' => 'Zile fără acceptare'
+    'days_without_acceptance' => 'Zile fără acceptare',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

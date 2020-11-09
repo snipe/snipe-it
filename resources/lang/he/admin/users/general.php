@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'הגדרות תצורה של LDAP נמצאות \'מנהל\'> \'הגדרות\'. המיקום הנבחר (אופציונלי) ייקבע עבור כל המשתמשים המיובאים.',
     'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'התוכנה נבדקה אל: שם',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'הצג משתמש: שם',
     'usercsv'           => 'קובץ CSV',
     'two_factor_admin_optin_help' => 'הגדרות מנהל המערכת הנוכחיות מאפשרות אכיפה סלקטיבית של אימות דו-גורמי.',

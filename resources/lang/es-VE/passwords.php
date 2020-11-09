@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => '¡El enlace de tu contraseña ha sido enviado!',
-    'user'			=> 'No se ha encontrado ningún usuario activo con ese correo electrónico.',
+    'user'			=> 'No se encontró ningún usuario activo con este correo electrónico.',
 ];
 

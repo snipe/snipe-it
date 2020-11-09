@@ -7,5 +7,8 @@
         'view'               => 'Погледнете детали за одржување на средствата',
         'repair'             => 'Поправка',
         'maintenance'        => 'Одржување',
-        'upgrade'            => 'Надградба'
+        'upgrade'            => 'Надградба',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

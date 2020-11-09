@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Status',
     'title'      	=> 'Nabytek',
     'image'		=> 'Zdjęcie urządzenia',
-    'days_without_acceptance' => 'Dni bez akceptacji'
+    'days_without_acceptance' => 'Dni bez akceptacji',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

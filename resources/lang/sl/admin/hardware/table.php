@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Status',
     'title'      	=> 'Sredstvo ',
     'image'		=> 'Slika naprave',
-    'days_without_acceptance' => 'Dnevi brez sprejema'
+    'days_without_acceptance' => 'Dnevi brez sprejema',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

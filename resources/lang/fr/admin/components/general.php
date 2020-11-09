@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> 'A propos des composants',
-    'about_components_text'  			=> 'Les composants sont des éléments constitutifs d\'un objet, par exemple HDD, RAM, etc.',
     'component_name'                  => 'Nom du composant',
     'checkin'                             => 'Dissocier un composant',
     'checkout'                             => 'Attribuer un composant',
