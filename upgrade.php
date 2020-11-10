@@ -73,7 +73,7 @@ $ext_missing = '';
 $ext_installed = '';
 
 // Loop through the required extensions
-foreach ($required_exts_array as $rkey => $required_ext) {
+foreach ($required_exts_array as $required_ext) {
 
     // If we don't find the string in the array....
     if (!in_array($required_ext, $loaded_exts_array)) {
@@ -85,7 +85,7 @@ foreach ($required_exts_array as $rkey => $required_ext) {
             $require_either = explode("|", $required_ext);
 
             // Now loop through the either/or array and see whether any of the options match
-            foreach ($require_either as $rqkey => $require_either_value) {
+            foreach ($require_either as $require_either_value) {
 
                 if (in_array($require_either_value, $loaded_exts_array)) {
                     break;
@@ -114,7 +114,7 @@ if ($ext_missing!='') {
     echo "--------------------------------------------------------\n\n";
     echo "You have the following extensions installed: \n\n";
 
-    foreach ($loaded_exts_array as $lkey => $loaded_ext) {
+    foreach ($loaded_exts_array as $loaded_ext) {
        echo "- ".$loaded_ext."\n";
     }
 
@@ -172,27 +172,23 @@ echo "--------------------------------------------------------\n";
 echo "Step 5: Cleaning up old cached files:\n";
 echo "--------------------------------------------------------\n\n";
 
+// Build an array of the files we generally want to delete because they
+// can cause issues with funky caching
+$unused_files = [
+    "bootstrap/cache/compiled.php",
+    "bootsrap/cache/services.php",
+    "bootstrap/cache/config.php",
+];
 
-if (file_exists('bootstrap/cache/compiled.php')) {
-    echo "√ Deleting bootstrap/cache/compiled.php. It is no longer used.\n";
-    @unlink('bootstrap/cache/compiled.php');
-} else {
-    echo "√ No bootstrap/cache/compiled.php, so nothing to delete.\n";
+foreach ($unused_files as $unused_file) {
+    if (file_exists($unused_file)) {
+        echo "√ Deleting ".$unused_file.". It is no longer used.\n";
+        @unlink('bootstrap/cache/compiled.php');
+    } else {
+        echo "√ No ".$unused_file.", so nothing to delete.\n";
+    }
 }
 
-if (file_exists('bootstrap/cache/services.php')) {
-    echo "√ Deleting bootstrap/cache/services.php. It it no longer used.\n";
-    @unlink('bootstrap/cache/services.php');
-} else {
-    echo "√ No bootstrap/cache/services.php, so nothing to delete.\n";
-}
-
-if (file_exists('bootstrap/cache/config.php')) {
-    echo "√ Deleting bootstrap/cache/config.php. It it no longer used.\n";
-    @unlink('bootstrap/cache/config.php');
-} else {
-    echo "√ No bootstrap/cache/config.php, so nothing to delete.\n";
-}
 
 $config_clear = shell_exec('php artisan config:clear');
 $cache_clear = shell_exec('php artisan cache:clear');
