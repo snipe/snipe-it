@@ -140,7 +140,7 @@ echo "--------------------------------------------------------\n";
 echo "STEP 3: Putting application into maintenance mode: \n";
 echo "--------------------------------------------------------\n\n";
 $down = shell_exec('php artisan down');
-echo '-- '.$down."\n\n";
+echo '-- '.$down."\n";
 
 
 echo "--------------------------------------------------------\n";
@@ -218,13 +218,13 @@ if (file_exists('composer.phar')) {
     $composer = shell_exec('php composer.phar install --no-dev --prefer-source');
 
 } else {
-    echo "-- We couldn't find a local composer.phar - trying globally.\n\n";
+    echo "-- We couldn't find a local composer.phar. No worries, trying globally.\n\n";
     $composer_dump = shell_exec('composer dump');
     $composer = shell_exec('composer install --no-dev --prefer-source');
 }
 
 echo $composer_dump."\n";
-echo $composer."\n";
+echo $composer;
 
 
 echo "--------------------------------------------------------\n";
@@ -232,7 +232,7 @@ echo "Step 7: Migrating database:\n";
 echo "--------------------------------------------------------\n\n";
 
 $migrations = shell_exec('php artisan migrate --force');
-echo '-- '.$migrations."\n";
+echo $migrations."\n";
 
 
 echo "--------------------------------------------------------\n";
