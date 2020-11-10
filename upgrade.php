@@ -20,7 +20,7 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 (array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
 
 echo "--------------------------------------------------------\n";
-echo "\nWelcome to the Snipe-IT upgrader! \n\n";
+echo "Welcome to the Snipe-IT upgrader! \n";
 echo "--------------------------------------------------------\n\n";
 echo "This script will attempt to: \n\n";
 echo "- check your PHP version and extension requirements \n";
