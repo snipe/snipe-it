@@ -19,72 +19,105 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 // otherwise just use master
 (array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
 
-echo "Welcome to the Snipe-IT upgrader.\n\n";
-echo "Please note that this script will not download the latest Snipe-IT \n";
-echo "files for you unless you have git installed. \n";
-echo "It simply runs the standard composer and artisan \n";
-echo "commands needed to finalize the upgrade after. \n\n";
-
-echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
-echo "!! If you have any encrypted custom fields, BE SURE TO run the recrypter if upgrading from v3 to v4. \n";
-echo "!! See the Snipe-IT documentation for help: \n";
-echo "!! https://snipe-it.readme.io/docs/upgrading-to-v4\n";
-echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
+echo "\nWelcome to the Snipe-IT upgrader. This script will attempt to: \n\n";
+echo "- check your PHP version and extension requirements \n";
+echo "- do a git pull to bring you to the latest version \n";
+echo "- run composer install to get your vendors up to date \n";
+echo "- run migrations to get your schema up to date \n";
+echo "- clear out old cache settings\n\n";
 
 echo "--------------------------------------------------------\n";
 echo "STEP 1: Checking PHP requirements: \n";
 echo "--------------------------------------------------------\n\n";
 
-echo "Current PHP version: " . PHP_VERSION . "\n\n";
-
 if (version_compare(PHP_VERSION, $required_version, '<')) {
     echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
-    echo "This version of PHP is not compatible with Snipe-IT.\n";
+    echo "This version of PHP (".PHP_VERSION.") is not compatible with Snipe-IT.\n";
     echo "Snipe-IT requires PHP version ".$required_version." or greater. Please upgrade \n";
     echo "your server's version of PHP (mod and cli) and try running this script again.\n\n\n";
     exit;
 
 } else {
-    echo "PHP version: " . PHP_VERSION . " is at least ".$required_version." - continuing... \n";
-    echo sprintf("The php.ini used by PHP: %s\n\n", get_cfg_var('cfg_file_path'))."\n\n";
+    echo "Current PHP version: (" . PHP_VERSION . ") is at least ".$required_version." - continuing... \n";
+    echo sprintf("FYI: The php.ini used by this PHP is: %s\n\n", get_cfg_var('cfg_file_path'));
 }
 
-$ext_check = '';
-if ((!extension_loaded('gd')) || (!extension_loaded('imagick'))) {
-    $ext_check .= "PHP extension MISSING: gd or imagick \n";
+
+
+$loaded_exts_array = get_loaded_extensions();
+$required_exts_array =
+    [
+        'bcmath',
+        'curl',
+        'fileinfo',
+		'gd|imagick',
+        'json',
+        'ldap',
+        'mbstring',
+        'mysqli|pgsql',
+        'openssl',
+        'PDO',
+        'tokenizer',
+        'xml',
+        'zip',
+    ];
+
+$ext_missing = '';
+$ext_installed = '';
+foreach ($required_exts_array as $rkey => $required_ext) {
+
+    // If we don't find the string in the array....
+    if (!in_array($required_ext, $loaded_exts_array)) {
+
+        // Let's check for any options with pipes in them - those mean you can have either or
+        if (strpos($required_ext, '|')) {
+
+            // Split the either/ors by their pipe and put them into an array
+            $require_either = explode("|", $required_ext);
+
+            // Now loop through the either/or array and see whether any of the options match
+            foreach ($require_either as $rqkey => $require_either_value) {
+
+                if (in_array($require_either_value, $loaded_exts_array)) {
+                    break;
+                // If no match, add it to the string for errors
+                } else {
+                    $ext_missing .=  'MISSING PHP EXTENSION: '.str_replace("|", " OR ", $required_ext)."\n";
+                    break;
+                }
+            }
+
+        // If this isn't an either/or option, just add it to the string of errors conventionally
+        } else {
+            $ext_missing .=  'MISSING PHP EXTENSION: '.$required_ext."\n";
+        }
+
+    // The required extension string was found in the array of installed extensions - yay!
+    } else {
+        $ext_installed .=  '√ '.$required_ext." is installed!\n";
+    }
 }
 
-if (!extension_loaded('ldap'))  {
-    $ext_check .= "PHP extension MISSING: php-ldap \n";
-}
-
-if (!extension_loaded('json'))  {
-    $ext_check .= "PHP extension MISSING: php-json \n";
-}
-
-if (!extension_loaded('fileinfo'))  {
-    $ext_check .= "PHP extension MISSING: php-fileinfo \n";
-}
-
-if (!extension_loaded('openssl'))  {
-    $ext_check .= "PHP extension MISSING: php-openssl \n";
-}
-
-if (!extension_loaded('curl'))  {
-    $ext_check .= "PHP extension MISSING: php-curl \n";
-}
-
-if (!extension_loaded('mbstring'))  {
-    $ext_check .= "PHP extension MISSING: php-mbstring \n";
-}
-
-if ($ext_check!='') {
+// Print out a useful error message and abort the install
+if ($ext_missing!='') {
     echo "--------------------------------------------------------\n";
-    echo $ext_check;
-    echo "ABORTING. Please install the extensions above and re-run this script.";
-    echo "--------------------------------------------------------\n";
+    echo $ext_missing."\n\n";
+    echo "You have the following extensions installed: \n\n";
+
+    foreach ($loaded_exts_array as $lkey => $loaded_ext) {
+       echo "- ".$loaded_ext."\n";
+    }
+
+    echo "------------------------- :( ---------------------------\n";
+    echo "ABORTING THE INSTALLER  \n";
+    echo "Please install the extensions above and re-run this script.\n\n";
+    echo "------------------------- :( ---------------------------\n";
     exit;
+} else {
+    echo $ext_installed;
+
 }
+
 
 echo "--------------------------------------------------------\n";
 echo "STEP 2: Backing up database: \n";
@@ -117,6 +150,11 @@ if ((strpos('git version', $git_version)) === false) {
 } else {
     echo "Git is NOT installed. You can still use this upgrade script to run common \n";
     echo "migration commands, but you will have to manually download the updated files. \n\n";
+    echo "Please note that this script will not download the latest Snipe-IT \n";
+    echo "files for you unless you have git installed. \n";
+    echo "It simply runs the standard composer, artisan, and migration \n";
+    echo "commands needed to finalize the upgrade after. \n\n";
+
 }
 
 
