@@ -217,8 +217,8 @@ if (file_exists('composer.phar')) {
     $composer = shell_exec('composer install --no-dev --prefer-source');
 }
 
-echo $composer_dump."\n\n";
-echo $composer."\n\n";
+echo $composer_dump."\n";
+echo $composer."\n";
 
 
 echo "--------------------------------------------------------\n";
