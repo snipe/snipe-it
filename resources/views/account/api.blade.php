@@ -27,6 +27,8 @@
                 <code>{{ url('/api/v1') }}</code></p>
 
                 <p>When you generate an API token, be sure to copy it down immediately as they will not be visible to you again. </p>
+
+                <p>API tokens will expire in {{ config('passport.expiration_years') }} years.</p>
             </div>
         </div>
 
