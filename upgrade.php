@@ -266,9 +266,9 @@ echo '-- '.$up."\n";
 
 
 
-echo "--------------------------------------------------------\n";
-echo "FINISHED! Clear your browser cookies and re-login to use :\n";
-echo "your upgraded Snipe-IT.\n";
+echo "---------------------- FINISHED! -----------------------\n";
+echo "All done! Clear your browser cookies and re-login to use \n";
+echo "your upgraded Snipe-IT!\n";
 echo "--------------------------------------------------------\n\n";
 
 
