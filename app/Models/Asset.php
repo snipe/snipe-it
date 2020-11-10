@@ -232,7 +232,10 @@ class Asset extends Depreciable
     }
 
     /**
-     * Determines if an asset is available for checkout
+     * Determines if an asset is available for checkout.
+     * This checks to see if the it's checked out to an invalid (deleted) user
+     * OR if the assigned_to and deleted_at fields on the asset are empty AND
+     * that the status is deployable
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
@@ -241,9 +244,10 @@ class Asset extends Depreciable
     public function availableForCheckout()
     {
         if (
-            (empty($this->assigned_to)) &&
+            (!$this->assignedTo) ||
+            ((empty($this->assigned_to)) &&
             (empty($this->deleted_at)) &&
-            (($this->assetstatus) && ($this->assetstatus->deployable == 1)))
+            (($this->assetstatus) && ($this->assetstatus->deployable == 1))))
         {
             return true;
         }
@@ -424,7 +428,7 @@ class Asset extends Depreciable
      */
     public function assignedTo()
     {
-        return $this->morphTo('assigned', 'assigned_type', 'assigned_to');
+        return $this->morphTo('assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
     /**
