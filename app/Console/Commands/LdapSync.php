@@ -108,7 +108,7 @@ class LdapSync extends Command
      */
     public function handle()
     {
-        ini_set('max_execution_time', env('LDAP_TIME_LIM', 600)); //600 seconds = 10 minutes
+        ini_set('max_execution_time', env('LDAP_TIME_LIM', "600")); //600 seconds = 10 minutes
         ini_set('memory_limit', '500M');
         $old_error_reporting = error_reporting(); // grab old error_reporting .ini setting, for later re-enablement
         error_reporting($old_error_reporting & ~E_DEPRECATED); // disable deprecation warnings, for LDAP in PHP 7.4 (and greater)
