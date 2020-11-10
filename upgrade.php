@@ -20,7 +20,7 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 (array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
 
 echo "--------------------------------------------------------\n";
-echo "Welcome to the Snipe-IT upgrader! \n";
+echo "WELCOME TO THE SNIPE-IT UPGRADER! \n";
 echo "--------------------------------------------------------\n\n";
 echo "This script will attempt to: \n\n";
 echo "- check your PHP version and extension requirements \n";
@@ -46,6 +46,7 @@ if (version_compare(PHP_VERSION, $required_version, '<')) {
 }
 
 
+echo "Checking PHP extensions: \n\n";
 
 $loaded_exts_array = get_loaded_extensions();
 $required_exts_array =
