@@ -57,7 +57,9 @@ class FixMismatchedAssetsAndLogs extends Command
         }
 
         $mismatch_count = 0;
-        $assets = Asset::whereNotNull('assigned_to')->where('assigned_type', '=', 'App\\Models\\User')->get();
+        $assets = Asset::whereNotNull('assigned_to')
+            ->where('assigned_type', '=', 'App\\Models\\User')
+            ->orderBy('id', 'ASC')->get();
         foreach ($assets as $asset) {
 
             // get the last checkout of the asset
