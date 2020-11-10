@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Tillgång',
     'image'		=> 'Enhetsbild',
     'days_without_acceptance' => 'Dagar utan godkännande',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Månatlig avskrivning'
 
 );

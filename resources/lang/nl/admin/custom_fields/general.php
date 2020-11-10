@@ -4,7 +4,7 @@ return array(
     'custom_fields'		        => 'Speciale velden',
     'field'		                => 'Veld',
     'about_fieldsets_title'		=> 'Over veldverzamelingen',
-    'about_fieldsets_text'		=> 'Veldverzamelingen laat jou groepen van aangepaste velden maken die vaak worden hergebruikt voor specifieke soorten eigendoms modellen.',
+    'about_fieldsets_text'		=> 'Veldverzamelingen stellen je in staat groepen van aangepaste velden te maken die vaak worden hergebruikt voor specifieke soorten asset modellen.',
     'custom_format'             => 'Aangepaste indeling...',
     'encrypt_field'      	        => 'Encrypt de waarde van dit veld in de database',
     'encrypt_field_help'      => 'Waarschuwing: Versleutelen van dit veld maakt het onmogelijk om hierop te zoeken.',

@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Asset ',
     'image'		=> 'Geräte-Bild',
     'days_without_acceptance' => 'Tage ohne Akzeptierung',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monatliche Abschreibung'
 
 );

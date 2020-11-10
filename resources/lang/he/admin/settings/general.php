@@ -28,7 +28,7 @@ return array(
     'confirm_purge_help'		=> 'Enter the text "DELETE" in the box below to purge your deleted records. This action cannot be undone and will PERMANENTLY delete all soft-deleted items and users. (You should make a backup first, just to be safe.)',
     'custom_css'				=> 'CSS מותאם אישית',
     'custom_css_help'			=> 'הזן כל דריסת CSS מותאמת אישית שבה תרצה להשתמש. אל תכלול את התגים &lt;style&gt;&lt;/style&gt;.',
-    'custom_forgot_pass_url'	=> 'Custom Password Reset URL',
+    'custom_forgot_pass_url'	=> 'כתובת איפוס ססמה בהתאמה אישית',
     'custom_forgot_pass_url_help'	=> 'This replaces the built-in forgotten password URL on the login screen, useful to direct people to internal or hosted LDAP password reset functionality. It will effectively disable local user forgotten password functionality.',
     'dashboard_message'			=> 'Dashboard Message',
     'dashboard_message_help'	=> 'This text will appear on the dashboard for anyone with permission to view the dashboard.',

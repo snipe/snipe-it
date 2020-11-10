@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about_kits_title'                  => 'About Predefined Kits',
-    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
-    'checkout'                          => 'Checkout Kit ',
-    'create_success'                    => 'Kit was successfully created.',
-    'create'                            => 'Create Predefined Kit',
-    'update'                            => 'Update Predefined Kit',
-    'delete_success'                    => 'Kit was successfully deleted.',
-    'update_success'                    => 'Kit was successfully updated.',
-    'none_models'                       => 'There are not enough available assets for :model to checkout. :qty are required. ',
-    'none_licenses'                     => 'There are not enough available seats for :license to checkout. :qty are required. ',
-    'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
-    'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
+    'about_kits_title'                  => 'À propos des kits prédéfinis',
+    'about_kits_text'                   => 'Les kits prédéfinis vous permettent d\'associer rapidement une collection d\'éléments (matériels, licences, etc.) à un utilisateur. Cela peut être utile lorsque votre processus d\'intégration est cohérent entre plusieurs utilisateurs et que tous les utilisateurs reçoivent les mêmes éléments.',
+    'checkout'                          => 'Associer le kit ',
+    'create_success'                    => 'Le kit a été créé avec succès.',
+    'create'                            => 'Créer un kit prédéfini',
+    'update'                            => 'Mettre à jour le kit prédéfini',
+    'delete_success'                    => 'Le kit a été supprimé avec succès.',
+    'update_success'                    => 'Le kit a été mis à jour avec succès.',
+    'none_models'                       => 'Il n\'y a pas assez de matériels disponibles pour :model à associer. :qty sont nécessaires. ',
+    'none_licenses'                     => 'Il n\'y a pas assez de licences disponibles pour :license pour associer. :qty sont nécessaires. ',
+    'none_consumables'                  => 'Il n\'y a pas assez d\'unités disponibles de :consumable pour associer. :qty sont nécessaires. ',
+    'none_accessory'                    => 'Il n\'y a pas assez d\'unités disponibles de :accessory pour associer. :qty sont nécessaires. ',
 
 );

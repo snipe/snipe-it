@@ -2,8 +2,8 @@
 
 return array(
     'about_manufacturers_title'    => 'Over fabrikanten',
-    'about_manufacturers_text'  => 'Fabrikanten zijn bedrijven die uw objecten maken. U kunt hier belangrijke ondersteuningsinformatie over deze bedrijven opslaan die zal worden weergegeven op de detail pagina van uw objecten.',
-    'asset_manufacturers'	=> 'Product fabrikanten',
+    'about_manufacturers_text'  => 'Fabrikanten zijn de bedrijven die uw assets maken. U kunt hier belangrijke contactinformatie over hen opslaan, die wordt weergegeven op de detailpagina van uw asset.',
+    'asset_manufacturers'	=> 'Asset fabrikanten',
     'create'				=> 'Maak fabrikant aan',
     'id'   					=> 'ID',
     'name'      			=> 'Naam',

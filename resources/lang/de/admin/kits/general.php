@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about_kits_title'                  => 'About Predefined Kits',
-    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
-    'checkout'                          => 'Checkout Kit ',
-    'create_success'                    => 'Kit was successfully created.',
-    'create'                            => 'Create Predefined Kit',
-    'update'                            => 'Update Predefined Kit',
-    'delete_success'                    => 'Kit was successfully deleted.',
-    'update_success'                    => 'Kit was successfully updated.',
-    'none_models'                       => 'There are not enough available assets for :model to checkout. :qty are required. ',
-    'none_licenses'                     => 'There are not enough available seats for :license to checkout. :qty are required. ',
-    'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
-    'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
+    'about_kits_title'                  => 'Über vordefinierte Kits',
+    'about_kits_text'                   => 'Mit vordefinierten Kits können Sie schnell eine Sammlung von Elementen (Assets, Lizenzen, etc.) an einen Benutzer ausgeben. Dies kann hilfreich sein, wenn Ihr Onboarding-Prozess über viele Nutzer hinweg einheitlich ist und alle Nutzer die gleichen Artikel erhalten.',
+    'checkout'                          => 'Kit herausgeben ',
+    'create_success'                    => 'Kit wurde erfolgreich erstellt.',
+    'create'                            => 'Vordefiniertes Kit erstellen',
+    'update'                            => 'Vordefiniertes Kit aktualisieren',
+    'delete_success'                    => 'Kit wurde erfolgreich gelöscht.',
+    'update_success'                    => 'Kit wurde erfolgreich aktualisiert.',
+    'none_models'                       => 'Es gibt nicht genügend verfügbare Assets für :model zum Herausgeben. :qty sind erforderlich. ',
+    'none_licenses'                     => 'Es gibt nicht genügend Lizenzen für :license zum Herausgeben. :qty sind erforderlich. ',
+    'none_consumables'                  => 'Es gibt nicht genügend verfügbare Einheiten von :consumable zum Herausgeben. :qty sind erforderlich. ',
+    'none_accessory'                    => 'Es gibt nicht genügend verfügbare Einheiten von :accessory zum Herausgeben. :qty werden benötigt. ',
 
 );

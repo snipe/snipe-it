@@ -4,7 +4,7 @@ return array(
     'actions' 	                => 'Acties',
     'add'    	                => 'Toevoegen',
     'cancel'                    => 'Annuleren',
-    'checkin_and_delete'  	    => 'Binnenmelden en gebruiker verwijderen',
+    'checkin_and_delete'  	    => 'Inchecken en gebruiker verwijderen',
     'delete'  	                => 'Verwijder',
     'edit'    	                => 'Bewerk',
     'restore' 	                => 'Herstel',
@@ -13,5 +13,5 @@ return array(
     'upload'                    => 'Verstuur',
 	'select_file'				=> 'Bestand selecteren...',
     'select_files'				=> 'Bestanden selecteren...',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'generate_labels'           => '{1} Genereer labels [2,*] Genereer labels',
 );

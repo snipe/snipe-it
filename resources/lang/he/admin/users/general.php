@@ -2,7 +2,7 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
+    'activated_help_text' => 'משתמש זה יכול להיכנס',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'נכסים שהוקצו ל: שם',
     'bulk_update_warn'	=> 'אתה עומד לערוך את המאפיינים של: user_count משתמשים. שים לב שאינך יכול לשנות את תכונות המשתמש שלך באמצעות טופס זה, ועליך לבצע עריכה למשתמש שלך בנפרד.',

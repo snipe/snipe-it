@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'สินทรัพย์',
     'image'		=> 'ภาพอุปกรณ์',
     'days_without_acceptance' => 'วันโดยปราศจากการยอมรับ',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'ค่าเสื่อมราคารายเดือน'
 
 );
