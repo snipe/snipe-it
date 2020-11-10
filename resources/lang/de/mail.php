@@ -18,7 +18,7 @@ return array(
     'click_to_confirm' => 'Bitte klicken Sie zum Bestätigen Ihres :web Kontos auf den folgenden Link:',
     'click_on_the_link_accessory' => 'Bitte klicken Sie auf den Link weiter unten, um den Erhalt des Zubehörs zu bestätigen.',
     'click_on_the_link_asset' => 'Bitte klicken Sie auf den Link weiter unten, um den Erhalt des Gegenstands zu bestätigen.',
-    'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
+    'Confirm_Asset_Checkin' => 'Asset-Check-in-Bestätigung',
     'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
     'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
     'Confirm_license_delivery' => 'License delivery confirmation',

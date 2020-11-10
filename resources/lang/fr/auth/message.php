@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Ce compte n\'est pas activé.',
     'account_suspended'      => 'Ce compte est suspendu.',
     'account_banned'         => 'Ce compte est banni.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Trop de tentatives de connexion échouées. Veuillez réessayer dans :minutes minutes.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Votre appareil est déjà inscrit.',
+        'success'               => 'Vous êtes bien connecté.',
+        'code_required'         => 'Le code à deux facteurs est requis.',
+        'invalid_code'          => 'Le code à deux facteurs est invalide.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Il y a eu un problème en essayant de vous déconnecter, veuillez réessayer.',
+        'success' => 'Vous êtes déconnecté avec succès.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Un problème a eu lieu pendant la récupération du code de réinitialisation de mot de passe, veuillez essayer à nouveau.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Si cette adresse email existe dans notre système, un e-mail de récupération de mot de passe a été envoyé.',
     ),
 
     'forgot-password-confirm' => array(

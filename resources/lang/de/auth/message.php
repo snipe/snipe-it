@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Das Benutzerkonto ist nicht aktiviert.',
     'account_suspended'      => 'Dieses Benutzerkonto ist gesperrt.',
     'account_banned'         => 'Dieses Benutzerkonto wurde ausgeschlossen.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Zu viele fehlgeschlagene Anmeldeversuche. Bitte versuchen Sie es in :minutes Minuten erneut.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Ihr Gerät ist bereits eingeschrieben.',
+        'success'               => 'Sie haben sich erfolgreich eingeloggt.',
+        'code_required'         => 'Zwei-Faktor-Code ist erforderlich.',
+        'invalid_code'          => 'Zwei-Faktor-Code ist ungültig.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Beim Ausloggen ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+        'success' => 'Sie haben sich erfolgreich abgemeldet.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Beim abrufen des Codes zur Passwortzurücksetzung ist ein Fehler aufgetreten, bitte versuchen sie es erneut.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Wenn diese E-Mail-Adresse in unserem System existiert, wurde eine E-Mail zum Wiederherstellen des Passworts gesendet.',
     ),
 
     'forgot-password-confirm' => array(

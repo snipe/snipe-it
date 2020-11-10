@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'checkout'                          => 'Verbruiksartikel uitleveren aan gebruiker',
+    'checkout'                          => 'Verbruiksartikel uitchecken aan gebruiker',
     'consumable_name'                   => 'Verbruiksartikel naam',
     'create'                            => 'Maak verbruiksartikel aan',
     'item_no'                           => 'Item nr.',

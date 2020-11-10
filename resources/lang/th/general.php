@@ -30,7 +30,7 @@
     'bulkaudit'             => 'การตรวจสอบเป็นกลุ่ม',
     'bulkaudit_status'      => 'สถานะการตรวจสอบ',
     'bulk_checkout'  		=> 'Checkout เป็นกลุ่ม',
-    'bystatus'              => 'by Status',
+    'bystatus'              => 'ตามสถานะ',
     'cancel'  				=> 'ยกเลิก',
     'categories'			=> 'ประเภท',
     'category'				=> 'หมวดหมู่',
@@ -58,7 +58,7 @@
     'created'               => 'สร้างรายการแล้ว',
     'created_asset'			=> 'ทรัพย์สินที่ถูกสร้าง',
     'created_at' 			=> 'สร้างที่',
-    'record_created' 		=> 'Record Created',
+    'record_created' 		=> 'สร้างบันทึกแล้ว',
     'updated_at' 			=> 'อัปเดตเมื่อวันที่',
     'currency'  			=> '฿', // this is deprecated
     'current'  				=> 'ปัจจุบัน',

@@ -12,7 +12,7 @@ return array(
     'insufficient_permissions'  => 'Otillräckliga tillstånd.',
     'user_deleted_warning'      => 'Den här användaren har raderats. Du måste återställa den här användaren för att redigera dem eller tilldela dem nya tillgångar.',
     'ldap_not_configured'        => 'LDAP-integrationen har inte konfigurerats för den här installationen.',
-    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_resets_sent'      => 'De valda användare som är aktiverade och har en giltig e-postadress har skickats en länk för att återställa lösenordet.',
 
 
     'success' => array(

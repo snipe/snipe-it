@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Deze gebruikersaccount is niet actief.',
     'account_suspended'      => 'Deze gebruikersaccount is vergrendeld.',
     'account_banned'         => 'Deze gebruikersaccount is geband.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Te veel mislukte inlog pogingen. Probeer het over :minuten opnieuw.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Je apparaat is al uitgeleverd.',
+        'success'               => 'U bent succesvol ingelogd.',
+        'code_required'         => 'Tweestapsverificatie code is vereist.',
+        'invalid_code'          => 'Tweestapsverificatie code is ongeldig.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Er is een probleem opgetreden bij het uitloggen, probeer het nogmaals.',
+        'success' => 'U bent succesvol uitgelogd.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Er was een probleem bij het ophalen van de paswoord herstelcode, probeer opnieuw aub.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Als dat e-mailadres in ons systeem bestaat, is er een e-mail gestuurd om het wachtwoord te herstellen.',
     ),
 
     'forgot-password-confirm' => array(

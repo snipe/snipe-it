@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about_kits_title'                  => 'About Predefined Kits',
-    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
+    'about_kits_title'                  => 'Over vooraf gedefinieerde Kits',
+    'about_kits_text'                   => 'Vooraf gedefinieerde Kits laat je snel een verzameling items bekijken (assets, licenties, enz.) voor een gebruiker. Dit kan handig zijn wanneer uw onboarding proces consistent is voor veel gebruikers en alle gebruikers dezelfde items ontvangen.',
     'checkout'                          => 'Checkout Kit ',
-    'create_success'                    => 'Kit was successfully created.',
-    'create'                            => 'Create Predefined Kit',
-    'update'                            => 'Update Predefined Kit',
-    'delete_success'                    => 'Kit was successfully deleted.',
-    'update_success'                    => 'Kit was successfully updated.',
-    'none_models'                       => 'There are not enough available assets for :model to checkout. :qty are required. ',
-    'none_licenses'                     => 'There are not enough available seats for :license to checkout. :qty are required. ',
-    'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
-    'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
+    'create_success'                    => 'Kit was succesvol aangemaakt.',
+    'create'                            => 'Aanmaken voorgedefinieerde Kit',
+    'update'                            => 'Bijwerken voorgedefinieerde Kit',
+    'delete_success'                    => 'Kit is succesvol verwijderd.',
+    'update_success'                    => 'Kit is succesvol bijgewerkt.',
+    'none_models'                       => 'Er zijn niet genoeg beschikbare assets voor :model om uit te checken. :qty is vereist. ',
+    'none_licenses'                     => 'Er zijn niet genoeg beschikbare werkplekken voor :license om uit te checken. :qty zijn vereist. ',
+    'none_consumables'                  => 'Er zijn niet genoeg beschikbare eenheden van :consumable om uit te checken. :qty zijn verplicht. ',
+    'none_accessory'                    => 'Er zijn niet genoeg beschikbare eenheden van :accessory om uit te checken. :qty zijn verplicht. ',
 
 );

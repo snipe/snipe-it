@@ -13,15 +13,15 @@ return array(
     |
     */
 
-    "more_info_title" => "More Info",
+    "more_info_title" => "Plus d'info",
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    "audit_help" => "Cocher cette case va modifier l'enregistrement de la ressource pour refléter ce nouvel emplacement. Laisser décoché notera simplement l'emplacement dans le journal d'audit.<br><br>Notez que cette ressource est vérifiée, elle ne changera pas l'emplacement de la personne, de la ressource ou de l'emplacement où elle est vérifiée.",
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Les actifs sont des éléments suivis par le numéro de série ou la balise d\'actif. Ils ont tendance à être des éléments de valeur plus élevée lorsque l\'identification d\'un élément spécifique importe.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Les catégories vous aident à organiser vos articles. Des catégories d\'exemples peuvent être &quot;des ordinateurs de bureau&quot;, &quot;des ordinateurs portables&quot;, &quot;des téléphones mobiles&quot;, &quot;des tablettes&quot;, et ainsi de suite, mais vous pouvez librement utiliser des catégories qui ont du sens pour vous.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Les accessoires sont tout ce que vous envoyez aux utilisateurs, mais qui n\'ont pas de numéro de série (ou vous n\'avez pas à les suivre de façon unique). Par exemple, souris ou claviers.',
 
     'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
 
