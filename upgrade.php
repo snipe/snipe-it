@@ -57,7 +57,7 @@ $required_exts_array =
         'bcmath',
         'curl',
         'fileinfo',
-		'gd|imagick',
+        'gd|imagick',
         'json',
         'ldap',
         'mbstring',
