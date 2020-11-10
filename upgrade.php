@@ -121,7 +121,7 @@ if ($ext_missing!='') {
 
     echo "------------------------- :( ---------------------------\n";
     echo "ABORTING THE INSTALLER  \n";
-    echo "Please install the extensions above and re-run this script.\n\n";
+    echo "Please install the extensions above and re-run this script.\n";
     echo "------------------------- :( ---------------------------\n";
     exit;
 } else {
