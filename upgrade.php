@@ -111,7 +111,7 @@ foreach ($required_exts_array as $rkey => $required_ext) {
 // Print out a useful error message and abort the install
 if ($ext_missing!='') {
     echo "--------------------------------------------------------\n";
-    echo $ext_missing."\n";
+    echo $ext_missing;
     echo "--------------------------------------------------------\n\n";
     echo "You have the following extensions installed: \n\n";
 
