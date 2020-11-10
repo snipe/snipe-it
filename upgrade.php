@@ -118,7 +118,7 @@ if ($ext_missing!='') {
     echo "------------------------- :( ---------------------------\n";
     exit;
 } else {
-    echo $ext_installed;
+    echo $ext_installed."\n";
 
 }
 
@@ -150,7 +150,7 @@ if ((strpos('git version', $git_version)) === false) {
     echo '-- '.$git_fetch;
     echo '-- '.$git_stash;
     echo '-- '.$git_checkout;
-    echo '-- '.$git_pull;
+    echo '-- '.$git_pull."\n";
 } else {
     echo "Git is NOT installed. You can still use this upgrade script to run common \n";
     echo "migration commands, but you will have to manually download the updated files. \n\n";
@@ -162,31 +162,30 @@ if ((strpos('git version', $git_version)) === false) {
 }
 
 
-
 echo "--------------------------------------------------------\n";
 echo "Step 5: Cleaning up old cached files:\n";
 echo "--------------------------------------------------------\n\n";
 
 
 if (file_exists('bootstrap/cache/compiled.php')) {
-    echo "-- Deleting bootstrap/cache/compiled.php. It is no longer used.\n";
+    echo "√ Deleting bootstrap/cache/compiled.php. It is no longer used.\n";
     @unlink('bootstrap/cache/compiled.php');
 } else {
-    echo "-- No bootstrap/cache/compiled.php, so nothing to delete.\n";
+    echo "√ No bootstrap/cache/compiled.php, so nothing to delete.\n";
 }
 
 if (file_exists('bootstrap/cache/services.php')) {
-    echo "-- Deleting bootstrap/cache/services.php. It it no longer used.\n";
+    echo "√ Deleting bootstrap/cache/services.php. It it no longer used.\n";
     @unlink('bootstrap/cache/services.php');
 } else {
-    echo "-- No bootstrap/cache/services.php, so nothing to delete.\n";
+    echo "√ No bootstrap/cache/services.php, so nothing to delete.\n";
 }
 
 if (file_exists('bootstrap/cache/config.php')) {
-    echo "-- Deleting bootstrap/cache/config.php. It it no longer used.\n";
+    echo "√ Deleting bootstrap/cache/config.php. It it no longer used.\n";
     @unlink('bootstrap/cache/config.php');
 } else {
-    echo "-- No bootstrap/cache/config.php, so nothing to delete.\n";
+    echo "√ No bootstrap/cache/config.php, so nothing to delete.\n";
 }
 
 $config_clear = shell_exec('php artisan config:clear');
@@ -207,7 +206,7 @@ echo "--------------------------------------------------------\n\n";
 
 // Composer install
 if (file_exists('composer.phar')) {
-    echo "-- Local composer.phar detected, so we'll use that.\n\n";
+    echo "√ Local composer.phar detected, so we'll use that.\n\n";
     echo "-- Updating local composer.phar\n\n";
     $composer_update = shell_exec('php composer.phar self-update');
     echo $composer_update."\n\n";
@@ -243,7 +242,7 @@ if ((!file_exists('storage/oauth-public.key')) || (!file_exists('storage/oauth-p
     $passport = shell_exec('php artisan passport:install');
     echo $passport;
 } else {
-    echo "- OAuth keys detected. Skipping passport install.\n\n";
+    echo "√ OAuth keys detected. Skipping passport install.\n\n";
 }
 
 
