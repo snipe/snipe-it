@@ -92,14 +92,14 @@ foreach ($required_exts_array as $rkey => $required_ext) {
                     break;
                 // If no match, add it to the string for errors
                 } else {
-                    $ext_missing .=  'MISSING PHP EXTENSION: '.str_replace("|", " OR ", $required_ext)."\n";
+                    $ext_missing .=  '✘ MISSING PHP EXTENSION: '.str_replace("|", " OR ", $required_ext)."\n";
                     break;
                 }
             }
 
         // If this isn't an either/or option, just add it to the string of errors conventionally
         } else {
-            $ext_missing .=  'MISSING PHP EXTENSION: '.$required_ext."\n";
+            $ext_missing .=  '✘ MISSING PHP EXTENSION: '.$required_ext."\n";
         }
 
     // The required extension string was found in the array of installed extensions - yay!
@@ -111,7 +111,8 @@ foreach ($required_exts_array as $rkey => $required_ext) {
 // Print out a useful error message and abort the install
 if ($ext_missing!='') {
     echo "--------------------------------------------------------\n";
-    echo $ext_missing."\n\n";
+    echo $ext_missing."\n";
+    echo "--------------------------------------------------------\n\n";
     echo "You have the following extensions installed: \n\n";
 
     foreach ($loaded_exts_array as $lkey => $loaded_ext) {
