@@ -88,6 +88,7 @@ foreach ($required_exts_array as $required_ext) {
             foreach ($require_either as $require_either_value) {
 
                 if (in_array($require_either_value, $loaded_exts_array)) {
+                    $ext_installed .=  '√ '.$require_either_value." is installed!\n";
                     break;
                 // If no match, add it to the string for errors
                 } else {
