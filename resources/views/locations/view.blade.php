@@ -127,7 +127,7 @@
 
     @if ($location->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 20px;">
-        <img src="{{ app('locations_upload_url') }}/{{ $location->image }}" class="img-responsive img-thumbnail" alt="{{ $location->name }}">
+        <img src="{{ Storage::disk('public')->url('locations/'.e($location->image)) }}" class="img-responsive img-thumbnail" alt="{{ $location->name }}">
       </div>
     @endif
       <div class="col-md-12">
