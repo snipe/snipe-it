@@ -40,15 +40,16 @@
                 <th class="col-sm-1" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                 <th class="col-sm-1" data-visible="false">{{ trans('admin/categories/general.category_name') }}</th>
                 <th class="col-sm-1">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                <th class="col-sm-1">{{ trans('admin/hardware/table.title') }}</th>
+                <th class="col-sm-1" data-visible="false">{{ trans('admin/hardware/table.title') }}</th>
                 @if ($snipeSettings->display_asset_name)
-                <th class="col-sm-1">{{ trans('general.name') }}</th>
+                <th class="col-sm-1" data-visible="false">{{ trans('general.name') }}</th>
                 @endif
                 <th class="col-sm-1">{{ trans('admin/hardware/table.serial') }}</th>
                 <th class="col-sm-1">{{ trans('admin/depreciations/general.depreciation_name') }}</th>
                 <th class="col-sm-1">{{ trans('admin/depreciations/general.number_of_months') }}</th>
+                <th class="col-sm-1">{{ trans('admin/hardware/table.status') }}</th>
                 <th class="col-sm-1">{{ trans('admin/hardware/table.checkoutto') }}</th>
-                <th class="col-sm-1">{{ trans('admin/hardware/table.location') }}</th>
+                <th class="col-sm-1" data-visible="false">{{ trans('admin/hardware/table.location') }}</th>
                 <th class="col-sm-1">{{ trans('admin/hardware/table.purchase_date') }}</th>
                 <th class="col-sm-1">{{ trans('admin/hardware/table.eol') }}</th>
                 <th class="col-sm-1 align-right">{{ trans('admin/hardware/table.purchase_cost') }}</th>
@@ -87,6 +88,10 @@
                   @if ($asset->model->depreciation)
                   {{ $asset->model->depreciation->months }}
                   @endif
+                </td>
+                <td>
+                  {{ $asset->assetstatus->name }}
+                  ({{ $asset->present()->statusMeta }})
                 </td>
                 <td>
                     @if (($asset->checkedOutToUser()) && ($asset->assigned))
