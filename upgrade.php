@@ -184,7 +184,7 @@ $unused_files = [
 foreach ($unused_files as $unused_file) {
     if (file_exists($unused_file)) {
         echo "√ Deleting ".$unused_file.". It is no longer used.\n";
-        @unlink('bootstrap/cache/compiled.php');
+        @unlink($unused_file);
     } else {
         echo "√ No ".$unused_file.", so nothing to delete.\n";
     }
