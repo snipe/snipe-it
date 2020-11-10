@@ -31,8 +31,10 @@
                     <table class="table table-borderless m-b-none" v-if="tokens.length > 0">
                         <thead>
                             <tr>
-                                <th class="col-md-9">Name</th>
-                                <th class="col-md-3"><span class="sr-only">Delete</span></th>
+                                <th class="col-md-3">Name</th>
+                                <th class="col-md-2">Created</th>
+                                <th class="col-md-2">Expires</th>
+                                <th class="col-md-2"><span class="sr-only">Delete</span></th>
                             </tr>
                         </thead>
 
@@ -42,6 +44,14 @@
                                 <td style="vertical-align: middle;">
                                     {{ token.name }}
                                 </td>
+
+                              <td style="vertical-align: middle;">
+                                {{ token.expires_at }}
+                              </td>
+
+                              <td style="vertical-align: middle;">
+                                {{ token.created_at }}
+                              </td>
 
                                 <!-- Delete Button -->
                                 <td style="vertical-align: middle;" class="text-right">
