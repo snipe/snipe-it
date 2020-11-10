@@ -50,7 +50,7 @@ if (version_compare(PHP_VERSION, $required_version, '<')) {
 }
 
 $ext_check = '';
-if ((!extension_loaded('gd')) || (!extension_loaded('imagick'))) {
+if ((!extension_loaded('php-gd')) || (!extension_loaded('imagick'))) {
     $ext_check .= "PHP extension MISSING: gd or imagick \n";
 }
 
