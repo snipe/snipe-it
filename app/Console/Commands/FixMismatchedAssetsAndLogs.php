@@ -13,14 +13,22 @@ class FixMismatchedAssetsAndLogs extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:fix-assets-and-logs';
+    protected $signature = 'snipeit:fix-assets-and-logs {--dryrun : Run the sync process but don\'t update the database}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'This script attempts to check the log table and check that the assets.assigned_to matches the last checkout.';
+
+    /**
+     * Is dry-run?
+     *
+     * @var bool
+     */
+    private $dryrun = false;
+
 
     /**
      * Create a new command instance.
@@ -40,8 +48,16 @@ class FixMismatchedAssetsAndLogs extends Command
     public function handle()
     {
 
+        if ($this->option('dryrun')) {
+            $this->dryrun = true;
+        }
+
+        if ($this->dryrun) {
+            $this->info('This is a DRY RUN - no changes will be saved.' );
+        }
+
         $mismatch_count = 0;
-        $assets = Asset::whereNotNull('assigned_to')->get();
+        $assets = Asset::whereNotNull('assigned_to')->where('assigned_type', '=', 'App\\Models\\User')->get();
         foreach ($assets as $asset) {
 
             // get the last checkout of the asset
@@ -59,16 +75,22 @@ class FixMismatchedAssetsAndLogs extends Command
                         ->orderBy('created_at', 'DESC')
                         ->first()) {
 
-                        // $this->info($checkout_log->id.' is checked out to '.$checkout_log->target_type.' '.$checkout_log->target_id.' and there is no subsequent checkin log.');
-
-
                         //print_r($asset);
                         if ($checkout_log->target_id != $asset->assigned_to) {
                             $this->error('Log ID: '.$checkout_log->id.' -- Asset ID '. $checkout_log->item_id.' SHOULD BE checked out to User '.$checkout_log->target_id.' but its assigned_to is '.$asset->assigned_to );
+
+                            if (!$this->dryrun) {
+                                $asset->assigned_to = $checkout_log->target_id;
+                                if ($asset->save()) {
+                                    $this->info('Asset record updated.');
+                                } else {
+                                    $this->errro('Error updating asset: '.$asset->getErrors());
+                                }
+                            }
                             $mismatch_count++;
                         }
                     } else {
-                        $this->info('Asset ID '.$asset->id.': There is a checkin '.$checkin_log->created_at.' after this checkout '.$checkout_log->created_at);
+                        //$this->info('Asset ID '.$asset->id.': There is a checkin '.$checkin_log->created_at.' after this checkout '.$checkout_log->created_at);
 
                     }
 
