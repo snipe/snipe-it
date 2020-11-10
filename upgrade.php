@@ -48,6 +48,32 @@ if (version_compare(PHP_VERSION, $required_version, '<')) {
     echo "PHP version: " . PHP_VERSION . " is at least ".$required_version." - continuing... \n\n";
 }
 
+$ext_check = '';
+if ((!extension_loaded('gd')) || (!extension_loaded('imagick'))) {
+    $ext_check .= "PHP extension MISSING: gd or imagick \n";
+}
+
+if (!extension_loaded('php-ldap'))  {
+    $ext_check .= "PHP extension MISSING: php-ldap \n";
+}
+
+if (!extension_loaded('php-json'))  {
+    $ext_check .= "PHP extension MISSING: php-json \n";
+}
+
+if (!extension_loaded('php-fileinfo'))  {
+    $ext_check .= "PHP extension MISSING: php-fileinfo \n";
+}
+
+if (!extension_loaded('php-openssl'))  {
+    $ext_check .= "PHP extension MISSING: php-openssl \n";
+}
+
+if ($ext_check!='') {
+    echo "--------------------------------------------------------\n";
+    echo $ext_check;
+    echo "--------------------------------------------------------\n";
+}
 
 echo "--------------------------------------------------------\n";
 echo "STEP 2: Backing up database: \n";
