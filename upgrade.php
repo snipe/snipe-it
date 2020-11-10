@@ -153,7 +153,7 @@ if ((strpos('git version', $git_version)) === false) {
     $git_checkout = shell_exec('git checkout '.$branch);
     $git_stash = shell_exec('git stash');
     $git_pull = shell_exec('git pull');
-    echo '-- '.$git_fetch;
+    echo $git_fetch;
     echo '-- '.$git_stash;
     echo '-- '.$git_checkout;
     echo '-- '.$git_pull."\n";
@@ -188,7 +188,7 @@ foreach ($unused_files as $unused_file) {
         echo "√ No ".$unused_file.", so nothing to delete.\n";
     }
 }
-
+echo "\n";
 
 $config_clear = shell_exec('php artisan config:clear');
 $cache_clear = shell_exec('php artisan cache:clear');
