@@ -2,7 +2,7 @@
 {{-- Header --}}
 @slot('header')
 @component('mail::header', ['url' => config('app.url')])
-@if (($snipeSettings->show_images_in_email=='1' ) && ($snipeSettings::setupCompleted()))
+@if (isset($snipeSettings) && ($snipeSettings->show_images_in_email=='1' ) && ($snipeSettings::setupCompleted()))
 
 @if ($snipeSettings->brand == '3')
 @if ($snipeSettings->logo!='')
