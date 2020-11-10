@@ -171,20 +171,26 @@ class StatuslabelsController extends Controller
 
         $labels=[];
         $points=[];
-        $colors=[];
+        $default_color = Helper::chartColors();
+        $default_color_count = 0;
+
         foreach ($statuslabels as $statuslabel) {
             if ($statuslabel->assets_count > 0) {
 
                 $labels[]=$statuslabel->name. ' ('.number_format($statuslabel->assets_count).')';
                 $points[]=$statuslabel->assets_count;
+
                 if ($statuslabel->color!='') {
-                    $colors[]=$statuslabel->color;
+                    $colors_array[] = $statuslabel->color;
+                } else {
+                    $colors_array[] = $default_color[$default_color_count];
+                    $default_color_count++;
                 }
             }
         }
 
         
-        $colors_array = array_merge($colors, Helper::chartColors());
+        $colors_array = array_merge($colors_array, Helper::chartColors());
 
         $result= [
             "labels" => $labels,

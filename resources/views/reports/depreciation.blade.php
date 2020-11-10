@@ -110,7 +110,9 @@
                   {{ $asset->defaultloc->name }}
                   @endif
                 </td>
-                <td>{{ $asset->purchase_date }}</td>
+                <td>
+                  {{ \Carbon\Carbon::parse($asset->purchase_date)->format('Y-m-d') }}
+                 </td>
 
                 <td>
                   @if ($asset->model->eol) {{ $asset->present()->eol_date() }}

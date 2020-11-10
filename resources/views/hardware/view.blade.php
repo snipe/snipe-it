@@ -673,6 +673,19 @@
                                             </div>
                                         </div>
                                     @endif
+                                     @if ($asset->last_checkout!='')
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <strong>
+                                                    {{ trans('admin/hardware/table.checkout_date') }}
+                                                </strong>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
+                                            </div>
+                                        </div>
+                                     @endif
+
 
 
                                     <div class="row">
