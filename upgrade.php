@@ -46,7 +46,7 @@ if (version_compare(PHP_VERSION, $required_version, '<')) {
 }
 
 
-echo "Checking PHP extensions: \n\n";
+echo "Checking Required PHP extensions... \n\n";
 
 $loaded_exts_array = get_loaded_extensions();
 $required_exts_array =
