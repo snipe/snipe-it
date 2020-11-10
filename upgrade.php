@@ -262,7 +262,7 @@ echo "Step 10: Taking application out of maintenance mode:\n";
 echo "--------------------------------------------------------\n\n";
 
 $up = shell_exec('php artisan up');
-echo '-- '.$up."\n\n";
+echo '-- '.$up."\n";
 
 
 
