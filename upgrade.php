@@ -46,6 +46,7 @@ if (version_compare(PHP_VERSION, $required_version, '<')) {
 
 } else {
     echo "PHP version: " . PHP_VERSION . " is at least ".$required_version." - continuing... \n\n";
+    echo sprintf("The php.ini used by PHP: %s\n\n", get_cfg_var('cfg_file_path'));
 }
 
 $ext_check = '';
@@ -53,26 +54,36 @@ if ((!extension_loaded('gd')) || (!extension_loaded('imagick'))) {
     $ext_check .= "PHP extension MISSING: gd or imagick \n";
 }
 
-if (!extension_loaded('php-ldap'))  {
+if (!extension_loaded('ldap'))  {
     $ext_check .= "PHP extension MISSING: php-ldap \n";
 }
 
-if (!extension_loaded('php-json'))  {
+if (!extension_loaded('json'))  {
     $ext_check .= "PHP extension MISSING: php-json \n";
 }
 
-if (!extension_loaded('php-fileinfo'))  {
+if (!extension_loaded('fileinfo'))  {
     $ext_check .= "PHP extension MISSING: php-fileinfo \n";
 }
 
-if (!extension_loaded('php-openssl'))  {
+if (!extension_loaded('openssl'))  {
     $ext_check .= "PHP extension MISSING: php-openssl \n";
+}
+
+if (!extension_loaded('curl'))  {
+    $ext_check .= "PHP extension MISSING: php-curl \n";
+}
+
+if (!extension_loaded('mbstring'))  {
+    $ext_check .= "PHP extension MISSING: php-mbstring \n";
 }
 
 if ($ext_check!='') {
     echo "--------------------------------------------------------\n";
     echo $ext_check;
+    echo "ABORTING. Please install the extensions above and re-run this script.";
     echo "--------------------------------------------------------\n";
+    exit;
 }
 
 echo "--------------------------------------------------------\n";
