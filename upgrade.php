@@ -56,7 +56,6 @@ $required_exts_array =
     [
         'bcmath',
         'curl',
-        'farts',
         'fileinfo',
 		'gd|imagick',
         'json',
