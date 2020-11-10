@@ -45,8 +45,8 @@ if (version_compare(PHP_VERSION, $required_version, '<')) {
     exit;
 
 } else {
-    echo "PHP version: " . PHP_VERSION . " is at least ".$required_version." - continuing... \n\n";
-    echo sprintf("The php.ini used by PHP: %s\n\n", get_cfg_var('cfg_file_path'));
+    echo "PHP version: " . PHP_VERSION . " is at least ".$required_version." - continuing... \n";
+    echo sprintf("The php.ini used by PHP: %s\n\n", get_cfg_var('cfg_file_path'))."\n\n";
 }
 
 $ext_check = '';
