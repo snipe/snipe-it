@@ -48,7 +48,10 @@ if (version_compare(PHP_VERSION, $required_version, '<')) {
 
 echo "Checking Required PHP extensions... \n\n";
 
+// Get the list of installed extensions
 $loaded_exts_array = get_loaded_extensions();
+
+// The PHP extensions PHP is *required* to have enabled in order to run
 $required_exts_array =
     [
         'bcmath',
@@ -68,6 +71,8 @@ $required_exts_array =
 
 $ext_missing = '';
 $ext_installed = '';
+
+// Loop through the required extensions 
 foreach ($required_exts_array as $rkey => $required_ext) {
 
     // If we don't find the string in the array....
