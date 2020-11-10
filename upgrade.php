@@ -229,7 +229,7 @@ echo "Step 7: Migrating database:\n";
 echo "--------------------------------------------------------\n\n";
 
 $migrations = shell_exec('php artisan migrate --force');
-echo '-- '.$migrations."\n\n";
+echo '-- '.$migrations."\n";
 
 
 echo "--------------------------------------------------------\n";
@@ -247,18 +247,7 @@ if ((!file_exists('storage/oauth-public.key')) || (!file_exists('storage/oauth-p
 
 
 echo "--------------------------------------------------------\n";
-echo "Step 9: Caching routes and config:\n";
-echo "--------------------------------------------------------\n\n";
-$config_cache = shell_exec('php artisan config:cache');
-$route_cache = shell_exec('php artisan route:cache');
-echo '-- '.$config_cache;
-echo '-- '.$route_cache;
-echo "\n";
-
-
-
-echo "--------------------------------------------------------\n";
-echo "Step 10: Taking application out of maintenance mode:\n";
+echo "Step 9: Taking application out of maintenance mode:\n";
 echo "--------------------------------------------------------\n\n";
 
 $up = shell_exec('php artisan up');
