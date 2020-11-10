@@ -37,7 +37,7 @@ if (version_compare(PHP_VERSION, $required_version, '<')) {
     echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
     echo "This version of PHP (".PHP_VERSION.") is not compatible with Snipe-IT.\n";
     echo "Snipe-IT requires PHP version ".$required_version." or greater. Please upgrade \n";
-    echo "your server's version of PHP (mod and cli) and try running this script again.\n\n\n";
+    echo "your version of PHP (web/php-fcgi and cli) and try running this script again.\n\n\n";
     exit;
 
 } else {
