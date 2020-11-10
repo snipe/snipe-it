@@ -56,6 +56,7 @@ $required_exts_array =
     [
         'bcmath',
         'curl',
+        'farts',
         'fileinfo',
 		'gd|imagick',
         'json',
@@ -72,7 +73,7 @@ $required_exts_array =
 $ext_missing = '';
 $ext_installed = '';
 
-// Loop through the required extensions 
+// Loop through the required extensions
 foreach ($required_exts_array as $rkey => $required_ext) {
 
     // If we don't find the string in the array....
