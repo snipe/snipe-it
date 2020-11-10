@@ -19,7 +19,10 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 // otherwise just use master
 (array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
 
-echo "\nWelcome to the Snipe-IT upgrader. This script will attempt to: \n\n";
+echo "--------------------------------------------------------\n";
+echo "\nWelcome to the Snipe-IT upgrader! \n\n";
+echo "--------------------------------------------------------\n\n";
+echo "This script will attempt to: \n\n";
 echo "- check your PHP version and extension requirements \n";
 echo "- do a git pull to bring you to the latest version \n";
 echo "- run composer install to get your vendors up to date \n";
