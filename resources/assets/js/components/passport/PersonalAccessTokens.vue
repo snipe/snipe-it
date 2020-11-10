@@ -46,11 +46,11 @@
                                 </td>
 
                               <td style="vertical-align: middle;">
-                                {{ token.expires_at }}
+                                {{ token.created_at }}
                               </td>
 
                               <td style="vertical-align: middle;">
-                                {{ token.created_at }}
+                                {{ token.expires_at }}
                               </td>
 
                                 <!-- Delete Button -->
