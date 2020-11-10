@@ -84,7 +84,7 @@ class FixMismatchedAssetsAndLogs extends Command
                                 if ($asset->save()) {
                                     $this->info('Asset record updated.');
                                 } else {
-                                    $this->errro('Error updating asset: '.$asset->getErrors());
+                                    $this->error('Error updating asset: '.$asset->getErrors());
                                 }
                             }
                             $mismatch_count++;
