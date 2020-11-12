@@ -37,7 +37,7 @@ class PurgeLoginAttempts extends Command
      */
     public function handle()
     {
-        if ($this->confirm("\n****************************************************\nTHIS WILL DELETE ALL OF THE YOUR LOGIN ATTEMPT RECORDS. There is NO undo. \n****************************************************\n\nDo you wish to continue? No backsies! [y|N]")) {
+        if ($this->confirm("\n****************************************************\nTHIS WILL DELETE ALL OF THE YOUR LOGIN ATTEMPT RECORDS. \nThere is NO undo! \n****************************************************\n\nDo you wish to continue? No backsies! [y|N]")) {
                 \DB::statement('delete from login_attempts');
         }
     }
