@@ -401,7 +401,11 @@
                     $("#mailtesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
                     $('#mailteststatus').html('Mail could not be sent.');
                     if (data.responseJSON) {
-                        $('#mailteststatus-error').html('Error: ' + data.responseJSON.messages);
+                        if (data.responseJSON.messages) {
+                            $('#mailteststatus-error').html('Error: ' + data.responseJSON.messages);
+                        } else {
+                            $('#mailteststatus-error').html('No additional error message provided. Check your mail settings and your app log.');
+                        }
                     } else {
                         console.dir(data);
                     }
