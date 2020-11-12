@@ -398,7 +398,7 @@ class LdapAd extends LdapAdConfiguration
     {
         /** @var Schema $schema */
         $schema = new $this->ldapConfig['schema'];
-        return [
+        return array_values(array_filter([
             $this->ldapSettings['ldap_username_field'],
             $this->ldapSettings['ldap_fname_field'],
             $this->ldapSettings['ldap_lname_field'],
@@ -409,7 +409,7 @@ class LdapAd extends LdapAdConfiguration
             $schema->userAccountControl(),
             $schema->title(),
             $schema->telephone(),
-        ];
+        ]));
     }
 
     /**
