@@ -91,7 +91,7 @@ class MoveUploadsToNewDisk extends Command
         for ($l = 0; $l < count($logos); $l++) {
             $type_count++;
             $filename = basename($logos[$l]);
-            $new_url = Storage::disk('public')->url($logos[$l], file_get_contents($public_upload[$i]));
+            $new_url = Storage::disk('public')->url($logos[$l], file_get_contents($public_upload[$l]));
             $this->info($type_count.'. LOGO: '.$filename.' was copied to '.$new_url);
         }
 
@@ -116,7 +116,7 @@ class MoveUploadsToNewDisk extends Command
                 $filename = basename($private_upload[$x]);
 
                 try  {
-                    Storage::disk('private_uploads')->put($private_type.'/'.$filename, file_get_contents($public_upload[$i]));
+                    Storage::put($private_type.'/'.$filename, file_get_contents($private_upload[$i]));
                     $new_url = Storage::url($private_type.'/'.$filename, $filename);
                     $this->info($type_count.'. PRIVATE: '.$filename.' was copied to '.$new_url);
 
