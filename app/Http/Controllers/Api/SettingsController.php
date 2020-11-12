@@ -137,7 +137,7 @@ class SettingsController extends Controller
             try {
                 Notification::send(Setting::first(), new MailTest());
                 return response()->json(['message' => 'Mail sent to '.config('mail.reply_to.address')], 200);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 return response()->json(['message' => $e->getMessage()], 500);
             }
         }
