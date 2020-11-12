@@ -88,7 +88,7 @@ class MoveUploadsToNewDisk extends Command
         $this->info("\nThere are ".count($logos).' files that might be logos.');
         $type_count = 0;
 
-        for ($l = 0; $l < count($logos); $l++) {
+        for ($l = 0; $l <= count($logos); $l++) {
             $type_count++;
             $filename = basename($logos[$l]);
             $new_url = Storage::disk('public')->url($logos[$l], file_get_contents($public_upload[$l]));
