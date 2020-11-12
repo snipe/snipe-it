@@ -111,7 +111,7 @@ class CheckinAccessoryNotification extends Notification
         ];
 
         return (new SlackMessage)
-            ->content(':arrow_down: :keyboard: Accessory Checked In')
+            ->content(':arrow_down: :keyboard: '.trans('mail.Accessory_Checkin_Notification'))
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
@@ -135,7 +135,7 @@ class CheckinAccessoryNotification extends Notification
                 'note'          => $this->note,
                 'target'        => $this->target,
             ])
-            ->subject('Accessory checked in');
+            ->subject(trans('mail.Accessory_Checkin_Notification'));
 
     }
 }
