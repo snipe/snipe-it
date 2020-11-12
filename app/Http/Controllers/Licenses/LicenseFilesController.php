@@ -39,7 +39,8 @@ class LicenseFilesController extends Controller
                 $upload_success = false;
                 foreach ($request->file('file') as $file) {
 
-                    $file_name = 'license-'.date('Y-m-d-His').'-'.$file->getBasename().'.'.$file->getClientOriginalExtension();
+
+                    $file_name = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$file->getClientOriginalExtension())).'.'.$file->getClientOriginalExtension();
 
 
                     $upload_success = $file->storeAs('private_uploads/licenses', $file_name);
