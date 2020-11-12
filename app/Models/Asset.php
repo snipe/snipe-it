@@ -244,7 +244,6 @@ class Asset extends Depreciable
      */
     public function availableForCheckout()
     {
-        \Log::debug($this->assetstatus);
         if (
         ((!$this->assignedTo) && ($this->assetstatus->archived == 0)) ||
             ((empty($this->assigned_to)) &&
