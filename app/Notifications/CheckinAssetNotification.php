@@ -79,7 +79,7 @@ class CheckinAssetNotification extends Notification
         ];
 
         return (new SlackMessage)
-            ->content(':arrow_down: :computer: Asset Checked In')
+            ->content(':arrow_down: :computer: '.trans('mail.Asset_Checkin_Notification'))
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
@@ -113,7 +113,7 @@ class CheckinAssetNotification extends Notification
                 'fields'        => $fields,
                 'expected_checkin'  => $this->expected_checkin,
             ])
-            ->subject('Asset checked in');
+            ->subject(trans('mail.Asset_Checkin_Notification'));
 
 
         return $message;
