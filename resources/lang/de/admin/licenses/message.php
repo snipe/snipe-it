@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Der Gegenstand, den Sie mit dieser Lizenz verknüpfen möchten, gehört jemand anderem als der im Dropdown-Feld ausgewählten Person.',
     'assoc_users'	 => 'Diese Lizenz ist derzeit mindestens einem Benutzer zugeordnet und kann nicht gelöscht werden. Bitte nehmen Sie die Lizenz zurück und versuchen Sie anschließend erneut diese zu löschen. ',
     'select_asset_or_person' => 'Sie müssen ein Asset oder einen Benutzer auswählen, aber nicht beides.',
+    'not_found' => 'Lizenz nicht gefunden',
 
 
     'create' => array(

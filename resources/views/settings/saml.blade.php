@@ -52,9 +52,16 @@
                                 {{ Form::label('saml_integration', trans('admin/settings/general.saml_integration')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('saml_enabled', '1', Request::old('saml_enabled', $setting->saml_enabled), ['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
+
+                                {{ Form::checkbox('saml_enabled', '1', Request::old('saml_enabled', $setting->saml_enabled), [((config('app.lock_passwords')===true)) ? 'disabled ': '', 'class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
                                 {{ trans('admin/settings/general.saml_enabled') }}
-                                <p class="help-block"></p>
+                                @if (config('app.lock_passwords')===true)
+                                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+
+
+
+
                                 @if ($setting->saml_enabled)
                                     <!-- SAML SP Details -->
                                     <!-- SAML SP Entity ID -->

@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'تنظشیمات تاییدیه LDPA در فولدر app/config در فایلی به نام idap.php وجود دارد.مکان مشخص شده برای تمامی کاربران وارد شده تنظیم میشود.شما نیاز دارید که حداقل یه مکان را اضافه کرده باشید تا بتوانید از این ویژگی استفاده کنید.',
     'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'برنامه چک شد برای:',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'نمایش کاربر :',
     'usercsv'           => 'فایل CSV',
     'two_factor_admin_optin_help' => 'تنظیمات مدیریت فعلی شما اجازه اجرای مجدد احراز هویت دو عامل را می دهد.',

@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'คุณสามารถตั้งค่าการกำหนดค่า LDAP ได้ Admin> การตั้งค่า สถานที่ที่เลือก (เลือกได้) จะถูกตั้งค่าสำหรับผู้ใช้ที่นำเข้าทั้งหมด',
     'print_assigned'    => 'พิมพ์รายการทั้งหมดที่ได้รับมอบหมาย',
     'software_user'     => 'ซอฟต์แวร์ที่กำหนดให้ :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'ดูผู้ใช้ :name',
     'usercsv'           => 'ไฟล์ CSV',
     'two_factor_admin_optin_help' => 'การตั้งค่าผู้ดูแลระบบปัจจุบันช่วยให้สามารถใช้การตรวจสอบสิทธิ์แบบสองปัจจัยได้อย่างมีประสิทธิภาพ',

@@ -57,7 +57,6 @@ class Setting extends Model
           'labels_per_page'                     => 'numeric',
           'slack_channel'                       => 'regex:/^[\#\@]?\w+/|required_with:slack_endpoint|nullable',
           'slack_botname'                       => 'string|nullable',
-          'labels_per_page'                     => 'numeric',
           'labels_width'                        => 'numeric',
           'labels_height'                       => 'numeric',
           'labels_pmargin_left'                 => 'numeric|nullable',
@@ -74,7 +73,7 @@ class Setting extends Model
           'login_remote_user_custom_logout_url' => 'string|nullable',
           'login_remote_user_header_name'       => 'string|nullable',
           'thumbnail_max_h'                     => 'numeric|max:500|min:25',
-          'pwd_secure_min'                      => 'numeric|required|min:5',
+          'pwd_secure_min'                      => 'numeric|required|min:8',
           'audit_warning_days'                  => 'numeric|nullable',
           'audit_interval'                      => 'numeric|nullable',
           'custom_forgot_pass_url'              => 'url|nullable',
@@ -118,18 +117,17 @@ class Setting extends Model
      */
     public static function setupCompleted(): bool
     {
-        return Cache::rememberForever(self::SETUP_CHECK_KEY, function () {
             try {
                 $usercount = User::withTrashed()->count();
                 $settingsCount = self::count();
-
                 return $usercount > 0 && $settingsCount > 0;
             } catch (\Throwable $th) {
-                // Catche the error if the tables dont exit
-        }
+                \Log::debug('User table and settings table DO NOT exist or DO NOT have records');
+                // Catch the error if the tables dont exit
+                return false;
+            }
 
-            return false;
-        });
+
     }
 
     /**
@@ -309,6 +307,7 @@ class Setting extends Model
 
         return 'required|min:'.$settings->pwd_secure_min.$security_rules;
     }
+
 
 
     /**

@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Gweler Gweinyddiaeth > Gosodiadau am gosodiadau LDAP. Mae\'r lleoliad (dewisol) yn cael ei osod am unrhyw defnyddwyr sydd yn cael ei mewnforio.',
     'print_assigned'    => 'Argraffu Asedau',
     'software_user'     => 'Meddalwedd allan i :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Gweld Defnyddiwr :name',
     'usercsv'           => 'Ffeil CSV',
     'two_factor_admin_optin_help' => 'Mae eich gosodiadau admin yn caniatau gorfodaeth dewisol o dilysiant dau-factor.  ',

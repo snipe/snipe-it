@@ -7,5 +7,8 @@
         'view'               => 'Chi tiết tài sản đang bảo trì',
         'repair'             => 'Sửa chữa',
         'maintenance'        => 'Bảo trì',
-        'upgrade'            => 'Nâng cấp'
+        'upgrade'            => 'Nâng cấp',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Hỗ trợ phần mềm',
+        'hardware_support'   => 'Hỗ trợ phần cứng',
     ];

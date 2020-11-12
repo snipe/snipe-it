@@ -1,12 +1,12 @@
 {{-- See snipeit_modals.js for what powers this --}}
 
 <script nonce="{{ csrf_token() }}">
-    $(document).ready(function () {
 
-        $('#genPassword').pGenerator({
+    window.setTimeout(function () {
+        $('#modal-genPassword').pGenerator({
             'bind': 'click',
             'passwordElement': '#modal-password',
-            'displayElement': '#generated-password',
+            'displayElement': '#modal-generated-password',
             'passwordLength': 16,
             'uppercase': true,
             'lowercase': true,
@@ -16,13 +16,14 @@
                 $('#modal-password_confirmation').val($('#modal-password').val());
             }
         });
-    });
+    }, 1000);
 </script>
+
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h2 class="modal-title">{{ trans('admin/users/table.createuser') }}</h4>
+            <h2 class="modal-title">{{ trans('admin/users/table.createuser') }}</h2>
         </div>
             <div class="modal-body">
                 <form action="{{ route('api.users.store') }}" onsubmit="return false">
@@ -46,14 +47,14 @@
                     <div class="dynamic-form-row">
                         <div class="col-md-4 col-xs-12"><label for="modal-password">{{ trans('admin/users/table.password') }}:</label></div>
                         <div class="col-md-8 col-xs-12 required"><input type='password' name="password" id='modal-password' class="form-control">
-                            <a href="#" class="left" id="genPassword">Generate</a>
+                            <a href="#" class="left" id="modal-genPassword">Generate</a>
                         </div>
                     </div>
 
                     <div class="dynamic-form-row">
                         <div class="col-md-4 col-xs-12"><label for="modal-password_confirmation">{{ trans('admin/users/table.password_confirm') }}:</label></div>
                         <div class="col-md-8 col-xs-12 required"><input type='password' name="password_confirmation" id='modal-password_confirmation' class="form-control">
-                            <div id="generated-password"></div>
+                            <div id="modal-generated-password"></div>
                         </div>
                     </div>
                 </form>

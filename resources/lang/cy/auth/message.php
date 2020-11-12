@@ -7,11 +7,23 @@ return array(
     'account_not_activated'  => 'Nid yw\'r cyfrif defnyddiwr hwn wedi\'i actifadu.',
     'account_suspended'      => 'Mae\'r cyfrif defnyddiwr hwn wedi\'i atal.',
     'account_banned'         => 'Mae\'r cyfrif defnyddiwr hwn wedi\'i atal.',
-    'throttle'               => 'Gormod o ymdrechion mewngofnodi wedi methu. Rhowch gynnig arall arni o gwmpas : minutes munud(au).',
+    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+
+    'two_factor' => array(
+        'already_enrolled'      => 'Your device is already enrolled.',
+        'success'               => 'You have successfully logged in.',
+        'code_required'         => 'Two-factor code is required.',
+        'invalid_code'          => 'Two-factor code is invalid.',
+    ),
 
     'signin' => array(
         'error'   => 'Roedd yna broblem wrth i chi fewngofnodi. Rhowch gynnig arall arni so gwelwch yn dda.',
         'success' => 'Rydych wedi llwydo i fewngofnodi.',
+    ),
+
+    'logout' => array(
+        'error'   => 'There was a problem while trying to log you out, please try again.',
+        'success' => 'You have successfully logged out.',
     ),
 
     'signup' => array(
@@ -19,19 +31,15 @@ return array(
         'success' => 'Cyfrif wedi\'i creu yn llwyddiannus.',
     ),
 
-        'forgot-password' => array(
-            'error'   => 'Roedd yna broblem wrth ceisio cael côd newid cyfrinair, rhowch gynnig arall arni so gwelwch yn dda.',
-            'success' => 'Ebost adfer cyfrinair wedi\'i yrru.',
-        ),
-
-        'forgot-password-confirm' => array(
-            'error'   => 'Roedd yna broblem wrth ceisio newid cyfrinair, rhowch gynnig arall arni so gwelwch yn dda.',
-            'success' => 'Mae eich cyfrinair wedi\'i ailosod yn llwyddiannus.',
-        ),
-
-    'activate' => array(
-        'error'   => 'Roedd problem wrth geisio actifadu eich cyfrif, ceisiwch eto.',
-        'success' => 'Mae\'ch cyfrif wedi\'i actifadu\'n llwyddiannus.',
+    'forgot-password' => array(
+        'error'   => 'Roedd yna broblem wrth ceisio cael côd newid cyfrinair, rhowch gynnig arall arni so gwelwch yn dda.',
+        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
     ),
+
+    'forgot-password-confirm' => array(
+        'error'   => 'Roedd yna broblem wrth ceisio newid cyfrinair, rhowch gynnig arall arni so gwelwch yn dda.',
+        'success' => 'Mae eich cyfrinair wedi\'i ailosod yn llwyddiannus.',
+    ),
+
 
 );

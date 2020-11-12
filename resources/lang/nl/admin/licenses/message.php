@@ -4,10 +4,11 @@ return array(
 
     'does_not_exist' => 'Licentie bestaat niet.',
     'user_does_not_exist' => 'Gebruiker bestaat niet.',
-    'asset_does_not_exist' 	=> 'Het product dat je probeert te koppelen met deze licentie bestaat niet.',
-    'owner_doesnt_match_asset' => 'Het product wat jij probeert te koppelen met deze licentie is in eigendom van iemand anders dan geselecteerd.',
+    'asset_does_not_exist' 	=> 'Het asset dat je probeert te koppelen aan deze licentie bestaat niet.',
+    'owner_doesnt_match_asset' => 'Het asset dat je probeert te koppelen aan deze licentie is eigendom van iemand anders dan de persoon die is geselecteerd in de toegewezen aan de dropdown.',
     'assoc_users'	 => 'Deze licentie is momenteel uitgecheckt aan een gebruiker en kan daarom niet worden verwijderd. Controleer je licentie eerst en probeer het later nog eens. ',
-    'select_asset_or_person' => 'U moet een actief of een gebruiker selecteren, maar niet allebei.',
+    'select_asset_or_person' => 'U moet een asset of een gebruiker selecteren, maar niet beide.',
+    'not_found' => 'Licentie niet gevonden',
 
 
     'create' => array(

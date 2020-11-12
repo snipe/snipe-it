@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Aksesuarlar Hakkında',
-    'about_accessories_text'  			=> 'Aksesuarlar kullanıclara verdiğiniz ekipmanlardır. Fakat seri numaraları yoktur (ya da siz tek tek takip etmeyi önemsemiyorsunuz). Örneğin bilgisayar faresi, klavye vs.',
     'accessory_category' 				=> 'Aksesuar Kategorisi',
     'accessory_name'  					=> 'Aksesuar Adı',
     'checkout'  							=> 'Aksesuar Çıkışı',

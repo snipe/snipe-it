@@ -56,18 +56,19 @@
               <td>{{$field->format}}</td>
               <td>{{$field->element}}</td>
               <td>{{ $field->field_encrypted=='1' ?  trans('general.yes') : trans('general.no') }}</td>
-              <td>
-                @if ($field->pivot->required)
-                  <a href="{{ route('fields.optional', [$custom_fieldset->id, $field->id]) }}">
-                    <i class="fa fa-check text-success" aria-hidden="true"></i>
-                    <span class="sr-only">Required - click to make optional</span>
-                  </a>
-                @else
-                      <a href="{{ route('fields.required', [$custom_fieldset->id, $field->id]) }}">
-                    <i class="fa fa-times text-danger" aria-hidden="true"></i>
-                    <span class="sr-only">Optional - click to make required</span>
-                  </a>
-                @endif
+                <td>
+                    @if ($field->pivot->required)
+                        <a href="{{ route('fields.optional', [$custom_fieldset->id, $field->id]) }}">
+                            <i class="fa fa-check text-success" aria-hidden="true"></i>
+                            <span class="sr-only">Required - click to make optional</span>
+                        </a>
+                    @else
+                        <a href="{{ route('fields.required', [$custom_fieldset->id, $field->id]) }}">
+                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                            <span class="sr-only">Optional - click to make required</span>
+                        </a>
+                    @endif
+                </td>
               <td>
                 @can('update', $custom_fieldset)
                 <a href="{{ route('fields.disassociate', [$field, $custom_fieldset->id]) }}" class="btn btn-sm btn-danger">Remove</a>

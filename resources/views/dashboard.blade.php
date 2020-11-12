@@ -178,7 +178,8 @@
                 <table
                     data-cookie-id-table="dashActivityReport"
                     data-height="400"
-                    data-pagination="true"
+                    data-pagination="false"
+                    data-id-table="dashActivityReport"
                     data-side-pagination="server"
                     data-sort-order="desc"
                     data-sort-name="created_at"

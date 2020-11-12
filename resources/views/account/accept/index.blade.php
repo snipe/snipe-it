@@ -41,7 +41,7 @@ Accept assets  {{ $user->present()->fullName() }}
             <tbody>
               @foreach ($acceptances as $acceptance)
               <tr>
-                <td>{{ $acceptance->checkoutable->present()->name }}</td>
+                <td>{{ ($acceptance->checkoutable) ? $acceptance->checkoutable->present()->name : '' }}</td>
                 <td><a href="{{ route('account.accept.item', $acceptance) }}" class="btn btn-default btn-sm">Accept/Decline</a></td>
               </tr>
               @endforeach

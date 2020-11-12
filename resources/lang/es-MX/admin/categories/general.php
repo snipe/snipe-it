@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Sobre categorias',
-    'about_categories'  				=> 'Las categorías te ayudan a organizar los equipos. Ejemplos de categorías: &quot;PCs&quot;, &quot;Portátiles&quot;, &quot;Móviles&quot;, &quot;Tabletas&quot;, etc.',
     'asset_categories' 					=> 'Categorias',
     'category_name'  					=> 'Categoría',
     'checkin_email'                     => 'Enviar un correo al usuario al asignar/desasignar.',

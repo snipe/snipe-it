@@ -1,106 +1,101 @@
-<style>
-tr {
-    padding-left:30px;
-}
-</style>
-
 <template>
-    <div v-show="processDetail">
 
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8" style="padding-top: 30px; margin: 0 auto;">
+    <div v-show="processDetail" class="col-md-6 col-md-offset-3">
+
+            <div class="row">
                 <div class="dynamic-form-row">
                     <div class="col-md-5 col-xs-12">
                         <label for="import-type">Import Type:</label>
                     </div>
+
                     <div class="col-md-7 col-xs-12">
                         <select2 :options="options.importTypes" v-model="options.importType" required>
                             <option disabled value="0"></option>
                         </select2>
                     </div>
-                </div>
-            </div>
-            <div class="dynamic-form-row">
-                <div class="col-md-5 col-xs-12">
-                    <label for="import-update">Update Existing Values?</label>
-                </div>
-                <div class="col-md-7 col-xs-12">
-                    <input type="checkbox" class="minimal" name="import-update" v-model="options.update">
-                </div>
-            </div>
 
-            <div class="dynamic-form-row">
-                <div class="col-md-5 col-xs-12">
-                    <label for="send-welcome">Send Welcome Email for new Users?</label>
-                </div>
-                <div class="col-md-7 col-xs-12">
-                    <input type="checkbox" class="minimal" name="send-welcome" v-model="options.send_welcome">
-                </div>
-            </div>
+                </div><!-- /dynamic-form-row -->
+                <div class="dynamic-form-row">
+                    <div class="col-md-5 col-xs-12">
+                        <label for="import-update">Update Existing Values?:</label>
+                    </div>
+                    <div class="col-md-7 col-xs-12">
+                        <input type="checkbox" class="minimal" name="import-update" v-model="options.update">
+                    </div>
+                </div><!-- /dynamic-form-row -->
 
-            <div class="dynamic-form-row">
-                <div class="col-md-5 col-xs-12">
-                    <label for="run-backup">Backup before importing?</label>
-                </div>
-                <div class="col-md-7 col-xs-12">
-                    <input type="checkbox" class="minimal" name="run-backup" v-model="options.run_backup">
-                </div>
-            </div>
+                <div class="dynamic-form-row">
+                    <div class="col-md-5 col-xs-12">
+                        <label for="send-welcome">Send Welcome Email for new Users?</label>
+                    </div>
+                    <div class="col-md-7 col-xs-12">
+                        <input type="checkbox" class="minimal" name="send-welcome" v-model="options.send_welcome">
+                    </div>
+                </div><!-- /dynamic-form-row -->
 
-            <div class="alert col-md-8 col-md-offset-2" style="text-align:left"
+                <div class="dynamic-form-row">
+                    <div class="col-md-5 col-xs-12">
+                        <label for="run-backup">Backup before importing?</label>
+                    </div>
+                    <div class="col-md-7 col-xs-12">
+                        <input type="checkbox" class="minimal" name="run-backup" v-model="options.run_backup">
+                    </div>
+                </div><!-- /dynamic-form-row -->
+
+                <div class="alert col-md-8 col-md-offset-2" style="text-align:left"
+                     :class="alertClass"
+                     v-if="statusText">
+                    {{ this.statusText }}
+                </div><!-- /alert -->
+        </div> <!-- /div row -->
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" style="padding-top: 30px;">
+                <div class="col-md-4 text-right"><h4>Header Field</h4></div>
+                <div class="col-md-4"><h4>Import Field</h4></div>
+                <div class="col-md-4"><h4>Sample Value</h4></div>
+            </div>
+        </div><!-- /div row -->
+
+        <template v-for="(header, index) in file.header_row">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="col-md-4 text-right">
+                        <label :for="header" class="control-label">{{ header }}</label>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <div required>
+                            <select2 :options="columns" v-model="columnMappings[header]">
+                                <option value="0">Do Not Import</option>
+                            </select2>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="form-control-static">{{ activeFile.first_row[index] }}</p>
+                    </div>
+                </div><!-- /div col-md-8 -->
+            </div><!-- /div row -->
+        </template>
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-2 text-right" style="padding-top: 20px;">
+                <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-primary" @click="postSave">Import</button>
+                <br><br>
+            </div>
+        </div><!-- /div row -->
+        <div class="row">
+            <div class="alert col-md-8 col-md-offset-2" style="padding-top: 20px;"
                  :class="alertClass"
                  v-if="statusText">
                 {{ this.statusText }}
             </div>
-        </div>
-                <div class="row">
-                     <div class="col-md-2"></div>
-                     <div class="col-md-8" style="padding-top: 30px;">
-                         <div class="col-md-4 text-right"><h4>Header Field</h4></div>
-                         <div class="col-md-4"><h4>Import Field</h4></div>
-                         <div class="col-md-4"><h4>Sample Value</h4></div>
-                    </div>
-                </div>
+        </div><!-- /div row -->
 
-                <template v-for="(header, index) in file.header_row">
-                    <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8">
-                            <div class="col-md-4 text-right">
-                                <label :for="header" class="control-label">{{ header }}</label>
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <div required>
-                                    <select2 :options="columns" v-model="columnMappings[header]">
-                                        <option value="0">Do Not Import</option>
-                                    </select2>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <p class="form-control-static">{{ activeFile.first_row[index] }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    </template>
+    </div><!-- /div v-show -->
 
-                <div class="row">
-                     <div class="col-md-6 col-md-offset-2 text-right" style="padding-top: 20px;">
-                         <button type="button" class="btn btn-sm btn-default" @click="processDetail = false">Cancel</button>
-                         <button type="submit" class="btn btn-sm btn-primary" @click="postSave">Import</button>
-                         <br><br>
-                     </div>
-                </div>
-                <div class="row">
-                    <div class="alert col-md-8 col-md-offset-2" style="padding-top: 20px;"
-                         :class="alertClass"
-                         v-if="statusText">
-                        {{ this.statusText }}
-                    </div>
-             </div>
-
-
-            </div>
 </template>
 
 <script>
@@ -180,6 +175,10 @@ tr {
                         {id: 'manager_last_name', text: 'Manager Last Name' },
                         {id: 'department', text: 'Department' },
                         {id: 'activated', text: 'Activated' },
+                        {id: 'address', text: 'Address' },
+                        {id: 'city', text: 'City' },
+                        {id: 'state', text: 'State' },
+                        {id: 'country', text: 'Country' },
 
                     ],
                     customFields: this.customFields,
@@ -205,14 +204,14 @@ tr {
                 switch(this.options.importType) {
                     case 'asset':
                         return this.columnOptions.general
-                                .concat(this.columnOptions.assets)
-                                .concat(this.columnOptions.customFields)
-                                .sort(sorter);
+                            .concat(this.columnOptions.assets)
+                            .concat(this.columnOptions.customFields)
+                            .sort(sorter);
 
                     case 'consumable':
                         return this.columnOptions.general
-                        .concat(this.columnOptions.consumables)
-                        .sort(sorter);
+                            .concat(this.columnOptions.consumables)
+                            .sort(sorter);
                     case 'license':
                         return this.columnOptions.general.concat(this.columnOptions.licenses).sort(sorter);
                     case 'user':

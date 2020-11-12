@@ -69,7 +69,8 @@
   <div class="col-md-3">
     @if ($consumable->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-        <a href="{{ app('consumables_upload_url') }}/{{ $consumable->image }}" data-toggle="lightbox"><img src="{{ app('consumables_upload_url') }}/{{ $consumable->image }}" class="img-responsive img-thumbnail" alt="{{ $consumable->name }}"></a>
+        <a href="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" data-toggle="lightbox">
+            <img src="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" class="img-responsive img-thumbnail" alt="{{ $consumable->name }}"></a>
       </div>
     @endif
 

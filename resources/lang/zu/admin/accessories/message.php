@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'I-accessory ayikho.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Lesi sesekeli samanje sino: ukubala izinto ezihlolwe kubasebenzisi. Sicela uhlole izesekeli bese uzama futhi.',
 
     'create' => array(

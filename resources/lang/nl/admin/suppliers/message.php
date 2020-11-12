@@ -21,7 +21,7 @@ return array(
         'success' => 'De leverancier is succesvol verwijderd.',
         'assoc_assets'	 => 'Deze leverancier is momenteel gekoppeld met :asset_count asset(s) en kan hierdoor niet verwijderd worden. Pas je modellen aan zodat deze leverancier niet langer gebruikt wordt en probeer het opnieuw. ',
         'assoc_licenses'	 => 'Deze leverancier is momenteel gekoppeld met :licenses_count licences(s) en kan hierdoor niet verwijderd worden. Pas je modellen aan zodat deze leverancier niet langer gebruikt wordt en probeer het opnieuw. ',
-        'assoc_maintenances'	 => 'Deze leverancier is momenteel gekoppeld met :asset_maintenances_count item onderhoud(en) en kan hierdoor niet verwijderd worden. Pas je modellen aan zodat deze leverancier niet langer gebruikt wordt en probeer het opnieuw. ',
+        'assoc_maintenances'	 => 'Deze leverancier is momenteel gekoppeld met :asset_maintenances_count asset onderhoud(en) en kan niet verwijderd worden. Pas je materiaal aan zodat deze leverancier niet langer gebruikt wordt en probeer het opnieuw. ',
     )
 
 );

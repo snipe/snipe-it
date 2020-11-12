@@ -67,7 +67,9 @@ class UsersController extends Controller
 
 
         if (($request->filled('deleted')) && ($request->input('deleted')=='true')) {
-            $users = $users->GetDeleted();
+            $users = $users->onlyTrashed();
+        } elseif (($request->filled('all')) && ($request->input('deleted')=='true')) {
+            $users = $users->withTrashed();
         }
 
         if ($request->filled('company_id')) {
@@ -76,6 +78,14 @@ class UsersController extends Controller
 
         if ($request->filled('location_id')) {
             $users = $users->where('users.location_id', '=', $request->input('location_id'));
+        }
+
+        if ($request->filled('email')) {
+            $users = $users->where('users.email', '=', $request->input('email'));
+        }
+
+        if ($request->filled('username')) {
+            $users = $users->where('users.username', '=', $request->input('username'));
         }
 
         if ($request->filled('group_id')) {

@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Permisos insuficientes.',
     'user_deleted_warning'      => 'Este usuario ha sido eliminado. Deberás restaurar este usuario para editarlo o asignarle nuevos activos.',
     'ldap_not_configured'        => 'La integración LDAP no ha sido configurada para esta instalación.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Tidak ada hak akses.',
     'user_deleted_warning'      => 'Pengguna ini telah di hapus. Anda harus kembalikan dahulu pengguna ini jika ingin menyunting atau di berikan hak kelola aset.',
     'ldap_not_configured'        => 'Integrasi LDAP belum dikonfigurasi untuk instalasi ini.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

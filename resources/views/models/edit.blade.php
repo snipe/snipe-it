@@ -10,7 +10,7 @@
 {{-- Page content --}}
 @section('inputFields')
 
-@include ('partials.forms.edit.name', ['translated_name' => trans('admin/models/table.name')])
+@include ('partials.forms.edit.name', ['translated_name' => trans('admin/models/table.name'), 'required' => 'true'])
 @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id', 'required' => 'true'])
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('admin/categories/general.category_name'), 'fieldname' => 'category_id', 'required' => 'true', 'category_type' => 'asset'])
 @include ('partials.forms.edit.model_number')

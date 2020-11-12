@@ -1,11 +1,14 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Materiaal onderhoud',
-        'edit'               => 'Wijzig materiaal onderhoud',
-        'delete'             => 'Verwijder materiaal onderhoud',
-        'view'               => 'Toon materiaal onderhoud details',
+        'asset_maintenances' => 'Asset onderhoud',
+        'edit'               => 'Asset onderhoud bewerken',
+        'delete'             => 'Verwijder asset onderhoud',
+        'view'               => 'Details asset onderhoud weergeven',
         'repair'             => 'Reparatie',
         'maintenance'        => 'Onderhoud',
-        'upgrade'            => 'Upgrade'
+        'upgrade'            => 'Upgrade',
+        'calibration'        => 'Calibratie',
+        'software_support'   => 'Software-ondersteuning',
+        'hardware_support'   => 'Hardware-ondersteuning',
     ];

@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP yapılandırma ayarları Yönetici> Ayarlar\'da bulunabilir. Seçilen yer (isteğe bağlı), tüm içe aktarılan kullanıcılar için ayarlanır.',
     'print_assigned'    => 'Atananların Tümünü Yazdır',
     'software_user'     => 'Yazılıma :name için çıkış yapılmış',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Kullanıcıyı Görüntüle :name',
     'usercsv'           => 'CSV Dosyası',
     'two_factor_admin_optin_help' => 'Mevcut yönetici ayarlarınız, iki aşamalı kimlik doğrulamasının seçici olarak uygulanmasına izin verir.  ',

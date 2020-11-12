@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Недоволни дозволи.',
     'user_deleted_warning'      => 'Овој корисник е избришан. Ќе мора да го вратите за да го ажурирате или да му доделите нови основни средства.',
     'ldap_not_configured'        => 'Интеграција со LDAP не е конфигурирана.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

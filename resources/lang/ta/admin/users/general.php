@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP உள்ளமைவு அமைப்புகள் நிர்வாகம்> அமைப்புகள். இறக்குமதி செய்யப்பட்ட அனைத்து பயனர்களுக்கும் (விரும்பினால்) தேர்ந்தெடுக்கப்பட்ட இடம் அமைக்கப்படும்.',
     'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'மென்பொருள் சரிபார்க்கப்பட்டது: பெயர்',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'பயனர் காண்க: பெயர்',
     'usercsv'           => 'CSV கோப்பு',
     'two_factor_admin_optin_help' => 'உங்கள் தற்போதைய நிர்வாக அமைப்புகள் இரண்டு காரணி அங்கீகரிப்பின் தேர்ந்தெடுக்கப்பட்ட செயல்பாட்டை அனுமதிக்கின்றன.',

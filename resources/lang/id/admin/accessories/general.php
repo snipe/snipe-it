@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Tentang Aksesori',
-    'about_accessories_text'  			=> 'Aksesoris apapun yang Anda keluarkan untuk pengguna, yang tidak memiliki nomor seri (atau Anda tidak peduli untuk dilacak). Misalnya, mouse komputer atau keyboard.',
     'accessory_category' 				=> 'Kategori Aksesori',
     'accessory_name'  					=> 'Nama Aksesori',
     'checkout'  							=> 'Aksesoris Keluar',

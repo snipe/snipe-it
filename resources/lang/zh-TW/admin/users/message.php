@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => '權限不足',
     'user_deleted_warning'      => '此使用者已被刪除。您必須先還原此使用者才能進行編輯或分配新的資產。',
     'ldap_not_configured'        => 'LDAP 整合尚未設定',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

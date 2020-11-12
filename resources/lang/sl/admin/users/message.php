@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Nezadostna dovoljenja.',
     'user_deleted_warning'      => 'Ta uporabnik je bil izbrisan. Tega uporabnika boste morali obnoviti, da ga uredite ali dodelite nova sredstva.',
     'ldap_not_configured'        => 'Integracija LDAP za to namestitev ni bila konfigurirana.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

@@ -127,7 +127,7 @@
 
     @if ($location->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 20px;">
-        <img src="{{ app('locations_upload_url') }}/{{ $location->image }}" class="img-responsive img-thumbnail" alt="{{ $location->name }}">
+        <img src="{{ Storage::disk('public')->url('locations/'.e($location->image)) }}" class="img-responsive img-thumbnail" alt="{{ $location->name }}">
       </div>
     @endif
       <div class="col-md-12">
@@ -151,7 +151,7 @@
 
         @if (($location->state!='') && ($location->country!='') && (config('services.google.maps_api_key')))
           <div class="col-md-12 text-center">
-            <img src="https://maps.googleapis.com/maps/api/staticmap?center={{ urlencode($location->city.','.$location->city.' '.$location->state.' '.$location->country.' '.$location->zip) }}&size=500x300&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-responsive img-thumbnail" alt="Map">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?markers={{ urlencode($location->address.','.$location->city.' '.$location->state.' '.$location->country.' '.$location->zip) }}&size=500x300&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-responsive img-thumbnail" alt="Map">
           </div>
         @endif
 

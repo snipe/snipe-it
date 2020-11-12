@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Doplněk neexistuje.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Tato kategorie má nyní :count položek k předání uživatelům. Zkontrolujte převzetí příslušenství a zkuste to znovu. ',
 
     'create' => array(

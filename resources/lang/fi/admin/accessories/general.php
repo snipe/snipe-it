@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Tietoja lisävarusteista',
-    'about_accessories_text'  			=> 'Lisävarusteet ovat mitä annat käyttäjille, mutta niissä ei ole sarjanumeroa (tai et välitä niiden yksilöllisestä seurannasta). Esimerkiksi tietokonehiiret tai näppäimistöt.',
     'accessory_category' 				=> 'Lisävarusteluokka',
     'accessory_name'  					=> 'Lisävarusteen nimi',
     'checkout'  							=> 'Checkout-lisävaruste',

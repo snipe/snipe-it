@@ -35,7 +35,7 @@
                                         <label class="col-md-4 control-label">{{ trans('admin/users/table.username')  }}</label>
 
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" name="username" value="{{ $username or old('username') }}">
+                                            <input type="text" class="form-control" name="username" value="{{ old('username', $username) }}">
                                             {!! $errors->first('username', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
 
                             </div>

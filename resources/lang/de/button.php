@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Hochladen',
 	'select_file'				=> 'Datei auswählen...',
     'select_files'				=> 'Dateien auswählen...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

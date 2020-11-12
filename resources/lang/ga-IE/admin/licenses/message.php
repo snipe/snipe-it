@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Tá somet faoi úinéireacht an tsócmhainn atá tú ag iarraidh a chomhcheangal leis an gceadúnas seo seachas an duine a roghnaíodh sa sannadh chuig an mionsonraithe.',
     'assoc_users'	 => 'Seiceáiltear an ceadúnas seo faoi láthair d\'úsáideoir agus ní féidir é a scriosadh. Seiceáil an ceadúnas sa chéad uair, agus déan iarracht ansin scriosadh arís.',
     'select_asset_or_person' => 'Ní mór duit sócmhainn nó úsáideoir a roghnú, ach níl an dá cheann.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

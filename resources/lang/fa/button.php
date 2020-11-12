@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'بارگزاری',
 	'select_file'				=> 'فایل را انتخاب کنید...',
     'select_files'				=> 'Select Files...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

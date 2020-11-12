@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP-i konfiguratsiooniseadeid saab leida Admin> Seaded. (Valikuline) valitud asukoht määratakse kõigi imporditud kasutajate jaoks.',
     'print_assigned'    => 'Prindi kõik varad',
     'software_user'     => 'Kasutaja :name valdusesse antud tarkvara',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Vaata kasutajat :name',
     'usercsv'           => 'CSV fail',
     'two_factor_admin_optin_help' => 'Sinu praegused admin seaded lubavad kahe-astmelist autantimis jõustada valikulselt. ',

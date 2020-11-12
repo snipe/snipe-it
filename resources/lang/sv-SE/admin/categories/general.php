@@ -1,9 +1,7 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Om kategorier',
-    'about_categories'  				=> 'Kategorier hjälper dig att organisera dina objekt. Exempel på kategorier kan vara &quot;Stationära datorer&quot;, &quot;Bärbara datorer&quot;, &quot;Mobiltelefoner&quot;, &quot;surfplattor&quot; och så vidare, men du kan använda kategorier på det sätt som passar bäst för dig.',
-    'asset_categories' 					=> 'Inventariekategorier',
+    'asset_categories' 					=> 'Kategorier',
     'category_name'  					=> 'Kategorinamn',
     'checkin_email'                     => 'Skicka e-post till användaren vid incheckning / utcheckning.',
     'checkin_email_notification'        => 'Den här användaren kommer att skickas ett mail vid incheckning / utcheckning.',
@@ -11,9 +9,9 @@ return array(
     'create'  							=> 'Skapa kategori',
     'edit'                              => 'Redigera kategori',
     'eula_text'							=> 'Kategori EULA',
-    'eula_text_help'					=> 'I detta fält kan du anpassa dina licensavtal för slutanvändare, EULA, för vissa typer av tillgångar. Om du bara har ett licensavtal för alla dina inventarier, kan du markera rutan nedan för att använda standardlicensavtalet.',
+    'eula_text_help'					=> 'I detta fält kan du anpassa dina licensavtal för slutanvändare, EULA, för vissa typer av tillgångar. Om du bara har ett licensavtal för alla dina tillgångar, kan du markera rutan nedan för att använda standardlicensavtalet.',
     'name'                              => 'Kategorinamn',
-    'require_acceptance'				=> 'Kräv att användare bekräftar mottagande av inventarier i den här kategorin.',
+    'require_acceptance'				=> 'Kräv att användare bekräftar mottagande av tillgångar i denna kategori.',
     'required_acceptance'				=> 'Användaren kommer att få e-post med en länk för att bekräfta mottagande av detta objekt.',
     'required_eula'						=> 'Användaren kommer att få e-post med en kopia av licensavtalet, EULA',
     'no_default_eula'					=> 'Ingen standard-licensavtal, EULA, hittades. Lägg till en under Inställningar.',

@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Isimo',
     'title'      	=> 'Impahla',
     'image'		=> 'Isithombe sedivayisi',
-    'days_without_acceptance' => 'Izinsuku Ngaphandle Kwemukelwa'
+    'days_without_acceptance' => 'Izinsuku Ngaphandle Kwemukelwa',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

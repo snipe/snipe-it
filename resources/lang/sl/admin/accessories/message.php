@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Dodatek ne obstaja.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Ta dodatek trenutno vsebuje: štetje predmetov, elementov ki so izdani uporabnikom. Preverite dodatke in poskusite znova. ',
 
     'create' => array(

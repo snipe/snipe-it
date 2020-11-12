@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'பதிவேற்றம்',
 	'select_file'				=> 'கோப்பு தேர்ந்தெடு ...',
     'select_files'				=> 'Select Files...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

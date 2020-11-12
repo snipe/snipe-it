@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Tình trạng',
     'title'      	=> 'Tài sản ',
     'image'		=> 'Hình ảnh Thiết bị',
-    'days_without_acceptance' => 'Những ngày không chấp nhận'
+    'days_without_acceptance' => 'Những ngày không chấp nhận',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

@@ -48,6 +48,10 @@ class UserImporter extends ItemImporter
         $this->item['email'] = $this->findCsvMatch($row, 'email');
         $this->item['phone'] = $this->findCsvMatch($row, 'phone_number');
         $this->item['jobtitle'] = $this->findCsvMatch($row, 'jobtitle');
+        $this->item['address'] = $this->findCsvMatch($row, 'address');
+        $this->item['city'] = $this->findCsvMatch($row, 'city');
+        $this->item['state'] = $this->findCsvMatch($row, 'state');
+        $this->item['country'] = $this->findCsvMatch($row, 'country');
         $this->item['activated'] =  ($this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')) == 1) ? '1' : 0;
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
         $this->item['department_id'] = $this->createOrFetchDepartment($this->findCsvMatch($row, 'department'));

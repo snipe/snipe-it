@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Notifications\AuditNotification;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Setting;
 
 trait Loggable
 {
@@ -28,8 +29,9 @@ trait Loggable
     {
         $log = new Actionlog;
         $log = $this->determineLogItemType($log);
-        if(Auth::user())
+        if (Auth::user()) {
             $log->user_id = Auth::user()->id;
+        }
 
         if (!isset($target)) {
             throw new \Exception('All checkout logs require a target.');
@@ -89,6 +91,7 @@ trait Loggable
      */
     public function logCheckin($target, $note, $action_date = null)
     {
+        $settings = Setting::getSettings();
         $log = new Actionlog;
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
@@ -113,13 +116,44 @@ trait Loggable
         $log->location_id = null;
         $log->note = $note;
 
-        $log->action_date = $action_date;
-
-        if (!$log->action_date) {
-            $log->action_date = date('Y-m-d H:i:s');
+        if (Auth::user()) {
+            $log->user_id = Auth::user()->id;
         }
-        $log->user_id = Auth::user()->id;
+        
         $log->logaction('checkin from');
+
+//        $params = [
+//            'target' => $target,
+//            'item' => $log->item,
+//            'admin' => $log->user,
+//            'note' => $note,
+//            'target_type' => $log->target_type,
+//            'settings' => $settings,
+//        ];
+//
+//
+//        $checkinClass = null;
+//
+//        if (method_exists($target, 'notify')) {
+//            try {
+//                $target->notify(new static::$checkinClass($params));
+//            } catch (\Exception $e) {
+//                \Log::debug($e);
+//            }
+//
+//        }
+//
+//        // Send to the admin, if settings dictate
+//        $recipient = new \App\Models\Recipients\AdminRecipient();
+//
+//        if (($settings->admin_cc_email!='') && (static::$checkinClass!='')) {
+//            try {
+//                $recipient->notify(new static::$checkinClass($params));
+//            } catch (\Exception $e) {
+//                \Log::debug($e);
+//            }
+//
+//        }
 
         return $log;
     }

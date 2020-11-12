@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Om Kategorier',
-    'about_categories'  				=> 'Kategorier hjælper dig med at organisere dine varer. Nogle eksempler kan være &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot; osv., Men du kan bruge kategorier på nogen måde, der giver mening for dig.',
     'asset_categories' 					=> 'Aktiver Kategorier',
     'category_name'  					=> 'Kategorinavn',
     'checkin_email'                     => 'Send e-mail til bruger ved tjek ind/ud.',

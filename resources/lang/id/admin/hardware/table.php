@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Status',
     'title'      	=> 'Aset ',
     'image'		=> 'Gambar Perangkat',
-    'days_without_acceptance' => 'Tanda Terima'
+    'days_without_acceptance' => 'Tanda Terima',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

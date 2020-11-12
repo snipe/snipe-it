@@ -19,6 +19,7 @@ return array(
     'status'   		=> '状態',
     'title'      	=> '資産 ',
     'image'		=> '写真',
-    'days_without_acceptance' => '未受理期間'
+    'days_without_acceptance' => '未受理期間',
+    'monthly_depreciation' => '毎月の減価償却費（減価償却費）'
 
 );

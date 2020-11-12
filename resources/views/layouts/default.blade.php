@@ -742,7 +742,17 @@
         <section class="content-header" style="padding-bottom: 30px;">
           <h1 class="pull-left">
             @yield('title')
+
+
           </h1>
+
+            @if (isset($helpText))
+            @include ('partials.more-info',
+                                   [
+                                       'helpText' => $helpText,
+                                       'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
+                                   ])
+            @endif
           <div class="pull-right">
             @yield('header_right')
           </div>
@@ -821,7 +831,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h2 class="modal-title" id="myModalLabel">&nbsp;</h4>
+                    <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
                 </div>
                 <div class="modal-body"></div>
                 <div class="modal-footer">
@@ -839,6 +849,10 @@
 
     {{-- Javascript files --}}
     <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+
+    <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
+    <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
+
     {{-- Page level javascript --}}
     @stack('js')
 
@@ -847,12 +861,20 @@
 
 
     <script nonce="{{ csrf_token() }}">
+
+
+        // ignore: 'input[type=hidden]' is required here to validate the select2 lists
         $.validate({
             form : '#create-form',
             modules : 'date, toggleDisabled',
             disabledFormFilter : '#create-form',
-            showErrorDialogs : true
+            showErrorDialogs : true,
+            ignore: 'input[type=hidden]'
         });
+
+
+
+
 
         $(function () {
   

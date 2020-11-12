@@ -154,8 +154,9 @@ View Assets for  {{ $user->present()->fullName() }}
                   }'>
             <thead>
               <tr>
-                <th class="col-md-5">{{ trans('general.name') }}</th>
+                <th class="col-md-4">{{ trans('general.name') }}</th>
                 <th class="col-md-4">{{ trans('admin/hardware/form.serial') }}</th>
+                <th class="col-md-4">{{ trans('general.category') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -169,6 +170,7 @@ View Assets for  {{ $user->present()->fullName() }}
                     ------------
                   @endcan
                 </td>
+                <td>{{ $license->category->name }}</td>
               </tr>
               @endforeach
             </tbody>
@@ -211,13 +213,15 @@ View Assets for  {{ $user->present()->fullName() }}
                   }'>
             <thead>
               <tr>
-                <th class="col-md-12">{{ trans('general.name') }}</th>
+                <th class="col-md-8">{{ trans('general.name') }}</th>
+                <th class="col-md-4">{{ trans('general.category') }}</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($user->consumables as $consumable)
               <tr>
                 <td>{{ $consumable->name }}</td>
+                <td>{{ $consumable->category->name }}</td>
               </tr>
               @endforeach
             </tbody>
@@ -264,13 +268,15 @@ View Assets for  {{ $user->present()->fullName() }}
                   }'>
             <thead>
               <tr>
-                <th class="col-md-12">Name</th>
+                <th class="col-md-8">{{ trans('general.name') }}</th>
+                <th class="col-md-4">{{ trans('general.category') }}</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($user->accessories as $accessory)
               <tr>
                 <td>{{ $accessory->name }}</td>
+                <td>{{ $accessory->category->name }}</td>
               </tr>
               @endforeach
             </tbody>
@@ -314,7 +320,7 @@ View Assets for  {{ $user->present()->fullName() }}
                 }'>
             <thead>
             <tr>
-              <th data-switchable="true" data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"><span class="sr-only">Icon</span></th>
+              <th data-switchable="true" data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">Icon</th>
               <th data-switchable="true" data-visible="true" class="col-sm-3" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
               <th data-switchable="true" data-visible="true" class="col-sm-3" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
               <th data-switchable="true" data-visible="true" class="col-sm-3" data-field="action_type">{{ trans('general.action') }}</th>

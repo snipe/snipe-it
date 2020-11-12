@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Tentang Aksesori',
-    'about_accessories_text'  			=> 'Aksesori adalah apa-apa yang kamu menetapkan untuk pengguna tetapi ia tidak mempunyai nombor siri (atau anda tidak peduli untuk trek ia dengan uniknya). Sebagai contoh, komputer tetikus atau papan kekunci.',
     'accessory_category' 				=> 'Kategori Aksesori',
     'accessory_name'  					=> 'Nama Aksesori',
     'checkout'  							=> 'Semak keluar aksesori',

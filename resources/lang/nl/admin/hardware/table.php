@@ -5,7 +5,7 @@ return array(
     'asset_tag'   	=> 'Asset tag',
     'asset_model'       => 'Model',
     'book_value'  	=> 'Waarde',
-    'change' 		=> 'In/out',
+    'change' 		=> 'In/Uit',
     'checkout_date' => 'Uitcheck datum',
     'checkoutto' 	=> 'Uitgecheckt',
     'diff' 			=> 'Verschil',
@@ -18,7 +18,8 @@ return array(
     'serial'   		=> 'Serienummer',
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
-    'image'		=> 'Product afbeelding',
-    'days_without_acceptance' => 'Dagen zonder acceptatie'
+    'image'		=> 'Apparaat afbeelding',
+    'days_without_acceptance' => 'Dagen zonder acceptatie',
+    'monthly_depreciation' => 'Maandelijkse afschrijving'
 
 );

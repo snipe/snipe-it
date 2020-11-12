@@ -156,6 +156,28 @@ class ProfileController extends Controller
             if (!Hash::check($request->input('current_password'), $user->password)) {
                 $validator->errors()->add('current_password', trans('validation.hashed_pass'));
             }
+
+            // This checks to make sure that the user's password isn't the same as their username,
+            // email address, first name or last name (see https://github.com/snipe/snipe-it/issues/8661)
+            // While this is handled via SaveUserRequest form request in other places, we have to do this manually
+            // here because we don't have the username, etc form fields available in the profile password change
+            // form.
+
+            // There may be a more elegant way to do this in the future.
+
+            // First let's see if that option is enabled in the settings
+            if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== FALSE) {
+                if (($request->input('password') == $user->username) ||
+                    ($request->input('password') == $user->email) ||
+                    ($request->input('password') == $user->first_name) ||
+                    ($request->input('password') == $user->last_name))
+                {
+                    $validator->errors()->add('password', trans('validation.disallow_same_pwd_as_user_fields'));
+                }
+            }
+
+
+
             
         });
 

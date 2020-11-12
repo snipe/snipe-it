@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> 'O komponentama',
-    'about_components_text'  			=> 'Komponente su stavke koje su deo imovine, na primjer HDD, RAM, Napajanje itd.',
     'component_name'                  => 'Naziv komponente',
     'checkin'                             => 'Checkin Component',
     'checkout'                             => 'Checkout Component',

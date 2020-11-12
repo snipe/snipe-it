@@ -13,4 +13,5 @@ return array(
     'upload'                    => '上传',
 	'select_file'				=> '选择文件...',
     'select_files'				=> '选择文件...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

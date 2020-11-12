@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'وسیله موجود نیست',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'این وسیله هم اکنون:آیتم های چک شده به کاربران را حساب کنید.لطفا در لوازم جانبی چک کنید و دوباره امتحان کنید',
 
     'create' => array(

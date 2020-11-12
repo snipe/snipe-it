@@ -3,7 +3,7 @@
 return array(
     'activated'  			=> 'Actief',
     'allow'  				=> 'Toestaan',
-    'checkedout'  			=> 'Materialen',
+    'checkedout'  			=> 'Assets',
     'created_at' 			=> 'Aangemaakt',
     'createuser' 			=> 'Gebruiker aanmaken',
     'deny'  				=> 'Weigeren',
@@ -33,6 +33,6 @@ return array(
     'username' 				=> 'Gebruikersnaam',
 	'user_deleted_text' 	=> 'Deze gebruiker is gemarkeerd als verwijderd.',
     'username_note' 		=> '(Dit wordt enkel gebruikt om te koppelen met de Active Directory, niet om aan te melden.)',
-    'cloneuser'             => 'Gebruiker klonen',
+    'cloneuser'             => 'Gebruiker dupliceren',
     'viewusers' 			=> 'Bekijk gebruikers',
 );

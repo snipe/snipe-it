@@ -69,7 +69,7 @@ class SuppliersController extends Controller
         $supplier->notes                = request('notes');
         $supplier->url                  = $supplier->addhttp(request('url'));
         $supplier->user_id              = Auth::id();
-        $supplier = $request->handleImages($supplier,600, public_path().'/uploads/suppliers');
+        $supplier = $request->handleImages($supplier);
 
 
         if ($supplier->save()) {
@@ -129,7 +129,7 @@ class SuppliersController extends Controller
         $supplier->email                = request('email');
         $supplier->url                  = $supplier->addhttp(request('url'));
         $supplier->notes                = request('notes');
-        $supplier = $request->handleImages($supplier,600, public_path().'/uploads/suppliers');
+        $supplier = $request->handleImages($supplier);
 
         if ($supplier->save()) {
             return redirect()->route('suppliers.index')->with('success', trans('admin/suppliers/message.update.success'));

@@ -26,6 +26,7 @@ class CheckinAccessoryNotification extends Notification
         $this->admin    = $checkedInby;
         $this->note     = $note;
         $this->settings = Setting::getSettings();
+        \Log::debug('Constructor for notification fired');
     }
 
     /**
@@ -35,22 +36,62 @@ class CheckinAccessoryNotification extends Notification
      */
     public function via()
     {
-
+        \Log::debug('via called');
         $notifyBy = [];
 
         if (Setting::getSettings()->slack_endpoint) {
             $notifyBy[] = 'slack';
         }
 
-        /**
-         * Only send checkin notifications to users if the category 
-         * has the corresponding checkbox checked. 
-         */
-        if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '')
-        {
-            \Log::debug('use email');
-            $notifyBy[] = 'mail';
+        if (Setting::getSettings()->slack_endpoint!='') {
+            $notifyBy[] = 'slack';
         }
+
+
+        /**
+         * Only send notifications to users that have email addresses
+         */
+        if ($this->target instanceof User && $this->target->email != '') {
+
+            \Log::debug('The target is a user');
+
+            /**
+             * Send an email if the asset requires acceptance,
+             * so the user can accept or decline the asset
+             */
+            if (($this->item->requireAcceptance()) || ($this->item->getEula()) || ($this->item->checkin_email())) {
+                $notifyBy[] = 'mail';
+            }
+
+
+
+
+
+            /**
+             * Send an email if the asset requires acceptance,
+             * so the user can accept or decline the asset
+             */
+            if ($this->item->requireAcceptance()) {
+               \Log::debug('This accessory requires acceptance');
+            }
+
+            /**
+             * Send an email if the item has a EULA, since the user should always receive it
+             */
+            if ($this->item->getEula()) {
+                \Log::debug('This accessory has a EULA');
+            }
+
+            /**
+             * Send an email if an email should be sent at checkin/checkout
+             */
+            if ($this->item->checkin_email()) {
+                \Log::debug('This accessory has a checkin_email()');
+            }
+
+        }
+
+        \Log::debug('checkin_email on this category is '.$this->item->checkin_email());
 
         return $notifyBy;
     }
@@ -70,7 +111,7 @@ class CheckinAccessoryNotification extends Notification
         ];
 
         return (new SlackMessage)
-            ->content(':arrow_down: :keyboard: Accessory Checked In')
+            ->content(':arrow_down: :keyboard: '.trans('mail.Accessory_Checkin_Notification'))
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
@@ -86,6 +127,7 @@ class CheckinAccessoryNotification extends Notification
      */
     public function toMail()
     {
+        \Log::debug('to email called');
         return (new MailMessage)->markdown('notifications.markdown.checkin-accessory',
             [
                 'item'          => $this->item,
@@ -93,7 +135,7 @@ class CheckinAccessoryNotification extends Notification
                 'note'          => $this->note,
                 'target'        => $this->target,
             ])
-            ->subject('Accessory checked in');
+            ->subject(trans('mail.Accessory_Checkin_Notification'));
 
     }
 }

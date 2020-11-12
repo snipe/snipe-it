@@ -107,6 +107,8 @@ class AssetsController extends Controller
         // differently
         $asset_tags = $request->input('asset_tags');
 
+        $settings = Setting::getSettings();
+
         $success = false;
         $serials = $request->input('serials');
 
@@ -563,7 +565,7 @@ class AssetsController extends Controller
         if (!ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
         }
-        $csv = Reader::createFromPath(Input::file('user_import_csv'));
+        $csv = Reader::createFromPath($request->file('user_import_csv'));
         $csv->setHeaderOffset(0);
         $results = $csv->getRecords();
         $item = array();

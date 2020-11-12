@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Về Danh mục',
-    'about_categories'  				=> 'Danh mục giúp bạn quản lý các mục của bạn. Ví dụ như danh mục có thể là Máy tính để bàn (Desktops), Máy tính xách tay (Laptops), Điện thoại di động (Mobile Phones), Máy tính bảng,... nhưng bản có thể sử dụng danh mục này bằng bất kỳ cách nào mà bạn cảm thấy phù hợp.',
     'asset_categories' 					=> 'Danh mục tài sản',
     'category_name'  					=> 'Tên hạng mục',
     'checkin_email'                     => 'Gửi email đến người dùng khi checkin/checkout.',

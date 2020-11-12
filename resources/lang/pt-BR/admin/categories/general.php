@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Sobre as Categorias',
-    'about_categories'  				=> 'Categorias auxiliam na organização dos seus itens. Alguns exemplos de categorias podem ser: Desktops, Notebooks, Celulares, Tablets, e assim por diante, mas você pode usar as Categorias de melhor forma que você identificar.',
     'asset_categories' 					=> 'Categorias de Ativos',
     'category_name'  					=> 'Nome da Categoria',
     'checkin_email'                     => 'Enviar email para o usuário no check-in / check-out.',

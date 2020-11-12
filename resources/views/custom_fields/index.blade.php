@@ -60,7 +60,7 @@
               </td>
               <td>
                 @foreach($fieldset->models as $model)
-                  <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}</a>
+                  <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}{{ ($model->model_number) ? ' ('.$model->model_number.')' : '' }}</a>
 
                 @endforeach
               </td>
@@ -140,7 +140,7 @@
             <tr>
               <td>{{ $field->name }}</td>
               <td>{{ $field->help_text }}</td>
-              <td>{!! ($field->show_in_email=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>'  !!}</td>
+              <td>{!! ($field->show_in_email=='1') ? '<i class="fa fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td>
                  <code>{{ $field->convertUnicodeDbSlug() }}</code>
                 @if ($field->convertUnicodeDbSlug()!=$field->db_column)

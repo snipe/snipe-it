@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Estado',
     'title'      	=> 'Equipo ',
     'image'		=> 'Imagen de dispositivo',
-    'days_without_acceptance' => 'Días Sin Aceptación'
+    'days_without_acceptance' => 'Días Sin Aceptación',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

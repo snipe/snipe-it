@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Статус',
     'title'      	=> 'Актив ',
     'image'		=> 'Зображення пристрою',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'days_without_acceptance' => 'Days Without Acceptance',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

@@ -7,5 +7,8 @@
         'view'               => 'Féach ar Mionsonraí Cothabhála Sócmhainní',
         'repair'             => 'Deisiúchán',
         'maintenance'        => 'Cothabháil',
-        'upgrade'            => 'Uasghrádú'
+        'upgrade'            => 'Uasghrádú',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

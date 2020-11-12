@@ -143,11 +143,10 @@ class LicenseFilesController extends Controller
                 // We have to override the URL stuff here, since local defaults in Laravel's Flysystem
                 // won't work, as they're not accessible via the web
                 if (config('filesystems.default') == 'local') {
-                    \Log::debug('The private filesystem is local');
-                    return Response::make(Storage::get($file));
-
+                    return Storage::download($file);
                 } else {
                     if ($download != 'true') {
+                        \Log::debug('display the file');
                         if ($contents = file_get_contents(Storage::url($file))) {
                             return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
                         }

@@ -70,7 +70,7 @@ class ManufacturersController extends Controller
         $manufacturer->support_url      = $request->input('support_url');
         $manufacturer->support_phone    = $request->input('support_phone');
         $manufacturer->support_email    = $request->input('support_email');
-        $manufacturer = $request->handleImages($manufacturer,600, public_path().'/uploads/manufacturers');
+        $manufacturer = $request->handleImages($manufacturer);
 
 
 
@@ -137,7 +137,7 @@ class ManufacturersController extends Controller
             $manufacturer->image = null;
         }
 
-        $manufacturer = $request->handleImages($manufacturer,600, public_path().'/uploads/manufacturers');
+        $manufacturer = $request->handleImages($manufacturer);
 
 
         if ($manufacturer->save()) {

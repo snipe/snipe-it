@@ -26,10 +26,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     use UniqueUndeletedTrait;
     use Notifiable;
     use Presentable;
+    use Searchable;
+
     protected $dates = ['deleted_at'];
     protected $hidden = ['password','remember_token','permissions','reset_password_code','persist_code'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
+
     protected $fillable = [
         'activated',
         'address',
@@ -74,11 +77,10 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'password'                => 'required|min:8',
         'locale'                  => 'max:10|nullable',
         'website'                 => 'url|nullable',
-        'manager_id'              => 'nullable|exists:users,id|different:users.id',
+        'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
         'location_id'             => 'exists:locations,id|nullable',
     ];
 
-    use Searchable;
 
     /**
      * The attributes that should be included when searching the model.
@@ -107,7 +109,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'groups'     => ['name'],
         'company'    => ['name'],
         'manager'    => ['first_name', 'last_name', 'username']
-    ];  
+    ];
+
 
     /**
      * Check user permissions
@@ -295,7 +298,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function accessories()
     {
-        return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')->withPivot('id')->withTrashed();
+        return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')
+            ->withPivot('id', 'created_at', 'note')->withTrashed();
     }
 
     /**
@@ -331,7 +335,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function userlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'target_id')->orderBy('created_at', 'DESC')->withTrashed();
+        return $this->hasMany('\App\Models\Actionlog', 'target_id')->where('target_type', '=', 'App\Models\User')->orderBy('created_at', 'DESC')->withTrashed();
     }
 
 
@@ -521,6 +525,18 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             } elseif ($format=='firstname') {
                 $username = str_slug($first_name);
             }
+              elseif ($format=='firstinitial.lastname') {
+                $username = str_slug(substr($first_name, 0, 1). '.' . str_slug($last_name));
+            }
+              elseif ($format=='lastname_firstinitial') {
+                $username = str_slug($last_name).'_'.str_slug(substr($first_name, 0, 1));
+            }
+              elseif ($format=='firstnamelastname') {
+                $username = str_slug($first_name) . str_slug($last_name);
+            }
+              elseif ($format=='firstnamelastinitial') {
+                $username = str_slug(($first_name.substr($last_name, 0, 1)));
+              }
         }
 
         $user['first_name'] = $first_name;

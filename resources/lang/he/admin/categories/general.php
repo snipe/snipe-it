@@ -1,12 +1,10 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'על קטגוריות',
-    'about_categories'  				=> 'קטגוריות מסייעות לך לארגן את הפריטים שלך. כמה קטגוריות לדוגמה עשויות להיות &quot;Desktops&quot;, &quot;Laptops&quot;, &quot; טלפונים ניידים &quot;, &quot; טבלטים &quot;, וכן הלאה, אך תוכל להשתמש בקטגוריות בכל דרך שמתאימה לך.',
     'asset_categories' 					=> 'קטגוריות נכסים',
     'category_name'  					=> 'שם קטגוריה',
-    'checkin_email'                     => 'Send email to user on checkin/checkout.',
-    'checkin_email_notification'        => 'This user will be sent an email on checkin/checkout.',
+    'checkin_email'                     => 'שלח דוא״ל למשתמש בעת הנפקה/החזרה.',
+    'checkin_email_notification'        => 'למשתמש זה ישלח דוא״ל בעת הנפקה/החזרה.',
     'clone'                             => 'קטגוריה שיבוט',
     'create'  							=> 'צור קטגוריה',
     'edit'                              => 'ערוך קטגוריה',

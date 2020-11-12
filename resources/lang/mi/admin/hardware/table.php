@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Tūnga',
     'title'      	=> 'Tahua',
     'image'		=> 'Atahanga Pūrere',
-    'days_without_acceptance' => 'Nga Rahui Te Whakaae'
+    'days_without_acceptance' => 'Nga Rahui Te Whakaae',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

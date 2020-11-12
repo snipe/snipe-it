@@ -91,6 +91,42 @@ class ValidationServiceProvider extends ServiceProvider
         });
 
 
+        // This ONLY works for create/update user forms, since the Update Profile Password form doesn't
+        // include any of these additional validator fields
+        Validator::extend('disallow_same_pwd_as_user_fields', function ($attribute, $value, $parameters, $validator) {
+            
+            $data = $validator->getData();
+
+            if (array_key_exists("username", $data)) {
+                if ($data['username'] == $data['password']) {
+                    return false;
+                }
+            }
+
+            if (array_key_exists("email", $data)) {
+                if ($data['email'] == $data['password']) {
+                    return false;
+                }
+            }
+
+            if (array_key_exists("first_name", $data)) {
+                if ($data['first_name'] == $data['password']) {
+                    return false;
+                }
+            }
+
+            if (array_key_exists("last_name", $data)) {
+                if ($data['last_name'] == $data['password']) {
+                    return false;
+                }
+            }
+
+
+           return true;
+
+
+        });
+
         Validator::extend('letters', function ($attribute, $value, $parameters) {
             return preg_match('/\pL/', $value);
         });
@@ -105,6 +141,27 @@ class ValidationServiceProvider extends ServiceProvider
 
         Validator::extend('symbols', function ($attribute, $value, $parameters) {
             return preg_match('/\p{Z}|\p{S}|\p{P}/', $value);
+        });
+
+        Validator::extend('cant_manage_self', function ($attribute, $value, $parameters, $validator) {
+            // $value is the actual *value* of the thing that's being validated
+            // $attribute is the name of the field that the validation is running on - probably manager_id in our case
+            // $parameters are the optional parameters - an array for everything, split on commas. But we don't take any params here.
+            // $validator gives us proper access to the rest of the actual data
+            $data = $validator->getData();
+
+            if(array_key_exists("id", $data)) {
+                if ($value && $value == $data['id']) {
+                    // if you definitely have an ID - you're saving an existing user - and your ID matches your manager's ID - fail.
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                // no 'id' key to compare against (probably because this is a new user)
+                // so it automatically passes this validation
+                return true;
+            }
         });
 
 

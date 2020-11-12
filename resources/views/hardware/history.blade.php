@@ -73,6 +73,9 @@
                             <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
                             <div class="col-sm-9">
                                 <input type="file" name="user_import_csv" id="user_import_csv"{{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
                             </div>
                         </div>
 

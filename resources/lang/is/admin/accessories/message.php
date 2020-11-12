@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Þessi aukabúnaður er ekki til.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Þessi aukabúnaður er nú þegar: count items sem skráð eru á notendur. Vinsamlegast skráðu inn aukabúnaðinn og reyndu aftur! ',
 
     'create' => array(

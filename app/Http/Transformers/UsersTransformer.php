@@ -54,7 +54,6 @@ class UsersTransformer
                 'activated' => ($user->activated =='1') ? true : false,
                 'two_factor_activated' => ($user->two_factor_active()) ? true : false,
                 'two_factor_enrolled' => ($user->two_factor_active_and_enrolled()) ? true : false,
-
                 'assets_count' => (int) $user->assets_count,
                 'licenses_count' => (int) $user->licenses_count,
                 'accessories_count' => (int) $user->accessories_count,
@@ -63,6 +62,7 @@ class UsersTransformer
                 'created_at' => Helper::getFormattedDateObject($user->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($user->updated_at, 'datetime'),
                 'last_login' => Helper::getFormattedDateObject($user->last_login, 'datetime'),
+                'deleted_at' => ($user->deleted_at) ?  Helper::getFormattedDateObject($user->deleted_at, 'datetime') : null,
             ];
 
         $permissions_array['available_actions'] = [

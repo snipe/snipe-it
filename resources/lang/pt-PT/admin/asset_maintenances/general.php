@@ -7,5 +7,8 @@
         'view'               => 'Ver Detalhes da Manutenção do Artigo',
         'repair'             => 'Reparar',
         'maintenance'        => 'Manutenção',
-        'upgrade'            => 'Melhorar'
+        'upgrade'            => 'Melhorar',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

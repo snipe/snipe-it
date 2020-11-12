@@ -13,7 +13,7 @@
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/accessories/general.accessory_name')])
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id', 'required' => 'true','category_type' => 'accessory'])
 @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
-@include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id', 'required' => 'true'])
+@include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id'])
 @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 @include ('partials.forms.edit.model_number')
 @include ('partials.forms.edit.order_number')
@@ -29,7 +29,7 @@
         <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
         <div class="col-md-5">
             {{ Form::checkbox('image_delete') }}
-            <img src="{{ Storage::disk('public')->url(app('accessories_upload_path').e($item->image)) }}" class="img-responsive" />
+            <img src="{{  Storage::disk('public')->url('accessories/'.e($item->image)) }}" class="img-responsive" />
             {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
         </div>
     </div>

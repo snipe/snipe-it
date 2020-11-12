@@ -18,7 +18,7 @@
 
 
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-7">
             <form class="form-horizontal" method="post" action="" autocomplete="off">
                 <!-- CSRF Token -->
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -37,7 +37,7 @@
                                     @if ($accessory->name)
                                     <!-- accessory name -->
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">{{ trans('admin/hardware/form.name') }}</label>
+                                        <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.name') }}</label>
                                         <div class="col-md-6">
                                           <p class="form-control-static">{{ $accessory->name }}</p>
                                         </div>
@@ -46,7 +46,7 @@
 
                                     <!-- Note -->
                                     <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-                                        <label for="note" class="col-md-2 control-label">{{ trans('admin/hardware/form.notes') }}</label>
+                                        <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                                         <div class="col-md-7">
                                             <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $accessory->note) }}</textarea>
                                             {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -55,8 +55,8 @@
                             <!-- Checkout/Checkin Date -->
                             <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">
                                 {{ Form::label('checkin_at', trans('admin/hardware/form.checkin_date'), array('class' => 'col-md-3 control-label')) }}
-                                <div class="col-md-8">
-                                    <div class="input-group col-md-5 required">
+                                <div class="col-md-7">
+                                    <div class="input-group col-md-5 required" style="padding-left: 0px;">
                                         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d" data-autoclose="true">
                                             <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkin_at" id="checkin_at" value="{{ Request::old('checkin_at', date('Y-m-d')) }}">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>

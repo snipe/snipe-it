@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Over Accessoires',
-    'about_accessories_text'  			=> 'Accessoires zijn alles wat je uitgeeft aan gebruikers maar welke geen serienummer hebben (of welke niet interessant genoeg zijn om individueel te volgen) Bij voorbeeld computer muizen of toetsenborden.',
     'accessory_category' 				=> 'Accessoire Categorie',
     'accessory_name'  					=> 'Accessoire Naam',
     'checkout'  							=> 'Checkout accessoire',
@@ -10,8 +8,8 @@ return array(
     'create'  							=> 'Accessoire aanmaken',
     'edit'  							=> 'Accessoire aanpassen',
     'eula_text'							=> 'Categorie EULA',
-    'eula_text_help'					=> 'Dit veld staat aanpassingen toe voor de gebruikersovereenkomsten van verschillende goederen. Heeft u één overeenkomst voor alle goederen, vink dan het vakje hieronder aan om de standaard gebruikersovereenkomst te gebruiken.',
-    'require_acceptance'				=> 'Verplicht de gebruikers de overeenkomst te accepteren voor de goederen in deze catagorie.',
+    'eula_text_help'					=> 'Dit veld laat je toe om je gebruikersovereenkomsten aan te passen voor specifieke assets. Als je maar één gebruikersovereenkomst hebt voor al je assets, vink dan het vakje hieronder aan om de primaire standaard te gebruiken.',
+    'require_acceptance'				=> 'Verplicht gebruikers om de acceptatie van assets in deze categorie te bevestigen.',
     'no_default_eula'					=> 'Geen standaard gebruikersovereenkomst gevonden. Voeg er één toe in Instellingen.',
     'total'  							=> 'Totaal',
     'remaining'  						=> 'Beschikbaar',

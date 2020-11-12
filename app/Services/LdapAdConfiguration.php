@@ -52,10 +52,19 @@ class LdapAdConfiguration
      * @since 5.0.0
      */
     public function init() {
-        $this->ldapSettings = $this->getSnipeItLdapSettings();
-        if ($this->isLdapEnabled()) {
-            $this->setSnipeItConfig();
+
+        // This try/catch is dumb, but is necessary to run initial migrations, since
+        // this service provider is booted even during migrations. :( - snipe
+        try {
+            $this->ldapSettings = $this->getSnipeItLdapSettings();
+            if ($this->isLdapEnabled()) {
+                $this->setSnipeItConfig();
+            }
+        } catch (\Exception $e) {
+            \Log::debug($e);
+            $this->ldapSettings = null;
         }
+
     }
 
     /**
@@ -82,33 +91,35 @@ class LdapAdConfiguration
      */
     private function getSnipeItLdapSettings(): Collection
     {
-        $ldapSettings = Setting::getLdapSettings()
-            ->map(function ($item, $key) {
-                // Trim the items
-                if (is_string($item)) {
-                    $item = trim($item);
-                }
-                // Get the boolean value of the LDAP setting, makes it easier to work with them
-                if (in_array($key, self::LDAP_BOOLEAN_SETTINGS)) {
-                    return boolval($item);
-                }
-
-                // Decrypt the admin password
-                if ('ldap_pword' === $key && !empty($item)) {
-                    try {
-                        return decrypt($item);
-                    } catch (Exception $e) {
-                        throw new Exception('Your app key has changed! Could not decrypt LDAP password using your current app key, so LDAP authentication has been disabled. Login with a local account, update the LDAP password and re-enable it in Admin > Settings.');
+        $ldapSettings = collect();
+        if(Setting::first()) { // during early migration steps, there may be no settings table entry to start with
+            $ldapSettings = Setting::getLdapSettings()
+                ->map(function ($item, $key) {
+                    // Trim the items
+                    if (is_string($item)) {
+                        $item = trim($item);
                     }
-                }
+                    // Get the boolean value of the LDAP setting, makes it easier to work with them
+                    if (in_array($key, self::LDAP_BOOLEAN_SETTINGS)) {
+                        return boolval($item);
+                    }
 
-                if ($item && 'ldap_server' === $key) {
-                    return collect(parse_url($item));
-                }
+                    // Decrypt the admin password
+                    if ('ldap_pword' === $key && !empty($item)) {
+                        try {
+                            return decrypt($item);
+                        } catch (Exception $e) {
+                            throw new Exception('Your app key has changed! Could not decrypt LDAP password using your current app key, so LDAP authentication has been disabled. Login with a local account, update the LDAP password and re-enable it in Admin > Settings.');
+                        }
+                    }
 
-                return $item;
-            });
+                    if ($item && 'ldap_server' === $key) {
+                        return collect(parse_url($item));
+                    }
 
+                    return $item;
+                });
+        }
         return $ldapSettings;
     }
 
@@ -153,7 +164,7 @@ class LdapAdConfiguration
             'password'         => $this->ldapSettings['ldap_pword'],
 
             // Optional Configuration Options
-            'schema'           => $this->getSchema(),
+            'schema'           => $this->getSchema(), // FIXME - we probably ought not to be using this, right?
             'account_prefix'   => '',
             'account_suffix'   => '',
             'port'             => $this->getPort(),
@@ -180,7 +191,7 @@ class LdapAdConfiguration
      *
      * @return string
      */
-    private function getSchema(): string
+    private function getSchema(): string //wait, what? This is a little weird, since we have completely separate variables for this; we probably shoulnd't be using any 'schema' at all
     {
         $schema = \Adldap\Schemas\OpenLDAP::class;
         if ($this->ldapSettings['is_ad']) {
@@ -237,11 +248,14 @@ class LdapAdConfiguration
      */
     private function getServerUrlBase(): array
     {
-        if ($this->ldapSettings['is_ad']) {
+        /* if ($this->ldapSettings['is_ad']) {
             return collect(explode(',', $this->ldapSettings['ad_domain']))->map(function ($item) {
                 return trim($item);
             })->toArray();
-        }
+        } */ // <- this was the *original* intent of the PR for AdLdap2, but we've been moving away from having
+             // two separate fields - one for "ldap_host" and one for "ad_domain" - towards just using "ldap_host"
+             // ad_domain for us just means "append this domain to your usernames for login, if you click that checkbox"
+             // that's all, nothing more (I hope).
 
         $url = $this->getLdapServerData('host');
         return $url ? [$url] : [];

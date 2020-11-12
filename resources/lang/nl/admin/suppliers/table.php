@@ -2,9 +2,9 @@
 
 return array(
     'about_suppliers_title' => 'Over leveranciers',
-    'about_suppliers_text'  => 'Leveranciers worden gebruikt om de afkomst van objecten bij te houden',
+    'about_suppliers_text'  => 'Leveranciers worden gebruikt om de afkomst van items bij te houden',
     'address'               => 'Leverancier adres',
-    'assets'                => 'Producten',
+    'assets'                => 'Assets',
     'city'                  => 'Stad',
     'contact'               => 'Contact naam',
     'country'               => 'Land',
@@ -21,7 +21,7 @@ return array(
     'update'                => 'Wijzig leverancier',
     'url'                   => 'URL',
     'view'                  => 'Bekijk leverancier',
-    'view_assets_for'       => 'Bekijk producten voor',
+    'view_assets_for'       => 'Bekijk assets voor',
     'zip'                   => 'Postcode',
 
 );

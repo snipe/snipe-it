@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> 'Acerca de Componentes',
-    'about_components_text'  			=> 'Los componentes son elementos que son parte de un activo, por ejemplo, HDD, RAM, etc.',
     'component_name'                  => 'Nombre de Componente',
     'checkin'                             => 'Ingreso de Componente',
     'checkout'                             => 'Salida de Componente',

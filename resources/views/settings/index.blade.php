@@ -139,9 +139,10 @@
                   <i class="fa fa-bell fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">Notifications</span>
+
                 </a>
               </h5>
-              <p class="help-block">Email alerts</p>
+              <p class="help-block">Email alerts, audit settings</p>
             </div>
           </div>
         </div>
@@ -258,7 +259,7 @@
           <div class="box-body text-center">
             <h5>
               <a href="{{ route('settings.logins.index') }}">
-                <i class="fa fa-sign-in fa-4x" aria-hidden="true"></i>
+                <i class="fa fa-crosshairs fa-4x" aria-hidden="true"></i>
                 <br><br>
                 <span class="name">Login Attempts</span>
               </a>

@@ -1911,6 +1911,33 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "sanjay900",
+      "name": "Sanjay Govind",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1862720?v=4",
+      "profile": "https://tangentmc.net",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "PeterUpfold",
+      "name": "Peter Upfold",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1255375?v=4",
+      "profile": "https://peter.upfold.org.uk/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jbiel",
+      "name": "Jared Biel",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/961717?v=4",
+      "profile": "https://github.com/jbiel",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

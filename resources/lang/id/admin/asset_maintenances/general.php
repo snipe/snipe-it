@@ -7,5 +7,8 @@
         'view'               => 'Rincian Pemeliharaan Aset',
         'repair'             => 'Perbaikan',
         'maintenance'        => 'Pemeliharaan',
-        'upgrade'            => 'Peningkatan'
+        'upgrade'            => 'Peningkatan',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

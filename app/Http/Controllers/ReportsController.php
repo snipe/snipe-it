@@ -103,7 +103,7 @@ class ReportsController extends Controller
         $this->authorize('reports.view');
         $depreciations = Depreciation::get();
         // Grab all the assets
-        $assets = Asset::with( 'assignedTo', 'assetstatus', 'defaultLoc', 'location', 'assetlog', 'company', 'model.category', 'model.depreciation')
+        $assets = Asset::with( 'assignedTo', 'assetstatus', 'defaultLoc', 'location', 'company', 'model.category', 'model.depreciation')
                        ->orderBy('created_at', 'DESC')->get();
 
         return view('reports/depreciation', compact('assets'))->with('depreciations',$depreciations);
@@ -682,7 +682,7 @@ class ReportsController extends Controller
                             $diff = ($asset->purchase_cost - $depreciation);
                             $row[]        = Helper::formatCurrencyOutput($depreciation);
                             $row[]        = Helper::formatCurrencyOutput($diff);
-                            $row[]        = ($asset->depreciated_date()!='') ? $asset->depreciated_date()->format('Y-m-d') : '';
+                            $row[]        = ($asset->depreciation) ? $asset->depreciated_date()->format('Y-m-d') : '';
                     }
 
                     if ($request->filled('checkout_date')) {

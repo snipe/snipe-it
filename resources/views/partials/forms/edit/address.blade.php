@@ -27,8 +27,7 @@
     <div class="col-md-7">
     {{Form::text('state', old('state', $item->state), array('class' => 'form-control', 'aria-label'=>'state')) }}
         {!! $errors->first('state', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
-    {{Form::text('state', Request::old('state', $item->state), array('class' => 'form-control')) }}
-        {!! $errors->first('state', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+
     </div>
 </div>
 

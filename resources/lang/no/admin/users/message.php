@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Utilstrekkelige rettigheter.',
     'user_deleted_warning'      => 'Denne brukeren er slettet. Du vil må gjenopprette denne brukeren for å redigere, eller tildele nye eiendeler.',
     'ldap_not_configured'        => 'LDAP integrasjonen er ikke konfigurert i denne installasjonen.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

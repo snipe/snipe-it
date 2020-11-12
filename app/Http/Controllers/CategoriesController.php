@@ -76,8 +76,7 @@ class CategoriesController extends Controller
         $category->checkin_email        = $request->input('checkin_email', '0');
         $category->user_id              = Auth::id();
 
-        $category = $request->handleImages($category,600, public_path().'/uploads/categories');
-
+        $category = $request->handleImages($category);
         if ($category->save()) {
             return redirect()->route('categories.index')->with('success', trans('admin/categories/message.create.success'));
         }
@@ -136,7 +135,7 @@ class CategoriesController extends Controller
         $category->checkin_email        = $request->input('checkin_email', '0');
 
 
-        $category = $request->handleImages($category,600, public_path().'/uploads/categories');
+        $category = $request->handleImages($category);
 
         if ($category->save()) {
             // Redirect to the new category page

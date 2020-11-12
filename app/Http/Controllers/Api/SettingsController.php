@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\LoginAttemptsTransformer;
 use App\Models\Setting;
 use App\Notifications\MailTest;
-use App\Notifications\SlackTest;
 use App\Services\LdapAd;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
@@ -75,6 +77,7 @@ class SettingsController extends Controller
         // Get a sample of 10 users so user can verify the data is correct
         try {
             Log::info('Testing LDAP sync');
+            error_reporting(E_ALL & ~E_DEPRECATED); // workaround for php7.4, which deprecates ldap_control_paged_result
             $users = $ldap->testUserImportSync();
             $message['user_sync']  = [
                 'users' => $users
@@ -90,24 +93,33 @@ class SettingsController extends Controller
         return response()->json($message, 200);
     }
 
-    public function slacktest()
+    public function slacktest(Request $request)
     {
 
-        if ($settings = Setting::getSettings()->slack_channel=='') {
-            \Log::debug('Slack is not enabled. Cannot test.');
-            return response()->json(['message' => 'Slack is not enabled, cannot test.'], 400);
-        }
+        $slack = new Client([
+            'base_url' => e($request->input('slack_endpoint')),
+            'defaults' => [
+                'exceptions' => false
+            ]
+        ]);
 
-        \Log::debug('Preparing to test slack connection');
+
+        $payload = json_encode(
+            [
+                'channel'    => e($request->input('slack_channel')),
+                'text'       => trans('general.slack_test_msg'),
+                'username'    => e($request->input('slack_botname')),
+                'icon_emoji' => ':heart:'
+            ]);
 
         try {
-            Notification::send($settings = Setting::getSettings(), new SlackTest());
+            $slack->post($request->input('slack_endpoint'),['body' => $payload]);
             return response()->json(['message' => 'Success'], 200);
         } catch (\Exception $e) {
-            \Log::debug('Slack connection failed');
-            return response()->json(['message' => $e->getMessage()], 400);
+            return response()->json(['message' => 'Oops! Please check the channel name and webhook endpoint URL. Slack responded with: '.$e->getMessage()], 400);
         }
 
+        return response()->json(['message' => 'Something went wrong :( '], 400);
 
     }
 
@@ -125,13 +137,58 @@ class SettingsController extends Controller
             try {
                 Notification::send(Setting::first(), new MailTest());
                 return response()->json(['message' => 'Mail sent to '.config('mail.reply_to.address')], 200);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 return response()->json(['message' => $e->getMessage()], 500);
             }
         }
         return response()->json(['message' => 'Mail would have been sent, but this application is in demo mode! '], 200);
 
     }
+
+
+    /**
+     * Delete server-cached barcodes
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0.0]
+     * @return Response
+     */
+    public function purgeBarcodes()
+    {
+
+        $file_count = 0;
+        $files = Storage::disk('public')->files('barcodes');
+
+        foreach ($files as $file) { // iterate files
+
+            $file_parts = explode(".", $file);
+            $extension = end($file_parts);
+            \Log::debug($extension);
+
+            // Only generated barcodes would have a .png file extension
+            if ($extension =='png') {
+
+                \Log::debug('Deleting: '.$file);
+
+
+                try  {
+                    Storage::disk('public')->delete($file);
+                    \Log::debug('Deleting: '.$file);
+                    $file_count++;
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+                }
+            }
+
+        }
+
+        return response()->json(['message' => 'Deleted '.$file_count.' barcodes'], 200);
+
+    }
+
+
+
+
 
     /**
      * Get a list of login attempts

@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Statws',
     'title'      	=> 'Ased ',
     'image'		=> 'Delwedd Dyfais',
-    'days_without_acceptance' => 'Diwrnodau Heb Derbyn'
+    'days_without_acceptance' => 'Diwrnodau Heb Derbyn',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

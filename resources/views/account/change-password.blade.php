@@ -25,6 +25,9 @@
         <div class="col-md-5 required">
             <input class="form-control" type="password" name="current_password" id="current_password" {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
             {!! $errors->first('current_password', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            @if (config('app.lock_passwords')===true)
+                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+            @endif
         </div>
     </div>
 
@@ -33,6 +36,9 @@
         <div class="col-md-5 required">
             <input class="form-control" type="password" name="password" id="password" {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
             {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            @if (config('app.lock_passwords')===true)
+                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+            @endif
         </div>
     </div>
 
@@ -42,8 +48,8 @@
         <div class="col-md-5 required">
             <input class="form-control" type="password" name="password_confirmation" id="password_confirmation"  {{ (config('app.lock_passwords') ? ' disabled' : '') }} aria-label="password_confirmation">
             {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
-            @if (config('app.lock_passwords'))
-            	<p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
+            @if (config('app.lock_passwords')===true)
+                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
             @endif
         </div>
     </div>

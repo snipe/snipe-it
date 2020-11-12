@@ -63,7 +63,7 @@ return array(
         'success' 		=> 'Το ενεργητικό ολοκληρώθηκε με επιτυχία.',
         'user_does_not_exist' => 'Αυτός ο χρήστης είναι άκυρος. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
         'not_available' => 'Αυτό το πάγιο δεν είναι διαθέσιμο για την ολοκλήρωση της παραγγελίας!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Πρέπει να επιλέξετε τουλάχιστον ένα στοιχείο προς δημοσίευση.'
     ),
 
     'checkin' => array(

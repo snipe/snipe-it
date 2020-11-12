@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Um Flokk',
-    'about_categories'  				=> 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
     'asset_categories' 					=> 'Asset Categories',
     'category_name'  					=> 'Heiti Vöruflokks',
     'checkin_email'                     => 'Senda tölvupóst til notenda til að skrá sig inn / út.',
