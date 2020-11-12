@@ -83,7 +83,7 @@ class CheckinLicenseSeatNotification extends Notification
 
 
         return (new SlackMessage)
-            ->content(':arrow_down: :floppy_disk: License  Checked In')
+            ->content(':arrow_down: :floppy_disk: '.trans('mail.License_Checkin_Notification'))
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
@@ -106,7 +106,7 @@ class CheckinLicenseSeatNotification extends Notification
                 'note'          => $this->note,
                 'target'        => $this->target,
             ])
-            ->subject('License checked in');
+            ->subject(trans('mail.License_Checkin_Notification'));
 
     }
 
