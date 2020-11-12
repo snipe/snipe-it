@@ -28,7 +28,6 @@
                 data-show-refresh="true"
                 data-sort-order="asc"
                 id="unacceptedAssetsReport"
-                data-url="{{route('api.maintenances.index') }}"
                 class="table table-striped snipe-table"
                 data-export-options='{
                     "fileName": "maintenance-report-{{ date('Y-m-d') }}",
