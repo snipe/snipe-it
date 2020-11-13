@@ -49,7 +49,8 @@ class ImageUploadRequest extends Request
         $type = strtolower(class_basename(get_class($item)));
 
         if (is_null($path)) {
-            $path = str_plural($type);
+            $path = 'uploads/';
+            $path .= str_plural($type);
 
             if ($type == 'assetmodel') {
                 $path =  'models';
