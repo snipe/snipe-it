@@ -285,12 +285,12 @@
                         <td class="text-nowrap">{{ trans('admin/users/general.two_factor_enrolled') }}</td>
                         <td class="two_factor_resetrow">
                           <div class="row">
-                          <div class="col-md-1" id="two_factor_reset_toggle">
+                          <div class="col-md-2" id="two_factor_reset_toggle">
                             {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                           </div>
 
                           @if ((Auth::user()->isSuperUser()) && ($snipeSettings->two_factor_enabled!='0') && ($snipeSettings->two_factor_enabled!=''))
-                            <div class="col-md-11">
+                            <div class="col-md-10">
                             <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
                             <span id="two_factor_reseticon">
                             </span>
@@ -679,7 +679,7 @@ $(function () {
       dataType: 'json',
 
       success: function (data) {
-        $("#two_factor_reset_toggle").html('').html('{{ trans('general.no') }}');
+        $("#two_factor_reset_toggle").html('').html('<i class="fa fa-times text-danger" aria-hidden="true"></i> {{ trans('general.no') }}');
         $("#two_factor_reseticon").html('');
         $("#two_factor_resetstatus").html('<i class="fa fa-check text-success"></i>' + data.message);
 
