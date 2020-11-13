@@ -131,6 +131,7 @@ class Asset extends Depreciable
         'warranty_months',
         'requestable',
         'last_checkout',
+        'expected_checkin',
     ];
 
     use Searchable;
