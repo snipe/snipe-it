@@ -234,6 +234,7 @@ class LoginController extends Controller
 
         if ($user = Auth::user()) {
             $user->last_login = \Carbon::now();
+            $user->activated = 1;
             $user->save();
         }
         // Redirect to the users page
