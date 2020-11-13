@@ -48,7 +48,7 @@
               @foreach ($assetsForReport as $assetItem)
                   @if ($assetItem)
                   <tr>
-                    <td>{{ ($assetItem->company) ? $assetItem->company->nam : '' }}</td>
+                    <td>{{ ($assetItem->company) ? $assetItem->company->name : '' }}</td>
                     <td>{{ $assetItem->model->category->name }}</td>
                     <td>{{ $assetItem->model->name }}</td>
                     <td>{!! $assetItem->present()->nameUrl() !!}</td>
