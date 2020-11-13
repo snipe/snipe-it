@@ -17,7 +17,7 @@ mix
             './node_modules/bootstrap/dist/css/bootstrap.css',
             './node_modules/font-awesome/css/font-awesome.css',
             './public/css/build/AdminLTE.css',
-            './node_modules/jquery-ui-dist/jquery-ui.css',
+            './node_modules/jquery-ui-bundle/jquery-ui.css',
             './node_modules/admin-lte/plugins/iCheck/minimal/blue.css',
             './node_modules/icheck/skins/minimal/minimal.css',
             './node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.css',
@@ -111,6 +111,7 @@ mix
         [
             './node_modules/admin-lte/dist/js/adminlte.min.js',
             './node_modules/tether/dist/js/tether.js',
+            './node_modules/jquery-ui-bundle/jquery-ui.js',
             './node_modules/jquery-slimscroll/jquery.slimscroll.js',
             './node_modules/jquery.iframe-transport/jquery.iframe-transport.js',
             './node_modules/blueimp-file-upload/js/jquery.fileupload.js',

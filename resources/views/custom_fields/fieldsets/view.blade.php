@@ -126,7 +126,7 @@
 
 @stop
 
-@section('moar_scripts')
+@push('js')
   @can('update', $custom_fieldset)
 
   <script nonce="{{ csrf_token() }}">
@@ -161,10 +161,11 @@
           });
       };
 
+  // this uses the jquery UI sortable method, NOT the query-dragtable library
   $("#sort tbody").sortable({
       helper: fixHelperModified,
       stop: updateIndex
   }).disableSelection();
 </script>
   @endcan
-@stop
+@endpush
