@@ -292,12 +292,19 @@ class LdapAd extends LdapAdConfiguration
          * if so, check the Active Directory User Account Control Flags
          */
         if ($user->hasAttribute($user->getSchema()->userAccountControl())) {
+            \Log::debug('This is AD - userAccountControl is'. $user->getSchema()->userAccountControl());
             $activeStatus = (in_array($user->getUserAccountControl(), self::AD_USER_ACCOUNT_CONTROL_FLAGS)) ? 1 : 0;
         } else {
+
+            \Log::debug('This looks like LDAP');
             // If there is no activated flag, assume this is handled via the OU and activate the users
             if (false == $this->ldapSettings['ldap_active_flag']) {
+                \Log::debug('ldap_active_flag is false - no ldap_active_flag is set');
                 $activeStatus = 1;
             }
+
+            \Log::debug('ldap_active_flag is not false - do nothing? that seems dumb/wrong?');
+
         }
 
         return $activeStatus;
