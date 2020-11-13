@@ -124,7 +124,7 @@ class ComponentsController extends Controller
         }
         $min = $component->numCHeckedOut();
         $validator = Validator::make($request->all(), [
-            "qty" => "required|numeric|gt:$min"
+            "qty" => "required|numeric|min:$min"
         ]);
 
         if ($validator->fails()) {
