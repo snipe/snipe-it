@@ -324,6 +324,9 @@ Route::group(['middleware' => ['auth']], function () {
         [ 'as' => 'reports.activity', 'uses' => 'ReportsController@getActivityReport' ]
     );
 
+    Route::post('reports/activity', 'ReportsController@postActivityReport');
+
+
 
     Route::get(
         'reports/unaccepted_assets',

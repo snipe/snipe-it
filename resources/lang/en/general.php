@@ -79,6 +79,7 @@
     'depreciation_report'	=> 'Depreciation Report',
     'details'               => 'Details',
     'download'				=> 'Download',
+    'download_all'				=> 'Download All',
     'depreciation'			=> 'Depreciation',
     'editprofile'  			=> 'Edit Your Profile',
     'eol'					=> 'EOL',
