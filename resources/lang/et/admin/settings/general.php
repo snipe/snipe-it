@@ -83,6 +83,7 @@ return array(
     'ldap_auth_filter_query'    => 'LDAP-i autentimise päring',
     'ldap_version'              => 'LDAP versioon',
     'ldap_active_flag'          => 'LDAP aktiivne lipp',
+    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
     'ldap_emp_num'              => 'LDAPi töötaja number',
     'ldap_email'                => 'LDAP-e-post',
     'license'                  => 'Software License',

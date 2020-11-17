@@ -83,6 +83,7 @@ return array(
     'ldap_auth_filter_query'    => 'Ερώτημα ελέγχου ταυτότητας LDAP',
     'ldap_version'              => 'Έκδοση LDAP',
     'ldap_active_flag'          => 'Ενεργή σημαία LDAP',
+    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
     'ldap_emp_num'              => 'Αριθμός υπαλλήλου LDAP',
     'ldap_email'                => 'LDAP Email',
     'license'                  => 'Άδειες λογισμικού',

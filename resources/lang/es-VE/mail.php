@@ -69,5 +69,11 @@ return array(
     'welcome' => 'Bienvenido :name',
     'welcome_to' => '¡Bienvenido a :web!',
     'your_credentials' => 'Tus credenciales de Snipe-IT',
-
+    'Accessory_Checkin_Notification' => 'Accesorio devuelto',
+    'Asset_Checkin_Notification' => 'Activo devuelto',
+    'License_Checkin_Notification' => 'Licencia devuelta',
+    'Expected_Checkin_Report' => 'Expected asset checkin report',
+    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Expected_Checkin_Date' => 'Un activo asignado a ti debe ser devuelto en :date',
+    'your_assets' => 'Ver tus activos'
 );

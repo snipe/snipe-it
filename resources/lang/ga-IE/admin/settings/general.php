@@ -83,6 +83,7 @@ return array(
     'ldap_auth_filter_query'    => 'Ceist Fíordheimhnithe LDAP',
     'ldap_version'              => 'Leagan LDAP',
     'ldap_active_flag'          => 'Bratach Gníomhach LDAP',
+    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
     'ldap_emp_num'              => 'Uimhir Fostaí LDAP',
     'ldap_email'                => 'Ríomhphost LDAP',
     'license'                  => 'Software License',

@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'أصل ',
     'image'		=> 'صورة الجهاز',
     'days_without_acceptance' => 'أيام بدون قبول',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'الإهلاك الشهري'
 
 );
