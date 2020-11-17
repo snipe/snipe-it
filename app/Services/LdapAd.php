@@ -165,7 +165,7 @@ class LdapAd extends LdapAdConfiguration
      */
     public function processUser(AdldapUser $user, ?Collection $defaultLocation=null, ?Collection $mappedLocations=null): ?User
     {
-        // Only sync active users
+        // Only sync active users <- I think this actually means 'existing', not 'activated/deactivated'
         if(!$user) {
             return null;
         }
@@ -177,8 +177,26 @@ class LdapAd extends LdapAdConfiguration
         $snipeUser['email']           = $user->{$this->ldapSettings['ldap_email']}[0] ?? '';
         $snipeUser['title']           = $user->getTitle() ?? '';
         $snipeUser['telephonenumber'] = $user->getTelephoneNumber() ?? '';
-        $snipeUser['location_id']     = $this->getLocationId($user, $defaultLocation, $mappedLocations);
-        $snipeUser['activated']       = $this->getActiveStatus($user);
+
+        /*
+         * $locationId being 'null' means we have no per-OU location information,
+         * but instead of explicitly setting it to null - which would override any admin-generated
+         * location assignments - we just don't set it at all. For a brand new User, the 'default null'
+         * on the column will cover us. For an already existing user, this will not override any
+         * locations that were explicitly chosen by the administrators.
+         *
+         * When syncing with a particular 'default location' in mind, those should still be respected
+         * and it *will* override the administrators previous choices. I think this is a fair compromise.
+         */
+        $locationId = $this->getLocationId($user, $defaultLocation, $mappedLocations);
+        if ($locationId !== null ) {
+            $snipeUser['location_id'] = $locationId;
+        }
+
+        $activeStatus = $this->getActiveStatus($user);
+        if ($activeStatus !== null) {
+            $snipeUser['activated'] = $activeStatus;
+        }
 
         return $this->setUserModel($snipeUser);
     }
@@ -208,8 +226,12 @@ class LdapAd extends LdapAdConfiguration
         $user->employee_num = trim($userInfo['employee_number']);
         $user->jobtitle     = trim($userInfo['title']);
         $user->phone        = trim($userInfo['telephonenumber']);
-        $user->activated    = $userInfo['activated'];
-        $user->location_id  = $userInfo['location_id'];
+        if(array_key_exists('activated',$userInfo)) {
+            $user->activated    = $userInfo['activated'];
+        }
+        if(array_key_exists('location_id',$userInfo)) {
+            $user->location_id  = $userInfo['location_id'];
+        }
         $user->notes        = 'Imported from LDAP';
         $user->ldap_import  = 1;
 
@@ -275,6 +297,8 @@ class LdapAd extends LdapAdConfiguration
 
     /**
      * Set the active status of the user.
+     * Returns 0 or 1 if the user is deactivated or activated
+     * or returns null if we just don't know
      *
      * @author Wes Hulette <jwhulette@gmail.com>
      *
@@ -282,29 +306,34 @@ class LdapAd extends LdapAdConfiguration
      *
      * @param \Adldap\Models\User $user
      *
-     * @return int
+     * @return int (or null)
      */
-    private function getActiveStatus(AdldapUser $user): int
+    private function getActiveStatus(AdldapUser $user): ?int
     {
-        $activeStatus = 0;
         /*
          * Check to see if we are connected to an AD server
          * if so, check the Active Directory User Account Control Flags
+         * If the admin has set their own 'active flag' - respect that instead
+         * (this may work to allow AD users to ignore the built-in UAC stuff that AD does)
          */
-        if ($user->hasAttribute($user->getSchema()->userAccountControl())) {
+        if ($user->hasAttribute($user->getSchema()->userAccountControl()) && !$this->ldapSettings['ldap_active_flag']) {
             \Log::debug('This is AD - userAccountControl is'. $user->getSchema()->userAccountControl());
             $activeStatus = (in_array($user->getUserAccountControl(), self::AD_USER_ACCOUNT_CONTROL_FLAGS)) ? 1 : 0;
         } else {
 
-            \Log::debug('This looks like LDAP');
-            // If there is no activated flag, assume this is handled via the OU and activate the users
+            \Log::debug('This looks like LDAP (or an AD where the UAC is disabled)');
+            // If there is no activated flag, then we can't make any determination about activated/deactivated
             if (false == $this->ldapSettings['ldap_active_flag']) {
                 \Log::debug('ldap_active_flag is false - no ldap_active_flag is set');
-                $activeStatus = 1;
+                return null;
             }
 
-            \Log::debug('ldap_active_flag is not false - do nothing? that seems dumb/wrong?');
+            // If there *is* an activated flag, then respect it *only* if it is actually present. If it's not there, ignore it. <-- NOT SURE IF RIGHT?
+            if (!$user->hasAttribute($this->ldapSettings['ldap_active_flag'])) {
+                return null; // 'active' flag is defined, but does not exist on returned user record. So we don't know if they're active or not.
+            }
 
+            $activeStatus = $user->{$this->ldapSettings['ldap_active_flag']} ? 1 : 0 ;
         }
 
         return $activeStatus;
