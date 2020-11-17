@@ -118,31 +118,22 @@ class SettingsController extends Controller
 
         \Log::debug('Preparing to test LDAP login');
         try {
-            $connection = $ldap->testLdapAdUserConnection();
-            try {
-                Ldap::bindAdminToLdap($connection);
-                \Log::debug('Attempting to bind to LDAP for LDAP test');
-                try {
-                    $ldap_user = Ldap::findAndBindUserLdap($request->input('ldaptest_user'), $request->input('ldaptest_password'));
-                    if ($ldap_user) {
-                        \Log::debug('It worked! '. $request->input('ldaptest_user').' successfully binded to LDAP.');
-                        return response()->json(['message' => 'It worked! '. $request->input('ldaptest_user').' successfully binded to LDAP.'], 200);
-                    }
-                    return response()->json(['message' => 'Login Failed. '. $request->input('ldaptest_user').' did not successfully bind to LDAP.'], 400);
+            DB::beginTransaction(); //this was the easiest way to invoke a full test of an LDAP login without adding new users to the DB (which may not be desired)
 
-                } catch (\Exception $e) {
-                    \Log::debug('LDAP login failed');
-                    return response()->json(['message' => $e->getMessage()], 400);
-                }
+            // $results = $ldap->ldap->auth()->attempt($request->input('ldaptest_username'), $request->input('ldaptest_password'), true);
+            // can't do this because that's a protected property.
 
-            } catch (\Exception $e) {
-                \Log::debug('Bind failed');
-                return response()->json(['message' => $e->getMessage()], 400);
-                //return response()->json(['message' => $e->getMessage()], 500);
+            $results = $ldap->ldapLogin($request->input('ldaptest_user'), $request->input('ldaptest_password')); // this would normally create a user on success (if they didn't already exist), but for the transaction
+            if($results) {
+                return response()->json(['message' => 'It worked! '. $request->input('ldaptest_user').' successfully binded to LDAP.'], 200);
+            } else {
+                return response()->json(['message' => 'Login Failed. '. $request->input('ldaptest_user').' did not successfully bind to LDAP.'], 400);
             }
         } catch (\Exception $e) {
             \Log::debug('Connection failed');
-            return response()->json(['message' => $e->getMessage()], 500);
+            return response()->json(['message' => $e->getMessage()], 400);
+        } finally {
+            DB::rollBack(); // ALWAYS rollback, whether success or failure
         }
 
 
