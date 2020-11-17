@@ -729,16 +729,12 @@
 
                             <div class="col-md-4">
 
-                                @if ($asset->image)
+                                @if (($asset->image) || (($asset->model) && ($asset->model->image!='')))
+
+
                                     <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-                                        <a href="{{ Storage::disk('public')->url('uploads/assets/'. $asset->image) }}" data-toggle="lightbox">
-                                            <img src="{{ Storage::disk('public')->url('uploads/assets/'. $asset->image) }}" class="assetimg img-responsive" alt="{{ $asset->getDisplayNameAttribute() }}">
-                                        </a>
-                                    </div>
-                                @elseif (($asset->model) && ($asset->model->image!=''))
-                                    <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-                                        <a href="{{ Storage::disk('public')->url('uploads/models/'.$asset->model->image) }}" data-toggle="lightbox">
-                                            <img src="{{ Storage::disk('public')->url('uploads/models/'.$asset->model->image) }}" class="assetimg img-responsive" alt="{{ $asset->getDisplayNameAttribute() }}">
+                                        <a href="{{ ($asset->getImageUrl()) ? $asset->getImageUrl() : null }}" data-toggle="lightbox">
+                                            <img src="{{ ($asset->getImageUrl()) ? $asset->getImageUrl() : null }}" class="assetimg img-responsive" alt="{{ $asset->getDisplayNameAttribute() }}">
                                         </a>
                                     </div>
                                 @endif
