@@ -83,6 +83,7 @@ return array(
     'ldap_auth_filter_query'    => 'LDAP 인증 요청',
     'ldap_version'              => 'LDAP 버전',
     'ldap_active_flag'          => 'LDAP 활성 플래그',
+    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
     'ldap_emp_num'              => 'LDAP 피고용인 번호',
     'ldap_email'                => 'LDAP 이메일',
     'license'                  => '소프트웨어 라이센스',

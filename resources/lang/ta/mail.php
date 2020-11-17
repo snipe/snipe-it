@@ -69,5 +69,11 @@ return array(
     'welcome' => 'வரவேற்பு: பெயர்',
     'welcome_to' => 'வரவேற்கிறோம்: வலை!',
     'your_credentials' => 'உங்கள் கத்தரி-ஐடி சான்றுகள்',
-
+    'Accessory_Checkin_Notification' => 'Accessory checked in',
+    'Asset_Checkin_Notification' => 'Asset checked in',
+    'License_Checkin_Notification' => 'License checked in',
+    'Expected_Checkin_Report' => 'Expected asset checkin report',
+    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
+    'your_assets' => 'View Your Assets'
 );

@@ -19,7 +19,7 @@ return array(
     'ldap_config_text'  => 'يمكن العثور على إعدادات تهيئة لداب المشرف> الإعدادات. سيتم تعيين الموقع (اختياري) المحدد لجميع المستخدمين الذين تم استيرادهم.',
     'print_assigned'    => 'طباعة كل الممتلكات',
     'software_user'     => 'البرامج المخرجة الى: :name',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => 'يجب عليك توفير عنوان بريد إلكتروني لهذا المستخدم لإرسال بيانات اعتماده. لا يمكن إرسال بيانات الاعتماد البريدية إلا عند إنشاء المستخدم. يتم تخزين كلمات المرور في تجزئة ذات اتجاه واحد ولا يمكن استرجاعها بمجرد الحفظ.',
     'view_user'         => 'عرض المستخدم :name',
     'usercsv'           => 'ملف CSV',
     'two_factor_admin_optin_help' => 'تسمح إعدادات المشرف الحالية بإنفاذ انتقائي للمصادقة الثنائية.',

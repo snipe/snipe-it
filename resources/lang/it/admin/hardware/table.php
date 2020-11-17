@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Bene ',
     'image'		=> 'Immagine dispositivo',
     'days_without_acceptance' => 'Giorni senza accettazione',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Ammortamento Mensile'
 
 );

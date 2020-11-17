@@ -8,7 +8,7 @@
         'repair'             => 'إصلاح',
         'maintenance'        => 'صيانة',
         'upgrade'            => 'الترقية',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'المعايره',
+        'software_support'   => 'دعم البرامج',
+        'hardware_support'   => 'دعم الأجهزة',
     ];

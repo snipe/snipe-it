@@ -83,6 +83,7 @@ return array(
     'ldap_auth_filter_query'    => 'LDAP оторизационна заявка',
     'ldap_version'              => 'LDAP версия',
     'ldap_active_flag'          => 'LDAP флаг за активност',
+    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
     'ldap_emp_num'              => 'LDAP номер на служител',
     'ldap_email'                => 'LDAP електронна поща',
     'license'                  => 'Софтуерен лиценз',

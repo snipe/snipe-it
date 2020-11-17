@@ -83,6 +83,7 @@ return array(
     'ldap_auth_filter_query'    => 'LDAP அங்கீகார வினவல்',
     'ldap_version'              => 'LDAP பதிப்பு',
     'ldap_active_flag'          => 'LDAP செயலில் கொடி',
+    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
     'ldap_emp_num'              => 'LDAP பணியாளர் எண்',
     'ldap_email'                => 'LDAP மின்னஞ்சல்',
     'license'                  => 'Software License',

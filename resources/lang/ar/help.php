@@ -13,23 +13,23 @@ return array(
     |
     */
 
-    "more_info_title" => "More Info",
+    "more_info_title" => "المزيد من المعلومات",
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    "audit_help" => "التحقق من هذا المربع سيؤدي إلى تعديل سجل الأصول لعكس هذا الموقع الجديد. تركه غير محدد سيلاحظ ببساطة الموقع في سجل المراجعة.<br><br>لاحظ أن هذا الأصل تم التحقق منه، فهو لن يغير موقع الشخص أو الأصل أو الموقع الذي يتم التحقق منه إليه.",
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'الأصول هي العناصر التي يتم تتبعها بواسطة الرقم التسلسلي أو ترميز الأصل. وهي تميل إلى أن تكون ممتلكات ذات قيمة أعلى حيث انه من المهم توثيقها.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'التصنيفات تساعدك على ترتيب الأصول. من الأمثلة على التصنيفات &quot; حواسيب مكتبية &quot;، &quot; حواسيب محمولة &quot;، &quot;الهواتف النقالة &quot;، &quot;أجهزة لوحية &quot; وهكذا، كما يمكنك استخدام التصنيفات بأي طريقة تناسبك.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'الملحقات هي أي شيء تصدره للمستخدمين ولكن ليس لها رقم تسلسلي (أو لا تهتم بتعقبه بشكل فريد). على سبيل المثال، الفئران الحاسوبية أو لوحة المفاتيح.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'يمكن استخدام الشركات كمجال بسيط لتحديد الهوية، أو يمكن استخدامها للحد من وضوح الأصول، المستخدمين، إلخ إذا تم تمكين دعم الشركة الكامل في إعدادات المشرف الخاص بك.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'المكونات هي عناصر تشكل جزءا من الأصل، مثل HDD، ذاكرة الوصول العشوائي، إلخ.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'المواد الاستهلاكية هي أي شيء يتم شراؤه وسيتم استخدامه مع مرور الوقت. على سبيل المثال حبر الطابعة أو ورق آلة النسخ.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'يمكنك إعداد استهلاك الأصول لاستهلاك الأصول بناء على الاستهلاك الثابت للقيمة.',
 
 
 

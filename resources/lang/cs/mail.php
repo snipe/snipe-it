@@ -69,5 +69,11 @@ return array(
     'welcome' => 'Vítej uživateli :name',
     'welcome_to' => 'Vítejte na :web!',
     'your_credentials' => 'Vaše pověření Snipe-IT',
-
+    'Accessory_Checkin_Notification' => 'Accessory checked in',
+    'Asset_Checkin_Notification' => 'Asset checked in',
+    'License_Checkin_Notification' => 'License checked in',
+    'Expected_Checkin_Report' => 'Expected asset checkin report',
+    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
+    'your_assets' => 'View Your Assets'
 );

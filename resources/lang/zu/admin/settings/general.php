@@ -83,6 +83,7 @@ return array(
     'ldap_auth_filter_query'    => 'Umbuzo wokuqinisekisa we-LDAP',
     'ldap_version'              => 'Inguqulo ye-LDAP',
     'ldap_active_flag'          => 'I-LDAP i-Flag Active',
+    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
     'ldap_emp_num'              => 'Inombolo yabasebenzi be-LDAP',
     'ldap_email'                => 'I-imeyili ye-LDAP',
     'license'                  => 'Software License',

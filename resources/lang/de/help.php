@@ -15,21 +15,21 @@ return array(
 
     "more_info_title" => "Mehr Informationen",
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    "audit_help" => "Mit dem aktivieren dieser Option wird der Asset-Datensatz an diesen neuen Ort angepasst. Wenn diese Option nicht aktiviert wird, wird nur der Ort im Audit-Log angezeigt.<br><br>Falls das Asset ausgecheckt ist, ändert sich nicht die Position der Person, des Assets oder der Position, an der es ausgecheckt wird.",
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Assets sind Elemente, die mit Seriennummer oder einem Asset-Tag versehen sind. Sie sind meist höhere Werte, bei denen die Identifizierung eines bestimmten Gegenstands von Bedeutung ist.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Kategorien helfen Ihnen beim Organisieren von Assets. Beispielkategorien sind &quot;Pcs&quot;, &quot;Laptops&quot;, &quot;Mobiltelefone&quot;, &quot;Tablets&quot; usw., jedoch können Sie Kategorien nutzen, wie Sie es für sinnvoll erachten.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Zubehör ist alles, was Sie an einen Benutzer ausgeben können, dass jedoch keine Seriennummer besitzt (oder es keinen Sinn macht diese zu verwalten). Zum Beispiel: Mäuse und Tastaturen.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Unternehmen können als einfaches Identifikationsfeld oder zur Begrenzung der Sichtbarkeit von Assets, Benutzer usw. verwendet werden, wenn die volle Unterstützung für Unternehmen in Ihren Admin-Einstellungen aktiviert ist.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Komponenten sind Teile eines Assets, zum Beispiel eine Festplatte, Arbeitsspeicher, etc.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Verbrauchsmaterialien sind alle gekauften Dinge, die mit der Zeit aufgebraucht werden. Zum Beispiel Druckerpatronen oder Kopierpapier.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Sie können Asset-Abschreibungen einrichten, um Assets linear abzuschreiben.',
 
 
 

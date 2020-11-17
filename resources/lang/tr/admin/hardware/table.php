@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Demirbaş ',
     'image'		=> 'Cihaz resmi',
     'days_without_acceptance' => 'Kabul edilmeden geçen gün',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Aylık Amortisman'
 
 );

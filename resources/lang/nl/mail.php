@@ -70,5 +70,11 @@ return array(
     'welcome' => 'Welkom :name',
     'welcome_to' => 'Welkom bij :web!',
     'your_credentials' => 'Je Snipe-IT inloggegevens',
-
+    'Accessory_Checkin_Notification' => 'Accessoire ingecheckt',
+    'Asset_Checkin_Notification' => 'Asset ingecheckt',
+    'License_Checkin_Notification' => 'Licentie ingecheckt',
+    'Expected_Checkin_Report' => 'Expected asset checkin report',
+    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Expected_Checkin_Date' => 'Een asset uitgecheckt aan jou moet worden ingecheckt op :date',
+    'your_assets' => 'Bekijk je assets'
 );
