@@ -25,7 +25,7 @@ return array(
     'backups'					=> 'Sicherungen',
     'barcode_settings'			=> 'Barcode Einstellungen',
     'confirm_purge'			    => 'Bereinigung bestätigen',
-    'confirm_purge_help'		=> 'Geben Sie den Text "LÖSCHEN" in das Feld unten ein, um die gelöschten Datensätze zu löschen. Diese Aktion kann nicht rückgängig gemacht werden. Alle Einträge und Benutzer werden DAUERHAFT gelöscht. (Um sicher zu gehen, sollten Sie zuerst ein Backup erstellen)',
+    'confirm_purge_help'		=> 'Geben Sie den Text "DELETE" in das Feld unten ein, um die gelöschten Datensätze zu löschen. Diese Aktion kann nicht rückgängig gemacht werden. Alle Einträge und Benutzer werden DAUERHAFT gelöscht. (Um sicher zu gehen, sollten Sie zuerst ein Backup erstellen)',
     'custom_css'				=> 'Eigenes CSS',
     'custom_css_help'			=> 'Füge eigenes CSS hinzu. Benutze keine &lt;style&gt;&lt;/style&gt; tags.',
     'custom_forgot_pass_url'	=> 'Benutzerdefinierte Passwort Reset URL',
