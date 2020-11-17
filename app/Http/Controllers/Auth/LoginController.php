@@ -157,9 +157,26 @@ class LoginController extends Controller
         if (Setting::getSettings()->login_remote_user_enabled == "1" && isset($remote_user) && !empty($remote_user)) {
             Log::debug("Authenticating via HTTP header $header_name.");
 
-            $pos = strpos($remote_user, '\\');
+            $strip_prefixes = [
+                // IIS/AD
+                // https://github.com/snipe/snipe-it/pull/5862
+                '\\',
+
+                // Google Cloud IAP
+                // https://cloud.google.com/iap/docs/identity-howto#getting_the_users_identity_with_signed_headers
+                'accounts.google.com:',
+            ];
+
+            $pos = 0;
+            foreach ($strip_prefixes as $needle) {
+                if (($pos = strpos($remote_user, $needle)) !== FALSE) {
+                    $pos += strlen($needle);
+                    break;
+                }
+            }
+
             if ($pos > 0) {
-                $remote_user = substr($remote_user, $pos + 1);
+                $remote_user = substr($remote_user, $pos);
             };
             
             try {
