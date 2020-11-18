@@ -68,7 +68,7 @@ class UsersController extends Controller
 
         if (($request->filled('deleted')) && ($request->input('deleted')=='true')) {
             $users = $users->onlyTrashed();
-        } elseif (($request->filled('all')) && ($request->input('deleted')=='true')) {
+        } elseif (($request->filled('all')) && ($request->input('all')=='true')) {
             $users = $users->withTrashed();
         }
 
