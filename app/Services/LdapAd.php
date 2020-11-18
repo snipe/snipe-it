@@ -145,9 +145,17 @@ class LdapAd extends LdapAdConfiguration
             throw new Exception('Unable to find user in LDAP directory!');
         }
 
-        return User::where('username', $username)
+        $user = User::where('username', $username)
                 ->whereNull('deleted_at')->where('ldap_import', '=', 1)
                 ->where('activated', '=', '1')->first();
+        /* Above, I could've just done ->firstOrFail() which would've been cleaner, but it would've been miserable to
+           troubleshoot if it ever came up (giving a really generic and untraceable error message)
+        */
+        if (!$user) {
+            throw new Exception("User is either deleted, not activated (can't log in), not from LDAP, or can't be found in database");
+        }
+
+        return $user;
     }
 
     /**
