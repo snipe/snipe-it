@@ -165,6 +165,8 @@ class Category extends SnipeModel
                 return $this->components()->count();
             case 'consumable':
                 return $this->consumables()->count();
+            case 'license':
+                return $this->licenses()->count();
         }
         return '0';
     }
