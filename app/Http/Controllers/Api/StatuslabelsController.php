@@ -167,11 +167,13 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('view', Statuslabel::class);
 
-        $statuslabels = Statuslabel::with('assets')->groupBy('id')->withCount('assets as assets_count')->get();
+        $statuslabels = Statuslabel::with('assets')
+            ->groupBy('id')
+            ->withCount('assets as assets_count')
+            ->get();
 
         $labels=[];
         $points=[];
-        $default_color = Helper::chartColors();
         $default_color_count = 0;
 
         foreach ($statuslabels as $statuslabel) {
@@ -183,14 +185,11 @@ class StatuslabelsController extends Controller
                 if ($statuslabel->color!='') {
                     $colors_array[] = $statuslabel->color;
                 } else {
-                    $colors_array[] = $default_color[$default_color_count];
+                    $colors_array[] = Helper::defaultChartColors($default_color_count);
                     $default_color_count++;
                 }
             }
         }
-
-        
-        $colors_array = array_merge($colors_array, Helper::chartColors());
 
         $result= [
             "labels" => $labels,
