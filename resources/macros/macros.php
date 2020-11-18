@@ -512,8 +512,8 @@ Form::macro('customfield_elements', function ($name = "customfield_elements", $s
         'text' => 'Text Box',
         'listbox' => 'List Box',
         'textarea' => 'Textarea (multi-line) ',
-     //   'checkbox' => 'Checkbox',
-     //   'radio' => 'Radio Buttons',
+        'checkbox' => 'Checkbox',
+        'radio' => 'Radio Buttons',
     );
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';

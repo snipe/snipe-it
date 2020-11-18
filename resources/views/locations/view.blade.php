@@ -141,12 +141,15 @@
             @if (($location->city!='') || ($location->state!='') || ($location->zip!=''))
               <li>{{ $location->city }} {{ $location->state }} {{ $location->zip }}</li>
             @endif
-            @if (($location->manager))
+            @if ($location->manager)
               <li>{{ trans('admin/users/table.manager') }}: {!! $location->manager->present()->nameUrl() !!}</li>
             @endif
-            @if (($location->parent))
+            @if ($location->parent)
               <li>{{ trans('admin/locations/table.parent') }}: {!! $location->parent->present()->nameUrl() !!}</li>
             @endif
+              @if ($location->ldap_ou)
+                  <li>{{ trans('admin/locations/table.ldap_ou') }}: {{ $location->ldap_ou }}</li>
+              @endif
         </ul>
 
         @if (($location->state!='') && ($location->country!='') && (config('services.google.maps_api_key')))
