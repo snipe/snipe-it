@@ -237,6 +237,8 @@ class LdapAd extends LdapAdConfiguration
         $user->phone        = trim($userInfo['telephonenumber']);
         if(array_key_exists('activated',$userInfo)) {
             $user->activated    = $userInfo['activated'];
+        } else if ( !$user->exists ) { // no 'activated' flag was set or unset, *AND* this user is new - activate by default.
+            $user->activated = 1;
         }
         if(array_key_exists('location_id',$userInfo)) {
             $user->location_id  = $userInfo['location_id'];
@@ -330,19 +332,30 @@ class LdapAd extends LdapAdConfiguration
             $activeStatus = (in_array($user->getUserAccountControl(), self::AD_USER_ACCOUNT_CONTROL_FLAGS)) ? 1 : 0;
         } else {
 
-            \Log::debug('This looks like LDAP (or an AD where the UAC is disabled)');
             // If there is no activated flag, then we can't make any determination about activated/deactivated
             if (false == $this->ldapSettings['ldap_active_flag']) {
                 \Log::debug('ldap_active_flag is false - no ldap_active_flag is set');
                 return null;
             }
 
-            // If there *is* an activated flag, then respect it *only* if it is actually present. If it's not there, ignore it. <-- NOT SURE IF RIGHT?
+            // If there *is* an activated flag, then respect it *only* if it is actually present. If it's not there, ignore it.
             if (!$user->hasAttribute($this->ldapSettings['ldap_active_flag'])) {
                 return null; // 'active' flag is defined, but does not exist on returned user record. So we don't know if they're active or not.
             }
 
-            $activeStatus = $user->{$this->ldapSettings['ldap_active_flag']} ? 1 : 0 ;
+            // if $user has the flag *AND* that flag has exactly one value -
+            if ( $user->{$this->ldapSettings['ldap_active_flag']} && count($user->{$this->ldapSettings['ldap_active_flag']}) == 1 ) {
+
+                $active_flag_value = $user->{$this->ldapSettings['ldap_active_flag']}[0];
+
+                // if the value of that flag is case-insensitively the string 'false' or boolean false
+                if ( strcasecmp($active_flag_value, "false") == 0 || $active_flag_value === false ) {
+                    return 0; // then make them INACTIVE
+                } else {
+                    return 1; // otherwise active
+                }
+            }
+            return 1; // fail 'open' (active) if we have the attribute and it's multivalued or empty; that's weird
         }
 
         return $activeStatus;
