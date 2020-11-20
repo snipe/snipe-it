@@ -55,6 +55,7 @@
 
                                 {{ Form::checkbox('saml_enabled', '1', Request::old('saml_enabled', $setting->saml_enabled), [((config('app.lock_passwords')===true)) ? 'disabled ': '', 'class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
                                 {{ trans('admin/settings/general.saml_enabled') }}
+                                {!! $errors->first('saml_integration', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}<br>
                                 @if (config('app.lock_passwords')===true)
                                 <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
