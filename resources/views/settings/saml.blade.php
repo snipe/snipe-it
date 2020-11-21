@@ -83,8 +83,12 @@
                                         {{ Form::textarea('saml_sp_x509cert', $setting->saml_sp_x509cert, ['class' => 'form-control', 'wrap' => 'off', 'readonly']) }}
                                         <br>
                                     @endif
+                                    <!-- SAML SP Metadata URL -->
+                                    {{ Form::label('saml_sp_metadata_url', trans('admin/settings/general.saml_sp_metadata_url')) }}
+                                    {{ Form::text('saml_sp_metadata_url', route('saml.metadata'), ['class' => 'form-control', 'readonly']) }}
+                                    <br>
                                     <p class="help-block">
-                                        <a href="{{ route('saml.metadata') }}" target="_blank" class="btn btn-default" style="margin-right: 5px;">View Metadata</a>
+                                        <a href="{{ route('saml.metadata') }}" target="_blank" class="btn btn-default" style="margin-right: 5px;">Download Metadata</a>
                                     </p>
                                 @endif
                                 {!! $errors->first('saml_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
