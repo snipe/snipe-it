@@ -70,22 +70,27 @@ class SettingsSamlRequest extends FormRequest
                 ]);
                 
                 $csr = openssl_csr_new($dn, $pkey, ['digest_alg' => 'sha256']);
-                
-                $x509 = openssl_csr_sign($csr, null, $pkey, 3650, ['digest_alg' => 'sha256']);
 
-                openssl_x509_export($x509, $x509cert);
-                openssl_pkey_export($pkey, $privateKey);
+                if ($csr) {
 
-                $errors = [];
-                while (($error = openssl_error_string() !== false)) {
-                    $errors[] = $error;
-                }
-    
-                if (!(empty($x509cert) && empty($privateKey))) {
-                    $this->merge([
-                        'saml_sp_x509cert' => $x509cert,
-                        'saml_sp_privatekey' => $privateKey,
-                    ]);
+                    $x509 = openssl_csr_sign($csr, null, $pkey, 3650, ['digest_alg' => 'sha256']);
+
+                    openssl_x509_export($x509, $x509cert);
+                    openssl_pkey_export($pkey, $privateKey);
+
+                    $errors = [];
+                    while (($error = openssl_error_string() !== false)) {
+                        $errors[] = $error;
+                    }
+        
+                    if (!(empty($x509cert) && empty($privateKey))) {
+                        $this->merge([
+                            'saml_sp_x509cert' => $x509cert,
+                            'saml_sp_privatekey' => $privateKey,
+                        ]);
+                    }
+                } else {
+                    $validator->errors()->add('saml_integration', 'openssl.cnf is missing/invalid');
                 }
             }
 

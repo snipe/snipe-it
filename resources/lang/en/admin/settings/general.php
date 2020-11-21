@@ -125,6 +125,7 @@ return array(
     'saml_sp_acs_url'           => 'Assertion Consumer Service (ACS) URL',
     'saml_sp_sls_url'           => 'Single Logout Service (SLS) URL',
     'saml_sp_x509cert'          => 'Public Certificate',
+    'saml_sp_metadata_url'      => 'Metadata URL',
     'saml_idp_metadata'         => 'SAML IdP Metadata',
     'saml_idp_metadata_help'    => 'You can specify the IdP metadata using a URL or XML file.',
     'saml_attr_mapping_username' => 'Attribute Mapping - Username',
