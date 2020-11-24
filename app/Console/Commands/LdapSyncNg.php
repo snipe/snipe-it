@@ -19,7 +19,7 @@ use Adldap\Models\User as AdldapUser;
  *
  * @since 5.0.0
  */
-class LdapSync extends Command
+class LdapSyncNg extends Command
 {
     /**
      * The name and signature of the console command.
