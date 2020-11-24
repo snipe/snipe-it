@@ -422,7 +422,7 @@
                         <i class="fa fa-circle-o text-blue"></i>
                         {{ trans('general.all') }}
                         {{ trans('general.deployed') }}
-                        ({{ ($total_deployed_sidebar) ? $total_deployed_sidebar : '' }})
+                        ({{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }})
                     </a>
                   </li>
                   <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
@@ -430,25 +430,25 @@
                         <i class="fa fa-circle-o text-green"></i>
                         {{ trans('general.all') }}
                         {{ trans('general.ready_to_deploy') }}
-                        ({{ ($total_rtd_sidebar) ? $total_rtd_sidebar : '' }})
+                        ({{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }})
                     </a>
                   </li>
                   <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}"><i class="fa fa-circle-o text-orange"></i>
                           {{ trans('general.all') }}
                           {{ trans('general.pending') }}
-                          ({{ ($total_pending_sidebar) ? $total_pending_sidebar : '' }})
+                          ({{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }})
                       </a>
                   </li>
                   <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ url('hardware?status=Undeployable') }}"><i class="fa fa-times text-red"></i>
                           {{ trans('general.all') }}
                           {{ trans('general.undeployable') }}
-                          ({{ ($total_undeployable_sidebar) ? $total_undeployable_sidebar : '' }})
+                          ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
                       </a>
                   </li>
                   <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Archived') }}"><i class="fa fa-times text-red"></i>
                           {{ trans('general.all') }}
                           {{ trans('admin/hardware/general.archived') }}
-                          ({{ ($total_archived_sidebar) ? $total_archived_sidebar : '' }})
+                          ({{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }})
                           </a>
                   </li>
                     <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Requestable') }}"><i class="fa fa-check text-blue"></i>

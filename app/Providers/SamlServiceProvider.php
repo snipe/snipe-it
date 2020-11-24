@@ -49,7 +49,7 @@ class SamlServiceProvider extends ServiceProvider
                     'uses' => 'Auth\SamlController@login' ]
             );
 
-            Route::group(['prefix' => 'admin','middleware' => ['auth', 'authorize:superuser']], function () {
+            Route::group(['prefix' => 'admin','middleware' => ['web','auth', 'authorize:superuser']], function () {
 
                 Route::get('saml', ['as' => 'settings.saml.index','uses' => 'SettingsController@getSamlSettings' ]);
                 Route::post('saml', ['as' => 'settings.saml.save','uses' => 'SettingsController@postSamlSettings' ]);
