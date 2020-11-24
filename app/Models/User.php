@@ -70,6 +70,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @var array
      */
 
+    // 'username' => 'required|string|min:1|unique:users,username,NULL,id,deleted_at,NULL',
     protected $rules = [
         'first_name'              => 'required|string|min:1',
         'username'                => 'required|string|min:1|unique_undeleted',
