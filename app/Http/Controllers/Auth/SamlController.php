@@ -53,8 +53,10 @@ class SamlController extends Controller
         if (empty($metadata)) {
             return response()->view('errors.403', [], 403);
         }
-
-        return response($metadata)->header('Content-Type', 'text/xml');
+    
+        return response()->streamDownload(function () use ($metadata) {
+            echo $metadata;
+        }, 'snipe-it-metadata.xml', ['Content-Type' => 'text/xml']);
     }
 
     /**
