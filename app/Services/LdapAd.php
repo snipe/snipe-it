@@ -332,6 +332,7 @@ class LdapAd extends LdapAdConfiguration
             $activeStatus = (in_array($user->getUserAccountControl(), self::AD_USER_ACCOUNT_CONTROL_FLAGS)) ? 1 : 0;
         } else {
 
+            //\Log::debug('This looks like LDAP (or an AD where the UAC is disabled)');
             // If there is no activated flag, then we can't make any determination about activated/deactivated
             if (false == $this->ldapSettings['ldap_active_flag']) {
                 \Log::debug('ldap_active_flag is false - no ldap_active_flag is set');
@@ -542,13 +543,16 @@ class LdapAd extends LdapAdConfiguration
      */
     public function getLdapUsers(): Paginator
     {
+        \Log::debug("IO don't thinkk it fired yet");
         $search = $this->ldap->search()->users()->in($this->getBaseDn()); //this looks wrong; we should instead have a passable parameter that does this, and use this as a 'sane' default, yeah?
 
         $filter = $this->getFilter();
         if (!is_null($filter)) {
             $search = $search->rawFilter($filter);
         }
-
+        \Log::debug("I thinkn *THIS* is where it actually fires, yeah?");
+        //I think it might be possible to potentially do our own paging here?
+        
         return $search->select($this->getSelectedFields())
             ->paginate(self::PAGE_SIZE);
     }
