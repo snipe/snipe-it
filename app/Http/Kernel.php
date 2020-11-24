@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\CheckLocale::class,
             \App\Http\Middleware\CheckForTwoFactor::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+            \App\Http\Middleware\AssetCountForSidebar::class,
         ],
 
         'api' => [
