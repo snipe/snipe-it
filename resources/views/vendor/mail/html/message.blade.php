@@ -5,18 +5,27 @@
 @if (isset($snipeSettings) && ($snipeSettings->show_images_in_email=='1' ) && ($snipeSettings::setupCompleted()))
 
 @if ($snipeSettings->brand == '3')
-@if ($snipeSettings->logo!='')
-    <img class="navbar-brand-img logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+
+@if ($snipeSettings->email_logo!='')
+<img style="max-height: 100px; vertical-align:middle;" src="{{ \Storage::disk('public')->url(e($snipeSettings->email_logo)) }}">
+@elseif ($snipeSettings->logo!='')
+<img style="max-height: 100px; vertical-align:middle;" src="{{ \Storage::disk('public')->url(e($snipeSettings->logo)) }}">
 @endif
 {{ $snipeSettings->site_name }}
+<br><br>
 
 @elseif ($snipeSettings->brand == '2')
-@if ($snipeSettings->logo!='')
-    <img class="navbar-brand-img logo" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
+@if ($snipeSettings->email_logo!='')
+
+<img style="max-width: 100px; vertical-align:middle;" src="{{ \Storage::disk('public')->url(e($snipeSettings->email_logo)) }}">
+@elseif ($snipeSettings->logo!='')
+<img style="max-width: 100px; vertical-align:middle;" src="{{ \Storage::disk('public')->url(e($snipeSettings->logo)) }}">
 @endif
+
 @else
 {{ $snipeSettings->site_name }}
 @endif
+
 @else
 Snipe-IT
 @endif
@@ -41,7 +50,7 @@ Snipe-IT
 @if($snipeSettings::setupCompleted())
 © {{ date('Y') }} {{ $snipeSettings->site_name }}. All rights reserved.
 @else
-© {{ date('Y') }} Snipe-it. All rights reserved.
+© {{ date('Y') }} Snipe-IT. All rights reserved.
 @endif
 
 @if ($snipeSettings->privacy_policy_link!='')
