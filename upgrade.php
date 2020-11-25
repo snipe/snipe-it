@@ -3,8 +3,8 @@
 
 $required_version = '7.2.0';
 
-if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-	echo "Skipping user check as it is not supported on Windows\n";
+if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_getpwuid'))) {
+	echo "Skipping user check as it is not supported on Windows or Posix is not installed on this server. \n";
 } else {
 	$pwu_data = posix_getpwuid(posix_geteuid());
 	$username = $pwu_data['name'];

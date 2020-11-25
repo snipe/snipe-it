@@ -8,6 +8,7 @@ use App\Notifications\ExpectedCheckinAdminNotification;
 use App\Notifications\ExpectedCheckinNotification;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use App\Models\Recipients\AlertRecipient;
 
 class SendExpectedCheckinAlerts extends Command
 {
