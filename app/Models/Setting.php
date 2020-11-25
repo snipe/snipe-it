@@ -48,7 +48,6 @@ class Setting extends Model
     protected $rules = [
           'brand'                               => 'required|min:1|numeric',
           'qr_text'                             => 'max:31|nullable',
-          'logo_img'                            => 'mimes:jpeg,bmp,png,gif',
           'alert_email'                         => 'email_array|nullable',
           'admin_cc_email'                      => 'email|nullable',
           'default_currency'                    => 'required',
