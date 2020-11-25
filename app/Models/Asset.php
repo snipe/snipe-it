@@ -166,6 +166,7 @@ class Asset extends Depreciable
         'supplier'           => ['name'],
         'company'            => ['name'],
         'defaultLoc'         => ['name'],
+        'location'           => ['name'],
         'model'              => ['name', 'model_number'],
         'model.category'     => ['name'],
         'model.manufacturer' => ['name'],
