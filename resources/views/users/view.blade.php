@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/users/general.view_user', ['name' => html_entity_decode($user->present()->fullName(), ENT_QUOTES | ENT_XML1, 'UTF-8')]) }}
+{{ trans('admin/users/general.view_user', ['name' => $user->present()->fullName()]) }}
 @parent
 @stop
 
