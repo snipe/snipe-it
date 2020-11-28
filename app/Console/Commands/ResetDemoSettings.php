@@ -66,9 +66,6 @@ class ResetDemoSettings extends Command
         $settings->version_footer = 'on';
         $settings->support_footer = null;
         $settings->saml_enabled = '0';
-        $settings->saml_sp_entitiyid = '0';
-        $settings->saml_sp_acs_url = null;
-        $settings->saml_sp_sls_url = null;
         $settings->saml_sp_x509cert = null;
         $settings->saml_idp_metadata = null;
         $settings->saml_attr_mapping_username = null;
@@ -84,7 +81,7 @@ class ResetDemoSettings extends Command
             $user->save();
         }
 
-        
+
     }
 
 }
