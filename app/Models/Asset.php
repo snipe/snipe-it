@@ -1349,6 +1349,14 @@ class Asset extends Depreciable
                     });
                 }
 
+                if ($fieldname == 'assigned_to') {
+                    $query->whereHas('assigneduser', function ($query) use ($search_val) {
+                        $query->where(function ($query) use ($search_val) {
+                            $query->where(DB::raw("CONCAT(users.first_name, ' ', users.last_name)"), 'LIKE', '%' . $search_val . '%');
+                        });
+                    });
+                }
+
 
                 if ($fieldname =='manufacturer') {
                     $query->whereHas('model', function ($query) use ($search_val) {
@@ -1428,7 +1436,7 @@ class Asset extends Depreciable
              * - snipe 
              *
              */
-            if (($fieldname!='category') && ($fieldname!='model_number') && ($fieldname!='rtd_location') && ($fieldname!='location') && ($fieldname!='supplier')
+            if (($fieldname != 'assigned_to') && ($fieldname!='category') && ($fieldname!='model_number') && ($fieldname!='rtd_location') && ($fieldname!='location') && ($fieldname!='supplier')
                 && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
                     $query->orWhere('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }
@@ -1440,6 +1448,9 @@ class Asset extends Depreciable
 
     }
 
+    public function assigneduser() {
+        return $this->belongsTo('App\Models\User', 'assigned_to');
+    }
 
     /**
     * Query builder scope to order on model
