@@ -1015,7 +1015,7 @@ class SettingsController extends Controller
 
         $path         = 'app/backups';
         $backup_files = Storage::files($path);
-        $files        = [];
+        $files_raw        = [];
 
         if (count($backup_files) > 0) {
             for ($f = 0; $f < count($backup_files); ++$f) {
@@ -1023,7 +1023,7 @@ class SettingsController extends Controller
                 // Skip dotfiles like .gitignore and .DS_STORE
                 if ((substr(basename($backup_files[$f]), 0, 1) != '.')) {
 
-                    $files[] = [
+                    $files_raw[] = [
                         'filename' => basename($backup_files[$f]),
                         'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
                         'modified' => Storage::lastModified($backup_files[$f]),
@@ -1034,6 +1034,9 @@ class SettingsController extends Controller
 
             }
         }
+
+        // Reverse the array so it lists oldest first
+        $files = array_reverse($files_raw);
 
         return view('settings/backups', compact('path', 'files'));
     }
