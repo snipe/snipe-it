@@ -84,7 +84,7 @@ class LdapSync extends Command
         }
 
         /* Determine which location to assign users to by default. */
-        $location = NULL;
+        $location = NULL; // FIXME - this would be better called "$default_location", which is more explicit about its purpose
 
         if ($this->option('location')!='') {
             $location = Location::where('name', '=', $this->option('location'))->first();
@@ -106,8 +106,8 @@ class LdapSync extends Command
             $ldap_ou_locations = Location::where('ldap_ou', '!=', '')->get()->toArray();
             $ldap_ou_lengths = array();
 
-            foreach ($ldap_ou_locations as $location) {
-                $ldap_ou_lengths[] = strlen($location["ldap_ou"]);
+            foreach ($ldap_ou_locations as $ou_loc) {
+                $ldap_ou_lengths[] = strlen($ou_loc["ldap_ou"]);
             }
 
             array_multisort($ldap_ou_lengths, SORT_ASC, $ldap_ou_locations);
