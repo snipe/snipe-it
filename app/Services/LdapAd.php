@@ -235,15 +235,20 @@ class LdapAd extends LdapAdConfiguration
         $user->employee_num = trim($userInfo['employee_number']);
         $user->jobtitle     = trim($userInfo['title']);
         $user->phone        = trim($userInfo['telephonenumber']);
-        if(array_key_exists('activated',$userInfo)) {
+        if (array_key_exists('activated',$userInfo)) {
             $user->activated    = $userInfo['activated'];
         } else if ( !$user->exists ) { // no 'activated' flag was set or unset, *AND* this user is new - activate by default.
             $user->activated = 1;
         }
-        if(array_key_exists('location_id',$userInfo)) {
+        if (array_key_exists('location_id',$userInfo)) {
             $user->location_id  = $userInfo['location_id'];
         }
-        $user->notes        = 'Imported from LDAP';
+
+        // this is a new user
+        if (!isset($user->id)) {
+            $user->notes        = 'Imported from LDAP';
+        }
+
         $user->ldap_import  = 1;
 
         return $user;

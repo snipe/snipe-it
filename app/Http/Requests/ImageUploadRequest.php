@@ -27,7 +27,7 @@ class ImageUploadRequest extends Request
     public function rules()
     {
         return [
-            'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml',
+            'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
             'avatar' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml',
         ];
     }
@@ -91,8 +91,8 @@ class ImageUploadRequest extends Request
                 \Log::info('File name will be: '.$file_name);
                 \Log::debug('File extension is: '. $ext);
 
-                if ($image->getClientOriginalExtension()!=='svg') {
-                    \Log::debug('Not an SVG - resize');
+                if (($image->getClientOriginalExtension()!=='webp') && ($image->getClientOriginalExtension()!=='svg')) {
+                    \Log::debug('Not an SVG or webp - resize');
                     \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
                     $upload = Image::make($image->getRealPath())->resize(null, $w, function ($constraint) {
                         $constraint->aspectRatio();
@@ -102,20 +102,27 @@ class ImageUploadRequest extends Request
                     // This requires a string instead of an object, so we use ($string)
                     Storage::disk('public')->put($path.'/'.$file_name, (string)$upload->encode());
 
-
-                // If the file is an SVG, we need to clean it and NOT encode it
                 } else {
-                    \Log::debug('This is an SVG');
-                    $sanitizer = new Sanitizer();
-                    $dirtySVG = file_get_contents($image->getRealPath());
-                    $cleanSVG = $sanitizer->sanitize($dirtySVG);
+                    // If the file is a webp, we need to just move it since webp support
+                    // needs to be compiled into gd for resizing to be available
+                    if ($image->getClientOriginalExtension()=='webp') {
+                        \Log::debug('This is a webp, just move it');
+                        Storage::disk('public')->put($path.'/'.$file_name, file_get_contents($image));
+                    // If the file is an SVG, we need to clean it and NOT encode it
+                    } else {
 
-                    try {
-                        \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
-                        Storage::disk('public')->put($path.'/'.$file_name, $cleanSVG);
-                    } catch (\Exception $e) {
-                        \Log::debug('Upload no workie :( ');
-                        \Log::debug($e);
+                        \Log::debug('This is an SVG');
+                        $sanitizer = new Sanitizer();
+                        $dirtySVG = file_get_contents($image->getRealPath());
+                        $cleanSVG = $sanitizer->sanitize($dirtySVG);
+
+                        try {
+                            \Log::debug('Trying to upload to: '.$path.'/'.$file_name);
+                            Storage::disk('public')->put($path.'/'.$file_name, $cleanSVG);
+                        } catch (\Exception $e) {
+                            \Log::debug('Upload no workie :( ');
+                            \Log::debug($e);
+                        }
                     }
                 }
 

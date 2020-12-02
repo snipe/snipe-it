@@ -112,7 +112,7 @@
     'image'                 => 'Image',
     'image_delete'         	=> 'Delete Image',
     'image_upload'         	=> 'Upload Image',
-    'image_filetypes_help'  => 'Accepted filetypes are jpg, png, gif, and svg. Max upload size allowed is :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, and svg. Max upload size allowed is :size.',
     'import'         	    => 'Import',
     'importing'         	=> 'Importing',
     'importing_help'        => 'You can import assets, accessories, licenses, components, consumables, and users via CSV file. <br><br>The CSV should be comma-delimited and formatted with headers that match the ones in the <a href="https://snipe-it.readme.io/docs/importing" target="_new">sample CSVs in the documentation</a>.',
