@@ -6,7 +6,7 @@
 
         <label class="btn btn-default" aria-hidden="true">
             {{ trans('button.select_file')  }}
-            <input type="file" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" class="js-uploadFile" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none; max-width: 90%" aria-label="image" aria-hidden="true">
+            <input type="file" name="{{ (isset($fieldname) ? $fieldname : 'image') }}" class="js-uploadFile" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/gif,image/jpeg,image/webp,image/png,image/svg" style="display:none; max-width: 90%" aria-label="image" aria-hidden="true">
         </label>
         <span class='label label-default' id="uploadFile-info"></span>
 
