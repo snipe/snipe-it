@@ -226,6 +226,15 @@ class UserPresenter extends Presenter
                 'formatter' => 'groupsFormatter'
             ],
             [
+                "field" => "ldap_import",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/settings/general.ldap_enabled'),
+                "visible" => false,
+                'formatter' => 'trueFalseFormatter'
+            ],
+            [
                 "field" => "two_factor_enrolled",
                 "searchable" => false,
                 "sortable" => true,

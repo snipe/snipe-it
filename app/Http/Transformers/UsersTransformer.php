@@ -52,6 +52,7 @@ class UsersTransformer
                 'notes'=> e($user->notes),
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated =='1') ? true : false,
+                'ldap_import' => ($user->ldap_import =='1') ? true : false,
                 'two_factor_activated' => ($user->two_factor_active()) ? true : false,
                 'two_factor_enrolled' => ($user->two_factor_active_and_enrolled()) ? true : false,
                 'assets_count' => (int) $user->assets_count,
