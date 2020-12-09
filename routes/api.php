@@ -16,6 +16,20 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api'], function () {
 
+
+    Route::get('/', function() {
+
+        return response()->json(
+            [
+                'status' => 'error',
+                'message' => '404 endpoint not found. This is the base URL for the API and does not return anything itself. Please check the API reference at https://snipe-it.readme.io/reference to find a valid API endpoint.',
+                'payload' => null,
+            ], 404);
+    });
+
+
+
+
     Route::group(['prefix' => 'account'], function () {
 
         Route::get('requestable/hardware',
@@ -989,6 +1003,15 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
         );
 
     }); // kits group
+
+    Route::fallback(function(){
+        return response()->json(
+            [
+                'status' => 'error',
+                'message' => '404 endpoint not found. Please check the API reference at https://snipe-it.readme.io/reference to find a valid API endpoint.',
+                'payload' => null,
+            ], 404);
+    });
 
 });
 
