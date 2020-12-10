@@ -73,7 +73,7 @@ VOLUME ["/var/lib/snipeit"]
 
 # Entrypoints
 COPY docker/entrypoint_alpine.sh /entrypoint.sh
-RUN chmod +x /entrypoint.shf
+RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
