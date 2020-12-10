@@ -47,8 +47,7 @@ WORKDIR /var/www/html
 
 COPY docker/docker.env /var/www/html/.env
 
-RUN mkdir -p "/var/www/html/vendor" \
-    && chown -R apache:apache /var/www/html
+RUN chown -R apache:apache /var/www/html
 
 RUN \
 	rm -r "/var/www/html/storage/private_uploads" \
@@ -74,7 +73,7 @@ VOLUME ["/var/lib/snipeit"]
 
 # Entrypoints
 COPY docker/entrypoint_alpine.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /entrypoint.shf
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
