@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.12
 # Apache + PHP
 RUN  apk add --update --no-cache \
         apache2 \
@@ -23,6 +23,8 @@ RUN  apk add --update --no-cache \
         php7-fileinfo \
         php7-simplexml \
         php7-session \
+        php7-dom \
+        php7-xmlwriter \
         curl \
         wget \
         vim \
@@ -45,7 +47,8 @@ WORKDIR /var/www/html
 
 COPY docker/docker.env /var/www/html/.env
 
-RUN chown -R apache:apache /var/www/html
+RUN mkdir -p "/var/www/html/vendor" \
+    && chown -R apache:apache /var/www/html
 
 RUN \
 	rm -r "/var/www/html/storage/private_uploads" \
