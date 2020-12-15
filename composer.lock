@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7081f85ecd412da47e071ae46bb099f",
+    "content-hash": "68cf0fb2c06b12c9f8b58efbca2cd72b",
     "packages": [
         {
             "name": "adldap2/adldap2",
@@ -72,72 +72,6 @@
             "time": "2020-09-09T12:55:51+00:00"
         },
         {
-            "name": "alek13/slack",
-            "version": "1.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-slack/slack.git",
-                "reference": "9db79a622803bf7baf0efafb50e37b900882f7fb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-slack/slack/zipball/9db79a622803bf7baf0efafb50e37b900882f7fb",
-                "reference": "9db79a622803bf7baf0efafb50e37b900882f7fb",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "guzzlehttp/guzzle": "~7.0|~6.0|~5.0|~4.0",
-                "php": "^5.6|^7.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "4.2.*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Maknz\\Slack\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "maknz",
-                    "email": "github@mak.geek.nz"
-                },
-                {
-                    "name": "Alexander Chibrikin",
-                    "email": "alek13.me@gmail.com"
-                }
-            ],
-            "description": "A simple PHP package (fork of maknz/slack) for sending messages to Slack, with a focus on ease of use and elegant syntax.",
-            "keywords": [
-                "laravel",
-                "slack"
-            ],
-            "support": {
-                "issues": "https://github.com/php-slack/slack/issues",
-                "source": "https://github.com/php-slack/slack/tree/1.12.0"
-            },
-            "funding": [
-                {
-                    "url": "https://donorbox.org/php-slack",
-                    "type": "custom"
-                }
-            ],
-            "time": "2020-09-01T18:22:43+00:00"
-        },
-        {
             "name": "asm89/stack-cors",
             "version": "1.3.0",
             "source": {
@@ -195,16 +129,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.169.0",
+            "version": "3.170.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d15a231355e4435fc33bab83df075ec31edd0a9b"
+                "reference": "7f457a08219173eba4b856cb7aef3a903cd790cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d15a231355e4435fc33bab83df075ec31edd0a9b",
-                "reference": "d15a231355e4435fc33bab83df075ec31edd0a9b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7f457a08219173eba4b856cb7aef3a903cd790cc",
+                "reference": "7f457a08219173eba4b856cb7aef3a903cd790cc",
                 "shasum": ""
             },
             "require": {
@@ -279,9 +213,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.169.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.170.0"
             },
-            "time": "2020-12-14T19:12:33+00:00"
+            "time": "2020-12-15T19:13:22+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
@@ -3512,6 +3446,59 @@
                 }
             ],
             "time": "2020-12-10T11:35:44+00:00"
+        },
+        {
+            "name": "maknz/slack",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maknz/slack.git",
+                "reference": "7f21fefc70c76b304adc1b3a780c8740dfcfb595"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maknz/slack/zipball/7f21fefc70c76b304adc1b3a780c8740dfcfb595",
+                "reference": "7f21fefc70c76b304adc1b3a780c8740dfcfb595",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "guzzlehttp/guzzle": "~6.0|~5.0|~4.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.2.*"
+            },
+            "suggest": {
+                "illuminate/support": "Required for Laravel support"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Maknz\\Slack\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "maknz",
+                    "email": "github@mak.geek.nz"
+                }
+            ],
+            "description": "A simple PHP package for sending messages to Slack, with a focus on ease of use and elegant syntax. Includes Laravel support out of the box.",
+            "keywords": [
+                "laravel",
+                "slack"
+            ],
+            "support": {
+                "issues": "https://github.com/maknz/slack/issues",
+                "source": "https://github.com/maknz/slack/tree/master"
+            },
+            "time": "2015-06-03T03:35:16+00:00"
         },
         {
             "name": "masterminds/html5",
