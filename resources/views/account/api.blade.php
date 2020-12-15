@@ -23,12 +23,19 @@
                 @endif
             </div>
             <div class="col-md-4">
-                <p>Your API endpoint is located at:<br>
-                <code>{{ url('/api/v1') }}</code></p>
+                <div class="alert alert-warning"><i class="fa fa-warning faa-pulse animated"></i>
+                    When generating an API token, be sure to copy it down immediately as they
+                    will not be visible to you again. </div>
 
-                <p>When you generate an API token, be sure to copy it down immediately as they will not be visible to you again. </p>
+                <p>Your API base url is located at:<br>
+                    <code>{{ url('/api/v1') }}/&lt;endpoint&gt;</code></p>
 
-                <p>API tokens will expire in {{ config('passport.expiration_years') }} years.</p>
+                <p>API tokens are set to expire in:
+                    <strong>{{ config('passport.expiration_years') }} years</strong>.</p>
+
+
+                <p>Please check the <a href="https://snipe-it.readme.io/reference" target="_blank">API reference</a> to
+                    find specific API endpoints and additional API documentation.</p>
             </div>
         </div>
 
