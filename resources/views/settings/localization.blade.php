@@ -72,7 +72,10 @@
                                 {{ Form::label('default_currency', trans('admin/settings/general.default_currency')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('default_currency', old('default_currency', $setting->default_currency), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {{ Form::text('default_currency', old('default_currency', $setting->default_currency), array('class' => 'form-control select2-container','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px; display: inline-block; ')) }}
+
+                                {!! Form::digit_separator('digit_separator', old('digit_separator', $setting->digit_separator), 'select2') !!}
+
                                 {!! $errors->first('default_currency', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
