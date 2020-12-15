@@ -110,15 +110,16 @@ foreach ($required_exts_array as $required_ext) {
 
 // Print out a useful error message and abort the install
 if ($ext_missing!='') {
-    echo "--------------------- !! ERROR !! ----------------------\n";
-    echo $ext_missing;
-    echo "--------------------------------------------------------\n\n";
-    echo "You have the following extensions installed: \n\n";
+    echo "--------------------------------------------------------\n";
+    echo "You have the following extensions installed: \n";
+    echo "--------------------------------------------------------\n";
 
     foreach ($loaded_exts_array as $loaded_ext) {
        echo "- ".$loaded_ext."\n";
     }
 
+    echo "--------------------- !! ERROR !! ----------------------\n";
+    echo $ext_missing;
     echo "------------------------- :( ---------------------------\n";
     echo "ABORTING THE INSTALLER  \n";
     echo "Please install the extensions above and re-run this script.\n";
