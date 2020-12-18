@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute er allerede taget.',
     'uploaded'             => 'Attributtet kunne ikke uploades.',
     'url'                  => ':attribute formatet er ugyldigt.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => ":attribute skal være unik.",
 
     /*
     |--------------------------------------------------------------------------

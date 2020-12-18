@@ -152,6 +152,7 @@ class LocationsController extends Controller
 
         $location->fill($request->all());
 
+
         if ($location->isValid()) {
 
             $location->save();
