@@ -67,7 +67,6 @@ class LocationsController extends Controller
     {
         $this->authorize('create', Location::class);
         $location = new Location();
-        $location->id               = null; // This is required to make Laravels different validation work, it errors if the parameter doesn't exist (maybe a bug)?
         $location->name             = $request->input('name');
         $location->parent_id        = $request->input('parent_id', null);
         $location->currency         = $request->input('currency', '$');
@@ -131,7 +130,6 @@ class LocationsController extends Controller
         if (is_null($location = Location::find($locationId))) {
             return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
         }
-
 
         // Update the location data
         $location->name         = $request->input('name');
