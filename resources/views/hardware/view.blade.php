@@ -856,7 +856,7 @@
                                                     </td>
                                                     <td>{{ $component->pivot->assigned_qty }}</td>
                                                     <td>{{ $component->purchase_cost }}</td>
-                                                    <?php $totalCost = $totalCost + $component->purchase_cost ;?>
+                                                    <?php $totalCost = $totalCost + $component->purchase_cost * $component->pivot->assigned_qty ;?>
 
                                                 </tr>
                                             @endif
