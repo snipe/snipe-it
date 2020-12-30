@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Laite ',
     'image'		=> 'Laitteen kuva',
     'days_without_acceptance' => 'Päiviä ilman hyväksymistä',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Kuukausittaiset poistot'
 
 );

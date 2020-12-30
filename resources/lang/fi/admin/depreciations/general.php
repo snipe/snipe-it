@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'Lisätietoja Laitteiden Poistoista',
+    'about_asset_depreciations'  			=> 'Lisätietoja laitteiden poistoista',
     'about_depreciations'  					=> 'Voit määrittää laitteelle poistoluokan poistaaksesi laitteen laitekannastasi määritetyn ajan jälkeen.',
-    'asset_depreciations'  					=> 'Laitteiden Poistot',
+    'asset_depreciations'  					=> 'Laitteiden poistot',
     'create'  					            => 'Luo arvonalentumisia',
-    'depreciation_name'  					=> 'Poiston Nimi',
+    'depreciation_name'  					=> 'Poiston nimi',
     'number_of_months'  					=> 'Kuukausien Lukumäärä',
     'update'  					            => 'Päivitä poistot',
 

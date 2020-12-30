@@ -3,7 +3,7 @@
 return array(
     'about_kits_title'                  => 'Over vooraf gedefinieerde Kits',
     'about_kits_text'                   => 'Vooraf gedefinieerde Kits laat je snel een verzameling items bekijken (assets, licenties, enz.) voor een gebruiker. Dit kan handig zijn wanneer uw onboarding proces consistent is voor veel gebruikers en alle gebruikers dezelfde items ontvangen.',
-    'checkout'                          => 'Checkout Kit ',
+    'checkout'                          => 'Check uit Kit ',
     'create_success'                    => 'Kit was succesvol aangemaakt.',
     'create'                            => 'Aanmaken voorgedefinieerde Kit',
     'update'                            => 'Bijwerken voorgedefinieerde Kit',

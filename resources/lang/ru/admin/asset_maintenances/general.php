@@ -8,7 +8,7 @@
         'repair'             => 'Починить',
         'maintenance'        => 'Обслуживание',
         'upgrade'            => 'Модернизировать',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'Калибровка',
+        'software_support'   => 'Программная поддержка',
+        'hardware_support'   => 'Аппаратная поддержка',
     ];

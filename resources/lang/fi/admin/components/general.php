@@ -2,8 +2,8 @@
 
 return array(
     'component_name'                  => 'Komponentin nimi',
-    'checkin'                             => 'Checkin Component',
-    'checkout'                             => 'Checkout Component',
+    'checkin'                             => 'Palauta komponentti',
+    'checkout'                             => 'Luovuta komponentti',
     'cost'				=> 'Hankintahinta',
     'create'                             => 'Luo komponentti',
     'edit'                             => 'Muokkaa komponenttia',

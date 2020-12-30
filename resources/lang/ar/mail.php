@@ -73,7 +73,7 @@ return array(
     'Asset_Checkin_Notification' => 'Asset checked in',
     'License_Checkin_Notification' => 'License checked in',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
-    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
-    'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
+    'Expected_Checkin_Notification' => 'تذكير: تاريخ تحقق :name يقترب من الموعد النهائي',
+    'Expected_Checkin_Date' => 'من المقرر أن يتم التحقق من الأصول التي تم إخراجها إليك في :date',
+    'your_assets' => 'عرض الأصول الخاصة بك'
 );

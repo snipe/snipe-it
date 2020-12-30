@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'このユーザーアカウントは有効化されていません。',
     'account_suspended'      => 'このユーザーアカウントは停止中です。',
     'account_banned'         => 'このユーザーアカウントは禁止されています。',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => '複数回ログインに失敗しました。 :minutes 分後に再試行してください。',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'お使いのデバイスは既に登録されています。',
+        'success'               => 'ログインに成功しました。',
+        'code_required'         => '二段階認証コードが必要です。',
+        'invalid_code'          => '二段階認証コードが無効です。',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'ログアウト中に問題が発生しました。もう一度やり直してください。',
+        'success' => 'ログアウトに成功しました。',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'パスワードリセットの際に問題が発生しました。もう一度やり直して下さい。',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'このシステムにそのメールアドレスが存在する場合は、パスワード回復用のメールが送信されました。',
     ),
 
     'forgot-password-confirm' => array(

@@ -2,18 +2,18 @@
 
 return array(
 
-    'account_already_exists' => 'Tällä email-osoitteella löytyy jo käyttäjätili.',
+    'account_already_exists' => 'Tällä sähköpostiosoitteella löytyy jo käyttäjätili.',
     'account_not_found'      => 'Käyttäjänimi tai salasana on virheellinen.',
     'account_not_activated'  => 'Käyttäjätiliä ei ole aktivoitu.',
     'account_suspended'      => 'Käyttäjätili on jäädytetty.',
     'account_banned'         => 'Käyttäjätili on estetty.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Liian monta kirjautumisyritystä. Yritä uudelleen :minutes minuutin kuluttua.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Laitteesi on jo käytössä.',
+        'success'               => 'Sisäänkirjautuminen onnistui.',
+        'code_required'         => 'MFA koodi on pakollinen.',
+        'invalid_code'          => 'MFA koodi on virheellinen.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Sisäänkirjautumisessa tapahtui virhe, yritä uudelleen.',
+        'success' => 'Olet kirjautunut ulos.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Salasanan nollauksessa tapahtui virhe, yritä uudelleen.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Jos sähköpostiosoite on järjestelmässä, salasanan palautus sähköposti on lähetetty.',
     ),
 
     'forgot-password-confirm' => array(
