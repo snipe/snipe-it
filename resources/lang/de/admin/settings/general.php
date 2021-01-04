@@ -83,7 +83,7 @@ return array(
     'ldap_auth_filter_query'    => 'LDAP Authentifikationsabfrage',
     'ldap_version'              => 'LDAP Version',
     'ldap_active_flag'          => 'LDAP Aktiv-Markierung',
-    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
+    'ldap_activated_flag_help'  => 'Diese Einstellung steuert, ob sich ein Benutzer bei Snipe-IT anmelden kann und hat keinen Einfluss auf die Möglichkeit, Elemente auszugeben oder zurück zu nehmen.',
     'ldap_emp_num'              => 'LDAP Mitarbeiternummer',
     'ldap_email'                => 'LDAP E-Mail',
     'license'                  => 'Softwarelizenz',

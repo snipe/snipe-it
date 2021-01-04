@@ -18,7 +18,7 @@ return array(
     'serial'   		=> 'Serienummer',
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
-    'image'		=> 'Apparaat afbeelding',
+    'image'		=> 'Asset afbeelding',
     'days_without_acceptance' => 'Dagen zonder acceptatie',
     'monthly_depreciation' => 'Maandelijkse afschrijving'
 

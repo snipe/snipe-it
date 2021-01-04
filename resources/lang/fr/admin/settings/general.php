@@ -83,7 +83,7 @@ return array(
     'ldap_auth_filter_query'    => 'Requête d\'authentification LDAP',
     'ldap_version'              => 'Version LDAP',
     'ldap_active_flag'          => 'Signal d\'activation LDAP',
-    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
+    'ldap_activated_flag_help'  => 'Ce drapeau est utilisé pour déterminer si un utilisateur peut se connecter à Snipe-IT et n\'affecte pas la possibilité d\'associer ou dissocier des éléments.',
     'ldap_emp_num'              => 'Numéro d\'employé LDAP',
     'ldap_email'                => 'E-mail LDAP',
     'license'                  => 'Licence de logiciel',

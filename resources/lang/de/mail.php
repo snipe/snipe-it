@@ -29,7 +29,7 @@ return array(
     'days' => 'Tage',
     'expecting_checkin_date' => 'Erwartetes Rückgabedatum:',
     'expires' => 'Ablaufdatum',
-    'Expiring_Assets_Report' => 'Bericht über Ablaufende Gegenstände.',
+    'Expiring_Assets_Report' => 'Bericht über ablaufende Gegenstände.',
     'Expiring_Licenses_Report' => 'Bericht über ablaufende Lizenzen.',
     'hello' => 'Hallo',
     'hi' => 'Hallo',
@@ -72,8 +72,8 @@ return array(
     'Accessory_Checkin_Notification' => 'Zubehör zurückgenommen',
     'Asset_Checkin_Notification' => 'Asset zurückgenommen',
     'License_Checkin_Notification' => 'Lizenz zurückgenommen',
-    'Expected_Checkin_Report' => 'Expected asset checkin report',
-    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Expected_Checkin_Report' => 'Bericht über erwartete Asset Rückgaben',
+    'Expected_Checkin_Notification' => 'Erinnerung: :name Rückgabedatum nähert sich',
     'Expected_Checkin_Date' => 'Ihr ausgebuchtes Asset ist fällig zur Rückgabe am :date',
     'your_assets' => 'Ihre Assets anzeigen'
 );

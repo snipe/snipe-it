@@ -83,7 +83,7 @@ return array(
     'ldap_auth_filter_query'    => 'استعلام مصادقة لداب',
     'ldap_version'              => 'إصدار لداب',
     'ldap_active_flag'          => 'لداب العلم النشط',
-    'ldap_activated_flag_help'  => 'This flag is used to determine whether a user can login to Snipe-IT and does not affect the ability to check items in or out to them.',
+    'ldap_activated_flag_help'  => 'يستخدم هذا العلم لتحديد ما إذا كان يمكن للمستخدم تسجيل الدخول إلى Snipe-IT ولا يؤثر على القدرة على التحقق من العناصر في أو خارجها.',
     'ldap_emp_num'              => 'رقم موظف لداب',
     'ldap_email'                => 'بريد لداب',
     'license'                  => 'ترخيص البرنامج',

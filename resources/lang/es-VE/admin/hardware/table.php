@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Activo ',
     'image'		=> 'Imagen de dispositivo',
     'days_without_acceptance' => 'Días sin Aceptación',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Depreciación mensual'
 
 );

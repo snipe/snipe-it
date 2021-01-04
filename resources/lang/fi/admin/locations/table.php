@@ -1,21 +1,21 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'Tietoja sijainneista',
-    'about_locations'           => 'Sijainteja käytetään käyttäjien, varojen ja muiden kohteiden sijaintitietojen seurantaan',
-    'assets_rtd'                => 'varat', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Määritetyt varat',
+    'about_locations_title'     => 'Tietoa sijainneista',
+    'about_locations'           => 'Sijaintia käytetään käyttäjien, varojen ja muiden kohteiden sijainnin seurantaan',
+    'assets_rtd'                => 'Laitteet', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Luovutetut laitteet',
     'id'                        => 'Tunnus',
     'city'                      => 'Kaupunki',
     'state'                     => 'Lääni',
     'country'                   => 'Maa',
-    'create'                    => 'Uusi Sijainti',
-    'update'                    => 'Päivitä Sijainti',
-    'name'                      => 'Sijainnin Nimi',
+    'create'                    => 'Uusi sijainti',
+    'update'                    => 'Päivitä sijainti',
+    'name'                      => 'Sijainnin nimi',
     'address'                   => 'Osoite',
     'zip'                       => 'Postinumero',
     'locations'                 => 'Sijainnit',
-    'parent'                    => 'Ylempi kategoria',
+    'parent'                    => 'Ylempi',
     'currency'                  => 'Valuutta',
-    'ldap_ou'                   => 'LDAP-haku OU',
+    'ldap_ou'                   => 'LDAP-haun OU',
     );

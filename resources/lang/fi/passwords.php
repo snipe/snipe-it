@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sent'	        => 'Salasanasi linkki on lähetetty!',
+    'sent'	        => 'Salasanalinkki on lähetetty!',
     'user'			=> 'Sähköpostille ei löytynyt käyttäjää.',
 ];
 

@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Nabytek',
     'image'		=> 'Zdjęcie urządzenia',
     'days_without_acceptance' => 'Dni bez akceptacji',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Amortyzacja miesięczna'
 
 );

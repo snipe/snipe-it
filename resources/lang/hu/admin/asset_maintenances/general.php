@@ -8,7 +8,7 @@
         'repair'             => 'Javítás',
         'maintenance'        => 'Karbantartás',
         'upgrade'            => 'Frissítés',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'Kalibrálás',
+        'software_support'   => 'Szoftver támogatás',
+        'hardware_support'   => 'Hardver támogatás',
     ];

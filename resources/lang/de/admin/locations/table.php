@@ -15,7 +15,7 @@ return array(
     'address'                   => 'Adresse',
     'zip'                       => 'Postleitzahl',
     'locations'                 => 'Standorte',
-    'parent'                    => 'Hauptkategorie',
+    'parent'                    => 'Übergeordneter Standort',
     'currency'                  => 'Landeswährung',
     'ldap_ou'                   => 'LDAP OU Suche',
     );

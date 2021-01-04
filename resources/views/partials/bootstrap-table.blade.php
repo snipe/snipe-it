@@ -592,11 +592,19 @@
             var total_sum = data.reduce(function(sum, row) {
                 return (sum) + (parseFloat(row[field]) || 0);
             }, 0);
-            return total_sum.toFixed(2);
+            return numberWithCommas(total_sum.toFixed(2));
         }
         return 'not an array';
     }
 
+    function numberWithCommas(value) {
+        if ((value) && ("{{$snipeSettings->digit_separator}}" == "1.234,56")){
+        var parts = value.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        return parts.join(",");
+        }
+        return value
+    }
 
     $(function () {
         $('#bulkEdit').click(function () {

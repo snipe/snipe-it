@@ -3,8 +3,8 @@
 return array(
     'accessory_category' 				=> 'Accessoire Categorie',
     'accessory_name'  					=> 'Accessoire Naam',
-    'checkout'  							=> 'Checkout accessoire',
-    'checkin'  							=> 'Checkin accessoire',
+    'checkout'  							=> 'Check uit accessoire',
+    'checkin'  							=> 'Check in accessoire',
     'create'  							=> 'Accessoire aanmaken',
     'edit'  							=> 'Accessoire aanpassen',
     'eula_text'							=> 'Categorie EULA',

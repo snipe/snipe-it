@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Eszköz ',
     'image'		=> 'Készülék kép',
     'days_without_acceptance' => 'Nem elfogadás óta eltelt napok száma',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Havi értékcsökkenés'
 
 );

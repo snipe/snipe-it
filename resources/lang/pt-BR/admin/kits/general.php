@@ -12,6 +12,6 @@ return array(
     'none_models'                       => 'Não há ativos disponíveis o suficiente para :model fazer atribuição. :qty são necessários. ',
     'none_licenses'                     => 'Não há licenças suficientes para :model fazer atribuição. :qty são necessários. ',
     'none_consumables'                  => 'Não há quantidade de consumíveis suficientes para :model fazer atribuição. :qty são necessários. ',
-    'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
+    'none_accessory'                    => 'Não há unidades disponíveis de :accessory para check-out. :qty são necessários. ',
 
 );

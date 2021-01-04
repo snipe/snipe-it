@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Ativo ',
     'image'		=> 'Imagem do equipamento',
     'days_without_acceptance' => 'Dias sem que fosse aceito',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Depreciação Mensal'
 
 );

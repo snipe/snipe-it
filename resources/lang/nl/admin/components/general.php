@@ -2,7 +2,7 @@
 
 return array(
     'component_name'                  => 'Component Naam',
-    'checkin'                             => 'Checkin Component',
+    'checkin'                             => 'Component inchecken',
     'checkout'                             => 'Component uitchecken',
     'cost'				=> 'Aankoop prijs',
     'create'                             => 'Component aanmaken',

@@ -8,7 +8,7 @@
         'repair'             => 'Remonts',
         'maintenance'        => 'Apkope',
         'upgrade'            => 'Jaunināt',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'Kalibrācija',
+        'software_support'   => 'Programmatūras atbalsts',
+        'hardware_support'   => 'Aparatūras atbalsts',
     ];

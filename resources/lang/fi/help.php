@@ -13,23 +13,23 @@ return array(
     |
     */
 
-    "more_info_title" => "More Info",
+    "more_info_title" => "Lisätietoa",
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    "audit_help" => "Tämän laatikon valitseminen muokkaa laitetietoja heijastamaan uutta sijaintia. Jos sitä ei ole valittu, sijainti kirjataan vain lokiin.<br><br> Huomaa, että jos laite on jo uloskuitattuna, tämä ei muuta henkilön, tai laitteen sijaintia mihin se on uloskuittattuna.",
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Laitteita seurataan sarjanumeron tai laitetunnisteen avulla. Laitteiksi määritellään yleensä arvoikkaampaa omaisuutta, joidenka tunnistaminen  yksilöllisesti on tärkeää.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Kategoriat auttavat sinua järjestämään kohteita. Joitakin esimerkkiluokkia voivat olla &quot;Työasemat&quot;, &quot;Kannettavat&quot;, &quot;Puhelimet&quot;, &quot;Tabletit&quot; ja niin edelleen, mutta voit käyttää kategorioita millä tahansa itsellesi sopivalla tavalla.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Lisävarusteet ovat laitteita joita ennetaan käyttäjille, mutta joilla ei ole omia tunnisteita tai sarjanumeroita. Kuten vaikkapa hiiret ja näppäimistöt.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Yrityksiä voidaan käyttää yksinkertaisesti tunnisteena tai niitä voidaan käyttää rajoittamaan laitteiden näkyvyyttä käyttäjille, jne, jos täysi yritystuki on käytössä Admin asetuksissa.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Komponentit ovat kohteita, jotka ovat osa laitetta, esimerkiksi kiintolevyjä, RAM-muistia jne.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Kulutustarvikkeet ovat kohteita jotka kuluvat ajan myötä. Esimerkiksi tulostimen muste tai kopiopaperi.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Voit määrittää laitteille poistoja poistaaksesi omaisuuden arvoa suoraviivaisesti laskien.',
 
 
 
