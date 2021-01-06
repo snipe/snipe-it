@@ -175,7 +175,11 @@
 
 
     // Make the edit/delete buttons
-    function genericActionsFormatter(owner_name, element_name = '') {
+    function genericActionsFormatter(owner_name, element_name) {
+        if (!element_name) {
+            element_name = '';
+        }
+
         return function (value,row) {
 
             var actions = '<nobr>';
