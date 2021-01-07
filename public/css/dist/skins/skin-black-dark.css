@@ -288,6 +288,12 @@ body {
   background-color: var(--back-main);
   color: var(--text-main);
 }
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+  background-color: var(--back-main);
+  color: var(--text-main);
+}
 .form-control {
   background-color: var(--back-main);
   color: var(--text-main);
