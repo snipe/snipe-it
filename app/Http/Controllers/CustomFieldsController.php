@@ -90,6 +90,10 @@ class CustomFieldsController extends Controller
             $field->format = e($request->get("format"));
         }
 
+        if($request->filled("element") == "checkbox"){
+            $field->format = 'boolean';
+        }
+
         if ($field->save()) {
 
             return redirect()->route("fields.index")->with("success", trans('admin/custom_fields/message.field.create.success'));

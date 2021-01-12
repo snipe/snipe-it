@@ -70,7 +70,7 @@
           </div>
 
           <!-- Format -->
-          <div class="form-group {{ $errors->has('format') ? ' has-error' : '' }}">
+          <div class="form-group {{ $errors->has('format') ? ' has-error' : '' }}" id="format">
             <label for="format" class="col-md-4 control-label">
               {{ trans('admin/custom_fields/general.field_format') }}
             </label>
@@ -175,6 +175,19 @@
                     $("#field_values_text").show();
                 } else{
                     $("#field_values_text").hide();
+                }
+            });
+        }).change();
+
+        // Checkbox handling
+        $(".field_element").change(function(){
+            $(this).find("option:selected").each(function(){
+                if (($(this).attr("value")=="checkbox")){
+                    $("#field_values_text").hide();
+                    $("#format").hide();
+                } else{
+                    $("#field_values_text").show();
+                    $("#format").show();
                 }
             });
         }).change();
