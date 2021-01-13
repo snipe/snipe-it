@@ -410,6 +410,8 @@
                                                         @can('superuser')
                                                             @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                                 <a href="{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
+                                                            @elseif ($field->format == 'boolean')
+                                                                {{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) == 1 ? 'TRUE' : 'FALSE' }}
                                                             @else
                                                                 {{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
                                                             @endif
@@ -420,6 +422,8 @@
                                                     @else
                                                         @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                             <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
+                                                        @elseif ($field->format == 'boolean')
+                                                            {{ $asset->{$field->db_column_name()} == 1 ? 'TRUE' : 'FALSE' }}
                                                         @else
                                                             {!! nl2br(e($asset->{$field->db_column_name()})) !!}
                                                         @endif
