@@ -90,7 +90,7 @@ class CustomFieldsController extends Controller
             $field->format = e($request->get("format"));
         }
 
-        if($request->filled("element") == "checkbox"){
+        if($request->get("element") == "checkbox"){
             $field->format = 'boolean';
         }
 
