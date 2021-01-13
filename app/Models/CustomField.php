@@ -32,7 +32,6 @@ class CustomField extends Model
             'IPV4'          => 'ipv4',
             'IPV6'          => 'ipv6',
             'MAC'           => 'regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/',
-            'BOOLEAN'       => 'boolean',
         ];
 
     public $guarded = [
@@ -286,8 +285,10 @@ class CustomField extends Model
     public function formatFieldValuesAsArray()
     {
         $arr = preg_split("/\\r\\n|\\r|\\n/", $this->field_values);
-
-        $result[''] = 'Select '.strtolower($this->format);
+        
+        if ($this->element != 'radio') {
+            $result[''] = 'Select ' . strtolower($this->format);
+        }
 
         for ($x = 0; $x < count($arr); $x++) {
             $arr_parts = explode('|', $arr[$x]);

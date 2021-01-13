@@ -16,17 +16,24 @@
 
 
               @elseif ($field->element=='checkbox')
-                    <!-- Checkboxes -->
-                  @foreach ($field->formatFieldValuesAsArray() as $key => $value)
+                  <!-- Checkboxes -->
+                  <div>
+                    <label>
+                        <input type="checkbox" value="1" name="{{ $field->db_column_name() }}" class="minimal" {{ $item->{$field->db_column_name()} != '' ? ' checked="checked"' : '' }}>
+                   </label>
+                  </div>
 
-                      <div>
-                          <label>
-                              <input type="checkbox" value="1" name="{{ $field->db_column_name() }}" class="minimal" {{ $item->{$field->db_column_name()} != '' ? ' checked="checked"' : '' }}>
-                          </label>
-                      </div>
-                  @endforeach
+              @elseif ($field->element=='radio')
+              <!-- Radiobuttons -->
+              @foreach ($field->formatFieldValuesAsArray() as $key)
+                  <div>
+                      <label>
+                          <input type="radio" value="{{ $key }}" name="{{ $field->db_column_name() }}" class="minimal" {{ $item->{$field->db_column_name()} == $key ? ' checked="checked"' : '' }}> {{ $key }}
+                      </label>
+                  </div>
+              @endforeach
 
-              @endif
+          @endif
 
 
           @else
