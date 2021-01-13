@@ -19,7 +19,7 @@
                   <!-- Checkboxes -->
                   <div>
                     <label>
-                        <input type="checkbox" value="1" name="{{ $field->db_column_name() }}" class="minimal" {{ $item->{$field->db_column_name()} != '' ? ' checked="checked"' : '' }}>
+                        <input type="checkbox" value="1" name="{{ $field->db_column_name() }}" class="minimal" {{ $item->{$field->db_column_name()} ?? '' != '' ? ' checked="checked"' : '' }}>
                    </label>
                   </div>
 
@@ -28,7 +28,7 @@
               @foreach ($field->formatFieldValuesAsArray() as $key)
                   <div>
                       <label>
-                          <input type="radio" value="{{ $key }}" name="{{ $field->db_column_name() }}" class="minimal" {{ $item->{$field->db_column_name()} == $key ? ' checked="checked"' : '' }}> {{ $key }}
+                          <input type="radio" value="{{ $key }}" name="{{ $field->db_column_name() }}" class="minimal" {{ $item->{$field->db_column_name()} ?? '' == $key ? ' checked="checked"' : '' }}> {{ $key }}
                       </label>
                   </div>
               @endforeach
