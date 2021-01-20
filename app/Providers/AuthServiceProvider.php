@@ -16,6 +16,7 @@ use App\Models\Depreciation;
 use App\Models\License;
 use App\Models\Location;
 use App\Models\Manufacturer;
+use App\Models\PredefinedKit;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
@@ -33,6 +34,7 @@ use App\Policies\DepreciationPolicy;
 use App\Policies\LicensePolicy;
 use App\Policies\LocationPolicy;
 use App\Policies\ManufacturerPolicy;
+use App\Policies\PredefinedKitPolicy;
 use App\Policies\StatuslabelPolicy;
 use App\Policies\SupplierPolicy;
 use App\Policies\UserPolicy;
@@ -63,6 +65,7 @@ class AuthServiceProvider extends ServiceProvider
         Depreciation::class => DepreciationPolicy::class,
         License::class => LicensePolicy::class,
         Location::class => LocationPolicy::class,
+        PredefinedKit::class => PredefinedKitPolicy::class,
         Statuslabel::class => StatuslabelPolicy::class,
         Supplier::class => SupplierPolicy::class,
         User::class => UserPolicy::class,
