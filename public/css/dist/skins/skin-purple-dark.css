@@ -228,7 +228,7 @@ body {
 .box-footer,
 .box-header {
   background-color: var(--back-sub);
-  color: var(--text-main);
+  color: var(--header);
 }
 .btn-default {
   background-color: var(--back-main);
@@ -408,13 +408,13 @@ a {
   color: var(--link);
 }
 a:link {
-  color: var(--link);
+  color: var(--header);
 }
 a:hover {
   color: var(--light-link);
 }
 a:visited {
-  color: var(--link);
+  color: var(--header);
 }
 .row-striped {
   vertical-align: top;
