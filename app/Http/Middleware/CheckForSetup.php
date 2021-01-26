@@ -27,7 +27,7 @@ class CheckForSetup
             }
 
         } else {
-            if (!($request->is('setup*')) && !($request->is('.env'))) {
+            if (!($request->is('setup*')) && !($request->is('.env')) && !($request->is('health'))) {
                 return redirect(url('/').'/setup');
             }
 

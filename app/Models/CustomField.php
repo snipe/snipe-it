@@ -287,7 +287,10 @@ class CustomField extends Model
     {
         $arr = preg_split("/\\r\\n|\\r|\\n/", $this->field_values);
 
-        $result[''] = 'Select '.strtolower($this->format);
+        if (($this->element!='checkbox') && ($this->element!='checkbox')) {
+            $result[''] = 'Select '.strtolower($this->format);
+        }
+
 
         for ($x = 0; $x < count($arr); $x++) {
             $arr_parts = explode('|', $arr[$x]);

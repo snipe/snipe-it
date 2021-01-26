@@ -1,6 +1,6 @@
 FROM alpine:3.12
 # Apache + PHP
-RUN  apk add --update --no-cache \
+RUN  apk add --no-cache \
         apache2 \
         php7 \
         php7-common \
