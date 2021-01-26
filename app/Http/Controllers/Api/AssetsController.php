@@ -812,7 +812,7 @@ class AssetsController extends Controller
                 $asset->location_id = $request->input('location_id');
             }
 
-            $asset->last_audit_date = date('Y-m-d h:i:s');
+            $asset->last_audit_date = date('Y-m-d H:i:s');
 
             if ($asset->save()) {
                 $log = $asset->logAudit(request('note'),request('location_id'));
