@@ -464,5 +464,4 @@ Route::group(['middleware' => 'web'], function () {
 
 Auth::routes();
 
-
-
+Route::get('/health', [ 'as' => 'health', 'uses' => 'HealthController@get']);
