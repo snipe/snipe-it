@@ -189,8 +189,8 @@ class LoginController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
-        $this->maxLoginAttempts = config('auth.throttle.max_attempts');
-        $this->lockoutTime = config('auth.throttle.lockout_duration');
+        $this->maxLoginAttempts = config('auth.passwords.users.throttle.max_attempts');
+        $this->lockoutTime = config('auth.passwords.users.throttle.lockout_duration');
 
         if ($lockedOut = $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
@@ -452,8 +452,8 @@ class LoginController extends Controller
      */
     protected function hasTooManyLoginAttempts(Request $request)
     {
-        $lockoutTime = config('auth.throttle.lockout_duration');
-        $maxLoginAttempts = config('auth.throttle.max_attempts');
+        $lockoutTime = config('auth.passwords.users.throttle.lockout_duration');
+        $maxLoginAttempts = config('auth.passwords.users.throttle.max_attempts');
 
         return $this->limiter()->tooManyAttempts(
             $this->throttleKey($request),
