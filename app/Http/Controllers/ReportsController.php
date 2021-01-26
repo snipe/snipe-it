@@ -632,6 +632,14 @@ class ReportsController extends Controller
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
                 $assets->whereBetween('assets.expected_checkin', [$request->input('expected_checkin_start'), $request->input('expected_checkin_end')]);
             }
+
+            if (($request->filled('last_audit_start')) && ($request->filled('last_audit_end'))) {
+                $assets->whereBetween('assets.last_audit_date', [$request->input('last_audit_start'), $request->input('last_audit_end')]);
+            }
+
+            if (($request->filled('next_audit_start')) && ($request->filled('next_audit_end'))) {
+                $assets->whereBetween('assets.next_audit_date', [$request->input('next_audit_start'), $request->input('next_audit_end')]);
+            }
             
             $assets->orderBy('assets.created_at', 'ASC')->chunk(20, function($assets) use($handle, $customfields, $request) {
 
