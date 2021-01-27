@@ -167,9 +167,22 @@
                     </strong>
                   </div>
                   <div class="col-md-8">
-                    {{ $license->expiration_date }}
+                    {{ \App\Helpers\Helper::getFormattedDateObject($license->expiration_date, 'date', false) }}
                   </div>
                 </div>
+                @endif
+
+                @if ($license->termination_date)
+                  <div class="row">
+                    <div class="col-md-4">
+                      <strong>
+                        {{ trans('admin/licenses/form.termination_date') }}
+                      </strong>
+                    </div>
+                    <div class="col-md-8">
+                      {{ \App\Helpers\Helper::getFormattedDateObject($license->termination_date, 'date', false) }}
+                    </div>
+                  </div>
                 @endif
 
 
@@ -188,8 +201,6 @@
                   </div>
                 </div>
 
-
-
                 <div class="row">
                   <div class="col-md-4">
                     <strong>
@@ -197,7 +208,7 @@
                     </strong>
                   </div>
                   <div class="col-md-8">
-                    {{ $license->depreciated_date()->format("Y-m-d") }}
+                    {{ \App\Helpers\Helper::getFormattedDateObject($license->depreciated_date(), 'date', false) }}
                   </div>
                 </div>
 
@@ -233,13 +244,14 @@
                   @endif
 
 
-                  @if (isset($license->purchase_date))
+                @if (isset($license->purchase_date))
                 <div class="row">
                   <div class="col-md-4">
                     <strong>{{ trans('general.purchase_date') }}</strong>
                   </div>
                   <div class="col-md-8">
-                    {{ $license->purchase_date }}
+                    {{ \App\Helpers\Helper::getFormattedDateObject($license->purchase_date, 'date', false) }}
+
                   </div>
                 </div>
                   @endif
