@@ -53,8 +53,8 @@
                                             {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                         </div>
                                         <div class="checkbox">
-                                            <label>
-                                                <input name="remember" type="checkbox" value="1">{{ trans('auth/general.remember_me')  }}
+                                            <label style="margin-left: -20px;">
+                                                <input name="remember" type="checkbox" value="1" class="minimal"> {{ trans('auth/general.remember_me')  }}
                                             </label>
                                         </div>
                                     </fieldset>
