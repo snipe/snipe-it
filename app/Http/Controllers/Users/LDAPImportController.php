@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\LdapAd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use App\Models\User; // Note that this is awful close to 'Users' the namespace above; be careful
 
 class LDAPImportController extends Controller
 {
@@ -65,6 +66,7 @@ class LDAPImportController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('update', User::class);
         // Call Artisan LDAP import command.
         $location_id = $request->input('location_id');
         Artisan::call('snipeit:ldap-sync', ['--location_id' => $location_id, '--json_summary' => true]);
