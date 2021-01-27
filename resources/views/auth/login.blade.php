@@ -43,12 +43,12 @@
                                     <fieldset>
 
                                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                                            <label for="username">{{ trans('admin/users/table.username')  }}</label>
+                                            <label for="username"><i class="fa fa-user" aria-hidden="true"></i> {{ trans('admin/users/table.username')  }}</label>
                                             <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" id="username" autocomplete="off" autofocus>
                                             {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                         </div>
                                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                            <label for="password">{{ trans('admin/users/table.password')  }}</label>
+                                            <label for="password"><i class="fa fa-key" aria-hidden="true"></i> {{ trans('admin/users/table.password')  }}</label>
                                             <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" id="password" autocomplete="off">
                                             {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                         </div>
