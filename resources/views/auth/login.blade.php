@@ -17,7 +17,7 @@
                 <div class="col-md-4 col-md-offset-4">
 
                     <div class="box login-box">
-                        <div class="box-header">
+                        <div class="box-header with-border">
                             <h1 class="box-title"> {{ trans('auth/general.login_prompt')  }}</h1>
                         </div>
 
