@@ -70,7 +70,7 @@
           </div>
 
           <!-- Format -->
-          <div class="form-group {{ $errors->has('format') ? ' has-error' : '' }}">
+          <div class="form-group {{ $errors->has('format') ? ' has-error' : '' }}" id="format_values">
             <label for="format" class="col-md-4 control-label">
               {{ trans('admin/custom_fields/general.field_format') }}
             </label>
@@ -164,6 +164,17 @@
                     $("#custom_regex").show();
                 } else{
                     $("#custom_regex").hide();
+                }
+            });
+        }).change();
+
+        // If the element is a radiobutton, doesn't show the format input box
+        $(".field_element").change(function(){
+            $(this).find("option:selected").each(function(){
+                if (($(this).attr("value") != "radio")){
+                    $("#format_values").show();
+                } else{
+                    $("#format_values").hide();
                 }
             });
         }).change();
