@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\LdapAd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use App\Models\User as UserModel; // to more-clearly distinguish between the Users *controller* Namespace, at the top. (it's *not* a conflict, it's Users vs. User)
 
 class LDAPImportController extends Controller
 {
@@ -42,7 +43,7 @@ class LDAPImportController extends Controller
      */
     public function create()
     {
-        $this->authorize('update', User::class);
+        $this->authorize('update', UserModel::class);
         try {
             //$this->ldap->connect(); I don't think this actually exists in LdapAd.php, and we don't really 'persist' LDAP connections anyways...right?
         } catch (\Exception $e) {
@@ -65,6 +66,7 @@ class LDAPImportController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('update', UserModel::class);
         // Call Artisan LDAP import command.
         $location_id = $request->input('location_id');
         Artisan::call('snipeit:ldap-sync', ['--location_id' => $location_id, '--json_summary' => true]);
