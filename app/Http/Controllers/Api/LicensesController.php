@@ -128,6 +128,7 @@ class LicensesController extends Controller
                         'free_seats_count',
                         'seats',
                         'termination_date',
+                        'depreciation_id'
                     ];
                 $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
                 $licenses = $licenses->orderBy($sort, $order);

@@ -3,7 +3,7 @@
 {{-- Page title --}}
 @section('title')
 
-    {{ trans('general.depreciation') }}: {{ $depreciation->name }}
+    {{ trans('general.depreciation') }}: {{ $depreciation->name }} ({{ $depreciation->months }} {{ trans('general.months') }})
 
     @parent
 @stop
@@ -24,7 +24,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
 
 
             <!-- Custom Tabs -->
@@ -39,7 +39,27 @@
                     <div class="tab-pane active" id="assets">
 
 
-                               sldkgjlksgj
+                        <table
+                                data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                                data-cookie-id-table="depreciationsAssetTable"
+                                data-id-table="depreciationsAssetTable"
+                                id="depreciationsAssetTable"
+                                data-pagination="true"
+                                data-search="true"
+                                data-side-pagination="server"
+                                data-show-columns="true"
+                                data-show-export="true"
+                                data-show-refresh="true"
+                                data-sort-order="asc"
+                                data-sort-name="name"
+                                class="table table-striped snipe-table"
+                                data-url="{{ route('api.assets.index',['depreciation_id'=> $depreciation->id]) }}"
+                                data-export-options='{
+                        "fileName": "export-depreciations-{{ date('Y-m-d') }}",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                        }'>
+                        </table>
+
                     </div> <!-- end tab-pane -->
 
                     <!-- tab-pane -->
@@ -50,12 +70,12 @@
                                 <div class="table-responsive">
 
                                     <table
-                                            data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayoutSeats() }}"
-                                            data-cookie-id-table="seatsTable"
-                                            data-id-table="seatsTable"
-                                            id="seatsTable"
+                                            data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+                                            data-cookie-id-table="depreciationsLicenseTable"
+                                            data-id-table="depreciationsLicenseTable"
+                                            id="depreciationsLicenseTable"
                                             data-pagination="true"
-                                            data-search="false"
+                                            data-search="true"
                                             data-side-pagination="server"
                                             data-show-columns="true"
                                             data-show-export="true"
@@ -63,7 +83,7 @@
                                             data-sort-order="asc"
                                             data-sort-name="name"
                                             class="table table-striped snipe-table"
-                                            data-url="{{ route('api.assets.index',['depreciation'=> $depreciation->id]) }}"
+                                            data-url="{{ route('api.licenses.index',['depreciation_id'=> $depreciation->id]) }}"
                                             data-export-options='{
                         "fileName": "export-depreciations-{{ date('Y-m-d') }}",
                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -82,18 +102,12 @@
 
 
         </div>
-        <div class="col-md-3">
-            <h2>Depreciation info:</h2>
-        </div>
+
     </div>
 
 @stop
 
 @section('moar_scripts')
-    @include ('partials.bootstrap-table', [
-        'exportFile' => 'assets-export',
-        'search' => true,
-        'columns' => \App\Presenters\AssetPresenter::dataTableLayout()
-    ])
+    @include ('partials.bootstrap-table')
 
 @stop
