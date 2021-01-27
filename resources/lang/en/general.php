@@ -243,5 +243,7 @@
     'i_accept'              => 'I accept',
     'i_decline'             => 'I decline',
     'sign_tos'              => 'Sign below to indicate that you agree to the terms of service:',
-    'clear_signature'       => 'Clear Signature'
+    'clear_signature'       => 'Clear Signature',
+    'show_help'             => 'Show help',
+    'hide_help'             => 'Hide help',
     ];

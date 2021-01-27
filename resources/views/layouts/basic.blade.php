@@ -11,10 +11,15 @@
     <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->favicon) : 'favicon.ico' }} ">
     {{-- stylesheets --}}
     <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
-
-
-    <link rel="stylesheet" href="{{ url('css/dist/all.css') }}">
     <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
+
+    <script nonce="{{ csrf_token() }}">
+        window.snipeit = {
+            settings: {
+                "per_page": 50
+            }
+        };
+    </script>
 
 
     @if (($snipeSettings) && ($snipeSettings->header_color))
@@ -64,6 +69,11 @@
     @endif
     </div>
 
+    {{-- Javascript files --}}
+    <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+
+
+    @stack('js')
 </body>
 
 </html>
