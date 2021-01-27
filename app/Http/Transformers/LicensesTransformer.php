@@ -29,6 +29,8 @@ class LicensesTransformer
             'order_number' => e($license->order_number),
             'purchase_order' => e($license->purchase_order),
             'purchase_date' => Helper::getFormattedDateObject($license->purchase_date, 'date'),
+            'termination_date' => Helper::getFormattedDateObject($license->termination_date, 'date'),
+            'depreciation' => ($license->depreciation) ? ['id' => (int) $license->depreciation->id,'name'=> e($license->depreciation->name)] : null,
             'purchase_cost' => e($license->purchase_cost),
             'notes' => e($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
