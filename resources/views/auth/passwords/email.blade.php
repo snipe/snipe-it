@@ -34,6 +34,7 @@
                                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
+                                            <label for="username">{{ trans('admin/users/table.username') }}: </label>
                                             <input type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="{{ trans('admin/users/table.username') }}" aria-label="username">
                                             {!! $errors->first('username', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                                         </div>
