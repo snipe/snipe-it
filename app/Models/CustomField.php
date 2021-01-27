@@ -287,7 +287,7 @@ class CustomField extends Model
     {
         $arr = preg_split("/\\r\\n|\\r|\\n/", $this->field_values);
 
-        if (($this->element!='checkbox') && ($this->element!='checkbox')) {
+        if (($this->element!='checkbox') && ($this->element!='radio')) {
             $result[''] = 'Select '.strtolower($this->format);
         }
 
