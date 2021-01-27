@@ -20,7 +20,7 @@ class DepreciationsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Depreciation::class);
-        $allowed_columns = ['id','name','created_at'];
+        $allowed_columns = ['id','name','months','created_at'];
 
         $depreciations = Depreciation::select('id','name','months','user_id','created_at','updated_at');
 
