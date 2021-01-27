@@ -103,11 +103,32 @@ class LicensesController extends Controller
             case 'category':
                 $licenses = $licenses->leftJoin('categories', 'licenses.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
                 break;
+            case 'depreciation':
+                $licenses = $licenses->leftJoin('depreciations', 'licenses.depreciation_id', '=', 'depreciations.id')->orderBy('depreciations.name', $order);
+                break;
             case 'company':
                 $licenses = $licenses->leftJoin('companies', 'licenses.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
                 break;
             default:
-                $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial','company','category','license_name','license_email','free_seats_count','seats'];
+                $allowed_columns =
+                    [
+                        'id',
+                        'name',
+                        'purchase_cost',
+                        'expiration_date',
+                        'purchase_order',
+                        'order_number',
+                        'notes',
+                        'purchase_date',
+                        'serial',
+                        'company',
+                        'category',
+                        'license_name',
+                        'license_email',
+                        'free_seats_count',
+                        'seats',
+                        'termination_date',
+                    ];
                 $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
                 $licenses = $licenses->orderBy($sort, $order);
                 break;
