@@ -96,13 +96,13 @@
     <script nonce="{{ csrf_token() }}">
         $(document).ready(function () {
             $("#show").click(function(){
-                $("#help-text").show();
+                $("#help-text").fadeIn(500);
                 $("#show").hide();
                 $("#hide").show();
             });
 
             $("#hide").click(function(){
-                $("#help-text").hide();
+                $("#help-text").fadeOut(300);
                 $("#show").show();
                 $("#hide").hide();
             });
