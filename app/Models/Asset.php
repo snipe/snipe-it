@@ -246,13 +246,18 @@ class Asset extends Depreciable
      */
     public function availableForCheckout()
     {
-        if (
-        ((!$this->assignedTo) && ($this->assetstatus->archived == 0)) ||
-            ((empty($this->assigned_to)) &&
-            (empty($this->deleted_at)) &&
-            (($this->assetstatus)  && ($this->assetstatus->deployable == 1))))
-        {
-            return true;
+
+        // This asset is not currently assigned to anyone and is not deleted...
+        if ((!$this->assigned_to) && (!$this->deleted_at)) {
+
+            // The asset status is not archived and is deployable
+            if (($this->assetstatus) && ($this->assetstatus->archived == '0')
+                && ($this->assetstatus->deployable == '1'))
+            {
+
+                return true;
+            }
+
         }
         return false;
     }
