@@ -10,7 +10,15 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('depreciations.edit', ['depreciation' => $depreciation->id]) }}" class="btn btn-sm btn-primary pull-right">{{ trans('admin/depreciations/table.update') }} </a>
+    <div class="btn-group pull-right">
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{{ route('depreciations.edit', ['depreciation' => $depreciation->id]) }}">{{ trans('general.update') }}</a></li>
+            <li><a href="{{ route('depreciations.create') }}">{{ trans('general.create') }}</a></li>
+        </ul>
+    </div>
 @stop
 
 {{-- Page content --}}
