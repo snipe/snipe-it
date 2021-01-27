@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Asset Depreciations
+  Depreciations
 @parent
 @stop
 
@@ -22,6 +22,7 @@ Asset Depreciations
         <div class="table-responsive">
 
           <table
+                  data-columns="{{ \App\Presenters\DepreciationPresenter::dataTableLayout() }}"
                   data-cookie-id-table="depreciationsTable"
                   data-pagination="true"
                   data-id-table="depreciationsTable"
@@ -39,14 +40,6 @@ Asset Depreciations
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                     }'>
 
-            <thead>
-              <tr>
-                <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-                <th data-sortable="true" data-field="name">{{ trans('admin/depreciations/table.title') }}</th>
-                <th data-sortable="false" data-field="months">{{ trans('admin/depreciations/table.term') }}</th>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"  data-formatter="depreciationsActionsFormatter">{{ trans('table.actions') }}</th>
-              </tr>
-            </thead>
           </table>
         </div>
       </div>
