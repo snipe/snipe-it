@@ -88,16 +88,16 @@ class AssetModelsController extends Controller
             case 'manufacturer':
                 $assetmodels->OrderManufacturer($order);
                 break;
+            case 'category':
+                $assetmodels->OrderCategory($order);
+                break;
             default:
                 $assetmodels->orderBy($sort, $order);
                 break;
         }
 
-
-
-        $total = $assetmodels->count();
         $assetmodels = $assetmodels->skip($offset)->take($limit)->get();
-        return (new AssetModelsTransformer)->transformAssetModels($assetmodels, $total);
+        return (new AssetModelsTransformer)->transformAssetModels($assetmodels, $assetmodels->count());
     }
 
 
