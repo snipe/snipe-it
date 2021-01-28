@@ -32,6 +32,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#assets" data-toggle="tab">{{ trans('general.assets') }}</a></li>
                     <li><a href="#licenses" data-toggle="tab">{{ trans('general.licenses') }}</a></li>
+                    <li><a href="#models" data-toggle="tab">{{ trans('general.asset_models') }}</a></li>
                     </ul>
 
                 <div class="tab-content">
@@ -97,7 +98,46 @@
                         </div> <!--/.row-->
                     </div> <!-- /.tab-pane -->
 
+                    <!-- tab-pane -->
+                    <div class="tab-pane" id="models">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="table-responsive">
+
+                                    <table
+                                            data-columns="{{ \App\Presenters\AssetModelPresenter::dataTableLayout() }}"
+                                            data-cookie-id-table="depreciationsModelsTable"
+                                            data-id-table="depreciationsModelsTable"
+                                            id="depreciationsModelsTable"
+                                            data-pagination="true"
+                                            data-search="true"
+                                            data-side-pagination="server"
+                                            data-show-columns="true"
+                                            data-show-export="true"
+                                            data-show-refresh="true"
+                                            data-sort-order="asc"
+                                            data-sort-name="name"
+                                            class="table table-striped snipe-table"
+                                            data-url="{{ route('api.models.index',['depreciation_id'=> $depreciation->id]) }}"
+                                            data-export-options='{
+                        "fileName": "export-depreciations-bymodel-{{ date('Y-m-d') }}",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                        }'>
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                        </div> <!--/.row-->
+                    </div> <!-- /.tab-pane -->
+
                 </div> <!-- /.tab-content -->
+
+
+
+            </div> <!-- /.tab-content -->
             </div> <!-- nav-tabs-custom -->
 
 
