@@ -232,7 +232,7 @@ body {
 }
 .btn-default {
   background-color: var(--back-main);
-  color: var(--header);
+  color: var(--text-main);
 }
 .btn-default:active,
 .btn-default:focus,
