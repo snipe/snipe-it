@@ -355,7 +355,19 @@ $(document).ready(function () {
         var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
         if (datalist.image) {
             var inner_div = $("<div style='width: 30px;'>");
-            var img = $("<img src='' style='max-height: 20px; max-width: 30px;'>");
+            /******************************************************************
+             * 
+             * We are specifically chosing empty alt-text below, because this 
+             * image conveys no additional information, relative to the text
+             * that will *always* be there in any select2 list that is in use
+             * in Snipe-IT. If that changes, we would probably want to change
+             * some signatures of some functions, but right now, we don't want
+             * screen readers to say "HP SuperJet 5000, .... picture of HP 
+             * SuperJet 5000..." and so on, for every single row in a list of
+             * assets or models or whatever.
+             * 
+             *******************************************************************/
+            var img = $("<img src='' style='max-height: 20px; max-width: 30px;' alt=''>");
             // console.warn("Img is: ");
             // console.dir(img);
             // console.warn("Strigularly, that's: ");
