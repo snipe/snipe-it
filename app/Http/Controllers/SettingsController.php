@@ -1142,6 +1142,7 @@ class SettingsController extends Controller
      */
     public function getPurge()
     {
+        \Log::warning('User ID '.Auth::user()->id.' is attempting a PURGE');
         return view('settings.purge-form');
     }
 
