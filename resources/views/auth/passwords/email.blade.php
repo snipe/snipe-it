@@ -5,7 +5,12 @@
 @section('content')
 
     @if ($snipeSettings->custom_forgot_pass_url)
-        <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.forgot_password')  }}</a>
+        <div class="col-md-4 col-md-offset-4">
+            <div class="box box-header text-center">
+       <h2 class="box-title"> <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.ldap_reset_password')  }}</a>
+       </h2>
+            </div>
+        </div>
     @else
 
     <form class="form" role="form" method="POST" action="{{ url('/password/email') }}">
