@@ -205,7 +205,7 @@ a,
 a:link,
 a:visited,
 .btn-primary.hover {
-  color: var(--header);
+  color: var(--text-main);
 }
 #accessoriesTable > tbody > tr > td > nobr > a > i.fa {
   color: var(--text-main);
@@ -228,11 +228,11 @@ body {
 .box-footer,
 .box-header {
   background-color: var(--back-sub);
-  color: var(--header);
+  color: var(--text-main);
 }
 .btn-default {
   background-color: var(--back-main);
-  color: var(--header);
+  color: var(--text-main);
 }
 .btn-default:active,
 .btn-default:focus,
@@ -408,13 +408,13 @@ a {
   color: var(--link);
 }
 a:link {
-  color: var(--header);
+  color: var(--text-main);
 }
 a:hover {
   color: var(--light-link);
 }
 a:visited {
-  color: var(--header);
+  color: var(--text-sub);
 }
 .row-striped {
   vertical-align: top;
