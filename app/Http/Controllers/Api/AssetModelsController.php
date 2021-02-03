@@ -259,7 +259,7 @@ class AssetModelsController extends Controller
                 $assetmodel->use_text .= (($assetmodel->manufacturer) ? $assetmodel->manufacturer->name.' ' : '');
             }
 
-            $assetmodel->use_text .=  e($assetmodel->name);
+            $assetmodel->use_text .=  $assetmodel->name;
 
             if (($settings->modellistCheckedValue('model_number')) && ($assetmodel->model_number!='')) {
                 $assetmodel->use_text .=  ' (#'.$assetmodel->model_number.')';
