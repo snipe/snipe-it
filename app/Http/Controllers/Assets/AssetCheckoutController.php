@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Assets;
 
 
 use App\Exceptions\CheckoutNotAllowed;
+use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
@@ -33,7 +34,8 @@ class AssetCheckoutController extends Controller
         $this->authorize('checkout', $asset);
 
         if ($asset->availableForCheckout()) {
-            return view('hardware/checkout', compact('asset'));
+            return view('hardware/checkout', compact('asset'))
+                ->with('statusLabel_list', Helper::deployableStatusLabelList());
         }
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
 
@@ -73,6 +75,10 @@ class AssetCheckoutController extends Controller
             $expected_checkin = '';
             if ($request->filled('expected_checkin')) {
                 $expected_checkin = $request->get('expected_checkin');
+            }
+
+            if ($request->filled('status_id')) {
+                $asset->status_id = $request->get('status_id');
             }
 
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {

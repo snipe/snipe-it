@@ -429,6 +429,26 @@ class Helper
     }
 
     /**
+     * Get the list of deployable status labels in an array to make a dropdown menu
+     *
+     * @todo This should probably be a selectlist, same as the other endpoints
+     * and we should probably add to the API controllers to make sure that
+     * the status_id submitted is actually really deployable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.1.0]
+     * @return Array
+     */
+    public static function deployableStatusLabelList()
+    {
+        $statuslabel_list =  Statuslabel::where('deployable', '=', '1')->orderBy('default_label', 'desc')
+                ->orderBy('name','asc')
+                ->orderBy('deployable','desc')
+                ->pluck('name', 'id')->toArray();
+        return $statuslabel_list;
+    }
+
+    /**
      * Get the list of status label types in an array to make a dropdown menu
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
