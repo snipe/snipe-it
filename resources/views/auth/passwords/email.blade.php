@@ -4,11 +4,21 @@
 {{-- Page content --}}
 @section('content')
 
+
     @if ($snipeSettings->custom_forgot_pass_url)
-        <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">
-            {{ trans('auth/general.forgot_password')  }}
-        </a>
+        <!--  The admin settings specify an LDAP password reset URL to let's send them there -->
+        <div class="col-md-4 col-md-offset-4" style="margin-top: 20px;">
+            <div class="box box-header text-center">
+                <h3 class="box-title">
+                    <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">
+                        {{ trans('auth/general.ldap_reset_password')  }}
+                    </a>
+                </h3>
+            </div>
+        </div>
+
     @else
+
 
     <form class="form" role="form" method="POST" action="{{ url('/password/email') }}">
         {!! csrf_field() !!}

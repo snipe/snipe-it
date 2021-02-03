@@ -229,13 +229,13 @@
 
             var auto_tag        = $("#asset_tag").val().replace(/[^\d]/g, '');
             var box_html        = '';
-
+			const zeroPad 		= (num, places) => String(num).padStart(places, '0');
 
             // Check that we haven't exceeded the max number of asset fields
             if (x < max_fields) {
 
                 if (auto_tag!='') {
-                     auto_tag = parseInt(auto_tag) + parseInt(x);
+                     auto_tag = zeroPad(parseInt(auto_tag) + parseInt(x),auto_tag.length);
                 } else {
                      auto_tag = '';
                 }
