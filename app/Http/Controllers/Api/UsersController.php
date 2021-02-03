@@ -185,16 +185,16 @@ class UsersController extends Controller
         foreach ($users as $user) {
             $name_str = '';
             if ($user->last_name!='') {
-                $name_str .= e($user->last_name).', ';
+                $name_str .= $user->last_name.', ';
             }
-            $name_str .= e($user->first_name);
+            $name_str .= $user->first_name;
 
             if ($user->username!='') {
-                $name_str .= ' ('.e($user->username).')';
+                $name_str .= ' ('.$user->username.')';
             }
 
             if ($user->employee_num!='') {
-                $name_str .= ' - #'.e($user->employee_num);
+                $name_str .= ' - #'.$user->employee_num;
             }
 
             $user->use_text = $name_str;

@@ -212,7 +212,7 @@ $(document).ready(function () {
                     };
                     return data;
                 },
-                processResults: function (data, params) {
+                /* processResults: function (data, params) {
 
                     params.page = params.page || 1;
 
@@ -224,12 +224,12 @@ $(document).ready(function () {
                     };
 
                     return answer;
-                },
+                }, */
                 cache: true
             },
-            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-            templateResult: formatDatalist,
-            templateSelection: formatDataSelection
+            //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            templateResult: formatDatalistSafe,
+            //templateSelection: formatDataSelection
         });
 
     });
@@ -331,17 +331,69 @@ $(document).ready(function () {
             return loading_markup;
         }
 
-        var markup = "<div class='clearfix'>" ;
-        markup +="<div class='pull-left' style='padding-right: 10px;'>";
+        var markup = '<div class="clearfix">' ;
+        markup += '<div class="pull-left" style="padding-right: 10px;">';
         if (datalist.image) {
             markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;' alt='" +  datalist.text + "'></div>";
         } else {
-            markup += "<div style='height: 20px; width: 30px;'></div>";
+            markup += '<div style="height: 20px; width: 30px;"></div>';
         }
 
         markup += "</div><div>" + datalist.text + "</div>";
         markup += "</div>";
         return markup;
+    }
+
+    function formatDatalistSafe(datalist) {
+        // console.warn("What in the hell is going on with Select2?!?!!?!?");
+        // console.warn($.select2);
+        if (datalist.loading) {
+            return $('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+        }
+
+        var root_div = $("<div class='clearfix'>") ;
+        var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
+        if (datalist.image) {
+            var inner_div = $("<div style='width: 30px;'>");
+            /******************************************************************
+             * 
+             * We are specifically chosing empty alt-text below, because this 
+             * image conveys no additional information, relative to the text
+             * that will *always* be there in any select2 list that is in use
+             * in Snipe-IT. If that changes, we would probably want to change
+             * some signatures of some functions, but right now, we don't want
+             * screen readers to say "HP SuperJet 5000, .... picture of HP 
+             * SuperJet 5000..." and so on, for every single row in a list of
+             * assets or models or whatever.
+             * 
+             *******************************************************************/
+            var img = $("<img src='' style='max-height: 20px; max-width: 30px;' alt=''>");
+            // console.warn("Img is: ");
+            // console.dir(img);
+            // console.warn("Strigularly, that's: ");
+            // console.log(img);
+            img.attr("src", datalist.image );
+            inner_div.append(img)
+        } else {
+            var inner_div=$("<div style='height: 20px; width: 30px;'></div>");
+        }
+        left_pull.append(inner_div);
+        root_div.append(left_pull);
+        var name_div = $("<div>");
+        name_div.text(datalist.text);
+        root_div.append(name_div)
+        var safe_html = root_div.get(0).outerHTML;
+        var old_html = formatDatalist(datalist);
+        if(safe_html != old_html) {
+            console.log("HTML MISMATCH: ");
+            console.log("FormatDatalistSafe: ");
+            // console.dir(root_div.get(0));
+            console.log(safe_html);
+            console.log("FormatDataList: ");
+            console.log(old_html);
+        }
+        return root_div;
+
     }
 
     function formatDataSelection (datalist) {
