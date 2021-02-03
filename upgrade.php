@@ -1,7 +1,7 @@
 <?php
 (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) && die('Access denied.');
 
-$required_version = '7.2.0';
+$required_version = '7.2.5';
 
 if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_getpwuid'))) {
 	echo "Skipping user check as it is not supported on Windows or Posix is not installed on this server. \n";
