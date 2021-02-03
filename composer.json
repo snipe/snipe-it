@@ -108,9 +108,6 @@
     "preferred-install": "dist",
     "sort-packages": true,
     "optimize-autoloader": true,
-    "process-timeout": 3000,
-    "platform": {
-      "php": "7.2"
-    }
+    "process-timeout": 3000
   }
 }
