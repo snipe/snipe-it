@@ -108,10 +108,15 @@ a {
   --background: #222;
   --back-main: #333;
   --back-sub: #444;
+  --button-default: darken(@green, 15%);
+  --button-primary: darken(@green, 25%);
+  --button-hover: darken(@green, 30%);
   --header: @green; /* Use same as Header picker */
-  --text-main: #FFF;
-  --text-sub: #BBB;
-  --link: lighten(@green, 50%); /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: lighten(@green, 30%); /* Use same as Header picker, lighten by 70% */
+  --visited-link: lighten(@green, 40%); /* Use same as Header picker, lighten by 70% */
+  --hover-link: lighten(@green, 45%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
@@ -123,7 +128,11 @@ a {
   border-color: var(--header);
 }
 
-.navbar-nav>li>a:link {
+.bootstrap-table .fixed-table-container .table thead th .sortable {
+  color: var(--nav-link);
+}
+
+.thead, .navbar-nav>li>a:link {
   color: var(--nav-link);
 }
 
@@ -131,29 +140,42 @@ a {
   background-color: var(--back-main);
   color: var(--text-main);
 }
-.popover {
-  background-color:var(--back-main);
-}
-.popover-title {
-  background-color: #00a65a;
+
+a:link {
+  color: var(--link);
 }
 
-a, a:link, a:visited, .btn-primary.hover {
-  color: var(--header);
+a:visited {
+  color: var(--nav-link);
 }
+
+a:hover {
+  color: var(--hover-link);
+}
+
+.btn-primary.hover {
+  color: var(--nav-link);
+}
+
+.small-box h3, .small-box p {
+  color: var(--nav-link) !important;
+  a:hover {
+    text-decoration: none;
+    color: var(--nav-link) !important;
+  }
+}
+
+
 #accessoriesTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
 }
 #assetsListingTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
 }
+
 #assetsListingTable>tbody>tr.selected>td {
   background-color: var(--back-main);
 }
-#assetsListingTable>tbody>tr>td {
-  color: var(--link);
-}
-
 body {
   color: var(--text-main);
 }
@@ -166,19 +188,25 @@ body {
   color: var(--header);
 }
 .btn-default{
-  background-color: var(--back-main);
-  color: var(--header);
+  background-color: var(--button-default);
+  color: var(--link);
 }
+
+.btn-default dropdown-toggle {
+  background-color: var(--button-default);
+  color: var(--link);
+}
+
 .btn-default:active, .btn-default:focus, .btn-default:hover, .btn-default.active {
-  background-color: var(--back-sub);
-  color: var(--header);
+  background-color: var(--button-hover);
+  color: var(--link);
 }
-.btn-primary, .btn-primary.hover, .btn-primary:active, .text-blue {
+.btn-primary, .btn-primary.hover, .btn-primary:active, .text-green {
   color: var(--text-main)!important;
 }
 .btn-primary:hover {
-  background-color: var(--back-main);
-  color: var(--header)!important;
+  background-color: var(--button-primary);
+  color: var(--link)!important;
 }
 #componentsTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
@@ -211,13 +239,6 @@ body {
   background-color: var(--back-main);
   color: var(--text-main);
 }
-.dynamic-form-row{
-  color: @green;
-}
-
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-  color: var(--header);
-}
 .form-control {
   background-color: var(--back-main);
   color: var(--text-main);
@@ -239,9 +260,6 @@ input[type=text], input[type=search] {
 .input-group, .input-group-addon {
   background-color: var(--back-sub)!important;
   color: var(--text-main);
-}
-li.select2-results__option{
-  color:@green;
 }
 #licensesTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
@@ -317,21 +335,25 @@ li.select2-results__option{
 .table-striped>tbody>tr:nth-of-type(odd) {
   background-color: var(--back-sub);
 }
-#webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa {
+#webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa, .box-body, .box-footer, .box-header {
   color: var(--text-main);
 }
-#webui>#app>.row>.col-md-12>.box>.box-body>.row>.col-md-12 {
-  color:@green;
+
+.box-header.with-border {
+  border-bottom: #000;
 }
+
 a {
   color: var(--link);
+
   &:link {
-    color: var(--header)  }
+    color: var(--link)  }
   &:hover {
-    color: var(--light-link);
+    color: var(--hover-link);
+    text-decoration: underline;
   }
   &:visited {
-    color: var(--header)
+    color: var(--visited-link)
   }
 }
 
@@ -361,3 +383,4 @@ a {
   border-top: 1px solid #dddddd;
   display: table-cell;
 }
+
