@@ -170,6 +170,7 @@ a:visited {
   --background: #222;
   --back-main: #333;
   --back-sub: #444;
+  --back-sub-alt: #dfd9d8;
   --button-default: #b06f09;
   --button-primary: #7f5006;
   --button-hover: #674105;
@@ -215,6 +216,9 @@ a:visited {
 a:hover {
   color: var(--hover-link);
 }
+a:link.btn-default {
+  color: var(--nav-link);
+}
 .btn-primary.hover {
   color: var(--nav-link);
 }
@@ -256,24 +260,24 @@ body {
 }
 .btn-default dropdown-toggle {
   background-color: var(--button-default);
-  color: var(--link);
+  color: var(--nav-link);
 }
 .btn-default:active,
 .btn-default:focus,
 .btn-default:hover,
 .btn-default.active {
   background-color: var(--button-hover);
-  color: var(--link);
+  color: var(--nav-link);
 }
 .btn-primary,
 .btn-primary.hover,
 .btn-primary:active,
 .text-yellow {
-  color: var(--text-main) !important;
+  color: var(--nav-link) !important;
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
-  color: var(--link) !important;
+  color: var(--nav-link) !important;
 }
 #componentsTable > tbody > tr > td > nobr > a > i.fa {
   color: var(--text-main);
@@ -424,6 +428,10 @@ input[type=search] {
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: var(--back-sub);
+}
+.table-striped > tbody > tr:nth-of-type(even) {
+  background-color: var(--back-sub-alt);
+  color: var(--header);
 }
 #webui > div > div > div > div > div > table > tbody > tr > td > a > i.fa,
 .box-body,
