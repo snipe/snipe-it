@@ -18,18 +18,6 @@ services:
     networks:
     - snipeit-backend
 
-  # caddy:
-  #   image: caddy:latest
-  #   ports:
-  #   - 8000:80
-  #   - 8443:443
-  #   volumes:
-  #   - ./Caddyfile:/etc/caddy/Caddyfile
-  #   env_file:
-  #   - .env.docker
-  #   networks:
-  #   - snipeit-backend
-
   mariadb:
     image: mariadb:latest
     volumes:
@@ -51,7 +39,6 @@ services:
     - 8025:8025
     networks:
     - snipeit-backend
-
 
 
 volumes:
