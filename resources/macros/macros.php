@@ -582,10 +582,21 @@ Form::macro('user_skin', function ($name = "skin", $selected = null, $class = nu
 
     $formats = array(
         '' => 'Site Default',
-        'light-blue' => 'Default Blue',
-        'green-dark' => 'Green Dark',
-        'red-dark' => 'Red Dark',
-        'orange-dark' => 'Orange Dark',
+        'blue' => 'Default Blue',
+        'blue-dark' => 'Blue (Dark Mode)',
+        'green' => 'Green Dark',
+        'green-dark' => 'Green (Dark Mode)',
+        'red' => 'Red Dark',
+        'red-dark' => 'Red (Dark Mode)',
+        'orange' => 'Orange Dark',
+        'orange-dark' => 'Orange (Dark Mode)',
+        'black' => 'Black',
+        'black-dark' => 'Black (Dark Mode)',
+        'purple' => 'Purple',
+        'purple-dark' => 'Purple (Dark Mode)',
+        'yellow' => 'Yellow',
+        'yellow-dark' => 'Yellow (Dark Mode)',
+        'contrast' => 'High Contrast',
     );
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px">';
