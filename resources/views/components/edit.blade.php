@@ -3,7 +3,7 @@
     'updateText' => trans('admin/components/general.update'),
     'helpPosition'  => 'right',
     'helpText' => trans('help.components'),
-    'formAction' => ($item) ? route('components.update', ['component' => $item->id]) : route('components.store'),
+    'formAction' => (isset($item->id)) ? route('components.update', ['component' => $item->id]) : route('components.store'),
 
 ])
 

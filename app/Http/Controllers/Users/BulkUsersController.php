@@ -33,9 +33,6 @@ class BulkUsersController extends Controller
 
         // Make sure there were users selected
         if (($request->filled('ids')) && (count($request->input('ids')) > 0)) {
-
-            $statuslabel_list = Helper::statusLabelList();
-
             // Get the list of affected users
             $users = User::whereIn('id', array_keys(request('ids')))
                 ->with('groups', 'assets', 'licenses', 'accessories')->get();
@@ -45,17 +42,16 @@ class BulkUsersController extends Controller
                     ->with('groups', Group::pluck('name', 'id'));
 
             } elseif ($request->input('bulk_actions') == 'delete') {
-                return view('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
+                return view('users/confirm-bulk-delete')->with('users', $users)->with('statuslabel_list',  Helper::statusLabelList());
+
 
             } elseif ($request->input('bulk_actions') == 'bulkpasswordreset') {
-                if ($users) {
-                    foreach ($users as $user) {
-                        if (($user->activated=='1') && ($user->email!='')) {
-                            $credentials = ['email' => $user->email];
-                            Password::sendResetLink($credentials, function (Message $message) {
-                                $message->subject($this->getEmailSubject());
-                            });
-                        }
+                foreach ($users as $user) {
+                    if (($user->activated=='1') && ($user->email!='')) {
+                        $credentials = ['email' => $user->email];
+                        Password::sendResetLink($credentials, function (Message $message) {
+                            $message->subject($this->getEmailSubject());
+                        });
                     }
                 }
                 return redirect()->back()->with('success', trans('admin/users/message.password_resets_sent'));

@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Тан уруу нууц үгийн холбоосыг явууллаа!',
-    'user'			=> 'No matching active user found with that email.',
+    'user'			=> 'Уг имэйл дээр бүртгэлтэй хэрэглэгч байхгүй байна.',
 ];
 

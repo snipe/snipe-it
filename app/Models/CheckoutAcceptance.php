@@ -19,7 +19,6 @@ class CheckoutAcceptance extends Model
     protected $dates = [
     	'accepted_at',
     	'declined_at',
-
     	'deleted_at'
     ];
 
@@ -96,7 +95,7 @@ class CheckoutAcceptance extends Model
      * Filter checkout acceptences by the user
      * @param  Illuminate\Database\Eloquent\Builder $query
      * @param  User    $user
-     * @return Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeForUser(Builder $query, User $user) {
         return $query->where('assigned_to_id', $user->id);
@@ -105,7 +104,7 @@ class CheckoutAcceptance extends Model
     /**
      * Filter to only get pending acceptances
      * @param  Illuminate\Database\Eloquent\Builder $query
-     * @return Illuminate\Database\Eloquent\Builder 
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopePending(Builder $query) {
         return $query->whereNull('accepted_at')->whereNull('declined_at');

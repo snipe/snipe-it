@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'За категориите',
-    'about_categories'  				=> 'Категориите ви помагаат да ги организирате вашите средства. Некои примери може да бидат &quot;Десктоп компјутери&quot;, &quot;Лаптопи&quot;, &quot;Мобилни телефони&quot;, &quot;Таблети&quot;, и така натаму, но можете да користите категории и на кој било начин кој има смисла за вас.',
     'asset_categories' 					=> 'Категории на основни средства',
     'category_name'  					=> 'Име на категорија',
     'checkin_email'                     => 'Send email to user on checkin/checkout.',

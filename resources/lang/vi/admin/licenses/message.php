@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Tài sản bạn đang cố gắng liên kết với bản quyền đã được sở hữu hởi một người nào đó khác với người đang được lựa chọn để gán trong danh sách xổ xuống.',
     'assoc_users'	 => 'Bản quyền này hiện tại đã được checkout đến một người dùng và có thể đã bị xóa. Xin vui lòng kiểm tra lại bản quyền đầu tiên, và kế đến có gắng xóa thêm lần nữa. ',
     'select_asset_or_person' => 'Bạn phải chọn một nội dung hoặc người dùng, nhưng không phải cả hai.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

@@ -2,39 +2,44 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Models\Group;
 
 class UpdateGroupFieldForReporting extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		//
-		// Schema::table('groups', function(Blueprint $table)
-		// {
-		// 	//
-		// });
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
 
-    DB::update('update '.DB::getTablePrefix().'groups set permissions = ? where id = ?', ['{"admin":1,"users":1,"reports":1}', 1]);
+        // This is janky because we had to do a back in time change to handle a MySQL 8+
+        // compatibility issue.
 
-    DB::update('update '.DB::getTablePrefix().'groups set permissions = ? where id = ?', ['{"users":1,"reports":1}', 2]);
+        // Ideally we'd be using the model here, but since we can't really know whether this is an upgrade
+        // or a fresh install, we have to check which table is being used.
+        
+        if (Schema::hasTable('permission_groups')) {
 
-      // DB::statement('UPDATE '.$prefix.'groups SET permissions="{\"admin\":1,\"users\":1,\"reports\":1}" where id=1');
-      // DB::statement('UPDATE '.$prefix.'groups SET permissions="{\"users\":1,\"reports\":1}" where id=2');
+            Group::where('id', 1)->update(['permissions' => '{"users-poop":1,"reports":1}']);
+            Group::where('id', 2)->update(['permissions' => '{"users-pop":1,"reports":1}']);
 
-	}
+        } elseif (Schema::hasTable('groups')) {
+            DB::update('update '.DB::getTablePrefix().'groups set permissions = ? where id = ?', ['{"admin-farts":1,"users":1,"reports":1}', 1]);
+            DB::update('update '.DB::getTablePrefix().'groups set permissions = ? where id = ?', ['{"users-farts":1,"reports":1}', 2]);
+        }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		//
-	}
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
 
 }

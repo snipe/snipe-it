@@ -2,16 +2,17 @@
 
 return array(
 
-    'accepted'                  => 'Je hebt met succes dit product geaccepteerd.',
-    'declined'                  => 'Je hebt met succes dit product geweigerd.',
+    'accepted'                  => 'Je hebt dit asset succesvol geaccepteerd.',
+    'declined'                  => 'Je hebt dit asset met succes geweigerd.',
     'bulk_manager_warn'	        => 'Uw gebruikers zijn succesvol bijgewerkt, de gekozen manager kon echter niet toegepast worden omdat deze persoon ook in de lijst staat, gebruikers mogen niet hun eigen manager zijn. Probeer het nogmaals en selecteer de gebruikers zonder de manager.',
     'user_exists'               => 'Gebruiker bestaat reeds!',
     'user_not_found'            => 'Gebruiker [:id] bestaat niet.',
     'user_login_required'       => 'Het veld gebruikersnaam is verplicht.',
     'user_password_required'    => 'Het veld wachtwoord is verplicht.',
     'insufficient_permissions'  => 'Onvoldoende rechten.',
-    'user_deleted_warning'      => 'Deze gebruiker werd verwijderd. Om deze gebruiker te bewerken of toe te wijzen aan materiaal, zal deze opnieuw geactiveerd moeten worden.',
+    'user_deleted_warning'      => 'Deze gebruiker is verwijderd. Je zult deze gebruiker moeten herstellen om hem te bewerken of om nieuwe assets toe te wijzen.',
     'ldap_not_configured'        => 'LDAP integratie is niet geconfigureerd voor deze installatie.',
+    'password_resets_sent'      => 'De geselecteerde gebruikers die zijn geactiveerd en die een geldig e-mailadres hebben, hebben een wachtwoord reset link ontvangen.',
 
 
     'success' => array(
@@ -34,9 +35,9 @@ return array(
         'delete_has_assets' => 'Deze gebruiker heeft toegewezen items en kon niet worden verwijderd.',
         'unsuspend' => 'Er was een probleem tijdens het opnieuw inschakelen van de gebruiker. Probeer opnieuw, aub.',
         'import'    => 'Er was een probleem met het importeren van de gebruikers. Probeer het opnieuw.',
-        'asset_already_accepted' => 'Dit product is al geaccepteerd.',
-        'accept_or_decline' => 'Je moet dit product accepteren of weigeren.',
-        'incorrect_user_accepted' => 'Het product wat je probeerde te accepteren is niet uitgecheckt aan jou.',
+        'asset_already_accepted' => 'Dit asset is al geaccepteerd.',
+        'accept_or_decline' => 'Je moet dit asset accepteren of weigeren.',
+        'incorrect_user_accepted' => 'Het asset dat je probeerde te accepteren is niet uitgecheckt aan jou.',
         'ldap_could_not_connect' => 'Kan niet verbinden met de LDAP server. Controleer je LDAP server configuratie in de LDAP configuratie bestand. <br>Fout van LDAP server:',
         'ldap_could_not_bind' => 'Kan niet verbinden met de LDAP server. Controleer je LDAP server configuratie in de LDAP configuratie bestand. <br>Fout van LDAP server: ',
         'ldap_could_not_search' => 'Kan niet zoeken in de LDAP server. Controleer je LDAP server configuratie in de LDAP configuratie bestand. <br>Fout van LDAP server:',

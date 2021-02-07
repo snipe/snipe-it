@@ -23,7 +23,7 @@
     <div class="box box-default">
     <div class="box-header with-border">
         <div class="box-heading">
-            <h3 class="box-title">{{ trans('general.users') }}</h3>
+            <h2 class="box-title">{{ trans('general.users') }}</h2>
         </div>
     </div>
       <div class="box-body">
@@ -56,7 +56,7 @@
       <div class="box box-default">
         <div class="box-header with-border">
           <div class="box-heading">
-            <h3 class="box-title">{{ trans('general.assets') }}</h3>
+            <h2 class="box-title">{{ trans('general.assets') }}</h2>
           </div>
         </div>
         <div class="box-body">
@@ -90,7 +90,7 @@
       <div class="box box-default">
           <div class="box-header with-border">
               <div class="box-heading">
-                  <h3 class="box-title">{{ trans('general.components') }}</h3>
+                  <h2 class="box-title">{{ trans('general.components') }}</h2>
               </div>
           </div>
           <div class="box-body">
@@ -127,7 +127,7 @@
 
     @if ($location->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 20px;">
-        <img src="{{ app('locations_upload_url') }}/{{ $location->image }}" class="img-responsive img-thumbnail" alt="{{ $location->name }}">
+        <img src="{{ Storage::disk('public')->url('locations/'.e($location->image)) }}" class="img-responsive img-thumbnail" alt="{{ $location->name }}">
       </div>
     @endif
       <div class="col-md-12">
@@ -141,17 +141,20 @@
             @if (($location->city!='') || ($location->state!='') || ($location->zip!=''))
               <li>{{ $location->city }} {{ $location->state }} {{ $location->zip }}</li>
             @endif
-            @if (($location->manager))
+            @if ($location->manager)
               <li>{{ trans('admin/users/table.manager') }}: {!! $location->manager->present()->nameUrl() !!}</li>
             @endif
-            @if (($location->parent))
+            @if ($location->parent)
               <li>{{ trans('admin/locations/table.parent') }}: {!! $location->parent->present()->nameUrl() !!}</li>
             @endif
+              @if ($location->ldap_ou)
+                  <li>{{ trans('admin/locations/table.ldap_ou') }}: {{ $location->ldap_ou }}</li>
+              @endif
         </ul>
 
         @if (($location->state!='') && ($location->country!='') && (config('services.google.maps_api_key')))
           <div class="col-md-12 text-center">
-            <img src="https://maps.googleapis.com/maps/api/staticmap?center={{ urlencode($location->city.','.$location->city.' '.$location->state.' '.$location->country.' '.$location->zip) }}&size=500x300&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-responsive img-thumbnail" alt="Map">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?markers={{ urlencode($location->address.','.$location->city.' '.$location->state.' '.$location->country.' '.$location->zip) }}&size=500x300&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-responsive img-thumbnail" alt="Map">
           </div>
         @endif
 

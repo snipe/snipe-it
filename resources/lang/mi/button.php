@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Tukuake',
 	'select_file'				=> 'Tīpako Kōnae ...',
     'select_files'				=> 'Select Files...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

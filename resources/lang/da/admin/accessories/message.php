@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Tilbehøret findes ikke.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Dette tilbehør har pt. :count emner tjekket ud til brugere. Tjek tilbehør ind og prøv igen.',
 
     'create' => array(

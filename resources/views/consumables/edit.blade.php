@@ -3,7 +3,7 @@
     'updateText' => trans('admin/consumables/general.update'),
     'helpPosition'  => 'right',
     'helpText' => trans('help.consumables'),
-    'formAction' => ($item) ? route('consumables.update', ['accessory' => $item->id]) : route('consumables.store'),
+    'formAction' => (isset($item->id)) ? route('consumables.update', ['consumable' => $item->id]) : route('consumables.store'),
 ])
 {{-- Page content --}}
 @section('inputFields')
@@ -11,7 +11,7 @@
 @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/consumables/table.title')])
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id', 'required' => 'true', 'category_type' => 'consumable'])
-@include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id', 'required' => 'true'])
+@include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id'])
 @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 @include ('partials.forms.edit.model_number')
 @include ('partials.forms.edit.item_number')

@@ -123,7 +123,16 @@ class LocationPresenter extends Presenter
                 "switchable" => true,
                 "title" =>  trans('admin/locations/table.country'),
                 "visible" => false,
-            ],[
+            ],
+            [
+                "field" => "ldap_ou",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" =>  trans('admin/locations/table.ldap_ou'),
+                "visible" => false,
+            ],
+            [
                 "field" => "manager",
                 "searchable" => false,
                 "sortable" => true,
@@ -188,7 +197,7 @@ class LocationPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fa fa-map-marker"></i>';
+        return '<i class="fa fa-map-marker" aria-hidden="true"></i>';
     }
     
     public function fullName() {

@@ -16,7 +16,7 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-header with-border">
-        <h3 class="box-title">{{ $custom_fieldset->name }} {{ trans('admin/custom_fields/general.fieldset') }}</h3>
+        <h2 class="box-title">{{ $custom_fieldset->name }} {{ trans('admin/custom_fields/general.fieldset') }}</h2>
         <div class="box-tools pull-right">
         </div>
       </div><!-- /.box-header -->
@@ -27,7 +27,7 @@
             <tr>
               {{-- Hide the sorting handle if we can't update the fieldset --}}
               @can('update', $custom_fieldset)
-              <th class="col-md-1"></th>
+              <th class="col-md-1"><span class="sr-only">Reorder</span></th>
               @endcan
               <th class="col-md-1">{{ trans('admin/custom_fields/general.order') }}</th>
               <th class="col-md-3">{{ trans('admin/custom_fields/general.field_name') }}</th>
@@ -35,7 +35,7 @@
               <th class="col-md-2">{{ trans('admin/custom_fields/general.field_element') }}</th>
               <th class="col-md-1">{{ trans('admin/custom_fields/general.encrypted') }}</th>
               <th class="col-md-1">{{ trans('admin/custom_fields/general.required') }}</th>
-              <th class="col-md-1"></th>
+              <th class="col-md-1"><span class="sr-only">Remove</span></th>
             </tr>
           </thead>
           <tbody>
@@ -56,33 +56,68 @@
               <td>{{$field->format}}</td>
               <td>{{$field->element}}</td>
               <td>{{ $field->field_encrypted=='1' ?  trans('general.yes') : trans('general.no') }}</td>
-              <td>{{$field->pivot->required ? "REQUIRED" : "OPTIONAL"}}</td>
+                <td>
+                    @if ($field->pivot->required)
+                        <a href="{{ route('fields.optional', [$custom_fieldset->id, $field->id]) }}">
+                            <i class="fa fa-check text-success" aria-hidden="true"></i>
+                            <span class="sr-only">Required - click to make optional</span>
+                        </a>
+                    @else
+                        <a href="{{ route('fields.required', [$custom_fieldset->id, $field->id]) }}">
+                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                            <span class="sr-only">Optional - click to make required</span>
+                        </a>
+                    @endif
+                </td>
               <td>
                 @can('update', $custom_fieldset)
-                <a href="{{ route('fields.disassociate', [$field,$custom_fieldset->id]) }}" class="btn btn-sm btn-danger">Remove</a>
+                <a href="{{ route('fields.disassociate', [$field, $custom_fieldset->id]) }}" class="btn btn-sm btn-danger">Remove</a>
                 @endcan
               </td>
             </tr>
             @endforeach
           </tbody>
+          @can('update', $custom_fieldset)
           <tfoot>
             <tr>
-              <td colspan="5" class="text-right">
-                @can('update', $custom_fieldset)
+              <td colspan="8">
                 {{ Form::open(['route' =>
                 ["fieldsets.associate",$custom_fieldset->id],
                 'class'=>'form-horizontal',
                 'id' => 'ordering']) }}
-                {{ Form::checkbox("required","on") }}
-                {{ trans('admin/custom_fields/general.required') }}
-                {{ Form::text("order",$maxid)}}
-                {{ Form::select("field_id",$custom_fields_list,"",["onchange" => "$('#ordering').submit()"]) }}
-                <span class="alert-msg"><?= $errors->first('field_id'); ?></span>
+
+
+                <div class="form-group col-md-4">
+                  <label for="field_id" class="sr-only">
+                   Add Field to Fieldset
+                  </label>
+                  {{ Form::select("field_id",$custom_fields_list,"",['aria-label'=>'field_id', 'class'=>'select2']) }}
+
+                </div>
+
+                <div class="form-group col-md-2" style="vertical-align: middle;">
+
+                  <label for="required">
+                    {{ Form::checkbox('required', 'on', old('required'), array('class' => 'minimal', 'aria-label'=>'required')) }}
+                    {{ trans('admin/custom_fields/general.required') }}
+                  </label>
+
+                </div>
+                <div class="form-group col-md-2">
+
+                  {{ Form::text('order', $maxid, array('class' => 'form-control col-sm-1 col-md-1', 'style'=> 'width: 80px; padding-;right: 10px;', 'aria-label'=>'order', 'maxlength'=>'3', 'size'=>'3')) }}
+                  <label for="order">   Order </label>
+                </div>
+
+                <div class="form-group col-md-3">
+                  <button type="submit" class="btn btn-primary"> {{ trans('general.save') }}</button>
+                </div>
                 {{ Form::close() }}
-                @endcan
+
               </td>
             </tr>
           </tfoot>
+          @endcan
         </table>
       </div> <!-- /.box-body-->
     </div> <!-- /.box.box-default-->
@@ -91,7 +126,7 @@
 
 @stop
 
-@section('moar_scripts')
+@push('js')
   @can('update', $custom_fieldset)
 
   <script nonce="{{ csrf_token() }}">
@@ -126,10 +161,11 @@
           });
       };
 
+  // this uses the jquery UI sortable method, NOT the query-dragtable library
   $("#sort tbody").sortable({
       helper: fixHelperModified,
       stop: updateIndex
   }).disableSelection();
 </script>
   @endcan
-@stop
+@endpush

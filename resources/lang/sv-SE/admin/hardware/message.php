@@ -4,7 +4,7 @@ return array(
 
     'undeployable' 		=> '<strong>Varning: </strong> Den här tillgången har markerats som omöjlig för närvarande. Om denna status har ändrats uppdaterar du tillgångsstatusen.',
     'does_not_exist' 	=> 'Tillgång existerar inte.',
-    'does_not_exist_or_not_requestable' => 'Bra försök. Den tillgången existerar inte eller är inte önskvärd.',
+    'does_not_exist_or_not_requestable' => 'Bra försök. Den tillgången existerar inte eller är inte tillgänglig.',
     'assoc_users'	 	=> 'Denna tillgång kontrolleras för närvarande till en användare och kan inte raderas. Kontrollera tillgången först och försök sedan radera igen.',
 
     'create' => array(
@@ -24,8 +24,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Assetrevisionen misslyckades. Var god försök igen.',
-        'success' 		=> 'Asset-revision har loggats in.'
+        'error'   		=> 'Inventeringen av tillgången misslyckades. Var god försök igen.',
+        'success' 		=> 'Inventeringen av tillgången har loggats.'
     ),
 
 
@@ -75,7 +75,7 @@ return array(
 
     'requests' => array(
         'error'   		=> 'Tillgången begärdes inte, försök igen',
-        'success' 		=> 'Asset begärdes framgångsrikt.',
+        'success' 		=> 'Tillgången begärdes framgångsrikt.',
         'canceled'      => 'Checkout förfrågan har avbrutits'
     )
 

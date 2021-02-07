@@ -15,7 +15,7 @@ return array(
     ),
     'purge' => array(
         'error'     => 'Beim Bereinigen ist ein Fehler augetreten. ',
-        'validation_failed'     => 'Falsche Bereinigungsbestätigung. Bitte geben Sie das Wort "Löschen" im Bestätigungsfeld ein.',
+        'validation_failed'     => 'Falsche Bereinigungsbestätigung. Bitte geben Sie das Wort "DELETE" im Bestätigungsfeld ein.',
         'success'               => 'Gelöschte Einträge erfolgreich bereinigt.'
     ),
 

@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'À propos des accessoires',
-    'about_accessories_text'  			=> 'Les accessoires sont des items que vous assignerai à des utilisateurs mais qui n\'ont pas de numéro de série (ou que vous ne désirez pas en faire un suivi). Par exemple, une souris ou un clavier.',
     'accessory_category' 				=> 'Catégorie d\'accessoire',
     'accessory_name'  					=> 'Nom de l\'accessoire',
     'checkout'  							=> 'Attribuer l\'accessoire',

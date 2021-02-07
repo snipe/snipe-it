@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Ang aksesoryang ito ay hindi umiiral.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Ang aksesoryang ito ay kasalukuyang mayroong :pag-check out sa pag-kwenta ng mga aytem sa mga gumagamit o user. Paki-tingnan sa mga aksesorya at subukang muli. ',
 
     'create' => array(

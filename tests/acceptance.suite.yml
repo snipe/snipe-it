@@ -11,7 +11,7 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: 'https://snipe-it.dev:1337'
+            url: 'https://snipe-it.local:8890'
             browser: 'firefox'
         - \Helper\Acceptance
         - Laravel5:

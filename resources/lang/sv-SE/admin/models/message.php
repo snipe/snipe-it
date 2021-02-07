@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Modellen finns inte.',
-    'assoc_users'	 => 'Denna modell är redan associerad med en eller flera inventarier och kan inte tas bort. Ta bort inventarierna och försök sedan igen. ',
+    'assoc_users'	 => 'Denna modell är redan associerad med en eller flera tillgångar och kan inte tas bort. Ta bort tillgången och försök sedan igen. ',
 
 
     'create' => array(
@@ -30,13 +30,13 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Inga fält ändrades, så ingenting uppdaterades.',
-        'success' 		=> 'Modeller uppdaterade.'
+        'success' 		=> 'Modeller uppdaterades.'
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Inga tillgångar valdes, så ingenting togs bort.',
         'success' 		    => ': success_count modell (er) borttagen!',
-        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
+        'success_partial' 	=> ':success_count modell(erna) raderades, men :fail_count kunde inte raderas eftersom de fortfarande har tillgångar kopplade till sig.'
     ),
 
 );

@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'היצרן לא שוחזר, נסה שוב',
+        'success' => 'היצרן שוחזר בהצלחה.'
     ),
 
     'delete' => array(

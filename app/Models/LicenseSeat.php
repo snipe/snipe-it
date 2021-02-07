@@ -100,5 +100,22 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
 
     }
 
+    /**
+     * Query builder scope to order on department
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderDepartments($query, $order)
+    {
+        return $query->leftJoin('users as license_seat_users',  'license_seats.assigned_to', '=', 'license_seat_users.id')
+            ->leftJoin('departments as license_user_dept',  'license_user_dept.id', '=', 'license_seat_users.department_id')
+            ->orderBy('license_user_dept.name', $order);
+    }
+
+
+
 
 }

@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Par piederumiem',
-    'about_accessories_text'  			=> 'Aksesuāri ir jebkas, ko jūs izsniedzat lietotājiem, bet kuriem nav sērijas numura (vai arī jums nav svarīgi, vai tie ir unikāli izsekojami). Piemēram, datoru peles vai tastatūras.',
     'accessory_category' 				=> 'Piederumu kategorija',
     'accessory_name'  					=> 'Piederuma nosaukums',
     'checkout'  							=> 'Izrakstīšanās Piederums',

@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Status',
     'title'      	=> 'Harta ',
     'image'		=> 'Imej Peranti',
-    'days_without_acceptance' => 'Hari Tanpa Penerimaan'
+    'days_without_acceptance' => 'Hari Tanpa Penerimaan',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

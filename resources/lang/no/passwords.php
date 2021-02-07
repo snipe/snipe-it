@@ -2,6 +2,6 @@
 
 return [
     'sent'	        => 'Din passord link har blitt sendt!',
-    'user'			=> 'No matching active user found with that email.',
+    'user'			=> 'Ingen aktiv bruker med den epostadressen funnet.',
 ];
 

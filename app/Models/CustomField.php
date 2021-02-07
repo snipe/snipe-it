@@ -287,7 +287,10 @@ class CustomField extends Model
     {
         $arr = preg_split("/\\r\\n|\\r|\\n/", $this->field_values);
 
-        $result[''] = 'Select '.strtolower($this->format);
+        if (($this->element!='checkbox') && ($this->element!='radio')) {
+            $result[''] = 'Select '.strtolower($this->format);
+        }
+
 
         for ($x = 0; $x < count($arr); $x++) {
             $arr_parts = explode('|', $arr[$x]);
@@ -326,7 +329,7 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.4]
-     * @return boolean
+     * @return string
      */
     public function convertUnicodeDbSlug($original = null)
     {

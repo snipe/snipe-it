@@ -3,7 +3,7 @@
 return array(
     'about_assets_title'           => 'Om tillgångar',
     'about_assets_text'            => 'Tillgångar är poster som spåras med serienummer eller tillgångstagg. De tenderar att vara mer värdefulla saker där identifiering av en viss sak är viktig.',
-	'archived'  				=> 'arkiveras',
+	'archived'  				=> 'Arkiverade',
     'asset'  					=> 'Tillgång',
     'bulk_checkout'             => 'Checkout tillgångar',
     'checkin'  					=> 'Checkin Asset',
@@ -13,10 +13,10 @@ return array(
     'deleted'  					=> 'Den här tillgången har tagits bort. <a href="/hardware/:asset_id/restore">Klicka här för att återställa det</a>.',
     'edit'  					=> 'Redigera tillgång',
     'model_deleted'  			=> 'Denna tillgångsmodell har raderats. Du måste återställa modellen innan du kan återställa Asset.<br/> <a href="/hardware/models/:model_id/restore">Klick här för att återställa modellen</a>.',
-    'requestable'               => 'Requestable',
+    'requestable'               => 'Tillgängliga',
     'requested'				    => 'Begärda',
     'restore'  					=> 'Återställ tillgången',
-    'pending'  					=> 'Avvaktan',
+    'pending'  					=> 'Väntande',
     'undeployable'  			=> 'Undeployable',
     'view'  					=> 'Visa tillgång',
 );

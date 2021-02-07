@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Über Kategorien',
-    'about_categories'  				=> 'Kategorien helfen Ihnen beim Organisieren von Assets. Beispielkategorien sind &quot;PCs&quot;, &quot;Laptops&quot;, &quot;Mobiltelefone&quot;, &quot;Tablets&quot; usw., jedoch können Sie Kategorien nutzen, wie Sie es für sinnvoll erachten.',
     'asset_categories' 					=> 'Asset-Kategorien',
     'category_name'  					=> 'Kategoriename',
     'checkin_email'                     => 'Beim Checkin/Checkout eine E-Mail an den Benutzer senden.',

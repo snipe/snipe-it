@@ -2,15 +2,15 @@
 
 return array(
     'about_manufacturers_title'    => 'Tietoja valmistajista',
-    'about_manufacturers_text'  => 'Valmistajat ovat yrityksiä, jotka luovat omaisuutesi. Voit tallentaa täältä tärkeitä yhteystietoja, jotka näkyvät omaisuustietosivullasi.',
+    'about_manufacturers_text'  => 'Valmistajat ovat yrityksiä, jotka valmistavat laitteesi. Voit tallentaa tähän tärkeitä yhteystietoja, jotka näkyvät laitteen sivulla.',
     'asset_manufacturers'	=> 'Laitevalmistajat',
     'create'				=> 'Uusi Valmistaja',
     'id'   					=> 'Tunnus',
     'name'      			=> 'Nimi',
-    'support_email'   		=> 'Tuki sähköpostilla',
-    'support_phone'   		=> 'Tuki puhelin',
-    'support_url'   		=> 'Tuki URL',
+    'support_email'   		=> 'Tuen sähköposti',
+    'support_phone'   		=> 'Tuen puhelin',
+    'support_url'   		=> 'Tuen URL',
     'update'				=> 'Päivitä Valmistaja',
-    'url'   				=> 'URL-',
+    'url'   				=> 'URL',
 
 );

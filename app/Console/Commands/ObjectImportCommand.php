@@ -55,8 +55,10 @@ class ObjectImportCommand extends Command
                  ->setShouldNotify($this->option('send-welcome'))
                  ->setUsernameFormat($this->option('username_format'));
 
-        $logFile = $this->option('logfile');
-        \Log::useFiles($logFile);
+
+        // This $logFile/useFiles() bit is currently broken, so commenting it out for now
+        // $logFile = $this->option('logfile');
+        // \Log::useFiles($logFile);
         $this->comment('======= Importing Items from '.$filename.' =========');
         $importer->import();
 

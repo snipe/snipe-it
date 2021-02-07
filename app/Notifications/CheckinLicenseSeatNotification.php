@@ -35,10 +35,9 @@ class CheckinLicenseSeatNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         $notifyBy = [];
 
@@ -47,7 +46,7 @@ class CheckinLicenseSeatNotification extends Notification
         }
 
         /**
-         * Only send checkin notifications to users if the category 
+         * Only send checkin notifications to users if the category
          * has the corresponding checkbox checked.
          */
         if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '')
@@ -58,7 +57,7 @@ class CheckinLicenseSeatNotification extends Notification
         return $notifyBy;
     }
 
-    public function toSlack($notifiable)
+    public function toSlack()
     {
 
         $target = $this->target;
@@ -68,15 +67,23 @@ class CheckinLicenseSeatNotification extends Notification
         $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
 
 
-        $fields = [
-            'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
-            'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
-        ];
+        if ($admin) {
+            $fields = [
+                'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
+                'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
+            ];
+        } else {
+            $fields = [
+                'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
+                'By' => 'CLI tool',
+            ];
+        }
+
 
 
 
         return (new SlackMessage)
-            ->content(':arrow_down: :floppy_disk: License  Checked In')
+            ->content(':arrow_down: :floppy_disk: '.trans('mail.License_Checkin_Notification'))
             ->from($botname)
             ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
                 $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
@@ -90,7 +97,7 @@ class CheckinLicenseSeatNotification extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)->markdown('notifications.markdown.checkin-license',
             [
@@ -99,20 +106,8 @@ class CheckinLicenseSeatNotification extends Notification
                 'note'          => $this->note,
                 'target'        => $this->target,
             ])
-            ->subject('License checked in');
+            ->subject(trans('mail.License_Checkin_Notification'));
 
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

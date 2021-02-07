@@ -1,10 +1,8 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'About Accessories',
-    'about_accessories_text'  			=> 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
-    'accessory_category' 				=> 'Accessory Category',
-    'accessory_name'  					=> 'Accessory Name',
+    'accessory_category' 				=> 'Kategorya ng accessory',
+    'accessory_name'  					=> 'Pangalan ng accessory',
     'checkout'  							=> 'Checkout Accessory',
     'checkin'  							=> 'Checkin Accessory',
     'create'  							=> 'Create Accessory',

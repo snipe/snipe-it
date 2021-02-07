@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'வகைகள் பற்றி',
-    'about_categories'  				=> 'வகைகள் உங்கள் பொருட்களை ஒழுங்கமைக்க உதவுகின்றன. சில எடுத்துக்காட்டு வகைகள் &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, மற்றும் பலவற்றில் இருக்கலாம், ஆனால் உங்களுக்கான அர்த்தங்களை வகைப்படுத்தலாம்.',
     'asset_categories' 					=> 'சொத்து வகைகள்',
     'category_name'  					=> 'வகை பெயர்',
     'checkin_email'                     => 'Send email to user on checkin/checkout.',

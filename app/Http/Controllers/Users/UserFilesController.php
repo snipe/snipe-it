@@ -38,14 +38,14 @@ class UserFilesController extends Controller
                 $filename = 'user-' . $user->id . '-' . str_random(8);
                 $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
                 if (!$file->move($destinationPath, $filename)) {
-                    return JsonResponse::create(["error" => "Unabled to move file"], 500);
+                    return redirect()->back()->with('error', trans('admin/users/message.upload.invalidfiles'));
                 }
                 //Log the uploaded file to the log
                 $logAction = new Actionlog();
                 $logAction->item_id = $user->id;
                 $logAction->item_type = User::class;
                 $logAction->user_id = Auth::id();
-                $logAction->note = e(Input::get('notes'));
+                $logAction->note = $request->input('notes');
                 $logAction->target_id = null;
                 $logAction->created_at = date("Y-m-d H:i:s");
                 $logAction->filename = $filename;
@@ -57,10 +57,10 @@ class UserFilesController extends Controller
                 }
                 $logActions[] = $logAction;
             }
-//            dd($logActions);
-            return JsonResponse::create($logActions);
+            // dd($logActions);
+            return redirect()->back()->with('success', trans('admin/users/message.upload.success'));
         }
-        return JsonResponse::create(["error" => "No User associated with this request"], 500);
+        return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
 
     }
 

@@ -11,7 +11,7 @@
 @section('content')
 
     
-<link rel="stylesheet" href="{{ mix('css/signature-pad.min.css') }}">
+<link rel="stylesheet" href="{{ url('css/signature-pad.min.css') }}">
 
 <style>
 .form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
@@ -23,6 +23,12 @@
     width: 100%;
     height: auto;
     overflow: scroll;
+}
+
+.m-signature-pad--body {
+    border-style: solid;
+    border-color: grey;
+    border-width: thin;
 }
 
 </style>

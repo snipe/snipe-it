@@ -72,7 +72,7 @@
                         <div class="col-md-12">
 
                             @if ($models->count() > 0)
-                            <h4>Requestable Models</h4>
+                            <h2>Requestable Models</h4>
                                 <table
                                         name="requested-assets"
                                         data-toolbar="#toolbar"

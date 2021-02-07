@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Параметры конфигурации LDAP можно найти Администратор > Параметры. Выбранное местоположение будет установлено для всех импортируемых пользователей. (Необязательно).',
     'print_assigned'    => 'Печать всех назначенных',
     'software_user'     => 'Программное обеспечение привязано к :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Показать пользователя :name',
     'usercsv'           => 'CSV файл',
     'two_factor_admin_optin_help' => 'Ваши текущие параметры администрирования разрешают избирательное применение двухфакторной аутентификации.  ',

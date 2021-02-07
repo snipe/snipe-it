@@ -23,6 +23,6 @@ return [
     |
     */
 
-    'method' => env('MAIL_AUTO_EMBED_METHOD', 'base64'),
+    'method' => env('MAIL_AUTO_EMBED_METHOD', 'attachment'),
 
 ];

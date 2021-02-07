@@ -38,7 +38,7 @@ return array(
     'tag'				=> 'Varade silt',
     'update'			=> 'Varade värskendamine',
     'warranty'			=> 'Garantii',
-		'warranty_expires'		=> 'Warranty Expires',
+		'warranty_expires'		=> 'Garantii aegub',
     'years'				=> 'aastat',
 )
 ;

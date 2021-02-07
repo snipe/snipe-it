@@ -4,6 +4,7 @@ return [
     'send_password_link'	        => 'Verzend wachtwoord herstel koppeling',
     'email_reset_password'			=> 'E-mail wachtwoord herstel',
     'reset_password'			    => 'Herstel wachtwoord',
+    'saml_login'                    => 'Inloggen via SAML',
     'login'                         => 'Inloggen',
     'login_prompt'                  => 'Graag inloggen',
     'forgot_password'               => 'Ik ben mijn wachtwoord vergeten',

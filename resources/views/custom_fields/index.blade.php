@@ -14,7 +14,7 @@
     <div class="box box-default">
 
       <div class="box-header with-border">
-        <h3 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h3>
+        <h2 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h2>
         <div class="box-tools pull-right">
           @can('create', \App\Models\CustomFieldset::class)
           <a href="{{ route('fieldsets.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new fieldset">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
@@ -44,7 +44,7 @@
               <th>{{ trans('general.name') }}</th>
               <th>{{ trans('admin/custom_fields/general.qty_fields') }}</th>
               <th>{{ trans('admin/custom_fields/general.used_by_models') }}</th>
-              <th></th>
+              <th>Actions</th>
             </tr>
           </thead>
 
@@ -53,14 +53,14 @@
             @foreach($custom_fieldsets AS $fieldset)
             <tr>
               <td>
-                {{ link_to_route("fieldsets.show",$fieldset->name,['id' => $fieldset->id]) }}
+                {{ link_to_route("fieldsets.show",$fieldset->name,['fieldset' => $fieldset->id]) }}
               </td>
               <td>
                 {{ $fieldset->fields->count() }}
               </td>
               <td>
                 @foreach($fieldset->models as $model)
-                  <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}</a>
+                  <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}{{ ($model->model_number) ? ' ('.$model->model_number.')' : '' }}</a>
 
                 @endforeach
               </td>
@@ -86,7 +86,7 @@
   </div> <!-- .col-md-9-->
   <!-- side address column -->
   <div class="col-md-3">
-    <h4>{{ trans('admin/custom_fields/general.about_fieldsets_title') }}</h4>
+    <h2>{{ trans('admin/custom_fields/general.about_fieldsets_title') }}</h2>
     <p>{{ trans('admin/custom_fields/general.about_fieldsets_text') }} </p>
   </div>
 </div> <!-- .row-->
@@ -96,7 +96,7 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-header with-border">
-        <h3 class="box-title">{{ trans('admin/custom_fields/general.custom_fields') }}</h3>
+        <h2 class="box-title">{{ trans('admin/custom_fields/general.custom_fields') }}</h2>
         <div class="box-tools pull-right">
           @can('create', \App\Models\CustomField::class)
           <a href="{{ route('fields.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new custom field">{{ trans('admin/custom_fields/general.create_field') }}</a>
@@ -132,7 +132,7 @@
               <th data-searchable="true">{{ trans('admin/custom_fields/general.field_format') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
               <th data-searchable="true">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
-              <th></th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -140,7 +140,7 @@
             <tr>
               <td>{{ $field->name }}</td>
               <td>{{ $field->help_text }}</td>
-              <td>{!! ($field->show_in_email=='1') ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>'  !!}</td>
+              <td>{!! ($field->show_in_email=='1') ? '<i class="fa fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td>
                  <code>{{ $field->convertUnicodeDbSlug() }}</code>
                 @if ($field->convertUnicodeDbSlug()!=$field->db_column)
@@ -157,14 +157,22 @@
               <td>
                 <nobr>
                   @can('update', $field)
-                <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+                <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                  <span class="sr-only">Edit</span>
+                </a>
                 @endcan               
                 @can('delete', $field)
                 {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
                 @if($field->fieldset->count()>0)
-                <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
+                <button type="submit" class="btn btn-danger btn-sm disabled" disabled>
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <span class="sr-only">Delete</span></button>
                 @else
-                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                <button type="submit" class="btn btn-danger btn-sm">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <span class="sr-only">Delete</span>
+                </button>
                 @endif
                 {{ Form::close() }}
                 @endcan

@@ -5,6 +5,7 @@ use App\Helpers\Helper;
 use App\Models\AssetMaintenance;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
+use App\Models\Asset;
 
 class AssetMaintenancesTransformer
 {
@@ -57,8 +58,8 @@ class AssetMaintenancesTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'update' => (bool) Gate::allows('update', Asset::class),
-            'delete' => (bool) Gate::allows('delete', Asset::class),
+            'update' => Gate::allows('update', Asset::class),
+            'delete' => Gate::allows('delete', Asset::class),
         ];
 
         $array += $permissions_array;

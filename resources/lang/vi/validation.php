@@ -67,7 +67,7 @@ return array(
     'not_in'               => ':attribute đã chọn không hợp lý.',
     'numeric'              => ':attribute phải là một số.',
     'present'              => 'Trường thuộc tính: phải có mặt.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'Đây không phải là một đơn hàng hợp lệ.',
     'regex'                => 'Định dạng :attribute thì không hợp lý.',
     'required'             => 'Trường :attribute thì bắt buộc.',
     'required_if'          => 'Trường :attribute thì bắt buộc khi :other là :value.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute đã sẵn sàng.',
     'uploaded'             => 'Thuộc tính: không thể tải lên.',
     'url'                  => 'Định dạng :attribute thì không hợp lý.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => "Thuộc tính: phải là duy nhất.",
 
     /*
     |--------------------------------------------------------------------------

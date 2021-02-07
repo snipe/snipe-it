@@ -4,7 +4,7 @@ return array(
     'custom_fields'		        => 'Anpassade fält',
     'field'		                => 'Fält',
     'about_fieldsets_title'		=> 'Om fältsamlingar',
-    'about_fieldsets_text'		=> 'Fältsamlingar låter dig skapa grupper av anpassade fält som ofta används för specifika modelltyper av inventarier.',
+    'about_fieldsets_text'		=> 'Fieldsets låter dig skapa grupper av fält som är anpassade efter och ofta använda av en viss typ av tillgång. Ex. "CPU", "RAM", "HDD", etc.',
     'custom_format'             => 'Anpassat format ...',
     'encrypt_field'      	        => 'Kryptera värdet på det här fältet i databasen',
     'encrypt_field_help'      => 'VARNING: Kryptering av ett fält gör det oförsvarligt.',

@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Stato',
     'title'      	=> 'Bene ',
     'image'		=> 'Immagine dispositivo',
-    'days_without_acceptance' => 'Giorni senza accettazione'
+    'days_without_acceptance' => 'Giorni senza accettazione',
+    'monthly_depreciation' => 'Ammortamento Mensile'
 
 );

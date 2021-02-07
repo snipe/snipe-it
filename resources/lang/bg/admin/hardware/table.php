@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Статус',
     'title'      	=> 'Актив ',
     'image'		=> 'Изображение на устройството',
-    'days_without_acceptance' => 'Дни без да е предаден'
+    'days_without_acceptance' => 'Дни без да е предаден',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

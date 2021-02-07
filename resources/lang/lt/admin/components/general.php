@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> 'Apie Komponentus',
-    'about_components_text'  			=> 'Komponentai yra daiktai, kurie yra įrangos sudedamoji dalis, pavyzdžiui HDD, RAM ir t. t.',
     'component_name'                  => 'Komponento pavadinimas',
     'checkin'                             => 'Checkin komponentas',
     'checkout'                             => 'Checkout komponentas',

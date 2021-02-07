@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'status',
     'title'      	=> 'bate',
     'image'		=> 'Toestelbeeld',
-    'days_without_acceptance' => 'Dae sonder aanvaarding'
+    'days_without_acceptance' => 'Dae sonder aanvaarding',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

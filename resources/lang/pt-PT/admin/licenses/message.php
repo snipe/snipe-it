@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'O proprietário do artigo que está a tentar associar com esta licença não é pessoa selecionada na dropdown.',
     'assoc_users'	 => 'Esta licença está correntemente alocada a um utilizador e não pode ser removida. Por favor devolva a licença e de seguida tente remover novamente. ',
     'select_asset_or_person' => 'Você deve selecionar um recurso ou um usuário, mas não ambos.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

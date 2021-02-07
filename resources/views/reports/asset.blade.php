@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('reports/export/assets') }}" class="btn btn-default"><i class="fa fa-download icon-white"></i>
+<a href="{{ route('reports/export/assets') }}" class="btn btn-default"><i class="fa fa-download icon-white" aria-hidden="true"></i>
 {{ trans('admin/hardware/table.dl_csv') }}</a>
 @stop
 
@@ -25,13 +25,13 @@
                     data-toolbar="#toolbar"
                     class="table table-striped snipe-table"
                     id="table"
-                    data-url="{{route('api.assets.index', array(''=>e(Input::get('status')),'order_number'=>e(Input::get('order_number')), 'status_id'=>e(Input::get('status_id')), 'report'=>'true'))}}"
+                    data-url="{{route('api.assets.index', array(''=>e(Request::get('status')),'order_number'=>e(Request::get('order_number')), 'status_id'=>e(Request::get('status_id')), 'report'=>'true'))}}"
                     data-cookie="true"
                     data-click-to-select="true"
-                    data-cookie-id-table="{{ e(Input::get('status')) }}assetTable-{{ config('version.hash_version') }}">
+                    data-cookie-id-table="{{ e(Request::get('status')) }}assetTable-{{ config('version.hash_version') }}">
                         <thead>
                             <tr>
-                                @if (Input::get('status')!='Deleted')
+                                @if (Request::get('status')!='Deleted')
                                 <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
                                 @endif
                                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>

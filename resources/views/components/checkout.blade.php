@@ -19,7 +19,7 @@
         @if ($component->id)
         <div class="box-header with-border">
           <div class="box-heading">
-            <h3 class="box-title">{{ $component->name }}  ({{ $component->numRemaining()  }}  {{ trans('admin/components/general.remaining') }})</h3>
+            <h2 class="box-title">{{ $component->name }}  ({{ $component->numRemaining()  }}  {{ trans('admin/components/general.remaining') }})</h2>
           </div>
         </div><!-- /.box-header -->
         @endif
@@ -42,8 +42,8 @@
               <label for="assigned_qty" class="col-md-3 control-label">{{ trans('general.qty') }}
                 <i class='icon-asterisk'></i></label>
               <div class="col-md-9">
-                <input class="form-control" type="text" name="assigned_qty" id="assigned_qty" style="width: 70px;" value="{{ Input::old('assigned_qty') }}" />
-                {!! $errors->first('assigned_qty', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                <input class="form-control" type="text" name="assigned_qty" id="assigned_qty" style="width: 70px;" value="{{ old('assigned_qty') ?? 1 }}" />
+                {!! $errors->first('assigned_qty', '<br><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
             </div>
 
@@ -51,7 +51,7 @@
         </div> <!-- .BOX-BODY-->
         <div class="box-footer">
           <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkout') }}</button>
+          <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
        </div>
       </div> <!-- .box-default-->
     </form>

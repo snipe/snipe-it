@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Catagóirí Maidir',
-    'about_categories'  				=> 'Cuidíonn catagóirí leat do chuid míreanna a eagrú. D\'fhéadfadh roinnt catagóirí samplaí a bheith &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mócaí Póca&quot;, &quot;Tablets&quot;, agus mar sin de, ach is féidir leat catagóirí a úsáid ar bhealach ar bith a dhéanann ciall duit.',
     'asset_categories' 					=> 'Catagóirí Sócmhainne',
     'category_name'  					=> 'Ainm Chatagóir',
     'checkin_email'                     => 'Send email to user on checkin/checkout.',

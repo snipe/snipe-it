@@ -13,12 +13,9 @@
         <div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span>
-                            Personal Access Tokens
-                        </span>
+                    <div class="text-right" style="display: flex; justify-content: space-between; align-items: center;">
 
-                        <a class="action-link" @click="showCreateTokenForm">
+                        <a class="btn btn-info btn-sm action-link pull-right" @click="showCreateTokenForm">
                             Create New Token
                         </a>
                     </div>
@@ -34,8 +31,10 @@
                     <table class="table table-borderless m-b-none" v-if="tokens.length > 0">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th></th>
+                                <th class="col-md-3">Name</th>
+                                <th class="col-md-2">Created</th>
+                                <th class="col-md-2">Expires</th>
+                                <th class="col-md-2"><span class="sr-only">Delete</span></th>
                             </tr>
                         </thead>
 
@@ -46,10 +45,18 @@
                                     {{ token.name }}
                                 </td>
 
+                              <td style="vertical-align: middle;">
+                                {{ token.created_at }}
+                              </td>
+
+                              <td style="vertical-align: middle;">
+                                {{ token.expires_at }}
+                              </td>
+
                                 <!-- Delete Button -->
-                                <td style="vertical-align: middle;">
-                                    <a class="action-link text-danger" @click="revoke(token)">
-                                        Delete
+                                <td style="vertical-align: middle;" class="text-right">
+                                    <a class="action-link btn btn-danger btn-sm" @click="revoke(token)">
+                                      <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -87,10 +94,10 @@
                         <form class="form-horizontal" role="form" @submit.prevent="store">
                             <!-- Name -->
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Name</label>
+                                <label class="col-md-4 control-label" for="name">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="create-token-name" type="text" class="form-control" name="name" v-model="form.name">
+                                    <input id="create-token-name" type="text" aria-label="name" class="form-control" name="name" v-model="form.name">
                                 </div>
                             </div>
 
@@ -117,7 +124,7 @@
 
                     <!-- Modal Actions -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn primary" data-dismiss="modal">Close</button>
 
                         <button type="button" class="btn btn-primary" @click="store">
                             Create

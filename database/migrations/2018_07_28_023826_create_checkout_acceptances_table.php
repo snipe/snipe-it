@@ -17,7 +17,7 @@ class CreateCheckoutAcceptancesTable extends Migration
             $table->increments('id');
 
             $table->morphs('checkoutable');
-            $table->integer('assigned_to_id')->unsigned();
+            $table->integer('assigned_to_id')->nullable();
 
             $table->string('signature_filename')->nullable();
 

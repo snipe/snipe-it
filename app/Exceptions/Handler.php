@@ -2,11 +2,13 @@
 
 namespace App\Exceptions;
 
-use App\Helpers\Helper;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App\Helpers\Helper;
+use Illuminate\Validation\ValidationException;
 use Log;
+
 
 class Handler extends ExceptionHandler
 {
@@ -22,6 +24,8 @@ class Handler extends ExceptionHandler
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
+        \Intervention\Image\Exception\NotSupportedException::class,
+        \League\OAuth2\Server\Exception\OAuthServerException::class,
     ];
 
     /**
@@ -65,10 +69,6 @@ class Handler extends ExceptionHandler
                 return response()->json(Helper::formatStandardApiResponse('error', null, $className . ' not found'), 200);
             }
 
-            if ($e instanceof \Illuminate\Validation\ValidationException) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, $e->response['messages'], 400));
-            }
-
             if ($this->isHttpException($e)) {
 
                 $statusCode = $e->getStatusCode();
@@ -83,11 +83,6 @@ class Handler extends ExceptionHandler
 
                 }
             }
-            // Try to parse 500 Errors in a bit nicer way when debug is enabled.
-            if (config('app.debug')) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, "An Error has occured! " . $e->getMessage()), 500);
-            }
-
         }
 
 
@@ -111,9 +106,21 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthorized.'], 401);
+            return response()->json(['error' => 'Unauthorized or unauthenticated.'], 401);
         }
 
         return redirect()->guest('login');
+    }
+
+    /**
+     * Convert a validation exception into a JSON response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Validation\ValidationException  $exception
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function invalidJson($request, ValidationException $exception)
+    {
+        return response()->json(Helper::formatStandardApiResponse('error', null, $exception->errors(), 400));
     }
 }

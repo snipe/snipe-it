@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> 'Om komponenter',
-    'about_components_text'  			=> 'Komponenter er ting som er del av en asset, f. eks HDD, RAM, etc.',
     'component_name'                  => 'Komponent navn',
     'checkin'                             => 'Sjekk inn komponent',
     'checkout'                             => 'Sjekk ut komponent',

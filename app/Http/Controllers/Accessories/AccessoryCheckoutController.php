@@ -64,18 +64,19 @@ class AccessoryCheckoutController extends Controller
 
         $this->authorize('checkout', $accessory);
 
-        if (!$user = User::find(Input::get('assigned_to'))) {
+        if (!$user = User::find($request->input('assigned_to'))) {
             return redirect()->route('checkout/accessory', $accessory->id)->with('error', trans('admin/accessories/message.checkout.user_does_not_exist'));
         }
 
       // Update the accessory data
-        $accessory->assigned_to = e(Input::get('assigned_to'));
+        $accessory->assigned_to = e($request->input('assigned_to'));
 
         $accessory->users()->attach($accessory->id, [
             'accessory_id' => $accessory->id,
             'created_at' => Carbon::now(),
             'user_id' => Auth::id(),
-            'assigned_to' => $request->get('assigned_to')
+            'assigned_to' => $request->get('assigned_to'),
+            'note' => $request->input('note')
         ]);
 
         DB::table('accessories_users')->where('assigned_to', '=', $accessory->assigned_to)->where('accessory_id', '=', $accessory->id)->first();

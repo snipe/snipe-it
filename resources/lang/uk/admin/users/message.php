@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Недостатньо прав.',
     'user_deleted_warning'      => 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
     'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(
@@ -37,10 +38,10 @@ return array(
         'asset_already_accepted' => 'This asset has already been accepted.',
         'accept_or_decline' => 'You must either accept or decline this asset.',
         'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
-        'ldap_could_not_connect' => 'Could not connect to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
-        'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server: ',
-        'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
-        'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'ldap_could_not_connect' => 'Could not connect to the LDAP server. Please check your LDAP server configuration in Admin Settings > LDAP/AD <br>Error from LDAP Server:',
+        'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in Admin Settings > LDAP/AD<br>Error from LDAP Server: ',
+        'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in Admin Settings > LDAP/AD and any Locations that may have additional OUs associated with them. <br>Error from LDAP Server:',
+        'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in Admin Settings > LDAP/AD and any Locations that may have additional OUs associated with them. <br>Error from LDAP Server:',
         'password_ldap' => 'The password for this account is managed by LDAP/Active Directory. Please contact your IT department to change your password. ',
     ),
 

@@ -47,7 +47,7 @@
 @endif
 
 
-Thanks,
+{{ trans('mail.best_regards') }}
 
 {{ $snipeSettings->site_name }}
 

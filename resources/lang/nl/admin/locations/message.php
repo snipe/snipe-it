@@ -4,7 +4,7 @@ return array(
 
     'does_not_exist' => 'Locatie bestaat niet.',
     'assoc_users'	 => 'Deze locatie is momenteel gekoppeld met tenminste één persoon en kan hierdoor niet worden verwijderd. Update je gebruikers die niet meer bij deze locatie horen en probeer het opnieuw. ',
-    'assoc_assets'	 => 'Deze locatie is momenteel gekoppeld met tenminste één product en kan hierdoor niet worden verwijderd. Update je producten die niet meer bij deze locatie en probeer het opnieuw. ',
+    'assoc_assets'	 => 'Deze locatie is momenteel gekoppeld met tenminste één asset en kan hierdoor niet worden verwijderd. Update je assets die niet meer bij deze locatie en probeer het opnieuw. ',
     'assoc_child_loc'	 => 'Deze locatie is momenteen de ouder van ten minste één kind locatie en kan hierdoor niet worden verwijderd. Update je locaties bij die niet meer naar deze locatie verwijzen en probeer het opnieuw. ',
 
 

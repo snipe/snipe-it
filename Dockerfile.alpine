@@ -1,6 +1,6 @@
-FROM alpine:3.8
+FROM alpine:3.12
 # Apache + PHP
-RUN  apk add --update --no-cache \
+RUN  apk add --no-cache \
         apache2 \
         php7 \
         php7-common \
@@ -23,6 +23,8 @@ RUN  apk add --update --no-cache \
         php7-fileinfo \
         php7-simplexml \
         php7-session \
+        php7-dom \
+        php7-xmlwriter \
         curl \
         wget \
         vim \

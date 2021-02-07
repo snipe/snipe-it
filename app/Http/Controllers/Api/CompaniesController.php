@@ -8,6 +8,7 @@ use App\Http\Transformers\CompaniesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CompaniesController extends Controller
 {
@@ -41,8 +42,13 @@ class CompaniesController extends Controller
             $companies->TextSearch($request->input('search'));
         }
 
-        $offset = (($companies) && (request('offset') > $companies->count())) ? 0 : request('offset', 0);
-        $limit = $request->input('limit', 50);
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($companies) && ($request->get('offset') > $companies->count())) ? $companies->count() : $request->get('offset', 0);
+
+        // Check to make sure the limit is not higher than the max allowed
+        ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
         $companies->orderBy($sort, $order);
@@ -127,28 +133,17 @@ class CompaniesController extends Controller
      */
     public function destroy($id)
     {
-       $this->authorize('delete', Company::class);
-       $company = Company::findOrFail($id);
-            $this->authorize('delete', $company);
+        $this->authorize('delete', Company::class);
+        $company = Company::findOrFail($id);
+        $this->authorize('delete', $company);
 
-        try {
-            $company->delete();
+        if ( !$company->isDeletable() ) {
             return response()
-                ->json(Helper::formatStandardApiResponse('success', null,  trans('admin/companies/message.delete.success')));
-        } catch (\Illuminate\Database\QueryException $exception) {
-            /*
-                 * NOTE: This happens when there's a foreign key constraint violation
-                 * For example when rows in other tables are referencing this company
-                 */
-            if ($exception->getCode() == 23000) {
-                return response()
                     ->json(Helper::formatStandardApiResponse('error', null,  trans('admin/companies/message.assoc_users')));
-
-            } else {
-                throw $exception;
-            }
         }
-
+        $company->delete();
+        return response()
+            ->json(Helper::formatStandardApiResponse('success', null,  trans('admin/companies/message.delete.success')));
     }
 
     /**

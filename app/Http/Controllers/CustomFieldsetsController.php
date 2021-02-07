@@ -44,23 +44,16 @@ class CustomFieldsetsController extends Controller
 
 
             $maxid = 0;
-            foreach ($cfset->fields() as $field) {
-
-                if ($field) {
-                    if ($field->pivot->order > $maxid) {
-                        $maxid=$field->pivot->order;
-                    }
-                    if (isset($custom_fields_list[$field->id])) {
-                        unset($custom_fields_list[$field->id]);
-                    }
+            foreach ($cfset->fields as $field) {
+                if ($field->pivot->order > $maxid) {
+                    $maxid=$field->pivot->order;
                 }
-
+                if (isset($custom_fields_list[$field->id])) {
+                    unset($custom_fields_list[$field->id]);
+                }
             }
 
-            return view("custom_fields.fieldsets.view")
-                ->with("custom_fieldset", $cfset)
-                ->with("maxid", $maxid+1)
-                ->with("custom_fields_list", $custom_fields_list);
+            return view("custom_fields.fieldsets.view")->with("custom_fieldset", $cfset)->with("maxid", $maxid+1)->with("custom_fields_list", $custom_fields_list);
         }
 
         return redirect()->route("fields.index")
@@ -103,7 +96,7 @@ class CustomFieldsetsController extends Controller
                 "user_id" => Auth::user()->id
         ]);
 
-        $validator = Validator::make(Input::all(), $cfset->rules);
+        $validator = Validator::make($request->all(), $cfset->rules);
         if ($validator->passes()) {
             $cfset->save();
             return redirect()->route("fieldsets.show", [$cfset->id])
@@ -176,28 +169,71 @@ class CustomFieldsetsController extends Controller
 
 
     /**
-     * Associate the custom field with a custom fieldset.
-     *
-     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
-     * @since [v1.8]
-     * @return View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function associate($id)
+    * Associate the custom field with a custom fieldset.
+    *
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @since [v1.8]
+    * @return View
+    */
+    public function associate(Request $request, $id)
     {
 
         $set = CustomFieldset::find($id);
 
         $this->authorize('update', $set);
 
-        foreach ($set->fields as $field) {
-            if ($field->id == Input::get('field_id')) {
-                return redirect()->route("fieldsets.show", [$id])->withInput()->withErrors(['field_id' => trans('admin/custom_fields/message.field.already_added')]);
+        if ($request->filled('field_id')) {
+            foreach ($set->fields as $field) {
+                if ($field->id == $request->input('field_id')) {
+                    return redirect()->route("fieldsets.show", [$id])->withInput()->withErrors(['field_id' => trans('admin/custom_fields/message.field.already_added')]);
+                }
             }
+
+            $results = $set->fields()->attach($request->input('field_id'), ["required" => ($request->input('required') == "on"),"order" => $request->input('order', 1)]);
+
+            return redirect()->route("fieldsets.show", [$id])->with("success", trans('admin/custom_fields/message.field.create.assoc_success'));
         }
+        return redirect()->route("fieldsets.show", [$id])->with("error", 'No field selected.');
 
-        $results=$set->fields()->attach(Input::get('field_id'), ["required" => (Input::get('required') == "on"),"order" => Input::get('order')]);
 
-        return redirect()->route("fieldsets.show", [$id])->with("success", trans('admin/custom_fields/message.field.create.assoc_success'));
+    }
+
+    /**
+     * Set the field in a fieldset to required
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     */
+    public function makeFieldRequired($fieldset_id, $field_id)
+    {
+
+        $this->authorize('update', CustomFieldset::class);
+        $field = CustomField::findOrFail($field_id);
+        $fieldset = CustomFieldset::findOrFail($fieldset_id);
+        $fields[$field->id] = ['required' => 1];
+        $fieldset->fields()->syncWithoutDetaching($fields);
+
+        return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])
+            ->with("success", trans('Field successfully set to required'));
+
+    }
+
+    /**
+     * Set the field in a fieldset to optional
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     */
+    public function makeFieldOptional($fieldset_id, $field_id)
+    {
+        $this->authorize('update', CustomFieldset::class);
+        $field = CustomField::findOrFail($field_id);
+        $fieldset = CustomFieldset::findOrFail($fieldset_id);
+        $fields[$field->id] = ['required' => 0];
+        $fieldset->fields()->syncWithoutDetaching($fields);
+
+        return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])
+            ->with("success", trans('Field successfully set to optional'));
+
     }
 }

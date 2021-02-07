@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Додатокот не постои.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Овој додаток во моментов има :count ставки задолжени на корисници. Ве молиме проверете во додатоците и обидете се повторно. ',
 
     'create' => array(

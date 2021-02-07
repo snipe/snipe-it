@@ -10,7 +10,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Import;
 use Artisan;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use League\Csv\Reader;
@@ -41,7 +41,7 @@ class ImportController extends Controller
     {
         $this->authorize('import');
         if (!config('app.lock_passwords')) {
-            $files = Input::file('files');
+            $files = Request::file('files');
             $path = config('app.private_uploads').'/imports';
             $results = [];
             $import = new Import;
@@ -118,8 +118,15 @@ class ImportController extends Controller
     public function process(ItemImportRequest $request, $import_id)
     {
         $this->authorize('import');
+
         // Run a backup immediately before processing
-        Artisan::call('backup:run');
+        if ($request->has('run-backup')) {
+            \Log::debug('Backup manually requested via importer');
+            Artisan::call('backup:run');
+        } else {
+            \Log::debug('NO BACKUP requested via importer');
+        }
+
         $errors = $request->import(Import::find($import_id));
         $redirectTo = "hardware.index";
         switch ($request->get('import-type')) {

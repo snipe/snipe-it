@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('settings.index') }}" class="btn btn-default"> {{ trans('general.back') }}</a>
+    <a href="{{ route('settings.index') }}" class="btn btn-primary"> {{ trans('general.back') }}</a>
 @stop
 
 
@@ -26,9 +26,9 @@
 
             <div class="panel box box-default">
                 <div class="box-header with-border">
-                    <h4 class="box-title">
-                        <i class="fa fa-lock"></i> Security
-                    </h4>
+                    <h2 class="box-title">
+                        <i class="fa fa-lock" aria-hidden="true"></i> Security
+                    </h2>
                 </div>
                 <div class="box-body">
 
@@ -43,14 +43,14 @@
                             </div>
                             <div class="col-md-9">
 
-                                {!! Form::two_factor_options('two_factor_enabled', Input::old('two_factor_enabled', $setting->two_factor_enabled), 'select2') !!}
+                                {!! Form::two_factor_options('two_factor_enabled', Request::old('two_factor_enabled', $setting->two_factor_enabled), 'select2') !!}
                                 <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_warning') }}</p>
 
                                 @if (config('app.lock_passwords'))
-                                    <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
 
-                                {!! $errors->first('two_factor_enabled', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('two_factor_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -60,9 +60,9 @@
                                 {{ Form::label('pwd_secure_min', trans('admin/settings/general.pwd_secure_min')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('pwd_secure_min', Input::old('pwd_secure_min', $setting->pwd_secure_min), array('class' => 'form-control',  'style'=>'width: 50px;')) }}
+                                {{ Form::text('pwd_secure_min', Request::old('pwd_secure_min', $setting->pwd_secure_min), array('class' => 'form-control',  'style'=>'width: 50px;')) }}
 
-                                {!! $errors->first('pwd_secure_min', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('pwd_secure_min', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 <p class="help-block">
                                     {{ trans('admin/settings/general.pwd_secure_min_help') }}
                                 </p>
@@ -75,14 +75,16 @@
                         <!-- Common Passwords -->
                         <div class="form-group {{ $errors->has('pwd_secure_uncommon') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('pwd_secure_text',
+                                {{ Form::label('pwd_secure_text_label',
                                               trans('admin/settings/general.pwd_secure_uncommon')) }}
 
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('pwd_secure_uncommon', '1', Input::old('pwd_secure_uncommon', $setting->pwd_secure_uncommon),array('class' => 'minimal')) }}
-                                {{ Form::label('pwd_secure_uncommon',  trans('general.yes')) }}
-                                {!! $errors->first('pwd_secure_uncommon', '<span class="alert-msg">:message</span>') !!}
+                                <label for="pwd_secure_uncommon"><span class="sr-only">Prevent common insecure passwords</span>
+                                {{ Form::checkbox('pwd_secure_uncommon', '1', old('pwd_secure_uncommon', $setting->pwd_secure_uncommon),array('class' => 'minimal', 'aria-label'=>'pwd_secure_uncommon')) }}
+                                    {{ trans('general.yes') }}
+                                </label>
+                                {!! $errors->first('pwd_secure_uncommon', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 <p class="help-block">
                                     {{ trans('admin/settings/general.pwd_secure_uncommon_help') }}
                                 </p>
@@ -97,16 +99,20 @@
                             </div>
                             <div class="col-md-9">
 
-                                {{ Form::checkbox("pwd_secure_complexity['letters']", 'letters', Input::old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'letters')!==false), array('class' => 'minimal')) }}
+                                {{ Form::checkbox("pwd_secure_complexity['disallow_same_pwd_as_user_fields']", 'disallow_same_pwd_as_user_fields', old('disallow_same_pwd_as_user_fields', strpos($setting->pwd_secure_complexity, 'disallow_same_pwd_as_user_fields')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
+                                Password cannot be the same as first name, last name, email, or username<br>
+
+
+                                {{ Form::checkbox("pwd_secure_complexity['letters']", 'letters', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'letters')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
                                 Require at least one letter <br>
 
-                                {{ Form::checkbox("pwd_secure_complexity['numbers']", 'numbers', Input::old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'numbers')!==false), array('class' => 'minimal')) }}
+                                {{ Form::checkbox("pwd_secure_complexity['numbers']", 'numbers', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'numbers')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
                                 Require at least one number<br>
 
-                                {{ Form::checkbox("pwd_secure_complexity['symbols']", 'symbols', Input::old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'symbols')!==false), array('class' => 'minimal')) }}
+                                {{ Form::checkbox("pwd_secure_complexity['symbols']", 'symbols', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'symbols')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
                                 Require at least one symbol<br>
 
-                                {{ Form::checkbox("pwd_secure_complexity['case_diff']", 'case_diff', Input::old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'case_diff')!==false), array('class' => 'minimal')) }}
+                                {{ Form::checkbox("pwd_secure_complexity['case_diff']", 'case_diff', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'case_diff')!==false), array('class' => 'minimal', 'aria-label'=>'pwd_secure_complexity')) }}
                                 Require at least one uppercase and one lowercase
 
                                 <p class="help-block">
@@ -119,32 +125,42 @@
                         <!-- Remote User Authentication -->
                         <div class="form-group {{ $errors->has('login_remote_user') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('login_remote_user', trans('admin/settings/general.login_remote_user_text')) }}
+                                {{ Form::label('login_remote_user_label', trans('admin/settings/general.login_remote_user_text')) }}
                             </div>
                             <div class="col-md-9">
                                 <!--  Enable Remote User Login -->
 
                                 @if (config('app.lock_passwords'))
-                                    <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {{ Form::checkbox('login_remote_user_enabled', '1', Input::old('login_remote_user_enabled', $setting->login_remote_user_enabled),array('class' => 'minimal')) }}
+                                    {{ Form::checkbox('login_remote_user_enabled', '1', old('login_remote_user_enabled', $setting->login_remote_user_enabled),array('class' => 'minimal', 'aria-label'=>'login_remote_user')) }}
                                     {{ Form::label('login_remote_user_enabled',  trans('admin/settings/general.login_remote_user_enabled_text')) }}
-                                    {!! $errors->first('login_remote_user_enabled', '<span class="alert-msg">:message</span>') !!}
+                                    {!! $errors->first('login_remote_user_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_remote_user_enabled_help') }}
                                     </p>
+                                    <!-- Use custom remote user header name -->
+                                    {{ Form::label('login_remote_user_header_name',  trans('admin/settings/general.login_remote_user_header_name_text')) }}
+                                    {{ Form::text('login_remote_user_header_name', Request::old('login_remote_user_header_name', $setting->login_remote_user_header_name),array('class' => 'form-control')) }}
+                                    {!! $errors->first('login_remote_user_header_name', '<span class="alert-msg">:message</span>') !!}
+                                    <p class="help-block">
+                                        {{ trans('admin/settings/general.login_remote_user_header_name_help') }}
+                                    </p>
                                     <!-- Custom logout url to redirect to authentication provider -->
                                     {{ Form::label('login_remote_user_custom_logout_url',  trans('admin/settings/general.login_remote_user_custom_logout_url_text')) }}
-                                    {{ Form::text('login_remote_user_custom_logout_url', Input::old('login_remote_user_custom_logout_url', $setting->login_remote_user_custom_logout_url),array('class' => 'form-control')) }}
+                                    {{ Form::text('login_remote_user_custom_logout_url', old('login_remote_user_custom_logout_url', $setting->login_remote_user_custom_logout_url),array('class' => 'form-control', 'aria-label'=>'login_remote_user_custom_logout_url')) }}
 
-                                    {!! $errors->first('login_remote_user_custom_logout_url', '<span class="alert-msg">:message</span>') !!}
+                                    {!! $errors->first('login_remote_user_custom_logout_url', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_remote_user_custom_logout_url_help') }}
                                     </p>
                                     <!--  Disable other logins mechanism -->
-                                    {{ Form::checkbox('login_common_disabled', '1', Input::old('login_common_disabled', $setting->login_common_disabled),array('class' => 'minimal')) }}
-                                    {{ Form::label('login_common_disabled',  trans('admin/settings/general.login_common_disabled_text')) }}
-                                    {!! $errors->first('login_common_disabled', '<span class="alert-msg">:message</span>') !!}
+                                    <label>
+
+                                        {{ Form::checkbox('login_common_disabled', '1', old('login_common_disabled', $setting->login_common_disabled),array('class' => 'minimal', 'aria-label'=>'login_common_disabled')) }}
+                                        {{ trans('admin/settings/general.login_common_disabled_text') }}
+                                    </label>
+                                    {!! $errors->first('login_common_disabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_common_disabled_help') }}
                                     </p>
@@ -163,7 +179,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

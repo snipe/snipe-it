@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'رفع',
 	'select_file'				=> 'حدد ملف ...',
     'select_files'				=> 'إختيار ملف...',
+    'generate_labels'           => '{1} انشاء تسميات [2,*] توليد تسميات',
 );

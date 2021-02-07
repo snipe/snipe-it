@@ -20,7 +20,7 @@ class BulkAssetModelsController extends Controller
      */
     public function edit(Request $request)
     {
-        $models_raw_array = Input::get('ids');
+        $models_raw_array = $request->input('ids');
 
         // Make sure some IDs have been selected
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {
@@ -64,7 +64,7 @@ class BulkAssetModelsController extends Controller
     public function update(Request $request)
     {
 
-        $models_raw_array = Input::get('ids');
+        $models_raw_array = $request->input('ids');
         $update_array = array();
 
         if (($request->filled('manufacturer_id') && ($request->input('manufacturer_id')!='NC'))) {
@@ -101,9 +101,9 @@ class BulkAssetModelsController extends Controller
      * @since [v1.0]
      * @return Redirect
      */
-    public function destroy()
+    public function destroy(Request $request)
     {
-        $models_raw_array = Input::get('ids');
+        $models_raw_array = $request->input('ids');
 
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {
 

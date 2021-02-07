@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Нямате необходимите права.',
     'user_deleted_warning'      => 'Този потребител е изтрит. За да редактирате данните за него или да му зададете актив, трябва първо да възстановите потребителя.',
     'ldap_not_configured'        => 'Интеграцията с LDAP не е конфигурирана за тази инсталация.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

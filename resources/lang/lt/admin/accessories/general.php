@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Apie įrangą',
-    'about_accessories_text'  			=> 'Įranga yra viskas, kas yra išduodama naudotojams ir suteikiamas ar nesuteikiamas inventorizacinis numeris. Pvz. kompiuteris, kompiuterio pelė, programinė iranga ir t. t.',
     'accessory_category' 				=> 'Įrangos kategorija',
     'accessory_name'  					=> 'Įrangos pavadinimas',
     'checkout'  							=> 'Checkout Accessory',
