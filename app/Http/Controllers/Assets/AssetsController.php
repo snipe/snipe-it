@@ -168,7 +168,11 @@ class AssetsController extends Controller
                             $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
                         }
                     } else {
-                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                        if(is_array($request->input($field->convertUnicodeDbSlug()))){
+                            $asset->{$field->convertUnicodeDbSlug()} = implode(', ', $request->input($field->convertUnicodeDbSlug()));
+                        }else{
+                            $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                        }
                     }
                 }
             }
@@ -345,8 +349,11 @@ class AssetsController extends Controller
                         $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
                     }
                 } else {
-                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
-                }
+                    if(is_array($request->input($field->convertUnicodeDbSlug()))){
+                        $asset->{$field->convertUnicodeDbSlug()} = implode(', ', $request->input($field->convertUnicodeDbSlug()));
+                    }else{
+                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                    }                }
             }
         }
 
