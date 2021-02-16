@@ -355,6 +355,19 @@
                             </div>
                         </div>
 
+                        <!-- LDAP Phone Number -->
+                        <div class="form-group {{ $errors->has('ldap_phone') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_phone', trans('admin/settings/general.ldap_phone')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::text('ldap_phone', Request::old('ldap_phone', $setting->ldap_email), ['class' => 'form-control','placeholder' => '', $setting->demoMode]) }}
+                                {!! $errors->first('ldap_phone', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fa fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
 
                         @if ($setting->ldap_enabled)
 
