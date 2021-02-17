@@ -21,7 +21,7 @@
 
                       <div>
                           <label>
-                              <input type="checkbox" value="1" name="{{ $field->db_column_name() }}[]" class="minimal" {{ Request::old($field->db_column_name()) != '' ? ' checked="checked"' : '' }}>
+                              <input type="checkbox" value="{{ $value }}" name="{{ $field->db_column_name() }}[]" class="minimal" {{  isset($item) ? (in_array($key, explode(', ', $item->{$field->db_column_name()})) ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : '') }}>
                               {{ $value }}
                           </label>
                       </div>

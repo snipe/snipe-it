@@ -279,7 +279,7 @@ class Asset extends Depreciable
      * @since [v3.0]
      * @return boolean
      */
-    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null, $location = null)
+    public function checkOut($target, $admin_id = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null, $location = null)
     {
         if (!$target) {
             return false;
@@ -313,9 +313,14 @@ class Asset extends Depreciable
         }
 
         if ($this->save()) {
+            if(isset($admin_id)){
+                $checkedOutBy = User::find($admin_id);
 
-            event(new CheckoutableCheckedOut($this, $target, Auth::user(), $note));
-
+                event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note));
+            } else {
+                event(new CheckoutableCheckedOut($this, $target, Auth::user(), $note));
+            }
+            
             $this->increment('checkout_counter', 1);
             return true;
         }
