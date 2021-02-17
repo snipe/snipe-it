@@ -5,7 +5,7 @@ The following {{ $assets->count() }} items are due to be checked in soon:
 
 @component('mail::table')
 | Asset | Checked Out to | Expected Checkin |
-| ------------- | ------------- |
+| ------------- | ------------- | ------------- |
 @foreach ($assets as $asset)
 @php
 $checkin = \App\Helpers\Helper::getFormattedDateObject($asset->expected_checkin, 'date');
