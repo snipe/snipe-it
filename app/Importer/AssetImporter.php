@@ -121,7 +121,7 @@ class AssetImporter extends ItemImporter
 
             // If we have a target to checkout to, lets do so.
             if(isset($target)) {
-                $asset->fresh()->checkOut($target, $this->user_id);
+                $asset->fresh()->checkOut($target);
             }
             return;
         }
