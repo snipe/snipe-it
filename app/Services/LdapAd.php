@@ -129,7 +129,7 @@ class LdapAd extends LdapAdConfiguration
             $login_username = $username;
         }
 
-        if ($this->ldap->auth()->attempt($login_username, $password, true) === false) {
+        if ($this->ldap->auth()->attempt($login_username, $password, false) === false) {
             throw new Exception('Unable to validate user credentials!');
         }    
 
