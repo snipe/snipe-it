@@ -13,7 +13,7 @@
     "node": ">=0.12"
   },
   "devDependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "babel-preset-env": "^1.7.0",
     "cross-env": "^7.0",
     "jquery": "^3.5.1",
@@ -47,7 +47,7 @@
     "less": "^3.13.1",
     "less-loader": "^4.1.0",
     "list.js": "^1.5.0",
-    "papaparse": "^4.3.3",
+    "papaparse": "^5.3.0",
     "phantomjs": "^2.1.7",
     "select2": "4.0.13",
     "sheetjs": "^2.0.0",
