@@ -2,7 +2,7 @@
 {{-- Header --}}
 @slot('header')
 @component('mail::header', ['url' => config('app.url')])
-@if (($snipeSettings->show_images_in_email=='1' ) && ($snipeSettings::setupCompleted()))
+@if (($snipeSettings !== null) && ($snipeSettings->show_images_in_email=='1' ) && ($snipeSettings::setupCompleted()))
 
 @if ($snipeSettings->brand == '3')
 @if ($snipeSettings->logo!='')
@@ -38,13 +38,13 @@ Snipe-IT
 {{-- Footer --}}
 @slot('footer')
 @component('mail::footer')
-@if($snipeSettings::setupCompleted())
+@if($snipeSettings !== null && $snipeSettings::setupCompleted())
 © {{ date('Y') }} {{ $snipeSettings->site_name }}. All rights reserved.
 @else
 © {{ date('Y') }} Snipe-it. All rights reserved.
 @endif
 
-@if ($snipeSettings->privacy_policy_link!='')
+@if ($snipeSettings !== null && $snipeSettings->privacy_policy_link!='')
 <a href="{{ $snipeSettings->privacy_policy_link }}">{{ trans('admin/settings/general.privacy_policy') }}</a>ldfkgjg
 @endif
 
