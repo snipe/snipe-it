@@ -128,7 +128,8 @@ class SamlController extends Controller
     public function sls(Request $request)
     {
         $auth = $this->saml->getAuth();
-        $sloUrl = $auth->processSLO(true, null, null, null, true);
+        $retrieveParametersFromServer = $this->saml->getSetting('retrieveParametersFromServer', false);
+        $sloUrl = $auth->processSLO(true, null, $retrieveParametersFromServer, null, true);
         $errors = $auth->getErrors();
         
         if (!empty($errors)) {
