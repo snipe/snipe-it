@@ -108,15 +108,16 @@ a {
   --background: #222;
   --back-main: #333;
   --back-sub: #444;
+  --back-sub-alt: #dfd9d8;
   --button-default: darken(@purple, 15%);
   --button-primary: darken(@purple, 25%);
   --button-hover: darken(@purple, 30%);
   --header: @purple; /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: lighten(@purple, 30%); /* Use same as Header picker, lighten by 70% */
-  --visited-link: lighten(@purple, 40%); /* Use same as Header picker, lighten by 70% */
-  --hover-link: lighten(@purple, 45%); /* Use same as Header picker, lighten by 70% */
+  --link: #9370DB; /* Use same as Header picker, lighten by 70% */
+  --visited-link: #B93CF6; /* Use same as Header picker, lighten by 70% */
+  --hover-link: #BF55EC; /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
@@ -165,7 +166,9 @@ a:hover {
   }
 }
 
-
+a:link.btn-default{
+  color: var(--nav-link);
+}
 #accessoriesTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
 }
@@ -189,20 +192,20 @@ body {
 }
 .btn-default{
   background-color: var(--button-default);
-  color: var(--link);
+  color: var(--nav-link);
 }
 
 .btn-default dropdown-toggle {
   background-color: var(--button-default);
-  color: var(--link);
+  color: var(--nav-link);
 }
 
 .btn-default:active, .btn-default:focus, .btn-default:hover, .btn-default.active {
   background-color: var(--button-hover);
-  color: var(--link);
+  color: var(--nav-link);
 }
 .btn-primary, .btn-primary.hover, .btn-primary:active, .text-purple {
-  color: var(--text-main)!important;
+  color: var(--nav-link)!important;
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
@@ -237,6 +240,9 @@ body {
 }
 .dropdown-menu>li>a:hover {
   background-color: var(--back-main);
+  color: var(--nav-link);
+}
+.fixed-table-body thead th .th-inner{
   color: var(--nav-link);
 }
 .form-control {
@@ -334,6 +340,10 @@ input[type=text], input[type=search] {
 }
 .table-striped>tbody>tr:nth-of-type(odd) {
   background-color: var(--back-sub);
+}
+.table-striped>tbody>tr:nth-of-type(even){
+  background-color: var(--back-sub-alt);
+  color: var(--header);
 }
 #webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa, .box-body, .box-footer, .box-header {
   color: var(--text-main);

@@ -170,6 +170,7 @@ a:visited {
   --background: #222;
   --back-main: #333;
   --back-sub: #444;
+  --back-sub-alt: #dfd9d8;
   --button-default: #005a31;
   --button-primary: #002715;
   --button-hover: #000d07;
@@ -177,11 +178,11 @@ a:visited {
   /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #40ffa8;
+  --link: #28A228;
   /* Use same as Header picker, lighten by 70% */
-  --visited-link: #73ffbf;
+  --visited-link: #5D995D;
   /* Use same as Header picker, lighten by 70% */
-  --hover-link: #8dffcb;
+  --hover-link: #00AA00;
   /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF;
   /* Use same as Header picker */
@@ -312,6 +313,9 @@ body {
   background-color: var(--back-main);
   color: var(--nav-link);
 }
+.fixed-table-body thead th .th-inner {
+  color: var(--nav-link);
+}
 .form-control {
   background-color: var(--back-main);
   color: var(--text-main);
@@ -424,6 +428,10 @@ input[type=search] {
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: var(--back-sub);
+}
+.table-striped > tbody > tr:nth-of-type(even) {
+  background-color: var(--back-sub-alt);
+  color: var(--header);
 }
 #webui > div > div > div > div > div > table > tbody > tr > td > a > i.fa,
 .box-body,
