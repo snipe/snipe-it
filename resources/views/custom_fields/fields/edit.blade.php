@@ -168,10 +168,10 @@
             });
         }).change();
 
-        // If the element is a radiobutton, doesn't show the format input box
+        // If the element is a radiobutton/checkbox, doesn't show the format input box
         $(".field_element").change(function(){
             $(this).find("option:selected").each(function(){
-                if (($(this).attr("value") != "radio")){
+                if (($(this).attr("value") != "radio") && ($(this).attr("value") != "checkbox")){
                     $("#format_values").show();
                 } else{
                     $("#format_values").hide();
