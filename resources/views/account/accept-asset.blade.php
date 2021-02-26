@@ -10,8 +10,8 @@
 {{-- Page content --}}
 @section('content')
 
-    
-<link rel="stylesheet" href="{{ mix('css/build/signature-pad.min.css') }}">
+
+<link rel="stylesheet" href="{{ url(mix('css/build/signature-pad.min.css')) }}">
 
 <style>
 .form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {

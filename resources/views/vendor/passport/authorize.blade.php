@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ config('app.name') }} - Authorization</title>
-    
+
     {{-- stylesheets --}}
-    <link rel="stylesheet" href="{{ mix('css/all.css') }}">
+    <link rel="stylesheet" href="{{ url(mix('css/all.css')) }}">
     <style>
         .passport-authorize .container {
             margin-top: 30px;
