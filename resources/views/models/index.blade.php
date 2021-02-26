@@ -54,28 +54,27 @@
               </div>
             @endif
               <div class="table-responsive">
-              <table
-                  data-side-pagination="server"
-                  data-columns="{{ \App\Presenters\AssetModelPresenter::dataTableLayout() }}"
-                  data-cookie-id-table="modelsTable"
-                  data-pagination="true"
-                  data-id-table="modelsTable"
-                  data-search="true"
-
-                  data-show-columns="true"
-                  data-toolbar="#toolbar"
-                  data-show-export="true"
-                  data-show-refresh="true"
-                  data-sort-order="asc"
-                  data-page-size='30'
-                  id="modelsTable"
-                  data-url="{{ route('api.models.index', ['status'=> e(Request::get('status'))]) }}"
-                  class="table table-striped snipe-table"
-                  data-export-options='{
-                "fileName": "export-asset-models-{{ date('Y-m-d') }}",
-                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                }'>
-        </table>
+                <table
+                        data-columns="{{ \App\Presenters\AssetModelPresenter::dataTableLayout() }}"
+                        data-cookie-id-table="asssetModelsTable"
+                        data-pagination="true"
+                        data-id-table="asssetModelsTable"
+                        data-search="true"
+                        data-show-footer="true"
+                        data-side-pagination="server"
+                        data-show-columns="true"
+                        data-toolbar="#toolbar"
+                        data-show-export="true"
+                        data-show-refresh="true"
+                        data-sort-order="asc"
+                        id="asssetModelsTable"
+                        class="table table-striped snipe-table"
+                        data-url="{{ route('api.models.index') }}"
+                        data-export-options='{
+              "fileName": "export-models-{{ date('Y-m-d') }}",
+              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+              }'>
+              </table>
 
           </div>
         </div>
