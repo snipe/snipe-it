@@ -2128,6 +2128,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "joelpittet",
+      "name": "Joel Pittet",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70129?v=4",
+      "profile": "https://pittet.ca",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
