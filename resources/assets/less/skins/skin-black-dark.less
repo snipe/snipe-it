@@ -108,13 +108,14 @@ a {
   --background: #222;
   --back-main: #333;
   --back-sub: #444;
+  --back-sub-alt: #dfd9d8;
   --button-default: darken(@black, 15%);
   --button-primary: darken(@black, 25%);
   --button-hover: darken(@black, 30%);
   --header: @black; /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: lighten(@black, 30%); /* Use same as Header picker, lighten by 70% */
+  --link: #AAA; /* Use same as Header picker, lighten by 70% */
   --visited-link: lighten(@black, 40%); /* Use same as Header picker, lighten by 70% */
   --hover-link: lighten(@black, 45%); /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
@@ -164,7 +165,20 @@ a:hover {
     color: var(--nav-link) !important;
   }
 }
+a:link.btn-default{
+  color: var(--nav-link);
+}
+/* Trying to figure out a way of having links different shades based on what row they are on (even/odd).
+a unique challenge for this dark mode skin.
+Probably writing the specificity for this incorrectly. --Godfrey Martinez 02/04/21
 
+.table-striped>tbody>tr:nth-of-type(even)>a:link{
+  color:#000d07;
+}
+.table-striped>tbody>tr:nth-of-type(odd)>a:link{
+  color:#bfbfbf;
+
+}*/
 
 #accessoriesTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
@@ -189,20 +203,20 @@ body {
 }
 .btn-default{
   background-color: var(--button-default);
-  color: var(--link);
+  color: var(--nav-link);
 }
 
 .btn-default dropdown-toggle {
   background-color: var(--button-default);
-  color: var(--link);
+  color: var(--nav-link);
 }
 
 .btn-default:active, .btn-default:focus, .btn-default:hover, .btn-default.active {
   background-color: var(--button-hover);
-  color: var(--link);
+  color: var(--nav-link);
 }
 .btn-primary, .btn-primary.hover, .btn-primary:active, .text-black {
-  color: var(--text-main)!important;
+  color: var(--nav-link)!important;
 }
 .btn-primary:hover {
   background-color: var(--button-primary);
@@ -334,6 +348,11 @@ input[type=text], input[type=search] {
 }
 .table-striped>tbody>tr:nth-of-type(odd) {
   background-color: var(--back-sub);
+  color: var(--text-main);
+}
+.table-striped>tbody>tr:nth-of-type(even){
+  background-color: var(--back-sub-alt);
+  color: var(--header);
 }
 #webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa, .box-body, .box-footer, .box-header {
   color: var(--text-main);
