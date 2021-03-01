@@ -174,7 +174,7 @@ class BulkUsersController extends Controller
         }
 
         $users = User::whereIn('id', $user_raw_array)->get();
-        $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
+        $assets = Asset::whereIn('assigned_to', $user_raw_array)->where('assigned_type', 'App\Models\User')->get();
         $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
         $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
 
