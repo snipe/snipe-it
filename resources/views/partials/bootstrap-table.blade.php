@@ -160,11 +160,12 @@
 
                 // Add some overrides for any funny urls we have
                 var dest = destination;
+                var dpolymorphicItemFormatterest = '';
                 if (destination=='fieldsets') {
-                    var dpolymorphicItemFormatterest = 'fields/fieldsets';
+                    var dpolymorphicItemFormatterest = 'fields/';
                 }
 
-                return '<nobr><a href="{{ url('/') }}/' + dest + '/' + value.id + '"> ' + value.name + '</a></span>';
+                return '<nobr><a href="{{ url('/') }}/' + dpolymorphicItemFormatterest + dest + '/' + value.id + '"> ' + value.name + '</a></span>';
             }
         };
     }
