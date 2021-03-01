@@ -325,6 +325,20 @@ class Saml
     }
 
     /**
+     * Get a setting.
+     * 
+     * @author Johnson Yi <jyi.dev@outlook.com>
+     * 
+     * @param string|array|int $key
+     * @param mixed $default
+     * 
+     * @return void
+     */
+    public function getSetting($key, $default = null) {
+        return data_get($this->_settings, $key, $default);
+    }
+
+    /**
      * Gets the SP metadata. The XML representation.
      *
      * @param bool $alwaysPublishEncryptionCert When 'true', the returned

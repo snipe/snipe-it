@@ -54,7 +54,7 @@ class LocationsController extends Controller
 
 
 
-        $offset = (($locations) && (request('offset') > $locations->count())) ? 0 : request('offset', 0);
+        $offset = (($locations) && (request('offset') > $locations->count())) ? $locations->count() : request('offset', 0);
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');

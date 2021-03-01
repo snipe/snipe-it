@@ -2110,6 +2110,33 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "koelle25",
+      "name": "Kevin Köllmann",
+      "avatar_url": "https://avatars.githubusercontent.com/u/915514?v=4",
+      "profile": "https://www.kevinkoellmann.de",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sw-mreyes",
+      "name": "sw-mreyes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49025941?v=4",
+      "profile": "https://github.com/sw-mreyes",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "joelpittet",
+      "name": "Joel Pittet",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70129?v=4",
+      "profile": "https://pittet.ca",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
