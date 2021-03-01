@@ -124,7 +124,7 @@ class AssetModelPresenter extends Presenter
             "sortable" => false,
             "switchable" => false,
             "title" => trans('table.actions'),
-            "formatter" => "licensesActionsFormatter",
+            "formatter" => "modelsActionsFormatter",
         ];
 
 
