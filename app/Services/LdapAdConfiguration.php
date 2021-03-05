@@ -92,6 +92,7 @@ class LdapAdConfiguration
     private function getSnipeItLdapSettings(): Collection
     {
         $ldapSettings = collect();
+        var_dump($ldapSettings);
         if(Setting::first()) { // during early migration steps, there may be no settings table entry to start with
             $ldapSettings = Setting::getLdapSettings()
                 ->map(function ($item, $key) {

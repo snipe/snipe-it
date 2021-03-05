@@ -339,6 +339,7 @@ class Setting extends Model
             'ldap_port',
             'ldap_tls',
             'ldap_pw_sync',
+            'ldap_phone_field',
             'is_ad',
             'ad_domain',
             'ad_append_domain',

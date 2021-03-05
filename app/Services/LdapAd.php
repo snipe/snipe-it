@@ -185,7 +185,7 @@ class LdapAd extends LdapAdConfiguration
         $snipeUser['firstname']       = $user->{$this->ldapSettings['ldap_fname_field']}[0] ?? '';
         $snipeUser['email']           = $user->{$this->ldapSettings['ldap_email']}[0] ?? '';
         $snipeUser['title']           = $user->getTitle() ?? '';
-        $snipeUser['telephonenumber'] = $user->getTelephoneNumber() ?? '';
+        $snipeUser['telephoneNumber '] = $user->getTelephoneNumber() ?? '';
 
         /*
          * $locationId being 'null' means we have no per-OU location information,
@@ -467,6 +467,7 @@ class LdapAd extends LdapAdConfiguration
             $this->ldapSettings['ldap_fname_field'],
             $this->ldapSettings['ldap_lname_field'],
             $this->ldapSettings['ldap_email'],
+            $this->ldapSettings['ldap_phone_field'],
             $this->ldapSettings['ldap_emp_num'],
             $this->ldapSettings['ldap_active_flag'],
             $schema->memberOf(),
@@ -530,6 +531,7 @@ class LdapAd extends LdapAdConfiguration
                     'lastname'        => $item->{$this->ldapSettings['ldap_lname_field']}[0] ?? null,
                     'firstname'       => $item->{$this->ldapSettings['ldap_fname_field']}[0] ?? null,
                     'email'           => $item->{$this->ldapSettings['ldap_email']}[0] ?? null,
+                    'telephonenumber' => $item->{$this->ldapSettings['ldap_phone_field']}[0] ?? null,
                 ];
             });
         }

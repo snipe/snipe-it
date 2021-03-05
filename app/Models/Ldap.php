@@ -169,6 +169,7 @@ class Ldap extends Model
         $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
         $ldap_result_email = Setting::getSettings()->ldap_email;
+        $ldap_result_phone = Setting::getSettings()->ldap_phone_field;
 
         // Get LDAP user data
         $item = array();
@@ -176,7 +177,8 @@ class Ldap extends Model
         $item["employee_number"] = isset($ldapatttibutes[$ldap_result_emp_num][0]) ? $ldapatttibutes[$ldap_result_emp_num][0] : "";
         $item["lastname"] = isset($ldapatttibutes[$ldap_result_last_name][0]) ? $ldapatttibutes[$ldap_result_last_name][0] : "";
         $item["firstname"] = isset($ldapatttibutes[$ldap_result_first_name][0]) ? $ldapatttibutes[$ldap_result_first_name][0] : "";
-        $item["email"] = isset($ldapatttibutes[$ldap_result_email][0]) ? $ldapatttibutes[$ldap_result_email][0] : "" ;
+        $item["mail"] = isset($ldapatttibutes[$ldap_result_email][0]) ? $ldapatttibutes[$ldap_result_email][0] : "" ;
+        $item["telephonenumber"] = isset($ldapatttibutes[$ldap_result_phone][0]) ? $ldapatttibutes[$ldap_result_phone][0] : "" ;
 
         return $item;
 
@@ -203,6 +205,7 @@ class Ldap extends Model
             $user->last_name = $item["lastname"];
             $user->username = $item["username"];
             $user->email = $item["email"];
+            $user->phone = $item['telephonenumber'];
 
             if (Setting::getSettings()->ldap_pw_sync=='1') {
                 $user->password = bcrypt(Input::get("password"));
