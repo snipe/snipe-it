@@ -31,7 +31,9 @@
       <ul class="nav nav-tabs">
         <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
         <li><a href="#seats" data-toggle="tab">{{ trans('admin/licenses/form.seats') }}</a></li>
+        @can('files', $license)
         <li><a href="#uploads" data-toggle="tab">{{ trans('general.file_uploads') }}</a></li>
+        @endcan
         <li><a href="#history" data-toggle="tab">{{ trans('admin/licenses/general.checkout_history') }}</a></li>
         <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a></li>
       </ul>
@@ -364,6 +366,7 @@
           </div> <!--/.row-->
         </div> <!-- /.tab-pane -->
 
+        @can('files', $license)
         <div class="tab-pane" id="uploads">
           <div class="table-responsive">
             <table
@@ -447,6 +450,7 @@
           </table>
           </div>
         </div> <!-- /.tab-pane -->
+        @endcan
 
         <div class="tab-pane" id="history">
           <div class="row">
