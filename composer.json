@@ -52,7 +52,7 @@
     "phpspec/prophecy": "^1.10",
     "pragmarx/google2fa-laravel": "^1.3",
     "rollbar/rollbar-laravel": "^6.0",
-    "spatie/laravel-backup": "6.14.4",
+    "spatie/laravel-backup": "^6.9",
     "tecnickcom/tc-lib-barcode": "^1.15",
     "tightenco/ziggy": "^0.9.0",
     "unicodeveloper/laravel-password": "^1.0",
