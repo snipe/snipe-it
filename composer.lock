@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a20cd96c28ab5093d3c2c45107050f0",
+    "content-hash": "7091362111beb350e59d71e3147aee13",
     "packages": [
         {
             "name": "adldap2/adldap2",
@@ -6132,20 +6132,19 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "6.15.0",
+            "version": "6.14.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "85f653df9c44b46e7829413f652e5b3f8fe98448"
+                "reference": "54bdd6d1f460ff16dc1322bbb249be46b2b28b7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/85f653df9c44b46e7829413f652e5b3f8fe98448",
-                "reference": "85f653df9c44b46e7829413f652e5b3f8fe98448",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/54bdd6d1f460ff16dc1322bbb249be46b2b28b7b",
+                "reference": "54bdd6d1f460ff16dc1322bbb249be46b2b28b7b",
                 "shasum": ""
             },
             "require": {
-                "ext-zip": "^1.14.0",
                 "illuminate/console": "^6.0|^7.0|^8.0",
                 "illuminate/contracts": "^6.0|^7.0|^8.0",
                 "illuminate/events": "^6.0|^7.0|^8.0",
@@ -6206,7 +6205,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/6.15.0"
+                "source": "https://github.com/spatie/laravel-backup/tree/6.14.4"
             },
             "funding": [
                 {
@@ -6218,7 +6217,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-03-02T21:25:20+00:00"
+            "time": "2021-01-29T07:29:58+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -11368,8 +11367,5 @@
         "ext-pdo": "*"
     },
     "platform-dev": [],
-    "platform-overrides": {
-        "php": "7.3"
-    },
     "plugin-api-version": "2.0.0"
 }
