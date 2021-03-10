@@ -2,7 +2,6 @@
 
 use Monolog\Handler\StreamHandler;
 
-
 $config = [
 
     /*
@@ -16,7 +15,7 @@ $config = [
     |
     */
 
-    'default' => 'stack',
+    'default' => env('LOG_CHANNEL', 'stack'),
 
     /*
     |--------------------------------------------------------------------------
@@ -45,6 +44,7 @@ $config = [
             'level' => env('APP_LOG_LEVEL', 'error'),
         ],
 
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
@@ -58,7 +58,6 @@ $config = [
             'access_token' => env('ROLLBAR_TOKEN'),
             'level' => env('APP_LOG_LEVEL', 'debug'),
         ],
-
 
         'slack' => [
             'driver' => 'slack',
