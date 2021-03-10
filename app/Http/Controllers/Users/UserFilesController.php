@@ -117,7 +117,7 @@ class UserFilesController extends Controller
 
             $log = Actionlog::find($fileId);
             $file = $log->get_src('users');
-            return Response::download($file);
+            return Response::download($file); //FIXME this doesn't use the new StorageHelper yet, but it's complicated...
         }
         // Prepare the error message
         $error = trans('admin/users/message.user_not_found', ['id' => $userId]);

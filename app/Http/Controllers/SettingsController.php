@@ -21,6 +21,7 @@ use Image;
 use Input;
 use Redirect;
 use Response;
+use App\Helpers\StorageHelper;
 
 /**
  * This controller handles all actions related to Settings for
@@ -1091,7 +1092,7 @@ class SettingsController extends Controller
 
         if (! config('app.lock_passwords')) {
             if (Storage::exists($path . '/' . $filename)) {
-                return Storage::download($path . '/' . $filename);
+                return StorageHelper::downloader($path . '/' . $filename);
             } else {
                 // Redirect to the backup page
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));

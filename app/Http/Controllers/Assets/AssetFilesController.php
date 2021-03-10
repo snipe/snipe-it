@@ -9,6 +9,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\StorageHelper;
 
 class AssetFilesController extends Controller
 {
@@ -86,7 +87,7 @@ class AssetFilesController extends Controller
                   }
                 return JsonResponse::create(["error" => "Failed validation: "], 500);
             }
-            return Storage::download($file);
+            return StorageHelper::downloader($file);
         }
         // Prepare the error message
         $error = trans('admin/hardware/message.does_not_exist', ['id' => $fileId]);
