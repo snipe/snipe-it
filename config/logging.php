@@ -2,7 +2,7 @@
 
 use Monolog\Handler\StreamHandler;
 
-return [
+$config = [
 
     /*
     |--------------------------------------------------------------------------
@@ -44,11 +44,19 @@ return [
             'level' => env('APP_LOG_LEVEL', 'error'),
         ],
 
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
             'days' =>  env('APP_LOG_MAX_FILES', 5),
+        ],
+
+        'rollbar' => [
+            'driver' => 'monolog',
+            'handler' => \Rollbar\Laravel\MonologHandler::class,
+            'access_token' => env('ROLLBAR_TOKEN'),
+            'level' => env('APP_LOG_LEVEL', 'debug'),
         ],
 
         'slack' => [
@@ -85,3 +93,10 @@ return [
     ],
 
 ];
+
+if ((env('APP_ENV')=='production')  && env('ROLLBAR_TOKEN')) {
+    array_push($config['channels']['stack']['channels'], 'rollbar');
+}
+
+
+return $config;

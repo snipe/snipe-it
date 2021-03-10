@@ -52,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
 
-        if (($this->app->environment('production'))  && (config('services.rollbar.access_token'))){
+        if (($this->app->environment('production'))  && (config('logging.channels.rollbar.access_token'))) {
             $this->app->register(\Rollbar\Laravel\RollbarServiceProvider::class);
         }
 
