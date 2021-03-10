@@ -175,6 +175,7 @@ class StatuslabelsController extends Controller
         $labels=[];
         $points=[];
         $default_color_count = 0;
+        $colors_array = array();
 
         foreach ($statuslabels as $statuslabel) {
             if ($statuslabel->assets_count > 0) {
