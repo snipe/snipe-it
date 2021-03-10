@@ -101,7 +101,8 @@ return [
          */
         'temporary_directory' => storage_path('app/backup-temp'),
 
-        'encryption' => \ZipArchive::EM_AES_256,
+        //'encryption' => \ZipArchive::EM_AES_256,
+        'encryption' => null,
     ],
 
     /*
