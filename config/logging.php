@@ -15,7 +15,7 @@ $config = [
     |
     */
 
-    'default' => env('LOG_CHANNEL', 'stack'),
+    'default' => 'stack',
 
     /*
     |--------------------------------------------------------------------------
@@ -58,6 +58,7 @@ $config = [
             'access_token' => env('ROLLBAR_TOKEN'),
             'level' => env('APP_LOG_LEVEL', 'debug'),
         ],
+
 
         'slack' => [
             'driver' => 'slack',
