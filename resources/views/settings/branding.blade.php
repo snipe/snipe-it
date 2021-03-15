@@ -105,7 +105,7 @@
                         "logoLabel" => trans('admin/settings/general.favicon'),
                         "logoClearVariable" => "clear_favicon",
                         "helpBlock" => trans('admin/settings/general.favicon_size') .' '. trans('admin/settings/general.favicon_format'),
-                        "allowedTypes" => "image/x-icon,image/gif,image/jpeg,image/png,image/svg,image/vnd.microsoft.icon",
+                        "allowedTypes" => "image/x-icon,image/gif,image/jpeg,image/png,image/svg,image/svg+xml,image/vnd.microsoft.icon",
                         "maxSize" => 20000
                     ])
 
