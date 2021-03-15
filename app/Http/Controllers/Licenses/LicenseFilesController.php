@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Helpers\StorageHelper;
 
 class LicenseFilesController extends Controller
 {
@@ -143,18 +144,18 @@ class LicenseFilesController extends Controller
 
                 // We have to override the URL stuff here, since local defaults in Laravel's Flysystem
                 // won't work, as they're not accessible via the web
-                if (config('filesystems.default') == 'local') {
-                    return Storage::download($file);
+                if (config('filesystems.default') == 'local') { // TODO - is there any way to fix this at the StorageHelper layer?
+                    return StorageHelper::downloader($file);
                 } else {
                     if ($download != 'true') {
                         \Log::debug('display the file');
-                        if ($contents = file_get_contents(Storage::url($file))) {
+                        if ($contents = file_get_contents(Storage::url($file))) { // TODO - this will fail on private S3 files or large public ones
                             return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
                         }
                         return JsonResponse::create(["error" => "Failed validation: "], 500);
                     }
 
-                    return Storage::download($file);
+                    return StorageHelper::downloader($file);
                 }
 
             }
