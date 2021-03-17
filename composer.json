@@ -65,6 +65,7 @@
     "codeception/module-rest": "^1.2",
     "codeception/module-webdriver": "^1.0",
     "fzaninotto/faker": "^1.9",
+    "nunomaduro/collision": "v3.2.0",
     "overtrue/phplint": "^2.2",
     "phpunit/php-token-stream": "^3.1",
     "phpunit/phpunit": "^8.5",
