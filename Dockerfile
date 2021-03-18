@@ -1,6 +1,10 @@
 FROM ubuntu:bionic
 LABEL maintainer Brady Wetherington <uberbrady@gmail.com>
 
+# No need to add `apt-get clean` here, reference:
+# - https://github.com/snipe/snipe-it/pull/9201
+# - https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#apt-get
+
 RUN export DEBIAN_FRONTEND=noninteractive; \
     export DEBCONF_NONINTERACTIVE_SEEN=true; \
     echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections; \
@@ -37,7 +41,6 @@ libmcrypt-dev \
 php7.2-dev \
 ca-certificates \
 unzip \
-&& apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
