@@ -504,9 +504,9 @@ class LdapAd extends LdapAdConfiguration
     {
         try {
             $this->ldap->connect();
-        } catch (\Adldap\Auth\BindException $e) {
-            Log::error($e);
-            throw new Exception('Unable to connect to LDAP directory!');
+        } catch (\Exception $e) {
+            Log::debug('LDAP ERROR: '.$e->getMessage());
+            throw new Exception($e->getMessage());
         }
     }
 
