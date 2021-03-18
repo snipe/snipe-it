@@ -55,9 +55,9 @@ class SettingsController extends Controller
                 'message' => 'Successfully connected to LDAP server.'
             ];
         } catch (\Exception $ex) {
-                \Log::debug('Connection to LDAP server '.Setting::getSettings()->ldap_server.' failed. Please check your LDAP settings and try again.');
+                \Log::debug('Connection to LDAP server '.Setting::getSettings()->ldap_server.' failed. Please check your LDAP settings and try again. Server Responded with error: ' . $ex->getMessage());
             return response()->json(
-                ['message' => 'Connection to LDAP server '.Setting::getSettings()->ldap_server.' failed. Error: ' . $ex->getMessage() . ' Verify that the LDAP hostname is entered correctly and that it can be reached from this web server.'
+                ['message' => 'Connection to LDAP server '.Setting::getSettings()->ldap_server." failed. Verify that the LDAP hostname is entered correctly and that it can be reached from this web server. \n\nServer Responded with error: " . $ex->getMessage()
 
                 ], 400);
         }
@@ -72,7 +72,7 @@ class SettingsController extends Controller
             ];
         } catch (\Exception $ex) {
             Log::info('LDAP Bind failed');
-            return response()->json(['message' => 'Connection to LDAP successful, but we were unable to Bind the LDAP user '.Setting::getSettings()->ldap_uname.'. Verify your that your LDAP Bind username and password are correct. Error: ' . $ex->getMessage()
+            return response()->json(['message' => 'Connection to LDAP successful, but we were unable to Bind the LDAP user '.Setting::getSettings()->ldap_uname.". Verify your that your LDAP Bind username and password are correct. \n\nServer Responded with error: " . $ex->getMessage()
             ], 400);
         }
 
