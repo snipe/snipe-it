@@ -80,6 +80,7 @@
         <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
         <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
 
+    @livewireStyles
 
   </head>
 
@@ -926,6 +927,6 @@
     @endif
 
 
-
+    @livewireScripts
   </body>
 </html>
