@@ -441,6 +441,11 @@ Form::macro('alt_barcode_types', function ($name = "alt_barcode", $selected = nu
         'C39',
         'PDF417',
         'EAN5',
+        'EAN13',
+        'UPCA',
+        'UPCE',
+
+        
 
     );
 
