@@ -111,7 +111,7 @@ class LoginController extends Controller
                     Auth::login($user, true);
                 } else {
                     $username = $saml->getUsername();
-                    Log::error("SAML user '$username' could not be found in database.");
+                    \Log::warning("SAML user '$username' could not be found in database.");
                     $request->session()->flash('error', trans('auth/message.signin.error'));
                     $saml->clearData();
                 }
@@ -121,7 +121,7 @@ class LoginController extends Controller
                     $user->save();
                 }
             } catch (\Exception $e) {
-                Log::error("There was an error authenticating the SAML user: " . $e->getMessage());
+                \Log::warning("There was an error authenticating the SAML user: " . $e->getMessage());
                 throw new \Exception($e->getMessage());
             }
         }
