@@ -78,7 +78,7 @@ final class Company extends SnipeModel
             $company_id = null;
         }
 
-        $table = ($table_name) ? DB::getTablePrefix().$table_name."." : '';
+        $table = ($table_name) ? $table_name."." : '';
 
         if(\Schema::hasColumn($query->getModel()->getTable(), $column)){
              return $query->where($table.$column, '=', $company_id); 
