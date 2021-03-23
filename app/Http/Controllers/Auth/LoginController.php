@@ -58,12 +58,12 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct(LdapAd $ldap, Saml $saml)
+    public function __construct(/*LdapAd $ldap, */ Saml $saml)
     {
         parent::__construct();
         $this->middleware('guest', ['except' => ['logout','postTwoFactorAuth','getTwoFactorAuth','getTwoFactorEnroll']]);
         Session::put('backUrl', \URL::previous());
-        $this->ldap = $ldap;
+        // $this->ldap = $ldap;
         $this->saml = $saml;
     }
 
@@ -140,10 +140,10 @@ class LoginController extends Controller
      * 
      * @throws \Exception
      */
-    private function loginViaLdap(Request $request): User
+    private function loginViaLdap(LdapAd $ldap, Request $request): User
     {
         try {
-            return $this->ldap->ldapLogin($request->input('username'), $request->input('password'));
+            return $ldap->ldapLogin($request->input('username'), $request->input('password'));
         } catch (\Exception $ex) {
             LOG::debug("LDAP user login: " . $ex->getMessage());
             throw new \Exception($ex->getMessage());
@@ -217,7 +217,7 @@ class LoginController extends Controller
         $user = null;
 
         // Should we even check for LDAP users?
-        if ($this->ldap->init()) {
+        if (Setting::getSettings()->ldap_enabled) { // avoid hitting the $this->ldap
             LOG::debug("LDAP is enabled.");
             try {
                 LOG::debug("Attempting to log user in by LDAP authentication.");
