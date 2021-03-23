@@ -36,9 +36,6 @@ class CustomFieldSetDefaultValuesForModel extends Component
     public function render()
     {
         // return 'fart<div>Hi: {{ $this->add_default_values }} yeah?</div>';
-        if($this->fieldset_id) {
-            $this->fields = CustomFieldset::find($this->fieldset_id)->fields()->get();
-        }
         return view('livewire.custom-field-set-default-values-for-model');
     }
 }
