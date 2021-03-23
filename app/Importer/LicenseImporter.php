@@ -82,7 +82,7 @@ class LicenseImporter extends ItemImporter
                         $targetLicense->save();
                     } catch (\Exception $ex){
                         if($ex->getMessage() === "Creating default object from empty value"){
-                            return back()->withError(trans("admin/licenses/message.not_found"));
+                            return back()->withError(trans("admin/licenses/message.not_enough_seats"));
                         } else {
                             return back()->withError($ex->getMessage());
                         }
