@@ -73,12 +73,21 @@ class LicenseImporter extends ItemImporter
                 $asset = Asset::where('asset_tag', $asset_tag)->first();
                 $targetLicense = $license->freeSeat();
                 if ($checkout_target) {
-                    $targetLicense->assigned_to = $checkout_target->id;
-                    $targetLicense->user_id = Auth::id();
-                    if ($asset) {
-                        $targetLicense->asset_id = $asset->id;
+                    try{
+                        $targetLicense->assigned_to = $checkout_target->id;
+                        $targetLicense->user_id = Auth::id();
+                        if ($asset) {
+                            $targetLicense->asset_id = $asset->id;
+                        }
+                        $targetLicense->save();
+                    } catch (\Exception $ex){
+                        if($ex->getMessage() === "Creating default object from empty value"){
+                            return back()->withError(trans("admin/licenses/message.not_found"));
+                        } else {
+                            return back()->withError($ex->getMessage());
+                        }
+
                     }
-                    $targetLicense->save();
                 } elseif ($asset) {
                     $targetLicense->user_id = Auth::id();
                     $targetLicense->asset_id = $asset->id;
