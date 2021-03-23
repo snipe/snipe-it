@@ -35,4 +35,14 @@ class LicensePolicy extends CheckoutablePermissionsPolicy
         return false;
     }
 
+    /**
+     * Determine whether the user can access files associated with licenses.
+     *
+     * @param  \App\Models\User  $user
+     * @return mixed
+     */
+    public function files(User $user)
+    {
+        return $user->hasAccess($this->columnName().'.files');
+    }
 }
