@@ -40,13 +40,15 @@ do
   [ ! -d "/var/lib/snipeit/$dir" ] && mkdir -p "/var/lib/snipeit/$dir"
 done
 
-# Sync var/lib/snipeit with /var/www/html directory
+# Sync /var/lib/snipeit (docker volume) with /var/www/html directory
 ln -fs \
-  "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \
+  "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads"
 ln -fs \
-  "/var/lib/snipeit/data/uploads" "/var/www/html/public/uploads" \
+  "/var/lib/snipeit/data/uploads" "/var/www/html/public/uploads"
 ln -fs \
-  "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups" \
+  "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups"
+ln -fs \
+  "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key"
 ln -fs \
   "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key"
 
