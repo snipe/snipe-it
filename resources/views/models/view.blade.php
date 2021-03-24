@@ -146,6 +146,13 @@
               </li>
               @endif
 
+                  @if ($model->lifetime)
+                      <li>
+                          Срок службы:
+                          {{ $model->lifetime }}
+                      </li>
+                  @endif
+
               @if ($model->depreciation)
               <li>
                 {{ trans('general.depreciation') }}:

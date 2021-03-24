@@ -148,6 +148,24 @@ class AssetPresenter extends Presenter
                 "title" => trans('general.purchase_cost'),
                 "footerFormatter" => 'sumFormatter',
             ], [
+                "field" => "depreciable_cost",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => "Остаточная стоимость",
+                "footerFormatter" => 'sumFormatter',
+            ], [
+//                "field" => "depreciable_cost",
+//                "searchable" => true,
+                "sortable" => true,
+                "title" => "Срок эксплуатации",
+                "formatter" => 'lifetimeFormatter',
+            ], [
+                "field" => "quality",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => "Состояние",
+                "formatter" => 'qualityFormatter',
+            ], [
                 "field" => "order_number",
                 "searchable" => true,
                 "sortable" => true,

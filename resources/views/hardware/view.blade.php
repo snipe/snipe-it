@@ -464,6 +464,51 @@
                   </div>
                   @endif
 
+
+                  @if ($asset->depreciable_cost)
+                    <div class="row">
+                      <div class="col-md-2">
+                        <strong>
+                          Остаточная стоимость
+                        </strong>
+                      </div>
+                      <div class="col-md-6">
+                        @if (($asset->id) && ($asset->location))
+                          {{ $asset->location->currency }}
+                        @elseif (($asset->id) && ($asset->location))
+                          {{ $asset->location->currency }}
+                        @else
+                          {{ $snipeSettings->default_currency }}
+                        @endif
+                        {{ \App\Helpers\Helper::formatCurrencyOutput($asset->depreciable_cost)}}
+                      </div>
+                    </div>
+                  @endif
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      <strong>
+                        Состояние
+                      </strong>
+                    </div>
+                    <div class="col-md-6">
+                      @if ($asset->quality == 5)
+                        <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
+                      @elseif  ($asset->quality == 4)
+                        <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+                      @elseif  ($asset->quality == 3)
+                        <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+                      @elseif  ($asset->quality == 2)
+                        <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+                      @elseif  ($asset->quality == 1)
+                        <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+                      @else
+                        <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+                      @endif
+
+                    </div>
+                  </div>
+
                   @if ($asset->order_number)
                   <div class="row">
                     <div class="col-md-2">

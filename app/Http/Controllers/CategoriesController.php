@@ -82,7 +82,7 @@ class CategoriesController extends Controller
         $category->require_acceptance   = $request->input('require_acceptance', '0');
         $category->checkin_email        = $request->input('checkin_email', '0');
         $category->user_id              = Auth::id();
-
+        $category->lifetime             = $request->input('lifetime', '0');
         $category = $request->handleImages($category,600, public_path().'/uploads/categories');
 
         if ($category->save()) {
@@ -141,6 +141,7 @@ class CategoriesController extends Controller
         $category->use_default_eula     = $request->input('use_default_eula', '0');
         $category->require_acceptance   = $request->input('require_acceptance', '0');
         $category->checkin_email        = $request->input('checkin_email', '0');
+        $category->lifetime             = $request->input('lifetime', '0');
 
         // Set the model's image property to null if the image is being deleted
         if ($request->input('image_delete') == 1) {

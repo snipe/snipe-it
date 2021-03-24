@@ -83,6 +83,7 @@ class AssetModelsController extends Controller
         $model->manufacturer_id     = $request->input('manufacturer_id');
         $model->category_id         = $request->input('category_id');
         $model->notes               = $request->input('notes');
+        $model->lifetime            = $request->input('lifetime');
         $model->user_id             = Auth::id();
         $model->requestable         = Input::has('requestable');
 
@@ -152,6 +153,7 @@ class AssetModelsController extends Controller
         $model->manufacturer_id     = $request->input('manufacturer_id');
         $model->category_id         = $request->input('category_id');
         $model->notes               = $request->input('notes');
+        $model->lifetime               = $request->input('lifetime');
         $model->requestable         = $request->input('requestable', '0');
 
         $this->removeCustomFieldsDefaultValues($model);

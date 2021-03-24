@@ -77,8 +77,15 @@ class AssetCheckoutController extends Controller
             if ($request->filled('expected_checkin')) {
                 $expected_checkin = $request->get('expected_checkin');
             }
-
-            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
+            $depreciable_cost = null;
+            if ($request->filled('depreciable_cost')) {
+                $depreciable_cost = $request->get('depreciable_cost');
+            }
+            $quality = null;
+            if ($request->filled('quality')) {
+                $quality =intval( $request->get('quality'));
+            }
+            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'),$location = null,$quality,$depreciable_cost)) {
                 return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
             }
 
