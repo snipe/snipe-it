@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Diffyg Hawliau.',
     'user_deleted_warning'      => 'Defnyddiwr wedi\'i dileu. Rhaid adfer y defnyddiwr I newid eu manylion neu clustnodi ased iddynt.',
     'ldap_not_configured'        => 'Nid ywr gosodiadau I dilysu trwy LDAP wedi gosod ar y system.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

@@ -1,5 +1,5 @@
 /*
- * Skin: orange
+ * Skin: orange dark
  * ----------
  */
 @import "../bootstrap-less/mixins.less";
@@ -108,10 +108,16 @@ a {
   --background: #222;
   --back-main: #333;
   --back-sub: #444;
+  --back-sub-alt: #dfd9d8;
+  --button-default: darken(@orange, 15%);
+  --button-primary: darken(@orange, 25%);
+  --button-hover: darken(@orange, 30%);
   --header: @orange; /* Use same as Header picker */
-  --text-main: #FFF;
-  --text-sub: #BBB;
-  --link: lighten(@orange, 50%); /* Use same as Header picker */
+  --text-main: #BBB;
+  --text-sub: #9b9b9b;
+  --link: #D43900; /* Use same as Header picker, lighten by 70% */
+  --visited-link: #D46A43; /* Use same as Header picker, lighten by 70% */
+  --hover-link: #FF4500; /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF; /* Use same as Header picker */
   --light-link: #fff; /* Use same as Header picker */
 }
@@ -123,7 +129,11 @@ a {
   border-color: var(--header);
 }
 
-.navbar-nav>li>a:link {
+.bootstrap-table .fixed-table-container .table thead th .sortable {
+  color: var(--nav-link);
+}
+
+.thead, .navbar-nav>li>a:link {
   color: var(--nav-link);
 }
 
@@ -132,15 +142,38 @@ a {
   color: var(--text-main);
 }
 
-a, a:link, a:visited, .btn-primary.hover {
-  color: var(--header);
+a:link {
+  color: var(--link);
 }
+
+a:visited {
+  color: var(--nav-link);
+}
+
+a:hover {
+  color: var(--hover-link);
+}
+
+.btn-primary.hover {
+  color: var(--nav-link);
+}
+
+.small-box h3, .small-box p {
+  color: var(--nav-link) !important;
+  a:hover {
+    text-decoration: none;
+    color: var(--nav-link) !important;
+  }
+}
+
+
 #accessoriesTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
 }
 #assetsListingTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
 }
+
 #assetsListingTable>tbody>tr.selected>td {
   background-color: var(--back-main);
 }
@@ -153,22 +186,30 @@ body {
 }
 .box-body, .box-footer, .box-header {
   background-color: var(--back-sub);
-  color: var(--text-main);
+  color: var(--header);
 }
 .btn-default{
-  background-color: var(--back-main);
-  color: var(--header);
+  background-color: var(--button-default);
+  color: var(--nav-link);
 }
+a:link.btn-default{
+  color: var(--nav-link);
+}
+.btn-default dropdown-toggle {
+  background-color: var(--button-default);
+  color: var(--nav-link);
+}
+
 .btn-default:active, .btn-default:focus, .btn-default:hover, .btn-default.active {
-  background-color: var(--back-sub);
-  color: var(--header);
+  background-color: var(--button-hover);
+  color: var(--background);
 }
-.btn-primary, .btn-primary.hover, .btn-primary:active, .text-blue {
-  color: var(--text-main)!important;
+.btn-primary, .btn-primary.hover, .btn-primary:active, .text-orange {
+  color: var(--nav-link)!important;
 }
 .btn-primary:hover {
-  background-color: var(--back-main);
-  color: var(--header)!important;
+  background-color: var(--button-primary);
+  color: var(--link)!important;
 }
 #componentsTable>tbody>tr>td>nobr>a>i.fa {
   color: var(--text-main);
@@ -195,13 +236,20 @@ body {
 }
 .dropdown-menu, .dropdown-menu>li>a {
   background-color: var(--back-sub);
-  color: var(--text-main);
+  color: var(--text-main) !important;
 }
 .dropdown-menu>li>a:hover {
   background-color: var(--back-main);
-  color: var(--text-main);
+  color: var(--nav-link);
+}
+.fixed-table-body thead th .th-inner{
+  color: var(--nav-link);
 }
 .form-control {
+  background-color: var(--back-main);
+  color: var(--text-main);
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
   background-color: var(--back-main);
   color: var(--text-main);
 }
@@ -269,6 +317,9 @@ input[type=text], input[type=search] {
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   color: var(--text-main);
 }
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: var(--header);
+}
 .select2-selection--single {
   background-color: var(--back-sub)!important;
   color: var(--text-main)!important;
@@ -290,20 +341,29 @@ input[type=text], input[type=search] {
 .table-striped>tbody>tr:nth-of-type(odd) {
   background-color: var(--back-sub);
 }
-#webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa {
+.table-striped>tbody>tr:nth-of-type(even){
+  background-color: var(--back-sub-alt);
+  color: var(--header);
+}
+#webui>div>div>div>div>div>table>tbody>tr>td>a>i.fa, .box-body, .box-footer, .box-header {
   color: var(--text-main);
+}
+
+.box-header.with-border {
+  border-bottom: #000;
 }
 
 a {
   color: var(--link);
+
   &:link {
-    color: var(--link);
-  }
+    color: var(--link)  }
   &:hover {
-    color: var(--light-link);
+    color: var(--hover-link);
+    text-decoration: underline;
   }
   &:visited {
-    color: var(--link);
+    color: var(--visited-link)
   }
 }
 

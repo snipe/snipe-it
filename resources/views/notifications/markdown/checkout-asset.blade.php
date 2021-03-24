@@ -20,8 +20,8 @@
 @if (isset($item->model))
 | **{{ trans('general.asset_model') }}** | {{ $item->model->name }} |
 @endif
-@if (isset($item->model_no))
-| **{{ trans('general.model_no') }}** | {{ $item->model_no }} |
+@if (isset($item->model->model_number))
+| **{{ trans('general.model_no') }}** | {{ $item->model->model_number }} |
 @endif
 @if (isset($item->serial))
 | **{{ trans('mail.serial') }}** | {{ $item->serial }} |
@@ -29,7 +29,7 @@
 @if (isset($last_checkout))
 | **{{ trans('mail.checkout_date') }}** | {{ $last_checkout }} |
 @endif
-@if (isset($expected_checkin))
+@if ((isset($expected_checkin)) && ($expected_checkin!=''))
 | **{{ trans('mail.expecting_checkin_date') }}** | {{ $expected_checkin }} |
 @endif
 @foreach($fields as $field)
@@ -64,7 +64,7 @@
 @endif
 
 
-Thanks,
+{{ trans('mail.best_regards') }}
 
 {{ $snipeSettings->site_name }}
 

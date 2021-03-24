@@ -84,7 +84,7 @@ Bulk Checkin &amp; Delete
                 <tfoot>
                   <tr>
                     <td colspan="6" class="warning">
-                      {{ Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
+                      {{ Form::select('status_id', $statuslabel_list , Request::old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
                       <label>Update all assets for these users to this status</label>
                     </td>
                   </tr>

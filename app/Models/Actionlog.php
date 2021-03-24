@@ -2,11 +2,9 @@
 namespace App\Models;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
-use Illuminate\Database\Eloquent\Model;
+use Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use Response;
-use Carbon;
 
 /**
  * Model for the Actionlog (the table that keeps a historical log of
@@ -41,9 +39,15 @@ class Actionlog extends SnipeModel
      */
     protected $searchableRelations = [
         'company' => ['name']
-    ];    
+    ];
 
-    // Overridden from Builder to automatically add the company
+    /**
+     * Override from Builder to automatically add the company
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public static function boot()
     {
         parent::boot();
@@ -60,17 +64,39 @@ class Actionlog extends SnipeModel
             }
         });
     }
-    // Eloquent Relationships below
+
+
+    /**
+     * Establishes the actionlog -> item relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function item()
     {
         return $this->morphTo('item')->withTrashed();
     }
 
+    /**
+     * Establishes the actionlog -> company relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function company()
     {
         return $this->hasMany('\App\Models\Company', 'id', 'company_id');
     }
 
+    /**
+     * Establishes the actionlog -> item type relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function itemType()
     {
 
@@ -80,6 +106,13 @@ class Actionlog extends SnipeModel
         return camel_case(class_basename($this->item_type));
     }
 
+    /**
+     * Establishes the actionlog -> target type relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function targetType()
     {
         if ($this->target_type == User::class) {
@@ -88,28 +121,14 @@ class Actionlog extends SnipeModel
         return camel_case(class_basename($this->target_type));
     }
 
-    public function parseItemRoute()
-    {
-        if ($this->itemType() == "asset") {
-            $itemroute = 'assets';
-        } elseif ($this->itemType() == "accessory") {
-            $itemroute = 'accessories';
-        } elseif ($this->itemType()=="consumable") {
-            $itemroute = 'consumables';
-        } elseif ($this->itemType()=="license") {
-            $itemroute = 'licenses';
-        } elseif ($this->itemType()=="component") {
-            $itemroute = 'components';
-        } else {
-            $itemroute = '';
-        }
 
-        return $itemroute;
-    }
-
-
-
-
+    /**
+     * Establishes the actionlog -> uploads relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function uploads()
     {
         return $this->morphTo('item')
@@ -117,39 +136,62 @@ class Actionlog extends SnipeModel
                     ->withTrashed();
     }
 
+    /**
+     * Establishes the actionlog -> userlog relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function userlog()
     {
         return $this->target();
     }
 
+    /**
+     * Establishes the actionlog -> user relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id')
                     ->withTrashed();
     }
 
+    /**
+     * Establishes the actionlog -> target relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function target()
     {
         return $this->morphTo('target')->withTrashed();
     }
 
-    public function childlogs()
-    {
-        return $this->hasMany('\App\Models\ActionLog', 'thread_id');
-    }
-
-    public function parentlog()
-    {
-        return $this->belongsTo('\App\Models\ActionLog', 'thread_id');
-    }
-
+    /**
+     * Establishes the actionlog -> location relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
     public function location() {
         return $this->belongsTo('\App\Models\Location', 'location_id' )->withTrashed();
     }
 
+
     /**
-       * Check if the file exists, and if it does, force a download
-       **/
+     * Check if the file exists, and if it does, force a download
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return string | false
+     */
     public function get_src($type = 'assets', $fieldname = 'filename')
     {
         if ($this->filename!='') {
@@ -162,8 +204,12 @@ class Actionlog extends SnipeModel
 
 
     /**
-       * Get the parent category name
-       */
+     * Saves the log record with the action type
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return boolean
+     */
     public function logaction($actiontype)
     {
 
@@ -176,6 +222,13 @@ class Actionlog extends SnipeModel
         }
     }
 
+    /**
+     * Calculate the number of days until the next audit
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return int
+     */
     public function daysUntilNextAudit($monthInterval = 12, $asset = null) {
 
         $now = Carbon::now();
@@ -192,6 +245,13 @@ class Actionlog extends SnipeModel
         return $next_audit_days;
     }
 
+    /**
+     * Calculate the date of the next audit
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return \Datetime
+     */
     public function calcNextAuditDate($monthInterval = 12, $asset = null) {
 
         $last_audit_date = Carbon::parse($this->created_at);
@@ -204,12 +264,12 @@ class Actionlog extends SnipeModel
     }
 
     /**
-       * getListingOfActionLogsChronologicalOrder
-       *
-       * @return mixed
-       * @author  Vincent Sposato <vincent.sposato@gmail.com>
-       * @version v1.0
-       */
+     * Gets action logs in chronological order, excluding uploads
+     *
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @since v1.0
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function getListingOfActionLogsChronologicalOrder()
     {
 

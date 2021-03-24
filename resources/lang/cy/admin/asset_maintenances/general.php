@@ -7,5 +7,8 @@
         'view'               => 'Gweld manylder Cynnal a Chadw Ased',
         'repair'             => 'Trwsio',
         'maintenance'        => 'Cynnal a Chadw',
-        'upgrade'            => 'Uwchraddio'
+        'upgrade'            => 'Uwchraddio',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

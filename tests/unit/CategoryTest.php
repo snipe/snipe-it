@@ -34,11 +34,13 @@ class CategoryTest extends BaseTest
          $category = $this->createValidCategory('asset-desktop-category');
          $models = factory(App\Models\AssetModel::class, 5)->states('mbp-13-model')->create(['category_id' => $category->id]);
 
-         $this->assertEquals(5, $category->has_models());
+         $this->assertEquals(5, $category->models->count());
          $this->assertCount(5, $category->models);
 
          $models->each(function($model) {
-             factory(App\Models\Asset::class, 2)->create(['model_id' => $model->id]);
+            // This is intentionally run twice to generate the ten imagined assets, done this way to keep it in sync with createValidAsset rather than using the factory directly.
+             $this->createValidAsset(['model_id' => $model->id]);
+             $this->createValidAsset(['model_id' => $model->id]);
          });
          $this->assertEquals(10, $category->itemCount());
      }

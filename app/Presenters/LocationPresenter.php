@@ -2,8 +2,6 @@
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-
 /**
  * Class LocationPresenter
  * @package App\Presenters
@@ -125,7 +123,16 @@ class LocationPresenter extends Presenter
                 "switchable" => true,
                 "title" =>  trans('admin/locations/table.country'),
                 "visible" => false,
-            ],[
+            ],
+            [
+                "field" => "ldap_ou",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" =>  trans('admin/locations/table.ldap_ou'),
+                "visible" => false,
+            ],
+            [
                 "field" => "manager",
                 "searchable" => false,
                 "sortable" => true,

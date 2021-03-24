@@ -21,52 +21,59 @@
 
 @section('content')
 
+<!-- row -->
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <!-- col-md-8 -->
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
+
+        <form id="create-form" class="form-horizontal" method="post" action="{{ (isset($formAction)) ? $formAction : \Request::url()  }}" autocomplete="off" role="form" enctype="multipart/form-data">
+
+        <!-- box -->
         <div class="box box-default">
-            <div class="box-header{{  ($item->id) ? ' with-border' : ''  }}">
+            <!-- box-header -->
+            <div class="box-header with-border text-right">
 
-            @if ($item->id)
-                    <h2 class="box-title">
-                        {{ $item->display_name }}
-                    </h2>
-            @endif
+                <div class="col-md-12 box-title text-right" style="padding: 0px; margin: 0px;">
 
-                @if (isset($helpText))
-                    <div class="box-tools pull-right">
-                        <button class="slideout-menu-toggle btn btn-box-tool btn-box-tool-lg" data-toggle="tooltip" title="Help"><i class="fa fa-question" aria-hidden="true"></i>
-                        <span class="sr-only">Help</span>
-                        </button>
+                    <div class="col-md-12" style="padding: 0px; margin: 0px;">
+                        <div class="col-md-9 text-left">
+                            @if ($item->id)
+                                <h2 class="box-title text-left" style="padding-top: 8px;">
+                                    {{ $item->display_name }}
+                                </h2>
+                            @endif
+                        </div>
+                        <div class="col-md-3 text-right" style="padding-right: 10px;">
+                            <a class="btn btn-link text-left" href="{{ URL::previous() }}">
+                                {{ trans('button.cancel') }}
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-check icon-white" aria-hidden="true"></i>
+                                {{ trans('general.save') }}
+                            </button>
+                        </div>
                     </div>
-                @endif
+                </div>
+
             </div><!-- /.box-header -->
 
+            <!-- box-body -->
             <div class="box-body">
-                <form id="create-form" class="form-horizontal" method="post" action="{{ (isset($formAction)) ? $formAction : \Request::url()  }}" autocomplete="off" role="form" enctype="multipart/form-data">
 
                     @if ($item->id)
                     {{ method_field('PUT') }}
                     @endif
 
-
                     <!-- CSRF Token -->
                     {{ csrf_field() }}
                     @yield('inputFields')
                     @include('partials.forms.edit.submit')
-                </form>
-            </div>
-        </div>
-    </div>
 
-    @if ((isset($helpText)) && (isset($helpTitle)))
-    <div class="slideout-menu">
-        <a href="#" class="slideout-menu-toggle pull-right">×</a>
-        <h2>
-            {{ $helpTitle}}
-        </h2>
-        <p>{{ $helpText }} </p>
-    </div>
-    @endif
-</div>
+            </div> <!-- ./box-body -->
+        </div> <!-- box -->
+        </form>
+    </div> <!-- col-md-8 -->
+
+</div><!-- ./row -->
 
 @stop

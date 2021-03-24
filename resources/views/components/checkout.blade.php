@@ -42,7 +42,7 @@
               <label for="assigned_qty" class="col-md-3 control-label">{{ trans('general.qty') }}
                 <i class='icon-asterisk'></i></label>
               <div class="col-md-9">
-                <input class="form-control" type="text" name="assigned_qty" id="assigned_qty" style="width: 70px;" value="{{ Input::old('assigned_qty') }}" />
+                <input class="form-control" type="text" name="assigned_qty" id="assigned_qty" style="width: 70px;" value="{{ old('assigned_qty') ?? 1 }}" />
                 {!! $errors->first('assigned_qty', '<br><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
             </div>

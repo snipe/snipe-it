@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'போதிய அனுமதிகள் இல்லை.',
     'user_deleted_warning'      => 'இந்த பயனர் நீக்கப்பட்டது. நீங்கள் அவற்றை திருத்தவோ அல்லது புதிய சொத்துகளை ஒதுக்கவோ இந்த பயனரை மீட்டெடுக்க வேண்டும்.',
     'ldap_not_configured'        => 'இந்த நிறுவலுக்கு LDAP ஒருங்கிணைப்பு கட்டமைக்கப்படவில்லை.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP конфигурациските поставки може да се најдат во Admin > Settings. Избраната локација (опционално) ќе биде поставена за сите увезени корисници.',
     'print_assigned'    => 'Печати задолжение',
     'software_user'     => 'Софтвер задолжен на :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Погледнете го/ја :name',
     'usercsv'           => 'CSV датотека',
     'two_factor_admin_optin_help' => 'Вашите тековни администраторски поставки овозможуваат селективно спроведување на автентикација со два фактори. ',

@@ -1,129 +1,211 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cache;
+use Parsedown;
 use Watson\Validating\ValidatingTrait;
-use Schema;
 
+/**
+ * Settings model.
+ */
 class Setting extends Model
 {
-    use Notifiable;
-    protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
+    use Notifiable, ValidatingTrait;
 
+    /**
+     * The app settings cache key name.
+     *
+     * @var string
+     */
+    const APP_SETTINGS_KEY = 'snipeit_app_settings';
+
+    /**
+     * The setup check cache key name.
+     *
+     * @var string
+     */
+    const SETUP_CHECK_KEY = 'snipeit_setup_check';
+
+    /**
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
+    protected $injectUniqueIdentifier = true;
+
+    /**
+     * Model rules.
+     *
+     * @var array
+     */
     protected $rules = [
-          'brand'     => 'required|min:1|numeric',
-          'qr_text'         => 'max:31|nullable',
-          'logo_img'        => 'mimes:jpeg,bmp,png,gif',
-          'alert_email'   => 'email_array|nullable',
-          'admin_cc_email'   => 'email|nullable',
-          'default_currency'   => 'required',
-          'locale'   => 'required',
-          'labels_per_page' => 'numeric|min:1',
-          'labels_width' => 'numeric',
-          'labels_height' => 'numeric',
-          'labels_pmargin_left' => 'numeric|nullable',
-          'labels_pmargin_right' => 'numeric|nullable',
-          'labels_pmargin_top' => 'numeric|nullable',
-          'labels_pmargin_bottom' => 'numeric|nullable',
-          'labels_display_bgutter' => 'numeric|nullable',
-          'labels_display_sgutter' => 'numeric|nullable',
-          'labels_fontsize' => 'numeric|min:5',
-          'labels_pagewidth' => 'numeric|nullable',
-          'labels_pageheight' => 'numeric|nullable',
-          'login_remote_user_enabled' => 'numeric|nullable',
-          'login_common_disabled' => 'numeric|nullable',
+          'brand'                               => 'required|min:1|numeric',
+          'qr_text'                             => 'max:31|nullable',
+          'alert_email'                         => 'email_array|nullable',
+          'admin_cc_email'                      => 'email|nullable',
+          'default_currency'                    => 'required',
+          'locale'                              => 'required',
+          'slack_endpoint'                      => 'url|required_with:slack_channel|nullable',
+          'labels_per_page'                     => 'numeric',
+          'slack_channel'                       => 'regex:/^[\#\@]?\w+/|required_with:slack_endpoint|nullable',
+          'slack_botname'                       => 'string|nullable',
+          'labels_width'                        => 'numeric',
+          'labels_height'                       => 'numeric',
+          'labels_pmargin_left'                 => 'numeric|nullable',
+          'labels_pmargin_right'                => 'numeric|nullable',
+          'labels_pmargin_top'                  => 'numeric|nullable',
+          'labels_pmargin_bottom'               => 'numeric|nullable',
+          'labels_display_bgutter'              => 'numeric|nullable',
+          'labels_display_sgutter'              => 'numeric|nullable',
+          'labels_fontsize'                     => 'numeric|min:5',
+          'labels_pagewidth'                    => 'numeric|nullable',
+          'labels_pageheight'                   => 'numeric|nullable',
+          'login_remote_user_enabled'           => 'numeric|nullable',
+          'login_common_disabled'               => 'numeric|nullable',
           'login_remote_user_custom_logout_url' => 'string|nullable',
-          'thumbnail_max_h'     => 'numeric|max:500|min:25',
-          'pwd_secure_min' => 'numeric|required|min:5',
-          'audit_warning_days' => 'numeric|nullable',
-          'audit_interval' => 'numeric|nullable',
-          'custom_forgot_pass_url' => 'url|nullable',
-          'privacy_policy_link' => 'nullable|url'
+          'login_remote_user_header_name'       => 'string|nullable',
+          'thumbnail_max_h'                     => 'numeric|max:500|min:25',
+          'pwd_secure_min'                      => 'numeric|required|min:8',
+          'audit_warning_days'                  => 'numeric|nullable',
+          'audit_interval'                      => 'numeric|nullable',
+          'custom_forgot_pass_url'              => 'url|nullable',
+          'privacy_policy_link'                 => 'nullable|url',
     ];
 
-    protected $fillable = ['site_name','email_domain','email_format','username_format'];
+    protected $fillable = [
+        'site_name',
+        'email_domain',
+        'email_format',
+        'username_format',
+    ];
 
-    public static function getSettings()
+    /**
+     * Get the app settings.
+     *  Cache is expired on Setting model saved in EventServiceProvider.
+     *
+     * @author Wes Hulette <jwhulette@gmail.com>
+     *
+     * @since 5.0.0
+     *
+     * @return \App\Models\Setting|null
+     */
+    public static function getSettings(): ?Setting
     {
-        static $static_cache = null;
-
-        if (!$static_cache) {
-            if (Schema::hasTable('settings')) {
-                $static_cache = Setting::first();
+        return Cache::rememberForever(self::APP_SETTINGS_KEY, function () {
+            // Need for setup as no tables exist
+            try {
+                return self::first();
+            } catch (\Throwable $th) {
+                return null;
             }
+        });
         }
 
-            return $static_cache;
+    /**
+     * Check to see if setup process is complete.
+     *  Cache is expired on Setting model saved in EventServiceProvider.
+     *
+     * @return bool
+     */
+    public static function setupCompleted(): bool
+    {
+            try {
+                $usercount = User::withTrashed()->count();
+                $settingsCount = self::count();
+                return $usercount > 0 && $settingsCount > 0;
+            } catch (\Throwable $th) {
+                \Log::debug('User table and settings table DO NOT exist or DO NOT have records');
+                // Catch the error if the tables dont exit
+                return false;
+            }
+
 
     }
 
-    public static function setupCompleted()
+    /**
+     * Get the current Laravel version.
+     *
+     * @return string
+     */
+    public function lar_ver(): string
     {
+        $app = App::getFacadeApplication();
 
-        $users_table_exists = Schema::hasTable('users');
-        $settings_table_exists = Schema::hasTable('settings');
-
-        if ($users_table_exists && $settings_table_exists) {
-            $usercount = User::withTrashed()->count();
-            $settingsCount = Setting::count();
-            return ($usercount > 0 && $settingsCount > 0);
-        }
-
-    }
-
-    public function lar_ver()
-    {
-        $app = \App::getFacadeApplication();
         return $app::VERSION;
     }
 
-    public static function getDefaultEula()
+    /**
+     * Get the default EULA text.
+     *
+     * @return string|null
+     */
+    public static function getDefaultEula(): ?string
     {
-        $Parsedown = new \Parsedown();
-        if (Setting::getSettings()->default_eula_text) {
-            return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+        if (self::getSettings()->default_eula_text) {
+            $parsedown = new Parsedown();
+
+            return $parsedown->text(e(self::getSettings()->default_eula_text));
         }
+
         return null;
     }
 
-    public function modellistCheckedValue ($element) {
-
+    /**
+     * Check wether to show in model dropdowns.
+     *
+     * @param string $element
+     *
+     * @return bool
+     */
+    public function modellistCheckedValue($element): bool
+    {
+        $settings = self::getSettings();
         // If the value is blank for some reason
-        if ($this->modellist_displays=='') {
+        if ($settings->modellist_displays == '') {
             return false;
         }
-        $values = explode(',', $this->modellist_displays);
+
+        $values = explode(',', $settings->modellist_displays);
 
         foreach ($values as $value) {
             if ($value == $element) {
                 return true;
             }
         }
-        return false;
 
+        return false;
     }
 
     /**
      * Escapes the custom CSS, and then un-escapes the greater-than symbol
      * so it can work with direct descendant characters for bootstrap
-     * menu overrides like:
+     * menu overrides like:.
      * 
      * .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a
      * 
      * Important: Do not remove the e() escaping here, as we output raw in the blade.
      *
      * @return string escaped CSS
+     *
      * @author A. Gianotto <snipe@snipe.net>
      */
-    public function show_custom_css()
+    public function show_custom_css(): string
     {
-        $custom_css = Setting::getSettings()->custom_css;
+        $custom_css = self::getSettings()->custom_css;
         $custom_css = e($custom_css);
         // Needed for modifying the bootstrap nav :(
         $custom_css = str_ireplace('script', 'SCRIPTS-NOT-ALLOWED-HERE', $custom_css);
         $custom_css = str_replace('&gt;', '>', $custom_css);
+        // Allow String output (needs quotes)
+        $custom_css = str_replace('&quot;', '"', $custom_css);
+
         return $custom_css;
     }
 
@@ -131,68 +213,82 @@ class Setting extends Model
     * Converts bytes into human readable file size.
     *
     * @param string $bytes
+     *
     * @return string human readable file size (2,87 Мб)
+     *
     * @author Mogilev Arseny
     */
-    public static function fileSizeConvert($bytes)
+    public static function fileSizeConvert($bytes): string
     {
         $bytes = floatval($bytes);
-            $arBytes = array(
-                0 => array(
-                    "UNIT" => "TB",
-                    "VALUE" => pow(1024, 4)
-                ),
-                1 => array(
-                    "UNIT" => "GB",
-                    "VALUE" => pow(1024, 3)
-                ),
-                2 => array(
-                    "UNIT" => "MB",
-                    "VALUE" => pow(1024, 2)
-                ),
-                3 => array(
-                    "UNIT" => "KB",
-                    "VALUE" => 1024
-                ),
-                4 => array(
-                    "UNIT" => "B",
-                    "VALUE" => 1
-                ),
-            );
+        $arBytes = [
+                0 => [
+                    'UNIT'  => 'TB',
+                    'VALUE' => pow(1024, 4),
+                ],
+                1 => [
+                    'UNIT'  => 'GB',
+                    'VALUE' => pow(1024, 3),
+                ],
+                2 => [
+                    'UNIT'  => 'MB',
+                    'VALUE' => pow(1024, 2),
+                ],
+                3 => [
+                    'UNIT'  => 'KB',
+                    'VALUE' => 1024,
+                ],
+                4 => [
+                    'UNIT'  => 'B',
+                    'VALUE' => 1,
+                ],
+            ];
 
             foreach ($arBytes as $arItem) {
-                if ($bytes >= $arItem["VALUE"]) {
-                    $result = $bytes / $arItem["VALUE"];
-                    $result = round($result, 2) .$arItem["UNIT"];
+            if ($bytes >= $arItem['VALUE']) {
+                $result = $bytes / $arItem['VALUE'];
+                $result = round($result, 2).$arItem['UNIT'];
                     break;
                 }
             }
+
             return $result;
     }
 
     /**
      * The url for slack notifications.
-     * Used by Notifiable trait.
-     * @return mixed
+     *  Used by Notifiable trait.
+     *
+     * @return string
      */
-    public function routeNotificationForSlack()
+    public function routeNotificationForSlack(): string
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
-        return $this->slack_endpoint;
+        return self::getSettings()->slack_endpoint;
     }
 
-    public function routeNotificationForMail()
+    /**
+     * Get the mail reply to address from configuration.
+     *
+     * @return string
+     */
+    public function routeNotificationForMail(): string
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
         return config('mail.reply_to.address');
     }
 
-    public static function passwordComplexityRulesSaving($action = 'update')
+    /**
+     * Get the password complexity rule.
+     *
+     * @return string
+     */
+    public static function passwordComplexityRulesSaving($action = 'update'): string
     {
         $security_rules = '';
-        $settings = Setting::getSettings();
+        $settings = self::getSettings();
 
         // Check if they have uncommon password enforcement selected in settings
         if ($settings->pwd_secure_uncommon == 1) {
@@ -200,8 +296,8 @@ class Setting extends Model
         }
 
         // Check for any secure password complexity rules that may have been selected
-        if ($settings->pwd_secure_complexity!='') {
-            $security_rules  .= '|'.$settings->pwd_secure_complexity;
+        if ($settings->pwd_secure_complexity != '') {
+            $security_rules .= '|'.$settings->pwd_secure_complexity;
         }
 
         if ($action == 'update') {
@@ -209,9 +305,45 @@ class Setting extends Model
         }
 
         return 'required|min:'.$settings->pwd_secure_min.$security_rules;
-
     }
 
 
 
+    /**
+     * Get the specific LDAP settings
+     *
+     * @author Wes Hulette <jwhulette@gmail.com>
+     *
+     * @since 5.0.0
+     *
+     * @return Collection
+     */
+    public static function getLdapSettings(): Collection
+    {
+        $ldapSettings = self::select([
+            'ldap_enabled',
+            'ldap_server',
+            'ldap_uname',
+            'ldap_pword',
+            'ldap_basedn',
+            'ldap_filter',
+            'ldap_username_field',
+            'ldap_lname_field',
+            'ldap_fname_field',
+            'ldap_auth_filter_query',
+            'ldap_version',
+            'ldap_active_flag',
+            'ldap_emp_num',
+            'ldap_email',
+            'ldap_server_cert_ignore',
+            'ldap_port',
+            'ldap_tls',
+            'ldap_pw_sync',
+            'is_ad',
+            'ad_domain',
+            'ad_append_domain',
+            ])->first()->getAttributes();
+
+        return collect($ldapSettings);
+    }
 }

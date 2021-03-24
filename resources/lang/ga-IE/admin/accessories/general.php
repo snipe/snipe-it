@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Maidir Accessories',
-    'about_accessories_text'  			=> 'Is éard atá i gceist le hábhair a eiseoidh tú d\'úsáideoirí ach nach bhfuil sraithuimhir acu (nó nach bhfuil cúram ort faoi iad a rianú uathúil). Mar shampla, lucha ríomhaire nó méarchláir.',
     'accessory_category' 				=> 'Catagóir Cúlpháirtí',
     'accessory_name'  					=> 'Ainm Cúlpháirtí',
     'checkout'  							=> 'Seiceáil Cúlpháirtí',

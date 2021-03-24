@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Būklė',
     'title'      	=> 'Įranga ',
     'image'		=> 'Įrenginio nuotrauka',
-    'days_without_acceptance' => 'Dienų skaičius be priėmimo'
+    'days_without_acceptance' => 'Dienų skaičius be priėmimo',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

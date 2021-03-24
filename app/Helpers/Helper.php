@@ -1,25 +1,16 @@
 <?php
 namespace App\Helpers;
 
-use DB;
-use App\Models\Statuslabel;
-use App\Models\Location;
-use App\Models\Department;
-use App\Models\AssetModel;
-use App\Models\Company;
-use App\Models\User;
-use App\Models\Manufacturer;
-use App\Models\Supplier;
-use App\Models\Category;
-use App\Models\Depreciation;
-use App\Models\CustomFieldset;
-use App\Models\CustomField;
-use App\Models\Component;
 use App\Models\Accessory;
+use App\Models\Component;
 use App\Models\Consumable;
-use App\Models\Asset;
+use App\Models\CustomField;
+use App\Models\CustomFieldset;
+use App\Models\Depreciation;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use Crypt;
+use Image;
 use Illuminate\Contracts\Encryption\DecryptException;
 
 class Helper
@@ -64,27 +55,313 @@ class Helper
 
     /**
      * Static colors for pie charts.
-     * This is inelegant, and could be refactored later.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.3]
      * @return Array
      */
-    public static function chartColors()
+    public static function defaultChartColors($index = 0)
     {
         $colors = [
-            '#f56954',
-            '#00a65a',
-            '#f39c12',
-            '#00c0ef',
-            '#3c8dbc',
-            '#d2d6de',
-            '#3c8dbc',
-            '#3c8dbc',
-            '#3c8dbc',
-
+            "#008941",
+            "#FF4A46",
+            "#006FA6",
+            "#A30059",
+            "#1CE6FF",
+            "#FFDBE5",
+            "#7A4900",
+            "#0000A6",
+            "#63FFAC",
+            "#B79762",
+            "#004D43",
+            "#8FB0FF",
+            "#997D87",
+            "#5A0007",
+            "#809693",
+            "#FEFFE6",
+            "#1B4400",
+            "#4FC601",
+            "#3B5DFF",
+            "#4A3B53",
+            "#FF2F80",
+            "#61615A",
+            "#BA0900",
+            "#6B7900",
+            "#00C2A0",
+            "#FFAA92",
+            "#FF90C9",
+            "#B903AA",
+            "#D16100",
+            "#DDEFFF",
+            "#000035",
+            "#7B4F4B",
+            "#A1C299",
+            "#300018",
+            "#0AA6D8",
+            "#013349",
+            "#00846F",
+            "#372101",
+            "#FFB500",
+            "#C2FFED",
+            "#A079BF",
+            "#CC0744",
+            "#C0B9B2",
+            "#C2FF99",
+            "#001E09",
+            "#00489C",
+            "#6F0062",
+            "#0CBD66",
+            "#EEC3FF",
+            "#456D75",
+            "#B77B68",
+            "#7A87A1",
+            "#788D66",
+            "#885578",
+            "#FAD09F",
+            "#FF8A9A",
+            "#D157A0",
+            "#BEC459",
+            "#456648",
+            "#0086ED",
+            "#886F4C",
+            "#34362D",
+            "#B4A8BD",
+            "#00A6AA",
+            "#452C2C",
+            "#636375",
+            "#A3C8C9",
+            "#FF913F",
+            "#938A81",
+            "#575329",
+            "#00FECF",
+            "#B05B6F",
+            "#8CD0FF",
+            "#3B9700",
+            "#04F757",
+            "#C8A1A1",
+            "#1E6E00",
+            "#7900D7",
+            "#A77500",
+            "#6367A9",
+            "#A05837",
+            "#6B002C",
+            "#772600",
+            "#D790FF",
+            "#9B9700",
+            "#549E79",
+            "#FFF69F",
+            "#201625",
+            "#72418F",
+            "#BC23FF",
+            "#99ADC0",
+            "#3A2465",
+            "#922329",
+            "#5B4534",
+            "#FDE8DC",
+            "#404E55",
+            "#0089A3",
+            "#CB7E98",
+            "#A4E804",
+            "#324E72",
+            "#6A3A4C",
+            "#83AB58",
+            "#001C1E",
+            "#D1F7CE",
+            "#004B28",
+            "#C8D0F6",
+            "#A3A489",
+            "#806C66",
+            "#222800",
+            "#BF5650",
+            "#E83000",
+            "#66796D",
+            "#DA007C",
+            "#FF1A59",
+            "#8ADBB4",
+            "#1E0200",
+            "#5B4E51",
+            "#C895C5",
+            "#320033",
+            "#FF6832",
+            "#66E1D3",
+            "#CFCDAC",
+            "#D0AC94",
+            "#7ED379",
+            "#012C58",
+            "#7A7BFF",
+            "#D68E01",
+            "#353339",
+            "#78AFA1",
+            "#FEB2C6",
+            "#75797C",
+            "#837393",
+            "#943A4D",
+            "#B5F4FF",
+            "#D2DCD5",
+            "#9556BD",
+            "#6A714A",
+            "#001325",
+            "#02525F",
+            "#0AA3F7",
+            "#E98176",
+            "#DBD5DD",
+            "#5EBCD1",
+            "#3D4F44",
+            "#7E6405",
+            "#02684E",
+            "#962B75",
+            "#8D8546",
+            "#9695C5",
+            "#E773CE",
+            "#D86A78",
+            "#3E89BE",
+            "#CA834E",
+            "#518A87",
+            "#5B113C",
+            "#55813B",
+            "#E704C4",
+            "#00005F",
+            "#A97399",
+            "#4B8160",
+            "#59738A",
+            "#FF5DA7",
+            "#F7C9BF",
+            "#643127",
+            "#513A01",
+            "#6B94AA",
+            "#51A058",
+            "#A45B02",
+            "#1D1702",
+            "#E20027",
+            "#E7AB63",
+            "#4C6001",
+            "#9C6966",
+            "#64547B",
+            "#97979E",
+            "#006A66",
+            "#391406",
+            "#F4D749",
+            "#0045D2",
+            "#006C31",
+            "#DDB6D0",
+            "#7C6571",
+            "#9FB2A4",
+            "#00D891",
+            "#15A08A",
+            "#BC65E9",
+            "#FFFFFE",
+            "#C6DC99",
+            "#203B3C",
+            "#671190",
+            "#6B3A64",
+            "#F5E1FF",
+            "#FFA0F2",
+            "#CCAA35",
+            "#374527",
+            "#8BB400",
+            "#797868",
+            "#C6005A",
+            "#3B000A",
+            "#C86240",
+            "#29607C",
+            "#402334",
+            "#7D5A44",
+            "#CCB87C",
+            "#B88183",
+            "#AA5199",
+            "#B5D6C3",
+            "#A38469",
+            "#9F94F0",
+            "#A74571",
+            "#B894A6",
+            "#71BB8C",
+            "#00B433",
+            "#789EC9",
+            "#6D80BA",
+            "#953F00",
+            "#5EFF03",
+            "#E4FFFC",
+            "#1BE177",
+            "#BCB1E5",
+            "#76912F",
+            "#003109",
+            "#0060CD",
+            "#D20096",
+            "#895563",
+            "#29201D",
+            "#5B3213",
+            "#A76F42",
+            "#89412E",
+            "#1A3A2A",
+            "#494B5A",
+            "#A88C85",
+            "#F4ABAA",
+            "#A3F3AB",
+            "#00C6C8",
+            "#EA8B66",
+            "#958A9F",
+            "#BDC9D2",
+            "#9FA064",
+            "#BE4700",
+            "#658188",
+            "#83A485",
+            "#453C23",
+            "#47675D",
+            "#3A3F00",
+            "#061203",
+            "#DFFB71",
+            "#868E7E",
+            "#98D058",
+            "#6C8F7D",
+            "#D7BFC2",
+            "#3C3E6E",
+            "#D83D66",
+            "#2F5D9B",
+            "#6C5E46",
+            "#D25B88",
+            "#5B656C",
+            "#00B57F",
+            "#545C46",
+            "#866097",
+            "#365D25",
+            "#252F99",
+            "#00CCFF",
+            "#674E60",
+            "#FC009C",
+            "#92896B",
         ];
-        return $colors;
+
+
+
+        return $colors[$index];
+
+    }
+
+    /**
+     * Increases or decreases the brightness of a color by a percentage of the current brightness.
+     *
+     * @param   string  $hexCode        Supported formats: `#FFF`, `#FFFFFF`, `FFF`, `FFFFFF`
+     * @param   float   $adjustPercent  A number between -1 and 1. E.g. 0.3 = 30% lighter; -0.4 = 40% darker.
+     *
+     * @return  string
+     */
+    public static function adjustBrightness($hexCode, $adjustPercent) {
+        $hexCode = ltrim($hexCode, '#');
+
+        if (strlen($hexCode) == 3) {
+            $hexCode = $hexCode[0] . $hexCode[0] . $hexCode[1] . $hexCode[1] . $hexCode[2] . $hexCode[2];
+        }
+
+        $hexCode = array_map('hexdec', str_split($hexCode, 2));
+
+        foreach ($hexCode as & $color) {
+            $adjustableLimit = $adjustPercent < 0 ? $color : 255 - $color;
+            $adjustAmount = ceil($adjustableLimit * $adjustPercent);
+
+            $color = str_pad(dechex($color + $adjustAmount), 2, '0', STR_PAD_LEFT);
+        }
+
+        return '#' . implode($hexCode);
     }
 
 
@@ -147,6 +424,26 @@ class Helper
     public static function statusLabelList()
     {
         $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('default_label', 'desc')->orderBy('name','asc')->orderBy('deployable','desc')
+                ->pluck('name', 'id')->toArray();
+        return $statuslabel_list;
+    }
+
+    /**
+     * Get the list of deployable status labels in an array to make a dropdown menu
+     *
+     * @todo This should probably be a selectlist, same as the other endpoints
+     * and we should probably add to the API controllers to make sure that
+     * the status_id submitted is actually really deployable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.1.0]
+     * @return Array
+     */
+    public static function deployableStatusLabelList()
+    {
+        $statuslabel_list =  Statuslabel::where('deployable', '=', '1')->orderBy('default_label', 'desc')
+                ->orderBy('name','asc')
+                ->orderBy('deployable','desc')
                 ->pluck('name', 'id')->toArray();
         return $statuslabel_list;
     }
@@ -225,8 +522,9 @@ class Helper
      */
     public static function predefined_formats()
     {
-        $keys = array_keys(CustomField::$PredefinedFormats);
+        $keys = array_keys(CustomField::PREDEFINED_FORMATS);
         $stuff = array_combine($keys, $keys);
+
         return $stuff;
     }
 
@@ -614,38 +912,32 @@ class Helper
 
         $extension = substr(strrchr($filename,'.'),1);
 
-        if ($extension) {
-            switch ($extension) {
-                case 'jpg':
-                case 'jpeg':
-                case 'gif':
-                case 'png':
-                    return "fa fa-file-image-o";
-                    break;
-                case 'doc':
-                case 'docx':
-                    return "fa fa-file-word-o";
-                    break;
-                case 'xls':
-                case 'xlsx':
-                    return "fa fa-file-excel-o";
-                    break;
-                case 'zip':
-                case 'rar':
-                    return "fa fa-file-archive-o";
-                    break;
-                case 'pdf':
-                    return "fa fa-file-pdf-o";
-                    break;
-                case 'txt':
-                    return "fa fa-file-text-o";
-                    break;
-                case 'lic':
-                    return "fa fa-floppy-o";
-                    break;
-                default:
-                    return "fa fa-file-o";
-            }
+        $allowedExtensionMap = [
+            // Images
+            'jpg'   => 'fa fa-file-image-o',
+            'jpeg'   => 'fa fa-file-image-o',
+            'gif'   => 'fa fa-file-image-o',
+            'png'   => 'fa fa-file-image-o',
+            // word
+            'doc'   => 'fa fa-file-word-o',
+            'docx'   => 'fa fa-file-word-o',
+            // Excel
+            'xls'   => 'fa fa-file-excel-o',
+            'xlsx'   => 'fa fa-file-excel-o',
+            // archive
+            'zip'   => 'fa fa-file-archive-o',
+            'rar'   => 'fa fa-file-archive-o',
+            //Text
+            'txt'   => 'fa fa-file-text-o',
+            'rtf'   => 'fa fa-file-text-o',
+            'xml'   => 'fa fa-file-text-o',
+            // Misc
+            'pdf'   => 'fa fa-file-pdf-o',
+            'lic'   => 'fa fa-file-floppy-o',
+        ];
+
+        if ($extension && array_key_exists($extension, $allowedExtensionMap)) {
+            return $allowedExtensionMap[$extension];
         }
         return "fa fa-file-o";
     }
@@ -669,7 +961,80 @@ class Helper
         return false;
     }
 
+    /**
+     * Generate a random encrypted password.
+     *
+     * @author Wes Hulette <jwhulette@gmail.com>
+     *
+     * @since 5.0.0
+     *
+     * @return string
+     */
+    public static function generateEncyrptedPassword(): string
+    {
+        return bcrypt(Helper::generateUnencryptedPassword());
+    }
 
+    /**
+     * Get a random unencrypted password.
+     *
+     * @author Steffen Buehl <sb@sbuehl.com>
+     *
+     * @since 5.0.0
+     *
+     * @return string
+     */
+    public static function generateUnencryptedPassword(): string
+    {
+        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+        $password = '';
+        for ( $i = 0; $i < 20; $i++ ) {
+            $password .= substr( $chars, random_int( 0, strlen( $chars ) - 1 ), 1 );
+        }
+        return $password;
+    }
+
+    /**
+     * Process base64 encoded image data and save it on supplied path
+     *
+     * @param string $image_data base64 encoded image data with mime type
+     * @param string $save_path path to a folder where the image should be saved
+     * @return string path to uploaded image or false if something went wrong
+     */
+    public static function processUploadedImage(String $image_data, String $save_path) {
+        if ($image_data != null && $save_path != null) {
+            // After modification, the image is prefixed by mime info like the following:
+            // data:image/jpeg;base64,; This causes the image library to be unhappy, so we need to remove it.
+            $header = explode(';', $image_data, 2)[0];
+            // Grab the image type from the header while we're at it.
+            $extension = substr($header, strpos($header, '/')+1);
+            // Start reading the image after the first comma, postceding the base64.
+            $image = substr($image_data, strpos($image_data, ',')+1);
+
+            $file_name = str_random(25).".".$extension;
+
+            $directory= public_path($save_path);
+            // Check if the uploads directory exists.  If not, try to create it.
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            $path = public_path($save_path.$file_name);
+
+            try {
+                Image::make($image)->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
+            } catch (\Exception $e) {
+                return false;
+            }
+
+            return $file_name;
+        }
+
+        return false;
+    }
 
 }

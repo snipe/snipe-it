@@ -75,6 +75,8 @@
                 <thead>
                 <tr>
                     <th data-searchable="false" data-formatter="usersLinkFormatter" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                    <th data-searchable="false" data-sortable="false" data-field="checkout_notes">{{ trans('general.notes') }}</th>
+                    <th data-searchable="false" data-formatter="dateDisplayFormatter" data-sortable="false" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>
                     <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
                 </tr>
                 </thead>
@@ -91,7 +93,7 @@
 
       @if ($accessory->image!='')
           <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-              <a href="{{ app('accessories_upload_url') }}{{ $accessory->image }}" data-toggle="lightbox"><img src="{{ app('accessories_upload_url') }}{{ $accessory->image }}" class="img-responsive img-thumbnail" alt="{{ $accessory->name }}"></a>
+              <a href="{{ Storage::disk('public')->url('accessories/'.e($accessory->image)) }}" data-toggle="lightbox"><img src="{{ Storage::disk('public')->url('accessories/'.e($accessory->image)) }}" class="img-responsive img-thumbnail" alt="{{ $accessory->name }}"></a>
           </div>
       @endif
 
@@ -100,12 +102,6 @@
               <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-primary btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
           @endcan
       </div>
-
-
-    <h2>{{ trans('admin/accessories/general.about_accessories_title') }}</h4>
-    <p>{{ trans('admin/accessories/general.about_accessories_text') }} </p>
-
-
   </div>
 </div>
 @stop

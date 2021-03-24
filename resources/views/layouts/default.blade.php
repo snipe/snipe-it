@@ -12,41 +12,40 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
       <meta name="apple-mobile-web-app-capable" content="yes">
-      <link rel="apple-touch-icon" href="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
-      <link rel="apple-touch-startup-image" href="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
 
 
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{ url(asset('js/plugins/select2/select2.min.css')) }}">
 
-    <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="{{ url(asset('js/plugins/iCheck/all.css')) }}">
+      <link rel="apple-touch-icon" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) : '/img/logo.png' }}">
+      <link rel="apple-touch-startup-image" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) : '/img/logo.png' }}">
+      <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->favicon)) : '/favicon.ico' }} ">
 
-    <!-- bootstrap tables CSS -->
-    <link rel="stylesheet" href="{{ url(asset('css/bootstrap-table.css')) }}">
 
-    <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
-
-    <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
-
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="baseUrl" content="{{ url('/') }}/">
+      <meta name="csrf-token" content="{{ csrf_token() }}">
+      <meta name="baseUrl" content="{{ url('/') }}/">
 
     <script nonce="{{ csrf_token() }}">
       window.Laravel = { csrfToken: '{{ csrf_token() }}' };
-
     </script>
 
+    {{-- stylesheets --}}
 
-      <link rel="stylesheet" href="{{ url('css/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css') }}">
+    <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
+    <link rel="stylesheet" href="{{ url(mix('css/dist/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css')) }}">
 
+
+
+      {{-- page level css --}}
+    @stack('css')
+
+
+
+    @if (($snipeSettings) && ($snipeSettings->header_color!=''))
     <style nonce="{{ csrf_token() }}">
-        @if (($snipeSettings) && ($snipeSettings->header_color!=''))
         .main-header .navbar, .main-header .logo {
-        background-color: {{ $snipeSettings->header_color }};
-        background: -webkit-linear-gradient(top,  {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
-        background: linear-gradient(to bottom, {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
-        border-color: {{ $snipeSettings->header_color }};
+            background-color: {{ $snipeSettings->header_color }};
+            background: -webkit-linear-gradient(top,  {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
+            background: linear-gradient(to bottom, {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
+            border-color: {{ $snipeSettings->header_color }};
         }
         .skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} .sidebar-menu > li:hover > a, .skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} .sidebar-menu > li.active > a {
           border-left-color: {{ $snipeSettings->header_color }};
@@ -56,26 +55,22 @@
           background-color: {{ $snipeSettings->header_color }};
           border-color: {{ $snipeSettings->header_color }};
         }
-        @endif
-
-
-
-    @media (max-width: 400px) {
-      .navbar-left {
-       margin: 2px;
-      }
-
-      .nav::after {
-        clear: none;
-      }
-    }
     </style>
+    @endif
+
+    {{-- Custom CSS --}}
+    @if (($snipeSettings) && ($snipeSettings->custom_css))
+    <style>
+        {!! $snipeSettings->show_custom_css() !!}
+    </style>
+    @endif
 
       @if (($snipeSettings) && ($snipeSettings->custom_css))
           <style>
               {!! $snipeSettings->show_custom_css() !!}
           </style>
       @endif
+
 
     <script nonce="{{ csrf_token() }}">
           window.snipeit = {
@@ -86,15 +81,12 @@
     </script>
     <!-- Add laravel routes into javascript  Primarily useful for vue.-->
     @routes
-      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      <!--[if lt IE 9]>
 
-
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
         <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
 
-       <![endif]-->
+
   </head>
   <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
   <a class="skip-main" href="#main">Skip to main content</a>
@@ -108,7 +100,7 @@
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button above the compact sidenav -->
-          <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
+          <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
           <div class="nav navbar-nav navbar-left">
@@ -116,14 +108,14 @@
                  @if ($snipeSettings->brand == '3')
                       <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
                           @if ($snipeSettings->logo!='')
-                          <img class="navbar-brand-img" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}" alt="">
+                          <img class="navbar-brand-img" src="{{ Storage::disk('public')->url('/').e($snipeSettings->logo) }}" alt="{{ $snipeSettings->site_name }} logo">
                           @endif
                           {{ $snipeSettings->site_name }}
                       </a>
                   @elseif ($snipeSettings->brand == '2')
                       <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
                           @if ($snipeSettings->logo!='')
-                          <img class="navbar-brand-img" src="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}" alt="">
+                            <img class="navbar-brand-img" src="{{ Storage::disk('public')->url('/').e($snipeSettings->logo) }}" alt="{{ $snipeSettings->site_name }} logo">
                           @endif
                           <span class="sr-only">{{ $snipeSettings->site_name }}</span>
                       </a>
@@ -329,8 +321,14 @@
                          <a href="{{ route('account.requested') }}">
                              <i class="fa fa-check fa-disk fa-fw" aria-hidden="true"></i>
                              Requested Assets
-                         </a>
-                     </li>
+                         </a></li>
+                     <li {!! (Request::is('account/accept') ? ' class="active"' : '') !!}>
+                         <a href="{{ route('account.accept') }}">
+                             <i class="fa fa-check fa-disk fa-fw"></i>
+                             Accept Assets
+                         </a></li>
+
+
 
                      <li>
                           <a href="{{ route('profile') }}">
@@ -377,7 +375,7 @@
             </ul>
           </div>
       </nav>
-       <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
+       <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
         <i class="fa fa-bars"></i>
       </a>
@@ -389,7 +387,7 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu">
+          <ul class="sidebar-menu" data-widget="tree">
             @can('admin')
             <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!}>
               <a href="{{ route('home') }}">
@@ -405,24 +403,26 @@
                 </a>
                 <ul class="treeview-menu">
                   <li>
-                    <a href="{{ url('hardware') }}">
+                      <a href="{{ url('hardware') }}">
+                          <i class="fa fa-circle-o text-grey" aria-hidden="true"></i>
                         {{ trans('general.list_all') }}
                     </a>
                   </li>
 
-                    <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav', '=', 1)->get(); ?>
+                    <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav', '=', 1)->withCount('assets as asset_count')->get(); ?>
                     @if (count($status_navs) > 0)
-                        <li class="divider">&nbsp;</li>
                         @foreach ($status_navs as $status_nav)
-                            <li><a href="{{ route('statuslabels.show', ['id' => $status_nav->id]) }}"}> {{ $status_nav->name }}</a></li>
+                            <li><a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}"><i class="fa fa-circle text-grey" aria-hidden="true"></i> {{ $status_nav->name }} ({{ $status_nav->asset_count }})</a></li>
                         @endforeach
                     @endif
 
 
                   <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
-                    <a href="{{ url('hardware?status=Deployed') }}"><i class="fa fa-circle-o text-blue"></i>
+                    <a href="{{ url('hardware?status=Deployed') }}">
+                        <i class="fa fa-circle-o text-blue"></i>
                         {{ trans('general.all') }}
                         {{ trans('general.deployed') }}
+                        ({{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }})
                     </a>
                   </li>
                   <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
@@ -430,21 +430,25 @@
                         <i class="fa fa-circle-o text-green"></i>
                         {{ trans('general.all') }}
                         {{ trans('general.ready_to_deploy') }}
+                        ({{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }})
                     </a>
                   </li>
                   <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}"><i class="fa fa-circle-o text-orange"></i>
                           {{ trans('general.all') }}
                           {{ trans('general.pending') }}
+                          ({{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }})
                       </a>
                   </li>
                   <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ url('hardware?status=Undeployable') }}"><i class="fa fa-times text-red"></i>
                           {{ trans('general.all') }}
                           {{ trans('general.undeployable') }}
+                          ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
                       </a>
                   </li>
                   <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Archived') }}"><i class="fa fa-times text-red"></i>
                           {{ trans('general.all') }}
                           {{ trans('admin/hardware/general.archived') }}
+                          ({{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }})
                           </a>
                   </li>
                     <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Requestable') }}"><i class="fa fa-check text-blue"></i>
@@ -489,6 +493,8 @@
                             {{ trans('general.asset_maintenances') }}
                           </a>
                       </li>
+                    @endcan
+                    @can('admin')
                       <li>
                           <a href="{{ url('hardware/history') }}">
                             {{ trans('general.import-history') }}
@@ -537,6 +543,15 @@
                 </a>
             </li>
             @endcan
+            @can('view', \App\Models\PredefinedKit::class)
+                <li{!! (Request::is('kits') ? ' class="active"' : '') !!}>
+                    <a href="{{ route('kits.index') }}">
+                        <i class="fa fa-object-group"></i>
+                        <span>{{ trans('general.kits') }}</span>
+                    </a>
+                </li>
+            @endcan
+
             @can('view', \App\Models\User::class)
             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
                   <a href="{{ route('users.index') }}">
@@ -709,6 +724,8 @@
             </a>
             </li>
             @endcan
+
+
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -731,7 +748,17 @@
         <section class="content-header" style="padding-bottom: 30px;">
           <h1 class="pull-left">
             @yield('title')
+
+
           </h1>
+
+            @if (isset($helpText))
+            @include ('partials.more-info',
+                                   [
+                                       'helpText' => $helpText,
+                                       'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
+                                   ])
+            @endif
           <div class="pull-right">
             @yield('header_right')
           </div>
@@ -793,7 +820,7 @@
                   {!!  Parsedown::instance()->text(e($snipeSettings->footer_text))  !!}
               </div>
           @endif
-
+          
 
           <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
       </footer>
@@ -826,17 +853,39 @@
         </div>
     </div>
 
-
-
+    {{-- Javascript files --}}
     <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
-    <script src="/js/pGenerator.jquery.js"></script>
+
+    <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
+    <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
+
+    {{-- Page level javascript --}}
+    @stack('js')
 
     @section('moar_scripts')
     @show
 
+
     <script nonce="{{ csrf_token() }}">
+
+
+        // ignore: 'input[type=hidden]' is required here to validate the select2 lists
+        $.validate({
+            form : '#create-form',
+            modules : 'date, toggleDisabled',
+            disabledFormFilter : '#create-form',
+            showErrorDialogs : true,
+            ignore: 'input[type=hidden]'
+        });
+
+
+
+
+
         $(function () {
+  
             $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="popover"]').popover();
             $('.select2 span').addClass('needsclick');
             $('.select2 span').removeAttr('title');
 

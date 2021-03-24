@@ -2,14 +2,10 @@
 
 namespace App\Notifications;
 
-use App\Models\Setting;
-use App\Models\SnipeModel;
+use App\Helpers\Helper;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Mail;
-use Carbon\Carbon;
 
 class ExpectedCheckinNotification extends Notification
 {
@@ -32,10 +28,9 @@ class ExpectedCheckinNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         $notifyBy = [];
         $item = $this->params['item'];
@@ -44,43 +39,25 @@ class ExpectedCheckinNotification extends Notification
         return $notifyBy;
     }
 
-    public function toSlack($notifiable)
-    {
-
-    }
-
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $asset
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($params)
+    public function toMail()
     {
-        $formatted_due = Carbon::parse($this->params->expected_checkin)->format('D,  M j, Y');
-        return (new MailMessage)
-            ->error()
-            ->subject('Reminder: '.$this->params->present()->name().' checkin deadline approaching')
-            ->line('Hi, '.$this->params->assignedto->first_name.' '.$this->params->assignedto->last_name)
-            ->greeting('An asset checked out to you is due to be checked back in on '.$formatted_due.'.')
-            ->line('Asset: '.$this->params->present()->name())
-            ->line('Serial: '.$this->params->serial)
-            ->line('Asset Tag: '.$this->params->asset_tag)
-            ->action('View Your Assets', route('view-assets'));
 
+        $message = (new MailMessage)->markdown('notifications.markdown.expected-checkin',
+            [
+                'date' => Helper::getFormattedDateObject($this->params->expected_checkin, 'date', false),
+                'asset' => $this->params->present()->name(),
+                'serial' => $this->params->serial,
+                'asset_tag' => $this->params->asset_tag
+            ])
+            ->subject(trans('mail.Expected_Checkin_Notification', ['name' => $this->params->present()->name()]));
+
+        return $message;
 
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

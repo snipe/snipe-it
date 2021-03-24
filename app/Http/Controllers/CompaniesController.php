@@ -1,14 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Company;
-use Input;
-use Lang;
-use Redirect;
-use View;
-use Illuminate\Http\Request;
-use Image;
 use App\Http\Requests\ImageUploadRequest;
+use App\Models\Company;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This controller handles all actions related to Companies for
@@ -21,11 +17,12 @@ final class CompaniesController extends Controller
 {
 
     /**
-    * Returns view to display listing of companies.
-    *
-    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
-    * @since [v1.8]
-    * @return \Illuminate\Contracts\View\View
+     * Returns view to display listing of companies.
+     *
+     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+     * @since [v1.8]
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
@@ -35,11 +32,12 @@ final class CompaniesController extends Controller
     }
 
     /**
-    * Returns view to create a new company.
-    *
-    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
-    * @since [v1.8]
-    * @return \Illuminate\Contracts\View\View
+     * Returns view to create a new company.
+     *
+     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+     * @since [v1.8]
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
@@ -55,6 +53,7 @@ final class CompaniesController extends Controller
      * @since [v1.8]
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ImageUploadRequest $request)
     {
@@ -63,7 +62,7 @@ final class CompaniesController extends Controller
         $company = new Company;
         $company->name = $request->input('name');
 
-        $company = $request->handleImages($company,600, public_path().'/uploads/companies');
+        $company = $request->handleImages($company);
 
         if ($company->save()) {
             return redirect()->route('companies.index')
@@ -74,12 +73,13 @@ final class CompaniesController extends Controller
 
 
     /**
-    * Return form to edit existing company.
-    *
-    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
-    * @since [v1.8]
-    * @param int $companyId
-    * @return \Illuminate\Contracts\View\View
+     * Return form to edit existing company.
+     *
+     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+     * @since [v1.8]
+     * @param int $companyId
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($companyId)
     {
@@ -98,9 +98,10 @@ final class CompaniesController extends Controller
      *
      * @author [Abdullah Alansari] [<ahimta@gmail.com>]
      * @since [v1.8]
-     * @param Request $request
+     * @param ImageUploadRequest $request
      * @param int $companyId
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(ImageUploadRequest $request, $companyId)
     {
@@ -112,12 +113,8 @@ final class CompaniesController extends Controller
 
         $company->name = $request->input('name');
 
-        // Set the model's image property to null if the image is being deleted
-        if ($request->input('image_delete') == 1) {
-            $company->image = null;
-        }
 
-        $company = $request->handleImages($company,600, public_path().'/uploads/companies');
+        $company = $request->handleImages($company);
 
 
         if ($company->save()) {
@@ -129,39 +126,38 @@ final class CompaniesController extends Controller
     }
 
     /**
-    * Delete company
-    *
-    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
-    * @since [v1.8]
-    * @param int $companyId
-    * @return \Illuminate\Http\RedirectResponse
+     * Delete company
+     *
+     * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+     * @since [v1.8]
+     * @param int $companyId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($companyId)
     {
         if (is_null($company = Company::find($companyId))) {
             return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.not_found'));
-        } else {
+        }
 
-            $this->authorize('delete', $company);
+        $this->authorize('delete', $company);
+        if(!$company->isDeletable()) {
+            return redirect()->route('companies.index')
+                    ->with('error', trans('admin/companies/message.assoc_users'));
+        }
 
-            try {
-                $company->delete();
-                return redirect()->route('companies.index')
-                    ->with('success', trans('admin/companies/message.delete.success'));
-            } catch (\Illuminate\Database\QueryException $exception) {
-            /*
-                 * NOTE: This happens when there's a foreign key constraint violation
-                 * For example when rows in other tables are referencing this company
-                 */
-                if ($exception->getCode() == 23000) {
-                    return redirect()->route('companies.index')
-                        ->with('error', trans('admin/companies/message.assoc_users'));
-                } else {
-                    throw $exception;
-                }
+        if ($company->image) {
+            try  {
+                Storage::disk('public')->delete('companies'.'/'.$company->image);
+            } catch (\Exception $e) {
+                \Log::debug($e);
             }
         }
+
+        $company->delete();
+        return redirect()->route('companies.index')
+            ->with('success', trans('admin/companies/message.delete.success'));
     }
 
     public function show($id) {
@@ -170,9 +166,8 @@ final class CompaniesController extends Controller
         if (is_null($company = Company::find($id))) {
             return redirect()->route('companies.index')
                 ->with('error', trans('admin/companies/message.not_found'));
-        } else {
-            return view('companies/view')->with('company',$company);
         }
 
+        return view('companies/view')->with('company',$company);
     }
 }

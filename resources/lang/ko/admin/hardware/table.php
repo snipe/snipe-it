@@ -19,6 +19,7 @@ return array(
     'status'   		=> '상태',
     'title'      	=> '자산 ',
     'image'		=> '장비 사진',
-    'days_without_acceptance' => '미 승인 기간'
+    'days_without_acceptance' => '미 승인 기간',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Hlaða upp',
 	'select_file'				=> 'Velja skrá...',
     'select_files'				=> 'Velja skrár...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

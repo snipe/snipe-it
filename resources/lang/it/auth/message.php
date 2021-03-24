@@ -7,11 +7,23 @@ return array(
     'account_not_activated'  => 'Questo account non è attivo.',
     'account_suspended'      => 'Questo account è sospeso.',
     'account_banned'         => 'Questo account è bannato.',
-    'throttle'               => 'Troppi tentativi di accesso non riusciti. Riprova in giro: minuti minuti.',
+    'throttle'               => 'Troppi tentativi di login falliti. Per favore riprova entro :minutes minuti.',
+
+    'two_factor' => array(
+        'already_enrolled'      => 'Il tuo dispositivo è già registrato.',
+        'success'               => 'Accesso eseguito correttamente.',
+        'code_required'         => 'Codice a due fattori richiesto.',
+        'invalid_code'          => 'Codice a due fattori non valido.',
+    ),
 
     'signin' => array(
         'error'   => 'C\'è stato un problema durante il tentativo di accesso, riprova.',
         'success' => 'Accesso eseguito correttamente.',
+    ),
+
+    'logout' => array(
+        'error'   => 'C\'è stato un problema durante il tentativo di logout, riprova per favore.',
+        'success' => 'Ti sei disconnesso con successo.',
     ),
 
     'signup' => array(
@@ -19,19 +31,15 @@ return array(
         'success' => 'Account creato con successo.',
     ),
 
-        'forgot-password' => array(
-            'error'   => 'C\'è stato un problema durante il tentativo di reset password, per favore riprova.',
-            'success' => 'La password di recupero è stata inviata con successo.',
-        ),
-
-        'forgot-password-confirm' => array(
-            'error'   => 'C\'è stato un problema durante il tentativo di reset password, per favore riprova.',
-            'success' => 'La tua password è stata resettata con successo.',
-        ),
-
-    'activate' => array(
-        'error'   => 'C\'è stato un problema durante il tentativo di attivazione del tuo account, per favore riprova.',
-        'success' => 'Il tuo account è stato creato con successo.',
+    'forgot-password' => array(
+        'error'   => 'C\'è stato un problema durante il tentativo di reset password, per favore riprova.',
+        'success' => 'Se l\'indirizzo email esiste nel nostro sistema, è stata inviata una email di recupero password.',
     ),
+
+    'forgot-password-confirm' => array(
+        'error'   => 'C\'è stato un problema durante il tentativo di reset password, per favore riprova.',
+        'success' => 'La tua password è stata resettata con successo.',
+    ),
+
 
 );

@@ -20,7 +20,7 @@
                        'id' => 'bulkForm']) }}
                     <div class="row">
                         <div class="col-md-12">
-                            @if (Input::get('status')!='Deleted')
+                            @if (Request::get('status')!='Deleted')
                                 <div id="toolbar">
                                     <select name="bulk_actions" class="form-control select2">
                                         <option value="edit">Edit</option>

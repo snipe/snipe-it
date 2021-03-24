@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class UserPresenter
@@ -225,6 +226,15 @@ class UserPresenter extends Presenter
                 'formatter' => 'groupsFormatter'
             ],
             [
+                "field" => "ldap_import",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/settings/general.ldap_enabled'),
+                "visible" => false,
+                'formatter' => 'trueFalseFormatter'
+            ],
+            [
                 "field" => "two_factor_enrolled",
                 "searchable" => false,
                 "sortable" => true,
@@ -300,7 +310,7 @@ class UserPresenter extends Presenter
      */
     public function fullName()
     {
-        return "{$this->first_name} {$this->last_name}";
+        return html_entity_decode($this->first_name.' '.$this->last_name, ENT_QUOTES | ENT_XML1, 'UTF-8');
     }
 
     /**
@@ -320,8 +330,9 @@ class UserPresenter extends Presenter
     public function gravatar()
     {
 
+
         if ($this->avatar) {
-            return config('app.url').'/uploads/avatars/'.$this->avatar;
+            return Storage::disk('public')->url('avatars/'.e($this->avatar));
         }
 
         if (Setting::getSettings()->load_remote=='1') {

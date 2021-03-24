@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Om tilbehør',
-    'about_accessories_text'  			=> 'Tilbehør er hva som helst som du tildeler brukere som ikke har et serienummer (eller som du ikke bryr deg om å spore enkeltvis). For eksempel mus og tastatur.',
     'accessory_category' 				=> 'Tilbehørskategori',
     'accessory_name'  					=> 'Navn tilbehør',
     'checkout'  							=> 'Sjekk ut tilbehør',

@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Olek',
     'title'      	=> 'Vara',
     'image'		=> 'Seadme pilt',
-    'days_without_acceptance' => 'Päeva ilma vastuvõtmiseta'
+    'days_without_acceptance' => 'Päeva ilma vastuvõtmiseta',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

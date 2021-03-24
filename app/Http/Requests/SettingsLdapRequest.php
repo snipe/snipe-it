@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use Session;
 
 class SettingsLdapRequest extends Request
@@ -34,6 +33,7 @@ class SettingsLdapRequest extends Request
             "ldap_lname_field"          => 'sometimes|required_if:ldap_enabled,1|nullable',
             "ldap_auth_filter_query"    => 'sometimes|required_if:ldap_enabled,1|nullable',
             "ldap_version"              => 'sometimes|required_if:ldap_enabled,1|nullable',
+            "ad_domain"                 => 'sometimes|required_if:is_ad,1|nullable',
         ];
 
         return $rules;

@@ -2,19 +2,18 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
-use Config;
-use Route;
-use Schema;
-use App\Models\User;
 use App\Models\Setting;
+use Closure;
 
 class CheckForSetup
 {
     public function handle($request, Closure $next, $guard = null)
     {
 
-        // This is dumb
+        /**
+         * This is dumb
+         * @todo Check on removing this, not sure if it's still needed
+         */
         if ($request->is('_debugbar*')) {
             return $next($request);
         }
@@ -28,7 +27,7 @@ class CheckForSetup
             }
 
         } else {
-            if (!($request->is('setup*')) && !($request->is('.env'))) {
+            if (!($request->is('setup*')) && !($request->is('.env')) && !($request->is('health'))) {
                 return redirect(url('/').'/setup');
             }
 

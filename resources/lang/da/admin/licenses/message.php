@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Aktivet, du forsøger at associere med denne licens, ejes af en anden end den person, der er valgt i Tildelt-rullemenuen.',
     'assoc_users'	 => 'Denne licens er i øjeblikket tjekket ud til en bruger og kan ikke slettes. Kontroller venligst licensen først, og prøv derefter at slette igen.',
     'select_asset_or_person' => 'Du skal vælge et aktiv eller en bruger, men ikke begge.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

@@ -42,7 +42,7 @@ class UserTest extends BaseTest
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'natalia';
-        $user = User::generateFormattedNameFromFullName('firstname', $fullname);
+        $user = User::generateFormattedNameFromFullName($fullname, 'firstname');
         $this->assertEquals($expected_username, $user['username']);
     }
 
@@ -50,7 +50,7 @@ class UserTest extends BaseTest
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'natalia.allanovna-romanova-oshostakova';
-        $user = User::generateFormattedNameFromFullName('firstname.lastname', $fullname);
+        $user = User::generateFormattedNameFromFullName($fullname, 'firstname.lastname');
         $this->assertEquals($expected_username, $user['username']);
     }
 
@@ -58,7 +58,7 @@ class UserTest extends BaseTest
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'allanovna-romanova-oshostakovan';
-        $user = User::generateFormattedNameFromFullName('lastnamefirstinitial', $fullname);
+        $user = User::generateFormattedNameFromFullName($fullname, 'lastnamefirstinitial');
         $this->assertEquals($expected_username, $user['username']);
     }
 
@@ -67,7 +67,7 @@ class UserTest extends BaseTest
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'nallanovna-romanova-oshostakova';
-        $user = User::generateFormattedNameFromFullName('filastname', $fullname);
+        $user = User::generateFormattedNameFromFullName($fullname, 'filastname');
         $this->assertEquals($expected_username, $user['username']);
     }
 
@@ -75,7 +75,7 @@ class UserTest extends BaseTest
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'n_allanovna-romanova-oshostakova';
-        $user = User::generateFormattedNameFromFullName('firstname_lastname', $fullname);
+        $user = User::generateFormattedNameFromFullName($fullname, 'firstname_lastname');
         $this->assertEquals($expected_username, $user['username']);
     }
 
@@ -90,28 +90,28 @@ class UserTest extends BaseTest
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'n.allanovnaromanovaoshostakova';
-        $user = User::generateFormattedNameFromFullName('firstinitial.lastname', $fullname);
+        $user = User::generateFormattedNameFromFullName($fullname, 'firstinitial.lastname');
         $this->assertEquals($expected_username, $user['username']);
     }
     public function lastNameUnderscoreFirstInitial()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'allanovnaromanovaoshostakova_n';
-        $user = User::generateFormattedNameFromFullName('lastname_firstinitial', $fullname);
+        $user = User::generateFormattedNameFromFullName($fullname, 'lastname_firstinitial');
         $this->assertEquals($expected_username, $user['username']);
     }
     public function firstNameLastName()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'nataliaallanovnaromanovaoshostakova';
-        $user = User::generateFormattedNameFromFullName('firstnamelastname', $fullname);
+        $user = User::generateFormattedNameFromFullName($fullname, 'firstnamelastname');
         $this->assertEquals($expected_username, $user['username']);
     }
     public function firstNameLastInitial()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'nataliaa';
-        $user = User::generateFormattedNameFromFullName('firstnamelastinitial', $fullname);
+        $user = User::generateFormattedNameFromFullName($fullname, 'firstnamelastinitial');
         $this->assertEquals($expected_username, $user['username']);
     }
 

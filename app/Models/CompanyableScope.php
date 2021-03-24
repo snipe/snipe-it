@@ -1,9 +1,9 @@
 <?php
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use \Illuminate\Database\Eloquent\Builder;
-use \Illuminate\Database\Eloquent\Scope;
+use Illuminate\Database\Eloquent\Scope;
 
 /**
  * Handle query scoping for full company support.

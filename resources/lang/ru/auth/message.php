@@ -7,11 +7,23 @@ return array(
     'account_not_activated'  => 'Эта учетная запись не активирована.',
     'account_suspended'      => 'Эта учетная запись приостановлена.',
     'account_banned'         => 'Эта учетная запись заблокирована.',
-    'throttle'               => 'Слишком много неудачных попыток входа. Пожалуйста, попробуйте через :minutes минут.',
+    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+
+    'two_factor' => array(
+        'already_enrolled'      => 'Your device is already enrolled.',
+        'success'               => 'You have successfully logged in.',
+        'code_required'         => 'Two-factor code is required.',
+        'invalid_code'          => 'Two-factor code is invalid.',
+    ),
 
     'signin' => array(
         'error'   => 'При попытке входа возникла проблема, пожалуйста попробуйте позже.',
         'success' => 'Вы успешно авторизованы.',
+    ),
+
+    'logout' => array(
+        'error'   => 'There was a problem while trying to log you out, please try again.',
+        'success' => 'You have successfully logged out.',
     ),
 
     'signup' => array(
@@ -19,19 +31,15 @@ return array(
         'success' => 'Учетная запись успешно создана.',
     ),
 
-        'forgot-password' => array(
-            'error'   => 'При попытке сброса возникла проблема, пожалуйста попробуйте позже.',
-            'success' => 'Пароль для восстановления учетной записи отправлен.',
-        ),
-
-        'forgot-password-confirm' => array(
-            'error'   => 'При попытке сбросить ваш пароль возникла проблема, пожалуйста попробуйте позже.',
-            'success' => 'Ваш пароль успешно изменен.',
-        ),
-
-    'activate' => array(
-        'error'   => 'При попытке активировать вашу учетную запись возникла проблема, пожалуйста попробуйте позже.',
-        'success' => 'Ваша учетная запись успешно активирована.',
+    'forgot-password' => array(
+        'error'   => 'При попытке сброса возникла проблема, пожалуйста попробуйте позже.',
+        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
     ),
+
+    'forgot-password-confirm' => array(
+        'error'   => 'При попытке сбросить ваш пароль возникла проблема, пожалуйста попробуйте позже.',
+        'success' => 'Ваш пароль успешно изменен.',
+    ),
+
 
 );

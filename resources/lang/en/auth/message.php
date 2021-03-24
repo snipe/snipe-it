@@ -7,7 +7,7 @@ return array(
     'account_not_activated'  => 'This user account is not activated.',
     'account_suspended'      => 'This user account is suspended.',
     'account_banned'         => 'This user account is banned.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :seconds seconds.',
+    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
 
     'two_factor' => array(
         'already_enrolled'      => 'Your device is already enrolled.',
@@ -41,9 +41,5 @@ return array(
         'success' => 'Your password has been successfully reset.',
     ),
 
-    'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
-    ),
 
 );

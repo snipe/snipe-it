@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Transformers;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
-use phpDocumentor\Reflection\Types\Integer;
-use Gate;
 use App\Helpers\Helper;
+use App\Models\User;
+use Gate;
+use Illuminate\Database\Eloquent\Collection;
 
 class UsersTransformer
 {
@@ -53,9 +52,9 @@ class UsersTransformer
                 'notes'=> e($user->notes),
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated =='1') ? true : false,
+                'ldap_import' => ($user->ldap_import =='1') ? true : false,
                 'two_factor_activated' => ($user->two_factor_active()) ? true : false,
                 'two_factor_enrolled' => ($user->two_factor_active_and_enrolled()) ? true : false,
-
                 'assets_count' => (int) $user->assets_count,
                 'licenses_count' => (int) $user->licenses_count,
                 'accessories_count' => (int) $user->accessories_count,
@@ -64,13 +63,14 @@ class UsersTransformer
                 'created_at' => Helper::getFormattedDateObject($user->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($user->updated_at, 'datetime'),
                 'last_login' => Helper::getFormattedDateObject($user->last_login, 'datetime'),
+                'deleted_at' => ($user->deleted_at) ?  Helper::getFormattedDateObject($user->deleted_at, 'datetime') : null,
             ];
 
         $permissions_array['available_actions'] = [
-            'update' => (Gate::allows('update', User::class) && ($user->deleted_at==''))  ? true : false,
-            'delete' => (Gate::allows('delete', User::class) && ($user->deleted_at=='') && ($user->assets_count == 0) && ($user->licenses_count == 0)  && ($user->accessories_count == 0)  && ($user->consumables_count == 0)) ? true : false,
+            'update' => (Gate::allows('update', User::class) && ($user->deleted_at=='')),
+            'delete' => (Gate::allows('delete', User::class) && ($user->assets_count == 0) && ($user->licenses_count == 0)  && ($user->accessories_count == 0)  && ($user->consumables_count == 0)),
             'clone' => (Gate::allows('create', User::class) && ($user->deleted_at=='')) ,
-            'restore' => (Gate::allows('create', User::class) && ($user->deleted_at!='')) ? true : false,
+            'restore' => (Gate::allows('create', User::class) && ($user->deleted_at!='')),
         ];
 
         $array += $permissions_array;
@@ -99,9 +99,5 @@ class UsersTransformer
     public function transformUsersDatatable($users) {
         return (new DatatablesTransformer)->transformDatatables($users);
     }
-
-
-
-
 
 }

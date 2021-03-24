@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> '關於類別',
-    'about_categories'  				=> '資產類別可幫助您組織您的資產。例如：桌上型電腦、筆記型電腦、手機、平板...等，您可依需求自行定義類別。',
     'asset_categories' 					=> '資產類別',
     'category_name'  					=> '類別名稱',
     'checkin_email'                     => '在借出/繳回時發送郵件給使用者。',

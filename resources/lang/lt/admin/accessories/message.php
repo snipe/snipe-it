@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Įranga neegzistuoja.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Ši įranga šiuo metu turi:count vienetus išduotus vartotojams. Prašome patikrinkite irangos meniu ir bandykite dar kartą. ',
 
     'create' => array(

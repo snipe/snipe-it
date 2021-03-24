@@ -6,7 +6,7 @@
  * @return {IIFE}          Immediately invoked. Returns self.
  */
 
-var lineOptions = {
+lineOptions = {
 
         legend: {
             position: "bottom"
@@ -39,7 +39,7 @@ var lineOptions = {
 
 };
 
-var pieOptions = {
+pieOptions = {
     //Boolean - Whether we should show a stroke on each segment
     segmentShowStroke: true,
     //String - The colour of each segment stroke
@@ -120,10 +120,6 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
     });
 }(jQuery, window.snipeit.settings));
 
-
-
-
-
 $(document).ready(function () {
 
     /*
@@ -177,12 +173,11 @@ $(document).ready(function () {
             }
         });
      }
-     $('.datepicker').datepicker();
 
-    var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
-    $.fn.bootstrapDP = datepicker;
-    $('.datepicker').datepicker();
-
+    // $('.datepicker').datepicker();
+    // var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
+    // $.fn.bootstrapDP = datepicker;
+    // $('.datepicker').datepicker();
 
     // Crazy select2 rich dropdowns with images!
     $('.js-data-ajax').each( function (i,item) {
@@ -202,7 +197,7 @@ $(document).ready(function () {
             ajax: {
 
                 // the baseUrl includes a trailing slash
-                url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist',
                 dataType: 'json',
                 delay: 250,
                 headers: {
@@ -217,7 +212,7 @@ $(document).ready(function () {
                     };
                     return data;
                 },
-                processResults: function (data, params) {
+                /* processResults: function (data, params) {
 
                     params.page = params.page || 1;
 
@@ -229,15 +224,106 @@ $(document).ready(function () {
                     };
 
                     return answer;
-                },
+                }, */
                 cache: true
             },
-            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-            templateResult: formatDatalist,
-            templateSelection: formatDataSelection
+            //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            templateResult: formatDatalistSafe,
+            //templateSelection: formatDataSelection
         });
 
     });
+
+	function getSelect2Value(element) {
+		
+		// if the passed object is not a jquery object, assuming 'element' is a selector
+		if (!(element instanceof jQuery)) element = $(element);
+
+		var select = element.data("select2");
+
+		// There's two different locations where the select2-generated input element can be. 
+		searchElement = select.dropdown.$search || select.$container.find(".select2-search__field");
+
+		var value = searchElement.val();
+		return value;
+	}
+	
+	$(".select2-hidden-accessible").on('select2:selecting', function (e) {
+		var data = e.params.args.data;
+		var isMouseUp = false;
+		var element = $(this);
+		var value = getSelect2Value(element);
+		
+		if(e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
+		
+		// if selected item does not match typed text, do not allow it to pass - force close for ajax.
+		if(!isMouseUp) {
+			if(value.toLowerCase() && data.text.toLowerCase().indexOf(value) < 0) {
+				e.preventDefault();
+
+				element.select2('close');
+				
+			// if it does match, we set a flag in the event (which gets passed to subsequent events), telling it not to worry about the ajax
+			} else if(value.toLowerCase() && data.text.toLowerCase().indexOf(value) > -1) {
+				e.params.args.noForceAjax = true;
+			}
+		}
+	});
+	
+	$(".select2-hidden-accessible").on('select2:closing', function (e) {
+		var element = $(this);
+		var value = getSelect2Value(element);
+		var noForceAjax = false;
+		var isMouseUp = false;
+		if(e.params.args.originalSelect2Event) noForceAjax = e.params.args.originalSelect2Event.noForceAjax;
+		if(e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
+		
+		if(value && !noForceAjax && !isMouseUp) {
+			var endpoint = element.data("endpoint");
+			var assetStatusType = element.data("asset-status-type");
+			$.ajax({
+				url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist?search='+value+'&page=1' + (assetStatusType ? '&assetStatusType='+assetStatusType : ''),
+				dataType: 'json',
+				headers: {
+					"X-Requested-With": 'XMLHttpRequest',
+					"X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+				},
+			}).done(function(response) {
+				var currentlySelected = element.select2('data').map(function (x){ 
+                    return +x.id;
+                }).filter(function (x) {
+                    return x !== 0;
+                });
+				
+				// makes sure we're not selecting the same thing twice for multiples
+				var filteredResponse = response.items.filter(function(item) {
+					return currentlySelected.indexOf(+item.id) < 0;
+				});
+
+				var first = (currentlySelected.length > 0) ? filteredResponse[0] : response.items[0];
+				
+				if(first && first.id) {
+					first.selected = true;
+					
+					if($("option[value='" + first.id + "']", element).length < 1) {
+						var option = new Option(first.text, first.id, true, true);
+						element.append(option);
+					} else {
+						var isMultiple = element.attr("multiple") == "multiple";
+						element.val(isMultiple? element.val().concat(first.id) : element.val(first.id));
+					}
+					element.trigger('change');
+
+					element.trigger({
+						type: 'select2:select',
+						params: {
+							data: first
+						}
+					});
+				}
+			});
+		}
+	});
 
     function formatDatalist (datalist) {
         var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
@@ -245,17 +331,69 @@ $(document).ready(function () {
             return loading_markup;
         }
 
-        var markup = "<div class='clearfix'>" ;
-        markup +="<div class='pull-left' style='padding-right: 10px;'>";
+        var markup = '<div class="clearfix">' ;
+        markup += '<div class="pull-left" style="padding-right: 10px;">';
         if (datalist.image) {
             markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;' alt='" +  datalist.text + "'></div>";
         } else {
-            markup += "<div style='height: 20px; width: 30px;'></div>";
+            markup += '<div style="height: 20px; width: 30px;"></div>';
         }
 
         markup += "</div><div>" + datalist.text + "</div>";
         markup += "</div>";
         return markup;
+    }
+
+    function formatDatalistSafe(datalist) {
+        // console.warn("What in the hell is going on with Select2?!?!!?!?");
+        // console.warn($.select2);
+        if (datalist.loading) {
+            return $('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+        }
+
+        var root_div = $("<div class='clearfix'>") ;
+        var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
+        if (datalist.image) {
+            var inner_div = $("<div style='width: 30px;'>");
+            /******************************************************************
+             * 
+             * We are specifically chosing empty alt-text below, because this 
+             * image conveys no additional information, relative to the text
+             * that will *always* be there in any select2 list that is in use
+             * in Snipe-IT. If that changes, we would probably want to change
+             * some signatures of some functions, but right now, we don't want
+             * screen readers to say "HP SuperJet 5000, .... picture of HP 
+             * SuperJet 5000..." and so on, for every single row in a list of
+             * assets or models or whatever.
+             * 
+             *******************************************************************/
+            var img = $("<img src='' style='max-height: 20px; max-width: 30px;' alt=''>");
+            // console.warn("Img is: ");
+            // console.dir(img);
+            // console.warn("Strigularly, that's: ");
+            // console.log(img);
+            img.attr("src", datalist.image );
+            inner_div.append(img)
+        } else {
+            var inner_div=$("<div style='height: 20px; width: 30px;'></div>");
+        }
+        left_pull.append(inner_div);
+        root_div.append(left_pull);
+        var name_div = $("<div>");
+        name_div.text(datalist.text);
+        root_div.append(name_div)
+        var safe_html = root_div.get(0).outerHTML;
+        var old_html = formatDatalist(datalist);
+        if(safe_html != old_html) {
+            console.log("HTML MISMATCH: ");
+            console.log("FormatDatalistSafe: ");
+            // console.dir(root_div.get(0));
+            console.log(safe_html);
+            console.log("FormatDataList: ");
+            console.log(old_html);
+        }
+        return root_div;
+
     }
 
     function formatDataSelection (datalist) {
@@ -342,12 +480,12 @@ $(document).ready(function () {
 
 
     // Image preview
-    function readURL(input) {
+    function readURL(input, $preview) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#imagePreview').attr('src', e.target.result);
-            }
+                $preview.attr('src', e.target.result);
+            };
             reader.readAsDataURL(input.files[0]);
         }
     }
@@ -357,43 +495,67 @@ $(document).ready(function () {
         else if(bytes < 1048576) return(bytes / 1024).toFixed(2) + " KB";
         else if(bytes < 1073741824) return(bytes / 1048576).toFixed(2) + " MB";
         else return(bytes / 1073741824).toFixed(2) + " GB";
-    };
+    }
 
      // File size validation
-    $('#uploadFile').bind('change', function() {
-        $('#upload-file-status').removeClass('text-success').removeClass('text-danger');
-        $('.goodfile').remove();
-        $('.badfile').remove();
-        $('.badfile').remove();
-        $('.previewSize').hide();
-        $('#upload-file-info').html('');
+    $('.js-uploadFile').bind('change', function() {
+        var $this = $(this);
+        var id = '#' + $this.attr('id');
+        var status = id + '-status';
+        var $status = $(status);
+        $status.removeClass('text-success').removeClass('text-danger');
+        $(status + ' .goodfile').remove();
+        $(status + ' .badfile').remove();
+        $(status + ' .previewSize').hide();
+        $(id + '-info').html('');
 
-        var max_size = $('#uploadFile').data('maxsize');
+        var max_size = $this.data('maxsize');
         var total_size = 0;
 
         for (var i = 0; i < this.files.length; i++) {
             total_size += this.files[i].size;
-            $('#upload-file-info').append('<span class="label label-default">' + this.files[i].name + ' (' + formatBytes(this.files[i].size) + ')</span> ');
+            $(id + '-info').append('<span class="label label-default">' + this.files[i].name + ' (' + formatBytes(this.files[i].size) + ')</span> ');
         }
 
+        console.log('Max size is: ' + max_size);
+        console.log('Real size is: ' + total_size);
+
         if (total_size > max_size) {
-            $('#upload-file-status').addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
+            $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
         } else {
-            $('#upload-file-status').addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
-            readURL(this);
-            $('#imagePreview').fadeIn();
+
+            $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
+            var $preview =  $(id + '-imagePreview');
+            readURL(this, $preview);
+            $preview.fadeIn();
         }
 
 
     });
 
-
-
-
-
-
-
-
-
-
 });
+
+
+/**
+ * Toggle disabled
+ */
+(function($){
+		
+    $.fn.toggleDisabled = function(callback){
+        return this.each(function(){
+            var disabled, $this = $(this);
+            if($this.attr('disabled')){
+                $this.removeAttr('disabled');
+                disabled = false;
+            } else {
+                $this.attr('disabled', 'disabled');
+                disabled = true;
+            }
+
+            if(callback && typeof callback === 'function'){
+                callback(this, disabled);
+            }
+        });
+    };
+    
+})(jQuery);

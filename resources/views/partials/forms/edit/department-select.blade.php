@@ -2,9 +2,9 @@
 
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
 
-    <div class="col-md-7">
+    <div class="col-md-6">
         <select class="js-data-ajax" data-endpoint="departments" data-placeholder="{{ trans('general.select_department') }}" name="{{ $fieldname }}" style="width: 100%" id="department_select" aria-label="{{ $fieldname }}">
-            @if ($department_id = Input::old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
+            @if ($department_id = old($fieldname, (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $department_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\Department::find($department_id)) ? \App\Models\Department::find($department_id)->name : '' }}
                 </option>

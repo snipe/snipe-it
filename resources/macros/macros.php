@@ -65,6 +65,7 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
       'tr'=> "Turkish",
       'uk'=> "Ukranian",
       'vi'=> "Vietnamese",
+      'cy'=> "Welsh",
       'zu'=> "Zulu",
     );
 
@@ -364,14 +365,12 @@ Form::macro('date_display_format', function ($name = "date_display_format", $sel
 
     $formats = [
         'Y-m-d',
-        'Y-m-d',
         'D M d, Y',
         'M j, Y',
         'd M, Y',
         'm/d/Y',
         'n/d/y',
         'd/m/Y',
-        'm/j/Y',
         'd.m.Y',
         'Y.m.d.',
     ];
@@ -412,6 +411,25 @@ Form::macro('time_display_format', function ($name = "time_display_format", $sel
 
 });
 
+Form::macro('digit_separator', function ($name = "digit_separator", $selected = null, $class = null) {
+
+    $formats = [
+        '1234.56',
+        '1.234,56',
+    ];
+
+    foreach ($formats as $format) {
+    }
+    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:120px">';
+    foreach ($formats as $format_inner ) {
+        $select .= '<option value="'.$format_inner.'"'.($selected == $format_inner ? ' selected="selected"' : '').'>'.$format_inner.'</option> ';
+    }
+
+    $select .= '</select>';
+    return $select;
+
+});
+
 /**
 * Barcode macro
 * Generates the dropdown menu of available 1D barcodes
@@ -423,6 +441,11 @@ Form::macro('alt_barcode_types', function ($name = "alt_barcode", $selected = nu
         'C39',
         'PDF417',
         'EAN5',
+        'EAN13',
+        'UPCA',
+        'UPCE',
+
+        
 
     );
 
@@ -513,8 +536,8 @@ Form::macro('customfield_elements', function ($name = "customfield_elements", $s
         'text' => 'Text Box',
         'listbox' => 'List Box',
         'textarea' => 'Textarea (multi-line) ',
-     //   'checkbox' => 'Checkbox',
-     //   'radio' => 'Radio Buttons',
+        'checkbox' => 'Checkbox',
+        'radio' => 'Radio Buttons',
     );
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';

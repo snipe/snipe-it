@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Tidak cukup kuasa.',
     'user_deleted_warning'      => 'Pengguna telah dihapuskan. Anda perlu masukkan semula pengguna ini untuk kemaskini atau untuk serahkan dia harta baru.',
     'ldap_not_configured'        => 'Integrasi LDAP belum dikonfigurasi untuk pemasangan ini.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

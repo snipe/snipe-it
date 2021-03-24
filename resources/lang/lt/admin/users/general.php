@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP konfigūracijos parametrus galite rasti Administratorius> Nustatymai. Pasirinkta vieta (pasirinktinai) bus nustatyta visiems importuojamiems vartotojams.',
     'print_assigned'    => 'Spausdinti visą turtą',
     'software_user'     => ':name išduota įranga',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Peržiūrėti :name vartotoją',
     'usercsv'           => 'CSV dokumentas',
     'two_factor_admin_optin_help' => 'Dabartiniai jūsų nustatymai leidžia pasirinkti dviejų veiksnių autentifikavimą.',

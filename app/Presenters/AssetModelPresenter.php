@@ -2,15 +2,135 @@
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-
 /**
  * Class AssetModelPresenter
  * @package App\Presenters
  */
 class AssetModelPresenter extends Presenter
 {
-    
+    public static function dataTableLayout() {
+
+        $layout = [
+            [
+                "field" => "checkbox",
+                "checkbox" => true
+            ],
+            [
+                "field" => "id",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.id'),
+                "visible" => false
+            ], [
+                "field" => "company",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/companies/table.title'),
+                "visible" => false,
+                "formatter" => "companiesLinkObjFormatter"
+            ], [
+                "field" => "name",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => true,
+                "title" => trans('general.name'),
+                "formatter" => "modelsLinkFormatter"
+            ],
+            [
+                "field" => "image",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.image'),
+                "visible" => true,
+                "formatter" => 'imageFormatter',
+            ],
+            [
+                "field" => "manufacturer",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.manufacturer'),
+                "visible" => false,
+                "formatter" => 'manufacturersLinkObjFormatter',
+            ],
+            [
+                "field" => "model_number",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/models/table.modelnumber'),
+                "visible" => true,
+            ],
+            [
+                "field" => "assets_count",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/models/table.numassets'),
+                "visible" => true,
+            ],
+            [
+                "field" => "depreciation",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.depreciation'),
+                "visible" => false,
+                "formatter" => "depreciationsLinkObjFormatter",
+            ],
+            [
+                "field" => "category",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.category'),
+                "visible" => false,
+                "formatter" => "categoriesLinkObjFormatter",
+            ],
+            [
+                "field" => "eol",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.eol'),
+                "visible" => true,
+            ],
+            [
+                "field" => "fieldset",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/models/general.fieldset'),
+                "visible" => true,
+                "formatter" => "fieldsetsLinkObjFormatter",
+            ],
+            [
+                "field" => "notes",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.notes'),
+                "visible" => false,
+            ],
+        ];
+
+
+        $layout[] = [
+            "field" => "actions",
+            "searchable" => false,
+            "sortable" => false,
+            "switchable" => false,
+            "title" => trans('table.actions'),
+            "formatter" => "modelsActionsFormatter",
+        ];
+
+
+        return json_encode($layout);
+
+    }
     /**
      * Formatted note for this model
      * @return string

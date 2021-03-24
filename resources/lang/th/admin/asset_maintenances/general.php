@@ -7,5 +7,8 @@
         'view'               => 'ดูรายละเอียดการซ่อมบำรุงสินทรัพย์',
         'repair'             => 'ซ่อมแซม',
         'maintenance'        => 'การดูแลรักษา',
-        'upgrade'            => 'อัพเกรด'
+        'upgrade'            => 'อัพเกรด',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

@@ -1,23 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Helpers\Helper;
-use Input;
-use Lang;
-use App\Models\Location;
-use phpDocumentor\Reflection\Types\Array_;
-use Redirect;
-use App\Models\Setting;
-use App\Models\User;
-use App\Models\Asset;
-use DB;
-use Str;
-use Validator;
-use View;
-use Auth;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Image;
+
 use App\Http\Requests\ImageUploadRequest;
+use App\Models\Location;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * This controller handles all actions related to Locations for
@@ -29,13 +17,14 @@ class LocationsController extends Controller
 {
 
     /**
-    * Returns a view that invokes the ajax tables which actually contains
-    * the content for the locations listing, which is generated in getDatatable.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see LocationsController::getDatatable() method that generates the JSON response
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the locations listing, which is generated in getDatatable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see LocationsController::getDatatable() method that generates the JSON response
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
@@ -47,12 +36,13 @@ class LocationsController extends Controller
 
 
     /**
-    * Returns a form view used to create a new location.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see LocationsController::postCreate() method that validates and stores the data
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Returns a form view used to create a new location.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see LocationsController::postCreate() method that validates and stores the data
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
@@ -63,13 +53,15 @@ class LocationsController extends Controller
 
 
     /**
-    * Validates and stores a new location.
-    *
-    * @todo Check if a Form Request would work better here.
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see LocationsController::getCreate() method that makes the form
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Validates and stores a new location.
+     *
+     * @todo Check if a Form Request would work better here.
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see LocationsController::getCreate() method that makes the form
+     * @since [v1.0]
+     * @param ImageUploadRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ImageUploadRequest $request)
     {
@@ -88,7 +80,7 @@ class LocationsController extends Controller
         $location->manager_id       = $request->input('manager_id');
         $location->user_id          = Auth::id();
 
-        $location = $request->handleImages($location,600, public_path().'/uploads/locations');
+        $location = $request->handleImages($location);
 
         if ($location->save()) {
             return redirect()->route("locations.index")->with('success', trans('admin/locations/message.create.success'));
@@ -98,13 +90,14 @@ class LocationsController extends Controller
 
 
     /**
-    * Makes a form view to edit location information.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see LocationsController::postCreate() method that validates and stores
-    * @param int $locationId
-    * @since [v1.0]
-    * @return \Illuminate\Contracts\View\View
+     * Makes a form view to edit location information.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see LocationsController::postCreate() method that validates and stores
+     * @param int $locationId
+     * @since [v1.0]
+     * @return \Illuminate\Contracts\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($locationId = null)
     {
@@ -120,13 +113,15 @@ class LocationsController extends Controller
 
 
     /**
-    * Validates and stores updated location data from edit form.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see LocationsController::getEdit() method that makes the form view
-    * @param int $locationId
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Validates and stores updated location data from edit form.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see LocationsController::getEdit() method that makes the form view
+     * @param ImageUploadRequest $request
+     * @param int $locationId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @since [v1.0]
      */
     public function update(ImageUploadRequest $request, $locationId = null)
     {
@@ -135,11 +130,6 @@ class LocationsController extends Controller
         if (is_null($location = Location::find($locationId))) {
             return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
         }
-
-        if ($request->input('parent_id') == $locationId) {
-            return redirect()->back()->withInput()->with('error', 'A location cannot be its own parent. Please select a different parent location.');
-        }
-
 
         // Update the location data
         $location->name         = $request->input('name');
@@ -153,7 +143,8 @@ class LocationsController extends Controller
         $location->zip          = $request->input('zip');
         $location->ldap_ou      = $request->input('ldap_ou');
         $location->manager_id   = $request->input('manager_id');
-        $location = $request->handleImages($location,600, public_path().'/uploads/locations');
+
+        $location = $request->handleImages($location);
 
 
         if ($location->save()) {
@@ -163,12 +154,13 @@ class LocationsController extends Controller
     }
 
     /**
-    * Validates and deletes selected location.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $locationId
-    * @since [v1.0]
-    * @return \Illuminate\Http\RedirectResponse
+     * Validates and deletes selected location.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $locationId
+     * @since [v1.0]
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($locationId)
     {
@@ -177,22 +169,25 @@ class LocationsController extends Controller
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.not_found'));
         }
 
-        if ($location->users->count() > 0) {
+        if ($location->users()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_users'));
-
-        } elseif ($location->children->count() > 0) {
+        } elseif ($location->children()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_child_loc'));
-
-        } elseif ($location->assets->count() > 0) {
+        } elseif ($location->assets()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
-
-        } elseif ($location->assignedassets->count() > 0) {
+        } elseif ($location->assignedassets()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
-
-        } else {
-            $location->delete();
-            return redirect()->to(route('locations.index'))->with('success', trans('admin/locations/message.delete.success'));
         }
+
+        if ($location->image) {
+            try  {
+                Storage::disk('public')->delete('locations/'.$location->image);
+            } catch (\Exception $e) {
+                \Log::error($e);
+            }
+        }
+        $location->delete();
+        return redirect()->to(route('locations.index'))->with('success', trans('admin/locations/message.delete.success'));
     }
 
 
@@ -201,13 +196,13 @@ class LocationsController extends Controller
     * the content for the locations detail page.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @param int $locationId
+    * @param int $id
     * @since [v1.0]
     * @return \Illuminate\Contracts\View\View
      */
-    public function show($locationId = null)
+    public function show($id = null)
     {
-        $location = Location::find($locationId);
+        $location = Location::find($id);
 
         if (isset($location->id)) {
             return view('locations/view', compact('location'));

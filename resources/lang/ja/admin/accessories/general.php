@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> '付属品について',
-    'about_accessories_text'  			=> '付属品は利用者に支給されますが、シリアル番号がありません。（付属品を厳密に追跡する必要はありません。）例えば、マウスやキーボードなど。',
     'accessory_category' 				=> '付属品カテゴリー',
     'accessory_name'  					=> '付属品名',
     'checkout'  							=> '付属品の貸し出し',

@@ -1,29 +1,15 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
-use App\Models\CheckoutRequest;
 use App\Models\Company;
-use App\Models\Component;
-use App\Models\Consumable;
-use App\Models\License;
 use App\Models\Setting;
 use App\Models\User;
+use App\Notifications\RequestAssetCancelation;
 use App\Notifications\RequestAssetNotification;
-use App\Notifications\RequestAssetCancelationNotification;
-use Auth;
-use Config;
-use DB;
-use Input;
-use Lang;
-use Mail;
-use Redirect;
-use Slack;
-use Validator;
-use View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 /**
@@ -55,18 +41,23 @@ class ViewAssetsController extends Controller
         $userlog = $user->userlog->load('item', 'user', 'target');
 
         if (isset($user->id)) {
-            return view('account/view-assets', compact('user', 'userlog'));
+            return view('account/view-assets', compact('user', 'userlog'))
+                ->with('settings', Setting::getSettings());
         } else {
-            // Prepare the error message
-            $error = trans('admin/users/message.user_not_found', compact('id'));
-
             // Redirect to the user management page
-            return redirect()->route('users.index')->with('error', $error);
+            return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
         }
+        // Redirect to the user management page
+        return redirect()->route('users.index')
+            ->with('error', trans('admin/users/message.user_not_found', $user->id));
 
     }
 
 
+    /**
+     * Returns view of requestable items for a user.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getRequestableIndex()
     {
 
@@ -78,7 +69,7 @@ class ViewAssetsController extends Controller
 
 
 
-    public function getRequestItem($itemType, $itemId = null)
+    public function getRequestItem(Request $request, $itemType, $itemId = null)
     {
         $item = null;
         $fullItemType = 'App\\Models\\' . studly_case($itemType);
@@ -102,7 +93,7 @@ class ViewAssetsController extends Controller
         $logaction->target_id = $data['user_id'] = Auth::user()->id;
         $logaction->target_type = User::class;
 
-        $data['item_quantity'] = Input::has('request-quantity') ? e(Input::get('request-quantity')) : 1;
+        $data['item_quantity'] = $request->has('request-quantity') ? e($request->input('request-quantity')) : 1;
         $data['requested_by'] = $user->present()->fullName();
         $data['item'] = $item;
         $data['item_type'] = $itemType;
@@ -124,7 +115,7 @@ class ViewAssetsController extends Controller
            $logaction->logaction('request_canceled');
 
             if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
-                $settings->notify(new RequestAssetCancelationNotification($data));
+                $settings->notify(new RequestAssetCancelation($data));
             }
 
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
@@ -143,10 +134,11 @@ class ViewAssetsController extends Controller
     }
 
 
-
-
-
-
+    /**
+     * Process a specific requested asset
+     * @param null $assetId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function getRequestAsset($assetId = null)
     {
 
@@ -156,7 +148,8 @@ class ViewAssetsController extends Controller
         if (is_null($asset = Asset::RequestableAssets()->find($assetId))) {
             return redirect()->route('requestable-assets')
                 ->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable'));
-        } elseif (!Company::isCurrentUserHasAccess($asset)) {
+        }
+        if (!Company::isCurrentUserHasAccess($asset)) {
             return redirect()->route('requestable-assets')
                 ->with('error', trans('general.insufficient_permissions'));
         }
@@ -184,19 +177,18 @@ class ViewAssetsController extends Controller
             $asset->decrement('requests_counter', 1);
             
             $logaction->logaction('request canceled');
-            $settings->notify(new RequestAssetCancelationNotification($data));
+            $settings->notify(new RequestAssetCancelation($data));
             return redirect()->route('requestable-assets')
                 ->with('success')->with('success', trans('admin/hardware/message.requests.cancel-success'));
-        } else {
-
-            $logaction->logaction('requested');
-            $asset->request();
-            $asset->increment('requests_counter', 1);
-            $settings->notify(new RequestAssetNotification($data));
-
-
-            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
+
+        $logaction->logaction('requested');
+        $asset->request();
+        $asset->increment('requests_counter', 1);
+        $settings->notify(new RequestAssetNotification($data));
+
+
+        return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
 
 
     }
@@ -259,7 +251,7 @@ class ViewAssetsController extends Controller
             return redirect()->to('account/view-assets')->with('error', trans('admin/users/message.error.asset_already_accepted'));
         }
 
-        if (!Input::has('asset_acceptance')) {
+        if ($request->missing('asset_acceptance')) {
             return redirect()->back()->with('error', trans('admin/users/message.error.accept_or_decline'));
         }
 
@@ -281,7 +273,7 @@ class ViewAssetsController extends Controller
 
         $logaction = new Actionlog();
 
-        if (Input::get('asset_acceptance')=='accepted') {
+        if ($request->input('asset_acceptance')=='accepted') {
             $logaction_msg  = 'accepted';
             $accepted="accepted";
             $return_msg = trans('admin/users/message.accepted');
@@ -295,7 +287,7 @@ class ViewAssetsController extends Controller
 
         // Asset
         if (($findlog->item_id!='') && ($findlog->item_type==Asset::class)) {
-            if (Input::get('asset_acceptance')!='accepted') {
+            if ($request->input('asset_acceptance')!='accepted') {
                 DB::table('assets')
                 ->where('id', $findlog->item_id)
                 ->update(array('assigned_to' => null));
@@ -304,7 +296,7 @@ class ViewAssetsController extends Controller
 
         $logaction->target_id = $findlog->target_id;
         $logaction->target_type = User::class;
-        $logaction->note = e(Input::get('note'));
+        $logaction->note = e($request->input('note'));
         $logaction->updated_at = date("Y-m-d H:i:s");
 
 

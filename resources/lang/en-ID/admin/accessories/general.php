@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Tentang Aksesoris',
-    'about_accessories_text'  			=> 'Aksesoris adalah Aset yang tidak memiliki nomor seri (atau Anda tidak peduli tentang pelacakan mereka secara unik). Misalnya, mouse komputer atau keyboard.',
     'accessory_category' 				=> 'Kategori Aksesoris',
     'accessory_name'  					=> 'Nama Aksesoris',
     'checkout'  							=> 'Keluarkan Aksesoris',

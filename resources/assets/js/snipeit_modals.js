@@ -11,7 +11,7 @@
 
  Create a Button looking like this:
 
- <a href='{{ route('modal.user') }}' data-toggle="modal"  data-target="#createModal" data-select='assigned_to' class="btn btn-sm btn-primary">New</a>
+ <a href='{{ route('modal.show', 'user') }}' data-toggle="modal"  data-target="#createModal" data-select='assigned_to' class="btn btn-sm btn-primary">New</a>
 
  If you don't have access to Blade commands (like {{ and }}, etc), you can hard-code a URL as the 'href'
 
@@ -28,7 +28,7 @@ $(function () {
 
 
   //handle modal-add-interstitial calls
-  var model, select;
+  var model, select, refreshSelector;
 
   if($('#createModal').length == 0) {
     $('body').append('<div class="modal fade" id="createModal"></div><!-- /.modal -->');
@@ -38,6 +38,8 @@ $(function () {
       var link = $(event.relatedTarget);
       model = link.data("dependency");
       select = link.data("select");
+      refreshSelector = link.data("refresh");
+      
       $('#createModal').load(link.attr('href'),function () {
         //do we need to re-select2 this, after load? Probably.
         $('#createModal').find('select.select2').select2();
@@ -52,7 +54,7 @@ $(function () {
                 ajax: {
 
                     // the baseUrl includes a trailing slash
-                    url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                    url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist',
                     dataType: 'json',
                     delay: 250,
                     headers: {
@@ -67,7 +69,7 @@ $(function () {
                         };
                         return data;
                     },
-                    processResults: function (data, params) {
+                    /*processResults: function (data, params) {
 
                         params.page = params.page || 1;
 
@@ -79,12 +81,12 @@ $(function () {
                         };
 
                         return answer;
-                    },
+                    },*/
                     cache: true
                 },
-                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-                templateResult: formatDatalist,
-                templateSelection: formatDataSelection
+                //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                templateResult: formatDatalistSafe,
+                //templateSelection: formatDataSelection
             });
         });
       });
@@ -123,6 +125,12 @@ $(function () {
             $('#createModal').modal('hide');
             $('#createModal').html("");
 
+            var refreshTable = $('#' + refreshSelector);
+
+            if(refreshTable.length > 0) {
+                refreshTable.bootstrapTable('refresh');
+            }
+
             // "select" is the original drop-down menu that someone
             // clicked 'add' on to add a new 'thing'
             // this code adds the newly created object to that select
@@ -150,6 +158,58 @@ $(function () {
     });
   });
 });
+
+function formatDatalistSafe(datalist) {
+    // console.warn("What in the hell is going on with Select2?!?!!?!?");
+    // console.warn($.select2);
+    if (datalist.loading) {
+        return $('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+    }
+
+    var root_div = $("<div class='clearfix'>") ;
+    var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
+    if (datalist.image) {
+        var inner_div = $("<div style='width: 30px;'>");
+        /******************************************************************
+         * 
+         * We are specifically chosing empty alt-text below, because this 
+         * image conveys no additional information, relative to the text
+         * that will *always* be there in any select2 list that is in use
+         * in Snipe-IT. If that changes, we would probably want to change
+         * some signatures of some functions, but right now, we don't want
+         * screen readers to say "HP SuperJet 5000, .... picture of HP 
+         * SuperJet 5000..." and so on, for every single row in a list of
+         * assets or models or whatever.
+         * 
+         *******************************************************************/
+        var img = $("<img src='' style='max-height: 20px; max-width: 30px;' alt=''>");
+        // console.warn("Img is: ");
+        // console.dir(img);
+        // console.warn("Strigularly, that's: ");
+        // console.log(img);
+        img.attr("src", datalist.image );
+        inner_div.append(img)
+    } else {
+        var inner_div=$("<div style='height: 20px; width: 30px;'></div>");
+    }
+    left_pull.append(inner_div);
+    root_div.append(left_pull);
+    var name_div = $("<div>");
+    name_div.text(datalist.text);
+    root_div.append(name_div)
+    var safe_html = root_div.get(0).outerHTML;
+    var old_html = formatDatalist(datalist);
+    if(safe_html != old_html) {
+        console.log("HTML MISMATCH: ");
+        console.log("FormatDatalistSafe: ");
+        // console.dir(root_div.get(0));
+        console.log(safe_html);
+        console.log("FormatDataList: ");
+        console.log(old_html);
+    }
+    return root_div;
+
+}
 
 function formatDatalist (datalist) {
     var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';

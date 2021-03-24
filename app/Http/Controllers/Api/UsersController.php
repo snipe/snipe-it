@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Transformers\UsersTransformer;
-use App\Models\Company;
-use App\Models\User;
 use App\Helpers\Helper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveUserRequest;
-use App\Models\Asset;
-use App\Http\Transformers\AssetsTransformer;
-use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\AccessoriesTransformer;
+use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\LicensesTransformer;
+use App\Http\Transformers\SelectlistTransformer;
+use App\Http\Transformers\UsersTransformer;
+use App\Models\Asset;
+use App\Models\Company;
+use App\Models\License;
+use App\Models\User;
 use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -58,6 +60,7 @@ class UsersController extends Controller
             'users.updated_at',
             'users.username',
             'users.zip',
+            'users.ldap_import',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department','assets','licenses','accessories','consumables')
             ->withCount('assets as assets_count','licenses as licenses_count','accessories as accessories_count','consumables as consumables_count');
@@ -65,7 +68,9 @@ class UsersController extends Controller
 
 
         if (($request->filled('deleted')) && ($request->input('deleted')=='true')) {
-            $users = $users->GetDeleted();
+            $users = $users->onlyTrashed();
+        } elseif (($request->filled('all')) && ($request->input('all')=='true')) {
+            $users = $users->withTrashed();
         }
 
         if ($request->filled('company_id')) {
@@ -97,6 +102,7 @@ class UsersController extends Controller
         }
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $offset = (($users) && (request('offset') > $users->count())) ? 0 : request('offset', 0);
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
@@ -126,7 +132,7 @@ class UsersController extends Controller
                         'assets','accessories', 'consumables','licenses','groups','activated','created_at',
                         'two_factor_enrolled','two_factor_optin','last_login', 'assets_count', 'licenses_count',
                         'consumables_count', 'accessories_count', 'phone', 'address', 'city', 'state',
-                        'country', 'zip', 'id'
+                        'country', 'zip', 'id', 'ldap_import'
                     ];
 
                 $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'first_name';
@@ -179,16 +185,16 @@ class UsersController extends Controller
         foreach ($users as $user) {
             $name_str = '';
             if ($user->last_name!='') {
-                $name_str .= e($user->last_name).', ';
+                $name_str .= $user->last_name.', ';
             }
-            $name_str .= e($user->first_name);
+            $name_str .= $user->first_name;
 
             if ($user->username!='') {
-                $name_str .= ' ('.e($user->username).')';
+                $name_str .= ' ('.$user->username.')';
             }
 
             if ($user->employee_num!='') {
-                $name_str .= ' - #'.e($user->employee_num);
+                $name_str .= ' - #'.$user->employee_num;
             }
 
             $user->use_text = $name_str;
@@ -229,6 +235,7 @@ class UsersController extends Controller
 
         $tmp_pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
         $user->password = bcrypt($request->get('password', $tmp_pass));
+
 
         if ($user->save()) {
             if ($request->filled('groups')) {
@@ -271,6 +278,16 @@ class UsersController extends Controller
         $this->authorize('update', User::class);
 
         $user = User::findOrFail($id);
+
+        // This is a janky hack to prevent people from changing admin demo user data on the public demo.
+        // The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
+        // Thanks, jerks. You are why we can't have nice things. - snipe
+
+        if ((($id == 1) || ($id == 2)) && (config('app.lock_passwords'))) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Permission denied. You cannot update user information via API on the demo.'));
+        }
+
+
         $user->fill($request->all());
 
         if ($user->id == $request->input('manager_id')) {
@@ -356,8 +373,16 @@ class UsersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null,  'This user still has ' . $user->managedLocations()->count() . ' locations that they manage.'));
         }
 
-
         if ($user->delete()) {
+
+            // Remove the user's avatar if they have one
+            if (Storage::disk('public')->exists('avatars/'.$user->avatar)) {
+                try  {
+                    Storage::disk('public')->delete('avatars/'.$user->avatar);
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+               }
+            }
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/users/message.success.delete')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/users/message.error.delete')));
@@ -414,6 +439,8 @@ class UsersController extends Controller
     }
 
     /**
+
+
      * Reset the user's two-factor status
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

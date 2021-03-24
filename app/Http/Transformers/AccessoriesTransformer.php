@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Transformers;
 
+use App\Helpers\Helper;
 use App\Models\Accessory;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
-use App\Helpers\Helper;
+use Illuminate\Support\Facades\Storage;
 
 class AccessoriesTransformer
 {
@@ -23,6 +24,7 @@ class AccessoriesTransformer
         $array = [
             'id' => $accessory->id,
             'name' => e($accessory->name),
+            'image' => ($accessory->image) ? Storage::disk('public')->url('accessories/'.e($accessory->image)) : null,
             'company' => ($accessory->company) ? ['id' => $accessory->company->id,'name'=> e($accessory->company->name)] : null,
             'manufacturer' => ($accessory->manufacturer) ? ['id' => $accessory->manufacturer->id,'name'=> e($accessory->manufacturer->name)] : null,
             'supplier' => ($accessory->supplier) ? ['id' => $accessory->supplier->id,'name'=> e($accessory->supplier->name)] : null,
@@ -36,17 +38,17 @@ class AccessoriesTransformer
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
             'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
             'remaining_qty' => $accessory->numRemaining(),
-            'image' => ($accessory->image) ? url('/').'/uploads/accessories/'.e($accessory->image) : null,
+
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
 
         ];
 
         $permissions_array['available_actions'] = [
-            'checkout' => Gate::allows('checkout', Accessory::class) ? true : false,
+            'checkout' => Gate::allows('checkout', Accessory::class),
             'checkin' =>  false,
-            'update' => Gate::allows('update', Accessory::class) ? true : false,
-            'delete' => Gate::allows('delete', Accessory::class) ? true : false,
+            'update' => Gate::allows('update', Accessory::class) ,
+            'delete' => Gate::allows('delete', Accessory::class),
         ];
 
         $permissions_array['user_can_checkout'] = false;
@@ -61,13 +63,18 @@ class AccessoriesTransformer
     }
 
 
-    public function transformCheckedoutAccessory ($accessory_users, $total)
+    public function transformCheckedoutAccessory ($accessory, $accessory_users, $total)
     {
 
 
         $array = array();
+
+
         foreach ($accessory_users as $user) {
+            \Log::debug(print_r($user->pivot, true));
+            \Log::debug(print_r($user->pivot, true));
             $array[] = [
+
                 'assigned_pivot_id' => $user->pivot->id,
                 'id' => (int) $user->id,
                 'username' => e($user->username),
@@ -75,6 +82,8 @@ class AccessoriesTransformer
                 'first_name'=> e($user->first_name),
                 'last_name'=> e($user->last_name),
                 'employee_number' =>  e($user->employee_num),
+                'checkout_notes' => $user->pivot->note,
+                'last_checkout' => Helper::getFormattedDateObject($user->pivot->created_at, 'datetime'),
                 'type' => 'user',
                 'available_actions' => ['checkin' => true]
             ];

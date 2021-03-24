@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit backupGlobals="false"
+         printerClass="NunoMaduro\Collision\Adapters\Phpunit\Printer"
          backupStaticAttributes="false"
          bootstrap="bootstrap/autoload.php"
          colors="true"

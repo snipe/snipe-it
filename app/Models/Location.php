@@ -7,10 +7,11 @@ use App\Models\SnipeModel;
 use App\Models\Traits\Searchable;
 use App\Models\User;
 use App\Presenters\Presentable;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
-use DB;
 
 class Location extends SnipeModel
 {
@@ -20,14 +21,20 @@ class Location extends SnipeModel
     protected $dates = ['deleted_at'];
     protected $table = 'locations';
     protected $rules = array(
-      'name'        => 'required|min:2|max:255|unique_undeleted',
-      'city'        => 'min:2|max:255|nullable',
-      'country'     => 'min:2|max:2|nullable',
-      'address'         => 'max:80|nullable',
-      'address2'        => 'max:80|nullable',
-      'zip'         => 'min:3|max:10|nullable',
-      'manager_id'  => 'exists:users,id|nullable'
+        'name'          => 'required|min:2|max:255|unique_undeleted',
+        'city'          => 'min:2|max:255|nullable',
+        'country'       => 'min:2|max:2|nullable',
+        'address'       => 'max:80|nullable',
+        'address2'      => 'max:80|nullable',
+        'zip'           => 'min:3|max:10|nullable',
+        'manager_id'    => 'exists:users,id|nullable',
+        'parent_id'     => 'non_circular:locations,id'
     );
+
+    protected $casts = [
+        'parent_id'     => 'integer',
+        'manager_id'    => 'integer',
+    ];
 
     /**
     * Whether the model should inject it's identifier to the unique
@@ -69,7 +76,7 @@ class Location extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['name', 'address', 'city', 'state', 'zip', 'created_at'];
+    protected $searchableAttributes = ['name', 'address', 'city', 'state', 'zip', 'created_at', 'ldap_ou'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -79,6 +86,14 @@ class Location extends SnipeModel
     protected $searchableRelations = [
       'parent' => ['name']
     ];
+
+    public function isDeletable()
+    {
+        return Gate::allows('delete', $this)
+                && ($this->assignedAssets()->count()===0)
+                && ($this->assets()->count()===0)
+                && ($this->users()->count()===0);
+    }
 
     public function users()
     {

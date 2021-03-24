@@ -28,7 +28,6 @@
                 data-show-refresh="true"
                 data-sort-order="asc"
                 id="unacceptedAssetsReport"
-                data-url="{{route('api.maintenances.index') }}"
                 class="table table-striped snipe-table"
                 data-export-options='{
                     "fileName": "maintenance-report-{{ date('Y-m-d') }}",
@@ -47,14 +46,16 @@
             <tbody>
               @if ($assetsForReport)
               @foreach ($assetsForReport as $assetItem)
-              <tr>
-                <td>{{ is_null($assetItem->company) ? '' : $assetItem->company->name }}</td>
-                <td>{{ $assetItem->model->category->name }}</td>
-                <td>{{ $assetItem->model->name }}</td>
-                <td>{!! $assetItem->present()->nameUrl() !!}</td>
-                <td>{{ $assetItem->asset_tag }}</td>
-                <td>{!! ($assetItem->assignedTo) ? $assetItem->assignedTo->present()->nameUrl() : 'Deleted user' !!}</td>
-              </tr>
+                  @if ($assetItem)
+                  <tr>
+                    <td>{{ ($assetItem->company) ? $assetItem->company->name : '' }}</td>
+                    <td>{{ $assetItem->model->category->name }}</td>
+                    <td>{{ $assetItem->model->name }}</td>
+                    <td>{!! $assetItem->present()->nameUrl() !!}</td>
+                    <td>{{ $assetItem->asset_tag }}</td>
+                    <td>{!! ($assetItem->assignedTo) ? $assetItem->assignedTo->present()->nameUrl() : 'Deleted user' !!}</td>
+                  </tr>
+                  @endif
               @endforeach
               @endif
             </tbody>

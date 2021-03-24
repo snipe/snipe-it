@@ -3,8 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Config;
-use Route;
 use Gate;
 
 class CheckPermissions

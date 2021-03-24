@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> 'О компонентах',
-    'about_components_text'  			=> 'Компоненты - это части активов, например HDD, RAM и прочее.',
     'component_name'                  => 'Наименование компонента',
     'checkin'                             => 'Привязать компонент',
     'checkout'                             => 'Отвязать компонент',

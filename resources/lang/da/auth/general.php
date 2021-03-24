@@ -4,6 +4,7 @@ return [
     'send_password_link'	        => 'Send Link til nulstilling af adgangskode',
     'email_reset_password'			=> 'Nulstil adgangskode',
     'reset_password'			    => 'Nulstil adgangskode',
+    'saml_login'                    => 'Login via SAML',
     'login'                         => 'Login',
     'login_prompt'                  => 'Log venligst ind',
     'forgot_password'               => 'Jeg har glemt min adgangskode',

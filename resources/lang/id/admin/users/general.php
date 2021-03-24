@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Konfigurasi LDAP terdapat di Admin > Pengaturan. Jika lokasi di pilih, maka akan di impor untuk semua pengguna.',
     'print_assigned'    => 'Cetak Semua Ditugaskan',
     'software_user'     => 'Perangkat lunak pada :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Lihat pengguna: name',
     'usercsv'           => 'Berkas CSV',
     'two_factor_admin_optin_help' => 'Pengaturan admin Anda saat ini memungkinkan penegakan dua faktor otentikasi selektif.',

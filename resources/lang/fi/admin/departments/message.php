@@ -3,18 +3,18 @@
 return array(
 
     'does_not_exist' => 'Osastoa ei ole olemassa.',
-    'assoc_users'	 => 'Tällä osastolla on tällä hetkellä vähintään yksi käyttäjä, eikä sitä voi poistaa. Päivitä käyttäjät, jotta he eivät enää viitata tähän osastoon ja yritä uudelleen.',
+    'assoc_users'	 => 'Tällä osastolla on tällä hetkellä vähintään yksi käyttäjä, eikä sitä voi poistaa. Poista käyttäjiltä viitaus tähän osastoon ja yritä uudelleen. ',
     'create' => array(
         'error'   => 'Osastoa ei luotu, yritä uudelleen.',
-        'success' => 'Laitos perustettiin onnistuneesti.'
+        'success' => 'Osasto luotiin onnistuneesti.'
     ),
     'update' => array(
-        'error'   => 'Laitetta ei ole päivitetty, yritä uudelleen',
+        'error'   => 'Osastoa ei päivitetty, yritä uudelleen',
         'success' => 'Osasto päivitettiin onnistuneesti.'
     ),
     'delete' => array(
         'confirm'   	=> 'Haluatko varmasti poistaa tämän osaston?',
-        'error'   => 'Oleskelun poistaminen tapahtui. Yritä uudelleen.',
+        'error'   => 'Osaston poistamisessa tapahtui jotain. Yritä uudelleen.',
         'success' => 'Osasto poistettiin onnistuneesti.'
     )
 

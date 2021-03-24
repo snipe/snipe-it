@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Mō Ngā Hoahoa',
-    'about_accessories_text'  			=> 'Ko nga mea katoa ka hoatu e koe ki nga kaiwhakamahi, engari kaore he tau rangahau (kaore ranei koe e whakaaro ana ki te aroturuki i a raatau). Hei tauira, nga kiore rorohiko me nga papapātuhi ranei.',
     'accessory_category' 				=> 'Kāwai Accessory',
     'accessory_name'  					=> 'Ingoa Whakauru',
     'checkout'  							=> 'Whakaritea Whakairinga',

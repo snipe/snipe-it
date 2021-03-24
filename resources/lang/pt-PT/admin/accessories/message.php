@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Acessório não existe.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Esta acessório tem atualmente :count items alocados a utilizadores. Por favor, devolva-os e tente novamente. ',
 
     'create' => array(

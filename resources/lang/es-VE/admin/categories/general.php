@@ -1,12 +1,10 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Acerca de Categorías',
-    'about_categories'  				=> 'Las categorías te ayudan a organizar tus elementos. Algunos ejemplos de categoría pueden ser &quot;PCs de escritorio&quot;, &quot;Laptops&quot;, &quot;Teléfonos Móbiles&quot;, &quot;Tablets&quot;, etc, pero puedes usar categorías en cualquier manera que tengan sentido para ti.',
     'asset_categories' 					=> 'Categorías de Activos',
     'category_name'  					=> 'Nombre de la Categoría',
     'checkin_email'                     => 'Enviar un correo al usuario al asignar/desasignar.',
-    'checkin_email_notification'        => 'A este usuario se le enviará un correo electrónico al asignar/desasignar.',
+    'checkin_email_notification'        => 'A este usuario se le enviará un correo electrónico al asignar/devolver.',
     'clone'                             => 'Clonar Categoría',
     'create'  							=> 'Crear Catergoría',
     'edit'                              => 'Editar Categoría',

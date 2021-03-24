@@ -2,16 +2,13 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Models\User;
 use App\Models\Actionlog;
 use App\Models\Asset;
-use App\Models\Consumable;
-use App\Models\Accessory;
-use App\Models\LicenseSeat;
 use App\Models\License;
-use DB;
+use App\Models\User;
 use Artisan;
+use DB;
+use Illuminate\Console\Command;
 
 class RestoreDeletedUsers extends Command
 {

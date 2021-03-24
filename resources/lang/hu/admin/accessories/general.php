@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'A tartozékokról',
-    'about_accessories_text'  			=> 'A tartozék bármi lehet, amit kiad egy felhasználónak, aminek nincs sorozatszáma (vagy csak nem akarja egyediként kezelni). Például számítógépes egér vagy billentyűzet.',
     'accessory_category' 				=> 'Tartozék kategória',
     'accessory_name'  					=> 'Tartozék neve',
     'checkout'  							=> 'Kiadott tartozék',

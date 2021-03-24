@@ -15,8 +15,8 @@ return array(
     ),
     'purge' => array(
         'error'     => 'Virhe on ilmennyt puhdistuksen aikana.',
-        'validation_failed'     => 'Puhdistustodistus on virheellinen. Kirjoita vahvistusruutuun sana "DELETE".',
-        'success'               => 'Poistetut tietueet menestyivät onnistuneesti.'
+        'validation_failed'     => 'Puhdistusvahvistus on virheellinen. Kirjoita vahvistusruutuun sana "DELETE".',
+        'success'               => 'Poistetut tietueet puhdistettu onnistuneesti.'
     ),
 
 );

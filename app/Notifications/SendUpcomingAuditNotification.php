@@ -26,10 +26,9 @@ class SendUpcomingAuditNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         return $notifyBy = ['mail'];
     }
@@ -37,10 +36,9 @@ class SendUpcomingAuditNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         $message = (new MailMessage)->markdown('notifications.markdown.upcoming-audits',
             [
@@ -50,18 +48,5 @@ class SendUpcomingAuditNotification extends Notification
             ->subject(trans_choice('mail.upcoming-audits', $this->assets->count(), ['count' => $this->assets->count(), 'threshold' => $this->threshold]));
 
         return $message;
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

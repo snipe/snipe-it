@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Il bene che si sta cercando di associare a questa licenza è di proprietà di una persona diversa dal soggetto selezionato nel menù a discesa.',
     'assoc_users'	 => 'Questo bene è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo. ',
     'select_asset_or_person' => 'È necessario selezionare un\'attività o un utente, ma non entrambi.',
+    'not_found' => 'Licenza non trovata',
 
 
     'create' => array(

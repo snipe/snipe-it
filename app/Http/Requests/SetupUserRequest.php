@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class SetupUserRequest extends Request
 {
     /**
@@ -29,7 +27,7 @@ class SetupUserRequest extends Request
           'last_name' => 'required|string|min:1',
           'username' => 'required|string|min:2|unique:users,username,NULL,deleted_at',
           'email' => 'email|unique:users,email',
-          'password' => 'required|min:6|confirmed',
+          'password' => 'required|min:8|confirmed',
           'email_domain' => 'required|min:4',
         ];
     }

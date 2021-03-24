@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Kaore te awhina i te tīariari.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Ko tenei taputapu i tenei wa: ko nga nama kua taatatia ki nga kaiwhakamahi. Titiro koa ki nga taputapu me te ngana ano.',
 
     'create' => array(

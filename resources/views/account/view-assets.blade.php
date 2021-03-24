@@ -44,6 +44,7 @@ View Assets for  {{ $user->present()->fullName() }}
                   }'>
               <thead>
               <tr>
+                <th>#</th>
                 <th class="col-md-3" data-switchable="true" data-visible="true">{{ trans('general.category') }}</th>
                 <th class="col-md-2" data-switchable="true" data-visible="true">{{ trans('admin/hardware/table.asset_tag') }}</th>
                 <th class="col-md-3" data-switchable="true" data-visible="true">{{ trans('general.name') }}</th>
@@ -54,8 +55,12 @@ View Assets for  {{ $user->present()->fullName() }}
 
               </thead>
               <tbody>
+                @php
+                  $counter = 1
+                @endphp
                 @foreach ($user->assets as $asset)
                 <tr>
+                  <td>{{ $counter }}</td>
                   <td>{{ $asset->model->category->name }}</td>
                   <td>{{ $asset->asset_tag }}</td>
                   <td>{{ $asset->name }}</td>
@@ -67,13 +72,46 @@ View Assets for  {{ $user->present()->fullName() }}
                   <td>{{ $asset->serial }}</td>
                   <td>
                     @if (($asset->image) && ($asset->image!=''))
-                      <img src="{{ url('/') }}/uploads/assets/{{ $asset->image }}" height="50" width="50" alt="{{ $asset->present()->name() }}">
+                      <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" height="50" width="50">
 
                     @elseif (($asset->model) && ($asset->model->image!=''))
-                      <img src="{{ url('/') }}/uploads/models/{{ $asset->model->image }}" height="50" width="50" alt="{{ $asset->present()->name() }}">
+                      <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($asset->model->image)) }}" height="50" width="50">
                     @endif
                   </td>
                 </tr>
+                @if($settings->show_assigned_assets)
+                  @php
+                    $assignedCounter = 1
+                  @endphp
+                  @foreach ($asset->assignedAssets as $asset)
+                    <tr>
+                      <td>{{ $counter }}.{{ $assignedCounter }}</td>
+                      <td>{{ $asset->model->category->name }}</td>
+                      <td>{{ $asset->asset_tag }}</td>
+                      <td>{{ $asset->name }}</td>
+                      <td>
+                        @if ($asset->physical=='1')
+                          {{ $asset->model->name }}
+                        @endif
+                      </td>
+                      <td>{{ $asset->serial }}</td>
+                      <td>
+                        @if (($asset->image) && ($asset->image!=''))
+                          <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" height="50" width="50">
+
+                        @elseif (($asset->model) && ($asset->model->image!=''))
+                          <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($asset->model->image)) }}" height="50" width="50">
+                        @endif
+                      </td>
+                    </tr>
+                    @php
+                      $assignedCounter++
+                    @endphp
+                  @endforeach
+                @endif
+                @php
+                  $counter++
+                @endphp
                 @endforeach
               </tbody>
             </table>
@@ -116,8 +154,9 @@ View Assets for  {{ $user->present()->fullName() }}
                   }'>
             <thead>
               <tr>
-                <th class="col-md-5">{{ trans('general.name') }}</th>
+                <th class="col-md-4">{{ trans('general.name') }}</th>
                 <th class="col-md-4">{{ trans('admin/hardware/form.serial') }}</th>
+                <th class="col-md-4">{{ trans('general.category') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -131,6 +170,7 @@ View Assets for  {{ $user->present()->fullName() }}
                     ------------
                   @endcan
                 </td>
+                <td>{{ $license->category->name }}</td>
               </tr>
               @endforeach
             </tbody>
@@ -173,13 +213,15 @@ View Assets for  {{ $user->present()->fullName() }}
                   }'>
             <thead>
               <tr>
-                <th class="col-md-12">{{ trans('general.name') }}</th>
+                <th class="col-md-8">{{ trans('general.name') }}</th>
+                <th class="col-md-4">{{ trans('general.category') }}</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($user->consumables as $consumable)
               <tr>
                 <td>{{ $consumable->name }}</td>
+                <td>{{ $consumable->category->name }}</td>
               </tr>
               @endforeach
             </tbody>
@@ -226,13 +268,15 @@ View Assets for  {{ $user->present()->fullName() }}
                   }'>
             <thead>
               <tr>
-                <th class="col-md-12">Name</th>
+                <th class="col-md-8">{{ trans('general.name') }}</th>
+                <th class="col-md-4">{{ trans('general.category') }}</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($user->accessories as $accessory)
               <tr>
                 <td>{{ $accessory->name }}</td>
+                <td>{{ $accessory->category->name }}</td>
               </tr>
               @endforeach
             </tbody>

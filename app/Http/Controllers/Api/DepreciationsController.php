@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
-use App\Models\Depreciation;
+use App\Http\Controllers\Controller;
 use App\Http\Transformers\DepreciationsTransformer;
+use App\Models\Depreciation;
+use Illuminate\Http\Request;
 
 class DepreciationsController extends Controller
 {
@@ -20,7 +20,7 @@ class DepreciationsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Depreciation::class);
-        $allowed_columns = ['id','name','created_at'];
+        $allowed_columns = ['id','name','months','created_at'];
 
         $depreciations = Depreciation::select('id','name','months','user_id','created_at','updated_at');
 
@@ -115,10 +115,10 @@ class DepreciationsController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete', Depreciation::class);
-        $depreciation = Depreciation::findOrFail($id);
+        $depreciation = Depreciation::withCount('models as models_count')->findOrFail($id);
         $this->authorize('delete', $depreciation);
 
-        if ($depreciation->has_models() > 0) {
+        if ($depreciation->models_count > 0) {
             return response()->json(Helper::formatStandardApiResponse('error', trans('admin/depreciations/message.assoc_users')));
         }
 

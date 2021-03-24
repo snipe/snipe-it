@@ -2,17 +2,16 @@
 
 namespace App\Console\Commands;
 
-
 use App\Models\Asset;
 use App\Models\Setting;
-use Illuminate\Console\Command;
-use App\Notifications\ExpectedCheckinNotification;
 use App\Notifications\ExpectedCheckinAdminNotification;
+use App\Notifications\ExpectedCheckinNotification;
 use Carbon\Carbon;
+use Illuminate\Console\Command;
+use App\Models\Recipients\AlertRecipient;
 
 class SendExpectedCheckinAlerts extends Command
 {
-
     /**
      * The console command name.
      *
@@ -29,8 +28,6 @@ class SendExpectedCheckinAlerts extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -44,15 +41,15 @@ class SendExpectedCheckinAlerts extends Command
      */
     public function handle()
     {
-        $settings = Setting::getSettings();
+        $settings   = Setting::getSettings();
         $whenNotify = Carbon::now()->addDays(7);
-        $assets = Asset::with('assignedTo')->whereNotNull('assigned_to')->whereNotNull('expected_checkin')->where('expected_checkin', '<=', $whenNotify)->get();
+        $assets     = Asset::with('assignedTo')->whereNotNull('assigned_to')->whereNotNull('expected_checkin')->where('expected_checkin', '<=', $whenNotify)->get();
 
-        $this->info($whenNotify.' is deadline');
-        $this->info($assets->count().' assets');
+        $this->info($whenNotify . ' is deadline');
+        $this->info($assets->count() . ' assets');
 
         foreach ($assets as $asset) {
-            if ($asset->assigned  && $asset->checkedOutToUser()) {
+            if ($asset->assigned && $asset->checkedOutToUser()) {
                 $asset->assigned->notify((new ExpectedCheckinNotification($asset)));
             }
         }
@@ -60,14 +57,9 @@ class SendExpectedCheckinAlerts extends Command
         if (($assets) && ($assets->count() > 0) && ($settings->alert_email != '')) {
             // Send a rollup to the admin, if settings dictate
             $recipients = collect(explode(',', $settings->alert_email))->map(function ($item, $key) {
-                return new \App\Models\Recipients\AlertRecipient($item);
+                return new AlertRecipient($item);
             });
             \Notification::send($recipients, new ExpectedCheckinAdminNotification($assets));
         }
-
-
-
-
-
     }
 }

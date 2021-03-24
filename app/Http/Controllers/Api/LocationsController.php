@@ -24,9 +24,9 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Location::class);
         $allowed_columns = [
-                'id','name','address','address2','city','state','country','zip','created_at',
-                'updated_at','manager_id','image',
-                'assigned_assets_count','users_count','assets_count','currency'];
+            'id','name','address','address2','city','state','country','zip','created_at',
+            'updated_at','manager_id','image',
+            'assigned_assets_count','users_count','assets_count','currency','ldap_ou'];
 
         $locations = Location::with('parent', 'manager', 'children')->select([
             'locations.id',
@@ -42,19 +42,19 @@ class LocationsController extends Controller
             'locations.created_at',
             'locations.updated_at',
             'locations.image',
+            'locations.ldap_ou',
             'locations.currency'
         ])->withCount('assignedAssets as assigned_assets_count')
-        ->withCount('assets as assets_count')
-        ->withCount('users as users_count');
+            ->withCount('assets as assets_count')
+            ->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $locations = $locations->TextSearch($request->input('search'));
         }
 
 
-        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
-        // case we override with the actual count, so we should return 0 items.
-        $offset = (($locations) && ($request->get('offset') > $locations->count())) ? $locations->count() : $request->get('offset', 0);
+
+        $offset = (($locations) && (request('offset') > $locations->count())) ? $locations->count() : request('offset', 0);
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
@@ -143,22 +143,19 @@ class LocationsController extends Controller
      * @since [v4.0]
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
         $this->authorize('update', Location::class);
         $location = Location::findOrFail($id);
 
-        if ($request->input('parent_id') == $id) {
-
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'A location cannot be its own parent. Please select a different parent ID.'));
-        }
-
-
         $location->fill($request->all());
 
-        if ($location->save()) {
+
+        if ($location->isValid()) {
+
+            $location->save();
             return response()->json(
                 Helper::formatStandardApiResponse(
                     'success',
@@ -183,6 +180,10 @@ class LocationsController extends Controller
     {
         $this->authorize('delete', Location::class);
         $location = Location::findOrFail($id);
+        if(!$location->isDeletable()) {
+            return response()
+                    ->json(Helper::formatStandardApiResponse('error', null,  trans('admin/companies/message.assoc_users')));
+        }
         $this->authorize('delete', $location);
         $location->delete();
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/locations/message.delete.success')));

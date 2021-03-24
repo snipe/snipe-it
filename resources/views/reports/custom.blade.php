@@ -263,6 +263,7 @@
             @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'by_company_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'by_location_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'by_rtd_location_id', 'hide_new' => 'true'])
+          @include ('partials.forms.edit.department-select', ['translated_name' => trans('general.department'), 'fieldname' => 'by_dept_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'by_supplier_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.model-select', ['translated_name' => trans('general.asset_model'), 'fieldname' => 'by_model_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'by_manufacturer_id', 'hide_new' => 'true'])
@@ -272,7 +273,7 @@
             <div class="form-group">
               <label for="by_status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }}</label>
               <div class="col-md-7 col-sm-11">
-                {{ Form::select('by_status_id', \App\Helpers\Helper::statusLabelList() , Input::old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'by_status_id')) }}
+                {{ Form::select('by_status_id', \App\Helpers\Helper::statusLabelList() , old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'by_status_id')) }}
               </div>
             </div>
 
@@ -315,7 +316,25 @@
               </div>
             </div>
 
-            
+              <!-- Last Audit Date -->
+              <div class="form-group last_audit-range">
+                  <label for="last_audit_start" class="col-md-3 control-label">{{ trans('general.last_audit') }}</label>
+                  <div class="input-daterange input-group col-md-6" id="datepicker">
+                      <input type="text" class="input-sm form-control" name="last_audit_start" aria-label="last_audit_start">
+                      <span class="input-group-addon">to</span>
+                      <input type="text" class="input-sm form-control" name="last_audit_end" aria-label="last_audit_end">
+                  </div>
+              </div>
+
+              <!-- Next Audit Date -->
+              <div class="form-group next_audit-range">
+                  <label for="next_audit_start" class="col-md-3 control-label">{{ trans('general.next_audit_date') }}</label>
+                  <div class="input-daterange input-group col-md-6" id="datepicker">
+                      <input type="text" class="input-sm form-control" name="next_audit_start" aria-label="nex_audit_start">
+                      <span class="input-group-addon">to</span>
+                      <input type="text" class="input-sm form-control" name="next_audit_end" aria-label="next_audit_end">
+                  </div>
+              </div>
 
             <div class="col-md-9 col-md-offset-3">
               <label>
@@ -350,6 +369,19 @@
       });
 
       $('.expected_checkin-range .input-daterange').datepicker({
+          clearBtn: true,
+          todayHighlight: true,
+          format: 'yyyy-mm-dd'
+      });
+
+      $('.last_audit-range .input-daterange').datepicker({
+          clearBtn: true,
+          todayHighlight: true,
+          endDate:'0d',
+          format: 'yyyy-mm-dd'
+      });
+
+      $('.next_audit-range .input-daterange').datepicker({
           clearBtn: true,
           todayHighlight: true,
           format: 'yyyy-mm-dd'

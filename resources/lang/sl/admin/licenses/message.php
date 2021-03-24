@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Sredstev, ki ga poskušate povezati s to licenco, je v lasti nekoga drugega, in ne v lasti uporabnika ki je izbran v spustnem seznamu.',
     'assoc_users'	 => 'Ta licenca je trenutno izdana uporabniku in je ni mogoče izbrisati. Najprej preverite licenco in poskusite znova izbrisati. ',
     'select_asset_or_person' => 'Izbrati morate sredstvo ali uporabnika, vendar ne obojega.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

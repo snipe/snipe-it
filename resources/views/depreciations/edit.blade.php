@@ -1,9 +1,9 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/depreciations/general.create') ,
     'updateText' => trans('admin/depreciations/general.update'),
-    'helpTitle' => trans('admin/depreciations/general.about_asset_depreciations'),
-    'helpText' => trans('admin/depreciations/general.about_depreciations'),
-    'formAction' => ($item) ? route('depreciations.update', ['depreciation' => $item->id]) : route('depreciations.store'),
+    'helpPosition'  => 'right',
+    'helpText' => trans('help.depreciations'),
+    'formAction' => (isset($item->id)) ? route('depreciations.update', ['depreciation' => $item->id]) : route('depreciations.store'),
 ])
 
 {{-- Page content --}}
@@ -17,7 +17,7 @@
     </label>
     <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'months')) ? ' required' : '' }}">
         <div class="col-md-2" style="padding-left:0px">
-            <input class="form-control" type="text" name="months" id="months" value="{{ Input::old('months', $item->months) }}" style="width: 80px;" />
+            <input class="form-control" type="text" name="months" id="months" value="{{ Request::old('months', $item->months) }}" style="width: 80px;" />
         </div>
     </div>
     {!! $errors->first('months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}

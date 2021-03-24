@@ -2,8 +2,6 @@
 
 namespace App\Presenters;
 
-use App\Helpers\Helper;
-
 /**
  * Class CategoryPresenter
  * @package App\Presenters
@@ -45,52 +43,35 @@ class CategoryPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('general.type'),
                 "visible" => true
-            ], [
-                "field" => "assets_count",
+            ],[
+                "field" => "item_count",
                 "searchable" => false,
                 "sortable" => true,
-                "title" => trans('general.assets'),
+                "title" => trans('general.qty'),
                 "visible" => true
-            ], [
-                "field" => "accessories_count",
-                "searchable" => false,
-                "sortable" => true,
-                "title" => trans('general.accessories'),
-                "visible" => true
-            ], [
-                "field" => "consumables_count",
-                "searchable" => false,
-                "sortable" => true,
-                "title" => trans('general.consumables'),
-                "visible" => true
-            ], [
-                "field" => "components_count",
-                "searchable" => false,
-                "sortable" => true,
-                "title" => trans('general.components'),
-                "visible" => true
-            ], [
-                "field" => "licenses_count",
-                "searchable" => false,
-                "sortable" => true,
-                "title" => trans('general.licenses'),
-                "visible" => true
-            ], [
-                "field" => "eula",
+            ],[
+                "field" => "has_eula",
                 "searchable" => false,
                 "sortable" => false,
                 "title" => trans('admin/categories/table.eula_text'),
                 "visible" => false,
                 "formatter" => 'trueFalseFormatter',
-            ],  [
+            ],[
+                "field" => "checkin_email",
+                "searchable" => false,
+                "sortable" => true,
+                "class" => 'css-envelope',
+                "title" => 'Send Email',
+                "visible" => true,
+                "formatter" => 'trueFalseFormatter',
+            ],[
                 "field" => "require_acceptance",
                 "searchable" => false,
                 "sortable" => true,
                 "title" => trans('admin/categories/table.require_acceptance'),
                 "visible" => true,
                 "formatter" => 'trueFalseFormatter',
-            ],
-           [
+            ],[
                 "field" => "actions",
                 "searchable" => false,
                 "sortable" => false,

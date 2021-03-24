@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Models\CustomField;
-use Illuminate\Console\Command;
 use App\LegacyEncrypter\McryptEncrypter;
-use App\Models\Setting;
 use App\Models\Asset;
+use App\Models\CustomField;
+use App\Models\Setting;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
 class RecryptFromMcrypt extends Command

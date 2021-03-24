@@ -82,11 +82,14 @@ return [
             'unix_socket' => env('DB_SOCKET',''),
             'dump' => [
                 'dump_binary_path' => env('DB_DUMP_PATH', '/usr/local/bin'),  // only the path, so without 'mysqldump'
-                'use_single_transaction',
+                'use_single_transaction' => false,
                 'timeout' => 60 * 5, // 5 minute timeout
                 //'exclude_tables' => ['table1', 'table2'],
                 //'add_extra_option' => '--optionname=optionvalue',
             ],
+
+            'dump_command_timeout' => 60 * 5, // 5 minute timeout
+            'dump_using_single_transaction' => true, // perform dump using a single transaction
             'options' => (env('DB_SSL')) ? ((env('DB_SSL_IS_PAAS')) ? [
                 PDO::MYSQL_ATTR_SSL_CA                  => env('DB_SSL_CA_PATH'),   // /path/to/ca.pem
             ] : [

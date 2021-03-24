@@ -1,12 +1,10 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Ангиллын тухай',
-    'about_categories'  				=> 'Хөрөнгийн бүтэц зохион байгуулалтыг оновчтой болгоход Ангилал тус болно. Жишээлбэл &quot;Ширээний компьютьер&quot;, &quot;Ноутбүүк&quot;,&quot;Гар утас&quot;,&quot;Таблет&quot; гэх мэт. Та өөрийн хүссэнээрээ ангиллаа зохиож болно.',
     'asset_categories' 					=> 'Хөрөнгийн ангиллууд',
     'category_name'  					=> 'Ангиллын нэр',
-    'checkin_email'                     => 'Олгох үед хэрэглэгч уруу имэйл илгээх.',
-    'checkin_email_notification'        => 'This user will be sent an email on checkin/checkout.',
+    'checkin_email'                     => 'Авах/олгох үед хэрэглэгч үрүү имэйл илгээх.',
+    'checkin_email_notification'        => 'Авах/олгох үед энэ хэрэглэгч үрүү имэйл очих болно.',
     'clone'                             => 'Ангиллыг хуулж үүсгэх',
     'create'  							=> 'Ангилал үүсгэх',
     'edit'                              => 'Ангилал засах',

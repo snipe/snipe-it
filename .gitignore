@@ -50,4 +50,14 @@ tests/_support/_generated/*
 /storage/oauth-public.key
 
 *.cache
+
+.vagrant
+
+\.php_cs\.dist
+
+phpmd\.xml
 /public/storage
+_ide_helper.php
+.phpstorm.meta.php
+_ide_helper_models.php
+/.phplint-cache

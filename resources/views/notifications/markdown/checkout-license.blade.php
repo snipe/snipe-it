@@ -16,7 +16,7 @@
 @if (isset($item->category))
 | **{{ trans('general.category') }}** | {{ $item->category->name }} |
 @endif
-@if ($target->can('update', $item))
+@if ($target->can('view', $item))
 | **Key** | {{ $item->serial }} |
 @endif
 @if ($note)
@@ -47,7 +47,7 @@
 @endif
 
 
-Thanks,
+{{ trans('mail.best_regards') }}
 
 {{ $snipeSettings->site_name }}
 

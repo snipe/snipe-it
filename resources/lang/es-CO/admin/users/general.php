@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Las configuraciones de LDAP estàn en: Admin -> Settings. La ubicaciòn seleccionadada sera asignada a todos los usuarios importados.',
     'print_assigned'    => 'Imprimir todos los Asignados',
     'software_user'     => 'Software asignado a :name',
+    'send_email_help'   => 'Debe proporcionar una dirección de correo electrónico para este usuario para enviarle credenciales. Únicamente pueden enviarse credenciales por correo eléctronico durante la creación del usuario. Las contraseñas se almacenan en un hash de un solo sentido y no se pueden recuperar una vez guardadas.',
     'view_user'         => 'Ver Usuario :name',
     'usercsv'           => 'Archivo CSV',
     'two_factor_admin_optin_help' => 'La actual configuración de administración permite cumplimiento selectivo de autenticación de dos factores.  ',

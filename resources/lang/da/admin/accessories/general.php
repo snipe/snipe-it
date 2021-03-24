@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Omkring Tilbehør',
-    'about_accessories_text'  			=> 'Tilbehør er alt du udleverer til brugere men som ikke har et serienummer (eller som du er ligeglad med følge præcist). For eksempel, computermus eller tastaturer.',
     'accessory_category' 				=> 'Tilbehør Kategori',
     'accessory_name'  					=> 'Tilbehør Navn',
     'checkout'  							=> 'Tjek tilbehør ud',

@@ -8,7 +8,7 @@ return array(
     'checkout'  				=> 'Check werkplek licentie uit',
     'edit'  					=> 'Wijzig licentie',
     'filetype_info'				=> 'Toegestane bestandstypes zijn png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
-    'clone'  					=> 'Kopieer licentie',
+    'clone'  					=> 'Dupliceer licentie',
     'history_for'  				=> 'Geschiedenis van ',
     'in_out'  					=> 'In/Uit',
     'info'  					=> 'Licentiegegevens',

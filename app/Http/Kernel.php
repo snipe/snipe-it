@@ -14,6 +14,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        \App\Http\Middleware\NoSessionStore::class,
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
@@ -38,6 +39,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\CheckLocale::class,
             \App\Http\Middleware\CheckForTwoFactor::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+            \App\Http\Middleware\AssetCountForSidebar::class,
         ],
 
         'api' => [

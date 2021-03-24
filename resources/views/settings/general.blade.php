@@ -48,7 +48,7 @@
                             {{ Form::label('full_multiple_companies_support', trans('admin/settings/general.full_multiple_companies_support_text')) }}
                         </div>
                         <div class="col-md-9">
-                            {{ Form::checkbox('full_multiple_companies_support', '1', Input::old('full_multiple_companies_support', $setting->full_multiple_companies_support),array('class' => 'minimal', 'aria-label'=>'full_multiple_companies_support')) }}
+                            {{ Form::checkbox('full_multiple_companies_support', '1', old('full_multiple_companies_support', $setting->full_multiple_companies_support),array('class' => 'minimal', 'aria-label'=>'full_multiple_companies_support')) }}
                             {{ trans('admin/settings/general.full_multiple_companies_support_text') }}
                             {!! $errors->first('full_multiple_companies_support', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             <p class="help-block">
@@ -66,7 +66,7 @@
                                            trans('admin/settings/general.require_accept_signature')) }}
                         </div>
                         <div class="col-md-9">
-                            {{ Form::checkbox('require_accept_signature', '1', Input::old('require_accept_signature', $setting->require_accept_signature),array('class' => 'minimal')) }}
+                            {{ Form::checkbox('require_accept_signature', '1', Request::old('require_accept_signature', $setting->require_accept_signature),array('class' => 'minimal')) }}
                             {{ trans('general.yes') }}
                             {!! $errors->first('require_accept_signature', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             <p class="help-block">{{ trans('admin/settings/general.require_accept_signature_help_text') }}</p>
@@ -81,7 +81,7 @@
                             {{ Form::label('email_domain', trans('general.email_domain')) }}
                         </div>
                         <div class="col-md-9">
-                            {{ Form::text('email_domain', Input::old('email_domain', $setting->email_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
+                            {{ Form::text('email_domain', Request::old('email_domain', $setting->email_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
                             <span class="help-block">{{ trans('general.email_domain_help')  }}</span>
                             {!! $errors->first('email_domain', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                         </div>
@@ -94,7 +94,7 @@
                             {{ Form::label('email_format', trans('general.email_format')) }}
                         </div>
                         <div class="col-md-9">
-                            {!! Form::username_format('email_format', Input::old('email_format', $setting->email_format), 'select2') !!}
+                            {!! Form::username_format('email_format', old('email_format', $setting->email_format), 'select2') !!}
                             {!! $errors->first('email_format', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                         </div>
                     </div>
@@ -105,21 +105,12 @@
                             {{ Form::label('username_format', trans('general.username_format')) }}
                         </div>
                         <div class="col-md-9">
-                            {!! Form::username_format('username_format', Input::old('username_format', $setting->username_format), 'select2') !!}
+                            {!! Form::username_format('username_format', old('username_format', $setting->username_format), 'select2') !!}
                             {!! $errors->first('username_format', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                        </div>
-                    </div>
 
-
-
-                    <!-- remote load -->
-                    <div class="form-group">
-                        <div class="col-md-3">
-                            {{ Form::label('load_remote', trans('admin/settings/general.load_remote_text')) }}
-                        </div>
-                        <div class="col-md-9">
-                            {{ Form::checkbox('load_remote', '1', Input::old('load_remote', $setting->load_remote),array('class' => 'minimal')) }}
-                            <p class="help-block">{{ trans('admin/settings/general.load_remote_help_text') }}</p>
+                            <p class="help-block">
+                                {{ trans('admin/settings/general.username_format_help') }}
+                            </p>
                         </div>
                     </div>
 
@@ -129,12 +120,10 @@
                                {{ Form::label('show_images_in_email', trans('admin/settings/general.show_images_in_email')) }}
                            </div>
                            <div class="col-md-9">
-                               {{ Form::checkbox('show_images_in_email', '1', Input::old('show_images_in_email', $setting->show_images_in_email),array('class' => 'minimal')) }}
+                               {{ Form::checkbox('show_images_in_email', '1', Request::old('show_images_in_email', $setting->show_images_in_email),array('class' => 'minimal')) }}
                                {{ trans('general.yes') }}
                                {!! $errors->first('show_images_in_email', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                               <p class="help-block">
-                                   {{ trans('admin/settings/general.show_images_in_email_help') }}
-                               </p>
+
                            </div>
                        </div>
 
@@ -144,7 +133,7 @@
                                {{ Form::label('unique_serial', trans('admin/settings/general.unique_serial')) }}
                            </div>
                            <div class="col-md-9">
-                               {{ Form::checkbox('unique_serial', '1', Input::old('unique_serial', $setting->unique_serial),array('class' => 'minimal')) }}
+                               {{ Form::checkbox('unique_serial', '1', Request::old('unique_serial', $setting->unique_serial),array('class' => 'minimal')) }}
                                {{ trans('general.yes') }}
                                {!! $errors->first('unique_serial', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                <p class="help-block">
@@ -160,7 +149,7 @@
                             {{ Form::label('per_page', trans('admin/settings/general.per_page')) }}
                         </div>
                         <div class="col-md-9">
-                            {{ Form::text('per_page', Input::old('per_page', $setting->per_page), array('class' => 'form-control','placeholder' => '5', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                            {{ Form::text('per_page', old('per_page', $setting->per_page), array('class' => 'form-control','placeholder' => '5', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                             {!! $errors->first('per_page', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                         </div>
                     </div>
@@ -171,7 +160,7 @@
                            {{ Form::label('thumbnail_max_h', trans('admin/settings/general.thumbnail_max_h')) }}
                        </div>
                        <div class="col-md-9">
-                           {{ Form::text('thumbnail_max_h', Input::old('thumbnail_max_h', $setting->thumbnail_max_h), array('class' => 'form-control','placeholder' => '50', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                           {{ Form::text('thumbnail_max_h', Request::old('thumbnail_max_h', $setting->thumbnail_max_h), array('class' => 'form-control','placeholder' => '50', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                            <p class="help-block">{{ trans('admin/settings/general.thumbnail_max_h_help') }}</p>
                            {!! $errors->first('thumbnail_max_h', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                        </div>
@@ -183,7 +172,7 @@
                            {{ Form::label('default_eula_text', trans('admin/settings/general.default_eula_text')) }}
                        </div>
                        <div class="col-md-9">
-                           {{ Form::textarea('default_eula_text', Input::old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control','placeholder' => 'Add your default EULA text')) }}
+                           {{ Form::textarea('default_eula_text', old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control','placeholder' => 'Add your default EULA text')) }}
                            {!! $errors->first('default_eula_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                            <p class="help-block">{{ trans('admin/settings/general.default_eula_help_text') }}</p>
                            <p class="help-block">{!! trans('admin/settings/general.eula_markdown') !!}</p>
@@ -199,11 +188,11 @@
                         <div class="col-md-9">
                             @if (config('app.lock_passwords'))
 
-                                <textarea class="form-control disabled" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2" aria-label="login_note" readonly>{{ Input::old('login_note', $setting->login_note) }}</textarea>
+                                <textarea class="form-control disabled" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2" aria-label="login_note" readonly>{{ old('login_note', $setting->login_note) }}</textarea>
                                 {!! $errors->first('login_note', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                <p class="help-block">{{ trans('general.lock_passwords') }}</p>
+                                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                             @else
-                                <textarea class="form-control" name="login_note" aria-label="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2">{{ Input::old('login_note', $setting->login_note) }}</textarea>
+                                <textarea class="form-control" name="login_note" aria-label="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2">{{ old('login_note', $setting->login_note) }}</textarea>
                                 {!! $errors->first('login_note', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             @endif
                             <p class="help-block">{!!  trans('admin/settings/general.login_note_help') !!}</p>
@@ -239,11 +228,11 @@
                            <div class="col-md-9">
                                @if (config('app.lock_passwords'))
 
-                                   <textarea class="form-control disabled" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2" aria-label="dashboard_message" readonly>{{ Input::old('dashboard_message', $setting->login_note) }}</textarea>
+                                   <textarea class="form-control disabled" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2" aria-label="dashboard_message" readonly>{{ old('dashboard_message', $setting->login_note) }}</textarea>
                                    {!! $errors->first('dashboard_message', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                   <p class="help-block">{{ trans('general.lock_passwords') }}</p>
+                                   <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                @else
-                                   <textarea class="form-control" aria-label="dashboard_message" name="dashboard_message" rows="2">{{ Input::old('login_note', $setting->dashboard_message) }}</textarea>
+                                   <textarea class="form-control" aria-label="dashboard_message" name="dashboard_message" rows="2">{{ old('login_note', $setting->dashboard_message) }}</textarea>
                                    {!! $errors->first('dashboard_message', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                @endif
                                <p class="help-block">
@@ -262,10 +251,24 @@
                                               trans('admin/settings/general.show_archived_in_list')) }}
                            </div>
                            <div class="col-md-9">
-                               {{ Form::checkbox('show_archived_in_list', '1', Input::old('show_archived_in_list', $setting->show_archived_in_list),array('class' => 'minimal')) }}
+                               {{ Form::checkbox('show_archived_in_list', '1', Request::old('show_archived_in_list', $setting->show_archived_in_list),array('class' => 'minimal')) }}
                                {{ trans('admin/settings/general.show_archived_in_list_text') }}
                                {!! $errors->first('show_archived_in_list', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
 
+                           </div>
+                       </div>
+
+                       <!-- Show assets assigned to user's assets -->
+                       <div class="form-group {{ $errors->has('show_assigned_assets') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                               {{ Form::label('show_assigned_assets',
+                                              trans('admin/settings/general.show_assigned_assets')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::checkbox('show_assigned_assets', '1', Request::old('show_assigned_assets', $setting->show_assigned_assets),array('class' => 'minimal')) }}
+                               {{ trans('general.yes') }}
+                               <p class="help-block">{{ trans('admin/settings/general.show_assigned_assets_help') }}</p>
+                               {!! $errors->first('show_assigned_assets', '<span class="alert-msg">:message</span>') !!}
                            </div>
                        </div>
 
@@ -276,10 +279,24 @@
                                               trans('admin/settings/general.show_in_model_list')) }}
                            </div>
                            <div class="col-md-9">
-                               {{ Form::checkbox('show_in_model_list[]', 'image', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('image')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }} {{ trans('general.image') }} <br>
-                               {{ Form::checkbox('show_in_model_list[]', 'category', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('category')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }} {{ trans('general.category') }} <br>
-                               {{ Form::checkbox('show_in_model_list[]', 'manufacturer', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('manufacturer')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }}  {{ trans('general.manufacturer') }} <br>
-                               {{ Form::checkbox('show_in_model_list[]', 'model_number', Input::old('show_in_model_list', $snipeSettings->modellistCheckedValue('model_number')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }} {{ trans('general.model_no') }}<br>
+                               {{ Form::checkbox('show_in_model_list[]', 'image', old('show_in_model_list', $snipeSettings->modellistCheckedValue('image')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }} {{ trans('general.image') }} <br>
+                               {{ Form::checkbox('show_in_model_list[]', 'category', old('show_in_model_list', $snipeSettings->modellistCheckedValue('category')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }} {{ trans('general.category') }} <br>
+                               {{ Form::checkbox('show_in_model_list[]', 'manufacturer', old('show_in_model_list', $snipeSettings->modellistCheckedValue('manufacturer')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }}  {{ trans('general.manufacturer') }} <br>
+                               {{ Form::checkbox('show_in_model_list[]', 'model_number', old('show_in_model_list', $snipeSettings->modellistCheckedValue('model_number')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }} {{ trans('general.model_no') }}<br>
+                           </div>
+                       </div>
+                       
+                       <!-- Depreciation method -->
+                       <div class="form-group {{ $errors->has('depreciation_method') ? 'error' : '' }}">
+                           <div class="col-md-3">
+                                {{ Form::label('depreciation_method', trans('Depreciation method')) }}
+                           </div>
+                           <div class="col-md-9">
+                               {{ Form::select('depreciation_method', array(
+                                    'default' => 'Linear (default)', 
+                                    'half_1' => 'Half-year convention, always applied', 
+                                    'half_2' => 'Half-year convention, applied with condition', 
+                                ), Request::old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
                            </div>
                        </div>
                        <!-- /.form-group -->
@@ -291,15 +308,20 @@
                            </div>
                            <div class="col-md-9">
                                @if (config('app.lock_passwords'))
-                                   {{ Form::text('privacy_policy_link', Input::old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control disabled', 'disabled' => 'disabled')) }}
+                                   {{ Form::text('privacy_policy_link', Request::old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control disabled', 'disabled' => 'disabled')) }}
                                @else
-                                   {{ Form::text('privacy_policy_link', Input::old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control')) }}
+                                   {{ Form::text('privacy_policy_link', Request::old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control')) }}
 
                                @endif
 
 
                                <span class="help-block">{{ trans('admin/settings/general.privacy_policy_link_help')  }}</span>
                                {!! $errors->first('privacy_policy_link', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+
+                               @if (config('app.lock_passwords')===true)
+                                   <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                               @endif
+
                            </div>
                        </div>
                    </div>
@@ -379,7 +401,11 @@
                     $("#mailtesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
                     $('#mailteststatus').html('Mail could not be sent.');
                     if (data.responseJSON) {
-                        $('#mailteststatus-error').html('Error: ' + data.responseJSON.messages);
+                        if (data.responseJSON.messages) {
+                            $('#mailteststatus-error').html('Error: ' + data.responseJSON.messages);
+                        } else {
+                            $('#mailteststatus-error').html('No additional error message provided. Check your mail settings and your app log.');
+                        }
                     } else {
                         console.dir(data);
                     }

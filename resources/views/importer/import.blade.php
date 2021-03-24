@@ -8,9 +8,6 @@
 
 {{-- Page content --}}
 @section('content')
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/lib/jquery.fileupload.css') }}">
-
     {{-- Hide importer until vue has rendered it, if we continue using vue for other things we should move this higher in the style --}}
     <style>
         [v-cloak] {
@@ -39,11 +36,11 @@
         <alert v-show="alert.visible" :alert-type="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert>
             <errors :errors="importErrors"></errors>
 
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <div class="box">
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 pull-right">
 
                                 <!-- The fileinput-button span is used to style the file input field as button -->
                                 @if (!config('app.lock_passwords'))
@@ -101,6 +98,11 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3">
+                <h2>{{ trans('general.importing') }}</h2>
+                <p>{!!   trans('general.importing_help') !!}</p>
+            </div>
+
         </div>
     </importer>
 </div>

@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => '승인 불충분.',
     'user_deleted_warning'      => '이 사용자는 삭제되었습니다. 그것들을 수정하려면 이 사용자를 복원하던가 새 자산들을 생성하세요.',
     'ldap_not_configured'        => '이 설치의 LDAP 통합이 구성이 되지 않았습니다.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

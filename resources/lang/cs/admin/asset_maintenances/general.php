@@ -7,5 +7,8 @@
         'view'               => 'Zobrazit podrobnosti o údržbě zařízení',
         'repair'             => 'Oprava',
         'maintenance'        => 'Údržba',
-        'upgrade'            => 'Upgradovat'
+        'upgrade'            => 'Upgradovat',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

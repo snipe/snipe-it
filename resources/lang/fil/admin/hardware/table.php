@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Ang Katayuan',
     'title'      	=> 'Ang Asset ',
     'image'		=> 'Ang Imahe ng Device',
-    'days_without_acceptance' => 'Ang mga Araw na Walang Pagtanggap'
+    'days_without_acceptance' => 'Ang mga Araw na Walang Pagtanggap',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

@@ -17,9 +17,9 @@ trait Searchable {
     /**
      * Performs a search on the model, using the provided search terms
      * 
-     * @param  Illuminate\Database\Eloquent\Builder $query The query to start the search on
+     * @param  \Illuminate\Database\Eloquent\Builder $query The query to start the search on
      * @param  string $search
-     * @return Illuminate\Database\Eloquent\Builder A query with added "where" clauses
+     * @return \Illuminate\Database\Eloquent\Builder A query with added "where" clauses
      */
     public function scopeTextSearch($query, $search)
     {

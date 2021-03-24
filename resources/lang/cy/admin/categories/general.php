@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Amdan Categoriau',
-    'about_categories'  				=> 'Mae categoriau yn cynorthwyo chi i cadw trefn ar eich eitemau. Enghreifftiau o categoriau yw &quot;Cyfrifiadur pen-bwrdd&quot;, &quot;Gliniadur&quot;, &quot;Ffôn Symudol&quot;, &quot;Tabledi&quot;, ac yn y blaen, ond cewch gosod rhain yn ol eich angen.',
     'asset_categories' 					=> 'Categoriau Asedau',
     'category_name'  					=> 'Enw categori',
     'checkin_email'                     => 'Gyrru ebost i defnyddiwr wrth nodi fewn/allan.',

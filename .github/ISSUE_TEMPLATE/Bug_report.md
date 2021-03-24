@@ -48,6 +48,7 @@ If applicable, add screenshots to help explain your problem.
 - Any errors that appear in your browser's error console.
 - Confirm whether the error is reproducible on the demo: https://snipeitapp.com/demo.
 - Include any additional information you can find in `storage/logs` and your webserver's logs.
+- Include the output from `php -m` (this should display what modules you have enabled.)
 
 **Additional context**
 - Is this a fresh install or an upgrade? 

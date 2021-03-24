@@ -1,19 +1,19 @@
 <?php
 
 return array(
-    'about'      	=> 'Lisätietoja Tilamerkinnöistä',
+    'about'      	=> 'Lisätietoja tilamerkinnöistä',
     'archived'      	=> 'Arkistoitu',
-    'create'      	=> 'Uusi Tilamerkintä',
+    'create'      	=> 'Uusi tilamerkintä',
     'color'      	=> 'Kaavion väri',
-    'default_label' => 'Default Label',
-    'default_label_help' => 'This is used to ensure your most commonly used status labels appear at the top of the select box when creating/editing assets.',
-    'deployable'      	=> 'Käyttööotettavissa',
+    'default_label' => 'Oletus',
+    'default_label_help' => 'Tätä käytetään varmistamaan, että yleisimmin käytetyt tilamerkinnät ovat valittavissa ylimpänä, kun luodaan tai muokataan laitteita.',
+    'deployable'      	=> 'Käyttöönotettavissa',
     'info'      	=> 'Tilamerkintöjä käytetään kuvailemaan laitteidesi eri tiloja. Ne voivat olla korjauksessa, hävinneitä/varastettuja jne. Voit luoa uusia tilamerkintöjä käyttöönotettaville, odottaville sekä arkistoiduille laitteille.',
-    'name'      	=> 'Tilan Nimi',
+    'name'      	=> 'Tilan nimi',
     'pending'      	=> 'Odottaa',
     'status_type'   => 'Tilatyyppi',
-    'show_in_nav'   => 'Näytä sivut nav',
+    'show_in_nav'   => 'Näytä sivupalkissa',
     'title'      	=> 'Tilamerkinnät',
-    'undeployable'  => 'Käyttökelvoton',
-    'update'      	=> 'Päivitä Tilamerkinnät',
+    'undeployable'  => 'Ei käytettävissä',
+    'update'      	=> 'Päivitä tilamerkinnät',
 );

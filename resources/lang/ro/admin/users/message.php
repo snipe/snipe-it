@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Nu aveti permisiuni suficiente.',
     'user_deleted_warning'      => 'Acest utilizator a fost sters. Trebuie sa restaurati utilizator ca sa-l editati sau sa-i desemnati active noi.',
     'ldap_not_configured'        => 'Integrarea LDAP nu a fost configurată pentru această instalare.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

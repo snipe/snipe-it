@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Actionlog;
 use App\Http\Transformers\ActionlogsTransformer;
+use App\Models\Actionlog;
+use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
@@ -49,6 +49,7 @@ class ReportsController extends Controller
             'created_at',
             'target_id',
             'user_id',
+            'accept_signature',
             'action_type',
             'note'
         ];

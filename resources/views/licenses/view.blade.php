@@ -167,9 +167,22 @@
                     </strong>
                   </div>
                   <div class="col-md-8">
-                    {{ $license->expiration_date }}
+                    {{ \App\Helpers\Helper::getFormattedDateObject($license->expiration_date, 'date', false) }}
                   </div>
                 </div>
+                @endif
+
+                @if ($license->termination_date)
+                  <div class="row">
+                    <div class="col-md-4">
+                      <strong>
+                        {{ trans('admin/licenses/form.termination_date') }}
+                      </strong>
+                    </div>
+                    <div class="col-md-8">
+                      {{ \App\Helpers\Helper::getFormattedDateObject($license->termination_date, 'date', false) }}
+                    </div>
+                  </div>
                 @endif
 
 
@@ -188,8 +201,6 @@
                   </div>
                 </div>
 
-
-
                 <div class="row">
                   <div class="col-md-4">
                     <strong>
@@ -197,7 +208,7 @@
                     </strong>
                   </div>
                   <div class="col-md-8">
-                    {{ $license->depreciated_date()->format("Y-m-d") }}
+                    {{ \App\Helpers\Helper::getFormattedDateObject($license->depreciated_date(), 'date', false) }}
                   </div>
                 </div>
 
@@ -233,13 +244,14 @@
                   @endif
 
 
-                  @if (isset($license->purchase_date))
+                @if (isset($license->purchase_date))
                 <div class="row">
                   <div class="col-md-4">
                     <strong>{{ trans('general.purchase_date') }}</strong>
                   </div>
                   <div class="col-md-8">
-                    {{ $license->purchase_date }}
+                    {{ \App\Helpers\Helper::getFormattedDateObject($license->purchase_date, 'date', false) }}
+
                   </div>
                 </div>
                   @endif
@@ -338,7 +350,7 @@
                         data-sort-order="asc"
                         data-sort-name="name"
                         class="table table-striped snipe-table"
-                        data-url="{{ route('api.license.seats',['license_id' => $license->id]) }}"
+                        data-url="{{ route('api.license.seats', $license->id) }}"
                         data-export-options='{
                         "fileName": "export-seats-{{ str_slug($license->name) }}-{{ date('Y-m-d') }}",
                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -442,9 +454,9 @@
               <div class="table-responsive">
               <table
                       class="table table-striped snipe-table"
-                      data-cookie-id-table="dsffsdflicenseHistoryTable"
-                      data-id-table="dsffsdflicenseHistoryTable"
-                      id="dsffsdflicenseHistoryTable"
+                      data-cookie-id-table="licenseHistoryTable"
+                      data-id-table="licenseHistoryTable"
+                      id="licenseHistoryTable"
                       data-pagination="true"
                       data-show-columns="true"
                       data-side-pagination="server"
@@ -459,12 +471,13 @@
 
                 <thead>
                 <tr>
-                  <th class="col-sm-2" data-visible="true" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                  <th class="col-sm-2" data-visible="false" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.record_created') }}</th>
                   <th class="col-sm-2"data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                   <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
                   <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-sortable="true" data-visible="true" data-field="note">{{ trans('general.notes') }}</th>
+                  <th class="col-sm-2" data-visible="true" data-field="action_date" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                   @if  ($snipeSettings->require_accept_signature=='1')
                     <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif

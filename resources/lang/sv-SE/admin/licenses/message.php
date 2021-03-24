@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Den tillgång du försöker associera med denna licens ägs av någon annan än den person som valts i den tilldelade till rullgardinsmenyn.',
     'assoc_users'	 => 'Licensen är nu utcheckad till en användare och kan inte raderas. Var god kontrollera licensen först och försök sedan radera igen.',
     'select_asset_or_person' => 'Du måste välja en tillgång eller en användare, men inte båda.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Transformers;
 
+use App\Helpers\Helper;
 use App\Models\License;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
-use App\Helpers\Helper;
 
 class LicensesTransformer
 {
@@ -29,6 +29,8 @@ class LicensesTransformer
             'order_number' => e($license->order_number),
             'purchase_order' => e($license->purchase_order),
             'purchase_date' => Helper::getFormattedDateObject($license->purchase_date, 'date'),
+            'termination_date' => Helper::getFormattedDateObject($license->termination_date, 'date'),
+            'depreciation' => ($license->depreciation) ? ['id' => (int) $license->depreciation->id,'name'=> e($license->depreciation->name)] : null,
             'purchase_cost' => e($license->purchase_cost),
             'notes' => e($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
@@ -36,6 +38,7 @@ class LicensesTransformer
             'free_seats_count' => (int) $license->free_seats_count,
             'license_name' =>  e($license->license_name),
             'license_email' => e($license->license_email),
+            'reassignable' => ($license->reassignable == 1) ? true : false,
             'maintained' => ($license->maintained == 1) ? true : false,
             'supplier' =>  ($license->supplier) ? ['id' => (int)  $license->supplier->id,'name'=> e($license->supplier->name)] : null,
             'category' =>  ($license->category) ? ['id' => (int)  $license->category->id,'name'=> e($license->category->name)] : null,
@@ -45,11 +48,11 @@ class LicensesTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'checkout' => Gate::allows('checkout', License::class) ? true : false,
-            'checkin' => Gate::allows('checkin', License::class) ? true : false,
-            'clone' => Gate::allows('create', License::class) ? true : false,
-            'update' => Gate::allows('update', License::class) ? true : false,
-            'delete' => Gate::allows('delete', License::class) ? true : false,
+            'checkout' => Gate::allows('checkout', License::class),
+            'checkin' => Gate::allows('checkin', License::class),
+            'clone' => Gate::allows('create', License::class),
+            'update' => Gate::allows('update', License::class),
+            'delete' => Gate::allows('delete', License::class),
         ];
 
         $array += $permissions_array;

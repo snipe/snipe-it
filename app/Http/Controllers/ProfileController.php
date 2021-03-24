@@ -1,17 +1,16 @@
 <?php
 namespace App\Http\Controllers;
 
-use Image;
-use Input;
-use Redirect;
-use View;
-use Auth;
-use App\Helpers\Helper;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Setting;
+use Auth;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\ImageUploadRequest;
+use Illuminate\Support\Facades\Storage;
+use Image;
+use Redirect;
+use View;
 
 /**
  * This controller handles all actions related to User Profiles for
@@ -64,18 +63,38 @@ class ProfileController extends Controller
         if (Gate::allows('self.edit_location')  && (!config('app.lock_passwords'))) {
             $user->location_id    = $request->input('location_id');
         }
-        
-        if (Input::file('avatar')) {
-            $image = Input::file('avatar');
-            $file_name = str_slug($user->first_name."-".$user->last_name).".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/avatars/'.$file_name);
-            Image::make($image->getRealPath())->resize(84, 84)->save($path);
+
+
+        if ($request->input('avatar_delete') == 1) {
+            $user->avatar = null;
+        }
+
+
+        if ($request->hasFile('avatar')) {
+            $path = 'avatars';
+
+            if(!Storage::disk('public')->exists($path)) Storage::disk('public')->makeDirectory($path, 775);
+
+            $upload = $image = $request->file('avatar');
+            $ext = $image->getClientOriginalExtension();
+            $file_name = 'avatar-'.str_random(18).'.'.$ext;
+
+            if ($image->getClientOriginalExtension()!='svg') {
+                $upload =  Image::make($image->getRealPath())->resize(84, 84);
+            }
+
+            // This requires a string instead of an object, so we use ($string)
+            Storage::disk('public')->put($path.'/'.$file_name, (string)$upload->encode());
+
+            // Remove Current image if exists
+            if (($user->avatar) && (Storage::disk('public')->exists($path.'/'.$user->avatar))) {
+                Storage::disk('public')->delete($path.'/'.$user->avatar);
+            }
+
             $user->avatar = $file_name;
         }
 
-        if (Input::get('avatar_delete') == 1 && Input::file('avatar') == "") {
-            $user->avatar = null;
-        }
+
 
         if ($user->save()) {
             return redirect()->route('profile')->with('success', 'Account successfully updated');
@@ -137,6 +156,28 @@ class ProfileController extends Controller
             if (!Hash::check($request->input('current_password'), $user->password)) {
                 $validator->errors()->add('current_password', trans('validation.hashed_pass'));
             }
+
+            // This checks to make sure that the user's password isn't the same as their username,
+            // email address, first name or last name (see https://github.com/snipe/snipe-it/issues/8661)
+            // While this is handled via SaveUserRequest form request in other places, we have to do this manually
+            // here because we don't have the username, etc form fields available in the profile password change
+            // form.
+
+            // There may be a more elegant way to do this in the future.
+
+            // First let's see if that option is enabled in the settings
+            if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== FALSE) {
+                if (($request->input('password') == $user->username) ||
+                    ($request->input('password') == $user->email) ||
+                    ($request->input('password') == $user->first_name) ||
+                    ($request->input('password') == $user->last_name))
+                {
+                    $validator->errors()->add('password', trans('validation.disallow_same_pwd_as_user_fields'));
+                }
+            }
+
+
+
             
         });
 

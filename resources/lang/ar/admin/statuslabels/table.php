@@ -6,7 +6,7 @@ return array(
     'create'      	=> 'إنشاء تسمية الحالة',
     'color'      	=> 'لون الرسم البياني',
     'default_label' => 'الوسم الافتراضي',
-    'default_label_help' => 'This is used to ensure your most commonly used status labels appear at the top of the select box when creating/editing assets.',
+    'default_label_help' => 'يستخدم هذا للتأكد من أن تسميات الحالة الأكثر استخداما تظهر في الجزء العلوي من المربع المحدد عند إنشاء/تحرير الأصول.',
     'deployable'      	=> 'قابل للتوزيع',
     'info'      	=> 'يتم استخدام تسميات الحالة لوصف الحالات المحتملة للأصول التابعة لك. قد تكون قيد الصيانة أو ضمن المفقودة أو المسروقة، وما إلى ذلك. يمكنك إنشاء تسميات حالة جديدة للأصول القابلة للتوزيع وقيد الانتظار والمؤرشفة.',
     'name'      	=> 'اسم الحالة',

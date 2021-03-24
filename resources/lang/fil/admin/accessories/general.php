@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Ang tungkol sa mga Aksesorya',
-    'about_accessories_text'  			=> 'Ang mga aksesorya ay tumutukoy sa anumang bagay na iyong inisyusa mga gumagamit ngunit wala itong serial number (o wala kang pakialam sa paghahanap basi sa kaibahan nito). Halimbawa, ang mga mouse ng kompyuter o mga keyboards.',
     'accessory_category' 				=> 'Ang Katergorya sa Aksesorya',
     'accessory_name'  					=> 'Ang Pangalan ng Aksesorya',
     'checkout'  							=> 'I-checkout ang Aksesorya',

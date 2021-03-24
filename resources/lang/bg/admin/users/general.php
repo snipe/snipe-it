@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP конфигурационните настройки могат да бъдат намерени в  Admin > Settings. Избраното (по изобр) местоположение ще бъде настроено за всички въведени потребители.',
     'print_assigned'    => 'Печат на всички отдадени',
     'software_user'     => 'Софтуерни продукти, изписани на :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Преглед на потребител :name',
     'usercsv'           => 'CSV файл',
     'two_factor_admin_optin_help' => 'Текущите настройки на администратор позволяват избирателно прилагане на двуфакторова автентификация. ',

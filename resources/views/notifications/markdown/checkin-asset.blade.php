@@ -20,8 +20,8 @@
 @if (isset($item->model))
 | **{{ trans('general.asset_model') }}** | {{ $item->model->name }} |
 @endif
-@if (isset($item->model_no))
-| **{{ trans('general.model_no') }}** | {{ $item->model_no }} |
+@if (isset($item->model->model_number))
+| **{{ trans('general.model_no') }}** | {{ $item->model->model_number }} |
 @endif
 @if (isset($item->serial))
 | **{{ trans('mail.serial') }}** | {{ $item->serial }} |
@@ -42,7 +42,7 @@
 @endif
 @endcomponent
 
-Thanks,
+{{ trans('mail.best_regards') }}
 
 {{ $snipeSettings->site_name }}
 

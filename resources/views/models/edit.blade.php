@@ -1,15 +1,16 @@
 @extends('layouts/edit-form', [
     'createText' => trans('admin/models/table.create') ,
     'updateText' => trans('admin/models/table.update'),
-    'helpTitle' => trans('admin/models/general.about_models_title'),
+    'topSubmit' => true,
+    'helpPosition' => 'right',
     'helpText' => trans('admin/models/general.about_models_text'),
-    'formAction' => ($item) ? route('models.update', ['model' => $item->id]) : route('models.store'),
+    'formAction' => (isset($item->id)) ? route('models.update', ['model' => $item->id]) : route('models.store'),
 ])
 
 {{-- Page content --}}
 @section('inputFields')
 
-@include ('partials.forms.edit.name', ['translated_name' => trans('admin/models/table.name')])
+@include ('partials.forms.edit.name', ['translated_name' => trans('admin/models/table.name'), 'required' => 'true'])
 @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id', 'required' => 'true'])
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('admin/categories/general.category_name'), 'fieldname' => 'category_id', 'required' => 'true', 'category_type' => 'asset'])
 @include ('partials.forms.edit.model_number')
@@ -21,7 +22,7 @@
     <label for="eol" class="col-md-3 control-label">{{ trans('general.eol') }}</label>
     <div class="col-md-2">
         <div class="input-group">
-            <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{ Input::old('eol', isset($item->eol)) ? $item->eol : ''  }}" />
+            <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{ Request::old('eol', isset($item->eol)) ? $item->eol : ''  }}" />
             <span class="input-group-addon">
                 {{ trans('general.months') }}
             </span>
@@ -37,10 +38,10 @@
     <div class="form-group {{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
         <label for="custom_fieldset" class="col-md-3 control-label">{{ trans('admin/models/general.fieldset') }}</label>
         <div class="col-md-7">
-            {{ Form::select('custom_fieldset', \App\Helpers\Helper::customFieldsetList(),Input::old('custom_fieldset', $item->fieldset_id), array('class'=>'select2 js-fieldset-field', 'style'=>'width:350px', 'aria-label'=>'custom_fieldset')) }}
+            {{ Form::select('custom_fieldset', \App\Helpers\Helper::customFieldsetList(),old('custom_fieldset', $item->fieldset_id), array('class'=>'select2 js-fieldset-field', 'style'=>'width:350px', 'aria-label'=>'custom_fieldset')) }}
             {!! $errors->first('custom_fieldset', '<span class="alert-msg" aria-hidden="true"><br><i class="fa fa-times"></i> :message</span>') !!}
             <label class="m-l-xs">
-                {{ Form::checkbox('add_default_values', 1, Input::old('add_default_values'), ['class' => 'js-default-values-toggler']) }}
+                {{ Form::checkbox('add_default_values', 1, Request::old('add_default_values'), ['class' => 'js-default-values-toggler']) }}
                 {{ trans('admin/models/general.add_default_values') }}
             </label>
         </div>
@@ -48,8 +49,8 @@
 
     <fieldset-default-values
         model-id="{{ $item->id ?: '' }}"
-        fieldset-id="{{ !empty($item->fieldset) ? $item->fieldset->id : Input::old('custom_fieldset') }}"
-        previous-input="{{ json_encode(Input::old('default_values')) }}">
+        fieldset-id="{{ !empty($item->fieldset) ? $item->fieldset->id : Request::old('custom_fieldset') }}"
+        previous-input="{{ json_encode(Request::old('default_values')) }}">
     </fieldset-default-values>
 </div>
 
@@ -62,10 +63,10 @@
     <label class="col-md-3 control-label" for="image_delete">{{ trans('general.image_delete') }}</label>
     <div class="col-md-5">
         <label for="image_delete">
-            {{ Form::checkbox('image_delete', '1', Input::old('image_delete'), array('class' => 'minimal', 'aria-label'=>'required')) }}
+            {{ Form::checkbox('image_delete', '1', old('image_delete'), array('class' => 'minimal', 'aria-label'=>'required')) }}
         </label>
         <br>
-        <img src="{{ url('/') }}/uploads/models/{{ $item->image }}" alt="Image for {{ $item->name }}">
+        <img src="{{ url('/') }}/uploads/models/{{ $item->image }}" alt="Image for {{ $item->name }}" class="img-responsive">
         {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true"><br>:message</span>') !!}
     </div>
 </div>
