@@ -28,6 +28,7 @@ class AssetModel extends SnipeModel
     protected $rules = array(
         'name'          => 'required|min:1|max:255',
         'model_number'      => 'max:255|nullable',
+        'lifetime'      => 'integer|nullable',
         'category_id'       => 'required|integer|exists:categories,id',
         'manufacturer_id'   => 'required|integer|exists:manufacturers,id',
         'eol'   => 'integer:min:0|max:240|nullable',
@@ -67,6 +68,7 @@ class AssetModel extends SnipeModel
         'name',
         'notes',
         'user_id',
+        'lifetime'
     ];
 
     use Searchable;

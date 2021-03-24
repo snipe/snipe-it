@@ -67,6 +67,13 @@ class AssetCheckinController extends Controller
         $asset->accepted = null;
         $asset->name = $request->get('name');
 
+        if ($request->filled('depreciable_cost')) {
+            $asset->depreciable_cost = $request->get('depreciable_cost');
+        }
+        if ($request->filled('quality')) {
+            $asset->quality =intval( $request->get('quality'));
+        }
+
         if ($request->filled('status_id')) {
             $asset->status_id =  e($request->get('status_id'));
         }
@@ -76,10 +83,18 @@ class AssetCheckinController extends Controller
         if ($request->filled('location_id')) {
             $asset->location_id =  e($request->get('location_id'));
         }
+        $changed = [];
+        foreach ($asset->getOriginal() as $key => $value) {
+            if ($asset->getOriginal()[$key] != $asset->getAttributes()[$key]) {
+                $changed[$key]['old'] = $asset->getOriginal()[$key];
+                $changed[$key]['new'] = $asset->getAttributes()[$key];
+            }
+        }
+
 
         // Was the asset updated?
         if ($asset->save()) {
-            $logaction = $asset->logCheckin($target, e(request('note')));
+            $logaction = $asset->logCheckin($target, e(request('note')),$changed);
 
             $data['log_id'] = $logaction->id;
             $data['first_name'] = get_class($target) == User::class ? $target->first_name : '';

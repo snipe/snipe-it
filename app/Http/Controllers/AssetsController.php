@@ -93,6 +93,7 @@ class AssetsController extends Controller
         $this->authorize('create', Asset::class);
         $asset = new Asset;
         $asset->nds = 20;
+        $asset->quality = 5;
         $view = View::make('hardware/edit')
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('item', $asset)
@@ -127,6 +128,7 @@ class AssetsController extends Controller
         $asset->order_number            = $request->input('order_number');
         $asset->notes                   = $request->input('notes');
         $asset->asset_tag               = $request->input('asset_tag');
+        $asset->quality                 = $request->input('quality');
         $asset->nds                     = intval(request('nds', 0));
         $asset->user_id                 = Auth::id();
         $asset->archived                = '0';
@@ -135,12 +137,14 @@ class AssetsController extends Controller
         $asset->status_id               = request('status_id', 0);
         $asset->warranty_months         = request('warranty_months', null);
         $asset->purchase_cost           = Helper::ParseFloat($request->get('purchase_cost'));
+        $asset->depreciable_cost        = Helper::ParseFloat($request->get('depreciable_cost'));
         $asset->purchase_date           = request('purchase_date', null);
         $asset->assigned_to             = request('assigned_to', null);
         $asset->supplier_id             = request('supplier_id', 0);
         $asset->requestable             = request('requestable', 0);
         $asset->rtd_location_id         = request('rtd_location_id', null);
-
+        $asset->quality        = $request->input('quality');
+        $asset->depreciable_cost        = $request->input('depreciable_cost');
 
         if ($asset->assigned_to=='') {
             $asset->location_id = $request->input('rtd_location_id', null);
@@ -345,6 +349,8 @@ class AssetsController extends Controller
         $asset->order_number = $request->input('order_number');
         $asset->asset_tag    = $request->input('asset_tag');
         $asset->notes        = $request->input('notes');
+        $asset->quality        = $request->input('quality');
+        $asset->depreciable_cost        = $request->input('depreciable_cost');
         $asset->physical     = '1';
 
         // Update the image

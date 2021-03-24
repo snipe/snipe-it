@@ -44,6 +44,7 @@ class AssetModelsController extends Controller
             'manufacturer_id',
             'depreciation_id',
             'fieldset_id',
+            'lifetime',
             'models.deleted_at',
             'models.updated_at',
          ])

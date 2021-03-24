@@ -28,7 +28,8 @@ class AssetsTransformer
             'serial' => e($asset->serial),
             'model' => ($asset->model) ? [
                 'id' => (int) $asset->model->id,
-                'name'=> e($asset->model->name)
+                'name'=> e($asset->model->name),
+                'lifetime'=> e($asset->model->lifetime)
             ] : null,
             'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
             'eol' => ($asset->purchase_date!='') ? Helper::getFormattedDateObject($asset->present()->eol_date(), 'date') : null ,
@@ -40,7 +41,8 @@ class AssetsTransformer
             ] : null,
             'category' => (($asset->model) && ($asset->model->category)) ? [
                 'id' => (int) $asset->model->category->id,
-                'name'=> e($asset->model->category->name)
+                'name'=> e($asset->model->category->name),
+                'lifetime'=> e($asset->model->lifetime)
             ]  : null,
             'manufacturer' => (($asset->model) && ($asset->model->manufacturer)) ? [
                 'id' => (int) $asset->model->manufacturer->id,
@@ -77,11 +79,13 @@ class AssetsTransformer
             'last_checkout' => Helper::getFormattedDateObject($asset->last_checkout, 'datetime'),
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($asset->purchase_cost),
+            'depreciable_cost' => Helper::formatCurrencyOutput($asset->depreciable_cost),
             'checkin_counter' => (int) $asset->checkin_counter,
             'checkout_counter' => (int) $asset->checkout_counter,
             'requests_counter' => (int) $asset->requests_counter,
             'user_can_checkout' => (bool) $asset->availableForCheckout(),
             'purchase_id' => (int) $asset->purchase_id,
+            'quality' => (int) $asset->quality,
             'nds' => (int) $asset->nds,
         ];
 

@@ -34,6 +34,7 @@ class Category extends SnipeModel
         'name'   => 'required|min:1|max:255|unique_undeleted',
         'require_acceptance'   => 'boolean',
         'use_default_eula'   => 'boolean',
+        'lifetime'      => 'integer|nullable',
         'category_type'   => 'required|in:asset,accessory,consumable,component,license',
     );
 
@@ -61,6 +62,7 @@ class Category extends SnipeModel
         'name',
         'require_acceptance',
         'use_default_eula',
+        'lifetime',
         'user_id',
     ];
 
