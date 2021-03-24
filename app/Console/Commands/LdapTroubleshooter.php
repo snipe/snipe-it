@@ -34,7 +34,9 @@ class LdapTroubleshooter extends Command
      * @var string
      */
     protected $signature = 'ldap:troubleshoot
-                            {--force : Skip the interactive yes/no prompt for confirmation}';
+                            {--ldap-search : Output an ldapsearch command-line for testing your LDAP config}
+                            {--force : Skip the interactive yes/no prompt for confirmation}
+                            {--debug : Include debuggin output (verbose)}';
 
     /**
      * The console command description.
@@ -54,20 +56,65 @@ class LdapTroubleshooter extends Command
     }
 
     /**
+     * Output something *only* if debug is enabled
+     * 
+     * @return void
+     */
+    public function debugout($string)
+    {
+        if($this->option('debug')) {
+            $this->line($string);
+        }
+    }
+
+    /**
      * Execute the console command.
      *
      * @return mixed
      */
     public function handle()
     {
+        $settings = Setting::getSettings();
+        if($this->option('ldap-search')) {
+            if(!$this->option('force')) {
+                $confirmation = $this->confirm('WARNING: This command will display your LDAP password on your terminal. Are you sure this is ok?');
+                if(!$confirmation) {
+                    $this->error('ABORTING');
+                    exit(-1);
+                }
+            }
+            $output = [];
+            if($settings->ldap_server_cert_ignore) {
+                $this->line("# Ignoring server certificate validity");
+                $output[] = "LDAPTLS_REQCERT=never";
+            }
+            $output[] = "ldapsearch";
+            $output[] = $settings->ldap_server;
+            $output[] = "-x";
+            $output[] = "-b ".escapeshellarg($settings->ldap_basedn);
+            $output[] = "-D ".escapeshellarg($settings->ldap_uname);
+            $output[] = "-w ".escapeshellarg(\Crypt::Decrypt($settings->ldap_pword));
+            if(substr($settings->ldap_filter,0,1) == "(" ) {
+                $output[] = escapeshellarg($settings->ldap_filter);
+            } else {
+                $output[] = escapeshellarg("(".$settings->ldap_filter.")");
+            }
+            if($settings->ldap_tls) {
+                $this->line("# adding STARTTLS option");
+                $output[] = "-Z";
+            }
+            $output[] = "-v";
+            $this->line("\n");
+            $this->line(implode(" \\\n",$output));
+            exit(0);
+        }
         if(!$this->option('force')) {
-            $confirmation = $this->confirm('WARNING: This command will make several attempts to connect to your LDAP server. Are you sure this is ok? (y/n)');
+            $confirmation = $this->confirm('WARNING: This command will make several attempts to connect to your LDAP server. Are you sure this is ok?');
             if(!$confirmation) {
                 $this->error('ABORTING');
                 exit(-1);
             }
         }
-        $settings = Setting::getSettings();
         //$this->line(print_r($settings,true));
         $this->info("STAGE 1: Checking settings");
         if(!$settings->ldap_enabled) {
@@ -109,7 +156,7 @@ class LdapTroubleshooter extends Command
             $this->error("ERROR: DNS lookup of host: ".$parsed['host']." has failed. ABORTING.");
             exit(-1);
         }
-        $this->info("IP's? ".print_r($ips,true));
+        $this->debugout("IP's? ".print_r($ips,true));
         foreach($ips as $ip) {
             if(!isset($ip['ip'])) {
                 continue;
@@ -192,20 +239,20 @@ class LdapTroubleshooter extends Command
             if($this->test_anonymous_bind($ldap_url)) {
                 $this->info("Plain connection to $ldap_url succesful!");
                 $ldap_urls[] = [ $ldap_url, true, false ];
-                $pretty_ldap_urls[] = [ $ldap_url, "YES", false ];
+                $pretty_ldap_urls[] = [ $ldap_url, "YES", "no" ];
                 continue;
             } else {
                 $this->error("WARNING: Failed to bind to $ldap_url. Giving up on port $port");
             }
         }
 
-        $this->info(print_r($ldap_urls,true));
+        $this->debugout(print_r($ldap_urls,true));
 
         if(count($ldap_urls) > 0 ) {
             $this->info("Found working LDAP URL's: ");
             foreach($ldap_urls as $ldap_url) { // TODO maybe do this as a $this->table() instead?
                 $this->info("LDAP URL: ".$ldap_url[0]);
-                $this->info($ldap_url[0]. ($ldap_url[1] ? " certificate checks enabled" : " certificate checks disabled"). $ldap_url[2] ? " STARTTLS Enabled ": " STARTTLS Disabled");
+                $this->info($ldap_url[0]. ($ldap_url[1] ? " certificate checks enabled" : " certificate checks disabled"). ($ldap_url[2] ? " STARTTLS Enabled ": " STARTTLS Disabled"));
             }
             $this->table(["URL", "Cert Checks Enabled?", "STARTTLS Enabled?"],$pretty_ldap_urls);
         } else {
@@ -217,7 +264,66 @@ class LdapTroubleshooter extends Command
             $this->test_authed_bind($ldap_url[0], $ldap_url[1], $ldap_url[2], $settings->ldap_uname, \Crypt::decrypt($settings->ldap_pword));
         }
 
-        $this->info("STAGE 5: Test LDAP Login to Snipe-IT");
+        $this->info("STAGE 5: Test BaseDN");
+        foreach($ldap_urls AS $ldap_url) {
+            $conn = $this->test_authed_bind($ldap_url[0], $ldap_url[1], $ldap_url[2], $settings->ldap_uname, \Crypt::decrypt($settings->ldap_pword));
+            if($conn) {
+            $result = ldap_read($conn, '', '(objectClass=*)'/* , ['supportedControl']*/);
+                $results = ldap_get_entries($conn, $result);
+                $cleaner = function ($array) {
+                    /* 
+                    */
+                    $all_defined_constants = get_defined_constants();
+                    $ldap_constants = [];
+                    foreach($all_defined_constants AS $key => $val) {
+                        if(starts_with($key,"LDAP_") && is_string($val)) {
+                            $ldap_constants[$val] = $key; // INVERT the meaning here!
+                        }
+                    }
+                    $this->info("LDAP constants are: ".print_r($ldap_constants,true));
+
+                    $cleaned = [];
+                    for($i = 0; $i < $array['count']; $i++) {
+                        $row = $array[$i];
+                        $clean_row = [];
+                        foreach($row AS $key => $val ) {
+                            print("Key is: ".$key);
+                            if($key == "count" || is_int($key) || $key == "dn") {
+                                print(" and we're gonna skip it\n");
+                                continue;
+                            }
+                            print(" And that seems fine.\n");
+                            if(array_key_exists('count',$val)) {
+                                if($val['count'] == 1) {
+                                    $clean_row[$key] = $val[0];
+                                } else {
+                                    unset($val['count']); //these counts are annoying
+                                    $elements = [];
+                                    foreach($val as $entry) {
+                                        if(isset($ldap_constants[$entry])) {
+                                            $elements[] = $ldap_constants[$entry];
+                                        } else {
+                                            $elements[] = $entry;
+                                        }
+                                    }
+                                    $clean_row[$key] = $elements;
+                                }
+                            } else {
+                                $clean_row[$key] = $val;
+                            }
+                        }
+                        $cleaned[$i] = $clean_row;
+                    }
+                    return $cleaned;
+                };
+                print_r($cleaner($results));
+                exit(99);
+
+                $search_results = ldap_search($conn,$settings->base_dn,$settings->filter);
+            }
+        }
+
+        $this->info("STAGE 6: Test LDAP Login to Snipe-IT");
         foreach($ldap_urls AS $ldap_url) {
             $this->info("Starting auth to ".$ldap_url[0]);
             while(true) {
@@ -239,7 +345,9 @@ class LdapTroubleshooter extends Command
         ldap_set_option($lconn,LDAP_OPT_PROTOCOL_VERSION,3); // should we 'test' different protocol versions here? Does anyone even use anything other than LDAPv3?
                                                              // no - it's formally deprecated: https://tools.ietf.org/html/rfc3494
         if(!$check_cert) {
-            ldap_set_option($lconn, LDAP_OPT_X_TLS_REQUIRE_CERT, 0);
+            putenv('LDAPTLS_REQCERT=never'); // This is horrible; is this *really* the only way to do it?
+        } else {
+            putenv('LDAPTLS_REQCERT'); // have to very explicitly and manually *UN* set the env var here to ensure it works
         }
         if($start_tls) {
             if(!ldap_start_tls($lconn)) {
@@ -272,12 +380,14 @@ class LdapTroubleshooter extends Command
             $bind_results = ldap_bind($lconn,$username,$password);
             if(!$bind_results) {
                 $this->error("WARNING: Failed to bind to $ldap_url as $username");
+                return false;
             } else {
                 $this->info("SUCCESS - Able to bind to $ldap_url as $username");
+                return $lconn;
             }
-            return $bind_results;
         } catch (Exception $e) {
             $this->error("WARNING: Exception caught during Admin bind - ".$e->getMessage());
+            return false;
         }
     }
 }
