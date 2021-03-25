@@ -572,14 +572,19 @@ class AssetsController extends Controller
      *
      * This needs a LOT of love. It's done very inelegantly right now, and there are
      * a ton of optimizations that could (and should) be done.
-     *
+     * 
+     * TODO: importer need to distinguish expected and actual checkin dates for history.
+     * If actual checkin is present, do not assign user ID (assuming that is removed on checkin)  
+     * If actual checkin is empty, assume it's checked out, assign user id, assign "App\Model\User" so View.blade.php doesn't explode
+     * 
+     
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.3]
      * @return View
      */
     public function postImportHistory(Request $request)
     {
-
+        \Debugbar::disable();
         if (!$request->hasFile('user_import_csv')) {
             return back()->with('error', 'No file provided. Please select a file for import and try again. ');
         }
@@ -589,6 +594,8 @@ class AssetsController extends Controller
         }
         $csv = Reader::createFromPath($request->file('user_import_csv'));
         $csv->setHeaderOffset(0);
+        $header = $csv->getHeader();
+        $isCheckinHeaderExplicit = in_array("checkin date", (array_map('strtolower', $header)));
         $results = $csv->getRecords();
         $item = array();
         $status = array();
@@ -603,8 +610,19 @@ class AssetsController extends Controller
                 }
                 $batch_counter = count($item[$asset_tag]);
                 $item[$asset_tag][$batch_counter]['checkout_date'] = Carbon::parse(Helper::array_smart_fetch($row, "checkout date"))->format('Y-m-d H:i:s');
-                $item[$asset_tag][$batch_counter]['checkin_date'] = Carbon::parse(Helper::array_smart_fetch($row, "checkin date"))->format('Y-m-d H:i:s');
-                \Log::debug($item[$asset_tag][$batch_counter]['checkin_date']);
+    
+                if ($isCheckinHeaderExplicit){
+                    //checkin date not empty, assume past transaction or future checkin date (expected)
+                    if (!empty(Helper::array_smart_fetch($row, "checkin date"))) {
+                        $item[$asset_tag][$batch_counter]['checkin_date'] = Carbon::parse(Helper::array_smart_fetch($row, "checkin date"))->format('Y-m-d H:i:s');
+                    } else {
+                        $item[$asset_tag][$batch_counter]['checkin_date'] = '';
+                    }
+                } else {
+                    //checkin header missing, assume data is unavailable and make checkin date explicit (now) so we don't encounter invalid state.
+                    $item[$asset_tag][$batch_counter]['checkin_date'] = Carbon::parse(now())->format('Y-m-d H:i:s');
+                }
+                
                 $item[$asset_tag][$batch_counter]['asset_tag'] = Helper::array_smart_fetch($row, "asset tag");
                 $item[$asset_tag][$batch_counter]['name'] = Helper::array_smart_fetch($row, "name");
                 $item[$asset_tag][$batch_counter]['email'] = Helper::array_smart_fetch($row, "email");
@@ -632,16 +650,25 @@ class AssetsController extends Controller
                         $user_query .= ', or on username '.$firstname['username'];
                     }
                     if ($request->input('match_email')=='1') {
-                        if ($item[$asset_tag][$batch_counter]['email']=='') {
+                        if ($item[$asset_tag][$batch_counter]['name']=='') {
                             $item[$asset_tag][$batch_counter]['username'][] = $user_email = User::generateEmailFromFullName($item[$asset_tag][$batch_counter]['name']);
                             $user->orWhere('username', '=', $user_email);
                             $user_query .= ', or on username '.$user_email;
                         }
                     }
+                    if ($request->input('match_username') == '1'){
+                        // Added #8825: add explicit username lookup
+                           $raw_username = $item[$asset_tag][$batch_counter]['name'];
+                           $user->orWhere('username', '=', $raw_username);
+                            $user_query .= ', or on username ' . $raw_username;
+                    }
+
                     // A matching user was found
                     if ($user = $user->first()) {
-                        $item[$asset_tag][$batch_counter]['checkedout_to'] = $user->id;
+                        //$user is now matched user from db
+                        //$item[$asset_tag][$batch_counter]['checkedout_to'] = $user->id;
                         $item[$asset_tag][$batch_counter]['user_id'] = $user->id;
+
                         Actionlog::firstOrCreate(array(
                             'item_id' => $asset->id,
                             'item_type' => Asset::class,
@@ -652,44 +679,48 @@ class AssetsController extends Controller
                             'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
                             'action_type'   => 'checkout',
                         ));
-                        $asset->assigned_to = $user->id;
+
+                        $checkin_date = $item[$asset_tag][$batch_counter]['checkin_date'];
+
+                        if ($isCheckinHeaderExplicit) {
+
+                            //if checkin date header exists, assume that empty or future date is still checked out
+                            //if checkin is before todays date, assume it's checked in and do not assign user ID, if checkin date is in the future or blank, this is the expected checkin date, items is checked out
+                            
+                            if ((strtotime($checkin_date) > strtotime(Carbon::now())) || (empty($checkin_date))
+                            ) {
+                                //only do this if item is checked out
+                                $asset->assigned_to = $user->id;
+                                $asset->assigned_type = User::class;
+                            }
+                        }
+
+                        if (!empty($checkin_date)) {
+                            Actionlog::firstOrCreate(array(
+                                'item_id' =>
+                                $item[$asset_tag][$batch_counter]['asset_id'],
+                                'item_type' => Asset::class,
+                                'user_id' => Auth::user()->id,
+                                'note' => 'Checkin imported by ' . Auth::user()->present()->fullName() . ' from history importer',
+                                'target_id' => null,
+                                'created_at' => $checkin_date,
+                                'action_type' => 'checkin'
+                            ));
+
+                        }
+                     
                         if ($asset->save()) {
                             $status['success'][]['asset'][$asset_tag]['msg'] = 'Asset successfully matched for '.Helper::array_smart_fetch($row, "name").$user_query.' on '.$item[$asset_tag][$batch_counter]['checkout_date'];
                         } else {
                             $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset and user was matched but could not be saved.';
                         }
                     } else {
-                        $item[$asset_tag][$batch_counter]['checkedout_to'] = null;
+                        $item[$asset_tag][$batch_counter]['user_id'] = null;
                         $status['error'][]['user'][Helper::array_smart_fetch($row, "name")]['msg'] = 'User does not exist so no checkin log was created.';
                     }
                 } else {
                     $item[$asset_tag][$batch_counter]['asset_id'] = null;
                     $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset does not exist so no match was attempted.';
-                }
-            }
-        }
-        // Loop through and backfill the checkins
-        foreach ($item as $key => $asset_batch) {
-            $total_in_batch = count($asset_batch);
-            for ($x = 0; $x < $total_in_batch; $x++) {
-                $next = $x + 1;
-                // Only do this if a matching user was found
-                if ((array_key_exists('checkedout_to', $asset_batch[$x])) && ($asset_batch[$x]['checkedout_to']!='')) {
-                    if (($total_in_batch > 1) && ($x < $total_in_batch) && (array_key_exists($next, $asset_batch))) {
-                        $checkin_date = Carbon::parse($asset_batch[$next]['checkin_date'])->format('Y-m-d H:i:s');
-                        $asset_batch[$x]['real_checkin'] = $checkin_date;
-                        \Log::debug($asset_batch[$next]['checkin_date']);
-                        \Log::debug($checkin_date);
-                        Actionlog::firstOrCreate(array(
-                            'item_id' => $asset_batch[$x]['asset_id'],
-                            'item_type' => Asset::class,
-                            'user_id' => Auth::user()->id,
-                            'note' => 'Checkin imported by ' . Auth::user()->present()->fullName() . ' from history importer',
-                            'target_id' => null,
-                            'created_at' => $checkin_date,
-                            'action_type' => 'checkin'
-                        ));
-                    }
                 }
             }
         }
