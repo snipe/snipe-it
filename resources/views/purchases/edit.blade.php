@@ -1,4 +1,4 @@
-@extends('layouts/edit-form', [
+ @extends('layouts/edit-form', [
     'createText' => "Создать закупку" ,
     'updateText' => "Обновить закупку",
     'formAction' => ($item) ? route('purchases.update', ['purchase' => $item->id]) : route('purchases.store'),
@@ -102,9 +102,9 @@
                         <div class="col-md-12">
                             <form class="form-horizontal">
                                 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/consumables/table.title')])
-                                @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id', 'required' => 'true', 'category_type' => 'consumable'])
+                                @include ('partials.forms.edit.category-select2', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id', 'required' => 'true', 'category_type' => 'consumable'])
                                 <p class="duble text-center text-bold text-danger hidden">Такая категория уже есть</p>
-                                @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id', 'required' => 'true'])
+                                @include ('partials.forms.edit.manufacturer-select2', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id', 'required' => 'true'])
                                 @include ('partials.forms.edit.model_number')
                                 @include ('partials.forms.edit.purchase_cost')
                                 @include ('partials.forms.edit.nds')
@@ -294,11 +294,16 @@
                 modal.find('#warranty_months').val(12);
                 modal.find('#quantity').val(1);
                 $('.duble').addClass('hidden');
+                // modal.find('select.select2').select2({
+                //     dropdownParent: modal,
+                // });
 
-                modal.find('select.select2').select2();
                 $('.js-data-ajax2').each(function (i, item) {
                     var link = $(item);
                     var endpoint = link.data("endpoint");
+                    if (link.hasClass("select2-hidden-accessible")) {
+                        link.select2('destroy');
+                    }
                     link.select2({
                         dropdownParent: modal,
                         ajax: {
@@ -357,10 +362,16 @@
                 modal.find('#quantity').val(1);
                 $('.duble').addClass('hidden');
 
-                $('#modal_consumables').find('select.select2').select2();
+                // modal.find('select.select2').select2({
+                //     dropdownParent: modal,
+                // });
+
                 $('.js-data-ajax2').each(function (i, item) {
                     var link = $(item);
                     var endpoint = link.data("endpoint");
+                    if (link.hasClass("select2-hidden-accessible")) {
+                        link.select2('destroy');
+                    }
                     link.select2({
                         dropdownParent: modal,
                         ajax: {
