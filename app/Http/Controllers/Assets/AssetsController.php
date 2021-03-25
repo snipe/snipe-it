@@ -584,7 +584,7 @@ class AssetsController extends Controller
      */
     public function postImportHistory(Request $request)
     {
-        \Debugbar::disable();
+
         if (!$request->hasFile('user_import_csv')) {
             return back()->with('error', 'No file provided. Please select a file for import and try again. ');
         }
@@ -695,6 +695,7 @@ class AssetsController extends Controller
                         }
 
                         if (!empty($checkin_date)) {
+                            //only make a checkin there is a valid checkin date or we created one on import.
                             Actionlog::firstOrCreate(array(
                                 'item_id' =>
                                 $item[$asset_tag][$batch_counter]['asset_id'],
