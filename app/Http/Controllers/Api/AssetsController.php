@@ -699,6 +699,13 @@ class AssetsController extends Controller
             $asset->name = $request->input('name');
         }
 
+        if ($request->filled('depreciable_cost')) {
+            $asset->depreciable_cost = $request->get('depreciable_cost');
+        }
+        if ($request->filled('quality')) {
+            $asset->quality =intval( $request->get('quality'));
+        }
+
         $asset->location_id = $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
@@ -710,7 +717,7 @@ class AssetsController extends Controller
         }
         $changed = [];
         foreach ($asset->getOriginal() as $key => $value) {
-            if ($asset->getOriginal()[$key] != $this->getAttributes()[$key]) {
+            if ($asset->getOriginal()[$key] != $asset->getAttributes()[$key]) {
                 $changed[$key]['old'] = $asset->getOriginal()[$key];
                 $changed[$key]['new'] = $asset->getAttributes()[$key];
             }

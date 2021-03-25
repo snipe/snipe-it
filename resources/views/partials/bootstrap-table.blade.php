@@ -43,7 +43,6 @@
             },
             stickyHeader: true,
             stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
-
             undefinedText: '',
             iconsPrefix: 'fa',
             cookie: true,
