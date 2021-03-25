@@ -573,18 +573,18 @@ class AssetsController extends Controller
      * This needs a LOT of love. It's done very inelegantly right now, and there are
      * a ton of optimizations that could (and should) be done.
      * 
-     * TODO: importer need to distinguish expected and actual checkin dates for history.
-     * If actual checkin is present, do not assign user ID (assuming that is removed on checkin)  
-     * If actual checkin is empty, assume it's checked out, assign user id, assign "App\Model\User" so View.blade.php doesn't explode
+     * Updated to respect checkin dates:
+     * No checkin column, assume all items are checked in (todays date)
+     * Checkin date in the past, update history.
+     * Checkin date in future or empty, check the item out to the user.
      * 
-     
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.3]
      * @return View
      */
     public function postImportHistory(Request $request)
     {
-        \Debugbar::disable();
+
         if (!$request->hasFile('user_import_csv')) {
             return back()->with('error', 'No file provided. Please select a file for import and try again. ');
         }
@@ -622,7 +622,7 @@ class AssetsController extends Controller
                     //checkin header missing, assume data is unavailable and make checkin date explicit (now) so we don't encounter invalid state.
                     $item[$asset_tag][$batch_counter]['checkin_date'] = Carbon::parse(now())->format('Y-m-d H:i:s');
                 }
-                
+
                 $item[$asset_tag][$batch_counter]['asset_tag'] = Helper::array_smart_fetch($row, "asset tag");
                 $item[$asset_tag][$batch_counter]['name'] = Helper::array_smart_fetch($row, "name");
                 $item[$asset_tag][$batch_counter]['email'] = Helper::array_smart_fetch($row, "email");
@@ -666,7 +666,6 @@ class AssetsController extends Controller
                     // A matching user was found
                     if ($user = $user->first()) {
                         //$user is now matched user from db
-                        //$item[$asset_tag][$batch_counter]['checkedout_to'] = $user->id;
                         $item[$asset_tag][$batch_counter]['user_id'] = $user->id;
 
                         Actionlog::firstOrCreate(array(
@@ -696,6 +695,7 @@ class AssetsController extends Controller
                         }
 
                         if (!empty($checkin_date)) {
+                            //only make a checkin there is a valid checkin date or we created one on import.
                             Actionlog::firstOrCreate(array(
                                 'item_id' =>
                                 $item[$asset_tag][$batch_counter]['asset_id'],
