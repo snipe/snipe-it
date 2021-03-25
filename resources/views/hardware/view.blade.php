@@ -1163,5 +1163,15 @@
 
 @section('moar_scripts')
   @include ('partials.bootstrap-table')
+  <script>
+    $(function() {
+      $('#assetHistory').on('post-body.bs.table', function (e, data) {
+        console.log("edcec")
+        lightGallery(document.getElementById('aniimated-thumbnials'), {
+          thumbnail:true
+        });
+      });
+    });
+  </script>
 
 @stop
