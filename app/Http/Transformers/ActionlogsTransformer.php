@@ -26,7 +26,9 @@ class ActionlogsTransformer
         if ($actionlog->filename!='') {
             $icon =  e(\App\Helpers\Helper::filetype_icon($actionlog->filename));
         }
-
+        if (($actionlog->photos) && ($actionlog->photos!='')) {
+            $photos_array = json_decode($actionlog->photos);
+        }
         // This is necessary since we can't escape special characters within a JSON object
         if (($actionlog->log_meta) && ($actionlog->log_meta!='')) {
             $meta_array = json_decode($actionlog->log_meta);
@@ -116,7 +118,8 @@ class ActionlogsTransformer
             'note'          => ($actionlog->note) ? e($actionlog->note): null,
             'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
-
+//            'photos' => ($actionlog->photos) ? e($actionlog->photos): null,
+            'photos' =>  ((isset($photos_array)) && (is_array($photos_array))) ? $photos_array: null,
 
         ];
 

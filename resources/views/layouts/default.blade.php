@@ -27,6 +27,9 @@
     <!-- bootstrap tables CSS -->
     <link rel="stylesheet" href="{{ url(asset('css/bootstrap-table.css')) }}">
 
+    <!-- lightgallery  CSS -->
+    <link rel="stylesheet" href="{{ url(asset('js/lightgallery/css/lightgallery.css')) }}">
+
     <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
 
     <link rel="shortcut icon" type="image/ico" href="{{ url(asset('favicon.ico')) }}">
@@ -902,7 +905,8 @@
 
 
 <script src="{{ url(asset('js/star-rating/dist/star-rating.js')) }}"></script>
-    <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+<script src="{{ url(asset('js/lightgallery/js/lightgallery.min.js')) }}"></script>
+<script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
 <script src="{{ url(asset('js/lightbox/js/lightbox.min.js')) }}" nonce="{{ csrf_token() }}"></script>
 
 @section('moar_scripts')

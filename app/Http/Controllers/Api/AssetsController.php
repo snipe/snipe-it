@@ -651,6 +651,21 @@ class AssetsController extends Controller
         $quality = request('quality', null);
         $depreciable_cost = request('depreciable_cost', null);
         $asset_name = request('name', null);
+        $photos = request('photos', null);
+        $photos_json = [];
+        if($photos !=null && count($photos)>0){
+            foreach ($photos as &$photo) {
+                $imgBase64 = substr($photo['base64'], strpos($photo['base64'], ",")+1);
+                $image = base64_decode($imgBase64);
+                $jpg_url = "/uploads/log_img/log_img-".time()."-".uniqid().".jpeg";
+                $path = public_path() . $jpg_url;
+                file_put_contents($path, $image);
+                array_push($photos_json, [
+                    "path" => $jpg_url,
+                    "commment" => $photo['commment'],
+                ]);
+            }
+        }
 
         // Set the location ID to the RTD location id if there is one
         // Wait, why are we doing this? This overrides the stuff we set further up, which makes no sense.
@@ -661,7 +676,7 @@ class AssetsController extends Controller
 //        }
 
 
-        if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id,$quality,$depreciable_cost)) {
+        if ($asset->checkOut($target, Auth::user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id,$quality,$depreciable_cost,$photos_json)) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset' => e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
         }
 
@@ -706,6 +721,10 @@ class AssetsController extends Controller
             $asset->quality =intval( $request->get('quality'));
         }
 
+        if ($request->filled('quality')) {
+            $asset->quality =intval( $request->get('quality'));
+        }
+
         $asset->location_id = $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
@@ -722,9 +741,24 @@ class AssetsController extends Controller
                 $changed[$key]['new'] = $asset->getAttributes()[$key];
             }
         }
+        $photos = request('photos', null);
+        $photos_json = [];
+        if($photos !=null && count($photos)>0){
+            foreach ($photos as &$photo) {
+                $imgBase64 = substr($photo['base64'], strpos($photo['base64'], ",")+1);
+                $image = base64_decode($imgBase64);
+                $jpg_url = "/uploads/log_img/log_img-".time()."-".uniqid().".jpeg";
+                $path = public_path() . $jpg_url;
+                file_put_contents($path, $image);
+                array_push($photos_json, [
+                    "path" => $jpg_url,
+                    "commment" => $photo['commment'],
+                ]);
+            }
+        }
 
         if ($asset->save()) {
-            $asset->logCheckin($target, e(request('note')),$changed);
+            $asset->logCheckin($target, e(request('note')),$changed,$photos_json);
             return response()->json(Helper::formatStandardApiResponse('success', ['asset' => e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
 

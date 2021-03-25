@@ -416,6 +416,28 @@
 
     }
 
+    function photosFormatter(value,row) {
+        var result = "";
+        if (value){
+            if (value.length>0){
+                result = ' <div id="aniimated-thumbnials">';
+                value.forEach((photo) => {
+                    result+='<a href="'+photo.path+'">'+
+                        '<img src="'+photo.path+'" />'+
+                        '</a>';
+                    console.log(photo)
+                });
+                result+='  </div>';
+                return result;
+            }else {
+                return '';
+            }
+        }else {
+            return '';
+        }
+
+    }
+
 
     // Create a linked phone number in the table list
     function phoneFormatter(value) {
