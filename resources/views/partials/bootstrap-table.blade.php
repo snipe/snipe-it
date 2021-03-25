@@ -1,4 +1,5 @@
 <script src="{{ asset('js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('js/locale/bootstrap-table-ru-RU.js') }}"></script>
 <script src="{{ asset('js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
 <script src="{{ asset('js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
 <script src="{{ asset('js/extensions/export/jquery.base64.js') }}"></script>
@@ -34,7 +35,7 @@
 
         $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
             classes: 'table table-responsive table-no-bordered',
-
+            locale: 'ru',
             ajaxOptions: {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
