@@ -18,7 +18,7 @@ class Purchase extends SnipeModel
     protected $dates = ['deleted_at'];
     protected $table = 'purchases';
     protected $rules = array(
-        'invoice_number'        => 'required|min:1|max:255|unique_undeleted',
+        'invoice_number'        => 'required|min:1|max:255',
         'final_price'        => 'required',
         'supplier_id'        => 'required',
         'comment'        => 'required',
@@ -70,16 +70,18 @@ class Purchase extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['invoice_number', 'comment'];
+    protected $searchableAttributes = ['invoice_number', 'comment','final_price'];
 
-//    /**
-//     * The relations and their attributes that should be included when searching the model.
-//     *
-//     * @var array
-//     */
-//    protected $searchableRelations = [
-//        'parent' => ['name']
-//    ];
+    /**
+     * The relations and their attributes that should be included when searching the model.
+     *
+     * @var array
+     */
+    protected $searchableRelations = [
+        'user' => ['first_name','last_name'],
+        'supplier' => ['name'],
+
+    ];
 
 
     public function assets()

@@ -51,19 +51,19 @@ class PurchasePresenter extends Presenter
               //  "formatter" => "suppliersLinkObjFormatter"
             ],[
                 "field" => "assets_count",
-                "searchable" => true,
+                "searchable" => false,
                 "sortable" => true,
                 "title" => "Активов",
                 "visible" => true,
             ],[
                 "field" => "consumables_count",
-                "searchable" => true,
+                "searchable" => false,
                 "sortable" => true,
                 "title" => "Расходников",
                 "visible" => true,
             ],[
                 "field" => "invoice_file",
-                "searchable" => true,
+                "searchable" => false,
                 "sortable" => true,
                 "title" => "Файл счета",
                 "visible" => true,
@@ -71,8 +71,7 @@ class PurchasePresenter extends Presenter
             ],[
                 "field" => "bitrix_id",
                 "searchable" => false,
-                "sortable" => false,
-//                "switchable" => false,
+                "sortable" => true,
                 "title" => "ID заявки Bitrix",
                 "visible" => true,
                 "formatter" => 'bitrixIdFormatter',
@@ -87,7 +86,7 @@ class PurchasePresenter extends Presenter
 //                "formatter" => 'companiesLinkFormatter',
             ],[
                 "field" => "currency",
-                "searchable" => true,
+                "searchable" => false,
                 "sortable" => true,
                 "switchable" => true,
                 "title" => "Валюта",
