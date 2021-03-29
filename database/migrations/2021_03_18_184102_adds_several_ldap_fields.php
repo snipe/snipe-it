@@ -16,7 +16,6 @@ class AddsSeveralLdapFields extends Migration
         Schema::table('settings', function (Blueprint $table) {
             $table->string('ldap_phone_field')->after('ldap_email')->nullable();
             $table->string('ldap_jobtitle')->after('ldap_phone_field')->nullable();
-            $table->string('ldap_departmentid')->after('ldap_jobtitle')->nullable();
             $table->string('ldap_country')->after('ldap_departmentid')->nullable();
         });
     }

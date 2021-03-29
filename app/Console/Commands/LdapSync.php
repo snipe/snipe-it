@@ -53,7 +53,6 @@ class LdapSync extends Command
         $ldap_result_email = Setting::getSettings()->ldap_email;
         $ldap_result_phone = Setting::getSettings()->ldap_phone_field;
         $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
-        $ldap_result_departmentid = Setting::getSettings()->ldap_departmentid;
         $ldap_result_country      = Setting::getSettings()->ldap_country;
 
         try {
@@ -180,7 +179,6 @@ class LdapSync extends Command
                 $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
                 $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
                 $item["telephone"] = isset($results[$i][$ldap_result_phone][0]) ? $results[$i][$ldap_result_phone][0] : "";
-                $item["departmentid"] = isset($results[$i][$ldap_result_departmentid][0]) ? $results[$i][$ldap_result_departmentid][0] : "";
                 $item["jobtitle"] = isset($results[$i][$ldap_result_jobtitle][0]) ? $results[$i][$ldap_result_jobtitle][0] : "";
                 $item["country"] = isset($results[$i][$ldap_result_country][0]) ? $results[$i][$ldap_result_country][0] : "";
 
@@ -202,7 +200,6 @@ class LdapSync extends Command
                 $user->email = $item["email"];
                 $user->employee_num = e($item["employee_number"]);
                 $user->phone = $item["telephone"];
-                $user->department_id = $item["departmentid"];
                 $user->jobtitle = $item["jobtitle"];
                 $user->country = $item["country"];
 

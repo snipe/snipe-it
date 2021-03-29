@@ -171,7 +171,6 @@ class Ldap extends Model
         $ldap_result_email = Setting::getSettings()->ldap_email;
         $ldap_result_phone = Setting::getSettings()->ldap_phone;
         $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
-        $ldap_result_departmentid = Setting::getSettings()->ldap_departmentid;
         $ldap_result_country      = Setting::getSettings()->ldap_country;
         // Get LDAP user data
         $item = array();
@@ -181,7 +180,6 @@ class Ldap extends Model
         $item["firstname"] = isset($ldapatttibutes[$ldap_result_first_name][0]) ? $ldapatttibutes[$ldap_result_first_name][0] : "";
         $item["email"] = isset($ldapatttibutes[$ldap_result_email][0]) ? $ldapatttibutes[$ldap_result_email][0] : "" ;
         $item["telephone"] = isset($ldapatttibutes[$ldap_result_phone][0]) ?$ldapatttibutes[$ldap_result_phone][0] : "";
-        $item["departmentid"] = isset($ldapatttibutes[$ldap_result_departmentid][0]) ? $ldapatttibutes[$ldap_result_departmentid][0] : "";
         $item["jobtitle"] = isset($ldapatttibutes[$ldap_result_jobtitle][0]) ? $ldapatttibutes[$ldap_result_jobtitle][0] : "";
         $item["country"] = isset($ldapatttibutes[$ldap_result_country][0]) ? $ldapatttibutes[$ldap_result_country][0] : "";
         return $item;
