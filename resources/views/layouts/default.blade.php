@@ -28,7 +28,7 @@
     </script>
 
     {{-- stylesheets --}}
-    <link rel="stylesheet" href="{{ mix('css/all.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/dist/all.css') }}">
     @if (($snipeSettings) && ($snipeSettings->allow_user_skin==1) && Auth::check() && Auth::user()->present()->skin != '')
         <link rel="stylesheet" href="{{ mix('css/skins/skin-'.Auth::user()->present()->skin.'.min.css') }}">
     @elseif (($snipeSettings) && ($snipeSettings->skin!=''))
