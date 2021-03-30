@@ -187,7 +187,9 @@
                                                          $interval = $d2->diff($now);
                                                          $result =  $interval->m + 12*$interval->y;
 
-                                                     }
+                                                     }else{
+                                $result = "???";
+                            }
                                                      if($asset->model->lifetime){
                                                           $lifetime = $asset->model->lifetime;
                                                      }else if($asset->model->category->lifetime){
