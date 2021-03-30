@@ -45,7 +45,7 @@
     "league/flysystem-cached-adapter": "^1.0",
     "neitanod/forceutf8": "^2.0",
     "nesbot/carbon": "^2.32",
-    "nunomaduro/collision": "v3.2.0",
+    "nunomaduro/collision": "^3.2",
     "onelogin/php-saml": "^3.4",
     "paragonie/constant_time_encoding": "^2.3",
     "patchwork/utf8": "^1.3",
