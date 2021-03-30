@@ -13,12 +13,8 @@ class AddMigrationsPk extends Migration
      */
     public function up()
     {
-        Schema::table('migrations', function (Blueprint $table) {
-            // Add the new id and batch columns to the migrations table if they
-            // don't exist yet
-            if (!Schema::hasColumn('migrations', 'id')) {
-                $table->increments('id');
-            }
+        Schema::table('password_resets', function (Blueprint $table) {
+            $table->increments('id');
         });
     }
 
@@ -29,5 +25,8 @@ class AddMigrationsPk extends Migration
      */
     public function down()
     {
+        Schema::table('password_resets', function (Blueprint $table) {
+            $table->dropColumn('id');
+        });
     }
 }
