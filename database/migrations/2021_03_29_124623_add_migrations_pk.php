@@ -14,8 +14,7 @@ class AddMigrationsPk extends Migration
     public function up()
     {
         Schema::table('migrations', function (Blueprint $table) {
-            // Add the new id and batch columns to the migrations table if they
-            // don't exist yet
+            // Add the id column to the migrations table if it doesn't yet.
             if (!Schema::hasColumn('migrations', 'id')) {
                 $table->increments('id');
             }
