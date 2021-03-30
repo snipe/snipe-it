@@ -167,7 +167,7 @@
                                 {{ Form::label('allow_user_skin', trans('admin/settings/general.allow_user_skin')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::checkbox('allow_user_skin', '1', Input::old('allow_user_skin', $setting->allow_user_skin),array('class' => 'minimal')) }}
+                                {{ Form::checkbox('allow_user_skin', '1', old('allow_user_skin', $setting->allow_user_skin),array('class' => 'minimal')) }}
                                 {{ trans('general.yes') }}
                                 <p class="help-block">{{ trans('admin/settings/general.allow_user_skin_help_text') }}</p>
                             </div>
