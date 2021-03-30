@@ -176,15 +176,67 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <!-- Purchase Cost -->
+                                        <!-- life Cost -->
+                                        <div class="form-group">
+                                            <label for="life" class="col-md-3 control-label">Срок эксплуатации (прошло/рассчетный)</label>
+                                            <div class="col-md-9">
+                                                @php
+                                                    if ($asset->purchase_date){
+                                                         $now = new DateTime();
+                                                         $d2 = new DateTime($asset->purchase_date);
+                                                         $interval = $d2->diff($now);
+                                                         $result =  $interval->m + 12*$interval->y;
+
+                                                     }
+                                                     if($asset->model->lifetime){
+                                                          $lifetime = $asset->model->lifetime;
+                                                     }else if($asset->model->category->lifetime){
+                                                         $lifetime = $asset->model->category->lifetime;
+                                                     }else{
+                                                         $lifetime = 36;
+                                                     }
+                                                @endphp
+                                                <div class="input-group col-md-4" style="padding-left: 0px;">
+                                                    <input class="form-control float" type="text" disabled
+                                                           value="{{$result}}/{{ $lifetime }}"/>
+                                                    <span class="input-group-addon">Месяцев</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Purchase Cost -->
+                                        <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
+                                            <label for="purchase_cost" class="col-md-3 control-label">Закупочная стоимость</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group col-md-4" style="padding-left: 0px;">
+                                                    <input class="form-control float" type="text"
+                                                           name="purchase_cost" aria-label="Purchase_cost"
+                                                           id="purchase_cost"
+                                                           disabled
+                                                           value="{{ Input::old('purchase_cost', \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost)) }}"/>
+                                                    <span class="input-group-addon">
+                @if (isset($currency_type))
+                                                            {{ $currency_type }}
+                                                        @else
+                                                            {{ $snipeSettings->default_currency }}
+                                                        @endif
+            </span>
+                                                </div>
+
+                                                <div class="col-md-9" style="padding-left: 0px;">
+                                                    {!! $errors->first('depreciable_cost', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- depreciable Cost -->
                                         <div class="form-group {{ $errors->has('depreciable_cost') ? ' has-error' : '' }}">
-                                            <label for="purchase_cost" class="col-md-3 control-label">Остаточная
+                                            <label for="purchase_cost" class="col-md-3 control-label">Старая остаточная
                                                 стоимость</label>
                                             <div class="col-md-9">
                                                 <div class="input-group col-md-4" style="padding-left: 0px;">
                                                     <input class="form-control float" type="text"
                                                            name="depreciable_cost" aria-label="depreciable_cost"
                                                            id="depreciable_cost"
+                                                           disabled
                                                            value="{{ Input::old('depreciable_cost', \App\Helpers\Helper::formatCurrencyOutput($asset->depreciable_cost)) }}"/>
                                                     <span class="input-group-addon">
                 @if (isset($currency_type))
@@ -194,12 +246,36 @@
                                                         @endif
             </span>
                                                 </div>
+
                                                 <div class="col-md-9" style="padding-left: 0px;">
                                                     {!! $errors->first('depreciable_cost', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- new depreciable Cost -->
+                                        <div class="form-group {{ $errors->has('depreciable_cost') ? ' has-error' : '' }}">
+                                            <label for="purchase_cost" class="col-md-3 control-label">Новая остаточная
+                                                стоимость</label>
+                                            <div class="col-md-9">
+                                                <div class="input-group col-md-4" style="padding-left: 0px;">
+                                                    <input class="form-control float" type="text"
+                                                           name="new_depreciable_cost" aria-label="depreciable_cost"
+                                                           id="new_depreciable_cost"
+                                                           value="{{ Input::old('new_depreciable_cost', \App\Helpers\Helper::formatCurrencyOutput($asset->new_depreciable_cost)) }}"/>
+                                                    <span class="input-group-addon">
+                @if (isset($currency_type))
+                                                            {{ $currency_type }}
+                                                        @else
+                                                            {{ $snipeSettings->default_currency }}
+                                                        @endif
+            </span>
+                                                </div>
 
+                                                <div class="col-md-9" style="padding-left: 0px;">
+                                                    {{--                                    {!! $errors->first('new_depreciable_cost', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}--}}
+                                                </div>
+                                            </div>
+                                        </div>
                                         <!-- Note -->
                                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
 
@@ -236,6 +312,65 @@
                 tooltip: 'Оцените состояние',
                 clearable: false,
             });
+            calculeteCoast();
+
+            function calculeteCoast() {
+                $buyVal = $("#purchase_cost").val();
+                $quality = $("#quality").val();
+                if ($buyVal > 0 && $quality > 0) {
+                    //quality count
+                    $quality_divider = 1;
+                    switch (parseInt($quality)) {
+                        case 4:
+                            $quality_divider = 0.75
+                            break;
+                        case 3:
+                            $quality_divider = 0.50
+                            break;
+                        case 2:
+                            $quality_divider = 0.25
+                            break;
+                        case 1:
+                            $quality_divider = 0
+                            break;
+                    }
+                    //lifetime count
+                    @if (isset($asset->model->lifetime))
+                        $lifetime = {{$asset->model->lifetime}};
+                    @elseif (isset($asset->model->category->lifetime))
+                        $lifetime = {{$asset->model->category->lifetime}};
+                    @else
+                        $lifetime = 36;
+                    @endif
+
+                            @if (isset($asset->purchase_date))
+                        $buydate = "{{$asset->purchase_date}}";
+                    $buydate = new Date($buydate.substr(0, 10));
+                    $usetime = monthDiff($buydate);
+                    $time_divider = ($lifetime - $usetime) / $lifetime;
+                    if ($time_divider < 0) {
+                        $time_divider = 0;
+                    }
+                    @else
+                        $time_divider = 1/3;
+                    @endif
+
+                    //final count
+                    $newVal = $buyVal * $quality_divider * $time_divider;
+                    $newVal = $newVal.toFixed(2);
+                    $("#new_depreciable_cost").val($newVal);
+                }
+            }
+
+            $("#quality").change(function () {
+                calculeteCoast();
+            });
+
+            function monthDiff(dateFrom) {
+                var dateTo = new Date();
+                return dateTo.getMonth() - dateFrom.getMonth() +
+                    (12 * (dateTo.getFullYear() - dateFrom.getFullYear()))
+            }
         });
     </script>
 @stop

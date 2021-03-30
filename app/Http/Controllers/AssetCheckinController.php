@@ -67,8 +67,8 @@ class AssetCheckinController extends Controller
         $asset->accepted = null;
         $asset->name = $request->get('name');
 
-        if ($request->filled('depreciable_cost')) {
-            $asset->depreciable_cost = $request->get('depreciable_cost');
+        if ($request->filled('new_depreciable_cost')) {
+            $asset->depreciable_cost = $request->get('new_depreciable_cost');
         }
         if ($request->filled('quality')) {
             $asset->quality =intval( $request->get('quality'));

@@ -78,8 +78,8 @@ class AssetCheckoutController extends Controller
                 $expected_checkin = $request->get('expected_checkin');
             }
             $depreciable_cost = null;
-            if ($request->filled('depreciable_cost')) {
-                $depreciable_cost = $request->get('depreciable_cost');
+            if ($request->filled('new_depreciable_cost')) {
+                $depreciable_cost = $request->get('new_depreciable_cost');
             }
             $quality = null;
             if ($request->filled('quality')) {
