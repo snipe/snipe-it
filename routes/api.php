@@ -166,7 +166,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
 
     /*--- Departments API ---*/
 
-    /*--- Suppliers API ---*/
     Route::group(['prefix' => 'departments'], function () {
 
 
@@ -496,11 +495,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
     /*--- Licenses API ---*/
 
     Route::group(['prefix' => 'licenses'], function () {
-        Route::get('{licenseId}/seats', [
-            'as' => 'api.license.seats',
-            'uses' => 'LicensesController@seats'
-        ]);
-        
         Route::get('selectlist',
             [
                 'as' => 'api.licenses.selectlist',
@@ -525,7 +519,18 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
         ]
     ); // Licenses resource
 
-
+    Route::resource('licenses.seats', 'LicenseSeatsController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.licenses.seats.index',
+                    'show' => 'api.licenses.seats.show',
+                    'update' => 'api.licenses.seats.update'
+                ],
+            'except' => ['create', 'edit', 'destroy', 'store'],
+            'parameters' => ['licenseseat' => 'licenseseat_id']
+        ]
+    ); // Licenseseats resource
 
     /*--- Locations API ---*/
 

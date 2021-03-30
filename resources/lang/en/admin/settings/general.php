@@ -14,6 +14,8 @@ return array(
     'alerts_enabled'			=> 'Email Alerts Enabled',
     'alert_interval'			=> 'Expiring Alerts Threshold (in days)',
     'alert_inv_threshold'		=> 'Inventory Alert Threshold',
+    'allow_user_skin'           => 'Allow user skin',
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to change the site skin for himself.' ,
     'asset_ids'					=> 'Asset IDs',
     'audit_interval'            => 'Audit Interval',
     'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months.',
