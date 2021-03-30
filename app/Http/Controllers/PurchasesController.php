@@ -134,6 +134,7 @@ class PurchasesController extends Controller
                         $asset->archived                = '0';
                         $asset->physical                = '1';
                         $asset->depreciate              = '0';
+                        $asset->quality             = 5;
                         $asset->status_id               = $status->id;
                         $asset->warranty_months         = $warranty;
                         $asset->purchase_cost           = $purchase_cost;
