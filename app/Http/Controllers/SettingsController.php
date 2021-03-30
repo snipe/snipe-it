@@ -400,6 +400,7 @@ class SettingsController extends Controller
         $setting->version_footer     = $request->input('version_footer');
         $setting->footer_text        = $request->input('footer_text');
         $setting->skin               = $request->input('skin');
+        $setting->allow_user_skin    = $request->input('allow_user_skin');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
         $setting->logo_print_assets  = $request->input('logo_print_assets', '0');
 
