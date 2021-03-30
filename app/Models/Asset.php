@@ -315,12 +315,12 @@ class Asset extends Depreciable
         if ($this->save()) {
             if (is_integer($admin)){
                 $checkedOutBy = User::findOrFail($admin);
-
-                event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note));
             } else {
-                event(new CheckoutableCheckedOut($this, $target, Auth::user(), $note));
+                $checkedOutBy = Auth::user();
             }
-            
+
+            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note));
+
             $this->increment('checkout_counter', 1);
             return true;
         }
