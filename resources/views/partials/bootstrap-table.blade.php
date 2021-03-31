@@ -422,9 +422,7 @@
             if (value.length>0){
                 result = ' <div id="aniimated-thumbnials" >';
                 value.forEach((photo) => {
-                    result+='<a href="'+photo.path+'">'+
-                        '<img width="200" class="img-thumbnail" src="'+photo.path+'" />'+
-                        '</a>';
+                    result+='<a href="'+photo.path+'"><img width="200" class="img-thumbnail" src="'+photo.path+'" /></a>';
                 });
                 result+='  </div>';
                 return result;

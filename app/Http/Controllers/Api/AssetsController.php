@@ -662,7 +662,7 @@ class AssetsController extends Controller
                 file_put_contents($path, $image);
                 array_push($photos_json, [
                     "path" => $jpg_url,
-                    "commment" => $photo['commment'],
+                    "comment" => $photo['comment'],
                 ]);
             }
         }
@@ -752,7 +752,7 @@ class AssetsController extends Controller
                 file_put_contents($path, $image);
                 array_push($photos_json, [
                     "path" => $jpg_url,
-                    "commment" => $photo['commment'],
+                    "comment" => $photo['comment'],
                 ]);
             }
         }
