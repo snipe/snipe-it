@@ -422,7 +422,11 @@
             if (value.length>0){
                 result = ' <div id="aniimated-thumbnials" >';
                 value.forEach((photo) => {
-                    result+='<a href="'+photo.path+'"><img width="200" class="img-thumbnail" data-sub-html='+photo.comment+'"src="'+photo.path+'" /></a>';
+                    var sub_html = "";
+                    if (photo.comment){
+                        sub_html =' data-sub-html="'+photo.comment+'" ';
+                    }
+                    result+='<a href="'+photo.path+'"><img width="200" class="img-thumbnail"'+sub_html+'  src="'+photo.path+'" /></a>';
                 });
                 result+='  </div>';
                 return result;
