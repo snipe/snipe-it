@@ -420,12 +420,11 @@
         var result = "";
         if (value){
             if (value.length>0){
-                result = ' <div id="aniimated-thumbnials">';
+                result = ' <div id="aniimated-thumbnials" >';
                 value.forEach((photo) => {
                     result+='<a href="'+photo.path+'">'+
-                        '<img src="'+photo.path+'" />'+
+                        '<img width="200px" class="img-thumbnail" src="'+photo.path+'" />'+
                         '</a>';
-                    console.log(photo)
                 });
                 result+='  </div>';
                 return result;
