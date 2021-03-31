@@ -423,7 +423,7 @@
                 result = ' <div id="aniimated-thumbnials" >';
                 value.forEach((photo) => {
                     result+='<a href="'+photo.path+'">'+
-                        '<img width="200px" class="img-thumbnail" src="'+photo.path+'" />'+
+                        '<img width="200" class="img-thumbnail" src="'+photo.path+'" />'+
                         '</a>';
                 });
                 result+='  </div>';
