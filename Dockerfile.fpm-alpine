@@ -94,15 +94,9 @@ RUN set -eux; \
 	rm -f /usr/local/bin/composer; \
 	chown -R www-data:www-data /var/www/html;
 
-# Docker config files
-COPY --chown=www-data:www-data docker/env-docker.php /var/www/html/config/
-COPY --chown=www-data:www-data docker/app-docker.php /var/www/html/config/app.php
-COPY --chown=www-data:www-data docker/database-docker.php /var/www/html/config/database.php
-COPY --chown=www-data:www-data docker/mail-docker.php /var/www/html/config/mail.php
-COPY --chown=www-data:www-data docker/docker-secrets.env /var/www/html/.env
-
 VOLUME [ "/var/lib/snipeit" ]
 
+COPY --chown=www-data:www-data docker/docker-secrets.env /var/www/html/.env
 COPY --chmod=655 docker/docker-entrypoint.sh /usr/local/bin/docker-snipeit-entrypoint
 ENTRYPOINT [ "/usr/local/bin/docker-snipeit-entrypoint" ]
 CMD [ "/usr/local/bin/docker-php-entrypoint", "php-fpm" ]
