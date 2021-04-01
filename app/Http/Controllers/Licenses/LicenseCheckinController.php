@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
+use App\Models\Asset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -80,7 +81,11 @@ class LicenseCheckinController extends Controller
             // Ooops.. something went wrong
             return redirect()->back()->withInput()->withErrors($validator);
         }
-        $return_to = User::find($licenseSeat->assigned_to);
+
+        if(($return_to = User::find($licenseSeat->assigned_to)) === null){
+            $return_to = Asset::find($licenseSeat->asset_id);
+        }
+
 
         // Update the asset data
         $licenseSeat->assigned_to                   = null;
