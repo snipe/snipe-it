@@ -354,6 +354,19 @@
                                 @endif
                             </div>
                         </div>
+                        <!-- LDAP department -->
+                        <div class="form-group {{ $errors->has('ldap_dept') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_dept', trans('admin/settings/general.ldap_dept')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::text('ldap_dept', Request::old('ldap_dept', $setting->ldap_dept), ['class' => 'form-control','placeholder' => 'department', $setting->demoMode]) }}
+                                {!! $errors->first('ldap_dept', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fa fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
 
 
                         @if ($setting->ldap_enabled)

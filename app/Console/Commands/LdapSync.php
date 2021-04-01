@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\Setting;
 use App\Models\Ldap;
 use App\Models\User;
+use App\Models\Department;
 use App\Models\Location;
 use Log;
 
@@ -51,6 +52,7 @@ class LdapSync extends Command
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
+        $ldap_result_dept = Setting::getSettings()->ldap_dept;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -175,6 +177,7 @@ class LdapSync extends Command
                 $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
                 $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
                 $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
+                $item["department"] = isset($results[$i][$ldap_result_dept][0]) ? $results[$i][$ldap_result_dept][0] : "";
 
                 $user = User::where('username', $item["username"])->first();
                 if ($user) {
@@ -187,7 +190,13 @@ class LdapSync extends Command
                     $user->activated = 0;
                     $item["createorupdate"] = 'created';
                 }
+                /* Feeling kinda dumb about this, but below is what I think I need to do.
+                   I get the department name from LDAP then I want to check it with the DB/API (will the transformer
+                    just work its magic here?? Need clarity on what is going on here.  */
+                $department= Department::firstorNew($item['department'])->name;
+                /*I am not sure at all on this; but then the department is found or created and I can link the id in the line below? */
 
+                $user->department_id = $department->id;
                 $user->first_name = $item["firstname"];
                 $user->last_name = $item["lastname"];
                 $user->username = $item["username"];

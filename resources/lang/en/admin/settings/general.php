@@ -61,6 +61,7 @@ return array(
     'label_logo'                => 'Label Logo',
     'label_logo_size'           => 'Square logos look best - will be displayed in the top right of each asset label. ',
     'laravel'                   => 'Laravel Version',
+    'ldap_dept'                 => "LDAP Department Name",
     'ldap_enabled'              => 'LDAP enabled',
     'ldap_integration'          => 'LDAP Integration',
     'ldap_settings'             => 'LDAP Settings',

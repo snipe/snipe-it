@@ -943,6 +943,7 @@ class SettingsController extends Controller
             $setting->ldap_tls               = $request->input('ldap_tls', '0');
             $setting->ldap_pw_sync           = $request->input('ldap_pw_sync', '0');
             $setting->custom_forgot_pass_url = $request->input('custom_forgot_pass_url');
+            $setting->ldap_dept              = $request->input('ldap_dept');
 
         }
 
