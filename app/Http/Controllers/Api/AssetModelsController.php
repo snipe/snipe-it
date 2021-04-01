@@ -96,9 +96,8 @@ class AssetModelsController extends Controller
                 break;
         }
 
-        $total = $assetmodels->count();
         $assetmodels = $assetmodels->skip($offset)->take($limit)->get();
-        return (new AssetModelsTransformer)->transformAssetModels($assetmodels, $total);
+        return (new AssetModelsTransformer)->transformAssetModels($assetmodels, $assetmodels->count());
     }
 
 

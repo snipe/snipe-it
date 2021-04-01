@@ -193,7 +193,9 @@ class LdapSync extends Command
                 /* Feeling kinda dumb about this, but below is what I think I need to do.
                    I get the department name from LDAP then I want to check it with the DB/API (will the transformer
                     just work its magic here?? Need clarity on what is going on here.  */
-                $department= Department::firstorNew($item['department'])->name;
+                $department= Department::firstorNew([
+                   'name' => $item['department'],
+                ]);
                 /*I am not sure at all on this; but then the department is found or created and I can link the id in the line below? */
 
                 $user->department_id = $department->id;

@@ -36,17 +36,13 @@ class SettingsController extends Controller
     public function ldapAdSettingsTest(LdapAd $ldap): JsonResponse
     {
         if(!$ldap->init()) {
-            Log::info('LDAP is not enabled so we cannot test.');
+            Log::info('LDAP is not enabled cannot test.');
             return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
         }
 
         // The connect, bind and resulting users message
         $message = [];
 
-        
-        // This is all kinda fucked right now. The connection test doesn't actually do what you think,
-        // // and the way we parse the errors
-        // on the JS side is horrible. 
         Log::info('Preparing to test LDAP user login');
         // Test user can connect to the LDAP server
         try {
@@ -55,11 +51,13 @@ class SettingsController extends Controller
                 'message' => 'Successfully connected to LDAP server.'
             ];
         } catch (\Exception $ex) {
-                \Log::debug('Connection to LDAP server '.Setting::getSettings()->ldap_server.' failed. Please check your LDAP settings and try again. Server Responded with error: ' . $ex->getMessage());
-            return response()->json(
-                ['message' => 'Connection to LDAP server '.Setting::getSettings()->ldap_server." failed. Verify that the LDAP hostname is entered correctly and that it can be reached from this web server. \n\nServer Responded with error: " . $ex->getMessage()
+                \Log::debug('LDAP connected but Bind failed. Please check your LDAP settings and try again.');
+            return response()->json([
+                'message' => 'Error logging into LDAP server, error: ' . $ex->getMessage() . ' - Verify your that your username and password are correct']);
 
-                ], 400);
+        } catch (\Exception $e) {
+            \Log::info('LDAP connection failed but we cannot debug it any further on our end.');
+            return response()->json(['message' => 'The LDAP connection failed but we cannot debug it any further on our end. The error from the server is: '.$e->getMessage()], 500);
         }
 
         Log::info('Preparing to test LDAP bind connection');
@@ -68,11 +66,12 @@ class SettingsController extends Controller
             Log::info('Testing Bind');
             $ldap->testLdapAdBindConnection();
             $message['bind'] = [
-                'message' => 'Successfully bound to LDAP server.'
+                'message' => 'Successfully binded to LDAP server.'
             ];
         } catch (\Exception $ex) {
             Log::info('LDAP Bind failed');
-            return response()->json(['message' => 'Connection to LDAP successful, but we were unable to Bind the LDAP user '.Setting::getSettings()->ldap_uname.". Verify your that your LDAP Bind username and password are correct. \n\nServer Responded with error: " . $ex->getMessage()
+            return response()->json([
+                'message' => 'Error binding to LDAP server, error: ' . $ex->getMessage()
             ], 400);
         }
 
@@ -95,17 +94,9 @@ class SettingsController extends Controller
                     'email'           => $item[$settings['ldap_email']][0] ?? null,
                 ];
             });
-            if ($users->count() > 0) {
-                $message['user_sync']  = [
-                    'users' => $users
-                ];
-            } else {
-                $message['user_sync']  = [
-                    'message' => 'Connection to LDAP was successful, however there were no users returned from your query. You should confirm the Base Bind DN above.'
-                ];
-                return response()->json($message, 400);
-            }
-            
+            $message['user_sync']  = [
+                'users' => $users
+            ];
         } catch (\Exception $ex) {
             Log::info('LDAP sync failed');
             $message['user_sync']  = [

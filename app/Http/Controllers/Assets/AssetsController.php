@@ -14,7 +14,6 @@ use App\Models\Setting;
 use App\Models\User;
 use Auth;
 use Carbon\Carbon;
-use Intervention\Image\Facades\Image;
 use DB;
 use Gate;
 use Illuminate\Http\Request;
@@ -166,17 +165,10 @@ class AssetsController extends Controller
                 foreach ($model->fieldset->fields as $field) {
                     if ($field->field_encrypted=='1') {
                         if (Gate::allows('admin')) {
-                            if(is_array($request->input($field->convertUnicodeDbSlug()))){
-                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e(implode(', ', $request->input($field->convertUnicodeDbSlug()))));
-                            }else{
-                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
-                            }                        }
-                    } else {
-                        if(is_array($request->input($field->convertUnicodeDbSlug()))){
-                            $asset->{$field->convertUnicodeDbSlug()} = implode(', ', $request->input($field->convertUnicodeDbSlug()));
-                        }else{
-                            $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
                         }
+                    } else {
+                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
                     }
                 }
             }
@@ -350,18 +342,10 @@ class AssetsController extends Controller
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted=='1') {
                     if (Gate::allows('admin')) {
-                        if(is_array($request->input($field->convertUnicodeDbSlug()))){
-                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e(implode(', ', $request->input($field->convertUnicodeDbSlug()))));
-                        }else{
-                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
-                        }
+                        $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
                     }
                 } else {
-                    if(is_array($request->input($field->convertUnicodeDbSlug()))){
-                        $asset->{$field->convertUnicodeDbSlug()} = implode(', ', $request->input($field->convertUnicodeDbSlug()));
-                    }else{
-                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
-                    }
+                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
                 }
             }
         }
@@ -487,16 +471,10 @@ class AssetsController extends Controller
                 $barcode_width = ($settings->labels_width - $settings->labels_display_sgutter) * 96.000000000001;
 
                 $barcode = new \Com\Tecnick\Barcode\Barcode();
-                try {
-                    $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode,$asset->asset_tag,($barcode_width < 300 ? $barcode_width : 300),50);
-                    file_put_contents($barcode_file, $barcode_obj->getPngData());
-                    return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
-                } catch(\Exception $e) {
-                    \Log::debug('The barcode format is invalid.');
-                    return response(file_get_contents(public_path('uploads/barcodes/invalid_barcode.gif')))->header('Content-type', 'image/gif');
-                }
+                $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode,$asset->asset_tag,($barcode_width < 300 ? $barcode_width : 300),50);
 
-
+                file_put_contents($barcode_file, $barcode_obj->getPngData());
+                return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
             }
         }
     }

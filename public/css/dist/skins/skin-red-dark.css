@@ -170,20 +170,18 @@ a:visited {
   --background: #222;
   --back-main: #333;
   --back-sub: #444;
-  --back-sub-alt: #dfd9d8;
   --button-default: #ac2d1e;
   --button-primary: #802216;
   --button-hover: #6b1c12;
   --header: #dd4b39;
   /* Use same as Header picker */
   --text-main: #BBB;
-  --text-alt: #222;
   --text-sub: #9b9b9b;
-  --link: #e00000;
+  --link: #f3c2bc;
   /* Use same as Header picker, lighten by 70% */
-  --visited-link: #D24D57;
+  --visited-link: #fbe9e7;
   /* Use same as Header picker, lighten by 70% */
-  --hover-link: #D24D57;
+  --hover-link: #fffdfd;
   /* Use same as Header picker, lighten by 70% */
   --nav-link: #FFF;
   /* Use same as Header picker */
@@ -253,7 +251,7 @@ body {
   color: var(--header);
 }
 .btn-default {
-  background-color: var(--back-sub);
+  background-color: var(--button-default);
   color: var(--link);
 }
 .btn-default dropdown-toggle {
@@ -312,9 +310,6 @@ body {
 }
 .dropdown-menu > li > a:hover {
   background-color: var(--back-main);
-  color: var(--nav-link);
-}
-.fixed-table-body thead th .th-inner {
   color: var(--nav-link);
 }
 .form-control {
@@ -429,10 +424,6 @@ input[type=search] {
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: var(--back-sub);
-}
-.table-striped > tbody > tr:nth-of-type(even) {
-  background-color: var(--back-sub-alt);
-  color: var(--text-alt);
 }
 #webui > div > div > div > div > div > table > tbody > tr > td > a > i.fa,
 .box-body,

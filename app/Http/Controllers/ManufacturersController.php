@@ -158,7 +158,7 @@ class ManufacturersController extends Controller
     public function destroy($manufacturerId)
     {
         $this->authorize('delete', Manufacturer::class);
-        if (is_null($manufacturer = Manufacturer::withTrashed()->withCount('models as models_count')->find($manufacturerId))) {
+        if (is_null($manufacturer = Manufacturer::withCount('models as models_count')->find($manufacturerId))) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.not_found'));
         }
 
@@ -174,12 +174,8 @@ class ManufacturersController extends Controller
             }
         }
 
-        // Soft delete the manufacturer if active, permanent delete if is already deleted
-        if($manufacturer->deleted_at === NULL) {
-            $manufacturer->delete();
-        } else {
-            $manufacturer->forceDelete();
-        }
+        // Delete the manufacturer
+        $manufacturer->delete();
         // Redirect to the manufacturers management page
         return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.delete.success'));
     }
