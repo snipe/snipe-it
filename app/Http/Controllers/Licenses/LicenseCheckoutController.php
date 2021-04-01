@@ -95,11 +95,7 @@ class LicenseCheckoutController extends Controller
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
         }
         $licenseSeat->asset_id = request('asset_id');
-
-        // Override asset's assigned user if available
-        if ($target->checkedOutToUser()) {
-            $licenseSeat->assigned_to =  $target->assigned_to;
-        }
+        
         if ($licenseSeat->save()) {
 
             event(new CheckoutableCheckedOut($licenseSeat, $target, Auth::user(), request('note')));
