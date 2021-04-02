@@ -1166,10 +1166,14 @@
   <script>
     $(function() {
       $('#assetHistory').on('post-body.bs.table', function (e, data) {
-        console.log("edcec")
-        lightGallery(document.getElementById('aniimated-thumbnials'), {
-          thumbnail:true
-        });
+        // console.log("assetHistory");
+        // $('.aniimated-thumbnials').lightGallery({
+        //   // thumbnail:true,
+        // });
+        lightbox.option({
+          'resizeDuration': 200,
+          'wrapAround': true
+        })
       });
     });
   </script>

@@ -420,13 +420,9 @@
         var result = "";
         if (value){
             if (value.length>0){
-                result = ' <div id="aniimated-thumbnials" >';
+                result = ' <div class="aniimated-thumbnials" >';
                 value.forEach((photo) => {
-                    var sub_html = "";
-                    if (photo.comment){
-                        sub_html =' data-sub-html="'+photo.comment+'" ';
-                    }
-                    result+='<a href="'+photo.path+'"><img width="200" class="img-thumbnail"'+sub_html+'  src="'+photo.path+'" /></a>';
+                    result+='<a href="'+photo.path+'" data-lightbox="image-1" data-title="'+photo.comment+'"><img width="200" class="img-thumbnail" src="'+photo.path+'" /></a>';
                 });
                 result+='  </div>';
                 return result;
