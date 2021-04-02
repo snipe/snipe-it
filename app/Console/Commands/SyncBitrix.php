@@ -111,7 +111,7 @@ class SyncBitrix extends Command
                     ]
                 );
                 if (!$sklad_user) {
-                    print('Bitrix user '.$bitrix_user.' not found');
+                    print('Responsible at object "'.$value["NAME"].'" ['.$value["ID"].'] not found (Bitrix user id '.$bitrix_user.')\n');
                 }else{
                     $location->manager_id = $sklad_user->id;
                 }
