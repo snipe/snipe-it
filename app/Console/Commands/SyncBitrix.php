@@ -110,7 +110,12 @@ class SyncBitrix extends Command
                         'address2' => $value["ADDRESS_2"],
                     ]
                 );
-                $location->manager_id = $sklad_user->id;
+                if (!$sklad_user) {
+                    print('Bitrix user '.$bitrix_user.' not found');
+                }else{
+                    $location->manager_id = $sklad_user->id;
+                }
+
                 $location->save();
             }
         }
