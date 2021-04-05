@@ -12,6 +12,10 @@ use App\Models\License;
 use App\Models\LicenseSeat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Api\User;
+use App\Http\Controllers\Api\Auth;
+use App\Events\CheckoutableCheckedOut;
+use App\Http\Controllers\Api\Validator;
 
 class LicensesController extends Controller
 {
@@ -260,6 +264,122 @@ class LicensesController extends Controller
 
         return (new SelectlistTransformer)->transformSelectlist($licenses);
     }
+    /**
+     * Checkout a License
+     *
+     * @author [D.Valin] [david.valin@deivishome.com] based on [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $LicenseId
+     * @since [v4.0]
+     * @return JsonResponse
+     * Added functions to checkout license to user and asset
+     */
+    public function checkout(Request $request, $licenseId, $seatId = null)
+    {
+            if (!$license = License::find($licenseId)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/licenses/message.not_found')));
+           }
+            $this->authorize('checkout', License::class);
+           $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
+           $licenseSeat->user_id = $request->filled('checkout_to');
+
+           $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
+           if ($this->$checkoutMethod($request, $licenseSeat)) {
+                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/licenses/message.checkout.success')));
+           }
+           return response()->json(Helper::formatStandardApiResponse('error', null, trans('Something went wrong handling this checkout.')));
+
+   }
+   
+   protected function findLicenseSeatToCheckout($license, $seatId)
+   {
+       $licenseSeat = LicenseSeat::find($seatId) ?? $license->freeSeat();
+
+       if (!$licenseSeat) {
+               if ($seatId) {
+                       return response()->json(Helper::formatStandardApiResponse('error',null,trans('This Seat is not available for checkout.')));
+               }
+               return response()->json(Helper::formatStandardApiResponse('error',null,trans('There are no available seats for this license')));
+       }
+
+       if(!$licenseSeat->license->is($license)) {
+           return response()->json(Helper::formatStandardApiResponse('error',null,trans('The license seat provided does not match the license.')));
+       }
+       return $licenseSeat;
+   }
+
+   protected function checkoutToUser(Request $request, $licenseSeat)
+   {
+       if (is_null($target = $request->filled('assigned_to'))) {
+               return response()->json(Helper::formatStandardApiResponse('error',null,trans('admin/licenses/message.user_does_not_exist')));
+       }
+       $licenseSeat->assigned_to = request('assigned_to');
+           
+       if ($licenseSeat->save()) {
+           return true;
+       }else {
+           return false;
+       }
+   }
+   
+
+   protected function checkoutToAsset(Request $request, $licenseSeat)
+   {
+       if (is_null($target = $request->filled('asset_id'))) {
+           return response()->json(Helper::formatStandardApiResponse('error',null,trans('admin/licenses/message.asset_does_not_exist')));
+       }
+       $licenseSeat->asset_id = request('asset_id');
+
+       if ($licenseSeat->save()) {            
+
+           return true;
+       }
+       return false;
+   }
+
+       /**
+    * Validates and stores the license checkin action.
+    *
+    * @author [D. Valin][<david.valin@deivishome.com>] based on [A. Gianotto] [<snipe@snipe.net>]
+    * Provides Checkin function to REST API 
+    * @since [v1.0]
+    * @param int $seatId
+    * @param string $backTo
+    * @return \Illuminate\Http\RedirectResponse
+    * @throws \Illuminate\Auth\Access\AuthorizationException
+    */
+   public function checkin(Request $request, $seatId = null, $backTo = null)
+   {
+       // Check if the asset exists
+       if (is_null($licenseSeat = LicenseSeat::find($seatId))) {
+           // Return error on api
+           return response()->json(Helper::formatStandardApiResponse('error',null, trans('admin/licenses/message.not_found')));
+       }
+
+       $license = License::find($licenseSeat->license_id);
+       $this->authorize('checkout', $license);
+
+       if (!$license->reassignable) {
+           // Not allowed to checkin            
+           return response()->json(Helper::formatStandardApiResponse('error',null,trans('License not reassignable.')));
+       }
+            
+       
+       // Update the asset data
+       $licenseSeat->assigned_to                   = null;
+       $licenseSeat->asset_id                      = null;
+       
+       // Was the asset updated?
+       if ($licenseSeat->save()) {            
+
+           if ($backTo=='user') {
+               return response()->json(Helper::formatStandardApiResponse('success',null, trans('admin/licenses/message.checkin.success')));
+           }
+           return response()->json(Helper::formatStandardApiResponse('success',null, trans('admin/licenses/message.checkin.success')));
+       }
+
+       // Redirect to the license page with error
+       return response()->json(Helper::formatStandardApiResponse('error',null, trans('admin/licenses/message.checkin.error')));
+   }
 
 
 }

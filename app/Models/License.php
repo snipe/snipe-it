@@ -678,4 +678,21 @@ class License extends Depreciable
         return $query->leftJoin('companies as companies', 'licenses.company_id', '=', 'companies.id')->select('licenses.*')
             ->orderBy('companies.name', $order);
     }
+    /**
+     * Determines if a license is available for checkout if there are enough free seats using API REST
+     *
+     * @author [D.Valin] [<david.valin@deivishome.com>]
+     * @since [v3.0]
+     * @return boolean
+     */
+    public function availableForCheckout()
+    {
+		$FS = $this->remaincount();		
+		//initialy we look to free seats to be checked out. If free_seats_count > 0 then it can be checkedout
+	   if ( intval($FS) > 0 ) {
+                return true;
+            } else {
+				return false;
+			}        
+    }
 }
