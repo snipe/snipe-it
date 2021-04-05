@@ -23,9 +23,12 @@ class LicenseCheckoutRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'note'   => 'string|nullable',
-            'asset_id'  => 'required_without:assigned_to',
-        ];
+        $rules = [
+		  'checkout_to_type'      => 'string',
+		  'assigned_to'         => 'string',		  
+		  'note'   => 'string|nullable',
+          'asset_id'  => 'string|nullable',
+	    ];		
+        return $rules;
     }
 }

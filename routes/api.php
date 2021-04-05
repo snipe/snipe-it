@@ -507,6 +507,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
                 'uses'=> 'LicensesController@selectlist'
             ]
         );
+        Route::post('{licenseId}/checkout',	    
+          [ 'as' => 'api.licenses.checkout', 'uses' => 'LicensesController@checkout' ]
+	    );
+        Route::post('{licenseId}/checkin',	    
+          [ 'as' => 'api.licenses.checkin', 'uses' => 'LicensesController@checkin' ]
+	    );
 
     }); // Licenses group
 
