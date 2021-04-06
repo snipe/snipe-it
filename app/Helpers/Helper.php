@@ -774,10 +774,9 @@ class Helper
 
 
     /**
-     * Gracefully handle decrypting the legacy data (encrypted via mcrypt) and use the new
-     * decryption method instead.
+     * Gracefully handle decrypting encrypted fields (custom fields, etc).
      *
-     * This is not currently used, but will be.
+     * @todo allow this to handle more than just strings (arrays, etc)
      *
      * @author A. Gianotto
      * @since 3.6
