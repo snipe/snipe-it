@@ -73,7 +73,7 @@ COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.co
 RUN a2enmod ssl
 RUN a2ensite 001-default-ssl.conf
 
-COPY --chown=docker . /var/www/html
+COPY . /var/www/html
 
 RUN a2enmod rewrite
 
@@ -86,7 +86,9 @@ WORKDIR /var/www/html
 
 #copy all configuration files
 # COPY docker/*.php /var/www/html/app/config/production/
-COPY --chown=docker docker/docker.env /var/www/html/.env
+COPY docker/docker.env /var/www/html/.env
+
+RUN chown -R docker /var/www/html
 
 RUN \
 	rm -r "/var/www/html/storage/private_uploads" && ln -fs "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \
@@ -95,6 +97,7 @@ RUN \
       && mkdir -p "/var/lib/snipeit/keys" && ln -fs "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key" \
       && ln -fs "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key" \
       && chown docker "/var/lib/snipeit/keys/" \
+      && chown -h docker "/var/www/html/storage/*.key" \
       && chmod +x /var/www/html/artisan \
       && echo "Finished setting up application in /var/www/html"
 
