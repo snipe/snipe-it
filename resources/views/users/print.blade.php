@@ -145,7 +145,7 @@
                     @can('viewKeys', $license)
                         {{ $license->serial }}
                     @else
-                        ------------
+                       <i class="fa-lock" aria-hidden="true"></i> {{ str_repeat('x', 15) }}
                     @endcan
                 </td>
                 <td>{{  $license->assetlog->first()->created_at }}</td>

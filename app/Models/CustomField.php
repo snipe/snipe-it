@@ -359,7 +359,7 @@ class CustomField extends Model
             "name" => "required|unique:custom_fields",
             "element" => [
                 "required",
-                Rule::in(['text', 'listbox',  'textara', 'checkbox', 'radio'])
+                Rule::in(['text', 'listbox',  'textarea', 'checkbox', 'radio'])
             ],
             'format' => [
                 Rule::in(array_merge(array_keys(CustomField::PREDEFINED_FORMATS), CustomField::PREDEFINED_FORMATS))

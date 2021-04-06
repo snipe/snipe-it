@@ -39,7 +39,11 @@
                     <tbody>
                     </tbody>
                 </table>
+<<<<<<< HEAD
             </div><
+=======
+            </div>
+>>>>>>> develop
         </div>
     </div>
 
