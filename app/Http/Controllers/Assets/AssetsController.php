@@ -484,7 +484,7 @@ class AssetsController extends Controller
                 return response()->file($barcode_file, $header);
             } else {
                 // Calculate barcode width in pixel based on label width (inch)
-                $barcode_width = ($settings->labels_width - $settings->labels_display_sgutter) * 96.000000000001;
+                $barcode_width = ($settings->labels_width - $settings->labels_display_sgutter) * 200.000000000001;
 
                 $barcode = new \Com\Tecnick\Barcode\Barcode();
                 try {
