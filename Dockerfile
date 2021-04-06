@@ -73,7 +73,7 @@ COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.co
 RUN a2enmod ssl
 RUN a2ensite 001-default-ssl.conf
 
-COPY . /var/www/html
+COPY --chown=docker . /var/www/html
 
 RUN a2enmod rewrite
 
@@ -86,9 +86,7 @@ WORKDIR /var/www/html
 
 #copy all configuration files
 # COPY docker/*.php /var/www/html/app/config/production/
-COPY docker/docker.env /var/www/html/.env
-
-RUN chown -R docker /var/www/html
+COPY --chown=docker docker/docker.env /var/www/html/.env
 
 RUN \
 	rm -r "/var/www/html/storage/private_uploads" && ln -fs "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \
