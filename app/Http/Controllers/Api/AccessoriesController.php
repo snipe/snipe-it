@@ -254,7 +254,8 @@ class AccessoriesController extends Controller
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
                 'user_id' => Auth::id(),
-                'assigned_to' => $request->get('assigned_to')
+                'assigned_to' => $request->get('assigned_to'),
+                'note' => $request->get('note')
             ]);
 
             $accessory->logCheckout($request->input('note'), $user);
