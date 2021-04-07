@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddsSeveralLdapFields extends Migration
+class AddLdapDeptAndMgr extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,8 @@ class AddsSeveralLdapFields extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('ldap_phone_field')->after('ldap_email')->nullable();
-            $table->string('ldap_jobtitle')->after('ldap_phone_field')->nullable();
-            $table->string('ldap_country')->after('ldap_jobtitle')->nullable();
+            $table->string('ldap_dept')->after('ldap_active_flag')->nullable();
+            $table->string('ldap_manager')->after('ldap_email')->nullable();
         });
     }
 
@@ -28,9 +27,9 @@ class AddsSeveralLdapFields extends Migration
     public function down()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->dropColumn('ldap_phone_field');
-            $table->dropColumn('ldap_jobtitle');
-            $table->dropColumn('ldap_country');
+            $table->dropColumn('ldap_dept');
+            $table->dropColumn('ldap_manager');
+
         });
     }
 }
