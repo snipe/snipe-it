@@ -1,5 +1,4 @@
-
-const { mix } = require('laravel-mix');
+const mix = require('laravel-mix');
 
 // This generates a file called app.css, which we use
 // later on to build all.css
@@ -58,7 +57,7 @@ mix
  */
 mix
     .copy('./resources/assets/css/signature-pad.css', './public/css/dist')
-    .minify('./public/css/build/signature-pad.css');
+    .minify('./public/css/dist/signature-pad.css');
 
 // Combine main SnipeIT JS files
 mix.js(
@@ -94,8 +93,6 @@ mix.less('./resources/assets/less/skins/skin-orange.less', 'css/dist/skins', './
 mix.combine(
     [
         './node_modules/bootstrap-table/dist/bootstrap-table.css',
-        './node_modules/bootstrap-table/dist/extentions/mobile/bootstrap-table-mobile.css',
-        './node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.css',
         './node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css'
     ],
     'public/css/dist/bootstrap-table.css'
@@ -137,14 +134,14 @@ mix
     .combine(
         [
             './node_modules/bootstrap-table/dist/bootstrap-table.js',
-            './node_modules/bootstrap-table/dist/extentions/mobile/bootstrap-table-mobile.js',
+            './node_modules/bootstrap-table/dist/extensions/mobile/bootstrap-table-mobile.js',
             './node_modules/bootstrap-table/dist/extensions/export/bootstrap-table-export.js',
             './node_modules/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.js',
             './resources/assets/js/extensions/jquery.base64.js',
             './node_modules/tableexport.jquery.plugin/tableExport.js',
             './node_modules/tableexport.jquery.plugin/libs/jsPDF/jspdf.min.js',
-            './resources/js/FileSaver.min.js',
-            './resources/js/xlsx.core.min.js',
+            './resources/assets/js/FileSaver.min.js',
+            './node_modules/xlsx/dist/xlsx.core.min.js',
             './node_modules/tableexport.jquery.plugin/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js',
             './node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js',
             './node_modules/bootstrap-table/dist/extensions/toolbar/bootstrap-table-toolbar.js'

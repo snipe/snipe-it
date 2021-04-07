@@ -150,7 +150,7 @@
                             </div>
                         </div>
 
-                        <!-- Email format -->
+                        <!-- Skin -->
                         <div class="form-group {{ $errors->has('skin') ? 'error' : '' }}">
                             <div class="col-md-3">
                                 {{ Form::label('skin', trans('general.skin')) }}
@@ -161,6 +161,17 @@
                             </div>
                         </div>
 
+                        <!-- Allow User Skin -->
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                {{ Form::label('allow_user_skin', trans('admin/settings/general.allow_user_skin')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::checkbox('allow_user_skin', '1', old('allow_user_skin', $setting->allow_user_skin),array('class' => 'minimal')) }}
+                                {{ trans('general.yes') }}
+                                <p class="help-block">{{ trans('admin/settings/general.allow_user_skin_help_text') }}</p>
+                            </div>
+                        </div>
 
                         <!-- Custom css -->
                         <div class="form-group {{ $errors->has('custom_css') ? 'error' : '' }}">

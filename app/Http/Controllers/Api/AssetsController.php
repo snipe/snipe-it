@@ -478,13 +478,36 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
-                if ($field->field_encrypted=='1') {
-                    if (Gate::allows('admin')) {
-                        $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
-                    }
-                } else {
-                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+
+                // Set the field value based on what was sent in the request
+                $field_val = $request->input($field->convertUnicodeDbSlug(), null);
+
+                // If input value is null, use custom field's default value
+                if ($field_val == null) {
+                    \Log::debug('Field value for '.$field->convertUnicodeDbSlug().' is null');
+                    $field_val = $field->defaultValue($request->get('model_id'));
+                    \Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
                 }
+
+                // if the field is set to encrypted, make sure we encrypt the value
+                if ($field->field_encrypted == '1') {
+
+                    \Log::debug('This model field is encrypted in this fieldset.');
+
+                    if (Gate::allows('admin')) {
+
+                        // If input value is null, use custom field's default value
+                        if (($field_val == null) && ($request->has('model_id')!='')){
+                            $field_val = \Crypt::encrypt($field->defaultValue($request->get('model_id')));
+                        } else {
+                            $field_val = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
+                        }
+                    }
+                }
+
+
+                $asset->{$field->convertUnicodeDbSlug()} = $field_val;
+
             }
         }
 

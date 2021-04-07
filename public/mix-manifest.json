@@ -19,8 +19,8 @@
     "/css/dist/skins/skin-orange-dark.css": "/css/dist/skins/skin-orange-dark.css?id=b3d2ebfcb2541fa8e9ec",
     "/css/dist/skins/skin-orange.css": "/css/dist/skins/skin-orange.css?id=39eb843599c275696aed",
     "/css/dist/all.css": "/css/dist/all.css?id=199fdf677ce0dce6cef8",
-    "/css/blue.png": "/css/blue.png?id=4c85d6a97173123bd14a",
-    "/css/blue@2x.png": "/css/blue@2x.png?id=62c67c6a822439e8a4ac",
+    "/css/blue.png": "/css/blue.png?id=e83a6c29e04fe851f212",
+    "/css/blue@2x.png": "/css/blue@2x.png?id=51135dd4d24f88f5de0b",
     "/css/dist/skins/skin-green-dark.min.css": "/css/dist/skins/skin-green-dark.min.css?id=0d9935d834b39386a82e",
     "/css/dist/skins/skin-black-dark.min.css": "/css/dist/skins/skin-black-dark.min.css?id=97ec6f217441ac2f79ed",
     "/css/dist/skins/skin-blue-dark.min.css": "/css/dist/skins/skin-blue-dark.min.css?id=8f7aed152883df9c6f5e",
@@ -30,9 +30,9 @@
     "/css/dist/skins/skin-orange-dark.min.css": "/css/dist/skins/skin-orange-dark.min.css?id=b3d2ebfcb2541fa8e9ec",
     "/css/dist/skins/skin-contrast.min.css": "/css/dist/skins/skin-contrast.min.css?id=d7996d850e8bcdc4e167",
     "/css/dist/signature-pad.css": "/css/dist/signature-pad.css?id=6a89d3cd901305e66ced",
-    "/css/build/signature-pad.min.css": "/css/build/signature-pad.min.css?id=d41d8cd98f00b204e980",
+    "/css/dist/signature-pad.min.css": "/css/dist/signature-pad.min.css?id=6a89d3cd901305e66ced",
     "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=1e77fde04b3f42432581",
     "/js/build/vendor.js": "/js/build/vendor.js?id=b93877b4a88a76e1b18b",
-    "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=58d95c93430f2ae33392",
+    "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=fd6e727609678bf04984",
     "/js/dist/all.js": "/js/dist/all.js?id=0efed60df4636f215a73"
 }

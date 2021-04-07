@@ -400,6 +400,7 @@ class SettingsController extends Controller
         $setting->version_footer     = $request->input('version_footer');
         $setting->footer_text        = $request->input('footer_text');
         $setting->skin               = $request->input('skin');
+        $setting->allow_user_skin    = $request->input('allow_user_skin');
         $setting->show_url_in_emails = $request->input('show_url_in_emails', '0');
         $setting->logo_print_assets  = $request->input('logo_print_assets', '0');
 
@@ -942,6 +943,9 @@ class SettingsController extends Controller
             $setting->ldap_tls               = $request->input('ldap_tls', '0');
             $setting->ldap_pw_sync           = $request->input('ldap_pw_sync', '0');
             $setting->custom_forgot_pass_url = $request->input('custom_forgot_pass_url');
+            $setting->ldap_phone_field       = $request->input('ldap_phone');
+            $setting->ldap_jobtitle          = $request->input('ldap_jobtitle');
+            $setting->ldap_country           = $request->input('ldap_country');
 
         }
 
