@@ -187,7 +187,7 @@ class LdapSync extends Command
 
 
                 $department = Department::firstOrCreate([
-                    ['name' => $item["department"]],
+                    'name' => $item["department"],
                 ]);
 
 
@@ -212,7 +212,6 @@ class LdapSync extends Command
                 $user->jobtitle = $item["jobtitle"];
                 $user->country = $item["country"];
                 $user->department_id = $department->id;
-                $user->manager_id = $department->manager_id;
 
                 // Sync activated state for Active Directory.
                 if ( array_key_exists('useraccountcontrol', $results[$i]) ) {
