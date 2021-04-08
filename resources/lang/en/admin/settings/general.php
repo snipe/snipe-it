@@ -75,7 +75,6 @@ return array(
     'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'LDAP Bind Username',
     'ldap_dept'                 => 'LDAP Department',
-    'ldap_manager'              => 'LDAP Manager',
     'ldap_phone'                => 'LDAP Telephone Number',
     'ldap_jobtitle'             => 'LDAP Job Title',
     'ldap_country'              => 'LDAP Country',
