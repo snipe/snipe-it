@@ -381,8 +381,6 @@ Route::get(
 );
 
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Setup Routes
@@ -391,6 +389,9 @@ Route::get(
 |
 |
 */
+
+
+
 Route::group([ 'prefix' => 'setup', 'middleware' => 'web'], function () {
     Route::get(
         'user',
@@ -498,6 +499,17 @@ Route::group(['middleware' => 'web'], function () {
     );
 
 });
+
+
+//Route::group([ 'prefix' => 'auth', 'middleware' => 'web'], function () {
+Route::group([ 'middleware' => 'web'], function () {
+    Route::get(
+        'auth',
+        ['uses' => 'Api\AuthController@getToken' ]
+    );
+});
+
+
 
 Auth::routes();
 
