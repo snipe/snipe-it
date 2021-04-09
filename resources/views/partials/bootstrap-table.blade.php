@@ -422,7 +422,10 @@
             if (value.length>0){
                 result = ' <div class="aniimated-thumbnials" >';
                 value.forEach((photo) => {
-                    result+='<a href="'+photo.path+'" data-lightbox="image-1" data-title="'+photo.comment+'"><img width="200" class="img-thumbnail" src="'+photo.path+'" /></a>';
+                    if (!photo.comment){
+                        photo.comment = "";
+                    }
+                    result+='<a href="'+photo.path+'" data-lightbox="image-1" data-title="'+photo.comment+'"><img width="200" class="img-thumbnail"  data-toggle="tooltip" data-placement="bottom" title="'+photo.comment+'" src="'+photo.path+'" /></a>';
                 });
                 result+='  </div>';
                 return result;
