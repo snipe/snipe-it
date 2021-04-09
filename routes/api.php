@@ -934,5 +934,11 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
             'uses' => 'BitrixSyncController@syncInvoiceTypes'
         ]);
     });
+//    Route::post('auth',
+//        [
+//            'as' => 'api.auth',
+//            'uses' => 'AuthController@getToken'
+//        ]
+//    );
 
 });
