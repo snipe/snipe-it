@@ -61,6 +61,8 @@ class Purchase extends SnipeModel
         "assets_json",
         "bitrix_send_json",
         "user_id",
+        "bitrix_result_at",
+        "verified_at",
     ];
 
     use Searchable;

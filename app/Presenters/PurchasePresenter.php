@@ -83,16 +83,18 @@ class PurchasePresenter extends Presenter
                 "switchable" => true,
                 "title" => "Цена",
                 "visible" => true,
+                "formatter" => 'priceFormatter',
+            ]
+//            ,[
+//                "field" => "currency",
+//                "searchable" => false,
+//                "sortable" => true,
+//                "switchable" => true,
+//                "title" => "Валюта",
+//                "visible" => true,
 //                "formatter" => 'companiesLinkFormatter',
-            ],[
-                "field" => "currency",
-                "searchable" => false,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => "Валюта",
-                "visible" => true,
-//                "formatter" => 'companiesLinkFormatter',
-            ],[
+//            ]
+            ,[
                 "field" => "user",
                 "searchable" => true,
                 "sortable" => true,
