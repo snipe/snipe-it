@@ -40,6 +40,12 @@ class CategoryPresenter extends Presenter
                 "visible" => true,
                 "formatter" => 'imageFormatter',
             ],[
+                "field" => "lifetime",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => 'Срок эксплуатации',
+                "visible" => true
+            ],[
                 "field" => "category_type",
                 "searchable" => true,
                 "sortable" => true,

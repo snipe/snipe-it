@@ -35,6 +35,7 @@ class CategoriesTransformer
                 'consumables_count' => (int) $category->consumables_count,
                 'components_count' => (int) $category->components_count,
                 'licenses_count' => (int) $category->licenses_count,
+                'lifetime' => (int) $category->lifetime,
                 'created_at' => Helper::getFormattedDateObject($category->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($category->updated_at, 'datetime'),
             ];

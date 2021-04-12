@@ -464,6 +464,51 @@
                   </div>
                   @endif
 
+
+                  @if ($asset->depreciable_cost)
+                    <div class="row">
+                      <div class="col-md-2">
+                        <strong>
+                          Остаточная стоимость
+                        </strong>
+                      </div>
+                      <div class="col-md-6">
+                        @if (($asset->id) && ($asset->location))
+                          {{ $asset->location->currency }}
+                        @elseif (($asset->id) && ($asset->location))
+                          {{ $asset->location->currency }}
+                        @else
+                          {{ $snipeSettings->default_currency }}
+                        @endif
+                        {{ \App\Helpers\Helper::formatCurrencyOutput($asset->depreciable_cost)}}
+                      </div>
+                    </div>
+                  @endif
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      <strong>
+                        Состояние
+                      </strong>
+                    </div>
+                    <div class="col-md-6">
+                      @if ($asset->quality == 5)
+                        <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
+                      @elseif  ($asset->quality == 4)
+                        <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+                      @elseif  ($asset->quality == 3)
+                        <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+                      @elseif  ($asset->quality == 2)
+                        <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+                      @elseif  ($asset->quality == 1)
+                        <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+                      @else
+                        <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+                      @endif
+
+                    </div>
+                  </div>
+
                   @if ($asset->order_number)
                   <div class="row">
                     <div class="col-md-2">
@@ -1006,7 +1051,8 @@
                     <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
                   <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
-                  <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">Changed</th>
+                  <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">Изменения</th>
+                  <th class="col-sm-2" data-field="photos" data-visible="true" data-formatter="photosFormatter">Фото</th>
                 </tr>
                 </thead>
               </table>
@@ -1117,5 +1163,19 @@
 
 @section('moar_scripts')
   @include ('partials.bootstrap-table')
+  <script>
+    $(function() {
+      $('#assetHistory').on('post-body.bs.table', function (e, data) {
+        // console.log("assetHistory");
+        // $('.aniimated-thumbnials').lightGallery({
+        //   // thumbnail:true,
+        // });
+        lightbox.option({
+          'resizeDuration': 200,
+          'wrapAround': true
+        })
+      });
+    });
+  </script>
 
 @stop

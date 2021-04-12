@@ -82,7 +82,9 @@ class PurchasesController extends Controller
         $purchase->invoice_type_id     = $request->input('invoice_type_id');
         $purchase->comment             = $request->input('comment');
         $purchase->consumables_json    = $request->input('consumables');
+        $purchase->assets_json         = $request->input('assets');
         $purchase->status             = "inprogress";
+        $purchase->user_id             = Auth::id();
         $currency_id = $request->input('currency_id');
 
         switch ($currency_id) {
@@ -132,6 +134,7 @@ class PurchasesController extends Controller
                         $asset->archived                = '0';
                         $asset->physical                = '1';
                         $asset->depreciate              = '0';
+                        $asset->quality             = 5;
                         $asset->status_id               = $status->id;
                         $asset->warranty_months         = $warranty;
                         $asset->purchase_cost           = $purchase_cost;
@@ -205,9 +208,16 @@ class PurchasesController extends Controller
                     //2. На боевом есть еще одно поле PROPERTY_1120=Y - надо передать любое значение, означает что создана из snipe_it
                 ]
             ];
-           // $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
+            $params_json = json_encode($params);
+//            \Log::debug($params_json);
+            $purchase->bitrix_send_json= $params_json;
+            $purchase->save();
+//            $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
+
             $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/',$params);
             $response = $response->getBody()->getContents();
+            $purchase->bitrix_result = $response;
+            $purchase->save();
             $bitrix_result = json_decode($response, true);
             $bitrix_id = $bitrix_result["result"];
             $purchase->bitrix_id = $bitrix_id;

@@ -39,7 +39,7 @@ class PurchasesController extends Controller
     {
         $this->authorize('view', Location::class);
 
-        $purchases = Purchase::with('supplier','assets','invoice_type','legal_person')
+        $purchases = Purchase::with('supplier', 'assets', 'invoice_type', 'legal_person','user')
             ->select([
                 'purchases.id',
                 'purchases.invoice_number',
@@ -52,12 +52,12 @@ class PurchasesController extends Controller
                 'purchases.invoice_type_id',
                 'purchases.comment',
                 'purchases.currency',
+                'purchases.user_id',
                 'purchases.created_at',
                 'purchases.deleted_at',
-            ]) ->withCount([
+            ])->withCount([
                 'assets as assets_count',
-            ])
-        ;
+            ]);
 
         if ($request->filled('search')) {
             $purchases = $purchases->TextSearch($request->input('search'));
@@ -65,7 +65,7 @@ class PurchasesController extends Controller
 
         $allowed_columns =
             [
-                'id','invoice_number','bitrix_id','final_price','status','created_at',
+                'id', 'invoice_number', 'bitrix_id', 'final_price', 'status', 'created_at',
                 'deleted_at'
             ];
 
@@ -98,16 +98,16 @@ class PurchasesController extends Controller
         $purchase->status = "paid";
         if ($purchase->save()) {
             $assets = Asset::where('purchase_id', $purchase->id)->get();
-            if (count($assets)>0){
+            if (count($assets) > 0) {
                 $status = Statuslabel::where('name', 'Доступные')->first();
                 foreach ($assets as &$value) {
-                    $value->status_id  =  $status->id;
+                    $value->status_id = $status->id;
                     $value->save();
                 }
             }
             $consumables_server = Consumable::where('purchase_id', $purchase->id)->get();
             $consumables = json_decode($purchase->consumables_json, true);
-            if ($purchase->consumables_json != null && count($consumables)>0 && count($consumables_server) == 0){
+            if ($purchase->consumables_json != null && count($consumables) > 0 && count($consumables_server) == 0) {
                 foreach ($consumables as &$consumable_new) {
                     $consumable_server = new Consumable();
                     $consumable_server->name = $consumable_new["name"];
@@ -117,9 +117,9 @@ class PurchasesController extends Controller
                     $consumable_server->order_number = $purchase->id;
                     $consumable_server->manufacturer_id = $consumable_new["manufacturer_id"];
                     $consumable_server->model_number = $consumable_new["model_number"];
-                    $consumable_server->purchase_date =  $purchase->created_at;
+                    $consumable_server->purchase_date = $purchase->created_at;
                     $consumable_server->purchase_cost = Helper::ParseFloat($consumable_new["purchase_cost"]);
-                    $consumable_server->qty =  Helper::ParseFloat($consumable_new["quantity"]);
+                    $consumable_server->qty = Helper::ParseFloat($consumable_new["quantity"]);
                     $consumable_server->purchase_id = $purchase->id;
                     $consumable_server->save();
                 }
@@ -149,7 +149,7 @@ class PurchasesController extends Controller
             $status = Statuslabel::where('name', 'Отклонено')->first();
             $assets = Asset::where('purchase_id', $purchase->id)->get();
             foreach ($assets as &$value) {
-                $value->status_id  =  $status->id;
+                $value->status_id = $status->id;
                 $value->save();
             }
             return response()->json(
@@ -159,6 +159,35 @@ class PurchasesController extends Controller
                     trans('admin/locations/message.update.success')
                 )
             );
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, $purchase->getErrors()));
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     * @return \Illuminate\Http\Response
+     */
+    public function resend(Request $request, $purchaseId = null)
+    {
+        $this->authorize('view', Location::class);
+        $purchase = Purchase::findOrFail($purchaseId);
+
+        $params_json = $purchase->bitrix_send_json;
+        $params = json_decode($params_json, true);
+        /** @var \GuzzleHttp\Client $client */
+        $client = new \GuzzleHttp\Client();
+//        $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
+        $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/', $params);
+        $response = $response->getBody()->getContents();
+        $bitrix_result = json_decode($response, true);
+        $bitrix_id = $bitrix_result["result"];
+        $purchase->bitrix_id = $bitrix_id;
+
+
+        if ($purchase->save()) {
+            return "ok";
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $purchase->getErrors()));

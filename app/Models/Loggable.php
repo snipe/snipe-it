@@ -36,7 +36,7 @@ trait Loggable
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
-    public function logCheckout($note, $target /* What are we checking out to? */)
+    public function logCheckout($note, $target,$changed,$photos_json/* What are we checking out to? */)
     {
         $settings = Setting::getSettings();
         $log = new Actionlog;
@@ -68,6 +68,8 @@ trait Loggable
         }
 
         $log->note = $note;
+        $log->log_meta = json_encode($changed);
+        $log->photos = json_encode($photos_json);
         $log->logaction('checkout');
 
         $params = [
@@ -117,7 +119,7 @@ trait Loggable
      * @since [v3.4]
      * @return \App\Models\Actionlog
      */
-    public function logCheckin($target, $note)
+    public function logCheckin($target, $note,$changed = null,$photos_json = null )
     {
         $settings = Setting::getSettings();
         $log = new Actionlog;
@@ -145,6 +147,13 @@ trait Loggable
         $log->location_id = null;
         $log->note = $note;
         $log->user_id = Auth::user()->id;
+
+        if ($changed){
+            $log->log_meta = json_encode($changed);
+        }
+        if ($photos_json){
+            $log->photos = json_encode($photos_json);
+        }
         $log->logaction('checkin from');
 
         $params = [

@@ -18,7 +18,7 @@ class Purchase extends SnipeModel
     protected $dates = ['deleted_at'];
     protected $table = 'purchases';
     protected $rules = array(
-        'invoice_number'        => 'required|min:1|max:255|unique_undeleted',
+        'invoice_number'        => 'required|min:1|max:255',
         'final_price'        => 'required',
         'supplier_id'        => 'required',
         'comment'        => 'required',
@@ -57,7 +57,10 @@ class Purchase extends SnipeModel
         'invoice_type_id',
         'comment',
         "currency",
-        "status"
+        "status",
+        "assets_json",
+        "bitrix_send_json",
+        "user_id",
     ];
 
     use Searchable;
@@ -67,7 +70,7 @@ class Purchase extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['invoice_number', 'bitrix_id', 'supplier_id', 'created_at'];
+    protected $searchableAttributes = ['invoice_number', 'comment','final_price'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -75,7 +78,9 @@ class Purchase extends SnipeModel
      * @var array
      */
     protected $searchableRelations = [
-        'parent' => ['name']
+        'user' => ['first_name','last_name'],
+        'supplier' => ['name'],
+
     ];
 
 
@@ -117,5 +122,11 @@ class Purchase extends SnipeModel
         }
         return false;
     }
+
+    public function user()
+    {
+        return $this->belongsTo('\App\Models\User', 'user_id');
+    }
+
 
 }

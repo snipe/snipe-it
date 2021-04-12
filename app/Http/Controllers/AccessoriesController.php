@@ -82,7 +82,7 @@ class AccessoriesController extends Controller
         $accessory->model_number            = request('model_number');
         $accessory->purchase_date           = request('purchase_date');
         $accessory->purchase_cost           = Helper::ParseFloat(request('purchase_cost'));
-        $accessory->qty                     = request('qty');
+        $accessory->qty                     = request('quantity');
         $accessory->user_id                 = Auth::user()->id;
         $accessory->supplier_id             = request('supplier_id');
         $accessory = $request->handleImages($accessory,600, public_path().'/uploads/accessories');

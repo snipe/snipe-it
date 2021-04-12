@@ -113,7 +113,12 @@ class SyncBitrix extends Command
                         'address2' => $value["ADDRESS_2"],
                     ]
                 );
-                $location->manager_id = $sklad_user->id;
+                if (!$sklad_user) {
+                    print("Responsible at object '".$value["NAME"]."' [".$value["ID"]."] not found (Bitrix user id ".$bitrix_user.")\n");
+                }else{
+                    $location->manager_id = $sklad_user->id;
+                }
+
                 $location->save();
             }
         }

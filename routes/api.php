@@ -876,6 +876,12 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
                 'uses' => 'PurchasesController@reject'
             ]
         );
+        Route::post('{purchase}/resend',
+            [
+                'as' => 'api.purchases.resend',
+                'uses' => 'PurchasesController@resend'
+            ]
+        );
     }); // Users group
 
 
@@ -898,5 +904,41 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
             'uses' => 'LegalPersonsController@selectlist'
         ]);
     });
+
+    /*--- BitrixSync API ---*/
+
+    Route::group(['prefix' => 'bitrix_sync'], function () {
+
+        Route::post( 'users',  [
+            'as' => 'bitrix_sync.users',
+            'uses' => 'BitrixSyncController@syncUsers'
+        ]);
+
+        Route::post( 'locations',  [
+            'as' => 'bitrix_sync.locations',
+            'uses' => 'BitrixSyncController@syncLocations'
+        ]);
+
+        Route::post( 'suppliers',  [
+            'as' => 'bitrix_sync.suppliers',
+            'uses' => 'BitrixSyncController@syncSuppliers'
+        ]);
+
+        Route::post( 'legal_persons',  [
+            'as' => 'bitrix_sync.legal_persons',
+            'uses' => 'BitrixSyncController@syncLegalPersons'
+        ]);
+
+        Route::post( 'invoice_types',  [
+            'as' => 'bitrix_sync.invoice_types',
+            'uses' => 'BitrixSyncController@syncInvoiceTypes'
+        ]);
+    });
+//    Route::post('auth',
+//        [
+//            'as' => 'api.auth',
+//            'uses' => 'AuthController@getToken'
+//        ]
+//    );
 
 });
