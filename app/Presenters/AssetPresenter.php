@@ -316,6 +316,7 @@ class AssetPresenter extends Presenter
             "formatter" => "hardwareInOutFormatter",
         ];
 
+
         $layout[] = [
             "field" => "actions",
             "searchable" => false,

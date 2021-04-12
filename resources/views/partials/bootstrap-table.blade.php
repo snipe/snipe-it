@@ -678,7 +678,7 @@
 
     function fileFormatter(value) {
         if (value) {
-            return '<a href="' + value + '" class="btn btn-default btn-sm"><i class="fa fa-download">Скачать</i></a>'
+            return '<a href="' + value + '" class="btn btn-default btn-sm" target="_blank"><i class="fa fa-download"> Скачать</i></a>'
         }
     }
 
@@ -736,15 +736,21 @@
 
     function bitrixIdFormatter(value, row) {
         if (value) {
-            return value;
+            return "<a href='https://bitrix.legis-s.ru/services/lists/52/element/0/"+value+"/?list_section_id=' target='_blank'>"+value+"</a>";
         } else {
             if (row.user) {
                 {{--return '<a href="{{ url('/') }}/api/v1/purchases/' + row.id + '/resend"> Отправить заново</a>';--}}
-                    return '<button type="button"  class="btn btn-default resend">Отправить заново</button>'
+                    return '<button type="button"  class="btn btn-default  btn-sm resend">Отправить заново</button>'
             } else {
                 return ' ';
             }
-            // return '<button type="button" id="resend" class="btn btn-default">Отправить заново</button>'
+        }
+    }
+
+    function priceFormatter(value, row) {
+        if (row.currency && row.final_price) {
+            return "<span style='font-size: 120%; font-weight: bold;' class='text-primary'>"+row.final_price+" "+row.currency+"</span>";
+        } else {
         }
     }
 
