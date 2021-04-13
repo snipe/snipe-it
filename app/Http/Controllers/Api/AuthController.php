@@ -45,6 +45,7 @@ class AuthController extends Controller
                             $request->name, $request->scopes ?: []
                         );
                         $arr = [
+                            "name" => $user->getFullNameAttribute(),
                             "username"=>$login,
                             "token"=>$token->accessToken
                         ];
