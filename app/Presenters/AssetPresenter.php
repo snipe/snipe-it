@@ -316,6 +316,17 @@ class AssetPresenter extends Presenter
             "formatter" => "hardwareInOutFormatter",
         ];
 
+        $layout[] = [
+            "field" => "review",
+            "searchable" => false,
+            "sortable" => false,
+            "switchable" => true,
+            "title" => "Проверка",
+            "visible" => true,
+            "formatter" => "reviewFormatter",
+        ];
+
+
 
         $layout[] = [
             "field" => "actions",
@@ -324,6 +335,7 @@ class AssetPresenter extends Presenter
             "switchable" => false,
             "title" => trans('table.actions'),
             "formatter" => "hardwareActionsFormatter",
+            "events"=> "operateEvents"
         ];
 
         return json_encode($layout);

@@ -13,6 +13,7 @@ use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Location;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use App\Models\User;
 use Artisan;
 use Auth;
@@ -534,6 +535,12 @@ class AssetsController extends Controller
                 }
             }
 
+
+            $status_inv = Statuslabel::where('name', 'Ожидает инвентаризации')->first();
+            $status_review= Statuslabel::where('name', 'Ожидает проверки')->first();
+            if ($asset->status_id == $status_inv->id && $request->filled('asset_tag')){
+                $asset->status_id=$status_review->id;
+            }
 
             if ($asset->save()) {
 
