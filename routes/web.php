@@ -501,7 +501,7 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 
-//Route::group([ 'prefix' => 'auth', 'middleware' => 'web'], function () {
+//Route::group(['prefix' => 'auth', 'middleware' => 'web'], function () {
 Route::group([ 'middleware' => 'web'], function () {
     Route::get(
         'auth',

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Config;
 use Input;
+use Laravel\Passport\TokenRepository;
 use Redirect;
 use Log;
 use DB;
@@ -24,10 +25,11 @@ class AuthController extends Controller
 //     *
 //     * @return void
 //     */
-//    public function __construct()
-//    {
+    public function __construct(TokenRepository $tokenRepository)
+    {
 //        $this->middleware('guest');
-//    }
+        $this->tokenRepository = $tokenRepository;
+    }
 
 
     public function getToken(Request $request) {
@@ -39,10 +41,12 @@ class AuthController extends Controller
                 try {
                     $user = User::where('username', '=', $login)->whereNull('deleted_at')->where('activated', '=', '1')->first();
                     if(!is_null($user)) {
-                        $key_row = DB::table('oauth_access_tokens')->where('user_id', $user->id)->first();
+                        $token =$user->createToken(
+                            $request->name, $request->scopes ?: []
+                        );
                         $arr = [
                             "username"=>$login,
-                            "api_key"=>$key_row->id
+                            "token"=>$token->accessToken
                         ];
                         return json_encode($arr);
                     }
