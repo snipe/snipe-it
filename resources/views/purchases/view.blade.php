@@ -105,7 +105,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <strong>
-                                {{ trans('general.order_number') }}
+                                Название
                             </strong>
                         </div>
                         <div class="col-md-6">
@@ -117,11 +117,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <strong>
-                                    Счет
+                                    Файл счета
                                 </strong>
                             </div>
                             <div class="col-md-6">
-                                {{ $purchase->invoice_file }}
+                                <a href="/uploads/purchases/{{ $purchase->invoice_file }}">Скачать</a>
                             </div>
                         </div>
                     @endif
@@ -133,7 +133,7 @@
                                 </strong>
                             </div>
                             <div class="col-md-6">
-                                {{ $purchase->bitrix_id }}
+                                <a href='https://bitrix.legis-s.ru/services/lists/52/element/0/{{ $purchase->bitrix_id }}/?list_section_id='>{{ $purchase->bitrix_id }}</a>
                             </div>
                         </div>
                     @endif

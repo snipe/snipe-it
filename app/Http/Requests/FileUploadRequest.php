@@ -63,7 +63,7 @@ class FileUploadRequest extends Request
             $file = $this->file('invoice_file');
             $filename = $file->getClientOriginalName();
             $ext = $file->getClientOriginalExtension();
-            $file_name = $filename.'-'.str_random(6).'.'.$ext;
+            $file_name = 'file_'.$filename.'-'.str_random(6).'.'.$ext;
             \Log::debug('File name will be: '.$file_name);
 
             \Log::debug('Trying to upload to: '.$path.'/'.$file_name);

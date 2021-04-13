@@ -11,6 +11,7 @@ use App\Models\Asset;
 use App\Models\Consumable;
 use App\Models\Location;
 use App\Models\Statuslabel;
+use DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\PurchasesTransformer;
@@ -96,10 +97,12 @@ class PurchasesController extends Controller
         $this->authorize('view', Location::class);
         $purchase = Purchase::findOrFail($purchaseId);
         $purchase->status = "paid";
+        $purchase->bitrix_result_at = new DateTime();
         if ($purchase->save()) {
             $assets = Asset::where('purchase_id', $purchase->id)->get();
             if (count($assets) > 0) {
                 $status = Statuslabel::where('name', 'Доступные')->first();
+//                $status = Statuslabel::where('name', 'Ожидает инвентаризации')->first();
                 foreach ($assets as &$value) {
                     $value->status_id = $status->id;
                     $value->save();
@@ -145,6 +148,7 @@ class PurchasesController extends Controller
         $this->authorize('view', Location::class);
         $purchase = Purchase::findOrFail($purchaseId);
         $purchase->status = "rejected";
+        $purchase->bitrix_result_at =new DateTime();
         if ($purchase->save()) {
             $status = Statuslabel::where('name', 'Отклонено')->first();
             $assets = Asset::where('purchase_id', $purchase->id)->get();

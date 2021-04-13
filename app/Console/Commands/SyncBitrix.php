@@ -95,7 +95,10 @@ class SyncBitrix extends Command
         $bitrix_objects = $bitrix_objects["result"];
         $count = 0 ;
         foreach ($bitrix_objects as &$value) {
-            if($value["TABEL_ID"] && $value["UF_TYPE"] == 455 && $value["DELETED"] != 1){
+            if ($value["DELETED"] == 1) {
+                continue;
+            }
+            if($value["TABEL_ID"] && $value["UF_TYPE"] == 455 || $value["UF_TYPE"] == 739){
                 $count++;
 
                 $bitrix_user =  $value["ASSIGNED_BY_ID"];
