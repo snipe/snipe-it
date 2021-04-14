@@ -106,7 +106,7 @@
                 <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="username">{{ trans('admin/users/table.username') }}</label>
                   <div class="col-md-6{{  (\App\Helpers\Helper::checkIfRequired($user, 'username')) ? ' required' : '' }}">
-                    @if ($user->ldap_import!='1')
+                    @if ($user->ldap_import!='1' || str_contains(Route::currentRouteName(), 'clone'))
                       <input
                         class="form-control"
                         type="text"
@@ -137,7 +137,7 @@
                     {{ trans('admin/users/table.password') }}
                   </label>
                   <div class="col-md-6{{  (\App\Helpers\Helper::checkIfRequired($user, 'password')) ? ' required' : '' }}">
-                    @if ($user->ldap_import!='1')
+                    @if ($user->ldap_import!='1' || str_contains(Route::currentRouteName(), 'clone') )
                       <input
                         type="password"
                         name="password"
@@ -161,7 +161,7 @@
                   </div>
                 </div>
 
-                @if ($user->ldap_import!='1')
+                @if ($user->ldap_import!='1' || str_contains(Route::currentRouteName(), 'clone'))
                 <!-- Password Confirm -->
                 <div class="form-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="password_confirmation">
