@@ -140,6 +140,30 @@ class PurchasesController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, $purchase->getErrors()));
     }
 
+
+    /**
+     * Display a listing of the resource.
+     * @return \Illuminate\Http\Response
+     */
+    public function bitrix_task(Request $request, $purchaseId = null,$bitrix_task= null)
+    {
+        $this->authorize('view', Location::class);
+        $purchase = Purchase::findOrFail($purchaseId);
+        $purchase->bitrix_task_id = $bitrix_task;
+        if ($purchase->save()) {
+            return response()->json(
+                Helper::formatStandardApiResponse(
+                    'success',
+                    (new PurchasesTransformer)->transformPurchase($purchase),
+                    trans('admin/locations/message.update.success')
+                )
+            );
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', null, $purchase->getErrors()));
+    }
+
+
     /**
      * Display a listing of the resource.
      * @return \Illuminate\Http\Response

@@ -63,6 +63,7 @@ class Purchase extends SnipeModel
         "user_id",
         "bitrix_result_at",
         "verified_at",
+        "bitrix_task_id"
     ];
 
     use Searchable;

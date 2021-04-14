@@ -889,6 +889,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
                 'uses' => 'PurchasesController@resend'
             ]
         );
+
+        Route::post('{purchase}/bitrix_task/{bitrix_task}',
+            [
+                'as' => 'api.purchases.paid',
+                'uses' => 'PurchasesController@bitrix_task'
+            ]
+        );
     }); // Users group
 
 
