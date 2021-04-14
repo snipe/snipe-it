@@ -177,11 +177,11 @@ View Assets for  {{ $user->present()->fullName() }}
               </tr>
             </thead>
             <tbody>
-              @foreach ($user->consumables as $consumable)
-              <tr>
-                <td>{{ $consumable->name }}</td>
-              </tr>
-              @endforeach
+{{--              @foreach ($user->consumables as $consumable)--}}
+{{--              <tr>--}}
+{{--                <td>{{ $consumable->name }}</td>--}}
+{{--              </tr>--}}
+{{--              @endforeach--}}
             </tbody>
           </table>
         </div>
