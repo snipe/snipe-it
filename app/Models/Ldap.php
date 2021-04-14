@@ -269,7 +269,11 @@ class Ldap extends Model
 
             if ($filter != '' && substr($filter, 0, 1) != '(') { // wrap parens around NON-EMPTY filters that DON'T have them, for back-compatibility with AdLdap2-based filters
                 $filter = "($filter)";
+            } elseif ($filter == '') {
+                $filter = "(cn=*)";
             }
+
+
             $search_results = ldap_search($ldapconn, $base_dn, $filter);
 
             if (!$search_results) {
