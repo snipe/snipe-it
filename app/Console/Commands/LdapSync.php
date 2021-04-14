@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Department;
 use Illuminate\Console\Command;
 use App\Models\Setting;
 use App\Models\Ldap;
@@ -54,6 +55,7 @@ class LdapSync extends Command
         $ldap_result_phone = Setting::getSettings()->ldap_phone_field;
         $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
         $ldap_result_country      = Setting::getSettings()->ldap_country;
+        $ldap_result_dept = Setting::getSettings()->ldap_dept;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -181,6 +183,13 @@ class LdapSync extends Command
                 $item["telephone"] = isset($results[$i][$ldap_result_phone][0]) ? $results[$i][$ldap_result_phone][0] : "";
                 $item["jobtitle"] = isset($results[$i][$ldap_result_jobtitle][0]) ? $results[$i][$ldap_result_jobtitle][0] : "";
                 $item["country"] = isset($results[$i][$ldap_result_country][0]) ? $results[$i][$ldap_result_country][0] : "";
+                $item["department"] = isset($results[$i][$ldap_result_dept][0]) ? $results[$i][$ldap_result_dept][0] : "";
+
+
+                $department = Department::firstOrCreate([
+                    'name' => $item["department"],
+                ]);
+
 
                 $user = User::where('username', $item["username"])->first();
                 if ($user) {
@@ -202,6 +211,7 @@ class LdapSync extends Command
                 $user->phone = $item["telephone"];
                 $user->jobtitle = $item["jobtitle"];
                 $user->country = $item["country"];
+                $user->department_id = $department->id;
 
                 // Sync activated state for Active Directory.
                 if ( array_key_exists('useraccountcontrol', $results[$i]) ) {
