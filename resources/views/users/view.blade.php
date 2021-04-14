@@ -240,6 +240,12 @@
                     <td>{{ $user->created_at->format('F j, Y h:iA') }}</td>
                   </tr>
                   @endif
+                    @if ($user->bitrix_token)
+                      <tr>
+                        <td>Bitrix token</td>
+                        <td>{{ $user->bitrix_token}}</td>
+                      </tr>
+                    @endif
                     <tr>
                       <td class="text-nowrap">{{ trans('general.login_enabled') }}</td>
                       <td>{{ ($user->activated=='1') ? trans('general.yes') : trans('general.no') }}</td>

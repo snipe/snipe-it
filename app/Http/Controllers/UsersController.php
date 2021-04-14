@@ -36,7 +36,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use URL;
 use View;
-
 /**
  * This controller handles all actions related to Users for
  * the Snipe-IT Asset Management application.
@@ -128,6 +127,12 @@ class UsersController extends Controller
         $user->state = $request->input('state', null);
         $user->country = $request->input('country', null);
         $user->zip = $request->input('zip', null);
+
+        if ($request->filled('new_bitrix_token')) {
+            $user->bitrix_token = Crypt::encryptString($request->input('new_bitrix_token'));
+        }
+
+        $user->bitrix_token = $request->input('new_bitrix_token', null);
 
         // Strip out the superuser permission if the user isn't a superadmin
         $permissions_array = $request->input('permission');
@@ -291,7 +296,9 @@ class UsersController extends Controller
         $user->activated = $request->input('activated', 0);
         $user->zip = $request->input('zip', null);
 
-
+        if ($request->filled('new_bitrix_token')) {
+            $user->bitrix_token = Crypt::encryptString($request->input('new_bitrix_token'));
+        }
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
             ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);

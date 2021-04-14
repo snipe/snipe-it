@@ -14,6 +14,7 @@ use App\Models\Statuslabel;
 use App\Models\User;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
+use Crypt;
 
 class PurchasesController extends Controller
 {
@@ -214,7 +215,14 @@ class PurchasesController extends Controller
             $purchase->save();
 //            $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
 
-            $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/',$params);
+            if ($user->bitrix_token && $user->bitrix_id){
+                $raw_bitrix_token  = Crypt::decryptString($user->bitrix_token);
+                $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/'.$user->bitrix_id.'/'.$raw_bitrix_token.'/lists.element.add.json/',$params);
+
+            }else{
+                $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/',$params);
+
+            }
             $response = $response->getBody()->getContents();
             $purchase->bitrix_result = $response;
             $purchase->save();

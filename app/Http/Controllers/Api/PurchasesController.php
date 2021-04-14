@@ -29,6 +29,7 @@ use App\Http\Transformers\LicensesTransformer;
 use Auth;
 use App\Models\AssetModel;
 use Illuminate\Database\Eloquent\Builder;
+use Crypt;
 
 class PurchasesController extends Controller
 {
@@ -183,7 +184,14 @@ class PurchasesController extends Controller
         /** @var \GuzzleHttp\Client $client */
         $client = new \GuzzleHttp\Client();
 //        $response = $client->request('POST', 'https://bitrixdev.legis-s.ru/rest/1/lp06vc4xgkxjbo3t/lists.element.add.json/',$params);
-        $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/', $params);
+        $user =  Auth::user();
+        if ($user->bitrix_token && $user->bitrix_id){
+            $raw_bitrix_token  = Crypt::decryptString($user->bitrix_token);
+            $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/'.$user->bitrix_id.'/'.$raw_bitrix_token.'/lists.element.add.json/',$params);
+
+        }else{
+            $response = $client->request('POST', 'https://bitrix.legis-s.ru/rest/1/rzrrat22t46msv7v/lists.element.add.json/',$params);
+        }
         $response = $response->getBody()->getContents();
         $bitrix_result = json_decode($response, true);
         $bitrix_id = $bitrix_result["result"];
