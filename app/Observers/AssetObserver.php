@@ -7,7 +7,7 @@ use App\Models\Setting;
 use App\Models\Actionlog;
 use App\Models\Statuslabel;
 use Auth;
-
+use Log;
 class AssetObserver
 {
     /**
@@ -46,33 +46,39 @@ class AssetObserver
         $status_review_wait = Statuslabel::where('name', 'Ожидает проверки')->first();
         $status_inventory_wait = Statuslabel::where('name', 'Ожидает инвентаризации')->first();
         $status_ok = Statuslabel::where('name', 'Доступные')->first();
-        if($asset->purchase && $asset->purchase->status == "review" && $asset->getOriginal()['status_id']==$status_review_wait->id){
-
+        // если все активы из закупки провверены то закупка окончена
+        if($asset->purchase && $asset->getOriginal()['status_id'] == $status_review_wait->id){
+            Log::error('An informational message.$status_review_wait');
             $purchase=$asset->purchase;
             $assets=$purchase->assets;
-            $all_ok = true;
-            foreach ($assets as &$asset) {
-                if ($asset->status_id != $status_ok->id){
-                    $all_ok = false;
+            $all_ok1 = true;
+            foreach ($assets as &$as1) {
+                if ($as1->status_id == $status_ok->id || $as1->id ==$asset->id ){
+                }else{
+                    $all_ok1 = false;
                 }
+
             }
-            if($all_ok){
+            if($all_ok1){
                 $purchase->status="finished";
                 $purchase->save();
             }
         }
+        // если все активы из закупки инвентаризированиа  то закупка уходит на прверку
+//        if($asset->purchase && $asset->purchase->status == "inventory"  && $asset->getOriginal()['status_id']==$status_inventory_wait->id){
+        if($asset->purchase && $asset->getOriginal()['status_id'] == $status_inventory_wait->id){
+            $purchase = $asset->purchase;
+            $assets= $purchase->assets;
+            $all_ok2 = true;
+            foreach ($assets as &$as2) {
+                if ($as2->status_id == $status_review_wait->id || $as2->id ==$asset->id ){
 
-        if($asset->purchase && $asset->purchase->status == "inventory"  && $asset->getOriginal()['status_id']==$status_inventory_wait->id){
-
-            $purchase=$asset->purchase;
-            $assets=$purchase->assets;
-            $all_ok = true;
-            foreach ($assets as &$asset) {
-                if ($asset->status_id != $status_review_wait->id){
-                    $all_ok= false;
+                }else{
+                    $all_ok2 = false;
                 }
+
             }
-            if($all_ok){
+            if($all_ok2){
                 $purchase->status="review";
                 $purchase->save();
             }
