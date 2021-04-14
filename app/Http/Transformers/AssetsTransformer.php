@@ -84,6 +84,7 @@ class AssetsTransformer
             'checkout_counter' => (int) $asset->checkout_counter,
             'requests_counter' => (int) $asset->requests_counter,
             'user_can_checkout' => (bool) $asset->availableForCheckout(),
+            'user_can_review' => (bool) $asset->availableForReview(),
             'purchase_id' => (int) $asset->purchase_id,
             'quality' => (int) $asset->quality,
             'nds' => (int) $asset->nds,
@@ -127,6 +128,7 @@ class AssetsTransformer
             'restore' => false,
             'update' => (bool) Gate::allows('update', Asset::class),
             'delete' => (bool) Gate::allows('delete', Asset::class),
+            'review' => (bool) Gate::allows('review', Asset::class),
         ];
 
         if ($asset->deleted_at!='') {

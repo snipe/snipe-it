@@ -202,6 +202,18 @@ class Asset extends Depreciable
         return false;
     }
 
+    public function availableForReview()
+    {
+        $status = Statuslabel::where('name', 'Ожидает проверки')->first();
+        if ($this->status_id == $status->id){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+
     /**
      * Checkout asset
      * @param User $user

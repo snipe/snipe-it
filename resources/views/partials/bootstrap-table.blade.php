@@ -274,6 +274,15 @@
     }
 
 
+
+    function reviewFormatter(value, row) {
+        if ((row.available_actions.review == true) && (row.user_can_review == true)) {
+            return '<button type="button" class="btn btn-primary btn-sm review">Проверено</button>';
+        }else{
+            return "";
+        }
+    }
+
     // We need a special formatter for license seats, since they don't work exactly the same
     // Checkouts need the license ID, checkins need the specific seat ID
 
@@ -513,6 +522,15 @@
     function purchaseStatusFormatter(value, row) {
         if (value) {
             switch (value) {
+                case "inventory":
+                    return '<span class="label label-warning">В процессе инвентаризации</span>';
+                    break;
+                case "review":
+                    return '<span class="label label-warning">В процессе проверки</span>';
+                    break;
+                case "finished":
+                    return '<span class="label label-success">Завершено</span>';
+                    break;
                 case "rejected":
                     return '<span class="label label-danger">Отклонено</span>';
                     break;
@@ -770,6 +788,20 @@
                 $.ajax({
                     url: '/api/v1/purchases/' + row.id + '/resend',
                     {{--url: '{{ route('api.purchases.resend', ['id'=> row.id]) }}',--}}
+                    method: "POST",
+                    headers: {
+                        "X-Requested-With": 'XMLHttpRequest',
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function () {
+                        $(".table").bootstrapTable('refresh');
+                    }
+                });
+            },
+            'click .review': function (e, value, row, index) {
+                console.log(row);
+                $.ajax({
+                    url: '/api/v1/hardware/' + row.id + '/review',
                     method: "POST",
                     headers: {
                         "X-Requested-With": 'XMLHttpRequest',

@@ -15,6 +15,7 @@ use App\Models\CustomField;
 use App\Models\Import;
 use App\Models\Location;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use App\Models\User;
 use Artisan;
 use Auth;
@@ -324,6 +325,14 @@ class AssetsController extends Controller
         // If the box isn't checked, it's not in the request at all.
         $asset->requestable = $request->filled('requestable');
         $asset->rtd_location_id = $request->input('rtd_location_id', null);
+
+
+
+        $status_inv = Statuslabel::where('name', 'Ожидает инвентаризации')->first();
+        $status_review = Statuslabel::where('name', 'Ожидает проверки')->first();
+        if ($asset->status_id == $status_inv->id && $request->filled('asset_tag')){
+            $asset->status_id=$status_review->id;
+        }
 
         if ($asset->assigned_to=='') {
             $asset->location_id = $request->input('rtd_location_id', null);
