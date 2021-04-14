@@ -892,7 +892,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
 
         Route::post('{purchase}/bitrix_task/{bitrix_task}',
             [
-                'as' => 'api.purchases.paid',
+                'as' => 'api.purchases.bitrix_task',
                 'uses' => 'PurchasesController@bitrix_task'
             ]
         );
