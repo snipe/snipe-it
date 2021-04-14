@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\Actionlog;
+use App\Models\Statuslabel;
 use Auth;
 
 class AssetObserver
@@ -33,7 +34,6 @@ class AssetObserver
                 }
             }
 
-
             $logAction = new Actionlog();
             $logAction->item_type = Asset::class;
             $logAction->item_id = $asset->id;
@@ -42,7 +42,41 @@ class AssetObserver
             $logAction->log_meta = json_encode($changed);
             $logAction->logaction('update');
 
-        } 
+        }
+        $status_review_wait = Statuslabel::where('name', 'Ожидает проверки')->first();
+        $status_inventory_wait = Statuslabel::where('name', 'Ожидает инвентаризации')->first();
+        $status_ok = Statuslabel::where('name', 'Доступные')->first();
+        if($asset->purchase && $asset->purchase->status == "review" && $asset->getOriginal()['status_id']==$status_review_wait->id){
+
+            $purchase=$asset->purchase;
+            $assets=$purchase->assets;
+            $all_ok = true;
+            foreach ($assets as &$asset) {
+                if ($asset->status_id != $status_ok->id){
+                    $all_ok = false;
+                }
+            }
+            if($all_ok){
+                $purchase->status="finished";
+                $purchase->save();
+            }
+        }
+
+        if($asset->purchase && $asset->purchase->status == "inventory"  && $asset->getOriginal()['status_id']==$status_inventory_wait->id){
+
+            $purchase=$asset->purchase;
+            $assets=$purchase->assets;
+            $all_ok = true;
+            foreach ($assets as &$asset) {
+                if ($asset->status_id != $status_review_wait->id){
+                    $all_ok= false;
+                }
+            }
+            if($all_ok){
+                $purchase->status="review";
+                $purchase->save();
+            }
+        }
 
     }
 

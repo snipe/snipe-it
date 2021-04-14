@@ -288,6 +288,7 @@ class AssetsController extends Controller
                 break;
             case 'location':
                 $assets->OrderLocation($order);
+                break;
             case 'rtd_location':
                 $assets->OrderRtdLocation($order);
                 break;
@@ -368,6 +369,26 @@ class AssetsController extends Controller
 
 
     }
+
+    /**
+     * Returns JSON with information about an asset for detail view.
+     *
+     * @param int $assetId
+     * @return JsonResponse
+     * @since [v4.0]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     */
+    public function review($id)
+    {
+        if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()->withCount('checkins as checkins_count', 'checkouts as checkouts_count', 'userRequests as userRequests_count')->findOrFail($id)) {
+            $this->authorize('review', Asset::class);
+            $status = Statuslabel::where('name', 'Доступные')->first();
+            $asset->status_id = $status->id;
+            $asset ->save();
+            return (new AssetsTransformer)->transformAsset($asset);
+        }
+    }
+
 
 
     /**

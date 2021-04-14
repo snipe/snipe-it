@@ -523,16 +523,13 @@
         if (value) {
             switch (value) {
                 case "inventory":
-                    return '<span class="label label-warning">Инвентаризация</span>';
-                    break;
-                case "inventory-finished":
-                    return '<span class="label label-primary">Инвентаризировано</span>';
+                    return '<span class="label label-warning">В процессе инвентаризации</span>';
                     break;
                 case "review":
-                    return '<span class="label label-warning">Проверка</span>';
+                    return '<span class="label label-warning">В процессе проверки</span>';
                     break;
                 case "finished":
-                    return '<span class="label label-success">Готово</span>';
+                    return '<span class="label label-success">Завершено</span>';
                     break;
                 case "rejected":
                     return '<span class="label label-danger">Отклонено</span>';
@@ -803,18 +800,17 @@
             },
             'click .review': function (e, value, row, index) {
                 console.log(row);
-                {{--$.ajax({--}}
-                {{--    url: '/api/v1/purchases/' + row.id + '/resend',--}}
-                {{--    --}}{{--url: '{{ route('api.purchases.resend', ['id'=> row.id]) }}',--}}
-                {{--    method: "POST",--}}
-                {{--    headers: {--}}
-                {{--        "X-Requested-With": 'XMLHttpRequest',--}}
-                {{--        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')--}}
-                {{--    },--}}
-                {{--    success: function () {--}}
-                {{--        $(".table").bootstrapTable('refresh');--}}
-                {{--    }--}}
-                {{--});--}}
+                $.ajax({
+                    url: '/api/v1/hardware/' + row.id + '/review',
+                    method: "POST",
+                    headers: {
+                        "X-Requested-With": 'XMLHttpRequest',
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function () {
+                        $(".table").bootstrapTable('refresh');
+                    }
+                });
             },
         }
     });

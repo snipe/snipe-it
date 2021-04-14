@@ -106,6 +106,13 @@ return array(
             'display'    => true,
         ),
 
+        array(
+            'permission' => 'assets.review',
+            'label'      => 'Review',
+            'note'       => '',
+            'display'    => true,
+        ),
+
     ),
 
     'Accessories' => array(

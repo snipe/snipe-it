@@ -380,6 +380,13 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
             ]
         );
 
+        Route::post('{asset_id}/review',
+            [
+                'as' => 'api.assets.review',
+                'uses' => 'AssetsController@review'
+            ]
+        );
+
     });
 
     /*--- Asset Maintenances API ---*/
@@ -407,7 +414,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
                     'show' => 'api.assets.show',
                     'store' => 'api.assets.store',
                     'update' => 'api.assets.update',
-                    'destroy' => 'api.assets.destroy'
+                    'destroy' => 'api.assets.destroy',
                 ],
             'except' => ['create', 'edit'],
             'parameters' => ['asset' => 'asset_id']
