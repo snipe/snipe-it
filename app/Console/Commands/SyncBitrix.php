@@ -111,6 +111,7 @@ class SyncBitrix extends Command
                         'city' => $value["ADDRESS_CITY"],
                         'address' => $value["ADDRESS"],
                         'address2' => $value["ADDRESS_2"],
+                        'coordinates' => $value["UF_MAP"]
                     ]
                 );
                 if (!$sklad_user) {

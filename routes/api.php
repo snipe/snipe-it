@@ -852,6 +852,21 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'api'], fun
     ); // Inventory resource
 
 
+
+
+    /*--- Map API ---*/
+
+    Route::resource('map', 'MapController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.map.index',
+                ],
+//            'except' => ['create', 'edit'],
+//            'parameters' => ['purchase' => 'purchase_id']
+        ]
+    ); // Purchases resource
+
     /*--- Purchases API ---*/
 
     Route::resource('purchases', 'PurchasesController',

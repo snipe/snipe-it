@@ -769,6 +769,13 @@
                     </a>
                 </li>
 
+                    <li{!! (Request::is('map/*') ? ' class="active"' : '') !!}>
+                        <a href="{{ route('map.index') }}">
+                            <i class="fa fa-map"></i>
+                            <span>Карта</span>
+                        </a>
+                    </li>
+
                 @can('viewRequestable', \App\Models\Asset::class)
                     <li{!! (Request::is('account/requestable-assets') ? ' class="active"' : '') !!}>
                         <a href="{{ route('requestable-assets') }}">

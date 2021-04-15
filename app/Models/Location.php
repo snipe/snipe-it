@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
@@ -17,26 +18,27 @@ class Location extends SnipeModel
     protected $presenter = 'App\Presenters\LocationPresenter';
     use Presentable;
     use SoftDeletes;
+
     protected $dates = ['deleted_at'];
     protected $table = 'locations';
     protected $rules = array(
-      'name'        => 'required|min:2|max:255|unique_undeleted',
-      'city'        => 'min:2|max:255|nullable',
-      'country'     => 'min:2|max:2|nullable',
-      'address'         => 'max:255|nullable',
-      'address2'        => 'max:255|nullable',
-      'zip'         => 'min:3|max:10|nullable',
-      'manager_id'  => 'exists:users,id|nullable',
-        'bitrix_id'  => 'min:1|max:10|nullable'
+        'name' => 'required|min:2|max:255|unique_undeleted',
+        'city' => 'min:2|max:255|nullable',
+        'country' => 'min:2|max:2|nullable',
+        'address' => 'max:255|nullable',
+        'address2' => 'max:255|nullable',
+        'zip' => 'min:3|max:10|nullable',
+        'manager_id' => 'exists:users,id|nullable',
+        'bitrix_id' => 'min:1|max:10|nullable'
     );
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var boolean
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     use UniqueUndeletedTrait;
@@ -61,26 +63,27 @@ class Location extends SnipeModel
         'manager_id',
         'image',
         'bitrix_id',
-        'notes'
+        'notes',
+        'coordinates'
     ];
     protected $hidden = ['user_id'];
 
     use Searchable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['name', 'address', 'city', 'state', 'zip', 'created_at'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [
-      'parent' => ['name']
+        'parent' => ['name']
     ];
 
     public function users()
@@ -92,9 +95,9 @@ class Location extends SnipeModel
     {
         return $this->hasMany('\App\Models\Asset', 'location_id')
             ->whereHas('assetstatus', function ($query) {
-                    $query->where('status_labels.deployable', '=', 1)
-                        ->orWhere('status_labels.pending', '=', 1)
-                        ->orWhere('status_labels.archived', '=', 0);
+                $query->where('status_labels.deployable', '=', 1)
+                    ->orWhere('status_labels.pending', '=', 1)
+                    ->orWhere('status_labels.archived', '=', 0);
             });
     }
 
@@ -116,7 +119,7 @@ class Location extends SnipeModel
 
     public function parent()
     {
-        return $this->belongsTo('\App\Models\Location', 'parent_id','id')
+        return $this->belongsTo('\App\Models\Location', 'parent_id', 'id')
             ->with('parent');
     }
 
@@ -125,8 +128,9 @@ class Location extends SnipeModel
         return $this->belongsTo('\App\Models\User', 'manager_id');
     }
 
-    public function children() {
-        return $this->hasMany('\App\Models\Location','parent_id')
+    public function children()
+    {
+        return $this->hasMany('\App\Models\Location', 'parent_id')
             ->with('children');
     }
 
@@ -145,55 +149,54 @@ class Location extends SnipeModel
     /**
      * Query builder scope to order on parent
      *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
+     * @param Illuminate\Database\Query\Builder $query Query builder instance
+     * @param text $order Order
      *
      * @return Illuminate\Database\Query\Builder          Modified query builder
      */
 
-    public static function indenter($locations_with_children, $parent_id = null, $prefix = '') {
-        $results = Array();
+    public static function indenter($locations_with_children, $parent_id = null, $prefix = '')
+    {
+        $results = array();
 
-        
+
         if (!array_key_exists($parent_id, $locations_with_children)) {
             return [];
         }
 
 
         foreach ($locations_with_children[$parent_id] as $location) {
-            $location->use_text = $prefix.' '.$location->name;
-            $location->use_image = ($location->image) ? url('/').'/uploads/locations/'.$location->image : null;
+            $location->use_text = $prefix . ' ' . $location->name;
+            $location->use_image = ($location->image) ? url('/') . '/uploads/locations/' . $location->image : null;
             $results[] = $location;
             //now append the children. (if we have any)
             if (array_key_exists($location->id, $locations_with_children)) {
-                $results = array_merge($results, Location::indenter($locations_with_children, $location->id,$prefix.'--'));
+                $results = array_merge($results, Location::indenter($locations_with_children, $location->id, $prefix . '--'));
             }
         }
         return $results;
     }
 
 
-
-
     /**
-    * Query builder scope to order on parent
-    *
-    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
-    *
-    * @return Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on parent
+     *
+     * @param Illuminate\Database\Query\Builder $query Query builder instance
+     * @param text $order Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderParent($query, $order)
     {
-      // Left join here, or it will only return results with parents
+        // Left join here, or it will only return results with parents
         return $query->leftJoin('locations as parent_loc', 'locations.parent_id', '=', 'parent_loc.id')->orderBy('parent_loc.name', $order);
     }
 
     /**
      * Query builder scope to order on manager name
      *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
+     * @param \Illuminate\Database\Query\Builder $query Query builder instance
+     * @param text $order Order
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
@@ -202,7 +205,8 @@ class Location extends SnipeModel
         return $query->leftJoin('users as location_user', 'locations.manager_id', '=', 'location_user.id')->orderBy('location_user.first_name', $order)->orderBy('location_user.last_name', $order);
     }
 
-    public function inventories() {
+    public function inventories()
+    {
         return $this->hasMany('\App\Models\Inventory');
     }
 

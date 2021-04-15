@@ -18,6 +18,7 @@ class LocationsTransformer
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
+
     public function transformLocation(Location $location = null)
     {
         if ($location) {
@@ -69,6 +70,55 @@ class LocationsTransformer
 
     }
 
+    public function transformCollectionForMap(Collection $locations)
+    {
+        $array = array();
+        foreach ($locations as $location) {
+            $array[] = self::transformForMap($location);
+        }
+        $objects_array['type'] = "FeatureCollection";
+        $objects_array['features'] = $array;
+        return $objects_array;
 
+    }
+
+    public function transformForMap(Location $location = null)
+    {
+        if ($location) {
+            $cords= [];
+            if ($location->coordinates){
+                $cords = explode(",", $location->coordinates);
+            }
+            $count = 0 ;
+            if ($location->assets){
+                $assets = $location->assets;
+                foreach ($assets as $asset) {
+                    $asset_tag = $asset->asset_tag;
+                    $first_s = substr( $asset_tag, 0, 1 );
+                    if ($first_s == "I" || $first_s =="X" || strlen($asset_tag)>7){
+                        $count++;
+                    }
+                }
+            }
+
+            $array = [
+                "id" => (int) $location->id,
+                "type"=> "Feature",
+                "geometry"=> [
+                    "type"=> "Point",
+                    "coordinates"=>$cords,
+                ],
+                "properties"=> [
+                    "balloonContentHeader"=>e($location->name),
+                    "balloonContentBody" =>  "Адрес: ".e($location->address)."<br>"."Активов: ".e($location->assets_count)."<br>"."Инвентаризированно: ".$count,
+                    "balloonContentFooter"=>"",
+                    "hintContent"=> e($location->name)
+                ]
+            ];
+            return $array;
+        }else{
+            return [];
+        }
+    }
 
 }
