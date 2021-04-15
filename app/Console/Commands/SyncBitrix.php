@@ -96,6 +96,17 @@ class SyncBitrix extends Command
         $count = 0 ;
         foreach ($bitrix_objects as &$value) {
             if ($value["DELETED"] == 1) {
+                $location = Location::where('bitrix_id',$value["ID"])->first();
+                if ($location){
+                    $location->update(  [
+                        'name' => "[Закрыто]".$value["NAME"],
+                        'city' => $value["ADDRESS_CITY"],
+                        'address' => $value["ADDRESS"],
+                        'address2' => $value["ADDRESS_2"],
+                        'coordinates' => $value["UF_MAP"]
+                    ]);
+                    $location->save();
+                }
                 continue;
             }
             if($value["TABEL_ID"] && $value["UF_TYPE"] == 455 || $value["UF_TYPE"] == 739){
