@@ -151,17 +151,20 @@ class CustomFieldsController extends Controller
      */
     public function destroy($field_id)
     {
-        $field = CustomField::find($field_id);
+        if ($field = CustomField::find($field_id)) {
 
             $this->authorize('delete', $field);
 
-        if ($field->fieldset->count()>0) {
+            if (($field->fieldset) && ($field->fieldset->count() > 0)) {
                 return redirect()->back()->withErrors(['message' => "Field is in-use"]);
             }
             $field->delete();
             return redirect()->route("fields.index")
                 ->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
+
+        return redirect()->back()->withErrors(['message' => "Field does not exist"]);
+    }
 
 
     /**
