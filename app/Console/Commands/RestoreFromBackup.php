@@ -180,11 +180,13 @@ class RestoreFromBackup extends Command
         $pipes = [];
 
         // FIXME - absolutely can *NOT* be hardcoding paths like this!!!!!!! But I don't know how to do it right? (Maybe get the user's ENV and append the MYSQL_PWD to it?)
-        $proc_results = proc_open("/usr/local/Cellar/mysql@5.7/5.7.32/bin/mysql -h ".escapeshellarg(config('database.connections.mysql.host'))." -u ".escapeshellarg(config('database.connections.mysql.username'))." ".escapeshellarg(config('database.connections.mysql.database')), // yanked -p since we pass via ENV
+        $env_vars = getenv();
+        $env_vars['MYSQL_PWD'] = config("database.connections.mysql.password");
+        $proc_results = proc_open("mysql -h ".escapeshellarg(config('database.connections.mysql.host'))." -u ".escapeshellarg(config('database.connections.mysql.username'))." ".escapeshellarg(config('database.connections.mysql.database')), // yanked -p since we pass via ENV
                                   [0 => ['pipe','r'],1 => ['pipe','w'],2 => ['pipe','w']],
                                   $pipes,
                                   null,
-                                  ['MYSQL_PWD' => config("database.connections.mysql.password")]); // this is not super-duper awesome-secure, but definitely more secure than showing it on the CLI, or dropping temporary files with passwords in them.
+                                  $env_vars); // this is not super-duper awesome-secure, but definitely more secure than showing it on the CLI, or dropping temporary files with passwords in them.
         if($proc_results === false) {
             return $this->error("Unable to invoke mysql via CLI");
         }
