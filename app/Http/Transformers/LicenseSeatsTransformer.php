@@ -20,12 +20,11 @@ class LicenseSeatsTransformer
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformLicenseSeat (LicenseSeat $seat, $seat_count)
+    public function transformLicenseSeat (LicenseSeat $seat, $seat_count=0)
     {
         $array = [
             'id' => (int) $seat->id,
             'license_id' => (int) $seat->license->id,
-            'name' => 'Seat '.$seat_count,
             'assigned_user' => ($seat->user) ? [
                 'id' => (int) $seat->user->id,
                 'name'=> e($seat->user->present()->fullName),
@@ -48,6 +47,10 @@ class LicenseSeatsTransformer
             'reassignable' => (bool) $seat->license->reassignable,
             'user_can_checkout' => (($seat->assigned_to=='') && ($seat->asset_id=='')),
         ];
+
+        if($seat_count != 0) {
+            $array['name'] = 'Seat '.$seat_count;
+        }
 
         $permissions_array['available_actions'] = [
             'checkout' => Gate::allows('checkout', License::class),

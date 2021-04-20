@@ -120,8 +120,10 @@ class AssetImporter extends ItemImporter
             $this->log('Asset ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
 
             // If we have a target to checkout to, lets do so.
+            //-- user_id is a property of the abstract class Importer, which this class inherits from and it's setted by
+            //-- the class that needs to use it (command importer or GUI importer inside the project).
             if(isset($target)) {
-                $asset->fresh()->checkOut($target);
+                $asset->fresh()->checkOut($target, $this->user_id);
             }
             return;
         }

@@ -141,6 +141,7 @@ class Saml
      * Builds settings from Snipe-IT for OneLogin_Saml2_Auth.
      * 
      * @author Johnson Yi <jyi.dev@outlook.com>
+     * @author Michael Pietsch <skywalker-11@mi-pietsch.de>
      * 
      * @since 5.0.0
      *
@@ -162,6 +163,11 @@ class Saml
             data_set($settings, 'sp.singleLogoutService.url', route('saml.sls'));
             data_set($settings, 'sp.x509cert', $setting->saml_sp_x509cert);
             data_set($settings, 'sp.privateKey', $setting->saml_sp_privatekey);
+            if(!empty($setting->saml_sp_x509certNew)) {
+                data_set($settings, 'sp.x509certNew', $setting->saml_sp_x509certNew);
+            } else {
+                data_set($settings, 'sp.x509certNew', "");
+            }
 
             if (!empty(data_get($settings, 'sp.privateKey'))) {
                 data_set($settings, 'security.logoutRequestSigned', true);
@@ -214,7 +220,6 @@ class Saml
                     }
                 }
             }
-
             $this->_settings = $settings;
         }
     }

@@ -85,7 +85,7 @@
             <td>{{ $asset->serial }}</td>
             <td>
                 {{ $asset->last_checkout }}</td>
-            <td><img height="20%" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}"></img></td>
+            <td><div><img height="20%" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}"></img></div></td>
         </tr>
             @if($settings->show_assigned_assets)
                 @php
@@ -145,7 +145,7 @@
                     @can('viewKeys', $license)
                         {{ $license->serial }}
                     @else
-                        ------------
+                       <i class="fa-lock" aria-hidden="true"></i> {{ str_repeat('x', 15) }}
                     @endcan
                 </td>
                 <td>{{  $license->assetlog->first()->created_at }}</td>
