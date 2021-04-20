@@ -95,7 +95,14 @@ class CustomFieldsController extends Controller
         $field = new CustomField;
 
         $data = $request->all();
-        $validator = Validator::make($data, $field->validationRules());
+        $regex_format = null;
+        
+        if (str_contains($data["format"], "regex:")){
+            $regex_format = $data["format"];
+        }
+
+        $validator = Validator::make($data, $field->validationRules($regex_format));
+
         if ($validator->fails()) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()));
         }

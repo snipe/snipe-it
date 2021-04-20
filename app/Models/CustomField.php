@@ -353,7 +353,7 @@ class CustomField extends Model
     * @since [v4.1.10]
     * @return array
     */
-    public function validationRules()
+    public function validationRules($regex_format = null)
     {
         return [
             "name" => "required|unique:custom_fields",
@@ -362,7 +362,7 @@ class CustomField extends Model
                 Rule::in(['text', 'listbox',  'textarea', 'checkbox', 'radio'])
             ],
             'format' => [
-                Rule::in(array_merge(array_keys(CustomField::PREDEFINED_FORMATS), CustomField::PREDEFINED_FORMATS))
+                Rule::in(array_merge(array_keys(CustomField::PREDEFINED_FORMATS), CustomField::PREDEFINED_FORMATS, [$regex_format]))
             ],
             'field_encrypted' => "nullable|boolean"
         ];
