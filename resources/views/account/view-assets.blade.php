@@ -221,7 +221,7 @@ View Assets for  {{ $user->present()->fullName() }}
               @foreach ($user->consumables as $consumable)
               <tr>
                 <td>{{ $consumable->name }}</td>
-                <td>{{ $consumable->category->name }}</td>
+                <td>{{ (($consumable->category) ? $consumable->category->name : 'deleted category') }}</td>
               </tr>
               @endforeach
             </tbody>
