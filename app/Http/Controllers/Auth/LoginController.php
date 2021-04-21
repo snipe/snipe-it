@@ -140,8 +140,9 @@ class LoginController extends Controller
      * 
      * @throws \Exception
      */
-    private function loginViaLdap(LdapAd $ldap, Request $request): User
+    private function loginViaLdap(Request $request): User
     {
+        $ldap = \App::make( LdapAd::class);
         try {
             return $ldap->ldapLogin($request->input('username'), $request->input('password'));
         } catch (\Exception $ex) {

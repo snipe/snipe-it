@@ -64,10 +64,9 @@
                            Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user's name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
                         </p>
 
-                        <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Checkout Date, Checkin Date, Name</strong>. Any additional fields will be ignored. </p>
+                        <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
 
-
-                        <p><strong>History should be ordered by date in ascending order.</strong></p>
+                        <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
 
                         <div class="form-group">
                             <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
@@ -118,6 +117,14 @@
                     </div>
                 </div>
 
+                 <!-- Match username -->
+                <div class="form-group">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        {{ Form::checkbox('match_username', '1', Request::old('match_username')) }} Try to match users by username
+                    </div>
+                </div>
 
                </div>
 
