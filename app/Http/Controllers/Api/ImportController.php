@@ -50,6 +50,7 @@ class ImportController extends Controller
                     'application/vnd.ms-excel',
                     'text/csv',
                     'application/csv',
+                    'text/x-Algol68', // because wtf CSV files?
                     'text/plain',
                     'text/comma-separated-values',
                     'text/tsv'))) {
