@@ -1,6 +1,7 @@
 <template>
-
-    <div v-show="processDetail" class="col-md-12">
+  <tr v-show="processDetail">
+    <td colspan="5">
+    <div class="col-md-12">
 
             <div class="row">
                 <div class="dynamic-form-row">
@@ -20,7 +21,7 @@
                         <label for="import-update">Update Existing Values?:</label>
                     </div>
                     <div class="col-md-7 col-xs-12">
-                        <input type="checkbox" class="minimal" name="import-update" v-model="options.update">
+                        <input type="checkbox" class="iCheck minimal" name="import-update" v-model="options.update">
                     </div>
                 </div><!-- /dynamic-form-row -->
 
@@ -94,6 +95,8 @@
 
     </div><!-- /div v-show -->
 
+    </td>
+  </tr>
 </template>
 
 <script>
