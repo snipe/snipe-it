@@ -14,8 +14,7 @@ $config = [
     | one of the channels defined in the "channels" configuration array.
     |
     */
-
-    'default' => 'stack',
+    'default' => env('LOG_CHANNEL', 'stack'),
 
     /*
     |--------------------------------------------------------------------------
