@@ -39,10 +39,9 @@ class CheckoutConsumableNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         $notifyBy = [];
 
@@ -56,7 +55,7 @@ class CheckoutConsumableNotification extends Notification
         if ($this->target instanceof User && $this->target->email != '') {
 
             /**
-             * Send an email if the asset requires acceptance, 
+             * Send an email if the asset requires acceptance,
              * so the user can accept or decline the asset
              */
             if ($this->item->requireAcceptance()) {
@@ -68,7 +67,7 @@ class CheckoutConsumableNotification extends Notification
              */
             if ($this->item->getEula()) {
                 $notifyBy[1] = 'mail';
-            }                  
+            }
 
             /**
              * Send an email if an email should be sent at checkin/checkout
@@ -77,14 +76,14 @@ class CheckoutConsumableNotification extends Notification
             if ((method_exists($this->item, 'checkin_email')) && ($this->item->checkin_email())) {
 
                 $notifyBy[1] = 'mail';
-            }            
+            }
 
         }
 
         return $notifyBy;
     }
 
-    public function toSlack($notifiable)
+    public function toSlack()
     {
         $target = $this->target;
         $admin = $this->admin;
@@ -109,10 +108,9 @@ class CheckoutConsumableNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
 
         \Log::debug($this->item->getImageUrl());
@@ -135,16 +133,4 @@ class CheckoutConsumableNotification extends Notification
 
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
-    }
 }

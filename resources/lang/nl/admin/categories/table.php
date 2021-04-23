@@ -5,6 +5,6 @@ return array(
     'id'      					=> 'ID',
     'parent'   					=> 'Bovenliggend',
     'require_acceptance'      	=> 'Acceptatie',
-    'title'      				=> 'Materiaal Categorie Naam',
+    'title'      				=> 'Asset categorie naam',
 
 );

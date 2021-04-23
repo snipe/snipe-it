@@ -1,18 +1,18 @@
 <?php
 
 return array(
-    'about_models_title'     => 'Tietoja varallismalleista',
-    'about_models_text'           => 'Asset-mallit ovat tapa ryhmitellä identtiset varat. "MBP 2013", "IPhone 6s" jne.',
+    'about_models_title'     => 'Tietoja laitemalleista',
+    'about_models_text'           => 'Laitemalleilla ryhmitellään samankaltaiset laitteet. "Elitebook 820 G3", "IPhone 6s" jne.',
     'deleted'  					        => 'Tämä malli on poistettu. <a href="/hardware/models/:model_id/restore">Vaihda tästä palauttaaksesi sen</a>.',
-    'bulk_delete'               => 'Massa Poista Nimike Malleja',
-    'bulk_delete_help'               => 'Vahvista valittujen omaisuusmallien poistaminen alla olevilla valintaruuduilla. Omaisuusmalleja, joilla on niihin liittyviä nimikkeitä, ei voida poistaa, ennen kuin nimikkeet on liittetty toiseen malliin.',
-    'bulk_delete_warn'          => 'Olet poistamassa :model_count nimike malleja.',
+    'bulk_delete'               => 'Massapoista laitemalleja',
+    'bulk_delete_help'               => 'Käytä alla olevia valintaruutuja vahvistaaksesi valittujen laitemallien poistamisen. Laitemalleja, joissa on niihin liittyviä laitteita, ei voida poistaa ennen kuin laitteet on liitetty toiseen malliin.',
+    'bulk_delete_warn'          => 'Olet poistamassa :model_count laitemallia.',
     'restore'                   => 'Palauta malli',
     'requestable'               => 'Käyttäjät voivat pyytää tätä mallia',
 	'show_mac_address'			      => 'Näytä MAC-osoitekenttä tämän mallin laitteille',
-    'view_deleted'              => 'Näytä poistettu',
+    'view_deleted'              => 'Näytä poistetut',
     'view_models'               => 'Näytä mallit',
-    'fieldset'                  => 'fieldset',
-    'no_custom_field'           => 'Ei muokattuja kenttiä',
+    'fieldset'                  => 'Kenttäsarja',
+    'no_custom_field'           => 'Ei mukautettuja kenttiä',
     'add_default_values'        => 'Lisää oletusarvot',
 );

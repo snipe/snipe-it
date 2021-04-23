@@ -7,5 +7,8 @@
         'view'               => 'Tirohia nga Taipitopito Whakahaere Taonga',
         'repair'             => 'Whakapai',
         'maintenance'        => 'Te tiaki',
-        'upgrade'            => 'Whakapai ake'
+        'upgrade'            => 'Whakapai ake',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

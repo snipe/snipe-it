@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> '關於配件',
-    'about_accessories_text'  			=> '配件是你分派給使用者，但不包含序號(或你不需要追蹤唯一性) 的物品。例如：滑鼠或鍵盤',
     'accessory_category' 				=> '配件類別',
     'accessory_name'  					=> '配件名稱',
     'checkout'  							=> '配件借出',

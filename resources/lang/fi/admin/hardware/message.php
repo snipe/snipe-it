@@ -2,10 +2,10 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite on määritetty käyttökunnottomaksi.
+    'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite  ei ole käytettävävissä.
                         Jos laitteen tila on muuttunut, päivitä laitteen tila sen asetuksista.',
     'does_not_exist' 	=> 'Laitetta ei löydy.',
-    'does_not_exist_or_not_requestable' => 'Hyvä yritys. Tätä omaisuutta ei ole olemassa tai se ei ole tarpeellista.',
+    'does_not_exist_or_not_requestable' => 'Hyvä yritys. Tätä laitetta ei ole tai se ei ole pyydettävissä.',
     'assoc_users'	 	=> 'Tämä laite on luovutettu käyttäjälle joten sitä ei voida poistaa. Palauta laite ensin käyttäjältä ja yritä uudelleen. ',
 
     'create' => array(
@@ -25,8 +25,8 @@ return array(
     ),
 
     'audit' => array(
-        'error'   		=> 'Omaisuuden tarkastus epäonnistui. Yritä uudelleen.',
-        'success' 		=> 'Omaisuuden tarkastus onnistui kirjautuneena.'
+        'error'   		=> 'Laitteen tarkastus epäonnistui. Yritä uudelleen.',
+        'success' 		=> 'Laitteen auditointi kirjattu.'
     ),
 
 
@@ -38,12 +38,12 @@ return array(
     'upload' => array(
         'error'   => 'Tiedostoja ei lähetetty. Ole hyvä ja yritä uudelleen.',
         'success' => 'Tiedostot lähetettiin onnistuneesti.',
-        'nofiles' => 'Et ole valinnut lähetettäviä tiedostoja tai tiedosto, jonka yrität ladata, on liian suuri',
+        'nofiles' => 'Et ole valinnut lähetettäviä tiedostoja tai lataamasi tiedosto on liian suuri',
         'invalidfiles' => 'Yksi tai useampia tiedostoja on liian iso tai sen tiedostotyyppi ei ole sallittu. Sallitut tiedostotyypit ovat png, gif, jpg, doc, docx, pdf, ja txt.',
     ),
 
     'import' => array(
-        'error'                 => 'Jotkin kohteet eivät tuoneet oikein.',
+        'error'                 => 'Joitakin kohteita ei tuotu oikein.',
         'errorDetail'           => 'Seuraavia kohteita ei tuotu virheiden vuoksi.',
         'success'               => "Tiedostosi on tuotu",
         'file_delete_success'   => "Tiedosto on poistettu onnistuneesti",
@@ -54,7 +54,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Oletko varma että haluat poistaa tämän laitteen?',
         'error'   		=> 'Laitteen poistamisessa tapahtui virhe. Yritä uudelleen.',
-        'nothing_updated'   => 'Mitään omaisuutta ei valittu, joten mitään ei poistettu.',
+        'nothing_updated'   => 'Laitetta ei ollut valittuna, joten mitään ei poistettu.',
         'success' 		=> 'Laite poistettu onnistuneesti.'
     ),
 
@@ -62,22 +62,22 @@ return array(
         'error'   		=> 'Laitteen luovutus epäonnistui, yritä uudelleen',
         'success' 		=> 'Laite luovutettu onnistuneesti.',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.',
-        'not_available' => 'Tätä omaisuutta ei ole saatavilla kassalle!',
-        'no_assets_selected' => 'Valitse ainakin yksi nimike listasta'
+        'not_available' => 'Laite ei ole luovutettavissa!',
+        'no_assets_selected' => 'Valitse ainakin yksi laite listasta'
     ),
 
     'checkin' => array(
         'error'   		=> 'Laitteen palautus epäonnistui, yritä uudelleen',
         'success' 		=> 'Laite palautettu onnistuneesti.',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.',
-        'already_checked_in'  => 'Tämä omaisuus on jo tarkistettu.',
+        'already_checked_in'  => 'Tämä laite on jo sisäänkirjattuna.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Varallisuutta ei pyydetty, yritä uudelleen',
-        'success' 		=> 'Omaisuus pyydettiin onnistuneesti.',
-        'canceled'      => 'Checkout-pyyntö peruutettiin onnistuneesti'
+        'error'   		=> 'Laitetta ei pyydetty, yritä uudelleen',
+        'success' 		=> 'Laitetteen pyyntäminen onnistui.',
+        'canceled'      => 'Uloskuittaus-pyyntö peruutettiin onnistuneesti'
     )
 
 );

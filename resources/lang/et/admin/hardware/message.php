@@ -62,7 +62,7 @@ return array(
         'success' 		=> 'Varad võeti edukalt välja.',
         'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.',
         'not_available' => 'See vara pole kontrollimiseks saadaval!',
-        'no_assets_selected' => 'You must select at least one asset from the list'
+        'no_assets_selected' => 'Sa pead valima vähemalt ühe kirje nimekirjast'
     ),
 
     'checkin' => array(

@@ -20,8 +20,13 @@ class Consumable extends SnipeModel
     protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'consumables';
     protected $casts = [
-        'requestable' => 'boolean'
+        'requestable'    => 'boolean',
+        'category_id'    => 'integer',
+        'company_id'     => 'integer',
+        'qty'            => 'integer',
+        'min_amt'        => 'integer',
     ];
+
 
 
     /**

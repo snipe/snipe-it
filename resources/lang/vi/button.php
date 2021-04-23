@@ -12,5 +12,6 @@ return array(
     'submit'  	                => 'Gửi',
     'upload'                    => 'Tải lên',
 	'select_file'				=> 'Chọn tập tin...',
-    'select_files'				=> 'Select Files...',
+    'select_files'				=> 'Chọn files...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

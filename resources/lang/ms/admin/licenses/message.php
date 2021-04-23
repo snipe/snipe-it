@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Harta yang anda ingin sekutukan dengan lesen ini dimiliki oleh orang lain selain dari orang yang dipilih dalam pilihan yang disekutukan.',
     'assoc_users'	 => 'Lesen ini telah diagihkan kepada pengguna dan tidak boleh dihapuskan. Sila semak lesen terlebih dahulu, dan cuba hapus semula.  ',
     'select_asset_or_person' => 'Anda mesti memilih aset atau pengguna, tetapi tidak kedua-duanya.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

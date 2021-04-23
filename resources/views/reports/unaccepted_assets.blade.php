@@ -28,7 +28,6 @@
                 data-show-refresh="true"
                 data-sort-order="asc"
                 id="unacceptedAssetsReport"
-                data-url="{{route('api.maintenances.index') }}"
                 class="table table-striped snipe-table"
                 data-export-options='{
                     "fileName": "maintenance-report-{{ date('Y-m-d') }}",
@@ -49,7 +48,7 @@
               @foreach ($assetsForReport as $assetItem)
                   @if ($assetItem)
                   <tr>
-                    <td>{{ ($assetItem->company) ? $assetItem->company->nam : '' }}</td>
+                    <td>{{ ($assetItem->company) ? $assetItem->company->name : '' }}</td>
                     <td>{{ $assetItem->model->category->name }}</td>
                     <td>{{ $assetItem->model->name }}</td>
                     <td>{!! $assetItem->present()->nameUrl() !!}</td>

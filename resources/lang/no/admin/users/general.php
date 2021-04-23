@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP-konfigurasjonsinnstillingene kan finnes på Admin > innstillinger. Den (Valgfrie) valgte plasseringen angis for alle importerte brukere.',
     'print_assigned'    => 'Skriv ut alt tilordnet',
     'software_user'     => 'Programvare utsjekket til :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Vis bruker :name',
     'usercsv'           => 'CSV-fil',
     'two_factor_admin_optin_help' => 'Gjeldende administrasjonsinnstillinger tillater selektiv håndhevelse av to-faktor autentisering.  ',

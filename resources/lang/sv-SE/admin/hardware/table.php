@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Status',
     'title'      	=> 'Tillgång',
     'image'		=> 'Enhetsbild',
-    'days_without_acceptance' => 'Dagar utan godkännande'
+    'days_without_acceptance' => 'Dagar utan godkännande',
+    'monthly_depreciation' => 'Månatlig avskrivning'
 
 );

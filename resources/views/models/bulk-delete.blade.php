@@ -21,7 +21,7 @@
                 {{csrf_field()}}
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <h3 class="box-title" style="color: red">{{ trans('admin/models/general.bulk_delete_warn', ['model_count' => $valid_count]) }}</h3>
+                        <h2 class="box-title" style="color: red">{{ trans('admin/models/general.bulk_delete_warn', ['model_count' => $valid_count]) }}</h2>
                     </div>
 
                     <div class="box-body">
@@ -34,7 +34,7 @@
                                     </label>
 
                                 </td>
-                                <td class="col-md-1"><i class="fa fa-barcode"></i></td>
+                                <td class="col-md-1"><i class="fa fa-barcode" aria-hidden="true"></i></td>
                                 <td class="col-md-10">Name</td>
                             </tr>
                             </thead>
@@ -55,7 +55,7 @@
 
                     <div class="box-footer text-right">
                         <a class="btn btn-link pull-left" href="{{ URL::previous() }}" method="post" enctype="multipart/form-data">{{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-success" id="submit-button"><i class="fa fa-check icon-white"></i> {{ trans('general.delete') }}</button>
+                        <button type="submit" class="btn btn-success" id="submit-button"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.delete') }}</button>
                     </div><!-- /.box-footer -->
                 </div><!-- /.box -->
             </form>

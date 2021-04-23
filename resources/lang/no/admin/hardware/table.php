@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Status',
     'title'      	=> 'Eiendel ',
     'image'		=> 'Enhet bilde',
-    'days_without_acceptance' => 'Dager uten aksept'
+    'days_without_acceptance' => 'Dager uten aksept',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

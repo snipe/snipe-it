@@ -1,9 +1,7 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'Over verbuiksartikelen',
-    'about_consumables_text'  			=> 'Verbruiksartikelen is alles wat gekocht is en wat na enige tijd opraakt. Bijvoorbeeld, printerinkt of kopieer papier.',
-    'checkout'                          => 'Verbruiksartikel uitleveren aan gebruiker',
+    'checkout'                          => 'Verbruiksartikel uitchecken aan gebruiker',
     'consumable_name'                   => 'Verbruiksartikel naam',
     'create'                            => 'Maak verbruiksartikel aan',
     'item_no'                           => 'Item nr.',

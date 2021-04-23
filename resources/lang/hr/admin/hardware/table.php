@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Status',
     'title'      	=> 'Imovina',
     'image'		=> 'Slika uređaja',
-    'days_without_acceptance' => 'Dani bez prihvaćanja'
+    'days_without_acceptance' => 'Dani bez prihvaćanja',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

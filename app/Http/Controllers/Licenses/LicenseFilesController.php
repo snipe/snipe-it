@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Helpers\StorageHelper;
 
 class LicenseFilesController extends Controller
 {
@@ -28,22 +29,23 @@ class LicenseFilesController extends Controller
     public function store(AssetFileRequest $request, $licenseId = null)
     {
         $license = License::find($licenseId);
-        // the license is valid
-        $destinationPath = config('app.private_uploads').'/licenses';
 
         if (isset($license->id)) {
             $this->authorize('update', $license);
 
-            if (Input::hasFile('file')) {
+            if ($request->hasFile('file')) {
 
                 if (!Storage::exists('private_uploads/licenses')) Storage::makeDirectory('private_uploads/licenses', 775);
 
                 $upload_success = false;
-                foreach (Input::file('file') as $file) {
-                    $extension = $file->getClientOriginalExtension();
-                    $file_name = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+                foreach ($request->file('file') as $file) {
 
-                    $upload_success = Storage::put('private_uploads/licenses/'.$file_name, $file);
+
+                    $file_name = 'license-'.$license->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$file->getClientOriginalExtension())).'.'.$file->getClientOriginalExtension();
+
+
+                    $upload_success = $file->storeAs('private_uploads/licenses', $file_name);
+                    // $upload_success = $file->storeAs('private_uploads/licenses/'.$file_name, $file);
 
                     //Log the upload to the log
                     $license->logUpload($file_name, e($request->input('notes')));
@@ -118,6 +120,7 @@ class LicenseFilesController extends Controller
     public function show($licenseId = null, $fileId = null, $download = true)
     {
 
+        \Log::info('Private filesystem is: '.config('filesystems.default') );
         $license = License::find($licenseId);
 
         // the license is valid
@@ -130,22 +133,36 @@ class LicenseFilesController extends Controller
             }
 
             $file = 'private_uploads/licenses/'.$log->filename;
-            \Log::debug('Checking for '.$file);
 
-            if (!Storage::exists($file)) {
-                return response('File '.$file.' not found on server', 404)
+
+            if (Storage::missing($file)) {
+                \Log::debug('NOT EXISTS for '.$file);
+                \Log::debug('NOT EXISTS URL should be '.Storage::url($file));
+                return response('File '.$file.' ('.Storage::url($file).') not found on server', 404)
                     ->header('Content-Type', 'text/plain');
+            } else {
+
+                // We have to override the URL stuff here, since local defaults in Laravel's Flysystem
+                // won't work, as they're not accessible via the web
+                if (config('filesystems.default') == 'local') { // TODO - is there any way to fix this at the StorageHelper layer?
+                    return StorageHelper::downloader($file);
+                } else {
+                    if ($download != 'true') {
+                        \Log::debug('display the file');
+                        if ($contents = file_get_contents(Storage::url($file))) { // TODO - this will fail on private S3 files or large public ones
+                            return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
+                        }
+                        return JsonResponse::create(["error" => "Failed validation: "], 500);
+                    }
+
+                    return StorageHelper::downloader($file);
+                }
+
             }
 
-            if ($download != 'true') {
-                if ($contents = file_get_contents(Storage::url($file))) {
-                    return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
-                }
-                return JsonResponse::create(["error" => "Failed validation: "], 500);
-            }
-            return Storage::download($file);
+
         }
-        return redirect()->route('hardware.index')->with('error', trans('admin/licenses/message.does_not_exist', ['id' => $fileId]));
+        return redirect()->route('license.index')->with('error', trans('admin/licenses/message.does_not_exist', ['id' => $fileId]));
 
     }
 

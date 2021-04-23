@@ -16,19 +16,19 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Haluatko varmasti poistaa tämän komponentin?',
-        'error'   => 'Komponentti poistettiin ongelmasta. Yritä uudelleen.',
-        'success' => 'Komponentti poistettiin onnistuneesti.'
+        'error'   => 'Komponentti poisto ei onnistunut. Yritä uudelleen.',
+        'success' => 'Komponentti poistettiin.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Komponenttia ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Komponentti onnistui.',
+        'error'   		=> 'Komponenttia ei luovutettu, yritä uudelleen',
+        'success' 		=> 'Komponentin luovutus onnistui.',
         'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Komponenttia ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Komponentti tarkistettiin onnistuneesti.',
+        'error'   		=> 'Komponenttia ei palautettu, yritä uudelleen',
+        'success' 		=> 'Komponentti palautettiin onnistuneesti.',
         'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
     )
 

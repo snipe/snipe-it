@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Statut',
     'title'      	=> 'Actif ',
     'image'		=> 'Image',
-    'days_without_acceptance' => 'Jours sans acceptation'
+    'days_without_acceptance' => 'Jours sans acceptation',
+    'monthly_depreciation' => 'Dépréciation mensuelle'
 
 );

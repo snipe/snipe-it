@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => '权限不足',
     'user_deleted_warning'      => '用户已经被删除，你需要恢复这个用户编辑他或者重新指定新资产。',
     'ldap_not_configured'        => '安装过程中未启用LDAP集成的功能。',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

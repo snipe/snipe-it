@@ -9,7 +9,7 @@ return array(
         'create' => array(
             'error'   => 'Kenttää ei luotu, yritä uudelleen.',
             'success' => 'Kenttä luotiin onnistuneesti.',
-            'assoc_success' => 'Kenttä lisättiin onnistuneesti kenttätasolle.'
+            'assoc_success' => 'Kenttä lisättiin onnistuneesti kenttäsarjaan.'
         ),
 
         'update' => array(
@@ -28,23 +28,23 @@ return array(
 
     'fieldset' => array(
 
-        'does_not_exist' => 'Fieldsetia ei ole olemassa',
+        'does_not_exist' => 'Kenttäsarjaa ei ole',
 
         'create' => array(
-            'error'   => 'Fieldsetia ei luotu, yritä uudelleen.',
-            'success' => 'Fieldset luotu onnistuneesti.'
+            'error'   => 'Kenttäsarjaa ei luotu, yritä uudelleen.',
+            'success' => 'Kenttäsarja luotu onnistuneesti.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldsetia ei ole päivitetty, yritä uudelleen',
-            'success' => 'Fieldset päivitettiin onnistuneesti.'
+            'error'   => 'Kenttäsarjaa ei päivitetty, yritä uudelleen',
+            'success' => 'Kenttäsarja päivitettiin onnistuneesti.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Haluatko varmasti poistaa tämän kentän?',
-            'error'   => 'On tapahtunut ongelma, joka poistaa kentän kentän. Yritä uudelleen.',
-            'success' => 'Fieldset poistettiin onnistuneesti.',
-            'in_use'   => 'Fieldset on edelleen käytössä.',
+            'confirm'   	=> 'Haluatko varmasti poistaa tämän kenttäsarjan?',
+            'error'   => 'Kenttäsarjan poistamisessa tapahtui virhe. Yritä uudelleen.',
+            'success' => 'Kenttäsarja poistettiin onnistuneesti.',
+            'in_use'   => 'Kenttäsarja on edelleen käytössä.',
         )
 
     ),

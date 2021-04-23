@@ -57,22 +57,32 @@ class CheckoutableListener
      * Notify the user about the checked in checkoutable
      */    
     public function onCheckedIn($event) {
+
+        \Log::debug('checkin fired');
+
         /**
          * When the item wasn't checked out to a user, we can't send notifications
          */
         if(!$event->checkedOutTo instanceof User) {
+            \Log::debug('checked out to not a user');
             return;
         }
 
         /**
          * Send the appropriate notification
          */
+
+
+        \Log::debug('checked out to a user');
         if(!$event->checkedOutTo->locale){
+            \Log::debug('Use default settings locale');
             Notification::locale(Setting::getSettings()->locale)->send(
                 $this->getNotifiables($event), 
                 $this->getCheckinNotification($event)
             );
         } else {
+            \Log::debug('Use user locale? I do not think this works as expected yet');
+            // \Log::debug(print_r($this->getNotifiables($event), true));
             Notification::send(
                 $this->getNotifiables($event), 
                 $this->getCheckinNotification($event)
@@ -130,7 +140,9 @@ class CheckoutableListener
      */
     private function getCheckinNotification($event) {
 
-        $model = get_class($event->checkoutable);
+        // $model = get_class($event->checkoutable);
+
+
 
         $notificationClass = null;
 
@@ -145,7 +157,8 @@ class CheckoutableListener
                 $notificationClass = CheckinLicenseSeatNotification::class;
                 break;
         }
- 
+
+        \Log::debug('Notification class: '.$notificationClass);
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);  
     }
 

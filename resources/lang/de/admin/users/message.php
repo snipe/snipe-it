@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Unzureichende Berechtigungen.',
     'user_deleted_warning'      => 'Dieser Benutzer wurde gelöscht. Sie müssen ihn wiederherstellen, um ihn zu bearbeiten oder neue Assets zuzuweisen.',
     'ldap_not_configured'        => 'LDAP Integration wurde für diese Installation nicht konfiguriert.',
+    'password_resets_sent'      => 'Den ausgewählten Benutzern, die aktiviert sind und eine gültige E-Mail-Adresse haben, wurde ein Link zum Zurücksetzen des Passworts gesendet.',
 
 
     'success' => array(

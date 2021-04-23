@@ -4,7 +4,7 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">{{ trans('admin/categories/general.create') }}</h4>
+            <h2 class="modal-title">{{ trans('admin/categories/general.create') }}</h4>
         </div>
         <div class="modal-body">
             <form action="{{ route('api.categories.store') }}" onsubmit="return false">

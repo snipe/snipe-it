@@ -84,16 +84,20 @@ return [
                 'dump_binary_path' => env('DB_DUMP_PATH', '/usr/local/bin'),  // only the path, so without 'mysqldump'
                 'use_single_transaction' => false,
                 'timeout' => 60 * 5, // 5 minute timeout
+                //'exclude_tables' => ['table1', 'table2'],
+                //'add_extra_option' => '--optionname=optionvalue',
             ],
 
             'dump_command_timeout' => 60 * 5, // 5 minute timeout
             'dump_using_single_transaction' => true, // perform dump using a single transaction
-            'options' => (env('DB_SSL')) ? [
-                PDO::MYSQL_ATTR_SSL_KEY    => env('DB_SSL_KEY_PATH'),  // /path/to/key.pem
-                PDO::MYSQL_ATTR_SSL_CERT   => env('DB_SSL_CERT_PATH'), // /path/to/cert.pem
-                PDO::MYSQL_ATTR_SSL_CA     => env('DB_SSL_CA_PATH'),   // /path/to/ca.pem
-                PDO::MYSQL_ATTR_SSL_CIPHER => env('DB_SSL_CIPHER')
-            ] : []
+            'options' => (env('DB_SSL')) ? ((env('DB_SSL_IS_PAAS')) ? [
+                PDO::MYSQL_ATTR_SSL_CA                  => env('DB_SSL_CA_PATH'),   // /path/to/ca.pem
+            ] : [
+                PDO::MYSQL_ATTR_SSL_KEY                 => env('DB_SSL_KEY_PATH'),  // /path/to/key.pem
+                PDO::MYSQL_ATTR_SSL_CERT                => env('DB_SSL_CERT_PATH'), // /path/to/cert.pem
+                PDO::MYSQL_ATTR_SSL_CA                  => env('DB_SSL_CA_PATH'),   // /path/to/ca.pem
+                PDO::MYSQL_ATTR_SSL_CIPHER              => env('DB_SSL_CIPHER')
+            ]) : []
         ],
 
         'pgsql' => [

@@ -20,17 +20,18 @@ class Component extends SnipeModel
 
     protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'components';
-    
+
     /**
     * Category validation rules
     */
     public $rules = array(
-        'name'        => 'required|min:3|max:255',
-        'qty'     => 'required|integer|min:1',
-        'category_id' => 'required|integer',
-        'company_id'  => 'integer|nullable',
+        'name'           => 'required|min:3|max:255',
+        'qty'            => 'required|integer|min:1',
+        'category_id'    => 'required|integer|exists:categories,id',
+        'company_id'     => 'integer|nullable',
+        'min_amt'        => 'integer|min:0|nullable',
         'purchase_date'  => 'date|nullable',
-        'purchase_cost'   => 'numeric|nullable',
+        'purchase_cost'  => 'numeric|nullable',
     );
 
     /**
@@ -156,6 +157,23 @@ class Component extends SnipeModel
     }
 
     /**
+     * Check how many items within a component are checked out
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     * @return int
+     */
+    public function numCheckedOut()
+    {
+        $checkedout = 0;
+        foreach ($this->assets as $checkout) {
+            $checkedout += $checkout->pivot->assigned_qty;
+        }
+
+        return $checkedout;
+    }
+
+    /**
      * Check how many items within a component are remaining
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -164,17 +182,8 @@ class Component extends SnipeModel
      */
     public function numRemaining()
     {
-        $checkedout = 0;
-
-        foreach ($this->assets as $checkout) {
-            $checkedout += $checkout->pivot->assigned_qty;
-        }
-
-
-        $total = $this->qty;
-        $remaining = $total - $checkedout;
-        return $remaining;
-    }   
+        return $this->qty - $this->numCheckedOut();
+    }
 
     /**
     * Query builder scope to order on company

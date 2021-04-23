@@ -7,5 +7,8 @@
         'view'               => '자산 관리 상세 보기',
         'repair'             => '수리',
         'maintenance'        => '관리',
-        'upgrade'            => '개선'
+        'upgrade'            => '개선',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

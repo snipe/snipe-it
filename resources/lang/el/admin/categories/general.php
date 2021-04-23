@@ -1,12 +1,10 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Σχετικά με τις κατηγορίες',
-    'about_categories'  				=> 'Οι κατηγορίες σας βοηθούν να οργανώσετε τα στοιχεία σας. Ορισμένες κατηγορίες παραδειγμάτων ενδέχεται να είναι &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot; κ.ο.κ., αλλά μπορείτε να χρησιμοποιήσετε κατηγορίες με οποιονδήποτε τρόπο που έχει νόημα για εσάς.',
     'asset_categories' 					=> 'Κατηγορίες στοιχείων παγίων',
     'category_name'  					=> 'Όνομα κατηγορίας',
-    'checkin_email'                     => 'Send email to user on checkin/checkout.',
-    'checkin_email_notification'        => 'This user will be sent an email on checkin/checkout.',
+    'checkin_email'                     => 'Αποστολή email στον χρήστη κατά την χρέωση/αποδέσμευση.',
+    'checkin_email_notification'        => 'Θα αποστέλεται email σε αυτόν τον χρήστη κατά την χρέωαη/αποδέσμευση.',
     'clone'                             => 'Αντιγραφή Κατηγορίας',
     'create'  							=> 'Δημιουργία Κατηγορίας',
     'edit'                              => 'Επεξεργασία Κατηγορίας',

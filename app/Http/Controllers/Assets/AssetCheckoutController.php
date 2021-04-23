@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Assets;
 
 
 use App\Exceptions\CheckoutNotAllowed;
+use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
@@ -27,18 +28,17 @@ class AssetCheckoutController extends Controller
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find(e($assetId)))) {
-            // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
         $this->authorize('checkout', $asset);
 
         if ($asset->availableForCheckout()) {
-            return view('hardware/checkout', compact('asset'));
+            return view('hardware/checkout', compact('asset'))
+                ->with('statusLabel_list', Helper::deployableStatusLabelList());
         }
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
 
-        // Get the dropdown of users and then pass it to the checkout view
 
     }
 
@@ -64,9 +64,7 @@ class AssetCheckoutController extends Controller
             $admin = Auth::user();
 
             $target = $this->determineCheckoutTarget($asset);
-            if ($asset->is($target)) {
-                throw new CheckoutNotAllowed('You cannot check an asset out to itself.');
-            }
+
             $asset = $this->updateAssetLocation($asset, $target);
 
             $checkout_at = date("Y-m-d H:i:s");
@@ -79,12 +77,16 @@ class AssetCheckoutController extends Controller
                 $expected_checkin = $request->get('expected_checkin');
             }
 
+            if ($request->filled('status_id')) {
+                $asset->status_id = $request->get('status_id');
+            }
+
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
                 return redirect()->route("hardware.index")->with('success', trans('admin/hardware/message.checkout.success'));
             }
 
             // Redirect to the asset management page with error
-            return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
+            return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error').$asset->getErrors());
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
         } catch (CheckoutNotAllowed $e) {

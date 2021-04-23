@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Kategoriler hakkında',
-    'about_categories'  				=> 'Demirbaş kategorileri size kategorileri organize etme konusunda yardımcı olur. &quot;Masaüstü&quot;, &quot;Laptop&quot;, &quot;Cep telefonu&quot;, gibi olabilir. Kategorilere size anlamı gelebilecek herhangi bir isim verebilirsiniz.',
     'asset_categories' 					=> 'Demirbaş Kategorileri',
     'category_name'  					=> 'Kategori Adı',
     'checkin_email'                     => 'Kullanıcıyı e-posta ile bilgilendir (iade etme / kullanıma alma).',

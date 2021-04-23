@@ -2,8 +2,8 @@
 
 return array(
 
-    'does_not_exist' => 'Lisävarustetta ei ole olemassa.',
-    'assoc_users'	 => 'Tällä lisävarusteella on tällä hetkellä: laskea kohteet, jotka on tarkistettu käyttäjille. Tarkista lisävarusteet ja yritä uudelleen.',
+    'does_not_exist' => 'Lisävarustetta [:id] ei ole.',
+    'assoc_users'	 => 'Lisävaruste on tällä hetkellä uloskuitattuna :count käyttäjille. Tarkista lisävarusteiden tila ja yritä uudelleen. ',
 
     'create' => array(
         'error'   => 'Lisävarustetta ei luotu, yritä uudelleen.',
@@ -17,19 +17,19 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Haluatko varmasti poistaa tämän lisävarusteen?',
-        'error'   => 'Ongelma poistaa lisäosan. Yritä uudelleen.',
+        'error'   => 'Lisävarusteen poistaminen ei onnistunut. Yritä uudelleen.',
         'success' => 'Lisävaruste poistettiin onnistuneesti.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Lisävarustetta ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Lisävaruste tarkistettiin onnistuneesti.',
+        'error'   		=> 'Lisävarustetta ei luovutettu, yritä uudelleen',
+        'success' 		=> 'Lisävaruste uloskuitattiin onnistuneesti.',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Lisävarustetta ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Lisävaruste tarkistettiin onnistuneesti.',
+        'error'   		=> 'Lisävarustetta ei palautettu, yritä uudelleen',
+        'success' 		=> 'Lisävaruste palautettiin onnistuneesti.',
         'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
     )
 

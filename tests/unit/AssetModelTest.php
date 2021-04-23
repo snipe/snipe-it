@@ -42,10 +42,10 @@ class AssetModelTest extends BaseTest
      public function testAnAssetModelContainsAssets()
      {
          $assetModel = $this->createValidAssetModel();
-         factory(Asset::class)->create([
+         $this->createValidAsset([
              'model_id' => $assetModel->id,
          ]);
-         $this->assertEquals(1,$assetModel->assets()->count());
+         $this->assertEquals(1, $assetModel->assets()->count());
      }
 
      public function testAnAssetModelHasACategory()

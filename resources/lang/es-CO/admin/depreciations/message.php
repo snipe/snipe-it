@@ -12,14 +12,14 @@ return array(
     ),
 
     'update' => array(
-        'error'   => 'Amortización no actualizada, intentalo de nuevo.',
-        'success' => 'Amortización actualizada correctamente.'
+        'error'   => 'La clase de depreciación no fue actualizada, por favor, inténtalo de nuevo',
+        'success' => 'La clase de depreciación fue creada con éxito.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Estas seguro que quieres eliminar la Amortización?',
-        'error'   => 'Amortización no eliminada, intentalo de nuevo.',
-        'success' => 'Amortización eliminada correctamente.'
+        'confirm'   => '¿Está seguro que desea eliminar esta clase de depreciación?',
+        'error'   => 'Ha sucedido un error eliminando la clase de depreciación, por favor intente de nuevo.',
+        'success' => 'La clase de depreciación fue eliminada con éxito.'
     )
 
 );

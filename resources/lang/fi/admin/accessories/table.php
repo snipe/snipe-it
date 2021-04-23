@@ -2,8 +2,8 @@
 
 return array(
 	'dl_csv'      				=> 'Lataa CSV',
-	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
+	'eula_text'      			=> 'Käyttöehdot',
+    'id'      					=> 'Tunnus',
     'require_acceptance'      	=> 'Hyväksyminen',
     'title'      				=> 'Lisävarusteen nimi',
 

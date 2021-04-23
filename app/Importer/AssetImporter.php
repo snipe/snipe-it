@@ -24,14 +24,17 @@ class AssetImporter extends ItemImporter
 
             foreach ($this->customFields as $customField) {
                 $customFieldValue = $this->array_smart_custom_field_fetch($row, $customField);
+
                 if ($customFieldValue) {
-                    if($customField->field_encrypted == 1){
+
+                    if ($customField->field_encrypted == 1) {
                         $this->item['custom_fields'][$customField->db_column_name()] = \Crypt::encrypt($customFieldValue);
                         $this->log('Custom Field '. $customField->name.': '.\Crypt::encrypt($customFieldValue));
                     } else {
                         $this->item['custom_fields'][$customField->db_column_name()] = $customFieldValue;
                         $this->log('Custom Field '. $customField->name.': '.$customFieldValue);
                     }
+
                 } else {
                     // Clear out previous data.
                     $this->item['custom_fields'][$customField->db_column_name()] = null;
@@ -70,6 +73,8 @@ class AssetImporter extends ItemImporter
         }
 
         $this->item['image'] = $this->findCsvMatch($row, "image");
+        $this->item['requestable'] = $this->fetchHumanBoolean($this->findCsvMatch($row, "requestable"));;
+        $asset->requestable =  $this->fetchHumanBoolean($this->findCsvMatch($row, "requestable"));
         $this->item['warranty_months'] = intval($this->findCsvMatch($row, "warranty_months"));
         $this->item['model_id'] = $this->createOrFetchAssetModel($row);
 
@@ -115,8 +120,10 @@ class AssetImporter extends ItemImporter
             $this->log('Asset ' . $this->item["name"] . ' with serial number ' . $this->item['serial'] . ' was created');
 
             // If we have a target to checkout to, lets do so.
+            //-- user_id is a property of the abstract class Importer, which this class inherits from and it's setted by
+            //-- the class that needs to use it (command importer or GUI importer inside the project).
             if(isset($target)) {
-                $asset->fresh()->checkOut($target);
+                $asset->fresh()->checkOut($target, $this->user_id);
             }
             return;
         }

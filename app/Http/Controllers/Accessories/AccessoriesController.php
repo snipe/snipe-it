@@ -80,7 +80,7 @@ class AccessoriesController extends Controller
         $accessory->supplier_id             = request('supplier_id');
 
         $accessory = $request->handleImages($accessory);
-
+        
         // Was the accessory created?
         if ($accessory->save()) {
             // Redirect to the new accessory  page

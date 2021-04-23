@@ -14,6 +14,7 @@ use App\Models\Setting;
 use App\Models\User;
 use Auth;
 use Carbon\Carbon;
+use Intervention\Image\Facades\Image;
 use DB;
 use Gate;
 use Illuminate\Http\Request;
@@ -63,11 +64,7 @@ class AssetsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('index', Asset::class);
-        if ($request->filled('company_id')) {
-            $company = Company::find($request->input('company_id'));
-        } else {
-            $company = null;
-        }
+        $company = Company::find($request->input('company_id'));
         return view('hardware/index')->with('company', $company);
     }
 
@@ -111,6 +108,8 @@ class AssetsController extends Controller
         // differently
         $asset_tags = $request->input('asset_tags');
 
+        $settings = Setting::getSettings();
+
         $success = false;
         $serials = $request->input('serials');
 
@@ -119,10 +118,16 @@ class AssetsController extends Controller
             $asset = new Asset();
             $asset->model()->associate(AssetModel::find($request->input('model_id')));
             $asset->name                    = $request->input('name');
+
             // Check for a corresponding serial
             if (($serials) && (array_key_exists($a, $serials))) {
                 $asset->serial                  = $serials[$a];
             }
+
+            if (($asset_tags) && (array_key_exists($a, $asset_tags))) {
+                $asset->asset_tag                  = $asset_tags[$a];
+            }
+
             $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
             $asset->model_id                = $request->input('model_id');
             $asset->order_number            = $request->input('order_number');
@@ -140,16 +145,16 @@ class AssetsController extends Controller
             $asset->requestable             = request('requestable', 0);
             $asset->rtd_location_id         = request('rtd_location_id', null);
 
+            if (!empty($settings->audit_interval)) {
+                $asset->next_audit_date         = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+            }
+
             if ($asset->assigned_to=='') {
                 $asset->location_id = $request->input('rtd_location_id', null);
             }
 
-            $asset->asset_tag = $asset_tags[$a];
-
             // Create the image (if one was chosen.)
-            if ($request->hasFile('image')) {
-                $image = $request->input('image');
-
+            if ($request->has('image')) {
                 $asset = $request->handleImages($asset);
             }
 
@@ -161,10 +166,17 @@ class AssetsController extends Controller
                 foreach ($model->fieldset->fields as $field) {
                     if ($field->field_encrypted=='1') {
                         if (Gate::allows('admin')) {
-                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
-                        }
+                            if(is_array($request->input($field->convertUnicodeDbSlug()))){
+                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e(implode(', ', $request->input($field->convertUnicodeDbSlug()))));
+                            }else{
+                                $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
+                            }                        }
                     } else {
-                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                        if(is_array($request->input($field->convertUnicodeDbSlug()))){
+                            $asset->{$field->convertUnicodeDbSlug()} = implode(', ', $request->input($field->convertUnicodeDbSlug()));
+                        }else{
+                            $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                        }
                     }
                 }
             }
@@ -184,7 +196,7 @@ class AssetsController extends Controller
                 }
 
                 if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')), $location);
+                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', e($request->get('name')), $location);
                 }
 
                 $success = true;
@@ -293,6 +305,7 @@ class AssetsController extends Controller
         $asset->purchase_cost = Helper::ParseFloat($request->input('purchase_cost', null));
         $asset->purchase_date = $request->input('purchase_date', null);
         $asset->supplier_id = $request->input('supplier_id', null);
+        $asset->expected_checkin = $request->input('expected_checkin', null);
 
         // If the box isn't checked, it's not in the request at all.
         $asset->requestable = $request->filled('requestable');
@@ -333,14 +346,22 @@ class AssetsController extends Controller
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
-        if ($model->fieldset) {
+        if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted=='1') {
                     if (Gate::allows('admin')) {
-                        $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
+                        if(is_array($request->input($field->convertUnicodeDbSlug()))){
+                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e(implode(', ', $request->input($field->convertUnicodeDbSlug()))));
+                        }else{
+                            $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt(e($request->input($field->convertUnicodeDbSlug())));
+                        }
                     }
                 } else {
-                    $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                    if(is_array($request->input($field->convertUnicodeDbSlug()))){
+                        $asset->{$field->convertUnicodeDbSlug()} = implode(', ', $request->input($field->convertUnicodeDbSlug()));
+                    }else{
+                        $asset->{$field->convertUnicodeDbSlug()} = $request->input($field->convertUnicodeDbSlug());
+                    }
                 }
             }
         }
@@ -351,8 +372,7 @@ class AssetsController extends Controller
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
 
-        return redirect()->back()->withInput()->withErrors()->with('error', trans('admin/hardware/message.does_not_exist'));
-
+        return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 
     /**
@@ -464,16 +484,45 @@ class AssetsController extends Controller
                 return response()->file($barcode_file, $header);
             } else {
                 // Calculate barcode width in pixel based on label width (inch)
-                $barcode_width = ($settings->labels_width - $settings->labels_display_sgutter) * 96.000000000001;
+                $barcode_width = ($settings->labels_width - $settings->labels_display_sgutter) * 200.000000000001;
 
                 $barcode = new \Com\Tecnick\Barcode\Barcode();
-                $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode,$asset->asset_tag,($barcode_width < 300 ? $barcode_width : 300),50);
+                try {
+                    $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode,$asset->asset_tag,($barcode_width < 300 ? $barcode_width : 300),50);
+                    file_put_contents($barcode_file, $barcode_obj->getPngData());
+                    return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+                } catch(\Exception $e) {
+                    \Log::debug('The barcode format is invalid.');
+                    return response(file_get_contents(public_path('uploads/barcodes/invalid_barcode.gif')))->header('Content-type', 'image/gif');
+                }
 
-                file_put_contents($barcode_file, $barcode_obj->getPngData());
-                return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+
             }
         }
     }
+
+
+    /**
+     * Return a label for an individual asset.
+     *
+     * @author [L. Swartzendruber] [<logan.swartzendruber@gmail.com>
+     * @param int $assetId
+     * @return View
+     */
+    public function getLabel($assetId = null)
+    {
+        if (isset($assetId)) {
+            $asset = Asset::find($assetId);
+            $this->authorize('view', $asset);
+
+            return view('hardware/labels')
+                ->with('assets', Asset::find($asset))
+                ->with('settings', Setting::getSettings())
+                ->with('bulkedit', false)
+                ->with('count', 0);
+        }
+    }
+
 
     /**
      * Returns a view that presents a form to clone an asset.
@@ -523,110 +572,162 @@ class AssetsController extends Controller
      *
      * This needs a LOT of love. It's done very inelegantly right now, and there are
      * a ton of optimizations that could (and should) be done.
-     *
-     * @author [herroworrd]
-     * @since [v5.0]
+     * 
+     * Updated to respect checkin dates:
+     * No checkin column, assume all items are checked in (todays date)
+     * Checkin date in the past, update history.
+     * Checkin date in future or empty, check the item out to the user.
+     * 
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.3]
      * @return View
      */
     public function postImportHistory(Request $request)
     {
+
+        if (!$request->hasFile('user_import_csv')) {
+            return back()->with('error', 'No file provided. Please select a file for import and try again. ');
+        }
+
         if (!ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
         }
-
-        $requiredcolumns = ['Asset Tag', 'Checkout Date', 'Checkin Date', 'Full Name'];
-
-        $csv = Reader::createFromPath(Input::file('user_import_csv'));
-
+        $csv = Reader::createFromPath($request->file('user_import_csv'));
         $csv->setHeaderOffset(0);
-
-        //Stop here if we don't have the columns we need
-        if(count(array_intersect($requiredcolumns, $csv->getHeader())) != count($requiredcolumns)) {
-            $status['error'][]['csv'][]['msg'] = 'Headers do not match';
-            return view('hardware/history')->with('status', $status);
-        }
-        $statement = (new Statement())
-            ->orderBy(\Closure::fromCallable([$this, 'sortByName']));
-
-        $results = $statement->process($csv);
-
+        $header = $csv->getHeader();
+        $isCheckinHeaderExplicit = in_array("checkin date", (array_map('strtolower', $header)));
+        $results = $csv->getRecords();
+        $item = array();
         $status = array();
         $status['error'] = array();
         $status['success'] = array();
-        $base_username = null;
-        $cachetime = Carbon::now()->addSeconds(120);
-
-        foreach ($results as $record) {
-
-            $asset_tag = $record['Asset Tag'];
-
-            try {
-                $checkoutdate = Carbon::parse($record['Checkout Date'])->format('Y-m-d H:i:s');
-                $checkindate = Carbon::parse($record['Checkin Date'])->format('Y-m-d H:i:s');
-            }
-            catch (\Exception $err) {
-                $status['error'][]['asset'][$asset_tag]['msg'] = 'Your dates are screwed up. Format needs to be Y-m-d H:i:s';
-                continue;
-            }
-
-            if($asset = Cache::remember('asset:' . $asset_tag, $cachetime, function () use( &$asset_tag) {
-                $tocache = Asset::where('asset_tag', '=', $asset_tag)->value('id');
-                return is_null($tocache) ? false : $tocache;}))
-            {
-                //we've found our asset, now lets look for a user
-                if($base_username != User::generateFormattedNameFromFullName($record['Full Name'], Setting::getSettings()->username_format)) {
-
-                    $base_username = User::generateFormattedNameFromFullName($record['Full Name'], Setting::getSettings()->username_format);
-
-                    if(!$user = Cache::remember('user:' . $base_username['username'], $cachetime, function () use( &$base_username) {
-                        $tocache = User::where('username', '=', $base_username['username'])->value('id');
-                        return is_null($tocache) ? false : $tocache;}))
-                    {
-                        $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset was found but user (' . $record['Full Name'] . ') not matched';
-                        $base_username = null;
-                        continue;
+        foreach ($results as $row) {
+            if (is_array($row)) {
+                $row = array_change_key_case($row, CASE_LOWER);
+                $asset_tag = Helper::array_smart_fetch($row, "asset tag");
+                if (!array_key_exists($asset_tag, $item)) {
+                    $item[$asset_tag] = array();
+                }
+                $batch_counter = count($item[$asset_tag]);
+                $item[$asset_tag][$batch_counter]['checkout_date'] = Carbon::parse(Helper::array_smart_fetch($row, "checkout date"))->format('Y-m-d H:i:s');
+    
+                if ($isCheckinHeaderExplicit){
+                    //checkin date not empty, assume past transaction or future checkin date (expected)
+                    if (!empty(Helper::array_smart_fetch($row, "checkin date"))) {
+                        $item[$asset_tag][$batch_counter]['checkin_date'] = Carbon::parse(Helper::array_smart_fetch($row, "checkin date"))->format('Y-m-d H:i:s');
+                    } else {
+                        $item[$asset_tag][$batch_counter]['checkin_date'] = '';
                     }
+                } else {
+                    //checkin header missing, assume data is unavailable and make checkin date explicit (now) so we don't encounter invalid state.
+                    $item[$asset_tag][$batch_counter]['checkin_date'] = Carbon::parse(now())->format('Y-m-d H:i:s');
                 }
 
-                if($checkoutdate < $checkindate) {
+                $item[$asset_tag][$batch_counter]['asset_tag'] = Helper::array_smart_fetch($row, "asset tag");
+                $item[$asset_tag][$batch_counter]['name'] = Helper::array_smart_fetch($row, "name");
+                $item[$asset_tag][$batch_counter]['email'] = Helper::array_smart_fetch($row, "email");
+                if ($asset = Asset::where('asset_tag', '=', $asset_tag)->first()) {
+                    $item[$asset_tag][$batch_counter]['asset_id'] = $asset->id;
+                    $base_username = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $item[$asset_tag][$batch_counter]['name']);
+                    $user = User::where('username', '=', $base_username['username']);
+                    $user_query = ' on username '.$base_username['username'];
+                    if ($request->input('match_firstnamelastname')=='1') {
+                        $firstnamedotlastname = User::generateFormattedNameFromFullName('firstname.lastname', $item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $firstnamedotlastname['username'];
+                        $user->orWhere('username', '=', $firstnamedotlastname['username']);
+                        $user_query .= ', or on username '.$firstnamedotlastname['username'];
+                    }
+                    if ($request->input('match_flastname')=='1') {
+                        $flastname = User::generateFormattedNameFromFullName('filastname', $item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $flastname['username'];
+                        $user->orWhere('username', '=', $flastname['username']);
+                        $user_query .= ', or on username '.$flastname['username'];
+                    }
+                    if ($request->input('match_firstname')=='1') {
+                        $firstname = User::generateFormattedNameFromFullName('firstname', $item[$asset_tag][$batch_counter]['name']);
+                        $item[$asset_tag][$batch_counter]['username'][] = $firstname['username'];
+                        $user->orWhere('username', '=', $firstname['username']);
+                        $user_query .= ', or on username '.$firstname['username'];
+                    }
+                    if ($request->input('match_email')=='1') {
+                        if ($item[$asset_tag][$batch_counter]['name']=='') {
+                            $item[$asset_tag][$batch_counter]['username'][] = $user_email = User::generateEmailFromFullName($item[$asset_tag][$batch_counter]['name']);
+                            $user->orWhere('username', '=', $user_email);
+                            $user_query .= ', or on username '.$user_email;
+                        }
+                    }
+                    if ($request->input('match_username') == '1'){
+                        // Added #8825: add explicit username lookup
+                           $raw_username = $item[$asset_tag][$batch_counter]['name'];
+                           $user->orWhere('username', '=', $raw_username);
+                            $user_query .= ', or on username ' . $raw_username;
+                    }
+
+                    // A matching user was found
+                    if ($user = $user->first()) {
+                        //$user is now matched user from db
+                        $item[$asset_tag][$batch_counter]['user_id'] = $user->id;
 
                         Actionlog::firstOrCreate(array(
-                            'item_id' => $asset,
+                            'item_id' => $asset->id,
                             'item_type' => Asset::class,
-                            'user_id' => Auth::user()->id,
-                            'note' => 'Historical record added by ' . Auth::user()->present()->fullName(),
-                            'target_id' => $user,
+                            'user_id' =>  Auth::user()->id,
+                            'note' => 'Checkout imported by '.Auth::user()->present()->fullName().' from history importer',
+                            'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
                             'target_type' => User::class,
-                            'created_at' => $checkoutdate,
-                            'action_type' => 'checkout',
+                            'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
+                            'action_type'   => 'checkout',
                         ));
 
-                        Actionlog::firstOrCreate(array(
-                            'item_id' => $asset,
-                            'item_type' => Asset::class,
-                            'user_id' => Auth::user()->id,
-                            'note' => 'Historical record added by ' . Auth::user()->present()->fullName(),
-                            'target_id' => $user,
-                            'target_type' => User::class,
-                            'created_at' => $checkindate,
-                            'action_type' => 'checkin'
-                        ));
+                        $checkin_date = $item[$asset_tag][$batch_counter]['checkin_date'];
 
-                    $status['success'][]['asset'][$asset_tag]['msg'] = 'Asset successfully matched for ' . $record['Full Name'] . ' on ' . $checkoutdate;
+                        if ($isCheckinHeaderExplicit) {
+
+                            //if checkin date header exists, assume that empty or future date is still checked out
+                            //if checkin is before todays date, assume it's checked in and do not assign user ID, if checkin date is in the future or blank, this is the expected checkin date, items is checked out
+                            
+                            if ((strtotime($checkin_date) > strtotime(Carbon::now())) || (empty($checkin_date))
+                            ) {
+                                //only do this if item is checked out
+                                $asset->assigned_to = $user->id;
+                                $asset->assigned_type = User::class;
+                            }
+                        }
+
+                        if (!empty($checkin_date)) {
+                            //only make a checkin there is a valid checkin date or we created one on import.
+                            Actionlog::firstOrCreate(array(
+                                'item_id' =>
+                                $item[$asset_tag][$batch_counter]['asset_id'],
+                                'item_type' => Asset::class,
+                                'user_id' => Auth::user()->id,
+                                'note' => 'Checkin imported by ' . Auth::user()->present()->fullName() . ' from history importer',
+                                'target_id' => null,
+                                'created_at' => $checkin_date,
+                                'action_type' => 'checkin'
+                            ));
+
+                        }
+                     
+                        if ($asset->save()) {
+                            $status['success'][]['asset'][$asset_tag]['msg'] = 'Asset successfully matched for '.Helper::array_smart_fetch($row, "name").$user_query.' on '.$item[$asset_tag][$batch_counter]['checkout_date'];
+                        } else {
+                            $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset and user was matched but could not be saved.';
+                        }
+                    } else {
+                        $item[$asset_tag][$batch_counter]['user_id'] = null;
+                        $status['error'][]['user'][Helper::array_smart_fetch($row, "name")]['msg'] = 'User does not exist so no checkin log was created.';
+                    }
+                } else {
+                    $item[$asset_tag][$batch_counter]['asset_id'] = null;
+                    $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset does not exist so no match was attempted.';
                 }
-                else {
-                    $status['error'][]['asset'][$asset_tag]['msg'] = 'Checkin date needs to be after checkout date.';
-                }
-            }
-            else {
-                $status['error'][]['asset'][$asset_tag]['msg'] = 'Asset not found in Snipe';
             }
         }
-
         return view('hardware/history')->with('status', $status);
     }
 
-    protected function sortByName(array $recordA, array $recordB): int
+    public function sortByName(array $recordA, array $recordB): int
     {
         return strcmp($recordB['Full Name'], $recordA['Full Name']);
     }

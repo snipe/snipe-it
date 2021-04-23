@@ -1,22 +1,20 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Tietoja lisävarusteista',
-    'about_accessories_text'  			=> 'Lisävarusteet ovat mitä annat käyttäjille, mutta niissä ei ole sarjanumeroa (tai et välitä niiden yksilöllisestä seurannasta). Esimerkiksi tietokonehiiret tai näppäimistöt.',
-    'accessory_category' 				=> 'Lisävarusteluokka',
+    'accessory_category' 				=> 'Kategoria',
     'accessory_name'  					=> 'Lisävarusteen nimi',
-    'checkout'  							=> 'Checkout-lisävaruste',
-    'checkin'  							=> 'Checkin-lisävaruste',
+    'checkout'  							=> 'Lisävarusteen luovutus',
+    'checkin'  							=> 'Lisävarusteen palautus',
     'create'  							=> 'Luo lisävaruste',
     'edit'  							=> 'Muokkaa lisävarustetta',
-    'eula_text'							=> 'EULA-luokka',
-    'eula_text_help'					=> 'Tässä kentässä voit muokata EULAs-asetuksiasi tietyn tyyppisille varoille. Jos sinulla on vain yksi käyttöoikeussopimus kaikille omaisuuksillesi, voit tarkistaa alla olevan kentän käyttämällä ensisijaista oletusarvoa.',
-    'require_acceptance'				=> 'Vaadittava käyttäjille vahvistetaan tämän luokan varojen hyväksyminen.',
-    'no_default_eula'					=> 'EU: n ensisijainen oletuslauseke ei löytynyt. Lisää yksi asetuksiin.',
+    'eula_text'							=> 'Kategorian käyttöehdot',
+    'eula_text_help'					=> 'Tässä kentässä voit muokata käyttöehtojasi tietyn tyyppisille laitteille. Jos sinulla on vain yksi käyttöoikeussopimus kaikille laitteillesi, voit valita yleisen käyttöehdon valitsemalla alla olevan ruudun.',
+    'require_acceptance'				=> 'Vaadi käyttäjiä hyväksymään tämän kategorian kohteet.',
+    'no_default_eula'					=> 'Yleisiä käyttöehtoja ei löytynyt. Voit lisätä ne asetuksista.',
     'total'  							=> 'Yhteensä',
-    'remaining'  						=> 'hyödyttää',
-    'update'  							=> 'Päivitä lisävaruste',
-    'use_default_eula'					=> 'Käytä sen sijaan <a href="#" data-toggle="modal" data-target="#eulaModal">primary-oletusarvoa EULA</a>.',
-    'use_default_eula_disabled'			=> '<del>Käytä ensisijaisen EULA: n sijaan.</del> Et ole määritetty ensisijaista EULA-asetusta. Lisää yksi asetuksiin.',
+    'remaining'  						=> 'Saatavilla',
+    'update'  							=> 'Lisävarusteen päivittäminen',
+    'use_default_eula'					=> 'Käytä <a href="#" data-toggle="modal" data-target="#eulaModal">yleisiä käyttöehtoja</a>.',
+    'use_default_eula_disabled'			=> '<del>Käytä yleisiä käyttöehtoja.</del> Et ole vielä määritellyt yleisiä käyttöehtoja, voit lisätä ne asetuksista.',
 
 );

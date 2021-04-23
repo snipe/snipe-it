@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Nga Whakaae Korero.',
     'user_deleted_warning'      => 'Kua mukua tenei kaiwhakamahi. Me whakahou e koe tenei kaiwhakamahi ki te whakatika i aua mea, ki te tuku ranei i nga taonga hou.',
     'ldap_not_configured'        => 'Ko te whakaurutanga LDAP kua kore i whirihorahia mo tenei whakauru.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

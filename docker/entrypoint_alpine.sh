@@ -49,5 +49,7 @@ php artisan migrate --force
 php artisan config:clear
 php artisan config:cache
 
+chown -R apache:root /var/www/html/storage/logs/laravel.log
+
 export APACHE_LOG_DIR=/var/log/apache2
 exec httpd -DNO_DETACH < /dev/null

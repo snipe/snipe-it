@@ -13,7 +13,7 @@ class SettingsSeeder extends Seeder
         $settings->per_page = 20;
         $settings->site_name = 'Snipe-IT Demo';
         $settings->auto_increment_assets = 1;
-        $settings->logo = 'logo.png';
+        $settings->logo = 'snipe-logo.png';
         $settings->alert_email = 'service@snipe-it.io';
         $settings->header_color = null;
         $settings->barcode_type = 'QRCODE';
@@ -32,12 +32,18 @@ class SettingsSeeder extends Seeder
         $settings->locale = 'en';
         $settings->version_footer = 'on';
         $settings->support_footer = 'on';
-        $settings->pwd_secure_min = '542321';
+        $settings->pwd_secure_min = '8';
         $settings->save();
 
         if ($user = User::where('username', '=', 'admin')->first()) {
             $user->locale = 'en';
             $user->save();
         }
+
+
+        // Copy the logos from the img/demo directory
+        Storage::disk('public')->put(public_path('uploads/snipe-logo.png'), file_get_contents(public_path('img/demo/snipe-logo.png')));
+        Storage::disk('public')->put(public_path('uploads/snipe-logo-lg.png'), file_get_contents(public_path('img/demo/snipe-logo-lg.png')));
+
     }
 }

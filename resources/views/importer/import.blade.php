@@ -14,20 +14,6 @@
             display:none;
         }
 
-        /* Rules for the div table */
-        .tbl_head {
-            font-weight: bold
-        }
-        .div_tbl {
-            display: table
-        }
-        .div_tbl_row {
-            display: table-row
-        }
-        .div_tbl_cell {
-            display: table-cell;
-            padding: 2px
-        }
     </style>
 
 <div id="app">
@@ -36,65 +22,91 @@
         <alert v-show="alert.visible" :alert-type="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert>
             <errors :errors="importErrors"></errors>
 
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <div class="box">
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-3">
 
-                                <!-- The fileinput-button span is used to style the file input field as button -->
-                                @if (!config('app.lock_passwords'))
-                                <span class="btn btn-info fileinput-button">
-                                    <span>Select Import File...</span>
-                                    <!-- The file input field used as target for the file upload widget -->
-                                    <input id="fileupload" type="file" name="files[]" data-url="{{ route('api.imports.index') }}" accept="text/csv">
-                                </span>
-                                 @endif
+                            <div class="col-md-12">
 
-                            </div>
-                            <div class="col-md-9" v-show="progress.visible" style="padding-bottom:20px">
-                                <div class="col-md-11">
+                                <div class="col-md-9" v-show="progress.visible" style="padding-bottom:20px">
                                     <div class="progress progress-striped-active" style="margin-top: 8px">
                                         <div class="progress-bar" :class="progress.currentClass" role="progressbar" :style="progressWidth">
                                             <span>@{{ progress.statusText }}</span>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-3 text-right pull-right">
+
+                                    <!-- The fileinput-button span is used to style the file input field as button -->
+                                    @if (!config('app.lock_passwords'))
+                                        <span class="btn btn-primary fileinput-button">
+                                        <span>Select Import File...</span>
+                                         <!-- The file input field used as target for the file upload widget -->
+                                        <label for="files[]"><span class="sr-only">Select file</span></label>
+                                        <input id="fileupload" type="file" name="files[]" data-url="{{ route('api.imports.index') }}" accept="text/csv" aria-label="files[]">
+                                        </span>
+                                    @endif
+
+                                </div>
+
                             </div>
+
+
+
                         </div>
                         <div class="row">
-                            <div class="col-md-12" style="padding-top: 30px;">
-                                <div class="table table-striped div_tbl" id="upload-table">
-                                    <div class="div_tbl_row">
-                                        <div class="div_tbl_cell tbl_head">File</div>
-                                        <div class="div_tbl_cell tbl_head">Created</div>
-                                        <div class="div_tbl_cell tbl_head">Size</div>
-                                        <div class="div_tbl_cell tbl_head"></div>
-                                    </div>
+                            <div class="col-md-12 table-responsive" style="padding-top: 30px;">
+
+                                <table data-pagination="true"
+                                        data-id-table="upload-table"
+                                        data-search="true"
+                                        data-side-pagination="client"
+                                        id="upload-table"
+                                        class="col-md-12 table table-striped snipe-table">
+
+                                    <tr>
+                                        <th class="col-md-6">File</th>
+                                        <th class="col-md-3">Created</th>
+                                        <th class="col-md-1">Size</th>
+                                        <th class="col-md-1 text-right"><span class="sr-only">Process</span></th>
+                                        <th class="col-md-1 text-right"><span class="sr-only">Delete</span></th>
+                                    </tr>
 
                                     <template v-for="currentFile in files">
-                                        <div class="div_tbl_row">
-                                        	<div class="div_tbl_cell">@{{ currentFile.file_path }}</div>
-                                    	    <div class="div_tbl_cell">@{{ currentFile.created_at }} </div>
-                                    		<div class="div_tbl_cell">@{{ currentFile.filesize }}</div>
-                                    		<div class="div_tbl_cell">
-                                    			<button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">Process</button>
-                                				<button class="btn btn-sm btn-danger" @click="deleteFile(currentFile)"><i class="fa fa-trash icon-white"></i></button>
-                                			</div>
-                                		</div>
-                            			<import-file
-                                            :key="currentFile.id"
-                                            :file="currentFile"
-                                            :custom-fields="customFields"
-                                            @alert="updateAlert(alert)">
-                                    	</import-file>
+                                    		<tr>
+                                    			<td class="col-md-6">@{{ currentFile.file_path }}</td>
+                                    			<td class="col-md-3">@{{ currentFile.created_at }} </td>
+                                    			<td class="col-md-1">@{{ currentFile.filesize }}</td>
+                                                <td class="col-md-1 text-right">
+                                                    <button class="btn btn-sm btn-info" @click="toggleEvent(currentFile.id)">
+                                                        Process
+                                                    </button>
+                                                </td>
+                                                <td class="col-md-1 text-right">
+                                                    <button class="btn btn-sm btn-danger" @click="deleteFile(currentFile)">
+                                                        <i class="fa fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
+                                    			</td>
+                                    		</tr>
+                                                <import-file
+                                                    :key="currentFile.id"
+                                                    :file="currentFile"
+                                                    :custom-fields="customFields"
+                                                    @alert="updateAlert(alert)">
+                                                </import-file>
                                     </template>
-                                </div>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-md-3">
+                <h2>{{ trans('general.importing') }}</h2>
+                <p>{!!   trans('general.importing_help') !!}</p>
+            </div>
+
         </div>
     </importer>
 </div>

@@ -26,10 +26,13 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     use UniqueUndeletedTrait;
     use Notifiable;
     use Presentable;
+    use Searchable;
+
     protected $dates = ['deleted_at'];
     protected $hidden = ['password','remember_token','permissions','reset_password_code','persist_code'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
+
     protected $fillable = [
         'activated',
         'address',
@@ -55,7 +58,10 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     ];
 
     protected $casts = [
-        'activated' => 'boolean',
+        'activated'    => 'boolean',
+        'manager_id'   => 'integer',
+        'location_id'  => 'integer',
+        'company_id'   => 'integer',
     ];
 
     /**
@@ -64,16 +70,18 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @var array
      */
 
+    // 'username' => 'required|string|min:1|unique:users,username,NULL,id,deleted_at,NULL',
     protected $rules = [
         'first_name'              => 'required|string|min:1',
         'username'                => 'required|string|min:1|unique_undeleted',
         'email'                   => 'email|nullable',
-        'password'                => 'required|min:6',
+        'password'                => 'required|min:8',
         'locale'                  => 'max:10|nullable',
-        'manager_id'              => 'exists:users,id|nullable'
+        'website'                 => 'url|nullable',
+        'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
+        'location_id'             => 'exists:locations,id|nullable',
     ];
 
-    use Searchable;
 
     /**
      * The attributes that should be included when searching the model.
@@ -104,21 +112,14 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'manager'    => ['first_name', 'last_name', 'username']
     ];
 
+
     /**
-     * Check user permissions
+     * Internally check the user permission for the given section
      *
-     * Parses the user and group permission masks to see if the user
-     * is authorized to do the thing
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v1.0]
      * @return boolean
      */
-    public function hasAccess($section)
+    protected function checkPermissionSection($section)
     {
-        if ($this->isSuperUser()) {
-            return true;
-        }
         $user_groups = $this->groups;
 
 
@@ -150,6 +151,24 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
+     * Check user permissions
+     *
+     * Parses the user and group permission masks to see if the user
+     * is authorized to do the thing
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return boolean
+     */
+    public function hasAccess($section)
+    {
+        if ($this->isSuperUser()) {
+            return true;
+        }
+        return $this->checkPermissionSection($section);
+    }
+
+    /**
      * Checks if the user is a SuperUser
      *
      * @author A. Gianotto <snipe@snipe.net>
@@ -158,23 +177,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function isSuperUser()
     {
-        if (!$user_permissions = json_decode($this->permissions, true)) {
-            return false;
-        }
-
-        foreach ($this->groups as $user_group) {
-            $group_permissions = json_decode($user_group->permissions, true);
-            $group_array = (array)$group_permissions;
-            if ((array_key_exists('superuser', $group_array)) && ($group_permissions['superuser']=='1')) {
-                return true;
-            }
-        }
-
-        if ((array_key_exists('superuser', $user_permissions)) && ($user_permissions['superuser']=='1')) {
-            return true;
-        }
-
-        return false;
+        return $this->checkPermissionSection('superuser');
     }
 
 
@@ -290,7 +293,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function accessories()
     {
-        return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')->withPivot('id')->withTrashed();
+        return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')
+            ->withPivot('id', 'created_at', 'note')->withTrashed();
     }
 
     /**
@@ -326,7 +330,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function userlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'target_id')->orderBy('created_at', 'DESC')->withTrashed();
+        return $this->hasMany('\App\Models\Actionlog', 'target_id')->where('target_type', '=', 'App\Models\User')->orderBy('created_at', 'DESC')->withTrashed();
     }
 
 
@@ -359,7 +363,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
     }
-
 
     /**
      * Establishes the user -> manager relationship
@@ -517,6 +520,18 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             } elseif ($format=='firstname') {
                 $username = str_slug($first_name);
             }
+              elseif ($format=='firstinitial.lastname') {
+                $username = str_slug(substr($first_name, 0, 1). '.' . str_slug($last_name));
+            }
+              elseif ($format=='lastname_firstinitial') {
+                $username = str_slug($last_name).'_'.str_slug(substr($first_name, 0, 1));
+            }
+              elseif ($format=='firstnamelastname') {
+                $username = str_slug($first_name) . str_slug($last_name);
+            }
+              elseif ($format=='firstnamelastinitial') {
+                $username = str_slug(($first_name.substr($last_name, 0, 1)));
+              }
         }
 
         $user['first_name'] = $first_name;
@@ -635,7 +650,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function scopeByGroup($query, $id) {
         return $query->whereHas('groups', function ($query) use ($id) {
-            $query->where('groups.id', '=', $id);
+            $query->where('permission_groups.id', '=', $id);
         });
     }
 
@@ -681,7 +696,22 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $query->leftJoin('departments as departments_users', 'users.department_id', '=', 'departments_users.id')->orderBy('departments_users.name', $order);
     }
 
+    /**
+     * Query builder scope to order on company
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderCompany($query, $order)
+    {
+        return $query->leftJoin('companies as companies_user', 'users.company_id', '=', 'companies_user.id')->orderBy('companies_user.name', $order);
+    }
+
     public function preferredLocale(){
         return $this->locale;
     }
+
+
 }

@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Durum',
     'title'      	=> 'Demirbaş ',
     'image'		=> 'Cihaz resmi',
-    'days_without_acceptance' => 'Kabul edilmeden geçen gün'
+    'days_without_acceptance' => 'Kabul edilmeden geçen gün',
+    'monthly_depreciation' => 'Aylık Amortisman'
 
 );

@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Acerca de acessórios',
-    'about_accessories_text'  			=> 'Um acessório é algo que se aloca aos utilizadores, e que não têm número de série (ou que não se preocupa em acompanhar de forma exclusiva). Por exemplo, ratos ou teclados.',
     'accessory_category' 				=> 'Categoria do Acessório',
     'accessory_name'  					=> 'Nome do Acessório',
     'checkout'  							=> 'Alocar acessório',

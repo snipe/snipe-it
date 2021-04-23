@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Nepakankamos teisės.',
     'user_deleted_warning'      => 'Šis naudotojas ištrintas. Jūs turėsite atkurti naudotoją norėdami redaguoto ar priskirti jam naują įrangą.',
     'ldap_not_configured'        => 'LDAP integracija nebuvo sukonfikuruota šiam diegimui.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

@@ -19,7 +19,7 @@
         <div class="col-md-12">
             <div class="box box-default">
                 <div class="box-header">
-                    <h3 class="box-title">PHP Info</h3>
+                    <h2 class="box-title">PHP Info</h2>
                 </div>
                 <div class="box-body">
 

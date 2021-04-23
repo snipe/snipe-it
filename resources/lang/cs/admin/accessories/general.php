@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'O příslušenství',
-    'about_accessories_text'  			=> 'Příslušenství je cokoliv, co předáte uživatelům, ale nemá to sérivoé číslo (nebo to neevidujete). Např. myš, klávesnice.',
     'accessory_category' 				=> 'Kategorie příslušenství',
     'accessory_name'  					=> 'Název příslušenství',
     'checkout'  							=> 'Předat příslušenství',

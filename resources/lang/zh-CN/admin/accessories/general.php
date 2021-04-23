@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> '关于配件',
-    'about_accessories_text'  			=> '配件就是你发给用户，但没有一个序列号（或者你不在乎唯一序列号标识）。例如，计算机鼠标或键盘。',
     'accessory_category' 				=> '配件类别',
     'accessory_name'  					=> '配件名称',
     'checkout'  							=> '借出配件',

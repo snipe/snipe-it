@@ -49,7 +49,7 @@ class CompanyPresenter extends Presenter
                 "field" => "assets_count",
                 "searchable" => false,
                 "sortable" => true,
-                "title" => '<span class="hidden-xs"><i class="fa fa-barcode"></i></span><span class="hidden-md hidden-lg">'.trans('general.assets').'</span>',
+                "title" => '<span class="hidden-xs"><i class="fa fa-barcode" aria-hidden="true"></i></span><span class="hidden-md hidden-lg">'.trans('general.assets').'</span>',
                 "visible" => true,
 
             ],[
@@ -82,12 +82,14 @@ class CompanyPresenter extends Presenter
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.updated_at'),
+                "formatter" => 'createdAtFormatter',
             ],[
                 "field" => "created_at",
                 "searchable" => false,
                 "sortable" => true,
                 "visible" => false,
                 "title" => trans('general.created_at'),
+                "formatter" => 'createdAtFormatter',
             ],[
                 "field" => "actions",
                 "searchable" => false,

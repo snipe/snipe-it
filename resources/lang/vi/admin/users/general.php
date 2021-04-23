@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Bạn có thể tìm thấy cài đặt cấu hình LDAP Quản trị> Cài đặt. Địa điểm đã chọn (tùy chọn) sẽ được đặt cho tất cả người dùng được nhập.',
     'print_assigned'    => 'In tất cả tài sản đã cấp phát',
     'software_user'     => 'Phần mềm đã được checkout đến :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Xem người dùng :name',
     'usercsv'           => 'Tập tin CSV',
     'two_factor_admin_optin_help' => 'Cài đặt quản trị hiện tại của bạn cho phép thực thi có chọn lọc xác thực hai yếu tố.',

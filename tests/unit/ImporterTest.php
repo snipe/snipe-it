@@ -541,12 +541,27 @@ EOT;
     {
         $this->signIn();
         $csv = <<<'EOT'
-Name,Email,Username,Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,category,notes
-Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Graphics Software,Sed ante. Vivamus tortor. Duis mattis egestas metus.
+Full Name,Email,Username,Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,category,notes,asset tag
+Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Foot Relief,1aa5b0eb-79c5-40b2-8943-5472a6893c3c,"Beer, Leannon and Lubowitz",07/13/2012,$79.66,53008,386436062-5,Cynthia Spencer,cspencer0@gov.uk,01/27/2016,false,no,80,"Haag, Schmidt and Farrell","Hegmann, Mohr and Cremin",Graphics Software,Sed ante. Vivamus tortor. Duis mattis egestas metus.,test 1
 EOT;
+
+        // Force create an asset to match the checkout
+        $testAsset = $this->createValidAsset(['asset_tag' => 'test 1']);
         $this->import(new LicenseImporter($csv));
         // dd($this->tester->grabRecord('licenses'));
 
+        // Did we create a user?
+        $this->tester->seeRecord('users', [
+            'first_name' => 'Helen',
+            'last_name' => 'Anderson',
+            'email' => 'cspencer0@privacy.gov.au',
+        ]);
+        // Grab the user record for use in asserting assigned_to
+        $createdUser = $this->tester->grabRecord('users', [
+            'first_name' => 'Helen',
+            'last_name' => 'Anderson',
+            'email' => 'cspencer0@privacy.gov.au',
+        ]);
         $this->tester->seeRecord('licenses', [
             'name' => 'Argentum Malachite Athletes Foot Relief',
             'purchase_date' => '2012-07-13 00:00:01',
@@ -562,7 +577,6 @@ EOT;
             'reassignable' => 0,
             'serial' => '1aa5b0eb-79c5-40b2-8943-5472a6893c3c',
         ]);
-
         $this->tester->seeRecord('manufacturers', [
             'name' => 'Beer, Leannon and Lubowitz'
         ]);
@@ -580,6 +594,11 @@ EOT;
         ]);
 
         $this->tester->seeNumRecords(80, 'license_seats');
+        $this->tester->seeRecord('license_seats', [
+            'assigned_to' => $createdUser['id'],
+            'license_id' => \App\Models\License::where('serial','1aa5b0eb-79c5-40b2-8943-5472a6893c3c')->first()->id,
+            'asset_id' => $testAsset->id
+        ]);
     }
 
     public function testDefaultLicenseUpdate()

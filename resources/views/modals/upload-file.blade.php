@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
+                <h2 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
             </div>
             {{ Form::open([
             'method' => 'POST',
@@ -19,7 +19,7 @@
 
                         <label class="btn btn-default">
                             {{ trans('button.select_file')  }}
-                            <input type="file" name="file[]" multiple="true" class="js-uploadFile" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/*,.csv,.zip,.rar,.doc,.docx,.xls,.xml,.lic,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/plain,.pdf,application/rtf" style="display:none">
+                            <input type="file" name="file[]" multiple="true" class="js-uploadFile" id="uploadFile" data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}" accept="image/*,.csv,.zip,.rar,.doc,.docx,.xls,.xlsx,.xml,.lic,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/plain,.pdf,application/rtf" style="display:none">
                         </label>
 
                     </div>
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="col-md-12">
-                        {{ Form::textarea('notes', Input::old('notes', Input::old('notes')), ['class' => 'form-control','placeholder' => 'Notes (Optional)', 'rows'=>3]) }}
+                        {{ Form::textarea('notes', old('notes', old('notes')), ['class' => 'form-control','placeholder' => 'Notes (Optional)', 'rows'=>3, 'aria-label' => 'file']) }}
                     </div>
                 </div>
 

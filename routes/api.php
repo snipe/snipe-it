@@ -14,9 +14,24 @@ use Illuminate\Http\Request;
 */
 
 
-Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
+Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api'], function () {
+
+
+    Route::get('/', function() {
+
+        return response()->json(
+            [
+                'status' => 'error',
+                'message' => '404 endpoint not found. This is the base URL for the API and does not return anything itself. Please check the API reference at https://snipe-it.readme.io/reference to find a valid API endpoint.',
+                'payload' => null,
+            ], 404);
+    });
+
+
+
 
     Route::group(['prefix' => 'account'], function () {
+
         Route::get('requestable/hardware',
             [
                 'as' => 'api.assets.requestable',
@@ -49,7 +64,9 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
                 'uses'=> 'AccessoriesController@selectlist'
             ]
         );
-    }); // Accessories group
+    });
+
+    // Accessories group
     Route::resource('accessories', 'AccessoriesController',
         ['names' =>
             [
@@ -62,9 +79,34 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'except' => ['create', 'edit'],
             'parameters' => ['accessory' => 'accessory_id']
         ]
-    ); // Accessories resource
+    );
 
+    // Accessories resource
 
+    Route::group(['prefix' => 'accessories'], function () {
+
+        Route::get('{accessory}/checkedout',
+            [
+                'as' => 'api.accessories.checkedout',
+                'uses' => 'AccessoriesController@checkedout'
+            ]
+        );
+
+        Route::post('{accessory}/checkout',
+            [
+                'as' => 'api.accessories.checkout',
+                'uses' => 'AccessoriesController@checkout'
+            ]
+        );
+
+        Route::post('{accessory}/checkin',
+            [
+                'as' => 'api.accessories.checkin',
+                'uses' => 'AccessoriesController@checkin'
+            ]
+        );
+
+    }); // Accessories group
 
 
     /*--- Categories API ---*/
@@ -78,9 +120,9 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
 
-    }); // Categories group
+    });
 
-
+    // Categories group
     Route::resource('categories', 'CategoriesController',
         [
             'names' =>
@@ -105,6 +147,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     ]);
 
 
+    // Companies resource
     Route::resource('companies', 'CompaniesController',
         [
             'names' =>
@@ -123,7 +166,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
 
     /*--- Departments API ---*/
 
-    /*--- Suppliers API ---*/
     Route::group(['prefix' => 'departments'], function () {
 
 
@@ -188,6 +230,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'uses'=> 'ConsumablesController@selectlist'
         ]
     );
+
     Route::resource('consumables', 'ConsumablesController',
         [
             'names' =>
@@ -202,12 +245,22 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'parameters' => ['consumable' => 'consumable_id']
         ]
     ); // Consumables resource
-    Route::get('consumables/view/{id}/users',
-        [
-            'as' => 'api.consumables.showUsers',
-            'uses' => 'ConsumablesController@getDataView'
-        ]
-    );
+
+    Route::group(['prefix' => 'consumables'], function () {
+        Route::get('view/{id}/users',
+            [
+                'as' => 'api.consumables.showUsers',
+                'uses' => 'ConsumablesController@getDataView'
+            ]
+        );
+
+        Route::post('{consumable}/checkout',
+            [
+                'as' => 'api.consumables.checkout',
+                'uses' => 'ConsumablesController@checkout'
+            ]
+        );
+    });
 
     /*--- Depreciations API ---*/
 
@@ -328,11 +381,21 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             'uses' => 'AssetsController@showByTag'
         ]);
 
-        Route::get( 'byserial/{serial}',  [
-            'as' => 'assets.show.byserial',
-            'uses' => 'AssetsController@showBySerial'
-        ]);
+        Route::get('bytag/{any}',
+            [
+                'as' => 'api.assets.show.bytag',
+                'uses' => 'AssetsController@showByTag'
+            ]
+        )->where('any', '.*');
 
+
+        Route::get('byserial/{any}',
+            [
+                'as' => 'api.assets.show.byserial',
+                'uses' => 'AssetsController@showBySerial'
+            ]
+         )->where('any', '.*');
+        
 
         Route::get( 'selectlist',  [
             'as' => 'assets.selectlist',
@@ -432,11 +495,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
     /*--- Licenses API ---*/
 
     Route::group(['prefix' => 'licenses'], function () {
-        Route::get('{licenseId}/seats', [
-            'as' => 'api.license.seats',
-            'uses' => 'LicensesController@seats'
-        ]);
-        
         Route::get('selectlist',
             [
                 'as' => 'api.licenses.selectlist',
@@ -461,7 +519,18 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         ]
     ); // Licenses resource
 
-
+    Route::resource('licenses.seats', 'LicenseSeatsController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.licenses.seats.index',
+                    'show' => 'api.licenses.seats.show',
+                    'update' => 'api.licenses.seats.update'
+                ],
+            'except' => ['create', 'edit', 'destroy', 'store'],
+            'parameters' => ['licenseseat' => 'licenseseat_id']
+        ]
+    ); // Licenseseats resource
 
     /*--- Locations API ---*/
 
@@ -585,6 +654,11 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         'uses' => 'SettingsController@ldapAdSettingsTest'
     ]);
 
+    Route::post('settings/purge_barcodes', [
+        'as' => 'api.settings.purgebarcodes',
+        'uses' => 'SettingsController@purgeBarcodes'
+    ]);
+
     Route::get('settings/login-attempts', [
         'middleware' => ['auth', 'authorize:superuser'],
         'as' => 'api.settings.login_attempts',
@@ -606,8 +680,8 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         'settings/mailtest',
         [
             'as'  => 'api.settings.mailtest',
-            'uses' => 'SettingsController@ajaxTestEmail' ]
-    );
+            'uses' => 'SettingsController@ajaxTestEmail'
+    ]);
 
 
     Route::resource('settings', 'SettingsController',
@@ -753,15 +827,15 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
         );
 
 
-        Route::get('{user}/licenses',
+        Route::get('{user}/accessories',
             [
-                'as' => 'api.users.licenselist',
-                'uses' => 'UsersController@licenses'
+                'as' => 'api.users.accessorieslist',
+                'uses' => 'UsersController@accessories'
             ]
         );
 
 
-        Route::get('{user}/accessories',
+        Route::get('{user}/licenses',
             [
                 'as' => 'api.users.licenselist',
                 'uses' => 'UsersController@licenses'
@@ -933,6 +1007,17 @@ Route::group(['prefix' => 'v1','namespace' => 'Api'], function () {
             ]
         );
 
-    }); // kits
-    
+    }); // kits group
+
+    Route::fallback(function(){
+        return response()->json(
+            [
+                'status' => 'error',
+                'message' => '404 endpoint not found. Please check the API reference at https://snipe-it.readme.io/reference to find a valid API endpoint.',
+                'payload' => null,
+            ], 404);
+    });
+
 });
+
+

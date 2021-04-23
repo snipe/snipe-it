@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Last opp',
 	'select_file'				=> 'Velg fil...',
     'select_files'				=> 'Velg filer...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

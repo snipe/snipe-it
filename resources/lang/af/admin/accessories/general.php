@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Oor Toebehore',
-    'about_accessories_text'  			=> 'Toebehore is enigiets wat jy aan gebruikers uitreik, maar dit het nie \'n reeksnommer (of jy gee nie om om hulle unieke te volg nie). Byvoorbeeld, rekenaarmuise of sleutelborde.',
     'accessory_category' 				=> 'Toebehore Kategorie',
     'accessory_name'  					=> 'Toebehore Naam',
     'checkout'  							=> 'Checkout Accessory',

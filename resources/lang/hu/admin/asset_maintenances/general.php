@@ -7,5 +7,8 @@
         'view'               => 'Az eszköz karbantartás részletei',
         'repair'             => 'Javítás',
         'maintenance'        => 'Karbantartás',
-        'upgrade'            => 'Frissítés'
+        'upgrade'            => 'Frissítés',
+        'calibration'        => 'Kalibrálás',
+        'software_support'   => 'Szoftver támogatás',
+        'hardware_support'   => 'Hardver támogatás',
     ];

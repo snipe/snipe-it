@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> '关于资产分类',
-    'about_categories'  				=> '资产分类帮助你管理你资产。你可以设置例如：台式机，笔记本，手机，平板 等等分类，当然你也可以自定义这些分类。',
     'asset_categories' 					=> '资产分类',
     'category_name'  					=> '分类名称',
     'checkin_email'                     => '在签入/签出时发送邮件给所有者。',

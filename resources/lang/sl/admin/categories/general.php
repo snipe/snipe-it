@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'O kategorijah',
-    'about_categories'  				=> 'Kategorije vam pomagajo organizirati vaše predmete. Kategorije primerov so &quot;Namizni računalniki&quot;, &quot;Prenosni računalniki&quot;, &quot;Mobilni telefoni&quot;, &quot;Tablice&quot;in tako naprej, vendar lahko kategorije uporabite kakor koli je smiselno za vas.',
     'asset_categories' 					=> 'Kategorije sredstev',
     'category_name'  					=> 'Ime kategorije',
     'checkin_email'                     => 'Send email to user on checkin/checkout.',

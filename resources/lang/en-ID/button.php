@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'Unggah',
 	'select_file'				=> 'Pilih Berkas...',
     'select_files'				=> 'Pilih file...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

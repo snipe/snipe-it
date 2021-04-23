@@ -24,11 +24,13 @@ class LocationsTransformer
         if ($location) {
 
             $children_arr = [];
-            foreach($location->childLocations as $child) {
-                $children_arr[] = [
-                    'id' => (int) $child->id,
-                    'name' => $child->name
-                ];
+            if(!is_null($location->children)){
+                foreach($location->children as $child) {
+                    $children_arr[] = [
+                        'id' => (int) $child->id,
+                        'name' => $child->name
+                    ];
+                }
             }
 
             $array = [
@@ -45,6 +47,7 @@ class LocationsTransformer
                 'assets_count'    => (int) $location->assets_count,
                 'users_count'    => (int) $location->users_count,
                 'currency' =>  ($location->currency) ? e($location->currency) : null,
+                'ldap_ou' =>  ($location->ldap_ou) ? e($location->ldap_ou) : null,
                 'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
                 'parent' => ($location->parent) ? [
@@ -59,7 +62,7 @@ class LocationsTransformer
 
             $permissions_array['available_actions'] = [
                 'update' => Gate::allows('update', Location::class) ? true : false,
-                'delete' => (Gate::allows('delete', Location::class) && ($location->assigned_assets_count==0) && ($location->assets_count==0) && ($location->users_count==0) && ($location->deleted_at=='')) ? true : false,
+                'delete' => $location->isDeletable(),
             ];
 
             $array += $permissions_array;

@@ -4,6 +4,7 @@ return [
     'send_password_link'	        => 'Parola sıfırlama bağlantısını gönder',
     'email_reset_password'			=> 'Email şifre sıfırlama',
     'reset_password'			    => 'Şifre sıfırla',
+    'saml_login'                    => 'Login via SAML',
     'login'                         => 'Giriş',
     'login_prompt'                  => 'Lütfen giriş yapın',
     'forgot_password'               => 'Şifremi unuttum',
