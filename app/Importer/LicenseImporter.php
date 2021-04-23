@@ -71,27 +71,20 @@ class LicenseImporter extends ItemImporter
             if ($license->seats > 0) {
                 $checkout_target = $this->item['checkout_target'];
                 $asset = Asset::where('asset_tag', $asset_tag)->first();
-                $targetLicense = $license->freeSeat();
+                $targetSeat = $license->freeSeat();
                 if ($checkout_target) {
-                    try{
-                        $targetLicense->assigned_to = $checkout_target->id;
-                        $targetLicense->user_id = Auth::id();
-                        if ($asset) {
-                            $targetLicense->asset_id = $asset->id;
-                        }
-                        $targetLicense->save();
-                    } catch (\Exception $ex){
-                        if($ex->getMessage() === "Creating default object from empty value"){
-                            return back()->withError(trans("admin/licenses/message.not_enough_seats"));
-                        } else {
-                            return back()->withError($ex->getMessage());
-                        }
+                    if ($targetSeat){
+                        $targetSeat->assigned_to = $checkout_target->id;
+                        $targetSeat->user_id = Auth::id();
 
+                        $targetSeat->save();
+                    } else {
+                        return back()->withError(trans("admin/licenses/message.not_enough_seats"));
                     }
                 } elseif ($asset) {
-                    $targetLicense->user_id = Auth::id();
-                    $targetLicense->asset_id = $asset->id;
-                    $targetLicense->save();
+                    $targetSeat->user_id = Auth::id();
+                    $targetSeat->asset_id = $asset->id;
+                    $targetSeat->save();
                 }
             }
             return;
