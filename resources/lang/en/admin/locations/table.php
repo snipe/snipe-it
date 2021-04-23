@@ -20,4 +20,6 @@ return array(
     'parent'                    => 'Parent',
     'currency'                  => 'Location Currency',
     'ldap_ou'                   => 'LDAP Search OU',
+    'exclude_child_locations'   => 'Exclude Child Locations',
+    'include_child_locations'   => 'Include Child Locations',
     );

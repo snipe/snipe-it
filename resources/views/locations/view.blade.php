@@ -38,7 +38,7 @@
                         data-sort-order="asc"
                         id="usersTable"
                         class="table table-striped snipe-table"
-                        data-url="{{route('api.users.index', ['location_id' => $location->id])}}"
+                        data-url="{{route('api.users.index', ['location_id' => $location->id, 'include_child_locations' => e(Request::get('include_child_locations'))]) }}""
                         data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-users-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -71,7 +71,7 @@
                           data-sort-order="asc"
                           id="assetsListingTable"
                           class="table table-striped snipe-table"
-                          data-url="{{route('api.assets.index', ['location_id' => $location->id, 'include_child_locations' => e(Input::get('include_child_locations'))]) }}"
+                          data-url="{{route('api.assets.index', ['location_id' => $location->id, 'include_child_locations' => e(Request::get('include_child_locations'))]) }}"
                           data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -79,55 +79,8 @@
                   </table>
 
               </div><!-- /.table-responsive -->
-        </div><!-- /asset_tab -->
-
-        <div class="tab-pane" id="accessories_tab">
-              <div class="table table-responsive">
-
-                  <table
-                          data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
-                          data-cookie-id-table="accessoriesTable"
-                          data-pagination="true"
-                          data-id-table="accessoriesTable"
-                          data-search="true"
-                          data-side-pagination="server"
-                          data-show-columns="true"
-                          data-show-export="true"
-                          data-show-refresh="true"
-                          data-sort-order="asc"
-                          id="accessoriesTable"
-                          class="table table-striped snipe-table"
-                          data-url="{{route('api.accessories.index', ['location_id' => $location->id, 'include_child_locations' => e(Input::get('include_child_locations'))])}}"
-                          data-export-options='{
-                              "fileName": "export-accessories-{{ str_slug($location->name) }}-accessories-{{ date('Y-m-d') }}",
-                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                              }'>
-
-                  </table>
-              </div><!-- /.table-responsive -->
-        </div><!-- /accessories_tab -->
-
-        <div class="tab-pane" id="consumables_tab">
-              <div class="table table-responsive">
-
-                  <table
-                          data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
-                          data-cookie-id-table="consumablesTable"
-                          data-pagination="true"
-                          data-id-table="consumablesTable"
-                          data-search="true"
-                          data-side-pagination="server"
-                          data-show-columns="true"
-                          data-show-export="true"
-                          data-show-refresh="true"
-                          data-sort-order="asc"
-                          id="consumablesTable"
-                          class="table table-striped snipe-table"
-                          data-url="{{route('api.consumables.index', ['location_id' => $location->id, 'include_child_locations' => e(Input::get('include_child_locations'))])}}"
-                          data-export-options='{
-                              "fileName": "export-locations-{{ str_slug($location->name) }}-consumables-{{ date('Y-m-d') }}",
-                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                              }'>
+            </div><!-- /.box-body -->
+          </div> <!--/.box-->
 
       <div class="box box-default">
         <div class="box-header with-border">
@@ -151,7 +104,7 @@
                           data-sort-order="asc"
                           id="accessoriesListingTable"
                           class="table table-striped snipe-table"
-                          data-url="{{route('api.accessories.index', ['location_id' => $location->id]) }}"
+                          data-url="{{route('api.accessories.index', ['location_id' => $location->id, 'include_child_locations' => e(Request::get('include_child_locations'))]) }}"
                           data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-accessories-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -184,7 +137,7 @@
                           data-sort-order="asc"
                           id="consumablesListingTable"
                           class="table table-striped snipe-table"
-                          data-url="{{route('api.consumables.index', ['location_id' => $location->id]) }}"
+                          data-url="{{route('api.consumables.index', ['location_id' => $location->id, 'include_child_locations' => e(Request::get('include_child_locations'))]) }}"
                           data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-consumables-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -217,7 +170,7 @@
                           data-sort-order="asc"
                           id="componentsTable"
                           class="table table-striped snipe-table"
-                          data-url="{{route('api.components.index', ['location_id' => $location->id, 'include_child_locations' => e(Input::get('include_child_locations'))])}}"
+                          data-url="{{route('api.components.index', ['location_id' => $location->id, 'include_child_locations' => e(Request::get('include_child_locations'))]) }}"
                           data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-components-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -253,7 +206,11 @@
               <li>{{ trans('admin/users/table.manager') }}: {!! $location->manager->present()->nameUrl() !!}</li>
             @endif
             @if ($location->parent)
-              <li>{{ trans('admin/locations/table.parent') }}: {!! $location->parent->present()->nameUrl() !!}</li>
+              @if (Request::get('include_child_locations'))
+                <li>{{ trans('admin/locations/table.parent') }}: <a href="{{ route('locations.show', ['location' => $location->parent->id, 'include_child_locations' => Request::get('include_child_locations')]) }}">{{ $location->parent->name }}</a></li>
+              @else
+                <li>{{ trans('admin/locations/table.parent') }}: {!! $location->parent->present()->nameUrl() !!}</li>
+              @endif
             @endif
               @if ($location->ldap_ou)
                   <li>{{ trans('admin/locations/table.ldap_ou') }}: {{ $location->ldap_ou }}</li>
@@ -277,6 +234,13 @@
 		<div class="col-md-12" style="padding-top: 5px;">
 			<a href="{{ route('locations.print_all_assigned', ['locationId' => $location->id]) }}" style="width: 50%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.print_all_assigned') }} </a>
 		</div>
+    <div class="col-md-12" style="padding-top: 5px;">
+      @if (Request::get('include_child_locations'))
+        <a href="{{ route('locations.show', ['location' => $location->id]) }}" style="width: 50%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.exclude_child_locations') }}</a>
+      @else
+        <a href="{{ route('locations.show', ['location' => $location->id, 'include_child_locations' => 'true']) }}" style="width: 50%;" class="btn btn-sm btn-default pull-left">{{ trans('admin/locations/table.include_child_locations') }} </a>
+      @endif
+    </div>
 		
   </div>
 
