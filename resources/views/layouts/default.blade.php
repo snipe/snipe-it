@@ -65,12 +65,6 @@
     </style>
     @endif
 
-      @if (($snipeSettings) && ($snipeSettings->custom_css))
-          <style>
-              {!! $snipeSettings->show_custom_css() !!}
-          </style>
-      @endif
-
 
     <script nonce="{{ csrf_token() }}">
           window.snipeit = {
