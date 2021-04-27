@@ -43,7 +43,7 @@ return array(
     'Low_Inventory_Report' => 'Rapport d’inventaire bas',
     'min_QTY' => 'Quantité minimum',
     'name' => 'Nom',
-    'new_item_checked' => 'Un nouvel élément a été vérifié sous votre nom, les détails sont ci-dessous.',
+    'new_item_checked' => 'Un nouvel élément a été assigné à votre nom, les détails sont ci-dessous.',
     'password' => 'Mot de passe:',
     'password_reset' => 'Réinitialisation du mot de passe',
 
@@ -57,7 +57,7 @@ return array(
     'tag' => 'Étiquette',
     'test_email' => 'Email test de Snipe-IT',
     'test_mail_text' => 'Il s\'agit d\'un test du système de gestion d\'actifs Snipe-IT. Si vous avez obtenu cela, le courrier fonctionne :)',
-    'the_following_item' => 'L\'élément suivant a été enregistré : ',
+    'the_following_item' => 'L\'élément suivant a été restitué : ',
     'low_inventory_alert' => 'Il y a :count item qui est en dessous du minimum d\'inventaire ou qui sera bas sous peu.|Il y a :count articles qui sont en dessous du minimum d\'inventaire ou qui seront bas sous peu.',
     'assets_warrantee_alert' => 'Il y a :count actifs avec une garantie expirant dans les prochains :threshold jours.|Il y a :count actifs avec des garanties expirant dans les prochains :threshold jours.',
     'license_expiring_alert' => 'Il y a :count licence expirant dans les prochains :threshold jours.|Il y a :count licences expirant dans les prochains :threshold jours.',
