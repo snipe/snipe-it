@@ -11,6 +11,8 @@ return array(
     'country'                   => 'מדינה',
     'create'                    => 'צור מיקום',
     'update'                    => 'עדכן מיקום',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'שם מיקום',
     'address'                   => 'כתובת',
     'zip'                       => 'מיקוד',

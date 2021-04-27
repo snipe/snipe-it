@@ -112,7 +112,7 @@
     'image'                 => 'Image',
     'image_delete'         	=> 'Supprimer l\'image',
     'image_upload'         	=> 'Charger une image',
-    'image_filetypes_help'  => 'Les types de fichiers acceptés sont jpg, png, gif et svg. La taille maximale autorisée est :size.',
+    'image_filetypes_help'  => 'Les types de fichiers acceptés sont jpg, webp, png, gif et svg. Taille maximale est de:size.',
     'import'         	    => 'Importer',
     'importing'         	=> 'Importation en cours',
     'importing_help'        => 'Vous pouvez importer des matériels, accessoires, licences, composants, consommables et utilisateurs via un fichier CSV. <br><br>Le CSV doit être délimité par des virgules et formaté avec des en-têtes qui correspondent à ceux des <a href="https://snipe-it.readme.io/docs/importing" target="_new">exemples de CSV présents dans la documentation</a>.',
@@ -243,5 +243,7 @@
     'i_accept'              => 'J\'accepte',
     'i_decline'             => 'Je refuse',
     'sign_tos'              => 'Signez ci-dessous pour indiquer que vous acceptez les conditions d\'utilisation :',
-    'clear_signature'       => 'Effacer la signature'
+    'clear_signature'       => 'Effacer la signature',
+    'show_help'             => 'Afficher l\'aide',
+    'hide_help'             => 'Masquer l\'aide',
     ];

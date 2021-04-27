@@ -13,5 +13,5 @@ return array(
     'upload'                    => 'Tải lên',
 	'select_file'				=> 'Chọn tập tin...',
     'select_files'				=> 'Chọn files...',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'generate_labels'           => '{1} Nhãn Chung|[2,*] Nhiều Nhãn Chung',
 );

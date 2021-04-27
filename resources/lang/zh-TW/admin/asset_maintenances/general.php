@@ -8,7 +8,7 @@
         'repair'             => '維修',
         'maintenance'        => '維護',
         'upgrade'            => '升級',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => '校準',
+        'software_support'   => '軟體支援',
+        'hardware_support'   => '硬體支援',
     ];

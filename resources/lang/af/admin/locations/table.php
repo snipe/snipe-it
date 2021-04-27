@@ -11,6 +11,8 @@ return array(
     'country'                   => 'land',
     'create'                    => 'Skep Ligging',
     'update'                    => 'Opdateer Plek',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Pleknaam',
     'address'                   => 'adres',
     'zip'                       => 'Poskode',

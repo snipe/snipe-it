@@ -61,23 +61,23 @@ return array(
     'checkout' => array(
         'error'   		=> 'Equipo no asignado, intentalo de nuevo',
         'success' 		=> 'Equipo asignado.',
-        'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
-        'not_available' => '¡Ese artículo no está disponible para retirada!',
-        'no_assets_selected' => 'Debes seleccionar al menos un elemento de la lista'
+        'user_does_not_exist' => 'Este usuario es inválido. Por favor, inténtalo de nuevo.',
+        'not_available' => '¡Ese equipo no está disponible para asignar!',
+        'no_assets_selected' => 'Debes seleccionar al menos un equipo de la lista'
     ),
 
     'checkin' => array(
-        'error'   		=> 'No se ha quitado el equipo. Intentalo de nuevo.',
-        'success' 		=> 'Equipo quitado correctamente.',
-        'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
-        'already_checked_in'  => 'Ese activo ya se quito.',
+        'error'   		=> 'El equipo no pudo ser asignado, por favor inténtalo de nuevo',
+        'success' 		=> 'El equipo fue asignado exitosamente.',
+        'user_does_not_exist' => 'Es usuario es invalido, por favor inténtalo de nuevo.',
+        'already_checked_in'  => 'El equipo ya ha sido devuelto.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Bien no solicitado, por favor inténtelo de nuevo',
-        'success' 		=> 'Bien solicitado correctamente.',
-        'canceled'      => 'Solicitud de retirada cancelada con éxito'
+        'error'   		=> 'El equipo no pudo ser solicitado, por favor inténtalo de nuevo',
+        'success' 		=> 'El equipos fue solicitado exitosamente.',
+        'canceled'      => 'La solicitud de asignación fue cancelada de forma exitosa'
     )
 
 );

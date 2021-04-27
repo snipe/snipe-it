@@ -1,7 +1,7 @@
 <?php
 return array(
     'does_not_exist' => 'Yritystä ei ole.',
-    'assoc_users'    => 'Yritys on liitettynnä vähintään yhteen malliin, eikä sitä voida poistaa. Poista malleista viitaus kyseiseen yritykseen ja yritä uudelleen. ',
+    'assoc_users'    => 'Yritys on liitettynä vähintään yhteen malliin, eikä sitä voida poistaa. Poista malleista viittaus kyseiseen yritykseen ja yritä uudelleen. ',
     'create' => array(
         'error'   => 'Yritystä ei luotu, yritä uudelleen.',
         'success' => 'Yritys luotiin onnistuneesti.'

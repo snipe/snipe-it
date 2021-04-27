@@ -2,8 +2,8 @@
 
 return array(
     'about_kits_title'                  => 'O zestawach',
-    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
-    'checkout'                          => 'Checkout Kit ',
+    'about_kits_text'                   => 'Zestawy predefiniowane pozwalają na szybkie przydzielenie zbioru pozycji (urządzeń, licencji itd.) użytkownikowi. Może to być pomocne, kiedy twój proces wdrażania jest spójny dla wielu użytkowników i wszyscy użytkownicy otrzymują takie same pozycje.',
+    'checkout'                          => 'Wydaj zestaw ',
     'create_success'                    => 'Zestaw został utworzony pomyślnie.',
     'create'                            => 'Utwórz zdefiniowany zestaw',
     'update'                            => 'Aktualizuj zdefiniowany zestaw',

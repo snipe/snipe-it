@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Χώρα',
     'create'                    => 'Δημιουργία τοποθεσίας',
     'update'                    => 'Ανανέωση τοποθεσίας',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Όνομα τοποθεσίας',
     'address'                   => 'Διεύθυνση',
     'zip'                       => 'Ταχυδρομικός Κώδικας',

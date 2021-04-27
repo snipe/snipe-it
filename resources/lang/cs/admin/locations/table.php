@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Země',
     'create'                    => 'Vytvořit umístění',
     'update'                    => 'Upravit umístění',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Název umístění',
     'address'                   => 'Adresa',
     'zip'                       => 'PSČ',

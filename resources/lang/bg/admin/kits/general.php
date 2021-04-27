@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about_kits_title'                  => 'About Predefined Kits',
-    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
-    'checkout'                          => 'Checkout Kit ',
-    'create_success'                    => 'Kit was successfully created.',
-    'create'                            => 'Create Predefined Kit',
-    'update'                            => 'Update Predefined Kit',
-    'delete_success'                    => 'Kit was successfully deleted.',
-    'update_success'                    => 'Kit was successfully updated.',
-    'none_models'                       => 'There are not enough available assets for :model to checkout. :qty are required. ',
-    'none_licenses'                     => 'There are not enough available seats for :license to checkout. :qty are required. ',
-    'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
-    'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
+    'about_kits_title'                  => 'Отностно предварително дефинирани комплекти',
+    'about_kits_text'                   => 'Предварително дефинираните комплекти Ви позволяват да изпишете група от артикули (активи, лицензи и др.) на избран потребител. Това може да бъде полезно, когато изписвате еднакви артикули в комплект.',
+    'checkout'                          => 'Изпиши Комплект ',
+    'create_success'                    => 'Комплектът беше създаден.',
+    'create'                            => 'Създай предифиниран комплект',
+    'update'                            => 'Обнови предифиниран комплект',
+    'delete_success'                    => 'Комплектът беше изтрит.',
+    'update_success'                    => 'Комплектът беше обновен.',
+    'none_models'                       => 'Няма достатъчна наличност от :model за изписване. Не достигат  :qty . ',
+    'none_licenses'                     => 'Няма достатъчно налични :license за изписване. Не достигат :qty . ',
+    'none_consumables'                  => 'Няма достатъчно налични бройки от :consumable за изписване. Не достигат :qty . ',
+    'none_accessory'                    => 'Няма достатъчно налични бройки от :accessory за изписване. Не достигат :qty . ',
 
 );
