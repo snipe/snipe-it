@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Izwe',
     'create'                    => 'Dala indawo',
     'update'                    => 'Buyekeza Indawo',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Igama lendawo',
     'address'                   => 'Ikheli',
     'zip'                       => 'I-Postal Code',

@@ -15,17 +15,17 @@ return array(
 
     "more_info_title" => "Lisätietoa",
 
-    "audit_help" => "Tämän laatikon valitseminen muokkaa laitetietoja heijastamaan uutta sijaintia. Jos sitä ei ole valittu, sijainti kirjataan vain lokiin.<br><br> Huomaa, että jos laite on jo uloskuitattuna, tämä ei muuta henkilön, tai laitteen sijaintia mihin se on uloskuittattuna.",
+    "audit_help" => "Tämän valitseminen muuttaa laitetiedot vastaamaan uutta sijaintia. Jos sitä ei ole valittu, sijainti kirjataan vain lokiin.<br><br> Huomaa, että jos laite on jo luovutettuna, tämä ei muuta sen henkilön, tai laitteen sijaintia mihin se on luovutettuna.",
 
-    'assets' => 'Laitteita seurataan sarjanumeron tai laitetunnisteen avulla. Laitteiksi määritellään yleensä arvoikkaampaa omaisuutta, joidenka tunnistaminen  yksilöllisesti on tärkeää.',
+    'assets' => 'Laitteet ovat nimmeitä joita seurataan sarjanumeron tai laitetunnisteen avulla. Laitteiksi määritellään yleensä arvokkaampaa omaisuutta, joiden tunnistaminen  yksilöllisesti on tärkeää.',
 
-    'categories' => 'Kategoriat auttavat sinua järjestämään kohteita. Joitakin esimerkkiluokkia voivat olla &quot;Työasemat&quot;, &quot;Kannettavat&quot;, &quot;Puhelimet&quot;, &quot;Tabletit&quot; ja niin edelleen, mutta voit käyttää kategorioita millä tahansa itsellesi sopivalla tavalla.',
+    'categories' => 'Kategoriat auttavat sinua järjestämään nimikkeitä. Kategorioita voivat olla esimerkiksi &quot;Työasemat&quot;, &quot;Kannettavat&quot;, &quot;Puhelimet&quot;, &quot;Tabletit&quot; ja niin edelleen, mutta voit käyttää kategorioita millä tahansa itsellesi sopivalla tavalla.',
 
-    'accessories' => 'Lisävarusteet ovat laitteita joita ennetaan käyttäjille, mutta joilla ei ole omia tunnisteita tai sarjanumeroita. Kuten vaikkapa hiiret ja näppäimistöt.',
+    'accessories' => 'Oheistarvikkeet ovat laitteita joita annetaan käyttäjille, mutta joilla ei ole omia tunnisteita tai sarjanumeroita. Kuten vaikkapa hiiret ja näppäimistöt.',
 
     'companies'     => 'Yrityksiä voidaan käyttää yksinkertaisesti tunnisteena tai niitä voidaan käyttää rajoittamaan laitteiden näkyvyyttä käyttäjille, jne, jos täysi yritystuki on käytössä Admin asetuksissa.',
 
-    'components'    => 'Komponentit ovat kohteita, jotka ovat osa laitetta, esimerkiksi kiintolevyjä, RAM-muistia jne.',
+    'components'    => 'Komponentit ovat nimikkeitä, jotka ovat osa laitetta, esimerkiksi kiintolevyjä, RAM-muistia jne.',
 
     'consumables'   => 'Kulutustarvikkeet ovat kohteita jotka kuluvat ajan myötä. Esimerkiksi tulostimen muste tai kopiopaperi.',
 

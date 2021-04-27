@@ -13,5 +13,5 @@ return array(
     'upload'                    => 'Качване',
 	'select_file'				=> 'Изберете файл...',
     'select_files'				=> 'Изберете файлове...',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'generate_labels'           => '{1} Генерирай Етикет|[2,*] Генерирай Етикети',
 );

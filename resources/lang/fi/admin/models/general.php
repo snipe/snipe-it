@@ -5,7 +5,7 @@ return array(
     'about_models_text'           => 'Laitemalleilla ryhmitellään samankaltaiset laitteet. "Elitebook 820 G3", "IPhone 6s" jne.',
     'deleted'  					        => 'Tämä malli on poistettu. <a href="/hardware/models/:model_id/restore">Vaihda tästä palauttaaksesi sen</a>.',
     'bulk_delete'               => 'Massapoista laitemalleja',
-    'bulk_delete_help'               => 'Käytä alla olevia valintaruutuja vahvistaaksesi valittujen laitemallien poistamisen. Laitemalleja, joissa on niihin liittyviä laitteita, ei voida poistaa ennen kuin laitteet on liitetty toiseen malliin.',
+    'bulk_delete_help'               => 'Käytä alla olevia valintaruutuja vahvistaaksesi laitemallien poistaminen. Laitemalleja, joissa on niihin liittyviä laitteita, ei voida poistaa ennen kuin laitteet on liitetty toiseen malliin.',
     'bulk_delete_warn'          => 'Olet poistamassa :model_count laitemallia.',
     'restore'                   => 'Palauta malli',
     'requestable'               => 'Käyttäjät voivat pyytää tätä mallia',

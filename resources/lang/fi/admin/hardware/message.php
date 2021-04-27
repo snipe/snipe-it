@@ -26,7 +26,7 @@ return array(
 
     'audit' => array(
         'error'   		=> 'Laitteen tarkastus epäonnistui. Yritä uudelleen.',
-        'success' 		=> 'Laitteen auditointi kirjattu.'
+        'success' 		=> 'Laitteen tarkastus kirjattu.'
     ),
 
 
@@ -43,8 +43,8 @@ return array(
     ),
 
     'import' => array(
-        'error'                 => 'Joitakin kohteita ei tuotu oikein.',
-        'errorDetail'           => 'Seuraavia kohteita ei tuotu virheiden vuoksi.',
+        'error'                 => 'Joitakin nimikkeitä ei tuotu oikein.',
+        'errorDetail'           => 'Seuraavia nimikkeitä ei tuotu virheiden vuoksi.',
         'success'               => "Tiedostosi on tuotu",
         'file_delete_success'   => "Tiedosto on poistettu onnistuneesti",
         'file_delete_error'      => "Tiedostoa ei voitu poistaa",
@@ -70,14 +70,14 @@ return array(
         'error'   		=> 'Laitteen palautus epäonnistui, yritä uudelleen',
         'success' 		=> 'Laite palautettu onnistuneesti.',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.',
-        'already_checked_in'  => 'Tämä laite on jo sisäänkirjattuna.',
+        'already_checked_in'  => 'Tämä laite on jo palautettu.',
 
     ),
 
     'requests' => array(
         'error'   		=> 'Laitetta ei pyydetty, yritä uudelleen',
-        'success' 		=> 'Laitetteen pyyntäminen onnistui.',
-        'canceled'      => 'Uloskuittaus-pyyntö peruutettiin onnistuneesti'
+        'success' 		=> 'Laitteen pyytäminen onnistui.',
+        'canceled'      => 'Luovutus-pyyntö peruutettiin onnistuneesti'
     )
 
 );

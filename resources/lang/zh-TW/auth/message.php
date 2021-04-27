@@ -11,9 +11,9 @@ return array(
 
     'two_factor' => array(
         'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
+        'success'               => '您已成功登入',
         'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'invalid_code'          => '兩階段驗證碼無效',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => '登出時發生問題，請稍後再試',
+        'success' => '您已成功登出',
     ),
 
     'signup' => array(

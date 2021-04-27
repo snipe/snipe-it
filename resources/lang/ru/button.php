@@ -13,5 +13,5 @@ return array(
     'upload'                    => 'Загрузка',
 	'select_file'				=> 'Выберите файл...',
     'select_files'				=> 'Выбрать файлы...',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'generate_labels'           => '{1} Сгенерировать этикетку[2,*] Cгенерировать этикетки',
 );

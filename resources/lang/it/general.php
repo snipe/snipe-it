@@ -112,7 +112,7 @@
     'image'                 => 'Immagine',
     'image_delete'         	=> 'Cancella l\'Immagine',
     'image_upload'         	=> 'Carica immagine',
-    'image_filetypes_help'  => 'I tipi di file accettati sono jpg, png, gif e svg. La dimensione massima consentita per il caricamento è :size.',
+    'image_filetypes_help'  => 'I tipi di file accettati sono jpg, webp, png, gif e svg. La dimensione massima consentita per il caricamento è :size.',
     'import'         	    => 'Importa',
     'importing'         	=> 'Importare',
     'importing_help'        => 'È possibile importare risorse, accessori, licenze, componenti, materiali di consumo e utenti utilizzando file CSV. <br><br>Il CSV dovrebbe essere delimitato e formattato con elementi che corrispondano a quelle della seguente documentazione <a href="https://snipe-it.readme.io/docs/importing" target="_new"> esempio CSV </a>.',
@@ -243,5 +243,7 @@
     'i_accept'              => 'Accetto',
     'i_decline'             => 'Rifiuto',
     'sign_tos'              => 'Firma qui sotto per indicare che accetti i termini di servizio:',
-    'clear_signature'       => 'Cancella Firma'
+    'clear_signature'       => 'Cancella Firma',
+    'show_help'             => 'Mostra aiuto',
+    'hide_help'             => 'Nascondi aiuto',
     ];

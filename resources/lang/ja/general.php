@@ -112,7 +112,7 @@
     'image'                 => '画像',
     'image_delete'         	=> '画像を削除',
     'image_upload'         	=> '画像をアップロード',
-    'image_filetypes_help'  => '使用できるファイルはjpg、png、gif、svgです。許可される最大アップロードサイズは:size です。',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, and svg. Max upload size allowed is :size.',
     'import'         	    => 'インポート',
     'importing'         	=> 'インポートしています',
     'importing_help'        => 'アセット、アクセサリ、ライセンス、コンポーネント、消耗品、およびユーザーをCSVファイルからインポートできます。 <br><br>CSVは、ドキュメント <a href="https://snipe-it.readme.io/docs/importing" target="_new"></a> のサンプルCSVに一致するヘッダーでカンマ区切りでフォーマットする必要があります。',
@@ -243,5 +243,7 @@
     'i_accept'              => 'I accept',
     'i_decline'             => 'I decline',
     'sign_tos'              => 'Sign below to indicate that you agree to the terms of service:',
-    'clear_signature'       => 'Clear Signature'
+    'clear_signature'       => 'Clear Signature',
+    'show_help'             => 'Show help',
+    'hide_help'             => 'Hide help',
     ];

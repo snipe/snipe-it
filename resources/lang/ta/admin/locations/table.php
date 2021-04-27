@@ -11,6 +11,8 @@ return array(
     'country'                   => 'நாடு',
     'create'                    => 'இருப்பிடத்தை உருவாக்கவும்',
     'update'                    => 'இருப்பிடம் புதுப்பிக்கவும்',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'இருப்பிடம் பெயர்',
     'address'                   => 'முகவரி',
     'zip'                       => 'அஞ்சல் குறியீடு',

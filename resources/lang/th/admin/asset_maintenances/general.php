@@ -8,7 +8,7 @@
         'repair'             => 'ซ่อมแซม',
         'maintenance'        => 'การดูแลรักษา',
         'upgrade'            => 'อัพเกรด',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'การเปรียบเทียบค่า',
+        'software_support'   => 'การสนับสนุน Software',
+        'hardware_support'   => 'การสนับสนุน Hardware',
     ];

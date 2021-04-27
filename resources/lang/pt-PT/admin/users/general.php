@@ -19,7 +19,7 @@ return array(
     'ldap_config_text'  => 'As definições de configuração do LDAP podem ser encontradas em Administrador > Definições. A localização (opcional) selecionada vai ser defenida para todos os utilizadores importados.',
     'print_assigned'    => 'Imprimir todos atribuídos',
     'software_user'     => 'Software alocado a :name',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => 'Você deve fornecer um endereço de e-mail para este usuário para enviar-lhe credenciais. Credenciais via e-mail só podem ser feitas na criação do usuário. As senhas são armazenadas em hash e não podem ser recuperadas depois de salvas.',
     'view_user'         => 'Ver Utilizador :name',
     'usercsv'           => 'Ficheiro CSV',
     'two_factor_admin_optin_help' => 'As configurações de admin actuais permitem a aplicação selectiva de autenticação de dois passos.  ',

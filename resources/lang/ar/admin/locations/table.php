@@ -11,6 +11,8 @@ return array(
     'country'                   => 'الدولة',
     'create'                    => 'إنشاء موقع',
     'update'                    => 'تحديث الموقع',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'إسم الموقع',
     'address'                   => 'العنوان',
     'zip'                       => 'الرمز البريدي',

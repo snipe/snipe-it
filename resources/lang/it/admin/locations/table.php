@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Paese',
     'create'                    => 'Crea Posizione',
     'update'                    => 'Aggiorna Posizione',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Nome Posizione',
     'address'                   => 'Indirizzo',
     'zip'                       => 'Codice Postale',

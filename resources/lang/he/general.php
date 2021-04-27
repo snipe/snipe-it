@@ -112,7 +112,7 @@
     'image'                 => 'תמונה',
     'image_delete'         	=> 'מחק תמונה',
     'image_upload'         	=> 'העלאת תמונה',
-    'image_filetypes_help'  => 'Accepted filetypes are jpg, png, gif, and svg. Max upload size allowed is :size.',
+    'image_filetypes_help'  => 'סוגי הקבצים המותרים הם jpg,‏ webp,‏ png,‏ gif ו־svg. גודל ההעלאה המרבי המותר הוא :size.',
     'import'         	    => 'יְבוּא',
     'importing'         	=> 'Importing',
     'importing_help'        => 'You can import assets, accessories, licenses, components, consumables, and users via CSV file. <br><br>The CSV should be comma-delimited and formatted with headers that match the ones in the <a href="https://snipe-it.readme.io/docs/importing" target="_new">sample CSVs in the documentation</a>.',
@@ -243,5 +243,7 @@
     'i_accept'              => 'קיבלתי',
     'i_decline'             => 'דחיתי',
     'sign_tos'              => 'יש לחתום להלן כדי לציין שתנאי השימוש מוסכמים עליך:',
-    'clear_signature'       => 'מחיקת החתימה'
+    'clear_signature'       => 'מחיקת החתימה',
+    'show_help'             => 'הצגת עזרה',
+    'hide_help'             => 'הסתרת עזרה',
     ];
