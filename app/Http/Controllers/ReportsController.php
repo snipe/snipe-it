@@ -12,7 +12,6 @@ use App\Models\Depreciation;
 use App\Models\License;
 use App\Models\Setting;
 use Carbon\Carbon;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
@@ -417,7 +416,7 @@ class ReportsController extends Controller
             // Open output stream
             $handle = fopen('php://output', 'w');
             stream_set_timeout($handle, 2000);
-            
+
             if ($request->filled('use_bom')) {
                 fprintf($handle, chr(0xEF) . chr(0xBB) . chr(0xBF));
             }
@@ -488,7 +487,7 @@ class ReportsController extends Controller
             if ($request->filled('rtd_location')) {
                 $header[] = trans('admin/hardware/form.default_location');
             }
-            
+
             if ($request->filled('rtd_location_address')) {
                 $header[] = trans('general.address');
                 $header[] = trans('general.address');
@@ -579,7 +578,7 @@ class ReportsController extends Controller
             $assets = \App\Models\Company::scopeCompanyables(Asset::select('assets.*'))->with(
                 'location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
                 'model.category', 'model.manufacturer','supplier');
-            
+
             if ($request->filled('by_location_id')) {
                 $assets->where('assets.location_id', $request->input('by_location_id'));
             }
@@ -641,7 +640,7 @@ class ReportsController extends Controller
             if (($request->filled('next_audit_start')) && ($request->filled('next_audit_end'))) {
                 $assets->whereBetween('assets.next_audit_date', [$request->input('next_audit_start'), $request->input('next_audit_end')]);
             }
-            
+
             $assets->orderBy('assets.created_at', 'ASC')->chunk(20, function($assets) use($handle, $customfields, $request) {
 
                 $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
@@ -650,7 +649,7 @@ class ReportsController extends Controller
                 foreach ($assets as $asset) {
                     $count++;
                     $row = [];
-                    
+
                     if ($request->filled('company')) {
                         $row[] = ($asset->company) ? $asset->company->name : '';
                     }
@@ -699,7 +698,7 @@ class ReportsController extends Controller
                     if ($request->filled('supplier')) {
                         $row[] = ($asset->supplier) ? $asset->supplier->name : '';
                     }
-                    
+
 
                     if ($request->filled('location')) {
                         $row[] = ($asset->location) ? $asset->location->present()->name() : '';
@@ -930,9 +929,8 @@ class ReportsController extends Controller
      * getAssetAcceptanceReport
      *
      * @return mixed
-     * @throws AuthorizationException
-     * @version v1.0
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
      */
     public function getAssetAcceptanceReport()
     {
