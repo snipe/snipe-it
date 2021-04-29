@@ -12,6 +12,7 @@ use App\Models\Depreciation;
 use App\Models\License;
 use App\Models\Setting;
 use Carbon\Carbon;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
@@ -929,8 +930,9 @@ class ReportsController extends Controller
      * getAssetAcceptanceReport
      *
      * @return mixed
-     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @throws AuthorizationException
      * @version v1.0
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
      */
     public function getAssetAcceptanceReport()
     {
@@ -940,11 +942,11 @@ class ReportsController extends Controller
          * Get all assets with pending checkout acceptances
          */
 
-        $acceptances = CheckoutAcceptance::pending()->get();
+        $acceptances = CheckoutAcceptance::pending()->with('assignedTo')->get();
 
         $assetsForReport = $acceptances
             ->filter(function($acceptance) {
-                return $acceptance->checkoutable_type == 'App\Models\Asset';
+                return $acceptance->checkoutable_type == 'App\Models\Asset' && !is_null($acceptance->assignedTo);
             })
             ->map(function($acceptance) {
                 return $acceptance->checkoutable;
