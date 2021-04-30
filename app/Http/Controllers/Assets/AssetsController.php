@@ -813,7 +813,7 @@ class AssetsController extends Controller
         $asset->unsetEventDispatcher();
 
         $asset->next_audit_date = $request->input('next_audit_date');
-        $asset->last_audit_date = date('Y-m-d h:i:s');
+        $asset->last_audit_date = date('Y-m-d H:i:s');
 
         // Check to see if they checked the box to update the physical location,
         // not just note it in the audit notes
