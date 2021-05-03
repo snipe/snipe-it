@@ -41,19 +41,24 @@
                 <th class="col-sm-1">{{ trans('admin/hardware/form.name') }}</th>
                 <th class="col-sm-1">{{ trans('admin/hardware/table.asset_tag') }}</th>
                 <th class="col-sm-1">{{ trans('admin/hardware/table.checkoutto') }}</th>
+                <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
               </tr>
             </thead>
             <tbody>
               @if ($assetsForReport)
-              @foreach ($assetsForReport as $assetItem)
-                  @if ($assetItem)
+              @foreach ($assetsForReport as $item)
+                  @if ($item['assetItem'])
                   <tr>
-                    <td>{{ ($assetItem->company) ? $assetItem->company->name : '' }}</td>
-                    <td>{{ $assetItem->model->category->name }}</td>
-                    <td>{{ $assetItem->model->name }}</td>
-                    <td>{!! $assetItem->present()->nameUrl() !!}</td>
-                    <td>{{ $assetItem->asset_tag }}</td>
-                    <td>{!! ($assetItem->assignedTo) ? $assetItem->assignedTo->present()->nameUrl() : 'Deleted user' !!}</td>
+                    <td>{{ ($item['assetItem']->company) ? $assetItem->company->name : '' }}</td>
+                    <td>{!! $item['assetItem']->model->category->present()->nameUrl() !!}</td>
+                    <td>{!! $item['assetItem']->present()->modelUrl() !!}</td>
+                    <td>{!! $item['assetItem']->present()->nameUrl() !!}</td>
+                    <td>{{ $item['assetItem']->asset_tag }}</td>
+                    <td>{!! ($item['acceptance']->assignedTo) ? $item['acceptance']->assignedTo->present()->nameUrl() : trans('admin/reports/general.deleted_user') !!}</td>
+                    <td>
+                        @if ($item['acceptance']->assignedTo)<a href="{{ route('reports/unaccepted_assets_sent_reminder', ['acceptanceId' => $item['acceptance']->id]) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('admin/reports/general.send_reminder') }}</a>@endif
+                        <a href="{{ route('reports/unaccepted_assets_delete', ['acceptanceId' => $item['acceptance']->id]) }}" class="btn btn-sm btn-danger delete-asset" data-tooltip="true" data-toggle="modal" data-content="{{ trans('general.delete_confirm', ['item' =>trans('admin/reports/general.acceptance_request')]) }}" data-title="{{  trans('general.delete') }}" onClick="return false;"><i class="fa fa-trash"></i></a>
+                    </td>
                   </tr>
                   @endif
               @endforeach

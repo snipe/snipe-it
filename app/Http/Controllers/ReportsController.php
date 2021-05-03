@@ -12,8 +12,10 @@ use App\Models\CustomField;
 use App\Models\Depreciation;
 use App\Models\License;
 use App\Models\Setting;
+use App\Notifications\CheckoutAssetNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Input;
@@ -904,6 +906,7 @@ class ReportsController extends Controller
      * getAssetAcceptanceReport
      *
      * @return mixed
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */
@@ -914,17 +917,85 @@ class ReportsController extends Controller
         /**
          * Get all assets with pending checkout acceptances
          */
+<<<<<<< HEAD
         $acceptances = CheckoutAcceptance::pending()->get();
+=======
+        $acceptances = CheckoutAcceptance::pending()->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+>>>>>>> Unaccepted Assets Report Actions (send reminder, delete) added
 
         $assetsForReport = $acceptances
             ->filter(function ($acceptance) {
                 return $acceptance->checkoutable_type == \App\Models\Asset::class;
             })
+<<<<<<< HEAD
             ->map(function ($acceptance) {
                 return $acceptance->checkoutable;
+=======
+            ->map(function($acceptance) {
+                return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
+>>>>>>> Unaccepted Assets Report Actions (send reminder, delete) added
             });
 
         return view('reports/unaccepted_assets', compact('assetsForReport'));
+    }
+
+    /**
+     * sentAssetAcceptanceReminder
+     *
+     * @param integer|null $acceptanceId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @version v1.0
+     */
+    public function sentAssetAcceptanceReminder($acceptanceId = null)
+    {
+        $this->authorize('reports.view');
+
+        if (!$acceptance = CheckoutAcceptance::pending()->find($acceptanceId)) {
+            // Redirect to the unaccepted assets report page with error
+            return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
+        }
+        $assetItem = $acceptance->checkoutable;
+
+        $logItem = $assetItem->checkouts()->where('created_at', '=', $acceptance->created_at)->get()[0];
+
+        if(!$assetItem->assignedTo->locale){
+            Notification::locale(Setting::getSettings()->locale)->send(
+                $assetItem->assignedTo,
+                new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
+            );
+        } else {
+            Notification::send(
+                $assetItem->assignedTo,
+                new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
+            );
+        }
+
+        return redirect()->route('reports/unaccepted_assets')->with('success', trans('admin/reports/general.reminder_sent'));
+    }
+
+    /**
+     * sentAssetAcceptanceReminder
+     *
+     * @param integer|null $acceptanceId
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @version v1.0
+     */
+    public function deleteAssetAcceptance($acceptanceId = null)
+    {
+        $this->authorize('reports.view');
+
+        if (!$acceptance = CheckoutAcceptance::pending()->find($acceptanceId)) {
+            // Redirect to the unaccepted assets report page with error
+            return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.bad_data'));
+        }
+
+        if($acceptance->delete()) {
+            return redirect()->route('reports/unaccepted_assets')->with('success', trans('admin/reports/general.acceptance_deleted'));
+        } else {
+            return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.deletion_failed'));
+        }
     }
 
     /**
@@ -937,9 +1008,19 @@ class ReportsController extends Controller
     public function exportAssetAcceptanceReport()
     {
         $this->authorize('reports.view');
-        // Grab all the improvements
-        $assetsForReport = Actionlog::whereIn('id', $this->getAssetsNotAcceptedYet())
-                                    ->get();
+
+        /**
+         * Get all assets with pending checkout acceptances
+         */
+        $acceptances = CheckoutAcceptance::pending()->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+
+        $assetsForReport = $acceptances
+            ->filter(function($acceptance) {
+                return $acceptance->checkoutable_type == 'App\Models\Asset';
+            })
+            ->map(function($acceptance) {
+                return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
+            });
 
         $rows = [];
 
@@ -954,6 +1035,7 @@ class ReportsController extends Controller
         $header = array_map('trim', $header);
         $rows[] = implode($header, ',');
 
+<<<<<<< HEAD
         foreach ($assetsForReport as $assetItem) {
             $row = [];
             $row[] = str_replace(',', '', e($assetItem->assetlog->model->category->name));
@@ -961,6 +1043,15 @@ class ReportsController extends Controller
             $row[] = str_replace(',', '', e($assetItem->assetlog->present()->name()));
             $row[] = str_replace(',', '', e($assetItem->assetlog->asset_tag));
             $row[] = str_replace(',', '', e($assetItem->assetlog->assignedTo->present()->name()));
+=======
+        foreach ($assetsForReport as $item) {
+            $row    = [ ];
+            $row[]  = str_replace(',', '', e($item['assetItem']->model->category->name));
+            $row[]  = str_replace(',', '', e($item['assetItem']->model->name));
+            $row[]  = str_replace(',', '', e($item['assetItem']->name));
+            $row[]  = str_replace(',', '', e($item['assetItem']->asset_tag));
+            $row[]  = str_replace(',', '', e(($item['acceptance']->assignedTo) ? $item['acceptance']->assignedTo->present()->name() : trans('admin/reports/general.deleted_user')));
+>>>>>>> Unaccepted Assets Report Actions (send reminder, delete) added
             $rows[] = implode($row, ',');
         }
 
