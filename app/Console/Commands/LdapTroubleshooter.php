@@ -74,6 +74,8 @@ class LdapTroubleshooter extends Command
      */
     public function handle()
     {
+	ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, 7);
+
         $settings = Setting::getSettings();
         if($this->option('ldap-search')) {
             if(!$this->option('force')) {
