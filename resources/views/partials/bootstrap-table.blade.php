@@ -637,10 +637,10 @@
 
                 if ($(element).val() != '') {
                     $(element).addClass('search-highlight');
-                    $(element).next().children().addClass('search-highlight'); // fixme
+                    $(element).next().children().addClass('search-highlight'); 
                 } else {
                     $(element).removeClass('search-highlight');
-                    $(element).next().children().removeClass('search-highlight'); //fixme
+                    $(element).next().children().removeClass('search-highlight');
                 }
             });
         };
