@@ -177,6 +177,7 @@ a:visited {
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
   background-color: #111;
 }
-.search-highlight {
+.search-highlight,
+.search-highlight:hover {
   background-color: #e9d15b;
 }

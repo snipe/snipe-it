@@ -488,6 +488,7 @@ a:visited {
   border-top: 1px solid #dddddd;
   display: table-cell;
 }
-.search-highlight {
+.search-highlight,
+.search-highlight:hover {
   background-color: #e9d15b;
 }
