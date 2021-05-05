@@ -84,11 +84,11 @@
 
         <tr>
         <td>{{ $counter }}</td>
-        <td>{{ $user->company->name }}</td>
-        <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-	<td>{{ $user->employee_num }}</td>
-	<td>{{ $user->department->name }}</td>
-        <td>{{ $user->location->name }}</td>
+        <td>{{ (($user) && ($user->company)) ? $user->company->name : '' }}</td>
+        <td>{{ ($user)  ? $user->first_name .' '. $user->last_name : '' }}</td>
+        <td>{{ ($user)  ? $user->employee_num : '' }}</td>
+        <td>{{ (($user) && ($user->department)) ? $user->department->name : '' }}</td>
+        <td>{{ (($user) && ($user->location)) ? $user->location->name : '' }}</td>
         </tr>
             @php
                 $counter++
@@ -131,11 +131,11 @@
         <td>{{ $counter }}</td>
         <td>{{ $asset->asset_tag }}</td>
         <td>{{ $asset->name }}</td>
-	<td>{{ $asset->model->category->name }}</td>
-        <td>{{ $asset->model->manufacturer->name }}</td>
-        <td>{{ $asset->model->name }} {{ $asset->model->model_number }}</td>
-	<td>{{ $asset->serial }}</td>
-	<td>{{ $asset->location->name }}</td>
+        <td>{{ (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '' }}</td>
+        <td>{{ (($asset->model) && ($asset->model->manufacturer)) ? $asset->model->manufacturer->name : '' }}</td>
+        <td>{{ ($asset->model) ? $asset->model->name : '' }}</td>
+        <td>{{ $asset->serial }}</td>
+        <td>{{ $asset->location->name }}</td>
         <td>{{ $asset->last_checkout }}</td>
         <td>{{ $asset->expected_checkin }}</td>
         </tr>
