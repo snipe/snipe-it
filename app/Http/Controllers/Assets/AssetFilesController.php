@@ -110,15 +110,15 @@ class AssetFilesController extends Controller
     {
         $asset = Asset::find($assetId);
         $this->authorize('update', $asset);
-        $rel_path = 'storage/private_uploads/assets';
+        $rel_path = 'private_uploads/assets';
 
         // the asset is valid
         if (isset($asset->id)) {
             $this->authorize('update', $asset);
             $log = Actionlog::find($fileId);
             if ($log) {
-            if (file_exists(base_path().'/'.$rel_path.'/'.$log->filename)) {
-                Storage::disk('public')->delete($rel_path.'/'.$log->filename);
+            if (Storage::exists($rel_path.'/'.$log->filename)) {
+                Storage::delete($rel_path.'/'.$log->filename);
                 }
                 $log->delete();
                 return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
