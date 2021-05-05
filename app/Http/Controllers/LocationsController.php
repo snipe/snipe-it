@@ -6,6 +6,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Asset;
 use Illuminate\Support\Facades\Storage;
 
 /**

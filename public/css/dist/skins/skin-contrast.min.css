@@ -218,3 +218,7 @@ input::-ms-input-placeholder {
 .fixed-table-container tbody .selected td {
   background-color: #fff8af;
 }
+.search-highlight,
+.search-highlight:hover {
+  background-color: #e9d15b;
+}
