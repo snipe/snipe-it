@@ -169,3 +169,6 @@ a:visited {
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
   background-color: #dd4b39;
 }
+.search-highlight {
+  background-color: #e9d15b;
+}
