@@ -99,7 +99,7 @@ class SecurityHeaders
         // We have to exclude debug mode here because debugbar pulls from a CDN or two
         // and it will break things.
 
-        if ((config('app.debug')!='true')  || (config('app.enable_csp')=='true')) {
+        if ((config('app.debug')!='true')  && (config('app.enable_csp')=='true')) {
             $csp_policy[] = "default-src 'self'";
             $csp_policy[] = "style-src 'self' 'unsafe-inline'";
             $csp_policy[] = "script-src 'self' 'unsafe-inline' 'unsafe-eval'";
