@@ -56,6 +56,13 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         padding-top: .11in;
         width: 100%;
     }
+    div.label-logo {
+        float: right;
+        display: inline-block;
+    }
+    img.label-logo {
+        height: 0.5in;
+    }
     .qr_text {
         width: {{ $settings->labels_width }}in;
         height: {{ $settings->labels_height }}in;
@@ -111,6 +118,11 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         @endif
 
         <div class="qr_text">
+            @if ($settings->label_logo)
+                <div class="label-logo">
+                    <img class="label-logo" src="{{ Storage::disk('public')->url('').e($snipeSettings->label_logo) }}">
+                </div>
+            @endif
             @if ($settings->qr_text!='')
                 <div class="pull-left">
                     <strong>{{ $settings->qr_text }}</strong>
