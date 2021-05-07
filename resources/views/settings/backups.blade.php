@@ -29,7 +29,6 @@
                     data-sort-order="asc"
                     id="system-backups"
                     class="table table-striped snipe-table">
-                <thead>
             <thead>
               <th>File</th>
               <th>Created</th>
