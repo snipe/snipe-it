@@ -27,22 +27,19 @@ class Ldap extends Model
         $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
         $ldap_use_tls = Setting::getSettings()->ldap_tls;
 
-
-        // If we are ignoring the SSL cert we need to setup the environment variable
-        // before we create the connection
-        if ($ldap_server_cert_ignore=='1') {
-            putenv('LDAPTLS_REQCERT=never');
-        }
-
-        // If the user specifies where CA Certs are, make sure to use them
-        if (env("LDAPTLS_CACERT")) {
-            putenv("LDAPTLS_CACERT=".env("LDAPTLS_CACERT"));
-        }
-
         $connection = @ldap_connect($ldap_host);
 
         if (!$connection) {
             throw new Exception('Could not connect to LDAP server at '.$ldap_host.'. Please check your LDAP server name and port number in your settings.');
+        }
+
+
+        // LDAP_OPT_X_TLS_REQUIRE_CERT requires PHP 7.0.5
+        ldap_set_option(NULL, LDAP_OPT_X_TLS_REQUIRE_CERT, $ldap_server_cert_ignore);
+
+        // Use cert path from env
+        if (env('LDAPTLS_CACERT')) {
+            ldap_set_option(NULL, LDAP_OPT_X_TLS_CACERTFILE, env('LDAPTLS_CACERT'));
         }
 
         // Needed for AD
@@ -50,6 +47,7 @@ class Ldap extends Model
         ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);
         ldap_set_option($connection, LDAP_OPT_NETWORK_TIMEOUT, 20);
 
+        //this should be called only for ldap:// URLs.
         if ($ldap_use_tls=='1') {
             ldap_start_tls($connection);
         }
