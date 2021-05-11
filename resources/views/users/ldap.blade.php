@@ -75,7 +75,7 @@ LDAP User Sync
           </tr>
 
           @foreach (Session::get('summary') as $entry)
-          <tr {!! ($entry['status']=='SUCCESS') ? 'class="success"' : 'class="danger"' !!}>
+          <tr {!! ($entry['status']=='success') ? 'class="success"' : 'class="danger"' !!}>
               <td>{{ $entry['username'] }}</td>
               <td>{{ $entry['employee_number'] }}</td>
               <td>{{ $entry['firstname'] }}</td>
