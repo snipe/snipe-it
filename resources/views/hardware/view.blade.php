@@ -734,11 +734,9 @@
                                                       'route' => ['hardware/bulkedit'],
                                                       'class' => 'form-inline',
                                                        'id' => 'bulkForm']) }}
-                                            <div id="toolbar">
                                                 <input type="hidden" name="bulk_actions" value="labels" />
                                                 <input type="hidden" name="ids[{{$asset->id}}]" value="{{ $asset->id }}" />
-                                                <button class="btn btn-primary" id="bulkEdit" >{{ trans_choice('button.generate_labels', 1) }}</button>
-                                            </div>
+                                                <button class="btn btn-sm btn-default" id="bulkEdit" ><i class="fa fa-barcode" aria-hidden="true"></i> {{ trans_choice('button.generate_labels', 1) }}</button>
 
                                             {{ Form::close() }}
 
