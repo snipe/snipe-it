@@ -41,6 +41,24 @@ class CustomFieldsController extends Controller
 
 
     /**
+     * Just redirect the user back if they try to view the details of a field.
+     * We already show those details on the listing page.
+     *
+     * @see CustomFieldsController::storeField()
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.1.5]
+     * @return Redirect
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+
+    public function show()
+    {
+        return redirect()->route("fields.index");
+
+    }
+
+
+    /**
      * Returns a view with a form to create a new custom field.
      *
      * @see CustomFieldsController::storeField()
@@ -133,16 +151,19 @@ class CustomFieldsController extends Controller
      */
     public function destroy($field_id)
     {
-        $field = CustomField::find($field_id);
+        if ($field = CustomField::find($field_id)) {
 
-        $this->authorize('delete', $field);
+            $this->authorize('delete', $field);
 
-        if ($field->fieldset->count()>0) {
-            return redirect()->back()->withErrors(['message' => "Field is in-use"]);
+            if (($field->fieldset) && ($field->fieldset->count() > 0)) {
+                return redirect()->back()->withErrors(['message' => "Field is in-use"]);
+            }
+            $field->delete();
+            return redirect()->route("fields.index")
+                ->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
-        $field->delete();
-        return redirect()->route("fields.index")
-            ->with("success", trans('admin/custom_fields/message.field.delete.success'));
+
+        return redirect()->back()->withErrors(['message' => "Field does not exist"]);
     }
 
 

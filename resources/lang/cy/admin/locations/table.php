@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Gwlad',
     'create'                    => 'Creu Lleoliad',
     'update'                    => 'Diweddaru Lleoliad',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Enw Lleoliad',
     'address'                   => 'Cyfeiriad',
     'zip'                       => 'Côd Post',

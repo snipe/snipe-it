@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Актив ',
     'image'		=> 'Изображение устройства',
     'days_without_acceptance' => 'Дней без принятия',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Ежемесячная амортизация'
 
 );

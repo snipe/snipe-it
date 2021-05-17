@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Land',
     'create'                    => 'Skapa plats',
     'update'                    => 'Uppdatera plats',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Platsnamn',
     'address'                   => 'Adress',
     'zip'                       => 'postnummer',

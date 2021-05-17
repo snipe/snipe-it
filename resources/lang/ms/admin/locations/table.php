@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Negara',
     'create'                    => 'Cipta Lokasi',
     'update'                    => 'Kemaskini Lokasi',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Nama Lokasi',
     'address'                   => 'Alamat',
     'zip'                       => 'Poskod',

@@ -112,7 +112,7 @@
     'image'                 => 'Afbeelding',
     'image_delete'         	=> 'Afbeelding verwijderen',
     'image_upload'         	=> 'Afbeelding uploaden',
-    'image_filetypes_help'  => 'Geaccepteerde bestandstypen zijn jpg, png, gif en svg. Maximale toegestane bestandsgrootte is :size.',
+    'image_filetypes_help'  => 'Geaccepteerde bestandstypen zijn jpg, webp, png, gif en svg. Maximale toegestane bestandsgrootte is :size.',
     'import'         	    => 'Importeer',
     'importing'         	=> 'Importeren',
     'importing_help'        => 'U kunt assets, accessoires, licenties, componenten, verbruiksartikelen en gebruikers importeren via het CSV-bestand. <br><br>De CSV moet door komma\'s worden gescheiden en met koppen die overeenkomen met de koppen in de <a href="https://snipe-it.readme.io/docs/importing" target="_new">voorbeeld CSV\'s in de documentatie</a>.',
@@ -243,5 +243,7 @@
     'i_accept'              => 'Ik accepteer',
     'i_decline'             => 'Ik wijs af',
     'sign_tos'              => 'Teken hieronder om aan te geven dat je akkoord gaat met de servicevoorwaarden:',
-    'clear_signature'       => 'Verwijder handtekening'
+    'clear_signature'       => 'Verwijder handtekening',
+    'show_help'             => 'Toon help',
+    'hide_help'             => 'Verberg help',
     ];

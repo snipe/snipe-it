@@ -17,6 +17,8 @@ class LicenseSeatsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $licenseId
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $licenseId)
@@ -53,7 +55,8 @@ class LicenseSeatsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $licenseId
+     * @param  int  $seatId
      * @return \Illuminate\Http\Response
      */
     public function show($licenseId, $seatId)

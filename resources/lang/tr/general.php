@@ -115,7 +115,7 @@ Context | Request Context
     'image'                 => 'Görsel',
     'image_delete'         	=> 'Resmi sil',
     'image_upload'         	=> 'Resim yükle',
-    'image_filetypes_help'  => 'İzin verilen dosya uzantıları jpg, png, gif ve svg.\'dir. izin verilen Maksimum yükleme boyutu :size \'dir.',
+    'image_filetypes_help'  => 'Kabul edilen dosya türleri jpg, webp, png, gif ve svg\'dir. İzin verilen maksimum yükleme boyutu :size \'dir.',
     'import'         	    => 'İçeri aktar',
     'importing'         	=> 'İçeri Aktarma',
     'importing_help'        => 'Demirbaşları, aksesuarları, lisansları, bileşenleri, sarf malzemelerini ve kullanıcıları CSV dosyası ile içeri aktarabilirsiniz. <br><br> CSV, virgülle ayrılmış olmalı ve <a href="https://snipe-it.readme.io/docs/importing" target="_new">dökümandaki örnek CSV\'lerdekilerle eşleşen başlıklarla hazırlanmalıdır.</a>.',
@@ -246,5 +246,7 @@ Context | Request Context
     'i_accept'              => 'Kabul ediyorum',
     'i_decline'             => 'Reddediyorum',
     'sign_tos'              => 'Hizmet şartlarını kabul ettiğinizi belirtmek için aşağıyı imzalayın:',
-    'clear_signature'       => 'İmzayı Temizle'
+    'clear_signature'       => 'İmzayı Temizle',
+    'show_help'             => 'Yardımı göster',
+    'hide_help'             => 'Yardımı gizle',
     ];

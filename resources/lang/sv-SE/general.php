@@ -112,7 +112,7 @@
     'image'                 => 'Bild',
     'image_delete'         	=> 'Ta bort Bild',
     'image_upload'         	=> 'Ladda upp Bild',
-    'image_filetypes_help'  => 'Godkända filtyper är jpg, png, gif och svg. Max tillåten uppladdningsstorlek är: storlek.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, and svg. Max upload size allowed is :size.',
     'import'         	    => 'Importera',
     'importing'         	=> 'Importing',
     'importing_help'        => 'You can import assets, accessories, licenses, components, consumables, and users via CSV file. <br><br>The CSV should be comma-delimited and formatted with headers that match the ones in the <a href="https://snipe-it.readme.io/docs/importing" target="_new">sample CSVs in the documentation</a>.',
@@ -243,5 +243,7 @@
     'i_accept'              => 'I accept',
     'i_decline'             => 'I decline',
     'sign_tos'              => 'Sign below to indicate that you agree to the terms of service:',
-    'clear_signature'       => 'Clear Signature'
+    'clear_signature'       => 'Clear Signature',
+    'show_help'             => 'Show help',
+    'hide_help'             => 'Hide help',
     ];

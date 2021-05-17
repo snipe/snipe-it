@@ -11,6 +11,8 @@ return array(
     'country'                   => 'ประเทศ',
     'create'                    => 'สร้างสถานที่',
     'update'                    => 'อัพเดทสถานที่',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'ชื่อสถานที่',
     'address'                   => 'ที่อยู่',
     'zip'                       => 'รหัสไปรษณีย์',

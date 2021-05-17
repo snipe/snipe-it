@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about_kits_title'                  => 'About Predefined Kits',
-    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
-    'checkout'                          => 'Checkout Kit ',
-    'create_success'                    => 'Kit was successfully created.',
-    'create'                            => 'Create Predefined Kit',
-    'update'                            => 'Update Predefined Kit',
-    'delete_success'                    => 'Kit was successfully deleted.',
-    'update_success'                    => 'Kit was successfully updated.',
-    'none_models'                       => 'There are not enough available assets for :model to checkout. :qty are required. ',
-    'none_licenses'                     => 'There are not enough available seats for :license to checkout. :qty are required. ',
-    'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
-    'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
+    'about_kits_title'                  => 'Ön Tanımlı Kitler Hakkında',
+    'about_kits_text'                   => 'Ön Tanımlı Kit (sarf malzeme, lisans vb).',
+    'checkout'                          => 'Çıkış Tarihi ',
+    'create_success'                    => 'Kit başarıyla oluşturuldu.',
+    'create'                            => 'Ön Tanımlı Kitler Hakkında',
+    'update'                            => 'Ön Tanımlı Kit Düzenle',
+    'delete_success'                    => 'Kit başarıyla silindi.',
+    'update_success'                    => 'Kit başarıyla güncelleştirildi.',
+    'none_models'                       => ':model için çıkış yapılabilecek yeterli uygun malzeme yok, :qty adet gerekmektedir. ',
+    'none_licenses'                     => 'Çıkış yapılabilecek sayıda :license lisansı bulunmamaktadır. :qty adet gereklidir. ',
+    'none_consumables'                  => 'Yeterli sayıda :consumable olmadığından çıkış yapılamıyor. :qty adet gereklidir. ',
+    'none_accessory'                    => 'Çıkış yapılabilecek sayıda :accessory bulunmamaktadır. :qty adet gereklidir. ',
 
 );

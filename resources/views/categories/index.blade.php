@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/categories/general.asset_categories') }}
+{{ trans('general.categories') }}
 @parent
 @stop
 

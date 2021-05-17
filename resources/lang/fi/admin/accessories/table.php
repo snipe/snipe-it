@@ -5,7 +5,7 @@ return array(
 	'eula_text'      			=> 'Käyttöehdot',
     'id'      					=> 'Tunnus',
     'require_acceptance'      	=> 'Hyväksyminen',
-    'title'      				=> 'Lisävarusteen nimi',
+    'title'      				=> 'Oheistarvikkeen nimi',
 
 
 );

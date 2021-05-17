@@ -37,21 +37,7 @@ mix
 mix.copy(['./node_modules/icheck/skins/minimal/blue.png',
     './node_modules/icheck/skins/minimal/blue@2x.png'], './public/css');
 
-/**
- * Copy, minify and version skins
- */
-mix
-    .minify([
-        './public/css/dist/skins/skin-green-dark.css',
-        './public/css/dist/skins/skin-black-dark.css',
-        './public/css/dist/skins/skin-blue-dark.css',
-        './public/css/dist/skins/skin-yellow-dark.css',
-        './public/css/dist/skins/skin-red-dark.css',
-        './public/css/dist/skins/skin-purple-dark.css',
-        './public/css/dist/skins/skin-orange-dark.css',
-        './public/css/dist/skins/skin-contrast.css'
-    ])
-    .version();
+
 /**
  * Copy, minify and version signature-pad.css
  */
@@ -160,5 +146,26 @@ mix.combine(
     ).version();
 
 
-
+/**
+ * Copy, minify and version skins
+ */
+mix
+    .minify([
+        './public/css/dist/skins/skin-green.css',
+        './public/css/dist/skins/skin-green-dark.css',
+        './public/css/dist/skins/skin-black.css',
+        './public/css/dist/skins/skin-black-dark.css',
+        './public/css/dist/skins/skin-blue.css',
+        './public/css/dist/skins/skin-blue-dark.css',
+        './public/css/dist/skins/skin-yellow.css',
+        './public/css/dist/skins/skin-yellow-dark.css',
+        './public/css/dist/skins/skin-red.css',
+        './public/css/dist/skins/skin-red-dark.css',
+        './public/css/dist/skins/skin-purple.css',
+        './public/css/dist/skins/skin-purple-dark.css',
+        './public/css/dist/skins/skin-orange.css',
+        './public/css/dist/skins/skin-orange-dark.css',
+        './public/css/dist/skins/skin-contrast.css'
+    ])
+    .version();
 

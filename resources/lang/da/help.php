@@ -21,7 +21,7 @@ return array(
 
     'categories' => 'Aktiv-kategorier hjælper dig med at organisere dine enheder. Eksempler på kategorier kunne være &quot;Stationære coputere&quot;, &quot;Bærbare&quot;, &quot;Mobiltelefoner&quot;, &quot;Tabletter&quot; osv., men du kan bruge aktiver kategorier på en hvilken som helst måde som giver mening for dig.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Tilbehør er alt du udleverer til brugere men som ikke har et serienummer (eller som du er ligeglad med følge præcist). For eksempel, computermus eller tastaturer.',
 
     'companies'     => 'Virksomheder kan bruges som et simpelt id-felt, eller kan bruges til at begrænse synligheden af aktiver, brugere osv, hvis fuld virksomhedssupport er aktiveret i dine Admin-indstillinger.',
 

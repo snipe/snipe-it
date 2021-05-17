@@ -11,6 +11,8 @@ return array(
     'country'                   => '국가명',
     'create'                    => '장소 생성',
     'update'                    => '장소 갱신',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => '장소 명',
     'address'                   => '주소',
     'zip'                       => '우편번호',

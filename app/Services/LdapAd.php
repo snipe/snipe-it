@@ -135,7 +135,7 @@ class LdapAd extends LdapAdConfiguration
             $bind_as_user = true;
         }
 
-        if ($this->ldap->auth()->attempt($login_username, $password, $bind_as_user) === false) {
+        if (($this->ldap) && ($this->ldap->auth()->attempt($login_username, $password, $bind_as_user) === false)) {
             throw new Exception('Unable to validate user credentials!');
         }    
 

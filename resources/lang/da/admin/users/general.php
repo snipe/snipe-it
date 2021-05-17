@@ -19,7 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP-konfigurationsindstillinger kan findes Admin> Indstillinger. Den (valgfrie) valgte placering vil blive indstillet for alle importerede brugere.',
     'print_assigned'    => 'Udskriv alle tildelte',
     'software_user'     => 'Software Checket ud til: navn',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => 'Du skal angive en e-mail-adresse for denne bruger for at sende dem legitimationsoplysninger. E-mailing af legitimationsoplysninger kan kun gøres ved brugeroprettelse. Adgangskoder gemmes i en envejs hash og kan ikke hentes når de er gemt.',
     'view_user'         => 'Se bruger :navn',
     'usercsv'           => 'CSV-fil',
     'two_factor_admin_optin_help' => 'Dine nuværende administratorindstillinger tillader selektiv håndhævelse af tofaktors godkendelse.',

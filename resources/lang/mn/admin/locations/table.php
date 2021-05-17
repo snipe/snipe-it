@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Улс',
     'create'                    => 'Байршлыг үүсгэх нь',
     'update'                    => 'Байршлын мэдээллийг шинэчлэх',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Байршил нэр',
     'address'                   => 'Хаяг',
     'zip'                       => 'Шуудангийн код',

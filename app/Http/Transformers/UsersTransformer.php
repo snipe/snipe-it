@@ -27,6 +27,7 @@ class UsersTransformer
                 'first_name' => e($user->first_name),
                 'last_name' => e($user->last_name),
                 'username' => e($user->username),
+                'locale' => ($user->locale) ? e($user->locale) : null,
                 'employee_num' => e($user->employee_num),
                 'manager' => ($user->manager) ? [
                     'id' => (int) $user->manager->id,

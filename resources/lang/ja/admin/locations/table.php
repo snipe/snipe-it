@@ -11,6 +11,8 @@ return array(
     'country'                   => '国',
     'create'                    => '所在地を作成',
     'update'                    => '所在地を更新',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'ロケーション名',
     'address'                   => '住所',
     'zip'                       => '郵便番号',
