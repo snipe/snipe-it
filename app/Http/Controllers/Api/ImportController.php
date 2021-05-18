@@ -49,10 +49,12 @@ class ImportController extends Controller
                 if (!in_array($file->getMimeType(), array(
                     'application/vnd.ms-excel',
                     'text/csv',
+                    'application/csv',
+                    'text/x-Algol68', // because wtf CSV files?
                     'text/plain',
                     'text/comma-separated-values',
                     'text/tsv'))) {
-                    $results['error']='File type must be CSV';
+                    $results['error']='File type must be CSV. Uploaded file is '.$file->getMimeType();
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
                 }
 

@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Nước',
     'create'                    => 'Tạo địa phương',
     'update'                    => 'Cập nhật địa phương',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Tên địa phương',
     'address'                   => 'Địa chỉ',
     'zip'                       => 'Mã bưu điện',

@@ -1,12 +1,14 @@
 @push('css')
 <link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
+
 @endpush
 
 @push('js')
-<script src="{{ asset(mix('js/dist/bootstrap-table.js')) }}"></script>
+<script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
 <script nonce="{{ csrf_token() }}">
 
     $(function () {
+
 
         var stickyHeaderOffsetY = 0;
 
@@ -21,7 +23,7 @@
 
         var keyBlocked = function(key) {
             for(var j in blockedFields) {
-                if(key === blockedFields[j]) {
+                if (key === blockedFields[j]) {
                     return true;
                 }
             }
@@ -44,6 +46,7 @@
             mobileResponsive: true,
             maintainSelected: true,
             trimOnSearch: false,
+            showSearchClearButton: true,
             paginationFirstText: "{{ trans('general.first') }}",
             paginationLastText: "{{ trans('general.last') }}",
             paginationPreText: "{{ trans('general.previous') }}",
@@ -69,12 +72,14 @@
                 paginationSwitchUp: 'fa-caret-square-o-up',
                 columns: 'fa-columns',
                 refresh: 'fa-refresh',
-                export: 'fa-download'
+                export: 'fa-download',
+                clearSearch: 'fa-times'
             },
             exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
             onLoadSuccess: function () {
-                $('[data-toggle="tooltip"]').tooltip(); // Need to attach tooltips after ajax call
+                $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
             }
+
         });
     });
 
@@ -621,13 +626,37 @@
     });
 
 
-    // This is necessary to make the bootstrap tooltips work inside of the
-    // wenzhixin/bootstrap-table formatters
+
     $(function() {
+
+        // This handles the search box highlighting on both ajax and client-side
+        // bootstrap tables
+        var searchboxHighlighter = function (event) {
+
+            $('.search-input').each(function (index, element) {
+
+                if ($(element).val() != '') {
+                    $(element).addClass('search-highlight');
+                    $(element).next().children().addClass('search-highlight');
+                } else {
+                    $(element).removeClass('search-highlight');
+                    $(element).next().children().removeClass('search-highlight');
+                }
+            });
+        };
+
+        $('.search button[name=clearSearch]').click(searchboxHighlighter);
+        searchboxHighlighter({ name:'pageload'});
+        $('.search-input').keyup(searchboxHighlighter);
+
+        //  This is necessary to make the bootstrap tooltips work inside of the
+        // wenzhixin/bootstrap-table formatters
         $('#table').on('post-body.bs.table', function () {
             $('[data-toggle="tooltip"]').tooltip({
                 container: 'body'
             });
+
+
         });
     });
 

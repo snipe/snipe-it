@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Land',
     'create'                    => 'Locatie aanmaken',
     'update'                    => 'Locatie bijwerken',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Locatie naam',
     'address'                   => 'Adres',
     'zip'                       => 'Postcode',

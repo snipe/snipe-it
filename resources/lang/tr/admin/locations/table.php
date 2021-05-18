@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Ülke',
     'create'                    => 'Konum Oluştur',
     'update'                    => 'Konum Güncelle',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Konum Adı',
     'address'                   => 'Adres',
     'zip'                       => 'Posta kodu',

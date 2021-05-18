@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Ang Bansa',
     'create'                    => 'Magsagawa ng Lokasyon',
     'update'                    => 'I-update ang Lokasyon',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Ang Pangalan ng Lokasyon',
     'address'                   => 'Ang Address',
     'zip'                       => 'Ang Postal Code',

@@ -13,23 +13,23 @@ return array(
     |
     */
 
-    "more_info_title" => "More Info",
+    "more_info_title" => "Допълнителна информация",
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    "audit_help" => "Отмятането на това поле, ще редактира записа, за да се отрази новото местоположение. Оставайки това поле без отметка ще се отрази местоположението на актива само при одит.<br><br>Ако актива е изписан няма да се смени леговата локация.",
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'assets' => 'Дълготрайни материални активи (ДМА), за кратко активи, се приемат всички материални ресурси на предприятието, които се използват повече от един отчетен период (за стопански и други цели). Проследават се по техния сериен или инвентарен номер.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Категорийте спомагат за организиране на активите. Примерни категорий могат да бъдат &quot;Настолни компютри&quot;, &quot;Лаптопи&quot;, &quot;Мобилни телефони&quot;, &quot;Таблети&quot;, и т.н. Може да създадете ваши категорий по избор.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Аксесоарите са консумативи, който се предостават на потребителите, като в повечете случай те не се проследяват по сериен номер или инвентарен номер, например мишки, клавиатури и др.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Име на компаюнията може да бъде използвано, като поле за идентификация или за да ограничи/раздели списъка от активи, потребители, ако е пусната поддръжка на множество компании в административните настройки -> Общи настройки.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Компонентите са част от актив, като например хард-диск, RAM и др.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Консумативите са материали, който свършват по време на изпозлването им, като мастила за принтер, тонер касети, копирна хартия и др.',
 
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Може да нагласите амортизация базирана на линеен метод.',
 
 
 

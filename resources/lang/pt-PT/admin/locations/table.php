@@ -11,6 +11,8 @@ return array(
     'country'                   => 'País',
     'create'                    => 'Criar localização',
     'update'                    => 'Atualizar localização',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Nome da localização',
     'address'                   => 'Morada',
     'zip'                       => 'Código postal',

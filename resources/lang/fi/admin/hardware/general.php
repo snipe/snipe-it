@@ -2,7 +2,7 @@
 
 return array(
     'about_assets_title'           => 'Tietoja laitteista',
-    'about_assets_text'            => 'Laitteita seurataan sarjanumeron tai laitetunnisteen avulla. Laitteiksi määritellään yleensä arvoikkaampaa omaisuutta, joidenka tunnistaminen  yksilöllisesti on tärkeää. Pienemmät laitteet voi määrittää lisävarusteiksi.',
+    'about_assets_text'            => 'Laitteita ovat nimikeitä joita seurataan sarjanumeron tai laitetunnisteen avulla. Laitteiksi määritellään yleensä arvokkaampaa omaisuutta, joiden tunnistaminen yksilöllisesti on tärkeää. Pienemmät laitteet voi määrittää lisävarusteiksi.',
 	'archived'  				=> 'Arkistoitu',
     'asset'  					=> 'Laite',
     'bulk_checkout'             => 'Laitteiden luovutus',

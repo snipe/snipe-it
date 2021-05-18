@@ -28,9 +28,9 @@
     </script>
 
     {{-- stylesheets --}}
-    <link rel="stylesheet" href="{{ mix('css/dist/all.css') }}">
+    <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
     @if (($snipeSettings) && ($snipeSettings->allow_user_skin==1) && Auth::check() && Auth::user()->present()->skin != '')
-        <link rel="stylesheet" href="{{ mix('css/dist/skins/skin-'.Auth::user()->present()->skin.'.min.css') }}">
+        <link rel="stylesheet" href="{{ url(mix('css/dist/skins/skin-'.Auth::user()->present()->skin.'.min.css')) }}">
     @else
     <link rel="stylesheet" href="{{ url(mix('css/dist/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css')) }}">
     @endif
@@ -65,12 +65,6 @@
     </style>
     @endif
 
-      @if (($snipeSettings) && ($snipeSettings->custom_css))
-          <style>
-              {!! $snipeSettings->show_custom_css() !!}
-          </style>
-      @endif
-
 
     <script nonce="{{ csrf_token() }}">
           window.snipeit = {
@@ -88,7 +82,13 @@
 
 
   </head>
-  <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
+
+  @if (($snipeSettings) && ($snipeSettings->allow_user_skin==1) && Auth::check() && Auth::user()->present()->skin != '')
+      <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? Auth::user()->present()->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
+  @else
+      <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
+  @endif
+
   <a class="skip-main" href="#main">Skip to main content</a>
     <div class="wrapper">
 

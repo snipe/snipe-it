@@ -20,6 +20,6 @@ return array(
     'title'      	=> '资产',
     'image'		=> '设备图片',
     'days_without_acceptance' => '过期天数',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => '每月折旧率'
 
 );

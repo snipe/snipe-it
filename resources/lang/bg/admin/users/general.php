@@ -2,8 +2,8 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
-    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
+    'activated_help_text' => 'Този потребител може да се логне',
+    'activated_disabled_help_text' => 'Не можете да редактирате статуса на активация на собствения си профил.',
     'assets_user'       => 'Активи предадени на :name',
     'bulk_update_warn'	=> 'На път сте да редактирате свойствата на :user_count потребители. Моля обърнете внимание, че не можете да променяте собствените си атрибути използвайки този формуляр и трябва да нанесете промени към собствения си потребителски профил индивидуално.',
     'bulk_update_help'	=> 'Този формуляр ви позволява да обновявате няколко потребителски профила едновременно. Попълнете единствено полетата, които желаете да промените. Всички празни полета няма да бъдат променени.',
@@ -19,7 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP конфигурационните настройки могат да бъдат намерени в  Admin > Settings. Избраното (по изобр) местоположение ще бъде настроено за всички въведени потребители.',
     'print_assigned'    => 'Печат на всички отдадени',
     'software_user'     => 'Софтуерни продукти, изписани на :name',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => 'Трябва да предоставите е-майл адрес за този потребител за да му се изпратят името и паролата. Изпращането на име и парола може да стане при създаването на потребителя. Паролите се съхраняват криптирани и не могат да се възстановят.',
     'view_user'         => 'Преглед на потребител :name',
     'usercsv'           => 'CSV файл',
     'two_factor_admin_optin_help' => 'Текущите настройки на администратор позволяват избирателно прилагане на двуфакторова автентификация. ',

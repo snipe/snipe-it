@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Valsts',
     'create'                    => 'Izveidot atrašanās vietu',
     'update'                    => 'Atjaunināt atrašanās vietu',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Atrašanās vietas nosaukums',
     'address'                   => 'Adrese',
     'zip'                       => 'Pasta indekss',

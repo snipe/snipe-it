@@ -3,7 +3,7 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'Tätä kenttää ei ole olemassa.',
+        'invalid'   => 'Tätä kenttää ei ole.',
         'already_added'   => 'Kentässä jo lisätty',
 
         'create' => array(

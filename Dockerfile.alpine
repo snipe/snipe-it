@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 # Apache + PHP
 RUN  apk add --no-cache \
         apache2 \
@@ -57,7 +57,7 @@ RUN \
     && mkdir -p "/var/lib/snipeit/dumps" && rm -r "/var/www/html/storage/app/backups" && ln -fs "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups" \
     && mkdir -p "/var/lib/snipeit/keys" && ln -fs "/var/lib/snipeit/keys/oauth-private.key" "/var/www/html/storage/oauth-private.key" \
     && ln -fs "/var/lib/snipeit/keys/oauth-public.key" "/var/www/html/storage/oauth-public.key" \
-    && chown -h "/var/www/html/storage/*.key"
+    && chown -hR apache "/var/www/html/storage/" \
     && chown -R apache "/var/lib/snipeit"
 
 # Install composer

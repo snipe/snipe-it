@@ -13,5 +13,5 @@ return array(
     'upload'                    => 'Lähetä',
 	'select_file'				=> 'Valitse tiedosto...',
     'select_files'				=> 'Valitse tiedostot...',
-    'generate_labels'           => '{1} Luo Tunniste |[2, *] Luo Tunnisteet',
+    'generate_labels'           => '{1} Luo tunniste |[2, *] Luo tunnisteet',
 );

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Location;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Asset;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -216,8 +218,8 @@ public function print_assigned($id)
 
         $location = Location::where('id',$id)->first();
         $parent = Location::where('id',$location->parent_id)->first();
-	$manager = User::where('id',$location->manager_id)->first();
-	$users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
+        $manager = User::where('id',$location->manager_id)->first();
+        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
         return view('locations/print')->with('assets', $assets)->with('users',$users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
 

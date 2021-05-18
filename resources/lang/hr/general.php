@@ -112,7 +112,7 @@
     'image'                 => 'Slika',
     'image_delete'         	=> 'Izbriši sliku',
     'image_upload'         	=> 'Prenesite sliku',
-    'image_filetypes_help'  => 'Prihvaćene vrste datoteka su jpg, png, gif i svg. Najveća dozvoljena veličina za upload je :size.',
+    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, and svg. Max upload size allowed is :size.',
     'import'         	    => 'Uvoz',
     'importing'         	=> 'Importing',
     'importing_help'        => 'You can import assets, accessories, licenses, components, consumables, and users via CSV file. <br><br>The CSV should be comma-delimited and formatted with headers that match the ones in the <a href="https://snipe-it.readme.io/docs/importing" target="_new">sample CSVs in the documentation</a>.',
@@ -243,5 +243,7 @@
     'i_accept'              => 'Prihvaćam',
     'i_decline'             => 'Odbijam',
     'sign_tos'              => 'Sign below to indicate that you agree to the terms of service:',
-    'clear_signature'       => 'Clear Signature'
+    'clear_signature'       => 'Clear Signature',
+    'show_help'             => 'Show help',
+    'hide_help'             => 'Hide help',
     ];

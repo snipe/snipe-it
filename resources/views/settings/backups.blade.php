@@ -19,7 +19,16 @@
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
-          <table class="table table-striped">
+            <table
+                    data-cookie="true"
+                    data-cookie-id-table="system-backups"
+                    data-pagination="true"
+                    data-id-table="system-backups"
+                    data-search="true"
+                    data-side-pagination="client"
+                    data-sort-order="asc"
+                    id="system-backups"
+                    class="table table-striped snipe-table">
             <thead>
               <th>File</th>
               <th>Created</th>
@@ -78,3 +87,8 @@
 
 
 @stop
+
+@section('moar_scripts')
+    @include ('partials.bootstrap-table')
+@stop
+

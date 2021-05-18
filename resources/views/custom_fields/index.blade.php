@@ -1,4 +1,8 @@
-@extends('layouts/default')
+@extends('layouts/default', [
+    'helpText' => trans('admin/custom_fields/general.about_fieldsets_text'),
+    'helpPosition' => 'right',
+])
+
 
 {{-- Page title --}}
 @section('title')
@@ -10,7 +14,7 @@
 
 @can('view', \App\Models\CustomFieldset::class)
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-12">
     <div class="box box-default">
 
       <div class="box-header with-border">
@@ -83,12 +87,9 @@
       </div><!-- /.box-body -->
     </div><!-- /.box.box-default -->
 
-  </div> <!-- .col-md-9-->
-  <!-- side address column -->
-  <div class="col-md-3">
-    <h2>{{ trans('admin/custom_fields/general.about_fieldsets_title') }}</h2>
-    <p>{{ trans('admin/custom_fields/general.about_fieldsets_text') }} </p>
-  </div>
+  </div> <!-- .col-md-12-->
+
+
 </div> <!-- .row-->
 @endcan
 @can('view', \App\Models\CustomField::class)
