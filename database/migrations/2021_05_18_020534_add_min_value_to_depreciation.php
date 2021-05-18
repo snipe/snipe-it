@@ -13,7 +13,7 @@ class AddMinValueToDepreciation extends Migration
      */
     public function up()
     {
-        Schema::table('depreciation', function (Blueprint $table) {
+        Schema::table('depreciations', function (Blueprint $table) {
             $table->string('min_value')->after('months')->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddMinValueToDepreciation extends Migration
      */
     public function down()
     {
-        Schema::table('depreciation', function (Blueprint $table) {
+        Schema::table('depreciations', function (Blueprint $table) {
             $table->dropColumn('min_value');
         });
     }
