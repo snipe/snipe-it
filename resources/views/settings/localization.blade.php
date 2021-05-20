@@ -51,7 +51,19 @@
                                 {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
+                        <!-- Timezone -->
+                        <div class="form-group {{ $errors->has('time_zone') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('time_zone', trans('general.zone')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {!! Form::time_format('time_zone', Request::old('time_zone', $setting->time_zone), 'select2') !!}
 
+
+
+                                {!! $errors->first('time_display_format', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                            </div>
+                        </div>
                         <!-- Date format -->
                         <div class="form-group {{ $errors->has('time_display_format') ? 'error' : '' }}">
                             <div class="col-md-3">

@@ -579,6 +579,7 @@ class SettingsController extends Controller
         $setting->default_currency    = $request->input('default_currency', '$');
         $setting->date_display_format = $request->input('date_display_format');
         $setting->time_display_format = $request->input('time_display_format');
+        $setting->time_zone           = $request->input('time_zone');
         $setting->digit_separator = $request->input('digit_separator');
 
         if ($setting->save()) {

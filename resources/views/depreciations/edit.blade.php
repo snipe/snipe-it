@@ -22,5 +22,14 @@
     </div>
     {!! $errors->first('months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
 </div>
-
+<!-- Min Depreciation -->
+<label for="min-value" class="col-md-3 control-label">
+    {{ trans('admin/depreciations/general.min_value') }}
+</label>
+<div class="col-md-2" style="padding-left:0px">
+    <input class="form-control" type="number" step="0.01" min="0.00" name="min_value" id="min_value" value="{{ Request::old('min_value', $item->min_value) }}" style="width: 80px;" />
+</div>
+</div>
+{!! $errors->first('min-value', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+</div>
 @stop
