@@ -11,7 +11,9 @@ return array(
     'user_password_required'    => 'The password is required.',
     'insufficient_permissions'  => 'Insufficient Permissions.',
     'user_deleted_warning'      => 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
-    'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
+    'ldap_not_configured'       => 'LDAP integration has not been configured for this installation.',
+    'ldap_location_not_synced'  => 'Users in that location where not synced. e.g(%s)',
+    'ldap_location_default'     => 'Users synced with default location.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 

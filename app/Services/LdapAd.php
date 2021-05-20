@@ -203,7 +203,12 @@ class LdapAd extends LdapAdConfiguration
          * When syncing with a particular 'default location' in mind, those should still be respected
          * and it *will* override the administrators previous choices. I think this is a fair compromise.
          */
-        $locationId = $this->getLocationId($user, $defaultLocation, $mappedLocations);
+        if ($this->ldapSettings['ldap_location_toggle'] == 1) {
+            $locationId = $this->getLocationIdByParam($user, $defaultLocation);
+        } else {
+            $locationId = $this->getLocationIdByOU($user, $defaultLocation, $mappedLocations);
+        }
+
         if ($locationId !== null ) {
             $snipeUser['location_id'] = $locationId;
         }
@@ -386,7 +391,7 @@ class LdapAd extends LdapAdConfiguration
      *
      * @return null|int
      */
-    private function getLocationId(AdldapUser $user, ?Collection $defaultLocation, ?Collection $mappedLocations): ?int
+    private function getLocationIdByOU(AdldapUser $user, ?Collection $defaultLocation, ?Collection $mappedLocations): ?int
     {
         $locationId = null;
         // Set the users default locations, if set
@@ -407,6 +412,17 @@ class LdapAd extends LdapAdConfiguration
             if ($location->count() > 0) {
                 $locationId = $location->keys()->first(); // from the returned $location array from the ->filter() method above, we return the first match - there should be only one
             }
+        }
+
+        return $locationId;
+    }
+
+    private function getLocationIdByParam(AdldapUser $user, ?Collection $defaultLocation): ?int
+    {
+        $locationId = null;
+        // Set the users default locations, if set
+        if ($defaultLocation) {
+            $locationId = $defaultLocation->keys()->first();
         }
 
         return $locationId;

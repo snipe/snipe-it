@@ -340,6 +340,37 @@
                                 @endif
                             </div>
                         </div>
+
+                        <!-- LDAP location toggle -->
+                        <div class="form-group {{ $errors->has('ldap_location_toggle') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_location_toggle', trans('admin/settings/general.ldap_location_toggle')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::checkbox('ldap_location_toggle', '1', Request::old('ldap_location_toggle', $setting->ldap_location_toggle),['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
+                                {{ trans('admin/settings/general.ldap_location_toggle_fluf') }}
+                                <p class="help-block">{{ trans('admin/settings/general.ldap_location_toggle_help') }}</p>
+                                {!! $errors->first('ldap_location_toggle', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fa fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- LDAP location -->
+                        <div class="form-group {{ $errors->has('ldap_location') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_location', trans('admin/settings/general.ldap_location')) }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::text('ldap_location', Request::old('ldap_location', $setting->ldap_location), ['class' => 'form-control','placeholder' => 'location', $setting->demoMode]) }}
+                                {!! $errors->first('ldap_location', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fa fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+
                         <!-- LDAP department -->
                         <div class="form-group {{ $errors->has('ldap_dept') ? 'error' : '' }}">
                             <div class="col-md-3">

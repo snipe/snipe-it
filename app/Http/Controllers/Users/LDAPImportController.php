@@ -77,7 +77,14 @@ class LDAPImportController extends Controller
 
         // Direct user to appropriate status page.
         if ($ldap_results['error']) {
-            return redirect()->back()->withInput()->with('error', $ldap_results['error_message']);
+            return redirect()->back()->withInput()
+                ->with('error', $ldap_results['error_message']);
+        }
+
+        if (!empty($ldap_results['warning_messages'])) {
+            return redirect()->back()->withInput()
+                ->with('warning_messages', $ldap_results['warning_messages'])
+                ->with('summary', $ldap_results['summary']);
         }
 
         return redirect()->route('ldap/user')
