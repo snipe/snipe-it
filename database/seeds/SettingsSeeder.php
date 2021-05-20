@@ -27,7 +27,6 @@ class SettingsSeeder extends Seeder
         $settings->email_format = 'filastname';
         $settings->username_format = 'filastname';
         $settings->date_display_format = 'D M d, Y';
-        $settings->time_zone = 'UTC';
         $settings->time_display_format = 'g:iA';
         $settings->thumbnail_max_h = '30';
         $settings->locale = 'en';

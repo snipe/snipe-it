@@ -211,7 +211,6 @@
     'submit'				=> 'Submit',
     'target'                => 'Target',
     'time_and_date_display' => 'Time and Date Display',
-    'time_zone'             => 'Time Zone',
     'total_assets'			=> 'total assets',
     'total_licenses'		=> 'total licenses',
     'total_accessories'		=> 'total accessories',
