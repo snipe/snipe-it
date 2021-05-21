@@ -722,7 +722,26 @@
                                             {{ ($asset->userRequests) ? (int) $asset->userRequests->count() : '0' }}
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <strong>
+                                               Labels
+                                            </strong>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{ Form::open([
+                                                      'method' => 'POST',
+                                                      'route' => ['hardware/bulkedit'],
+                                                      'class' => 'form-inline',
+                                                       'id' => 'bulkForm']) }}
+                                                <input type="hidden" name="bulk_actions" value="labels" />
+                                                <input type="hidden" name="ids[{{$asset->id}}]" value="{{ $asset->id }}" />
+                                                <button class="btn btn-sm btn-default" id="bulkEdit" ><i class="fa fa-barcode" aria-hidden="true"></i> {{ trans_choice('button.generate_labels', 1) }}</button>
 
+                                            {{ Form::close() }}
+
+                                        </div>
+                                    </div>
                                 </div> <!-- end row-striped -->
 
                             </div><!-- /col-md-8 -->

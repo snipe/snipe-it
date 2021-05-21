@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 # Apache + PHP
 RUN  apk add --no-cache \
         apache2 \

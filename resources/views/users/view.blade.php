@@ -248,10 +248,14 @@
                       </tr>
                     @endif
 
-                    @if (!is_null($user->department))
+                    @if ($user->department)
                       <tr>
                         <td class="text-nowrap">{{ trans('general.department') }}</td>
-                        <td><a href="{{ route('departments.show', $user->department) }}">{{ $user->department->name }}</a></td>
+                        <td>
+                          <a href="{{ route('departments.show', $user->department) }}">
+                            {{ $user->department->name }}
+                          </a>
+                        </td>
                       </tr>
                     @endif
                   @if ($user->created_at)
