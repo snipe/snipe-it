@@ -28,7 +28,7 @@ class ImageUploadRequest extends Request
     {
         return [
             'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
-            'avatar' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml',
+            'avatar' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
         ];
     }
 
