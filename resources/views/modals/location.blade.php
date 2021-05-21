@@ -33,3 +33,4 @@
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
+<!-- Going to create a different modal for removing locations from bulk users here. Will be con't this a bit on 05/21 -Godfrey -->
