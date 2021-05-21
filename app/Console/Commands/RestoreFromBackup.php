@@ -15,7 +15,8 @@ class RestoreFromBackup extends Command
      */
     protected $signature = 'snipeit:restore 
                                             {--force : Skip the danger prompt; assuming you hit "y"} 
-                                            {filename : The zip file to be migrated}';
+                                            {filename : The zip file to be migrated}
+                                            {--no-progress : Don\'t show a progress bar}';
 
     /**
      * The console command description.
@@ -79,13 +80,13 @@ class RestoreFromBackup extends Command
 
 
         $private_dirs = [
-            'storage/private_uploads/assets',
+            'storage/private_uploads/assets', // these are asset _files_, not the pictures.
             'storage/private_uploads/audits',
             'storage/private_uploads/imports',
             'storage/private_uploads/assetmodels',
             'storage/private_uploads/users',
             'storage/private_uploads/licenses',
-            'storage/private_uploads/signatures' // We probably don't want this in the first place.
+            'storage/private_uploads/signatures'
         ];
         $private_files = [
             'storage/oauth-private.key',
@@ -96,19 +97,27 @@ class RestoreFromBackup extends Command
             'public/uploads/components',
             'public/uploads/categories',
             'public/uploads/manufacturers',
-            'public/uploads/barcodes', // don't want this neither
+            //'public/uploads/barcodes', // we don't want this, let the barcodes be regenerated
             'public/uploads/consumables',
             'public/uploads/departments',
             'public/uploads/avatars',
             'public/uploads/suppliers',
-            'public/uploads/assets', //wait, what?!
+            'public/uploads/assets', // these are asset _pictures_, not asset files
             'public/uploads/locations',
             'public/uploads/accessories',
             'public/uploads/models',
+            'public/uploads/categories',
+            'public/uploads/avatars',
+            'public/uploads/manufacturers'
         ];
         
         $public_files = [
-            'public/uploads/logo.png'
+            'public/uploads/logo.*',
+            'public/uploads/setting-email_logo*',
+            'public/uploads/setting-label_logo*',
+            'public/uploads/setting-logo*',
+            'public/uploads/favicon.*',
+            'public/uploads/favicon-uploaded.*'
         ];
 
         $all_files = $private_dirs + $public_dirs;
@@ -117,6 +126,7 @@ class RestoreFromBackup extends Command
         $sqlfile_indices = [];
 
         $interesting_files = [];
+        $boring_files = [];
         
         for ($i=0; $i<$za->numFiles;$i++) {
             $stat_results = $za->statIndex($i);
@@ -124,46 +134,63 @@ class RestoreFromBackup extends Command
             // print_r($stat_results);
         
             $raw_path = $stat_results['name'];
-            // skip macOS resource fork files (?!?!?!)
-            if(strpos($raw_path,"__MACOSX")!==false && strpos($raw_path,"._") !== false) {
-                //print "SKIPPING macOS Resource fork file: $raw_path\n";
-                continue;
-            }
             if(strpos($raw_path,'\\')!==false) { //found a backslash, swap it to forward-slash
                 $raw_path = strtr($raw_path,'\\','/');
                 //print "Translating file: ".$stat_results['name']." to: ".$raw_path."\n";
             }
         
+            // skip macOS resource fork files (?!?!?!)
+            if(strpos($raw_path,"__MACOSX")!==false && strpos($raw_path,"._") !== false) {
+                //print "SKIPPING macOS Resource fork file: $raw_path\n";
+                $boring_files[] = $raw_path;
+                continue;
+            }
             if(@pathinfo($raw_path)['extension'] == "sql") {
                 print "Found a sql file!\n";
                 $sqlfiles[] = $raw_path;
                 $sqlfile_indices[] = $i;
+                continue;
             }
         
-            foreach($private_dirs+$public_dirs as $dir) {
+            foreach(array_merge($private_dirs,$public_dirs) as $dir) {
                 $last_pos = strrpos($raw_path,$dir.'/');
                 if($last_pos !== false ) {
                     //print("INTERESTING - last_pos is $last_pos when searching $raw_path for $dir - last_pos+strlen(\$dir) is: ".($last_pos+strlen($dir))." and strlen(\$rawpath) is: ".strlen($raw_path)."\n");
-                    print("We would copy $raw_path to $dir.\n"); //FIXME append to a path?
+                    //print("We would copy $raw_path to $dir.\n"); //FIXME append to a path?
                     $interesting_files[$raw_path] = ['dest' =>$dir, 'index' => $i];
+                    continue 2;
                     if($last_pos + strlen($dir) +1 == strlen($raw_path)) {
                         // we don't care about that; we just want files with the appropriate prefix
                         //print("FOUND THE EXACT DIRECTORY: $dir AT: $raw_path!!!\n");
                     }
                 }
             }
-            foreach($private_files+$public_files as $file) {
+            $good_extensions = ["png","gif","jpg","svg","jpeg","doc","docx","pdf","txt",
+                                "zip","rar","xls","xlsx","lic","xml","rtf", "webp","key","ico"];
+            foreach(array_merge($private_files, $public_files) as $file) {
+                $has_wildcard = (strpos($file,"*") !== false);
+                if($has_wildcard) {
+                    $file = substr($file,0,-1); //trim last character (which should be the wildcard)
+                }
                 $last_pos = strrpos($raw_path,$file); // no trailing slash!
                 if($last_pos !== false ) {
+                    $extension = strtolower(pathinfo($raw_path, PATHINFO_EXTENSION));
+                    if(!in_array($extension, $good_extensions)) {
+                        $this->warn("Potentially unsafe file ".$raw_path." is being skipped");
+                        $boring_files[] = $raw_path;
+                        continue 2;
+                    }
                     //print("INTERESTING - last_pos is $last_pos when searching $raw_path for $file - last_pos+strlen(\$file) is: ".($last_pos+strlen($file))." and strlen(\$rawpath) is: ".strlen($raw_path)."\n");
-                    if($last_pos + strlen($file) == strlen($raw_path)) { //again, no trailing slash
-                        print("FOUND THE EXACT FILE: $file AT: $raw_path!!!\n"); //we *do* care about this, though.
+                    //no wildcards found in $file, process 'normally'
+                    if($last_pos + strlen($file) == strlen($raw_path) || $has_wildcard) { //again, no trailing slash. or this is a wildcard and we just take it.
+                        // print("FOUND THE EXACT FILE: $file AT: $raw_path!!!\n"); //we *do* care about this, though.
                         $interesting_files[$raw_path] = ['dest' => dirname($file),'index' => $i];
+                        continue 2;
                     }
                 }
-
             }
-        }
+            $boring_files[] = $raw_path; //if we've gotten to here and haven't continue'ed our way into the next iteration, we don't want this file
+        } // end of pre-processing the ZIP file for-loop
 
         // print_r($interesting_files);exit(-1);
 
@@ -179,7 +206,6 @@ class RestoreFromBackup extends Command
         //how to invoke the restore?
         $pipes = [];
 
-        // FIXME - absolutely can *NOT* be hardcoding paths like this!!!!!!! But I don't know how to do it right? (Maybe get the user's ENV and append the MYSQL_PWD to it?)
         $env_vars = getenv();
         $env_vars['MYSQL_PWD'] = config("database.connections.mysql.password");
         $proc_results = proc_open("mysql -h ".escapeshellarg(config('database.connections.mysql.host'))." -u ".escapeshellarg(config('database.connections.mysql.username'))." ".escapeshellarg(config('database.connections.mysql.database')), // yanked -p since we pass via ENV
@@ -199,7 +225,7 @@ class RestoreFromBackup extends Command
         //$sql_contents = fopen($sqlfiles[0], "r"); //NOPE! This isn't a real file yet, silly-billy!
 
         $sql_stat = $za->statIndex($sqlfile_indices[0]);
-        $this->info("SQL Stat is: ".print_r($sql_stat,true));
+        //$this->info("SQL Stat is: ".print_r($sql_stat,true));
         $sql_contents = $za->getStream($sql_stat['name']);
         if ($sql_contents === false) {
             $stdout = fgets($pipes[1]);
@@ -232,17 +258,34 @@ class RestoreFromBackup extends Command
         
         //and now copy the files over too (right?)
         //FIXME - we don't prune the filesystem space yet!!!!
+        if($this->option('no-progress')) {
+            $bar = null;
+        } else {
+            $bar = $this->output->createProgressBar(count($interesting_files));
+        }
         foreach($interesting_files AS $pretty_file_name => $file_details) {
             $ugly_file_name = $za->statIndex($file_details['index'])['name'];
             $fp = $za->getStream($ugly_file_name);
-            $this->info("Weird problem, here are file details? ".print_r($file_details,true));
+            //$this->info("Weird problem, here are file details? ".print_r($file_details,true));
             $migrated_file = fopen($file_details['dest']."/".basename($pretty_file_name),"w");
             while(($buffer = fgets($fp))!== false) {
                 fwrite($migrated_file,$buffer);
             }
             fclose($migrated_file);
             fclose($fp);
-            $this->info("Wrote $ugly_file_name to $pretty_file_name");
+            //$this->info("Wrote $ugly_file_name to $pretty_file_name");
+            if($bar) {
+                $bar->advance();
+            }
+        }
+        if($bar) {
+            $bar->finish();
+            $this->line("");
+        } else {
+            $this->info(count($interesting_files)." files were succesfully transferred");
+        }
+        foreach($boring_files as $boring_file) {
+            $this->warn($boring_file." was skipped.");
         }
         
     }
