@@ -112,7 +112,7 @@ class RestoreFromBackup extends Command
         ];
         
         $public_files = [
-            'public/uploads/logo.png',
+            'public/uploads/logo.*',
             'public/uploads/setting-email_logo*',
             'public/uploads/setting-label_logo*',
             'public/uploads/setting-logo*',
