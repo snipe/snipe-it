@@ -108,7 +108,7 @@ class LoginController extends Controller
                 Log::debug("Attempting to log user in by SAML authentication.");
                 $user = $saml->samlLogin($samlData);
                 if(!is_null($user)) {
-                    Auth::login($user, true);
+                    Auth::login($user);
                 } else {
                     $username = $saml->getUsername();
                     \Log::warning("SAML user '$username' could not be found in database.");
@@ -183,7 +183,7 @@ class LoginController extends Controller
             try {
                 $user = User::where('username', '=', $remote_user)->whereNull('deleted_at')->where('activated', '=', '1')->first();
                 Log::debug("Remote user auth lookup complete");
-                if(!is_null($user)) Auth::login($user, true);
+                if(!is_null($user)) Auth::login($user, $request->input('remember'));
             } catch(Exception $e) {
                 Log::debug("There was an error authenticating the Remote user: " . $e->getMessage());
             }
@@ -223,7 +223,7 @@ class LoginController extends Controller
             try {
                 LOG::debug("Attempting to log user in by LDAP authentication.");
                 $user = $this->loginViaLdap($request);
-                Auth::login($user, true);
+                Auth::login($user, $request->input('remember'));
 
             // If the user was unable to login via LDAP, log the error and let them fall through to
             // local authentication.
