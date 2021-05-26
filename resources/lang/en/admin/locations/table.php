@@ -20,4 +20,5 @@ return array(
     'parent'                    => 'Parent',
     'currency'                  => 'Location Currency',
     'ldap_ou'                   => 'LDAP Search OU',
+    'remove_location'           => 'Remove from Current Location?'
     );
