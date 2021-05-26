@@ -417,7 +417,7 @@
                                     {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
                                 </div>
                                 <div class="col-md-9" id="ldaptestrow">
-                                    <a {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">Test LDAP Syncronization</a>
+                                    <a {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">Test LDAP Synchronization</a>
                                 </div>
                                 <div class="col-md-9 col-md-offset-3">
                                     <br />
