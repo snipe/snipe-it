@@ -16,6 +16,16 @@ Route::group([ 'prefix' => 'users', 'middleware' => ['auth']], function () {
         [ 'as' => 'userfile.destroy', 'uses' => 'Users\UserFilesController@destroy' ]
     );
 
+
+    Route::post(
+        '{userId}/password',
+        [
+            'as'   => 'users.password',
+            'uses' => 'Users\UsersController@sendPasswordReset',
+        ]
+    );
+    
+
     Route::get(
         '{userId}/print',
         [ 'as' => 'users.print', 'uses' => 'Users\UsersController@printInventory' ]

@@ -128,7 +128,7 @@
               @endif
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-7">
               <div class="table table-responsive">
                 <table class="table table-striped">
                   @if (!is_null($user->company))
@@ -326,7 +326,7 @@
             </div> <!--/col-md-8-->
 
             <!-- Start button column -->
-            <div class="col-md-2">
+            <div class="col-md-3">
               @can('update', $user)
                 <div class="col-md-12">
                   <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.edit') }}</a>
@@ -344,9 +344,21 @@
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
                 @endcan
+
+                @can('update', $user)
+                  @if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0'))
+                      <div class="col-md-12" style="padding-top: 5px;">
+                        <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
+                          {{ csrf_field() }}
+                          <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
+                        </form>
+                      </div>
+                  @endif
+                @endcan
+
                 @can('delete', $user)
                   @if ($user->deleted_at=='')
-                    <div class="col-md-12" style="padding-top: 5px;">
+                    <div class="col-md-12" style="padding-top: 30px;">
                       <form action="{{route('users.destroy',$user->id)}}" method="POST">
                         {{csrf_field()}}
                         {{ method_field("DELETE")}}
