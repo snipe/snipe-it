@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Δεν έχετε επαρκή δικαιώματα.',
     'user_deleted_warning'      => 'Αυτός ο χρήστης έχει διαγραφεί. Θα πρέπει να επαναφέρετε αυτό το χρήστη για να τον επεξεργαστείτε ή να του εκχωρήσετε νέα πάγια.',
     'ldap_not_configured'        => 'Η ενσωμάτωση LDAP δεν έχει ρυθμιστεί για αυτήν την εγκατάσταση.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

@@ -22,6 +22,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('locations', 'LocationsController', [
         'parameters' => ['location' => 'location_id']
     ]);
+    
+    Route::get(
+        'locations/{locationId}/printassigned',
+        [ 'as' => 'locations.print_assigned', 'uses' => 'LocationsController@print_assigned' ]
+    );
+    
+    Route::get(
+        'locations/{locationId}/printallassigned',
+        [ 'as' => 'locations.print_all_assigned', 'uses' => 'LocationsController@print_all_assigned' ]
+    );
 
     /*
     * Manufacturers
@@ -80,17 +90,7 @@ Route::group(['middleware' => 'auth'], function () {
 */
 
 Route::group(['middleware' => 'auth','prefix' => 'modals'], function () {
-    Route::get('location',['as' => 'modal.location','uses' => 'ModalController@location']);
-    Route::get('category',['as' => 'modal.category','uses' => 'ModalController@category']);
-    Route::get('manufacturer',['as' => 'modal.manufacturer','uses' => 'ModalController@manufacturer']);
-    Route::get('model',['as' => 'modal.model','uses' => 'ModalController@model']);
-    Route::get('statuslabel',['as' => 'modal.statuslabel','uses' => 'ModalController@statuslabel']);
-    Route::get('supplier',['as' => 'modal.supplier','uses' => 'ModalController@supplier']);
-    Route::get('user',['as' => 'modal.user','uses' => 'ModalController@user']);
-    Route::get('kit-model',['as' => 'modal.kit.model','uses' => 'ModalController@kitModel']);
-    Route::get('kit-license',['as' => 'modal.kit.license','uses' => 'ModalController@kitLicense']);
-    Route::get('kit-consumable',['as' => 'modal.kit.consumable','uses' => 'ModalController@kitConsumable']);
-    Route::get('kit-accessory',['as' => 'modal.kit.accessory','uses' => 'ModalController@kitAccessory']);
+    Route::get('{type}/{itemId?}',['as' => 'modal.show', 'uses' => 'ModalController@show']);
 });
 
 /*
@@ -344,6 +344,9 @@ Route::group(['middleware' => ['auth']], function () {
         [ 'as' => 'reports.activity', 'uses' => 'ReportsController@getActivityReport' ]
     );
 
+    Route::post('reports/activity', 'ReportsController@postActivityReport');
+
+
 
     Route::get(
         'reports/unaccepted_assets',
@@ -481,5 +484,4 @@ Route::group(['middleware' => 'web'], function () {
 
 Auth::routes();
 
-
-
+Route::get('/health', [ 'as' => 'health', 'uses' => 'HealthController@get']);

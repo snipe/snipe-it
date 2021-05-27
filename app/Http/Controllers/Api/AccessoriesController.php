@@ -50,7 +50,9 @@ class AccessoriesController extends Controller
             $accessories->where('supplier_id','=',$request->input('supplier_id'));
         }
 
-        $offset = (($accessories) && (request('offset') > $accessories->count())) ? 0 : request('offset', 0);
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($accessories) && ($request->get('offset') > $accessories->count())) ? $accessories->count() : $request->get('offset', 0);
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
@@ -152,7 +154,6 @@ class AccessoriesController extends Controller
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 
-        $accessory->lastCheckoutArray = $accessory->lastCheckout->toArray();
         $accessory_users = $accessory->users;
         $total = $accessory_users->count();
 
@@ -253,7 +254,8 @@ class AccessoriesController extends Controller
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
                 'user_id' => Auth::id(),
-                'assigned_to' => $request->get('assigned_to')
+                'assigned_to' => $request->get('assigned_to'),
+                'note' => $request->get('note')
             ]);
 
             $accessory->logCheckout($request->input('note'), $user);
@@ -285,7 +287,7 @@ class AccessoriesController extends Controller
         $accessory = Accessory::find($accessory_user->accessory_id);
         $this->authorize('checkin', $accessory);
 
-        $logaction = $accessory->logCheckin(User::find($accessoryUserId), $request->input('note'));
+        $logaction = $accessory->logCheckin(User::find($accessory_user->user_id), $request->input('note'));
 
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {

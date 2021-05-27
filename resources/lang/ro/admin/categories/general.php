@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Despre categorii',
-    'about_categories'  				=> 'Categoriile vă ajută să vă organizați articolele. Unele categorii de exemple ar putea fi &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot; și așa mai departe, dar puteți utiliza categoriile în orice mod care vă poate face sens.',
     'asset_categories' 					=> 'Categoriile de active',
     'category_name'  					=> 'Nume categorii',
     'checkin_email'                     => 'Trimiteți e-mail utilizatorului la logare / iesire.',

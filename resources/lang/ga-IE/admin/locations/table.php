@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Tír',
     'create'                    => 'Cruthaigh Suíomh',
     'update'                    => 'Suíomh Nuashonraithe',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Ainm Suíomh',
     'address'                   => 'Seoladh',
     'zip'                       => 'Cód Poist',

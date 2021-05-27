@@ -218,6 +218,12 @@ return array(
             'note'       => '',
             'display'    => true,
         ),
+        array(
+            'permission' => 'licenses.files',
+            'label'      => 'View and Modify License Files',
+            'note'       => '',
+            'display'    => true,
+        ),
     ),
 
 

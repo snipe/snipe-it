@@ -11,6 +11,8 @@ use Redirect;
 use Request;
 use Storage;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 /**
  * This class controls all actions related to asset models for
  * the Snipe-IT Asset Management application.
@@ -141,6 +143,8 @@ class AssetModelsController extends Controller
             return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
+        $model = $request->handleImages($model);
+
         $model->depreciation_id     = $request->input('depreciation_id');
         $model->eol                 = $request->input('eol');
         $model->name                = $request->input('name');
@@ -149,6 +153,8 @@ class AssetModelsController extends Controller
         $model->category_id         = $request->input('category_id');
         $model->notes               = $request->input('notes');
         $model->requestable         = $request->input('requestable', '0');
+
+
 
         $this->removeCustomFieldsDefaultValues($model);
 
@@ -162,7 +168,6 @@ class AssetModelsController extends Controller
             }
         }
 
-        $model = $request->handleImages($model);
 
         if ($model->save()) {
             return redirect()->route("models.index")->with('success', trans('admin/models/message.update.success'));
@@ -250,7 +255,7 @@ class AssetModelsController extends Controller
         if (isset($model->id)) {
             return view('models/view', compact('model'));
         }
-        // Redirect to the user management page
+
         return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
     }
 

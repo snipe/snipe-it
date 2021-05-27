@@ -7,16 +7,16 @@
             <h4 class="modal-title">Append license{{-- TODO: trans --}}</h4>
         </div>
         <div class="modal-body">
-            <form action="{{ route('api.kits.licenses.store', ['kit_id' => request('kit')]) }}" onsubmit="return false">
+            <form action="{{ route('api.kits.licenses.store', $kitId) }}" onsubmit="return false">
                 {{ csrf_field() }}
                 <div class="alert alert-danger" id="modal_error_msg" style="display:none">
                 </div>
-                
+
                 <div class="dynamic-form-row">
                     <div class="col-md-4 col-xs-12"><label for="modal-license_id">{{ trans('general.license') }}:
                         </label></div>
                     <div class="col-md-8 col-xs-12 required">
-                        <select class="js-data-ajax" data-endpoint="licenses" name="license" style="width: 100%" id="modal-license_id" />
+                        <select class="js-data-ajax" data-endpoint="licenses" name="license" style="width: 100%" id="modal-license_id"></select>
                     </div>
                 </div>
 

@@ -2,8 +2,9 @@
 
 use App\Services\LdapAd;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
-class LdapServiceProvider extends ServiceProvider
+class LdapServiceProvider extends ServiceProvider implements DeferrableProvider
 {
 
     /**
@@ -13,7 +14,7 @@ class LdapServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->singleton(LdapAd::class, LdapAd::class);
+        
     }
 
 
@@ -24,6 +25,16 @@ class LdapServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton(LdapAd::class, LdapAd::class);
+    }
 
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [LdapAd::class];
     }
 }

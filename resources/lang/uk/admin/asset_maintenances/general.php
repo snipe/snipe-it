@@ -7,5 +7,8 @@
         'view'               => 'View Asset Maintenance Details',
         'repair'             => 'Ремонт',
         'maintenance'        => 'Технічне обслуговування',
-        'upgrade'            => 'Модернізація'
+        'upgrade'            => 'Модернізація',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

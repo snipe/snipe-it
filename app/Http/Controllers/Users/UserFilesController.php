@@ -38,7 +38,7 @@ class UserFilesController extends Controller
                 $filename = 'user-' . $user->id . '-' . str_random(8);
                 $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
                 if (!$file->move($destinationPath, $filename)) {
-                    return JsonResponse::create(["error" => "Unabled to move file"], 500);
+                    return redirect()->back()->with('error', trans('admin/users/message.upload.invalidfiles'));
                 }
                 //Log the uploaded file to the log
                 $logAction = new Actionlog();
@@ -57,10 +57,10 @@ class UserFilesController extends Controller
                 }
                 $logActions[] = $logAction;
             }
-//            dd($logActions);
-            return JsonResponse::create($logActions);
+            // dd($logActions);
+            return redirect()->back()->with('success', trans('admin/users/message.upload.success'));
         }
-        return JsonResponse::create(["error" => "No User associated with this request"], 500);
+        return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
 
     }
 
@@ -117,7 +117,7 @@ class UserFilesController extends Controller
 
             $log = Actionlog::find($fileId);
             $file = $log->get_src('users');
-            return Response::download($file);
+            return Response::download($file); //FIXME this doesn't use the new StorageHelper yet, but it's complicated...
         }
         // Prepare the error message
         $error = trans('admin/users/message.user_not_found', ['id' => $userId]);

@@ -103,7 +103,7 @@ class ReportsController extends Controller
         $this->authorize('reports.view');
         $depreciations = Depreciation::get();
         // Grab all the assets
-        $assets = Asset::with( 'assignedTo', 'assetstatus', 'defaultLoc', 'location', 'assetlog', 'company', 'model.category', 'model.depreciation')
+        $assets = Asset::with( 'assignedTo', 'assetstatus', 'defaultLoc', 'location', 'company', 'model.category', 'model.depreciation')
                        ->orderBy('created_at', 'DESC')->get();
 
         return view('reports/depreciation', compact('assets'))->with('depreciations',$depreciations);
@@ -218,6 +218,99 @@ class ReportsController extends Controller
 
 
     /**
+     * Exports the activity report to CSV
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0.7]
+     * @return \Illuminate\Http\Response
+     */
+    public function postActivityReport(Request $request)
+    {
+        ini_set('max_execution_time', 12000);
+        $this->authorize('reports.view');
+
+        \Debugbar::disable();
+        $response = new StreamedResponse(function () {
+
+            \Log::debug('Starting streamed response');
+
+            // Open output stream
+            $handle = fopen('php://output', 'w');
+            stream_set_timeout($handle, 2000);
+
+            $header = [
+                trans('general.date'),
+                trans('general.admin'),
+                trans('general.action'),
+                trans('general.type'),
+                trans('general.item'),
+                'To',
+                trans('general.notes'),
+                'Changed',
+
+            ];
+            $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+            \Log::debug('Starting headers: '.$executionTime);
+            fputcsv($handle, $header);
+            $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+            \Log::debug('Added headers: '.$executionTime);
+
+            $actionlogs = Actionlog::with('item', 'user', 'target','location')
+                ->orderBy('created_at', 'DESC')
+                ->chunk(20, function($actionlogs) use($handle) {
+
+                $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+                \Log::debug('Walking results: '.$executionTime);
+                $count = 0;
+
+                foreach ($actionlogs as $actionlog) {
+
+                    $count++;
+                    $target_name = '';
+
+                    if ($actionlog->target) {
+                        if ($actionlog->targetType()=='user') {
+                           $target_name =  $actionlog->target->getFullNameAttribute();
+                        } else {
+                            $target_name = $actionlog->target->getDisplayNameAttribute();
+                        }
+                    }
+
+
+                    $row = [
+                        $actionlog->created_at,
+                        ($actionlog->user) ? e($actionlog->user->getFullNameAttribute()) : '',
+                        $actionlog->present()->actionType(),
+                        e($actionlog->itemType()),
+                        ($actionlog->itemType()=='user') ? $actionlog->filename : e($actionlog->item->getDisplayNameAttribute()),
+                        $target_name,
+                        ($actionlog->note) ? e($actionlog->note): '',
+                        $actionlog->log_meta,
+                    ];
+                    fputcsv($handle, $row);
+
+                }
+            });
+
+            // Close the output stream
+            fclose($handle);
+            $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+            \Log::debug('-- SCRIPT COMPLETED IN '. $executionTime);
+
+        }, 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition'
+            => 'attachment; filename="activity-report-'.date('Y-m-d-his').'.csv"',
+        ]);
+
+
+        return $response;
+
+
+    }
+
+
+    /**
      * Displays license report
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -310,7 +403,7 @@ class ReportsController extends Controller
      */
     public function postCustom(Request $request)
     {
-        ini_set('max_execution_time', 12000);
+        ini_set('max_execution_time', env('REPORT_TIME_LIMIT', 12000)); //12000 seconds = 200 minutes
         $this->authorize('reports.view');
 
 
@@ -539,8 +632,16 @@ class ReportsController extends Controller
             if (($request->filled('expected_checkin_start')) && ($request->filled('expected_checkin_end'))) {
                 $assets->whereBetween('assets.expected_checkin', [$request->input('expected_checkin_start'), $request->input('expected_checkin_end')]);
             }
+
+            if (($request->filled('last_audit_start')) && ($request->filled('last_audit_end'))) {
+                $assets->whereBetween('assets.last_audit_date', [$request->input('last_audit_start'), $request->input('last_audit_end')]);
+            }
+
+            if (($request->filled('next_audit_start')) && ($request->filled('next_audit_end'))) {
+                $assets->whereBetween('assets.next_audit_date', [$request->input('next_audit_start'), $request->input('next_audit_end')]);
+            }
             
-            $assets->orderBy('assets.created_at', 'ASC')->chunk(20, function($assets) use($handle, $customfields, $request) {
+            $assets->orderBy('assets.id', 'ASC')->chunk(20, function($assets) use($handle, $customfields, $request) {
 
                 $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
                 \Log::debug('Walking results: '.$executionTime);
@@ -682,7 +783,7 @@ class ReportsController extends Controller
                             $diff = ($asset->purchase_cost - $depreciation);
                             $row[]        = Helper::formatCurrencyOutput($depreciation);
                             $row[]        = Helper::formatCurrencyOutput($diff);
-                            $row[]        = ($asset->depreciated_date()!='') ? $asset->depreciated_date()->format('Y-m-d') : '';
+                            $row[]        = ($asset->depreciation) ? $asset->depreciated_date()->format('Y-m-d') : '';
                     }
 
                     if ($request->filled('checkout_date')) {

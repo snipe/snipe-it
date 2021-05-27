@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> 'Про компоненти',
-    'about_components_text'  			=> 'Компоненти це складові активу, наприклад HDD, RAM, тощо.',
     'component_name'                  => 'Назва компонента',
     'checkin'                             => 'Прийняти компонент',
     'checkout'                             => 'Видати компонент',

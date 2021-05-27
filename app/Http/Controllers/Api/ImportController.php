@@ -49,10 +49,12 @@ class ImportController extends Controller
                 if (!in_array($file->getMimeType(), array(
                     'application/vnd.ms-excel',
                     'text/csv',
+                    'application/csv',
+                    'text/x-Algol68', // because wtf CSV files?
                     'text/plain',
                     'text/comma-separated-values',
                     'text/tsv'))) {
-                    $results['error']='File type must be CSV';
+                    $results['error']='File type must be CSV. Uploaded file is '.$file->getMimeType();
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
                 }
 
@@ -118,8 +120,15 @@ class ImportController extends Controller
     public function process(ItemImportRequest $request, $import_id)
     {
         $this->authorize('import');
+
         // Run a backup immediately before processing
-        Artisan::call('backup:run');
+        if ($request->has('run-backup')) {
+            \Log::debug('Backup manually requested via importer');
+            Artisan::call('backup:run');
+        } else {
+            \Log::debug('NO BACKUP requested via importer');
+        }
+
         $errors = $request->import(Import::find($import_id));
         $redirectTo = "hardware.index";
         switch ($request->get('import-type')) {

@@ -170,7 +170,7 @@ class DepartmentsController extends Controller
         $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
 
         $department = $request->handleImages($department);
-
+        
         if ($department->save()) {
             return redirect()->route("departments.index")->with('success', trans('admin/departments/message.update.success'));
         }

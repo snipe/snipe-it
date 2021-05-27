@@ -2,8 +2,8 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
-    'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
+    'activated_help_text' => 'A felhasználó beléphet',
+    'activated_disabled_help_text' => 'Saját felhasználói fiókjának a státuszát nem tudja módosítani.',
     'assets_user'       => 'Eszköz(ök) hozzárendelve: :name',
     'bulk_update_warn'	=> 'A következő felhasználók tulajdonságait szerkesztheti: user_count felhasználók. Kérjük, vegye figyelembe, hogy a saját felhasználói attribútumait nem tudja megváltoztatni ezzel az űrlappal, és személyre kell változtatni a saját felhasználóit.',
     'bulk_update_help'	=> 'Ez az űrlap egyszerre több felhasználó frissítését teszi lehetővé. Csak töltse ki a megváltoztatni kívánt mezőket. Az üresen maradt mezők változatlanok maradnak.',
@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Az LDAP konfigurációs beállításai megtalálhatók az Adminisztrálás> Beállítások menüben. Az (opcionális) kiválasztott hely minden importált felhasználó számára be lesz állítva.',
     'print_assigned'    => 'Az összes hozzárendelt nyomtatása',
     'software_user'     => 'Szoftver ellenőrzése: név',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Felhasználó megtekintése: név',
     'usercsv'           => 'CSV fájl',
     'two_factor_admin_optin_help' => 'A jelenlegi adminisztrációs beállításai lehetővé teszik a kétütemű hitelesítés szelektív végrehajtását.',

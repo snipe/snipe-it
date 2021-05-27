@@ -12,5 +12,6 @@ return array(
     'submit'  	                => 'Send',
     'upload'                    => 'Upload',
 	'select_file'				=> 'Vælg fil ...',
-    'select_files'				=> 'Select Files...',
+    'select_files'				=> 'Vælg filer...',
+    'generate_labels'           => '{1} Generer etiketter [2,*] Generer etiketter',
 );

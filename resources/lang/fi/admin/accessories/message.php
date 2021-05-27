@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Lisävarustetta ei ole olemassa.',
-    'assoc_users'	 => 'Tällä lisävarusteella on tällä hetkellä: laskea kohteet, jotka on tarkistettu käyttäjille. Tarkista lisävarusteet ja yritä uudelleen.',
+    'does_not_exist' => 'Oheistarviketta [:id] ei ole.',
+    'assoc_users'	 => 'Oheistarviketta on tällä hetkellä luovutettuna :count nimikettä käyttäjille. Tarkista oheistarvikkeiden tila ja yritä uudelleen. ',
 
     'create' => array(
-        'error'   => 'Lisävarustetta ei luotu, yritä uudelleen.',
-        'success' => 'Lisävaruste on luotu.'
+        'error'   => 'Oheistarviketta ei luotu, yritä uudelleen.',
+        'success' => 'Oheistarvike on luotu.'
     ),
 
     'update' => array(
-        'error'   => 'Lisävarustetta ei päivitetty, yritä uudelleen',
-        'success' => 'Lisävaruste päivitettiin onnistuneesti.'
+        'error'   => 'Oheistarviketta ei päivitetty, yritä uudelleen',
+        'success' => 'Oheistarvike päivitettiin onnistuneesti.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Haluatko varmasti poistaa tämän lisävarusteen?',
-        'error'   => 'Ongelma poistaa lisäosan. Yritä uudelleen.',
-        'success' => 'Lisävaruste poistettiin onnistuneesti.'
+        'confirm'   => 'Haluatko varmasti poistaa tämän oheistarvikkeen?',
+        'error'   => 'Oheistarvikkeen poistaminen ei onnistunut. Yritä uudelleen.',
+        'success' => 'Oheistarvike poistettiin onnistuneesti.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Lisävarustetta ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Lisävaruste tarkistettiin onnistuneesti.',
+        'error'   		=> 'Oheistarviketta ei luovutettu, yritä uudelleen',
+        'success' 		=> 'Oheistarvike luovutettiin onnistuneesti.',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Lisävarustetta ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Lisävaruste tarkistettiin onnistuneesti.',
+        'error'   		=> 'Oheistarviketta ei palautettu, yritä uudelleen',
+        'success' 		=> 'Oheistarvike palautettiin onnistuneesti.',
         'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
     )
 

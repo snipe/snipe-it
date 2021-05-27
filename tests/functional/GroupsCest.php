@@ -39,10 +39,10 @@ class GroupsCest
         $I->wantTo("Test Validation Fails with short name");
         $I->amOnPage(route('groups.create'));
         $I->seeResponseCodeIs(200);
-        $I->fillField('name', 't2');
+        $I->fillField('name', 't');
         $I->click('Save');
         $I->seeElement('.alert-danger');
-        $I->see('The name must be at least 3 characters', '.alert-msg');
+        $I->see('The name must be at least 2 characters', '.alert-msg');
     }
 
     public function passesCorrectValidation(FunctionalTester $I)
@@ -58,10 +58,7 @@ class GroupsCest
 
     public function allowsDelete(FunctionalTester $I, $scenario)
     {
-        $scenario->incomplete('Fix this test to generate a group for deleting');
-
         $I->wantTo('Ensure I can delete a group');
-
         // create a group
         $I->amOnPage(route('groups.create'));
         $I->seeResponseCodeIs(200);
@@ -70,16 +67,9 @@ class GroupsCest
         $I->dontSee('&lt;span class=&quot;');
         $I->seeElement('.alert-success');
 
-        // delete it
-        $I->amOnPage(route('groups.delete', Group::doesntHave('users')->first()->id));
+        $I->sendDelete(route('groups.destroy', Group::whereName('TestGroup')->doesntHave('users')->first()->id));
         $I->seeResponseCodeIs(200);
         $I->seeElement('.alert-success');
-        // $I->seeResponseCodeIs(200);
-    }
-
-    public function allowsEditing(FunctionalTester $I, $scenario)
-    {
-        $scenario->incomplete('Fix this test to generate a group for editing');
-        $I->wantTo('Ensure i can edit a group');
+        $I->seeResponseCodeIs(200);
     }
 }

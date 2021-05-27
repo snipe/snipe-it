@@ -20,6 +20,7 @@ return array(
     'title'      	=> 'دارایی ',
     'image'		=> 'دستگاه تصویر
 ',
-    'days_without_acceptance' => 'روز بدون پذیرش'
+    'days_without_acceptance' => 'روز بدون پذیرش',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

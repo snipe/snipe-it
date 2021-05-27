@@ -70,9 +70,7 @@ class ManufacturersController extends Controller
         $manufacturer->support_url      = $request->input('support_url');
         $manufacturer->support_phone    = $request->input('support_phone');
         $manufacturer->support_email    = $request->input('support_email');
-
-
-        $manufacturer = $request->handleImages($manufacturer,'manufacturers');
+        $manufacturer = $request->handleImages($manufacturer);
 
 
 
@@ -94,11 +92,14 @@ class ManufacturersController extends Controller
      */
     public function edit($manufacturerId = null)
     {
+        // Handles manufacturer checks and permissions.
         $this->authorize('update', Manufacturer::class);
+
         // Check if the manufacturer exists
-        if (is_null($item = Manufacturer::find($manufacturerId))) {
+        if (!$item = Manufacturer::find($manufacturerId)) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
+
         // Show the page
         return view('manufacturers/edit', compact('item'));
     }
@@ -131,6 +132,11 @@ class ManufacturersController extends Controller
         $manufacturer->support_phone    = $request->input('support_phone');
         $manufacturer->support_email    = $request->input('support_email');
 
+        // Set the model's image property to null if the image is being deleted
+        if ($request->input('image_delete') == 1) {
+            $manufacturer->image = null;
+        }
+
         $manufacturer = $request->handleImages($manufacturer);
 
 
@@ -152,11 +158,11 @@ class ManufacturersController extends Controller
     public function destroy($manufacturerId)
     {
         $this->authorize('delete', Manufacturer::class);
-        if (is_null($manufacturer = Manufacturer::withCount('models as models_count')->find($manufacturerId))) {
+        if (is_null($manufacturer = Manufacturer::withTrashed()->withCount('models as models_count')->find($manufacturerId))) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.not_found'));
         }
 
-        if ($manufacturer->models_count > 0) {
+        if (!$manufacturer->isDeletable()) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.assoc_users'));
         }
 
@@ -168,9 +174,12 @@ class ManufacturersController extends Controller
             }
         }
 
-
-        // Delete the manufacturer
-        $manufacturer->delete();
+        // Soft delete the manufacturer if active, permanent delete if is already deleted
+        if($manufacturer->deleted_at === NULL) {
+            $manufacturer->delete();
+        } else {
+            $manufacturer->forceDelete();
+        }
         // Redirect to the manufacturers management page
         return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.delete.success'));
     }

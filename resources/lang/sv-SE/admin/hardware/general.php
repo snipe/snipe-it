@@ -13,7 +13,7 @@ return array(
     'deleted'  					=> 'Den här tillgången har tagits bort. <a href="/hardware/:asset_id/restore">Klicka här för att återställa det</a>.',
     'edit'  					=> 'Redigera tillgång',
     'model_deleted'  			=> 'Denna tillgångsmodell har raderats. Du måste återställa modellen innan du kan återställa Asset.<br/> <a href="/hardware/models/:model_id/restore">Klick här för att återställa modellen</a>.',
-    'requestable'               => 'Requestable',
+    'requestable'               => 'Tillgängliga',
     'requested'				    => 'Begärda',
     'restore'  					=> 'Återställ tillgången',
     'pending'  					=> 'Väntande',

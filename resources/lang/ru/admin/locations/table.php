@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Страна',
     'create'                    => 'Создать статус',
     'update'                    => 'Обновить статус',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Имя статуса',
     'address'                   => 'Адрес',
     'zip'                       => 'Почтовый индекс',

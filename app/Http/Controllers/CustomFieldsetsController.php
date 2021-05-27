@@ -182,14 +182,58 @@ class CustomFieldsetsController extends Controller
 
         $this->authorize('update', $set);
 
-        foreach ($set->fields as $field) {
-            if ($field->id == $request->input('field_id')) {
-                return redirect()->route("fieldsets.show", [$id])->withInput()->withErrors(['field_id' => trans('admin/custom_fields/message.field.already_added')]);
+        if ($request->filled('field_id')) {
+            foreach ($set->fields as $field) {
+                if ($field->id == $request->input('field_id')) {
+                    return redirect()->route("fieldsets.show", [$id])->withInput()->withErrors(['field_id' => trans('admin/custom_fields/message.field.already_added')]);
+                }
             }
+
+            $results = $set->fields()->attach($request->input('field_id'), ["required" => ($request->input('required') == "on"),"order" => $request->input('order', 1)]);
+
+            return redirect()->route("fieldsets.show", [$id])->with("success", trans('admin/custom_fields/message.field.create.assoc_success'));
         }
+        return redirect()->route("fieldsets.show", [$id])->with("error", 'No field selected.');
 
-        $results = $set->fields()->attach($request->input('field_id'), ["required" => ($request->input('required') == "on"),"order" => $request->input('order', 1)]);
 
-        return redirect()->route("fieldsets.show", [$id])->with("success", trans('admin/custom_fields/message.field.create.assoc_success'));
+    }
+
+    /**
+     * Set the field in a fieldset to required
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     */
+    public function makeFieldRequired($fieldset_id, $field_id)
+    {
+
+        $this->authorize('update', CustomFieldset::class);
+        $field = CustomField::findOrFail($field_id);
+        $fieldset = CustomFieldset::findOrFail($fieldset_id);
+        $fields[$field->id] = ['required' => 1];
+        $fieldset->fields()->syncWithoutDetaching($fields);
+
+        return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])
+            ->with("success", trans('Field successfully set to required'));
+
+    }
+
+    /**
+     * Set the field in a fieldset to optional
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     */
+    public function makeFieldOptional($fieldset_id, $field_id)
+    {
+        $this->authorize('update', CustomFieldset::class);
+        $field = CustomField::findOrFail($field_id);
+        $fieldset = CustomFieldset::findOrFail($fieldset_id);
+        $fields[$field->id] = ['required' => 0];
+        $fieldset->fields()->syncWithoutDetaching($fields);
+
+        return redirect()->route('fieldsets.show', ['fieldset' => $fieldset_id])
+            ->with("success", trans('Field successfully set to optional'));
+
     }
 }

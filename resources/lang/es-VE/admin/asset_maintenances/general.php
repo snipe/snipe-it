@@ -7,5 +7,8 @@
         'view'               => 'Ver Detalles de Mantenimiento de Activo',
         'repair'             => 'Reparar',
         'maintenance'        => 'Mantenimiento',
-        'upgrade'            => 'Mejorar'
+        'upgrade'            => 'Mejorar',
+        'calibration'        => 'Calibrar',
+        'software_support'   => 'Servicio de software',
+        'hardware_support'   => 'Servicio de software',
     ];

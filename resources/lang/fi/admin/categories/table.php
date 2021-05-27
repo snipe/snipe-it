@@ -1,10 +1,10 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'eula_text'      			=> 'Käyttöehdot',
     'id'      					=> 'Tunnus',
     'parent'   					=> 'Ylempi',
     'require_acceptance'      	=> 'Hyväksyminen',
-    'title'      				=> 'Laiteluokan Nimi',
+    'title'      				=> 'Laitekategorian nimi',
 
 );

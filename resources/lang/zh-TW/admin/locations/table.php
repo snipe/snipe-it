@@ -11,6 +11,8 @@ return array(
     'country'                   => '國家',
     'create'                    => '新增位置',
     'update'                    => '更新位置',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => '位置名稱',
     'address'                   => '地址',
     'zip'                       => '郵遞區號',

@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Tara',
     'create'                    => 'Creeaza locatie',
     'update'                    => 'Actualizeaza locatie',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Nume locatie',
     'address'                   => 'Adresa',
     'zip'                       => 'Cod postal',

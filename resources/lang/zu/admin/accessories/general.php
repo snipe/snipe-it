@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Mayelana nezesekeli',
-    'about_accessories_text'  			=> 'Izesekeli yilokho okukhipha kubasebenzisi kodwa ezingenayo inombolo ye-serial (noma awunandaba nokulandelela ngokuhlukile). Isibonelo, amagundane wekhompiyutha noma amakhibhodi.',
     'accessory_category' 				=> 'Isigaba sokufinyelela',
     'accessory_name'  					=> 'Igama lokufinyelela',
     'checkout'  							=> 'I-Checkout Accessory',

@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Piederums neeksistē.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Pašlaik šim piederumam ir: lietotāju skaits tiek pārbaudīts. Lūdzu, pārbaudiet piederumus un mēģiniet vēlreiz.',
 
     'create' => array(

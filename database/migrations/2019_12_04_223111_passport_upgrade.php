@@ -13,9 +13,11 @@ class PassportUpgrade extends Migration
      */
     public function up()
     {
-        Schema::table('oauth_clients', function (Blueprint $table) {
-            $table->string('secret', 100)->nullable()->change();
-        });
+        if (Schema::hasTable('oauth_clients')) {
+            Schema::table('oauth_clients', function (Blueprint $table) {
+                $table->string('secret', 100)->nullable()->change();
+            });
+        }
     }
 
     /**
@@ -25,8 +27,10 @@ class PassportUpgrade extends Migration
      */
     public function down()
     {
-        Schema::table('oauth_clients', function (Blueprint $table) {
-            $table->string('secret', 100)->change();
-        });
+        if (Schema::hasTable('oauth_clients')) {
+            Schema::table('oauth_clients', function (Blueprint $table) {
+                $table->string('secret', 100)->change();
+            });
+        }
     }
 }

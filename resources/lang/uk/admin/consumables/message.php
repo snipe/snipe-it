@@ -29,7 +29,7 @@ return array(
     'checkin' => array(
         'error'   		=> 'Consumable was not checked in, please try again',
         'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'Вказаного користувача не існує. Спробуйте ще раз.'
     )
 
 

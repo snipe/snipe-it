@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
     'image'		=> 'Geräte-Bild',
-    'days_without_acceptance' => 'Tage ohne Akzeptierung'
+    'days_without_acceptance' => 'Tage ohne Akzeptierung',
+    'monthly_depreciation' => 'Monatliche Abschreibung'
 
 );

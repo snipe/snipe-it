@@ -21,15 +21,15 @@ return array(
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component is niet uitgeleverd, probeer het nogmaals.',
-        'success' 		=> 'Component succesvol uitgeleverd.',
-        'user_does_not_exist' => 'De gebruiker is onbekend, probeer het nogmaals.'
+        'error'   		=> 'Component is niet uitgecheckt, probeer het nogmaals',
+        'success' 		=> 'Component succesvol uitgecheckt.',
+        'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component is niet binnengemeld, probeer het nogmaals.',
-        'success' 		=> 'Component succesvol binnengemeld.',
-        'user_does_not_exist' => 'De gebruiker is onbekend, probeer het nogmaals.'
+        'error'   		=> 'Component is niet ingecheckt, probeer het nogmaals',
+        'success' 		=> 'Component succesvol ingecheckt.',
+        'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.'
     )
 
 

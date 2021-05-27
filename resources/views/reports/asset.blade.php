@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('reports/export/assets') }}" class="btn btn-default"><i class="fa fa-download icon-white"></i>
+<a href="{{ route('reports/export/assets') }}" class="btn btn-default"><i class="fa fa-download icon-white" aria-hidden="true"></i>
 {{ trans('admin/hardware/table.dl_csv') }}</a>
 @stop
 

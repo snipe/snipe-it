@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sent'	        => 'Salasanasi linkki on lähetetty!',
-    'user'			=> 'No matching active user found with that email.',
+    'sent'	        => 'Salasanalinkki on lähetetty!',
+    'user'			=> 'Sähköpostille ei löytynyt käyttäjää.',
 ];
 

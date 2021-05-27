@@ -1,0 +1,127 @@
+/*
+ * Skin: Blue
+ * ----------
+ */
+@import "../bootstrap-less/mixins.less";
+@import "../bootstrap-less/variables.less";
+@import "../variables.less";
+@import "../mixins.less";
+
+.skin-blue {
+  //Navbar
+  .main-header {
+    .navbar {
+      .navbar-variant(@light-blue; #fff);
+      .sidebar-toggle {
+        color: #fff;
+        &:hover {
+          background-color: darken(@light-blue, 5%);
+        }
+      }
+      @media (max-width: @screen-header-collapse) {
+        .dropdown-menu {
+          li {
+            &.divider {
+              background-color: rgba(255, 255, 255, 0.1);
+            }
+            a {
+              color: #fff;
+              &:hover {
+                background: darken(@light-blue, 5%);
+              }
+            }
+          }
+        }
+      }
+    }
+    //Logo
+
+    li.user-header {
+      background-color: @light-blue;
+    }
+  }
+
+  //Content Header
+  .content-header {
+    background: transparent;
+  }
+
+  //Create the sidebar skin
+  .skin-dark-sidebar(@light-blue);
+}
+
+.skin-blue.layout-top-nav .main-header > .logo {
+  .logo-variant {
+    background-color: none;
+  }
+}
+
+
+
+.btn, btn-sm, .btn:hover {
+
+
+  &.btn-primary, .btn-primary:link {
+    background-color: darken(@light-blue, 10%);
+    border-color: darken(@light-blue, 20%);
+    color: #fff;
+  }
+
+
+  &a.btn-primary:hover {
+    background-color: darken(@light-blue, 20%);
+    border-color: darken(@light-blue, 20%);
+    color: #fff;
+  }
+
+  &.btn-white:link {
+    background-color: darken(@light-blue, 10%);
+    color: #fff;
+  }
+
+  &.btn-white:hover {
+    background-color: darken(@light-blue, 30%);
+    color: #fff;
+  }
+
+  &.btn-white:visited {
+    background-color: darken(@light-blue, 30%);
+    color: #fff;
+  }
+}
+
+
+
+.btn-warning, .btn-warning:link, a.btn-warning:hover, .btn-warning:link, .btn-warning:visited,
+.btn-danger, .btn-danger:link, a.btn-danger:hover, .btn-danger:link, .btn-danger:visited
+{
+    color: #fff;
+}
+
+
+
+a {
+  color: @light-blue;
+  &:hover {
+    color: darken(@light-blue, 20%);
+  }
+  &:visited {
+    color: @light-blue;
+  }
+}
+
+.text-primary {
+  color: darken(@light-blue, 20%);
+}
+
+
+.fixed-table-container tbody .selected td {
+  background-color: #fff8af;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #3c8dbc;
+}
+
+.search-highlight, .search-highlight:hover {
+  background-color: #e9d15b;
+}

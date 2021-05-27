@@ -3,28 +3,29 @@
 {{-- Page title --}}
 @section('title')
 
-@if (Request::get('status')=='deleted')
-    {{ trans('general.deleted') }}
-@else
-    {{ trans('general.current') }}
-@endif
- {{ trans('general.users') }}
+    @if (request('status')=='deleted')
+        {{ trans('general.deleted') }}
+    @else
+        {{ trans('general.current') }}
+    @endif
+    {{ trans('general.users') }}
+    @parent
 
-@parent
 @stop
 
 @section('header_right')
+
     @can('create', \App\Models\User::class)
-      @if ($snipeSettings->ldap_enabled == 1)
-      <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-sitemap"></span> LDAP Sync</a>
-      @endif
-      <a href="{{ route('users.create') }}" class="btn btn-primary pull-right" style="margin-right: 5px;">  {{ trans('general.create') }}</a>
+        @if ($snipeSettings->ldap_enabled == 1)
+            <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-sitemap"></span> LDAP Sync</a>
+        @endif
+        <a href="{{ route('users.create') }}" class="btn btn-primary pull-right" style="margin-right: 5px;">  {{ trans('general.create') }}</a>
     @endcan
 
-    @if (Request::get('status')=='deleted')
-      <a class="btn btn-default pull-right" href="{{ route('users.index') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_current') }}</a>
+    @if (request('status')=='deleted')
+        <a class="btn btn-default pull-right" href="{{ route('users.index') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_current') }}</a>
     @else
-      <a class="btn btn-default pull-right" href="{{ route('users.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
+        <a class="btn btn-default pull-right" href="{{ route('users.index', ['status' => 'deleted']) }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
     @endif
     @can('view', \App\Models\User::class)
         <a class="btn btn-default pull-right" href="{{ route('users.export') }}" style="margin-right: 5px;">Export</a>
@@ -44,13 +45,14 @@
                'class' => 'form-inline',
                 'id' => 'bulkForm']) }}
 
-            @if (Request::get('status')!='deleted')
+            @if (request('status')!='deleted')
               @can('delete', \App\Models\User::class)
                 <div id="toolbar">
-                  <select name="bulk_actions" class="form-control select2" style="width: 200px;">
+                    <label for="bulk_actions" class="sr-only">Bulk Actions</label>
+                  <select name="bulk_actions" class="form-control select2" style="width: 200px;" aria-label="bulk_actions">
                     <option value="delete">Bulk Checkin &amp; Delete</option>
                     <option value="edit">Bulk Edit</option>
-                    <option value="bulkpasswordreset">Send Password Reset</option>
+                    <option value="bulkpasswordreset">{{ trans('button.send_password_link') }}</option>
                   </select>
                   <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
                 </div>
@@ -74,23 +76,25 @@
                     id="usersTable"
                     class="table table-striped snipe-table"
                     data-url="{{ route('api.users.index',
-              array('deleted'=> (Request::get('status')=='deleted') ? 'true' : 'false','company_id'=>e(Request::get('company_id')))) }}"
+              array('deleted'=> (request('status')=='deleted') ? 'true' : 'false','company_id' => e(request('company_id')))) }}"
                     data-export-options='{
                 "fileName": "export-users-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
-            </table>
+                    </table>
 
 
-          {{ Form::close() }}
-        </div><!-- /.box-body -->
-      </div><!-- /.box -->
-  </div>
-</div>
+                    {{ Form::close() }}
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+    </div>
 
 @stop
 
 @section('moar_scripts')
+
+
 @include ('partials.bootstrap-table')
 
 

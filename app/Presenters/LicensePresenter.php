@@ -97,7 +97,41 @@ class LicensePresenter extends Presenter
                 "visible" => false,
                 "title" => trans('general.purchase_date'),
                 'formatter' => 'dateDisplayFormatter'
+            ],
+            [
+                "field" => "termination_date",
+                "searchable" => true,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/licenses/form.termination_date'),
+                'formatter' => 'dateDisplayFormatter'
+            ],
+            [
+                "field" => "depreciation",
+                "searchable" => true,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/hardware/form.depreciation'),
+                "visible" => false,
+                "formatter" => "depreciationsLinkObjFormatter",
+            ],
+
+            [
+                "field" => "maintained",
+                "searchable" => false,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/licenses/form.maintained'),
+                "formatter" => "trueFalseFormatter"
             ], [
+                "field" => "reassignable",
+                "searchable" => false,
+                "sortable" => true,
+                "visible" => false,
+                "title" => trans('admin/licenses/form.reassignable'),
+                "formatter" => "trueFalseFormatter"
+            ],
+            [
                 "field" => "purchase_cost",
                 "searchable" => true,
                 "sortable" => true,
@@ -161,6 +195,7 @@ class LicensePresenter extends Presenter
                 "field" => "name",
                 "searchable" => false,
                 "sortable" => false,
+                "sorter"   => "numericOnly",
                 "switchable" => true,
                 "title" => trans('admin/licenses/general.seat'),
                 "visible" => true,
@@ -173,6 +208,15 @@ class LicensePresenter extends Presenter
                 "visible" => true,
                 "formatter" => "usersLinkObjFormatter"
             ], [
+                "field" => "department",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('general.department'),
+                "visible" => false,
+                "formatter" => "departmentNameLinkFormatter"
+            ],
+            [
                 "field" => "assigned_asset",
                 "searchable" => false,
                 "sortable" => false,
@@ -188,7 +232,8 @@ class LicensePresenter extends Presenter
                 "title" => trans('general.location'),
                 "visible" => true,
                 "formatter" => "locationsLinkObjFormatter"
-            ], [
+            ],
+            [
                 "field" => "checkincheckout",
                 "searchable" => false,
                 "sortable" => false,

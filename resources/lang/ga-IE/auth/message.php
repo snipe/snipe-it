@@ -7,11 +7,23 @@ return array(
     'account_not_activated'  => 'Níl an cuntas úsáideora seo curtha i ngníomh.',
     'account_suspended'      => 'Tá an cuntas úsáideora seo ar fionraí.',
     'account_banned'         => 'Tá toirmeasc ar an gcuntas úsáideora seo.',
-    'throttle'               => 'Go leor iarrachtaí logáil isteach theip. Déan iarracht arís i dtreo: nóiméad nóiméad nóiméad.',
+    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+
+    'two_factor' => array(
+        'already_enrolled'      => 'Your device is already enrolled.',
+        'success'               => 'You have successfully logged in.',
+        'code_required'         => 'Two-factor code is required.',
+        'invalid_code'          => 'Two-factor code is invalid.',
+    ),
 
     'signin' => array(
         'error'   => 'Bhí fadhb ann agus tú ag iarraidh logáil isteach, déan iarracht arís.',
         'success' => 'Rinne tú logáil isteach go rathúil.',
+    ),
+
+    'logout' => array(
+        'error'   => 'There was a problem while trying to log you out, please try again.',
+        'success' => 'You have successfully logged out.',
     ),
 
     'signup' => array(
@@ -19,19 +31,15 @@ return array(
         'success' => 'Cruthaigh an cuntas go rathúil.',
     ),
 
-        'forgot-password' => array(
-            'error'   => 'Bhí fadhb ann agus tú ag iarraidh cód pasfhocal a athshocrú, déan iarracht arís.',
-            'success' => 'R-phost aisghabhála pasfhocal a sheoladh go rath',
-        ),
-
-        'forgot-password-confirm' => array(
-            'error'   => 'Bhí fadhb ann agus tú ag iarraidh an focal faire a athshocrú, déan iarracht arís.',
-            'success' => 'D\'athshocraigh do phasfhocal go rathúil.',
-        ),
-
-    'activate' => array(
-        'error'   => 'Bhí fadhb ann agus tú ag iarraidh do chuntas a ghníomhachtú, déan iarracht arís.',
-        'success' => 'Tá do chuntas gníomhachtaithe go rathúil.',
+    'forgot-password' => array(
+        'error'   => 'Bhí fadhb ann agus tú ag iarraidh cód pasfhocal a athshocrú, déan iarracht arís.',
+        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
     ),
+
+    'forgot-password-confirm' => array(
+        'error'   => 'Bhí fadhb ann agus tú ag iarraidh an focal faire a athshocrú, déan iarracht arís.',
+        'success' => 'D\'athshocraigh do phasfhocal go rathúil.',
+    ),
+
 
 );

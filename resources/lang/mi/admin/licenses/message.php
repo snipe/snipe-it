@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Ko te taonga e ngana ana koe ki te hono atu ki tenei raihana ko te pene atu i te tangata i whiriwhiria i roto i te waahanga kua tohaina.',
     'assoc_users'	 => 'Kei te tirohia tenei raihana ki tetahi kaiwhakamahi me te kore e taea te muku. Titirohia te raihana i te tuatahi, ka ngana ki te muku ano.',
     'select_asset_or_person' => 'Me whiriwhiri koe i tetahi rawa, i tetahi kaiwhakamahi ranei, engari ehara i te mea e rua.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

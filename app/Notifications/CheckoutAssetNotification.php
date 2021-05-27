@@ -49,7 +49,6 @@ class CheckoutAssetNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
     public function via()
@@ -68,7 +67,7 @@ class CheckoutAssetNotification extends Notification
         if ($this->target instanceof User && $this->target->email != '') {
 
             /**
-             * Send an email if the asset requires acceptance, 
+             * Send an email if the asset requires acceptance,
              * so the user can accept or decline the asset
              */
             if ($this->item->requireAcceptance()) {
@@ -80,14 +79,14 @@ class CheckoutAssetNotification extends Notification
              */
             if ($this->item->getEula()) {
                 $notifyBy[1] = 'mail';
-            }            
+            }
 
             /**
              * Send an email if an email should be sent at checkin/checkout
              */
             if ($this->item->checkin_email()) {
                 $notifyBy[1] = 'mail';
-            }            
+            }
 
         }
 
@@ -159,7 +158,6 @@ class CheckoutAssetNotification extends Notification
 
 
         return $message;
-
 
     }
 

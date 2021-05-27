@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Location;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Asset;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -80,7 +82,7 @@ class LocationsController extends Controller
         $location->manager_id       = $request->input('manager_id');
         $location->user_id          = Auth::id();
 
-        $location = $request->handleImages($location, 'public/uploads/locations');
+        $location = $request->handleImages($location);
 
         if ($location->save()) {
             return redirect()->route("locations.index")->with('success', trans('admin/locations/message.create.success'));
@@ -131,11 +133,6 @@ class LocationsController extends Controller
             return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
-        if ($request->input('parent_id') == $locationId) {
-            return redirect()->back()->withInput()->with('error', 'A location cannot be its own parent. Please select a different parent location.');
-        }
-
-
         // Update the location data
         $location->name         = $request->input('name');
         $location->parent_id    = $request->input('parent_id', null);
@@ -149,32 +146,7 @@ class LocationsController extends Controller
         $location->ldap_ou      = $request->input('ldap_ou');
         $location->manager_id   = $request->input('manager_id');
 
-        $location = $request->handleImages($location, 'public/uploads/locations');
-
-
-        if ($request->file('image')) {
-            $image = $request->file('image');
-            $file_name = $location->id.'-'.str_slug($image->getClientOriginalName()) . "." . $image->getClientOriginalExtension();
-
-            if ($image->getClientOriginalExtension()!='svg') {
-                Image::make($image->getRealPath())->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save(app('locations_upload_path').$file_name);
-            } else {
-                $image->move(app('locations_upload_path'), $file_name);
-            }
-            $location->image = $file_name;
-
-        }
-
-        if ((($request->file('image')) && (isset($old_image)) && ($old_image!='')) || ($request->input('image_delete') == 1)) {
-            try  {
-                unlink(app('locations_upload_path').$old_image);
-            } catch (\Exception $e) {
-                \Log::info($e);
-            }
-        }
+        $location = $request->handleImages($location);
 
 
         if ($location->save()) {
@@ -199,18 +171,14 @@ class LocationsController extends Controller
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.not_found'));
         }
 
-        if (($location->users()) && ($location->users()->count() > 0)) {
+        if ($location->users()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_users'));
-
-        } elseif (($location->children) && ($location->children->count() > 0)) {
+        } elseif ($location->children()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_child_loc'));
-
-        } elseif (($location->assets()) && ($location->assets()->count() > 0)) {
+        } elseif ($location->assets()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
-
-        } elseif (($location->assignedassets()) && ($location->assignedassets()->count() > 0)) {
+        } elseif ($location->assignedassets()->count() > 0) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_assets'));
-
         }
 
         if ($location->image) {
@@ -243,6 +211,30 @@ class LocationsController extends Controller
         }
 
         return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
+    }
+    
+public function print_assigned($id)
+    {
+
+        $location = Location::where('id',$id)->first();
+        $parent = Location::where('id',$location->parent_id)->first();
+        $manager = User::where('id',$location->manager_id)->first();
+        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
+        $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
+        return view('locations/print')->with('assets', $assets)->with('users',$users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
+
+    }
+    
+    public function print_all_assigned($id)
+    {
+
+        $location = Location::where('id',$id)->first();
+        $parent = Location::where('id',$location->parent_id)->first();
+        $manager = User::where('id',$location->manager_id)->first();
+        $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
+        $assets = Asset::where('location_id', $id)->with('model', 'model.category')->get();
+        return view('locations/print')->with('assets', $assets)->with('users',$users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
+
     }
 
 }

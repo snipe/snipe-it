@@ -23,10 +23,10 @@ return array(
     ),
 
     'help' => array(
-        'undeployable'   => 'Näitä varoja ei voida siirtää kenellekään.',
-        'deployable'   => 'Nämä varat voidaan tarkistaa. Kun ne on määritetty, ne ottavat meta-tilan <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong>.',
-        'archived'   => 'Näitä varoja ei voi tarkistaa, ja ne näkyvät vain Arkistoitu-näkymässä. Tämä on hyödyllistä, kun säilytetään tietoja varoista budjetointiin / historiallisiin tarkoituksiin, mutta säilytetään ne päivittäisestä omaisuusluettelosta.',
-        'pending'   => 'Näitä varoja ei voida vielä antaa kenellekään, jota käytetään usein kohteisiin, jotka ovat korjaamattomia, mutta joiden odotetaan palaavan liikkeeseen.',
+        'undeployable'   => 'Näitä laitteita ei voida luovuttaa kenellekään.',
+        'deployable'   => 'Nämä laitteet voidaan luovuttaa. Kun ne on luovutettu, ne saavat tilamerkinnän <i class="fa fa-circle text-blue"></i> <strong>Käyttöönotettu</strong>.',
+        'archived'   => 'Näitä laitteita ei voi luovuttaa, ja ne näkyvät vain Arkistoitu-näkymässä. Tämä on hyödyllistä, kun säilytetään tietoja laitteista budjetointiin / historiallisiin tarkoituksiin.',
+        'pending'   => 'Näitä laitteita ei voida vielä antaa kenellekään. Käytä vaikka laitteille jotka ovat korjauksessa, mutta joiden odotetaan palaavan käyttöön.',
     ),
 
 );

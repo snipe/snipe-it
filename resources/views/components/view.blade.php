@@ -12,22 +12,35 @@
 @section('header_right')
   @can('manage', $component)
     <div class="dropdown pull-right">
-      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        {{ trans('button.actions') }}
           <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+      <ul class="dropdown-menu pull-right" role="menu22">
         @if ($component->assigned_to != '')
           @can('checkin', $component)
-          <li role="presentation"><a href="{{ route('checkin/component', $component->id) }}">{{ trans('admin/components/general.checkin') }}</a></li>
+          <li role="menuitem">
+            <a href="{{ route('checkin/component', $component->id) }}">
+              {{ trans('admin/components/general.checkin') }}
+            </a>
+          </li>
           @endcan
         @else
           @can('checkout', $component)
-          <li role="presentation"><a href="{{ route('checkout/component', $component->id)  }}">{{ trans('admin/components/general.checkout') }}</a></li>
+          <li role="menuitem">
+            <a href="{{ route('checkout/component', $component->id)  }}">
+              {{ trans('admin/components/general.checkout') }}
+            </a>
+          </li>
           @endcan
         @endif
 
         @can('update', $component)
-        <li role="presentation"><a href="{{ route('components.edit', $component->id) }}">{{ trans('admin/components/general.edit') }}</a></li>
+        <li role="menuitem">
+          <a href="{{ route('components.edit', $component->id) }}">
+            {{ trans('admin/components/general.edit') }}
+          </a>
+        </li>
         @endcan
       </ul>
     </div>
@@ -67,10 +80,18 @@
                 }'>
                 <thead>
                 <tr>
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name" data-formatter="hardwareLinkFormatter">{{ trans('general.asset') }}</th>
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{ trans('general.qty') }}</th>
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="componentsInOutFormatter">{{ trans('general.checkin') }}/{{ trans('general.checkout') }}</th>
+                  <th data-searchable="false" data-sortable="false" data-field="name" data-formatter="hardwareLinkFormatter">
+                    {{ trans('general.asset') }}
+                  </th>
+                  <th data-searchable="false" data-sortable="false" data-field="qty">
+                    {{ trans('general.qty') }}
+                  </th>
+                  <th data-searchable="false" data-sortable="false" data-field="created_at" data-formatter="dateDisplayFormatter">
+                    {{ trans('general.date') }}
+                  </th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkincheckout" data-formatter="componentsInOutFormatter">
+                    {{ trans('general.checkin') }}/{{ trans('general.checkout') }}
+                  </th>
                 </tr>
                 </thead>
               </table>
@@ -87,7 +108,8 @@
   <div class="col-md-3">
     @if ($component->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-        <a href="{{ app('components_upload_url') }}{{ $component->image }}" data-toggle="lightbox"><img src="{{ app('components_upload_url') }}{{ $component->image }}" class="img-responsive img-thumbnail" alt="{{ $component->name }}"></a>
+        <a href="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" data-toggle="lightbox">
+          <img src="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" class="img-responsive img-thumbnail" alt="{{ $component->name }}"></a>
       </div>
 
     @endif

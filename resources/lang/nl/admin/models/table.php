@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Maak product model aan',
+    'create'				=> 'Maak asset model aan',
     'created_at' 			=> 'Aangemaakt op',
     'eol'	 				=> 'EOL',
     'modelnumber'   		=> 'Model Nr.',
-    'name'      			=> 'Product model naam',
-    'numassets' 			=> 'Producten',
-    'title'					=> 'Product modellen',
-    'update'				=> 'Wijzig product model',
-    'view'					=> 'Bekijk product model',
-    'update'				=> 'Wijzig product model',
+    'name'      			=> 'Asset model naam',
+    'numassets' 			=> 'Assets',
+    'title'					=> 'Asset modellen',
+    'update'				=> 'Wijzig asset model',
+    'view'					=> 'Bekijk asset model',
+    'update'				=> 'Wijzig asset model',
     'clone'				=> 'Kopieer model',
     'edit'				=> 'Bewerk model',
 );

@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> '부속품들이란',
-    'about_accessories_text'  			=> '부속품들이란 사용자들에게 지급은 하지만 일련 번호가 없는(또는 특별히 추적할 필요가 없는) 것을 뜻합니다. 예를 들면, 컴퓨터의 마우스나 키보드들입니다.',
     'accessory_category' 				=> '부속품 분류',
     'accessory_name'  					=> '부속품 명',
     'checkout'  							=> '부속품 반출',

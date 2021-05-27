@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'O dodatkih',
-    'about_accessories_text'  			=> 'Dodatki so vse stvari, ki se posredujejo uporabnikom, vendar niso vodeni kot osnovna sredstva. Na primer, računalniške miške ali tipkovnice.',
     'accessory_category' 				=> 'Kategorija Dodatki',
     'accessory_name'  					=> 'Ime Dodatka',
     'checkout'  							=> 'Izdaj Dodatek',

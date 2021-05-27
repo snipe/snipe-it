@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Uusi Laitemalli',
+    'create'				=> 'Uusi laitemalli',
     'created_at' 			=> 'Luontiaika',
     'eol'	 				=> 'Elinaika',
     'modelnumber'   		=> 'Mallinumero',
-    'name'      			=> 'Laitemallin Nimi',
+    'name'      			=> 'Laitemallin nimi',
     'numassets' 			=> 'Laitelkm',
     'title'					=> 'Laitemallit',
-    'update'				=> 'Päivitä Laitemalli',
-    'view'					=> 'Näytä Laitemalli',
-    'update'				=> 'Päivitä Laitemalli',
-    'clone'				=> 'Monista Malli',
-    'edit'				=> 'Muokkaa Mallia',
+    'update'				=> 'Päivitä laitemalli',
+    'view'					=> 'Näytä laitemalli',
+    'update'				=> 'Päivitä laitemalli',
+    'clone'				=> 'Monista malli',
+    'edit'				=> 'Muokkaa mallia',
 );

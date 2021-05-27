@@ -1,4 +1,6 @@
-@extends('layouts/default')
+@extends('layouts/default', [
+    'helpTitle' => trans('admin/kits/general.about_kits_title'),
+    'helpText' => trans('admin/kits/general.about_kits_text')])
 
 {{-- Web site Title --}}
 @section('title')

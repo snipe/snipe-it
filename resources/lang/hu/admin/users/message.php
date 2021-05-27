@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Nem megfelelő engedélyek.',
     'user_deleted_warning'      => 'Ezt a felhasználót törölték. Ezt a felhasználót vissza kell állítania, hogy szerkeszteni tudja őket, vagy hozzárendelhessen új eszközökhöz.',
     'ldap_not_configured'        => 'Az LDAP integráció nem lett konfigurálva ehhez a telepítéshez.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

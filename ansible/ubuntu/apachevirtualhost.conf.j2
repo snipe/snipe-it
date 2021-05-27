@@ -1,0 +1,10 @@
+<VirtualHost *:80>
+    <Directory {{ app_path }}/public>
+        Allow From All
+        AllowOverride All
+        Options -Indexes
+    </Directory>
+
+    DocumentRoot {{ app_path }}/public
+    ServerName {{ fqdn }}
+</VirtualHost>

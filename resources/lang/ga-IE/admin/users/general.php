@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Is féidir suímh chumraíochta LDAP a fháil Admin> Settings. Socrófar an suíomh roghnaithe (roghnach) do gach úsáideoir a allmhairítear.',
     'print_assigned'    => 'Print All Assigned',
     'software_user'     => 'Bogearraí Seiceáil amach chuig: ainm',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Féach Úsáideoir: ainm',
     'usercsv'           => 'Comhad CSV',
     'two_factor_admin_optin_help' => 'Ceadaíonn do shuímh riaracháin reatha forfheidhmiú roghnach fíordheimhnithe dhá fhachtóir.',

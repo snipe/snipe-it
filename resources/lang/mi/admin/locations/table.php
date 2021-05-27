@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Whenua',
     'create'                    => 'Waihanga Wahi',
     'update'                    => 'Whakahōu Tauwāhi',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Ingoa Tauwāhi',
     'address'                   => 'Wāhitau',
     'zip'                       => 'Waehere Pouaka',

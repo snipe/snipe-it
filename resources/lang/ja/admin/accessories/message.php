@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => '付属品は存在しません。',
+    'does_not_exist' => '付属品[:id]は存在しません。',
     'assoc_users'	 => 'この付属品は、ユーザーに :count 個貸し出されています。もう一度、付属品を返却して下さい。 ',
 
     'create' => array(

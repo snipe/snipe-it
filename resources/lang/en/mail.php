@@ -9,7 +9,7 @@ return array(
     'asset' => 'Asset:',
     'asset_name' => 'Asset Name:',
     'asset_requested' => 'Asset requested',
-    'asset_tag' => 'Asset Tag:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Assigned To',
     'best_regards' => 'Best regards,',
     'canceled' => 'Canceled:',
@@ -70,5 +70,11 @@ return array(
     'welcome' => 'Welcome :name',
     'welcome_to' => 'Welcome to :web!',
     'your_credentials' => 'Your Snipe-IT credentials',
-
+    'Accessory_Checkin_Notification' => 'Accessory checked in',
+    'Asset_Checkin_Notification' => 'Asset checked in',
+    'License_Checkin_Notification' => 'License checked in',
+    'Expected_Checkin_Report' => 'Expected asset checkin report',
+    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
+    'your_assets' => 'View Your Assets'
 );

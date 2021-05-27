@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Država',
     'create'                    => 'Ustvari lokacijo',
     'update'                    => 'Posodobi lokacijo',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Ime lokacije',
     'address'                   => 'Naslov',
     'zip'                       => 'Poštna številka',

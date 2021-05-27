@@ -37,9 +37,9 @@ class ManufacturersController extends Controller
         }
 
 
-
-
-        $offset = (($manufacturers) && (request('offset') > $manufacturers->count())) ? 0 : request('offset', 0);
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($manufacturers) && ($request->get('offset') > $manufacturers->count())) ? $manufacturers->count() : $request->get('offset', 0);
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
@@ -125,15 +125,15 @@ class ManufacturersController extends Controller
     {
 
         $this->authorize('delete', Manufacturer::class);
-        $manufacturer = Manufacturer::withCount('assets as assets_count', 'licenses as licenses_count', 'consumables as consumables_count', 'accessories as accessories_count', 'models as models_count'  )->findOrFail($id);
+        $manufacturer = Manufacturer::findOrFail($id);
         $this->authorize('delete', $manufacturer);
 
-        if (($manufacturer->assets_count == 0)  && ($manufacturer->licenses_count==0)  && ($manufacturer->consumables_count==0)  && ($manufacturer->accessories_count==0)  && ($manufacturer->models_count==0)  && ($manufacturer->deleted_at=='')) {
+        if ($manufacturer->isDeletable()) {
             $manufacturer->delete();
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/manufacturers/message.delete.error')));
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/manufacturers/message.assoc_users')));
 
 
 

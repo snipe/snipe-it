@@ -3,14 +3,21 @@
 {{-- Page title --}}
 @section('title')
 
-    {{ trans('general.depreciation') }}
-    : {{ $depreciation->name }}
+    {{ trans('general.depreciation') }}: {{ $depreciation->name }} ({{ $depreciation->months }} {{ trans('general.months') }})
 
     @parent
 @stop
 
 @section('header_right')
-    <a href="{{ route('depreciations.edit', ['depreciation' => $depreciation->id]) }}" class="btn btn-sm btn-primary pull-right">{{ trans('admin/depreciations/table.update') }} </a>
+    <div class="btn-group pull-right">
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{{ route('depreciations.edit', ['depreciation' => $depreciation->id]) }}">{{ trans('general.update') }}</a></li>
+            <li><a href="{{ route('depreciations.create') }}">{{ trans('general.create') }}</a></li>
+        </ul>
+    </div>
 @stop
 
 {{-- Page content --}}
@@ -18,37 +25,147 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-default">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table table-responsive">
-                                <table
-                                        name="location_users"
-                                        id="table-users"
-                                        class="table table-striped snipe-table"
-                                        data-url="{{ route('api.assets.index',['depreciation'=> $depreciation->id]) }}"
-                                        data-cookie="true"
-                                        data-click-to-select="true"
-                                        data-cookie-id-table="department_usersDetailTable">
-                                    <thead>
 
-                                </table>
+
+            <!-- Custom Tabs -->
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#assets" data-toggle="tab">{{ trans('general.assets') }}</a></li>
+                    <li><a href="#licenses" data-toggle="tab">{{ trans('general.licenses') }}</a></li>
+                    <li><a href="#models" data-toggle="tab">{{ trans('general.asset_models') }}</a></li>
+                    </ul>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="assets">
+
+
+                        <table
+                                data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                                data-cookie-id-table="depreciationsAssetTable"
+                                data-id-table="depreciationsAssetTable"
+                                id="depreciationsAssetTable"
+                                data-pagination="true"
+                                data-search="true"
+                                data-side-pagination="server"
+                                data-show-columns="true"
+                                data-show-export="true"
+                                data-show-refresh="true"
+                                data-sort-order="asc"
+                                data-sort-name="name"
+                                class="table table-striped snipe-table"
+                                data-url="{{ route('api.assets.index',['depreciation_id'=> $depreciation->id]) }}"
+                                data-export-options='{
+                        "fileName": "export-depreciations-{{ date('Y-m-d') }}",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                        }'>
+                        </table>
+
+                    </div> <!-- end tab-pane -->
+
+                    <!-- tab-pane -->
+                    <div class="tab-pane" id="licenses">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="table-responsive">
+
+                                    <table
+                                            data-columns="{{ \App\Presenters\LicensePresenter::dataTableLayout() }}"
+                                            data-cookie-id-table="depreciationsLicenseTable"
+                                            data-id-table="depreciationsLicenseTable"
+                                            id="depreciationsLicenseTable"
+                                            data-pagination="true"
+                                            data-search="true"
+                                            data-side-pagination="server"
+                                            data-show-columns="true"
+                                            data-show-export="true"
+                                            data-show-refresh="true"
+                                            data-sort-order="asc"
+                                            data-sort-name="name"
+                                            class="table table-striped snipe-table"
+                                            data-url="{{ route('api.licenses.index',['depreciation_id'=> $depreciation->id]) }}"
+                                            data-export-options='{
+                        "fileName": "export-depreciations-{{ date('Y-m-d') }}",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                        }'>
+                                    </table>
+
+                                </div>
+
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+                        </div> <!--/.row-->
+                    </div> <!-- /.tab-pane -->
+
+                    <!-- tab-pane -->
+                    <div class="tab-pane" id="models">
+
+                        <div class="row">
+                            {{ Form::open(
+                                      [
+                                     'method' => 'POST',
+                                     'route' => ['models.bulkedit.index'],
+                                     'class' => 'form-inline',
+                                      'id' => 'bulkForm']
+                                      ) }}
+                            <div class="col-md-12">
+                                <div id="toolbar">
+                                    <label for="bulk_actions" class="sr-only">Bulk Actions</label>
+                                    <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions" style="width: 300px;">
+                                        <option value="edit">Bulk Edit</option>
+                                        <option value="delete">Bulk Delete</option>
+                                    </select>
+                                    <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table
+                                            data-columns="{{ \App\Presenters\AssetModelPresenter::dataTableLayout() }}"
+                                            data-cookie-id-table="depreciationsModelsTable"
+                                            data-id-table="depreciationsModelsTable"
+                                            id="depreciationsModelsTable"
+                                            data-pagination="true"
+                                            data-search="true"
+                                            data-toolbar="#toolbar"
+                                            data-side-pagination="server"
+                                            data-show-columns="true"
+                                            data-show-export="true"
+                                            data-show-refresh="true"
+                                            data-sort-order="asc"
+                                            data-sort-name="name"
+                                            class="table table-striped snipe-table"
+                                            data-url="{{ route('api.models.index',['depreciation_id'=> $depreciation->id]) }}"
+                                            data-export-options='{
+                        "fileName": "export-depreciations-bymodel-{{ date('Y-m-d') }}",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                        }'>
+                                    </table>
+
+
+                                </div>
+
+                            </div>
+                            {{ Form::close() }}
+
+                        </div> <!--/.row-->
+                    </div> <!-- /.tab-pane -->
+
+                </div> <!-- /.tab-content -->
+
+
+
+            </div> <!-- /.tab-content -->
+            </div> <!-- nav-tabs-custom -->
+
+
         </div>
+
     </div>
 
 @stop
 
 @section('moar_scripts')
-    @include ('partials.bootstrap-table', [
-        'exportFile' => 'assets-export',
-        'search' => true,
-        'columns' => \App\Presenters\AssetPresenter::dataTableLayout()
-    ])
+    @include ('partials.bootstrap-table')
 
 @stop

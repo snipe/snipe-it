@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Varad on üksused, mida jälgitakse seerianumbri või vara tag. Need kipuvad olema kõrgema väärtusega esemed, kus konkreetse üksuse kindlakstegemine on oluline.',
 	'archived'  				=> 'Arhiveeritud',
     'asset'  					=> 'Vahend',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Vara kasutusele võtt',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Klooni vahend',

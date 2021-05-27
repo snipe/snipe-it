@@ -7,5 +7,8 @@
         'view'               => 'عرض تفاصيل صيانة الأصل',
         'repair'             => 'إصلاح',
         'maintenance'        => 'صيانة',
-        'upgrade'            => 'الترقية'
+        'upgrade'            => 'الترقية',
+        'calibration'        => 'المعايره',
+        'software_support'   => 'دعم البرامج',
+        'hardware_support'   => 'دعم الأجهزة',
     ];

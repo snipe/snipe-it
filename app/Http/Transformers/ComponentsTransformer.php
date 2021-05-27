@@ -49,10 +49,10 @@ class ComponentsTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'checkout' => (bool) Gate::allows('checkout', Component::class),
-            'checkin' => (bool) Gate::allows('checkin', Component::class),
-            'update' => (bool) Gate::allows('update', Component::class),
-            'delete' => (bool) Gate::allows('delete', Component::class),
+            'checkout' => Gate::allows('checkout', Component::class),
+            'checkin' => Gate::allows('checkin', Component::class),
+            'update' => Gate::allows('update', Component::class),
+            'delete' => Gate::allows('delete', Component::class),
         ];
         $array += $permissions_array;
 

@@ -13,4 +13,5 @@ return array(
     'upload'                    => 'I-upload',
 	'select_file'				=> 'Pumili ng File...',
     'select_files'				=> 'Select Files...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

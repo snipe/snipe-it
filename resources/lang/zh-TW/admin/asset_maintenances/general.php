@@ -7,5 +7,8 @@
         'view'               => '檢視資產維護詳細資料',
         'repair'             => '維修',
         'maintenance'        => '維護',
-        'upgrade'            => '升級'
+        'upgrade'            => '升級',
+        'calibration'        => '校準',
+        'software_support'   => '軟體支援',
+        'hardware_support'   => '硬體支援',
     ];

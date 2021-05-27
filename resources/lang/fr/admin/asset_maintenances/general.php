@@ -8,6 +8,7 @@
         'repair'             => 'Réparation',
         'maintenance'        => 'Entretien',
         'upgrade'            => 'Mise à niveau',
+        'calibration'        => 'Etalonnage',
         'software_support'   => 'Support logiciel',
         'hardware_support'   => 'Support matériel',
     ];

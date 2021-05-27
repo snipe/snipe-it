@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_components_title' 			=> 'Бүрэлдэхүүн хэсгүүдийн тухай',
-    'about_components_text'  			=> 'Бүрэлдэхүүн хэсэг нь хөрөнгийн хэсэг болох зүйл, жишээ нь HDD, RAM, гэх мэт.',
     'component_name'                  => 'Бүрэлдэхүүн хэсэг Нэр',
     'checkin'                             => 'Checkin Component',
     'checkout'                             => 'Тооцоо хийх хэсэг',

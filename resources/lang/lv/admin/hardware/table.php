@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Statuss',
     'title'      	=> 'Aktīvs',
     'image'		=> 'Ierīces attēls',
-    'days_without_acceptance' => 'Dienas bez pieņemšanas'
+    'days_without_acceptance' => 'Dienas bez pieņemšanas',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\User;
 use App\Services\LdapAd;
+use App\Services\Saml;
 use Com\Tecnick\Barcode\Barcode;
 use Google2FA;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -45,25 +46,37 @@ class LoginController extends Controller
     protected $ldap;
 
     /**
+     * @var Saml
+     */
+    protected $saml;
+
+    /**
      * Create a new authentication controller instance.
      *
      * @param LdapAd $ldap
+     * @param Saml $saml
      *
      * @return void
      */
-    public function __construct(LdapAd $ldap)
+    public function __construct(/*LdapAd $ldap, */ Saml $saml)
     {
         parent::__construct();
         $this->middleware('guest', ['except' => ['logout','postTwoFactorAuth','getTwoFactorAuth','getTwoFactorEnroll']]);
         Session::put('backUrl', \URL::previous());
-        $this->ldap = $ldap;
+        // $this->ldap = $ldap;
+        $this->saml = $saml;
     }
 
     function showLoginForm(Request $request)
     {
         $this->loginViaRemoteUser($request);
+        $this->loginViaSaml($request);
         if (Auth::check()) {
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/');
+        }
+
+        if ($this->saml->isEnabled() && Setting::getSettings()->saml_forcelogin == "1" && !($request->has('nosaml') || $request->session()->has('error'))) {
+            return redirect()->route('saml.login');
         }
 
         if (Setting::getSettings()->login_common_disabled == "1") {
@@ -71,6 +84,47 @@ class LoginController extends Controller
         }
 
         return view('auth.login');
+    }
+
+    /**
+     * Log in a user by SAML
+     * 
+     * @author Johnson Yi <jyi.dev@outlook.com>
+     * 
+     * @since 5.0.0
+     *
+     * @param Request $request
+     * 
+     * @return User
+     * 
+     * @throws \Exception
+     */
+    private function loginViaSaml(Request $request)
+    {
+        $saml = $this->saml;
+        $samlData = $request->session()->get('saml_login');
+        if ($saml->isEnabled() && !empty($samlData)) {
+            try {
+                Log::debug("Attempting to log user in by SAML authentication.");
+                $user = $saml->samlLogin($samlData);
+                if(!is_null($user)) {
+                    Auth::login($user);
+                } else {
+                    $username = $saml->getUsername();
+                    \Log::warning("SAML user '$username' could not be found in database.");
+                    $request->session()->flash('error', trans('auth/message.signin.error'));
+                    $saml->clearData();
+                }
+
+                if ($user = Auth::user()) {
+                    $user->last_login = \Carbon::now();
+                    $user->save();
+                }
+            } catch (\Exception $e) {
+                \Log::warning("There was an error authenticating the SAML user: " . $e->getMessage());
+                throw new \Exception($e->getMessage());
+            }
+        }
     }
 
     /**
@@ -88,8 +142,9 @@ class LoginController extends Controller
      */
     private function loginViaLdap(Request $request): User
     {
+        $ldap = \App::make( LdapAd::class);
         try {
-            return $this->ldap->ldapLogin($request->input('username'), $request->input('password'));
+            return $ldap->ldapLogin($request->input('username'), $request->input('password'));
         } catch (\Exception $ex) {
             LOG::debug("LDAP user login: " . $ex->getMessage());
             throw new \Exception($ex->getMessage());
@@ -103,15 +158,32 @@ class LoginController extends Controller
         if (Setting::getSettings()->login_remote_user_enabled == "1" && isset($remote_user) && !empty($remote_user)) {
             Log::debug("Authenticating via HTTP header $header_name.");
 
-            $pos = strpos($remote_user, '\\');
+            $strip_prefixes = [
+                // IIS/AD
+                // https://github.com/snipe/snipe-it/pull/5862
+                '\\',
+
+                // Google Cloud IAP
+                // https://cloud.google.com/iap/docs/identity-howto#getting_the_users_identity_with_signed_headers
+                'accounts.google.com:',
+            ];
+
+            $pos = 0;
+            foreach ($strip_prefixes as $needle) {
+                if (($pos = strpos($remote_user, $needle)) !== FALSE) {
+                    $pos += strlen($needle);
+                    break;
+                }
+            }
+
             if ($pos > 0) {
-                $remote_user = substr($remote_user, $pos + 1);
+                $remote_user = substr($remote_user, $pos);
             };
             
             try {
                 $user = User::where('username', '=', $remote_user)->whereNull('deleted_at')->where('activated', '=', '1')->first();
                 Log::debug("Remote user auth lookup complete");
-                if(!is_null($user)) Auth::login($user, true);
+                if(!is_null($user)) Auth::login($user, $request->input('remember'));
             } catch(Exception $e) {
                 Log::debug("There was an error authenticating the Remote user: " . $e->getMessage());
             }
@@ -135,8 +207,8 @@ class LoginController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
-        $this->maxLoginAttempts = config('auth.throttle.max_attempts');
-        $this->lockoutTime = config('auth.throttle.lockout_duration');
+        $this->maxLoginAttempts = config('auth.passwords.users.throttle.max_attempts');
+        $this->lockoutTime = config('auth.passwords.users.throttle.lockout_duration');
 
         if ($lockedOut = $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
@@ -146,12 +218,12 @@ class LoginController extends Controller
         $user = null;
 
         // Should we even check for LDAP users?
-        if ($this->ldap->init()) {
+        if (Setting::getSettings()->ldap_enabled) { // avoid hitting the $this->ldap
             LOG::debug("LDAP is enabled.");
             try {
                 LOG::debug("Attempting to log user in by LDAP authentication.");
                 $user = $this->loginViaLdap($request);
-                Auth::login($user, true);
+                Auth::login($user, $request->input('remember'));
 
             // If the user was unable to login via LDAP, log the error and let them fall through to
             // local authentication.
@@ -180,6 +252,7 @@ class LoginController extends Controller
 
         if ($user = Auth::user()) {
             $user->last_login = \Carbon::now();
+            $user->activated = 1;
             $user->save();
         }
         // Redirect to the users page
@@ -309,17 +382,41 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        $request->session()->forget('2fa_authed');
+        $settings = Setting::getSettings();
+        $saml = $this->saml;
+        $sloRedirectUrl = null;
+        $sloRequestUrl = null;
 
+        if ($saml->isEnabled()) {
+            $auth = $saml->getAuth();
+            $sloRedirectUrl = $request->session()->get('saml_slo_redirect_url');
+            
+            if (!empty($auth->getSLOurl()) && $settings->saml_slo == '1' && $saml->isAuthenticated()  && empty($sloRedirectUrl)) {
+                $sloRequestUrl = $auth->logout(null, array(), $saml->getNameId(), $saml->getSessionIndex(), true, $saml->getNameIdFormat(), $saml->getNameIdNameQualifier(), $saml->getNameIdSPNameQualifier());
+            }
+
+            $saml->clearData();
+        }
+
+        if (!empty($sloRequestUrl)) {
+            return redirect()->away($sloRequestUrl);
+        }
+
+        $request->session()->regenerate(true);
+
+        $request->session()->regenerate(true);
         Auth::logout();
 
-        $settings = Setting::getSettings();
+        if (!empty($sloRedirectUrl)) {
+            return redirect()->away($sloRedirectUrl);
+        }
+
         $customLogoutUrl = $settings->login_remote_user_custom_logout_url ;
         if ($settings->login_remote_user_enabled == '1' && $customLogoutUrl != '') {
             return redirect()->away($customLogoutUrl);
         }
 
-        return redirect()->route('login')->with('success',  trans('auth/message.logout.success'));
+        return redirect()->route('login')->with(['success' => trans('auth/message.logout.success'), 'loggedout' => true]);
     }
 
 
@@ -373,8 +470,8 @@ class LoginController extends Controller
      */
     protected function hasTooManyLoginAttempts(Request $request)
     {
-        $lockoutTime = config('auth.throttle.lockout_duration');
-        $maxLoginAttempts = config('auth.throttle.max_attempts');
+        $lockoutTime = config('auth.passwords.users.throttle.lockout_duration');
+        $maxLoginAttempts = config('auth.passwords.users.throttle.max_attempts');
 
         return $this->limiter()->tooManyAttempts(
             $this->throttleKey($request),

@@ -1,4 +1,8 @@
-@extends('layouts/default')
+@extends('layouts/default', [
+    'helpText' => trans('admin/statuslabels/table.info') ,
+    'helpPosition' => 'right',
+])
+
 
 {{-- Page title --}}
 @section('title')
@@ -59,8 +63,7 @@
   </div>
   <!-- side address column -->
   <div class="col-md-3">
-    <h4>{{ trans('admin/statuslabels/table.about') }}</h4>
-    <p>{{ trans('admin/statuslabels/table.info') }}</p>
+    <h2>{{ trans('admin/statuslabels/table.about') }}</h2>
 
       <div class="box box-success">
           <div class="box-body">

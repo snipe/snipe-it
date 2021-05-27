@@ -19,9 +19,9 @@ return array(
         'confirm'   => 'Jeste li sigurni da želite izbrisati ovog dobavljača?',
         'error'   => 'Došlo je do problema s brisanjem dobavljača. Molim te pokušaj ponovno.',
         'success' => 'Dobavljač je uspješno izbrisan.',
-        'assoc_assets'	 => 'This supplier is currently associated with :asset_count asset(s) and cannot be deleted. Please update your assets to no longer reference this supplier and try again. ',
-        'assoc_licenses'	 => 'This supplier is currently associated with :licenses_count licences(s) and cannot be deleted. Please update your licenses to no longer reference this supplier and try again. ',
-        'assoc_maintenances'	 => 'This supplier is currently associated with :asset_maintenances_count asset maintenances(s) and cannot be deleted. Please update your asset maintenances to no longer reference this supplier and try again. ',
+        'assoc_assets'	 => 'Ovaj dobavljač je trenutno povezan sa :asset_count komadom/a imovine i ne može se izbrisati. Molimo ažurirajte imovinu tako da više ne bude povezana sa ovim dobavljačem i pokušajte ponovo. ',
+        'assoc_licenses'	 => 'Ovaj dobavljač je trenutno povezan sa :licenses_count licencom/ama i ne može se izbrisati. Molimo ažurirajte licence tako da više ne budu povezane sa ovim dobavljačem i pokušajte ponovo. ',
+        'assoc_maintenances'	 => 'Ovaj dobavljač je trenutno povezan sa :asset_maintenences_count slučajem/evima održavanja imovine i ne može se izbrisati. Molimo ažurirajte slučajeve održavanja imovine tako da više ne budu povezani sa ovim dobavljačem i pokušajte ponovo. ',
     )
 
 );

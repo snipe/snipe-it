@@ -5,7 +5,7 @@ return array(
     'about_assets_text'            => 'Актив нь сериал дугаар буюу хөрөнгийн тэмдэгтээр хянагдсан зүйлс юм. Эдгээр нь тодорхой зүйлүүдийг тодорхойлоход илүү үнэ цэнэтэй зүйлс байх хандлагатай байдаг.',
 	'archived'  				=> 'Архивлагдсан',
     'asset'  					=> 'Актив',
-    'bulk_checkout'             => 'Checkout Assets',
+    'bulk_checkout'             => 'Хөрөнгийг олгох',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Тооцоот Хөрөнгийн',
     'clone'  					=> 'Clone Asset',

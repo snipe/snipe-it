@@ -1,17 +1,14 @@
 @push('css')
-<link rel="stylesheet" href="{{ mix('css/dist/bootstrap-table.css') }}">
+<link rel="stylesheet" href="{{ url(mix('css/dist/bootstrap-table.css')) }}">
+
 @endpush
 
 @push('js')
-<script src="{{ mix('js/dist/bootstrap-table.js') }}"></script>
-
-@if (!isset($simple_view))
-<script src="{{ mix('js/dist/bootstrap-table-simple-view.js') }}"></script>
-@endif
-
+<script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
 <script nonce="{{ csrf_token() }}">
 
     $(function () {
+
 
         var stickyHeaderOffsetY = 0;
 
@@ -20,6 +17,17 @@
         }
         if ( $('.navbar-fixed-top').css('margin-bottom') ) {
             stickyHeaderOffsetY += +$('.navbar-fixed-top').css('margin-bottom').replace('px','');
+        }
+
+        var blockedFields = "searchable,sortable,switchable,title,visible,formatter,class".split(",");
+
+        var keyBlocked = function(key) {
+            for(var j in blockedFields) {
+                if (key === blockedFields[j]) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
@@ -35,10 +43,10 @@
             iconsPrefix: 'fa',
             cookie: true,
             cookieExpire: '2y',
-            cookieIdTable: '{{ Route::currentRouteName() }}',
             mobileResponsive: true,
             maintainSelected: true,
             trimOnSearch: false,
+            showSearchClearButton: true,
             paginationFirstText: "{{ trans('general.first') }}",
             paginationLastText: "{{ trans('general.last') }}",
             paginationPreText: "{{ trans('general.previous') }}",
@@ -46,8 +54,17 @@
             pageList: ['10','20', '30','50','100','150','200', '500'],
             pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
             paginationVAlign: 'both',
+            queryParams: function (params) {
+                var newParams = {};
+                for(var i in params) {
+                    if(!keyBlocked(i)) { // only send the field if it's not in blockedFields
+                        newParams[i] = params[i];
+                    }
+                }
+                return newParams;
+            },
             formatLoadingMessage: function () {
-                return '<h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+                return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
             },
             icons: {
                 advancedSearchIcon: 'fa fa-search-plus',
@@ -55,14 +72,20 @@
                 paginationSwitchUp: 'fa-caret-square-o-up',
                 columns: 'fa-columns',
                 refresh: 'fa-refresh',
-                export: 'fa-download'
+                export: 'fa-download',
+                clearSearch: 'fa-times'
             },
             exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
             onLoadSuccess: function () {
-                $('[data-toggle="tooltip"]').tooltip(); // Need to attach tooltips after ajax call
+                $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
             }
+
         });
     });
+
+
+
+
 
     function dateRowCheckStyle(value) {
         if ((value.days_to_next_audit) && (value.days_to_next_audit < {{ $snipeSettings->audit_warning_days ?: 0 }})) {
@@ -70,6 +93,7 @@
         }
         return {};
     }
+
 
     // Handle whether or not the edit button should be disabled
     $('.snipe-table').on('check.bs.table', function () {
@@ -140,11 +164,12 @@
 
                 // Add some overrides for any funny urls we have
                 var dest = destination;
+                var dpolymorphicItemFormatterest = '';
                 if (destination=='fieldsets') {
-                    var dest = 'fields/fieldsets';
+                    var dpolymorphicItemFormatterest = 'fields/';
                 }
 
-                return '<nobr><a href="{{ url('/') }}/' + dest + '/' + value.id + '"> ' + value.name + '</a></span>';
+                return '<nobr><a href="{{ url('/') }}/' + dpolymorphicItemFormatterest + dest + '/' + value.id + '"> ' + value.name + '</a></span>';
             }
         };
     }
@@ -155,7 +180,11 @@
 
 
     // Make the edit/delete buttons
-    function genericActionsFormatter(owner_name, element_name = '') {
+    function genericActionsFormatter(owner_name, element_name) {
+        if (!element_name) {
+            element_name = '';
+        }
+
         return function (value,row) {
 
             var actions = '<nobr>';
@@ -176,11 +205,11 @@
             }
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-toggle="tooltip" title="Clone"><i class="fa fa-copy"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="fa fa-copy" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update Item"><i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">Update</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
@@ -189,7 +218,7 @@
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
-                    + '<i class="fa fa-trash"></i></a>&nbsp;';
+                    + '<i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span></a>&nbsp;';
             } else {
                 actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
             }
@@ -236,7 +265,7 @@
                 item_icon = 'fa-map-marker';
             }
 
-            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-toggle="tooltip" title="' + value.type + '"><i class="fa ' + item_icon + ' text-blue"></i> ' + value.name + '</a></nobr>';
+            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
 
         } else {
             return '';
@@ -390,8 +419,8 @@
 
 
     function createdAtFormatter(value) {
-        if ((value) && (value.date)) {
-            return value.date;
+        if ((value) && (value.formatted)) {
+            return value.formatted;
         }
     }
 
@@ -451,6 +480,14 @@
             return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.asset_tag + '</a>';
         }
         return '';
+
+    }
+
+    function departmentNameLinkFormatter(value, row) {
+        if ((row.assigned_user) && (row.assigned_user.department) && (row.assigned_user.department.name)) {
+            return '<a href="{{ url('/') }}/department/' + row.assigned_user.department.id + '"> ' + row.assigned_user.department.name + '</a>';
+        }
+
     }
 
     function assetNameLinkFormatter(value, row) {
@@ -525,9 +562,20 @@
         }
     }
 
-   function imageFormatter(value) {
+
+   function imageFormatter(value, row) {
+
+
+
         if (value) {
-            return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
+
+            if (row.name) {
+                var altName = row.name;
+            }
+                else if ((row) && (row.model)) {
+                var altName = row.model.name;
+           }
+            return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="' + altName + '"></a>';
         }
     }
 
@@ -553,11 +601,19 @@
             var total_sum = data.reduce(function(sum, row) {
                 return (sum) + (parseFloat(row[field]) || 0);
             }, 0);
-            return total_sum.toFixed(2);
+            return numberWithCommas(total_sum.toFixed(2));
         }
         return 'not an array';
     }
 
+    function numberWithCommas(value) {
+        if ((value) && ("{{$snipeSettings->digit_separator}}" == "1.234,56")){
+        var parts = value.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        return parts.join(",");
+        }
+        return value
+    }
 
     $(function () {
         $('#bulkEdit').click(function () {
@@ -570,13 +626,37 @@
     });
 
 
-    // This is necessary to make the bootstrap tooltips work inside of the
-    // wenzhixin/bootstrap-table formatters
+
     $(function() {
+
+        // This handles the search box highlighting on both ajax and client-side
+        // bootstrap tables
+        var searchboxHighlighter = function (event) {
+
+            $('.search-input').each(function (index, element) {
+
+                if ($(element).val() != '') {
+                    $(element).addClass('search-highlight');
+                    $(element).next().children().addClass('search-highlight');
+                } else {
+                    $(element).removeClass('search-highlight');
+                    $(element).next().children().removeClass('search-highlight');
+                }
+            });
+        };
+
+        $('.search button[name=clearSearch]').click(searchboxHighlighter);
+        searchboxHighlighter({ name:'pageload'});
+        $('.search-input').keyup(searchboxHighlighter);
+
+        //  This is necessary to make the bootstrap tooltips work inside of the
+        // wenzhixin/bootstrap-table formatters
         $('#table').on('post-body.bs.table', function () {
             $('[data-toggle="tooltip"]').tooltip({
                 container: 'body'
             });
+
+
         });
     });
 

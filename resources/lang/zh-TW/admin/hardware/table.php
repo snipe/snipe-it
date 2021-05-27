@@ -19,6 +19,7 @@ return array(
     'status'   		=> '狀態',
     'title'      	=> '資產',
     'image'		=> '設備圖片',
-    'days_without_acceptance' => '過期天數'
+    'days_without_acceptance' => '過期天數',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );

@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'Stádas',
     'title'      	=> 'Sócmhainn',
     'image'		=> 'Íomhá Gléas',
-    'days_without_acceptance' => 'Laethanta Gan Glactha'
+    'days_without_acceptance' => 'Laethanta Gan Glactha',
+    'monthly_depreciation' => 'Monthly Depreciation'
 
 );
