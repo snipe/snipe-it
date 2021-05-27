@@ -77,7 +77,7 @@ class DepartmentsController extends Controller
     {
         $department = Department::find($id);
 
-        $this->authorize('view', $department);
+        $this->authorize('view', Department::class);
 
         if (isset($department->id)) {
             return view('departments/view', compact('department'));
@@ -118,7 +118,7 @@ class DepartmentsController extends Controller
             return redirect()->to(route('departments.index'))->with('error', trans('admin/departments/message.not_found'));
         }
 
-        $this->authorize('delete', $department);
+        $this->authorize('delete', Department::class);
 
         if ($department->users->count() > 0) {
             return redirect()->to(route('departments.index'))->with('error', trans('admin/departments/message.assoc_users'));
@@ -153,7 +153,7 @@ class DepartmentsController extends Controller
             return redirect()->back()->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
-        $this->authorize('update', $item);
+        $this->authorize('update', Department::class);
 
         return view('departments/edit', compact('item'));
     }
@@ -164,7 +164,7 @@ class DepartmentsController extends Controller
             return redirect()->route('departments.index')->with('error', trans('admin/departments/message.does_not_exist'));
         }
 
-        $this->authorize('update', $department);
+        $this->authorize('update', Department::class);
 
         $department->fill($request->all());
         $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
