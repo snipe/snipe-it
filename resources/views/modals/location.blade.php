@@ -1,9 +1,9 @@
-{{-- See snipeit_modals.js for what powers this --}}
+{{-- See snipeit_modals.js for what powers this--}}
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h2 class="modal-title">{{ trans('admin/locations/table.create')  }}</h4>
+            <h2 class="modal-title">{{ trans('admin/locations/table.create')  }}</h2>
         </div>
         <div class="modal-body">
             <form action="{{ route('api.locations.store') }}" onsubmit="return false">
@@ -24,7 +24,7 @@
                     <div class="col-md-4 col-xs-12 country"><label for="modal-country">{{ trans('general.country') }}:</label></div>
                     <div class="col-md-8 col-xs-12">{!! Form::countries('country', Request::old('country'), 'select2 country',"modal-country") !!}</div>
                 </div>
-            </form>
+            </form>˜
         </div>
 
         <div class="modal-footer">
@@ -34,23 +34,4 @@
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 
-<!-- Remove Location from bulk targets -->
 
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h2 class="modal-title">{{ trans('general.remove_location')  }}</h2>
-        </div>
-        <div class="modal-body">
-            <form action="{{ route('api.users.update') }}" onsubmit="return false">
-                {{!! Form::label('location_id', trans('general.remove_location_msg')}}
-                {{ Form::hidden('location_id', '', ['id' => 'location_id'])}}
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('button.cancel') }}</button>
-            <button type="button" class="btn btn-primary" id="modal-save">{{ trans('general.save') }}</button>
-        </div>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
