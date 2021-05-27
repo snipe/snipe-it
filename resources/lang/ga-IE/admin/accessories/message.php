@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Níl an cúlpháirtí ann.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Tá an accessory seo faoi láthair: cuntais a sheiceáil le húsáideoirí. Seiceáil na gabhálais agus déan iarracht arís.',
 
     'create' => array(

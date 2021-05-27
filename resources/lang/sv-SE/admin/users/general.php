@@ -19,9 +19,10 @@ return array(
     'ldap_config_text'  => 'LDAP-konfigurationsinställningar finns Admin> Inställningar. Den (valfria) valda platsen kommer att ställas in för alla importerade användare.',
     'print_assigned'    => 'Skriv ut alla tilldelade',
     'software_user'     => 'Programvara Kontrollerad till: namn',
+    'send_email_help'   => 'Du måste ange en e-postadress till användaren för att kunna skicka inloggningsuppgifterna. Utskick av inloggningsuppgifter kan endast göras när användaren skapas. Lösenorden lagras i en one-way hash och kan inte hämtas när de väl sparats.',
     'view_user'         => 'Visa användare: namn',
     'usercsv'           => 'CSV-fil',
-    'two_factor_admin_optin_help' => 'Dina nuvarande administrativa inställningar tillåter selektiv tillämpning av tvåfaktors autentisering.',
+    'two_factor_admin_optin_help' => 'Dina nuvarande administratörsinställningar tillåter selektiv tillämpning av tvåfaktorsautentisering.  ',
     'two_factor_enrolled' => '2FA-enhet inskriven',
     'two_factor_active'   => '2FA Aktiv',
     );

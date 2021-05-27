@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Die bate wat u met hierdie lisensie probeer assosieer, is in besit van ander as die persoon wat in die opdrag toegeken is.',
     'assoc_users'	 => 'Hierdie lisensie word tans na \'n gebruiker nagegaan en kan nie uitgevee word nie. Gaan asseblief die lisensie eers in, en probeer dan weer uitvee.',
     'select_asset_or_person' => 'Jy moet \'n bate of \'n gebruiker kies, maar nie albei nie.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

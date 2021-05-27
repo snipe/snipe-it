@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'الحالة',
     'title'      	=> 'أصل ',
     'image'		=> 'صورة الجهاز',
-    'days_without_acceptance' => 'أيام بدون قبول'
+    'days_without_acceptance' => 'أيام بدون قبول',
+    'monthly_depreciation' => 'الإهلاك الشهري'
 
 );

@@ -23,13 +23,13 @@ return array(
      'checkout' => array(
         'error'   		=> 'Verbruiksartikel is niet uitgecheckt, probeer het opnieuw',
         'success' 		=> 'Verbruiksartikel is met succes uitgecheckt.',
-        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer het opnieuw.'
+        'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.'
     ),
 
     'checkin' => array(
         'error'   		=> 'Verbruiksartikel is niet ingecheckt, probeer het opnieuw',
         'success' 		=> 'Verbruiksartikel is met succes ingecheckt.',
-        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer het opnieuw.'
+        'user_does_not_exist' => 'Deze gebruiker is ongeldig. Probeer het opnieuw.'
     )
 
 

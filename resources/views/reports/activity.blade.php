@@ -6,6 +6,13 @@
 @parent
 @stop
 
+@section('header_right')
+    {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
+    {{csrf_field()}}
+    <button type="submit" class="btn btn-default"><i class="fa fa-download icon-white" aria-hidden="true"></i> {{ trans('general.download_all') }}</button>
+    {{ Form::close() }}
+@stop
+
 {{-- Page content --}}
 @section('content')
 
@@ -37,7 +44,7 @@
 
                     <thead>
                         <tr>
-                            <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"></th>
+                            <th data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">Icon</th>
                             <th class="col-sm-3" data-searchable="false" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                             <th class="col-sm-2" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                             <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>

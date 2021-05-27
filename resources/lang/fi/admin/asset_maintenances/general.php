@@ -6,6 +6,9 @@
         'delete'             => 'Poista laitteen huolto',
         'view'               => 'Näytä laitteen huoltotiedot',
         'repair'             => 'Korjaus',
-        'maintenance'        => 'Huoltotila',
-        'upgrade'            => 'Päivitä'
+        'maintenance'        => 'Huolto',
+        'upgrade'            => 'Päivitä',
+        'calibration'        => 'Kalibrointi',
+        'software_support'   => 'Ohjelmiston tuki',
+        'hardware_support'   => 'Laitteiston tuki',
     ];

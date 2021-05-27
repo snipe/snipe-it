@@ -146,6 +146,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('general.purchase_cost'),
+                "formatter" => 'numberWithCommas',
                 "footerFormatter" => 'sumFormatter',
             ], [
                 "field" => "order_number",
@@ -258,14 +259,21 @@ class AssetPresenter extends Presenter
             $query->whereHas('models');
         })->get();
 
+
+        // Note: We do not need to e() escape the field names here, as they are already escaped when
+        // they are presented in the blade view. If we escape them here, custom fields with quotes in their
+        // name can break the listings page. - snipe
         foreach ($fields as $field) {
             $layout[] = [
                 "field" => 'custom_fields.'.$field->convertUnicodeDbSlug(),
                 "searchable" => true,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => ($field->field_encrypted=='1') ?'<i class="fa fa-lock"></i> '.e($field->name) : e($field->name),
-                "formatter" => "customFieldsFormatter"
+                "title" => $field->name,
+                "formatter"=> 'customFieldsFormatter',
+                "escape" => true,
+                "class" => ($field->field_encrypted=='1') ? 'css-padlock' : '',
+                "visible" => true,
             ];
 
         }
@@ -320,12 +328,14 @@ class AssetPresenter extends Presenter
         $imagePath = '';
         if ($this->image && !empty($this->image)) {
             $imagePath = $this->image;
+            $imageAlt = $this->name;
         } elseif ($this->model && !empty($this->model->image)) {
             $imagePath = $this->model->image;
+            $imageAlt = $this->model->name;
         }
         $url = config('app.url');
         if (!empty($imagePath)) {
-            $imagePath = "<img src='{$url}/uploads/assets/{$imagePath}' height=50 width=50>";
+            $imagePath = '<img src="'.$url.'/uploads/assets/'.$imagePath.' height="50" width="50" alt="'.$imageAlt.'">';
         }
         return $imagePath;
     }
@@ -351,18 +361,13 @@ class AssetPresenter extends Presenter
     /**
      * Get Displayable Name
      * @return string
+     *
+     * @todo this should be factored out - it should be subsumed by fullName (below)
+     *
      **/
     public function name()
     {
-
-        if (empty($this->model->name)) {
-            if (isset($this->model->model)) {
-                return $this->model->model->name.' ('.$this->model->asset_tag.')';
-            }
-            return $this->model->asset_tag;
-        }
-        return $this->model->name . ' (' . $this->model->asset_tag . ')';
-
+        return $this->fullName;
     }
 
     /**
@@ -372,13 +377,18 @@ class AssetPresenter extends Presenter
     public function fullName()
     {
         $str = '';
+
+        // Asset name
         if ($this->model->name) {
-            $str .= $this->name;
+            $str .= $this->model->name;
         }
 
+        // Asset tag
         if ($this->asset_tag) {
             $str .= ' ('.$this->model->asset_tag.')';
         }
+
+        // Asset Model name
         if ($this->model->model) {
             $str .= ' - '.$this->model->model->name;
         }
@@ -391,7 +401,7 @@ class AssetPresenter extends Presenter
     public function eol_date()
     {
 
-        if (( $this->purchase_date ) && ( $this->model ) && ($this->model->model->eol) ) {
+        if (( $this->purchase_date ) && ( $this->model->model ) && ($this->model->model->eol) ) {
             $date = date_create($this->purchase_date);
             date_add($date, date_interval_create_from_date_string($this->model->model->eol . ' months'));
             return date_format($date, 'Y-m-d');
@@ -512,6 +522,6 @@ class AssetPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fa fa-barcode"></i>';
+        return '<i class="fa fa-barcode" aria-hidden="true"></i>';
     }
 }

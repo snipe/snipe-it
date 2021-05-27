@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Imovina koju pokušavate povezati s ovom licencom nije u vlasništvu osobe koja je odabrana u padajućem meniju.',
     'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
     'select_asset_or_person' => 'Morate odabrati neku vrstu imovine ili korisnika, ali ne oboje.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

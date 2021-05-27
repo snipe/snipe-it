@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Events\AssetCheckedOut;
 use App\Events\CheckoutableCheckedOut;
+use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
@@ -76,6 +77,14 @@ class Asset extends Depreciable
     ];
 
 
+    protected $casts = [
+        'model_id'       => 'integer',
+        'status_id'      => 'integer',
+        'company_id'     => 'integer',
+        'location_id'    => 'integer',
+        'rtd_company_id' => 'integer',
+        'supplier_id'    => 'integer',
+    ];
 
     protected $rules = [
         'name'            => 'max:255|nullable',
@@ -86,13 +95,15 @@ class Asset extends Depreciable
         'physical'        => 'numeric|max:1|nullable',
         'checkout_date'   => 'date|max:10|min:10|nullable',
         'checkin_date'    => 'date|max:10|min:10|nullable',
-        'supplier_id'     => 'numeric|nullable',
+        'supplier_id'     => 'exists:suppliers,id|numeric|nullable',
+        'location_id'     => 'exists:locations,id|nullable',
+        'rtd_location_id' => 'exists:locations,id|nullable',
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
         'status'          => 'integer',
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable',
-        'next_audit_date'  => 'date|nullable',
-        'last_audit_date'  => 'date|nullable',
+        'next_audit_date' => 'date|nullable',
+        'last_audit_date' => 'date|nullable',
     ];
 
   /**
@@ -118,6 +129,9 @@ class Asset extends Depreciable
         'status_id',
         'supplier_id',
         'warranty_months',
+        'requestable',
+        'last_checkout',
+        'expected_checkin',
     ];
 
     use Searchable;
@@ -152,6 +166,7 @@ class Asset extends Depreciable
         'supplier'           => ['name'],
         'company'            => ['name'],
         'defaultLoc'         => ['name'],
+        'location'           => ['name'],
         'model'              => ['name', 'model_number'],
         'model.category'     => ['name'],
         'model.manufacturer' => ['name'],
@@ -165,11 +180,6 @@ class Asset extends Depreciable
      */
     public function save(array $params = [])
     {
-        $settings = \App\Models\Setting::getSettings();
-
-        // I don't remember why we have this here? Asset tag would always be required, even if auto increment is on...
-        $this->rules['asset_tag'] = ($settings->auto_increment_assets == '1') ? 'max:255' : 'required';
-
         if($this->model_id != '') {
             $model = AssetModel::find($this->model_id);
 
@@ -220,7 +230,10 @@ class Asset extends Depreciable
     }
 
     /**
-     * Determines if an asset is available for checkout
+     * Determines if an asset is available for checkout.
+     * This checks to see if the it's checked out to an invalid (deleted) user
+     * OR if the assigned_to and deleted_at fields on the asset are empty AND
+     * that the status is deployable
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
@@ -228,12 +241,18 @@ class Asset extends Depreciable
      */
     public function availableForCheckout()
     {
-        if (
-            (empty($this->assigned_to)) &&
-            (empty($this->deleted_at)) &&
-            (($this->assetstatus) && ($this->assetstatus->deployable == 1)))
-        {
-            return true;
+
+        // This asset is not currently assigned to anyone and is not deleted...
+        if ((!$this->assigned_to) && (!$this->deleted_at)) {
+
+            // The asset status is not archived and is deployable
+            if (($this->assetstatus) && ($this->assetstatus->archived == '0')
+                && ($this->assetstatus->deployable == '1'))
+            {
+
+                return true;
+            }
+
         }
         return false;
     }
@@ -260,6 +279,9 @@ class Asset extends Depreciable
         if (!$target) {
             return false;
         }
+        if ($this->is($target)) {
+            throw new CheckoutNotAllowed('You cannot check an asset out to itself.');
+        }
 
         if ($expected_checkin) {
             $this->expected_checkin = $expected_checkin;
@@ -277,17 +299,23 @@ class Asset extends Depreciable
         if ($location != null) {
             $this->location_id = $location;
         } else {
-            if($target->location) {
+            if (isset($target->location)) {
                 $this->location_id = $target->location->id;
             }
-            if($target instanceof Location) {
+            if ($target instanceof Location) {
                 $this->location_id = $target->id;
             }
         }
 
         if ($this->save()) {
-
-            event(new CheckoutableCheckedOut($this, $target, Auth::user(), $note));
+            if (is_integer($admin)){
+                $checkedOutBy = User::findOrFail($admin);
+            } elseif (get_class($admin) === 'App\Models\User') {
+                $checkedOutBy = $admin;
+            } else {
+                $checkedOutBy = Auth::user();
+            }
+            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note));
 
             $this->increment('checkout_counter', 1);
             return true;
@@ -409,7 +437,7 @@ class Asset extends Depreciable
      */
     public function assignedTo()
     {
-        return $this->morphTo('assigned', 'assigned_type', 'assigned_to');
+        return $this->morphTo('assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
     /**
@@ -797,7 +825,10 @@ class Asset extends Depreciable
      */
     public function requireAcceptance()
     {
-        return $this->model->category->require_acceptance;
+        if (($this->model) && ($this->model->category)) {
+            return $this->model->category->require_acceptance;
+        }
+
     }
 
     /**
@@ -811,14 +842,17 @@ class Asset extends Depreciable
     public function getEula()
     {
         $Parsedown = new \Parsedown();
-
-        if ($this->model->category->eula_text) {
-            return $Parsedown->text(e($this->model->category->eula_text));
-        } elseif ($this->model->category->use_default_eula == '1') {
-            return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
-        } else {
-            return false;
+        
+        if (($this->model) && ($this->model->category)) {
+            if ($this->model->category->eula_text) {
+                return $Parsedown->text(e($this->model->category->eula_text));
+            } elseif ($this->model->category->use_default_eula == '1') {
+                return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+            } else {
+                return false;
+            }
         }
+        return false;
     }
 
 
@@ -1023,9 +1057,11 @@ class Asset extends Depreciable
 
     public function scopeDueForAudit($query, $settings)
     {
+        $interval = $settings->audit_warning_days ?? 0;
+
         return $query->whereNotNull('assets.next_audit_date')
             ->where('assets.next_audit_date', '>=', Carbon::now())
-            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $settings->audit_warning_days DAY) <= '".Carbon::now()."'")
+            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $interval DAY) <= '".Carbon::now()."'")
             ->where('assets.archived', '=', 0)
             ->NotArchived();
     }
@@ -1071,7 +1107,7 @@ class Asset extends Depreciable
         $interval = $settings->audit_warning_days ?? 0;
 
         return $query->whereNotNull('assets.next_audit_date')
-            ->whereRaw("DATE_SUB(assets.next_audit_date, INTERVAL $interval DAY) <= '".Carbon::now()."'")
+            ->whereRaw("DATE_SUB(".DB::getTablePrefix()."assets.next_audit_date, INTERVAL $interval DAY) <= '".Carbon::now()."'")
             ->where('assets.archived', '=', 0)
             ->NotArchived();
     }
@@ -1598,8 +1634,7 @@ class Asset extends Depreciable
 
 
     /**
-     * Query builder scope to search on location ID
-     *
+     * Query builder scope to search on depreciation name
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
      * @param  text                              $search      Search term
      *

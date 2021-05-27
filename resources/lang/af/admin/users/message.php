@@ -12,6 +12,7 @@ return array(
     'insufficient_permissions'  => 'Onvoldoende Toestemmings.',
     'user_deleted_warning'      => 'Hierdie gebruiker is verwyder. Jy sal hierdie gebruiker moet herstel om hulle te wysig of nuwe bates toe te ken.',
     'ldap_not_configured'        => 'LDAP-integrasie is nie vir hierdie installasie gekonfigureer nie.',
+    'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
 
     'success' => array(

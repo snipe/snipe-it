@@ -2,6 +2,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Setting;
 
 /**
  * This service provider handles sharing the snipeSettings variable, and sets
@@ -26,7 +27,7 @@ class SettingsServiceProvider extends ServiceProvider
 
         // Share common setting variables with all views.
         view()->composer('*', function ($view) {
-            $view->with('snipeSettings', \App\Models\Setting::getSettings());
+            $view->with('snipeSettings', Setting::getSettings());
         });
 
 
@@ -44,7 +45,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('accessories_upload_path', function() {
-            return 'accessories/';
+            return 'public/uploads/accessories/';
         });
 
         \App::singleton('models_upload_path', function(){
@@ -70,16 +71,16 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('locations_upload_url', function(){
-            return 'storage/public_uploads/locations/';
+            return 'locations/';
         });
 
         // Users
         \App::singleton('users_upload_path', function(){
-            return 'users/';
+            return 'avatars/';
         });
 
         \App::singleton('users_upload_url', function(){
-            return 'public_uploads/users/';
+            return 'users/';
         });
 
         // Manufacturers
@@ -88,7 +89,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('manufacturers_upload_url', function(){
-            return 'public_uploads/manufacturers/';
+            return 'manufacturers/';
         });
 
         // Suppliers
@@ -97,7 +98,7 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('suppliers_upload_url', function(){
-            return 'storage/public_uploads/suppliers/';
+            return 'suppliers/';
         });
 
         // Departments
@@ -115,63 +116,35 @@ class SettingsServiceProvider extends ServiceProvider
         });
 
         \App::singleton('companies_upload_url', function(){
-            return 'storage/public_uploads/companies/';
+            return 'companies/';
         });
 
         // Accessories paths and URLs
         \App::singleton('accessories_upload_path', function(){
-            return public_path('/uploads/accessories/');
+            return 'accessories/';
         });
 
         \App::singleton('accessories_upload_url', function(){
-            return url('/').'/uploads/accessories/';
+            return 'accessories/';
         });
 
         // Consumables paths and URLs
         \App::singleton('consumables_upload_path', function(){
-            return public_path('/uploads/consumables/');
+            return 'consumables/';
         });
 
         \App::singleton('consumables_upload_url', function(){
-            return url('/').'/uploads/consumables/';
+            return 'consumables/';
         });
 
 
         // Components paths and URLs
         \App::singleton('components_upload_path', function(){
-            return public_path('/uploads/components/');
+            return 'components/';
         });
 
         \App::singleton('components_upload_url', function(){
-            return url('/').'/uploads/components/';
-        });
-
-        // Accessories paths and URLs
-        \App::singleton('accessories_upload_path', function(){
-            return public_path('/uploads/accessories/');
-        });
-
-        \App::singleton('accessories_upload_url', function(){
-            return url('/').'/uploads/accessories/';
-        });
-
-        // Consumables paths and URLs
-        \App::singleton('consumables_upload_path', function(){
-            return public_path('/uploads/consumables/');
-        });
-
-        \App::singleton('consumables_upload_url', function(){
-            return url('/').'/uploads/consumables/';
-        });
-
-
-        // Components paths and URLs
-        \App::singleton('components_upload_path', function(){
-            return public_path('/uploads/components/');
-        });
-
-        \App::singleton('components_upload_url', function(){
-            return url('/').'/uploads/components/';
+            return 'components/';
         });
 
 

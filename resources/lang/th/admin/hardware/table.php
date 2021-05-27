@@ -19,6 +19,7 @@ return array(
     'status'   		=> 'สถานะ',
     'title'      	=> 'สินทรัพย์',
     'image'		=> 'ภาพอุปกรณ์',
-    'days_without_acceptance' => 'วันโดยปราศจากการยอมรับ'
+    'days_without_acceptance' => 'วันโดยปราศจากการยอมรับ',
+    'monthly_depreciation' => 'ค่าเสื่อมราคารายเดือน'
 
 );

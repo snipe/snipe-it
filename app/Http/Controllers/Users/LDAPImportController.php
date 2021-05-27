@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ldap;
 use App\Services\LdapAd;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use App\Models\User; // Note that this is awful close to 'Users' the namespace above; be careful
 
 class LDAPImportController extends Controller
 {
@@ -45,7 +45,7 @@ class LDAPImportController extends Controller
     {
         $this->authorize('update', User::class);
         try {
-            $this->ldap->testLdapAdUserConnection();
+            //$this->ldap->connect(); I don't think this actually exists in LdapAd.php, and we don't really 'persist' LDAP connections anyways...right?
         } catch (\Exception $e) {
             return redirect()->route('users.index')->with('error', $e->getMessage());
         }
@@ -57,6 +57,7 @@ class LDAPImportController extends Controller
      * LDAP form processing.
      *
      * @author Aladin Alaily
+     * @author A. Gianotto <snipe@snipe.net>
      * @author Wes Hulette <jwhulette@gmail.com>
      *
      * @since 5.0.0
@@ -65,6 +66,7 @@ class LDAPImportController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('update', User::class);
         // Call Artisan LDAP import command.
         $location_id = $request->input('location_id');
         Artisan::call('snipeit:ldap-sync', ['--location_id' => $location_id, '--json_summary' => true]);

@@ -49,12 +49,7 @@ return [
         'app_key'  => env('STUNNING_APP_KEY'),
         'stripe_id'    => env('STUNNING_STRIPE_ID'),
     ],
-
-    'rollbar' => [
-        'access_token' => env('ROLLBAR_TOKEN'),
-        'level' => env('ROLLBAR_LEVEL', 'error'),
-    ],
-
+    
     'google' => [
         'maps_api_key' => env('GOOGLE_MAPS_API')
     ],

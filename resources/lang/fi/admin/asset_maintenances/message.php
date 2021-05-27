@@ -1,19 +1,19 @@
 <?php
 
     return [
-        'not_found'                    => 'Varallisuushoitoa, jota etsit, ei löytynyt!',
+        'not_found'                    => 'Etsimääsi huoltoa ei löytynyt!',
         'delete'                       => [
-            'confirm' => 'Haluatko varmasti poistaa tämän omaisuuden ylläpidon?',
-            'error'   => 'Omaisuuden ylläpitoa poistettiin ongelma. Yritä uudelleen.',
-            'success' => 'Omaisuuden ylläpito on poistettu onnistuneesti.'
+            'confirm' => 'Haluatko varmasti poistaa tämän huollon?',
+            'error'   => 'Huollon poistamisessa tapahtui virhe. Yritä uudelleen.',
+            'success' => 'Huolto poistettu.'
         ],
         'create'                       => [
-            'error'   => 'Omaisuuden ylläpitoa ei luotu, yritä uudelleen.',
-            'success' => 'Omaisuuden ylläpito onnistui.'
+            'error'   => 'Huoltoa ei luotu, yritä uudelleen.',
+            'success' => 'Huollon kirjaus onnistui.'
         ],
         'edit'                       => [
-            'error'   => 'Varainhoitoa ei muokattu, yritä uudelleen.',
-            'success' => 'Varainhoidon muokkaus onnistui.'
+            'error'   => 'Huoltoa ei muokattu, yritä uudelleen.',
+            'success' => 'Huollon muokkaus onnistui.'
         ],
         'asset_maintenance_incomplete' => 'Ei vielä valmis',
         'warranty'                     => 'Takuu',

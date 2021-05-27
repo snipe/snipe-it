@@ -64,15 +64,17 @@
                            Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user's name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
                         </p>
 
-                        <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Checkout Date, Checkin Date, Name</strong>. Any additional fields will be ignored. </p>
+                        <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
 
-
-                        <p><strong>History should be ordered by date in ascending order.</strong></p>
+                        <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
 
                         <div class="form-group">
                             <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
                             <div class="col-sm-9">
                                 <input type="file" name="user_import_csv" id="user_import_csv"{{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
                             </div>
                         </div>
 
@@ -115,6 +117,14 @@
                     </div>
                 </div>
 
+                 <!-- Match username -->
+                <div class="form-group">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        {{ Form::checkbox('match_username', '1', Request::old('match_username')) }} Try to match users by username
+                    </div>
+                </div>
 
                </div>
 
@@ -148,7 +158,7 @@
                     <div class="col-md-12">
                         <div class="box box-default">
                             <div class="box-header with-border">
-                                <h3 class="box-title"> {{ count($status['error']) }} Error Messages </h3>
+                                <h2 class="box-title"> {{ count($status['error']) }} Error Messages </h2>
                             </div>
                             <div class="box-body">
                                 <div style="height : 400px; overflow : auto;">
@@ -175,7 +185,7 @@
                             <div class="col-md-12">
                                 <div class="box box-default">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title"> {{ count($status['success']) }} Success Messages </h3>
+                                        <h2 class="box-title"> {{ count($status['success']) }} Success Messages </h2>
                                     </div>
                                     <div class="box-body">
                                         <div style="height : 400px; overflow : auto;">

@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Acerca de Categorías',
-    'about_categories'  				=> 'Las categorías te ayudan a organizar tus elementos. Algunos ejemplos de categoría pueden ser &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Teléfonos Móviles&quot;, &quot;Tablets&quot;, y otros, pero puedes usar las categorías de cualquier manera que tengan sentido para ti.',
     'asset_categories' 					=> 'Categorías de Equipos',
     'category_name'  					=> 'Nombre de la Categoría',
     'checkin_email'                     => 'Enviar un correo al usuario al asignar/desasignar.',

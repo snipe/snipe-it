@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP 設定在 管理 > 設定。所選位置將套用至匯入的使用者。',
     'print_assigned'    => '列印所有分配的',
     'software_user'     => ':name 借出的軟體',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => '檢視使用者： :name',
     'usercsv'           => 'CSV 檔',
     'two_factor_admin_optin_help' => '您當前的管理員設置允許使用雙因素身份驗證。',

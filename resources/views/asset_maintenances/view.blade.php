@@ -13,10 +13,10 @@ use Carbon\Carbon;
 @section('content')
 <div class="row header">
   <div class="col-md-12">
-    <h3 class="title">
+    <h2 class="title">
       {{ trans('admin/asset_maintenances/general.view') }}
       {{ " - " . $assetMaintenance->title }}
-    </h3>
+    </h2>
 
     <div class="btn-group pull-right">
       <div class="dropdown">

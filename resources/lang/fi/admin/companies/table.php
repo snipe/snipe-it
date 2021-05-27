@@ -1,8 +1,8 @@
 <?php
 return array(
-    'companies' => 'yritykset',
+    'companies' => 'Yritykset',
     'create'    => 'Luo yritys',
-    'title'     => 'Yhtiö',
+    'title'     => 'Yritys',
     'update'    => 'Päivitä yritys',
     'name'      => 'Yrityksen nimi',
     'id'        => 'ID',

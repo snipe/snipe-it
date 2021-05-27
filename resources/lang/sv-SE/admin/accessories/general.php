@@ -1,17 +1,15 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'Om Tillbehör',
-    'about_accessories_text'  			=> 'Tillbehör är något som tilldelas till användare men som inte har ett serienummer (det krävs inte att det är spårbart). Exv. datormöss eller tangentbord.',
-    'accessory_category' 				=> 'Tillbehörs Kategori',
-    'accessory_name'  					=> 'Tillbehörs Namn',
+    'accessory_category' 				=> 'Tillbehörskategori',
+    'accessory_name'  					=> 'Tillbehörsnamn',
     'checkout'  							=> 'Checka ut tillbehör',
     'checkin'  							=> 'Checka in tillbehör',
     'create'  							=> 'Skapa tillbehör',
-    'edit'  							=> 'Redigera tillbehär',
+    'edit'  							=> 'Redigera tillbehör',
     'eula_text'							=> 'Kategori EULA',
     'eula_text_help'					=> 'Det här fältet tillåter att du ändrar din EULA för specifika typer av tillgångar. Om du endast har en EULA för samtliga tillgångar så kan du kryssa i rutan nedan för att använda den.',
-    'require_acceptance'				=> 'Kräv att användare accepterar mottagande av inventarier i den här kategorin.',
+    'require_acceptance'				=> 'Kräv att användare bekräftar mottagande av tillgångar i denna kategori.',
     'no_default_eula'					=> 'Ingen EULA funnen. Lägg till en i inställningar.',
     'total'  							=> 'Totalt',
     'remaining'  						=> 'Tillgängliga',

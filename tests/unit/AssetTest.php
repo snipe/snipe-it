@@ -77,7 +77,11 @@ class AssetTest extends BaseTest
      */
      public function testWarrantyExpiresAttribute()
      {
-         $asset = factory(Asset::class)->states('laptop-mbp')->create(['model_id' => $this->createValidAssetModel()->id]);
+        $asset = factory(Asset::class)->states('laptop-mbp')->create([
+            'model_id' => $this->createValidAssetModel()->id,
+            'supplier_id' => $this->createvalidSupplier()->id,
+            'rtd_location_id' => $this->createValidLocation()->id
+        ]);
 
          $asset->purchase_date = Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0);
          $asset->warranty_months = 24;
@@ -109,7 +113,11 @@ class AssetTest extends BaseTest
      public function testModelIdMustExist()
      {
          $model = $this->createValidAssetModel();
-         $asset = factory(Asset::class)->make(['model_id' => $model->id]);
+         $asset = factory(Asset::class)->make([
+            'model_id' => $model->id,
+            'supplier_id' => $this->createValidSupplier()->id,
+            'rtd_location_id' => $this->createValidLocation()->id
+        ]);
          $asset->save();
          $this->assertTrue($asset->isValid());
          $newId = $model->id + 1;
@@ -188,7 +196,9 @@ class AssetTest extends BaseTest
 
      public function testAnAssetCanHaveUploads()
      {
-         $asset = $this->createValidAsset();
+         $asset = $this->createValidAsset([
+            'supplier_id' => $this->createValidSupplier()->id
+         ]);
          $this->assertCount(0, $asset->uploads);
          factory(App\Models\Actionlog::class, 'asset-upload')->create(['item_id' => $asset->id]);
          $this->assertCount(1, $asset->fresh()->uploads);
@@ -276,6 +286,11 @@ class AssetTest extends BaseTest
              'target_type'   => get_class($target),
              'target_id'     => $target->id
          ]);
+
+         // An Asset cannot be checked out to itself.
+         $target = $this->createValidAsset();
+         $this->expectException(CheckoutNotAllowed::class);
+         $target->checkOut($target, $adminUser);
 
          // An Asset Can be checked out to a location, and this should be logged.
          $target = $this->createValidLocation();

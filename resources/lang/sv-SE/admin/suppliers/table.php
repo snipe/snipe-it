@@ -17,7 +17,7 @@ return array(
     'notes'                 => 'anteckningar',
     'phone'                 => 'Telefon',
     'state'                 => 'stat',
-    'suppliers'             => 'leverantörer',
+    'suppliers'             => 'Leverantörer',
     'update'                => 'Uppdatera Leverantör',
     'url'                   => 'URL',
     'view'                  => 'Visa leverantör',

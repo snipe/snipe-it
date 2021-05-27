@@ -19,7 +19,7 @@ return array(
     'location'  			=> 'Plats',
     'lock_passwords'		=> 'Inloggningsuppgifter kan inte ändras på den här installationen.',
     'manager' 				=> 'Chef',
-    'managed_locations'     => 'Managed platser',
+    'managed_locations'     => 'Hanterade platser',
     'name' 					=> 'namn',
     'notes'                 => 'anteckningar',
     'password_confirm' 		=> 'Bekräfta lösenord',

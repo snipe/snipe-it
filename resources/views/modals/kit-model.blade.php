@@ -7,7 +7,7 @@
             <h4 class="modal-title">Append model{{-- TODO: trans --}}</h4>
         </div>
         <div class="modal-body">
-            <form action="{{ route('api.kits.models.store', ['kit_id' => request('kit')]) }}" onsubmit="return false">
+            <form action="{{ route('api.kits.models.store', $kitId) }}" onsubmit="return false">
                 {{ csrf_field() }}
                 <div class="alert alert-danger" id="modal_error_msg" style="display:none">
                 </div>
@@ -16,7 +16,7 @@
                     <div class="col-md-4 col-xs-12"><label for="modal-model_id">{{ trans('general.asset_model') }}:
                         </label></div>
                     <div class="col-md-8 col-xs-12 required">
-                        <select class="js-data-ajax" data-endpoint="models" name="model" style="width: 100%" id="modal-model_id" />
+                        <select class="js-data-ajax" data-endpoint="models" name="model" style="width: 100%" id="modal-model_id"></select>
                     </div>
                 </div>
 

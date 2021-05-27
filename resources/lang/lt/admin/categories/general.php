@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Apie kategorijas',
-    'about_categories'  				=> 'Kategorijos padeda jums tvarkyti savo daiktus. Kai kurių pavyzdžių kategorijos gali būti &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobilieji telefonai&quot;, &quot;Tablets&quot; ir tt, bet jūs galite naudoti kategorijas bet kokiu būdu, kuris jums yra naudingas.',
     'asset_categories' 					=> 'Įrangos kategorijos',
     'category_name'  					=> 'Kategorijos pavadinimas',
     'checkin_email'                     => 'Siųsti el. laišką vartotojui gavus/priskyrus.',

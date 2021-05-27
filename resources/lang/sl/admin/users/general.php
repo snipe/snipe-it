@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Nastavitve konfiguracije LDAP-a lahko najdete v zavihku Admin> Nastavitve. Izbrana lokacija bo nastavljena za vse uvožene uporabnike.',
     'print_assigned'    => 'Natisni vse dodeljene',
     'software_user'     => 'Programska oprema izdana osebi :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Ogled uporabnika :name',
     'usercsv'           => 'Datoteko CSV',
     'two_factor_admin_optin_help' => 'Vaše trenutne nastavitve skrbnika omogočajo selektivno uveljavljanje dvotaktne pristnosti.  ',

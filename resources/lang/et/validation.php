@@ -67,7 +67,7 @@ return array(
     'not_in'               => 'Valitud atribuut on kehtetu.',
     'numeric'              => 'Atribuut peab olema number.',
     'present'              => 'Atribuudiväli peab olema kohal.',
-    'valid_regex'          => 'That is not a valid regex. ',
+    'valid_regex'          => 'See ei ole õige regex süntaks. ',
     'regex'                => 'Atribuudivorming on vale.',
     'required'             => 'Atribuudiväljandus on kohustuslik.',
     'required_if'          => 'Atribuudiväljastus on vajalik, kui: muu on: väärtus.',
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'Atribuut: on juba võetud.',
     'uploaded'             => 'Atribuut ei õnnestunud üles laadida.',
     'url'                  => 'Atribuudivorming on vale.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    "unique_undeleted"     => ":attribute peab olema ainulaadne.",
 
     /*
     |--------------------------------------------------------------------------

@@ -26,7 +26,7 @@ class CurrentInventory extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         return ['mail'];
     }
@@ -34,10 +34,9 @@ class CurrentInventory extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         $message = (new MailMessage)->markdown('notifications.markdown.user-inventory',
             [
@@ -48,18 +47,5 @@ class CurrentInventory extends Notification
             ->subject('Inventory Report');
 
         return $message;
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

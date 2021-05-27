@@ -2,8 +2,8 @@
 
 return array(
 
-    'asset'             => 'Product',
-    'checkin'           => 'Inchecken',
+    'asset'             => 'Asset',
+    'checkin'           => 'Checkin',
     'create'            => 'Licentie toevoegen',
     'expiration'        => 'Vervaldatum',
     'license_key'       => 'Productcode',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licentie uitgegeven aan E-mail',
     'to_name'           => 'Licentie uitgegeven aan Naam',
     'update'            => 'Wijzig licentie',
-    'checkout_help'     => 'Je moet een licentie uitchecken naar een hardware product of een persoon. Je kan beide selecteren maar de eigenaar van het product moet overeenkomen met het persoon waar je het product aan koppelt.'
+    'checkout_help'     => 'Je moet een licentie uitchecken naar een hardware product of een persoon. Je kunt beide selecteren, maar de eigenaar van het product moet overeenkomen met de persoon waar je het asset aan selecteert.'
 );

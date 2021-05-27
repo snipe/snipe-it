@@ -9,7 +9,19 @@ return array(
     'account_banned'         => '账户已经被禁用',
     'throttle'               => '登录失败的次数太多。请在 :minutes分钟后重试。',
 
+    'two_factor' => array(
+        'already_enrolled'      => '您的设备已经登记了。',
+        'success'               => '恭喜，登陆成功。',
+        'code_required'         => '需要两步验证码。',
+        'invalid_code'          => '两步验证码无效。',
+    ),
+
     'signin' => array(
+        'error'   => '登陆过程中出现了一点儿问题，请重试。',
+        'success' => '恭喜，登陆成功。',
+    ),
+
+    'logout' => array(
         'error'   => '登陆过程中出现了一点儿问题，请重试。',
         'success' => '恭喜，登陆成功。',
     ),
@@ -19,19 +31,15 @@ return array(
         'success' => '账户创建成功。',
     ),
 
-        'forgot-password' => array(
-            'error'   => '重置密码过程中出现了一点儿问题，请重试。',
-            'success' => '密码找回邮件已经发送成功，请查收。',
-        ),
-
-        'forgot-password-confirm' => array(
-            'error'   => '再重置密码过程中出现了一点儿问题，请重试。',
-            'success' => '密码重置成功。',
-        ),
-
-    'activate' => array(
-        'error'   => '账户激活过程中出现了一点儿问题，请重试。',
-        'success' => '账户已经成功被激活。',
+    'forgot-password' => array(
+        'error'   => '重置密码过程中出现了一点儿问题，请重试。',
+        'success' => '如果该电子邮件地址存在于系统中，那么密码重置邮件已发送到您邮箱。',
     ),
+
+    'forgot-password-confirm' => array(
+        'error'   => '再重置密码过程中出现了一点儿问题，请重试。',
+        'success' => '密码重置成功。',
+    ),
+
 
 );

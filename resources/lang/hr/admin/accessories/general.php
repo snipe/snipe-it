@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'O priboru',
-    'about_accessories_text'  			=> 'Pribor je sve što izdajete korisnicima, ali nemaju serijski broj (ili vas ne zanima njihovo jedinstveno praćenje). Na primjer, računalni miševi ili tipkovnice.',
     'accessory_category' 				=> 'Kategorija dodatne opreme',
     'accessory_name'  					=> 'Naziv dodatne opreme',
     'checkout'  							=> 'Dodatna oprema za naplatu',

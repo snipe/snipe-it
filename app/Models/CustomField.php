@@ -285,9 +285,13 @@ class CustomField extends Model
      */
     public function formatFieldValuesAsArray()
     {
+        $result = [];
         $arr = preg_split("/\\r\\n|\\r|\\n/", $this->field_values);
 
-        $result[''] = 'Select '.strtolower($this->format);
+        if (($this->element!='checkbox') && ($this->element!='radio')) {
+            $result[''] = 'Select '.strtolower($this->format);
+        }
+
 
         for ($x = 0; $x < count($arr); $x++) {
             $arr_parts = explode('|', $arr[$x]);
@@ -326,7 +330,7 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.4]
-     * @return boolean
+     * @return string
      */
     public function convertUnicodeDbSlug($original = null)
     {
@@ -349,16 +353,16 @@ class CustomField extends Model
     * @since [v4.1.10]
     * @return array
     */
-    public function validationRules()
+    public function validationRules($regex_format = null)
     {
         return [
             "name" => "required|unique:custom_fields",
             "element" => [
                 "required",
-                Rule::in(['text', 'listbox'])
+                Rule::in(['text', 'listbox',  'textarea', 'checkbox', 'radio'])
             ],
             'format' => [
-                Rule::in(array_merge(array_keys(CustomField::PREDEFINED_FORMATS), CustomField::PREDEFINED_FORMATS))
+                Rule::in(array_merge(array_keys(CustomField::PREDEFINED_FORMATS), CustomField::PREDEFINED_FORMATS, [$regex_format]))
             ],
             'field_encrypted' => "nullable|boolean"
         ];

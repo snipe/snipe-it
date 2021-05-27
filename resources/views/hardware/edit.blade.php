@@ -35,7 +35,9 @@
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
           <div class="col-md-2 col-sm-12">
-              <button class="add_field_button btn btn-default btn-sm"><i class="fa fa-plus"></i></button>
+              <button class="add_field_button btn btn-default btn-sm">
+                  <i class="fa fa-plus"></i>
+              </button>
           </div>
       @endif
   </div>
@@ -45,7 +47,7 @@
     </div>
 
 
-    @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'required' => 'true'])
+    @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'field_req' => true])
 
 
   <div id='custom_fields_content'>
@@ -64,17 +66,15 @@
   </div>
 
   @include ('partials.forms.edit.status', [ 'required' => 'true'])
-
   @if (!$item->id)
       @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true', 'style' => 'display:none;'])
-
       @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user', 'style' => 'display:none;', 'required' => 'false'])
-
-  @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset', 'style' => 'display:none;', 'required' => 'false'])
-
-  @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
+      @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset', 'style' => 'display:none;', 'required' => 'false'])
+      @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
+  @elseif (($item->assignedTo) && ($item->deleted_at==''))
+      <!-- This is an asset and it's currently deployed, so let them edit the expected checkin date -->
+      @include ('partials.forms.edit.datepicker', ['translated_name' => trans('admin/hardware/form.expected_checkin'),'fieldname' => 'expected_checkin'])
   @endif
-
 
   @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
   @include ('partials.forms.edit.purchase_date')
@@ -153,7 +153,7 @@
                         if(transformed_oldvals[elem.name]) {
                             $(elem).val(transformed_oldvals[elem.name]).trigger('change'); //the trigger is for select2-based objects, if we have any
                         }
-                        
+
                     });
                 }
             });
@@ -178,16 +178,18 @@
                         $("#assignto_selector").show();
                         $("#assigned_user").show();
 
-                        $("#selected_status_status").removeClass('alert-msg');
+                        $("#selected_status_status").removeClass('text-danger');
+                        $("#selected_status_status").removeClass('text-warning');
                         $("#selected_status_status").addClass('text-success');
                         $("#selected_status_status").html('<i class="fa fa-check"></i> That status is deployable. This asset can be checked out.');
 
 
                     } else {
                         $("#assignto_selector").hide();
+                        $("#selected_status_status").removeClass('text-danger');
                         $("#selected_status_status").removeClass('text-success');
-                        $("#selected_status_status").addClass('alert-msg');
-                        $("#selected_status_status").html('<i class="fa fa-times"></i> That asset status is not deployable. This asset cannot be checked out. ');
+                        $("#selected_status_status").addClass('text-warning');
+                        $("#selected_status_status").html('<i class="fa fa-warning"></i> That asset status is not deployable. This asset cannot be checked out. ');
                     }
                 }
             });
@@ -227,13 +229,13 @@
 
             var auto_tag        = $("#asset_tag").val().replace(/[^\d]/g, '');
             var box_html        = '';
-
+			const zeroPad 		= (num, places) => String(num).padStart(places, '0');
 
             // Check that we haven't exceeded the max number of asset fields
             if (x < max_fields) {
 
                 if (auto_tag!='') {
-                     auto_tag = parseInt(auto_tag) + parseInt(x);
+                     auto_tag = zeroPad(parseInt(auto_tag) + parseInt(x),auto_tag.length);
                 } else {
                      auto_tag = '';
                 }

@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Country',
     'create'                    => 'Create Location',
     'update'                    => 'Update Location',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Location Name',
     'address'                   => 'Address',
     'zip'                       => 'Postal Code',

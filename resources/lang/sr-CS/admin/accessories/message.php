@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Pribor ne postoji.',
+    'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Ovaj pribor trenutno ima :count stavku označenu korisnicima. Proverite pribor i pokušajte ponovo. ',
 
     'create' => array(

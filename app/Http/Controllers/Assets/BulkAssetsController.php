@@ -78,6 +78,7 @@ class BulkAssetsController extends Controller
         $assets = array_keys($request->input('ids'));
 
         if (($request->filled('purchase_date'))
+            || ($request->filled('expected_checkin'))
             || ($request->filled('purchase_cost'))
             || ($request->filled('supplier_id'))
             || ($request->filled('order_number'))
@@ -92,6 +93,7 @@ class BulkAssetsController extends Controller
                 $this->update_array = [];
 
                 $this->conditionallyAddItem('purchase_date')
+                    ->conditionallyAddItem('expected_checkin')
                     ->conditionallyAddItem('model_id')
                     ->conditionallyAddItem('order_number')
                     ->conditionallyAddItem('requestable')
@@ -206,9 +208,11 @@ class BulkAssetsController extends Controller
 
             $asset_ids = array_filter($request->get('selected_assets'));
 
-            foreach ($asset_ids as $asset_id) {
-                if ($target->id == $asset_id && request('checkout_to_type') =='asset') {
-                    return redirect()->back()->with('error', 'You cannot check an asset out to itself.');
+            if(request('checkout_to_type') =='asset') {
+                foreach ($asset_ids as $asset_id) {
+                    if ($target->id == $asset_id)  {
+                        return redirect()->back()->with('error', 'You cannot check an asset out to itself.');
+                    }
                 }
             }
             $checkout_at = date("Y-m-d H:i:s");

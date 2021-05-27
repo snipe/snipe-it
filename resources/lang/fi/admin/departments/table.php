@@ -2,9 +2,9 @@
 
 return array(
 
-    'id'                        => 'ID',
-    'name'                      => 'osaston nimi',
-    'manager'                   => 'johtaja',
+    'id'                        => 'Tunnus',
+    'name'                      => 'Osaston nimi',
+    'manager'                   => 'Esimies',
     'location'                  => 'Sijainti',
     'create'                    => 'Luo osasto',
     'update'                    => 'Päivitä osasto',

@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Šalis',
     'create'                    => 'Sukurti vietovę',
     'update'                    => 'Atnaujinti vietovę',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Vietovės pavadinimas',
     'address'                   => 'Adresas',
     'zip'                       => 'Pašto kodas',

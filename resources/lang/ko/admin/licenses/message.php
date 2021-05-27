@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => '이 라이센스와 연결하려고하는 자산은 드롭 다운 목록에서 선택한 사람이 아닌 다른 누군가가 소유하고 있습니다.',
     'assoc_users'	 => '이 자산은 현재 사용자에게 반출 중이어서 삭제 할 수 없습니다. 먼저 자산을 확인해 보고 다시 삭제를 시도해 주세요. ',
     'select_asset_or_person' => '애셋이나 사용자 중 하나만 선택해야하며 둘 다 선택할 수는 없습니다.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

@@ -7,5 +7,8 @@
         'view'               => 'Zobacz szczegóły konserwacji aktywa',
         'repair'             => 'Naprawa',
         'maintenance'        => 'Konserwacja',
-        'upgrade'            => 'Uaktualnienie'
+        'upgrade'            => 'Uaktualnienie',
+        'calibration'        => 'Kalibracja',
+        'software_support'   => 'Wsparcie oprogramowania',
+        'hardware_support'   => 'Wsparcie sprzętowe',
     ];

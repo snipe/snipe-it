@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP 구성 설정들은 Admin > Settings 에서 찾을 수 있습니다. (부가적으로) 선택된 장소는 불러온 모든 사용자들에게 설정됩니다.',
     'print_assigned'    => 'Assigned 자산 모두 인쇄',
     'software_user'     => '소프트웨어 반출 목록 :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => '사용자 보기 :name',
     'usercsv'           => 'CSV 파일',
     'two_factor_admin_optin_help' => '현재 관리 설정이 두가지 인증방법을 선택적으로 실행하게 되어 있습니다.  ',

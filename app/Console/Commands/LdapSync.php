@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Department;
 use Illuminate\Console\Command;
 use App\Models\Setting;
 use App\Models\Ldap;
@@ -42,9 +43,8 @@ class LdapSync extends Command
      */
     public function handle()
     {
-        ini_set('max_execution_time', 600); //600 seconds = 10 minutes
-        ini_set('memory_limit', '500M');
-
+        ini_set('max_execution_time', env('LDAP_TIME_LIM', 600)); //600 seconds = 10 minutes
+        ini_set('memory_limit', env('LDAP_MEM_LIM', '500M'));
         $ldap_result_username = Setting::getSettings()->ldap_username_field;
         $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
@@ -52,6 +52,10 @@ class LdapSync extends Command
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
+        $ldap_result_phone = Setting::getSettings()->ldap_phone_field;
+        $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
+        $ldap_result_country      = Setting::getSettings()->ldap_country;
+        $ldap_result_dept = Setting::getSettings()->ldap_dept;
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -85,7 +89,7 @@ class LdapSync extends Command
         }
 
         /* Determine which location to assign users to by default. */
-        $location = NULL;
+        $location = NULL; // FIXME - this would be better called "$default_location", which is more explicit about its purpose
 
         if ($this->option('location')!='') {
             $location = Location::where('name', '=', $this->option('location'))->first();
@@ -107,8 +111,8 @@ class LdapSync extends Command
             $ldap_ou_locations = Location::where('ldap_ou', '!=', '')->get()->toArray();
             $ldap_ou_lengths = array();
 
-            foreach ($ldap_ou_locations as $location) {
-                $ldap_ou_lengths[] = strlen($location["ldap_ou"]);
+            foreach ($ldap_ou_locations as $ou_loc) {
+                $ldap_ou_lengths[] = strlen($ou_loc["ldap_ou"]);
             }
 
             array_multisort($ldap_ou_lengths, SORT_ASC, $ldap_ou_locations);
@@ -125,7 +129,16 @@ class LdapSync extends Command
 
             // Grab subsets based on location-specific DNs, and overwrite location for these users.
             foreach ($ldap_ou_locations as $ldap_loc) {
-                $location_users = Ldap::findLdapUsers($ldap_loc["ldap_ou"]);
+                try {
+                    $location_users = Ldap::findLdapUsers($ldap_loc["ldap_ou"]);
+                } catch (\Exception $e) { // FIXME: this is stolen from line 77 or so above
+                    if ($this->option('json_summary')) {
+                        $json_summary = [ "error" => true, "error_message" => trans('admin/users/message.error.ldap_could_not_search')." Location: ".$ldap_loc['name']." (ID: ".$ldap_loc['id'].") cannot connect to \"".$ldap_loc["ldap_ou"]."\" - ".$e->getMessage(), "summary" => [] ];
+                        $this->info(json_encode($json_summary));
+                    }
+                    LOG::info($e);
+                    return [];
+                }
                 $usernames = array();
                 for ($i = 0; $i < $location_users["count"]; $i++) {
 
@@ -167,6 +180,16 @@ class LdapSync extends Command
                 $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
                 $item["ldap_location_override"] = isset($results[$i]["ldap_location_override"]) ? $results[$i]["ldap_location_override"]:"";
                 $item["location_id"] = isset($results[$i]["location_id"]) ? $results[$i]["location_id"]:"";
+                $item["telephone"] = isset($results[$i][$ldap_result_phone][0]) ? $results[$i][$ldap_result_phone][0] : "";
+                $item["jobtitle"] = isset($results[$i][$ldap_result_jobtitle][0]) ? $results[$i][$ldap_result_jobtitle][0] : "";
+                $item["country"] = isset($results[$i][$ldap_result_country][0]) ? $results[$i][$ldap_result_country][0] : "";
+                $item["department"] = isset($results[$i][$ldap_result_dept][0]) ? $results[$i][$ldap_result_dept][0] : "";
+
+
+                $department = Department::firstOrCreate([
+                    'name' => $item["department"],
+                ]);
+
 
                 $user = User::where('username', $item["username"])->first();
                 if ($user) {
@@ -185,11 +208,40 @@ class LdapSync extends Command
                 $user->username = $item["username"];
                 $user->email = $item["email"];
                 $user->employee_num = e($item["employee_number"]);
+                $user->phone = $item["telephone"];
+                $user->jobtitle = $item["jobtitle"];
+                $user->country = $item["country"];
+                $user->department_id = $department->id;
 
                 // Sync activated state for Active Directory.
                 if ( array_key_exists('useraccountcontrol', $results[$i]) ) {
+                    /* The following is _probably_ the correct logic, but we can't use it because
+                       some users may have been dependent upon the previous behavior, and this
+                       could cause additional access to be available to users they don't want
+                       to allow to log in.
+
+                    $useraccountcontrol = $results[$i]['useraccountcontrol'][0];
+                    if(
+                        // based on MS docs at: https://support.microsoft.com/en-us/help/305144/how-to-use-useraccountcontrol-to-manipulate-user-account-properties
+                        ($useraccountcontrol & 0x200) && // is a NORMAL_ACCOUNT
+                        !($useraccountcontrol & 0x02) && // *and* _not_ ACCOUNTDISABLE
+                        !($useraccountcontrol & 0x10)    // *and* _not_ LOCKOUT
+                    ) {
+                        $user->activated = 1;
+                    } else {
+                        $user->activated = 0;
+                    } */
                   $enabled_accounts = [
-                    '512', '544', '66048', '66080', '262656', '262688', '328192', '328224', '4260352'
+                    '512',    // 0x200    NORMAL_ACCOUNT
+                    '544',    // 0x220    NORMAL_ACCOUNT, PASSWD_NOTREQD
+                    '66048',  // 0x10200  NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
+                    '66080',  // 0x10220  NORMAL_ACCOUNT, PASSWD_NOTREQD, DONT_EXPIRE_PASSWORD
+                    '262656', // 0x40200  NORMAL_ACCOUNT, SMARTCARD_REQUIRED
+                    '262688', // 0x40220  NORMAL_ACCOUNT, PASSWD_NOTREQD, SMARTCARD_REQUIRED
+                    '328192', // 0x50200  NORMAL_ACCOUNT, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
+                    '328224', // 0x50220  NORMAL_ACCOUNT, PASSWD_NOT_REQD, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
+                    '4260352',// 0x410200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, DONT_REQ_PREAUTH
+                    '1049088',// 0x100200 NORMAL_ACCOUNT, NOT_DELEGATED
                   ];
                   $user->activated = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
                 }
@@ -240,7 +292,7 @@ class LdapSync extends Command
                 }
             }
         } else if ($this->option('json_summary')) {
-            $json_summary = [ "error" => false, "error_message" => "", "summary" => $summary ];
+            $json_summary = [ "error" => false, "error_message" => "", "summary" => $summary ]; // hardcoding the error to false and the error_message to blank seems a bit weird
             $this->info(json_encode($json_summary));
         } else {
             return $summary;

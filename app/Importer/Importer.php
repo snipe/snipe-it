@@ -63,6 +63,10 @@ abstract class Importer
         'full_name' => 'full name',
         'email' => 'email',
         'username' => 'username',
+        'address' => 'address',
+        'city' => 'city',
+        'state' => 'state',
+        'country' => 'country',
         'jobtitle' => 'job title',
         'employee_num' => 'employee number',
         'phone_number' => 'phone number',
@@ -454,11 +458,7 @@ abstract class Importer
 
     public function fetchHumanBoolean($value)
     {
-        if (($value =='1') || (strtolower($value) =='true') || (strtolower($value) =='yes'))
-        {
-            return '1';
-        }
-        return '0';
+       return (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**

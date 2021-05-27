@@ -7,7 +7,7 @@
             <span class="input-group-addon">{{ trans('admin/hardware/form.months') }}</span>
         </div>
         <div class="col-md-9" style="padding-left: 0px;">
-            {!! $errors->first('warranty_months', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('warranty_months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
 </div>

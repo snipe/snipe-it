@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'O Priboru',
-    'about_accessories_text'  			=> 'Pribori su sve ono što je izdatao ali nema serijiski broj (ili nije važan za jedinstveno praćenje). Na primer: miševi, tastature, patch kabl i sl.',
     'accessory_category' 				=> 'Kategorija pribora',
     'accessory_name'  					=> 'Naziv pribora',
     'checkout'  							=> 'Izdaj pribor',

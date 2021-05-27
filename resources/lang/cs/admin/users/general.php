@@ -19,6 +19,7 @@ return array(
     'ldap_config_text'  => 'Nastavení konfigurace LDAP lze nalézt v menu Správce> Nastavení. Vybrané (volitelně) místo bude nastaven pro všechny importované uživatele.',
     'print_assigned'    => 'Vypsat všechna přiřazení',
     'software_user'     => 'Software vydaný pro :name',
+    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
     'view_user'         => 'Zobraz uživatele',
     'usercsv'           => 'CSV soubor',
     'two_factor_admin_optin_help' => 'Vaše současná nastavení administrátora umožňují selektivní vynucení dvoufaktorového ověřování.  ',

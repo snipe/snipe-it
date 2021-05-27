@@ -6,30 +6,37 @@ This is a reminder of the items currently checked out to you. If you feel this l
 @component('mail::table')
 
 @if ($assets->count() > 0)
+
 ## {{ $assets->count() }} Assets
-|{{ trans('mail.name') }} |{{ trans('mail.asset_tag') }} |
-|:------------- |:-------------|:---------|
+
+<table width="100%">
+<tr><th align="left">{{ trans('mail.name') }} </th><th align="left">{{ trans('mail.asset_tag') }}</th></tr>
 @foreach($assets as $asset)
-|{{ $asset->present()->name }} |{{ $asset->asset_tag }} |
+<tr><td>{{ $asset->present()->name }}</td><td> {{ $asset->asset_tag }} </td></tr>
 @endforeach
+</table>
 @endif
 
 @if ($accessories->count() > 0)
 ## {{ $accessories->count() }} Accessories
-|{{ trans('mail.name') }} |
-| |:------------- |
+
+<table width="100%">
+<tr><th align="left">{{ trans('mail.name') }} </th></tr>
 @foreach($accessories as $accessory)
-|{{ $accessory->name }} |
+<tr><td>{{ $accessory->name }}</td></tr>
 @endforeach
+</table>
 @endif
 
 @if ($licenses->count() > 0)
 ## {{ $licenses->count() }} Licenses
 
-| |:------------- |
+<table width="100%">
+<tr><th align="left"{{ trans('mail.name') }} </th></tr>
 @foreach($licenses as $license)
-|{{ $asset->$license }} |
+<tr><td>{{ $license->name }}</td></tr>
 @endforeach
+</table>
 @endif
 
 

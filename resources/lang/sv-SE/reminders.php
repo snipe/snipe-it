@@ -17,8 +17,8 @@ return array(
 
     "user"     => "Användarnamnet eller e-postadressen är felaktigt",
 
-    "token"    => "Stafetten för lösenordsåterställningen är felaktig.",
+    "token"    => "Denna token för lösenordsåterställning är ogiltig.",
 
-    "sent" => "Om en matchande e-postadress har hittats, så har en lösenordspåminnelse skickats!",
+    "sent" => "Om en matchande e-postadress hittades, har en lösenordspåminnelse skickats!",
 
 );

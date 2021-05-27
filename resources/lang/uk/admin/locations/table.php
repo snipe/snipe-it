@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Країна',
     'create'                    => 'Створити розташування',
     'update'                    => 'Оновити розташування',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Назва розташування',
     'address'                   => 'Адреса',
     'zip'                       => 'Поштовий код',

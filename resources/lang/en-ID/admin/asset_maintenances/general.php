@@ -7,5 +7,8 @@
         'view'               => 'Tampilkan Detail Pemeliharaan Aet',
         'repair'             => 'Perbaikan',
         'maintenance'        => 'Pemeliharaan',
-        'upgrade'            => 'Perbarui'
+        'upgrade'            => 'Perbarui',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

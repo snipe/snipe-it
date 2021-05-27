@@ -24,33 +24,37 @@
 <!-- row -->
 <div class="row">
     <!-- col-md-8 -->
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
 
         <form id="create-form" class="form-horizontal" method="post" action="{{ (isset($formAction)) ? $formAction : \Request::url()  }}" autocomplete="off" role="form" enctype="multipart/form-data">
 
         <!-- box -->
         <div class="box box-default">
             <!-- box-header -->
-            <div class="box-header with-border">
+            <div class="box-header with-border text-right">
 
-            <h3 class="box-title" style="min-height: 20px;">
-            @if (isset($helpText))
-                @include ('partials.more-info',
-                    [
-                        'helpText' => $helpText,
-                        'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
-                    ])
-            @endif
+                <div class="col-md-12 box-title text-right" style="padding: 0px; margin: 0px;">
 
-            @if ($item->id)
-            {{ $item->display_name }}
-            @endif
-            </h3>
-                @if (isset($topSubmit))
-                <div class="box-tools pull-right">
-                 @include('partials.forms.edit.submit-button')
+                    <div class="col-md-12" style="padding: 0px; margin: 0px;">
+                        <div class="col-md-9 text-left">
+                            @if ($item->id)
+                                <h2 class="box-title text-left" style="padding-top: 8px;">
+                                    {{ $item->display_name }}
+                                </h2>
+                            @endif
+                        </div>
+                        <div class="col-md-3 text-right" style="padding-right: 10px;">
+                            <a class="btn btn-link text-left" href="{{ URL::previous() }}">
+                                {{ trans('button.cancel') }}
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-check icon-white" aria-hidden="true"></i>
+                                {{ trans('general.save') }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                @endif
+
             </div><!-- /.box-header -->
 
             <!-- box-body -->

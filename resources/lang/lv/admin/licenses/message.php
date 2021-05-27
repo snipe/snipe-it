@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'Aktīvs, kuru jūs mēģināt saistīt ar šo licenci, ir īpašumā somene, kas nav persona, kas atlasīta nolaižamajā sarakstā piešķirtajam.',
     'assoc_users'	 => 'Šobrīd šī licence tiek izrakstīta lietotājam un to nevar izdzēst. Vispirms pārbaudiet licenci un pēc tam mēģiniet dzēst vēlreiz.',
     'select_asset_or_person' => 'Jums jāizvēlas aktīvs vai lietotājs, bet ne abi.',
+    'not_found' => 'License not found',
 
 
     'create' => array(

@@ -2,6 +2,10 @@
 
 namespace App\Presenters;
 
+use App\Helpers\Helper;
+use App\Models\Setting;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -168,21 +172,22 @@ class UserPresenter extends Presenter
                 "formatter" => "usersLinkObjFormatter"
             ],
             [
-                "field" => "assets_count",
-                "searchable" => false,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => ' <span class="hidden-md hidden-lg">Assets</span>'
-                            .'<span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>',
-                "visible" => true,
+                'field' => 'assets_count',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'escape' => true,
+                'class' => 'css-barcode',
+                'title' => 'Assets',
+                'visible' => true,
             ],
             [
                 "field" => "licenses_count",
                 "searchable" => false,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => ' <span class="hidden-md hidden-lg">Licenses</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-floppy-o fa-lg"></i></span>',
+                'class' => 'css-license',
+                "title" => 'License',
                 "visible" => true,
             ],
             [
@@ -190,8 +195,8 @@ class UserPresenter extends Presenter
                 "searchable" => false,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => ' <span class="hidden-md hidden-lg">Consumables</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-tint fa-lg"></i></span>',
+                'class' => 'css-consumable',
+                "title" => 'Consumables',
                 "visible" => true,
             ],
             [
@@ -199,8 +204,8 @@ class UserPresenter extends Presenter
                 "searchable" => false,
                 "sortable" => true,
                 "switchable" => true,
-                "title" => ' <span class="hidden-md hidden-lg">Accessories</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-keyboard-o fa-lg"></i></span>',
+                'class' => 'css-accessory',
+                "title" => 'Accessories',
                 "visible" => true,
             ],
             [
@@ -219,6 +224,15 @@ class UserPresenter extends Presenter
                 "title" => trans('general.groups'),
                 "visible" => true,
                 'formatter' => 'groupsFormatter'
+            ],
+            [
+                "field" => "ldap_import",
+                "searchable" => false,
+                "sortable" => true,
+                "switchable" => true,
+                "title" => trans('admin/settings/general.ldap_enabled'),
+                "visible" => false,
+                'formatter' => 'trueFalseFormatter'
             ],
             [
                 "field" => "two_factor_enrolled",
@@ -296,7 +310,7 @@ class UserPresenter extends Presenter
      */
     public function fullName()
     {
-        return "{$this->first_name} {$this->last_name}";
+        return html_entity_decode($this->first_name.' '.$this->last_name, ENT_QUOTES | ENT_XML1, 'UTF-8');
     }
 
     /**
@@ -316,21 +330,23 @@ class UserPresenter extends Presenter
     public function gravatar()
     {
 
+
         if ($this->avatar) {
-            return Storage::disk('public')->url('avatars/'.$this->avatar, $this->avatar);
+            return Storage::disk('public')->url('avatars/'.e($this->avatar));
         }
 
-        if ($this->email != '') {
-            /**
-             * @see https://en.gravatar.com/site/implement/images/
-             * Return a default [Myster Person] gravatar if the user does not have one
-             */
-            $gravatar = md5(strtolower(trim($this->email)));
-            // return "//gravatar.com/avatar/".$gravatar.'?d=mp';
+        if (Setting::getSettings()->load_remote=='1') {
+            if ($this->model->gravatar!='') {
+                $gravatar = md5(strtolower(trim($this->model->gravatar)));
+                return "//gravatar.com/avatar/".$gravatar;
+            } elseif ($this->email!='') {
+                $gravatar = md5(strtolower(trim($this->email)));
+                return "//gravatar.com/avatar/".$gravatar;
+            }
         }
 
-        // Set a fun, gender-neutral default icon when there is no email
-        return url('/img/default-sm.png');
+        // Set a fun, gender-neutral default icon
+        return url('/').'/img/default-sm.png';
 
     }
 
@@ -354,6 +370,6 @@ class UserPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fa fa-user"></i>';
+        return '<i class="fa fa-user" aria-hidden="true"></i>';
     }
 }

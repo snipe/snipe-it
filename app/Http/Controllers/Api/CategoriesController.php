@@ -31,7 +31,9 @@ class CategoriesController extends Controller
             $categories = $categories->TextSearch($request->input('search'));
         }
 
-        $offset = (($categories) && (request('offset') > $categories->count())) ? 0 : request('offset', 0);
+        // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
+        // case we override with the actual count, so we should return 0 items.
+        $offset = (($categories) && ($request->get('offset') > $categories->count())) ? $categories->count() : $request->get('offset', 0);
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
@@ -118,16 +120,12 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete', Category::class);
-        $category = Category::withCount('models as models_count', 'accessories as accessories_count','consumables as consumables_count','components as components_count')->findOrFail($id);
+        $category = Category::findOrFail($id);
 
-        if ($category->models_count > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'model'])));
-        } elseif ($category->accessories_count > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'accessory'])));
-        } elseif ($category->consumables_count > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'consumable'])));
-        } elseif ($category->components_count > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>'component'])));
+        if (!$category->isDeletable()) {
+            return response()->json(
+                Helper::formatStandardApiResponse('error', null,  trans('admin/categories/message.assoc_items', ['asset_type'=>$category->category_type]))
+            );
         }
         $category->delete();
         return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/categories/message.delete.success')));

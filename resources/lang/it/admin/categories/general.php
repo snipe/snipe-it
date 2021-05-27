@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Informazioni sulle categorie',
-    'about_categories'  				=> 'Le categorie ti aiutano a organizzare i tuoi articoli. Alcune categorie di esempio potrebbero essere &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot; e così via, ma è possibile utilizzare categorie in qualsiasi modo che ha senso per te.',
     'asset_categories' 					=> 'Categorie dei Beni',
     'category_name'  					=> 'Nome categoria',
     'checkin_email'                     => 'Invia email all\'utente al ritiro / consegna.',

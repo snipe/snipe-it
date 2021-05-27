@@ -8,6 +8,7 @@ return array(
     'owner_doesnt_match_asset' => 'L\'actif que vous essayez d\'associer avec cette licence est détenu par une autre personne que celle sélectionnée dans la liste déroulante.',
     'assoc_users'	 => 'Cette catégorie est associée au moins à un modèle et ne peut être supprimée. Veuillez actualiser vos modèles pour ne plus référencer cette catégorie et réessayer.',
     'select_asset_or_person' => 'Vous devez sélectionner un actif ou un utilisateur, mais pas les deux.',
+    'not_found' => 'Licence introuvable',
 
 
     'create' => array(

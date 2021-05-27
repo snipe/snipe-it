@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about_models_title'     => 'Over modellen',
-    'about_models_text'           => 'Modellen geven de mogelijkheid om identieke objecten te groeperen.',
-    'deleted'  					        => 'Dit model is verwijderd. <a href="/hardware/models/:model_id/restore">Klik hier om het te herstellen</a>.',
-    'bulk_delete'               => 'In bulk verwijderen van materiaalmodellen',
-    'bulk_delete_help'               => 'Gebruik de selectievakjes hieronder om het verwijderen van de geselecteerde modellen te bevestigen. Materiaalmodellen die nog gebruikt worden door materialen kunnen niet verwijderd worden voordat de materialen aan een ander model gekoppeld worden.',
-    'bulk_delete_warn'          => 'Je staat op het punt om :model_count modellen te verwijderen.',
+    'about_models_title'     => 'Over Asset Modellen',
+    'about_models_text'           => 'Assetmodellen zijn een manier om identieke assets te groeperen. "MBP 2013", "iPhone 6s", enz.',
+    'deleted'  					        => 'Dit asset is verwijderd. <a href="/hardware/models/:model_id/restore">Klik hier om het te herstellen</a>.',
+    'bulk_delete'               => 'In bulk verwijderen van assetmodellen',
+    'bulk_delete_help'               => 'Gebruik de selectievakjes hieronder om het verwijderen van de geselecteerde assetmodellen te bevestigen. Assetmodellen waarbij assets gekoppeld zijn, kunnen niet verwijderd worden totdat de assets gekoppeld zijn aan een ander model.',
+    'bulk_delete_warn'          => 'Je staat op het punt om :model_count assetmodellen te verwijderen.',
     'restore'                   => 'Herstel model',
     'requestable'               => 'Gebruikers mogen dit model aanvragen',
-	'show_mac_address'			      => 'Laat het MAC-adres veld zien in de producten van deze model',
+	'show_mac_address'			      => 'Toon MAC-adresveld in de assets van dit model',
     'view_deleted'              => 'Bekijk verwijderde',
     'view_models'               => 'Bekijk modelen',
     'fieldset'                  => 'Veldverzameling',

@@ -8,6 +8,7 @@ use App\Models\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * This class controls all actions related to Components for
@@ -120,6 +121,16 @@ class ComponentsController extends Controller
     {
         if (is_null($component = Component::find($componentId))) {
             return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
+        }
+        $min = $component->numCHeckedOut();
+        $validator = Validator::make($request->all(), [
+            "qty" => "required|numeric|min:$min"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $this->authorize('update', $component);

@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Pays',
     'create'                    => 'Créer un lieu',
     'update'                    => 'Mettre à jour le lieu',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Nom du lieu',
     'address'                   => 'Adresse',
     'zip'                       => 'Code postal',

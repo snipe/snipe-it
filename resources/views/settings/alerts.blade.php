@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('settings.index') }}" class="btn btn-default"> {{ trans('general.back') }}</a>
+    <a href="{{ route('settings.index') }}" class="btn btn-primary"> {{ trans('general.back') }}</a>
 @stop
 
 
@@ -31,9 +31,9 @@
 
             <div class="panel box box-default">
                 <div class="box-header with-border">
-                    <h4 class="box-title">
+                    <h2 class="box-title">
                         <i class="fa fa-bell"></i> Alerts
-                    </h4>
+                    </h2>
                 </div>
                 <div class="box-body">
 
@@ -70,8 +70,8 @@
                                 {{ Form::label('alert_email', trans('admin/settings/general.alert_email')) }}
                             </div>
                             <div class="col-md-7">
-                                {{ Form::text('alert_email', Request::old('alert_email', $setting->alert_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
-                                {!! $errors->first('alert_email', '<span class="alert-msg">:message</span><br>') !!}
+                                {{ Form::text('alert_email', old('alert_email', $setting->alert_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
+                                {!! $errors->first('alert_email', '<span class="alert-msg" aria-hidden="true">:message</span><br>') !!}
 
                                 <p class="help-block">Email addresses or distribution lists you want alerts to be sent to, comma separated</p>
 
@@ -86,8 +86,8 @@
                                 {{ Form::label('admin_cc_email', trans('admin/settings/general.admin_cc_email')) }}
                             </div>
                             <div class="col-md-7">
-                                {{ Form::text('admin_cc_email', Request::old('admin_cc_email', $setting->admin_cc_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
-                                {!! $errors->first('admin_cc_email', '<span class="alert-msg">:message</span><br>') !!}
+                                {{ Form::text('admin_cc_email', old('admin_cc_email', $setting->admin_cc_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
+                                {!! $errors->first('admin_cc_email', '<span class="alert-msg" aria-hidden="true">:message</span><br>') !!}
 
                                 <p class="help-block">{{ trans('admin/settings/general.admin_cc_email_help') }}</p>
 
@@ -101,8 +101,8 @@
                                 {{ Form::label('alert_interval', trans('admin/settings/general.alert_interval')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('alert_interval', Request::old('alert_interval', $setting->alert_interval), array('class' => 'form-control','placeholder' => '30', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
-                                {!! $errors->first('alert_interval', '<span class="alert-msg">:message</span>') !!}
+                                {{ Form::text('alert_interval', old('alert_interval', $setting->alert_interval), array('class' => 'form-control','placeholder' => '30', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {!! $errors->first('alert_interval', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -112,8 +112,8 @@
                                 {{ Form::label('alert_threshold', trans('admin/settings/general.alert_inv_threshold')) }}
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('alert_threshold', Request::old('alert_threshold', $setting->alert_threshold), array('class' => 'form-control','placeholder' => '5', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
-                                {!! $errors->first('alert_threshold', '<span class="alert-msg">:message</span>') !!}
+                                {{ Form::text('alert_threshold', old('alert_threshold', $setting->alert_threshold), array('class' => 'form-control','placeholder' => '5', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                                {!! $errors->first('alert_threshold', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
@@ -128,7 +128,7 @@
                                 <span class="input-group-addon">{{ trans('general.months') }}</span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
-                                {!! $errors->first('audit_interval', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('audit_interval', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 <p class="help-block">{{ trans('admin/settings/general.audit_interval_help') }}</p>
                             </div>
                         </div>
@@ -147,7 +147,7 @@
 
                             </div>
                             <div class="col-md-9 col-md-offset-3">
-                                {!! $errors->first('audit_warning_days', '<span class="alert-msg">:message</span>') !!}
+                                {!! $errors->first('audit_warning_days', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 <p class="help-block">{{ trans('admin/settings/general.audit_warning_days_help') }}</p>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

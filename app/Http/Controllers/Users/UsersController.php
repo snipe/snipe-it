@@ -5,6 +5,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserNotFoundException;
 use App\Http\Requests\SaveUserRequest;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Group;
@@ -14,12 +15,13 @@ use App\Models\User;
 use App\Notifications\WelcomeNotification;
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Password;
 use Input;
 use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use View;
-use Request;
+use Illuminate\Http\Request;
 
 
 /**
@@ -65,12 +67,12 @@ class UsersController extends Controller
 
         $userGroups = collect();
 
-        if (Request::old('groups')) {
-            $userGroups = Group::whereIn('id', Request::old('groups'))->pluck('name', 'id');
+        if ($request->old('groups')) {
+            $userGroups = Group::whereIn('id', $request->old('groups'))->pluck('name', 'id');
         }
 
         $permissions = config('permissions');
-        $userPermissions = Helper::selectedPermissionsArray($permissions, Request::old('permissions', array()));
+        $userPermissions = Helper::selectedPermissionsArray($permissions, $request->old('permissions', array()));
         $permissions = $this->filterDisplayable($permissions);
 
         $user = new User;
@@ -124,6 +126,10 @@ class UsersController extends Controller
             unset($permissions_array['superuser']);
         }
         $user->permissions =  json_encode($permissions_array);
+
+
+        // we have to invoke the
+        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
 
         if ($user->save()) {
             if ($request->filled('groups')) {
@@ -203,6 +209,7 @@ class UsersController extends Controller
      */
     public function update(SaveUserRequest $request, $id = null)
     {
+
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
         $permissions = $request->input('permissions', array());
@@ -218,24 +225,20 @@ class UsersController extends Controller
 
         try {
             $user = User::findOrFail($id);
-
-            if ($user->id == $request->input('manager_id')) {
-                return redirect()->back()->withInput()->with('error', 'You cannot be your own manager.');
-            }
-            $this->authorize('update', $user);
-            // Figure out of this user was an admin before this edit
-            $orig_permissions_array = $user->decodePermissions();
-            $orig_superuser = '0';
-            if (is_array($orig_permissions_array)) {
-                if (array_key_exists('superuser', $orig_permissions_array)) {
-                    $orig_superuser = $orig_permissions_array['superuser'];
-                }
-            }
         } catch (ModelNotFoundException $e) {
             return redirect()->route('users.index')
                 ->with('error', trans('admin/users/message.user_not_found', compact('id')));
         }
 
+        $this->authorize('update', $user);
+        // Figure out of this user was an admin before this edit
+        $orig_permissions_array = $user->decodePermissions();
+        $orig_superuser = '0';
+        if (is_array($orig_permissions_array)) {
+            if (array_key_exists('superuser', $orig_permissions_array)) {
+                $orig_superuser = $orig_permissions_array['superuser'];
+            }
+        }
 
         // Only save groups if the user is a super user
         if (Auth::user()->isSuperUser()) {
@@ -243,13 +246,11 @@ class UsersController extends Controller
         }
 
 
+        // Update the user
         if ($request->filled('username')) {
             $user->username = $request->input('username');
         }
         $user->email = $request->input('email');
-
-
-        // Update the user
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
@@ -290,6 +291,12 @@ class UsersController extends Controller
         }
 
         $user->permissions =  json_encode($permissions_array);
+
+        // Handle uploaded avatar
+        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
+
+
+        //\Log::debug(print_r($user, true));
 
         // Was the user updated?
         if ($user->save()) {
@@ -375,7 +382,7 @@ class UsersController extends Controller
     {
         $this->authorize('update', User::class);
         // Get user information
-        if (!$user = User::onlyTrashed()->find($id)) {
+        if (!User::onlyTrashed()->find($id)) {
             return redirect()->route('users.index')->with('error', trans('admin/users/messages.user_not_found'));
         }
 
@@ -610,5 +617,32 @@ class UsersController extends Controller
             ->with('consumables', $consumables)
             ->with('show_user', $show_user)
             ->with('settings', Setting::getSettings());
+    }
+
+
+    /**
+     * Send individual password reset email
+     *
+     * @author A. Gianotto
+     * @since [v5.0.15]
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function sendPasswordReset($id) {
+
+        if (($user = User::find($id)) &&  ($user->activated == '1') && ($user->email!='') && ($user->ldap_import == '0')) {
+            $credentials = ['email' => $user->email];
+
+            try {
+                \Password::sendResetLink($credentials, function (Message $message) use ($user) {
+                    $message->subject($this->getEmailSubject());
+                });
+                return redirect()->back()->with('success', trans('admin/users/message.password_reset_sent', ['email' => $user->email]));
+
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', ' Error sending email. :( ');
+            }
+
+        }
+        return redirect()->back()->with('error', 'User is not activated, is LDAP synced, or does not have an email address ');
     }
 }

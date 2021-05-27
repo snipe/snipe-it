@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,12 +9,15 @@
       :: {{ $snipeSettings->site_name }}
     </title>
     <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
       <meta name="apple-mobile-web-app-capable" content="yes">
-      <link rel="apple-touch-icon" href="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
-      <link rel="apple-touch-startup-image" href="{{ url('/') }}/uploads/{{ $snipeSettings->logo }}">
-      <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url('').e($snipeSettings->favicon) : 'favicon.ico' }} ">
+
+
+
+      <link rel="apple-touch-icon" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) : '/img/logo.png' }}">
+      <link rel="apple-touch-startup-image" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->logo)) : '/img/logo.png' }}">
+      <link rel="shortcut icon" type="image/ico" href="{{ ($snipeSettings) && ($snipeSettings->favicon!='') ?  Storage::disk('public')->url(e($snipeSettings->favicon)) : '/favicon.ico' }} ">
 
 
       <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -25,14 +28,17 @@
     </script>
 
     {{-- stylesheets --}}
-    <link rel="stylesheet" href="{{ mix('css/all.css') }}">
-    @if (($snipeSettings) && ($snipeSettings->skin!=''))
-    <link rel="stylesheet" href="{{ mix('css/skins/skin-'.$snipeSettings->skin.'.min.css') }}">
+    <link rel="stylesheet" href="{{ url(mix('css/dist/all.css')) }}">
+    @if (($snipeSettings) && ($snipeSettings->allow_user_skin==1) && Auth::check() && Auth::user()->present()->skin != '')
+        <link rel="stylesheet" href="{{ url(mix('css/dist/skins/skin-'.Auth::user()->present()->skin.'.min.css')) }}">
+    @else
+    <link rel="stylesheet" href="{{ url(mix('css/dist/skins/skin-'.($snipeSettings->skin!='' ? $snipeSettings->skin : 'blue').'.css')) }}">
     @endif
     {{-- page level css --}}
     @stack('css')
 
-    {{-- Custom header color --}}
+
+
     @if (($snipeSettings) && ($snipeSettings->header_color!=''))
     <style nonce="{{ csrf_token() }}">
         .main-header .navbar, .main-header .logo {
@@ -41,7 +47,7 @@
             background: linear-gradient(to bottom, {{ $snipeSettings->header_color }} 0%,{{ $snipeSettings->header_color }} 100%);
             border-color: {{ $snipeSettings->header_color }};
         }
-        .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
+        .skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} .sidebar-menu > li:hover > a, .skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} .sidebar-menu > li.active > a {
           border-left-color: {{ $snipeSettings->header_color }};
         }
 
@@ -59,6 +65,7 @@
     </style>
     @endif
 
+
     <script nonce="{{ csrf_token() }}">
           window.snipeit = {
               settings: {
@@ -70,14 +77,19 @@
     @routes
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js" integrity="sha384-qFIkRsVO/J5orlMvxK1sgAt2FXT67og+NyFTITYzvbIP1IJavVEKZM7YWczXkwpB" crossorigin="anonymous"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js" integrity="sha384-ZoaMbDF+4LeFxg6WdScQ9nnR1QC2MIRxA1O9KWEXQwns1G8UNyIEZIQidzb0T1fo" crossorigin="anonymous"></script>
-    <![endif]-->
+        <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>
+        <script src="{{ url(asset('js/respond.js')) }}" nonce="{{ csrf_token() }}"></script>
+
 
   </head>
-  <body class="sidebar-mini skin-blue {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
+
+  @if (($snipeSettings) && ($snipeSettings->allow_user_skin==1) && Auth::check() && Auth::user()->present()->skin != '')
+      <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? Auth::user()->present()->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
+  @else
+      <body class="sidebar-mini skin-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} {{ (session('menu_state')!='open') ? 'sidebar-mini sidebar-collapse' : ''  }}">
+  @endif
+
+  <a class="skip-main" href="#main">Skip to main content</a>
     <div class="wrapper">
 
       <header class="main-header">
@@ -91,133 +103,144 @@
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
-          <ul class="nav navbar-nav navbar-left">
-              <li class="left-navblock">
+          <div class="nav navbar-nav navbar-left">
+              <div class="left-navblock">
                  @if ($snipeSettings->brand == '3')
                       <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
                           @if ($snipeSettings->logo!='')
-                          <img class="navbar-brand-img" src="{{ Storage::disk('public')->url('').e($snipeSettings->logo) }}" alt="{{ $snipeSettings->site_name }} logo">
+                          <img class="navbar-brand-img" src="{{ Storage::disk('public')->url('/').e($snipeSettings->logo) }}" alt="{{ $snipeSettings->site_name }} logo">
                           @endif
                           {{ $snipeSettings->site_name }}
                       </a>
                   @elseif ($snipeSettings->brand == '2')
                       <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
                           @if ($snipeSettings->logo!='')
-                            <img class="navbar-brand-img" src="{{ Storage::disk('public')->url('').e($snipeSettings->logo) }}" alt="{{ $snipeSettings->site_name }} logo">
+                            <img class="navbar-brand-img" src="{{ Storage::disk('public')->url('/').e($snipeSettings->logo) }}" alt="{{ $snipeSettings->site_name }} logo">
                           @endif
+                          <span class="sr-only">{{ $snipeSettings->site_name }}</span>
                       </a>
                   @else
-                      <a class="logo no-hover" href="{{ url('/') }}">
+                      <a class="logo navbar-brand no-hover" href="{{ url('/') }}">
                           {{ $snipeSettings->site_name }}
                       </a>
                   @endif
-              </li>
-            </ul>
+              </div>
+            </div>
 
           <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
               <ul class="nav navbar-nav">
                   @can('index', \App\Models\Asset::class)
-                  <li {!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
-                      <a href="{{ url('hardware') }}">
-                          <i class="fa fa-barcode"></i>
+                  <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
+                      <a href="{{ url('hardware') }}" tabindex="-1">
+                          <i class="fa fa-barcode" aria-hidden="true"></i>
+                          <span class="sr-only">Assets</span>
                       </a>
                   </li>
                   @endcan
                   @can('view', \App\Models\License::class)
-                  <li {!! (Request::is('licenses*') ? ' class="active"' : '') !!}>
-                      <a href="{{ route('licenses.index') }}">
+                  <li aria-hidden="true"{!! (Request::is('licenses*') ? ' class="active"' : '') !!} tabindex="-1">
+                      <a href="{{ route('licenses.index') }}" tabindex="-1">
                           <i class="fa fa-floppy-o"></i>
+                          <span class="sr-only">Licenses</span>
                       </a>
                   </li>
                   @endcan
                   @can('index', \App\Models\Accessory::class)
-                  <li {!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
-                      <a href="{{ route('accessories.index') }}">
+                  <li aria-hidden="true"{!! (Request::is('accessories*') ? ' class="active"' : '') !!} tabindex="-1">
+                      <a href="{{ route('accessories.index') }}" tabindex="-1">
                           <i class="fa fa-keyboard-o"></i>
+                          <span class="sr-only">Accessories</span>
                       </a>
                   </li>
                   @endcan
                   @can('index', \App\Models\Consumable::class)
-                  <li {!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
-                      <a href="{{ url('consumables') }}">
+                  <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
+                      <a href="{{ url('consumables') }}" tabindex="-1">
                           <i class="fa fa-tint"></i>
+                          <span class="sr-only">Consumables</span>
                       </a>
                   </li>
                   @endcan
                   @can('view', \App\Models\Component::class)
-                  <li {!! (Request::is('components*') ? ' class="active"' : '') !!}>
-                      <a href="{{ route('components.index') }}">
+                  <li aria-hidden="true"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
+                      <a href="{{ route('components.index') }}" tabindex="-1">
                           <i class="fa fa-hdd-o"></i>
+                          <span class="sr-only">Components</span>
                       </a>
                   </li>
                   @endcan
 
                   @can('index', \App\Models\Asset::class)
+                  <li>
                   <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
                       <div class="col-xs-12 col-md-12">
                           <div class="col-xs-12 form-group">
                               <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
                               <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
-                              <input type="hidden" name="topsearch" value="true">
+                              <input type="hidden" name="topsearch" value="true" id="search">
                           </div>
                           <div class="col-xs-1">
-                              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-search"></i></button>
+                              <button type="submit" class="btn btn-primary pull-right">
+                                  <i class="fa fa-search" aria-hidden="true"></i>
+                                  <span class="sr-only">Search</span>
+                              </button>
                           </div>
                       </div>
                   </form>
+                  </li>
                   @endcan
 
                   @can('admin')
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <li class="dropdown" aria-hidden="true">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" tabindex="-1">
                       {{ trans('general.create') }}
-                      <b class="caret"></b>
+                      <strong class="caret"></strong>
                     </a>
                    <ul class="dropdown-menu">
                      @can('create', \App\Models\Asset::class)
                       <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
-                              <a href="{{ route('hardware.create') }}">
-                                  <i class="fa fa-barcode fa-fw"></i>
+                              <a href="{{ route('hardware.create') }}" tabindex="-1">
+                                  <i class="fa fa-barcode fa-fw" aria-hidden="true"></i>
                                   {{ trans('general.asset') }}
                               </a>
                       </li>
                        @endcan
                        @can('create', \App\Models\License::class)
                        <li {!! (Request::is('licenses/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('licenses.create') }}">
-                               <i class="fa fa-floppy-o fa-fw"></i>
+                           <a href="{{ route('licenses.create') }}" tabindex="-1">
+                               <i class="fa fa-floppy-o fa-fw" aria-hidden="true"></i>
                                {{ trans('general.license') }}
                            </a>
                        </li>
                        @endcan
                        @can('create', \App\Models\Accessory::class)
                        <li {!! (Request::is('accessories/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('accessories.create') }}">
-                               <i class="fa fa-keyboard-o fa-fw"></i>
+                           <a href="{{ route('accessories.create') }}" tabindex="-1">
+                               <i class="fa fa-keyboard-o fa-fw" aria-hidden="true"></i>
                                {{ trans('general.accessory') }}</a>
                        </li>
                        @endcan
                        @can('create', \App\Models\Consumable::class)
                        <li {!! (Request::is('consunmables/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('consumables.create') }}">
-                               <i class="fa fa-tint fa-fw"></i>
+                           <a href="{{ route('consumables.create') }}" tabindex="-1">
+                               <i class="fa fa-tint fa-fw" aria-hidden="true"></i>
                                {{ trans('general.consumable') }}
                            </a>
                        </li>
                        @endcan
                        @can('create', \App\Models\Component::class)
                        <li {!! (Request::is('components/create') ? 'class="active"' : '') !!}>
-                           <a href="{{ route('components.create') }}">
-                           <i class="fa fa-hdd-o fa-fw"></i>
+                           <a href="{{ route('components.create') }}" tabindex="-1">
+                           <i class="fa fa-hdd-o fa-fw" aria-hidden="true"></i>
                            {{ trans('general.component') }}
                            </a>
                        </li>
                        @endcan
                          @can('create', \App\Models\User::class)
                              <li {!! (Request::is('users/create') ? 'class="active"' : '') !!}>
-                                 <a href="{{ route('users.create') }}">
-                                     <i class="fa fa-user fa-fw"></i>
+                                 <a href="{{ route('users.create') }}" tabindex="-1">
+                                     <i class="fa fa-user fa-fw" aria-hidden="true"></i>
                                      {{ trans('general.user') }}
                                  </a>
                              </li>
@@ -233,7 +256,8 @@
 
                <li class="dropdown tasks-menu">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                   <i class="fa fa-flag-o"></i>
+                   <i class="fa fa-flag-o" aria-hidden="true"></i>
+                     <span class="sr-only">Alerts</span>
                    @if (count($alert_items))
                     <span class="label label-danger">{{ count($alert_items) }}</span>
                    @endif
@@ -244,15 +268,15 @@
                      <!-- inner menu: contains the actual data -->
                      <ul class="menu">
 
-                      @for($i=0; count($alert_items) > $i; $i++)
+                      @for($i = 0; count($alert_items) > $i; $i++)
 
                         <li><!-- Task item -->
                           <a href="{{route($alert_items[$i]['type'].'.show', $alert_items[$i]['id'])}}">
-                            <h3>{{ $alert_items[$i]['name'] }}
+                            <h2>{{ $alert_items[$i]['name'] }}
                               <small class="pull-right">
                                 {{ $alert_items[$i]['remaining'] }} remaining
                               </small>
-                            </h3>
+                            </h2>
                             <div class="progress xs">
                               <div class="progress-bar progress-bar-yellow" style="width: {{ $alert_items[$i]['percent'] }}%" role="progressbar" aria-valuenow="{{ $alert_items[$i]['percent'] }}" aria-valuemin="0" aria-valuemax="100">
                                 <span class="sr-only">{{ $alert_items[$i]['percent'] }}% Complete</span>
@@ -278,24 +302,24 @@
                <li class="dropdown user user-menu">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    @if (Auth::user()->present()->gravatar())
-                       <img src="{{ Auth::user()->present()->gravatar() }}" class="user-image" alt="User Image">
+                       <img src="{{ Auth::user()->present()->gravatar() }}" class="user-image" alt="">
                    @else
-                      <i class="fa fa-user fa-fws"></i>
+                      <i class="fa fa-user fa-fws" aria-hidden="true"></i>
                    @endif
 
-                   <span class="hidden-xs">{{ Auth::user()->first_name }} <b class="caret"></b></span>
+                   <span class="hidden-xs">{{ Auth::user()->first_name }} <strong class="caret"></strong></span>
                  </a>
                  <ul class="dropdown-menu">
                    <!-- User image -->
                      <li {!! (Request::is('account/profile') ? ' class="active"' : '') !!}>
                        <a href="{{ route('view-assets') }}">
-                             <i class="fa fa-check fa-fw"></i>
+                             <i class="fa fa-check fa-fw" aria-hidden="true"></i>
                              {{ trans('general.viewassets') }}
                        </a></li>
 
                      <li {!! (Request::is('account/requested') ? ' class="active"' : '') !!}>
                          <a href="{{ route('account.requested') }}">
-                             <i class="fa fa-check fa-disk fa-fw"></i>
+                             <i class="fa fa-check fa-disk fa-fw" aria-hidden="true"></i>
                              Requested Assets
                          </a></li>
                      <li {!! (Request::is('account/accept') ? ' class="active"' : '') !!}>
@@ -308,13 +332,13 @@
 
                      <li>
                           <a href="{{ route('profile') }}">
-                             <i class="fa fa-user fa-fw"></i>
+                             <i class="fa fa-user fa-fw" aria-hidden="true"></i>
                               {{ trans('general.editprofile') }}
                          </a>
                      </li>
                      <li>
                          <a href="{{ route('account.password.index') }}">
-                             <i class="fa fa-asterisk fa-fw"></i>
+                             <i class="fa fa-asterisk fa-fw" aria-hidden="true"></i>
                              {{ trans('general.changepassword') }}
                          </a>
                      </li>
@@ -324,14 +348,14 @@
                      @can('self.api')
                      <li>
                          <a href="{{ route('user.api') }}">
-                             <i class="fa fa-user-secret fa-fw"></i> Manage API Keys
+                             <i class="fa fa-user-secret fa-fw" aria-hidden="true"></i> Manage API Keys
                          </a>
                      </li>
                      @endcan
                      <li class="divider"></li>
                      <li>
                          <a href="{{ url('/logout') }}">
-                             <i class="fa fa-sign-out fa-fw"></i>
+                             <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>
                              {{ trans('general.logout') }}
                          </a>
                      </li>
@@ -343,7 +367,8 @@
                @can('superadmin')
                <li>
                    <a href="{{ route('settings.index') }}">
-                       <i class="fa fa-cogs fa-fw"></i>
+                       <i class="fa fa-cogs fa-fw" aria-hidden="true"></i>
+                       <span class="sr-only">{{ trans('general.admin') }}</span>
                    </a>
                </li>
                @endcan
@@ -366,36 +391,38 @@
             @can('admin')
             <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!}>
               <a href="{{ route('home') }}">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <i class="fa fa-dashboard" aria-hidden="true"></i> <span>Dashboard</span>
               </a>
             </li>
             @endcan
             @can('index', \App\Models\Asset::class)
             <li class="treeview{{ (Request::is('hardware*') ? ' active' : '') }}">
-                <a href="#"><i class="fa fa-barcode"></i>
+                <a href="#"><i class="fa fa-barcode" aria-hidden="true"></i>
                   <span>{{ trans('general.assets') }}</span>
                   <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                   <li>
-                    <a href="{{ url('hardware') }}">
+                      <a href="{{ url('hardware') }}">
+                          <i class="fa fa-circle-o text-grey" aria-hidden="true"></i>
                         {{ trans('general.list_all') }}
                     </a>
                   </li>
 
-                    <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav', '=', 1)->get(); ?>
+                    <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav', '=', 1)->withCount('assets as asset_count')->get(); ?>
                     @if (count($status_navs) > 0)
-                        <li class="divider">&nbsp;</li>
                         @foreach ($status_navs as $status_nav)
-                            <li><a href="{{ route('statuslabels.show', ['id' => $status_nav->id]) }}"}> {{ $status_nav->name }}</a></li>
+                            <li><a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}"><i class="fa fa-circle text-grey" aria-hidden="true"></i> {{ $status_nav->name }} ({{ $status_nav->asset_count }})</a></li>
                         @endforeach
                     @endif
 
 
                   <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
-                    <a href="{{ url('hardware?status=Deployed') }}"><i class="fa fa-circle-o text-blue"></i>
+                    <a href="{{ url('hardware?status=Deployed') }}">
+                        <i class="fa fa-circle-o text-blue"></i>
                         {{ trans('general.all') }}
                         {{ trans('general.deployed') }}
+                        ({{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }})
                     </a>
                   </li>
                   <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
@@ -403,21 +430,25 @@
                         <i class="fa fa-circle-o text-green"></i>
                         {{ trans('general.all') }}
                         {{ trans('general.ready_to_deploy') }}
+                        ({{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }})
                     </a>
                   </li>
                   <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}"><i class="fa fa-circle-o text-orange"></i>
                           {{ trans('general.all') }}
                           {{ trans('general.pending') }}
+                          ({{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }})
                       </a>
                   </li>
                   <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ url('hardware?status=Undeployable') }}"><i class="fa fa-times text-red"></i>
                           {{ trans('general.all') }}
                           {{ trans('general.undeployable') }}
+                          ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
                       </a>
                   </li>
                   <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Archived') }}"><i class="fa fa-times text-red"></i>
                           {{ trans('general.all') }}
                           {{ trans('admin/hardware/general.archived') }}
+                          ({{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }})
                           </a>
                   </li>
                     <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Requestable') }}"><i class="fa fa-check text-blue"></i>
@@ -541,7 +572,7 @@
             @can('backend.interact')
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-gear"></i>
+                        <i class="fa fa-gear" aria-hidden="true"></i>
                         <span>{{ trans('general.settings') }}</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
@@ -702,7 +733,7 @@
 
       <!-- Content Wrapper. Contains page content -->
 
-      <div class="content-wrapper">
+      <div class="content-wrapper" role="main">
 
           @if ($debug_in_production)
               <div class="row" style="margin-bottom: 0px; background-color: red; color: white; font-size: 15px;">
@@ -720,6 +751,14 @@
 
 
           </h1>
+
+            @if (isset($helpText))
+            @include ('partials.more-info',
+                                   [
+                                       'helpText' => $helpText,
+                                       'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
+                                   ])
+            @endif
           <div class="pull-right">
             @yield('header_right')
           </div>
@@ -729,7 +768,8 @@
         </section>
 
 
-        <section class="content">
+        <section class="content" id="main" tabindex="-1">
+
           <!-- Notifications -->
           <div class="row">
               @if (config('app.lock_passwords'))
@@ -758,7 +798,7 @@
         <div class="pull-right hidden-xs">
           @if ($snipeSettings->version_footer!='off')
               @if (($snipeSettings->version_footer=='on') || (($snipeSettings->version_footer=='admin') && (Auth::user()->isSuperUser()=='1')))
-                &nbsp; <b>Version</b> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
+                &nbsp; <strong>Version</strong> {{ config('version.app_version') }} - build {{ config('version.build_version') }} ({{ config('version.branch') }})
               @endif
           @endif
 
@@ -781,7 +821,8 @@
               </div>
           @endif
           
-        <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
+
+          <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
       </footer>
 
 
@@ -796,7 +837,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
+                    <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
                 </div>
                 <div class="modal-body"></div>
                 <div class="modal-footer">
@@ -813,8 +854,11 @@
     </div>
 
     {{-- Javascript files --}}
-    <script src="{{ url(mix('js/app.js')) }}" nonce="{{ csrf_token() }}"></script>
-    <script src="{{ url(mix('js/vendor.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+
+    <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
+    <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
+
     {{-- Page level javascript --}}
     @stack('js')
 
@@ -823,18 +867,27 @@
 
 
     <script nonce="{{ csrf_token() }}">
+
+
+        // ignore: 'input[type=hidden]' is required here to validate the select2 lists
         $.validate({
             form : '#create-form',
             modules : 'date, toggleDisabled',
             disabledFormFilter : '#create-form',
-            showErrorDialogs : true
+            showErrorDialogs : true,
+            ignore: 'input[type=hidden]'
         });
+
+
+
+
 
         $(function () {
   
             $('[data-toggle="tooltip"]').tooltip();
             $('[data-toggle="popover"]').popover();
             $('.select2 span').addClass('needsclick');
+            $('.select2 span').removeAttr('title');
 
             // This javascript handles saving the state of the menu (expanded or not)
             $('body').bind('expanded.pushMenu', function() {

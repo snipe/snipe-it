@@ -3,7 +3,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">{{ trans('admin/models/table.create') }}</h4>
+            <h2 class="modal-title">{{ trans('admin/models/table.create') }}</h4>
         </div>
         <div class="modal-body">
             <form action="{{ route('api.models.store') }}" onsubmit="return false">
@@ -19,15 +19,14 @@
                     <div class="col-md-4 col-xs-12"><label for="modal-manufacturer_id">{{ trans('general.manufacturer') }}:
                         </label></div>
                     <div class="col-md-8 col-xs-12 required">
-                        <select class="js-data-ajax" data-endpoint="manufacturers" name="manufacturer_id" style="width: 100%" id="modal-manufactuer_id" />
+                        <select class="js-data-ajax" data-endpoint="manufacturers" name="manufacturer_id" style="width: 100%" id="modal-manufactuer_id"></select>
                     </div>
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-category_id">{{ trans('general.category') }}:
-                        </label></div>
+                    <div class="col-md-4 col-xs-12"><label for="modal-category_id">{{ trans('general.category') }}:</label></div>
                     <div class="col-md-8 col-xs-12 required">
-                        <select class="js-data-ajax" data-endpoint="categories/asset" name="category_id" style="width: 100%" id="modal-category_id" />
+                        <select class="js-data-ajax" data-endpoint="categories/asset" name="category_id" style="width: 100%" id="modal-category_id"></select>
                     </div>
                 </div>
 

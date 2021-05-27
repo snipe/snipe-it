@@ -1,8 +1,6 @@
 <?php
 
 return array(
-    'about_categories_title' 			=> 'Oor Kategorieë',
-    'about_categories'  				=> 'Kategorieë help jou om jou items te organiseer. Sommige voorbeeldkategorieë kan wees &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, ensovoorts, maar jy kan kategorieë gebruik wat vir jou sin maak.',
     'asset_categories' 					=> 'Bate kategorieë',
     'category_name'  					=> 'Kategorie Naam',
     'checkin_email'                     => 'Stuur e-pos aan gebruiker by aanmelding/afmelding.',

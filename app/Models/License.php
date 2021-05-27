@@ -36,6 +36,13 @@ class License extends Depreciable
 
     protected $guarded = 'id';
     protected $table = 'licenses';
+
+    protected $casts = [
+        'seats'   => 'integer',
+        'category_id'  => 'integer',
+        'company_id'   => 'integer',
+    ];
+
     protected $rules = array(
         'name'   => 'required|string|min:3|max:255',
         'seats'   => 'required|min:1|max:999|integer',
@@ -101,6 +108,7 @@ class License extends Depreciable
       'manufacturer' => ['name'],
       'company'      => ['name'],
       'category'     => ['name'],
+      'depreciation' => ['name'],
     ];
 
     /**

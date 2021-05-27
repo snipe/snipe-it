@@ -12,5 +12,6 @@ return array(
     'submit'  	                => 'שלח',
     'upload'                    => 'העלה',
 	'select_file'				=> 'בחר קובץ...',
-    'select_files'				=> 'Select Files...',
+    'select_files'				=> 'בחר קבצים...',
+    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
 );

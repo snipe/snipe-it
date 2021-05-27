@@ -2,33 +2,33 @@
 
 return array(
 
-    'does_not_exist' => 'Kulutusta ei ole olemassa.',
+    'does_not_exist' => 'Kulutustarviketta ei ole.',
 
     'create' => array(
-        'error'   => 'Kulutusta ei luotu, yritä uudelleen.',
+        'error'   => 'Kulutustarviketta ei luotu, yritä uudelleen.',
         'success' => 'Kulutustarvike luotiin onnistuneesti.'
     ),
 
     'update' => array(
-        'error'   => 'Kulutusta ei ole päivitetty, yritä uudelleen',
-        'success' => 'Kulutettu päivitetty onnistuneesti.'
+        'error'   => 'Kulutustarviketta ei päivitetty, yritä uudelleen',
+        'success' => 'Kulutustarvike päivitettiin onnistuneesti.'
     ),
 
     'delete' => array(
         'confirm'   => 'Haluatko varmasti poistaa tämän kulutustarvikkeen?',
         'error'   => 'Kulutustarvikkeen poistamisessa oli ongelma. Yritä uudelleen.',
-        'success' => 'Kulutustulos poistettiin onnistuneesti.'
+        'success' => 'Kulutustarvike poistettiin onnistuneesti.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Kulutusta ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Kulutettu tarkistettu onnistuneesti.',
+        'error'   		=> 'Kulutustarviketta ei luovutettu, yritä uudelleen',
+        'success' 		=> 'Kulutustarvike luovutettiin.',
         'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Kulutusta ei ole tarkistettu, yritä uudelleen',
-        'success' 		=> 'Kulutustarkastus onnistui.',
+        'error'   		=> 'Kulutustarviketta ei palautettu, yritä uudelleen',
+        'success' 		=> 'Kulutustarvike palautettiin.',
         'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
     )
 

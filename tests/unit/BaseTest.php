@@ -16,7 +16,9 @@ class BaseTest extends \Codeception\TestCase\Test
     protected function signIn($user = null)
     {
         if (!$user) {
-            $user = factory(User::class)->states('superuser')->create();
+            $user = factory(User::class)->states('superuser')->create([
+                'location_id' => $this->createValidLocation()->id
+            ]);
         }
         Auth::login($user);
 
@@ -78,17 +80,24 @@ class BaseTest extends \Codeception\TestCase\Test
 
     protected function createValidUser($overrides= [])
     {
-        return factory(App\Models\User::class)->create($overrides);
+        return factory(App\Models\User::class)->create(
+            array_merge([ 
+                'location_id'=>$this->createValidLocation()->id 
+            ], $overrides)
+        );
     }
 
     protected function createValidAsset($overrides = [])
     {
-        $locId = $this->createValidLocation();
+        $locId = $this->createValidLocation()->id;
         $this->createValidAssetModel();
-        return factory(\App\Models\Asset::class)->states('laptop-mbp')->create([
-            'rtd_location_id' => $locId,
-            'location_id' => $locId
-        ], $overrides);
+        return factory(\App\Models\Asset::class)->states('laptop-mbp')->create(
+            array_merge([
+                'rtd_location_id' => $locId,
+                'location_id' => $locId,
+                'supplier_id' => $this->createValidSupplier()->id
+            ], $overrides)
+        );
     }
 
 

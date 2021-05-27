@@ -7,5 +7,8 @@
         'view'               => 'Vaadake varahalduse üksikasju',
         'repair'             => 'Remont',
         'maintenance'        => 'Hooldus',
-        'upgrade'            => 'Uuendage'
+        'upgrade'            => 'Uuendage',
+        'calibration'        => 'Calibration',
+        'software_support'   => 'Software Support',
+        'hardware_support'   => 'Hardware Support',
     ];

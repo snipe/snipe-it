@@ -5,8 +5,8 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
-ini_set('max_execution_time', 600); //600 seconds = 10 minutes
-ini_set('memory_limit', '500M');
+ini_set('max_execution_time', env('IMPORT_TIME_LIMIT', 600)); //600 seconds = 10 minutes
+ini_set('memory_limit', env('IMPORT_MEMORY_LIMIT', '500M'));
 
 /**
  * Class ObjectImportCommand
@@ -55,8 +55,10 @@ class ObjectImportCommand extends Command
                  ->setShouldNotify($this->option('send-welcome'))
                  ->setUsernameFormat($this->option('username_format'));
 
-        $logFile = $this->option('logfile');
-        \Log::useFiles($logFile);
+
+        // This $logFile/useFiles() bit is currently broken, so commenting it out for now
+        // $logFile = $this->option('logfile');
+        // \Log::useFiles($logFile);
         $this->comment('======= Importing Items from '.$filename.' =========');
         $importer->import();
 

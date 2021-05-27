@@ -94,7 +94,7 @@ class AcceptanceController extends Controller {
         if (!Storage::exists('private_uploads/signatures'))  Storage::makeDirectory('private_uploads/signatures', 775);
 
 
-
+        $sig_filename = '';
         if ($request->filled('signature_output')) {
             $sig_filename = "siglog-" .Str::uuid() . '-'.date('Y-m-d-his').".png";
             $data_uri = e($request->input('signature_output'));

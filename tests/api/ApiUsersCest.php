@@ -65,6 +65,7 @@ class ApiUsersCest
             'notes' => $temp_user->notes,
             'manager_id' => $temp_user->manager_id,
             'password' => $temp_user->password,
+            'password_confirmation' => $temp_user->password,
             'phone' => $temp_user->phone,
             'state' => $temp_user->state,
             'username' => $temp_user->username,

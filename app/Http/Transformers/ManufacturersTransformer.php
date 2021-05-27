@@ -41,9 +41,9 @@ class ManufacturersTransformer
             ];
 
             $permissions_array['available_actions'] = [
-                'update' => (($manufacturer->deleted_at=='') && (Gate::allows('update', Manufacturer::class))) ? true : false,
-                'restore' => (($manufacturer->deleted_at!='') && (Gate::allows('create', Manufacturer::class))) ? true : false,
-                'delete' => (Gate::allows('delete', Manufacturer::class) && ($manufacturer->assets_count == 0)  && ($manufacturer->licenses_count==0)  && ($manufacturer->consumables_count==0)  && ($manufacturer->accessories_count==0)  && ($manufacturer->deleted_at=='')) ? true : false,
+                'update' => (($manufacturer->deleted_at=='') && (Gate::allows('update', Manufacturer::class))),
+                'restore' => (($manufacturer->deleted_at!='') && (Gate::allows('create', Manufacturer::class))),
+                'delete' => $manufacturer->isDeletable(),
             ];
 
             $array += $permissions_array;

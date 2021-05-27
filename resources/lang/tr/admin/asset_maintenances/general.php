@@ -7,5 +7,8 @@
         'view'               => 'Varlık Bakım Detaylarını Gör',
         'repair'             => 'Onar',
         'maintenance'        => 'Bakım',
-        'upgrade'            => 'Yükselt'
+        'upgrade'            => 'Yükselt',
+        'calibration'        => 'Kalibrasyon',
+        'software_support'   => 'Yazılım Desteği',
+        'hardware_support'   => 'Donanım Desteği',
     ];

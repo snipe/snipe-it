@@ -19,6 +19,12 @@ class SaveUserRequest extends FormRequest
         return true;
     }
 
+    public function response(array $errors)
+    {
+        return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
+    }
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -27,7 +33,9 @@ class SaveUserRequest extends FormRequest
     public function rules()
     {
 
-        $rules = [];
+        $rules = [
+            'manager_id' => "nullable|exists:users,id"
+        ];
 
         switch($this->method())
         {

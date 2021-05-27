@@ -7,5 +7,8 @@
         'view'               => 'Skatīt aktīvu uzturēšanas informāciju',
         'repair'             => 'Remonts',
         'maintenance'        => 'Apkope',
-        'upgrade'            => 'Jaunināt'
+        'upgrade'            => 'Jaunināt',
+        'calibration'        => 'Kalibrācija',
+        'software_support'   => 'Programmatūras atbalsts',
+        'hardware_support'   => 'Aparatūras atbalsts',
     ];
