@@ -180,6 +180,17 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->checkPermissionSection('superuser');
     }
 
+     /**
+     * Checks if the user (permision group) is a MultiCompany
+     *
+     * @author R.Florek
+     * @since [v1.0]
+     * @return boolean
+     */    
+	public function isMultiCompany()
+    {
+        return $this->checkPermissionSection('multicompany');
+    }
 
     /**
      * Establishes the user -> company relationship
