@@ -72,7 +72,7 @@
     "codeception/module-rest": "^1.2",
     "codeception/module-webdriver": "^1.0",
     "fzaninotto/faker": "^1.9",
-    "overtrue/phplint": "^2.2",
+    "overtrue/phplint": "^3.0",
     "phpunit/php-token-stream": "^3.1",
     "phpunit/phpunit": "^8.5",
     "squizlabs/php_codesniffer": "^3.5",

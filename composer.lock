@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e0e7a5006d7556af7637d14ed2ad9ece",
+    "content-hash": "b5554c36ddddbc10d46b00b7df31d3e2",
     "packages": [
         {
             "name": "adldap2/adldap2",
@@ -11379,16 +11379,16 @@
         },
         {
             "name": "overtrue/phplint",
-            "version": "2.4.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/phplint.git",
-                "reference": "59affacd0b09a1460e39acf2c64c963ddbf734cf"
+                "reference": "2d68ee8ab9083041a297cb6897ccec6290814c88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/phplint/zipball/59affacd0b09a1460e39acf2c64c963ddbf734cf",
-                "reference": "59affacd0b09a1460e39acf2c64c963ddbf734cf",
+                "url": "https://api.github.com/repos/overtrue/phplint/zipball/2d68ee8ab9083041a297cb6897ccec6290814c88",
+                "reference": "2d68ee8ab9083041a297cb6897ccec6290814c88",
                 "shasum": ""
             },
             "require": {
@@ -11443,9 +11443,9 @@
             ],
             "support": {
                 "issues": "https://github.com/overtrue/phplint/issues",
-                "source": "https://github.com/overtrue/phplint/tree/2.4.1"
+                "source": "https://github.com/overtrue/phplint/tree/3.0.0"
             },
-            "time": "2021-06-02T16:18:33+00:00"
+            "time": "2021-06-02T13:27:41+00:00"
         },
         {
             "name": "phar-io/manifest",
