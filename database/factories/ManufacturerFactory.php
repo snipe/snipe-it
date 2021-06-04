@@ -1,134 +1,226 @@
 <?php
+namespace Database\Factories;
 
-/*
-|--------------------------------------------------------------------------
-| Asset Model Factories
-|--------------------------------------------------------------------------
-|
-| Factories related exclusively to creating models ..
-|
-*/
-
-$factory->define(App\Models\Manufacturer::class, function (Faker\Generator $faker) {
-    return [
-        'user_id' => 1,
-        'support_phone' => $faker->phoneNumber(),
-        'url' => $faker->url(),
-        'support_email' => $faker->safeEmail(),
-    ];
-});
+use App\Models\Manufacturer;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 
-// 1
-$factory->state(App\Models\Manufacturer::class, 'apple', function ($faker) {
-    return [
-        'name' => 'Apple',
-        'url' => 'https://apple.com',
-        'support_url' => 'https://support.apple.com',
-        'image' => 'apple.jpg',
-    ];
-});
 
-// 2
-$factory->state(App\Models\Manufacturer::class, 'microsoft', function ($faker) {
-    return [
-        'name' => 'Microsoft',
-        'url' => 'https://microsoft.com',
-        'support_url' => 'https://support.microsoft.com',
-        'image' => 'microsoft.png',
-    ];
-});
+class ManufacturerFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Manufacturer::class;
 
-// 3
-$factory->state(App\Models\Manufacturer::class, 'dell', function ($faker) {
-    return [
-        'name' => 'Dell',
-        'url' => 'https://dell.com',
-        'support_url' => 'https://support.dell.com',
-        'image' => 'dell.png',
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'user_id' => 1,
+            'support_phone' => $this->faker->phoneNumber(),
+            'url' => $this->faker->url(),
+            'support_email' => $this->faker->safeEmail(),
 
-// 4
-$factory->state(App\Models\Manufacturer::class, 'asus', function ($faker) {
-    return [
-        'name' => 'Asus',
-        'url' => 'https://asus.com',
-        'support_url' => 'https://support.asus.com',
-        'image' => 'asus.png',
-    ];
-});
+        ];
 
-// 5
-$factory->state(App\Models\Manufacturer::class, 'hp', function ($faker) {
-    return [
-        'name' => 'HP',
-        'url' => 'https://hp.com',
-        'support_url' => 'https://support.hp.com',
-        'image' => 'hp.png',
-    ];
-});
+    }
 
-// 6
-$factory->state(App\Models\Manufacturer::class, 'lenovo', function ($faker) {
-    return [
-        'name' => 'Lenovo',
-        'url' => 'https://lenovo.com',
-        'support_url' => 'https://support.lenovo.com',
-        'image' => 'lenovo.jpg',
-    ];
-});
+    /**
+     * Apple
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function mfgApple()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'Apple',
+                'url' => 'https://apple.com',
+                'support_url' => 'https://support.apple.com',
+                'image' => 'apple.jpg',
+            ];
+        });
+    }
 
-// 7
-$factory->state(App\Models\Manufacturer::class, 'lg', function ($faker) {
-    return [
-        'name' => 'LG',
-        'url' => 'https://lg.com',
-        'support_url' => 'https://support.lg.com',
-        'image' => 'lg.jpg',
-    ];
-});
+    /**
+     * Microsoft
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function mfgMicrosoft()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'Microsoft',
+                'url' => 'https://microsoft.com',
+                'support_url' => 'https://support.microsoft.com',
+                'image' => 'microsoft.png',
+            ];
+        });
+    }
 
-// 8
-$factory->state(App\Models\Manufacturer::class, 'polycom', function ($faker) {
-    return [
-        'name' => 'Polycom',
-        'url' => 'https://polycom.com',
-        'support_url' => 'https://support.polycom.com',
-        'image' => 'polycom.png',
-    ];
-});
+    /**
+     * Dell
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function mfgDell()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'Dell',
+                'url' => 'https://dell.com',
+                'support_url' => 'https://support.dell.com',
+                'image' => 'dell.png',
+            ];
+        });
+    }
 
-// 9
-$factory->state(App\Models\Manufacturer::class, 'adobe', function ($faker) {
-    return [
-        'name' => 'Adobe',
-        'url' => 'https://adobe.com',
-        'support_url' => 'https://support.adobe.com',
-        'image' => 'adobe.jpg',
-    ];
-});
+    /**
+     * ASUS
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function mfgAsus()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'Asus',
+                'url' => 'https://asus.com',
+                'support_url' => 'https://support.asus.com',
+                'image' => 'asus.png',
+            ];
+        });
+    }
+
+    /**
+     * HP
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function mfgHp()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'HP',
+                'url' => 'https://hp.com',
+                'support_url' => 'https://support.hp.com',
+                'image' => 'hp.png',
+            ];
+        });
+    }
+
+    /**
+     * Lenovo
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function mfgLenovo()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'Lenovo',
+                'url' => 'https://lenovo.com',
+                'support_url' => 'https://support.lenovo.com',
+                'image' => 'lenovo.jpg',
+            ];
+        });
+    }
+
+    /**
+     * LG
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function mfgLg()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'LG',
+                'url' => 'https://lg.com',
+                'support_url' => 'https://support.lg.com',
+                'image' => 'lg.jpg',
+            ];
+        });
+    }
+
+    /**
+     * Polycom
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function mfgPolycom()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'Polycom',
+                'url' => 'https://polycom.com',
+                'support_url' => 'https://support.polycom.com',
+                'image' => 'polycom.png',
+            ];
+        });
+    }
+
+    /**
+     * Adobe
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function mfgAdobe()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'Adobe',
+                'url' => 'https://adobe.com',
+                'support_url' => 'https://support.adobe.com',
+                'image' => 'adobe.jpg',
+            ];
+        });
+    }
+
+    /**
+     * Avery
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function mfgAvery()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'Avery',
+                'url' => 'https://avery.com',
+                'support_url' => 'https://support.avery.com',
+                'image' => 'avery.png',
+            ];
+        });
+    }
+
+    /**
+     * Crucial
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function mfgCrucial()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'Crucial',
+                'url' => 'https://crucial.com',
+                'support_url' => 'https://support.crucial.com',
+                'image' => 'crucial.jpg',
+            ];
+        });
+    }
 
 
-// 10
-$factory->state(App\Models\Manufacturer::class, 'avery', function ($faker) {
-    return [
-        'name' => 'Avery',
-        'url' => 'https://avery.com',
-        'support_url' => 'https://support.avery.com',
-        'image' => 'avery.png',
-    ];
-});
 
-// 11
-$factory->state(App\Models\Manufacturer::class, 'crucial', function ($faker) {
-    return [
-        'name' => 'Crucial',
-        'url' => 'https://crucial.com',
-        'support_url' => 'https://support.crucial.com',
-        'image' => 'crucial.jpg',
-    ];
-});
-
+}
 
 

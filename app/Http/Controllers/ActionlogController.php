@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use Response;
 
+
 class ActionlogController extends Controller
 {
     public function displaySig($filename)

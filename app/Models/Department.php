@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Department extends SnipeModel
 {
@@ -17,7 +18,7 @@ class Department extends SnipeModel
      */
     protected $injectUniqueIdentifier = true;
 
-    use ValidatingTrait, UniqueUndeletedTrait;
+    use ValidatingTrait, UniqueUndeletedTrait, HasFactory;
 
     protected $casts = [
         'manager_id'   => 'integer',

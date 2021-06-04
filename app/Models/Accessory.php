@@ -7,6 +7,7 @@ use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Model for Accessories.
@@ -19,6 +20,7 @@ class Accessory extends SnipeModel
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
+    use HasFactory;
 
     protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'accessories';

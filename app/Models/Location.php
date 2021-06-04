@@ -12,12 +12,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Location extends SnipeModel
 {
     protected $presenter = 'App\Presenters\LocationPresenter';
     use Presentable;
     use SoftDeletes;
+    use HasFactory;
     protected $dates = ['deleted_at'];
     protected $table = 'locations';
     protected $rules = array(

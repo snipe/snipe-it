@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Parsedown;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Settings model.
  */
 class Setting extends Model
 {
-    use Notifiable, ValidatingTrait;
+    use Notifiable, ValidatingTrait, HasFactory;
 
     /**
      * The app settings cache key name.

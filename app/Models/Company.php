@@ -7,6 +7,7 @@ use Auth;
 use DB;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Model for Companies.
@@ -24,6 +25,7 @@ final class Company extends SnipeModel
 
     protected $presenter = 'App\Presenters\CompanyPresenter';
     use Presentable;
+    use HasFactory;
 
     /**
     * Whether the model should inject it's identifier to the unique

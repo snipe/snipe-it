@@ -5,10 +5,13 @@ use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Supplier extends SnipeModel
 {
     use SoftDeletes;
+    use HasFactory;
+
     protected $dates = ['deleted_at'];
     protected $table = 'suppliers';
 

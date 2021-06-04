@@ -6,6 +6,7 @@ use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Model for Asset Models. Asset Models contain higher level
@@ -16,6 +17,7 @@ use Watson\Validating\ValidatingTrait;
 class AssetModel extends SnipeModel
 {
     use SoftDeletes;
+    use HasFactory;
     protected $presenter = 'App\Presenters\AssetModelPresenter';
     use Requestable, Presentable;
     protected $dates = ['deleted_at'];

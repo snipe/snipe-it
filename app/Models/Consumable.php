@@ -6,7 +6,9 @@ use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Testing\Fluent\Concerns\Has;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Consumable extends SnipeModel
 {
@@ -14,7 +16,7 @@ class Consumable extends SnipeModel
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
-
+    use HasFactory;
     use Acceptable;
 
     protected $dates = ['deleted_at', 'purchase_date'];

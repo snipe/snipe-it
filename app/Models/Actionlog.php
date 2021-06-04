@@ -5,6 +5,7 @@ use App\Presenters\Presentable;
 use Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Model for the Actionlog (the table that keeps a historical log of
@@ -17,6 +18,7 @@ class Actionlog extends SnipeModel
     protected $presenter = "App\Presenters\ActionlogPresenter";
     use SoftDeletes;
     use Presentable;
+    use HasFactory;
     protected $dates = [ 'deleted_at' ];
 
     protected $table      = 'action_logs';

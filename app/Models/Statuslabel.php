@@ -5,12 +5,14 @@ use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Statuslabel extends SnipeModel
 {
     use SoftDeletes;
     use ValidatingTrait;
     use UniqueUndeletedTrait;
+    use HasFactory;
 
     protected $injectUniqueIdentifier = true;
     protected $dates = ['deleted_at'];

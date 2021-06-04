@@ -5,6 +5,7 @@ use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Model for Components.
@@ -17,6 +18,7 @@ class Component extends SnipeModel
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
+    use HasFactory;
 
     protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'components';

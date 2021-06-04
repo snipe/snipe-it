@@ -1,4 +1,6 @@
 <?php
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\Manufacturer;
 use Illuminate\Support\Facades\Storage;
@@ -8,17 +10,18 @@ class ManufacturerSeeder extends Seeder
     public function run()
     {
         Manufacturer::truncate();
-        factory(Manufacturer::class, 1)->states('apple')->create(); // 1
-        factory(Manufacturer::class, 1)->states('microsoft')->create(); // 2
-        factory(Manufacturer::class, 1)->states('dell')->create(); // 3
-        factory(Manufacturer::class, 1)->states('asus')->create(); // 4
-        factory(Manufacturer::class, 1)->states('hp')->create(); // 5
-        factory(Manufacturer::class, 1)->states('lenovo')->create(); // 6
-        factory(Manufacturer::class, 1)->states('lg')->create(); // 7
-        factory(Manufacturer::class, 1)->states('polycom')->create(); // 8
-        factory(Manufacturer::class, 1)->states('adobe')->create(); // 9
-        factory(Manufacturer::class, 1)->states('avery')->create(); // 10
-        factory(Manufacturer::class, 1)->states('crucial')->create(); // 10
+        Manufacturer::factory()->count(1)->mfgApple()->create();
+        Manufacturer::factory()->count(1)->mfgMicrosoft()->create();
+        Manufacturer::factory()->count(1)->mfgDell()->create();
+        Manufacturer::factory()->count(1)->mfgAsus()->create();
+        Manufacturer::factory()->count(1)->mfgHp()->create();
+        Manufacturer::factory()->count(1)->mfgLenovo()->create();
+        Manufacturer::factory()->count(1)->mfgLg()->create();
+        Manufacturer::factory()->count(1)->mfgPolycom()->create();
+        Manufacturer::factory()->count(1)->mfgAdobe()->create();
+        Manufacturer::factory()->count(1)->mfgAvery()->create();
+        Manufacturer::factory()->count(1)->mfgCrucial()->create();
+
 
         $src = public_path('/img/demo/manufacturers/');
         $dst = 'manufacturers'.'/';
@@ -26,7 +29,7 @@ class ManufacturerSeeder extends Seeder
 
         foreach($del_files as $del_file){ // iterate files
             $file_to_delete = str_replace($src,'',$del_file);
-            \Log::debug('Deleting: '.$file_to_delete);
+           // \Log::debug('Deleting: '.$file_to_delete);
             try  {
                 Storage::disk('public')->delete($dst.$del_file);
             } catch (\Exception $e) {
@@ -46,7 +49,7 @@ class ManufacturerSeeder extends Seeder
             }
         }
 
-        
+
     }
 
 

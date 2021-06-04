@@ -1,25 +1,20 @@
 <?php
+namespace Database\Seeders;
 
-use App\Models\Company;
 use Illuminate\Database\Seeder;
+use App\Models\Location;
+use Illuminate\Support\Facades\Storage;
 
-class CompanySeeder extends Seeder
+class LocationSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        \Log::debug('Seed companies');
-        Company::truncate();
-        factory(Company::class, 4)->create();
+        Location::truncate();
+        Location::factory()->count(10)->create();
 
-
-        $src = public_path('/img/demo/companies/');
-        $dst = 'companies'.'/';
-        $del_files = Storage::files('companies/'.$dst);
+        $src = public_path('/img/demo/locations/');
+        $dst = 'locations'.'/';
+        $del_files = Storage::files($dst);
 
         foreach($del_files as $del_file){ // iterate files
             $file_to_delete = str_replace($src,'',$del_file);
@@ -35,14 +30,13 @@ class CompanySeeder extends Seeder
         $add_files = glob($src."/*.*");
         foreach($add_files as $add_file){
             $file_to_copy = str_replace($src,'',$add_file);
-            \Log::debug('Copying: '.$file_to_copy);
+            // \Log::debug('Copying: '.$file_to_copy);
             try  {
                 Storage::disk('public')->put($dst.$file_to_copy, file_get_contents($src.$file_to_copy));
             } catch (\Exception $e) {
                 \Log::debug($e);
             }
         }
-
 
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+namespace Database\Factories;
 
 $factory->define(App\Models\CustomField::class, function (Faker\Generator $faker) {
     return [

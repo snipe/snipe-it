@@ -1,4 +1,6 @@
 <?php
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\Setting;
 use App\Models\User;
@@ -11,7 +13,7 @@ class SettingsSeeder extends Seeder
         Setting::truncate();
         $settings = new Setting;
         $settings->per_page = 20;
-        $settings->site_name = 'Snipe-IT Demo';
+        $settings->site_name = 'Snipe-IT v6 Demo';
         $settings->auto_increment_assets = 1;
         $settings->logo = 'snipe-logo.png';
         $settings->alert_email = 'service@snipe-it.io';
@@ -42,8 +44,8 @@ class SettingsSeeder extends Seeder
 
 
         // Copy the logos from the img/demo directory
-        Storage::disk('local_public')->put('snipe-logo.png', file_get_contents(public_path('img/demo/snipe-logo.png')));
-        Storage::disk('local_public')->put('snipe-logo-lg.png', file_get_contents(public_path('img/demo/snipe-logo-lg.png')));
+        \Storage::disk('local_public')->put('snipe-logo.png', file_get_contents(public_path('img/demo/snipe-logo.png')));
+        \Storage::disk('local_public')->put('snipe-logo-lg.png', file_get_contents(public_path('img/demo/snipe-logo-lg.png')));
 
     }
 }

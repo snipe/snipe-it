@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Model for Assets.
@@ -26,7 +27,7 @@ use Watson\Validating\ValidatingTrait;
 class Asset extends Depreciable
 {
     protected $presenter = 'App\Presenters\AssetPresenter';
-    use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
+    use HasFactory, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 
     const LOCATION = 'location';
     const ASSET = 'asset';

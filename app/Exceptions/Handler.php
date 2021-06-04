@@ -8,6 +8,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Helper;
 use Illuminate\Validation\ValidationException;
 use Log;
+use Throwable;
 
 
 class Handler extends ExceptionHandler
@@ -28,6 +29,9 @@ class Handler extends ExceptionHandler
         \League\OAuth2\Server\Exception\OAuthServerException::class,
     ];
 
+
+
+
     /**
      * Report or log an exception.
      *
@@ -36,11 +40,11 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $e)
     {
-        if ($this->shouldReport($exception)) {
-            \Log::error($exception);
-            return parent::report($exception);
+        if ($this->shouldReport($e)) {
+            \Log::error($e);
+            return parent::report($e);
         }
     }
 
@@ -51,7 +55,7 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $e
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
+    public function render($request, Throwable $e)
     {
 
 
