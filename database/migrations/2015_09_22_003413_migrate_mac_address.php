@@ -14,20 +14,20 @@ class MigrateMacAddress extends Migration {
 	{
 		DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
 
-		$f2=new \App\Models\CustomFieldset(['name' => "Asset with MAC Address"]);
+		$f2 = new \App\Models\CustomFieldset(['id' => 1, 'name' => "Asset with MAC Address"]);
 		$f2->timestamps=false; //when this model was first created, it had no timestamps. But later on it gets them.
-		if(!$f2->save()) {
-			throw new Exception("couldn't save customfieldset");
+		if (!$f2->save()) {
+			\Log::debug('Could not save custom fieldset');
 		}
-		$macid=DB::table('custom_fields')->insertGetId([
+		$macid = DB::table('custom_fields')->insertGetId([
 			'name' => "MAC Address",
 			'format' => \App\Models\CustomField::PREDEFINED_FORMATS['MAC'],
 			'element'=>'text']);
-		if(!$macid) {
-			throw new Exception("Can't save MAC Custom field: $macid");
+		if (!$macid) {
+            \Log::debug('Could not save MAC Address custom field: '. $macid);
 		}
 
-		$f2->fields()->attach($macid,['required' => false, 'order' => 1]);
+		$f2->fields()->attach($macid,['custom_fieldset_id' =>1 , 'required' => false, 'order' => 1]);
 		\App\Models\AssetModel::where(["show_mac_address" => true])->update(["fieldset_id"=>$f2->id]);
 
     Schema::table('assets', function (Blueprint $table) {
