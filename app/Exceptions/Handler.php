@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Helper;
@@ -37,7 +36,7 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Throwable  $e
      * @return void
      */
     public function report(Throwable $e)
@@ -52,7 +51,7 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
+     * @param  \Throwable  $e
      * @return \Illuminate\Http\Response
      */
     public function render($request, Throwable $e)
@@ -109,8 +108,12 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthorized or unauthenticated.'], 401);
+
+        \Log::debug('API thinks it is not authenticated but runs out of memory if I try to dd() the request.');
+        \Log::debug('(This is happening in the ExceptionHandler, unauthenticated method))');
+
+        if ($request->isJson() || ($request->wantsJson())) {
+            return response()->json(['error' => 'API is Unauthorized or unauthenticated.'], 401);
         }
 
         return redirect()->guest('login');
