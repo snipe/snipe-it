@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16bccc179e0f48b819d99a76d83dc569",
+    "content-hash": "b47c11f7dab2db75f6ee70a61a95cf1a",
     "packages": [
         {
             "name": "adldap2/adldap2",
@@ -73,27 +73,27 @@
         },
         {
             "name": "alek13/slack",
-            "version": "1.12.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-slack/slack.git",
-                "reference": "9db79a622803bf7baf0efafb50e37b900882f7fb"
+                "reference": "9654e7485ec4228addbbfb1a271aad602caf9b4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-slack/slack/zipball/9db79a622803bf7baf0efafb50e37b900882f7fb",
-                "reference": "9db79a622803bf7baf0efafb50e37b900882f7fb",
+                "url": "https://api.github.com/repos/php-slack/slack/zipball/9654e7485ec4228addbbfb1a271aad602caf9b4f",
+                "reference": "9654e7485ec4228addbbfb1a271aad602caf9b4f",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "guzzlehttp/guzzle": "~7.0|~6.0|~5.0|~4.0",
-                "php": "^5.6|^7.0"
+                "php": "^7.1|^8.0"
             },
             "require-dev": {
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "4.2.*"
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": ">=7.5"
             },
             "type": "library",
             "extra": {
@@ -103,7 +103,8 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Maknz\\Slack\\": "src/"
+                    "Maknz\\Slack\\": "src/",
+                    "Slack\\Tests\\": "tests/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -127,7 +128,7 @@
             ],
             "support": {
                 "issues": "https://github.com/php-slack/slack/issues",
-                "source": "https://github.com/php-slack/slack/tree/1.12.0"
+                "source": "https://github.com/php-slack/slack/tree/2.0.1"
             },
             "funding": [
                 {
@@ -135,7 +136,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2020-09-01T18:22:43+00:00"
+            "time": "2021-02-24T23:46:28+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -12509,7 +12510,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2.5",
+        "php": "^7.4",
         "ext-curl": "*",
         "ext-fileinfo": "*",
         "ext-json": "*",
