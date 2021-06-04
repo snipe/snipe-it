@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class RecreateLicensesTable extends Migration
+class ReCreateLicensesTable extends Migration
 {
     /**
      * Run the migrations.
