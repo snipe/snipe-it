@@ -313,6 +313,7 @@ class UsersController extends Controller
             $user->permissions =  $permissions_array;
         }
 
+        
 
 
 

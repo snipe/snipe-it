@@ -37,7 +37,6 @@
                         <!-- Location -->
                         @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
-
                         <!-- Company -->
                         @if (\App\Models\Company::canManageUsersCompanies())
                             @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.select_company'), 'fieldname' => 'company_id'])

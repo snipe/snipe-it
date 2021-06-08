@@ -9,10 +9,13 @@
         <div class="modal-body">
             <form action="{{ route('api.users.update', $user->id) }}" onsubmit="return false">
                 {{ method_field('PUT') }}
-                {{ Form::label('location_id', trans('general.remove_location_msg'))}}
-                {{ Form::hidden('location_id', 'test', [$user->id => 'location_id'])}}
+                {{csrf_field()}}
+                {{ Form::label('remove_location_id', trans('general.remove_location_msg'))}}
+                {{!! Form::hidden('remove_location_id', 0)}}
+                {{dd($user)}}
             </form>
         </div>
+
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('button.cancel') }}</button>
             <button type="button" class="btn btn-primary" id="modal-save">{{ trans('general.save') }}</button>
