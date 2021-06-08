@@ -29,7 +29,10 @@
         <p class="help-block">{{ $help_text }}</p>
     </div>
     @endif
-
+    <div class="col-md-9 text-center" style="margin-left:15px; ">
+        {{ Form::label('removal_boolean', trans('general.remove_location_msg'))}}
+        {{ Form::checkbox('removal_boolean', 1) }}
+    </div>
 
 </div>
 

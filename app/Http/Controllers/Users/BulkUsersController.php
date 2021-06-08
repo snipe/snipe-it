@@ -108,7 +108,7 @@ class BulkUsersController extends Controller
         if (!$manager_conflict) {
             $this->conditionallyAddItem('manager_id');
         }
-
+        $this->conditionallyRemoveLocation('removal_boolean');
 
         // Save the updated info
         User::whereIn('id', $user_raw_array)
@@ -120,6 +120,7 @@ class BulkUsersController extends Controller
                 $user->groups()->sync($request->input('groups'));
             }
         }
+
 
         return redirect()->route('users.index')
             ->with($return_array);
@@ -142,6 +143,16 @@ class BulkUsersController extends Controller
             $this->update_array[$field] = request()->input($field);
         }
         return $this;
+    }
+    /**
+     * Clears locations for bulk users
+     * @param booolean
+     */
+    protected function conditionallyRemoveLocation($input)
+    {
+        if(request()->input($input)=='1') {
+            $this->update_array["location_id"]= null;
+        }
     }
 
     /**

@@ -174,6 +174,7 @@
     'ready_to_deploy'		=> 'Ready to Deploy',
     'recent_activity'		=> 'Recent Activity',
     'remove_company'        => 'Remove Company Association',
+        'remove_location_msg'   => 'Remove Selected Users from Location',
     'reports'				=> 'Reports',
     'restored'				=> 'restored',
     'requested'				=> 'Requested',
