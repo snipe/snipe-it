@@ -121,7 +121,6 @@ class BulkUsersController extends Controller
             }
         }
 
-
         return redirect()->route('users.index')
             ->with($return_array);
     }
