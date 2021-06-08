@@ -85,7 +85,11 @@
             <td>{{ $asset->serial }}</td>
             <td>
                 {{ $asset->last_checkout }}</td>
-            <td><div><img height="20%" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}"></img></div></td>
+            <td>
+                @if ($asset->assetlog->first())
+                <img height="20%" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}">
+                @endif
+           </td>
         </tr>
             @if($settings->show_assigned_assets)
                 @php
