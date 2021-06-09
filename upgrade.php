@@ -196,10 +196,12 @@ $config_clear = shell_exec('php artisan config:clear');
 $cache_clear = shell_exec('php artisan cache:clear');
 $route_clear = shell_exec('php artisan route:clear');
 $view_clear = shell_exec('php artisan view:clear');
+$optimize_clear = shell_exec('php artisan optimize:clear');
 echo '-- '.$config_clear;
 echo '-- '.$cache_clear;
 echo '-- '.$route_clear;
 echo '-- '.$view_clear;
+echo '-- '.$optimize_clear;
 echo "\n";
 
 echo "--------------------------------------------------------\n";
