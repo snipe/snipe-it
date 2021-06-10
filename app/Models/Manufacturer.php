@@ -10,7 +10,7 @@ use Watson\Validating\ValidatingTrait;
 
 class Manufacturer extends SnipeModel
 {
-    protected $presenter = 'App\Presenters\ManufacturerPresenter';
+    protected $presenter = \App\Presenters\ManufacturerPresenter::class;
     use Presentable;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
@@ -77,26 +77,26 @@ class Manufacturer extends SnipeModel
 
     public function assets()
     {
-        return $this->hasManyThrough('\App\Models\Asset', '\App\Models\AssetModel', 'manufacturer_id', 'model_id');
+        return $this->hasManyThrough(\App\Models\Asset::class, \App\Models\AssetModel::class, 'manufacturer_id', 'model_id');
     }
 
     public function models()
     {
-        return $this->hasMany('\App\Models\AssetModel', 'manufacturer_id');
+        return $this->hasMany(\App\Models\AssetModel::class, 'manufacturer_id');
     }
 
     public function licenses()
     {
-        return $this->hasMany('\App\Models\License', 'manufacturer_id');
+        return $this->hasMany(\App\Models\License::class, 'manufacturer_id');
     }
 
     public function accessories()
     {
-        return $this->hasMany('\App\Models\Accessory', 'manufacturer_id');
+        return $this->hasMany(\App\Models\Accessory::class, 'manufacturer_id');
     }
 
     public function consumables()
     {
-        return $this->hasMany('\App\Models\Consumable', 'manufacturer_id');
+        return $this->hasMany(\App\Models\Consumable::class, 'manufacturer_id');
     }
 }

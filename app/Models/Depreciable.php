@@ -25,7 +25,7 @@ class Depreciable extends SnipeModel
 
     public function depreciation()
     {
-        return $this->belongsTo('\App\Models\Depreciation', 'depreciation_id');
+        return $this->belongsTo(\App\Models\Depreciation::class, 'depreciation_id');
     }
 
     public function get_depreciation()

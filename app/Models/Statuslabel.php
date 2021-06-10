@@ -59,7 +59,7 @@ class Statuslabel extends SnipeModel
      */
     public function assets()
     {
-        return $this->hasMany('\App\Models\Asset', 'status_id');
+        return $this->hasMany(\App\Models\Asset::class, 'status_id');
     }
 
     /**

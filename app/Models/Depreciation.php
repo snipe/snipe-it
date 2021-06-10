@@ -8,7 +8,7 @@ use Watson\Validating\ValidatingTrait;
 
 class Depreciation extends SnipeModel
 {
-    protected $presenter = 'App\Presenters\DepreciationPresenter';
+    protected $presenter = \App\Presenters\DepreciationPresenter::class;
     use Presentable;
     // Declare the rules for the form validation
     protected $rules = [
@@ -58,7 +58,7 @@ class Depreciation extends SnipeModel
      */
     public function models()
     {
-        return $this->hasMany('\App\Models\AssetModel', 'depreciation_id');
+        return $this->hasMany(\App\Models\AssetModel::class, 'depreciation_id');
     }
 
     /**
@@ -70,6 +70,6 @@ class Depreciation extends SnipeModel
      */
     public function licenses()
     {
-        return $this->hasMany('\App\Models\License', 'depreciation_id');
+        return $this->hasMany(\App\Models\License::class, 'depreciation_id');
     }
 }

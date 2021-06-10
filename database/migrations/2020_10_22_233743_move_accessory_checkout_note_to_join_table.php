@@ -43,7 +43,7 @@ class MoveAccessoryCheckoutNoteToJoinTable extends Migration
                 $action_log_entries = Actionlog::where('created_at', '=', $join_log->created_at)
                     ->where('target_id', '=', $join_log->assigned_to)
                     ->where('item_id', '=', $accessory->id)
-                    ->where('target_type', '=', 'App\\Models\\User')
+                    ->where('target_type', '=', \App\Models\User::class)
                     ->where('action_type', '=', 'checkout')
                     ->orderBy('created_at', 'DESC')->get();
 

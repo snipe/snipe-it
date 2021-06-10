@@ -129,7 +129,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
      */
     public function asset()
     {
-        return $this->belongsTo('\App\Models\Asset', 'asset_id')
+        return $this->belongsTo(\App\Models\Asset::class, 'asset_id')
                     ->withTrashed();
     }
 
@@ -142,13 +142,13 @@ class AssetMaintenance extends Model implements ICompanyableChild
      */
     public function admin()
     {
-        return $this->belongsTo('\App\Models\User', 'user_id')
+        return $this->belongsTo(\App\Models\User::class, 'user_id')
             ->withTrashed();
     }
 
     public function supplier()
     {
-        return $this->belongsTo('\App\Models\Supplier', 'supplier_id')
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id')
                     ->withTrashed();
     }
 

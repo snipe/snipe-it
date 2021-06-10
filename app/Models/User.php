@@ -21,7 +21,7 @@ use Watson\Validating\ValidatingTrait;
 
 class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
-    protected $presenter = 'App\Presenters\UserPresenter';
+    protected $presenter = \App\Presenters\UserPresenter::class;
     use SoftDeletes, ValidatingTrait;
     use Authenticatable, Authorizable, CanResetPassword, HasApiTokens;
     use UniqueUndeletedTrait;
@@ -188,7 +188,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function company()
     {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
     }
 
     /**
@@ -200,7 +200,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function department()
     {
-        return $this->belongsTo('\App\Models\Department', 'department_id');
+        return $this->belongsTo(\App\Models\Department::class, 'department_id');
     }
 
     /**
@@ -264,7 +264,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function assets()
     {
-        return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
     /**
@@ -279,7 +279,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function assetmaintenances()
     {
-        return $this->hasMany('\App\Models\AssetMaintenance', 'user_id')->withTrashed();
+        return $this->hasMany(\App\Models\AssetMaintenance::class, 'user_id')->withTrashed();
     }
 
     /**
@@ -291,7 +291,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function accessories()
     {
-        return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')
+        return $this->belongsToMany(\App\Models\Accessory::class, 'accessories_users', 'assigned_to', 'accessory_id')
             ->withPivot('id', 'created_at', 'note')->withTrashed();
     }
 
@@ -304,7 +304,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function consumables()
     {
-        return $this->belongsToMany('\App\Models\Consumable', 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id')->withTrashed();
+        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id')->withTrashed();
     }
 
     /**
@@ -316,7 +316,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function licenses()
     {
-        return $this->belongsToMany('\App\Models\License', 'license_seats', 'assigned_to', 'license_id')->withPivot('id');
+        return $this->belongsToMany(\App\Models\License::class, 'license_seats', 'assigned_to', 'license_id')->withPivot('id');
     }
 
     /**
@@ -328,7 +328,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function userlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'target_id')->where('target_type', '=', 'App\Models\User')->orderBy('created_at', 'DESC')->withTrashed();
+        return $this->hasMany(\App\Models\Actionlog::class, 'target_id')->where('target_type', '=', \App\Models\User::class)->orderBy('created_at', 'DESC')->withTrashed();
     }
 
     /**
@@ -344,7 +344,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function userloc()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
+        return $this->belongsTo(\App\Models\Location::class, 'location_id')->withTrashed();
     }
 
     /**
@@ -356,7 +356,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function location()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
+        return $this->belongsTo(\App\Models\Location::class, 'location_id')->withTrashed();
     }
 
     /**
@@ -368,7 +368,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function manager()
     {
-        return $this->belongsTo('\App\Models\User', 'manager_id')->withTrashed();
+        return $this->belongsTo(\App\Models\User::class, 'manager_id')->withTrashed();
     }
 
     /**
@@ -380,7 +380,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function managedLocations()
     {
-        return $this->hasMany('\App\Models\Location', 'manager_id');
+        return $this->hasMany(\App\Models\Location::class, 'manager_id');
     }
 
     /**
@@ -392,7 +392,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function groups()
     {
-        return $this->belongsToMany('\App\Models\Group', 'users_groups');
+        return $this->belongsToMany(\App\Models\Group::class, 'users_groups');
     }
 
     /**
@@ -404,7 +404,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Asset', 'id')->withTrashed();
+        return $this->hasMany(\App\Models\Asset::class, 'id')->withTrashed();
     }
 
     /**
@@ -418,7 +418,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function uploads()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
             ->where('item_type', self::class)
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')

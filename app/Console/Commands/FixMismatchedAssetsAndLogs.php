@@ -56,19 +56,19 @@ class FixMismatchedAssetsAndLogs extends Command
 
         $mismatch_count = 0;
         $assets = Asset::whereNotNull('assigned_to')
-            ->where('assigned_type', '=', 'App\\Models\\User')
+            ->where('assigned_type', '=', \App\Models\User::class)
             ->orderBy('id', 'ASC')->get();
         foreach ($assets as $asset) {
 
             // get the last checkout of the asset
-            if ($checkout_log = Actionlog::where('target_type', '=', 'App\\Models\\User')
+            if ($checkout_log = Actionlog::where('target_type', '=', \App\Models\User::class)
                 ->where('action_type', '=', 'checkout')
                 ->where('item_id', '=', $asset->id)
                 ->orderBy('created_at', 'DESC')
                 ->first()) {
 
                     // Now check for a subsequent checkin log - we want to ignore those
-                if (! $checkin_log = Actionlog::where('target_type', '=', 'App\\Models\\User')
+                if (! $checkin_log = Actionlog::where('target_type', '=', \App\Models\User::class)
                         ->where('action_type', '=', 'checkin from')
                         ->where('item_id', '=', $asset->id)
                         ->whereDate('created_at', '>', $checkout_log->created_at)

@@ -167,7 +167,7 @@ class CustomField extends Model
      */
     public function fieldset()
     {
-        return $this->belongsToMany('\App\Models\CustomFieldset');
+        return $this->belongsToMany(\App\Models\CustomFieldset::class);
     }
 
     /**
@@ -179,7 +179,7 @@ class CustomField extends Model
      */
     public function user()
     {
-        return $this->belongsTo('\App\Models\User');
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     /**
@@ -191,7 +191,7 @@ class CustomField extends Model
      */
     public function defaultValues()
     {
-        return $this->belongsToMany('\App\Models\AssetModel', 'models_custom_fields')->withPivot('default_value');
+        return $this->belongsToMany(\App\Models\AssetModel::class, 'models_custom_fields')->withPivot('default_value');
     }
 
     /**

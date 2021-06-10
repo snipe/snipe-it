@@ -200,12 +200,12 @@ class CheckoutableListener
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\CheckoutableCheckedIn',
+            \App\Events\CheckoutableCheckedIn::class,
             'App\Listeners\CheckoutableListener@onCheckedIn'
         );
 
         $events->listen(
-            'App\Events\CheckoutableCheckedOut',
+            \App\Events\CheckoutableCheckedOut::class,
             'App\Listeners\CheckoutableListener@onCheckedOut'
         );
     }

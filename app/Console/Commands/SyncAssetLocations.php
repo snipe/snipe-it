@@ -57,7 +57,7 @@ class SyncAssetLocations extends Command
             $bar->advance();
         }
 
-        $assigned_user_assets = Asset::where('assigned_type', 'App\Models\User')->whereNotNull('assigned_to')->whereNull('deleted_at')->get();
+        $assigned_user_assets = Asset::where('assigned_type', \App\Models\User::class)->whereNotNull('assigned_to')->whereNull('deleted_at')->get();
         $output['info'][] = 'There are '.$assigned_user_assets->count().' assets checked out to users.';
         foreach ($assigned_user_assets as $assigned_user_asset) {
             if (($assigned_user_asset->assignedTo) && ($assigned_user_asset->assignedTo->userLoc)) {
@@ -73,7 +73,7 @@ class SyncAssetLocations extends Command
             $bar->advance();
         }
 
-        $assigned_location_assets = Asset::where('assigned_type', 'App\Models\Location')
+        $assigned_location_assets = Asset::where('assigned_type', \App\Models\Location::class)
             ->whereNotNull('assigned_to')->whereNull('deleted_at')->get();
         $output['info'][] = 'There are '.$assigned_location_assets->count().' assets checked out to locations.';
 
@@ -90,7 +90,7 @@ class SyncAssetLocations extends Command
         }
 
         // Assigned to assets
-        $assigned_asset_assets = Asset::where('assigned_type', 'App\Models\Asset')
+        $assigned_asset_assets = Asset::where('assigned_type', \App\Models\Asset::class)
             ->whereNotNull('assigned_to')->whereNull('deleted_at')->get();
         $output['info'][] = 'Asset-assigned assets: '.$assigned_asset_assets->count();
 

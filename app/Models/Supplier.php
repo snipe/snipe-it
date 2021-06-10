@@ -104,7 +104,7 @@ class Supplier extends SnipeModel
      */
     public function assets()
     {
-        return $this->hasMany('\App\Models\Asset', 'supplier_id');
+        return $this->hasMany(\App\Models\Asset::class, 'supplier_id');
     }
 
     /**
@@ -116,7 +116,7 @@ class Supplier extends SnipeModel
      */
     public function accessories()
     {
-        return $this->hasMany('\App\Models\Accessory', 'supplier_id');
+        return $this->hasMany(\App\Models\Accessory::class, 'supplier_id');
     }
 
     /**
@@ -128,7 +128,7 @@ class Supplier extends SnipeModel
      */
     public function asset_maintenances()
     {
-        return $this->hasMany('\App\Models\AssetMaintenance', 'supplier_id');
+        return $this->hasMany(\App\Models\AssetMaintenance::class, 'supplier_id');
     }
 
     /**
@@ -156,7 +156,7 @@ class Supplier extends SnipeModel
      */
     public function licenses()
     {
-        return $this->hasMany('\App\Models\License', 'supplier_id');
+        return $this->hasMany(\App\Models\License::class, 'supplier_id');
     }
 
     /**

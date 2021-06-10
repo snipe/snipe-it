@@ -26,7 +26,7 @@ use Watson\Validating\ValidatingTrait;
  */
 class Asset extends Depreciable
 {
-    protected $presenter = 'App\Presenters\AssetPresenter';
+    protected $presenter = \App\Presenters\AssetPresenter::class;
     use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 
     const LOCATION = 'location';
@@ -224,7 +224,7 @@ class Asset extends Depreciable
      */
     public function company()
     {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
     }
 
     /**
@@ -304,7 +304,7 @@ class Asset extends Depreciable
         if ($this->save()) {
             if (is_int($admin)) {
                 $checkedOutBy = User::findOrFail($admin);
-            } elseif (get_class($admin) === 'App\Models\User') {
+            } elseif (get_class($admin) === \App\Models\User::class) {
                 $checkedOutBy = $admin;
             } else {
                 $checkedOutBy = Auth::user();
@@ -358,7 +358,7 @@ class Asset extends Depreciable
      */
     public function depreciation()
     {
-        return $this->model->belongsTo('\App\Models\Depreciation', 'depreciation_id');
+        return $this->model->belongsTo(\App\Models\Depreciation::class, 'depreciation_id');
     }
 
     /**
@@ -370,7 +370,7 @@ class Asset extends Depreciable
      */
     public function components()
     {
-        return $this->belongsToMany('\App\Models\Component', 'components_assets', 'asset_id', 'component_id')->withPivot('id', 'assigned_qty')->withTrashed();
+        return $this->belongsToMany(\App\Models\Component::class, 'components_assets', 'asset_id', 'component_id')->withPivot('id', 'assigned_qty')->withTrashed();
     }
 
     /**
@@ -398,7 +398,7 @@ class Asset extends Depreciable
      */
     public function uploads()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
                   ->where('item_type', '=', self::class)
                   ->where('action_type', '=', 'uploaded')
                   ->whereNotNull('filename')
@@ -443,7 +443,7 @@ class Asset extends Depreciable
      */
     public function assignedAssets()
     {
-        return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
     /**
@@ -508,7 +508,7 @@ class Asset extends Depreciable
      */
     public function defaultLoc()
     {
-        return $this->belongsTo('\App\Models\Location', 'rtd_location_id');
+        return $this->belongsTo(\App\Models\Location::class, 'rtd_location_id');
     }
 
     /**
@@ -541,7 +541,7 @@ class Asset extends Depreciable
      */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
                   ->where('item_type', '=', self::class)
                   ->orderBy('created_at', 'desc')
                   ->withTrashed();
@@ -600,7 +600,7 @@ class Asset extends Depreciable
      */
     public function assetmaintenances()
     {
-        return $this->hasMany('\App\Models\AssetMaintenance', 'asset_id')
+        return $this->hasMany(\App\Models\AssetMaintenance::class, 'asset_id')
                   ->orderBy('created_at', 'desc');
     }
 
@@ -613,7 +613,7 @@ class Asset extends Depreciable
      */
     public function adminuser()
     {
-        return $this->belongsTo('\App\Models\User', 'user_id');
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
 
     /**
@@ -625,7 +625,7 @@ class Asset extends Depreciable
      */
     public function assetstatus()
     {
-        return $this->belongsTo('\App\Models\Statuslabel', 'status_id');
+        return $this->belongsTo(\App\Models\Statuslabel::class, 'status_id');
     }
 
     /**
@@ -637,7 +637,7 @@ class Asset extends Depreciable
      */
     public function model()
     {
-        return $this->belongsTo('\App\Models\AssetModel', 'model_id')->withTrashed();
+        return $this->belongsTo(\App\Models\AssetModel::class, 'model_id')->withTrashed();
     }
 
     /**
@@ -670,7 +670,7 @@ class Asset extends Depreciable
      */
     public function licenses()
     {
-        return $this->belongsToMany('\App\Models\License', 'license_seats', 'asset_id', 'license_id');
+        return $this->belongsToMany(\App\Models\License::class, 'license_seats', 'asset_id', 'license_id');
     }
 
     /**
@@ -682,7 +682,7 @@ class Asset extends Depreciable
      */
     public function licenseseats()
     {
-        return $this->hasMany('\App\Models\LicenseSeat', 'asset_id');
+        return $this->hasMany(\App\Models\LicenseSeat::class, 'asset_id');
     }
 
     /**
@@ -694,7 +694,7 @@ class Asset extends Depreciable
      */
     public function supplier()
     {
-        return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
     }
 
     /**
@@ -706,7 +706,7 @@ class Asset extends Depreciable
      */
     public function location()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id');
+        return $this->belongsTo(\App\Models\Location::class, 'location_id');
     }
 
     /**

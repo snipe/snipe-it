@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class Actionlog extends SnipeModel
 {
-    protected $presenter = "App\Presenters\ActionlogPresenter";
+    protected $presenter = \App\Presenters\ActionlogPresenter::class;
     use SoftDeletes;
     use Presentable;
     protected $dates = ['deleted_at'];
@@ -88,7 +88,7 @@ class Actionlog extends SnipeModel
      */
     public function company()
     {
-        return $this->hasMany('\App\Models\Company', 'id', 'company_id');
+        return $this->hasMany(\App\Models\Company::class, 'id', 'company_id');
     }
 
     /**
@@ -183,7 +183,7 @@ class Actionlog extends SnipeModel
      */
     public function location()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
+        return $this->belongsTo(\App\Models\Location::class, 'location_id')->withTrashed();
     }
 
     /**

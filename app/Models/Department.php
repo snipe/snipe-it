@@ -71,7 +71,7 @@ class Department extends SnipeModel
      */
     public function company()
     {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
     }
 
     /**
@@ -83,7 +83,7 @@ class Department extends SnipeModel
      */
     public function users()
     {
-        return $this->hasMany('\App\Models\User', 'department_id');
+        return $this->hasMany(\App\Models\User::class, 'department_id');
     }
 
     /**
@@ -95,7 +95,7 @@ class Department extends SnipeModel
      */
     public function manager()
     {
-        return $this->belongsTo('\App\Models\User', 'manager_id');
+        return $this->belongsTo(\App\Models\User::class, 'manager_id');
     }
 
     /**
@@ -107,7 +107,7 @@ class Department extends SnipeModel
      */
     public function location()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id');
+        return $this->belongsTo(\App\Models\Location::class, 'location_id');
     }
 
     /**

@@ -14,7 +14,7 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
     use SoftDeletes;
     use Loggable;
 
-    protected $presenter = 'App\Presenters\LicenseSeatPresenter';
+    protected $presenter = \App\Presenters\LicenseSeatPresenter::class;
     use Presentable;
 
     protected $dates = ['deleted_at'];
@@ -64,7 +64,7 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
      */
     public function license()
     {
-        return $this->belongsTo('\App\Models\License', 'license_id');
+        return $this->belongsTo(\App\Models\License::class, 'license_id');
     }
 
     /**
@@ -76,7 +76,7 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
      */
     public function user()
     {
-        return $this->belongsTo('\App\Models\User', 'assigned_to')->withTrashed();
+        return $this->belongsTo(\App\Models\User::class, 'assigned_to')->withTrashed();
     }
 
     /**
@@ -88,7 +88,7 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
      */
     public function asset()
     {
-        return $this->belongsTo('\App\Models\Asset', 'asset_id')->withTrashed();
+        return $this->belongsTo(\App\Models\Asset::class, 'asset_id')->withTrashed();
     }
 
     /**

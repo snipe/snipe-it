@@ -17,7 +17,7 @@ use Watson\Validating\ValidatingTrait;
 class AssetModel extends SnipeModel
 {
     use SoftDeletes;
-    protected $presenter = 'App\Presenters\AssetModelPresenter';
+    protected $presenter = \App\Presenters\AssetModelPresenter::class;
     use Requestable, Presentable;
     protected $dates = ['deleted_at'];
     protected $table = 'models';
@@ -98,7 +98,7 @@ class AssetModel extends SnipeModel
      */
     public function assets()
     {
-        return $this->hasMany('\App\Models\Asset', 'model_id');
+        return $this->hasMany(\App\Models\Asset::class, 'model_id');
     }
 
     /**
@@ -110,7 +110,7 @@ class AssetModel extends SnipeModel
      */
     public function category()
     {
-        return $this->belongsTo('\App\Models\Category', 'category_id');
+        return $this->belongsTo(\App\Models\Category::class, 'category_id');
     }
 
     /**
@@ -122,7 +122,7 @@ class AssetModel extends SnipeModel
      */
     public function depreciation()
     {
-        return $this->belongsTo('\App\Models\Depreciation', 'depreciation_id');
+        return $this->belongsTo(\App\Models\Depreciation::class, 'depreciation_id');
     }
 
     /**
@@ -134,7 +134,7 @@ class AssetModel extends SnipeModel
      */
     public function manufacturer()
     {
-        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
+        return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
     }
 
     /**
@@ -146,7 +146,7 @@ class AssetModel extends SnipeModel
      */
     public function fieldset()
     {
-        return $this->belongsTo('\App\Models\CustomFieldset', 'fieldset_id');
+        return $this->belongsTo(\App\Models\CustomFieldset::class, 'fieldset_id');
     }
 
     /**
@@ -158,7 +158,7 @@ class AssetModel extends SnipeModel
      */
     public function defaultValues()
     {
-        return $this->belongsToMany('\App\Models\CustomField', 'models_custom_fields')->withPivot('default_value');
+        return $this->belongsToMany(\App\Models\CustomField::class, 'models_custom_fields')->withPivot('default_value');
     }
 
     /**
