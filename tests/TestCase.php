@@ -22,12 +22,12 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $app;
     }
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         //Artisan::call('migrate:reset');
         parent::tearDown();
