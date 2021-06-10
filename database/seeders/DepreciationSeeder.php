@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Depreciation;
 use Illuminate\Database\Seeder;
 

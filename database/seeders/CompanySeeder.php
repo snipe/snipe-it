@@ -1,19 +1,26 @@
 <?php
 
-use App\Models\Location;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
+namespace Database\Seeders;
 
-class LocationSeeder extends Seeder
+use App\Models\Company;
+use Illuminate\Database\Seeder;
+
+class CompanySeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
-        Location::truncate();
-        Location::factory()->count(10)->create();
+        \Log::debug('Seed companies');
+        Company::truncate();
+        Company::factory()->count(4)->create();
 
-        $src = public_path('/img/demo/locations/');
-        $dst = 'locations'.'/';
-        $del_files = Storage::files($dst);
+        $src = public_path('/img/demo/companies/');
+        $dst = 'companies'.'/';
+        $del_files = Storage::files('companies/'.$dst);
 
         foreach ($del_files as $del_file) { // iterate files
             $file_to_delete = str_replace($src, '', $del_file);

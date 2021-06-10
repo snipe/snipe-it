@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use Illuminate\Database\Schema\Blueprint;

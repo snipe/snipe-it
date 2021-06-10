@@ -1,5 +1,16 @@
 <?php
 
+namespace Database\Seeders;
+
+use Database\Seeders\CustomFieldSeeder;
+use Database\Seeders\ConsumableSeeder;
+use Database\Seeders\ComponentSeeder;
+use Database\Seeders\CompanySeeder;
+use Database\Seeders\CategorySeeder;
+use Database\Seeders\AssetSeeder;
+use Database\Seeders\AssetModelSeeder;
+use Database\Seeders\ActionlogSeeder;
+use Database\Seeders\AccessorySeeder;
 use App\Models\Setting;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;

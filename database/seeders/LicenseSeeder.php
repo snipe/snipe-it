@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\License;
 use App\Models\LicenseSeat;
 use Illuminate\Database\Seeder;

@@ -1,24 +1,24 @@
 <?php
 
-use App\Models\Company;
+namespace Database\Seeders;
+
+use App\Models\Accessory;
 use Illuminate\Database\Seeder;
 
-class CompanySeeder extends Seeder
+class AccessorySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        \Log::debug('Seed companies');
-        Company::truncate();
-        Company::factory()->count(4)->create();
+        Accessory::truncate();
+        DB::table('accessories_users')->truncate();
+        Accessory::factory()->count(1)->appleUsbKeyboard()->create();
+        Accessory::factory()->count(1)->appleBtKeyboard()->create();
+        Accessory::factory()->count(1)->appleMouse()->create();
+        Accessory::factory()->count(1)->microsoftMouse()->create();
 
-        $src = public_path('/img/demo/companies/');
-        $dst = 'companies'.'/';
-        $del_files = Storage::files('companies/'.$dst);
+        $src = public_path('/img/demo/accessories/');
+        $dst = 'accessories'.'/';
+        $del_files = Storage::files($dst);
 
         foreach ($del_files as $del_file) { // iterate files
             $file_to_delete = str_replace($src, '', $del_file);
