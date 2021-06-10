@@ -168,6 +168,27 @@
             </tbody>
           </table>
         </div> <!-- /.table-responsive-->
+        {{--<table
+                data-cookie-id-table="depreciationReport"
+                data-pagination="true"
+                data-id-table="depreciationReport"
+                data-search="true"
+                data-side-pagination="server"
+                data-show-columns="true"
+                data-show-export="true"
+                data-show-refresh="true"
+                data-sort-order="asc"
+                id="depreciationReport"
+                class="table table-striped snipe-table"
+                data-export-options='{
+                        "fileName": "depreciation-report-{{ date('Y-m-d') }}",
+                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                        }'
+                data-url="{{ route('api.depreciations.index',
+              array('deleted'=> (request('status')=='deleted') ? 'true' : 'false','company_id' => e(request('company_id')))) }}"
+        >
+
+        </table>--}}
               @else
               <div class="col-md-12">
                   <div class="alert alert-warning fade in">
