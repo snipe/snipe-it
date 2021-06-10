@@ -8,7 +8,6 @@ class ConsumableAssignment extends Model
 {
     use CompanyableTrait;
 
-    protected $dates = ['deleted_at'];
     protected $table = 'consumables_users';
 
     public function consumable()

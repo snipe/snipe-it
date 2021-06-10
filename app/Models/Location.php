@@ -19,7 +19,7 @@ class Location extends SnipeModel
     protected $presenter = \App\Presenters\LocationPresenter::class;
     use Presentable;
     use SoftDeletes;
-    protected $dates = ['deleted_at'];
+
     protected $table = 'locations';
     protected $rules = [
         'name'          => 'required|min:2|max:255|unique_undeleted',

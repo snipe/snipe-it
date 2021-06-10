@@ -17,15 +17,14 @@ class Consumable extends SnipeModel
     use SoftDeletes;
     use Acceptable;
 
-    protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'consumables';
     protected $casts = [
+        'purchase_date' => 'datetime',
         'requestable'    => 'boolean',
         'category_id'    => 'integer',
         'company_id'     => 'integer',
         'qty'            => 'integer',
-        'min_amt'        => 'integer',
-    ];
+        'min_amt'        => 'integer',    ];
 
     /**
      * Category validation rules

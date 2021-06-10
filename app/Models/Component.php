@@ -18,8 +18,9 @@ class Component extends SnipeModel
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
-
-    protected $dates = ['deleted_at', 'purchase_date'];
+    protected $casts = [
+        'purchase_date' => 'datetime',
+    ];
     protected $table = 'components';
 
     /**

@@ -13,7 +13,7 @@ class Manufacturer extends SnipeModel
     protected $presenter = \App\Presenters\ManufacturerPresenter::class;
     use Presentable;
     use SoftDeletes;
-    protected $dates = ['deleted_at'];
+
     protected $table = 'manufacturers';
 
     // Declare the rules for the form validation

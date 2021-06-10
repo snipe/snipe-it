@@ -10,7 +10,7 @@ use Watson\Validating\ValidatingTrait;
 class Supplier extends SnipeModel
 {
     use SoftDeletes;
-    protected $dates = ['deleted_at'];
+
     protected $table = 'suppliers';
 
     protected $rules = [

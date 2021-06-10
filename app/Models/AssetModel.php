@@ -19,7 +19,7 @@ class AssetModel extends SnipeModel
     use SoftDeletes;
     protected $presenter = \App\Presenters\AssetModelPresenter::class;
     use Requestable, Presentable;
-    protected $dates = ['deleted_at'];
+
     protected $table = 'models';
     protected $hidden = ['user_id', 'deleted_at'];
 

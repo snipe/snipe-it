@@ -29,7 +29,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     use Presentable;
     use Searchable;
 
-    protected $dates = ['deleted_at'];
     protected $hidden = ['password', 'remember_token', 'permissions', 'reset_password_code', 'persist_code'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;

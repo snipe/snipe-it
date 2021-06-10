@@ -17,7 +17,6 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
     protected $presenter = \App\Presenters\LicenseSeatPresenter::class;
     use Presentable;
 
-    protected $dates = ['deleted_at'];
     protected $guarded = 'id';
     protected $table = 'license_seats';
 

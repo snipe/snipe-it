@@ -14,7 +14,7 @@ class Statuslabel extends SnipeModel
     use UniqueUndeletedTrait;
 
     protected $injectUniqueIdentifier = true;
-    protected $dates = ['deleted_at'];
+
     protected $table = 'status_labels';
     protected $hidden = ['user_id', 'deleted_at'];
 

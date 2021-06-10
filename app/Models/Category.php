@@ -22,7 +22,7 @@ class Category extends SnipeModel
     protected $presenter = \App\Presenters\CategoryPresenter::class;
     use Presentable;
     use SoftDeletes;
-    protected $dates = ['deleted_at'];
+
     protected $table = 'categories';
     protected $hidden = ['user_id', 'deleted_at'];
 
