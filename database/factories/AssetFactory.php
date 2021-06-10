@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,27 +15,6 @@ use App\Models\Category;
 | Factories related exclusively to modelling assets.
 |
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // These are just for unit tests, not to generate data
 

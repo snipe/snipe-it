@@ -13,7 +13,6 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
@@ -21,6 +20,7 @@ use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class GroupFactory extends Factory
 {

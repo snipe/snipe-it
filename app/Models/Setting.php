@@ -17,7 +17,6 @@ use Watson\Validating\ValidatingTrait;
 class Setting extends Model
 {
     use HasFactory;
-
     use Notifiable, ValidatingTrait;
 
     /**

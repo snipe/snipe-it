@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Watson\Validating\ValidatingTrait;
 
 class Department extends SnipeModel

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Helpers\Helper;
 use App\Models\Traits\Searchable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -17,7 +17,6 @@ use Watson\Validating\ValidatingTrait;
 class AssetMaintenance extends Model implements ICompanyableChild
 {
     use HasFactory;
-
     use SoftDeletes;
     use CompanyableChildTrait;
     use ValidatingTrait;

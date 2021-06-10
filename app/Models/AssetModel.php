@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
@@ -18,7 +18,6 @@ use Watson\Validating\ValidatingTrait;
 class AssetModel extends SnipeModel
 {
     use HasFactory;
-
     use SoftDeletes;
     protected $presenter = \App\Presenters\AssetModelPresenter::class;
     use Requestable, Presentable;

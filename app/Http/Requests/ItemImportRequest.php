@@ -80,7 +80,6 @@ class ItemImportRequest extends FormRequest
     public function progress($count)
     {
         // Open for future
-
     }
 
     public function errorCallback($item, $field, $errorString)

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Events\AssetCheckedOut;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
@@ -16,6 +15,7 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
@@ -69,7 +69,6 @@ class Asset extends Depreciable
     protected $injectUniqueIdentifier = true;
 
     // We set these as protected dates so that they will be easily accessible via Carbon
-
 
     protected $casts = [
         'purchase_date' => 'datetime',
@@ -442,7 +441,7 @@ class Asset extends Depreciable
      */
     public function assignedAssets()
     {
-        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphMany(self::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
     /**

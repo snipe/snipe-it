@@ -14,7 +14,7 @@ use App\Models\Manufacturer;
  use App\Models\Supplier;
  use App\Models\User;
 
- /**
+/**
  * Inherited Methods
  * @method void wantToTest($text)
  * @method void wantTo($text)

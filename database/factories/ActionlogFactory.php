@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\User;
-
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 $factory->defineAs(App\Models\Actionlog::class, 'asset-upload', function ($faker) {
     $asset = \App\Models\Asset::factory()->create();

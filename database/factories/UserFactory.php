@@ -2,51 +2,22 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Company;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 $password = bcrypt('password');
-
-
-
 
 // USER GLOBAL PERMISSION STATES
 
 // USER ASSET PERMISSION STATES
 
-
-
-
-
-
-
 // USER ACCESSORY PERMISSION STATES
-
-
-
-
-
 
 // USER CONSUMABLE PERMISSION STATES
 
-
-
-
-
-
 // USER LICENSE PERMISSION STATES
 
-
-
-
-
-
 // USER COMPONENTS PERMISSION STATES
-
-
-
-
-
 
 // USER USER PERMISSION STATES
 

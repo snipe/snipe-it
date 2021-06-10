@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Asset;
 use App\Models\SnipeModel;
@@ -10,6 +9,7 @@ use App\Models\Traits\Searchable;
 use App\Models\User;
 use App\Presenters\Presentable;
 use DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
@@ -131,7 +131,7 @@ class Location extends SnipeModel
 
     public function parent()
     {
-        return $this->belongsTo(\App\Models\Location::class, 'parent_id', 'id')
+        return $this->belongsTo(self::class, 'parent_id', 'id')
             ->with('parent');
     }
 
@@ -142,7 +142,7 @@ class Location extends SnipeModel
 
     public function children()
     {
-        return $this->hasMany(\App\Models\Location::class, 'parent_id')
+        return $this->hasMany(self::class, 'parent_id')
             ->with('children');
     }
 

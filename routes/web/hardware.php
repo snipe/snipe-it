@@ -3,6 +3,7 @@
 use App\Http\Controllers\AssetMaintenancesController;
 use App\Http\Controllers\Assets;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Asset Routes

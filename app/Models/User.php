@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
@@ -14,6 +13,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
@@ -330,7 +330,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function userlog()
     {
-        return $this->hasMany(\App\Models\Actionlog::class, 'target_id')->where('target_type', '=', \App\Models\User::class)->orderBy('created_at', 'DESC')->withTrashed();
+        return $this->hasMany(\App\Models\Actionlog::class, 'target_id')->where('target_type', '=', self::class)->orderBy('created_at', 'DESC')->withTrashed();
     }
 
     /**
@@ -370,7 +370,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function manager()
     {
-        return $this->belongsTo(\App\Models\User::class, 'manager_id')->withTrashed();
+        return $this->belongsTo(self::class, 'manager_id')->withTrashed();
     }
 
     /**

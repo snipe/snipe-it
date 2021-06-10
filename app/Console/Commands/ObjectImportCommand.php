@@ -74,7 +74,6 @@ class ObjectImportCommand extends Command
             $this->comment('All Items imported successfully!');
         }
         $this->comment('');
-
     }
 
     public function errorCallback($item, $field, $errorString)

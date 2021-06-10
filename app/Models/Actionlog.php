@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +22,6 @@ class Actionlog extends SnipeModel
     protected $presenter = \App\Presenters\ActionlogPresenter::class;
     use SoftDeletes;
     use Presentable;
-
 
     protected $table = 'action_logs';
     public $timestamps = true;
