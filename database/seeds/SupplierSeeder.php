@@ -1,6 +1,7 @@
 <?php
-use Illuminate\Database\Seeder;
+
 use App\Models\Supplier;
+use Illuminate\Database\Seeder;
 
 class SupplierSeeder extends Seeder
 {
@@ -8,6 +9,5 @@ class SupplierSeeder extends Seeder
     {
         Supplier::truncate();
         factory(Supplier::class, 5)->create();
-
     }
 }

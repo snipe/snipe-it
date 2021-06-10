@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Įrangos kortelė',
     'asset_model'       => 'Modelis',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Įranga ',
     'image'		=> 'Įrenginio nuotrauka',
     'days_without_acceptance' => 'Dienų skaičius be priėmimo',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'activated'  			=> 'Aktif',
     'allow'  				=> 'Benarkan',
     'checkedout'  			=> 'Harta',
@@ -28,11 +28,11 @@ return array(
     'show_current'          => 'Tunjukkan Pengguna Semasa',
     'show_deleted'          => 'Tunjukkan Pengguna Dipadamkan',
     'title' 				=> 'Tajuk',
-	'to_restore_them'		=> 'untuk memulihkannya.',
+    'to_restore_them'		=> 'untuk memulihkannya.',
     'updateuser' 			=> 'Kemaskini Pengguna',
     'username' 				=> 'Nama pengguna',
-	'user_deleted_text' 	=> 'Pengguna ini telah ditandakan sebagai dipadamkan.',
+    'user_deleted_text' 	=> 'Pengguna ini telah ditandakan sebagai dipadamkan.',
     'username_note' 		=> '(Ini digunakan untuk \'Active Directory\' sahaja, bukan untuk log masuk.)',
     'cloneuser'             => 'Pendua Pengguna',
     'viewusers' 			=> 'Papar Pengguna',
-);
+];

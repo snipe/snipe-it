@@ -1,6 +1,7 @@
 <?php
-use Illuminate\Database\Seeder;
+
 use App\Models\Depreciation;
+use Illuminate\Database\Seeder;
 
 class DepreciationSeeder extends Seeder
 {

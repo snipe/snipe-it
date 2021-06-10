@@ -21,7 +21,6 @@ class ApiCategoriesCest
     /** @test */
     public function indexCategorys(ApiTester $I)
     {
-
         $I->wantTo('Get a list of categories');
 
         // call
@@ -31,7 +30,7 @@ class ApiCategoriesCest
 
         $response = json_decode($I->grabResponse(), true);
         // sample verify
-        $category = App\Models\Category::withCount('assets as assets_count','accessories as accessories_count','consumables as consumables_count','components as components_count','licenses as licenses_count')
+        $category = App\Models\Category::withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count')
             ->orderByDesc('created_at')->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new CategoriesTransformer)->transformCategory($category)));
     }
@@ -42,7 +41,7 @@ class ApiCategoriesCest
         $I->wantTo('Create a new category');
 
         $temp_category = factory(\App\Models\Category::class)->states('asset-laptop-category')->make([
-            'name' => "Test Category Tag",
+            'name' => 'Test Category Tag',
         ]);
 
         // setup
@@ -63,6 +62,7 @@ class ApiCategoriesCest
 
     // Put is routed to the same method in the controller
     // DO we actually need to test both?
+
     /** @test */
     public function updateCategoryWithPatch(ApiTester $I, $scenario)
     {
@@ -77,7 +77,7 @@ class ApiCategoriesCest
 
         $temp_category = factory(\App\Models\Category::class)
             ->states('accessory-mouse-category')->make([
-            'name' => "updated category name",
+            'name' => 'updated category name',
         ]);
 
         $data = [
@@ -92,7 +92,7 @@ class ApiCategoriesCest
         $I->assertNotEquals($category->name, $data['name']);
 
         // update
-        $I->sendPATCH('/categories/' . $category->id, $data);
+        $I->sendPATCH('/categories/'.$category->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -108,11 +108,10 @@ class ApiCategoriesCest
         $temp_category->id = $category->id;
 
         // verify
-        $I->sendGET('/categories/' . $category->id);
+        $I->sendGET('/categories/'.$category->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson((new CategoriesTransformer)->transformCategory($temp_category));
-
     }
 
     /** @test */
@@ -122,12 +121,12 @@ class ApiCategoriesCest
 
         // create
         $category = factory(\App\Models\Category::class)->states('asset-laptop-category')->create([
-            'name' => "Soon to be deleted"
+            'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Category::class, $category);
 
         // delete
-        $I->sendDELETE('/categories/' . $category->id);
+        $I->sendDELETE('/categories/'.$category->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -136,7 +135,7 @@ class ApiCategoriesCest
         $I->assertEquals(trans('admin/categories/message.delete.success'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/categories/' . $category->id);
+        $I->sendGET('/categories/'.$category->id);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }

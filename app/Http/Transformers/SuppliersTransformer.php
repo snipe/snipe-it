@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
@@ -9,20 +10,19 @@ use Illuminate\Support\Facades\Storage;
 
 class SuppliersTransformer
 {
-
-    public function transformSuppliers (Collection $suppliers, $total)
+    public function transformSuppliers(Collection $suppliers, $total)
     {
-        $array = array();
+        $array = [];
         foreach ($suppliers as $supplier) {
             $array[] = self::transformSupplier($supplier);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformSupplier (Supplier $supplier = null)
+    public function transformSupplier(Supplier $supplier = null)
     {
         if ($supplier) {
-
             $array = [
                 'id' => (int) $supplier->id,
                 'name' => e($supplier->name),
@@ -49,17 +49,12 @@ class SuppliersTransformer
 
             $permissions_array['available_actions'] = [
                 'update' => Gate::allows('update', Supplier::class),
-                'delete' => (Gate::allows('delete', Supplier::class) && ($supplier->assets_count == 0) && ($supplier->licenses_count == 0)  && ($supplier->accessories_count == 0)),
+                'delete' => (Gate::allows('delete', Supplier::class) && ($supplier->assets_count == 0) && ($supplier->licenses_count == 0) && ($supplier->accessories_count == 0)),
             ];
 
             $array += $permissions_array;
 
             return $array;
         }
-
-
     }
-
-
-
 }

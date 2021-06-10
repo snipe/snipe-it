@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Активна директория',
     'ad_domain'				    => 'Домейн на активна директория',
     'ad_domain_help'			=> 'Това е понякога еднакво с вашия email домейн, но не винаги.',
     'ad_append_domain_label'    => 'Добави името на домейна',
     'ad_append_domain'          => 'Добави името на домейна към потребителското име',
-    'ad_append_domain_help'     => 'От потребителя не се изисква да въвежда "username@domain.local", достатъчно е да напише само "username".' ,
+    'ad_append_domain_help'     => 'От потребителя не се изисква да въвежда "username@domain.local", достатъчно е да напише само "username".',
     'admin_cc_email'            => 'CC електронна поща',
     'admin_cc_email_help'       => 'Въведете допълнителни електронни адреси, ако желаете да се изпраща копие на електронните пощи при вписване и изписване на активи.',
     'is_ad'				        => 'Това е активна директория на сървър',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Изтичаш праг на известия (в дни)',
     'alert_inv_threshold'		=> 'Праг на известия за запаси',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID на активи',
     'audit_interval'            => 'Одитен интервал',
     'audit_interval_help'       => 'Ако се изисква редовно да извършвате физически одит на активите си, въведете интервала в месеци.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Въведете двуфакторен код',
     'two_factor_config_complete'	=> 'Подаване на код',
     'two_factor_enabled_edit_not_allowed' => 'Вашият администратор не разрешава да редактирате тази настройка.',
-    'two_factor_enrollment_text'	=> "Двуфакторово удостоверяване се изисква, но вашето устройство не е било регистрирано още. Отворете Google Authenticator и сканирайте QR кода по-долу за да регистрирате вашето устройство. След като сте записани вашето устройство, въведете кода по-долу",
+    'two_factor_enrollment_text'	=> 'Двуфакторово удостоверяване се изисква, но вашето устройство не е било регистрирано още. Отворете Google Authenticator и сканирайте QR кода по-долу за да регистрирате вашето устройство. След като сте записани вашето устройство, въведете кода по-долу',
     'require_accept_signature'      => 'Изисква подпис',
     'require_accept_signature_help_text'      => 'Разрешаването на тази функция ще изисква от потребителите да се подпишат физически за приемане на даден актив.',
     'left'        => 'ляво',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Отмятането на този чек, ще задължи ползването на уникални сериини номера на артикулите',
     'zerofill_count'        => 'Дължина на етикети на актив, включително zerofill',
     'username_format_help'   => 'Тази настройка се изпозлва само при импортиране, ако потребителя не е въведен и ние трябва да му генерираме потребителско име.',
-);
+];

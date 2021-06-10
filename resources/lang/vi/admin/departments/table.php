@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => 'Tên bộ phận',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Vị trí',
     'create'                    => 'Tạo bộ phận',
     'update'                    => 'Bộ phận cập nhật',
-    );
+    ];

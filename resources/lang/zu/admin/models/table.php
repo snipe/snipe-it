@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'Dala i-Asset Model',
     'created_at' 			=> 'Kudalwe ngaso',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'Buyekeza i-Asset Model',
     'clone'				=> 'I-Clone Model',
     'edit'				=> 'Hlela Isibonelo',
-);
+];

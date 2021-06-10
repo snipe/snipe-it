@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Výdej spotřebního materiálu uživateli',
     'consumable_name'                   => 'Název sp. materiálu',
     'create'                            => 'Vytvořit sp. materiál',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Zbývá',
     'total' 			                => 'Celkem',
     'update'                            => 'Upravit sp. materiál',
-);
+];

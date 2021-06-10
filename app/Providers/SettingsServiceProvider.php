@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Models\Setting;
+use Illuminate\Support\ServiceProvider;
 
 /**
  * This service provider handles sharing the snipeSettings variable, and sets
@@ -11,7 +12,6 @@ use App\Models\Setting;
  * PHP version 5.5.9
  * @version    v3.0
  */
-
 class SettingsServiceProvider extends ServiceProvider
 {
     /**
@@ -24,135 +24,127 @@ class SettingsServiceProvider extends ServiceProvider
     public function boot()
     {
 
-
         // Share common setting variables with all views.
         view()->composer('*', function ($view) {
             $view->with('snipeSettings', Setting::getSettings());
         });
-
 
         /**
          * Set some common variables so that they're globally available.
          * The paths should always be public (versus private uploads)
          */
 
-
-
         // Model paths and URLs
 
-        \App::singleton('assets_upload_path', function(){
+        \App::singleton('assets_upload_path', function () {
             return 'assets/';
         });
 
-        \App::singleton('accessories_upload_path', function() {
+        \App::singleton('accessories_upload_path', function () {
             return 'public/uploads/accessories/';
         });
 
-        \App::singleton('models_upload_path', function(){
+        \App::singleton('models_upload_path', function () {
             return 'models/';
         });
 
-        \App::singleton('models_upload_url', function(){
+        \App::singleton('models_upload_url', function () {
             return 'models/';
         });
 
         // Categories
-        \App::singleton('categories_upload_path', function(){
+        \App::singleton('categories_upload_path', function () {
             return 'categories/';
         });
 
-        \App::singleton('categories_upload_url', function(){
+        \App::singleton('categories_upload_url', function () {
             return 'categories/';
         });
 
         // Locations
-        \App::singleton('locations_upload_path', function(){
+        \App::singleton('locations_upload_path', function () {
             return 'locations/';
         });
 
-        \App::singleton('locations_upload_url', function(){
+        \App::singleton('locations_upload_url', function () {
             return 'locations/';
         });
 
         // Users
-        \App::singleton('users_upload_path', function(){
+        \App::singleton('users_upload_path', function () {
             return 'avatars/';
         });
 
-        \App::singleton('users_upload_url', function(){
+        \App::singleton('users_upload_url', function () {
             return 'users/';
         });
 
         // Manufacturers
-        \App::singleton('manufacturers_upload_path', function(){
+        \App::singleton('manufacturers_upload_path', function () {
             return 'manufacturers/';
         });
 
-        \App::singleton('manufacturers_upload_url', function(){
+        \App::singleton('manufacturers_upload_url', function () {
             return 'manufacturers/';
         });
 
         // Suppliers
-        \App::singleton('suppliers_upload_path', function(){
+        \App::singleton('suppliers_upload_path', function () {
             return 'suppliers/';
         });
 
-        \App::singleton('suppliers_upload_url', function(){
+        \App::singleton('suppliers_upload_url', function () {
             return 'suppliers/';
         });
 
         // Departments
-        \App::singleton('departments_upload_path', function(){
+        \App::singleton('departments_upload_path', function () {
             return 'departments/';
         });
 
-        \App::singleton('departments_upload_url', function(){
+        \App::singleton('departments_upload_url', function () {
             return 'departments/';
         });
 
         // Company paths and URLs
-        \App::singleton('companies_upload_path', function(){
+        \App::singleton('companies_upload_path', function () {
             return 'companies/';
         });
 
-        \App::singleton('companies_upload_url', function(){
+        \App::singleton('companies_upload_url', function () {
             return 'companies/';
         });
 
         // Accessories paths and URLs
-        \App::singleton('accessories_upload_path', function(){
+        \App::singleton('accessories_upload_path', function () {
             return 'accessories/';
         });
 
-        \App::singleton('accessories_upload_url', function(){
+        \App::singleton('accessories_upload_url', function () {
             return 'accessories/';
         });
 
         // Consumables paths and URLs
-        \App::singleton('consumables_upload_path', function(){
+        \App::singleton('consumables_upload_path', function () {
             return 'consumables/';
         });
 
-        \App::singleton('consumables_upload_url', function(){
+        \App::singleton('consumables_upload_url', function () {
             return 'consumables/';
         });
-
 
         // Components paths and URLs
-        \App::singleton('components_upload_path', function(){
+        \App::singleton('components_upload_path', function () {
             return 'components/';
         });
 
-        \App::singleton('components_upload_url', function(){
+        \App::singleton('components_upload_url', function () {
             return 'components/';
         });
-
-
 
         // Set the monetary locale to the configured locale to make helper::parseFloat work.
         setlocale(LC_MONETARY, config('app.locale'));
         setlocale(LC_NUMERIC, config('app.locale'));
-
     }
 
     /**
@@ -162,6 +154,5 @@ class SettingsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 }

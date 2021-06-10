@@ -9,26 +9,25 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) use (
         'activated' => 1,
         'address' => $faker->address,
         'city' => $faker->city,
-        'company_id' => rand(1,4),
+        'company_id' => rand(1, 4),
         'country' => $faker->country,
-        'department_id' => rand(1,6),
+        'department_id' => rand(1, 6),
         'email' => $faker->safeEmail,
         'employee_num' => $faker->numberBetween(3500, 35050),
         'first_name' => $faker->firstName,
         'jobtitle' => $faker->jobTitle,
         'last_name' => $faker->lastName,
         'locale' => $faker->locale,
-        'location_id' => rand(1,5),
+        'location_id' => rand(1, 5),
         'notes' => 'Created by DB seeder',
         'password' => $password,
         'permissions' => '{"user":"0"}',
         'phone' => $faker->phoneNumber,
         'state' => $faker->stateAbbr,
         'username' => $faker->username,
-        'zip' => $faker->postcode
+        'zip' => $faker->postcode,
     ];
 });
-
 
 $factory->state(App\Models\User::class, 'first-admin', function ($faker) {
     return [
@@ -49,7 +48,6 @@ $factory->state(App\Models\User::class, 'snipe-admin', function ($faker) {
     ];
 });
 
-
 // USER GLOBAL PERMISSION STATES
 $factory->state(App\Models\User::class, 'superuser', function ($faker) {
     return [
@@ -60,7 +58,7 @@ $factory->state(App\Models\User::class, 'superuser', function ($faker) {
 $factory->state(App\Models\User::class, 'admin', function ($faker) {
     return [
         'permissions' => '{"admin":"1"}',
-        'manager_id' => rand(1,2),
+        'manager_id' => rand(1, 2),
     ];
 });
 // USER ASSET PERMISSION STATES

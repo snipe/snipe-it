@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
@@ -23,36 +24,33 @@ class Category extends SnipeModel
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'categories';
-    protected $hidden = ['user_id','deleted_at'];
-
+    protected $hidden = ['user_id', 'deleted_at'];
 
     protected $casts = [
         'user_id'      => 'integer',
     ];
 
-
     /**
-    * Category validation rules
-    */
-    public $rules = array(
+     * Category validation rules
+     */
+    public $rules = [
         'user_id' => 'numeric|nullable',
         'name'   => 'required|min:1|max:255|unique_undeleted',
         'require_acceptance'   => 'boolean',
         'use_default_eula'   => 'boolean',
         'category_type'   => 'required|in:asset,accessory,consumable,component,license',
-    );
+    ];
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     use UniqueUndeletedTrait;
-
 
     /**
      * The attributes that are mass assignable.
@@ -85,7 +83,6 @@ class Category extends SnipeModel
      */
     protected $searchableRelations = [];
 
-
     /**
      * Checks if category can be deleted
      *
@@ -95,8 +92,8 @@ class Category extends SnipeModel
      */
     public function isDeletable()
     {
-         return (Gate::allows('delete', $this)
-                && ($this->itemCount() == 0));
+        return Gate::allows('delete', $this)
+                && ($this->itemCount() == 0);
     }
 
     /**
@@ -168,6 +165,7 @@ class Category extends SnipeModel
             case 'license':
                 return $this->licenses()->count();
         }
+
         return '0';
     }
 
@@ -205,19 +203,16 @@ class Category extends SnipeModel
      */
     public function getEula()
     {
-
         $Parsedown = new \Parsedown();
 
         if ($this->eula_text) {
             return $Parsedown->text(e($this->eula_text));
-        } elseif ((Setting::getSettings()->default_eula_text) && ($this->use_default_eula=='1')) {
+        } elseif ((Setting::getSettings()->default_eula_text) && ($this->use_default_eula == '1')) {
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
         } else {
             return null;
         }
-
     }
-
 
     /**
      * -----------------------------------------------
@@ -233,10 +228,8 @@ class Category extends SnipeModel
      * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
-
     public function scopeRequiresAcceptance($query)
     {
-
         return $query->where('require_acceptance', '=', true);
     }
 }

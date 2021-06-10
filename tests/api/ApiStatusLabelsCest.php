@@ -2,11 +2,11 @@
 
 use App\Helpers\Helper;
 use App\Http\Transformers\StatuslabelsTransformer;
-use App\Models\Statuslabel;
 use App\Models\Setting;
+use App\Models\Statuslabel;
 use Illuminate\Support\Facades\Auth;
 
-class ApiStatuslabelsCest
+class ApiStatusLabelsCest
 {
     protected $user;
     protected $timeFormat;
@@ -21,7 +21,6 @@ class ApiStatuslabelsCest
     /** @test */
     public function indexStatuslabels(ApiTester $I)
     {
-
         $I->wantTo('Get a list of statuslabels');
 
         // call
@@ -43,7 +42,7 @@ class ApiStatuslabelsCest
         $I->wantTo('Create a new statuslabel');
 
         $temp_statuslabel = factory(\App\Models\Statuslabel::class)->make([
-            'name' => "Test Statuslabel Tag",
+            'name' => 'Test Statuslabel Tag',
         ]);
 
         // setup
@@ -53,7 +52,7 @@ class ApiStatuslabelsCest
             'deployable' => $temp_statuslabel->deployable,
             'notes' => $temp_statuslabel->notes,
             'pending' => $temp_statuslabel->pending,
-            'type' => 'deployable'
+            'type' => 'deployable',
         ];
 
         // create
@@ -64,6 +63,7 @@ class ApiStatuslabelsCest
 
     // Put is routed to the same method in the controller
     // DO we actually need to test both?
+
     /** @test */
     public function updateStatuslabelWithPatch(ApiTester $I, $scenario)
     {
@@ -76,8 +76,8 @@ class ApiStatuslabelsCest
         $I->assertInstanceOf(\App\Models\Statuslabel::class, $statuslabel);
 
         $temp_statuslabel = factory(\App\Models\Statuslabel::class)->states('pending')->make([
-            'name' => "updated statuslabel name",
-            'type' => 'pending'
+            'name' => 'updated statuslabel name',
+            'type' => 'pending',
         ]);
 
         $data = [
@@ -86,18 +86,18 @@ class ApiStatuslabelsCest
             'deployable' => $temp_statuslabel->deployable,
             'notes' => $temp_statuslabel->notes,
             'pending' => $temp_statuslabel->pending,
-            'type' => $temp_statuslabel->type
+            'type' => $temp_statuslabel->type,
         ];
 
         $I->assertNotEquals($statuslabel->name, $data['name']);
 
         // update
-        $I->sendPATCH('/statuslabels/' . $statuslabel->id, $data);
+        $I->sendPATCH('/statuslabels/'.$statuslabel->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
         $response = json_decode($I->grabResponse());
-// dd($response);
+        // dd($response);
         $I->assertEquals('success', $response->status);
         $I->assertEquals(trans('admin/statuslabels/message.update.success'), $response->messages);
         $I->assertEquals($statuslabel->id, $response->payload->id); // statuslabel id does not change
@@ -108,11 +108,10 @@ class ApiStatuslabelsCest
         $temp_statuslabel->id = $statuslabel->id;
 
         // verify
-        $I->sendGET('/statuslabels/' . $statuslabel->id);
+        $I->sendGET('/statuslabels/'.$statuslabel->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson((new StatuslabelsTransformer)->transformStatuslabel($temp_statuslabel));
-
     }
 
     /** @test */
@@ -122,12 +121,12 @@ class ApiStatuslabelsCest
 
         // create
         $statuslabel = factory(\App\Models\Statuslabel::class)->create([
-            'name' => "Soon to be deleted"
+            'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Statuslabel::class, $statuslabel);
 
         // delete
-        $I->sendDELETE('/statuslabels/' . $statuslabel->id);
+        $I->sendDELETE('/statuslabels/'.$statuslabel->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -136,7 +135,7 @@ class ApiStatuslabelsCest
         $I->assertEquals(trans('admin/statuslabels/message.delete.success'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/statuslabels/' . $statuslabel->id);
+        $I->sendGET('/statuslabels/'.$statuslabel->id);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }

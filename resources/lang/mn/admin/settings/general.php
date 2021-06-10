@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Идэвхтэй лавлах',
     'ad_domain'				    => 'Active Directory домэйн',
     'ad_domain_help'			=> 'Энэ нь заримдаа таны имэйл домэйнтой адил боловч үргэлж биш юм.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Имэйл',
     'admin_cc_email_help'       => 'Хэрэв та хэрэглэгчдэд илгээсэн хүлээн авах/олгох имэйлийн хуулбарыг нэмэлт имэйл үрүү илгээхийг хүсвэл энд оруулна уу. Үгүй бол энэ талбарыг хоосон орхино уу.',
     'is_ad'				        => 'Энэ бол Active Directory Server',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Exped Alerts (босоо хоногоор)',
     'alert_inv_threshold'		=> 'Бараа материалын Alert босго',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Хөрөнгийн дугаар',
     'audit_interval'            => 'Аудитын интервал',
     'audit_interval_help'       => 'Хэрэв та хөрөнгөө тогтмол шалгаж байх шаардлагатай бол сар бүрийн интервалыг оруул.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Хоёр хүчин зүйлийн кодыг оруулна уу',
     'two_factor_config_complete'	=> 'Код илгээх',
     'two_factor_enabled_edit_not_allowed' => 'Таны админ энэ тохиргоог засахыг зөвшөөрөхгүй.',
-    'two_factor_enrollment_text'	=> "Хоёр хүчин зүйлийг баталгаажуулах шаардлагатай боловч таны төхөөрөмж одоогоор бүртгэгдээгүй байна. Google Authenticator аппликейшнийг нээж, төхөөрөмжөө бүртгүүлэхийн тулд доорх QR кодыг хайна уу. Та төхөөрөмжөө бүртгүүлснийхээ дараа доорх кодыг оруулна уу",
+    'two_factor_enrollment_text'	=> 'Хоёр хүчин зүйлийг баталгаажуулах шаардлагатай боловч таны төхөөрөмж одоогоор бүртгэгдээгүй байна. Google Authenticator аппликейшнийг нээж, төхөөрөмжөө бүртгүүлэхийн тулд доорх QR кодыг хайна уу. Та төхөөрөмжөө бүртгүүлснийхээ дараа доорх кодыг оруулна уу',
     'require_accept_signature'      => 'Гарын үсэг зурах шаардлагатай',
     'require_accept_signature_help_text'      => 'Энэ функцийг идэвхжүүлэх нь хэрэглэгчид активыг хүлээн авахдаа биечлэн гарын үсэг зурах шаардлагатай болно.',
     'left'        => 'үлдсэн',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Энэ хайрцгийг шалгаснаар хөрөнгийн сериал дахь дахин давтагдашгүй дугаарлалтын хязгаарлалтыг хэрэгжүүлэх болно',
     'zerofill_count'        => 'Үүнд үл хөдлөх хөрөнгийн хаягуудын урт',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

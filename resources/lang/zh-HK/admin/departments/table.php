@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => '部門名稱',
@@ -8,4 +8,4 @@ return array(
     'location'                  => '位置',
     'create'                    => '新增部門',
     'update'                    => '更新部門',
-    );
+    ];

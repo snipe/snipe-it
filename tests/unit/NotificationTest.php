@@ -1,4 +1,5 @@
 <?php
+
 use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -15,12 +16,12 @@ use Illuminate\Support\Facades\Notification;
 class NotificationTest extends BaseTest
 {
     /**
-    * @var \UnitTester
-    */
+     * @var \UnitTester
+     */
     protected $tester;
 
-     public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()
-     {
+    public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()
+    {
         $admin = factory(User::class)->states('superuser')->create();
         Auth::login($admin);
         $cat = $this->createValidCategory('asset-laptop-category', ['require_acceptance' => true]);
@@ -31,5 +32,5 @@ class NotificationTest extends BaseTest
         Notification::fake();
         $asset->checkOut($user, 1);
         Notification::assertSentTo($user, CheckoutAssetNotification::class);
-     }
+    }
 }

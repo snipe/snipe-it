@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
@@ -12,7 +13,7 @@ class Supplier extends SnipeModel
     protected $dates = ['deleted_at'];
     protected $table = 'suppliers';
 
-    protected $rules = array(
+    protected $rules = [
         'name'              => 'required|min:1|max:255|unique_undeleted',
         'address'           => 'max:50|nullable',
         'address2'          => 'max:50|nullable',
@@ -26,43 +27,40 @@ class Supplier extends SnipeModel
         'email'             => 'email|max:150|nullable',
         'zip'               => 'max:10|nullable',
         'url'               => 'sometimes|nullable|string|max:250',
-    );
+    ];
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     use UniqueUndeletedTrait;
-
     use Searchable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['name'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [];
-
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name','address','address2','city','state','country','zip','phone','fax','email','contact','url','notes'];
-
+    protected $fillable = ['name', 'address', 'address2', 'city', 'state', 'country', 'zip', 'phone', 'fax', 'email', 'contact', 'url', 'notes'];
 
     /**
      * Eager load counts
@@ -184,9 +182,10 @@ class Supplier extends SnipeModel
      */
     public function addhttp($url)
     {
-        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-            $url = "http://" . $url;
+        if (! preg_match('~^(?:f|ht)tps?://~i', $url)) {
+            $url = 'http://'.$url;
         }
+
         return $url;
     }
 }

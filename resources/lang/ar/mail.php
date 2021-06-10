@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'ألغى المستخدم طلب عنصر على الموقع',
     'a_user_requested' => 'طلب مستخدم عنصر على الموقع',
     'accessory_name' => 'اسم الملحق:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'تذكير: تاريخ تحقق :name يقترب من الموعد النهائي',
     'Expected_Checkin_Date' => 'من المقرر أن يتم التحقق من الأصول التي تم إخراجها إليك في :date',
-    'your_assets' => 'عرض الأصول الخاصة بك'
-);
+    'your_assets' => 'عرض الأصول الخاصة بك',
+];

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\Traits\Searchable;
@@ -16,22 +17,22 @@ class Manufacturer extends SnipeModel
     protected $table = 'manufacturers';
 
     // Declare the rules for the form validation
-    protected $rules = array(
+    protected $rules = [
         'name'   => 'required|min:2|max:255|unique:manufacturers,name,NULL,id,deleted_at,NULL',
         'url'   => 'url|nullable',
         'support_url'   => 'url|nullable',
-        'support_email'   => 'email|nullable'
-    );
+        'support_email'   => 'email|nullable',
+    ];
 
     protected $hidden = ['user_id'];
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
@@ -65,14 +66,13 @@ class Manufacturer extends SnipeModel
      */
     protected $searchableRelations = [];
 
-
     public function isDeletable()
     {
-        return (Gate::allows('delete', $this)
-            && ($this->assets()->count()  === 0)
+        return Gate::allows('delete', $this)
+            && ($this->assets()->count() === 0)
             && ($this->licenses()->count() === 0)
             && ($this->consumables()->count() === 0)
-            && ($this->accessories()->count() === 0));
+            && ($this->accessories()->count() === 0);
     }
 
     public function assets()

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Omkring Aktiv Afskrivninger',
     'about_depreciations'  					=> 'Du kan sætte aktiv afskrivninger til at afskrive aktiver baseret på lineære afskrivninger.',
     'asset_depreciations'  					=> 'Aktiv Afskrivninger',
@@ -9,4 +9,4 @@ return array(
     'number_of_months'  					=> 'Antal måneder',
     'update'  					            => 'Opdater Afskrivninger',
 
-);
+];

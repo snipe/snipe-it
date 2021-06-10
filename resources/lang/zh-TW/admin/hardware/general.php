@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => '關於資產',
     'about_assets_text'            => '資產是按序號或資產標籤追蹤的物品。 他們往往是高價值並標示為重要的物品。',
-	'archived'  				=> '已封存',
+    'archived'  				=> '已封存',
     'asset'  					=> '資產',
     'bulk_checkout'             => '借出資產',
     'checkin'  					=> '資產繳回',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> '待處理',
     'undeployable'  			=> '不可部署',
     'view'  					=> '檢視資產',
-);
+];

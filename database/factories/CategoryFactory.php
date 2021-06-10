@@ -9,7 +9,6 @@
 |
 */
 
-
 $factory->define(App\Models\Category::class, function (Faker\Generator $faker) {
     return [
         'checkin_email' => $faker->boolean(),
@@ -70,7 +69,6 @@ $factory->state(App\Models\Category::class, 'asset-voip-category', function ($fa
     ];
 });
 
-
 $factory->state(App\Models\Category::class, 'accessory-keyboard-category', function ($faker) {
     return [
         'name' => 'Keyboards',
@@ -84,7 +82,6 @@ $factory->state(App\Models\Category::class, 'accessory-mouse-category', function
         'category_type' => 'accessory',
     ];
 });
-
 
 $factory->state(App\Models\Category::class, 'component-hdd-category', function ($faker) {
     return [
@@ -114,14 +111,12 @@ $factory->state(App\Models\Category::class, 'consumable-ink-category', function 
     ];
 });
 
-
 $factory->state(App\Models\Category::class, 'license-graphics-category', function ($faker) {
     return [
         'name' => 'Graphics Software',
         'category_type' => 'license',
     ];
 });
-
 
 $factory->state(App\Models\Category::class, 'license-office-category', function ($faker) {
     return [

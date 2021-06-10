@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory 域',
     'ad_domain_help'			=> '通常(但並非全部情況下)這與您的郵件域相同。',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => '電子郵件副本',
     'admin_cc_email_help'       => '如果您想將發送給用戶的繳回/借出電子郵件的副本發送到其他電子郵件帳戶，請在此處輸入。否則，請將此字段留空。',
     'is_ad'				        => '這是AD域伺服器',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> '警報閾值(天)',
     'alert_inv_threshold'		=> '庫存警報閾值',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> '資產ID',
     'audit_interval'            => '稽核間隔',
     'audit_interval_help'       => '如果您需要定期對您的資產進行身體審核，請輸入幾個月的時間間隔。',
@@ -214,7 +214,7 @@ return array(
     'two_factor_enter_code'	=> '輸入雙因素認證代碼',
     'two_factor_config_complete'	=> '送出代碼',
     'two_factor_enabled_edit_not_allowed' => '您的管理員不允許您編輯此設定。',
-    'two_factor_enrollment_text'	=> "雙因素認證是必要的，無論您是否已登記行動裝置。開啟您的 Google Authenticator app 並且掃描下方的 QR Code 以登記雙因素認證。當您已登記您的裝置，請在下方輸入認證代碼",
+    'two_factor_enrollment_text'	=> '雙因素認證是必要的，無論您是否已登記行動裝置。開啟您的 Google Authenticator app 並且掃描下方的 QR Code 以登記雙因素認證。當您已登記您的裝置，請在下方輸入認證代碼',
     'require_accept_signature'      => '需要簽名',
     'require_accept_signature_help_text'      => '啟用此功能將需要使用者親自簽名來接受一項資產。',
     'left'        => '左',
@@ -227,4 +227,4 @@ return array(
     'unique_serial_help_text'                => '選中此框將強制對資產序號進行唯一性約束',
     'zerofill_count'        => '資產標籤長度，包括補零',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\Traits\Searchable;
@@ -20,24 +21,24 @@ class AssetModel extends SnipeModel
     use Requestable, Presentable;
     protected $dates = ['deleted_at'];
     protected $table = 'models';
-    protected $hidden = ['user_id','deleted_at'];
+    protected $hidden = ['user_id', 'deleted_at'];
 
     // Declare the rules for the model validation
-    protected $rules = array(
+    protected $rules = [
         'name'              => 'required|min:1|max:255',
         'model_number'      => 'max:255|nullable',
         'category_id'       => 'required|integer|exists:categories,id',
         'manufacturer_id'   => 'required|integer|exists:manufacturers,id',
         'eol'               => 'integer:min:0|max:240|nullable',
-    );
+    ];
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
@@ -49,6 +50,7 @@ class AssetModel extends SnipeModel
 
         $this->attributes['eol'] = $value;
     }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -68,17 +70,17 @@ class AssetModel extends SnipeModel
     ];
 
     use Searchable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['name', 'model_number', 'notes', 'eol'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [
@@ -86,7 +88,6 @@ class AssetModel extends SnipeModel
         'category'     => ['name'],
         'manufacturer' => ['name'],
     ];
-
 
     /**
      * Establishes the model -> assets relationship
@@ -124,7 +125,6 @@ class AssetModel extends SnipeModel
         return $this->belongsTo('\App\Models\Depreciation', 'depreciation_id');
     }
 
-
     /**
      * Establishes the model -> manufacturer relationship
      *
@@ -161,7 +161,6 @@ class AssetModel extends SnipeModel
         return $this->belongsToMany('\App\Models\CustomField', 'models_custom_fields')->withPivot('default_value');
     }
 
-
     /**
      * Gets the full url for the image
      *
@@ -171,19 +170,20 @@ class AssetModel extends SnipeModel
      * @since [v2.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function getImageUrl() {
+    public function getImageUrl()
+    {
         if ($this->image) {
             return Storage::disk('public')->url(app('models_upload_path').$this->image);
         }
+
         return false;
     }
 
     /**
-    * -----------------------------------------------
-    * BEGIN QUERY SCOPES
-    * -----------------------------------------------
-    **/
-
+     * -----------------------------------------------
+     * BEGIN QUERY SCOPES
+     * -----------------------------------------------
+     **/
 
     /**
      * scopeInCategory
@@ -198,7 +198,6 @@ class AssetModel extends SnipeModel
      */
     public function scopeInCategory($query, array $categoryIdListing)
     {
-
         return $query->whereIn('category_id', $categoryIdListing);
     }
 
@@ -214,9 +213,8 @@ class AssetModel extends SnipeModel
      */
     public function scopeRequestableModels($query)
     {
-
         return $query->where('requestable', '1');
-    }  
+    }
 
     /**
      * Query builder scope to search on text, including catgeory and manufacturer name
@@ -228,7 +226,6 @@ class AssetModel extends SnipeModel
      */
     public function scopeSearchByManufacturerOrCat($query, $search)
     {
-
         return $query->where('models.name', 'LIKE', "%$search%")
             ->orWhere('model_number', 'LIKE', "%$search%")
             ->orWhere(function ($query) use ($search) {
@@ -241,7 +238,6 @@ class AssetModel extends SnipeModel
                     $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
                 });
             });
-
     }
 
     /**
@@ -269,6 +265,4 @@ class AssetModel extends SnipeModel
     {
         return $query->leftJoin('categories', 'models.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
     }
-
-
 }

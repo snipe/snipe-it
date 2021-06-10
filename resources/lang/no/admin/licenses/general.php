@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_licenses_title'            => 'Om lisenser',
     'about_licenses'                  => 'Lisenser er brukt til å spore bruk av programvare.  De har et angitt antall seter som kan sjekkes ut til enkeltpersoner',
     'checkin'  					=> 'Sjekk inn setelisens',
@@ -18,4 +18,4 @@ return array(
     'software_licenses'  		=> 'Programvarelisenser',
     'user'  					=> 'Bruker',
     'view'  					=> 'Vis lisens',
-);
+];

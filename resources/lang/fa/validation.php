@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'ویژگی در حال حاضر گرفته شده است.',
     'uploaded'             => 'ویژگی: attribute failed to upload.',
     'url'                  => 'شکل ویژگی نامعتبر است.',
-    "unique_undeleted"     => "The :attribute must be unique.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "فیلد attribute شامل یک شخصیت است که مجاز نیست.",
-        "email_array"      => "یک یا چند آدرس ایمیل نامعتبر است",
-        "hashed_pass"      => "رمز عبور فعلی شما اشتباه است",
+        'alpha_space' => 'فیلد attribute شامل یک شخصیت است که مجاز نیست.',
+        'email_array'      => 'یک یا چند آدرس ایمیل نامعتبر است',
+        'hashed_pass'      => 'رمز عبور فعلی شما اشتباه است',
         'dumbpwd'          => 'این رمز عبور خیلی رایج است',
-        "statuslabel_type" => "شما باید نوع برچسب معتبر را انتخاب کنید",
+        'statuslabel_type' => 'شما باید نوع برچسب معتبر را انتخاب کنید',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Ya existe un usuario con este e-mail.',
     'account_not_found'      => 'El nombre de usuario o contraseña es incorrecta.',
@@ -9,37 +9,36 @@ return array(
     'account_banned'         => 'Este usuario ha sido expulsado.',
     'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
 
-    'two_factor' => array(
+    'two_factor' => [
         'already_enrolled'      => 'Your device is already enrolled.',
         'success'               => 'You have successfully logged in.',
         'code_required'         => 'Two-factor code is required.',
         'invalid_code'          => 'Two-factor code is invalid.',
-    ),
+    ],
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Ha habido un problema al iniciar sesión. Por favor, vuelve a intentarlo.',
         'success' => 'has iniciado sesión correctamente.',
-    ),
+    ],
 
-    'logout' => array(
+    'logout' => [
         'error'   => 'There was a problem while trying to log you out, please try again.',
         'success' => 'You have successfully logged out.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Ha habido un problema al crear la cuenta. Por favor, vuelve a intentarlo.',
         'success' => 'Cuenta creada correctamente.',
-    ),
+    ],
 
-    'forgot-password' => array(
+    'forgot-password' => [
         'error'   => 'Ha habido un problema al intentar resetear el password. Por favor, vuelve a intentarlo.',
         'success' => 'If that email address exists in our system, a password recovery email has been sent.',
-    ),
+    ],
 
-    'forgot-password-confirm' => array(
+    'forgot-password-confirm' => [
         'error'   => 'Ha habido un problema al intentar resetear el password. Por favor, vuelve a intentarlo.',
         'success' => 'El password ha sido reseteado correctamente.',
-    ),
+    ],
 
-
-);
+];

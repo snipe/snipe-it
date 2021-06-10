@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Mengenai Aset',
     'about_assets_text'            => 'Aset adalah item yang dikesan oleh nombor siri atau tag aset. Mereka cenderung menjadi item nilai yang lebih tinggi di mana mengenal pasti perkara-perkara tertentu.',
-	'archived'  				=> 'Diarkibkan',
+    'archived'  				=> 'Diarkibkan',
     'asset'  					=> 'Harta',
     'bulk_checkout'             => 'Daftar Keluar Aset',
     'checkin'  					=> 'Terima Harta',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Menunggu',
     'undeployable'  			=> 'Tidak dapat dipisahkan',
     'view'  					=> 'Papar Harta',
-);
+];

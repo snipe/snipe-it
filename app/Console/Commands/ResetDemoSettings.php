@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Console\Command;
@@ -40,7 +39,6 @@ class ResetDemoSettings extends Command
      */
     public function handle()
     {
-
         $this->info('Resetting the demo settings.');
         $settings = Setting::first();
         $settings->per_page = 20;
@@ -73,7 +71,6 @@ class ResetDemoSettings extends Command
         $settings->saml_slo = null;
         $settings->saml_custom_settings = null;
 
-
         $settings->save();
 
         if ($user = User::where('username', '=', 'admin')->first()) {
@@ -83,7 +80,5 @@ class ResetDemoSettings extends Command
 
         \Storage::disk('local_public')->put('snipe-logo.png', file_get_contents(public_path('img/demo/snipe-logo.png')));
         \Storage::disk('local_public')->put('snipe-logo-lg.png', file_get_contents(public_path('img/demo/snipe-logo-lg.png')));
-
     }
-
 }

@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Denne bruger kan logge ind',
     'activated_disabled_help_text' => 'Du kan ikke redigere rettigheder for din egen konto.',
     'assets_user'       => 'Aktiver tildelt :navn',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Redigér bruger',
     'filetype_info'     => 'Tilladte filtyper er png, gif, jpg, jpeg, doc, docx, pdf, txt, zip og rar.',
     'history_user'      => 'Historie for: navn',
-	'info'				=> 'Information',
+    'info'				=> 'Information',
     'restore_user'		=> 'Klik her for at gendanne dem.',
     'last_login'        => 'Sidste Login',
     'ldap_config_text'  => 'LDAP-konfigurationsindstillinger kan findes Admin> Indstillinger. Den (valgfrie) valgte placering vil blive indstillet for alle importerede brugere.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Dine nuværende administratorindstillinger tillader selektiv håndhævelse af tofaktors godkendelse.',
     'two_factor_enrolled' => '2FA Device Enrolled',
     'two_factor_active'   => '2FA aktiv ',
-    );
+    ];

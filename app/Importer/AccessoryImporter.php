@@ -27,17 +27,19 @@ class AccessoryImporter extends ItemImporter
     {
         $accessory = Accessory::where('name', $this->item['name'])->first();
         if ($accessory) {
-            if (!$this->updating) {
-                $this->log('A matching Accessory ' . $this->item["name"] . ' already exists.  ');
+            if (! $this->updating) {
+                $this->log('A matching Accessory '.$this->item['name'].' already exists.  ');
+
                 return;
             }
 
             $this->log('Updating Accessory');
             $accessory->update($this->sanitizeItemForUpdating($accessory));
             $accessory->save();
+
             return;
         }
-        $this->log("No Matching Accessory, Creating a new one");
+        $this->log('No Matching Accessory, Creating a new one');
         $accessory = new Accessory();
         $accessory->fill($this->sanitizeItemForStoring($accessory));
 
@@ -45,7 +47,8 @@ class AccessoryImporter extends ItemImporter
         // $accessory->unsetEventDispatcher();
         if ($accessory->save()) {
             $accessory->logCreate('Imported using CSV Importer');
-            $this->log('Accessory ' . $this->item["name"] . ' was created');
+            $this->log('Accessory '.$this->item['name'].' was created');
+
             return;
         }
         $this->logError($accessory, 'Accessory');

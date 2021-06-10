@@ -42,9 +42,9 @@ class ApiLicensesCest
         $I->wantTo('Create a new license');
 
         $temp_license = factory(\App\Models\License::class)->states('acrobat')->make([
-            'name' => "Test License Name",
+            'name' => 'Test License Name',
             'depreciation_id' => 3,
-            'company_id' => 2
+            'company_id' => 2,
         ]);
 
         // setup
@@ -77,6 +77,7 @@ class ApiLicensesCest
 
     // Put is routed to the same method in the controller
     // DO we actually need to test both?
+
     /** @test */
     public function updateLicenseWithPatch(ApiTester $I, $scenario)
     {
@@ -86,13 +87,13 @@ class ApiLicensesCest
         $license = factory(\App\Models\License::class)->states('acrobat')->create([
             'name' => 'Original License Name',
             'depreciation_id' => 3,
-            'company_id' => 2
+            'company_id' => 2,
         ]);
         $I->assertInstanceOf(\App\Models\License::class, $license);
 
         $temp_license = factory(\App\Models\License::class)->states('office')->make([
             'company_id' => 3,
-            'depreciation_id' => 2
+            'depreciation_id' => 2,
         ]);
 
         $data = [
@@ -121,7 +122,7 @@ class ApiLicensesCest
         $I->assertNotEquals($license->name, $data['name']);
 
         // update
-        $I->sendPATCH('/licenses/' . $license->id, $data);
+        $I->sendPATCH('/licenses/'.$license->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -134,7 +135,7 @@ class ApiLicensesCest
         $temp_license->updated_at = Carbon::parse($response->payload->updated_at);
         $temp_license->id = $license->id;
         // verify
-        $I->sendGET('/licenses/' . $license->id);
+        $I->sendGET('/licenses/'.$license->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson((new LicensesTransformer)->transformLicense($temp_license));
@@ -147,7 +148,7 @@ class ApiLicensesCest
 
         // create
         $license = factory(\App\Models\License::class)->states('acrobat')->create([
-            'name' => "Soon to be deleted"
+            'name' => 'Soon to be deleted',
         ]);
         $licenseSeat = $license->freeSeat();
         $licenseSeat->assigned_to = $this->user->id;
@@ -155,7 +156,7 @@ class ApiLicensesCest
         $I->assertInstanceOf(\App\Models\License::class, $license);
 
         // delete
-        $I->sendDELETE('/licenses/' . $license->id);
+        $I->sendDELETE('/licenses/'.$license->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -171,12 +172,12 @@ class ApiLicensesCest
 
         // create
         $license = factory(\App\Models\License::class)->states('acrobat')->create([
-            'name' => "Soon to be deleted"
+            'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\License::class, $license);
 
         // delete
-        $I->sendDELETE('/licenses/' . $license->id);
+        $I->sendDELETE('/licenses/'.$license->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -185,7 +186,7 @@ class ApiLicensesCest
         $I->assertEquals(trans('admin/licenses/message.delete.success'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/licenses/' . $license->id);
+        $I->sendGET('/licenses/'.$license->id);
 
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();

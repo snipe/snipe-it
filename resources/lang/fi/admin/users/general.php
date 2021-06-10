@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Salli kirjautuminen',
     'activated_disabled_help_text' => 'Et voi muokata oman tilisi aktivoinnin tilaa.',
     'assets_user'       => 'Käyttäjälle :name luovutetut laitteet',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Muokkaa käyttäjää',
     'filetype_info'     => 'Sallitut tiedostotyypit ovat png, gif, jpg, jpeg, doc, docx, pdf, txt, zip ja rar.',
     'history_user'      => 'Historia käyttäjälle :name',
-	'info'				=> 'Tiedot',
+    'info'				=> 'Tiedot',
     'restore_user'		=> 'Klikkaa tästä palauttaaksesi ne.',
     'last_login'        => 'Viimeisin kirjautuminen',
     'ldap_config_text'  => 'LDAP-asetukset löytyvät kohdasta Järjestelmänvalvoja> Asetukset. Valittu (valinnainen) sijainti määritetään kaikille tuodulle käyttäjälle.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Nykyiset järjestelmänvalvojan asetukset mahdollistavat kaksivaiheisen tunnistautumisen käyttöönoton valituille käyttäjille.  ',
     'two_factor_enrolled' => 'MFA-laite ilmoittautunut mukaan ',
     'two_factor_active'   => 'MFA aktiivinen',
-    );
+    ];

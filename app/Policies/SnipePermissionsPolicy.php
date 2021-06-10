@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Policies;
 
 use App\Models\Company;
@@ -18,26 +19,24 @@ use Illuminate\Auth\Access\HandlesAuthorization;
  * {
  *    return 'manufacturers';
  * }
- *
  */
-
 abstract class SnipePermissionsPolicy
 {
     /**
      * This should return the key of the model in the users json permission string.
      *
-     * @return boolean
+     * @return bool
      */
 
     //
     abstract protected function columnName();
 
-        use HandlesAuthorization;
+    use HandlesAuthorization;
 
     public function before(User $user, $ability, $item)
     {
         // Lets move all company related checks here.
-        if ($item instanceof \App\Models\SnipeModel && !Company::isCurrentUserHasAccess($item)) {
+        if ($item instanceof \App\Models\SnipeModel && ! Company::isCurrentUserHasAccess($item)) {
             return false;
         }
         // If an admin, they can do all asset related tasks.
@@ -50,6 +49,7 @@ abstract class SnipePermissionsPolicy
     {
         return $user->hasAccess($this->columnName().'.view');
     }
+
     /**
      * Determine whether the user can view the accessory.
      *
@@ -93,12 +93,13 @@ abstract class SnipePermissionsPolicy
     {
         $itemConditional = true;
         if ($item) {
-            $itemConditional =  empty($item->deleted_at);
+            $itemConditional = empty($item->deleted_at);
         }
+
         return $itemConditional && $user->hasAccess($this->columnName().'.delete');
     }
 
-     /**
+    /**
      * Determine whether the user can manage the accessory.
      *
      * @param  \App\Models\User  $user
@@ -108,6 +109,4 @@ abstract class SnipePermissionsPolicy
     {
         return $user->hasAccess($this->columnName().'.edit');
     }
-
-
 }

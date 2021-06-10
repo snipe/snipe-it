@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\AssetModel;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
 class AssetModelSeeder extends Seeder
@@ -44,29 +44,25 @@ class AssetModelSeeder extends Seeder
         $dst = 'models'.'/';
         $del_files = Storage::files($dst);
 
-        foreach($del_files as $del_file){ // iterate files
-            $file_to_delete = str_replace($src,'',$del_file);
+        foreach ($del_files as $del_file) { // iterate files
+            $file_to_delete = str_replace($src, '', $del_file);
             \Log::debug('Deleting: '.$file_to_delete);
-            try  {
+            try {
                 Storage::disk('public')->delete($dst.$del_file);
             } catch (\Exception $e) {
                 \Log::debug($e);
             }
         }
 
-
-        $add_files = glob($src."/*.*");
-        foreach($add_files as $add_file){
-            $file_to_copy = str_replace($src,'',$add_file);
+        $add_files = glob($src.'/*.*');
+        foreach ($add_files as $add_file) {
+            $file_to_copy = str_replace($src, '', $add_file);
             \Log::debug('Copying: '.$file_to_copy);
-            try  {
+            try {
                 Storage::disk('public')->put($dst.$file_to_copy, file_get_contents($src.$file_to_copy));
             } catch (\Exception $e) {
                 \Log::debug($e);
             }
         }
-
-
     }
-
 }

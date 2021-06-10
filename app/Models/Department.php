@@ -13,7 +13,7 @@ class Department extends SnipeModel
      * validation rules before attempting validation. If this property
      * is not set in the model it will default to true.
      *
-     * @var boolean
+     * @var bool
      */
     protected $injectUniqueIdentifier = true;
 
@@ -47,17 +47,17 @@ class Department extends SnipeModel
     ];
 
     use Searchable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['name', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [];
@@ -74,7 +74,6 @@ class Department extends SnipeModel
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
-
     /**
      * Establishes the department -> users relationship
      *
@@ -86,7 +85,6 @@ class Department extends SnipeModel
     {
         return $this->hasMany('\App\Models\User', 'department_id');
     }
-
 
     /**
      * Establishes the department -> manager relationship
@@ -111,7 +109,7 @@ class Department extends SnipeModel
     {
         return $this->belongsTo('\App\Models\Location', 'location_id');
     }
-    
+
     /**
      * Query builder scope to order on location name
      *
@@ -137,6 +135,4 @@ class Department extends SnipeModel
     {
         return $query->leftJoin('users as department_user', 'departments.manager_id', '=', 'department_user.id')->orderBy('department_user.first_name', $order)->orderBy('department_user.last_name', $order);
     }
-
-
 }

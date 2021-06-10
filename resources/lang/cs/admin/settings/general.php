@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Doména služby Active Directory',
     'ad_domain_help'			=> 'Toto je někdy stejné jako vaše emailová doména, ale ne vždy.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'Ve skryté kopii',
     'admin_cc_email_help'       => 'Chcete-li poslat kopii e-mailů pro check-in / checkout, které jsou uživatelům zaslány na další e-mailový účet, zadejte je zde. V opačném případě nechte toto pole prázdné.',
     'is_ad'				        => 'Toto je server služby Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Mez upozornění na vypršení (ve dnech)',
     'alert_inv_threshold'		=> 'Mez upozornění skladu',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID majetku',
     'audit_interval'            => 'Interval auditu',
     'audit_interval_help'       => 'Pokud budete muset pravidelně fyzicky kontrolovat svůj majetek, zadejte interval v měsících.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Zadejte dvoufaktorový kód',
     'two_factor_config_complete'	=> 'Odeslat kód',
     'two_factor_enabled_edit_not_allowed' => 'Váš administrátor vám nedovolil upravit toto nastavení.',
-    'two_factor_enrollment_text'	=> "Je vyžadováno dvoufaktorové ověření, nicméně vaše zařízení ještě nebylo zaregistrováno. Otevřete aplikaci Google Authenticator a oskenujte níže uvedený QR kód pro registraci vašeho zařízení. Jakmile zaregistrujete své zařízení, zadejte níže uvedený kód",
+    'two_factor_enrollment_text'	=> 'Je vyžadováno dvoufaktorové ověření, nicméně vaše zařízení ještě nebylo zaregistrováno. Otevřete aplikaci Google Authenticator a oskenujte níže uvedený QR kód pro registraci vašeho zařízení. Jakmile zaregistrujete své zařízení, zadejte níže uvedený kód',
     'require_accept_signature'      => 'Požadovat podpis',
     'require_accept_signature_help_text'      => 'Aktivace této funkce bude vyžadovat, aby se uživatelé fyzicky přihlásili k přijetí určitého materiálu.',
     'left'        => 'vlevo',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Zaškrtnutím tohoto políčka bude vynucena jedinečnost seriových čísel položek majetku',
     'zerofill_count'        => 'Délka značek majetku včetně zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

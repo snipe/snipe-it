@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'This user can login',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Nga taonga kua tohaina ki: ingoa',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Whakatika Kaiwhakamahi',
     'filetype_info'     => 'Ko nga piriti kua whakaaetia he png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, me te rar.',
     'history_user'      => 'Hītori mō: ingoa',
-	'info'				=> 'Mōhiohio',
+    'info'				=> 'Mōhiohio',
     'restore_user'		=> 'Pāwhiri ki konei kia whakahokia mai.',
     'last_login'        => 'Whakauru Whakamutunga',
     'ldap_config_text'  => 'Ka taea te kitea nga tautuhinga whirihora LDAP Kaiwhakahaere> Tautuhinga. Ko te (tahua) kua tohua te tauwāhi kua tohua mo nga kaiwhakamahi katoa kua kawemai.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Ko to tautuhinga kaiwhakahaere o toianei kei te whakarite i te whakatinanatanga o te whakamotuhēhēnga-rua.',
     'two_factor_enrolled' => 'Kua whakauruhia te Pūrere 2FA',
     'two_factor_active'   => '2FA Mahi',
-    );
+    ];

@@ -1,6 +1,7 @@
 <?php
-use Illuminate\Database\Seeder;
+
 use App\Models\Category;
+use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
@@ -24,5 +25,4 @@ class CategorySeeder extends Seeder
         factory(Category::class, 1)->states('license-graphics-category')->create(); // 14
         factory(Category::class, 1)->states('license-office-category')->create(); // 15
     }
-
 }

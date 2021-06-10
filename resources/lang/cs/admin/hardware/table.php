@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Označení majetku',
     'asset_model'       => 'Model',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Majetek ',
     'image'		=> 'Obrázek zařízení',
     'days_without_acceptance' => 'Dní bez schválení',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

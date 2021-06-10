@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Whaiaronga Active',
     'ad_domain'				    => 'Rohe Whaiaronga Active',
     'ad_domain_help'			=> 'He waahi tenei i te wa i to rohe rohe īmēra, engari ehara i nga wa katoa.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'He raupapa Active Directory tēnei',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Nga Mahinga Whakamutunga Nga Tae (i nga ra)',
     'alert_inv_threshold'		=> 'Waehere Awhearanga Inventory',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Ngā ID tahua',
     'audit_interval'            => 'Whirihoranga Arotake',
     'audit_interval_help'       => 'Mena ka hiahia koe ki te tirotiro i nga rawa o taau, ka uru ki roto i nga marama.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Tāuruhia te Waehere Tuarua-Wae',
     'two_factor_config_complete'	=> 'Tukuna Waehere',
     'two_factor_enabled_edit_not_allowed' => 'Kaore to kaiwhakahaere e tuku ki a koe kia whakatika i tenei tautuhinga.',
-    'two_factor_enrollment_text'	=> "E rua nga tohu motuhake e hiahiatia ana, ahakoa kuaore i whakauruhia to whakaaro. Whakatūwherahia tō taupānga Authenticator Google me te matawai i te waehere QR i raro nei hei whakauru i tō pūrere. I te wa i whakauruhia e koe to whakaaro, uruhia te waehere i raro nei",
+    'two_factor_enrollment_text'	=> 'E rua nga tohu motuhake e hiahiatia ana, ahakoa kuaore i whakauruhia to whakaaro. Whakatūwherahia tō taupānga Authenticator Google me te matawai i te waehere QR i raro nei hei whakauru i tō pūrere. I te wa i whakauruhia e koe to whakaaro, uruhia te waehere i raro nei',
     'require_accept_signature'      => 'Me tono Waitohu',
     'require_accept_signature_help_text'      => 'Ma te whakahoahoa i tenei ahua ka hiahia nga kaiwhakamahi ki te waitohu i te waahi ki te whakaae i tetahi taonga.',
     'left'        => 'maui',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Te roa o nga taputapu hua, tae atu ki te korerehu',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

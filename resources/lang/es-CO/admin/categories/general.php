@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'Categorías de Equipos',
     'category_name'  					=> 'Nombre de la Categoría',
     'checkin_email'                     => 'Enviar un correo al usuario al asignar/desasignar.',
@@ -19,4 +19,4 @@ return array(
     'use_default_eula'					=> 'Usa la <a href="#" data-toggle="modal" data-target="#eulaModal">licencia primaria predeterminada</a> en su lugar.',
     'use_default_eula_disabled'			=> '<del>Usa la licencia primaria predeterminada en su lugar.</del> No se ha establecido ninguna licencia primaria predeterminada. Por favor, añade una en las Configuraciones.',
 
-);
+];

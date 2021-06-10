@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Pritaikyti laukai',
     'field'		                => 'Laukas',
     'about_fieldsets_title'		=> 'Apie laukų grupes',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Naujas pritaikomas laukelis',
     'value_encrypted'      	        => 'Šio lauko vertė yra užkoduota duomenų bazėje. Tik admin vartotojai galės peržiūrėti iššifruotą vertę',
     'show_in_email'     => 'Įterptos šio laukelio išdavimo reikšmės bus siunčiamos vartotojams? Užšifruoti laukai negali būti įterpti į el. laišką.',
-);
+];

@@ -14,7 +14,6 @@ class AddNoteToAssetLogsTable extends Migration
         //
         Schema::table('asset_logs', function ($table) {
             $table->text('note')->nullable();
-
         });
     }
 
@@ -30,5 +29,4 @@ class AddNoteToAssetLogsTable extends Migration
             $table->dropColumn('note');
         });
     }
-
 }

@@ -26,5 +26,4 @@ class DropLicenseFromAssetsTable extends Migration
     {
         //
     }
-
 }

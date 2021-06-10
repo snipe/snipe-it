@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'מוקצה ל-',
     'checkout'   		=> 'ניפוק/החזרה',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'מספר סידורי',
     'title'      		=> 'רישיון',
 
-);
+];

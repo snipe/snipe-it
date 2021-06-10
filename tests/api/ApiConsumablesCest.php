@@ -41,8 +41,8 @@ class ApiConsumablesCest
         $I->wantTo('Create a new consumable');
 
         $temp_consumable = factory(\App\Models\Consumable::class)->states('ink')->make([
-            'name' => "Test Consumable Name",
-            'company_id' => 2
+            'name' => 'Test Consumable Name',
+            'company_id' => 2,
         ]);
 
         // setup
@@ -67,6 +67,7 @@ class ApiConsumablesCest
 
     // Put is routed to the same method in the controller
     // DO we actually need to test both?
+
     /** @test */
     public function updateConsumableWithPatch(ApiTester $I, $scenario)
     {
@@ -76,13 +77,13 @@ class ApiConsumablesCest
         $consumable = factory(\App\Models\Consumable::class)->states('ink')->create([
             'name' => 'Original Consumable Name',
             'company_id' => 2,
-            'location_id' => 3
+            'location_id' => 3,
         ]);
         $I->assertInstanceOf(\App\Models\Consumable::class, $consumable);
 
         $temp_consumable = factory(\App\Models\Consumable::class)->states('cardstock')->make([
             'company_id' => 3,
-            'name' => "updated consumable name",
+            'name' => 'updated consumable name',
             'location_id' => 1,
         ]);
 
@@ -104,7 +105,7 @@ class ApiConsumablesCest
         $I->assertNotEquals($consumable->name, $data['name']);
 
         // update
-        $I->sendPATCH('/consumables/' . $consumable->id, $data);
+        $I->sendPATCH('/consumables/'.$consumable->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -120,7 +121,7 @@ class ApiConsumablesCest
         $temp_consumable->updated_at = Carbon::parse($response->payload->updated_at);
         $temp_consumable->id = $consumable->id;
         // verify
-        $I->sendGET('/consumables/' . $consumable->id);
+        $I->sendGET('/consumables/'.$consumable->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson((new ConsumablesTransformer)->transformConsumable($temp_consumable));
@@ -133,12 +134,12 @@ class ApiConsumablesCest
 
         // create
         $consumable = factory(\App\Models\Consumable::class)->states('ink')->create([
-            'name' => "Soon to be deleted"
+            'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Consumable::class, $consumable);
 
         // delete
-        $I->sendDELETE('/consumables/' . $consumable->id);
+        $I->sendDELETE('/consumables/'.$consumable->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -147,7 +148,7 @@ class ApiConsumablesCest
         $I->assertEquals(trans('admin/consumables/message.delete.success'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/consumables/' . $consumable->id);
+        $I->sendGET('/consumables/'.$consumable->id);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }

@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Ang Tungkol sa mga Asset',
     'about_assets_text'            => 'Ang mga asset ay mga aytem na sinubaybayan ng serial number o tag ng asset. May mga posiilidad na ito ay mataas na balyu ng mga aytem kung saan tinitingna ang partikular na mga aytem.',
-	'archived'  				=> 'Ang Archive',
+    'archived'  				=> 'Ang Archive',
     'asset'  					=> 'Ang Asset',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'I-checkin ang Asset',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Hindi pa nasimulan',
     'undeployable'  			=> 'Hindi pwedeng i-deploy',
     'view'  					=> 'Tingnan ang Asset',
-);
+];

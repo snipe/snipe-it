@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'O imovini',
     'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
-	'archived'  				=> 'Arhivirano',
+    'archived'  				=> 'Arhivirano',
     'asset'  					=> 'Imovina',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'Checkin Asset',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'U čekanju',
     'undeployable'  			=> 'Ne može da se razmesti',
     'view'  					=> 'Prikaz imovine',
-);
+];

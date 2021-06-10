@@ -1,7 +1,8 @@
 <?php
-use Illuminate\Database\Seeder;
+
 use App\Models\License;
 use App\Models\LicenseSeat;
+use Illuminate\Database\Seeder;
 
 class LicenseSeeder extends Seeder
 {

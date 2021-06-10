@@ -1,12 +1,12 @@
 <?php
-namespace App\Policies;
 
+namespace App\Policies;
 
 use App\Models\User;
 
 abstract class CheckoutablePermissionsPolicy extends SnipePermissionsPolicy
 {
-   /**
+    /**
      * Determine whether the user can checkout the accessory.
      *
      * @param  \App\User  $user
@@ -17,7 +17,7 @@ abstract class CheckoutablePermissionsPolicy extends SnipePermissionsPolicy
         return $user->hasAccess($this->columnName().'.checkout');
     }
 
-   /**
+    /**
      * Determine whether the user can checkin the accessory.
      *
      * @param  \App\User  $user
@@ -28,7 +28,7 @@ abstract class CheckoutablePermissionsPolicy extends SnipePermissionsPolicy
         return $user->hasAccess($this->columnName().'.checkin');
     }
 
-     /**
+    /**
      * Determine whether the user can manage the accessory.
      *
      * @param  \App\User  $user

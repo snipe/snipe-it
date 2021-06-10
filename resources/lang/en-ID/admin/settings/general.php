@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Direktori Berkas',
     'ad_domain'				    => 'Domain Direktori Aktif',
     'ad_domain_help'			=> 'Terkadang ini sama dengan domain email anda, tapi tidak selalu.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'Tembusan Email',
     'admin_cc_email_help'       => 'Jika Anda ingin mengirim salinan email checkin / checkout yang dikirimkan ke pengguna akun email tambahan, masukkan di sini. Jika tidak, biarkan bidang ini kosong.',
     'is_ad'				        => 'Ini adalah server aktif direktori',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Ambang batas waktu kadaluwarsa (dalam beberapa hari)',
     'alert_inv_threshold'		=> 'Ambang Batas Invertaris',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID Aset',
     'audit_interval'            => 'Memeriksa perbedaan',
     'audit_interval_help'       => 'Jika anda diminta untuk melakukan audit aset secara fisik dengan teratur, maka masukkan selang waktu dalam beberapa bulan.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Masukkan Kode Dua Faktor',
     'two_factor_config_complete'	=> 'Kirim Kode',
     'two_factor_enabled_edit_not_allowed' => 'Administrator anda tidak mengizinkan anda untuk mengedit pengaturan ini.',
-    'two_factor_enrollment_text'	=> "Diperlukan dua faktor otentikasi, namun perangkat anda belum terdaftar. Buka aplikasi Google Authenticator anda dan pindai kode QR dibawah ini untuk mendaftarkan perangkat anda. Setelah perangkat anda terdaftar, masukkan kode dibawah ini",
+    'two_factor_enrollment_text'	=> 'Diperlukan dua faktor otentikasi, namun perangkat anda belum terdaftar. Buka aplikasi Google Authenticator anda dan pindai kode QR dibawah ini untuk mendaftarkan perangkat anda. Setelah perangkat anda terdaftar, masukkan kode dibawah ini',
     'require_accept_signature'      => 'Membutuhkan Tanda Tangan',
     'require_accept_signature_help_text'      => 'Mengaktifkan fitur ini akan mengharuskan pengguna secara fisik menandatangani untuk menerima aset.',
     'left'        => 'kiri',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Menandai boks ini akan membuat adanya batasan keunikan pada tiap nomor seri aset',
     'zerofill_count'        => 'Panjang tag aset, termasuk isian kosong',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

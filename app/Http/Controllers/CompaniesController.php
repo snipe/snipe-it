@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
@@ -12,10 +13,8 @@ use Illuminate\Support\Facades\Storage;
  *
  * @version    v1.0
  */
-
 final class CompaniesController extends Controller
 {
-
     /**
      * Returns view to display listing of companies.
      *
@@ -68,9 +67,9 @@ final class CompaniesController extends Controller
             return redirect()->route('companies.index')
                 ->with('success', trans('admin/companies/message.create.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($company->getErrors());
     }
-
 
     /**
      * Return form to edit existing company.
@@ -113,14 +112,13 @@ final class CompaniesController extends Controller
 
         $company->name = $request->input('name');
 
-
         $company = $request->handleImages($company);
-
 
         if ($company->save()) {
             return redirect()->route('companies.index')
                 ->with('success', trans('admin/companies/message.update.success'));
         }
+
         return redirect()->route('companies.edit', ['company' => $companyId])
             ->with('error', trans('admin/companies/message.update.error'));
     }
@@ -142,13 +140,13 @@ final class CompaniesController extends Controller
         }
 
         $this->authorize('delete', $company);
-        if(!$company->isDeletable()) {
+        if (! $company->isDeletable()) {
             return redirect()->route('companies.index')
                     ->with('error', trans('admin/companies/message.assoc_users'));
         }
 
         if ($company->image) {
-            try  {
+            try {
                 Storage::disk('public')->delete('companies'.'/'.$company->image);
             } catch (\Exception $e) {
                 \Log::debug($e);
@@ -156,11 +154,13 @@ final class CompaniesController extends Controller
         }
 
         $company->delete();
+
         return redirect()->route('companies.index')
             ->with('success', trans('admin/companies/message.delete.success'));
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $this->authorize('view', Company::class);
 
         if (is_null($company = Company::find($id))) {
@@ -168,6 +168,6 @@ final class CompaniesController extends Controller
                 ->with('error', trans('admin/companies/message.not_found'));
         }
 
-        return view('companies/view')->with('company',$company);
+        return view('companies/view')->with('company', $company);
     }
 }

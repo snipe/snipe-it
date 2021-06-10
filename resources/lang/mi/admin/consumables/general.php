@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Waea Whakamahia ki te Kaiwhakamahi',
     'consumable_name'                   => 'Ingoa Whakamahia',
     'create'                            => 'Waihanga Whakamahia',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Te noho',
     'total' 			                => 'Te tapeke',
     'update'                            => 'Whakahou Whakamahia',
-);
+];

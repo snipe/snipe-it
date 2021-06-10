@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Anpassade fält',
     'field'		                => 'Fält',
     'about_fieldsets_title'		=> 'Om fältsamlingar',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Nytt anpassat fält',
     'value_encrypted'      	        => 'Värdet på det här fältet är krypterat i databasen. Endast adminanvändare kan se det dekrypterade värdet',
     'show_in_email'     => 'Inkludera värdet på det här fältet i utcheckning mailen som skickas till användarna? Krypterade fält kan inte inkluderas i e-postmeddelanden.',
-);
+];

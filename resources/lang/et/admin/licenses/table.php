@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'Määratud',
     'checkout'   		=> 'Sees väljas',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'Seerianumber',
     'title'      		=> 'Litsents',
 
-);
+];

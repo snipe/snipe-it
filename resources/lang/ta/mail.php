@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'வலைத்தளத்தில் பயனர் ஒரு உருப்படி கோரிக்கையை ரத்து செய்துள்ளார்',
     'a_user_requested' => 'வலைத்தளத்தில் பயனர் ஒரு உருப்படியைக் கோரியுள்ளார்',
     'accessory_name' => 'துணை பெயர்:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

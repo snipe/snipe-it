@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'O Aktywach',
     'about_assets_text'            => 'Aktywa są to elementy identyfikowane przez numer seryjny lub etykietę.  Są to przedmioty o większej wartości, gdzie liczy się identyfikacji określonego elementu.',
-	'archived'  				=> 'Zarchiwizowane',
+    'archived'  				=> 'Zarchiwizowane',
     'asset'  					=> 'Nabytek',
     'bulk_checkout'             => 'Przypisz aktywa',
     'checkin'  					=> 'Potwierdzanie zasobu/aktywa',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Oczekuje',
     'undeployable'  			=> 'Niemożliwe do wdrożenia',
     'view'  					=> 'Wyświetl nabytki',
-);
+];

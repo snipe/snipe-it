@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Champs personnalisés',
     'field'		                => 'Champ',
     'about_fieldsets_title'		=> 'A propos des fieldsets',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Nouveau champ personnalisé',
     'value_encrypted'      	        => 'La valeur de ce champ est chiffrée dans la base de donnée. Seuls les administrateurs seront capable de voir les données déchiffrées',
     'show_in_email'     => 'Inclure la valeur de ce champ dans les e-mails envoyés à l\'utilisateur? Les champs cryptés ne peuvent pas être inclus dans les e-mails.',
-);
+];

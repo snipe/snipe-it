@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Checkout Consumable to User',
     'consumable_name'                   => 'Naziv potrošnog materijala',
     'create'                            => 'Kreiraj potrošni materijal',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Preostalo',
     'total' 			                => 'Ukupno',
     'update'                            => 'Ažuriraj potrošni materijal',
-);
+];

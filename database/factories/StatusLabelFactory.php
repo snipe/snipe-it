@@ -12,7 +12,7 @@ $factory->define(Statuslabel::class, function (Faker\Generator $faker) {
         'deployable' => 0,
         'pending' => 0,
         'archived' => 0,
-        'notes' => ''
+        'notes' => '',
     ];
 });
 $factory->state(Statuslabel::class, 'rtd', function (Faker\Generator $faker) {

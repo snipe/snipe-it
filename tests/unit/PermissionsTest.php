@@ -12,7 +12,6 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class PermissionsTest extends BaseTest
 {
-
     public function _before()
     {
         parent::_before();
@@ -57,7 +56,6 @@ class PermissionsTest extends BaseTest
             'users.edit' => false,
             'users.delete' => false,
         ];
-
     }
 
     private $noHardware;
@@ -68,6 +66,7 @@ class PermissionsTest extends BaseTest
     private $noUsers;
 
     // tests
+
     /**
      * @test
      */
@@ -217,7 +216,7 @@ class PermissionsTest extends BaseTest
 
     /**
      * @test
-    */
+     */
     public function a_user_with_view_accessories_permissions_can_view_accessories()
     {
         $u = factory(App\Models\User::class)->states('view-accessories')->create();
@@ -366,7 +365,7 @@ class PermissionsTest extends BaseTest
     {
         $u = factory(App\Models\User::class)->states('view-users')->create();
 
-        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
+        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents;
 
         $permissions = array_merge($permissions, [
             'users.view' => true,
@@ -384,7 +383,7 @@ class PermissionsTest extends BaseTest
     {
         $u = factory(App\Models\User::class)->states('create-users')->create();
 
-        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
+        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents;
 
         $permissions = array_merge($permissions, [
             'users.view' => false,
@@ -402,7 +401,7 @@ class PermissionsTest extends BaseTest
     {
         $u = factory(App\Models\User::class)->states('edit-users')->create();
 
-                $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
+        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents;
 
         $permissions = array_merge($permissions, [
             'users.view' => false,
@@ -420,7 +419,7 @@ class PermissionsTest extends BaseTest
     {
         $u = factory(App\Models\User::class)->states('delete-users')->create();
 
-                $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noComponents;
+        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noComponents;
 
         $permissions = array_merge($permissions, [
             'users.view' => false,
@@ -438,7 +437,7 @@ class PermissionsTest extends BaseTest
     {
         $u = factory(App\Models\User::class)->states('view-components')->create();
 
-        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
+        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noUsers;
 
         $permissions = array_merge($permissions, [
             'components.view' => true,
@@ -455,7 +454,7 @@ class PermissionsTest extends BaseTest
     public function a_user_with_create_components_permissions_can_create_components()
     {
         $u = factory(App\Models\User::class)->states('create-components')->create();
-        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
+        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noUsers;
 
         $permissions = array_merge($permissions, [
             'components.view' => false,
@@ -473,7 +472,7 @@ class PermissionsTest extends BaseTest
     {
         $u = factory(App\Models\User::class)->states('edit-components')->create();
 
-        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
+        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noUsers;
 
         $permissions = array_merge($permissions, [
             'components.view' => false,
@@ -491,7 +490,7 @@ class PermissionsTest extends BaseTest
     {
         $u = factory(App\Models\User::class)->states('delete-components')->create();
 
-        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories +$this->noConsumables + $this->noUsers;
+        $permissions = $this->noHardware + $this->noLicenses + $this->noAccessories + $this->noConsumables + $this->noUsers;
 
         $permissions = array_merge($permissions, [
             'components.view' => false,

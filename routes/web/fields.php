@@ -3,38 +3,33 @@
 * Custom Fields Routes
 */
 
-
-
-Route::group([ 'prefix' => 'fields','middleware' => ['auth'] ], function () {
-
+Route::group(['prefix' => 'fields', 'middleware' => ['auth']], function () {
     Route::get('required/{fieldset_id}/{field_id}',
         ['uses' => 'CustomFieldsetsController@makeFieldRequired',
-            'as' => 'fields.required']
+            'as' => 'fields.required', ]
     );
 
     Route::get('optional/{fieldset_id}/{field_id}',
         ['uses' => 'CustomFieldsetsController@makeFieldOptional',
-            'as' => 'fields.optional']
+            'as' => 'fields.optional', ]
     );
 
     Route::get('{field_id}/fieldset/{fieldset_id}/disassociate',
         ['uses' => 'CustomFieldsController@deleteFieldFromFieldset',
-        'as' => 'fields.disassociate']
+        'as' => 'fields.disassociate', ]
     );
 
     Route::post('fieldsets/{id}/associate',
         ['uses' => 'CustomFieldsetsController@associate',
-        'as' => 'fieldsets.associate']
+        'as' => 'fieldsets.associate', ]
     );
 
     Route::resource('fieldsets', 'CustomFieldsetsController', [
-    'parameters' => ['fieldset' => 'field_id', 'field' => 'field_id']
+    'parameters' => ['fieldset' => 'field_id', 'field' => 'field_id'],
     ]);
-
-
 });
 
 Route::resource('fields', 'CustomFieldsController', [
     'middleware' => ['auth'],
-    'parameters' => ['field' => 'field_id', 'fieldset' => 'fieldset_id']
+    'parameters' => ['field' => 'field_id', 'fieldset' => 'fieldset_id'],
 ]);

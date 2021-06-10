@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 use App\Models\Asset;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddFirstCounterTotalsToAssets extends Migration
 {
@@ -19,7 +19,6 @@ class AddFirstCounterTotalsToAssets extends Migration
         Artisan::call('snipeit:counter-sync');
         $output = Artisan::output();
         \Log::info($output);
-
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Par Asset Depreciations',
     'about_depreciations'  					=> 'Jūs varat izveidot aktīvu nolietojumu, lai nolietotu aktīvus, pamatojoties uz lineāro nolietojumu.',
     'asset_depreciations'  					=> 'Aktīvu vērtības samazināšanās',
@@ -9,4 +9,4 @@ return array(
     'number_of_months'  					=> 'Mēnešu skaits',
     'update'  					            => 'Atjaunināt nolietojumu',
 
-);
+];

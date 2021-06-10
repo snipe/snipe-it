@@ -20,7 +20,7 @@ class CreateCheckoutAcceptancesForUnacceptedAssets extends Migration
 
         $acceptances = [];
 
-        foreach($assets as $asset) {
+        foreach ($assets as $asset) {
             $acceptances[] = [
                 'checkoutable_type' => 'App\Models\Asset',
                 'checkoutable_id'   => $asset->id,
@@ -28,7 +28,7 @@ class CreateCheckoutAcceptancesForUnacceptedAssets extends Migration
             ];
         }
 
-        DB::table('checkout_acceptances')->insert($acceptances);        
+        DB::table('checkout_acceptances')->insert($acceptances);
     }
 
     /**

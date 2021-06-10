@@ -1,16 +1,15 @@
 <?php
 
-
 use App\Models\Group;
 
 class GroupsCest
 {
     public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'admin');
-         $I->fillField('password', 'password');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'admin');
+        $I->fillField('password', 'password');
+        $I->click('Login');
     }
 
     // tests
@@ -26,7 +25,7 @@ class GroupsCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('groups.create'));
         $I->seeResponseCodeIs(200);
         $I->click('Save');
@@ -36,7 +35,7 @@ class GroupsCest
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with short name");
+        $I->wantTo('Test Validation Fails with short name');
         $I->amOnPage(route('groups.create'));
         $I->seeResponseCodeIs(200);
         $I->fillField('name', 't');
@@ -47,7 +46,7 @@ class GroupsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->amOnPage(route('groups.create'));
         $I->seeResponseCodeIs(200);
         $I->fillField('name', 'TestGroup');

@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Directorio Activo',
     'ad_domain'				    => 'Dominio del Directorio Activo',
     'ad_domain_help'			=> 'Esto es a veces el mismo que su correo electrónico de dominio, pero no siempre.',
     'ad_append_domain_label'    => 'Añadir nombre de dominio',
     'ad_append_domain'          => 'Añadir nombre de dominio al campo de nombre de usuario',
-    'ad_append_domain_help'     => 'El usuario no necesita escribir "username@domain.local", puede escribir únicamente "username".' ,
+    'ad_append_domain_help'     => 'El usuario no necesita escribir "username@domain.local", puede escribir únicamente "username".',
     'admin_cc_email'            => 'Email CC',
     'admin_cc_email_help'       => 'Si deseas enviar una notificación por correo electrónico de las asignaciones de activos que se envían a los usuarios a una cuenta adicional, ingrésela aquí. De lo contrario, deja este campo en blanco.',
     'is_ad'				        => 'Este es un servidor de Directorio Activo',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Limite de alertas de expiración (en días)',
     'alert_inv_threshold'		=> 'Umbral de alerta del inventario',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'IDs de Recurso',
     'audit_interval'            => 'Intervalo de auditoría',
     'audit_interval_help'       => 'Si tiene que auditar físicamente sus activos periódicamente, ingrese el intervalo en meses.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Ingrese código de verificación en dos pasos',
     'two_factor_config_complete'	=> 'Enviar código',
     'two_factor_enabled_edit_not_allowed' => 'El administrador no permite modificar esta configuración.',
-    'two_factor_enrollment_text'	=> "Autenticación de doble factor se requiere, sin embargo el dispositivo no ha inscrito todavía. Abra la aplicación Google Authenticator y escanear el código QR a continuación para inscribir a su dispositivo. Una vez que haya inscrito su dispositivo, introduzca el código de abajo",
+    'two_factor_enrollment_text'	=> 'Autenticación de doble factor se requiere, sin embargo el dispositivo no ha inscrito todavía. Abra la aplicación Google Authenticator y escanear el código QR a continuación para inscribir a su dispositivo. Una vez que haya inscrito su dispositivo, introduzca el código de abajo',
     'require_accept_signature'      => 'Requerir Firma',
     'require_accept_signature_help_text'      => 'Para activar esta función se requiere que los usuarios firmen fisicamente aceptando el activo.',
     'left'        => 'izquierda',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Al marcar esta casilla se forzarán números de serie únicos a los activos',
     'zerofill_count'        => 'Longitud de etiquetas de activos, incluyendo relleno de ceros',
     'username_format_help'   => 'Esta configuración sólo será utilizada por el proceso de importación si no se proporciona un nombre de usuario y tenemos que generar un nombre de usuario para usted.',
-);
+];

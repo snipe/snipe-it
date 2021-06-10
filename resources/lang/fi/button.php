@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Toiminnot',
     'add'    	                => 'Lisää uusi',
     'cancel'                    => 'Peruuta',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Pyydä',
     'submit'  	                => 'Lähetä',
     'upload'                    => 'Lähetä',
-	'select_file'				=> 'Valitse tiedosto...',
+    'select_file'				=> 'Valitse tiedosto...',
     'select_files'				=> 'Valitse tiedostot...',
     'generate_labels'           => '{1} Luo tunniste |[2, *] Luo tunnisteet',
-);
+];

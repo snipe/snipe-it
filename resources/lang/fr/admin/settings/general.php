@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Service d\'annuaire',
     'ad_domain'				    => 'Domaine du service d\'annuaire',
     'ad_domain_help'			=> 'C\'est parfois le même que votre domaine d\'e-mail, mais pas toujours.',
     'ad_append_domain_label'    => 'Ajouter un nom de domaine',
     'ad_append_domain'          => 'Ajouter le nom de domaine au champ nom d\'utilisateur',
-    'ad_append_domain_help'     => 'L\'utilisateur n\'est pas obligé d\'écrire "username@domain.local", il peut juste taper "username".' ,
+    'ad_append_domain_help'     => 'L\'utilisateur n\'est pas obligé d\'écrire "username@domain.local", il peut juste taper "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'Si vous souhaitez envoyer une copie des courriels d\'association/dissociation qui sont envoyés aux utilisateurs à un compte de messagerie supplémentaire, entrez-le ici. Sinon, laissez ce champ vide.',
     'is_ad'				        => 'C\'est un serveur Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Seuil d\'expiration des alertes (en jours)',
     'alert_inv_threshold'		=> 'Seuil d\'alerte d\'inventaire',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID de l\'actif',
     'audit_interval'            => 'Intervalle d\'audit',
     'audit_interval_help'       => 'Si vous devez régulièrement vérifier physiquement vos actifs, entrez l\'intervalle en mois.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Entre le code à deux facteurs',
     'two_factor_config_complete'	=> 'Soumettre le code',
     'two_factor_enabled_edit_not_allowed' => 'Votre administrateur ne vous permet pas de modifier ce paramètre.',
-    'two_factor_enrollment_text'	=> "L’authentification à deux facteurs est nécessaire, mais votre appareil n’a pas encore été inscrit. Ouvrez votre application Google Authenticator et scanner le code QR ci-dessous pour inscrire votre appareil. Une fois que vous avez inscrit votre appareil, saisissez le code ci-dessous",
+    'two_factor_enrollment_text'	=> 'L’authentification à deux facteurs est nécessaire, mais votre appareil n’a pas encore été inscrit. Ouvrez votre application Google Authenticator et scanner le code QR ci-dessous pour inscrire votre appareil. Une fois que vous avez inscrit votre appareil, saisissez le code ci-dessous',
     'require_accept_signature'      => 'Exiger la signature',
     'require_accept_signature_help_text'      => 'L\'activation de cette fonctionnalité nécessite que les utilisateurs signent physiquement l\'acceptation de cet actif.',
     'left'        => 'gauche',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Cocher cette case forcera une contrainte d\'unicité sur les identifiants d\'actif',
     'zerofill_count'        => 'Longueur des étiquettes de bien, incluant le remplissage de zéros',
     'username_format_help'   => 'Ce paramètre ne sera utilisé par le processus d\'importation que si un nom d\'utilisateur n\'est pas fourni et que nous devons générer un nom d\'utilisateur pour vous.',
-);
+];

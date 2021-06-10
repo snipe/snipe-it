@@ -20,7 +20,7 @@ class AddCompanyToLogs extends Migration
 
         $logs = Actionlog::with('item')->get();
         foreach ($logs as $log) {
-            if($log->item) {
+            if ($log->item) {
                 $log->company_id = $log->item->company_id;
                 $log->save();
             } else {

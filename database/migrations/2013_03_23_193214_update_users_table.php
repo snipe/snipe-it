@@ -32,5 +32,4 @@ class UpdateUsersTable extends Migration
             $table->dropColumn('deleted_at', 'website', 'country', 'gravatar');
         });
     }
-
 }

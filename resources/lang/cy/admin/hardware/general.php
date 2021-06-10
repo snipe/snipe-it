@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Amdan Asedau',
     'about_assets_text'            => 'Mae asedau wedi tracio trwy rhif cofrestru neu rhif ased. Maen yn tueddu fod yn eitemau gwerthfawr lle mae adnabod offer penodol yn bwysig.',
-	'archived'  				=> 'Archifwyd',
+    'archived'  				=> 'Archifwyd',
     'asset'  					=> 'Ased',
     'bulk_checkout'             => 'Nodi Asedau Allan',
     'checkin'  					=> 'Nodi Asedau I Mewn',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Yn disgwl',
     'undeployable'  			=> 'Dim ar gael',
     'view'  					=> 'Gweld Ased',
-);
+];

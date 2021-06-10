@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Miền Active Directory',
     'ad_domain_help'			=> 'Đôi khi giống như tên miền email của bạn, nhưng không phải luôn luôn.',
     'ad_append_domain_label'    => 'Nối tên miền',
     'ad_append_domain'          => 'Nối tên miền với trường tên người dùng',
-    'ad_append_domain_help'     => 'Người dùng không bắt buộc phải viết "username@domain.local", họ chỉ cần nhập "tên người dùng".' ,
+    'ad_append_domain_help'     => 'Người dùng không bắt buộc phải viết "username@domain.local", họ chỉ cần nhập "tên người dùng".',
     'admin_cc_email'            => 'Gửi thêm 1 bản email đến người khác',
     'admin_cc_email_help'       => 'Nếu bạn muốn gửi email nhận/trả tài sản đến người dùng vào tài khoản email bổ sung, nhập nó ở đây. Nếu không thì để trống trường này.',
     'is_ad'				        => 'Đây là một máy chủ Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Ngưỡng Cảnh báo Hết hạn (theo ngày)',
     'alert_inv_threshold'		=> 'Ngưỡng thông báo khoảng không quảng cáo',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID tài sản',
     'audit_interval'            => 'Khoảng Kiểm toán',
     'audit_interval_help'       => 'Nếu bạn được yêu cầu kiểm tra thường xuyên tài sản của mình, hãy nhập khoảng thời gian trong nhiều tháng.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Nhập mã số hai nhân tố',
     'two_factor_config_complete'	=> 'Gửi Mã',
     'two_factor_enabled_edit_not_allowed' => 'Quản trị viên của bạn không cho phép bạn chỉnh sửa cài đặt này.',
-    'two_factor_enrollment_text'	=> "Yêu cầu xác thực hai yếu tố, tuy nhiên thiết bị của bạn chưa được đăng ký. Mở ứng dụng Google Authenticator của bạn và quét mã QR dưới đây để đăng ký thiết bị của bạn. Khi bạn đã đăng ký thiết bị của mình, hãy nhập mã dưới đây",
+    'two_factor_enrollment_text'	=> 'Yêu cầu xác thực hai yếu tố, tuy nhiên thiết bị của bạn chưa được đăng ký. Mở ứng dụng Google Authenticator của bạn và quét mã QR dưới đây để đăng ký thiết bị của bạn. Khi bạn đã đăng ký thiết bị của mình, hãy nhập mã dưới đây',
     'require_accept_signature'      => 'Yêu cầu Chữ ký',
     'require_accept_signature_help_text'      => 'Bật tính năng này sẽ yêu cầu người dùng đăng ký về việc chấp nhận nội dung.',
     'left'        => 'trái',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Chọn hộp này các chuỗi tài sản có một mã duy nhất',
     'zerofill_count'        => 'Chiều dài của các thẻ thuộc tính, bao gồm zerofill',
     'username_format_help'   => 'Cài đặt này sẽ chỉ được sử dụng bởi quá trình import nếu tên người dùng không được cung cấp và chúng tôi sẽ tạo tên người dùng cho bạn.',
-);
+];

@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'O majetku',
     'about_assets_text'            => 'Majetky jsou položky sledované sériovým číslem nebo značkou. Mají tendenci mít vyšší hodnotou, tam kde je důležitá identifikace určité položky.',
-	'archived'  				=> 'Archivováno',
+    'archived'  				=> 'Archivováno',
     'asset'  					=> 'Majetek',
     'bulk_checkout'             => 'Vyskladnit majetek',
     'checkin'  					=> 'Převzít majetek',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Čekající',
     'undeployable'  			=> 'Nepřiřaditelné',
     'view'  					=> 'Zobrazit majetek',
-);
+];

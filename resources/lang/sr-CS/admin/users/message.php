@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Uspješno ste prihvatili ovaj resurs.',
     'declined'                  => 'Uspješno ste odbili ovaj resurs.',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'LDAP integracija nije konfigurisana za ovu instalaciju.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Korisnik je uspešno kreiran.',
         'update'    => 'Korisnik je uspešno ažuriran.',
         'update_bulk'    => 'Korisnici su uspešno ažurirani!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'User was successfully unsuspended.',
         'restored'  => 'Korisnik je uspešno obnovljen.',
         'import'    => 'Korisnici su uspješno importovani.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Pojavio se problem pri kreiranju korisnika. Molim pokušajte ponovo.',
         'update' => 'Došlo je do problema s ažuriranjem korisnika. Molim pokušajte ponovo.',
         'delete' => 'Došlo je do problema s brisanjem korisnika. Molim pokušajte ponovo.',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'Nije moguće pretražiti LDAP server. Proverite konfiguraciju LDAP servera. <br>Greška sa LDAP servera:',
         'ldap_could_not_get_entries' => 'Nije bilo moguće dobiti zapise sa LDAP servera. Proverite konfiguraciju LDAP servera. <br>Greška sa LDAP servera:',
         'password_ldap' => 'Lozinku za ovaj nalog kontroliše LDAP / Active Directory. Obratite se IT centru za promenu lozinke. ',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Datoteka nije izbrisana. Molim pokušajte ponovo.',
         'success' => 'Datoteka je uspešno obrisana.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Datoteke nisu prenesene. Molim pokušajte ponovo.',
         'success' => 'Datoteke su uspješno učitane.',
         'nofiles' => 'Niste odabrali nijednu datoteku za prenos',
         'invalidfiles' => 'Jedna ili više datoteka je prevelika ili je vrsta datoteke koja nije dopuštena. Dopuštene vrste datoteka su png, gif, jpg, doc, docx, pdf i txt.',
-    ),
+    ],
 
-);
+];

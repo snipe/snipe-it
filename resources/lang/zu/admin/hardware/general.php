@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Mayelana namafa',
     'about_assets_text'            => 'Amafa yizinto ezilandelwa inombolo ye-série noma i-tag tag. Bavame ukuba izinto eziphakeme kakhulu lapho behlonza izinto ezithile.',
-	'archived'  				=> 'I-Archived',
+    'archived'  				=> 'I-Archived',
     'asset'  					=> 'Impahla',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'I-Checkin Asset',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Kulindile',
     'undeployable'  			=> 'Awuvumelekile',
     'view'  					=> 'Buka Impahla',
-);
+];

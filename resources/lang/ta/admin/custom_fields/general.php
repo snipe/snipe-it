@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'விருப்ப புலங்கள்',
     'field'		                => 'களம்',
     'about_fieldsets_title'		=> 'புலங்கள் பற்றி',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'புதிய தனிப்பயன் புலம்',
     'value_encrypted'      	        => 'இந்த புலத்தின் மதிப்பு தரவுத்தளத்தில் குறியாக்கம் செய்யப்பட்டுள்ளது. நிர்வாக பயனர்கள் மட்டுமே குறியாக்கப்பட்ட மதிப்புகளைக் காண முடியும்',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+];

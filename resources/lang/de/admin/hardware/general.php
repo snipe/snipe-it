@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Über Assets',
     'about_assets_text'            => 'Assets sind Gegenstände die durch eine Seriennummer oder Bezeichnung identifiziert werden. Meistens sind diese von höherem Wert, wobei es Sinn macht diese spezifisch zu kennzeichnen.',
-	'archived'  				=> 'Archiviert',
+    'archived'  				=> 'Archiviert',
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Assets herausgeben',
     'checkin'  					=> 'Asset zurücknehmen',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Ausstehend',
     'undeployable'  			=> 'Nicht einsetzbar',
     'view'  					=> 'Asset ansehen',
-);
+];

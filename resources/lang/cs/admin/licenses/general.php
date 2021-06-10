@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_licenses_title'            => 'O licencích',
     'about_licenses'                  => 'Licence jsou používány ke sledování softwaru. Mají stanovený počet uživatelských licencí, které mohou být přiděleny jednotlivcům',
     'checkin'  					=> 'Převzít jednu licenci',
@@ -18,4 +18,4 @@ return array(
     'software_licenses'  		=> 'Softwarové licence',
     'user'  					=> 'Uživatel',
     'view'  					=> 'Ukaž licenci',
-);
+];

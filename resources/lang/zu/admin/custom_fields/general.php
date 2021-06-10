@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Amasimu wangokwezifiso',
     'field'		                => 'Inkambu',
     'about_fieldsets_title'		=> 'Mayelana nama-Fieldsets',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Insimu Engokwezifiso Entsha',
     'value_encrypted'      	        => 'Inani lale nsimu libethelwe kwi-database. Abasebenzisi kuphela abasebenzisi bazokwazi ukubuka inani elimisiwe',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+];

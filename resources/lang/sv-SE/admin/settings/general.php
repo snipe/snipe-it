@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory-domän',
     'ad_domain_help'			=> 'Detta är ibland samma som din e-post domän, men inte alltid.',
     'ad_append_domain_label'    => 'Lägg till domännamn',
     'ad_append_domain'          => 'Lägg till domännamn i fältet användarnamn',
-    'ad_append_domain_help'     => 'Användaren behöver inte skriva "username@domain.local", det räcker att skriva "username".' ,
+    'ad_append_domain_help'     => 'Användaren behöver inte skriva "username@domain.local", det räcker att skriva "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'Om du vill skicka en kopia av checkin / checkout-e-postmeddelanden som skickas till användare till ett extra e-postkonto, skriv det här. Annars lämnar du fältet tomt.',
     'is_ad'				        => 'Detta är en Active Directory-server',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Utgående varningströskel (i dagar)',
     'alert_inv_threshold'		=> 'Varna om lågt lagersaldo',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Tillgångs-ID',
     'audit_interval'            => 'Inventeringsintervall',
     'audit_interval_help'       => 'Om ni är i behov av regelbunden fysisk inventering av era tillgångar anger du intervallet i månader.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Ange tvåfaktorskod',
     'two_factor_config_complete'	=> 'Skicka kod',
     'two_factor_enabled_edit_not_allowed' => 'Din administratör tillåter dig inte att redigera den här inställningen.',
-    'two_factor_enrollment_text'	=> "Tvåfaktorsautentisering krävs, men din enhet har inte registrerats än. Öppna din Google Authenticator-app och skanna QR-koden nedan för att registrera din enhet. När enheten är registrerad anger du koden nedan",
+    'two_factor_enrollment_text'	=> 'Tvåfaktorsautentisering krävs, men din enhet har inte registrerats än. Öppna din Google Authenticator-app och skanna QR-koden nedan för att registrera din enhet. När enheten är registrerad anger du koden nedan',
     'require_accept_signature'      => 'Kräver signatur',
     'require_accept_signature_help_text'      => 'Aktivering av denna funktion kräver att användarna fysiskt loggar av när de accepterar en tillgång.',
     'left'        => 'vänster',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Genom att kryssa denna ruta skapas ett krav på unikt serienummer för varje enhet',
     'zerofill_count'        => 'Längd på tillgångstaggar, inklusive zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

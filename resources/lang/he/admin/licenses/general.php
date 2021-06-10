@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_licenses_title'            => 'על רישיונות',
     'about_licenses'                  => 'רשיונות משמשים למעקב אחר תוכנה. יש להם מספר מסוים של מושבים כי ניתן לבדוק את הפרטים',
     'checkin'  					=> 'רישיון רישיון',
@@ -18,4 +18,4 @@ return array(
     'software_licenses'  		=> 'רשיונות תוכנה',
     'user'  					=> 'מִשׁתַמֵשׁ',
     'view'  					=> 'הצג רישיון',
-);
+];
