@@ -1,35 +1,57 @@
 <?php
 
+use App\Http\Controllers\SuppliersController;
+use App\Http\Controllers\StatuslabelsController;
+use App\Http\Controllers\DepreciationsController;
+use App\Http\Controllers\DepartmentsController;
+use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\Account;
+use App\Http\Controllers\ActionlogController;
+use App\Http\Controllers\Auth;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GroupsController;
+use App\Http\Controllers\HealthController;
+use App\Http\Controllers\ImportsController;
+use App\Http\Controllers\LocationsController;
+use App\Http\Controllers\ManufacturersController;
+use App\Http\Controllers\ModalController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\ViewAssetsController;
+use Illuminate\Support\Facades\Route;
+
 Route::group(['middleware' => 'auth'], function () {
     /*
     * Companies
     */
-    Route::resource('companies', 'CompaniesController', [
+    Route::resource('companies', CompaniesController::class, [
         'parameters' => ['company' => 'company_id'],
     ]);
 
     /*
     * Categories
     */
-    Route::resource('categories', 'CategoriesController', [
+    Route::resource('categories', CategoriesController::class, [
         'parameters' => ['category' => 'category_id'],
     ]);
 
     /*
     * Locations
     */
-    Route::resource('locations', 'LocationsController', [
+    Route::resource('locations', LocationsController::class, [
         'parameters' => ['location' => 'location_id'],
     ]);
 
     Route::get(
         'locations/{locationId}/printassigned',
-        ['as' => 'locations.print_assigned', 'uses' => 'LocationsController@print_assigned']
+        ['as' => 'locations.print_assigned', 'uses' => [LocationsController::class, 'print_assigned']]
     );
 
     Route::get(
         'locations/{locationId}/printallassigned',
-        ['as' => 'locations.print_all_assigned', 'uses' => 'LocationsController@print_all_assigned']
+        ['as' => 'locations.print_all_assigned', 'uses' => [LocationsController::class, 'print_all_assigned']]
     );
 
     /*
@@ -37,38 +59,38 @@ Route::group(['middleware' => 'auth'], function () {
     */
 
     Route::group(['prefix' => 'manufacturers', 'middleware' => ['auth']], function () {
-        Route::get('{manufacturers_id}/restore', ['as' => 'restore/manufacturer', 'uses' => 'ManufacturersController@restore']);
+        Route::get('{manufacturers_id}/restore', ['as' => 'restore/manufacturer', 'uses' => [ManufacturersController::class, 'restore']]);
     });
 
-    Route::resource('manufacturers', 'ManufacturersController', [
+    Route::resource('manufacturers', ManufacturersController::class, [
         'parameters' => ['manufacturer' => 'manufacturers_id'],
     ]);
 
     /*
     * Suppliers
     */
-    Route::resource('suppliers', 'SuppliersController', [
+    Route::resource('suppliers', SuppliersController::class, [
         'parameters' => ['supplier' => 'supplier_id'],
     ]);
 
     /*
     * Depreciations
      */
-    Route::resource('depreciations', 'DepreciationsController', [
+    Route::resource('depreciations', DepreciationsController::class, [
          'parameters' => ['depreciation' => 'depreciation_id'],
      ]);
 
     /*
     * Status Labels
      */
-    Route::resource('statuslabels', 'StatuslabelsController', [
+    Route::resource('statuslabels', StatuslabelsController::class, [
           'parameters' => ['statuslabel' => 'statuslabel_id'],
       ]);
 
     /*
     * Departments
     */
-    Route::resource('departments', 'DepartmentsController', [
+    Route::resource('departments', DepartmentsController::class, [
         'parameters' => ['department' => 'department_id'],
     ]);
 });
@@ -84,7 +106,7 @@ Route::group(['middleware' => 'auth'], function () {
 */
 
 Route::group(['middleware' => 'auth', 'prefix' => 'modals'], function () {
-    Route::get('{type}/{itemId?}', ['as' => 'modal.show', 'uses' => 'ModalController@show']);
+    Route::get('{type}/{itemId?}', ['as' => 'modal.show', 'uses' => [ModalController::class, 'show']]);
 });
 
 /*
@@ -101,7 +123,7 @@ Route::group(['middleware' => 'auth'], function () {
         'display-sig/{filename}',
         [
             'as' => 'log.signature.view',
-            'uses' => 'ActionlogController@displaySig', ]
+            'uses' => [ActionlogController::class, 'displaySig'], ]
     );
 });
 
@@ -115,71 +137,71 @@ Route::group(['middleware' => 'auth'], function () {
 */
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser']], function () {
-    Route::get('settings', ['as' => 'settings.general.index', 'uses' => 'SettingsController@getSettings']);
-    Route::post('settings', ['as' => 'settings.general.save', 'uses' => 'SettingsController@postSettings']);
+    Route::get('settings', ['as' => 'settings.general.index', 'uses' => [SettingsController::class, 'getSettings']]);
+    Route::post('settings', ['as' => 'settings.general.save', 'uses' => [SettingsController::class, 'postSettings']]);
 
-    Route::get('branding', ['as' => 'settings.branding.index', 'uses' => 'SettingsController@getBranding']);
-    Route::post('branding', ['as' => 'settings.branding.save', 'uses' => 'SettingsController@postBranding']);
+    Route::get('branding', ['as' => 'settings.branding.index', 'uses' => [SettingsController::class, 'getBranding']]);
+    Route::post('branding', ['as' => 'settings.branding.save', 'uses' => [SettingsController::class, 'postBranding']]);
 
-    Route::get('security', ['as' => 'settings.security.index', 'uses' => 'SettingsController@getSecurity']);
-    Route::post('security', ['as' => 'settings.security.save', 'uses' => 'SettingsController@postSecurity']);
+    Route::get('security', ['as' => 'settings.security.index', 'uses' => [SettingsController::class, 'getSecurity']]);
+    Route::post('security', ['as' => 'settings.security.save', 'uses' => [SettingsController::class, 'postSecurity']]);
 
-    Route::get('groups', ['as' => 'settings.groups.index', 'uses' => 'GroupsController@index']);
+    Route::get('groups', ['as' => 'settings.groups.index', 'uses' => [GroupsController::class, 'index']]);
 
-    Route::get('localization', ['as' => 'settings.localization.index', 'uses' => 'SettingsController@getLocalization']);
-    Route::post('localization', ['as' => 'settings.localization.save', 'uses' => 'SettingsController@postLocalization']);
+    Route::get('localization', ['as' => 'settings.localization.index', 'uses' => [SettingsController::class, 'getLocalization']]);
+    Route::post('localization', ['as' => 'settings.localization.save', 'uses' => [SettingsController::class, 'postLocalization']]);
 
-    Route::get('notifications', ['as' => 'settings.alerts.index', 'uses' => 'SettingsController@getAlerts']);
-    Route::post('notifications', ['as' => 'settings.alerts.save', 'uses' => 'SettingsController@postAlerts']);
+    Route::get('notifications', ['as' => 'settings.alerts.index', 'uses' => [SettingsController::class, 'getAlerts']]);
+    Route::post('notifications', ['as' => 'settings.alerts.save', 'uses' => [SettingsController::class, 'postAlerts']]);
 
-    Route::get('slack', ['as' => 'settings.slack.index', 'uses' => 'SettingsController@getSlack']);
-    Route::post('slack', ['as' => 'settings.slack.save', 'uses' => 'SettingsController@postSlack']);
+    Route::get('slack', ['as' => 'settings.slack.index', 'uses' => [SettingsController::class, 'getSlack']]);
+    Route::post('slack', ['as' => 'settings.slack.save', 'uses' => [SettingsController::class, 'postSlack']]);
 
-    Route::get('asset_tags', ['as' => 'settings.asset_tags.index', 'uses' => 'SettingsController@getAssetTags']);
-    Route::post('asset_tags', ['as' => 'settings.asset_tags.save', 'uses' => 'SettingsController@postAssetTags']);
+    Route::get('asset_tags', ['as' => 'settings.asset_tags.index', 'uses' => [SettingsController::class, 'getAssetTags']]);
+    Route::post('asset_tags', ['as' => 'settings.asset_tags.save', 'uses' => [SettingsController::class, 'postAssetTags']]);
 
-    Route::get('barcodes', ['as' => 'settings.barcodes.index', 'uses' => 'SettingsController@getBarcodes']);
-    Route::post('barcodes', ['as' => 'settings.barcodes.save', 'uses' => 'SettingsController@postBarcodes']);
+    Route::get('barcodes', ['as' => 'settings.barcodes.index', 'uses' => [SettingsController::class, 'getBarcodes']]);
+    Route::post('barcodes', ['as' => 'settings.barcodes.save', 'uses' => [SettingsController::class, 'postBarcodes']]);
 
-    Route::get('labels', ['as' => 'settings.labels.index', 'uses' => 'SettingsController@getLabels']);
-    Route::post('labels', ['as' => 'settings.labels.save', 'uses' => 'SettingsController@postLabels']);
+    Route::get('labels', ['as' => 'settings.labels.index', 'uses' => [SettingsController::class, 'getLabels']]);
+    Route::post('labels', ['as' => 'settings.labels.save', 'uses' => [SettingsController::class, 'postLabels']]);
 
-    Route::get('ldap', ['as' => 'settings.ldap.index', 'uses' => 'SettingsController@getLdapSettings']);
-    Route::post('ldap', ['as' => 'settings.ldap.save', 'uses' => 'SettingsController@postLdapSettings']);
+    Route::get('ldap', ['as' => 'settings.ldap.index', 'uses' => [SettingsController::class, 'getLdapSettings']]);
+    Route::post('ldap', ['as' => 'settings.ldap.save', 'uses' => [SettingsController::class, 'postLdapSettings']]);
 
-    Route::get('phpinfo', ['as' => 'settings.phpinfo.index', 'uses' => 'SettingsController@getPhpInfo']);
+    Route::get('phpinfo', ['as' => 'settings.phpinfo.index', 'uses' => [SettingsController::class, 'getPhpInfo']]);
 
-    Route::get('oauth', ['as' => 'settings.oauth.index', 'uses' => 'SettingsController@api']);
+    Route::get('oauth', ['as' => 'settings.oauth.index', 'uses' => [SettingsController::class, 'api']]);
 
-    Route::get('purge', ['as' => 'settings.purge.index', 'uses' => 'SettingsController@getPurge']);
-    Route::post('purge', ['as' => 'settings.purge.save', 'uses' => 'SettingsController@postPurge']);
+    Route::get('purge', ['as' => 'settings.purge.index', 'uses' => [SettingsController::class, 'getPurge']]);
+    Route::post('purge', ['as' => 'settings.purge.save', 'uses' => [SettingsController::class, 'postPurge']]);
 
-    Route::get('login-attempts', ['as' => 'settings.logins.index', 'uses' => 'SettingsController@getLoginAttempts']);
+    Route::get('login-attempts', ['as' => 'settings.logins.index', 'uses' => [SettingsController::class, 'getLoginAttempts']]);
 
     // Backups
     Route::group(['prefix' => 'backups', 'middleware' => 'auth'], function () {
         Route::get('download/{filename}', [
             'as' => 'settings.backups.download',
-            'uses' => 'SettingsController@downloadFile', ]);
+            'uses' => [SettingsController::class, 'downloadFile'], ]);
 
         Route::delete('delete/{filename}', [
             'as' => 'settings.backups.destroy',
-            'uses' => 'SettingsController@deleteFile', ]);
+            'uses' => [SettingsController::class, 'deleteFile'], ]);
 
         Route::post('/', [
             'as' => 'settings.backups.create',
-            'uses' => 'SettingsController@postBackups',
+            'uses' => [SettingsController::class, 'postBackups'],
         ]);
 
-        Route::get('/', ['as' => 'settings.backups.index', 'uses' => 'SettingsController@getBackups']);
+        Route::get('/', ['as' => 'settings.backups.index', 'uses' => [SettingsController::class, 'getBackups']]);
     });
 
-    Route::resource('groups', 'GroupsController', [
+    Route::resource('groups', GroupsController::class, [
         'middleware' => ['auth'],
         'parameters' => ['group' => 'group_id'],
     ]);
 
-    Route::get('/', ['as' => 'settings.index', 'uses' => 'SettingsController@index']);
+    Route::get('/', ['as' => 'settings.index', 'uses' => [SettingsController::class, 'index']]);
 });
 
 /*
@@ -193,7 +215,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
 Route::group(['prefix' => 'import', 'middleware' => ['auth']], function () {
     Route::get('/', [
                 'as' => 'imports.index',
-                'uses' => 'ImportsController@index',
+                'uses' => [ImportsController::class, 'index'],
         ]);
 });
 
@@ -208,116 +230,116 @@ Route::group(['prefix' => 'import', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
 
     // Profile
-    Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@getIndex']);
-    Route::post('profile', 'ProfileController@postIndex');
+    Route::get('profile', ['as' => 'profile', 'uses' => [ProfileController::class, 'getIndex']]);
+    Route::post('profile', [ProfileController::class, 'postIndex']);
 
-    Route::get('menu', ['as' => 'account.menuprefs', 'uses' => 'ProfileController@getMenuState']);
+    Route::get('menu', ['as' => 'account.menuprefs', 'uses' => [ProfileController::class, 'getMenuState']]);
 
-    Route::get('password', ['as' => 'account.password.index', 'uses' => 'ProfileController@password']);
-    Route::post('password', ['uses' => 'ProfileController@passwordSave']);
+    Route::get('password', ['as' => 'account.password.index', 'uses' => [ProfileController::class, 'password']]);
+    Route::post('password', ['uses' => [ProfileController::class, 'passwordSave']]);
 
-    Route::get('api', ['as' => 'user.api', 'uses' => 'ProfileController@api']);
+    Route::get('api', ['as' => 'user.api', 'uses' => [ProfileController::class, 'api']]);
 
     // View Assets
-    Route::get('view-assets', ['as' => 'view-assets', 'uses' => 'ViewAssetsController@getIndex']);
+    Route::get('view-assets', ['as' => 'view-assets', 'uses' => [ViewAssetsController::class, 'getIndex']]);
 
-    Route::get('requested', ['as' => 'account.requested', 'uses' => 'ViewAssetsController@getRequestedAssets']);
+    Route::get('requested', ['as' => 'account.requested', 'uses' => [ViewAssetsController::class, 'getRequestedAssets']]);
 
     // Accept Asset
     Route::get(
         'accept-asset/{logID}',
-        ['as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset']
+        ['as' => 'account/accept-assets', 'uses' => [ViewAssetsController::class, 'getAcceptAsset']]
     );
 
     // Profile
     Route::get(
         'requestable-assets',
-        ['as' => 'requestable-assets', 'uses' => 'ViewAssetsController@getRequestableIndex']
+        ['as' => 'requestable-assets', 'uses' => [ViewAssetsController::class, 'getRequestableIndex']]
     );
     Route::get(
         'request-asset/{assetId}',
-        ['as' => 'account/request-asset', 'uses' => 'ViewAssetsController@getRequestAsset']
+        ['as' => 'account/request-asset', 'uses' => [ViewAssetsController::class, 'getRequestAsset']]
     );
 
     Route::post(
         'request/{itemType}/{itemId}',
-        ['as' => 'account/request-item', 'uses' => 'ViewAssetsController@getRequestItem']
+        ['as' => 'account/request-item', 'uses' => [ViewAssetsController::class, 'getRequestItem']]
     );
 
     // Account Dashboard
-    Route::get('/', ['as' => 'account', 'uses' => 'ViewAssetsController@getIndex']);
+    Route::get('/', ['as' => 'account', 'uses' => [ViewAssetsController::class, 'getIndex']]);
 
-    Route::get('accept', 'Account\AcceptanceController@index')
+    Route::get('accept', [Account\AcceptanceController::class, 'index'])
         ->name('account.accept');
 
-    Route::get('accept/{id}', 'Account\AcceptanceController@create')
+    Route::get('accept/{id}', [Account\AcceptanceController::class, 'create'])
         ->name('account.accept.item');
 
-    Route::post('accept/{id}', 'Account\AcceptanceController@store');
+    Route::post('accept/{id}', [Account\AcceptanceController::class, 'store']);
 });
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('reports/audit', [
         'as' => 'reports.audit',
-        'uses' => 'ReportsController@audit',
+        'uses' => [ReportsController::class, 'audit'],
     ]);
 
     Route::get(
         'reports/depreciation',
-        ['as' => 'reports/depreciation', 'uses' => 'ReportsController@getDeprecationReport']
+        ['as' => 'reports/depreciation', 'uses' => [ReportsController::class, 'getDeprecationReport']]
     );
     Route::get(
         'reports/export/depreciation',
-        ['as' => 'reports/export/depreciation', 'uses' => 'ReportsController@exportDeprecationReport']
+        ['as' => 'reports/export/depreciation', 'uses' => [ReportsController::class, 'exportDeprecationReport']]
     );
     Route::get(
         'reports/asset_maintenances',
-        ['as' => 'reports/asset_maintenances', 'uses' => 'ReportsController@getAssetMaintenancesReport']
+        ['as' => 'reports/asset_maintenances', 'uses' => [ReportsController::class, 'getAssetMaintenancesReport']]
     );
     Route::get(
         'reports/export/asset_maintenances',
         [
             'as'   => 'reports/export/asset_maintenances',
-            'uses' => 'ReportsController@exportAssetMaintenancesReport',
+            'uses' => [ReportsController::class, 'exportAssetMaintenancesReport'],
         ]
     );
     Route::get(
         'reports/licenses',
-        ['as' => 'reports/licenses', 'uses' => 'ReportsController@getLicenseReport']
+        ['as' => 'reports/licenses', 'uses' => [ReportsController::class, 'getLicenseReport']]
     );
     Route::get(
         'reports/export/licenses',
-        ['as' => 'reports/export/licenses', 'uses' => 'ReportsController@exportLicenseReport']
+        ['as' => 'reports/export/licenses', 'uses' => [ReportsController::class, 'exportLicenseReport']]
     );
 
-    Route::get('reports/accessories', ['as' => 'reports/accessories', 'uses' => 'ReportsController@getAccessoryReport']);
+    Route::get('reports/accessories', ['as' => 'reports/accessories', 'uses' => [ReportsController::class, 'getAccessoryReport']]);
     Route::get(
         'reports/export/accessories',
-        ['as' => 'reports/export/accessories', 'uses' => 'ReportsController@exportAccessoryReport']
+        ['as' => 'reports/export/accessories', 'uses' => [ReportsController::class, 'exportAccessoryReport']]
     );
-    Route::get('reports/custom', ['as' => 'reports/custom', 'uses' => 'ReportsController@getCustomReport']);
-    Route::post('reports/custom', 'ReportsController@postCustom');
+    Route::get('reports/custom', ['as' => 'reports/custom', 'uses' => [ReportsController::class, 'getCustomReport']]);
+    Route::post('reports/custom', [ReportsController::class, 'postCustom']);
 
     Route::get(
         'reports/activity',
-        ['as' => 'reports.activity', 'uses' => 'ReportsController@getActivityReport']
+        ['as' => 'reports.activity', 'uses' => [ReportsController::class, 'getActivityReport']]
     );
 
-    Route::post('reports/activity', 'ReportsController@postActivityReport');
+    Route::post('reports/activity', [ReportsController::class, 'postActivityReport']);
 
     Route::get(
         'reports/unaccepted_assets',
-        ['as' => 'reports/unaccepted_assets', 'uses' => 'ReportsController@getAssetAcceptanceReport']
+        ['as' => 'reports/unaccepted_assets', 'uses' => [ReportsController::class, 'getAssetAcceptanceReport']]
     );
     Route::get(
         'reports/export/unaccepted_assets',
-        ['as' => 'reports/export/unaccepted_assets', 'uses' => 'ReportsController@exportAssetAcceptanceReport']
+        ['as' => 'reports/export/unaccepted_assets', 'uses' => [ReportsController::class, 'exportAssetAcceptanceReport']]
     );
 });
 
 Route::get(
     'auth/signin',
-    ['uses' => 'Auth\LoginController@legacyAuthRedirect']
+    ['uses' => [Auth\LoginController::class, 'legacyAuthRedirect']]
 );
 
 /*
@@ -333,42 +355,42 @@ Route::group(['prefix' => 'setup', 'middleware' => 'web'], function () {
         'user',
         [
         'as'  => 'setup.user',
-        'uses' => 'SettingsController@getSetupUser', ]
+        'uses' => [SettingsController::class, 'getSetupUser'], ]
     );
 
     Route::post(
         'user',
         [
         'as'  => 'setup.user.save',
-        'uses' => 'SettingsController@postSaveFirstAdmin', ]
+        'uses' => [SettingsController::class, 'postSaveFirstAdmin'], ]
     );
 
     Route::get(
         'migrate',
         [
         'as'  => 'setup.migrate',
-        'uses' => 'SettingsController@getSetupMigrate', ]
+        'uses' => [SettingsController::class, 'getSetupMigrate'], ]
     );
 
     Route::get(
         'done',
         [
         'as'  => 'setup.done',
-        'uses' => 'SettingsController@getSetupDone', ]
+        'uses' => [SettingsController::class, 'getSetupDone'], ]
     );
 
     Route::get(
         'mailtest',
         [
         'as'  => 'setup.mailtest',
-        'uses' => 'SettingsController@ajaxTestEmail', ]
+        'uses' => [SettingsController::class, 'ajaxTestEmail'], ]
     );
 
     Route::get(
         '/',
         [
         'as'  => 'setup',
-        'uses' => 'SettingsController@getSetupIndex', ]
+        'uses' => [SettingsController::class, 'getSetupIndex'], ]
     );
 });
 
@@ -377,7 +399,7 @@ Route::get(
     [
         'as' => 'two-factor-enroll',
         'middleware' => ['web'],
-        'uses' => 'Auth\LoginController@getTwoFactorEnroll', ]
+        'uses' => [Auth\LoginController::class, 'getTwoFactorEnroll'], ]
 );
 
 Route::get(
@@ -385,7 +407,7 @@ Route::get(
     [
         'as' => 'two-factor',
         'middleware' => ['web'],
-        'uses' => 'Auth\LoginController@getTwoFactorAuth', ]
+        'uses' => [Auth\LoginController::class, 'getTwoFactorAuth'], ]
 );
 
 Route::post(
@@ -393,7 +415,7 @@ Route::post(
     [
         'as' => 'two-factor',
         'middleware' => ['web'],
-        'uses' => 'Auth\LoginController@postTwoFactorAuth', ]
+        'uses' => [Auth\LoginController::class, 'postTwoFactorAuth'], ]
 );
 
 Route::get(
@@ -401,7 +423,7 @@ Route::get(
     [
     'as' => 'home',
     'middleware' => ['auth'],
-    'uses' => 'DashboardController@getIndex', ]
+    'uses' => [DashboardController::class, 'getIndex'], ]
 );
 
 Route::group(['middleware' => 'web'], function () {
@@ -411,7 +433,7 @@ Route::group(['middleware' => 'web'], function () {
         [
             'as' => 'login',
             'middleware' => ['web'],
-            'uses' => 'Auth\LoginController@showLoginForm', ]
+            'uses' => [Auth\LoginController::class, 'showLoginForm'], ]
     );
 
     Route::post(
@@ -419,17 +441,17 @@ Route::group(['middleware' => 'web'], function () {
         [
             'as' => 'login',
             'middleware' => ['web'],
-            'uses' => 'Auth\LoginController@login', ]
+            'uses' => [Auth\LoginController::class, 'login'], ]
     );
 
     Route::get(
         'logout',
         [
             'as' => 'logout',
-            'uses' => 'Auth\LoginController@logout', ]
+            'uses' => [Auth\LoginController::class, 'logout'], ]
     );
 });
 
 Auth::routes();
 
-Route::get('/health', ['as' => 'health', 'uses' => 'HealthController@get']);
+Route::get('/health', ['as' => 'health', 'uses' => [HealthController::class, 'get']]);
