@@ -9,8 +9,8 @@ class ConsumableSeeder extends Seeder
     {
         Consumable::truncate();
         DB::table('consumables_users')->truncate();
-        factory(Consumable::class, 1)->states('cardstock')->create(); // 1
-        factory(Consumable::class, 1)->states('paper')->create(); // 2
-        factory(Consumable::class, 1)->states('ink')->create(); // 3
+        Consumable::factory()->count(1)->cardstock()->create(); // 1
+        Consumable::factory()->count(1)->paper()->create(); // 2
+        Consumable::factory()->count(1)->ink()->create(); // 3
     }
 }

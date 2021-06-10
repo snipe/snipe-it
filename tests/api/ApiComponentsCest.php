@@ -40,7 +40,7 @@ class ApiComponentsCest
     {
         $I->wantTo('Create a new component');
 
-        $temp_component = factory(\App\Models\Component::class)->states('ram-crucial4')->make([
+        $temp_component = \App\Models\Component::factory()->ramCrucial4()->make([
             'name' => 'Test Component Name',
             'company_id' => 2,
         ]);
@@ -75,14 +75,14 @@ class ApiComponentsCest
         $I->wantTo('Update an component with PATCH');
 
         // create
-        $component = factory(\App\Models\Component::class)->states('ram-crucial4')->create([
+        $component = \App\Models\Component::factory()->ramCrucial4()->create([
             'name' => 'Original Component Name',
             'company_id' => 2,
             'location_id' => 3,
         ]);
         $I->assertInstanceOf(\App\Models\Component::class, $component);
 
-        $temp_component = factory(\App\Models\Component::class)->states('ssd-crucial240')->make([
+        $temp_component = \App\Models\Component::factory()->ssdCrucial240()->make([
             'company_id' => 3,
             'name' => 'updated component name',
             'location_id' => 1,
@@ -132,7 +132,7 @@ class ApiComponentsCest
         $I->wantTo('Delete an component');
 
         // create
-        $component = factory(\App\Models\Component::class)->states('ram-crucial4')->create([
+        $component = \App\Models\Component::factory()->ramCrucial4()->create([
             'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Component::class, $component);

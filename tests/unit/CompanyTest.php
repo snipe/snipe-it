@@ -45,10 +45,10 @@ class CompanyTest extends BaseTest
     public function testACompanyCanHaveLicenses()
     {
         $company = $this->createValidCompany();
-        factory(App\Models\License::class, 1)->states('acrobat')->create([
+        \App\Models\License::factory()->count(1)->acrobat()->create([
              'company_id'=>$company->id,
-             'manufacturer_id' => factory(App\Models\Manufacturer::class)->states('adobe')->create()->id,
-             'category_id' => factory(App\Models\Category::class)->states('license-office-category')->create()->id,
+             'manufacturer_id' => \App\Models\Manufacturer::factory()->adobe()->create()->id,
+             'category_id' => \App\Models\Category::factory()->licenseOfficeCategory()->create()->id,
          ]);
         $this->assertCount(1, $company->licenses);
     }
@@ -56,8 +56,8 @@ class CompanyTest extends BaseTest
     public function testACompanyCanHaveAccessories()
     {
         $company = $this->createValidCompany();
-        $a = factory(App\Models\Accessory::class)->states('apple-bt-keyboard')->create([
-             'category_id' => factory(App\Models\Category::class)->states('accessory-keyboard-category')->create()->id,
+        $a = \App\Models\Accessory::factory()->appleBtKeyboard()->create([
+             'category_id' => \App\Models\Category::factory()->accessoryKeyboardCategory()->create()->id,
              'company_id' => $company->id,
          ]);
 
@@ -67,9 +67,9 @@ class CompanyTest extends BaseTest
     public function testACompanyCanHaveConsumables()
     {
         $company = $this->createValidCompany();
-        factory(App\Models\Consumable::class, 1)->states('cardstock')->create([
+        \App\Models\Consumable::factory()->count(1)->cardstock()->create([
              'company_id' => $company->id,
-             'category_id' => factory(App\Models\Category::class)->states('consumable-paper-category')->create()->id,
+             'category_id' => \App\Models\Category::factory()->consumablePaperCategory()->create()->id,
          ]);
         $this->assertCount(1, $company->consumables);
     }
@@ -77,9 +77,9 @@ class CompanyTest extends BaseTest
     public function testACompanyCanHaveComponents()
     {
         $company = $this->createValidCompany();
-        factory(App\Models\Component::class, 1)->states('ram-crucial4')->create([
+        \App\Models\Component::factory()->count(1)->ramCrucial4()->create([
              'company_id'=>$company->id,
-             'category_id' => factory(App\Models\Category::class)->states('component-ram-category')->create()->id,
+             'category_id' => \App\Models\Category::factory()->componentRamCategory()->create()->id,
          ]);
         $this->assertCount(1, $company->components);
     }

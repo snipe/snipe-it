@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Auth;
@@ -16,6 +17,8 @@ use Watson\Validating\ValidatingTrait;
  */
 final class Company extends SnipeModel
 {
+    use HasFactory;
+
     protected $table = 'companies';
 
     // Declare the rules for the model validation

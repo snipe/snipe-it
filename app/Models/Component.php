@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +15,8 @@ use Watson\Validating\ValidatingTrait;
  */
 class Component extends SnipeModel
 {
+    use HasFactory;
+
     protected $presenter = \App\Presenters\ComponentPresenter::class;
     use CompanyableTrait;
     use Loggable, Presentable;

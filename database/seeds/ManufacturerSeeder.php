@@ -9,17 +9,17 @@ class ManufacturerSeeder extends Seeder
     public function run()
     {
         Manufacturer::truncate();
-        factory(Manufacturer::class, 1)->states('apple')->create(); // 1
-        factory(Manufacturer::class, 1)->states('microsoft')->create(); // 2
-        factory(Manufacturer::class, 1)->states('dell')->create(); // 3
-        factory(Manufacturer::class, 1)->states('asus')->create(); // 4
-        factory(Manufacturer::class, 1)->states('hp')->create(); // 5
-        factory(Manufacturer::class, 1)->states('lenovo')->create(); // 6
-        factory(Manufacturer::class, 1)->states('lg')->create(); // 7
-        factory(Manufacturer::class, 1)->states('polycom')->create(); // 8
-        factory(Manufacturer::class, 1)->states('adobe')->create(); // 9
-        factory(Manufacturer::class, 1)->states('avery')->create(); // 10
-        factory(Manufacturer::class, 1)->states('crucial')->create(); // 10
+        Manufacturer::factory()->count(1)->apple()->create(); // 1
+        Manufacturer::factory()->count(1)->microsoft()->create(); // 2
+        Manufacturer::factory()->count(1)->dell()->create(); // 3
+        Manufacturer::factory()->count(1)->asus()->create(); // 4
+        Manufacturer::factory()->count(1)->hp()->create(); // 5
+        Manufacturer::factory()->count(1)->lenovo()->create(); // 6
+        Manufacturer::factory()->count(1)->lg()->create(); // 7
+        Manufacturer::factory()->count(1)->polycom()->create(); // 8
+        Manufacturer::factory()->count(1)->adobe()->create(); // 9
+        Manufacturer::factory()->count(1)->avery()->create(); // 10
+        Manufacturer::factory()->count(1)->crucial()->create(); // 10
 
         $src = public_path('/img/demo/manufacturers/');
         $dst = 'manufacturers'.'/';

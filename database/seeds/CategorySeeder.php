@@ -9,20 +9,20 @@ class CategorySeeder extends Seeder
     {
         Category::truncate();
 
-        factory(Category::class, 1)->states('asset-laptop-category')->create(); // 1
-        factory(Category::class, 1)->states('asset-desktop-category')->create(); // 2
-        factory(Category::class, 1)->states('asset-tablet-category')->create(); // 3
-        factory(Category::class, 1)->states('asset-mobile-category')->create(); // 4
-        factory(Category::class, 1)->states('asset-display-category')->create(); // 5
-        factory(Category::class, 1)->states('asset-voip-category')->create(); // 6
-        factory(Category::class, 1)->states('asset-conference-category')->create(); // 7
-        factory(Category::class, 1)->states('accessory-keyboard-category')->create(); // 8
-        factory(Category::class, 1)->states('accessory-mouse-category')->create(); // 9
-        factory(Category::class, 1)->states('consumable-paper-category')->create(); // 10
-        factory(Category::class, 1)->states('consumable-ink-category')->create(); // 11
-        factory(Category::class, 1)->states('component-hdd-category')->create(); // 12
-        factory(Category::class, 1)->states('component-ram-category')->create(); // 13
-        factory(Category::class, 1)->states('license-graphics-category')->create(); // 14
-        factory(Category::class, 1)->states('license-office-category')->create(); // 15
+        Category::factory()->count(1)->assetLaptopCategory()->create(); // 1
+        Category::factory()->count(1)->assetDesktopCategory()->create(); // 2
+        Category::factory()->count(1)->assetTabletCategory()->create(); // 3
+        Category::factory()->count(1)->assetMobileCategory()->create(); // 4
+        Category::factory()->count(1)->assetDisplayCategory()->create(); // 5
+        Category::factory()->count(1)->assetVoipCategory()->create(); // 6
+        Category::factory()->count(1)->assetConferenceCategory()->create(); // 7
+        Category::factory()->count(1)->accessoryKeyboardCategory()->create(); // 8
+        Category::factory()->count(1)->accessoryMouseCategory()->create(); // 9
+        Category::factory()->count(1)->consumablePaperCategory()->create(); // 10
+        Category::factory()->count(1)->consumableInkCategory()->create(); // 11
+        Category::factory()->count(1)->componentHddCategory()->create(); // 12
+        Category::factory()->count(1)->componentRamCategory()->create(); // 13
+        Category::factory()->count(1)->licenseGraphicsCategory()->create(); // 14
+        Category::factory()->count(1)->licenseOfficeCategory()->create(); // 15
     }
 }

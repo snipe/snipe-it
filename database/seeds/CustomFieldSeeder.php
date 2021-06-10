@@ -23,13 +23,13 @@ class CustomFieldSeeder extends Seeder
         CustomFieldset::truncate();
         DB::table('custom_field_custom_fieldset')->truncate();
 
-        factory(CustomFieldset::class, 1)->states('mobile')->create();
-        factory(CustomFieldset::class, 1)->states('computer')->create();
-        factory(CustomField::class, 1)->states('imei')->create();
-        factory(CustomField::class, 1)->states('phone')->create();
-        factory(CustomField::class, 1)->states('ram')->create();
-        factory(CustomField::class, 1)->states('cpu')->create();
-        factory(CustomField::class, 1)->states('mac-address')->create();
+        CustomFieldset::factory()->count(1)->mobile()->create();
+        CustomFieldset::factory()->count(1)->computer()->create();
+        CustomField::factory()->count(1)->imei()->create();
+        CustomField::factory()->count(1)->phone()->create();
+        CustomField::factory()->count(1)->ram()->create();
+        CustomField::factory()->count(1)->cpu()->create();
+        CustomField::factory()->count(1)->macAddress()->create();
 
         DB::table('custom_field_custom_fieldset')->insert([
             [

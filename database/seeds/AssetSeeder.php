@@ -9,31 +9,31 @@ class AssetSeeder extends Seeder
     public function run()
     {
         Asset::truncate();
-        factory(Asset::class, 1000)->states('laptop-mbp')->create();
-        factory(Asset::class, 50)->states('laptop-mbp-pending')->create();
-        factory(Asset::class, 50)->states('laptop-mbp-archived')->create();
-        factory(Asset::class, 50)->states('laptop-air')->create();
-        factory(Asset::class, 5)->states('laptop-surface')->create();
-        factory(Asset::class, 5)->states('laptop-xps')->create();
-        factory(Asset::class, 5)->states('laptop-spectre')->create();
-        factory(Asset::class, 5)->states('laptop-zenbook')->create();
-        factory(Asset::class, 3)->states('laptop-yoga')->create();
+        Asset::factory()->count(1000)->laptopMbp()->create();
+        Asset::factory()->count(50)->laptopMbpPending()->create();
+        Asset::factory()->count(50)->laptopMbpArchived()->create();
+        Asset::factory()->count(50)->laptopAir()->create();
+        Asset::factory()->count(5)->laptopSurface()->create();
+        Asset::factory()->count(5)->laptopXps()->create();
+        Asset::factory()->count(5)->laptopSpectre()->create();
+        Asset::factory()->count(5)->laptopZenbook()->create();
+        Asset::factory()->count(3)->laptopYoga()->create();
 
-        factory(Asset::class, 30)->states('desktop-macpro')->create();
-        factory(Asset::class, 30)->states('desktop-lenovo-i5')->create();
-        factory(Asset::class, 30)->states('desktop-optiplex')->create();
+        Asset::factory()->count(30)->desktopMacpro()->create();
+        Asset::factory()->count(30)->desktopLenovoI5()->create();
+        Asset::factory()->count(30)->desktopOptiplex()->create();
 
-        factory(Asset::class, 5)->states('conf-polycom')->create();
-        factory(Asset::class, 2)->states('conf-polycomcx')->create();
+        Asset::factory()->count(5)->confPolycom()->create();
+        Asset::factory()->count(2)->confPolycomcx()->create();
 
-        factory(Asset::class, 12)->states('tablet-ipad')->create();
-        factory(Asset::class, 4)->states('tablet-tab3')->create();
+        Asset::factory()->count(12)->tabletIpad()->create();
+        Asset::factory()->count(4)->tabletTab3()->create();
 
-        factory(Asset::class, 27)->states('phone-iphone6s')->create();
-        factory(Asset::class, 40)->states('phone-iphone7')->create();
+        Asset::factory()->count(27)->phoneIphone6s()->create();
+        Asset::factory()->count(40)->phoneIphone7()->create();
 
-        factory(Asset::class, 10)->states('ultrafine')->create();
-        factory(Asset::class, 10)->states('ultrasharp')->create();
+        Asset::factory()->count(10)->ultrafine()->create();
+        Asset::factory()->count(10)->ultrasharp()->create();
 
         $del_files = Storage::files('assets');
         foreach ($del_files as $del_file) { // iterate files

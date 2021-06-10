@@ -48,7 +48,7 @@ class UsersCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $user = factory(App\Models\User::class)->make();
+        $user = \App\Models\User::factory()->make();
         $submitValues = [
             'first_name'        => $user->first_name,
             'last_name'         => $user->last_name,
@@ -90,7 +90,7 @@ class UsersCest
 
     public function allowsDelete(FunctionalTester $I)
     {
-        $user = factory(App\Models\User::class)->create();
+        $user = \App\Models\User::factory()->create();
         $I->wantTo('Ensure I can delete a user');
         $I->sendDelete(route('users.destroy', $user->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);

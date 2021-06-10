@@ -8,12 +8,12 @@ class StatuslabelSeeder extends Seeder
     public function run()
     {
         Statuslabel::truncate();
-        factory(Statuslabel::class)->states('rtd')->create(['name' => 'Ready to Deploy']);
-        factory(Statuslabel::class)->states('pending')->create(['name' => 'Pending']);
-        factory(Statuslabel::class)->states('archived')->create(['name' => 'Archived']);
-        factory(Statuslabel::class)->states('out_for_diagnostics')->create();
-        factory(Statuslabel::class)->states('out_for_repair')->create();
-        factory(Statuslabel::class)->states('broken')->create();
-        factory(Statuslabel::class)->states('lost')->create();
+        Statuslabel::factory()->rtd()->create(['name' => 'Ready to Deploy']);
+        Statuslabel::factory()->pending()->create(['name' => 'Pending']);
+        Statuslabel::factory()->archived()->create(['name' => 'Archived']);
+        Statuslabel::factory()->outForDiagnostics()->create();
+        Statuslabel::factory()->outForRepair()->create();
+        Statuslabel::factory()->broken()->create();
+        Statuslabel::factory()->lost()->create();
     }
 }

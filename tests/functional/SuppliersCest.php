@@ -31,7 +31,7 @@ class SuppliersCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $supplier = factory(App\Models\Supplier::class)->make();
+        $supplier = \App\Models\Supplier::factory()->make();
 
         $values = [
             'name'              => $supplier->name,
@@ -58,7 +58,7 @@ class SuppliersCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a supplier');
-        $supplier = factory(App\Models\Supplier::class)->create();
+        $supplier = \App\Models\Supplier::factory()->create();
         $I->sendDelete(route('suppliers.destroy', $supplier->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);
     }

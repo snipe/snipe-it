@@ -74,7 +74,7 @@ class AssetTest extends BaseTest
      */
     public function testWarrantyExpiresAttribute()
     {
-        $asset = factory(Asset::class)->states('laptop-mbp')->create([
+        $asset = Asset::factory()->laptopMbp()->create([
             'model_id' => $this->createValidAssetModel()->id,
             'supplier_id' => $this->createvalidSupplier()->id,
             'rtd_location_id' => $this->createValidLocation()->id,
@@ -110,7 +110,7 @@ class AssetTest extends BaseTest
     public function testModelIdMustExist()
     {
         $model = $this->createValidAssetModel();
-        $asset = factory(Asset::class)->make([
+        $asset = Asset::factory()->make([
             'model_id' => $model->id,
             'supplier_id' => $this->createValidSupplier()->id,
             'rtd_location_id' => $this->createValidLocation()->id,
@@ -118,7 +118,7 @@ class AssetTest extends BaseTest
         $asset->save();
         $this->assertTrue($asset->isValid());
         $newId = $model->id + 1;
-        $asset = factory(Asset::class)->make(['model_id' => $newId]);
+        $asset = Asset::factory()->make(['model_id' => $newId]);
         $asset->save();
 
         $this->assertFalse($asset->isValid());
@@ -126,7 +126,7 @@ class AssetTest extends BaseTest
 
     public function testAnAssetHasRelationships()
     {
-        $asset = factory(Asset::class)->states('laptop-mbp')
+        $asset = Asset::factory()->laptopMbp()
              ->create([
                  'model_id' => $this->createValidAssetModel()->id,
                  'company_id' => $this->createValidCompany()->id,
@@ -147,13 +147,12 @@ class AssetTest extends BaseTest
         // Then it is available for checkout
 
         // An asset assigned to someone should not be available for checkout.
-        $assetAssigned = factory(Asset::class)
-             ->states('laptop-mbp', 'assigned-to-user')
+        $assetAssigned = Asset::factory()->laptopMbp()->assignedToUser()
              ->create(['model_id' => $this->createValidAssetModel()]);
         $this->assertFalse($assetAssigned->availableForCheckout());
 
         // An asset with a non deployable statuslabel should not be available for checkout.
-        $assetUndeployable = factory(Asset::class)->create([
+        $assetUndeployable = Asset::factory()->create([
              'status_id' => $this->createValidStatuslabel('archived')->id,
              'model_id' => $this->createValidAssetModel(),
          ]);
@@ -161,13 +160,13 @@ class AssetTest extends BaseTest
         $this->assertFalse($assetUndeployable->availableForCheckout());
 
         // An asset that has been deleted is not avaiable for checkout.
-        $assetDeleted = factory(Asset::class)->states('deleted')->create([
+        $assetDeleted = Asset::factory()->deleted()->create([
              'model_id' => $this->createValidAssetModel(),
          ]);
         $this->assertFalse($assetDeleted->availableForCheckout());
 
         // A ready to deploy asset that isn't assigned to anyone is available for checkout
-        $asset = factory(Asset::class)->create([
+        $asset = Asset::factory()->create([
              'status_id' => $this->createValidStatuslabel('rtd')->id,
              'model_id' => $this->createValidAssetModel(),
          ]);
@@ -178,7 +177,7 @@ class AssetTest extends BaseTest
     {
         $asset = $this->createValidAsset();
 
-        $components = factory(App\Models\Component::class, 5)->states('ram-crucial4')->create([
+        $components = \App\Models\Component::factory()->count(5)->ramCrucial4()->create([
              'category_id' => $this->createValidCategory('component-hdd-category')->id,
          ]);
 
@@ -197,7 +196,7 @@ class AssetTest extends BaseTest
             'supplier_id' => $this->createValidSupplier()->id,
          ]);
         $this->assertCount(0, $asset->uploads);
-        factory(App\Models\Actionlog::class, 'asset-upload')->create(['item_id' => $asset->id]);
+        \App\Models\Actionlog::factory()->count('asset-upload')->create(['item_id' => $asset->id]);
         $this->assertCount(1, $asset->fresh()->uploads);
     }
 
@@ -222,8 +221,8 @@ class AssetTest extends BaseTest
         $asset = $this->createValidAsset();
         $adminUser = $this->signIn();
 
-        $target = factory(App\Models\User::class)->create([
-             'location_id' => factory(App\Models\Location::class)->create(),
+        $target = \App\Models\User::factory()->create([
+             'location_id' => \App\Models\Location::factory()->create(),
          ]);
         // An Asset Can be checked out to a user, and this should be logged.
         $asset->checkOut($target, $adminUser);
@@ -318,7 +317,7 @@ class AssetTest extends BaseTest
     public function testAnAssetHasMaintenances()
     {
         $asset = $this->createValidAsset();
-        factory(App\Models\AssetMaintenance::class)->create(['asset_id' => $asset->id]);
+        \App\Models\AssetMaintenance::factory()->create(['asset_id' => $asset->id]);
         $this->assertCount(1, $asset->assetmaintenances);
     }
 }

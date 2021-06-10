@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Events\AssetCheckedOut;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
@@ -26,6 +27,8 @@ use Watson\Validating\ValidatingTrait;
  */
 class Asset extends Depreciable
 {
+    use HasFactory;
+
     protected $presenter = \App\Presenters\AssetPresenter::class;
     use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 

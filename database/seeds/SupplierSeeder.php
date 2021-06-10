@@ -8,6 +8,6 @@ class SupplierSeeder extends Seeder
     public function run()
     {
         Supplier::truncate();
-        factory(Supplier::class, 5)->create();
+        Supplier::factory()->count(5)->create();
     }
 }

@@ -43,7 +43,7 @@ class DepreciationsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $depreciation = factory(App\Models\Depreciation::class)->states('computer')->make([
+        $depreciation = \App\Models\Depreciation::factory()->computer()->make([
             'name'=>'Test Depreciation',
         ]);
         $values = [

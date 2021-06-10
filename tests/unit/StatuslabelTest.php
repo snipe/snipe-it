@@ -15,7 +15,7 @@ class StatuslabelTest extends BaseTest
 
     public function testRTDStatuslabelAdd()
     {
-        $statuslabel = factory(Statuslabel::class)->states('rtd')->make();
+        $statuslabel = Statuslabel::factory()->rtd()->make();
         $values = [
          'name'        => $statuslabel->name,
          'deployable'  => $statuslabel->deployable,
@@ -30,7 +30,7 @@ class StatuslabelTest extends BaseTest
 
     public function testPendingStatuslabelAdd()
     {
-        $statuslabel = factory(Statuslabel::class)->states('pending')->make();
+        $statuslabel = Statuslabel::factory()->pending()->make();
         $values = [
          'name'        => $statuslabel->name,
          'deployable'  => $statuslabel->deployable,
@@ -44,7 +44,7 @@ class StatuslabelTest extends BaseTest
 
     public function testArchivedStatuslabelAdd()
     {
-        $statuslabel = factory(Statuslabel::class)->states('archived')->make();
+        $statuslabel = Statuslabel::factory()->archived()->make();
         $values = [
          'name'        => $statuslabel->name,
          'deployable'  => $statuslabel->deployable,
@@ -58,7 +58,7 @@ class StatuslabelTest extends BaseTest
 
     public function testOutForRepairStatuslabelAdd()
     {
-        $statuslabel = factory(Statuslabel::class)->states('out_for_repair')->make();
+        $statuslabel = Statuslabel::factory()->outForRepair()->make();
         $values = [
          'name'        => $statuslabel->name,
          'deployable'  => $statuslabel->deployable,
@@ -72,7 +72,7 @@ class StatuslabelTest extends BaseTest
 
     public function testOutForDiagnosticsStatuslabelAdd()
     {
-        $statuslabel = factory(Statuslabel::class)->states('out_for_diagnostics')->make();
+        $statuslabel = Statuslabel::factory()->outForDiagnostics()->make();
         $values = [
          'name'        => $statuslabel->name,
          'deployable'  => $statuslabel->deployable,
@@ -86,7 +86,7 @@ class StatuslabelTest extends BaseTest
 
     public function testBrokenStatuslabelAdd()
     {
-        $statuslabel = factory(Statuslabel::class)->states('broken')->make();
+        $statuslabel = Statuslabel::factory()->broken()->make();
         $values = [
          'name'        => $statuslabel->name,
          'deployable'  => $statuslabel->deployable,
@@ -100,7 +100,7 @@ class StatuslabelTest extends BaseTest
 
     public function testLostStatuslabelAdd()
     {
-        $statuslabel = factory(Statuslabel::class)->states('lost')->make();
+        $statuslabel = Statuslabel::factory()->lost()->make();
         $values = [
          'name'        => $statuslabel->name,
          'deployable'  => $statuslabel->deployable,

@@ -1,19 +1,17 @@
 <?php
 
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\User;
 
-$factory->define(Actionlog::class, function (Faker\Generator $faker) {
-    return [
-        'note' => 'Sample checkout from DB seeder!',
-    ];
-});
 
 $factory->defineAs(App\Models\Actionlog::class, 'asset-upload', function ($faker) {
-    $asset = factory(App\Models\Asset::class)->create();
+    $asset = \App\Models\Asset::factory()->create();
 
     return [
         'item_type' => get_class($asset),
@@ -74,6 +72,7 @@ $factory->defineAs(Actionlog::class, 'asset-checkout-location', function (Faker\
 });
 
 // This doesn't work - we need to assign a seat
+
 $factory->defineAs(Actionlog::class, 'license-checkout-asset', function (Faker\Generator $faker) {
     $target = Asset::inRandomOrder()->RTD()->first();
     $item = License::inRandomOrder()->first();
@@ -109,10 +108,10 @@ $factory->defineAs(Actionlog::class, 'accessory-checkout', function (Faker\Gener
 });
 
 $factory->defineAs(Actionlog::class, 'consumable-checkout', function (Faker\Generator $faker) {
-    $company = factory(App\Models\Company::class)->create();
-    $user = factory(App\Models\User::class)->create(['company_id' => $company->id]);
-    $target = factory(App\Models\User::class)->create(['company_id' => $company->id]);
-    $item = factory(App\Models\Consumable::class)->create(['company_id' => $company->id]);
+    $company = \App\Models\Company::factory()->create();
+    $user = \App\Models\User::factory()->create(['company_id' => $company->id]);
+    $target = \App\Models\User::factory()->create(['company_id' => $company->id]);
+    $item = \App\Models\Consumable::factory()->create(['company_id' => $company->id]);
 
     return [
         'user_id' => $user->id,
@@ -128,10 +127,10 @@ $factory->defineAs(Actionlog::class, 'consumable-checkout', function (Faker\Gene
 });
 
 $factory->defineAs(Actionlog::class, 'component-checkout', function (Faker\Generator $faker) {
-    $company = factory(App\Models\Company::class)->create();
-    $user = factory(App\Models\User::class)->create(['company_id' => $company->id]);
-    $target = factory(App\Models\User::class)->create(['company_id' => $company->id]);
-    $item = factory(App\Models\Component::class)->create(['company_id' => $company->id]);
+    $company = \App\Models\Company::factory()->create();
+    $user = \App\Models\User::factory()->create(['company_id' => $company->id]);
+    $target = \App\Models\User::factory()->create(['company_id' => $company->id]);
+    $item = \App\Models\Component::factory()->create(['company_id' => $company->id]);
 
     return [
         'user_id' => $user->id,
@@ -145,3 +144,25 @@ $factory->defineAs(Actionlog::class, 'component-checkout', function (Faker\Gener
         'company_id' => $company->id,
     ];
 });
+
+class ActionlogFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Actionlog::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'note' => 'Sample checkout from DB seeder!',
+        ];
+    }
+}

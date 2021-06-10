@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\Searchable;
 use Watson\Validating\ValidatingTrait;
 
 class Group extends SnipeModel
 {
+    use HasFactory;
+
     protected $table = 'permission_groups';
 
     public $rules = [

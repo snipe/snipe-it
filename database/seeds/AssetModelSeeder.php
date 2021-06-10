@@ -11,34 +11,34 @@ class AssetModelSeeder extends Seeder
         AssetModel::truncate();
 
         // Laptops
-        factory(AssetModel::class, 1)->states('mbp-13-model')->create(); // 1
-        factory(AssetModel::class, 1)->states('mbp-air-model')->create(); // 2
-        factory(AssetModel::class, 1)->states('surface-model')->create(); // 3
-        factory(AssetModel::class, 1)->states('xps13-model')->create(); // 4
-        factory(AssetModel::class, 1)->states('spectre-model')->create(); // 5
-        factory(AssetModel::class, 1)->states('zenbook-model')->create(); // 6
-        factory(AssetModel::class, 1)->states('yoga-model')->create(); // 7
+        AssetModel::factory()->count(1)->mbp13Model()->create(); // 1
+        AssetModel::factory()->count(1)->mbpAirModel()->create(); // 2
+        AssetModel::factory()->count(1)->surfaceModel()->create(); // 3
+        AssetModel::factory()->count(1)->xps13Model()->create(); // 4
+        AssetModel::factory()->count(1)->spectreModel()->create(); // 5
+        AssetModel::factory()->count(1)->zenbookModel()->create(); // 6
+        AssetModel::factory()->count(1)->yogaModel()->create(); // 7
 
         // Desktops
-        factory(AssetModel::class, 1)->states('macpro-model')->create(); // 8
-        factory(AssetModel::class, 1)->states('lenovo-i5-model')->create(); // 9
-        factory(AssetModel::class, 1)->states('optiplex-model')->create(); // 10
+        AssetModel::factory()->count(1)->macproModel()->create(); // 8
+        AssetModel::factory()->count(1)->lenovoI5Model()->create(); // 9
+        AssetModel::factory()->count(1)->optiplexModel()->create(); // 10
 
         // Conference Phones
-        factory(AssetModel::class, 1)->states('polycom-model')->create(); // 11
-        factory(AssetModel::class, 1)->states('polycomcx-model')->create(); // 12
+        AssetModel::factory()->count(1)->polycomModel()->create(); // 11
+        AssetModel::factory()->count(1)->polycomcxModel()->create(); // 12
 
         // Tablets
-        factory(AssetModel::class, 1)->states('ipad-model')->create(); // 13
-        factory(AssetModel::class, 1)->states('tab3-model')->create(); // 14
+        AssetModel::factory()->count(1)->ipadModel()->create(); // 13
+        AssetModel::factory()->count(1)->tab3Model()->create(); // 14
 
         // Phones
-        factory(AssetModel::class, 1)->states('iphone6s-model')->create(); // 15
-        factory(AssetModel::class, 1)->states('iphone7-model')->create(); // 16
+        AssetModel::factory()->count(1)->iphone6sModel()->create(); // 15
+        AssetModel::factory()->count(1)->iphone7Model()->create(); // 16
 
         // Displays
-        factory(AssetModel::class, 1)->states('ultrafine')->create(); // 17
-        factory(AssetModel::class, 1)->states('ultrasharp')->create(); // 18
+        AssetModel::factory()->count(1)->ultrafine()->create(); // 17
+        AssetModel::factory()->count(1)->ultrasharp()->create(); // 18
 
         $src = public_path('/img/demo/models/');
         $dst = 'models'.'/';

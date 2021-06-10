@@ -47,7 +47,7 @@ class LicensesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $license = factory(App\Models\License::class)->states('photoshop')->make([
+        $license = \App\Models\License::factory()->photoshop()->make([
             'name' => 'Test License',
             'company_id' => 3,
         ]);

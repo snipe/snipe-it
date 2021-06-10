@@ -47,7 +47,7 @@ class ConsumablesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $consumable = factory(App\Models\Consumable::class)->states('cardstock')->make([
+        $consumable = \App\Models\Consumable::factory()->cardstock()->make([
             'name' => 'Test Consumable',
             'model_number' => 23520,
         ]);

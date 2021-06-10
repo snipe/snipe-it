@@ -9,7 +9,7 @@ class LocationSeeder extends Seeder
     public function run()
     {
         Location::truncate();
-        factory(Location::class, 10)->create();
+        Location::factory()->count(10)->create();
 
         $src = public_path('/img/demo/locations/');
         $dst = 'locations'.'/';

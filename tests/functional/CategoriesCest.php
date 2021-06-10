@@ -36,7 +36,7 @@ class CategoriesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $category = factory(App\Models\Category::class)->states('asset-laptop-category')->make([
+        $category = \App\Models\Category::factory()->assetLaptopCategory()->make([
             'name' => 'Test Category',
         ]);
         $values = [
@@ -57,7 +57,7 @@ class CategoriesCest
     public function allowsDelete(FunctionalTester $I)
     {
         $I->wantTo('Ensure I can delete a category');
-        $category = factory(App\Models\Category::class)->states('asset-laptop-category')->create([
+        $category = \App\Models\Category::factory()->assetLaptopCategory()->create([
             'name'=>'Deletable Test Category',
         ]);
         $I->sendDelete(route('categories.destroy', $category->id), ['_token' => csrf_token()]);

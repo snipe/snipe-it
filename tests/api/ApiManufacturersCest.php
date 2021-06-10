@@ -41,7 +41,7 @@ class ApiManufacturersCest
     {
         $I->wantTo('Create a new manufacturer');
 
-        $temp_manufacturer = factory(\App\Models\Manufacturer::class)->states('apple')->make([
+        $temp_manufacturer = \App\Models\Manufacturer::factory()->apple()->make([
             'name' => 'Test Manufacturer Tag',
         ]);
 
@@ -70,13 +70,13 @@ class ApiManufacturersCest
         $I->wantTo('Update an manufacturer with PATCH');
 
         // create
-        $manufacturer = factory(\App\Models\Manufacturer::class)->states('apple')
+        $manufacturer = \App\Models\Manufacturer::factory()->apple()
             ->create([
                 'name' => 'Original Manufacturer Name',
         ]);
         $I->assertInstanceOf(\App\Models\Manufacturer::class, $manufacturer);
 
-        $temp_manufacturer = factory(\App\Models\Manufacturer::class)->states('dell')->make([
+        $temp_manufacturer = \App\Models\Manufacturer::factory()->dell()->make([
             'name' => 'updated manufacturer name',
         ]);
 
@@ -120,7 +120,7 @@ class ApiManufacturersCest
         $I->wantTo('Delete an manufacturer');
 
         // create
-        $manufacturer = factory(\App\Models\Manufacturer::class)->states('apple')->create([
+        $manufacturer = \App\Models\Manufacturer::factory()->apple()->create([
             'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Manufacturer::class, $manufacturer);

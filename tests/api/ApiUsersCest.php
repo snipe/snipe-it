@@ -42,10 +42,10 @@ class ApiUsersCest
     {
         $I->wantTo('Create a new user');
 
-        $temp_user = factory(\App\Models\User::class)->make([
+        $temp_user = \App\Models\User::factory()->make([
             'name' => 'Test User Name',
         ]);
-        factory(Group::class, 2)->create();
+        Group::factory()->count(2)->create();
         $groups = Group::pluck('id');
         // setup
         $data = [
@@ -90,20 +90,20 @@ class ApiUsersCest
         $I->wantTo('Update an user with PATCH');
 
         // create
-        $user = factory(\App\Models\User::class)->create([
+        $user = \App\Models\User::factory()->create([
             'first_name' => 'Original User Name',
             'company_id' => 2,
             'location_id' => 3,
         ]);
         $I->assertInstanceOf(\App\Models\User::class, $user);
 
-        $temp_user = factory(\App\Models\User::class)->make([
+        $temp_user = \App\Models\User::factory()->make([
             'company_id' => 3,
             'first_name' => 'updated user name',
             'location_id' => 1,
         ]);
 
-        factory(Group::class, 2)->create();
+        Group::factory()->count(2)->create();
         $groups = Group::pluck('id');
 
         $data = [
@@ -163,7 +163,7 @@ class ApiUsersCest
         $I->wantTo('Delete an user');
 
         // create
-        $user = factory(\App\Models\User::class)->create([
+        $user = \App\Models\User::factory()->create([
             'first_name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\User::class, $user);

@@ -33,7 +33,7 @@ class StatusLabelsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $status = factory(App\Models\Statuslabel::class)->states('pending')->make();
+        $status = \App\Models\Statuslabel::factory()->pending()->make();
         $submitValues = [
             'name'                  => 'Testing Status',
             'statuslabel_types'     => 'pending',

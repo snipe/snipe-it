@@ -17,7 +17,7 @@ class LocationTest extends BaseTest
     {
         $this->createValidLocation(['id' => 10]);
 
-        $a = factory(Location::class)->make([
+        $a = Location::factory()->make([
             'name' => 'Test Location',
             'id' => 1,
             'parent_id' => 10,
@@ -28,7 +28,7 @@ class LocationTest extends BaseTest
 
     public function testFailsIfSelfParent()
     {
-        $a = factory(Location::class)->make([
+        $a = Location::factory()->make([
             'name' => 'Test Location',
             'id' => 1,
             'parent_id' => 1,

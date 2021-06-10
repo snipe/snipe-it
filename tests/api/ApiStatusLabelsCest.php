@@ -41,7 +41,7 @@ class ApiStatusLabelsCest
     {
         $I->wantTo('Create a new statuslabel');
 
-        $temp_statuslabel = factory(\App\Models\Statuslabel::class)->make([
+        $temp_statuslabel = \App\Models\Statuslabel::factory()->make([
             'name' => 'Test Statuslabel Tag',
         ]);
 
@@ -70,12 +70,12 @@ class ApiStatusLabelsCest
         $I->wantTo('Update an statuslabel with PATCH');
 
         // create
-        $statuslabel = factory(\App\Models\Statuslabel::class)->states('rtd')->create([
+        $statuslabel = \App\Models\Statuslabel::factory()->rtd()->create([
             'name' => 'Original Statuslabel Name',
         ]);
         $I->assertInstanceOf(\App\Models\Statuslabel::class, $statuslabel);
 
-        $temp_statuslabel = factory(\App\Models\Statuslabel::class)->states('pending')->make([
+        $temp_statuslabel = \App\Models\Statuslabel::factory()->pending()->make([
             'name' => 'updated statuslabel name',
             'type' => 'pending',
         ]);
@@ -120,7 +120,7 @@ class ApiStatusLabelsCest
         $I->wantTo('Delete an statuslabel');
 
         // create
-        $statuslabel = factory(\App\Models\Statuslabel::class)->create([
+        $statuslabel = \App\Models\Statuslabel::factory()->create([
             'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Statuslabel::class, $statuslabel);

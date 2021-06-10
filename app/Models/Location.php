@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Asset;
 use App\Models\SnipeModel;
@@ -16,6 +17,8 @@ use Watson\Validating\ValidatingTrait;
 
 class Location extends SnipeModel
 {
+    use HasFactory;
+
     protected $presenter = \App\Presenters\LocationPresenter::class;
     use Presentable;
     use SoftDeletes;

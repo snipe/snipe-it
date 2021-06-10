@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
@@ -11,6 +12,8 @@ use Watson\Validating\ValidatingTrait;
 
 class Consumable extends SnipeModel
 {
+    use HasFactory;
+
     protected $presenter = \App\Presenters\ConsumablePresenter::class;
     use CompanyableTrait;
     use Loggable, Presentable;

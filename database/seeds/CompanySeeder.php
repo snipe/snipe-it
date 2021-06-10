@@ -14,7 +14,7 @@ class CompanySeeder extends Seeder
     {
         \Log::debug('Seed companies');
         Company::truncate();
-        factory(Company::class, 4)->create();
+        Company::factory()->count(4)->create();
 
         $src = public_path('/img/demo/companies/');
         $dst = 'companies'.'/';

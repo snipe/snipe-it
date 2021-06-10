@@ -46,7 +46,7 @@ class ApiAssetsCest
     {
         $I->wantTo('Create a new asset');
 
-        $temp_asset = factory(\App\Models\Asset::class)->states('laptop-mbp')->make([
+        $temp_asset = \App\Models\Asset::factory()->laptopMbp()->make([
             'asset_tag' => 'Test Asset Tag',
             'company_id' => 2,
         ]);
@@ -81,13 +81,13 @@ class ApiAssetsCest
         $I->wantTo('Update an asset with PATCH');
 
         // create
-        $asset = factory(\App\Models\Asset::class)->states('laptop-mbp')->create([
+        $asset = \App\Models\Asset::factory()->laptopMbp()->create([
             'company_id' => 2,
             'rtd_location_id' => 3,
         ]);
         $I->assertInstanceOf(\App\Models\Asset::class, $asset);
 
-        $temp_asset = factory(\App\Models\Asset::class)->states('laptop-air')->make([
+        $temp_asset = \App\Models\Asset::factory()->laptopAir()->make([
             'company_id' => 3,
             'name' => 'updated asset name',
             'rtd_location_id' => 1,
@@ -144,7 +144,7 @@ class ApiAssetsCest
         $I->wantTo('Delete an asset');
 
         // create
-        $asset = factory(\App\Models\Asset::class)->states('laptop-mbp')->create();
+        $asset = \App\Models\Asset::factory()->laptopMbp()->create();
         $I->assertInstanceOf(\App\Models\Asset::class, $asset);
 
         // delete

@@ -46,7 +46,7 @@ class ComponentsCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $component = factory(App\Models\Component::class)->states('ram-crucial4')->make([
+        $component = \App\Models\Component::factory()->ramCrucial4()->make([
             'name' => 'Test Component',
             'serial' => '3523-235325-1350235',
         ]);

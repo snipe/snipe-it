@@ -13,10 +13,10 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::truncate();
-        factory(User::class, 1)->states('first-admin')->create();
-        factory(User::class, 1)->states('snipe-admin')->create();
-        factory(User::class, 3)->states('superuser')->create();
-        factory(User::class, 3)->states('admin')->create();
-        factory(User::class, 50)->states('view-assets')->create();
+        User::factory()->count(1)->firstAdmin()->create();
+        User::factory()->count(1)->snipeAdmin()->create();
+        User::factory()->count(3)->superuser()->create();
+        User::factory()->count(3)->admin()->create();
+        User::factory()->count(50)->viewAssets()->create();
     }
 }

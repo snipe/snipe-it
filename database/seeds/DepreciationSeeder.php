@@ -8,8 +8,8 @@ class DepreciationSeeder extends Seeder
     public function run()
     {
         Depreciation::truncate();
-        factory(Depreciation::class, 1)->states('computer')->create(); // 1
-        factory(Depreciation::class, 1)->states('display')->create(); // 2
-        factory(Depreciation::class, 1)->states('mobile-phones')->create(); // 3
+        Depreciation::factory()->count(1)->computer()->create(); // 1
+        Depreciation::factory()->count(1)->display()->create(); // 2
+        Depreciation::factory()->count(1)->mobilePhones()->create(); // 3
     }
 }

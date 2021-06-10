@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
 use Watson\Validating\ValidatingTrait;
 
 class Department extends SnipeModel
 {
+    use HasFactory;
+
     /**
      * Whether the model should inject it's identifier to the unique
      * validation rules before attempting validation. If this property

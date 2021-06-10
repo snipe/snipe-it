@@ -9,10 +9,10 @@ class AccessorySeeder extends Seeder
     {
         Accessory::truncate();
         DB::table('accessories_users')->truncate();
-        factory(Accessory::class, 1)->states('apple-usb-keyboard')->create();
-        factory(Accessory::class, 1)->states('apple-bt-keyboard')->create();
-        factory(Accessory::class, 1)->states('apple-mouse')->create();
-        factory(Accessory::class, 1)->states('microsoft-mouse')->create();
+        Accessory::factory()->count(1)->appleUsbKeyboard()->create();
+        Accessory::factory()->count(1)->appleBtKeyboard()->create();
+        Accessory::factory()->count(1)->appleMouse()->create();
+        Accessory::factory()->count(1)->microsoftMouse()->create();
 
         $src = public_path('/img/demo/accessories/');
         $dst = 'accessories'.'/';

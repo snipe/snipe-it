@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Watson\Validating\ValidatingTrait;
 
 class Depreciation extends SnipeModel
 {
+    use HasFactory;
+
     protected $presenter = \App\Presenters\DepreciationPresenter::class;
     use Presentable;
     // Declare the rules for the form validation

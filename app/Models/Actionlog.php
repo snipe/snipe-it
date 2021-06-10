@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon;
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Auth;
  */
 class Actionlog extends SnipeModel
 {
+    use HasFactory;
+
     protected $presenter = \App\Presenters\ActionlogPresenter::class;
     use SoftDeletes;
     use Presentable;

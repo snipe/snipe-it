@@ -39,7 +39,7 @@ class ApiModelsCest
     {
         $I->wantTo('Create a new assetmodel');
 
-        $temp_assetmodel = factory(\App\Models\AssetModel::class)->states('mbp-13-model')->make([
+        $temp_assetmodel = \App\Models\AssetModel::factory()->mbp13Model()->make([
             'name' => 'Test AssetModel Tag',
         ]);
 
@@ -70,12 +70,12 @@ class ApiModelsCest
         $I->wantTo('Update an assetmodel with PATCH');
 
         // create
-        $assetmodel = factory(\App\Models\AssetModel::class)->states('mbp-13-model')->create([
+        $assetmodel = \App\Models\AssetModel::factory()->mbp13Model()->create([
             'name' => 'Original AssetModel Name',
         ]);
         $I->assertInstanceOf(\App\Models\AssetModel::class, $assetmodel);
 
-        $temp_assetmodel = factory(\App\Models\AssetModel::class)->states('polycomcx-model')->make([
+        $temp_assetmodel = \App\Models\AssetModel::factory()->polycomcxModel()->make([
             'name' => 'updated AssetModel name',
             'fieldset_id' => 2,
         ]);
@@ -123,7 +123,7 @@ class ApiModelsCest
         $I->wantTo('Delete an assetmodel');
 
         // create
-        $assetmodel = factory(\App\Models\AssetModel::class)->states('mbp-13-model')->create([
+        $assetmodel = \App\Models\AssetModel::factory()->mbp13Model()->create([
             'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\AssetModel::class, $assetmodel);

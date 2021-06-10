@@ -34,7 +34,7 @@ class AssetsCest
 
     public function passesCreateAndCheckout(FunctionalTester $I)
     {
-        $asset = factory(App\Models\Asset::class)->states('laptop-mbp')->make([
+        $asset = \App\Models\Asset::factory()->laptopMbp()->make([
             'asset_tag'=>'test tag',
             'name'=> 'test asset',
             'company_id'=>1,

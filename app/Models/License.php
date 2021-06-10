@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
@@ -13,6 +14,8 @@ use Watson\Validating\ValidatingTrait;
 
 class License extends Depreciable
 {
+    use HasFactory;
+
     protected $presenter = \App\Presenters\LicensePresenter::class;
 
     use SoftDeletes;
