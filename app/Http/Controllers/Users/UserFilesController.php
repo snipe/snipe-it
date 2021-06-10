@@ -33,6 +33,10 @@ class UserFilesController extends Controller
 
             $logActions = [];
             $files = $request->file('file');
+
+            if (is_null($files)){
+                return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
+            }
             foreach($files as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $filename = 'user-' . $user->id . '-' . str_random(8);
