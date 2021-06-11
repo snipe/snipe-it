@@ -19,6 +19,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StatuslabelsController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\ViewAssetsController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -339,7 +340,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get(
     'auth/signin',
-    ['uses' => [Auth\LoginController::class, 'legacyAuthRedirect']]
+    ['uses' => [LoginController::class, 'legacyAuthRedirect']]
 );
 
 /*
@@ -399,7 +400,7 @@ Route::get(
     [
         'as' => 'two-factor-enroll',
         'middleware' => ['web'],
-        'uses' => [Auth\LoginController::class, 'getTwoFactorEnroll'], ]
+        'uses' => [LoginController::class, 'getTwoFactorEnroll'], ]
 );
 
 Route::get(
@@ -407,7 +408,7 @@ Route::get(
     [
         'as' => 'two-factor',
         'middleware' => ['web'],
-        'uses' => [Auth\LoginController::class, 'getTwoFactorAuth'], ]
+        'uses' => [LoginController::class, 'getTwoFactorAuth'], ]
 );
 
 Route::post(
@@ -415,7 +416,7 @@ Route::post(
     [
         'as' => 'two-factor',
         'middleware' => ['web'],
-        'uses' => [Auth\LoginController::class, 'postTwoFactorAuth'], ]
+        'uses' => [LoginController::class, 'postTwoFactorAuth'], ]
 );
 
 
@@ -423,25 +424,27 @@ Route::post(
 Route::group(['middleware' => 'web'], function () {
     Route::get(
         'login',
-        [
-            'as' => 'login',
-            'middleware' => ['web'],
-            'uses' => [Auth\LoginController::class, 'showLoginForm'], ]
-    );
+        [LoginController::class, 'showLoginForm']
+        // [
+        //     'as' => 'login',
+        //     'middleware' => ['web'],
+        //     'uses' => [LoginController::class, 'showLoginForm'], ]
+    )->name("login");
 
     Route::post(
         'login',
-        [
-            'as' => 'login',
-            'middleware' => ['web'],
-            'uses' => [Auth\LoginController::class, 'login'], ]
+        [LoginController::class, 'login']
+        // [
+        //     'as' => 'login',
+        //     'middleware' => ['web'],
+        //     'uses' => [LoginController::class, 'login'], ]
     );
 
     Route::get(
         'logout',
         [
             'as' => 'logout',
-            'uses' => [Auth\LoginController::class, 'logout'], ]
+            'uses' => [LoginController::class, 'logout'], ]
     );
 });
 
@@ -454,10 +457,11 @@ Route::get(
     'uses' => [HealthController::class, 'get'],]
 );
 
-Route::get(
+Route::middleware(['auth'])->get(
     '/',
-    [
-    'as' => 'home',
-    'middleware' => ['auth'],
-    'uses' => [DashboardController::class, 'index'], ]
-);
+    [DashboardController::class, 'index']
+    // [
+    // 'as' => 'home',
+    // 'middleware' => ['auth'],
+    // 'uses' => [DashboardController::class, 'index'], ]
+)->name('home');

@@ -630,12 +630,12 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
     Route::group(['prefix' => 'statuslabels'], function () {
 
         // Pie chart for dashboard
-        Route::get('assets',
-            [
-                'as' => 'api.statuslabels.assets.bytype',
-                'uses' => [Api\StatuslabelsController::class, 'getAssetCountByStatuslabel'],
-            ]
-        );
+        Route::get('assets', [Api\StatuslabelsController::class, 'getAssetCountByStatuslabel']
+            // [
+            //     'as' => 'api.statuslabels.assets.bytype',
+            //     'uses' => [Api\StatuslabelsController::class, 'getAssetCountByStatuslabel'],
+            // ]
+        )->name('api.statuslabels.assets.bytype');
 
         Route::get('{statuslabel}/assetlist',
             [
@@ -774,9 +774,10 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
     ); // Users resource
 
     Route::get(
-        'reports/activity',
-        ['as' => 'api.activity.index', 'uses' => [Api\ReportsController::class, 'index']]
-    );
+        'reports/activity', 
+        [Api\ReportsController::class, 'index']
+        // ['as' => 'api.activity.index', 'uses' => [Api\ReportsController::class, 'index']]
+    )->name('api.activity.index');
 
     /*--- Kits API ---*/
 
