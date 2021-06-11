@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\AdminController;
-use Auth;
-use View;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
+
 
 /**
  * This controller handles all actions related to the Admin Dashboard
  * for the Snipe-IT Asset Management application.
  *
- * @version    v1.0
+ * @author A. Gianotto <snipe@snipe.net>
+ * @version v1.0
  */
 class DashboardController extends Controller
 {
@@ -22,7 +23,7 @@ class DashboardController extends Controller
      * @since [v1.0]
      * @return View
      */
-    public function getIndex()
+    public function index()
     {
         // Show the page
         if (Auth::user()->hasAccess('admin')) {
@@ -35,7 +36,7 @@ class DashboardController extends Controller
             $counts['grand_total'] = $counts['asset'] + $counts['accessory'] + $counts['license'] + $counts['consumable'];
 
             if ((! file_exists(storage_path().'/oauth-private.key')) || (! file_exists(storage_path().'/oauth-public.key'))) {
-                \Artisan::call('migrate', ['--force' => true]);
+                Artisan::call('migrate', ['--force' => true]);
                 \Artisan::call('passport:install');
             }
 

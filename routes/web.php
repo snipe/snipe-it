@@ -418,16 +418,9 @@ Route::post(
         'uses' => [Auth\LoginController::class, 'postTwoFactorAuth'], ]
 );
 
-Route::get(
-    '/',
-    [
-    'as' => 'home',
-    'middleware' => ['auth'],
-    'uses' => [DashboardController::class, 'getIndex'], ]
-);
+
 
 Route::group(['middleware' => 'web'], function () {
-    //Route::auth();
     Route::get(
         'login',
         [
@@ -452,6 +445,19 @@ Route::group(['middleware' => 'web'], function () {
     );
 });
 
-Auth::routes();
+//Auth::routes();
 
-Route::get('/health', ['as' => 'health', 'uses' => [HealthController::class, 'get']]);
+Route::get(
+    '/health', 
+    [
+    'as' => 'health', 
+    'uses' => [HealthController::class, 'get'],]
+);
+
+Route::get(
+    '/',
+    [
+    'as' => 'home',
+    'middleware' => ['auth'],
+    'uses' => [DashboardController::class, 'index'], ]
+);
