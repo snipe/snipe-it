@@ -13,7 +13,6 @@ class Supplier extends SnipeModel
     use SoftDeletes;
     use HasFactory;
 
-    protected $dates = ['deleted_at'];
     protected $table = 'suppliers';
 
     protected $rules = [

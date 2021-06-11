@@ -22,14 +22,7 @@ class License extends Depreciable
     use ValidatingTrait;
 
     // We set these as protected dates so that they will be easily accessible via Carbon
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'purchase_date',
-        'expiration_date',
-        'termination_date',
-    ];
+
 
     public $timestamps = true;
 
@@ -37,6 +30,9 @@ class License extends Depreciable
     protected $table = 'licenses';
 
     protected $casts = [
+        'purchase_date' => 'datetime',
+        'expiration_date' => 'datetime',
+        'termination_date' => 'datetime',
         'seats'   => 'integer',
         'category_id'  => 'integer',
         'company_id'   => 'integer',

@@ -10,15 +10,9 @@ class CheckoutAcceptance extends Model
 {
     use SoftDeletes;
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'accepted_at',
-        'declined_at',
-        'deleted_at',
+    protected $casts = [
+        'accepted_at' => 'datetime',
+        'declined_at' => 'datetime',
     ];
 
     /**

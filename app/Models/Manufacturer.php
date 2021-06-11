@@ -15,7 +15,7 @@ class Manufacturer extends SnipeModel
     use Presentable;
     use SoftDeletes;
     use HasFactory;
-    protected $dates = ['deleted_at'];
+
     protected $table = 'manufacturers';
 
     // Declare the rules for the form validation

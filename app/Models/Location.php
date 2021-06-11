@@ -21,7 +21,7 @@ class Location extends SnipeModel
     use Presentable;
     use SoftDeletes;
     use HasFactory;
-    protected $dates = ['deleted_at'];
+
     protected $table = 'locations';
     protected $rules = [
         'name'          => 'required|min:2|max:255|unique_undeleted',

@@ -21,7 +21,7 @@ class Actionlog extends SnipeModel
     use SoftDeletes;
     use Presentable;
     use HasFactory;
-    protected $dates = ['deleted_at'];
+
 
     protected $table = 'action_logs';
     public $timestamps = true;

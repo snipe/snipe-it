@@ -18,8 +18,10 @@ class AssetMaintenance extends Model implements ICompanyableChild
     use SoftDeletes;
     use CompanyableChildTrait;
     use ValidatingTrait;
-
-    protected $dates = ['deleted_at', 'start_date', 'completion_date'];
+    protected $casts = [
+        'start_date' => 'datetime',
+        'completion_date' => 'datetime',
+    ];
     protected $table = 'asset_maintenances';
     protected $rules = [
         'asset_id'               => 'required|integer',

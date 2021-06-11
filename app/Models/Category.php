@@ -24,7 +24,7 @@ class Category extends SnipeModel
     use Presentable;
     use SoftDeletes;
     use HasFactory;
-    protected $dates = ['deleted_at'];
+
     protected $table = 'categories';
     protected $hidden = ['user_id', 'deleted_at'];
 

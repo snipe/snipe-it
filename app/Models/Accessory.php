@@ -23,11 +23,10 @@ class Accessory extends SnipeModel
     use SoftDeletes;
     use HasFactory;
 
-    protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'accessories';
     protected $casts = [
-        'requestable' => 'boolean',
-    ];
+        'purchase_date' => 'datetime',
+        'requestable' => 'boolean',    ];
 
     use Searchable;
     use Acceptable;
