@@ -14,7 +14,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['purchase_date'] = $value;
-
     }
 
     /**
@@ -28,7 +27,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['purchase_cost'] = $value;
-
     }
 
     public function setLocationIdAttribute($value)
@@ -37,7 +35,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['location_id'] = $value;
-
     }
 
     public function setCategoryIdAttribute($value)
@@ -47,7 +44,6 @@ class SnipeModel extends Model
         }
         $this->attributes['category_id'] = $value;
         // dd($this->attributes);
-
     }
 
     public function setSupplierIdAttribute($value)
@@ -56,7 +52,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['supplier_id'] = $value;
-
     }
 
     public function setDepreciationIdAttribute($value)
@@ -65,7 +60,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['depreciation_id'] = $value;
-
     }
 
     public function setManufacturerIdAttribute($value)
@@ -74,7 +68,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['manufacturer_id'] = $value;
-
     }
 
     public function setMinAmtAttribute($value)
@@ -83,7 +76,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['min_amt'] = $value;
-
     }
 
     public function setParentIdAttribute($value)
@@ -92,7 +84,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['parent_id'] = $value;
-
     }
 
     public function setFieldSetIdAttribute($value)
@@ -101,7 +92,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['fieldset_id'] = $value;
-
     }
 
     public function setCompanyIdAttribute($value)
@@ -110,7 +100,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['company_id'] = $value;
-
     }
 
     public function setWarrantyMonthsAttribute($value)
@@ -119,7 +108,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['warranty_months'] = $value;
-
     }
 
     public function setRtdLocationIdAttribute($value)
@@ -128,7 +116,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['rtd_location_id'] = $value;
-
     }
 
     public function setDepartmentIdAttribute($value)
@@ -137,7 +124,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['department_id'] = $value;
-
     }
 
     public function setManagerIdAttribute($value)
@@ -146,7 +132,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['manager_id'] = $value;
-
     }
 
     public function setModelIdAttribute($value)
@@ -155,7 +140,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['model_id'] = $value;
-
     }
 
     public function setStatusIdAttribute($value)
@@ -164,7 +148,6 @@ class SnipeModel extends Model
             $value = null;
         }
         $this->attributes['status_id'] = $value;
-
     }
 
     //

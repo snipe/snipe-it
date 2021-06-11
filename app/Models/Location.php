@@ -130,7 +130,7 @@ class Location extends SnipeModel
 
     public function parent()
     {
-        return $this->belongsTo(\App\Models\Location::class, 'parent_id', 'id')
+        return $this->belongsTo(self::class, 'parent_id', 'id')
             ->with('parent');
     }
 
@@ -141,7 +141,7 @@ class Location extends SnipeModel
 
     public function children()
     {
-        return $this->hasMany(\App\Models\Location::class, 'parent_id')
+        return $this->hasMany(self::class, 'parent_id')
             ->with('children');
     }
 

@@ -68,7 +68,6 @@ class Asset extends Depreciable
 
     // We set these as protected dates so that they will be easily accessible via Carbon
 
-
     protected $casts = [
         'purchase_date' => 'datetime',
         'last_checkout' => 'datetime',
@@ -440,7 +439,7 @@ class Asset extends Depreciable
      */
     public function assignedAssets()
     {
-        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphMany(self::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
     /**

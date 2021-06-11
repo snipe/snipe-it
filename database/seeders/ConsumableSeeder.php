@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Consumable;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ConsumableSeeder extends Seeder
 {

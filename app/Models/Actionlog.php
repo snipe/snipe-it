@@ -22,7 +22,6 @@ class Actionlog extends SnipeModel
     use Presentable;
     use HasFactory;
 
-
     protected $table = 'action_logs';
     public $timestamps = true;
     protected $fillable = ['created_at', 'item_type', 'user_id', 'item_id', 'action_type', 'note', 'target_id', 'target_type'];

@@ -53,6 +53,5 @@ class ConsumableImporter extends ItemImporter
             return;
         }
         $this->logError($consumable, 'Consumable');
-
     }
 }

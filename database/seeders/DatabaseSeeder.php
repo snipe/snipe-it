@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use App\Models\Setting;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class DatabaseSeeder extends Seeder
 {
@@ -53,14 +56,14 @@ class DatabaseSeeder extends Seeder
         //$this->call(ActionlogSeeder::class);
         //$this->call(CustomFieldSeeder::class);
 
-        // \Artisan::call('snipeit:sync-asset-locations', ['--output' => 'all']);
-        //$output = \Artisan::output();
-        // \Log::info($output);
+        // Artisan::call('snipeit:sync-asset-locations', ['--output' => 'all']);
+        //$output = Artisan::output();
+        // Log::info($output);
 
         Model::reguard();
 
-        \DB::table('imports')->truncate();
-        \DB::table('asset_maintenances')->truncate();
-        \DB::table('requested_assets')->truncate();
+        DB::table('imports')->truncate();
+        DB::table('asset_maintenances')->truncate();
+        DB::table('requested_assets')->truncate();
     }
 }

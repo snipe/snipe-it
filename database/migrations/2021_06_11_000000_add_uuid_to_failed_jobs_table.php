@@ -22,7 +22,7 @@ class AddUuidToFailedJobsTable extends Migration
         DB::table('failed_jobs')->whereNull('uuid')->cursor()->each(function ($job) {
             DB::table('failed_jobs')
                 ->where('id', $job->id)
-                ->update(['uuid' => (string)Str::uuid()]);
+                ->update(['uuid' => (string) Str::uuid()]);
         });
     }
 

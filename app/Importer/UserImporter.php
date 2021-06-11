@@ -106,7 +106,6 @@ class UserImporter extends ItemImporter
         }
 
         $this->logError($user, 'User');
-
     }
 
     /**

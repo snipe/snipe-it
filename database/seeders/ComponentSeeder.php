@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Component;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ComponentSeeder extends Seeder
 {
