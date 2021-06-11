@@ -4,7 +4,7 @@ return [
 
     'supportsCredentials' => false,
 
-    'allowedOrigins' => $allowed_origins,
+    'allowedOrigins' => '[*]',
 
     'allowedHeaders' => ['*'],
 

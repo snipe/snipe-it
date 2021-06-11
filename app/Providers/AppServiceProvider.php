@@ -42,6 +42,9 @@ class AppServiceProvider extends ServiceProvider
                 \Log::warning("'APP_FORCE_TLS' is set to true, but 'APP_URL' does not start with 'https://'. Will not force TLS on connections.");
             }
         }
+
+        \Illuminate\Pagination\Paginator::useBootstrap();
+
         Schema::defaultStringLength(191);
         Asset::observe(AssetObserver::class);
         Accessory::observe(AccessoryObserver::class);
