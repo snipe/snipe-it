@@ -205,21 +205,21 @@ Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Li
 EOT;
 
         // Need to do this manually...
-        $customField = factory(App\Models\CustomField::class)->create(['name' => 'Weight']);
-        $customFieldSet = factory(App\Models\CustomFieldset::class)->create(['name' => 'Default']);
+        $customField = \App\Models\CustomField::factory()->create(['name' => 'Weight']);
+        $customFieldSet = \App\Models\CustomFieldset::factory()->create(['name' => 'Default']);
         $customFieldSet->fields()->attach($customField, [
                 'required' => false,
                 'order' => 'asc', ]);
 
-        factory(App\Models\Category::class)->states('asset-laptop-category')->create([
+        \App\Models\Category::factory()->assetLaptopCategory()->create([
                 'name' => 'quam',
             ]);
 
-        factory(App\Models\Manufacturer::class)->states('apple')->create([
+        \App\Models\Manufacturer::factory()->apple()->create([
                 'name' => 'Linkbridge',
             ]);
 
-        $am = factory(App\Models\AssetModel::class)->create([
+        $am = \App\Models\AssetModel::factory()->create([
                 'name' => 'massa id',
                 'fieldset_id' => $customFieldSet->id,
                 'category_id' => 1,
@@ -246,13 +246,13 @@ EOT;
 
     public function initializeCustomFields()
     {
-        $customField = factory(App\Models\CustomField::class)->create(['name' => 'Weight']);
-        $customFieldSet = factory(App\Models\CustomFieldset::class)->create(['name' => 'Default']);
+        $customField = \App\Models\CustomField::factory()->create(['name' => 'Weight']);
+        $customFieldSet = \App\Models\CustomFieldset::factory()->create(['name' => 'Default']);
         $customFieldSet->fields()->attach($customField, [
                 'required' => false,
                 'order' => 'asc', ]);
 
-        $am = factory(App\Models\AssetModel::class)->create([
+        $am = \App\Models\AssetModel::factory()->create([
                 'name' => 'massa id',
                 'fieldset_id' => $customFieldSet->id,
             ]);

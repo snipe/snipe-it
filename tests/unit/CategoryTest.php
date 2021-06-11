@@ -33,7 +33,7 @@ class CategoryTest extends BaseTest
     {
         $this->createValidAssetModel(); //This will seed various things to make the following work better.
         $category = $this->createValidCategory('asset-desktop-category');
-        $models = factory(App\Models\AssetModel::class, 5)->states('mbp-13-model')->create(['category_id' => $category->id]);
+        $models = \App\Models\AssetModel::factory()->count(5)->mbp13Model()->create(['category_id' => $category->id]);
 
         $this->assertEquals(5, $category->models->count());
         $this->assertCount(5, $category->models);
@@ -49,7 +49,7 @@ class CategoryTest extends BaseTest
     public function testACategoryCanHaveAccessories()
     {
         $category = $this->createValidCategory('accessory-keyboard-category');
-        factory(App\Models\Accessory::class, 5)->states('apple-bt-keyboard')->create(['category_id' => $category->id]);
+        \App\Models\Accessory::factory()->count(5)->appleBtKeyboard()->create(['category_id' => $category->id]);
 
         $this->assertCount(5, $category->accessories);
         $this->assertEquals(5, $category->itemCount());
@@ -58,7 +58,7 @@ class CategoryTest extends BaseTest
     public function testACategoryCanHaveConsumables()
     {
         $category = $this->createValidCategory('consumable-paper-category');
-        factory(App\Models\Consumable::class, 5)->states('cardstock')->create(['category_id' => $category->id]);
+        \App\Models\Consumable::factory()->count(5)->cardstock()->create(['category_id' => $category->id]);
         $this->assertCount(5, $category->consumables);
         $this->assertEquals(5, $category->itemCount());
     }
@@ -66,7 +66,7 @@ class CategoryTest extends BaseTest
     public function testACategoryCanHaveComponents()
     {
         $category = $this->createValidCategory('component-ram-category');
-        factory(App\Models\Component::class, 5)->states('ram-crucial4')->create(['category_id' => $category->id]);
+        \App\Models\Component::factory()->count(5)->ramCrucial4()->create(['category_id' => $category->id]);
         $this->assertCount(5, $category->components);
         $this->assertEquals(5, $category->itemCount());
     }

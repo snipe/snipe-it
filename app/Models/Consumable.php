@@ -13,6 +13,8 @@ use Watson\Validating\ValidatingTrait;
 
 class Consumable extends SnipeModel
 {
+    use HasFactory;
+
     protected $presenter = \App\Presenters\ConsumablePresenter::class;
     use CompanyableTrait;
     use Loggable, Presentable;

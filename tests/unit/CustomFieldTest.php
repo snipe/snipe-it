@@ -21,7 +21,7 @@ class CustomFieldTest extends BaseTest
 
     public function testFormat()
     {
-        $customfield = factory(CustomField::class)->make(['format' => 'IP']);
+        $customfield = CustomField::factory()->make(['format' => 'IP']);
         $values = [
             'name' => $customfield->name,
             'format' => $customfield->format,

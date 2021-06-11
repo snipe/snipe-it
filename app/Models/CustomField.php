@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Http\Traits\UniqueUndeletedTrait;
 use EasySlugger\Utf8Slugger;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,8 @@ use Watson\Validating\ValidatingTrait;
 
 class CustomField extends Model
 {
+    use HasFactory;
+
     use ValidatingTrait,
         UniqueUndeletedTrait;
 

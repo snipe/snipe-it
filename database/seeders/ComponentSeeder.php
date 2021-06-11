@@ -11,9 +11,9 @@ class ComponentSeeder extends Seeder
     {
         Component::truncate();
         DB::table('components_assets')->truncate();
-        factory(Component::class, 1)->states('ram-crucial4')->create(); // 1
-        factory(Component::class, 1)->states('ram-crucial8')->create(); // 1
-        factory(Component::class, 1)->states('ssd-crucial120')->create(); // 1
-        factory(Component::class, 1)->states('ssd-crucial240')->create(); // 1
+        Component::factory()->count(1)->ramCrucial4()->create(); // 1
+        Component::factory()->count(1)->ramCrucial8()->create(); // 1
+        Component::factory()->count(1)->ssdCrucial120()->create(); // 1
+        Component::factory()->count(1)->ssdCrucial240()->create(); // 1
     }
 }

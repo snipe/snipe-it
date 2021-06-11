@@ -41,7 +41,7 @@ class ApiLocationsCest
     {
         $I->wantTo('Create a new location');
 
-        $temp_location = factory(\App\Models\Location::class)->make([
+        $temp_location = \App\Models\Location::factory()->make([
             'name' => 'Test Location Tag',
         ]);
 
@@ -76,12 +76,12 @@ class ApiLocationsCest
         $I->wantTo('Update an location with PATCH');
 
         // create
-        $location = factory(\App\Models\Location::class)->create([
+        $location = \App\Models\Location::factory()->create([
             'name' => 'Original Location Name',
         ]);
         $I->assertInstanceOf(\App\Models\Location::class, $location);
 
-        $temp_location = factory(\App\Models\Location::class)->make([
+        $temp_location = \App\Models\Location::factory()->make([
             'name' => 'updated location name',
         ]);
 
@@ -132,7 +132,7 @@ class ApiLocationsCest
         $I->wantTo('Delete an location');
 
         // create
-        $location = factory(\App\Models\Location::class)->create([
+        $location = \App\Models\Location::factory()->create([
             'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Location::class, $location);

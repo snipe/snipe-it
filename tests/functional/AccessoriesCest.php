@@ -52,7 +52,7 @@ class AccessoriesCest
 
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $accessory = factory(App\Models\Accessory::class)->states('apple-bt-keyboard')->make();
+        $accessory = \App\Models\Accessory::factory()->appleBtKeyboard()->make();
         $values = [
             'category_id'   => $accessory->category_id,
             'location_id'      => $accessory->location_id,

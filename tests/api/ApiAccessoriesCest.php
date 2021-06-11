@@ -39,7 +39,7 @@ class ApiAccessoriesCest
     {
         $I->wantTo('Create a new accessory');
 
-        $temp_accessory = factory(\App\Models\Accessory::class)->states('apple-bt-keyboard')->make([
+        $temp_accessory = \App\Models\Accessory::factory()->appleBtKeyboard()->make([
             'name' => 'Test Accessory Name',
             'company_id' => 2,
         ]);
@@ -74,14 +74,14 @@ class ApiAccessoriesCest
         $I->wantTo('Update an accessory with PATCH');
 
         // create
-        $accessory = factory(\App\Models\Accessory::class)->states('apple-bt-keyboard')->create([
+        $accessory = \App\Models\Accessory::factory()->appleBtKeyboard()->create([
             'name' => 'Original Accessory Name',
             'company_id' => 2,
             'location_id' => 3,
         ]);
         $I->assertInstanceOf(\App\Models\Accessory::class, $accessory);
 
-        $temp_accessory = factory(\App\Models\Accessory::class)->states('microsoft-mouse')->make([
+        $temp_accessory = \App\Models\Accessory::factory()->microsoftMouse()->make([
             'company_id' => 3,
             'name' => 'updated accessory name',
             'location_id' => 1,
@@ -133,7 +133,7 @@ class ApiAccessoriesCest
         $I->wantTo('Delete an accessory');
 
         // create
-        $accessory = factory(\App\Models\Accessory::class)->states('apple-bt-keyboard')->create([
+        $accessory = \App\Models\Accessory::factory()->appleBtKeyboard()->create([
             'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Accessory::class, $accessory);

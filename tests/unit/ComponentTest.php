@@ -37,7 +37,7 @@ class ComponentTest extends BaseTest
         // An Component name has a min length of 3
         // An Component has a min qty of 1
         // An Component has a min amount of 0
-        $a = factory(Component::class)->make([
+        $a = Component::factory()->make([
             'name' => 'a',
             'qty' => 0,
             'min_amt' => -1,
@@ -58,15 +58,14 @@ class ComponentTest extends BaseTest
     {
         $category = $this->createValidCategory('component-hdd-category',
             ['category_type' => 'component']);
-        $component = factory(Component::class)
-            ->states('ssd-crucial240')
+        $component = Component::factory()->ssdCrucial240()
             ->make(['category_id' => $category->id]);
         $this->createValidManufacturer('apple');
 
         $component->save();
         $this->assertTrue($component->isValid());
         $newId = $category->id + 1;
-        $component = factory(Component::class)->states('ssd-crucial240')->make(['category_id' => $newId]);
+        $component = Component::factory()->ssdCrucial240()->make(['category_id' => $newId]);
         $component->save();
 
         $this->assertFalse($component->isValid());
@@ -75,24 +74,23 @@ class ComponentTest extends BaseTest
 
     public function testAnComponentBelongsToACompany()
     {
-        $component = factory(Component::class)
-            ->create(['company_id' => factory(Company::class)->create()->id]);
+        $component = Component::factory()
+            ->create(['company_id' => Company::factory()->create()->id]);
         $this->assertInstanceOf(Company::class, $component->company);
     }
 
     public function testAnComponentHasALocation()
     {
-        $component = factory(Component::class)
-            ->create(['location_id' => factory(Location::class)->create()->id]);
+        $component = Component::factory()
+            ->create(['location_id' => Location::factory()->create()->id]);
         $this->assertInstanceOf(Location::class, $component->location);
     }
 
     public function testAnComponentBelongsToACategory()
     {
-        $component = factory(Component::class)->states('ssd-crucial240')
+        $component = Component::factory()->ssdCrucial240()
             ->create([
-                'category_id' => factory(Category::class)
-                                    ->states('component-hdd-category')
+                'category_id' => Category::factory()->componentHddCategory()
                                     ->create(['category_type' => 'component'])->id,
             ]);
         $this->assertInstanceOf(Category::class, $component->category);

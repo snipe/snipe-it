@@ -32,7 +32,7 @@ class ConsumableTest extends BaseTest
 
     public function testAConsumableHasRelationships()
     {
-        $consumable = factory(Consumable::class)->states('cardstock')->create([
+        $consumable = Consumable::factory()->cardstock()->create([
              'category_id' => $this->createValidCategory('consumable-paper-category')->id,
              'manufacturer_id' => $this->createValidManufacturer('apple')->id,
              'company_id' => $this->createValidCompany()->id,

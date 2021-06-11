@@ -32,7 +32,7 @@ class DepreciationTest extends BaseTest
     {
         $this->createValidAssetModel();
         $depreciation = $this->createValidDepreciation('computer', ['name' => 'New Depreciation']);
-        $models = factory(App\Models\AssetModel::class, 5)->states('mbp-13-model')->create(['depreciation_id'=>$depreciation->id]);
+        $models = \App\Models\AssetModel::factory()->count(5)->mbp13Model()->create(['depreciation_id'=>$depreciation->id]);
         $this->assertEquals(5, $depreciation->models->count());
     }
 
@@ -40,7 +40,7 @@ class DepreciationTest extends BaseTest
     {
         $category = $this->createValidCategory('license-graphics-category');
         $depreciation = $this->createValidDepreciation('computer', ['name' => 'New Depreciation']);
-        $licenses = factory(App\Models\License::class, 5)->states('photoshop')->create([
+        $licenses = \App\Models\License::factory()->count(5)->photoshop()->create([
              'depreciation_id'=>$depreciation->id,
              'category_id' => $category->id,
          ]);

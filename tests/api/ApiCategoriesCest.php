@@ -40,7 +40,7 @@ class ApiCategoriesCest
     {
         $I->wantTo('Create a new category');
 
-        $temp_category = factory(\App\Models\Category::class)->states('asset-laptop-category')->make([
+        $temp_category = \App\Models\Category::factory()->assetLaptopCategory()->make([
             'name' => 'Test Category Tag',
         ]);
 
@@ -69,14 +69,13 @@ class ApiCategoriesCest
         $I->wantTo('Update an category with PATCH');
 
         // create
-        $category = factory(\App\Models\Category::class)->states('asset-laptop-category')
+        $category = \App\Models\Category::factory()->assetLaptopCategory()
             ->create([
                 'name' => 'Original Category Name',
         ]);
         $I->assertInstanceOf(\App\Models\Category::class, $category);
 
-        $temp_category = factory(\App\Models\Category::class)
-            ->states('accessory-mouse-category')->make([
+        $temp_category = \App\Models\Category::factory()->accessoryMouseCategory()->make([
             'name' => 'updated category name',
         ]);
 
@@ -120,7 +119,7 @@ class ApiCategoriesCest
         $I->wantTo('Delete an category');
 
         // create
-        $category = factory(\App\Models\Category::class)->states('asset-laptop-category')->create([
+        $category = \App\Models\Category::factory()->assetLaptopCategory()->create([
             'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Category::class, $category);

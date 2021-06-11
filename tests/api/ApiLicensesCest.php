@@ -41,7 +41,7 @@ class ApiLicensesCest
     {
         $I->wantTo('Create a new license');
 
-        $temp_license = factory(\App\Models\License::class)->states('acrobat')->make([
+        $temp_license = \App\Models\License::factory()->acrobat()->make([
             'name' => 'Test License Name',
             'depreciation_id' => 3,
             'company_id' => 2,
@@ -84,14 +84,14 @@ class ApiLicensesCest
         $I->wantTo('Update a license with PATCH');
 
         // create
-        $license = factory(\App\Models\License::class)->states('acrobat')->create([
+        $license = \App\Models\License::factory()->acrobat()->create([
             'name' => 'Original License Name',
             'depreciation_id' => 3,
             'company_id' => 2,
         ]);
         $I->assertInstanceOf(\App\Models\License::class, $license);
 
-        $temp_license = factory(\App\Models\License::class)->states('office')->make([
+        $temp_license = \App\Models\License::factory()->office()->make([
             'company_id' => 3,
             'depreciation_id' => 2,
         ]);
@@ -147,7 +147,7 @@ class ApiLicensesCest
         $I->wantTo('Ensure a license with seats checked out cannot be deleted');
 
         // create
-        $license = factory(\App\Models\License::class)->states('acrobat')->create([
+        $license = \App\Models\License::factory()->acrobat()->create([
             'name' => 'Soon to be deleted',
         ]);
         $licenseSeat = $license->freeSeat();
@@ -171,7 +171,7 @@ class ApiLicensesCest
         $I->wantTo('Delete an license');
 
         // create
-        $license = factory(\App\Models\License::class)->states('acrobat')->create([
+        $license = \App\Models\License::factory()->acrobat()->create([
             'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\License::class, $license);

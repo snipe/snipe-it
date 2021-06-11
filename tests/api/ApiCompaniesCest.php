@@ -42,7 +42,7 @@ class ApiCompaniesCest
     {
         $I->wantTo('Create a new company');
 
-        $temp_company = factory(\App\Models\Company::class)->make([
+        $temp_company = \App\Models\Company::factory()->make([
             'name' => 'Test Company Tag',
         ]);
 
@@ -66,12 +66,12 @@ class ApiCompaniesCest
         $I->wantTo('Update an company with PATCH');
 
         // create
-        $company = factory(\App\Models\Company::class)->create([
+        $company = \App\Models\Company::factory()->create([
             'name' => 'Original Company Name',
         ]);
         $I->assertInstanceOf(\App\Models\Company::class, $company);
 
-        $temp_company = factory(\App\Models\Company::class)->make([
+        $temp_company = \App\Models\Company::factory()->make([
             'name' => 'updated company name',
         ]);
 
@@ -110,7 +110,7 @@ class ApiCompaniesCest
         $I->wantTo('Delete an company');
 
         // create
-        $company = factory(\App\Models\Company::class)->create([
+        $company = \App\Models\Company::factory()->create([
             'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Company::class, $company);

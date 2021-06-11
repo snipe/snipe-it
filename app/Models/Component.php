@@ -15,6 +15,8 @@ use Watson\Validating\ValidatingTrait;
  */
 class Component extends SnipeModel
 {
+    use HasFactory;
+
     protected $presenter = \App\Presenters\ComponentPresenter::class;
     use CompanyableTrait;
     use Loggable, Presentable;

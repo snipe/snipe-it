@@ -5,21 +5,21 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
 |--------------------------------------------------------------------------
-| Consumables Factories
+| Components Factories
 |--------------------------------------------------------------------------
 |
-| Factories related exclusively to creating consumables ..
+| Factories related exclusively to creating components ..
 |
 */
 
-class ConsumableFactory extends Factory
+class ComponentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = \App\Models\Consumable::class;
+    protected $model = \App\Models\Component::class;
 
     /**
      * Define the model's default state.
@@ -30,7 +30,6 @@ class ConsumableFactory extends Factory
     {
         return [
             'user_id' => 1,
-            'item_no' => $this->faker->numberBetween(1000000, 50000000),
             'order_number' => $this->faker->numberBetween(1000000, 50000000),
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
             'purchase_cost' => $this->faker->randomFloat(2, 1, 50),
@@ -39,41 +38,51 @@ class ConsumableFactory extends Factory
         ];
     }
 
-    public function cardstock()
+    public function ramCrucial4()
     {
         return $this->state(function () {
             return [
-                'name' => 'Cardstock (White)',
-                'category_id' => 10,
-                'manufacturer_id' => 10,
+                'name' => 'Crucial 4GB DDR3L-1600 SODIMM',
+                'category_id' => 13,
                 'qty' => 10,
                 'min_amt' => 2,
-                'company_id' => 3,
+                'location_id' => 3,
+                'company_id' => 2,
             ];
         });
     }
 
-    public function paper()
+    public function ramCrucial8()
     {
         return $this->state(function () {
             return [
-                'name' => 'Laserjet Paper (Ream)',
-                'category_id' => 10,
-                'manufacturer_id' => 10,
-                'qty' => 20,
+                'name' => 'Crucial 8GB DDR3L-1600 SODIMM Memory for Mac',
+                'category_id' => 13,
+                'qty' => 10,
                 'min_amt' => 2,
             ];
         });
     }
 
-    public function ink()
+    public function ssdCrucial120()
     {
         return $this->state(function () {
             return [
-                'name' => 'Laserjet Toner (black)',
-                'category_id' => 11,
-                'manufacturer_id' => 5,
-                'qty' => 20,
+                'name' => 'Crucial BX300 120GB SATA Internal SSD',
+                'category_id' => 12,
+                'qty' => 10,
+                'min_amt' => 2,
+            ];
+        });
+    }
+
+    public function ssdCrucial240()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'Crucial BX300 240GB SATA Internal SSD',
+                'category_id' => 12,
+                'qty' => 10,
                 'min_amt' => 2,
             ];
         });

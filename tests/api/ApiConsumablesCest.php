@@ -40,7 +40,7 @@ class ApiConsumablesCest
     {
         $I->wantTo('Create a new consumable');
 
-        $temp_consumable = factory(\App\Models\Consumable::class)->states('ink')->make([
+        $temp_consumable = \App\Models\Consumable::factory()->ink()->make([
             'name' => 'Test Consumable Name',
             'company_id' => 2,
         ]);
@@ -74,14 +74,14 @@ class ApiConsumablesCest
         $I->wantTo('Update an consumable with PATCH');
 
         // create
-        $consumable = factory(\App\Models\Consumable::class)->states('ink')->create([
+        $consumable = \App\Models\Consumable::factory()->ink()->create([
             'name' => 'Original Consumable Name',
             'company_id' => 2,
             'location_id' => 3,
         ]);
         $I->assertInstanceOf(\App\Models\Consumable::class, $consumable);
 
-        $temp_consumable = factory(\App\Models\Consumable::class)->states('cardstock')->make([
+        $temp_consumable = \App\Models\Consumable::factory()->cardstock()->make([
             'company_id' => 3,
             'name' => 'updated consumable name',
             'location_id' => 1,
@@ -133,7 +133,7 @@ class ApiConsumablesCest
         $I->wantTo('Delete an consumable');
 
         // create
-        $consumable = factory(\App\Models\Consumable::class)->states('ink')->create([
+        $consumable = \App\Models\Consumable::factory()->ink()->create([
             'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Consumable::class, $consumable);
