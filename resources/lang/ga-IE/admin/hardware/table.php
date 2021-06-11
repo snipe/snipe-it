@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Clib Sócmhainní',
     'asset_model'       => 'Mionsamhail',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Sócmhainn',
     'image'		=> 'Íomhá Gléas',
     'days_without_acceptance' => 'Laethanta Gan Glactha',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'Бүрэлдэхүүн хэсэг Нэр',
     'checkin'                             => 'Checkin Component',
     'checkout'                             => 'Тооцоо хийх хэсэг',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'Үлдсэн',
     'total' 			                 => 'Нийт',
     'update'                            => 'Бүрэлдэхүүн хэсэг шинэчлэх',
-);
+];

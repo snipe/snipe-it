@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'This user can login',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Activul desemnat catre :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Editeaza utilizator',
     'filetype_info'     => 'Tipurile de fișiere permise sunt png, gif, jpg, jpeg, doc, docx, pdf, txt, zip și rar.',
     'history_user'      => 'Istoric pentru :name',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Faceți clic aici pentru a le restaura.',
     'last_login'        => 'Ultima logare',
     'ldap_config_text'  => 'Setările de configurare LDAP pot fi găsite pe Administrator> Setări. Locația selectată (opțional) va fi setată pentru toți utilizatorii importați.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Setările dvs. actuale de administrare permit executarea selectivă a autentificării cu două factori.',
     'two_factor_enrolled' => 'Dispozitivul 2FA Înregistrat',
     'two_factor_active'   => '2FA Active',
-    );
+    ];

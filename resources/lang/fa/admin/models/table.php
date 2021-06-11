@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'ایجاد مدل دارایی',
     'created_at' 			=> 'ایجاد شده در',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'بروزسانی مدل دارایی',
     'clone'				=> 'مدل شگرف',
     'edit'				=> 'تغییر مدل',
-);
+];

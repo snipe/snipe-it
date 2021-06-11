@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'Tungkol sa Label ng Katayuan',
     'archived'      	=> 'Nailagay na sa Archive',
     'create'      	=> 'Magsagawa ng Label ng Katayuan',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Ang mga Label ng Katayuan',
     'undeployable'  => 'Hindi pwedeng i-deploy',
     'update'      	=> 'I-update ang Label ng Katayuan',
-);
+];

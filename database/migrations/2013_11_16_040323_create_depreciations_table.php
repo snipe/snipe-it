@@ -31,5 +31,4 @@ class CreateDepreciationsTable extends Migration
     {
         Schema::drop('depreciations');
     }
-
 }

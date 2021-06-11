@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'À propos des kits prédéfinis',
     'about_kits_text'                   => 'Les kits prédéfinis vous permettent d\'associer rapidement une collection d\'éléments (matériels, licences, etc.) à un utilisateur. Cela peut être utile lorsque votre processus d\'intégration est cohérent entre plusieurs utilisateurs et que tous les utilisateurs reçoivent les mêmes éléments.',
     'checkout'                          => 'Associer le kit ',
@@ -14,4 +14,4 @@ return array(
     'none_consumables'                  => 'Il n\'y a pas assez d\'unités disponibles de :consumable pour associer. :qty sont nécessaires. ',
     'none_accessory'                    => 'Il n\'y a pas assez d\'unités disponibles de :accessory pour associer. :qty sont nécessaires. ',
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'Skapa Modell',
     'created_at' 			=> 'Skapad den',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'Uppdatera modell',
     'clone'				=> 'Kopiera Modell',
     'edit'				=> 'Ändra Modell',
-);
+];

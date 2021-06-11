@@ -1,40 +1,40 @@
 <?php
+
+use App\Http\Controllers\CustomFieldsController;
+use App\Http\Controllers\CustomFieldsetsController;
+use Illuminate\Support\Facades\Route;
+
 /*
 * Custom Fields Routes
 */
 
-
-
-Route::group([ 'prefix' => 'fields','middleware' => ['auth'] ], function () {
-
+Route::group(['prefix' => 'fields', 'middleware' => ['auth']], function () {
     Route::get('required/{fieldset_id}/{field_id}',
-        ['uses' => 'CustomFieldsetsController@makeFieldRequired',
-            'as' => 'fields.required']
+        ['uses' => [CustomFieldsetsController::class, 'makeFieldRequired'],
+            'as' => 'fields.required', ]
     );
 
     Route::get('optional/{fieldset_id}/{field_id}',
-        ['uses' => 'CustomFieldsetsController@makeFieldOptional',
-            'as' => 'fields.optional']
+        ['uses' => [CustomFieldsetsController::class, 'makeFieldOptional'],
+            'as' => 'fields.optional', ]
     );
 
     Route::get('{field_id}/fieldset/{fieldset_id}/disassociate',
-        ['uses' => 'CustomFieldsController@deleteFieldFromFieldset',
-        'as' => 'fields.disassociate']
+        ['uses' => [CustomFieldsController::class, 'deleteFieldFromFieldset'],
+        'as' => 'fields.disassociate', ]
     );
 
     Route::post('fieldsets/{id}/associate',
-        ['uses' => 'CustomFieldsetsController@associate',
-        'as' => 'fieldsets.associate']
+        ['uses' => [CustomFieldsetsController::class, 'associate'],
+        'as' => 'fieldsets.associate', ]
     );
 
-    Route::resource('fieldsets', 'CustomFieldsetsController', [
-    'parameters' => ['fieldset' => 'field_id', 'field' => 'field_id']
+    Route::resource('fieldsets', CustomFieldsetsController::class, [
+    'parameters' => ['fieldset' => 'field_id', 'field' => 'field_id'],
     ]);
-
-
 });
 
-Route::resource('fields', 'CustomFieldsController', [
+Route::resource('fields', CustomFieldsController::class, [
     'middleware' => ['auth'],
-    'parameters' => ['field' => 'field_id', 'fieldset' => 'fieldset_id']
+    'parameters' => ['field' => 'field_id', 'fieldset' => 'fieldset_id'],
 ]);

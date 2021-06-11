@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'פעולות',
     'add'    	                => 'הוסף חדש',
     'cancel'                    => 'לְבַטֵל',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'בַּקָשָׁה',
     'submit'  	                => 'שלח',
     'upload'                    => 'העלה',
-	'select_file'				=> 'בחר קובץ...',
+    'select_file'				=> 'בחר קובץ...',
     'select_files'				=> 'בחר קבצים...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+];

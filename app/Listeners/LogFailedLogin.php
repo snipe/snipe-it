@@ -40,6 +40,5 @@ class LogFailedLogin
         } catch (\Exception $e) {
             \Log::debug($e);
         }
-
     }
 }

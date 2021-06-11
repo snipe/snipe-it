@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => 'Ainm na Roinne',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Suíomh',
     'create'                    => 'Cruthaigh an Roinn',
     'update'                    => 'An Roinn Nuashonraithe',
-    );
+    ];

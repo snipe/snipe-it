@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Luba pole olemas.',
     'user_does_not_exist' => 'Kasutajat ei eksisteeri.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'Peate valima vara või kasutaja, kuid mitte mõlemad.',
     'not_found' => 'License not found',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Litsentsi ei loodud, proovige uuesti.',
-        'success' => 'Litsents on edukalt loodud.'
-    ),
+        'success' => 'Litsents on edukalt loodud.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Faili pole kustutatud. Palun proovi uuesti.',
         'success' => 'Fail edukalt kustutatud.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Faili (d) pole üles laaditud. Palun proovi uuesti.',
         'success' => 'Fail (id) edukalt üles laaditud.',
         'nofiles' => 'Te ei valinud üleslaadimiseks ühtegi faili või fail, mille üritate üles laadida, on liiga suur',
         'invalidfiles' => 'Üks või mitu teie faili on liiga suured või failitüüp pole lubatud. Lubatud failitüübid on png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml ja lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Litsentsi ei värskendatud, proovige uuesti',
-        'success' => 'Litsents värskendati edukalt.'
-    ),
+        'success' => 'Litsents värskendati edukalt.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Kas olete kindel, et soovite selle litsentsi kustutada?',
         'error'   => 'Litsentsi kustutati. Palun proovi uuesti.',
-        'success' => 'Litsents kustutati edukalt.'
-    ),
+        'success' => 'Litsents kustutati edukalt.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Litsentsi kontrollides oli küsimus. Palun proovi uuesti.',
-        'success' => 'Litsents oli edukalt välja võetud'
-    ),
+        'success' => 'Litsents oli edukalt välja võetud',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Litsentsis kontrolliti probleemi. Palun proovi uuesti.',
-        'success' => 'Litsents märgiti edukalt'
-    ),
+        'success' => 'Litsents märgiti edukalt',
+    ],
 
-);
+];

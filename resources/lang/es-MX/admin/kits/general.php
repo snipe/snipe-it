@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'Acerca de kits predefinidos',
     'about_kits_text'                   => 'Kits predefinidos le permiten revisar rápidamente un conjunto de elementos (activos, licencias, etc.) a un usuario. Esto puede ser útil cuando su proceso de incorporación es consistente entre muchos usuarios y todos los usuarios reciben los mismos artículos.',
     'checkout'                          => 'Asignar kit ',
@@ -14,4 +14,4 @@ return array(
     'none_consumables'                  => 'No hay suficientes unidades disponibles de :consumable para asignar. :qty son requeridas. ',
     'none_accessory'                    => 'No hay suficientes unidades disponibles de :accesory para asignar. :qty son requeridas. ',
 
-);
+];

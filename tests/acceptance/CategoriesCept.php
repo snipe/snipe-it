@@ -1,4 +1,5 @@
 <?php
+
 $I = new AcceptanceTester($scenario);
 AcceptanceTester::test_login($I);
 $I->am('logged in user');
@@ -6,7 +7,7 @@ $I->wantTo('ensure that the categories listing page loads without errors');
 $I->lookForwardTo('seeing it load without errors');
 $I->amOnPage('/categories');
 $I->waitForElement('.table', 5); // secs
-$I->seeNumberOfElements('table[name="categories"] tr', [5,30]);
+$I->seeNumberOfElements('table[name="categories"] tr', [5, 30]);
 $I->seeInTitle('Categories');
 $I->see('Categories');
 $I->seeInPageSource('/categories/create');

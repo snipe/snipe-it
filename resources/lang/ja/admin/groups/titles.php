@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'グループについて',
     'about_groups'                  => 'グループを使用して、ユーザーへのアクセス許可を管理します。',
     'group_management' 	 	=> 'グループ管理',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> '許可',
     'deny' 	 				=> '拒否',
 
-);
+];

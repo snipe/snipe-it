@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Dagen',
         'notes'                  => 'Notities',
         'update'                 => 'Bijwerken',
-        'create'                 => 'Creeër'
+        'create'                 => 'Creeër',
     ];

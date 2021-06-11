@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Om aktiver',
     'about_assets_text'            => 'Aktiver er poster sporet af serienummer eller aktiv tag. De har tendens til at være højere værdi elementer, hvor identifikation af en bestemt genstand betyder noget.',
-	'archived'  				=> 'arkiverede',
+    'archived'  				=> 'arkiverede',
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Udtjek aktiv',
     'checkin'  					=> 'Checkin Asset',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Verserende',
     'undeployable'  			=> 'Undeployable',
     'view'  					=> 'Se aktiv',
-);
+];

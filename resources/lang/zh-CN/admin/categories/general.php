@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> '资产分类',
     'category_name'  					=> '分类名称',
     'checkin_email'                     => '在签入/签出时发送邮件给所有者。',
@@ -19,4 +19,4 @@ return array(
     'use_default_eula'					=> '用<a href="#" data-toggle="modal" data-target="#eulaModal">默认EULA（最终用户许可协议）</a>进行替换',
     'use_default_eula_disabled'			=> '<del>使用默认EULA（最终用户许可协议）替换.</del>没有设置默认EULA（最终用户许可协议），请在设置中增加一个。',
 
-);
+];

@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Usługa katalogowa Active Directory',
     'ad_domain'				    => 'Domena Active Directory',
     'ad_domain_help'			=> 'Czasami jest taka sama jak domena poczty e-mail, ale nie zawsze.',
     'ad_append_domain_label'    => 'Dołącz nazwę domeny',
     'ad_append_domain'          => 'Dołącz nazwę domeny do pola nazwy użytkownika',
-    'ad_append_domain_help'     => 'Użytkownik nie jest wymagany do wpisywania "username@domain.local", może po prostu wpisać "username".' ,
+    'ad_append_domain_help'     => 'Użytkownik nie jest wymagany do wpisywania "username@domain.local", może po prostu wpisać "username".',
     'admin_cc_email'            => 'Kopia',
     'admin_cc_email_help'       => 'Jeśli chcesz otrzymywać kopię e-maili przypisań wysyłanych do użytkowników na dodatkowy adres e-mail, wpisz go tutaj. W przeciwnym razie zostaw to pole puste.',
     'is_ad'				        => 'To jest serwer Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Próg wygasających alarmów (w dniach)',
     'alert_inv_threshold'		=> 'Inwentarz progu alarmów',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID Aktywa',
     'audit_interval'            => 'Interwał audytu',
     'audit_interval_help'       => 'Jeśli wymagane są regularne kontrole fizycznie aktyw, wprowadź interwał w miesiącach.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Wprowadź kod jednorazowy',
     'two_factor_config_complete'	=> 'Zatwierdź kod',
     'two_factor_enabled_edit_not_allowed' => 'Administrator nie zezwala na edycję tego ustawienia.',
-    'two_factor_enrollment_text'	=> "Wymagane jest uwierzytelnianie dwóch elementów, ale urządzenie nie zostało jeszcze zapisane. Otwórz aplikację Google Authenticator i zeskanuj kod QR poniżej, aby zarejestrować urządzenie. Po zarejestrowaniu urządzenia wprowadź poniższy kod",
+    'two_factor_enrollment_text'	=> 'Wymagane jest uwierzytelnianie dwóch elementów, ale urządzenie nie zostało jeszcze zapisane. Otwórz aplikację Google Authenticator i zeskanuj kod QR poniżej, aby zarejestrować urządzenie. Po zarejestrowaniu urządzenia wprowadź poniższy kod',
     'require_accept_signature'      => 'Wymagany podpis',
     'require_accept_signature_help_text'      => 'Włączając tę funkcjonalność wymusza się na użytkownikach fizycznego podpisania przyjęcia aktywa.',
     'left'        => 'lewo',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Zaznaczenie tego pola wymusi sprawdzanie czy numer seryjny nie został już przypisany w zasobach',
     'zerofill_count'        => 'Długość znaczników zasobów, w tym zerofill',
     'username_format_help'   => 'To ustawienie będzie używane przez proces importu tylko wtedy, gdy nazwa użytkownika nie jest podana i musimy wygenerować nazwę użytkownika dla Ciebie.',
-);
+];

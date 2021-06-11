@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => '自訂欄位',
     'field'		                => '欄位',
     'about_fieldsets_title'		=> '關於欄位集',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => '新增欄位',
     'value_encrypted'      	        => '此欄位的值已被加密。只有管理員能夠查看原始資料。',
     'show_in_email'     => '在發送給用戶的借出通知信中包含此欄位的值？加密的欄位不能包含在電子郵件中。',
-);
+];

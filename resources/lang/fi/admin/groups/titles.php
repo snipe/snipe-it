@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Tietoja ryhmistä',
     'about_groups'                  => 'Ryhmien avulla voit yhdenmukaistaa käyttöoikeudet.',
     'group_management' 	 	=> 'Ryhmienhallinta',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Salli',
     'deny' 	 				=> 'Estä',
 
-);
+];

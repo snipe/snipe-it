@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'Enw Cydran',
     'checkin'                             => 'Nodi\'r gydran allan',
     'checkout'                             => 'Nodi\'r gydran allan',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'Yn weddill',
     'total' 			                 => 'Cyfanswm',
     'update'                            => 'Diweddaru Cydran',
-);
+];

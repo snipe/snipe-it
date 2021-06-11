@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Laitetunniste',
     'asset_model'       => 'Malli',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Laite ',
     'image'		=> 'Laitteen kuva',
     'days_without_acceptance' => 'Päiviä ilman hyväksymistä',
-    'monthly_depreciation' => 'Kuukautinen poisto'
+    'monthly_depreciation' => 'Kuukautinen poisto',
 
-);
+];

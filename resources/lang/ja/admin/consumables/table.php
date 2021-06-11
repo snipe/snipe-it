@@ -1,5 +1,5 @@
 <?php
 
-return array(
+return [
     'title'      				=> '消耗品名',
-);
+];

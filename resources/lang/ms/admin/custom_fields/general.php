@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Bidang Tersuai',
     'field'		                => 'Padang',
     'about_fieldsets_title'		=> 'Mengenai Fieldsets',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Padang Tersuai Baru',
     'value_encrypted'      	        => 'Nilai medan ini disulitkan dalam pangkalan data. Hanya pengguna admin sahaja yang dapat melihat nilai yang disahkrit',
     'show_in_email'     => 'Sertakan nilai medan ini dalam e-mel semak keluar yang dihantar kepada pengguna? Medan yang disulitkan tidak boleh dimasukkan ke dalam e-mel.',
-);
+];

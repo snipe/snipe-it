@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'O sredstvih',
     'about_assets_text'            => 'Sredstva so stvari, ki so sledene po serijski številki ali oznaki sredstva. Ponavadi so stvari z višjo vrednostjo, pri katerih je opredelitev določenega predmeta pomembna.',
-	'archived'  				=> 'Arhivirano',
+    'archived'  				=> 'Arhivirano',
     'asset'  					=> 'Sredstev',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'Sprejem sredstev',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Na čakanju',
     'undeployable'  			=> 'Nerazdeljeno',
     'view'  					=> 'Ogled sredstva',
-);
+];

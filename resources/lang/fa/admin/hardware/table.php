@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'برچسب دارایی',
     'asset_model'       => 'مدل',
@@ -21,6 +21,6 @@ return array(
     'image'		=> 'دستگاه تصویر
 ',
     'days_without_acceptance' => 'روز بدون پذیرش',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

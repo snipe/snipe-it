@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Handlinger',
     'add'    	                => 'Opprett ny',
     'cancel'                    => 'Avbryt',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Forespørsel',
     'submit'  	                => 'Send',
     'upload'                    => 'Last opp',
-	'select_file'				=> 'Velg fil...',
+    'select_file'				=> 'Velg fil...',
     'select_files'				=> 'Velg filer...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Las contraseñas deben ser de seis caracteres y coincidir con la confirmación.",
+    'password' => 'Las contraseñas deben ser de seis caracteres y coincidir con la confirmación.',
 
-    "user"     => "El nombre de usuario o la dirección de correo son incorrectos",
+    'user'     => 'El nombre de usuario o la dirección de correo son incorrectos',
 
-    "token"    => "Esta token para restablecer la contraseña es inválido.",
+    'token'    => 'Esta token para restablecer la contraseña es inválido.',
 
-    "sent" => "Si se encontró un correo electrónico coincide, ¡un recordatorio de contraseña fue enviado!",
+    'sent' => 'Si se encontró un correo electrónico coincide, ¡un recordatorio de contraseña fue enviado!',
 
-);
+];

@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Maidir Sócmhainní',
     'about_assets_text'            => 'Déantar míreanna a rianú trí shraithuimhir nó ar chlib sócmhainne. Is iondúil go n-éireoidh siad le hítimí ar luach níos airde a bhaineann le hábhair shonracha a aithint.',
-	'archived'  				=> 'Archived',
+    'archived'  				=> 'Archived',
     'asset'  					=> 'Sócmhainn',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'Sócmhainn Checkin',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Ar feitheamh',
     'undeployable'  			=> 'Neamhfhostaithe',
     'view'  					=> 'Féach Sócmhainn',
-);
+];

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddLocationIndicesToAssets extends Migration
 {
@@ -15,7 +15,7 @@ class AddLocationIndicesToAssets extends Migration
     {
         Schema::table('assets', function (Blueprint $table) {
             $table->index('rtd_location_id');
-            $table->index(['assigned_type','assigned_to']);
+            $table->index(['assigned_type', 'assigned_to']);
         });
     }
 
@@ -29,7 +29,7 @@ class AddLocationIndicesToAssets extends Migration
         Schema::table('assets', function (Blueprint $table) {
             //
             $table->dropIndex(['rtd_location_id']);
-            $table->dropIndex(['assigned_type','assigned_to']);
+            $table->dropIndex(['assigned_type', 'assigned_to']);
         });
     }
 }

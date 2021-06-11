@@ -9,8 +9,8 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Accessory;
 use App\Models\Company;
 use App\Models\User;
-use Carbon\Carbon;
 use Auth;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
@@ -26,7 +26,7 @@ class AccessoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Accessory::class);
-        $allowed_columns = ['id','name','model_number','eol','notes','created_at','min_amt','company_id'];
+        $allowed_columns = ['id', 'name', 'model_number', 'eol', 'notes', 'created_at', 'min_amt', 'company_id'];
 
         $accessories = Accessory::with('category', 'company', 'manufacturer', 'users', 'location');
 
@@ -35,19 +35,19 @@ class AccessoriesController extends Controller
         }
 
         if ($request->filled('company_id')) {
-            $accessories->where('company_id','=',$request->input('company_id'));
+            $accessories->where('company_id', '=', $request->input('company_id'));
         }
 
         if ($request->filled('category_id')) {
-            $accessories->where('category_id','=',$request->input('category_id'));
+            $accessories->where('category_id', '=', $request->input('category_id'));
         }
 
         if ($request->filled('manufacturer_id')) {
-            $accessories->where('manufacturer_id','=',$request->input('manufacturer_id'));
+            $accessories->where('manufacturer_id', '=', $request->input('manufacturer_id'));
         }
 
         if ($request->filled('supplier_id')) {
-            $accessories->where('supplier_id','=',$request->input('supplier_id'));
+            $accessories->where('supplier_id', '=', $request->input('supplier_id'));
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
@@ -56,7 +56,6 @@ class AccessoriesController extends Controller
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
-
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
@@ -77,9 +76,9 @@ class AccessoriesController extends Controller
 
         $total = $accessories->count();
         $accessories = $accessories->skip($offset)->take($limit)->get();
+
         return (new AccessoriesTransformer)->transformAccessories($accessories, $total);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -98,8 +97,8 @@ class AccessoriesController extends Controller
         if ($accessory->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $accessory, trans('admin/accessories/message.create.success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $accessory->getErrors()));
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, $accessory->getErrors()));
     }
 
     /**
@@ -114,9 +113,9 @@ class AccessoriesController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $accessory = Accessory::findOrFail($id);
+
         return (new AccessoriesTransformer)->transformAccessory($accessory);
     }
-
 
     /**
      * Display the specified resource.
@@ -130,9 +129,9 @@ class AccessoriesController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $accessory = Accessory::findOrFail($id);
+
         return (new AccessoriesTransformer)->transformAccessory($accessory);
     }
-
 
     /**
      * Display the specified resource.
@@ -147,7 +146,7 @@ class AccessoriesController extends Controller
         $this->authorize('view', Accessory::class);
 
         $accessory = Accessory::with('lastCheckout')->findOrFail($id);
-        if (!Company::isCurrentUserHasAccess($accessory)) {
+        if (! Company::isCurrentUserHasAccess($accessory)) {
             return ['total' => 0, 'rows' => []];
         }
 
@@ -157,7 +156,7 @@ class AccessoriesController extends Controller
         $accessory_users = $accessory->users;
         $total = $accessory_users->count();
 
-        if($total < $offset){
+        if ($total < $offset) {
             $offset = 0;
         }
 
@@ -173,7 +172,6 @@ class AccessoriesController extends Controller
 
         return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $accessory_users, $total);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -212,14 +210,13 @@ class AccessoriesController extends Controller
         $this->authorize($accessory);
 
         if ($accessory->hasUsers() > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers()))));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.assoc_users', ['count'=> $accessory->hasUsers()])));
         }
 
         $accessory->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.delete.success')));
 
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.delete.success')));
     }
-
 
     /**
      * Save the Accessory checkout information.
@@ -240,10 +237,8 @@ class AccessoriesController extends Controller
 
         $this->authorize('checkout', $accessory);
 
-
         if ($accessory->numRemaining() > 0) {
-
-            if (!$user = User::find($request->input('assigned_to'))) {
+            if (! $user = User::find($request->input('assigned_to'))) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.checkout.user_does_not_exist')));
             }
 
@@ -255,16 +250,15 @@ class AccessoriesController extends Controller
                 'created_at' => Carbon::now(),
                 'user_id' => Auth::id(),
                 'assigned_to' => $request->get('assigned_to'),
-                'note' => $request->get('note')
+                'note' => $request->get('note'),
             ]);
 
             $accessory->logCheckout($request->input('note'), $user);
 
-            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkout.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.checkout.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, 'No accessories remaining'));
-
     }
 
     /**
@@ -273,7 +267,7 @@ class AccessoriesController extends Controller
      * @uses Accessory::checkin_email() to determine if an email can and should be sent
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param Request $request
-     * @param integer $accessoryUserId
+     * @param int $accessoryUserId
      * @param string $backto
      * @return Redirect
      * @internal param int $accessoryId
@@ -291,7 +285,7 @@ class AccessoriesController extends Controller
 
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
-            if (!is_null($accessory_user->assigned_to)) {
+            if (! is_null($accessory_user->assigned_to)) {
                 $user = User::find($accessory_user->assigned_to);
             }
 
@@ -303,26 +297,22 @@ class AccessoriesController extends Controller
             $data['item_tag'] = '';
             $data['note'] = $logaction->note;
 
-            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkin.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.checkin.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/accessories/message.checkin.error')));
-
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.checkin.error')));
     }
 
-
     /**
-    * Gets a paginated collection for the select2 menus
-    *
-    * @see \App\Http\Transformers\SelectlistTransformer
-    *
-    */
+     * Gets a paginated collection for the select2 menus
+     *
+     * @see \App\Http\Transformers\SelectlistTransformer
+     */
     public function selectlist(Request $request)
     {
-
         $accessories = Accessory::select([
             'accessories.id',
-            'accessories.name'
+            'accessories.name',
         ]);
 
         if ($request->filled('search')) {
@@ -331,10 +321,6 @@ class AccessoriesController extends Controller
 
         $accessories = $accessories->orderBy('name', 'ASC')->paginate(50);
 
-
         return (new SelectlistTransformer)->transformSelectlist($accessories);
     }
-
-
-
 }

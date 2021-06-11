@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory -toimialue',
     'ad_domain_help'			=> 'Tämä on joskus sama kuin sähköpostiosoitteesi loppuosa, mutta ei aina.',
     'ad_append_domain_label'    => 'Lisää toimialueen nimi loppuun',
     'ad_append_domain'          => 'Lisää toimialueen nimi käyttäjänimikentän loppuun',
-    'ad_append_domain_help'     => 'Käyttäjätunnusta ei tarvitse kirjoittaa muodossa "käyttätunnus@domain.local", pelkkä "käyttäjätunnus" riittää.' ,
+    'ad_append_domain_help'     => 'Käyttäjätunnusta ei tarvitse kirjoittaa muodossa "käyttätunnus@domain.local", pelkkä "käyttäjätunnus" riittää.',
     'admin_cc_email'            => 'Kopio sähköpostiosoite',
     'admin_cc_email_help'       => 'Mikäli haluat lähettää erilliseen sähköpostiosoitteeseen kopion käyttäjälle lähetettävästä sähköposti-ilmoituksesta palautuksiin/luovutuksiin liittyen, syötä se tähän. Muussa tapauksessa jätä kenttä tyhjäksi.',
     'is_ad'				        => 'Käytössä on Active Directory -palvelin',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Kynnys ilmoituksille vanhentuvista (päivinä)',
     'alert_inv_threshold'		=> 'Varaston hälytysraja',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Laitetunnisteet',
     'audit_interval'            => 'Tarkastusväli',
     'audit_interval_help'       => 'Jos sinun on säännöllisesti tarkastettava laitteesi, anna aikaväli kuukausina.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Syötä MFA koodi',
     'two_factor_config_complete'	=> 'Lähetä koodi',
     'two_factor_enabled_edit_not_allowed' => 'Järjestelmänvalvoja ei salli sinun muokata tätä asetusta.',
-    'two_factor_enrollment_text'	=> "Kaksivaiheinen tunnistautuminen vaaditaan, mutta et ole rekisteröinyt itsellesi laitetta. Avaa Google Authenticator -sovellus ja skannaa alla oleva QR-koodi rekisteröidäksesi laitteesi. Kun olet rekisteröinyt laitteesi, kirjoita koodi",
+    'two_factor_enrollment_text'	=> 'Kaksivaiheinen tunnistautuminen vaaditaan, mutta et ole rekisteröinyt itsellesi laitetta. Avaa Google Authenticator -sovellus ja skannaa alla oleva QR-koodi rekisteröidäksesi laitteesi. Kun olet rekisteröinyt laitteesi, kirjoita koodi',
     'require_accept_signature'      => 'Vaadi allekirjoitus',
     'require_accept_signature_help_text'      => 'Tämän ominaisuuden ottaminen käyttöön edellyttää käyttäjiltä allekirjoitusta hyväksymisen yhteydessä.',
     'left'        => 'vasen',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Vaadi laitteilta yksilölliset sarjanumerot',
     'zerofill_count'        => 'Laitetunnisteen pituus, mukaan lukien nollat',
     'username_format_help'   => 'Käytetään tietoja tuodessa, jos käyttäjänimeä ei ole annettu ja nimitietojen perusteella on luotava käyttäjälle käyttäjätunnus.',
-);
+];

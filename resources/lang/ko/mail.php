@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => '사용자가 웹사이트에서 품목 요청을 취소했습니다',
     'a_user_requested' => '사용자가 웹사이트에서 품목을 요청했습니다',
     'accessory_name' => '액세서리 이름',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => '자산 확인'
-);
+    'your_assets' => '자산 확인',
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,9 +13,9 @@ return array(
     |
     */
 
-    "more_info_title" => "מידע נוסף",
+    'more_info_title' => 'מידע נוסף',
 
-    "audit_help" => "Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.",
+    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
 
     'assets' => 'נכסים הם פריטים במעקב לפי מספר סידורי או תג נכס. הם נוטים להיות פריטים בעלי ערך גבוה יותר במקרים בהם זיהוי של פריט מסוים חשוב.',
 
@@ -31,6 +31,4 @@ return array(
 
     'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
 
-
-
-);
+];

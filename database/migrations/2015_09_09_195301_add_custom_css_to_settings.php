@@ -1,34 +1,31 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class AddCustomCssToSettings extends Migration {
+class AddCustomCssToSettings extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('settings', function (Blueprint $table) {
+            $table->text('custom_css')->nullable()->default(null);
+        });
+    }
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::table('settings', function(Blueprint $table)
-		{
-			$table->text('custom_css')->nullable()->default(NULL);
-		});
-	}
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::table('settings', function(Blueprint $table)
-		{
-			$table->dropColumn('custom_css');
-		});
-	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('settings', function (Blueprint $table) {
+            $table->dropColumn('custom_css');
+        });
+    }
 }

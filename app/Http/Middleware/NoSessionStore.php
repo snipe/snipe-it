@@ -7,7 +7,7 @@ use Closure;
 class NoSessionStore
 {
     protected $except = [
-        'health'
+        'health',
     ];
 
     /**
@@ -24,6 +24,7 @@ class NoSessionStore
                 config()->set('session.driver', 'array');
             }
         }
+
         return $next($request);
     }
 }

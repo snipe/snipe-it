@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'O imovini',
     'about_assets_text'            => 'Imovina je stavka koja se prati serijskim brojem ili oznakom imovine. Oni imaju tendenciju da se stavke više vrijednosti gdje je identificiranje određenog predmeta pitanjima.',
-	'archived'  				=> 'Arhivirano',
+    'archived'  				=> 'Arhivirano',
     'asset'  					=> 'Imovina',
     'bulk_checkout'             => 'Provjera imovine',
     'checkin'  					=> 'Provjera imovine',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'U tijeku',
     'undeployable'  			=> 'Undeployable',
     'view'  					=> 'Prikaz opcije Asset',
-);
+];

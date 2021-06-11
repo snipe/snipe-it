@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> '创建资产模板',
     'created_at' 			=> '创建于',
@@ -14,4 +14,4 @@ return array(
     'update'				=> '更新资产模板',
     'clone'				=> '克隆模板',
     'edit'				=> '编辑模板',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'O skupinah',
     'about_groups'                  => 'Skupine se uporabljajo za določanje uporabniških pravic.',
     'group_management' 	 	=> 'Upravljanje skupine',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Dovoli',
     'deny' 	 				=> 'Zavrni',
 
-);
+];

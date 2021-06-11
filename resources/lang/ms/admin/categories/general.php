@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'Kategori aset',
     'category_name'  					=> 'Nama Kategori',
     'checkin_email'                     => 'Hantar e-mel kepada pengguna selepas semak masuk / semak keluar.',
@@ -19,4 +19,4 @@ return array(
     'use_default_eula'					=> 'Gunakan <a href="#" data-toggle="modal" data-target="#eulaModal">pilihan utama lalai EULA</a> sebaliknya.',
     'use_default_eula_disabled'			=> '<del>Gunakan EULA lalai utama bukannya.</del> Tiada seting utama EULA ditetapkan. Sila tambah satu dalam Tetapan.',
 
-);
+];

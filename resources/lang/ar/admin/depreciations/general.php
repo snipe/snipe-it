@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'حول استهلاك الأصول',
     'about_depreciations'  					=> 'يمكنك إعداد استهلاك الأصول لخفض قيمة الأصول على اساس القسط الثابت للاستهلاك.',
     'asset_depreciations'  					=> 'استهلاك الأصول',
@@ -9,4 +9,4 @@ return array(
     'number_of_months'  					=> 'عدد الأشهر',
     'update'  					            => 'تحديث الاستهلاك',
 
-);
+];

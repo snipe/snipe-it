@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'El componente no existe.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'El componente no fue creado, por favor inténtalo de nuevo.',
-        'success' => 'Componente creado con éxito.'
-    ),
+        'success' => 'Componente creado con éxito.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'El componente no se actualizó, por favor inténtalo de nuevo',
-        'success' => 'Componente actualizado con éxito.'
-    ),
+        'success' => 'Componente actualizado con éxito.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => '¿Estás seguro de que deseas eliminar este componente?',
         'error'   => 'Hubo un problema eliminando el componente. Por favor, inténtalo de nuevo.',
-        'success' => 'El componente fue eliminado con éxito.'
-    ),
+        'success' => 'El componente fue eliminado con éxito.',
+    ],
 
-     'checkout' => array(
+     'checkout' => [
         'error'   		=> 'El componente no fue retirado, por favor, inténtalo de nuevo',
         'success' 		=> 'Componente retirado con éxito.',
-        'user_does_not_exist' => 'Este usuario es inválido. Por favor, inténtalo de nuevo.'
-    ),
+        'user_does_not_exist' => 'Este usuario es inválido. Por favor, inténtalo de nuevo.',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   		=> 'El componente no fue registrado, por favor inténtalo de nuevo',
         'success' 		=> 'Componente registrado con éxito.',
-        'user_does_not_exist' => 'El usuario no es válido. Por favor inténtalo de nuevo.'
-    )
+        'user_does_not_exist' => 'El usuario no es válido. Por favor inténtalo de nuevo.',
+    ],
 
-
-);
+];

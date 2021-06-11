@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'I-checkout ang Consumable sa User',
     'consumable_name'                   => 'Ang Pangalan ng Consumable',
     'create'                            => 'Magsagawa ng Consumable',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Ang natitira',
     'total' 			                => 'Ang Kabuuan',
     'update'                            => 'I-update ang Consumable',
-);
+];

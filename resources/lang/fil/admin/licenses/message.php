@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Ang lisensya ay hindi umiiral.',
     'user_does_not_exist' => 'Ang gumagamit ay hindi umiiral.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'Dapat kang pumili ng isang asset o isang user, pero hindi ang dalawa.',
     'not_found' => 'License not found',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Ang lisensya ay hindi naisagawa, mangyaring subukang muli.',
-        'success' => 'Ang lisensya ay matagumpay na naisagawa.'
-    ),
+        'success' => 'Ang lisensya ay matagumpay na naisagawa.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Ang file ay hindi nai-delete. Mangyaring subukang muli.',
         'success' => 'Ang file ay matagumpay nang nai-delete.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Ang file(s) ay hindi nai-upload. Mangyaring subukang muli.',
         'success' => 'Ang file(s) ay matagumpay na nai-upload.',
         'nofiles' => 'Hindi ka pumili ng maga files para sa i-upload, o ang file na gusto mong i-upload ay masyadong malaki',
         'invalidfiles' => 'Ang isa o higit sa iyong mga file ay masyadong malaki o isang uri ng file na hindi pinapayagan. Ang mga pinapayagang mga file ay ang png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, and lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Ang lisensya ay hindi nai-update, mangyaring subukang muli',
-        'success' => 'Ang lisensya ay matagumpay na nai-update.'
-    ),
+        'success' => 'Ang lisensya ay matagumpay na nai-update.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Sigurado kaba na gusto mong i-delete ang lisensyang ito?',
         'error'   => 'Mayroong isyu sa pag-delete ng lisensya. Mangyaring subukang muli.',
-        'success' => 'Matagumpay na nai-delete ang lisensya.'
-    ),
+        'success' => 'Matagumpay na nai-delete ang lisensya.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Mayroong isyu sa pag-check out ng lisensya. Mangyaring subukang muli.',
-        'success' => 'Matagumpay na nai-check out ang lisensya'
-    ),
+        'success' => 'Matagumpay na nai-check out ang lisensya',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Mayroong isyu sa pag-check in ng lisensya. Mangyaring subukang muli.',
-        'success' => 'Matagumpay na nai-check in ang lisensya'
-    ),
+        'success' => 'Matagumpay na nai-check in ang lisensya',
+    ],
 
-);
+];

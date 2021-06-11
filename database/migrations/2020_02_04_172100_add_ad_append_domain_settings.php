@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\Setting;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Setting;
 
 class AddAdAppendDomainSettings extends Migration
 {
@@ -23,7 +23,7 @@ class AddAdAppendDomainSettings extends Migration
             $s->ad_append_domain = 1;
             $s->save();
         }
-}
+    }
 
     /**
      * Reverse the migrations.

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'சொத்து வகைகள்',
     'category_name'  					=> 'வகை பெயர்',
     'checkin_email'                     => 'Send email to user on checkin/checkout.',
@@ -19,4 +19,4 @@ return array(
     'use_default_eula'					=> 'பதிலாக <a href="#" data-toggle="modal" data-target="#eulaModal">primary இயல்புநிலை EULA</a> ஐப் பயன்படுத்துக.',
     'use_default_eula_disabled'			=> '<del> முதன்மை இயல்புநிலை EULA ஐப் பயன்படுத்தவும் .</del> முதன்மை இயல்புநிலை EULA அமைக்கப்படவில்லை. அமைப்புகளில் ஒன்றைச் சேர்க்கவும்.',
 
-);
+];

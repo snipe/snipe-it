@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Olet hyväksynyt tämän laitteen.',
     'declined'                  => 'Olet onnistuneesti hylännyt tämän laitteen.',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'LDAP-integraatiota ei ole määritetty tähän asennukseen.',
     'password_resets_sent'      => 'Salasanan resetointilinkki on lähetetty niille käyttäjille, joille on määritetty voimassa oleva sähköpostiosoite.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Käyttäjä luotiin onnistuneesti.',
         'update'    => 'Käyttäjä päivitettiin onnistuneesti.',
         'update_bulk'    => 'Käyttäjät päivitettiin onnistuneesti!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'Käyttäjän jäädytys poistettiin onnistuneesti.',
         'restored'  => 'Käyttäjä palautettiin onnistuneesti.',
         'import'    => 'Käyttäjät tuotiin onnistuneesti.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Käyttäjä luonnissa tapahtui virhe. Yritä uudelleen.',
         'update' => 'Käyttäjän päivityksessä tapahtui virhe. Yritä uudelleen.',
         'delete' => 'Käyttäjän poistamisessa tapahtui virhe. Yritä uudelleen.',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'Haku LDAP-palvelimelta ei onnistunut ei voitu hakea. Tarkista LDAP-palvelimen määritys. <br>LDAP-palvelimen virhe:',
         'ldap_could_not_get_entries' => 'LDAP-palvelimelta ei palautunut kohteita. Tarkista LDAP-palvelimen määritys. <br>LDAP-palvelimen virhe:',
         'password_ldap' => 'Tätä salasanaa hallinnoi LDAP / Active Directory. Vaihda salasanasi IT-osastolla.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Tiedostoa ei ole poistettu. Yritä uudelleen.',
         'success' => 'Tiedosto onnistuneesti poistettu.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Tiedostoja ei ole ladattu. Yritä uudelleen.',
         'success' => 'Tiedostot lähetettiin onnistuneesti.',
         'nofiles' => 'Et valinnut yhtään tiedostoa lähetettäväksi',
         'invalidfiles' => 'Yksi tai useampi tiedosto on liian suuri tai on tiedostotyyppi, jota ei sallita. Sallitut tiedostotyypit ovat png, gif, jpg, doc, docx, pdf ja txt.',
-    ),
+    ],
 
-);
+];

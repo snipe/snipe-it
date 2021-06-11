@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_models_title'     => 'О моделях активов',
     'about_models_text'           => 'Модели активов это способ группировки идентичных активов. Например, "MacBookPro 2013, iPhone 6s", и т. д.',
     'deleted'  					        => 'Эта модель была удалена. <a href="/hardware/models/:model_id/restore">Нажмите здесь, чтобы восстановить</a>.',
@@ -9,10 +9,10 @@ return array(
     'bulk_delete_warn'          => 'Вы собираетесь удалить :model_count моделей активов.',
     'restore'                   => 'Восстановить модель',
     'requestable'               => 'Данная модель может быть запрошена пользователем',
-	'show_mac_address'			      => 'Отображать поле MAC адрес для данной модели',
+    'show_mac_address'			      => 'Отображать поле MAC адрес для данной модели',
     'view_deleted'              => 'Просмотр удаленных',
     'view_models'               => 'Просмотр моделей',
     'fieldset'                  => 'Набор полей',
     'no_custom_field'           => 'Нет пользовательских полей',
     'add_default_values'        => 'Добавить значения по умолчанию',
-);
+];

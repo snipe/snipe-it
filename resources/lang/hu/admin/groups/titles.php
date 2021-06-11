@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'A csoportokról',
     'about_groups'                  => 'A csoportokat a felhasználói jogosultságok általánosítására használják.',
     'group_management' 	 	=> 'Csoport kezelés',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Engedélyezés',
     'deny' 	 				=> 'Elutasítás',
 
-);
+];

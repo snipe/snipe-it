@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => 'Ang :katangian ay nakuha na.',
     'uploaded'             => 'Ang :katangian ay hindi nagtagumpay sa pag-upload.',
     'url'                  => 'Ang :pormat ng katangian ng pormat ay hindi balido.',
-    "unique_undeleted"     => "Ang :katangian ay dapat na natatangi.",
+    'unique_undeleted'     => 'Ang :katangian ay dapat na natatangi.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Ang :field ng katangian ay naglalaman ng karakter na hindi pinapayagan.",
-        "email_array"      => "Imbalido ang isa o higit pang mga email address.",
-        "hashed_pass"      => "Ang iyong kasalukuyang password ay hindi wasto",
+        'alpha_space' => 'Ang :field ng katangian ay naglalaman ng karakter na hindi pinapayagan.',
+        'email_array'      => 'Imbalido ang isa o higit pang mga email address.',
+        'hashed_pass'      => 'Ang iyong kasalukuyang password ay hindi wasto',
         'dumbpwd'          => 'Ang password ay sobrang pangkaraniwan.',
-        "statuslabel_type" => "Kinakailangang pumili ng balidong uri ng label ng estado",
+        'statuslabel_type' => 'Kinakailangang pumili ng balidong uri ng label ng estado',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

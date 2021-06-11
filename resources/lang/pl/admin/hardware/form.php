@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Potwierdź zbiorcze usuwanie aktywów',
+return [
+    'bulk_delete'		=> 'Potwierdź zbiorcze usuwanie aktywów',
   'bulk_delete_help'	=> 'Przejrzyj usuwanie zbiorcze aktywów poniżej. Po usunięciu tych aktywów będą one mogły zostać przywrócone, ale nie będą one skojarzone z żadnym z użytkowników, do których są aktualnie przypisane.',
   'bulk_delete_warn'	=> 'Zamierzasz usunąć :asset_count aktywów.',
-	'bulk_update'		=> 'Zbiorcza aktualizacja aktywów',
-	'bulk_update_help'	=> 'Ten formularz umożliwia zbiorczą aktualizację wielu aktywów na raz. Wypełnij tylko te pola, które chcesz zmienić. Puste pola pozostaną niezmienione. ',
-	'bulk_update_warn'	=> 'Zamierzasz edytować właściwości :asset_count zestawów.',
+    'bulk_update'		=> 'Zbiorcza aktualizacja aktywów',
+    'bulk_update_help'	=> 'Ten formularz umożliwia zbiorczą aktualizację wielu aktywów na raz. Wypełnij tylko te pola, które chcesz zmienić. Puste pola pozostaną niezmienione. ',
+    'bulk_update_warn'	=> 'Zamierzasz edytować właściwości :asset_count zestawów.',
     'checkedout_to'		=> 'Wypożyczony do',
     'checkout_date'		=> 'Data przypisania',
     'checkin_date'		=> 'Data przypisania',
@@ -38,7 +38,6 @@ return array(
     'tag'				=> 'Tag-i zasobu/nabytku',
     'update'			=> 'Aktualizacja zasobu/nabytku',
     'warranty'			=> 'Gwarancja',
-		'warranty_expires'		=> 'Gwarancja wygasa',
+        'warranty_expires'		=> 'Gwarancja wygasa',
     'years'				=> 'rok',
-)
-;
+];

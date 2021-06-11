@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'தகுதி லேபிள்களைப் பற்றி',
     'archived'      	=> 'காப்பகப்படுத்தியவை',
     'create'      	=> 'நிலை லேபிள் உருவாக்கவும்',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'நிலை லேபிள்கள்',
     'undeployable'  => 'Undeployable',
     'update'      	=> 'Status Label ஐப் புதுப்பிக்கவும்',
-);
+];

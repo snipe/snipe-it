@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Diretório Ativo',
     'ad_domain'				    => 'Domínio de Diretório Ativo',
     'ad_domain_help'			=> 'Geralmente isso é igual ao seu domínio de email, mas nem sempre.',
     'ad_append_domain_label'    => 'Acrescentar nome de domínio',
     'ad_append_domain'          => 'Acrescentar nome de domínio ao campo de usuário',
-    'ad_append_domain_help'     => 'Usuário não é necessário para escrever "username@domain.local", ele pode apenas digitar "username".' ,
+    'ad_append_domain_help'     => 'Usuário não é necessário para escrever "username@domain.local", ele pode apenas digitar "username".',
     'admin_cc_email'            => 'E-mail em CC',
     'admin_cc_email_help'       => 'Se você quiser enviar uma cópia dos e-mails de check-in / check-out que são enviados aos usuários para uma conta de e-mail adicional, insira-a aqui. Caso contrário, deixe este campo em branco.',
     'is_ad'				        => 'Este é um servidor de Diretório Ativo',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Limite de Expiração dos Alertas (em dias)',
     'alert_inv_threshold'		=> 'Limite de Alerta de Inventário',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID do ativo',
     'audit_interval'            => 'Intervalo de auditoria',
     'audit_interval_help'       => 'Se você precisa verificar fisicamente seus ativos com frequência, insira um intervalo em meses.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Digite o código de autenticação de pois passos',
     'two_factor_config_complete'	=> 'Enviar código',
     'two_factor_enabled_edit_not_allowed' => 'O Administrador não permite editar esta opção.',
-    'two_factor_enrollment_text'	=> "A autenticação de dois passos é obrigatória, mas se o teu dispositivo ainda não foi registrado, abra o Google Authenticator e escaneie o QR Code para registrar o teu dispositivo. Uma vez registrado, digite o código abaixo",
+    'two_factor_enrollment_text'	=> 'A autenticação de dois passos é obrigatória, mas se o teu dispositivo ainda não foi registrado, abra o Google Authenticator e escaneie o QR Code para registrar o teu dispositivo. Uma vez registrado, digite o código abaixo',
     'require_accept_signature'      => 'Requer assinatura',
     'require_accept_signature_help_text'      => 'Habilitar este recurso vai exigir que os usuários assinem pessoalmente o aceite do ativo.',
     'left'        => 'esquerda',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Marcar esta opção impõe identificadores únicos nos números de séries dos ativos',
     'zerofill_count'        => 'Comprimento de etiquetas de ativos, incluindo zerofill',
     'username_format_help'   => 'Esta configuração será usada somente pelo processo de importação, se um nome de usuário não for fornecido nós iremos gerar um nome de usuário para você.',
-);
+];

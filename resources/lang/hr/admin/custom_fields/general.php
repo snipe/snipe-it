@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Prilagođena polja',
     'field'		                => 'Polje',
     'about_fieldsets_title'		=> 'O karticama Fieldsets',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Novi prilagođeni polje',
     'value_encrypted'      	        => 'Vrijednost ovog polja je šifrirana u bazi podataka. Samo administratori administratora moći će vidjeti dešifriranu vrijednost',
     'show_in_email'     => 'Prikazati vrijednost ovog polja u checkout e-mailovima koji se šalju korisnicima? Enkriptirana polja se ne mogu prikazati u e-mailovima.',
-);
+];

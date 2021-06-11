@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Dominio do Active Directory',
     'ad_domain_help'			=> 'Em alguns casos isto e o mesmo que o dominio de email, mas nem sempre.',
     'ad_append_domain_label'    => 'Acrescentar nome de domínio',
     'ad_append_domain'          => 'Acrescentar nome de domínio ao campo de usuário',
-    'ad_append_domain_help'     => 'O utilizador não tem que escrever "username@domain.local", pode apenas digitar "username".' ,
+    'ad_append_domain_help'     => 'O utilizador não tem que escrever "username@domain.local", pode apenas digitar "username".',
     'admin_cc_email'            => 'E-mail em CC',
     'admin_cc_email_help'       => 'Se prefere que seja enviada uma cópia do e-mail de checkin/checktout que é enviado aos utilizadores para uma conta de e-mail adicional, introduza o endereço de e-mail aqui. Caso contrário, deixe este campo em branco.',
     'is_ad'				        => 'Isto é um servidor do Active Directoriy',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Alertas expiram (em dias)',
     'alert_inv_threshold'		=> 'Alerta limite do inventário',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'IDs dos Artigos',
     'audit_interval'            => 'Intervalo de auditoria',
     'audit_interval_help'       => 'Se você for obrigado a auditar fisicamente seus ativos, insira o intervalo em meses.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Digite o código de autenticação de pois passos',
     'two_factor_config_complete'	=> 'Enviar codigo',
     'two_factor_enabled_edit_not_allowed' => 'O teu administrador não permite editar esta opção.',
-    'two_factor_enrollment_text'	=> "A autenticação de dois passos é obrigatória, mas se o teu dispositivo ainda não foi registado, abre o Google Authenticator e lê o QR Code para registar o teu dispositivo. Uma vez registado, introduz o código abaixo",
+    'two_factor_enrollment_text'	=> 'A autenticação de dois passos é obrigatória, mas se o teu dispositivo ainda não foi registado, abre o Google Authenticator e lê o QR Code para registar o teu dispositivo. Uma vez registado, introduz o código abaixo',
     'require_accept_signature'      => 'Requer assinatura',
     'require_accept_signature_help_text'      => 'Habilitar este recurso vai exigir que os utilizadores assinar fisicamente aceitando o artigo.',
     'left'        => 'esquerda',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Marcar esta caixa para garantir que os números de série são únicos',
     'zerofill_count'        => 'Comprimento de tags de artigos, incluindo zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

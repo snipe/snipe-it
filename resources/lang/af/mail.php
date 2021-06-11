@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => '\'N Gebruiker het \'n itemversoek op die webwerf gekanselleer',
     'a_user_requested' => '\'N Gebruiker het \'n item op die webwerf versoek',
     'accessory_name' => 'Toebehore Naam:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

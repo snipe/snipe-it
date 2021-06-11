@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Activ',
     'checkin'           => 'Primire',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licentiat catre E-mail',
     'to_name'           => 'Licentiat catre nume',
     'update'            => 'Actualizeaza licenta',
-    'checkout_help'     => 'Trebuie sa predati licenta catre un activ sau catre o persoana. Puteti selecta ambele, dar proprietarul activului trebuie sa fie la fel cu persoana caruia ii predati activul.'
-);
+    'checkout_help'     => 'Trebuie sa predati licenta catre un activ sau catre o persoana. Puteti selecta ambele, dar proprietarul activului trebuie sa fie la fel cu persoana caruia ii predati activul.',
+];

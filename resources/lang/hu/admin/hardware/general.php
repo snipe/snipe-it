@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Az eszközökről',
     'about_assets_text'            => 'Az eszközök a sorszám vagy az eszközcímke által követett elemek. Ezek általában magasabb értékű termékek, amelyekben egy adott elem azonosítása fontos.',
-	'archived'  				=> 'Arhivált',
+    'archived'  				=> 'Arhivált',
     'asset'  					=> 'Eszköz',
     'bulk_checkout'             => 'Eszközök kiadása',
     'checkin'  					=> 'Eszköz visszavétele',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Függőben',
     'undeployable'  			=> 'Nem telepíthető',
     'view'  					=> 'Eszköz megtekintése',
-);
+];

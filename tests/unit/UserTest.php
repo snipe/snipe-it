@@ -1,9 +1,10 @@
 <?php
+
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Hash;
 
 class UserTest extends BaseTest
 {
@@ -26,7 +27,6 @@ class UserTest extends BaseTest
     //   User::create($values);
     //   $this->tester->seeRecord('users', $values);
     // }
-
 
     public function testFirstNameSplit()
     {
@@ -62,7 +62,6 @@ class UserTest extends BaseTest
         $this->assertEquals($expected_username, $user['username']);
     }
 
-
     public function testFirstInitialLastName()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
@@ -81,11 +80,12 @@ class UserTest extends BaseTest
 
     public function testSingleName()
     {
-        $fullname = "Natalia";
+        $fullname = 'Natalia';
         $expected_username = 'natalia';
         $user = User::generateFormattedNameFromFullName('firstname_lastname', $fullname);
         $this->assertEquals($expected_username, $user['username']);
     }
+
     public function firstInitialDotLastname()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
@@ -93,6 +93,7 @@ class UserTest extends BaseTest
         $user = User::generateFormattedNameFromFullName($fullname, 'firstinitial.lastname');
         $this->assertEquals($expected_username, $user['username']);
     }
+
     public function lastNameUnderscoreFirstInitial()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
@@ -100,6 +101,7 @@ class UserTest extends BaseTest
         $user = User::generateFormattedNameFromFullName($fullname, 'lastname_firstinitial');
         $this->assertEquals($expected_username, $user['username']);
     }
+
     public function firstNameLastName()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
@@ -107,6 +109,7 @@ class UserTest extends BaseTest
         $user = User::generateFormattedNameFromFullName($fullname, 'firstnamelastname');
         $this->assertEquals($expected_username, $user['username']);
     }
+
     public function firstNameLastInitial()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
@@ -114,5 +117,4 @@ class UserTest extends BaseTest
         $user = User::generateFormattedNameFromFullName($fullname, 'firstnamelastinitial');
         $this->assertEquals($expected_username, $user['username']);
     }
-
 }

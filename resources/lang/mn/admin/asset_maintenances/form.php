@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Хоног',
         'notes'                  => 'Тэмдэглэл',
         'update'                 => 'Шинэчлэх',
-        'create'                 => 'Үүсгэх'
+        'create'                 => 'Үүсгэх',
     ];

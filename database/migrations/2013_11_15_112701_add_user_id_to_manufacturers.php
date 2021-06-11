@@ -25,5 +25,4 @@ class AddUserIdToManufacturers extends Migration
     {
         //
     }
-
 }

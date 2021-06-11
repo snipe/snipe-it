@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory domēns',
     'ad_domain_help'			=> 'Tas dažreiz ir tāds pats kā jūsu e-pasta domēnam, bet ne vienmēr.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'E-pasta kopija',
     'admin_cc_email_help'       => 'Šeit ievadiet epasta adresi, ja vēlaties saņemt kopiju epastiem par izsniegšanu / saņemšanu, kuras sūta lietotājiem. Atstājiet tukšu, ja nevēlaties kopijas.',
     'is_ad'				        => 'Tas ir Active Directory serveris',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Pabeidzamo brīdinājumu slieksnis (dienās)',
     'alert_inv_threshold'		=> 'Inventāra trauksmes slieksnis',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Aktīvu ID',
     'audit_interval'            => 'Audita intervāls',
     'audit_interval_help'       => 'Ja jums ir pienākums regulāri fiziski pārbaudīt savus aktīvus, ievadiet intervālu mēnešos.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Ievadiet divu faktoru kodu',
     'two_factor_config_complete'	=> 'Iesniegt kodu',
     'two_factor_enabled_edit_not_allowed' => 'Jūsu administrators neatļauj mainīt šo iestatījumu.',
-    'two_factor_enrollment_text'	=> "Nepieciešama divu faktoru autentifikācija, tomēr jūsu ierīce vēl nav reģistrēta. Atveriet savu lietotni Google autentifikators un skenējiet zemāk redzamo QR kodu, lai reģistrētu savu ierīci. Kad esat reģistrējies savā ierīcē, ievadiet zemāk redzamo kodu",
+    'two_factor_enrollment_text'	=> 'Nepieciešama divu faktoru autentifikācija, tomēr jūsu ierīce vēl nav reģistrēta. Atveriet savu lietotni Google autentifikators un skenējiet zemāk redzamo QR kodu, lai reģistrētu savu ierīci. Kad esat reģistrējies savā ierīcē, ievadiet zemāk redzamo kodu',
     'require_accept_signature'      => 'Pieprasīt parakstu',
     'require_accept_signature_help_text'      => 'Iespējojot šo funkciju, lietotājiem būs jāpiesaista aktīva pieņemšana.',
     'left'        => 'pa kreisi',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Atzīmējot šo lodziņu, tas padarīs Aktīvu/inventāra sērijas nummurus unikālus',
     'zerofill_count'        => 'Aktīvu biržas garums, ieskaitot zerofill',
     'username_format_help'   => 'Importa process izmantos šo iestatījumu tikai ja lietotājvārds nebūs norādīts un mums to vajadzēs uzģenerēt priekš Tevis.',
-);
+];

@@ -1,42 +1,41 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Isibonelo asikho.',
     'assoc_users'	 => 'Lo modeli okwamanje uhlotshaniswa nefa elilodwa noma ngaphezulu futhi alinakususwa. Sicela ususe amafa, bese uzama ukususa futhi.',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Isibonelo asizange sidalwe, sicela uzame futhi.',
         'success' => 'Isibonelo sidalwe ngempumelelo.',
         'duplicate_set' => 'Imodeli yezimpahla ngelo gama, umkhiqizi kanye nenombolo yomodeli kakade ikhona.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Isibonelo asibuyekezwanga, sicela uzame futhi',
-        'success' => 'Isibonelo sibuyekezwe ngempumelelo.'
-    ),
+        'success' => 'Isibonelo sibuyekezwe ngempumelelo.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Ingabe uqinisekile ukuthi ufisa ukususa le model?',
         'error'   => 'Kube nenkinga yokususa imodeli. Ngicela uzame futhi.',
-        'success' => 'Imodeli isusiwe ngempumelelo.'
-    ),
+        'success' => 'Imodeli isusiwe ngempumelelo.',
+    ],
 
-    'restore' => array(
+    'restore' => [
         'error'   		=> 'Isibonelo asibuyisiwe, sicela uzame futhi',
-        'success' 		=> 'Isibonelo sibuyiselwe ngempumelelo.'
-    ),
+        'success' 		=> 'Isibonelo sibuyiselwe ngempumelelo.',
+    ],
 
-    'bulkedit' => array(
+    'bulkedit' => [
         'error'   		=> 'Azikho amasimu ashintshiwe, ngakho akukho lutho olubuyekeziwe.',
-        'success' 		=> 'Amamodeli abuyekeziwe.'
-    ),
+        'success' 		=> 'Amamodeli abuyekeziwe.',
+    ],
 
-    'bulkdelete' => array(
+    'bulkdelete' => [
         'error'   		    => 'No models were selected, so nothing was deleted.',
         'success' 		    => ':success_count model(s) deleted!',
-        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.'
-    ),
+        'success_partial' 	=> ':success_count model(s) were deleted, however :fail_count were unable to be deleted because they still have assets associated with them.',
+    ],
 
-);
+];

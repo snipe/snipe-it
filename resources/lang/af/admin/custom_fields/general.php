@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Aangepaste velde',
     'field'		                => 'veld',
     'about_fieldsets_title'		=> 'Oor Fieldsets',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Nuwe aangepaste veld',
     'value_encrypted'      	        => 'Die waarde van hierdie veld is geïnkripteer in die databasis. Slegs admingebruikers sal die gedecodeerde waarde kan sien',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+];

@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
@@ -15,31 +17,31 @@ use Watson\Validating\ValidatingTrait;
  */
 class Accessory extends SnipeModel
 {
-    protected $presenter = 'App\Presenters\AccessoryPresenter';
+    use HasFactory;
+
+    protected $presenter = \App\Presenters\AccessoryPresenter::class;
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
 
-    protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'accessories';
     protected $casts = [
-        'requestable' => 'boolean'
-    ];
+        'purchase_date' => 'datetime',
+        'requestable' => 'boolean',    ];
 
     use Searchable;
-
     use Acceptable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['name', 'model_number', 'order_number', 'purchase_date'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [
@@ -47,29 +49,28 @@ class Accessory extends SnipeModel
         'company'      => ['name'],
         'manufacturer' => ['name'],
         'supplier'     => ['name'],
-        'location'     => ['name']
+        'location'     => ['name'],
     ];
 
     /**
-    * Accessory validation rules
-    */
-    public $rules = array(
+     * Accessory validation rules
+     */
+    public $rules = [
         'name'              => 'required|min:3|max:255',
         'qty'               => 'required|integer|min:1',
         'category_id'       => 'required|integer|exists:categories,id',
         'company_id'        => 'integer|nullable',
         'min_amt'           => 'integer|min:0|nullable',
         'purchase_cost'     => 'numeric|nullable',
-    );
-
+    ];
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
@@ -91,10 +92,8 @@ class Accessory extends SnipeModel
         'supplier_id',
         'image',
         'qty',
-        'requestable'
+        'requestable',
     ];
-
-
 
     /**
      * Establishes the accessory -> supplier relationship
@@ -105,9 +104,8 @@ class Accessory extends SnipeModel
      */
     public function supplier()
     {
-        return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
     }
-
 
     /**
      * Sets the requestable attribute on the accessory
@@ -122,7 +120,6 @@ class Accessory extends SnipeModel
             $value = null;
         }
         $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
-        return;
     }
 
     /**
@@ -134,7 +131,7 @@ class Accessory extends SnipeModel
      */
     public function company()
     {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
     }
 
     /**
@@ -146,7 +143,7 @@ class Accessory extends SnipeModel
      */
     public function location()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id');
+        return $this->belongsTo(\App\Models\Location::class, 'location_id');
     }
 
     /**
@@ -158,7 +155,7 @@ class Accessory extends SnipeModel
      */
     public function category()
     {
-        return $this->belongsTo('\App\Models\Category', 'category_id')->where('category_type', '=', 'accessory');
+        return $this->belongsTo(\App\Models\Category::class, 'category_id')->where('category_type', '=', 'accessory');
     }
 
     /**
@@ -170,12 +167,12 @@ class Accessory extends SnipeModel
      */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Accessory::class)->orderBy('created_at', 'desc')->withTrashed();
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
     /**
      * Get the LAST checkout for this accessory.
-     * 
+     *
      * This is kinda gross, but is necessary for how the accessory
      * pivot stuff works for now.
      *
@@ -198,13 +195,11 @@ class Accessory extends SnipeModel
      * @since v5.0.0
      *
      * @see \App\Http\Controllers\Api\AccessoriesController\checkedout()
-     *
      */
     public function lastCheckout()
     {
-        return $this->assetlog()->where('action_type','=','checkout')->take(1);
+        return $this->assetlog()->where('action_type', '=', 'checkout')->take(1);
     }
-
 
     /**
      * Sets the full image url
@@ -216,12 +211,13 @@ class Accessory extends SnipeModel
      * @since [v3.0]
      * @return string
      */
-    public function getImageUrl() {
+    public function getImageUrl()
+    {
         if ($this->image) {
             return Storage::disk('public')->url(app('accessories_upload_path').$this->image);
         }
-        return false;
 
+        return false;
     }
 
     /**
@@ -231,10 +227,9 @@ class Accessory extends SnipeModel
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-
     public function users()
     {
-        return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id', 'created_at', 'note')->withTrashed();
+        return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id', 'created_at', 'note')->withTrashed();
     }
 
     /**
@@ -246,7 +241,7 @@ class Accessory extends SnipeModel
      */
     public function hasUsers()
     {
-        return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->count();
+        return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->count();
     }
 
     /**
@@ -258,7 +253,7 @@ class Accessory extends SnipeModel
      */
     public function manufacturer()
     {
-        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
+        return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
     }
 
     /**
@@ -267,7 +262,7 @@ class Accessory extends SnipeModel
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return boolean
+     * @return bool
      */
     public function checkin_email()
     {
@@ -280,7 +275,7 @@ class Accessory extends SnipeModel
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return boolean
+     * @return bool
      */
     public function requireAcceptance()
     {
@@ -297,15 +292,15 @@ class Accessory extends SnipeModel
      */
     public function getEula()
     {
-
         $Parsedown = new \Parsedown();
 
         if ($this->category->eula_text) {
             return $Parsedown->text(e($this->category->eula_text));
-        } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula=='1')) {
+        } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula == '1')) {
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
         }
-            return null;
+
+        return null;
     }
 
     /**
@@ -320,17 +315,18 @@ class Accessory extends SnipeModel
         $checkedout = $this->users->count();
         $total = $this->qty;
         $remaining = $total - $checkedout;
+
         return $remaining;
     }
 
     /**
-    * Query builder scope to order on company
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on company
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderCompany($query, $order)
     {
         return $query->leftJoin('companies', 'accessories.company_id', '=', 'companies.id')
@@ -338,13 +334,13 @@ class Accessory extends SnipeModel
     }
 
     /**
-    * Query builder scope to order on category
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on category
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderCategory($query, $order)
     {
         return $query->leftJoin('categories', 'accessories.category_id', '=', 'categories.id')
@@ -352,13 +348,13 @@ class Accessory extends SnipeModel
     }
 
     /**
-    * Query builder scope to order on location
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on location
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderLocation($query, $order)
     {
         return $query->leftJoin('locations', 'accessories.location_id', '=', 'locations.id')
@@ -366,13 +362,13 @@ class Accessory extends SnipeModel
     }
 
     /**
-    * Query builder scope to order on manufacturer
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on manufacturer
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderManufacturer($query, $order)
     {
         return $query->leftJoin('manufacturers', 'accessories.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);

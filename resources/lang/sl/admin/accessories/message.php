@@ -1,37 +1,36 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Ta dodatek trenutno vsebuje: štetje predmetov, elementov ki so izdani uporabnikom. Preverite dodatke in poskusite znova. ',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Dodatek ni bila ustvarjen, poskusite znova.',
-        'success' => 'Dodatek je bil uspešno ustvarjen.'
-    ),
+        'success' => 'Dodatek je bil uspešno ustvarjen.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Dodatek ni bil posodobljen, poskusite znova',
-        'success' => 'Dodatek je bil uspešno posodobljen.'
-    ),
+        'success' => 'Dodatek je bil uspešno posodobljen.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Ali ste prepričani, da želite izbrisati ta dodatek?',
         'error'   => 'Prišlo je do napake pri brisanju dodatka. Prosim poskusite ponovno.',
-        'success' => 'Dodatek je bil uspešno izbrisan.'
-    ),
+        'success' => 'Dodatek je bil uspešno izbrisan.',
+    ],
 
-     'checkout' => array(
+     'checkout' => [
         'error'   		=> 'Dodatek ni bil izdan, poskusite znova',
         'success' 		=> 'Dodatek uspešno izdan.',
-        'user_does_not_exist' => 'Uporabnik je napačen. Prosim poskusite ponovno.'
-    ),
+        'user_does_not_exist' => 'Uporabnik je napačen. Prosim poskusite ponovno.',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   		=> 'Dodatek ni bil sprejet, poskusite znova',
         'success' 		=> 'Dodatek uspešno sprejet.',
-        'user_does_not_exist' => 'Uporabnik ne obstaja. Prosim poskusite ponovno.'
-    )
+        'user_does_not_exist' => 'Uporabnik ne obstaja. Prosim poskusite ponovno.',
+    ],
 
-
-);
+];

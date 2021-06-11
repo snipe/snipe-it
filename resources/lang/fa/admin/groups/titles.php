@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'درباره گروه ها',
     'about_groups'                  => 'گروه ها برای تعمیم مجوز کاربر استفاده می شوند.',
     'group_management' 	 	=> 'مدیریت گروه',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'اجازه می دهد',
     'deny' 	 				=> 'رد کردن',
 
-);
+];

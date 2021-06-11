@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Инвентарен номер',
     'asset_model'       => 'Модел',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Актив ',
     'image'		=> 'Изображение на устройството',
     'days_without_acceptance' => 'Дни без да е предаден',
-    'monthly_depreciation' => 'Месечна Амортизация'
+    'monthly_depreciation' => 'Месечна Амортизация',
 
-);
+];

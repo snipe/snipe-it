@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'アクション',
     'add'    	                => '新規追加',
     'cancel'                    => 'キャンセル',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'リクエスト',
     'submit'  	                => '送信',
     'upload'                    => 'アップロード',
-	'select_file'				=> 'ファイルを選択...',
+    'select_file'				=> 'ファイルを選択...',
     'select_files'				=> 'ファイルを選択...',
     'generate_labels'           => '{1} ラベル生成|[2,*] 複数ラベル生成',
-);
+];

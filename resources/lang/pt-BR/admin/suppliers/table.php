@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'Sobre os fornecedores',
     'about_suppliers_text'  => 'Fornecedores são usados para seguir a origem de itens',
     'address'               => 'Endereço do Fornecedor',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Ver Bens para',
     'zip'                   => 'Código Postal',
 
-);
+];

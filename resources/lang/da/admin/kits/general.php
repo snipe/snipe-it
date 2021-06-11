@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'Om Foruddefinerede Kits',
     'about_kits_text'                   => 'Foruddefinerede Kits lader dig hurtigt tjekke en samling af varer (aktiver, licenser osv.) til en bruger. Dette kan være nyttigt, når din onboarding proces er konsekvent på tværs af mange brugere, og alle brugere modtager de samme elementer.',
     'checkout'                          => 'Checkout Kit ',
@@ -14,4 +14,4 @@ return array(
     'none_consumables'                  => 'Der er ikke nok tilgængelige enheder af :consumable til checkout. :qty er påkrævet. ',
     'none_accessory'                    => 'Der er ikke nok tilgængelige enheder :accessory til checkout. :qty er påkrævet. ',
 
-);
+];

@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Mō Ngā Taonga',
     'about_assets_text'            => 'Ko nga taonga he taonga kua rapua e te tau rangatū, te tohu taonga ranei. He ahua nui ake o nga taonga kei te tautuhi i nga take e tika ana.',
-	'archived'  				=> 'Whakamahia',
+    'archived'  				=> 'Whakamahia',
     'asset'  					=> 'Tahua',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'Tirohia te Ahua',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Kei te tatari',
     'undeployable'  			=> 'Kaore e taea',
     'view'  					=> 'Tirohia te Ahua',
-);
+];
