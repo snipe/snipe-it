@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'Ön Tanımlı Kitler Hakkında',
     'about_kits_text'                   => 'Ön Tanımlı Kit (sarf malzeme, lisans vb).',
     'checkout'                          => 'Çıkış Tarihi ',
@@ -14,4 +14,4 @@ return array(
     'none_consumables'                  => 'Yeterli sayıda :consumable olmadığından çıkış yapılamıyor. :qty adet gereklidir. ',
     'none_accessory'                    => 'Çıkış yapılabilecek sayıda :accessory bulunmamaktadır. :qty adet gereklidir. ',
 
-);
+];

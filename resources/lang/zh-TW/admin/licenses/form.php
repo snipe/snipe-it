@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => '資產',
     'checkin'           => '繳回',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => '授權信箱',
     'to_name'           => '授權給',
     'update'            => '更新授權',
-    'checkout_help'     => '請檢查這個授權是否已經分配給某個人或某個設備。你可以複選，但資產歸屬人必須是相同的。'
-);
+    'checkout_help'     => '請檢查這個授權是否已經分配給某個人或某個設備。你可以複選，但資產歸屬人必須是相同的。',
+];

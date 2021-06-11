@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'משתמש זה יכול להיכנס',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'נכסים שהוקצו ל: שם',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'ערוך משתמש',
     'filetype_info'     => 'סוגי קבצים מותרים הם png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, ו rar.',
     'history_user'      => 'היסטוריה עבור: שם',
-	'info'				=> 'מידע',
+    'info'				=> 'מידע',
     'restore_user'		=> 'לחץ כאן כדי לשחזר אותם.',
     'last_login'        => 'כניסה אחרונה',
     'ldap_config_text'  => 'הגדרות תצורה של LDAP נמצאות \'מנהל\'> \'הגדרות\'. המיקום הנבחר (אופציונלי) ייקבע עבור כל המשתמשים המיובאים.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'הגדרות מנהל המערכת הנוכחיות מאפשרות אכיפה סלקטיבית של אימות דו-גורמי.',
     'two_factor_enrolled' => 'רשם מכשיר 2FA',
     'two_factor_active'   => '2FA פעיל',
-    );
+    ];

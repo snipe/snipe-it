@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'Apie būklės korteles',
     'archived'      	=> 'Archyvuota',
     'create'      	=> 'Sukurti būlės kortelę',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Būklės kortelės',
     'undeployable'  => 'Negalimas naudoti',
     'update'      	=> 'Atnaujinti būklės kortelę',
-);
+];

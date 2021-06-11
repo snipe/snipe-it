@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Энэ хэрэглэгч нэвтрэх эрхтэй',
     'activated_disabled_help_text' => 'Та өөрийн дансны идэвхжүүлэх статусыг засах боломжгүй.',
     'assets_user'       => 'Нэр:',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Хэрэглэгчийг засварлах',
     'filetype_info'     => 'Зөвшөөрөгдсөн filetypes нь png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Түүх: нэр',
-	'info'				=> 'Мэдээлэл',
+    'info'				=> 'Мэдээлэл',
     'restore_user'		=> 'Тэднийг сэргээхийн тулд энд дарна уу.',
     'last_login'        => 'Сүүлчийн Нэвтрэх',
     'ldap_config_text'  => 'LDAP тохиргооны тохиргоог Админ> Тохиргоо гэж олж болно. (Заавал биш) сонгосон байршлыг бүх импортлогчдын хувьд тохируулах болно.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Таны одоогийн админ тохиргоо нь хоёр хүчин зүйлийн баталгаажуулалтыг сонгохыг зөвшөөрдөг.',
     'two_factor_enrolled' => '2FA төхөөрөмжийг бүртгүүлсэн',
     'two_factor_active'   => '2FA идэвхтэй',
-    );
+    ];

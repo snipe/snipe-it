@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Models\LicenseSeat;
-use Illuminate\Console\Command;
-use App\Models\User;
 use App\Models\License;
+use App\Models\LicenseSeat;
+use App\Models\User;
+use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 
 class CheckoutLicenseToAllUsers extends Command
@@ -41,18 +41,18 @@ class CheckoutLicenseToAllUsers extends Command
      */
     public function handle()
     {
-
         $license_id = $this->option('license_id');
         $notify = $this->option('notify');
 
-        if (!$license_id) {
-             $this->error('ERROR: License ID is required.');
-             return false;
+        if (! $license_id) {
+            $this->error('ERROR: License ID is required.');
+
+            return false;
         }
 
-
-        if (!$license = License::where('id','=',$license_id)->with('assignedusers')->first()) {
+        if (! $license = License::where('id', '=', $license_id)->with('assignedusers')->first()) {
             $this->error('Invalid license ID');
+
             return false;
         }
 
@@ -64,7 +64,7 @@ class CheckoutLicenseToAllUsers extends Command
 
         $this->info('Checking out '.$users->count().' of '.$license->getAvailSeatsCountAttribute().' seats for '.$license->name);
 
-        if (!$notify) {
+        if (! $notify) {
             $this->info('No mail will be sent.');
         }
 
@@ -74,14 +74,14 @@ class CheckoutLicenseToAllUsers extends Command
             // to them
 
             if ($user->licenses->where('id', '=', $license_id)->count()) {
-                $this->info($user->username .' already has this license checked out to them. Skipping... ');
+                $this->info($user->username.' already has this license checked out to them. Skipping... ');
                 continue;
             }
 
-            
             // If the license is valid, check that there is an available seat
             if ($license->availCount()->count() < 1) {
                 $this->error('ERROR: No available seats');
+
                 return false;
             }
 
@@ -89,13 +89,12 @@ class CheckoutLicenseToAllUsers extends Command
             // Get the seat ID
             $licenseSeat = $license->freeSeat();
 
-
             // Update the seat with checkout info,
-           $licenseSeat->assigned_to = $user->id;
+            $licenseSeat->assigned_to = $user->id;
             if ($licenseSeat->save()) {
 
                 // Temporarily null the user's email address so we don't send mail if we're not supposed to
-                if (!$notify) {
+                if (! $notify) {
                     $user->email = null;
                 }
 
@@ -103,10 +102,6 @@ class CheckoutLicenseToAllUsers extends Command
                 $licenseSeat->logCheckout('Checked out via cli tool', $user);
                 $this->info('License '.$license_id.' seat '.$licenseSeat->id.' checked out to '.$user->username);
             }
-
         }
-
-
-
     }
 }

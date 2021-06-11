@@ -19,9 +19,9 @@ use Illuminate\Support\Collection;
  */
 class LdapAdConfiguration
 {
-    const LDAP_PORT             = 389;
-    const CONNECTION_TIMEOUT    = 5;
-    const DEFAULT_LDAP_VERSION  = 3;
+    const LDAP_PORT = 389;
+    const CONNECTION_TIMEOUT = 5;
+    const DEFAULT_LDAP_VERSION = 3;
     const LDAP_BOOLEAN_SETTINGS = [
         'ldap_enabled',
         'ldap_server_cert_ignore',
@@ -51,7 +51,8 @@ class LdapAdConfiguration
      *
      * @since 5.0.0
      */
-    public function init() {
+    public function init()
+    {
 
         // This try/catch is dumb, but is necessary to run initial migrations, since
         // this service provider is booted even during migrations. :( - snipe
@@ -64,7 +65,6 @@ class LdapAdConfiguration
             \Log::debug($e);
             $this->ldapSettings = null;
         }
-
     }
 
     /**
@@ -92,7 +92,7 @@ class LdapAdConfiguration
     private function getSnipeItLdapSettings(): Collection
     {
         $ldapSettings = collect();
-        if(Setting::first()) { // during early migration steps, there may be no settings table entry to start with
+        if (Setting::first()) { // during early migration steps, there may be no settings table entry to start with
             $ldapSettings = Setting::getLdapSettings()
                 ->map(function ($item, $key) {
                     // Trim the items
@@ -105,7 +105,7 @@ class LdapAdConfiguration
                     }
 
                     // Decrypt the admin password
-                    if ('ldap_pword' === $key && !empty($item)) {
+                    if ('ldap_pword' === $key && ! empty($item)) {
                         try {
                             return decrypt($item);
                         } catch (Exception $e) {
@@ -120,6 +120,7 @@ class LdapAdConfiguration
                     return $item;
                 });
         }
+
         return $ldapSettings;
     }
 
@@ -216,6 +217,7 @@ class LdapAdConfiguration
         if ($port && is_int($port)) {
             return $port;
         }
+
         return self::LDAP_PORT;
     }
 
@@ -234,6 +236,7 @@ class LdapAdConfiguration
         if ($scheme && 'ldaps' === strtolower($scheme)) {
             return true;
         }
+
         return false;
     }
 
@@ -253,11 +256,12 @@ class LdapAdConfiguration
                 return trim($item);
             })->toArray();
         } */ // <- this was the *original* intent of the PR for AdLdap2, but we've been moving away from having
-             // two separate fields - one for "ldap_host" and one for "ad_domain" - towards just using "ldap_host"
-             // ad_domain for us just means "append this domain to your usernames for login, if you click that checkbox"
-             // that's all, nothing more (I hope).
+        // two separate fields - one for "ldap_host" and one for "ad_domain" - towards just using "ldap_host"
+        // ad_domain for us just means "append this domain to your usernames for login, if you click that checkbox"
+        // that's all, nothing more (I hope).
 
         $url = $this->getLdapServerData('host');
+
         return $url ? [$url] : [];
     }
 

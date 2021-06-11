@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory活动目录',
     'ad_domain'				    => 'AD域',
     'ad_domain_help'			=> '通常(但并非全部情况下)这与您的邮件域相同',
     'ad_append_domain_label'    => '附加域名',
     'ad_append_domain'          => '添加域名到用户名字段',
-    'ad_append_domain_help'     => '不要求用户输入“"username@domain.local"，他们只需输入“username”。' ,
+    'ad_append_domain_help'     => '不要求用户输入“"username@domain.local"，他们只需输入“username”。',
     'admin_cc_email'            => '邮件抄送',
     'admin_cc_email_help'       => '如果你想给用户额外的邮件账户发送签入/签出副本，请在此输入邮箱地址，否则请留空。',
     'is_ad'				        => '这是AD域服务器',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> '警报阈值(天)',
     'alert_inv_threshold'		=> '库存警报阈值',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> '资产ID',
     'audit_interval'            => '盘点时间间隔',
     'audit_interval_help'       => '如果您需要定期盘点您的资产，请输入月数间隔。',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> '输入两步验证代码',
     'two_factor_config_complete'	=> '发送两步验证代码',
     'two_factor_enabled_edit_not_allowed' => '你的管理员不允许您编辑此设置。',
-    'two_factor_enrollment_text'	=> "本系统强制两步验证，但您尚未登记您的移动设备。请启动您的 Google Authenticator 应用并扫描下方二维码以设置两步验证。在您完成后，请在下方输入生成的认证代码。",
+    'two_factor_enrollment_text'	=> '本系统强制两步验证，但您尚未登记您的移动设备。请启动您的 Google Authenticator 应用并扫描下方二维码以设置两步验证。在您完成后，请在下方输入生成的认证代码。',
     'require_accept_signature'      => '需要签名',
     'require_accept_signature_help_text'      => '启用此功能将需要用户亲自签署来接受一项资产。',
     'left'        => '左',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => '选中此框将强制对资产序列进行唯一性约束',
     'zerofill_count'        => '资产标签长度，包括补零',
     'username_format_help'   => '只有在没有提供用户名并且我们必须为您生成用户名时，导入过程才会使用此设置。',
-);
+];

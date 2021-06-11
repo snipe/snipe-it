@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Models\LicenseSeat;
-use Illuminate\Console\Command;
-use App\Models\User;
 use App\Models\License;
+use App\Models\LicenseSeat;
+use App\Models\User;
+use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 
 class CheckinLicensesFromAllUsers extends Command
@@ -41,55 +41,48 @@ class CheckinLicensesFromAllUsers extends Command
      */
     public function handle()
     {
-
         $license_id = $this->option('license_id');
         $notify = $this->option('notify');
 
-        if (!$license_id) {
+        if (! $license_id) {
             $this->error('ERROR: License ID is required.');
+
             return false;
         }
 
-
-        if (!$license = License::where('id','=',$license_id)->first()) {
+        if (! $license = License::where('id', '=', $license_id)->first()) {
             $this->error('Invalid license ID');
+
             return false;
         }
 
         $this->info('Checking in ALL seats for '.$license->name);
-
 
         $licenseSeats = LicenseSeat::where('license_id', '=', $license_id)
             ->whereNotNull('assigned_to')
             ->with('user')
             ->get();
 
-        $this->info(' There are ' .$licenseSeats->count(). ' seats checked out: ');
+        $this->info(' There are '.$licenseSeats->count().' seats checked out: ');
 
-        if (!$notify) {
+        if (! $notify) {
             $this->info('No mail will be sent.');
         }
 
         foreach ($licenseSeats as $seat) {
-            $this->info($seat->user->username .' has a license seat for '.$license->name);
+            $this->info($seat->user->username.' has a license seat for '.$license->name);
             $seat->assigned_to = null;
 
             if ($seat->save()) {
 
                 // Override the email address so we don't notify on checkin
-                if (!$notify) {
+                if (! $notify) {
                     $seat->user->email = null;
                 }
 
                 // Log the checkin
                 $seat->logCheckin($seat->user, 'Checked in via cli tool');
             }
-
-
-
-
         }
-        
-
     }
 }

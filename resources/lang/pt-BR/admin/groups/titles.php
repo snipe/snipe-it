@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Sobre Grupos',
     'about_groups'                  => 'Os Grupos são utilizados para generalizar as permissões do usuário.',
     'group_management' 	 	=> 'Gerenciamento do Grupo',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Permitir',
     'deny' 	 				=> 'Negar',
 
-);
+];

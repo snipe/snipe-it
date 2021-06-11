@@ -22,8 +22,7 @@ class AssetObserver
         // (Those other actions already create log entries.)
         if (($asset->getAttributes()['assigned_to'] == $asset->getOriginal()['assigned_to'])
             && ($asset->getAttributes()['next_audit_date'] == $asset->getOriginal()['next_audit_date'])
-            && ($asset->getAttributes()['last_checkout'] == $asset->getOriginal()['last_checkout']))
-        {
+            && ($asset->getAttributes()['last_checkout'] == $asset->getOriginal()['last_checkout'])) {
             $changed = [];
 
             foreach ($asset->getOriginal() as $key => $value) {
@@ -33,22 +32,18 @@ class AssetObserver
                 }
             }
 
-
             $logAction = new Actionlog();
             $logAction->item_type = Asset::class;
             $logAction->item_id = $asset->id;
-            $logAction->created_at =  date("Y-m-d H:i:s");
+            $logAction->created_at = date('Y-m-d H:i:s');
             $logAction->user_id = Auth::id();
             $logAction->log_meta = json_encode($changed);
             $logAction->logaction('update');
-
-        } 
-
+        }
     }
 
-
     /**
-     * Listen to the Asset created event, and increment 
+     * Listen to the Asset created event, and increment
      * the next_auto_tag_base value in the settings table when i
      * a new asset is created.
      *
@@ -65,10 +60,9 @@ class AssetObserver
         $logAction = new Actionlog();
         $logAction->item_type = Asset::class;
         $logAction->item_id = $asset->id;
-        $logAction->created_at =  date("Y-m-d H:i:s");
+        $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->logaction('create');
-
     }
 
     /**
@@ -82,7 +76,7 @@ class AssetObserver
         $logAction = new Actionlog();
         $logAction->item_type = Asset::class;
         $logAction->item_id = $asset->id;
-        $logAction->created_at =  date("Y-m-d H:i:s");
+        $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->logaction('delete');
     }

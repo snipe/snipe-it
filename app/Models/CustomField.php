@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
@@ -15,7 +16,7 @@ class CustomField extends Model
 
     /**
      * Custom field predfined formats
-     * 
+     *
      * @var array
      */
     const PREDEFINED_FORMATS = [
@@ -36,7 +37,7 @@ class CustomField extends Model
         ];
 
     public $guarded = [
-        "id"
+        'id',
     ];
 
     /**
@@ -71,7 +72,7 @@ class CustomField extends Model
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @since [v3.0]
      */
-    public static $table_name = "assets";
+    public static $table_name = 'assets';
 
     /**
      * Convert the custom field's name property to a db-safe string.
@@ -81,11 +82,11 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.4]
-     * @return String
+     * @return string
      */
     public static function name_to_db_name($name)
     {
-        return "_snipeit_" . preg_replace("/[^a-zA-Z0-9]/", "_", strtolower($name));
+        return '_snipeit_'.preg_replace('/[^a-zA-Z0-9]/', '_', strtolower($name));
     }
 
     /**
@@ -98,7 +99,7 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.4]
-     * @return Boolean
+     * @return bool
      */
     public static function boot()
     {
@@ -107,12 +108,12 @@ class CustomField extends Model
 
             // Column already exists on the assets table - nothing to do here.
             // This *shouldn't* happen in the wild.
-            if (Schema::hasColumn(CustomField::$table_name, $custom_field->convertUnicodeDbSlug())) {
+            if (Schema::hasColumn(self::$table_name, $custom_field->convertUnicodeDbSlug())) {
                 return false;
             }
 
             // Update the column name in the assets table
-            Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
+            Schema::table(self::$table_name, function ($table) use ($custom_field) {
                 $table->text($custom_field->convertUnicodeDbSlug())->nullable();
             });
 
@@ -121,13 +122,11 @@ class CustomField extends Model
             $custom_field->save();
         });
 
-
         self::updating(function ($custom_field) {
 
             // Column already exists on the assets table - nothing to do here.
-            if ($custom_field->isDirty("name")) {
-
-                if (Schema::hasColumn(CustomField::$table_name, $custom_field->convertUnicodeDbSlug())) {
+            if ($custom_field->isDirty('name')) {
+                if (Schema::hasColumn(self::$table_name, $custom_field->convertUnicodeDbSlug())) {
                     return true;
                 }
 
@@ -137,8 +136,8 @@ class CustomField extends Model
                 $platform->registerDoctrineTypeMapping('enum', 'string');
 
                 // Rename the field if the name has changed
-                Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
-                    $table->renameColumn($custom_field->convertUnicodeDbSlug($custom_field->getOriginal("name")), $custom_field->convertUnicodeDbSlug());
+                Schema::table(self::$table_name, function ($table) use ($custom_field) {
+                    $table->renameColumn($custom_field->convertUnicodeDbSlug($custom_field->getOriginal('name')), $custom_field->convertUnicodeDbSlug());
                 });
 
                 // Save the updated column name to the custom fields table
@@ -147,13 +146,13 @@ class CustomField extends Model
 
                 return true;
             }
+
             return true;
         });
 
-
         // Drop the assets column if we've deleted it from custom fields
         self::deleting(function ($custom_field) {
-            return Schema::table(CustomField::$table_name, function ($table) use ($custom_field) {
+            return Schema::table(self::$table_name, function ($table) use ($custom_field) {
                 $table->dropColumn($custom_field->convertUnicodeDbSlug());
             });
         });
@@ -217,11 +216,11 @@ class CustomField extends Model
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param $value string
      * @since [v3.0]
-     * @return boolean
+     * @return bool
      */
     public function check_format($value)
     {
-        return preg_match('/^'.$this->attributes['format'].'$/', $value)===1;
+        return preg_match('/^'.$this->attributes['format'].'$/', $value) === 1;
     }
 
     /**
@@ -270,9 +269,9 @@ class CustomField extends Model
     public function setFormatAttribute($value)
     {
         if (isset(self::PREDEFINED_FORMATS[$value])) {
-            $this->attributes['format']=self::PREDEFINED_FORMATS[$value];
+            $this->attributes['format'] = self::PREDEFINED_FORMATS[$value];
         } else {
-            $this->attributes['format']=$value;
+            $this->attributes['format'] = $value;
         }
     }
 
@@ -286,24 +285,22 @@ class CustomField extends Model
     public function formatFieldValuesAsArray()
     {
         $result = [];
-        $arr = preg_split("/\\r\\n|\\r|\\n/", $this->field_values);
+        $arr = preg_split('/\\r\\n|\\r|\\n/', $this->field_values);
 
-        if (($this->element!='checkbox') && ($this->element!='radio')) {
+        if (($this->element != 'checkbox') && ($this->element != 'radio')) {
             $result[''] = 'Select '.strtolower($this->format);
         }
 
-
         for ($x = 0; $x < count($arr); $x++) {
             $arr_parts = explode('|', $arr[$x]);
-            if ($arr_parts[0]!='') {
-                if (key_exists('1', $arr_parts)) {
+            if ($arr_parts[0] != '') {
+                if (array_key_exists('1', $arr_parts)) {
                     $result[$arr_parts[0]] = $arr_parts[1];
                 } else {
                     $result[$arr_parts[0]] = $arr_parts[0];
                 }
             }
         }
-
 
         return $result;
     }
@@ -313,16 +310,16 @@ class CustomField extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.4]
-     * @return boolean
+     * @return bool
      */
     public function isFieldDecryptable($string)
     {
-        if (($this->field_encrypted=='1') && ($string!='')) {
+        if (($this->field_encrypted == '1') && ($string != '')) {
             return true;
         }
+
         return false;
     }
-
 
     /**
      * Convert non-UTF-8 or weirdly encoded text into something that
@@ -337,52 +334,52 @@ class CustomField extends Model
         $name = $original ? $original : $this->name;
         $id = $this->id ? $this->id : 'xx';
 
-        if (!function_exists('transliterator_transliterate')) {
-            $long_slug = '_snipeit_' . str_slug(\Patchwork\Utf8::utf8_encode(trim($name)), '_');
+        if (! function_exists('transliterator_transliterate')) {
+            $long_slug = '_snipeit_'.str_slug(\Patchwork\Utf8::utf8_encode(trim($name)), '_');
         } else {
-            $long_slug =  '_snipeit_' . Utf8Slugger::slugify($name, '_');
+            $long_slug = '_snipeit_'.Utf8Slugger::slugify($name, '_');
         }
 
-        return substr($long_slug, 0, 50) . '_' . $id;
+        return substr($long_slug, 0, 50).'_'.$id;
     }
 
     /**
-    * Get validation rules for custom fields to use with Validator
-    * @author [V. Cordes] [<volker@fdatek.de>]
-    * @param int $id
-    * @since [v4.1.10]
-    * @return array
-    */
+     * Get validation rules for custom fields to use with Validator
+     * @author [V. Cordes] [<volker@fdatek.de>]
+     * @param int $id
+     * @since [v4.1.10]
+     * @return array
+     */
     public function validationRules($regex_format = null)
     {
         return [
-            "name" => "required|unique:custom_fields",
-            "element" => [
-                "required",
-                Rule::in(['text', 'listbox',  'textarea', 'checkbox', 'radio'])
+            'name' => 'required|unique:custom_fields',
+            'element' => [
+                'required',
+                Rule::in(['text', 'listbox',  'textarea', 'checkbox', 'radio']),
             ],
             'format' => [
-                Rule::in(array_merge(array_keys(CustomField::PREDEFINED_FORMATS), CustomField::PREDEFINED_FORMATS, [$regex_format]))
+                Rule::in(array_merge(array_keys(self::PREDEFINED_FORMATS), self::PREDEFINED_FORMATS, [$regex_format])),
             ],
-            'field_encrypted' => "nullable|boolean"
+            'field_encrypted' => 'nullable|boolean',
         ];
     }
 
     /**
      * Check to see if there is a custom regex format type
      * @see https://github.com/snipe/snipe-it/issues/5896
-     * 
-     * @author Wes Hulette <jwhulette@gmail.com>    
-     * 
+     *
+     * @author Wes Hulette <jwhulette@gmail.com>
+     *
      * @since 5.0.0
-     * 
+     *
      * @return string
      */
     public function getFormatType()
     {
-        if(stripos($this->format,'regex') === 0 && ($this->format !== self::PREDEFINED_FORMATS['MAC'])) {
-           return 'CUSTOM REGEX';
-        } 
+        if (stripos($this->format, 'regex') === 0 && ($this->format !== self::PREDEFINED_FORMATS['MAC'])) {
+            return 'CUSTOM REGEX';
+        }
 
         return $this->format;
     }

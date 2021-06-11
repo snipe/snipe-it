@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'Όνομα στοιχείου',
     'checkin'                             => 'Ελέγξτε το στοιχείο',
     'checkout'                             => 'Συστατικό ελέγχου',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'Απομένουν',
     'total' 			                 => 'Σύνολο',
     'update'                            => 'Αναβάθμιση εξαρτήματος',
-);
+];

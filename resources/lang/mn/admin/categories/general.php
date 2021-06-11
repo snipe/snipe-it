@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'Хөрөнгийн ангиллууд',
     'category_name'  					=> 'Ангиллын нэр',
     'checkin_email'                     => 'Авах/олгох үед хэрэглэгч үрүү имэйл илгээх.',
@@ -19,4 +19,4 @@ return array(
     'use_default_eula'					=> 'Үүний оронд <a href="#" data-toggle="modal" data-target="#eulaModal">үндсэн стандарт EULA</a> -г ашиглана уу.',
     'use_default_eula_disabled'			=> '<del>Үүний оронд үндсэн хэрэглэгчийн гэрээг ашиглана уу.</del> Үндсэн хэрэглэгчийн гэрээг зааж өгөөгүй байна. Тохируулга хэсэгт нэмж оруулна уу.',
 
-);
+];

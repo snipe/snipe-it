@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'This user can login',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'دارایی ها محول شده به :',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'ویرایش کاربر',
     'filetype_info'     => 'پسوند های مجاز:png, gif, jpg, jpeg, doc, docx, pdf, txt, zip,Rar',
     'history_user'      => 'تاریخچه برای:',
-	'info'				=> 'اطلاعات',
+    'info'				=> 'اطلاعات',
     'restore_user'		=> 'برای بازسازی آنها اینجا کلیک کنید.',
     'last_login'        => 'آخرین ورود',
     'ldap_config_text'  => 'تنظشیمات تاییدیه LDPA در فولدر app/config در فایلی به نام idap.php وجود دارد.مکان مشخص شده برای تمامی کاربران وارد شده تنظیم میشود.شما نیاز دارید که حداقل یه مکان را اضافه کرده باشید تا بتوانید از این ویژگی استفاده کنید.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'تنظیمات مدیریت فعلی شما اجازه اجرای مجدد احراز هویت دو عامل را می دهد.',
     'two_factor_enrolled' => 'دستگاه 2FA ثبت شده است',
     'two_factor_active'   => '2FA فعال',
-    );
+    ];

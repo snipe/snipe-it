@@ -1,8 +1,9 @@
 <?php
+
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Department;
+use Illuminate\Database\Seeder;
 
 class DepartmentSeeder extends Seeder
 {
@@ -15,6 +16,5 @@ class DepartmentSeeder extends Seeder
         Department::factory()->count(1)->deptClientServices()->create();
         Department::factory()->count(1)->deptProduct()->create();
         Department::factory()->count(1)->deptSillyWalks()->create();
-
     }
 }

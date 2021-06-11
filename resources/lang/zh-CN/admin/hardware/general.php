@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => '关于资产',
     'about_assets_text'            => '资产是按照序列号或者资产标签跟踪的物品。可以标记特殊物品为高价值资产。',
-	'archived'  				=> '已存档',
+    'archived'  				=> '已存档',
     'asset'  					=> '资产',
     'bulk_checkout'             => '分配资产',
     'checkin'  					=> '借入资产',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> '待处理',
     'undeployable'  			=> '不可部署',
     'view'  					=> '查看资产',
-);
+];

@@ -1,10 +1,10 @@
 <?php
+
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Setting;
 use App\Models\User;
-
+use Illuminate\Database\Seeder;
 
 class SettingsSeeder extends Seeder
 {
@@ -42,10 +42,8 @@ class SettingsSeeder extends Seeder
             $user->save();
         }
 
-
         // Copy the logos from the img/demo directory
         \Storage::disk('local_public')->put('snipe-logo.png', file_get_contents(public_path('img/demo/snipe-logo.png')));
         \Storage::disk('local_public')->put('snipe-logo-lg.png', file_get_contents(public_path('img/demo/snipe-logo-lg.png')));
-
     }
 }

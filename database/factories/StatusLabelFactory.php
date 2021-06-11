@@ -1,12 +1,11 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Statuslabel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
-
-class StatuslabelFactory extends Factory
+class StatusLabelFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -33,7 +32,6 @@ class StatuslabelFactory extends Factory
             'default_label' => 0,
             'notes' => $this->faker->sentence,
         ];
-
     }
 
     /**
@@ -143,9 +141,4 @@ class StatuslabelFactory extends Factory
             ];
         });
     }
-
-
-
 }
-
-

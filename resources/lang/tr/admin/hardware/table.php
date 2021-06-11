@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Demirbaş Etiketi',
     'asset_model'       => 'Model',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Demirbaş ',
     'image'		=> 'Cihaz resmi',
     'days_without_acceptance' => 'Kabul edilmeden geçen gün',
-    'monthly_depreciation' => 'Aylık Amortisman'
+    'monthly_depreciation' => 'Aylık Amortisman',
 
-);
+];

@@ -1,15 +1,14 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Actionlog;
-use App\Models\User;
-use App\Models\Location;
 use App\Models\Asset;
+use App\Models\Location;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
-
-class ActionlogFactory extends Factory
+class ActionLogFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -28,7 +27,6 @@ class ActionlogFactory extends Factory
         return [
             'note' => 'Sample checkout from DB seeder!',
         ];
-
     }
 
     /**
@@ -38,10 +36,9 @@ class ActionlogFactory extends Factory
      */
     public function assetCheckoutToUser()
     {
-
         $target = User::inRandomOrder()->first()->first();
         $item = Asset::inRandomOrder()->RTD()->first();
-        $user_id = rand(1,2); // keep it simple - make it one of the two superadmins
+        $user_id = rand(1, 2); // keep it simple - make it one of the two superadmins
         $item->update(
                 [
                     'assigned_to' => $target->id,
@@ -51,7 +48,7 @@ class ActionlogFactory extends Factory
 
         return $this->state(function (array $attributes) use ($user_id, $item, $target) {
             return [
-                'created_at'  => $this->faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
                 'user_id' => $user_id,
                 'action_type' => 'checkout',
                 'item_id' => $item->id,
@@ -60,7 +57,6 @@ class ActionlogFactory extends Factory
                 'target_type' => get_class($target),
             ];
         });
-
     }
 
     /**
@@ -73,7 +69,7 @@ class ActionlogFactory extends Factory
         $target = Location::inRandomOrder()->first();
         $item = Asset::inRandomOrder()->RTD()->first();
 
-        $user_id = rand(1,2); // keep it simple - make it one of the two superadmins
+        $user_id = rand(1, 2); // keep it simple - make it one of the two superadmins
         $item->update(
                 [
                     'assigned_to' => $target->id,
@@ -83,7 +79,7 @@ class ActionlogFactory extends Factory
 
         return $this->state(function (array $attributes) use ($user_id, $item, $target) {
             return [
-                'created_at'  => $this->faker->dateTimeBetween('-1 years','now', date_default_timezone_get()),
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
                 'user_id' => $user_id,
                 'action_type' => 'checkout',
                 'item_id' => $item->id,
@@ -93,7 +89,4 @@ class ActionlogFactory extends Factory
             ];
         });
     }
-
 }
-
-

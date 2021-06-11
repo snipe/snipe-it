@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class Enable2faFields extends Migration
 {
@@ -16,7 +16,7 @@ class Enable2faFields extends Migration
             $table->tinyInteger('two_factor_enabled')->nullable()->default(null);
         });
 
-        if (!Schema::hasColumn('users', 'two_factor_secret')) {
+        if (! Schema::hasColumn('users', 'two_factor_secret')) {
             Schema::table('users', function ($table) {
                 $table->string('two_factor_secret', 32)->nullable()->default(null);
             });
@@ -26,7 +26,6 @@ class Enable2faFields extends Migration
             $table->boolean('two_factor_enrolled')->default(0);
             $table->boolean('two_factor_optin')->default(0);
         });
-
     }
 
     /**

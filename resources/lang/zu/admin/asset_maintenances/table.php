@@ -4,5 +4,5 @@
         'title'         => 'Ukugcinwa Kwempahla',
         'asset_name'    => 'Igama lefa',
         'is_warranty'   => 'Iwaranti',
-        'dl_csv'        => 'Landa i-CSV'
+        'dl_csv'        => 'Landa i-CSV',
     ];

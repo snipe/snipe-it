@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'ترميز الأصل',
     'asset_model'       => 'الموديل',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'أصل ',
     'image'		=> 'صورة الجهاز',
     'days_without_acceptance' => 'أيام بدون قبول',
-    'monthly_depreciation' => 'الإهلاك الشهري'
+    'monthly_depreciation' => 'الإهلاك الشهري',
 
-);
+];

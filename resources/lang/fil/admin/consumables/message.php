@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Ang consumable ay hindi umiiral.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Ang consumable ay hindi naisagawa, mangyaring subukang muli.',
-        'success' => 'Ang consumable ay matagumpay na nai-likha.'
-    ),
+        'success' => 'Ang consumable ay matagumpay na nai-likha.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Ang consumable ay hindi nai-update, manyaring subukang muli',
-        'success' => 'Ang consumable ay matagumpay na nai-update.'
-    ),
+        'success' => 'Ang consumable ay matagumpay na nai-update.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Sigurado kaba na i-delete mo ang consumable na ito?',
         'error'   => 'Mayroong isyu sa pag-delete ng consumable. Mangayaring subukang muli.',
-        'success' => 'Ang consumable na ito ay matagumpay na nai-delete.'
-    ),
+        'success' => 'Ang consumable na ito ay matagumpay na nai-delete.',
+    ],
 
-     'checkout' => array(
+     'checkout' => [
         'error'   		=> 'Ang consumable ay hindi nai-check out, mangyaring subukang muli',
         'success' 		=> 'Ang consumable ay matagumpay na nai-check out.',
-        'user_does_not_exist' => 'Ang user na iyon ay hindi balido. Mangyaring subukang muli.'
-    ),
+        'user_does_not_exist' => 'Ang user na iyon ay hindi balido. Mangyaring subukang muli.',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   		=> 'Ang consumable ay hindi nai-check in, mangyaring subukang muli',
         'success' 		=> 'Ang consumable ay matagumpay na nai-check in.',
-        'user_does_not_exist' => 'Ang user na iyon ay hindi balido. Mangyaring subukang muli.'
-    )
+        'user_does_not_exist' => 'Ang user na iyon ay hindi balido. Mangyaring subukang muli.',
+    ],
 
-
-);
+];

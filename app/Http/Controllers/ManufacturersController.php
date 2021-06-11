@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
@@ -29,9 +30,9 @@ class ManufacturersController extends Controller
     public function index()
     {
         $this->authorize('index', Manufacturer::class);
+
         return view('manufacturers/index');
     }
-
 
     /**
      * Returns a view that displays a form to create a new manufacturer.
@@ -45,9 +46,9 @@ class ManufacturersController extends Controller
     public function create()
     {
         $this->authorize('create', Manufacturer::class);
+
         return view('manufacturers/edit')->with('item', new Manufacturer);
     }
-
 
     /**
      * Validates and stores the data for a new manufacturer.
@@ -61,22 +62,20 @@ class ManufacturersController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
-
         $this->authorize('create', Manufacturer::class);
         $manufacturer = new Manufacturer;
-        $manufacturer->name             = $request->input('name');
-        $manufacturer->user_id          = Auth::id();
-        $manufacturer->url              = $request->input('url');
-        $manufacturer->support_url      = $request->input('support_url');
-        $manufacturer->support_phone    = $request->input('support_phone');
-        $manufacturer->support_email    = $request->input('support_email');
+        $manufacturer->name = $request->input('name');
+        $manufacturer->user_id = Auth::id();
+        $manufacturer->url = $request->input('url');
+        $manufacturer->support_url = $request->input('support_url');
+        $manufacturer->support_phone = $request->input('support_phone');
+        $manufacturer->support_email = $request->input('support_email');
         $manufacturer = $request->handleImages($manufacturer);
-
-
 
         if ($manufacturer->save()) {
             return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.create.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
     }
 
@@ -96,14 +95,13 @@ class ManufacturersController extends Controller
         $this->authorize('update', Manufacturer::class);
 
         // Check if the manufacturer exists
-        if (!$item = Manufacturer::find($manufacturerId)) {
+        if (! $item = Manufacturer::find($manufacturerId)) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
 
         // Show the page
         return view('manufacturers/edit', compact('item'));
     }
-
 
     /**
      * Validates and stores the updated manufacturer data.
@@ -126,11 +124,11 @@ class ManufacturersController extends Controller
         }
 
         // Save the  data
-        $manufacturer->name             = $request->input('name');
-        $manufacturer->url              = $request->input('url');
-        $manufacturer->support_url      = $request->input('support_url');
-        $manufacturer->support_phone    = $request->input('support_phone');
-        $manufacturer->support_email    = $request->input('support_email');
+        $manufacturer->name = $request->input('name');
+        $manufacturer->url = $request->input('url');
+        $manufacturer->support_url = $request->input('support_url');
+        $manufacturer->support_phone = $request->input('support_phone');
+        $manufacturer->support_email = $request->input('support_email');
 
         // Set the model's image property to null if the image is being deleted
         if ($request->input('image_delete') == 1) {
@@ -139,10 +137,10 @@ class ManufacturersController extends Controller
 
         $manufacturer = $request->handleImages($manufacturer);
 
-
         if ($manufacturer->save()) {
             return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.update.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
     }
 
@@ -162,12 +160,12 @@ class ManufacturersController extends Controller
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.not_found'));
         }
 
-        if (!$manufacturer->isDeletable()) {
+        if (! $manufacturer->isDeletable()) {
             return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.assoc_users'));
         }
 
         if ($manufacturer->image) {
-            try  {
+            try {
                 Storage::disk('public')->delete('manufacturers/'.$manufacturer->image);
             } catch (\Exception $e) {
                 \Log::info($e);
@@ -175,7 +173,7 @@ class ManufacturersController extends Controller
         }
 
         // Soft delete the manufacturer if active, permanent delete if is already deleted
-        if($manufacturer->deleted_at === NULL) {
+        if ($manufacturer->deleted_at === null) {
             $manufacturer->delete();
         } else {
             $manufacturer->forceDelete();
@@ -221,7 +219,7 @@ class ManufacturersController extends Controller
     public function restore($manufacturers_id)
     {
         $this->authorize('create', Manufacturer::class);
-        $manufacturer = Manufacturer::onlyTrashed()->where('id',$manufacturers_id)->first();
+        $manufacturer = Manufacturer::onlyTrashed()->where('id', $manufacturers_id)->first();
 
         if ($manufacturer) {
 
@@ -230,9 +228,10 @@ class ManufacturersController extends Controller
             if ($manufacturer->restore()) {
                 return redirect()->route('manufacturers.index')->with('success', trans('admin/manufacturers/message.restore.success'));
             }
+
             return redirect()->back()->with('error', 'Could not restore.');
         }
-        return redirect()->back()->with('error', trans('admin/manufacturers/message.does_not_exist'));
 
+        return redirect()->back()->with('error', trans('admin/manufacturers/message.does_not_exist'));
     }
 }

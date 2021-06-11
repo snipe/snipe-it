@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Mō Ngā Rōpū',
     'about_groups'                  => 'Ka whakamahia nga röpü ki te whakawhäiti i nga whakaaetanga kaiwhakamahi.',
     'group_management' 	 	=> 'Whakahaere Rōpū',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Tukua',
     'deny' 	 				=> 'Whakaae',
 
-);
+];

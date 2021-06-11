@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Artigo',
     'checkin'           => 'Devolver',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licenciado ao E-mail',
     'to_name'           => 'Licenciado ao Nome',
     'update'            => 'Atualizar Licença',
-    'checkout_help'     => 'Deve registar uma licença para uma pessoa ou hardware. Podem selecionar ambos, mas o proprietário do artigo deve coincidir com a pessoa a quem está a alocar o artigo.'
-);
+    'checkout_help'     => 'Deve registar uma licença para uma pessoa ou hardware. Podem selecionar ambos, mas o proprietário do artigo deve coincidir com a pessoa a quem está a alocar o artigo.',
+];

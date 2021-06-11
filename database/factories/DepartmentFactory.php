@@ -1,10 +1,9 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Department;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-
 
 class DepartmentFactory extends Factory
 {
@@ -26,7 +25,6 @@ class DepartmentFactory extends Factory
             'user_id' => 1,
             'location_id' => rand(1, 5),
         ];
-
     }
 
     /**
@@ -112,8 +110,4 @@ class DepartmentFactory extends Factory
             ];
         });
     }
-
-
 }
-
-

@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Factories;
 
 $factory->define(App\Models\CustomField::class, function (Faker\Generator $faker) {
@@ -38,11 +39,9 @@ $factory->state(App\Models\CustomField::class, 'cpu', function ($faker) {
     ];
 });
 
-
 $factory->state(App\Models\CustomField::class, 'mac-address', function ($faker) {
     return [
         'name' => 'MAC Address',
         'format' => 'regex:/^([0-9a-fA-F]{2}[:-]){5}[0-9a-fA-F]{2}$/',
     ];
 });
-

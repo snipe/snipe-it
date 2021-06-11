@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Modelis',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Aktīvs',
     'image'		=> 'Ierīces attēls',
     'days_without_acceptance' => 'Dienas bez pieņemšanas',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

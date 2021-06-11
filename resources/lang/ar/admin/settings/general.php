@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'الدليل النشط',
     'ad_domain'				    => 'مجال الدليل النشط',
     'ad_domain_help'			=> 'هذا هو أحيانا نفس نطاق البريد الإلكتروني الخاص بك، ولكن ليس دائما.',
     'ad_append_domain_label'    => 'إلحاق اسم domain',
     'ad_append_domain'          => 'إلحاق اسم domain إلى حقل اسم المستخدم',
-    'ad_append_domain_help'     => 'المستخدم غير مطلوب لكتابة "username@domain.local" ، فإنها يمكن أن تكتب فقط "اسم المستخدم".' ,
+    'ad_append_domain_help'     => 'المستخدم غير مطلوب لكتابة "username@domain.local" ، فإنها يمكن أن تكتب فقط "اسم المستخدم".',
     'admin_cc_email'            => 'نسخة اضافية للبريد الإكتروني',
     'admin_cc_email_help'       => 'إذا كنت ترغب في إرسال نسخة من رسائل البريد الإلكتروني لتسجيل الدخول / الخروج التي يتم إرسالها إلى المستخدمين إلى حساب بريد إلكتروني إضافي، فقم بإدخالها هنا. خلاف ذلك، اترك هذه الخانة فارغة.',
     'is_ad'				        => 'هذا هو ملقم أكتيف ديركتوري',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'انتهاء فترة التنبيهات (بالأيام)',
     'alert_inv_threshold'		=> 'عتبة تنبيه المخزون',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ارقام تعريف الاصول',
     'audit_interval'            => 'مدة التدقيق',
     'audit_interval_help'       => 'إذا كان مطلوبا منك مراجعة أصولك الفعلية بشكل دوري، قم بإدخال المدة بالأشهر.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'أدخل رمز عاملين',
     'two_factor_config_complete'	=> 'إرسال الرمز',
     'two_factor_enabled_edit_not_allowed' => 'لا يسمح لك المشرف بتعديل هذا الإعداد.',
-    'two_factor_enrollment_text'	=> "التوثيق ذو العاملين 2FA اجباري، ولكن لم يتم تسجيل جهازك بعد. افتح تطبيق غوغل للتوثيق Google Authenticator وافحص رمز الاستجابة السريعة QR أدناه لتسجيل جهازك. بعد تسجيل جهازك، أدخل الرمز أدناه",
+    'two_factor_enrollment_text'	=> 'التوثيق ذو العاملين 2FA اجباري، ولكن لم يتم تسجيل جهازك بعد. افتح تطبيق غوغل للتوثيق Google Authenticator وافحص رمز الاستجابة السريعة QR أدناه لتسجيل جهازك. بعد تسجيل جهازك، أدخل الرمز أدناه',
     'require_accept_signature'      => 'يتطلب التوقيع',
     'require_accept_signature_help_text'      => 'سيتطلب تمكين هذه الميزة من المستخدمين تسجيل الدخول فعليا عند قبول مادة العرض.',
     'left'        => 'اليسار',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'تحديد المربع سيؤدي الى فرض سياسة التفرد على الرقم التسلسلي للمتلكات',
     'zerofill_count'        => 'طول ترميز الأصل، بما في ذلك تعبئة الاصفار',
     'username_format_help'   => 'سيتم استخدام هذا الإعداد فقط من قبل عملية الاستيراد إذا لم يتم توفير اسم المستخدم ويتعين علينا إنشاء اسم مستخدم لك.',
-);
+];

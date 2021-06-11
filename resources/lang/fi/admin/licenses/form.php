@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Laite',
     'checkin'           => 'Palauta',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Lisenssille määritetty sähköpostiosoite',
     'to_name'           => 'Lisenssille määritetty nimi',
     'update'            => 'Päivitä lisenssi',
-    'checkout_help'     => 'Lisenssi tulee luovuttaa laitteelle tai henkilölle. Voit valita molemmat, mutta laitteen omistajan tulee täsmätä lisenssin omistajaan.'
-);
+    'checkout_help'     => 'Lisenssi tulee luovuttaa laitteelle tai henkilölle. Voit valita molemmat, mutta laitteen omistajan tulee täsmätä lisenssin omistajaan.',
+];

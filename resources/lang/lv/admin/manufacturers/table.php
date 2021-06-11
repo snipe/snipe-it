@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_manufacturers_title'    => 'Par ražotājiem',
     'about_manufacturers_text'  => 'Ražotāji ir uzņēmumi, kas veido jūsu aktīvus. Šeit varat saglabāt svarīgu atbalsta kontaktinformāciju par tiem, kas tiks parādīti jūsu detalizētās informācijas lapās.',
     'asset_manufacturers'	=> 'Aktīvu ražotāji',
@@ -13,4 +13,4 @@ return array(
     'update'				=> 'Atjaunināt ražotāju',
     'url'   				=> 'URL',
 
-);
+];

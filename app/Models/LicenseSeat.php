@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\Traits\Acceptable;
@@ -21,13 +22,13 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
     protected $table = 'license_seats';
 
     /**
-    * The attributes that are mass assignable.
-    *
-    * @var array
-    */
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'assigned_to',
-        'asset_id'
+        'asset_id',
     ];
 
     use Acceptable;
@@ -42,17 +43,18 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v4.0]
-     * @return boolean
+     * @return bool
      */
     public function requireAcceptance()
     {
         return $this->license->category->require_acceptance;
     }
 
-    public function getEula() {
+    public function getEula()
+    {
         return $this->license->getEula();
     }
-    
+
     /**
      * Establishes the seat -> license relationship
      *
@@ -101,13 +103,11 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
     {
         if (($this->user) && ($this->user->location)) {
             return $this->user->location;
-
         } elseif (($this->asset) && ($this->asset->location)) {
             return $this->asset->location;
         }
 
         return false;
-
     }
 
     /**
@@ -120,12 +120,8 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
      */
     public function scopeOrderDepartments($query, $order)
     {
-        return $query->leftJoin('users as license_seat_users',  'license_seats.assigned_to', '=', 'license_seat_users.id')
-            ->leftJoin('departments as license_user_dept',  'license_user_dept.id', '=', 'license_seat_users.department_id')
+        return $query->leftJoin('users as license_seat_users', 'license_seats.assigned_to', '=', 'license_seat_users.id')
+            ->leftJoin('departments as license_user_dept', 'license_user_dept.id', '=', 'license_seat_users.department_id')
             ->orderBy('license_user_dept.name', $order);
     }
-
-
-
-
 }

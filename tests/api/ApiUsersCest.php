@@ -43,7 +43,7 @@ class ApiUsersCest
         $I->wantTo('Create a new user');
 
         $temp_user = factory(\App\Models\User::class)->make([
-            'name' => "Test User Name",
+            'name' => 'Test User Name',
         ]);
         factory(Group::class, 2)->create();
         $groups = Group::pluck('id');
@@ -70,7 +70,7 @@ class ApiUsersCest
             'state' => $temp_user->state,
             'username' => $temp_user->username,
             'zip' => $temp_user->zip,
-            'groups' => $groups
+            'groups' => $groups,
         ];
 
         // create
@@ -83,6 +83,7 @@ class ApiUsersCest
 
     // Put is routed to the same method in the controller
     // DO we actually need to test both?
+
     /** @test */
     public function updateUserWithPatch(ApiTester $I, $scenario)
     {
@@ -92,13 +93,13 @@ class ApiUsersCest
         $user = factory(\App\Models\User::class)->create([
             'first_name' => 'Original User Name',
             'company_id' => 2,
-            'location_id' => 3
+            'location_id' => 3,
         ]);
         $I->assertInstanceOf(\App\Models\User::class, $user);
 
         $temp_user = factory(\App\Models\User::class)->make([
             'company_id' => 3,
-            'first_name' => "updated user name",
+            'first_name' => 'updated user name',
             'location_id' => 1,
         ]);
 
@@ -132,7 +133,7 @@ class ApiUsersCest
         $I->assertNotEquals($user->first_name, $data['first_name']);
 
         // update
-        $I->sendPATCH('/users/' . $user->id, $data);
+        $I->sendPATCH('/users/'.$user->id, $data);
         $I->seeResponseIsJson();
 
         $I->seeResponseCodeIs(200);
@@ -150,7 +151,7 @@ class ApiUsersCest
         $temp_user->updated_at = Carbon::parse($response->payload->updated_at->datetime);
         $temp_user->id = $user->id;
         // verify
-        $I->sendGET('/users/' . $user->id);
+        $I->sendGET('/users/'.$user->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson((new UsersTransformer)->transformUser($temp_user));
@@ -163,12 +164,12 @@ class ApiUsersCest
 
         // create
         $user = factory(\App\Models\User::class)->create([
-            'first_name' => "Soon to be deleted"
+            'first_name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\User::class, $user);
 
         // delete
-        $I->sendDELETE('/users/' . $user->id);
+        $I->sendDELETE('/users/'.$user->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -178,15 +179,16 @@ class ApiUsersCest
         $I->assertEquals(trans('admin/users/message.success.delete'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/users/' . $user->id);
+        $I->sendGET('/users/'.$user->id);
 
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }
 
     /** @test */
-    public function fetchUserAssetsTest(ApiTester $I, $scenario) {
-        $I->wantTo("Fetch assets for a user");
+    public function fetchUserAssetsTest(ApiTester $I, $scenario)
+    {
+        $I->wantTo('Fetch assets for a user');
 
         $user = User::has('assets')->first();
         $asset = $user->assets->shuffle()->first();

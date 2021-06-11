@@ -1,8 +1,9 @@
 <?php
+
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Depreciation;
+use Illuminate\Database\Seeder;
 
 class DepreciationSeeder extends Seeder
 {
@@ -12,6 +13,5 @@ class DepreciationSeeder extends Seeder
         Depreciation::factory()->count(1)->depreciateComputer()->create();
         Depreciation::factory()->count(1)->depreciateDisplay()->create();
         Depreciation::factory()->count(1)->depreciateMobile()->create();
-
     }
 }

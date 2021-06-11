@@ -1,10 +1,9 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Depreciation;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-
 
 class DepreciationFactory extends Factory
 {
@@ -25,7 +24,6 @@ class DepreciationFactory extends Factory
         return [
             'user_id' => 1,
         ];
-
     }
 
     /**
@@ -72,10 +70,4 @@ class DepreciationFactory extends Factory
             ];
         });
     }
-
-
-
-
 }
-
-

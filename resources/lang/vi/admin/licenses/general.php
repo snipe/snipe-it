@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_licenses_title'            => 'Về giấy phép',
     'about_licenses'                  => 'Giấy phép được sử dụng để theo dõi phần mềm. Họ có một số lượng ghế xác định mà có thể được kiểm tra ra cho cá nhân',
     'checkin'  					=> 'Checkin bản quyền đặt vào',
@@ -18,4 +18,4 @@ return array(
     'software_licenses'  		=> 'Bản quyền phần mềm',
     'user'  					=> 'Người dùng',
     'view'  					=> 'Xem bản quyền',
-);
+];

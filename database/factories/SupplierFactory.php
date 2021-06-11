@@ -1,9 +1,9 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
 
 class SupplierFactory extends Factory
 {
@@ -34,10 +34,5 @@ class SupplierFactory extends Factory
             'phone' => $this->faker->tollFreePhoneNumber(),
             'fax' => $this->faker->phoneNumber(),
         ];
-
     }
-
-
 }
-
-

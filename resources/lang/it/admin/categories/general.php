@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'Categorie dei Beni',
     'category_name'  					=> 'Nome categoria',
     'checkin_email'                     => 'Invia email all\'utente al ritiro / consegna.',
@@ -20,4 +20,4 @@ return array(
 Usa <a href="#" data-toggle="modal" data-target="#eulaModal">L\'EULA predefinita</a> invece.',
     'use_default_eula_disabled'			=> '<del>Usa L\'EULA predefinita.</del> Nessuna EULA predefinita è in uso. Per favore aggiungine una nei Settaggi.',
 
-);
+];

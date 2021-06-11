@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Giới thiệu về Tài sản',
     'about_assets_text'            => 'Tài sản là các mục được theo dõi bằng số sê-ri hoặc thẻ nội dung. Chúng thường có giá trị cao hơn khi xác định một mục cụ thể.',
-	'archived'  				=> 'Đã lưu trữ',
+    'archived'  				=> 'Đã lưu trữ',
     'asset'  					=> 'Tài sản',
     'bulk_checkout'             => 'Checkout Tài sản',
     'checkin'  					=> 'Checkin tài sản',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Đang chờ',
     'undeployable'  			=> 'Không cho phép cấp phát',
     'view'  					=> 'Xem tài sản',
-);
+];

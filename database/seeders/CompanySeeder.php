@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use App\Models\Company;
@@ -15,6 +16,5 @@ class CompanySeeder extends Seeder
     {
         Company::truncate();
         Company::factory()->count(4)->create();
-
     }
 }

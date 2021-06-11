@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory Domäne',
     'ad_domain_help'			=> 'Meistens dieselbe wie die E-Mail Domäne.',
     'ad_append_domain_label'    => 'Domänenname anhängen',
     'ad_append_domain'          => 'Domänenname an das Feld Benutzername anhängen',
-    'ad_append_domain_help'     => 'Benutzer muss nicht "username@domain.local" eingeben, "username" ist ausreichend.' ,
+    'ad_append_domain_help'     => 'Benutzer muss nicht "username@domain.local" eingeben, "username" ist ausreichend.',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'Wenn Sie eine Kopie der Rücknahme- / Herausgabe-E-Mails, die an Benutzer gehen auch an zusätzliche E-Mail-Empfänger versenden möchten, geben Sie sie hier ein. Ansonsten lassen Sie dieses Feld leer.',
     'is_ad'				        => 'Dies ist ein Active Directory Server',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Ablauf Alarmschwelle (in Tagen)',
     'alert_inv_threshold'		=> 'Inventar Alarmschwelle',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Asset IDs',
     'audit_interval'            => 'Auditintervall',
     'audit_interval_help'       => 'Wenn Sie Ihre Assets regelmäßig physisch überprüfen müssen, geben Sie das Intervall in Monaten ein.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Zwei-Faktor Code eingeben',
     'two_factor_config_complete'	=> 'Code absenden',
     'two_factor_enabled_edit_not_allowed' => 'Der Administrator erlaubt nicht, diese Einstellung zu ändern.',
-    'two_factor_enrollment_text'	=> "Zwei-Faktor-Authentifizierung ist erforderlich, Ihr Gerät wurde jedoch noch nicht hinzugefügt. Öffnen Sie die Google Authenticator App und scannen Sie den QR-Code unterhalb um Ihr Gerät hinzuzufügen. Geben Sie anschließend den Code ein",
+    'two_factor_enrollment_text'	=> 'Zwei-Faktor-Authentifizierung ist erforderlich, Ihr Gerät wurde jedoch noch nicht hinzugefügt. Öffnen Sie die Google Authenticator App und scannen Sie den QR-Code unterhalb um Ihr Gerät hinzuzufügen. Geben Sie anschließend den Code ein',
     'require_accept_signature'      => 'Signatur erforderlich',
     'require_accept_signature_help_text'      => 'Wenn aktiviert, wird eine physische Unterschrift durch den Benutzer notwendig, der das Asset erhält.',
     'left'        => 'links',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Wenn dieses Kontrollkästchen aktiviert wird, müssen Seriennummern von Assets eindeutig sein',
     'zerofill_count'        => 'Länge der Asset Tags, inklusive zerofill',
     'username_format_help'   => 'Diese Einstellung wird nur beim Import benutzt, wenn kein Benutzername angegeben wurde und ein Benutzername generiert werden muss.',
-);
+];

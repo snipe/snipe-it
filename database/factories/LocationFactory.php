@@ -1,10 +1,9 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-
 
 class LocationFactory extends Factory
 {
@@ -27,10 +26,7 @@ class LocationFactory extends Factory
             'city' => $this->faker->city(),
             'state' => $this->faker->stateAbbr(),
             'zip' => $this->faker->postcode(),
-            'image' => $this->faker->randomDigit([1,9]).'.jpg'
+            'image' => $this->faker->randomDigit([1, 9]).'.jpg',
         ];
-
     }
-
 }
-

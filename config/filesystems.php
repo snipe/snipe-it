@@ -64,7 +64,7 @@ $config = [
             'bucket' => env('PUBLIC_AWS_BUCKET'),
             'url' => env('PUBLIC_AWS_URL'),
             'root'   => env('PUBLIC_AWS_BUCKET_ROOT'),
-            'visibility' => 'public'
+            'visibility' => 'public',
         ],
 
         's3_private' => [
@@ -79,7 +79,7 @@ $config = [
             'bucket' => env('PRIVATE_AWS_BUCKET'),
             'url' => env('PRIVATE_AWS_URL'),
             'root'   => env('PRIVATE_AWS_BUCKET_ROOT'),
-            'visibility' => 'private'
+            'visibility' => 'private',
         ],
 
         'rackspace' => [
@@ -103,6 +103,6 @@ $config = [
 
 // copy the selected PUBLIC_FILESYSTEM_DISK's configuration to the 'public' key for easy use
 // (by default, the PUBLIC_FILESYSTEM DISK is 'local_public', in the public/uploads directory)
-$config['disks']['public'] = $config['disks'][env('PUBLIC_FILESYSTEM_DISK','local_public')];
+$config['disks']['public'] = $config['disks'][env('PUBLIC_FILESYSTEM_DISK', 'local_public')];
 
 return $config;

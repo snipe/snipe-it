@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_models_title'     => 'Om modeller',
     'about_models_text'           => 'Modeller är ett sätt att gruppera identiska tillgångar. "Galaxy S20", "iPhone 12", etc.',
     'deleted'  					        => 'Den här modellen har tagits bort. <a href="/hardware/models/:model_id/restore">Klicka här för att återskapa</a>.',
@@ -9,10 +9,10 @@ return array(
     'bulk_delete_warn'          => 'Du håller på att ta bort: model_count modeller.',
     'restore'                   => 'Återskapa Modell',
     'requestable'               => 'Användare kan begära denna modell',
-	'show_mac_address'			      => 'Visa fältet MAC-adress för tillgångar av denna modell',
+    'show_mac_address'			      => 'Visa fältet MAC-adress för tillgångar av denna modell',
     'view_deleted'              => 'Visa Borttagna',
     'view_models'               => 'Visa modeller',
     'fieldset'                  => 'Fältsamling',
     'no_custom_field'           => 'Inga anpassade fält',
     'add_default_values'        => 'Lägg till standardvärden',
-);
+];

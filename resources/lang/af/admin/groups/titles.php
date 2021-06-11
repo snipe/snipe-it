@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Oor groepe',
     'about_groups'                  => 'Groepe word gebruik om gebruikersregte te veralgemeen.',
     'group_management' 	 	=> 'Groepbestuur',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'laat',
     'deny' 	 				=> 'ontken',
 
-);
+];

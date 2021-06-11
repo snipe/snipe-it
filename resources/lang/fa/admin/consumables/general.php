@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'پرداخت هزینه قابل مصرف به کاربر',
     'consumable_name'                   => 'نام های مصرفی',
     'create'                            => 'ایجاد مواد مصرفی',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'یاقیمانده',
     'total' 			                => 'مجموع',
     'update'                            => 'به روز رسانی لوازم مصرفي',
-);
+];

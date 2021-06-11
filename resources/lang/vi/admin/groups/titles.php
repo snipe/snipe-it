@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Giới Nhóm',
     'about_groups'                  => 'Các nhóm được sử dụng để khái quát hóa quyền người dùng.',
     'group_management' 	 	=> 'Quản lý nhóm',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Cho phép',
     'deny' 	 				=> 'Từ chối',
 
-);
+];

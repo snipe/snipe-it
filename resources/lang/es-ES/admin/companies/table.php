@@ -1,9 +1,10 @@
 <?php
-return array(
+
+return [
     'companies' => 'Compañías',
     'create'    => 'Crear Compañía',
     'title'     => 'Compañía',
     'update'    => 'Actualizar Compañía',
     'name'      => 'Nombre de Compañía',
     'id'        => 'ID',
-);
+];

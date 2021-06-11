@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Apie grupes',
     'about_groups'                  => 'Grupės naudojamos apibendrinti naudotojo leidimus.',
     'group_management' 	 	=> 'Grupės valdymas',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Leisti',
     'deny' 	 				=> 'Neleisti',
 
-);
+];

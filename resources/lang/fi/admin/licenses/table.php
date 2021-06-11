@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'Luovutettu',
     'checkout'   		=> 'Toiminto',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'Sarjanumero',
     'title'      		=> 'Lisenssi',
 
-);
+];

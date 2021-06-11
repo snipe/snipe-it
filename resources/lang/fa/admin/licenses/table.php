@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'اختصاص داده شده به',
     'checkout'   		=> '/ خارج',
@@ -15,4 +15,4 @@ return array(
     'serial'   			=> 'سریال',
     'title'      		=> 'توافق‌نامه',
 
-);
+];

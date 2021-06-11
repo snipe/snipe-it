@@ -1,22 +1,22 @@
 <?php
 
-return array(
+return [
 
     'group_exists'        => 'Kumpulan sudah wujud!',
     'group_not_found'     => 'Kumpulan [:id] tidah wujud.',
     'group_name_required' => 'Ruangan nama adalah perlu',
 
-    'success' => array(
+    'success' => [
         'create' => 'Kumpulan berjaya dicipta.',
         'update' => 'Kumpulan berjaya dikemaskini.',
         'delete' => 'Kumpulan berjaya dihapuskan.',
-    ),
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Adakah anda pasti untuk haspuskan kumpulan ini?',
         'create' => 'Ada isu semasa mencipta kumpulan. Sila cuba semula.',
         'update' => 'Ada isu semasa mengemaskini kumpulan, Sila cuba semula.',
         'delete' => 'Ada isu semasa menghapuskan kumpulan ini, Sila cuba semula.',
-    ),
+    ],
 
-);
+];

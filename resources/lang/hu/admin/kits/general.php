@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'Az előredefiniált csomagokról',
     'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
     'checkout'                          => 'Checkout Kit ',
@@ -14,4 +14,4 @@ return array(
     'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
     'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
 
-);
+];

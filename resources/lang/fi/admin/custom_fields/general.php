@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Mukautetut kentät',
     'field'		                => 'Kenttä',
     'about_fieldsets_title'		=> 'Tietoja kenttäsarjoista',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Uusi mukautettu kenttä',
     'value_encrypted'      	        => 'Kentän arvo salataan tietokannassa. Vain järjestelmänvalvojat voivat tarkastella purettua arvoa',
     'show_in_email'     => 'Käytetäänkö kentän arvoa käyttäjälle lähetettävissä luovutus-sähköposteissa? Salattuja kenttiä ei voi lisätä sähköposteihin.',
-);
+];

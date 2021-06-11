@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Component;
@@ -11,8 +12,8 @@ use Illuminate\Support\Facades\Hash;
 class ComponentTest extends BaseTest
 {
     /**
-    * @var \UnitTester
-    */
+     * @var \UnitTester
+     */
     protected $tester;
 
     public function testFailsEmptyValidation()
@@ -23,7 +24,7 @@ class ComponentTest extends BaseTest
         $fields = [
             'name' => 'name',
             'qty' => 'qty',
-            'category_id' => 'category id'
+            'category_id' => 'category id',
         ];
         $errors = $a->getErrors();
         foreach ($fields as $field => $fieldTitle) {
@@ -39,12 +40,12 @@ class ComponentTest extends BaseTest
         $a = factory(Component::class)->make([
             'name' => 'a',
             'qty' => 0,
-            'min_amt' => -1
+            'min_amt' => -1,
         ]);
         $fields = [
             'name' => 'name',
             'qty' => 'qty',
-            'min_amt' => 'min amt'
+            'min_amt' => 'min amt',
         ];
         $this->assertFalse($a->isValid());
         $errors = $a->getErrors();
@@ -55,7 +56,7 @@ class ComponentTest extends BaseTest
 
     public function testCategoryIdMustExist()
     {
-        $category = $this->createValidCategory('component-hdd-category', 
+        $category = $this->createValidCategory('component-hdd-category',
             ['category_type' => 'component']);
         $component = factory(Component::class)
             ->states('ssd-crucial240')
@@ -69,7 +70,7 @@ class ComponentTest extends BaseTest
         $component->save();
 
         $this->assertFalse($component->isValid());
-        $this->assertStringContainsString("The selected category id is invalid.", $component->getErrors()->get('category_id')[0]);
+        $this->assertStringContainsString('The selected category id is invalid.', $component->getErrors()->get('category_id')[0]);
     }
 
     public function testAnComponentBelongsToACompany()
@@ -92,7 +93,7 @@ class ComponentTest extends BaseTest
             ->create([
                 'category_id' => factory(Category::class)
                                     ->states('component-hdd-category')
-                                    ->create(['category_type' => 'component'])->id
+                                    ->create(['category_type' => 'component'])->id,
             ]);
         $this->assertInstanceOf(Category::class, $component->category);
         $this->assertEquals('component', $component->category->category_type);

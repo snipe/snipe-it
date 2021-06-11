@@ -1,57 +1,52 @@
 <?php
 
-return array(
+return [
 
-    'field' => array(
+    'field' => [
         'invalid'   => 'Ang field ay hindi umiiral.',
         'already_added'   => 'Ang field ay naidagdag na',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Ang field ay hindi naisagawa, mangyaring subukang muli.',
             'success' => 'Ang field ay matagumpay na naisagawa.',
-            'assoc_success' => 'Ang field ay matagumpay na naidagdag sa fieldset.'
-        ),
+            'assoc_success' => 'Ang field ay matagumpay na naidagdag sa fieldset.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Ang field ay hindi nai-update, mangyaring subukang muli',
-            'success' => 'Ang field ay matagumpay na nai-update.'
-        ),
+            'success' => 'Ang field ay matagumpay na nai-update.',
+        ],
 
-        'delete' => array(
+        'delete' => [
             'confirm'   	=> 'Sigurado kaba na gusto mong i-delete ang field na ito?',
             'error'   => 'Mayroong isyu sa pag-delete ng field. Mangyaring subukang muli.',
             'success' => 'Matagumpay na nai-delete ang field.',
             'in_use'   => 'Ang field ay kasalukuyang ginagamit.',
-        )
+        ],
 
-    ),
+    ],
 
-    'fieldset' => array(
+    'fieldset' => [
 
         'does_not_exist' => 'Ang fieldset ay hindi umiiral',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Ang fieldset ay hindi naisagawa, mangyaring subukang muli.',
-            'success' => 'Ang fieldset ay matagumpay na naisagawa.'
-        ),
+            'success' => 'Ang fieldset ay matagumpay na naisagawa.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Ang fieldset ay hindi nai-update, mangyaring subukang muli',
-            'success' => 'Ang fieldset ay matagumpay na nai-update.'
-        ),
+            'success' => 'Ang fieldset ay matagumpay na nai-update.',
+        ],
 
-        'delete' => array(
+        'delete' => [
             'confirm'   	=> 'Sigurado kaba na gusto mong i-delete ang fieldset na ito?',
             'error'   => 'Mayroong isyu sa pag-delete ng fieldset. Mangyaring subukang muli.',
             'success' => 'Matagumpay na nai-delete ang fieldset.',
             'in_use'   => 'Ang fieldset ay kasalukuyang ginagamit.',
-        )
+        ],
 
-    ),
+    ],
 
-
-
-
-
-
-);
+];

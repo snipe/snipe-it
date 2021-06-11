@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'هذا المستخدم تسجيل الدخول',
     'activated_disabled_help_text' => 'لا يمكنك تعديل حالة التنشيط لحسابك الخاص.',
     'assets_user'       => 'الأصول التي تم اخراجها إلى :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'تعديل المستخدم',
     'filetype_info'     => 'انواع صيغ الملفات المسوح بها هي png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'الأرشيف الخاص بـ :name',
-	'info'				=> 'معلومات',
+    'info'				=> 'معلومات',
     'restore_user'		=> 'انقر هنا لاستعادتها.',
     'last_login'        => 'آخر دخول للمستخدم',
     'ldap_config_text'  => 'يمكن العثور على إعدادات تهيئة لداب المشرف> الإعدادات. سيتم تعيين الموقع (اختياري) المحدد لجميع المستخدمين الذين تم استيرادهم.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'تسمح إعدادات المشرف الحالية بإنفاذ انتقائي للمصادقة الثنائية.',
     'two_factor_enrolled' => '2FA الجهاز المسجلين',
     'two_factor_active'   => '2FA نشط',
-    );
+    ];

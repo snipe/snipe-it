@@ -43,7 +43,6 @@ $config = [
             'level' => env('APP_LOG_LEVEL', 'error'),
         ],
 
-
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
@@ -57,7 +56,6 @@ $config = [
             'access_token' => env('ROLLBAR_TOKEN'),
             'level' => env('APP_LOG_LEVEL', 'debug'),
         ],
-
 
         'slack' => [
             'driver' => 'slack',
@@ -78,7 +76,7 @@ $config = [
         'stdout' => [
             'driver' => 'monolog',
             'handler' => StreamHandler::class,
-            'with' => [ 'stream' => 'php://stdout', ],
+            'with' => ['stream' => 'php://stdout'],
         ],
 
         'syslog' => [
@@ -94,9 +92,8 @@ $config = [
 
 ];
 
-if ((env('APP_ENV')=='production')  && env('ROLLBAR_TOKEN')) {
+if ((env('APP_ENV') == 'production') && env('ROLLBAR_TOKEN')) {
     array_push($config['channels']['stack']['channels'], 'rollbar');
 }
-
 
 return $config;

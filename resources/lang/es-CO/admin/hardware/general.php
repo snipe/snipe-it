@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Acerca de los Equipos',
     'about_assets_text'            => 'Los activos son elementos con número de serie o etiqueta de activos. Tienden a ser artículos de alto valor donde es importante identificar un elemento específico.',
-	'archived'  				=> 'Archivado',
+    'archived'  				=> 'Archivado',
     'asset'  					=> 'Equipo',
     'bulk_checkout'             => 'Asignar Equipos',
     'checkin'  					=> 'Devolver Equipo',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Equipos Pendiente',
     'undeployable'  			=> 'No desplegable',
     'view'  					=> 'Ver Equipo',
-);
+];

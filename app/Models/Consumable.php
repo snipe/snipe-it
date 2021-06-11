@@ -1,14 +1,15 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Watson\Validating\ValidatingTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Consumable extends SnipeModel
 {
@@ -29,27 +30,25 @@ class Consumable extends SnipeModel
         'min_amt'        => 'integer',
     ];
 
-
-
     /**
-    * Category validation rules
-    */
-    public $rules = array(
+     * Category validation rules
+     */
+    public $rules = [
         'name'        => 'required|min:3|max:255',
         'qty'         => 'required|integer|min:0',
         'category_id' => 'required|integer',
         'company_id'  => 'integer|nullable',
         'min_amt'     => 'integer|min:0|nullable',
         'purchase_cost'   => 'numeric|nullable',
-    );
+    ];
 
     /**
-    * Whether the model should inject it's identifier to the unique
-    * validation rules before attempting validation. If this property
-    * is not set in the model it will default to true.
-    *
-    * @var boolean
-    */
+     * Whether the model should inject it's identifier to the unique
+     * validation rules before attempting validation. If this property
+     * is not set in the model it will default to true.
+     *
+     * @var bool
+     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
@@ -70,27 +69,27 @@ class Consumable extends SnipeModel
         'purchase_cost',
         'purchase_date',
         'qty',
-        'requestable'
+        'requestable',
     ];
 
     use Searchable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['name', 'order_number', 'purchase_cost', 'purchase_date', 'item_no'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [
         'category'     => ['name'],
         'company'      => ['name'],
-        'location'     => ['name'],  
+        'location'     => ['name'],
         'manufacturer' => ['name'],
     ];
 
@@ -113,7 +112,7 @@ class Consumable extends SnipeModel
             $value = null;
         }
         $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
-        return;
+
     }
 
     /**
@@ -188,7 +187,6 @@ class Consumable extends SnipeModel
         return $this->belongsTo('\App\Models\Category', 'category_id');
     }
 
-
     /**
      * Establishes the component -> action logs relationship
      *
@@ -198,7 +196,7 @@ class Consumable extends SnipeModel
      */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Consumable::class)->orderBy('created_at', 'desc')->withTrashed();
+        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
     /**
@@ -208,12 +206,13 @@ class Consumable extends SnipeModel
      * @since [v3.0]
      * @return string | false
      */
-    public function getImageUrl() {
+    public function getImageUrl()
+    {
         if ($this->image) {
             return Storage::disk('public')->url(app('consumables_upload_path').$this->image);
         }
-        return false;
 
+        return false;
     }
 
     /**
@@ -228,14 +227,13 @@ class Consumable extends SnipeModel
         return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
     }
 
-
     /**
      * Determine whether to send a checkin/checkout email based on
      * asset model category
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return boolean
+     * @return bool
      */
     public function checkin_email()
     {
@@ -247,7 +245,7 @@ class Consumable extends SnipeModel
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @return boolean
+     * @return bool
      */
     public function requireAcceptance()
     {
@@ -264,17 +262,15 @@ class Consumable extends SnipeModel
      */
     public function getEula()
     {
-
         $Parsedown = new \Parsedown();
 
         if ($this->category->eula_text) {
             return $Parsedown->text(e($this->category->eula_text));
-        } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula=='1')) {
+        } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula == '1')) {
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
         } else {
             return null;
         }
-
     }
 
     /**
@@ -289,30 +285,31 @@ class Consumable extends SnipeModel
         $checkedout = $this->users->count();
         $total = $this->qty;
         $remaining = $total - $checkedout;
+
         return $remaining;
     }
 
     /**
-    * Query builder scope to order on company
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  string                              $order       Order
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on company
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderCategory($query, $order)
     {
         return $query->join('categories', 'consumables.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
     }
 
     /**
-    * Query builder scope to order on location
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  text                              $order       Order
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on location
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderLocation($query, $order)
     {
         return $query->leftJoin('locations', 'consumables.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
@@ -331,15 +328,14 @@ class Consumable extends SnipeModel
         return $query->leftJoin('manufacturers', 'consumables.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
     }
 
-
     /**
-    * Query builder scope to order on company
-    *
-    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-    * @param  string                              $order       Order
-    *
-    * @return \Illuminate\Database\Query\Builder          Modified query builder
-    */
+     * Query builder scope to order on company
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  string                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderCompany($query, $order)
     {
         return $query->leftJoin('companies', 'consumables.company_id', '=', 'companies.id')->orderBy('companies.name', $order);

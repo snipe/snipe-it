@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return array(
     'unique'               => ':attribute jau užimtas.',
     'uploaded'             => 'Nepavyko įkelti atributo.',
     'url'                  => ':attribute formatas neteisingas.',
-    "unique_undeleted"     => ":attribute turi būti unikalus.",
+    'unique_undeleted'     => ':attribute turi būti unikalus.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -114,11 +113,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Lauke: atributo lauke yra simbolis, kuris nėra leidžiamas.",
-        "email_array"      => "Vienas ar keli el. Pašto adresai yra netinkami.",
-        "hashed_pass"      => "Jūsų dabartinis slaptažodis yra neteisingas",
+        'alpha_space' => 'Lauke: atributo lauke yra simbolis, kuris nėra leidžiamas.',
+        'email_array'      => 'Vienas ar keli el. Pašto adresai yra netinkami.',
+        'hashed_pass'      => 'Jūsų dabartinis slaptažodis yra neteisingas',
         'dumbpwd'          => 'Šis slaptažodis yra per dažnas.',
-        "statuslabel_type" => "Turite pasirinkti tinkamą statuso etiketės tipą",
+        'statuslabel_type' => 'Turite pasirinkti tinkamą statuso etiketės tipą',
     ],
 
     /*
@@ -134,4 +133,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

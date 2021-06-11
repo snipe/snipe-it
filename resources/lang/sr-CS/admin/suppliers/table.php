@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'O Dobavljačima',
     'about_suppliers_text'  => 'Dobavljači se koriste za praćenje porekla stavki',
     'address'               => 'Adresa dobavljača',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Prikaži imovinu za',
     'zip'                   => 'Poštanski broj',
 
-);
+];

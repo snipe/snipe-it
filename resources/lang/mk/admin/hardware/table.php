@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Код на основното средство',
     'asset_model'       => 'Модел',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Основно средство ',
     'image'		=> 'Слика',
     'days_without_acceptance' => 'Денови без прифаќање',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

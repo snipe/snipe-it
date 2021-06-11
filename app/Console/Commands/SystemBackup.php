@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 
 class SystemBackup extends Command
 {
-
     /**
      * The console command name.
      *
@@ -40,6 +39,5 @@ class SystemBackup extends Command
     {
         //
         $this->call('backup:run');
-
     }
 }

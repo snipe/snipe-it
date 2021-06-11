@@ -1,10 +1,9 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Manufacturer;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-
 
 class ManufacturerFactory extends Factory
 {
@@ -29,7 +28,6 @@ class ManufacturerFactory extends Factory
             'support_email' => $this->faker->safeEmail(),
 
         ];
-
     }
 
     /**
@@ -218,9 +216,4 @@ class ManufacturerFactory extends Factory
             ];
         });
     }
-
-
-
 }
-
-

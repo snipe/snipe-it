@@ -1,9 +1,9 @@
 <?php
+
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Statuslabel;
-
+use Illuminate\Database\Seeder;
 
 class StatuslabelSeeder extends Seeder
 {
@@ -17,6 +17,5 @@ class StatuslabelSeeder extends Seeder
         Statuslabel::factory()->count(1)->statuslabelRepair()->create();
         Statuslabel::factory()->count(1)->statuslabelBroken()->create();
         Statuslabel::factory()->count(1)->statuslabelLost()->create();
-
     }
 }

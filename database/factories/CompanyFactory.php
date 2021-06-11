@@ -1,10 +1,9 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-
 
 class CompanyFactory extends Factory
 {
@@ -25,8 +24,5 @@ class CompanyFactory extends Factory
         return [
             'name' => $this->faker->company,
         ];
-
     }
-
 }
-

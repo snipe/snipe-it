@@ -1,10 +1,9 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-
 
 class CategoryFactory extends Factory
 {
@@ -29,7 +28,6 @@ class CategoryFactory extends Factory
             'use_default_eula' => $this->faker->boolean(),
             'user_id' => 1,
         ];
-
     }
 
     /**
@@ -257,6 +255,4 @@ class CategoryFactory extends Factory
             ];
         });
     }
-
 }
-

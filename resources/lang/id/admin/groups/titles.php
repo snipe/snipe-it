@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Tentang Grup',
     'about_groups'                  => 'Grup digunakan untuk menyamaratakan perizinan pengguna.',
     'group_management' 	 	=> 'Manajemen Kelompok',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Izin',
     'deny' 	 				=> 'Tolak',
 
-);
+];

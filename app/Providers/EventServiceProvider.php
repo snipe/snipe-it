@@ -30,6 +30,6 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $subscribe = [
         LogListener::class,
-        CheckoutableListener::class
+        CheckoutableListener::class,
     ];
 }

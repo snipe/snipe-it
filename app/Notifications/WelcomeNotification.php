@@ -10,7 +10,7 @@ class WelcomeNotification extends Notification
 {
     use Queueable;
 
-    private $_data = array();
+    private $_data = [];
 
     /**
      * Create a new notification instance.
@@ -45,7 +45,7 @@ class WelcomeNotification extends Notification
     public function toMail()
     {
         return (new MailMessage)
-            ->subject(trans('mail.welcome', ['name' => $this->_data['first_name'] . ' ' . $this->_data['last_name'] ]))
+            ->subject(trans('mail.welcome', ['name' => $this->_data['first_name'].' '.$this->_data['last_name']]))
             ->markdown('notifications.Welcome', $this->_data);
     }
 }

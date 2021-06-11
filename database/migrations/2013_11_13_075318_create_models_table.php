@@ -11,7 +11,7 @@ class CreateModelsTable extends Migration
      */
     public function up()
     {
-         Schema::create('models', function ($table) {
+        Schema::create('models', function ($table) {
             $table->increments('id');
             $table->string('name');
             $table->string('modelno')->nullable();
@@ -31,5 +31,4 @@ class CreateModelsTable extends Migration
     {
         Schema::drop('models');
     }
-
 }

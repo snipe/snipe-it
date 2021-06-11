@@ -8,8 +8,6 @@
  | be modified directly.
 */
 
-
-
 return [
 
     /*
@@ -110,10 +108,9 @@ return [
     */
 
     'reply_to' => [
-        'address' => env('MAIL_REPLYTO_ADDR',null),
+        'address' => env('MAIL_REPLYTO_ADDR', null),
         'name' => env('MAIL_REPLYTO_NAME', null),
      ],
-
 
     /*
     |--------------------------------------------------------------------------

@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Dominio Active Directory',
     'ad_domain_help'			=> 'Questo a volte è lo stesso del dominio email, ma non sempre.',
     'ad_append_domain_label'    => 'Aggiungi il dominio',
     'ad_append_domain'          => 'Aggiungi il dominio al campo username',
-    'ad_append_domain_help'     => 'L\'utente non è tenuto a scrivere "username@domain.local", può semplicemente digitare "username".' ,
+    'ad_append_domain_help'     => 'L\'utente non è tenuto a scrivere "username@domain.local", può semplicemente digitare "username".',
     'admin_cc_email'            => 'Email CC',
     'admin_cc_email_help'       => 'Se desideri inviare una copia delle e-mail di consegna / ritiro che vengono inviate agli utenti a un altro account e-mail, inseriscile qui. Altrimenti, lascia questo campo vuoto.',
     'is_ad'				        => 'Si tratta di un server Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Soglia di avviso di scadenza (in giorni)',
     'alert_inv_threshold'		=> 'Soglia di avviso di inventario',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID Bene',
     'audit_interval'            => 'Intervallo di controllo',
     'audit_interval_help'       => 'Se sei tenuto a controllare regolarmente le risorse, inserisci l\'intervallo in mesi.',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Selezionando questa casella viene forzato un vincolo di unicità sul seriale del bene',
     'zerofill_count'        => 'Lunghezza dei tag di asset, incluso zerofill',
     'username_format_help'   => 'Questa impostazione sarà usata dal processo di importazione solo se un nome utente non è fornito, e se è necessario creare un nome utente.',
-);
+];

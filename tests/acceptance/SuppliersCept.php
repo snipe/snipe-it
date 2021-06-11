@@ -1,4 +1,5 @@
 <?php
+
 $I = new AcceptanceTester($scenario);
 AcceptanceTester::test_login($I);
 $I->am('logged in user');
@@ -6,7 +7,7 @@ $I->wantTo('ensure that the suppliers listing page loads without errors');
 $I->lookForwardTo('seeing it load without errors');
 $I->amOnPage('/suppliers');
 $I->waitForElement('.table', 5); // secs
-$I->seeNumberOfElements('table[name="suppliers"] tr', [5,25]);
+$I->seeNumberOfElements('table[name="suppliers"] tr', [5, 25]);
 $I->seeInTitle('Suppliers');
 $I->see('Suppliers');
 $I->seeInPageSource('suppliers/create');

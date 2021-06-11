@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => '用户已取消物品申请',
     'a_user_requested' => '用户已申请物品',
     'accessory_name' => '配件名称：',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => '预期的资产检查报告',
     'Expected_Checkin_Notification' => '提醒：:name 签入截止日期已接近。',
     'Expected_Checkin_Date' => '借出的资产将在 :date 重新签入',
-    'your_assets' => '查看您的资产'
-);
+    'your_assets' => '查看您的资产',
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Eine Geräte-Anfrage auf der Webseite wurde vom Benutzer abgebrochen',
     'a_user_requested' => 'Ein Benutzer hat ein Gerät auf der Webseite angefordert',
     'accessory_name' => 'Zubehör Name:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Bericht über erwartete Asset Rückgaben',
     'Expected_Checkin_Notification' => 'Erinnerung: :name Rückgabedatum nähert sich',
     'Expected_Checkin_Date' => 'Ihr ausgebuchtes Asset ist fällig zur Rückgabe am :date',
-    'your_assets' => 'Ihre Assets anzeigen'
-);
+    'your_assets' => 'Ihre Assets anzeigen',
+];

@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Thời gian bảo trì tài sản (ngày)',
         'notes'                  => 'Ghi chú',
         'update'                 => 'Cập nhật tài sản đang bảo trì',
-        'create'                 => 'Tạo Bảo hành Tài sản'
+        'create'                 => 'Tạo Bảo hành Tài sản',
     ];

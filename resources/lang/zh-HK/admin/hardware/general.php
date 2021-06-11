@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'About Assets',
     'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
-	'archived'  				=> 'Archived',
+    'archived'  				=> 'Archived',
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'Checkin Asset',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Pending',
     'undeployable'  			=> 'Undeployable',
     'view'  					=> 'View Asset',
-);
+];

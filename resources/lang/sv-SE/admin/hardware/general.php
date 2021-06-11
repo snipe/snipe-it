@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Om tillgångar',
     'about_assets_text'            => 'Tillgångar är poster som spåras med serienummer eller tillgångstagg. De tenderar att vara mer värdefulla saker där identifiering av en viss sak är viktig.',
-	'archived'  				=> 'Arkiverade',
+    'archived'  				=> 'Arkiverade',
     'asset'  					=> 'Tillgång',
     'bulk_checkout'             => 'Checkout tillgångar',
     'checkin'  					=> 'Checkin Asset',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Väntande',
     'undeployable'  			=> 'Undeployable',
     'view'  					=> 'Visa tillgång',
-);
+];

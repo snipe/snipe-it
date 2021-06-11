@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Verificați consumul pentru utilizator',
     'consumable_name'                   => 'Nume consumabile',
     'create'                            => 'Creați consumabile',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Rămas',
     'total' 			                => 'Total',
     'update'                            => 'Actualizați consumabilele',
-);
+];

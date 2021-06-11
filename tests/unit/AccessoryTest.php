@@ -1,16 +1,17 @@
 <?php
+
 use App\Models\Accessory;
 use App\Models\Category;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Hash;
 
 class AccessoryTest extends BaseTest
 {
     /**
-    * @var \UnitTester
-    */
+     * @var \UnitTester
+     */
     protected $tester;
 
     public function testFailsEmptyValidation()
@@ -21,7 +22,7 @@ class AccessoryTest extends BaseTest
         $fields = [
             'name' => 'name',
             'qty' => 'qty',
-            'category_id' => 'category id'
+            'category_id' => 'category id',
         ];
         $errors = $a->getErrors();
         foreach ($fields as $field => $fieldTitle) {
@@ -37,12 +38,12 @@ class AccessoryTest extends BaseTest
         $a = factory(Accessory::class)->make([
             'name' => 'a',
             'qty' => 0,
-            'min_amt' => -1
+            'min_amt' => -1,
         ]);
         $fields = [
             'name' => 'name',
             'qty' => 'qty',
-            'min_amt' => 'min amt'
+            'min_amt' => 'min amt',
         ];
         $this->assertFalse($a->isValid());
         $errors = $a->getErrors();
@@ -64,7 +65,7 @@ class AccessoryTest extends BaseTest
         $accessory->save();
 
         $this->assertFalse($accessory->isValid());
-        $this->assertStringContainsString("The selected category id is invalid.", $accessory->getErrors()->get('category_id')[0]);
+        $this->assertStringContainsString('The selected category id is invalid.', $accessory->getErrors()->get('category_id')[0]);
     }
 
     public function testAnAccessoryBelongsToACompany()

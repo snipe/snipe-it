@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'Staatuse siltidest',
     'archived'      	=> 'Arhiveeritud',
     'create'      	=> 'Uus staatuse silt',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Staatuse sildid',
     'undeployable'  => 'Unustamatu',
     'update'      	=> 'Uuenda staatuse silti',
-);
+];

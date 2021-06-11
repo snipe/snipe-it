@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'Tildelt',
     'checkout'   		=> 'Ind ud',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'Seriel',
     'title'      		=> 'Licens',
 
-);
+];

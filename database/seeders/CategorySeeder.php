@@ -1,8 +1,9 @@
 <?php
+
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Category;
+use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
@@ -25,7 +26,5 @@ class CategorySeeder extends Seeder
         Category::factory()->count(1)->componentRamCategory()->create();
         Category::factory()->count(1)->licenseGraphicsCategory()->create();
         Category::factory()->count(1)->licenceOfficeCategory()->create();
-
     }
-
 }

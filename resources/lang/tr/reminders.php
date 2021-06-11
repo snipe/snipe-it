@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Şifre en az 6 karakter olmalı ve birbiriyle eşleşmeli.",
+    'password' => 'Şifre en az 6 karakter olmalı ve birbiriyle eşleşmeli.',
 
-    "user"     => "Kullanıcı adı veya e-mail adresi hatalı",
+    'user'     => 'Kullanıcı adı veya e-mail adresi hatalı',
 
-    "token"    => "Şifre sıfırlama anahtarı geçersiz.",
+    'token'    => 'Şifre sıfırlama anahtarı geçersiz.',
 
-    "sent" => "Eşleşen email bulunsaydı, şifre gönderilirdi!",
+    'sent' => 'Eşleşen email bulunsaydı, şifre gönderilirdi!',
 
-);
+];

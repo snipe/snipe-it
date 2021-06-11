@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'O amortizacijama imovine',
     'about_depreciations'  					=> 'Možete postaviti amortizaciju imovine za amortizaciju imovine na temelju linearne amortizacije.',
     'asset_depreciations'  					=> 'Deprecijacija imovine',
@@ -9,4 +9,4 @@ return array(
     'number_of_months'  					=> 'Broj mjeseci',
     'update'  					            => 'Ažuriraj amortizaciju',
 
-);
+];

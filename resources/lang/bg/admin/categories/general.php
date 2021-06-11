@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'Категории на активи',
     'category_name'  					=> 'Име на категория',
     'checkin_email'                     => 'Изпращане на email до потребителя при вписване/изписване на активи.',
@@ -19,4 +19,4 @@ return array(
     'use_default_eula'					=> 'Използване на <a href="#" data-toggle="modal" data-target="#eulaModal">EULA по подразбиране</a>.',
     'use_default_eula_disabled'			=> '<del>Използване на EULA по подразбиране</del> Няма EULA по подразбиране. Добавете я в Настройки.',
 
-);
+];

@@ -1,10 +1,9 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\AssetModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-
 
 class AssetModelFactory extends Factory
 {
@@ -27,7 +26,6 @@ class AssetModelFactory extends Factory
             'model_number' => $this->faker->numberBetween(99999999, 9999999999),
             'notes' => 'Created by demo seeder',
         ];
-
     }
 
     /**
@@ -255,7 +253,6 @@ class AssetModelFactory extends Factory
         });
     }
 
-
     /**
      * Polycom CX3000 IP Conference Phone
      *
@@ -353,7 +350,6 @@ class AssetModelFactory extends Factory
         });
     }
 
-
     /**
      * Ultrafine
      *
@@ -391,9 +387,4 @@ class AssetModelFactory extends Factory
             ];
         });
     }
-
-
-
 }
-
-

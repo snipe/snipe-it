@@ -13,12 +13,11 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('users', 'email_verified_at')) {
+        if (! Schema::hasColumn('users', 'email_verified_at')) {
             Schema::table('users', function (Blueprint $table) {
                 $table->text('email_verified_at')
                     ->after('created_at')
                     ->nullable();
-
             });
         }
     }
@@ -30,11 +29,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-
         if (Schema::hasColumn('users', 'email_verified_at')) {
             Schema::dropColumns('email_verified_at');
         }
-
-
     }
 }

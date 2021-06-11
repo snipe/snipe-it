@@ -1,11 +1,10 @@
 <?php
+
 namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-
-
 
 class UserFactory extends Factory
 {
@@ -24,11 +23,12 @@ class UserFactory extends Factory
     public function definition()
     {
         $password = bcrypt('password');
+
         return [
             'activated' => 1,
             'address' => $this->faker->address,
             'city' => $this->faker->city,
-            'company_id' => rand(1,4),
+            'company_id' => rand(1, 4),
             'country' => $this->faker->country,
             //'department_id' => rand(1,6),
             'email' => $this->faker->safeEmail,
@@ -37,7 +37,7 @@ class UserFactory extends Factory
             'jobtitle' => $this->faker->jobTitle,
             'last_name' => $this->faker->lastName,
             'locale' => $this->faker->locale,
-            'location_id' => rand(1,5),
+            'location_id' => rand(1, 5),
             'notes' => 'Created by DB seeder',
             'password' => $password,
             'permissions' => '{"user":"0"}',
@@ -48,7 +48,6 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];
-
     }
 
     /**
@@ -64,7 +63,6 @@ class UserFactory extends Factory
             ];
         });
     }
-
 
     /**
      * Generated a generic 'admin' superuser
@@ -82,7 +80,6 @@ class UserFactory extends Factory
             ];
         });
     }
-
 
     /**
      * Generated a generic 'snipe' superuser
@@ -126,7 +123,7 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'permissions' => '{"admin":"1"}',
-                'manager_id' => rand(1,2),
+                'manager_id' => rand(1, 2),
             ];
         });
     }
@@ -158,8 +155,4 @@ class UserFactory extends Factory
             ];
         });
     }
-
-
-
 }
-

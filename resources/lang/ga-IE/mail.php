@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Tá úsáideoir tar éis iarratas ar mhír a chealú ar an láithreán gréasáin',
     'a_user_requested' => 'D\'iarr úsáideoir mír ar an láithreán gréasáin',
     'accessory_name' => 'Ainm Cúlpháirtí:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

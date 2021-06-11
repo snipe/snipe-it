@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Factories;
 
 $factory->define(App\Models\CustomFieldset::class, function (Faker\Generator $faker) {
@@ -18,6 +19,3 @@ $factory->state(App\Models\CustomFieldset::class, 'computer', function ($faker) 
         'name' => 'Laptops and Desktops',
     ];
 });
-
-
-

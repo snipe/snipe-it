@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Eszköz értékcsökkentésekről',
     'about_depreciations'  					=> 'Beállíthat az eszközökhöz, eszköz alapú lineáris értékcsökkentést.',
     'asset_depreciations'  					=> 'Eszköz értékcsökkenések',
@@ -9,4 +9,4 @@ return array(
     'number_of_months'  					=> 'Hónapok száma',
     'update'  					            => 'Értékcsökkenés frissítése',
 
-);
+];
