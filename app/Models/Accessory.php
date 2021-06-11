@@ -17,7 +17,7 @@ use Watson\Validating\ValidatingTrait;
  */
 class Accessory extends SnipeModel
 {
-    protected $presenter = 'App\Presenters\AccessoryPresenter';
+    protected $presenter = \App\Presenters\AccessoryPresenter::class;
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
@@ -104,7 +104,7 @@ class Accessory extends SnipeModel
      */
     public function supplier()
     {
-        return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
     }
 
     /**
@@ -132,7 +132,7 @@ class Accessory extends SnipeModel
      */
     public function company()
     {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
     }
 
     /**
@@ -144,7 +144,7 @@ class Accessory extends SnipeModel
      */
     public function location()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id');
+        return $this->belongsTo(\App\Models\Location::class, 'location_id');
     }
 
     /**
@@ -156,7 +156,7 @@ class Accessory extends SnipeModel
      */
     public function category()
     {
-        return $this->belongsTo('\App\Models\Category', 'category_id')->where('category_type', '=', 'accessory');
+        return $this->belongsTo(\App\Models\Category::class, 'category_id')->where('category_type', '=', 'accessory');
     }
 
     /**
@@ -168,7 +168,7 @@ class Accessory extends SnipeModel
      */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
     /**
@@ -230,7 +230,7 @@ class Accessory extends SnipeModel
      */
     public function users()
     {
-        return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id', 'created_at', 'note')->withTrashed();
+        return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id', 'created_at', 'note')->withTrashed();
     }
 
     /**
@@ -242,7 +242,7 @@ class Accessory extends SnipeModel
      */
     public function hasUsers()
     {
-        return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->count();
+        return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->count();
     }
 
     /**
@@ -254,7 +254,7 @@ class Accessory extends SnipeModel
      */
     public function manufacturer()
     {
-        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
+        return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
     }
 
     /**

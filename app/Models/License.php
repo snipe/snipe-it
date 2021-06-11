@@ -13,7 +13,7 @@ use Watson\Validating\ValidatingTrait;
 
 class License extends Depreciable
 {
-    protected $presenter = 'App\Presenters\LicensePresenter';
+    protected $presenter = \App\Presenters\LicensePresenter::class;
 
     use SoftDeletes;
     use CompanyableTrait;
@@ -264,7 +264,7 @@ class License extends Depreciable
      */
     public function company()
     {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
     }
 
     /**
@@ -276,7 +276,7 @@ class License extends Depreciable
      */
     public function category()
     {
-        return $this->belongsTo('\App\Models\Category', 'category_id');
+        return $this->belongsTo(\App\Models\Category::class, 'category_id');
     }
 
     /**
@@ -288,7 +288,7 @@ class License extends Depreciable
      */
     public function manufacturer()
     {
-        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
+        return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
     }
 
     /**
@@ -345,7 +345,7 @@ class License extends Depreciable
      */
     public function assignedusers()
     {
-        return $this->belongsToMany('\App\Models\User', 'license_seats', 'assigned_to', 'license_id');
+        return $this->belongsToMany(\App\Models\User::class, 'license_seats', 'assigned_to', 'license_id');
     }
 
     /**
@@ -357,7 +357,7 @@ class License extends Depreciable
      */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
             ->where('item_type', '=', self::class)
             ->orderBy('created_at', 'desc');
     }
@@ -371,7 +371,7 @@ class License extends Depreciable
      */
     public function uploads()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
             ->where('item_type', '=', self::class)
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
@@ -387,7 +387,7 @@ class License extends Depreciable
      */
     public function adminuser()
     {
-        return $this->belongsTo('\App\Models\User', 'user_id');
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
 
     /**
@@ -570,7 +570,7 @@ class License extends Depreciable
      */
     public function licenseseats()
     {
-        return $this->hasMany('\App\Models\LicenseSeat');
+        return $this->hasMany(\App\Models\LicenseSeat::class);
     }
 
     /**
@@ -582,7 +582,7 @@ class License extends Depreciable
      */
     public function supplier()
     {
-        return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
     }
 
     /**
@@ -614,7 +614,7 @@ class License extends Depreciable
      */
     public function freeSeats()
     {
-        return $this->hasMany('\App\Models\LicenseSeat')->whereNull('assigned_to')->whereNull('deleted_at')->whereNull('asset_id');
+        return $this->hasMany(\App\Models\LicenseSeat::class)->whereNull('assigned_to')->whereNull('deleted_at')->whereNull('asset_id');
     }
 
     /**

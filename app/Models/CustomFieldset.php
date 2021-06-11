@@ -38,7 +38,7 @@ class CustomFieldset extends Model
      */
     public function fields()
     {
-        return $this->belongsToMany('\App\Models\CustomField')->withPivot(['required', 'order'])->orderBy('pivot_order');
+        return $this->belongsToMany(\App\Models\CustomField::class)->withPivot(['required', 'order'])->orderBy('pivot_order');
     }
 
     /**
@@ -50,7 +50,7 @@ class CustomFieldset extends Model
      */
     public function models()
     {
-        return $this->hasMany('\App\Models\AssetModel', 'fieldset_id');
+        return $this->hasMany(\App\Models\AssetModel::class, 'fieldset_id');
     }
 
     /**
@@ -62,7 +62,7 @@ class CustomFieldset extends Model
      */
     public function user()
     {
-        return $this->belongsTo('\App\Models\User'); //WARNING - not all CustomFieldsets have a User!!
+        return $this->belongsTo(\App\Models\User::class); //WARNING - not all CustomFieldsets have a User!!
     }
 
     /**

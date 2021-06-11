@@ -15,7 +15,7 @@ use Watson\Validating\ValidatingTrait;
  */
 class Component extends SnipeModel
 {
-    protected $presenter = 'App\Presenters\ComponentPresenter';
+    protected $presenter = \App\Presenters\ComponentPresenter::class;
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
@@ -94,7 +94,7 @@ class Component extends SnipeModel
      */
     public function location()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id');
+        return $this->belongsTo(\App\Models\Location::class, 'location_id');
     }
 
     /**
@@ -106,7 +106,7 @@ class Component extends SnipeModel
      */
     public function assets()
     {
-        return $this->belongsToMany('\App\Models\Asset', 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'user_id');
+        return $this->belongsToMany(\App\Models\Asset::class, 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'user_id');
     }
 
     /**
@@ -120,7 +120,7 @@ class Component extends SnipeModel
      */
     public function admin()
     {
-        return $this->belongsTo('\App\Models\User', 'user_id');
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
 
     /**
@@ -132,7 +132,7 @@ class Component extends SnipeModel
      */
     public function company()
     {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
     }
 
     /**
@@ -144,7 +144,7 @@ class Component extends SnipeModel
      */
     public function category()
     {
-        return $this->belongsTo('\App\Models\Category', 'category_id');
+        return $this->belongsTo(\App\Models\Category::class, 'category_id');
     }
 
     /**
@@ -156,7 +156,7 @@ class Component extends SnipeModel
      */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
     /**

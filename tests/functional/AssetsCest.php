@@ -62,7 +62,7 @@ class AssetsCest
         $seenValues = [
             'asset_tag'         => $asset->asset_tag,
             'assigned_to'       => $userId,
-            'assigned_type'     => 'App\\Models\\User',
+            'assigned_type'     => \App\Models\User::class,
             'company_id'        => $asset->company_id,
             'model_id'          => $asset->model_id,
             'name'              => $asset->name,

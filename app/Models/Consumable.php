@@ -13,7 +13,7 @@ use Watson\Validating\ValidatingTrait;
 
 class Consumable extends SnipeModel
 {
-    protected $presenter = 'App\Presenters\ConsumablePresenter';
+    protected $presenter = \App\Presenters\ConsumablePresenter::class;
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
@@ -124,7 +124,7 @@ class Consumable extends SnipeModel
      */
     public function admin()
     {
-        return $this->belongsTo('\App\Models\User', 'user_id');
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
 
     /**
@@ -136,7 +136,7 @@ class Consumable extends SnipeModel
      */
     public function consumableAssignments()
     {
-        return $this->hasMany('\App\Models\ConsumableAssignment');
+        return $this->hasMany(\App\Models\ConsumableAssignment::class);
     }
 
     /**
@@ -148,7 +148,7 @@ class Consumable extends SnipeModel
      */
     public function company()
     {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
     }
 
     /**
@@ -160,7 +160,7 @@ class Consumable extends SnipeModel
      */
     public function manufacturer()
     {
-        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
+        return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
     }
 
     /**
@@ -172,7 +172,7 @@ class Consumable extends SnipeModel
      */
     public function location()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id');
+        return $this->belongsTo(\App\Models\Location::class, 'location_id');
     }
 
     /**
@@ -184,7 +184,7 @@ class Consumable extends SnipeModel
      */
     public function category()
     {
-        return $this->belongsTo('\App\Models\Category', 'category_id');
+        return $this->belongsTo(\App\Models\Category::class, 'category_id');
     }
 
     /**
@@ -196,7 +196,7 @@ class Consumable extends SnipeModel
      */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
     /**
@@ -224,7 +224,7 @@ class Consumable extends SnipeModel
      */
     public function users()
     {
-        return $this->belongsToMany('\App\Models\User', 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
+        return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
     }
 
     /**

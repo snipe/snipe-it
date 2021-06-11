@@ -25,7 +25,7 @@ class ApiCheckoutAssetsCest
         $I->wantTo('Check out an asset to a user');
         //Grab an asset from the database that isn't checked out.
         $asset = Asset::whereNull('assigned_to')->first();
-        $targetUser = factory('App\Models\User')->create();
+        $targetUser = factory(\App\Models\User::class)->create();
         $data = [
             'assigned_user' => $targetUser->id,
             'note' => 'This is a test checkout note',
@@ -62,7 +62,7 @@ class ApiCheckoutAssetsCest
             ->where('model_id', 8)
             ->where('status_id', Statuslabel::deployable()->first()->id)
             ->first();  // We need to make sure that this is an asset/model that doesn't require acceptance
-        $targetAsset = factory('App\Models\Asset')->states('desktop-macpro')->create([
+        $targetAsset = factory(\App\Models\Asset::class)->states('desktop-macpro')->create([
             'name' => 'Test Asset For Checkout to',
         ]);
         $data = [
@@ -96,7 +96,7 @@ class ApiCheckoutAssetsCest
             ->where('model_id', 8)
             ->where('status_id', Statuslabel::deployable()->first()->id)
             ->first();  // We need to make sure that this is an asset/model that doesn't require acceptance
-        $targetLocation = factory('App\Models\Location')->create([
+        $targetLocation = factory(\App\Models\Location::class)->create([
             'name' => 'Test Location for Checkout',
         ]);
         $data = [

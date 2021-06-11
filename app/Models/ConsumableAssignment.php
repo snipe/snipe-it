@@ -13,16 +13,16 @@ class ConsumableAssignment extends Model
 
     public function consumable()
     {
-        return $this->belongsTo('\App\Models\Consumable');
+        return $this->belongsTo(\App\Models\Consumable::class);
     }
 
     public function user()
     {
-        return $this->belongsTo('\App\Models\User', 'assigned_to');
+        return $this->belongsTo(\App\Models\User::class, 'assigned_to');
     }
 
     public function admin()
     {
-        return $this->belongsTo('\App\Models\User', 'user_id');
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
 }

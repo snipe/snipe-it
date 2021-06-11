@@ -24,7 +24,7 @@ final class Company extends SnipeModel
         'name' => 'required|min:1|max:255|unique:companies,name',
     ];
 
-    protected $presenter = 'App\Presenters\CompanyPresenter';
+    protected $presenter = \App\Presenters\CompanyPresenter::class;
     use Presentable;
     use HasFactory;
 

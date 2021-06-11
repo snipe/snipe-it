@@ -20,7 +20,7 @@ use Watson\Validating\ValidatingTrait;
  */
 class Category extends SnipeModel
 {
-    protected $presenter = 'App\Presenters\CategoryPresenter';
+    protected $presenter = \App\Presenters\CategoryPresenter::class;
     use Presentable;
     use SoftDeletes;
     use HasFactory;
@@ -107,7 +107,7 @@ class Category extends SnipeModel
      */
     public function accessories()
     {
-        return $this->hasMany('\App\Models\Accessory');
+        return $this->hasMany(\App\Models\Accessory::class);
     }
 
     /**
@@ -119,7 +119,7 @@ class Category extends SnipeModel
      */
     public function licenses()
     {
-        return $this->hasMany('\App\Models\License');
+        return $this->hasMany(\App\Models\License::class);
     }
 
     /**
@@ -131,7 +131,7 @@ class Category extends SnipeModel
      */
     public function consumables()
     {
-        return $this->hasMany('\App\Models\Consumable');
+        return $this->hasMany(\App\Models\Consumable::class);
     }
 
     /**
@@ -143,7 +143,7 @@ class Category extends SnipeModel
      */
     public function components()
     {
-        return $this->hasMany('\App\Models\Component');
+        return $this->hasMany(\App\Models\Component::class);
     }
 
     /**
@@ -180,7 +180,7 @@ class Category extends SnipeModel
      */
     public function assets()
     {
-        return $this->hasManyThrough('\App\Models\Asset', '\App\Models\AssetModel', 'category_id', 'model_id');
+        return $this->hasManyThrough(\App\Models\Asset::class, \App\Models\AssetModel::class, 'category_id', 'model_id');
     }
 
     /**
@@ -192,7 +192,7 @@ class Category extends SnipeModel
      */
     public function models()
     {
-        return $this->hasMany('\App\Models\AssetModel', 'category_id');
+        return $this->hasMany(\App\Models\AssetModel::class, 'category_id');
     }
 
     /**

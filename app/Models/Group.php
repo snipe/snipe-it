@@ -47,7 +47,7 @@ class Group extends SnipeModel
      */
     public function users()
     {
-        return $this->belongsToMany('\App\Models\User', 'users_groups');
+        return $this->belongsToMany(\App\Models\User::class, 'users_groups');
     }
 
     /**

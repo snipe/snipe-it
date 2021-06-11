@@ -17,7 +17,7 @@ use Watson\Validating\ValidatingTrait;
 
 class Location extends SnipeModel
 {
-    protected $presenter = 'App\Presenters\LocationPresenter';
+    protected $presenter = \App\Presenters\LocationPresenter::class;
     use Presentable;
     use SoftDeletes;
     use HasFactory;
@@ -99,12 +99,12 @@ class Location extends SnipeModel
 
     public function users()
     {
-        return $this->hasMany('\App\Models\User', 'location_id');
+        return $this->hasMany(\App\Models\User::class, 'location_id');
     }
 
     public function assets()
     {
-        return $this->hasMany('\App\Models\Asset', 'location_id')
+        return $this->hasMany(\App\Models\Asset::class, 'location_id')
             ->whereHas('assetstatus', function ($query) {
                 $query->where('status_labels.deployable', '=', 1)
                         ->orWhere('status_labels.pending', '=', 1)
@@ -125,30 +125,30 @@ class Location extends SnipeModel
            In all likelyhood, we need to denorm an "effective_location" column
            into Assets to make this slightly less miserable.
         */
-        return $this->hasMany('\App\Models\Asset', 'rtd_location_id');
+        return $this->hasMany(\App\Models\Asset::class, 'rtd_location_id');
     }
 
     public function parent()
     {
-        return $this->belongsTo('\App\Models\Location', 'parent_id', 'id')
+        return $this->belongsTo(\App\Models\Location::class, 'parent_id', 'id')
             ->with('parent');
     }
 
     public function manager()
     {
-        return $this->belongsTo('\App\Models\User', 'manager_id');
+        return $this->belongsTo(\App\Models\User::class, 'manager_id');
     }
 
     public function children()
     {
-        return $this->hasMany('\App\Models\Location', 'parent_id')
+        return $this->hasMany(\App\Models\Location::class, 'parent_id')
             ->with('children');
     }
 
     // I don't think we need this anymore since we de-normed location_id in assets?
     public function assignedAssets()
     {
-        return $this->morphMany('App\Models\Asset', 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
     public function setLdapOuAttribute($ldap_ou)

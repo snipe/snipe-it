@@ -16,13 +16,13 @@ class CreateCheckoutAcceptancesForUnacceptedAssets extends Migration
     public function up()
     {
         // Get all assets not accepted
-        $assets = DB::table('assets')->where('assigned_type', 'App\Models\User')->where('accepted', 'pending')->get();
+        $assets = DB::table('assets')->where('assigned_type', \App\Models\User::class)->where('accepted', 'pending')->get();
 
         $acceptances = [];
 
         foreach ($assets as $asset) {
             $acceptances[] = [
-                'checkoutable_type' => 'App\Models\Asset',
+                'checkoutable_type' => \App\Models\Asset::class,
                 'checkoutable_id'   => $asset->id,
                 'assigned_to_id'    => $asset->assigned_to,
             ];

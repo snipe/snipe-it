@@ -15,7 +15,7 @@ use Watson\Validating\ValidatingTrait;
  */
 class PredefinedKit extends SnipeModel
 {
-    protected $presenter = 'App\Presenters\PredefinedKitPresenter';
+    protected $presenter = \App\Presenters\PredefinedKitPresenter::class;
     use Presentable;
     protected $table = 'kits';
 
@@ -139,12 +139,12 @@ class PredefinedKit extends SnipeModel
      */
     public function models()
     {
-        return $this->belongsToMany('\App\Models\AssetModel', 'kits_models', 'kit_id', 'model_id')->withPivot('id', 'quantity');
+        return $this->belongsToMany(\App\Models\AssetModel::class, 'kits_models', 'kit_id', 'model_id')->withPivot('id', 'quantity');
     }
 
     public function assets()
     {
-        return $this->hasManyThrough('\App\Models\Asset', '\App\Models\AssetModel', 'country_id', 'user_id');
+        return $this->hasManyThrough(\App\Models\Asset::class, \App\Models\AssetModel::class, 'country_id', 'user_id');
     }
 
     /**
@@ -153,7 +153,7 @@ class PredefinedKit extends SnipeModel
      */
     public function licenses()
     {
-        return $this->belongsToMany('\App\Models\License', 'kits_licenses', 'kit_id', 'license_id')->withPivot('id', 'quantity');
+        return $this->belongsToMany(\App\Models\License::class, 'kits_licenses', 'kit_id', 'license_id')->withPivot('id', 'quantity');
     }
 
     /**
@@ -162,7 +162,7 @@ class PredefinedKit extends SnipeModel
      */
     public function consumables()
     {
-        return $this->belongsToMany('\App\Models\Consumable', 'kits_consumables', 'kit_id', 'consumable_id')->withPivot('id', 'quantity');
+        return $this->belongsToMany(\App\Models\Consumable::class, 'kits_consumables', 'kit_id', 'consumable_id')->withPivot('id', 'quantity');
     }
 
     /**
@@ -171,7 +171,7 @@ class PredefinedKit extends SnipeModel
      */
     public function accessories()
     {
-        return $this->belongsToMany('\App\Models\Accessory', 'kits_accessories', 'kit_id', 'accessory_id')->withPivot('id', 'quantity');
+        return $this->belongsToMany(\App\Models\Accessory::class, 'kits_accessories', 'kit_id', 'accessory_id')->withPivot('id', 'quantity');
     }
 
     /**

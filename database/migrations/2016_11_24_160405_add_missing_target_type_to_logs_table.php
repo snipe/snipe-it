@@ -17,7 +17,7 @@ class AddMissingTargetTypeToLogsTable extends Migration
         DB::table('action_logs')->where('target_type', null)->where(function ($query) {
             $query->where('action_type', 'accepted')
             ->orWhere('action_type', 'declined');
-        })->update(['target_type'=> 'App\Models\User']);
+        })->update(['target_type'=> \App\Models\User::class]);
     }
 
     /**
