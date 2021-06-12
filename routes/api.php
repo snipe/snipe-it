@@ -4,6 +4,16 @@ use App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+/*******************************************************************************************************************************
+ * 
+ * FIXME FIXME FIXME
+ * 
+ * The 'old' way of specifying routes (an array with 'as' for a name, and 'uses' for a controller) doesn't seem to work anymore.
+ * Almost all of these routes will need to be fixed (as has been done in the web.php routes file). Hopefully, a later version of
+ * Laravel Shift will do it for us maybe? Or we can get to it at some point later.
+ * 
+ ******************************************************************************************************************************/
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
