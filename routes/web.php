@@ -47,20 +47,20 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get(
         'locations/{locationId}/printassigned',
-        ['as' => 'locations.print_assigned', 'uses' => [LocationsController::class, 'print_assigned']]
-    );
+        [LocationsController::class, 'print_assigned']
+    )->name('locations.print_assigned');
 
     Route::get(
         'locations/{locationId}/printallassigned',
-        ['as' => 'locations.print_all_assigned', 'uses' => [LocationsController::class, 'print_all_assigned']]
-    );
+        [LocationsController::class, 'print_all_assigned']
+    )->name('locations.print_all_assigned');
 
     /*
     * Manufacturers
     */
 
     Route::group(['prefix' => 'manufacturers', 'middleware' => ['auth']], function () {
-        Route::get('{manufacturers_id}/restore', ['as' => 'restore/manufacturer', 'uses' => [ManufacturersController::class, 'restore']]);
+        Route::get('{manufacturers_id}/restore', [ManufacturersController::class, 'restore'] )->name('restore/manufacturer');
     });
 
     Route::resource('manufacturers', ManufacturersController::class, [
@@ -107,7 +107,7 @@ Route::group(['middleware' => 'auth'], function () {
 */
 
 Route::group(['middleware' => 'auth', 'prefix' => 'modals'], function () {
-    Route::get('{type}/{itemId?}', ['as' => 'modal.show', 'uses' => [ModalController::class, 'show']]);
+    Route::get('{type}/{itemId?}', [ModalController::class, 'show'] )->name('modal.show');
 });
 
 /*
@@ -122,10 +122,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'modals'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get(
         'display-sig/{filename}',
-        [
-            'as' => 'log.signature.view',
-            'uses' => [ActionlogController::class, 'displaySig'], ]
-    );
+        [ActionlogController::class, 'displaySig']
+    )->name('log.signature.view');
 });
 
 /*
@@ -138,63 +136,60 @@ Route::group(['middleware' => 'auth'], function () {
 */
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser']], function () {
-    Route::get('settings', ['as' => 'settings.general.index', 'uses' => [SettingsController::class, 'getSettings']]);
-    Route::post('settings', ['as' => 'settings.general.save', 'uses' => [SettingsController::class, 'postSettings']]);
+    Route::get('settings', [SettingsController::class, 'getSettings'])->name('settings.general.index');
+    Route::post('settings', [SettingsController::class, 'postSettings'])->name('settings.general.save');
 
-    Route::get('branding', ['as' => 'settings.branding.index', 'uses' => [SettingsController::class, 'getBranding']]);
-    Route::post('branding', ['as' => 'settings.branding.save', 'uses' => [SettingsController::class, 'postBranding']]);
+    Route::get('branding', [SettingsController::class, 'getBranding'])->name('settings.branding.index');
+    Route::post('branding', [SettingsController::class, 'postBranding'])->name('settings.branding.save');
 
-    Route::get('security', ['as' => 'settings.security.index', 'uses' => [SettingsController::class, 'getSecurity']]);
-    Route::post('security', ['as' => 'settings.security.save', 'uses' => [SettingsController::class, 'postSecurity']]);
+    Route::get('security', [SettingsController::class, 'getSecurity'])->name('settings.security.index');
+    Route::post('security', [SettingsController::class, 'postSecurity'])->name('settings.security.save');
 
-    Route::get('groups', ['as' => 'settings.groups.index', 'uses' => [GroupsController::class, 'index']]);
+    Route::get('groups', [GroupsController::class, 'index'])->name('settings.groups.index');
 
-    Route::get('localization', ['as' => 'settings.localization.index', 'uses' => [SettingsController::class, 'getLocalization']]);
-    Route::post('localization', ['as' => 'settings.localization.save', 'uses' => [SettingsController::class, 'postLocalization']]);
+    Route::get('localization', [SettingsController::class, 'getLocalization'])->name('settings.localization.index');
+    Route::post('localization', [SettingsController::class, 'postLocalization'])->name('settings.localization.save');
 
-    Route::get('notifications', ['as' => 'settings.alerts.index', 'uses' => [SettingsController::class, 'getAlerts']]);
-    Route::post('notifications', ['as' => 'settings.alerts.save', 'uses' => [SettingsController::class, 'postAlerts']]);
+    Route::get('notifications', [SettingsController::class, 'getAlerts'])->name('settings.alerts.index');
+    Route::post('notifications', [SettingsController::class, 'postAlerts'])->name('settings.alerts.save');
 
-    Route::get('slack', ['as' => 'settings.slack.index', 'uses' => [SettingsController::class, 'getSlack']]);
-    Route::post('slack', ['as' => 'settings.slack.save', 'uses' => [SettingsController::class, 'postSlack']]);
+    Route::get('slack', [SettingsController::class, 'getSlack'])->name('settings.slack.index');
+    Route::post('slack', [SettingsController::class, 'postSlack'])->name('settings.slack.save');
 
-    Route::get('asset_tags', ['as' => 'settings.asset_tags.index', 'uses' => [SettingsController::class, 'getAssetTags']]);
-    Route::post('asset_tags', ['as' => 'settings.asset_tags.save', 'uses' => [SettingsController::class, 'postAssetTags']]);
+    Route::get('asset_tags', [SettingsController::class, 'getAssetTags'])->name('settings.asset_tags.index');
+    Route::post('asset_tags', [SettingsController::class, 'postAssetTags'])->name('settings.asset_tags.save');
 
-    Route::get('barcodes', ['as' => 'settings.barcodes.index', 'uses' => [SettingsController::class, 'getBarcodes']]);
-    Route::post('barcodes', ['as' => 'settings.barcodes.save', 'uses' => [SettingsController::class, 'postBarcodes']]);
+    Route::get('barcodes', [SettingsController::class, 'getBarcodes'])->name('settings.barcodes.index');
+    Route::post('barcodes', [SettingsController::class, 'postBarcodes'])->name('settings.barcodes.save');
 
-    Route::get('labels', ['as' => 'settings.labels.index', 'uses' => [SettingsController::class, 'getLabels']]);
-    Route::post('labels', ['as' => 'settings.labels.save', 'uses' => [SettingsController::class, 'postLabels']]);
+    Route::get('labels', [SettingsController::class, 'getLabels'])->name('settings.labels.index');
+    Route::post('labels', [SettingsController::class, 'postLabels'])->name('settings.labels.save');
 
-    Route::get('ldap', ['as' => 'settings.ldap.index', 'uses' => [SettingsController::class, 'getLdapSettings']]);
-    Route::post('ldap', ['as' => 'settings.ldap.save', 'uses' => [SettingsController::class, 'postLdapSettings']]);
+    Route::get('ldap', [SettingsController::class, 'getLdapSettings'])->name('settings.ldap.index');
+    Route::post('ldap', [SettingsController::class, 'postLdapSettings'])->name('settings.ldap.save');
 
-    Route::get('phpinfo', ['as' => 'settings.phpinfo.index', 'uses' => [SettingsController::class, 'getPhpInfo']]);
+    Route::get('phpinfo', [SettingsController::class, 'getPhpInfo'])->name('settings.phpinfo.index');
 
-    Route::get('oauth', ['as' => 'settings.oauth.index', 'uses' => [SettingsController::class, 'api']]);
+    Route::get('oauth', [SettingsController::class, 'api'])->name('settings.oauth.index');
 
-    Route::get('purge', ['as' => 'settings.purge.index', 'uses' => [SettingsController::class, 'getPurge']]);
-    Route::post('purge', ['as' => 'settings.purge.save', 'uses' => [SettingsController::class, 'postPurge']]);
+    Route::get('purge', [SettingsController::class, 'getPurge'])->name('settings.purge.index');
+    Route::post('purge', [SettingsController::class, 'postPurge'])->name('settings.purge.save');
 
-    Route::get('login-attempts', ['as' => 'settings.logins.index', 'uses' => [SettingsController::class, 'getLoginAttempts']]);
+    Route::get('login-attempts', [SettingsController::class, 'getLoginAttempts'])->name('settings.logins.index');
 
     // Backups
     Route::group(['prefix' => 'backups', 'middleware' => 'auth'], function () {
-        Route::get('download/{filename}', [
-            'as' => 'settings.backups.download',
-            'uses' => [SettingsController::class, 'downloadFile'], ]);
+        Route::get('download/{filename}',
+            [SettingsController::class, 'downloadFile'])->name('settings.backups.download');
 
-        Route::delete('delete/{filename}', [
-            'as' => 'settings.backups.destroy',
-            'uses' => [SettingsController::class, 'deleteFile'], ]);
+        Route::delete('delete/{filename}',
+            [SettingsController::class, 'deleteFile'])->name('settings.backups.destroy');
 
-        Route::post('/', [
-            'as' => 'settings.backups.create',
-            'uses' => [SettingsController::class, 'postBackups'],
-        ]);
+        Route::post('/', 
+            [SettingsController::class, 'postBackups']
+        )->name('settings.backups.create');
 
-        Route::get('/', ['as' => 'settings.backups.index', 'uses' => [SettingsController::class, 'getBackups']]);
+        Route::get('/', [SettingsController::class, 'getBackups'])->name('settings.backups.index');
     });
 
     Route::resource('groups', GroupsController::class, [
@@ -202,7 +197,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
         'parameters' => ['group' => 'group_id'],
     ]);
 
-    Route::get('/', ['as' => 'settings.index', 'uses' => [SettingsController::class, 'index']]);
+    Route::get('/', [SettingsController::class, 'index'])->name('settings.index');
 });
 
 /*
@@ -214,10 +209,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
 |
 */
 Route::group(['prefix' => 'import', 'middleware' => ['auth']], function () {
-    Route::get('/', [
-                'as' => 'imports.index',
-                'uses' => [ImportsController::class, 'index'],
-        ]);
+    Route::get('/', 
+       [ImportsController::class, 'index']
+    )->name('imports.index');
 });
 
 /*
@@ -231,44 +225,44 @@ Route::group(['prefix' => 'import', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
 
     // Profile
-    Route::get('profile', ['as' => 'profile', 'uses' => [ProfileController::class, 'getIndex']]);
+    Route::get('profile', [ProfileController::class, 'getIndex'])->name('profile');
     Route::post('profile', [ProfileController::class, 'postIndex']);
 
-    Route::get('menu', ['as' => 'account.menuprefs', 'uses' => [ProfileController::class, 'getMenuState']]);
+    Route::get('menu', [ProfileController::class, 'getMenuState'])->name('account.menuprefs');
 
-    Route::get('password', ['as' => 'account.password.index', 'uses' => [ProfileController::class, 'password']]);
-    Route::post('password', ['uses' => [ProfileController::class, 'passwordSave']]);
+    Route::get('password', [ProfileController::class, 'password'])->name('account.password.index');
+    Route::post('password', [ProfileController::class, 'passwordSave']);
 
-    Route::get('api', ['as' => 'user.api', 'uses' => [ProfileController::class, 'api']]);
+    Route::get('api', [ProfileController::class, 'api'])->name('user.api');
 
     // View Assets
-    Route::get('view-assets', ['as' => 'view-assets', 'uses' => [ViewAssetsController::class, 'getIndex']]);
+    Route::get('view-assets', [ViewAssetsController::class, 'getIndex'])->name('view-assets');
 
-    Route::get('requested', ['as' => 'account.requested', 'uses' => [ViewAssetsController::class, 'getRequestedAssets']]);
+    Route::get('requested', [ViewAssetsController::class, 'getRequestedAssets'])->name('account.requested');
 
     // Accept Asset
     Route::get(
         'accept-asset/{logID}',
-        ['as' => 'account/accept-assets', 'uses' => [ViewAssetsController::class, 'getAcceptAsset']]
-    );
+        [ViewAssetsController::class, 'getAcceptAsset']
+    )->name('account/accept-assets');
 
     // Profile
     Route::get(
         'requestable-assets',
-        ['as' => 'requestable-assets', 'uses' => [ViewAssetsController::class, 'getRequestableIndex']]
-    );
+        [ViewAssetsController::class, 'getRequestableIndex']
+    )->name('requestable-assets');
     Route::get(
         'request-asset/{assetId}',
-        ['as' => 'account/request-asset', 'uses' => [ViewAssetsController::class, 'getRequestAsset']]
-    );
+        [ViewAssetsController::class, 'getRequestAsset']
+    )->name('account/request-asset');
 
     Route::post(
         'request/{itemType}/{itemId}',
-        ['as' => 'account/request-item', 'uses' => [ViewAssetsController::class, 'getRequestItem']]
-    );
+        [ViewAssetsController::class, 'getRequestItem']
+    )->name('account/request-item');
 
     // Account Dashboard
-    Route::get('/', ['as' => 'account', 'uses' => [ViewAssetsController::class, 'getIndex']]);
+    Route::get('/', [ViewAssetsController::class, 'getIndex'])->name('account');
 
     Route::get('accept', [Account\AcceptanceController::class, 'index'])
         ->name('account.accept');
@@ -280,67 +274,63 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('reports/audit', [
-        'as' => 'reports.audit',
-        'uses' => [ReportsController::class, 'audit'],
-    ]);
+    Route::get('reports/audit', 
+        [ReportsController::class, 'audit']
+    )->name('reports.audit');
 
     Route::get(
         'reports/depreciation',
-        ['as' => 'reports/depreciation', 'uses' => [ReportsController::class, 'getDeprecationReport']]
-    );
+        [ReportsController::class, 'getDeprecationReport']
+    )->name('reports/depreciation');
     Route::get(
         'reports/export/depreciation',
-        ['as' => 'reports/export/depreciation', 'uses' => [ReportsController::class, 'exportDeprecationReport']]
-    );
+        [ReportsController::class, 'exportDeprecationReport']
+    )->name('reports/export/depreciation');
     Route::get(
         'reports/asset_maintenances',
-        ['as' => 'reports/asset_maintenances', 'uses' => [ReportsController::class, 'getAssetMaintenancesReport']]
-    );
+        [ReportsController::class, 'getAssetMaintenancesReport']
+    )->name('reports/asset_maintenances');
     Route::get(
         'reports/export/asset_maintenances',
-        [
-            'as'   => 'reports/export/asset_maintenances',
-            'uses' => [ReportsController::class, 'exportAssetMaintenancesReport'],
-        ]
-    );
+        [ReportsController::class, 'exportAssetMaintenancesReport']
+    )->name('reports/export/asset_maintenances');
     Route::get(
         'reports/licenses',
-        ['as' => 'reports/licenses', 'uses' => [ReportsController::class, 'getLicenseReport']]
-    );
+        [ReportsController::class, 'getLicenseReport']
+    )->name('reports/licenses');
     Route::get(
         'reports/export/licenses',
-        ['as' => 'reports/export/licenses', 'uses' => [ReportsController::class, 'exportLicenseReport']]
-    );
+        [ReportsController::class, 'exportLicenseReport']
+    )->name('reports/export/licenses');
 
-    Route::get('reports/accessories', ['as' => 'reports/accessories', 'uses' => [ReportsController::class, 'getAccessoryReport']]);
+    Route::get('reports/accessories', [ReportsController::class, 'getAccessoryReport'])->name('reports/accessories');
     Route::get(
         'reports/export/accessories',
-        ['as' => 'reports/export/accessories', 'uses' => [ReportsController::class, 'exportAccessoryReport']]
-    );
-    Route::get('reports/custom', ['as' => 'reports/custom', 'uses' => [ReportsController::class, 'getCustomReport']]);
+        [ReportsController::class, 'exportAccessoryReport']
+    )->name('reports/export/accessories');
+    Route::get('reports/custom', [ReportsController::class, 'getCustomReport'])->name('reports/custom');
     Route::post('reports/custom', [ReportsController::class, 'postCustom']);
 
     Route::get(
         'reports/activity',
-        ['as' => 'reports.activity', 'uses' => [ReportsController::class, 'getActivityReport']]
-    );
+        [ReportsController::class, 'getActivityReport']
+    )->name('reports.activity');
 
     Route::post('reports/activity', [ReportsController::class, 'postActivityReport']);
 
     Route::get(
         'reports/unaccepted_assets',
-        ['as' => 'reports/unaccepted_assets', 'uses' => [ReportsController::class, 'getAssetAcceptanceReport']]
-    );
+        [ReportsController::class, 'getAssetAcceptanceReport']
+    )->name('reports/unaccepted_assets');
     Route::get(
         'reports/export/unaccepted_assets',
-        ['as' => 'reports/export/unaccepted_assets', 'uses' => [ReportsController::class, 'exportAssetAcceptanceReport']]
-    );
+        [ReportsController::class, 'exportAssetAcceptanceReport']
+    )->name('reports/export/unaccepted_assets');
 });
 
 Route::get(
     'auth/signin',
-    ['uses' => [LoginController::class, 'legacyAuthRedirect']]
+    [LoginController::class, 'legacyAuthRedirect']
 );
 
 /*
@@ -354,70 +344,51 @@ Route::get(
 Route::group(['prefix' => 'setup', 'middleware' => 'web'], function () {
     Route::get(
         'user',
-        [
-        'as'  => 'setup.user',
-        'uses' => [SettingsController::class, 'getSetupUser'], ]
-    );
+        [SettingsController::class, 'getSetupUser']
+    )->name('setup.user');
 
     Route::post(
         'user',
-        [
-        'as'  => 'setup.user.save',
-        'uses' => [SettingsController::class, 'postSaveFirstAdmin'], ]
-    );
+        [SettingsController::class, 'postSaveFirstAdmin']
+    )->name('setup.user.save');
 
     Route::get(
         'migrate',
-        [
-        'as'  => 'setup.migrate',
-        'uses' => [SettingsController::class, 'getSetupMigrate'], ]
-    );
+        [SettingsController::class, 'getSetupMigrate']
+    )->name('setup.migrate');
 
     Route::get(
         'done',
-        [
-        'as'  => 'setup.done',
-        'uses' => [SettingsController::class, 'getSetupDone'], ]
-    );
+        [SettingsController::class, 'getSetupDone']
+    )->name('setup.done');
 
     Route::get(
         'mailtest',
-        [
-        'as'  => 'setup.mailtest',
-        'uses' => [SettingsController::class, 'ajaxTestEmail'], ]
-    );
+        [SettingsController::class, 'ajaxTestEmail']
+    )->name('setup.mailtest');
 
     Route::get(
         '/',
-        [
-        'as'  => 'setup',
-        'uses' => [SettingsController::class, 'getSetupIndex'], ]
-    );
+        [SettingsController::class, 'getSetupIndex']
+    )->name('setup');
 });
 
-Route::get(
-    'two-factor-enroll',
-    [
-        'as' => 'two-factor-enroll',
-        'middleware' => ['web'],
-        'uses' => [LoginController::class, 'getTwoFactorEnroll'], ]
-);
-
-Route::get(
-    'two-factor',
-    [
-        'as' => 'two-factor',
-        'middleware' => ['web'],
-        'uses' => [LoginController::class, 'getTwoFactorAuth'], ]
-);
-
-Route::post(
-    'two-factor',
-    [
-        'as' => 'two-factor',
-        'middleware' => ['web'],
-        'uses' => [LoginController::class, 'postTwoFactorAuth'], ]
-);
+Route::middleware(['web'], function () {
+    Route::get(
+        'two-factor-enroll',
+        [LoginController::class, 'getTwoFactorEnroll']
+    )->name('two-factor-enroll');
+    
+    Route::get(
+        'two-factor',
+        [LoginController::class, 'getTwoFactorAuth']
+    )->name('two-factor');
+    
+    Route::post(
+        'two-factor',
+        [LoginController::class, 'postTwoFactorAuth']
+    );    
+});
 
 
 
@@ -425,43 +396,27 @@ Route::group(['middleware' => 'web'], function () {
     Route::get(
         'login',
         [LoginController::class, 'showLoginForm']
-        // [
-        //     'as' => 'login',
-        //     'middleware' => ['web'],
-        //     'uses' => [LoginController::class, 'showLoginForm'], ]
     )->name("login");
 
     Route::post(
         'login',
         [LoginController::class, 'login']
-        // [
-        //     'as' => 'login',
-        //     'middleware' => ['web'],
-        //     'uses' => [LoginController::class, 'login'], ]
     );
 
     Route::get(
         'logout',
-        [
-            'as' => 'logout',
-            'uses' => [LoginController::class, 'logout'], ]
-    );
+        [LoginController::class, 'logout']
+    )->name('logout');
 });
 
 //Auth::routes();
 
 Route::get(
     '/health', 
-    [
-    'as' => 'health', 
-    'uses' => [HealthController::class, 'get'],]
-);
+    [HealthController::class, 'get']
+)->name('health');
 
 Route::middleware(['auth'])->get(
     '/',
     [DashboardController::class, 'index']
-    // [
-    // 'as' => 'home',
-    // 'middleware' => ['auth'],
-    // 'uses' => [DashboardController::class, 'index'], ]
 )->name('home');
