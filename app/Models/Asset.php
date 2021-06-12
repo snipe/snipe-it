@@ -27,10 +27,9 @@ use Watson\Validating\ValidatingTrait;
  */
 class Asset extends Depreciable
 {
-    use HasFactory;
 
     protected $presenter = \App\Presenters\AssetPresenter::class;
-    use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
+    use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 
     const LOCATION = 'location';
     const ASSET = 'asset';
