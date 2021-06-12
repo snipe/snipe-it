@@ -39,6 +39,16 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
                 'requestedAssets'
             ]
         )->name('api.assets.requested');
+
+        Route::get('requestable/hardware',
+        [
+            Api\AssetsController::class, 
+            'requestable'
+        ]
+        )->name('api.assets.requestable');
+
+
+
      }); // end account group
 
 
