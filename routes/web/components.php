@@ -7,20 +7,24 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
     Route::get(
         '{componentID}/checkout',
-        ['as' => 'checkout/component', 'uses' => [Components\ComponentCheckoutController::class, 'create']]
-    );
+        [Components\ComponentCheckoutController::class, 'create']
+    )->name('checkout/accessory');
+
     Route::post(
         '{componentID}/checkout',
-        ['as' => 'checkout/component', 'uses' => [Components\ComponentCheckoutController::class, 'store']]
-    );
+        [Components\ComponentCheckoutController::class, 'store']
+    )->name('checkout/accessory');
+
     Route::get(
-        '{componentID}/checkin',
-        ['as' => 'checkin/component', 'uses' => [Components\ComponentCheckinController::class, 'create']]
-    );
+        '{componentID}/checkin/{backto?}',
+        [Components\ComponentCheckinController::class, 'create']
+    )->name('checkout/accessory');
+
     Route::post(
-        '{componentID}/checkin',
-        ['as' => 'component.checkin.save', 'uses' => [Components\ComponentCheckinController::class, 'store']]
-    );
+        '{componentID}/checkin/{backto?}',
+        [Components\ComponentCheckinController::class, 'store']
+    )->name('checkout/accessory');
+
 });
 
 Route::resource('components', Components\ComponentsController::class, [

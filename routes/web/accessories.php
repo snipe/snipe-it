@@ -9,21 +9,24 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'accessories', 'middleware' => ['auth']], function () {
     Route::get(
         '{accessoryID}/checkout',
-        ['as' => 'checkout/accessory', 'uses' => [Accessories\AccessoryCheckoutController::class, 'create']]
-    );
+        [Accessories\AccessoryCheckoutController::class, 'create']
+    )->name('checkout/accessory');
+
     Route::post(
         '{accessoryID}/checkout',
-        ['as' => 'checkout/accessory', 'uses' => [Accessories\AccessoryCheckoutController::class, 'store']]
-    );
+        [Accessories\AccessoryCheckoutController::class, 'store']
+    )->name('checkout/accessory');
 
     Route::get(
         '{accessoryID}/checkin/{backto?}',
-        ['as' => 'checkin/accessory', 'uses' => [Accessories\AccessoryCheckinController::class, 'create']]
-    );
+        [Accessories\AccessoryCheckinController::class, 'create']
+    )->name('checkout/accessory');
+
     Route::post(
         '{accessoryID}/checkin/{backto?}',
-        ['as' => 'checkin/accessory', 'uses' => [Accessories\AccessoryCheckinController::class, 'store']]
-    );
+        [Accessories\AccessoryCheckinController::class, 'store']
+    )->name('checkout/accessory');
+
 });
 
 Route::resource('accessories', Accessories\AccessoriesController::class, [
