@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'consumables', 'middleware' => ['auth']], function () {
     Route::get(
         '{consumablesID}/checkout',
-        [Consumables\ConsumableCheckoutController, 'create']
+        [Consumables\ConsumableCheckoutController::class, 'create']
     )->name('checkout/accessory');
 
     Route::post(

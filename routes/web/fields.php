@@ -9,32 +9,49 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'fields', 'middleware' => ['auth']], function () {
-    Route::get('required/{fieldset_id}/{field_id}',
-        ['uses' => [CustomFieldsetsController::class, 'makeFieldRequired'],
-            'as' => 'fields.required', ]
-    );
 
-    Route::get('optional/{fieldset_id}/{field_id}',
-        ['uses' => [CustomFieldsetsController::class, 'makeFieldOptional'],
-            'as' => 'fields.optional', ]
-    );
+    Route::get(
+        'required/{fieldset_id}/{field_id}',
+        [
+            CustomFieldsetsController::class, 
+            'makeFieldRequired'
+        ]
+    )->name('fields.required');
 
-    Route::get('{field_id}/fieldset/{fieldset_id}/disassociate',
-        ['uses' => [CustomFieldsController::class, 'deleteFieldFromFieldset'],
-        'as' => 'fields.disassociate', ]
-    );
+    Route::get(
+        'optional/{fieldset_id}/{field_id}',
+        [
+            CustomFieldsetsController::class, 
+            'makeFieldOptional'
+        ]
+    )->name('fields.optional');
 
-    Route::post('fieldsets/{id}/associate',
-        ['uses' => [CustomFieldsetsController::class, 'associate'],
-        'as' => 'fieldsets.associate', ]
-    );
+    Route::get(
+        '{field_id}/fieldset/{fieldset_id}/disassociate',
+        [
+            CustomFieldsetsController::class, 
+            'deleteFieldFromFieldset'
+        ]
+    )->name('fields.disassociate');
+
+    Route::get(
+        'fieldsets/{id}/associate',
+        [
+            CustomFieldsetsController::class, 
+            'associate'
+        ]
+    )->name('fields.associate');
 
     Route::resource('fieldsets', CustomFieldsetsController::class, [
-    'parameters' => ['fieldset' => 'field_id', 'field' => 'field_id'],
-    ]);
-});
+        'parameters' => ['fieldset' => 'field_id', 'field' => 'field_id'],
+        ]);
 
-Route::resource('fields', CustomFieldsController::class, [
+
+});
+    
+Route::resource('fields', CustomFieldsetsController::class, [
     'middleware' => ['auth'],
-    'parameters' => ['field' => 'field_id', 'fieldset' => 'fieldset_id'],
+    'parameters' => ['field' => 'field_id'],
 ]);
+
+
