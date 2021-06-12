@@ -20,7 +20,6 @@
         "adldap2/adldap2": "^10.2",
         "alek13/slack": "^1.12",
         "bacon/bacon-qr-code": "^1.0",
-        "barryvdh/laravel-cors": "^2.0",
         "barryvdh/laravel-debugbar": "^3.6",
         "doctrine/cache": "^1.10",
         "doctrine/common": "^2.12",
