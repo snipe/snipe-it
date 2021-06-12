@@ -409,7 +409,7 @@ Route::group(['middleware' => 'web'], function () {
     )->name('logout');
 });
 
-//Auth::routes();
+Auth::routes();
 
 Route::get(
     '/health', 
