@@ -242,7 +242,7 @@ class AssetFactory extends Factory
             return [
                 'model_id' => 1,
                 'assigned_to' => \App\Models\User::factory()->create()->id,
-                'assigned_type' => App\Models\User::class,
+                'assigned_type' => \App\Models\User::class,
             ];
         });
     }
@@ -253,7 +253,7 @@ class AssetFactory extends Factory
             return [
                 'model_id' => 1,
                 'assigned_to' => \App\Models\Location::factory()->create()->id,
-                'assigned_type' => App\Models\Location::class,
+                'assigned_type' => \App\Models\Location::class,
             ];
         });
     }
@@ -264,7 +264,7 @@ class AssetFactory extends Factory
             return [
                 'model_id' => 1,
                 'assigned_to' => \App\Models\Asset::factory()->create()->id,
-                'assigned_type' => App\Models\Asset::class,
+                'assigned_type' => \App\Models\Asset::class,
             ];
         });
     }

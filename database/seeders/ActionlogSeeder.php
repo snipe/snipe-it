@@ -10,7 +10,9 @@ class ActionlogSeeder extends Seeder
     public function run()
     {
         Actionlog::truncate();
-        Actionlog::factory()->count('asset-checkout-user', 300)->create();
-        Actionlog::factory()->count('asset-checkout-location', 100)->create();
+        Actionlog::factory()->count(300)->assetCheckoutToUser()->create();
+        Actionlog::factory()->count(100)->assetCheckoutToLocation()->create();
+
+        
     }
 }

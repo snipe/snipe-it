@@ -9,140 +9,14 @@ use App\Models\Location;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->defineAs(App\Models\Actionlog::class, 'asset-upload', function ($faker) {
-    $asset = \App\Models\Asset::factory()->create();
-
-    return [
-        'item_type' => get_class($asset),
-        'item_id' => 1,
-        'user_id' => 1,
-        'filename' => $faker->word,
-        'action_type' => 'uploaded',
-    ];
-});
-
-$factory->defineAs(Actionlog::class, 'asset-checkout-user', function (Faker\Generator $faker) {
-    $target = User::inRandomOrder()->first();
-    $item = Asset::inRandomOrder()->RTD()->first();
-    $user_id = rand(1, 2); // keep it simple - make it one of the two superadmins
-    $asset = App\Models\Asset::where('id', $item->id)
-        ->update(
-            [
-                'assigned_to' => $target->id,
-                'assigned_type' => App\Models\User::class,
-                'assigned_to' => $target->location_id,
-            ]
-        );
-
-    return [
-        'created_at'  => $faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
-        'user_id' => $user_id,
-        'action_type' => 'checkout',
-        'item_id' => $item->id,
-        'item_type'  => App\Models\Asset::class,
-        'target_id' => $target->id,
-        'target_type' => get_class($target),
-
-    ];
-});
-
-$factory->defineAs(Actionlog::class, 'asset-checkout-location', function (Faker\Generator $faker) {
-    $target = Location::inRandomOrder()->first();
-    $item = Asset::inRandomOrder()->RTD()->first();
-    $user_id = rand(1, 2); // keep it simple - make it one of the two superadmins
-    $asset = App\Models\Asset::where('id', $item->id)
-        ->update(
-            [
-                'assigned_to' => $target->id,
-                'assigned_type' => App\Models\Location::class,
-                'assigned_to' => $target->id,
-            ]
-        );
-
-    return [
-        'created_at'  => $faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
-        'user_id' => $user_id,
-        'action_type' => 'checkout',
-        'item_id' => $item->id,
-        'item_type'  => App\Models\Asset::class,
-        'target_id' => $target->id,
-        'target_type' => get_class($target),
-    ];
-});
-
-// This doesn't work - we need to assign a seat
-
-$factory->defineAs(Actionlog::class, 'license-checkout-asset', function (Faker\Generator $faker) {
-    $target = Asset::inRandomOrder()->RTD()->first();
-    $item = License::inRandomOrder()->first();
-    $user_id = rand(1, 2); // keep it simple - make it one of the two superadmins
-
-    return [
-        'user_id' => $user_id,
-        'action_type' => 'checkout',
-        'item_id' => $item->id,
-        'item_type'  => get_class($item),
-        'target_id' => $target->id,
-        'target_type' => get_class($target),
-        'created_at'  => $faker->dateTime(),
-        'note' => $faker->sentence,
-    ];
-});
-
-$factory->defineAs(Actionlog::class, 'accessory-checkout', function (Faker\Generator $faker) {
-    $target = Asset::inRandomOrder()->RTD()->first();
-    $item = Accessory::inRandomOrder()->first();
-    $user_id = rand(1, 2); // keep it simple - make it one of the two superadmins
-
-    return [
-        'user_id' => $user_id,
-        'action_type' => 'checkout',
-        'item_id' => $item->id,
-        'item_type'  => get_class($item),
-        'target_id' => $target->id,
-        'target_type' => get_class($target),
-        'created_at'  => $faker->dateTime(),
-        'note' => $faker->sentence,
-    ];
-});
-
-$factory->defineAs(Actionlog::class, 'consumable-checkout', function (Faker\Generator $faker) {
-    $company = \App\Models\Company::factory()->create();
-    $user = \App\Models\User::factory()->create(['company_id' => $company->id]);
-    $target = \App\Models\User::factory()->create(['company_id' => $company->id]);
-    $item = \App\Models\Consumable::factory()->create(['company_id' => $company->id]);
-
-    return [
-        'user_id' => $user->id,
-        'action_type' => 'checkout',
-        'item_id' => $item->id,
-        'item_type'  => get_class($item),
-        'target_id' => $target->id,
-        'target_type' => get_class($target),
-        'created_at'  => $faker->dateTime(),
-        'note' => $faker->sentence,
-        'company_id' => $company->id,
-    ];
-});
-
-$factory->defineAs(Actionlog::class, 'component-checkout', function (Faker\Generator $faker) {
-    $company = \App\Models\Company::factory()->create();
-    $user = \App\Models\User::factory()->create(['company_id' => $company->id]);
-    $target = \App\Models\User::factory()->create(['company_id' => $company->id]);
-    $item = \App\Models\Component::factory()->create(['company_id' => $company->id]);
-
-    return [
-        'user_id' => $user->id,
-        'action_type' => 'checkout',
-        'item_id' => $item->id,
-        'item_type'  => get_class($item),
-        'target_id' => $target->id,
-        'target_type' => get_class($target),
-        'created_at'  => $faker->dateTime(),
-        'note' => $faker->sentence,
-        'company_id' => $company->id,
-    ];
-});
+/*
+|--------------------------------------------------------------------------
+| Action Log Factories
+|--------------------------------------------------------------------------
+|
+| This simulates checkin/checkout/etc activities 
+|
+*/
 
 class ActionlogFactory extends Factory
 {
@@ -151,7 +25,7 @@ class ActionlogFactory extends Factory
      *
      * @var string
      */
-    protected $model = Actionlog::class;
+    protected $model = \App\Models\Actionlog::class;
 
     /**
      * Define the model's default state.
@@ -160,8 +34,72 @@ class ActionlogFactory extends Factory
      */
     public function definition()
     {
+        $asset = \App\Models\Asset::factory()->create();
         return [
-            'note' => 'Sample checkout from DB seeder!',
+            'item_type' => get_class($asset),
+            'item_id' => 1,
+            'user_id' => 1,
+            'filename' => $this->faker->word,
+            'action_type' => 'uploaded',
         ];
     }
+
+
+    public function assetCheckoutToUser()
+    {
+        return $this->state(function () {
+            $target = \App\Models\User::inRandomOrder()->first();
+            $item = \App\Models\Asset::inRandomOrder()->RTD()->first();
+            $user_id = rand(1, 2); // keep it simple - make it one of the two superadmins
+            $asset = Asset::where('id', $item->id)
+                ->update(
+                    [
+                        'assigned_to' => $target->id,
+                        'assigned_type' => \App\Models\User::class,
+                        'assigned_to' => $target->location_id,
+                    ]
+                );
+    
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'user_id' => $user_id,
+                'action_type' => 'checkout',
+                'item_id' => $item->id,
+                'item_type'  => \App\Models\Asset::class,
+                'target_id' => $target->id,
+                'target_type' => get_class($target),
+    
+            ];
+        });
+    }
+
+
+    public function assetCheckoutToLocation()
+    {
+        return $this->state(function () {
+            $target = \App\Models\Location::inRandomOrder()->first();
+            $item = \App\Models\Asset::inRandomOrder()->RTD()->first();
+            $user_id = rand(1, 2); // keep it simple - make it one of the two superadmins
+            $asset = \App\Models\Asset::where('id', $item->id)
+                ->update(
+                    [
+                        'assigned_to' => $target->id,
+                        'assigned_type' => \App\Models\Location::class,
+                        'assigned_to' => $target->id,
+                    ]
+                );
+
+            return [
+                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'user_id' => $user_id,
+                'action_type' => 'checkout',
+                'item_id' => $item->id,
+                'item_type'  => \App\Models\Asset::class,
+                'target_id' => $target->id,
+                'target_type' => get_class($target),
+            ];
+        });
+    }
+
+
 }

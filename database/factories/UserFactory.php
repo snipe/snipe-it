@@ -5,21 +5,6 @@ namespace Database\Factories;
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-$password = bcrypt('password');
-
-// USER GLOBAL PERMISSION STATES
-
-// USER ASSET PERMISSION STATES
-
-// USER ACCESSORY PERMISSION STATES
-
-// USER CONSUMABLE PERMISSION STATES
-
-// USER LICENSE PERMISSION STATES
-
-// USER COMPONENTS PERMISSION STATES
-
-// USER USER PERMISSION STATES
 
 class UserFactory extends Factory
 {
@@ -37,6 +22,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $password = bcrypt('password');
         return [
             'activated' => 1,
             'address' => $this->faker->address,

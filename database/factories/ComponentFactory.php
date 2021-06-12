@@ -30,12 +30,20 @@ class ComponentFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => 1,
+            'name' => $this->faker->text(20),
+            'category_id' => function () {
+                return \App\Models\Category::factory()->create()->id;
+            },
+            'location_id' => 1,
+            'serial'   => $this->faker->uuid,
+            'qty' => $this->faker->numberBetween(3, 10),
             'order_number' => $this->faker->numberBetween(1000000, 50000000),
-            'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
-            'purchase_cost' => $this->faker->randomFloat(2, 1, 50),
-            'qty' => $this->faker->numberBetween(5, 10),
+            'purchase_date' => $this->faker->dateTime(),
+            'purchase_cost' => $this->faker->randomFloat(2),
             'min_amt' => $this->faker->numberBetween($min = 1, $max = 2),
+            'company_id' => function () {
+                return \App\Models\Company::factory()->create()->id;
+            },
         ];
     }
 
@@ -89,28 +97,5 @@ class ComponentFactory extends Factory
         });
     }
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
-    {
-        return [
-            'name' => $this->faker->text(20),
-            'category_id' => function () {
-                return \App\Models\Category::factory()->create()->id;
-            },
-            'location_id' => 1,
-            'serial'   => $this->faker->uuid,
-            'qty' => $this->faker->numberBetween(3, 10),
-            'order_number' => $this->faker->numberBetween(1000000, 50000000),
-            'purchase_date' => $this->faker->dateTime(),
-            'purchase_cost' => $this->faker->randomFloat(2),
-            'min_amt' => $this->faker->numberBetween($min = 1, $max = 2),
-            'company_id' => function () {
-                return \App\Models\Company::factory()->create()->id;
-            },
-        ];
-    }
+
 }
