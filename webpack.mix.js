@@ -53,7 +53,7 @@ mix.js(
         './resources/assets/js/snipeit_modals.js'
     ],
     './public/js/build/app.js'
-);
+).vue();
 
 // Convert the skins to CSS
 mix.less('./resources/assets/less/skins/skin-blue.less', 'css/dist/skins', './public/css/dist/skins/skin-blue.css');
