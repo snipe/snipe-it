@@ -36,7 +36,7 @@ return array(
     'i_have_read' => 'Ich habe die Nutzungsbedingungen gelesen und stimme diesen zu, und ich habe diesen Gegenstand erhalten.',
     'item' => 'Gegenstand:',
     'Item_Request_Canceled' => 'Gegenstands Anfrage abgebrochen',
-    'Item_Requested' => 'Gegenstand angefortdert',
+    'Item_Requested' => 'Gegenstand angefordert',
     'link_to_update_password' => 'Klicken Sie bitte auf den folgenden Link zum Aktualisieren Ihres :web Passworts:',
     'login_first_admin' => 'Melden Sie sich zu Ihrer neuen Snipe-IT-Installation mithilfe der unten stehenden Anmeldeinformationen an:',
     'login' => 'Benutzername:',
