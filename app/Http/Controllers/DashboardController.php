@@ -33,6 +33,8 @@ class DashboardController extends Controller
             $counts['accessory'] = \App\Models\Accessory::count();
             $counts['license'] = \App\Models\License::assetcount();
             $counts['consumable'] = \App\Models\Consumable::count();
+            $counts['component'] = \App\Models\Component::count();
+            $counts['users'] = \App\Models\User::count();
             $counts['grand_total'] = $counts['asset'] + $counts['accessory'] + $counts['license'] + $counts['consumable'];
 
             if ((! file_exists(storage_path().'/oauth-private.key')) || (! file_exists(storage_path().'/oauth-public.key'))) {
