@@ -29,6 +29,7 @@
                     data-show-refresh="true"
                     data-sort-order="asc"
                     id="depreciationReport"
+                    data-url={{ route('api.depreciationreports.index') }}
                     class="table table-striped snipe-table"
                     data-export-options='{
                         "fileName": "depreciation-report-{{ date('Y-m-d') }}",
