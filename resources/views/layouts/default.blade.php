@@ -74,6 +74,7 @@
           };
     </script>
     <!-- Add laravel routes into javascript  Primarily useful for vue.-->
+    @routes('vue_routes')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <script src="{{ url(asset('js/html5shiv.js')) }}" nonce="{{ csrf_token() }}"></script>

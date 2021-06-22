@@ -16,47 +16,40 @@ Route::group(
     ['prefix' => 'hardware',
     'middleware' => ['auth'], ],
     function () {
-        Route::get('bulkaudit', [
-            'as' => 'assets.bulkaudit',
-            'uses' => [Assets\AssetsController::class, 'quickScan'],
-        ]);
+        Route::get('bulkaudit',
+            [Assets\AssetsController::class, 'quickScan']
+        )->name('assets.bulkaudit');
 
         // Asset Maintenances
         Route::resource('maintenances', AssetMaintenancesController::class, [
             'parameters' => ['maintenance' => 'maintenance_id', 'asset' => 'asset_id'],
         ]);
 
-        Route::get('requested', ['as' => 'assets.requested', 'uses' => [Assets\AssetsController::class, 'getRequestedIndex']]);
+        Route::get('requested', [Assets\AssetsController::class, 'getRequestedIndex'])->name('assets.requested');
 
-        Route::get('scan', [
-            'as' => 'asset.scan',
-            'uses' => [Assets\AssetsController::class, 'scan'],
-        ]);
+        Route::get('scan',
+            [Assets\AssetsController::class, 'scan']
+        )->name('asset.scan');
 
-        Route::get('audit/due', [
-            'as' => 'assets.audit.due',
-            'uses' => [Assets\AssetsController::class, 'dueForAudit'],
-        ]);
+        Route::get('audit/due',
+            [Assets\AssetsController::class, 'dueForAudit']
+        )->name('assets.audit.due');
 
-        Route::get('audit/overdue', [
-            'as' => 'assets.audit.overdue',
-            'uses' => [Assets\AssetsController::class, 'overdueForAudit'],
-        ]);
+        Route::get('audit/overdue',
+            [Assets\AssetsController::class, 'overdueForAudit']
+        )->name('assets.audit.overdue');
 
-        Route::get('audit/due', [
-            'as' => 'assets.audit.due',
-            'uses' => [Assets\AssetsController::class, 'dueForAudit'],
-        ]);
+        Route::get('audit/due',
+            [Assets\AssetsController::class, 'dueForAudit']
+        )->name('assets.audit.due');
 
-        Route::get('audit/overdue', [
-            'as' => 'assets.audit.overdue',
-            'uses' => [Assets\AssetsController::class, 'overdueForAudit'],
-        ]);
+        Route::get('audit/overdue',
+            [Assets\AssetsController::class, 'overdueForAudit']
+        )->name('assets.audit.overdue');
 
-        Route::get('audit/due', [
-            'as' => 'assets.audit.due',
-            'uses' => [Assets\AssetsController::class, 'dueForAudit'],
-        ]);
+        Route::get('audit/due',
+            [Assets\AssetsController::class, 'dueForAudit']
+        )->name('assets.audit.due');
 
         Route::get('audit/overdue', [
             'as' => 'assets.audit.overdue',
