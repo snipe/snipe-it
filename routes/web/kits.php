@@ -35,7 +35,7 @@ Route::group(['prefix' => 'kits/{kit_id}', 'middleware' => ['auth']], function (
 
     Route::put('models/{model_id}',
         [Kits\PredefinedKitsController::class, 'updateModel']
-    )->parameters([2 => 'kit_id', 1 => 'model_id'])->name('kits.models.update');
+    )/* ->parameters([2 => 'kit_id', 1 => 'model_id'])*/->name('kits.models.update');
 
     Route::get('models/{model_id}/edit',
         [Kits\PredefinedKitsController::class, 'editModel']
@@ -48,7 +48,7 @@ Route::group(['prefix' => 'kits/{kit_id}', 'middleware' => ['auth']], function (
     // Consumables
     Route::put('consumables/{consumable_id}',
         [Kits\PredefinedKitsController::class, 'updateConsumable']
-    )->parameters([2 => 'kit_id', 1 => 'consumable_id'])->name('kits.consumables.update');
+    )/*->parameters([2 => 'kit_id', 1 => 'consumable_id'])*/->name('kits.consumables.update');
 
     Route::get('consumables/{consumable_id}/edit',
         [Kits\PredefinedKitsController::class, 'editConsumable']
@@ -61,7 +61,7 @@ Route::group(['prefix' => 'kits/{kit_id}', 'middleware' => ['auth']], function (
     // Accessories
     Route::put('accessories/{accessory_id}',
         [Kits\PredefinedKitsController::class, 'updateAccessory']
-    )->parameters([2 => 'kit_id', 1 => 'accessory_id'])->name('kits.accessories.update');
+    )/*->parameters([2 => 'kit_id', 1 => 'accessory_id'])*/->name('kits.accessories.update');
 
     Route::get('accessories/{accessory_id}/edit',
         [Kits\PredefinedKitsController::class, 'editAccessory']
