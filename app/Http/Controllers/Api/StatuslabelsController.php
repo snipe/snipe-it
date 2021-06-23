@@ -167,10 +167,7 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('view', Statuslabel::class);
 
-        $statuslabels = Statuslabel::with('assets')
-            ->groupBy('id')
-            ->withCount('assets as assets_count')
-            ->get();
+        $statuslabels = Statuslabel::withCount('assets')->get();
 
         $labels=[];
         $points=[];
