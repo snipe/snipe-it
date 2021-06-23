@@ -111,6 +111,9 @@
     "sort-packages": true,
     "optimize-autoloader": true,
     "discard-changes": true,
-    "process-timeout": 3000
+    "process-timeout": 3000,
+    "platform": {
+      "php": "7.2.5"
+  }
   }
 }
