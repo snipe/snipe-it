@@ -48,11 +48,11 @@ mix
 // Combine main SnipeIT JS files
 mix.js(
     [
-        './resources/assets/js/vue.js',
+        './resources/assets/js/vue.js', // require()s vue, and require()s bootstrap.js
         './resources/assets/js/snipeit.js', //this is the actual Snipe-IT JS
         './resources/assets/js/snipeit_modals.js'
     ],
-    './public/js/build/app.js'
+    './public/js/build/app.js' //because of compiling - this does not work very well :(
 ).vue();
 
 // Convert the skins to CSS
@@ -91,7 +91,9 @@ mix.combine(
  */
 mix
     .combine(
-        [
+        [   // lots of node_modules here - should this be subsumed by require()?
+            './node_modules/jquery/dist/jquery.js',
+            './node_modules/select2/dist/js/select2.full.min.js',
             './node_modules/admin-lte/dist/js/adminlte.min.js',
             './node_modules/tether/dist/js/tether.js',
             './node_modules/jquery-ui-bundle/jquery-ui.js',
@@ -101,14 +103,14 @@ mix
             './node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js',
             './node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
             './node_modules/ekko-lightbox/dist/ekko-lightbox.js',
-            './node_modules/icheck/icheck.js',
+            './node_modules/icheck/icheck.js', //definite problem here :(
             './resources/assets/js/extensions/pGenerator.jquery.js',
             './node_modules/chart.js/dist/Chart.js',
             './resources/assets/js/signature_pad.js',
-            './node_modules/jquery-form-validator/form-validator/jquery.form-validator.js',
+            './node_modules/jquery-form-validator/form-validator/jquery.form-validator.js', //problem?
             './node_modules/list.js/dist/list.js'
         ],
-        'public/js/build/vendor.js'
+        'public/js/build/vendor.js' // this file seems OK!
     );
 
 
@@ -138,9 +140,8 @@ mix
 
 mix.combine(
         [
-            './public/js/build/app.js',
-            './public/js/build/vendor.js'
-
+            './public/js/build/vendor.js',
+            './public/js/build/app.js'
         ],
         './public/js/dist/all.js'
     ).version();

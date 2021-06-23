@@ -980,14 +980,14 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
                 ]
             )->name('api.kits.models.store');
 
-            Route::put('models/{model_id',
+            Route::put('models/{model_id}',
                 [
                     Api\PredefinedKitsController::class, 
                     'updateModels'
                 ]
             )->name('api.kits.models.update');
 
-            Route::delete('models/{model_id',
+            Route::delete('models/{model_id}',
                 [
                     Api\PredefinedKitsController::class, 
                     'detachModels'

@@ -1,4 +1,8 @@
 
+// var jQuery = require('jquery');
+// window.jQuery = jQuery
+// window.$ = jQuery
+
 /**
  * Module containing core application logic.
  * @param  {jQuery} $        Insulated jQuery object
