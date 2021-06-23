@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 
 class AccessoriesController extends Controller
 {
@@ -86,10 +87,10 @@ class AccessoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\ImageUploadRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Accessory::class);
         $accessory = new Accessory;
@@ -180,11 +181,11 @@ class AccessoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\ImageUploadRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Accessory::class);
         $accessory = Accessory::findOrFail($id);
