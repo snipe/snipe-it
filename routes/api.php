@@ -486,7 +486,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
          * Asset maintenances API routes
          */
         Route::resource('maintenances', 
-        Api\AssetsController::class,
+        Api\AssetMaintenancesController::class,
         ['names' => 
             [
                 'index' => 'api.maintenances.index',
