@@ -48,7 +48,6 @@
         "less-loader": "^5.0.0",
         "list.js": "^1.5.0",
         "papaparse": "^4.3.3",
-        "phantomjs": "^2.1.7",
         "select2": "4.0.13",
         "sheetjs": "^2.0.0",
         "tableexport.jquery.plugin": "^1.10.26",
