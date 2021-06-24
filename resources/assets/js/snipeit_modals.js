@@ -54,7 +54,7 @@ $(function () {
                 ajax: {
 
                     // the baseUrl includes a trailing slash
-                    url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                    url: baseUrl + 'api/v1/' + endpoint + '/selectlist', //WARNING - we're hoping that's defined on the page somewhere...
                     dataType: 'json',
                     delay: 250,
                     headers: {
