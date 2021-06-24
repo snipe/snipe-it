@@ -167,8 +167,8 @@ a:visited {
 :root {
   --background: #222;
   --back-main: #333;
-  --back-sub: #444;
-  --back-sub-alt: #dfd9d8;
+  --back-sub: #3d4144;
+  --back-sub-alt: rgba(0, 0, 0, 0.36);
   --button-default: #b06f09;
   --button-primary: #7f5006;
   --button-hover: #674105;
