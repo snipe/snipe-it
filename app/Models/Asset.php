@@ -90,7 +90,7 @@ class Asset extends Depreciable
         'name'            => 'max:255|nullable',
         'model_id'        => 'required|integer|exists:models,id',
         'status_id'       => 'required|integer|exists:status_labels,id',
-        'company_id'      => 'integer|nullable',
+        'company_id'      => 'integer|nullable|fmcs_validator',
         'warranty_months' => 'numeric|nullable|digits_between:0,240',
         'physical'        => 'numeric|max:1|nullable',
         'checkout_date'   => 'date|max:10|min:10|nullable',

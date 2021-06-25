@@ -58,7 +58,7 @@ final class Company extends SnipeModel
      */
     protected $fillable = ['name'];
 
-    private static function isFullMultipleCompanySupportEnabled()
+    public static function isFullMultipleCompanySupportEnabled()
     {
         $settings = Setting::getSettings();
 
@@ -72,18 +72,20 @@ final class Company extends SnipeModel
 
     private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null )
     {
-        if (Auth::user()) {
-            $company_id = Auth::user()->company_id;
-        } else {
-            $company_id = null;
-        }
-
+        $current_user = Auth::user();
         $table = ($table_name) ? $table_name."." : '';
 
-        if(\Schema::hasColumn($query->getModel()->getTable(), $column)){
-             return $query->where($table.$column, '=', $company_id); 
+        // join the users table if the specified table doesn't contain a company_id
+        if(!\Schema::hasColumn($query->getModel()->getTable(), $column)){
+            $query = $query->join('users as users_comp', 'users_comp.id', 'user_id');
+            $table = 'users_comp.';
+            $column = 'company_id';
+        }
+
+        if ($current_user->company_id != null) {
+            return $query->whereIn($table.$column, $current_user->company_ids());
         } else {
-            return $query->join('users as users_comp', 'users_comp.id', 'user_id')->where('users_comp.company_id', '=', $company_id); 
+            return $query->where($table.$column, '=', null);
         }
     }
 
@@ -100,22 +102,12 @@ final class Company extends SnipeModel
 
     public static function getIdForCurrentUser($unescaped_input)
     {
-        if (!static::isFullMultipleCompanySupportEnabled()) {
-            return static::getIdFromInput($unescaped_input);
+        $current_user = Auth::user();
+        $input = static::getIdFromInput($unescaped_input);
+        if (static::canManageUsersCompanies()) {
+            return $input;
         } else {
-            $current_user = Auth::user();
-
-            // Super users should be able to set a company to whatever they need
-            if ($current_user->isSuperUser()) {
-                return static::getIdFromInput($unescaped_input);
-            } else {
-                if ($current_user->company_id != null) {
-                    return $current_user->company_id;
-                } else {
-                    return static::getIdFromInput($unescaped_input);
-                }
-            }
-
+            return $current_user->company_id;
         }
     }
 
@@ -127,11 +119,11 @@ final class Company extends SnipeModel
             return true;
         } else {
             if (Auth::user()) {
-                $current_user_company_id = Auth::user()->company_id;
-                $companyable_company_id = $companyable->company_id;
-                return ($current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser());
+                $current_user = Auth::user();
+                return ($current_user->company_id == null
+                        || $current_user->company_ids()->contains($companyable->company_id)
+                        || $current_user->isSuperUser());
             }
-
         }
     }
 
@@ -142,8 +134,11 @@ final class Company extends SnipeModel
 
     public static function canManageUsersCompanies()
     {
-        return (!static::isFullMultipleCompanySupportEnabled() || Auth::user()->isSuperUser() ||
-                Auth::user()->company_id == null);
+        $current_user = Auth::user();
+        return (!static::isFullMultipleCompanySupportEnabled()
+                || $current_user->isSuperUser()
+                || $current_user->company_id == null
+                || $current_user->company_ids()->count() > 1);
     }
 
     /**

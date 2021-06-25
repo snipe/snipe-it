@@ -78,6 +78,9 @@
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab_1" data-toggle="tab">Information</a></li>
           <li><a href="#tab_2" data-toggle="tab">Permissions</a></li>
+          @if($fmcs)
+            <li><a href="#tab_3" data-toggle="tab">Company Mappings</a></li>
+          @endif
         </ul>
 
         <div class="tab-content">
@@ -273,7 +276,6 @@
                 @if (\App\Models\Company::canManageUsersCompanies())
                     @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.select_company'), 'fieldname' => 'company_id'])
                 @endif
-
 
               <!-- Image -->
                   @if ($user->avatar)
@@ -523,6 +525,22 @@
                 @include('partials.forms.edit.permissions-base')
             </table>
           </div><!-- /.tab-pane -->
+
+          <!-- Company Mappings Tab-->
+          @if($fmcs)
+          <div class="tab-pane" id="tab_3">
+            <table class="table table-striped company-mappings-fmcs">
+              <thead>
+                <tr class="company-mappings-fmcs-row">
+                  <th class="col-md-8">Company</th>
+                  <th class="col-md-1">Mapped</th>
+                </tr>
+              </thead>
+                @include('partials.forms.edit.company-mappings-fmcs')
+            </table>
+          </div><!-- /.tab-pane -->
+          @endif
+
         </div><!-- /.tab-content -->
         <div class="box-footer text-right">
           <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>

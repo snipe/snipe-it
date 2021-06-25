@@ -401,6 +401,32 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
+     * Establishes the user -> companies relationship for FullMultipleCompanySupport
+     *
+     * @author T. Regnery <tobias.regnery@gmail.com>
+     * @since [vX.X]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function companies()
+    {
+        return $this->belongsToMany('\App\Models\Company', 'companies_users_fmcs');
+    }
+
+    /**
+     * Returns the combined company_ids from the users "primary" company and the FullMultipleCompanySupport mapping table
+     *
+     * @author T. Regnery <tobias.regnery@gmail.com>
+     * @since [vX.X]
+     * @return Illuminate\Support\Collection
+     */
+    public function company_ids()
+    {
+        $company_ids = $this->companies()->pluck('company_id');
+        $company_ids->push($this->company_id);
+        return $company_ids;
+    }
+
+    /**
      * Establishes the user -> assets relationship
      *
      * @author A. Gianotto <snipe@snipe.net>

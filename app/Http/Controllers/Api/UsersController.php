@@ -336,6 +336,12 @@ class UsersController extends Controller
                 $user->groups()->sync(array());
             }
 
+            // Remove the new company from the fmcs mapping table
+            if ($request->filled('company_id')
+                && Company::isFullMultipleCompanySupportEnabled()
+                && $user->companies()->get()->contains($request->input('company_id'))) {
+                    $user->companies()->detach($request->input('company_id'));
+                }
 
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
         }
