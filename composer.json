@@ -41,6 +41,7 @@
     "laravel/tinker": "^2.4",
     "laravelcollective/html": "^6.0",
     "league/csv": "^9.5",
+    "league/flysystem": "1.1.4",
     "league/flysystem-aws-s3-v3": "^1.0",
     "league/flysystem-cached-adapter": "^1.0",
     "neitanod/forceutf8": "^2.0",
@@ -110,6 +111,9 @@
     "sort-packages": true,
     "optimize-autoloader": true,
     "discard-changes": true,
-    "process-timeout": 3000
+    "process-timeout": 3000,
+    "platform": {
+      "php": "7.2.5"
+  }
   }
 }

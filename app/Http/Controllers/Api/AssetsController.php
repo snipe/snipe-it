@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api;
 
+use App\Events\CheckoutableCheckedIn;
 use Illuminate\Support\Facades\Gate;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -782,6 +783,8 @@ class AssetsController extends Controller
 
         if ($asset->save()) {
             $asset->logCheckin($target, e($request->input('note')));
+            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note')));
+
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
 
