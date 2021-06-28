@@ -95,7 +95,8 @@ class AccessoriesController extends Controller
         $this->authorize('create', Accessory::class);
         $accessory = new Accessory;
         $accessory->fill($request->all());
-
+        $accessory = $request->handleImages($accessory);
+        
         if ($accessory->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $accessory, trans('admin/accessories/message.create.success')));
         }
