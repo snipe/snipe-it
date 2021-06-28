@@ -96,7 +96,7 @@ class AccessoriesController extends Controller
         $accessory = new Accessory;
         $accessory->fill($request->all());
         $accessory = $request->handleImages($accessory);
-        
+
         if ($accessory->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $accessory, trans('admin/accessories/message.create.success')));
         }
@@ -191,6 +191,8 @@ class AccessoriesController extends Controller
         $this->authorize('update', Accessory::class);
         $accessory = Accessory::findOrFail($id);
         $accessory->fill($request->all());
+        
+        $accessory = $request->handleImages($accessory);
 
         if ($accessory->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $accessory, trans('admin/accessories/message.update.success')));
