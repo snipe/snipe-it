@@ -58,6 +58,24 @@ class UserPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'usersLinkFormatter',
             ],
+
+            [
+                'field' => 'first_name',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.first_name'),
+                'visible' => false,
+                'formatter' => 'usersLinkFormatter',
+            ],
+
+            [
+                'field' => 'last_name',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.last_name'),
+                'visible' => false,
+                'formatter' => 'usersLinkFormatter',
+            ],
             [
                 'field' => 'jobtitle',
                 'searchable' => true,
