@@ -246,4 +246,5 @@
     'clear_signature'       => 'Clear Signature',
     'show_help'             => 'Show help',
     'hide_help'             => 'Hide help',
+    'view_all'              => 'view all',
     ];

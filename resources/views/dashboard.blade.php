@@ -29,78 +29,115 @@
 
 <div class="row">
   <!-- panel -->
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-2 col-xs-6">
       <a href="{{ route('hardware.index') }}">
     <!-- small box -->
     <div class="small-box bg-teal">
       <div class="inner">
         <h3>{{ number_format($counts['asset']) }}</h3>
-        <p>{{ trans('general.total_assets') }}</p>
+        <p>{{ strtolower(trans('general.assets')) }}</p>
       </div>
       <div class="icon" aria-hidden="true">
         <i class="fa fa-barcode" aria-hidden="true"></i>
       </div>
       @can('index', \App\Models\Asset::class)
-        <a href="{{ route('hardware.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+        <a href="{{ route('hardware.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
       @endcan
     </div>
       </a>
   </div><!-- ./col -->
 
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-2 col-xs-6">
      <a href="{{ route('licenses.index') }}">
     <!-- small box -->
     <div class="small-box bg-maroon">
       <div class="inner">
         <h3>{{ number_format($counts['license']) }}</h3>
-        <p>{{ trans('general.total_licenses') }}</p>
+        <p>{{ strtolower(trans('general.licenses')) }}</p>
       </div>
       <div class="icon" aria-hidden="true">
         <i class="fa fa-floppy-o"></i>
       </div>
         @can('view', \App\Models\License::class)
-          <a href="{{ route('licenses.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+          <a href="{{ route('licenses.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
         @endcan
     </div>
      </a>
   </div><!-- ./col -->
 
 
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-2 col-xs-6">
     <!-- small box -->
       <a href="{{ route('accessories.index') }}">
     <div class="small-box bg-orange">
       <div class="inner">
         <h3> {{ number_format($counts['accessory']) }}</h3>
-          <p>{{ trans('general.total_accessories') }}</p>
+        <p>{{ strtolower(trans('general.accessories')) }}</p>
       </div>
       <div class="icon" aria-hidden="true">
         <i class="fa fa-keyboard-o"></i>
       </div>
       @can('index', \App\Models\Accessory::class)
-          <a href="{{ route('accessories.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+          <a href="{{ route('accessories.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
       @endcan
     </div>
       </a>
   </div><!-- ./col -->
 
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-lg-2 col-xs-6">
     <!-- small box -->
 
       <a href="{{ route('consumables.index') }}">
     <div class="small-box bg-purple">
       <div class="inner">
         <h3> {{ number_format($counts['consumable']) }}</h3>
-          <p>{{ trans('general.total_consumables') }}</p>
+        <p>{{ strtolower(trans('general.consumables')) }}</p>
       </div>
       <div class="icon" aria-hidden="true">
         <i class="fa fa-tint"></i>
       </div>
       @can('index', \App\Models\Consumable::class)
-        <a href="{{ route('consumables.index') }}" class="small-box-footer">{{ trans('general.moreinfo') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+        <a href="{{ route('consumables.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
       @endcan
     </div>
   </div><!-- ./col -->
+
+  <div class="col-lg-2 col-xs-6">
+    <a href="{{ route('components.index') }}">
+   <!-- small box -->
+   <div class="small-box bg-yellow">
+     <div class="inner">
+       <h3>{{ number_format($counts['component']) }}</h3>
+       <p>{{ strtolower(trans('general.components')) }}</p>
+     </div>
+     <div class="icon" aria-hidden="true">
+       <i class="fa fa-hdd-o"></i>
+     </div>
+       @can('view', \App\Models\License::class)
+         <a href="{{ route('components.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+       @endcan
+   </div>
+    </a>
+ </div><!-- ./col -->
+
+ <div class="col-lg-2 col-xs-6">
+    <a href="{{ route('users.index') }}">
+   <!-- small box -->
+   <div class="small-box bg-light-blue">
+     <div class="inner">
+       <h3>{{ number_format($counts['user']) }}</h3>
+       <p>{{ strtolower(trans('general.people')) }}</p>
+     </div>
+     <div class="icon" aria-hidden="true">
+       <i class="fa fa-users"></i>
+     </div>
+       @can('view', \App\Models\License::class)
+         <a href="{{ route('users.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+       @endcan
+   </div>
+    </a>
+ </div><!-- ./col -->
+
 </div>
 </div>
 
@@ -177,7 +214,7 @@
 
                 <table
                     data-cookie-id-table="dashActivityReport"
-                    data-height="400"
+                    data-height="350"
                     data-pagination="false"
                     data-id-table="dashActivityReport"
                     data-side-pagination="server"
@@ -202,7 +239,7 @@
 
             </div><!-- /.responsive -->
           </div><!-- /.col -->
-          <div class="col-md-12 text-center" style="padding-top: 10px;">
+          <div class="text-center col-md-12" style="padding-top: 10px;">
             <a href="{{ route('reports.activity') }}" class="btn btn-primary btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
           </div>
         </div><!-- /.row -->
@@ -295,7 +332,7 @@
                         </table>
                         </div>
                     </div> <!-- /.col -->
-                    <div class="col-md-12 text-center" style="padding-top: 10px;">
+                    <div class="text-center col-md-12" style="padding-top: 10px;">
                         <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
                     </div>
                 </div> <!-- /.row -->
