@@ -82,7 +82,7 @@ class DepartmentsController extends Controller
         $this->authorize('create', Department::class);
         $department = new Department;
         $department->fill($request->all());
-        $department = $request->handleImages($department)
+        $department = $request->handleImages($department);
 
         $department->user_id = Auth::user()->id;
         $department->manager_id = ($request->filled('manager_id') ? $request->input('manager_id') : null);

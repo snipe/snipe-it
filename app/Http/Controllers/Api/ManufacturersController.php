@@ -106,7 +106,7 @@ class ManufacturersController extends Controller
         $this->authorize('update', Manufacturer::class);
         $manufacturer = Manufacturer::findOrFail($id);
         $manufacturer->fill($request->all());
-        $manufacturer = $request->handleImages($manufacturer)
+        $manufacturer = $request->handleImages($manufacturer);
 
         if ($manufacturer->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $manufacturer, trans('admin/manufacturers/message.update.success')));
