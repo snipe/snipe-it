@@ -199,7 +199,7 @@
         - { regexp: '^DB_PASSWORD=', line: 'DB_PASSWORD=vagrant' }
         - { regexp: '^APP_URL=', line: "APP_URL=http://{{ fqdn }}" }
         - { regexp: '^APP_ENV=', line: "APP_ENV=development" }
-        - { regexp: '^APP_DEBUG=', line: "APP_ENV=true" }
+        - { regexp: '^APP_DEBUG=', line: "APP_DEBUG=true" }
     - name: Generate application key
       shell: "php {{ app_path }}/artisan key:generate --force"
     - name: Artisan Migrate
