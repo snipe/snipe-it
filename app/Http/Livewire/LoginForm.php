@@ -55,11 +55,17 @@ class LoginForm extends Component
         
         $validatedData = $this->validate();
 
-        if (\Auth::attempt(array('username' => $this->username, 'password' => $this->password))){
+        if (\Auth::attempt(
+            [
+                'username' => $this->username, 
+                'password' => $this->password
+            ]
+            ))
+            {
             redirect()->route('dashboard');
         } else {
-            session()->flash('error', 'email and password are wrong.');
-    }
+            session()->flash('error', trans('auth/message.account_not_found'));
+        }
               
     }
 
