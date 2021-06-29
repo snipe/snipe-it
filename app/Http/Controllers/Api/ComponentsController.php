@@ -8,6 +8,7 @@ use App\Http\Transformers\ComponentsTransformer;
 use App\Models\Company;
 use App\Models\Component;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 
 class ComponentsController extends Controller
 {
@@ -78,14 +79,15 @@ class ComponentsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Component::class);
         $component = new Component;
         $component->fill($request->all());
+        $component = $request->handleImages($component);
 
         if ($component->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $component, trans('admin/components/message.create.success')));
@@ -116,15 +118,17 @@ class ComponentsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param   \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Component::class);
         $component = Component::findOrFail($id);
         $component->fill($request->all());
+        $component = $request->handleImages($component);
+        
 
         if ($component->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $component, trans('admin/components/message.update.success')));
