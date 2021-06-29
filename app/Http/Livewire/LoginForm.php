@@ -33,38 +33,37 @@ class LoginForm extends Component
      */
     public function updated($fields)
     {
-        $this->validateOnly($fields);
-        
-        if (!is_null($fields) && !empty($fields)) {
-            $this->can_submit = true;
-        } else {
+
+        if (is_null($fields) || empty($fields)) {
             $this->can_submit = false;
-        }
+        } 
+
+        $this->validateOnly($fields);
+    
+        $this->can_submit = true;
+        
 
     }
     
     /**
      * Actually do the login thing
      * 
-     * @todo fix missing LDAP stuff maybe?
+     * @todo fix missing LDAP stuff maybe? Not sure if it 
+     * makes sense to even do this via LiveWire, since 
+     * our login system is pretty complicated.
+     * 
      * @author  A. Ginaotto <snipe@snipe.net>
      * @version v6.0
      */
     public function submitForm()
     {
         
-        $validatedData = $this->validate();
-
-        if (\Auth::attempt(
-            [
-                'username' => $this->username, 
-                'password' => $this->password
-            ]
-            ))
-            {
-            redirect()->route('dashboard');
+        $this->can_submit = true;
+        
+        if (auth()->attempt($this->validate())) {
+            return redirect()->intended('/');
         } else {
-            session()->flash('error', trans('auth/message.account_not_found'));
+            return session()->flash('error', trans('auth/message.account_not_found'));
         }
               
     }
