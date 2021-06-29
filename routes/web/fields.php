@@ -29,7 +29,7 @@ Route::group(['prefix' => 'fields', 'middleware' => ['auth']], function () {
     Route::get(
         '{field_id}/fieldset/{fieldset_id}/disassociate',
         [
-            CustomFieldsetsController::class, 
+            CustomFieldsController::class,
             'deleteFieldFromFieldset'
         ]
     )->name('fields.disassociate');
@@ -37,7 +37,7 @@ Route::group(['prefix' => 'fields', 'middleware' => ['auth']], function () {
     Route::post(
         'fieldsets/{id}/associate',
         [
-            CustomFieldsetsController::class, 
+            CustomFieldsetsController::class,
             'associate'
         ]
     )->name('fieldsets.associate');
@@ -49,8 +49,8 @@ Route::group(['prefix' => 'fields', 'middleware' => ['auth']], function () {
 
 });
     
-
 Route::resource('fields', CustomFieldsController::class, [
+    'middleware' => ['auth'],
     'parameters' => ['field' => 'field_id'],
 ]);
 

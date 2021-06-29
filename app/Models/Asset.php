@@ -8,6 +8,7 @@ use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
+use App\Models\Traits\Customfieldsable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use AssetPresenter;
@@ -35,7 +36,9 @@ class Asset extends Depreciable
     const ASSET = 'asset';
     const USER = 'user';
 
-    use Acceptable;
+    use Acceptable, Customfieldsable;
+    protected $custom_field_pivot_class = AssetModel::class;
+    protected $custom_field_pivot_id = "model_id";
 
     /**
      * Run after the checkout acceptance was declined by the user
@@ -169,25 +172,7 @@ class Asset extends Depreciable
         'model.manufacturer' => ['name'],
     ];
 
-    /**
-     * This handles the custom field validation for assets
-     *
-     * @var array
-     */
-    public function save(array $params = [])
-    {
-        if ($this->model_id != '') {
-            $model = AssetModel::find($this->model_id);
-
-            if (($model) && ($model->fieldset)) {
-                $this->rules += $model->fieldset->validation_rules();
-            }
-        }
-
-        return parent::save($params);
-    }
-
-    public function getDisplayNameAttribute()
+     public function getDisplayNameAttribute()
     {
         return $this->present()->name();
     }
@@ -1254,7 +1239,7 @@ class Asset extends Depreciable
     {
         return $query->where(function ($query) use ($filter) {
             foreach ($filter as $key => $search_val) {
-                $fieldname = str_replace('custom_fields.', '', $key);
+                $fieldname = str_replace('custom_fields.', '', $key); // something here?
 
                 if ($fieldname == 'asset_tag') {
                     $query->where('assets.asset_tag', 'LIKE', '%'.$search_val.'%');
@@ -1371,7 +1356,7 @@ class Asset extends Depreciable
              *
              * In short, this set of statements tells the query builder to ONLY query against an
              * actual field that's being passed if it doesn't meet known relational fields. This
-             * allows us to query custom fields directly in the assetsv table
+             * allows us to query custom fields directly in the assets table
              * (regardless of their name) and *skip* any fields that we already know can only be
              * searched through relational searches that we do earlier in this method.
              *
