@@ -196,7 +196,7 @@
 
 <!-- recent activity -->
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8">
     <div class="box">
       <div class="box-header with-border">
         <h2 class="box-title">{{ trans('general.recent_activity') }}</h2>
@@ -246,10 +246,7 @@
       </div><!-- ./box-body -->
     </div><!-- /.box -->
   </div>
-
-</div> <!--/row-->
-<div class="row">
-    <div class="col-md-6">
+  <div class="col-md-4">
         <div class="box box-default">
             <div class="box-header with-border">
                 <h2 class="box-title">{{ trans('general.assets') }} by Status</h2>
@@ -265,10 +262,72 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="chart-responsive">
-                            <canvas id="statusPieChart" height="216"></canvas>
+                            <canvas id="statusPieChart" height="290"></canvas>
                         </div> <!-- ./chart-responsive -->
                     </div> <!-- /.col -->
                 </div> <!-- /.row -->
+            </div><!-- /.box-body -->
+        </div> <!-- /.box -->
+  </div>
+
+</div> <!--/row-->
+<div class="row">
+    <div class="col-md-6">
+         <!-- Categories -->
+         <div class="box box-default">
+            <div class="box-header with-border">
+                <h2 class="box-title">Asset {{ trans('general.locations') }}</h2>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                        <span class="sr-only">Collapse</span>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                        <table
+                                data-cookie-id-table="dashLocationSummary"
+                                data-height="400"
+                                data-pagination="true"
+                                data-side-pagination="server"
+                                data-sort-order="desc"
+                                data-sort-field="assets_count"
+                                id="dashLocationSummary"
+                                class="table table-striped snipe-table"
+                                data-url="{{ route('api.locations.index', ['sort' => 'assets_count', 'order' => 'asc']) }}">
+
+                            <thead>
+                            <tr>
+                                <th class="col-sm-3" data-visible="true" data-field="name" data-formatter="categoriesLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
+                                
+                                <th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
+                                    <i class="fa fa-barcode" aria-hidden="true"></i>
+                                    <span class="sr-only">Asset Count</span>
+                                </th>
+                                <th class="col-sm-1" data-visible="true" data-field="assigned_assets_count" data-sortable="true">
+                                    
+                                    Assigned
+                                </th>
+                                <th class="col-sm-1" data-visible="true" data-field="users_count" data-sortable="true">
+                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                    <span class="sr-only">People</span>
+                                    
+                                </th>
+                                
+                            </tr>
+                            </thead>
+                        </table>
+                        </div>
+                    </div> <!-- /.col -->
+                    <div class="text-center col-md-12" style="padding-top: 10px;">
+                        <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
+                    </div>
+                </div> <!-- /.row -->
+
             </div><!-- /.box-body -->
         </div> <!-- /.box -->
     </div>
