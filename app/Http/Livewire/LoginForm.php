@@ -13,7 +13,7 @@ class LoginForm extends Component
     /**
      * Set the validation rules for login
      *
-     * @author  A. Ginaotto <snipe@snipe.net>
+     * @author  A. Gianotto <snipe@snipe.net>
      * @version v6.0
      * @return Array
      */
@@ -28,7 +28,7 @@ class LoginForm extends Component
     /**
      * Perform the validation
      *
-     * @author  A. Ginaotto <snipe@snipe.net>
+     * @author  A. Gianotto <snipe@snipe.net>
      * @version v6.0
      */
     public function updated($fields)
@@ -52,7 +52,7 @@ class LoginForm extends Component
      * makes sense to even do this via LiveWire, since 
      * our login system is pretty complicated.
      * 
-     * @author  A. Ginaotto <snipe@snipe.net>
+     * @author  A. Gianotto <snipe@snipe.net>
      * @version v6.0
      */
     public function submitForm()
