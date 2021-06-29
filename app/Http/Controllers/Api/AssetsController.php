@@ -21,6 +21,7 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 use Input;
 use Paginator;
 use Slack;
@@ -425,11 +426,11 @@ class AssetsController extends Controller
      * Accepts a POST request to create a new asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param Request $request
+     * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
 
         $this->authorize('create', Asset::class);
@@ -473,6 +474,8 @@ class AssetsController extends Controller
 
             $asset->image = $saved_image_path;
         }
+
+        $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
         // Validation for these fields is handled through the AssetRequest form request
@@ -540,11 +543,11 @@ class AssetsController extends Controller
      * Accepts a POST request to update an asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param Request $request
+     * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Asset::class);
 
@@ -584,6 +587,8 @@ class AssetsController extends Controller
                 }
             }
 
+            $asset = $request->handleImages($asset); 
+            
             // Update custom fields
             if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
