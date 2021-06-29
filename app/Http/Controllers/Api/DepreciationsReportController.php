@@ -21,6 +21,22 @@ class DepreciationsReportController extends Controller
     {
         $this->authorize('view', Asset::class);
 
+        $assets = Asset::select([
+            'assets.company_id',
+            'assets.id',
+            'assets.model_id',
+            'assets.deleted_at',
+            'assets.asset_tag',
+            'assets.name',
+            'assets.serial',
+            'assets.status_id',
+            'assets.assigned_to',
+            'assets.location_id',
+            'assets.purchase_date',
+            'assets.purchase_cost',
+        ]);
+
+
     }
 
 }
