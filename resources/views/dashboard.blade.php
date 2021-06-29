@@ -324,7 +324,7 @@
                         </div>
                     </div> <!-- /.col -->
                     <div class="text-center col-md-12" style="padding-top: 10px;">
-                        <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
+                        <a href="{{ route('locations.index') }}" class="btn btn-primary btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
                     </div>
                 </div> <!-- /.row -->
 
