@@ -1,7 +1,7 @@
 <div>
-    <div class="form-group {{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
+    <div class="form-group{{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
         <label for="custom_fieldset" class="col-md-3 control-label">{{ trans('admin/models/general.fieldset') }}</label>
-        <div class="col-md-7">
+        <div class="col-md-9">
             {{ Form::select('custom_fieldset', \App\Helpers\Helper::customFieldsetList(),old('custom_fieldset', 0000 /*$item->fieldset_id*/), array('class'=>'select2 js-fieldset-field', 'style'=>'width:350px', 'aria-label'=>'custom_fieldset', 'wire:model' => 'fieldset_id')) }}
             {!! $errors->first('custom_fieldset', '<span class="alert-msg" aria-hidden="true"><br><i class="fa fa-times"></i> :message</span>') !!}
             <label class="m-l-xs">
@@ -15,10 +15,7 @@
     @if($this->add_default_values) {{-- 'if the checkbox is enabled *AND* there are more than 0 fields in the fieldsset' --}}
     <div>
         <div class="form-group">
-            <fieldset>
-                <legend class="col-md-3 control-label">Default Values</legend>
                 @livewire('custom-fields-for-fieldset',['fieldset_id' => $fieldset_id])
-            </fieldset>
         </div>
     </div>
     @endif
