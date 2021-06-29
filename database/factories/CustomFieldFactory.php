@@ -26,6 +26,7 @@ class CustomFieldFactory extends Factory
             'format' => '',
             'element' => 'text',
             'auto_add_to_fieldsets' => '0',
+            'type' => 'App\\Models\\Asset'
         ];
     }
 
@@ -74,8 +75,27 @@ class CustomFieldFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'name' => 'MAC Address',
+                'name' => 'MAC Address EXPLICIT',
                 'format' => 'regex:/^([0-9a-fA-F]{2}[:-]){5}[0-9a-fA-F]{2}$/',
+            ];
+        });
+    }
+
+    public function plainText()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'plain_text',
+            ];
+        });
+    }
+
+    public function date()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'date',
+                'format' => 'date'
             ];
         });
     }

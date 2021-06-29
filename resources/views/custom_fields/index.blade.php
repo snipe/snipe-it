@@ -14,6 +14,23 @@
 
 @can('view', \App\Models\CustomFieldset::class)
 <div class="row">
+  <div calss="col-md-12">
+    <div class="box box-default">
+      <div class="box-body">
+
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs">
+            {{-- TODO - generalize this so it's less 'hardcoded' --}}
+            <li {!! !Request::query('tab') ? 'class="active"': '' !!}><a href="{{ route("fields.index",["tab" => 0]) }}">Asset Custom Fields</a></li>
+            <li {!! Request::query('tab') == 1 ? 'class="active"': '' !!}><a href="{{ route("fields.index",["tab" => 1]) }}">Users</a></li>
+            <li {!! Request::query('tab') == 2 ? 'class="active"': '' !!}><a href="{{ route("fields.index",["tab" => 2]) }}">Accessories</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div class="col-md-12">
     <div class="box box-default">
 
@@ -21,7 +38,7 @@
         <h2 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h2>
         <div class="box-tools pull-right">
           @can('create', \App\Models\CustomFieldset::class)
-          <a href="{{ route('fieldsets.create') }}" class="btn btn-sm btn-primary" data-tooltip="true" title="{{ trans('admin/custom_fields/general.create_fieldset_title') }}">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
+          <a href="{{ route('fieldsets.create',['tab' => Request::query('tab',0)]) }}" class="btn btn-sm btn-primary" data-tooltip="true" title="{{ trans('admin/custom_fields/general.create_fieldset_title') }}">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
           @endcan
         </div>
       </div><!-- /.box-header -->
@@ -47,7 +64,7 @@
             <tr>
               <th>{{ trans('general.name') }}</th>
               <th>{{ trans('admin/custom_fields/general.qty_fields') }}</th>
-              <th>{{ trans('admin/custom_fields/general.used_by_models') }}</th>
+              <th>{{ trans('admin/custom_fields/general.used_by_models') }}{{-- FIXME --}}</th>
               <th>{{ trans('table.actions') }}</th>
             </tr>
           </thead>
@@ -63,9 +80,9 @@
                 {{ $fieldset->fields->count() }}
               </td>
               <td>
-                @foreach($fieldset->models as $model)
-                  <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}{{ ($model->model_number) ? ' ('.$model->model_number.')' : '' }}</a>
-
+                @foreach($fieldset->customizables() as $url => $name)
+                  <a href="{{ $url }}" class="label label-default">{{ $name }}</a>
+                  {{-- get_class($customizable) }}: {{ $customizable->name<br /> --}}
                 @endforeach
               </td>
               <td>
@@ -81,7 +98,7 @@
 
                 @can('delete', $fieldset)
                 {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete','style' => 'display:inline-block']) }}
-                  @if($fieldset->models->count() > 0)
+                  @if(count($fieldset->customizables()) > 0 /* TODO - hate 'customizables' */)
                   <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fas fa-trash"></i></button>
                   @else
                   <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
@@ -111,7 +128,7 @@
         <h2 class="box-title">{{ trans('admin/custom_fields/general.custom_fields') }}</h2>
         <div class="box-tools pull-right">
           @can('create', \App\Models\CustomField::class)
-          <a href="{{ route('fields.create') }}" class="btn btn-sm btn-primary" data-tooltip="true" title="{{ trans('admin/custom_fields/general.create_field_title') }}">{{ trans('admin/custom_fields/general.create_field') }}</a>
+          <a href="{{ route('fields.create', ['tab' => Request::query('tab',0)]) }}" class="btn btn-sm btn-primary" data-tooltip="true" title="{{ trans('admin/custom_fields/general.create_field_title') }}">{{ trans('admin/custom_fields/general.create_field') }}</a>
           @endcan
         </div>
 

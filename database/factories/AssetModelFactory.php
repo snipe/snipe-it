@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\AssetModel;
+use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use App\Models\Depreciation;
 use App\Models\Manufacturer;
@@ -428,5 +429,14 @@ class AssetModelFactory extends Factory
                 'image' => 'ultrasharp.jpg',
             ];
         });
+    }
+
+    public function complicated()
+    {
+        return $this->state(function () {
+            return [
+                'name' => 'Complicated fieldset'
+            ];
+        })->for(CustomFieldSet::factory()->complicated(),'fieldset');
     }
 }

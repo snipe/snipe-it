@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Redirect;
 
+
 /**
  * This controller handles all actions related to Custom Asset Fields for
  * the Snipe-IT Asset Management application.
@@ -21,6 +22,7 @@ use Redirect;
  */
 class CustomFieldsController extends Controller
 {
+
     /**
      * Returns a view with a listing of custom fields.
      *
@@ -29,12 +31,12 @@ class CustomFieldsController extends Controller
      * @return \Illuminate\Support\Facades\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view', CustomField::class);
 
-        $fieldsets = CustomFieldset::with('fields', 'models')->get();
-        $fields = CustomField::with('fieldset')->get();
+        $fieldsets = CustomFieldset::with('fields')->where("type", Helper::$itemtypes_having_custom_fields[$request->get('tab',0)])->get(); //cannot eager-load 'customizable' because it's not a relation
+        $fields = CustomField::with('fieldset')->where("type", Helper::$itemtypes_having_custom_fields[$request->get('tab',0)])->get();
 
         return view('custom_fields.index')->with('custom_fieldsets', $fieldsets)->with('custom_fields', $fields);
     }
@@ -110,8 +112,10 @@ class CustomFieldsController extends Controller
             "display_in_user_view" => $display_in_user_view,
             "auto_add_to_fieldsets" => $request->get("auto_add_to_fieldsets", 0),
             "show_in_listview" => $request->get("show_in_listview", 0),
-            "user_id" => Auth::id()
+            "user_id" => Auth::id(),
         ]);
+        // not mass-assignable; must be manual
+        $field->type = Helper::$itemtypes_having_custom_fields[$request->get('tab')];
 
 
         if ($request->filled('custom_format')) {
@@ -131,7 +135,7 @@ class CustomFieldsController extends Controller
             }
 
 
-            return redirect()->route('fields.index')->with('success', trans('admin/custom_fields/message.field.create.success'));
+            return redirect()->route('fields.index',['tab' => $request->get('tab',0)])->with('success', trans('admin/custom_fields/message.field.create.success'));
         }
 
         return redirect()->back()->with('selected_fieldsets', $request->input('associate_fieldsets'))->withInput()
@@ -188,8 +192,8 @@ class CustomFieldsController extends Controller
                 return redirect()->back()->withErrors(['message' => 'Field is in-use']);
             }
             $field->delete();
-            return redirect()->route("fields.index")
-                ->with("success", trans('admin/custom_fields/message.field.delete.success'));
+            return redirect()->route('fields.index',['tab' => Request::query('tab',0)])
+                ->with('success', trans('admin/custom_fields/message.field.delete.success'));
         }
 
         return redirect()->back()->withErrors(['message' => 'Field does not exist']);
@@ -289,7 +293,7 @@ class CustomFieldsController extends Controller
                 $field->fieldset()->sync([]);
             }
 
-            return redirect()->route('fields.index')->with('success', trans('admin/custom_fields/message.field.update.success'));
+            return redirect()->route('fields.index',['tab' => $request->get('tab',0)])->with('success', trans('admin/custom_fields/message.field.update.success'));
         }
 
         return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.field.update.error'));

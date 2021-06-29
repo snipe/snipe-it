@@ -110,7 +110,7 @@ class AssetsController extends Controller
             $filter = json_decode($request->input('filter'), true);
         }
 
-        $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
+        $all_custom_fields = CustomField::where('type', Asset::class); //used as a 'cache' of custom fields throughout this page load
         foreach ($all_custom_fields as $field) {
             $allowed_columns[] = $field->db_column_name();
         }
@@ -573,42 +573,8 @@ class AssetsController extends Controller
 
         $asset = $request->handleImages($asset);
 
-        // Update custom fields in the database.
-        // Validation for these fields is handled through the AssetRequest form request
-        $model = AssetModel::find($request->get('model_id'));
+        $asset->customFill($request, Auth::user(), true);
 
-        if (($model) && ($model->fieldset)) {
-            foreach ($model->fieldset->fields as $field) {
-
-                // Set the field value based on what was sent in the request
-                $field_val = $request->input($field->db_column, null);
-
-                // If input value is null, use custom field's default value
-                if ($field_val == null) {
-                    \Log::debug('Field value for '.$field->db_column.' is null');
-                    $field_val = $field->defaultValue($request->get('model_id'));
-                    \Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
-                }
-
-                // if the field is set to encrypted, make sure we encrypt the value
-                if ($field->field_encrypted == '1') {
-                    \Log::debug('This model field is encrypted in this fieldset.');
-
-                    if (Gate::allows('admin')) {
-
-                        // If input value is null, use custom field's default value
-                        if (($field_val == null) && ($request->has('model_id') != '')) {
-                            $field_val = \Crypt::encrypt($field->defaultValue($request->get('model_id')));
-                        } else {
-                            $field_val = \Crypt::encrypt($request->input($field->db_column));
-                        }
-                    }
-                }
-
-
-                $asset->{$field->db_column} = $field_val;
-            }
-        }
 
         if ($asset->save()) {
             if ($request->get('assigned_user')) {
@@ -668,21 +634,7 @@ class AssetsController extends Controller
 
             $asset = $request->handleImages($asset); 
             
-            // Update custom fields
-            if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
-                foreach ($model->fieldset->fields as $field) {
-                    if ($request->has($field->db_column)) {
-                        if ($field->field_encrypted == '1') {
-                            if (Gate::allows('admin')) {
-                                $asset->{$field->db_column} = \Crypt::encrypt($request->input($field->db_column));
-                            }
-                        } else {
-                            $asset->{$field->db_column} = $request->input($field->db_column);
-                        }
-                    }
-                }
-            }
-
+            $asset->customFill($request,Auth::user());
 
             if ($asset->save()) {
                 if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {

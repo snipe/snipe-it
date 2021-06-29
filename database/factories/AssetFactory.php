@@ -338,4 +338,15 @@ class AssetFactory extends Factory
     {
         return $this->state(['requestable' => false]);
     }
+
+    public function withComplicatedCustomFields()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => function () {
+                    return AssetModel::where('name','complicated')->first() ?? AssetModel::factory()->complicated();
+                }
+            ];
+        });
+    }
 }
