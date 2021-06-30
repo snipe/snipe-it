@@ -8,6 +8,8 @@ use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use Illuminate\Support\Facades\Auth;
 use Redirect;
+use Illuminate\Http\Request;
+
 
 /**
  * This controller handles all actions related to Custom Asset Fields for
@@ -20,6 +22,12 @@ use Redirect;
  */
 class CustomFieldsController extends Controller
 {
+    static $tabs = [
+        0 => \App\Models\Asset::class,
+        1 => \App\Models\User::class,
+        2 => \App\Models\Accessory::class
+    ];
+
     /**
      * Returns a view with a listing of custom fields.
      *
@@ -28,12 +36,12 @@ class CustomFieldsController extends Controller
      * @return \Illuminate\Support\Facades\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view', CustomField::class);
 
-        $fieldsets = CustomFieldset::with('fields', 'models')->get();
-        $fields = CustomField::with('fieldset')->get();
+        $fieldsets = CustomFieldset::with('fields', 'models')->where("type",self::$tabs[$request->get('tab',0)])->get();
+        $fields = CustomField::with('fieldset')->where("type",self::$tabs[$request->get('tab',0)])->get();
 
         return view('custom_fields.index')->with('custom_fieldsets', $fieldsets)->with('custom_fields', $fields);
     }
@@ -93,6 +101,7 @@ class CustomFieldsController extends Controller
             'field_encrypted' => $request->get('field_encrypted', 0),
             'show_in_email' => $request->get('show_in_email', 0),
             'user_id' => Auth::id(),
+            'type' => self::$tabs[$request->get('tab')]
         ]);
 
         if ($request->filled('custom_format')) {
@@ -102,7 +111,7 @@ class CustomFieldsController extends Controller
         }
 
         if ($field->save()) {
-            return redirect()->route('fields.index')->with('success', trans('admin/custom_fields/message.field.create.success'));
+            return redirect()->route('fields.index',['tab' => $request->get('tab',0)])->with('success', trans('admin/custom_fields/message.field.create.success'));
         }
 
         return redirect()->back()->withInput()
@@ -149,7 +158,7 @@ class CustomFieldsController extends Controller
             }
             $field->delete();
 
-            return redirect()->route('fields.index')
+            return redirect()->route('fields.index',['tab' => Request::query('tab',0)])
                 ->with('success', trans('admin/custom_fields/message.field.delete.success'));
         }
 
@@ -214,7 +223,7 @@ class CustomFieldsController extends Controller
         }
 
         if ($field->save()) {
-            return redirect()->route('fields.index')->with('success', trans('admin/custom_fields/message.field.update.success'));
+            return redirect()->route('fields.index',['tab' => $request->get('tab',0)])->with('success', trans('admin/custom_fields/message.field.update.success'));
         }
 
         return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.field.update.error'));

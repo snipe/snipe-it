@@ -433,7 +433,7 @@ class AssetModelsController extends Controller
     }
 
     /**
-     * Adds default values to a model (as long as they are truthy)
+     * Adds default values to a model (as long as they are truthy) (does this mean I cannot set a default value of 0?)
      *
      * @param  AssetModel $model
      * @param  array      $defaultValues

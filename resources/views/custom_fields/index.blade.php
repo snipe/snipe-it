@@ -13,6 +13,27 @@
 @section('content')
 
 @can('view', \App\Models\CustomFieldset::class)
+{{--<div class="row">--}}
+{{--  <div calss="col-md-12">--}}
+{{--    <div class="box box-default">--}}
+{{--      <div class="box-body">--}}
+
+{{--        <div class="nav-tabs-custom">--}}
+{{--          <ul class="nav nav-tabs">--}}
+{{--            <li class="active"><a href="{{ route("fieldsets.index",["tab" => 0]) }}">Asset Custom Fields</a></li>--}}
+{{--            <li><a href="{{ route("fieldsets.index",["tab" => 1]) }}">Users</a></li>--}}
+{{--            <li><a href="{{ route("fieldsets.index",["tab" => 2]) }}">Accessories</a></li>--}}
+{{--          </ul>--}}
+{{--        </div>--}}
+{{--      </div>--}}
+{{--    </div>--}}
+{{--  </div>--}}
+{{--</div>--}}
+<div class="row">
+  <a href="?tab=0">Asset</a>
+  <a href="?tab=1">Users</a>
+  <a href="?tab=2">Accessories</a>
+</div>
 <div class="row">
   <div class="col-md-12">
     <div class="box box-default">
@@ -21,7 +42,7 @@
         <h2 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h2>
         <div class="box-tools pull-right">
           @can('create', \App\Models\CustomFieldset::class)
-          <a href="{{ route('fieldsets.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new fieldset">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
+          <a href="{{ route('fieldsets.create',['tab' => Request::query('tab',0)]) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new fieldset">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
           @endcan
         </div>
       </div><!-- /.box-header -->
@@ -100,7 +121,7 @@
         <h2 class="box-title">{{ trans('admin/custom_fields/general.custom_fields') }}</h2>
         <div class="box-tools pull-right">
           @can('create', \App\Models\CustomField::class)
-          <a href="{{ route('fields.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new custom field">{{ trans('admin/custom_fields/general.create_field') }}</a>
+          <a href="{{ route('fields.create', ['tab' => Request::query('tab',0)]) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Create a new custom field">{{ trans('admin/custom_fields/general.create_field') }}</a>
           @endcan
         </div>
 

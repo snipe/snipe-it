@@ -17,26 +17,26 @@ class CustomField extends Model
         UniqueUndeletedTrait;
 
     /**
-     * Custom field predfined formats
+     * Custom field predefined formats
      *
      * @var array
      */
     const PREDEFINED_FORMATS = [
-            'ANY'           => '',
-            'CUSTOM REGEX'  => '',
-            'ALPHA'         => 'alpha',
-            'ALPHA-DASH'    => 'alpha_dash',
-            'NUMERIC'       => 'numeric',
-            'ALPHA-NUMERIC' => 'alpha_num',
-            'EMAIL'         => 'email',
-            'DATE'          => 'date',
-            'URL'           => 'url',
-            'IP'            => 'ip',
-            'IPV4'          => 'ipv4',
-            'IPV6'          => 'ipv6',
-            'MAC'           => 'regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/',
-            'BOOLEAN'       => 'boolean',
-        ];
+        'ANY' => '',
+        'CUSTOM REGEX' => '',
+        'ALPHA' => 'alpha',
+        'ALPHA-DASH' => 'alpha_dash',
+        'NUMERIC' => 'numeric',
+        'ALPHA-NUMERIC' => 'alpha_num',
+        'EMAIL' => 'email',
+        'DATE' => 'date',
+        'URL' => 'url',
+        'IP' => 'ip',
+        'IPV4' => 'ipv4',
+        'IPV6' => 'ipv6',
+        'MAC' => 'regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/',
+        'BOOLEAN' => 'boolean',
+    ];
 
     public $guarded = [
         'id',
@@ -74,7 +74,7 @@ class CustomField extends Model
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @since [v3.0]
      */
-    public static $table_name = 'assets';
+    //public static $table_name = 'assets'; //we should now determine this from 'type' I guess?
 
     /**
      * Convert the custom field's name property to a db-safe string.
@@ -82,13 +82,13 @@ class CustomField extends Model
      * We could probably have used str_slug() here but not sure what it would
      * do with previously existing values. - @snipe
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v3.4]
      * @return string
+     * @since [v3.4]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      */
     public static function name_to_db_name($name)
     {
-        return '_snipeit_'.preg_replace('/[^a-zA-Z0-9]/', '_', strtolower($name));
+        return '_snipeit_' . preg_replace('/[^a-zA-Z0-9]/', '_', strtolower($name));
     }
 
     /**
@@ -99,23 +99,22 @@ class CustomField extends Model
      * if they have changed, so we handle that here so that we don't have to remember
      * to do it in the controllers.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v3.4]
      * @return bool
+     * @since [v3.4]
+     * @author [A. Gianotto] [<snipe@snipe.net>]
      */
     public static function boot()
     {
         parent::boot();
         self::created(function ($custom_field) {
-
             // Column already exists on the assets table - nothing to do here.
             // This *shouldn't* happen in the wild.
-            if (Schema::hasColumn(self::$table_name, $custom_field->convertUnicodeDbSlug())) {
+            if (Schema::hasColumn($custom_field->getTableName(), $custom_field->convertUnicodeDbSlug())) {
                 return false;
             }
 
             // Update the column name in the assets table
-            Schema::table(self::$table_name, function ($table) use ($custom_field) {
+            Schema::table($custom_field->getTableName(), function ($table) use ($custom_field) {
                 $table->text($custom_field->convertUnicodeDbSlug())->nullable();
             });
 
@@ -128,7 +127,7 @@ class CustomField extends Model
 
             // Column already exists on the assets table - nothing to do here.
             if ($custom_field->isDirty('name')) {
-                if (Schema::hasColumn(self::$table_name, $custom_field->convertUnicodeDbSlug())) {
+                if (Schema::hasColumn($custom_field->getTableName(), $custom_field->convertUnicodeDbSlug())) {
                     return true;
                 }
 
@@ -138,7 +137,7 @@ class CustomField extends Model
                 $platform->registerDoctrineTypeMapping('enum', 'string');
 
                 // Rename the field if the name has changed
-                Schema::table(self::$table_name, function ($table) use ($custom_field) {
+                Schema::table($custom_field->getTableName(), function ($table) use ($custom_field) {
                     $table->renameColumn($custom_field->convertUnicodeDbSlug($custom_field->getOriginal('name')), $custom_field->convertUnicodeDbSlug());
                 });
 
@@ -154,10 +153,16 @@ class CustomField extends Model
 
         // Drop the assets column if we've deleted it from custom fields
         self::deleting(function ($custom_field) {
-            return Schema::table(self::$table_name, function ($table) use ($custom_field) {
+
+            return Schema::table($custom_field->getTableName(), function ($table) use ($custom_field) {
                 $table->dropColumn($custom_field->convertUnicodeDbSlug());
             });
         });
+    }
+
+    public function getTableName()
+    {
+        return (new $this->type)()->getTable();
     }
 
     /**
@@ -191,7 +196,7 @@ class CustomField extends Model
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function defaultValues()
+    public function defaultValues() eeek, another direct reference to an AssetModel!!
     {
         return $this->belongsToMany(\App\Models\AssetModel::class, 'models_custom_fields')->withPivot('default_value');
     }
@@ -203,7 +208,7 @@ class CustomField extends Model
      * @param  int $modelId
      * @return string
      */
-    public function defaultValue($modelId)
+    public function defaultValue($modelId) And another hurty one here - how can we maybe find a way to query this elsewhere?
     {
         return $this->defaultValues->filter(function ($item) use ($modelId) {
             return $item->pivot->asset_model_id == $modelId;

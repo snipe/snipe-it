@@ -504,7 +504,7 @@ class AssetsController extends Controller
                 // If input value is null, use custom field's default value
                 if ($field_val == null) {
                     \Log::debug('Field value for '.$field->convertUnicodeDbSlug().' is null');
-                    $field_val = $field->defaultValue($request->get('model_id'));
+                    $field_val = $field->defaultValue($request->get('model_id')); I *think* we can invert this - to AssetMode::find($request->get('model_id'))->defaultValues() or whatever?
                     \Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
                 }
 

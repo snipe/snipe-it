@@ -20,6 +20,7 @@ class CustomFieldset extends Model
      */
     public $rules = [
         'name' => 'required|unique:custom_fieldsets',
+        ''
     ];
 
     /**
@@ -52,7 +53,7 @@ class CustomFieldset extends Model
      */
     public function models()
     {
-        return $this->hasMany(\App\Models\AssetModel::class, 'fieldset_id');
+        return $this->hasMany(\App\Models\AssetModel::class, 'fieldset_id'); FIXME - this is *not* right for the new flexible thing :/
     }
 
     /**
