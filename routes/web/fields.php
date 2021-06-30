@@ -49,9 +49,10 @@ Route::group(['prefix' => 'fields', 'middleware' => ['auth']], function () {
 
 });
     
-Route::resource('fields', CustomFieldsetsController::class, [
-    'middleware' => ['auth'],
+
+Route::resource('fields', CustomFieldsController::class, [
     'parameters' => ['field' => 'field_id'],
 ]);
+
 
 
