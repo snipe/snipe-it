@@ -159,7 +159,7 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
                     'destroy' => 'api.companies.destroy'
                 ],
             'except' => ['create', 'edit'],
-            'parameters' => ['component' => 'component_id']
+            'parameters' => ['company' => 'company_id']
         ]
     ); // Companies resource
 
