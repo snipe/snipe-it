@@ -61,7 +61,7 @@ class RestoreFromBackup extends Command
 
         $za = new ZipArchive();
 
-        $errcode = $za->open($filename, ZipArchive::RDONLY);
+        $errcode = $za->open($filename/* , ZipArchive::RDONLY */); // that constant only exists in PHP 7.4 and higher
         if ($errcode !== true) {
             $errors = [
                 ZipArchive::ER_EXISTS => "File already exists.",
@@ -248,8 +248,13 @@ class RestoreFromBackup extends Command
         }
         fclose($pipes[0]);
         fclose($sql_contents);
+        
+        $this->line(stream_get_contents($pipes[1]));
         fclose($pipes[1]);
+
+        $this->error(stream_get_contents($pipes[2]));
         fclose($pipes[2]);
+
         //wait, have to do fclose() on all pipes first?
         $close_results = proc_close($proc_results);
         if($close_results != 0) {
