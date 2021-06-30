@@ -220,6 +220,21 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
                 'uses' => 'ComponentsController@getAssets',
             ]
         );
+
+        Route::post('{component}/checkout',
+            [
+                'as' =>'api.components.checkout',
+                'uses' => 'ComponentsController@checkout',
+            ]
+        );
+
+        Route::post('{component}/checkin',
+        [
+            'as' =>'api.components.checkin',
+            'uses' => 'ComponentsController@checkin',
+        ]
+    );
+
     }); // Components group
 
 
