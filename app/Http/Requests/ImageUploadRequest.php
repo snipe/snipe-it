@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Models\SnipeModel;
 use Intervention\Image\Facades\Image;
 use enshrined\svgSanitize\Sanitizer;
-use App\Traits\ConvertsBase64ToFiles;
+use App\Http\Traits\ConvertsBase64ToFiles;
 use Storage;
 
 class ImageUploadRequest extends Request
