@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace App\Http\Traits;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
