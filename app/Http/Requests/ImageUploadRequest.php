@@ -5,10 +5,13 @@ namespace App\Http\Requests;
 use App\Models\SnipeModel;
 use enshrined\svgSanitize\Sanitizer;
 use Intervention\Image\Facades\Image;
+use App\Traits\ConvertsBase64ToFiles;
 use Storage;
 
 class ImageUploadRequest extends Request
 {
+    use ConvertsBase64ToFiles;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,15 +29,23 @@ class ImageUploadRequest extends Request
      */
     public function rules()
     {
-        return [
-            'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
-            'avatar' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
-        ];
+       
+            return [
+                'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
+                'avatar' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
+            ];
     }
 
     public function response(array $errors)
     {
         return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
+    }
+
+    protected function base64FileKeys(): array
+    {
+        return [
+            'image' => 'auto',
+        ];
     }
 
     /**
