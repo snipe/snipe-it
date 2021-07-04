@@ -5,7 +5,11 @@ namespace App\Http\Requests;
 use App\Models\SnipeModel;
 use Intervention\Image\Facades\Image;
 use enshrined\svgSanitize\Sanitizer;
-
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\FileBag;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Storage;
 
 class ImageUploadRequest extends Request
