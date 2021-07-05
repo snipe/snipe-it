@@ -88,10 +88,14 @@ trait ConvertsBase64ToFiles
                 $body = $this->bodyParametersBag()->all();
                 Arr::forget($body, $key);
                 $this->bodyParametersBag()->replace($body);
+                \Log::debug("Trait: file field $key replaced:". $request->has($key));
+
 
                 $files = $this->uploadFilesBag()->all();
                 Arr::set($files, $key, $uploadedFile);
                 $this->uploadFilesBag()->replace($files);
+                \Log::debug("Trait: file field $key inserted:". $request->hasFile($key));
+
             }, null, false);
         });
     }
