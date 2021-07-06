@@ -165,9 +165,13 @@ class AccessoriesController extends Controller
 
         if ($request->filled('search')) {
             $accessory_users = $accessory->users()
-                                ->where('first_name', 'like', '%'.$request->input('search').'%')
-                                ->orWhere('last_name', 'like', '%'.$request->input('search').'%')
-                                ->get();
+                                         ->where(function ($query) use ($request) {
+                                             $search_str = '%' . $request->input('search') . '%';
+                                             $query->where('first_name', 'like', $search_str)
+                                                   ->orWhere('last_name', 'like', $search_str)
+                                                   ->orWhere('note', 'like', $search_str);
+                                         })
+                                         ->get();
             $total = $accessory_users->count();
         }
 
