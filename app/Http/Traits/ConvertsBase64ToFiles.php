@@ -6,34 +6,12 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\FileBag;
-use Symfony\Component\HttpFoundation\ParameterBag;
 
 trait ConvertsBase64ToFiles
 {
     protected function base64FileKeys(): array
     {
         return [];
-    }
-
-    /**
-     * Helper method to get the body parameters bag.
-     *
-     * @return \Symfony\Component\HttpFoundation\ParameterBag
-     */
-    private function bodyParametersBag(): ParameterBag
-    {
-        return $this->request;
-    }
-
-    /**
-     * Helper method to get the uploaded files bag.
-     *
-     * @return FileBag
-     */
-    private function uploadFilesBag(): FileBag
-    {
-        return $this->files;
     }
 
     /**
