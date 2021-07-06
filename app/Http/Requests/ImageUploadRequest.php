@@ -5,7 +5,8 @@ namespace App\Http\Requests;
 use App\Models\SnipeModel;
 use enshrined\svgSanitize\Sanitizer;
 use Intervention\Image\Facades\Image;
-use App\Traits\ConvertsBase64ToFiles;
+use App\Http\Traits\ConvertsBase64ToFiles;
+use Illuminate\Http\UploadedFile;
 use Storage;
 
 class ImageUploadRequest extends Request
@@ -88,13 +89,24 @@ class ImageUploadRequest extends Request
         \Log::debug('Type is: '.$type);
         \Log::debug('Form fieldname is: '.$form_fieldname);
         \Log::debug('DB fieldname is: '.$use_db_field);
-        \Log::debug('Trying to upload to '.$path);
-
-        \Log::debug($this->file());
-
-        if ($this->hasFile($form_fieldname)) {
-            if (! config('app.lock_passwords')) {
+        \Log::debug('Trying to upload to '. $path);
+        
+        // ConvertBase64ToFiles just changes object type, 
+        // as it cannot currently insert files to $this->files
+        if ($this->offsetGet($form_fieldname) instanceof UploadedFile) {
+           $image=$this->offsetGet($form_fieldname);
+        } else {
+            if ($this->hasFile($form_fieldname)) {
                 $image = $this->file($form_fieldname);
+            }
+        }
+
+        \Log::debug($image);
+
+        if (isset($image)) {
+
+            if (!config('app.lock_passwords')) {
+
                 $ext = $image->getClientOriginalExtension();
                 $file_name = $type.'-'.$form_fieldname.'-'.str_random(10).'.'.$ext;
 
