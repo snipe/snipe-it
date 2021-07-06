@@ -53,6 +53,7 @@
                 <th data-sortable="true" data-field="color" data-formatter="colorSqFormatter">{{ trans('admin/statuslabels/table.color') }}</th>
                 <th class="text-center" data-sortable="true" data-field="show_in_nav" data-formatter="trueFalseFormatter">{{ trans('admin/statuslabels/table.show_in_nav') }}</th>
                   <th class="text-center" data-sortable="true" data-field="default_label" data-formatter="trueFalseFormatter">{{ trans('admin/statuslabels/table.default_label') }}</th>
+                  <th data-sortable="true" data-field="notes" data-visible="false">{{ trans('general.notes') }}</th>
                 <th data-formatter="statuslabelsActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
