@@ -103,9 +103,8 @@ class ImageUploadRequest extends Request
             }
         }
 
-        \Log::debug($image);
-
         if (isset($image)) {
+            \Log::debug($image);
 
             if (!config('app.lock_passwords')) {
 
