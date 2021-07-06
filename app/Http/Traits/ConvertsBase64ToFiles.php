@@ -69,7 +69,7 @@ trait ConvertsBase64ToFiles
                 
                 //Inserting new file  to $this-files does not work so have to deal this after
                 $this->offsetSet($key,$uploadedFile);
-                \Log::debug("Trait: encoded field \"$key\" inserted" );
+                \Log::debug("Trait:  field \"$key\" inserted as UplodedFile" );
     
             }, null, false);
         });
