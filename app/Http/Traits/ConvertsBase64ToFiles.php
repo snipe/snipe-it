@@ -85,17 +85,14 @@ trait ConvertsBase64ToFiles
 
                 $uploadedFile = new UploadedFile($tempFilePath, $filename, null, null, true);
 
-                $body = $this->bodyParametersBag()->all();
-                Arr::forget($body, $key);
-                $this->bodyParametersBag()->replace($body);
-                \Log::debug("Trait: file field $key replaced:". $request->has($key));
-
-
-                $files = $this->uploadFilesBag()->all();
-                Arr::set($files, $key, $uploadedFile);
-                $this->uploadFilesBag()->replace($files);
-                \Log::debug("Trait: file field $key inserted:". $request->hasFile($key));
-
+                \Log::debug("Trait: uploadedfile ". $tempFilePath);
+                $this->offsetUnset($key);                                                                                                                                                                                                                                                                                                                                               
+                \Log::debug("Trait: encoded field \"$key\" removed" );
+                
+                //Inserting new file  to $this-files does not work so have to deal this after
+                $this->offsetSet($key,$uploadedFile);
+                \Log::debug("Trait: encoded field \"$key\" inserted" );
+    
             }, null, false);
         });
     }
