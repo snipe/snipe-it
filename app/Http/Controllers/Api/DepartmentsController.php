@@ -9,7 +9,7 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Department;
 use Auth;
 use Illuminate\Http\Request;
-use App\http\Requests\ImageUploadRequest;
+use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
 
 class DepartmentsController extends Controller
