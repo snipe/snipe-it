@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\ComponentsTransformer;
 use App\Models\Company;
 use App\Models\Component;
-use App\Http\Requests\Request;
+use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
