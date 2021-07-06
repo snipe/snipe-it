@@ -300,7 +300,7 @@
             }
         },
         components: {
-            select2: require('../select2.vue')
+            select2: require('../select2.vue').default
         }
     }
 </script>
