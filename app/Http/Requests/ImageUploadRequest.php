@@ -47,13 +47,8 @@ class ImageUploadRequest extends Request
      */
     protected function base64FileKeys(): array
     {
-        /**
-         * image_source is here just legacy reasons. Api\AssetController
-         * had it once to allow encoded image uploads.
-        */ 
         return [
             'image' => 'auto',
-            'image_source' => 'auto'
         ];
     }
 

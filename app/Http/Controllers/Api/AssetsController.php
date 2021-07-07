@@ -437,6 +437,22 @@ class AssetsController extends Controller
         $asset->rtd_location_id         = $request->get('rtd_location_id', null);
         $asset->location_id             = $request->get('rtd_location_id', null);
 
+        if ($request->has('image_source') && $request->input('image_source') != "") {
+            $saved_image_path = Helper::processUploadedImage(
+                $request->input('image_source'), 'uploads/assets/'
+            );
+
+            if (!$saved_image_path) {
+                return response()->json(Helper::formatStandardApiResponse(
+                        'error',
+                        null,
+                        trans('admin/hardware/message.create.error')
+                    ), 200);
+            }
+
+            $asset->image = $saved_image_path;
+        }
+
         $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
@@ -518,8 +534,31 @@ class AssetsController extends Controller
             ($request->filled('company_id')) ?
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
+($request->filled('rtd_location_id')) ?
+                $asset->location_id = $request->get('rtd_location_id') : null;
+
+
+            if ($request->filled('image_source')) {
+                if ($request->input('image_source') == "") {
             ($request->filled('rtd_location_id')) ?
                 $asset->location_id = $request->get('rtd_location_id') : null;
+                    $asset->image = null;
+                } else {
+                    $saved_image_path = Helper::processUploadedImage(
+                        $request->input('image_source'), 'uploads/assets/'
+                    );
+
+                    if (!$saved_image_path) {
+                        return response()->json(Helper::formatStandardApiResponse(
+                            'error',
+                            null,
+                            trans('admin/hardware/message.update.error')
+                        ), 200);
+                    }
+
+                    $asset->image = $saved_image_path;
+                }
+            }
 
             $asset = $request->handleImages($asset); 
             
