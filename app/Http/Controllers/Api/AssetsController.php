@@ -416,42 +416,26 @@ class AssetsController extends Controller
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
-        $asset->name = $request->get('name');
-        $asset->serial = $request->get('serial');
-        $asset->company_id = Company::getIdForCurrentUser($request->get('company_id'));
-        $asset->model_id = $request->get('model_id');
-        $asset->order_number = $request->get('order_number');
-        $asset->notes = $request->get('notes');
-        $asset->asset_tag = $request->get('asset_tag', Asset::autoincrement_asset());
-        $asset->user_id = Auth::id();
-        $asset->archived = '0';
-        $asset->physical = '1';
-        $asset->depreciate = '0';
-        $asset->status_id = $request->get('status_id', 0);
-        $asset->warranty_months = $request->get('warranty_months', null);
-        $asset->purchase_cost = Helper::ParseFloat($request->get('purchase_cost'));
-        $asset->purchase_date = $request->get('purchase_date', null);
-        $asset->assigned_to = $request->get('assigned_to', null);
-        $asset->supplier_id = $request->get('supplier_id', 0);
-        $asset->requestable = $request->get('requestable', 0);
-        $asset->rtd_location_id = $request->get('rtd_location_id', null);
-        $asset->location_id = $request->get('rtd_location_id', null);
-
-        if ($request->has('image_source') && $request->input('image_source') != '') {
-            $saved_image_path = Helper::processUploadedImage(
-                $request->input('image_source'), 'uploads/assets/'
-            );
-
-            if (! $saved_image_path) {
-                return response()->json(Helper::formatStandardApiResponse(
-                        'error',
-                        null,
-                        trans('admin/hardware/message.create.error')
-                    ), 200);
-            }
-
-            $asset->image = $saved_image_path;
-        }
+        $asset->name                    = $request->get('name');
+        $asset->serial                  = $request->get('serial');
+        $asset->company_id              = Company::getIdForCurrentUser($request->get('company_id'));
+        $asset->model_id                = $request->get('model_id');
+        $asset->order_number            = $request->get('order_number');
+        $asset->notes                   = $request->get('notes');
+        $asset->asset_tag               = $request->get('asset_tag', Asset::autoincrement_asset());
+        $asset->user_id                 = Auth::id();
+        $asset->archived                = '0';
+        $asset->physical                = '1';
+        $asset->depreciate              = '0';
+        $asset->status_id               = $request->get('status_id', 0);
+        $asset->warranty_months         = $request->get('warranty_months', null);
+        $asset->purchase_cost           = Helper::ParseFloat($request->get('purchase_cost'));
+        $asset->purchase_date           = $request->get('purchase_date', null);
+        $asset->assigned_to             = $request->get('assigned_to', null);
+        $asset->supplier_id             = $request->get('supplier_id', 0);
+        $asset->requestable             = $request->get('requestable', 0);
+        $asset->rtd_location_id         = $request->get('rtd_location_id', null);
+        $asset->location_id             = $request->get('rtd_location_id', null);
 
         $asset = $request->handleImages($asset);
 
@@ -536,28 +520,6 @@ class AssetsController extends Controller
 
             ($request->filled('rtd_location_id')) ?
                 $asset->location_id = $request->get('rtd_location_id') : null;
-
-            if ($request->filled('image_source')) {
-                if ($request->input('image_source') == '') {
-                    ($request->filled('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : null;
-                    $asset->image = null;
-                } else {
-                    $saved_image_path = Helper::processUploadedImage(
-                        $request->input('image_source'), 'uploads/assets/'
-                    );
-
-                    if (! $saved_image_path) {
-                        return response()->json(Helper::formatStandardApiResponse(
-                            'error',
-                            null,
-                            trans('admin/hardware/message.update.error')
-                        ), 200);
-                    }
-
-                    $asset->image = $saved_image_path;
-                }
-            }
 
             $asset = $request->handleImages($asset); 
             
