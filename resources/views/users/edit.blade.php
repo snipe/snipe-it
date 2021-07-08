@@ -77,7 +77,7 @@
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab_1" data-toggle="tab">Information</a></li>
-          <li><a href="#tab_2" data-toggle="tab">Permissions</a></li>
+          <li><a href="#permissions" data-toggle="tab">Permissions</a></li>
         </ul>
 
         <div class="tab-content">
@@ -504,7 +504,7 @@
             </div>
           </div><!-- /.tab-pane -->
 
-          <div class="tab-pane" id="tab_2">
+          <div class="tab-pane" id="permissions">
             <div class="col-md-12">
               @if (!Auth::user()->isSuperUser())
                 <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
