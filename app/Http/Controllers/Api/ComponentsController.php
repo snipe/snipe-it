@@ -210,7 +210,7 @@ class ComponentsController extends Controller
             $component->assets()->attach($component->id, [
                 'component_id' => $component->id,
                 'created_at' => \Carbon::now(),
-                'assigned_qty' => $request->get('assigned_qty'),
+                'assigned_qty' => $request->get('assigned_qty', 1),
                 'user_id' => \Auth::id(),
                 'asset_id' => $request->get('assigned_to')
             ]);
