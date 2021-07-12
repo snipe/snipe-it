@@ -155,6 +155,7 @@
                     consumables: [
                         {id: 'item_no', text: "Item Number"},
                         {id: 'model_number', text: "Model Number"},
+                        {id: 'min_amt', text: "Minimum Quantity"},
                     ],
                     licenses: [
                         {id: 'asset_tag', text: 'Assigned To Asset'},
@@ -210,6 +211,7 @@
                             .sort(sorter);
 
                     case 'consumable':
+                    	console.log('Returned consumable');
                         return this.columnOptions.general
                             .concat(this.columnOptions.consumables)
                             .sort(sorter);
