@@ -15,11 +15,26 @@
 {{-- Page content --}}
 @section('content')
 
+{{ Form::open([
+   'method' => 'POST',
+   'route' => ['consumables/bulkedit'],
+   'class' => 'form-inline',
+   'id' => 'bulkForm']) }}
 <div class="row">
   <div class="col-md-12">
 
     <div class="box box-default">
       <div class="box-body">
+        <div id="toolbar">
+          <label for="bulk_actions"><span class="sr-only">Bulk Actions</span></label>
+          <select name="bulk_actions" class="form-control select2" style="width: 150px;" aria-label="bulk_actions">
+            <option value="edit">Edit</option>
+            <option value="delete">Delete</option>
+            <option value="labels">Generate Labels</option>
+          </select>
+          <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+        </div>
+        
         <table
                 data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
                 data-cookie-id-table="consumablesTable"
@@ -48,6 +63,7 @@
 
   </div> <!-- /.col-md-12 -->
 </div> <!-- /.row -->
+{{ Form::close() }}
 @stop
 
 @section('moar_scripts')

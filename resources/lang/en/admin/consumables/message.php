@@ -11,12 +11,14 @@ return array(
 
     'update' => array(
         'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'success' => 'Consumable updated successfully.',
+        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
     ),
 
     'delete' => array(
         'confirm'   => 'Are you sure you wish to delete this consumable?',
         'error'   => 'There was an issue deleting the consumable. Please try again.',
+        'nothing_updated'   => 'No consumables were selected, so nothing was deleted.',
         'success' => 'The consumable was deleted successfully.'
     ),
 

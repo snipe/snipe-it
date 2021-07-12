@@ -22,7 +22,10 @@ Route::group(
             'parameters' => ['maintenance' => 'maintenance_id', 'asset' => 'asset_id']
         ]);
 
-        Route::get('requested', [ 'as' => 'assets.requested', 'uses' => 'Assets\AssetsController@getRequestedIndex']);
+        Route::get('requested', [ 
+            'as' => 'assets.requested', 
+            'uses' => 'Assets\AssetsController@getRequestedIndex'
+        ]);
 
         Route::get('scan', [
             'as' => 'asset.scan',
@@ -129,8 +132,14 @@ Route::group(
             'as' => 'hardware.view',
             'uses' => 'Assets\AssetsController@show'
         ]);
-        Route::get('{assetId}/qr_code', [ 'as' => 'qr_code/hardware', 'uses' => 'Assets\AssetsController@getQrCode' ]);
-        Route::get('{assetId}/barcode', [ 'as' => 'barcode/hardware', 'uses' => 'Assets\AssetsController@getBarCode' ]);
+        Route::get('{assetId}/qr_code', [ 
+            'as' => 'qr_code/hardware', 
+            'uses' => 'Assets\AssetsController@getQrCode' 
+        ]);
+        Route::get('{assetId}/barcode', [ 
+            'as' => 'barcode/hardware', 
+            'uses' => 'Assets\AssetsController@getBarCode' 
+        ]);
         Route::get('{assetId}/restore', [
             'as' => 'restore/hardware',
             'uses' => 'Assets\AssetsController@getRestore'
@@ -151,27 +160,18 @@ Route::group(
         ]);
 
 
-        Route::post(
-            'bulkedit',
-            [
+        Route::post( 'bulkedit', [
                 'as'   => 'hardware/bulkedit',
                 'uses' => 'Assets\BulkAssetsController@edit'
-            ]
-        );
-        Route::post(
-            'bulkdelete',
-            [
+        ]);
+        Route::post('bulkdelete', [
                 'as'   => 'hardware/bulkdelete',
                 'uses' => 'Assets\BulkAssetsController@destroy'
-            ]
-        );
-        Route::post(
-            'bulksave',
-            [
+        ]);
+        Route::post('bulksave', [
                 'as'   => 'hardware/bulksave',
                 'uses' => 'Assets\BulkAssetsController@update'
-            ]
-        );
+        ]);
 
         # Bulk checkout / checkin
          Route::get( 'bulkcheckout',  [

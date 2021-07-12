@@ -30,6 +30,25 @@
       <div class="box-body">
         <div class="row">
           <div class="col-md-12">
+            <div class="col-md-2">
+                <strong>
+                    Labels
+                </strong>
+            </div>
+            <div class="col-md-6">
+                {{ Form::open([
+                        'method' => 'POST',
+                        'route' => ['consumables/bulkedit'],
+                        'class' => 'form-inline',
+                        'id' => 'bulkForm']) }}
+                    <input type="hidden" name="bulk_actions" value="labels" />
+                    <input type="hidden" name="ids[{{$consumable->id}}]" value="{{ $consumable->id }}" />
+                    <button class="btn btn-sm btn-default" id="bulkEdit" ><i class="fa fa-barcode" aria-hidden="true"></i> {{ trans_choice('button.generate_labels', 1) }}</button>
+
+                {{ Form::close() }}
+            </div>
+            
+            
             <div class="table table-responsive">
 
               <table
