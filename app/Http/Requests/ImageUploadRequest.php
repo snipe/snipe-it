@@ -5,10 +5,14 @@ namespace App\Http\Requests;
 use App\Models\SnipeModel;
 use Intervention\Image\Facades\Image;
 use enshrined\svgSanitize\Sanitizer;
+use App\Http\Traits\ConvertsBase64ToFiles;
+use Illuminate\Http\UploadedFile;
 use Storage;
 
 class ImageUploadRequest extends Request
 {
+    use ConvertsBase64ToFiles;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,15 +30,31 @@ class ImageUploadRequest extends Request
      */
     public function rules()
     {
-        return [
-            'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
-            'avatar' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
-        ];
+       
+            return [
+                'image' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
+                'avatar' => 'mimes:png,gif,jpg,jpeg,svg,bmp,svg+xml,webp',
+            ];
     }
 
     public function response(array $errors)
     {
         return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
+    }
+    
+    /** 
+     * Fields that should be traited from base64 to files
+     */
+    protected function base64FileKeys(): array
+    {
+        /**
+         * image_source is here just legacy reasons. Api\AssetController
+         * had it once to allow encoded image uploads.
+        */ 
+        return [
+            'image' => 'auto',
+            'image_source' => 'auto'
+        ];
     }
 
     /**
@@ -77,14 +97,22 @@ class ImageUploadRequest extends Request
         \Log::debug('Form fieldname is: '.$form_fieldname);
         \Log::debug('DB fieldname is: '.$use_db_field);
         \Log::debug('Trying to upload to '. $path);
+        
+        // ConvertBase64ToFiles just changes object type, 
+        // as it cannot currently insert files to $this->files
+        if ($this->offsetGet($form_fieldname) instanceof UploadedFile) {
+           $image=$this->offsetGet($form_fieldname);
+        } else {
+            if ($this->hasFile($form_fieldname)) {
+                $image = $this->file($form_fieldname);
+            }
+        }
 
-        \Log::debug($this->file());
-
-        if ($this->hasFile($form_fieldname)) {
+        if (isset($image)) {
+            \Log::debug($image);
 
             if (!config('app.lock_passwords')) {
 
-                $image = $this->file($form_fieldname);
                 $ext = $image->getClientOriginalExtension();
                 $file_name = $type.'-'.$form_fieldname.'-'.str_random(10).'.'.$ext;
 
@@ -165,4 +193,5 @@ class ImageUploadRequest extends Request
 
         return $item;
     }
+    
 }

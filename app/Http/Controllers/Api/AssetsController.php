@@ -21,6 +21,7 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 use Input;
 use Paginator;
 use Slack;
@@ -425,11 +426,11 @@ class AssetsController extends Controller
      * Accepts a POST request to create a new asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param Request $request
+     * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
 
         $this->authorize('create', Asset::class);
@@ -458,21 +459,7 @@ class AssetsController extends Controller
         $asset->rtd_location_id         = $request->get('rtd_location_id', null);
         $asset->location_id             = $request->get('rtd_location_id', null);
 
-        if ($request->has('image_source') && $request->input('image_source') != "") {
-            $saved_image_path = Helper::processUploadedImage(
-                $request->input('image_source'), 'uploads/assets/'
-            );
-
-            if (!$saved_image_path) {
-                return response()->json(Helper::formatStandardApiResponse(
-                        'error',
-                        null,
-                        trans('admin/hardware/message.create.error')
-                    ), 200);
-            }
-
-            $asset->image = $saved_image_path;
-        }
+        $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
         // Validation for these fields is handled through the AssetRequest form request
@@ -540,11 +527,11 @@ class AssetsController extends Controller
      * Accepts a POST request to update an asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param Request $request
+     * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Asset::class);
 
@@ -558,32 +545,19 @@ class AssetsController extends Controller
             ($request->filled('company_id')) ?
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
-($request->filled('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : null;
-
-
-            if ($request->filled('image_source')) {
-                if ($request->input('image_source') == "") {
             ($request->filled('rtd_location_id')) ?
                 $asset->location_id = $request->get('rtd_location_id') : null;
-                    $asset->image = null;
-                } else {
-                    $saved_image_path = Helper::processUploadedImage(
-                        $request->input('image_source'), 'uploads/assets/'
-                    );
 
-                    if (!$saved_image_path) {
-                        return response()->json(Helper::formatStandardApiResponse(
-                            'error',
-                            null,
-                            trans('admin/hardware/message.update.error')
-                        ), 200);
-                    }
+            /**
+            * this is here just legacy reasons. Api\AssetController
+            * used image_source  once to allow encoded image uploads.
+            */
+            if ($request->has('image_source')) {
+                $request->offsetSet('image', $request->offsetGet('image_source'));
+            }     
 
-                    $asset->image = $saved_image_path;
-                }
-            }
-
+            $asset = $request->handleImages($asset); 
+            
             // Update custom fields
             if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
