@@ -991,7 +991,8 @@
                            "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                          }'
                                         data-url="{{ route('api.maintenances.index', array('asset_id' => $asset->id)) }}"
-                                        data-cookie-id-table="assetMaintenancesTable">
+                                        data-cookie-id-table="assetMaintenancesTable"
+                                        data-cookie="true">
                                 </table>
                             </div> <!-- /.col-md-12 -->
                         </div> <!-- /.row -->
@@ -1019,7 +1020,8 @@
                        }'
 
                       data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}"
-                      data-cookie-id-table="assetHistory">
+                      data-cookie-id-table="assetHistory"
+                      data-cookie="true">
                 <thead>
                 <tr>
                   <th data-visible="true" style="width: 40px;" class="hidden-xs">Icon</th>

@@ -197,21 +197,6 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
 
     /*--- Components API ---*/
 
-    Route::resource('components', 'ComponentsController',
-        [
-            'names' =>
-                [
-                    'index' => 'api.components.index',
-                    'show' => 'api.components.show',
-                    'store' => 'api.components.store',
-                    'update' => 'api.components.update',
-                    'destroy' => 'api.components.destroy'
-                ],
-            'except' => ['create', 'edit'],
-            'parameters' => ['component' => 'component_id']
-        ]
-    ); // Components resource
-
     Route::group(['prefix' => 'components'], function () {
 
         Route::get('{component}/assets',
@@ -236,6 +221,24 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
     );
 
     }); // Components group
+    
+
+    Route::resource('components', 'ComponentsController',
+        [
+            'names' =>
+                [
+                    'index' => 'api.components.index',
+                    'show' => 'api.components.show',
+                    'store' => 'api.components.store',
+                    'update' => 'api.components.update',
+                    'destroy' => 'api.components.destroy'
+                ],
+            'except' => ['create', 'edit'],
+            'parameters' => ['component' => 'component_id']
+        ]
+    ); // Components resource
+
+   
 
 
     /*--- Consumables API ---*/
