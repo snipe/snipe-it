@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Accept {{ $acceptance->checkoutable->present()->name() }}
+    {{trans('general.accept', ['asset' => $acceptance->checkoutable->present()->name()])}}
     @parent
 @stop
 
@@ -22,7 +22,7 @@
 #eula_div {
     width: 100%;
     height: auto;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .m-signature-pad--body {
@@ -43,51 +43,42 @@
     <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
       <div class="panel box box-default">
         <div class="box-body">
-          <div class="col-md-12">
-            <div class="radio">
-              <label>
-                <input type="radio" name="asset_acceptance" id="accepted" value="accepted">
-                I accept
-              </label>
+          @if ($acceptance->checkoutable->getEula())
+            <div id="eula_div" style="padding-bottom: 20px">
+              {!!  $acceptance->checkoutable->getEula() !!}
             </div>
+          @endif
 
-            <div class="radio">
-              <label>
-                <input type="radio" name="asset_acceptance" id="declined" value="declined">
-                I decline
-              </label>
+          <h3>{{$acceptance->checkoutable->present()->name()}}</h3>
+          <div class="radio">
+            <label>
+              <input type="radio" name="asset_acceptance" id="accepted" value="accepted">
+                {{trans('general.i_accept')}}
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="asset_acceptance" id="declined" value="declined">
+                {{trans('general.i_decline')}}
+            </label>
+          </div>
+
+          @if ($snipeSettings->require_accept_signature=='1')
+          <h3 style="padding-top: 20px">{{trans('general.sign_tos')}}</h3>
+          <div id="signature-pad" class="m-signature-pad">
+            <div class="m-signature-pad--body col-md-12 col-sm-12 col-lg-12 col-xs-12">
+              <canvas></canvas>
+                <input type="hidden" name="signature_output" id="signature_output">
             </div>
-
-            @if ($acceptance->checkoutable->getEula())
-            <div class="col-md-12" style="padding-top: 20px">
-              <div id="eula_div">
-                {!!  $acceptance->checkoutable->getEula() !!}
-              </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center">
+              <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">{{trans('general.clear_signature')}}</button>
             </div>
-            @endif
-
-            @if ($snipeSettings->require_accept_signature=='1')
-            <div class="col-md-12 col-sm-12 text-center" style="padding-top: 20px">
-
-              <h3>Sign below to indicate that you agree to the terms of service:</h3>
-
-              <div id="signature-pad" class="m-signature-pad">
-                <div class="m-signature-pad--body col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                  <canvas></canvas>
-                    <input type="hidden" name="signature_output" id="signature_output">
-                </div>
-               <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12 text-center">
-                  <button type="button" class="btn btn-sm btn-default clear" data-action="clear" id="clear_button">Clear Signature</button>
-                </div>
-              </div>
-            </div> <!-- .col-md-12.text-center-->
-            @endif
-
-          </div><!-- / col-md-12 -->
+          </div>
+          @endif
 
         </div> <!-- / box-body -->
         <div class="box-footer text-right">
-            <button type="submit" class="btn btn-success" id="submit-button"><i class="fa fa-check icon-white"></i> {{ trans('general.submit') }}</button>
+            <button type="submit" class="btn btn-success" id="submit-button"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.submit') }}</button>
         </div><!-- /.box-footer -->
       </div> <!-- / box-default -->
     </div> <!-- / col -->
