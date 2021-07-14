@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
 use App\Models\Location;
@@ -86,14 +87,15 @@ class LocationsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Location::class);
         $location = new Location;
         $location->fill($request->all());
+        $location = $request->handleImages($location);
 
         if ($location->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', (new LocationsTransformer)->transformLocation($location), trans('admin/locations/message.create.success')));
@@ -141,17 +143,17 @@ class LocationsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Location::class);
         $location = Location::findOrFail($id);
 
         $location->fill($request->all());
-
+        $location = $request->handleImages($location);
 
         if ($location->isValid()) {
 
