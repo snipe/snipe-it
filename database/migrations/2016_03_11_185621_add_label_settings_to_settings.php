@@ -15,10 +15,10 @@ class AddLabelSettingsToSettings extends Migration
       Schema::table('settings', function (Blueprint $table) {
         $table->tinyInteger('labels_per_page')->default(30);
         $table->decimal('labels_width', 6, 5)->default(2.625);
-        $table->decimal('labels_height', 6, 5)->default(1);
+        $table->decimal('labels_height', 6, 5)->default(.95);
         $table->decimal('labels_pmargin_left', 6, 5)->default(0.21975);
-        $table->decimal('labels_pmargin_right', 6, 5)->default(0.21975);
-        $table->decimal('labels_pmargin_top', 6, 5)->default(0.5);
+        $table->decimal('labels_pmargin_right', 6, 5)->default(0.19975);
+        $table->decimal('labels_pmargin_top', 6, 5)->default(0.6);
         $table->decimal('labels_pmargin_bottom', 6, 5)->default(0.5);
         $table->decimal('labels_display_bgutter', 6, 5)->default(0.07);
         $table->decimal('labels_display_sgutter', 6, 5)->default(0.05);
