@@ -459,6 +459,14 @@ class AssetsController extends Controller
         $asset->rtd_location_id         = $request->get('rtd_location_id', null);
         $asset->location_id             = $request->get('rtd_location_id', null);
 
+        /**
+        * this is here just legacy reasons. Api\AssetController
+        * used image_source  once to allow encoded image uploads.
+        */
+        if ($request->has('image_source')) {
+            $request->offsetSet('image', $request->offsetGet('image_source'));
+        }     
+
         $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
