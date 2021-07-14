@@ -17,24 +17,16 @@ class DepreciationsReportController extends Controller
      * @since [v5.16]
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $this->authorize('view', Asset::class);
+        $this->authorize('api.depreciationsReport.view', Depreciation::class);
 
-        $assets = Asset::select([
-            'assets.company_id',
-            'assets.id',
-            'assets.model_id',
-            'assets.deleted_at',
-            'assets.asset_tag',
-            'assets.name',
-            'assets.serial',
-            'assets.status_id',
-            'assets.assigned_to',
-            'assets.location_id',
-            'assets.purchase_date',
-            'assets.purchase_cost',
-        ]);
+        $depreciations = Depreciation::select('name')->with('assets');
+
+        return (new DepreciationsReportTransformer)->transformDepreciations($depreciations);
+
+
+
 
 
     }
