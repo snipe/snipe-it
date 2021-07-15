@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-<<<<<<< HEAD
-=======
-use Illuminate\Http\Request;
-use App\Http\Requests\ImageUploadRequest;
-use App\Http\Controllers\Controller;
->>>>>>> f9da83bc4 (Support images and multipart requests)
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
