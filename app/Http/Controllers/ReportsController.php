@@ -991,13 +991,13 @@ class ReportsController extends Controller
     }
 
     /**
-     * exportAssetAcceptanceReport
+     * Exports the AssetAcceptance report to CSV
      *
      * @return \Illuminate\Http\Response
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */
-    public function exportAssetAcceptanceReport()
+    public function postAssetAcceptanceReport()
     {
         $this->authorize('reports.view');
 
