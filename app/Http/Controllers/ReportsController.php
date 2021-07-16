@@ -911,14 +911,21 @@ class ReportsController extends Controller
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */
-    public function getAssetAcceptanceReport()
+    public function getAssetAcceptanceReport($deleted = false)
     {
         $this->authorize('reports.view');
+        $showDeleted = $deleted == 'deleted';
 
         /**
          * Get all assets with pending checkout acceptances
          */
-        $acceptances = CheckoutAcceptance::pending()->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        if($showDeleted) {
+            $acceptances = CheckoutAcceptance::pending()->withTrashed()->with(['assignedTo' , 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        } else {
+            $acceptances = CheckoutAcceptance::pending()->with(['assignedTo' => function ($query) {
+                $query->withTrashed();
+            }, 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        }
 
         $assetsForReport = $acceptances
             ->filter(function ($acceptance) {
@@ -928,7 +935,7 @@ class ReportsController extends Controller
                 return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
             });
 
-        return view('reports/unaccepted_assets', compact('assetsForReport'));
+        return view('reports/unaccepted_assets', compact('assetsForReport','showDeleted' ));
     }
 
     /**
@@ -997,14 +1004,19 @@ class ReportsController extends Controller
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */
-    public function postAssetAcceptanceReport()
+    public function postAssetAcceptanceReport($deleted = false)
     {
         $this->authorize('reports.view');
+        $showDeleted = $deleted == 'deleted';
 
         /**
          * Get all assets with pending checkout acceptances
          */
-        $acceptances = CheckoutAcceptance::pending()->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        if($showDeleted) {
+            $acceptances = CheckoutAcceptance::pending()->withTrashed()->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        } else {
+            $acceptances = CheckoutAcceptance::pending()->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        }
 
         $assetsForReport = $acceptances
             ->filter(function($acceptance) {

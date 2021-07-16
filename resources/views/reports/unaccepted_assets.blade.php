@@ -9,10 +9,22 @@
 @stop
 
 @section('header_right')
-    {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
-    {{csrf_field()}}
-    <button type="submit" class="btn btn-default"><i class="fa fa-download icon-white" aria-hidden="true"></i> {{ trans('general.download_all') }}</button>
-    {{ Form::close() }}
+
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group mr-2" role="group">
+            @if($showDeleted)
+                <a href="{{ route('reports/unaccepted_assets') }}" class="btn btn-default" ><i class="fa fa-trash icon-white" aria-hidden="true"></i> {{ trans('general.hide_deleted') }}</a>
+            @else
+                <a href="{{ route('reports/unaccepted_assets', ['deleted' => 'deleted']) }}" class="btn btn-default" ><i class="fa fa-trash icon-white" aria-hidden="true"></i> {{ trans('general.show_deleted') }}</a>
+            @endif
+        </div>
+        <div class="btn-group mr-2" role="group">
+            {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
+            {{csrf_field()}}
+            <button type="submit" class="btn btn-default"><i class="fa fa-download icon-white" aria-hidden="true"></i> {{ trans('general.download_all') }}</button>
+            {{ Form::close() }}
+        </div>
+    </div>
 @stop
 
 {{-- Page content --}}
@@ -34,6 +46,7 @@
                 data-show-export="true"
                 data-show-refresh="true"
                 data-sort-order="asc"
+                data-sort-name="created_at"
                 id="unacceptedAssetsReport"
                 class="table table-striped snipe-table"
                 data-export-options='{
@@ -42,12 +55,13 @@
                     }'>
             <thead>
               <tr role="row">
-                <th class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
-                <th class="col-sm-1">{{ trans('general.category') }}</th>
-                <th class="col-sm-1">{{ trans('admin/hardware/form.model') }}</th>
-                <th class="col-sm-1">{{ trans('admin/hardware/form.name') }}</th>
-                <th class="col-sm-1">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                <th class="col-sm-1">{{ trans('admin/hardware/table.checkoutto') }}</th>
+                <th class="col-sm-1" data-searchable="false" data-field="created_at"  data-sortable="true">{{ trans('general.date') }}</th>
+                <th class="col-sm-1" data-sortable="true" >{{ trans('admin/companies/table.title') }}</th>
+                <th class="col-sm-1" data-sortable="true" >{{ trans('general.category') }}</th>
+                <th class="col-sm-1" data-sortable="true" >{{ trans('admin/hardware/form.model') }}</th>
+                <th class="col-sm-1" data-sortable="true" >{{ trans('admin/hardware/form.name') }}</th>
+                <th class="col-sm-1" data-sortable="true" >{{ trans('admin/hardware/table.asset_tag') }}</th>
+                <th class="col-sm-1" data-sortable="true" >{{ trans('admin/hardware/table.checkoutto') }}</th>
                 <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
               </tr>
             </thead>
@@ -55,16 +69,19 @@
               @if ($assetsForReport)
               @foreach ($assetsForReport as $item)
                   @if ($item['assetItem'])
-                  <tr>
+                  <tr @if($item['acceptance']->trashed()) style="text-decoration: line-through" @endif>
+                    <td>{{ $item['acceptance']->created_at }}</td>
                     <td>{{ ($item['assetItem']->company) ? $assetItem->company->name : '' }}</td>
                     <td>{!! $item['assetItem']->model->category->present()->nameUrl() !!}</td>
                     <td>{!! $item['assetItem']->present()->modelUrl() !!}</td>
                     <td>{!! $item['assetItem']->present()->nameUrl() !!}</td>
                     <td>{{ $item['assetItem']->asset_tag }}</td>
-                    <td>{!! ($item['acceptance']->assignedTo) ? $item['acceptance']->assignedTo->present()->nameUrl() : trans('admin/reports/general.deleted_user') !!}</td>
+                    <td @if($item['acceptance']->assignedTo === null || $item['acceptance']->assignedTo->trashed()) style="text-decoration: line-through" @endif>{!! ($item['acceptance']->assignedTo) ? $item['acceptance']->assignedTo->present()->nameUrl() : trans('admin/reports/general.deleted_user') !!}</td>
                     <td>
-                        @if ($item['acceptance']->assignedTo)<a href="{{ route('reports/unaccepted_assets_sent_reminder', ['acceptanceId' => $item['acceptance']->id]) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('admin/reports/general.send_reminder') }}</a>@endif
-                        <a href="{{ route('reports/unaccepted_assets_delete', ['acceptanceId' => $item['acceptance']->id]) }}" class="btn btn-sm btn-danger delete-asset" data-tooltip="true" data-toggle="modal" data-content="{{ trans('general.delete_confirm', ['item' =>trans('admin/reports/general.acceptance_request')]) }}" data-title="{{  trans('general.delete') }}" onClick="return false;"><i class="fa fa-trash"></i></a>
+                        @if(!$item['acceptance']->trashed())
+                            @if ($item['acceptance']->assignedTo)<a href="{{ route('reports/unaccepted_assets_sent_reminder', ['acceptanceId' => $item['acceptance']->id]) }}" class="btn btn-sm bg-purple" data-tooltip="true">{{ trans('admin/reports/general.send_reminder') }}</a>@endif
+                            <a href="{{ route('reports/unaccepted_assets_delete', ['acceptanceId' => $item['acceptance']->id]) }}" class="btn btn-sm btn-danger delete-asset" data-tooltip="true" data-toggle="modal" data-content="{{ trans('general.delete_confirm', ['item' =>trans('admin/reports/general.acceptance_request')]) }}" data-title="{{  trans('general.delete') }}" onClick="return false;"><i class="fa fa-trash"></i></a>
+                        @endif
                     </td>
                   </tr>
                   @endif
