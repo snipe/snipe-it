@@ -75,7 +75,7 @@ class ReportsController extends Controller
             trans('admin/accessories/general.remaining'),
         ];
         $header = array_map('trim', $header);
-        $rows[] = implode($header, ', ');
+        $rows[] = implode(', ', $header);
 
         // Row per accessory
         foreach ($accessories as $accessory) {
@@ -85,10 +85,10 @@ class ReportsController extends Controller
             $row[] = e($accessory->total);
             $row[] = e($accessory->remaining);
 
-            $rows[] = implode($row, ',');
+            $rows[] = implode(',', $row);
         }
 
-        $csv = implode($rows, "\n");
+        $csv = implode("\n", $rows);
         $response = Response::make($csv, 200);
         $response->header('Content-Type', 'text/csv');
         $response->header('Content-disposition', 'attachment;filename=report.csv');
@@ -346,7 +346,7 @@ class ReportsController extends Controller
         ];
 
         $header = array_map('trim', $header);
-        $rows[] = implode($header, ', ');
+        $rows[] = implode(', ', $header);
 
         // Row per license
         foreach ($licenses as $license) {
@@ -360,10 +360,11 @@ class ReportsController extends Controller
             $row[] = ($license->depreciation != '') ? '' : e($license->depreciation->name);
             $row[] = '"'.Helper::formatCurrencyOutput($license->purchase_cost).'"';
 
-            $rows[] = implode($row, ',');
+            $rows[] = implode(',', $row);
         }
 
-        $csv = implode($rows, "\n");
+
+        $csv      = implode("\n", $rows);
         $response = Response::make($csv, 200);
         $response->header('Content-Type', 'text/csv');
         $response->header('Content-disposition', 'attachment;filename=report.csv');
@@ -871,7 +872,7 @@ class ReportsController extends Controller
         ];
 
         $header = array_map('trim', $header);
-        $rows[] = implode($header, ',');
+        $rows[] = implode(',', $header);
 
         foreach ($assetMaintenances as $assetMaintenance) {
             $row = [];
@@ -888,13 +889,13 @@ class ReportsController extends Controller
             } else {
                 $improvementTime = intval($assetMaintenance->asset_maintenance_time);
             }
-            $row[] = $improvementTime;
-            $row[] = trans('general.currency').Helper::formatCurrencyOutput($assetMaintenance->cost);
-            $rows[] = implode($row, ',');
+            $row[]  = $improvementTime;
+            $row[]  = trans('general.currency') . Helper::formatCurrencyOutput($assetMaintenance->cost);
+            $rows[] = implode(',', $row);
         }
 
         // spit out a csv
-        $csv = implode($rows, "\n");
+        $csv      = implode("\n", $rows);
         $response = Response::make($csv, 200);
         $response->header('Content-Type', 'text/csv');
         $response->header('Content-disposition', 'attachment;filename=report.csv');
@@ -917,23 +918,14 @@ class ReportsController extends Controller
         /**
          * Get all assets with pending checkout acceptances
          */
-<<<<<<< HEAD
-        $acceptances = CheckoutAcceptance::pending()->get();
-=======
         $acceptances = CheckoutAcceptance::pending()->with(['assignedTo', 'checkoutable.assignedTo', 'checkoutable.model'])->get();
->>>>>>> Unaccepted Assets Report Actions (send reminder, delete) added
 
         $assetsForReport = $acceptances
             ->filter(function ($acceptance) {
                 return $acceptance->checkoutable_type == \App\Models\Asset::class;
             })
-<<<<<<< HEAD
-            ->map(function ($acceptance) {
-                return $acceptance->checkoutable;
-=======
             ->map(function($acceptance) {
                 return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
->>>>>>> Unaccepted Assets Report Actions (send reminder, delete) added
             });
 
         return view('reports/unaccepted_assets', compact('assetsForReport'));
@@ -1033,17 +1025,8 @@ class ReportsController extends Controller
         ];
 
         $header = array_map('trim', $header);
-        $rows[] = implode($header, ',');
+        $rows[] = implode(',', $header);
 
-<<<<<<< HEAD
-        foreach ($assetsForReport as $assetItem) {
-            $row = [];
-            $row[] = str_replace(',', '', e($assetItem->assetlog->model->category->name));
-            $row[] = str_replace(',', '', e($assetItem->assetlog->model->name));
-            $row[] = str_replace(',', '', e($assetItem->assetlog->present()->name()));
-            $row[] = str_replace(',', '', e($assetItem->assetlog->asset_tag));
-            $row[] = str_replace(',', '', e($assetItem->assetlog->assignedTo->present()->name()));
-=======
         foreach ($assetsForReport as $item) {
             $row    = [ ];
             $row[]  = str_replace(',', '', e($item['assetItem']->model->category->name));
@@ -1051,12 +1034,11 @@ class ReportsController extends Controller
             $row[]  = str_replace(',', '', e($item['assetItem']->name));
             $row[]  = str_replace(',', '', e($item['assetItem']->asset_tag));
             $row[]  = str_replace(',', '', e(($item['acceptance']->assignedTo) ? $item['acceptance']->assignedTo->present()->name() : trans('admin/reports/general.deleted_user')));
->>>>>>> Unaccepted Assets Report Actions (send reminder, delete) added
-            $rows[] = implode($row, ',');
+            $rows[] = implode(',', $row);
         }
 
         // spit out a csv
-        $csv = implode($rows, "\n");
+        $csv      = implode("\n", $rows);
         $response = Response::make($csv, 200);
         $response->header('Content-Type', 'text/csv');
         $response->header('Content-disposition', 'attachment;filename=report.csv');
