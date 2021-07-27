@@ -226,26 +226,26 @@ $factory->state(App\Models\AssetModel::class, 'tab3-model', function ($faker) {
 |--------------------------------------------------------------------------
 */
 
-$factory->state(App\Models\AssetModel::class, 'iphone6s-model', function ($faker) {
+$factory->state(App\Models\AssetModel::class, 'iphone11-model', function ($faker) {
     return [
-        'name' => 'iPhone 6s',
+        'name' => 'iPhone 11',
         'category_id' => 4,
         'manufacturer_id' => 1,
         'eol' => '12',
         'depreciation_id' => 3,
-        'image' => 'iphone6.jpg',
+        'image' => 'iphone11.jpeg',
         'fieldset_id' => 1,
     ];
 });
 
-$factory->state(App\Models\AssetModel::class, 'iphone7-model', function ($faker) {
+$factory->state(App\Models\AssetModel::class, 'iphone12-model', function ($faker) {
     return [
-        'name' => 'iPhone 7',
+        'name' => 'iPhone 12',
         'category_id' => 4,
         'manufacturer_id' => 1,
         'eol' => '12',
         'depreciation_id' => 1,
-        'image' => 'iphone7.jpg',
+        'image' => 'iphone12.jpeg',
         'fieldset_id' => 1,
     ];
 });
