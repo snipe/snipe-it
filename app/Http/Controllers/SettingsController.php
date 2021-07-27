@@ -847,7 +847,7 @@ class SettingsController extends Controller
         $setting->labels_pageheight           = $request->input('labels_pageheight');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
-
+        $setting->labels_measurement_type     = $request->input('labels_measurement_type', '1');
 
 
         if ($request->filled('labels_display_name')) {
@@ -887,6 +887,55 @@ class SettingsController extends Controller
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
+    /**
+     * Converts the labels measurement unit for measurable fields in the labels settings
+     *
+     */
+        public function measurementConverter(Request $request, $setting)
+        {
+            if(!$request->labels_measurement_type == old($setting->labels_measurement_type)){
+            switch ($request->labels_measurement_type) {
+                case "in":
+                    if (old($setting->labels_measurement_type == 'cm')) {
+                        $setting->labels_width = pow(10, -1) * ($request->labels_width);
+                        $setting->labels_height = pow(10, -1) * ($request->labels_height);
+                        $setting->labels_pmargin_left = pow(10, -1) * ($request->labels_pmargin_left);
+                        $setting->labels_pmargin_right = pow(10, -1) * ($request->labels_pmargin_right);
+                        $setting->labels_pmargin_top = pow(10, -1) * ($request->labels_pmargin_top);
+                        $setting->labels_pmargin_bottom = pow(10, -1) * ($request->labels_pmargin_bottom);
+                        $setting->labels_display_bgutter = pow(10, -1) * ($request->labels_display_bgutter);
+                        $setting->labels_display_sgutter = pow(10, -1) * ($request->labels_display_sgutter);
+                        $setting->labels_fontsize = pow(10, -1) * ($request->labels_fontsize);
+                        $setting->labels_pagewidth = pow(10, -1) * ($request->labels_pagewidth);
+                        $setting->labels_pageheight = pow(10, -1) * ($request->labels_pageheight);
+                    }
+                    if (old($setting->labels_measurement_type == 'mm')) {
+                        $setting->labels_width = pow(10, -3) * ($request->labels_width);
+                        $setting->labels_height = pow(10, -3) * ($request->labels_height);
+                        $setting->labels_pmargin_left = pow(10, -3) * ($request->labels_pmargin_left);
+                        $setting->labels_pmargin_right = pow(10, -3) * ($request->labels_pmargin_right);
+                        $setting->labels_pmargin_top = pow(10, -3) * ($request->labels_pmargin_top);
+                        $setting->labels_pmargin_bottom = pow(10, -3) * ($request->labels_pmargin_bottom);
+                        $setting->labels_display_bgutter = pow(10, -3) * ($request->labels_display_bgutter);
+                        $setting->labels_display_sgutter = pow(10, -3) * ($request->labels_display_sgutter);
+                        $setting->labels_fontsize = pow(10, -3) * ($request->labels_fontsize);
+                        $setting->labels_pagewidth = pow(10, -3) * ($request->labels_pagewidth);
+                        $setting->labels_pageheight = pow(10, -3) * ($request->labels_pageheight);
+                    }
+                case "cm":
+                    if (old($setting->labels_measurement_type == 'in')) {
+                    }
+                    if (old($setting->labels_measurement_type == 'mm')) {
+                    }
+                case "mm":
+                    if (old($setting->labels_measurement_type == 'cm')) {
+                    }
+                    if (old($setting->labels_measurement_type == 'in')) {
+                    }
+
+            }
+        }
+        }
 
     /**
      * Return a form to allow a super admin to update settings.
