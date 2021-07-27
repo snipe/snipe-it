@@ -294,31 +294,31 @@ class AssetModelFactory extends Factory
         });
     }
 
-    public function iphone6sModel()
+    public function iphone11Model()
     {
         return $this->state(function () {
             return [
-                'name' => 'iPhone 6s',
+                'name' => 'iPhone 11',
                 'category_id' => 4,
                 'manufacturer_id' => 1,
                 'eol' => '12',
                 'depreciation_id' => 3,
-                'image' => 'iphone6.jpg',
+                'image' => 'iphone11.jpeg',
                 'fieldset_id' => 1,
             ];
         });
     }
 
-    public function iphone7Model()
+    public function iphone12Model()
     {
         return $this->state(function () {
             return [
-                'name' => 'iPhone 7',
+                'name' => 'iPhone 12',
                 'category_id' => 4,
                 'manufacturer_id' => 1,
                 'eol' => '12',
                 'depreciation_id' => 1,
-                'image' => 'iphone7.jpg',
+                'image' => 'iphone12.jpeg',
                 'fieldset_id' => 1,
             ];
         });

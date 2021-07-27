@@ -200,7 +200,7 @@ class AssetFactory extends Factory
         });
     }
 
-    public function phoneIphone6s()
+    public function phoneIphone11()
     {
         return $this->state(function () {
             return [
@@ -209,7 +209,7 @@ class AssetFactory extends Factory
         });
     }
 
-    public function phoneIphone7()
+    public function phoneIphone12()
     {
         return $this->state(function () {
             return [
