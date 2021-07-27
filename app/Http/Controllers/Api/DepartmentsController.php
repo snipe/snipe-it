@@ -9,6 +9,7 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Department;
 use Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
 
 class DepartmentsController extends Controller
@@ -73,14 +74,16 @@ class DepartmentsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Department::class);
         $department = new Department;
         $department->fill($request->all());
+        $department = $request->handleImages($department);
+
         $department->user_id = Auth::user()->id;
         $department->manager_id = ($request->filled('manager_id' ) ? $request->input('manager_id') : null);
 
@@ -111,15 +114,16 @@ class DepartmentsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v5.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Department::class);
         $department = Department::findOrFail($id);
         $department->fill($request->all());
+        $department = $request->handleImages($department);
 
         if ($department->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $department, trans('admin/departments/message.update.success')));
