@@ -26,6 +26,7 @@ use Watson\Validating\ValidatingTrait;
 class Asset extends Depreciable
 {
     protected $presenter = 'App\Presenters\AssetPresenter';
+    use CompanyableTrait;
     use Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 
     const LOCATION = 'location';
