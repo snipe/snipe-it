@@ -49,7 +49,20 @@
                                 {!! $errors->first('labels_per_page', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
+                        <div class="form-group {{ $errors->has('labels_measurement') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('labels_measurement', trans('admin/settings/general.labels_measurement')) }}
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <div class="input-group">
+                                    {{ Form::select('labels_measurement', ['in', 'mm','cm'], 'in', [$setting->labels_measurement], ['class' => 'form-control', 'aria-label'=>'labels_measurement']) }}
 
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-md-offset-3">
+                                {!! $errors->first('labels_fontsize', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                            </div>
+                        </div>
                         <div class="form-group {{ $errors->has('labels_fontsize') ? 'error' : '' }}">
                             <div class="col-md-3">
                                 {{ Form::label('labels_fontsize', trans('admin/settings/general.labels_fontsize')) }}

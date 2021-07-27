@@ -60,6 +60,7 @@ return array(
     'info'                      => 'These settings let you customize certain aspects of your installation.',
     'label_logo'                => 'Label Logo',
     'label_logo_size'           => 'Square logos look best - will be displayed in the top right of each asset label. ',
+    'labels_measurement'    => 'Measurement Unit',
     'laravel'                   => 'Laravel Version',
     'ldap_enabled'              => 'LDAP enabled',
     'ldap_integration'          => 'LDAP Integration',
