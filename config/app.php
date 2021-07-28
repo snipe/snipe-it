@@ -345,7 +345,6 @@ return [
         * Custom service provider
         */
         App\Providers\MacroServiceProvider::class,
-        App\Providers\LdapServiceProvider::class,
         App\Providers\SamlServiceProvider::class,
 
     ],

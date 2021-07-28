@@ -7,7 +7,6 @@ use App\Http\Transformers\LoginAttemptsTransformer;
 use App\Models\Ldap;
 use App\Models\Setting;
 use App\Notifications\MailTest;
-use App\Services\LdapAd;
 use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
