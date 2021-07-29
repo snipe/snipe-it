@@ -15,6 +15,8 @@ class AddsLabelMeasurementType extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->string('labels_measurement_type')->after('labels_per_page')->default('in');
+            $table->string('old_labels_measurement_type')->after('labels_measurement_type');
+
         });
     }
 
@@ -27,6 +29,7 @@ class AddsLabelMeasurementType extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             $table->dropColumn('labels_measurement_type');
+            $table->dropColumn('old_labels_measurement_type');
         });
     }
 }
