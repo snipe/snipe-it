@@ -83,7 +83,7 @@ class ForgotPasswordController extends Controller
                 )
             );
         } catch(\Exception $e) {
-            \Log::info('Password reset attempt: User '.$request->input('username').' doesnt have email setted' );
+            \Log::info('Password reset attempt: User '.$request->input('username').'failed with exception: '.$e );
         }
 
 
