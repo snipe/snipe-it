@@ -901,102 +901,101 @@ class SettingsController extends Controller
         public function measurementConverter($setting)
         {
             switch ($setting->labels_measurement_type) {
+
                 case "in":
-//                      converts from inches to centimeters
+//                      converts centimeters to inches
                     if ($setting->old_labels_measurement_type == 'cm') {
-                        $setting->labels_width = ($setting->labels_width)/2.54;
-                        $setting->labels_height = ($setting->labels_height)/2.54;
-                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left)/2.54;
-                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right)/2.54;
-                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top)/2.54;
-                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom)/2.54;
-                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter)/2.54;
-                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter)/2.54;
-                        $setting->labels_fontsize = ($setting->labels_fontsize)/2.54;
-                        $setting->labels_pagewidth = ($setting->labels_pagewidth)/2.54;
-                        $setting->labels_pageheight = ($setting->labels_pageheight)/2.54;
+
+                        $setting->labels_width = ($setting->labels_width) / 2.54;
+                        $setting->labels_height = ($setting->labels_height) / 2.54;
+                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left) / 2.54;
+                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right) / 2.54;
+                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top) / 2.54;
+                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom) / 2.54;
+                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter) / 2.54;
+                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter) / 2.54;
+                        $setting->labels_pagewidth = ($setting->labels_pagewidth) / 2.54;
+                        $setting->labels_pageheight = ($setting->labels_pageheight) / 2.54;
                         break;
-                    }
-                    else {
-//                      converts from inches to millimeters
-                        $setting->labels_width = ($setting->labels_width)/25.4;
-                        $setting->labels_height = ($setting->labels_height)/25.4;
-                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left)/25.4;
-                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right)/25.4;
-                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top)/25.4;
-                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom)/25.4;
-                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter)/25.4;
-                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter)/25.4;
-                        $setting->labels_fontsize = ($setting->labels_fontsize)/25.4;
-                        $setting->labels_pagewidth = ($setting->labels_pagewidth)/25.4;
-                        $setting->labels_pageheight = ($setting->labels_pageheight)/25.4;
+
+//                      converts millimeters to inches
+                    } else if ($setting->old_labels_measurement_type == 'mm') {
+                        dd("mm->in");
+                        $setting->labels_width = ($setting->labels_width) / 25.4;
+                        $setting->labels_height = ($setting->labels_height) / 25.4;
+                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left) / 25.4;
+                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right) / 25.4;
+                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top) / 25.4;
+                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom) / 25.4;
+                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter) / 25.4;
+                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter) / 25.4;
+                        $setting->labels_pagewidth = ($setting->labels_pagewidth) / 25.4;
+                        $setting->labels_pageheight = ($setting->labels_pageheight) / 25.4;
                         break;
                     }
                 case "cm":
-//                      converts from centimeters to inches
+//                      converts inches to centimeters
                     if ($setting->old_labels_measurement_type == 'in') {
-                        $setting->labels_width = ($setting->labels_width)*2.54;
-                        $setting->labels_height = ($setting->labels_height)*2.54;
-                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left)*2.54;
-                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right)*2.54;
-                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top)*2.54;
-                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom)*2.54;
-                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter)*2.54;
-                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter)*2.54;
-                        $setting->labels_fontsize = ($setting->labels_fontsize)*2.54;
-                        $setting->labels_pagewidth = ($setting->labels_pagewidth)*2.54;
-                        $setting->labels_pageheight = ($setting->labels_pageheight)*2.54;
+
+                        $setting->labels_width = ($setting->labels_width) * 2.54;
+                        $setting->labels_height = ($setting->labels_height) * 2.54;
+                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left) * 2.54;
+                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right) * 2.54;
+                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top) * 2.54;
+                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom) * 2.54;
+                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter) * 2.54;
+                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter) * 2.54;
+                        $setting->labels_pagewidth = ($setting->labels_pagewidth) * 2.54;
+                        $setting->labels_pageheight = ($setting->labels_pageheight) * 2.54;
                         break;
-                    }
-                    else {
-//                      converts from centimeters to millimeters
-                        $setting->labels_width = ($setting->labels_width)*pow(10,-1);
-                        $setting->labels_height = ($setting->labels_height)*pow(10,-1);
-                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left)*pow(10,-1);
-                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right)*pow(10,-1);
-                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top)*pow(10,-1);
-                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom)*pow(10,-1);
-                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter)*pow(10,-1);
-                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter)*pow(10,-1);
-                        $setting->labels_fontsize = ($setting->labels_fontsize)*pow(10,-1);
-                        $setting->labels_pagewidth = ($setting->labels_pagewidth)*pow(10,-1);
-                        $setting->labels_pageheight = ($setting->labels_pageheight)*pow(10,-1);
+
+//                      converts millimeters to centimeters
+                    } else if ($setting->old_labels_measurement_type == 'mm') {
+                        dd("mm->cm");
+                        $setting->labels_width = ($setting->labels_width) * pow(10, -1);
+                        $setting->labels_height = ($setting->labels_height) * pow(10, -1);
+                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left) * pow(10, -1);
+                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right) * pow(10, -1);
+                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top) * pow(10, -1);
+                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom) * pow(10, -1);
+                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter) * pow(10, -1);
+                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter) * pow(10, -1);
+                        $setting->labels_pagewidth = ($setting->labels_pagewidth) * pow(10, -1);
+                        $setting->labels_pageheight = ($setting->labels_pageheight) * pow(10, -1);
                         break;
                     }
                 case "mm":
-//                      converts from millimeters to centimeters
+//                      converts centimeters to millimeters
                     if ($setting->old_labels_measurement_type == 'cm') {
-                        $setting->labels_width = ($setting->labels_width)*pow(10,1);
-                        $setting->labels_height = ($setting->labels_height)*pow(10,1);
-                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left)*pow(10,1);
-                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right)*pow(10,1);
-                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top)*pow(10,1);
-                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom)*pow(10,1);
-                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter)*pow(10,1);
-                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter)*pow(10,1);
-                        $setting->labels_fontsize = ($setting->labels_fontsize)*pow(10,1);
-                        $setting->labels_pagewidth = ($setting->labels_pagewidth)*pow(10,1);
-                        $setting->labels_pageheight = ($setting->labels_pageheight)*pow(10,1);
-                        break;
-                    }
-                    else {
-//                      converts from millimeters to inches
-                        $setting->labels_width = ($setting->labels_width)*25.4;
-                        $setting->labels_height = ($setting->labels_height)*25.4;
-                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left)*25.4;
-                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right)*25.4;
-                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top)*25.4;
-                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom)*25.4;
-                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter)*25.4;
-                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter)*25.4;
-                        $setting->labels_fontsize = ($setting->labels_fontsize)*25.4;
-                        $setting->labels_pagewidth = ($setting->labels_pagewidth)*25.4;
-                        $setting->labels_pageheight = ($setting->labels_pageheight)*25.4;
-                        break;
-                    }
 
+                        $setting->labels_width = ($setting->labels_width) * pow(10, 1);
+                        $setting->labels_height = ($setting->labels_height) * pow(10, 1);
+                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left) * pow(10, 1);
+                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right) * pow(10, 1);
+                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top) * pow(10, 1);
+                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom) * pow(10, 1);
+                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter) * pow(10, 1);
+                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter) * pow(10, 1);
+                        $setting->labels_pagewidth = ($setting->labels_pagewidth) * pow(10, 1);
+                        $setting->labels_pageheight = ($setting->labels_pageheight) * pow(10, 1);
+                        break;
+                    }
+//                      converts inches to millimeters
+                    else if ($setting->old_labels_measurement_type == 'in')
+                        $setting->labels_width = ($setting->labels_width) * 25.4;
+                        $setting->labels_height = ($setting->labels_height) * 25.4;
+                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left) * 25.4;
+                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right) * 25.4;
+                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top) * 25.4;
+                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom) * 25.4;
+                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter) * 25.4;
+                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter) * 25.4;
+                        $setting->labels_pagewidth = ($setting->labels_pagewidth) * 25.4;
+                        $setting->labels_pageheight = ($setting->labels_pageheight) * 25.4;
+                    break;
             }
         }
+
 
 
     /**

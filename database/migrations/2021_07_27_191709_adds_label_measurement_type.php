@@ -17,6 +17,7 @@ class AddsLabelMeasurementType extends Migration
             $table->string('labels_measurement_type')->after('labels_per_page')->default('in');
             $table->string('old_labels_measurement_type')->after('labels_measurement_type');
 
+
         });
     }
 
