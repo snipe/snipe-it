@@ -63,11 +63,9 @@ class ProfileController extends Controller
             $user->location_id    = $request->input('location_id');
         }
 
-
         if ($request->input('avatar_delete') == 1) {
             $user->avatar = null;
         }
-
 
         if ($request->hasFile('avatar')) {
             $path = 'avatars';
@@ -92,8 +90,6 @@ class ProfileController extends Controller
 
             $user->avatar = $file_name;
         }
-
-
 
         if ($user->save()) {
             return redirect()->route('profile')->with('success', 'Account successfully updated');
@@ -174,10 +170,6 @@ class ProfileController extends Controller
                     $validator->errors()->add('password', trans('validation.disallow_same_pwd_as_user_fields'));
                 }
             }
-
-
-
-            
         });
 
         if (!$validator->fails()) {
@@ -187,8 +179,6 @@ class ProfileController extends Controller
 
         }
         return redirect()->back()->withInput()->withErrors($validator);
-
-
     }
 
     /**
@@ -210,6 +200,4 @@ class ProfileController extends Controller
             $request->session()->put('menu_state', 'closed');
         }
     }
-
-
 }

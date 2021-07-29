@@ -65,7 +65,6 @@ class AssetModelsController extends Controller
      */
     public function store(ImageUploadRequest $request)
     {
-
         $this->authorize('create', AssetModel::class);
         // Create a new asset model
         $model = new AssetModel;
@@ -119,7 +118,6 @@ class AssetModelsController extends Controller
         }
 
         return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
-
     }
 
 
@@ -154,8 +152,6 @@ class AssetModelsController extends Controller
         $model->notes               = $request->input('notes');
         $model->requestable         = $request->input('requestable', '0');
 
-
-
         $this->removeCustomFieldsDefaultValues($model);
 
         if ($request->input('custom_fieldset')=='') {
@@ -167,7 +163,6 @@ class AssetModelsController extends Controller
                 $this->assignCustomFieldsDefaultValues($model, $request->input('default_values'));
             }
         }
-
 
         if ($model->save()) {
             return redirect()->route("models.index")->with('success', trans('admin/models/message.update.success'));
@@ -234,7 +229,6 @@ class AssetModelsController extends Controller
             return redirect()->route('models.index')->with('success', trans('admin/models/message.restore.success'));
         }
         return redirect()->back()->with('error', trans('admin/models/message.not_found'));
-
     }
 
 
@@ -284,7 +278,6 @@ class AssetModelsController extends Controller
             ->with('clone_model', $model_to_clone);
     }
 
-
     /**
     * Get the custom fields form
     *
@@ -297,9 +290,6 @@ class AssetModelsController extends Controller
     {
         return view("models.custom_fields_form")->with("model", AssetModel::find($modelId));
     }
-
-
-
 
     /**
      * Returns a view that allows the user to bulk edit model attrbutes
@@ -345,10 +335,7 @@ class AssetModelsController extends Controller
 
         return redirect()->route('models.index')
             ->with('error', 'You must select at least one model to edit.');
-
     }
-
-
 
     /**
      * Returns a view that allows the user to bulk edit model attrbutes
@@ -363,7 +350,6 @@ class AssetModelsController extends Controller
         $models_raw_array = $request->input('ids');
         $update_array = array();
 
-
         if (($request->filled('manufacturer_id') && ($request->input('manufacturer_id')!='NC'))) {
             $update_array['manufacturer_id'] = $request->input('manufacturer_id');
         }
@@ -377,8 +363,6 @@ class AssetModelsController extends Controller
             $update_array['depreciation_id'] = $request->input('depreciation_id');
         }
 
-
-        
         if (count($update_array) > 0) {
             AssetModel::whereIn('id', $models_raw_array)->update($update_array);
             return redirect()->route('models.index')
@@ -387,7 +371,6 @@ class AssetModelsController extends Controller
 
         return redirect()->route('models.index')
             ->with('warning', trans('admin/models/message.bulkedit.error'));
-
     }
 
     /**
@@ -435,7 +418,6 @@ class AssetModelsController extends Controller
 
         return redirect()->route('models.index')
             ->with('error', trans('admin/models/message.bulkdelete.error'));
-
     }
 
     /**

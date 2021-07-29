@@ -17,7 +17,6 @@ use Str;
  */
 class CategoriesController extends Controller
 {
-
     /**
      * Returns a view that invokes the ajax tables which actually contains
      * the content for the categories listing, which is generated in getDatatable.
