@@ -850,7 +850,7 @@ class SettingsController extends Controller
         $setting->old_labels_measurement_type = $setting->labels_measurement_type;
         $setting->labels_measurement_type     = $request->input('labels_measurement_type', 'in');
 
-        if(!$setting->labels_measurement_type == $setting->old_labels_measurement_type) {
+        if($setting->labels_measurement_type != $setting->old_labels_measurement_type) {
             $this->measurementConverter($setting);
         }
 
@@ -897,7 +897,6 @@ class SettingsController extends Controller
      */
         public function measurementConverter($setting)
         {
-
             switch ($setting->labels_measurement_type) {
                 case "in":
                     if ($setting->old_labels_measurement_type == 'cm') {
@@ -913,7 +912,7 @@ class SettingsController extends Controller
                         $setting->labels_pagewidth = ($setting->labels_pagewidth)/2.54;
                         $setting->labels_pageheight = ($setting->labels_pageheight)/2.54;
                     }
-                    if ($setting->old_labels_measurement_type == 'mm') {
+                    else {
                         $setting->labels_width = ($setting->labels_width)/25.4;
                         $setting->labels_height = ($setting->labels_height)/25.4;
                         $setting->labels_pmargin_left = ($setting->labels_pmargin_left)/25.4;
@@ -940,7 +939,7 @@ class SettingsController extends Controller
                         $setting->labels_pagewidth = ($setting->labels_pagewidth)*2.54;
                         $setting->labels_pageheight = ($setting->labels_pageheight)*2.54;
                     }
-                    if ($setting->old_labels_measurement_type == 'mm') {
+                    else {
                         $setting->labels_width = ($setting->labels_width)/pow(10,1);
                         $setting->labels_height = ($setting->labels_height)/pow(10,1);
                         $setting->labels_pmargin_left = ($setting->labels_pmargin_left)/pow(10,1);
@@ -967,7 +966,7 @@ class SettingsController extends Controller
                         $setting->labels_pagewidth = ($setting->labels_pagewidth)*pow(10,1);
                         $setting->labels_pageheight = ($setting->labels_pageheight)*pow(10,1);
                     }
-                    if ($setting->old_labels_measurement_type == 'in') {
+                    else {
                         $setting->labels_width = ($setting->labels_width)*25.4;
                         $setting->labels_height = ($setting->labels_height)*25.4;
                         $setting->labels_pmargin_left = ($setting->labels_pmargin_left)*25.4;
