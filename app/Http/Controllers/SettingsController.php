@@ -893,12 +893,16 @@ class SettingsController extends Controller
     }
     /**
      * Converts the labels measurement unit for measurable fields in the labels settings
+     *@author [G. Martinez] [<gmartinez@grokability.com>]
+     *
+     *
      *
      */
         public function measurementConverter($setting)
         {
             switch ($setting->labels_measurement_type) {
                 case "in":
+//                      converts from inches to centimeters
                     if ($setting->old_labels_measurement_type == 'cm') {
                         $setting->labels_width = ($setting->labels_width)/2.54;
                         $setting->labels_height = ($setting->labels_height)/2.54;
@@ -914,6 +918,7 @@ class SettingsController extends Controller
                         break;
                     }
                     else {
+//                      converts from inches to millimeters
                         $setting->labels_width = ($setting->labels_width)/25.4;
                         $setting->labels_height = ($setting->labels_height)/25.4;
                         $setting->labels_pmargin_left = ($setting->labels_pmargin_left)/25.4;
@@ -928,6 +933,7 @@ class SettingsController extends Controller
                         break;
                     }
                 case "cm":
+//                      converts from centimeters to inches
                     if ($setting->old_labels_measurement_type == 'in') {
                         $setting->labels_width = ($setting->labels_width)*2.54;
                         $setting->labels_height = ($setting->labels_height)*2.54;
@@ -943,6 +949,7 @@ class SettingsController extends Controller
                         break;
                     }
                     else {
+//                      converts from centimeters to millimeters
                         $setting->labels_width = ($setting->labels_width)*pow(10,-1);
                         $setting->labels_height = ($setting->labels_height)*pow(10,-1);
                         $setting->labels_pmargin_left = ($setting->labels_pmargin_left)*pow(10,-1);
@@ -957,6 +964,7 @@ class SettingsController extends Controller
                         break;
                     }
                 case "mm":
+//                      converts from millimeters to centimeters
                     if ($setting->old_labels_measurement_type == 'cm') {
                         $setting->labels_width = ($setting->labels_width)*pow(10,1);
                         $setting->labels_height = ($setting->labels_height)*pow(10,1);
@@ -972,6 +980,7 @@ class SettingsController extends Controller
                         break;
                     }
                     else {
+//                      converts from millimeters to inches
                         $setting->labels_width = ($setting->labels_width)*25.4;
                         $setting->labels_height = ($setting->labels_height)*25.4;
                         $setting->labels_pmargin_left = ($setting->labels_pmargin_left)*25.4;
