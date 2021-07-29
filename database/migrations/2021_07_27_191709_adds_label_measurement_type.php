@@ -14,7 +14,7 @@ class AddsLabelMeasurementType extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->double('labels_measurement_type', 4,3)->after('labels_per_page')->default('1');
+            $table->string('labels_measurement_type')->after('labels_per_page')->default('in');
         });
     }
 

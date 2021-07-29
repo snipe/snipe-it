@@ -847,8 +847,9 @@ class SettingsController extends Controller
         $setting->labels_pageheight           = $request->input('labels_pageheight');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
-        $setting->labels_measurement_type     = $request->input('labels_measurement_type', '1');
+        $setting->labels_measurement_type     = $request->input('labels_measurement_type', 'in');
 
+        $this->measurementConverter($setting, $request);
 
         if ($request->filled('labels_display_name')) {
             $setting->labels_display_name = 1;
@@ -891,46 +892,90 @@ class SettingsController extends Controller
      * Converts the labels measurement unit for measurable fields in the labels settings
      *
      */
-        public function measurementConverter(Request $request, $setting)
+        public function measurementConverter($request, $setting)
         {
             if(!$request->labels_measurement_type == old($setting->labels_measurement_type)){
             switch ($request->labels_measurement_type) {
                 case "in":
                     if (old($setting->labels_measurement_type == 'cm')) {
-                        $setting->labels_width = pow(10, -1) * ($request->labels_width);
-                        $setting->labels_height = pow(10, -1) * ($request->labels_height);
-                        $setting->labels_pmargin_left = pow(10, -1) * ($request->labels_pmargin_left);
-                        $setting->labels_pmargin_right = pow(10, -1) * ($request->labels_pmargin_right);
-                        $setting->labels_pmargin_top = pow(10, -1) * ($request->labels_pmargin_top);
-                        $setting->labels_pmargin_bottom = pow(10, -1) * ($request->labels_pmargin_bottom);
-                        $setting->labels_display_bgutter = pow(10, -1) * ($request->labels_display_bgutter);
-                        $setting->labels_display_sgutter = pow(10, -1) * ($request->labels_display_sgutter);
-                        $setting->labels_fontsize = pow(10, -1) * ($request->labels_fontsize);
-                        $setting->labels_pagewidth = pow(10, -1) * ($request->labels_pagewidth);
-                        $setting->labels_pageheight = pow(10, -1) * ($request->labels_pageheight);
+                        $setting->labels_width = ($request->labels_width)/2.54;
+                        $setting->labels_height = ($request->labels_height)/2.54;
+                        $setting->labels_pmargin_left = ($request->labels_pmargin_left)/2.54;
+                        $setting->labels_pmargin_right = ($request->labels_pmargin_right)/2.54;
+                        $setting->labels_pmargin_top = ($request->labels_pmargin_top)/2.54;
+                        $setting->labels_pmargin_bottom = ($request->labels_pmargin_bottom)/2.54;
+                        $setting->labels_display_bgutter = ($request->labels_display_bgutter)/2.54;
+                        $setting->labels_display_sgutter = ($request->labels_display_sgutter)/2.54;
+                        $setting->labels_fontsize = ($request->labels_fontsize)/2.54;
+                        $setting->labels_pagewidth = ($request->labels_pagewidth)/2.54;
+                        $setting->labels_pageheight = ($request->labels_pageheight)/2.54;
                     }
                     if (old($setting->labels_measurement_type == 'mm')) {
-                        $setting->labels_width = pow(10, -3) * ($request->labels_width);
-                        $setting->labels_height = pow(10, -3) * ($request->labels_height);
-                        $setting->labels_pmargin_left = pow(10, -3) * ($request->labels_pmargin_left);
-                        $setting->labels_pmargin_right = pow(10, -3) * ($request->labels_pmargin_right);
-                        $setting->labels_pmargin_top = pow(10, -3) * ($request->labels_pmargin_top);
-                        $setting->labels_pmargin_bottom = pow(10, -3) * ($request->labels_pmargin_bottom);
-                        $setting->labels_display_bgutter = pow(10, -3) * ($request->labels_display_bgutter);
-                        $setting->labels_display_sgutter = pow(10, -3) * ($request->labels_display_sgutter);
-                        $setting->labels_fontsize = pow(10, -3) * ($request->labels_fontsize);
-                        $setting->labels_pagewidth = pow(10, -3) * ($request->labels_pagewidth);
-                        $setting->labels_pageheight = pow(10, -3) * ($request->labels_pageheight);
+                        $setting->labels_width = ($request->labels_width)/25.4;
+                        $setting->labels_height = ($request->labels_height)/25.4;
+                        $setting->labels_pmargin_left = ($request->labels_pmargin_left)/25.4;
+                        $setting->labels_pmargin_right = ($request->labels_pmargin_right)/25.4;
+                        $setting->labels_pmargin_top = ($request->labels_pmargin_top)/25.4;
+                        $setting->labels_pmargin_bottom = ($request->labels_pmargin_bottom)/25.4;
+                        $setting->labels_display_bgutter = ($request->labels_display_bgutter)/25.4;
+                        $setting->labels_display_sgutter = ($request->labels_display_sgutter)/25.4;
+                        $setting->labels_fontsize = ($request->labels_fontsize)/25.4;
+                        $setting->labels_pagewidth = ($request->labels_pagewidth)/25.4;
+                        $setting->labels_pageheight = ($request->labels_pageheight)/25.4;
                     }
                 case "cm":
                     if (old($setting->labels_measurement_type == 'in')) {
+                        $setting->labels_width = ($request->labels_width)*2.54;
+                        $setting->labels_height = ($request->labels_height)*2.54;
+                        $setting->labels_pmargin_left = ($request->labels_pmargin_left)*2.54;
+                        $setting->labels_pmargin_right = ($request->labels_pmargin_right)*2.54;
+                        $setting->labels_pmargin_top = ($request->labels_pmargin_top)*2.54;
+                        $setting->labels_pmargin_bottom = ($request->labels_pmargin_bottom)*2.54;
+                        $setting->labels_display_bgutter = ($request->labels_display_bgutter)*2.54;
+                        $setting->labels_display_sgutter = ($request->labels_display_sgutter)*2.54;
+                        $setting->labels_fontsize = ($request->labels_fontsize)*2.54;
+                        $setting->labels_pagewidth = ($request->labels_pagewidth)*2.54;
+                        $setting->labels_pageheight = ($request->labels_pageheight)*2.54;
                     }
                     if (old($setting->labels_measurement_type == 'mm')) {
+                        $setting->labels_width = ($request->labels_width)/pow(10,1);
+                        $setting->labels_height = ($request->labels_height)/pow(10,1);
+                        $setting->labels_pmargin_left = ($request->labels_pmargin_left)/pow(10,1);
+                        $setting->labels_pmargin_right = ($request->labels_pmargin_right)/pow(10,1);
+                        $setting->labels_pmargin_top = ($request->labels_pmargin_top)/pow(10,1);
+                        $setting->labels_pmargin_bottom = ($request->labels_pmargin_bottom)/pow(10,1);
+                        $setting->labels_display_bgutter = ($request->labels_display_bgutter)/pow(10,1);
+                        $setting->labels_display_sgutter = ($request->labels_display_sgutter)/pow(10,1);
+                        $setting->labels_fontsize = ($request->labels_fontsize)/pow(10,1);
+                        $setting->labels_pagewidth = ($request->labels_pagewidth)/pow(10,1);
+                        $setting->labels_pageheight = ($request->labels_pageheight)/pow(10,1);
                     }
                 case "mm":
                     if (old($setting->labels_measurement_type == 'cm')) {
+                        $setting->labels_width = ($request->labels_width)*pow(10,1);
+                        $setting->labels_height = ($request->labels_height)*pow(10,1);
+                        $setting->labels_pmargin_left = ($request->labels_pmargin_left)*pow(10,1);
+                        $setting->labels_pmargin_right = ($request->labels_pmargin_right)*pow(10,1);
+                        $setting->labels_pmargin_top = ($request->labels_pmargin_top)*pow(10,1);
+                        $setting->labels_pmargin_bottom = ($request->labels_pmargin_bottom)*pow(10,1);
+                        $setting->labels_display_bgutter = ($request->labels_display_bgutter)*pow(10,1);
+                        $setting->labels_display_sgutter = ($request->labels_display_sgutter)*pow(10,1);
+                        $setting->labels_fontsize = ($request->labels_fontsize)*pow(10,1);
+                        $setting->labels_pagewidth = ($request->labels_pagewidth)*pow(10,1);
+                        $setting->labels_pageheight = ($request->labels_pageheight)*pow(10,1);
                     }
                     if (old($setting->labels_measurement_type == 'in')) {
+                        $setting->labels_width = ($request->labels_width)*25.4;
+                        $setting->labels_height = ($request->labels_height)*25.4;
+                        $setting->labels_pmargin_left = ($request->labels_pmargin_left)*25.4;
+                        $setting->labels_pmargin_right = ($request->labels_pmargin_right)*25.4;
+                        $setting->labels_pmargin_top = ($request->labels_pmargin_top)*25.4;
+                        $setting->labels_pmargin_bottom = ($request->labels_pmargin_bottom)*25.4;
+                        $setting->labels_display_bgutter = ($request->labels_display_bgutter)*25.4;
+                        $setting->labels_display_sgutter = ($request->labels_display_sgutter)*25.4;
+                        $setting->labels_fontsize = ($request->labels_fontsize)*25.4;
+                        $setting->labels_pagewidth = ($request->labels_pagewidth)*25.4;
+                        $setting->labels_pageheight = ($request->labels_pageheight)*25.4;
                     }
 
             }
