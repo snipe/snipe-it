@@ -852,6 +852,7 @@ class SettingsController extends Controller
 
         if($setting->labels_measurement_type != $setting->old_labels_measurement_type) {
             $this->measurementConverter($setting);
+
         }
 
         if ($request->filled('labels_display_name')) {
@@ -920,7 +921,7 @@ class SettingsController extends Controller
 
 //                      converts millimeters to inches
                     } else if ($setting->old_labels_measurement_type == 'mm') {
-                        dd("mm->in");
+
                         $setting->labels_width = ($setting->labels_width) / 25.4;
                         $setting->labels_height = ($setting->labels_height) / 25.4;
                         $setting->labels_pmargin_left = ($setting->labels_pmargin_left) / 25.4;
@@ -951,7 +952,7 @@ class SettingsController extends Controller
 
 //                      converts millimeters to centimeters
                     } else if ($setting->old_labels_measurement_type == 'mm') {
-                        dd("mm->cm");
+
                         $setting->labels_width = ($setting->labels_width) * pow(10, -1);
                         $setting->labels_height = ($setting->labels_height) * pow(10, -1);
                         $setting->labels_pmargin_left = ($setting->labels_pmargin_left) * pow(10, -1);
