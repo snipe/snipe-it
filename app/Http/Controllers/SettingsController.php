@@ -911,6 +911,7 @@ class SettingsController extends Controller
                         $setting->labels_fontsize = ($setting->labels_fontsize)/2.54;
                         $setting->labels_pagewidth = ($setting->labels_pagewidth)/2.54;
                         $setting->labels_pageheight = ($setting->labels_pageheight)/2.54;
+                        break;
                     }
                     else {
                         $setting->labels_width = ($setting->labels_width)/25.4;
@@ -924,6 +925,7 @@ class SettingsController extends Controller
                         $setting->labels_fontsize = ($setting->labels_fontsize)/25.4;
                         $setting->labels_pagewidth = ($setting->labels_pagewidth)/25.4;
                         $setting->labels_pageheight = ($setting->labels_pageheight)/25.4;
+                        break;
                     }
                 case "cm":
                     if ($setting->old_labels_measurement_type == 'in') {
@@ -938,19 +940,21 @@ class SettingsController extends Controller
                         $setting->labels_fontsize = ($setting->labels_fontsize)*2.54;
                         $setting->labels_pagewidth = ($setting->labels_pagewidth)*2.54;
                         $setting->labels_pageheight = ($setting->labels_pageheight)*2.54;
+                        break;
                     }
                     else {
-                        $setting->labels_width = ($setting->labels_width)/pow(10,1);
-                        $setting->labels_height = ($setting->labels_height)/pow(10,1);
-                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left)/pow(10,1);
-                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right)/pow(10,1);
-                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top)/pow(10,1);
-                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom)/pow(10,1);
-                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter)/pow(10,1);
-                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter)/pow(10,1);
-                        $setting->labels_fontsize = ($setting->labels_fontsize)/pow(10,1);
-                        $setting->labels_pagewidth = ($setting->labels_pagewidth)/pow(10,1);
-                        $setting->labels_pageheight = ($setting->labels_pageheight)/pow(10,1);
+                        $setting->labels_width = ($setting->labels_width)*pow(10,-1);
+                        $setting->labels_height = ($setting->labels_height)*pow(10,-1);
+                        $setting->labels_pmargin_left = ($setting->labels_pmargin_left)*pow(10,-1);
+                        $setting->labels_pmargin_right = ($setting->labels_pmargin_right)*pow(10,-1);
+                        $setting->labels_pmargin_top = ($setting->labels_pmargin_top)*pow(10,-1);
+                        $setting->labels_pmargin_bottom = ($setting->labels_pmargin_bottom)*pow(10,-1);
+                        $setting->labels_display_bgutter = ($setting->labels_display_bgutter)*pow(10,-1);
+                        $setting->labels_display_sgutter = ($setting->labels_display_sgutter)*pow(10,-1);
+                        $setting->labels_fontsize = ($setting->labels_fontsize)*pow(10,-1);
+                        $setting->labels_pagewidth = ($setting->labels_pagewidth)*pow(10,-1);
+                        $setting->labels_pageheight = ($setting->labels_pageheight)*pow(10,-1);
+                        break;
                     }
                 case "mm":
                     if ($setting->old_labels_measurement_type == 'cm') {
@@ -965,6 +969,7 @@ class SettingsController extends Controller
                         $setting->labels_fontsize = ($setting->labels_fontsize)*pow(10,1);
                         $setting->labels_pagewidth = ($setting->labels_pagewidth)*pow(10,1);
                         $setting->labels_pageheight = ($setting->labels_pageheight)*pow(10,1);
+                        break;
                     }
                     else {
                         $setting->labels_width = ($setting->labels_width)*25.4;
@@ -978,6 +983,7 @@ class SettingsController extends Controller
                         $setting->labels_fontsize = ($setting->labels_fontsize)*25.4;
                         $setting->labels_pagewidth = ($setting->labels_pagewidth)*25.4;
                         $setting->labels_pageheight = ($setting->labels_pageheight)*25.4;
+                        break;
                     }
 
             }
