@@ -79,10 +79,14 @@ class LicensesController extends Controller
 
         if (($request->filled('maintained')) && ($request->input('maintained')=='true')) {
             $licenses->where('maintained','=',1);
+        } elseif (($request->filled('maintained')) && ($request->input('maintained')=='false')) {
+            $licenses->where('maintained','=',0);
         }
 
         if (($request->filled('expires')) && ($request->input('expires')=='true')) {
             $licenses->whereNotNull('expiration_date');
+        } elseif (($request->filled('expires')) && ($request->input('expires')=='false')) {
+            $licenses->whereNull('expiration_date');
         }
 
         if ($request->filled('search')) {
