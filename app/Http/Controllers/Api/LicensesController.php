@@ -76,6 +76,14 @@ class LicensesController extends Controller
             $licenses->where('supplier_id', '=', $request->input('supplier_id'));
         }
 
+        if (($request->filled('maintained')) && ($request->input('maintained')=='true')) {
+            $licenses->where('maintained','=',1);
+        }
+
+        if (($request->filled('expires')) && ($request->input('expires')=='true')) {
+            $licenses->whereNotNull('expiration_date');
+        }
+
         if ($request->filled('search')) {
             $licenses = $licenses->TextSearch($request->input('search'));
         }
