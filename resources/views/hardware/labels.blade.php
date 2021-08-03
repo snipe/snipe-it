@@ -10,6 +10,7 @@
 <?php
 $settings->labels_width = $settings->labels_width - $settings->labels_display_sgutter;
 $settings->labels_height = $settings->labels_height - $settings->labels_display_bgutter;
+
 // Leave space on bottom for 1D barcode if necessary
 $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='') ? $settings->labels_height - .3 : $settings->labels_height - 0.1;
 ?>
@@ -17,17 +18,17 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
 <style>
     body {
         font-family: arial, helvetica, sans-serif;
-        width: {{ $settings->labels_pagewidth }}in;
-        height: {{ $settings->labels_pageheight }}in;
-        margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
+        width: {{ $settings->labels_pagewidth }}{{$settings->labels_measurement_type}};
+        height: {{ $settings->labels_pageheight }}{{$settings->labels_measurement_type}};
+        margin: {{ $settings->labels_pmargin_top }}{{$settings->labels_measurement_type}} {{ $settings->labels_pmargin_right }}{{$settings->labels_measurement_type}} {{ $settings->labels_pmargin_bottom }}{{$settings->labels_measurement_type}} {{ $settings->labels_pmargin_left }}{{$settings->labels_measurement_type}};
         font-size: {{ $settings->labels_fontsize }}pt;
     }
     .label {
-        width: {{ $settings->labels_width }}in;
-        height: {{ $settings->labels_height }}in;
+        width: {{ $settings->labels_width }}{{$settings->labels_measurement_type}};
+        height: {{ $settings->labels_height }}{{$settings->labels_measurement_type}};
         padding: 0in;
-        margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
-        margin-bottom: {{ $settings->labels_display_bgutter }}in;
+        margin-right: {{ $settings->labels_display_sgutter }}{{$settings->labels_measurement_type}}; /* the gutter */
+        margin-bottom: {{ $settings->labels_display_bgutter }}{{$settings->labels_measurement_type}};
         display: inline-block;
         overflow: hidden;
     }
@@ -35,8 +36,8 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         page-break-after:always;
     }
     div.qr_img {
-        width: {{ $qr_size }}in;
-        height: {{ $qr_size }}in;
+        width: {{ $qr_size }}{{$settings->labels_measurement_type}};
+        height: {{ $qr_size }}{{$settings->labels_measurement_type}};
 
         float: left;
         display: inline-flex;
@@ -64,9 +65,9 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         height: 0.5in;
     }
     .qr_text {
-        width: {{ $settings->labels_width }}in;
-        height: {{ $settings->labels_height }}in;
-        padding-top: {{$settings->labels_display_bgutter}}in;
+        width: {{ $settings->labels_width }}{{$settings->labels_measurement_type}};
+        height: {{ $settings->labels_height }}{{$settings->labels_measurement_type}};
+        padding-top: {{$settings->labels_display_bgutter}}{{$settings->labels_measurement_type}};
         font-family: arial, helvetica, sans-serif;
         font-size: {{$settings->labels_fontsize}}pt;
         padding-right: .0001in;
@@ -82,14 +83,14 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         overflow: hidden;
     }
     .next-padding {
-        margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
+        margin: {{ $settings->labels_pmargin_top }}{{$settings->labels_measurement_type}} {{ $settings->labels_pmargin_right }}{{$settings->labels_measurement_type}} {{ $settings->labels_pmargin_bottom }}{{$settings->labels_measurement_type}} {{ $settings->labels_pmargin_left }}{{$settings->labels_measurement_type}};
     }
     @media print {
         .noprint {
             display: none !important;
         }
         .next-padding {
-            margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
+            margin: {{ $settings->labels_pmargin_top }}{{$settings->labels_measurement_type}} {{ $settings->labels_pmargin_right }}{{$settings->labels_measurement_type}} {{ $settings->labels_pmargin_bottom }}{{$settings->labels_measurement_type}} {{ $settings->labels_pmargin_left }}{{$settings->labels_measurement_type}};
             font-size: 0;
         }
     }
