@@ -608,18 +608,25 @@
 
     function sumFormatterQuantity(data){
         if(Array.isArray(data)) {
-            // Check that we are actually trying to sum cost from a table
-            // that has a quantity column
+            
+            // Prevents issues on page load where data is an empty array
             if(data[0] == undefined){
                 return 0.00
             }
-            if("qty" in data[0]) {
-                var total_sum = data.reduce(function(sum, row) {
-                    return (sum) + (parseFloat(row["purchase_cost"])*row["qty"] || 0);
-                }, 0);
-                return numberWithCommas(total_sum.toFixed(2));
+            // Check that we are actually trying to sum cost from a table
+            // that has a quantity column. We must perform this check to
+            // support licences which use seats instead of qty
+            if('qty' in data[0]) {
+                var multiplier = 'qty';
+            } else if('seats' in data[0]) {
+                var multiplier = 'seats';
+            } else {
+                return 'no quantity';
             }
-            return 'no quantity';
+            var total_sum = data.reduce(function(sum, row) {
+                return (sum) + (parseFloat(row["purchase_cost"])*row[multiplier] || 0);
+            }, 0);
+            return numberWithCommas(total_sum.toFixed(2));
         }
         return 'not an array';
     }
