@@ -606,6 +606,24 @@
         return 'not an array';
     }
 
+    function sumFormatterQuantity(data){
+        if(Array.isArray(data)) {
+            // Check that we are actually trying to sum cost from a table
+            // that has a quantity column
+            if(data[0] == undefined){
+                return 0.00
+            }
+            if("qty" in data[0]) {
+                var total_sum = data.reduce(function(sum, row) {
+                    return (sum) + (parseFloat(row["purchase_cost"])*row["qty"] || 0);
+                }, 0);
+                return numberWithCommas(total_sum.toFixed(2));
+            }
+            return 'no quantity';
+        }
+        return 'not an array';
+    }
+
     function numberWithCommas(value) {
         if ((value) && ("{{$snipeSettings->digit_separator}}" == "1.234,56")){
         var parts = value.toString().split(".");
