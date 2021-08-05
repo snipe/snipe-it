@@ -1314,7 +1314,7 @@ class Asset extends Depreciable
                     $query->where('assets.name', 'LIKE', '%'.$search_val.'%');
                 }
 
-                if ($fieldname =='product_key') {
+                if ($fieldname =='serial') {
                     $query->where('assets.serial', 'LIKE', '%'.$search_val.'%');
                 }
 
