@@ -72,6 +72,10 @@ class Depreciable extends SnipeModel
         $months_remaining = $this->time_until_depreciated()->m + 12 * $this->time_until_depreciated()->y; //UGlY
         $current_value = round(($months_remaining / $this->get_depreciation()->months) * $this->purchase_cost, 2);
 
+        if($this->get_depreciation()->depreciation_min > $current_value) {
+
+            $current_value=$this->get_depreciation()->depreciation_min;
+        }
         if ($current_value < 0) {
             $current_value = 0;
         }
