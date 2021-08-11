@@ -375,7 +375,21 @@ class AssetsController extends Controller
      */
     public function selectlist(Request $request)
     {
+        $assets = self::getAssetSelectList($request);
+ 
+        $assets = self::prepareForSelectList($assets);
 
+        return (new SelectlistTransformer)->transformSelectlist($assets);
+    }
+
+    /**
+     * Gets a prepared list for users to use in select2 menus
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v5.0]
+     */
+    public static function getAssetSelectList(Request $request)
+    {
         $assets = Company::scopeCompanyables(Asset::select([
             'assets.id',
             'assets.name',
@@ -393,8 +407,11 @@ class AssetsController extends Controller
         if ($request->filled('search')) {
             $assets = $assets->AssignedSearch($request->input('search'));
         }
+        return $assets;
+    }
 
-
+    public static function prepareForSelectList($assets)
+    {
         $assets = $assets->paginate(50);
 
         // Loop through and set some custom properties for the transformer to use.
@@ -417,8 +434,7 @@ class AssetsController extends Controller
             $asset->use_image = ($asset->getImageUrl()) ? $asset->getImageUrl() : null;
         }
 
-        return (new SelectlistTransformer)->transformSelectlist($assets);
-
+        return $assets;
     }
 
 

@@ -17,6 +17,7 @@
     <ul class="dropdown-menu" role="menu">
         <li role="menuitem"><a href="{{ route('licenses.edit', ['license' => $license->id]) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
         <li role="menuitem"><a href="{{ route('clone/license', $license->id) }}">{{ trans('admin/licenses/general.clone') }}</a></li>
+        <li role="menuitem"><a href="{{ route('licenses.bulkcheckin', $license->id) }}">{{ trans('admin/licenses/general.checkin') }}</a></li>
     </ul>
    @endcan
 </div>

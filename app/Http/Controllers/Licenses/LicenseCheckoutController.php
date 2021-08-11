@@ -10,6 +10,7 @@ use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Log;
 
 class LicenseCheckoutController extends Controller
 {
@@ -60,33 +61,58 @@ class LicenseCheckoutController extends Controller
 
         $this->authorize('checkout', $license);
 
-        $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
-        $licenseSeat->user_id = Auth::id();
-
-        $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
-        if ($this->$checkoutMethod($licenseSeat)) {
-            return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
+        if ($seatId != null) {
+            $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
+            if(!$this->doLicenseSeatCheckout($licenseSeat)) {
+                return redirect()->route("licenses.index")->with('error', trans('Something went wrong handling this checkout.'));
+            }
+        } else {
+            foreach ($this->findMultiLicenseSeatsToCheckout($license, request('qty')) as $licenseSeat) {
+                if (!$this->doLicenseSeatCheckout($licenseSeat)) {
+                    return redirect()->route("licenses.index")->with('error', trans('Something went wrong handling this checkout.'));
+                }
+            }
         }
 
-        return redirect()->route("licenses.index")->with('error', trans('Something went wrong handling this checkout.'));
+        return redirect()->route("licenses.index")->with('success', trans('admin/licenses/message.checkout.success'));
     }
 
     protected function findLicenseSeatToCheckout($license, $seatId)
     {
         $licenseSeat = LicenseSeat::find($seatId) ?? $license->freeSeat();
-
         if (!$licenseSeat) {
             if ($seatId) {
                 return redirect()->route('licenses.index')->with('error', 'This Seat is not available for checkout.');
             }
             return redirect()->route('licenses.index')->with('error', 'There are no available seats for this license');
         }
-
         if(!$licenseSeat->license->is($license)) {
             return redirect()->route('licenses.index')->with('error', 'The license seat provided does not match the license.');
         }
-
         return $licenseSeat;
+    }
+
+    protected function findMultiLicenseSeatsToCheckout($license, $quantity=1)
+    {
+        $licenseSeats = $license->freeSeats()->take($quantity)->get();
+
+        if (!$licenseSeats || $licenseSeats->count() < $quantity) {
+            return redirect()->route('licenses.index')->with('error', 'There are not enough available seats for this license: only ' . $licenseSeats->count() .'/' . $quantity);
+        }
+        foreach ($licenseSeats as $licenseSeat) {
+            if(!$licenseSeat->license->is($license)) {
+                return redirect()->route('licenses.index')->with('error', 'The license seat provided does not match the license.');
+            }
+        }
+
+        return $licenseSeats;
+    }
+
+    protected function doLicenseSeatCheckout($licenseSeat)
+    {
+        $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
+        $licenseSeat->user_id = Auth::id();
+        return $this->$checkoutMethod($licenseSeat);
     }
 
     protected function checkoutToAsset($licenseSeat)
