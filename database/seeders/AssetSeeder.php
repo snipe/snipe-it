@@ -33,8 +33,8 @@ class AssetSeeder extends Seeder
         Asset::factory()->count(12)->tabletIpad()->create();
         Asset::factory()->count(4)->tabletTab3()->create();
 
-        Asset::factory()->count(27)->phoneIphone6s()->create();
-        Asset::factory()->count(40)->phoneIphone7()->create();
+        Asset::factory()->count(27)->phoneIphone11()->create();
+        Asset::factory()->count(40)->phoneIphone12()->create();
 
         Asset::factory()->count(10)->ultrafine()->create();
         Asset::factory()->count(10)->ultrasharp()->create();
