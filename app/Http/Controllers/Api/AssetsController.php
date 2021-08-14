@@ -9,6 +9,7 @@ use App\Http\Requests\AssetCheckoutRequest;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
@@ -637,6 +638,39 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.delete.success')));
         }
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+    }
+
+    
+
+    /**
+     * Restore a soft-deleted asset.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v5.1.18]
+     * @return JsonResponse
+     */
+    public function restore($assetId = null)
+    {
+        // Get asset information
+        $asset = Asset::withTrashed()->find($assetId);
+        $this->authorize('delete', $asset);
+        if (isset($asset->id)) {
+            // Restore the asset
+            Asset::withTrashed()->where('id', $assetId)->restore();
+
+            $logaction = new Actionlog();
+            $logaction->item_type = Asset::class;
+            $logaction->item_id = $asset->id;
+            $logaction->created_at =  date("Y-m-d H:i:s");
+            $logaction->user_id = Auth::user()->id;
+            $logaction->logaction('restored');
+
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.restore.success')));
+        
+
+        }
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 

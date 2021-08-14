@@ -51,6 +51,10 @@ class AccessoriesController extends Controller
             $accessories->where('supplier_id','=',$request->input('supplier_id'));
         }
 
+        if ($request->filled('location_id')) {
+            $accessories->where('location_id','=',$request->input('location_id'));
+        }
+
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($accessories) && ($request->get('offset') > $accessories->count())) ? $accessories->count() : $request->get('offset', 0);
@@ -167,9 +171,13 @@ class AccessoriesController extends Controller
 
         if ($request->filled('search')) {
             $accessory_users = $accessory->users()
-                                ->where('first_name', 'like', '%'.$request->input('search').'%')
-                                ->orWhere('last_name', 'like', '%'.$request->input('search').'%')
-                                ->get();
+                                         ->where(function ($query) use ($request) {
+                                             $search_str = '%' . $request->input('search') . '%';
+                                             $query->where('first_name', 'like', $search_str)
+                                                   ->orWhere('last_name', 'like', $search_str)
+                                                   ->orWhere('note', 'like', $search_str);
+                                         })
+                                         ->get();
             $total = $accessory_users->count();
         }
 
