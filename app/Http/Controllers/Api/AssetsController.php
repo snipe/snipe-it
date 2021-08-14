@@ -644,7 +644,7 @@ class AssetsController extends Controller
     
 
     /**
-     * Retore a soft-deleted asset.
+     * Restore a soft-deleted asset.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param int $assetId
