@@ -69,7 +69,7 @@ class DepreciationsController extends Controller
         // Depreciation data
         $depreciation->name             = $request->input('name');
         $depreciation->months           = $request->input('months');
-        $depreciation->depreciations_min= $request->input('depreciation_min');
+        $depreciation->depreciation_min= $request->input('depreciation_min');
         $depreciation->user_id          = Auth::id();
 
         // Was the asset created?
