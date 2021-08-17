@@ -156,7 +156,7 @@ class LdapAdConfiguration
     private function setLdapConnectionConfiguration(): array
     {
         // Create the configuration array.
-        return [
+        $ldap_settings =  [
             // Mandatory Configuration Options
             'hosts'            => $this->getServerUrlBase(),
             'base_dn'          => $this->ldapSettings['ldap_basedn'],
@@ -180,6 +180,14 @@ class LdapAdConfiguration
                 // LDAP_OPT_X_TLS_REQUIRE_CERT => LDAP_OPT_X_TLS_HARD,
             ],
         ];
+
+        if($this->ldapSettings['ldap_client_tls_cert'] || $this->ldapSettings['ldap_client_tls_key']) {
+            $ldap_settings['custom_options'] = [
+                LDAP_OPT_X_TLS_CERTFILE => Setting::get_client_side_cert_path(),
+                LDAP_OPT_X_TLS_KEYFILE => Setting::get_client_side_key_path()
+            ];
+        }
+        return $ldap_settings;
     }
 
     /**

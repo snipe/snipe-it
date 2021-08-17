@@ -947,10 +947,14 @@ class SettingsController extends Controller
             $setting->ldap_jobtitle          = $request->input('ldap_jobtitle');
             $setting->ldap_country           = $request->input('ldap_country');
             $setting->ldap_dept              = $request->input('ldap_dept');
+            $setting->ldap_client_tls_cert   = $request->input('ldap_client_tls_cert');
+            $setting->ldap_client_tls_key    = $request->input('ldap_client_tls_key');
+
 
         }
 
         if ($setting->save()) {
+            $setting->update_client_side_cert_files();
             return redirect()->route('settings.ldap.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }
