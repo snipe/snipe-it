@@ -6,6 +6,7 @@ return [
     'asset_depreciations'  					=> 'Asset Depreciations',
     'create'  					            => 'Create Depreciation',
     'depreciation_name'  					=> 'Depreciation Name',
+    'depreciation_min'                      => 'Floor Value of Depreciation',
     'number_of_months'  					=> 'Number of Months',
     'update'  					            => 'Update Depreciation',
 

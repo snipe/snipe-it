@@ -463,7 +463,28 @@
                                             </div>
                                         </div>
                                     @endif
+                                    @if (($asset->model) && ($asset->depreciation))
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <strong>
+                                                    {{ trans('admin/hardware/table.current_value') }}
+                                                </strong>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="col-md-6" style="margin-left:-15px;">
+                                                    @if (($asset->id) && ($asset->location))
+                                                        {{ $asset->location->currency }}
+                                                    @elseif (($asset->id) && ($asset->location))
+                                                        {{ $asset->location->currency }}
+                                                    @else
+                                                        {{ $snipeSettings->default_currency }}
+                                                    @endif
+                                                    {{ \App\Helpers\Helper::formatCurrencyOutput($asset->getDepreciatedValue() )}}
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                     @if ($asset->order_number)
                                         <div class="row">
                                             <div class="col-md-2">
