@@ -4,7 +4,7 @@ return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'In/Out',
     'checkout_date' => 'Checkout Date',
     'checkoutto' 	=> 'Checked Out',
