@@ -27,6 +27,7 @@ class DepreciationsTransformer
             'months' => $depreciation->months.' '.trans('general.months'),
             'created_at' => Helper::getFormattedDateObject($depreciation->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($depreciation->updated_at, 'datetime'),
+            'depreciation_min' =>($depreciation->depreciation_min),
         ];
 
         $permissions_array['available_actions'] = [
