@@ -318,6 +318,10 @@ a.logo.no-hover a:hover {
 .sidebar-menu {
   font-size: 14px;
   white-space: normal;
+  padding-top: 15px;
+}
+ul.sidebar-menu.tree {
+  margin-top: 35px;
 }
 @media print {
   a[href]:after {
@@ -341,6 +345,7 @@ img.navbar-brand-img,
 .btn.bg-maroon,
 .btn.bg-purple {
   min-width: 90px;
+  margin-left: 38px;
 }
 [hidden] {
   display: none !important;
