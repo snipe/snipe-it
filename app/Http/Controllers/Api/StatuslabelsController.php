@@ -182,6 +182,7 @@ class StatuslabelsController extends Controller
 
                 if ($statuslabel->color!='') {
                     $colors_array[] = $statuslabel->color;
+                    $default_color_count++;
                 } else {
                     $colors_array[] = Helper::defaultChartColors($default_color_count);
                     $default_color_count++;
