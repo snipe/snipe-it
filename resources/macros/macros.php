@@ -414,7 +414,7 @@ Form::macro('time_display_format', function ($name = "time_display_format", $sel
 Form::macro('digit_separator', function ($name = "digit_separator", $selected = null, $class = null) {
 
     $formats = [
-        '1234.56',
+        '1,234.56',
         '1.234,56',
     ];
 
