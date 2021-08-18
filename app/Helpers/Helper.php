@@ -67,7 +67,7 @@ class Helper
     {
         $colors = [
             "#008941",
-            "#FF4A46",
+            "#FF851B",
             "#006FA6",
             "#A30059",
             "#1CE6FF",
