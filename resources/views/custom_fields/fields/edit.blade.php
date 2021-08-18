@@ -58,7 +58,7 @@
           </div>
 
           <!-- Element values -->
-          <div class="form-group {{ $errors->has('element') ? ' has-error' : '' }}" id="field_values_text" style="display:none;">
+          <div class="form-group {{ $errors->has('field_values') ? ' has-error' : '' }}" id="field_values_text" style="display:none;">
             <label for="field_values" class="col-md-4 control-label">
               {{ trans('admin/custom_fields/general.field_values') }}
             </label>

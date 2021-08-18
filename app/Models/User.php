@@ -114,20 +114,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
 
     /**
-     * Check user permissions
+     * Internally check the user permission for the given section
      *
-     * Parses the user and group permission masks to see if the user
-     * is authorized to do the thing
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since [v1.0]
      * @return boolean
      */
-    public function hasAccess($section)
+    protected function checkPermissionSection($section)
     {
-        if ($this->isSuperUser()) {
-            return true;
-        }
         $user_groups = $this->groups;
 
 
@@ -159,6 +151,24 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
+     * Check user permissions
+     *
+     * Parses the user and group permission masks to see if the user
+     * is authorized to do the thing
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v1.0]
+     * @return boolean
+     */
+    public function hasAccess($section)
+    {
+        if ($this->isSuperUser()) {
+            return true;
+        }
+        return $this->checkPermissionSection($section);
+    }
+
+    /**
      * Checks if the user is a SuperUser
      *
      * @author A. Gianotto <snipe@snipe.net>
@@ -167,23 +177,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function isSuperUser()
     {
-        if (!$user_permissions = json_decode($this->permissions, true)) {
-            return false;
-        }
-
-        foreach ($this->groups as $user_group) {
-            $group_permissions = json_decode($user_group->permissions, true);
-            $group_array = (array)$group_permissions;
-            if ((array_key_exists('superuser', $group_array)) && ($group_permissions['superuser']=='1')) {
-                return true;
-            }
-        }
-
-        if ((array_key_exists('superuser', $user_permissions)) && ($user_permissions['superuser']=='1')) {
-            return true;
-        }
-
-        return false;
+        return $this->checkPermissionSection('superuser');
     }
 
 

@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Negara',
     'create'                    => 'Membuat Lokasi',
     'update'                    => 'Perbarui Lokasi',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Nama lokasi',
     'address'                   => 'Alamat',
     'zip'                       => 'Kode Pos',

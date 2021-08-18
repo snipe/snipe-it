@@ -403,7 +403,7 @@ class ReportsController extends Controller
      */
     public function postCustom(Request $request)
     {
-        ini_set('max_execution_time', 12000);
+        ini_set('max_execution_time', env('REPORT_TIME_LIMIT', 12000)); //12000 seconds = 200 minutes
         $this->authorize('reports.view');
 
 
@@ -641,7 +641,7 @@ class ReportsController extends Controller
                 $assets->whereBetween('assets.next_audit_date', [$request->input('next_audit_start'), $request->input('next_audit_end')]);
             }
             
-            $assets->orderBy('assets.created_at', 'ASC')->chunk(20, function($assets) use($handle, $customfields, $request) {
+            $assets->orderBy('assets.id', 'ASC')->chunk(20, function($assets) use($handle, $customfields, $request) {
 
                 $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
                 \Log::debug('Walking results: '.$executionTime);

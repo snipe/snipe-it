@@ -180,11 +180,6 @@ class Asset extends Depreciable
      */
     public function save(array $params = [])
     {
-        $settings = \App\Models\Setting::getSettings();
-
-        // I don't remember why we have this here? Asset tag would always be required, even if auto increment is on...
-        $this->rules['asset_tag'] = ($settings->auto_increment_assets == '1') ? 'max:255' : 'required';
-
         if($this->model_id != '') {
             $model = AssetModel::find($this->model_id);
 
@@ -313,8 +308,14 @@ class Asset extends Depreciable
         }
 
         if ($this->save()) {
-
-            event(new CheckoutableCheckedOut($this, $target, Auth::user(), $note));
+            if (is_integer($admin)){
+                $checkedOutBy = User::findOrFail($admin);
+            } elseif (get_class($admin) === 'App\Models\User') {
+                $checkedOutBy = $admin;
+            } else {
+                $checkedOutBy = Auth::user();
+            }
+            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note));
 
             $this->increment('checkout_counter', 1);
             return true;

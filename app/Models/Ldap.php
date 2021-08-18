@@ -93,8 +93,12 @@ class Ldap extends Model
 
         \Log::debug('Attempting to login using distinguished name:'.$userDn);
 
-
+        
         $filterQuery = $settings->ldap_auth_filter_query . $username;
+        $filter = Setting::getSettings()->ldap_filter;
+        $filterQuery = "({$filter}({$filterQuery}))";
+
+        \Log::debug('Filter query: '.$filterQuery);
 
 
         if (!$ldapbind = @ldap_bind($connection, $userDn, $password)) {
@@ -161,7 +165,7 @@ class Ldap extends Model
      * @param $ldapatttibutes
      * @return array|bool
      */
-    static function parseAndMapLdapAttributes($ldapatttibutes)
+    static function parseAndMapLdapAttributes($ldapattributes)
     {
         //Get LDAP attribute config
         $ldap_result_username = Setting::getSettings()->ldap_username_field;
@@ -169,15 +173,21 @@ class Ldap extends Model
         $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
         $ldap_result_email = Setting::getSettings()->ldap_email;
-
+        $ldap_result_phone = Setting::getSettings()->ldap_phone;
+        $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
+        $ldap_result_country      = Setting::getSettings()->ldap_country;
+        $ldap_result_dept = Setting::getSettings()->ldap_dept;
         // Get LDAP user data
         $item = array();
-        $item["username"] = isset($ldapatttibutes[$ldap_result_username][0]) ? $ldapatttibutes[$ldap_result_username][0] : "";
-        $item["employee_number"] = isset($ldapatttibutes[$ldap_result_emp_num][0]) ? $ldapatttibutes[$ldap_result_emp_num][0] : "";
-        $item["lastname"] = isset($ldapatttibutes[$ldap_result_last_name][0]) ? $ldapatttibutes[$ldap_result_last_name][0] : "";
-        $item["firstname"] = isset($ldapatttibutes[$ldap_result_first_name][0]) ? $ldapatttibutes[$ldap_result_first_name][0] : "";
-        $item["email"] = isset($ldapatttibutes[$ldap_result_email][0]) ? $ldapatttibutes[$ldap_result_email][0] : "" ;
-
+        $item["username"] = isset($ldapattributes[$ldap_result_username][0]) ? $ldapattributes[$ldap_result_username][0] : "";
+        $item["employee_number"] = isset($ldapattributes[$ldap_result_emp_num][0]) ? $ldapattributes[$ldap_result_emp_num][0] : "";
+        $item["lastname"] = isset($ldapattributes[$ldap_result_last_name][0]) ? $ldapattributes[$ldap_result_last_name][0] : "";
+        $item["firstname"] = isset($ldapattributes[$ldap_result_first_name][0]) ? $ldapattributes[$ldap_result_first_name][0] : "";
+        $item["email"] = isset($ldapattributes[$ldap_result_email][0]) ? $ldapattributes[$ldap_result_email][0] : "" ;
+        $item["telephone"] = isset($ldapattributes[$ldap_result_phone][0]) ?$ldapattributes[$ldap_result_phone][0] : "";
+        $item["jobtitle"] = isset($ldapattributes[$ldap_result_jobtitle][0]) ? $ldapattributes[$ldap_result_jobtitle][0] : "";
+        $item["country"] = isset($ldapattributes[$ldap_result_country][0]) ? $ldapattributes[$ldap_result_country][0] : "";
+        $item["department"] = isset($ldapattributes[$ldap_result_dept][0]) ? $ldapattributes[$ldap_result_dept][0] : "";
         return $item;
 
 
@@ -263,7 +273,11 @@ class Ldap extends Model
 
             if ($filter != '' && substr($filter, 0, 1) != '(') { // wrap parens around NON-EMPTY filters that DON'T have them, for back-compatibility with AdLdap2-based filters
                 $filter = "($filter)";
+            } elseif ($filter == '') {
+                $filter = "(cn=*)";
             }
+
+
             $search_results = ldap_search($ldapconn, $base_dn, $filter);
 
             if (!$search_results) {

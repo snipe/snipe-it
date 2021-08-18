@@ -15,9 +15,16 @@ class MoveAccessoryCheckoutNoteToJoinTable extends Migration
      */
     public function up()
     {
-        Schema::table('accessories_users', function (Blueprint $table) {
-            $table->string('note')->nullable(true)->default(null);
-        });
+
+        if (!Schema::hasColumn('accessories_users', 'note'))
+        {
+            Schema::table('accessories_users', function (Blueprint $table) {
+                $table->string('note')->nullable(true)->default(null);
+            });
+        }
+
+
+        
 
         // Loop through the checked out accessories, find their related action_log entry, and copy over the note
         // to the newly created note field
@@ -82,8 +89,15 @@ class MoveAccessoryCheckoutNoteToJoinTable extends Migration
      */
     public function down()
     {
-        Schema::table('accessories_users', function (Blueprint $table) {
-            $table->dropColumn('note');
-        });
+
+        if (Schema::hasColumn('accessories_users', 'note'))
+        {
+            Schema::table('accessories_users', function (Blueprint $table)
+            {
+                $table->dropColumn('note');
+            });
+        }
+
+    
     }
 }

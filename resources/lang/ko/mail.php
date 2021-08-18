@@ -21,7 +21,7 @@ return array(
     'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
     'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
     'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
-    'Confirm_license_delivery' => 'License delivery confirmation',
+    'Confirm_license_delivery' => '라이센스 전달 확인',
     'Confirm_asset_delivery' => 'Asset delivery confirmation',
     'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
     'current_QTY' => '현재 수량',
@@ -71,9 +71,9 @@ return array(
     'your_credentials' => '당신의 Snipe-IT 인증들',
     'Accessory_Checkin_Notification' => 'Accessory checked in',
     'Asset_Checkin_Notification' => 'Asset checked in',
-    'License_Checkin_Notification' => 'License checked in',
+    'License_Checkin_Notification' => '라이센스 확인 됨.',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
+    'your_assets' => '자산 확인'
 );

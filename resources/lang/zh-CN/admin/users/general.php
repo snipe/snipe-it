@@ -19,7 +19,7 @@ return array(
     'ldap_config_text'  => 'LDAP配置在 管理 > 设置。所选位置将为导入的用户所用',
     'print_assigned'    => '打印所有已分配资产',
     'software_user'     => ':name 借走的软件',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => '您必须为此用户提供电子邮件地址才能发送他们的凭据。电子邮件凭据只能在用户创建时完成。 密码存储在单向散列中，保存后无法检索。',
     'view_user'         => '查看用户： :name',
     'usercsv'           => 'CSV 档案',
     'two_factor_admin_optin_help' => '您当前的管理员设置允许使用双重认证。 ',

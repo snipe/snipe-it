@@ -125,8 +125,6 @@ class UserImporter extends ItemImporter
         if ($department) {
             $this->log('A matching department ' . $department_name . ' already exists');
             return $department->id;
-        } else {
-            return null;
         }
 
         $department = new department();

@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Land',
     'create'                    => 'Opprett plassering',
     'update'                    => 'Oppdater plassering',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Plasseringsnavn',
     'address'                   => 'Adresse',
     'zip'                       => 'Postnummer',

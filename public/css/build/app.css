@@ -97,7 +97,7 @@ a.accordion-header {
   padding-top: 10px;
 }
 .main-header .sidebar-toggle:before {
-  content: "\F0C9";
+  content: "\f0c9";
 }
 .direct-chat-contacts {
   padding: 10px;
@@ -125,7 +125,6 @@ a.accordion-header {
 .btn-outline {
   color: inherit;
   background-color: transparent;
-  -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
 .btn-primary.btn-outline {
@@ -263,14 +262,12 @@ a.accordion-header {
   position: relative;
   border-radius: 0px;
   height: 8px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   margin: 20px 0;
 }
 .bs-wizard > .bs-wizard-step > .progress > .progress-bar {
   width: 0px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   background: #fbe8aa;
 }
 .bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {
@@ -460,7 +457,7 @@ a.accordion-header {
   padding-top: 10px;
 }
 .main-header .sidebar-toggle:before {
-  content: "\F0C9";
+  content: "\f0c9";
 }
 .direct-chat-contacts {
   padding: 10px;
@@ -488,8 +485,7 @@ a.accordion-header {
 .btn-outline {
   color: inherit;
   background-color: transparent;
-  -webkit-transition: all .5s;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 .btn-primary.btn-outline {
   color: #428bca;
@@ -575,7 +571,7 @@ a.accordion-header {
   position: absolute;
   top: 15px;
   right: 10px;
-  opacity: .5;
+  opacity: 0.5;
 }
 .btn-box-tool-lg {
   font-size: 16px;
@@ -628,14 +624,12 @@ a.accordion-header {
   position: relative;
   border-radius: 0px;
   height: 8px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   margin: 20px 0;
 }
 .bs-wizard > .bs-wizard-step > .progress > .progress-bar {
   width: 0px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   background: #fbe8aa;
 }
 .bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {
@@ -775,8 +769,7 @@ h4 {
   line-height: 2.6;
   padding: 0px;
   margin-left: 20px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   display: table;
 }
 .row-striped .row:nth-of-type(odd) div {
@@ -825,23 +818,23 @@ th.css-accessory > .th-inner::before {
   font-size: 20px;
 }
 th.css-padlock > .th-inner::before {
-  content: "\F023";
+  content: "\f023";
   padding-right: 2px;
 }
 th.css-barcode > .th-inner::before {
-  content: "\F02A";
+  content: "\f02a";
 }
 th.css-license > .th-inner::before {
-  content: "\F0C7";
+  content: "\f0c7";
 }
 th.css-consumable > .th-inner::before {
-  content: "\F043";
+  content: "\f043";
 }
 th.css-envelope > .th-inner::before {
-  content: "\F003";
+  content: "\f003";
 }
 th.css-accessory > .th-inner::before {
-  content: "\F11C";
+  content: "\f11c";
 }
 .small-box .inner {
   padding-left: 15px;
@@ -863,4 +856,7 @@ th.css-accessory > .th-inner::before {
 }
 .form-group.has-error label {
   color: #a94442;
+}
+.select2-container--default .select2-selection--multiple {
+  border-radius: 0px;
 }

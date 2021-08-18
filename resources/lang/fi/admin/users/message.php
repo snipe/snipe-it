@@ -4,7 +4,7 @@ return array(
 
     'accepted'                  => 'Olet hyväksynyt tämän laitteen.',
     'declined'                  => 'Olet onnistuneesti hylännyt tämän laitteen.',
-    'bulk_manager_warn'	        => 'Käyttäjiäsi on onnistuneesti päivitetty, mutta esimies merkintääsi ei tallennettu, koska valitsemasi esimies oli myös muokattavana käyttäjäluettelossa, eivätkä käyttäjä voi olla itsensä esimies. Valitse käyttäjät uudelleen, poislukien esimies.',
+    'bulk_manager_warn'	        => 'Käyttäjät on onnistuneesti päivitetty, mutta esimies-merkintää ei tallennettu, koska valitsemasi esimies oli mukana käyttäjäluettelossa, eikä käyttäjä voi olla itsensä esimies. Valitse käyttäjät uudelleen, poislukien esimies.',
     'user_exists'               => 'Käyttäjä on jo luotu!',
     'user_not_found'            => 'Käyttäjää [:id] ei löydy.',
     'user_login_required'       => 'Käyttäjätunnus vaaditaan',
@@ -32,7 +32,7 @@ return array(
         'create' => 'Käyttäjä luonnissa tapahtui virhe. Yritä uudelleen.',
         'update' => 'Käyttäjän päivityksessä tapahtui virhe. Yritä uudelleen.',
         'delete' => 'Käyttäjän poistamisessa tapahtui virhe. Yritä uudelleen.',
-        'delete_has_assets' => 'Tällä käyttäjällä on kohteita, joita ei voitu poistaa.',
+        'delete_has_assets' => 'Käyttäjää ei voida poistaa, koska käyttäjälle on luovutettuna nimikkeitä.',
         'unsuspend' => 'Käyttäjän jäädytyksen poistossa tapahtui virhe. Yritä uudelleen.',
         'import'    => 'Käyttäjien tuonnissa tapahtui virhe, Yritä uudelleen.',
         'asset_already_accepted' => 'Tämä laite on jo hyväksytty.',

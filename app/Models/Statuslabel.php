@@ -41,7 +41,7 @@ class Statuslabel extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['name'];
+    protected $searchableAttributes = ['name', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.

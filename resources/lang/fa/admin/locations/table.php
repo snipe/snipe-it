@@ -12,6 +12,8 @@ return array(
     'country'                   => 'كشور',
     'create'                    => 'ساخت مکان',
     'update'                    => 'به روز رسانی منطقه مکانی',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'نام منطقه مکانی',
     'address'                   => 'آدرس',
     'zip'                       => 'کد پستی',

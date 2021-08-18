@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 
 class AccessoriesController extends Controller
 {
@@ -48,6 +49,10 @@ class AccessoriesController extends Controller
 
         if ($request->filled('supplier_id')) {
             $accessories->where('supplier_id','=',$request->input('supplier_id'));
+        }
+
+        if ($request->filled('location_id')) {
+            $accessories->where('location_id','=',$request->input('location_id'));
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
@@ -86,14 +91,15 @@ class AccessoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Accessory::class);
         $accessory = new Accessory;
         $accessory->fill($request->all());
+        $accessory = $request->handleImages($accessory);
 
         if ($accessory->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $accessory, trans('admin/accessories/message.create.success')));
@@ -165,9 +171,13 @@ class AccessoriesController extends Controller
 
         if ($request->filled('search')) {
             $accessory_users = $accessory->users()
-                                ->where('first_name', 'like', '%'.$request->input('search').'%')
-                                ->orWhere('last_name', 'like', '%'.$request->input('search').'%')
-                                ->get();
+                                         ->where(function ($query) use ($request) {
+                                             $search_str = '%' . $request->input('search') . '%';
+                                             $query->where('first_name', 'like', $search_str)
+                                                   ->orWhere('last_name', 'like', $search_str)
+                                                   ->orWhere('note', 'like', $search_str);
+                                         })
+                                         ->get();
             $total = $accessory_users->count();
         }
 
@@ -180,15 +190,16 @@ class AccessoriesController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Accessory::class);
         $accessory = Accessory::findOrFail($id);
         $accessory->fill($request->all());
+        $accessory = $request->handleImages($accessory);
 
         if ($accessory->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $accessory, trans('admin/accessories/message.update.success')));
@@ -254,7 +265,8 @@ class AccessoriesController extends Controller
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
                 'user_id' => Auth::id(),
-                'assigned_to' => $request->get('assigned_to')
+                'assigned_to' => $request->get('assigned_to'),
+                'note' => $request->get('note')
             ]);
 
             $accessory->logCheckout($request->input('note'), $user);
@@ -286,7 +298,7 @@ class AccessoriesController extends Controller
         $accessory = Accessory::find($accessory_user->accessory_id);
         $this->authorize('checkin', $accessory);
 
-        $logaction = $accessory->logCheckin(User::find($accessoryUserId), $request->input('note'));
+        $logaction = $accessory->logCheckin(User::find($accessory_user->user_id), $request->input('note'));
 
         // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {

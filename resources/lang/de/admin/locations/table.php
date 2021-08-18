@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Land',
     'create'                    => 'Standort erstellen',
     'update'                    => 'Standort aktualisieren',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Standortname',
     'address'                   => 'Adresse',
     'zip'                       => 'Postleitzahl',

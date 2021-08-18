@@ -11,6 +11,8 @@ return array(
     'country'                   => 'രാജ്യം',
     'create'                    => 'സ്ഥലം ഉണ്ടാകുക',
     'update'                    => 'സ്ഥലം പുതുക്കുക',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'സ്ഥലത്തിന്റെ പേര്',
     'address'                   => 'വിലാസം',
     'zip'                       => 'സിപ് / പോസ്റ്റൽ കോഡ്',

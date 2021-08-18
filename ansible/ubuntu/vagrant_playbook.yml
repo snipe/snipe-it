@@ -1,0 +1,226 @@
+---
+- name: Set up local server
+  hosts: all
+  remote_user: vagrant
+  become_user: root
+  become_method: sudo
+  vars:
+    app_path: "/var/www/snipeit"
+    fqdn: "localhost"
+  tasks:
+    - name: Update and upgrade existing apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+    - name: Install Utilities
+      become: true          
+      apt:
+        name: "{{ packages }}"
+        state: present 
+      vars: 
+        packages:
+          - nano
+          - vim
+    - name: Installing Apache httpd, PHP, MariaDB and other requirements.
+      become: true
+      apt:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        packages:
+          - mariadb-client
+          - php
+          - php-curl
+          - php-mysql
+          - php-gd
+          - php-ldap
+          - php-zip
+          - php-mbstring
+          - php-xml
+          - php-bcmath
+          - curl
+          - git
+          - unzip
+          - python-pymysql
+    #
+    # Install the lastest version of composer
+    #
+    - name: Composer check
+      stat:
+        path: /usr/local/bin/composer
+      register: composer_exits
+    - name: Install Composer
+      shell: |
+        EXPECTED_SIGNATURE=$(wget -q -O - https://composer.github.io/installer.sig)
+        php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+        ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');")
+
+        if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
+        then
+            >&2 echo 'ERROR: Invalid installer signature'
+            rm composer-setup.php
+            exit 1
+        fi
+
+        php composer-setup.php --quiet
+        RESULT=$?
+        rm composer-setup.php
+        mv composer.phar /usr/local/bin/composer
+        exit $RESULT
+      when: not composer_exits.stat.exists
+      args:
+        creates: /usr/local/bin/composer
+      become: true
+    #
+    # Install and Configure MariaDB
+    #
+    - name: Install MariaDB
+      become: true
+      apt:
+        name: mariadb-server
+        state: present
+      register: sql_server
+    - name: Start and Enable MySQL server
+      become: true 
+      systemd:
+        state: started
+        enabled: yes
+        name: mariadb
+    - name: Create Vagrant mysql password
+      become: true
+      mysql_user:
+        name: vagrant
+        password: vagrant
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+        priv: "*.*:ALL"
+        state: present
+    - name: Enable remote mysql
+      replace:
+        path: /etc/mysql/mariadb.conf.d/50-server.cnf
+        regexp: "127.0.0.1"
+        replace: "0.0.0.0" 
+      become: true         
+      notify:
+        - restart mysql
+    - name: Create snipeit database
+      become: true
+      mysql_db:
+        name: snipeit
+        state: present
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+    #  
+    # Install Apache Web Server
+    #
+    - name: Install Apache 2.4
+      apt:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        packages:
+          - apache2
+          - libapache2-mod-php
+      become: true    
+      register: apache2_server     
+    - name: Start and Enable Apache2 Server
+      become: true
+      systemd:
+        name: apache2
+        state: started
+        enabled: yes
+    #- name: Disable Apache modules
+    #  become: true 
+    #  apache2_module:
+    #    state: absent
+    #    name: "{{ item }}"
+    #  with_items: 
+    #    #- mpm_prefork
+    #  notify:
+    #    - restart apache2
+    - name: Enable Apache modules
+      become: true
+      apache2_module:
+        state: present
+        name: "{{ item }}"
+      with_items:
+        - rewrite
+        - vhost_alias
+        - deflate
+        - expires
+        - proxy_fcgi
+        - proxy
+      notify:
+        - restart apache2
+    - name: Install Apache VirtualHost File
+      become: true
+      template:
+        src: apachevirtualhost.conf.j2
+        dest: "/etc/apache2/sites-available/snipeit.conf"
+    - name: Enable VirtualHost
+      become: true
+      command: a2ensite snipeit
+      args:
+        creates: /etc/apache2/sites-enabled/snipeit.conf
+      notify:
+        - restart apache2
+    - name: Map apache dir to local folder
+      become: true
+      file:
+        src: /vagrant
+        dest: "{{ app_path }}"
+        state: link
+      notify:
+        - restart apache2
+    #
+    # Install dependencies from composer
+    #
+    - name: Install dependencies from composer
+      composer:
+        command: install
+        working_dir: "{{ app_path }}"
+      notify:
+        - restart apache2
+    #
+    # Configure .env file
+    #
+    - name: Copy .env file
+      copy:
+        src: "{{ app_path }}/.env.example"
+        dest: "{{ app_path }}/.env"
+    - name: Configure .env file
+      lineinfile:
+        path: "{{ app_path }}/.env"
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items:
+        - { regexp: '^DB_HOST=', line: 'DB_HOST=127.0.0.1'}
+        - { regexp: '^DB_DATABASE=', line: 'DB_DATABASE=snipeit' }
+        - { regexp: '^DB_USERNAME=', line: 'DB_USERNAME=vagrant' }
+        - { regexp: '^DB_PASSWORD=', line: 'DB_PASSWORD=vagrant' }
+        - { regexp: '^APP_URL=', line: "APP_URL=http://{{ fqdn }}" }
+        - { regexp: '^APP_ENV=', line: "APP_ENV=development" }
+        - { regexp: '^APP_DEBUG=', line: "APP_DEBUG=true" }
+    - name: Generate application key
+      shell: "php {{ app_path }}/artisan key:generate --force"
+    - name: Artisan Migrate
+      shell: "php {{ app_path }}/artisan migrate --force"
+    #
+    # Create Cron Job
+    #
+    - name: Create scheduler cron job
+      become: true
+      cron:
+        name: "Snipe-IT Artisan Scheduler"
+        job: "/usr/bin/php {{ app_path }}/artisan schedule:run"
+  handlers:
+    - name: restart apache2
+      become: true
+      systemd:
+        name: apache2
+        state: restarted
+    - name: restart mysql
+      become: true
+      systemd:
+        name: mysql
+        state: restarted
+

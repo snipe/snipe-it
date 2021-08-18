@@ -6,7 +6,7 @@ return array(
     'asset_depreciations'  					=> 'Laitteiden poistot',
     'create'  					            => 'Luo arvonalentumisia',
     'depreciation_name'  					=> 'Poiston nimi',
-    'number_of_months'  					=> 'Kuukausien Lukumäärä',
+    'number_of_months'  					=> 'Kuukausien lukumäärä',
     'update'  					            => 'Päivitä poistot',
 
 );

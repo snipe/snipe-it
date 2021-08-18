@@ -2,31 +2,31 @@
 
 return array(
 
-    'does_not_exist' => 'Etiqueta de estado no existe.',
-    'assoc_assets'	 => 'Esta etiqueta de estado esta actualmente asociado con al menos un activo y no se puede eliminar. Por favor actualice sus activos para ya no hacer referencia a este estado y vuelva a intentarlo. ',
+    'does_not_exist' => 'Etiqueta de Estado inexistente.',
+    'assoc_assets'	 => 'Esta etiqueta de estado está asociada con al menos un equipo actualmente, por lo que no puede ser eliminada. Por favor actualiza tus equipos para que no hagan uso de esta etiqueta, e inténtalo de nuevo. ',
 
 
     'create' => array(
-        'error'   => 'Etiqueta de estado no fue creada, por favor, inténtelo de nuevo.',
-        'success' => 'Etiqueta de estado fue creada exitosamente.'
+        'error'   => 'La etiqueta de estado no pudo ser creada, por favor inténtalo de nuevo.',
+        'success' => 'La etiqueta de estado fue creada exitosamente.'
     ),
 
     'update' => array(
-        'error'   => 'Etiqueta de estado no se ha actualizado, por favor, inténtelo de nuevo',
-        'success' => 'Etiqueta de estado fue actualizada exitosamente.'
+        'error'   => 'La etiqueta de estado no pudo ser actualizada, por favor inténtalo de nuevo',
+        'success' => 'La etiqueta de estado fue actualizada exitosamente.'
     ),
 
     'delete' => array(
-        'confirm'   => '¿Está seguro que desea eliminar esta etiqueta de estado?',
-        'error'   => 'Hubo un problema borrando la etiqueta de estado. Por favor, inténtelo de nuevo.',
-        'success' => 'La etiqueta de estado se ha eliminado exitosamente.'
+        'confirm'   => '¿Estas seguro(a) de que quieres eliminar esta etiqueta de estado?',
+        'error'   => 'Hubo un problema al eliminar la etiqueta de estado. Por favor inténtalo de nuevo.',
+        'success' => 'La etiqueta de estado fue eliminada de forma exitosa.'
     ),
 
     'help' => array(
-        'undeployable'   => 'Estos activos no pueden asignarse a nadie.',
-        'deployable'   => 'Estos activos se pueden desproteger. Una vez que se les asigna, asumirán un estado meta de <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong>.',
-        'archived'   => 'Estos activos no pueden desprotegerse y solo aparecerán en la vista Archivada. Esto es útil para retener información sobre activos para presupuestos / propósitos históricos, pero mantenerlos fuera de la lista de activos del día a día.',
-        'pending'   => 'Estos activos aún no se pueden asignar a nadie, a menudo se utilizan para artículos que están pendientes de reparación, pero se espera que vuelvan a la circulación.',
+        'undeployable'   => 'Estos equipos no pueden ser asignados.',
+        'deployable'   => 'Estos equipos pueden ser asignados. Una vez estén asignados, asumirán el meta estado de <i class="fa fa-circle text-blue"></i> <strong>Asignado</strong>.',
+        'archived'   => 'Estos equipos no pueden ser asignados, y solo se mostrarán en la vista de Archivados. Esto es útil para retener información sobre equipos por razones de presupuesto/revisión histórica, mientras están fuera de la lista de equipos del día a día.',
+        'pending'   => 'Estos equipos no pueden ser asignados, suele usarse para ítems que están en reparación, o que se espera que regresen a circulación eventualmente.',
     ),
 
 );

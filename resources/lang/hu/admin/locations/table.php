@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Ország',
     'create'                    => 'Helyszín létrehozása',
     'update'                    => 'Helyszín frissítése',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Helyszín neve',
     'address'                   => 'Cím',
     'zip'                       => 'Irányítószám',

@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Држава',
     'create'                    => 'Креирај локација',
     'update'                    => 'Ажурирај локација',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Име на локација',
     'address'                   => 'Адреса',
     'zip'                       => 'Поштенски код',

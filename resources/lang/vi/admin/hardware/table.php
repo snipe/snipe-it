@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Tài sản ',
     'image'		=> 'Hình ảnh Thiết bị',
     'days_without_acceptance' => 'Những ngày không chấp nhận',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Khấu hao tháng'
 
 );

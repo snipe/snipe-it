@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Riik',
     'create'                    => 'Uus asukoht',
     'update'                    => 'Uuenda asukohta',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Asukoha nimi',
     'address'                   => 'Aadress',
     'zip'                       => 'Postiindeks',

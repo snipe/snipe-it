@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Activ ',
     'image'		=> 'Imagine dispozitiv',
     'days_without_acceptance' => 'Zile fără acceptare',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Depreciere lunară'
 
 );

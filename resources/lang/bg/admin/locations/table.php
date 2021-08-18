@@ -11,6 +11,8 @@ return array(
     'country'                   => 'Държава',
     'create'                    => 'Създаване на местоположение',
     'update'                    => 'Обновяване на местоположение',
+    'print_assigned'            => 'Print Assigned',
+    'print_all_assigned'        => 'Print All Assigned',
     'name'                      => 'Местоположение',
     'address'                   => 'Aдрес',
     'zip'                       => 'Пощенски код',

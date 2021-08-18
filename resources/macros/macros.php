@@ -414,7 +414,7 @@ Form::macro('time_display_format', function ($name = "time_display_format", $sel
 Form::macro('digit_separator', function ($name = "digit_separator", $selected = null, $class = null) {
 
     $formats = [
-        '1234.56',
+        '1,234.56',
         '1.234,56',
     ];
 
@@ -576,6 +576,37 @@ Form::macro('skin', function ($name = "skin", $selected = null, $class = null) {
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
         $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$label.'</option> '."\n";
+    }
+
+    $select .= '</select>';
+    return $select;
+
+});
+
+Form::macro('user_skin', function ($name = "skin", $selected = null, $class = null) {
+
+    $formats = array(
+        '' => 'Site Default',
+        'blue' => 'Default Blue',
+        'blue-dark' => 'Blue (Dark Mode)',
+        'green' => 'Green Dark',
+        'green-dark' => 'Green (Dark Mode)',
+        'red' => 'Red Dark',
+        'red-dark' => 'Red (Dark Mode)',
+        'orange' => 'Orange Dark',
+        'orange-dark' => 'Orange (Dark Mode)',
+        'black' => 'Black',
+        'black-dark' => 'Black (Dark Mode)',
+        'purple' => 'Purple',
+        'purple-dark' => 'Purple (Dark Mode)',
+        'yellow' => 'Yellow',
+        'yellow-dark' => 'Yellow (Dark Mode)',
+        'contrast' => 'High Contrast',
+    );
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px">';
+    foreach ($formats as $format => $label) {
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
     }
 
     $select .= '</select>';

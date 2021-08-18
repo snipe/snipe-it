@@ -2,7 +2,6 @@
 
 use Monolog\Handler\StreamHandler;
 
-
 $config = [
 
     /*
@@ -15,8 +14,7 @@ $config = [
     | one of the channels defined in the "channels" configuration array.
     |
     */
-
-    'default' => 'stack',
+    'default' => env('LOG_CHANNEL', 'stack'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,6 +42,7 @@ $config = [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('APP_LOG_LEVEL', 'error'),
         ],
+
 
         'daily' => [
             'driver' => 'daily',
