@@ -16,34 +16,7 @@
         }
     </style>
 
-    <div class="col-md-6">
-        <div class="box box-default" id="audited-div" style="display: none">
-            <div class="box-header with-border">
-                <h2 class="box-title"> {{ trans('general.bulkaudit_status') }} (<span id="audit-counter">0</span> assets audited) </h2>
-            </div>
-            <div class="box-body">
-
-                <table id="audited" class="table table-striped snipe-table">
-                    <thead>
-                    <tr>
-                        <th>{{ trans('general.asset_tag') }}</th>
-                        <th>{{ trans('general.bulkaudit_status') }}</th>
-                        <th></th>
-                    </tr>
-                    <tr id="audit-loader" style="display: none;">
-                        <td colspan="3">
-                            <i class="fa fa-spinner spin" aria-hidden="true"></i> Processing...
-                        </td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div>
+    
 
     <div class="row">
     {{ Form::open(['method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'audit-form' ]) }}
@@ -121,26 +94,27 @@
 
 
             {{Form::close()}}
-        </div> <!--/.col-md-7-->
+        </div> <!--/.col-md-6-->
+
         <div class="col-md-6">
             <div class="box box-default" id="audited-div" style="display: none">
                 <div class="box-header with-border">
                     <h2 class="box-title"> {{ trans('general.bulkaudit_status') }} (<span id="audit-counter">0</span> assets audited) </h2>
                 </div>
                 <div class="box-body">
-
+    
                     <table id="audited" class="table table-striped snipe-table">
                         <thead>
-                            <tr>
-                                <th>{{ trans('general.asset_tag') }}</th>
-                                <th>{{ trans('general.bulkaudit_status') }}</th>
-                                <th></th>
-                            </tr>
-                            <tr id="audit-loader" style="display: none;">
-                                <td colspan="3">
-                                    <i class="fa fa-spinner spin" aria-hidden="true"></i> Processing...
-                                </td>
-                            </tr>
+                        <tr>
+                            <th>{{ trans('general.asset_tag') }}</th>
+                            <th>{{ trans('general.bulkaudit_status') }}</th>
+                            <th></th>
+                        </tr>
+                        <tr id="audit-loader" style="display: none;">
+                            <td colspan="3">
+                                <i class="fa fa-spinner spin" aria-hidden="true"></i> Processing...
+                            </td>
+                        </tr>
                         </thead>
                         <tbody>
                         </tbody>
@@ -148,7 +122,7 @@
                 </div>
             </div>
         </div>
-        </div>
+
     </div>
 
 
