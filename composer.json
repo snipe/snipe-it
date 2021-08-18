@@ -11,7 +11,7 @@
   "license": "AGPL-3.0-or-later",
   "type": "project",
   "require": {
-    "php": "^7.4",
+    "php": "^7.3",
     "ext-curl": "*",
     "ext-fileinfo": "*",
     "ext-json": "*",
@@ -42,8 +42,8 @@
     "laravel/tinker": "^2.6",
     "laravel/ui": "^3.3",
     "laravelcollective/html": "^6.2",
-    "lcobucci/clock": "^2.0",
-    "lcobucci/jwt": "^4.1",
+    "lcobucci/clock": "1.2.0",
+    "lcobucci/jwt": "^3.4.5",
     "league/csv": "^9.7",
     "league/flysystem-aws-s3-v3": "^1.0",
     "league/flysystem-cached-adapter": "^1.1",
@@ -107,9 +107,7 @@
   },
   "scripts": {
     "post-autoload-dump": [
-      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-      "@php artisan package:discover --ansi",
-      "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"
     ],
     "post-create-project-cmd": [
       "php artisan key:generate"
