@@ -596,6 +596,9 @@
     }
 
     function cleanFloat(number) {
+        if(!number) { // in a JavaScript context, meaning, if it's null or zero or unset
+            return 0.0;
+        }
         if ("{{$snipeSettings->digit_separator}}" == "1.234,56") {
             // yank periods, change commas to periods
             periodless = number.toString().replace("\.","");
