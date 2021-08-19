@@ -180,6 +180,33 @@ class SettingsController extends Controller
     }
 
 
+    public function msteamstest(Request $request)
+    {
+
+        $msteams = new Client([
+            'base_url' => e($request->input('msteams_endpoint')),
+            'defaults' => [
+                'exceptions' => false
+            ]
+        ]);
+
+
+        $payload = json_encode(
+            [
+                'text'       => trans('general.msteams_test_msg')
+            ]
+        );
+
+        try {
+            $msteams->post($request->input('msteams_endpoint'), ['body' => $payload]);
+            return response()->json(['message' => 'Success'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Oops! Please check the channel name and webhook endpoint URL. Microsoft Teams responded with: ' . $e->getMessage()], 400);
+        }
+
+        return response()->json(['message' => 'Something went wrong :( '], 400);
+    }
+
     /**
      * Test the email configuration
      *

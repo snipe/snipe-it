@@ -56,6 +56,27 @@
                     {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                 </div>
             </div>
+
+             @if (($snipeSettings->slack_endpoint!='') || ($snipeSettings->msteams_endpoint!=''))
+                    <div class="form-group notification-callout">
+                        <div class="col-md-8 col-md-offset-3">
+                            <div class="callout callout-info">
+
+                                @if ($snipeSettings->slack_endpoint!='')
+                                    <i class="fa fa-slack"></i>
+                                    A slack message will be sent
+                                    <br>
+                                @endif
+
+                                @if ($snipeSettings->msteams_endpoint!='')
+                                    <i class="fa fa-windows" aria-hidden="true"></i>
+                                     A Microsoft Teams message will be sent
+                                    <br>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endif
                         <div class="box-footer">
                             <a class="btn btn-link" href="{{ route('licenses.index') }}">{{ trans('button.cancel') }}</a>
                             <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>

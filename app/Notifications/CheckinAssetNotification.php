@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 use Illuminate\Notifications\Notification;
 
 class CheckinAssetNotification extends Notification
@@ -49,6 +51,12 @@ class CheckinAssetNotification extends Notification
             $notifyBy[] = 'slack';
         }
 
+        if (Setting::getSettings()->msteams_endpoint != '') {
+            \Log::debug('use msteams');
+            $notifyBy[2] = MicrosoftTeamsChannel::class;
+        }
+
+
         /**
          * Only send checkin notifications to users if the category
          * has the corresponding checkbox checked.
@@ -83,6 +91,30 @@ class CheckinAssetNotification extends Notification
                     ->content($note);
             });
     }
+
+
+
+    public function toMicrosoftTeams($notifiable)
+    {
+
+        $target = $this->target;
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note;
+        $location = ($item->location) ? $item->location->name : '';
+
+        return MicrosoftTeamsMessage::create()
+            ->to(Setting::getSettings()->msteams_endpoint)
+            ->type('success')
+            ->addStartGroupToSection($sectionId = 'action_msteams')
+            ->title('&#x2B07;&#x1F4BB; Asset Checked In: <a href=' . $item->present()->viewUrl() . '>' . $item->present()->fullName() . '</a>', $params = ['section' => 'action_msteams'])
+            ->content($note, $params = ['section' => 'action_msteams'])
+            ->fact('By', '<a href=' . $admin->present()->viewUrl() . '>' . $admin->present()->fullName() . '</a>', $sectionId = 'action_msteams')
+            ->fact('Status', $item->assetstatus->name ,$sectionId = 'action_msteams')
+            ->fact('Location', $location, $sectionId = 'action_msteams')
+            ->button('View in Browser', '' . $target->present()->viewUrl() . '', $params = ['section' => 'action_msteams']);
+    }
+
 
     /**
      * Get the mail representation of the notification.

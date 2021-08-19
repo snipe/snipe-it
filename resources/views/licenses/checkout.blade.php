@@ -65,7 +65,7 @@
                 </div>
 
 
-                @if ($license->requireAcceptance() || $license->getEula() || ($snipeSettings->slack_endpoint!=''))
+                @if ($license->requireAcceptance() || $license->getEula() || ($snipeSettings->slack_endpoint!='') || ($snipeSettings->msteams_endpoint!=''))
                     <div class="form-group notification-callout">
                         <div class="col-md-8 col-md-offset-3">
                             <div class="callout callout-info">
@@ -91,6 +91,11 @@
                                 @if ($snipeSettings->slack_endpoint!='')
                                     <i class="fab fa-slack"></i>
                                     {{ trans('general.slack_msg_note') }}
+                                @endif
+
+                                @if ($snipeSettings->msteams_endpoint!='')
+                                    <i class="fab fa-windows"></i>
+                                    {{ trans('general.msteams_msg_note') }}
                                 @endif
                             </div>
                         </div>

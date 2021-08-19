@@ -54,6 +54,8 @@ class Setting extends Model
           'admin_cc_email'                      => 'email|nullable',
           'default_currency'                    => 'required',
           'locale'                              => 'required',
+          'msteams_endpoint'                    => 'url|nullable',
+          'slack_endpoint'                      => 'url|required_with:slack_channel|nullable',
           'labels_per_page'                     => 'numeric',
           'labels_width'                        => 'numeric',
           'labels_height'                       => 'numeric',
@@ -264,6 +266,19 @@ class Setting extends Model
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
         return self::getSettings()->slack_endpoint;
+    }
+
+    /**
+     * The url for msteams notifications.
+     *  Used by Notifiable trait.
+     *
+     * @return string
+     */
+    public function routeNotificationForMSTeams(): string
+    {
+        // At this point the endpoint is the same for everything.
+        //  In the future this may want to be adapted for individual notifications.
+        return self::getSettings()->msteams_endpoint;
     }
 
     /**

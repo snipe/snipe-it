@@ -744,6 +744,13 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
             ]
             )->name('api.settings.slacktest');
 
+            Route::post('msteamstest',
+            [
+                Api\SettingsController::class, 
+                'msteamstest'
+            ]
+            )->name('api.settings.msteamstest');
+
             Route::post('mailtest',
             [
                 Api\SettingsController::class, 

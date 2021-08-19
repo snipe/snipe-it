@@ -284,6 +284,22 @@
           </div>
         </div>
 
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+          <div class="box box-default">
+            <div class="box-body text-center">
+              <h5>
+                <a href="{{ route('settings.msteams.index') }}">
+                  <i class="fa fa-windows fa-4x" aria-hidden="true"></i>
+                  <br><br>
+                  <span class="name">Microsoft Teams</span>
+                </a>
+              </h5>
+              <p class="help-block">Microsoft Teams settings</p>
+            </div>
+          </div>
+        </div>
+
+
         @if (config('app.debug')=== true)
           <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
             <div class="box box-default">

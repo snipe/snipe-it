@@ -259,6 +259,20 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
+     * The url for MS Teams notifications.
+     * Used by Notifiable trait.
+     * @return mixed
+     */
+    public function routeNotificationForMSTeams()
+    {
+        // At this point the endpoint is the same for everything.
+        //  In the future this may want to be adapted for individual notifications.
+        $this->endpoint = \App\Models\Setting::getSettings()->msteams_endpoint;
+        return $this->endpoint;
+    }
+
+
+    /**
      * Establishes the user -> assets relationship
      *
      * @author A. Gianotto <snipe@snipe.net>

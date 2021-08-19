@@ -9,6 +9,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
+use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 
 class CheckoutLicenseSeatNotification extends Notification
 {
@@ -32,6 +34,25 @@ class CheckoutLicenseSeatNotification extends Notification
         $this->acceptance = $acceptance;
 
         $this->settings = Setting::getSettings();
+        $this->expected_checkin = '';
+
+
+        if ($this->item->last_checkout) {
+            $this->last_checkout = \App\Helpers\Helper::getFormattedDateObject(
+                $this->item->last_checkout,
+                'date',
+                false
+            );
+        }
+
+        if ($this->item->expected_checkin) {
+            $this->expected_checkin = \App\Helpers\Helper::getFormattedDateObject(
+                $this->item->expected_checkin,
+                'date',
+                false
+            );
+        }
+
     }
 
     /**
@@ -45,6 +66,11 @@ class CheckoutLicenseSeatNotification extends Notification
 
         if (Setting::getSettings()->slack_endpoint != '') {
             $notifyBy[] = 'slack';
+        }
+        
+        if (Setting::getSettings()->msteams_endpoint != '') {
+            \Log::debug('use msteams');
+            $notifyBy[2] = MicrosoftTeamsChannel::class;
         }
 
         /**
@@ -100,6 +126,35 @@ class CheckoutLicenseSeatNotification extends Notification
                     ->content($note);
             });
     }
+
+
+
+    public function toMicrosoftTeams($notifiable)
+    {
+        $expectedCheckin = 'None';
+        $target = $this->target;
+        $admin = $this->admin;
+        $item = $this->item;
+        $note = $this->note ?: 'No note provided.';
+
+        if (($this->expected_checkin) && ($this->expected_checkin != '')) {
+            $expectedCheckin = $this->expected_checkin;
+        }
+        
+        return MicrosoftTeamsMessage::create()
+            ->to(Setting::getSettings()->msteams_endpoint)
+            ->type('success')
+            ->addStartGroupToSection($sectionId = 'action_msteams')
+            ->title('&#x2B06;&#x1F4BE; License Checked Out: <a href=' . $item->present()->viewUrl() . '>' . $item->present()->fullName() . '</a>', $params = ['section' => 'action_msteams'])
+            ->content($note, $params = ['section' => 'action_msteams'])
+            ->fact('To', '<a href=' . $target->present()->viewUrl() . '>' . $target->present()->fullName() . '</a>', $sectionId = 'action_msteams')
+            ->fact('By', '<a href=' . $admin->present()->viewUrl() . '>' . $admin->present()->fullName() . '</a>', $sectionId = 'action_msteams')
+            ->fact('Expected Checkin', $expectedCheckin, $sectionId = 'action_msteams')
+            ->button('View in Browser', '' . $target->present()->viewUrl() . '', $params = ['section' => 'action_msteams']);
+    }
+
+
+
 
     /**
      * Get the mail representation of the notification.
