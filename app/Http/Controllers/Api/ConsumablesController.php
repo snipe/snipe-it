@@ -42,6 +42,10 @@ class ConsumablesController extends Controller
             $consumables->where('category_id','=',$request->input('category_id'));
         }
 
+        if ($request->filled('model_number')) {
+            $consumables->where('model_number','=',$request->input('model_number'));
+        }
+
         if ($request->filled('manufacturer_id')) {
             $consumables->where('manufacturer_id','=',$request->input('manufacturer_id'));
         }

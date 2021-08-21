@@ -78,7 +78,7 @@ class Consumable extends SnipeModel
      * 
      * @var array
      */
-    protected $searchableAttributes = ['name', 'order_number', 'purchase_cost', 'purchase_date', 'item_no'];
+    protected $searchableAttributes = ['name', 'order_number', 'purchase_cost', 'purchase_date', 'item_no', 'model_number'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
