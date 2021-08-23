@@ -342,8 +342,56 @@ class Setting extends Model
             'is_ad',
             'ad_domain',
             'ad_append_domain',
+            'ldap_client_tls_key',
+            'ldap_client_tls_cert'
             ])->first()->getAttributes();
 
         return collect($ldapSettings);
     }
+
+    /**
+     * Return the filename for the client-side SSL cert
+     *
+     * @var string
+     */
+    public static function get_client_side_cert_path()
+    {
+        return storage_path().'/ldap_client_tls.cert';
+    }
+
+    /**
+     * Return the filename for the client-side SSL key
+     *
+     * @var string
+     */
+    public static function get_client_side_key_path()
+    {
+        return storage_path().'/ldap_client_tls.key';
+    }
+
+    public function update_client_side_cert_files()
+    {
+        /**
+         * I'm not sure if it makes sense to have a cert but no key
+         * nor vice versa, but for now I'm just leaving it like this.
+         *
+         * Also, we could easily set this up with an event handler and
+         * self::saved() or something like that but there's literally only
+         * one place where we will do that, so I'll just explicitly call
+         * this method at that spot instead. It'll be easier to debug and understand.
+         */
+        if($this->ldap_client_tls_cert) {
+            file_put_contents(self::get_client_side_cert_path(), $this->ldap_client_tls_cert);
+        } else {
+            unlink(self::get_client_side_cert_path());
+        }
+
+        if($this->ldap_client_tls_key) {
+            file_put_contents(self::get_client_side_key_path(), $this->ldap_client_tls_key);
+        } else {
+            unlink(self::get_client_side_key_path());
+        }
+    }
+
+
 }

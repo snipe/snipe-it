@@ -27,7 +27,6 @@ class Ldap extends Model
         $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
         $ldap_use_tls = Setting::getSettings()->ldap_tls;
 
-
         // If we are ignoring the SSL cert we need to setup the environment variable
         // before we create the connection
         if ($ldap_server_cert_ignore=='1') {
@@ -50,9 +49,15 @@ class Ldap extends Model
         ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);
         ldap_set_option($connection, LDAP_OPT_NETWORK_TIMEOUT, 20);
 
+        if (Setting::getSettings()->ldap_client_tls_cert && Setting::getSettings()->ldap_client_tls_key) {
+            ldap_set_option($connection, LDAP_OPT_X_TLS_CERTFILE, Setting::get_client_side_cert_path());
+            ldap_set_option($connection, LDAP_OPT_X_TLS_KEYFILE, Setting::get_client_side_key_path());
+        }
+
         if ($ldap_use_tls=='1') {
             ldap_start_tls($connection);
         }
+
 
         return $connection;
     }
