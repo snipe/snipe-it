@@ -798,7 +798,6 @@ class AssetsController extends Controller
         }
 
         if ($asset->save()) {
-            $asset->logCheckin($target, e($request->input('note')));
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note')));
 
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
