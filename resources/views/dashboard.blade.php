@@ -447,7 +447,6 @@
           error: function (data) {
               // window.location.reload(true);
           }
-
       });
 </script>
 @endpush
