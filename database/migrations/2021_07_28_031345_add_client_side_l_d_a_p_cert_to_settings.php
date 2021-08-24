@@ -14,7 +14,7 @@ class AddClientSideLDAPCertToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->text('ldap_client_tls_cert');
+            $table->text('ldap_client_tls_cert')->nullable()->default(null);
         });
     }
 
