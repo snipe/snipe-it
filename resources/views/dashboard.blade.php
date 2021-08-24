@@ -418,7 +418,6 @@
     // ---------------------------
     // - ASSET STATUS CHART -
     // ---------------------------
-
       var pieChartCanvas = $("#statusPieChart").get(0).getContext("2d");
       var pieChart = new Chart(pieChartCanvas);
       var ctx = document.getElementById("statusPieChart");
@@ -427,31 +426,27 @@
                   position: 'top',
                   responsive: true, 
                   maintainAspectRatio: true,
-
               }
           };
 
       $.ajax({
-            type: 'GET',
-            url: '{{  route('api.statuslabels.assets.bytype') }}',
-            headers: {
-                "X-Requested-With": 'XMLHttpRequest',
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-            },
-            dataType: 'json',
-            success: function (data) {
-
-                var myPieChart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: data,
-                    options: pieOptions
-                });
-
-            },
-            error: function (data) {
-
-                // window.location.reload(true);
-            }
+          type: 'GET',
+          url: '{{  route('api.statuslabels.assets.bytype') }}',
+          headers: {
+              "X-Requested-With": 'XMLHttpRequest',
+              "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+          },
+          dataType: 'json',
+          success: function (data) {
+              var myPieChart = new Chart(ctx,{
+                  type   : 'doughnut',
+                  data   : data,
+                  options: pieOptions
+              });
+          },
+          error: function (data) {
+              // window.location.reload(true);
+          }
 
       });
 </script>
