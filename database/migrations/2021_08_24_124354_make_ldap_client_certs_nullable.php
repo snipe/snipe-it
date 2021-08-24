@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddClientSideLDAPCertToSettings extends Migration
+class MakeLdapClientCertsNullable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class AddClientSideLDAPCertToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->text('ldap_client_tls_cert')->nullable();
+            //
+            $table->text('ldap_client_tls_cert')->nullable()->change();
+            $table->text('ldap_client_tls_key')->nullable()->change();
         });
     }
 
@@ -26,7 +28,7 @@ class AddClientSideLDAPCertToSettings extends Migration
     public function down()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->dropColumn('ldap_client_tls_cert')->nullable();
+            //
         });
     }
 }
