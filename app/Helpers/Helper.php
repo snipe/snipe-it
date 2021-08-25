@@ -890,7 +890,8 @@ class Helper
             // If upload_max_size is less, then reduce. Except if upload_max_size is
             // zero, which indicates no limit.
             $upload_max = Helper::parse_size(ini_get('upload_max_filesize'));
-            if ($upload_max > 0 && $upload_max < $max_size) {
+
+            if ($upload_max > 0 && $upload_max < $post_max_size) {
                 $max_size = ini_get('upload_max_filesize');
             }
         }
