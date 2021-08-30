@@ -380,16 +380,20 @@ class Setting extends Model
          * one place where we will do that, so I'll just explicitly call
          * this method at that spot instead. It'll be easier to debug and understand.
          */
-        if($this->ldap_client_tls_cert) {
+        if ($this->ldap_client_tls_cert) {
             file_put_contents(self::get_client_side_cert_path(), $this->ldap_client_tls_cert);
         } else {
-            unlink(self::get_client_side_cert_path());
+            if (file_exists(self::get_client_side_cert_path())) {
+                unlink(self::get_client_side_cert_path());
+            }
         }
 
-        if($this->ldap_client_tls_key) {
+        if ($this->ldap_client_tls_key) {
             file_put_contents(self::get_client_side_key_path(), $this->ldap_client_tls_key);
         } else {
-            unlink(self::get_client_side_key_path());
+            if (file_exists(self::get_client_side_key_path())) {
+                unlink(self::get_client_side_key_path());
+            }
         }
     }
 
