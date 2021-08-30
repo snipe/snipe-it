@@ -41,6 +41,7 @@ libmcrypt-dev \
 php7.4-dev \
 ca-certificates \
 unzip \
+dnsutils \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 

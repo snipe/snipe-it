@@ -36,7 +36,7 @@ class LdapTroubleshooter extends Command
     protected $signature = 'ldap:troubleshoot
                             {--ldap-search : Output an ldapsearch command-line for testing your LDAP config}
                             {--force : Skip the interactive yes/no prompt for confirmation}
-                            {--debug : Include debuggin output (verbose)}';
+                            {--debug : Include debugging output (verbose)}';
 
     /**
      * The console command description.
@@ -74,7 +74,9 @@ class LdapTroubleshooter extends Command
      */
     public function handle()
     {
-	ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, 7);
+        if($this->option('debug')) {
+    	    ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, 7);
+        }
 
         $settings = Setting::getSettings();
         if($this->option('ldap-search')) {
@@ -89,6 +91,10 @@ class LdapTroubleshooter extends Command
             if($settings->ldap_server_cert_ignore) {
                 $this->line("# Ignoring server certificate validity");
                 $output[] = "LDAPTLS_REQCERT=never";
+            }
+            if($settings->ldap_client_tls_cert && $settings->ldap_client_tls_key) {
+                $output[] = "LDAPTLS_CERT=storage/ldap_client_tls.cert";
+                $output[] = "LDAPTLS_KEY=storage/ldap_client_tls.key";
             }
             $output[] = "ldapsearch";
             $output[] = $settings->ldap_server;
@@ -291,10 +297,10 @@ class LdapTroubleshooter extends Command
                         foreach($row AS $key => $val ) {
                             print("Key is: ".$key);
                             if($key == "count" || is_int($key) || $key == "dn") {
-                                print(" and we're gonna skip it\n");
+                                $this->debugout(" and we're gonna skip it\n");
                                 continue;
                             }
-                            print(" And that seems fine.\n");
+                            $this->debugout(" And that seems fine.\n");
                             if(array_key_exists('count',$val)) {
                                 if($val['count'] == 1) {
                                     $clean_row[$key] = $val[0];
@@ -318,8 +324,7 @@ class LdapTroubleshooter extends Command
                     }
                     return $cleaned;
                 };
-                print_r($cleaner($results));
-                exit(99);
+                $this->debugout(print_r($cleaner($results),true));
 
                 $search_results = ldap_search($conn,$settings->base_dn,$settings->filter);
             }
@@ -341,15 +346,20 @@ class LdapTroubleshooter extends Command
         $this->info("LDAP TROUBLESHOOTING COMPLETE!");
     }
 
-    public function connect_to_ldap($ldap_url, $check_cert, $start_tls) 
+    public function connect_to_ldap($ldap_url, $check_cert, $start_tls, $settings) 
     {
         $lconn = ldap_connect($ldap_url);
-        ldap_set_option($lconn,LDAP_OPT_PROTOCOL_VERSION,3); // should we 'test' different protocol versions here? Does anyone even use anything other than LDAPv3?
+        ldap_set_option($lconn, LDAP_OPT_PROTOCOL_VERSION, 3); // should we 'test' different protocol versions here? Does anyone even use anything other than LDAPv3?
                                                              // no - it's formally deprecated: https://tools.ietf.org/html/rfc3494
         if(!$check_cert) {
             putenv('LDAPTLS_REQCERT=never'); // This is horrible; is this *really* the only way to do it?
         } else {
             putenv('LDAPTLS_REQCERT'); // have to very explicitly and manually *UN* set the env var here to ensure it works
+        }
+        if($settings->ldap_client_tls_cert && $settings->ldap_client_tls_key) {
+            // client-side TLS certificate support for LDAP (Google Secure LDAP)
+            putenv('LDAPTLS_CERT=storage/ldap_client_tls.cert');
+            putenv('LDAPTLS_KEY=storage/ldap_client_tls.key');
         }
         if($start_tls) {
             if(!ldap_start_tls($lconn)) {
