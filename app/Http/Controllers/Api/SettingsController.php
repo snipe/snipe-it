@@ -165,6 +165,14 @@ class SettingsController extends Controller
     public function slacktest(Request $request)
     {
 
+
+        $validatedData = $request->validate([
+            'slack_endpoint'     => 'url|required_with:slack_channel|nullable|starts_with:https://hooks.slack.com',
+            'slack_channel'      => 'starts_with:#|required_with:slack_endpoint|nullable',
+            'slack_botname'      => 'string|required_with:slack_endpoint|nullable',
+        ]);
+
+        
         $slack = new Client([
             'base_url' => e($request->input('slack_endpoint')),
             'defaults' => [

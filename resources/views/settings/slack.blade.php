@@ -146,7 +146,7 @@
                 $('#slacktestcontainer').fadeOut(500);
             }
 
-            if(event) { //on 'initial load' we don't *have* an 'event', but in the regular keyup callback, we *do*. So this only fires on 'real' callback events, not on first load
+            if (event) { //on 'initial load' we don't *have* an 'event', but in the regular keyup callback, we *do*. So this only fires on 'real' callback events, not on first load
                 if($('#slack_endpoint').val() == "" && $('#slack_channel').val() == "" && $('#slack_botname').val() == "") {
                     // if all three fields are blank, the user may want to disable Slack integration; enable the Save button
                     $('#save_slack').removeAttr('disabled');
@@ -183,15 +183,6 @@
                 dataType: 'json',
 
                 success: function (data) {
-                    $('#save_slack').removeAttr('disabled');
-                    $("#slacktesticon").html('');
-                    $("#slacktestrow").addClass('text-success');
-                    $("#slackteststatus").addClass('text-success');
-                    $("#slackteststatus").html('<i class="fa fa-check text-success"></i> Success! Check the ' + $('#slack_channel').val() + ' channel for your test message, and be sure to click SAVE below to store your settings.');
-                },
-
-                error: function (data) {
-
 
                     if (data.responseJSON) {
                         var errors = data.responseJSON.message;
@@ -201,10 +192,27 @@
 
                     var error_text = '';
 
-                    $('#save_slack').attr("disabled", true);
-                    $("#slacktesticon").html('');
-                    $("#slackteststatus").addClass('text-danger');
-                    $("#slacktesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+
+                    if (data.status=="error") {
+
+                        $('#save_slack').attr("disabled", true);
+                        $("#slacktesticon").html('');
+                        $("#slacktestrow").addClass('text-danger');
+                        $("#slackteststatus").addClass('text-danger');
+                        $("#slacktesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i> ');
+                        $("#slackteststatus").html('There was an error testing Slack. Please check that the Slack endpoint URL starts with https://hooks.slack.com, and that your channel name exists in your Slack workspace and starts with a #.');
+
+                    } else {
+                        $('#save_slack').removeAttr('disabled');
+                        $("#slacktesticon").html('');
+                        $("#slacktestrow").addClass('text-success');
+                        $("#slackteststatus").addClass('text-success');
+                        $("#slackteststatus").html('<i class="fa fa-check text-success"></i> Success! Check the ' + $('#slack_channel').val() + ' channel for your test message, and be sure to click SAVE below to store your settings.');
+                    }
+                                       
+                },
+
+                error: function (data) {
 
                     if (data.status == 500) {
                         $('#slackteststatus').html('500 Server Error');
