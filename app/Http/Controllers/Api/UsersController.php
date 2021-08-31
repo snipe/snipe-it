@@ -91,6 +91,26 @@ class UsersController extends Controller
             $users = $users->where('users.username', '=', $request->input('username'));
         }
 
+        if ($request->filled('first_name')) {
+            $users = $users->where('users.first_name', '=', $request->input('first_name'));
+        }
+
+        if ($request->filled('last_name')) {
+            $users = $users->where('users.last_name', '=', $request->input('last_name'));
+        }
+
+        if ($request->filled('employee_num')) {
+            $users = $users->where('users.employee_num', '=', $request->input('employee_num'));
+        }
+
+        if ($request->filled('state')) {
+            $users = $users->where('users.state', '=', $request->input('state'));
+        }
+
+        if ($request->filled('state')) {
+            $users = $users->where('users.zip', '=', $request->input('zip'));
+        }
+
         if ($request->filled('group_id')) {
             $users = $users->ByGroup($request->get('group_id'));
         }
