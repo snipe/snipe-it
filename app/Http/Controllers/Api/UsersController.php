@@ -75,6 +75,10 @@ class UsersController extends Controller
             $users = $users->withTrashed();
         }
 
+        if ($request->filled('activated')) {
+            $users = $users->where('users.activated', '=', $request->input('activated'));
+        }
+
         if ($request->filled('company_id')) {
             $users = $users->where('users.company_id', '=', $request->input('company_id'));
         }
@@ -107,6 +111,10 @@ class UsersController extends Controller
             $users = $users->where('users.state', '=', $request->input('state'));
         }
 
+        if ($request->filled('country')) {
+            $users = $users->where('users.country', '=', $request->input('country'));
+        }
+
         if ($request->filled('zip')) {
             $users = $users->where('users.zip', '=', $request->input('zip'));
         }
@@ -117,6 +125,10 @@ class UsersController extends Controller
 
         if ($request->filled('department_id')) {
             $users = $users->where('users.department_id','=',$request->input('department_id'));
+        }
+
+        if ($request->filled('manager_id')) {
+            $users = $users->where('users.manager_id','=',$request->input('manager_id'));
         }
 
         if ($request->filled('search')) {
