@@ -209,9 +209,9 @@ class AssetMaintenancesController extends Controller
             return static::getInsufficientPermissionsRedirect();
         }
 
-        $assetMaintenance->supplier_id = e($request->input('supplier_id'));
-        $assetMaintenance->is_warranty = e($request->input('is_warranty'));
-        $assetMaintenance->cost =  Helper::ParseFloat(e($request->input('cost')));
+        $assetMaintenance->supplier_id = $request->input('supplier_id');
+        $assetMaintenance->is_warranty = $request->input('is_warranty');
+        $assetMaintenance->cost =  Helper::ParseFloat($request->input('cost'));
         $assetMaintenance->notes = $request->input('notes');
 
         $asset = Asset::find(request('asset_id'));
