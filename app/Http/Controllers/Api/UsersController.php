@@ -107,7 +107,7 @@ class UsersController extends Controller
             $users = $users->where('users.state', '=', $request->input('state'));
         }
 
-        if ($request->filled('state')) {
+        if ($request->filled('zip')) {
             $users = $users->where('users.zip', '=', $request->input('zip'));
         }
 
