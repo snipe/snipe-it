@@ -212,7 +212,7 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->supplier_id = e($request->input('supplier_id'));
         $assetMaintenance->is_warranty = e($request->input('is_warranty'));
         $assetMaintenance->cost =  Helper::ParseFloat(e($request->input('cost')));
-        $assetMaintenance->notes = e($request->input('notes'));
+        $assetMaintenance->notes = $request->input('notes');
 
         $asset = Asset::find(request('asset_id'));
 
