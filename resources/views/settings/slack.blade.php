@@ -182,6 +182,8 @@
 
                 dataType: 'json',
 
+                // This part is a little confusing, since we return a 200 on failed validation, so we have to
+                // actually look at the contents of the response, where we have a "status" field in the JSON. 
                 success: function (data) {
 
                     if (data.responseJSON) {
@@ -193,6 +195,7 @@
                     var error_text = '';
 
 
+                    // The request responded with a 200, but we see an error as the "status"
                     if (data.status=="error") {
 
                         $('#save_slack').attr("disabled", true);
