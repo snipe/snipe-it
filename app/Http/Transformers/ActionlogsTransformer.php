@@ -95,7 +95,7 @@ class ActionlogsTransformer
                 'id' => (int) $actionlog->location->id,
                 'name' => e($actionlog->location->name)
             ] : null,
-            'created_at'    => Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
+            'created_at'    => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'):Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
             'updated_at'    => Helper::getFormattedDateObject($actionlog->updated_at, 'datetime'),
             'next_audit_date' => ($actionlog->itemType()=='asset') ? Helper::getFormattedDateObject($actionlog->calcNextAuditDate(null, $actionlog->item), 'date'): null,
             'days_to_next_audit' => $actionlog->daysUntilNextAudit($settings->audit_interval, $actionlog->item),
