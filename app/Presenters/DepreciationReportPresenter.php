@@ -3,7 +3,7 @@
 namespace App\Presenters;
 
 /**
- * Class DepreciationPresenter
+ * Class DepreciationReportsPresenter
  * @package App\Presenters
  */
 class DepreciationReportPresenter extends Presenter

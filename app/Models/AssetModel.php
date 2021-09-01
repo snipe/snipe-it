@@ -17,6 +17,7 @@ use Watson\Validating\ValidatingTrait;
  */
 class AssetModel extends SnipeModel
 {
+    use $report= \App\Presenters\DepreciationReportPresenter::class;
     use HasFactory;
     use SoftDeletes;
     protected $presenter = \App\Presenters\AssetModelPresenter::class;

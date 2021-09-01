@@ -9,7 +9,7 @@ class DepreciationReportController extends Controller
 {
     /**
      * Returns a view that invokes the ajax tables which actually contains
-     * the content for the depreciation listing, which is generated in getDatatable.
+     * the content for the depreciation report, which is generated in getDatatable.
      *
      * @author [G. Martinez] [<godmartinz@gmail.com]
      * @see DepreciationsReportController::getDatatable() method that generates the JSON response
