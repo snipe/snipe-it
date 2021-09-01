@@ -95,7 +95,7 @@ class ActionlogsTransformer
                 'id' => (int) $actionlog->location->id,
                 'name' => e($actionlog->location->name)
             ] : null,
-            'created_at'    => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'):Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
+            'created_at'    => Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
             'updated_at'    => Helper::getFormattedDateObject($actionlog->updated_at, 'datetime'),
             'next_audit_date' => ($actionlog->itemType()=='asset') ? Helper::getFormattedDateObject($actionlog->calcNextAuditDate(null, $actionlog->item), 'date'): null,
             'days_to_next_audit' => $actionlog->daysUntilNextAudit($settings->audit_interval, $actionlog->item),
@@ -115,7 +115,7 @@ class ActionlogsTransformer
             'note'          => ($actionlog->note) ? e($actionlog->note): null,
             'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
-            'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): null,
+            'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
 
         ];
 
