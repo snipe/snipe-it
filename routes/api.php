@@ -294,7 +294,18 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         'parameters' => ['depreciations' => 'depreciation_id'],
         ]
         ); // end depreciations API routes
-
+        /**
+         * Depreciation Report API routes
+         */
+        Route::resource('depreciations',
+            Api\DepreciationReportController::class,
+            ['names' =>
+                [
+                    'index' => 'api.depreciationreport.index',
+                ],
+                'except' => ['create', 'edit'],
+            ]
+        );
 
         /**
          * Fields API routes

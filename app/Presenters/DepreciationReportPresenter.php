@@ -6,7 +6,7 @@ namespace App\Presenters;
  * Class DepreciationPresenter
  * @package App\Presenters
  */
-class DepreciationPresenter extends Presenter
+class DepreciationReportPresenter extends Presenter
 {
     /**
      * Json Column Layout for bootstrap table
