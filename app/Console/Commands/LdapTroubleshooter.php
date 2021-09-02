@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Setting;
 use Exception;
+use Crypt;
 
 /**
  * Check if a given ip is in a network
@@ -36,7 +37,9 @@ class LdapTroubleshooter extends Command
     protected $signature = 'ldap:troubleshoot
                             {--ldap-search : Output an ldapsearch command-line for testing your LDAP config}
                             {--force : Skip the interactive yes/no prompt for confirmation}
-                            {--debug : Include debugging output (verbose)}';
+                            {--debug : Include debugging output (verbose)}
+                            {--trace : Include extremely verbose LDAP trace output}
+                            {--timeout=15 : Timeout for LDAP Bind operations}';
 
     /**
      * The console command description.
@@ -74,11 +77,12 @@ class LdapTroubleshooter extends Command
      */
     public function handle()
     {
-        if($this->option('debug')) {
+        if($this->option('trace')) {
     	    ldap_set_option(NULL, LDAP_OPT_DEBUG_LEVEL, 7);
         }
 
         $settings = Setting::getSettings();
+        $this->settings = $settings;
         if($this->option('ldap-search')) {
             if(!$this->option('force')) {
                 $confirmation = $this->confirm('WARNING: This command will display your LDAP password on your terminal. Are you sure this is ok?');
@@ -93,6 +97,7 @@ class LdapTroubleshooter extends Command
                 $output[] = "LDAPTLS_REQCERT=never";
             }
             if($settings->ldap_client_tls_cert && $settings->ldap_client_tls_key) {
+                $this->line("# Adding LDAP Client Certificate and Key");
                 $output[] = "LDAPTLS_CERT=storage/ldap_client_tls.cert";
                 $output[] = "LDAPTLS_KEY=storage/ldap_client_tls.key";
             }
@@ -140,6 +145,7 @@ class LdapTroubleshooter extends Command
             $this->error("WARNING: LDAP Server setting of: ".$settings->ldap_server." cannot be parsed. We will try to guess.");
             //exit(-1);
         }
+        //since we never use $ldap_conn again, we don't have to ldap_unbind() it (it's not even connected, tbh - that only happens at bind-time)
 
         $parsed = parse_url($settings->ldap_server);
 
@@ -214,6 +220,7 @@ class LdapTroubleshooter extends Command
         $ldap_urls = [];
         $pretty_ldap_urls = [];
         foreach($open_ports as $port) {
+            //if($port == 389) { continue; } // FIXME GET RID OF THIS LINE! THIS SUCKS!!!!!!
             $this->line("Trying TLS first for port $port");
             $ldap_url = "ldaps://".$parsed['host'].":$port";
             if($this->test_anonymous_bind($ldap_url)) {
@@ -237,8 +244,8 @@ class LdapTroubleshooter extends Command
             $ldap_url = "ldap://".$parsed['host'].":$port";
             if($this->test_anonymous_bind($ldap_url, true, true)) {
                 $this->info("Plain connection to $ldap_url with STARTTLS succesful!");
-                $ldap_urls[] = [ $ldap_url, true, false ];
-                $pretty_ldap_urls[] = [ $ldap_url, "YES", "no" ];
+                $ldap_urls[] = [ $ldap_url, true, true ];
+                $pretty_ldap_urls[] = [ $ldap_url, "YES", "YES" ];
                 continue;
             } else {
                 $this->error("WARNING: Failed to bind to $ldap_url with STARTTLS enabled. Trying without STARTTLS");
@@ -265,68 +272,67 @@ class LdapTroubleshooter extends Command
             $this->table(["URL", "Cert Checks Enabled?", "STARTTLS Enabled?"],$pretty_ldap_urls);
         } else {
             $this->error("ERROR - no valid LDAP URL's available - ABORTING");
+            exit(1);
         }
 
         $this->info("STAGE 4: Test Administrative Bind for LDAP Sync");
         foreach($ldap_urls AS $ldap_url) {
-            $this->test_authed_bind($ldap_url[0], $ldap_url[1], $ldap_url[2], $settings->ldap_uname, \Crypt::decrypt($settings->ldap_pword));
+            $this->test_authed_bind($ldap_url[0], $ldap_url[1], $ldap_url[2], $settings->ldap_uname, Crypt::decrypt($settings->ldap_pword));
         }
 
         $this->info("STAGE 5: Test BaseDN");
-        foreach($ldap_urls AS $ldap_url) {
-            $conn = $this->test_authed_bind($ldap_url[0], $ldap_url[1], $ldap_url[2], $settings->ldap_uname, \Crypt::decrypt($settings->ldap_pword));
-            if($conn) {
-            $result = ldap_read($conn, '', '(objectClass=*)'/* , ['supportedControl']*/);
-                $results = ldap_get_entries($conn, $result);
-                $cleaner = function ($array) {
-                    /* 
-                    */
-                    $all_defined_constants = get_defined_constants();
-                    $ldap_constants = [];
-                    foreach($all_defined_constants AS $key => $val) {
-                        if(starts_with($key,"LDAP_") && is_string($val)) {
-                            $ldap_constants[$val] = $key; // INVERT the meaning here!
-                        }
-                    }
-                    $this->info("LDAP constants are: ".print_r($ldap_constants,true));
+        //grab all LDAP_ constants and fill up a reversed array mapping from weird LDAP dotted-strings to (Constant Name)
+        $all_defined_constants = get_defined_constants();
+        $ldap_constants = [];
+        foreach($all_defined_constants AS $key => $val) {
+            if(starts_with($key,"LDAP_") && is_string($val)) {
+                $ldap_constants[$val] = $key; // INVERT the meaning here!
+            }
+        }
+        $this->debugout("LDAP constants are: ".print_r($ldap_constants,true));
 
-                    $cleaned = [];
-                    for($i = 0; $i < $array['count']; $i++) {
-                        $row = $array[$i];
-                        $clean_row = [];
-                        foreach($row AS $key => $val ) {
-                            print("Key is: ".$key);
-                            if($key == "count" || is_int($key) || $key == "dn") {
-                                $this->debugout(" and we're gonna skip it\n");
-                                continue;
-                            }
-                            $this->debugout(" And that seems fine.\n");
-                            if(array_key_exists('count',$val)) {
-                                if($val['count'] == 1) {
-                                    $clean_row[$key] = $val[0];
+        // recursive function that 'cleans' the returned array from ldap_get_entries which are formatted awfully
+        $cleaner = function ($array) {
+            $cleaned = [];
+            for($i = 0; $i < $array['count']; $i++) {
+                $row = $array[$i];
+                $clean_row = [];
+                foreach($row AS $key => $val ) {
+                    $this->debugout("Key is: ".$key);
+                    if($key == "count" || is_int($key) || $key == "dn") {
+                        $this->debugout(" and we're gonna skip it\n");
+                        continue;
+                    }
+                    $this->debugout(" And that seems fine.\n");
+                    if(array_key_exists('count',$val)) {
+                        if($val['count'] == 1) {
+                            $clean_row[$key] = $val[0];
+                        } else {
+                            unset($val['count']); //these counts are annoying
+                            $elements = [];
+                            foreach($val as $entry) {
+                                if(isset($ldap_constants[$entry])) {
+                                    $elements[] = $ldap_constants[$entry];
                                 } else {
-                                    unset($val['count']); //these counts are annoying
-                                    $elements = [];
-                                    foreach($val as $entry) {
-                                        if(isset($ldap_constants[$entry])) {
-                                            $elements[] = $ldap_constants[$entry];
-                                        } else {
-                                            $elements[] = $entry;
-                                        }
-                                    }
-                                    $clean_row[$key] = $elements;
+                                    $elements[] = $entry;
                                 }
-                            } else {
-                                $clean_row[$key] = $val;
                             }
+                            $clean_row[$key] = $elements;
                         }
-                        $cleaned[$i] = $clean_row;
+                    } else {
+                        $clean_row[$key] = $val;
                     }
-                    return $cleaned;
-                };
-                $this->debugout(print_r($cleaner($results),true));
-
-                $search_results = ldap_search($conn,$settings->base_dn,$settings->filter);
+                }
+                $cleaned[$i] = $clean_row;
+            }
+            return $cleaned;
+        };
+        
+        foreach($ldap_urls AS $ldap_url) {
+            if($this->test_informational_bind($ldap_url[0],$ldap_url[1],$ldap_url[2],$settings->ldap_uname,Crypt::decrypt($settings->ldap_pword))) {
+                $this->info("Success getting informational bind!");
+            } else {
+                $this->error("Unable to get information from bind.");
             }
         }
 
@@ -334,19 +340,21 @@ class LdapTroubleshooter extends Command
         foreach($ldap_urls AS $ldap_url) {
             $this->info("Starting auth to ".$ldap_url[0]);
             while(true) {
-                if(!$this->confirm('Do you wish to try to authenticate to the directory?')) {
+                $with_tls = $ldap_url[1] ? "with": "without";
+                $with_startssl = $ldap_url[2] ? "using": "not using";
+                if(!$this->confirm('Do you wish to try to authenticate to this directory: '.$ldap_url[0]." $with_tls TLS and $with_startssl STARTSSL?")) {
                     break;
                 }
                 $username = $this->ask("Username");
                 $password = $this->secret("Password");
-                $this->test_authed_bind($ldap_url[0], $ldap_url[1], $ldap_url[2], $username, $password); // FIXME - should do some other stuff here, maybe with the concatenating or something?
+                $this->test_authed_bind($ldap_url[0], $ldap_url[1], $ldap_url[2], $username, $password); // FIXME - should do some other stuff here, maybe with the concatenating or something? maybe? and/or should put up some results?
             }
         }
 
         $this->info("LDAP TROUBLESHOOTING COMPLETE!");
     }
 
-    public function connect_to_ldap($ldap_url, $check_cert, $start_tls, $settings) 
+    public function connect_to_ldap($ldap_url, $check_cert, $start_tls) 
     {
         $lconn = ldap_connect($ldap_url);
         ldap_set_option($lconn, LDAP_OPT_PROTOCOL_VERSION, 3); // should we 'test' different protocol versions here? Does anyone even use anything other than LDAPv3?
@@ -356,7 +364,7 @@ class LdapTroubleshooter extends Command
         } else {
             putenv('LDAPTLS_REQCERT'); // have to very explicitly and manually *UN* set the env var here to ensure it works
         }
-        if($settings->ldap_client_tls_cert && $settings->ldap_client_tls_key) {
+        if($this->settings->ldap_client_tls_cert && $this->settings->ldap_client_tls_key) {
             // client-side TLS certificate support for LDAP (Google Secure LDAP)
             putenv('LDAPTLS_CERT=storage/ldap_client_tls.cert');
             putenv('LDAPTLS_KEY=storage/ldap_client_tls.key');
@@ -371,35 +379,126 @@ class LdapTroubleshooter extends Command
             $this->error("WARNING: Failed to generate connection string - using: ".$ldap_url);
             return false;
         }
+        $net = ldap_set_option($lconn, LDAP_OPT_NETWORK_TIMEOUT, $this->option('timeout'));
+        $time = ldap_set_option($lconn, LDAP_OPT_TIMELIMIT, $this->option('timeout'));
+        if(!$net || !$time) {
+            $this->error("Unable to set timeouts!");
+        }
         return $lconn;
     }
 
     public function test_anonymous_bind($ldap_url, $check_cert = true, $start_tls = false)
     {
-        try {
-            $lconn = $this->connect_to_ldap($ldap_url,$check_cert,$start_tls);
-            return ldap_bind($lconn);
-        } catch (Exception $e) {
-            $this->error("WARNING: Exception caught during bind - ".$e->getMessage());
-            return false;
-        }
+        return $this->timed_boolean_execute(function () use ($ldap_url, $check_cert , $start_tls) {
+            try {
+                $lconn = $this->connect_to_ldap($ldap_url, $check_cert, $start_tls);
+                $this->info("gonna try to bind now, this can take a while if we mess it up");
+                $bind_results = ldap_bind($lconn);
+                $this->info("Bind results are: ".$bind_results." which translate into boolean: ".(bool)$bind_results);
+                return (bool)$bind_results;
+            } catch (Exception $e) {
+                $this->error("WARNING: Exception caught during bind - ".$e->getMessage());
+                return false;
+            }
+        });
     }
 
     public function test_authed_bind($ldap_url, $check_cert, $start_tls, $username, $password) 
     {
-        try {
-            $lconn = $this->connect_to_ldap($ldap_url,$check_cert,$start_tls);
-            $bind_results = ldap_bind($lconn,$username,$password);
-            if(!$bind_results) {
-                $this->error("WARNING: Failed to bind to $ldap_url as $username");
+        return $this->timed_boolean_execute(function () use ($ldap_url, $check_cert, $start_tls, $username, $password) {
+            try {
+                $lconn = $this->connect_to_ldap($ldap_url, $check_cert, $start_tls);
+                $bind_results = ldap_bind($lconn, $username, $password);
+                if(!$bind_results) {
+                    $this->error("WARNING: Failed to bind to $ldap_url as $username");
+                    return false;
+                } else {
+                    $this->info("SUCCESS - Able to bind to $ldap_url as $username");
+                    return (bool)$lconn;
+                }
+            } catch (Exception $e) {
+                $this->error("WARNING: Exception caught during Authed bind to $username - ".$e->getMessage());
                 return false;
-            } else {
-                $this->info("SUCCESS - Able to bind to $ldap_url as $username");
-                return $lconn;
             }
-        } catch (Exception $e) {
-            $this->error("WARNING: Exception caught during Admin bind - ".$e->getMessage());
-            return false;
+        });
+    }
+
+    public function test_informational_bind($ldap_url, $check_cert, $start_tls, $username, $password)
+    {
+        return $this->timed_boolean_execute(function () use ($ldap_url, $check_cert, $start_tls, $username, $password) {
+            try { // TODO - copypasta'ed from test_authed_bind
+                $conn = $this->connect_to_ldap($ldap_url, $check_cert, $start_tls);
+                $bind_results = ldap_bind($conn, $username, $password);
+                if(!$bind_results) {
+                    $this->error("WARNING: Failed to bind to $ldap_url as $username");
+                    return false;
+                }
+                $this->info("SUCCESS - Able to bind to $ldap_url as $username");
+                $result = ldap_read($conn, '', '(objectClass=*)'/* , ['supportedControl']*/);
+                $results = ldap_get_entries($conn, $result);
+                $cleaned_results = $cleaner($results);
+                $this->line(print_r($cleaned_results,true));
+                //okay, great - now how do we display those results? I have no idea.
+                // I don't see why this throws an Exception for Google LDAP, but I guess we ought to try and catch it?
+                $this->comment("I guess we're trying to do the ldap search here, but sometimes it takes too long?");
+                $search_results = ldap_search($conn, $settings->base_dn, $settings->filter);
+                $this->info("Printing first 10 results: ");
+                for($i=0;$i<10;$i++) {
+                    $this->info($search_results[$i]);
+                }
+            } catch (\Exception $e) {
+                $this->error("WARNING: Exception caught during Authed bind to $username - ".$e->getMessage());
+                return false;
+            }
+        });
+    }
+
+    /***********************************************
+     * 
+     * This function executes $function - which is expected to be some kind of executable function - 
+     * with a timeout set. It respects the timeout by forking execution and setting a strict timer
+     * for which to get back a SIGUSR1 or SIGUSR2 signal from the forked process.
+     * 
+     ***********************************************/
+    private function timed_boolean_execute($function)
+    {
+        if(!(function_exists('pcntl_sigtimedwait') && function_exists('posix_getpid') && function_exists('pcntl_fork') && function_exists('posix_kill') && function_exists('pcntl_wifsignaled'))) {
+            // POSIX functions needed for forking aren't present, just run the function inline (ignoring timeout)
+            $this->info('WARNING: Unable to execute POSIX fork() commands, timeout may not be respected');
+            return $function();
+        } else {
+            $parent_pid = posix_getpid();
+            $pid = pcntl_fork();
+            switch($pid) {
+                case 0:
+                    //we're the 'child'
+                    if($function()) {
+                        //SUCCESS = SIGUSR1
+                        posix_kill($parent_pid, SIGUSR1);
+                    } else {
+                        //FAILURE = SIGUSR2
+                        posix_kill($parent_pid, SIGUSR2);
+                    }
+                    exit();
+                    break; //yes I know we don't need it.
+                case -1:
+                    //couldn't fork
+                    $this->error("COULD NOT FORK - assuming failure");
+                    return false;
+                    break; //I still know that we don't need it
+                default:
+                    //we remain the 'parent', $pid is the PID of the forked process.
+                    $siginfo = [];
+                    $exit_status = pcntl_sigtimedwait ([SIGUSR1, SIGUSR2], $siginfo, $this->option('timeout'));
+                    if ($exit_status == SIGUSR1) {
+                        return true;
+                    } else {
+                        posix_kill($pid, SIGKILL); //make sure we don't have processes hanging around that might try and send signals during later executions, confusing us
+                        return false;
+                    }
+                    break; //Yeah I get it already, shush.
+            }
         }
+
     }
 }
