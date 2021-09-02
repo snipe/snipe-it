@@ -25,7 +25,7 @@ body:
         2.
         3.
         ...
-      validations:
+    validations:
         required: true
   - type: textarea
     attributes:
@@ -46,6 +46,7 @@ body:
     validations:
       required: true
   - type: input
+    id: server_operatingSystem
     attributes:
       label: Operating System
       description: 'e.g. Ubuntu, Windows'
@@ -66,14 +67,17 @@ body:
     attributes:
       value: Desktop
   - type: input
+    id: desktop_operatingSystem
     attributes:
       label: Operating System
       description: 'e.g. Ubuntu, Windows'
   - type: input
+    id: desktop_browser
     attributes:
       label: Browser
       description: 'e.g. Google Chrome, Safari'
   - type: input
+    id: desktop_version
     attributes:
       label: Version
       description: 'e.g. 93'
@@ -85,14 +89,17 @@ body:
       label: Device
       description: 'e.g. iPhone 6, Pixel 4a'
   - type: input
+    id: device_operatingSystem
     attributes:
       label: Operating System
       description: 'e.g. iOS 8.1, Android 9'
   - type: input
+    id: device_browser
     attributes:
       label: Browser
       description: 'e.g. Google Chrome, Safari'
   - type: input
+    id: device_version
     attributes:
       label: Version
       description: 'e.g. 93'
@@ -106,7 +113,7 @@ body:
         Confirm whether the error is reproducible on the demo: https://snipeitapp.com/demo.
         Include any additional information you can find in `storage/logs` and your webserver's logs.
         Include the output from `php -m` (this should display what modules you have enabled.)
-    render: shell
+      render: shell
   - type: textarea
     attributes:
       label: Additional context
