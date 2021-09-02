@@ -7,6 +7,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\DepreciationReportTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Actionlog;
@@ -29,6 +30,7 @@ use Slack;
 use Str;
 use TCPDF;
 use Validator;
+use Route;
 
 
 /**
@@ -49,10 +51,32 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function index(Request $request, $audit = null)
+    public function index(Request $request, $audit = null) 
     {
 
-        $this->authorize('index', Asset::class);
+        \Log::debug(Route::currentRouteName());
+        
+
+        /**
+         * This looks MAD janky (and it is), but the AssetsController@index does a LOT of heavy lifting throughout the 
+         * app. This bit here just makes sure that someone without permission to view assets doesn't 
+         * end up with priv escalations because they asked for a different endpoint. 
+         * 
+         * Since we never gave the specification for which transformer to use before, it should default 
+         * gracefully to just use the AssetTransformer by default, which shouldn't break anything. 
+         * 
+         * It was either this mess, or repeating ALL of the searching and sorting and filtering code, 
+         * which would have been far worse of a mess. *sad face*  - snipe (Sept 1, 2021)
+         */
+        if (Route::currentRouteName()=='api.depreciation-report.index') {
+            $transformer = 'App\Http\Transformers\DepreciationReportTransformer';
+            $this->authorize('reports.view');
+        } else {
+            $transformer = 'App\Http\Transformers\AssetsTransformer';
+            $this->authorize('index', Asset::class);          
+        }
+        
+       
         $settings = Setting::getSettings();
 
         $allowed_columns = [
@@ -295,8 +319,12 @@ class AssetsController extends Controller
 
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
-        // dd($assets);
-        return (new AssetsTransformer)->transformAssets($assets, $total);
+
+        /**
+         * Here we're just determining which Transformer (via $transformer) to use based on the 
+         * variables we set earlier on in this method - we default to AssetsTransformer.
+         */
+        return (new $transformer)->transformAssets($assets, $total);
     }
 
 

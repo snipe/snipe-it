@@ -903,6 +903,14 @@ Route::group(['prefix' => 'v1','namespace' => 'Api', 'middleware' => 'auth:api']
         [ 'as' => 'api.activity.index', 'uses' => 'ReportsController@index' ]
     );
 
+    Route::get(
+        'reports/depreciation',
+        [ 
+            'as' => 'api.depreciation-report.index', 
+            'uses' => 'AssetsController@index' 
+        ]
+    );
+
     /*--- Kits API ---*/
 
     Route::resource('kits', 'PredefinedKitsController',
