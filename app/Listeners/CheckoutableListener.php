@@ -71,20 +71,27 @@ class CheckoutableListener
         /**
          * Send the appropriate notification
          */
+        $acceptances = CheckoutAcceptance::where('checkoutable_id', $event->checkoutable->id)
+                                        ->where('assigned_to_id', $event->checkedOutTo->id)
+                                        ->get();
 
-
+        foreach($acceptances as $acceptance){
+            if($acceptance->isPending()){
+                $acceptance->delete();
+            }
+        }
         \Log::debug('checked out to a user');
         if(!$event->checkedOutTo->locale){
             \Log::debug('Use default settings locale');
             Notification::locale(Setting::getSettings()->locale)->send(
-                $this->getNotifiables($event), 
+                $this->getNotifiables($event),
                 $this->getCheckinNotification($event)
             );
         } else {
             \Log::debug('Use user locale? I do not think this works as expected yet');
             // \Log::debug(print_r($this->getNotifiables($event), true));
             Notification::send(
-                $this->getNotifiables($event), 
+                $this->getNotifiables($event),
                 $this->getCheckinNotification($event)
             );
         }
