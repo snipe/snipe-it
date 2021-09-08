@@ -82,7 +82,7 @@ class AssetCheckoutController extends Controller
 
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
                 if(request()->input('asset_redirect')=='1') {
-                    return redirect()->route('hardware.view', $assetId)->with('success', trans('admin/hardware/message.checkin.success'));
+                    return redirect()->route('hardware.view', $assetId)->with('success', trans('admin/hardware/message.checkout.success'));
                 }
                 return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
             }
