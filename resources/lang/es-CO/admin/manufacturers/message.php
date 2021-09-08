@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Fabricante inexistente.',
+    'does_not_exist' => 'El fabricante no existe.',
     'assoc_users'	 => 'Este Fabricante está asociado al menos a un modelo y no puede ser eliminado',
 
     'create' => array(

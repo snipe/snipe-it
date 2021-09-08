@@ -9,7 +9,7 @@ return array(
     'asset' => 'aktiv:',
     'asset_name' => 'Aktivnavn:',
     'asset_requested' => 'Aktiver bedt om',
-    'asset_tag' => 'Asset Tag:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Tildelt',
     'best_regards' => 'Med venlig hilsen,',
     'canceled' => 'annulleret:',

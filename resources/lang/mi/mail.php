@@ -9,7 +9,7 @@ return array(
     'asset' => 'Tahua:',
     'asset_name' => 'Ingoa Ahua:',
     'asset_requested' => 'Ka tonohia te taonga',
-    'asset_tag' => 'Tae Tūemi:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Tohua Ki To',
     'best_regards' => 'Ko nga whakaaro pai,',
     'canceled' => 'Kua whakakorehia:',

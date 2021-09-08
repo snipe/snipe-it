@@ -9,7 +9,7 @@ return array(
     'asset' => 'Ang Asset:',
     'asset_name' => 'Ang Pangalan ng Asset:',
     'asset_requested' => 'Ang nirekwest na asset',
-    'asset_tag' => 'Ang Tag ng Asset:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Nakatalaga Sa',
     'best_regards' => 'Lubos na bumabati,',
     'canceled' => 'Nakansela:',

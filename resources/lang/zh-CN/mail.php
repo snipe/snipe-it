@@ -9,7 +9,7 @@ return array(
     'asset' => '资产：',
     'asset_name' => '资产名称：',
     'asset_requested' => '已申请资产',
-    'asset_tag' => '资产标签：',
+    'asset_tag' => '资产标签',
     'assigned_to' => '已分配给',
     'best_regards' => '此致',
     'canceled' => '已取消：',

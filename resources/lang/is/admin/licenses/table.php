@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
+    'assigned_to'   	=> 'Úthlutað til',
     'checkout'   		=> 'In/Out',
     'id'      			=> 'ID',
     'license_email'   	=> 'License Email',
     'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
+    'purchase_date'   	=> 'Innkaups dagsetning',
+    'purchased'   		=> 'Keypt',
     'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'hardware'   		=> 'Vélbúnaður',
+    'serial'   			=> 'Raðnúmer',
+    'title'      		=> 'Leyfi',
 
 );

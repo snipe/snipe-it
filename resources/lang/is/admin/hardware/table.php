@@ -2,24 +2,24 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
+    'asset_tag'   	=> 'Eignamerking',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
+    'book_value'  	=> 'Núvirði',
     'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
+    'checkout_date' => 'Ráðstöfunardagsetning',
+    'checkoutto' 	=> 'Ráðstafað',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Download CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
-    'serial'   		=> 'Serial',
-    'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
+    'location' 		=> 'Staðsetning',
+    'purchase_cost'	=> 'Innkaupsverð',
+    'purchase_date'	=> 'Keypt',
+    'serial'   		=> 'Raðnúmer',
+    'status'   		=> 'Staða',
+    'title'      	=> 'Eign ',
     'image'		=> 'Device Image',
     'days_without_acceptance' => 'Days Without Acceptance',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Mánaðarlegar afskriftir'
 
 );

@@ -9,7 +9,7 @@ return array(
     'asset' => 'Produit:',
     'asset_name' => 'Nom du produit:',
     'asset_requested' => 'Produit demandé',
-    'asset_tag' => 'Code produit:',
+    'asset_tag' => 'Numéro d\'inventaire',
     'assigned_to' => 'Affecté à',
     'best_regards' => 'Cordialement,',
     'canceled' => 'Annulé:',

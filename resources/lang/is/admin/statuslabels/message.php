@@ -23,10 +23,10 @@ return array(
     ),
 
     'help' => array(
-        'undeployable'   => 'These assets cannot be assigned to anyone.',
-        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong>.',
-        'archived'   => 'These assets cannot be checked out, and will only show up in the Archived view. This is useful for retaining information about assets for budgeting/historic purposes but keeping them out of the day-to-day asset list.',
-        'pending'   => 'These assets can not yet be assigned to anyone, often used for items that are out for repair, but are expected to return to circulation.',
+        'undeployable'   => 'Þessum eignum er ekki hægt að úthluta til notenda.',
+        'deployable'   => 'Þessum eignum er hægt að ráðstafa. Þegar þeim er ráðstafað fá þær almenna stöðugildið <i class="fa fa-circle text-blue"></i> <strong>Í notkun</strong>.',
+        'archived'   => 'Þessum eignum er ekki hægt að ráðstafa og þær sjást eingöngu í þar til gerðum lista. Þetta er gagnlegt til að varðveita upplýsingar um eignir sem nýta má við gerð fjárhagsáætlana eða til að halda utan um sögu eigna á sama tíma og þeim er haldið utan við þann eignalista sem unnið er með daglega.',
+        'pending'   => 'Þessum eignum er ekki hægt að úthluta til notenda að svo stöddu. Oft notað fyrir hluti sem eru í viðgerð en er viðbúið að verði teknir aftur í notkun.',
     ),
 
 );

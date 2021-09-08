@@ -142,7 +142,7 @@ return array(
     'saml_slo_label'            => 'SAML Single Log Out',
     'saml_slo'                  => 'Send a LogoutRequest to IdP on Logout',
     'saml_slo_help'             => 'This will cause the user to be first redirected to the IdP on logout. Leave unchecked if the IdP doesn\'t correctly support SP-initiated SAML SLO.',
-    'saml_custom_settings'      => 'SAML Custom Settings',
+    'saml_custom_settings'      => 'SAML egyedi beállítások',
     'saml_custom_settings_help' => 'You can specify additional settings to the onelogin/php-saml library. Use at your own risk.',
     'setting'                   => 'Beállítás',
     'settings'                  => 'Beállítások',

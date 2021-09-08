@@ -9,7 +9,7 @@ return array(
     'asset' => 'Πάγιο:',
     'asset_name' => 'Όνομα του περιουσιακού στοιχείου:',
     'asset_requested' => 'Πάγιο αίτήθηκε',
-    'asset_tag' => 'Ετικέτα παγίων:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Ανατέθηκε στον',
     'best_regards' => 'Τις καλύτερες ευχές,',
     'canceled' => 'Ακυρωμένο:',

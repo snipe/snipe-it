@@ -8,8 +8,9 @@ return [
     'login'                         => 'Nome de registro',
     'login_prompt'                  => 'Faça o Login',
     'forgot_password'               => 'Esqueci minha senha',
+    'ldap_reset_password'           => 'Por favor clique aqui para redefinir sua senha LDAP',
     'remember_me'                   => 'Lembrar-me',
     'username_help_top'                 => 'Digite seu <strong>nome de usuário</strong> para receber um email com um link de redefinição de senha.',
-    'username_help_bottom'          => 'Your username and email address <em>may</em> be the same, but may not be, depending on your configuration. If you cannot remember your username, contact your administrator. <br><br><strong>Usernames without an associated email address will not be emailed a password reset link.</strong> ',
+    'username_help_bottom'          => 'Seu nome de usuário e endereço de e-mail <em> podem </em> ser o mesmo, mas pode não ser, dependendo da sua configuração. Se você não conseguir lembrar seu nome de usuário, entre em contato com seu administrador. <br> <br> <strong> nomes de usuário sem um endereço de e-mail associado não será enviado por e-mail um link de redefinição de senha.</strong> ',
     ];
 

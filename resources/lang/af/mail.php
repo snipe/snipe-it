@@ -9,7 +9,7 @@ return array(
     'asset' => 'bate:',
     'asset_name' => 'Bate Naam:',
     'asset_requested' => 'Bate aangevra',
-    'asset_tag' => 'Bate-tag:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Toevertrou aan',
     'best_regards' => 'Beste wense,',
     'canceled' => 'gekanselleer:',

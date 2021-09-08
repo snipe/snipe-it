@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'A: attribútum nem sikerült feltölteni.',
     'url'                  => 'Az :attribute formátuma érvénytelen.',
     "unique_undeleted"     => "A(z) :attribute egyedinek kell lennie.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

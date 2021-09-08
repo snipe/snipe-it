@@ -9,7 +9,7 @@ return array(
     'asset' => '자산:',
     'asset_name' => '자산명:',
     'asset_requested' => '자산 요청',
-    'asset_tag' => '자산 태그:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => '할당',
     'best_regards' => '감사합니다,',
     'canceled' => '취소됨',

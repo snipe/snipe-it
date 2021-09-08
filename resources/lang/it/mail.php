@@ -9,7 +9,7 @@ return array(
     'asset' => 'Bene:',
     'asset_name' => 'Nome del bene:',
     'asset_requested' => 'Bene richiesto',
-    'asset_tag' => 'Tag del bene:',
+    'asset_tag' => 'Etichetta del bene',
     'assigned_to' => 'Assegnato a',
     'best_regards' => 'Cordiali saluti,',
     'canceled' => 'Cancellato:',
@@ -72,8 +72,8 @@ return array(
     'Accessory_Checkin_Notification' => 'Checkin accessorio avvenuto',
     'Asset_Checkin_Notification' => 'Checkin asset avvenuto',
     'License_Checkin_Notification' => 'Checkin licenza avvenuto',
-    'Expected_Checkin_Report' => 'Expected asset checkin report',
-    'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
+    'Expected_Checkin_Report' => 'Rapporto restituzione attesa del bene',
+    'Expected_Checkin_Notification' => 'Promemoria: scadenza riconsegna :name in avvicinamento',
     'Expected_Checkin_Date' => 'Un asset assegnato a te deve essere ricontrollato il :date',
     'your_assets' => 'Visualizza i tuoi assets'
 );

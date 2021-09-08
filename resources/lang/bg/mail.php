@@ -9,7 +9,7 @@ return array(
     'asset' => 'Актив:',
     'asset_name' => 'Име на актив:',
     'asset_requested' => 'Заявка за актив',
-    'asset_tag' => 'Етикет на актив:',
+    'asset_tag' => 'Етикет на актив',
     'assigned_to' => 'Възложени на',
     'best_regards' => 'С най-добри пожелания.',
     'canceled' => 'Отменено:',

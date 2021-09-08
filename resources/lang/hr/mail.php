@@ -9,7 +9,7 @@ return array(
     'asset' => 'Imovina:',
     'asset_name' => 'Naziv imovine:',
     'asset_requested' => 'Traženo sredstvo',
-    'asset_tag' => 'Oznaka imovine:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Dodijeljena',
     'best_regards' => 'Lijepi Pozdrav,',
     'canceled' => 'otkazano:',

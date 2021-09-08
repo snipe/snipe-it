@@ -9,7 +9,7 @@ return array(
     'asset' => 'ทรัพย์สิน:',
     'asset_name' => 'ชื่อสินทรัพย์:',
     'asset_requested' => 'สินทรัพย์ที่ขอ',
-    'asset_tag' => 'แท็กเนื้อหา:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'ได้รับมอบหมายให้',
     'best_regards' => 'ด้วยความเคารพ,',
     'canceled' => 'ยกเลิก:',

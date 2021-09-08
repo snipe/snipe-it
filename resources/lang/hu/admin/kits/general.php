@@ -2,16 +2,16 @@
 
 return array(
     'about_kits_title'                  => 'Az előredefiniált csomagokról',
-    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
-    'checkout'                          => 'Checkout Kit ',
-    'create_success'                    => 'Kit was successfully created.',
-    'create'                            => 'Create Predefined Kit',
-    'update'                            => 'Update Predefined Kit',
-    'delete_success'                    => 'Kit was successfully deleted.',
-    'update_success'                    => 'Kit was successfully updated.',
-    'none_models'                       => 'There are not enough available assets for :model to checkout. :qty are required. ',
+    'about_kits_text'                   => 'Az előre definiált csomagok lehetővé teszik, hogy egy felhasználó gyorsan ki tudjon adni egy eszközgyűjteményt (eszközök, licencek stb.). Ez akkor lehet hasznos, ha a belépési folyamat sok felhasználó számára egységes, és minden felhasználó ugyanazokat az eszközöket kapja meg.',
+    'checkout'                          => 'Csomag kiadása ',
+    'create_success'                    => 'Csomag sikeresen létrehozva.',
+    'create'                            => 'Előre definiált csomag frissítése',
+    'update'                            => 'Előre definiált csomag frissítése',
+    'delete_success'                    => 'Csomag sikeresen törölve.',
+    'update_success'                    => 'Csomag sikeresen frissítve.',
+    'none_models'                       => 'Nincs elég rendelkezésre álló eszköz a :model kiadáshoz. :qty szükséges. ',
     'none_licenses'                     => 'Nincs elegendő szabad felhasználói hely a :license licenceből a kiadáshoz. További :qty felhasználói helyre van még szükség. ',
-    'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
-    'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
+    'none_consumables'                  => 'Nincs elég szabad egység :consumable-ból a kiadáshoz. :qty szükséges. ',
+    'none_accessory'                    => 'Nem áll rendelkezésre elég egység a :accessory kiadáshoz. :qty szükséges. ',
 
 );

@@ -2,7 +2,7 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
+    'accepted'                  => 'Þú hefur samþykkt þessa eign.',
     'declined'                  => 'You have successfully declined this asset.',
     'bulk_manager_warn'	        => 'Your users have been successfully updated, however your manager entry was not saved because the manager you selected was also in the user list to be edited, and users may not be their own manager. Please select your users again, excluding the manager.',
     'user_exists'               => 'User already exists!',
@@ -35,9 +35,9 @@ return array(
         'delete_has_assets' => 'This user has items assigned and could not be deleted.',
         'unsuspend' => 'There was an issue unsuspending the user. Please try again.',
         'import'    => 'There was an issue importing users. Please try again.',
-        'asset_already_accepted' => 'This asset has already been accepted.',
-        'accept_or_decline' => 'You must either accept or decline this asset.',
-        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
+        'asset_already_accepted' => 'Þessi eign hefur þegar verið samþykkt.',
+        'accept_or_decline' => 'Þú verður annað hvort að samþykkja eða hafna þessari eign.',
+        'incorrect_user_accepted' => 'Eigninni sem þú reyndir að samþykkja var ekki ráðstafað til þín.',
         'ldap_could_not_connect' => 'Could not connect to the LDAP server. Please check your LDAP server configuration in Admin Settings > LDAP/AD <br>Error from LDAP Server:',
         'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in Admin Settings > LDAP/AD<br>Error from LDAP Server: ',
         'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in Admin Settings > LDAP/AD and any Locations that may have additional OUs associated with them. <br>Error from LDAP Server:',

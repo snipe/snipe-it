@@ -9,7 +9,7 @@ return array(
     'asset' => 'Eiendel:',
     'asset_name' => 'Navn:',
     'asset_requested' => 'Eiendel forespurt',
-    'asset_tag' => 'Eiendelsmerke:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Tilordnet til',
     'best_regards' => 'Med vennlig hilsen,',
     'canceled' => 'Avbrutt:',

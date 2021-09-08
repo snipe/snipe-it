@@ -9,7 +9,7 @@ return array(
     'asset' => 'Activo:',
     'asset_name' => 'Nombre del activo:',
     'asset_requested' => 'Activo solicitado',
-    'asset_tag' => 'Etiqueta de activo:',
+    'asset_tag' => 'Etiqueta de activo',
     'assigned_to' => 'Asignado a',
     'best_regards' => 'Cordialmente,',
     'canceled' => 'Cancelado:',

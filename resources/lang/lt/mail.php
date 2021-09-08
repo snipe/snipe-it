@@ -9,7 +9,7 @@ return array(
     'asset' => 'Įranga:',
     'asset_name' => 'Įrangos pavadinimas:',
     'asset_requested' => 'Užklausta įranga',
-    'asset_tag' => 'Įrangos nr:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Priskirtas',
     'best_regards' => 'pagarbiai,',
     'canceled' => 'Atšauktas:',

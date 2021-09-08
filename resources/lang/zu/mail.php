@@ -9,7 +9,7 @@ return array(
     'asset' => 'Impahla:',
     'asset_name' => 'Igama lomhlaba:',
     'asset_requested' => 'Ifa liceliwe',
-    'asset_tag' => 'Ithegi yetekisi:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Kwabiwa Ku',
     'best_regards' => 'Ozithobayo,',
     'canceled' => 'Ikhanseliwe:',

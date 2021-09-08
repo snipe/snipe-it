@@ -9,7 +9,7 @@ return array(
     'asset' => '資產：',
     'asset_name' => '資產名稱：',
     'asset_requested' => '申請資產',
-    'asset_tag' => '資產標籤：',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => '分配給',
     'best_regards' => 'Best regards,',
     'canceled' => '取消：',

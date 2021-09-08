@@ -9,7 +9,7 @@ return array(
     'asset' => 'Sócmhainn:',
     'asset_name' => 'Ainm Sócmhainne:',
     'asset_requested' => 'Iarrtar sócmhainn',
-    'asset_tag' => 'Tag Sócmhainní:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Sannadh Chun',
     'best_regards' => 'Dea-mhéin,',
     'canceled' => 'Ar ceal:',

@@ -14,7 +14,7 @@ return array(
     'alerts_enabled'			=> 'Alerts Enabled',
     'alert_interval'			=> 'Expiring Alerts Threshold (in days)',
     'alert_inv_threshold'		=> 'Inventory Alert Threshold',
-    'allow_user_skin'           => 'Allow user skin',
+    'allow_user_skin'           => 'Erlaube Benutzer Skin',
     'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
     'asset_ids'					=> 'Asset IDs',
     'audit_interval'            => 'Audit Interval',

@@ -9,7 +9,7 @@ return array(
     'asset' => 'Aktīvs:',
     'asset_name' => 'Aktīvu nosaukums:',
     'asset_requested' => 'Aktīvs pieprasīts',
-    'asset_tag' => 'Aktīvu tags:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Piešķirts',
     'best_regards' => 'Ar laba vēlējumiem,',
     'canceled' => 'Atcelts:',

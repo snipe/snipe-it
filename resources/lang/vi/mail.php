@@ -9,7 +9,7 @@ return array(
     'asset' => 'Tài sản:',
     'asset_name' => 'Tên tài sản:',
     'asset_requested' => 'Tài sản được yêu cầu',
-    'asset_tag' => 'Thẻ tài sản:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Cấp phát cho',
     'best_regards' => 'Trân trọng,',
     'canceled' => 'Đã hủy bỏ:',

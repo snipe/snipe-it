@@ -112,7 +112,7 @@
     'image'                 => 'صورة',
     'image_delete'         	=> 'حذف الصورة',
     'image_upload'         	=> 'رفع صورة',
-    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, and svg. Max upload size allowed is :size.',
+    'image_filetypes_help'  => 'أنواع الملفات المقبولة هي jpg، webpp، png، gif، svg. الحد الأقصى المسموح به للتحميل هو :size.',
     'import'         	    => 'استيراد',
     'importing'         	=> 'الاستيراد',
     'importing_help'        => 'يمكنك استيراد الأصول، الملحقات، التراخيص، المكونات، المواد الاستهلاكية، والمستخدمين عبر ملف CSV. <br><br>يجب أن تكون CSV محددة بفواصل وأن يتم تنسيقها مع رؤوس تطابق تلك الموجودة في <a href="https://snipe-it.readme.io/docs/importing" target="_new">عينة CSVs في الوثائق</a>.',
@@ -244,6 +244,6 @@
     'i_decline'             => 'أنا أرفض',
     'sign_tos'              => 'قم بتسجيل الدخول أدناه للإشارة إلى أنك توافق على شروط الخدمة:',
     'clear_signature'       => 'مسح التوقيع',
-    'show_help'             => 'Show help',
-    'hide_help'             => 'Hide help',
+    'show_help'             => 'إظهار المساعدة',
+    'hide_help'             => 'إخفاء المساعدة',
     ];

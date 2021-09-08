@@ -9,7 +9,7 @@ return array(
     'asset' => 'activ:',
     'asset_name' => 'Numele activului:',
     'asset_requested' => 'Activul solicitat',
-    'asset_tag' => 'Eticheta activului:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Atribuit',
     'best_regards' => 'Toate cele bune,',
     'canceled' => 'Anulat:',

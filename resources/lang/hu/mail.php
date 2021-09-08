@@ -9,7 +9,7 @@ return array(
     'asset' => 'Eszköz:',
     'asset_name' => 'Eszköz neve:',
     'asset_requested' => 'Asset requested',
-    'asset_tag' => 'Eszköz azonosító:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Hozzárendelve',
     'best_regards' => 'Üdvözlettel,',
     'canceled' => 'Megszakítva:',

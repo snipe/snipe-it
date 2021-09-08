@@ -9,7 +9,7 @@ return array(
     'asset' => 'Ativo:',
     'asset_name' => 'Nome do Ativo:',
     'asset_requested' => 'Requisição de Ativo',
-    'asset_tag' => 'Etiqueta de Ativo:',
+    'asset_tag' => 'Etiqueta de Ativo',
     'assigned_to' => 'Atribuído a',
     'best_regards' => 'Atenciosamente,',
     'canceled' => 'Cancelado:',
@@ -63,7 +63,7 @@ return array(
     'license_expiring_alert' => 'Há uma :count licença expirando nos próximos :threshold dias. | Existem :count licenças expirand nos próximos :threshold dias.',
     'to_reset' => 'Para fazer reset da senha do :web, preencha este formulário:',
     'type' => 'Tipo',
-    'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
+    'upcoming-audits' => 'Existe um :count ativo que está sendo auditado dentro de :threshold days. There are :count assets que estão sendo enviados para auditoria dentro de :threshold dias.',
     'user' => 'Usuário',
     'username' => 'Nome de Usuário',
     'welcome' => 'Bem-vindo(a), :name',
@@ -74,6 +74,6 @@ return array(
     'License_Checkin_Notification' => 'Licença verificada em',
     'Expected_Checkin_Report' => 'Relatório de check-in de ativos esperado',
     'Expected_Checkin_Notification' => 'Lembrete: :name prazo de devolução aproximando',
-    'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
+    'Expected_Checkin_Date' => 'Um ativo com check-out para você deve ser verificado novamente em :date',
     'your_assets' => 'Ver seus ativos'
 );

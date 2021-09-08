@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'ویژگی: attribute failed to upload.',
     'url'                  => 'شکل ویژگی نامعتبر است.',
     "unique_undeleted"     => "The :attribute must be unique.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

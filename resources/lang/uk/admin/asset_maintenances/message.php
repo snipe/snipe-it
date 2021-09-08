@@ -1,19 +1,19 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Обслуговування активів, що ви шукали, не знайдено!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Ви впевнені, що хочете видалити це обслуговування активів?',
+            'error'   => 'Виникла проблема при видаленні. Будь ласка, спробуйте ще раз.',
+            'success' => 'Обслуговування активів було успішно видалено.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Обслуговування не було створено, будь ласка, спробуйте ще раз.',
+            'success' => 'Обслуговування активів успішно створено.'
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.'
+            'error'   => 'Обслуговування активів не було відредаговано, будь ласка, спробуйте ще раз.',
+            'success' => 'Обслуговування активів успішно змінено.'
         ],
         'asset_maintenance_incomplete' => 'Ще не завершено',
         'warranty'                     => 'Гарантійний',

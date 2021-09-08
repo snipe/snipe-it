@@ -9,7 +9,7 @@ return array(
     'asset' => 'Актив:',
     'asset_name' => 'Хөрөнгийн нэр:',
     'asset_requested' => 'Хөрөнгө хүссэн',
-    'asset_tag' => 'Хөрөнгийн тэмдэг:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Томилогдсон',
     'best_regards' => 'Хамгийн сайн нь,',
     'canceled' => 'Цуцалсан:',

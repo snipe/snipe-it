@@ -9,7 +9,7 @@ return array(
     'asset' => 'Laite:',
     'asset_name' => 'Laitteen nimi:',
     'asset_requested' => 'Pyydetty laite',
-    'asset_tag' => 'Laitetunniste:',
+    'asset_tag' => 'Laitetunniste',
     'assigned_to' => 'Osoitettu',
     'best_regards' => 'Parhain terveisin,',
     'canceled' => 'Peruutettu:',

@@ -9,7 +9,7 @@ return array(
     'asset' => 'נכס:',
     'asset_name' => 'שם הנכס:',
     'asset_requested' => 'הנכס המבוקש',
-    'asset_tag' => 'תג נכס:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'שהוקצה ל',
     'best_regards' => 'כל טוב,',
     'canceled' => 'בּוּטלָה:',

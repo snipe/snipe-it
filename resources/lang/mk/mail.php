@@ -9,7 +9,7 @@ return array(
     'asset' => 'Основно средство:',
     'asset_name' => 'Име на основното средство:',
     'asset_requested' => 'Бараното основно средство',
-    'asset_tag' => 'Код на основното средство:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Задолжен на',
     'best_regards' => 'Со почит,',
     'canceled' => 'Откажано:',

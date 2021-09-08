@@ -9,7 +9,7 @@ return array(
     'asset' => 'Artigo:',
     'asset_name' => 'Nome do Artigo:',
     'asset_requested' => 'Artigo requesitado',
-    'asset_tag' => 'Etiqueta de Artigo:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Atribuído a',
     'best_regards' => 'Atenciosamente',
     'canceled' => 'Cancelado:',

@@ -9,7 +9,7 @@ return array(
     'asset' => 'Ased:',
     'asset_name' => 'Enw Ased:',
     'asset_requested' => 'Gofynnwyd am ased',
-    'asset_tag' => 'Tag Ased:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Wedi Neilltuo i',
     'best_regards' => 'Cofon gorau,',
     'canceled' => 'Wedi canslo:',

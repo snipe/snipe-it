@@ -11,7 +11,7 @@ return array(
         'success' => 'Company updated successfully.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
+        'confirm' => 'Ertu viss um að þú viljir afskrá þetta fyrirtæki?',
         'error'   => 'There was an issue deleting the company. Please try again.',
         'success' => 'The Company was deleted successfully.'
     )

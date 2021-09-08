@@ -112,7 +112,7 @@
     'image'                 => 'Billede',
     'image_delete'         	=> 'Slet billede',
     'image_upload'         	=> 'Upload billede',
-    'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, and svg. Max upload size allowed is :size.',
+    'image_filetypes_help'  => 'Tilladte filtyper er jpg, png, gif, og svg. Maximalt tilladte upload størrelse er :size.',
     'import'         	    => 'Importér',
     'importing'         	=> 'Importerer',
     'importing_help'        => 'Du kan importere assets, tilbehør, licenser, komponenter, forbrugsvarer og brugere via CSV-fil. <br><br>CSV skal være kommasepareret og formateret med overskrifter, der matcher dem i <a href="https://snipe-it.readme.io/docs/importing" target="_new">sample CSV\'er i dokumentationen</a>.',
@@ -244,6 +244,6 @@
     'i_decline'             => 'Jeg afviser',
     'sign_tos'              => 'Bekræft nedenfor for at angive, at du accepterer vilkårene for tjenesten:',
     'clear_signature'       => 'Ryd signatur',
-    'show_help'             => 'Show help',
-    'hide_help'             => 'Hide help',
+    'show_help'             => 'Vis hjælp',
+    'hide_help'             => 'Skjul hjælp',
     ];

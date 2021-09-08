@@ -9,7 +9,7 @@ return array(
     'asset' => 'சொத்து:',
     'asset_name' => 'சொத்து பெயர்:',
     'asset_requested' => 'சொத்து கோரப்பட்டது',
-    'asset_tag' => 'சொத்து குறிச்சொல்:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'ஒதுக்கப்படும்',
     'best_regards' => 'சிறந்த வாழ்த்துக்கள்,',
     'canceled' => 'ரத்து செய்தவர்:',

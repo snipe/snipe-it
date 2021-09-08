@@ -8,7 +8,7 @@ return array(
     'custom_format'             => 'Custom regex format...',
     'encrypt_field'      	        => 'Encrypt the value of this field in the database',
     'encrypt_field_help'      => 'WARNING: Encrypting a field makes it unsearchable.',
-    'encrypted'      	        => 'Encrypted',
+    'encrypted'      	        => 'Dulkóðað',
     'fieldset'      	        => 'Fieldset',
     'qty_fields'      	      => 'Qty Fields',
     'fieldsets'      	        => 'Fieldsets',

@@ -9,7 +9,7 @@ return array(
     'asset' => 'Vahend:',
     'asset_name' => 'Vahendi nimi:',
     'asset_requested' => 'Vara nõutud',
-    'asset_tag' => 'Vara silt:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Määratud',
     'best_regards' => 'Parimate soovidega,',
     'canceled' => 'Tühistatud:',

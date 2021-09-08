@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
+    'does_not_exist' => 'Þessi fyrningarflokkur er ekki til.',
     'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Fyrningarflokkurinn var ekki búinn til. Vinsamlegast reyndu aftur. :(',
+        'success' => 'Fyrningarflokkurinn var búinn til. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Fyrningarflokkurinn var ekki uppfærður. Vinsamlegast reyndu aftur',
+        'success' => 'Fyrningarflokkurinn var uppfærður.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Ertu viss um að þú viljir eyða þessum fyrningarflokki?',
+        'error'   => 'Það kom upp vandamál þegar reynt var að eyða fyrningarflokknum. Vinsamlegast reyndu aftur.',
+        'success' => 'Fyrningarflokknum var eytt.'
     )
 
 );

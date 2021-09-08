@@ -9,7 +9,7 @@ return array(
     'asset' => 'Asset:',
     'asset_name' => 'Asset Name:',
     'asset_requested' => 'Asset requested',
-    'asset_tag' => 'Asset Tag:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Assigned To',
     'best_regards' => 'Best regards,',
     'canceled' => 'Canceled:',

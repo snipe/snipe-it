@@ -9,7 +9,7 @@ return array(
     'asset' => 'Aset:',
     'asset_name' => 'Nama Aset:',
     'asset_requested' => 'Aset diminta',
-    'asset_tag' => 'Tag Aset:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Ditugaskan untuk',
     'best_regards' => 'Selamat sejahtera,',
     'canceled' => 'Dibatalkan:',

@@ -9,7 +9,7 @@ return array(
     'asset' => 'Majetek:',
     'asset_name' => 'Název majetku:',
     'asset_requested' => 'Požadovaný majetek',
-    'asset_tag' => 'Označení majetku:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Přiděleno',
     'best_regards' => 'S pozdravem,',
     'canceled' => 'Zrušeno:',

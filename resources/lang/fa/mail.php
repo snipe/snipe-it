@@ -9,7 +9,7 @@ return array(
     'asset' => 'دارایی:',
     'asset_name' => 'نام دارایی',
     'asset_requested' => 'دارایی درخواست شد',
-    'asset_tag' => 'برچسب دارایی:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'اختصاص یافته به',
     'best_regards' => 'با احترام،',
     'canceled' => 'لغو شد:',
