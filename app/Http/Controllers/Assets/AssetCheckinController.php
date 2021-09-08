@@ -116,6 +116,9 @@ class AssetCheckinController extends Controller
             if ((isset($user)) && ($backto == 'user')) {
                 return redirect()->route('users.show', $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
             }
+            if(request()->input('asset_redirect')=='1') {
+                return redirect()->route('hardware.view', $assetId)->with('success', trans('admin/hardware/message.checkin.success'));
+            }
 
             return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkin.success'));
         }

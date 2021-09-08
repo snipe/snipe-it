@@ -71,7 +71,13 @@
                     @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required'=>'true'])
 
 
-
+                    <!-- Redirect to Asset Checkbox-->
+                        <div class="form-group">
+                            {{ Form::label('asset_redirect', trans('admin/hardware/form.asset_redirect'), array ('class' => 'col-md-3 control-label')) }}
+                            <div class="col-md-8">
+                                {{ Form::checkbox('asset_redirect', '1', false) }}
+                            </div>
+                        </div>
                     <!-- Checkout/Checkin Date -->
                         <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
                             {{ Form::label('checkout_at', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
