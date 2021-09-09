@@ -20,6 +20,9 @@ function set_db($uri) {
   file_put_contents('./.env', 'DB_USERNAME=' . parse_url($uri, PHP_URL_USER). PHP_EOL, FILE_APPEND);
   file_put_contents('./.env', 'DB_PASSWORD=' . parse_url($uri, PHP_URL_PASS). PHP_EOL, FILE_APPEND);
   file_put_contents('./.env', 'DB_DATABASE=' . ltrim(parse_url($uri, PHP_URL_PATH), '/'). PHP_EOL, FILE_APPEND);
+  file_put_contents('./.env', 'DB_PREFIX=' . 'null' . PHP_EOL, FILE_APPEND);
+  file_put_contents('./.env', 'DB_DUMP_PATH=' . 'null' . PHP_EOL, FILE_APPEND);
+
 }
 
 // If Heroku Redis is setup, let's get it working.

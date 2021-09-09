@@ -7,15 +7,19 @@
     ],
     "website": "https://snipeitapp.com/",
     "repository": "https://github.com/snipe/snipe-it",
-    "logo": "https://snipeitapp.com/img/logos/snipe-it-logo-xs.png",
+    "logo": "https://pbs.twimg.com/profile_images/976748875733020672/K-HnZCCK_400x400.jpg",
     "success_url": "/setup",
     "env": {
       "APP_ENV": {
-        "description": "Symfony environment mode.",
+        "description": "Symfony environment mode. Unless developing the application, this should be production.",
         "value": "production"
       },
+      "APP_DEBUG": {
+        "description": "Symfony debug mode. Unless developing the application or actively debugging a problem, this should be set to false.",
+        "value": "false"
+      },
       "APP_KEY": {
-        "description": "A secret key for verifying the integrity of signed cookies. (https://coderstoolbox.online/toolbox/generate-symfony-secret)",
+        "description": "A secret key for verifying the integrity of signed cookies. (See either https://snipe-it.readme.io/docs/install-dependencies or generate at https://coderstoolbox.online/toolbox/generate-symfony-secret)",
         "value": ""
       },
       "APP_URL": {
@@ -30,84 +34,88 @@
         "description": "Which language do you want to use for your install? (https://snipe-it.readme.io/docs/configuration#setting-a-language)",
         "value": "en"
       },
+      "MAX_RESULTS": {
+        "description": "The maximum number of search results that can be returned at one time.",
+        "value": "500"
+      },
       "MAIL_DRIVER": {
-        "description": "",
+        "description": "Mail driver - Generally SMTP on Heroku - https://snipe-it.readme.io/docs/configuration#required-outgoing-mail-settings",
         "value": "smtp"
       },
       "MAIL_HOST": {
-        "description": "",
+        "description": "SMTP Server Hostname",
         "value": "smtp.your.domain.name"
       },
       "MAIL_PORT": {
-        "description": "",
+        "description": "SMTP Server Port",
         "value": "25"
       },
       "MAIL_USERNAME": {
-        "description": "",
+        "description": "SMTP Server Username",
         "value": "YOURUSERNAME"
       },
       "MAIL_PASSWORD": {
-        "description": "",
+        "description": "SMTP Server Password",
         "value": "YOURPASSWORD"
       },
       "MAIL_ENCRYPTION": {
-        "description": "",
+        "description": "Encryption protocol for email sending.",
         "value": "null"
       },
       "MAIL_FROM_ADDR": {
-        "description": "",
-        "value": "your@domain.name"
+        "description": "Email from address",
+        "value": "no-reply@domain.name"
       },
       "MAIL_FROM_NAME": {
-        "description": "",
+        "description": "Email from Name",
         "value": "Snipe-IT"
       },
       "MAIL_REPLYTO_ADDR": {
-        "description": "",
+        "description": "Email Reply-To address",
         "value": "your@domain.name"
       },
       "MAIL_REPLYTO_NAME": {
-        "description": "",
+        "description": "Email Reply-To Name",
         "value": "Snipe-IT"
       },
       "MAIL_AUTO_EMBED": {
-        "description": "",
+        "description": "Whether or not to embed images in emails (via CID or base64) versus linking to them.",
         "value": "true"
       },
       "MAIL_AUTO_EMBED_METHOD": {
-        "description": "",
+        "description": "Method that should be used for attaching inline images.",
         "value": "base64"
       },
       "SESSION_LIFETIME": {
-        "description": "",
+        "description": "Specify the time in minutes that the session should remain valid.",
         "value": "12000"
       },
       "EXPIRE_ON_CLOSE": {
-        "description": "",
+        "description": "Specify whether or not the logged in session should be expired when the user closes their browser window.",
         "value": "false"
       },
       "ENCRYPT": {
-        "description": "",
-        "value": "false"
+        "description": "Specify whether you wish to use encrypted cookies for your Snipe-IT sessions.",
+        "value": "true"
       },
       "COOKIE_NAME": {
-        "description": "",
+        "description": "The name of the cookie set by Snipe-IT for session management.",
         "value": "snipeit_session"
       },
       "COOKIE_DOMAIN": {
-        "description": "",
+        "description": "The domain name that the session cookie should be sent for.",
         "value": "your-app-name.herokuapp.com"
       },
       "SECURE_COOKIES": {
-        "description": "",
-        "value": "false"
+        "description": "Should cookies only be sent for HTTPS connections? Generally true on Heroku.",
+        "value": "true"
       },
       "LOGIN_MAX_ATTEMPTS": {
-        "description": "",
+        "description": "The maximum number of failed attempts allowed before the user is throttled.",
         "value": "5"
       },
       "LOGIN_LOCKOUT_DURATION": {
-        "description": "",
+        "description": "The duration (in seconds) that the user should be blocked from attempting to authenticate again.",
         "value": "60"
       },
       "APP_LOG": {
@@ -115,19 +123,19 @@
         "value": "errorlog"
       },
       "ALLOW_IFRAMING": {
-        "description": "",
+        "description": "Allow Snipe-IT to be loaded using an iFrame?",
         "value": "false"
       },
       "GOOGLE_MAPS_API": {
-        "description": "",
-        "value": ""
+        "description": "Include your Google Maps API key here if you'd like Snipe-IT to load maps from Google on your locations and suppliers pages.",
+        "required": false
       },
       "BACKUP_ENV": {
-        "description": "",
+        "description": "Set this to true if you wish to backup your .env file in your Admin > Backups process.",
         "value": "true"
       },
       "ENABLE_HSTS": {
-        "description": "",
+        "description": "Whether or not to send the HSTS security policy header.",
         "value": "false"
       }
     },
