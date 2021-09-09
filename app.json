@@ -11,15 +11,15 @@
     "success_url": "/setup",
     "env": {
       "APP_ENV": {
-        "description": "Symfony environment mode. Unless developing the application, this should be production.",
+        "description": "Laravel environment mode. Unless developing the application, this should be production.",
         "value": "production"
       },
       "APP_DEBUG": {
-        "description": "Symfony debug mode. Unless developing the application or actively debugging a problem, this should be set to false.",
+        "description": "Laravel debug mode. Unless developing the application or actively debugging a problem, this should be set to false.",
         "value": "false"
       },
       "APP_KEY": {
-        "description": "A secret key for verifying the integrity of signed cookies. (See either https://snipe-it.readme.io/docs/install-dependencies or generate at https://coderstoolbox.online/toolbox/generate-symfony-secret)",
+        "description": "A secret key for verifying the integrity of signed cookies. (See either https://snipe-it.readme.io/docs/generate-your-app-key or generate at https://coderstoolbox.online/toolbox/generate-symfony-secret)",
         "value": ""
       },
       "APP_URL": {
