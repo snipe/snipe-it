@@ -57,6 +57,13 @@ class CategoryPresenter extends Presenter
                 "visible" => false,
                 "formatter" => 'trueFalseFormatter',
             ],[
+                "field" => "use_default_eula",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/categories/general.use_default_eula_column'),
+                "visible" => false,
+                "formatter" => 'trueFalseFormatter',
+            ],[
                 "field" => "checkin_email",
                 "searchable" => false,
                 "sortable" => true,
