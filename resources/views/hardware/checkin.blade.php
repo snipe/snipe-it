@@ -110,6 +110,21 @@
                     <div class="box-footer">
                       <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
                       <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
+                      <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default">Checkin</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span class="caret"></span>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Go to Asset </a></li>
+                          <li><a href="#">Go to User </a></li>
+                          <li><a href="#">Go to Location </a></li>
+                          <li><a href="#">Go to All Assets </a></li>
+
+                        </ul>
+                      </div>
+
                     </div>
                   </form>
           </div> <!--/.col-md-12-->
