@@ -29,6 +29,7 @@ class CategoriesTransformer
                 'image' =>   ($category->image) ? Storage::disk('public')->url('categories/'.e($category->image)) : null,
                 'category_type' => ucwords(e($category->category_type)),
                 'has_eula' => ($category->getEula() ? true : false),
+                'use_default_eula' => ($category->use_default_eula=='1' ? true : false),
                 'eula' => ($category->getEula()),
                 'checkin_email' => ($category->checkin_email =='1'),
                 'require_acceptance' => ($category->require_acceptance == '1'),
