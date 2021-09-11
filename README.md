@@ -19,6 +19,8 @@ For instructions on installing and configuring Snipe-IT on your server, check ou
 
 If you're having trouble with the installation, please check the [Common Issues](https://snipe-it.readme.io/docs/common-issues) and [Getting Help](https://snipe-it.readme.io/docs/getting-help) documentation, and search this repository's open *and* closed issues for help.
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 -----
 ### User's Manual
 For help using Snipe-IT, check out the [user's manual](https://snipe-it.readme.io/docs/overview).
