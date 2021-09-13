@@ -122,7 +122,7 @@
             </tr>
         </thead>
 		@php
-        	$counter = 1;;
+        	$counter = 1;
     	@endphp
     	
     	@foreach ($assets as $asset)
