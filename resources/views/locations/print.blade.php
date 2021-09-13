@@ -122,11 +122,15 @@
             </tr>
         </thead>
 		@php
-        	$counter = 1;
+        	$counter = 1;;
     	@endphp
     	
     	@foreach ($assets as $asset)
-
+            @php
+                if($snipeSettings->show_archived_in_list != 1 && $asset->assetstatus->name === 'Archived'){
+                    continue;
+                }
+            @endphp
         <tr>
         <td>{{ $counter }}</td>
         <td>{{ $asset->asset_tag }}</td>
