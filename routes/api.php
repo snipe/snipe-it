@@ -467,7 +467,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
       }); 
 
 
-        Route::resource('assets', 
+        Route::resource('hardware', 
         Api\AssetsController::class,
         ['names' => 
             [

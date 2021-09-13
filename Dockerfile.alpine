@@ -25,6 +25,8 @@ RUN  apk add --no-cache \
         php7-session \
         php7-dom \
         php7-xmlwriter \
+        php7-xmlreader \
+        php7-sodium \
         curl \
         wget \
         vim \
