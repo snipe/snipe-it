@@ -231,7 +231,7 @@
                         {{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}
                     @endif
                 </td>
-                    <td>{{ $consumable->category->name }}</td>
+                    <td>{{ ($consumable->category) ? $consumable->category->name : ' invalid/deleted category' }} </td>
                     <td>{{  $consumable->assetlog->first()->created_at }}</td>
                 </tr>
                 @php
