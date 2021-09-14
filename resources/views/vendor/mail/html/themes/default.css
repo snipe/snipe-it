@@ -197,6 +197,10 @@ img {
     margin: 0;
 }
 
+.bulk td {
+    text-align: center;
+}
+
 .content-cell {
     padding: 35px;
 }

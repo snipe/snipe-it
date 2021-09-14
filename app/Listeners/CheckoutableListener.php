@@ -10,6 +10,7 @@ use App\Models\LicenseSeat;
 use App\Models\Recipients\AdminRecipient;
 use App\Models\Setting;
 use App\Models\User;
+use App\Notifications\BulkCheckoutAssetNotification;
 use App\Notifications\CheckinAccessoryNotification;
 use App\Notifications\CheckinAssetNotification;
 use App\Notifications\CheckinLicenseNotification;
@@ -20,6 +21,7 @@ use App\Notifications\CheckoutConsumableNotification;
 use App\Notifications\CheckoutLicenseNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
 use Illuminate\Support\Facades\Notification;
+use mysql_xdevapi\Exception;
 
 class CheckoutableListener
 {
@@ -31,24 +33,25 @@ class CheckoutableListener
         /**
          * When the item wasn't checked out to a user, we can't send notifications
          */
-        if(! $event->checkedOutTo instanceof User) {
+        if(! $event->checkedOutTo instanceof User || ($event->isIndividual && $event->isBulkCheckoutEmail)) {
             return;
         }
 
         /**
          * Make a checkout acceptance and attach it in the notification
          */
-        $acceptance = $this->getCheckoutAcceptance($event);       
+        $isBulkCheckoutEmail = $this->isBulkCheckoutEmail($event);
+        $acceptance = $this->getCheckoutAcceptance($event, $isBulkCheckoutEmail);
 
         if(!$event->checkedOutTo->locale){
             Notification::locale(Setting::getSettings()->locale)->send(
-                $this->getNotifiables($event), 
-                $this->getCheckoutNotification($event, $acceptance)
+                $this->getNotifiables($event),
+                $this->getCheckoutNotification($event, $acceptance, $isBulkCheckoutEmail)
             );
         } else {
             Notification::send(
-                $this->getNotifiables($event), 
-                $this->getCheckoutNotification($event, $acceptance)
+                $this->getNotifiables($event),
+                $this->getCheckoutNotification($event, $acceptance, $isBulkCheckoutEmail)
             );
         }
     }
@@ -95,24 +98,41 @@ class CheckoutableListener
                 $this->getCheckinNotification($event)
             );
         }
-    }      
+    }
+
+    private function getAssetAcceptance($asset, $checkedOutTo) {
+        if (!$asset->requireAcceptance()) {
+            return null;
+        }
+
+        $acceptance = new CheckoutAcceptance;
+        $acceptance->checkoutable()->associate($asset);
+        $acceptance->assignedTo()->associate($checkedOutTo);
+        $acceptance->save();
+
+        return $acceptance;
+    }
 
     /**
      * Generates a checkout acceptance
      * @param  Event $event
      * @return mixed
      */
-    private function getCheckoutAcceptance($event) {
-        if (!$event->checkoutable->requireAcceptance()) {
+    private function getCheckoutAcceptance($event, $isBulkCheckoutEmail) {
+        if ($isBulkCheckoutEmail) {
             return null;
         }
 
-        $acceptance = new CheckoutAcceptance;
-        $acceptance->checkoutable()->associate($event->checkoutable);
-        $acceptance->assignedTo()->associate($event->checkedOutTo);
-        $acceptance->save();
+        return $this->getAssetAcceptance($event->checkoutable, $event->checkedOutTo);
+    }
 
-        return $acceptance;      
+    /**
+     * @param Event $event
+     * @return boolean
+     */
+    private function isBulkCheckoutEmail($event)
+    {
+        return $event->isBulkCheckoutEmail;
     }
 
     /**
@@ -176,25 +196,30 @@ class CheckoutableListener
      * @param  CheckoutAcceptance $acceptance 
      * @return Notification
      */
-    private function getCheckoutNotification($event, $acceptance) {
+    private function getCheckoutNotification($event, $acceptance, $isBulkCheckoutEmail) {
         $notificationClass = null;
-
-        switch (get_class($event->checkoutable)) {
-            case Accessory::class:
-                $notificationClass = CheckoutAccessoryNotification::class;
-                break;
-            case Asset::class:
-                $notificationClass = CheckoutAssetNotification::class;
-                break;
-            case Consumable::class:
-                $notificationClass = CheckoutConsumableNotification::class;
-                break;    
-            case LicenseSeat::class:
-                $notificationClass = CheckoutLicenseSeatNotification::class;
-                break;                
+        $checkOutDate = isset($event->dates) ? $event->dates["checkout"] : null;
+        $checkInDate = isset($event->dates) ? $event->dates["checkin"] : null;
+        if ($isBulkCheckoutEmail) {
+            $notificationClass = BulkCheckoutAssetNotification::class;
+        }else {
+            switch (get_class($event->checkoutable)) {
+                case Accessory::class:
+                    $notificationClass = CheckoutAccessoryNotification::class;
+                    break;
+                case Asset::class:
+                    $notificationClass = CheckoutAssetNotification::class;
+                    break;
+                case Consumable::class:
+                    $notificationClass = CheckoutConsumableNotification::class;
+                    break;
+                case LicenseSeat::class:
+                    $notificationClass = CheckoutLicenseSeatNotification::class;
+                    break;
+            }
         }
 
-        return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
+        return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note, $checkOutDate, $checkInDate);
     }
 
     /**
@@ -207,7 +232,7 @@ class CheckoutableListener
         $events->listen(
             'App\Events\CheckoutableCheckedIn',
             'App\Listeners\CheckoutableListener@onCheckedIn'
-        ); 
+        );
 
         $events->listen(
             'App\Events\CheckoutableCheckedOut',

@@ -271,11 +271,14 @@ class Asset extends Depreciable
      * @param Carbon $expected_checkin
      * @param string $note
      * @param null $name
+     * @param null $location
+     * @param bool $isBulkCheckoutEmail
+     * @param $logId
      * @return bool
      * @since [v3.0]
      * @return boolean
      */
-    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null, $location = null)
+    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null, $location = null, $isBulkCheckoutEmail = false, &$logId = null)
     {
         if (!$target) {
             return false;
@@ -309,6 +312,11 @@ class Asset extends Depreciable
         }
 
         if ($this->save()) {
+            $log = event(new CheckoutableCheckedOut($this, $target, Auth::user(), $note, $isBulkCheckoutEmail));
+
+            if($isBulkCheckoutEmail) {
+                $logId = $log[0]->id;
+            }
             if (is_integer($admin)){
                 $checkedOutBy = User::findOrFail($admin);
             } elseif (get_class($admin) === 'App\Models\User') {
@@ -843,7 +851,7 @@ class Asset extends Depreciable
     public function getEula()
     {
         $Parsedown = new \Parsedown();
-        
+
         if (($this->model) && ($this->model->category)) {
             if ($this->model->category->eula_text) {
                 return $Parsedown->text(e($this->model->category->eula_text));
