@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 * Custom Fields Routes
 */
 
-Route::group(['prefix' => 'fields', 'middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get(
         'required/{fieldset_id}/{field_id}',
@@ -40,7 +40,7 @@ Route::group(['prefix' => 'fields', 'middleware' => ['auth']], function () {
             CustomFieldsetsController::class, 
             'associate'
         ]
-    )->name('fields.associate');
+    )->name('fieldsets.associate');
 
     Route::resource('fieldsets', CustomFieldsetsController::class, [
         'parameters' => ['fieldset' => 'field_id', 'field' => 'field_id'],
