@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Assets;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
@@ -81,10 +82,27 @@ class AssetCheckoutController extends Controller
             }
 
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $request->get('name'))) {
-                if(request()->input('asset_redirect')=='1') {
-                    return redirect()->route('hardware.view', $assetId)->with('success', trans('admin/hardware/message.checkout.success'));
+                //Stores the redirect option chosen for the rest of the session
+                Session::put('value',request()->input('asset_redirect'));
+               $redirect_option = session::get('value');
+
+                if($redirect_option=='0') {
+                    return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
                 }
-                return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
+                if($redirect_option=='1' || $redirect_option=='2' ) {
+                    if ($request->assigned_user != null) {
+                        return redirect()->route('users.show', $request->assigned_user)->with('success', trans('admin/hardware/message.checkout.success'));
+                    }
+                    if ($request->assigned_location != null) {
+
+                        return redirect()->route('locations.show', $request->assigned_location)->with('success', trans('admin/hardware/message.checkout.success'));
+                    }
+                }
+
+            }
+                if($redirect_option=='3') {
+                    return redirect()->route('hardware.view', $assetId)->with('success', trans('admin/hardware/message.checkout.success'));
+
             }
 
             // Redirect to the asset management page with error
@@ -94,5 +112,8 @@ class AssetCheckoutController extends Controller
         } catch (CheckoutNotAllowed $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+   static public function getRedirectOption() {
+        return Session::get('value');
     }
 }

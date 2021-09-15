@@ -141,6 +141,14 @@
                     <div class="box-footer">
                         <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
                         <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Form::select('asset_redirect', $asset_redirect=['Go to All Assets', 'Go to User', 'Go to Location','Go to Asset' ]),App\Http\Controllers\Assets\AssetCheckoutController::getRedirectOption() }}
+                            </button>
+
+                        </div>
+
+
                     </div>
                 </form>
             </div>
