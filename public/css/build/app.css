@@ -861,13 +861,10 @@ th.css-accessory > .th-inner::before {
   justify-content: space-between !important;
   margin-bottom: 1.5px;
 }
-.bootstrap-table .fixed-table-container .table tbody tr .card-view span:first-child {
-  text-align: left;
+.bootstrap-table .fixed-table-container .table tbody tr .card-view .img-responsive {
+  float: right;
 }
 .bootstrap-table .fixed-table-container .table tbody tr .card-view span:last-child {
   text-align: right;
-}
-.bootstrap-table .fixed-table-container .table tbody tr .card-view .img-responsive {
-  float: right;
 }
 
