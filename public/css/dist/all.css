@@ -18118,6 +18118,13 @@ th.css-accessory > .th-inner::before {
 .form-group.has-error label {
   color: #a94442;
 }
+.bootstrap-table .fixed-table-container .table tbody tr .card-view span:first-child {
+  text-align: left;
+}
+.bootstrap-table .fixed-table-container .table tbody tr .card-view span:last-child {
+  text-align: right;
+  float: left;
+}
 
 
 .select2-container {
@@ -19093,5 +19100,12 @@ th.css-accessory > .th-inner::before {
 }
 .form-group.has-error label {
   color: #a94442;
+}
+.bootstrap-table .fixed-table-container .table tbody tr .card-view span:first-child {
+  text-align: left;
+}
+.bootstrap-table .fixed-table-container .table tbody tr .card-view span:last-child {
+  text-align: right;
+  float: left;
 }
 
