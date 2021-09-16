@@ -564,19 +564,24 @@ th.css-accessory > .th-inner::before
 .form-group.has-error label {
   color: #a94442;
 }
-bootstrap-table .fixed-table-container .table tbody tr .card-view  {
-   display: flex;
-   justify-content: space-between;
-   margin-bottom: 1.5px;
- }
+
+//organizies the bootstrap tables for mobile
+.bootstrap-table .fixed-table-container .table tbody tr .card-view {
+  justify-content: space-between !important;
+  margin-bottom:1.5px;
+}
+.bootstrap-table .fixed-table-container .table tbody tr .card-view .img-responsive{
+  float:right;
+}
 .bootstrap-table .fixed-table-container .table tbody tr .card-view span:first-child{
   text-align:left;
 }
 .bootstrap-table .fixed-table-container .table tbody tr .card-view span:last-child{
   text-align: right;
 }
-bootstrap-table .fixed-table-container .table tbody tr .card-view nobr {
-  display: flex;
-}
+
+
+
+
 
 
