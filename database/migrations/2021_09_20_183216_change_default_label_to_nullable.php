@@ -16,12 +16,12 @@ class ChangeDefaultLabelToNullable extends Migration
      */
     public function up()
     {
-        Schema::table('nullable', function (Blueprint $table) {
-            Schema::table('status_labels', function (Blueprint $table) {
-                $table->boolean('default_label')->nullable()->default(0);
-                $table->boolean('show_in_nav')->nullable()->default(0);
-            });
+
+        Schema::table('status_labels', function (Blueprint $table) {
+            $table->boolean('default_label')->nullable()->default(0)->change();
+            $table->boolean('show_in_nav')->nullable()->default(0)->change();
         });
+
     }
 
     /**
@@ -31,8 +31,6 @@ class ChangeDefaultLabelToNullable extends Migration
      */
     public function down()
     {
-        Schema::table('nullable', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }
