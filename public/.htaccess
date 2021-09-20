@@ -5,6 +5,9 @@
 
     RewriteEngine On
 
+    # Needed for https://letsencrypt.org/ certificates.
+    RewriteRule ^\.well-known/acme-challenge/ - [END]
+
     # Uncomment these two lines to force SSL redirect in Apache
     # RewriteCond %{HTTPS} off
     # RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
