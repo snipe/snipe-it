@@ -2378,6 +2378,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "vapier",
+      "name": "Mike Frysinger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/176950?v=4",
+      "profile": "https://wh0rd.org/",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
