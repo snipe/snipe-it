@@ -14,7 +14,7 @@ class AddDefaultFlagOnStatuslabels extends Migration
     public function up()
     {
         Schema::table('status_labels', function (Blueprint $table) {
-            $table->boolean('default_label')->default(0);
+            $table->boolean('default_label')->nullable()->default(0);
         });
     }
 
