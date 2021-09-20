@@ -71,13 +71,6 @@
                     @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required'=>'true'])
 
 
-                    <!-- Redirect to Asset Checkbox-->
-                        <div class="form-group">
-                            {{ Form::label('asset_redirect', trans('admin/hardware/form.asset_redirect'), array ('class' => 'col-md-3 control-label')) }}
-                            <div class="col-md-8">
-                                {{ Form::checkbox('asset_redirect', '1', false) }}
-                            </div>
-                        </div>
                     <!-- Checkout/Checkin Date -->
                         <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
                             {{ Form::label('checkout_at', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
@@ -143,7 +136,7 @@
                         <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
                         <div class="btn-group pull-right">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Form::select('asset_redirect', $asset_redirect=['Go to All Assets', 'Go to User', 'Go to Location','Go to Asset' ]),App\Http\Controllers\Assets\AssetCheckoutController::getRedirectOption() }}
+                                {{ Form::select('asset_redirect', $asset_redirect=['Go to All Assets', 'Go to User', 'Go to Location','Go to Asset' ],App\Http\Controllers\Assets\AssetCheckoutController::getRedirectOption())}}
                             </button>
 
                         </div>

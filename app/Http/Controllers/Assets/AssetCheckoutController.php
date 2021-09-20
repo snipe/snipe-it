@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Assets;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
-use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Models\Asset;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AssetCheckoutController extends Controller
 {
@@ -114,6 +114,8 @@ class AssetCheckoutController extends Controller
         }
     }
    static public function getRedirectOption() {
-        return Session::get('value');
+        $option= Session::get('value');
+
+        return $option;
     }
 }

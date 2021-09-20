@@ -74,13 +74,6 @@
                     </div>
 
                   @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id', 'help_text' => ($asset->defaultLoc) ? 'You can choose to check this asset in to a location other than the default location of '.$asset->defaultLoc->name.' if one is set.' : null])
-                  <!-- Redirect to Asset Checkbox-->
-                    <div class="form-group">
-                      {{ Form::label('asset_redirect', trans('admin/hardware/form.asset_redirect'), array ('class' => 'col-md-3 control-label')) }}
-                      <div class="col-md-8">
-                        {{ Form::checkbox('asset_redirect', '1', false) }}
-                      </div>
-                    </div>
                   <!-- Checkout/Checkin Date -->
                     <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">
                       {{ Form::label('checkin_at', trans('admin/hardware/form.checkin_date'), array('class' => 'col-md-3 control-label')) }}
@@ -111,18 +104,10 @@
                       <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
                       <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
                       <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-default">Checkin</button>
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <span class="caret"></span>
-                          <span class="sr-only">Toggle Dropdown</span>
+                          {{ Form::select('asset_redirect', $asset_redirect=['Go to All Assets', 'Go to Location','Go to Asset' ],App\Http\Controllers\Assets\AssetCheckinController::getRedirectOption())}}
                         </button>
-                        <ul class="dropdown-menu">
-                          <li><a href="#">Go to Asset </a></li>
-                          <li><a href="#">Go to User </a></li>
-                          <li><a href="#">Go to Location </a></li>
-                          <li><a href="#">Go to All Assets </a></li>
 
-                        </ul>
                       </div>
 
                     </div>

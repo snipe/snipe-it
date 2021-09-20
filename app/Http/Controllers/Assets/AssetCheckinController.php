@@ -9,6 +9,7 @@ use App\Http\Requests\AssetCheckinRequest;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 
 class AssetCheckinController extends Controller
@@ -113,16 +114,30 @@ class AssetCheckinController extends Controller
         if ($asset->save()) {
             event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
 
-            if ((isset($user)) && ($backto == 'user')) {
-                return redirect()->route('users.show', $user->id)->with('success', trans('admin/hardware/message.checkin.success'));
-            }
-            if(request()->input('asset_redirect')=='1') {
-                return redirect()->route('hardware.view', $assetId)->with('success', trans('admin/hardware/message.checkin.success'));
-            }
+            //Stores the redirect option chosen for the rest of the session
+            Session::put('value', request()->input('asset_redirect'));
+            $redirect_option = session::get('value');
 
-            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkin.success'));
+            if($redirect_option == '0') {
+                return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.checkout.success'));
+            }
+            if($redirect_option == '1') {
+
+                if($asset->location_id != null) {
+
+                    return redirect()->route('locations.show', $asset->location_id)->with('success', trans('admin/hardware/message.checkout.success'));
+                }
+            }
+            if($redirect_option == '2') {
+                return redirect()->route('hardware.view', $assetId)->with('success', trans('admin/hardware/message.checkout.success'));
+            }
         }
         // Redirect to the asset management page with error
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.error').$asset->getErrors());
+    }
+    static public function getRedirectOption() {
+        $option= Session::get('value');
+
+        return $option;
     }
 }
