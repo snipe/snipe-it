@@ -18128,6 +18128,11 @@ th.css-accessory > .th-inner::before {
 .bootstrap-table .fixed-table-container .table tbody tr .card-view span:last-child {
   text-align: right;
 }
+@media (max-width: 767px) {
+  .main-sidebar {
+    padding-top: 160px;
+  }
+}
 
 
 .select2-container {
@@ -19113,5 +19118,10 @@ th.css-accessory > .th-inner::before {
 }
 .bootstrap-table .fixed-table-container .table tbody tr .card-view span:last-child {
   text-align: right;
+}
+@media (max-width: 767px) {
+  .main-sidebar {
+    padding-top: 160px;
+  }
 }
 
