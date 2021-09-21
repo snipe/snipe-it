@@ -43,7 +43,7 @@ class PaveIt extends Command
     {
 
         if (!$this->option('force')) {
-            $confirmation = $this->confirm("\n****************************************************\nTHIS WILL DELETE ALL OF THE DATA IN YOUR DATABASE. \nThere is NO undo. This WILL destroy ALL of your data. \n****************************************************\n\nDo you wish to continue? No backsies! ");
+            $confirmation = $this->confirm("\n****************************************************\nTHIS WILL DELETE ALL OF THE DATA IN YOUR DATABASE. \nThere is NO undo. This WILL destroy ALL of your data, \nINCLUDING ANY non-Snipe-IT tables you have in this database. \n****************************************************\n\nDo you wish to continue? No backsies! ");
             if (!$confirmation) {
                 $this->error('ABORTING');
                 exit(-1);
