@@ -79,7 +79,10 @@ class PaveIt extends Command
                     }
                     
                 }   
-                \DB::statement('delete from users WHERE id!=1' 
+                \DB::statement('delete from users WHERE id > 2');
+                \DB::statement('delete from oauth_clients WHERE id > 2');
+                \DB::statement('delete from oauth_access_tokens WHERE id > 2');
+                
         }
     }
 }
