@@ -896,6 +896,13 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
             ]
             )->name('api.users.uploads');
 
+            Route::post('{user}/restore',
+                [
+                    Api\UsersController::class,
+                    'restore'
+                ]
+            )->name('api.users.restore');
+
         }); 
     
         Route::resource('users', 

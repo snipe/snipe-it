@@ -474,4 +474,28 @@ class UsersController extends Controller
     {
         return (new UsersTransformer)->transformUser($request->user());
     }
+
+    /**
+     * Restore a soft-deleted user.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $userId
+     * @since [v6.0.0]
+     * @return JsonResponse
+     */
+    public function restore($userId = null)
+    {
+        // Get asset information
+        $user = User::withTrashed()->find($userId);
+        $this->authorize('delete', $user);
+        if (isset($user->id)) {
+            // Restore the user
+            User::withTrashed()->where('id', $userId)->restore();
+
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')));
+        
+
+        }
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_exists')), 200);
+    }
 }
