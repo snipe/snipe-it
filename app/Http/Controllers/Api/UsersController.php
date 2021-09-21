@@ -494,6 +494,8 @@ class UsersController extends Controller
 
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_exists')), 200);
+        
+        $id = $userId;
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))), 200);
     }
 }
