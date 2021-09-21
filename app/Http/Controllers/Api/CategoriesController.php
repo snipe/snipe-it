@@ -63,6 +63,7 @@ class CategoriesController extends Controller
         $this->authorize('create', Category::class);
         $category = new Category;
         $category->fill($request->all());
+        $category->category_type = strtolower($request->input('category_type'));
         $category = $request->handleImages($category);
 
         if ($category->save()) {
@@ -103,6 +104,7 @@ class CategoriesController extends Controller
         $this->authorize('update', Category::class);
         $category = Category::findOrFail($id);
         $category->fill($request->all());
+        $category->category_type = strtolower($request->input('category_type'));
         $category = $request->handleImages($category);
 
         if ($category->save()) {
