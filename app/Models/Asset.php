@@ -8,7 +8,7 @@ use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
-use App\Models\Traits\Customfieldsable;
+use App\Models\Traits\Customizable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use AssetPresenter;
@@ -36,7 +36,7 @@ class Asset extends Depreciable
     const ASSET = 'asset';
     const USER = 'user';
 
-    use Acceptable, Customfieldsable;
+    use Acceptable, Customizable; // I'm not sure this is where I want the attachment; should it maybe instead go in the AssetModel?
     protected $custom_field_pivot_class = AssetModel::class;
     protected $custom_field_pivot_id = "model_id";
 

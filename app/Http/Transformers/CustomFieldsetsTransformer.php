@@ -21,7 +21,7 @@ class CustomFieldsetsTransformer
     public function transformCustomFieldset(CustomFieldset $fieldset)
     {
         $fields = $fieldset->fields;
-        $models = $fieldset->models;
+        $models = $fieldset->models; //FIXME - not models anymore!
         $modelsArray = [];
 
         foreach ($models as $model) {
@@ -35,7 +35,7 @@ class CustomFieldsetsTransformer
             'id' => (int) $fieldset->id,
             'name' => e($fieldset->name),
             'fields' => (new CustomFieldsTransformer)->transformCustomFields($fields, $fieldset->fields_count),
-            'models' => (new DatatablesTransformer)->transformDatatables($modelsArray, $fieldset->models_count),
+            'models' => (new DatatablesTransformer)->transformDatatables($modelsArray, $fieldset->models_count), //I don't even understand where this is getting created, but FIXME as it's not strictly just models anymore
             'created_at' => Helper::getFormattedDateObject($fieldset->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($fieldset->updated_at, 'datetime'),
         ];

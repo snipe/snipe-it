@@ -162,7 +162,8 @@ class CustomField extends Model
 
     public function getTableName()
     {
-        return (new $this->type)()->getTable();
+        //FIXME - this is dangerous; I bet you could find a sneaky way to inject a weird class and do something 'bad' here.
+        return (new $this->type)()->getTable(); //okay, THIS seems to want the 'type' to be the *final target* of the relation...
     }
 
     /**
@@ -196,8 +197,25 @@ class CustomField extends Model
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function defaultValues() eeek, another direct reference to an AssetModel!!
+    public function defaultValues()
     {
+        /*  eeek, another direct reference to an AssetModel!!
+            So I think there might be a way to do this, but it won't be a 'straight relation' anymore.
+            We know our own 'type' right? it's $this->type, and that's a class.
+            (I mean, shit, should I do a polymorphic relationship, and maybe that would "just work"?)
+            Well, if I can't, then I can just programatically do what I need - 
+
+            I know my type.
+            I can look at the class of my type and find out my table name.
+            I can query that table. 
+
+            models_custom_fields is a tough one, but maybe we just migrate that into 'custom_field_default_values'?
+            oh, but how could I tell the difference between asset->model_id 7's default values, versus accessories->category_id 7's default values?
+            Maybe another morphy 'type' value here? I could see it.
+            Anyhow, I ought to be able to do that - figure out my the name of the field that holds my pivot field, figure out my type,
+            query all of the custom_fields_defaults or whatever I end up calling it with both my *type* ahd the value of my pivot field.
+            TODO - delete these comments once I have this working and can even frickin' explain it, halfway-reasonably.
+        */
         return $this->belongsToMany(\App\Models\AssetModel::class, 'models_custom_fields')->withPivot('default_value');
     }
 
@@ -208,8 +226,11 @@ class CustomField extends Model
      * @param  int $modelId
      * @return string
      */
-    public function defaultValue($modelId) And another hurty one here - how can we maybe find a way to query this elsewhere?
+    public function defaultValue($modelId) //FIXME rename this (the variable name)
     {
+        /* if we *can* figure out how to fix defaultValues, this will work as-is
+        (barring the renaming that we will want to do)
+        */
         return $this->defaultValues->filter(function ($item) use ($modelId) {
             return $item->pivot->asset_model_id == $modelId;
         })->map(function ($item) {

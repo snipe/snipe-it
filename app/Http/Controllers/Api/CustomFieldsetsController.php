@@ -34,7 +34,7 @@ class CustomFieldsetsController extends Controller
     public function index()
     {
         $this->authorize('index', CustomFieldset::class);
-        $fieldsets = CustomFieldset::withCount('fields as fields_count', 'models as models_count')->get();
+        $fieldsets = CustomFieldset::withCount('fields as fields_count', 'models as models_count')->get(); //FIXME maybe customizables_count or something? - also this won't work as is, customizables is *NOT* a relation!
 
         return (new CustomFieldsetsTransformer)->transformCustomFieldsets($fieldsets, $fieldsets->count());
     }
@@ -112,7 +112,7 @@ class CustomFieldsetsController extends Controller
         $this->authorize('delete', CustomFieldset::class);
         $fieldset = CustomFieldset::findOrFail($id);
 
-        $modelsCount = $fieldset->models->count();
+        $modelsCount = $fieldset->models->count(); //this one needs changing! FIXME
         $fieldsCount = $fieldset->fields->count();
 
         if (($modelsCount > 0) || ($fieldsCount > 0)) {

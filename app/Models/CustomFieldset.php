@@ -49,11 +49,38 @@ class CustomFieldset extends Model
      *
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @since [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function models()
+    public function customizable()
     {
-        return $this->hasMany(\App\Models\AssetModel::class, 'fieldset_id'); FIXME - this is *not* right for the new flexible thing :/
+        /************************************
+         * 
+         * WARNING:
+         * 
+         * This tries to look and act like a normal Laravel relation, but it is very much *not*
+         * 
+         * I decided to make it look and act similar to the Laravel relations to be easier on the developer(s)
+         * (which is likely going to be me).
+         * 
+         * But I figured I need to warn you (me) before you start rummaging around assume that this is a 'normal' relation
+         **********************************/
+
+        // $class_name = $this->type; // FIXED I THINK BUT CHECK?: note that here, we're expecting the 'type' to be the type of the *pivot*, but elsewhere we seem to want it to be of the Customizable thing.
+        // $class_name is the name of the end-result of the actually customizable thing (e.g. "asset" not "AssetModel"), in "\Blah\Blah\Blah" format as a string.
+        $customizable_class_name = $this->type; //TODO - maybe this should be some kind of method in the Trait itself? Let's see how it goes first.
+        $customizable_blank_object = new $customizable_class_name(); //FIXME - this seems dangerous with a Traits check (similar with getTableName() or whatever - maybe smoosh em together? Or check the Traits using refleciton?)
+        $pivot_class_object = $customizable_blank_object->custom_field_pivot_class;
+        return $pivot_class_object::where("fieldset_id", "=", $this->id)->get(); // I *have* tested this in Tinker and it *does* seem to work.
+
+        /**************************
+         * 
+         * What we're trying to do here, and it's confusing, is to basically call - 
+         * 
+         *  `$classname::where("fieldset_id", "=", $this->id)` - but that's not directly possible
+         * So we have to use this strange contraption below
+         */
+        $query_builder = call_user_func( [$class_name, "where"], "fieldset_id", "=", $this->id); //this *should* return a standard Eloquent Query Builder object
+        return $query_builder->get(); //we may want to pull this 'get' and let the caller call get on their own? Not sure. Trying to keep it acting like a relation still.
     }
 
     /**

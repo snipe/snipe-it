@@ -504,7 +504,12 @@ class AssetsController extends Controller
                 // If input value is null, use custom field's default value
                 if ($field_val == null) {
                     \Log::debug('Field value for '.$field->convertUnicodeDbSlug().' is null');
-                    $field_val = $field->defaultValue($request->get('model_id')); I *think* we can invert this - to AssetMode::find($request->get('model_id'))->defaultValues() or whatever?
+                    $field_val = $field->defaultValue($request->get('model_id'));
+                    // I *think* we can invert this - to AssetMode::find($request->get('model_id'))->defaultValues() or whatever?
+                    // actually, no, we don't have to.  The field itself knows its 'type', right?
+                    // so it's easy enough to crawl through the pivot (which the _type_ knows) and grab the default values
+                    // so I think this works as is
+                    // TODO: this comment should be deleted once this is ready to push.
                     \Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
                 }
 
