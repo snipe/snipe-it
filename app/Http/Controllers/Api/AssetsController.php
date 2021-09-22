@@ -24,7 +24,6 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\ImageUploadRequest;
 use Input;
 use Paginator;
