@@ -116,6 +116,12 @@ class DepreciationReportPresenter extends Presenter
                 "title" => trans('general.purchase_date'),
                 "formatter" => "dateDisplayFormatter"
             ], [
+                "field" => "currency",
+                "searchable" => false,
+                "sortable" => false,
+                "visible" => false,
+                "title" =>  'Currency',
+            ], [
                 "field" => "purchase_cost",
                 "searchable" => true,
                 "sortable" => true,
@@ -140,7 +146,8 @@ class DepreciationReportPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "visible" => true,
-                "title" => trans('admin/hardware/table.book_value')
+                "title" => trans('admin/hardware/table.book_value'),
+                "footerFormatter" => 'sumFormatter',
             ], [
                 "field" => "monthly_depreciation",
                 "searchable" => true,
@@ -152,7 +159,8 @@ class DepreciationReportPresenter extends Presenter
                 "searchable" => false,
                 "sortable" => false,
                 "visible" => true,
-                "title" => trans('admin/hardware/table.diff')
+                "title" => trans('admin/hardware/table.diff'),
+                "footerFormatter" => 'sumFormatter',
             ],[
                 "field" => "warranty_expires",
                 "searchable" => false,
