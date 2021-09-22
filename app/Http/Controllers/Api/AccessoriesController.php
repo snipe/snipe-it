@@ -27,9 +27,23 @@ class AccessoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Accessory::class);
-        $allowed_columns = ['id','name','model_number','eol','notes','created_at','min_amt','company_id'];
+        
+        // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations
+        // Relations will be handled in query scopes a little further down.
+        $allowed_columns = 
+            [
+                'id',
+                'name',
+                'model_number',
+                'eol',
+                'notes',
+                'created_at',
+                'min_amt',
+                'company_id'
+            ];
 
-        $accessories = Accessory::with('category', 'company', 'manufacturer', 'users', 'location');
+
+        $accessories = Accessory::with('category', 'company', 'manufacturer', 'users', 'location', 'supplier');
 
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));
@@ -62,24 +76,32 @@ class AccessoriesController extends Controller
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
-
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $sort_override =  $request->input('sort');
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
 
-        switch ($sort) {
+        switch ($sort_override) {
             case 'category':
                 $accessories = $accessories->OrderCategory($order);
                 break;
             case 'company':
                 $accessories = $accessories->OrderCompany($order);
                 break;
+            case 'location':
+                $accessories = $accessories->OrderLocation($order);
+                break;
+            case 'manufacturer':
+                $accessories = $accessories->OrderManufacturer($order);
+                break;    
+            case 'supplier':
+                $accessories = $accessories->OrderSupplier($order);
+                break;       
             default:
-                $accessories = $accessories->orderBy($sort, $order);
+                $accessories = $accessories->orderBy($column_sort, $order);
                 break;
         }
 
-        $accessories->orderBy($sort, $order);
-
+    
         $total = $accessories->count();
         $accessories = $accessories->skip($offset)->take($limit)->get();
         return (new AccessoriesTransformer)->transformAccessories($accessories, $total);
