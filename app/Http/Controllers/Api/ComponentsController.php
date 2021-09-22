@@ -26,8 +26,25 @@ class ComponentsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Component::class);
+
+        // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations
+        // Relations will be handled in query scopes a little further down.
+        $allowed_columns = 
+            [
+                'id',
+                'name',
+                'min_amt',
+                'order_number',
+                'serial',
+                'purchase_date',
+                'purchase_cost',
+                'qty',
+                'image',
+            ];
+
+
         $components = Company::scopeCompanyables(Component::select('components.*')
-            ->with('company', 'location', 'category'));
+            ->with('company', 'location', 'category', 'assets'));
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
@@ -52,11 +69,12 @@ class ComponentsController extends Controller
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
-        $allowed_columns = ['id','name','min_amt','order_number','serial','purchase_date','purchase_cost','company','category','qty','location','image'];
+        
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $sort_override =  $request->input('sort');
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
 
-        switch ($sort) {
+        switch ($sort_override) {
             case 'category':
                 $components = $components->OrderCategory($order);
                 break;
@@ -67,7 +85,7 @@ class ComponentsController extends Controller
                 $components = $components->OrderCompany($order);
                 break;
             default:
-                $components = $components->orderBy($sort, $order);
+                $components = $components->orderBy($column_sort, $order);
                 break;
         }
 
