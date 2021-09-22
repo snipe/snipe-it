@@ -54,7 +54,7 @@ class DepreciationReportTransformer
          * for the other calculations that come after, like diff, etc.
          */
         if ($asset->purchase_cost!='') {
-            $purchase_cost = $purchase_cost_currency . ' ' . \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost);
+            $purchase_cost = $asset->purchase_cost;
         }
        
 
@@ -62,9 +62,9 @@ class DepreciationReportTransformer
          * Override the previously set null values if there is a valid model and associated depreciation
          */
         if (($asset->model) && ($asset->model->depreciation)) {
-            $depreciated_value = $purchase_cost_currency . ' ' . \App\Helpers\Helper::formatCurrencyOutput($asset->getDepreciatedValue());
-            $monthly_depreciation = $purchase_cost_currency . ' ' .\App\Helpers\Helper::formatCurrencyOutput(($asset->model->eol > 0 ? ($asset->purchase_cost / $asset->model->eol) : 0));
-            $diff = $purchase_cost_currency . ' ' .\App\Helpers\Helper::formatCurrencyOutput(($asset->purchase_cost - $asset->getDepreciatedValue()));
+            $depreciated_value = \App\Helpers\Helper::formatCurrencyOutput($asset->getDepreciatedValue());
+            $monthly_depreciation = \App\Helpers\Helper::formatCurrencyOutput(($asset->model->eol > 0 ? ($asset->purchase_cost / $asset->model->eol) : 0));
+            $diff = \App\Helpers\Helper::formatCurrencyOutput(($asset->purchase_cost - $asset->getDepreciatedValue()));
         }
 
         if ($asset->assigned) {
@@ -93,12 +93,13 @@ class DepreciationReportTransformer
             'order_number' => ($asset->order_number) ? e($asset->order_number) : null,
             'location' => ($asset->location) ? e($asset->location->name) : null,
             'warranty_expires' => ($asset->warranty_months > 0) ?  Helper::getFormattedDateObject($asset->warranty_expires, 'date') : null,
+            'currency' => $purchase_cost_currency,
             'purchase_date' => Helper::getFormattedDateObject($asset->purchase_date, 'date'),
-            'purchase_cost' => $purchase_cost,
-            'book_value' => $depreciated_value,
+            'purchase_cost' => Helper::formatCurrencyOutput($asset->purchase_cost),
+            'book_value' => Helper::formatCurrencyOutput($depreciated_value),
             'monthly_depreciation' => $monthly_depreciation,
             'checked_out_to' => $checkout_target,
-            'diff' =>  $diff,
+            'diff' =>  Helper::formatCurrencyOutput($diff),
             'number_of_months' =>  ($asset->model && $asset->model->depreciation) ? e($asset->model->depreciation->months) : null,
             'depreciation' => (($asset->model) && ($asset->model->depreciation)) ?  e($asset->model->depreciation->name) : null,
             
