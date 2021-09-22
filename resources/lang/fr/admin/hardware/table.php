@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Étiquette de l\'actif',
     'asset_model'       => 'Modèle',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Actif ',
     'image'		=> 'Image',
     'days_without_acceptance' => 'Jours sans acceptation',
-    'monthly_depreciation' => 'Dépréciation mensuelle'
+    'monthly_depreciation' => 'Dépréciation mensuelle',
 
-);
+];

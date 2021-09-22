@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Хөрөнгийн тухай',
     'about_assets_text'            => 'Актив нь сериал дугаар буюу хөрөнгийн тэмдэгтээр хянагдсан зүйлс юм. Эдгээр нь тодорхой зүйлүүдийг тодорхойлоход илүү үнэ цэнэтэй зүйлс байх хандлагатай байдаг.',
-	'archived'  				=> 'Архивлагдсан',
+    'archived'  				=> 'Архивлагдсан',
     'asset'  					=> 'Актив',
     'bulk_checkout'             => 'Хөрөнгийг олгох',
     'checkin'  					=> 'Checkin Asset',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Хүлээгдэж байна',
     'undeployable'  			=> 'Undeployable',
     'view'  					=> 'Хөрөнгийг харах',
-);
+];

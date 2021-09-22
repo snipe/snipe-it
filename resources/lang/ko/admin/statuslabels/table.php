@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> '상태 꼬리표란',
     'archived'      	=> '보관됨',
     'create'      	=> '상태 꼬리표 생성',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> '상태 꼬리표',
     'undeployable'  => '사용불가',
     'update'      	=> '상태 꼬리표 수정',
-);
+];

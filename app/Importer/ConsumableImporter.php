@@ -28,28 +28,30 @@ class ConsumableImporter extends ItemImporter
     {
         $consumable = Consumable::where('name', $this->item['name'])->first();
         if ($consumable) {
-            if (!$this->updating) {
-                $this->log('A matching Consumable ' . $this->item["name"] . ' already exists.  ');
+            if (! $this->updating) {
+                $this->log('A matching Consumable '.$this->item['name'].' already exists.  ');
+
                 return;
             }
             $this->log('Updating Consumable');
             $consumable->update($this->sanitizeItemForUpdating($consumable));
             $consumable->save();
+
             return;
         }
-        $this->log("No matching consumable, creating one");
+        $this->log('No matching consumable, creating one');
         $consumable = new Consumable();
-        $this->item['model_number'] = $this->findCsvMatch($row, "model_number");;
-        $this->item['item_no'] = $this->findCsvMatch($row, "item_number");
+        $this->item['model_number'] = $this->findCsvMatch($row, 'model_number');
+        $this->item['item_no'] = $this->findCsvMatch($row, 'item_number');
         $consumable->fill($this->sanitizeItemForStoring($consumable));
         //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         $consumable->unsetEventDispatcher();
         if ($consumable->save()) {
             $consumable->logCreate('Imported using CSV Importer');
-            $this->log("Consumable " . $this->item["name"] . ' was created');
+            $this->log('Consumable '.$this->item['name'].' was created');
+
             return;
         }
         $this->logError($consumable, 'Consumable');
-        return;
     }
 }

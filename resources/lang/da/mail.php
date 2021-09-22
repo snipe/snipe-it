@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'En bruger har annulleret en vareforespørgsel på hjemmesiden',
     'a_user_requested' => 'En bruger har anmodet om et emne på hjemmesiden',
     'accessory_name' => 'Tilbehør Navn:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Forventet asset checkin rapport',
     'Expected_Checkin_Notification' => 'Påmindelse: :name checkin deadline nærmer sig',
     'Expected_Checkin_Date' => 'Et asset tjekket ud til dig skal tjekkes tilbage den :date',
-    'your_assets' => 'Se dine assets'
-);
+    'your_assets' => 'Se dine assets',
+];

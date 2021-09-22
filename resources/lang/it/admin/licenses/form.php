@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Bene',
     'checkin'           => 'Carica',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licenza Email',
     'to_name'           => 'Licenza Nome',
     'update'            => 'Aggiornamento Licenze',
-    'checkout_help'     => 'È necessario verificare una licenza ad una bene hardware o una persona. È possibile selezionare, ma il proprietario del bene deve corrispondere alla persona che ha il bene fuori.'
-);
+    'checkout_help'     => 'È necessario verificare una licenza ad una bene hardware o una persona. È possibile selezionare, ma il proprietario del bene deve corrispondere alla persona che ha il bene fuori.',
+];

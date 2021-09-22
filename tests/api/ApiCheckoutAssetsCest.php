@@ -20,17 +20,18 @@ class ApiCheckoutAssetsCest
     }
 
     /** @test */
-    public function checkoutAssetToUser(ApiTester $I) {
+    public function checkoutAssetToUser(ApiTester $I)
+    {
         $I->wantTo('Check out an asset to a user');
         //Grab an asset from the database that isn't checked out.
         $asset = Asset::whereNull('assigned_to')->first();
-        $targetUser = factory('App\Models\User')->create();
+        $targetUser = \App\Models\User::factory()->create();
         $data = [
             'assigned_user' => $targetUser->id,
-            'note' => "This is a test checkout note",
-            'expected_checkin' => "2018-05-24",
-            'name' => "Updated Asset Name",
-            'checkout_to_type' => 'user'
+            'note' => 'This is a test checkout note',
+            'expected_checkin' => '2018-05-24',
+            'name' => 'Updated Asset Name',
+            'checkout_to_type' => 'user',
         ];
         $I->sendPOST("/hardware/{$asset->id}/checkout", $data);
         $I->seeResponseIsJson();
@@ -45,28 +46,28 @@ class ApiCheckoutAssetsCest
         $I->seeResponseContainsJson([
             'assigned_to' => [
                 'id' => $targetUser->id,
-                'type' => 'user'
+                'type' => 'user',
             ],
-            'name' => "Updated Asset Name",
-            'expected_checkin' => Helper::getFormattedDateObject('2018-05-24', 'date')
+            'name' => 'Updated Asset Name',
+            'expected_checkin' => Helper::getFormattedDateObject('2018-05-24', 'date'),
         ]);
-
     }
 
-      /** @test */
-    public function checkoutAssetToAsset(ApiTester $I) {
+    /** @test */
+    public function checkoutAssetToAsset(ApiTester $I)
+    {
         $I->wantTo('Check out an asset to an asset');
         //Grab an asset from the database that isn't checked out.
         $asset = Asset::whereNull('assigned_to')
-            ->where('model_id',8)
+            ->where('model_id', 8)
             ->where('status_id', Statuslabel::deployable()->first()->id)
             ->first();  // We need to make sure that this is an asset/model that doesn't require acceptance
-        $targetAsset = factory('App\Models\Asset')->states('desktop-macpro')->create([
-            'name' => "Test Asset For Checkout to"
+        $targetAsset = \App\Models\Asset::factory()->desktopMacpro()->create([
+            'name' => 'Test Asset For Checkout to',
         ]);
         $data = [
             'assigned_asset' => $targetAsset->id,
-            'checkout_to_type' => 'asset'
+            'checkout_to_type' => 'asset',
         ];
         $I->sendPOST("/hardware/{$asset->id}/checkout", $data);
         $I->seeResponseIsJson();
@@ -81,26 +82,26 @@ class ApiCheckoutAssetsCest
         $I->seeResponseContainsJson([
             'assigned_to' => [
                 'id' => $targetAsset->id,
-                'type' => 'asset'
-            ]
+                'type' => 'asset',
+            ],
         ]);
-
     }
 
-         /** @test */
-    public function checkoutAssetToLocation(ApiTester $I) {
+    /** @test */
+    public function checkoutAssetToLocation(ApiTester $I)
+    {
         $I->wantTo('Check out an asset to an asset');
         //Grab an asset from the database that isn't checked out.
         $asset = Asset::whereNull('assigned_to')
-            ->where('model_id',8)
+            ->where('model_id', 8)
             ->where('status_id', Statuslabel::deployable()->first()->id)
             ->first();  // We need to make sure that this is an asset/model that doesn't require acceptance
-        $targetLocation = factory('App\Models\Location')->create([
-            'name' => "Test Location for Checkout"
+        $targetLocation = \App\Models\Location::factory()->create([
+            'name' => 'Test Location for Checkout',
         ]);
         $data = [
             'assigned_location' => $targetLocation->id,
-            'checkout_to_type' => 'location'
+            'checkout_to_type' => 'location',
         ];
         $I->sendPOST("/hardware/{$asset->id}/checkout", $data);
         $I->seeResponseIsJson();
@@ -115,20 +116,20 @@ class ApiCheckoutAssetsCest
         $I->seeResponseContainsJson([
             'assigned_to' => [
                 'id' => $targetLocation->id,
-                'type' => 'location'
-            ]
+                'type' => 'location',
+            ],
         ]);
-
     }
 
     /** @test */
-    public function checkinAsset(ApiTester $I) {
+    public function checkinAsset(ApiTester $I)
+    {
         $I->wantTo('Checkin an asset that is currently checked out');
 
         $asset = Asset::whereNotNull('assigned_to')->first();
 
         $I->sendPOST("/hardware/{$asset->id}/checkin", [
-            "note" => "Checkin Note"
+            'note' => 'Checkin Note',
         ]);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
@@ -140,7 +141,7 @@ class ApiCheckoutAssetsCest
         // Verify
         $I->sendGET("/hardware/{$asset->id}");
         $I->seeResponseContainsJson([
-            'assigned_to' => null
+            'assigned_to' => null,
         ]);
     }
 }

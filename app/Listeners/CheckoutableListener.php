@@ -23,15 +23,15 @@ use Illuminate\Support\Facades\Notification;
 
 class CheckoutableListener
 {
-
     /**
      * Notify the user about the checked out checkoutable
      */
-    public function onCheckedOut($event) {
+    public function onCheckedOut($event)
+    {
         /**
          * When the item wasn't checked out to a user, we can't send notifications
          */
-        if(! $event->checkedOutTo instanceof User) {
+        if (! $event->checkedOutTo instanceof User) {
             return;
         }
 
@@ -40,7 +40,7 @@ class CheckoutableListener
          */
         $acceptance = $this->getCheckoutAcceptance($event);       
 
-        if(!$event->checkedOutTo->locale){
+        if (! $event->checkedOutTo->locale) {
             Notification::locale(Setting::getSettings()->locale)->send(
                 $this->getNotifiables($event), 
                 $this->getCheckoutNotification($event, $acceptance)
@@ -56,15 +56,16 @@ class CheckoutableListener
     /**
      * Notify the user about the checked in checkoutable
      */    
-    public function onCheckedIn($event) {
-
+    public function onCheckedIn($event)
+    {
         \Log::debug('checkin fired');
 
         /**
          * When the item wasn't checked out to a user, we can't send notifications
          */
-        if(!$event->checkedOutTo instanceof User) {
+        if (! $event->checkedOutTo instanceof User) {
             \Log::debug('checked out to not a user');
+
             return;
         }
 
@@ -81,7 +82,7 @@ class CheckoutableListener
             }
         }
         \Log::debug('checked out to a user');
-        if(!$event->checkedOutTo->locale){
+        if (! $event->checkedOutTo->locale) {
             \Log::debug('Use default settings locale');
             Notification::locale(Setting::getSettings()->locale)->send(
                 $this->getNotifiables($event),
@@ -102,8 +103,9 @@ class CheckoutableListener
      * @param  Event $event
      * @return mixed
      */
-    private function getCheckoutAcceptance($event) {
-        if (!$event->checkoutable->requireAcceptance()) {
+    private function getCheckoutAcceptance($event)
+    {
+        if (! $event->checkoutable->requireAcceptance()) {
             return null;
         }
 
@@ -121,7 +123,8 @@ class CheckoutableListener
      * @param  Event $event
      * @return Collection
      */
-    private function getNotifiables($event) {
+    private function getNotifiables($event)
+    {
         $notifiables = collect();
 
         /**
@@ -145,7 +148,8 @@ class CheckoutableListener
      * @param  CheckoutableCheckedIn $event 
      * @return Notification
      */
-    private function getCheckinNotification($event) {
+    private function getCheckinNotification($event)
+    {
 
         // $model = get_class($event->checkoutable);
 
@@ -166,6 +170,7 @@ class CheckoutableListener
         }
 
         \Log::debug('Notification class: '.$notificationClass);
+
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);  
     }
 
@@ -176,7 +181,8 @@ class CheckoutableListener
      * @param  CheckoutAcceptance $acceptance 
      * @return Notification
      */
-    private function getCheckoutNotification($event, $acceptance) {
+    private function getCheckoutNotification($event, $acceptance)
+    {
         $notificationClass = null;
 
         switch (get_class($event->checkoutable)) {
@@ -205,14 +211,13 @@ class CheckoutableListener
     public function subscribe($events)
     {
         $events->listen(
-            'App\Events\CheckoutableCheckedIn',
+            \App\Events\CheckoutableCheckedIn::class,
             'App\Listeners\CheckoutableListener@onCheckedIn'
         ); 
 
         $events->listen(
-            'App\Events\CheckoutableCheckedOut',
+            \App\Events\CheckoutableCheckedOut::class,
             'App\Listeners\CheckoutableListener@onCheckedOut'
         ); 
     }
-
 }

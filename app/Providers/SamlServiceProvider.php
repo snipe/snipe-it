@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Services\Saml;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class SamlServiceProvider extends ServiceProvider
 {
@@ -23,7 +23,7 @@ class SamlServiceProvider extends ServiceProvider
                     'metadata',
                     [
                         'as' => 'saml.metadata',
-                        'uses' => 'Auth\SamlController@metadata' ]
+                        'uses' => 'Auth\SamlController@metadata', ]
                 );
 
                 Route::match(
@@ -31,14 +31,14 @@ class SamlServiceProvider extends ServiceProvider
                     'acs',
                     [
                         'as' => 'saml.acs',
-                        'uses' => 'Auth\SamlController@acs' ]
+                        'uses' => 'Auth\SamlController@acs', ]
                 );
 
                 Route::get(
                     'sls',
                     [
                         'as' => 'saml.sls',
-                        'uses' => 'Auth\SamlController@sls' ]
+                        'uses' => 'Auth\SamlController@sls', ]
                 );
             });
 
@@ -46,14 +46,12 @@ class SamlServiceProvider extends ServiceProvider
                 'login/saml',
                 [
                     'as' => 'saml.login',
-                    'uses' => 'Auth\SamlController@login' ]
+                    'uses' => 'Auth\SamlController@login', ]
             );
 
-            Route::group(['prefix' => 'admin','middleware' => ['web','auth', 'authorize:superuser']], function () {
-
-                Route::get('saml', ['as' => 'settings.saml.index','uses' => 'SettingsController@getSamlSettings' ]);
-                Route::post('saml', ['as' => 'settings.saml.save','uses' => 'SettingsController@postSamlSettings' ]);
-
+            Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth', 'authorize:superuser']], function () {
+                Route::get('saml', ['as' => 'settings.saml.index', 'uses' => 'SettingsController@getSamlSettings']);
+                Route::post('saml', ['as' => 'settings.saml.save', 'uses' => 'SettingsController@postSamlSettings']);
             });
         });
     }

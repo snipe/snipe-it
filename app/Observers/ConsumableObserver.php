@@ -16,15 +16,13 @@ class ConsumableObserver
      */
     public function updated(Consumable $consumable)
     {
-
         $logAction = new Actionlog();
         $logAction->item_type = Consumable::class;
         $logAction->item_id = $consumable->id;
-        $logAction->created_at =  date("Y-m-d H:i:s");
+        $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->logaction('update');
     }
-
 
     /**
      * Listen to the Consumable created event when
@@ -35,14 +33,12 @@ class ConsumableObserver
      */
     public function created(Consumable $consumable)
     {
-
         $logAction = new Actionlog();
         $logAction->item_type = Consumable::class;
         $logAction->item_id = $consumable->id;
-        $logAction->created_at =  date("Y-m-d H:i:s");
+        $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->logaction('create');
-
     }
 
     /**
@@ -56,7 +52,7 @@ class ConsumableObserver
         $logAction = new Actionlog();
         $logAction->item_type = Consumable::class;
         $logAction->item_id = $consumable->id;
-        $logAction->created_at =  date("Y-m-d H:i:s");
+        $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->user_id = Auth::id();
         $logAction->logaction('delete');
     }

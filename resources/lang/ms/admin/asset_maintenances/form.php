@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Hari',
         'notes'                  => 'Nota',
         'update'                 => 'Kemaskini',
-        'create'                 => 'Cipta'
+        'create'                 => 'Cipta',
     ];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Пользователь отменил запрос элемента на веб-сайте',
     'a_user_requested' => 'Пользователь запросил элемент на веб-сайте',
     'accessory_name' => 'Аксессуар:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'Посмотреть активы'
-);
+    'your_assets' => 'Посмотреть активы',
+];

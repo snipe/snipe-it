@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'ימים',
         'notes'                  => 'הערות',
         'update'                 => 'עדכון',
-        'create'                 => 'לִיצוֹר'
+        'create'                 => 'לִיצוֹר',
     ];

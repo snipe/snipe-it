@@ -1,77 +1,74 @@
 <?php
 /**
 * Macro helpers
-*
 */
-
 
 /**
-* Locale macro
-* Generates the dropdown menu of available languages
-*/
-Form::macro('locales', function ($name = "locale", $selected = null, $class = null, $id = null) {
-
-    $locales = array(
-      ''=> " ",
-      'en'=> "English, US",
-      'en-GB'=> "English, UK",
-      'af'=> "Afrikaans",
-      'ar'=> "Arabic",
-      'bg'=> "Bulgarian",
-      'zh-CN'=> "Chinese Simplified",
-      'zh-TW'=> "Chinese Traditional",
-      'hr'=> "Croatian",
-      'cs'=> "Czech",
-      'da'=> "Danish",
-      'nl'=> "Dutch",
-      'en-ID'=> "English, Indonesia",
-      'et'=> "Estonian",
-      'fil'=> "Filipino",
-      'fi'=> "Finnish",
-      'fr'=> "French",
-      'de'=> "German",
-      'el'=> "Greek",
-      'he'=> "Hebrew",
-      'hu'=> "Hungarian",
+ * Locale macro
+ * Generates the dropdown menu of available languages
+ */
+Form::macro('locales', function ($name = 'locale', $selected = null, $class = null, $id = null) {
+    $locales = [
+      ''=> ' ',
+      'en'=> 'English, US',
+      'en-GB'=> 'English, UK',
+      'af'=> 'Afrikaans',
+      'ar'=> 'Arabic',
+      'bg'=> 'Bulgarian',
+      'zh-CN'=> 'Chinese Simplified',
+      'zh-TW'=> 'Chinese Traditional',
+      'hr'=> 'Croatian',
+      'cs'=> 'Czech',
+      'da'=> 'Danish',
+      'nl'=> 'Dutch',
+      'en-ID'=> 'English, Indonesia',
+      'et'=> 'Estonian',
+      'fil'=> 'Filipino',
+      'fi'=> 'Finnish',
+      'fr'=> 'French',
+      'de'=> 'German',
+      'el'=> 'Greek',
+      'he'=> 'Hebrew',
+      'hu'=> 'Hungarian',
       'is' => 'Icelandic',
-      'id'=> "Indonesian",
-      'ga-IE'=> "Irish",
-      'it'=> "Italian",
-      'ja'=> "Japanese",
-      'ko'=> "Korean",
+      'id'=> 'Indonesian',
+      'ga-IE'=> 'Irish',
+      'it'=> 'Italian',
+      'ja'=> 'Japanese',
+      'ko'=> 'Korean',
       'lv'=>'Latvian',
-      'lt'=> "Lithuanian",
-      'mk'=> "Macedonian",
-      'ms'=> "Malay",
-      'mi'=> "Maori",
-      'mn'=> "Mongolian",
-      'no'=> "Norwegian",
-      'fa'=> "Persian",
-      'pl'=> "Polish",
-      'pt-PT'=> "Portuguese",
-      'pt-BR'=> "Portuguese, Brazilian",
-      'ro'=> "Romanian",
-      'ru'=> "Russian",
+      'lt'=> 'Lithuanian',
+      'mk'=> 'Macedonian',
+      'ms'=> 'Malay',
+      'mi'=> 'Maori',
+      'mn'=> 'Mongolian',
+      'no'=> 'Norwegian',
+      'fa'=> 'Persian',
+      'pl'=> 'Polish',
+      'pt-PT'=> 'Portuguese',
+      'pt-BR'=> 'Portuguese, Brazilian',
+      'ro'=> 'Romanian',
+      'ru'=> 'Russian',
       'sr-CS' => 'Serbian (Latin)',
-      'sl'=> "Slovenian",
-      'es-ES'=> "Spanish",
-      'es-CO'=> "Spanish, Colombia",
-      'es-MX'=> "Spanish, Mexico",
-      'es-VE'=> "Spanish, Venezuela",
-      'sv-SE'=> "Swedish",
-      'tl'=> "Tagalog",
-      'ta'=> "Tamil",
-      'th'=> "Thai",
-      'tr'=> "Turkish",
-      'uk'=> "Ukranian",
-      'vi'=> "Vietnamese",
-      'cy'=> "Welsh",
-      'zu'=> "Zulu",
-    );
+      'sl'=> 'Slovenian',
+      'es-ES'=> 'Spanish',
+      'es-CO'=> 'Spanish, Colombia',
+      'es-MX'=> 'Spanish, Mexico',
+      'es-VE'=> 'Spanish, Venezuela',
+      'sv-SE'=> 'Swedish',
+      'tl'=> 'Tagalog',
+      'ta'=> 'Tamil',
+      'th'=> 'Thai',
+      'tr'=> 'Turkish',
+      'uk'=> 'Ukranian',
+      'vi'=> 'Vietnamese',
+      'cy'=> 'Welsh',
+      'zu'=> 'Zulu',
+    ];
 
-    $idclause='';
-    if($id) {
-      $idclause=" id='$id'";
+    $idclause = '';
+    if ($id) {
+        $idclause = " id='$id'";
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px"'.$idclause.' aria-label="'.$name.'">';
 
@@ -82,18 +79,15 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
     $select .= '</select>';
 
     return $select;
-
 });
 
-
 /**
-* Country macro
-* Generates the dropdown menu of countries for the profile form
-*/
-Form::macro('countries', function ($name = "country", $selected = null, $class = null, $id = null) {
-
-    $countries = array(
-    ''=>"Select a Country",
+ * Country macro
+ * Generates the dropdown menu of countries for the profile form
+ */
+Form::macro('countries', function ($name = 'country', $selected = null, $class = null, $id = null) {
+    $countries = [
+    ''=>'Select a Country',
     'AC'=>'Ascension Island',
     'AD'=>'Andorra',
     'AE'=>'United Arab Emirates',
@@ -340,29 +334,25 @@ Form::macro('countries', function ($name = "country", $selected = null, $class =
     'YT'=>'Mayotte',
     'ZA'=>'South Africa',
     'ZM'=>'Zambia',
-    'ZW'=>'Zimbabwe'
-    );
+    'ZW'=>'Zimbabwe',
+    ];
 
-    $idclause='';
-    if($id) {
-      $idclause=" id='$id'";
+    $idclause = '';
+    if ($id) {
+        $idclause = " id='$id'";
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px"'.$idclause.' aria-label="'.$name.'">';
 
     foreach ($countries as $abbr => $country) {
-        $select .= '<option value="'.strtoupper($abbr).'"'.(strtoupper($selected)== strtoupper($abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
+        $select .= '<option value="'.strtoupper($abbr).'"'.(strtoupper($selected) == strtoupper($abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
     }
 
     $select .= '</select>';
 
     return $select;
-
 });
 
-
-
-Form::macro('date_display_format', function ($name = "date_display_format", $selected = null, $class = null) {
-
+Form::macro('date_display_format', function ($name = 'date_display_format', $selected = null, $class = null) {
     $formats = [
         'Y-m-d',
         'D M d, Y',
@@ -376,7 +366,6 @@ Form::macro('date_display_format', function ($name = "date_display_format", $sel
     ];
 
     foreach ($formats as $format) {
-
         $date_display_formats[$format] = Carbon::parse(date('Y').'-'.date('m').'-25')->format($format);
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:250px" aria-label="'.$name.'">';
@@ -385,13 +374,11 @@ Form::macro('date_display_format', function ($name = "date_display_format", $sel
     }
 
     $select .= '</select>';
-    return $select;
 
+    return $select;
 });
 
-
-Form::macro('time_display_format', function ($name = "time_display_format", $selected = null, $class = null) {
-
+Form::macro('time_display_format', function ($name = 'time_display_format', $selected = null, $class = null) {
     $formats = [
         'g:iA',
         'h:iA',
@@ -407,12 +394,11 @@ Form::macro('time_display_format', function ($name = "time_display_format", $sel
     }
 
     $select .= '</select>';
-    return $select;
 
+    return $select;
 });
 
-Form::macro('digit_separator', function ($name = "digit_separator", $selected = null, $class = null) {
-
+Form::macro('digit_separator', function ($name = 'digit_separator', $selected = null, $class = null) {
     $formats = [
         '1,234.56',
         '1.234,56',
@@ -421,22 +407,21 @@ Form::macro('digit_separator', function ($name = "digit_separator", $selected = 
     foreach ($formats as $format) {
     }
     $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:120px">';
-    foreach ($formats as $format_inner ) {
+    foreach ($formats as $format_inner) {
         $select .= '<option value="'.$format_inner.'"'.($selected == $format_inner ? ' selected="selected"' : '').'>'.$format_inner.'</option> ';
     }
 
     $select .= '</select>';
-    return $select;
 
+    return $select;
 });
 
 /**
-* Barcode macro
-* Generates the dropdown menu of available 1D barcodes
-*/
-Form::macro('alt_barcode_types', function ($name = "alt_barcode", $selected = null, $class = null) {
-
-    $barcode_types = array(
+ * Barcode macro
+ * Generates the dropdown menu of available 1D barcodes
+ */
+Form::macro('alt_barcode_types', function ($name = 'alt_barcode', $selected = null, $class = null) {
+    $barcode_types = [
         'C128',
         'C39',
         'PDF417',
@@ -445,9 +430,7 @@ Form::macro('alt_barcode_types', function ($name = "alt_barcode", $selected = nu
         'UPCA',
         'UPCE',
 
-        
-
-    );
+    ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" aria-label="'.$name.'">';
     foreach ($barcode_types as $barcode_type) {
@@ -457,36 +440,31 @@ Form::macro('alt_barcode_types', function ($name = "alt_barcode", $selected = nu
     $select .= '</select>';
 
     return $select;
-
 });
 
-
 /**
-* Barcode macro
-* Generates the dropdown menu of available 2D barcodes
-*/
-Form::macro('barcode_types', function ($name = "barcode_type", $selected = null, $class = null) {
-
-    $barcode_types = array(
+ * Barcode macro
+ * Generates the dropdown menu of available 2D barcodes
+ */
+Form::macro('barcode_types', function ($name = 'barcode_type', $selected = null, $class = null) {
+    $barcode_types = [
         'QRCODE',
         'DATAMATRIX',
 
-    );
+    ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" aria-label="'.$name.'">';
     foreach ($barcode_types as $barcode_type) {
-        $select .= '<option value="'.$barcode_type.'"'.($selected == $barcode_type ?' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$barcode_type.'</option> ';
+        $select .= '<option value="'.$barcode_type.'"'.($selected == $barcode_type ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$barcode_type.'</option> ';
     }
 
     $select .= '</select>';
 
     return $select;
-
 });
 
-Form::macro('username_format', function ($name = "username_format", $selected = null, $class = null) {
-
-    $formats = array(
+Form::macro('username_format', function ($name = 'username_format', $selected = null, $class = null) {
+    $formats = [
         'firstname.lastname' => trans('general.firstname_lastname_format'),
         'firstname' => trans('general.first_name_format'),
         'filastname' => trans('general.filastname_format'),
@@ -495,8 +473,8 @@ Form::macro('username_format', function ($name = "username_format", $selected = 
         'firstinitial.lastname' => trans('general.firstinitial.lastname'),
         'lastname_firstinitial' => trans('general.lastname_firstinitial'),
         'firstnamelastname' => trans('general.firstnamelastname'),
-        'firstnamelastinitial' => trans('general.firstnamelastinitial')
-    );
+        'firstnamelastinitial' => trans('general.firstnamelastinitial'),
+    ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
@@ -506,17 +484,15 @@ Form::macro('username_format', function ($name = "username_format", $selected = 
     $select .= '</select>';
 
     return $select;
-
 });
 
-Form::macro('two_factor_options', function ($name = "two_factor_enabled", $selected = null, $class = null) {
-
-    $formats = array(
+Form::macro('two_factor_options', function ($name = 'two_factor_enabled', $selected = null, $class = null) {
+    $formats = [
         '' => trans('admin/settings/general.two_factor_disabled'),
         '1' => trans('admin/settings/general.two_factor_optional'),
         '2' => trans('admin/settings/general.two_factor_required'),
 
-    );
+    ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
@@ -526,19 +502,16 @@ Form::macro('two_factor_options', function ($name = "two_factor_enabled", $selec
     $select .= '</select>';
 
     return $select;
-
 });
 
-
-Form::macro('customfield_elements', function ($name = "customfield_elements", $selected = null, $class = null) {
-
-    $formats = array(
+Form::macro('customfield_elements', function ($name = 'customfield_elements', $selected = null, $class = null) {
+    $formats = [
         'text' => 'Text Box',
         'listbox' => 'List Box',
         'textarea' => 'Textarea (multi-line) ',
         'checkbox' => 'Checkbox',
         'radio' => 'Radio Buttons',
-    );
+    ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
@@ -548,14 +521,10 @@ Form::macro('customfield_elements', function ($name = "customfield_elements", $s
     $select .= '</select>';
 
     return $select;
-
 });
 
-
-
-Form::macro('skin', function ($name = "skin", $selected = null, $class = null) {
-
-    $formats = array(
+Form::macro('skin', function ($name = 'skin', $selected = null, $class = null) {
+    $formats = [
         'blue' => 'Default Blue',
         'blue-dark' => 'Blue (Dark Mode)',
         'green' => 'Green Dark',
@@ -571,7 +540,7 @@ Form::macro('skin', function ($name = "skin", $selected = null, $class = null) {
         'yellow' => 'Yellow',
         'yellow-dark' => 'Yellow (Dark Mode)',
         'contrast' => 'High Contrast',
-    );
+    ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px" aria-label="'.$name.'">';
     foreach ($formats as $format => $label) {
@@ -579,13 +548,12 @@ Form::macro('skin', function ($name = "skin", $selected = null, $class = null) {
     }
 
     $select .= '</select>';
-    return $select;
 
+    return $select;
 });
 
-Form::macro('user_skin', function ($name = "skin", $selected = null, $class = null) {
-
-    $formats = array(
+Form::macro('user_skin', function ($name = 'skin', $selected = null, $class = null) {
+    $formats = [
         '' => 'Site Default',
         'blue' => 'Default Blue',
         'blue-dark' => 'Blue (Dark Mode)',
@@ -602,7 +570,7 @@ Form::macro('user_skin', function ($name = "skin", $selected = null, $class = nu
         'yellow' => 'Yellow',
         'yellow-dark' => 'Yellow (Dark Mode)',
         'contrast' => 'High Contrast',
-    );
+    ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px">';
     foreach ($formats as $format => $label) {
@@ -610,6 +578,6 @@ Form::macro('user_skin', function ($name = "skin", $selected = null, $class = nu
     }
 
     $select .= '</select>';
-    return $select;
 
+    return $select;
 });

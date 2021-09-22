@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Ovaj korisnik se može prijaviti',
     'activated_disabled_help_text' => 'Ne možete mijenjati status aktivacije za svoj vlastiti račun.',
     'assets_user'       => 'Imovina dodijeljena za: ime',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Uređivanje korisnika',
     'filetype_info'     => 'Dopuštene vrste datoteka su png, gif, jpg, jpeg, doc, docx, pdf, txt, zip i rar.',
     'history_user'      => 'Povijest za: ime',
-	'info'				=> 'Informacije',
+    'info'				=> 'Informacije',
     'restore_user'		=> 'Kliknite ovdje da biste ih vratili.',
     'last_login'        => 'Zadnja prijava',
     'ldap_config_text'  => 'Postavke LDAP konfiguracije mogu se pronaći u Administrator> Postavke. Odabrana lokacija (opcionalno) bit će postavljena za sve uvezene korisnike.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Vaše trenutačne postavke administracije omogućuju selektivnu provedbu autentikacije dvogritera.',
     'two_factor_enrolled' => '2FA uređaj upisan',
     'two_factor_active'   => '2FA aktivno',
-    );
+    ];

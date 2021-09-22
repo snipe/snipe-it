@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'Categoriau Asedau',
     'category_name'  					=> 'Enw categori',
     'checkin_email'                     => 'Gyrru ebost i defnyddiwr wrth nodi fewn/allan.',
@@ -19,4 +19,4 @@ return array(
     'use_default_eula'					=> 'Defnyddio\'r <a href="#" data-toggle="modal" data-target="#eulaModal">prif CTDT diofyn</a> yn lle.',
     'use_default_eula_disabled'			=> '<del>Defnyddio\'r CTDT diofyn yn lle\'r un presennol.</del>Nid oes prif CTDT diofyn wedi gosod. Ychwanegwch yn ynj gosodiadau os gwelwch yn dda.',
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'accessory_category' 				=> 'Категорія аксесуарів',
     'accessory_name'  					=> 'Назва аксесуара',
     'checkout'  							=> 'Видати аксесуар',
@@ -17,4 +17,4 @@ return array(
     'use_default_eula'					=> 'Use the <a href="#" data-toggle="modal" data-target="#eulaModal">primary default EULA</a> instead.',
     'use_default_eula_disabled'			=> '<del>Use the primary default EULA instead.</del> No primary default EULA is set. Please add one in Settings.',
 
-);
+];

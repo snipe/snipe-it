@@ -21,7 +21,6 @@ class ApiLocationsCest
     /** @test */
     public function indexLocations(ApiTester $I)
     {
-
         $I->wantTo('Get a list of locations');
 
         // call
@@ -32,7 +31,7 @@ class ApiLocationsCest
         $response = json_decode($I->grabResponse(), true);
         // sample verify
         $location = App\Models\Location::orderByDesc('created_at')
-            ->withCount('assignedAssets as assigned_assets_count', 'assets as assets_count',  'users as users_count')
+            ->withCount('assignedAssets as assigned_assets_count', 'assets as assets_count', 'users as users_count')
             ->take(10)->get()->shuffle()->first();
         $I->seeResponseContainsJson($I->removeTimestamps((new LocationsTransformer)->transformLocation($location)));
     }
@@ -42,8 +41,8 @@ class ApiLocationsCest
     {
         $I->wantTo('Create a new location');
 
-        $temp_location = factory(\App\Models\Location::class)->make([
-            'name' => "Test Location Tag",
+        $temp_location = \App\Models\Location::factory()->make([
+            'name' => 'Test Location Tag',
         ]);
 
         // setup
@@ -59,7 +58,7 @@ class ApiLocationsCest
             'parent_id' => $temp_location->parent_id,
             'parent_id' => $temp_location->parent_id,
             'manager_id' => $temp_location->manager_id,
-            'currency' => $temp_location->currency
+            'currency' => $temp_location->currency,
         ];
 
         // create
@@ -70,19 +69,20 @@ class ApiLocationsCest
 
     // Put is routed to the same method in the controller
     // DO we actually need to test both?
+
     /** @test */
     public function updateLocationWithPatch(ApiTester $I, $scenario)
     {
         $I->wantTo('Update an location with PATCH');
 
         // create
-        $location = factory(\App\Models\Location::class)->create([
+        $location = \App\Models\Location::factory()->create([
             'name' => 'Original Location Name',
         ]);
         $I->assertInstanceOf(\App\Models\Location::class, $location);
 
-        $temp_location = factory(\App\Models\Location::class)->make([
-            'name' => "updated location name",
+        $temp_location = \App\Models\Location::factory()->make([
+            'name' => 'updated location name',
         ]);
 
         $data = [
@@ -97,13 +97,13 @@ class ApiLocationsCest
             'parent_id' => $temp_location->parent_id,
             'parent_id' => $temp_location->parent_id,
             'manager_id' => $temp_location->manager_id,
-            'currency' => $temp_location->currency
+            'currency' => $temp_location->currency,
         ];
 
         $I->assertNotEquals($location->name, $data['name']);
 
         // update
-        $I->sendPATCH('/locations/' . $location->id, $data);
+        $I->sendPATCH('/locations/'.$location->id, $data);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -120,7 +120,7 @@ class ApiLocationsCest
         $temp_location->id = $location->id;
 
         // verify
-        $I->sendGET('/locations/' . $location->id);
+        $I->sendGET('/locations/'.$location->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
         $I->seeResponseContainsJson((new LocationsTransformer)->transformLocation($temp_location));
@@ -132,13 +132,13 @@ class ApiLocationsCest
         $I->wantTo('Delete an location');
 
         // create
-        $location = factory(\App\Models\Location::class)->create([
-            'name' => "Soon to be deleted"
+        $location = \App\Models\Location::factory()->create([
+            'name' => 'Soon to be deleted',
         ]);
         $I->assertInstanceOf(\App\Models\Location::class, $location);
 
         // delete
-        $I->sendDELETE('/locations/' . $location->id);
+        $I->sendDELETE('/locations/'.$location->id);
         $I->seeResponseIsJson();
         $I->seeResponseCodeIs(200);
 
@@ -147,7 +147,7 @@ class ApiLocationsCest
         $I->assertEquals(trans('admin/locations/message.delete.success'), $response->messages);
 
         // verify, expect a 200
-        $I->sendGET('/locations/' . $location->id);
+        $I->sendGET('/locations/'.$location->id);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
     }

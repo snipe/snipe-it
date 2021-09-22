@@ -47,9 +47,9 @@ class LdapAd extends LdapAdConfiguration
       '262688', // 0x40220  NORMAL_ACCOUNT, PASSWD_NOTREQD, SMARTCARD_REQUIRED
       '328192', // 0x50200  NORMAL_ACCOUNT, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
       '328224', // 0x50220  NORMAL_ACCOUNT, PASSWD_NOT_REQD, SMARTCARD_REQUIRED, DONT_EXPIRE_PASSWORD
-      '4260352',// 0x410200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, DONT_REQ_PREAUTH
-      '1049088',// 0x100200 NORMAL_ACCOUNT, NOT_DELEGATED
-      '1114624',// 0x110200 NORMAL_ACCOUNT, NOT_DELEGATED, DONT_EXPIRE_PASSWORD
+      '4260352', // 0x410200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, DONT_REQ_PREAUTH
+      '1049088', // 0x100200 NORMAL_ACCOUNT, NOT_DELEGATED
+      '1114624', // 0x110200 NORMAL_ACCOUNT, NOT_DELEGATED, DONT_EXPIRE_PASSWORD
     ];
 
     /**
@@ -86,8 +86,8 @@ class LdapAd extends LdapAdConfiguration
         }
 
         parent::init();
-        if($this->isLdapEnabled()) {
-            if($this->ldapSettings['is_ad'] == 0 ) { //only for NON-AD setups!
+        if ($this->isLdapEnabled()) {
+            if ($this->ldapSettings['is_ad'] == 0) { //only for NON-AD setups!
                 $this->ldapConfig['account_prefix'] = $this->ldapSettings['ldap_auth_filter_query'];
                 $this->ldapConfig['account_suffix'] = ','.$this->ldapConfig['base_dn'];
             } /*
@@ -98,16 +98,19 @@ class LdapAd extends LdapAdConfiguration
             */
             $this->ldap = new Adldap();
             $this->ldap->addProvider($this->ldapConfig);
+
             return true;
         }
+
         return false;
     }
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->init();
     }
 
-        /**
+    /**
      * Create a user if they successfully login to the LDAP server.
      *
      * @author Wes Hulette <jwhulette@gmail.com>
@@ -124,7 +127,7 @@ class LdapAd extends LdapAdConfiguration
     public function ldapLogin(string $username, string $password): User
     {
         if ($this->ldapSettings['ad_append_domain']) { //if you're using 'userprincipalname', don't check the ad_append_domain checkbox
-            $login_username = $username . '@' . $this->ldapSettings['ad_domain']; // I feel like could can be solved with the 'suffix' feature? Then this would be easier.
+            $login_username = $username.'@'.$this->ldapSettings['ad_domain']; // I feel like could can be solved with the 'suffix' feature? Then this would be easier.
         } else {
             $login_username = $username;
         }
@@ -137,18 +140,17 @@ class LdapAd extends LdapAdConfiguration
 
         if (($this->ldap) && ($this->ldap->auth()->attempt($login_username, $password, $bind_as_user) === false)) {
             throw new Exception('Unable to validate user credentials!');
-        }    
+        }
 
         // Should we sync the logged in user
         Log::debug('Attempting to find user in LDAP directory');
         $record = $this->ldap->search()->findBy($this->ldapSettings['ldap_username_field'], $username);
 
-        if($record) {
+        if ($record) {
             if ($this->isLdapSync($record)) {
                 $this->syncUserLdapLogin($record, $password);
             }
-        }
-        else {
+        } else {
             throw new Exception('Unable to find user in LDAP directory!');
         }
 
@@ -158,7 +160,7 @@ class LdapAd extends LdapAdConfiguration
         /* Above, I could've just done ->firstOrFail() which would've been cleaner, but it would've been miserable to
            troubleshoot if it ever came up (giving a really generic and untraceable error message)
         */
-        if (!$user) {
+        if (! $user) {
             throw new Exception("User is either deleted, not activated (can't log in), not from LDAP, or can't be found in database");
         }
 
@@ -178,19 +180,19 @@ class LdapAd extends LdapAdConfiguration
      *
      * @return null|\App\Models\User
      */
-    public function processUser(AdldapUser $user, ?Collection $defaultLocation=null, ?Collection $mappedLocations=null): ?User
+    public function processUser(AdldapUser $user, ?Collection $defaultLocation = null, ?Collection $mappedLocations = null): ?User
     {
         // Only sync active users <- I think this actually means 'existing', not 'activated/deactivated'
-        if(!$user) {
+        if (! $user) {
             return null;
         }
         $snipeUser = [];
-        $snipeUser['username']        = $user->{$this->ldapSettings['ldap_username_field']}[0] ?? '';
+        $snipeUser['username'] = $user->{$this->ldapSettings['ldap_username_field']}[0] ?? '';
         $snipeUser['employee_number'] = $user->{$this->ldapSettings['ldap_emp_num']}[0] ?? '';
-        $snipeUser['lastname']        = $user->{$this->ldapSettings['ldap_lname_field']}[0] ?? '';
-        $snipeUser['firstname']       = $user->{$this->ldapSettings['ldap_fname_field']}[0] ?? '';
-        $snipeUser['email']           = $user->{$this->ldapSettings['ldap_email']}[0] ?? '';
-        $snipeUser['title']           = $user->getTitle() ?? '';
+        $snipeUser['lastname'] = $user->{$this->ldapSettings['ldap_lname_field']}[0] ?? '';
+        $snipeUser['firstname'] = $user->{$this->ldapSettings['ldap_fname_field']}[0] ?? '';
+        $snipeUser['email'] = $user->{$this->ldapSettings['ldap_email']}[0] ?? '';
+        $snipeUser['title'] = $user->getTitle() ?? '';
         $snipeUser['telephonenumber'] = $user->getTelephoneNumber() ?? '';
 
         /*
@@ -204,7 +206,7 @@ class LdapAd extends LdapAdConfiguration
          * and it *will* override the administrators previous choices. I think this is a fair compromise.
          */
         $locationId = $this->getLocationId($user, $defaultLocation, $mappedLocations);
-        if ($locationId !== null ) {
+        if ($locationId !== null) {
             $snipeUser['location_id'] = $locationId;
         }
 
@@ -233,29 +235,29 @@ class LdapAd extends LdapAdConfiguration
         $user = User::firstOrNew([
                     'username' => $userInfo['username'],
                 ]);
-        $user->username     = $user->username ?? trim($userInfo['username']);
-        $user->password     = $user->password ?? Helper::generateEncyrptedPassword();
-        $user->first_name   = trim($userInfo['firstname']);
-        $user->last_name    = trim($userInfo['lastname']);
-        $user->email        = trim($userInfo['email']);
+        $user->username = $user->username ?? trim($userInfo['username']);
+        $user->password = $user->password ?? Helper::generateEncyrptedPassword();
+        $user->first_name = trim($userInfo['firstname']);
+        $user->last_name = trim($userInfo['lastname']);
+        $user->email = trim($userInfo['email']);
         $user->employee_num = trim($userInfo['employee_number']);
-        $user->jobtitle     = trim($userInfo['title']);
-        $user->phone        = trim($userInfo['telephonenumber']);
-        if (array_key_exists('activated',$userInfo)) {
-            $user->activated    = $userInfo['activated'];
-        } else if ( !$user->exists ) { // no 'activated' flag was set or unset, *AND* this user is new - activate by default.
+        $user->jobtitle = trim($userInfo['title']);
+        $user->phone = trim($userInfo['telephonenumber']);
+        if (array_key_exists('activated', $userInfo)) {
+            $user->activated = $userInfo['activated'];
+        } elseif (! $user->exists) { // no 'activated' flag was set or unset, *AND* this user is new - activate by default.
             $user->activated = 1;
         }
-        if (array_key_exists('location_id',$userInfo)) {
-            $user->location_id  = $userInfo['location_id'];
+        if (array_key_exists('location_id', $userInfo)) {
+            $user->location_id = $userInfo['location_id'];
         }
 
         // this is a new user
-        if (!isset($user->id)) {
-            $user->notes        = 'Imported from LDAP';
+        if (! isset($user->id)) {
+            $user->notes = 'Imported from LDAP';
         }
 
-        $user->ldap_import  = 1;
+        $user->ldap_import = 1;
 
         return $user;
     }
@@ -285,7 +287,7 @@ class LdapAd extends LdapAdConfiguration
             $user->password = bcrypt($password);
         }
 
-        if (!$user->save()) {
+        if (! $user->save()) {
             Log::debug('Could not save user. '.$user->getErrors());
             throw new Exception('Could not save user: '.$user->getErrors());
         }
@@ -304,13 +306,13 @@ class LdapAd extends LdapAdConfiguration
      */
     private function isLdapSync(AdldapUser $user): bool
     {
-        if ( !$this->ldapSettings['ldap_active_flag']) {
+        if (! $this->ldapSettings['ldap_active_flag']) {
             return true; // always sync if you didn't define an 'active' flag
         }
-       
-        if ( $user->{$this->ldapSettings['ldap_active_flag']} &&                           // if your LDAP user has the aforementioned flag as an attribute *AND* 
-             count($user->{$this->ldapSettings['ldap_active_flag']}) == 1 &&               // if that attribute has exactly one value *AND* 
-             strtolower($user->{$this->ldapSettings['ldap_active_flag']}[0]) == 'false') { // that value is the string 'false' (regardless of case), 
+
+        if ($user->{$this->ldapSettings['ldap_active_flag']} &&                           // if your LDAP user has the aforementioned flag as an attribute *AND*
+             count($user->{$this->ldapSettings['ldap_active_flag']}) == 1 &&               // if that attribute has exactly one value *AND*
+             strtolower($user->{$this->ldapSettings['ldap_active_flag']}[0]) == 'false') { // that value is the string 'false' (regardless of case),
             return false;                                                                  // then your user is *INACTIVE* - return false
         }
         // otherwise, return true
@@ -338,8 +340,8 @@ class LdapAd extends LdapAdConfiguration
          * If the admin has set their own 'active flag' - respect that instead
          * (this may work to allow AD users to ignore the built-in UAC stuff that AD does)
          */
-        if ($user->hasAttribute($user->getSchema()->userAccountControl()) && !$this->ldapSettings['ldap_active_flag']) {
-            \Log::debug('This is AD - userAccountControl is'. $user->getSchema()->userAccountControl());
+        if ($user->hasAttribute($user->getSchema()->userAccountControl()) && ! $this->ldapSettings['ldap_active_flag']) {
+            \Log::debug('This is AD - userAccountControl is'.$user->getSchema()->userAccountControl());
             $activeStatus = (in_array($user->getUserAccountControl(), self::AD_USER_ACCOUNT_CONTROL_FLAGS)) ? 1 : 0;
         } else {
 
@@ -347,26 +349,27 @@ class LdapAd extends LdapAdConfiguration
             // If there is no activated flag, then we can't make any determination about activated/deactivated
             if (false == $this->ldapSettings['ldap_active_flag']) {
                 \Log::debug('ldap_active_flag is false - no ldap_active_flag is set');
+
                 return null;
             }
 
             // If there *is* an activated flag, then respect it *only* if it is actually present. If it's not there, ignore it.
-            if (!$user->hasAttribute($this->ldapSettings['ldap_active_flag'])) {
+            if (! $user->hasAttribute($this->ldapSettings['ldap_active_flag'])) {
                 return null; // 'active' flag is defined, but does not exist on returned user record. So we don't know if they're active or not.
             }
 
             // if $user has the flag *AND* that flag has exactly one value -
-            if ( $user->{$this->ldapSettings['ldap_active_flag']} && count($user->{$this->ldapSettings['ldap_active_flag']}) == 1 ) {
-
+            if ($user->{$this->ldapSettings['ldap_active_flag']} && count($user->{$this->ldapSettings['ldap_active_flag']}) == 1) {
                 $active_flag_value = $user->{$this->ldapSettings['ldap_active_flag']}[0];
 
                 // if the value of that flag is case-insensitively the string 'false' or boolean false
-                if ( strcasecmp($active_flag_value, "false") == 0 || $active_flag_value === false ) {
+                if (strcasecmp($active_flag_value, 'false') == 0 || $active_flag_value === false) {
                     return 0; // then make them INACTIVE
                 } else {
                     return 1; // otherwise active
                 }
             }
+
             return 1; // fail 'open' (active) if we have the attribute and it's multivalued or empty; that's weird
         }
 
@@ -399,7 +402,7 @@ class LdapAd extends LdapAdConfiguration
             $location = $mappedLocations->filter(function ($value, $key) use ($user) {
                 //if ($user->inOu($value)) { // <----- *THIS* seems not to be working, and it seems more 'intelligent' - but it's literally just a strpos() call, and it doesn't work quite right against plain strings
                 $user_ou = substr($user->getDn(), -strlen($value)); // get the LAST chars of the user's DN, the count of those chars being the length of the thing we're checking against
-                if(strcasecmp($user_ou, $value) === 0) { // case *IN*sensitive comparision - some people say OU=blah, some say ou=blah. returns 0 when strings are identical (which is a little odd, yeah)
+                if (strcasecmp($user_ou, $value) === 0) { // case *IN*sensitive comparision - some people say OU=blah, some say ou=blah. returns 0 when strings are identical (which is a little odd, yeah)
                     return $key; // WARNING: we are doing a 'filter' - not a regular for-loop. So the answer(s) get "return"ed into the $location array
                 }
             });
@@ -423,7 +426,7 @@ class LdapAd extends LdapAdConfiguration
      */
     private function getBaseDn(): string
     {
-        if (!is_null($this->baseDn)) {
+        if (! is_null($this->baseDn)) {
             return $this->baseDn;
         }
 
@@ -442,7 +445,7 @@ class LdapAd extends LdapAdConfiguration
     private function getFilter(): ?string
     {
         $filter = $this->ldapSettings['ldap_filter'];
-        if (!$filter) {
+        if (! $filter) {
             return null;
         }
         // Add surrounding parentheses as needed
@@ -468,6 +471,7 @@ class LdapAd extends LdapAdConfiguration
     {
         /** @var Schema $schema */
         $schema = new $this->ldapConfig['schema'];
+
         return array_values(array_filter([
             $this->ldapSettings['ldap_username_field'],
             $this->ldapSettings['ldap_fname_field'],
@@ -557,7 +561,7 @@ class LdapAd extends LdapAdConfiguration
         $search = $this->ldap->search()->users()->in($this->getBaseDn()); //this looks wrong; we should instead have a passable parameter that does this, and use this as a 'sane' default, yeah?
 
         $filter = $this->getFilter();
-        if (!is_null($filter)) {
+        if (! is_null($filter)) {
             $search = $search->rawFilter($filter);
         }
         //I think it might be possible to potentially do our own paging here?

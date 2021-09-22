@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Trường tùy chỉnh',
     'field'		                => 'Cánh đồng',
     'about_fieldsets_title'		=> 'Giới thiệu về các trường',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Trường tùy chỉnh mới',
     'value_encrypted'      	        => 'Giá trị của trường này được mã hóa trong cơ sở dữ liệu. Chỉ những người dùng quản trị mới có thể xem được giá trị được giải mã',
     'show_in_email'     => 'Bao gồm giá trị của trường này trong email thanh toán được gửi tới người dùng? Các trường được mã hóa không thể được bao gồm trong email.',
-);
+];

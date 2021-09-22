@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'La Licenza non esiste.',
     'user_does_not_exist' => 'L\'utente non esiste.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'È necessario selezionare un\'attività o un utente, ma non entrambi.',
     'not_found' => 'Licenza non trovata',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'La licenza non è stata creata, si prega di riprovare.',
-        'success' => 'Licenza creata con successo.'
-    ),
+        'success' => 'Licenza creata con successo.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'File non cancellato. Riprova.',
         'success' => 'File cancellato con successo.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'File non caricato/i. Riprova.',
         'success' => 'File caricato/i con successo.',
         'nofiles' => 'Non hai selezionato nessun file per il caricamento, oppure il file selezionato è troppo grande',
         'invalidfiles' => 'Uno o più file sono troppo grandi o il formato del file non è consentito. I tipi di file consentiti sono png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, e lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'La licenza non è stata aggiornata, si prega di riprovare',
-        'success' => 'Licenza aggiornata con successo.'
-    ),
+        'success' => 'Licenza aggiornata con successo.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Sei sicuro di voler cancellare questa licenza?',
         'error'   => 'C\'è stato un problema nell\'eliminazione della licenza. Riprova.',
-        'success' => 'Licenza eliminata con successo.'
-    ),
+        'success' => 'Licenza eliminata con successo.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'C\'è stato un problema nell\'estrazione della licenza. Riprova.',
-        'success' => 'La licenza è stata estratta con successo'
-    ),
+        'success' => 'La licenza è stata estratta con successo',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'C\'è stato un problema nella registrazione della licenza. Riprova.',
-        'success' => 'La licenza è stata registrata con successo'
-    ),
+        'success' => 'La licenza è stata registrata con successo',
+    ],
 
-);
+];

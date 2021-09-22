@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => 'Nom du département',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Emplacement',
     'create'                    => 'Créer un département',
     'update'                    => 'Mise à jour Département',
-    );
+    ];

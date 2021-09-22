@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
@@ -8,32 +9,31 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ActionlogsTransformer
 {
-
-    public function transformActionlogs (Collection $actionlogs, $total)
+    public function transformActionlogs(Collection $actionlogs, $total)
     {
-        $array = array();
+        $array = [];
         $settings = Setting::getSettings();
         foreach ($actionlogs as $actionlog) {
             $array[] = self::transformActionlog($actionlog, $settings);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformActionlog (Actionlog $actionlog, $settings = null)
+    public function transformActionlog(Actionlog $actionlog, $settings = null)
     {
         $icon = $actionlog->present()->icon();
-        if ($actionlog->filename!='') {
-            $icon =  e(\App\Helpers\Helper::filetype_icon($actionlog->filename));
+        if ($actionlog->filename != '') {
+            $icon = e(\App\Helpers\Helper::filetype_icon($actionlog->filename));
         }
 
         // This is necessary since we can't escape special characters within a JSON object
-        if (($actionlog->log_meta) && ($actionlog->log_meta!='')) {
+        if (($actionlog->log_meta) && ($actionlog->log_meta != '')) {
             $meta_array = json_decode($actionlog->log_meta);
 
             if ($meta_array) {
                 foreach ($meta_array as $key => $value) {
                     foreach ($value as $meta_key => $meta_value) {
-
                         if (is_array($meta_value)) {
                             foreach ($meta_value as $meta_value_key => $meta_value_value) {
                                 $clean_meta[$key][$meta_value_key] = e($meta_value_value);
@@ -50,9 +50,7 @@ class ActionlogsTransformer
                             // so we have to walk down that next level
 
                             if (is_object($meta_value)) {
-
                                 foreach ($meta_value as $meta_value_key => $meta_value_value) {
-
                                     if ($meta_value_key == 'value') {
                                         $clean_meta[$key]['old'] = null;
                                         $clean_meta[$key]['new'] = e($meta_value->value);
@@ -61,25 +59,19 @@ class ActionlogsTransformer
                                         $clean_meta[$meta_value_key]['new'] = e($meta_value_value);
                                     }
                                 }
-
-
-
                             } else {
                                 $clean_meta[$key][$meta_key] = e($meta_value);
                             }
                         }
-
                     }
                 }
-
             }
         }
-
 
             $array = [
             'id'          => (int) $actionlog->id,
             'icon'          => $icon,
-            'file' => ($actionlog->filename!='') ?
+            'file' => ($actionlog->filename != '') ?
                 [
                     'url' => route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]),
                     'filename' => $actionlog->filename,
@@ -88,27 +80,27 @@ class ActionlogsTransformer
 
             'item' => ($actionlog->item) ? [
                 'id' => (int) $actionlog->item->id,
-                'name' => ($actionlog->itemType()=='user') ? $actionlog->filename : e($actionlog->item->getDisplayNameAttribute()),
+                'name' => ($actionlog->itemType() == 'user') ? $actionlog->filename : e($actionlog->item->getDisplayNameAttribute()),
                 'type' => e($actionlog->itemType()),
             ] : null,
             'location' => ($actionlog->location) ? [
                 'id' => (int) $actionlog->location->id,
-                'name' => e($actionlog->location->name)
+                'name' => e($actionlog->location->name),
             ] : null,
             'created_at'    => Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
             'updated_at'    => Helper::getFormattedDateObject($actionlog->updated_at, 'datetime'),
-            'next_audit_date' => ($actionlog->itemType()=='asset') ? Helper::getFormattedDateObject($actionlog->calcNextAuditDate(null, $actionlog->item), 'date'): null,
+            'next_audit_date' => ($actionlog->itemType() == 'asset') ? Helper::getFormattedDateObject($actionlog->calcNextAuditDate(null, $actionlog->item), 'date') : null,
             'days_to_next_audit' => $actionlog->daysUntilNextAudit($settings->audit_interval, $actionlog->item),
             'action_type'   => $actionlog->present()->actionType(),
             'admin' => ($actionlog->user) ? [
                 'id' => (int) $actionlog->user->id,
                 'name' => e($actionlog->user->getFullNameAttribute()),
                 'first_name'=> e($actionlog->user->first_name),
-                'last_name'=> e($actionlog->user->last_name)
+                'last_name'=> e($actionlog->user->last_name),
             ] : null,
             'target' => ($actionlog->target) ? [
                 'id' => (int) $actionlog->target->id,
-                'name' => ($actionlog->targetType()=='user') ? e($actionlog->target->getFullNameAttribute()) : e($actionlog->target->getDisplayNameAttribute()),
+                'name' => ($actionlog->targetType() == 'user') ? e($actionlog->target->getFullNameAttribute()) : e($actionlog->target->getDisplayNameAttribute()),
                 'type' => e($actionlog->targetType()),
             ] : null,
 
@@ -122,18 +114,13 @@ class ActionlogsTransformer
         return $array;
     }
 
-
-
-    public function transformCheckedoutActionlog (Collection $accessories_users, $total)
+    public function transformCheckedoutActionlog(Collection $accessories_users, $total)
     {
-
-        $array = array();
+        $array = [];
         foreach ($accessories_users as $user) {
             $array[] = (new UsersTransformer)->transformUser($user);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
-
-
-
 }

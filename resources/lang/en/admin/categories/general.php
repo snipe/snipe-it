@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'Asset Categories',
     'category_name'  					=> 'Category Name',
     'checkin_email'                     => 'Send email to user on checkin/checkout.',
@@ -20,4 +20,4 @@ return array(
     'use_default_eula_column'			=> 'Use default EULA',
     'use_default_eula_disabled'			=> '<del>Use the primary default EULA instead.</del> No primary default EULA is set. Please add one in Settings.',
 
-);
+];

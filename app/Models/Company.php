@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Auth;
 use DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 
@@ -15,14 +17,16 @@ use Watson\Validating\ValidatingTrait;
  */
 final class Company extends SnipeModel
 {
+    use HasFactory;
+
     protected $table = 'companies';
 
     // Declare the rules for the model validation
     protected $rules = [
-        'name' => 'required|min:1|max:255|unique:companies,name'
+        'name' => 'required|min:1|max:255|unique:companies,name',
     ];
 
-    protected $presenter = 'App\Presenters\CompanyPresenter';
+    protected $presenter = \App\Presenters\CompanyPresenter::class;
     use Presentable;
 
     /**
@@ -30,11 +34,10 @@ final class Company extends SnipeModel
     * validation rules before attempting validation. If this property
     * is not set in the model it will default to true.
     *
-    * @var boolean
+     * @var bool
     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
-
     use Searchable;
     
     /**
@@ -70,7 +73,7 @@ final class Company extends SnipeModel
         }
     }
 
-    private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null )
+    private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null)
     {
         if (Auth::user()) {
             $company_id = Auth::user()->company_id;
@@ -80,7 +83,7 @@ final class Company extends SnipeModel
 
         $table = ($table_name) ? $table_name."." : $query->getModel()->getTable().".";
 
-        if(\Schema::hasColumn($query->getModel()->getTable(), $column)){
+        if (\Schema::hasColumn($query->getModel()->getTable(), $column)) {
              return $query->where($table.$column, '=', $company_id);
         } else {
             return $query->join('users as users_comp', 'users_comp.id', 'user_id')->where('users_comp.company_id', '=', $company_id);
@@ -100,7 +103,7 @@ final class Company extends SnipeModel
 
     public static function getIdForCurrentUser($unescaped_input)
     {
-        if (!static::isFullMultipleCompanySupportEnabled()) {
+        if (! static::isFullMultipleCompanySupportEnabled()) {
             return static::getIdFromInput($unescaped_input);
         } else {
             $current_user = Auth::user();
@@ -115,7 +118,6 @@ final class Company extends SnipeModel
                     return static::getIdFromInput($unescaped_input);
                 }
             }
-
         }
     }
 
@@ -123,27 +125,27 @@ final class Company extends SnipeModel
     {
         if (is_null($companyable)) {
             return false;
-        } elseif (!static::isFullMultipleCompanySupportEnabled()) {
+        } elseif (! static::isFullMultipleCompanySupportEnabled()) {
             return true;
         } else {
             if (Auth::user()) {
                 $current_user_company_id = Auth::user()->company_id;
                 $companyable_company_id = $companyable->company_id;
-                return ($current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser());
-            }
 
+                return $current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser();
+            }
         }
     }
 
     public static function isCurrentUserAuthorized()
     {
-        return ((!static::isFullMultipleCompanySupportEnabled()) || (Auth::user()->isSuperUser()));
+        return (! static::isFullMultipleCompanySupportEnabled()) || (Auth::user()->isSuperUser());
     }
 
     public static function canManageUsersCompanies()
     {
-        return (!static::isFullMultipleCompanySupportEnabled() || Auth::user()->isSuperUser() ||
-                Auth::user()->company_id == null);
+        return ! static::isFullMultipleCompanySupportEnabled() || Auth::user()->isSuperUser() ||
+                Auth::user()->company_id == null;
     }
 
     /**
@@ -153,7 +155,8 @@ final class Company extends SnipeModel
      * @since [v5.0]
      * @return bool
      */
-    public function isDeletable() {
+    public function isDeletable()
+    {
         return Gate::allows('delete', $this)
                 && ($this->assets()->count() === 0)
                 && ($this->accessories()->count() === 0)
@@ -164,17 +167,17 @@ final class Company extends SnipeModel
 
     public static function getIdForUser($unescaped_input)
     {
-        if (!static::isFullMultipleCompanySupportEnabled() || Auth::user()->isSuperUser()) {
+        if (! static::isFullMultipleCompanySupportEnabled() || Auth::user()->isSuperUser()) {
             return static::getIdFromInput($unescaped_input);
         } else {
             return static::getIdForCurrentUser($unescaped_input);
         }
     }
 
-    public static function scopeCompanyables($query, $column = 'company_id', $table_name = null )
+    public static function scopeCompanyables($query, $column = 'company_id', $table_name = null)
     {
         // If not logged in and hitting this, assume we are on the command line and don't scope?'
-        if (!static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser()) || (!Auth::check())) {
+        if (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser()) || (! Auth::check())) {
             return $query;
         } else {
             return static::scopeCompanyablesDirectly($query, $column, $table_name);
@@ -185,7 +188,7 @@ final class Company extends SnipeModel
     {
         if (count($companyable_names) == 0) {
             throw new Exception('No Companyable Children to scope');
-        } elseif (!static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser())) {
+        } elseif (! static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser())) {
             return $query;
         } else {
             $f = function ($q) {
@@ -199,6 +202,7 @@ final class Company extends SnipeModel
                     $q2 = $q2->orWhereHas($companyable_names[$i], $f);
                 }
             });
+
             return $q;
         }
     }
@@ -217,6 +221,7 @@ final class Company extends SnipeModel
     {
         return $this->hasMany(License::class, 'company_id');
     }
+
     public function accessories()
     {
         return $this->hasMany(Accessory::class, 'company_id');

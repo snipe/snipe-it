@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Direktori Aktif',
     'ad_domain'				    => 'Domain direktori aktif',
     'ad_domain_help'			=> 'Ini kadangkala sama dengan domain e-mel anda, tetapi tidak semestinya.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'Ini adalah pelayan Direktori Aktif',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Amaran Pemberitahuan Amaran (dalam hari)',
     'alert_inv_threshold'		=> 'Ambang Amaran Inventori',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID Aset',
     'audit_interval'            => 'Selang Audit',
     'audit_interval_help'       => 'Sekiranya anda dikehendaki untuk secara tetap mengaudit aset anda, masukkan selang waktu dalam bulan.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Masukkan Kod Dua Faktor',
     'two_factor_config_complete'	=> 'Hantar Kod',
     'two_factor_enabled_edit_not_allowed' => 'Pentadbir anda tidak membenarkan anda mengedit tetapan ini.',
-    'two_factor_enrollment_text'	=> "Dua faktor pengesahan diperlukan, namun peranti anda belum lagi mendaftar. Buka apl Google Authenticator anda dan imbas kod QR di bawah untuk mendaftarkan peranti anda. Sebaik sahaja anda telah mendaftarkan peranti anda, masukkan kod di bawah",
+    'two_factor_enrollment_text'	=> 'Dua faktor pengesahan diperlukan, namun peranti anda belum lagi mendaftar. Buka apl Google Authenticator anda dan imbas kod QR di bawah untuk mendaftarkan peranti anda. Sebaik sahaja anda telah mendaftarkan peranti anda, masukkan kod di bawah',
     'require_accept_signature'      => 'Memerlukan Tandatangan',
     'require_accept_signature_help_text'      => 'Mengaktifkan ciri ini akan menghendaki pengguna menandatangani secara fizikal apabila menerima aset.',
     'left'        => 'dibiarkan',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Panjang tag aset, termasuk zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

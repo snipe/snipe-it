@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Brugerdefinerede felter',
     'field'		                => 'Felt',
     'about_fieldsets_title'		=> 'Om Feltsæt',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Nyt Brugerdefinerede Felt',
     'value_encrypted'      	        => 'Værdien af dette felt er krypteret i databasen. Kun admins vil være i stand til at se den krypteret værdi',
     'show_in_email'     => 'Inkludér værdien af ​​dette felt i tjekud-e-mail til brugeren? Krypterede felter kan ikke medtages i e-mails.',
-);
+];

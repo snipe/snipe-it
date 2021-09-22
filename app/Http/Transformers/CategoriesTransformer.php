@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
@@ -9,20 +10,19 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoriesTransformer
 {
-
-    public function transformCategories (Collection $categorys, $total)
+    public function transformCategories(Collection $categorys, $total)
     {
-        $array = array();
+        $array = [];
         foreach ($categorys as $category) {
             $array[] = self::transformCategory($category);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformCategory (Category $category = null)
+    public function transformCategory(Category $category = null)
     {
         if ($category) {
-
             $array = [
                 'id' => (int) $category->id,
                 'name' => e($category->name),
@@ -31,7 +31,7 @@ class CategoriesTransformer
                 'has_eula' => ($category->getEula() ? true : false),
                 'use_default_eula' => ($category->use_default_eula=='1' ? true : false),
                 'eula' => ($category->getEula()),
-                'checkin_email' => ($category->checkin_email =='1'),
+                'checkin_email' => ($category->checkin_email == '1'),
                 'require_acceptance' => ($category->require_acceptance == '1'),
                 'item_count' => (int) $category->itemCount(),
                 'assets_count' => (int) $category->assets_count,
@@ -52,10 +52,5 @@ class CategoriesTransformer
 
             return $array;
         }
-
-
     }
-
-
-
 }

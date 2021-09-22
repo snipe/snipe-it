@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'Mō Ngā Kaihoko',
     'about_suppliers_text'  => 'Ka whakamahia nga kaiwhakarato ki te whai i te puna o nga taonga',
     'address'               => 'Kaihoko Kaiwhakahaere',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Tirohia nga Taonga mo',
     'zip'                   => 'Waehere Pouaka',
 
-);
+];

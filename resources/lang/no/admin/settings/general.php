@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory domene',
     'ad_domain_help'			=> 'Dette er noen ganger det samme som e-post domene, men ikke alltid.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC e-post',
     'admin_cc_email_help'       => 'Hvis du vil sende en kopi av innsjekk-/utsjekkeposter som sendes til brukere til en ekstra epostadresse, skriv den inn her. La ellers feltet stå tomt.',
     'is_ad'				        => 'Dette er en Active Directory server',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Terskel for utløpende varslinger (dager)',
     'alert_inv_threshold'		=> 'Terskel for eiendelsvarslinger',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Eiendels-IDer',
     'audit_interval'            => 'Audit intervall',
     'audit_interval_help'       => 'Hvis du regelmessig må fysisk overvåke dine eiendeler, angi intervallet i måneder.',
@@ -214,7 +214,7 @@ Linjeskift, topptekst, bilder, osv. kan føre til uventede resultater.',
     'two_factor_enter_code'	=> 'Skriv inn to-faktor kode',
     'two_factor_config_complete'	=> 'Send kode',
     'two_factor_enabled_edit_not_allowed' => 'Systemansvarlig tillater ikke at du redigerer denne innstillingen.',
-    'two_factor_enrollment_text'	=> "To-faktor autentisering er påkrevd, men enheten din har ikke blitt aktivert for dette enda. Åpne Google Authenticator-appen og scan inn QR-koden nedenfor for å aktivere. Når du har aktivert enheten din, skriv inn koden nedenfor",
+    'two_factor_enrollment_text'	=> 'To-faktor autentisering er påkrevd, men enheten din har ikke blitt aktivert for dette enda. Åpne Google Authenticator-appen og scan inn QR-koden nedenfor for å aktivere. Når du har aktivert enheten din, skriv inn koden nedenfor',
     'require_accept_signature'      => 'Kreve signatur',
     'require_accept_signature_help_text'      => 'Aktivering av denne funksjonen ville forlange brukernes å fysisk logge ut for å akseptere en eiendel.',
     'left'        => 'venstre',
@@ -227,4 +227,4 @@ Linjeskift, topptekst, bilder, osv. kan føre til uventede resultater.',
     'unique_serial_help_text'                => 'Håndhever at  eiendelsserienumre er unike',
     'zerofill_count'        => 'Lengden på ID-merker, inkludert zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

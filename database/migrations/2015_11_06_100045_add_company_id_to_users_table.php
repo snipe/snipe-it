@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class AddCompanyIdToUsersTable extends Migration {
-
+class AddCompanyIdToUsersTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,8 +12,7 @@ class AddCompanyIdToUsersTable extends Migration {
      */
     public function up()
     {
-        Schema::table('users', function(Blueprint $table)
-        {
+        Schema::table('users', function (Blueprint $table) {
             $table->integer('company_id')->unsigned()->nullable();
             //$table->foreign('company_id')->references('id')->on('companies');
         });
@@ -26,8 +25,7 @@ class AddCompanyIdToUsersTable extends Migration {
      */
     public function down()
     {
-        Schema::table('users', function(Blueprint $table)
-        {
+        Schema::table('users', function (Blueprint $table) {
             //$table->dropForeign('users_company_id_foreign');
             $table->dropColumn('company_id');
         });

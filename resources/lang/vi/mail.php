@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Người dùng đã hủy bỏ một khoản mục yêu cầu trên trang web',
     'a_user_requested' => 'Người dùng đã yêu cầu một mục trên trang web',
     'accessory_name' => 'Tên Phụ Kiện:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Báo cáo mong muốn cấp phát tài sản',
     'Expected_Checkin_Notification' => 'Nhắn nhở: hạn chót cấp phát cho :name gần đến',
     'Expected_Checkin_Date' => 'Một tài sản đã thu hồi về cho bạn vì đã hoàn lại vào ngày :date',
-    'your_assets' => 'Xen qua tài sản của bạn'
-);
+    'your_assets' => 'Xen qua tài sản của bạn',
+];

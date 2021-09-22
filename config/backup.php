@@ -8,7 +8,6 @@
  | be modified directly.
 */
 
-
 // This is janky, but necessary to figure out whether to include the .env in the backup
 $included_dirs = [
     base_path('public/uploads'),
@@ -18,7 +17,7 @@ $included_dirs = [
 
 ];
 
-if (env('BACKUP_ENV')=='true') {
+if (env('BACKUP_ENV') == 'true') {
     $included_dirs[] = base_path('.env');
 }
 

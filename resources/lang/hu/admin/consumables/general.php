@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Checkout Felhasználónak szállítható',
     'consumable_name'                   => 'Kellék Neve',
     'create'                            => 'Kellék létrehozva',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Fennmaradó',
     'total' 			                => 'Összesen',
     'update'                            => 'Kellék frissítése',
-);
+];

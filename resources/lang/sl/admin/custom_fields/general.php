@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Polja po meri',
     'field'		                => 'Polje',
     'about_fieldsets_title'		=> 'O setih polj',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Novo polje po meri',
     'value_encrypted'      	        => 'Vrednost tega polja je šifrirana v bazi podatkov. Dešifrirane vrednosti bodo lahko videli samo skrbniki sistema',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+];

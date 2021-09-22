@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddSupplierIdToAsset extends Migration
 {
@@ -13,7 +13,7 @@ class AddSupplierIdToAsset extends Migration
     public function up()
     {
         Schema::table('assets', function ($table) {
-            $table->integer('supplier_id')->nullable()->default(NULL);
+            $table->integer('supplier_id')->nullable()->default(null);
         });
     }
 
@@ -28,5 +28,4 @@ class AddSupplierIdToAsset extends Migration
             $table->dropColumn('supplier_id');
         });
     }
-
 }

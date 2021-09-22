@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_licenses_title'            => 'O licencama',
     'about_licenses'                  => 'Licence se koriste za praćenje softvera. Imaju određeni broj mesta koja se mogu dodeliti pojedincima',
     'checkin'  					=> 'Checkin License Seat',
@@ -18,4 +18,4 @@ return array(
     'software_licenses'  		=> 'Licence za softver',
     'user'  					=> 'Korisnik',
     'view'  					=> 'Prikaži licencu',
-);
+];

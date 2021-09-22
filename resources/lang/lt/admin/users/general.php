@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Šis vartotojas gali prisijungti',
     'activated_disabled_help_text' => 'Jūs negalite keisti savosios pąskyros aktyvacijos statuso.',
     'assets_user'       => 'Priskirta įranga :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Redaguoti naudotoją',
     'filetype_info'     => 'Leidžiami dokumentų formatai png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar.',
     'history_user'      => ':name naudotojo istorija',
-	'info'				=> 'Informacija',
+    'info'				=> 'Informacija',
     'restore_user'		=> 'Spauskite čia norėdami juos atkurti.',
     'last_login'        => 'Paskutinis prisijungimas',
     'ldap_config_text'  => 'LDAP konfigūracijos parametrus galite rasti Administratorius> Nustatymai. Pasirinkta vieta (pasirinktinai) bus nustatyta visiems importuojamiems vartotojams.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Dabartiniai jūsų nustatymai leidžia pasirinkti dviejų veiksnių autentifikavimą.',
     'two_factor_enrolled' => 'Įrašytas 2FA įrenginys',
     'two_factor_active'   => '2FA aktyvus',
-    );
+    ];

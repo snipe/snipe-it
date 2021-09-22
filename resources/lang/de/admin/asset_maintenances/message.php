@@ -5,15 +5,15 @@
         'delete'                       => [
             'confirm' => 'Möchten Sie die Wartung wirklich löschen?',
             'error'   => 'Es gab Probleme beim Löschen der Wartung. Bitte versuchen Sie es erneut.',
-            'success' => 'Die Wartung wurde erfolgreich gelöscht.'
+            'success' => 'Die Wartung wurde erfolgreich gelöscht.',
         ],
         'create'                       => [
             'error'   => 'Wartung wurde nicht erstellt. Bitte versuchen Sie es erneut.',
-            'success' => 'Wartung erfolgreich erstellt.'
+            'success' => 'Wartung erfolgreich erstellt.',
         ],
         'edit'                       => [
             'error'   => 'Die Wartung wurde nicht bearbeitet, bitte versuchen Sie es erneut.',
-            'success' => 'Wartung wurde erfolgreich bearbeitet.'
+            'success' => 'Wartung wurde erfolgreich bearbeitet.',
         ],
         'asset_maintenance_incomplete' => 'Nicht vollständig ausgefüllt',
         'warranty'                     => 'Garantie',

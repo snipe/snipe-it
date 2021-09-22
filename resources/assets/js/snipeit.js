@@ -1,4 +1,8 @@
 
+// var jQuery = require('jquery');
+// window.jQuery = jQuery
+// window.$ = jQuery
+
 /**
  * Module containing core application logic.
  * @param  {jQuery} $        Insulated jQuery object
@@ -197,7 +201,7 @@ $(document).ready(function () {
             ajax: {
 
                 // the baseUrl includes a trailing slash
-                url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
                 dataType: 'json',
                 delay: 250,
                 headers: {
@@ -282,7 +286,7 @@ $(document).ready(function () {
 			var endpoint = element.data("endpoint");
 			var assetStatusType = element.data("asset-status-type");
 			$.ajax({
-				url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist?search='+value+'&page=1' + (assetStatusType ? '&assetStatusType='+assetStatusType : ''),
+				url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search='+value+'&page=1' + (assetStatusType ? '&assetStatusType='+assetStatusType : ''),
 				dataType: 'json',
 				headers: {
 					"X-Requested-With": 'XMLHttpRequest',

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Tällä sähköpostiosoitteella löytyy jo käyttäjätili.',
     'account_not_found'      => 'Käyttäjänimi tai salasana on virheellinen.',
@@ -9,37 +9,36 @@ return array(
     'account_banned'         => 'Käyttäjätili on estetty.',
     'throttle'               => 'Liian monta kirjautumisyritystä. Yritä uudelleen :minutes minuutin kuluttua.',
 
-    'two_factor' => array(
+    'two_factor' => [
         'already_enrolled'      => 'Laitteesi on jo käytössä.',
         'success'               => 'Sisäänkirjautuminen onnistui.',
         'code_required'         => 'MFA koodi on pakollinen.',
         'invalid_code'          => 'MFA koodi on virheellinen.',
-    ),
+    ],
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Sisäänkirjautumisessa tapahtui virhe, yritä uudelleen.',
         'success' => 'Sisäänkirjautuminen onnistui.',
-    ),
+    ],
 
-    'logout' => array(
+    'logout' => [
         'error'   => 'Sisäänkirjautumisessa tapahtui virhe, yritä uudelleen.',
         'success' => 'Olet kirjautunut ulos.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Käyttäjätilin luonnissa tapahtui virhe, yritä uudelleen.',
         'success' => 'Käyttäjätili luotu onnistuneesti.',
-    ),
+    ],
 
-    'forgot-password' => array(
+    'forgot-password' => [
         'error'   => 'Salasanan nollauksessa tapahtui virhe, yritä uudelleen.',
         'success' => 'Jos sähköpostiosoite on järjestelmässä, salasanan palautus sähköposti on lähetetty.',
-    ),
+    ],
 
-    'forgot-password-confirm' => array(
+    'forgot-password-confirm' => [
         'error'   => 'Salasanan nollauksessa tapahtui virhe, yritä uudelleen.',
         'success' => 'Salasana on nollattu onnistuneesti.',
-    ),
+    ],
 
-
-);
+];

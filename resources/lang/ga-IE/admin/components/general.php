@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'Ainm an Chomhpháirt',
     'checkin'                             => 'Comhpháirt Checkin',
     'checkout'                             => 'Comhpháirt Seiceáil',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'Ag fágáil',
     'total' 			                 => 'Iomlán',
     'update'                            => 'Comhpháirt Nuashonraithe',
-);
+];

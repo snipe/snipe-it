@@ -23,5 +23,4 @@ class DropLicensesTable extends Migration
     {
         //
     }
-
 }

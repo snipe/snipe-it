@@ -22,16 +22,18 @@ use App\Models\LicenseSeat;
 
 class LogListener
 {
-
-    public function onCheckoutableCheckedIn(CheckoutableCheckedIn $event) {
+    public function onCheckoutableCheckedIn(CheckoutableCheckedIn $event)
+    {
         $event->checkoutable->logCheckin($event->checkedOutTo, $event->note, $event->action_date);
     }
 
-    public function onCheckoutableCheckedOut(CheckoutableCheckedOut $event) {
+    public function onCheckoutableCheckedOut(CheckoutableCheckedOut $event)
+    {
         $event->checkoutable->logCheckout($event->note, $event->checkedOutTo, $event->checkoutable->last_checkout);
-    }    
+    }
 
-    public function onCheckoutAccepted(CheckoutAccepted $event) {
+    public function onCheckoutAccepted(CheckoutAccepted $event)
+    {
         $logaction = new Actionlog();
 
         $logaction->item()->associate($event->acceptance->checkoutable);
@@ -40,14 +42,15 @@ class LogListener
         $logaction->action_type = 'accepted';
 
         // TODO: log the actual license seat that was checked out
-        if($event->acceptance->checkoutable instanceof LicenseSeat) {
+        if ($event->acceptance->checkoutable instanceof LicenseSeat) {
             $logaction->item()->associate($event->acceptance->checkoutable->license);
         }
-        
-        $logaction->save();
-    }   
 
-    public function onCheckoutDeclined(CheckoutDeclined $event) {
+        $logaction->save();
+    }
+
+    public function onCheckoutDeclined(CheckoutDeclined $event)
+    {
         $logaction = new Actionlog();
         $logaction->item()->associate($event->acceptance->checkoutable);
         $logaction->target()->associate($event->acceptance->assignedTo);
@@ -55,12 +58,12 @@ class LogListener
         $logaction->action_type = 'declined';
 
         // TODO: log the actual license seat that was checked out
-        if($event->acceptance->checkoutable instanceof LicenseSeat) {
+        if ($event->acceptance->checkoutable instanceof LicenseSeat) {
             $logaction->item()->associate($event->acceptance->checkoutable->license);
         }
 
-        $logaction->save();        
-    } 
+        $logaction->save();
+    }
 
     /**
      * Register the listeners for the subscriber.
@@ -73,15 +76,14 @@ class LogListener
             'CheckoutableCheckedIn',
             'CheckoutableCheckedOut',
             'CheckoutAccepted',
-            'CheckoutDeclined', 
+            'CheckoutDeclined',
         ];
 
-        foreach($list as $event)  {
+        foreach ($list as $event) {
             $events->listen(
-                'App\Events\\' . $event,
-                'App\Listeners\LogListener@on' . $event
+                'App\Events\\'.$event,
+                'App\Listeners\LogListener@on'.$event
             );
-        }         
+        }
     }
-
 }

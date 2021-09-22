@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'שדות מותאמים אישית',
     'field'		                => 'שדה',
     'about_fieldsets_title'		=> 'אודות שדות',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'שדה מותאם אישית חדש',
     'value_encrypted'      	        => 'הערך של שדה זה מוצפן במסד הנתונים. רק משתמשי מנהל יוכלו להציג את הערך המפוענח',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+];

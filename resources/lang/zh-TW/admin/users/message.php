@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => '您已接受這項資產。',
     'declined'                  => '您已拒絕這項資產。',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'LDAP 整合尚未設定',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => '新增使用者成功。',
         'update'    => '更新使用者成功。',
         'update_bulk'    => '使用者更新成功 ！',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => '解除停用使用者成功。',
         'restored'  => '恢復使用者成功。',
         'import'    => '匯入使用者成功。',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => '新增使用者失敗，請重試。',
         'update' => '更新使用者失敗，請重試。',
         'delete' => '刪除使用者失敗，請重試。',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => '查詢 LDAP 伺服器失敗，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',
         'ldap_could_not_get_entries' => ' LDAP 伺服器取得資訊條目失敗，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',
         'password_ldap' => '此帳戶的密碼由 LDAP/AD 管理。若要更改您的密碼，請聯繫您的 IT 部門。 ',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => '刪除檔案失敗，請重試',
         'success' => '刪除檔案成功。',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => '上傳檔案失敗，請重試',
         'success' => '上傳檔案成功。',
         'nofiles' => '尚未選擇要上傳的檔案',
         'invalidfiles' => '一個或多個檔案太大或屬於不被允許的檔案類型。允許上傳的檔案類型：png, gif, jpg, doc, docx, pdf, txt。',
-    ),
+    ],
 
-);
+];

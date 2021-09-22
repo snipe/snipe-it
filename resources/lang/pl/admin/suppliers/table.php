@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'O Dostawcach',
     'about_suppliers_text'  => 'Dostawcy są wykorzystywani do śledzenia źródeł elementów',
     'address'               => 'Adres Dostawcy',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Podgląd aktywa dla',
     'zip'                   => 'Kod Pocztowy',
 
-);
+];

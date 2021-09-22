@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Un utente ha annullato una richiesta di articolo sul sito web',
     'a_user_requested' => 'Un utente ha richiesto un elemento tramite il sito web',
     'accessory_name' => 'Nome accessorio:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Rapporto restituzione attesa del bene',
     'Expected_Checkin_Notification' => 'Promemoria: scadenza riconsegna :name in avvicinamento',
     'Expected_Checkin_Date' => 'Un asset assegnato a te deve essere ricontrollato il :date',
-    'your_assets' => 'Visualizza i tuoi assets'
-);
+    'your_assets' => 'Visualizza i tuoi assets',
+];

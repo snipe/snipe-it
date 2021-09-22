@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Domena Active Directory',
     'ad_domain_help'			=> 'To je včasih enako kot vaša domena e-pošte, vendar ne vedno.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'To je strežnik Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Prag za opozorilo pri poteku (v dneh)',
     'alert_inv_threshold'		=> 'Prag za opozorilo pri inventuri',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID sredstva',
     'audit_interval'            => 'Revizijski interval',
     'audit_interval_help'       => 'Če boste morali redno fizično pregledovati svoja sredstva, vnesite interval v mesecih.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Vnesite dvo-stopenjsko kodo',
     'two_factor_config_complete'	=> 'Pošlji kodo',
     'two_factor_enabled_edit_not_allowed' => 'Vaš skrbnik vam ne dovoli urejanja te nastavitve.',
-    'two_factor_enrollment_text'	=> "Zahtevano je dvo-stopenjsko preverjanje pristnosti, vendar vaša naprava še ni bila včlanjena. Odprite aplikacijo Google Authenticator in si oglejte spodnjo kodo QR, če želite vnesti svojo napravo. Ko vnesete napravo, vnesite spodnjo kodo",
+    'two_factor_enrollment_text'	=> 'Zahtevano je dvo-stopenjsko preverjanje pristnosti, vendar vaša naprava še ni bila včlanjena. Odprite aplikacijo Google Authenticator in si oglejte spodnjo kodo QR, če želite vnesti svojo napravo. Ko vnesete napravo, vnesite spodnjo kodo',
     'require_accept_signature'      => 'Zahtevaj podpis',
     'require_accept_signature_help_text'      => 'Če omogočite to funkcijo, se bodo uporabniki morali fizično odjaviti ob sprejemu sredstva.',
     'left'        => 'levo',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Dolžina oznak sredstev, vključno z zerofilom',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

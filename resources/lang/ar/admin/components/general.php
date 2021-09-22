@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'اسم المكون',
     'checkin'                             => 'ادخالات المكونات',
     'checkout'                             => 'مخرجات المكونات',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'المتبقية',
     'total' 			                 => 'المجموع',
     'update'                            => 'تحديث مكون',
-);
+];

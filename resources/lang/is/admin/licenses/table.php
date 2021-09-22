@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'Úthlutað til',
     'checkout'   		=> 'In/Out',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'Raðnúmer',
     'title'      		=> 'Leyfi',
 
-);
+];

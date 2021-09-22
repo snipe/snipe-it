@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Lietotājs var pieslēgties sistēmai',
     'activated_disabled_help_text' => 'Jūs nevarat rediģēt sava konta aktivizācijas statusu.',
     'assets_user'       => 'Aktīvi, kas piešķirti: nosaukums',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Rediģēt lietotāju',
     'filetype_info'     => 'Atļautie failu tipi ir png, gif, jpg, jpeg, doc, docx, pdf, txt, zip un rar.',
     'history_user'      => 'Vēsture: vārds',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Noklikšķiniet šeit, lai tos atjaunotu.',
     'last_login'        => 'Pēdējais pieteikšanās',
     'ldap_config_text'  => 'LDAP konfigurācijas iestatījumus var atrast Admin> Settings. Atlasītā atrašanās vieta (izvēles) tiks iestatīta visiem importētajiem lietotājiem.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Jūsu pašreizējie administrēšanas iestatījumi ļauj atlasīt divu faktoru autentifikāciju.',
     'two_factor_enrolled' => 'Reģistrēta 2F ierīce',
     'two_factor_active'   => '2FA aktīvs',
-    );
+    ];

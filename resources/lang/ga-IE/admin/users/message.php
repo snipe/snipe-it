@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Ghlac tú leis an tsócmhainn seo go rathúil.',
     'declined'                  => 'Dhiúltaigh tú an tsócmhainn seo go rathúil.',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'Níl cumasc LDAP cumraithe don suiteáil seo.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Úsáideadh an t-úsáideoir go rathúil.',
         'update'    => 'Rinneadh an nuashonrú ar an úsáideoir.',
         'update_bulk'    => 'Tugadh cothrom le dáta d\'úsáideoirí!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'Rinneadh an t-úsáideoir a neamhshlánú go rathúil.',
         'restored'  => 'Cuireadh an t-úsáideoir ar ais go rathúil.',
         'import'    => 'Allmhairítear úsáideoirí go rathúil.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Bhí ceist ann a chruthaigh an t-úsáideoir. Arís, le d\'thoil.',
         'update' => 'Bhí ceist ann ag nuashonrú an úsáideora. Arís, le d\'thoil.',
         'delete' => 'Bhí ceist ann a scriosadh an t-úsáideoir. Arís, le d\'thoil.',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'Níorbh fhéidir an freastalaí LDAP a chuardach. Seiceáil do chumraíocht an fhreastalaí LDAP sa chomhad cumraíochta LDAP. <br>Error ó Freastalaí LDAP:',
         'ldap_could_not_get_entries' => 'Níorbh fhéidir iontrálacha a fháil ón fhreastalaí LDAP. Seiceáil do chumraíocht an fhreastalaí LDAP sa chomhad cumraíochta LDAP. <br>Error ó Freastalaí LDAP:',
         'password_ldap' => 'Bainistíonn LDAP / Active Directory an focal faire don chuntas seo. Téigh i dteagmháil le do roinn TF chun do phasfhocal a athrú.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Ní scriosadh an comhad. Arís, le d\'thoil.',
         'success' => 'Comhad a scriosadh go rathúil',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Comhad (í) nach bhfuil uaslódáil. Arís, le d\'thoil.',
         'success' => 'Comhad (í) uaslódáil go rathúil.',
         'nofiles' => 'Níor roghnaigh tú aon chomhaid le híoslódáil',
         'invalidfiles' => 'Tá ceann amháin nó níos mó de do chuid comhad ró-mhór nó is comhad í nach bhfuil ceadaithe. Tá píopaí comhaid a cheadaítear png, gif, jpg, doc, docx, pdf, and txt.',
-    ),
+    ],
 
-);
+];

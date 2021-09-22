@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'Acerca da Rótulos de Estados',
     'archived'      	=> 'Arquivado',
     'create'      	=> 'Criar Estado',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Estados',
     'undeployable'  => 'Não implementável',
     'update'      	=> 'Atualizar Estado',
-);
+];

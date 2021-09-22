@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Pengguna ini dapat masuk',
     'activated_disabled_help_text' => 'Anda tidak dapat menyunting status aktivasi akun anda sendiri.',
     'assets_user'       => 'Aset ditetapkan untuk :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Sunting Pengguna',
     'filetype_info'     => 'Tipe file yang dibolehkan png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Riwayat untuk :name',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Klik disini untuk mengembalikan mereka.',
     'last_login'        => 'Masuk terakhir',
     'ldap_config_text'  => 'Pengaturan konfigurasi LDAP dapat ditemukan di Admin > Pengaturan. Lokasi pilihan (opsional) akan di atur untuk semua pengguna yang diimpor.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Pengaturan admin anda saat ini membolehkan pelaksanaan otentifikasi dua-faktor secara selektif.  ',
     'two_factor_enrolled' => 'Perangkat 2FA Terdaftar ',
     'two_factor_active'   => '2FA Aktif ',
-    );
+    ];

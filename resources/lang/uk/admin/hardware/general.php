@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Про активи',
     'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
-	'archived'  				=> 'Архівний',
+    'archived'  				=> 'Архівний',
     'asset'  					=> 'Актив',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'Прийняти актив',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Pending',
     'undeployable'  			=> 'Undeployable',
     'view'  					=> 'Переглянути актив',
-);
+];

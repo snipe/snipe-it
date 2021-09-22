@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Denne brukeren kan logge inn',
     'activated_disabled_help_text' => 'Du kan ikke redigere aktiveringsstatus for din egen konto.',
     'assets_user'       => 'Eiendeler tildelt :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Rediger bruker',
     'filetype_info'     => 'Gyldige filtyper er png, gif, jpg, jpeg, doc docx, pdf, txt, zip og rar.',
     'history_user'      => 'Historikk for :name',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Klikk her for å gjenopprette dem.',
     'last_login'        => 'Siste innlogging',
     'ldap_config_text'  => 'LDAP-konfigurasjonsinnstillingene kan finnes på Admin > innstillinger. Den (Valgfrie) valgte plasseringen angis for alle importerte brukere.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Gjeldende administrasjonsinnstillinger tillater selektiv håndhevelse av to-faktor autentisering.  ',
     'two_factor_enrolled' => '2FA enhet registrert ',
     'two_factor_active'   => '2FA Aktiv ',
-    );
+    ];

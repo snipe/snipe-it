@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Домен Active Directory',
     'ad_domain_help'			=> 'Обычно, то же, что и ваш домен, но не всегда.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'Скрытая копия',
     'admin_cc_email_help'       => 'Если вы хотите отправлять копии писем, что приходят пользователям при выдаче/возврате, на какой-то дополнительный адрес электронной почты, то введите его здесь. В противном случае оставьте это поле пустым.',
     'is_ad'				        => 'У вас сервер Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Предупреждение об истечении срока (в днях)',
     'alert_inv_threshold'		=> 'Порог оповещения о запасах',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID актива',
     'audit_interval'            => 'Интервал аудита',
     'audit_interval_help'       => 'Если вам требуется регулярно физически проверять свои активы, введите интервал в месяцах.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Введите Двухфакторный код',
     'two_factor_config_complete'	=> 'Подтвердить код',
     'two_factor_enabled_edit_not_allowed' => 'Ваш администратор не позволяет изменять этот параметр.',
-    'two_factor_enrollment_text'	=> "Требуется двухфакторная аутентификация, однако ваше устройство еще не зарегистрировано. Откройте приложение Google Authenticator и отсканируйте QR-код ниже, чтобы зарегистрировать свое устройство. После того, как вы зарегистрируете свое устройство, введите приведенный ниже код",
+    'two_factor_enrollment_text'	=> 'Требуется двухфакторная аутентификация, однако ваше устройство еще не зарегистрировано. Откройте приложение Google Authenticator и отсканируйте QR-код ниже, чтобы зарегистрировать свое устройство. После того, как вы зарегистрируете свое устройство, введите приведенный ниже код',
     'require_accept_signature'      => 'Требуется подпись',
     'require_accept_signature_help_text'      => 'Включение этой функции потребует от пользователей физического выхода из системы при принятии актива.',
     'left'        => 'слева',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Установка этого флажка включает ограничение по уникальности на серии активов',
     'zerofill_count'        => 'Длина инвентарного номера, включая заполнение нулями',
     'username_format_help'   => 'Этот параметр используется только в процессе импорта, если имя пользователя не предоставляется и мы должны сгенерировать его для Вас.',
-);
+];

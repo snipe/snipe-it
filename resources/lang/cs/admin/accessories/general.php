@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'accessory_category' 				=> 'Kategorie příslušenství',
     'accessory_name'  					=> 'Název příslušenství',
     'checkout'  							=> 'Předat příslušenství',
@@ -18,4 +18,4 @@ return array(
     'use_default_eula_disabled'			=> '<del>Použít výchozí EULA.</del>
 Žádná výchozí EULA nenastavena. Zadejte novou v nastevení.',
 
-);
+];

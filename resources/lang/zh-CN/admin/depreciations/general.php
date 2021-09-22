@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> '关于资产折旧',
     'about_depreciations'  					=> '你可以设置资产折旧时间期限',
     'asset_depreciations'  					=> '资产折旧',
@@ -9,4 +9,4 @@ return array(
     'number_of_months'  					=> '月数',
     'update'  					            => '更新折旧',
 
-);
+];

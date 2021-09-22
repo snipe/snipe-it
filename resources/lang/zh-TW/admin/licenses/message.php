@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => '授權不存在。',
     'user_does_not_exist' => '使用者不存在',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => '您必須選擇資產或用戶，但不能同時選擇兩者。',
     'not_found' => 'License not found',
 
-
-    'create' => array(
+    'create' => [
         'error'   => '新增授權失敗，請重試。',
-        'success' => '新增授權成功。'
-    ),
+        'success' => '新增授權成功。',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => '刪除檔案失敗，請重試。',
         'success' => '刪除檔案成功。',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => '上傳檔案失敗，請重試。',
         'success' => '上傳檔案成功。',
         'nofiles' => '您尚未選擇要上傳的檔案，或上傳的檔案太大。',
         'invalidfiles' => '一個或多個檔案太大，或者是不允許的檔案類型。允許的檔案類型有 png、 gif、 jpg、 jpeg、 doc、 docx、 pdf、 txt、 zip、 rar、 rtf、 xml 和 lic。',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => '更新授權失敗，請重試。',
-        'success' => '更新授權成功。'
-    ),
+        'success' => '更新授權成功。',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => '您確定要刪除此授權嗎？',
         'error'   => '刪除授權時發生問題，請重試。',
-        'success' => '刪除授權成功。'
-    ),
+        'success' => '刪除授權成功。',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => '借出授權時發生問題，請重試。',
-        'success' => '借出授權成功。'
-    ),
+        'success' => '借出授權成功。',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => '繳回授權時發生問題，請重試。',
-        'success' => '繳回授權成功。'
-    ),
+        'success' => '繳回授權成功。',
+    ],
 
-);
+];

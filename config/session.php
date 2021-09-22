@@ -8,8 +8,6 @@
  | be modified directly.
 */
 
-
-
 return [
 
     /*
@@ -67,7 +65,7 @@ return [
     |
     */
 
-    'files' => (env('SESSION_PATH')!='' ?  env('SESSION_PATH') : storage_path('framework/sessions')),
+    'files' => (env('SESSION_PATH') != '' ? env('SESSION_PATH') : storage_path('framework/sessions')),
 
     /*
     |--------------------------------------------------------------------------
@@ -158,6 +156,6 @@ return [
     |
     */
 
-    'secure' => env('SECURE_COOKIES', false)
+    'secure' => env('SECURE_COOKIES', false),
 
 ];

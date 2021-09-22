@@ -4,11 +4,9 @@ namespace App\Presenters;
 
 /**
  * Class CategoryPresenter
- * @package App\Presenters
  */
 class CategoryPresenter extends Presenter
 {
-
     /**
      * Json Column Layout for bootstrap table
      * @return string
@@ -17,51 +15,72 @@ class CategoryPresenter extends Presenter
     {
         $layout = [
             [
-                "field" => "id",
-                "searchable" => false,
-                "sortable" => true,
-                "switchable" => true,
-                "title" => trans('general.id'),
-                "visible" => false
+                'field' => 'id',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.id'),
+                'visible' => false,
             ], [
-                "field" => "name",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('general.name'),
-                "visible" => true,
-                "formatter" => 'categoriesLinkFormatter',
-            ],[
-                "field" => "image",
-                "searchable" => false,
-                "sortable" => true,
-                "title" => trans('general.image'),
-                "visible" => true,
-                "formatter" => 'imageFormatter',
-            ],[
-                "field" => "category_type",
-                "searchable" => true,
-                "sortable" => true,
-                "title" => trans('general.type'),
-                "visible" => true
-            ],[
-                "field" => "item_count",
-                "searchable" => false,
-                "sortable" => true,
-                "title" => trans('general.qty'),
-                "visible" => true
-            ],[
-                "field" => "has_eula",
-                "searchable" => false,
-                "sortable" => false,
-                "title" => trans('admin/categories/table.eula_text'),
-                "visible" => false,
-                "formatter" => 'trueFalseFormatter',
+                'field' => 'name',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.name'),
+                'visible' => true,
+                'formatter' => 'categoriesLinkFormatter',
+            ], [
+                'field' => 'image',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.image'),
+                'visible' => true,
+                'formatter' => 'imageFormatter',
+            ], [
+                'field' => 'category_type',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.type'),
+                'visible' => true,
+            ], [
+                'field' => 'item_count',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.qty'),
+                'visible' => true,
+            ], [
+                'field' => 'has_eula',
+                'searchable' => false,
+                'sortable' => false,
+                'title' => trans('admin/categories/table.eula_text'),
+                'visible' => false,
+                'formatter' => 'trueFalseFormatter',
+            ], [
+                'field' => 'checkin_email',
+                'searchable' => false,
+                'sortable' => true,
+                'class' => 'css-envelope',
+                'title' => 'Send Email',
+                'visible' => true,
+                'formatter' => 'trueFalseFormatter',
+            ], [
+                'field' => 'require_acceptance',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('admin/categories/table.require_acceptance'),
+                'visible' => true,
+                'formatter' => 'trueFalseFormatter',
+            ], [
+                'field' => 'actions',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => false,
+                'title' => trans('table.actions'),
             ],[
                 "field" => "use_default_eula",
                 "searchable" => false,
                 "sortable" => true,
                 "title" => trans('admin/categories/general.use_default_eula_column'),
-                "visible" => false,
+                'visible' => true,
                 "formatter" => 'trueFalseFormatter',
             ],[
                 "field" => "checkin_email",
@@ -75,39 +94,28 @@ class CategoryPresenter extends Presenter
                 "field" => "require_acceptance",
                 "searchable" => false,
                 "sortable" => true,
-                "title" => trans('admin/categories/table.require_acceptance'),
-                "visible" => true,
-                "formatter" => 'trueFalseFormatter',
-            ],[
-                "field" => "actions",
-                "searchable" => false,
-                "sortable" => false,
-                "switchable" => false,
-                "title" => trans('table.actions'),
-                "visible" => true,
-                "formatter" => "categoriesActionsFormatter",
+                'formatter' => 'categoriesActionsFormatter',
             ],
             [
-                "field" => "created_at",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => false,
-                "title" => trans('general.created_at'),
-                "formatter" => "dateDisplayFormatter"
+                'field' => 'created_at',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.created_at'),
+                'formatter' => 'dateDisplayFormatter',
             ],
             [
-                "field" => "updated_at",
-                "searchable" => true,
-                "sortable" => true,
-                "visible" => false,
-                "title" => trans('general.updated_at'),
-                "formatter" => "dateDisplayFormatter"
+                'field' => 'updated_at',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.updated_at'),
+                'formatter' => 'dateDisplayFormatter',
             ],
         ];
 
         return json_encode($layout);
     }
-
 
     /**
      * Link to this categories name

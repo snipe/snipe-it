@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'Ingoa Ingoa',
     'checkin'                             => 'Tirohia te Mea',
     'checkout'                             => 'Waehia te Waehere',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'Te noho',
     'total' 			                 => 'Te tapeke',
     'update'                            => 'Whakahōuhia te Wae',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Rawa Ritenga',
     'field'		                => 'Āpure',
     'about_fieldsets_title'		=> 'Mō Ngā Āpure',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Rawa Ritenga Hou',
     'value_encrypted'      	        => 'Ko te uara o tenei mara kei te whakamunatia i roto i te pātengi raraunga. Ka taea anake e nga kaiwhakahaere ka kite i te uara kua tohua',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+];

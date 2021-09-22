@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'Over leveranciers',
     'about_suppliers_text'  => 'Leveranciers worden gebruikt om de afkomst van items bij te houden',
     'address'               => 'Leverancier adres',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Bekijk assets voor',
     'zip'                   => 'Postcode',
 
-);
+];

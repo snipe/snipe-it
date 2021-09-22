@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Dage',
         'notes'                  => 'Noter',
         'update'                 => 'Opdatering',
-        'create'                 => 'Opret'
+        'create'                 => 'Opret',
     ];

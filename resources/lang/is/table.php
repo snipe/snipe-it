@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'actions'	 	=> 'Aðgerðir',
     'action' 		=> 'Aðgerð',
     'by'      		=> 'Eftir',
     'item' 			=> 'Atriði',
 
-);
+];
