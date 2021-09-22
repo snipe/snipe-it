@@ -418,7 +418,6 @@
     // ---------------------------
     // - ASSET STATUS CHART -
     // ---------------------------
-
       var pieChartCanvas = $("#statusPieChart").get(0).getContext("2d");
       var pieChart = new Chart(pieChartCanvas);
       var ctx = document.getElementById("statusPieChart");
@@ -426,7 +425,7 @@
               legend: {
                   position: 'top',
                   responsive: true,
-                  maintainAspectRatio: false,
+                  maintainAspectRatio: true,
               }
           };
 
@@ -448,7 +447,6 @@
           error: function (data) {
               // window.location.reload(true);
           },
-
       });
         var last = document.getElementById('statusPieChart').clientWidth;
         addEventListener('resize', function() {
