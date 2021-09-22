@@ -43,7 +43,7 @@ class AccessoriesController extends Controller
             ];
 
 
-        $accessories = Accessory::with('category', 'company', 'manufacturer', 'users', 'location', 'supplier');
+        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'users', 'location', 'supplier');
 
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));
