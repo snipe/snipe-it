@@ -418,14 +418,15 @@
     // ---------------------------
     // - ASSET STATUS CHART -
     // ---------------------------
+
       var pieChartCanvas = $("#statusPieChart").get(0).getContext("2d");
       var pieChart = new Chart(pieChartCanvas);
       var ctx = document.getElementById("statusPieChart");
       var pieOptions = {
               legend: {
                   position: 'top',
-                  responsive: true, 
-                  maintainAspectRatio: true,
+                  responsive: true,
+                  maintainAspectRatio: false,
               }
           };
 
@@ -446,7 +447,14 @@
           },
           error: function (data) {
               // window.location.reload(true);
-          }
+          },
+
       });
+        var last = document.getElementById('statusPieChart').clientWidth;
+        addEventListener('resize', function() {
+        var current = document.getElementById('statusPieChart').clientWidth;
+        if (current != last) location.reload();
+        last = current;
+    });
 </script>
 @endpush

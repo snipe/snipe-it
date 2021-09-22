@@ -18118,6 +18118,12 @@ th.css-accessory > .th-inner::before {
 .form-group.has-error label {
   color: #a94442;
 }
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 80vh;
+  width: 80vw;
+}
 
 
 .select2-container {
@@ -19093,5 +19099,11 @@ th.css-accessory > .th-inner::before {
 }
 .form-group.has-error label {
   color: #a94442;
+}
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 80vh;
+  width: 80vw;
 }
 
