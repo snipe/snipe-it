@@ -97,14 +97,11 @@ class AccessoriesController extends Controller
                 $accessories = $accessories->OrderSupplier($order);
                 break;       
             default:
-                \Log::error('switch: order by default');
                 $accessories = $accessories->orderBy($column_sort, $order);
                 break;
         }
 
-        
-        //$accessories->orderBy($sort, $order);
-
+    
         $total = $accessories->count();
         $accessories = $accessories->skip($offset)->take($limit)->get();
         return (new AccessoriesTransformer)->transformAccessories($accessories, $total);
