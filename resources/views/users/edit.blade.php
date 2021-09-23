@@ -509,6 +509,12 @@
               @if (!Auth::user()->isSuperUser())
                 <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
               @endif
+
+              @if (!Auth::user()->hasAccess('admin'))
+                <p class="alert alert-warning">Only users with admins rights or greater may grant a user admin access.</p>
+              @else
+                farts
+              @endif
             </div>
 
             <table class="table table-striped permissions">
