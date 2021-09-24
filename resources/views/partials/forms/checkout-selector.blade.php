@@ -14,7 +14,7 @@
             @endif
             @if ((isset($location_select)) && ($location_select!='false'))
             <label class="btn btn-default">
-                <input name="checkout_to_type" value="location" aria-label="checkout_to_type" class="active" type="radio"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ trans('general.location') }}
+                <input name="checkout_to_type" value="location" aria-label="checkout_to_type" class="active" type="radio"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{ trans('general.location') }}
             </label>
             @endif
 
