@@ -120,39 +120,62 @@
                 </div>
               </div>
             @endif
-            <div class="col-md-2 text-center">
-              @if ($user->avatar)
-                <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print" alt="{{ $user->present()->fullName() }}">
-              @else
-                <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print" alt="{{ $user->present()->fullName() }}">
-              @endif
-            </div>
+          
+            <div class="col-md-9">
 
-            <div class="col-md-7">
-              <div class="table table-responsive">
-                <table class="table table-striped">
-                  @if (!is_null($user->company))
-                    <tr>
-                        <td class="text-nowrap">{{ trans('general.company') }}</td>
-                        <td>{{ $user->company->name }}</td>
-                    </tr>
-                  @endif
+               <div class="row-new-striped">
+                
+                  <div class="row">
+                    <!-- name -->
+    
+                      <div class="col-md-3 col-sm-2">
+                        {{ trans('admin/users/table.name') }}
+                      </div>
+                      <div class="col-md-9 col-sm-2">
+                        {{ $user->present()->fullName() }}
+                      </div>
 
-                  <tr>
-                    <td class="text-nowrap">{{ trans('admin/users/table.name') }}</td>
-                    <td>{{ $user->present()->fullName() }}</td>
-                  </tr>
+                  </div>
 
-                  <tr>
-                    <td class="text-nowrap">{{ trans('admin/users/table.username') }}</td>
-                    <td>{{ $user->username }}</td>
-                  </tr>
+               
+
+                   <!-- company -->
+                    @if (!is_null($user->company))
+                    <div class="row">
+
+                      <div class="col-md-3">
+                        {{ trans('general.company') }}
+                      </div>
+                      <div class="col-md-9">
+                        {{ $user->company->name }}
+                      </div>
+
+                    </div>
+                   
+                    @endif
+
+                    <!-- username -->
+                    <div class="row">
+
+                      <div class="col-md-3">
+                        {{ trans('admin/users/table.username') }}
+                      </div>
+                      <div class="col-md-9">
+                        {{ $user->username }}
+                      </div>
+
+                    </div>
+
+                    <!-- address -->
                     @if (($user->address) || ($user->city) || ($user->state) || ($user->country))
-                      <tr>
-                        <td class="text-nowrap">{{ trans('general.address') }}</td>
-                        <td>
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('general.address') }}
+                      </div>
+                      <div class="col-md-9">
+                      
                           @if ($user->address)
-                            {{ $user->address }} <br>
+                          {{ $user->address }} <br>
                           @endif
                           @if ($user->city)
                             {{ $user->city }}
@@ -163,170 +186,275 @@
                           @if ($user->country)
                             {{ $user->country }}
                           @endif
-                        </td>
-                      </tr>
 
+                      </div>
+                    </div>
                     @endif
-                    <tr>
-                      <td class="text-nowrap">{{ trans('general.groups') }}</td>
-                      <td>
-                        @if ($user->groups->count() > 0)
+
+
+                     <!-- groups -->
+                     <div class="row">
+                        <div class="col-md-3">
+                          {{ trans('general.groups') }}
+                        </div>
+                        <div class="col-md-9">
+                          @if ($user->groups->count() > 0)
                             @foreach ($user->groups as $group)
 
                               @can('superadmin')
                                   <a href="{{ route('groups.show', $group->id) }}" class="label label-default">{{ $group->name }}</a>
-                            @else
+                              @else
                               {{ $group->name }}
-                            @endcan
+                              @endcan
 
                             @endforeach
-                        @else
-                          --
-                        @endif
+                          @else
+                              --
+                          @endif
+                        </div>
+                      </div>
 
-                      </td>
-                    </tr>
+                    @if ($user->jobtitle)
+                     <!-- jobtitle -->
+                     <div class="row">
 
+                        <div class="col-md-3">
+                          {{ trans('admin/users/table.job') }}
+                        </div>
+                        <div class="col-md-9">
+                          {{ $user->jobtitle }}
+                        </div>
 
-                  @if ($user->jobtitle)
-                  <tr>
-                    <td class="text-nowrap">{{ trans('admin/users/table.job') }}</td>
-                    <td>{{ $user->jobtitle }}</td>
-                  </tr>
-                  @endif
-
-                  @if ($user->employee_num)
-                  <tr>
-                    <td class="text-nowrap">{{ trans('admin/users/table.employee_num') }}</td>
-                    <td>{{ $user->employee_num }}</td>
-                  </tr>
-                  @endif
-
-                  @if ($user->manager)
-                  <tr>
-                    <td class="text-nowrap">{{ trans('admin/users/table.manager') }}</td>
-                    <td>
-                      <a href="{{ route('users.show', $user->manager->id) }}">{{ $user->manager->getFullNameAttribute() }}</a>
-
-                      </td>
-                  </tr>
-                  @endif
-
-                  @if ($user->email)
-                  <tr>
-                    <td class="text-nowrap">{{ trans('admin/users/table.email') }}</td>
-                    <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
-                  </tr>
-                  @endif
-
-                  @if ($user->website)
-                    <tr>
-                      <td class="text-nowrap">{{ trans('general.website') }}</td>
-                      <td><a href="{{ $user->website }}" target="_blank">{{ $user->website }}</a></td>
-                    </tr>
-                  @endif
-
-                  @if ($user->phone)
-                  <tr>
-                    <td class="text-nowrap">{{ trans('admin/users/table.phone') }}</td>
-                    <td><a href="tel:{{ $user->phone }}">{{ $user->phone }}</a></td>
-                  </tr>
-                  @endif
-
-                  @if ($user->userloc)
-                  <tr>
-                    <td class="text-nowrap">{{ trans('admin/users/table.location') }}</td>
-                    <td>{{ link_to_route('locations.show', $user->userloc->name, [$user->userloc->id]) }}</td>
-
-
-                  </tr>
-                  @endif
-                    @if ($user->last_login)
-                      <tr>
-                        <td class="text-nowrap">{{ trans('general.last_login') }}</td>
-                        <td>{{ \App\Helpers\Helper::getFormattedDateObject($user->last_login, 'datetime', false) }}</td>
-                      </tr>
+                      </div>
                     @endif
+
+                    @if ($user->employee_num)
+                      <!-- employee_num -->
+                      <div class="row">
+
+                        <div class="col-md-3">
+                          {{ trans('admin/users/table.employee_num') }}
+                        </div>
+                        <div class="col-md-9">
+                          {{ $user->employee_num }}
+                        </div>
+                        
+                      </div>
+                    @endif
+
+                    @if ($user->manager)
+                      <!-- manager -->
+                      <div class="row">
+
+                        <div class="col-md-3">
+                          {{ trans('admin/users/table.manager') }}
+                        </div>
+                        <div class="col-md-9">
+                          <a href="{{ route('users.show', $user->manager->id) }}">
+                            {{ $user->manager->getFullNameAttribute() }}
+                          </a>
+                        </div>
+
+                      </div>
+
+                    @endif
+
+                    
+                    @if ($user->email)
+                    <!-- email -->
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('admin/users/table.email') }}
+                      </div>
+                      <div class="col-md-9">
+                        <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+                      </div>
+                    </div>
+                    @endif
+
+                    @if ($user->phone)
+                     <!-- website -->
+                     <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('general.website') }}
+                      </div>
+                      <div class="col-md-9">
+                          <a href="{{ $user->website }}" target="_blank">{{ $user->website }}</a>
+                      </div>
+                    </div>
+                    @endif
+
+                    @if ($user->phone)
+                      <!-- phone -->
+                      <div class="row">
+                        <div class="col-md-3">
+                          {{ trans('admin/users/table.phone') }}
+                        </div>
+                        <div class="col-md-9">
+                          <a href="tel:{{ $user->phone }}">{{ $user->phone }}</a>
+                        </div>
+                      </div>
+                    @endif
+
+                    @if ($user->userloc)
+                     <!-- location -->
+                     <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('admin/users/table.location') }}
+                      </div>
+                      <div class="col-md-9">
+                        {{ link_to_route('locations.show', $user->userloc->name, [$user->userloc->id]) }}
+                      </div>
+                    </div>
+                    @endif
+
+                    <!-- last login -->
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('general.last_login') }}
+                      </div>
+                      <div class="col-md-9">
+                        {{ \App\Helpers\Helper::getFormattedDateObject($user->last_login, 'datetime', false) }}
+                      </div>
+                    </div>
+
 
                     @if ($user->department)
-                      <tr>
-                        <td class="text-nowrap">{{ trans('general.department') }}</td>
-                        <td>
-                          <a href="{{ route('departments.show', $user->department) }}">
-                            {{ $user->department->name }}
-                          </a>
-                        </td>
-                      </tr>
+                    <!-- empty -->
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('general.department') }}
+                      </div>
+                      <div class="col-md-9">
+                        <a href="{{ route('departments.show', $user->department) }}">
+                          {{ $user->department->name }}
+                        </a>
+                      </div>
+                    </div>
                     @endif
-                  @if ($user->created_at)
-                  <tr>
-                    <td>{{ trans('general.created_at') }}</td>
-                    <td>{{ $user->created_at->format('F j, Y h:iA') }}</td>
-                  </tr>
-                  @endif
-                    <tr>
-                      <td class="text-nowrap">{{ trans('general.login_enabled') }}</td>
-                      <td>
+
+                    @if ($user->created_at)
+                    <!-- created at -->
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('general.created_at') }}
+                      </div>
+                      <div class="col-md-9">
+                        {{ \App\Helpers\Helper::getFormattedDateObject($user->created_at, 'datetime')['formatted']}}
+                      </div>
+                    </div>
+                    @endif
+
+
+                    <!-- login enabled -->
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('general.login_enabled') }}
+                      </div>
+                      <div class="col-md-9">
                         {!! ($user->activated=='1') ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
-                    </tr>
-                    <tr>
-                      <td class="text-nowrap">LDAP</td>
-                      <td>
+                      </div>
+                    </div>
+
+                    <!-- LDAP -->
+                    <div class="row">
+                      <div class="col-md-3">
+                          LDAP
+                      </div>
+                      <div class="col-md-9">
                         {!! ($user->ldap_import=='1') ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
 
-                        </td>
-                    </tr>
+                      </div>
+                    </div>
 
+                    @if ($user->activated == '1')
 
-                    @if ($user->activated=='1')
-                      <tr>
-                        <td class="text-nowrap">{{ trans('admin/users/general.two_factor_active') }}</td>
-                        <td>
-                          {!! ($user->two_factor_active()) ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-nowrap">{{ trans('admin/users/general.two_factor_enrolled') }}</td>
-                        <td class="two_factor_resetrow">
+                          <!-- 2FA active -->
                           <div class="row">
-                          <div class="col-md-2" id="two_factor_reset_toggle">
-                            {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
-                          </div>
-
-                          @if ((Auth::user()->isSuperUser()) && ($snipeSettings->two_factor_enabled!='0') && ($snipeSettings->two_factor_enabled!=''))
-                            <div class="col-md-10">
-                            <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> {{ trans('admin/settings/general.two_factor_reset') }}</a>
-                            <span id="two_factor_reseticon">
-                            </span>
-                            <span id="two_factor_resetresult">
-                            </span>
-                            <span id="two_factor_resetstatus">
-                            </span>
-
-                                <br><br><p class="help-block">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
+                            <div class="col-md-3">
+                              {{ trans('admin/users/general.two_factor_active') }}
+                            </div>
+                            <div class="col-md-9">
+                          
+                              {!! ($user->two_factor_active()) ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                          
                             </div>
                           </div>
-                       @endif
+                          
+                          <!-- 2FA enrolled -->
+                          <div class="row two_factor_resetrow">
+                            <div class="col-md-3">
+                              {{ trans('admin/users/general.two_factor_enrolled') }}
+                            </div>
+                            <div class="col-md-9" id="two_factor_reset_toggle">
+                              {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
 
-                        </td>
-                      </tr>
-
-                     @endif
+                              {{ Auth::user()->isSuperUser() }}
+                              && 
+                              {{ $snipeSettings->two_factor_enabled }}
+                              &&  
+                              {{ $snipeSettings->two_factor_enabled }}
+                            </div>
+                          </div>
+                          
+                          @if ((Auth::user()->isSuperUser()) && ($snipeSettings->two_factor_enabled!='0') && ($snipeSettings->two_factor_enabled!=''))
+                          
+                            <!-- 2FA reset -->
+                            <div class="row">
+                              <div class="col-md-3">
+                          
+                              </div>
+                              <div class="col-md-9" style="margin-top: 10px;">
+                                
+                                <a class="btn btn-default btn-sm pull-left" id="two_factor_reset" style="margin-right: 10px;"> 
+                                  {{ trans('admin/settings/general.two_factor_reset') }}
+                                </a>
+                                <span id="two_factor_reseticon">
+                                </span>
+                                <span id="two_factor_resetresult">
+                                </span>
+                                <span id="two_factor_resetstatus">
+                                </span>
+                                <br>
+                                <p class="help-block" style="line-height: 1.6;">{{ trans('admin/settings/general.two_factor_reset_help') }}</p>
+                          
+                                
+                              </div>
+                            </div>
+                            @endif 
+                  @endif
+                    
 
                     @if ($user->notes)
-                      <tr>
-                        <td class="text-nowrap">{{ trans('admin/users/table.notes') }}</td>
-                        <td>{{ $user->notes }}</td>
-                      </tr>
+                     <!-- empty -->
+                     <div class="row">
+
+                      <div class="col-md-3">
+                        {{ trans('admin/users/table.notes') }}
+                      </div>
+                      <div class="col-md-9">
+                        {{ $user->notes }}
+                      </div>
+
+                    </div>
                     @endif
 
-
-                </table>
-              </div>
-            </div> <!--/col-md-8-->
-
+                  </div> <!--/end striped container-->
+                </div> <!-- end col-md-9 -->
+   
+            
             <!-- Start button column -->
-            <div class="col-md-3">
+            <div class="col-md-3 col-xs-12">
+
+              @if ($user->avatar)
+              <div class="col-md-12">
+                  <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
+                @else
+                  <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
+                </div>
+            @endif
+
+
               @can('update', $user)
                 <div class="col-md-12">
                   <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.edit') }}</a>
@@ -385,6 +513,7 @@
             <!-- End button column -->
           </div> <!--/.row-->
         </div><!-- /.tab-pane -->
+      </div> <!--/.row-->
 
         <div class="tab-pane" id="asset">
           <!-- checked out assets table -->
