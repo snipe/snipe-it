@@ -205,7 +205,7 @@
             }
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="fa fa-copy" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="far fa-clone" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
@@ -224,7 +224,7 @@
             }
 
             if ((row.available_actions) && (row.available_actions.restore === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Restore"><i class="fa fa-retweet"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Restore"><i class="far fa-clone"></i></a>&nbsp;';
             }
 
             actions +='</nobr>';
@@ -244,28 +244,28 @@
 
             if (value.type == 'asset') {
                 item_destination = 'hardware';
-                item_icon = 'fa-barcode';
+                item_icon = 'fa fa-barcode';
             } else if (value.type == 'accessory') {
                 item_destination = 'accessories';
-                item_icon = 'fa-keyboard-o';
+                item_icon = 'far fa-keyboard';
             } else if (value.type == 'component') {
                 item_destination = 'components';
-                item_icon = 'fa-hdd-o';
+                item_icon = 'far fa-hdd';
             } else if (value.type == 'consumable') {
                 item_destination = 'consumables';
-                item_icon = 'fa-tint';
+                item_icon = 'fa fa-tint';
             } else if (value.type == 'license') {
                 item_destination = 'licenses';
-                item_icon = 'fa-floppy-o';
+                item_icon = 'far fa-save';
             } else if (value.type == 'user') {
                 item_destination = 'users';
-                item_icon = 'fa-user';
+                item_icon = 'fa fa-user';
             } else if (value.type == 'location') {
                 item_destination = 'locations'
-                item_icon = 'fa-map-marker';
+                item_icon = 'far fa-hdd';
             }
 
-            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
+            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
 
         } else {
             return '';
