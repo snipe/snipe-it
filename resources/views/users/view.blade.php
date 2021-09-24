@@ -120,8 +120,78 @@
                 </div>
               </div>
             @endif
+
+            <!-- Start button column -->
+            <div class="col-md-3 col-xs-12 col-sm-push-9">
+
+              @if ($user->avatar)
+              <div class="col-md-12">
+                  <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
+                @else
+                  <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
+                </div>
+              @endif
+
+
+              @can('update', $user)
+                <div class="col-md-12">
+                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.edit') }}</a>
+                </div>
+              @endcan
+
+              @can('create', $user)
+                <div class="col-md-12" style="padding-top: 5px;">
+                  <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>
+                </div>
+               @endcan
+
+                @can('view', $user)
+                <div class="col-md-12" style="padding-top: 5px;">
+                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
+                </div>
+                @endcan
+
+                @can('update', $user)
+                  @if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0'))
+                      <div class="col-md-12" style="padding-top: 5px;">
+                        <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
+                          {{ csrf_field() }}
+                          <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
+                        </form>
+                      </div>
+                  @endif
+                @endcan
+
+                @can('delete', $user)
+                  @if ($user->deleted_at=='')
+                    <div class="col-md-12" style="padding-top: 30px;">
+                      <form action="{{route('users.destroy',$user->id)}}" method="POST">
+                        {{csrf_field()}}
+                        {{ method_field("DELETE")}}
+                        <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
+                      </form>
+                    </div>
+                    <div class="col-md-12" style="padding-top: 5px;">
+                      <form action="{{ route('users/bulkedit') }}" method="POST">
+                        <!-- CSRF Token -->
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="bulk_actions" value="delete" />
+
+                        <input type="hidden" name="ids[{{ $user->id }}]" value="{{ $user->id }}" />
+                        <button style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('button.checkin_and_delete') }}</button>
+                      </form>
+                    </div>
+                  @else
+                    <div class="col-md-12" style="padding-top: 5px;">
+                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
+                    </div>
+                  @endif
+                @endcan
+            </div>
+          </div>
+            <!-- End button column -->
           
-            <div class="col-md-9">
+            <div class="col-md-9 col-xs-12 col-sm-pull-3">
 
                <div class="row-new-striped">
                 
@@ -443,77 +513,10 @@
                 </div> <!-- end col-md-9 -->
    
             
-            <!-- Start button column -->
-            <div class="col-md-3 col-xs-12">
-
-              @if ($user->avatar)
-              <div class="col-md-12">
-                  <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
-                @else
-                  <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
-                </div>
-            @endif
-
-
-              @can('update', $user)
-                <div class="col-md-12">
-                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.edit') }}</a>
-                </div>
-              @endcan
-
-              @can('create', $user)
-                <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>
-                </div>
-               @endcan
-
-                @can('view', $user)
-                <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
-                </div>
-                @endcan
-
-                @can('update', $user)
-                  @if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0'))
-                      <div class="col-md-12" style="padding-top: 5px;">
-                        <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
-                          {{ csrf_field() }}
-                          <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
-                        </form>
-                      </div>
-                  @endif
-                @endcan
-
-                @can('delete', $user)
-                  @if ($user->deleted_at=='')
-                    <div class="col-md-12" style="padding-top: 30px;">
-                      <form action="{{route('users.destroy',$user->id)}}" method="POST">
-                        {{csrf_field()}}
-                        {{ method_field("DELETE")}}
-                        <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
-                      </form>
-                    </div>
-                    <div class="col-md-12" style="padding-top: 5px;">
-                      <form action="{{ route('users/bulkedit') }}" method="POST">
-                        <!-- CSRF Token -->
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                        <input type="hidden" name="bulk_actions" value="delete" />
-
-                        <input type="hidden" name="ids[{{ $user->id }}]" value="{{ $user->id }}" />
-                        <button style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('button.checkin_and_delete') }}</button>
-                      </form>
-                    </div>
-                  @else
-                    <div class="col-md-12" style="padding-top: 5px;">
-                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
-                    </div>
-                  @endif
-                @endcan
-            </div>
-            <!-- End button column -->
+            
           </div> <!--/.row-->
         </div><!-- /.tab-pane -->
-      </div> <!--/.row-->
+
 
         <div class="tab-pane" id="asset">
           <!-- checked out assets table -->
