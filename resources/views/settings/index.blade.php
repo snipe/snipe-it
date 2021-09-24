@@ -101,7 +101,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('groups.index') }}">
-                  <i class="fa fa-group fa-4x" aria-hidden="true"></i>
+                  <i class="fas fa-user-friends fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">Groups</span>
                   <span class="keywords" aria-hidden="true" style="display:none">permissions, permission groups, authorization</span>
@@ -118,7 +118,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.localization.index') }}">
-                  <i class="fa fa-globe fa-4x" aria-hidden="true"></i>
+                  <i class="fas fa-globe-americas fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">Localization</span>
                   <span class="keywords" aria-hidden="true" style="display:none">localization, currency, local, locale, time zone, timezone, international, internatinalization, language, languages, translation</span>
@@ -152,7 +152,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.slack.index') }}">
-                  <i class="fa fa-slack fa-4x" aria-hidden="true"></i>
+                  <i class="fab fa-slack fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">Slack</span>
                 </a>
@@ -228,7 +228,7 @@
           <div class="box-body text-center">
             <h5>
               <a href="{{ route('settings.saml.index') }}">
-                <i class="fa fa-sign-in fa-4x" aria-hidden="true"></i>
+                <i class="fas fa-sign-in-alt fa-4x" aria-hidden="true"></i>
                 <br><br>
                 <span class="name">SAML</span>
               </a>
@@ -243,7 +243,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.backups.index') }}">
-                  <i class="fa fa-cloud-download fa-4x" aria-hidden="true"></i>
+                  <i class="fas fa-file-archive fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">Backups</span>
                 </a>
@@ -290,7 +290,7 @@
               <div class="box-body text-center">
                 <h5>
                   <a href="{{ route('settings.phpinfo.index') }}">
-                    <i class="fa fa-server fa-4x" aria-hidden="true"></i>
+                    <i class="fab fa-php fa-4x" aria-hidden="true"></i>
                     <br><br>
                     <span class="name">PHP</span>
                     <span class="keywords" aria-hidden="true" style="display:none">phpinfo, system, info</span>

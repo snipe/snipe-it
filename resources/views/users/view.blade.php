@@ -17,7 +17,7 @@
         <li class="active">
           <a href="#details" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-info-circle"></i>
+            <i class="fa fa-info-circle" fa-2x></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
           </a>
@@ -26,7 +26,7 @@
         <li>
           <a href="#asset" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-barcode" aria-hidden="true"></i>
+            <i class="fa fa-barcode fa-2x" aria-hidden="true"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
               {!! ($user->assets->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->assets->count().'</badge>' : '' !!}
@@ -37,7 +37,7 @@
         <li>
           <a href="#licenses" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-floppy-o"></i>
+            <i class="far fa-save fa-2x"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
               {!! ($user->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->licenses->count().'</badge>' : '' !!}
@@ -48,7 +48,7 @@
         <li>
           <a href="#accessories" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-keyboard-o"></i>
+            <i class="far fa-keyboard fa-2x"></i>
             </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}
               {!! ($user->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->accessories->count().'</badge>' : '' !!}
             </span>
@@ -58,7 +58,7 @@
         <li>
           <a href="#consumables" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-tint"></i></span>
+            <i class="fa fa-tint fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}
               {!! ($user->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->consumables->count().'</badge>' : '' !!}
             </span>
@@ -68,7 +68,7 @@
         <li>
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-paperclip"></i></span>
+            <i class="fa fa-paperclip fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
               {!! ($user->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->uploads->count().'</badge>' : '' !!}
             </span>
@@ -78,7 +78,7 @@
         <li>
           <a href="#history" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-clock-o"></i></span>
+            <i class="fas fa-history fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
           </a>
         </li>
@@ -87,7 +87,7 @@
         <li>
           <a href="#managed" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-map-marker"></i></span>
+            <i class="fa fa-map-marker fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}
               {!! ($user->managedLocations->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->managedLocations->count().'</badge>' : '' !!}
           </a>
@@ -97,7 +97,7 @@
         @can('update', $user)
           <li class="dropdown pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fa fa-gear"></i> {{ trans('button.actions') }}
+              <i class="fas fa-cog"></i> {{ trans('button.actions') }}
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
@@ -136,7 +136,7 @@
             <div class="col-md-3 col-xs-12 col-sm-push-9">
 
               @if ($user->avatar)
-              <div class="col-md-12">
+              <div class="col-md-12 text-center">
                   <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
                 @else
                   <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
@@ -242,11 +242,14 @@
                         {{ trans('admin/users/table.username') }}
                       </div>
                       <div class="col-md-9">
-                        <i class="fas fa-crown"></i>
-                        {{ $user->username }}
-                        @if ($user->hasAccess('admin'))
-                        <label class="label label-default">admin</label>
+
+                        @if ($user->isSuperUser())
+                          <label class="label label-danger"><i class="fas fa-crown" title="superuser"></i></label> {{ $user->username }}
+                        @elseif ($user->hasAccess('admin'))
+                          <label class="label label-warning"><i class="fas fa-crown" title="superuser"></i></label> {{ $user->username }}
                         @endif
+
+                      
                       </div>
 
                     </div>

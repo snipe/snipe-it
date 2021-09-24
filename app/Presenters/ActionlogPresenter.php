@@ -43,13 +43,13 @@ class ActionlogPresenter extends Presenter
         if ($this->itemType() == 'asset') {
             $itemicon = 'fa fa-barcode';
         } elseif ($this->itemType() == 'accessory') {
-            $itemicon = 'fa fa-keyboard-o';
+            $itemicon = 'far fa-keyboard';
         } elseif ($this->itemType() == 'consumable') {
             $itemicon = 'fa fa-tint';
         } elseif ($this->itemType() == 'license') {
-            $itemicon = 'fa fa-floppy-o';
+            $itemicon = 'far fa-save';
         } elseif ($this->itemType() == 'component') {
-            $itemicon = 'fa fa-hdd-o';
+            $itemicon = 'far fa-hdd';
         }
 
         return $itemicon;

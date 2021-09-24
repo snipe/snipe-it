@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-slack"></i> Slack
+                        <i class="fab fa-slack"></i> Slack
                     </h2>
                 </div>
                 <div class="box-body">

@@ -14,7 +14,6 @@ mix
     .styles(
         [
             './node_modules/bootstrap/dist/css/bootstrap.css',
-            './node_modules/font-awesome/css/font-awesome.css',
             './public/css/build/AdminLTE.css',
             './node_modules/jquery-ui-bundle/jquery-ui.css',
             './node_modules/admin-lte/plugins/iCheck/minimal/blue.css',

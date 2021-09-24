@@ -109,7 +109,7 @@
                     <li>
                         <a href="#software" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-              <i class="fa fa-floppy-o" aria-hidden="true"></i>
+              <i class="far fa-save" aria-hidden="true"></i>
             </span>
                             <span class="hidden-xs hidden-sm">
               {{ trans('general.licenses') }}
@@ -119,7 +119,7 @@
                     <li>
                         <a href="#components" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-              <i class="fa fa-hdd-o" aria-hidden="true"></i>
+              <i class="far fa-hdd" aria-hidden="true"></i>
             </span>
                             <span class="hidden-xs hidden-sm">
               {{ trans('general.components') }}

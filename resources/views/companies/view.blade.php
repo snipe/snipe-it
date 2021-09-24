@@ -27,7 +27,7 @@
                     <li>
                         <a href="#licenses_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
-                            <i class="fa fa-floppy-o"></i>
+                            <i class="far fa-save"></i>
                             </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span>
                         </a>
@@ -36,7 +36,7 @@
                     <li>
                         <a href="#accessories_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
-                            <i class="fa fa-keyboard-o"></i>
+                            <i class="far fa-keyboard"></i>
                             </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span>
                         </a>
                     </li>
@@ -52,7 +52,7 @@
                     <li>
                         <a href="#components_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
-                            <i class="fa fa-hdd-o"></i></span>
+                            <i class="far fa-hdd"></i></span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.components') }}</span>
                         </a>
                     </li>
