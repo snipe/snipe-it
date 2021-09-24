@@ -9,6 +9,8 @@
 {{-- Page content --}}
 @section('content')
 
+
+
 <div class="row">
   <div class="col-md-12">
     <div class="nav-tabs-custom">
@@ -17,7 +19,7 @@
         <li class="active">
           <a href="#details" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-info-circle" fa-2x></i>
+            <i class="fa fa-info-circle fa-2x" fa-2x></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
           </a>
@@ -139,14 +141,32 @@
             <!-- Start button column -->
             <div class="col-md-3 col-xs-12 col-sm-push-9">
 
-              @if ($user->avatar)
-              <div class="col-md-12 text-center">
-                  <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
-                @else
-                  <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
-                </div>
-              @endif
+              
 
+              <div class="col-md-12 text-center">
+                
+                <div class="product">
+	
+                    <div class="product-image">
+                      <img src="{{ $user->present()->gravatar() }}"  class="img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">
+                      <span class="onsale-section{{  ($user->isSuperUser()) ? ' danger' : ' warning'}}">
+
+                        <span class="onsale{{  ($user->isSuperUser()) ? ' danger' : ' warning'}}">
+
+                          <i class="fas fa-crown" title="superuser"></i> 
+                            @if ($user->isSuperUser())
+                              superadmin
+                            @elseif ($user->hasAccess('admin'))
+                              admin
+                            @endif
+                        </span>
+
+                      </span>
+                    </div>       
+                </div>
+               </div>
+               
+          
 
               @can('update', $user)
                 <div class="col-md-12">
@@ -202,8 +222,9 @@
                     </div>
                   @endif
                 @endcan
+                <br><br>
             </div>
-          </div>
+ 
             <!-- End button column -->
           
             <div class="col-md-9 col-xs-12 col-sm-pull-3">
