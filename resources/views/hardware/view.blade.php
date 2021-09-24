@@ -134,23 +134,13 @@
                             <i class="fa fa-barcode fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
-                            {!! ($asset->assets->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->assets->count().'</badge>' : '' !!}
+                            {!! ($asset->assignedAssets()->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->assignedAssets()->count().'</badge>' : '' !!}
+                            
                           </span>
                         </a>
                     </li>
 
-                    <li>
-                        <a href="#maintenances" data-toggle="tab">
-                          <span class="hidden-lg hidden-md">
-                            <i class="fa fa-wrench fa-2x" aria-hidden="true"></i>
-                          </span>
-                          <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}
-                            {!! ($asset->maintenances->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->maintenances->count().'</badge>' : '' !!}
-                          </span>
-                        </a>
-                    </li>
-
-
+                
                     <li>
                         <a href="#history" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
@@ -162,13 +152,13 @@
                     </li>
 
                     <li>
-                        <a href="#files" data-toggle="tab">
+                        <a href="#maintenances" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fa fa-paperclip fa-2x" aria-hidden="true"></i>
+                            <i class="fa fa-wrench fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}
-                            {!! ($asset->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->uploads->count().'</badge>' : '' !!}
-                        </span>
+                            {!! ($asset->assetmaintenances()->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->assetmaintenances()->count().'</badge>' : '' !!}
+                          </span>
                         </a>
                     </li>
                    
@@ -203,7 +193,7 @@
                                                     {{ $asset->assetstatus->name }}
                                                     <label class="label label-default">{{ trans('general.deployed') }}</label>
 
-                                                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                                    <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i>
                                                     {!!  $asset->assignedTo->present()->glyph()  !!}
                                                     {!!  $asset->assignedTo->present()->nameUrl() !!}
                                                 @else
