@@ -128,3 +128,30 @@
 // Transition global options
 @transition-speed: .3s;
 @transition-fn: ease-in-out;
+
+// Color varaity
+.onsale-section.danger, .onsale.danger {
+    background-color: @red;
+}
+.onsale.warning {
+    background-color: @yellow;
+  }
+  .onsale-section.info, .onsale.info {
+    border-left-color: @aqua;
+    border-top: 6px solid @aqua;
+  }
+  .onsale-section.success, .onsale.success {
+    border-left-color: @green;
+    border-top: 6px solid @green;
+  }
+  .onsale-section.primary, .onsale.primary {
+    border-left-color: @light-blue;
+    border-top: 6px solid @light-blue;
+  }
+  
+  .onsale-section.danger:after, .onsale.danger {
+    background-color: @red;
+    //border-top: 6px solid @red;
+  }
+  
+  

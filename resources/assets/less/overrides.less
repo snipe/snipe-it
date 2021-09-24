@@ -502,6 +502,84 @@ h4 {
   display: table-cell;
 }
 
+
+/**
+* Ribbon stuff
+* https://codepen.io/devinsays/pen/PwEbmR
+**/
+
+.product {
+	width: 100%;
+  min-width: 100%;
+}
+
+.product-image {
+  position: relative;
+  min-height: 250px;
+  min-width: 4;
+}
+
+.onsale-section {
+  position: absolute;
+  top: -6px;
+  right: 15px;
+}
+
+.onsale-section:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  //border-top: 6px solid #6ec5d5;
+}
+
+
+.onsale {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+
+  font-size: 12px;
+  line-height: 1;
+  padding: 12px 8px 6px;
+  border-top-right-radius: 8px;
+  width: 100px;
+  text-transform: uppercase
+}
+
+.onsale:before,
+.onsale:after {
+  position: absolute;
+  content: '';
+  display: block;
+}
+
+.onsale:before {
+  height: 7px;
+  width: 6px;
+  left: -6px;
+  top: 0;
+}
+
+
+.onsale:after {
+  background: #96a0a2;
+  height: 7px;
+  width: 8px;
+  border-radius: 8px 8px 0 0;
+  left: -8px;
+  top: 0;
+}
+
+.product img {
+  display: block;
+}
+
+
 /**
 * This just adds a little extra padding on mobile
 **/
@@ -513,6 +591,14 @@ h4 {
 
   .firstnav {
     padding-top: 120px !important;
+  }
+
+  .product {
+    width: 400px;
+  }
+
+  .product img {
+    min-width: 400px;
   }
 }
 
@@ -526,10 +612,6 @@ h4 {
   display: table-row;
   flex-direction: column;
 }
-
-
-
-
 
 // ---------------
 
