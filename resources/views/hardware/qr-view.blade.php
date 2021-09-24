@@ -358,7 +358,7 @@
                 @endif
 
                 @if (isset($asset->assignedTo->email))
-                <li><br /><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a></li>
+                <li><br /><i class="far fa-envelope"></i> <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a></li>
                 @endif
 
                 @if ((isset($asset->assignedTo->phone)) && ($asset->assignedTo->phone!=''))

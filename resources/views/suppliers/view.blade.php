@@ -242,7 +242,7 @@
 
       @if ($supplier->email)
       <li>
-        <i class="fa fa-envelope-o"></i>
+        <i class="far fa-envelope"></i>
         <a href="mailto:{{ $supplier->email }}">
         {{ $supplier->email }}
         </a>
