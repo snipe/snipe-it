@@ -9,12 +9,12 @@ Route::group(['prefix' => 'consumables', 'middleware' => ['auth']], function () 
     Route::get(
         '{consumablesID}/checkout',
         [Consumables\ConsumableCheckoutController::class, 'create']
-    )->name('checkout/accessory');
+    )->name('checkout/consumable');
 
     Route::post(
         '{consumablesID}/checkout',
         [Consumables\ConsumableCheckoutController::class, 'store']
-    )->name('checkout/accessory');
+    )->name('checkout/consumable');
 
 
 });
