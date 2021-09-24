@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
             }
         }
 
-        $users = User::orderBy('id', 'desc')->take(20)->get();
+        $users = User::orderBy('id', 'asc')->take(20)->get();
         $file_number = 1;
 
         foreach ($users as $user) {
