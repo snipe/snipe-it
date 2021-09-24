@@ -180,9 +180,8 @@
                         <div class="row">
                             <div class="col-md-8">
 
-
                                 <!-- start striped rows -->
-                                <div class="container row-striped">
+                                <div class="container row-new-striped">
 
                                     @if ($asset->assetstatus)
 
