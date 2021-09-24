@@ -41,18 +41,17 @@ class ActionlogPresenter extends Presenter
         $itemicon = 'fa fa-paperclip';
 
         if ($this->itemType() == 'asset') {
-            $itemicon = 'fa fa-barcode';
+            return 'fa fa-barcode';
         } elseif ($this->itemType() == 'accessory') {
-            $itemicon = 'fa fa-keyboard-o';
+            return 'far fa-keyboard';
         } elseif ($this->itemType() == 'consumable') {
-            $itemicon = 'fa fa-tint';
+            return 'fa fa-tint';
         } elseif ($this->itemType() == 'license') {
-            $itemicon = 'fa fa-floppy-o';
+            return 'far fa-save';
         } elseif ($this->itemType() == 'component') {
-            $itemicon = 'fa fa-hdd-o';
+            return 'far fa-hdd';
         }
 
-        return $itemicon;
     }
 
     public function actionType()

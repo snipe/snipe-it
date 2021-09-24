@@ -12,7 +12,7 @@ Create a User ::
     @if (trim($output)=='Nothing to migrate.')
     <div class="col-md-12">
         <div class="alert alert-warning">
-            <i class="fa fa-warning"></i>
+            <i class="fas fa-exclamation-triangle"></i>
             There was nothing to migrate. Your database tables were already set up!
         </div>
     </div>

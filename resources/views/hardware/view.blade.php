@@ -96,76 +96,82 @@
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
+
                     <li class="active">
                         <a href="#details" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-            </span>
-                            <span class="hidden-xs hidden-sm">
-              {{ trans('general.details') }}
-            </span>
+                          <span class="hidden-lg hidden-md">
+                          <i class="fa fa-info-circle fa-2x"x></i>
+                          </span>
+                          <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
                         </a>
                     </li>
+
                     <li>
                         <a href="#software" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-              <i class="fa fa-floppy-o" aria-hidden="true"></i>
-            </span>
-                            <span class="hidden-xs hidden-sm">
-              {{ trans('general.licenses') }}
-            </span>
+                          <span class="hidden-lg hidden-md">
+                            <i class="far fa-save fa-2x" aria-hidden="true"></i>
+                          </span>
+                          <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
+                            {!! ($asset->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->licenses->count().'</badge>' : '' !!}
+                          </span>
                         </a>
                     </li>
+
                     <li>
                         <a href="#components" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-              <i class="fa fa-hdd-o" aria-hidden="true"></i>
-            </span>
-                            <span class="hidden-xs hidden-sm">
-              {{ trans('general.components') }}
-            </span>
+                          <span class="hidden-lg hidden-md">
+                            <i class="far fa-hdd" aria-hidden="true"></i>
+                          </span>
+                          <span class="hidden-xs hidden-sm">{{ trans('general.components') }}
+                            {!! ($asset->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->components->count().'</badge>' : '' !!}
+                          </span>
                         </a>
                     </li>
+
                     <li>
                         <a href="#assets" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-              <i class="fa fa-barcode" aria-hidden="true"></i>
-            </span>
-                            <span class="hidden-xs hidden-sm">
-              {{ trans('general.assets') }}
-            </span>
+                          <span class="hidden-lg hidden-md">
+                            <i class="fa fa-barcode fa-2x" aria-hidden="true"></i>
+                          </span>
+                          <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
+                            {!! ($asset->assets->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->assets->count().'</badge>' : '' !!}
+                          </span>
                         </a>
                     </li>
+
                     <li>
                         <a href="#maintenances" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-              <i class="fa fa-wrench" aria-hidden="true"></i>
-            </span>
-                            <span class="hidden-xs hidden-sm">
-              {{ trans('general.maintenances') }}
-            </span>
+                          <span class="hidden-lg hidden-md">
+                            <i class="fa fa-wrench fa-2x" aria-hidden="true"></i>
+                          </span>
+                          <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}
+                            {!! ($asset->maintenances->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->maintenances->count().'</badge>' : '' !!}
+                          </span>
                         </a>
                     </li>
+
+
                     <li>
                         <a href="#history" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-              <i class="fa fa-history" aria-hidden="true"></i>
-            </span>
-                            <span class="hidden-xs hidden-sm">
-              {{ trans('general.history') }}
-            </span>
+                          <span class="hidden-lg hidden-md">
+                            <i class="fas fa-history fa-2x" aria-hidden="true"></i>
+                          </span>
+                          <span class="hidden-xs hidden-sm">{{ trans('general.history') }}
+                          </span>
                         </a>
                     </li>
+
                     <li>
                         <a href="#files" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-              <i class="fa fa-files-o" aria-hidden="true"></i>
-            </span>
-                            <span class="hidden-xs hidden-sm">
-              {{ trans('general.files') }}
-            </span>
+                          <span class="hidden-lg hidden-md">
+                            <i class="fa fa-paperclip fa-2x" aria-hidden="true"></i>
+                          </span>
+                          <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}
+                            {!! ($asset->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->uploads->count().'</badge>' : '' !!}
+                        </span>
                         </a>
                     </li>
+                   
                     @can('update', \App\Models\Asset::class)
                         <li class="pull-right">
                             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
@@ -174,7 +180,9 @@
                             </a>
                         </li>
                     @endcan
+
                 </ul>
+                
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="details">
                         <div class="row">

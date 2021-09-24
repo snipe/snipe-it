@@ -9,6 +9,8 @@
 {{-- Page content --}}
 @section('content')
 
+
+
 <div class="row">
   <div class="col-md-12">
     <div class="nav-tabs-custom">
@@ -17,7 +19,7 @@
         <li class="active">
           <a href="#details" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-info-circle"></i>
+            <i class="fa fa-info-circle fa-2x"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
           </a>
@@ -26,49 +28,60 @@
         <li>
           <a href="#asset" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-barcode" aria-hidden="true"></i>
+            <i class="fa fa-barcode fa-2x" aria-hidden="true"></i>
             </span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
+              {!! ($user->assets->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->assets->count().'</badge>' : '' !!}
+            </span>
           </a>
         </li>
 
         <li>
           <a href="#licenses" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-floppy-o"></i>
+            <i class="far fa-save fa-2x"></i>
             </span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
+              {!! ($user->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->licenses->count().'</badge>' : '' !!}
+            </span>
           </a>
         </li>
 
         <li>
           <a href="#accessories" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-keyboard-o"></i>
-            </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span>
+            <i class="far fa-keyboard fa-2x"></i>
+            </span> 
+            <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}
+              {!! ($user->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->accessories->count().'</badge>' : '' !!}
+            </span>
           </a>
         </li>
 
         <li>
           <a href="#consumables" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-tint"></i></span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>
+            <i class="fa fa-tint fa-2x"></i></span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}
+              {!! ($user->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->consumables->count().'</badge>' : '' !!}
+            </span>
           </a>
         </li>
 
         <li>
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-paperclip"></i></span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}</span>
+            <i class="fa fa-paperclip fa-2x"></i></span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
+              {!! ($user->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->uploads->count().'</badge>' : '' !!}
+            </span>
           </a>
         </li>
 
         <li>
           <a href="#history" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-clock-o"></i></span>
+            <i class="fas fa-history fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
           </a>
         </li>
@@ -77,8 +90,9 @@
         <li>
           <a href="#managed" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-clock-o"></i></span>
-            <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}</span>
+            <i class="fa fa-map-marker fa-2x"></i></span>
+            <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}
+              {!! ($user->managedLocations->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->managedLocations->count().'</badge>' : '' !!}
           </a>
         </li>
         @endif
@@ -86,7 +100,7 @@
         @can('update', $user)
           <li class="dropdown pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fa fa-gear"></i> {{ trans('button.actions') }}
+              <i class="fas fa-cog"></i> {{ trans('button.actions') }}
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
@@ -109,19 +123,112 @@
       <div class="tab-content">
         <div class="tab-pane active" id="details">
           <div class="row">
+
+            
             @if ($user->deleted_at!='')
               <div class="col-md-12">
                 <div class="callout callout-warning">
-                  <i class="icon fa fa-warning"></i>
+                  <i class="icon fas fa-exclamation-triangle"></i>
                   {{ trans('admin/users/message.user_deleted_warning') }}
                   @can('update', $user)
-                      <a href="{{ route('restore/user', $user->id) }}">{{ trans('admin/users/general.restore_user') }}</a>
+                      <a href="{{ route('restore/user', $user->id) }}">
+                        {{ trans('admin/users/general.restore_user') }}
+                      </a>
                   @endcan
                 </div>
               </div>
             @endif
+
+            <!-- Start button column -->
+            <div class="col-md-3 col-xs-12 col-sm-push-9">
+
+              
+
+              <div class="col-md-12 text-center">
+                
+                <div class="product">
+	
+                    <div class="product-image">
+                      <img src="{{ $user->present()->gravatar() }}"  class="img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">
+                      <span class="onsale-section{{  ($user->isSuperUser()) ? ' danger' : ' warning'}}">
+
+                        <span class="onsale{{  ($user->isSuperUser()) ? ' danger' : ' warning'}}">
+
+                          <i class="fas fa-crown" title="superuser"></i> 
+                            @if ($user->isSuperUser())
+                              superadmin
+                            @elseif ($user->hasAccess('admin'))
+                              admin
+                            @endif
+                        </span>
+
+                      </span>
+                    </div>       
+                </div>
+               </div>
+               
           
-            <div class="col-md-9">
+
+              @can('update', $user)
+                <div class="col-md-12">
+                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.edit') }}</a>
+                </div>
+              @endcan
+
+              @can('create', $user)
+                <div class="col-md-12" style="padding-top: 5px;">
+                  <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>
+                </div>
+               @endcan
+
+                @can('view', $user)
+                <div class="col-md-12" style="padding-top: 5px;">
+                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
+                </div>
+                @endcan
+
+                @can('update', $user)
+                  @if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0'))
+                      <div class="col-md-12" style="padding-top: 5px;">
+                        <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
+                          {{ csrf_field() }}
+                          <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
+                        </form>
+                      </div>
+                  @endif
+                @endcan
+
+                @can('delete', $user)
+                  @if ($user->deleted_at=='')
+                    <div class="col-md-12" style="padding-top: 30px;">
+                      <form action="{{route('users.destroy',$user->id)}}" method="POST">
+                        {{csrf_field()}}
+                        {{ method_field("DELETE")}}
+                        <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
+                      </form>
+                    </div>
+                    <div class="col-md-12" style="padding-top: 5px;">
+                      <form action="{{ route('users/bulkedit') }}" method="POST">
+                        <!-- CSRF Token -->
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <input type="hidden" name="bulk_actions" value="delete" />
+
+                        <input type="hidden" name="ids[{{ $user->id }}]" value="{{ $user->id }}" />
+                        <button style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('button.checkin_and_delete') }}</button>
+                      </form>
+                    </div>
+                  @else
+                    <div class="col-md-12" style="padding-top: 5px;">
+                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
+                    </div>
+                  @endif
+                @endcan
+                <br><br>
+            </div>
+ 
+            <!-- End button column -->
+          
+            <div class="col-md-9 col-xs-12 col-sm-pull-3">
 
                <div class="row-new-striped">
                 
@@ -161,7 +268,14 @@
                         {{ trans('admin/users/table.username') }}
                       </div>
                       <div class="col-md-9">
-                        {{ $user->username }}
+
+                        @if ($user->isSuperUser())
+                          <label class="label label-danger"><i class="fas fa-crown" title="superuser"></i></label> {{ $user->username }}
+                        @elseif ($user->hasAccess('admin'))
+                          <label class="label label-warning"><i class="fas fa-crown" title="superuser"></i></label> {{ $user->username }}
+                        @endif
+
+                      
                       </div>
 
                     </div>
@@ -443,77 +557,10 @@
                 </div> <!-- end col-md-9 -->
    
             
-            <!-- Start button column -->
-            <div class="col-md-3 col-xs-12">
-
-              @if ($user->avatar)
-              <div class="col-md-12">
-                  <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
-                @else
-                  <img src="{{ $user->present()->gravatar() }}" class="avatar img-circle hidden-print" alt="{{ $user->present()->fullName() }}" style="margin-bottom: 20px;">
-                </div>
-            @endif
-
-
-              @can('update', $user)
-                <div class="col-md-12">
-                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.edit') }}</a>
-                </div>
-              @endcan
-
-              @can('create', $user)
-                <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/users/general.clone') }}</a>
-                </div>
-               @endcan
-
-                @can('view', $user)
-                <div class="col-md-12" style="padding-top: 5px;">
-                  <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
-                </div>
-                @endcan
-
-                @can('update', $user)
-                  @if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import == '0'))
-                      <div class="col-md-12" style="padding-top: 5px;">
-                        <form action="{{ route('users.password',['userId'=> $user->id]) }}" method="POST">
-                          {{ csrf_field() }}
-                          <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('button.send_password_link') }}</button>
-                        </form>
-                      </div>
-                  @endif
-                @endcan
-
-                @can('delete', $user)
-                  @if ($user->deleted_at=='')
-                    <div class="col-md-12" style="padding-top: 30px;">
-                      <form action="{{route('users.destroy',$user->id)}}" method="POST">
-                        {{csrf_field()}}
-                        {{ method_field("DELETE")}}
-                        <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.delete')}}</button>
-                      </form>
-                    </div>
-                    <div class="col-md-12" style="padding-top: 5px;">
-                      <form action="{{ route('users/bulkedit') }}" method="POST">
-                        <!-- CSRF Token -->
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                        <input type="hidden" name="bulk_actions" value="delete" />
-
-                        <input type="hidden" name="ids[{{ $user->id }}]" value="{{ $user->id }}" />
-                        <button style="width: 100%;" class="btn btn-sm btn-danger hidden-print">{{ trans('button.checkin_and_delete') }}</button>
-                      </form>
-                    </div>
-                  @else
-                    <div class="col-md-12" style="padding-top: 5px;">
-                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
-                    </div>
-                  @endif
-                @endcan
-            </div>
-            <!-- End button column -->
+            
           </div> <!--/.row-->
         </div><!-- /.tab-pane -->
-      </div> <!--/.row-->
+
 
         <div class="tab-pane" id="asset">
           <!-- checked out assets table -->

@@ -40,7 +40,7 @@ LDAP User Sync
                 </div>
                 <div class="text-right col-md-6">
                     <button type="submit" class="btn btn-primary" id="sync">
-                        <i id="sync-button-icon" class="fa fa-refresh icon-white" aria-hidden="true"></i> <span id="sync-button-text">Synchronize</span>
+                        <i id="sync-button-icon" class="fas fa-sync-alt icon-white" aria-hidden="true"></i> <span id="sync-button-text">Synchronize</span>
                     </button>
                 </div>
 

@@ -116,7 +116,7 @@
 <div class="col-md-12">
     <div class="alert alert-warning fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-warning faa-pulse animated"></i>
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
         <strong>Warning: </strong>
         {{ $message }}
     </div>

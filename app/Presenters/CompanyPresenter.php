@@ -56,13 +56,13 @@ class CompanyPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => true,
                 'visible' => true,
-                'title' => ' <span class="hidden-xs"><i class="fa fa-floppy-o"></i></span><span class="hidden-md hidden-lg">'.trans('general.licenses').'</span>',
+                'title' => ' <span class="hidden-xs"><i class="far fa-save"></i></span><span class="hidden-md hidden-lg">'.trans('general.licenses').'</span>',
             ], [
                 'field' => 'accessories_count',
                 'searchable' => false,
                 'sortable' => true,
                 'visible' => true,
-                'title' => ' <span class="hidden-xs"><i class="fa fa-keyboard-o"></i></span><span class="hidden-md hidden-lg">'.trans('general.accessories').'</span>',
+                'title' => ' <span class="hidden-xs"><i class="far fa-keyboard"></i></span><span class="hidden-md hidden-lg">'.trans('general.accessories').'</span>',
             ], [
                 'field' => 'consumables_count',
                 'searchable' => false,
@@ -74,7 +74,7 @@ class CompanyPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => true,
                 'visible' => true,
-                'title' => ' <span class="hidden-xs"><i class="fa fa-hdd-o"></i></span><span class="hidden-md hidden-lg">'.trans('general.components').'</span>',
+                'title' => ' <span class="hidden-xs"><i class="far fa-hdd"></i></span><span class="hidden-md hidden-lg">'.trans('general.components').'</span>',
             ], [
                 'field' => 'updated_at',
                 'searchable' => false,

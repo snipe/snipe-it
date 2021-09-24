@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-globe"></i> Localization
+                        <i class="fas fa-globe-americas" aria-hidden="true"></i> Localization
                     </h2>
                 </div>
                 <div class="box-body">

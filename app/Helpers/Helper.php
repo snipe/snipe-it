@@ -900,33 +900,33 @@ class Helper
 
         $allowedExtensionMap = [
             // Images
-            'jpg'   => 'fa fa-file-image-o',
-            'jpeg'   => 'fa fa-file-image-o',
-            'gif'   => 'fa fa-file-image-o',
-            'png'   => 'fa fa-file-image-o',
+            'jpg'   => 'far fa-image',
+            'jpeg'   => 'far fa-image',
+            'gif'   => 'far fa-image',
+            'png'   => 'far fa-image',
             // word
-            'doc'   => 'fa fa-file-word-o',
-            'docx'   => 'fa fa-file-word-o',
+            'doc'   => 'far fa-file-word',
+            'docx'   => 'far fa-file-word',
             // Excel
-            'xls'   => 'fa fa-file-excel-o',
-            'xlsx'   => 'fa fa-file-excel-o',
+            'xls'   => 'far fa-file-excel',
+            'xlsx'   => 'far fa-file-excel',
             // archive
-            'zip'   => 'fa fa-file-archive-o',
-            'rar'   => 'fa fa-file-archive-o',
+            'zip'   => 'fas fa-file-archive',
+            'rar'   => 'fas fa-file-archive',
             //Text
-            'txt'   => 'fa fa-file-text-o',
-            'rtf'   => 'fa fa-file-text-o',
-            'xml'   => 'fa fa-file-text-o',
+            'txt'   => 'far fa-file-alt',
+            'rtf'   => 'far fa-file-alt',
+            'xml'   => 'far fa-file-alt',
             // Misc
-            'pdf'   => 'fa fa-file-pdf-o',
-            'lic'   => 'fa fa-file-floppy-o',
+            'pdf'   => 'far fa-file-pdf',
+            'lic'   => 'far fa-save',
         ];
 
         if ($extension && array_key_exists($extension, $allowedExtensionMap)) {
             return $allowedExtensionMap[$extension];
         }
 
-        return 'fa fa-file-o';
+        return 'far fa-file';
     }
 
     public static function show_file_inline($filename)

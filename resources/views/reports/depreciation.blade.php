@@ -46,7 +46,7 @@
               @else
               <div class="col-md-12">
                   <div class="alert alert-warning fade in">
-                      <i class="fa fa-warning faa-pulse animated"></i>
+                      <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
                       <strong>Warning: </strong>
                       You do not currently have any depreciations set up.
                       Please set up at least one depreciation to view the depreciation report.

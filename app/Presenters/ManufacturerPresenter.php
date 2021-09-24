@@ -94,7 +94,7 @@ class ManufacturerPresenter extends Presenter
                 'sortable' => true,
                 'switchable' => true,
                 'title' => ' <span class="hidden-md hidden-lg">Licenses</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-floppy-o fa-lg"></i></span>',
+                    .'<span class="hidden-xs"><i class="far fa-save fa-lg"></i></span>',
                 'visible' => true,
             ],
             [
@@ -112,7 +112,7 @@ class ManufacturerPresenter extends Presenter
                 'sortable' => true,
                 'switchable' => true,
                 'title' => ' <span class="hidden-md hidden-lg">Accessories</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-keyboard-o fa-lg"></i></span>',
+                    .'<span class="hidden-xs"><i class="far fa-keyboard fa-lg"></i></span>',
                 'visible' => true,
             ],
             [

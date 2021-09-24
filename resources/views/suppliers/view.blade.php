@@ -193,7 +193,7 @@
                       <td>{{ $improvement->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
                       <td>{{ sprintf( $snipeSettings->default_currency. '%01.2f', $improvement->cost) }}</td>
                         <?php $totalCost += $improvement->cost; ?>
-                      <td><a href="{{ route('maintenances.edit', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white" aria-hidden="true"></i></a>
+                      <td><a href="{{ route('maintenances.edit', $improvement->id) }}" class="btn btn-warning"><i class="fas fa-pencil-alt icon-white" aria-hidden="true"></i></a>
                       </td>
                     </tr>
                   @endif
@@ -242,7 +242,7 @@
 
       @if ($supplier->email)
       <li>
-        <i class="fa fa-envelope-o"></i>
+        <i class="far fa-envelope"></i>
         <a href="mailto:{{ $supplier->email }}">
         {{ $supplier->email }}
         </a>

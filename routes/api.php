@@ -389,7 +389,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
          * Groups API routes
         */
         Route::resource('groups', 
-        Api\CustomFieldsetsController::class,
+        Api\GroupsCOntroller::class,
             ['names' => 
                 [
                     'index' => 'api.groups.index',

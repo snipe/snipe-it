@@ -2,6 +2,32 @@
  * Skin: green dark
  * ----------
  */
+.onsale-section.danger,
+.onsale.danger {
+  background-color: #dd4b39;
+}
+.onsale.warning {
+  background-color: #f39c12;
+}
+.onsale-section.info,
+.onsale.info {
+  border-left-color: #00c0ef;
+  border-top: 6px solid #00c0ef;
+}
+.onsale-section.success,
+.onsale.success {
+  border-left-color: #00a65a;
+  border-top: 6px solid #00a65a;
+}
+.onsale-section.primary,
+.onsale.primary {
+  border-left-color: #3c8dbc;
+  border-top: 6px solid #3c8dbc;
+}
+.onsale-section.danger:after,
+.onsale.danger {
+  background-color: #dd4b39;
+}
 .skin-green-dark .main-header .navbar {
   background-color: #00a65a;
 }
