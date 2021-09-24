@@ -28,7 +28,9 @@
             <span class="hidden-lg hidden-md">
             <i class="fa fa-barcode" aria-hidden="true"></i>
             </span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
+              {!! ($user->assets->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->assets->count().'</badge>' : '' !!}
+            </span>
           </a>
         </li>
 
@@ -37,7 +39,9 @@
             <span class="hidden-lg hidden-md">
             <i class="fa fa-floppy-o"></i>
             </span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}
+              {!! ($user->licenses->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->licenses->count().'</badge>' : '' !!}
+            </span>
           </a>
         </li>
 
@@ -45,7 +49,9 @@
           <a href="#accessories" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-keyboard-o"></i>
-            </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span>
+            </span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}
+              {!! ($user->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->accessories->count().'</badge>' : '' !!}
+            </span>
           </a>
         </li>
 
@@ -53,7 +59,9 @@
           <a href="#consumables" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-tint"></i></span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}
+              {!! ($user->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->consumables->count().'</badge>' : '' !!}
+            </span>
           </a>
         </li>
 
@@ -61,7 +69,9 @@
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
             <i class="fa fa-paperclip"></i></span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}</span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
+              {!! ($user->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->uploads->count().'</badge>' : '' !!}
+            </span>
           </a>
         </li>
 
@@ -77,8 +87,9 @@
         <li>
           <a href="#managed" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-clock-o"></i></span>
-            <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}</span>
+            <i class="fa fa-map-marker"></i></span>
+            <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}
+              {!! ($user->managedLocations->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->managedLocations->count().'</badge>' : '' !!}
           </a>
         </li>
         @endif
@@ -231,7 +242,11 @@
                         {{ trans('admin/users/table.username') }}
                       </div>
                       <div class="col-md-9">
+                        <i class="fas fa-crown"></i>
                         {{ $user->username }}
+                        @if ($user->hasAccess('admin'))
+                        <label class="label label-default">admin</label>
+                        @endif
                       </div>
 
                     </div>
