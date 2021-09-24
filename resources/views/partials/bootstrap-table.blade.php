@@ -71,7 +71,7 @@
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
                 columns: 'fa-columns',
-                refresh: 'fa-refresh',
+                refresh: 'fas fa-sync-alt',
                 export: 'fa-download',
                 clearSearch: 'fa-times'
             },
