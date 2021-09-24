@@ -90,7 +90,7 @@
         <li>
           <a href="#managed" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-map-marker fa-2x"></i></span>
+              <i class="fas fa-map-marker-alt fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/table.managed_locations') }}
               {!! ($user->managedLocations->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->managedLocations->count().'</badge>' : '' !!}
           </a>
@@ -146,25 +146,15 @@
 
               <div class="col-md-12 text-center">
                 
-                <div class="product">
-	
-                    <div class="product-image">
-                      <img src="{{ $user->present()->gravatar() }}"  class="img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">
-                      <span class="onsale-section{{  ($user->isSuperUser()) ? ' danger' : ' warning'}}">
+                 @if (($user->isSuperUser()) || ($user->hasAccess('admin')))
+                    <i class="fas fa-crown fa-2x {{  ($user->isSuperUser()) ? 'text-danger' : ' text-orange'}}"></i>
+                    <div class="{{  ($user->isSuperUser()) ? 'text-danger' : ' text-orange'}}" style="font-weight: bold">{{  ($user->isSuperUser()) ? 'superadmin' : 'admin'}}</div>
+                  @endif
 
-                        <span class="onsale{{  ($user->isSuperUser()) ? ' danger' : ' warning'}}">
-
-                          <i class="fas fa-crown" title="superuser"></i> 
-                            @if ($user->isSuperUser())
-                              superadmin
-                            @elseif ($user->hasAccess('admin'))
-                              admin
-                            @endif
-                        </span>
-
-                      </span>
-                    </div>       
-                </div>
+                
+              </div>
+              <div class="col-md-12 text-center">
+                <img src="{{ $user->present()->gravatar() }}"  class=" img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">  
                </div>
                
           
