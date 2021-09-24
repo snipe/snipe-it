@@ -503,11 +503,6 @@
                             <div class="col-md-9" id="two_factor_reset_toggle">
                               {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
 
-                              {{ Auth::user()->isSuperUser() }}
-                              && 
-                              {{ $snipeSettings->two_factor_enabled }}
-                              &&  
-                              {{ $snipeSettings->two_factor_enabled }}
                             </div>
                           </div>
                           
