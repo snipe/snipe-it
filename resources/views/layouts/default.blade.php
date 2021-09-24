@@ -390,7 +390,7 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu" data-widget="tree">
             @can('admin')
-            <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!}>
+            <li {!! (\Request::route()->getName()=='home' ? ' class="active"' : '') !!} class="firstnav">
               <a href="{{ route('home') }}">
                 <i class="fa fa-dashboard" aria-hidden="true"></i> <span>{{ trans('general.dashboard') }}</span>
               </a>
@@ -747,11 +747,7 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header" style="padding-bottom: 30px;">
-          <h1 class="pull-left">
-            @yield('title')
-
-
-          </h1>
+          <h1 class="pull-left pagetitle">@yield('title') </h1>
 
             @if (isset($helpText))
             @include ('partials.more-info',
