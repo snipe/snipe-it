@@ -822,6 +822,15 @@ h4 {
     padding-top: 120px !important;
   }
 }
+.card-view-title {
+  min-width: 40% !important;
+  line-height: 3 !important;
+  padding-right: 20px;
+}
+.card-view {
+  display: table-row;
+  flex-direction: column;
+}
 /**
 
  COLUMN SELECTOR ICONS
