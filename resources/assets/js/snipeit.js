@@ -296,11 +296,11 @@ $(document).ready(function () {
                 });
 				
 				// makes sure we're not selecting the same thing twice for multiples
-				var filteredResponse = response.items.filter(function(item) {
+				var filteredResponse = response.results.filter(function(item) {
 					return currentlySelected.indexOf(+item.id) < 0;
 				});
 
-				var first = (currentlySelected.length > 0) ? filteredResponse[0] : response.items[0];
+				var first = (currentlySelected.length > 0) ? filteredResponse[0] : response.results[0];
 				
 				if(first && first.id) {
 					first.selected = true;
