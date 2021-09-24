@@ -325,7 +325,7 @@ class AssetsController extends Controller
          * Include additional associated relationships
          */  
         if ($request->input('components')) {
-            $assets->load(['components' => function ($query) {
+            $assets->loadMissing(['components' => function ($query) {
                 $query->orderBy('created_at', 'desc');
             }]);
         }
