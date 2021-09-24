@@ -511,9 +511,7 @@
               @endif
 
               @if (!Auth::user()->hasAccess('admin'))
-                <p class="alert alert-warning">Only users with admins rights or greater may grant a user admin access.</p>
-              @else
-                farts
+                <p class="alert alert-warning">Only users with admins rights or greater may grant a user admin access.</p>              
               @endif
             </div>
 
