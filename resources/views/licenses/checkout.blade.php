@@ -71,19 +71,19 @@
                             <div class="callout callout-info">
 
                                 @if ($license->requireAcceptance())
-                                    <i class="fa fa-envelope"></i>
+                                    <i class="far fa-envelope"></i>
                                     {{ trans('admin/categories/general.required_acceptance') }}
                                     <br>
                                 @endif
 
                                 @if ($license->getEula())
-                                    <i class="fa fa-envelope"></i>
+                                    <i class="far fa-envelope"></i>
                                     {{ trans('admin/categories/general.required_eula') }}
                                     <br>
                                 @endif
 
                                 @if (($license->category) && ($license->category->checkin_email))
-                                    <i class="fa fa-envelope"></i>
+                                    <i class="far fa-envelope"></i>
                                     {{ trans('admin/categories/general.checkin_email_notification') }}
                                     <br>
                                 @endif

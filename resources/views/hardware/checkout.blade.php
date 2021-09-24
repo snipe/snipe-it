@@ -111,13 +111,13 @@
                                     <div class="callout callout-info">
 
                                         @if ($asset->requireAcceptance())
-                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <i class="far fa-envelope" aria-hidden="true"></i>
                                             {{ trans('admin/categories/general.required_acceptance') }}
                                             <br>
                                         @endif
 
                                         @if ($asset->getEula())
-                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <i class="far fa-envelope" aria-hidden="true"></i>
                                             {{ trans('admin/categories/general.required_eula') }}
                                             <br>
                                         @endif

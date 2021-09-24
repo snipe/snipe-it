@@ -47,13 +47,13 @@
                   <div class="callout callout-info">
 
                     @if ($consumable->category->require_acceptance=='1')
-                      <i class="fa fa-envelope"></i>
+                      <i class="far fa-envelope"></i>
                       {{ trans('admin/categories/general.required_acceptance') }}
                       <br>
                     @endif
 
                     @if ($consumable->getEula())
-                      <i class="fa fa-envelope"></i>
+                      <i class="far fa-envelope"></i>
                       {{ trans('admin/categories/general.required_eula') }}
                         <br>
                     @endif

@@ -251,7 +251,7 @@
 
       @if ($supplier->url)
       <li>
-        <i class="fa fa-globe"></i>
+        <i class="fas fa-globe-americas"></i>
         <a href="{{ $supplier->url }}" target="_new">{{ $supplier->url }}</a>
       </li>
       @endif

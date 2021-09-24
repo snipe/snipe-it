@@ -115,7 +115,7 @@
 
                   @if ($model->manufacturer->url)
                       <li>
-                          <i class="fa fa-globe"></i> <a href="{{ $model->manufacturer->url }}">{{ $model->manufacturer->url }}</a>
+                          <i class="fas fa-globe-americas"></i> <a href="{{ $model->manufacturer->url }}">{{ $model->manufacturer->url }}</a>
                       </li>
                   @endif
 
@@ -135,7 +135,7 @@
 
                   @if ($model->manufacturer->support_email)
                       <li>
-                          <i class="fa fa-envelope"></i> <a href="mailto:{{ $model->manufacturer->support_email }}">{{ $model->manufacturer->support_email }}</a>
+                          <i class="far fa-envelope"></i> <a href="mailto:{{ $model->manufacturer->support_email }}">{{ $model->manufacturer->support_email }}</a>
                       </li>
                   @endif
                 @endif

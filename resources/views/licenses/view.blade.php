@@ -71,7 +71,7 @@
                       @endcan
 
                       @if ($license->manufacturer->url)
-                        <br><i class="fa fa-globe" aria-hidden="true"></i> <a href="{{ $license->manufacturer->url }}" rel="noopener">{{ $license->manufacturer->url }}</a>
+                        <br><i class="fas fa-globe-americas" aria-hidden="true"></i> <a href="{{ $license->manufacturer->url }}" rel="noopener">{{ $license->manufacturer->url }}</a>
                       @endif
 
                       @if ($license->manufacturer->support_url)
@@ -85,7 +85,7 @@
                       @endif
 
                       @if ($license->manufacturer->support_email)
-                        <br><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ $license->manufacturer->support_email }}">{{ $license->manufacturer->support_email }}</a>
+                        <br><i class="far fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ $license->manufacturer->support_email }}">{{ $license->manufacturer->support_email }}</a>
                       @endif
                     </div>
                   </div>

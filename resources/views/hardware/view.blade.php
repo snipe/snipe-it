@@ -179,7 +179,7 @@
                             <div class="col-md-8">
 
                                 <!-- start striped rows -->
-                                <div class="container row-new-striped">
+                                <div class="container row-striped">
 
                                     @if ($asset->assetstatus)
 
@@ -296,7 +296,7 @@
 
                                                     @if (($asset->model) && ($asset->model->manufacturer->url))
                                                         <li>
-                                                            <i class="fa fa-globe" aria-hidden="true"></i>
+                                                            <i class="fas fa-globe-americas" aria-hidden="true"></i>
                                                             <a href="{{ $asset->model->manufacturer->url }}">
                                                                 {{ $asset->model->manufacturer->url }}
                                                             </a>
@@ -322,7 +322,8 @@
                                                     @endif
 
                                                     @if (($asset->model) && ($asset->model->manufacturer->support_email))
-                                                        <li><i class="fa fa-envelope" aria-hidden="true"></i>
+                                                        <li>
+                                                            <i class="far fa-envelope" aria-hidden="true"></i>
                                                             <a href="mailto:{{ $asset->model->manufacturer->support_email }}">
                                                                 {{ $asset->model->manufacturer->support_email }}
                                                             </a>
@@ -792,7 +793,7 @@
                                         <ul class="list-unstyled" style="line-height: 25px;">
                                             @if ((isset($asset->assignedTo->email)) && ($asset->assignedTo->email!=''))
                                                 <li>
-                                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                                    <i class="far fa-envelope" aria-hidden="true"></i>
                                                     <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a>
                                                 </li>
                                             @endif
