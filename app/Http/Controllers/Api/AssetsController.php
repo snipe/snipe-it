@@ -118,7 +118,7 @@ class AssetsController extends Controller
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier');
 
-
+        
         // These are used by the API to query against specific ID numbers.
         // They are also used by the individual searches on detail pages like
         // locations, etc.
@@ -270,7 +270,7 @@ class AssetsController extends Controller
             $assets->TextSearch($request->input('search'));
         }
 
-
+        
         // This is kinda gross, but we need to do this because the Bootstrap Tables
         // API passes custom field ordering as custom_fields.fieldname, and we have to strip
         // that out to let the default sorter below order them correctly on the assets table.
@@ -319,12 +319,25 @@ class AssetsController extends Controller
 
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
+        
+    
+        /**
+         * Include additional associated relationships
+         */  
+        if ($request->input('components')) {
+            $assets->load(['components' => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }]);
+        }
+
+        
+
 
         /**
          * Here we're just determining which Transformer (via $transformer) to use based on the 
          * variables we set earlier on in this method - we default to AssetsTransformer.
          */
-        return (new $transformer)->transformAssets($assets, $total);
+        return (new $transformer)->transformAssets($assets, $total, $request);
     }
 
 
@@ -336,11 +349,11 @@ class AssetsController extends Controller
      * @since [v4.2.1]
      * @return JsonResponse
      */
-    public function showByTag($tag)
+    public function showByTag(Request $request, $tag)
     {
         if ($asset = Asset::with('assetstatus')->with('assignedTo')->where('asset_tag',$tag)->first()) {
             $this->authorize('view', $asset);
-            return (new AssetsTransformer)->transformAsset($asset);
+            return (new AssetsTransformer)->transformAsset($asset, $request);
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
 
@@ -354,7 +367,7 @@ class AssetsController extends Controller
      * @since [v4.2.1]
      * @return JsonResponse
      */
-    public function showBySerial($serial)
+    public function showBySerial(Request $request, $serial)
     {
         $this->authorize('index', Asset::class);
         if ($assets = Asset::with('assetstatus')->with('assignedTo')
@@ -374,17 +387,17 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()
             ->withCount('checkins as checkins_count', 'checkouts as checkouts_count', 'userRequests as user_requests_count')->findOrFail($id)) {
             $this->authorize('view', $asset);
-            return (new AssetsTransformer)->transformAsset($asset);
+            return (new AssetsTransformer)->transformAsset($asset, $request->input('components') );
         }
 
 
     }
-    public function licenses($id)
+    public function licenses(Request $request, $id)
     {
         $this->authorize('view', Asset::class);
         $this->authorize('view', License::class);
