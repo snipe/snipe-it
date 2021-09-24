@@ -405,7 +405,7 @@
                 <ul class="treeview-menu">
                   <li>
                       <a href="{{ url('hardware') }}">
-                          <i class="fa fa-circle-o text-grey" aria-hidden="true"></i>
+                          <i class="far fa-circle text-grey" aria-hidden="true"></i>
                         {{ trans('general.list_all') }}
                     </a>
                   </li>
@@ -413,14 +413,16 @@
                     <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav', '=', 1)->withCount('assets as asset_count')->get(); ?>
                     @if (count($status_navs) > 0)
                         @foreach ($status_navs as $status_nav)
-                            <li><a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}"><i class="fa fa-circle text-grey" aria-hidden="true"></i> {{ $status_nav->name }} ({{ $status_nav->asset_count }})</a></li>
+                            <li><a href="{{ route('statuslabels.show', ['statuslabel' => $status_nav->id]) }}">
+                                <i class="fas fa-circle text-grey" aria-hidden="true"></i>
+                                 {{ $status_nav->name }} ({{ $status_nav->asset_count }})</a></li>
                         @endforeach
                     @endif
 
 
                   <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
                     <a href="{{ url('hardware?status=Deployed') }}">
-                        <i class="fa fa-circle-o text-blue"></i>
+                        <i class="far fa-circle text-blue"></i>
                         {{ trans('general.all') }}
                         {{ trans('general.deployed') }}
                         ({{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }})
@@ -428,13 +430,13 @@
                   </li>
                   <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
                     <a href="{{ url('hardware?status=RTD') }}">
-                        <i class="fa fa-circle-o text-green"></i>
+                        <i class="far fa-circle text-green"></i>
                         {{ trans('general.all') }}
                         {{ trans('general.ready_to_deploy') }}
                         ({{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }})
                     </a>
                   </li>
-                  <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}"><i class="fa fa-circle-o text-orange"></i>
+                  <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}"><i class="far fa-circle text-orange"></i>
                           {{ trans('general.all') }}
                           {{ trans('general.pending') }}
                           ({{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }})
@@ -465,7 +467,7 @@
                         </li>
                         <li{!! (Request::is('hardware/audit/overdue') ? ' class="active"' : '') !!}>
                             <a href="{{ route('assets.audit.overdue') }}">
-                                <i class="fa fa-warning text-red"></i> {{ trans('general.audit_overdue') }}
+                                <i class="fas fa-exclamation-triangle text-red"></i> {{ trans('general.audit_overdue') }}
                             </a>
                         </li>
                     @endcan
