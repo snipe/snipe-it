@@ -20,7 +20,7 @@
     <p>{{ trans('admin/hardware/form.bulk_update_help') }}</p>
 
     <div class="callout callout-warning">
-      <i class="fa fa-warning"></i> {{ trans('admin/hardware/form.bulk_update_warn', ['asset_count' => count($assets)]) }}
+      <i class="fas fa-exclamation-triangle"></i> {{ trans('admin/hardware/form.bulk_update_warn', ['asset_count' => count($assets)]) }}
     </div>
 
     <form class="form-horizontal" method="post" action="{{ route('hardware/bulksave') }}" autocomplete="off" role="form">

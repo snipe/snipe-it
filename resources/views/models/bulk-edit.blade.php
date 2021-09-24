@@ -22,7 +22,7 @@
 
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <div class="box-title"><i class="fa fa-warning"></i> You are about to edit the following: </div>
+                        <div class="box-title"><i class="fas fa-exclamation-triangle"></i> You are about to edit the following: </div>
                     </div>
                     <div class="box-body">
 

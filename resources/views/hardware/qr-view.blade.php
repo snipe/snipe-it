@@ -46,12 +46,12 @@
             <div class="col-md-12">
                 @if ($asset->model->deleted_at!='')
                 <div class="alert alert-warning alert-block">
-                    <i class="fa fa-warning"></i>
+                    <i class="fas fa-exclamation-triangle"></i>
                     {{ trans('admin/hardware/general.model_deleted', array('model_id' => $asset->model->id)) }}
                 </div>
                 @elseif ($asset->deleted_at!='')
                 <div class="alert alert-warning alert-block">
-                    <i class="fa fa-warning"></i>
+                    <i class="fas fa-exclamation-triangle"></i>
                     {{ trans('admin/hardware/general.deleted', array('asset_id' => $asset->id)) }}
                 </div>
                 @endif

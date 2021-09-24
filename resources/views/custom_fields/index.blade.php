@@ -145,7 +145,7 @@
               <td>
                  <code>{{ $field->convertUnicodeDbSlug() }}</code>
                 @if ($field->convertUnicodeDbSlug()!=$field->db_column)
-                  <br><i class="fa fa-warning text-danger"></i>WARNING. This field is in the custom fields table as <code>{{  $field->db_column }}</code> but should be <code>{{ $field->convertUnicodeDbSlug() }}</code>.
+                  <br><i class="fas fa-exclamation-triangle text-danger"></i>WARNING. This field is in the custom fields table as <code>{{  $field->db_column }}</code> but should be <code>{{ $field->convertUnicodeDbSlug() }}</code>.
                 @endif
               </td>
               <td>{{ $field->format }}</td>
@@ -159,7 +159,7 @@
                 <nobr>
                   @can('update', $field)
                 <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm">
-                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                  <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                   <span class="sr-only">Edit</span>
                 </a>
                 @endcan               

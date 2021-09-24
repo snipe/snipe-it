@@ -209,7 +209,7 @@
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update Item"><i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">Update</span></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update Item"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">Update</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
@@ -446,7 +446,7 @@
     function changeLogFormatter(value) {
         var result = '';
             for (var index in value) {
-                result += index + ': <del>' + value[index].old + '</del>  <i class="fa fa-long-arrow-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
+                result += index + ': <del>' + value[index].old + '</del>  <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
             }
 
         return result;

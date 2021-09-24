@@ -129,7 +129,7 @@
           <div class="col-md-6 col-md-offset-4" id="encrypt_warning" style="display:none;">
 
               <div class="callout callout-danger">
-                <p><i class="fa fa-warning" aria-hidden="true"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
+                <p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{ trans('admin/custom_fields/general.encrypt_field_help') }}</p>
             </div>
           </div>
         </div>

@@ -120,13 +120,17 @@
       <div class="tab-content">
         <div class="tab-pane active" id="details">
           <div class="row">
+
+            
             @if ($user->deleted_at!='')
               <div class="col-md-12">
                 <div class="callout callout-warning">
-                  <i class="icon fa fa-warning"></i>
+                  <i class="icon fas fa-exclamation-triangle"></i>
                   {{ trans('admin/users/message.user_deleted_warning') }}
                   @can('update', $user)
-                      <a href="{{ route('restore/user', $user->id) }}">{{ trans('admin/users/general.restore_user') }}</a>
+                      <a href="{{ route('restore/user', $user->id) }}">
+                        {{ trans('admin/users/general.restore_user') }}
+                      </a>
                   @endcan
                 </div>
               </div>
