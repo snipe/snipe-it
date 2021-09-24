@@ -36,8 +36,8 @@ class AssetModelSeeder extends Seeder
         AssetModel::factory()->count(1)->tab3Model()->create(); // 14
 
         // Phones
-        AssetModel::factory()->count(1)->iphone6sModel()->create(); // 15
-        AssetModel::factory()->count(1)->iphone7Model()->create(); // 16
+        AssetModel::factory()->count(1)->iphone11Model()->create(); // 15
+        AssetModel::factory()->count(1)->iphone12Model()->create(); // 16
 
         // Displays
         AssetModel::factory()->count(1)->ultrafine()->create(); // 17
