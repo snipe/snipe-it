@@ -71,7 +71,7 @@
         <li>
           <a href="#files" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-paperclip fa-2x"></i></span>
+            <i class="far fa-file fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
               {!! ($user->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->uploads->count().'</badge>' : '' !!}
             </span>
