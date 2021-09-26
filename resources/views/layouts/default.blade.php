@@ -378,7 +378,7 @@
       </nav>
        <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
-        <i class="fa fa-bars"></i>
+        <i class="fas fa-bars"></i>
       </a>
        <!-- Sidebar toggle button-->
       </header>
