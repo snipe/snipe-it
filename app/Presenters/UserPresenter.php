@@ -386,6 +386,6 @@ class UserPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fa fa-user" aria-hidden="true"></i>';
+        return '<i class="fas fa-user" aria-hidden="true"></i>';
     }
 }

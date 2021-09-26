@@ -72,9 +72,9 @@
                 @can('delete', $fieldset)
                 {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete']) }}
                   @if($fieldset->models->count() > 0)
-                  <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
+                  <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fas fa-trash"></i></button>
                   @else
-                  <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                  <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                   @endif
                 {{ Form::close() }}
                 @endcan
@@ -141,7 +141,7 @@
             <tr>
               <td>{{ $field->name }}</td>
               <td>{{ $field->help_text }}</td>
-              <td>{!! ($field->show_in_email=='1') ? '<i class="fa fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
+              <td>{!! ($field->show_in_email=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td>
                  <code>{{ $field->convertUnicodeDbSlug() }}</code>
                 @if ($field->convertUnicodeDbSlug()!=$field->db_column)
@@ -167,11 +167,11 @@
                 {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
                 @if($field->fieldset->count()>0)
                 <button type="submit" class="btn btn-danger btn-sm disabled" disabled>
-                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <i class="fas fa-trash" aria-hidden="true"></i>
                   <span class="sr-only">Delete</span></button>
                 @else
                 <button type="submit" class="btn btn-danger btn-sm">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <i class="fas fa-trash" aria-hidden="true"></i>
                   <span class="sr-only">Delete</span>
                 </button>
                 @endif

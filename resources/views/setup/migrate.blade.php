@@ -19,7 +19,7 @@ Create a User ::
     @else
     <div class="col-md-12">
         <div class="alert alert-success">
-            <i class="fa fa-check"></i>
+            <i class="fas fa-check"></i>
             Your database tables have been created
         </div>
     </div>

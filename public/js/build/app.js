@@ -1913,7 +1913,7 @@ pieOptions = {
   // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
   maintainAspectRatio: false,
   //String - A legend template
-  legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li>" + "<i class='fa fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" + "<%if(segments[i].label){%><%=segments[i].label%><%}%> foo</li><%}%></ul>",
+  legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li>" + "<i class='fas fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" + "<%if(segments[i].label){%><%=segments[i].label%><%}%> foo</li><%}%></ul>",
   //String - A tooltip template
   tooltipTemplate: "<%=value %> <%=label%> "
 }; //-----------------
@@ -2144,7 +2144,7 @@ $(document).ready(function () {
   });
 
   function formatDatalist(datalist) {
-    var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+    var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
 
     if (datalist.loading) {
       return loading_markup;
@@ -2168,7 +2168,7 @@ $(document).ready(function () {
     // console.warn("What in the hell is going on with Select2?!?!!?!?");
     // console.warn($.select2);
     if (datalist.loading) {
-      return $('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+      return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
     }
 
     var root_div = $("<div class='clearfix'>");
@@ -2331,9 +2331,9 @@ $(document).ready(function () {
     console.log('Real size is: ' + total_size);
 
     if (total_size > max_size) {
-      $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
+      $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fas fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
     } else {
-      $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
+      $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fas fa-check"></i> ');
       var $preview = $(id + '-imagePreview');
       readURL(this, $preview);
       $preview.fadeIn();
@@ -2521,7 +2521,7 @@ function formatDatalistSafe(datalist) {
   // console.warn("What in the hell is going on with Select2?!?!!?!?");
   // console.warn($.select2);
   if (datalist.loading) {
-    return $('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+    return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
   }
 
   var root_div = $("<div class='clearfix'>");
@@ -2574,7 +2574,7 @@ function formatDatalistSafe(datalist) {
 }
 
 function formatDatalist(datalist) {
-  var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+  var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
 
   if (datalist.loading) {
     return loading_markup;
@@ -36976,7 +36976,7 @@ var render = function() {
               expression: "alertType == 'success'"
             }
           ],
-          staticClass: "fa fa-check faa-pulse animated",
+          staticClass: "fas fa-check faa-pulse animated",
           attrs: { "aria-hidden": "true" }
         }),
         _vm._v(" "),
@@ -38431,7 +38431,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_c("i", { staticClass: "fa fa-trash" })]
+                            [_c("i", { staticClass: "fas fa-trash" })]
                           )
                         ]
                       )

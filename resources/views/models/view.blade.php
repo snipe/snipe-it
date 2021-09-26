@@ -121,13 +121,13 @@
 
                   @if ($model->manufacturer->support_url)
                       <li>
-                          <i class="fa fa-life-ring"></i> <a href="{{ $model->manufacturer->support_url }}">{{ $model->manufacturer->support_url }}</a>
+                          <i class="far fa-life-ring"></i> <a href="{{ $model->manufacturer->support_url }}">{{ $model->manufacturer->support_url }}</a>
                       </li>
                   @endif
 
                   @if ($model->manufacturer->support_phone)
                       <li>
-                          <i class="fa fa-phone"></i>
+                          <i class="fas fa-phone"></i>
                           <a href="tel:{{ $model->manufacturer->support_phone }}">{{ $model->manufacturer->support_phone }}</a>
 
                       </li>

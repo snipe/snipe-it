@@ -396,6 +396,6 @@ class DepreciationReportPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fa fa-barcode" aria-hidden="true"></i>';
+        return '<i class="fas fa-barcode" aria-hidden="true"></i>';
     }
 }

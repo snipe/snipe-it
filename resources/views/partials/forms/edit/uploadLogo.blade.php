@@ -44,7 +44,7 @@
         </p>
 
         @if (config('app.lock_passwords')===true)
-            <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+            <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
         @endif
         {!! $errors->first($logoVariable, '<span class="alert-msg">:message</span>') !!}
 

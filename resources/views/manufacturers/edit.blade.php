@@ -16,7 +16,7 @@
         </label>
         <div class="col-md-6">
             <input class="form-control" type="text" name="url" id="url" value="{{ old('url', $item->url) }}" />
-            {!! $errors->first('url', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('url', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
 
@@ -26,7 +26,7 @@
         </label>
         <div class="col-md-6">
             <input class="form-control" type="text" name="support_url" id="support_url" value="{{ old('support_url', $item->support_url) }}" />
-            {!! $errors->first('support_url', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('support_url', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
 
@@ -36,7 +36,7 @@
         </label>
         <div class="col-md-6">
             <input class="form-control" type="text" name="support_phone" id="support_phone" value="{{ old('support_phone', $item->support_phone) }}" />
-            {!! $errors->first('support_phone', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('support_phone', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
 
@@ -46,7 +46,7 @@
         </label>
         <div class="col-md-6">
             <input class="form-control" type="email" name="support_email" id="support_email" value="{{ old('support_email', $item->support_email) }}" />
-            {!! $errors->first('support_email', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            {!! $errors->first('support_email', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
 

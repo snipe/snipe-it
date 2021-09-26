@@ -35,7 +35,7 @@
         <li><a href="#uploads" data-toggle="tab">{{ trans('general.file_uploads') }}</a></li>
         @endcan
         <li><a href="#history" data-toggle="tab">{{ trans('admin/licenses/general.checkout_history') }}</a></li>
-        <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a></li>
+        <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a></li>
       </ul>
 
       <div class="tab-content">
@@ -75,12 +75,12 @@
                       @endif
 
                       @if ($license->manufacturer->support_url)
-                        <br><i class="fa fa-life-ring" aria-hidden="true"></i>
+                        <br><i class="far fa-life-ring" aria-hidden="true"></i>
                         <a href="{{ $license->manufacturer->support_url }}"  rel="noopener">{{ $license->manufacturer->support_url }}</a>
                       @endif
 
                       @if ($license->manufacturer->support_phone)
-                        <br><i class="fa fa-phone" aria-hidden="true"></i>
+                        <br><i class="fas fa-phone" aria-hidden="true"></i>
                         <a href="tel:{{ $license->manufacturer->support_phone }}">{{ $license->manufacturer->support_phone }}</a>
                       @endif
 
@@ -428,14 +428,14 @@
                 <td>
                   @if ($file->filename)
                     <a href="{{ route('show.licensefile', [$license->id, $file->id, 'download' => 'true']) }}" class="btn btn-default">
-                      <i class="fa fa-download" aria-hidden="true"></i>
+                      <i class="fas fa-download" aria-hidden="true"></i>
                       <span class="sr-only">Download</span>
                     </a>
                   @endif
                 </td>
                 <td>
                   <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?">
-                    <i class="fa fa-trash icon-white" aria-hidden="true"></i>
+                    <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                     <span class="sr-only">Delete</span>
                   </a>
                 </td>

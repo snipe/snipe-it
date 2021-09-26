@@ -19,7 +19,7 @@
         <li class="active">
           <a href="#details" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-info-circle fa-2x"></i>
+            <i class="fas fa-info-circle fa-2x"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
           </a>
@@ -28,7 +28,7 @@
         <li>
           <a href="#asset" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-barcode fa-2x" aria-hidden="true"></i>
+            <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
               {!! ($user->assets->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->assets->count().'</badge>' : '' !!}
@@ -61,7 +61,7 @@
         <li>
           <a href="#consumables" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fa fa-tint fa-2x"></i></span>
+            <i class="fas fa-tint fa-2x"></i></span>
             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}
               {!! ($user->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.$user->consumables->count().'</badge>' : '' !!}
             </span>
@@ -115,7 +115,7 @@
 
         @can('update', \App\Models\User::class)
           <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
-              <i class="fa fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
+              <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
           </li>
         @endcan
       </ul>
@@ -456,7 +456,7 @@
                         {{ trans('general.login_enabled') }}
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->activated=='1') ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->activated=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                       </div>
                     </div>
 
@@ -466,7 +466,7 @@
                           LDAP
                       </div>
                       <div class="col-md-9">
-                        {!! ($user->ldap_import=='1') ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                        {!! ($user->ldap_import=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
 
                       </div>
                     </div>
@@ -480,7 +480,7 @@
                             </div>
                             <div class="col-md-9">
                           
-                              {!! ($user->two_factor_active()) ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                              {!! ($user->two_factor_active()) ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
                           
                             </div>
                           </div>
@@ -491,7 +491,7 @@
                               {{ trans('admin/users/general.two_factor_enrolled') }}
                             </div>
                             <div class="col-md-9" id="two_factor_reset_toggle">
-                              {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fa fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fa fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                              {!! ($user->two_factor_active_and_enrolled()) ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
 
                             </div>
                           </div>
@@ -761,7 +761,7 @@
                       </td>
                       <td>
                         @can('update', $user)
-                        <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fa fa-trash icon-white" aria-hidden="true"></i><span class="sr-only">Delete</span></a>
+                        <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?"><i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only">Delete</span></a>
                         @endcan
                       </td>
                     </tr>
@@ -852,7 +852,7 @@ $(function () {
     $("#two_factor_resetrow").removeClass('success');
     $("#two_factor_resetrow").removeClass('danger');
     $("#two_factor_resetstatus").html('');
-    $("#two_factor_reseticon").html('<i class="fa fa-spinner spin"></i>');
+    $("#two_factor_reseticon").html('<i class="fas fa-spinner spin"></i>');
     $.ajax({
       url: '{{ route('api.users.two_factor_reset', ['id'=> $user->id]) }}',
       type: 'POST',
@@ -864,15 +864,15 @@ $(function () {
       dataType: 'json',
 
       success: function (data) {
-        $("#two_factor_reset_toggle").html('').html('<i class="fa fa-times text-danger" aria-hidden="true"></i> {{ trans('general.no') }}');
+        $("#two_factor_reset_toggle").html('').html('<i class="fas fa-times text-danger" aria-hidden="true"></i> {{ trans('general.no') }}');
         $("#two_factor_reseticon").html('');
-        $("#two_factor_resetstatus").html('<i class="fa fa-check text-success"></i>' + data.message);
+        $("#two_factor_resetstatus").html('<i class="fas fa-check text-success"></i>' + data.message);
 
       },
 
       error: function (data) {
         $("#two_factor_reseticon").html('');
-        $("#two_factor_reseticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+        $("#two_factor_reseticon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
         $('#two_factor_resetstatus').text(data.message);
       }
 
@@ -914,13 +914,13 @@ $(function () {
                 var errorMessage = data.jqXHR.responseJSON.messages["file.0"];
                 $('#progress-bar-text').html(errorMessage[0]);
                 $('.progress-bar').removeClass('progress-bar-warning').addClass('progress-bar-danger').css('width','100%');
-                $('.progress-checkmark').fadeIn('fast').html('<i class="fa fa-times fa-3x icon-white" style="color: #d9534f"></i>');
+                $('.progress-checkmark').fadeIn('fast').html('<i class="fas fa-times fa-3x icon-white" style="color: #d9534f"></i>');
             } else {
                 $('.progress-bar').removeClass('progress-bar-warning').addClass('progress-bar-success').css('width','100%');
                 $('.progress-checkmark').fadeIn('fast');
                 $('#progress-container').delay(950).css('visibility', 'visible');
                 $('.progress-bar-text').html('Finished!');
-                $('.progress-checkmark').fadeIn('fast').html('<i class="fa fa-check fa-3x icon-white" style="color: green"></i>');
+                $('.progress-checkmark').fadeIn('fast').html('<i class="fas fa-check fa-3x icon-white" style="color: green"></i>');
                 $.each(data.result, function (index, file) {
                     $('<tr><td>' + file.note + '</td><<td>' + file.filename + '</td></tr>').prependTo("#files-table > tbody");
                 });

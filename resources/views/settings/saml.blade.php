@@ -38,7 +38,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-sign-in"></i> SAML
+                        <i class="fas fa-sign-in-alt"></i> SAML
                     </h4>
                 </div>
                 <div class="box-body">
@@ -57,7 +57,7 @@
                                 {{ trans('admin/settings/general.saml_enabled') }}
                                 {!! $errors->first('saml_integration', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}<br>
                                 @if (config('app.lock_passwords')===true)
-                                <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
 
 
@@ -171,7 +171,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>

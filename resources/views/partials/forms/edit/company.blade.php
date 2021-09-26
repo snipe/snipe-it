@@ -5,7 +5,7 @@
    </div>
     <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($item, 'company_id')) ? ' required' : '' }}">
        {{ Form::select('company_id', $company_list , old('company_id', $item->company_id), array('class'=>'select2', 'style'=>'width:100%')) }}
-       {!! $errors->first('company_id', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+       {!! $errors->first('company_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
    </div>
 </div>
 @endif

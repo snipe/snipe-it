@@ -80,7 +80,7 @@
         @if ($asset->deleted_at!='')
             <div class="col-md-12">
                 <div class="alert alert-danger">
-                    <i class="fa fa-exclamation-circle faa-pulse animated" aria-hidden="true"></i>
+                    <i class="fas fa-exclamation-triangle faa-pulse animated" aria-hidden="true"></i>
                     <strong>WARNING: </strong>
                     This asset has been deleted.
                     You must <a href="{{ route('restore/hardware', $asset->id) }}">restore it</a> before you can assign it to someone.
@@ -100,7 +100,7 @@
                     <li class="active">
                         <a href="#details" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                          <i class="fa fa-info-circle fa-2x"x></i>
+                          <i class="fas fa-info-circle fa-2x"x></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
                         </a>
@@ -131,7 +131,7 @@
                     <li>
                         <a href="#assets" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fa fa-barcode fa-2x" aria-hidden="true"></i>
+                            <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
                             {!! ($asset->assignedAssets()->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->assignedAssets()->count().'</badge>' : '' !!}
@@ -154,7 +154,7 @@
                     <li>
                         <a href="#maintenances" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fa fa-wrench fa-2x" aria-hidden="true"></i>
+                            <i class="fas fa-wrench fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}
                             {!! ($asset->assetmaintenances()->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->assetmaintenances()->count().'</badge>' : '' !!}
@@ -177,7 +177,7 @@
                     @can('update', \App\Models\Asset::class)
                         <li class="pull-right">
                             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                                <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                <i class="fas fa-paperclip" aria-hidden="true"></i>
                                 {{ trans('button.upload') }}
                             </a>
                         </li>
@@ -201,7 +201,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
-                                                    <i class="fa fa-circle text-blue"></i>
+                                                    <i class="fas fa-circle text-blue"></i>
                                                     {{ $asset->assetstatus->name }}
                                                     <label class="label label-default">{{ trans('general.deployed') }}</label>
 
@@ -210,11 +210,11 @@
                                                     {!!  $asset->assignedTo->present()->nameUrl() !!}
                                                 @else
                                                     @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
-                                                        <i class="fa fa-circle text-green"></i>
+                                                        <i class="fas fa-circle text-green"></i>
                                                     @elseif (($asset->assetstatus) && ($asset->assetstatus->pending=='1'))
-                                                        <i class="fa fa-circle text-orange"></i>
+                                                        <i class="fas fa-circle text-orange"></i>
                                                     @elseif (($asset->assetstatus) && ($asset->assetstatus->archived=='1'))
-                                                        <i class="fa fa-times text-red"></i>
+                                                        <i class="fas fa-times text-red"></i>
                                                     @endif
                                                     <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">
                                                         {{ $asset->assetstatus->name }}</a>
@@ -317,7 +317,7 @@
 
                                                     @if (($asset->model) && ($asset->model->manufacturer->support_url))
                                                         <li>
-                                                            <i class="fa fa-life-ring" aria-hidden="true"></i>
+                                                            <i class="far fa-life-ring" aria-hidden="true"></i>
                                                             <a href="{{ $asset->model->manufacturer->support_url }}">
                                                                 {{ $asset->model->manufacturer->support_url }}
                                                             </a>
@@ -326,7 +326,7 @@
 
                                                     @if (($asset->model) && ($asset->model->manufacturer->support_phone))
                                                         <li>
-                                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                                            <i class="fas fa-phone" aria-hidden="true"></i>
                                                             <a href="tel:{{ $asset->model->manufacturer->support_phone }}">
                                                                 {{ $asset->model->manufacturer->support_phone }}
                                                             </a>
@@ -413,7 +413,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     @if ($field->field_encrypted=='1')
-                                                        <i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
+                                                        <i class="fas fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                                                     @endif
 
                                                     @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
@@ -767,7 +767,7 @@
                                                        'id' => 'bulkForm']) }}
                                                 <input type="hidden" name="bulk_actions" value="labels" />
                                                 <input type="hidden" name="ids[{{$asset->id}}]" value="{{ $asset->id }}" />
-                                                <button class="btn btn-sm btn-default" id="bulkEdit" ><i class="fa fa-barcode" aria-hidden="true"></i> {{ trans_choice('button.generate_labels', 1) }}</button>
+                                                <button class="btn btn-sm btn-default" id="bulkEdit" ><i class="fas fa-barcode" aria-hidden="true"></i> {{ trans_choice('button.generate_labels', 1) }}</button>
 
                                             {{ Form::close() }}
 
@@ -812,7 +812,7 @@
 
                                             @if ((isset($asset->assignedTo)) && ($asset->assignedTo->phone!=''))
                                                 <li>
-                                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                                    <i class="fas fa-phone" aria-hidden="true"></i>
                                                     <a href="tel:{{ $asset->assignedTo->phone }}">{{ $asset->assignedTo->phone }}</a>
                                                 </li>
                                             @endif
@@ -875,7 +875,7 @@
                                 @else
 
                                     <div class="alert alert-info alert-block">
-                                        <i class="fa fa-info-circle"></i>
+                                        <i class="fas fa-info-circle"></i>
                                         {{ trans('general.no_results') }}
                                     </div>
                                 @endif
@@ -922,7 +922,7 @@
                                     </table>
                                 @else
                                     <div class="alert alert-info alert-block">
-                                        <i class="fa fa-info-circle"></i>
+                                        <i class="fas fa-info-circle"></i>
                                         {{ trans('general.no_results') }}
                                     </div>
                                 @endif
@@ -984,7 +984,7 @@
                                 @else
 
                                     <div class="alert alert-info alert-block">
-                                        <i class="fa fa-info-circle"></i>
+                                        <i class="fas fa-info-circle"></i>
                                         {{ trans('general.no_results') }}
                                     </div>
                                 @endif
@@ -1131,7 +1131,7 @@
                                                 <td>
                                                     @if ($file->filename)
                                                         <a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default">
-                                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                                            <i class="fas fa-download" aria-hidden="true"></i>
                                                         </a>
                                                     @endif
                                                 </td>
@@ -1145,7 +1145,7 @@
 
                                                 <td>
                                                     @can('update', \App\Models\Asset::class)
-                                                        <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}"><i class="fa fa-trash icon-white" aria-hidden="true"></i></a>
+                                                        <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}"><i class="fas fa-trash icon-white" aria-hidden="true"></i></a>
                                                     @endcan
                                                 </td>
                                             </tr>
@@ -1156,7 +1156,7 @@
                                 @else
 
                                     <div class="alert alert-info alert-block">
-                                        <i class="fa fa-info-circle"></i>
+                                        <i class="fas fa-info-circle"></i>
                                         {{ trans('general.no_results') }}
                                     </div>
                                 @endif

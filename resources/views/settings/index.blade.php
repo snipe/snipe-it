@@ -35,7 +35,7 @@
       <form onsubmit="return false;">
         <div class="btn-group">
           <input id="searchinput" name="search" type="search" class="search form-control" placeholder="Filter by setting keyword">
-          <span id="searchclear" class="fa fa-times" aria-hidden="true"></span>
+          <span id="searchclear" class="fas fa-times" aria-hidden="true"></span>
           <button type="submit" disabled style="display: none" aria-hidden="true"></button>
         </div>
       </form>
@@ -51,7 +51,7 @@
             <div class="box-body text-center">
               <h5>
               <a href="{{ route('settings.branding.index') }}">
-                <i class="fa fa-copyright fa-4x" aria-hidden="true"></i>
+                <i class="fas fa-copyright fa-4x" aria-hidden="true"></i>
                 <br><br>
                 <span class="name">Branding</span>
                 <span class="keywords" aria-hidden="true" style="display:none">footer, logo, print, theme, skin, header, colors, color, css</span>
@@ -68,7 +68,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.general.index') }}">
-                  <i class="fa fa-wrench fa-4x" aria-hidden="true"></i>
+                  <i class="fas fa-wrench fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name"> General Settings</span>
                   <span class="keywords" aria-hidden="true" style="display:none">company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula,  tos, dashboard, privacy</span>
@@ -85,7 +85,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.security.index') }}">
-                  <i class="fa fa-lock fa-4x" aria-hidden="true"></i>
+                  <i class="fas fa-lock fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">Security</span>
                   <span class="keywords" aria-hidden="true" style="display:none">password, passwords, requirements, two factor, two-factor, common passwords, remote login, logout, authentication</span>
@@ -136,7 +136,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.alerts.index') }}">
-                  <i class="fa fa-bell fa-4x" aria-hidden="true"></i>
+                  <i class="fas fa-bell fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">Notifications</span>
 
@@ -167,7 +167,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.asset_tags.index') }}">
-                  <i class="fa fa-list-ol fa-4x" aria-hidden="true"></i>
+                  <i class="fas fa-list-ol fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">Asset Tags</span>
                 </a>
@@ -182,7 +182,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.barcodes.index') }}">
-                  <i class="fa fa-barcode fa-4x" aria-hidden="true"></i>
+                  <i class="fas fa-barcode fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">Barcodes</span>
                 </a>
@@ -197,7 +197,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.labels.index') }}">
-                  <i class="fa fa-tags fa-4x" aria-hidden="true"></i>
+                  <i class="fas fa-tags fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">Labels</span>
                 </a>
@@ -213,7 +213,7 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.ldap.index') }}">
-                  <i class="fa fa-sitemap fa-4x" aria-hidden="true"></i>
+                  <i class="fas fa-sitemap fa-4x" aria-hidden="true"></i>
                   <br><br>
                   <span class="name">LDAP</span>
                 </a>
@@ -259,7 +259,7 @@
           <div class="box-body text-center">
             <h5>
               <a href="{{ route('settings.logins.index') }}">
-                <i class="fa fa-crosshairs fa-4x" aria-hidden="true"></i>
+                <i class="fas fa-crosshairs fa-4x" aria-hidden="true"></i>
                 <br><br>
                 <span class="name">Login Attempts</span>
               </a>
@@ -274,7 +274,7 @@
             <div class="box-body text-center">
               <h5>
               <a href="{{ route('settings.oauth.index') }}">
-                <i class="fa fa-user-secret fa-4x" aria-hidden="true"></i>
+                <i class="fas fa-user-secret fa-4x" aria-hidden="true"></i>
                 <br><br>
                 <span class="name">OAuth</span>
               </a>
@@ -307,7 +307,7 @@
         <div class="box-body text-center">
           <h5>
             <a href="{{ route('settings.purge.index') }}">
-              <i class="fa fa-trash fa-4x" aria-hidden="true"></i>
+              <i class="fas fa-trash fa-4x" aria-hidden="true"></i>
               <br><br>
               <span class="name">Purge</span>
               <span class="keywords" aria-hidden="true" style="display:none">permanently delete</span>

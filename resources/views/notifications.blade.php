@@ -2,7 +2,7 @@
 <div class="col-md-12">
     <div class="alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-exclamation-circle faa-pulse animated"></i>
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
         <strong>Error: </strong>
          Please check the form below for errors
     </div>
@@ -15,7 +15,7 @@
     <div class="col-md-12">
         <div class="alert alert-success fade in">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <i class="fa fa-check faa-pulse animated"></i>
+            <i class="fas fa-check faa-pulse animated"></i>
             <strong>Success: </strong>
             {{ $message }}
         </div>
@@ -27,7 +27,7 @@
 <div class="col-md-12">
     <div class="alert alert-success fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-check faa-pulse animated"></i>
+        <i class="fas fa-check faa-pulse animated"></i>
         <strong>Success: </strong>
         {{ $message }}
     </div>
@@ -40,7 +40,7 @@
         <div class="col-md-12">
             <div class="alert alert-info fade in">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <i class="fa fa-info-circle faa-pulse animated"></i>
+                <i class="fas fa-info-circle faa-pulse animated"></i>
                 <strong>Asset Information: </strong>
                 <ul>
                     @isset ($asset->model->name)
@@ -63,7 +63,7 @@
         <div class="col-md-12">
             <div class="alert alert-info fade in">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <i class="fa fa-info-circle faa-pulse animated"></i>
+                <i class="fas fa-info-circle faa-pulse animated"></i>
                 <strong>Consumable Information: </strong>
                 <ul><li><b>Name:</b> {{ $consumable->name }}</li></ul>
             </div>
@@ -77,7 +77,7 @@
         <div class="col-md-12">
             <div class="alert alert-info fade in">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <i class="fa fa-info-circle faa-pulse animated"></i>
+                <i class="fas fa-info-circle faa-pulse animated"></i>
                 <strong>Accessory Information: </strong>
                 <ul><li><b>Name:</b> {{ $accessory->name }}</li></ul>
             </div>
@@ -90,7 +90,7 @@
 <div class="col-md-12">
     <div class="alert alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-exclamation-circle faa-pulse animated"></i>
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
         <strong>Error: </strong>
         {{ $message }}
     </div>
@@ -103,7 +103,7 @@
 <div class="col-md-12">
     <div class="alert alert alert-danger fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-exclamation-circle faa-pulse animated"></i>
+        <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
         <strong>Error: </strong>
         {{ $message }}
     </div>
@@ -128,7 +128,7 @@
 <div class="col-md-12">
     <div class="alert alert-info fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <i class="fa fa-info-circle faa-pulse animated"></i>
+        <i class="fas fa-info-circle faa-pulse animated"></i>
         <strong>Info: </strong>
         {{ $message }}
     </div>

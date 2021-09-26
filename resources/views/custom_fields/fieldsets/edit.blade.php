@@ -26,17 +26,16 @@
         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
           <label for="name" class="col-md-4 control-label">
             {{ trans('admin/custom_fields/general.fieldset_name') }}
-            <i class='fa fa-asterisk'></i>
           </label>
           <div class="col-md-6">
-            <input class="form-control" type="text" name="name" id="name" value="{{ old('name') }}" />
-            {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            <input class="form-control" type="text" name="name" id="name" value="{{ old('name') }}" required>
+            {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
 
       </div> <!-- /.box-body-->
       <div class="box-footer text-right">
-        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+        <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
       </div>
 
     </div> <!-- /.box.box-default-->

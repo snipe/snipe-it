@@ -64,10 +64,10 @@
                 return newParams;
             },
             formatLoadingMessage: function () {
-                return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
             },
             icons: {
-                advancedSearchIcon: 'fa fa-search-plus',
+                advancedSearchIcon: 'fas fa-search-plus',
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
                 columns: 'fa-columns',
@@ -218,9 +218,9 @@
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
-                    + '<i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span></a>&nbsp;';
+                    + '<i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span></a>&nbsp;';
             } else {
-                actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
+                actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fas fa-trash"></i></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.restore === true)) {
@@ -244,7 +244,7 @@
 
             if (value.type == 'asset') {
                 item_destination = 'hardware';
-                item_icon = 'fa fa-barcode';
+                item_icon = 'fas fa-barcode';
             } else if (value.type == 'accessory') {
                 item_destination = 'accessories';
                 item_icon = 'far fa-keyboard';
@@ -253,13 +253,13 @@
                 item_icon = 'far fa-hdd';
             } else if (value.type == 'consumable') {
                 item_destination = 'consumables';
-                item_icon = 'fa fa-tint';
+                item_icon = 'fas fa-tint';
             } else if (value.type == 'license') {
                 item_destination = 'licenses';
                 item_icon = 'far fa-save';
             } else if (value.type == 'user') {
                 item_destination = 'users';
-                item_icon = 'fa fa-user';
+                item_icon = 'fas fa-user';
             } else if (value.type == 'location') {
                 item_destination = 'locations'
                 item_icon = 'far fa-hdd';
@@ -499,9 +499,9 @@
 
     function trueFalseFormatter(value) {
         if ((value) && ((value == 'true') || (value == '1'))) {
-            return '<i class="fa fa-check text-success"></i>';
+            return '<i class="fas fa-check text-success"></i>';
         } else {
-            return '<i class="fa fa-times text-danger"></i>';
+            return '<i class="fas fa-times text-danger"></i>';
         }
     }
 
@@ -583,7 +583,7 @@
         if ((value) && (value.url) && (value.inlineable)) {
             return '<a href="' + value.url + '" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
         } else if ((value) && (value.url)) {
-            return '<a href="' + value.url + '" class="btn btn-default"><i class="fa fa-download"></i></a>';
+            return '<a href="' + value.url + '" class="btn btn-default"><i class="fas fa-download"></i></a>';
         }
     }
 
