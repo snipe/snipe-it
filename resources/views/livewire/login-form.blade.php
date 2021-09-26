@@ -38,7 +38,7 @@
 
                                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                                         <label for="username">
-                                            <i class="fa fa-user" aria-hidden="true"></i> 
+                                            <i class="fas fa-user" aria-hidden="true"></i> 
                                             {{ trans('admin/users/table.username')  }}
                                         </label>
                                         <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" autocomplete="off" wire:model="username" wire:model.defer="username" wire:model.lazy="username">
@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                         <label for="password">
-                                            <i class="fa fa-key" aria-hidden="true"></i> 
+                                            <i class="fas fa-key" aria-hidden="true"></i> 
                                             {{ trans('admin/users/table.password')  }}
                                         </label>
                                         <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password" wire:model="password" wire:model.lazy="password" wire:model.defer="password" autocomplete="off">
@@ -83,7 +83,7 @@
                     </div>
                     <div class="box-footer">
                         <button class="btn btn-lg btn-primary btn-block" type="submit"{{ $can_submit ? '' : ' disabled' }}>
-                            <i wire:loading wire:target='submitForm' class="fa fa-spin fa-spinner"></i> {{ trans('auth/general.login')  }}</button>
+                            <i wire:loading wire:target='submitForm' class="fas fa-spin fa-spinner"></i> {{ trans('auth/general.login')  }}</button>
                     </div>
                     <div class="text-right col-md-12 col-sm-12 col-xs-12" style="padding-top: 10px;">
                         @if ($snipeSettings->custom_forgot_pass_url)

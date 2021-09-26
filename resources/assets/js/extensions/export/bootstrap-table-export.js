@@ -45,7 +45,7 @@
                     '<div class="export btn-group">',
                     '<button class="btn btn-default dropdown-toggle" ' +
                     'data-toggle="dropdown" type="button">',
-                    '<i class="fa fa-download" aria-hidden="true"></i> ',
+                    '<i class="fas fa-download" aria-hidden="true"></i> ',
                     '<span class="sr-only">Export</span>',
                     '<span class="caret"></span>',
                     '</button>',

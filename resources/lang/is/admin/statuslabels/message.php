@@ -24,7 +24,7 @@ return array(
 
     'help' => array(
         'undeployable'   => 'Þessum eignum er ekki hægt að úthluta til notenda.',
-        'deployable'   => 'Þessum eignum er hægt að ráðstafa. Þegar þeim er ráðstafað fá þær almenna stöðugildið <i class="fa fa-circle text-blue"></i> <strong>Í notkun</strong>.',
+        'deployable'   => 'Þessum eignum er hægt að ráðstafa. Þegar þeim er ráðstafað fá þær almenna stöðugildið <i class="fas fa-circle text-blue"></i> <strong>Í notkun</strong>.',
         'archived'   => 'Þessum eignum er ekki hægt að ráðstafa og þær sjást eingöngu í þar til gerðum lista. Þetta er gagnlegt til að varðveita upplýsingar um eignir sem nýta má við gerð fjárhagsáætlana eða til að halda utan um sögu eigna á sama tíma og þeim er haldið utan við þann eignalista sem unnið er með daglega.',
         'pending'   => 'Þessum eignum er ekki hægt að úthluta til notenda að svo stöddu. Oft notað fyrir hluti sem eru í viðgerð en er viðbúið að verði teknir aftur í notkun.',
     ),

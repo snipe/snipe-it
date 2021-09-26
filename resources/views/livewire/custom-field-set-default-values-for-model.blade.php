@@ -3,7 +3,7 @@
         <label for="custom_fieldset" class="col-md-3 control-label">{{ trans('admin/models/general.fieldset') }}</label>
         <div class="col-md-9">
             {{ Form::select('custom_fieldset', \App\Helpers\Helper::customFieldsetList(),old('custom_fieldset', 0000 /*$item->fieldset_id*/), array('class'=>'select2 js-fieldset-field', 'style'=>'width:350px', 'aria-label'=>'custom_fieldset', 'wire:model' => 'fieldset_id')) }}
-            {!! $errors->first('custom_fieldset', '<span class="alert-msg" aria-hidden="true"><br><i class="fa fa-times"></i> :message</span>') !!}
+            {!! $errors->first('custom_fieldset', '<span class="alert-msg" aria-hidden="true"><br><i class="fas fa-times"></i> :message</span>') !!}
             <label class="m-l-xs">
                 {{-- {{ Form::checkbox('add_default_values', 1, Request::old('add_default_values'), ['class' => 'js-default-values-toggler']) }} --}}
                 {{-- I'm not sure  that *this* checkboxy thing will render right, because of things. It's not *in* its own view, right? So that's a problem --}}

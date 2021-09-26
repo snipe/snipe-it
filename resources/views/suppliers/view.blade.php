@@ -229,15 +229,15 @@
 
     <ul class="list-unstyled" style="line-height: 25px; padding-bottom: 20px; padding-top: 20px;">
       @if ($supplier->contact)
-      <li><i class="fa fa-user" aria-hidden="true"></i> {{ $supplier->contact }}</li>
+      <li><i class="fas fa-user" aria-hidden="true"></i> {{ $supplier->contact }}</li>
       @endif
       @if ($supplier->phone)
-      <li><i class="fa fa-phone"></i>
+      <li><i class="fas fa-phone"></i>
         <a href="tel:{{ $supplier->phone }}">{{ $supplier->phone }}</a>
       </li>
       @endif
       @if ($supplier->fax)
-      <li><i class="fa fa-print"></i> {{ $supplier->fax }}</li>
+      <li><i class="fas fa-print"></i> {{ $supplier->fax }}</li>
       @endif
 
       @if ($supplier->email)

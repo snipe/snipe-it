@@ -7,7 +7,7 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('reports/export/assets') }}" class="btn btn-default"><i class="fa fa-download icon-white" aria-hidden="true"></i>
+<a href="{{ route('reports/export/assets') }}" class="btn btn-default"><i class="fas fa-download icon-white" aria-hidden="true"></i>
 {{ trans('admin/hardware/table.dl_csv') }}</a>
 @stop
 
@@ -59,7 +59,7 @@
 
                                 <th data-sortable="{{ ($field->field_encrypted=='1' ? 'false' : 'true') }}" data-visible="false" data-field="{{$field->db_column_name()}}">
                                     @if ($field->field_encrypted=='1')
-                                    <i class="fa fa-lock"></i>
+                                    <i class="fas fa-lock"></i>
                                     @endif
 
                                     {{$field->name}}

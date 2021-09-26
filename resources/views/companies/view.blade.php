@@ -18,7 +18,7 @@
                     <li class="active">
                         <a href="#asset_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
-                            <i class="fa fa-barcode" aria-hidden="true"></i>
+                            <i class="fas fa-barcode" aria-hidden="true"></i>
                             </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span>
                         </a>
@@ -44,7 +44,7 @@
                     <li>
                         <a href="#consumables_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
-                            <i class="fa fa-tint"></i></span>
+                            <i class="fas fa-tint"></i></span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span>
                         </a>
                     </li>
@@ -60,7 +60,7 @@
                     <li>
                         <a href="#users_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
-                            <i class="fa fa-users"></i></span>
+                            <i class="fas fa-users"></i></span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.people') }}</span>
                         </a>
                     </li>

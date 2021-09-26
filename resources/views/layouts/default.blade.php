@@ -134,7 +134,7 @@
                   @can('index', \App\Models\Asset::class)
                   <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
                       <a href="{{ url('hardware') }}" tabindex="-1">
-                          <i class="fa fa-barcode" aria-hidden="true"></i>
+                          <i class="fas fa-barcode" aria-hidden="true"></i>
                           <span class="sr-only">Assets</span>
                       </a>
                   </li>
@@ -158,7 +158,7 @@
                   @can('index', \App\Models\Consumable::class)
                   <li aria-hidden="true"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
                       <a href="{{ url('consumables') }}" tabindex="-1">
-                          <i class="fa fa-tint"></i>
+                          <i class="fas fa-tint"></i>
                           <span class="sr-only">Consumables</span>
                       </a>
                   </li>
@@ -183,7 +183,7 @@
                           </div>
                           <div class="col-xs-1">
                               <button type="submit" class="btn btn-primary pull-right">
-                                  <i class="fa fa-search" aria-hidden="true"></i>
+                                  <i class="fas fa-search" aria-hidden="true"></i>
                                   <span class="sr-only">Search</span>
                               </button>
                           </div>
@@ -202,7 +202,7 @@
                      @can('create', \App\Models\Asset::class)
                       <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
                               <a href="{{ route('hardware.create') }}" tabindex="-1">
-                                  <i class="fa fa-barcode fa-fw" aria-hidden="true"></i>
+                                  <i class="fas fa-barcode fa-fw" aria-hidden="true"></i>
                                   {{ trans('general.asset') }}
                               </a>
                       </li>
@@ -225,7 +225,7 @@
                        @can('create', \App\Models\Consumable::class)
                        <li {!! (Request::is('consunmables/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('consumables.create') }}" tabindex="-1">
-                               <i class="fa fa-tint fa-fw" aria-hidden="true"></i>
+                               <i class="fas fa-tint fa-fw" aria-hidden="true"></i>
                                {{ trans('general.consumable') }}
                            </a>
                        </li>
@@ -241,7 +241,7 @@
                          @can('create', \App\Models\User::class)
                              <li {!! (Request::is('users/create') ? 'class="active"' : '') !!}>
                                  <a href="{{ route('users.create') }}" tabindex="-1">
-                                     <i class="fa fa-user fa-fw" aria-hidden="true"></i>
+                                     <i class="fas fa-user fa-fw" aria-hidden="true"></i>
                                      {{ trans('general.user') }}
                                  </a>
                              </li>
@@ -314,18 +314,18 @@
                    <!-- User image -->
                      <li {!! (Request::is('account/profile') ? ' class="active"' : '') !!}>
                        <a href="{{ route('view-assets') }}">
-                             <i class="fa fa-check fa-fw" aria-hidden="true"></i>
+                             <i class="fas fa-check fa-fw" aria-hidden="true"></i>
                              {{ trans('general.viewassets') }}
                        </a></li>
 
                      <li {!! (Request::is('account/requested') ? ' class="active"' : '') !!}>
                          <a href="{{ route('account.requested') }}">
-                             <i class="fa fa-check fa-disk fa-fw" aria-hidden="true"></i>
+                             <i class="fas fa-check fa-disk fa-fw" aria-hidden="true"></i>
                              Requested Assets
                          </a></li>
                      <li {!! (Request::is('account/accept') ? ' class="active"' : '') !!}>
                          <a href="{{ route('account.accept') }}">
-                             <i class="fa fa-check fa-disk fa-fw"></i>
+                             <i class="fas fa-check fa-disk fa-fw"></i>
                              Accept Assets
                          </a></li>
 
@@ -333,7 +333,7 @@
 
                      <li>
                           <a href="{{ route('profile') }}">
-                             <i class="fa fa-user fa-fw" aria-hidden="true"></i>
+                             <i class="fas fa-user fa-fw" aria-hidden="true"></i>
                               {{ trans('general.editprofile') }}
                          </a>
                      </li>
@@ -349,7 +349,7 @@
                      @can('self.api')
                      <li>
                          <a href="{{ route('user.api') }}">
-                             <i class="fa fa-user-secret fa-fw" aria-hidden="true"></i> Manage API Keys
+                             <i class="fas fa-user-secret fa-fw" aria-hidden="true"></i> Manage API Keys
                          </a>
                      </li>
                      @endcan
@@ -398,7 +398,7 @@
             @endcan
             @can('index', \App\Models\Asset::class)
             <li class="treeview{{ (Request::is('hardware*') ? ' active' : '') }}">
-                <a href="#"><i class="fa fa-barcode" aria-hidden="true"></i>
+                <a href="#"><i class="fas fa-barcode" aria-hidden="true"></i>
                   <span>{{ trans('general.assets') }}</span>
                   <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -442,19 +442,19 @@
                           ({{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }})
                       </a>
                   </li>
-                  <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ url('hardware?status=Undeployable') }}"><i class="fa fa-times text-red"></i>
+                  <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ url('hardware?status=Undeployable') }}"><i class="fas fa-times text-red"></i>
                           {{ trans('general.all') }}
                           {{ trans('general.undeployable') }}
                           ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
                       </a>
                   </li>
-                  <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Archived') }}"><i class="fa fa-times text-red"></i>
+                  <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Archived') }}"><i class="fas fa-times text-red"></i>
                           {{ trans('general.all') }}
                           {{ trans('admin/hardware/general.archived') }}
                           ({{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }})
                           </a>
                   </li>
-                    <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Requestable') }}"><i class="fa fa-check text-blue"></i>
+                    <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Requestable') }}"><i class="fas fa-check text-blue"></i>
                         {{ trans('admin/hardware/general.requestable') }}
                         </a>
                     </li>
@@ -533,7 +533,7 @@
               @can('view', \App\Models\Consumable::class)
             <li{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
                 <a href="{{ url('consumables') }}">
-                  <i class="fa fa-tint"></i>
+                  <i class="fas fa-tint"></i>
                   <span>{{ trans('general.consumables') }}</span>
                 </a>
             </li>
@@ -558,7 +558,7 @@
             @can('view', \App\Models\User::class)
             <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
                   <a href="{{ route('users.index') }}">
-                      <i class="fa fa-users"></i>
+                      <i class="fas fa-users"></i>
                       <span>{{ trans('general.people') }}</span>
                   </a>
             </li>
@@ -821,7 +821,7 @@
           @endif
           
 
-          <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
+          <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
       </footer>
 
 

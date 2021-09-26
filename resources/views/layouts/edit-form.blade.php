@@ -48,7 +48,7 @@
                                 {{ trans('button.cancel') }}
                             </a>
                             <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-check icon-white" aria-hidden="true"></i>
+                                <i class="fas fa-check icon-white" aria-hidden="true"></i>
                                 {{ trans('general.save') }}
                             </button>
                         </div>
