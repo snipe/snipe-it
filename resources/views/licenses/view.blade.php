@@ -26,16 +26,69 @@
 @section('content')
 <div class="row">
   <div class="col-md-12">
+
     <!-- Custom Tabs -->
     <div class="nav-tabs-custom">
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
-        <li><a href="#seats" data-toggle="tab">{{ trans('admin/licenses/form.seats') }}</a></li>
-        @can('files', $license)
-        <li><a href="#uploads" data-toggle="tab">{{ trans('general.file_uploads') }}</a></li>
+      
+      <ul class="nav nav-tabs hidden-print">
+
+        <li class="active">
+          <a href="#details" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+            <i class="fas fa-info-circle fa-2x" aria-hidden="true"></i>
+            </span>
+            <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#seats" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+              <i class="far fa-list-alt fa-2x" aria-hidden="true"></i>
+              </span>
+              <span class="hidden-xs hidden-sm">{{ trans('admin/licenses/form.seats') }}</span>
+              <badge class="badge badge-secondary">{{ $license->availCount()->count() }} / {{ $license->seats }}</badge>
+
+            </a>
+        </li>
+        
+        <li>
+          <a href="#files" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+            <i class="far fa-file fa-2x" aria-hidden="true"></i></span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
+              {!! ($license->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.$license->uploads->count().'</badge>' : '' !!}
+            </span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#history" data-toggle="tab">
+            <span class="hidden-lg hidden-md">
+            <i class="fas fa-history fa-2x" aria-hidden="true"></i></span>
+            <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
+          </a>
+        </li>
+
+    
+        @can('update', $license)
+          <li class="dropdown pull-right">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fas fa-cog" aria-hidden="true"></i> {{ trans('button.actions') }}
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ route('licenses.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
+              <li><a href="{{ route('clone/license', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
+            </ul>
+          </li>
         @endcan
-        <li><a href="#history" data-toggle="tab">{{ trans('admin/licenses/general.checkout_history') }}</a></li>
-        <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a></li>
+
+        @can('update', \App\Models\License::class)
+          <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
+              <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
+          </li>
+        @endcan
       </ul>
 
       <div class="tab-content">
@@ -367,7 +420,7 @@
         </div> <!-- /.tab-pane -->
 
         @can('files', $license)
-        <div class="tab-pane" id="uploads">
+        <div class="tab-pane" id="files">
           <div class="table-responsive">
             <table
                 data-cookie-id-table="licenseUploadsTable"
