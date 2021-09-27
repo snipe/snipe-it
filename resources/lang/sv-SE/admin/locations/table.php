@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Om platser',
     'about_locations'           => 'Platser används för att spåra platsinformation för användare, tillgångar och andra objekt',
     'assets_rtd'                => 'Tillgångar', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'Land',
     'create'                    => 'Skapa plats',
     'update'                    => 'Uppdatera plats',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'Skriv ut tilldelade',
+    'print_all_assigned'        => 'Skriv ut alla tilldelade',
     'name'                      => 'Platsnamn',
     'address'                   => 'Adress',
     'zip'                       => 'postnummer',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => 'Förälder',
     'currency'                  => 'Platsvaluta',
     'ldap_ou'                   => 'LDAP-sökning OU',
-    );
+    ];

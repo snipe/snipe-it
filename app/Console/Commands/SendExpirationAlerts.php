@@ -41,7 +41,7 @@ class SendExpirationAlerts extends Command
      */
     public function handle()
     {
-        $settings  = Setting::getSettings();
+        $settings = Setting::getSettings();
         $threshold = $settings->alert_interval;
 
         if (($settings->alert_email != '') && ($settings->alerts_enabled == 1)) {

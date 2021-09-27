@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => '管理地理位置',
     'about_locations'           => '地理位置用来跟踪用户、资产和其他项目的位置信息。',
     'assets_rtd'                => '资产', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => '国家',
     'create'                    => '创建地理位置',
     'update'                    => '更新地理位置',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => '打印已分配资产',
+    'print_all_assigned'        => '打印所有已分配资产',
     'name'                      => '地理位置名称',
     'address'                   => '地址',
     'zip'                       => '邮政编码',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => '上级节点',
     'currency'                  => '当地货币单位',
     'ldap_ou'                   => 'LDAP中搜索组织单位（OU）',
-    );
+    ];

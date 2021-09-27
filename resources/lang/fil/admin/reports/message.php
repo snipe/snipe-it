@@ -1,5 +1,5 @@
 <?php
 
-return array(
-    'error'   => 'Kinakailangan mong pumili ng kahit ISANG opsyon.'
-);
+return [
+    'error'   => 'Kinakailangan mong pumili ng kahit ISANG opsyon.',
+];

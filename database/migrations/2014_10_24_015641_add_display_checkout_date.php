@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class AddDisplayCheckoutDate extends Migration {
-    
-     /**
+class AddDisplayCheckoutDate extends Migration
+{
+    /**
      * Run the migrations.
      *
      * @return void
@@ -13,8 +13,7 @@ class AddDisplayCheckoutDate extends Migration {
     public function up()
     {
         Schema::table('settings', function ($table) {
-            $table->integer('display_checkout_date')->nullable()->default(NULL);
-
+            $table->integer('display_checkout_date')->nullable()->default(null);
         });
     }
 
@@ -29,5 +28,4 @@ class AddDisplayCheckoutDate extends Migration {
             $table->dropColumn('display_checkout_date');
         });
     }
-
 }

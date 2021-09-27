@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Aktivni direktorij',
     'ad_domain'				    => 'Domena Active Directory',
     'ad_domain_help'			=> 'Ovo je ponekad isto kao i vaša domena e-pošte, ali ne uvijek.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'Kopija e-pošte (CC)',
     'admin_cc_email_help'       => 'Ako želite poslati kopiju checkin/checkout poruka e-pošte koje se šalju korisnicima na dodatni račun e-pošte, unesite ga ovdje. U suprotnom ostavite ovo polje prazno.',
     'is_ad'				        => 'Ovo je poslužitelj Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Prag prekoračenja upozorenja (u danima)',
     'alert_inv_threshold'		=> 'Prag upozorenja inventara',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID atributi',
     'audit_interval'            => 'Interval revizije',
     'audit_interval_help'       => 'Ako morate redovito fizički provjeravati svoju imovinu, unesite interval u mjesecima.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Unesite dvoznamenkasti kôd',
     'two_factor_config_complete'	=> 'Pošaljite šifru',
     'two_factor_enabled_edit_not_allowed' => 'Vaš administrator vam ne dopušta uređivanje ove postavke.',
-    'two_factor_enrollment_text'	=> "Potrebna je autentikacija dva faktora, međutim vaš uređaj još nije upisan. Otvorite aplikaciju Google autentifikator i skenirajte QR kôd u nastavku da biste registrirali svoj uređaj. Nakon što upišete uređaj, unesite kôd u nastavku",
+    'two_factor_enrollment_text'	=> 'Potrebna je autentikacija dva faktora, međutim vaš uređaj još nije upisan. Otvorite aplikaciju Google autentifikator i skenirajte QR kôd u nastavku da biste registrirali svoj uređaj. Nakon što upišete uređaj, unesite kôd u nastavku',
     'require_accept_signature'      => 'Potražite potpis',
     'require_accept_signature_help_text'      => 'Ako omogućite tu značajku, korisnici će se morati fizički odjaviti pri prihvaćanju imovine.',
     'left'        => 'lijevo',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Uključivanje ovog checkbox-a će osigurati jedinstvenost serijskih brojeva imovine',
     'zerofill_count'        => 'Duljina oznaka za imovinu, uključujući nulte punjenje',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

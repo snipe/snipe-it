@@ -1,57 +1,52 @@
 <?php
 
-return array(
+return [
 
-    'field' => array(
+    'field' => [
         'invalid'   => 'Tätä kenttää ei ole.',
         'already_added'   => 'Kentässä jo lisätty',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Kenttää ei luotu, yritä uudelleen.',
             'success' => 'Kenttä luotiin onnistuneesti.',
-            'assoc_success' => 'Kenttä lisättiin onnistuneesti kenttäsarjaan.'
-        ),
+            'assoc_success' => 'Kenttä lisättiin onnistuneesti kenttäsarjaan.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Kenttä ei päivittynyt, yritä uudelleen',
-            'success' => 'Kenttä päivitettiin onnistuneesti.'
-        ),
+            'success' => 'Kenttä päivitettiin onnistuneesti.',
+        ],
 
-        'delete' => array(
+        'delete' => [
             'confirm'   	=> 'Haluatko varmasti poistaa tämän kentän?',
             'error'   => 'Kentässä on ollut ongelma. Yritä uudelleen.',
             'success' => 'Kenttä poistettiin onnistuneesti.',
             'in_use'   => 'Kenttä on edelleen käytössä.',
-        )
+        ],
 
-    ),
+    ],
 
-    'fieldset' => array(
+    'fieldset' => [
 
         'does_not_exist' => 'Kenttäsarjaa ei ole',
 
-        'create' => array(
+        'create' => [
             'error'   => 'Kenttäsarjaa ei luotu, yritä uudelleen.',
-            'success' => 'Kenttäsarja luotu onnistuneesti.'
-        ),
+            'success' => 'Kenttäsarja luotu onnistuneesti.',
+        ],
 
-        'update' => array(
+        'update' => [
             'error'   => 'Kenttäsarjaa ei päivitetty, yritä uudelleen',
-            'success' => 'Kenttäsarja päivitettiin onnistuneesti.'
-        ),
+            'success' => 'Kenttäsarja päivitettiin onnistuneesti.',
+        ],
 
-        'delete' => array(
+        'delete' => [
             'confirm'   	=> 'Haluatko varmasti poistaa tämän kenttäsarjan?',
             'error'   => 'Kenttäsarjan poistamisessa tapahtui virhe. Yritä uudelleen.',
             'success' => 'Kenttäsarja poistettiin onnistuneesti.',
             'in_use'   => 'Kenttäsarja on edelleen käytössä.',
-        )
+        ],
 
-    ),
+    ],
 
-
-
-
-
-
-);
+];

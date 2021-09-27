@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class UpdateLdapFilterToLongerField extends Migration
 {
@@ -12,9 +12,9 @@ class UpdateLdapFilterToLongerField extends Migration
      */
     public function up()
     {
-      Schema::table('settings', function (Blueprint $table) {
-        $table->text('ldap_filter')->default(NULL)->change();
-      });
+        Schema::table('settings', function (Blueprint $table) {
+            $table->text('ldap_filter')->default(null)->change();
+        });
     }
 
     /**

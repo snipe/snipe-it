@@ -27,5 +27,4 @@ class AddStatusIdOnAssetsTable extends Migration
             $table->dropColumn('status_id');
         });
     }
-
 }

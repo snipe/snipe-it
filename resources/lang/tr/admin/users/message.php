@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Bu aksesuarı başarıyla kabul ettiniz.',
     'declined'                  => 'Bu varlığı başarıyla reddettiniz.',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'LDAP entegrasyonu bu yükleme için yapılandırılmamış.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Kullanıcı başarıyla oluşturuldu.',
         'update'    => 'Kullanıcı başarıyla güncelleştirildi.',
         'update_bulk'    => 'Kullanıcılar başarıyla güncelleştirildi!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'Kullanıcı erişimi açıldı.',
         'restored'  => 'Kullanıcı başarıyla geri yüklendi.',
         'import'    => 'Kullanıcılar başarıyla içe aktarıldı.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Kullanıcı oluştururken bir sorun oluştu. Lütfen yeniden deneyin.',
         'update' => 'Kullanıcı oluştururken bir sorun oluştu. Lütfen yeniden deneyin.',
         'delete' => 'Kullanıcı silinirken bir problem oluştu. Lütfen tekrar deneyin.',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'LDAP sunucusuna bağlanamadı. LDAP yapılandırma dosyası LDAP sunucusu yapılandırmanızda gözden geçirin. <br> LDAP sunucusundan Hata:',
         'ldap_could_not_get_entries' => 'LDAP sunucusuna bağlanamadı. LDAP yapılandırma dosyası LDAP sunucusu yapılandırmanızda gözden geçirin. <br> LDAP sunucusundan Hata:',
         'password_ldap' => 'Bu hesabın parolası LDAP / Active Directory tarafından yönetilir. Lütfen şifrenizi değiştirmek için BT departmanınızla iletişime geçin.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Dosya silinemedi. Lütfen tekrar deneyin.',
         'success' => 'Dosya silindi.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Dosya(lar) yüklenemedi. Lütfen tekrar deneyin.',
         'success' => 'Dosya(lar) yüklendi.',
         'nofiles' => 'Yükleme için hiç bir dosya seçmediniz',
         'invalidfiles' => 'Bir veya daha fazla dosya çok büyük veya izin verilmeyen bir dosya türü. İzin verilen dosya türleri png, Gif, jpg, doc, docx, pdf, txt.',
-    ),
+    ],
 
-);
+];

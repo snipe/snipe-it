@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM alpine:3
 # Apache + PHP
 RUN  apk add --no-cache \
         apache2 \
@@ -25,6 +25,8 @@ RUN  apk add --no-cache \
         php7-session \
         php7-dom \
         php7-xmlwriter \
+        php7-xmlreader \
+        php7-sodium \
         curl \
         wget \
         vim \

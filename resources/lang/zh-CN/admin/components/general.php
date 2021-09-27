@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => '名称',
     'checkin'                             => '借入组件',
     'checkout'                             => '借出组件',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => '剩余',
     'total' 			                 => '总计',
     'update'                            => '更新组件',
-);
+];

@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Người dùng này có thể đăng nhập',
     'activated_disabled_help_text' => 'Bạn không thể sửa tình trạng kích hoạt của tài khoản quản trị.',
     'assets_user'       => 'Tài sản đã được cấp phát đến :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Sửa người dùng',
     'filetype_info'     => 'Cho phép loại tập tin are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Lịch sử cấp phát của :name',
-	'info'				=> 'Thông tin',
+    'info'				=> 'Thông tin',
     'restore_user'		=> 'Nhấp vào đây để khôi phục chúng.',
     'last_login'        => 'Lần đăng nhập trước',
     'ldap_config_text'  => 'Bạn có thể tìm thấy cài đặt cấu hình LDAP Quản trị> Cài đặt. Địa điểm đã chọn (tùy chọn) sẽ được đặt cho tất cả người dùng được nhập.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Cài đặt quản trị hiện tại của bạn cho phép thực thi có chọn lọc xác thực hai yếu tố.',
     'two_factor_enrolled' => 'Thiết bị 2FA đã đăng ký',
     'two_factor_active'   => '2FA Hoạt động',
-    );
+    ];

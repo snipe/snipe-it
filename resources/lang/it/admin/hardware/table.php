@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Etichetta bene',
     'asset_model'       => 'Modello',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Bene ',
     'image'		=> 'Immagine dispositivo',
     'days_without_acceptance' => 'Giorni senza accettazione',
-    'monthly_depreciation' => 'Ammortamento Mensile'
+    'monthly_depreciation' => 'Ammortamento Mensile',
 
-);
+];

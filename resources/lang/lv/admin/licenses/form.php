@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Aktīvs',
     'checkin'           => 'Reģistrēties',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licencēta uz e-pastu',
     'to_name'           => 'Licencēta uz vārdu',
     'update'            => 'Atjaunināt licenci',
-    'checkout_help'     => 'Jums jāpārbauda licence aparatūras aktīvam vai personai. Jūs varat izvēlēties abus, bet īpašnieka īpašumam ir jāatbilst personai, kurai veicat īpašuma pārbaudi.'
-);
+    'checkout_help'     => 'Jums jāpārbauda licence aparatūras aktīvam vai personai. Jūs varat izvēlēties abus, bet īpašnieka īpašumam ir jāatbilst personai, kurai veicat īpašuma pārbaudi.',
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Om grupper',
     'about_groups'                  => 'Grupper används för att generalisera användarbehörigheter.',
     'group_management' 	 	=> 'Grupphantering',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Tillåt',
     'deny' 	 				=> 'Neka',
 
-);
+];

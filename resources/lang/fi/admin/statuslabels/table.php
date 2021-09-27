@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'Tietoja tilamerkinnöistä',
     'archived'      	=> 'Arkistoitu',
     'create'      	=> 'Uusi tilamerkintä',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Tilamerkinnät',
     'undeployable'  => 'Ei käytettävissä',
     'update'      	=> 'Päivitä tilamerkinnät',
-);
+];

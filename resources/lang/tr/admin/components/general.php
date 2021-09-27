@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'Bileşen adı',
     'checkin'                             => 'Bileşeni Kabul Et',
     'checkout'                             => 'Bileşeni teslim et',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'Kalan',
     'total' 			                 => 'Toplam',
     'update'                            => 'Bileşeni düzenle',
-);
+];

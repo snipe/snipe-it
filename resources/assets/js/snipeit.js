@@ -1,4 +1,9 @@
 
+
+// var jQuery = require('jquery');
+// window.jQuery = jQuery
+// window.$ = jQuery
+
 /**
  * Module containing core application logic.
  * @param  {jQuery} $        Insulated jQuery object
@@ -63,7 +68,7 @@ pieOptions = {
 
     //String - A legend template
     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li>" +
-    "<i class='fa fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" +
+    "<i class='fas fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" +
     "<%if(segments[i].label){%><%=segments[i].label%><%}%> foo</li><%}%></ul>",
     //String - A tooltip template
     tooltipTemplate: "<%=value %> <%=label%> "
@@ -197,7 +202,7 @@ $(document).ready(function () {
             ajax: {
 
                 // the baseUrl includes a trailing slash
-                url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
                 dataType: 'json',
                 delay: 250,
                 headers: {
@@ -282,7 +287,7 @@ $(document).ready(function () {
 			var endpoint = element.data("endpoint");
 			var assetStatusType = element.data("asset-status-type");
 			$.ajax({
-				url: Ziggy.baseUrl + 'api/v1/' + endpoint + '/selectlist?search='+value+'&page=1' + (assetStatusType ? '&assetStatusType='+assetStatusType : ''),
+				url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search='+value+'&page=1' + (assetStatusType ? '&assetStatusType='+assetStatusType : ''),
 				dataType: 'json',
 				headers: {
 					"X-Requested-With": 'XMLHttpRequest',
@@ -326,7 +331,7 @@ $(document).ready(function () {
 	});
 
     function formatDatalist (datalist) {
-        var loading_markup = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+        var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
         if (datalist.loading) {
             return loading_markup;
         }
@@ -348,7 +353,7 @@ $(document).ready(function () {
         // console.warn("What in the hell is going on with Select2?!?!!?!?");
         // console.warn($.select2);
         if (datalist.loading) {
-            return $('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+            return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
         }
 
         var root_div = $("<div class='clearfix'>") ;
@@ -521,10 +526,10 @@ $(document).ready(function () {
         console.log('Real size is: ' + total_size);
 
         if (total_size > max_size) {
-            $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fa fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
+            $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fas fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
         } else {
 
-            $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fa fa-check"></i> ');
+            $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fas fa-check"></i> ');
             var $preview =  $(id + '-imagePreview');
             readURL(this, $preview);
             $preview.fadeIn();
@@ -534,6 +539,8 @@ $(document).ready(function () {
     });
 
 });
+
+
 
 
 /**

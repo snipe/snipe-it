@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Aceitou este artigo com sucesso.',
     'declined'                  => 'Recusou este artigo com sucesso.',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'A integração com LDAP não foi configurada para este instalação.',
     'password_resets_sent'      => 'Os usuários selecionados que são ativados e têm um endereço de e-mail válido receberam um link de redefinição de senha.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Utilizador criado com sucesso.',
         'update'    => 'Utilizador atualizado com sucesso.',
         'update_bulk'    => 'Os usuários foram atualizados com sucesso!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'A suspensão do Utilizador foi removida com sucesso.',
         'restored'  => 'Utilizador restaurado com sucesso.',
         'import'    => 'Utilizadores importados com sucesso.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Ocorreu um problema ao criar o utilizador. Por favor, tente novamente.',
         'update' => 'Ocorreu um problema ao atualizar o utilizador. Por favor, tente novamente.',
         'delete' => 'Ocorreu um problema ao remover o utilizador. Por favor, tente novamente.',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'Não foi possível pesquisar no servidor LDAP. Por favor, verifique a configuração de servidor no ficheiro de configuração. <br>Error do Servidor LDAP:',
         'ldap_could_not_get_entries' => 'Não foi possível obter registos do servidor LDAP. Por favor, verifique a configuração de servidor no ficheiro de configuração. <br>Error do Servidor LDAP:',
         'password_ldap' => 'A senha desta conta é gerenciada pelo LDAP / Active Directory. Entre em contato com seu departamento de TI para alterar sua senha.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Ficheiro não removido. Por favor, tente novamente.',
         'success' => 'Ficheiro removido com sucesso.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Ficheiro(s) não submetidos. Por favor, tente novamente.',
         'success' => 'Ficheiro(s) submetidos com sucesso.',
         'nofiles' => 'Não selecionou nenhum ficheiro para submissão',
         'invalidfiles' => 'Um ou mais ficheiros são demasiado grandes ou trata-se de um tipo de ficheiro não permitido. Os tipos de ficheiro permitidos são png, gif, jpg, jpeg, doc, docx, pdf e txt.',
-    ),
+    ],
 
-);
+];

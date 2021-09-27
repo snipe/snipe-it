@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'Относно доставчици',
     'about_suppliers_text'  => 'Доставчици се използват за проследяване на източника на елементи',
     'address'               => 'Адрес на доставчика',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Преглед на активите за',
     'zip'                   => 'Пощенски код',
 
-);
+];

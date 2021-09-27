@@ -13,8 +13,7 @@ class CreateOauthAccessTokensTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('oauth_access_tokens')) {
-
+        if (! Schema::hasTable('oauth_access_tokens')) {
             Schema::create('oauth_access_tokens', function (Blueprint $table) {
                 $table->string('id', 100)->primary();
                 $table->unsignedBigInteger('user_id')->nullable()->index();
@@ -35,6 +34,6 @@ class CreateOauthAccessTokensTable extends Migration
      */
     public function down()
     {
-            Schema::dropIfExists('oauth_access_tokens');
+        Schema::dropIfExists('oauth_access_tokens');
     }
 }

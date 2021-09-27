@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Tae Taonga',
     'asset_model'       => 'Tauira',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Tahua',
     'image'		=> 'Atahanga Pūrere',
     'days_without_acceptance' => 'Nga Rahui Te Whakaae',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

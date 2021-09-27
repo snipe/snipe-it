@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_licenses_title'            => 'Acerca de las Licencias',
     'about_licenses'                  => 'Las licencias son usadas para rastrear el software. Tienen un número específico de puestos que pueden ser asignados a individuos',
     'checkin'  					=> 'Registrar Puestos de Licencia',
@@ -18,4 +18,4 @@ return array(
     'software_licenses'  		=> 'Licencias de Software',
     'user'  					=> 'Usuario',
     'view'  					=> 'Ver Licencia',
-);
+];

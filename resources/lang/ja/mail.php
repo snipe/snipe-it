@@ -9,7 +9,7 @@ return array(
     'asset' => '資産:',
     'asset_name' => '資産名:',
     'asset_requested' => '資産リクエスト',
-    'asset_tag' => '資産タグ:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => '割り当て先',
     'best_regards' => '敬具',
     'canceled' => 'キャンセル済:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
+    'your_assets' => 'あなたの資産を表示'
 );

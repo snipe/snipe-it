@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -88,8 +88,8 @@ return array(
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +101,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +114,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "The :attribute field contains a character that is not allowed.",
-        "email_array"      => "One or more email addresses is invalid.",
-        "hashed_pass"      => "Your current password is incorrect",
+        'alpha_space' => 'The :attribute field contains a character that is not allowed.',
+        'email_array'      => 'One or more email addresses is invalid.',
+        'hashed_pass'      => 'Your current password is incorrect',
         'dumbpwd'          => 'That password is too common.',
-        "statuslabel_type" => "You must select a valid status label type",
+        'statuslabel_type' => 'You must select a valid status label type',
     ],
 
     /*
@@ -135,4 +134,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

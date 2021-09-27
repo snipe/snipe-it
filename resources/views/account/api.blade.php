@@ -23,7 +23,7 @@
                 @endif
             </div>
             <div class="col-md-4">
-                <div class="alert alert-warning"><i class="fa fa-warning faa-pulse animated"></i>
+                <div class="alert alert-warning"><i class="fas fa-exclamation-triangle faa-pulse animated"></i>
                     When generating an API token, be sure to copy it down immediately as they
                     will not be visible to you again. </div>
 

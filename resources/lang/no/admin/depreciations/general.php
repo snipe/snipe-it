@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Om avskrivninger',
     'about_depreciations'  					=> 'Du kan sette opp avskrivninger for å kostnadsføre eiendeler basert på en lineær avskrivning i perioden.',
     'asset_depreciations'  					=> 'Avskrivninger',
@@ -9,4 +9,4 @@ return array(
     'number_of_months'  					=> 'Antall måneder',
     'update'  					            => 'Oppdater avskrivninger',
 
-);
+];

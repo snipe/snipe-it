@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Vlastní pole',
     'field'		                => 'Pole',
     'about_fieldsets_title'		=> 'O sadách polí',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Nové vlastní pole',
     'value_encrypted'      	        => 'Hodnota tohoto pole je zašifrována v databázi. Pouze administrátoři budou moci zobrazit dešifrovanou hodnotu',
     'show_in_email'     => 'Zahrnout hodnotu této kolonky do e-mailu o vyskladnění pro uživatele? Šifrované kolonky nemohou být součástí e-mailů.',
-);
+];

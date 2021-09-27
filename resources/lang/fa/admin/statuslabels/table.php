@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'درباره ی برچسب های وضعیت',
     'archived'      	=> 'آرشیو',
     'create'      	=> 'ساخت برچسب وضعیت',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'برچسب های وضعیت',
     'undeployable'  => 'غیرقابل گسترش',
     'update'      	=> 'به روزرسانی برچسب وضعیت',
-);
+];

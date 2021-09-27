@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Eine Geräte-Anfrage auf der Webseite wurde vom Benutzer abgebrochen',
     'a_user_requested' => 'Ein Benutzer hat ein Gerät auf der Webseite angefordert',
     'accessory_name' => 'Zubehör Name:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Asset:',
     'asset_name' => 'Gegenstands Name:',
     'asset_requested' => 'Gegenstand angefordert',
-    'asset_tag' => 'Gegenstands Etikett:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Zugewiesen an',
     'best_regards' => 'Grüße,',
     'canceled' => 'Abgebrochen:',
@@ -36,7 +36,7 @@ return array(
     'i_have_read' => 'Ich habe die Nutzungsbedingungen gelesen und stimme diesen zu, und ich habe diesen Gegenstand erhalten.',
     'item' => 'Gegenstand:',
     'Item_Request_Canceled' => 'Gegenstands Anfrage abgebrochen',
-    'Item_Requested' => 'Gegenstand angefortdert',
+    'Item_Requested' => 'Gegenstand angefordert',
     'link_to_update_password' => 'Klicken Sie bitte auf den folgenden Link zum Aktualisieren Ihres :web Passworts:',
     'login_first_admin' => 'Melden Sie sich zu Ihrer neuen Snipe-IT-Installation mithilfe der unten stehenden Anmeldeinformationen an:',
     'login' => 'Benutzername:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Bericht über erwartete Asset Rückgaben',
     'Expected_Checkin_Notification' => 'Erinnerung: :name Rückgabedatum nähert sich',
     'Expected_Checkin_Date' => 'Ihr ausgebuchtes Asset ist fällig zur Rückgabe am :date',
-    'your_assets' => 'Ihre Assets anzeigen'
-);
+    'your_assets' => 'Ihre Assets anzeigen',
+];

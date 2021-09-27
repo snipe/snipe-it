@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'A propos des actifs',
     'about_assets_text'            => 'Les actifs sont des éléments suivis par le numéro de série ou l\'étiquette de l\'actif. Ils ont tendance à être des éléments de valeur supérieure où l\'identification d\'un élément spécifique importe.',
-	'archived'  				=> 'Retiré',
+    'archived'  				=> 'Retiré',
     'asset'  					=> 'Biens',
     'bulk_checkout'             => 'Attribuer les actifs',
     'checkin'  					=> 'Retour des Biens',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'En attente',
     'undeployable'  			=> 'Non déployable',
     'view'  					=> 'Voir le Bien',
-);
+];

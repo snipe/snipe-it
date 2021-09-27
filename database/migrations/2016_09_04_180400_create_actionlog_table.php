@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateActionlogTable extends Migration
 {
@@ -12,7 +12,7 @@ class CreateActionlogTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('action_logs')) {
+        if (! Schema::hasTable('action_logs')) {
             Schema::create('action_logs', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('user_id')->nullable();

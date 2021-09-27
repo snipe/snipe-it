@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Ön sikeresen elfogadta ezt az eszközt.',
     'declined'                  => 'Az eszközt sikeresen csökkentetted.',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'Az LDAP integráció nem lett konfigurálva ehhez a telepítéshez.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'A felhasználó sikeresen létrejött.',
         'update'    => 'A felhasználó módosítása sikeresen megtörtént.',
         'update_bulk'    => 'A felhasználók sikeresen frissültek!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'A felhasználó sikeresen felfüggesztésre került.',
         'restored'  => 'A felhasználó sikeresen visszaállt.',
         'import'    => 'A felhasználók sikeresen importáltak.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Hiba történt a felhasználó létrehozásában. Kérlek próbáld újra.',
         'update' => 'Hiba történt a felhasználó frissítésében. Kérlek próbáld újra.',
         'delete' => 'A felhasználó törölte a problémát. Kérlek próbáld újra.',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'Nem sikerült keresni az LDAP kiszolgálót. Ellenőrizze az LDAP kiszolgáló konfigurációját az LDAP konfigurációs fájlban. <br>Az LDAP kiszolgáló hibája:',
         'ldap_could_not_get_entries' => 'Nem sikerült bejegyzéseket szerezni az LDAP kiszolgálóról. Ellenőrizze az LDAP kiszolgáló konfigurációját az LDAP konfigurációs fájlban. <br>Az LDAP kiszolgáló hibája:',
         'password_ldap' => 'A fiókhoz tartozó jelszót az LDAP / Active Directory kezeli. Kérjük, lépjen kapcsolatba informatikai részlegével a jelszó megváltoztatásához.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'A fájl nem törölve. Kérlek próbáld újra.',
         'success' => 'A fájl sikeresen törölve.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Fel nem töltött fájl (ok). Kérlek próbáld újra.',
         'success' => 'Fájl (ok) sikeresen feltöltve.',
         'nofiles' => 'Nem választottál fel fájlokat a feltöltéshez',
         'invalidfiles' => 'Egy vagy több fájl túl nagy vagy egy filetype, amely nem megengedett. Az engedélyezett fájltípusok png, gif, jpg, doc, docx, pdf és txt.',
-    ),
+    ],
 
-);
+];

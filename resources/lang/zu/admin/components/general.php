@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'Igama lesakhiwo',
     'checkin'                             => 'I-Checkin Ingxenye',
     'checkout'                             => 'I-Checkout Ingxenye',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'Ukuhlala',
     'total' 			                 => 'Inani',
     'update'                            => 'Buyekeza Ingxenye',
-);
+];

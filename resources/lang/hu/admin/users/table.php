@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'activated'  			=> 'Aktív',
     'allow'  				=> 'Engedélyezés',
     'checkedout'  			=> 'Eszközök',
@@ -28,11 +28,11 @@ return array(
     'show_current'          => 'Jelenlegi felhasználók megjelenítése',
     'show_deleted'          => 'A törölt felhasználók megjelenítése',
     'title' 				=> 'Cím',
-	'to_restore_them'		=> 'visszaállítani őket.',
+    'to_restore_them'		=> 'visszaállítani őket.',
     'updateuser' 			=> 'Felhasználó frissítése',
     'username' 				=> 'Felhasználónév',
-	'user_deleted_text' 	=> 'Ezt a felhasználót törölték.',
+    'user_deleted_text' 	=> 'Ezt a felhasználót törölték.',
     'username_note' 		=> '(Ez csak az Active Directory-kötéshez használható, nem pedig a bejelentkezéshez.)',
     'cloneuser'             => 'Klón felhasználó',
     'viewusers' 			=> 'Felhasználók megtekintése',
-);
+];

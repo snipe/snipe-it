@@ -32,11 +32,11 @@
                                     <input type="hidden" name="token" value="{{ $token }}">
 
                                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                                        <label class="col-md-4 control-label"><i class="fa fa-user" aria-hidden="true"></i> {{ trans('admin/users/table.username')  }}</label>
+                                        <label class="col-md-4 control-label"><i class="fas fa-user" aria-hidden="true"></i> {{ trans('admin/users/table.username')  }}</label>
 
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" name="username" value="{{ old('username', $username) }}">
-                                            {!! $errors->first('username', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                            {!! $errors->first('username', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
 
                             </div>
                         </div>
@@ -46,7 +46,7 @@
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password" aria-label="password">
-                                {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
 
@@ -54,7 +54,7 @@
                             <label class="col-md-4 control-label" for="password_confirmation"><i class="fa fa-key" aria-hidden="true"></i> {{ trans('admin/users/table.password_confirm')  }}</label>
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password_confirmation" aria-label="password_confirmation">
-                                {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
 
                             </div>
                         </div>

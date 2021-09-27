@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Categoría inexistente.',
     'user_does_not_exist' => 'Usuario inexistente.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'Debe seleccionar un activo o un usuario, pero no ambos.',
     'not_found' => 'Licencia no encontrada',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'La categoría no se ha creado, intentalo de nuevo.',
-        'success' => 'Categoría creada correctamente.'
-    ),
+        'success' => 'Categoría creada correctamente.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
         'success' => 'Archivo eliminado correctamente.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
         'success' => 'Archivo(s) cargado correctamente.',
         'nofiles' => 'No ha seleccionado ningun archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
         'invalidfiles' => 'Uno o más de tus ficheros son demasiado grandes o de un tipo no permitido. Los tipos permitidos son png, gif, jpg, doc, docx, pdf, txt, zip, rar, rtf, xml y lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'La categoría no se ha actualizado, intentalo de nuevo.',
-        'success' => 'Categoría actualizada correctamente.'
-    ),
+        'success' => 'Categoría actualizada correctamente.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Estás seguro de eliminar esta categoría?',
         'error'   => 'Ha habido un problema eliminando la categoría. Intentalo de nuevo.',
-        'success' => 'Categoría eliminada.'
-    ),
+        'success' => 'Categoría eliminada.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Equipo no asignado, intentalo de nuevo',
-        'success' => 'Equipo asignado.'
-    ),
+        'success' => 'Equipo asignado.',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'No se ha quitado el equipo. Intentalo de nuevo.',
-        'success' => 'Equipo quitado correctamente.'
-    ),
+        'success' => 'Equipo quitado correctamente.',
+    ],
 
-);
+];

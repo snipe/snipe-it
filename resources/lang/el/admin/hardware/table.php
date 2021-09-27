@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Ετικέτα πόρων',
     'asset_model'       => 'Μοντέλο',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Πάγιο ',
     'image'		=> 'Φωτογραφία συσκευής',
     'days_without_acceptance' => 'Ημέρες χωρίς αποδοχή',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Thao tác',
     'add'    	                => 'Thêm mới',
     'cancel'                    => 'Hủy',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Yêu cầu',
     'submit'  	                => 'Gửi',
     'upload'                    => 'Tải lên',
-	'select_file'				=> 'Chọn tập tin...',
+    'select_file'				=> 'Chọn tập tin...',
     'select_files'				=> 'Chọn files...',
     'generate_labels'           => '{1} Nhãn Chung|[2,*] Nhiều Nhãn Chung',
-);
+];

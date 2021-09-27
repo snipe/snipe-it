@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\Department;
 use App\Models\Location;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -25,5 +26,4 @@ class DepartmentTest extends BaseTest
     //     Department::create($values);
     //     $this->tester->seeRecord('departments', $values);
     // }
-
 }

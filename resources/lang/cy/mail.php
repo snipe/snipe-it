@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Mae defnyddiwr wedi canslo cais am eitem ar y wefan',
     'a_user_requested' => 'Mae defnyddiwr wedi gwneud cais am eitem ar y wefan',
     'accessory_name' => 'Enw Ategolyn:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Ased:',
     'asset_name' => 'Enw Ased:',
     'asset_requested' => 'Gofynnwyd am ased',
-    'asset_tag' => 'Tag Ased:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Wedi Neilltuo i',
     'best_regards' => 'Cofon gorau,',
     'canceled' => 'Wedi canslo:',
@@ -76,5 +76,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

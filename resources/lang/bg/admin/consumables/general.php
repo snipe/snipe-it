@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Отписване на консумативи към потребител',
     'consumable_name'                   => 'Консуматив',
     'create'                            => 'Създаване на консуматив',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Остава',
     'total' 			                => 'Oбщо',
     'update'                            => 'Обновяване на консуматив',
-);
+];

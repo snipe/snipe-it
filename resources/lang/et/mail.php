@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Kasutaja on veebisaidil tühistanud üksuse taotluse',
     'a_user_requested' => 'Kasutaja on taotlenud üksuse veebisaidil',
     'accessory_name' => 'Lisaseade Nimi:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Vahend:',
     'asset_name' => 'Vahendi nimi:',
     'asset_requested' => 'Vara nõutud',
-    'asset_tag' => 'Vara silt:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Määratud',
     'best_regards' => 'Parimate soovidega,',
     'canceled' => 'Tühistatud:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

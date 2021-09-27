@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'Vahendite kategooriad',
     'category_name'  					=> 'Kategooria nimi',
     'checkin_email'                     => 'Saada kasutajale e-kiri vara liikumise kohta.',
@@ -19,4 +19,4 @@ return array(
     'use_default_eula'					=> 'Kasuta hoopis <a href="#" data-toggle="modal" data-target="#eulaModal">peamist vaikimisi EULA-t</a>.',
     'use_default_eula_disabled'			=> '<del>Kasuta hoopis peamist vaikimisi EULAt.</del> Peamine vaikumisi EULA puudub. Lisa see seadete alt.',
 
-);
+];

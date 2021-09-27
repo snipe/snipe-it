@@ -18,6 +18,6 @@ class CheckoutAccepted
      */
     public function __construct(CheckoutAcceptance $acceptance)
     {
-        $this->acceptance       = $acceptance;
+        $this->acceptance = $acceptance;
     }
 }

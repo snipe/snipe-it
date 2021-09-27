@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Kasutaja saab tellimuse',
     'consumable_name'                   => 'Kuluvahendi nimi',
     'create'                            => 'Loo tarbitav',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Alles',
     'total' 			                => 'Kokku',
     'update'                            => 'Muuda kuluvahendit',
-);
+];

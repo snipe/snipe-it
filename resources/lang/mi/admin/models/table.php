@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'Waihanga Tae Ahua',
     'created_at' 			=> 'I hangaia i',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'Whakahouhia te tauira Ahua',
     'clone'				=> 'He tauira tauira',
     'edit'				=> 'Whakatikahia te tauira',
-);
+];

@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory domeen',
     'ad_domain_help'			=> 'See on mõnikord sama kui teie e-posti domeen, kuid mitte alati.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC e-mail',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'See on Active Directory server',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Aegumatu häiretaseme künnis (päevades)',
     'alert_inv_threshold'		=> 'Inventari hoiatuslävi',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Varade ID-d',
     'audit_interval'            => 'Auditi intervall',
     'audit_interval_help'       => 'Kui teil on kohustus kontrollida oma vara füüsiliselt, sisestage intervall kuude kaupa.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Sisestage kahe faktori kood',
     'two_factor_config_complete'	=> 'Esita koodeks',
     'two_factor_enabled_edit_not_allowed' => 'Teie administraator ei luba seda sätet muuta.',
-    'two_factor_enrollment_text'	=> "Vaja on kahte tegurit, kuid teie seadet ei ole veel registreeritud. Avage oma Google Authenticatori rakendus ja skannige oma seadme registreerimiseks allolevat QR-koodi. Kui olete oma seadme sisestanud, sisestage allolev kood",
+    'two_factor_enrollment_text'	=> 'Vaja on kahte tegurit, kuid teie seadet ei ole veel registreeritud. Avage oma Google Authenticatori rakendus ja skannige oma seadme registreerimiseks allolevat QR-koodi. Kui olete oma seadme sisestanud, sisestage allolev kood',
     'require_accept_signature'      => 'Nõuda allkirja',
     'require_accept_signature_help_text'      => 'Selle funktsiooni lubamine nõuab, et kasutajad võtaksid vara füüsiliselt alla.',
     'left'        => 'lahkus',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Varasiltide, sealhulgas zerofilli pikkus',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

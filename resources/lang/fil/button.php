@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Ang mga aksyon',
     'add'    	                => 'Magdagdag ng bago',
     'cancel'                    => 'I-kansela',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Mga Rekwest',
     'submit'  	                => 'I-sumita',
     'upload'                    => 'I-upload',
-	'select_file'				=> 'Pumili ng File...',
+    'select_file'				=> 'Pumili ng File...',
     'select_files'				=> 'Select Files...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+];

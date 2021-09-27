@@ -1,9 +1,10 @@
 <?php
+
 use App\Models\Manufacturer;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Hash;
 
 class ManufacturerTest extends BaseTest
 {
@@ -22,5 +23,4 @@ class ManufacturerTest extends BaseTest
     //   Manufacturer::create($values);
     //   $this->tester->seeRecord('manufacturers', $values);
     // }
-
 }

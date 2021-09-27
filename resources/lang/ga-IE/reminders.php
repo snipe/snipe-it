@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Ní mór go mbeadh sé carachtair ar na focail agus an dearbhú a mheaitseáil.",
+    'password' => 'Ní mór go mbeadh sé carachtair ar na focail agus an dearbhú a mheaitseáil.',
 
-    "user"     => "Tá ainm úsáideora nó seoladh ríomhphoist mícheart",
+    'user'     => 'Tá ainm úsáideora nó seoladh ríomhphoist mícheart',
 
-    "token"    => "Tá an tocsa athshocrú focal faire seo neamhbhailí.",
+    'token'    => 'Tá an tocsa athshocrú focal faire seo neamhbhailí.',
 
-    "sent" => "Má aimsíodh seoladh ríomhphoist meaitseála, cuireadh meabhrúchán phasfhocal isteach!",
+    'sent' => 'Má aimsíodh seoladh ríomhphoist meaitseála, cuireadh meabhrúchán phasfhocal isteach!',
 
-);
+];

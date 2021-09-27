@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'О местонахождениях',
     'about_locations'           => 'Местонахождения используются для отслеживания информации о месте находжения активов, и прочих элементов',
     'assets_rtd'                => 'Активы', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'Страна',
     'create'                    => 'Создать статус',
     'update'                    => 'Обновить статус',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'Печать выделенных',
+    'print_all_assigned'        => 'Печать всех выделенных',
     'name'                      => 'Имя статуса',
     'address'                   => 'Адрес',
     'zip'                       => 'Почтовый индекс',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => 'Родитель',
     'currency'                  => 'Валюта местонахождения',
     'ldap_ou'                   => 'Поиск в LDAP OU',
-    );
+    ];

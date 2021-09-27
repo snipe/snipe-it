@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Bu kullanıcı giriş yapabilir',
     'activated_disabled_help_text' => 'Kendi hesabınız için aktivasyon durumunu düzenleyemezsiniz.',
     'assets_user'       => 'Demirbaşlar şu kişiye atandı :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Kullanıcıyı Düzenle',
     'filetype_info'     => 'İzin verilen dosya türleri; png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar.',
     'history_user'      => ':name Kişisi ile iligli geçmiş',
-	'info'				=> 'Bilgi',
+    'info'				=> 'Bilgi',
     'restore_user'		=> 'Onları geri yüklemek için buraya tıklayın.',
     'last_login'        => 'Son oturum açma tarihi',
     'ldap_config_text'  => 'LDAP yapılandırma ayarları Yönetici> Ayarlar\'da bulunabilir. Seçilen yer (isteğe bağlı), tüm içe aktarılan kullanıcılar için ayarlanır.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Mevcut yönetici ayarlarınız, iki aşamalı kimlik doğrulamasının seçici olarak uygulanmasına izin verir.  ',
     'two_factor_enrolled' => 'Kayıtlı 2FA Cihazı ',
     'two_factor_active'   => '2FA Etkin ',
-    );
+    ];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Tegevused',
     'add'    	                => 'Lisa uus',
     'cancel'                    => 'Loobu',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Päring',
     'submit'  	                => 'Kinnita',
     'upload'                    => 'Lae üles',
-	'select_file'				=> 'Vali fail...',
+    'select_file'				=> 'Vali fail...',
     'select_files'				=> 'Vali failid...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+];

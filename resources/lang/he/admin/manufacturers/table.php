@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_manufacturers_title'    => 'על היצרנים',
     'about_manufacturers_text'  => 'היצרנים הן החברות שיוצרות את הנכסים שלך. תוכל לאחסן כאן פרטים חשובים ליצירת קשר עם התמיכה, שתוצג בדפי פרטי הנכס שלך.',
     'asset_manufacturers'	=> 'יצרני נכסים',
@@ -13,4 +13,4 @@ return array(
     'update'				=> 'עדכון היצרן',
     'url'   				=> 'כתובת אתר',
 
-);
+];

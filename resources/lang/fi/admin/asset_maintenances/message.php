@@ -5,15 +5,15 @@
         'delete'                       => [
             'confirm' => 'Haluatko varmasti poistaa tämän huollon?',
             'error'   => 'Huollon poistamisessa tapahtui virhe. Yritä uudelleen.',
-            'success' => 'Huolto poistettu.'
+            'success' => 'Huolto poistettu.',
         ],
         'create'                       => [
             'error'   => 'Huoltoa ei luotu, yritä uudelleen.',
-            'success' => 'Huollon kirjaus onnistui.'
+            'success' => 'Huollon kirjaus onnistui.',
         ],
         'edit'                       => [
             'error'   => 'Huoltoa ei muokattu, yritä uudelleen.',
-            'success' => 'Huollon muokkaus onnistui.'
+            'success' => 'Huollon muokkaus onnistui.',
         ],
         'asset_maintenance_incomplete' => 'Ei vielä valmis',
         'warranty'                     => 'Takuu',

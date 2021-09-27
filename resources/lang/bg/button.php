@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Действия',
     'add'    	                => 'Добави нов',
     'cancel'                    => 'Отказ',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Заявка',
     'submit'  	                => 'Потвърди',
     'upload'                    => 'Качване',
-	'select_file'				=> 'Изберете файл...',
+    'select_file'				=> 'Изберете файл...',
     'select_files'				=> 'Изберете файлове...',
     'generate_labels'           => '{1} Генерирай Етикет|[2,*] Генерирай Етикети',
-);
+];

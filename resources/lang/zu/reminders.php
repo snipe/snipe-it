@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Amaphasiwedi kufanele abe izinhlamvu eziyisithupha futhi afane nokuqinisekiswa.",
+    'password' => 'Amaphasiwedi kufanele abe izinhlamvu eziyisithupha futhi afane nokuqinisekiswa.',
 
-    "user"     => "Igama lomsebenzisi noma ikheli le-imeyili alilungile",
+    'user'     => 'Igama lomsebenzisi noma ikheli le-imeyili alilungile',
 
-    "token"    => "Le ithokheni yokusetha kabusha iphasiwedi ayivumelekile.",
+    'token'    => 'Le ithokheni yokusetha kabusha iphasiwedi ayivumelekile.',
 
-    "sent" => "Uma ikheli le-imeyili elifanayo litholakala, isikhumbuzi sephasiwedi sithunyelwe!",
+    'sent' => 'Uma ikheli le-imeyili elifanayo litholakala, isikhumbuzi sephasiwedi sithunyelwe!',
 
-);
+];

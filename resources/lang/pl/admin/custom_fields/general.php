@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Pola niestandardowe',
     'field'		                => 'Pole',
     'about_fieldsets_title'		=> 'O zestawie pól',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Nowe pole niestandardowe',
     'value_encrypted'      	        => 'Wartość tego pola jest zaszyfrowana w bazie danych. Tylko admini będą mogli wyświetlić rozszyfrowaną wartość',
     'show_in_email'     => 'Czy podać wartość tego pola w e-mailach z przypisaniem, wysłanych do użytkownika? Zaszyfrowane pola nie mogą być zawarte w wiadomościach e-mail.',
-);
+];

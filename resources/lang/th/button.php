@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'การกระทำ',
     'add'    	                => 'เพิ่มใหม่',
     'cancel'                    => 'ยกเลิก',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'ร้องขอ',
     'submit'  	                => 'ตกลง',
     'upload'                    => 'อัพโหลด',
-	'select_file'				=> 'เลือกไฟล์...',
+    'select_file'				=> 'เลือกไฟล์...',
     'select_files'				=> 'เลือกไฟล์...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+];

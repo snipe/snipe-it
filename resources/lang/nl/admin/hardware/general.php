@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Over assets',
     'about_assets_text'            => 'Assets zijn items die worden bijgehouden op serienummer of een tag van het product. Het zijn meestal items met een hogere waarde waarbij het identificeren van een specifiek item belangrijk is.',
-	'archived'  				=> 'Gearchiveerd',
+    'archived'  				=> 'Gearchiveerd',
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Asset uitchecken',
     'checkin'  					=> 'Asset inchecken',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'In behandeling',
     'undeployable'  			=> 'Niet uitgeefbaar',
     'view'  					=> 'Bekijk Asset',
-);
+];

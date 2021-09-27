@@ -37,7 +37,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="alert alert-info">
-                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                        <i class="fas fa-info-circle" aria-hidden="true"></i>
                                         {!! trans('auth/general.username_help_top') !!}
                                     </div>
                                 </div>
@@ -55,9 +55,9 @@
                                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
 
                                         <div class="col-md-12">
-                                            <label for="username"><i class="fa fa-user" aria-hidden="true"></i> {{ trans('admin/users/table.username') }} </label>
+                                            <label for="username"><i class="fas fa-user" aria-hidden="true"></i> {{ trans('admin/users/table.username') }} </label>
                                             <input type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="{{ trans('admin/users/table.username') }}" aria-label="username">
-                                            {!! $errors->first('username', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                                            {!! $errors->first('username', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
                                         </div>
                                     </div>
                             </div>

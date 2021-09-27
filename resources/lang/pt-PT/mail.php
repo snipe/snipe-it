@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Um utilizador cancelou um pedido de artigo no site',
     'a_user_requested' => 'Um utilizador solicitou um artigo no site',
     'accessory_name' => 'Nome do acessório:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Artigo:',
     'asset_name' => 'Nome do Artigo:',
     'asset_requested' => 'Artigo requesitado',
-    'asset_tag' => 'Etiqueta de Artigo:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Atribuído a',
     'best_regards' => 'Atenciosamente',
     'canceled' => 'Cancelado:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

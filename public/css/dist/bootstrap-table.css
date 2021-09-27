@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.18.2
+ * version: 1.18.3
  * https://github.com/wenzhixin/bootstrap-table/
  */
 .bootstrap-table .fixed-table-toolbar::after {
@@ -138,11 +138,12 @@
   font-weight: bold;
   display: inline-block;
   min-width: 30%;
+  width: auto !important;
   text-align: left !important;
 }
 
 .bootstrap-table .fixed-table-container .table tbody tr .card-view .card-view-value {
-  width: 100%;
+  width: 100% !important;
 }
 
 .bootstrap-table .fixed-table-container .table .bs-checkbox {

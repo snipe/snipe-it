@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'תג נכס',
     'asset_model'       => 'דֶגֶם',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'נכס',
     'image'		=> 'תמונה של מכשיר',
     'days_without_acceptance' => 'ימים ללא קבלה',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

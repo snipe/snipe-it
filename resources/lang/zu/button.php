@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Izenzo',
     'add'    	                => 'Engeza okusha',
     'cancel'                    => 'Khansela',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Isicelo',
     'submit'  	                => 'Thumela',
     'upload'                    => 'Layisha',
-	'select_file'				=> 'Khetha Ifayela ...',
+    'select_file'				=> 'Khetha Ifayela ...',
     'select_files'				=> 'Select Files...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+];

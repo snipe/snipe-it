@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => '关于分组',
     'about_groups'                  => '分组用来区分用户的权限。',
     'group_management' 	 	=> '分组管理',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> '允许',
     'deny' 	 				=> '拒绝',
 
-);
+];

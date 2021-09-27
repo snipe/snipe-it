@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'یک کاربر یک درخواست اقساط در وب سایت را لغو کرده است',
     'a_user_requested' => 'یک کاربر یک مورد را در وبسایت درخواست کرده است',
     'accessory_name' => 'نام لوازم جانبی:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'دارایی:',
     'asset_name' => 'نام دارایی',
     'asset_requested' => 'دارایی درخواست شد',
-    'asset_tag' => 'برچسب دارایی:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'اختصاص یافته به',
     'best_regards' => 'با احترام،',
     'canceled' => 'لغو شد:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

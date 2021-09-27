@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => '關於供應商',
     'about_suppliers_text'  => '供應商用來追踪物品的來源',
     'address'               => '供應商地址',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => '檢視資產關於',
     'zip'                   => '郵遞區號',
 
-);
+];

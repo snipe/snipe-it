@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -6,7 +5,7 @@ window._ = require('lodash');
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
  */
-window.$ = window.jQuery = require('jquery');
+//window.$ = window.jQuery = require('jquery');
 
 /**
  * jQuery UI is loaded here and then the tooltip is assigned another funtion name
@@ -26,7 +25,7 @@ require('bootstrap-less');
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = require('vue');
+window.Vue = require('vue').default;
 window.eventHub = new Vue();
 require('vue-resource');
 
@@ -42,6 +41,11 @@ Vue.http.interceptors.push(function (request, next) {
     next();
 });
 
+// require('admin-lte');
+
+// require('chart.js');
+
+// require('jquery-form-validator'); //says something about dependency
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
