@@ -191,7 +191,7 @@
                       <td>{{ $improvement->start_date }}</td>
                       <td>{{ $improvement->completion_date }}</td>
                       <td>{{ $improvement->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
-                      <td>{{ sprintf( $snipeSettings->default_currency. '%01.2f', $improvement->cost) }}</td>
+                      <td>{{ $snipeSettings->default_currency. ' '. Helper::formatCurrencyOutput($improvement->cost) }}</td>
                         <?php $totalCost += $improvement->cost; ?>
                       <td><a href="{{ route('maintenances.edit', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white" aria-hidden="true"></i></a>
                       </td>
@@ -207,7 +207,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>{{sprintf($snipeSettings->default_currency . '%01.2f', $totalCost)}}</td>
+                <td>{{ $snipeSettings->default_currency . ' '.Helper::formatCurrencyOutput($totalCost) }}</td>
               </tr>
               </tfoot>
             </table>

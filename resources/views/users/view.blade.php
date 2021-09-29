@@ -460,7 +460,7 @@
                     @endcan
                   </td>
                   <td class="col-md-2">
-                    {{ $license->purchase_cost }}
+                    {{ Helper::formatCurrencyOutput($license->purchase_cost) }}
                   </td>
                   <td>
                     {{ $license->purchase_order }}
@@ -512,7 +512,7 @@
                   <tr>
                     <td>{!!$accessory->present()->nameUrl()!!}</td>
                     <td>
-                      {!! $accessory->purchase_cost !!}
+                      {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
                     </td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
@@ -558,7 +558,7 @@
                 <tr>
                   <td>{!! $consumable->present()->nameUrl() !!}</td>
                   <td>
-                    {!! $consumable->purchase_cost !!}
+                    {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
                   </td>
                   <td>{{ $consumable->created_at }}</td>
                 </tr>

@@ -102,7 +102,7 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('warranty_months');
 
                 if ($request->filled('purchase_cost')) {
-                    $this->update_array['purchase_cost'] =  Helper::ParseFloat($request->input('purchase_cost'));
+                    $this->update_array['purchase_cost'] =  Helper::ParseCurrency($request->input('purchase_cost'));
                 }
 
                 if ($request->filled('company_id')) {
