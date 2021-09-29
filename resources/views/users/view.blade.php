@@ -100,7 +100,12 @@
         @can('update', $user)
           <li class="dropdown pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fas fa-cog"></i> {{ trans('button.actions') }}
+              <span class="hidden-xs"><i class="fas fa-cog" aria-hidden="true"></i></span>
+              <span class="hidden-lg hidden-md hidden-xl"><i class="fas fa-cog fa-2x" aria-hidden="true"></i></span>
+              
+              <span class="hidden-xs hidden-sm">
+                {{ trans('button.actions') }}
+              </span>
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
@@ -115,7 +120,10 @@
 
         @can('update', \App\Models\User::class)
           <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
-              <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}</a>
+              <span class="hidden-xs"><i class="fas fa-paperclip" aria-hidden="true"></i></span>
+              <span class="hidden-lg hidden-md hidden-xl"><i class="fas fa-paperclip fa-2x" aria-hidden="true"></i></span>
+              <span class="hidden-xs hidden-sm">{{ trans('button.upload') }}</span>
+              </a>
           </li>
         @endcan
       </ul>
