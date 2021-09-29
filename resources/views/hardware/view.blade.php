@@ -267,7 +267,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ \App\Helpers\Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }} (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
+                                                {{ Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }} (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
                                             </div>
                                         </div>
                                     @endif
@@ -280,7 +280,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ \App\Helpers\Helper::getFormattedDateObject($asset->next_audit_date, 'date', false) }}
+                                                {{ Helper::getFormattedDateObject($asset->next_audit_date, 'date', false) }}
                                             </div>
                                         </div>
                                     @endif
@@ -419,9 +419,9 @@
                                                     @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
                                                         @can('superuser')
                                                             @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
-                                                                <a href="{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
+                                                                <a href="{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
                                                             @else
-                                                                {{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
+                                                                {{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
                                                             @endif
                                                         @else
                                                             {{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}
@@ -448,7 +448,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ \App\Helpers\Helper::getFormattedDateObject($asset->purchase_date, 'date', false) }}
+                                                {{ Helper::getFormattedDateObject($asset->purchase_date, 'date', false) }}
                                             </div>
                                         </div>
                                     @endif
@@ -468,7 +468,7 @@
                                                 @else
                                                     {{ $snipeSettings->default_currency }}
                                                 @endif
-                                                {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost)}}
+                                                {{ Helper::formatCurrencyOutput($asset->purchase_cost)}}
 
                                             </div>
                                         </div>
@@ -489,7 +489,7 @@
                                                     @else
                                                         {{ $snipeSettings->default_currency }}
                                                     @endif
-                                                    {{ \App\Helpers\Helper::formatCurrencyOutput($asset->getDepreciatedValue() )}}
+                                                    {{ Helper::formatCurrencyOutput($asset->getDepreciatedValue() )}}
 
                                                 </div>
                                             </div>
@@ -625,7 +625,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ \App\Helpers\Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
+                                                {{ Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
                                             </div>
                                         </div>
                                     @endif
@@ -687,7 +687,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ \App\Helpers\Helper::getFormattedDateObject($asset->created_at, 'datetime', false) }}
+                                                {{ Helper::getFormattedDateObject($asset->created_at, 'datetime', false) }}
                                             </div>
                                         </div>
                                     @endif
@@ -700,7 +700,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ \App\Helpers\Helper::getFormattedDateObject($asset->updated_at, 'datetime', false) }}
+                                                {{ Helper::getFormattedDateObject($asset->updated_at, 'datetime', false) }}
                                             </div>
                                         </div>
                                     @endif
@@ -712,7 +712,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                {{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
+                                                {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
                                             </div>
                                         </div>
                                      @endif
@@ -1112,15 +1112,15 @@
 
                                         @foreach ($asset->uploads as $file)
                                             <tr>
-                                                <td><i class="{{ \App\Helpers\Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i></td>
+                                                <td><i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i></td>
                                                 <td>
                                                     @if ($file->note)
                                                         {{ $file->note }}
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('assets')))
-                                                        <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ \App\Helpers\Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
+                                                    @if ( Helper::checkUploadIsImage($file->get_src('assets')))
+                                                        <a href="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}" data-footer="{{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}">
                                                             <img src="{{ route('show/assetfile', ['assetId' => $asset->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
                                                         </a>
                                                     @endif
@@ -1138,7 +1138,7 @@
 
                                                 <td>
                                                     @if ($file->created_at)
-                                                        {{ \App\Helpers\Helper::getFormattedDateObject($file->created_at, 'datetime', false) }}
+                                                        {{ Helper::getFormattedDateObject($file->created_at, 'datetime', false) }}
                                                     @endif
                                                 </td>
 

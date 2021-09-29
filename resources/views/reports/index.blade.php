@@ -66,7 +66,7 @@
                     @if ($asset->purchase_cost > 0)
                     <td class="align-right">
                         {{ $snipeSettings->default_currency }}
-                        {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost) }}
+                        {{ Helper::formatCurrencyOutput($asset->purchase_cost) }}
                     </td>
                     <td class="align-right">
                         {{ $snipeSettings->default_currency }}

@@ -88,7 +88,7 @@ class AssetsTransformer
 
             foreach ($asset->model->fieldset->fields as $field) {
                 if ($field->isFieldDecryptable($asset->{$field->convertUnicodeDbSlug()})) {
-                    $decrypted = \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->convertUnicodeDbSlug()});
+                    $decrypted = Helper::gracefulDecrypt($field, $asset->{$field->convertUnicodeDbSlug()});
                     $value = (Gate::allows('superadmin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
 
                     $fields_array[$field->name] = [

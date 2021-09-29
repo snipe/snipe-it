@@ -1,7 +1,7 @@
 <!-- Min QTY -->
 <div class="form-group{{ $errors->has('min_amt') ? ' has-error' : '' }}">
     <label for="min_amt" class="col-md-3 control-label">{{ trans('general.min_amt') }}</label>
-    <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($item, 'min_amt')) ? ' required' : '' }}">
+    <div class="col-md-9{{  (Helper::checkIfRequired($item, 'min_amt')) ? ' required' : '' }}">
        <div class="col-md-2" style="padding-left:0px">
             <input class="form-control col-md-3" type="text" name="min_amt" id="min_amt" aria-label="min_amt" value="{{ old('min_amt', $item->min_amt) }}" />
         </div>

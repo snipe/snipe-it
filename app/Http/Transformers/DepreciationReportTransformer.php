@@ -62,9 +62,9 @@ class DepreciationReportTransformer
          * Override the previously set null values if there is a valid model and associated depreciation
          */
         if (($asset->model) && ($asset->model->depreciation)) {
-            $depreciated_value = \App\Helpers\Helper::formatCurrencyOutput($asset->getDepreciatedValue());
-            $monthly_depreciation = \App\Helpers\Helper::formatCurrencyOutput(($asset->model->eol > 0 ? ($asset->purchase_cost / $asset->model->eol) : 0));
-            $diff = \App\Helpers\Helper::formatCurrencyOutput(($asset->purchase_cost - $asset->getDepreciatedValue()));
+            $depreciated_value = Helper::formatCurrencyOutput($asset->getDepreciatedValue());
+            $monthly_depreciation = Helper::formatCurrencyOutput(($asset->model->eol > 0 ? ($asset->purchase_cost / $asset->model->eol) : 0));
+            $diff = Helper::formatCurrencyOutput(($asset->purchase_cost - $asset->getDepreciatedValue()));
         }
 
         if ($asset->assigned) {

@@ -24,7 +24,7 @@ class ActionlogsTransformer
     {
         $icon = $actionlog->present()->icon();
         if ($actionlog->filename != '') {
-            $icon = e(\App\Helpers\Helper::filetype_icon($actionlog->filename));
+            $icon = e(Helper::filetype_icon($actionlog->filename));
         }
 
         // This is necessary since we can't escape special characters within a JSON object
@@ -75,7 +75,7 @@ class ActionlogsTransformer
                 [
                     'url' => route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]),
                     'filename' => $actionlog->filename,
-                    'inlineable' => (bool) \App\Helpers\Helper::show_file_inline($actionlog->filename),
+                    'inlineable' => (bool) Helper::show_file_inline($actionlog->filename),
                 ] : null,
 
             'item' => ($actionlog->item) ? [

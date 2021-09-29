@@ -15,7 +15,7 @@
     <label for="months" class="col-md-3 control-label">
         {{ trans('admin/depreciations/general.number_of_months') }}
     </label>
-    <div class="col-md-7 col-sm-12 {{  (\App\Helpers\Helper::checkIfRequired($item, 'months')) ? ' required' : '' }}">
+    <div class="col-md-7 col-sm-12 {{  (Helper::checkIfRequired($item, 'months')) ? ' required' : '' }}">
             <input class="form-control" type="text" name="months" aria-label="months" id="months" value="{{ Request::old('months', $item->months) }}" style="width: 80px;" />
             {!! $errors->first('months', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>

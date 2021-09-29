@@ -222,7 +222,7 @@
                     </strong>
                   </div>
                   <div class="col-md-9">
-                    {{ \App\Helpers\Helper::getFormattedDateObject($license->expiration_date, 'date', false) }}
+                    {{ Helper::getFormattedDateObject($license->expiration_date, 'date', false) }}
                   </div>
                 </div>
                 @endif
@@ -235,7 +235,7 @@
                       </strong>
                     </div>
                     <div class="col-md-9">
-                      {{ \App\Helpers\Helper::getFormattedDateObject($license->termination_date, 'date', false) }}
+                      {{ Helper::getFormattedDateObject($license->termination_date, 'date', false) }}
                     </div>
                   </div>
                 @endif
@@ -263,7 +263,7 @@
                     </strong>
                   </div>
                   <div class="col-md-9">
-                    {{ \App\Helpers\Helper::getFormattedDateObject($license->depreciated_date(), 'date', false) }}
+                    {{ Helper::getFormattedDateObject($license->depreciated_date(), 'date', false) }}
                   </div>
                 </div>
 
@@ -305,7 +305,7 @@
                     <strong>{{ trans('general.purchase_date') }}</strong>
                   </div>
                   <div class="col-md-9">
-                    {{ \App\Helpers\Helper::getFormattedDateObject($license->purchase_date, 'date', false) }}
+                    {{ Helper::getFormattedDateObject($license->purchase_date, 'date', false) }}
 
                   </div>
                 </div>
@@ -320,7 +320,7 @@
                     </div>
                     <div class="col-md-9">
                       {{ $snipeSettings->default_currency }}
-                      {{ \App\Helpers\Helper::formatCurrencyOutput($license->purchase_cost) }}
+                      {{ Helper::formatCurrencyOutput($license->purchase_cost) }}
                     </div>
                   </div>
                   @endif
@@ -457,8 +457,8 @@
               @foreach ($license->uploads as $file)
               <tr>
                 <td>
-                  <i class="{{ \App\Helpers\Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
-                  <span class="sr-only">{{ \App\Helpers\Helper::filetype_icon($file->filename) }}</span>
+                  <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
+                  <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
 
                 </td>
                 <td>
@@ -473,7 +473,7 @@
                 <td>{{ $file->created_at }}</td>
                 <td>
                 @if ($file->filename)
-                    @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('licenses')))
+                    @if ( Helper::checkUploadIsImage($file->get_src('licenses')))
                       <a href="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
                     @endif
                 @endif

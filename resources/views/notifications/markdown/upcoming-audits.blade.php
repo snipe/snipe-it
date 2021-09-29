@@ -7,8 +7,8 @@
 | |:------------- |:-------------|:---------|:---------|:---------|:---------|
 @foreach ($assets as $asset)
 @php
-$next_audit_date = \App\Helpers\Helper::getFormattedDateObject($asset->next_audit_date, 'date', false);
-$last_audit_date = \App\Helpers\Helper::getFormattedDateObject($asset->last_audit_date, 'date', false);
+$next_audit_date = Helper::getFormattedDateObject($asset->next_audit_date, 'date', false);
+$last_audit_date = Helper::getFormattedDateObject($asset->last_audit_date, 'date', false);
 $diff = Carbon::parse(Carbon::now())->diffInDays($next_audit_date, false);
 $icon = ($diff <= 7) ? '🚨' : (($diff <= 14) ? '⚠️' : ' ');
 @endphp

@@ -105,7 +105,7 @@
                             {!! $errors->first('saml_idp_metadata', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}<br>
                             <button type="button" class="btn btn-default" id="saml_idp_metadata_upload_btn">{{ trans('button.select_file') }}</button>
                             <input type="file" class="js-uploadFile" id="saml_idp_metadata_upload"
-                                data-maxsize="{{ \App\Helpers\Helper::file_upload_max_size() }}"
+                                data-maxsize="{{ Helper::file_upload_max_size() }}"
                                 accept="text/xml,application/xml" style="display:none; max-width: 90%">
                             
                             <p class="help-block">{{ trans('admin/settings/general.saml_idp_metadata_help') }}</p>

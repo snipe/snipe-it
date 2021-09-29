@@ -50,7 +50,7 @@
           <label for="title" class="col-md-3 control-label">
             {{ trans('admin/asset_maintenances/form.title') }}
           </label>
-          <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'title')) ? ' required' : '' }}">
+          <div class="col-md-7{{  (Helper::checkIfRequired($item, 'title')) ? ' required' : '' }}">
             <input class="form-control" type="text" name="title" id="title" value="{{ old('title', $item->title) }}" />
             {!! $errors->first('title', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
@@ -60,7 +60,7 @@
         <div class="form-group {{ $errors->has('start_date') ? ' has-error' : '' }}">
           <label for="start_date" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.start_date') }}</label>
 
-          <div class="input-group col-md-3{{  (\App\Helpers\Helper::checkIfRequired($item, 'start_date')) ? ' required' : '' }}">
+          <div class="input-group col-md-3{{  (Helper::checkIfRequired($item, 'start_date')) ? ' required' : '' }}">
             <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
               <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="start_date" id="start_date" value="{{ old('start_date', $item->start_date) }}">
               <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
@@ -75,7 +75,7 @@
         <div class="form-group {{ $errors->has('completion_date') ? ' has-error' : '' }}">
           <label for="start_date" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.completion_date') }}</label>
 
-          <div class="input-group col-md-3{{  (\App\Helpers\Helper::checkIfRequired($item, 'completion_date')) ? ' required' : '' }}">
+          <div class="input-group col-md-3{{  (Helper::checkIfRequired($item, 'completion_date')) ? ' required' : '' }}">
             <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
               <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="completion_date" id="completion_date" value="{{ old('completion_date', $item->completion_date) }}">
               <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
@@ -107,7 +107,7 @@
                   {{ $snipeSettings->default_currency }}
                 @endif
               </span>
-              <input class="col-md-2 form-control" type="text" name="cost" id="cost" value="{{ old('cost', \App\Helpers\Helper::formatCurrencyOutput($item->cost)) }}" />
+              <input class="col-md-2 form-control" type="text" name="cost" id="cost" value="{{ old('cost', Helper::formatCurrencyOutput($item->cost)) }}" />
               {!! $errors->first('cost', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>

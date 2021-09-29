@@ -85,7 +85,7 @@
                 @if ($consumable->purchase_date)
                   <div class="col-md-12" style="padding-bottom: 15px;">
                     <strong>{{ trans('general.purchase_date') }}: </strong>
-                    {{ \App\Helpers\Helper::getFormattedDateObject($consumable->purchase_date, 'date', false) }}
+                    {{ Helper::getFormattedDateObject($consumable->purchase_date, 'date', false) }}
                   </div>
                 @endif
 
@@ -93,7 +93,7 @@
                   <div class="col-md-12" style="padding-bottom: 15px;">
                     <strong>{{ trans('general.purchase_cost') }}:</strong>
                     {{ $snipeSettings->default_currency }}
-                    {{ \App\Helpers\Helper::formatCurrencyOutput($consumable->purchase_cost) }}
+                    {{ Helper::formatCurrencyOutput($consumable->purchase_cost) }}
                   </div>
                 @endif
 
