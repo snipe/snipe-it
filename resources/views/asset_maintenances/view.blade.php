@@ -81,7 +81,7 @@ use Carbon\Carbon;
       <div class="row">
         <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
           <strong>{{ trans('admin/asset_maintenances/form.cost') }}: </strong>
-          {{ sprintf( trans( 'general.currency' ) . '%01.2f', $assetMaintenance->cost) }}
+          {{ trans( 'general.currency' ) . Helper::formatCurrencyOutput($assetMaintenance->cost) }}
         </div>
         <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
           <strong>{{ trans('admin/asset_maintenances/form.is_warranty') }}: </strong>

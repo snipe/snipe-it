@@ -75,7 +75,7 @@ class ConsumablesController extends Controller
         $consumable->model_number           = $request->input('model_number');
         $consumable->item_no                = $request->input('item_no');
         $consumable->purchase_date          = $request->input('purchase_date');
-        $consumable->purchase_cost          = Helper::ParseFloat($request->input('purchase_cost'));
+        $consumable->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost'));
         $consumable->qty                    = $request->input('qty');
         $consumable->user_id                = Auth::id();
 
@@ -141,7 +141,7 @@ class ConsumablesController extends Controller
         $consumable->model_number           = $request->input('model_number');
         $consumable->item_no                = $request->input('item_no');
         $consumable->purchase_date          = $request->input('purchase_date');
-        $consumable->purchase_cost          = Helper::ParseFloat($request->input('purchase_cost'));
+        $consumable->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost'));
         $consumable->qty                    = Helper::ParseFloat($request->input('qty'));
 
         $consumable = $request->handleImages($consumable);
