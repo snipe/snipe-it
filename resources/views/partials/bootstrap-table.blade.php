@@ -601,8 +601,8 @@
         }
         if ("{{$snipeSettings->digit_separator}}" == "1.234,56") {
             // yank periods, change commas to periods
-            periodless = number.toString().replace("\.","");
-            decimalfixed = periodless.replace(",",".");
+            periodless = number.toString().replace(/\./g,"");
+            decimalfixed = periodless.replace(/,/g,".");
         } else {
             // yank commas, that's it.
             decimalfixed = number.toString().replace(",","");
