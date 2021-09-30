@@ -144,6 +144,7 @@ class AssetsTransformer
                     $array['components'][] = [
                         [
                             'id' => $component->id,
+                            'pivot_id' => $component->pivot->id,
                             'name' => $component->name,
                             'qty' => $component->pivot->assigned_qty,
                             'price_cost' => $component->purchase_cost,
