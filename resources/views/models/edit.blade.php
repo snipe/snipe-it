@@ -81,7 +81,9 @@
 @include ('partials.forms.edit.image-upload')
 
 @stop
-
+@push('js')
+console.log("hi there")
+@endpush
 {{-- @section('moar_scripts')
 <script nonce="{{ csrf_token() }}">
     new Vue({
