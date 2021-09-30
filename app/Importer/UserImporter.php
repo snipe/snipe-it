@@ -121,6 +121,11 @@ class UserImporter extends ItemImporter
      */
     public function createOrFetchDepartment($department_name)
     {
+        if (is_null($department_name) || $department_name == ''){
+            return null;
+        }
+
+
         $department = Department::where(['name' => $department_name])->first();
         if ($department) {
             $this->log('A matching department ' . $department_name . ' already exists');
