@@ -40,6 +40,7 @@ done
 chown -R docker:root /var/lib/snipeit/data/*
 chown -R docker:root /var/lib/snipeit/dumps
 chown -R docker:root /var/lib/snipeit/keys
+chown -R docker:root /var/www/html/storage/framework/cache
 
 # Fix php settings
 if [ -v "PHP_UPLOAD_LIMIT" ]
