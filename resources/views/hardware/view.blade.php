@@ -927,7 +927,8 @@
                                                         <a href="{{ route('components.show', $component->id) }}">{{ $component->name }}</a>
                                                     </td>
                                                     <td>{{ $component->pivot->assigned_qty }}</td>
-                                                    <td>{{ $component->purchase_cost }} each</td>
+                                                    <td>{{ Helper::formatCurrencyOutput($component->purchase_cost) }} each</td>
+
                                                     <?php $totalCost = $totalCost + ($component->purchase_cost *$component->pivot->assigned_qty) ?>
                                                 </tr>
                                             @endif
