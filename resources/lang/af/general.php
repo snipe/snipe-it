@@ -176,6 +176,7 @@
     'remove_company'        => 'Verwyder Maatskappyvereniging',
     'reports'				=> 'Berigte',
     'restored'				=> 'restored',
+    'restore'				=> 'Restore',
     'requested'				=> 'versoek',
     'request_canceled'      => 'Versoek gekanselleer',
     'save'  				=> 'Save',

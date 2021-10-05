@@ -176,6 +176,7 @@
     'remove_company'        => 'Κατάργηση σύνδεσης εταιρείας',
     'reports'				=> 'Αναφορές',
     'restored'				=> 'restored',
+    'restore'				=> 'Restore',
     'requested'				=> 'Ζητήθηκαν',
     'request_canceled'      => 'Το αίτημα ακυρώθηκε',
     'save'  				=> 'Αποθήκευση',

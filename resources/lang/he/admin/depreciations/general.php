@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'שם פחת',
     'number_of_months'  					=> 'מספר החודשים',
     'update'  					            => 'עדכון פחת',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

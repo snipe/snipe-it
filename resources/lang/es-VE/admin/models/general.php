@@ -3,7 +3,7 @@
 return array(
     'about_models_title'     => 'Acerca de los Modelos de Activos',
     'about_models_text'           => 'Los Modelos de Activos son un grupo de activos idénticos. "MBP 2013", "iPhone 6S", etc.',
-    'deleted'  					        => 'Este modelo ha sido borrado. <a href="/hardware/models/:model_id/restore">Click aquí para restaurarlo</a>.',
+    'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'Eliminación Masiva de Modelos de Activos',
     'bulk_delete_help'               => 'Usa las casillas abajo para confirmar la eliminación de los modelos de activos seleccionados. Los modelos de activo que tienen distintos activos asociados con ellos no pueden ser borrados hasta que los activos sean asociados a un modelo diferente.',
     'bulk_delete_warn'          => 'Estás a punto de borrar :model_count modelos de activo.',

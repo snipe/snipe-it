@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Nusidėvėjimo pavadinimas',
     'number_of_months'  					=> 'Mėnesių skaičius',
     'update'  					            => 'Atnaujinti nusidėvėjimą',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

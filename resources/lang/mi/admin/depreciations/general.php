@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Te Ingoa Taweke',
     'number_of_months'  					=> 'Tau o Marama',
     'update'  					            => 'Whakahouhia te whakahekenga',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

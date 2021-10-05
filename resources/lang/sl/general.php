@@ -176,6 +176,7 @@
     'remove_company'        => 'Odstrani povezavo do podjetja',
     'reports'				=> 'Poročila',
     'restored'				=> 'obnovljena',
+    'restore'				=> 'Restore',
     'requested'				=> 'Zahtevano',
     'request_canceled'      => 'Zahteva je bila preklicana',
     'save'  				=> 'Shrani',

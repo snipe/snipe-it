@@ -176,6 +176,7 @@
     'remove_company'        => 'Eemalda ettevõtteühing',
     'reports'				=> 'Aruanded',
     'restored'				=> 'taastatud',
+    'restore'				=> 'Restore',
     'requested'				=> 'Taotletud',
     'request_canceled'      => 'Taotlus tühistati',
     'save'  				=> 'Salvesta',

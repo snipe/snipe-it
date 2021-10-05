@@ -176,6 +176,7 @@
     'remove_company'        => 'Tangohia te Kamupene Kamupene',
     'reports'				=> 'Ngā pūrongo',
     'restored'				=> 'restored',
+    'restore'				=> 'Restore',
     'requested'				=> 'I tonohia',
     'request_canceled'      => 'Tono Whakamutua',
     'save'  				=> 'Tiaki',

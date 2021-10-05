@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Heiti fyrningarflokks',
     'number_of_months'  					=> 'Fjöldi mánaða',
     'update'  					            => 'Uppfæra fyrningarflokk',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

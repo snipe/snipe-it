@@ -3,7 +3,7 @@
 return array(
     'about_models_title'     => 'சொத்து மாடல்களைப் பற்றி',
     'about_models_text'           => 'சொத்து மாதிரிகள் ஒரே மாதிரியான சொத்துக்களை குழுவாக மாற்றுகின்றன. "MBP 2013", "ஐபோன் 6s", முதலியன',
-    'deleted'  					        => 'இந்த மாதிரி நீக்கப்பட்டது. <a href="/hardware/models/:model_id/restore"> அதை மீட்டமைக்க இங்கு கிளிக் செய்க. </a>.',
+    'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'Bulk Delete Asset Models',
     'bulk_delete_help'               => 'Use the checkboxes below to confirm the deletion of the selected asset models. Asset models that have assets associated with them cannot be deleted until the assets are associated with a different model.',
     'bulk_delete_warn'          => 'You are about to delete :model_count asset models.',

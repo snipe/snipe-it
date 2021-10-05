@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Элэгдэл Нэр',
     'number_of_months'  					=> 'Сарын тоо',
     'update'  					            => 'Элэгдэл шинэчлэх',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

@@ -3,7 +3,7 @@
 return array(
     'about_models_title'     => 'O Modelach aktywów',
     'about_models_text'           => 'Modele aktywów są sposobem grupowania identycznych aktywów. "MBP 2013", "IPhone 6s", itp.',
-    'deleted'  					        => 'Model został usunięty. <a href="/hardware/models/:model_id/restore">Kliknij aby przywrócić</a>.',
+    'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'Zbiorcze usuwanie modeli aktywów',
     'bulk_delete_help'               => 'Użyj poniższych pól wyboru, aby potwierdzić usunięcie wybranych modeli zasobów. Modele zasobów z którymi są powiązane zasoby, nie mogą zostać usunięte, dopóki zasoby nie zostaną powiązane z innym modelem.',
     'bulk_delete_warn'          => 'Zamierzasz usunąć :model_count modeli aktywów.',

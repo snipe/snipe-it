@@ -176,6 +176,7 @@
     'remove_company'        => 'Hapus Asosiasi Perusahaan',
     'reports'				=> 'Laporan',
     'restored'				=> 'kembalikan',
+    'restore'				=> 'Restore',
     'requested'				=> 'Diminta',
     'request_canceled'      => 'Permintaan Dibatalkan',
     'save'  				=> 'Simpan',

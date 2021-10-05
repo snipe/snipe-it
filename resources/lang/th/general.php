@@ -176,6 +176,7 @@
     'remove_company'        => 'นำออกสมาคม บริษัท',
     'reports'				=> 'รายงาน',
     'restored'				=> 'คืนค่า',
+    'restore'				=> 'Restore',
     'requested'				=> 'คำร้องขอ',
     'request_canceled'      => 'คำขอยกเลิกแล้ว',
     'save'  				=> 'บันทึก',

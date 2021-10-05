@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Jméno amortizace',
     'number_of_months'  					=> 'Počet měsíců',
     'update'  					            => 'Aktualizovat amortizaci',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

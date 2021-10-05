@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Nome Obsolescenza',
     'number_of_months'  					=> 'Numero di Mesi',
     'update'  					            => 'Aggiorna l\'ammortamento',
+    'depreciation_min'                      => 'Valore minimo di svalutazione'
 
 );

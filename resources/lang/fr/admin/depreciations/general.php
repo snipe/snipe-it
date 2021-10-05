@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Nom d\'Amortissement',
     'number_of_months'  					=> 'Mois',
     'update'  					            => 'Actualiser l\'amortissement',
+    'depreciation_min'                      => 'Valeur minimale après amortissement'
 
 );

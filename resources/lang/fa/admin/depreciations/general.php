@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'نام استهلاک',
     'number_of_months'  					=> 'تعداد ماه ها',
     'update'  					            => 'کمبود به روزرسانی',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

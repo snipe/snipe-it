@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Ang Pangalan ng Depresasyon',
     'number_of_months'  					=> 'Ang Bilang ng mga Buwan',
     'update'  					            => 'I-update ang Depresasyon',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

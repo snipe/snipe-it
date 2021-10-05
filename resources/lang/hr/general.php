@@ -176,6 +176,7 @@
     'remove_company'        => 'Ukloni Udruženje tvrtki',
     'reports'				=> 'Izvještaji',
     'restored'				=> 'obnovljeno',
+    'restore'				=> 'Restore',
     'requested'				=> 'Traženi',
     'request_canceled'      => 'Zahtjev je otkazan',
     'save'  				=> 'Uštedjeti',

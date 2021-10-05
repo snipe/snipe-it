@@ -176,6 +176,7 @@
     'remove_company'        => 'Ta bort företagsföreningen',
     'reports'				=> 'Rapporter',
     'restored'				=> 'återställd',
+    'restore'				=> 'Restore',
     'requested'				=> 'Begärda',
     'request_canceled'      => 'Förfrågan annulleras',
     'save'  				=> 'Spara',

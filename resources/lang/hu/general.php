@@ -176,6 +176,7 @@
     'remove_company'        => 'Vállati kapcsolat megszüntetése',
     'reports'				=> 'Jelentések',
     'restored'				=> 'visszaállítva',
+    'restore'				=> 'Restore',
     'requested'				=> 'Kérve',
     'request_canceled'      => 'A kérelem törölve',
     'save'  				=> 'Mentés',

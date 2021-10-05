@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Амортизация',
     'number_of_months'  					=> 'Брой месеци',
     'update'  					            => 'Обновяване на амортизация',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

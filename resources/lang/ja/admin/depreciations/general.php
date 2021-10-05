@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> '減価償却名',
     'number_of_months'  					=> '月数',
     'update'  					            => '減価償却の更新',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

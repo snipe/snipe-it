@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Nolietojuma nosaukums',
     'number_of_months'  					=> 'Mēnešu skaits',
     'update'  					            => 'Atjaunināt nolietojumu',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

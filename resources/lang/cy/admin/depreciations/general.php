@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Enw Dibrisiant',
     'number_of_months'  					=> 'Nifer o Fisoedd',
     'update'  					            => 'Diweddaru Dibrisiant',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

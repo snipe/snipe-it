@@ -176,6 +176,7 @@
     'remove_company'        => 'הסר התאחדות החברה',
     'reports'				=> 'דיווחים',
     'restored'				=> 'שוחזר',
+    'restore'				=> 'Restore',
     'requested'				=> 'מבוקש',
     'request_canceled'      => 'הבקשה בוטלה',
     'save'  				=> 'להציל',

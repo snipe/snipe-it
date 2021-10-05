@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> '折舊名稱',
     'number_of_months'  					=> '月數',
     'update'  					            => '更新折舊',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );
