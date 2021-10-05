@@ -114,9 +114,7 @@
                 <div class="callout callout-warning">
                   <i class="icon fa fa-warning"></i>
                   {{ trans('admin/users/message.user_deleted_warning') }}
-                  @can('update', $user)
-                      <a href="{{ route('restore/user', $user->id) }}">{{ trans('admin/users/general.restore_user') }}</a>
-                  @endcan
+                  
                 </div>
               </div>
             @endif
