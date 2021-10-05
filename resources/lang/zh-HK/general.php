@@ -176,6 +176,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Reports',
     'restored'				=> 'restored',
+    'restore'				=> 'Restore',
     'requested'				=> 'Requested',
     'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Save',

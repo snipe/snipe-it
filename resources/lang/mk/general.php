@@ -176,6 +176,7 @@
     'remove_company'        => 'Отстрани поврзување со компанија',
     'reports'				=> 'Извештаи',
     'restored'				=> 'вратено',
+    'restore'				=> 'Restore',
     'requested'				=> 'Побарано',
     'request_canceled'      => 'Барањето е откажано',
     'save'  				=> 'Зачувај',

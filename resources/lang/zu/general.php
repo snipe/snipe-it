@@ -176,6 +176,7 @@
     'remove_company'        => 'Susa Inkampani Yenkampani',
     'reports'				=> 'Imibiko',
     'restored'				=> 'restored',
+    'restore'				=> 'Restore',
     'requested'				=> 'Kuceliwe',
     'request_canceled'      => 'Isicelo sikhanseliwe',
     'save'  				=> 'Londoloza',

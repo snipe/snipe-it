@@ -176,6 +176,7 @@
     'remove_company'        => 'Tanggalin ang Assosasyon ng Kompanya',
     'reports'				=> 'Mga Ulat',
     'restored'				=> 'ibinalik sa dati',
+    'restore'				=> 'Restore',
     'requested'				=> 'Ang Nirekwest',
     'request_canceled'      => 'Ang mga Rekwest ay Nakansela',
     'save'  				=> 'I-save',

@@ -114,13 +114,11 @@
                 <div class="callout callout-warning">
                   <i class="icon fa fa-warning"></i>
                   {{ trans('admin/users/message.user_deleted_warning') }}
-                  @can('update', $user)
-                      <a href="{{ route('restore/user', $user->id) }}">{{ trans('admin/users/general.restore_user') }}</a>
-                  @endcan
+                  
                 </div>
               </div>
             @endif
-            <div class="col-md-2 text-center">
+            <div class="text-center col-md-2">
               @if ($user->avatar)
                 <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print" alt="{{ $user->present()->fullName() }}">
               @else
@@ -377,7 +375,12 @@
                     </div>
                   @else
                     <div class="col-md-12" style="padding-top: 5px;">
-                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
+                      @if ($user->deleted_at!='')
+                            <form method="POST" action="{{ route('restore/user', ['userId' => $user->id]) }}">
+                            @csrf 
+                            <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</button>
+                            </form>
+                        @endif
                     </div>
                   @endif
                 @endcan
@@ -573,7 +576,7 @@
 
             <div class="col-md-12 col-sm-12">
               <div class="table-responsive">
-                <table id="files-table" class="display table table-striped">
+                <table id="files-table" class="table display table-striped">
                   <thead>
                     <tr>
                       <th class="col-md-5">{{ trans('general.notes') }}</th>
@@ -651,7 +654,7 @@
 
         <div class="tab-pane" id="managed">
           <div class="table-responsive">
-            <table class="display table table-striped">
+            <table class="table display table-striped">
               <thead>
                 <tr>
                   <th class="col-md-8">{{ trans('general.name') }}</th>

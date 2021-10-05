@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Nombre de Depreciación',
     'number_of_months'  					=> 'Número de Meses',
     'update'  					            => 'Actualizar Depreciación',
+    'depreciation_min'                      => 'Valor mínimo después de la depreciación'
 
 );

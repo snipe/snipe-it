@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Abschreibungs Name',
     'number_of_months'  					=> 'Anzahl der Monate',
     'update'  					            => 'Abschreibung aktualisieren',
+    'depreciation_min'                      => 'Minimaler Wert nach Abschreibung'
 
 );

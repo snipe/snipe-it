@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Waardevermindering Naam',
     'number_of_months'  					=> 'Aantal maande',
     'update'  					            => 'Werk waardevermindering op',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Poiston nimi',
     'number_of_months'  					=> 'Kuukausien lukumäärä',
     'update'  					            => 'Päivitä poistot',
+    'depreciation_min'                      => 'Minimiarvo poistojen jälkeen'
 
 );

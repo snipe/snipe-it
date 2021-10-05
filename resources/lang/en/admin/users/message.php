@@ -16,7 +16,6 @@ return array(
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
 
-
     'success' => array(
         'create'    => 'User was successfully created.',
         'update'    => 'User was successfully updated.',

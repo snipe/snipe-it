@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'ชื่อค่าเสื่อมราคา',
     'number_of_months'  					=> 'จำนวนเดือน',
     'update'  					            => 'อัปเดตค่าเสื่อมราคา',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

@@ -176,6 +176,7 @@
     'remove_company'        => 'Rimuovi associazioni azienda',
     'reports'				=> 'Reports',
     'restored'				=> 'ripristinato',
+    'restore'				=> 'Restore',
     'requested'				=> 'Richiesto',
     'request_canceled'      => 'Richiesta annullata',
     'save'  				=> 'Salva',

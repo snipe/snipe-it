@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Име на амортизационен план',
     'number_of_months'  					=> 'Број на месеци',
     'update'  					            => 'Ажурирај амортизационен план',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

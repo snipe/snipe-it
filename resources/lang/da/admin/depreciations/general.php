@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Afskrivningnavn',
     'number_of_months'  					=> 'Antal måneder',
     'update'  					            => 'Opdater Afskrivninger',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

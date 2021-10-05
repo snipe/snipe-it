@@ -176,6 +176,7 @@
     'remove_company'        => 'Eliminați asocierea companiilor',
     'reports'				=> 'Rapoarte',
     'restored'				=> 'restored',
+    'restore'				=> 'Restore',
     'requested'				=> 'Cereri',
     'request_canceled'      => 'Cerere anulată',
     'save'  				=> 'Salveaza',

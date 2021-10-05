@@ -176,6 +176,7 @@
     'remove_company'        => 'Panaikinti kompanijos asociaciją',
     'reports'				=> 'Ataskaitos',
     'restored'				=> 'atkurta',
+    'restore'				=> 'Restore',
     'requested'				=> 'Užklausta',
     'request_canceled'      => 'Prašymas atšauktas',
     'save'  				=> 'Išsaugoti',

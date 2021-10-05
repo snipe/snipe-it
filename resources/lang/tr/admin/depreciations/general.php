@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Amortisman Adı',
     'number_of_months'  					=> 'Ay Sayısı',
     'update'  					            => 'Değer Kaybını Güncelle',
+    'depreciation_min'                      => 'Değişiklik sonrası minumum değer'
 
 );

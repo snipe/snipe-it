@@ -3,7 +3,7 @@
 return array(
     'about_models_title'     => 'حول موديلات الأصول',
     'about_models_text'           => 'موديلات الأصول هي طريقة لتجميع الأصول المتطابقة "MBP 2013", "IPhone 6s", الخ.',
-    'deleted'  					        => 'تم حذف هذا الموديل. <a href="/hardware/models/:model_id/restore"> انقر هنا لاستعادته </a>.',
+    'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'حذف موديلات الاصول بالجملة',
     'bulk_delete_help'               => 'استخدم مربعات الاختيار أدناه لتأكيد حذف موديلات الأصول المحددة. لا يمكن حذف موديلات الأصول التي تحتوي على أصول مرتبطة بها إلى أن يتم ربط الأصول بموديل مختلف.',
     'bulk_delete_warn'          => 'أنت على وشك حذف :model_count من موديلات الأصول.',

@@ -3,7 +3,7 @@
 return array(
     'about_models_title'     => 'O modelih sredstev',
     'about_models_text'           => 'Modeli sredstev so način za združevanje identičnih sredstev. "MBP 2013", "IPhone 6s" itd.',
-    'deleted'  					        => 'Ta model je bil izbrisan. <a href="/hardware/models/:model_id/restore">Kliknite tukaj, da ga obnovite</a>.',
+    'deleted'  					        => 'This model has been deleted.',
     'bulk_delete'               => 'Množično brisanje modelov sredstva',
     'bulk_delete_help'               => 'S potrditvenimi polji spodaj potrdite izbris izbranih modelov sredstev. Modelov sredstev, ki imajo z njimi povezana sredstva, ni mogoče izbrisati, dokler sredstva niso povezana z drugačnim modelom.',
     'bulk_delete_warn'          => 'Izbrisali boste :modelov_count modelov sredstev.',

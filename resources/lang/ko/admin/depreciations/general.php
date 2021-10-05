@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> '감가 상각 명',
     'number_of_months'  					=> '개월 수',
     'update'  					            => '감가 상각 갱신',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

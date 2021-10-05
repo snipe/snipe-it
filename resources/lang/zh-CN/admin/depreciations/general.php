@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> '折旧名称',
     'number_of_months'  					=> '月数',
     'update'  					            => '更新折旧',
+    'depreciation_min'                      => '最底折旧值'
 
 );

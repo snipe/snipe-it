@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Tên khấu hao',
     'number_of_months'  					=> 'Số lượng tháng',
     'update'  					            => 'Cập nhật khấu hao',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

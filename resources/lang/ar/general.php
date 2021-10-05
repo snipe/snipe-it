@@ -176,6 +176,7 @@
     'remove_company'        => 'إزالة جمعية الشركة',
     'reports'				=> 'التقارير',
     'restored'				=> 'المعاد',
+    'restore'				=> 'Restore',
     'requested'				=> 'طلب',
     'request_canceled'      => 'تم إلغاء الطلب',
     'save'  				=> 'حفظ',

@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Názov odpisovania',
     'number_of_months'  					=> 'Počet mesiacov',
     'update'  					            => 'Upraviť odpisovanie',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

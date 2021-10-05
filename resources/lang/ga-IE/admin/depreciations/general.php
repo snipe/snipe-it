@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Ainm Dímheas',
     'number_of_months'  					=> 'Líon na Míonna',
     'update'  					            => 'Dímheas Nuashonraigh',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 );

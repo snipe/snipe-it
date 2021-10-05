@@ -176,6 +176,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Звіти',
     'restored'				=> 'відновлено',
+    'restore'				=> 'Restore',
     'requested'				=> 'Запрошено користувачем',
     'request_canceled'      => 'Запит скасовано',
     'save'  				=> 'Зберегти',

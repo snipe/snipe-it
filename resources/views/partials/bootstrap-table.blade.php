@@ -80,7 +80,8 @@
                 $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
             }
 
-        });
+        });   
+
     });
 
 
@@ -95,24 +96,46 @@
     }
 
 
+    // These methods dynamically add/remove hidden input values in the bulk actions form
+    $('.snipe-table').on('check.bs.table .btSelectItem', function (row, $element) {
+        $('#bulkEdit').removeAttr('disabled');
+        $('#bulkEdit').prepend('<input id="checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
+    });
+
+    $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
+        $( "#checkbox_" + $element.id).remove();
+    });
+    
+
     // Handle whether or not the edit button should be disabled
-    $('.snipe-table').on('check.bs.table', function () {
-        $('#bulkEdit').removeAttr('disabled');
-    });
-
-    $('.snipe-table').on('check-all.bs.table', function () {
-        $('#bulkEdit').removeAttr('disabled');
-    });
-
     $('.snipe-table').on('uncheck.bs.table', function () {
         if ($('.snipe-table').bootstrapTable('getSelections').length == 0) {
             $('#bulkEdit').attr('disabled', 'disabled');
         }
     });
 
-    $('.snipe-table').on('uncheck-all.bs.table', function (e, row) {
+    $('.snipe-table').on('uncheck-all.bs.table', function (event, rowsAfter, rowsBefore) {
         $('#bulkEdit').attr('disabled', 'disabled');
+        //console.dir(rowsBefore);
+
+        for (var i in rowsBefore) {
+            $( "#checkbox_" + rowsBefore[i].id).remove();
+        }
+
     });
+
+    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
+        
+        $('#bulkEdit').removeAttr('disabled');
+        //console.dir(rowsAfter);
+        
+        for (var i in rowsAfter) {
+            // console.log(rowsAfter[i].id);
+            $('#bulkEdit').prepend('<input id="checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+        }
+    });
+
+    
 
     // This only works for model index pages because it uses the row's model ID
     function genericRowLinkFormatter(destination) {
@@ -209,7 +232,7 @@
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update Item"><i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">Update</span></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
@@ -218,13 +241,17 @@
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
-                    + '<i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span></a>&nbsp;';
+                    + '<i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span></a>&nbsp;';
             } else {
                 actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
             }
+            
 
             if ((row.available_actions) && (row.available_actions.restore === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Restore"><i class="fa fa-retweet"></i></a>&nbsp;';
+                actions += '<form style="display: inline;" method="POST" action="{{ url('/') }}/' + dest + '/' + row.id + '/restore"> ';
+                actions += '@csrf';
+                actions += '<button class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ trans('general.restore') }}">';
+                actions += '<i class="fa fa-retweet" aria-hidden="true"></i><span class="sr-only">{{ trans('general.restore') }}</span></button></form>&nbsp;';
             }
 
             actions +='</nobr>';

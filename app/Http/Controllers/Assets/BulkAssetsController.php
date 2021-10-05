@@ -32,7 +32,8 @@ class BulkAssetsController extends Controller
             return redirect()->back()->with('error', 'No assets selected');
         }
 
-        $asset_ids = array_keys($request->input('ids'));
+        
+        $asset_ids = array_values(array_unique($request->input('ids')));
 
         if ($request->filled('bulk_actions')) {
             switch($request->input('bulk_actions')) {
@@ -50,7 +51,7 @@ class BulkAssetsController extends Controller
                     return view('hardware/bulk-delete')->with('assets', $assets);
                 case 'edit':
                     return view('hardware/bulk')
-                        ->with('assets', request('ids'))
+                        ->with('assets', $asset_ids)
                         ->with('statuslabel_list', Helper::statusLabelList());
             }
         }
@@ -90,6 +91,7 @@ class BulkAssetsController extends Controller
             || ($request->filled('model_id'))
         ) {
             foreach ($assets as $assetId) {
+
                 $this->update_array = [];
 
                 $this->conditionallyAddItem('purchase_date')

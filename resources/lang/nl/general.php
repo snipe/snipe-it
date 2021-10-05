@@ -176,6 +176,7 @@
     'remove_company'        => 'Verwijder bedrijfsverbinding',
     'reports'				=> 'Rapporten',
     'restored'				=> 'hersteld',
+    'restore'				=> 'Restore',
     'requested'				=> 'Aangevraagd',
     'request_canceled'      => 'Aanvraag geannuleerd',
     'save'  				=> 'Opslaan',
