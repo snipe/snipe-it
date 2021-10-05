@@ -69,7 +69,7 @@
                         data-sort-order="asc"
                         id="asssetModelsTable"
                         class="table table-striped snipe-table"
-                        data-url="{{ route('api.models.index') }}"
+                        data-url="{{ route('api.models.index', ['status' => request('status')]) }}"
                         data-export-options='{
               "fileName": "export-models-{{ date('Y-m-d') }}",
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]

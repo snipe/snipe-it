@@ -67,7 +67,7 @@ class AssetModelsController extends Controller
 
 
 
-        if ($request->filled('status')) {
+        if ($request->input('status')=='deleted') {
             $assetmodels->onlyTrashed();
         }
 
