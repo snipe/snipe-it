@@ -60,13 +60,18 @@
        
           <div class="row">
             <div class="col-md-12">
+              
               @if (Request::get('status')!='Deleted')
-                  {{ Form::open([
-                    'method' => 'POST',
-                    'route' => ['hardware/bulkedit'],
-                    'class' => 'form-inline',
-                    'id' => 'bulkForm']) }}
+              
+                 
+                    
                     <div id="toolbar">
+                      {{ Form::open([
+                        'method' => 'POST',
+                        'route' => ['hardware/bulkedit'],
+                        'class' => 'form-inline',
+                        'id' => 'bulkForm']) }}
+                        
                      
                       <label for="bulk_actions"><span class="sr-only">Bulk Actions</span></label>
                       <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions">
@@ -76,10 +81,9 @@
                       </select>
                       
                       <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
-                      
+                      {{ Form::close() }}   
                     </div>
-                    {{ Form::close() }}
-              
+                   
               @endif
 
               <table

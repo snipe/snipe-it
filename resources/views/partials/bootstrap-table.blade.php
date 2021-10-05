@@ -80,18 +80,7 @@
                 $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
             }
 
-        });
-
-        $('.snipe-table').on('check.bs.table .btSelectItem', function (row, $element) {
-            $('#bulkEdit').before('<input id="checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
-        });
-
-
-        $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
-            $( "#checkbox_" + $element.id).remove();
-        });
-
-       
+        });   
 
     });
 
@@ -107,24 +96,46 @@
     }
 
 
+    // These methods dynamically add/remove hidden input values in the bulk actions form
+    $('.snipe-table').on('check.bs.table .btSelectItem', function (row, $element) {
+        $('#bulkEdit').removeAttr('disabled');
+        $('#bulkEdit').prepend('<input id="checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
+    });
+
+    $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
+        $( "#checkbox_" + $element.id).remove();
+    });
+    
+
     // Handle whether or not the edit button should be disabled
-    $('.snipe-table').on('check.bs.table', function () {
-        $('#bulkEdit').removeAttr('disabled');
-    });
-
-    $('.snipe-table').on('check-all.bs.table', function () {
-        $('#bulkEdit').removeAttr('disabled');
-    });
-
     $('.snipe-table').on('uncheck.bs.table', function () {
         if ($('.snipe-table').bootstrapTable('getSelections').length == 0) {
             $('#bulkEdit').attr('disabled', 'disabled');
         }
     });
 
-    $('.snipe-table').on('uncheck-all.bs.table', function (e, row) {
+    $('.snipe-table').on('uncheck-all.bs.table', function (event, rowsAfter, rowsBefore) {
         $('#bulkEdit').attr('disabled', 'disabled');
+        //console.dir(rowsBefore);
+
+        for (var i in rowsBefore) {
+            $( "#checkbox_" + rowsBefore[i].id).remove();
+        }
+
     });
+
+    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
+        
+        $('#bulkEdit').removeAttr('disabled');
+        //console.dir(rowsAfter);
+        
+        for (var i in rowsAfter) {
+            // console.log(rowsAfter[i].id);
+            $('#bulkEdit').prepend('<input id="checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+        }
+    });
+
+    
 
     // This only works for model index pages because it uses the row's model ID
     function genericRowLinkFormatter(destination) {
