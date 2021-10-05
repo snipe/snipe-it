@@ -1,5 +1,5 @@
-FROM ubuntu:focal
-LABEL maintainer Brady Wetherington <bwetherington@grokability.com>
+FROM ubuntu:20.04
+LABEL maintainer="Brady Wetherington <bwetherington@grokability.com>"
 
 # No need to add `apt-get clean` here, reference:
 # - https://github.com/snipe/snipe-it/pull/9201
