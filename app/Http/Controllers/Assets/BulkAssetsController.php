@@ -91,7 +91,6 @@ class BulkAssetsController extends Controller
             || ($request->filled('model_id'))
         ) {
             foreach ($assets as $assetId) {
-                \Log::error($assetId);
 
                 $this->update_array = [];
 
