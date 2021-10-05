@@ -34,13 +34,13 @@ Route::group(['prefix' => 'fields', 'middleware' => ['auth']], function () {
         ]
     )->name('fields.disassociate');
 
-    Route::get(
+    Route::post(
         'fieldsets/{id}/associate',
         [
             CustomFieldsetsController::class, 
             'associate'
         ]
-    )->name('fields.associate');
+    )->name('fieldsets.associate');
 
     Route::resource('fieldsets', CustomFieldsetsController::class, [
         'parameters' => ['fieldset' => 'field_id', 'field' => 'field_id'],
