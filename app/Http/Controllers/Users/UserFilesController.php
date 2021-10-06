@@ -47,8 +47,8 @@ class UserFilesController extends Controller
 
                     // Check for SVG and sanitize it
                     if ($extension == 'svg') {
-                        \Log::error('This is an SVG');
-                        \Log::error($file_name);
+                        \Log::debug('This is an SVG');
+                        \Log::debug($file_name);
 
                             $sanitizer = new Sanitizer();
                             $dirtySVG = file_get_contents($file->getRealPath());
@@ -57,7 +57,7 @@ class UserFilesController extends Controller
                             try {
                                 Storage::put('private_uploads/users/'.$file_name, $cleanSVG);
                             } catch (\Exception $e) {
-                                \Log::error('Upload no workie :( ');
+                                \Log::debug('Upload no workie :( ');
                                 \Log::debug($e);
                             }
 

@@ -45,8 +45,8 @@ class LicenseFilesController extends Controller
 
                         // Check for SVG and sanitize it
                         if ($extension == 'svg') {
-                            \Log::error('This is an SVG');
-                            \Log::error($file_name);
+                            \Log::debug('This is an SVG');
+                            \Log::debug($file_name);
 
                                 $sanitizer = new Sanitizer();
                                 $dirtySVG = file_get_contents($file->getRealPath());
@@ -55,7 +55,7 @@ class LicenseFilesController extends Controller
                                 try {
                                     Storage::put('private_uploads/licenses/'.$file_name, $cleanSVG);
                                 } catch (\Exception $e) {
-                                    \Log::error('Upload no workie :( ');
+                                    \Log::debug('Upload no workie :( ');
                                     \Log::debug($e);
                                 }
 
@@ -67,8 +67,7 @@ class LicenseFilesController extends Controller
                     $license->logUpload($file_name, e($request->input('notes')));
                 }
 
-                
-                    \Log::error('yay!');
+
                     return redirect()->route('licenses.show', $license->id)->with('success', trans('admin/licenses/message.upload.success'));
                 
             }
