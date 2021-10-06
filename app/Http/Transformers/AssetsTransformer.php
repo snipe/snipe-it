@@ -142,7 +142,7 @@ class AssetsTransformer
     
                 foreach ($asset->components as $component) {
                     $array['components'][] = [
-                        [
+                        
                             'id' => $component->id,
                             'pivot_id' => $component->pivot->id,
                             'name' => $component->name,
@@ -150,7 +150,7 @@ class AssetsTransformer
                             'price_cost' => $component->purchase_cost,
                             'purchase_total' => $component->purchase_cost * $component->pivot->assigned_qty,
                             'checkout_date' => Helper::getFormattedDateObject($component->pivot->created_at, 'datetime') ,
-                        ]
+                        
                     ];
                 }
             }
