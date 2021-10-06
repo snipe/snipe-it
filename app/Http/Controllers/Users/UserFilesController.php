@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use enshrined\svgSanitize\Sanitizer;
+use Illuminate\Support\Facades\Storage;
 
 class UserFilesController extends Controller
 {
@@ -38,12 +40,31 @@ class UserFilesController extends Controller
                 return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
             }
             foreach($files as $file) {
+                
                 $extension = $file->getClientOriginalExtension();
-                $filename = 'user-' . $user->id . '-' . str_random(8);
-                $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
-                if (!$file->move($destinationPath, $filename)) {
-                    return redirect()->back()->with('error', trans('admin/users/message.upload.invalidfiles'));
-                }
+                $file_name = 'user-'.$user->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+
+
+                    // Check for SVG and sanitize it
+                    if ($extension == 'svg') {
+                        \Log::debug('This is an SVG');
+                        \Log::debug($file_name);
+
+                            $sanitizer = new Sanitizer();
+                            $dirtySVG = file_get_contents($file->getRealPath());
+                            $cleanSVG = $sanitizer->sanitize($dirtySVG);
+
+                            try {
+                                Storage::put('private_uploads/users/'.$file_name, $cleanSVG);
+                            } catch (\Exception $e) {
+                                \Log::debug('Upload no workie :( ');
+                                \Log::debug($e);
+                            }
+
+                    } else {
+                        Storage::put('private_uploads/users/'.$file_name, file_get_contents($file));
+                    }
+
                 //Log the uploaded file to the log
                 $logAction = new Actionlog();
                 $logAction->item_id = $user->id;
@@ -52,7 +73,7 @@ class UserFilesController extends Controller
                 $logAction->note = $request->input('notes');
                 $logAction->target_id = null;
                 $logAction->created_at = date("Y-m-d H:i:s");
-                $logAction->filename = $filename;
+                $logAction->filename = $file_name;
                 $logAction->action_type = 'uploaded';
 
                 if (!$logAction->save()) {

@@ -514,7 +514,7 @@ $(document).ready(function () {
 
         for (var i = 0; i < this.files.length; i++) {
             total_size += this.files[i].size;
-            $(id + '-info').append('<span class="label label-default">' + this.files[i].name + ' (' + formatBytes(this.files[i].size) + ')</span> ');
+            $(id + '-info').append('<span class="label label-default">' + htmlEntities(this.files[i].name) + ' (' + formatBytes(this.files[i].size) + ')</span> ');
         }
 
         console.log('Max size is: ' + max_size);
@@ -535,6 +535,9 @@ $(document).ready(function () {
 
 });
 
+function htmlEntities(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 
 /**
  * Toggle disabled
