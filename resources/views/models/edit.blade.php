@@ -66,7 +66,7 @@
             {{ Form::checkbox('image_delete', '1', old('image_delete'), array('class' => 'minimal', 'aria-label'=>'required')) }}
         </label>
         <br>
-        <img src="{{ url('/') }}/uploads/models/{{ $item->image }}" alt="Image for {{ $item->name }}" class="img-responsive">
+        <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($item->image )) }}" alt="Image for {{ $item->name }}" class="img-responsive">
         {!! $errors->first('image_delete', '<span class="alert-msg" aria-hidden="true"><br>:message</span>') !!}
     </div>
 </div>
