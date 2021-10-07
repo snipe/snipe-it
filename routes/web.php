@@ -332,7 +332,7 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('reports/unaccepted_assets_delete');
     Route::post(
         'reports/unaccepted_assets/{deleted?}',
-        [ReportsController::class, 'exportAssetAcceptanceReport']
+        [ReportsController::class, 'postAssetAcceptanceReport']
     )->name('reports/export/unaccepted_assets');
 });
 
