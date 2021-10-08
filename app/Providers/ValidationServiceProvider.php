@@ -54,6 +54,20 @@ class ValidationServiceProvider extends ServiceProvider
             }
         });
 
+        // Unique if undeleted for two columns
+            // Same as unique_undeleted but taking the combination of two columns as unique constrain.
+            Validator::extend('two_column_unique_undeleted', function ($attribute, $value, $parameters, $validator) {
+                if (count($parameters)) {
+                    $count = DB::table($parameters[0])
+                             ->select('id')->where($attribute, '=', $value)
+                             ->whereNull('deleted_at')
+                             ->where('id', '!=', $parameters[1])
+                             ->where($parameters[2], $parameters[3])->count();
+
+                    return $count < 1;
+                }
+            });
+
         // Prevent circular references
         //
         // Example usage in Location model where parent_id references another Location:
