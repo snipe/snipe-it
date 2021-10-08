@@ -29,7 +29,7 @@ class ForgotPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $this->middleware('throttle:1,1', ['except' => 'showLinkRequestForm']);
+        $this->middleware('throttle:5,1', ['except' => 'showLinkRequestForm']);
     }
 
     /**
