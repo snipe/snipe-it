@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Pengguna ini boleh log masuk',
     'activated_disabled_help_text' => 'Anda tidak boleh kemaskini status pengaktifan akaun anda sendiri.',
     'assets_user'       => 'Serahkan harta kepada :nama',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Kemaskini Pengguna',
     'filetype_info'     => 'Filetype yang dibenarkan adalah png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, dan rar.',
     'history_user'      => 'Sejarah untuk :nama',
-	'info'				=> 'Maklumat',
+    'info'				=> 'Maklumat',
     'restore_user'		=> 'Klik di sini untuk memulihkannya.',
     'last_login'        => 'Log masuk terakhir',
     'ldap_config_text'  => 'Tetapan konfigurasi LDAP boleh didapati Admin> Tetapan. Lokasi (pilihan) yang dipilih akan ditetapkan untuk semua pengguna yang diimport.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Tetapan admin semasa anda membenarkan penguatkuasaan selektif pengesahan dua faktor.',
     'two_factor_enrolled' => '2FA Device Enrolled',
     'two_factor_active'   => '2FA Aktif',
-    );
+    ];

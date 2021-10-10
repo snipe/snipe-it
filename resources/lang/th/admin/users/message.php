@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'คุณยอมรับสินทรัพย์นี้เรียบร้อยแล้ว',
     'declined'                  => 'คุณปฏิเสธสินทรัพย์นี้เรียบร้อยแล้ว',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'การทำงานร่วมกับ LDAP ไม่ได้ถูกตั้งค่าไว้สำหรับการติดตั้งนี้',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'สร้างผู้ใช้งานเสร็จสมบูรณ์แล้ว',
         'update'    => 'แก้ไขผู้ใช้งานเสร็จสมบูรณ์แล้ว',
         'update_bulk'    => 'อัปเดตผู้ใช้สำเร็จแล้ว!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'ยกเลิกระงับผู้ใช้งานเสร็จสมบูรณ์แล้ว',
         'restored'  => 'กู้คืนผู้ใช้งานเสร็จสมบูรณ์แล้ว',
         'import'    => 'นำเข้าผู้ใช้งานเสร็จสมบูรณ์แล้ว',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'มีปัญหาระหว่างการสร้างผู้ใช้งาน กรุณาลองใหม่อีกครั้ง',
         'update' => 'มีปัญหาระหว่างปรับปรุงข้อมูลผู้ใช้ กรุณาลองใหม่อีกครั้ง',
         'delete' => 'มีปัญหาระหว่างลบผู้ใช้งาน กรุณาลองใหม่อีกครั้ง',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'ไม่สามารถค้นหา LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server:',
         'ldap_could_not_get_entries' => 'ไม่สามารถดึงข้อมูลจาก LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server:',
         'password_ldap' => 'รหัสผ่านสำหรับบัญชีนี้ได้รับการจัดการโดย LDAP / Active Directory โปรดติดต่อฝ่ายไอทีของคุณเพื่อเปลี่ยนรหัสผ่านของคุณ',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'ไฟล์ยังไม่ถูกลบ กรุณาลองใหม่อีกครั้ง',
         'success' => 'ไฟล์ถูกลบเรียบร้อยแล้ว',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'ไฟล์ยังไม่ถูกอัพโหลด กรุณาลองอีกครั้ง',
         'success' => 'ไฟล์ถูกอัพโหลดเรียบร้อยแล้ว',
         'nofiles' => 'คุณยังไม่ได้เลือกไฟล์สำหรับอัพโหลด',
         'invalidfiles' => 'ไฟล์ข้อมูลของคุณมีขนาดใหญ่เกินไป หรือประเภทของไฟล์ไม่ได้รับการอนุญาต ประเภทของไฟล์ที่ได้รับอนุญาตแล้วมีดังนี้ png, gif, jpg, doc, docx, pdf, and txt.',
-    ),
+    ],
 
-);
+];

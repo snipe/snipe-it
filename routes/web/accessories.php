@@ -1,31 +1,35 @@
 <?php
 
+use App\Http\Controllers\Accessories;
+use Illuminate\Support\Facades\Route;
+
 /*
 * Accessories
  */
-Route::group([ 'prefix' => 'accessories', 'middleware' => ['auth']], function () {
-
+Route::group(['prefix' => 'accessories', 'middleware' => ['auth']], function () {
     Route::get(
         '{accessoryID}/checkout',
-        [ 'as' => 'checkout/accessory', 'uses' => 'Accessories\AccessoryCheckoutController@create' ]
-    );
+        [Accessories\AccessoryCheckoutController::class, 'create']
+    )->name('checkout/accessory');
+
     Route::post(
         '{accessoryID}/checkout',
-        [ 'as' => 'checkout/accessory', 'uses' => 'Accessories\AccessoryCheckoutController@store' ]
-    );
+        [Accessories\AccessoryCheckoutController::class, 'store']
+    )->name('checkout/accessory');
 
     Route::get(
         '{accessoryID}/checkin/{backto?}',
-        [ 'as' => 'checkin/accessory', 'uses' => 'Accessories\AccessoryCheckinController@create' ]
-    );
+        [Accessories\AccessoryCheckinController::class, 'create']
+    )->name('checkin/accessory');
+
     Route::post(
         '{accessoryID}/checkin/{backto?}',
-        [ 'as' => 'checkin/accessory', 'uses' => 'Accessories\AccessoryCheckinController@store' ]
-    );
+        [Accessories\AccessoryCheckinController::class, 'store']
+    )->name('checkin/accessory');
 
 });
 
-Route::resource('accessories', 'Accessories\AccessoriesController', [
+Route::resource('accessories', Accessories\AccessoriesController::class, [
     'middleware' => ['auth'],
-    'parameters' => ['accessory' => 'accessory_id']
+    'parameters' => ['accessory' => 'accessory_id'],
 ]);

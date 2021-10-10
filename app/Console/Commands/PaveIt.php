@@ -2,23 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Accessory;
 use App\Models\Asset;
-use App\Models\AssetModel;
-use App\Models\Category;
-use App\Models\Company;
-use App\Models\Component;
-use App\Models\Consumable;
-use App\Models\Department;
-use App\Models\Depreciation;
-use App\Models\Group;
-use App\Models\Import;
-use App\Models\License;
-use App\Models\LicenseSeat;
-use App\Models\Location;
-use App\Models\Manufacturer;
-use App\Models\Statuslabel;
-use App\Models\Supplier;
+use App\Models\CustomField;
+use Schema;
 use DB;
 use Illuminate\Console\Command;
 
@@ -29,15 +15,14 @@ class PaveIt extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:pave
-              {--soft : Perform a "Soft" Delete, leaving all migrations, table structure, and the first user in place.}';
+    protected $signature = 'snipeit:pave  {--force : Skip the interactive yes/no prompt for confirmation}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Pave the database to start over. This should ALMOST NEVER BE USED. (It is primarily a quick tool for developers.)';
+    protected $description = 'Clear the database tables, leaving all migrations, table structure, and the first user in place. (It is primarily a quick tool for developers.) If you want to destroy all tables as well, use php artisan db:wipe.';
 
     /**
      * Create a new command instance.
@@ -56,106 +41,51 @@ class PaveIt extends Command
      */
     public function handle()
     {
-        if ($this->confirm("\n****************************************************\nTHIS WILL DELETE ALL OF THE DATA IN YOUR DATABASE. \nThere is NO undo. This WILL destroy ALL of your data. \n****************************************************\n\nDo you wish to continue? No backsies! [y|N]")) {
-            if ($this->option('soft')) {
-                Accessory::getQuery()->delete();
-                Asset::getQuery()->delete();
-                Category::getQuery()->delete();
-                Company::getQuery()->delete();
-                Component::getQuery()->delete();
-                Consumable::getQuery()->delete();
-                Department::getQuery()->delete();
-                Depreciation::getQuery()->delete();
-                License::getQuery()->delete();
-                LicenseSeat::getQuery()->delete();
-                Location::getQuery()->delete();
-                Manufacturer::getQuery()->delete();
-                AssetModel::getQuery()->delete();
-                Statuslabel::getQuery()->delete();
-                Supplier::getQuery()->delete();
-                Group::getQuery()->delete();
-                Import::getQuery()->delete();
 
-                DB::statement('delete from accessories_users');
-                DB::statement('delete from asset_logs');
-                DB::statement('delete from asset_maintenances');
-                DB::statement('delete from login_attempts');
-                DB::statement('delete from asset_uploads');
-                DB::statement('delete from action_logs');
-                DB::statement('delete from checkout_requests');
-                DB::statement('delete from checkout_acceptances');
-                DB::statement('delete from consumables_users');
-                DB::statement('delete from custom_field_custom_fieldset');
-                DB::statement('delete from custom_fields');
-                DB::statement('delete from custom_fieldsets');
-                DB::statement('delete from components_assets');
-                DB::statement('delete from kits');
-                DB::statement('delete from kits_accessories');
-                DB::statement('delete from kits_consumables');
-                DB::statement('delete from kits_licenses');
-                DB::statement('delete from kits_models');
-                DB::statement('delete from login_attempts');
-                DB::statement('delete from models_custom_fields');
-                DB::statement('delete from permission_groups');
-                DB::statement('delete from password_resets');
-                DB::statement('delete from requested_assets');
-                DB::statement('delete from requests');
-                DB::statement('delete from throttle');
-                DB::statement('delete from users_groups');
-                DB::statement('delete from users WHERE id!=1');
-            } else {
-                \DB::statement('drop table IF EXISTS accessories_users');
-                \DB::statement('drop table IF EXISTS accessories');
-                \DB::statement('drop table IF EXISTS asset_logs');
-                \DB::statement('drop table IF EXISTS action_logs');
-                \DB::statement('drop table IF EXISTS asset_maintenances');
-                \DB::statement('drop table IF EXISTS asset_uploads');
-                \DB::statement('drop table IF EXISTS assets');
-                \DB::statement('drop table IF EXISTS categories');
-                \DB::statement('drop table IF EXISTS checkout_requests');
-                \DB::statement('drop table IF EXISTS checkout_acceptances');
-                \DB::statement('drop table IF EXISTS companies');
-                \DB::statement('drop table IF EXISTS components');
-                \DB::statement('drop table IF EXISTS components_assets');
-                \DB::statement('drop table IF EXISTS consumables_users');
-                \DB::statement('drop table IF EXISTS consumables');
-                \DB::statement('drop table IF EXISTS custom_field_custom_fieldset');
-                \DB::statement('drop table IF EXISTS custom_fields');
-                \DB::statement('drop table IF EXISTS custom_fieldsets');
-                \DB::statement('drop table IF EXISTS depreciations');
-                \DB::statement('drop table IF EXISTS departments');
-                \DB::statement('drop table IF EXISTS groups');
-                \DB::statement('drop table IF EXISTS history');
-                \DB::statement('drop table IF EXISTS kits');
-                \DB::statement('drop table IF EXISTS kits_accessories');
-                \DB::statement('drop table IF EXISTS kits_consumables');
-                \DB::statement('drop table IF EXISTS kits_licenses');
-                \DB::statement('drop table IF EXISTS kits_models');
-                \DB::statement('drop table IF EXISTS models_custom_fields');
-                \DB::statement('drop table IF EXISTS permission_groups');
-                \DB::statement('drop table IF EXISTS license_seats');
-                \DB::statement('drop table IF EXISTS licenses');
-                \DB::statement('drop table IF EXISTS locations');
-                \DB::statement('drop table IF EXISTS login_attempts');
-                \DB::statement('drop table IF EXISTS manufacturers');
-                \DB::statement('drop table IF EXISTS models');
-                \DB::statement('drop table IF EXISTS migrations');
-                \DB::statement('drop table IF EXISTS oauth_access_tokens');
-                \DB::statement('drop table IF EXISTS oauth_auth_codes');
-                \DB::statement('drop table IF EXISTS oauth_clients');
-                \DB::statement('drop table IF EXISTS oauth_personal_access_clients');
-                \DB::statement('drop table IF EXISTS oauth_refresh_tokens');
-                \DB::statement('drop table IF EXISTS password_resets');
-                \DB::statement('drop table IF EXISTS requested_assets');
-                \DB::statement('drop table IF EXISTS requests');
-                \DB::statement('drop table IF EXISTS settings');
-                \DB::statement('drop table IF EXISTS status_labels');
-                \DB::statement('drop table IF EXISTS suppliers');
-                \DB::statement('drop table IF EXISTS throttle');
-                \DB::statement('drop table IF EXISTS users_groups');
-                \DB::statement('drop table IF EXISTS users');
-                \DB::statement('drop table IF EXISTS imports');
+        if (!$this->option('force')) {
+            $confirmation = $this->confirm("\n****************************************************\nTHIS WILL DELETE ALL OF THE DATA IN YOUR DATABASE. \nThere is NO undo. This WILL destroy ALL of your data, \nINCLUDING ANY non-Snipe-IT tables you have in this database. \n****************************************************\n\nDo you wish to continue? No backsies! ");
+            if (!$confirmation) {
+                $this->error('ABORTING');
+                exit(-1);
             }
         }
+
+        // List all the tables in the database so we don't have to worry about missing some as the app grows
+        $tables = DB::connection()->getDoctrineSchemaManager()->listTableNames();
+
+        $except_tables = [
+            'oauth_access_tokens',
+            'oauth_clients',
+            'oauth_personal_access_clients',
+            'migrations',
+            'settings',
+            'users',
+        ];
+
+        // We only need to find out what these are so we can nuke these columns on the assets table.
+        $custom_fields = CustomField::get();
+        foreach ($custom_fields as $custom_field) {
+            $this->info('DROP the '.$custom_field->db_column.' column from assets as well.');
+
+            if (\Schema::hasColumn('assets', $custom_field->db_column)) {
+                \Schema::table('assets', function ($table) use ($custom_field) {
+                    $table->dropColumn($custom_field->db_column);
+                });
+            }
+        }
+
+        foreach ($tables as $table) {
+            if (in_array($table, $except_tables)) {
+                $this->info($table. ' is SKIPPED.');
+            } else {
+                \DB::statement('truncate '.$table);
+                $this->info($table. ' is TRUNCATED.');
+            }
+        }
+
+        // Leave in the demo oauth keys so we don't have to reset them every day in the demos
+        \DB::statement('delete from oauth_clients WHERE id > 2');
+        \DB::statement('delete from oauth_access_tokens WHERE id > 2');
+    
     }
 }

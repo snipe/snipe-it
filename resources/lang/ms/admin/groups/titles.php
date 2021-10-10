@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Mengenai Kumpulan',
     'about_groups'                  => 'Kumpulan digunakan untuk memperibadikan kebenaran pengguna.',
     'group_management' 	 	=> 'Pengurusan Kumpulan',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Benarkan',
     'deny' 	 				=> 'Nafikan',
 
-);
+];

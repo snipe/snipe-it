@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory 도메인',
     'ad_domain_help'			=> '이것은 보통은 당신의 이메일 주소와 같지만, 항상 같지는 않습니다.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => '참조 이메일',
     'admin_cc_email_help'       => '사용자에게 보낸 반입/반출 이메일 사본을 추가 이메일 계정으로 보내려면, 여기에 입력하세요. 그렇지 않으면 이 필드를 비워 두세요.',
     'is_ad'				        => '이것은 액티브 디렉토리 서버입니다.',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> '(일자) 최대값 만료 알림',
     'alert_inv_threshold'		=> '재고 알림 최대값',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> '자산 ID',
     'audit_interval'            => '감사 간격',
     'audit_interval_help'       => '자산을 정기적으로 물리적인 감사를 해야하는 경우, 간격을 개월 단위로 입력하십시오.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> '2중 코드 입력',
     'two_factor_config_complete'	=> '코드 제출',
     'two_factor_enabled_edit_not_allowed' => '관리자가 이 설정의 수정을 허용하지 않았습니다.',
-    'two_factor_enrollment_text'	=> "2중 인증은 필수입니다만, 당신의 장치는 아직 등록되지 않았습니다. 구글 인증 앱을 실행하고 등록할 장치 아래의 QR 코드를 스캔하세요. 당신의 장치가 등록됐다면, 아래 코드를 입력하세요",
+    'two_factor_enrollment_text'	=> '2중 인증은 필수입니다만, 당신의 장치는 아직 등록되지 않았습니다. 구글 인증 앱을 실행하고 등록할 장치 아래의 QR 코드를 스캔하세요. 당신의 장치가 등록됐다면, 아래 코드를 입력하세요',
     'require_accept_signature'      => '서명 필수',
     'require_accept_signature_help_text'      => '이 기능을 활성화하면 자산 수락시에 물리적 서명을 필수로 하게 됩니다.',
     'left'        => '왼쪽',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => '이 상자를 선택하면 자산 일련 번호를 생성하는 제약 조건이 적용됩니다.',
     'zerofill_count'        => '0 채움을 포함한, 자산 태그 길이',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Sobre os Ativos',
     'about_assets_text'            => 'Ativos são itens que são controlados e rastreáveis pelo número de série ou por uma etiqueta de ativo (patrimônio). Eles tendem a ser de valor elevado onde a identificação de itens específicos é relevante.',
-	'archived'  				=> 'Arquivado',
+    'archived'  				=> 'Arquivado',
     'asset'  					=> 'Ativo',
     'bulk_checkout'             => 'Alocação de Ativos',
     'checkin'  					=> 'Retornar Ativo',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Pendente',
     'undeployable'  			=> 'Não implementável',
     'view'  					=> 'Ver Ativo',
-);
+];

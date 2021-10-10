@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Etiqueta de equipo',
     'asset_model'       => 'Modelo',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Equipo ',
     'image'		=> 'Imagen de dispositivo',
     'days_without_acceptance' => 'Días Sin Aceptación',
-    'monthly_depreciation' => 'Depreciación mensual'
+    'monthly_depreciation' => 'Depreciación mensual',
 
-);
+];

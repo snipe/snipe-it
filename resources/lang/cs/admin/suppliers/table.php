@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'O dodavatelích',
     'about_suppliers_text'  => 'Dodavatelé se používají ke sledování zdroje položek',
     'address'               => 'Adresa dodavatele',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'Zobrazit majetky pro',
     'zip'                   => 'PSČ',
 
-);
+];

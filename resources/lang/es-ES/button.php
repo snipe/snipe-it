@@ -13,5 +13,5 @@ return array(
     'upload'                    => 'Subir',
 	'select_file'				=> 'Seleccionar Archivo...',
     'select_files'				=> 'Selecciona Archivos...',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'generate_labels'           => '{1} Generar Etiqueta|[2,*] Generar Etiquetas',
 );

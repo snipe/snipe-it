@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Parth Active Directory',
     'ad_domain_help'			=> 'Ar adegau yn debyg i parth eich cyfeiriad ebost, ond dim pob tro.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Ebost',
     'admin_cc_email_help'       => 'Os ydych am i cyfrif ebost derbyn copi o negeseuon i ddefnyddwyr wrth nodi asdedau allan i defnyddwyr ac yn ol i fewn rhowch o yma. Fel arall, gadewch yn wag.',
     'is_ad'				        => 'Mae hwn yn Server Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Trothwy Rhybuddion sy\'n Dod i Ben (mewn dyddiau)',
     'alert_inv_threshold'		=> 'Trothwy Rhybudd Rhestr',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Rhifau Unigryw Asedau',
     'audit_interval'            => 'Cyfnod Awdit',
     'audit_interval_help'       => 'Os ydych angen gwneud awdit ffisegol, rhowch y cyfnod mewn misoedd.',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Bydd gwirio\'r blwch hwn yn gorfodi cyfyngiad unigryw ar gyfresi asedau',
     'zerofill_count'        => 'Hyd y tagiau asedau, gan gynnwys zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

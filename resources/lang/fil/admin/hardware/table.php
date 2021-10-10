@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Ang Tag ng Asset',
     'asset_model'       => 'Ang Modelo',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Ang Asset ',
     'image'		=> 'Ang Imahe ng Device',
     'days_without_acceptance' => 'Ang mga Araw na Walang Pagtanggap',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

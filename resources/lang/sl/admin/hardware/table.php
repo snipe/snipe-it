@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Oznaka sredstva',
     'asset_model'       => 'Model',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Sredstvo ',
     'image'		=> 'Slika naprave',
     'days_without_acceptance' => 'Dnevi brez sprejema',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

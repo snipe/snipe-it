@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Kod',
     'asset_model'       => 'Model',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Nabytek',
     'image'		=> 'Zdjęcie urządzenia',
     'days_without_acceptance' => 'Dni bez akceptacji',
-    'monthly_depreciation' => 'Amortyzacja miesięczna'
+    'monthly_depreciation' => 'Amortyzacja miesięczna',
 
-);
+];

@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'El atributo: no se pudo cargar.',
     'url'                  => ':attribute formato incorrecto.',
     "unique_undeleted"     => "El :atrribute debe ser único.",
+    "non_circular"         => ":attribute no debe crear una referencia circular.",
 
     /*
     |--------------------------------------------------------------------------

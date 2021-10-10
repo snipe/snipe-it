@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'செயலில் உள்ள அடைவு',
     'ad_domain'				    => 'Active Directory டொமைன்',
     'ad_domain_help'			=> 'இது சில நேரங்களில் உங்கள் மின்னஞ்சல் டொமைன் போலவே இருக்கும், ஆனால் எப்போதும் இல்லை.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'இது ஒரு Active Directory சேவையகம்',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'அலாரங்கள் முற்றுப்பெறல் (நாட்களில்)',
     'alert_inv_threshold'		=> 'சரக்கு அலர்ட் த்ரொல்ஹோல்',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'சொத்து ID கள்',
     'audit_interval'            => 'ஆடிட் இடைவேளை',
     'audit_interval_help'       => 'நீங்கள் வழக்கமாக உங்கள் சொத்துக்களைத் தணிக்கை செய்ய வேண்டும் என்றால், மாதங்களில் இடைவெளியை உள்ளிடவும்.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'இரு காரணி குறியீடு உள்ளிடவும்',
     'two_factor_config_complete'	=> 'கோட் சமர்ப்பிக்கவும்',
     'two_factor_enabled_edit_not_allowed' => 'இந்த அமைப்பைத் திருத்த உங்கள் நிர்வாகி அனுமதிக்கவில்லை.',
-    'two_factor_enrollment_text'	=> "இரண்டு காரணி அங்கீகாரம் தேவைப்படுகிறது, ஆனால் உங்கள் சாதனம் இதுவரை பதிவுசெய்யப்படவில்லை. உங்கள் Google Authenticator பயன்பாட்டைத் திறந்து உங்கள் சாதனத்தை சேர்ப்பதற்கு கீழே உள்ள QR குறியீட்டை ஸ்கேன் செய்யவும். உங்கள் சாதனத்தை நீங்கள் சேர்ந்தவுடன், கீழே உள்ள குறியீட்டை உள்ளிடுக",
+    'two_factor_enrollment_text'	=> 'இரண்டு காரணி அங்கீகாரம் தேவைப்படுகிறது, ஆனால் உங்கள் சாதனம் இதுவரை பதிவுசெய்யப்படவில்லை. உங்கள் Google Authenticator பயன்பாட்டைத் திறந்து உங்கள் சாதனத்தை சேர்ப்பதற்கு கீழே உள்ள QR குறியீட்டை ஸ்கேன் செய்யவும். உங்கள் சாதனத்தை நீங்கள் சேர்ந்தவுடன், கீழே உள்ள குறியீட்டை உள்ளிடுக',
     'require_accept_signature'      => 'கையொப்பம் தேவை',
     'require_accept_signature_help_text'      => 'இந்த அம்சத்தை இயக்குவதால், சொத்துக்களை ஏற்கும் வகையில் பயனர்கள் உடனே உள்நுழைய வேண்டும்.',
     'left'        => 'விட்டு',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'சொரெஃபைல் உள்ளிட்ட சொத்தின் குறிச்சொற்களை நீளம்',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

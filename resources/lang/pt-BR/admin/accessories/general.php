@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'accessory_category' 				=> 'Categoria do Acessório',
     'accessory_name'  					=> 'Nome do Acessório',
     'checkout'  							=> 'Alocar acessório',
@@ -17,4 +17,4 @@ return array(
     'use_default_eula'					=> 'Em vez disso, use o <a href="#" data-toggle="modal" data-target="#eulaModal">EULA padrão primário</a>.',
     'use_default_eula_disabled'			=> '<del>Em vez disso, use o EULA padrão primário.</del> Nenhum EULA padrão primário foi definido. Adicione um nas Configurações.',
 
-);
+];

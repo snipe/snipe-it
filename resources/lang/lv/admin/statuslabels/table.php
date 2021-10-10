@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'Par statusa etiķetēm',
     'archived'      	=> 'Arhivēts',
     'create'      	=> 'Izveidot statusa marķējumu',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Statusa etiķetes',
     'undeployable'  => 'Nodarbināms',
     'update'      	=> 'Atjaunināt statusa marķējumu',
-);
+];

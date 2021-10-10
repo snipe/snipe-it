@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_manufacturers_title'    => 'Tentang produsen',
     'about_manufacturers_text'  => 'Produsen adalah perusahaan yang menciptakan aset Anda. Anda dapat menyimpan informasi kontak pendukung penting tentang mereka di sini, yang akan ditampilkan di halaman detail aset Anda.',
     'asset_manufacturers'	=> 'Produsen aset',
@@ -13,4 +13,4 @@ return array(
     'update'				=> 'Perbarui produsen',
     'url'   				=> 'URL',
 
-);
+];

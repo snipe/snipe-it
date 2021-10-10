@@ -40,15 +40,15 @@ return array(
     'distinct'             => 'The :attribute field has a duplicate value.',
     'email'                => 'The :attribute format is invalid.',
     'exists'               => 'The selected :attribute is invalid.',
-    'file'                 => 'The :attribute must be a file.',
+    'file'                 => ':attribute verður að vera skrá.',
     'filled'               => 'The :attribute field must have a value.',
-    'image'                => 'The :attribute must be an image.',
+    'image'                => ':attribute verður að vera mynd.',
     'in'                   => 'The selected :attribute is invalid.',
     'in_array'             => 'The :attribute field does not exist in :other.',
-    'integer'              => 'The :attribute must be an integer.',
-    'ip'                   => 'The :attribute must be a valid IP address.',
-    'ipv4'                 => 'The :attribute must be a valid IPv4 address.',
-    'ipv6'                 => 'The :attribute must be a valid IPv6 address.',
+    'integer'              => ':attribute verður að vera heiltala.',
+    'ip'                   => ':attribute verður að vera gild IP-tala.',
+    'ipv4'                 => ':attribute verður að vera gild IPv4-tala.',
+    'ipv6'                 => ':attribute verður að vera gild IPv6-tala.',
     'json'                 => 'The :attribute must be a valid JSON string.',
     'max'                  => [
         'numeric' => 'The :attribute may not be greater than :max.',
@@ -65,7 +65,7 @@ return array(
         'array'   => 'The :attribute must have at least :min items.',
     ],
     'not_in'               => 'The selected :attribute is invalid.',
-    'numeric'              => 'The :attribute must be a number.',
+    'numeric'              => ':attribute verður að vera tala.',
     'present'              => 'The :attribute field must be present.',
     'valid_regex'          => 'That is not a valid regex. ',
     'regex'                => 'The :attribute format is invalid.',
@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
     "unique_undeleted"     => "The :attribute must be unique.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
@@ -117,7 +118,7 @@ return array(
         'alpha_space' => "The :attribute field contains a character that is not allowed.",
         "email_array"      => "One or more email addresses is invalid.",
         "hashed_pass"      => "Your current password is incorrect",
-        'dumbpwd'          => 'That password is too common.',
+        'dumbpwd'          => 'Þetta lykilorð er of algengt.',
         "statuslabel_type" => "You must select a valid status label type",
     ],
 

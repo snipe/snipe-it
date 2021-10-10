@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Tietoja laitteista',
     'about_assets_text'            => 'Laitteita ovat nimikeitä joita seurataan sarjanumeron tai laitetunnisteen avulla. Laitteiksi määritellään yleensä arvokkaampaa omaisuutta, joiden tunnistaminen yksilöllisesti on tärkeää. Pienemmät laitteet voi määrittää lisävarusteiksi.',
-	'archived'  				=> 'Arkistoitu',
+    'archived'  				=> 'Arkistoitu',
     'asset'  					=> 'Laite',
     'bulk_checkout'             => 'Laitteiden luovutus',
     'checkin'  					=> 'Palauta laite',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Odottaa',
     'undeployable'  			=> 'Ei käytettävissä',
     'view'  					=> 'Näytä laite',
-);
+];

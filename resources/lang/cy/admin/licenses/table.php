@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'Wedi Neilltuo i',
     'checkout'   		=> 'Mewn/Allan',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'Serial',
     'title'      		=> 'Trwydded',
 
-);
+];

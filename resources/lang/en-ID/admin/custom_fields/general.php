@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Bidang Kustom',
     'field'		                => 'Bidang',
     'about_fieldsets_title'		=> 'Tentang Fieldsets',
@@ -30,4 +30,4 @@ return array(
     'create_field'            => 'Kostum field baru',
     'value_encrypted'      	        => 'Nilai field ini dienkripsi dalam database. Hanya pengguna admin yang bisa melihat nilai dekripsi',
     'show_in_email'     => 'Sertakan nilai bidang ini dalam semua email keluar yang dikirim ke pengguna? Bidang yang terenkripsi tidak dapat disertakan dalam email.',
-);
+];

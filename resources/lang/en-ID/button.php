@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Tindakan',
     'add'    	                => 'Tambah Baru',
     'cancel'                    => 'Batal',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Permintaan',
     'submit'  	                => 'Kirim',
     'upload'                    => 'Unggah',
-	'select_file'				=> 'Pilih Berkas...',
+    'select_file'				=> 'Pilih Berkas...',
     'select_files'				=> 'Pilih file...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+];

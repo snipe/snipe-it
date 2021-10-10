@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => '使用者已取消項目申請',
     'a_user_requested' => '使用者已申請項目',
     'accessory_name' => '配件名稱：',
@@ -9,7 +9,7 @@ return array(
     'asset' => '資產：',
     'asset_name' => '資產名稱：',
     'asset_requested' => '申請資產',
-    'asset_tag' => '資產標籤：',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => '分配給',
     'best_regards' => 'Best regards,',
     'canceled' => '取消：',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => '查看您的資產'
-);
+    'your_assets' => '查看您的資產',
+];

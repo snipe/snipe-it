@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Campos personalizados',
     'field'		                => 'Campo',
     'about_fieldsets_title'		=> 'Acerca de los campos personalizados',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Nuevo campo personalizado',
     'value_encrypted'      	        => 'El valor de este campo está encriptado en la base de datos. Solo los administradores pueden ver el valor desencriptado',
     'show_in_email'     => '¿Incluir el valor de este campo en las notificaciones por correo de asignaciones de activos? Ten en cuenta que los campos encriptados no se pueden incluir en los correos electrónicos.',
-);
+];

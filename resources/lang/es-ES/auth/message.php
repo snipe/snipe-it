@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Este usuario no está activado.',
     'account_suspended'      => 'Este usuario está desactivado.',
     'account_banned'         => 'Este usuario ha sido expulsado.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Demasiados intentos de inicio de sesión fallidos. Por favor, intente otra vez en alrededor de :minutes minuto/s.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Su dispositivo ya está inscrito.',
+        'success'               => 'Usted inició sesión correctamente.',
+        'code_required'         => 'Se requiere el código de 2FA(Autenticación en dos pasos) .',
+        'invalid_code'          => 'El código de doble factor es inválido.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Hubo un problema al intentar cerrar la sesión, por favor inténtelo de nuevo.',
+        'success' => 'Has cerrado la sesión con éxito.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Ha habido un problema al intentar resetear el password. Por favor, vuelve a intentarlo.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Si esa dirección de correo electrónico existe en nuestro sistema, recibirá un correo electrónico de recuperación de contraseña.',
     ),
 
     'forgot-password-confirm' => array(

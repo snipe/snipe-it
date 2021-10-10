@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Custom Fields',
     'field'		                => 'Field',
     'about_fieldsets_title'		=> 'About Fieldsets',
@@ -8,7 +8,7 @@ return array(
     'custom_format'             => 'Custom regex format...',
     'encrypt_field'      	        => 'Encrypt the value of this field in the database',
     'encrypt_field_help'      => 'WARNING: Encrypting a field makes it unsearchable.',
-    'encrypted'      	        => 'Encrypted',
+    'encrypted'      	        => 'Dulkóðað',
     'fieldset'      	        => 'Fieldset',
     'qty_fields'      	      => 'Qty Fields',
     'fieldsets'      	        => 'Fieldsets',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'New Custom Field',
     'value_encrypted'      	        => 'The value of this field is encrypted in the database. Only admin users will be able to view the decrypted value',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+];

@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'על נכסים',
     'about_assets_text'            => 'נכסים הם פריטים במעקב לפי מספר סידורי או תג נכס. הם נוטים להיות פריטים בעלי ערך גבוה יותר, כאשר מזהים פריטים ספציפיים.',
-	'archived'  				=> 'בארכיון',
+    'archived'  				=> 'בארכיון',
     'asset'  					=> 'נכס',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'רכוש',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'ממתין ל',
     'undeployable'  			=> 'לא ניתן לפריסה',
     'view'  					=> 'הצג נכס',
-);
+];

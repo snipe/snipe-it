@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => 'Afdelingsnaam',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Locatie',
     'create'                    => 'Afdeling aanmaken',
     'update'                    => 'Afdeling bijwerken',
-    );
+    ];

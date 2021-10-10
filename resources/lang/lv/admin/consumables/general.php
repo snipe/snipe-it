@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Izrakstīšanās, ko patērē lietotājs',
     'consumable_name'                   => 'Paturējamais nosaukums',
     'create'                            => 'Izveidot patērējamu',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Atlikušais',
     'total' 			                => 'Kopā',
     'update'                            => 'Atjaunināt patērējamu',
-);
+];

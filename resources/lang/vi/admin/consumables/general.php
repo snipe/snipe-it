@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Thanh toán cho người tiêu dùng',
     'consumable_name'                   => 'Tên vật tư phụ',
     'create'                            => 'Tạo vật tư phụ',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Còn lại',
     'total' 			                => 'Tổng số',
     'update'                            => 'Cập nhật vật tư phụ',
-);
+];

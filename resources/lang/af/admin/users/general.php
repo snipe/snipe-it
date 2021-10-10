@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'This user can login',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Bates toegewys aan: naam',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Wysig gebruiker',
     'filetype_info'     => 'Toegelate filetipes is png, gif, jpg, jpeg, doc, docx, pdf, txt, zip en rar.',
     'history_user'      => 'Geskiedenis vir: naam',
-	'info'				=> 'info',
+    'info'				=> 'info',
     'restore_user'		=> 'Klik hier om dit te herstel.',
     'last_login'        => 'Laaste Aanmelding',
     'ldap_config_text'  => 'LDAP-konfigurasie-instellings kan Admin> Instellings gevind word. Die (opsionele) gekose ligging sal vir alle ingevoerde gebruikers gestel word.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Jou huidige administrasie-instellings laat selektiewe handhawing van twee-faktor-verifikasie toe.',
     'two_factor_enrolled' => '2FA-toestel ingeskryf',
     'two_factor_active'   => '2FA aktief',
-    );
+    ];

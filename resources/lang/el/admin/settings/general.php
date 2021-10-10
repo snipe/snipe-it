@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Υπηρεσία καταλόγου Active Directory',
     'ad_domain'				    => 'Τομέα Active Directory',
     'ad_domain_help'			=> 'Αυτό είναι μερικές φορές το ίδιο με τον τομέα ηλεκτρονικού ταχυδρομείου σας, αλλά όχι πάντα.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'Επασύναψη email',
     'admin_cc_email_help'       => 'Εάν θέλετε να στείλετε ένα αντίγραφο checkin/checkout emails που αποστέλλονται στους χρήστες σε έναν επιπλέον λογαριασμό email, εισαγάγετέ το εδώ. Διαφορετικά, αφήστε αυτό το πεδίο κενό.',
     'is_ad'				        => 'Αυτός είναι ένας διακομιστής υπηρεσίας καταλόγου Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Ελάχιστο όριο λήξης ειδοποιήσεων (σε ημέρες)',
     'alert_inv_threshold'		=> 'Ειδοποιήση ορίου αποθήκης',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Στοιχεία ταυτότητας περιουσιακών στοιχείων',
     'audit_interval'            => 'Διάρκεια ελέγχου',
     'audit_interval_help'       => 'Αν απαιτείται να ελέγχετε τακτικά τα πάγια σας, εισάγετε το διάστημα σε μήνες.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Εισαγάγετε τον κωδικό δύο συντελεστών',
     'two_factor_config_complete'	=> 'Υποβολή Κωδικού',
     'two_factor_enabled_edit_not_allowed' => 'Ο διαχειριστής σας δεν σας επιτρέπει να επεξεργαστείτε αυτήν τη ρύθμιση.',
-    'two_factor_enrollment_text'	=> "Απαιτείται έλεγχος ταυτότητας δύο παραγόντων, ωστόσο η συσκευή σας δεν έχει εγγραφεί ακόμα. Ανοίξτε την εφαρμογή Google Authenticator και σαρώστε τον παρακάτω κωδικό QR για να εγγραφείτε στη συσκευή σας. Μόλις εγγραφείτε στη συσκευή σας, πληκτρολογήστε τον παρακάτω κώδικα",
+    'two_factor_enrollment_text'	=> 'Απαιτείται έλεγχος ταυτότητας δύο παραγόντων, ωστόσο η συσκευή σας δεν έχει εγγραφεί ακόμα. Ανοίξτε την εφαρμογή Google Authenticator και σαρώστε τον παρακάτω κωδικό QR για να εγγραφείτε στη συσκευή σας. Μόλις εγγραφείτε στη συσκευή σας, πληκτρολογήστε τον παρακάτω κώδικα',
     'require_accept_signature'      => 'Απαιτείται υπογραφή',
     'require_accept_signature_help_text'      => 'Η ενεργοποίηση αυτής της λειτουργίας θα απαιτεί από τους χρήστες να αποδεχθούν φυσικά την αποδοχή ενός στοιχείου.',
     'left'        => 'αριστερά',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Με την επιλογή αυτή θα επιβληθεί ο περιορισμός μοναδικότητας σειριακού αριθμού στα πάγια',
     'zerofill_count'        => 'Μήκος ετικετών ενεργητικού, συμπεριλαμβανομένου του zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

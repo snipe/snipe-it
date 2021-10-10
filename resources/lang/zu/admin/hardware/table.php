@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Ithegi lefa',
     'asset_model'       => 'Isibonelo',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Impahla',
     'image'		=> 'Isithombe sedivayisi',
     'days_without_acceptance' => 'Izinsuku Ngaphandle Kwemukelwa',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

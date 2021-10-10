@@ -21,7 +21,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="box box-default">
                         <div class="alert alert-danger">
-                            <i class="fa fa-exclamation-circle faa-pulse animated"></i>
+                            <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
                             <strong>{{ count($status['error']) }} Error Messagess: </strong>
                             Please see below for errors.
                         </div>
@@ -34,7 +34,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="box box-default">
                     <div class="alert alert-success">
-                        <i class="fa fa-check faa-pulse animated"></i>
+                        <i class="fas fa-check faa-pulse animated"></i>
                         <strong>{{ count($status['success']) }} Success Messages: </strong>
                         Please see below for details.
                     </div>
@@ -73,7 +73,7 @@
                             <div class="col-sm-9">
                                 <input type="file" name="user_import_csv" id="user_import_csv"{{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>
                                 @if (config('app.lock_passwords')===true)
-                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
                         </div>

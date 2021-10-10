@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Tentang Aset',
     'about_assets_text'            => 'Aset adalah item yang dilacak dengan nomor seri atau tag aset. Mereka cenderung menjadi item nilai lebih tinggi di mana mengidentifikasi item tertentu yang penting.',
-	'archived'  				=> 'Diarsipkan',
+    'archived'  				=> 'Diarsipkan',
     'asset'  					=> 'Aset',
     'bulk_checkout'             => 'Pengeluaran Aset',
     'checkin'  					=> 'Mendaftar aset',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Tertunda',
     'undeployable'  			=> 'Tidak dapat disebarkan',
     'view'  					=> 'Lihat aset',
-);
+];

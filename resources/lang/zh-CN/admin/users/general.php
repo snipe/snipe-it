@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => '该用户可以登录',
     'activated_disabled_help_text' => '您无法编辑自己帐户的激活状态。',
     'assets_user'       => '分配给:name的资产',
@@ -13,7 +12,7 @@ return array(
     'edit'              => '编辑用户',
     'filetype_info'     => '允许的文件类型有： png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar',
     'history_user'      => ':name的历史',
-	'info'				=> '信息',
+    'info'				=> '信息',
     'restore_user'		=> '单击此处可将其还原。',
     'last_login'        => '上一次登陆',
     'ldap_config_text'  => 'LDAP配置在 管理 > 设置。所选位置将为导入的用户所用',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => '您当前的管理员设置允许使用双重认证。 ',
     'two_factor_enrolled' => '双重认证设备登记',
     'two_factor_active'   => '启用双重认证',
-    );
+    ];

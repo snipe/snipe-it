@@ -46,8 +46,8 @@
               <td>
                 <!-- drag handle -->
                 <span class="handle">
-                <i class="fa fa-ellipsis-v"></i>
-                <i class="fa fa-ellipsis-v"></i>
+                <i class="fas fa-ellipsis-v"></i>
+                <i class="fas fa-ellipsis-v"></i>
                 </span>
               </td>
               @endcan
@@ -59,12 +59,12 @@
                 <td>
                     @if ($field->pivot->required)
                         <a href="{{ route('fields.optional', [$custom_fieldset->id, $field->id]) }}">
-                            <i class="fa fa-check text-success" aria-hidden="true"></i>
+                            <i class="fas fa-check text-success" aria-hidden="true"></i>
                             <span class="sr-only">Required - click to make optional</span>
                         </a>
                     @else
                         <a href="{{ route('fields.required', [$custom_fieldset->id, $field->id]) }}">
-                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                            <i class="fas fa-times text-danger" aria-hidden="true"></i>
                             <span class="sr-only">Optional - click to make required</span>
                         </a>
                     @endif

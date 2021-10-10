@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_manufacturers_title'    => 'About manufacturers',
     'about_manufacturers_text'  => 'Manufacturers are the companies that create your assets. You can store important support contact information about them here, which will be displayed on your asset detail pages.',
     'asset_manufacturers'	=> 'Asset Manufacturers',
@@ -13,4 +13,4 @@ return array(
     'update'				=> 'Update Manufacturer',
     'url'   				=> 'URL',
 
-);
+];

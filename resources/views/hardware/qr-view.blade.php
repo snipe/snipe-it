@@ -46,12 +46,12 @@
             <div class="col-md-12">
                 @if ($asset->model->deleted_at!='')
                 <div class="alert alert-warning alert-block">
-                    <i class="fa fa-warning"></i>
+                    <i class="fas fa-exclamation-triangle"></i>
                     {{ trans('admin/hardware/general.model_deleted', array('model_id' => $asset->model->id)) }}
                 </div>
                 @elseif ($asset->deleted_at!='')
                 <div class="alert alert-warning alert-block">
-                    <i class="fa fa-warning"></i>
+                    <i class="fas fa-exclamation-triangle"></i>
                     {{ trans('admin/hardware/general.deleted', array('asset_id' => $asset->id)) }}
                 </div>
                 @endif
@@ -198,7 +198,7 @@
                 @else
                 <div class="col-md-12">
                     <div class="alert alert-info alert-block">
-                        <i class="fa fa-info-circle"></i>
+                        <i class="fas fa-info-circle"></i>
                         {{ trans('general.no_results') }}
                     </div>
                 </div>
@@ -242,7 +242,7 @@
                                 data-html="false" data-toggle="modal"
                                 data-title="{{ trans('admin/hardware/message.deletefile.confirm') }}"
                                 data-content="{{ trans('admin/hardware/message.deletefile.confirm-more',array('filename' => $file->filename)) }} " onClick="return false;">
-                                <i class="fa fa-trash icon-white" aria-hidden="true"></i>
+                                <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                                 </a>
                             </td>
                         </tr>
@@ -358,11 +358,11 @@
                 @endif
 
                 @if (isset($asset->assignedTo->email))
-                <li><br /><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a></li>
+                <li><br /><i class="far fa-envelope"></i> <a href="mailto:{{ $asset->assignedTo->email }}">{{ $asset->assignedTo->email }}</a></li>
                 @endif
 
                 @if ((isset($asset->assignedTo->phone)) && ($asset->assignedTo->phone!=''))
-                <li><i class="fa fa-phone"></i> {{ $asset->assignedTo->phone }}</li>
+                <li><i class="fas fa-phone"></i> {{ $asset->assignedTo->phone }}</li>
                 @endif
             </ul>
             @endif
@@ -393,7 +393,7 @@
                     @if (($asset->assetstatus->notes) && ($asset->assigned_to==''))
                     <div class="col-md-12">
                         <div class="alert alert-info alert-block">
-                            <i class="fa fa-info-circle"></i>
+                            <i class="fas fa-info-circle"></i>
                             {{ $asset->assetstatus->notes }}
 
                         </div>

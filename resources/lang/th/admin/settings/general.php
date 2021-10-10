@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'โดเมน Active Directory',
     'ad_domain_help'			=> 'นี่เป็นบางครั้งเหมือนกับโดเมนอีเมลของคุณ แต่ไม่บ่อยนัก',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'อีเมล สำเนาถึง',
     'admin_cc_email_help'       => 'หากคุณต้องการส่งสำเนาเช็คอิน / เช็คเอาต์อีเมลที่ส่งถึงผู้ใช้ไปยังบัญชีอีเมลอื่นให้ป้อนได้ที่นี่ มิฉะนั้นปล่อยให้ฟิลด์นี้ว่างเปล่า',
     'is_ad'				        => 'นี่คือเซิร์ฟเวอร์ Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'เกณฑ์การเตือนที่หมดอายุ (เป็นวัน)',
     'alert_inv_threshold'		=> 'เกณฑ์การแจ้งเตือนพื้นที่โฆษณา',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'รหัสทรัพย์สิน',
     'audit_interval'            => 'ช่วงการตรวจสอบ',
     'audit_interval_help'       => 'หากคุณจำเป็นต้องตรวจสอบสินทรัพย์ของคุณอย่างสม่ำเสมอให้ป้อนช่วงเวลาเป็นเดือน ๆ',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'ป้อนรหัสสองปัจจัย',
     'two_factor_config_complete'	=> 'ส่งรหัส',
     'two_factor_enabled_edit_not_allowed' => 'ผู้ดูแลระบบของคุณไม่อนุญาตให้คุณแก้ไขการตั้งค่านี้',
-    'two_factor_enrollment_text'	=> "จำเป็นต้องมีการตรวจสอบสิทธิ์สองปัจจัย แต่อุปกรณ์ของคุณยังไม่ได้ลงทะเบียน เปิดแอป Google Authenticator และสแกนโค้ด QR ด้านล่างเพื่อลงทะเบียนอุปกรณ์ของคุณ เมื่อคุณลงทะเบียนอุปกรณ์แล้วให้ป้อนรหัสด้านล่าง",
+    'two_factor_enrollment_text'	=> 'จำเป็นต้องมีการตรวจสอบสิทธิ์สองปัจจัย แต่อุปกรณ์ของคุณยังไม่ได้ลงทะเบียน เปิดแอป Google Authenticator และสแกนโค้ด QR ด้านล่างเพื่อลงทะเบียนอุปกรณ์ของคุณ เมื่อคุณลงทะเบียนอุปกรณ์แล้วให้ป้อนรหัสด้านล่าง',
     'require_accept_signature'      => 'ต้องการลายเซ็น',
     'require_accept_signature_help_text'      => 'การเปิดใช้งานคุณลักษณะนี้จะกำหนดให้ผู้ใช้ลงชื่อเข้าใช้เพื่อยอมรับเนื้อหา',
     'left'        => 'ซ้าย',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'การทำเครื่องหมายในช่องนี้จะบังคับใช้ข้อ จำกัด เฉพาะใน serials ของเนื้อหา',
     'zerofill_count'        => 'ความยาวของแท็กเนื้อหารวมทั้ง zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

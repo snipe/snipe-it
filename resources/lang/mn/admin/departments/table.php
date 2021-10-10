@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => 'Газрын нэр',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Байршил',
     'create'                    => 'Газар үүсгэх',
     'update'                    => 'Шинэчилсэн газар',
-    );
+    ];

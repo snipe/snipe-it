@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'Atribut: se nepodařilo nahrát.',
     'url'                  => 'Formát :attribute je neplatný.',
     "unique_undeleted"     => "Je třeba, aby se :attribute neopakoval.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

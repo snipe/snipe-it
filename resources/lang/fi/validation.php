@@ -89,6 +89,7 @@ return array(
     'uploaded'             => ':attribute -kenttää ei onnistuttu lähettämään.',
     'url'                  => ':attribute muotoilu on virheellinen.',
     "unique_undeleted"     => ":attribute on oltava ainutlaatuinen.",
+    "non_circular"         => ":attribute ei saa luoda kehäviittausta.",
 
     /*
     |--------------------------------------------------------------------------

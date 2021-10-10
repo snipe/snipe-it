@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => '資産について',
     'about_assets_text'            => '資産はシリアル番号や資産タグで追跡します。資産は特定することが重要な、高価な物であることが多いです。',
-	'archived'  				=> 'アーカイブ',
+    'archived'  				=> 'アーカイブ',
     'asset'  					=> '資産',
     'bulk_checkout'             => '一括チェックアウト',
     'checkin'  					=> '資産をチェックイン',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'ペンディング',
     'undeployable'  			=> '配備不可',
     'view'  					=> '資産を表示',
-);
+];

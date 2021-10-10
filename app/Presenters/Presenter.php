@@ -6,7 +6,6 @@ use App\Models\SnipeModel;
 
 abstract class Presenter
 {
-
     /**
      * @var SnipeModel
      */
@@ -33,6 +32,7 @@ abstract class Presenter
         if ($model->category) {
             return $model->category->present()->nameUrl();
         }
+
         return '';
     }
 
@@ -41,6 +41,7 @@ abstract class Presenter
         if ($this->model->location) {
             return $this->model->location->present()->nameUrl();
         }
+
         return '';
     }
 
@@ -49,8 +50,10 @@ abstract class Presenter
         if ($this->model->company) {
             return $this->model->company->present()->nameUrl();
         }
+
         return '';
     }
+
     public function manufacturerUrl()
     {
         $model = $this->model;
@@ -62,6 +65,7 @@ abstract class Presenter
         if ($model->manufacturer) {
             return $model->manufacturer->present()->nameUrl();
         }
+
         return '';
     }
 

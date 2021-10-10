@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'Tohua Ki To',
     'checkout'   		=> 'In / Out',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'Waea',
     'title'      		=> 'Raihana',
 
-);
+];

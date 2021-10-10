@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Lesen tidak wujud.',
     'user_does_not_exist' => 'Pengguna tidak wujud.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'Anda mesti memilih aset atau pengguna, tetapi tidak kedua-duanya.',
     'not_found' => 'License not found',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Lesen gagal dicipta, sila cuba lagi.',
-        'success' => 'Lesen berjaya dicipta.'
-    ),
+        'success' => 'Lesen berjaya dicipta.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Fail tidak dipadam. Sila cuba lagi.',
         'success' => 'Fail berjaya dipadam.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Fail tidak dimuat naik. Sila cuba lagi.',
         'success' => 'Fail berjaya dimuat naik.',
         'nofiles' => 'Anda tidak memilih sebarang fail untuk dimuat naik, atau fail yang anda cuba muat naik terlalu besar',
         'invalidfiles' => 'Satu atau lebih daripada fail anda terlalu besar atau merupakan filetype yang tidak dibenarkan. Filetype yang dibenarkan adalah png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, dan lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Lesen gagal dikemaskini, sila cuba lagi',
-        'success' => 'Lesen berjaya dikemaskini.'
-    ),
+        'success' => 'Lesen berjaya dikemaskini.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Anda pasti and ingin menghapuskan lesen ini?',
         'error'   => 'Ada isu semada menghapuskan lesen, sila cuba lagi.',
-        'success' => 'Lesen berjaya dihapuskan.'
-    ),
+        'success' => 'Lesen berjaya dihapuskan.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Ada isu semasa agihan lesen. Sila cuba lagi.',
-        'success' => 'Lesen berjaya diagihkan'
-    ),
+        'success' => 'Lesen berjaya diagihkan',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Ada isu semasa terima lesen. Sila cuba lagi.',
-        'success' => 'Lesen berjaya diterima'
-    ),
+        'success' => 'Lesen berjaya diterima',
+    ],
 
-);
+];

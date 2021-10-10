@@ -13,8 +13,8 @@ class AddSamlKeyRollover extends Migration
      */
     public function up()
     {
-        Schema::table('settings', function(Blueprint $table) {
-            $table->text('saml_sp_x509certNew')->nullable()->default(NULL);
+        Schema::table('settings', function (Blueprint $table) {
+            $table->text('saml_sp_x509certNew')->nullable()->default(null);
         });
     }
 
@@ -25,7 +25,7 @@ class AddSamlKeyRollover extends Migration
      */
     public function down()
     {
-        Schema::table('settings', function(Blueprint $table) {
+        Schema::table('settings', function (Blueprint $table) {
             $table->dropColumn('saml_sp_x509certNew');
         });
     }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Tài khoản với email này đã thực sự tồn tại.',
     'account_not_found'      => 'Tên đăng nhập hoặc mật khẩu không đúng.',
@@ -9,37 +9,36 @@ return array(
     'account_banned'         => 'Tài khoản người dùng này đã bị cấm.',
     'throttle'               => 'Quá nhiều lần đăng nhập thất bại. Vui lòng thử lại trong khoảng :minutes phút.',
 
-    'two_factor' => array(
+    'two_factor' => [
         'already_enrolled'      => 'Thiết bị của bạn đã được ghi danh.',
         'success'               => 'Bạn đã đăng nhập thành công.',
         'code_required'         => 'Mã xác thực hai yếu tố là bắt buộc.',
         'invalid_code'          => 'Mã xác thực hai yếu tố chưa đúng.',
-    ),
+    ],
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Có vấn đề khi bạn có gắng đăng nhập, xin thử lại.',
         'success' => 'Bạn đã đăng nhập thành công.',
-    ),
+    ],
 
-    'logout' => array(
+    'logout' => [
         'error'   => 'Có vấn đề khi đăng xuất, xin vui lòng thử lại.',
         'success' => 'Đăng xuất thành công.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Có vấn đề khi cố gắng tạo tài khoản của bạn, xin thử lại.',
         'success' => 'Tài khoản đã được tạo thành công.',
-    ),
+    ],
 
-    'forgot-password' => array(
+    'forgot-password' => [
         'error'   => 'Có vấn đề khi cố gắng nhận một mã phục hồi mật khẩu, xin thử lại.',
         'success' => 'Nếu email đã cung cấp có tồn tại trên hệ thống, một email phục hồi mật khẩu sẽ được gửi.',
-    ),
+    ],
 
-    'forgot-password-confirm' => array(
+    'forgot-password-confirm' => [
         'error'   => 'Có vấn đề khi cố gắng khởi tạo lại mật khẩu của bạn, xin thử lại lần nữa.',
         'success' => 'Mật khẩu của bạn đã được khởi tạo lại thành công.',
-    ),
+    ],
 
-
-);
+];

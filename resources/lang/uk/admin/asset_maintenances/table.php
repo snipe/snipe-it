@@ -4,5 +4,5 @@
         'title'         => 'Обслуговування активів',
         'asset_name'    => 'Назва активу',
         'is_warranty'   => 'Гарантія',
-        'dl_csv'        => 'Download CSV'
+        'dl_csv'        => 'Завантажити CSV'
     ];

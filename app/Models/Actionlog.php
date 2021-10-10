@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Models;
+
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,31 +17,32 @@ use Illuminate\Support\Facades\Auth;
  */
 class Actionlog extends SnipeModel
 {
-    protected $presenter = "App\Presenters\ActionlogPresenter";
+    use HasFactory;
+
+    protected $presenter = \App\Presenters\ActionlogPresenter::class;
     use SoftDeletes;
     use Presentable;
-    protected $dates = [ 'deleted_at' ];
 
-    protected $table      = 'action_logs';
+    protected $table = 'action_logs';
     public $timestamps = true;
-    protected $fillable   = [ 'created_at', 'item_type','user_id','item_id','action_type','note','target_id', 'target_type' ];
+    protected $fillable = ['created_at', 'item_type', 'user_id', 'item_id', 'action_type', 'note', 'target_id', 'target_type'];
 
     use Searchable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['action_type', 'note', 'log_meta'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [
-        'company' => ['name']
+        'company' => ['name'],
     ];
 
     /**
@@ -51,7 +55,7 @@ class Actionlog extends SnipeModel
     public static function boot()
     {
         parent::boot();
-        static::creating(function (Actionlog $actionlog) {
+        static::creating(function (self $actionlog) {
             // If the admin is a superadmin, let's see if the target instead has a company.
             if (Auth::user() && Auth::user()->isSuperUser()) {
                 if ($actionlog->target) {
@@ -64,7 +68,6 @@ class Actionlog extends SnipeModel
             }
         });
     }
-
 
     /**
      * Establishes the actionlog -> item relationship
@@ -87,7 +90,7 @@ class Actionlog extends SnipeModel
      */
     public function company()
     {
-        return $this->hasMany('\App\Models\Company', 'id', 'company_id');
+        return $this->hasMany(\App\Models\Company::class, 'id', 'company_id');
     }
 
     /**
@@ -99,10 +102,10 @@ class Actionlog extends SnipeModel
      */
     public function itemType()
     {
-
         if ($this->item_type == AssetModel::class) {
-            return "model";
+            return 'model';
         }
+
         return camel_case(class_basename($this->item_type));
     }
 
@@ -116,11 +119,11 @@ class Actionlog extends SnipeModel
     public function targetType()
     {
         if ($this->target_type == User::class) {
-            return "user";
+            return 'user';
         }
+
         return camel_case(class_basename($this->target_type));
     }
-
 
     /**
      * Establishes the actionlog -> uploads relationship
@@ -180,10 +183,10 @@ class Actionlog extends SnipeModel
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function location() {
-        return $this->belongsTo('\App\Models\Location', 'location_id' )->withTrashed();
+    public function location()
+    {
+        return $this->belongsTo(\App\Models\Location::class, 'location_id')->withTrashed();
     }
-
 
     /**
      * Check if the file exists, and if it does, force a download
@@ -194,25 +197,24 @@ class Actionlog extends SnipeModel
      */
     public function get_src($type = 'assets', $fieldname = 'filename')
     {
-        if ($this->filename!='') {
-            $file = config('app.private_uploads') . '/' . $type . '/' . $this->{$fieldname};
+        if ($this->filename != '') {
+            $file = config('app.private_uploads').'/'.$type.'/'.$this->{$fieldname};
+
             return $file;
         }
+
         return false;
     }
-
-
 
     /**
      * Saves the log record with the action type
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return boolean
+     * @return bool
      */
     public function logaction($actiontype)
     {
-
         $this->action_type = $actiontype;
 
         if ($this->save()) {
@@ -229,8 +231,8 @@ class Actionlog extends SnipeModel
      * @since [v4.0]
      * @return int
      */
-    public function daysUntilNextAudit($monthInterval = 12, $asset = null) {
-
+    public function daysUntilNextAudit($monthInterval = 12, $asset = null)
+    {
         $now = Carbon::now();
         $last_audit_date = $this->created_at;
         $next_audit = $last_audit_date->addMonth($monthInterval);
@@ -252,8 +254,8 @@ class Actionlog extends SnipeModel
      * @since [v4.0]
      * @return \Datetime
      */
-    public function calcNextAuditDate($monthInterval = 12, $asset = null) {
-
+    public function calcNextAuditDate($monthInterval = 12, $asset = null)
+    {
         $last_audit_date = Carbon::parse($this->created_at);
         // If there is an asset-specific next date already given,
         if (($asset) && ($asset->next_audit_date)) {
@@ -272,7 +274,6 @@ class Actionlog extends SnipeModel
      */
     public function getListingOfActionLogsChronologicalOrder()
     {
-
         return $this->all()
                  ->where('action_type', '!=', 'uploaded')
                  ->orderBy('item_id', 'asc')

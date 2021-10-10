@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Oor bates',
     'about_assets_text'            => 'Bates is items opgespoor volgens reeksnommer of bate-tag. Hulle is geneig om hoër waarde items te wees waar die identifisering van \'n spesifieke item saak maak.',
-	'archived'  				=> 'argief',
+    'archived'  				=> 'argief',
     'asset'  					=> 'bate',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'Kontrole bate',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'hangende',
     'undeployable'  			=> 'Undeployable',
     'view'  					=> 'Bekyk bate',
-);
+];

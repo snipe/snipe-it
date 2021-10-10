@@ -44,37 +44,35 @@ class RecryptFromMcrypt extends Command
     public function handle()
     {
 
-
         // Check and see if they have a legacy app key listed in their .env
         // If not, we can try to use the current APP_KEY if looks like it's old
         $legacy_key = env('LEGACY_APP_KEY');
         $key_parts = explode(':', $legacy_key);
         $legacy_cipher = env('LEGACY_CIPHER', 'rijndael-256');
-        $errors = array();
+        $errors = [];
 
-        if (!$legacy_key) {
+        if (! $legacy_key) {
             $this->error('ERROR: You do not have a LEGACY_APP_KEY set in your .env file. Please locate your old APP_KEY and ADD a line to your .env file like: LEGACY_APP_KEY=YOUR_OLD_APP_KEY');
+
             return false;
         }
-
 
         // Do some basic legacy app key length checks
         if (strlen($legacy_key) == 32) {
             $legacy_length_check = true;
-        } elseif (array_key_exists('1', $key_parts) && (strlen($key_parts[1])==44)) {
-            $legacy_key = base64_decode($key_parts[1],true);
+        } elseif (array_key_exists('1', $key_parts) && (strlen($key_parts[1]) == 44)) {
+            $legacy_key = base64_decode($key_parts[1], true);
             $legacy_length_check = true;
         } else {
             $legacy_length_check = false;
         }
-   
-
 
         // Check that the app key is 32 characters
         if ($legacy_length_check === true) {
             $this->comment('INFO: Your LEGACY_APP_KEY looks correct. Okay to continue.');
         } else {
             $this->error('ERROR: Your LEGACY_APP_KEY is not the correct length (32 characters or base64 followed by 44 characters for later versions). Please locate your old APP_KEY and use that as your LEGACY_APP_KEY in your .env file to continue.');
+
             return false;
         }
 
@@ -84,8 +82,7 @@ class RecryptFromMcrypt extends Command
 
         $force = ($this->option('force')) ? true : false;
 
-        if ($force || ($this->confirm("Are you SURE you wish to continue?"))) {
-
+        if ($force || ($this->confirm('Are you SURE you wish to continue?'))) {
             $backup_file = 'backups/env-backups/'.'app_key-'.date('Y-m-d-gis');
 
             try {
@@ -95,15 +92,14 @@ class RecryptFromMcrypt extends Command
                 $this->info('WARNING: Could not backup app keys');
             }
 
-
-            if ($legacy_cipher){
-                $mcrypter = new McryptEncrypter($legacy_key,$legacy_cipher);
-            }else{
+            if ($legacy_cipher) {
+                $mcrypter = new McryptEncrypter($legacy_key, $legacy_cipher);
+            } else {
                 $mcrypter = new McryptEncrypter($legacy_key);
             }
             $settings = Setting::getSettings();
 
-            if ($settings->ldap_pword=='') {
+            if ($settings->ldap_pword == '') {
                 $this->comment('INFO: No LDAP password found. Skipping... ');
             } else {
                 $decrypted_ldap_pword = $mcrypter->decrypt($settings->ldap_pword);
@@ -111,16 +107,15 @@ class RecryptFromMcrypt extends Command
                 $settings->save();
             }
             /** @var CustomField[] $custom_fields */
-            $custom_fields = CustomField::where('field_encrypted','=', 1)->get();
+            $custom_fields = CustomField::where('field_encrypted', '=', 1)->get();
             $this->comment('INFO: Retrieving encrypted custom fields...');
 
             $query = Asset::withTrashed();
 
             foreach ($custom_fields as $custom_field) {
-                $this->comment('FIELD TO RECRYPT:  '.$custom_field->name .' ('.$custom_field->db_column.')');
+                $this->comment('FIELD TO RECRYPT:  '.$custom_field->name.' ('.$custom_field->db_column.')');
                 $query->orWhereNotNull($custom_field->db_column);
             }
-
 
             // Get all assets with a value in any of the fields that were encrypted
             /** @var Asset[] $assets */
@@ -128,13 +123,12 @@ class RecryptFromMcrypt extends Command
 
             $bar = $this->output->createProgressBar(count($assets));
 
-
             foreach ($assets as $asset) {
                 foreach ($custom_fields as $encrypted_field) {
                     $columnName = $encrypted_field->db_column;
 
                     // Make sure the value isn't null
-                    if ($asset->{$columnName}!='') {
+                    if ($asset->{$columnName} != '') {
                         // Try to decrypt the payload using the legacy app key
                         try {
                             $decrypted_field = $mcrypter->decrypt($asset->{$columnName});
@@ -144,13 +138,10 @@ class RecryptFromMcrypt extends Command
                             $errors[] = ' - ERROR: Could not decrypt field ['.$encrypted_field->name.']: '.$e->getMessage();
                         }
                     }
-
                 }
                 $asset->save();
                 $bar->advance();
             }
-
-
 
             $bar->finish();
 
@@ -162,6 +153,5 @@ class RecryptFromMcrypt extends Command
                 }
             }
         }
-
     }
 }

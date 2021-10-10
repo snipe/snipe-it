@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Egyéni mezők',
     'field'		                => 'Mező',
     'about_fieldsets_title'		=> 'A mezőcsoportokról',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Új egyéni mező',
     'value_encrypted'      	        => 'A mező értéke titkosítva van az adatbázisban. Csak az adminisztrátor felhasználók láthatják a dekódolt értéket',
     'show_in_email'     => 'Szerepeljen ez a mező az eszköz kiadásakor a felhasználónak küldött emailben? A titkosított mezők nem szerepelhetnek az emailekben.',
-);
+];

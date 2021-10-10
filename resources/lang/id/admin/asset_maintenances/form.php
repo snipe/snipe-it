@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Waktu Pemeliharaan Aset (dalam hari)',
         'notes'                  => 'Catatan',
         'update'                 => 'Pembaharuan Pemeliharan Aset',
-        'create'                 => 'Membuat Pemeliharan Aset'
+        'create'                 => 'Membuat Pemeliharan Aset',
     ];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Pielāgotie lauki',
     'field'		                => 'Lauks',
     'about_fieldsets_title'		=> 'Par lauka laukiem',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Jauna pielāgota lauks',
     'value_encrypted'      	        => 'Šī lauka vērtība ir šifrēta datu bāzē. Tikai admin lietotāji varēs apskatīt atšifrēto vērtību',
     'show_in_email'     => 'Vai iekļaut šī lauka vērtību lietotājiem nosūtītajos e-pasta paziņojumos? Šifrētie lauki nevar būt iekļauti e-pasta ziņojumos.',
-);
+];

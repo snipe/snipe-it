@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Acerca de Activos',
     'about_assets_text'            => 'Los activos son seguidos mediante el número del serial o la etiqueta del activo. Tienden a ser objetos de mayor valor en los que identificar un objeto específico importa.',
-	'archived'  				=> 'Archivado',
+    'archived'  				=> 'Archivado',
     'asset'  					=> 'Activo',
     'bulk_checkout'             => 'Activos Asignados',
     'checkin'  					=> 'Ingresar Activo',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'Pendiente',
     'undeployable'  			=> 'No enviable',
     'view'  					=> 'Ver Activo',
-);
+];

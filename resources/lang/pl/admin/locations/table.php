@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'O Lokalizacjach',
     'about_locations'           => 'Lokalizacje są używane do śledzenia informacji o lokalizacji użytkowników, aktywów i innych elementów',
     'assets_rtd'                => 'Aktywa', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'Kraj',
     'create'                    => 'Utwórz Lokalizację',
     'update'                    => 'Zaktualizuj lokalizację',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'Drukuj przypisane',
+    'print_all_assigned'        => 'Drukuj wszystkie przypisane',
     'name'                      => 'Nazwa Lokalizacji',
     'address'                   => 'Adres',
     'zip'                       => 'Kod Pocztowy',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => 'Rodzic',
     'currency'                  => 'Waluta lokalna',
     'ldap_ou'                   => 'OU wyszukiwania LDAP',
-    );
+    ];

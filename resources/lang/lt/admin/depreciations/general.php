@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Apie įrangos nusidėvėjimą',
     'about_depreciations'  					=> 'Jūs galite nustatyti irangos nusidėvėjimą naudodami proporcinio metodo nusidėvėjimą.',
     'asset_depreciations'  					=> 'Irangos nusidėvėjimas',
@@ -9,4 +9,4 @@ return array(
     'number_of_months'  					=> 'Mėnesių skaičius',
     'update'  					            => 'Atnaujinti nusidėvėjimą',
 
-);
+];

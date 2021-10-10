@@ -26,7 +26,7 @@ class UserFilesController extends Controller
     public function store(AssetFileRequest $request, $userId = null)
     {
         $user = User::find($userId);
-        $destinationPath = config('app.private_uploads') . '/users';
+        $destinationPath = config('app.private_uploads').'/users';
 
         if (isset($user->id)) {
             $this->authorize('update', $user);
@@ -34,14 +34,14 @@ class UserFilesController extends Controller
             $logActions = [];
             $files = $request->file('file');
 
-            if (is_null($files)){
+            if (is_null($files)) {
                 return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
             }
-            foreach($files as $file) {
+            foreach ($files as $file) {
                 $extension = $file->getClientOriginalExtension();
-                $filename = 'user-' . $user->id . '-' . str_random(8);
-                $filename .= '-' . str_slug($file->getClientOriginalName()) . '.' . $extension;
-                if (!$file->move($destinationPath, $filename)) {
+                $filename = 'user-'.$user->id.'-'.str_random(8);
+                $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
+                if (! $file->move($destinationPath, $filename)) {
                     return redirect()->back()->with('error', trans('admin/users/message.upload.invalidfiles'));
                 }
                 //Log the uploaded file to the log
@@ -51,23 +51,21 @@ class UserFilesController extends Controller
                 $logAction->user_id = Auth::id();
                 $logAction->note = $request->input('notes');
                 $logAction->target_id = null;
-                $logAction->created_at = date("Y-m-d H:i:s");
+                $logAction->created_at = date('Y-m-d H:i:s');
                 $logAction->filename = $filename;
                 $logAction->action_type = 'uploaded';
 
-                if (!$logAction->save()) {
-                    return JsonResponse::create(["error" => "Failed validation: " . print_r($logAction->getErrors(), true)], 500);
-
+                if (! $logAction->save()) {
+                    return JsonResponse::create(['error' => 'Failed validation: '.print_r($logAction->getErrors(), true)], 500);
                 }
                 $logActions[] = $logAction;
             }
             // dd($logActions);
             return redirect()->back()->with('success', trans('admin/users/message.upload.success'));
         }
+
         return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
-
     }
-
 
     /**
      * Delete file
@@ -87,18 +85,18 @@ class UserFilesController extends Controller
         if (isset($user->id)) {
             $this->authorize('update', $user);
             $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath . '/' . $log->filename;
+            $full_filename = $destinationPath.'/'.$log->filename;
             if (file_exists($full_filename)) {
-                unlink($destinationPath . '/' . $log->filename);
+                unlink($destinationPath.'/'.$log->filename);
             }
             $log->delete();
+
             return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
         }
         // Prepare the error message
         $error = trans('admin/users/message.user_not_found', ['id' => $userId]);
         // Redirect to the licence management page
         return redirect()->route('users.index')->with('error', $error);
-
     }
 
     /**
@@ -121,6 +119,7 @@ class UserFilesController extends Controller
 
             $log = Actionlog::find($fileId);
             $file = $log->get_src('users');
+
             return Response::download($file); //FIXME this doesn't use the new StorageHelper yet, but it's complicated...
         }
         // Prepare the error message
@@ -129,5 +128,4 @@ class UserFilesController extends Controller
         // Redirect to the licence management page
         return redirect()->route('users.index')->with('error', $error);
     }
-
 }

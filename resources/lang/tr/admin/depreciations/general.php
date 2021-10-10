@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Demirbaş Amortismanları Hakkında',
     'about_depreciations'  					=> 'Demirbaş amortismanını sabit bir oran ile düşecek şekilde ayarlayabilirsiniz.',
     'asset_depreciations'  					=> 'Demirbaş Amortismanları',
@@ -9,4 +9,4 @@ return array(
     'number_of_months'  					=> 'Ay Sayısı',
     'update'  					            => 'Değer Kaybını Güncelle',
 
-);
+];

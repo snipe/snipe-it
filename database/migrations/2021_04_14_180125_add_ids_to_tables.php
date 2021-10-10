@@ -13,23 +13,19 @@ class AddIdsToTables extends Migration
      */
     public function up()
     {
-
         Schema::table('migrations', function (Blueprint $table) {
             // Add the id column to the migrations table if it doesn't yet have one
-            if (!Schema::hasColumn('migrations', 'id')) {
+            if (! Schema::hasColumn('migrations', 'id')) {
                 $table->increments('id');
             }
         });
 
         Schema::table('password_resets', function (Blueprint $table) {
             // Add the id column to the password_resets table if it doesn't yet have one
-            if (!Schema::hasColumn('password_resets', 'id')) {
+            if (! Schema::hasColumn('password_resets', 'id')) {
                 $table->increments('id');
             }
         });
-
-
-
     }
 
     /**

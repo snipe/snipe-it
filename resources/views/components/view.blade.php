@@ -128,7 +128,7 @@
     <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/components/general.cost') }}:</strong>
     {{ $snipeSettings->default_currency }}
 
-    {{ \App\Helpers\Helper::formatCurrencyOutput($component->purchase_cost) }} </div>
+    {{ Helper::formatCurrencyOutput($component->purchase_cost) }} </div>
     @endif
 
     @if ($component->order_number)

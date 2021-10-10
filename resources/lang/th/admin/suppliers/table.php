@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'เกี่ยวกับซัพพลายเออร์',
     'about_suppliers_text'  => 'ซัพพลายเออร์ใช้เพื่อติดตามแหล่งที่มาของสินค้า',
     'address'               => 'ที่อยู่ซัพพลายเออร์',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'ดูทรัพย์สินสำหรับ',
     'zip'                   => 'รหัสไปรษณีย์',
 
-);
+];

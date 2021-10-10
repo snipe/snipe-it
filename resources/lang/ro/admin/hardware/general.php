@@ -1,9 +1,9 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Despre Active',
     'about_assets_text'            => 'Activele sunt elemente urmărite prin numărul de serie sau eticheta de activ. Ele tind să fie elemente de valoare mai mare în cazul în care identificarea unui anumit element contează.',
-	'archived'  				=> 'Arhivate',
+    'archived'  				=> 'Arhivate',
     'asset'  					=> 'Activ',
     'bulk_checkout'             => 'Predă activ',
     'checkin'  					=> 'Verifica activ',
@@ -19,4 +19,4 @@ return array(
     'pending'  					=> 'In asteptare',
     'undeployable'  			=> 'Nelansabil',
     'view'  					=> 'Vizualizeaza activ',
-);
+];

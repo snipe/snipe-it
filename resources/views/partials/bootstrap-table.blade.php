@@ -51,7 +51,7 @@
             paginationLastText: "{{ trans('general.last') }}",
             paginationPreText: "{{ trans('general.previous') }}",
             paginationNextText: "{{ trans('general.next') }}",
-            pageList: ['10','20', '30','50','100','150','200', '500'],
+            pageList: ['10','20', '30','50','100','150','200', '500', '1000'],
             pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
             paginationVAlign: 'both',
             queryParams: function (params) {
@@ -64,14 +64,14 @@
                 return newParams;
             },
             formatLoadingMessage: function () {
-                return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
             },
             icons: {
-                advancedSearchIcon: 'fa fa-search-plus',
+                advancedSearchIcon: 'fas fa-search-plus',
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
                 columns: 'fa-columns',
-                refresh: 'fa-refresh',
+                refresh: 'fas fa-sync-alt',
                 export: 'fa-download',
                 clearSearch: 'fa-times'
             },
@@ -205,11 +205,11 @@
             }
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="fa fa-copy" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="far fa-clone" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update Item"><i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">Update</span></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update Item"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">Update</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
@@ -218,13 +218,13 @@
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
-                    + '<i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span></a>&nbsp;';
+                    + '<i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span></a>&nbsp;';
             } else {
-                actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
+                actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fas fa-trash"></i></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.restore === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Restore"><i class="fa fa-retweet"></i></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Restore"><i class="far fa-clone"></i></a>&nbsp;';
             }
 
             actions +='</nobr>';
@@ -244,28 +244,28 @@
 
             if (value.type == 'asset') {
                 item_destination = 'hardware';
-                item_icon = 'fa-barcode';
+                item_icon = 'fas fa-barcode';
             } else if (value.type == 'accessory') {
                 item_destination = 'accessories';
-                item_icon = 'fa-keyboard-o';
+                item_icon = 'far fa-keyboard';
             } else if (value.type == 'component') {
                 item_destination = 'components';
-                item_icon = 'fa-hdd-o';
+                item_icon = 'far fa-hdd';
             } else if (value.type == 'consumable') {
                 item_destination = 'consumables';
-                item_icon = 'fa-tint';
+                item_icon = 'fas fa-tint';
             } else if (value.type == 'license') {
                 item_destination = 'licenses';
-                item_icon = 'fa-floppy-o';
+                item_icon = 'far fa-save';
             } else if (value.type == 'user') {
                 item_destination = 'users';
-                item_icon = 'fa-user';
+                item_icon = 'fas fa-user';
             } else if (value.type == 'location') {
                 item_destination = 'locations'
-                item_icon = 'fa-map-marker';
+                item_icon = 'far fa-map-marker-alt';
             }
 
-            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
+            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
 
         } else {
             return '';
@@ -446,7 +446,7 @@
     function changeLogFormatter(value) {
         var result = '';
             for (var index in value) {
-                result += index + ': <del>' + value[index].old + '</del>  <i class="fa fa-long-arrow-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
+                result += index + ': <del>' + value[index].old + '</del>  <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
             }
 
         return result;
@@ -499,9 +499,9 @@
 
     function trueFalseFormatter(value) {
         if ((value) && ((value == 'true') || (value == '1'))) {
-            return '<i class="fa fa-check text-success"></i>';
+            return '<i class="fas fa-check text-success"></i>';
         } else {
-            return '<i class="fa fa-times text-danger"></i>';
+            return '<i class="fas fa-times text-danger"></i>';
         }
     }
 
@@ -583,7 +583,7 @@
         if ((value) && (value.url) && (value.inlineable)) {
             return '<a href="' + value.url + '" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
         } else if ((value) && (value.url)) {
-            return '<a href="' + value.url + '" class="btn btn-default"><i class="fa fa-download"></i></a>';
+            return '<a href="' + value.url + '" class="btn btn-default"><i class="fas fa-download"></i></a>';
         }
     }
 
@@ -595,11 +595,26 @@
         }
     }
 
+    function cleanFloat(number) {
+        if(!number) { // in a JavaScript context, meaning, if it's null or zero or unset
+            return 0.0;
+        }
+        if ("{{$snipeSettings->digit_separator}}" == "1.234,56") {
+            // yank periods, change commas to periods
+            periodless = number.toString().replace("\.","");
+            decimalfixed = periodless.replace(",",".");
+        } else {
+            // yank commas, that's it.
+            decimalfixed = number.toString().replace(",","");
+        }
+        return parseFloat(decimalfixed);
+    }
+
     function sumFormatter(data) {
         if (Array.isArray(data)) {
             var field = this.field;
             var total_sum = data.reduce(function(sum, row) {
-                return (sum) + (parseFloat(row[field]) || 0);
+                return (sum) + (cleanFloat(row[field]) || 0);
             }, 0);
             return numberWithCommas(total_sum.toFixed(2));
         }
@@ -633,9 +648,13 @@
 
     function numberWithCommas(value) {
         if ((value) && ("{{$snipeSettings->digit_separator}}" == "1.234,56")){
-        var parts = value.toString().split(".");
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        return parts.join(",");
+            var parts = value.toString().split(".");
+             parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+             return parts.join(",");
+         } else {
+             var parts = value.toString().split(",");
+             parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+             return parts.join(".");
         }
         return value
     }
