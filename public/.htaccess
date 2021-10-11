@@ -36,3 +36,7 @@
 
 </IfModule>
 Options -Indexes
+
+<Files "web.config">
+    Deny from all
+</Files>
