@@ -3,6 +3,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\CustomField;
+use Gate;
 use Illuminate\Database\Eloquent\Collection;
 
 class CustomFieldsTransformer
@@ -42,13 +43,24 @@ class CustomFieldsTransformer
             'name' => e($field->name),
             'db_column_name' => e($field->db_column_name()),
             'format'   =>  e($field->format),
+            'element'   =>  e($field->element),
+            'help_text' => e($field->help_text),
             'field_values'   => ($field->field_values) ?  e($field->field_values) : null,
             'field_values_array'   => ($field->field_values) ?  explode("\r\n", e($field->field_values)) : null,
             'type'   =>  e($field->element),
-            'required'   =>  $field->pivot ? $field->pivot->required : false,
+            'show_in_email' => (int) $field->show_in_email,
+            'field_encrypted' => (int) $field->field_encrypted,
             'created_at' => Helper::getFormattedDateObject($field->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($field->updated_at, 'datetime'),
         ];
+
+        $permissions_array['available_actions'] = [
+            'update' => Gate::allows('update', CustomField::class) ? true : false,
+            'delete' => true,
+        ];
+
+        $array += $permissions_array;
+
         return $array;
     }
 
@@ -66,6 +78,11 @@ class CustomFieldsTransformer
             'id' => $field->id,
             'name' => e($field->name),
             'type'   =>  e($field->element),
+            'help_text' => e($field->help_text),
+            'db_column' => e($field->db_column),
+            'format' => e($field->format),
+            'show_in_email' => (int) $field->show_in_email,
+            'field_encrypted' => (int) $field->field_encrypted,
             'field_values_array'   => ($field->field_values) ?  explode("\r\n", e($field->field_values)) : null,
             'default_value' => $field->defaultValue($modelId),
         ];

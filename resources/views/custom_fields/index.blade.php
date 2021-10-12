@@ -112,7 +112,7 @@
                 data-cookie-id-table="customFieldsTable"
                 data-id-table="customFieldsTable"
                 data-search="true"
-                data-side-pagination="client"
+                data-side-pagination="server"
                 data-show-columns="true"
                 data-show-export="true"
                 data-show-refresh="true"
@@ -120,68 +120,25 @@
                 data-sort-name="name"
                 id="customFieldsTable"
                 class="table table-striped snipe-table"
+                data-url="{{ route('api.customfields.index') }}"
                 data-export-options='{
                 "fileName": "export-fields-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
           <thead>
             <tr>
-              <th data-searchable="true">{{ trans('general.name') }}</th>
-              <th data-searchable="true">Help Text</th>
-              <th data-searchable="true">Email</th>
-              <th data-visible="false">DB Field</th>
-              <th data-searchable="true">{{ trans('admin/custom_fields/general.field_format') }}</th>
-              <th data-searchable="true">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
-              <th data-searchable="true">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
-              <th>Actions</th>
+              <th data-visible="false"  data-field="id" data-sortable="true" data-searchable="true">{{ trans('general.id') }}</th>
+              <th data-searchable="true" data-field="name">{{ trans('general.name') }}</th>
+              <th data-searchable="true" data-field="help_text">Help Text</th>
+              <th data-searchable="false" data-field="show_in_email" data-formatter="trueFalseFormatter">Email</th>
+              <th data-visible="false" data-sortable="true" data-field="db_column_name">DB Field</th>
+              <th data-sortable="false"  data-field="field_encrypted" data-formatter="trueFalseFormatter">Encrypted</th>
+              <th data-searchable="false" data-field="format">{{ trans('admin/custom_fields/general.field_format') }}</th>
+              <th data-searchable="false" data-field="element">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
+              <th data-searchable="false" data-field="fieldsets">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
+              <th data-sortable="false" data-formatter="fieldsActionsFormatter" data-field="actions" data-searchable="false">{{ trans('table.actions') }}</th>
             </tr>
           </thead>
-          <tbody>
-            @foreach($custom_fields as $field)
-            <tr>
-              <td>{{ $field->name }}</td>
-              <td>{{ $field->help_text }}</td>
-              <td>{!! ($field->show_in_email=='1') ? '<i class="fa fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fa fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
-              <td>
-                 <code>{{ $field->convertUnicodeDbSlug() }}</code>
-                @if ($field->convertUnicodeDbSlug()!=$field->db_column)
-                  <br><i class="fa fa-warning text-danger"></i>WARNING. This field is in the custom fields table as <code>{{  $field->db_column }}</code> but should be <code>{{ $field->convertUnicodeDbSlug() }}</code>.
-                @endif
-              </td>
-              <td>{{ $field->format }}</td>
-              <td>{{ $field->element }}</td>
-              <td>
-                @foreach($field->fieldset as $fieldset)
-                  <a href="{{ route('fieldsets.show', $fieldset->id) }}" class="label label-default">{{ $fieldset->name }}</a>
-                @endforeach
-              </td>
-              <td>
-                <nobr>
-                  @can('update', $field)
-                <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm">
-                  <i class="fa fa-pencil" aria-hidden="true"></i>
-                  <span class="sr-only">Edit</span>
-                </a>
-                @endcan               
-                @can('delete', $field)
-                {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
-                @if($field->fieldset->count()>0)
-                <button type="submit" class="btn btn-danger btn-sm disabled" disabled>
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-                  <span class="sr-only">Delete</span></button>
-                @else
-                <button type="submit" class="btn btn-danger btn-sm">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-                  <span class="sr-only">Delete</span>
-                </button>
-                @endif
-                {{ Form::close() }}
-                @endcan
-                </nobr>
-              </td>
-            </tr>
-            @endforeach
-          </tbody>
         </table>
         </div>
       </div><!-- /.box-body -->

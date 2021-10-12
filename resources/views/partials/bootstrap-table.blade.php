@@ -388,6 +388,7 @@
         'companies',
         'depreciations',
         'fieldsets',
+        'fields',
         'groups',
         'kits'
     ];
