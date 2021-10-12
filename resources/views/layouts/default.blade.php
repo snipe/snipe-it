@@ -102,6 +102,7 @@
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button above the compact sidenav -->
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="push-menu" role="button">
+            <i class="fas fa-bars"></i>
             <span class="sr-only">Toggle navigation</span>
           </a>
           <div class="nav navbar-nav navbar-left">
@@ -831,7 +832,7 @@
 
     <!-- end main container -->
 
-    <div class="modal  modal-danger fade" id="dataConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal modal-danger fade" id="dataConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -844,7 +845,7 @@
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
 
-                    <button type="button" class="btn btn-default  pull-left" data-dismiss="modal">{{ trans('general.cancel') }}</button>
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ trans('general.cancel') }}</button>
                     <button type="submit" class="btn btn-outline" id="dataConfirmOK">{{ trans('general.yes') }}</button>
                 </form>
                 </div>
