@@ -123,7 +123,7 @@
                 data-url="{{ route('api.customfields.index') }}"
                 data-export-options='{
                 "fileName": "export-fields-{{ date('Y-m-d') }}",
-                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                "ignoreColumn": ["actions"]
                 }'>
           <thead>
             <tr>
