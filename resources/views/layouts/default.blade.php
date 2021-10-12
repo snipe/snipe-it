@@ -102,7 +102,6 @@
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button above the compact sidenav -->
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="push-menu" role="button">
-            <i class="fas fa-bars"></i>
             <span class="sr-only">Toggle navigation</span>
           </a>
           <div class="nav navbar-nav navbar-left">
