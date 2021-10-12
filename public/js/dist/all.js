@@ -59184,235 +59184,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['fieldsetId', 'modelId', 'previousInput'],
-  data: function data() {
-    return {
-      identifiers: {
-        fieldset: null,
-        model: null
-      },
-      elements: {
-        fieldset: null,
-        field: null
-      },
-      fields: null,
-      show: false,
-      error: false
-    };
-  },
-
-  /**
-   * Initialise the component (Vue 1.x).
-   */
-  ready: function ready() {
-    this.init();
-  },
-
-  /**
-   * Initialise the component (Vue 2.x).
-   */
-  mounted: function mounted() {
-    this.init();
-  },
-  methods: {
-    /**
-     * Grabs the toggle field and connected fieldset and if present,
-     * set up the rest of the component. Scope lookups to the component
-     * only so we're not traversing and/or manipulating the whole DOM
-     */
-    init: function init() {
-      this.defaultValues = JSON.parse(this.previousInput);
-      this.identifiers.fieldset = this.fieldsetId;
-      this.identifiers.model = this.modelId; // This has to be jQuery because a lot of native functions/events
-      // do not work with select2
-
-      this.elements.fieldset = $('.js-fieldset-field');
-      this.elements.field = document.querySelector('.js-default-values-toggler');
-
-      if (this.elements.fieldset && this.elements.field) {
-        this.addListeners();
-        this.getFields();
-      }
-    },
-
-    /**
-     * Adds event listeners for:
-     *     - Toggle field changing
-     *     - Fieldset field changing
-     *
-     * Using jQuery event hooks for the select2 fieldset field as
-     * select2 does not emit DOM events...
-     */
-    addListeners: function addListeners() {
-      var _this = this;
-
-      this.elements.field.addEventListener('change', function (e) {
-        return _this.updateShow();
-      });
-      this.elements.fieldset.on('change', function (e) {
-        return _this.updateFields();
-      });
-    },
-
-    /**
-     * Call the CustomFieldsetsController::fields() endpoint to grab
-     * the fields we can set default values for
-     */
-    getFields: function getFields() {
-      var _this2 = this;
-
-      if (!this.identifiers.fieldset) {
-        return this.fields = [];
-      }
-
-      this.$http.get(this.getUrl()).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        return _this2.checkResponseForError(data);
-      }).then(function (data) {
-        return _this2.fields = data.rows;
-      }).then(function () {
-        return _this2.determineIfShouldShow();
-      });
-    },
-    getValue: function getValue(field) {
-      if (field.default_value) {
-        return field.default_value;
-      }
-
-      return this.defaultValues != null ? this.defaultValues[field.id.toString()] : '';
-    },
-
-    /**
-     * Generates the API URL depending on what information is available
-     *
-     * @return Router
-     */
-    getUrl: function getUrl() {
-      if (this.identifiers.model) {
-        return route('api.fieldsets.fields-with-default-value', {
-          fieldset: this.identifiers.fieldset,
-          model: this.identifiers.model
-        });
-      }
-
-      return route('api.fieldsets.fields', {
-        fieldset: this.identifiers.fieldset
-      });
-    },
-
-    /**
-     * Sets error state and shows error if request was not marked
-     * successful
-     */
-    checkResponseForError: function checkResponseForError(data) {
-      this.error = data.status == 'error';
-      return data;
-    },
-
-    /**
-     * Checks whether the toggler is checked and shows the default
-     * values field dependent on that
-     */
-    updateShow: function updateShow() {
-      if (this.identifiers.fieldset && this.elements.field) {
-        this.show = this.elements.field.checked;
-      }
-    },
-
-    /**
-     * checks the 'add default values' checkbox if it is already checked
-     * OR this.show is already set to true OR if any fields already have
-     * a default value.
-     */
-    determineIfShouldShow: function determineIfShouldShow() {
-      this.elements.field.checked = this.elements.field.checked || this.show || this.fields.reduce(function (accumulator, currentValue) {
-        return accumulator || currentValue.default_value;
-      }, false);
-      this.updateShow();
-    },
-    updateFields: function updateFields() {
-      this.identifiers.fieldset = this.elements.fieldset[0].value ? parseInt(this.elements.fieldset[0].value) : false;
-      this.getFields();
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/importer/importer-errors.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/importer/importer-errors.vue?vue&type=script&lang=js& ***!
@@ -61760,8 +61531,12 @@ __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
 Vue.component('passport-clients', __webpack_require__(/*! ./components/passport/Clients.vue */ "./resources/assets/js/components/passport/Clients.vue")["default"]);
 Vue.component('passport-authorized-clients', __webpack_require__(/*! ./components/passport/AuthorizedClients.vue */ "./resources/assets/js/components/passport/AuthorizedClients.vue")["default"]);
 Vue.component('passport-personal-access-tokens', __webpack_require__(/*! ./components/passport/PersonalAccessTokens.vue */ "./resources/assets/js/components/passport/PersonalAccessTokens.vue")["default"]);
-Vue.component('importer', __webpack_require__(/*! ./components/importer/importer.vue */ "./resources/assets/js/components/importer/importer.vue")["default"]);
-Vue.component('fieldset-default-values', __webpack_require__(/*! ./components/forms/asset-models/fieldset-default-values.vue */ "./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue")["default"]); // Commented out currently to avoid trying to load vue everywhere.
+Vue.component('importer', __webpack_require__(/*! ./components/importer/importer.vue */ "./resources/assets/js/components/importer/importer.vue")["default"]); // This component has been removed and replaced with a Livewire implementation
+// Vue.component(
+//     'fieldset-default-values',
+//     require('./components/forms/asset-models/fieldset-default-values.vue').default
+// );
+// Commented out currently to avoid trying to load vue everywhere.
 // const app = new Vue({
 //     el: '#app'
 // });
@@ -77294,30 +77069,6 @@ if ( typeof noGlobal === "undefined" ) {
 
 return jQuery;
 } );
-
-
-/***/ }),
-
-/***/ "./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../node_modules/laravel-mix/node_modules/css-loader/dist/runtime/api.js */ "./node_modules/laravel-mix/node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_laravel_mix_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nlegend[data-v-2adc8102] {\n    font-size: 13px;\n    font-weight: bold;\n    border: 0;\n}\nfieldset > div[data-v-2adc8102] {\n    background: #f4f4f4;\n    border: 1px solid #d3d6de;\n    margin: 0 15px 15px;\n    padding: 20px 20px 10px;\n}\n@media (max-width: 992px) {\nlegend[data-v-2adc8102] {\n        text-align: left !important;\n}\n}\n@media (min-width: 992px) {\nfieldset > div[data-v-2adc8102] {\n        width: 55%;\n}\n}\n\n\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
@@ -94940,36 +94691,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css&":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_26_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_26_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldset_default_values_vue_vue_type_style_index_0_id_2adc8102_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[1]!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[2]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css& */ "./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css&");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_26_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_26_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldset_default_values_vue_vue_type_style_index_0_id_2adc8102_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_26_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_26_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldset_default_values_vue_vue_type_style_index_0_id_2adc8102_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/passport/AuthorizedClients.vue?vue&type=style&index=0&id=2ee9fe67&scoped=true&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/passport/AuthorizedClients.vue?vue&type=style&index=0&id=2ee9fe67&scoped=true&lang=css& ***!
@@ -95408,47 +95129,6 @@ component.options.__file = "resources/assets/js/components/alert.vue"
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue":
-/*!***************************************************************************************!*\
-  !*** ./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue ***!
-  \***************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _fieldset_default_values_vue_vue_type_template_id_2adc8102_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fieldset-default-values.vue?vue&type=template&id=2adc8102&scoped=true& */ "./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=template&id=2adc8102&scoped=true&");
-/* harmony import */ var _fieldset_default_values_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fieldset-default-values.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=script&lang=js&");
-/* harmony import */ var _fieldset_default_values_vue_vue_type_style_index_0_id_2adc8102_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css& */ "./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-;
-
-
-/* normalize component */
-
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _fieldset_default_values_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _fieldset_default_values_vue_vue_type_template_id_2adc8102_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _fieldset_default_values_vue_vue_type_template_id_2adc8102_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "2adc8102",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/assets/js/components/forms/asset-models/fieldset-default-values.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/assets/js/components/importer/importer-errors.vue":
 /*!*********************************************************************!*\
   !*** ./resources/assets/js/components/importer/importer-errors.vue ***!
@@ -95745,22 +95425,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************!*\
-  !*** ./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldset_default_values_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./fieldset-default-values.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldset_default_values_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
 /***/ "./resources/assets/js/components/importer/importer-errors.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************!*\
   !*** ./resources/assets/js/components/importer/importer-errors.vue?vue&type=script&lang=js& ***!
@@ -95873,19 +95537,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css&":
-/*!************************************************************************************************************************************************!*\
-  !*** ./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css& ***!
-  \************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_laravel_mix_node_modules_css_loader_dist_cjs_js_clonedRuleSet_26_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_26_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldset_default_values_vue_vue_type_style_index_0_id_2adc8102_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[1]!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[2]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/laravel-mix/node_modules/css-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-26[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=style&index=0&id=2adc8102&scoped=true&lang=css&");
-
-
-/***/ }),
-
 /***/ "./resources/assets/js/components/passport/AuthorizedClients.vue?vue&type=style&index=0&id=2ee9fe67&scoped=true&lang=css&":
 /*!********************************************************************************************************************************!*\
   !*** ./resources/assets/js/components/passport/AuthorizedClients.vue?vue&type=style&index=0&id=2ee9fe67&scoped=true&lang=css& ***!
@@ -95951,23 +95602,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_alert_vue_vue_type_template_id_78c7e3d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_alert_vue_vue_type_template_id_78c7e3d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./alert.vue?vue&type=template&id=78c7e3d5&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/alert.vue?vue&type=template&id=78c7e3d5&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=template&id=2adc8102&scoped=true&":
-/*!**********************************************************************************************************************************!*\
-  !*** ./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=template&id=2adc8102&scoped=true& ***!
-  \**********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldset_default_values_vue_vue_type_template_id_2adc8102_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldset_default_values_vue_vue_type_template_id_2adc8102_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldset_default_values_vue_vue_type_template_id_2adc8102_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./fieldset-default-values.vue?vue&type=template&id=2adc8102&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=template&id=2adc8102&scoped=true&");
 
 
 /***/ }),
@@ -96124,131 +95758,6 @@ var render = function() {
       ],
       2
     )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=template&id=2adc8102&scoped=true&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/assets/js/components/forms/asset-models/fieldset-default-values.vue?vue&type=template&id=2adc8102&scoped=true& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.show && _vm.fields.length
-      ? _c("div", [
-          _c("div", { staticClass: "form-group" }, [
-            _c("fieldset", [
-              _c("legend", { staticClass: "col-md-3 control-label" }, [
-                _vm._v("Default Values")
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-sm-8 col-xl-7" },
-                [
-                  _vm.error
-                    ? _c("p", [
-                        _vm._v(
-                          "\n                        There was a problem retrieving the fields for this fieldset.\n                    "
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm._l(_vm.fields, function(field) {
-                    return _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-sm-12 col-lg-6" }, [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "control-label",
-                            attrs: { for: "default-value" + field.id }
-                          },
-                          [_vm._v(_vm._s(field.name))]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-sm-12 col-lg-6" }, [
-                        field.type == "text"
-                          ? _c("input", {
-                              staticClass: "form-control m-b-xs",
-                              attrs: {
-                                type: "text",
-                                id: "default-value" + field.id,
-                                name: "default_values[" + field.id + "]"
-                              },
-                              domProps: { value: _vm.getValue(field) }
-                            })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        field.type == "textarea"
-                          ? _c("textarea", {
-                              staticClass: "form-control",
-                              attrs: {
-                                id: "default-value" + field.id,
-                                name: "default_values[" + field.id + "]"
-                              },
-                              domProps: { value: _vm.getValue(field) }
-                            })
-                          : _vm._e(),
-                        _c("br"),
-                        _vm._v(" "),
-                        field.type == "listbox"
-                          ? _c(
-                              "select",
-                              {
-                                staticClass: "form-control m-b-xs",
-                                attrs: {
-                                  name: "default_values[" + field.id + "]"
-                                }
-                              },
-                              [
-                                _c("option", { attrs: { value: "" } }),
-                                _vm._v(" "),
-                                _vm._l(field.field_values_array, function(
-                                  field_value
-                                ) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      domProps: {
-                                        value: field_value,
-                                        selected:
-                                          _vm.getValue(field) == field_value
-                                      }
-                                    },
-                                    [_vm._v(_vm._s(field_value))]
-                                  )
-                                })
-                              ],
-                              2
-                            )
-                          : _vm._e()
-                      ])
-                    ])
-                  })
-                ],
-                2
-              )
-            ])
-          ])
-        ])
-      : _vm._e()
   ])
 }
 var staticRenderFns = []
