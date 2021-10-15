@@ -75,6 +75,10 @@
                 export: 'fa-download',
                 clearSearch: 'fa-times'
             },
+            exportOptions: {
+                htmlContent: true,
+            },
+
             exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
             onLoadSuccess: function () {
                 $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
