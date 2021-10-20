@@ -163,7 +163,9 @@ class CustomField extends Model
     public function getTableName()
     {
         //FIXME - this is dangerous; I bet you could find a sneaky way to inject a weird class and do something 'bad' here.
-        return (new $this->type)()->getTable(); //okay, THIS seems to want the 'type' to be the *final target* of the relation...
+        $type = $this->type;
+        $instance = new $type();
+        return $instance->getTable(); //okay, THIS seems to want the 'type' to be the *final target* of the relation...
     }
 
     /**
