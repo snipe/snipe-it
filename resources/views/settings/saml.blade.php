@@ -138,6 +138,20 @@
                             </div>
                         </div>
 
+                        <!-- SAML Disallow local Login -->
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                {{ Form::label('saml_disable_local_login', 'Allow local login') }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::checkbox('saml_disable_local_login', '1', Request::old('saml_disable_local_login', $setting->saml_disable_local_login),['class' => 'minimal '. $setting->demoMode, $setting->demoMode]) }}
+                                {{ trans('general.yes') }}
+                                <p class="help-block">Check this box to disallow local logins via /login?nosaml when SAML is enabled. This will make local accounts (including administrator accounts) unable to login without SAML.</p>
+                                
+                                {!! $errors->first('saml_disable_local_login', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                            </div>
+                        </div>
+
                         <!-- SAML Single Log Out -->
                         <div class="form-group">
                             <div class="col-md-3">
@@ -168,7 +182,7 @@
                 </div> <!--/.box-body-->
                 <div class="box-footer">
                     <div class="text-left col-md-6">
-                        <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
+                        <a class="text-left btn btn-link" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
