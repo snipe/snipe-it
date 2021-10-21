@@ -10,7 +10,6 @@ use App\Models\License;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Helpers\StorageHelper;
 use enshrined\svgSanitize\Sanitizer;
 
 class LicenseFilesController extends Controller
