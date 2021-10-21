@@ -9,7 +9,6 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use App\Helpers\StorageHelper;
 use enshrined\svgSanitize\Sanitizer;
 
 class AssetFilesController extends Controller
