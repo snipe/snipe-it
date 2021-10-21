@@ -8,5 +8,6 @@ return [
     'depreciation_name'  					=> 'Nama Penyusutan',
     'number_of_months'  					=> 'Jumlah bulan',
     'update'  					            => 'Perbaharui Penyusutan',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 ];

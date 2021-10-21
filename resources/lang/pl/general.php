@@ -176,6 +176,7 @@
     'remove_company'        => 'Usuń powiązanie firmy',
     'reports'				=> 'Raporty',
     'restored'				=> 'przywrócone',
+    'restore'				=> 'Restore',
     'requested'				=> 'Wymagane',
     'request_canceled'      => 'Żądanie anulowane',
     'save'  				=> 'Zapisz',

@@ -176,6 +176,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Skýrslur',
     'restored'				=> 'endurheimt',
+    'restore'				=> 'Restore',
     'requested'				=> 'Óskað eftir',
     'request_canceled'      => 'Beiðni endurkölluð',
     'save'  				=> 'Vista',

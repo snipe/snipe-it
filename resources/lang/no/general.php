@@ -176,6 +176,7 @@
     'remove_company'        => 'Fjern tilknytning til bedrift',
     'reports'				=> 'Rapporter',
     'restored'				=> 'gjenopprettet',
+    'restore'				=> 'Restore',
     'requested'				=> 'Forespurt',
     'request_canceled'      => 'Forespørsel avbrutt',
     'save'  				=> 'Lagre',

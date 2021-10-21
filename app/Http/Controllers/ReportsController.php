@@ -556,7 +556,7 @@ class ReportsController extends Controller
 
 
             foreach ($customfields as $customfield) {
-                if (e($request->input($customfield->db_column_name())) == '1') {
+                if ($request->input($customfield->db_column_name()) == '1') {
                     $header[] = $customfield->name;
                 }
             }

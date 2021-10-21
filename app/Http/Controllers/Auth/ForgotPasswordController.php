@@ -29,6 +29,7 @@ class ForgotPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('throttle:5,1', ['except' => 'showLinkRequestForm']);
     }
 
     /**
@@ -66,7 +67,7 @@ class ForgotPasswordController extends Controller
          * Once we have attempted to send the link, we will examine the response
          * then see the message we need to show to the user. Finally, we'll send out a proper response.
          */
-
+        
         $response = null;
 
         try {

@@ -129,22 +129,22 @@ class AssetsController extends Controller
                 $asset->asset_tag = $asset_tags[$a];
             }
 
-            $asset->company_id = Company::getIdForCurrentUser($request->input('company_id'));
-            $asset->model_id = $request->input('model_id');
-            $asset->order_number = $request->input('order_number');
-            $asset->notes = $request->input('notes');
-            $asset->user_id = Auth::id();
-            $asset->archived = '0';
-            $asset->physical = '1';
-            $asset->depreciate = '0';
-            $asset->status_id = request('status_id', 0);
-            $asset->warranty_months = request('warranty_months', null);
-            $asset->purchase_cost = Helper::ParseFloat($request->get('purchase_cost'));
-            $asset->purchase_date = request('purchase_date', null);
-            $asset->assigned_to = request('assigned_to', null);
-            $asset->supplier_id = request('supplier_id', 0);
-            $asset->requestable = request('requestable', 0);
-            $asset->rtd_location_id = request('rtd_location_id', null);
+            $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
+            $asset->model_id                = $request->input('model_id');
+            $asset->order_number            = $request->input('order_number');
+            $asset->notes                   = $request->input('notes');
+            $asset->user_id                 = Auth::id();
+            $asset->archived                = '0';
+            $asset->physical                = '1';
+            $asset->depreciate              = '0';
+            $asset->status_id               = request('status_id', 0);
+            $asset->warranty_months         = request('warranty_months', null);
+            $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost'));
+            $asset->purchase_date           = request('purchase_date', null);
+            $asset->assigned_to             = request('assigned_to', null);
+            $asset->supplier_id             = request('supplier_id', 0);
+            $asset->requestable             = request('requestable', 0);
+            $asset->rtd_location_id         = request('rtd_location_id', null);
 
             if (! empty($settings->audit_interval)) {
                 $asset->next_audit_date = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
@@ -296,7 +296,7 @@ class AssetsController extends Controller
 
         $asset->status_id = $request->input('status_id', null);
         $asset->warranty_months = $request->input('warranty_months', null);
-        $asset->purchase_cost = Helper::ParseFloat($request->input('purchase_cost', null));
+        $asset->purchase_cost = Helper::ParseCurrency($request->input('purchase_cost', null));
         $asset->purchase_date = $request->input('purchase_date', null);
         $asset->supplier_id = $request->input('supplier_id', null);
         $asset->expected_checkin = $request->input('expected_checkin', null);
@@ -356,6 +356,7 @@ class AssetsController extends Controller
                 }
             }
         }
+
 
         if ($asset->save()) {
             return redirect()->route('hardware.show', $assetId)
@@ -828,8 +829,8 @@ class AssetsController extends Controller
                 Storage::putFileAs($path, $upload, $file_name);
             }
 
-            $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
 
+            $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
             return redirect()->to('hardware')->with('success', trans('admin/hardware/message.audit.success'));
         }
     }

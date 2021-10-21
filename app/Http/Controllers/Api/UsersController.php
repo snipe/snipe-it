@@ -68,6 +68,7 @@ class UsersController extends Controller
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
         $users = Company::scopeCompanyables($users);
 
+
         if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
             $users = $users->onlyTrashed();
         } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
@@ -143,6 +144,7 @@ class UsersController extends Controller
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
 
         switch ($request->input('sort')) {
             case 'manager':
@@ -233,6 +235,8 @@ class UsersController extends Controller
         return (new SelectlistTransformer)->transformSelectlist($users);
     }
 
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -291,6 +295,7 @@ class UsersController extends Controller
         return (new UsersTransformer)->transformUser($user);
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -320,6 +325,7 @@ class UsersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Permission denied. You cannot update user information via API on the demo.'));
         }
 
+
         $user->fill($request->all());
         
         if ($user->id == $request->input('manager_id')) {
@@ -343,6 +349,8 @@ class UsersController extends Controller
             $user->permissions = $permissions_array;
         }
 
+
+
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
             ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
@@ -365,6 +373,7 @@ class UsersController extends Controller
             } elseif ($request->has('groups')) {
                 $user->groups()->sync([]);
             }
+
 
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
         }
@@ -427,13 +436,13 @@ class UsersController extends Controller
      * @param $userId
      * @return string JSON
      */
-    public function assets($id)
+    public function assets(Request $request, $id)
     {
         $this->authorize('view', User::class);
         $this->authorize('view', Asset::class);
         $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model')->get();
 
-        return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+        return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
     }
 
     /**
@@ -496,8 +505,9 @@ class UsersController extends Controller
                 return response()->json(['message' => trans('admin/settings/general.two_factor_reset_error')], 500);
             }
         }
-
         return response()->json(['message' => 'No ID provided'], 500);
+
+
     }
 
     /**

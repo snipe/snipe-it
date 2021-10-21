@@ -176,6 +176,7 @@
     'remove_company'        => 'Fjern association med selskab',
     'reports'				=> 'Rapporter',
     'restored'				=> 'gendannet',
+    'restore'				=> 'Restore',
     'requested'				=> 'Anmodet',
     'request_canceled'      => 'Anmodning Annulleret',
     'save'  				=> 'Gem',

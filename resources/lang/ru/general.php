@@ -176,6 +176,7 @@
     'remove_company'        => 'Удалить привязку компании',
     'reports'				=> 'Отчеты',
     'restored'				=> 'восстановлено',
+    'restore'				=> 'Restore',
     'requested'				=> 'Запрошено',
     'request_canceled'      => 'Запрос отменен',
     'save'  				=> 'Сохранить',

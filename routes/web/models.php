@@ -33,7 +33,7 @@ Route::group(['prefix' => 'models', 'middleware' => ['auth']], function () {
         ]
     )->name('view/model');
 
-    Route::get(
+    Route::post(
         '{modelID}/restore',
         [
             AssetModelsController::class, 

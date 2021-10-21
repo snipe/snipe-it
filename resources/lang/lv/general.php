@@ -176,6 +176,7 @@
     'remove_company'        => 'Noņemt uzņēmumu asociāciju',
     'reports'				=> 'Ziņojumi',
     'restored'				=> 'atjaunots',
+    'restore'				=> 'Restore',
     'requested'				=> 'Pieprasīts',
     'request_canceled'      => 'Pieprasījums atcelts',
     'save'  				=> 'Saglabājiet',

@@ -8,5 +8,6 @@ return [
     'depreciation_name'  					=> 'Afschrijvingsnaam',
     'number_of_months'  					=> 'Aantal maanden',
     'update'  					            => 'Afschrijving bijwerken',
+    'depreciation_min'                      => 'Minimale waarde na afschrijving'
 
 ];

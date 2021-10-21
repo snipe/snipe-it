@@ -8,5 +8,6 @@ return [
     'depreciation_name'  					=> 'Nombre Amortización',
     'number_of_months'  					=> 'Meses',
     'update'  					            => 'Actualizar Amortización',
+    'depreciation_min'                      => 'Valor mínimo después de depreciado'
 
 ];

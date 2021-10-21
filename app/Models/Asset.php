@@ -29,6 +29,8 @@ class Asset extends Depreciable
 {
 
     protected $presenter = \App\Presenters\AssetPresenter::class;
+
+    use CompanyableTrait;
     use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait, UniqueSerialTrait;
 
     const LOCATION = 'location';
@@ -68,6 +70,17 @@ class Asset extends Depreciable
     protected $injectUniqueIdentifier = true;
 
     // We set these as protected dates so that they will be easily accessible via Carbon
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'purchase_date',
+        'last_checkout',
+        'expected_checkin',
+        'last_audit_date',
+        'next_audit_date'
+    ];
+
 
     protected $casts = [
         'purchase_date' => 'datetime',
@@ -169,6 +182,7 @@ class Asset extends Depreciable
         'model.manufacturer' => ['name'],
     ];
 
+
     /**
      * This handles the custom field validation for assets
      *
@@ -186,6 +200,7 @@ class Asset extends Depreciable
 
         return parent::save($params);
     }
+
 
     public function getDisplayNameAttribute()
     {
@@ -243,7 +258,8 @@ class Asset extends Depreciable
 
             // The asset status is not archived and is deployable
             if (($this->assetstatus) && ($this->assetstatus->archived == '0')
-                && ($this->assetstatus->deployable == '1')) {
+                && ($this->assetstatus->deployable == '1')) 
+            {
                 return true;
             }
         }
@@ -370,8 +386,9 @@ class Asset extends Depreciable
      */
     public function components()
     {
-        return $this->belongsToMany(\App\Models\Component::class, 'components_assets', 'asset_id', 'component_id')->withPivot('id', 'assigned_qty')->withTrashed();
+
     }
+
 
     /**
      * Get depreciation attribute from associated asset model
@@ -399,8 +416,8 @@ class Asset extends Depreciable
      */
     public function uploads()
     {
-        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
-                  ->where('item_type', '=', self::class)
+        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+                  ->where('item_type', '=', Asset::class)
                   ->where('action_type', '=', 'uploaded')
                   ->whereNotNull('filename')
                   ->orderBy('created_at', 'desc');
@@ -447,6 +464,7 @@ class Asset extends Depreciable
         return $this->morphMany(self::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
+
     /**
      * Get the asset's location based on the assigned user
      *
@@ -475,6 +493,7 @@ class Asset extends Depreciable
                 if ($this->assignedTo) {
                     return $this->assignedTo;
                 }
+
             }
             if ($this->assignedType() == self::USER) {
                 if (($this->assignedTo) && $this->assignedTo->userLoc) {
@@ -532,6 +551,7 @@ class Asset extends Depreciable
 
         return false;
     }
+
 
     /**
      * Get the asset's logs
@@ -592,6 +612,7 @@ class Asset extends Depreciable
             ->withTrashed();
     }
 
+
     /**
      * Get maintenances for this asset
      *
@@ -616,6 +637,8 @@ class Asset extends Depreciable
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
+
+
 
     /**
      * Establishes the asset -> status relationship
@@ -661,6 +684,7 @@ class Asset extends Depreciable
             ->orderBy('purchase_date', 'ASC')
             ->get();
     }
+
 
     /**
      * Establishes the asset -> assigned licenses relationship
@@ -710,6 +734,8 @@ class Asset extends Depreciable
         return $this->belongsTo(\App\Models\Location::class, 'location_id');
     }
 
+
+
     /**
      * Get the next autoincremented asset tag
      *
@@ -720,6 +746,7 @@ class Asset extends Depreciable
     public static function autoincrement_asset()
     {
         $settings = \App\Models\Setting::getSettings();
+
 
         if ($settings->auto_increment_assets == '1') {
             $temp_asset_tag = \DB::table('assets')
@@ -751,22 +778,27 @@ class Asset extends Depreciable
      */
     public static function nextAutoIncrement($assets)
     {
+
         $max = 1;
 
         foreach ($assets as $asset) {
             $results = preg_match("/\d+$/", $asset['asset_tag'], $matches);
 
             if ($results) {
+            {
                 $number = $matches[0];
 
                 if ($number > $max) {
+                {
                     $max = $number;
                 }
             }
         }
 
-        return $max + 1;
+
     }
+
+
 
     /**
      * Add zerofilling based on Settings
@@ -807,6 +839,7 @@ class Asset extends Depreciable
         if (($this->model) && ($this->model->category)) {
             return $this->model->category->require_acceptance;
         }
+
     }
 
     /**
@@ -834,6 +867,7 @@ class Asset extends Depreciable
         return false;
     }
 
+
     /**
     * -----------------------------------------------
     * BEGIN QUERY SCOPES
@@ -859,11 +893,13 @@ class Asset extends Depreciable
         });
 
         foreach ($terms as $term) {
+
             $query = $query
                 ->orWhere('assets_users.first_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.last_name', 'LIKE', '%'.$term.'%')
                 ->orWhere('assets_users.username', 'LIKE', '%'.$term.'%')
                 ->orWhereRaw('CONCAT('.DB::getTablePrefix().'assets_users.first_name," ",'.DB::getTablePrefix().'assets_users.last_name) LIKE ?', ["%$term%"]);
+
         }
 
         /**
@@ -875,6 +911,7 @@ class Asset extends Depreciable
         });
 
         foreach ($terms as $term) {
+
             $query = $query->orWhere('assets_locations.name', 'LIKE', '%'.$term.'%');
         }
 
@@ -888,10 +925,12 @@ class Asset extends Depreciable
 
         foreach ($terms as $term) {
             $query = $query->orWhere('assigned_assets.name', 'LIKE', '%'.$term.'%');
+
         }
 
         return $query;
     }
+
 
     /**
     * Query builder scope for hardware
@@ -900,6 +939,7 @@ class Asset extends Depreciable
     *
     * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
+
     public function scopeHardware($query)
     {
         return $query->where('physical', '=', '1');
@@ -912,6 +952,7 @@ class Asset extends Depreciable
     *
     * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
+
     public function scopePending($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
@@ -921,6 +962,7 @@ class Asset extends Depreciable
         });
     }
 
+
     /**
     * Query builder scope for searching location
     *
@@ -928,6 +970,7 @@ class Asset extends Depreciable
     *
     * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
+
     public function scopeAssetsByLocation($query, $location)
     {
         return $query->where(function ($query) use ($location) {
@@ -949,6 +992,7 @@ class Asset extends Depreciable
         });
     }
 
+
     /**
     * Query builder scope for RTD assets
     *
@@ -956,6 +1000,7 @@ class Asset extends Depreciable
     *
     * @return \Illuminate\Database\Query\Builder          Modified query builder
     */
+
     public function scopeRTD($query)
     {
         return $query->whereNull('assets.assigned_to')
@@ -973,6 +1018,7 @@ class Asset extends Depreciable
    *
    * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
+
     public function scopeUndeployable($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
@@ -989,6 +1035,7 @@ class Asset extends Depreciable
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
+
     public function scopeNotArchived($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
@@ -1018,6 +1065,7 @@ class Asset extends Depreciable
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
+
     public function scopeDueForAudit($query, $settings)
     {
         $interval = $settings->audit_warning_days ?? 0;
@@ -1042,6 +1090,7 @@ class Asset extends Depreciable
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
+
     public function scopeOverdueForAudit($query)
     {
         return $query->whereNotNull('assets.next_audit_date')
@@ -1063,6 +1112,7 @@ class Asset extends Depreciable
      *
      * @return \Illuminate\Database\Query\Builder          Modified query builder
      */
+
     public function scopeDueOrOverdueForAudit($query, $settings)
     {
         $interval = $settings->audit_warning_days ?? 0;
@@ -1073,6 +1123,7 @@ class Asset extends Depreciable
             ->NotArchived();
     }
 
+
   /**
    * Query builder scope for Archived assets
    *
@@ -1080,6 +1131,7 @@ class Asset extends Depreciable
    *
    * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
+
     public function scopeArchived($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
@@ -1096,6 +1148,7 @@ class Asset extends Depreciable
    *
    * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
+
     public function scopeDeployed($query)
     {
         return $query->where('assigned_to', '>', '0');
@@ -1108,6 +1161,7 @@ class Asset extends Depreciable
    *
    * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
+
     public function scopeRequestableAssets($query)
     {
         return Company::scopeCompanyables($query->where('requestable', '=', 1))
@@ -1117,6 +1171,7 @@ class Asset extends Depreciable
                  ->where('archived', '=', 0);
         });
     }
+
 
     /**
    * scopeInModelList
@@ -1157,6 +1212,7 @@ class Asset extends Depreciable
     {
         return $query->where('accepted', '=', 'rejected');
     }
+
 
   /**
   * Query builder scope to get accepted assets
@@ -1220,6 +1276,7 @@ class Asset extends Depreciable
                     ->orWhere('assets.order_number', 'LIKE', '%'.$search.'%')
                     ->orWhere('assets.notes', 'LIKE', '%'.$search.'%');
             }
+
         })->withTrashed()->whereNull('assets.deleted_at'); //workaround for laravel bug
     }
 
@@ -1239,8 +1296,11 @@ class Asset extends Depreciable
                 ->where('assets.assigned_type', '=', User::class);
         })->where(function ($query) use ($search) {
                     $query->where('assets_dept_users.department_id', '=', $search);
+
         })->withTrashed()->whereNull('assets.deleted_at'); //workaround for laravel bug
     }
+
+
 
     /**
      * Query builder scope to search on text filters for complex Bootstrap Tables API
@@ -1344,6 +1404,7 @@ class Asset extends Depreciable
                     });
                 }
 
+
                 if ($fieldname == 'company') {
                     $query->where(function ($query) use ($search_val) {
                         $query->whereHas('company', function ($query) use ($search_val) {
@@ -1381,13 +1442,20 @@ class Asset extends Depreciable
              * against those relationships earlier in this method.
              *
              * - snipe 
+             *
              */
             if (($fieldname != 'category') && ($fieldname != 'model_number') && ($fieldname != 'rtd_location') && ($fieldname != 'location') && ($fieldname != 'supplier')
                 && ($fieldname != 'status_label') && ($fieldname != 'model') && ($fieldname != 'company') && ($fieldname != 'manufacturer')) {
                 $query->orWhere('assets.'.$fieldname, 'LIKE', '%'.$search_val.'%');
             }
+
+
+
+
         });
+
     }
+
 
     /**
     * Query builder scope to order on model
@@ -1414,6 +1482,7 @@ class Asset extends Depreciable
     {
         return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.model_number', $order);
     }
+
 
     /**
     * Query builder scope to order on assigned user
@@ -1454,6 +1523,7 @@ class Asset extends Depreciable
         return $query->leftJoin('companies as company_sort', 'assets.company_id', '=', 'company_sort.id')->orderBy('company_sort.name', $order);
     }
 
+
     /**
      * Query builder scope to return results of a category
      *
@@ -1482,6 +1552,8 @@ class Asset extends Depreciable
             ->join('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')->where('models.manufacturer_id', '=', $manufacturer_id);
     }
 
+
+
     /**
     * Query builder scope to order on category
     *
@@ -1496,6 +1568,7 @@ class Asset extends Depreciable
             ->join('categories as category_order', 'order_model_category.category_id', '=', 'category_order.id')
             ->orderBy('category_order.name', $order);
     }
+
 
     /**
      * Query builder scope to order on manufacturer
@@ -1537,6 +1610,7 @@ class Asset extends Depreciable
         return $query->leftJoin('locations as rtd_asset_locations', 'rtd_asset_locations.id', '=', 'assets.rtd_location_id')->orderBy('rtd_asset_locations.name', $order);
     }
 
+
     /**
      * Query builder scope to order on supplier name
      *
@@ -1565,7 +1639,9 @@ class Asset extends Depreciable
                 $query->where('locations.id', '=', $search);
             });
         });
+
     }
+
 
     /**
      * Query builder scope to search on depreciation name
@@ -1578,5 +1654,8 @@ class Asset extends Depreciable
     {
         return $query->join('models', 'assets.model_id', '=', 'models.id')
             ->join('depreciations', 'models.depreciation_id', '=', 'depreciations.id')->where('models.depreciation_id', '=', $search);
+
     }
+
+
 }

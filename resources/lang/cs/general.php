@@ -176,6 +176,7 @@
     'remove_company'        => 'Odstraňte sdružení společnosti',
     'reports'				=> 'Reporty',
     'restored'				=> 'obnoveno',
+    'restore'				=> 'Restore',
     'requested'				=> 'Požadováno',
     'request_canceled'      => 'Žádost zrušena',
     'save'  				=> 'Uložit',

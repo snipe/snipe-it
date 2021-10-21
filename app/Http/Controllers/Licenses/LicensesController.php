@@ -76,27 +76,27 @@ class LicensesController extends Controller
         // create a new model instance
         $license = new License();
         // Save the license data
-        $license->company_id = Company::getIdForCurrentUser($request->input('company_id'));
-        $license->depreciation_id = $request->input('depreciation_id');
-        $license->expiration_date = $request->input('expiration_date');
-        $license->license_email = $request->input('license_email');
-        $license->license_name = $request->input('license_name');
-        $license->maintained = $request->input('maintained', 0);
-        $license->manufacturer_id = $request->input('manufacturer_id');
-        $license->name = $request->input('name');
-        $license->notes = $request->input('notes');
-        $license->order_number = $request->input('order_number');
-        $license->purchase_cost = $request->input('purchase_cost');
-        $license->purchase_date = $request->input('purchase_date');
-        $license->purchase_order = $request->input('purchase_order');
-        $license->purchase_order = $request->input('purchase_order');
-        $license->reassignable = $request->input('reassignable', 0);
-        $license->seats = $request->input('seats');
-        $license->serial = $request->input('serial');
-        $license->supplier_id = $request->input('supplier_id');
-        $license->category_id = $request->input('category_id');
-        $license->termination_date = $request->input('termination_date');
-        $license->user_id = Auth::id();
+        $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
+        $license->depreciation_id   = $request->input('depreciation_id');
+        $license->expiration_date   = $request->input('expiration_date');
+        $license->license_email     = $request->input('license_email');
+        $license->license_name      = $request->input('license_name');
+        $license->maintained        = $request->input('maintained', 0);
+        $license->manufacturer_id   = $request->input('manufacturer_id');
+        $license->name              = $request->input('name');
+        $license->notes             = $request->input('notes');
+        $license->order_number      = $request->input('order_number');
+        $license->purchase_cost     = Helper::ParseCurrency($request->input('purchase_cost'));
+        $license->purchase_date     = $request->input('purchase_date');
+        $license->purchase_order    = $request->input('purchase_order');
+        $license->purchase_order    = $request->input('purchase_order');
+        $license->reassignable      = $request->input('reassignable', 0);
+        $license->seats             = $request->input('seats');
+        $license->serial            = $request->input('serial');
+        $license->supplier_id       = $request->input('supplier_id');
+        $license->category_id       = $request->input('category_id');
+        $license->termination_date  = $request->input('termination_date');
+        $license->user_id           = Auth::id();
 
         if ($license->save()) {
             return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.create.success'));
@@ -154,25 +154,25 @@ class LicensesController extends Controller
 
         $this->authorize('update', $license);
 
-        $license->company_id = Company::getIdForCurrentUser($request->input('company_id'));
-        $license->depreciation_id = $request->input('depreciation_id');
-        $license->expiration_date = $request->input('expiration_date');
-        $license->license_email = $request->input('license_email');
-        $license->license_name = $request->input('license_name');
-        $license->maintained = $request->input('maintained', 0);
-        $license->name = $request->input('name');
-        $license->notes = $request->input('notes');
-        $license->order_number = $request->input('order_number');
-        $license->purchase_cost = $request->input('purchase_cost');
-        $license->purchase_date = $request->input('purchase_date');
-        $license->purchase_order = $request->input('purchase_order');
-        $license->reassignable = $request->input('reassignable', 0);
-        $license->serial = $request->input('serial');
-        $license->termination_date = $request->input('termination_date');
-        $license->seats = e($request->input('seats'));
-        $license->manufacturer_id = $request->input('manufacturer_id');
-        $license->supplier_id = $request->input('supplier_id');
-        $license->category_id = $request->input('category_id');
+        $license->company_id        = Company::getIdForCurrentUser($request->input('company_id'));
+        $license->depreciation_id   = $request->input('depreciation_id');
+        $license->expiration_date   = $request->input('expiration_date');
+        $license->license_email     = $request->input('license_email');
+        $license->license_name      = $request->input('license_name');
+        $license->maintained        = $request->input('maintained',0);
+        $license->name              = $request->input('name');
+        $license->notes             = $request->input('notes');
+        $license->order_number      = $request->input('order_number');
+        $license->purchase_cost     = Helper::ParseCurrency($request->input('purchase_cost'));
+        $license->purchase_date     = $request->input('purchase_date');
+        $license->purchase_order    = $request->input('purchase_order');
+        $license->reassignable      = $request->input('reassignable', 0);
+        $license->serial            = $request->input('serial');
+        $license->termination_date  = $request->input('termination_date');
+        $license->seats             = e($request->input('seats'));
+        $license->manufacturer_id   =  $request->input('manufacturer_id');
+        $license->supplier_id       = $request->input('supplier_id');
+        $license->category_id       = $request->input('category_id');
 
         if ($license->save()) {
             return redirect()->route('licenses.show', ['license' => $licenseId])->with('success', trans('admin/licenses/message.update.success'));

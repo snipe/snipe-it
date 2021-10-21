@@ -188,6 +188,8 @@ class AssetsController extends Controller
             }
         }
 
+
+
         // This is used by the sidenav, mostly
 
         // We switched from using query scopes here because of a Laravel bug
@@ -313,12 +315,25 @@ class AssetsController extends Controller
 
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
+        
+
+        /**
+         * Include additional associated relationships
+         */  
+        if ($request->input('components')) {
+            $assets->loadMissing(['components' => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }]);
+        }
+
+        
+
 
         /**
          * Here we're just determining which Transformer (via $transformer) to use based on the 
          * variables we set earlier on in this method - we default to AssetsTransformer.
          */
-        return (new $transformer)->transformAssets($assets, $total);
+        return (new $transformer)->transformAssets($assets, $total, $request);
     }
 
     /**
@@ -329,15 +344,16 @@ class AssetsController extends Controller
      * @since [v4.2.1]
      * @return JsonResponse
      */
-    public function showByTag($tag)
+    public function showByTag(Request $request, $tag)
     {
         if ($asset = Asset::with('assetstatus')->with('assignedTo')->where('asset_tag', $tag)->first()) {
             $this->authorize('view', $asset);
 
-            return (new AssetsTransformer)->transformAsset($asset);
+            return (new AssetsTransformer)->transformAsset($asset, $request);
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+
+
     }
 
     /**
@@ -348,15 +364,16 @@ class AssetsController extends Controller
      * @since [v4.2.1]
      * @return JsonResponse
      */
-    public function showBySerial($serial)
+    public function showBySerial(Request $request, $serial)
     {
         $this->authorize('index', Asset::class);
         if ($assets = Asset::with('assetstatus')->with('assignedTo')
             ->withTrashed()->where('serial', $serial)->get()) {
                 return (new AssetsTransformer)->transformAssets($assets, $assets->count());
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+
+
     }
 
 
@@ -368,19 +385,19 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()
             ->withCount('checkins as checkins_count', 'checkouts as checkouts_count', 'userRequests as user_requests_count')->findOrFail($id)) {
             $this->authorize('view', $asset);
 
-            return (new AssetsTransformer)->transformAsset($asset);
+            return (new AssetsTransformer)->transformAsset($asset, $request->input('components') );
         }
 
 
     }
 
-    public function licenses($id)
+    public function licenses(Request $request, $id)
     {
         $this->authorize('view', Asset::class);
         $this->authorize('view', License::class);
@@ -446,6 +463,7 @@ class AssetsController extends Controller
         return (new SelectlistTransformer)->transformSelectlist($assets);
     }
 
+
     /**
      * Accepts a POST request to create a new asset
      *
@@ -461,26 +479,26 @@ class AssetsController extends Controller
         $asset = new Asset();
         $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
 
-        $asset->name = $request->get('name');
-        $asset->serial = $request->get('serial');
-        $asset->company_id = Company::getIdForCurrentUser($request->get('company_id'));
-        $asset->model_id = $request->get('model_id');
-        $asset->order_number = $request->get('order_number');
-        $asset->notes = $request->get('notes');
-        $asset->asset_tag = $request->get('asset_tag', Asset::autoincrement_asset());
-        $asset->user_id = Auth::id();
-        $asset->archived = '0';
-        $asset->physical = '1';
-        $asset->depreciate = '0';
-        $asset->status_id = $request->get('status_id', 0);
-        $asset->warranty_months = $request->get('warranty_months', null);
-        $asset->purchase_cost = Helper::ParseFloat($request->get('purchase_cost'));
-        $asset->purchase_date = $request->get('purchase_date', null);
-        $asset->assigned_to = $request->get('assigned_to', null);
-        $asset->supplier_id = $request->get('supplier_id', 0);
-        $asset->requestable = $request->get('requestable', 0);
-        $asset->rtd_location_id = $request->get('rtd_location_id', null);
-        $asset->location_id = $request->get('rtd_location_id', null);
+        $asset->name                    = $request->get('name');
+        $asset->serial                  = $request->get('serial');
+        $asset->company_id              = Company::getIdForCurrentUser($request->get('company_id'));
+        $asset->model_id                = $request->get('model_id');
+        $asset->order_number            = $request->get('order_number');
+        $asset->notes                   = $request->get('notes');
+        $asset->asset_tag               = $request->get('asset_tag', Asset::autoincrement_asset());
+        $asset->user_id                 = Auth::id();
+        $asset->archived                = '0';
+        $asset->physical                = '1';
+        $asset->depreciate              = '0';
+        $asset->status_id               = $request->get('status_id', 0);
+        $asset->warranty_months         = $request->get('warranty_months', null);
+        $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost')); // this is the API's store method, so I don't know that I want to do this? Confusing. FIXME (or not?!)
+        $asset->purchase_date           = $request->get('purchase_date', null);
+        $asset->assigned_to             = $request->get('assigned_to', null);
+        $asset->supplier_id             = $request->get('supplier_id', 0);
+        $asset->requestable             = $request->get('requestable', 0);
+        $asset->rtd_location_id         = $request->get('rtd_location_id', null);
+        $asset->location_id             = $request->get('rtd_location_id', null);
 
         /**
         * this is here just legacy reasons. Api\AssetController
@@ -549,6 +567,7 @@ class AssetsController extends Controller
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
     }
+
 
     /**
      * Accepts a POST request to update an asset

@@ -629,7 +629,7 @@
                     @endcan
                   </td>
                   <td class="col-md-2">
-                    {{ $license->purchase_cost }}
+                    {{ Helper::formatCurrencyOutput($license->purchase_cost) }}
                   </td>
                   <td>
                     {{ $license->purchase_order }}
@@ -681,7 +681,7 @@
                   <tr>
                     <td>{!!$accessory->present()->nameUrl()!!}</td>
                     <td>
-                      {!! $accessory->purchase_cost !!}
+                      {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
                     </td>
                     <td class="hidden-print">
                       @can('checkin', $accessory)
@@ -727,7 +727,7 @@
                 <tr>
                   <td>{!! $consumable->present()->nameUrl() !!}</td>
                   <td>
-                    {!! $consumable->purchase_cost !!}
+                    {!! Helper::formatCurrencyOutput($consumable->purchase_cost) !!}
                   </td>
                   <td>{{ $consumable->created_at }}</td>
                 </tr>
@@ -742,7 +742,7 @@
 
             <div class="col-md-12 col-sm-12">
               <div class="table-responsive">
-                <table id="files-table" class="display table table-striped">
+                <table id="files-table" class="table display table-striped">
                   <thead>
                     <tr>
                       <th class="col-md-5">{{ trans('general.notes') }}</th>
@@ -820,7 +820,7 @@
 
         <div class="tab-pane" id="managed">
           <div class="table-responsive">
-            <table class="display table table-striped">
+            <table class="table display table-striped">
               <thead>
                 <tr>
                   <th class="col-md-8">{{ trans('general.name') }}</th>

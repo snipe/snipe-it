@@ -176,6 +176,7 @@
     'remove_company'        => '移除公司關聯',
     'reports'				=> '報告',
     'restored'				=> '還原',
+    'restore'				=> 'Restore',
     'requested'				=> '已申請',
     'request_canceled'      => '取消申請',
     'save'  				=> '儲存',

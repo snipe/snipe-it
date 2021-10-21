@@ -341,6 +341,7 @@ Route::get(
     [LoginController::class, 'legacyAuthRedirect']
 );
 
+
 /*
 |--------------------------------------------------------------------------
 | Setup Routes
@@ -359,6 +360,7 @@ Route::group(['prefix' => 'setup', 'middleware' => 'web'], function () {
         'user',
         [SettingsController::class, 'postSaveFirstAdmin']
     )->name('setup.user.save');
+
 
     Route::get(
         'migrate',

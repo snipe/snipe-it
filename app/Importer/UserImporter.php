@@ -74,6 +74,7 @@ class UserImporter extends ItemImporter
             return;
         }
 
+
         // This needs to be applied after the update logic, otherwise we'll overwrite user passwords
         // Issue #5408
         $this->item['password'] = bcrypt($this->tempPassword);
@@ -106,6 +107,7 @@ class UserImporter extends ItemImporter
         }
 
         $this->logError($user, 'User');
+        return;
     }
 
     /**
@@ -118,9 +120,10 @@ class UserImporter extends ItemImporter
      */
     public function createOrFetchDepartment($department_name)
     {
-        if(is_null($department_name) || $department_name == ''){
+
             return null;
         }
+
         
         $department = Department::where(['name' => $department_name])->first();
         if ($department) {
