@@ -784,11 +784,11 @@ class Asset extends Depreciable
         foreach ($assets as $asset) {
             $results = preg_match("/\d+$/", $asset['asset_tag'], $matches);
 
-            if ($results) {
+            if ($results) 
             {
                 $number = $matches[0];
 
-                if ($number > $max) {
+                if ($number > $max) 
                 {
                     $max = $number;
                 }
