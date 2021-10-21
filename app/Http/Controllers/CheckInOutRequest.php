@@ -39,6 +39,8 @@ trait CheckInOutRequest
         switch (request('checkout_to_type')) {
             case 'location':
                 $asset->location_id = $target->id;
+                Asset::where('assigned_type', 'App\Models\Asset')->where('assigned_to', $asset->id)
+                    ->update(['location_id' => $asset->location_id]);
                 break;
             case 'asset':
                 $asset->location_id = $target->rtd_location_id;
