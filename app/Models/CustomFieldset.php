@@ -67,10 +67,13 @@ class CustomFieldset extends Model
 
         // $class_name = $this->type; // FIXED I THINK BUT CHECK?: note that here, we're expecting the 'type' to be the type of the *pivot*, but elsewhere we seem to want it to be of the Customizable thing.
         // $class_name is the name of the end-result of the actually customizable thing (e.g. "asset" not "AssetModel"), in "\Blah\Blah\Blah" format as a string.
-        $customizable_class_name = $this->type; //TODO - maybe this should be some kind of method in the Trait itself? Let's see how it goes first.
-        $customizable_blank_object = new $customizable_class_name(); //FIXME - this seems dangerous with a Traits check (similar with getTableName() or whatever - maybe smoosh em together? Or check the Traits using refleciton?)
-        $pivot_class_object = $customizable_blank_object->custom_field_pivot_class;
-        return $pivot_class_object::where("fieldset_id", "=", $this->id)->get(); // I *have* tested this in Tinker and it *does* seem to work.
+        // does it make sense to do a Trait check here, or is the actual trait *usage* enough?
+        $customizable_class_name = $this->type; //TODO - copypasta from Customizable trait?
+        \Log::info("Customizable Class name is: ".$customizable_class_name);
+        $customizable_class = new $customizable_class_name;
+        $pivot_class_name = $customizable_class->getPivotClass();
+
+        return $pivot_class_name::where("fieldset_id", "=", $this->id)->get(); // I *have* tested this in Tinker and it *does* seem to work.
 
         /**************************
          * 

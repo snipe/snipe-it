@@ -36,8 +36,8 @@ class Asset extends Depreciable
     const ASSET = 'asset';
     const USER = 'user';
 
-    use Acceptable, Customizable; // I'm not sure this is where I want the attachment; should it maybe instead go in the AssetModel?
-    protected $custom_field_pivot_class = AssetModel::class;
+    use Acceptable, Customizable;
+    protected $custom_field_pivot_class = AssetModel::class; //wait, why is this a string?!
     protected $custom_field_pivot_id = "model_id";
 
     /**

@@ -40,7 +40,7 @@ class CustomFieldsController extends Controller
     {
         $this->authorize('view', CustomField::class);
 
-        $fieldsets = CustomFieldset::with('fields', 'models')->where("type",self::$tabs[$request->get('tab',0)])->get();
+        $fieldsets = CustomFieldset::with('fields')->where("type",self::$tabs[$request->get('tab',0)])->get(); //cannot eager-load 'customizable' because it's not a relation
         $fields = CustomField::with('fieldset')->where("type",self::$tabs[$request->get('tab',0)])->get();
 
         return view('custom_fields.index')->with('custom_fieldsets', $fieldsets)->with('custom_fields', $fields);

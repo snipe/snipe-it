@@ -47,6 +47,22 @@ trait Customizable
 
     // }
 
+    public function getPivotClass()
+    {
+        /*
+        Since this method is defined within the Trait itself, it inherently is 'safe' - only classes with this trait will work correctly. That's what we want. 
+        */
+        // $customizable_class_name = $this->type; //TODO - maybe this should be some kind of method in the Trait itself? Let's see how it goes first.
+        // $customizable_blank_object = new $customizable_class_name(); //FIXME - this seems dangerous with a Traits check (similar with getTableName() or whatever - maybe smoosh em together? Or check the Traits using reflection?)
+        // \Log::info("Customizable class: $customizable_class_name");
+        // $pivot_class_object = $this->custom_field_pivot_class;
+        // \Log::info("Pivot class object is? ".$pivot_class_object);
+        // \Log::info("Pivot class: ".get_class($pivot_class_object));
+        // return $pivot_class_object;
+
+        return $this->custom_field_pivot_class;
+    }
+
     /**
      * This handles the custom field validation for anything that is Customizable
      *

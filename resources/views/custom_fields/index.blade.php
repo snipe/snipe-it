@@ -84,15 +84,15 @@
                 {{ $fieldset->fields->count() }}
               </td>
               <td>
-                @foreach($fieldset->models as $model)
-                  <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}{{ ($model->model_number) ? ' ('.$model->model_number.')' : '' }}</a>
-
+                @foreach($fieldset->customizable() as $customizable)
+                  {{-- <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}{{ ($model->model_number) ? ' ('.$model->model_number.')' : '' }}</a> --}}
+                  {{ get_class($customizable) }}: {{ $customizable->name }}<br />
                 @endforeach
               </td>
               <td>
                 @can('delete', $fieldset)
                 {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete']) }}
-                  @if($fieldset->models->count() > 0)
+                  @if($fieldset->customizable()->count() > 0)
                   <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fas fa-trash"></i></button>
                   @else
                   <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
