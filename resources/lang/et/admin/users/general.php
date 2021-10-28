@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'kasutaja saab sisse logida',
     'activated_disabled_help_text' => 'Te ei saa iseenda konto aktiveerimis staatust muuta.',
     'assets_user'       => 'Kasutajaga :nimi seotud vahendid',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Muuda kasutajat',
     'filetype_info'     => 'Lubatud failitüübid on png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, ja rar.',
     'history_user'      => 'Kasutaja :name ajalugu',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Nende taastamiseks klõpsake siin.',
     'last_login'        => 'Viimane sisselogimine',
     'ldap_config_text'  => 'LDAP-i konfiguratsiooniseadeid saab leida Admin> Seaded. (Valikuline) valitud asukoht määratakse kõigi imporditud kasutajate jaoks.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Sinu praegused admin seaded lubavad kahe-astmelist autantimis jõustada valikulselt. ',
     'two_factor_enrolled' => '2FA-seade on registreeritud',
     'two_factor_active'   => '2FA aktiivne ',
-    );
+    ];

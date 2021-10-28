@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Özel alanlar',
     'field'		                => 'Alan',
     'about_fieldsets_title'		=> 'Alan kümeleri hakkında',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Yeni özel alan',
     'value_encrypted'      	        => 'Bu alanın değeri veritabanında şifrelidir. Yalnızca yönetici kullanıcıları şifresi çözülen değeri görüntüleyebilir',
     'show_in_email'     => 'Bu alandaki değer kullanıcıya gönderilen ödeme e-postalara dahil edilsin mi? Şifreli alanlar e-postalarda yer alamaz.',
-);
+];

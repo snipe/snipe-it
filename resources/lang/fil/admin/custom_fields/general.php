@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'I-kuston ang mga Fields',
     'field'		                => 'Ang Field',
     'about_fieldsets_title'		=> 'Ang Tungkol sa Fieldsets',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Ang Bagong Custom Field',
     'value_encrypted'      	        => 'Ang balyu ng field na ito ay naka-encrypt sa database. Ang admin na mga gumagamit lamang ang maaaring maka-tanaw sa na-decrypt na balyu',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'O zestawach',
     'about_kits_text'                   => 'Zestawy predefiniowane pozwalają na szybkie przydzielenie zbioru pozycji (urządzeń, licencji itd.) użytkownikowi. Może to być pomocne, kiedy twój proces wdrażania jest spójny dla wielu użytkowników i wszyscy użytkownicy otrzymują takie same pozycje.',
     'checkout'                          => 'Wydaj zestaw ',
@@ -14,4 +14,4 @@ return array(
     'none_consumables'                  => 'Nie ma wystarczającej ilości dostępnych jednostek :consumable do zakupu. :qty są wymagane. ',
     'none_accessory'                    => 'Brak wystarczającej liczby dostępnych jednostek z :accessory do zamówienia. :qty są wymagane. ',
 
-);
+];

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddDigitSeparatorToSettings extends Migration
 {
@@ -14,7 +14,7 @@ class AddDigitSeparatorToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->char('digit_separator')->nullable()->default('1234.56');
+            $table->char('digit_separator')->nullable()->default('1,234.56');
         });
     }
 

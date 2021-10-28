@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Käyttäjä on peruuttanut nimikkeen pyynnön sivustolla',
     'a_user_requested' => 'Käyttäjä on pyytänyt nimikettä sivustolla',
     'accessory_name' => 'Oheistarvikkeen nimi:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Laite:',
     'asset_name' => 'Laitteen nimi:',
     'asset_requested' => 'Pyydetty laite',
-    'asset_tag' => 'Laitetunniste:',
+    'asset_tag' => 'Laitetunniste',
     'assigned_to' => 'Osoitettu',
     'best_regards' => 'Parhain terveisin,',
     'canceled' => 'Peruutettu:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Odotettujen palautuspäivien raportti',
     'Expected_Checkin_Notification' => 'Muistutus: :name palautuspäivä lähestyy',
     'Expected_Checkin_Date' => 'Sinulle luovutettu laite on määrä palauttaa takaisin :date',
-    'your_assets' => 'Omat laitteesi'
-);
+    'your_assets' => 'Omat laitteesi',
+];

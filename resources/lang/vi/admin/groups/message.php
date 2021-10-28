@@ -1,22 +1,22 @@
 <?php
 
-return array(
+return [
 
     'group_exists'        => 'Nhóm đã tồn tại!',
     'group_not_found'     => 'Nhóm [:id] không tồn tại.',
     'group_name_required' => 'Trường tên thì bắt buộc',
 
-    'success' => array(
+    'success' => [
         'create' => 'Nhóm đã được tạo thành công.',
         'update' => 'Nhóm đã cập nhật thành công.',
         'delete' => 'Nhóm đã xóa thành công.',
-    ),
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Bạn có chắc muốn xóa nhóm này?',
         'create' => 'Có vấn đề khi tạo nhóm. Xin vui lòng thử lại.',
         'update' => 'Có vấn đề khi cập nhật nhóm. Xin vui lòng thử lại.',
         'delete' => 'Có vấn đề khi xóa nhóm. Xin vui lòng thử lại.',
-    ),
+    ],
 
-);
+];

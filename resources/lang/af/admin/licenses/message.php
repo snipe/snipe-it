@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Lisensie bestaan ​​nie.',
     'user_does_not_exist' => 'Gebruiker bestaan ​​nie.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'Jy moet \'n bate of \'n gebruiker kies, maar nie albei nie.',
     'not_found' => 'License not found',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Lisensie is nie geskep nie, probeer asseblief weer.',
-        'success' => 'Lisensie geskep suksesvol.'
-    ),
+        'success' => 'Lisensie geskep suksesvol.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Lêer nie verwyder nie. Probeer asseblief weer.',
         'success' => 'Lêer suksesvol uitgevee.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Lêer (s) nie opgelaai nie. Probeer asseblief weer.',
         'success' => 'Lêer (s) suksesvol opgelaai.',
         'nofiles' => 'Jy het nie enige lêers vir oplaai gekies nie, of die lêer wat jy probeer oplaai is te groot',
         'invalidfiles' => 'Een of meer van jou lêers is te groot of is \'n filetipe wat nie toegelaat word nie. Toegelate filetipes is png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml en lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Lisensie is nie opgedateer nie, probeer asseblief weer',
-        'success' => 'Lisensie suksesvol opgedateer.'
-    ),
+        'success' => 'Lisensie suksesvol opgedateer.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Is jy seker jy wil hierdie lisensie uitvee?',
         'error'   => 'Daar was \'n probleem met die verwydering van die lisensie. Probeer asseblief weer.',
-        'success' => 'Die lisensie is suksesvol verwyder.'
-    ),
+        'success' => 'Die lisensie is suksesvol verwyder.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Daar was \'n probleem om die lisensie te kontroleer. Probeer asseblief weer.',
-        'success' => 'Die lisensie is suksesvol nagegaan'
-    ),
+        'success' => 'Die lisensie is suksesvol nagegaan',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Daar was \'n probleem om die lisensie te kontroleer. Probeer asseblief weer.',
-        'success' => 'Die lisensie is suksesvol nagegaan'
-    ),
+        'success' => 'Die lisensie is suksesvol nagegaan',
+    ],
 
-);
+];

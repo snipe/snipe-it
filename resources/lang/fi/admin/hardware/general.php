@@ -1,22 +1,22 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Tietoja laitteista',
     'about_assets_text'            => 'Laitteita ovat nimikeitä joita seurataan sarjanumeron tai laitetunnisteen avulla. Laitteiksi määritellään yleensä arvokkaampaa omaisuutta, joiden tunnistaminen yksilöllisesti on tärkeää. Pienemmät laitteet voi määrittää lisävarusteiksi.',
-	'archived'  				=> 'Arkistoitu',
+    'archived'  				=> 'Arkistoitu',
     'asset'  					=> 'Laite',
     'bulk_checkout'             => 'Laitteiden luovutus',
     'checkin'  					=> 'Palauta laite',
     'checkout'  				=> 'Luovuta laite',
     'clone'  					=> 'Monista laite',
     'deployable'  				=> 'Käyttöönotettavissa',
-    'deleted'  					=> 'Tämä laite on poistettu. <a href="/hardware/:asset_id/restore">Klikkaa tästä palauttaaksesi sen</a>.',
+    'deleted'  					=> 'This asset has been deleted.',
     'edit'  					=> 'Muokkaa laitetta',
-    'model_deleted'  			=> 'Tämä laitemalli on poistettu. Sinun on palautettava malli ennen kuin voit palauttaa laitteen.<br/> <a href="/hardware/models/:model_id/restore">Klikkaa tästä palauttaaksesi mallin</a>.',
+    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'Pyydettävissä',
     'requested'				    => 'Pyydetty',
     'restore'  					=> 'Palauta laite',
     'pending'  					=> 'Odottaa',
     'undeployable'  			=> 'Ei käytettävissä',
     'view'  					=> 'Näytä laite',
-);
+];

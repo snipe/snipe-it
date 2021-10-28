@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Aset ',
     'image'		=> 'Perangkat Gambar',
     'days_without_acceptance' => 'Hari tanpa penerimaan',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Penyusutan Bulanan'
 
 );

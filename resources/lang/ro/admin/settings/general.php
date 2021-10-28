@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Director activ',
     'ad_domain'				    => 'Domeniu Active Directory',
     'ad_domain_help'			=> 'Acest lucru este uneori același cu domeniul dvs. de e-mail, dar nu întotdeauna.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC e-mail',
     'admin_cc_email_help'       => 'Dacă doriți să trimiteți o copie a e-mailurilor de predare/ primire trimise utilizatorilor către un cont de e-mail suplimentar, introduceți-l aici. În caz contrar, lăsați acest câmp necompletat.',
     'is_ad'				        => 'Acesta este un server Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Termenul de expirare a alertelor (în zile)',
     'alert_inv_threshold'		=> 'Ajustarea pragului de inventar',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID-uri de active',
     'audit_interval'            => 'Interval de audit',
     'audit_interval_help'       => 'Dacă vi se cere să efectuați un audit fizic în mod regulat, introduceți intervalul în luni.',
@@ -43,13 +43,13 @@ return array(
     'display_eol'               => 'Arata EOL in tabel',
     'display_qr'                => 'Afișați codurile pătrată',
     'display_alt_barcode'		=> 'Afișați coduri de bare 1D',
-    'email_logo'                => 'Email Logo',
+    'email_logo'                => 'Logo e-mail',
     'barcode_type'				=> 'Tip de cod de bare 2D',
     'alt_barcode_type'			=> 'Tip de cod de bare 1D',
     'email_logo_size'       => 'Square logos in email look best. ',
     'eula_settings'				=> 'Setările EULA',
     'eula_markdown'				=> 'Această licență EULA permite <a href="https://help.github.com/articles/github-flavored-markdown/">Github aromdown markdown</a>.',
-    'favicon'                   => 'Favicon',
+    'favicon'                   => 'Pictogramă',
     'favicon_format'            => 'Accepted filetypes are ico, png, and gif. Other image formats may not work in all browsers.',
     'favicon_size'          => 'Favicons should be square images, 16x16 pixels.',
     'footer_text'               => 'Textul suplimentar în subsol ',
@@ -58,7 +58,7 @@ return array(
     'generate_backup'			=> 'Generați Backup',
     'header_color'              => 'Culoarea antetului',
     'info'                      => 'Aceste setari va lasa sa modificati anumite aspecte ale instalarii.',
-    'label_logo'                => 'Label Logo',
+    'label_logo'                => 'Sigla etichetei',
     'label_logo_size'           => 'Square logos look best - will be displayed in the top right of each asset label. ',
     'laravel'                   => 'Versiune Laravel',
     'ldap_enabled'              => 'LDAP activat',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Introduceți codul cu doi factori',
     'two_factor_config_complete'	=> 'Trimiteți codul',
     'two_factor_enabled_edit_not_allowed' => 'Administratorul nu vă permite să editați această setare.',
-    'two_factor_enrollment_text'	=> "Este necesară autentificarea cu două factori, cu toate acestea, dispozitivul dvs. nu a fost încă înscris. Deschideți aplicația Google Authenticator și scanați codul QR de mai jos pentru a vă înregistra dispozitivul. După ce ați înscris dispozitivul, introduceți codul de mai jos",
+    'two_factor_enrollment_text'	=> 'Este necesară autentificarea cu două factori, cu toate acestea, dispozitivul dvs. nu a fost încă înscris. Deschideți aplicația Google Authenticator și scanați codul QR de mai jos pentru a vă înregistra dispozitivul. După ce ați înscris dispozitivul, introduceți codul de mai jos',
     'require_accept_signature'      => 'Solicită semnătura',
     'require_accept_signature_help_text'      => 'Activarea acestei funcții va impune utilizatorilor să se deconecteze fizic la acceptarea unui activ.',
     'left'        => 'stânga',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Verificarea acestei casete va impune o constrângere de unicitate în serialele de active',
     'zerofill_count'        => 'Lungimea etichetelor de activ, inclusiv zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

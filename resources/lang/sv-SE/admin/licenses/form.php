@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Tillgång',
     'checkin'           => 'Checka in',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licensierad till Email',
     'to_name'           => 'Licensierad till Namn',
     'update'            => 'Uppdateringslicens',
-    'checkout_help'     => 'Du måste kolla en licens ut till en maskinvaru tillgång eller en person. Du kan välja båda, men ägaren av tillgången måste matcha den person du kontrollerar tillgången ut till.'
-);
+    'checkout_help'     => 'Du måste kolla en licens ut till en maskinvaru tillgång eller en person. Du kan välja båda, men ägaren av tillgången måste matcha den person du kontrollerar tillgången ut till.',
+];

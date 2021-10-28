@@ -1,137 +1,80 @@
 <?php
 
+use App\Http\Controllers\Kits;
+use Illuminate\Support\Facades\Route;
+
 // Predefined Kit Management
-Route::resource('kits', 'Kits\PredefinedKitsController', [
+Route::resource('kits', Kits\PredefinedKitsController::class, [
     'middleware' => ['auth'],
-    'parameters' => ['kit' => 'kit_id']
+    'parameters' => ['kit' => 'kit_id'],
 ]);
 
+Route::group(['prefix' => 'kits/{kit_id}', 'middleware' => ['auth']], function () {
 
+    // Route::get('licenses',
+    //     [Kits\PredefinedKitsController::class, 'indexLicenses']
+    // )->name('kits.licenses.index');
 
-Route::group([ 'prefix' => 'kits/{kit_id}', 'middleware' => ['auth'] ], function () {
+    Route::post('licenses',
+        [Kits\PredefinedKitsController::class, 'storeLicense']
+    )->name('kits.licenses.store');
 
-    // Route::get('licenses', 
-    //     [
-    //         'as' => 'kits.licenses.index',
-    //         'uses' => 'Kits\PredefinedKitsController@indexLicenses',
-    //     ]
-    // );
-    
-    Route::post('licenses', 
-        [
-            'as' => 'kits.licenses.store',
-            'uses' => 'Kits\PredefinedKitsController@storeLicense',
-        ]
-    );
-    
-    Route::put('licenses/{license_id}', 
-        [
-            'as' => 'kits.licenses.update',
-            'uses' => 'Kits\PredefinedKitsController@updateLicense',
-        ]
-    );
-  
-    Route::get('licenses/{license_id}/edit', 
-        [
-            'as' => 'kits.licenses.edit',
-            'uses' => 'Kits\PredefinedKitsController@editLicense',
-            
-        ]
-    );
+    Route::put('licenses/{license_id}',
+        [Kits\PredefinedKitsController::class, 'updateLicense']
+    )->name('kits.licenses.update');
 
-    Route::delete('licenses/{license_id}', 
-        [
-            'as' => 'kits.licenses.detach',
-            'uses' => 'Kits\PredefinedKitsController@detachLicense',
-        ]
-    );
+    Route::get('licenses/{license_id}/edit',
+        [Kits\PredefinedKitsController::class, 'editLicense']
+    )->name('kits.licenses.edit');
 
-    
+    Route::delete('licenses/{license_id}',
+        [Kits\PredefinedKitsController::class, 'detachLicense']
+    )->name('kits.licenses.detach');
+
     // Models
-    
-    Route::put('models/{model_id}', 
-        [
-            'as' => 'kits.models.update',
-            'uses' => 'Kits\PredefinedKitsController@updateModel',
-            'parameters' => [2 => 'kit_id', 1 => 'model_id']
-        ]
-    );
-  
-    Route::get('models/{model_id}/edit', 
-        [
-            'as' => 'kits.models.edit',
-            'uses' => 'Kits\PredefinedKitsController@editModel',
-            
-        ]
-    );
 
-    Route::delete('models/{model_id}', 
-        [
-            'as' => 'kits.models.detach',
-            'uses' => 'Kits\PredefinedKitsController@detachModel',
-        ]
-    );
+    Route::put('models/{model_id}',
+        [Kits\PredefinedKitsController::class, 'updateModel']
+    )/* ->parameters([2 => 'kit_id', 1 => 'model_id'])*/->name('kits.models.update');
 
+    Route::get('models/{model_id}/edit',
+        [Kits\PredefinedKitsController::class, 'editModel']
+    )->name('kits.models.edit');
+
+    Route::delete('models/{model_id}',
+        [Kits\PredefinedKitsController::class, 'detachModel']
+    )->name('kits.models.detach');
 
     // Consumables
-    Route::put('consumables/{consumable_id}', 
-        [
-            'as' => 'kits.consumables.update',
-            'uses' => 'Kits\PredefinedKitsController@updateConsumable',
-            'parameters' => [2 => 'kit_id', 1 => 'consumable_id']
-        ]
-    );
-  
-    Route::get('consumables/{consumable_id}/edit', 
-        [
-            'as' => 'kits.consumables.edit',
-            'uses' => 'Kits\PredefinedKitsController@editConsumable',
-            
-        ]
-    );
+    Route::put('consumables/{consumable_id}',
+        [Kits\PredefinedKitsController::class, 'updateConsumable']
+    )/*->parameters([2 => 'kit_id', 1 => 'consumable_id'])*/->name('kits.consumables.update');
 
-    Route::delete('consumables/{consumable_id}', 
-        [
-            'as' => 'kits.consumables.detach',
-            'uses' => 'Kits\PredefinedKitsController@detachConsumable',
-        ]
-    );
+    Route::get('consumables/{consumable_id}/edit',
+        [Kits\PredefinedKitsController::class, 'editConsumable']
+    )->name('kits.consumables.edit');
 
+    Route::delete('consumables/{consumable_id}',
+        [Kits\PredefinedKitsController::class, 'detachConsumable']
+    )->name('kits.consumables.detach');
 
     // Accessories
-    Route::put('accessories/{accessory_id}', 
-        [
-            'as' => 'kits.accessories.update',
-            'uses' => 'Kits\PredefinedKitsController@updateAccessory',
-            'parameters' => [2 => 'kit_id', 1 => 'accessory_id']
-        ]
-    );
+    Route::put('accessories/{accessory_id}',
+        [Kits\PredefinedKitsController::class, 'updateAccessory']
+    )/*->parameters([2 => 'kit_id', 1 => 'accessory_id'])*/->name('kits.accessories.update');
 
-    Route::get('accessories/{accessory_id}/edit', 
-        [
-            'as' => 'kits.accessories.edit',
-            'uses' => 'Kits\PredefinedKitsController@editAccessory',
-            
-        ]
-    );
+    Route::get('accessories/{accessory_id}/edit',
+        [Kits\PredefinedKitsController::class, 'editAccessory']
+    )->name('kits.accessories.edit');
 
-    Route::delete('accessories/{accessory_id}', 
-        [
-            'as' => 'kits.accessories.detach',
-            'uses' => 'Kits\PredefinedKitsController@detachAccessory',
-        ]
-    );
+    Route::delete('accessories/{accessory_id}',
+        [Kits\PredefinedKitsController::class, 'detachAccessory']
+    )->name('kits.accessories.detach');
     Route::get('checkout',
-        [
-            'as' => 'kits.checkout.show',
-            'uses' => 'Kits\CheckoutKitController@showCheckout',
-        ]
-    );
+        [Kits\CheckoutKitController::class, 'showCheckout']
+    )->name('kits.checkout.show');
 
     Route::post('checkout',
-        [
-            'as' => 'kits.checkout.store',
-            'uses' => 'Kits\CheckoutKitController@store',
-        ]
-    );
+        [Kits\CheckoutKitController::class, 'store']
+    )->name('kits.checkout.store');
 }); // kits

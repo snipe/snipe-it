@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Eolaire Gníomhach',
     'ad_domain'				    => 'Fearann ​​Eolaire Gníomhach',
     'ad_domain_help'			=> 'Tá sé seo mar an gcéanna le do r-phost, ach ní i gcónaí.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'Is freastalaí Gníomhach Eolaire é seo',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Tairseach Alerts ag dul in éag (i laethanta)',
     'alert_inv_threshold'		=> 'Tairseach Alert Fardail',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'IDanna Sócmhainní',
     'audit_interval'            => 'Agallamh Iniúchta',
     'audit_interval_help'       => 'Más gá duit do chuid sócmhainní a iniúchadh go rialta, cuir isteach an t-eatramh i mí.',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Fad na clibeanna sócmhainne, lena n-áirítear zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'حول تسميات الحالة',
     'archived'      	=> 'مؤرشف',
     'create'      	=> 'إنشاء تسمية الحالة',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'تسميات الحالة',
     'undeployable'  => 'غير قابل للتوزيع',
     'update'      	=> 'تحديث تسمية الحالة',
-);
+];

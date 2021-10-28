@@ -21,7 +21,7 @@ class FixAssignedTypeNotBeingNulled extends Migration
 
         // Additionally, the importer did not set assigned_type when importing.
         // In the case where we have an assigned_to but not an assigned_type, set the assigned_type to User.
-        Asset::whereNotNull('assigned_to')->whereNull('assigned_type')->update(['assigned_type' => 'App\Models\User']);
+        Asset::whereNotNull('assigned_to')->whereNull('assigned_type')->update(['assigned_type' => \App\Models\User::class]);
     }
 
     /**

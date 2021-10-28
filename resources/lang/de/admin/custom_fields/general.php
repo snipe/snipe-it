@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Benutzerdefinierte Felder',
     'field'		                => 'Feld',
     'about_fieldsets_title'		=> 'Über Feldsätze',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Neues benutzerdefiniertes Feld',
     'value_encrypted'      	        => 'Der Wert dieses Feldes ist in der Datenbank verschlüsselt. Nur Benutzer mit Administratorrechten können den entschlüsselten Wert anzeigen',
     'show_in_email'     => 'Feld miteinbeziehen bei Herausgabe-Emails an die Benutzer? Verschlüsselte Felder können nicht miteinbezogen werden.',
-);
+];

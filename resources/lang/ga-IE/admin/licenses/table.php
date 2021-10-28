@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'Sannadh Chun',
     'checkout'   		=> 'In / Amach',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'Sraithuimhir',
     'title'      		=> 'Ceadúnas',
 
-);
+];

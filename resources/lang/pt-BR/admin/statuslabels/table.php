@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'Sobre os Rótulos de Status',
     'archived'      	=> 'Arquivado',
     'create'      	=> 'Criar Rótulo de Status',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Rótulos de Status',
     'undeployable'  => 'Não implementável',
     'update'      	=> 'Atualizar Rótulo de Status',
-);
+];

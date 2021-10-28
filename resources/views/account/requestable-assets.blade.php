@@ -128,7 +128,7 @@
 
                             @else
                                 <div class="alert alert-info alert-block">
-                                    <i class="fa fa-info-circle"></i>
+                                    <i class="fas fa-info-circle"></i>
                                     {{ trans('general.no_results') }}
                                 </div>
                             @endif

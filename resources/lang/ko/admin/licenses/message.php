@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => '라이선스가 존재하지 않습니다.',
     'user_does_not_exist' => '사용자가 존재하지 않습니다.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => '애셋이나 사용자 중 하나만 선택해야하며 둘 다 선택할 수는 없습니다.',
     'not_found' => 'License not found',
 
-
-    'create' => array(
+    'create' => [
         'error'   => '라이선스가 생성되지 않았습니다. 다시 시도해 주세요.',
-        'success' => '라이선스가 생성되었습니다.'
-    ),
+        'success' => '라이선스가 생성되었습니다.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => '파일이 삭제되지 않았습니다. 다시 시도해 주세요.',
         'success' => '파일이 삭제되었습니다.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => '파일(들)이 업로드 되지 않았습니다. 다시 시도해 주세요.',
         'success' => '파일(들)이 업로드 되었습니다.',
         'nofiles' => '업로드 하기 위한 파일이 선택되지 않았거나, 업로드 할 파일이 너무 큽니다.',
         'invalidfiles' => '하나 이상의 파일이 너무 크거나 허용되지 않는 형식입니다. 허용되는 형식은 png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, lic 입니다.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => '라이선스가 갱신되지 않았습니다. 다시 시도해 주세요.',
-        'success' => '라이선스가 갱신되었습니다.'
-    ),
+        'success' => '라이선스가 갱신되었습니다.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => '이 라이선스를 삭제하시겠습니까?',
         'error'   => '라이선스 삭제 중 문제가 발생했습니다. 다시 시도해 주세요.',
-        'success' => '라이선스가 삭제되었습니다.'
-    ),
+        'success' => '라이선스가 삭제되었습니다.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => '라이선스 반출 중 문제가 발생했습니다. 다시 시도해 주세요.',
-        'success' => '라이선스가 반출 되었습니다.'
-    ),
+        'success' => '라이선스가 반출 되었습니다.',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => '라이선스 반입 중 문제가 발생했습니다. 다시 시도해 주세요.',
-        'success' => '라이선스가 반입 되었습니다.'
-    ),
+        'success' => '라이선스가 반입 되었습니다.',
+    ],
 
-);
+];

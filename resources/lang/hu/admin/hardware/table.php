@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Eszköz cimke',
     'asset_model'       => 'Modell',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Eszköz ',
     'image'		=> 'Készülék kép',
     'days_without_acceptance' => 'Nem elfogadás óta eltelt napok száma',
-    'monthly_depreciation' => 'Havi értékcsökkenés'
+    'monthly_depreciation' => 'Havi értékcsökkenés',
 
-);
+];

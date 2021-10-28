@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'Asignada a',
     'checkout'   		=> 'Quita/Asigna',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'N. Serie',
     'title'      		=> 'Categoría de equipo',
 
-);
+];

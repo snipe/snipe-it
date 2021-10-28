@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> '자산 태그',
     'asset_model'       => '모델',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> '자산 ',
     'image'		=> '장비 사진',
     'days_without_acceptance' => '미 승인 기간',
-    'monthly_depreciation' => '월간 감가상각'
+    'monthly_depreciation' => '월간 감가상각',
 
-);
+];

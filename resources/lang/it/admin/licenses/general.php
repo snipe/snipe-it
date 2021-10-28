@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_licenses_title'            => 'Informazioni sulle licenze',
     'about_licenses'                  => 'Le licenze vengono utilizzate per monitorare il software. Hanno un numero specifico di posti che possono essere verificati agli individui',
     'checkin'  					=> 'Registrare Licenza Sede',
@@ -18,4 +18,4 @@ return array(
     'software_licenses'  		=> 'Licenze Software',
     'user'  					=> 'Utente',
     'view'  					=> 'Mostra Licenza',
-);
+];

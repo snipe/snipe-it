@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'accessory_category' 				=> 'Категория аксесоари',
     'accessory_name'  					=> 'Аксесоар',
     'checkout'  							=> 'Отписване на аксесоар',
@@ -17,4 +17,4 @@ return array(
     'use_default_eula'					=> 'Използване на <a href="#" data-toggle="modal" data-target="#eulaModal">EULA по подразбиране</a>.',
     'use_default_eula_disabled'			=> '<del>Използване на EULA по подразбиране</del> Няма EULA по подразбиране. Добавете я в Настройки.',
 
-);
+];

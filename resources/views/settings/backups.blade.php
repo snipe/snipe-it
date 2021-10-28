@@ -50,7 +50,7 @@
                   @can('superadmin')
                       <a data-html="false"
                          class="btn delete-asset btn-danger btn-sm {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('settings.backups.destroy', $file['filename']) }}" data-content="{{ trans('admin/settings/message.backup.delete_confirm') }}" data-title="{{ trans('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
-                          <i class="fa fa-trash icon-white" aria-hidden="true"></i>
+                          <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                           <span class="sr-only">{{ trans('general.delete') }}</span>
                       </a>
                   @endcan
@@ -74,7 +74,7 @@
           </p>
 
            @if (config('app.lock_passwords'))
-              <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+              <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
           @endif
 
 

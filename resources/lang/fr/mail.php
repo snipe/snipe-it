@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Un utilisateur a annulé une commande d’article sur le site Web',
     'a_user_requested' => 'Un utilisateur a commandé un article sur le site Web',
     'accessory_name' => 'Nom de l’accessoire :',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Produit:',
     'asset_name' => 'Nom du produit:',
     'asset_requested' => 'Produit demandé',
-    'asset_tag' => 'Code produit:',
+    'asset_tag' => 'Numéro d\'inventaire',
     'assigned_to' => 'Affecté à',
     'best_regards' => 'Cordialement,',
     'canceled' => 'Annulé:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Rapport de vérification de matériel attendu',
     'Expected_Checkin_Notification' => 'Rappel : la date limite de vérification de :name approche',
     'Expected_Checkin_Date' => 'Un matériel que vous avez emprunté doit être vérifié à nouveau le :date',
-    'your_assets' => 'Voir vos matériels'
-);
+    'your_assets' => 'Voir vos matériels',
+];

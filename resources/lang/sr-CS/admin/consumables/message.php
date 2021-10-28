@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Potrošni materijal ne postoji.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Potrošni materijal nije kreiran, pokušajte ponovo.',
-        'success' => 'Potrošni materijal uspešno kreiran.'
-    ),
+        'success' => 'Potrošni materijal uspešno kreiran.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Potrošni materijal nije ažuriran, pokušajte ponovo',
-        'success' => 'Potrošni materijal uspešno ažuriran.'
-    ),
+        'success' => 'Potrošni materijal uspešno ažuriran.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Da li ste sigurni da želite izbrisati ovaj potrošni materijal?',
         'error'   => 'Došlo je do problema s brisanjem potrošnog materijala. Molim pokušaj te ponovo.',
-        'success' => 'Potrošni materijal je uspešno izbrisan.'
-    ),
+        'success' => 'Potrošni materijal je uspešno izbrisan.',
+    ],
 
-     'checkout' => array(
+     'checkout' => [
         'error'   		=> 'Consumable was not checked out, please try again',
         'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušaj te ponovo.'
-    ),
+        'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušaj te ponovo.',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   		=> 'Consumable was not checked in, please try again',
         'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušaj te ponovo.'
-    )
+        'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušaj te ponovo.',
+    ],
 
-
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Wagwoorde moet ses karakters wees en ooreenstem met die bevestiging.",
+    'password' => 'Wagwoorde moet ses karakters wees en ooreenstem met die bevestiging.',
 
-    "user"     => "Gebruikersnaam of e-posadres is verkeerd",
+    'user'     => 'Gebruikersnaam of e-posadres is verkeerd',
 
-    "token"    => "Hierdie wagwoord-reset-token is ongeldig.",
+    'token'    => 'Hierdie wagwoord-reset-token is ongeldig.',
 
-    "sent" => "As 'n ooreenstemmende e-posadres gevind is, is 'n wagwoordherinnering gestuur!",
+    'sent' => "As 'n ooreenstemmende e-posadres gevind is, is 'n wagwoordherinnering gestuur!",
 
-);
+];

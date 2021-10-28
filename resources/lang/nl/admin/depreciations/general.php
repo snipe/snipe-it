@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Over afschrijvingen van Asset',
     'about_depreciations'  					=> 'U kan de asset-afschrijving instellen om assets af te schrijven op basis van lineaire afschrijving.',
     'asset_depreciations'  					=> 'Asset afschrijvingen',
@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Afschrijvingsnaam',
     'number_of_months'  					=> 'Aantal maanden',
     'update'  					            => 'Afschrijving bijwerken',
+    'depreciation_min'                      => 'Minimale waarde na afschrijving'
 
-);
+];

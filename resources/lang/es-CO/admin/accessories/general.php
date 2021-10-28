@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'accessory_category' 				=> 'Categoría de accesorio',
     'accessory_name'  					=> 'Nombre de accesorio',
     'checkout'  							=> 'Retirar Accesorio',
@@ -17,4 +17,4 @@ return array(
     'use_default_eula'					=> 'En su lugar, use el <a href="#" data-toggle="modal" data-target="#eulaModal">EULA por defecto</a>.',
     'use_default_eula_disabled'			=> '<del>En su lugar, use el EULA por defecto.</del> No esta configurado un EULA por defecto. Por favor agregue uno en Configuración.',
 
-);
+];

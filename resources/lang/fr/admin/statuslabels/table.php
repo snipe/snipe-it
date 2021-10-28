@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'À propos des étiquettes de statut',
     'archived'      	=> 'Retiré',
     'create'      	=> 'Créé une étiquette de statut',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Étiquette de statut',
     'undeployable'  => 'Non déployable',
     'update'      	=> 'Mettre à jour l\'étiquette de statut',
-);
+];

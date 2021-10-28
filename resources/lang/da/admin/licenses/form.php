@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Asset',
     'checkin'           => 'checkin',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licenseret til Email',
     'to_name'           => 'Licenseret til Navn',
     'update'            => 'Opdater licens',
-    'checkout_help'     => 'Du skal tjekke en licens ud til et hardware aktiv eller en person. Du kan vælge begge dele, men ejeren af aktivet skal svare til den person, du tjekker aktivet ud til.'
-);
+    'checkout_help'     => 'Du skal tjekke en licens ud til et hardware aktiv eller en person. Du kan vælge begge dele, men ejeren af aktivet skal svare til den person, du tjekker aktivet ud til.',
+];

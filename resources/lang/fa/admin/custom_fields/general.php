@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'فیلدهای سفارشی',
     'field'		                => 'فیلد',
     'about_fieldsets_title'		=> 'درباره ی تنظیمات فیلد',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'فیلد سفارشی جدید',
     'value_encrypted'      	        => 'ارزش این فیلد در پایگاه داده رمزگذاری شده است. فقط کاربران مدیریت قادر به مشاهده مقدار رمزگشایی خواهند شد',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+];

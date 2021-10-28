@@ -19,21 +19,30 @@
         <label class="sr-only" for="{{ 'permission['.$localPermission['permission'].']' }}">{{ 'permission['.$localPermission['permission'].']' }}</label>
         @if (($localPermission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
           {{ Form::radio('permission['.$localPermission['permission'].']', '1',$userPermissions[$localPermission['permission'] ] == '1',['disabled'=>"disabled", 'class'=>'minimal', 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+        @elseif (($localPermission['permission'] == 'admin') && (!Auth::user()->hasAccess('admin')))
+          {{ Form::radio('permission['.$localPermission['permission'].']', '1',$userPermissions[$localPermission['permission'] ] == '1',['disabled'=>"disabled", 'class'=>'minimal', 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
         @else
           {{ Form::radio('permission['.$localPermission['permission'].']', '1',$userPermissions[$localPermission['permission'] ] == '1',['value'=>"grant", 'class'=>'minimal',  'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
         @endif
+
+        
       </td>
       <td class="col-md-1 permissions-item">
         <label class="sr-only" for="{{ 'permission['.$localPermission['permission'].']' }}">{{ 'permission['.$localPermission['permission'].']' }}</label>
         @if (($localPermission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
+          {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['disabled'=>"disabled", 'class'=>'minimal', 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+        @elseif (($localPermission['permission'] == 'admin') && (!Auth::user()->hasAccess('admin')))
           {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['disabled'=>"disabled", 'class'=>'minimal', 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
         @else
           {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['value'=>"deny", 'class'=>'minimal',  'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
         @endif
       </td>
       <td class="col-md-1 permissions-item">
-        <label class="sr-only" for="{{ 'permission['.$localPermission['permission'].']' }}">{{ 'permission['.$localPermission['permission'].']' }}</label>
+        <label class="sr-only" for="{{ 'permission['.$localPermission['permission'].']' }}">
+           {{ 'permission['.$localPermission['permission'].']' }}</label>
         @if (($localPermission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
+          {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['disabled'=>"disabled",'class'=>'minimal',  'aria-label'=> 'permission['.$localPermission['permission'].']'] ) }}
+        @elseif (($localPermission['permission'] == 'admin') && (!Auth::user()->hasAccess('admin')))
           {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['disabled'=>"disabled",'class'=>'minimal',  'aria-label'=> 'permission['.$localPermission['permission'].']'] ) }}
         @else
           {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['value'=>"inherit", 'class'=>'minimal',  'aria-label'=> 'permission['.$localPermission['permission'].']'] ) }}

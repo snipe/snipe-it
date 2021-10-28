@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_licenses_title'            => 'Лицензийн тухай',
     'about_licenses'                  => 'Програмыг хянах лицензийг ашигладаг. Тэдгээр нь тодорхой тооны суудалтай байдаг',
     'checkin'  					=> 'Checkin лицензийн суудал',
@@ -18,4 +18,4 @@ return array(
     'software_licenses'  		=> 'Програм хангамжийн лиценз',
     'user'  					=> 'Хэрэглэгч',
     'view'  					=> 'Лицензийг харах',
-);
+];

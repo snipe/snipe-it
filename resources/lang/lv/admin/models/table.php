@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'Izveidot aktīvu modeli',
     'created_at' 			=> 'Izveidots pie',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'Atjaunināt aktīvu modeli',
     'clone'				=> 'Klona modelis',
     'edit'				=> 'Rediģēt modeli',
-);
+];

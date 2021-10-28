@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Om steder',
     'about_locations'           => 'Steder bruges til at spore placeringsoplysninger for brugere, aktiver og andre elementer',
     'assets_rtd'                => 'Aktiver', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'Land',
     'create'                    => 'Opret placering',
     'update'                    => 'Opdateringssted',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'Udskriv tildelte',
+    'print_all_assigned'        => 'Udskriv alle tildelte',
     'name'                      => 'Navn på sted',
     'address'                   => 'Adresse',
     'zip'                       => 'Postnummer',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => 'Forældre',
     'currency'                  => 'Beliggenhed Valuta',
     'ldap_ou'                   => 'LDAP Search OU',
-    );
+    ];

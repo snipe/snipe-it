@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'Mō nga Tapanga Tūnga',
     'archived'      	=> 'Whakamahia',
     'create'      	=> 'Waihanga Tapanga Whakaaetanga',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Ngā Tapanga Tūnga',
     'undeployable'  => 'Kaore e taea',
     'update'      	=> 'Whakahoutia te Tapanga Tūnga',
-);
+];

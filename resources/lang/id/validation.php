@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'Atribut: gagal diupload.',
     'url'                  => 'Format :attribute tidak benar.',
     "unique_undeleted"     => ":attribute harus unik.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

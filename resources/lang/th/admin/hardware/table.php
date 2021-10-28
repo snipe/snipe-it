@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'แท็กเนื้อหา',
     'asset_model'       => 'แบบ',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'สินทรัพย์',
     'image'		=> 'ภาพอุปกรณ์',
     'days_without_acceptance' => 'วันโดยปราศจากการยอมรับ',
-    'monthly_depreciation' => 'ค่าเสื่อมราคารายเดือน'
+    'monthly_depreciation' => 'ค่าเสื่อมราคารายเดือน',
 
-);
+];

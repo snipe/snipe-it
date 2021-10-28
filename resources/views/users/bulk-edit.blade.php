@@ -20,7 +20,7 @@
             <p>{{ trans('admin/users/general.bulk_update_help') }}</p>
 
             <div class="callout callout-warning">
-                <i class="fa fa-warning"></i> {{ trans('admin/users/general.bulk_update_warn', ['user_count' => count($users)]) }}
+                <i class="fas fa-exclamation-triangle"></i> {{ trans('admin/users/general.bulk_update_warn', ['user_count' => count($users)]) }}
             </div>
 
             <form class="form-horizontal" method="post" action="{{ route('users/bulkeditsave') }}" autocomplete="off" role="form">
@@ -73,7 +73,7 @@
                                 <div class="checkbox">
                                     <label for="activated">
                                         {{ Form::radio('activated', '', true, ['aria-label'=>'activated']) }} Do not change activation status <br>
-                                        {{ Form::radio('activated', '1', old('activated'), ['aria-label'=>'activated']) }}  User is activated<br>
+                                        {{ Form::radio('activated', '1', old('activated'), ['aria-label'=>'activated']) }}  {{  trans('general.login_enabled')}} <br>
                                         {{ Form::radio('activated', '0', old('activated'), ['aria-label'=>'activated']) }}  User is de-activated
 
                                     </label>
@@ -113,8 +113,8 @@
                         @endforeach
                     </div> <!--/.box-body-->
 
-                    <div class="box-footer text-right">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                    <div class="text-right box-footer">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
                 </div> <!--/.box.box-default-->
             </form>

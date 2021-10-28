@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Bản quyền không tồn tại.',
     'user_does_not_exist' => 'Người dùng không tồn tại.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'Bạn phải chọn một nội dung hoặc người dùng, nhưng không phải cả hai.',
     'not_found' => 'License not found',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Bản quyền chưa được tạo, xin vui lòng thử lại.',
-        'success' => 'Bản quyền đã được tạo thành công.'
-    ),
+        'success' => 'Bản quyền đã được tạo thành công.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Tập tin không xóa được. Xin vui lòng thử lại.',
         'success' => 'Tập tin đã xóa thành công.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Tập tin không tải lên được. Xin vui lòng thử lại.',
         'success' => 'Tập tin đã tải lên thành công.',
         'nofiles' => 'Bạn chưa chọn bất kỳ tập tin nào để tải lên, hoặc tập tin bạn đang cố gắng tải lên có dung lượng quá lớn',
         'invalidfiles' => 'Một hoặc nhiều tệp của bạn quá lớn hoặc là loại tập tin không được phép. Các loại tệp được cho phép là png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml và lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Bản quyền chưa được cập nhật, xin vui lòng thử lại',
-        'success' => 'Bản quyền đã cập nhật thành công.'
-    ),
+        'success' => 'Bản quyền đã cập nhật thành công.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Bạn có chắc muốn xóa bản quyền này?',
         'error'   => 'Có vấn đề xảy ra khi xóa bản quyền này. Xin vui lòng thử lại.',
-        'success' => 'Bản quyền đã xóa thành công.'
-    ),
+        'success' => 'Bản quyền đã xóa thành công.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Có vấn đề xảy ra khi checkout bản quyền. Xin vui lòng thử lại.',
-        'success' => 'Bản quyền đã được checkout thành công'
-    ),
+        'success' => 'Bản quyền đã được checkout thành công',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Có vấn đề xảy ra khi checkin bản quyền. Xin vui lòng thử lại.',
-        'success' => 'Bản quyền đã được checkin thành công'
-    ),
+        'success' => 'Bản quyền đã được checkin thành công',
+    ],
 
-);
+];

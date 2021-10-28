@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'Maidir Lipéid Stádas',
     'archived'      	=> 'Archived',
     'create'      	=> 'Lipéad Stádas a Chruthaigh',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Lipéid Stádas',
     'undeployable'  => 'Neamhfhostaithe',
     'update'      	=> 'Lipéad Stádas Nuashonraithe',
-);
+];

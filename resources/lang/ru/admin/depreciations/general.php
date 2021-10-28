@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'О износе активов',
     'about_depreciations'  					=> 'Этот раздел служит для настройки расчета вычисления степени износа активов.',
     'asset_depreciations'  					=> 'Износ активов',
@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Название амортизации',
     'number_of_months'  					=> 'Количество месяцев',
     'update'  					            => 'Обновить амортизацию',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
-);
+];

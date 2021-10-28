@@ -31,9 +31,9 @@
                   <div class="col-md-8">
                       <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-end-date="0d">
                           <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkout_at" id="checkout_at" value="{{ Request::old('checkout_at') }}">
-                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                          <span class="input-group-addon"><i class="fas fa-calendar"></i></span>
                       </div>
-                      {!! $errors->first('checkout_at', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                      {!! $errors->first('checkout_at', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
                   </div>
               </div>
 
@@ -43,9 +43,9 @@
                   <div class="col-md-8">
                       <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-start-date="0d">
                           <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ Request::old('expected_checkin') }}">
-                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                          <span class="input-group-addon"><i class="fas fa-calendar"></i></span>
                       </div>
-                      {!! $errors->first('expected_checkin', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                      {!! $errors->first('expected_checkin', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
                   </div>
               </div>
 
@@ -55,14 +55,14 @@
             {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
             <div class="col-md-8">
               <textarea class="col-md-6 form-control" id="note" name="note">{{ Request::old('note') }}</textarea>
-              {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              {!! $errors->first('note', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
             </div>
           </div>
 
       </div> <!--./box-body-->
       <div class="box-footer">
         <a class="btn btn-link" href="{{ route('kits.index') }}"> {{ trans('button.cancel') }}</a>
-        <button type="submit" class="btn btn-success pull-right"><i class="fa fa-check icon-white"></i> {{ trans('general.checkout') }}</button>
+        <button type="submit" class="btn btn-success pull-right"><i class="fas fa-check icon-white"></i> {{ trans('general.checkout') }}</button>
       </div>
     </div>
       </form>

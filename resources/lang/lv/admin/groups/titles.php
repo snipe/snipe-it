@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Par grupām',
     'about_groups'                  => 'Grupas tiek izmantotas, lai vispārinātu lietotāju atļaujas.',
     'group_management' 	 	=> 'Grupas vadība',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Atļaut',
     'deny' 	 				=> 'Liegties',
 
-);
+];

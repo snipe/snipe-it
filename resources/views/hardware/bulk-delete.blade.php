@@ -59,7 +59,7 @@
 
         <div class="box-footer text-right">
           <a class="btn btn-link" href="{{ URL::previous() }}" method="post" enctype="multipart/form-data">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-success" id="submit-button"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.delete') }}</button>
+          <button type="submit" class="btn btn-success" id="submit-button"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.delete') }}</button>
         </div><!-- /.box-footer -->
       </div><!-- /.box -->
     </form>

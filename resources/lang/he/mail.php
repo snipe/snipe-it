@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'משתמש ביטל בקשת פריט באתר',
     'a_user_requested' => 'משתמש ביקש פריט באתר',
     'accessory_name' => 'שם אביזר:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'נכס:',
     'asset_name' => 'שם הנכס:',
     'asset_requested' => 'הנכס המבוקש',
-    'asset_tag' => 'תג נכס:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'שהוקצה ל',
     'best_regards' => 'כל טוב,',
     'canceled' => 'בּוּטלָה:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

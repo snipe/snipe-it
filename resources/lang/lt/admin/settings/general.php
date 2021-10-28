@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => '"Active Directory" domenas',
     'ad_domain_help'			=> 'Tai kartais sutampa su jūsų el. Pašto domenu, bet ne visada.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC El. paštas',
     'admin_cc_email_help'       => 'Jeigu Jūs norite siųsti išduoto/neišduoto turto sąrašo kopiją, įveskite čia el. pašto adresą. Kitu atveju palikite laukelį tuščią.',
     'is_ad'				        => 'Tai yra "Active Directory" serveris',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Galiojanti įspėjimų slenkstis (dienomis)',
     'alert_inv_threshold'		=> 'Inventoriaus įspėjimo slenkstis',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Įrangos ID',
     'audit_interval'            => 'Audito intervalas',
     'audit_interval_help'       => 'Jei turite reguliariai fiziškai tikrinti savo turtą, įveskite intervalą per mėnesius.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Įveskite dviejų veiksnių kodą',
     'two_factor_config_complete'	=> 'Pateikti kodeksą',
     'two_factor_enabled_edit_not_allowed' => 'Jūsų administratorius neleidžia jums redaguoti šio nustatymo.',
-    'two_factor_enrollment_text'	=> "Būtina atlikti du autentiškumo patvirtinimo veiksnius, tačiau jūsų įrenginys dar nebuvo užregistruotas. Atidarykite \"Google\" autentifikavimo priemonės programą ir nuskaitykite žemiau esantį QR kodą, kad užsiregistruotumėte savo įrenginį. Įrašę savo įrenginį įveskite žemiau esantį kodą",
+    'two_factor_enrollment_text'	=> 'Būtina atlikti du autentiškumo patvirtinimo veiksnius, tačiau jūsų įrenginys dar nebuvo užregistruotas. Atidarykite "Google" autentifikavimo priemonės programą ir nuskaitykite žemiau esantį QR kodą, kad užsiregistruotumėte savo įrenginį. Įrašę savo įrenginį įveskite žemiau esantį kodą',
     'require_accept_signature'      => 'Reikalauti parašo',
     'require_accept_signature_help_text'      => 'Įjungus šią funkciją, naudotojams reikės fiziškai atsisakyti priimti turtą.',
     'left'        => 'kairėje',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Pažymėtas šis langelis reiškia unikalius serijinius kiekvienam turtui',
     'zerofill_count'        => 'Turto žymų ilgis, įskaitant "zerofill"',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

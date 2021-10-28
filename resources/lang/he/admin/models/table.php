@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'יצירת מודל נכס',
     'created_at' 			=> 'נוצר ב',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'עדכון דגם הנכס',
     'clone'				=> 'שיבוט המודל',
     'edit'				=> 'עריכת מודל',
-);
+];

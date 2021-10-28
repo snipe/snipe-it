@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'Piešķirts',
     'checkout'   		=> 'Iekšā ārā',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'Sērijas numurs',
     'title'      		=> 'Licence',
 
-);
+];

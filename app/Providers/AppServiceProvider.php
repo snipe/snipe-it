@@ -1,6 +1,6 @@
 <?php
-namespace App\Providers;
 
+namespace App\Providers;
 
 use App\Models\Accessory;
 use App\Models\Asset;
@@ -14,9 +14,9 @@ use App\Observers\ComponentObserver;
 use App\Observers\ConsumableObserver;
 use App\Observers\LicenseObserver;
 use App\Observers\SettingObserver;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\UrlGenerator;
 
 /**
  * This service provider handles setting the observers on models
@@ -24,7 +24,6 @@ use Illuminate\Routing\UrlGenerator;
  * PHP version 5.5.9
  * @version    v3.0
  */
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -43,6 +42,9 @@ class AppServiceProvider extends ServiceProvider
                 \Log::warning("'APP_FORCE_TLS' is set to true, but 'APP_URL' does not start with 'https://'. Will not force TLS on connections.");
             }
         }
+
+        \Illuminate\Pagination\Paginator::useBootstrap();
+
         Schema::defaultStringLength(191);
         Asset::observe(AssetObserver::class);
         Accessory::observe(AccessoryObserver::class);
@@ -59,10 +61,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-        if (($this->app->environment('production'))  && (config('logging.channels.rollbar.access_token'))) {
+        if (($this->app->environment('production')) && (config('logging.channels.rollbar.access_token'))) {
             $this->app->register(\Rollbar\Laravel\RollbarServiceProvider::class);
         }
-
     }
 }

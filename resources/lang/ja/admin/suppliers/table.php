@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => '仕入先について',
     'about_suppliers_text'  => '仕入先は、アイテムの追跡に使用されます。',
     'address'               => '仕入先住所',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => '資産を表示',
     'zip'                   => '郵便番号',
 
-);
+];

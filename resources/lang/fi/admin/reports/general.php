@@ -1,5 +1,5 @@
 <?php
 
-return array(
-    'info'   => 'Valitse vaihtoehdot jotka haluat laiteraportillesi.'
-);
+return [
+    'info'   => 'Valitse vaihtoehdot jotka haluat laiteraportillesi.',
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Selle e-posti aadress on juba olemas.',
     'account_not_found'      => 'Kasutajanimi või parool on vale.',
@@ -9,37 +9,36 @@ return array(
     'account_banned'         => 'See kasutajakonto on keelatud.',
     'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
 
-    'two_factor' => array(
+    'two_factor' => [
         'already_enrolled'      => 'Your device is already enrolled.',
         'success'               => 'You have successfully logged in.',
         'code_required'         => 'Two-factor code is required.',
         'invalid_code'          => 'Two-factor code is invalid.',
-    ),
+    ],
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Kui proovisite sisse logida, ilmnes probleem, proovige uuesti.',
         'success' => 'Sa oled edukalt sisse loginud.',
-    ),
+    ],
 
-    'logout' => array(
+    'logout' => [
         'error'   => 'There was a problem while trying to log you out, please try again.',
         'success' => 'You have successfully logged out.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Konto loomise proovimisel tekkis probleem, proovige uuesti.',
         'success' => 'Konto edukalt loodud.',
-    ),
+    ],
 
-    'forgot-password' => array(
+    'forgot-password' => [
         'error'   => 'Uuesti parooli koodi proovimisel proovige uuesti proovida.',
         'success' => 'If that email address exists in our system, a password recovery email has been sent.',
-    ),
+    ],
 
-    'forgot-password-confirm' => array(
+    'forgot-password-confirm' => [
         'error'   => 'Parooli lähtestamise ajal ilmnes probleem, proovige uuesti.',
         'success' => 'Teie parool on edukalt lähtestatud.',
-    ),
+    ],
 
-
-);
+];

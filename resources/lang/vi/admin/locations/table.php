@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Giới thiệu về Địa điểm',
     'about_locations'           => 'Vị trí được sử dụng để theo dõi thông tin vị trí cho người dùng, nội dung và các mục khác',
     'assets_rtd'                => 'Tài sản', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'Nước',
     'create'                    => 'Tạo địa phương',
     'update'                    => 'Cập nhật địa phương',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'In tài sản đã cấp phát',
+    'print_all_assigned'        => 'In tất cả tài sản đã cấp phát',
     'name'                      => 'Tên địa phương',
     'address'                   => 'Địa chỉ',
     'zip'                       => 'Mã bưu điện',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => 'Parent',
     'currency'                  => 'Tiền tệ địa phương',
     'ldap_ou'                   => 'Tìm kiếm LDAP của OU',
-    );
+    ];

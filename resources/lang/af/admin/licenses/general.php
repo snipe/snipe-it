@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_licenses_title'            => 'Oor lisensies',
     'about_licenses'                  => 'Lisensies word gebruik om sagteware op te spoor. Hulle het \'n gespesifiseerde aantal sitplekke wat aan individue nagekeken kan word',
     'checkin'  					=> 'Checkin License Seat',
@@ -18,4 +18,4 @@ return array(
     'software_licenses'  		=> 'Sagteware lisensies',
     'user'  					=> 'gebruiker',
     'view'  					=> 'Bekyk lisensie',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_licenses_title'            => 'حول التراخيص',
     'about_licenses'                  => 'تستخدم التراخيص لتتبع البرمجيات. كل لديه عدد محدد من المقاعد التي يمكن اخراجها للأفراد',
     'checkin'  					=> 'ادخال مقعد الترخيص',
@@ -18,4 +18,4 @@ return array(
     'software_licenses'  		=> 'تراخيص البرامج',
     'user'  					=> 'مستخدم',
     'view'  					=> 'عرض الترخيص',
-);
+];

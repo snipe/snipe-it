@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Tahua',
     'checkin'           => 'Tirohia',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Kua raihanahia ki te Īmēra',
     'to_name'           => 'Kua whakaaetia kia Ingoa',
     'update'            => 'Whakahou Raihana',
-    'checkout_help'     => 'Me tirohia e koe he raihana ki tetahi taonga taputapu, ki tetahi tangata ranei. Ka taea e koe te whiriwhiri i nga mea e rua, engari ko te kaipupuri o te rawa ka rite ki te tangata e tirotirohia ana e koe te taonga.'
-);
+    'checkout_help'     => 'Me tirohia e koe he raihana ki tetahi taonga taputapu, ki tetahi tangata ranei. Ka taea e koe te whiriwhiri i nga mea e rua, engari ko te kaipupuri o te rawa ka rite ki te tangata e tirotirohia ana e koe te taonga.',
+];

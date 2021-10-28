@@ -40,7 +40,7 @@ LDAP User Sync
                 </div>
                 <div class="text-right col-md-6">
                     <button type="submit" class="btn btn-primary" id="sync">
-                        <i id="sync-button-icon" class="fa fa-refresh icon-white" aria-hidden="true"></i> <span id="sync-button-text">Synchronize</span>
+                        <i id="sync-button-icon" class="fas fa-sync-alt icon-white" aria-hidden="true"></i> <span id="sync-button-text">Synchronize</span>
                     </button>
                 </div>
 
@@ -83,7 +83,7 @@ LDAP User Sync
               <td>{{ $entry['email'] }}</td>
               <td>
                 @if ($entry['status']=='success')
-                  <i class="fa fa-check"></i> {!! $entry['note'] !!}
+                  <i class="fas fa-check"></i> {!! $entry['note'] !!}
                 @else
                   <span class="alert-msg" aria-hidden="true">{!! $entry['note'] !!}</span>
                 @endif

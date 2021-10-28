@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'ผู้ใช้ยกเลิกคำร้องขอสินค้าในเว็บไซต์แล้ว',
     'a_user_requested' => 'ผู้ใช้ร้องขอรายการบนเว็บไซต์',
     'accessory_name' => 'ชื่ออุปกรณ์เสริม:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'ทรัพย์สิน:',
     'asset_name' => 'ชื่อสินทรัพย์:',
     'asset_requested' => 'สินทรัพย์ที่ขอ',
-    'asset_tag' => 'แท็กเนื้อหา:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'ได้รับมอบหมายให้',
     'best_regards' => 'ด้วยความเคารพ,',
     'canceled' => 'ยกเลิก:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];
