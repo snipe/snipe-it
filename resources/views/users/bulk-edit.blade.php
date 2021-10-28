@@ -73,7 +73,7 @@
                                 <div class="checkbox">
                                     <label for="activated">
                                         {{ Form::radio('activated', '', true, ['aria-label'=>'activated']) }} Do not change activation status <br>
-                                        {{ Form::radio('activated', '1', old('activated'), ['aria-label'=>'activated']) }}  User is activated<br>
+                                        {{ Form::radio('activated', '1', old('activated'), ['aria-label'=>'activated']) }}  {{  trans('general.login_enabled')}} <br>
                                         {{ Form::radio('activated', '0', old('activated'), ['aria-label'=>'activated']) }}  User is de-activated
 
                                     </label>
@@ -113,7 +113,7 @@
                         @endforeach
                     </div> <!--/.box-body-->
 
-                    <div class="box-footer text-right">
+                    <div class="text-right box-footer">
                         <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
                 </div> <!--/.box.box-default-->
