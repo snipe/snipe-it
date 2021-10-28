@@ -1324,7 +1324,8 @@ class Asset extends Depreciable
                     $query->where('assets.name', 'LIKE', '%'.$search_val.'%');
                 }
 
-                if ($fieldname == 'product_key') {
+
+                if ($fieldname =='serial') {
                     $query->where('assets.serial', 'LIKE', '%'.$search_val.'%');
                 }
 
@@ -1444,9 +1445,10 @@ class Asset extends Depreciable
              * - snipe 
              *
              */
-            if (($fieldname != 'category') && ($fieldname != 'model_number') && ($fieldname != 'rtd_location') && ($fieldname != 'location') && ($fieldname != 'supplier')
-                && ($fieldname != 'status_label') && ($fieldname != 'model') && ($fieldname != 'company') && ($fieldname != 'manufacturer')) {
-                $query->orWhere('assets.'.$fieldname, 'LIKE', '%'.$search_val.'%');
+
+            if (($fieldname!='category') && ($fieldname!='model_number') && ($fieldname!='rtd_location') && ($fieldname!='location') && ($fieldname!='supplier')
+                && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
+                    $query->where('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }
 
 
