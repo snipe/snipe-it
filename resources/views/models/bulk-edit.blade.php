@@ -72,13 +72,30 @@
                                 </div>
                             </div>
 
+                            <!-- requestable -->
+                                <div class="form-group {{ $errors->has('requestable') ? 'has-error' : '' }}">
+                                <div class="col-md-7 col-md-offset-3">
+                            
+
+                                    <div class="checkbox">
+                                        <label for="requestable">
+                                            {{ Form::radio('requestable', '', true, ['aria-label'=>'requestable']) }} Do not change  requestable status<br>
+                                            {{ Form::radio('requestable', '1', old('requestable'), ['aria-label'=>'requestable']) }}  {{  trans('admin/hardware/general.requestable')}} <br>
+                                            {{ Form::radio('requestable', '0', old('requestable'), ['aria-label'=>'requestable']) }}  Not requestable
+    
+                                        </label>
+                                    </div>
+
+                                </div>
+                                </div>
+
                             @foreach ($models as $model)
                                 <input type="hidden" name="ids[{{ $model->id }}]" value="{{ $model->id }}">
                             @endforeach
                         </div>
                     </div> <!--/.box-body-->
 
-                    <div class="box-footer text-right">
+                    <div class="text-right box-footer">
                         <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
                 </div> <!--/.box.box-default-->

@@ -107,6 +107,14 @@ class AssetModelPresenter extends Presenter
                 'formatter' => 'fieldsetsLinkObjFormatter',
             ],
             [
+                'field' => 'requestable',
+                'searchable' => false,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('admin/hardware/general.requestable'),
+                'formatter' => 'trueFalseFormatter',
+            ],
+            [
                 'field' => 'notes',
                 'searchable' => true,
                 'sortable' => true,
