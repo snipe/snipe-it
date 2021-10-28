@@ -125,10 +125,10 @@
 
         <!-- Two factor opt in -->
         @if ($snipeSettings->two_factor_enabled=='1')
-        <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
+        <div class="form-group {{ $errors->has('two_factor_optin') ? 'has-error' : '' }}">
           <div class="col-md-7 col-md-offset-3">
             @can('self.two_factor')
-              <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
+              <label for="two_factor_optin">{{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),array('class' => 'minimal')) }}
             @else
                 <label for="avatar">{{ Form::checkbox('two_factor_optin', '1', Request::old('two_factor_optin', $user->two_factor_optin),['class' => 'disabled minimal', 'disabled' => 'disabled']) }}
             @endcan
@@ -148,7 +148,7 @@
 
 
       </div> <!-- .box-body -->
-      <div class="box-footer text-right">
+      <div class="text-right box-footer">
         <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
         <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
       </div>
