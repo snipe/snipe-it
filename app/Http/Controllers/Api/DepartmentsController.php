@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\DepartmentsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Company;
 use App\Models\Department;
 use Auth;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class DepartmentsController extends Controller
         $this->authorize('view', Department::class);
         $allowed_columns = ['id', 'name', 'image', 'users_count'];
 
-        $departments = Department::select([
+        $departments = Company::scopeCompanyables(Department::select(
             'departments.id',
             'departments.name',
             'departments.location_id',
@@ -34,8 +35,8 @@ class DepartmentsController extends Controller
             'departments.manager_id',
             'departments.created_at',
             'departments.updated_at',
-            'departments.image',
-        ])->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
+            'departments.image'),
+             "company_id", "departments")->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $departments = $departments->TextSearch($request->input('search'));
