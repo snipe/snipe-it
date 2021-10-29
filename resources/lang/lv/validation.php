@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => 'Atribūts jau ir pieņemts.',
     'uploaded'             => 'Atribūts neizdevās augšupielādēt.',
     'url'                  => 'Atribūta formāts nav derīgs.',
-    'unique_undeleted'     => ':attribute jābūt unikālam.',
+    "unique_undeleted"     => ":attribute jābūt unikālam.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +115,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => 'Laukā: atribūta lauks ir rakstzīme, kas nav atļauta.',
-        'email_array'      => 'Viena vai vairākas e-pasta adreses nav derīgas.',
-        'hashed_pass'      => 'Jūsu pašreizējā parole nav pareiza',
+        'alpha_space' => "Laukā: atribūta lauks ir rakstzīme, kas nav atļauta.",
+        "email_array"      => "Viena vai vairākas e-pasta adreses nav derīgas.",
+        "hashed_pass"      => "Jūsu pašreizējā parole nav pareiza",
         'dumbpwd'          => 'Šī parole ir pārāk izplatīta.',
-        'statuslabel_type' => 'Jums ir jāizvēlas derīgs statusa etiķetes veids',
+        "statuslabel_type" => "Jums ir jāizvēlas derīgs statusa etiķetes veids",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

@@ -86,7 +86,7 @@
                                                 </td>
                                                 <td class="col-md-1 text-right">
                                                     <button class="btn btn-sm btn-danger" @click="deleteFile(currentFile)">
-                                                        <i class="fa fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
+                                                        <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
                                     			</td>
                                     		</tr>
                                                 <import-file

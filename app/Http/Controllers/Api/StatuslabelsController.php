@@ -47,6 +47,7 @@ class StatuslabelsController extends Controller
         return (new StatuslabelsTransformer)->transformStatuslabels($statuslabels, $total);
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -71,6 +72,10 @@ class StatuslabelsController extends Controller
         $statuslabel->deployable = $statusType['deployable'];
         $statuslabel->pending = $statusType['pending'];
         $statuslabel->archived = $statusType['archived'];
+        $statuslabel->color             =  $request->input('color');
+        $statuslabel->show_in_nav       =  $request->input('show_in_nav', 0);
+        $statuslabel->default_label     =  $request->input('default_label', 0);
+
 
         if ($statuslabel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.create.success')));
@@ -108,7 +113,7 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('update', Statuslabel::class);
         $statuslabel = Statuslabel::findOrFail($id);
-
+        
         $request->except('deployable', 'pending', 'archived');
 
         if (! $request->filled('type')) {
@@ -121,6 +126,9 @@ class StatuslabelsController extends Controller
         $statuslabel->deployable = $statusType['deployable'];
         $statuslabel->pending = $statusType['pending'];
         $statuslabel->archived = $statusType['archived'];
+        $statuslabel->color             =  $request->input('color');
+        $statuslabel->show_in_nav       =  $request->input('show_in_nav', 0);
+        $statuslabel->default_label     =  $request->input('default_label', 0);
 
         if ($statuslabel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.update.success')));
@@ -153,7 +161,7 @@ class StatuslabelsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/statuslabels/message.assoc_assets')));
     }
 
-    /**
+     /**
      * Show a count of assets by status label for pie chart
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -164,10 +172,7 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('view', Statuslabel::class);
 
-        $statuslabels = Statuslabel::with('assets')
-            ->groupBy('id')
-            ->withCount('assets as assets_count')
-            ->get();
+        $statuslabels = Statuslabel::withCount('assets')->get();
 
         $labels = [];
         $points = [];
@@ -183,8 +188,8 @@ class StatuslabelsController extends Controller
                     $colors_array[] = $statuslabel->color;
                 } else {
                     $colors_array[] = Helper::defaultChartColors($default_color_count);
-                    $default_color_count++;
                 }
+                $default_color_count++;
             }
         }
 
@@ -228,8 +233,10 @@ class StatuslabelsController extends Controller
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
 
+
         return (new AssetsTransformer)->transformAssets($assets, $total);
     }
+
 
     /**
      * Returns a boolean response based on whether the status label

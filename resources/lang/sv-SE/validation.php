@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => ':attribute är upptaget.',
     'uploaded'             => 'Uppladdningen av :attribute misslyckades.',
     'url'                  => ':attribute Formatet är ogiltigt.',
-    'unique_undeleted'     => ':attribute måste vara unikt.',
+    "unique_undeleted"     => ":attribute måste vara unikt.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +115,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => 'Fältet :attribute innehåller ett tecken som inte är tillåtet.',
-        'email_array'      => 'En eller flera e-postadresser är ogiltiga.',
-        'hashed_pass'      => 'Ditt nuvarande lösenord är felaktigt',
+        'alpha_space' => "Fältet :attribute innehåller ett tecken som inte är tillåtet.",
+        "email_array"      => "En eller flera e-postadresser är ogiltiga.",
+        "hashed_pass"      => "Ditt nuvarande lösenord är felaktigt",
         'dumbpwd'          => 'Det angivna lösenordet är för vanligt.',
-        'statuslabel_type' => 'Du måste ange en giltig typ av statusetikett',
+        "statuslabel_type" => "Du måste ange en giltig typ av statusetikett",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

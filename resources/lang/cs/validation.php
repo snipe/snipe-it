@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => ':attribute byl již vybrán.',
     'uploaded'             => 'Atribut: se nepodařilo nahrát.',
     'url'                  => 'Formát :attribute je neplatný.',
-    'unique_undeleted'     => 'Je třeba, aby se :attribute neopakoval.',
+    "unique_undeleted"     => "Je třeba, aby se :attribute neopakoval.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +115,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => 'Pole atributu: atribut obsahuje znak, který není povolen.',
-        'email_array'      => 'Jedna nebo více e-mailových adres je neplatná.',
-        'hashed_pass'      => 'Vaše současné heslo je nesprávné',
+        'alpha_space' => "Pole atributu: atribut obsahuje znak, který není povolen.",
+        "email_array"      => "Jedna nebo více e-mailových adres je neplatná.",
+        "hashed_pass"      => "Vaše současné heslo je nesprávné",
         'dumbpwd'          => 'Toto heslo je příliš běžné.',
-        'statuslabel_type' => 'Musíte vybrat platný typ štítku stavu',
+        "statuslabel_type" => "Musíte vybrat platný typ štítku stavu",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

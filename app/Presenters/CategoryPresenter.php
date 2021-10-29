@@ -75,7 +75,25 @@ class CategoryPresenter extends Presenter
                 'sortable' => false,
                 'switchable' => false,
                 'title' => trans('table.actions'),
+            ],[
+                "field" => "use_default_eula",
+                "searchable" => false,
+                "sortable" => true,
+                "title" => trans('admin/categories/general.use_default_eula_column'),
                 'visible' => true,
+                "formatter" => 'trueFalseFormatter',
+            ],[
+                "field" => "checkin_email",
+                "searchable" => false,
+                "sortable" => true,
+                "class" => 'css-envelope',
+                "title" => 'Send Email',
+                "visible" => true,
+                "formatter" => 'trueFalseFormatter',
+            ],[
+                "field" => "require_acceptance",
+                "searchable" => false,
+                "sortable" => true,
                 'formatter' => 'categoriesActionsFormatter',
             ],
             [

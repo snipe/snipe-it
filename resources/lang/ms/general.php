@@ -176,6 +176,7 @@
     'remove_company'        => 'Keluarkan Persatuan Syarikat',
     'reports'				=> 'Laporan',
     'restored'				=> 'restored',
+    'restore'				=> 'Restore',
     'requested'				=> 'Diminta',
     'request_canceled'      => 'Permintaan Dibatalkan',
     'save'  				=> 'Simpan',

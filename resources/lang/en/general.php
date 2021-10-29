@@ -73,6 +73,7 @@
     'delete_confirm'  		=> 'Are you sure you wish to delete :item?',
     'deleted'  				=> 'Deleted',
     'delete_seats'  		=> 'Deleted Seats',
+    'deletion_failed'       => 'Deletion failed',
     'departments'           => 'Departments',
     'department'           => 'Department',
     'deployed'				=> 'Deployed',
@@ -176,6 +177,7 @@
     'remove_company'        => 'Remove Company Association',
     'reports'				=> 'Reports',
     'restored'				=> 'restored',
+    'restore'				=> 'Restore',
     'requested'				=> 'Requested',
     'request_canceled'      => 'Request Canceled',
     'save'  				=> 'Save',
@@ -247,4 +249,5 @@
     'show_help'             => 'Show help',
     'hide_help'             => 'Hide help',
     'view_all'              => 'view all',
+    'hide_deleted'          => 'Hide Deleted',
     ];

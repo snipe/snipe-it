@@ -24,7 +24,7 @@ class ActionlogsTransformer
     {
         $icon = $actionlog->present()->icon();
         if ($actionlog->filename != '') {
-            $icon = e(\App\Helpers\Helper::filetype_icon($actionlog->filename));
+            $icon = e(Helper::filetype_icon($actionlog->filename));
         }
 
         // This is necessary since we can't escape special characters within a JSON object
@@ -68,14 +68,14 @@ class ActionlogsTransformer
             }
         }
 
-        $array = [
+            $array = [
             'id'          => (int) $actionlog->id,
             'icon'          => $icon,
             'file' => ($actionlog->filename != '') ?
                 [
                     'url' => route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]),
                     'filename' => $actionlog->filename,
-                    'inlineable' => (bool) \App\Helpers\Helper::show_file_inline($actionlog->filename),
+                    'inlineable' => (bool) Helper::show_file_inline($actionlog->filename),
                 ] : null,
 
             'item' => ($actionlog->item) ? [
@@ -104,10 +104,10 @@ class ActionlogsTransformer
                 'type' => e($actionlog->targetType()),
             ] : null,
 
-            'note'          => ($actionlog->note) ? e($actionlog->note) : null,
-            'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature]) : null,
-            'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta : null,
-            'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime') : null,
+            'note'          => ($actionlog->note) ? e($actionlog->note): null,
+            'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
+            'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
+            'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
 
         ];
 

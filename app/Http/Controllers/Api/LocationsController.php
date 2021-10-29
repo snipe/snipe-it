@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
+use App\Http\Requests\ImageUploadRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Location;
 use Illuminate\Http\Request;
-use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
@@ -78,6 +78,7 @@ class LocationsController extends Controller
 
         return (new LocationsTransformer)->transformLocations($locations, $total);
     }
+
 
     /**
      * Store a newly created resource in storage.

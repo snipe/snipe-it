@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => 'Mae\'r :attribute wedi cymeryd yn barod.',
     'uploaded'             => 'Mae\'r :attribute wedi fethu uwchlwytho.',
     'url'                  => 'Mae fformat :attribute yn annilys.',
-    'unique_undeleted'     => "Rhaid i'r :attribute bod yn unigryw.",
+    "unique_undeleted"     => "Rhaid i'r :attribute bod yn unigryw.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -114,10 +116,10 @@ return [
 
     'custom' => [
         'alpha_space' => "Mae'r maes :attribute yn cynnwys cymeriad na chaniateir.",
-        'email_array'      => 'Mae un neu fwy o gyfeiriadau e-bost yn annilys.',
-        'hashed_pass'      => 'Mae eich cyfrinair cyfredol yn anghywir',
+        "email_array"      => "Mae un neu fwy o gyfeiriadau e-bost yn annilys.",
+        "hashed_pass"      => "Mae eich cyfrinair cyfredol yn anghywir",
         'dumbpwd'          => 'Mae\'r cyfrinair hwnnw\'n rhy gyffredin.',
-        'statuslabel_type' => 'Rhaid i chi ddewis math label statws dilys',
+        "statuslabel_type" => "Rhaid i chi ddewis math label statws dilys",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

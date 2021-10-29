@@ -47,12 +47,19 @@ class Ldap extends Model
         ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);
         ldap_set_option($connection, LDAP_OPT_NETWORK_TIMEOUT, 20);
 
-        if ($ldap_use_tls == '1') {
+        if (Setting::getSettings()->ldap_client_tls_cert && Setting::getSettings()->ldap_client_tls_key) {
+            ldap_set_option($connection, LDAP_OPT_X_TLS_CERTFILE, Setting::get_client_side_cert_path());
+            ldap_set_option($connection, LDAP_OPT_X_TLS_KEYFILE, Setting::get_client_side_key_path());
+        }
+
+        if ($ldap_use_tls=='1') {
             ldap_start_tls($connection);
         }
 
+
         return $connection;
     }
+
 
     /**
      * Binds/authenticates the user to LDAP, and returns their attributes.
@@ -95,7 +102,7 @@ class Ldap extends Model
 
         if (! $ldapbind = @ldap_bind($connection, $userDn, $password)) {
             if (! $ldapbind = self::bindAdminToLdap($connection)) {
-                return false;
+                    return false;
             }
         }
 
@@ -128,6 +135,8 @@ class Ldap extends Model
     {
         $ldap_username = Setting::getSettings()->ldap_uname;
 
+        $ldap_username     = Setting::getSettings()->ldap_uname;
+
         // Lets return some nicer messages for users who donked their app key, and disable LDAP
         try {
             $ldap_pass = \Crypt::decrypt(Setting::getSettings()->ldap_pword);
@@ -139,6 +148,7 @@ class Ldap extends Model
             throw new Exception('Could not bind to LDAP: '.ldap_error($connection));
         }
     }
+
 
     /**
      * Parse and map LDAP attributes based on settings

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => 'Ko te: kua tangohia te huanga.',
     'uploaded'             => 'Ko te: ko te huanga i rahua te tuku.',
     'url'                  => 'Ko te: ko te hōputu huanga he muhu.',
-    'unique_undeleted'     => 'The :attribute must be unique.',
+    "unique_undeleted"     => "The :attribute must be unique.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +115,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => 'Ko te: kei roto i te waahi tohu he momo e kore e whakaaetia.',
-        'email_array'      => 'Kotahi, neke atu ranei nga wahitau īmēra he muhu.',
-        'hashed_pass'      => 'He hē tō kupuhipa o nāianei',
+        'alpha_space' => "Ko te: kei roto i te waahi tohu he momo e kore e whakaaetia.",
+        "email_array"      => "Kotahi, neke atu ranei nga wahitau īmēra he muhu.",
+        "hashed_pass"      => "He hē tō kupuhipa o nāianei",
         'dumbpwd'          => 'He noa rawa te kupuhipa.',
-        'statuslabel_type' => 'Me tīpako i te momo tahua tohu whaimana',
+        "statuslabel_type" => "Me tīpako i te momo tahua tohu whaimana",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

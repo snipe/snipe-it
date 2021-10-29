@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Company;
 use App\Models\Component;
+use App\Helpers\Helper;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
@@ -35,6 +36,7 @@ class ComponentsController extends Controller
 
         return view('components/index');
     }
+
 
     /**
      * Returns a form to create a new component.
@@ -67,17 +69,17 @@ class ComponentsController extends Controller
     {
         $this->authorize('create', Component::class);
         $component = new Component();
-        $component->name = $request->input('name');
-        $component->category_id = $request->input('category_id');
-        $component->location_id = $request->input('location_id');
-        $component->company_id = Company::getIdForCurrentUser($request->input('company_id'));
-        $component->order_number = $request->input('order_number', null);
-        $component->min_amt = $request->input('min_amt', null);
-        $component->serial = $request->input('serial', null);
-        $component->purchase_date = $request->input('purchase_date', null);
-        $component->purchase_cost = $request->input('purchase_cost', null);
-        $component->qty = $request->input('qty');
-        $component->user_id = Auth::id();
+        $component->name                   = $request->input('name');
+        $component->category_id            = $request->input('category_id');
+        $component->location_id            = $request->input('location_id');
+        $component->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
+        $component->order_number           = $request->input('order_number', null);
+        $component->min_amt                = $request->input('min_amt', null);
+        $component->serial                 = $request->input('serial', null);
+        $component->purchase_date          = $request->input('purchase_date', null);
+        $component->purchase_cost          = Helper::ParseCurrency($request->input('purchase_cost', null));
+        $component->qty                    = $request->input('qty');
+        $component->user_id                = Auth::id();
 
         $component = $request->handleImages($component);
 
@@ -109,6 +111,7 @@ class ComponentsController extends Controller
         return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
     }
 
+
     /**
      * Return a view to edit a component.
      *
@@ -139,16 +142,16 @@ class ComponentsController extends Controller
         $this->authorize('update', $component);
 
         // Update the component data
-        $component->name = $request->input('name');
-        $component->category_id = $request->input('category_id');
-        $component->location_id = $request->input('location_id');
-        $component->company_id = Company::getIdForCurrentUser($request->input('company_id'));
-        $component->order_number = $request->input('order_number');
-        $component->min_amt = $request->input('min_amt');
-        $component->serial = $request->input('serial');
-        $component->purchase_date = $request->input('purchase_date');
-        $component->purchase_cost = request('purchase_cost');
-        $component->qty = $request->input('qty');
+        $component->name                   = $request->input('name');
+        $component->category_id            = $request->input('category_id');
+        $component->location_id            = $request->input('location_id');
+        $component->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
+        $component->order_number           = $request->input('order_number');
+        $component->min_amt                = $request->input('min_amt');
+        $component->serial                 = $request->input('serial');
+        $component->purchase_date          = $request->input('purchase_date');
+        $component->purchase_cost          = Helper::ParseCurrency(request('purchase_cost'));
+        $component->qty                    = $request->input('qty');
 
         $component = $request->handleImages($component);
 

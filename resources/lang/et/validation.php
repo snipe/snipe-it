@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => 'Atribuut: on juba võetud.',
     'uploaded'             => 'Atribuut ei õnnestunud üles laadida.',
     'url'                  => 'Atribuudivorming on vale.',
-    'unique_undeleted'     => ':attribute peab olema ainulaadne.',
+    "unique_undeleted"     => ":attribute peab olema ainulaadne.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +115,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => 'Atribuudi väli sisaldab märk, mis pole lubatud.',
-        'email_array'      => 'Üks või mitu e-posti aadressi on kehtetu.',
-        'hashed_pass'      => 'Teie praegune parool on vale',
+        'alpha_space' => "Atribuudi väli sisaldab märk, mis pole lubatud.",
+        "email_array"      => "Üks või mitu e-posti aadressi on kehtetu.",
+        "hashed_pass"      => "Teie praegune parool on vale",
         'dumbpwd'          => 'See parool on liiga levinud.',
-        'statuslabel_type' => 'Peate valima kehtiva olekutüübi tüübi',
+        "statuslabel_type" => "Peate valima kehtiva olekutüübi tüübi",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

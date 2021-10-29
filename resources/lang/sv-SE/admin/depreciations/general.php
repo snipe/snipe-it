@@ -8,5 +8,6 @@ return [
     'depreciation_name'  					=> 'Avskrivningsnamn',
     'number_of_months'  					=> 'Antal Månader',
     'update'  					            => 'Uppdatera avskrivningar',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 ];

@@ -1,7 +1,7 @@
 <?php
 
-return [
-    'asset_categories' 					=> 'Asset Categories',
+return array(
+    'asset_categories' 					=> 'Eignaflokkar',
     'category_name'  					=> 'Heiti Vöruflokks',
     'checkin_email'                     => 'Senda tölvupóst til notenda til að skrá sig inn / út.',
     'checkin_email_notification'        => 'Þessi notandi fær tölvupóst til að skrá sig inn/út.',
@@ -19,4 +19,4 @@ return [
     'use_default_eula'					=> 'Notaðu frekar <a href="#" data-toggle="modal" data-target="#eulaModal">',
     'use_default_eula_disabled'			=> '<del>Notaðu frekar sjálfgefna notendaskilmálana.</del>Sjálfgefnu notendaskilmálarnir eru ekki í notkun. Vinsamlegast bættu einhverjum notendaskilmálum við í undir "Stillingar"',
 
-];
+);

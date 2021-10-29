@@ -85,7 +85,7 @@ class ManufacturerPresenter extends Presenter
                 'sortable' => true,
                 'switchable' => true,
                 'title' => ' <span class="hidden-md hidden-lg">Assets</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>',
+                    .'<span class="hidden-xs"><i class="fas fa-barcode fa-lg"></i></span>',
                 'visible' => true,
             ],
             [
@@ -94,7 +94,7 @@ class ManufacturerPresenter extends Presenter
                 'sortable' => true,
                 'switchable' => true,
                 'title' => ' <span class="hidden-md hidden-lg">Licenses</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-floppy-o fa-lg"></i></span>',
+                    .'<span class="hidden-xs"><i class="far fa-save fa-lg"></i></span>',
                 'visible' => true,
             ],
             [
@@ -103,7 +103,7 @@ class ManufacturerPresenter extends Presenter
                 'sortable' => true,
                 'switchable' => true,
                 'title' => ' <span class="hidden-md hidden-lg">Consumables</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-tint fa-lg"></i></span>',
+                    .'<span class="hidden-xs"><i class="fas fa-tint fa-lg"></i></span>',
                 'visible' => true,
             ],
             [
@@ -112,7 +112,7 @@ class ManufacturerPresenter extends Presenter
                 'sortable' => true,
                 'switchable' => true,
                 'title' => ' <span class="hidden-md hidden-lg">Accessories</span>'
-                    .'<span class="hidden-xs"><i class="fa fa-keyboard-o fa-lg"></i></span>',
+                    .'<span class="hidden-xs"><i class="far fa-keyboard fa-lg"></i></span>',
                 'visible' => true,
             ],
             [

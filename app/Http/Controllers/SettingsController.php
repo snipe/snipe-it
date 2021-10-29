@@ -360,6 +360,7 @@ class SettingsController extends Controller
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
 
+
     /**
      * Return a form to allow a super admin to update settings.
      *
@@ -411,14 +412,15 @@ class SettingsController extends Controller
         $setting = $request->handleImages($setting, 600, 'logo', '', 'logo');
 
         if ('1' == $request->input('clear_logo')) {
-            Storage::disk('public')->delete($setting->logo);
+                Storage::disk('public')->delete($setting->logo);
             $setting->logo = null;
-            $setting->brand = 1;
+                $setting->brand = 1;
         }
 
         $setting = $request->handleImages($setting, 600, 'email_logo', '', 'email_logo');
 
-        if ('1' == $request->input('clear_email_logo')) {
+
+       if ('1' == $request->input('clear_email_logo')) {
             Storage::disk('public')->delete($setting->email_logo);
             $setting->email_logo = null;
             // If they are uploading an image, validate it and upload it
@@ -431,8 +433,9 @@ class SettingsController extends Controller
             $setting->label_logo = null;
         }
 
+
         // If the user wants to clear the favicon...
-        if ($request->hasFile('favicon')) {
+         if ($request->hasFile('favicon')) {
             $favicon_image = $favicon_upload = $request->file('favicon');
             $favicon_ext = $favicon_image->getClientOriginalExtension();
             $setting->favicon = $favicon_file_name = 'favicon-uploaded.'.$favicon_ext;
@@ -449,16 +452,17 @@ class SettingsController extends Controller
                 Storage::disk('public')->put($favicon_file_name, file_get_contents($request->file('favicon')));
             }
 
+
             // Remove Current image if exists
             if (($setting->favicon) && (file_exists($favicon_file_name))) {
                 Storage::disk('public')->delete($favicon_file_name);
             }
         } elseif ('1' == $request->input('clear_favicon')) {
-            Storage::disk('public')->delete($setting->clear_favicon);
+             Storage::disk('public')->delete($setting->clear_favicon);
             $setting->favicon = null;
 
-            // If they are uploading an image, validate it and upload it
-        }
+             // If they are uploading an image, validate it and upload it
+         }
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
@@ -515,6 +519,7 @@ class SettingsController extends Controller
         $setting->pwd_secure_uncommon = (int) $request->input('pwd_secure_uncommon');
         $setting->pwd_secure_min = (int) $request->input('pwd_secure_min');
         $setting->pwd_secure_complexity = '';
+
 
         if ($request->filled('pwd_secure_complexity')) {
             $setting->pwd_secure_complexity = implode('|', $request->input('pwd_secure_complexity'));
@@ -928,9 +933,14 @@ class SettingsController extends Controller
             $setting->ldap_jobtitle = $request->input('ldap_jobtitle');
             $setting->ldap_country = $request->input('ldap_country');
             $setting->ldap_dept = $request->input('ldap_dept');
+            $setting->ldap_client_tls_cert   = $request->input('ldap_client_tls_cert');
+            $setting->ldap_client_tls_key    = $request->input('ldap_client_tls_key');
+
+
         }
 
         if ($setting->save()) {
+            $setting->update_client_side_cert_files();
             return redirect()->route('settings.ldap.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }

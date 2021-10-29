@@ -38,7 +38,7 @@
         <p>{{ strtolower(trans('general.assets')) }}</p>
       </div>
       <div class="icon" aria-hidden="true">
-        <i class="fa fa-barcode" aria-hidden="true"></i>
+        <i class="fas fa-barcode" aria-hidden="true"></i>
       </div>
       @can('index', \App\Models\Asset::class)
         <a href="{{ route('hardware.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
@@ -56,7 +56,7 @@
         <p>{{ strtolower(trans('general.licenses')) }}</p>
       </div>
       <div class="icon" aria-hidden="true">
-        <i class="fa fa-floppy-o"></i>
+        <i class="far fa-save"></i>
       </div>
         @can('view', \App\Models\License::class)
           <a href="{{ route('licenses.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
@@ -75,7 +75,7 @@
         <p>{{ strtolower(trans('general.accessories')) }}</p>
       </div>
       <div class="icon" aria-hidden="true">
-        <i class="fa fa-keyboard-o"></i>
+        <i class="far fa-keyboard"></i>
       </div>
       @can('index', \App\Models\Accessory::class)
           <a href="{{ route('accessories.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
@@ -94,7 +94,7 @@
         <p>{{ strtolower(trans('general.consumables')) }}</p>
       </div>
       <div class="icon" aria-hidden="true">
-        <i class="fa fa-tint"></i>
+        <i class="fas fa-tint"></i>
       </div>
       @can('index', \App\Models\Consumable::class)
         <a href="{{ route('consumables.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
@@ -111,7 +111,7 @@
        <p>{{ strtolower(trans('general.components')) }}</p>
      </div>
      <div class="icon" aria-hidden="true">
-       <i class="fa fa-hdd-o"></i>
+       <i class="far fa-hdd"></i>
      </div>
        @can('view', \App\Models\License::class)
          <a href="{{ route('components.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
@@ -129,7 +129,7 @@
        <p>{{ strtolower(trans('general.people')) }}</p>
      </div>
      <div class="icon" aria-hidden="true">
-       <i class="fa fa-users"></i>
+       <i class="fas fa-users"></i>
      </div>
        @can('view', \App\Models\License::class)
          <a href="{{ route('users.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
@@ -202,7 +202,7 @@
         <h2 class="box-title">{{ trans('general.recent_activity') }}</h2>
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
-                <i class="fa fa-minus" aria-hidden="true"></i>
+                <i class="fas fa-minus" aria-hidden="true"></i>
                 <span class="sr-only">Collapse</span>
             </button>
         </div>
@@ -252,7 +252,7 @@
                 <h2 class="box-title">{{ trans('general.assets') }} by Status</h2>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
-                        <i class="fa fa-minus" aria-hidden="true"></i>
+                        <i class="fas fa-minus" aria-hidden="true"></i>
                         <span class="sr-only">Collapse</span>
                     </button>
                 </div>
@@ -279,7 +279,7 @@
                 <h2 class="box-title">Asset {{ trans('general.locations') }}</h2>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                        <i class="fa fa-minus" aria-hidden="true"></i>
+                        <i class="fas fa-minus" aria-hidden="true"></i>
                         <span class="sr-only">Collapse</span>
                     </button>
                 </div>
@@ -305,7 +305,7 @@
                                 <th class="col-sm-3" data-visible="true" data-field="name" data-formatter="categoriesLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
                                 
                                 <th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
-                                    <i class="fa fa-barcode" aria-hidden="true"></i>
+                                    <i class="fas fa-barcode" aria-hidden="true"></i>
                                     <span class="sr-only">Asset Count</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="assigned_assets_count" data-sortable="true">
@@ -313,7 +313,7 @@
                                     Assigned
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="users_count" data-sortable="true">
-                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                    <i class="fas fa-users" aria-hidden="true"></i>
                                     <span class="sr-only">People</span>
                                     
                                 </th>
@@ -339,7 +339,7 @@
                 <h2 class="box-title">Asset {{ trans('general.categories') }}</h2>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                        <i class="fa fa-minus" aria-hidden="true"></i>
+                        <i class="fas fa-minus" aria-hidden="true"></i>
                         <span class="sr-only">Collapse</span>
                     </button>
                 </div>
@@ -367,23 +367,23 @@
                                     {{ trans('general.type') }}
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
-                                    <i class="fa fa-barcode" aria-hidden="true"></i>
+                                    <i class="fas fa-barcode" aria-hidden="true"></i>
                                     <span class="sr-only">Asset Count</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="accessories_count" data-sortable="true">
-                                    <i class="fa fa-keyboard-o" aria-hidden="true"></i>
+                                    <i class="far fa-keyboard" aria-hidden="true"></i>
                                     <span class="sr-only">Accessories Count</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="consumables_count" data-sortable="true">
-                                    <i class="fa fa-tint" aria-hidden="true"></i>
+                                    <i class="fas fa-tint" aria-hidden="true"></i>
                                     <span class="sr-only">Consumables Count</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="components_count" data-sortable="true">
-                                    <i class="fa fa-hdd-o" aria-hidden="true"></i>
+                                    <i class="far fa-hdd" aria-hidden="true"></i>
                                     <span class="sr-only">Components Count</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="licenses_count" data-sortable="true">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                    <i class="far fa-save" aria-hidden="true"></i>
                                     <span class="sr-only">Licenses Count</span>
                                 </th>
                             </tr>

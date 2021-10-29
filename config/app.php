@@ -250,6 +250,9 @@ return [
 
     'enable_csp' => env('ENABLE_CSP', false),
 
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Demo Mode Lockdown
@@ -272,6 +275,7 @@ return [
     */
 
     'min_php' => '7.2.5',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -397,6 +401,8 @@ return [
         'Google2FA' => PragmaRX\Google2FALaravel\Facade::class,
         'Image'     => Intervention\Image\ImageServiceProvider::class,
         'Carbon' => Carbon\Carbon::class,
+        'Helper' => App\Helpers\Helper::class, // makes it much easier to use 'Helper::blah' in blades (which is where we usually use this)
+
 
     ],
 

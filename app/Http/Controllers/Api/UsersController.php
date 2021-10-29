@@ -68,10 +68,15 @@ class UsersController extends Controller
             ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count');
         $users = Company::scopeCompanyables($users);
 
+
         if (($request->filled('deleted')) && ($request->input('deleted') == 'true')) {
             $users = $users->onlyTrashed();
         } elseif (($request->filled('all')) && ($request->input('all') == 'true')) {
             $users = $users->withTrashed();
+        }
+
+        if ($request->filled('activated')) {
+            $users = $users->where('users.activated', '=', $request->input('activated'));
         }
 
         if ($request->filled('company_id')) {
@@ -90,12 +95,40 @@ class UsersController extends Controller
             $users = $users->where('users.username', '=', $request->input('username'));
         }
 
+        if ($request->filled('first_name')) {
+            $users = $users->where('users.first_name', '=', $request->input('first_name'));
+        }
+
+        if ($request->filled('last_name')) {
+            $users = $users->where('users.last_name', '=', $request->input('last_name'));
+        }
+
+        if ($request->filled('employee_num')) {
+            $users = $users->where('users.employee_num', '=', $request->input('employee_num'));
+        }
+
+        if ($request->filled('state')) {
+            $users = $users->where('users.state', '=', $request->input('state'));
+        }
+
+        if ($request->filled('country')) {
+            $users = $users->where('users.country', '=', $request->input('country'));
+        }
+
+        if ($request->filled('zip')) {
+            $users = $users->where('users.zip', '=', $request->input('zip'));
+        }
+
         if ($request->filled('group_id')) {
             $users = $users->ByGroup($request->get('group_id'));
         }
 
         if ($request->filled('department_id')) {
             $users = $users->where('users.department_id', '=', $request->input('department_id'));
+        }
+
+        if ($request->filled('manager_id')) {
+            $users = $users->where('users.manager_id','=',$request->input('manager_id'));
         }
 
         if ($request->filled('search')) {
@@ -111,6 +144,7 @@ class UsersController extends Controller
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
+
 
         switch ($request->input('sort')) {
             case 'manager':
@@ -201,6 +235,8 @@ class UsersController extends Controller
         return (new SelectlistTransformer)->transformSelectlist($users);
     }
 
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -259,6 +295,7 @@ class UsersController extends Controller
         return (new UsersTransformer)->transformUser($user);
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -274,13 +311,20 @@ class UsersController extends Controller
 
         $user = User::findOrFail($id);
 
-        // This is a janky hack to prevent people from changing admin demo user data on the public demo.
-        // The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
-        // Thanks, jerks. You are why we can't have nice things. - snipe
+        /**
+         * This is a janky hack to prevent people from changing admin demo user data on the public demo.
+         * 
+         * The $ids 1 and 2 are special since they are seeded as superadmins in the demo seeder.
+         * 
+         *  Thanks, jerks. You are why we can't have nice things. - snipe
+         * 
+         */ 
+
 
         if ((($id == 1) || ($id == 2)) && (config('app.lock_passwords'))) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Permission denied. You cannot update user information via API on the demo.'));
         }
+
 
         $user->fill($request->all());
         
@@ -305,6 +349,8 @@ class UsersController extends Controller
             $user->permissions = $permissions_array;
         }
 
+
+
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
             ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
@@ -327,6 +373,7 @@ class UsersController extends Controller
             } elseif ($request->has('groups')) {
                 $user->groups()->sync([]);
             }
+
 
             return response()->json(Helper::formatStandardApiResponse('success', (new UsersTransformer)->transformUser($user), trans('admin/users/message.success.update')));
         }
@@ -389,13 +436,13 @@ class UsersController extends Controller
      * @param $userId
      * @return string JSON
      */
-    public function assets($id)
+    public function assets(Request $request, $id)
     {
         $this->authorize('view', User::class);
         $this->authorize('view', Asset::class);
         $assets = Asset::where('assigned_to', '=', $id)->where('assigned_type', '=', User::class)->with('model')->get();
 
-        return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+        return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
     }
 
     /**
@@ -458,8 +505,9 @@ class UsersController extends Controller
                 return response()->json(['message' => trans('admin/settings/general.two_factor_reset_error')], 500);
             }
         }
-
         return response()->json(['message' => 'No ID provided'], 500);
+
+
     }
 
     /**
@@ -473,5 +521,29 @@ class UsersController extends Controller
     public function getCurrentUserInfo(Request $request)
     {
         return (new UsersTransformer)->transformUser($request->user());
+    }
+
+    /**
+     * Restore a soft-deleted user.
+     *
+     * @author [E. Taylor] [<dev@evantaylor.name>]
+     * @param int $userId
+     * @since [v6.0.0]
+     * @return JsonResponse
+     */
+    public function restore($userId = null)
+    {
+        // Get asset information
+        $user = User::withTrashed()->find($userId);
+        $this->authorize('delete', $user);
+        if (isset($user->id)) {
+            // Restore the user
+            User::withTrashed()->where('id', $userId)->restore();
+
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')));
+        }
+        
+        $id = $userId;
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/users/message.user_not_found', compact('id'))), 200);
     }
 }

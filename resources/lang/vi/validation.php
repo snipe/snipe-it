@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => ':attribute đã sẵn sàng.',
     'uploaded'             => 'Thuộc tính: không thể tải lên.',
     'url'                  => 'Định dạng :attribute thì không hợp lý.',
-    'unique_undeleted'     => 'Thuộc tính: phải là duy nhất.',
+    "unique_undeleted"     => "Thuộc tính: phải là duy nhất.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +115,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => 'Trường: attribute chứa một ký tự không được phép.',
-        'email_array'      => 'Một hoặc nhiều địa chỉ email không hợp lệ.',
-        'hashed_pass'      => 'Mật khẩu hiện tại của bạn không chính xác',
+        'alpha_space' => "Trường: attribute chứa một ký tự không được phép.",
+        "email_array"      => "Một hoặc nhiều địa chỉ email không hợp lệ.",
+        "hashed_pass"      => "Mật khẩu hiện tại của bạn không chính xác",
         'dumbpwd'          => 'Mật khẩu đó quá phổ biến.',
-        'statuslabel_type' => 'Bạn phải chọn một loại nhãn tình trạng hợp lệ',
+        "statuslabel_type" => "Bạn phải chọn một loại nhãn tình trạng hợp lệ",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

@@ -54,6 +54,7 @@ class UserFactory extends Factory
                 'first_name' => 'Admin',
                 'last_name' => 'User',
                 'username' => 'admin',
+                'avatar' => '1.jpg',
                 'permissions' => '{"superuser":"1"}',
             ];
         });
@@ -66,6 +67,7 @@ class UserFactory extends Factory
                 'first_name' => 'Snipe E.',
                 'last_name' => 'Head',
                 'username' => 'snipe',
+                'avatar' => '2.jpg',
                 'email' => 'snipe@snipe.net',
                 'permissions' => '{"superuser":"1"}',
             ];

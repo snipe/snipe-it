@@ -3,8 +3,8 @@
 return [
 
     'id'      => 'ID',
-    'months'   => 'Months',
-    'term'   => 'Term',
-    'title'      => 'Name ',
+    'months'   => 'Mánuðir',
+    'term'   => 'Tími',
+    'title'      => 'Heiti ',
 
 ];

@@ -43,7 +43,7 @@
                 <i class='icon-asterisk'></i></label>
               <div class="col-md-9">
                 <input class="form-control" type="text" name="assigned_qty" id="assigned_qty" style="width: 70px;" value="{{ old('assigned_qty') ?? 1 }}" />
-                {!! $errors->first('assigned_qty', '<br><span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                {!! $errors->first('assigned_qty', '<br><span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
             </div>
 
@@ -51,7 +51,7 @@
         </div> <!-- .BOX-BODY-->
         <div class="box-footer">
           <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
+          <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
        </div>
       </div> <!-- .box-default-->
     </form>

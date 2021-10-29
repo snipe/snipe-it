@@ -66,7 +66,7 @@ class AssetModelsController extends Controller
             ->with('category', 'depreciation', 'manufacturer', 'fieldset')
             ->withCount('assets as assets_count');
 
-        if ($request->filled('status')) {
+        if ($request->input('status')=='deleted') {
             $assetmodels->onlyTrashed();
         }
 
@@ -102,6 +102,7 @@ class AssetModelsController extends Controller
         return (new AssetModelsTransformer)->transformAssetModels($assetmodels, $total);
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -120,8 +121,9 @@ class AssetModelsController extends Controller
         if ($assetmodel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $assetmodel, trans('admin/models/message.create.success')));
         }
-
         return response()->json(Helper::formatStandardApiResponse('error', null, $assetmodel->getErrors()));
+
+
     }
 
     /**
@@ -156,6 +158,7 @@ class AssetModelsController extends Controller
         return (new AssetsTransformer)->transformAssets($assets, $assets->count());
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -183,6 +186,7 @@ class AssetModelsController extends Controller
         if ($request->filled('custom_fieldset_id')) {
             $assetmodel->fieldset_id = $request->get('custom_fieldset_id');
         }
+
 
         if ($assetmodel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $assetmodel, trans('admin/models/message.update.success')));

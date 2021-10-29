@@ -91,6 +91,8 @@ a.accordion-header {
 }
 .main-header .sidebar-toggle:before {
   content: "\f0c9";
+  font-weight: 900;
+  font-family: 'Font Awesome\ 5 Free';
 }
 .direct-chat-contacts {
   padding: 10px;
@@ -415,6 +417,68 @@ h4 {
   border-top: 1px solid #dddddd;
   display: table-cell;
 }
+.row-new-striped {
+  vertical-align: top;
+  line-height: 2.6;
+  padding: 0px;
+  margin-left: 20px;
+  display: table;
+  width: 100%;
+  padding-right: 20px;
+}
+/**
+*  NEW STRIPING
+*  This section is for the new row striping for nicer 
+* display for non-table data as of v6
+**/
+.row-new-striped > .row:nth-of-type(even) {
+  background: #FFFFFF;
+  border-top: 1px solid #dddddd;
+  display: table-row;
+}
+.row-new-striped > .row:nth-of-type(odd) {
+  background-color: #F8F8F8;
+  border-top: 1px solid #dddddd;
+  display: table-row;
+}
+.row-new-striped div {
+  display: table-cell;
+  border-top: 1px solid #dddddd;
+}
+.row-new-striped div {
+  display: table-cell;
+  border-top: 1px solid #dddddd;
+}
+.row-new-striped div[class^="col"]:first-child {
+  font-weight: bold;
+}
+/**
+* This just adds a little extra padding on mobile
+**/
+@media only screen and (max-width: 520px) {
+  h1.pagetitle {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .firstnav {
+    padding-top: 120px !important;
+  }
+  .product {
+    width: 400px;
+  }
+  .product img {
+    min-width: 400px;
+  }
+}
+.card-view-title {
+  min-width: 40% !important;
+  line-height: 3 !important;
+  padding-right: 20px;
+}
+.card-view {
+  display: table-row;
+  flex-direction: column;
+}
 /**
 
  COLUMN SELECTOR ICONS
@@ -490,3 +554,8 @@ th.css-accessory > .th-inner::before {
 .form-group.has-error label {
   color: #a94442;
 }
+
+.select2-container--default .select2-selection--multiple {
+  border-radius: 0px;
+}
+

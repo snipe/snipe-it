@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Disse aktiver kan ikke tildeles nogen.',
-        'deployable'   => 'Disse aktiver kan tjekkes ud. Når de er tildelt, antager de en metastatus på <i class="fa fa-circle text-blue"></i> <strong>Deployed</strong>.',
+        'deployable'   => 'Disse aktiver kan tjekkes ud. Når de er tildelt, antager de en metastatus på <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Disse aktiver kan ikke tjekkes ud, og vises kun i arkiveret visning. Dette er nyttigt for at bevare oplysninger om aktiver til budgettering / historiske formål, men bevare dem ud af den daglige aktivliste.',
         'pending'   => 'Disse aktiver kan endnu ikke tildeles nogen, der ofte bruges til genstande, der er ude til reparation, men forventes at vende tilbage til omløb.',
     ],

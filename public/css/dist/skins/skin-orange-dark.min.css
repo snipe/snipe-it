@@ -167,8 +167,8 @@ a:visited {
 :root {
   --background: #222;
   --back-main: #333;
-  --back-sub: #444;
-  --back-sub-alt: #dfd9d8;
+  --back-sub: #3d4144;
+  --back-sub-alt: rgba(0, 0, 0, 0.36);
   --button-default: #b36200;
   --button-primary: #804600;
   --button-hover: #663800;
@@ -431,7 +431,6 @@ input[type=search] {
 }
 .table-striped > tbody > tr:nth-of-type(even) {
   background-color: var(--back-sub-alt);
-  color: var(--header);
 }
 #webui > div > div > div > div > div > table > tbody > tr > td > a > i.fa,
 .box-body,

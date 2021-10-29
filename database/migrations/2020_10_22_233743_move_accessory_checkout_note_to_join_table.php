@@ -15,9 +15,16 @@ class MoveAccessoryCheckoutNoteToJoinTable extends Migration
      */
     public function up()
     {
-        Schema::table('accessories_users', function (Blueprint $table) {
-            $table->string('note')->nullable(true)->default(null);
-        });
+
+        if (!Schema::hasColumn('accessories_users', 'note'))
+        {
+            Schema::table('accessories_users', function (Blueprint $table) {
+                $table->string('note')->nullable(true)->default(null);
+            });
+        }
+
+
+        
 
         // Loop through the checked out accessories, find their related action_log entry, and copy over the note
         // to the newly created note field
@@ -44,7 +51,9 @@ class MoveAccessoryCheckoutNoteToJoinTable extends Migration
                     ->where('target_id', '=', $join_log->assigned_to)
                     ->where('item_id', '=', $accessory->id)
                     ->where('target_type', '=', \App\Models\User::class)
+                    ->where('item_type', '=','App\\Models\\Accessory')
                     ->where('action_type', '=', 'checkout')
+                    ->where('note', '!=', '')
                     ->orderBy('created_at', 'DESC')->get();
 
                 \Log::debug($action_log_entries->count().' matching entries in the action_logs table');
@@ -74,8 +83,15 @@ class MoveAccessoryCheckoutNoteToJoinTable extends Migration
      */
     public function down()
     {
-        Schema::table('accessories_users', function (Blueprint $table) {
-            $table->dropColumn('note');
-        });
+
+        if (Schema::hasColumn('accessories_users', 'note'))
+        {
+            Schema::table('accessories_users', function (Blueprint $table)
+            {
+                $table->dropColumn('note');
+            });
+        }
+
+    
     }
 }

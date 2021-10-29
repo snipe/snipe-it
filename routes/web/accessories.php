@@ -20,12 +20,12 @@ Route::group(['prefix' => 'accessories', 'middleware' => ['auth']], function () 
     Route::get(
         '{accessoryID}/checkin/{backto?}',
         [Accessories\AccessoryCheckinController::class, 'create']
-    )->name('checkout/accessory');
+    )->name('checkin/accessory');
 
     Route::post(
         '{accessoryID}/checkin/{backto?}',
         [Accessories\AccessoryCheckinController::class, 'store']
-    )->name('checkout/accessory');
+    )->name('checkin/accessory');
 
 });
 

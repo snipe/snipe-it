@@ -1,10 +1,11 @@
 <?php
 
-return [
-    'dl_csv'      				=> 'Download CSV',
-    'eula_text'      			=> 'EULA',
+return array(
+	'dl_csv'      				=> 'Завантажити CSV',
+	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
+    'require_acceptance'      	=> 'Схвалення',
     'title'      				=> 'Назва аксесуара',
 
-];
+
+);

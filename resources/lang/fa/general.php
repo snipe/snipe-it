@@ -179,6 +179,7 @@
     'remove_company'        => 'حذف انجمن شرکت',
     'reports'				=> 'گزارش‌ها',
     'restored'				=> 'restored',
+    'restore'				=> 'Restore',
     'requested'				=> 'در خواست شده',
     'request_canceled'      => 'درخواست لغو شد',
     'save'  				=> 'ذخیره کردن',

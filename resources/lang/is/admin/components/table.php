@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'title'      				=> 'Component Name',
-];
+return array(
+    'title'      				=> 'Heiti íhlutar',
+);

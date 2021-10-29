@@ -11,7 +11,7 @@ Create a User ::
 <div class="col-lg-12" style="padding-top: 20px;">
 	<div class="col-md-12">
         <div class="alert alert-warning">
-            <i class="fa fa-check"></i>
+            <i class="fas fa-check"></i>
             Success! Your admin user has been added!
         </div>
     </div>

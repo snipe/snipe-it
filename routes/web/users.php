@@ -4,6 +4,14 @@ use App\Http\Controllers\Users;
 use Illuminate\Support\Facades\Route;
 
 // User Management
+    Route::post('{userId}/clone', [ 'uses' => 'Users\UsersController@postCreate' ]);
+    Route::post('{userId}/restore', [ 'as' => 'restore/user', 'uses' => 'Users\UsersController@getRestore' ]);
+    Route::get('{userId}/unsuspend', [ 'as' => 'unsuspend/user', 'uses' => 'Users\UsersController@getUnsuspend' ]);
+    Route::post('{userId}/upload', [ 'as' => 'upload/user', 'uses' => 'Users\UserFilesController@store' ]);
+    Route::delete(
+        '{userId}/deletefile/{fileId}',
+        [ 'as' => 'userfile.destroy', 'uses' => 'Users\UserFilesController@destroy' ]
+    );
 
 Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
 

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => ':attribute е веќе зафатен.',
     'uploaded'             => ':attribute не е прикачен.',
     'url'                  => 'Форматот на :attribute не е валиден.',
-    'unique_undeleted'     => ':attribute мора да биде уникатен.',
+    "unique_undeleted"     => ":attribute мора да биде уникатен.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +115,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => 'Полето :attribute содржи знак што не е дозволен.',
-        'email_array'      => 'Една или повеќе е-пошти не се валидни.',
-        'hashed_pass'      => 'Вашата тековна лозинка е неточна',
+        'alpha_space' => "Полето :attribute содржи знак што не е дозволен.",
+        "email_array"      => "Една или повеќе е-пошти не се валидни.",
+        "hashed_pass"      => "Вашата тековна лозинка е неточна",
         'dumbpwd'          => 'Таа лозинка е премногу честа.',
-        'statuslabel_type' => 'Мора да изберете валидна етикета за статус',
+        "statuslabel_type" => "Мора да изберете валидна етикета за статус",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

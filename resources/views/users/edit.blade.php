@@ -87,7 +87,7 @@
                 <!-- First Name -->
                 <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="first_name">{{ trans('general.first_name') }}</label>
-                  <div class="col-md-6{{  (\App\Helpers\Helper::checkIfRequired($user, 'first_name')) ? ' required' : '' }}">
+                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'first_name')) ? ' required' : '' }}">
                     <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}" />
                     {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
@@ -96,7 +96,7 @@
                 <!-- Last Name -->
                 <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="last_name">{{ trans('general.last_name') }} </label>
-                  <div class="col-md-6{{  (\App\Helpers\Helper::checkIfRequired($user, 'last_name')) ? ' required' : '' }}">
+                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'last_name')) ? ' required' : '' }}">
                     <input class="form-control" type="text" name="last_name" id="last_name" value="{{ old('last_name', $user->last_name) }}" />
                     {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                   </div>
@@ -105,7 +105,7 @@
                 <!-- Username -->
                 <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="username">{{ trans('admin/users/table.username') }}</label>
-                  <div class="col-md-6{{  (\App\Helpers\Helper::checkIfRequired($user, 'username')) ? ' required' : '' }}">
+                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'username')) ? ' required' : '' }}">
                     @if ($user->ldap_import!='1' || str_contains(Route::currentRouteName(), 'clone'))
                       <input
                         class="form-control"
@@ -136,7 +136,7 @@
                   <label class="col-md-3 control-label" for="password">
                     {{ trans('admin/users/table.password') }}
                   </label>
-                  <div class="col-md-6{{  (\App\Helpers\Helper::checkIfRequired($user, 'password')) ? ' required' : '' }}">
+                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'password')) ? ' required' : '' }}">
                     @if ($user->ldap_import!='1' || str_contains(Route::currentRouteName(), 'clone') )
                       <input
                         type="password"
@@ -167,7 +167,7 @@
                   <label class="col-md-3 control-label" for="password_confirmation">
                     {{ trans('admin/users/table.password_confirm') }}
                   </label>
-                  <div class="col-md-6{{  ((\App\Helpers\Helper::checkIfRequired($user, 'first_name')) && (!$user->id)) ? ' required' : '' }}">
+                  <div class="col-md-6{{  ((Helper::checkIfRequired($user, 'first_name')) && (!$user->id)) ? ' required' : '' }}">
                     <input
                     type="password"
                     name="password_confirmation"
@@ -230,7 +230,7 @@
                   <!-- Email -->
                 <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="email">{{ trans('admin/users/table.email') }} </label>
-                  <div class="col-md-6{{  (\App\Helpers\Helper::checkIfRequired($user, 'email')) ? ' required' : '' }}">
+                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'email')) ? ' required' : '' }}">
                     <input
                       class="form-control"
                       type="text"
@@ -356,7 +356,7 @@
                       <label for="website" class="col-md-3 control-label">{{ trans('general.website') }}</label>
                       <div class="col-md-6">
                           <input class="form-control" type="text" name="website" id="website" value="{{ old('website', $user->website) }}" />
-                          {!! $errors->first('website', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                          {!! $errors->first('website', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                       </div>
                   </div>
 
@@ -453,7 +453,7 @@
                   <label for="notes" class="col-md-3 control-label">{{ trans('admin/users/table.notes') }}</label>
                   <div class="col-md-6">
                     <textarea class="form-control" rows="5" id="notes" name="notes">{{ old('notes', $user->notes) }}</textarea>
-                    {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                    {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                   </div>
                 </div>
 
@@ -509,6 +509,10 @@
               @if (!Auth::user()->isSuperUser())
                 <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
               @endif
+
+              @if (!Auth::user()->hasAccess('admin'))
+                <p class="alert alert-warning">Only users with admins rights or greater may grant a user admin access.</p>              
+              @endif
             </div>
 
             <table class="table table-striped permissions">
@@ -525,7 +529,7 @@
           </div><!-- /.tab-pane -->
         </div><!-- /.tab-content -->
         <div class="box-footer text-right">
-          <button type="submit" class="btn btn-primary"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
         </div>
       </div><!-- nav-tabs-custom -->
     </form>
@@ -597,7 +601,7 @@ $(document).ready(function() {
         $("#two_factor_resetrow").removeClass('success');
         $("#two_factor_resetrow").removeClass('danger');
         $("#two_factor_resetstatus").html('');
-        $("#two_factor_reseticon").html('<i class="fa fa-spinner spin"></i>');
+        $("#two_factor_reseticon").html('<i class="fas fa-spinner spin"></i>');
         $.ajax({
             url: '{{ route('api.users.two_factor_reset', ['id'=> $user->id]) }}',
             type: 'POST',
@@ -610,12 +614,12 @@ $(document).ready(function() {
 
             success: function (data) {
                 $("#two_factor_reseticon").html('');
-                $("#two_factor_resetstatus").html('<i class="fa fa-check text-success"></i>' + data.message);
+                $("#two_factor_resetstatus").html('<i class="fas fa-check text-success"></i>' + data.message);
             },
 
             error: function (data) {
                 $("#two_factor_reseticon").html('');
-                $("#two_factor_reseticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+                $("#two_factor_reseticon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
                 $('#two_factor_resetstatus').text(data.message);
             }
 

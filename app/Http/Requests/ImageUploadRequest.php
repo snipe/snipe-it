@@ -123,7 +123,7 @@ class ImageUploadRequest extends Request
                     $upload = Image::make($image->getRealPath())->resize(null, $w, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();
-                    });
+                     });
 
                     // This requires a string instead of an object, so we use ($string)
                     Storage::disk('public')->put($path.'/'.$file_name, (string) $upload->encode());
@@ -150,12 +150,12 @@ class ImageUploadRequest extends Request
                     }
                 }
 
-                // Remove Current image if exists
+                 // Remove Current image if exists
                 if (Storage::disk('public')->exists($path.'/'.$item->{$use_db_field})) {
                     \Log::debug('A file already exists that we are replacing - we should delete the old one.');
                     try {
-                        Storage::disk('public')->delete($path.'/'.$item->{$use_db_field});
-                        \Log::debug('Old file '.$path.'/'.$file_name.' has been deleted.');
+                         Storage::disk('public')->delete($path.'/'.$item->{$use_db_field});
+                         \Log::debug('Old file '.$path.'/'.$file_name.' has been deleted.');
                     } catch (\Exception $e) {
                         \Log::debug('Could not delete old file. '.$path.'/'.$file_name.' does not exist?');
                     }
@@ -164,14 +164,14 @@ class ImageUploadRequest extends Request
                 $item->{$use_db_field} = $file_name;
             }
 
-            // If the user isn't uploading anything new but wants to delete their old image, do so
+        // If the user isn't uploading anything new but wants to delete their old image, do so
         } else {
             \Log::debug('No file passed for '.$form_fieldname);
             if ($this->input('image_delete') == '1') {
                 \Log::debug('Deleting image');
                 try {
                     Storage::disk('public')->delete($path.'/'.$item->{$use_db_field});
-                    $item->{$use_db_field} = null;
+                        $item->{$use_db_field} = null;
                 } catch (\Exception $e) {
                     \Log::debug($e);
                 }

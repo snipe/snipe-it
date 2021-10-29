@@ -87,7 +87,7 @@
                 {{ $asset->last_checkout }}</td>
             <td>
                 @if ($asset->assetlog->first())
-                <img height="20%" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}">
+                <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}">
                 @endif
            </td>
         </tr>
@@ -106,7 +106,7 @@
                         <td>{{ $asset->serial }}</td>
                         <td>
                             {{ $asset->last_checkout }}</td>
-                        <td><img height="20%" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}"></img></td>
+                        <td><img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}"></td>
                     </tr>
                     @php
                         $assignedCounter++
@@ -231,7 +231,7 @@
                         {{ ($consumable->manufacturer) ? $consumable->manufacturer->name : '' }}  {{ $consumable->name }} {{ $consumable->model_number }}
                     @endif
                 </td>
-                    <td>{{ $consumable->category->name }}</td>
+                    <td>{{ ($consumable->category) ? $consumable->category->name : ' invalid/deleted category' }} </td>
                     <td>{{  $consumable->assetlog->first()->created_at }}</td>
                 </tr>
                 @php

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => ':attribute 已被採用',
     'uploaded'             => ':attribute 上傳失敗',
     'url'                  => ':attribute 格式不正確',
-    'unique_undeleted'     => ':attribute 必須是唯一值',
+    "unique_undeleted"     => ":attribute 必須是唯一值",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +115,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => ':attribute 含有無效字元',
-        'email_array'      => '一個或多個郵件地址不正確',
-        'hashed_pass'      => '當前密碼不正確！',
+        'alpha_space' => ":attribute 含有無效字元",
+        "email_array"      => "一個或多個郵件地址不正確",
+        "hashed_pass"      => "當前密碼不正確！",
         'dumbpwd'          => '該密碼太常見。',
-        'statuslabel_type' => '您必須選擇一個有效的狀態標籤',
+        "statuslabel_type" => "您必須選擇一個有效的狀態標籤",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

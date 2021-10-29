@@ -1,12 +1,12 @@
 <?php
 
-return [
+return array(
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory domain',
     'ad_domain_help'			=> 'Ovo je ponekad isto kao i vaš domen e-pošte, ali ne uvek.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'Ovo je Active Directory server',
@@ -15,7 +15,7 @@ return [
     'alert_interval'			=> 'Expiring Alerts Threshold (in days)',
     'alert_inv_threshold'		=> 'Inventory Alert Threshold',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
+    'allow_user_skin_help_text' => 'Čekiranjem ovog polja omogućava se korisniku da premosti UI \'skin\' sa nekim drugim.' ,
     'asset_ids'					=> 'Asset IDs',
     'audit_interval'            => 'Interval revizije',
     'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months.',
@@ -74,10 +74,10 @@ return [
     'ldap_tls'                  => 'Use TLS',
     'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'LDAP Bind Username',
-    'ldap_dept'                 => 'LDAP Department',
-    'ldap_phone'                => 'LDAP Telephone Number',
+    'ldap_dept'                 => 'LDAP Odeljenje',
+    'ldap_phone'                => 'LDAP Broj telefona',
     'ldap_jobtitle'             => 'LDAP Job Title',
-    'ldap_country'              => 'LDAP Country',
+    'ldap_country'              => 'LDAP Zemlja',
     'ldap_pword'                => 'LDAP Bind Password',
     'ldap_basedn'               => 'Base Bind DN',
     'ldap_filter'               => 'LDAP Filter',
@@ -226,4 +226,4 @@ return [
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Dužina oznake sredstva, uključujući i popunu nulama',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-];
+);

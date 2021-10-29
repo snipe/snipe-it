@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => ':attribute は、取得済みです。',
     'uploaded'             => ':attribute のアップロードに失敗しました。',
     'url'                  => ':attribute フォーマットが不正です。',
-    'unique_undeleted'     => ':attribute は 一意の値である必要があります。',
+    "unique_undeleted"     => ":attribute は 一意の値である必要があります。",
+    "non_circular"         => ":attribute は、循環参照を作成してはいけません。",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +115,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => ':attribute フィールドに、禁止文字列が含まれています。',
-        'email_array'      => '1 つまたは複数の電子メール アドレスが無効です。',
-        'hashed_pass'      => '現在のパスワードが正しくありません。',
+        'alpha_space' => ":attribute フィールドに、禁止文字列が含まれています。",
+        "email_array"      => "1 つまたは複数の電子メール アドレスが無効です。",
+        "hashed_pass"      => "現在のパスワードが正しくありません。",
         'dumbpwd'          => 'そのパスワードはあまりにも脆弱です。',
-        'statuslabel_type' => '有効なステータスラベルの種類を選択する必要があります。',
+        "statuslabel_type" => "有効なステータスラベルの種類を選択する必要があります。",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

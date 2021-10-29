@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'error'   => 'You must select at least ONE option.',
-];
+return array(
+    'error'   => 'Þú verður að velja að minnsta kosti EINN valkost.'
+);

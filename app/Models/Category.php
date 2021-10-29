@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Traits\UniqueUndeletedTrait;
+use App\Http\Traits\TwoColumnUniqueUndeletedTrait;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,7 +38,7 @@ class Category extends SnipeModel
      */
     public $rules = [
         'user_id' => 'numeric|nullable',
-        'name'   => 'required|min:1|max:255|unique_undeleted',
+        'name'   => 'required|min:1|max:255|two_column_unique_undeleted:category_type',
         'require_acceptance'   => 'boolean',
         'use_default_eula'   => 'boolean',
         'category_type'   => 'required|in:asset,accessory,consumable,component,license',
@@ -53,7 +53,8 @@ class Category extends SnipeModel
      */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
-    use UniqueUndeletedTrait;
+    use TwoColumnUniqueUndeletedTrait;
+
 
     /**
      * The attributes that are mass assignable.

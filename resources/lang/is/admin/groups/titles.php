@@ -8,7 +8,7 @@ return [
     'update' 	 		        => 'Edit Group',
     'group_name' 	 		=> 'Group Name',
     'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
+    'allow' 	 			=> 'Leyfa',
+    'deny' 	 				=> 'Hafna',
 
 ];

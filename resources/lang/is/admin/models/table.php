@@ -7,7 +7,7 @@ return [
     'eol'	 				=> 'EOL',
     'modelnumber'   		=> 'Model No.',
     'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
+    'numassets' 			=> 'Eignir',
     'title'					=> 'Asset Models',
     'update'				=> 'Update Asset Model',
     'view'					=> 'View Asset Model',

@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Nid yw\'n bosib clustnodi\'r ased yma I ddefnyddwyr.',
-        'deployable'   => 'Mae\'r asedau yma ar gael i\'w defnyddio. Unwaith y cânt eu haseinio, byddant yn cymryd statws meta <i class="fa fa-circle text-blue"></i> <strong>Mewn Defnydd</strong>.',
+        'deployable'   => 'Mae\'r asedau yma ar gael i\'w defnyddio. Unwaith y cânt eu haseinio, byddant yn cymryd statws meta <i class="fas fa-circle text-blue"></i> <strong>Mewn Defnydd</strong>.',
         'archived'   => 'Ni ellir newid statws yr asedau hyn, dim ond yn yr olygfa archifedig y byddant yn ymddangos. Mae hyn yn ddefnyddiol ar gyfer cadw gwybodaeth am asedau at ddibenion cyllidebu / hanesyddol ond eu cadw allan o\'r rhestr asedau o ddydd i ddydd.',
         'pending'   => 'Ni ellir aseinio\'r asedau hyn i unrhyw un eto, ddefnyddir yn aml ar gyfer eitemau sydd allan i\'w hatgyweirio, ond y disgwylir iddynt ddychwelyd i\'w cylchrediad.',
     ],

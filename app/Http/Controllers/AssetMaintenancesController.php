@@ -23,14 +23,14 @@ use View;
 class AssetMaintenancesController extends Controller
 {
     /**
-     * Checks for permissions for this action.
-     *
-     * @todo This should be replaced with middleware and/or policies
-     * @author  Vincent Sposato <vincent.sposato@gmail.com>
-     * @version v1.0
-     * @since [v1.8]
-     * @return View
-     */
+    * Checks for permissions for this action.
+    *
+    * @todo This should be replaced with middleware and/or policies
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @version v1.0
+    * @since [v1.8]
+    * @return View
+    */
     private static function getInsufficientPermissionsRedirect()
     {
         return redirect()->route('maintenances.index')
@@ -38,16 +38,16 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-     *  Returns a view that invokes the ajax tables which actually contains
-     * the content for the asset maintenances listing, which is generated in getDatatable.
-     *
-     * @todo This should be replaced with middleware and/or policies
-     * @see AssetMaintenancesController::getDatatable() method that generates the JSON response
-     * @author  Vincent Sposato <vincent.sposato@gmail.com>
-     * @version v1.0
-     * @since [v1.8]
-     * @return View
-     */
+    *  Returns a view that invokes the ajax tables which actually contains
+    * the content for the asset maintenances listing, which is generated in getDatatable.
+    *
+    * @todo This should be replaced with middleware and/or policies
+    * @see AssetMaintenancesController::getDatatable() method that generates the JSON response
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @version v1.0
+    * @since [v1.8]
+    * @return View
+    */
     public function index()
     {
         return view('asset_maintenances/index');
@@ -84,21 +84,21 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-     *  Validates and stores the new asset maintenance
-     *
-     * @see AssetMaintenancesController::getCreate() method for the form
-     * @author  Vincent Sposato <vincent.sposato@gmail.com>
-     * @version v1.0
-     * @since [v1.8]
-     * @return mixed
-     */
+    *  Validates and stores the new asset maintenance
+    *
+    * @see AssetMaintenancesController::getCreate() method for the form
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @version v1.0
+    * @since [v1.8]
+    * @return mixed
+    */
     public function store(Request $request)
     {
         // create a new model instance
         $assetMaintenance = new AssetMaintenance();
         $assetMaintenance->supplier_id = $request->input('supplier_id');
         $assetMaintenance->is_warranty = $request->input('is_warranty');
-        $assetMaintenance->cost = $request->input('cost');
+        $assetMaintenance->cost = Helper::ParseCurrency($request->input('cost'));
         $assetMaintenance->notes = $request->input('notes');
         $asset = Asset::find($request->input('asset_id'));
 
@@ -134,15 +134,15 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-     *  Returns a form view to edit a selected asset maintenance.
-     *
-     * @see AssetMaintenancesController::postEdit() method that stores the data
-     * @author  Vincent Sposato <vincent.sposato@gmail.com>
-     * @param int $assetMaintenanceId
-     * @version v1.0
-     * @since [v1.8]
-     * @return mixed
-     */
+    *  Returns a form view to edit a selected asset maintenance.
+    *
+    * @see AssetMaintenancesController::postEdit() method that stores the data
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @param int $assetMaintenanceId
+    * @version v1.0
+    * @since [v1.8]
+    * @return mixed
+    */
     public function edit($assetMaintenanceId = null)
     {
         // Check if the asset maintenance exists
@@ -204,10 +204,10 @@ class AssetMaintenancesController extends Controller
             return static::getInsufficientPermissionsRedirect();
         }
 
-        $assetMaintenance->supplier_id = e($request->input('supplier_id'));
-        $assetMaintenance->is_warranty = e($request->input('is_warranty'));
-        $assetMaintenance->cost = Helper::ParseFloat(e($request->input('cost')));
-        $assetMaintenance->notes = e($request->input('notes'));
+        $assetMaintenance->supplier_id = $request->input('supplier_id');
+        $assetMaintenance->is_warranty = $request->input('is_warranty');
+        $assetMaintenance->cost =  Helper::ParseCurrency($request->input('cost'));
+        $assetMaintenance->notes = $request->input('notes');
 
         $asset = Asset::find(request('asset_id'));
 
@@ -240,7 +240,7 @@ class AssetMaintenancesController extends Controller
             $assetMaintenance->asset_maintenance_time = $completionDate->diffInDays($startDate);
         }
 
-        // Was the asset maintenance created?
+      // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
 
             // Redirect to the new asset maintenance page
@@ -252,14 +252,14 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-     *  Delete an asset maintenance
-     *
-     * @author  Vincent Sposato <vincent.sposato@gmail.com>
-     * @param int $assetMaintenanceId
-     * @version v1.0
-     * @since [v1.8]
-     * @return mixed
-     */
+    *  Delete an asset maintenance
+    *
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @param int $assetMaintenanceId
+    * @version v1.0
+    * @since [v1.8]
+    * @return mixed
+    */
     public function destroy($assetMaintenanceId)
     {
         // Check if the asset maintenance exists
@@ -280,14 +280,14 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-     *  View an asset maintenance
-     *
-     * @author  Vincent Sposato <vincent.sposato@gmail.com>
-     * @param int $assetMaintenanceId
-     * @version v1.0
-     * @since [v1.8]
-     * @return View
-     */
+    *  View an asset maintenance
+    *
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @param int $assetMaintenanceId
+    * @version v1.0
+    * @since [v1.8]
+    * @return View
+    */
     public function show($assetMaintenanceId)
     {
         // Check if the asset maintenance exists

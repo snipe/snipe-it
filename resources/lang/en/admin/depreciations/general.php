@@ -9,5 +9,6 @@ return [
     'depreciation_min'                      => 'Floor Value of Depreciation',
     'number_of_months'  					=> 'Number of Months',
     'update'  					            => 'Update Depreciation',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 ];

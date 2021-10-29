@@ -54,6 +54,7 @@ class Helper
         return $cost;
     }
 
+
     /**
      * Static colors for pie charts.
      *
@@ -332,6 +333,8 @@ class Helper
             '#92896B',
         ];
 
+
+
         return $colors[$index];
     }
 
@@ -389,6 +392,7 @@ class Helper
         return $colors;
     }
 
+
     /**
      * Format currency using comma for thousands until local info is property used.
      *
@@ -398,6 +402,19 @@ class Helper
      */
     public static function ParseFloat($floatString)
     {
+        /*******
+         * 
+         * WARNING: This does conversions based on *locale* - a Unix-ey-like thing.
+         * 
+         * Everything else in the system tends to convert based on the Snipe-IT settings
+         * 
+         * So it's very likely this is *not* what you want - instead look for the new
+         * 
+         * ParseCurrency($currencyString)
+         * 
+         * Which should be directly below here
+         * 
+         */
         $LocaleInfo = localeconv();
         $floatString = str_replace(',', '', $floatString);
         $floatString = str_replace($LocaleInfo['decimal_point'], '.', $floatString);
@@ -411,6 +428,26 @@ class Helper
         $floatString = str_replace($currencySymbol, '', $floatString);
 
         return floatval($floatString);
+    }
+    
+    /**
+     * Format currency using comma or period for thousands, and period or comma for decimal, based on settings.
+     * 
+     * @author [B. Wetherington] [<bwetherington@grokability.com>]
+     * @since [v5.2]
+     * @return Float
+     */
+    public static function ParseCurrency($currencyString) {
+        $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); //generally shouldn't come up, since we don't do this in fields, but just in case it does...
+        if(Setting::getSettings()->digit_separator=='1.234,56') {
+            //EU format
+            $without_thousands = str_replace('.', '', $without_currency);
+            $corrected_decimal = str_replace(',', '.', $without_thousands);
+        } else {
+            $without_thousands = str_replace(',', '', $without_currency);
+            $corrected_decimal = $without_thousands;  // decimal is already OK
+        }
+        return floatval($corrected_decimal);
     }
 
     /**
@@ -780,12 +817,12 @@ class Helper
             } catch (DecryptException $e) {
                 return 'Error Decrypting: '.$e->getMessage();
             }
-        }
+            }
 
         return $string;
     }
-
     public static function formatStandardApiResponse($status, $payload = null, $messages = null)
+
     {
         $array['status'] = $status;
         $array['messages'] = $messages;
@@ -869,7 +906,8 @@ class Helper
             // If upload_max_size is less, then reduce. Except if upload_max_size is
             // zero, which indicates no limit.
             $upload_max = self::parse_size(ini_get('upload_max_filesize'));
-            if ($upload_max > 0 && $upload_max < $max_size) {
+
+            if ($upload_max > 0 && $upload_max < $post_max_size) {
                 $max_size = ini_get('upload_max_filesize');
             }
         }
@@ -895,33 +933,33 @@ class Helper
 
         $allowedExtensionMap = [
             // Images
-            'jpg'   => 'fa fa-file-image-o',
-            'jpeg'   => 'fa fa-file-image-o',
-            'gif'   => 'fa fa-file-image-o',
-            'png'   => 'fa fa-file-image-o',
+            'jpg'   => 'far fa-image',
+            'jpeg'   => 'far fa-image',
+            'gif'   => 'far fa-image',
+            'png'   => 'far fa-image',
             // word
-            'doc'   => 'fa fa-file-word-o',
-            'docx'   => 'fa fa-file-word-o',
+            'doc'   => 'far fa-file-word',
+            'docx'   => 'far fa-file-word',
             // Excel
-            'xls'   => 'fa fa-file-excel-o',
-            'xlsx'   => 'fa fa-file-excel-o',
+            'xls'   => 'far fa-file-excel',
+            'xlsx'   => 'far fa-file-excel',
             // archive
-            'zip'   => 'fa fa-file-archive-o',
-            'rar'   => 'fa fa-file-archive-o',
+            'zip'   => 'fas fa-file-archive',
+            'rar'   => 'fas fa-file-archive',
             //Text
-            'txt'   => 'fa fa-file-text-o',
-            'rtf'   => 'fa fa-file-text-o',
-            'xml'   => 'fa fa-file-text-o',
+            'txt'   => 'far fa-file-alt',
+            'rtf'   => 'far fa-file-alt',
+            'xml'   => 'far fa-file-alt',
             // Misc
-            'pdf'   => 'fa fa-file-pdf-o',
-            'lic'   => 'fa fa-file-floppy-o',
+            'pdf'   => 'far fa-file-pdf',
+            'lic'   => 'far fa-save',
         ];
 
         if ($extension && array_key_exists($extension, $allowedExtensionMap)) {
             return $allowedExtensionMap[$extension];
         }
 
-        return 'fa fa-file-o';
+        return 'far fa-file';
     }
 
     public static function show_file_inline($filename)

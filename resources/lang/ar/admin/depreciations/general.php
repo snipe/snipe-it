@@ -8,5 +8,6 @@ return [
     'depreciation_name'  					=> 'اسم الاستهلاك',
     'number_of_months'  					=> 'عدد الأشهر',
     'update'  					            => 'تحديث الاستهلاك',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 ];

@@ -37,10 +37,10 @@ $I->dontSeeInSource('&lt;br&gt;&lt;');
 $I->click(['name' => 'email']);
 $I->click(['name' => 'username']);
 $I->submitForm('#userForm', [
-    'email' => \App\Helpers\Helper::generateRandomString(15).'@example.com',
+    'email' => Helper::generateRandomString(15).'@example.com',
     'first_name' => 'Joe',
     'last_name' => 'Smith',
-    'username' => \App\Helpers\Helper::generateRandomString(15),
+    'username' => Helper::generateRandomString(15),
 ]);
 
 $I->seeElement('.alert-danger');
@@ -49,11 +49,11 @@ $I->dontSeeInSource('&lt;br&gt;&lt;');
 /* Submit form and expect success */
 $I->wantTo('submit the form successfully');
 $I->click(['name' => 'email']);
-$I->fillField(['name' => 'email'], \App\Helpers\Helper::generateRandomString(15).'@example.com');
+$I->fillField(['name' => 'email'], Helper::generateRandomString(15).'@example.com');
 $I->fillField(['name' => 'first_name'], 'Joe');
 $I->fillField(['name' => 'last_name'], 'Smith');
 $I->click(['name' => 'username']);
-$I->fillField(['name' => 'username'], \App\Helpers\Helper::generateRandomString(15));
+$I->fillField(['name' => 'username'], Helper::generateRandomString(15));
 $I->click(['name' => 'password']);
 $I->fillField(['name' => 'password'], 'password');
 $I->click(['name' => 'password_confirmation']);

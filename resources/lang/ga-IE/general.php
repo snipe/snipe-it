@@ -176,6 +176,7 @@
     'remove_company'        => 'Bain Cuideachta Chomhlachais',
     'reports'				=> 'Tuarascálacha',
     'restored'				=> 'restored',
+    'restore'				=> 'Restore',
     'requested'				=> 'Iarrtar',
     'request_canceled'      => 'Iarratas Ar Ceal',
     'save'  				=> 'Sábháil',

@@ -319,12 +319,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('reports/activity', [ReportsController::class, 'postActivityReport']);
 
     Route::get(
-        'reports/unaccepted_assets',
+        'reports/unaccepted_assets/{deleted?}',
         [ReportsController::class, 'getAssetAcceptanceReport']
     )->name('reports/unaccepted_assets');
     Route::get(
-        'reports/export/unaccepted_assets',
-        [ReportsController::class, 'exportAssetAcceptanceReport']
+        'reports/unaccepted_assets/{acceptanceId}/sent_reminder',
+        [ReportsController::class, 'sentAssetAcceptanceReminder']
+    )->name('reports/unaccepted_assets_sent_reminder');
+    Route::delete(
+        'reports/unaccepted_assets/{acceptanceId}/delete',
+        [ReportsController::class, 'deleteAssetAcceptance']
+    )->name('reports/unaccepted_assets_delete');
+    Route::post(
+        'reports/unaccepted_assets/{deleted?}',
+        [ReportsController::class, 'postAssetAcceptanceReport']
     )->name('reports/export/unaccepted_assets');
 });
 
@@ -332,6 +340,7 @@ Route::get(
     'auth/signin',
     [LoginController::class, 'legacyAuthRedirect']
 );
+
 
 /*
 |--------------------------------------------------------------------------
@@ -351,6 +360,7 @@ Route::group(['prefix' => 'setup', 'middleware' => 'web'], function () {
         'user',
         [SettingsController::class, 'postSaveFirstAdmin']
     )->name('setup.user.save');
+
 
     Route::get(
         'migrate',

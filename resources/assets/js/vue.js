@@ -11,37 +11,31 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-import PassportClients from './components/passport/Clients.vue'
-import PassportAuthorizedClients from './components/passport/AuthorizedClients.vue'
-import PassportPersonalAccessTokens from './components/passport/PersonalAccessTokens.vue'
-import Importer from './components/importer/importer.vue'
-import FieldsetDefaultValues from './components/forms/asset-models/fieldset-default-values.vue'
-
 Vue.component(
     'passport-clients',
-    PassportClients
+    require('./components/passport/Clients.vue').default
 );
 
 Vue.component(
     'passport-authorized-clients',
-    PassportAuthorizedClients
+    require('./components/passport/AuthorizedClients.vue').default
 );
 
 Vue.component(
     'passport-personal-access-tokens',
-    PassportPersonalAccessTokens
+    require('./components/passport/PersonalAccessTokens.vue').default
 );
 
 Vue.component(
     'importer',
-    Importer
+    require('./components/importer/importer.vue').default
 );
 
-Vue.component(
-    'fieldset-default-values',
-    FieldsetDefaultValues
-);
+// This component has been removed and replaced with a Livewire implementation
+// Vue.component(
+//     'fieldset-default-values',
+//     require('./components/forms/asset-models/fieldset-default-values.vue').default
+// );
 
 // Commented out currently to avoid trying to load vue everywhere.
 // const app = new Vue({

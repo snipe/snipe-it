@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Input;
  */
 class AssetMaintenancesController extends Controller
 {
+
+
     /**
      *  Generates the JSON response for asset maintenances listing view.
      *
@@ -82,9 +84,11 @@ class AssetMaintenancesController extends Controller
 
         $total = $maintenances->count();
         $maintenances = $maintenances->skip($offset)->take($limit)->get();
-
         return (new AssetMaintenancesTransformer())->transformAssetMaintenances($maintenances, $total);
+
+
     }
+
 
     /**
      *  Validates and stores the new asset maintenance
@@ -101,7 +105,7 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance = new AssetMaintenance();
         $assetMaintenance->supplier_id = $request->input('supplier_id');
         $assetMaintenance->is_warranty = $request->input('is_warranty');
-        $assetMaintenance->cost = e($request->input('cost'));
+        $assetMaintenance->cost =  Helper::ParseCurrency($request->input('cost'));
         $assetMaintenance->notes = e($request->input('notes'));
         $asset = Asset::find(e($request->input('asset_id')));
 
@@ -129,9 +133,11 @@ class AssetMaintenancesController extends Controller
         // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $assetMaintenance, trans('admin/asset_maintenances/message.create.success')));
+
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $assetMaintenance->getErrors()));
+
     }
 
     /**
@@ -155,7 +161,7 @@ class AssetMaintenancesController extends Controller
 
         $assetMaintenance->supplier_id = e($request->input('supplier_id'));
         $assetMaintenance->is_warranty = e($request->input('is_warranty'));
-        $assetMaintenance->cost = Helper::ParseFloat(e($request->input('cost')));
+        $assetMaintenance->cost =  Helper::ParseCurrency($request->input('cost'));
         $assetMaintenance->notes = e($request->input('notes'));
 
         $asset = Asset::find(request('asset_id'));
@@ -192,6 +198,7 @@ class AssetMaintenancesController extends Controller
         // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $assetMaintenance, trans('admin/asset_maintenances/message.edit.success')));
+
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $assetMaintenance->getErrors()));
@@ -218,6 +225,8 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->delete();
 
         return response()->json(Helper::formatStandardApiResponse('success', $assetMaintenance, trans('admin/asset_maintenances/message.delete.success')));
+
+
     }
 
     /**
@@ -237,5 +246,6 @@ class AssetMaintenancesController extends Controller
         }
 
         return (new AssetMaintenancesTransformer())->transformAssetMaintenance($assetMaintenance);
+
     }
 }

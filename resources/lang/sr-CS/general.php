@@ -176,6 +176,7 @@
     'remove_company'        => 'Ukloni asocijaciju sa firmom',
     'reports'				=> 'Izveštaji',
     'restored'				=> 'vraćeno u prethodno stanje',
+    'restore'				=> 'Restore',
     'requested'				=> 'Tražena',
     'request_canceled'      => 'Zahtev je otkazan',
     'save'  				=> 'Sačuvaj',

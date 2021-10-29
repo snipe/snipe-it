@@ -176,6 +176,7 @@
     'remove_company'        => 'Poista',
     'reports'				=> 'Raportit',
     'restored'				=> 'palautettu',
+    'restore'				=> 'Restore',
     'requested'				=> 'Pyydetty',
     'request_canceled'      => 'Pyyntö peruutettu',
     'save'  				=> 'Tallenna',

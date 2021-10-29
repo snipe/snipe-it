@@ -1,81 +1,83 @@
 <?php
 
-return [
+return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Varúð: </strong> Þessi eign hefur verið merkt sem ónothæf að svo stöddu.
+                        Ef ástand hennar hefur breyst skaltu uppfæra stöðu eignarinnar.',
+    'does_not_exist' 	=> 'Þessi eign finnst ekki.',
+    'does_not_exist_or_not_requestable' => 'Góð tilraun. Þessi eign er annað hvort ekki til eða ekki í boði.',
+    'assoc_users'	 	=> 'Þessari eign hefur þegar verið ráðstafað til notanda og er því ekki hægt að afskrá. Vinsamlegast skilaðu eigninni fyrst og reyndu síðan að afskrá hana. ',
 
-    'create' => [
+    'create' => array(
         'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)',
-    ],
+        'success' 		=> 'Það tókst að skrá þessa eign :)'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   			=> 'Asset was not updated, please try again',
         'success' 			=> 'Asset updated successfully.',
         'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
-    ],
+    ),
 
-    'restore' => [
+    'restore' => array(
         'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.',
-    ],
+        'success' 		=> 'Asset restored successfully.'
+    ),
 
-    'audit' => [
-        'error'   		=> 'Asset audit was unsuccessful. Please try again.',
-        'success' 		=> 'Asset audit successfully logged.',
-    ],
+    'audit' => array(
+        'error'   		=> 'Eignaúttekt var ekki skráð. Vinsamlegast reyndu aftur.',
+        'success' 		=> 'Eignaúttekt var skráð.'
+    ),
 
-    'deletefile' => [
+
+    'deletefile' => array(
         'error'   => 'File not deleted. Please try again.',
         'success' => 'File successfully deleted.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'File(s) not uploaded. Please try again.',
         'success' => 'File(s) successfully uploaded.',
         'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
-    ],
+    ),
 
-    'import' => [
+    'import' => array(
         'error'                 => 'Some items did not import correctly.',
         'errorDetail'           => 'The following Items were not imported because of errors.',
-        'success'               => 'Your file has been imported',
-        'file_delete_success'   => 'Your file has been been successfully deleted',
-        'file_delete_error'      => 'The file was unable to be deleted',
-    ],
+        'success'               => "Your file has been imported",
+        'file_delete_success'   => "Your file has been been successfully deleted",
+        'file_delete_error'      => "The file was unable to be deleted",
+    ),
 
-    'delete' => [
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
+
+    'delete' => array(
+        'confirm'   	=> 'Ertu viss um að þú viljir afskrá þessa eign?',
         'error'   		=> 'There was an issue deleting the asset. Please try again.',
         'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
-        'success' 		=> 'The asset was deleted successfully.',
-    ],
+        'success' 		=> 'The asset was deleted successfully.'
+    ),
 
-    'checkout' => [
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
+    'checkout' => array(
+        'error'   		=> 'Eigninni var ekki ráðstafað, vinsamlegast reyndu aftur',
+        'success' 		=> 'Eigninni var ráðstafað.',
         'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'not_available' => 'That asset is not available for checkout!',
-        'no_assets_selected' => 'You must select at least one asset from the list',
-    ],
+        'not_available' => 'Þessi eign er ekki laus til ráðstöfunar!',
+        'no_assets_selected' => 'Þú verður að velja að lágmarki eina eign úr listanum'
+    ),
 
-    'checkin' => [
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
+    'checkin' => array(
+        'error'   		=> 'Eigninni var ekki skilað, vinsamlegast reyndu aftur',
+        'success' 		=> 'Eigninni var skilað.',
         'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Þessari eign hefur þegar verið skilað.',
 
-    ],
+    ),
 
-    'requests' => [
+    'requests' => array(
         'error'   		=> 'Asset was not requested, please try again',
         'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled',
-    ],
+        'canceled'      => 'Beiðni um ráðstöfun var afturkölluð'
+    )
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'asset_tag'   	=> 'Tag Aset',
     'asset_model'       => 'Model',
@@ -20,6 +20,6 @@ return [
     'title'      	=> 'Aset ',
     'image'		=> 'Perangkat Gambar',
     'days_without_acceptance' => 'Hari tanpa penerimaan',
-    'monthly_depreciation' => 'Monthly Depreciation',
+    'monthly_depreciation' => 'Penyusutan Bulanan'
 
-];
+);

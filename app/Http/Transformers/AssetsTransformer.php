@@ -83,12 +83,13 @@ class AssetsTransformer
             'user_can_checkout' => (bool) $asset->availableForCheckout(),
         ];
 
+
         if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields->count() > 0)) {
             $fields_array = [];
 
             foreach ($asset->model->fieldset->fields as $field) {
                 if ($field->isFieldDecryptable($asset->{$field->convertUnicodeDbSlug()})) {
-                    $decrypted = \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->convertUnicodeDbSlug()});
+                    $decrypted = Helper::gracefulDecrypt($field, $asset->{$field->convertUnicodeDbSlug()});
                     $value = (Gate::allows('superadmin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
 
                     $fields_array[$field->name] = [
@@ -96,12 +97,15 @@ class AssetsTransformer
                             'value' => $value,
                             'field_format' => $field->format,
                         ];
+
                 } else {
                     $fields_array[$field->name] = [
                         'field' => $field->convertUnicodeDbSlug(),
                         'value' => $asset->{$field->convertUnicodeDbSlug()},
                         'field_format' => $field->format,
                     ];
+
+
                 }
                 $array['custom_fields'] = $fields_array;
             }
@@ -112,7 +116,7 @@ class AssetsTransformer
         $permissions_array['available_actions'] = [
             'checkout' => Gate::allows('checkout', Asset::class),
             'checkin' => Gate::allows('checkin', Asset::class),
-            'clone' => Gate::allows('create', Asset::class),
+            'clone' => false,
             'restore' => false,
             'update' => (bool) Gate::allows('update', Asset::class),
             'delete' => ($asset->assigned_to == '' && Gate::allows('delete', Asset::class)),
@@ -129,6 +133,29 @@ class AssetsTransformer
             ];
         }
 
+
+        if (request('components')=='true') {
+        
+            if ($asset->components) {
+                $array['components'] = [];
+    
+                foreach ($asset->components as $component) {
+                    $array['components'][] = [
+                        
+                            'id' => $component->id,
+                            'pivot_id' => $component->pivot->id,
+                            'name' => $component->name,
+                            'qty' => $component->pivot->assigned_qty,
+                            'price_cost' => $component->purchase_cost,
+                            'purchase_total' => $component->purchase_cost * $component->pivot->assigned_qty,
+                            'checkout_date' => Helper::getFormattedDateObject($component->pivot->created_at, 'datetime') ,
+                        
+                    ];
+                }
+            }
+
+        }
+        
         $array += $permissions_array;
 
         return $array;
@@ -159,6 +186,7 @@ class AssetsTransformer
             'type' => $asset->assignedType(),
         ] : null;
     }
+
 
     public function transformRequestedAssets(Collection $assets, $total)
     {
@@ -192,7 +220,8 @@ class AssetsTransformer
         ];
 
         $array += $permissions_array;
-
         return $array;
+
+
     }
 }

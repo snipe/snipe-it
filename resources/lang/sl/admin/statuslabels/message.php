@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Tega sredstva ni mogoče dodeliti nikomur.',
-        'deployable'   => 'Teh sredstev ni mogoče izdati. Ko bodo dodeljeni, bodo prevzeli meta status <i class="fa fa-circle text-blue"></i> <strong>Razporejeno</strong>.',
+        'deployable'   => 'Teh sredstev ni mogoče izdati. Ko bodo dodeljeni, bodo prevzeli meta status <i class="fas fa-circle text-blue"></i> <strong>Razporejeno</strong>.',
         'archived'   => 'Teh sredstev ni mogoče izdati in se bodo prikazala samo v pogledu Arhivirano. To je koristno za ohranjanje informacij o sredstvih za računovodske namene / zgodovinske namene, vendar jih ni na seznamu uporabnih sredstev.',
         'pending'   => 'Teh sredstev trnutno ni mogoče dodeliti nikomur, pogosto se uporablja za sredstva, ki so ne popravilu, in se pričakuje, da se bodo vrnila v obtok.',
     ],

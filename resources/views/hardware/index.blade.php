@@ -57,23 +57,33 @@
   <div class="col-md-12">
     <div class="box">
       <div class="box-body">
-        {{ Form::open([
-          'method' => 'POST',
-          'route' => ['hardware/bulkedit'],
-          'class' => 'form-inline',
-           'id' => 'bulkForm']) }}
+       
           <div class="row">
             <div class="col-md-12">
+              
               @if (Request::get('status')!='Deleted')
-              <div id="toolbar">
-                <label for="bulk_actions"><span class="sr-only">Bulk Actions</span></label>
-                <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions">
-                  <option value="edit">{{ trans('button.edit') }}</option>
-                  <option value="delete">{{ trans('button.delete') }}</option>
-                  <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
-                </select>
-                <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
-              </div>
+              
+                 
+                    
+                    <div id="toolbar">
+                      {{ Form::open([
+                        'method' => 'POST',
+                        'route' => ['hardware/bulkedit'],
+                        'class' => 'form-inline',
+                        'id' => 'bulkForm']) }}
+                        
+                     
+                      <label for="bulk_actions"><span class="sr-only">Bulk Actions</span></label>
+                      <select name="bulk_actions" class="form-control select2" aria-label="bulk_actions">
+                        <option value="edit">{{ trans('button.edit') }}</option>
+                        <option value="delete">{{ trans('button.delete') }}</option>
+                        <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
+                      </select>
+                      
+                      <button class="btn btn-primary" id="bulkEdit" disabled>Go</button>
+                      {{ Form::close() }}   
+                    </div>
+                   
               @endif
 
               <table
@@ -107,7 +117,7 @@
 
             </div><!-- /.col -->
           </div><!-- /.row -->
-        {{ Form::close() }}
+        
       </div><!-- ./box-body -->
     </div><!-- /.box -->
   </div>

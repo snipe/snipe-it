@@ -7,6 +7,8 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckinRequest;
 use App\Models\Asset;
+use App\Models\CheckoutAcceptance;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
@@ -108,6 +110,16 @@ class AssetCheckinController extends Controller
         if ($request->filled('checkin_at')) {
             $checkin_at = $request->input('checkin_at');
         }
+
+        // Get all pending Acceptances for this asset and delete them
+        $acceptances = CheckoutAcceptance::pending()->whereHasMorph('checkoutable',
+            [Asset::class],
+            function (Builder $query) use ($asset) {
+                $query->where('id', $asset->id);
+            })->get();
+        $acceptances->map(function($acceptance) {
+            $acceptance->delete();
+        });
 
         // Was the asset updated?
         if ($asset->save()) {

@@ -29,6 +29,7 @@ class ForgotPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('throttle:5,1', ['except' => 'showLinkRequestForm']);
     }
 
     /**
@@ -66,13 +67,21 @@ class ForgotPasswordController extends Controller
          * Once we have attempted to send the link, we will examine the response
          * then see the message we need to show to the user. Finally, we'll send out a proper response.
          */
-        $response = $this->broker()->sendResetLink(
-            array_merge(
-                $request->only('username'),
-                ['activated' => '1'],
-                ['ldap_import' => '0']
-            )
-        );
+        
+        $response = null;
+
+        try {
+            $response = $this->broker()->sendResetLink(
+                array_merge(
+                    $request->only('username'),
+                    ['activated' => '1'],
+                    ['ldap_import' => '0']
+                )
+            );
+        } catch(\Exception $e) {
+            \Log::info('Password reset attempt: User '.$request->input('username').'failed with exception: '.$e );
+        }
+
 
         if ($response === \Password::RESET_LINK_SENT) {
             \Log::info('Password reset attempt: User '.$request->input('username').' WAS found, password reset sent');
@@ -91,10 +100,10 @@ class ForgotPasswordController extends Controller
          *
          * Instead we tell the user we've sent an email even though we haven't.
          * It's bad UX, but better security. The compromises we sometimes have to make.
-         */
+        */
 
         // Regardless of response, we do not want to disclose the status of a user account,
         // so we give them a generic "If this exists, we're TOTALLY gonna email you" response
         return redirect()->route('login')->with('success', trans('passwords.sent'));
-    }
+        }
 }

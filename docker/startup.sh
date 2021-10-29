@@ -40,6 +40,7 @@ done
 chown -R docker:root /var/lib/snipeit/data/*
 chown -R docker:root /var/lib/snipeit/dumps
 chown -R docker:root /var/lib/snipeit/keys
+chown -R docker:root /var/www/html/storage/framework/cache
 
 # Fix php settings
 if [ -v "PHP_UPLOAD_LIMIT" ]
@@ -54,7 +55,7 @@ then
   cp -ax /var/www/html/vendor/laravel/passport/database/migrations/* /var/www/html/database/migrations/
 fi
 
-if [ $SESSION_DRIVER = "database" ]
+if [ "$SESSION_DRIVER" = "database" ]
 then
   cp -ax /var/www/html/vendor/laravel/framework/src/Illuminate/Session/Console/stubs/database.stub /var/www/html/database/migrations/2021_05_06_0000_create_sessions_table.php
 fi

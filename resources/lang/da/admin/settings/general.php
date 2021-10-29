@@ -1,12 +1,12 @@
 <?php
 
-return [
+return array(
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory domæne',
     'ad_domain_help'			=> 'Dette er nogle gange det samme som dit e-mail-domæne, men ikke altid.',
     'ad_append_domain_label'    => 'Tilføj domænenavn',
     'ad_append_domain'          => 'Tilføj domænenavn til feltet brugernavn',
-    'ad_append_domain_help'     => 'Brugeren er ikke forpligtet til at skrive "username@domain.local", de kan bare skrive "brugernavn".',
+    'ad_append_domain_help'     => 'Brugeren er ikke forpligtet til at skrive "username@domain.local", de kan bare skrive "brugernavn".' ,
     'admin_cc_email'            => 'CC email',
     'admin_cc_email_help'       => 'Hvis du vil sende en kopi af checkin/checkout emails som er sendt til brugere til en ekstra email konto, så tilføj den her. Ellers efterlad feltet tomt.',
     'is_ad'				        => 'Dette er en Active Directory-server',
@@ -14,8 +14,8 @@ return [
     'alerts_enabled'			=> 'Advarsler aktiveret',
     'alert_interval'			=> 'Udløbsvarsel Threshold (i dage)',
     'alert_inv_threshold'		=> 'Lagervarsletærskel',
-    'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
+    'allow_user_skin'           => 'Tillad bruger skin',
+    'allow_user_skin_help_text' => 'Afkrydsning her giver brugeren afgang til at overskrive UI skin med et andet skin.' ,
     'asset_ids'					=> 'Aktiv-id\'er',
     'audit_interval'            => 'Revisionsinterval',
     'audit_interval_help'       => 'Hvis du skal regelmæssigt kontrollere dine aktiver fysisk, skal du indtaste intervallet i måneder.',
@@ -74,10 +74,10 @@ return [
     'ldap_tls'                  => 'Brug TLS',
     'ldap_tls_help'             => 'Dette bør kun kontrolleres, hvis du kører STARTTLS på din LDAP-server.',
     'ldap_uname'                => 'LDAP Bind Brugernavn',
-    'ldap_dept'                 => 'LDAP Department',
-    'ldap_phone'                => 'LDAP Telephone Number',
-    'ldap_jobtitle'             => 'LDAP Job Title',
-    'ldap_country'              => 'LDAP Country',
+    'ldap_dept'                 => 'LDAP Afdeling',
+    'ldap_phone'                => 'LDAP-telefonnummer',
+    'ldap_jobtitle'             => 'LDAP Jobtitel',
+    'ldap_country'              => 'LDAP Land',
     'ldap_pword'                => 'LDAP-bindingsadgangskode',
     'ldap_basedn'               => 'Base Bind DN',
     'ldap_filter'               => 'LDAP-filter',
@@ -213,7 +213,7 @@ return [
     'two_factor_enter_code'	=> 'Indtast tofaktorkode',
     'two_factor_config_complete'	=> 'Indsend kode',
     'two_factor_enabled_edit_not_allowed' => 'Din administrator tillader ikke dig at redigere denne indstilling.',
-    'two_factor_enrollment_text'	=> 'To faktor godkendelse er påkrævet, men din enhed er endnu ikke blevet tilmeldt. Åbn din Google Authenticator-app og scan QR-koden nedenfor for at tilmelde din enhed. Når du har tilmeldt din enhed, skal du indtaste koden nedenfor',
+    'two_factor_enrollment_text'	=> "To faktor godkendelse er påkrævet, men din enhed er endnu ikke blevet tilmeldt. Åbn din Google Authenticator-app og scan QR-koden nedenfor for at tilmelde din enhed. Når du har tilmeldt din enhed, skal du indtaste koden nedenfor",
     'require_accept_signature'      => 'Kræver Signatur',
     'require_accept_signature_help_text'      => 'Aktivering af denne funktion kræver, at brugerne fysisk logger af ved at acceptere et aktiv.',
     'left'        => 'venstre',
@@ -226,4 +226,4 @@ return [
     'unique_serial_help_text'                => 'Markering af denne boks medfører en unik begrænsning af aktivserier',
     'zerofill_count'        => 'Længde af aktivetiketter, herunder zerofill',
     'username_format_help'   => 'Denne indstilling vil kun blive brugt af importprocessen, hvis et brugernavn ikke er angivet, og vi er nødt til at generere et brugernavn til dig.',
-];
+);

@@ -176,6 +176,7 @@
     'remove_company'        => 'Dileu Cymdeithas y Cwmni',
     'reports'				=> 'Adroddiadau',
     'restored'				=> 'wedi adfer',
+    'restore'				=> 'Restore',
     'requested'				=> 'Gofynnwyd amdano',
     'request_canceled'      => 'Cais wedi dileu',
     'save'  				=> 'Cadw',

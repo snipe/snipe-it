@@ -25,6 +25,26 @@ class ConsumablesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('index', Consumable::class);
+
+        // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations
+        // Relations will be handled in query scopes a little further down.
+        $allowed_columns = 
+            [
+                'id',
+                'name',
+                'order_number',
+                'min_amt',
+                'purchase_date',
+                'purchase_cost',
+                'company',
+                'category',
+                'model_number', 
+                'item_no', 
+                'qty',
+                'image',
+                ];
+
+
         $consumables = Company::scopeCompanyables(
             Consumable::select('consumables.*')
                 ->with('company', 'location', 'category', 'users', 'manufacturer')
@@ -42,9 +62,18 @@ class ConsumablesController extends Controller
             $consumables->where('category_id', '=', $request->input('category_id'));
         }
 
+        if ($request->filled('model_number')) {
+            $consumables->where('model_number','=',$request->input('model_number'));
+        }
+
         if ($request->filled('manufacturer_id')) {
             $consumables->where('manufacturer_id', '=', $request->input('manufacturer_id'));
         }
+
+        if ($request->filled('location_id')) {
+            $consumables->where('location_id','=',$request->input('location_id'));
+        }
+
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
@@ -55,9 +84,12 @@ class ConsumablesController extends Controller
 
         $allowed_columns = ['id', 'name', 'order_number', 'min_amt', 'purchase_date', 'purchase_cost', 'company', 'category', 'model_number', 'item_no', 'manufacturer', 'location', 'qty', 'image'];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
 
-        switch ($sort) {
+        $sort_override =  $request->input('sort');
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
+
+
+        switch ($sort_override) {
             case 'category':
                 $consumables = $consumables->OrderCategory($order);
                 break;
@@ -71,7 +103,7 @@ class ConsumablesController extends Controller
                 $consumables = $consumables->OrderCompany($order);
                 break;
             default:
-                $consumables = $consumables->orderBy($sort, $order);
+                $consumables = $consumables->orderBy($column_sort, $order);
                 break;
         }
 
@@ -160,13 +192,13 @@ class ConsumablesController extends Controller
     }
 
     /**
-     * Returns a JSON response containing details on the users associated with this consumable.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @see \App\Http\Controllers\Consumables\ConsumablesController::getView() method that returns the form.
-     * @since [v1.0]
-     * @param int $consumableId
-     * @return array
+    * Returns a JSON response containing details on the users associated with this consumable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see \App\Http\Controllers\Consumables\ConsumablesController::getView() method that returns the form.
+    * @since [v1.0]
+    * @param int $consumableId
+    * @return array
      */
     public function getDataView($consumableId)
     {
@@ -251,10 +283,10 @@ class ConsumablesController extends Controller
     }
 
     /**
-     * Gets a paginated collection for the select2 menus
-     *
-     * @see \App\Http\Transformers\SelectlistTransformer
-     */
+    * Gets a paginated collection for the select2 menus
+    *
+    * @see \App\Http\Transformers\SelectlistTransformer
+    */
     public function selectlist(Request $request)
     {
         $consumables = Consumable::select([

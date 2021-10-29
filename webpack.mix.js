@@ -13,8 +13,8 @@ mix
     .less('./resources/assets/less/overrides.less', 'css/build')
     .styles(
         [
+            './resources/assets/css/font-awesome/all.css',
             './node_modules/bootstrap/dist/css/bootstrap.css',
-            './node_modules/font-awesome/css/font-awesome.css',
             './public/css/build/AdminLTE.css',
             './node_modules/jquery-ui-bundle/jquery-ui.css',
             './node_modules/admin-lte/plugins/iCheck/minimal/blue.css',
@@ -33,10 +33,8 @@ mix
     ).version();
 
 
-
 mix.copy(['./node_modules/icheck/skins/minimal/blue.png',
     './node_modules/icheck/skins/minimal/blue@2x.png'], './public/css');
-
 
 /**
  * Copy, minify and version signature-pad.css

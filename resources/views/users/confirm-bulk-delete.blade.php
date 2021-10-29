@@ -18,7 +18,7 @@ Bulk Checkin &amp; Delete
           {{csrf_field()}}
           <div class="col-md-12">
             <div class="callout callout-danger">
-              <i class="fa fa-exclamation-circle"></i>
+              <i class="fas fa-exclamation-triangle"></i>
               <strong>WARNING: </strong>
               You are about to delete the {{ count($users) }} user(s) listed below. Super admin names are highlighted in red.
             </div>
@@ -100,7 +100,7 @@ Bulk Checkin &amp; Delete
         </div> <!--/box-body-->
         <div class="box-footer text-right">
           <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
+          <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('button.submit') }}</button>
         </div><!-- /.box-footer -->
       </form>
     </div>

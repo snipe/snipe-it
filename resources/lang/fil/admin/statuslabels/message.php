@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Ang mga asset na ito ay hindi maaaring maitalaga sa sinuman.',
-        'deployable'   => 'Ang asset na ito ay pwedeng mai-check out. Kapag naitalaga na sila, sila ay pwede magpalagay ng meta status ng <i class="fa fa-circle text-blue"></i> <strong>Nai-deploy</strong>.',
+        'deployable'   => 'Ang asset na ito ay pwedeng mai-check out. Kapag naitalaga na sila, sila ay pwede magpalagay ng meta status ng <i class="fas fa-circle text-blue"></i> <strong>Nai-deploy</strong>.',
         'archived'   => 'Ang mga asset na ito ay hindi maaaring mai-check out, at maipakita lamang sa Archived view. Ito ay kapakipakinabang sa pagpapanatili ng impormasyon tungkol sa mga asset para sa budgeting/historic na layunin ngunit ang pagpapanatili nito mula sa pang-araw-araw na listahan ng asset.',
         'pending'   => 'Ang mga asset na ito ay hindi maaaring ma-italaga sa sinuman, kadalasang ginagamit para sa mga aytem naipalabas para sa pagkumpuni, ngunit inaasahang magbalik sa sirkulasyon.',
     ],

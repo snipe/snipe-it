@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => ':attribute on jo käytössä.',
     'uploaded'             => ':attribute -kenttää ei onnistuttu lähettämään.',
     'url'                  => ':attribute muotoilu on virheellinen.',
-    'unique_undeleted'     => ':attribute on oltava ainutlaatuinen.',
+    "unique_undeleted"     => ":attribute on oltava ainutlaatuinen.",
+    "non_circular"         => ":attribute ei saa luoda kehäviittausta.",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +115,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => ':attribute -kenttä sisältää merkin, jota ei sallita.',
-        'email_array'      => 'Yksi tai useampi sähköpostiosoite on virheellinen.',
-        'hashed_pass'      => 'Nykyinen salasanasi on virheellinen',
+        'alpha_space' => ":attribute -kenttä sisältää merkin, jota ei sallita.",
+        "email_array"      => "Yksi tai useampi sähköpostiosoite on virheellinen.",
+        "hashed_pass"      => "Nykyinen salasanasi on virheellinen",
         'dumbpwd'          => 'Salasana on liian yleinen.',
-        'statuslabel_type' => 'Sinun on valittava kelvollinen tilamerkintätyyppi',
+        "statuslabel_type" => "Sinun on valittava kelvollinen tilamerkintätyyppi",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

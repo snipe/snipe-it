@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,8 @@ return [
     'unique'               => 'A :attribute már foglalt.',
     'uploaded'             => 'A: attribútum nem sikerült feltölteni.',
     'url'                  => 'Az :attribute formátuma érvénytelen.',
-    'unique_undeleted'     => 'A(z) :attribute egyedinek kell lennie.',
+    "unique_undeleted"     => "A(z) :attribute egyedinek kell lennie.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------
@@ -100,6 +101,7 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +115,11 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => 'A: attribútum mező olyan karaktert tartalmaz, amely nem megengedett.',
-        'email_array'      => 'Egy vagy több e-mail cím érvénytelen.',
-        'hashed_pass'      => 'A jelenlegi jelszava helytelen',
+        'alpha_space' => "A: attribútum mező olyan karaktert tartalmaz, amely nem megengedett.",
+        "email_array"      => "Egy vagy több e-mail cím érvénytelen.",
+        "hashed_pass"      => "A jelenlegi jelszava helytelen",
         'dumbpwd'          => 'Ez a jelszó túl gyakori.',
-        'statuslabel_type' => 'Meg kell határoznia egy érvényes állapotcímke típust',
+        "statuslabel_type" => "Meg kell határoznia egy érvényes állapotcímke típust",
     ],
 
     /*
@@ -133,4 +135,4 @@ return [
 
     'attributes' => [],
 
-];
+);

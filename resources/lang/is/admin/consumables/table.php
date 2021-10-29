@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'title'      				=> 'Consumable Name',
-];
+return array(
+    'title'      				=> 'Heiti rekstrarvöru',
+);

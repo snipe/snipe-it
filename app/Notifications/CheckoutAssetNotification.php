@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
@@ -33,12 +34,12 @@ class CheckoutAssetNotification extends Notification
         $this->expected_checkin = '';
 
         if ($this->item->last_checkout) {
-            $this->last_checkout = \App\Helpers\Helper::getFormattedDateObject($this->item->last_checkout, 'date',
+            $this->last_checkout = Helper::getFormattedDateObject($this->item->last_checkout, 'date',
                 false);
         }
 
         if ($this->item->expected_checkin) {
-            $this->expected_checkin = \App\Helpers\Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
+            $this->expected_checkin = Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
                 false);
         }
     }

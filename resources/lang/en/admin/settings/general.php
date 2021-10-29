@@ -61,6 +61,7 @@ return [
     'label_logo'                => 'Label Logo',
     'label_logo_size'           => 'Square logos look best - will be displayed in the top right of each asset label. ',
     'laravel'                   => 'Laravel Version',
+    'ldap_client_tls_cert'      => 'LDAP Client-Side TLS Certificate',
     'ldap_enabled'              => 'LDAP enabled',
     'ldap_integration'          => 'LDAP Integration',
     'ldap_settings'             => 'LDAP Settings',

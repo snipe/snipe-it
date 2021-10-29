@@ -41,10 +41,10 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         )->name('api.assets.requested');
 
         Route::get('requestable/hardware',
-        [
-            Api\AssetsController::class, 
-            'requestable'
-        ]
+            [
+                Api\AssetsController::class, 
+                'requestable'
+            ]
         )->name('api.assets.requestable');
 
 
@@ -296,6 +296,15 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         ); // end depreciations API routes
 
 
+        Route::post('reports/depreciation',
+        [
+            Api\AssetsController::class, 
+            'index'
+        ]
+        )->name('api.depreciation-report.index');
+
+       
+        
         /**
          * Fields API routes
         */
@@ -380,7 +389,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
          * Groups API routes
         */
         Route::resource('groups', 
-        Api\CustomFieldsetsController::class,
+        Api\GroupsCOntroller::class,
             ['names' => 
                 [
                     'index' => 'api.groups.index',
@@ -895,6 +904,13 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
                 'postUpload'
             ]
             )->name('api.users.uploads');
+
+            Route::post('{user}/restore',
+                [
+                    Api\UsersController::class,
+                    'restore'
+                ]
+            )->name('api.users.restore');
 
         }); 
     

@@ -312,7 +312,7 @@ class UserPresenter extends Presenter
     {
         if ($this->email) {
             return '<a href="mailto:'.$this->email.'">'.$this->email.'</a>'
-                .'<a href="mailto:'.$this->email.'" class="hidden-xs hidden-sm"><i class="fa fa-envelope"></i></a>';
+                .'<a href="mailto:'.$this->email.'" class="hidden-xs hidden-sm"><i class="far fa-envelope"></i></a>';
         }
 
         return '';
@@ -386,6 +386,6 @@ class UserPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fa fa-user" aria-hidden="true"></i>';
+        return '<i class="fas fa-user" aria-hidden="true"></i>';
     }
 }

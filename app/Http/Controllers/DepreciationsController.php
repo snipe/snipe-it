@@ -125,8 +125,8 @@ class DepreciationsController extends Controller
         $this->authorize('update', $depreciation);
 
         // Depreciation data
-        $depreciation->name = $request->input('name');
-        $depreciation->months = $request->input('months');
+        $depreciation->name             = $request->input('name');
+        $depreciation->months           = $request->input('months');
         $depreciation->depreciation_min = $request->input('depreciation_min');
 
         // Was the asset created?

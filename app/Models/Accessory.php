@@ -31,17 +31,17 @@ class Accessory extends SnipeModel
 
     use Searchable;
     use Acceptable;
-
+    
     /**
      * The attributes that should be included when searching the model.
-     *
+     * 
      * @var array
      */
     protected $searchableAttributes = ['name', 'model_number', 'order_number', 'purchase_date'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     *
+     * 
      * @var array
      */
     protected $searchableRelations = [
@@ -53,8 +53,8 @@ class Accessory extends SnipeModel
     ];
 
     /**
-     * Accessory validation rules
-     */
+    * Accessory validation rules
+    */
     public $rules = [
         'name'              => 'required|min:3|max:255',
         'qty'               => 'required|integer|min:1',
@@ -65,12 +65,12 @@ class Accessory extends SnipeModel
     ];
 
     /**
-     * Whether the model should inject it's identifier to the unique
-     * validation rules before attempting validation. If this property
-     * is not set in the model it will default to true.
-     *
+    * Whether the model should inject it's identifier to the unique
+    * validation rules before attempting validation. If this property
+    * is not set in the model it will default to true.
+    *
      * @var bool
-     */
+    */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
 
@@ -92,8 +92,11 @@ class Accessory extends SnipeModel
         'supplier_id',
         'image',
         'qty',
+        'min_amt',
         'requestable',
     ];
+
+
 
     /**
      * Establishes the accessory -> supplier relationship
@@ -172,7 +175,7 @@ class Accessory extends SnipeModel
 
     /**
      * Get the LAST checkout for this accessory.
-     *
+     * 
      * This is kinda gross, but is necessary for how the accessory
      * pivot stuff works for now.
      *
@@ -200,6 +203,7 @@ class Accessory extends SnipeModel
     {
         return $this->assetlog()->where('action_type', '=', 'checkout')->take(1);
     }
+
 
     /**
      * Sets the full image url
@@ -300,7 +304,7 @@ class Accessory extends SnipeModel
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
         }
 
-        return null;
+            return null;
     }
 
     /**
@@ -320,13 +324,13 @@ class Accessory extends SnipeModel
     }
 
     /**
-     * Query builder scope to order on company
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
-     *
-     * @return \Illuminate\Database\Query\Builder          Modified query builder
-     */
+    * Query builder scope to order on company
+    *
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
+    */
     public function scopeOrderCompany($query, $order)
     {
         return $query->leftJoin('companies', 'accessories.company_id', '=', 'companies.id')
@@ -334,13 +338,13 @@ class Accessory extends SnipeModel
     }
 
     /**
-     * Query builder scope to order on category
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
-     *
-     * @return \Illuminate\Database\Query\Builder          Modified query builder
-     */
+    * Query builder scope to order on category
+    *
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
+    */
     public function scopeOrderCategory($query, $order)
     {
         return $query->leftJoin('categories', 'accessories.category_id', '=', 'categories.id')
@@ -348,13 +352,13 @@ class Accessory extends SnipeModel
     }
 
     /**
-     * Query builder scope to order on location
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
-     *
-     * @return \Illuminate\Database\Query\Builder          Modified query builder
-     */
+    * Query builder scope to order on location
+    *
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
+    */
     public function scopeOrderLocation($query, $order)
     {
         return $query->leftJoin('locations', 'accessories.location_id', '=', 'locations.id')
@@ -362,15 +366,28 @@ class Accessory extends SnipeModel
     }
 
     /**
-     * Query builder scope to order on manufacturer
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text                              $order       Order
-     *
-     * @return \Illuminate\Database\Query\Builder          Modified query builder
-     */
+    * Query builder scope to order on manufacturer
+    *
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
+    */
     public function scopeOrderManufacturer($query, $order)
     {
         return $query->leftJoin('manufacturers', 'accessories.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
+    }
+
+    /**
+    * Query builder scope to order on supplier
+    *
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderSupplier($query, $order)
+    {
+        return $query->leftJoin('suppliers', 'accessories.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
     }
 }

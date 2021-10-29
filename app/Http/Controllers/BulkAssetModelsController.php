@@ -80,6 +80,11 @@ class BulkAssetModelsController extends Controller
             $update_array['depreciation_id'] = $request->input('depreciation_id');
         }
 
+        if ($request->filled('requestable') != '') {
+            $update_array['requestable'] = $request->input('requestable');
+        }
+
+
         if (count($update_array) > 0) {
             AssetModel::whereIn('id', $models_raw_array)->update($update_array);
 

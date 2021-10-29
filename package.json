@@ -13,6 +13,7 @@
         "node": ">=0.12"
     },
     "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.4",
         "axios": "^0.20.0",
         "babel-preset-latest": "^6.24.1",
         "jquery": "^3.6.0",
@@ -24,7 +25,6 @@
         "vue-template-compiler": "2.4.4"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.15.3",
         "admin-lte": "^2.4.18",
         "ajv": "^6.12.6",
         "blueimp-file-upload": "^9.34.0",

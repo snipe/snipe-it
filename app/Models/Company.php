@@ -30,29 +30,29 @@ final class Company extends SnipeModel
     use Presentable;
 
     /**
-     * Whether the model should inject it's identifier to the unique
-     * validation rules before attempting validation. If this property
-     * is not set in the model it will default to true.
-     *
+    * Whether the model should inject it's identifier to the unique
+    * validation rules before attempting validation. If this property
+    * is not set in the model it will default to true.
+    *
      * @var bool
-     */
+    */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     use Searchable;
-
+    
     /**
      * The attributes that should be included when searching the model.
-     *
+     * 
      * @var array
      */
     protected $searchableAttributes = ['name', 'created_at', 'updated_at'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     *
+     * 
      * @var array
      */
-    protected $searchableRelations = [];
+    protected $searchableRelations = [];   
 
     /**
      * The attributes that are mass assignable.
@@ -81,10 +81,10 @@ final class Company extends SnipeModel
             $company_id = null;
         }
 
-        $table = ($table_name) ? $table_name.'.' : '';
+        $table = ($table_name) ? $table_name."." : $query->getModel()->getTable().".";
 
         if (\Schema::hasColumn($query->getModel()->getTable(), $column)) {
-            return $query->where($table.$column, '=', $company_id);
+             return $query->where($table.$column, '=', $company_id);
         } else {
             return $query->join('users as users_comp', 'users_comp.id', 'user_id')->where('users_comp.company_id', '=', $company_id);
         }
