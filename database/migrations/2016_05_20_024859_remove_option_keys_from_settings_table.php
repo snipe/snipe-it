@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class RemoveOptionKeysFromSettingsTable extends Migration
 {
@@ -14,8 +14,9 @@ class RemoveOptionKeysFromSettingsTable extends Migration
     {
         Schema::table('settings', function (Blueprint $table) {
             //
-            if(Schema::hasColumn('settings', 'option_name'))
+            if (Schema::hasColumn('settings', 'option_name')) {
                 $table->dropColumn('option_name');
+            }
         });
     }
 

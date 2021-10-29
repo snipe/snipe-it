@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class RenameModelNoteToNotes extends Migration
 {
@@ -26,7 +26,7 @@ class RenameModelNoteToNotes extends Migration
     public function down()
     {
         Schema::table('models', function (Blueprint $table) {
-            //            
+            //
             $table->renameColumn('notes', 'note');
         });
     }

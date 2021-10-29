@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Über Asset-Abschreibungen',
     'about_depreciations'  					=> 'Sie können Asset-Abschreibungen einrichten, um Assets linear abzuschreiben.',
     'asset_depreciations'  					=> 'Asset-Abschreibungen',
@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Abschreibungs Name',
     'number_of_months'  					=> 'Anzahl der Monate',
     'update'  					            => 'Abschreibung aktualisieren',
+    'depreciation_min'                      => 'Minimaler Wert nach Abschreibung'
 
-);
+];

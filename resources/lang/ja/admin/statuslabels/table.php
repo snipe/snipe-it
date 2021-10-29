@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'ステータスラベルについて',
     'archived'      	=> 'アーカイブ',
     'create'      	=> 'ステータスラベルを作成',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'ステータスラベル',
     'undeployable'  => '配備不可',
     'update'      	=> 'ステータスラベルを更新',
-);
+];

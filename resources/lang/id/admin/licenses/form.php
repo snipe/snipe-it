@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Aset',
     'checkin'           => 'Masuk',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Berlisensi untuk Email',
     'to_name'           => 'Berlisensi untuk Nama',
     'update'            => 'Memperbarui lisensi',
-    'checkout_help'     => 'Anda harus memeriksa lisensi untuk aset perangkat keras atau seseorang. Anda dapat memilih keduanya, namun pemilik aset harus sesuai dengan orang yang Anda memeriksa aset.'
-);
+    'checkout_help'     => 'Anda harus memeriksa lisensi untuk aset perangkat keras atau seseorang. Anda dapat memilih keduanya, namun pemilik aset harus sesuai dengan orang yang Anda memeriksa aset.',
+];

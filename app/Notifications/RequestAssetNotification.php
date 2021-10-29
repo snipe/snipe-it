@@ -46,8 +46,6 @@ class RequestAssetNotification extends Notification
             $this->expected_checkin = Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
                 false);
         }
-
-
     }
 
     /**
@@ -58,10 +56,9 @@ class RequestAssetNotification extends Notification
      */
     public function via()
     {
-
         $notifyBy = [];
 
-        if (Setting::getSettings()->slack_endpoint!='') {
+        if (Setting::getSettings()->slack_endpoint != '') {
             $notifyBy[] = 'slack';
         }
 
@@ -76,7 +73,7 @@ class RequestAssetNotification extends Notification
         $qty = $this->item_quantity;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
+        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
 
         $fields = [
             'QTY' => $qty,
@@ -92,6 +89,7 @@ class RequestAssetNotification extends Notification
                     ->content($note);
             });
     }
+
     /**
      * Get the mail representation of the notification.
      *
@@ -99,7 +97,6 @@ class RequestAssetNotification extends Notification
      */
     public function toMail()
     {
-
         $fields = [];
 
         // Check if the item has custom fields associated with it
@@ -121,8 +118,6 @@ class RequestAssetNotification extends Notification
             ])
             ->subject(trans('mail.Item_Requested'));
 
-
         return $message;
     }
-
 }

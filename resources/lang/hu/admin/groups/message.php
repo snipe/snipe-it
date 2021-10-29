@@ -1,22 +1,22 @@
 <?php
 
-return array(
+return [
 
     'group_exists'        => 'A csoport már létezik!',
     'group_not_found'     => '[:id] csoport nem létezik.',
     'group_name_required' => 'A név mező kötelező',
 
-    'success' => array(
+    'success' => [
         'create' => 'A csoport sikeresen létrehozva.',
         'update' => 'A csoport sikeresen frissítve.',
         'delete' => 'A csoport sikeresen törölve.',
-    ),
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Biztosan törölni szeretnéd ezt a csoportot?',
         'create' => 'Egy probléma támadt a csoport létrehozása közben. Próbálkozz újra.',
         'update' => 'Egy probléma támadt a csoport frissítése közben. Próbálkozz újra.',
         'delete' => 'Egy probléma támadt a csoport törlése közben. Próbálkozz újra.',
-    ),
+    ],
 
-);
+];

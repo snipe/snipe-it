@@ -1,5 +1,5 @@
 <?php
 
-return array(
+return [
     'title'      				=> '組件名稱',
-);
+];

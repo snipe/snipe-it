@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Lokasyonlar hakkında',
     'about_locations'           => 'Konum bilgileri kullanıcılar, varlıklar ve diğer nesneleri izlemek için kullanılır',
     'assets_rtd'                => 'Varlıklar', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'Ülke',
     'create'                    => 'Konum Oluştur',
     'update'                    => 'Konum Güncelle',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'Atananların Tümünü Yazdır',
+    'print_all_assigned'        => 'Atananların Tümünü Yazdır',
     'name'                      => 'Konum Adı',
     'address'                   => 'Adres',
     'zip'                       => 'Posta kodu',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => 'Üst',
     'currency'                  => 'Lokasyon Para Birimi',
     'ldap_ou'                   => 'LDAP arama OU',
-    );
+    ];

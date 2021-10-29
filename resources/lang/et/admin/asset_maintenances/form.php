@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Päevad',
         'notes'                  => 'Märkused',
         'update'                 => 'Uuenda',
-        'create'                 => 'Loo'
+        'create'                 => 'Loo',
     ];

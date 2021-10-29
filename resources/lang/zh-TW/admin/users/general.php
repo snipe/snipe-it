@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => '該用戶可以登錄',
     'activated_disabled_help_text' => '您無法編輯自己帳戶的啟動狀態。',
     'assets_user'       => '分配給 :name 的資產',
@@ -13,7 +12,7 @@ return array(
     'edit'              => '編輯使用者',
     'filetype_info'     => '允許檔案類型：png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar。',
     'history_user'      => ':name 的歷史記錄',
-	'info'				=> '資訊',
+    'info'				=> '資訊',
     'restore_user'		=> '點擊此處可將它們還原。',
     'last_login'        => '上次登入',
     'ldap_config_text'  => 'LDAP 設定在 管理 > 設定。所選位置將套用至匯入的使用者。',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => '您當前的管理員設置允許使用雙因素身份驗證。',
     'two_factor_enrolled' => '雙因素認證設備登記',
     'two_factor_active'   => '啟用雙因素認證',
-    );
+    ];

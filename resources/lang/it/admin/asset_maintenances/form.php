@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Tempo Manutenzione Prodotto (in giorni)',
         'notes'                  => 'Note',
         'update'                 => 'Aggiorna Manutenzione Prodotto',
-        'create'                 => 'Crea Manutenzione Prodotto'
+        'create'                 => 'Crea Manutenzione Prodotto',
     ];

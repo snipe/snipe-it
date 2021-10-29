@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'Creu Model Ased',
     'created_at' 			=> 'Crëwyd',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'Diweddaru Model Ased',
     'clone'				=> 'Dyblygu Model',
     'edit'				=> 'Newid Model',
-);
+];

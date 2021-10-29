@@ -25,8 +25,8 @@ class CheckoutableCheckedIn
     {
         $this->checkoutable = $checkoutable;
         $this->checkedOutTo = $checkedOutTo;
-        $this->checkedInBy  = $checkedInBy;
-        $this->note         = $note;
-        $this->action_date  = $action_date ?? date('Y-m-d');
+        $this->checkedInBy = $checkedInBy;
+        $this->note = $note;
+        $this->action_date = $action_date ?? date('Y-m-d');
     }
 }

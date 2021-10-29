@@ -1,42 +1,41 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Model findes ikke.',
     'assoc_users'	 => 'Denne model er knyttet til en eller flere aktiver og ikke kan slettes. Slet venligst aktiver, og prøv derefter at slette igen. ',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Modellen blev ikke oprettet, prøve igen.',
         'success' => 'Model oprettet.',
         'duplicate_set' => 'Der findes allerede en model med det navn, producent og modelnummer eksisterer allerede.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Modellen blev ikke opdateret, prøv igen',
-        'success' => 'Model opdateret.'
-    ),
+        'success' => 'Model opdateret.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Er du sikker på du vil slette dette aktiv model?',
         'error'   => 'Der opstod et problem under sletning af modellen. Prøv venligst igen.',
-        'success' => 'Modellen blev slettet.'
-    ),
+        'success' => 'Modellen blev slettet.',
+    ],
 
-    'restore' => array(
+    'restore' => [
         'error'   		=> 'Modellen blev ikke gendannet, prøv igen',
-        'success' 		=> 'Model gendannet.'
-    ),
+        'success' 		=> 'Model gendannet.',
+    ],
 
-    'bulkedit' => array(
+    'bulkedit' => [
         'error'   		=> 'Ingen felter blev ændret, så intet er blevet opdateret.',
-        'success' 		=> 'Modeller opdateret.'
-    ),
+        'success' 		=> 'Modeller opdateret.',
+    ],
 
-    'bulkdelete' => array(
+    'bulkdelete' => [
         'error'   		    => 'Ingen modeller blev valgt, så intet blev slettet.',
         'success' 		    => ':success_count model(ler) slettet!',
-        'success_partial' 	=> ':success_count model(ler) blev slettet; men :fail_count kunne ikke slettes fordi de stadig har aktiver knyttet til sig.'
-    ),
+        'success_partial' 	=> ':success_count model(ler) blev slettet; men :fail_count kunne ikke slettes fordi de stadig har aktiver knyttet til sig.',
+    ],
 
-);
+];

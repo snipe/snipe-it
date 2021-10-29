@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Services\LdapAd;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use App\Models\User; // Note that this is awful close to 'Users' the namespace above; be careful
+use Illuminate\Support\Facades\Artisan; // Note that this is awful close to 'Users' the namespace above; be careful
 
 class LDAPImportController extends Controller
 {

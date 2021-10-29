@@ -1,37 +1,36 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'See lisavarustus on praegu: kasutajate poolt kontrollitud arvude arv. Palun kontrollige tarvikuid ja proovige uuesti.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Lisatarvikut ei loodud, proovige uuesti.',
-        'success' => 'Lisavarustus loodi edukalt.'
-    ),
+        'success' => 'Lisavarustus loodi edukalt.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Lisatarvikut ei värskendatud. Proovige uuesti',
-        'success' => 'Lisatarvikut uuendati edukalt.'
-    ),
+        'success' => 'Lisatarvikut uuendati edukalt.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Kas olete kindel, et soovite seda lisaseadet kustutada?',
         'error'   => 'Aksessuaar eemaldati. Palun proovi uuesti.',
-        'success' => 'Lisaseade kustutati edukalt.'
-    ),
+        'success' => 'Lisaseade kustutati edukalt.',
+    ],
 
-     'checkout' => array(
+     'checkout' => [
         'error'   		=> 'Lisatarvikut ei kontrollitud, palun proovige uuesti',
         'success' 		=> 'Lisaseade edukalt kontrollitud.',
-        'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.'
-    ),
+        'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   		=> 'Lisatarvikut ei olnud märgitud, palun proovige uuesti',
         'success' 		=> 'Lisaseade kontrollitud edukalt.',
-        'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.'
-    )
+        'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.',
+    ],
 
-
-);
+];

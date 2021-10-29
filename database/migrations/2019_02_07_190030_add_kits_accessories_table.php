@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddKitsAccessoriesTable extends Migration
 {
@@ -16,8 +16,8 @@ class AddKitsAccessoriesTable extends Migration
         //
         Schema::create('kits_accessories', function ($table) {
             $table->increments('id');
-            $table->integer('kit_id')->nullable()->default(NULL); 
-            $table->integer('accessory_id')->nullable()->default(NULL);    
+            $table->integer('kit_id')->nullable()->default(null);
+            $table->integer('accessory_id')->nullable()->default(null);
             $table->integer('quantity')->default(1);
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class AddKitsAccessoriesTable extends Migration
     public function down()
     {
         //
-		Schema::drop('kits_accessories');
+        Schema::drop('kits_accessories');
     }
 }

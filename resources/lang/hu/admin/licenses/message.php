@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Engedély nem létezik.',
     'user_does_not_exist' => 'Felhasználó nem létezik.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'Válasszon egy eszközt vagy egy felhasználót, de nem mindkettőt.',
     'not_found' => 'Licensz nem található',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'A licenc nem jött létre, próbálkozzon újra.',
-        'success' => 'A licenc sikeresen létrehozva.'
-    ),
+        'success' => 'A licenc sikeresen létrehozva.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'A fájl nem törölve. Kérlek próbáld újra.',
         'success' => 'A fájl sikeresen törölve.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Fel nem töltött fájl (ok). Kérlek próbáld újra.',
         'success' => 'Fájl (ok) sikeresen feltöltve.',
         'nofiles' => 'Nem választottál fel fájlokat a feltöltéshez, vagy a fájl, amelyet feltölteni próbálsz, túl nagy',
         'invalidfiles' => 'Egy vagy több fájl túl nagy vagy egy filetype, amely nem megengedett. Az engedélyezett fájltípusok png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml és lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'A licenc nem frissült, próbálkozzon újra',
-        'success' => 'A licenc sikeresen frissült.'
-    ),
+        'success' => 'A licenc sikeresen frissült.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Biztosan törölni szeretné ezt az engedélyt?',
         'error'   => 'Hiba történt az engedély törlése során. Kérlek próbáld újra.',
-        'success' => 'Az engedélyt sikeresen törölték.'
-    ),
+        'success' => 'Az engedélyt sikeresen törölték.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Hiba történt az engedély megvizsgálásakor. Kérlek próbáld újra.',
-        'success' => 'Az engedélyt sikeresen kiállították'
-    ),
+        'success' => 'Az engedélyt sikeresen kiállították',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Hiba történt az engedélyben. Kérlek próbáld újra.',
-        'success' => 'Az engedélyt sikeresen ellenőrizték'
-    ),
+        'success' => 'Az engedélyt sikeresen ellenőrizték',
+    ],
 
-);
+];

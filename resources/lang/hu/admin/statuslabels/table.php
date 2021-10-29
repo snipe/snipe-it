@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'A státusz címkékről',
     'archived'      	=> 'Archivált',
     'create'      	=> 'Státusz címke létrehozása',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Státusz címkék',
     'undeployable'  => 'Nem telepíthető',
     'update'      	=> 'Státusz címke frissítése',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Eticheta activ',
     'asset_model'       => 'Model',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Activ ',
     'image'		=> 'Imagine dispozitiv',
     'days_without_acceptance' => 'Zile fără acceptare',
-    'monthly_depreciation' => 'Depreciere lunară'
+    'monthly_depreciation' => 'Depreciere lunară',
 
-);
+];

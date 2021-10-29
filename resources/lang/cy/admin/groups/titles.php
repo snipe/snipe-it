@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Amdan Grwpiau',
     'about_groups'                  => 'Defnyddir grwpiau i gosod hawliau defnyddwyr.',
     'group_management' 	 	=> 'Rheoli Grwpiau',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Caniatau',
     'deny' 	 				=> 'Gwrthod',
 
-);
+];

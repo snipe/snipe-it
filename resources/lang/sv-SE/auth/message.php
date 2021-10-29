@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Detta användarkonto är inte aktiverat.',
     'account_suspended'      => 'Detta användarkonto har blivit suspenderat.',
     'account_banned'         => 'Detta användarkonto har blivit avstängt.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'För många misslyckade inloggningsförsök. Försök igen om :minutes minuter.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Din enhet är redan registrerad.',
+        'success'               => 'Din inloggning lyckades.',
+        'code_required'         => 'Tvåfaktorskod krävs.',
+        'invalid_code'          => 'Tvåfaktorskoden är ogiltig.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Det uppstod ett problem när du försökte logga ut, försök igen.',
+        'success' => 'Du har loggat ut.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Det uppstod ett problem med att nollställa ditt lösenord, var god försök igen.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Om den e-postadressen finns i vårt system har ett e-postmeddelande om lösenordsåterställning skickats.',
     ),
 
     'forgot-password-confirm' => array(

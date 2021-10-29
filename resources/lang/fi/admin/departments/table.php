@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'Tunnus',
     'name'                      => 'Osaston nimi',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Sijainti',
     'create'                    => 'Luo osasto',
     'update'                    => 'Päivitä osasto',
-    );
+    ];

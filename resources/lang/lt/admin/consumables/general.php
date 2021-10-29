@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Užsakymas, kurį reikia išnaudoti vartotojui',
     'consumable_name'                   => 'Suvartojamos įrangos pavadinimas',
     'create'                            => 'Sukurti suvartojamą įrangą',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Likutis',
     'total' 			                => 'Viso',
     'update'                            => 'Atnaujinti suvartojamą irangą',
-);
+];

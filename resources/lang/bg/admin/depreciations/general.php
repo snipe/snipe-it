@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Относно амортизацията на активи',
     'about_depreciations'  					=> 'Тук можете да конфигурирате линейна амортизация на активи във времето.',
     'asset_depreciations'  					=> 'Амортизация на активи',
@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Амортизация',
     'number_of_months'  					=> 'Брой месеци',
     'update'  					            => 'Обновяване на амортизация',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
-);
+];

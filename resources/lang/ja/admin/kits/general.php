@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about_kits_title'                  => 'About Predefined Kits',
-    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
-    'checkout'                          => 'Checkout Kit ',
-    'create_success'                    => 'Kit was successfully created.',
-    'create'                            => 'Create Predefined Kit',
-    'update'                            => 'Update Predefined Kit',
-    'delete_success'                    => 'Kit was successfully deleted.',
-    'update_success'                    => 'Kit was successfully updated.',
-    'none_models'                       => 'There are not enough available assets for :model to checkout. :qty are required. ',
-    'none_licenses'                     => 'There are not enough available seats for :license to checkout. :qty are required. ',
-    'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
-    'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
+    'about_kits_title'                  => '製品セットについて',
+    'about_kits_text'                   => '製品セットを用いると、アイテム（アセット、ライセンスなど）のコレクションをすばやくユーザーに払い出す（チェックアウトする）ことができます。例えば、組織のオンボーディングプロセスが一貫している場合に、すべてのユーザーが同じアイテムを使用する場合に役立ちます。',
+    'checkout'                          => 'チェックアウト',
+    'create_success'                    => '製品セットは正常に作成されました。',
+    'create'                            => '製品セットを作成',
+    'update'                            => '製品セットを更新',
+    'delete_success'                    => '製品セットは正常に削除されました。',
+    'update_success'                    => '製品セットは正常に更新されました。',
+    'none_models'                       => ':modelをチェックアウトするのに十分な資産がありません。:qtyが必要です。 ',
+    'none_licenses'                     => ':licenseをチェックアウトするのに十分なシートがありません。:qtyが必要です。 ',
+    'none_consumables'                  => ':consumableをチェックアウトするのに十分な数がありません。:qtyが必要です。 ',
+    'none_accessory'                    => ':accessoryをチェックアウトするのに十分な数がありません。:qtyが必要です。 ',
 
 );

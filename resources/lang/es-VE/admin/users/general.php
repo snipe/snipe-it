@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Este usuario puede ingresar',
     'activated_disabled_help_text' => 'No puedes editar el estado de activación de tu propia cuenta.',
     'assets_user'       => 'Activos asignados a :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Editar Usuario',
     'filetype_info'     => 'Los tipos de archivos permitidos son png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, y rar.',
     'history_user'      => 'Historial para :name',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Haga clic aquí para restaurarlos.',
     'last_login'        => 'Último Inicio de Sesión',
     'ldap_config_text'  => 'Los parámetros de configuración LDAP pueden ser encontrados en Admin > Settings. La ubicación (opcional) seleccionada será establecida para todos los usuarios importados.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Tus configuraciones de administrador actuales permiten cumplimiento selectivo de autenticación de dos factores.  ',
     'two_factor_enrolled' => 'Dispositivo 2FA inscrito ',
     'two_factor_active'   => '2FA activo ',
-    );
+    ];

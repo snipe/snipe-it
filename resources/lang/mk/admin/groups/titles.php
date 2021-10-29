@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'За групите',
     'about_groups'                  => 'Групите се користат за генерализирање на кориснички дозволи.',
     'group_management' 	 	=> 'Управување со група',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Дозволи',
     'deny' 	 				=> 'Одбиј',
 
-);
+];

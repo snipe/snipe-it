@@ -1,13 +1,17 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
+use App\Events\CheckoutableCheckedIn;
 use Illuminate\Support\Facades\Gate;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\DepreciationReportTransformer;
 use App\Http\Transformers\LicensesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
@@ -20,13 +24,14 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 use Input;
 use Paginator;
 use Slack;
 use Str;
 use TCPDF;
 use Validator;
-
+use Route;
 
 /**
  * This class controls all actions related to assets for
@@ -37,7 +42,6 @@ use Validator;
  */
 class AssetsController extends Controller
 {
-
     /**
      * Returns JSON listing of all assets
      *
@@ -46,10 +50,32 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function index(Request $request, $audit = null)
+    public function index(Request $request, $audit = null) 
     {
 
-        $this->authorize('index', Asset::class);
+        \Log::debug(Route::currentRouteName());
+        
+
+        /**
+         * This looks MAD janky (and it is), but the AssetsController@index does a LOT of heavy lifting throughout the 
+         * app. This bit here just makes sure that someone without permission to view assets doesn't 
+         * end up with priv escalations because they asked for a different endpoint. 
+         * 
+         * Since we never gave the specification for which transformer to use before, it should default 
+         * gracefully to just use the AssetTransformer by default, which shouldn't break anything. 
+         * 
+         * It was either this mess, or repeating ALL of the searching and sorting and filtering code, 
+         * which would have been far worse of a mess. *sad face*  - snipe (Sept 1, 2021)
+         */
+        if (Route::currentRouteName()=='api.depreciation-report.index') {
+            $transformer = 'App\Http\Transformers\DepreciationReportTransformer';
+            $this->authorize('reports.view');
+        } else {
+            $transformer = 'App\Http\Transformers\AssetsTransformer';
+            $this->authorize('index', Asset::class);          
+        }
+        
+       
         $settings = Setting::getSettings();
 
         $allowed_columns = [
@@ -76,7 +102,7 @@ class AssetsController extends Controller
             'requests_counter',
         ];
 
-        $filter = array();
+        $filter = [];
 
         if ($request->filled('filter')) {
             $filter = json_decode($request->input('filter'), true);
@@ -84,13 +110,12 @@ class AssetsController extends Controller
 
         $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
         foreach ($all_custom_fields as $field) {
-            $allowed_columns[]=$field->db_column_name();
+            $allowed_columns[] = $field->db_column_name();
         }
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
+        $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset','supplier');
-
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier');
 
         // These are used by the API to query against specific ID numbers.
         // They are also used by the individual searches on detail pages like
@@ -99,7 +124,7 @@ class AssetsController extends Controller
             $assets->where('assets.status_id', '=', $request->input('status_id'));
         }
 
-        if ($request->input('requestable')=='true') {
+        if ($request->input('requestable') == 'true') {
             $assets->where('assets.requestable', '=', '1');
         }
 
@@ -146,7 +171,6 @@ class AssetsController extends Controller
         // case we override with the actual count, so we should return 0 items.
         $offset = (($assets) && ($request->get('offset') > $assets->count())) ? $assets->count() : $request->get('offset', 0);
 
-
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
@@ -154,7 +178,6 @@ class AssetsController extends Controller
 
         // This is used by the audit reporting routes
         if (Gate::allows('audit', Asset::class)) {
-
             switch ($audit) {
                 case 'due':
                     $assets->DueOrOverdueForAudit($settings);
@@ -177,19 +200,19 @@ class AssetsController extends Controller
                 $assets->onlyTrashed();
                 break;
             case 'Pending':
-                $assets->join('status_labels AS status_alias',function ($join) {
-                    $join->on('status_alias.id', "=", "assets.status_id")
-                        ->where('status_alias.deployable','=',0)
-                        ->where('status_alias.pending','=',1)
+                $assets->join('status_labels AS status_alias', function ($join) {
+                    $join->on('status_alias.id', '=', 'assets.status_id')
+                        ->where('status_alias.deployable', '=', 0)
+                        ->where('status_alias.pending', '=', 1)
                         ->where('status_alias.archived', '=', 0);
                 });
                 break;
             case 'RTD':
                 $assets->whereNull('assets.assigned_to')
-                    ->join('status_labels AS status_alias',function ($join) {
-                        $join->on('status_alias.id', "=", "assets.status_id")
-                            ->where('status_alias.deployable','=',1)
-                            ->where('status_alias.pending','=',0)
+                    ->join('status_labels AS status_alias', function ($join) {
+                        $join->on('status_alias.id', '=', 'assets.status_id')
+                            ->where('status_alias.deployable', '=', 1)
+                            ->where('status_alias.pending', '=', 0)
                             ->where('status_alias.archived', '=', 0);
                     });
                 break;
@@ -197,19 +220,19 @@ class AssetsController extends Controller
                 $assets->Undeployable();
                 break;
             case 'Archived':
-                $assets->join('status_labels AS status_alias',function ($join) {
-                    $join->on('status_alias.id', "=", "assets.status_id")
-                        ->where('status_alias.deployable','=',0)
-                        ->where('status_alias.pending','=',0)
+                $assets->join('status_labels AS status_alias', function ($join) {
+                    $join->on('status_alias.id', '=', 'assets.status_id')
+                        ->where('status_alias.deployable', '=', 0)
+                        ->where('status_alias.pending', '=', 0)
                         ->where('status_alias.archived', '=', 1);
                 });
                 break;
             case 'Requestable':
                 $assets->where('assets.requestable', '=', 1)
-                    ->join('status_labels AS status_alias',function ($join) {
-                        $join->on('status_alias.id', "=", "assets.status_id")
-                            ->where('status_alias.deployable','=',1)
-                            ->where('status_alias.pending','=',0)
+                    ->join('status_labels AS status_alias', function ($join) {
+                        $join->on('status_alias.id', '=', 'assets.status_id')
+                            ->where('status_alias.deployable', '=', 1)
+                            ->where('status_alias.pending', '=', 0)
                             ->where('status_alias.archived', '=', 0);
                     });
 
@@ -220,24 +243,24 @@ class AssetsController extends Controller
                 break;
             default:
 
-                if ((!$request->filled('status_id')) && ($settings->show_archived_in_list!='1')) {
+                if ((! $request->filled('status_id')) && ($settings->show_archived_in_list != '1')) {
                     // terrible workaround for complex-query Laravel bug in fulltext
-                    $assets->join('status_labels AS status_alias',function ($join) {
-                        $join->on('status_alias.id', "=", "assets.status_id")
+                    $assets->join('status_labels AS status_alias', function ($join) {
+                        $join->on('status_alias.id', '=', 'assets.status_id')
                             ->where('status_alias.archived', '=', 0);
                     });
 
                     // If there is a status ID, don't take show_archived_in_list into consideration
                 } else {
-                    $assets->join('status_labels AS status_alias',function ($join) {
-                        $join->on('status_alias.id', "=", "assets.status_id");
+                    $assets->join('status_labels AS status_alias', function ($join) {
+                        $join->on('status_alias.id', '=', 'assets.status_id');
                     });
                 }
 
         }
 
 
-        if ((!is_null($filter)) && (count($filter)) > 0) {
+        if ((! is_null($filter)) && (count($filter)) > 0) {
             $assets->ByFilter($filter);
         } elseif ($request->filled('search')) {
             $assets->TextSearch($request->input('search'));
@@ -247,7 +270,7 @@ class AssetsController extends Controller
         // This is kinda gross, but we need to do this because the Bootstrap Tables
         // API passes custom field ordering as custom_fields.fieldname, and we have to strip
         // that out to let the default sorter below order them correctly on the assets table.
-        $sort_override = str_replace('custom_fields.','', $request->input('sort')) ;
+        $sort_override = str_replace('custom_fields.', '', $request->input('sort'));
 
         // This handles all of the pivot sorting (versus the assets.* fields
         // in the allowed_columns array)
@@ -292,10 +315,26 @@ class AssetsController extends Controller
 
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
-        // dd($assets);
-        return (new AssetsTransformer)->transformAssets($assets, $total);
-    }
+        
 
+        /**
+         * Include additional associated relationships
+         */  
+        if ($request->input('components')) {
+            $assets->loadMissing(['components' => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }]);
+        }
+
+        
+
+
+        /**
+         * Here we're just determining which Transformer (via $transformer) to use based on the 
+         * variables we set earlier on in this method - we default to AssetsTransformer.
+         */
+        return (new $transformer)->transformAssets($assets, $total, $request);
+    }
 
     /**
      * Returns JSON with information about an asset (by tag) for detail view.
@@ -305,13 +344,15 @@ class AssetsController extends Controller
      * @since [v4.2.1]
      * @return JsonResponse
      */
-    public function showByTag($tag)
+    public function showByTag(Request $request, $tag)
     {
-        if ($asset = Asset::with('assetstatus')->with('assignedTo')->where('asset_tag',$tag)->first()) {
+        if ($asset = Asset::with('assetstatus')->with('assignedTo')->where('asset_tag', $tag)->first()) {
             $this->authorize('view', $asset);
-            return (new AssetsTransformer)->transformAsset($asset);
+
+            return (new AssetsTransformer)->transformAsset($asset, $request);
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+
 
     }
 
@@ -323,14 +364,15 @@ class AssetsController extends Controller
      * @since [v4.2.1]
      * @return JsonResponse
      */
-    public function showBySerial($serial)
+    public function showBySerial(Request $request, $serial)
     {
         $this->authorize('index', Asset::class);
         if ($assets = Asset::with('assetstatus')->with('assignedTo')
-            ->withTrashed()->where('serial',$serial)->get()) {
+            ->withTrashed()->where('serial', $serial)->get()) {
                 return (new AssetsTransformer)->transformAssets($assets, $assets->count());
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+
 
     }
 
@@ -343,22 +385,25 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         if ($asset = Asset::with('assetstatus')->with('assignedTo')->withTrashed()
             ->withCount('checkins as checkins_count', 'checkouts as checkouts_count', 'userRequests as user_requests_count')->findOrFail($id)) {
             $this->authorize('view', $asset);
-            return (new AssetsTransformer)->transformAsset($asset);
+
+            return (new AssetsTransformer)->transformAsset($asset, $request->input('components') );
         }
 
 
     }
-    public function licenses($id)
+
+    public function licenses(Request $request, $id)
     {
         $this->authorize('view', Asset::class);
         $this->authorize('view', License::class);
         $asset = Asset::where('id', $id)->withTrashed()->first();
         $licenses = $asset->licenses()->get();
+
         return (new LicensesTransformer())->transformLicenses($licenses, $licenses->count());
      }
 
@@ -381,7 +426,7 @@ class AssetsController extends Controller
             'assets.model_id',
             'assets.assigned_to',
             'assets.assigned_type',
-            'assets.status_id'
+            'assets.status_id',
             ])->with('model', 'assetstatus', 'assignedTo')->NotArchived(), 'company_id', 'assets');
 
         if ($request->filled('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
@@ -408,15 +453,14 @@ class AssetsController extends Controller
             }
 
 
-            if ($asset->assetstatus->getStatuslabelType()=='pending') {
-                $asset->use_text .=  '('.$asset->assetstatus->getStatuslabelType().')';
+            if ($asset->assetstatus->getStatuslabelType() == 'pending') {
+                $asset->use_text .= '('.$asset->assetstatus->getStatuslabelType().')';
             }
 
             $asset->use_image = ($asset->getImageUrl()) ? $asset->getImageUrl() : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($assets);
-
     }
 
 
@@ -424,13 +468,12 @@ class AssetsController extends Controller
      * Accepts a POST request to create a new asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param Request $request
+     * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
-
         $this->authorize('create', Asset::class);
 
         $asset = new Asset();
@@ -449,7 +492,7 @@ class AssetsController extends Controller
         $asset->depreciate              = '0';
         $asset->status_id               = $request->get('status_id', 0);
         $asset->warranty_months         = $request->get('warranty_months', null);
-        $asset->purchase_cost           = Helper::ParseFloat($request->get('purchase_cost'));
+        $asset->purchase_cost           = Helper::ParseCurrency($request->get('purchase_cost')); // this is the API's store method, so I don't know that I want to do this? Confusing. FIXME (or not?!)
         $asset->purchase_date           = $request->get('purchase_date', null);
         $asset->assigned_to             = $request->get('assigned_to', null);
         $asset->supplier_id             = $request->get('supplier_id', 0);
@@ -457,21 +500,15 @@ class AssetsController extends Controller
         $asset->rtd_location_id         = $request->get('rtd_location_id', null);
         $asset->location_id             = $request->get('rtd_location_id', null);
 
-        if ($request->has('image_source') && $request->input('image_source') != "") {
-            $saved_image_path = Helper::processUploadedImage(
-                $request->input('image_source'), 'uploads/assets/'
-            );
+        /**
+        * this is here just legacy reasons. Api\AssetController
+        * used image_source  once to allow encoded image uploads.
+        */
+        if ($request->has('image_source')) {
+            $request->offsetSet('image', $request->offsetGet('image_source'));
+        }     
 
-            if (!$saved_image_path) {
-                return response()->json(Helper::formatStandardApiResponse(
-                        'error',
-                        null,
-                        trans('admin/hardware/message.create.error')
-                    ), 200);
-            }
-
-            $asset->image = $saved_image_path;
-        }
+        $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
         // Validation for these fields is handled through the AssetRequest form request
@@ -491,13 +528,12 @@ class AssetsController extends Controller
 
                 // if the field is set to encrypted, make sure we encrypt the value
                 if ($field->field_encrypted == '1') {
-
                     \Log::debug('This model field is encrypted in this fieldset.');
 
                     if (Gate::allows('admin')) {
 
                         // If input value is null, use custom field's default value
-                        if (($field_val == null) && ($request->has('model_id')!='')){
+                        if (($field_val == null) && ($request->has('model_id') != '')) {
                             $field_val = \Crypt::encrypt($field->defaultValue($request->get('model_id')));
                         } else {
                             $field_val = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
@@ -507,12 +543,10 @@ class AssetsController extends Controller
 
 
                 $asset->{$field->convertUnicodeDbSlug()} = $field_val;
-
             }
         }
 
         if ($asset->save()) {
-
             if ($request->get('assigned_user')) {
                 $target = User::find(request('assigned_user'));
             } elseif ($request->get('assigned_asset')) {
@@ -539,11 +573,11 @@ class AssetsController extends Controller
      * Accepts a POST request to update an asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param Request $request
+     * @param \App\Http\Requests\ImageUploadRequest $request
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Asset::class);
 
@@ -557,37 +591,24 @@ class AssetsController extends Controller
             ($request->filled('company_id')) ?
                 $asset->company_id = Company::getIdForCurrentUser($request->get('company_id')) : '';
 
-($request->filled('rtd_location_id')) ?
-                $asset->location_id = $request->get('rtd_location_id') : null;
-
-
-            if ($request->filled('image_source')) {
-                if ($request->input('image_source') == "") {
             ($request->filled('rtd_location_id')) ?
                 $asset->location_id = $request->get('rtd_location_id') : null;
-                    $asset->image = null;
-                } else {
-                    $saved_image_path = Helper::processUploadedImage(
-                        $request->input('image_source'), 'uploads/assets/'
-                    );
 
-                    if (!$saved_image_path) {
-                        return response()->json(Helper::formatStandardApiResponse(
-                            'error',
-                            null,
-                            trans('admin/hardware/message.update.error')
-                        ), 200);
-                    }
+            /**
+            * this is here just legacy reasons. Api\AssetController
+            * used image_source  once to allow encoded image uploads.
+            */
+            if ($request->has('image_source')) {
+                $request->offsetSet('image', $request->offsetGet('image_source'));
+            }     
 
-                    $asset->image = $saved_image_path;
-                }
-            }
-
+            $asset = $request->handleImages($asset); 
+            
             // Update custom fields
             if (($model = AssetModel::find($asset->model_id)) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {
                     if ($request->has($field->convertUnicodeDbSlug())) {
-                        if ($field->field_encrypted=='1') {
+                        if ($field->field_encrypted == '1') {
                             if (Gate::allows('admin')) {
                                 $asset->{$field->convertUnicodeDbSlug()} = \Crypt::encrypt($request->input($field->convertUnicodeDbSlug()));
                             }
@@ -600,15 +621,13 @@ class AssetsController extends Controller
 
 
             if ($asset->save()) {
-
                 if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
                         $location = $target->location_id;
                 } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
                     $location = $target->location_id;
 
-                    Asset::where('assigned_type', '\\App\\Models\\Asset')->where('assigned_to', $id)
+                    Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $id)
                         ->update(['location_id' => $target->location_id]);
-
                 } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
                     $location = $target->id;
                 }
@@ -623,8 +642,10 @@ class AssetsController extends Controller
 
                 return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
             }
+
             return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
@@ -642,18 +663,48 @@ class AssetsController extends Controller
         $this->authorize('delete', Asset::class);
 
         if ($asset = Asset::find($id)) {
-
             $this->authorize('delete', $asset);
 
             DB::table('assets')
                 ->where('id', $asset->id)
-                ->update(array('assigned_to' => null));
+                ->update(['assigned_to' => null]);
 
             $asset->delete();
 
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.delete.success')));
         }
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+    }
+
+    /**
+     * Restore a soft-deleted asset.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v5.1.18]
+     * @return JsonResponse
+     */
+    public function restore($assetId = null)
+    {
+        // Get asset information
+        $asset = Asset::withTrashed()->find($assetId);
+        $this->authorize('delete', $asset);
+        if (isset($asset->id)) {
+            // Restore the asset
+            Asset::withTrashed()->where('id', $assetId)->restore();
+
+            $logaction = new Actionlog();
+            $logaction->item_type = Asset::class;
+            $logaction->item_id = $asset->id;
+            $logaction->created_at =  date("Y-m-d H:i:s");
+            $logaction->user_id = Auth::user()->id;
+            $logaction->logaction('restored');
+
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.restore.success')));
+        
+
+        }
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
@@ -672,7 +723,7 @@ class AssetsController extends Controller
         $this->authorize('checkout', Asset::class);
         $asset = Asset::findOrFail($asset_id);
 
-        if (!$asset->availableForCheckout()) {
+        if (! $asset->availableForCheckout()) {
             return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkout.not_available')));
         }
 
@@ -686,21 +737,21 @@ class AssetsController extends Controller
 
 
         // This item is checked out to a location
-        if (request('checkout_to_type')=='location') {
+        if (request('checkout_to_type') == 'location') {
             $target = Location::find(request('assigned_location'));
             $asset->location_id = ($target) ? $target->id : '';
             $error_payload['target_id'] = $request->input('assigned_location');
             $error_payload['target_type'] = 'location';
 
-        } elseif (request('checkout_to_type')=='asset') {
-            $target = Asset::where('id','!=',$asset_id)->find(request('assigned_asset'));
+        } elseif (request('checkout_to_type') == 'asset') {
+            $target = Asset::where('id', '!=', $asset_id)->find(request('assigned_asset'));
             $asset->location_id = $target->rtd_location_id;
             // Override with the asset's location_id if it has one
             $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_asset');
             $error_payload['target_type'] = 'asset';
 
-        } elseif (request('checkout_to_type')=='user') {
+        } elseif (request('checkout_to_type') == 'user') {
             // Fetch the target and set the asset's new location_id
             $target = User::find(request('assigned_user'));
             $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
@@ -710,13 +761,13 @@ class AssetsController extends Controller
 
 
 
-        if (!isset($target)) {
+        if (! isset($target)) {
             return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'Checkout target for asset '.e($asset->asset_tag).' is invalid - '.$error_payload['target_type'].' does not exist.'));
         }
 
 
 
-        $checkout_at = request('checkout_at', date("Y-m-d H:i:s"));
+        $checkout_at = request('checkout_at', date('Y-m-d H:i:s'));
         $expected_checkin = request('expected_checkin', null);
         $note = request('note', null);
         $asset_name = request('name', null);
@@ -770,18 +821,19 @@ class AssetsController extends Controller
             $asset->name = $request->input('name');
         }
         
-        $asset->location_id =  $asset->rtd_location_id;
+        $asset->location_id = $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
-            $asset->location_id =  $request->input('location_id');
+            $asset->location_id = $request->input('location_id');
         }
 
         if ($request->has('status_id')) {
-            $asset->status_id =  $request->input('status_id');
+            $asset->status_id = $request->input('status_id');
         }
 
         if ($asset->save()) {
-            $asset->logCheckin($target, e($request->input('note')));
+            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note')));
+
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
 
@@ -797,15 +849,16 @@ class AssetsController extends Controller
      * @since [v4.0]
      * @return JsonResponse
      */
-    public function audit(Request $request) {
+    public function audit(Request $request)
+    {
 
 
         $this->authorize('audit', Asset::class);
-        $rules = array(
+        $rules = [
             'asset_tag' => 'required',
             'location_id' => 'exists:locations,id|nullable|numeric',
-            'next_audit_date' => 'date|nullable'
-        );
+            'next_audit_date' => 'date|nullable',
+        ];
 
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -815,7 +868,7 @@ class AssetsController extends Controller
         $settings = Setting::getSettings();
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
 
-        $asset = Asset::where('asset_tag','=', $request->input('asset_tag'))->first();
+        $asset = Asset::where('asset_tag', '=', $request->input('asset_tag'))->first();
 
 
         if ($asset) {
@@ -829,18 +882,19 @@ class AssetsController extends Controller
 
             // Check to see if they checked the box to update the physical location,
             // not just note it in the audit notes
-            if ($request->input('update_location')=='1') {
+            if ($request->input('update_location') == '1') {
                 $asset->location_id = $request->input('location_id');
             }
 
             $asset->last_audit_date = date('Y-m-d H:i:s');
 
             if ($asset->save()) {
-                $log = $asset->logAudit(request('note'),request('location_id'));
+                $log = $asset->logAudit(request('note'), request('location_id'));
+
                 return response()->json(Helper::formatStandardApiResponse('success', [
                     'asset_tag'=> e($asset->asset_tag),
                     'note'=> e($request->input('note')),
-                    'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date)
+                    'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date),
                 ], trans('admin/hardware/message.audit.success')));
             }
         }
@@ -866,9 +920,9 @@ class AssetsController extends Controller
     {
         $this->authorize('viewRequestable', Asset::class);
 
-        $assets = Company::scopeCompanyables(Asset::select('assets.*'),"company_id","assets")
+        $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset','supplier')->where('assets.requestable', '=', '1');
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')->where('assets.requestable', '=', '1');
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
@@ -893,9 +947,9 @@ class AssetsController extends Controller
                 break;
         }
 
-
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
+
         return (new AssetsTransformer)->transformRequestedAssets($assets, $total);
     }
 }

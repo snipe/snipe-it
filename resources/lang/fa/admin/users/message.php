@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'دارایی با موفقیت پذیرفته شد.',
     'declined'                  => 'شما با موفقیت این دارایی را به کاهش دادید.',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'LDAPبرای این نصب و راه اندازی پیکربندی نشده است.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'کاربر با موفقیت ایجاد شد.',
         'update'    => 'کاربر با موفقیت به روز شد.',
         'update_bulk'    => 'کاربران با موفقیت به روز شد!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'تعلیق کاربر با موفقیت متوقف شد.',
         'restored'  => 'کابر با موفقیت بازگردانی شد.',
         'import'    => 'کاربران با موفقیت وارد شدند.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'اشکال در ایجاد کاربر.لطفا دوباره تلاش کنید.',
         'update' => 'اشکال در به روزرسانی کاربر.لطفا دوباره تلاش کنید.',
         'delete' => 'اشکال در حذف کاربر.لطفا دوباره تلاش کنید.',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'جستجو در سرور LDPA انجام نشد.لطفا پیکربندی LDPA سرور را در فایل LDPA config بررسی کنید.<br>اشکال از سرور LDPA:',
         'ldap_could_not_get_entries' => 'مجوز از سرور LDPA گرفته نشد.لطفا پیکربندی LDPA سرور را در فایل LDPA config بررسی کنید.<br>اشکال از سرور LDPA:',
         'password_ldap' => 'رمز عبور این حساب توسط LDAP / Active Directory مدیریت می شود. برای تغییر رمز عبور خود، لطفا با بخش IT خود تماس بگیرید.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'فایل حذف نشد.لطفا دوباره تلاش کنید.',
         'success' => 'نقش با موفقیت حذف شد.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'فایل(ها) بارگذاری نشدند.لطفا دوباره تلاش کنید.',
         'success' => 'فایل(ها) با موفقیت بارگذاری شدند.',
         'nofiles' => 'شما هیچ فایلی برای بارگذاری انتخاب نکرده اید.',
         'invalidfiles' => 'یک یا چندی از فایل های شما با پسوند غیرمجاز هستند.پسوند های مجاز شامل:png, gif, jpg, doc, docx, pdf و text می باشند.',
-    ),
+    ],
 
-);
+];

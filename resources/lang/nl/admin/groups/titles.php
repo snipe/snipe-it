@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Over groepen',
     'about_groups'                  => 'Groepen die gebruikt worden om gebruikerspermissies te generaliseren.',
     'group_management' 	 	=> 'Groepsmanagement',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Toestaan',
     'deny' 	 				=> 'Weigeren',
 
-);
+];

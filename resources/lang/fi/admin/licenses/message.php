@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Lisenssiä ei löydy.',
     'user_does_not_exist' => 'Käyttäjää ei löydy.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'Sinun on valittava laite tai käyttäjä, mutta ei molempia.',
     'not_found' => 'Lisenssiä ei löydy',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Lisenssiä ei luotu, yritä uudelleen.',
-        'success' => 'Lisenssi luotiin onnistuneesti.'
-    ),
+        'success' => 'Lisenssi luotiin onnistuneesti.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Tiedostoa ei poistettu. Ole hyvä ja yritä uudelleen.',
         'success' => 'Tiedosto poistettiin onnistuneesti.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Tiedostoja ei lähetetty. Ole hyvä ja yritä uudelleen.',
         'success' => 'Tiedostot lähetettiin onnistuneesti.',
         'nofiles' => 'Et ole valinnut lähetettäviä tiedostoja tai lataamasi tiedosto on liian suuri',
         'invalidfiles' => 'Yksi tai useampi tiedosto on liian suuri tai tiedostotyyppiä jota ei sallita. Sallitut tiedostotyypit ovat png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml ja lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Lisenssiä ei päivitetty, yritä uudelleen',
-        'success' => 'Lisenssi päivitettiin onnistuneesti.'
-    ),
+        'success' => 'Lisenssi päivitettiin onnistuneesti.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Oletko varma että haluat poistaa tämän lisenssin?',
         'error'   => 'Lisenssin poistamisessa tapahtui virhe. Yritä uudelleen.',
-        'success' => 'Lisenssi poistettiin onnistuneesti.'
-    ),
+        'success' => 'Lisenssi poistettiin onnistuneesti.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Lisenssin luovutuksessa tapahtui virhe. Yritä uudelleen.',
-        'success' => 'Lisenssi luovutettiin onnistuneesti'
-    ),
+        'success' => 'Lisenssi luovutettiin onnistuneesti',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Lisenssin palautuksessa tapahtui virhe. Yritä uudelleen.',
-        'success' => 'Lisenssi palautettiin onnistuneesti'
-    ),
+        'success' => 'Lisenssi palautettiin onnistuneesti',
+    ],
 
-);
+];

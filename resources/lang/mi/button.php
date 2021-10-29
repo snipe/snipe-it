@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Nga mahi',
     'add'    	                => 'Tāpiri Hou',
     'cancel'                    => 'Whakakore',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Tono',
     'submit'  	                => 'Tukuna',
     'upload'                    => 'Tukuake',
-	'select_file'				=> 'Tīpako Kōnae ...',
+    'select_file'				=> 'Tīpako Kōnae ...',
     'select_files'				=> 'Select Files...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+];

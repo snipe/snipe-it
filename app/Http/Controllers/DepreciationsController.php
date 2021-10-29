@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Depreciation;
@@ -31,7 +32,6 @@ class DepreciationsController extends Controller
         return view('depreciations/index');
     }
 
-
     /**
      * Returns a view that displays a form to create a new depreciation.
      *
@@ -48,7 +48,6 @@ class DepreciationsController extends Controller
         // Show the page
         return view('depreciations/edit')->with('item', new Depreciation);
     }
-
 
     /**
      * Validates and stores the new depreciation data.
@@ -67,15 +66,17 @@ class DepreciationsController extends Controller
         // create a new instance
         $depreciation = new Depreciation();
         // Depreciation data
-        $depreciation->name             = $request->input('name');
-        $depreciation->months           = $request->input('months');
-        $depreciation->user_id          = Auth::id();
+        $depreciation->name = $request->input('name');
+        $depreciation->months = $request->input('months');
+        $depreciation->user_id = Auth::id();
+        $depreciation->depreciation_min = $request->input('depreciation_min');
 
         // Was the asset created?
         if ($depreciation->save()) {
             // Redirect to the new depreciation  page
             return redirect()->route('depreciations.index')->with('success', trans('admin/depreciations/message.create.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
     }
 
@@ -102,7 +103,6 @@ class DepreciationsController extends Controller
         return view('depreciations/edit', compact('item'));
     }
 
-
     /**
      * Validates and stores the updated depreciation data.
      *
@@ -125,14 +125,16 @@ class DepreciationsController extends Controller
         $this->authorize('update', $depreciation);
 
         // Depreciation data
-        $depreciation->name      = $request->input('name');
-        $depreciation->months    = $request->input('months');
+        $depreciation->name             = $request->input('name');
+        $depreciation->months           = $request->input('months');
+        $depreciation->depreciation_min = $request->input('depreciation_min');
 
         // Was the asset created?
         if ($depreciation->save()) {
             // Redirect to the depreciation page
-            return redirect()->route("depreciations.index")->with('success', trans('admin/depreciations/message.update.success'));
+            return redirect()->route('depreciations.index')->with('success', trans('admin/depreciations/message.update.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
     }
 
@@ -143,7 +145,7 @@ class DepreciationsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net]
      * @since [v1.0]
-     * @param integer $depreciationId
+     * @param int $depreciationId
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -187,6 +189,4 @@ class DepreciationsController extends Controller
 
         return view('depreciations/view', compact('depreciation'));
     }
-
-
 }

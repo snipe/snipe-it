@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Пользователь отменил запрос элемента на веб-сайте',
     'a_user_requested' => 'Пользователь запросил элемент на веб-сайте',
     'accessory_name' => 'Аксессуар:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Актив:',
     'asset_name' => 'Имя актива:',
     'asset_requested' => 'Актив запрошен',
-    'asset_tag' => 'Инвентарный номер актива:',
+    'asset_tag' => 'Тег актива',
     'assigned_to' => 'Выдано',
     'best_regards' => 'С наилучшими пожеланиями,',
     'canceled' => 'Отменен:',
@@ -18,12 +18,12 @@ return array(
     'click_to_confirm' => 'Пожалуйста, перейдите по ссылке, чтобы подтвердить ваш :web аккаунт:',
     'click_on_the_link_accessory' => 'Пожалуйста, перейдите по ссылке внизу, чтобы подтвердить получение аксессуара.',
     'click_on_the_link_asset' => 'Пожалуйста, перейдите по ссылке внизу, чтобы подтвердить получение актива.',
-    'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
-    'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
-    'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
-    'Confirm_license_delivery' => 'License delivery confirmation',
-    'Confirm_asset_delivery' => 'Asset delivery confirmation',
-    'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
+    'Confirm_Asset_Checkin' => 'Подтверждение возврата активов',
+    'Confirm_Accessory_Checkin' => 'Подтвердить возврат аксессуара',
+    'Confirm_accessory_delivery' => 'Подтвердить доставку аксессуара',
+    'Confirm_license_delivery' => 'Подтвердите получение лицензии',
+    'Confirm_asset_delivery' => 'Подтвердить доставку актива',
+    'Confirm_consumable_delivery' => 'Подтвердить доставку расходников',
     'current_QTY' => 'Текущее количество',
     'Days' => 'Дни',
     'days' => 'Дни',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'Посмотреть активы'
-);
+    'your_assets' => 'Посмотреть активы',
+];

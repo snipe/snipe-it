@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Tentang Lokasi',
     'about_locations'           => 'Lokasi digunakan untuk melacak informasi lokasi bagi pengguna, aset, dan item lainnya',
     'assets_rtd'                => 'Aset', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'Negara',
     'create'                    => 'Buat Lokasi',
     'update'                    => 'Perbarui lokasi',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'Cetak yang Ditetapkan',
+    'print_all_assigned'        => 'Cetak Semua yang Ditetapkan',
     'name'                      => 'Nama lokasi',
     'address'                   => 'Alamat',
     'zip'                       => 'Kode pos',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => 'Induk',
     'currency'                  => 'Mata Uang Lokasi',
     'ldap_ou'                   => 'LDAP Cari OU',
-    );
+    ];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_manufacturers_title'    => 'Amdan Gwneuthyrwyr',
     'about_manufacturers_text'  => 'Gwneuthurwyr yw\'r cwmnïau sy\'n creu eich asedau. Gallwch ddod o hyd i wybodaeth bwysig amdanynt yma, a fydd yn cael ei harddangos ar eich tudalennau manylion asedau.',
     'asset_manufacturers'	=> 'Gwneuthyrwyr Asedau',
@@ -13,4 +13,4 @@ return array(
     'update'				=> 'Diweddaru Gwneuthyrwr',
     'url'   				=> 'URL',
 
-);
+];

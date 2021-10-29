@@ -1,23 +1,23 @@
 <?php
 
 return array(
-    'about_locations_title'     => 'About Locations',
-    'about_locations'           => 'Locations are used to track location information for users, assets, and other items',
-    'assets_rtd'                => 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'         => 'Assets Assigned',
+    'about_locations_title'     => 'Um staðsetningar',
+    'about_locations'           => 'Staðsetningar eru notaðar til að skrá upplýsingar um staðsetningar notenda, eigna og annarra hluta',
+    'assets_rtd'                => 'Eignir', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'         => 'Ráðstafaðar eignir',
     'id'                        => 'ID',
-    'city'                      => 'City',
-    'state'                     => 'State',
-    'country'                   => 'Country',
-    'create'                    => 'Create Location',
-    'update'                    => 'Update Location',
+    'city'                      => 'Borg',
+    'state'                     => 'Fylki',
+    'country'                   => 'Land',
+    'create'                    => 'Skrá staðsetningu',
+    'update'                    => 'Uppfæra staðsetningu',
     'print_assigned'            => 'Print Assigned',
     'print_all_assigned'        => 'Print All Assigned',
-    'name'                      => 'Location Name',
-    'address'                   => 'Address',
-    'zip'                       => 'Postal Code',
-    'locations'                 => 'Locations',
+    'name'                      => 'Heiti staðsetningar',
+    'address'                   => 'Heimilisfang',
+    'zip'                       => 'Póstnúmer',
+    'locations'                 => 'Staðsetningar',
     'parent'                    => 'Parent',
-    'currency'                  => 'Location Currency',
+    'currency'                  => 'Gjaldmiðill staðsetningar',
     'ldap_ou'                   => 'LDAP Search OU',
     );

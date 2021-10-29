@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Bekreft sletting av flere enheter',
+return [
+    'bulk_delete'		=> 'Bekreft sletting av flere enheter',
   'bulk_delete_help'	=> 'Se gjennom listen over enheter som er valgt for sletting. Etter sletting er det mulig å gjenopprette enheter, men nåværende koblinger til brukere vil ikke lenger finnes.',
   'bulk_delete_warn'	=> 'Du er i ferd med å slette :asset_count enheter.',
-	'bulk_update'		=> 'Masseoppdater eiendeler',
-	'bulk_update_help'	=> 'Dette skjemaet lar deg oppdatere flere eiendeler på en gang. Fyll kun ut feltene du ønsker å endre. Tomme felter forblir uendret. ',
-	'bulk_update_warn'	=> 'Du er på vei til å endre egenskapene til :asset_count eiendeler.',
+    'bulk_update'		=> 'Masseoppdater eiendeler',
+    'bulk_update_help'	=> 'Dette skjemaet lar deg oppdatere flere eiendeler på en gang. Fyll kun ut feltene du ønsker å endre. Tomme felter forblir uendret. ',
+    'bulk_update_warn'	=> 'Du er på vei til å endre egenskapene til :asset_count eiendeler.',
     'checkedout_to'		=> 'Utsjekket til',
     'checkout_date'		=> 'Utsjekkdato',
     'checkin_date'		=> 'Innsjekkdato',
@@ -38,7 +38,6 @@ return array(
     'tag'				=> 'Eiendelsmerke',
     'update'			=> 'Oppdater eiendel',
     'warranty'			=> 'Garanti',
-		'warranty_expires'		=> 'Garantien utløper',
+        'warranty_expires'		=> 'Garantien utløper',
     'years'				=> 'år',
-)
-;
+];

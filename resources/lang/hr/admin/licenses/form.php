@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset'             => 'Imovina',
     'checkin'           => 'Checkin',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licencirano na e-poštu',
     'to_name'           => 'Licencirano za ime',
     'update'            => 'Ažuriraj licencu',
-    'checkout_help'     => 'Morate provjeriti licencu na hardversku imovinu ili osobu. Možete odabrati oboje, ali vlasnik imovine mora odgovarati osobi kojoj provjeravate imovinu.'
-);
+    'checkout_help'     => 'Morate provjeriti licencu na hardversku imovinu ili osobu. Možete odabrati oboje, ali vlasnik imovine mora odgovarati osobi kojoj provjeravate imovinu.',
+];

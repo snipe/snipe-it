@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Darbības',
     'add'    	                => 'Pievieno jaunu',
     'cancel'                    => 'Atcelt',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Pieprasījums',
     'submit'  	                => 'Iesniegt',
     'upload'                    => 'Augšupielādēt',
-	'select_file'				=> 'Atlasiet failu ...',
+    'select_file'				=> 'Atlasiet failu ...',
     'select_files'				=> 'Atlasiet datnes...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+];

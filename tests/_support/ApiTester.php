@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -15,16 +14,15 @@
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
+ */
 class ApiTester extends \Codeception\Actor
 {
     use _generated\ApiTesterActions;
 
-   /**
-    * Define custom actions here
-    */
-
-    public function getToken(\App\Models\User $user)
+    /**
+     * Define custom actions here
+     */
+    public function getToken(App\Models\User $user)
     {
         $client_repository = new \Laravel\Passport\ClientRepository();
         $client = $client_repository->createPersonalAccessClient($user->id, 'Codeception API Test Client',
@@ -54,6 +52,7 @@ class ApiTester extends \Codeception\Actor
     {
         unset($array['created_at']);
         unset($array['updated_at']);
+
         return $array;
     }
 }

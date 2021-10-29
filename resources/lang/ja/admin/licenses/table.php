@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> '割り当て先',
     'checkout'   		=> 'In/Out',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'シリアル',
     'title'      		=> 'ライセンス',
 
-);
+];

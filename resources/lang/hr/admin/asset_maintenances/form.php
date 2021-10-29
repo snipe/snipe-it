@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'dana',
         'notes'                  => 'Bilješke',
         'update'                 => 'Ažuriraj',
-        'create'                 => 'Stvoriti'
+        'create'                 => 'Stvoriti',
     ];

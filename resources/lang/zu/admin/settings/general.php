@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'I-Active Directory',
     'ad_domain'				    => 'Isizinda se-Active Directory',
     'ad_domain_help'			=> 'Lokhu ngezinye izikhathi kufana nesizinda sakho se-imeyili, kodwa hhayi njalo.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'Lena iseva ye-Active Directory',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Ukuphelelwa yisikhathi kwe-Alerts Threshold (ezinsukwini)',
     'alert_inv_threshold'		=> 'Inventory Alert Threshold',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Ama-ID wefa',
     'audit_interval'            => 'I-Interval Audit',
     'audit_interval_help'       => 'Uma kudingeka ukuba uhlole amafa akho njalo ngokomzimba, faka isikhashana ezinyangeni.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Faka i-Code-Two Factor',
     'two_factor_config_complete'	=> 'Thumela ikhodi',
     'two_factor_enabled_edit_not_allowed' => 'Umlawuli wakho akakakuvumeli ukuhlela lesi silungiselelo.',
-    'two_factor_enrollment_text'	=> "Ukuqinisekiswa okubili kokubili kuyadingeka, noma ngabe idivayisi yakho ayibhalisile okwamanje. Vula uhlelo lwakho lokusebenza lwe-Google Authenticator bese uskena ikhodi ye-QR ngezansi ukuze ubhalise idivayisi yakho. Uma usubhalisile idivayisi yakho, faka ikhodi ngezansi",
+    'two_factor_enrollment_text'	=> 'Ukuqinisekiswa okubili kokubili kuyadingeka, noma ngabe idivayisi yakho ayibhalisile okwamanje. Vula uhlelo lwakho lokusebenza lwe-Google Authenticator bese uskena ikhodi ye-QR ngezansi ukuze ubhalise idivayisi yakho. Uma usubhalisile idivayisi yakho, faka ikhodi ngezansi',
     'require_accept_signature'      => 'Kudinga isignesha',
     'require_accept_signature_help_text'      => 'Ukunika amandla lesi sici kuzodinga ukuthi abasebenzisi bakwazi ukusayina ngokomzimba ngokwamukela ifa.',
     'left'        => 'kwesokunxele',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Ubude bamathegi wefa, kufaka phakathi i-zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

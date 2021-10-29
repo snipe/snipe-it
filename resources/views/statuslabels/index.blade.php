@@ -53,6 +53,7 @@
                 <th data-sortable="true" data-field="color" data-formatter="colorSqFormatter">{{ trans('admin/statuslabels/table.color') }}</th>
                 <th class="text-center" data-sortable="true" data-field="show_in_nav" data-formatter="trueFalseFormatter">{{ trans('admin/statuslabels/table.show_in_nav') }}</th>
                   <th class="text-center" data-sortable="true" data-field="default_label" data-formatter="trueFalseFormatter">{{ trans('admin/statuslabels/table.default_label') }}</th>
+                  <th data-sortable="true" data-field="notes" data-visible="false">{{ trans('general.notes') }}</th>
                 <th data-formatter="statuslabelsActionsFormatter" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
@@ -67,24 +68,24 @@
 
       <div class="box box-success">
           <div class="box-body">
-          <p><i class="fa fa-circle text-green"></i> <strong>{{ trans('admin/statuslabels/table.deployable') }}</strong>: {!!  trans('admin/statuslabels/message.help.deployable')  !!}</p>
+          <p><i class="fas fa-circle text-green"></i> <strong>{{ trans('admin/statuslabels/table.deployable') }}</strong>: {!!  trans('admin/statuslabels/message.help.deployable')  !!}</p>
           </div>
       </div>
 
       <div class="box box-warning">
           <div class="box-body">
-              <p><i class="fa fa-circle text-orange"></i> <strong>Pending</strong>: {{ trans('admin/statuslabels/message.help.pending') }}</p>
+              <p><i class="fas fa-circle text-orange"></i> <strong>Pending</strong>: {{ trans('admin/statuslabels/message.help.pending') }}</p>
           </div>
       </div>
       <div class="box box-danger">
           <div class="box-body">
-            <p><i class="fa fa-times text-red"></i> <strong>Undeployable</strong>: {{ trans('admin/statuslabels/message.help.undeployable') }}</p>
+            <p><i class="fas fa-times text-red"></i> <strong>Undeployable</strong>: {{ trans('admin/statuslabels/message.help.undeployable') }}</p>
           </div>
       </div>
 
       <div class="box box-danger">
           <div class="box-body">
-              <p><i class="fa fa-times text-red"></i> <strong>Archived</strong>: {{ trans('admin/statuslabels/message.help.archived') }}</p>
+              <p><i class="fas fa-times text-red"></i> <strong>Archived</strong>: {{ trans('admin/statuslabels/message.help.archived') }}</p>
           </div>
       </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'A felhasználó törölte az elemkérést a webhelyen',
     'a_user_requested' => 'A felhasználó egy elemet kért a webhelyen',
     'accessory_name' => 'Tartozéknév:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Eszköz:',
     'asset_name' => 'Eszköz neve:',
     'asset_requested' => 'Asset requested',
-    'asset_tag' => 'Eszköz azonosító:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Hozzárendelve',
     'best_regards' => 'Üdvözlettel,',
     'canceled' => 'Megszakítva:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

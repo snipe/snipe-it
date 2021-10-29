@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Models\Asset;
@@ -7,17 +8,17 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ComponentsAssetsTransformer
 {
-    public function transformAssets (Collection $assets, $total)
+    public function transformAssets(Collection $assets, $total)
     {
-        $array = array();
+        $array = [];
         foreach ($assets as $asset) {
             $array[] = self::transformAsset($asset);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-
-    public function transformAsset (Asset $asset)
+    public function transformAsset(Asset $asset)
     {
         $array = [
             'id' => $asset->id,
@@ -34,8 +35,6 @@ class ComponentsAssetsTransformer
             'delete' => Gate::allows('delete', Asset::class),
         ];
 
-
-
         $array += $permissions_array;
 
         if ($asset->model->fieldset) {
@@ -43,12 +42,13 @@ class ComponentsAssetsTransformer
                 $fields_array = [$field->name => $asset->{$field->convertUnicodeDbSlug()}];
                 $array += $fields_array;
             }
-       }
+        }
 
         return $array;
     }
 
-    public function transformAssetsDatatable ($assets) {
+    public function transformAssetsDatatable($assets)
+    {
         return (new DatatablesTransformer)->transformDatatables($assets);
     }
 }

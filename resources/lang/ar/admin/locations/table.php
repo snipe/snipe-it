@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'حول المواقع',
     'about_locations'           => 'يتم استخدام المواقع لتتبع معلومات الموقع للمستخدمين والأصول والعناصر الأخرى',
     'assets_rtd'                => 'الأصول', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'الدولة',
     'create'                    => 'إنشاء موقع',
     'update'                    => 'تحديث الموقع',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'طباعة كل الممتلكات',
+    'print_all_assigned'        => 'طباعة كل المعين',
     'name'                      => 'إسم الموقع',
     'address'                   => 'العنوان',
     'zip'                       => 'الرمز البريدي',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => 'الأبوين',
     'currency'                  => 'عملة الموقع',
     'ldap_ou'                   => 'لداب البحث أو',
-    );
+    ];

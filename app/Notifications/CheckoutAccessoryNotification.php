@@ -19,7 +19,6 @@ class CheckoutAccessoryNotification extends Notification
      */
     public function __construct(Accessory $accessory, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
-
         $this->item = $accessory;
         $this->admin = $checkedOutBy;
         $this->note = $note;
@@ -27,7 +26,6 @@ class CheckoutAccessoryNotification extends Notification
         $this->acceptance = $acceptance;
 
         $this->settings = Setting::getSettings();
-
     }
 
     /**
@@ -37,13 +35,11 @@ class CheckoutAccessoryNotification extends Notification
      */
     public function via()
     {
-
         $notifyBy = [];
 
-        if (Setting::getSettings()->slack_endpoint!='') {
+        if (Setting::getSettings()->slack_endpoint != '') {
             $notifyBy[] = 'slack';
         }
-
 
         /**
          * Only send notifications to users that have email addresses
@@ -71,7 +67,6 @@ class CheckoutAccessoryNotification extends Notification
             if ($this->item->checkin_email()) {
                 $notifyBy[1] = 'mail';
             }
-
         }
 
         return $notifyBy;
@@ -83,7 +78,7 @@ class CheckoutAccessoryNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot' ;
+        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
 
         $fields = [
             'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
@@ -99,6 +94,7 @@ class CheckoutAccessoryNotification extends Notification
                     ->content($note);
             });
     }
+
     /**
      * Get the mail representation of the notification.
      *
@@ -107,7 +103,7 @@ class CheckoutAccessoryNotification extends Notification
     public function toMail()
     {
         \Log::debug($this->item->getImageUrl());
-        $eula =  $this->item->getEula();
+        $eula = $this->item->getEula();
         $req_accept = $this->item->requireAcceptance();
 
         $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
@@ -123,6 +119,5 @@ class CheckoutAccessoryNotification extends Notification
                 'accept_url'    => $accept_url,
             ])
             ->subject(trans('mail.Confirm_accessory_delivery'));
-
     }
 }

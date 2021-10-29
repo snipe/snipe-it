@@ -2,7 +2,7 @@
 
 
 return array(
-    'activated_help_text' => 'This user can login',
+    'activated_help_text' => 'Acest utilizator se poate conecta',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Activul desemnat catre :name',
     'bulk_update_warn'	=> 'Sunteți pe punctul de a edita proprietățile utilizatorilor: user_count. Rețineți că nu puteți modifica propriile atribute ale utilizatorilor utilizând acest formular și trebuie să efectuați modificări individuale ale propriului dvs. utilizator.',

@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'Atributul: nu a reușit să se încarce.',
     'url'                  => 'Formatul :attribute nu este valid.',
     "unique_undeleted"     => "The :attribute must be unique.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

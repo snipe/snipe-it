@@ -141,6 +141,9 @@
                         {id: 'username', text: 'Username' },
                         {id: 'department', text: 'Department' },
                     ],
+                    accessories:[
+                        {id: 'model_number', text: 'Model Number'},
+                    ],
                     assets: [
                         {id: 'asset_tag', text: 'Asset Tag' },
                         {id: 'asset_model', text: 'Model Name' },
@@ -208,7 +211,10 @@
                             .concat(this.columnOptions.assets)
                             .concat(this.columnOptions.customFields)
                             .sort(sorter);
-
+                    case 'accessory':
+                        return this.columnOptions.general
+                            .concat(this.columnOptions.accessories)
+                            .sort(sorter);
                     case 'consumable':
                         return this.columnOptions.general
                             .concat(this.columnOptions.consumables)
@@ -300,7 +306,7 @@
             }
         },
         components: {
-            select2: require('../select2.vue')
+            select2: require('../select2.vue').default
         }
     }
 </script>

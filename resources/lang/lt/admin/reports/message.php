@@ -1,5 +1,5 @@
 <?php
 
-return array(
-    'error'   => 'Jūs turite pasirinkti bent vieną parametrą.'
-);
+return [
+    'error'   => 'Jūs turite pasirinkti bent vieną parametrą.',
+];

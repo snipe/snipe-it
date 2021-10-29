@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Luovuta kulutustarvike käyttäjälle',
     'consumable_name'                   => 'Kulutustarvikkeen nimi',
     'create'                            => 'Luo kulutustarvike',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Jäljellä',
     'total' 			                => 'Yhteensä',
     'update'                            => 'Päivitä kulutustarvike',
-);
+];
