@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    'password' => 'Passwords must be six characters and match the confirmation.',
 
-    "user"     => "Username or email address is incorrect",
+    'user'     => 'Username or email address is incorrect',
 
-    "token"    => "This password reset token is invalid.",
+    'token'    => 'This password reset token is invalid.',
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    'sent' => 'If a matching email address was found, a password reminder has been sent!',
 
-);
+];

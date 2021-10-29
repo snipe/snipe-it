@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'Uus mudel',
     'created_at' 			=> 'Loodud',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'Uuenda mudelit',
     'clone'				=> 'Klooni mudel',
     'edit'				=> 'Muuda mudelit',
-);
+];

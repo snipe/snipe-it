@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> '资产标签',
     'asset_model'       => '型号',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> '资产',
     'image'		=> '设备图片',
     'days_without_acceptance' => '过期天数',
-    'monthly_depreciation' => '每月折旧率'
+    'monthly_depreciation' => '每月折旧率',
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'نام اجزا',
     'checkin'                             => 'کامپوننت قفل های دسترسی',
     'checkout'                             => 'کامپیوننت پرداخت',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'یاقیمانده',
     'total' 			                 => 'مجموع',
     'update'                            => 'بروزرسانی کامپیوننت',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'Om fördefinierade produktpaket',
     'about_kits_text'                   => 'Fördefinierade produktpaket låter dig snabbt checka ut en samling artiklar (tillgångar, licenser, etc) till en användare. Detta kan vara till hjälp när din registreringsprocess är konsekvent för många användare och alla användare får samma objekt.',
     'checkout'                          => 'Checka ut produktpaket ',
@@ -14,4 +14,4 @@ return array(
     'none_consumables'                  => 'Det finns inte tillräckligt antal tillgängliga av : consumable att checka ut. :qty krävs. ',
     'none_accessory'                    => 'Det finns inte tillräckligt antal tillgängliga av : accessory att checka ut. :qty krävs. ',
 
-);
+];

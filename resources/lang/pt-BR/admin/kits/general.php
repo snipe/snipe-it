@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'Sobre Kits predefinidos',
     'about_kits_text'                   => 'Kits predefinidos permitem que você verifique rapidamente uma coleção de itens (ativos, licenças, etc.) para um usuário. Isso pode ser útil quando o processo de integração é consistente em muitos usuários e todos os usuários recebem os mesmos itens.',
     'checkout'                          => 'Kit alocado para ',
@@ -14,4 +14,4 @@ return array(
     'none_consumables'                  => 'Não há quantidade de consumíveis suficientes para :model fazer atribuição. :qty são necessários. ',
     'none_accessory'                    => 'Não há unidades disponíveis de :accessory para check-out. :qty são necessários. ',
 
-);
+];

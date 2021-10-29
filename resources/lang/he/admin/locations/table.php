@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'אודות מיקומים',
     'about_locations'           => 'מיקומים משמשים למעקב אחר נתוני מיקום עבור משתמשים, נכסים ופריטים אחרים',
     'assets_rtd'                => 'נכסים', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'מדינה',
     'create'                    => 'צור מיקום',
     'update'                    => 'עדכן מיקום',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'להדפיס הקצאה',
+    'print_all_assigned'        => 'להדפיס את כל ההקצאות',
     'name'                      => 'שם מיקום',
     'address'                   => 'כתובת',
     'zip'                       => 'מיקוד',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => 'הוֹרֶה',
     'currency'                  => 'מטבע מיקום',
     'ldap_ou'                   => 'חיפוש OD של LDAP',
-    );
+    ];

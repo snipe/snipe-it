@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Licence neeksistē.',
     'user_does_not_exist' => 'Lietotājs neeksistē.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'Jums jāizvēlas aktīvs vai lietotājs, bet ne abi.',
     'not_found' => 'License not found',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Licence netika izveidota, lūdzu, mēģiniet vēlreiz.',
-        'success' => 'Licence tika veiksmīgi izveidota.'
-    ),
+        'success' => 'Licence tika veiksmīgi izveidota.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Fails nav izdzēsts. Lūdzu mēģiniet vēlreiz.',
         'success' => 'Fails veiksmīgi izdzēsts.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Faili nav augšupielādēti. Lūdzu mēģiniet vēlreiz.',
         'success' => 'Faili (-i) ir veiksmīgi augšupielādēti.',
         'nofiles' => 'Jūs neesat atlasījis augšupielādējamos failus, vai arī fails, kuru mēģināt augšupielādēt, ir pārāk liels',
         'invalidfiles' => 'Viens vai vairāki jūsu faili ir pārāk lieli vai nav atļauto faila tipu. Atļautie failu tipi ir png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml un lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Licence netika atjaunināta, lūdzu, mēģiniet vēlreiz',
-        'success' => 'Licence tika veiksmīgi atjaunināta.'
-    ),
+        'success' => 'Licence tika veiksmīgi atjaunināta.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Vai tiešām vēlaties dzēst šo licenci?',
         'error'   => 'Radās problēma, dzēšot licenci. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Licence tika veiksmīgi dzēsta.'
-    ),
+        'success' => 'Licence tika veiksmīgi dzēsta.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Pārbaudot licenci, radās problēma. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Licence tika veiksmīgi pārbaudīta'
-    ),
+        'success' => 'Licence tika veiksmīgi pārbaudīta',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Licencē tika pārbaudīta problēma. Lūdzu mēģiniet vēlreiz.',
-        'success' => 'Licence tika veiksmīgi reģistrēta'
-    ),
+        'success' => 'Licence tika veiksmīgi reģistrēta',
+    ],
 
-);
+];

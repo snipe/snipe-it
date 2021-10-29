@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Nid ywr cydran yn bodoli.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Ni crewyd y cydran, ceisiwch eto o. g. y. dd.',
-        'success' => 'Cydran wedi creu yn llwyddiannus.'
-    ),
+        'success' => 'Cydran wedi creu yn llwyddiannus.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Ni ddiweddarwyd y cydran, ceisiwch eto o. g. y. dd',
-        'success' => 'Diweddarwyd y gydran yn llwyddiannus.'
-    ),
+        'success' => 'Diweddarwyd y gydran yn llwyddiannus.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Ydych chi\'n siwr eich bod eisiau dileu\'r cydran yma?',
         'error'   => 'Nid oedd yn bosib dileu\'r cydran. Ceisiwch eto o. g. y. dd.',
-        'success' => 'Cydran wedi dileu\'n llwyddiannus.'
-    ),
+        'success' => 'Cydran wedi dileu\'n llwyddiannus.',
+    ],
 
-     'checkout' => array(
+     'checkout' => [
         'error'   		=> 'Cydran heb ei nodi allan, ceisiwch eto o. g. y. dd',
         'success' 		=> 'Cydran wedi nodi allan yn llwyddiannus.',
-        'user_does_not_exist' => 'Nid yw\'r defnyddiwr yna yn ddilys. Ceisiwch eto o. g. y. dd.'
-    ),
+        'user_does_not_exist' => 'Nid yw\'r defnyddiwr yna yn ddilys. Ceisiwch eto o. g. y. dd.',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   		=> 'Cydran heb ei nodi i fewn, ceisiwch eto o. g. y. dd',
         'success' 		=> 'Cydran wedi nodi i fewn yn llwyddiannus.',
-        'user_does_not_exist' => 'Nid yw\'r defnyddiwr yna yn ddilys. Ceisiwch eto o. g. y. dd.'
-    )
+        'user_does_not_exist' => 'Nid yw\'r defnyddiwr yna yn ddilys. Ceisiwch eto o. g. y. dd.',
+    ],
 
-
-);
+];

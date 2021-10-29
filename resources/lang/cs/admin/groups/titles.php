@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'O skupinách',
     'about_groups'                  => 'Skupiny se používají ke zobecnění uživatelských oprávnění.',
     'group_management' 	 	=> 'Správa skupin',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Povolit',
     'deny' 	 				=> 'Zakázat',
 
-);
+];

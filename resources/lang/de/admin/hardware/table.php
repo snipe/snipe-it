@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Modell',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Asset ',
     'image'		=> 'Geräte-Bild',
     'days_without_acceptance' => 'Tage ohne Akzeptierung',
-    'monthly_depreciation' => 'Monatliche Abschreibung'
+    'monthly_depreciation' => 'Monatliche Abschreibung',
 
-);
+];

@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'This user can login',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Sócmhainní a shanntar do: ainm',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Athraigh Úsáideoir',
     'filetype_info'     => 'Is iad píopaí comhaid a cheadaítear png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Stair le haghaidh: ainm',
-	'info'				=> 'Eolas',
+    'info'				=> 'Eolas',
     'restore_user'		=> 'Cliceáil anseo chun iad a athchóiriú.',
     'last_login'        => 'Logáil isteach deireanach',
     'ldap_config_text'  => 'Is féidir suímh chumraíochta LDAP a fháil Admin> Settings. Socrófar an suíomh roghnaithe (roghnach) do gach úsáideoir a allmhairítear.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Ceadaíonn do shuímh riaracháin reatha forfheidhmiú roghnach fíordheimhnithe dhá fhachtóir.',
     'two_factor_enrolled' => 'Gléas 2FA Cláraithe',
     'two_factor_active'   => '2FA Gníomhach',
-    );
+    ];

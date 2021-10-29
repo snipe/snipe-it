@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'Asset-Kategorien',
     'category_name'  					=> 'Kategoriename',
     'checkin_email'                     => 'Beim Checkin/Checkout eine E-Mail an den Benutzer senden.',
@@ -19,4 +19,4 @@ return array(
     'use_default_eula'					=> 'Die <a href="#" data-toggle="modal" data-target="#eulaModal">Standard EULA</a> stattdessen verwenden.',
     'use_default_eula_disabled'			=> '<del>Die Standard-EULA verwenden.</del> Es wurde keine Standard-EULA definiert. Bitte fügen Sie eine in den Einstellungen hinzu.',
 
-);
+];

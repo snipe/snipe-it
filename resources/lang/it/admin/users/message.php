@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Hai accettato con successo questo prodotto.',
     'declined'                  => 'Hai rifiutato con successo questo prodotto.',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'L\'integrazione con LDAP non è stata configurata per questa installazione.',
     'password_resets_sent'      => 'È stato inviato un link agli utenti selezionati che sono attivati e hanno un indirizzo email valido, per reimpostare la password.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Utente creato con successo.',
         'update'    => 'Utente aggiornato con successo.',
         'update_bulk'    => 'Gli utenti sono stati aggiornati con successo!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'Utente riabilitato con successo.',
         'restored'  => 'Utente ripristinato con successo.',
         'import'    => 'Utenti importati con successo.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'C\'è stato un problema durante la creazione dell\'utente. Per favore riprova.',
         'update' => 'C\'è stato un problema durante l\'aggiornamento dell\'utente. Per favore riprova.',
         'delete' => 'C\'è stato un problema durante la cancellazione dell\'utente. Riprova per favore.',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'Impossibile trovare il server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
         'ldap_could_not_get_entries' => 'Impossibile ottenere voci dal server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
         'password_ldap' => 'La password per questo account è gestita da LDAP / Active Directory. Per cambiare la tua password, contatta il tuo reparto IT.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'File non cancellato. Riprova.',
         'success' => 'File cancellato con successo.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'File non caricato/i. Riprova.',
         'success' => 'File caricato/i con successo.',
         'nofiles' => 'Non hai selezionato i file per il caricamento',
         'invalidfiles' => 'Uno o più file è troppo grande o è un tipo di file non consentito. Tipi di file ammessi sono png, gif, jpg, doc, docx, pdf, txt.',
-    ),
+    ],
 
-);
+];

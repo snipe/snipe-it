@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory etki alanı',
     'ad_domain_help'			=> 'Mail etki alanı gibidir fakat her zaman aynı olmayabilir.',
     'ad_append_domain_label'    => 'Alan adını sonuna ekle',
     'ad_append_domain'          => 'Alan adını kullanıcı adının sonuna ekle',
-    'ad_append_domain_help'     => 'Kullanıcı "kullanıcıadı@alan.adı" yazmak zorunda değil, bunun yerine "kullanıcıadı" yazabilir.' ,
+    'ad_append_domain_help'     => 'Kullanıcı "kullanıcıadı@alan.adı" yazmak zorunda değil, bunun yerine "kullanıcıadı" yazabilir.',
     'admin_cc_email'            => 'CC e-Posta',
     'admin_cc_email_help'       => 'Kullanıcılar bir ek e-posta hesabına gönderilen iade etme/kullanıma alma e-posta bir kopyasını göndermek isterseniz, buraya girin. Aksi takdirde bu alanı boş bırakın.',
     'is_ad'				        => 'Active Directory sunucusudur',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Uyarı bitiş zamanı (gün içinde)',
     'alert_inv_threshold'		=> 'Son uyarı zamanı',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Demirbaş No',
     'audit_interval'            => 'Denetim Aralığı',
     'audit_interval_help'       => 'Varlıklarınızı düzenli olarak fiziksel olarak denetlemeniz gerekiyorsa, aralığı ay olarak girin.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'İki Aşamalı Kod Girin',
     'two_factor_config_complete'	=> 'Kodu Gönder',
     'two_factor_enabled_edit_not_allowed' => 'Yöneticiniz bu ayarı düzenlemeniz için izin vermiyor.',
-    'two_factor_enrollment_text'	=> "Cihazınız henüz kayıtlı değil ancak iki aşamalı kimlik doğrulama gereklidir. Google kimlik doğrulayıcısı app açmak ve tarama QR kodu cihazınızı kayıt için aşağıdaki. Aygıtınız kayıtlı sonra aşağıdaki kodu girin",
+    'two_factor_enrollment_text'	=> 'Cihazınız henüz kayıtlı değil ancak iki aşamalı kimlik doğrulama gereklidir. Google kimlik doğrulayıcısı app açmak ve tarama QR kodu cihazınızı kayıt için aşağıdaki. Aygıtınız kayıtlı sonra aşağıdaki kodu girin',
     'require_accept_signature'      => 'İmza Gerekli',
     'require_accept_signature_help_text'      => 'Bu özelliği etkinleştirmek kullanıcıların fiziksel olarak bir varlık kabul evrağı imzalaması gerekir.',
     'left'        => 'sol',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Bu kutunun işaretlenmesi, varlık serileri üzerinde benzersiz bir kısıtlama uygular',
     'zerofill_count'        => 'Varlık etiketlerinin uzunluğu, boşluksuz olmak üzere',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

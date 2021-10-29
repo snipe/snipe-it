@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Paswoorden moeten 6 karakters lang zijn en gelijk zijn in beide paswoordvelden.",
+    'password' => 'Paswoorden moeten 6 karakters lang zijn en gelijk zijn in beide paswoordvelden.',
 
-    "user"     => "Gebruikersnaam of e-mailadres is niet correct",
+    'user'     => 'Gebruikersnaam of e-mailadres is niet correct',
 
-    "token"    => "De token voor paswoordherstel is niet correct.",
+    'token'    => 'De token voor paswoordherstel is niet correct.',
 
-    "sent" => "Indien het e-mailadres bestaat, werd een paswoordhint verstuurd",
+    'sent' => 'Indien het e-mailadres bestaat, werd een paswoordhint verstuurd',
 
-);
+];

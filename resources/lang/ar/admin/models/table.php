@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'إنشاء موديل الأصل',
     'created_at' 			=> 'أنشئت في',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'تحديث موديل الأصول',
     'clone'				=> 'استنساخ الموديل',
     'edit'				=> 'تعديل الموديل',
-);
+];

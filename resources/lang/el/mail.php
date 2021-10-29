@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Ένας χρήστης έχει ακυρώσει μια αίτηση στοιχείο στην ιστοσελίδα',
     'a_user_requested' => 'Ο χρήστης έχει ζητήσει ένα στοιχείο στην ιστοσελίδα',
     'accessory_name' => 'Όνομα ανταλλακτικού:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Πάγιο:',
     'asset_name' => 'Όνομα του περιουσιακού στοιχείου:',
     'asset_requested' => 'Πάγιο αίτήθηκε',
-    'asset_tag' => 'Ετικέτα παγίων:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Ανατέθηκε στον',
     'best_regards' => 'Τις καλύτερες ευχές,',
     'canceled' => 'Ακυρωμένο:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

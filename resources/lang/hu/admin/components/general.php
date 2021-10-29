@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'Alkatrész név',
     'checkin'                             => 'Visszavett alkatrész',
     'checkout'                             => 'Kiadott Alkatrész',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'Fennmaradó',
     'total' 			                 => 'Összesen',
     'update'                            => 'Alkatrész frissítés',
-);
+];

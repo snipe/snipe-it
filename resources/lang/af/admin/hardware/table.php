@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Bate-tag',
     'asset_model'       => 'model',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'bate',
     'image'		=> 'Toestelbeeld',
     'days_without_acceptance' => 'Dae sonder aanvaarding',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Checkout Disebabkan Pengguna',
     'consumable_name'                   => 'Nama yang boleh digunakan',
     'create'                            => 'Buat Makan',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Baki',
     'total' 			                => 'Jumlah',
     'update'                            => 'Kemas kini boleh digunakan',
-);
+];

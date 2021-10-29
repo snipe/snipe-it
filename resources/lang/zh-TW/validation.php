@@ -89,6 +89,7 @@ return array(
     'uploaded'             => ':attribute 上傳失敗',
     'url'                  => ':attribute 格式不正確',
     "unique_undeleted"     => ":attribute 必須是唯一值",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'Utwórz model aktytwa',
     'created_at' 			=> 'Utworzone',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'Uaktualnij model aktywa',
     'clone'				=> 'Kopiuj Model',
     'edit'				=> 'Edytuj Model',
-);
+];

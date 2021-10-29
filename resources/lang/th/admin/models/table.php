@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'สร้างโมเดล',
     'created_at' 			=> 'สร้างที่',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'อัพเดทรุ่นสินทรัพย์',
     'clone'				=> 'คัดลอกแบบรุ่น',
     'edit'				=> 'แก้ไขรุ่น',
-);
+];

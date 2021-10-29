@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'câmpuri customizate',
     'field'		                => 'Camp',
     'about_fieldsets_title'		=> 'Despre câmpuri',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Noul câmp personalizat',
     'value_encrypted'      	        => 'Valoarea acestui câmp este criptată în baza de date. Numai utilizatorii de administrare vor putea vizualiza valoarea decriptată',
     'show_in_email'     => 'Includeți valoarea acestui câmp în e-mailurile trimise utilizatorului? Căsuțele criptate nu pot fi incluse în e-mailuri.',
-);
+];

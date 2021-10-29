@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'El usuario ha cancelado el item solicitado en la pagina Web',
     'a_user_requested' => 'Un usuario a solicitado un item en la pagina Web',
     'accessory_name' => 'Nombre de accesorio:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Activo:',
     'asset_name' => 'Nombre del activo:',
     'asset_requested' => 'Activo solicitado',
-    'asset_tag' => 'Etiqueta de activo:',
+    'asset_tag' => 'Etiqueta de activo',
     'assigned_to' => 'Asignado a',
     'best_regards' => 'Cordialmente,',
     'canceled' => 'Cancelado:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Informe de devolución de activo esperado',
     'Expected_Checkin_Notification' => 'Recordatorio: :name se acerca la fecha de devolución',
     'Expected_Checkin_Date' => 'Un activo asignado a ti debe ser devuelto en :date',
-    'your_assets' => 'Ver tus activos'
-);
+    'your_assets' => 'Ver tus activos',
+];

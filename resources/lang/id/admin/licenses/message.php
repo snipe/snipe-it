@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Lisensi tidak ada.',
     'user_does_not_exist' => 'Pengguna tidak ada.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'Anda harus memilih aset atau pengguna, namun tidak keduanya.',
     'not_found' => 'License not found',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Gagal membuat lisensi, silahkan coba kembali.',
-        'success' => 'Sukses membuat lisensi.'
-    ),
+        'success' => 'Sukses membuat lisensi.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Berkas belum terhapus. Silahkan coba kembali.',
         'success' => 'Berkas sukses di hapus.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Berkas belum terunggah. Silakan coba kembali.',
         'success' => 'Berkas sukses terunggah.',
         'nofiles' => 'Anda belum memilih berkas untuk di unggah, atau berkas yang akan di unggah terlalu besar ukurannya',
         'invalidfiles' => 'Satu atau lebih file Anda terlalu besar atau merupakan jenis filetype yang tidak diizinkan. Filetype yang diperbolehkan adalah png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, dan lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Gagal memperbarui lisensi, silahkan coba kembali',
-        'success' => 'Sukses perbarui lisensi.'
-    ),
+        'success' => 'Sukses perbarui lisensi.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Apakah Anda yakin untuk menghapus lisensi ini?',
         'error'   => 'Terdapat kesalahan pada saat penghapusan lisensi ini. Silahkan coba kembali.',
-        'success' => 'Lisensi telah berhasil dihapus.'
-    ),
+        'success' => 'Lisensi telah berhasil dihapus.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Terdapat kesalahan pada saat pemberian lisensi ini. Silahkan coba kembali.',
-        'success' => 'Lisensi telah berhasil diberikan'
-    ),
+        'success' => 'Lisensi telah berhasil diberikan',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Terdapat kesalahan pada saat penerimaan lisensi ini. Silahkan coba kembali.',
-        'success' => 'Lisensi telah berhasil diterima'
-    ),
+        'success' => 'Lisensi telah berhasil diterima',
+    ],
 
-);
+];

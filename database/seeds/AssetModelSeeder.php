@@ -33,8 +33,8 @@ class AssetModelSeeder extends Seeder
         factory(AssetModel::class, 1)->states('tab3-model')->create(); // 14
 
         // Phones
-        factory(AssetModel::class, 1)->states('iphone6s-model')->create(); // 15
-        factory(AssetModel::class, 1)->states('iphone7-model')->create(); // 16
+        factory(AssetModel::class, 1)->states('iphone11-model')->create(); // 15
+        factory(AssetModel::class, 1)->states('iphone12-model')->create(); // 16
 
         // Displays
         factory(AssetModel::class, 1)->states('ultrafine')->create(); // 17

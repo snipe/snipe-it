@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about'      	=> 'Статусын гарчгийн талаар',
     'archived'      	=> 'Архивлагдсан',
     'create'      	=> 'Статусын шошго үүсгэнэ үү',
@@ -16,4 +16,4 @@ return array(
     'title'      	=> 'Статусын шошго',
     'undeployable'  => 'Undeployable',
     'update'      	=> 'Статус шошго шинэчлэх',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'Demirbaş Modeli Oluştur',
     'created_at' 			=> 'Şurada oluşturuldu',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'Demirbaş Modeli Güncelle',
     'clone'				=> 'Modeli Kopyala',
     'edit'				=> 'Modeli Düzenle',
-);
+];

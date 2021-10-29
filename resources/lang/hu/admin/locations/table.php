@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'A Helyekről',
     'about_locations'           => 'A helyek a felhasználók, az eszközök és egyéb elemek helyadatait nyomon követik',
     'assets_rtd'                => 'Eszközök', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => 'Ország',
     'create'                    => 'Helyszín létrehozása',
     'update'                    => 'Helyszín frissítése',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => 'Hozzárendelt nyomtatása',
+    'print_all_assigned'        => 'Az összes hozzárendelt nyomtatása',
     'name'                      => 'Helyszín neve',
     'address'                   => 'Cím',
     'zip'                       => 'Irányítószám',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => 'Szülő',
     'currency'                  => 'Helyi valuta',
     'ldap_ou'                   => 'LDAP keresés OU',
-    );
+    ];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Vartotojas svetainėje atšaukė elemento užklausą',
     'a_user_requested' => 'Vartotojas paprašė elemento svetainėje',
     'accessory_name' => 'Aksesuaro pavadinimas:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Įranga:',
     'asset_name' => 'Įrangos pavadinimas:',
     'asset_requested' => 'Užklausta įranga',
-    'asset_tag' => 'Įrangos nr:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Priskirtas',
     'best_regards' => 'pagarbiai,',
     'canceled' => 'Atšauktas:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

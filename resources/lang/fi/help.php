@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,9 +13,9 @@ return array(
     |
     */
 
-    "more_info_title" => "Lisätietoa",
+    'more_info_title' => 'Lisätietoa',
 
-    "audit_help" => "Tämän valitseminen muuttaa laitetiedot vastaamaan uutta sijaintia. Jos sitä ei ole valittu, sijainti kirjataan vain lokiin.<br><br> Huomaa, että jos laite on jo luovutettuna, tämä ei muuta sen henkilön, tai laitteen sijaintia mihin se on luovutettuna.",
+    'audit_help' => 'Tämän valitseminen muuttaa laitetiedot vastaamaan uutta sijaintia. Jos sitä ei ole valittu, sijainti kirjataan vain lokiin.<br><br> Huomaa, että jos laite on jo luovutettuna, tämä ei muuta sen henkilön, tai laitteen sijaintia mihin se on luovutettuna.',
 
     'assets' => 'Laitteet ovat nimmeitä joita seurataan sarjanumeron tai laitetunnisteen avulla. Laitteiksi määritellään yleensä arvokkaampaa omaisuutta, joiden tunnistaminen  yksilöllisesti on tärkeää.',
 
@@ -31,6 +31,4 @@ return array(
 
     'depreciations' => 'Voit määrittää laitteille poistoja poistaaksesi omaisuuden arvoa suoraviivaisesti laskien.',
 
-
-
-);
+];

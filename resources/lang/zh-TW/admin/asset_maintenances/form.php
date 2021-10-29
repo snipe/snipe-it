@@ -10,5 +10,5 @@
         'asset_maintenance_time' => '資產維護所需天數',
         'notes'                  => '備註',
         'update'                 => '更新資產維護',
-        'create'                 => '新建資產維護'
+        'create'                 => '新建資產維護',
     ];

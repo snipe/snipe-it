@@ -1,5 +1,5 @@
 <?php
 
-return array(
+return [
     'title'      				=> '耗材名稱',
-);
+];

@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fa fa-slack"></i> Slack
+                        <i class="fab fa-slack"></i> Slack
                     </h2>
                 </div>
                 <div class="box-body">
@@ -58,7 +58,7 @@
                             <div class="col-md-10">
                                 @if (config('app.lock_passwords')===true)
                                     {{ Form::text('slack_endpoint', old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX', 'id' => 'slack_endpoint')) }}
-                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
 
                                 @else
                                     {{ Form::text('slack_endpoint', old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX', 'id' => 'slack_endpoint')) }}
@@ -75,7 +75,7 @@
                             <div class="col-md-10">
                                 @if (config('app.lock_passwords')===true)
                                     {{ Form::text('slack_channel', old('slack_channel', $setting->slack_channel), array('class' => 'form-control','disabled'=>'disabled','placeholder' => '#IT-Ops')) }}
-                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
 
                                 @else
                                     {{ Form::text('slack_channel', old('slack_channel', $setting->slack_channel), array('class' => 'form-control','placeholder' => '#IT-Ops')) }}
@@ -92,7 +92,7 @@
                             <div class="col-md-10">
                                 @if (config('app.lock_passwords')===true)
                                     {{ Form::text('slack_botname', old('slack_botname', $setting->slack_botname), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'Snipe-Bot')) }}
-                                    <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+                                    <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
 
                                 @else
                                     {{ Form::text('slack_botname', old('slack_botname', $setting->slack_botname), array('class' => 'form-control','placeholder' => 'Snipe-Bot')) }}
@@ -106,7 +106,7 @@
                                 {{ Form::label('test_slack', 'Test Slack') }}
                             </div>
                             <div class="col-md-10" id="slacktestrow">
-                                <a class="btn btn-default btn-sm pull-left" id="slacktest" style="margin-right: 10px;">Test <i class="fa fa-slack"></i> Integration</a>
+                                <a class="btn btn-default btn-sm pull-left" id="slacktest" style="margin-right: 10px;">Test <i class="fab fa-slack"></i> Integration</a>
                             </div>
                             <div class="col-md-10 col-md-offset-2">
                                 <span id="slacktesticon"></span>
@@ -123,7 +123,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" id="save_slack" class="btn btn-primary" disabled><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" id="save_slack" class="btn btn-primary" disabled><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>
@@ -165,7 +165,7 @@
             $("#slacktestrow").removeClass('text-danger');
             $("#slackteststatus").removeClass('text-danger');
             $("#slackteststatus").html('');
-            $("#slacktesticon").html('<i class="fa fa-spinner spin"></i> Sending Slack test message...');
+            $("#slacktesticon").html('<i class="fas fa-spinner spin"></i> Sending Slack test message...');
             $.ajax({
                 url: '{{ route('api.settings.slacktest') }}',
                 type: 'POST',
@@ -187,7 +187,7 @@
                     $("#slacktesticon").html('');
                     $("#slacktestrow").addClass('text-success');
                     $("#slackteststatus").addClass('text-success');
-                    $("#slackteststatus").html('<i class="fa fa-check text-success"></i> Success! Check the ' + $('#slack_channel').val() + ' channel for your test message, and be sure to click SAVE below to store your settings.');
+                    $("#slackteststatus").html('<i class="fas fa-check text-success"></i> Success! Check the ' + $('#slack_channel').val() + ' channel for your test message, and be sure to click SAVE below to store your settings.');
                 },
 
                 error: function (data) {
@@ -204,7 +204,7 @@
                     $('#save_slack').attr("disabled", true);
                     $("#slacktesticon").html('');
                     $("#slackteststatus").addClass('text-danger');
-                    $("#slacktesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+                    $("#slacktesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
 
                     if (data.status == 500) {
                         $('#slackteststatus').html('500 Server Error');

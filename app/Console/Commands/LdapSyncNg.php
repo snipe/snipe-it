@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Log;
-use Exception;
+use Adldap\Models\User as AdldapUser;
+use App\Models\Location;
 use App\Models\User;
 use App\Services\LdapAd;
-use App\Models\Location;
+use Exception;
 use Illuminate\Console\Command;
-use Adldap\Models\User as AdldapUser;
+use Log;
 
 /**
  * LDAP / AD sync command.
@@ -96,9 +96,9 @@ class LdapSyncNg extends Command
     public function __construct(LdapAd $ldap)
     {
         parent::__construct();
-        $this->ldap     = $ldap;
+        $this->ldap = $ldap;
         $this->settings = $this->ldap->ldapSettings;
-        $this->summary  = collect();
+        $this->summary = collect();
     }
 
     /**
@@ -108,22 +108,21 @@ class LdapSyncNg extends Command
      */
     public function handle()
     {
-
-        $dispatcher =  \Adldap\Adldap::getEventDispatcher();
+        $dispatcher = \Adldap\Adldap::getEventDispatcher();
 
         // Listen for all model events.
         $dispatcher->listen('Adldap\Models\Events\*', function ($eventName, array $data) {
             echo $eventName; // Returns 'Adldap\Models\Events\Updating'
             var_dump($data); // Returns [0] => (object) Adldap\Models\Events\Updating;
-            \Log::debug("Event: ".$eventName." data - ".print_r($data, true));
+            \Log::debug('Event: '.$eventName.' data - '.print_r($data, true));
         });
         $dispatcher->listen('Adldap\Auth\Events\*', function ($eventName, array $data) {
             echo $eventName; // Returns 'Adldap\Models\Events\Updating'
             var_dump($data); // Returns [0] => (object) Adldap\Models\Events\Updating;
-            \Log::debug("Event: ".$eventName." data - ".print_r($data, true));
+            \Log::debug('Event: '.$eventName.' data - '.print_r($data, true));
         });
 
-        ini_set('max_execution_time', env('LDAP_TIME_LIM', "600")); //600 seconds = 10 minutes
+        ini_set('max_execution_time', env('LDAP_TIME_LIM', '600')); //600 seconds = 10 minutes
         ini_set('memory_limit', '500M');
         $old_error_reporting = error_reporting(); // grab old error_reporting .ini setting, for later re-enablement
         error_reporting($old_error_reporting & ~E_DEPRECATED); // disable deprecation warnings, for LDAP in PHP 7.4 (and greater)
@@ -138,7 +137,7 @@ class LdapSyncNg extends Command
         /*
          * Use the default location if set, this is needed for the LDAP users sync page
          */
-        if (!$this->option('base_dn') && null == $this->defaultLocation) {
+        if (! $this->option('base_dn') && null == $this->defaultLocation) {
             $this->getMappedLocations();
         }
         $this->processLdapUsers();
@@ -150,6 +149,7 @@ class LdapSyncNg extends Command
         }
 
         error_reporting($old_error_reporting); // re-enable deprecation warnings.
+
         return $this->getSummary();
     }
 
@@ -205,17 +205,17 @@ class LdapSyncNg extends Command
             'location_id'     => $user->location_id,
         ];
         // Only update the database if is not a dry run
-        if (!$this->dryrun) {
+        if (! $this->dryrun) {
             if ($user->isDirty()) { //if nothing on the user changed, don't bother trying to save anything nor put anything in the summary
                 if ($user->save()) {
-                    $summary['note']   = ($user->wasRecentlyCreated ? 'CREATED' : 'UPDATED');
+                    $summary['note'] = ($user->wasRecentlyCreated ? 'CREATED' : 'UPDATED');
                     $summary['status'] = 'SUCCESS';
                 } else {
                     $errors = '';
                     foreach ($user->getErrors()->getMessages() as  $error) {
-                        $errors .= implode(", ",$error);
+                        $errors .= implode(', ', $error);
                     }
-                    $summary['note']   = $snipeUser->getDN().' was not imported. REASON: '.$errors;
+                    $summary['note'] = $snipeUser->getDN().' was not imported. REASON: '.$errors;
                     $summary['status'] = 'ERROR';
                 }
             } else {
@@ -224,7 +224,7 @@ class LdapSyncNg extends Command
         }
 
         // $summary['note'] = ($user->getOriginal('username') ? 'UPDATED' : 'CREATED'); // this seems, kinda, like, superfluous, relative to the $summary['note'] thing above, yeah?
-        if($summary) { //if the $user wasn't dirty, $summary was set to null so that we will skip the following push()
+        if ($summary) { //if the $user wasn't dirty, $summary was set to null so that we will skip the following push()
             $this->summary->push($summary);
         }
     }
@@ -235,14 +235,13 @@ class LdapSyncNg extends Command
      * @author Wes Hulette <jwhulette@gmail.com>
      *
      * @since 5.0.0
-     *
      */
     private function processLdapUsers(): void
     {
         try {
-            \Log::debug("CAL:LING GET LDAP SUSERS");
+            \Log::debug('CAL:LING GET LDAP SUSERS');
             $ldapUsers = $this->ldap->getLdapUsers();
-            \Log::debug("END CALLING GET LDAP USERS");
+            \Log::debug('END CALLING GET LDAP USERS');
         } catch (Exception $e) {
             $this->outputError($e);
             exit($e->getMessage());

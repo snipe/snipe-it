@@ -37,10 +37,9 @@ class PredefinedKitsController extends Controller
 
         $total = $kits->count();
         $kits = $kits->skip($offset)->take($limit)->get();
+
         return (new PredefinedKitsTransformer)->transformPredefinedKits($kits, $total);
-
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -57,8 +56,8 @@ class PredefinedKitsController extends Controller
         if ($kit->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.create_success')));
         }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $kit->getErrors()));
 
+        return response()->json(Helper::formatStandardApiResponse('error', null, $kit->getErrors()));
     }
 
     /**
@@ -71,9 +70,9 @@ class PredefinedKitsController extends Controller
     {
         $this->authorize('view', PredefinedKit::class);
         $kit = PredefinedKit::findOrFail($id);
+
         return (new PredefinedKitsTransformer)->transformPredefinedKit($kit);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -113,23 +112,20 @@ class PredefinedKitsController extends Controller
         $kit->accessories()->detach();
 
         $kit->delete();
-        return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/kits/general.delete_success')));     // TODO: trans
 
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/kits/general.delete_success')));     // TODO: trans
     }
-
 
     /**
      * Gets a paginated collection for the select2 menus
      *
      * @see \App\Http\Transformers\SelectlistTransformer
-     *
      */
     public function selectlist(Request $request)
     {
-
         $kits = PredefinedKit::select([
             'id',
-            'name'
+            'name',
         ]);
 
         if ($request->filled('search')) {
@@ -139,7 +135,6 @@ class PredefinedKitsController extends Controller
         $kits = $kits->orderBy('name', 'ASC')->paginate(50);
 
         return (new SelectlistTransformer)->transformSelectlist($kits);
-
     }
 
     /**
@@ -148,38 +143,40 @@ class PredefinedKitsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function indexLicenses($kit_id) {
+    public function indexLicenses($kit_id)
+    {
         $this->authorize('view', PredefinedKit::class);
         $kit = PredefinedKit::findOrFail($kit_id);
         $licenses = $kit->licenses;
+
         return (new PredefinedKitsTransformer)->transformElements($licenses, $licenses->count());
     }
 
-    
     /**
      * Store the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function storeLicense(Request $request, $kit_id)
-     {
-         $this->authorize('update', PredefinedKit::class);
-         
-         $kit = PredefinedKit::findOrFail($kit_id);        
-         $quantity = $request->input('quantity', 1);
-         if( $quantity < 1) {
-             $quantity = 1;
-         }
+    public function storeLicense(Request $request, $kit_id)
+    {
+        $this->authorize('update', PredefinedKit::class);
 
-         $license_id = $request->get('license');
-         $relation = $kit->licenses();
-         if( $relation->find($license_id) ) {
-             return response()->json(Helper::formatStandardApiResponse('error', null, ['license' => 'License already attached to kit']));
-         }
+        $kit = PredefinedKit::findOrFail($kit_id);
+        $quantity = $request->input('quantity', 1);
+        if ($quantity < 1) {
+            $quantity = 1;
+        }
 
-         $relation->attach( $license_id, ['quantity' => $quantity]);
-         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License added successfull'));     // TODO: trans
+        $license_id = $request->get('license');
+        $relation = $kit->licenses();
+        if ($relation->find($license_id)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, ['license' => 'License already attached to kit']));
+        }
+
+        $relation->attach($license_id, ['quantity' => $quantity]);
+
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License added successfull'));     // TODO: trans
     }
 
     /**
@@ -189,20 +186,20 @@ class PredefinedKitsController extends Controller
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
-     public function updateLicense(Request $request, $kit_id, $license_id)
-     {
-         $this->authorize('update', PredefinedKit::class);
-         $kit = PredefinedKit::findOrFail($kit_id);
-         $quantity = $request->input('quantity', 1);
-         if( $quantity < 1) {
-             $quantity = 1;
-         }
-         $kit->licenses()->syncWithoutDetaching([$license_id => ['quantity' =>  $quantity]]);
- 
-         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License updated'));  // TODO: trans
-     }
+    public function updateLicense(Request $request, $kit_id, $license_id)
+    {
+        $this->authorize('update', PredefinedKit::class);
+        $kit = PredefinedKit::findOrFail($kit_id);
+        $quantity = $request->input('quantity', 1);
+        if ($quantity < 1) {
+            $quantity = 1;
+        }
+        $kit->licenses()->syncWithoutDetaching([$license_id => ['quantity' =>  $quantity]]);
 
-     /**
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License updated'));  // TODO: trans
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $kit_id
@@ -214,48 +211,49 @@ class PredefinedKitsController extends Controller
         $kit = PredefinedKit::findOrFail($kit_id);
 
         $kit->licenses()->detach($license_id);
-        return response()->json(Helper::formatStandardApiResponse('success', $kit,  trans('admin/kits/general.delete_success')));
+
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.delete_success')));
     }
-    
+
     /**
      * Display the specified resource.
      *
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
-     public function indexModels($kit_id) {
+    public function indexModels($kit_id)
+    {
         $this->authorize('view', PredefinedKit::class);
         $kit = PredefinedKit::findOrFail($kit_id);
         $models = $kit->models;
+
         return (new PredefinedKitsTransformer)->transformElements($models, $models->count());
     }
-    
+
     /**
      * Store the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function storeModel(Request $request, $kit_id)
-     {
-
-
+    public function storeModel(Request $request, $kit_id)
+    {
         $this->authorize('update', PredefinedKit::class);
-        
-        $kit = PredefinedKit::findOrFail($kit_id);        
-        
+
+        $kit = PredefinedKit::findOrFail($kit_id);
+
         $model_id = $request->get('model');
         $quantity = $request->input('quantity', 1);
-        if( $quantity < 1) {
+        if ($quantity < 1) {
             $quantity = 1;
         }
-        
+
         $relation = $kit->models();
-        if( $relation->find($model_id) ) {
+        if ($relation->find($model_id)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, ['model' => 'Model already attached to kit']));
         }
         $relation->attach($model_id, ['quantity' => $quantity]);
-        
+
         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Model added successfull'));
     }
 
@@ -266,20 +264,20 @@ class PredefinedKitsController extends Controller
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
-     public function updateModel(Request $request, $kit_id, $model_id)
-     {
-         $this->authorize('update', PredefinedKit::class);
-         $kit = PredefinedKit::findOrFail($kit_id);
-         $quantity = $request->input('quantity', 1);
-         if( $quantity < 1) {
-             $quantity = 1;
-         }
-         $kit->models()->syncWithoutDetaching([$model_id => ['quantity' =>  $quantity]]);
- 
-         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License updated'));  // TODO: trans
-     }
+    public function updateModel(Request $request, $kit_id, $model_id)
+    {
+        $this->authorize('update', PredefinedKit::class);
+        $kit = PredefinedKit::findOrFail($kit_id);
+        $quantity = $request->input('quantity', 1);
+        if ($quantity < 1) {
+            $quantity = 1;
+        }
+        $kit->models()->syncWithoutDetaching([$model_id => ['quantity' =>  $quantity]]);
 
-     /**
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'License updated'));  // TODO: trans
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $kit_id
@@ -291,49 +289,50 @@ class PredefinedKitsController extends Controller
         $kit = PredefinedKit::findOrFail($kit_id);
 
         $kit->models()->detach($model_id);
-        return response()->json(Helper::formatStandardApiResponse('success', $kit,  trans('admin/kits/general.model_removed_success')));
+
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, trans('admin/kits/general.model_removed_success')));
     }
 
-
-    
     /**
      * Display the specified resource.
      *
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
-    public function indexConsumables($kit_id) {
+    public function indexConsumables($kit_id)
+    {
         $this->authorize('view', PredefinedKit::class);
         $kit = PredefinedKit::findOrFail($kit_id);
         $consumables = $kit->consumables;
+
         return (new PredefinedKitsTransformer)->transformElements($consumables, $consumables->count());
     }
 
-    
     /**
      * Store the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function storeConsumable(Request $request, $kit_id)
-     {
-         $this->authorize('update', PredefinedKit::class);
-         
-         $kit = PredefinedKit::findOrFail($kit_id);        
-         $quantity = $request->input('quantity', 1);
-         if( $quantity < 1) {
-             $quantity = 1;
-         }
+    public function storeConsumable(Request $request, $kit_id)
+    {
+        $this->authorize('update', PredefinedKit::class);
 
-         $consumable_id = $request->get('consumable');
-         $relation = $kit->consumables();
-         if( $relation->find($consumable_id) ) {
-             return response()->json(Helper::formatStandardApiResponse('error', null, ['consumable' => 'Consumable already attached to kit']));
-         }
+        $kit = PredefinedKit::findOrFail($kit_id);
+        $quantity = $request->input('quantity', 1);
+        if ($quantity < 1) {
+            $quantity = 1;
+        }
 
-         $relation->attach( $consumable_id, ['quantity' => $quantity]);
-         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Consumable added successfull'));     // TODO: trans
+        $consumable_id = $request->get('consumable');
+        $relation = $kit->consumables();
+        if ($relation->find($consumable_id)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, ['consumable' => 'Consumable already attached to kit']));
+        }
+
+        $relation->attach($consumable_id, ['quantity' => $quantity]);
+
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Consumable added successfull'));     // TODO: trans
     }
 
     /**
@@ -343,20 +342,20 @@ class PredefinedKitsController extends Controller
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
-     public function updateConsumable(Request $request, $kit_id, $consumable_id)
-     {
-         $this->authorize('update', PredefinedKit::class);
-         $kit = PredefinedKit::findOrFail($kit_id);
-         $quantity = $request->input('quantity', 1);
-         if( $quantity < 1) {
-             $quantity = 1;
-         }
-         $kit->consumables()->syncWithoutDetaching([$consumable_id => ['quantity' =>  $quantity]]);
- 
-         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Consumable updated'));  // TODO: trans
-     }
+    public function updateConsumable(Request $request, $kit_id, $consumable_id)
+    {
+        $this->authorize('update', PredefinedKit::class);
+        $kit = PredefinedKit::findOrFail($kit_id);
+        $quantity = $request->input('quantity', 1);
+        if ($quantity < 1) {
+            $quantity = 1;
+        }
+        $kit->consumables()->syncWithoutDetaching([$consumable_id => ['quantity' =>  $quantity]]);
 
-     /**
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Consumable updated'));  // TODO: trans
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $kit_id
@@ -368,48 +367,50 @@ class PredefinedKitsController extends Controller
         $kit = PredefinedKit::findOrFail($kit_id);
 
         $kit->consumables()->detach($consumable_id);
-        return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
+
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Delete was successfull'));     // TODO: trans
     }
 
-    
     /**
      * Display the specified resource.
      *
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
-    public function indexAccessories($kit_id) {
+    public function indexAccessories($kit_id)
+    {
         $this->authorize('view', PredefinedKit::class);
         $kit = PredefinedKit::findOrFail($kit_id);
         $accessories = $kit->accessories;
+
         return (new PredefinedKitsTransformer)->transformElements($accessories, $accessories->count());
     }
 
-    
     /**
      * Store the specified resource.
      *
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
-     public function storeAccessory(Request $request, $kit_id)
-     {
-         $this->authorize('update', PredefinedKit::class);
-         
-         $kit = PredefinedKit::findOrFail($kit_id);        
-         $quantity = $request->input('quantity', 1);
-         if( $quantity < 1) {
-             $quantity = 1;
-         }
+    public function storeAccessory(Request $request, $kit_id)
+    {
+        $this->authorize('update', PredefinedKit::class);
 
-         $accessory_id = $request->get('accessory');
-         $relation = $kit->accessories();
-         if( $relation->find($accessory_id) ) {
-             return response()->json(Helper::formatStandardApiResponse('error', null, ['accessory' => 'Accessory already attached to kit']));
-         }
+        $kit = PredefinedKit::findOrFail($kit_id);
+        $quantity = $request->input('quantity', 1);
+        if ($quantity < 1) {
+            $quantity = 1;
+        }
 
-         $relation->attach( $accessory_id, ['quantity' => $quantity]);
-         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Accessory added successfull'));     // TODO: trans
+        $accessory_id = $request->get('accessory');
+        $relation = $kit->accessories();
+        if ($relation->find($accessory_id)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, ['accessory' => 'Accessory already attached to kit']));
+        }
+
+        $relation->attach($accessory_id, ['quantity' => $quantity]);
+
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Accessory added successfull'));     // TODO: trans
     }
 
     /**
@@ -419,20 +420,20 @@ class PredefinedKitsController extends Controller
      * @param  int  $kit_id
      * @return \Illuminate\Http\Response
      */
-     public function updateAccessory(Request $request, $kit_id, $accessory_id)
-     {
-         $this->authorize('update', PredefinedKit::class);
-         $kit = PredefinedKit::findOrFail($kit_id);
-         $quantity = $request->input('quantity', 1);
-         if( $quantity < 1) {
-             $quantity = 1;
-         }
-         $kit->accessories()->syncWithoutDetaching([$accessory_id => ['quantity' =>  $quantity]]);
- 
-         return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Accessory updated'));  // TODO: trans
-     }
+    public function updateAccessory(Request $request, $kit_id, $accessory_id)
+    {
+        $this->authorize('update', PredefinedKit::class);
+        $kit = PredefinedKit::findOrFail($kit_id);
+        $quantity = $request->input('quantity', 1);
+        if ($quantity < 1) {
+            $quantity = 1;
+        }
+        $kit->accessories()->syncWithoutDetaching([$accessory_id => ['quantity' =>  $quantity]]);
 
-     /**
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Accessory updated'));  // TODO: trans
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $kit_id
@@ -444,6 +445,7 @@ class PredefinedKitsController extends Controller
         $kit = PredefinedKit::findOrFail($kit_id);
 
         $kit->accessories()->detach($accessory_id);
-        return response()->json(Helper::formatStandardApiResponse('success', $kit,  'Delete was successfull'));     // TODO: trans
+
+        return response()->json(Helper::formatStandardApiResponse('success', $kit, 'Delete was successfull'));     // TODO: trans
     }
 }

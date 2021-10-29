@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'แอตทริบิวต์: ล้มเหลวในการอัปโหลด',
     'url'                  => 'รูปแบบของ :attribute ไม่ถูกต้อง',
     "unique_undeleted"     => "แอตทริบิวต์ต้องไม่ซ้ำกัน",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

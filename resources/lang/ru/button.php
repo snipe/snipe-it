@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Действия',
     'add'    	                => 'Добавить',
     'cancel'                    => 'Отмена',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Требовать',
     'submit'  	                => 'Принять',
     'upload'                    => 'Загрузка',
-	'select_file'				=> 'Выберите файл...',
+    'select_file'				=> 'Выберите файл...',
     'select_files'				=> 'Выбрать файлы...',
     'generate_labels'           => '{1} Сгенерировать этикетку[2,*] Cгенерировать этикетки',
-);
+];

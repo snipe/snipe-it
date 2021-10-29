@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Lisens eksisterer ikke.',
     'user_does_not_exist' => 'Bruker eksisterer ikke.',
@@ -10,43 +10,42 @@ return array(
     'select_asset_or_person' => 'Du må velge en ressurs eller en bruker, men ikke begge.',
     'not_found' => 'License not found',
 
-
-    'create' => array(
+    'create' => [
         'error'   => 'Lisens ble ikke opprettet, prøv igjen.',
-        'success' => 'Vellykket opprettelse av lisens.'
-    ),
+        'success' => 'Vellykket opprettelse av lisens.',
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Fil ble ikke slettet. Prøv igjen.',
         'success' => 'Fil ble slettet.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Fil(er) ble ikke lastet opp. Prøv igjen.',
         'success' => 'Fil(er) ble slettet.',
         'nofiles' => 'Ingen fil er valgt til opplasting, eller filen er for stor',
         'invalidfiles' => 'En eller flere av filene er for stor, eller er en filtype som ikke er tillatt. Tillatte filtyper er png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, og lic.',
-    ),
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Lisens ble ikke oppdatert, prøv igjen',
-        'success' => 'Vellykket oppdatering av lisens.'
-    ),
+        'success' => 'Vellykket oppdatering av lisens.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Er du sikker på at du vil slette denne lisensen?',
         'error'   => 'Det oppstod et problem under sletting av lisens. Vennligst prøv igjen.',
-        'success' => 'Vellykket sletting av lisens.'
-    ),
+        'success' => 'Vellykket sletting av lisens.',
+    ],
 
-    'checkout' => array(
+    'checkout' => [
         'error'   => 'Det oppstod et problem under utsjekk av lisens. Vennligst prøv igjen.',
-        'success' => 'Vellykket utsjekk av lisens'
-    ),
+        'success' => 'Vellykket utsjekk av lisens',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   => 'Det oppstod et problem under innsjekk av lisens. Vennligst prøv igjen.',
-        'success' => 'Vellykket innsjekk av lisens'
-    ),
+        'success' => 'Vellykket innsjekk av lisens',
+    ],
 
-);
+];

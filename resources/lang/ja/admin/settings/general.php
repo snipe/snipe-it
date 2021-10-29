@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory ドメイン',
     'ad_domain_help'			=> '通常はemailのドメイン名と同じです。ただし例外あり',
     'ad_append_domain_label'    => 'ドメイン名を追加',
     'ad_append_domain'          => 'ユーザー名フィールドにドメイン名を追加',
-    'ad_append_domain_help'     => 'ユーザーは "username@domain.local" を記述する必要はなく、"username" と入力するだけです。' ,
+    'ad_append_domain_help'     => 'ユーザーは "username@domain.local" を記述する必要はなく、"username" と入力するだけです。',
     'admin_cc_email'            => 'CC（カーボンコピー）メール 送信先',
     'admin_cc_email_help'       => 'ユーザーに送信されたチェックイン/チェックアウト　メールのコピーを追加の電子メールアカウントに送信する場合は、ここにメールアドレスを入力します。必要が無ければ、このフィールドを空白にします',
     'is_ad'				        => 'Active Directory サーバー',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'アラートを無視する期間',
     'alert_inv_threshold'		=> 'インベントリのアラート間隔',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> '資産ID',
     'audit_interval'            => '監査の間隔',
     'audit_interval_help'       => '定期的にあなたの資産を監査する必要がある場合は、間隔を月で入力します。',
@@ -214,7 +214,7 @@ return array(
     'two_factor_enter_code'	=> '二段階認証コードを入力',
     'two_factor_config_complete'	=> '送信',
     'two_factor_enabled_edit_not_allowed' => '管理者はこの設定を編集することを許可していません。',
-    'two_factor_enrollment_text'	=> "二段階認証の登録が必要ですが、あなたのデバイスはまだ登録されていません。Google Authenticatorアプリを開き、下のQRコードをスキャンして端末を登録してください。端末を登録したら以下のコードを入力してください。",
+    'two_factor_enrollment_text'	=> '二段階認証の登録が必要ですが、あなたのデバイスはまだ登録されていません。Google Authenticatorアプリを開き、下のQRコードをスキャンして端末を登録してください。端末を登録したら以下のコードを入力してください。',
     'require_accept_signature'      => 'シグネチャリクエスト',
     'require_accept_signature_help_text'      => 'この機能を有効にするには、ユーザーが資産を受け入れる際に物理的にサインオフする必要があります。',
     'left'        => '左',
@@ -227,4 +227,4 @@ return array(
     'unique_serial_help_text'                => 'このチェックボックスをオンにすると、資産のシリアル番号に一意性制約が適用されます',
     'zerofill_count'        => '資産タグの長さ (ゼロ埋め含む)',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

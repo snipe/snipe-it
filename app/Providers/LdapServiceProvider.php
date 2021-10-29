@@ -1,12 +1,13 @@
-<?php namespace App\Providers;
+<?php
+
+namespace App\Providers;
 
 use App\Services\LdapAd;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\ServiceProvider;
 
 class LdapServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-
     /**
      * Bootstrap the application services.
      *
@@ -14,9 +15,7 @@ class LdapServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function boot()
     {
-        
     }
-
 
     /**
      * Register any application services.

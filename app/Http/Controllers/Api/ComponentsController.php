@@ -8,6 +8,7 @@ use App\Http\Transformers\ComponentsTransformer;
 use App\Models\Company;
 use App\Models\Component;
 use Illuminate\Http\Request;
+use App\Http\Requests\ImageUploadRequest;
 use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
 use App\Models\Asset;
@@ -25,23 +26,40 @@ class ComponentsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Component::class);
+
+        // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations
+        // Relations will be handled in query scopes a little further down.
+        $allowed_columns = 
+            [
+                'id',
+                'name',
+                'min_amt',
+                'order_number',
+                'serial',
+                'purchase_date',
+                'purchase_cost',
+                'qty',
+                'image',
+            ];
+
+
         $components = Company::scopeCompanyables(Component::select('components.*')
-            ->with('company', 'location', 'category'));
+            ->with('company', 'location', 'category', 'assets'));
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
         }
 
         if ($request->filled('company_id')) {
-            $components->where('company_id','=',$request->input('company_id'));
+            $components->where('company_id', '=', $request->input('company_id'));
         }
 
         if ($request->filled('category_id')) {
-            $components->where('category_id','=',$request->input('category_id'));
+            $components->where('category_id', '=', $request->input('category_id'));
         }
 
         if ($request->filled('location_id')) {
-            $components->where('location_id','=',$request->input('location_id'));
+            $components->where('location_id', '=', $request->input('location_id'));
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
@@ -51,11 +69,12 @@ class ComponentsController extends Controller
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
-        $allowed_columns = ['id','name','min_amt','order_number','serial','purchase_date','purchase_cost','company','category','qty','location','image'];
+        
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
+        $sort_override =  $request->input('sort');
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
 
-        switch ($sort) {
+        switch ($sort_override) {
             case 'category':
                 $components = $components->OrderCategory($order);
                 break;
@@ -66,12 +85,13 @@ class ComponentsController extends Controller
                 $components = $components->OrderCompany($order);
                 break;
             default:
-                $components = $components->orderBy($sort, $order);
+                $components = $components->orderBy($column_sort, $order);
                 break;
         }
 
         $total = $components->count();
         $components = $components->skip($offset)->take($limit)->get();
+
         return (new ComponentsTransformer)->transformComponents($components, $total);
     }
 
@@ -81,18 +101,20 @@ class ComponentsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request)
     {
         $this->authorize('create', Component::class);
         $component = new Component;
         $component->fill($request->all());
+        $component = $request->handleImages($component);
 
         if ($component->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $component, trans('admin/components/message.create.success')));
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, $component->getErrors()));
     }
 
@@ -113,21 +135,22 @@ class ComponentsController extends Controller
         }
     }
 
-
     /**
      * Update the specified resource in storage.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     * @param   \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageUploadRequest $request, $id)
     {
         $this->authorize('update', Component::class);
         $component = Component::findOrFail($id);
         $component->fill($request->all());
+        $component = $request->handleImages($component);
+        
 
         if ($component->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $component, trans('admin/components/message.update.success')));
@@ -150,6 +173,7 @@ class ComponentsController extends Controller
         $component = Component::findOrFail($id);
         $this->authorize('delete', $component);
         $component->delete();
+
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/components/message.delete.success')));
     }
 
@@ -173,6 +197,7 @@ class ComponentsController extends Controller
         $limit = $request->input('limit', 50);
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
+
         return (new ComponentsTransformer)->transformCheckedoutComponents($assets, $total);
     }
 
@@ -198,7 +223,7 @@ class ComponentsController extends Controller
         $this->authorize('checkout', $component);
 
 
-        if ($component->numRemaining() > $request->get('assigned_qty')) {
+        if ($component->numRemaining() >= $request->get('assigned_qty')) {
 
             if (!$asset = Asset::find($request->input('assigned_to'))) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')));
@@ -210,7 +235,7 @@ class ComponentsController extends Controller
             $component->assets()->attach($component->id, [
                 'component_id' => $component->id,
                 'created_at' => \Carbon::now(),
-                'assigned_qty' => $request->get('assigned_qty'),
+                'assigned_qty' => $request->get('assigned_qty', 1),
                 'user_id' => \Auth::id(),
                 'asset_id' => $request->get('assigned_to')
             ]);

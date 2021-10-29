@@ -2,13 +2,13 @@
 
 return array(
 
-    'asset'             => 'Asset',
-    'checkin'           => 'Checkin',
-    'create'            => 'Create License',
+    'asset'             => 'Eign',
+    'checkin'           => 'Skila',
+    'create'            => 'Skrá leyfi',
     'expiration'        => 'Expiration Date',
     'license_key'       => 'Product Key',
     'maintained'        => 'Maintained',
-    'name'              => 'Software Name',
+    'name'              => 'Heiti hugbúnaðar',
     'no_depreciation'   => 'Do Not Depreciate',
     'purchase_order'    => 'Purchase Order Number',
     'reassignable'      => 'Reassignable',
@@ -17,6 +17,6 @@ return array(
     'termination_date'  => 'Termination Date',
     'to_email'          => 'Licensed to Email',
     'to_name'           => 'Licensed to Name',
-    'update'            => 'Update License',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'update'            => 'Uppfæra leyfi',
+    'checkout_help'     => 'Þú verður að ráðstafa leyfi á tiltekna eign eða til einstaklings. Þú getur valið hvor tveggja en eigandi eignarinnar verður að vera sá hinn sami og þú ert að ráðstafa eigninni til.'
 );

@@ -89,6 +89,7 @@ return array(
     'uploaded'             => 'Atribut se ni uspel naložiti.',
     'url'                  => 'Oblika atributa je neveljavna.',
     "unique_undeleted"     => "Atribut mora biti edinstven.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

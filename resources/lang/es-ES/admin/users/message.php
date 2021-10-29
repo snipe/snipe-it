@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Ha aceptado con éxito este equipo.',
     'declined'                  => 'Ha declinado con éxito este equipo.',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'La integración con LDAP no ha sido configurada para esta instalación.',
     'password_resets_sent'      => 'A los usuarios seleccionados que están activados y tienen una dirección de correo electrónico válida se les ha enviado un enlace de restablecimiento de contraseña.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Usuario correctamente creado.',
         'update'    => 'Usuario correctamente actualizado.',
         'update_bulk'    => 'Usuarios correctamente actualizados!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'Usuario correctamente no suspendido.',
         'restored'  => 'Usuario correctamente restaurado.',
         'import'    => 'Usuarios importados correctamente.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Ha habido un problema creando el Usuario. Intentalo de nuevo.',
         'update' => 'Ha habido un problema actualizando el Usuario. Intentalo de nuevo.',
         'delete' => 'Ha habido un problema eliminando el  Usuario. Intentalo de nuevo.',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'No se ha podido buscar en el servidor LDAP. Por favor verifique la configuración de su servidor LDAP en su archivo de configuración.<br> Error del servidor LDAP:',
         'ldap_could_not_get_entries' => 'No se han podido obtener entradas del servidor LDAP. Por favor verifique la configuración de su servidor LDAP en su archivo de configuración.<br> Error del servidor LDAP:',
         'password_ldap' => 'La contraseña para esta cuenta es administrada por LDAP / Active Directory. Póngase en contacto con su departamento de TI para cambiar su contraseña.',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
         'success' => 'Archivo eliminado correctamente.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
         'success' => 'Archivo(s) cargado correctamente.',
         'nofiles' => 'No ha seleccionado ningún archivo para subir',
         'invalidfiles' => 'Uno o más sus archivos es demasiado grande o es de un tipo no permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
-    ),
+    ],
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Brukeren har avbrutt en element-forespørsel på webområdet',
     'a_user_requested' => 'En bruker har bedt om et element på webområdet',
     'accessory_name' => 'Navn tilbehør:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Eiendel:',
     'asset_name' => 'Navn:',
     'asset_requested' => 'Eiendel forespurt',
-    'asset_tag' => 'Eiendelsmerke:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Tilordnet til',
     'best_regards' => 'Med vennlig hilsen,',
     'canceled' => 'Avbrutt:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

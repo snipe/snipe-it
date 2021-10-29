@@ -1,22 +1,22 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Sobre os Ativos',
     'about_assets_text'            => 'Ativos são itens que são controlados e rastreáveis pelo número de série ou por uma etiqueta de ativo (patrimônio). Eles tendem a ser de valor elevado onde a identificação de itens específicos é relevante.',
-	'archived'  				=> 'Arquivado',
+    'archived'  				=> 'Arquivado',
     'asset'  					=> 'Ativo',
     'bulk_checkout'             => 'Alocação de Ativos',
     'checkin'  					=> 'Retornar Ativo',
     'checkout'  				=> 'Checkout de Ativo',
     'clone'  					=> 'Clonar Ativo',
     'deployable'  				=> 'Implementável',
-    'deleted'  					=> 'Este ativo foi excluído. <a href="/hardware/:asset_id/restore">Clique aqui para restaurá-lo</a>.',
+    'deleted'  					=> 'This asset has been deleted.',
     'edit'  					=> 'Editar Ativo',
-    'model_deleted'  			=> 'Este modelo de Ativos foi excluído. Você deve restaurar o modelo antes de restaurar o Ativo.<br/> <a href="/hardware/models/:model_id/restore">Clique aqui para restaurar o modelo</a>.',
+    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'Solicitável',
     'requested'				    => 'Solicitado',
     'restore'  					=> 'Restaurar Ativo',
     'pending'  					=> 'Pendente',
     'undeployable'  			=> 'Não implementável',
     'view'  					=> 'Ver Ativo',
-);
+];

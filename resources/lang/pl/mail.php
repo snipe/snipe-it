@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Użytkownik anulował zapotrzebowanie na sprzęt na stronie www',
     'a_user_requested' => 'Użytkownik zamówił pozycję na stronie internetowej',
     'accessory_name' => 'Nazwa sprzętu:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Sprzęt:',
     'asset_name' => 'Nazwa sprzętu:',
     'asset_requested' => 'Wystosowane zapotrzebowanie na sprzęt',
-    'asset_tag' => 'Numer sprzętu:',
+    'asset_tag' => 'Tag sprzętu',
     'assigned_to' => 'Przypisane do',
     'best_regards' => 'Pozdrawiam',
     'canceled' => 'Anulowane:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Oczekiwano raportu kontroli aktywów',
     'Expected_Checkin_Notification' => 'Przypomnienie: :name sprawdza termin zbliżający się',
     'Expected_Checkin_Date' => 'Zasób przypisany Tobie ma być zwrócony w dniu :date',
-    'your_assets' => 'Zobacz swój sprzęt'
-);
+    'your_assets' => 'Zobacz swój sprzęt',
+];

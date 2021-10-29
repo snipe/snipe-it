@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
@@ -9,20 +10,19 @@ use Illuminate\Support\Facades\Storage;
 
 class ManufacturersTransformer
 {
-
-    public function transformManufacturers (Collection $manufacturers, $total)
+    public function transformManufacturers(Collection $manufacturers, $total)
     {
-        $array = array();
+        $array = [];
         foreach ($manufacturers as $manufacturer) {
             $array[] = self::transformManufacturer($manufacturer);
         }
+
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformManufacturer (Manufacturer $manufacturer = null)
+    public function transformManufacturer(Manufacturer $manufacturer = null)
     {
         if ($manufacturer) {
-
             $array = [
                 'id' => (int) $manufacturer->id,
                 'name' => e($manufacturer->name),
@@ -41,8 +41,8 @@ class ManufacturersTransformer
             ];
 
             $permissions_array['available_actions'] = [
-                'update' => (($manufacturer->deleted_at=='') && (Gate::allows('update', Manufacturer::class))),
-                'restore' => (($manufacturer->deleted_at!='') && (Gate::allows('create', Manufacturer::class))),
+                'update' => (($manufacturer->deleted_at == '') && (Gate::allows('update', Manufacturer::class))),
+                'restore' => (($manufacturer->deleted_at != '') && (Gate::allows('create', Manufacturer::class))),
                 'delete' => $manufacturer->isDeletable(),
             ];
 
@@ -50,10 +50,5 @@ class ManufacturersTransformer
 
             return $array;
         }
-
-
     }
-
-
-
 }

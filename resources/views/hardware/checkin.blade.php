@@ -46,7 +46,7 @@
 
                           @else
                             <span class="text-danger text-bold">
-                      <i class="fa fa-exclamation-triangle"></i>This asset's model is invalid!
+                      <i class="fas fa-exclamation-triangle"></i>This asset's model is invalid!
                       The asset <a href="{{ route('hardware.edit', $asset->id) }}">should be edited</a> to correct this before attempting to check it in or out.</span>
                           @endif
                         </p>
@@ -60,7 +60,7 @@
                       <div class="col-md-8">
                         <input class="form-control" type="text" name="name" aria-label="name" id="name"
                                value="{{ old('name', $asset->name) }}"/>
-                        {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                        {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                       </div>
                     </div>
 
@@ -69,7 +69,7 @@
                       {{ Form::label('status_id', trans('admin/hardware/form.status'), array('class' => 'col-md-3 control-label')) }}
                       <div class="col-md-7 required">
                         {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types', 'aria-label'=>'status_id')) }}
-                        {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                        {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                       </div>
                     </div>
 
@@ -82,9 +82,9 @@
                         <div class="input-group col-md-5 required">
                           <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                             <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="checkin_at" id="checkin_at" value="{{ old('checkin_at', date('Y-m-d')) }}">
-                            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
                           </div>
-                          {!! $errors->first('checkin_at', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                          {!! $errors->first('checkin_at', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                         </div>
                       </div>
                     </div>
@@ -98,12 +98,12 @@
                       <div class="col-md-8">
                   <textarea class="col-md-6 form-control" id="note"
                             name="note">{{ old('note', $asset->note) }}</textarea>
-                        {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+                        {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                       </div>
                     </div>
                     <div class="box-footer">
                       <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
-                      <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
+                      <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
                     </div>
                   </form>
           </div> <!--/.col-md-12-->

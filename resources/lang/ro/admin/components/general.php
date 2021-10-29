@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'Numele componentei',
     'checkin'                             => 'Verificați componenta',
     'checkout'                             => 'Componenta de verificare',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'Rămas',
     'total' 			                 => 'Total',
     'update'                            => 'Actualizați componenta',
-);
+];

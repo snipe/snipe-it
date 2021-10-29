@@ -1,36 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Komponenta ne obstaja.',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Komponenta ni bila ustvarjena, poskusite znova.',
-        'success' => 'Komponenta je bila uspešno ustvarjena.'
-    ),
+        'success' => 'Komponenta je bila uspešno ustvarjena.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Komponenta ni bila posodobljena, poskusite znova',
-        'success' => 'Komponenta je bila uspešno posodobljena.'
-    ),
+        'success' => 'Komponenta je bila uspešno posodobljena.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Ali ste prepričani, da želite izbrisati to komponento?',
         'error'   => 'Prišlo je do težave pri brisanju komponente. Prosim poskusite ponovno.',
-        'success' => 'Komponenta je bila uspešno izbrisana.'
-    ),
+        'success' => 'Komponenta je bila uspešno izbrisana.',
+    ],
 
-     'checkout' => array(
+     'checkout' => [
         'error'   		=> 'Komponenta ni bila izdana, poskusite znova',
         'success' 		=> 'Komponenta je bila uspešno izdana.',
-        'user_does_not_exist' => 'Ta uporabnik ni veljaven. Prosim poskusite ponovno.'
-    ),
+        'user_does_not_exist' => 'Ta uporabnik ni veljaven. Prosim poskusite ponovno.',
+    ],
 
-    'checkin' => array(
+    'checkin' => [
         'error'   		=> 'Komponenta ni bila prevzeta, poskusite znova',
         'success' 		=> 'Komponenta je bila uspešno prevzeta.',
-        'user_does_not_exist' => 'Ta uporabnik ni veljaven. Prosim poskusite ponovno.'
-    )
+        'user_does_not_exist' => 'Ta uporabnik ni veljaven. Prosim poskusite ponovno.',
+    ],
 
-
-);
+];

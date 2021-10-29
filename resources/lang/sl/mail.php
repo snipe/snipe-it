@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Uporabnik je preklical zahtevo za sredstev na spletnem mestu',
     'a_user_requested' => 'Uporabnik je zahteval sredstev na spletnem mestu',
     'accessory_name' => 'Ime Dodatka:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Sredstvo:',
     'asset_name' => 'Ime sredstva:',
     'asset_requested' => 'Sredstev zahtevano',
-    'asset_tag' => 'Oznaka sredstva:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Dodeljena',
     'best_regards' => 'Lep pozdrav,',
     'canceled' => 'Preklicana:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'Rydych wedi llwyddo I dderbyn yr ased yma.',
     'declined'                  => 'Rydych wedi llwyddo I wrthod yr ased yma.',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'Nid ywr gosodiadau I dilysu trwy LDAP wedi gosod ar y system.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Wedi llwyddo i greu defnyddiwr.',
         'update'    => 'Wedi llwyddo i diweddaru defnyddiwr.',
         'update_bulk'    => 'Wedi lwyddo i diweddaru defnyddwyr!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'Wedi llwyddo i anwahardd defnyddiwr.',
         'restored'  => 'Wedi adfer y defnyddiwr yn llwyddiannus.',
         'import'    => 'Defnyddwyr wedi mewnforio\'n llwyddiannus.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Roedd problem wrth ceisio creu\'r defnyddiwr. Ceisiwch eto o. g. y. dd.',
         'update' => 'Roedd problem wrth ceisio diweddaru\'r defnyddiwr. Ceisiwch eto o. g. y. dd.',
         'delete' => 'Roedd problem wrth ceisio dileu\'r defnyddiwr. Ceisiwch eto o. g. y. dd.',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'Wedi methu cyraedd y server LDAP. Gwiriwch eich gosodiadau LDAP. <br>Error from LDAP Server:',
         'ldap_could_not_get_entries' => 'Wedi methu llwytho data trwy LDAP. Gwiriwch eich gosodiadau LDAP. <br>Error from LDAP Server:',
         'password_ldap' => 'Mae eich cyfrinair wedi\'i rheoli trwy LDAP/Active Directory. Cysylltwch a\'r Adran TGCh i\'w newid. ',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Ffeil heb ei ddileu. Ceisiwch eto o. g. y. dd.',
         'success' => 'Ffeil wedi dileu yn llwyddiannus.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Ffeil(iau) heb ei uwchlwytho. Ceisiwch eto o. g. y. dd.',
         'success' => 'Ffeil(iau) wedi uwchlwytho yn llwyddiannus.',
         'nofiles' => 'Nid ydych wedi dewis unrhyw ffeiliau i\'w uwchlwytho',
         'invalidfiles' => 'Mae un neu mwy o\'r ffeiliau unai yn rhy fawr neu ddim y math cywir. Derbynir png, gif, fjp, doc, docx, pdf a txt.',
-    ),
+    ],
 
-);
+];

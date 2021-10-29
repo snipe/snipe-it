@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Umsebenzisi ukhanse isicelo sezinto kuwebhusayithi',
     'a_user_requested' => 'Umsebenzisi ucele into ku-website',
     'accessory_name' => 'Igama lokufinyelela:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Impahla:',
     'asset_name' => 'Igama lomhlaba:',
     'asset_requested' => 'Ifa liceliwe',
-    'asset_tag' => 'Ithegi yetekisi:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Kwabiwa Ku',
     'best_regards' => 'Ozithobayo,',
     'canceled' => 'Ikhanseliwe:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

@@ -89,6 +89,7 @@ return array(
     'uploaded'             => ':attribute nije prenet.',
     'url'                  => ':attribute format je neispravan.',
     "unique_undeleted"     => ":attribute mora biti jedinstven.",
+    "non_circular"         => "The :attribute must not create a circular reference.",
 
     /*
     |--------------------------------------------------------------------------

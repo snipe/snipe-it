@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_licenses_title'            => '關於授權',
     'about_licenses'                  => '授權是用來追踨可供借出的軟體數量。',
     'checkin'  					=> '繳回授權數量',
@@ -19,4 +19,4 @@ return array(
     'user'  					=> '使用者
 ',
     'view'  					=> '檢視授權',
-);
+];

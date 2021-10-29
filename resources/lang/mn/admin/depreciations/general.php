@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Хөрөнгийн элэгдлийн тухай',
     'about_depreciations'  					=> 'Та шулуун шугамын элэгдэл дээр үндэслэн хөрөнгийг элэгдүүлэхийн тулд хөрөнгийн элэгдлийг үүсгэж болно.',
     'asset_depreciations'  					=> 'Хөрөнгийн элэгдэл',
@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Элэгдэл Нэр',
     'number_of_months'  					=> 'Сарын тоо',
     'update'  					            => 'Элэгдэл шинэчлэх',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
-);
+];

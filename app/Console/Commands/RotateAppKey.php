@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Artisan;
-use App\Models\CustomField;
 use App\Models\Asset;
+use App\Models\CustomField;
 use App\Models\Setting;
-use \Illuminate\Encryption\Encrypter;
+use Artisan;
+use Illuminate\Console\Command;
+use Illuminate\Encryption\Encrypter;
 
 class RotateAppKey extends Command
 {
@@ -42,9 +42,7 @@ class RotateAppKey extends Command
      */
     public function handle()
     {
-        if ($this->confirm("\n****************************************************\nTHIS WILL MODIFY YOUR APP_KEY AND DE-CRYPT YOUR ENCRYPTED CUSTOM FIELDS AND \nRE-ENCRYPT THEM WITH A NEWLY GENERATED KEY. \n\nThere is NO undo. \n\nMake SURE you have a database backup and a backup of your .env generated BEFORE running this command. \n\nIf you do not save the newly generated APP_KEY to your .env in this process, \nyour encrypted data will no longer be decryptable. \n\nAre you SURE you wish to continue, and have confirmed you have a database backup and an .env backup? "))  {
-
-
+        if ($this->confirm("\n****************************************************\nTHIS WILL MODIFY YOUR APP_KEY AND DE-CRYPT YOUR ENCRYPTED CUSTOM FIELDS AND \nRE-ENCRYPT THEM WITH A NEWLY GENERATED KEY. \n\nThere is NO undo. \n\nMake SURE you have a database backup and a backup of your .env generated BEFORE running this command. \n\nIf you do not save the newly generated APP_KEY to your .env in this process, \nyour encrypted data will no longer be decryptable. \n\nAre you SURE you wish to continue, and have confirmed you have a database backup and an .env backup? ")) {
 
             // Get the existing app_key and ciphers
             // We put them in a variable since we clear the cache partway through here.
@@ -73,33 +71,26 @@ class RotateAppKey extends Command
 
             $fields = CustomField::where('field_encrypted', '1')->get();
 
-
             foreach ($fields as $field) {
-
                 $assets = Asset::whereNotNull($field->db_column)->get();
 
                 foreach ($assets as $asset) {
-
                     $asset->{$field->db_column} = $oldEncrypter->decrypt($asset->{$field->db_column});
-                    $this->line('DECRYPTED: '. $field->db_column);
+                    $this->line('DECRYPTED: '.$field->db_column);
                     $asset->{$field->db_column} = $newEncrypter->encrypt($asset->{$field->db_column});
                     $this->line('ENCRYPTED: '.$field->db_column);
                     $asset->save();
-
                 }
-
             }
 
             // Handle the LDAP password if one is provided
             $setting = Setting::first();
-            if ($setting->ldap_pword!='') {
-                $setting->ldap_pword =  $oldEncrypter->decrypt($setting->ldap_pword);
-                $setting->ldap_pword =  $newEncrypter->encrypt($setting->ldap_pword);
+            if ($setting->ldap_pword != '') {
+                $setting->ldap_pword = $oldEncrypter->decrypt($setting->ldap_pword);
+                $setting->ldap_pword = $newEncrypter->encrypt($setting->ldap_pword);
                 $setting->save();
                 $this->warn('LDAP password has been re-encrypted.');
             }
-
-
         } else {
             $this->info('This operation has been canceled. No changes have been made.');
         }
@@ -113,7 +104,6 @@ class RotateAppKey extends Command
      */
     protected function writeNewEnvironmentFileWith($key)
     {
-
         file_put_contents($this->laravel->environmentFilePath(), preg_replace(
             $this->keyReplacementPattern(),
             'APP_KEY='.$key,
@@ -129,7 +119,7 @@ class RotateAppKey extends Command
     protected function keyReplacementPattern()
     {
         $escaped = preg_quote('='.$this->laravel['config']['app.key'], '/');
+
         return "/^APP_KEY{$escaped}/m";
     }
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'Kategori Aset',
     'category_name'  					=> 'Nama Kategori',
     'checkin_email'                     => 'Kirim email ke pengguna saat check in / checkout.',
@@ -19,4 +19,4 @@ return array(
     'use_default_eula'					=> 'Gunakan <a href="#" data-toggle="modal" data-target="#eulaModal"> pilihan utama</a> sebagai gantinya.',
     'use_default_eula_disabled'			=> '<del>Gunakan pilihan EULA utama sebagai gantinya.</del> Tidak ada pilihan utama yang diatur. Silahkan tambahkan di Pengaturan.',
 
-);
+];

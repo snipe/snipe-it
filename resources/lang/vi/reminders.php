@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Mật khẩu phải có tối thiểu 6 ký tự và trùng với thông tin xác nhận.",
+    'password' => 'Mật khẩu phải có tối thiểu 6 ký tự và trùng với thông tin xác nhận.',
 
-    "user"     => "Tên đăng nhập và địa chỉ email không đúng",
+    'user'     => 'Tên đăng nhập và địa chỉ email không đúng',
 
-    "token"    => "Token khởi tạo mật khẩu này không hợp lệ.",
+    'token'    => 'Token khởi tạo mật khẩu này không hợp lệ.',
 
-    "sent" => "Nếu tìm thấy một địa chỉ email phù hợp, một thông báo mật khẩu đã được gửi đi!",
+    'sent' => 'Nếu tìm thấy một địa chỉ email phù hợp, một thông báo mật khẩu đã được gửi đi!',
 
-);
+];

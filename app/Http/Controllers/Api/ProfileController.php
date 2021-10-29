@@ -15,7 +15,7 @@ class ProfileController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.3.0]
      *
-     * @return Array
+     * @return array
      */
     public function requestedAssets()
     {
@@ -23,7 +23,6 @@ class ProfileController extends Controller
 
         $results = [];
         $results['total'] = $checkoutRequests->count();
-
 
         foreach ($checkoutRequests as $checkoutRequest) {
 
@@ -39,10 +38,8 @@ class ProfileController extends Controller
                     'request_date' => Helper::getFormattedDateObject($checkoutRequest->created_at, 'datetime'),
                 ];
             }
-
         }
+
         return $results;
     }
-
-
 }

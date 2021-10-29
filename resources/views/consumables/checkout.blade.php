@@ -47,19 +47,19 @@
                   <div class="callout callout-info">
 
                     @if ($consumable->category->require_acceptance=='1')
-                      <i class="fa fa-envelope"></i>
+                      <i class="far fa-envelope"></i>
                       {{ trans('admin/categories/general.required_acceptance') }}
                       <br>
                     @endif
 
                     @if ($consumable->getEula())
-                      <i class="fa fa-envelope"></i>
+                      <i class="far fa-envelope"></i>
                       {{ trans('admin/categories/general.required_eula') }}
                         <br>
                     @endif
 
                     @if ($snipeSettings->slack_endpoint!='')
-                        <i class="fa fa-slack"></i>
+                        <i class="fab fa-slack"></i>
                         A slack message will be sent
                     @endif
                   </div>
@@ -71,13 +71,13 @@
             <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
             <div class="col-md-7">
               <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note', $consumable->note) }}</textarea>
-              {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
         </div> <!-- .box-body -->
         <div class="box-footer">
           <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-          <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
+          <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkout') }}</button>
        </div>
       </div>
     </form>
