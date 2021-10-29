@@ -24,7 +24,7 @@
     "vue-template-compiler": "2.4.4"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "admin-lte": "^2.4.18",
     "ajv": "^6.12.6",
     "blueimp-file-upload": "^9.34.0",
