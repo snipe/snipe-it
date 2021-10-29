@@ -211,12 +211,12 @@ class AssetsTransformer
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'location' => ($asset->location) ? e($asset->location->name) : null,
             'status'=> ($asset->assetstatus) ? $asset->present()->statusMeta : null,
+            'assigned_to_self' => ($asset->assigned_to == \Auth::user()->id),
         ];
 
         $permissions_array['available_actions'] = [
             'cancel' => ($asset->isRequestedBy(\Auth::user())) ? true : false,
             'request' => ($asset->isRequestedBy(\Auth::user())) ? false : true,
-
         ];
 
         $array += $permissions_array;
