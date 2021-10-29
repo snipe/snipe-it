@@ -14,6 +14,7 @@ use App\Models\License;
 use App\Models\Setting;
 use App\Notifications\CheckoutAssetNotification;
 use Carbon\Carbon;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Response;
@@ -908,6 +909,7 @@ class ReportsController extends Controller
      *
      * @return mixed
      * @throws \Illuminate\Auth\Access\AuthorizationException
+
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */
@@ -919,17 +921,12 @@ class ReportsController extends Controller
         /**
          * Get all assets with pending checkout acceptances
          */
-        if($showDeleted) {
-            $acceptances = CheckoutAcceptance::pending()->withTrashed()->with(['assignedTo' , 'checkoutable.assignedTo', 'checkoutable.model'])->get();
-        } else {
-            $acceptances = CheckoutAcceptance::pending()->with(['assignedTo' => function ($query) {
-                $query->withTrashed();
-            }, 'checkoutable.assignedTo', 'checkoutable.model'])->get();
-        }
+
+        $acceptances = CheckoutAcceptance::pending()->with('assignedTo')->get();
 
         $assetsForReport = $acceptances
-            ->filter(function ($acceptance) {
-                return $acceptance->checkoutable_type == \App\Models\Asset::class;
+            ->filter(function($acceptance) {
+                return $acceptance->checkoutable_type == 'App\Models\Asset' && !is_null($acceptance->assignedTo);
             })
             ->map(function($acceptance) {
                 return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
