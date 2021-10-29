@@ -27,14 +27,14 @@ namespace App\Models\Traits;
  * Yeah that's not even that bad.
  * 
  * Okay, to restate, here's what you've gotta do:
- * add Customizable (which I shoudl totally rename this to) to the thing that you want to have custom fields.
+ * add 'use HasCustomFields'
  * (do we still need the pivot stuff? maybe?)
  * Then the pivot-class, that should morphTo a fieldset
  * Oh, and if you want to use it, it should also morphMany custom_field_default_values
  * Is that it?
  */
 
-trait Customizable
+trait HasCustomFields
 {
 
     // protected static function booted()
