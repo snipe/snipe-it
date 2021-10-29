@@ -338,6 +338,17 @@
                   </div>
                   @endif
 
+                  <div class="row">
+                    <div class="col-md-4">
+                      <strong>
+                        {{ trans('admin/licenses/form.maintained') }}
+                      </strong>
+                    </div>
+                    <div class="col-md-8">
+                      {{ $license->maintained ? 'Yes' : 'No' }}
+                    </div>
+                  </div>
+
                   @if (($license->seats) && ($license->seats) > 0)
                   <div class="row">
                     <div class="col-md-3">
