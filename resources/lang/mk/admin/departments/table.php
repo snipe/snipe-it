@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'id'                        => 'ID',
     'name'                      => 'Име на оддел',
@@ -8,4 +8,4 @@ return array(
     'location'                  => 'Локација',
     'create'                    => 'Креирај оддел',
     'update'                    => 'Ажурирај оддел',
-    );
+    ];

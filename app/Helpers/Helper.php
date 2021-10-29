@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Helpers;
 
 use App\Models\Accessory;
@@ -10,19 +11,17 @@ use App\Models\Depreciation;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use Crypt;
-use Image;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Image;
 
 class Helper
 {
-
-
     /**
      * Simple helper to invoke the markdown parser
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.0]
-     * @return String
+     * @return string
      */
     public static function parseEscapedMarkedown($str)
     {
@@ -33,7 +32,6 @@ class Helper
         }
     }
 
-
     /**
      * The importer has formatted number strings since v3,
      * so the value might be a string, or an integer.
@@ -41,12 +39,16 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.0]
-     * @return String
+     * @return string
      */
     public static function formatCurrencyOutput($cost)
     {
         if (is_numeric($cost)) {
-            return number_format($cost, 2, '.', '');
+
+            if (Setting::getSettings()->digit_separator=='1.234,56') {
+                return number_format($cost, 2, ',', '.');
+            }
+            return number_format($cost, 2, '.', ',');
         }
         // It's already been parsed.
         return $cost;
@@ -58,283 +60,282 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.3]
-     * @return Array
+     * @return array
      */
     public static function defaultChartColors($index = 0)
     {
         $colors = [
-            "#008941",
-            "#FF4A46",
-            "#006FA6",
-            "#A30059",
-            "#1CE6FF",
-            "#FFDBE5",
-            "#7A4900",
-            "#0000A6",
-            "#63FFAC",
-            "#B79762",
-            "#004D43",
-            "#8FB0FF",
-            "#997D87",
-            "#5A0007",
-            "#809693",
-            "#FEFFE6",
-            "#1B4400",
-            "#4FC601",
-            "#3B5DFF",
-            "#4A3B53",
-            "#FF2F80",
-            "#61615A",
-            "#BA0900",
-            "#6B7900",
-            "#00C2A0",
-            "#FFAA92",
-            "#FF90C9",
-            "#B903AA",
-            "#D16100",
-            "#DDEFFF",
-            "#000035",
-            "#7B4F4B",
-            "#A1C299",
-            "#300018",
-            "#0AA6D8",
-            "#013349",
-            "#00846F",
-            "#372101",
-            "#FFB500",
-            "#C2FFED",
-            "#A079BF",
-            "#CC0744",
-            "#C0B9B2",
-            "#C2FF99",
-            "#001E09",
-            "#00489C",
-            "#6F0062",
-            "#0CBD66",
-            "#EEC3FF",
-            "#456D75",
-            "#B77B68",
-            "#7A87A1",
-            "#788D66",
-            "#885578",
-            "#FAD09F",
-            "#FF8A9A",
-            "#D157A0",
-            "#BEC459",
-            "#456648",
-            "#0086ED",
-            "#886F4C",
-            "#34362D",
-            "#B4A8BD",
-            "#00A6AA",
-            "#452C2C",
-            "#636375",
-            "#A3C8C9",
-            "#FF913F",
-            "#938A81",
-            "#575329",
-            "#00FECF",
-            "#B05B6F",
-            "#8CD0FF",
-            "#3B9700",
-            "#04F757",
-            "#C8A1A1",
-            "#1E6E00",
-            "#7900D7",
-            "#A77500",
-            "#6367A9",
-            "#A05837",
-            "#6B002C",
-            "#772600",
-            "#D790FF",
-            "#9B9700",
-            "#549E79",
-            "#FFF69F",
-            "#201625",
-            "#72418F",
-            "#BC23FF",
-            "#99ADC0",
-            "#3A2465",
-            "#922329",
-            "#5B4534",
-            "#FDE8DC",
-            "#404E55",
-            "#0089A3",
-            "#CB7E98",
-            "#A4E804",
-            "#324E72",
-            "#6A3A4C",
-            "#83AB58",
-            "#001C1E",
-            "#D1F7CE",
-            "#004B28",
-            "#C8D0F6",
-            "#A3A489",
-            "#806C66",
-            "#222800",
-            "#BF5650",
-            "#E83000",
-            "#66796D",
-            "#DA007C",
-            "#FF1A59",
-            "#8ADBB4",
-            "#1E0200",
-            "#5B4E51",
-            "#C895C5",
-            "#320033",
-            "#FF6832",
-            "#66E1D3",
-            "#CFCDAC",
-            "#D0AC94",
-            "#7ED379",
-            "#012C58",
-            "#7A7BFF",
-            "#D68E01",
-            "#353339",
-            "#78AFA1",
-            "#FEB2C6",
-            "#75797C",
-            "#837393",
-            "#943A4D",
-            "#B5F4FF",
-            "#D2DCD5",
-            "#9556BD",
-            "#6A714A",
-            "#001325",
-            "#02525F",
-            "#0AA3F7",
-            "#E98176",
-            "#DBD5DD",
-            "#5EBCD1",
-            "#3D4F44",
-            "#7E6405",
-            "#02684E",
-            "#962B75",
-            "#8D8546",
-            "#9695C5",
-            "#E773CE",
-            "#D86A78",
-            "#3E89BE",
-            "#CA834E",
-            "#518A87",
-            "#5B113C",
-            "#55813B",
-            "#E704C4",
-            "#00005F",
-            "#A97399",
-            "#4B8160",
-            "#59738A",
-            "#FF5DA7",
-            "#F7C9BF",
-            "#643127",
-            "#513A01",
-            "#6B94AA",
-            "#51A058",
-            "#A45B02",
-            "#1D1702",
-            "#E20027",
-            "#E7AB63",
-            "#4C6001",
-            "#9C6966",
-            "#64547B",
-            "#97979E",
-            "#006A66",
-            "#391406",
-            "#F4D749",
-            "#0045D2",
-            "#006C31",
-            "#DDB6D0",
-            "#7C6571",
-            "#9FB2A4",
-            "#00D891",
-            "#15A08A",
-            "#BC65E9",
-            "#FFFFFE",
-            "#C6DC99",
-            "#203B3C",
-            "#671190",
-            "#6B3A64",
-            "#F5E1FF",
-            "#FFA0F2",
-            "#CCAA35",
-            "#374527",
-            "#8BB400",
-            "#797868",
-            "#C6005A",
-            "#3B000A",
-            "#C86240",
-            "#29607C",
-            "#402334",
-            "#7D5A44",
-            "#CCB87C",
-            "#B88183",
-            "#AA5199",
-            "#B5D6C3",
-            "#A38469",
-            "#9F94F0",
-            "#A74571",
-            "#B894A6",
-            "#71BB8C",
-            "#00B433",
-            "#789EC9",
-            "#6D80BA",
-            "#953F00",
-            "#5EFF03",
-            "#E4FFFC",
-            "#1BE177",
-            "#BCB1E5",
-            "#76912F",
-            "#003109",
-            "#0060CD",
-            "#D20096",
-            "#895563",
-            "#29201D",
-            "#5B3213",
-            "#A76F42",
-            "#89412E",
-            "#1A3A2A",
-            "#494B5A",
-            "#A88C85",
-            "#F4ABAA",
-            "#A3F3AB",
-            "#00C6C8",
-            "#EA8B66",
-            "#958A9F",
-            "#BDC9D2",
-            "#9FA064",
-            "#BE4700",
-            "#658188",
-            "#83A485",
-            "#453C23",
-            "#47675D",
-            "#3A3F00",
-            "#061203",
-            "#DFFB71",
-            "#868E7E",
-            "#98D058",
-            "#6C8F7D",
-            "#D7BFC2",
-            "#3C3E6E",
-            "#D83D66",
-            "#2F5D9B",
-            "#6C5E46",
-            "#D25B88",
-            "#5B656C",
-            "#00B57F",
-            "#545C46",
-            "#866097",
-            "#365D25",
-            "#252F99",
-            "#00CCFF",
-            "#674E60",
-            "#FC009C",
-            "#92896B",
+            '#008941',
+            '#FF4A46',
+            '#006FA6',
+            '#A30059',
+            '#1CE6FF',
+            '#FFDBE5',
+            '#7A4900',
+            '#0000A6',
+            '#63FFAC',
+            '#B79762',
+            '#004D43',
+            '#8FB0FF',
+            '#997D87',
+            '#5A0007',
+            '#809693',
+            '#FEFFE6',
+            '#1B4400',
+            '#4FC601',
+            '#3B5DFF',
+            '#4A3B53',
+            '#FF2F80',
+            '#61615A',
+            '#BA0900',
+            '#6B7900',
+            '#00C2A0',
+            '#FFAA92',
+            '#FF90C9',
+            '#B903AA',
+            '#D16100',
+            '#DDEFFF',
+            '#000035',
+            '#7B4F4B',
+            '#A1C299',
+            '#300018',
+            '#0AA6D8',
+            '#013349',
+            '#00846F',
+            '#372101',
+            '#FFB500',
+            '#C2FFED',
+            '#A079BF',
+            '#CC0744',
+            '#C0B9B2',
+            '#C2FF99',
+            '#001E09',
+            '#00489C',
+            '#6F0062',
+            '#0CBD66',
+            '#EEC3FF',
+            '#456D75',
+            '#B77B68',
+            '#7A87A1',
+            '#788D66',
+            '#885578',
+            '#FAD09F',
+            '#FF8A9A',
+            '#D157A0',
+            '#BEC459',
+            '#456648',
+            '#0086ED',
+            '#886F4C',
+            '#34362D',
+            '#B4A8BD',
+            '#00A6AA',
+            '#452C2C',
+            '#636375',
+            '#A3C8C9',
+            '#FF913F',
+            '#938A81',
+            '#575329',
+            '#00FECF',
+            '#B05B6F',
+            '#8CD0FF',
+            '#3B9700',
+            '#04F757',
+            '#C8A1A1',
+            '#1E6E00',
+            '#7900D7',
+            '#A77500',
+            '#6367A9',
+            '#A05837',
+            '#6B002C',
+            '#772600',
+            '#D790FF',
+            '#9B9700',
+            '#549E79',
+            '#FFF69F',
+            '#201625',
+            '#72418F',
+            '#BC23FF',
+            '#99ADC0',
+            '#3A2465',
+            '#922329',
+            '#5B4534',
+            '#FDE8DC',
+            '#404E55',
+            '#0089A3',
+            '#CB7E98',
+            '#A4E804',
+            '#324E72',
+            '#6A3A4C',
+            '#83AB58',
+            '#001C1E',
+            '#D1F7CE',
+            '#004B28',
+            '#C8D0F6',
+            '#A3A489',
+            '#806C66',
+            '#222800',
+            '#BF5650',
+            '#E83000',
+            '#66796D',
+            '#DA007C',
+            '#FF1A59',
+            '#8ADBB4',
+            '#1E0200',
+            '#5B4E51',
+            '#C895C5',
+            '#320033',
+            '#FF6832',
+            '#66E1D3',
+            '#CFCDAC',
+            '#D0AC94',
+            '#7ED379',
+            '#012C58',
+            '#7A7BFF',
+            '#D68E01',
+            '#353339',
+            '#78AFA1',
+            '#FEB2C6',
+            '#75797C',
+            '#837393',
+            '#943A4D',
+            '#B5F4FF',
+            '#D2DCD5',
+            '#9556BD',
+            '#6A714A',
+            '#001325',
+            '#02525F',
+            '#0AA3F7',
+            '#E98176',
+            '#DBD5DD',
+            '#5EBCD1',
+            '#3D4F44',
+            '#7E6405',
+            '#02684E',
+            '#962B75',
+            '#8D8546',
+            '#9695C5',
+            '#E773CE',
+            '#D86A78',
+            '#3E89BE',
+            '#CA834E',
+            '#518A87',
+            '#5B113C',
+            '#55813B',
+            '#E704C4',
+            '#00005F',
+            '#A97399',
+            '#4B8160',
+            '#59738A',
+            '#FF5DA7',
+            '#F7C9BF',
+            '#643127',
+            '#513A01',
+            '#6B94AA',
+            '#51A058',
+            '#A45B02',
+            '#1D1702',
+            '#E20027',
+            '#E7AB63',
+            '#4C6001',
+            '#9C6966',
+            '#64547B',
+            '#97979E',
+            '#006A66',
+            '#391406',
+            '#F4D749',
+            '#0045D2',
+            '#006C31',
+            '#DDB6D0',
+            '#7C6571',
+            '#9FB2A4',
+            '#00D891',
+            '#15A08A',
+            '#BC65E9',
+            '#FFFFFE',
+            '#C6DC99',
+            '#203B3C',
+            '#671190',
+            '#6B3A64',
+            '#F5E1FF',
+            '#FFA0F2',
+            '#CCAA35',
+            '#374527',
+            '#8BB400',
+            '#797868',
+            '#C6005A',
+            '#3B000A',
+            '#C86240',
+            '#29607C',
+            '#402334',
+            '#7D5A44',
+            '#CCB87C',
+            '#B88183',
+            '#AA5199',
+            '#B5D6C3',
+            '#A38469',
+            '#9F94F0',
+            '#A74571',
+            '#B894A6',
+            '#71BB8C',
+            '#00B433',
+            '#789EC9',
+            '#6D80BA',
+            '#953F00',
+            '#5EFF03',
+            '#E4FFFC',
+            '#1BE177',
+            '#BCB1E5',
+            '#76912F',
+            '#003109',
+            '#0060CD',
+            '#D20096',
+            '#895563',
+            '#29201D',
+            '#5B3213',
+            '#A76F42',
+            '#89412E',
+            '#1A3A2A',
+            '#494B5A',
+            '#A88C85',
+            '#F4ABAA',
+            '#A3F3AB',
+            '#00C6C8',
+            '#EA8B66',
+            '#958A9F',
+            '#BDC9D2',
+            '#9FA064',
+            '#BE4700',
+            '#658188',
+            '#83A485',
+            '#453C23',
+            '#47675D',
+            '#3A3F00',
+            '#061203',
+            '#DFFB71',
+            '#868E7E',
+            '#98D058',
+            '#6C8F7D',
+            '#D7BFC2',
+            '#3C3E6E',
+            '#D83D66',
+            '#2F5D9B',
+            '#6C5E46',
+            '#D25B88',
+            '#5B656C',
+            '#00B57F',
+            '#545C46',
+            '#866097',
+            '#365D25',
+            '#252F99',
+            '#00CCFF',
+            '#674E60',
+            '#FC009C',
+            '#92896B',
         ];
 
 
 
         return $colors[$index];
-
     }
 
     /**
@@ -345,25 +346,25 @@ class Helper
      *
      * @return  string
      */
-    public static function adjustBrightness($hexCode, $adjustPercent) {
+    public static function adjustBrightness($hexCode, $adjustPercent)
+    {
         $hexCode = ltrim($hexCode, '#');
 
         if (strlen($hexCode) == 3) {
-            $hexCode = $hexCode[0] . $hexCode[0] . $hexCode[1] . $hexCode[1] . $hexCode[2] . $hexCode[2];
+            $hexCode = $hexCode[0].$hexCode[0].$hexCode[1].$hexCode[1].$hexCode[2].$hexCode[2];
         }
 
         $hexCode = array_map('hexdec', str_split($hexCode, 2));
 
-        foreach ($hexCode as & $color) {
+        foreach ($hexCode as &$color) {
             $adjustableLimit = $adjustPercent < 0 ? $color : 255 - $color;
             $adjustAmount = ceil($adjustableLimit * $adjustPercent);
 
             $color = str_pad(dechex($color + $adjustAmount), 2, '0', STR_PAD_LEFT);
         }
 
-        return '#' . implode($hexCode);
+        return '#'.implode($hexCode);
     }
-
 
     /**
      * Static background (highlight) colors for pie charts
@@ -371,7 +372,7 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.2]
-     * @return Array
+     * @return array
      */
     public static function chartBackgroundColors()
     {
@@ -387,6 +388,7 @@ class Helper
             '#3c8dbc',
 
         ];
+
         return $colors;
     }
 
@@ -396,13 +398,26 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.7]
-     * @return String
+     * @return string
      */
     public static function ParseFloat($floatString)
     {
+        /*******
+         * 
+         * WARNING: This does conversions based on *locale* - a Unix-ey-like thing.
+         * 
+         * Everything else in the system tends to convert based on the Snipe-IT settings
+         * 
+         * So it's very likely this is *not* what you want - instead look for the new
+         * 
+         * ParseCurrency($currencyString)
+         * 
+         * Which should be directly below here
+         * 
+         */
         $LocaleInfo = localeconv();
-        $floatString = str_replace(",", "", $floatString);
-        $floatString = str_replace($LocaleInfo["decimal_point"], ".", $floatString);
+        $floatString = str_replace(',', '', $floatString);
+        $floatString = str_replace($LocaleInfo['decimal_point'], '.', $floatString);
         // Strip Currency symbol
         // If no currency symbol is set, default to $ because Murica
         $currencySymbol = $LocaleInfo['currency_symbol'];
@@ -411,7 +426,28 @@ class Helper
         }
 
         $floatString = str_replace($currencySymbol, '', $floatString);
+
         return floatval($floatString);
+    }
+    
+    /**
+     * Format currency using comma or period for thousands, and period or comma for decimal, based on settings.
+     * 
+     * @author [B. Wetherington] [<bwetherington@grokability.com>]
+     * @since [v5.2]
+     * @return Float
+     */
+    public static function ParseCurrency($currencyString) {
+        $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); //generally shouldn't come up, since we don't do this in fields, but just in case it does...
+        if(Setting::getSettings()->digit_separator=='1.234,56') {
+            //EU format
+            $without_thousands = str_replace('.', '', $without_currency);
+            $corrected_decimal = str_replace(',', '.', $without_thousands);
+        } else {
+            $without_thousands = str_replace(',', '', $without_currency);
+            $corrected_decimal = $without_thousands;  // decimal is already OK
+        }
+        return floatval($corrected_decimal);
     }
 
     /**
@@ -419,12 +455,13 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.5]
-     * @return Array
+     * @return array
      */
     public static function statusLabelList()
     {
-        $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('default_label', 'desc')->orderBy('name','asc')->orderBy('deployable','desc')
+        $statuslabel_list = ['' => trans('general.select_statuslabel')] + Statuslabel::orderBy('default_label', 'desc')->orderBy('name', 'asc')->orderBy('deployable', 'desc')
                 ->pluck('name', 'id')->toArray();
+
         return $statuslabel_list;
     }
 
@@ -437,14 +474,15 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v5.1.0]
-     * @return Array
+     * @return array
      */
     public static function deployableStatusLabelList()
     {
-        $statuslabel_list =  Statuslabel::where('deployable', '=', '1')->orderBy('default_label', 'desc')
-                ->orderBy('name','asc')
-                ->orderBy('deployable','desc')
+        $statuslabel_list = Statuslabel::where('deployable', '=', '1')->orderBy('default_label', 'desc')
+                ->orderBy('name', 'asc')
+                ->orderBy('deployable', 'desc')
                 ->pluck('name', 'id')->toArray();
+
         return $statuslabel_list;
     }
 
@@ -453,16 +491,17 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.5]
-     * @return Array
+     * @return array
      */
     public static function statusTypeList()
     {
         $statuslabel_types =
-              array('' => trans('admin/hardware/form.select_statustype'))
-            + array('deployable' => trans('admin/hardware/general.deployable'))
-            + array('pending' => trans('admin/hardware/general.pending'))
-            + array('undeployable' => trans('admin/hardware/general.undeployable'))
-            + array('archived' => trans('admin/hardware/general.archived'));
+              ['' => trans('admin/hardware/form.select_statustype')]
+            + ['deployable' => trans('admin/hardware/general.deployable')]
+            + ['pending' => trans('admin/hardware/general.pending')]
+            + ['undeployable' => trans('admin/hardware/general.undeployable')]
+            + ['archived' => trans('admin/hardware/general.archived')];
+
         return $statuslabel_types;
     }
 
@@ -471,12 +510,13 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.5]
-     * @return Array
+     * @return array
      */
     public static function depreciationList()
     {
         $depreciation_list = ['' => 'Do Not Depreciate'] + Depreciation::orderBy('name', 'asc')
                 ->pluck('name', 'id')->toArray();
+
         return $depreciation_list;
     }
 
@@ -485,18 +525,19 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.5]
-     * @return Array
+     * @return array
      */
     public static function categoryTypeList()
     {
-        $category_types = array(
+        $category_types = [
             '' => '',
             'accessory' => 'Accessory',
             'asset' => 'Asset',
             'consumable' => 'Consumable',
             'component' => 'Component',
-            'license' => 'License'
-        );
+            'license' => 'License',
+        ];
+
         return $category_types;
     }
 
@@ -505,11 +546,12 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v2.5]
-     * @return Array
+     * @return array
      */
     public static function customFieldsetList()
     {
-        $customfields = array('' => trans('admin/models/general.no_custom_field')) + CustomFieldset::pluck('name', 'id')->toArray();
+        $customfields = ['' => trans('admin/models/general.no_custom_field')] + CustomFieldset::pluck('name', 'id')->toArray();
+
         return  $customfields;
     }
 
@@ -518,7 +560,7 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.4]
-     * @return Array
+     * @return array
      */
     public static function predefined_formats()
     {
@@ -533,7 +575,7 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.3]
-     * @return Array
+     * @return array
      */
     public static function barcodeDimensions($barcode_type = 'QRCODE')
     {
@@ -547,6 +589,7 @@ class Helper
             $size['height'] = '-3';
             $size['width'] = '-3';
         }
+
         return $size;
     }
 
@@ -555,7 +598,7 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return Array
+     * @return array
      */
     public static function generateRandomString($length = 10)
     {
@@ -565,9 +608,9 @@ class Helper
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
+
         return $randomString;
     }
-
 
     /**
      * This nasty little method gets the low inventory info for the
@@ -575,7 +618,7 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return Array
+     * @return array
      */
     public static function checkLowInventory()
     {
@@ -584,7 +627,7 @@ class Helper
         $components = Component::withCount('assets as assets_count')->whereNotNull('min_amt')->get();
 
         $avail_consumables = 0;
-        $items_array = array();
+        $items_array = [];
         $all_count = 0;
 
         foreach ($consumables as $consumable) {
@@ -601,17 +644,14 @@ class Helper
                 $items_array[$all_count]['type'] = 'consumables';
                 $items_array[$all_count]['percent'] = $percent;
                 $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt']=$consumable->min_amt;
+                $items_array[$all_count]['min_amt'] = $consumable->min_amt;
                 $all_count++;
             }
-
-
         }
 
         foreach ($accessories as $accessory) {
             $avail = $accessory->qty - $accessory->users_count;
             if ($avail < ($accessory->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
-
                 if ($accessory->qty > 0) {
                     $percent = number_format((($avail / $accessory->qty) * 100), 0);
                 } else {
@@ -623,10 +663,9 @@ class Helper
                 $items_array[$all_count]['type'] = 'accessories';
                 $items_array[$all_count]['percent'] = $percent;
                 $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt']=$accessory->min_amt;
+                $items_array[$all_count]['min_amt'] = $accessory->min_amt;
                 $all_count++;
             }
-
         }
 
         foreach ($components as $component) {
@@ -643,19 +682,13 @@ class Helper
                 $items_array[$all_count]['type'] = 'components';
                 $items_array[$all_count]['percent'] = $percent;
                 $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt']=$component->min_amt;
+                $items_array[$all_count]['min_amt'] = $component->min_amt;
                 $all_count++;
             }
-
         }
 
-
-
         return $items_array;
-
-
     }
-
 
     /**
      * Check if the file is an image, so we can show a preview
@@ -663,7 +696,7 @@ class Helper
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
      * @param File $file
-     * @return String | Boolean
+     * @return string | Boolean
      */
     public static function checkUploadIsImage($file)
     {
@@ -671,7 +704,7 @@ class Helper
         $filetype = @finfo_file($finfo, $file);
         finfo_close($finfo);
 
-        if (($filetype=="image/jpeg") || ($filetype=="image/jpg")   || ($filetype=="image/png") || ($filetype=="image/bmp") || ($filetype=="image/gif")) {
+        if (($filetype == 'image/jpeg') || ($filetype == 'image/jpg') || ($filetype == 'image/png') || ($filetype == 'image/bmp') || ($filetype == 'image/gif')) {
             return $filetype;
         }
 
@@ -693,21 +726,17 @@ class Helper
      * @param array $permissions
      * @param array $selected_arr
      * @since [v1.0]
-     * @return Array
+     * @return array
      */
-    public static function selectedPermissionsArray($permissions, $selected_arr = array())
+    public static function selectedPermissionsArray($permissions, $selected_arr = [])
     {
-
-
-        $permissions_arr = array();
+        $permissions_arr = [];
 
         foreach ($permissions as $permission) {
-
             for ($x = 0; $x < count($permission); $x++) {
                 $permission_name = $permission[$x]['permission'];
 
                 if ($permission[$x]['display'] === true) {
-
                     if ($selected_arr) {
                         if (array_key_exists($permission_name, $selected_arr)) {
                             $permissions_arr[$permission_name] = $selected_arr[$permission_name];
@@ -718,11 +747,7 @@ class Helper
                         $permissions_arr[$permission_name] = '0';
                     }
                 }
-
-
             }
-
-
         }
 
         return $permissions_arr;
@@ -738,7 +763,7 @@ class Helper
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return boolean
+     * @return bool
      */
     public static function checkIfRequired($class, $field)
     {
@@ -750,11 +775,9 @@ class Helper
                 } else {
                     return true;
                 }
-
             }
         }
     }
-
 
     /**
      * Check to see if the given key exists in the array, and trim excess white space before returning it
@@ -769,9 +792,9 @@ class Helper
     public static function array_smart_fetch(array $array, $key, $default = '')
     {
         array_change_key_case($array, CASE_LOWER);
-        return array_key_exists(strtolower($key), array_change_key_case($array)) ? e(trim($array[ $key ])) : $default;
-    }
 
+        return array_key_exists(strtolower($key), array_change_key_case($array)) ? e(trim($array[$key])) : $default;
+    }
 
     /**
      * Gracefully handle decrypting encrypted fields (custom fields, etc).
@@ -781,52 +804,47 @@ class Helper
      * @author A. Gianotto
      * @since 3.6
      * @param CustomField $field
-     * @param String $string
+     * @param string $string
      * @return string
      */
     public static function gracefulDecrypt(CustomField $field, $string)
     {
-
         if ($field->isFieldDecryptable($string)) {
-
             try {
                 Crypt::decrypt($string);
-                return Crypt::decrypt($string);
 
+                return Crypt::decrypt($string);
             } catch (DecryptException $e) {
                 return 'Error Decrypting: '.$e->getMessage();
             }
+            }
 
-        }
         return $string;
-
     }
+    public static function formatStandardApiResponse($status, $payload = null, $messages = null)
 
-
-
-    public static function formatStandardApiResponse($status, $payload = null, $messages = null) {
-
+    {
         $array['status'] = $status;
         $array['messages'] = $messages;
-        if (($messages) &&  (is_array($messages)) && (count($messages) > 0)) {
+        if (($messages) && (is_array($messages)) && (count($messages) > 0)) {
             $array['messages'] = $messages;
         }
         ($payload) ? $array['payload'] = $payload : $array['payload'] = null;
+
         return $array;
     }
-
 
     /*
     Possible solution for unicode fieldnames
     */
-    public static function make_slug($string) {
+    public static function make_slug($string)
+    {
         return preg_replace('/\s+/u', '_', trim($string));
     }
 
-
-    public static function getFormattedDateObject($date, $type = 'datetime', $array = true) {
-
-        if ($date=='') {
+    public static function getFormattedDateObject($date, $type = 'datetime', $array = true)
+    {
+        if ($date == '') {
             return null;
         }
 
@@ -835,7 +853,7 @@ class Helper
 
         if ($type == 'datetime') {
             $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
-            $dt['formatted'] = $tmp_date->format($settings->date_display_format .' '. $settings->time_display_format);
+            $dt['formatted'] = $tmp_date->format($settings->date_display_format.' '.$settings->time_display_format);
         } else {
             $dt['date'] = $tmp_date->format('Y-m-d');
             $dt['formatted'] = $tmp_date->format($settings->date_display_format);
@@ -844,28 +862,28 @@ class Helper
         if ($array == 'true') {
             return $dt;
         }
+
         return $dt['formatted'];
-
     }
-
 
     // Nicked from Drupal :)
     // Returns a file size limit in bytes based on the PHP upload_max_filesize
     // and post_max_size
-    public static function file_upload_max_size() {
+    public static function file_upload_max_size()
+    {
         static $max_size = -1;
 
         if ($max_size < 0) {
 
             // Start with post_max_size.
-            $post_max_size = Helper::parse_size(ini_get('post_max_size'));
+            $post_max_size = self::parse_size(ini_get('post_max_size'));
             if ($post_max_size > 0) {
                 $max_size = $post_max_size;
             }
 
             // If upload_max_size is less, then reduce. Except if upload_max_size is
             // zero, which indicates no limit.
-            $upload_max = Helper::parse_size(ini_get('upload_max_filesize'));
+            $upload_max = self::parse_size(ini_get('upload_max_filesize'));
             if ($upload_max > 0 && $upload_max < $max_size) {
                 $max_size = $upload_max;
             }
@@ -874,76 +892,79 @@ class Helper
         return $max_size;
     }
 
-    public static function file_upload_max_size_readable() {
+    public static function file_upload_max_size_readable()
+    {
         static $max_size = -1;
 
         if ($max_size < 0) {
             // Start with post_max_size.
-            $post_max_size = Helper::parse_size(ini_get('post_max_size'));
+            $post_max_size = self::parse_size(ini_get('post_max_size'));
             if ($post_max_size > 0) {
                 $max_size = ini_get('post_max_size');
             }
 
             // If upload_max_size is less, then reduce. Except if upload_max_size is
             // zero, which indicates no limit.
-            $upload_max = Helper::parse_size(ini_get('upload_max_filesize'));
-            if ($upload_max > 0 && $upload_max < $max_size) {
+            $upload_max = self::parse_size(ini_get('upload_max_filesize'));
+
+            if ($upload_max > 0 && $upload_max < $post_max_size) {
                 $max_size = ini_get('upload_max_filesize');
             }
         }
+
         return $max_size;
     }
 
-    public static function parse_size($size) {
+    public static function parse_size($size)
+    {
         $unit = preg_replace('/[^bkmgtpezy]/i', '', $size); // Remove the non-unit characters from the size.
         $size = preg_replace('/[^0-9\.]/', '', $size); // Remove the non-numeric characters from the size.
         if ($unit) {
             // Find the position of the unit in the ordered string which is the power of magnitude to multiply a kilobyte by.
             return round($size * pow(1024, stripos('bkmgtpezy', $unit[0])));
-        }
-        else {
+        } else {
             return round($size);
         }
     }
 
-
-    public static function filetype_icon($filename) {
-
-        $extension = substr(strrchr($filename,'.'),1);
+    public static function filetype_icon($filename)
+    {
+        $extension = substr(strrchr($filename, '.'), 1);
 
         $allowedExtensionMap = [
             // Images
-            'jpg'   => 'fa fa-file-image-o',
-            'jpeg'   => 'fa fa-file-image-o',
-            'gif'   => 'fa fa-file-image-o',
-            'png'   => 'fa fa-file-image-o',
+            'jpg'   => 'far fa-image',
+            'jpeg'   => 'far fa-image',
+            'gif'   => 'far fa-image',
+            'png'   => 'far fa-image',
             // word
-            'doc'   => 'fa fa-file-word-o',
-            'docx'   => 'fa fa-file-word-o',
+            'doc'   => 'far fa-file-word',
+            'docx'   => 'far fa-file-word',
             // Excel
-            'xls'   => 'fa fa-file-excel-o',
-            'xlsx'   => 'fa fa-file-excel-o',
+            'xls'   => 'far fa-file-excel',
+            'xlsx'   => 'far fa-file-excel',
             // archive
-            'zip'   => 'fa fa-file-archive-o',
-            'rar'   => 'fa fa-file-archive-o',
+            'zip'   => 'fas fa-file-archive',
+            'rar'   => 'fas fa-file-archive',
             //Text
-            'txt'   => 'fa fa-file-text-o',
-            'rtf'   => 'fa fa-file-text-o',
-            'xml'   => 'fa fa-file-text-o',
+            'txt'   => 'far fa-file-alt',
+            'rtf'   => 'far fa-file-alt',
+            'xml'   => 'far fa-file-alt',
             // Misc
-            'pdf'   => 'fa fa-file-pdf-o',
-            'lic'   => 'fa fa-file-floppy-o',
+            'pdf'   => 'far fa-file-pdf',
+            'lic'   => 'far fa-save',
         ];
 
         if ($extension && array_key_exists($extension, $allowedExtensionMap)) {
             return $allowedExtensionMap[$extension];
         }
-        return "fa fa-file-o";
+
+        return 'far fa-file';
     }
 
-    public static function show_file_inline($filename) {
-
-        $extension = substr(strrchr($filename,'.'),1);
+    public static function show_file_inline($filename)
+    {
+        $extension = substr(strrchr($filename, '.'), 1);
 
         if ($extension) {
             switch ($extension) {
@@ -957,6 +978,7 @@ class Helper
                     return false;
             }
         }
+
         return false;
     }
 
@@ -971,7 +993,7 @@ class Helper
      */
     public static function generateEncyrptedPassword(): string
     {
-        return bcrypt(Helper::generateUnencryptedPassword());
+        return bcrypt(self::generateUnencryptedPassword());
     }
 
     /**
@@ -988,9 +1010,10 @@ class Helper
         $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         $password = '';
-        for ( $i = 0; $i < 20; $i++ ) {
-            $password .= substr( $chars, random_int( 0, strlen( $chars ) - 1 ), 1 );
+        for ($i = 0; $i < 20; $i++) {
+            $password .= substr($chars, random_int(0, strlen($chars) - 1), 1);
         }
+
         return $password;
     }
 
@@ -1001,7 +1024,8 @@ class Helper
      * @param string $save_path path to a folder where the image should be saved
      * @return string path to uploaded image or false if something went wrong
      */
-    public static function processUploadedImage(String $image_data, String $save_path) {
+    public static function processUploadedImage(String $image_data, String $save_path)
+    {
         if ($image_data == null || $save_path == null) {
             return false;
         }
@@ -1010,15 +1034,15 @@ class Helper
         // data:image/jpeg;base64,; This causes the image library to be unhappy, so we need to remove it.
         $header = explode(';', $image_data, 2)[0];
         // Grab the image type from the header while we're at it.
-        $extension = substr($header, strpos($header, '/')+1);
+        $extension = substr($header, strpos($header, '/') + 1);
         // Start reading the image after the first comma, postceding the base64.
-        $image = substr($image_data, strpos($image_data, ',')+1);
+        $image = substr($image_data, strpos($image_data, ',') + 1);
 
-        $file_name = str_random(25).".".$extension;
+        $file_name = str_random(25).'.'.$extension;
 
-        $directory= public_path($save_path);
+        $directory = public_path($save_path);
         // Check if the uploads directory exists.  If not, try to create it.
-        if (!file_exists($directory)) {
+        if (! file_exists($directory)) {
             mkdir($directory, 0755, true);
         }
 
@@ -1035,5 +1059,4 @@ class Helper
 
         return $file_name;
     }
-
 }

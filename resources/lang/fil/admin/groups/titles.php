@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Ang Tungkol sa mga Grupo',
     'about_groups'                  => 'Ang mga grupo ay ginagamit para mag-generalize ng mga pahintulot sa gumagamit.',
     'group_management' 	 	=> 'Ang Pamamahala ng Grupo',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Magbigay Pahintulot',
     'deny' 	 				=> 'Tanggihan',
 
-);
+];

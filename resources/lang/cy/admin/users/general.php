@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Fedrith y defnyddiwr yma mewngofnodi',
     'activated_disabled_help_text' => 'Nid yw\'n bosib newid statws eich cyfrif.',
     'assets_user'       => 'Asedu wedi aseinio i :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Golygu Defnyddiwr',
     'filetype_info'     => 'Math o ffeiliau a caniateir yw png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, a rar.',
     'history_user'      => 'Hanes ar gyfer :name',
-	'info'				=> 'Gwybodaeth',
+    'info'				=> 'Gwybodaeth',
     'restore_user'		=> 'Cliciwch yma yw adfer.',
     'last_login'        => 'Mewngofnodi Diwethaf',
     'ldap_config_text'  => 'Gweler Gweinyddiaeth > Gosodiadau am gosodiadau LDAP. Mae\'r lleoliad (dewisol) yn cael ei osod am unrhyw defnyddwyr sydd yn cael ei mewnforio.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Mae eich gosodiadau admin yn caniatau gorfodaeth dewisol o dilysiant dau-factor.  ',
     'two_factor_enrolled' => 'Dyfais D2F Wedi Ymuno ',
     'two_factor_active'   => 'D2F Weithredol ',
-    );
+    ];

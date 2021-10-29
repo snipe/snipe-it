@@ -4,15 +4,16 @@ use App\Models\User;
 
 class UsersCest
 {
-    public function _before(\FunctionalTester $I)
+    public function _before(FunctionalTester $I)
     {
-         $I->amOnPage('/login');
-         $I->fillField('username', 'admin');
-         $I->fillField('password', 'password');
-         $I->click('Login');
+        $I->amOnPage('/login');
+        $I->fillField('username', 'admin');
+        $I->fillField('password', 'password');
+        $I->click('Login');
     }
+
     // tests
-    public function tryToTest(\FunctionalTester $I)
+    public function tryToTest(FunctionalTester $I)
     {
         $I->wantTo('ensure that the create users form loads without errors');
         $I->lookForwardTo('seeing it load without errors');
@@ -23,7 +24,7 @@ class UsersCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with blank elements");
+        $I->wantTo('Test Validation Fails with blank elements');
         $I->amOnPage(route('users.create'));
         $I->click('Save');
         $I->seeElement('.alert-danger');
@@ -34,7 +35,7 @@ class UsersCest
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        $I->wantTo("Test Validation Fails with short name");
+        $I->wantTo('Test Validation Fails with short name');
         $I->amOnPage(route('users.create'));
         $I->fillField('first_name', 't2');
         $I->fillField('last_name', 't2');
@@ -43,11 +44,11 @@ class UsersCest
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The password must be at least 8 characters', '.alert-msg');
-
     }
+
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        $user = factory(App\Models\User::class)->make();
+        $user = \App\Models\User::factory()->make();
         $submitValues = [
             'first_name'        => $user->first_name,
             'last_name'         => $user->last_name,
@@ -63,7 +64,7 @@ class UsersCest
             'location_id'       => $user->location_id,
             'phone'             => $user->phone,
             'activated'         => true,
-            'notes'             => $user->notes
+            'notes'             => $user->notes,
         ];
         $storedValues = [
             'first_name'        => $user->first_name,
@@ -78,10 +79,10 @@ class UsersCest
             'location_id'       => $user->location_id,
             'phone'             => $user->phone,
             'activated'         => true,
-            'notes'             => $user->notes
+            'notes'             => $user->notes,
         ];
         $I->amOnPage(route('users.create'));
-        $I->wantTo("Test Validation Succeeds");
+        $I->wantTo('Test Validation Succeeds');
         $I->submitForm('form#userForm', $submitValues);
         $I->seeRecord('users', $storedValues);
         $I->seeElement('.alert-success');
@@ -89,7 +90,7 @@ class UsersCest
 
     public function allowsDelete(FunctionalTester $I)
     {
-        $user = factory(App\Models\User::class)->create();
+        $user = \App\Models\User::factory()->create();
         $I->wantTo('Ensure I can delete a user');
         $I->sendDelete(route('users.destroy', $user->id), ['_token' => csrf_token()]);
         $I->seeResponseCodeIs(200);

@@ -1,29 +1,29 @@
 <?php
 
-return array(
+return [
 
-    'does_not_exist' => 'Fabricante inexistente.',
+    'does_not_exist' => 'El fabricante no existe.',
     'assoc_users'	 => 'Este Fabricante está asociado al menos a un modelo y no puede ser eliminado',
 
-    'create' => array(
+    'create' => [
         'error'   => 'Fabricante no creado, Intentalo de nuevo.',
-        'success' => 'Fabricante creado.'
-    ),
+        'success' => 'Fabricante creado.',
+    ],
 
-    'update' => array(
+    'update' => [
         'error'   => 'Fabricante no actualizado, Intentalo de nuevo',
-        'success' => 'Fabricante actualizado.'
-    ),
+        'success' => 'Fabricante actualizado.',
+    ],
 
-    'restore' => array(
+    'restore' => [
         'error'   => 'El fabricante no fue restaurado, intente de nuevo',
-        'success' => 'Fabricante restaurado con éxito.'
-    ),
+        'success' => 'Fabricante restaurado con éxito.',
+    ],
 
-    'delete' => array(
+    'delete' => [
         'confirm'   => 'Estás seguro que quieres eliminar Fabricante?',
         'error'   => 'Hubo un problema eliminando el fabricante. Por favor, inténtalo de nuevo.',
-        'success' => 'Fabricante Eliminado.'
-    )
+        'success' => 'Fabricante Eliminado.',
+    ],
 
-);
+];

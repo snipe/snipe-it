@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Speciale velden',
     'field'		                => 'Veld',
     'about_fieldsets_title'		=> 'Over veldverzamelingen',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Nieuw aangepast veld',
     'value_encrypted'      	        => 'De waarde van dit veld is versleuteld in de database. Alleen beheerders zullen de onversleutelde waarde kunnen weergeven.',
     'show_in_email'     => 'De waarde van dit veld opnemen in de checkout-e-mails die naar de gebruiker zijn verzonden? Versleutelde velden kunnen niet worden opgenomen in e-mails.',
-);
+];

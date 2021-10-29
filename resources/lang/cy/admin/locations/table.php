@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Amdan Lleoliadau',
     'about_locations'           => 'Defnyddir lleoliadau i cofnodi manylder lleoliad ar gyfer defnyddwyr, asedau a eitemau eraill',
     'assets_rtd'                => 'Asedau', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -20,4 +20,4 @@ return array(
     'parent'                    => 'Rhiant',
     'currency'                  => 'Arian y Lleoliad',
     'ldap_ou'                   => 'OU a denyddir wrth chwilio LDAP',
-    );
+    ];

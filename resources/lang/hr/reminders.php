@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Zaporke moraju imati šest znakova i odgovarati potvrdi.",
+    'password' => 'Zaporke moraju imati šest znakova i odgovarati potvrdi.',
 
-    "user"     => "Korisničko ime ili e-adresa nisu točni",
+    'user'     => 'Korisničko ime ili e-adresa nisu točni',
 
-    "token"    => "Token za resetiranje lozinke nije valjan.",
+    'token'    => 'Token za resetiranje lozinke nije valjan.',
 
-    "sent" => "Ako je pronađena odgovarajuća adresa e-pošte, podsjetnik za lozinku je poslan!",
+    'sent' => 'Ako je pronađena odgovarajuća adresa e-pošte, podsjetnik za lozinku je poslan!',
 
-);
+];

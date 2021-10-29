@@ -17,6 +17,8 @@ class LicenseSeatsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $licenseId
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request, $licenseId)
@@ -30,7 +32,7 @@ class LicenseSeatsController extends Controller
 
             $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
 
-            if ($request->input('sort')=='department') {
+            if ($request->input('sort') == 'department') {
                 $seats->OrderDepartments($order);
             } else {
                 $seats->orderBy('id', $order);
@@ -39,7 +41,7 @@ class LicenseSeatsController extends Controller
             $total = $seats->count();
             $offset = (($seats) && (request('offset') > $total)) ? 0 : request('offset', 0);
             $limit = request('limit', 50);
-            
+
             $seats = $seats->skip($offset)->take($limit)->get();
 
             if ($seats) {
@@ -53,7 +55,8 @@ class LicenseSeatsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $licenseId
+     * @param  int  $seatId
      * @return \Illuminate\Http\Response
      */
     public function show($licenseId, $seatId)
@@ -62,13 +65,14 @@ class LicenseSeatsController extends Controller
         $this->authorize('view', License::class);
         // sanity checks:
         // 1. does the license seat exist?
-        if (!$licenseSeat = LicenseSeat::find($seatId)) {
+        if (! $licenseSeat = LicenseSeat::find($seatId)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Seat not found'));
         }
         // 2. does the seat belong to the specified license?
-        if (!$license = $licenseSeat->license()->first() || $license->id != intval($licenseId)) {
+        if (! $license = $licenseSeat->license()->first() || $license->id != intval($licenseId)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Seat does not belong to the specified license'));
         }
+
         return (new LicenseSeatsTransformer)->transformLicenseSeat($licenseSeat);
     }
 
@@ -86,11 +90,11 @@ class LicenseSeatsController extends Controller
 
         // sanity checks:
         // 1. does the license seat exist?
-        if (!$licenseSeat = LicenseSeat::find($seatId)) {
+        if (! $licenseSeat = LicenseSeat::find($seatId)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Seat not found'));
         }
         // 2. does the seat belong to the specified license?
-        if (!$license = $licenseSeat->license()->first() || $license->id != intval($licenseId)) {
+        if (! $license = $licenseSeat->license()->first() || $license->id != intval($licenseId)) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Seat does not belong to the specified license'));
         }
 
@@ -100,14 +104,14 @@ class LicenseSeatsController extends Controller
         // attempt to update the license seat
         $licenseSeat->fill($request->all());
         $licenseSeat->user_id = Auth::user()->id;
-        
+
         // check if this update is a checkin operation
         // 1. are relevant fields touched at all?
         $touched = $licenseSeat->isDirty('assigned_to') || $licenseSeat->isDirty('asset_id');
         // 2. are they cleared? if yes then this is a checkin operation
         $is_checkin = ($touched && $licenseSeat->assigned_to === null && $licenseSeat->asset_id === null);
 
-        if (!$touched) {
+        if (! $touched) {
             // nothing to update
             return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
         }
@@ -125,11 +129,13 @@ class LicenseSeatsController extends Controller
 
             if ($is_checkin) {
                 $licenseSeat->logCheckin($target, $request->input('note'));
+
                 return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
             }
 
             // in this case, relevant fields are touched but it's not a checkin operation. so it must be a checkout operation.
             $licenseSeat->logCheckout($request->input('note'), $target);
+
             return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
         }
 

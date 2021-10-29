@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Ang account na may ganitong email ay umiiral na.',
     'account_not_found'      => 'Ang pangalan ng gumagamit o password ay hindi wasto.',
@@ -9,37 +9,36 @@ return array(
     'account_banned'         => 'Ang account ng user na ito ay nai-ban.',
     'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
 
-    'two_factor' => array(
+    'two_factor' => [
         'already_enrolled'      => 'Your device is already enrolled.',
         'success'               => 'You have successfully logged in.',
         'code_required'         => 'Two-factor code is required.',
         'invalid_code'          => 'Two-factor code is invalid.',
-    ),
+    ],
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Maayroong problema habang sunusubukang i-login ka, mangyaring subukang muli.',
         'success' => 'Ikaw ay matagumay na naka-log in.',
-    ),
+    ],
 
-    'logout' => array(
+    'logout' => [
         'error'   => 'There was a problem while trying to log you out, please try again.',
         'success' => 'You have successfully logged out.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Mayoong problema habang sinusubukang isagawa ang iyong account, mangyaring subukang muli.',
         'success' => 'Matagumpay na naisagawa ang account.',
-    ),
+    ],
 
-    'forgot-password' => array(
+    'forgot-password' => [
         'error'   => 'Mayroong problema habang sinusubukang kunin ang code sa pag-reset ng password, mangyaring subukang muli.',
         'success' => 'If that email address exists in our system, a password recovery email has been sent.',
-    ),
+    ],
 
-    'forgot-password-confirm' => array(
+    'forgot-password-confirm' => [
         'error'   => 'Mayroong problema habang sunusubukang i-reset ang iyong password, mangyaring subukang muli.',
         'success' => 'Ang iyong password ay nai-reset na.',
-    ),
+    ],
 
-
-);
+];

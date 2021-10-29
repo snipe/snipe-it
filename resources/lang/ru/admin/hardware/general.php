@@ -1,22 +1,22 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Об активах',
     'about_assets_text'            => 'Активы - вещи, которые отслеживаются по серийному номеру или инвентарному номеру. Они, как правило, являются ценными.',
-	'archived'  				=> 'Архивированные',
+    'archived'  				=> 'Архивированные',
     'asset'  					=> 'Актив',
     'bulk_checkout'             => 'Выдать актив пользователю',
     'checkin'  					=> 'Вернуть актив на склад',
     'checkout'  				=> 'Выдать актив пользователю',
     'clone'  					=> 'Клонировать актив',
     'deployable'  				=> 'Доступные',
-    'deleted'  					=> 'Этот актив был удален. <a href="/hardware/:asset_id/restore">Нажмите, чтобы восстановить</a>.',
+    'deleted'  					=> 'This asset has been deleted.',
     'edit'  					=> 'Редактировать актив',
-    'model_deleted'  			=> 'Эта модель актива была удалена. Необходимо сначала восстановить модель актива прежде чем восстанавливать сам актив.<br/> <a href="/hardware/models/:model_id/restore">Нажмите здесь, чтобы восстановить модель</a>.',
+    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'Готов к выдаче',
     'requested'				    => 'Запрошенное',
     'restore'  					=> 'Восстановить актив',
     'pending'  					=> 'Ожидание',
     'undeployable'  			=> 'Выданные',
     'view'  					=> 'Показать актив',
-);
+];

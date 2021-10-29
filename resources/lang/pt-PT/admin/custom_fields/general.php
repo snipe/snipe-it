@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Campos Personalizados',
     'field'		                => 'Campo',
     'about_fieldsets_title'		=> 'Sobre conjuntos de campos',
@@ -30,4 +30,4 @@ return array(
     'create_field'            => 'Novo conjunto de campos personalizado',
     'value_encrypted'      	        => 'O valor deste campo está encriptado na base de dados. apenas administradores poderão ver o valor desencriptado',
     'show_in_email'     => 'Incluir o valor deste campo nos e-mails de checktout enviados ao utilizador? Os campos encriptados não serão incluídos.',
-);
+];

@@ -94,12 +94,10 @@
 }
 .skin-yellow .sidebar-form input[type="text"],
 .skin-yellow .sidebar-form .btn {
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   background-color: #374850;
   border: 1px solid transparent;
   height: 35px;
-  -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 .skin-yellow .sidebar-form input[type="text"] {
@@ -173,3 +171,4 @@ a:visited {
 .search-highlight:hover {
   background-color: #e9d15b;
 }
+

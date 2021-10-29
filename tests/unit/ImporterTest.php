@@ -1,4 +1,5 @@
 <?php
+
 use App\Importer\AccessoryImporter;
 use App\Importer\AssetImporter;
 use App\Importer\ConsumableImporter;
@@ -20,8 +21,8 @@ use Illuminate\Support\Facades\Notification;
 class ImporterTest extends BaseTest
 {
     /**
-    * @var \UnitTester
-    */
+     * @var \UnitTester
+     */
     protected $tester;
 
     public function testDefaultImportAssetWithCustomFields()
@@ -41,43 +42,42 @@ EOT;
             'email' => 'bnelson0@cdbaby.com',
         ]);
         $this->tester->seeRecord('categories', [
-            'name' => 'quam'
+            'name' => 'quam',
         ]);
 
         $this->tester->seeRecord('models', [
             'name' => 'massa id',
-            'model_number' => 6377018600094472
+            'model_number' => 6377018600094472,
         ]);
 
         $this->tester->seeRecord('manufacturers', [
-            'name' => 'Linkbridge'
+            'name' => 'Linkbridge',
         ]);
 
         $this->tester->seeRecord('locations', [
-            'name' => 'Daping'
+            'name' => 'Daping',
         ]);
 
         $this->tester->seeRecord('companies', [
-            'name' => 'Alpha'
+            'name' => 'Alpha',
         ]);
 
         $this->tester->seeRecord('status_labels', [
-            'name' => 'Undeployable'
+            'name' => 'Undeployable',
         ]);
 
         $this->tester->seeRecord('suppliers', [
-            'name' => 'Blogspan'
+            'name' => 'Blogspan',
         ]);
 
         $this->tester->seeRecord('assets', [
             'name' => 'eget nunc donec quis',
             'serial' => '27aa8378-b0f4-4289-84a4-405da95c6147',
             'asset_tag' => '970882174-8',
-            'notes' => "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
+            'notes' => 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.',
             'purchase_date' => '2016-04-05 00:00:01',
-            'purchase_cost' => 133289.59
-,            'warranty_months' => 14,
-            '_snipeit_weight_2' => 35
+            'purchase_cost' => 133289.59,            'warranty_months' => 14,
+            '_snipeit_weight_2' => 35,
             ]);
     }
 
@@ -105,30 +105,29 @@ EOT;
         $this->tester->seeRecord('assets', [
             'asset_tag' => '970882174-8',
             'assigned_type' => User::class,
-            'assigned_to' => $user->id
+            'assigned_to' => $user->id,
         ]);
 
         $user = User::where('username', 'mgibson2')->firstOrFail();
         $this->tester->seeRecord('assets', [
             'asset_tag' => '710141467-2',
             'assigned_type' => User::class,
-            'assigned_to' => $user->id
+            'assigned_to' => $user->id,
         ]);
 
         $location = Location::where('name', 'Planet Earth')->firstOrFail();
         $this->tester->seeRecord('assets', [
             'asset_tag' => '998233705-X',
             'assigned_type' => Location::class,
-            'assigned_to' => $location->id
+            'assigned_to' => $location->id,
         ]);
 
         $location = Location::where('name', 'Daping')->firstOrFail();
         $this->tester->seeRecord('assets', [
             'asset_tag' => '927820758-6',
             'assigned_type' => Location::class,
-            'assigned_to' => $location->id
+            'assigned_to' => $location->id,
         ]);
-
     }
 
     public function testUpdateAssetIncludingCustomFields()
@@ -153,47 +152,47 @@ EOT;
              ->import();
 
         $this->tester->seeRecord('categories', [
-            'name' => 'some other category'
+            'name' => 'some other category',
         ]);
 
         $this->tester->seeRecord('models', [
             'name' => 'Another Model',
-            'model_number' => 356
+            'model_number' => 356,
         ]);
 
         $this->tester->seeRecord('manufacturers', [
-            'name' => 'Linkbridge 32'
+            'name' => 'Linkbridge 32',
         ]);
 
         $this->tester->seeRecord('locations', [
-            'name' => 'New Location'
+            'name' => 'New Location',
         ]);
 
         $this->tester->seeRecord('companies', [
-            'name' => 'Another Company'
+            'name' => 'Another Company',
         ]);
 
         $this->tester->seeRecord('status_labels', [
-            'name' => 'Ready To Go'
+            'name' => 'Ready To Go',
         ]);
 
         $this->tester->seeRecord('suppliers', [
-            'name' => 'Not Creative'
+            'name' => 'Not Creative',
         ]);
 
         $this->tester->seeRecord('assets', [
             'name' => 'A new name',
             'serial' => '67433477',
             'asset_tag' => '970882174-8',
-            'notes' => "I have no notes",
+            'notes' => 'I have no notes',
             'purchase_date' => '2018-04-05 00:00:01',
             'purchase_cost' => 25.59,
             'warranty_months' => 18,
-            '_snipeit_weight_2' => 95
+            '_snipeit_weight_2' => 95,
         ]);
     }
 
-   public function testAssetModelNumber4359()
+    public function testAssetModelNumber4359()
     {
         // As per bug #4359
         // 1) Create model with blank model # and custom field.
@@ -206,27 +205,26 @@ Bonnie Nelson,bnelson0@cdbaby.com,bnelson0,eget nunc donec quis,quam,massa id,Li
 EOT;
 
         // Need to do this manually...
-            $customField = factory(App\Models\CustomField::class)->create(['name' => 'Weight']);
-            $customFieldSet = factory(App\Models\CustomFieldset::class)->create(['name' => 'Default']);
-            $customFieldSet->fields()->attach($customField, [
+        $customField = \App\Models\CustomField::factory()->create(['name' => 'Weight']);
+        $customFieldSet = \App\Models\CustomFieldset::factory()->create(['name' => 'Default']);
+        $customFieldSet->fields()->attach($customField, [
                 'required' => false,
-                'order' => 'asc']);
+                'order' => 'asc', ]);
 
-            factory(App\Models\Category::class)->states('asset-laptop-category')->create([
-                'name' => 'quam'
+        \App\Models\Category::factory()->assetLaptopCategory()->create([
+                'name' => 'quam',
             ]);
 
-            factory(App\Models\Manufacturer::class)->states('apple')->create([
-                'name' => 'Linkbridge'
+        \App\Models\Manufacturer::factory()->apple()->create([
+                'name' => 'Linkbridge',
             ]);
 
-
-            $am = factory(App\Models\AssetModel::class)->create([
+        $am = \App\Models\AssetModel::factory()->create([
                 'name' => 'massa id',
                 'fieldset_id' => $customFieldSet->id,
                 'category_id' => 1,
                 'manufacturer_id' => 1,
-                'model_number' => null
+                'model_number' => null,
             ]);
 
         $this->import(new AssetImporter($csv));
@@ -242,21 +240,21 @@ EOT;
 
         $this->tester->seeRecord('assets', [
             'asset_tag' => '970882174-8',
-            '_snipeit_weight_2' => 115
+            '_snipeit_weight_2' => 115,
         ]);
     }
 
     public function initializeCustomFields()
     {
-            $customField = factory(App\Models\CustomField::class)->create(['name' => 'Weight']);
-            $customFieldSet = factory(App\Models\CustomFieldset::class)->create(['name' => 'Default']);
-            $customFieldSet->fields()->attach($customField, [
+        $customField = \App\Models\CustomField::factory()->create(['name' => 'Weight']);
+        $customFieldSet = \App\Models\CustomFieldset::factory()->create(['name' => 'Default']);
+        $customFieldSet->fields()->attach($customField, [
                 'required' => false,
-                'order' => 'asc']);
+                'order' => 'asc', ]);
 
-            $am = factory(App\Models\AssetModel::class)->create([
+        $am = \App\Models\AssetModel::factory()->create([
                 'name' => 'massa id',
-                'fieldset_id' => $customFieldSet->id
+                'fieldset_id' => $customFieldSet->id,
             ]);
     }
 
@@ -276,7 +274,7 @@ EOT;
             'expiration_date' => 'expiration date',
             'location' => 'loc',
             'notes' => 'Some Notes',
-            'asset_model' => "model name",
+            'asset_model' => 'model name',
         ];
 
         $this->import(new AssetImporter($csv), $customFieldMap);
@@ -294,44 +292,44 @@ EOT;
         ]);
 
         $this->tester->seeRecord('categories', [
-            'name' => 'quam'
+            'name' => 'quam',
         ]);
 
         $this->tester->seeRecord('models', [
             'name' => 'massa id',
-            'model_number' => 6377018600094472
+            'model_number' => 6377018600094472,
         ]);
 
         $this->tester->seeRecord('manufacturers', [
-            'name' => 'Linkbridge'
+            'name' => 'Linkbridge',
         ]);
 
         $this->tester->seeRecord('locations', [
-            'name' => 'Daping'
+            'name' => 'Daping',
         ]);
 
         $this->tester->seeRecord('companies', [
-            'name' => 'Alpha'
+            'name' => 'Alpha',
         ]);
 
         $this->tester->seeRecord('status_labels', [
-            'name' => 'Undeployable'
+            'name' => 'Undeployable',
         ]);
 
         $this->tester->seeRecord('suppliers', [
-            'name' => 'Blogspan'
+            'name' => 'Blogspan',
         ]);
 
         $this->tester->seeRecord('assets', [
             'name' => 'eget nunc donec quis',
             'serial' => '27aa8378-b0f4-4289-84a4-405da95c6147',
             'asset_tag' => '970882174-8',
-            'notes' => "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
+            'notes' => 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.',
             'purchase_date' => '2016-04-05 00:00:01',
             'purchase_cost' => 133289.59,
             'warranty_months' => 14,
             'assigned_to' => $createdUser['id'],
-            'assigned_type' => User::class
+            'assigned_type' => User::class,
         ]);
     }
 
@@ -347,19 +345,19 @@ EOT;
             'purchase_date' => '2006-09-01 00:00:01',
             'order_number' => 'J935H60W',
             'requestable' => 0,
-            'qty' => 278
+            'qty' => 278,
         ]);
 
         $this->tester->seeRecord('locations', [
-            'name' => 'metus. Vivamus'
+            'name' => 'metus. Vivamus',
         ]);
 
         $this->tester->seeRecord('companies', [
-            'name' => 'Macromedia'
+            'name' => 'Macromedia',
         ]);
 
         $this->tester->seeRecord('categories', [
-            'name' => 'Customers'
+            'name' => 'Customers',
         ]);
     }
 
@@ -371,7 +369,6 @@ Walter Carter,09/01/2006,,metus. Vivamus,Macromedia,J935H60W,Customers,False,278
 EOT;
         $this->import(new AccessoryImporter($csv));
         $this->tester->seeNumRecords(1, 'accessories');
-
 
         $updatedCSV = <<<'EOT'
 Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Requestable,Quantity
@@ -389,7 +386,7 @@ EOT;
             'purchase_date' => '2015-09-01 00:00:01',
             'order_number' => '35GGH',
             'requestable' => 1,
-            'qty' => 12
+            'qty' => 12,
         ]);
     }
 
@@ -406,10 +403,10 @@ EOT;
             'item_name' => 'Name',
             'location' => 'Loc',
             'purchase_date' => 'Pur Date',
-            'purchase_cost' => "Cost",
+            'purchase_cost' => 'Cost',
             'order_number' => 'Order Num',
             'requestable' => 'Request',
-            'quantity' => 'Quan'
+            'quantity' => 'Quan',
         ];
         $this->import(new AccessoryImporter($csv), $customFieldMap);
         // dd($this->tester->grabRecord('accessories'));
@@ -418,19 +415,19 @@ EOT;
             'purchase_date' => '2006-09-01 00:00:01',
             'order_number' => 'J935H60W',
             'requestable' => 0,
-            'qty' => 278
+            'qty' => 278,
         ]);
 
         $this->tester->seeRecord('locations', [
-            'name' => 'metus. Vivamus'
+            'name' => 'metus. Vivamus',
         ]);
 
         $this->tester->seeRecord('companies', [
-            'name' => 'Macromedia'
+            'name' => 'Macromedia',
         ]);
 
         $this->tester->seeRecord('categories', [
-            'name' => 'Customers'
+            'name' => 'Customers',
         ]);
     }
 
@@ -449,19 +446,19 @@ EOT;
             'requestable' => 0,
             'qty' => 322,
             'item_no' => 3305,
-            'model_number' => 30123
+            'model_number' => 30123,
         ]);
 
         $this->tester->seeRecord('locations', [
-            'name' => 'mauris blandit mattis.'
+            'name' => 'mauris blandit mattis.',
         ]);
 
         $this->tester->seeRecord('companies', [
-            'name' => 'Lycos'
+            'name' => 'Lycos',
         ]);
 
         $this->tester->seeRecord('categories', [
-            'name' => 'Triamterene/Hydrochlorothiazide'
+            'name' => 'Triamterene/Hydrochlorothiazide',
         ]);
     }
 
@@ -473,7 +470,6 @@ eget,01/03/2011,85.91,mauris blandit mattis.,Lycos,T295T06V,Triamterene/Hydrochl
 EOT;
         $this->import(new ConsumableImporter($csv));
         $this->tester->seeNumRecords(1, 'consumables');
-
 
         $updatedCSV = <<<'EOT'
 Item Name,Purchase Date,Purchase Cost,Location,Company,Order Number,Category,Requestable,Quantity
@@ -492,7 +488,7 @@ EOT;
             'purchase_cost' => 35.45,
             'order_number' => '3666FF',
             'requestable' => 1,
-            'qty' => 15
+            'qty' => 15,
         ]);
     }
 
@@ -509,10 +505,10 @@ EOT;
             'item_name' => 'Name',
             'location' => 'Loc',
             'purchase_date' => 'Pur date',
-            'purchase_cost' => "Pur Cost",
+            'purchase_cost' => 'Pur Cost',
             'order_number' => 'Order Num',
             'requestable' => 'Request',
-            'quantity' => 'Quan'
+            'quantity' => 'Quan',
         ];
         $this->import(new ConsumableImporter($csv), $customFieldMap);
         $this->tester->seeRecord('consumables', [
@@ -521,19 +517,19 @@ EOT;
             'purchase_cost' => 85.91,
             'order_number' => 'T295T06V',
             'requestable' => 0,
-            'qty' => 322
+            'qty' => 322,
         ]);
 
         $this->tester->seeRecord('locations', [
-            'name' => 'mauris blandit mattis.'
+            'name' => 'mauris blandit mattis.',
         ]);
 
         $this->tester->seeRecord('companies', [
-            'name' => 'Lycos'
+            'name' => 'Lycos',
         ]);
 
         $this->tester->seeRecord('categories', [
-            'name' => 'Triamterene/Hydrochlorothiazide'
+            'name' => 'Triamterene/Hydrochlorothiazide',
         ]);
     }
 
@@ -573,31 +569,31 @@ EOT;
             'maintained' => 0,
             'notes' => 'Sed ante. Vivamus tortor. Duis mattis egestas metus.',
             'purchase_cost' => 79.66,
-            'purchase_order' => "53008",
+            'purchase_order' => '53008',
             'reassignable' => 0,
             'serial' => '1aa5b0eb-79c5-40b2-8943-5472a6893c3c',
         ]);
         $this->tester->seeRecord('manufacturers', [
-            'name' => 'Beer, Leannon and Lubowitz'
+            'name' => 'Beer, Leannon and Lubowitz',
         ]);
 
         $this->tester->seeRecord('suppliers', [
-            'name' => "Hegmann, Mohr and Cremin",
+            'name' => 'Hegmann, Mohr and Cremin',
         ]);
 
         $this->tester->seeRecord('companies', [
-            'name' => 'Haag, Schmidt and Farrell'
+            'name' => 'Haag, Schmidt and Farrell',
         ]);
 
         $this->tester->seeRecord('categories', [
-            'name' => 'Graphics Software'
+            'name' => 'Graphics Software',
         ]);
 
         $this->tester->seeNumRecords(80, 'license_seats');
         $this->tester->seeRecord('license_seats', [
             'assigned_to' => $createdUser['id'],
-            'license_id' => \App\Models\License::where('serial','1aa5b0eb-79c5-40b2-8943-5472a6893c3c')->first()->id,
-            'asset_id' => $testAsset->id
+            'license_id' => \App\Models\License::where('serial', '1aa5b0eb-79c5-40b2-8943-5472a6893c3c')->first()->id,
+            'asset_id' => $testAsset->id,
         ]);
     }
 
@@ -609,7 +605,6 @@ Helen Anderson,cspencer0@privacy.gov.au,cspencer0,Argentum Malachite Athletes Fo
 EOT;
         $this->import(new LicenseImporter($csv));
         $this->tester->seeNumRecords(1, 'licenses');
-
 
         $updatedCSV = <<<'EOT'
 Item name,serial,manufacturer,purchase date,purchase cost,purchase order,order number,Licensed To Name,Licensed to Email,expiration date,maintained,reassignable,seats,company,supplier,category,notes
@@ -635,7 +630,7 @@ EOT;
             'maintained' => 1,
             'notes' => 'Sed ante. Vivamus tortor. Duis mattis egestas metus.',
             'purchase_cost' => 1865.34,
-            'purchase_order' => "63 ar",
+            'purchase_order' => '63 ar',
             'reassignable' => 1,
             'serial' => '1aa5b0eb-79c5-40b2-8943-5472a6893c3c',
         ]);
@@ -660,9 +655,9 @@ EOT;
             'manufacturer' => 'manuf',
             'notes' => 'note',
             'order_number' => 'Order Num',
-            'purchase_cost' => "Pur Cost",
+            'purchase_cost' => 'Pur Cost',
             'purchase_date' => 'Pur date',
-            'purchase_order' => "Purc Order",
+            'purchase_order' => 'Purc Order',
             'quantity' => 'Quan',
             'reassignable' => 'reass',
             'requestable' => 'Request',
@@ -682,26 +677,25 @@ EOT;
             'maintained' => 0,
             'notes' => 'Sed ante. Vivamus tortor. Duis mattis egestas metus.',
             'purchase_cost' => 79.66,
-            'purchase_order' => "53008",
+            'purchase_order' => '53008',
             'reassignable' => 0,
             'serial' => '1aa5b0eb-79c5-40b2-8943-5472a6893c3c',
         ]);
 
         $this->tester->seeRecord('manufacturers', [
-            'name' => 'Beer, Leannon and Lubowitz'
+            'name' => 'Beer, Leannon and Lubowitz',
         ]);
 
         $this->tester->seeRecord('suppliers', [
-            'name' => "Hegmann, Mohr and Cremin",
+            'name' => 'Hegmann, Mohr and Cremin',
         ]);
 
         $this->tester->seeRecord('companies', [
-            'name' => 'Haag, Schmidt and Farrell'
+            'name' => 'Haag, Schmidt and Farrell',
         ]);
 
         $this->tester->seeNumRecords(80, 'license_seats');
     }
-
 
     public function testDefaultUserImport()
     {
@@ -724,20 +718,21 @@ EOT;
             'username' => 'bocollopy0',
             'phone' => '63-(199)661-2186',
             'jobtitle' => 'Clinical Specialist',
-            'employee_num' => '7080919053'
+            'employee_num' => '7080919053',
         ]);
 
         $this->tester->seeRecord('companies', [
-            'name' => 'Morar-Ward'
+            'name' => 'Morar-Ward',
         ]);
 
         $this->tester->seeRecord('departments', [
-            'name' => 'Management'
+            'name' => 'Management',
         ]);
 
         Notification::assertSentTo(User::find(2), \App\Notifications\WelcomeNotification::class);
         Notification::assertNotSentTo(User::find(3), \App\Notifications\WelcomeNotification::class);
     }
+
     private function import($importer, $mappings = null)
     {
         if ($mappings) {

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Om avskrivning av tillgångar',
     'about_depreciations'  					=> 'Du kan ställa in avskrivning av tillgångar baserat på linjär avskrivning.',
     'asset_depreciations'  					=> 'Avskrivningar av tillgångar',
@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Avskrivningsnamn',
     'number_of_months'  					=> 'Antal Månader',
     'update'  					            => 'Uppdatera avskrivningar',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
-);
+];

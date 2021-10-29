@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Asset Maintenances',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
+        'asset_maintenances' => 'Обслуговування активів',
+        'edit'               => 'Редагувати обслуговування активів',
+        'delete'             => 'Видалити обслуговування активів',
+        'view'               => 'Переглянути інформацію про обслуговування активів',
         'repair'             => 'Ремонт',
         'maintenance'        => 'Технічне обслуговування',
         'upgrade'            => 'Модернізація',
-        'calibration'        => 'Calibration',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware Support',
+        'calibration'        => 'Калібрування',
+        'software_support'   => 'Підтримка програмного забезпечення',
+        'hardware_support'   => 'Підтримка апаратного забезпечення',
     ];

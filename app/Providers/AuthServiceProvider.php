@@ -80,13 +80,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         $this->commands([
             \Laravel\Passport\Console\InstallCommand::class,
             \Laravel\Passport\Console\ClientCommand::class,
             \Laravel\Passport\Console\KeysCommand::class,
         ]);
-
 
         $this->registerPolicies();
         Passport::routes();
@@ -94,7 +92,6 @@ class AuthServiceProvider extends ServiceProvider
         Passport::refreshTokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
         Passport::personalAccessTokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
         Passport::withCookieSerialization();
-
 
         // --------------------------------
         // BEFORE ANYTHING ELSE
@@ -117,42 +114,40 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-
         // Can the user import CSVs?
         Gate::define('import', function ($user) {
-            if ($user->hasAccess('import') ) {
+            if ($user->hasAccess('import')) {
                 return true;
             }
         });
 
-
-        # -----------------------------------------
-        # Reports
-        # -----------------------------------------
+        // -----------------------------------------
+        // Reports
+        // -----------------------------------------
         Gate::define('reports.view', function ($user) {
             if ($user->hasAccess('reports.view')) {
                 return true;
             }
         });
 
-        # -----------------------------------------
-        # Self
-        # -----------------------------------------
+        // -----------------------------------------
+        // Self
+        // -----------------------------------------
         Gate::define('self.two_factor', function ($user) {
             if (($user->hasAccess('self.two_factor')) || ($user->hasAccess('admin'))) {
                 return true;
             }
         });
 
-        Gate::define('self.api', function($user) {
+        Gate::define('self.api', function ($user) {
             return $user->hasAccess('self.api');
         });
 
-        Gate::define('self.edit_location', function($user) {
+        Gate::define('self.edit_location', function ($user) {
             return $user->hasAccess('self.edit_location');
         });
 
-        Gate::define('self.checkout_assets', function($user) {
+        Gate::define('self.checkout_assets', function ($user) {
             return $user->hasAccess('self.checkout_assets');
         });
 
@@ -167,7 +162,7 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('view', Company::class)
                 || $user->can('view', Manufacturer::class)
                 || $user->can('view', CustomField::class)
-                || $user->can('view', CustomFieldset::class)                
+                || $user->can('view', CustomFieldset::class)
                 || $user->can('view', Depreciation::class);
         });
     }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Pengguna telah membatalkan permintaan item di situs web',
     'a_user_requested' => 'Pengguna telah meminta item di situs web',
     'accessory_name' => 'Nama Aksesori:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Aset:',
     'asset_name' => 'Nama Aset:',
     'asset_requested' => 'Permintaan aset',
-    'asset_tag' => 'Tag Aset',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Ditugaskan untuk',
     'best_regards' => 'Salam Hormat,',
     'canceled' => 'Dibatalkan:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

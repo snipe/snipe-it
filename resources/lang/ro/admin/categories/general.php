@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'asset_categories' 					=> 'Categoriile de active',
     'category_name'  					=> 'Nume categorii',
     'checkin_email'                     => 'Trimiteți e-mail utilizatorului la logare / iesire.',
@@ -19,4 +19,4 @@ return array(
     'use_default_eula'					=> 'Utilizați în schimb <a href="#" data-toggle="modal" data-target="#eulaModal"> implicit EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Foloseste EULA general implicita.</del> EULA implicita nu a fost gasita. A se crea una in Setari.',
 
-);
+];

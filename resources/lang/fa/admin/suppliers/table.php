@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_suppliers_title' => 'درباره تامین کنندگان',
     'about_suppliers_text'  => 'تامین کنندگان برای ردیابی منبع مورد استفاده قرار می گیرند',
     'address'               => 'آدرس تأمین کننده',
@@ -24,4 +24,4 @@ return array(
     'view_assets_for'       => 'نمایش دارایی برای',
     'zip'                   => 'کد پستی',
 
-);
+];

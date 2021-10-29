@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Acerca de Depreciaciones de Equipos',
     'about_depreciations'  					=> 'Puedes establecer las depreciaciones de equipos para depreciar los equipos basados en una depreciación en línea recta.',
     'asset_depreciations'  					=> 'Depreciación de Equipos',
@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Nombre de Depreciación',
     'number_of_months'  					=> 'Número de Meses',
     'update'  					            => 'Actualizar Depreciación',
+    'depreciation_min'                      => 'Valor mínimo después de depreciación'
 
-);
+];

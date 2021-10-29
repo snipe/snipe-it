@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Korisnik je otkazao zahtev za stavke na Web lokaciji',
     'a_user_requested' => 'Korisnik je zatražio stavke na Web lokaciji',
     'accessory_name' => 'Naziv dodatne opreme, pribora:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Imovina:',
     'asset_name' => 'Naziv imovine:',
     'asset_requested' => 'Traženo sredstvo',
-    'asset_tag' => 'Oznaka imovine:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Dodijeljena',
     'best_regards' => 'Srdačan pozdrav',
     'canceled' => 'Otkazano:',
@@ -76,5 +76,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

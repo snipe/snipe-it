@@ -1,10 +1,10 @@
 <?php
 
-return array(
+return [
 
     'id'      => 'תְעוּדַת זֶהוּת',
     'months'   => 'חודשים',
     'term'   => 'טווח',
     'title'      => 'שֵׁם',
 
-);
+];

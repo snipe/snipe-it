@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'Dodeljena',
     'checkout'   		=> 'Prejeto/Izdano',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'Serijska številka',
     'title'      		=> 'Licenca',
 
-);
+];

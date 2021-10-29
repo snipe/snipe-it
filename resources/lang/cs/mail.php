@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Uživatel zrušil žádost o položku na webu',
     'a_user_requested' => 'Uživatel požádal o položku na webu',
     'accessory_name' => 'Název příslušenství:',
@@ -9,7 +9,7 @@ return array(
     'asset' => 'Majetek:',
     'asset_name' => 'Název majetku:',
     'asset_requested' => 'Požadovaný majetek',
-    'asset_tag' => 'Označení majetku:',
+    'asset_tag' => 'Asset Tag',
     'assigned_to' => 'Přiděleno',
     'best_regards' => 'S pozdravem,',
     'canceled' => 'Zrušeno:',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

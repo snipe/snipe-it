@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'accessory_category' 				=> 'Tillbehörskategori',
     'accessory_name'  					=> 'Tillbehörsnamn',
     'checkout'  							=> 'Checka ut tillbehör',
@@ -17,4 +17,4 @@ return array(
     'use_default_eula'					=> 'Använd <a href="#" data-toggle="modal" data-target="#eulaModal">den primära EULA:n</a> istället.',
     'use_default_eula_disabled'			=> '<del>Använd den primära EULA:n istället.</del> Ingen primär EULA är satt. Vänligen lägg till en i Inställningar.',
 
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'על פחת נכסים',
     'about_depreciations'  					=> 'ניתן להגדיר פחתונות נכסים כדי לפחת נכסים על בסיס פחת קו ישר.',
     'asset_depreciations'  					=> 'פחת נכסים',
@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'שם פחת',
     'number_of_months'  					=> 'מספר החודשים',
     'update'  					            => 'עדכון פחת',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
-);
+];

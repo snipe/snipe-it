@@ -4,11 +4,11 @@
         'asset_maintenance_type' => 'Viðhaldgerð',
         'title'                  => 'Titill',
         'start_date'             => 'Hafið',
-        'completion_date'        => 'Completed',
+        'completion_date'        => 'Lokið',
         'cost'                   => 'Kostnaður',
         'is_warranty'            => 'Warranty Improvement',
         'asset_maintenance_time' => 'Dagar',
         'notes'                  => 'Athugasemdir',
         'update'                 => 'Uppfæra',
-        'create'                 => 'Búa til'
+        'create'                 => 'Búa til',
     ];

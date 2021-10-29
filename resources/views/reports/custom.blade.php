@@ -273,7 +273,7 @@
             <div class="form-group">
               <label for="by_status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }}</label>
               <div class="col-md-7 col-sm-11">
-                {{ Form::select('by_status_id', \App\Helpers\Helper::statusLabelList() , old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'by_status_id')) }}
+                {{ Form::select('by_status_id', Helper::statusLabelList() , old('by_status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'by_status_id')) }}
               </div>
             </div>
 
@@ -349,7 +349,7 @@
 
         </div> <!-- /.box-body-->
         <div class="box-footer text-right">
-          <button type="submit" class="btn btn-success"><i class="fa fa-download icon-white" aria-hidden="true"></i> {{ trans('general.generate') }}</button>
+          <button type="submit" class="btn btn-success"><i class="fas fa-download icon-white" aria-hidden="true"></i> {{ trans('general.generate') }}</button>
         </div>
       </div> <!--/.box.box-default-->
     {{ Form::close() }}

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Marcação do Ativo',
     'asset_model'       => 'Modelo',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Ativo ',
     'image'		=> 'Imagem do equipamento',
     'days_without_acceptance' => 'Dias sem que fosse aceito',
-    'monthly_depreciation' => 'Depreciação Mensal'
+    'monthly_depreciation' => 'Depreciação Mensal',
 
-);
+];

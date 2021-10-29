@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'שם רכיב',
     'checkin'                             => 'רכיב Checkin',
     'checkout'                             => 'רכיב Checkout',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'נוֹתָר',
     'total' 			                 => 'סה"כ',
     'update'                            => 'עדכון רכיב',
-);
+];

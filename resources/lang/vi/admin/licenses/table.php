@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'assigned_to'   	=> 'Cấp phát đến',
     'checkout'   		=> 'Nhập/Xuất',
@@ -14,4 +14,4 @@ return array(
     'serial'   			=> 'Serial',
     'title'      		=> 'Bản quyền',
 
-);
+];

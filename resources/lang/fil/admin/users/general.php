@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'This user can login',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Ang mga asset na nakatalaga sa :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'I-edit ang Gumamit',
     'filetype_info'     => 'Ang mga pinapayagang uri ng file ay png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, at rar.',
     'history_user'      => 'Ang kasaysayan para sa :name',
-	'info'				=> 'Impormasyon',
+    'info'				=> 'Impormasyon',
     'restore_user'		=> 'I-klik dito upang maibalik ang mga ito.',
     'last_login'        => 'Ang Huling Pag-login',
     'ldap_config_text'  => 'Pwedeng makita ang configuration settings ng LDAP Admin > Settings. Ang (opsyonal) napiling lokasyon ay itatakda para sa lahat ng mga na-import na mga gumagamit o user.',
@@ -25,4 +24,4 @@ return array(
     'two_factor_admin_optin_help' => 'Ang iyong kasalukuyang mga admin settings ay napapahintulot ng selektibong pagpapatupad ng two-factor authentication.  ',
     'two_factor_enrolled' => 'Ang Na-enroll na 2FA Device ',
     'two_factor_active'   => 'Ang 2FA Active ',
-    );
+    ];

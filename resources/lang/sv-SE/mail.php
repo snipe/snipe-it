@@ -9,7 +9,7 @@ return array(
     'asset' => 'Tillgång:',
     'asset_name' => 'Tillgångsnamn:',
     'asset_requested' => 'Tillgången begärd',
-    'asset_tag' => 'Tillgångstagg:',
+    'asset_tag' => 'Tillgångstagg',
     'assigned_to' => 'Tilldelats',
     'best_regards' => 'Vänliga hälsningar,',
     'canceled' => 'Avbruten:',
@@ -63,7 +63,7 @@ return array(
     'license_expiring_alert' => ':count licens löper ut inom :threshold dagar.|:count licenser löper ut inom :threshold days.',
     'to_reset' => 'För att återställa ditt :web lösenord, fyll i det här formuläret:',
     'type' => 'Typ',
-    'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
+    'upcoming-audits' => 'Det finns :count tillgång som kommer upp för revision inom :threshold days.|Det finns :count tillgångar som kommer upp för revision inom :threshold dagar.',
     'user' => 'Användare',
     'username' => 'Användarnamn',
     'welcome' => 'Välkommen: namn',
@@ -74,6 +74,6 @@ return array(
     'License_Checkin_Notification' => 'Licensen har checkats in',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
-    'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
+    'Expected_Checkin_Date' => 'En tillgång som checkas ut till dig kommer att checkas in igen :date',
     'your_assets' => 'Visa dina tillgångar'
 );

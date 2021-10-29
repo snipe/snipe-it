@@ -1,22 +1,22 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Acerca de Activos',
     'about_assets_text'            => 'Los activos son elementos con número de serie o etiqueta de activos.  Tienden a ser artículos de alto valor donde es importante identificar un elemento específico.',
-	'archived'  				=> 'Archivado',
+    'archived'  				=> 'Archivado',
     'asset'  					=> 'Equipo',
     'bulk_checkout'             => 'Checkout Assets',
     'checkin'  					=> 'Quitar Equipo',
     'checkout'  				=> 'Activo de pago',
     'clone'  					=> 'Clonar Equipo',
     'deployable'  				=> 'Desplegable',
-    'deleted'  					=> 'Este equipo ha sido eliminado. <a href="/hardware/:asset_id/restore">Click aqui para restaurarlot</a>.',
+    'deleted'  					=> 'This asset has been deleted.',
     'edit'  					=> 'Editar Equipo',
-    'model_deleted'  			=> 'Este modelo de equipo ha sido borrado. Debe restaurar el modelo antes de poder restaurar el equipo.<br/><a href="/hardware/models/:model_id/restore">Hacer click aquí para restaurar el modelo</a>.',
+    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'Requerible',
     'requested'				    => 'Solicitado',
     'restore'  					=> 'Restaurar equipo',
     'pending'  					=> 'Pendiente',
     'undeployable'  			=> 'No desplegable',
     'view'  					=> 'Ver Equipo',
-);
+];

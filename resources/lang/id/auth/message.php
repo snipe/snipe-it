@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'Akun dengan ini email telah digunakan.',
     'account_not_found'      => 'Nama pengguna atau sandi tidak benar.',
@@ -9,37 +9,36 @@ return array(
     'account_banned'         => 'Akun pengguna ini dilarang.',
     'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
 
-    'two_factor' => array(
+    'two_factor' => [
         'already_enrolled'      => 'Your device is already enrolled.',
         'success'               => 'You have successfully logged in.',
         'code_required'         => 'Two-factor code is required.',
         'invalid_code'          => 'Two-factor code is invalid.',
-    ),
+    ],
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'Terdapat kesalahan ketika anda mencoba masuk, silahkan coba kembali.',
         'success' => 'Anda berhasil masuk.',
-    ),
+    ],
 
-    'logout' => array(
+    'logout' => [
         'error'   => 'There was a problem while trying to log you out, please try again.',
         'success' => 'You have successfully logged out.',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'Terdapat kesalahan ketika membuat akun anda, silahkan coba kembali.',
         'success' => 'Akun berhasil dibuat.',
-    ),
+    ],
 
-    'forgot-password' => array(
+    'forgot-password' => [
         'error'   => 'Terdapat kesalahan ketika reset kode kata sandi anda, silahkan coba kembali.',
         'success' => 'If that email address exists in our system, a password recovery email has been sent.',
-    ),
+    ],
 
-    'forgot-password-confirm' => array(
+    'forgot-password-confirm' => [
         'error'   => 'Terdapat kesalahan ketika reset kata sandi anda, silahkan coba kembali.',
         'success' => 'Password anda sudah berhasil di reset.',
-    ),
+    ],
 
-
-);
+];

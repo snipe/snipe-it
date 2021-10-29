@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Aktiewe gids',
     'ad_domain'				    => 'Active Directory-domein',
     'ad_domain_help'			=> 'Dit is soms dieselfde as jou e-pos domein, maar nie altyd nie.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'Dit is \'n Active Directory-bediener',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'Uitgaande Alert Drempel (in dae)',
     'alert_inv_threshold'		=> 'Voorraadwaarskuwingsdrempel',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Bate ID\'s',
     'audit_interval'            => 'Ouditinterval',
     'audit_interval_help'       => 'As u gereeld u bates fisies moet kontroleer, vul die interval in maande in.',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Voer twee-faktor kode in',
     'two_factor_config_complete'	=> 'Dien kode in',
     'two_factor_enabled_edit_not_allowed' => 'Jou administrateur laat jou nie toe om hierdie instelling te wysig nie.',
-    'two_factor_enrollment_text'	=> "Twee faktor verifikasie is nodig, maar jou toestel is nog nie ingeskryf nie. Maak jou Google Authenticator-program oop en scan die QR-kode hieronder om jou toestel in te skryf. Sodra jy jou toestel ingeskryf het, voer die kode hieronder in",
+    'two_factor_enrollment_text'	=> 'Twee faktor verifikasie is nodig, maar jou toestel is nog nie ingeskryf nie. Maak jou Google Authenticator-program oop en scan die QR-kode hieronder om jou toestel in te skryf. Sodra jy jou toestel ingeskryf het, voer die kode hieronder in',
     'require_accept_signature'      => 'Vereis Handtekening',
     'require_accept_signature_help_text'      => 'As u hierdie kenmerk aanskakel, sal gebruikers fisies moet afmeld wanneer hulle \'n bate aanvaar.',
     'left'        => 'links',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'Lengte van bate-etikette, insluitend zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

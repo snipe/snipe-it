@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => '設置場所について',
     'about_locations'           => '設置場所はユーザー、資産、およびその他のアイテムの情報追跡に使用されます。',
     'assets_rtd'                => '資産', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -11,8 +11,8 @@ return array(
     'country'                   => '国',
     'create'                    => '所在地を作成',
     'update'                    => '所在地を更新',
-    'print_assigned'            => 'Print Assigned',
-    'print_all_assigned'        => 'Print All Assigned',
+    'print_assigned'            => '割り当て先を印刷',
+    'print_all_assigned'        => '割り当て先をすべて印刷',
     'name'                      => 'ロケーション名',
     'address'                   => '住所',
     'zip'                       => '郵便番号',
@@ -20,4 +20,4 @@ return array(
     'parent'                    => '上位',
     'currency'                  => '現地通貨',
     'ldap_ou'                   => 'LDAP OU を検索',
-    );
+    ];

@@ -1,22 +1,22 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Om aktiver',
     'about_assets_text'            => 'Aktiver er poster sporet af serienummer eller aktiv tag. De har tendens til at være højere værdi elementer, hvor identifikation af en bestemt genstand betyder noget.',
-	'archived'  				=> 'arkiverede',
+    'archived'  				=> 'arkiverede',
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Udtjek aktiv',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Checkout Asset',
     'clone'  					=> 'Klonaktiver',
     'deployable'  				=> 'Deployable',
-    'deleted'  					=> 'Dette aktiv er blevet slettet. <a href="/hardware/:asset_id/restore">Klik her for at gendanne det</a>.',
+    'deleted'  					=> 'This asset has been deleted.',
     'edit'  					=> 'Rediger aktiv',
-    'model_deleted'  			=> 'Denne aktivmodel er blevet slettet. Du skal gendanne modellen, før du kan gendanne Asset.<br/> <a href="/hardware/models/:model_id/restore">Klik her for at gendanne model</a>.',
+    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'kan anmodes',
     'requested'				    => 'Anmodet',
     'restore'  					=> 'Gendan aktiv',
     'pending'  					=> 'Verserende',
     'undeployable'  			=> 'Undeployable',
     'view'  					=> 'Se aktiv',
-);
+];

@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory tartomány',
     'ad_domain_help'			=> 'Ez néha megegyezik az e-mail domainjével, de nem mindig.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'Email másolat',
     'admin_cc_email_help'       => 'Ha azt szeretné, hogy a kiadáskor/visszavételkor a felhasználóknak küldött levél másolata egy másik címre is elmenjen, akkor írja be a címet ide. Ellenkező esetben hagyja szabadon a mezőt.',
     'is_ad'				        => 'Ez egy Active Directory szerver',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'A figyelmeztetések lejárata küszöbérték (napokban)',
     'alert_inv_threshold'		=> 'Leltár riasztási küszöb',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Eszköz ID',
     'audit_interval'            => 'Audit időtartam',
     'audit_interval_help'       => 'Ha rendszeres fizikai ellenőrzést igényel az eszközökkel, adja meg az intervallumot hónapokban.',
@@ -142,7 +142,7 @@ return array(
     'saml_slo_label'            => 'SAML Single Log Out',
     'saml_slo'                  => 'Send a LogoutRequest to IdP on Logout',
     'saml_slo_help'             => 'This will cause the user to be first redirected to the IdP on logout. Leave unchecked if the IdP doesn\'t correctly support SP-initiated SAML SLO.',
-    'saml_custom_settings'      => 'SAML Custom Settings',
+    'saml_custom_settings'      => 'SAML egyedi beállítások',
     'saml_custom_settings_help' => 'You can specify additional settings to the onelogin/php-saml library. Use at your own risk.',
     'setting'                   => 'Beállítás',
     'settings'                  => 'Beállítások',
@@ -213,7 +213,7 @@ return array(
     'two_factor_enter_code'	=> 'Adja meg a két faktor kódot',
     'two_factor_config_complete'	=> 'Kód küldése',
     'two_factor_enabled_edit_not_allowed' => 'Az adminisztrátor nem teszi lehetővé a beállítás szerkesztését.',
-    'two_factor_enrollment_text'	=> "Két tényező hitelesítésre van szükség, de a készülék még nem került bejegyzésre. Nyissa meg a Google Hitelesítő alkalmazást, és szkennelje be az alábbi QR-kódot a készülék regisztrálásához. Miután beírta a készüléket, adja meg az alábbi kódot",
+    'two_factor_enrollment_text'	=> 'Két tényező hitelesítésre van szükség, de a készülék még nem került bejegyzésre. Nyissa meg a Google Hitelesítő alkalmazást, és szkennelje be az alábbi QR-kódot a készülék regisztrálásához. Miután beírta a készüléket, adja meg az alábbi kódot',
     'require_accept_signature'      => 'Aláírásra van szükség',
     'require_accept_signature_help_text'      => 'Ha engedélyezni szeretné ezt a funkciót, akkor a felhasználóknak fizikailag ki kell jelentkezniük egy eszköz elfogadásáról.',
     'left'        => 'balra',
@@ -226,4 +226,4 @@ return array(
     'unique_serial_help_text'                => 'Bejelölés esetén az eszközök széria számának egyedinek kell lenni',
     'zerofill_count'        => 'Az eszközcímkék hossza, beleértve a nem töltöt',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'accepted'                  => 'To sredstev ste uspešno sprejeli.',
     'declined'                  => 'To sredstev ste uspešno zavrnili.',
@@ -14,8 +14,7 @@ return array(
     'ldap_not_configured'        => 'Integracija LDAP za to namestitev ni bila konfigurirana.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
 
-
-    'success' => array(
+    'success' => [
         'create'    => 'Uporabnik je bil uspešno ustvarjen.',
         'update'    => 'Uporabnik je bil uspešno posodobljen.',
         'update_bulk'    => 'Uporabniki so bili uspešno posodobljeni!',
@@ -26,9 +25,9 @@ return array(
         'unsuspend' => 'Uporabnik je bil uspešno od-suspendiran.',
         'restored'  => 'Uporabnik je bil uspešno obnovljen.',
         'import'    => 'Uporabniki so bili uvoženi uspešno.',
-    ),
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Pri ustvarjanju uporabnika je prišlo do težave. Prosim poskusite ponovno.',
         'update' => 'Prišlo je do težave pri posodabljanju uporabnika. Prosim poskusite ponovno.',
         'delete' => 'Pri brisanju uporabnika je prišlo do težave. Prosim poskusite ponovno.',
@@ -43,18 +42,18 @@ return array(
         'ldap_could_not_search' => 'Strežnika LDAP ni bilo mogoče najti. Preverite konfiguracijo strežnika LDAP v konfiguracijski datoteki LDAP. <br>Napaka strežnika LDAP:',
         'ldap_could_not_get_entries' => 'Vnose iz strežnika LDAP ni bilo mogoče pridobiti. Preverite konfiguracijo strežnika LDAP v konfiguracijski datoteki LDAP. <br>Napaka strežnika LDAP:',
         'password_ldap' => 'Geslo za ta račun upravlja LDAP / Active Directory. Za spremembo gesla se obrnite na oddelek IT. ',
-    ),
+    ],
 
-    'deletefile' => array(
+    'deletefile' => [
         'error'   => 'Datoteka ni izbrisana. Prosim poskusite ponovno.',
         'success' => 'Datoteka je uspešno izbrisana.',
-    ),
+    ],
 
-    'upload' => array(
+    'upload' => [
         'error'   => 'Datoteka(e) niso naložene. Prosim poskusite ponovno.',
         'success' => 'Datoteka(e) so bile uspešno naložene.',
         'nofiles' => 'Niste izbrali nobenih datotek za nalaganje',
         'invalidfiles' => 'Ena ali več vaših datotek je prevelika ali pa je tip datoteke, ki ni dovoljen. Dovoljeni tipi datotek so png, gif, jpg, doc, docx, pdf in txt.',
-    ),
+    ],
 
-);
+];

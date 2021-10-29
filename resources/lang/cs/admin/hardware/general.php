@@ -1,22 +1,22 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'O majetku',
     'about_assets_text'            => 'Majetky jsou položky sledované sériovým číslem nebo značkou. Mají tendenci mít vyšší hodnotou, tam kde je důležitá identifikace určité položky.',
-	'archived'  				=> 'Archivováno',
+    'archived'  				=> 'Archivováno',
     'asset'  					=> 'Majetek',
     'bulk_checkout'             => 'Vyskladnit majetek',
     'checkin'  					=> 'Převzít majetek',
     'checkout'  				=> 'Pokladní majetek',
     'clone'  					=> 'Klonovat majetek',
     'deployable'  				=> 'Připraveno k nasazení',
-    'deleted'  					=> 'Toto zařízení bylo odstraněno. <a href="/hardware/:asset_id/restore">Klepněte zde pro jeho obnovení</a>.',
+    'deleted'  					=> 'This asset has been deleted.',
     'edit'  					=> 'Upravit majetek',
-    'model_deleted'  			=> 'Tento model majetku byl odstraněn. Přejete-li si obnovit zařízení, <a href="/hardware/models/:model_id/restore">klepněte zde</a><br/> a obnovte nejdříve jeho model.',
+    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'Lze vyžádat',
     'requested'				    => 'Požadováno',
     'restore'  					=> 'Obnovit zařízení',
     'pending'  					=> 'Čekající',
     'undeployable'  			=> 'Nepřiřaditelné',
     'view'  					=> 'Zobrazit majetek',
-);
+];

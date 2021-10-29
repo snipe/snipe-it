@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Eiendelsmerke',
     'asset_model'       => 'Modell',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Eiendel ',
     'image'		=> 'Enhet bilde',
     'days_without_acceptance' => 'Dager uten aksept',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

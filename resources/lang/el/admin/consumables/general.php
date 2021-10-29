@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Έλεγχος κατανάλωσης σε χρήστη',
     'consumable_name'                   => 'Όνομα αναλώσιμου',
     'create'                            => 'Δημιουργία αναλώσιμου',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Απομένουν',
     'total' 			                => 'Σύνολο',
     'update'                            => 'Ενημέρωση αναλώσιμων',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'Informazioni su Kit Predefiniti',
     'about_kits_text'                   => 'I Kit Predefiniti ti permettono di assegnare rapidamente una collezione di prodotti (asset, licenze, ecc.) ad un utente. Può esserti d\'aiuto nel caso in cui devi assegnare lo stesso lotto di prodotti ad uno o più utenti allo stesso tempo.',
     'checkout'                          => 'Assegna Kit ',
@@ -14,4 +14,4 @@ return array(
     'none_consumables'                  => 'Non ci sono abbastanza consumabili disponibili da assegnare per :consumable. Ulteriori :qty sono richiesti. ',
     'none_accessory'                    => 'Non ci sono abbastanza accessori disponibili da assegnare per :accessory. Ulteriori :qty sono richiesti. ',
 
-);
+];

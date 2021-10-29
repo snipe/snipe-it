@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Oznaka imovine',
     'asset_model'       => 'Model',
@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Imovina ',
     'image'		=> 'Slika uređaja',
     'days_without_acceptance' => 'Days Without Acceptance',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Monthly Depreciation',
 
-);
+];

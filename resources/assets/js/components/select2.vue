@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    require('select2');
+    //require('select2');
     export default {
         /*
          * The component's data.

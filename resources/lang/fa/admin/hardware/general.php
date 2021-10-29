@@ -1,18 +1,18 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'درباره دارایی ها',
     'about_assets_text'            => 'دارایی ها مواردی هستند که توسط شماره سریال یا برچسب دارایی دنبال می شوند. آنها تمایل دارند که مقادیر ارزش بیشتری داشته باشند که در آن شناسایی یک مورد خاص موردنیاز باشد.',
-	'archived'  				=> 'بایگانی شد',
+    'archived'  				=> 'بایگانی شد',
     'asset'  					=> 'دارایی',
     'bulk_checkout'             => 'خروج دارایی ها',
     'checkin'  					=> 'دارایی checkin',
     'checkout'  				=> 'دارایی پرداخت',
     'clone'  					=> 'دارایی شگرف',
     'deployable'  				=> 'گسترش',
-    'deleted'  					=> 'این دارایی حذف شده است. <a href="/hardware/:asset_id/restore"> اینجا به بازگرداندن آن کلیک کنید </a>.',
+    'deleted'  					=> 'This asset has been deleted.',
     'edit'  					=> 'ویرایش دارایی',
-    'model_deleted'  			=> 'این مدل دارایی حذف شده است. شما باید مدل بازگرداندن قبل از شما می توانید دارایی بازگرداندن کنید. <br/> <a href="/hardware/models/:model_id/restore"> برای بازگرداندن مدل </a> را اینجا را کلیک کنید.',
+    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'در خواست شد',
     'requested'				    => 'درخواست شده',
     'restore'  					=> 'بازیابی دارایی',
@@ -20,4 +20,4 @@ return array(
     'undeployable'  			=> 'غیرقابل گسترش',
     'view'  					=> 'نمایش دارایی ها
 ',
-);
+];

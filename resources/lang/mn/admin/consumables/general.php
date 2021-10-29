@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'checkout'                          => 'Хэрэглэгчдэд хэрэглэх боломжтой',
     'consumable_name'                   => 'Боломжийн нэр',
     'create'                            => 'Болгоомжтой болгох',
@@ -8,4 +8,4 @@ return array(
     'remaining' 			            => 'Үлдсэн',
     'total' 			                => 'Нийт',
     'update'                            => 'Боломжийн талаар шинэчиллээ',
-);
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Дії',
     'add'    	                => 'Додати новий',
     'cancel'                    => 'Скасувати',
@@ -11,7 +11,7 @@ return array(
     'request'                   => 'Запит',
     'submit'  	                => 'Зберегти',
     'upload'                    => 'Upload',
-	'select_file'				=> 'Обрати файл...',
+    'select_file'				=> 'Обрати файл...',
     'select_files'				=> 'Select Files...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-);
+];

@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'روزها',
         'notes'                  => 'یادداشت ها',
         'update'                 => 'بروزرسانی',
-        'create'                 => 'ایجاد'
+        'create'                 => 'ایجاد',
     ];

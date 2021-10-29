@@ -1,22 +1,22 @@
 <?php
 
-return array(
+return [
     'about_assets_title'           => 'Хөрөнгийн тухай',
     'about_assets_text'            => 'Актив нь сериал дугаар буюу хөрөнгийн тэмдэгтээр хянагдсан зүйлс юм. Эдгээр нь тодорхой зүйлүүдийг тодорхойлоход илүү үнэ цэнэтэй зүйлс байх хандлагатай байдаг.',
-	'archived'  				=> 'Архивлагдсан',
+    'archived'  				=> 'Архивлагдсан',
     'asset'  					=> 'Актив',
     'bulk_checkout'             => 'Хөрөнгийг олгох',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Тооцоот Хөрөнгийн',
     'clone'  					=> 'Clone Asset',
     'deployable'  				=> 'Даалгавартай',
-    'deleted'  					=> 'Энэ хөрөнгө устгагдсан байна. <a href="/hardware/:asset_id/restore">Дахин оруулна уу</a>.',
+    'deleted'  					=> 'This asset has been deleted.',
     'edit'  					=> 'Хөрөнгийг засварлах',
-    'model_deleted'  			=> 'Энэ активын загвар устгагдсан байна. Хөрөнгийг сэргээхээс өмнө загварыг сэргээх хэрэгтэй.<br/> <a href="/hardware/models/:model_id/restore">Загвар</a>-г сэргээхийн тулд энд дарна уу.',
+    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'Уучлаарай',
     'requested'				    => 'Хүсэлт гаргасан',
     'restore'  					=> 'Хөрөнгийг дахин сэргээх',
     'pending'  					=> 'Хүлээгдэж байна',
     'undeployable'  			=> 'Undeployable',
     'view'  					=> 'Хөрөнгийг харах',
-);
+];

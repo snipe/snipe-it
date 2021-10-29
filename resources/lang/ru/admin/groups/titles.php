@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'О группах',
     'about_groups'                  => 'Группы используются для обобщения разрешений пользователей.',
     'group_management' 	 	=> 'Управление группой',
@@ -11,4 +11,4 @@ return array(
     'allow' 	 			=> 'Разрешить',
     'deny' 	 				=> 'Запретить',
 
-);
+];

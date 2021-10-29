@@ -1,12 +1,12 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'دایرکتوری فعال',
     'ad_domain'				    => 'دامنه فعال دایرکتوری',
     'ad_domain_help'			=> 'این گاهی اوقات دامنه ایمیل شماست اما همیشه اینطور نیست.',
     'ad_append_domain_label'    => 'Append domain name',
     'ad_append_domain'          => 'Append domain name to username field',
-    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".' ,
+    'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Email',
     'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
     'is_ad'				        => 'این سرور Active Directory است',
@@ -15,7 +15,7 @@ return array(
     'alert_interval'			=> 'آستانه ی انقضای هشدارها( به روز)',
     'alert_inv_threshold'		=> 'فهرست آستانه ی هشدار',
     'allow_user_skin'           => 'Allow user skin',
-    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.' ,
+    'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'ID حساب',
     'audit_interval'            => 'فاصله حسابرسی',
     'audit_interval_help'       => 'اگر شما ملزم هستید که به طور منظم از دارایی های خود حسابرسی کنید، فاصله را در ماه وارد کنید.',
@@ -214,7 +214,7 @@ return array(
     'two_factor_enter_code'	=> 'کد دو فاکتور را وارد کنید',
     'two_factor_config_complete'	=> 'ارسال کد',
     'two_factor_enabled_edit_not_allowed' => 'سرپرست شما اجازه نمی دهد که این تنظیم را ویرایش کنید.',
-    'two_factor_enrollment_text'	=> "احراز هویت دو عامل لازم است، اما دستگاه شما هنوز ثبت نشده است. برنامه Google Authenticator خود را باز کنید و کد QR زیر را برای ثبت نام دستگاه خود اسکن کنید. هنگامی که دستگاه خود را ثبت نام کردید، کد زیر را وارد کنید",
+    'two_factor_enrollment_text'	=> 'احراز هویت دو عامل لازم است، اما دستگاه شما هنوز ثبت نشده است. برنامه Google Authenticator خود را باز کنید و کد QR زیر را برای ثبت نام دستگاه خود اسکن کنید. هنگامی که دستگاه خود را ثبت نام کردید، کد زیر را وارد کنید',
     'require_accept_signature'      => 'امضا لازم است',
     'require_accept_signature_help_text'      => 'فعال کردن این ویژگی، کاربران را مجبور به فیزیکی در پذیرش یک دارایی می کند.',
     'left'        => 'چپ',
@@ -227,4 +227,4 @@ return array(
     'unique_serial_help_text'                => 'Checking this box will enforce a uniqueness constraint on asset serials',
     'zerofill_count'        => 'طول برچسب دارایی، از جمله zerofill',
     'username_format_help'   => 'This setting will only be used by the import process if a username is not provided and we have to generate a username for you.',
-);
+];

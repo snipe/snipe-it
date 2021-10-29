@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Meysydd addasedig',
     'field'		                => 'Meysydd',
     'about_fieldsets_title'		=> 'Amdan grwpiau meysydd',
@@ -29,4 +29,4 @@ return array(
     'create_field'            => 'Maes Addasedig newydd',
     'value_encrypted'      	        => 'Mae gwerth y maes hwn wedi\'i amgryptio yn y gronfa ddata. Dim ond defnyddwyr gweinyddol fydd yn gallu gweld y gwerth wedi\'i ddadgryptio',
     'show_in_email'     => 'Cynnwys gwerth y maes hwn mewn e-byst talu a anfonir at y defnyddiwr? Ni ellir cynnwys meysydd wedi\'u hamgryptio mewn e-byst.',
-);
+];

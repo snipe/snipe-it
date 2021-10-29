@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'Über vordefinierte Kits',
     'about_kits_text'                   => 'Mit vordefinierten Kits können Sie schnell eine Sammlung von Elementen (Assets, Lizenzen, etc.) an einen Benutzer ausgeben. Dies kann hilfreich sein, wenn Ihr Onboarding-Prozess über viele Nutzer hinweg einheitlich ist und alle Nutzer die gleichen Artikel erhalten.',
     'checkout'                          => 'Kit herausgeben ',
@@ -14,4 +14,4 @@ return array(
     'none_consumables'                  => 'Es gibt nicht genügend verfügbare Einheiten von :consumable zum Herausgeben. :qty sind erforderlich. ',
     'none_accessory'                    => 'Es gibt nicht genügend verfügbare Einheiten von :accessory zum Herausgeben. :qty werden benötigt. ',
 
-);
+];

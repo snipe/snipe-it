@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,9 +13,9 @@ return array(
     |
     */
 
-    "more_info_title" => "Daha Fazla Bilgi",
+    'more_info_title' => 'Daha Fazla Bilgi',
 
-    "audit_help" => "Bu kutucuğu işaretlediğinizde varlık kaydı yeni lokasyonu gösterir. İşaretlenmemiş olarak bırakırsanız denetim kayıtlarında basitçe lokasyonu not edecektir. <br><br>Eğer varlığın çıkışı yapılmışsa, çıkışı yapılan kişiyi, varlığı veya lokasyonu değiştirmeyecektir.",
+    'audit_help' => 'Bu kutucuğu işaretlediğinizde varlık kaydı yeni lokasyonu gösterir. İşaretlenmemiş olarak bırakırsanız denetim kayıtlarında basitçe lokasyonu not edecektir. <br><br>Eğer varlığın çıkışı yapılmışsa, çıkışı yapılan kişiyi, varlığı veya lokasyonu değiştirmeyecektir.',
 
     'assets' => 'Varlıklar seri numaraları veya varlık etiketleri ile takip edilir. Bunlar bir öğeyi belirlemek için daha yüksek öneme sahip olma eğilimindedir.',
 
@@ -31,6 +31,4 @@ return array(
 
     'depreciations' => 'Demirbaş amortismanını sabit bir oran ile düşecek şekilde ayarlayabilirsiniz.',
 
-
-
-);
+];

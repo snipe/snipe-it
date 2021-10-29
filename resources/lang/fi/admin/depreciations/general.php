@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'Lisätietoja laitteiden poistoista',
     'about_depreciations'  					=> 'Voit määrittää laitteelle poistoluokan poistaaksesi laitteen laitekannastasi määritetyn ajan jälkeen.',
     'asset_depreciations'  					=> 'Laitteiden poistot',
@@ -8,5 +8,6 @@ return array(
     'depreciation_name'  					=> 'Poiston nimi',
     'number_of_months'  					=> 'Kuukausien lukumäärä',
     'update'  					            => 'Päivitä poistot',
+    'depreciation_min'                      => 'Minimiarvo poistojen jälkeen'
 
-);
+];

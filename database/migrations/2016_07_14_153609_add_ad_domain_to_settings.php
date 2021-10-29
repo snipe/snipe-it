@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class AddAdDomainToSettings extends Migration
 {
@@ -13,7 +13,7 @@ class AddAdDomainToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->string('ad_domain')->nullable()->default(NULL);
+            $table->string('ad_domain')->nullable()->default(null);
         });
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'Tạo kiểu tài sản',
     'created_at' 			=> 'Đã tạo lúc',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'Cập nhật kiểu tài sản',
     'clone'				=> 'Nhân đôi kiểu tài sản',
     'edit'				=> 'Cập nhật kiểu tài sản',
-);
+];

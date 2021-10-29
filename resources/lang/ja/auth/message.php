@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'account_already_exists' => 'このemailのアカウントが既に存在しています。',
     'account_not_found'      => 'ユーザー名またはパスワードが不正です。',
@@ -9,37 +9,36 @@ return array(
     'account_banned'         => 'このユーザーアカウントは禁止されています。',
     'throttle'               => '複数回ログインに失敗しました。 :minutes 分後に再試行してください。',
 
-    'two_factor' => array(
+    'two_factor' => [
         'already_enrolled'      => 'お使いのデバイスは既に登録されています。',
         'success'               => 'ログインに成功しました。',
         'code_required'         => '二段階認証コードが必要です。',
         'invalid_code'          => '二段階認証コードが無効です。',
-    ),
+    ],
 
-    'signin' => array(
+    'signin' => [
         'error'   => 'ログインする際に問題が発生しました。もう一度やり直して下さい。',
         'success' => 'ログインに成功しました。',
-    ),
+    ],
 
-    'logout' => array(
+    'logout' => [
         'error'   => 'ログアウト中に問題が発生しました。もう一度やり直してください。',
         'success' => 'ログアウトに成功しました。',
-    ),
+    ],
 
-    'signup' => array(
+    'signup' => [
         'error'   => 'アカウントを作成する際に問題が発生しました。もう一度やり直して下さい。',
         'success' => 'アカウントが作成されました。',
-    ),
+    ],
 
-    'forgot-password' => array(
+    'forgot-password' => [
         'error'   => 'パスワードリセットの際に問題が発生しました。もう一度やり直して下さい。',
         'success' => 'このシステムにそのメールアドレスが存在する場合は、パスワード回復用のメールが送信されました。',
-    ),
+    ],
 
-    'forgot-password-confirm' => array(
+    'forgot-password-confirm' => [
         'error'   => 'パスワードをリセットする際に問題が発生しました。もう一度やり直して下さい。',
         'success' => 'パスワードがリセットされました。',
-    ),
+    ],
 
-
-);
+];

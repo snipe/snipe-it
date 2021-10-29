@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'create'				=> 'Uusi laitemalli',
     'created_at' 			=> 'Luontiaika',
@@ -14,4 +14,4 @@ return array(
     'update'				=> 'Päivitä laitemalli',
     'clone'				=> 'Monista malli',
     'edit'				=> 'Muokkaa mallia',
-);
+];

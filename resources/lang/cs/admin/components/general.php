@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'component_name'                  => 'Název dílu',
     'checkin'                             => 'Převzít díl',
     'checkout'                             => 'Předat díl',
@@ -12,4 +12,4 @@ return array(
     'remaining' 			             => 'Zbývá',
     'total' 			                 => 'Celkem',
     'update'                            => 'Upravit díl',
-);
+];

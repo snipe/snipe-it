@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -13,7 +14,6 @@ ini_set('memory_limit', env('IMPORT_MEMORY_LIMIT', '500M'));
  */
 class ObjectImportCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -37,7 +37,9 @@ class ObjectImportCommand extends Command
     {
         parent::__construct();
     }
+
     private $bar;
+
     /**
      * Execute the console command.
      *
@@ -55,7 +57,6 @@ class ObjectImportCommand extends Command
                  ->setShouldNotify($this->option('send-welcome'))
                  ->setUsernameFormat($this->option('username_format'));
 
-
         // This $logFile/useFiles() bit is currently broken, so commenting it out for now
         // $logFile = $this->option('logfile');
         // \Log::useFiles($logFile);
@@ -64,29 +65,28 @@ class ObjectImportCommand extends Command
 
         $this->bar = null;
 
-        if (!empty($this->errors)) {
-            $this->comment("The following Errors were encountered.");
+        if (! empty($this->errors)) {
+            $this->comment('The following Errors were encountered.');
             foreach ($this->errors as $asset => $error) {
-                $this->comment('Error: Item: ' . $asset . ' failed validation: ' . json_encode($error));
+                $this->comment('Error: Item: '.$asset.' failed validation: '.json_encode($error));
             }
         } else {
-            $this->comment("All Items imported successfully!");
+            $this->comment('All Items imported successfully!');
         }
-        $this->comment("");
-
-        return;
+        $this->comment('');
     }
 
     public function errorCallback($item, $field, $errorString)
     {
         $this->errors[$item->name][$field] = $errorString;
     }
+
     public function progress($count)
     {
-        if (!$this->bar) {
+        if (! $this->bar) {
             $this->bar = $this->output->createProgressBar($count);
         }
-        static $index =0;
+        static $index = 0;
         $index++;
         if ($index < $count) {
             $this->bar->advance();
@@ -94,11 +94,11 @@ class ObjectImportCommand extends Command
             $this->bar->finish();
         }
     }
+
     // Tracks the current item for error messages
     private $updating;
     // An array of errors encountered while parsing
     private $errors;
-
 
     /**
      * Log a message to file, configurable by the --log-file parameter.
@@ -108,7 +108,7 @@ class ObjectImportCommand extends Command
      * @since 3.0
      * @param string $string
      * @param string $level
-    */
+     */
     public function log($string, $level = 'info')
     {
         if ($level === 'warning') {
@@ -121,6 +121,7 @@ class ObjectImportCommand extends Command
             }
         }
     }
+
     /**
      * Get the console command arguments.
      *
@@ -130,11 +131,10 @@ class ObjectImportCommand extends Command
      */
     protected function getArguments()
     {
-        return array(
-            array('filename', InputArgument::REQUIRED, 'File for the CSV import.'),
-        );
+        return [
+            ['filename', InputArgument::REQUIRED, 'File for the CSV import.'],
+        ];
     }
-
 
     /**
      * Get the console command options.
@@ -145,16 +145,15 @@ class ObjectImportCommand extends Command
      */
     protected function getOptions()
     {
-        return array(
-        array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
-        array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
-        array('logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log') ),
-        array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Accessory, License, or User', 'Asset'),
-        array('web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer'),
-        array('user_id', null, InputOption::VALUE_REQUIRED, 'ID of user creating items', 1),
-        array('update', null, InputOption::VALUE_NONE, 'If a matching item is found, update item information'),
-        array('send-welcome', null, InputOption::VALUE_NONE, 'Whether to send a welcome email to any new users that are created.'),
-        );
-
+        return [
+        ['email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null],
+        ['username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null],
+        ['logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log')],
+        ['item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Accessory, License, or User', 'Asset'],
+        ['web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer'],
+        ['user_id', null, InputOption::VALUE_REQUIRED, 'ID of user creating items', 1],
+        ['update', null, InputOption::VALUE_NONE, 'If a matching item is found, update item information'],
+        ['send-welcome', null, InputOption::VALUE_NONE, 'Whether to send a welcome email to any new users that are created.'],
+        ];
     }
 }

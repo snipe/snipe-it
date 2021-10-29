@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Assets;
 
-
+use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetFileRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use App\Helpers\StorageHelper;
+use enshrined\svgSanitize\Sanitizer;
 
 class AssetFilesController extends Controller
 {
@@ -25,22 +25,44 @@ class AssetFilesController extends Controller
      */
     public function store(AssetFileRequest $request, $assetId = null)
     {
-        if (!$asset = Asset::find($assetId)) {
+        if (! $asset = Asset::find($assetId)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
         $this->authorize('update', $asset);
 
         if ($request->hasFile('file')) {
-
-            if (!Storage::exists('private_uploads/assets')) Storage::makeDirectory('private_uploads/assets', 775);
+            if (! Storage::exists('private_uploads/assets')) {
+                Storage::makeDirectory('private_uploads/assets', 775);
+            }
 
             foreach ($request->file('file') as $file) {
+
                 $extension = $file->getClientOriginalExtension();
                 $file_name = 'hardware-'.$asset->id.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$extension;
+
+                // Check for SVG and sanitize it
+                if ($extension=='svg') {
+                    \Log::debug('This is an SVG');
+
+                        $sanitizer = new Sanitizer();
+                        $dirtySVG = file_get_contents($file->getRealPath());
+                        $cleanSVG = $sanitizer->sanitize($dirtySVG);
+
+                        try {
+                            Storage::put('private_uploads/assets/'.$file_name, $cleanSVG);
+                        } catch (\Exception $e) {
+                            \Log::debug('Upload no workie :( ');
+                            \Log::debug($e);
+                        }
+                } else {
                 Storage::put('private_uploads/assets/'.$file_name, file_get_contents($file));
+                }
+               
+                
                 $asset->logUpload($file_name, e($request->get('notes')));
             }
+
             return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
         }
 
@@ -64,7 +86,7 @@ class AssetFilesController extends Controller
         if (isset($asset->id)) {
             $this->authorize('view', $asset);
 
-            if (!$log = Actionlog::find($fileId)) {
+            if (! $log = Actionlog::find($fileId)) {
                 return response('No matching record for that asset/file', 500)
                     ->header('Content-Type', 'text/plain');
             }
@@ -72,21 +94,23 @@ class AssetFilesController extends Controller
             $file = 'private_uploads/assets/'.$log->filename;
             \Log::debug('Checking for '.$file);
 
-            if ($log->action_type =='audit') {
+            if ($log->action_type == 'audit') {
                 $file = 'private_uploads/audits/'.$log->filename;
             }
 
-            if (!Storage::exists($file)) {
+            if (! Storage::exists($file)) {
                 return response('File '.$file.' not found on server', 404)
                     ->header('Content-Type', 'text/plain');
             }
 
             if ($download != 'true') {
-                  if ($contents = file_get_contents(Storage::url($file))) {
-                      return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
-                  }
-                return JsonResponse::create(["error" => "Failed validation: "], 500);
+                if ($contents = file_get_contents(Storage::url($file))) {
+                    return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
+                }
+
+                return JsonResponse::create(['error' => 'Failed validation: '], 500);
             }
+
             return StorageHelper::downloader($file);
         }
         // Prepare the error message
@@ -117,13 +141,14 @@ class AssetFilesController extends Controller
             $this->authorize('update', $asset);
             $log = Actionlog::find($fileId);
             if ($log) {
-            if (Storage::exists($rel_path.'/'.$log->filename)) {
-                Storage::delete($rel_path.'/'.$log->filename);
+                if (Storage::exists($rel_path.'/'.$log->filename)) {
+                    Storage::delete($rel_path.'/'.$log->filename);
                 }
                 $log->delete();
+
                 return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
             }
-            $log->delete();
+
             return redirect()->back()
                 ->with('success', trans('admin/hardware/message.deletefile.success'));
         }

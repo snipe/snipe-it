@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Dnů',
         'notes'                  => 'Poznámky',
         'update'                 => 'Aktualizace',
-        'create'                 => 'Vytvořit'
+        'create'                 => 'Vytvořit',
     ];
