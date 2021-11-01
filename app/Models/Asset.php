@@ -1357,8 +1357,8 @@ class Asset extends Depreciable
                     });
                 }
 
-                if ($fieldname == 'checkedout_to') {
-                    $query->whereHas('assigneduser', function ($query) use ($search_val) {
+                if ($fieldname =='assigned_to') {
+                    $query->whereHasMorph('assignedTo', [User::class], function ($query) use ($search_val) {
                         $query->where(function ($query) use ($search_val) {
                             $query->where('users.first_name', 'LIKE', '%'.$search_val.'%')
                                 ->orWhere('users.last_name', 'LIKE', '%'.$search_val.'%');
@@ -1421,7 +1421,7 @@ class Asset extends Depreciable
                         });
                     });
                 }
-            }
+            
 
             /**
              * THIS CLUNKY BIT IS VERY IMPORTANT
@@ -1447,11 +1447,11 @@ class Asset extends Depreciable
              */
 
             if (($fieldname!='category') && ($fieldname!='model_number') && ($fieldname!='rtd_location') && ($fieldname!='location') && ($fieldname!='supplier')
-                && ($fieldname!='status_label') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
+                && ($fieldname!='status_label') && ($fieldname!='assigned_to') && ($fieldname!='model') && ($fieldname!='company') && ($fieldname!='manufacturer')) {
                     $query->where('assets.'.$fieldname, 'LIKE', '%' . $search_val . '%');
             }
 
-
+            }
 
 
         });
