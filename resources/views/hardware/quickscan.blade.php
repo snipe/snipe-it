@@ -109,7 +109,7 @@
                             <th>{{ trans('general.asset_tag') }}</th>
                             <th>{{ trans('general.bulkaudit_status') }}</th>
                             <th>{{ trans('general.location') }}</th>
-                            <th>{{ trans('general.default_location') }}</th>
+                            <th>{{ trans('admin/hardware/form.default_location') }}</th>
                         </tr>
                         <tr id="audit-loader" style="display: none;">
                             <td colspan="3">
