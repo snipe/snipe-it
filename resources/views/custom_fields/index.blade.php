@@ -48,7 +48,7 @@
               <th>{{ trans('general.name') }}</th>
               <th>{{ trans('admin/custom_fields/general.qty_fields') }}</th>
               <th>{{ trans('admin/custom_fields/general.used_by_models') }}</th>
-              <th>{{ trans('button.actions') }}</th>
+              <th>{{ trans('table.actions') }}</th>
             </tr>
           </thead>
 

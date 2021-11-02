@@ -265,5 +265,4 @@
     'view_all'              => 'view all',
     'hide_deleted'          => 'Hide Deleted',
     'email'                 => 'Email',
-    'Help'
     ];
