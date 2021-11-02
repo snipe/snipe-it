@@ -2,6 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
+//TODO: Debug page as it is not viewable in browser due to crash
 Accept assets  {{ $user->present()->fullName() }}
 @parent
 @stop
@@ -34,8 +35,8 @@ Accept assets  {{ $user->present()->fullName() }}
                   }'>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>{{ trans('general.name')}}</th>
+                <th>{{ trans('general.actions')}}</th>
               </tr>
             </thead>
             <tbody>
