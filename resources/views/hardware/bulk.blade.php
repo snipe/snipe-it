@@ -75,12 +75,12 @@
 
                 <label for="update_real_loc">
                   {{ Form::radio('update_real_loc', '1', old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_real_loc']) }}
-                  Update default location AND actual location
+                  {{ trans('admin/hardware/form.asset_location_update_default_current') }}
                 </label>
                 <br>
                 <label for="update_default_loc">
                   {{ Form::radio('update_real_loc', '0', old('update_real_loc'), ['class'=>'minimal', 'aria-label'=>'update_default_loc']) }}
-                  Update only default location
+                  {{ trans('admin/hardware/form.asset_location_update_default') }}
                 </label>
 
             </div>
@@ -137,13 +137,13 @@
             </div>
             <div class="col-md-7">
               <label class="radio">
-                <input type="radio" class="minimal" name="requestable" value="1"> Yes
+                <input type="radio" class="minimal" name="requestable" value="1"> {{ trans('general.yes')}}
               </label>
               <label class="radio">
-                <input type="radio" class="minimal" name="requestable" value="0"> No
+                <input type="radio" class="minimal" name="requestable" value="0"> {{ trans('general.no')}}
               </label>
               <label class="radio">
-                <input type="radio" class="minimal" name="requestable" value=""> Do Not Change
+                <input type="radio" class="minimal" name="requestable" value=""> {{ trans('general.do_not_change')}}
               </label>
             </div>
           </div>
