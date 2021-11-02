@@ -286,4 +286,5 @@
     'setup_create_database' => 'Create Database Tables',
     'setup_create_admin'    => 'Create Admin User',
     'setup_done'            => 'Finished!',
+    'bulk_edit_about_to'    => 'You are about to edit the following: ',
 ];

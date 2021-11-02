@@ -15,6 +15,8 @@ return [
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'Requestable',
     'requested'				    => 'Requested',
+    'not_requestable'           => 'Not Requestable',
+    'requestable_status_warning' => 'Do not change  requestable status',
     'restore'  					=> 'Restore Asset',
     'pending'  					=> 'Pending',
     'undeployable'  			=> 'Undeployable',
