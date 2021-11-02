@@ -287,4 +287,9 @@
     'setup_create_admin'    => 'Create Admin User',
     'setup_done'            => 'Finished!',
     'bulk_edit_about_to'    => 'You are about to edit the following: ',
+    'checked_out_to' => 'Checked out to',
+    'last_checkout' => 'Last Checkout',
+    'due_to_checkin' => 'The following :count items are due to be checked in soon:',
+    'expected_checkin' => 'Expected Checkin',
+    'reminder_checked_out_items' => 'This is a reminder of the items currently checked out to you. If you feel this list is inaccurate (something is missing, or something appears here that you believe you never received), please email :reply_to_name at :reply_to_address.',
 ];
