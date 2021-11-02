@@ -35,7 +35,7 @@
             <thead>
               <tr>
                 <th>{{ trans('general.name')}}</th>
-                <th>{{ trans('general.actions')}}</th>
+                <th>{{ trans('button.actions')}}</th>
               </tr>
             </thead>
             <tbody>

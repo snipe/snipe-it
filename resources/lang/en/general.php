@@ -6,7 +6,6 @@
     'accessory'				=> 'Accessory',
     'accessory_report'		=> 'Accessory Report',
     'action'                => 'Action',
-    'actions'               => 'Actions',
     'activity_report'		=> 'Activity Report',
     'address'				=> 'Address',
     'admin'					=> 'Admin',
@@ -261,4 +260,6 @@
     'hide_help'             => 'Hide help',
     'view_all'              => 'view all',
     'hide_deleted'          => 'Hide Deleted',
+    'email'                 => 'Email',
+    'Help'
     ];
