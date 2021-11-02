@@ -13,5 +13,12 @@ return [
     'none_licenses'                     => 'There are not enough available seats for :license to checkout. :qty are required. ',
     'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
     'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
-
+    'append_accessory'                  => 'Append Accessory',
+    'update_appended_accessory'         => 'Update appended Accessory',
+    'append_consumable' => 'Append Consumable',
+    'update_appended_consumable' => 'Update appended Consumable',
+    'append_license' => 'Append license',
+    'update_appended_license' => 'Update appended license',
+    'append_model' => 'Append model',
+    'update_appended_model' => 'Update appended model'
 ];
