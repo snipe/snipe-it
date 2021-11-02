@@ -459,8 +459,8 @@
                 <th class="col-md-3" data-field="notes" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.notes') }}</th>
                 <th class="col-md-2" data-field="created_at" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.created_at') }}</th>
                 <th class="col-md-2" data-searchable="true" data-visible="true">{{ trans('general.image') }}</th>
-                <th class="col-md-2" data-field="download" data-visible="true"  data-sortable="false" data-switchable="true">Download</th>
-                <th class="col-md-2" data-field="delete" data-visible="true"  data-sortable="false" data-switchable="true">Delete</th>
+                <th class="col-md-2" data-field="download" data-visible="true"  data-sortable="false" data-switchable="true">{{ trans('general.download') }}</th>
+                <th class="col-md-2" data-field="delete" data-visible="true"  data-sortable="false" data-switchable="true">{{ trans('general.delete') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -493,14 +493,14 @@
                   @if ($file->filename)
                     <a href="{{ route('show.licensefile', [$license->id, $file->id, 'download' => 'true']) }}" class="btn btn-default">
                       <i class="fas fa-download" aria-hidden="true"></i>
-                      <span class="sr-only">Download</span>
+                      <span class="sr-only">{{ trans('general.download') }}</span>
                     </a>
                   @endif
                 </td>
                 <td>
                   <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?">
                     <i class="fas fa-trash icon-white" aria-hidden="true"></i>
-                    <span class="sr-only">Delete</span>
+                    <span class="sr-only">{{ trans('general.delete') }}</span>
                   </a>
                 </td>
               </tr>
