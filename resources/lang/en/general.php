@@ -111,6 +111,7 @@
     'file_name'				=> 'File',
     'file_type'             => 'File Type',
     'file_uploads'			=> 'File Uploads',
+    'file_upload'           => 'File Upload',
     'generate'				=> 'Generate',
     'generate_labels'       => 'Generate Labels',
     'github_markdown'      => 'This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
