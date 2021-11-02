@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('general.viewassetsfor', array('name' => $user->fullName)) }}
+{{ trans('general.viewassetsfor', array('name' => $user->present()->fullName())) }}
 @parent
 @stop
 

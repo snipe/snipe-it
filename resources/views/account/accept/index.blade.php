@@ -2,8 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-//TODO: Debug page as it is not viewable in browser due to crash
-Accept assets  {{ $user->present()->fullName() }}
+{{ trans('general.accept_assets', array('name' => $user->present()->fullName())) }}
 @parent
 @stop
 
@@ -43,7 +42,7 @@ Accept assets  {{ $user->present()->fullName() }}
               @foreach ($acceptances as $acceptance)
               <tr>
                 <td>{{ ($acceptance->checkoutable) ? $acceptance->checkoutable->present()->name : '' }}</td>
-                <td><a href="{{ route('account.accept.item', $acceptance) }}" class="btn btn-default btn-sm">Accept/Decline</a></td>
+                <td><a href="{{ route('account.accept.item', $acceptance) }}" class="btn btn-default btn-sm">{{ trans('general.accept_decline') }}</a></td>
               </tr>
               @endforeach
             </tbody>
