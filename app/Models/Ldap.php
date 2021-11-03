@@ -86,22 +86,22 @@ class Ldap extends Model
             // If they are, we can skip building the UPN to authenticate against AD
             if ($ldap_username_field == 'userprincipalname') {
                 $userDn = $username;
-            } else {
+            } else { // FIXME - we have to respect the new 'append AD domain to username' setting (which sucks.)
                 // In case they haven't added an AD domain
                 $userDn = ($settings->ad_domain != '') ? $username.'@'.$settings->ad_domain : $username.'@'.$settings->email_domain;
             }
         }
 
-        \Log::debug('Attempting to login using distinguished name:'.$userDn);
-
         $filterQuery = $settings->ldap_auth_filter_query.$username;
-        $filter = Setting::getSettings()->ldap_filter;
+        $filter = Setting::getSettings()->ldap_filter; //TODO - this *does* respect the ldap filter, but I believe that AdLdap2 did *not*.
         $filterQuery = "({$filter}({$filterQuery}))";
 
         \Log::debug('Filter query: '.$filterQuery);
 
         if (! $ldapbind = @ldap_bind($connection, $userDn, $password)) {
-            if (! $ldapbind = self::bindAdminToLdap($connection)) {
+            \Log::debug("Status of binding user: $userDn to directory: (directly!) ".($ldapbind ? "success" : "FAILURE"));
+            if (! $ldapbind = self::bindAdminToLdap($connection)) { // TODO uh, this seems...dangerous? Why would we just switch over to the admin connection? That's too loose, I feel.
+                    \Log::debug("Status of binding Admin user: $userDn to directory instead: ".($ldapbind ? "success" : "FAILURE"));
                     return false;
             }
         }
@@ -233,11 +233,11 @@ class Ldap extends Model
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @param $ldapatttibutes
      * @param $base_dn
+     * @param $count
      * @return array|bool
      */
-    public static function findLdapUsers($base_dn = null)
+    public static function findLdapUsers($base_dn = null, $count = -1)
     {
         $ldapconn = self::connectToLdap();
         $ldap_bind = self::bindAdminToLdap($ldapconn);
@@ -256,10 +256,10 @@ class Ldap extends Model
         // Perform the search
         do {
 
-            // Paginate (non-critical, if not supported by server)
-            if (! $ldap_paging = @ldap_control_paged_result($ldapconn, $page_size, false, $cookie)) {
-                throw new Exception('Problem with your LDAP connection. Try checking the Use TLS setting in Admin > Settings. ');
-            }
+            // // Paginate (non-critical, if not supported by server)
+            // if (! $ldap_paging = ldap_search($ldapconn, $page_size, false, $cookie)) { //FIXME! This command doesn't exist anymore? I don't know what to replace it with. maybe nothing?
+            //     throw new Exception('Problem with your LDAP connection. Try checking the Use TLS setting in Admin > Settings. ');
+            // }
 
             if ($filter != '' && substr($filter, 0, 1) != '(') { // wrap parens around NON-EMPTY filters that DON'T have them, for back-compatibility with AdLdap2-based filters
                 $filter = "($filter)";
@@ -267,12 +267,36 @@ class Ldap extends Model
                 $filter = '(cn=*)';
             }
 
-            $search_results = ldap_search($ldapconn, $base_dn, $filter);
-
+            // HUGE thanks to this article: https://stackoverflow.com/questions/68275972/how-to-get-paged-ldap-queries-in-php-8-and-read-more-than-1000-entries
+            // which helped me wrap my head around paged results!
+            \Log::info("ldap conn is: ".$ldapconn." basedn is: $base_dn, filter is: $filter - count is: $count. page size is: $page_size");
+            // if a $count is set and it's smaller than $page_size then use that as the page size
+            $ldap_controls = [];
+            if($count == -1) { //count is -1 means we have to employ paging to query the entire directory
+                $ldap_controls = [['oid' => LDAP_CONTROL_PAGEDRESULTS, 'iscritical' => false, 'value' => ['size'=> $page_size, 'cookie' => $cookie]]];
+            }
+            $search_results = @ldap_search($ldapconn, $base_dn, $filter, [], 0, /* $page_size*/ -1, -1, LDAP_DEREF_NEVER, $ldap_controls);
+            \Log::info("did the search run? I guess so if you got here!");
             if (! $search_results) {
                 return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn)); // FIXME this is never called in any routed context - only from the Artisan command. So this redirect will never work.
             }
 
+            $errcode = null;
+            $matcheddn = null;
+            $errmsg = null;
+            $referrals = null;
+            $controls = [];
+            ldap_parse_result($ldapconn, $search_results, $errcode , $matcheddn , $errmsg , $referrals, $controls);
+            if (isset($controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'])) {
+                // You need to pass the cookie from the last call to the next one
+                $cookie = $controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'];
+                \Log::info("okay, at least one more page to go!!!");
+            } else {
+                \Log::info("okay, we're out of pages - no cookie (or empty cookie) was passed");
+                $cookie = '';
+            }
+            // Empty cookie means last page
+        
             // Get results from page
             $results = ldap_get_entries($ldapconn, $search_results);
             if (! $results) {
@@ -282,14 +306,14 @@ class Ldap extends Model
             // Add results to result set
             $global_count += $results['count'];
             $result_set = array_merge($result_set, $results);
+            \Log::info("Total count is: $global_count");
 
-            @ldap_control_paged_result_response($ldapconn, $search_results, $cookie);
+            // ldap_search($ldapconn, $search_results, $cookie); // FIXME - this function is removed in PHP8
         } while ($cookie !== null && $cookie != '');
 
         // Clean up after search
         $result_set['count'] = $global_count;
         $results = $result_set;
-        @ldap_control_paged_result($ldapconn, 0);
 
         return $results;
     }
