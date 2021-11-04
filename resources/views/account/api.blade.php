@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    {{ trans('account/api.personal_api_keys') }}
+    {{ trans('account/general.personal_api_keys') }}
     @parent
 @stop
 
@@ -24,17 +24,17 @@
             </div>
             <div class="col-md-4">
                 <div class="alert alert-warning"><i class="fas fa-exclamation-triangle faa-pulse animated"></i>
-                    {{ trans('account/api.api_key_warning') }}
+                    {{ trans('account/general.api_key_warning') }}
                 </div>
 
-                <p>{{ trans('account/api.api_base_url') }}<br>
-                    <code>{{ url('/api/v1') }}{{!! trans('account/api.api_base_url_endpoint') !!}}</code></p>
+                <p>{{ trans('account/general.api_base_url') }}<br>
+                    <code>{{ url('/api/v1') }}{{!! trans('account/general.api_base_url_endpoint') !!}}</code></p>
 
-                <p>{{ trans('account/api.api_token_expiration_time') }}
+                <p>{{ trans('account/general.api_token_expiration_time') }}
                     <strong>{{ config('passport.expiration_years') }} {{ trans('general.years') }} </strong>.</p>
 
 
-                <p>{{!! trans('account/api.api_reference') !!}}</p>
+                <p>{{!! trans('account/general.api_reference') !!}}</p>
             </div>
         </div>
 
