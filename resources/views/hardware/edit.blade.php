@@ -50,8 +50,7 @@
 
     @include ('partials.forms.edit.derived_from')
 
-    @include ('partials.forms.edit.declassification_date')
-
+    @include ('partials.forms.edit.declassification_date', ['translated_name' => trans('admin/hardware/form.declassification_date'),'fieldname' => 'declassification_date'])
     @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'field_req' => true])
 
 
