@@ -334,7 +334,7 @@ class AssetsController extends Controller
         $asset_tag           =  $request->input('asset_tags');
         $asset->classified_by= $request->input('classified_by');
         $asset->derived_from = $request->input('derived_from');
-        $asset->Declassification_date = $request->input('Declassification_date');
+        $asset->declassification_date = $request->input('declassification_date');
         $serial              = $request->input('serials');
         $asset->name         = $request->input('name');
         $asset->serial       = $serial[1];
