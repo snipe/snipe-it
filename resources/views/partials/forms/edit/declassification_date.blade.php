@@ -1,6 +1,6 @@
 <!-- Declassification Date -->
 <div class="form-group{{ $errors->has('declassification_date') ? ' has-error' : '' }}">
-    {{ Form::label($declassification_date, $translated_name, array('class' => 'col-md-3 control-label')) }}
+    {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
     <div class="input-group col-md-3">
         <div class="input-group date" data-provide="declassification_date" data-date-format="yyyy-mm-dd"  data-autoclose="true">
             <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="{{ $fieldname }}" id="{{ $fieldname }}" value="{{ old($fieldname, ($item->{$fieldname}) ? $item->{$fieldname}->format('Y-m-d') : '') }}">
