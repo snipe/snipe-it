@@ -463,12 +463,6 @@ Route::group(['middleware' => 'web'], function () {
             'uses' => 'Auth\LoginController@login' ]
     );
 
-    Route::get(
-        'logout',
-        [
-            'as' => 'logout',
-            'uses' => 'Auth\LoginController@logout' ]
-    );
 
 });
 
