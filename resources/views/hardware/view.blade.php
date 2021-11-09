@@ -271,6 +271,17 @@
                                         </div>
                                     @endif
 
+                                    @if ($asset->classified_by)
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <strong>{{ trans('admin/hardware/form.classified_by') }}</strong>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ $asset->classified_by  }}
+                                            </div>
+                                        </div>
+                                    @endif
+
 
                                     @if ((isset($audit_log)) && ($audit_log->created_at))
                                         <div class="row">
