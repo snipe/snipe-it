@@ -282,6 +282,17 @@
                                         </div>
                                     @endif
 
+                                    @if ($asset->derived_from)
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <strong>{{ trans('admin/hardware/form.derived_from') }}</strong>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ $asset->derived_from  }}
+                                            </div>
+                                        </div>
+                                    @endif
+
 
                                     @if ((isset($audit_log)) && ($audit_log->created_at))
                                         <div class="row">
