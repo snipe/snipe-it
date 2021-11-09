@@ -122,7 +122,7 @@
                             </div>
                         </div><!-- AD Domain -->
 
-                        <!-- AD Append Domain -->
+                        {{-- NOTICE - this was a feature for AdLdap2-based LDAP syncing, and is already handled in 'classic' LDAP, so we now hide the checkbox (but haven't deleted the field) <!-- AD Append Domain -->
                         <div class="form-group">
                             <div class="col-md-3">
                                 {{ Form::label('ad_append_domain', trans('admin/settings/general.ad_append_domain_label')) }}
@@ -136,7 +136,7 @@
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- LDAP Client-Side TLS key -->
                         <div class="form-group {{ $errors->has('ldap_client_tls_key') ? 'error' : '' }}">
