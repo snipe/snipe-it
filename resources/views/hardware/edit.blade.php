@@ -46,7 +46,7 @@
     <div class="input_fields_wrap">
     </div>
 
-	@include ('partials.forms.edit.classified_by', ['translated_classified_by' => trans('admin/hardware/form.classified_by')])
+	@include ('partials.forms.edit.classified_by', ['translated_name' => trans('admin/hardware/form.classified_by')])
 
     @include ('partials.forms.edit.derived_from', ['translated_name' => trans('admin/hardware/derived_from.model'), 'fieldname' => 'derived_from'])
 
