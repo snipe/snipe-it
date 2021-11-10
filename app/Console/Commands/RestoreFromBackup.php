@@ -34,6 +34,8 @@ class RestoreFromBackup extends Command
         parent::__construct();
     }
 
+    public static $buffer_size = 1024 * 1024;  // use a 1MB buffer, ought to work fine for most cases?
+
     /**
      * Execute the console command.
      *
@@ -42,7 +44,10 @@ class RestoreFromBackup extends Command
     public function handle()
     {
         $dir = getcwd();
-        echo "Current working directory is: $dir\n";
+        if( $dir != base_path() ) { // usually only the case when running via webserver, not via command-line
+            \Log::debug("Current working directory is: $dir, changing directory to: ".base_path());
+            chdir(base_path()); // TODO - is this *safe* to change on a running script?!
+        }
         //
         $filename = $this->argument('filename');
 
@@ -144,7 +149,7 @@ class RestoreFromBackup extends Command
                 continue;
             }
             if (@pathinfo($raw_path)['extension'] == 'sql') {
-                echo "Found a sql file!\n";
+                \Log::debug("Found a sql file!\n");
                 $sqlfiles[] = $raw_path;
                 $sqlfile_indices[] = $i;
                 continue;
@@ -206,7 +211,9 @@ class RestoreFromBackup extends Command
 
         $env_vars = getenv();
         $env_vars['MYSQL_PWD'] = config('database.connections.mysql.password');
-        $proc_results = proc_open('mysql -h '.escapeshellarg(config('database.connections.mysql.host')).' -u '.escapeshellarg(config('database.connections.mysql.username')).' '.escapeshellarg(config('database.connections.mysql.database')), // yanked -p since we pass via ENV
+        // TODO notes: we are stealing the dump_binary_path (which *probably* also has your copy of the mysql binary in it. But it might not, so we might need to extend this)
+        //             we unilaterally prepend a slash to the `mysql` command. This might mean your path could look like /blah/blah/blah//mysql - which should be fine. But maybe in some environments it isn't?
+        $proc_results = proc_open(config('database.connections.mysql.dump.dump_binary_path').'/mysql -h '.escapeshellarg(config('database.connections.mysql.host')).' -u '.escapeshellarg(config('database.connections.mysql.username')).' '.escapeshellarg(config('database.connections.mysql.database')), // yanked -p since we pass via ENV
                                   [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
                                   $pipes,
                                   null,
@@ -234,7 +241,7 @@ class RestoreFromBackup extends Command
             return false;
         }
 
-        while (($buffer = fgets($sql_contents)) !== false) {
+        while (($buffer = fgets($sql_contents, self::$buffer_size)) !== false) {
             //$this->info("Buffer is: '$buffer'");
             $bytes_written = fwrite($pipes[0], $buffer);
             if ($bytes_written === false) {
@@ -273,7 +280,7 @@ class RestoreFromBackup extends Command
             $fp = $za->getStream($ugly_file_name);
             //$this->info("Weird problem, here are file details? ".print_r($file_details,true));
             $migrated_file = fopen($file_details['dest'].'/'.basename($pretty_file_name), 'w');
-            while (($buffer = fgets($fp)) !== false) {
+            while (($buffer = fgets($fp, self::$buffer_size)) !== false) {
                 fwrite($migrated_file, $buffer);
             }
             fclose($migrated_file);
