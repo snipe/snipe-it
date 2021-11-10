@@ -7,7 +7,15 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('settings.index') }}" class="btn btn-primary"> {{ trans('general.back') }}</a>
+    <a href="{{ route('settings.index') }}" class="btn btn-default pull-right" style="margin-left: 5px;"> 
+      {{ trans('general.back') }}
+    </a>
+
+    <form method="POST" style="display: inline">
+      {{ Form::hidden('_token', csrf_token()) }}
+            <button class="btn btn-primary {{ (config('app.lock_passwords')) ? ' disabled': '' }}">{{ trans('admin/settings/general.generate_backup') }}</button>
+      </form>
+
 @stop
 
 {{-- Page content --}}
@@ -15,10 +23,16 @@
 
 
 <div class="row">
+
   <div class="col-md-9">
+    
     <div class="box box-default">
       <div class="box-body">
+       
+        
+          
         <div class="table-responsive">
+          
             <table
                     data-cookie="true"
                     data-cookie-id-table="system-backups"
@@ -30,10 +44,13 @@
                     id="system-backups"
                     class="table table-striped snipe-table">
             <thead>
-              <th>File</th>
-              <th>Created</th>
-              <th>Size</th>
+              <tr>
+              <th data-sortable="true">File</th>
+              <th data-sortable="true" data-field="modified_display" data-sort-name="modified_value">Created</th>
+              <th data-field="modified_value" data-visible="false"></th>
+              <th data-sortable="true">Size</th>
               <th><span class="sr-only">{{ trans('general.delete') }}</span></th>
+              </tr>
             </thead>
             <tbody>
             @foreach ($files as $file)
@@ -43,7 +60,8 @@
                       {{ $file['filename'] }}
                   </a>
               </td>
-              <td>{{ date("M d, Y g:i A", $file['modified']) }} </td>
+              <td>{{ $file['modified_display'] }} </td>
+              <td>{{ $file['modified_value'] }} </td>
               <td>{{ $file['filesize'] }}</td>
               <td>
 
@@ -53,38 +71,62 @@
                           <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                           <span class="sr-only">{{ trans('general.delete') }}</span>
                       </a>
+
+                     <a data-html="false" 
+                        href="{{ route('settings.backups.restore', $file['filename']) }}" class="btn btn-warning btn-sm restore-asset {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" data-content="Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This method does not currently support installations that use S3 for file storage." data-title="Are you sure you wish to restore your database from {{ $file['filename']}}?" onClick="return false;">
+                      <i class="fas fa-retweet" aria-hidden="true"></i>
+                      <span class="sr-only">Restore</span>
+                    </a>
+                     
                   @endcan
               </td>
             </tr>
             @endforeach
             </tbody>
           </table>
-      </div>
-    </div>
-</div>
-</div>
+      </div> <!-- end table-responsive div -->
+    </div> <!-- end box-body div -->
+</div> <!-- end box div -->
+</div> <!-- end col-md div -->
+
    <!-- side address column -->
   <div class="col-md-3">
 
-      <form method="POST">
-        {{ Form::hidden('_token', csrf_token()) }}
+     
+      <p>Backup files are located in: <code>{{ $path  }}</code></p>
 
-          <p>
-              <button class="btn btn-primary {{ (config('app.lock_passwords')) ? ' disabled': '' }}">{{ trans('admin/settings/general.generate_backup') }}</button>
-          </p>
+      <h2>Upload Backup</h2>
 
-           @if (config('app.lock_passwords'))
-              <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
-          @endif
+      
+      <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+        <div class="col-md-12">
+          
+          {{ Form::open([
+            'method' => 'POST',
+            'route' => 'settings.backups.upload',
+            'files' => true,
+            'class' => 'form-horizontal' ]) }}
 
+            @csrf
 
-      </form>
-      <p>Backup files are located in: {{ $path  }}</p>
+            <input type="file" id="file" name="file" aria-label="file" class="sr-only">
+    
+            <label class="btn btn-default" aria-hidden="true">
+                {{ trans('button.select_file')  }}
+                <input type="file" name="file" class="js-uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="application/zip" style="display:none; max-width: 90%" aria-label="file" aria-hidden="true">
+            </label>
+    
+            <p class="help-block" id="uploadFile-status">{{ trans_choice('general.filetypes_accepted_help', 3, ['size' => Helper::file_upload_max_size_readable(), 'types' => '.zip']) }}</p>
+            {!! $errors->first('file', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
 
+            <button>Submit</button>
+          {{ Form::close() }}
+          
+        </div> <!-- end col-md-12 form div -->
+   </div> <!-- end form group div -->
 
-
-  </div>
-
+  </div> <!-- end col-md-3 div -->
+</div> <!-- end row div -->
 
 @stop
 
