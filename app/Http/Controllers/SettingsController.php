@@ -1018,17 +1018,25 @@ class SettingsController extends Controller
         $backup_files = Storage::files($path);
         $files_raw = [];
 
+
         if (count($backup_files) > 0) {
             for ($f = 0; $f < count($backup_files); $f++) {
 
                 // Skip dotfiles like .gitignore and .DS_STORE
                 if ((substr(basename($backup_files[$f]), 0, 1) != '.')) {
+                    //$lastmodified = Carbon::parse(Storage::lastModified($backup_files[$f]))->toDatetimeString();
+                    $file_timestamp = Storage::lastModified($backup_files[$f]);
+
+
                     $files_raw[] = [
                         'filename' => basename($backup_files[$f]),
                         'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
-                        'modified' => Storage::lastModified($backup_files[$f]),
+                        'modified_value' => $file_timestamp,
+                        'modified_display' => Helper::getFormattedDateObject($file_timestamp, $type = 'datetime', false),
+                        
                     ];
                 }
+               
             }
         }
 
