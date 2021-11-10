@@ -1150,31 +1150,32 @@ class SettingsController extends Controller
 
     public function postUploadBackup(Request $request) {
 
-        $max_file_size = Helper::file_upload_max_size();
-
-        $rules = [
-            'file' => 'required|mimes:zip|max:'.$max_file_size,
-        ];
-
-        $validator = \Validator::make($request->all(), $rules);
-
-        if ($validator->passes()) {
-
-            if ($request->hasFile('file')) {
-
-                $upload_filename = 'uploaded-'.date('U').'-'.Str::slug(pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME)).'.zip';
-
-                Storage::putFileAs('app/backups', $request->file('file'), $upload_filename);
-    
-                return redirect()->route('settings.backups.index')->with('success', 'File uploaded');
-    
-            } else {
-                return redirect()->route('settings.backups.index')->with('error', 'No file uploaded');
-            }
-
+        if (!$request->hasFile('file')) {
+            return redirect()->route('settings.backups.index')->with('error', 'No file uploaded');
         } else {
-            return redirect()->route('settings.backups.index')->withErrors($request->getErrors());
+            $max_file_size = Helper::file_upload_max_size();
+
+            $rules = [
+                'file' => 'required|mimes:zip|max:'.$max_file_size,
+            ];
+
+            $validator = \Validator::make($request->all(), $rules);
+
+            if ($validator->passes()) {
+
+
+
+                    $upload_filename = 'uploaded-'.date('U').'-'.Str::slug(pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME)).'.zip';
+
+                    Storage::putFileAs('app/backups', $request->file('file'), $upload_filename);
+        
+                    return redirect()->route('settings.backups.index')->with('success', 'File uploaded');
+            } else {
+                return redirect()->route('settings.backups.index')->withErrors($request->getErrors());
+            }
         }
+
+        
         
     }
 
@@ -1198,29 +1199,41 @@ class SettingsController extends Controller
                 // grab the user's info so we can make sure they exist in the system
                 $user = User::find(Auth::user()->id);
 
+
+                // TODO: run a backup 
+
+                // TODO: add db:wipe 
+
+
                 // run the restore command
                 Artisan::call('snipeit:restore', 
-                    [
-                        '--force' => true, 
-                        '--no-progress' => true, 
-                        'filename' => storage_path($path).'/'.$filename
-                    ]);
+                [
+                    '--force' => true, 
+                    '--no-progress' => true, 
+                    'filename' => storage_path($path).'/'.$filename
+                ]);
 
                 $output = Artisan::output();
-
-
+                    
+            
                 // If it's greater than 300, it probably worked
                 if (strlen($output) > 300) {
                     return redirect()->route('settings.backups.index')->with('success', 'Your system has been restored.');
-
                 } else {
                     return redirect()->route('settings.backups.index')->with('error', $output);
 
                 }
                 //dd($output);
 
-                // insert the user if they are not there in the old one
+                // TODO: insert the user if they are not there in the old one
+                
+
+
+
                 // log the user out
+                // \Auth::logout();
+
+
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
