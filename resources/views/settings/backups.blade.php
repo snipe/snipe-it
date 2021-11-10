@@ -1,6 +1,4 @@
-@extends('layouts/default', [
-  'helpText' => 'Backup files are located in: <code>'.$path.'</code>',
-])
+@extends('layouts/default')
 
 {{-- Page title --}}
 @section('title')
@@ -26,7 +24,7 @@
 
 <div class="row">
 
-  <div class="col-md-9">
+  <div class="col-md-8">
     
     <div class="box box-default">
       <div class="box-body">
@@ -92,7 +90,7 @@
 </div> <!-- end col-md div -->
 
    <!-- side address column -->
-  <div class="col-md-3">
+  <div class="col-md-4">
    <h2 style="margin-top: 0px">Upload Backup</h2>
 
       {{ Form::open([
@@ -100,7 +98,6 @@
         'route' => 'settings.backups.upload',
         'files' => true,
         'class' => 'form-horizontal' ]) }}
-
         @csrf
 
         
@@ -111,13 +108,14 @@
 
              <!-- displayed on screen -->
             <label class="btn btn-default col-md-12 col-xs-12" aria-hidden="true">
+              <i class="fas fa-paperclip" aria-hidden="true"></i>
                 {{ trans('button.select_file')  }}
                 <input type="file" name="file" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="application/zip" style="display:none;" aria-label="file" aria-hidden="true">
             </label>   
 
         </div>
         <div class="col-md-4 col-xs-4">
-            <button class="btn btn-primary col-md-12 col-xs-12">Upload</button>
+            <button class="btn btn-primary col-md-12 col-xs-12" id="uploadButton" disabled>Upload</button>
         </div>
         <div class="col-md-12">
           
@@ -126,12 +124,39 @@
           <p class="help-block" style="margin-top: 10px; margin-bottom: 10px;" id="uploadFile-status">{{ trans_choice('general.filetypes_accepted_help', 3, ['size' => Helper::file_upload_max_size_readable(), 'types' => '.zip']) }}</p>     
           {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
 
-        </div>
-        
-        
+        </div>        
     </div>
     
     {{ Form::close() }}
+
+    <h3>Restoring from Backup</h3>
+
+    <div class="alert alert-warning fade in">
+      <p>You can use the restore (<i class="text-white fas fa-retweet" aria-hidden="true"></i>) button to restore from a previous backup, however there are a few things you should know: </p>
+    </div>
+
+
+      
+      <ul class="list-unstyled">
+        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
+          Your entire database and any uploaded files will be completely replaced by what's in the backup file.
+          <br><br>
+        </li>
+        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
+            Very large backups may time out on the restore attempt and may still need to be run via command line. 
+            <br><br>
+        </li>
+        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
+          This does not currently work with S3 file storage.
+          <br><br>
+        </li>
+        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
+          You will be logged out after your restore is complete.</li>
+      </ul>  
+      
+
+      <br><br>
+    <p>Backup files are located in: <code>{{ $path }}</code></p>
 
       
     
@@ -144,6 +169,25 @@
 @stop
 
 @section('moar_scripts')
+
     @include ('partials.bootstrap-table')
+
+    <script>
+      $(document).ready(function() {
+        
+        $('#uploadFile').on('keyup', function() {
+          let empty = false;
+
+          $('#uploadFile').each(function() {
+            empty = $(this).val().length == 0;
+          });
+
+          if (empty)
+            $('#uploadButton').attr('disabled', 'disabled');
+          else
+            $('#uploadButton').attr('disabled', false);
+        });
+      });
+  </script>
 @stop
 
