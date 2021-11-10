@@ -14,7 +14,7 @@ class RestoreFromBackup extends Command
      */
     protected $signature = 'snipeit:restore 
                                             {--force : Skip the danger prompt; assuming you hit "y"} 
-                                            {filename : The zip file to be migrated}
+                                            {filename : The full path of the .zip file to be migrated}
                                             {--no-progress : Don\'t show a progress bar}';
 
     /**
@@ -22,7 +22,7 @@ class RestoreFromBackup extends Command
      *
      * @var string
      */
-    protected $description = 'Restore from a previously created backup';
+    protected $description = 'Restore from a previously created Snipe-IT backup file';
 
     /**
      * Create a new command instance.
@@ -67,7 +67,7 @@ class RestoreFromBackup extends Command
                 ZipArchive::ER_INCONS => 'Zip archive inconsistent.',
                 ZipArchive::ER_INVAL => 'Invalid argument.',
                 ZipArchive::ER_MEMORY => 'Malloc failure.',
-                ZipArchive::ER_NOENT => 'No such file.',
+                ZipArchive::ER_NOENT => 'No such file ('.$filename.') in directory '.$dir.'.',
                 ZipArchive::ER_NOZIP => 'Not a zip archive.',
                 ZipArchive::ER_OPEN => "Can't open file.",
                 ZipArchive::ER_READ => 'Read error.',
