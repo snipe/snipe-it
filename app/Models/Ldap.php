@@ -11,16 +11,16 @@ use Log;
 
 /***********************************************
  * TODOS:
- * 
- * First off, we should probably make it so that the main LDAP thing we're using is an *instance* of this class, 
+ *
+ * First off, we should probably make it so that the main LDAP thing we're using is an *instance* of this class,
  * rather than the static methods we use here. We should probably load up that class with its settings, so we
  * don't have to explicitly refer to them so often.
- * 
+ *
  * Then, we should probably look at embedding some of the logic we use elsewhere into here - the various methods
  * should either return a User or false, or other things like that. Don't make the consumers of this class reach
  * into its guts. While that conflates this model with the User model, I think having the appropriate logic for
  * turning LDAP people into Users ought to belong here, so it's easier on the consumer of this class.
- * 
+ *
  * We're probably going to have to eventually make it so that Snipe-IT users can define multiple LDAP servers,
  * and having this as a more instance-oriented class will be a step in the right direction.
  ***********************************************/
@@ -122,18 +122,18 @@ class Ldap extends Model
         if (! $ldapbind = @ldap_bind($connection, $userDn, $password)) {
             \Log::debug("Status of binding user: $userDn to directory: (directly!) ".($ldapbind ? "success" : "FAILURE"));
             if (! $ldapbind = self::bindAdminToLdap($connection)) {
-                /* 
-                 * FIXME PLEASE:
-                 * 
+                /*
+                 * TODO PLEASE:
+                 *
                  * this isn't very clear, so it's important to note: the $ldapbind value is never correctly returned - we never 'return true' from self::bindAdminToLdap() (the function
                  * just "falls off the end" without ever explictly returning 'true')
-                 * 
+                 *
                  * but it *does* have an interesting side-effect of checking for the LDAP password being incorrectly encrypted with the wrong APP_KEY, so I'm leaving it in for now.
-                 * 
+                 *
                  * If it *did* correctly return 'true' on a succesful bind, it would _probably_ allow users to log in with an incorrect password. Which would be horrible!
-                 * 
+                 *
                  * Let's definitely fix this at the next refactor!!!!
-                 * 
+                 *
                  */
                 \Log::debug("Status of binding Admin user: $userDn to directory instead: ".($ldapbind ? "success" : "FAILURE"));
                 return false;
@@ -179,7 +179,7 @@ class Ldap extends Model
         if (! $ldapbind = @ldap_bind($connection, $ldap_username, $ldap_pass)) {
             throw new Exception('Could not bind to LDAP: '.ldap_error($connection));
         }
-        // FIXME - this just "falls off the end" but the function states that it should return true or false
+        // TODO - this just "falls off the end" but the function states that it should return true or false
         // unfortunately, one of the use cases for this function is wrong and *needs* for that failure mode to fire
         // so I don't want to fix this right now.
         // this method MODIFIES STATE on the passed-in $connection and just returns true or false (or, in this case, undefined)
@@ -293,11 +293,6 @@ class Ldap extends Model
         // Perform the search
         do {
 
-            // // Paginate (non-critical, if not supported by server)
-            // if (! $ldap_paging = ldap_search($ldapconn, $page_size, false, $cookie)) { //FIXME! This command doesn't exist anymore? I don't know what to replace it with. maybe nothing?
-            //     throw new Exception('Problem with your LDAP connection. Try checking the Use TLS setting in Admin > Settings. ');
-            // }
-
             if ($filter != '' && substr($filter, 0, 1) != '(') { // wrap parens around NON-EMPTY filters that DON'T have them, for back-compatibility with AdLdap2-based filters
                 $filter = "($filter)";
             } elseif ($filter == '') {
@@ -306,16 +301,16 @@ class Ldap extends Model
 
             // HUGE thanks to this article: https://stackoverflow.com/questions/68275972/how-to-get-paged-ldap-queries-in-php-8-and-read-more-than-1000-entries
             // which helped me wrap my head around paged results!
-            \Log::info("ldap conn is: ".$ldapconn." basedn is: $base_dn, filter is: $filter - count is: $count. page size is: $page_size");
+            \Log::info("ldap conn is: ".$ldapconn." basedn is: $base_dn, filter is: $filter - count is: $count. page size is: $page_size"); //FIXME - remove
             // if a $count is set and it's smaller than $page_size then use that as the page size
             $ldap_controls = [];
-            if($count == -1) { //count is -1 means we have to employ paging to query the entire directory
-                $ldap_controls = [['oid' => LDAP_CONTROL_PAGEDRESULTS, 'iscritical' => false, 'value' => ['size'=> $page_size, 'cookie' => $cookie]]];
-            }
-            $search_results = @ldap_search($ldapconn, $base_dn, $filter, [], 0, /* $page_size*/ -1, -1, LDAP_DEREF_NEVER, $ldap_controls);
+            //if($count == -1) { //count is -1 means we have to employ paging to query the entire directory
+                $ldap_controls = [['oid' => LDAP_CONTROL_PAGEDRESULTS, 'iscritical' => false, 'value' => ['size'=> $count == -1||$count>$page_size ? $page_size : $count, 'cookie' => $cookie]]];
+            //}
+            $search_results = ldap_search($ldapconn, $base_dn, $filter, [], 0, /* $page_size */ -1, -1, LDAP_DEREF_NEVER, $ldap_controls); // TODO - I hate the @, and I hate that we get a full page even if we ask for 10 records. Can we use an ldap_control?
             \Log::info("did the search run? I guess so if you got here!");
             if (! $search_results) {
-                return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn)); // FIXME this is never called in any routed context - only from the Artisan command. So this redirect will never work.
+                return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn)); // TODO this is never called in any routed context - only from the Artisan command. So this redirect will never work.
             }
 
             $errcode = null;
@@ -327,9 +322,9 @@ class Ldap extends Model
             if (isset($controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'])) {
                 // You need to pass the cookie from the last call to the next one
                 $cookie = $controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'];
-                \Log::info("okay, at least one more page to go!!!");
+                \Log::debug("okay, at least one more page to go!!!");
             } else {
-                \Log::info("okay, we're out of pages - no cookie (or empty cookie) was passed");
+                \Log::debug("okay, we're out of pages - no cookie (or empty cookie) was passed");
                 $cookie = '';
             }
             // Empty cookie means last page
@@ -337,19 +332,18 @@ class Ldap extends Model
             // Get results from page
             $results = ldap_get_entries($ldapconn, $search_results);
             if (! $results) {
-                return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn)); // FIXME this is never called in any routed context - only from the Artisan command. So this redirect will never work.
+                return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn)); // TODO this is never called in any routed context - only from the Artisan command. So this redirect will never work.
             }
 
             // Add results to result set
             $global_count += $results['count'];
             $result_set = array_merge($result_set, $results);
-            \Log::info("Total count is: $global_count");
+            \Log::debug("Total count is: $global_count");
 
-            // ldap_search($ldapconn, $search_results, $cookie); // FIXME - this function is removed in PHP8
-        } while ($cookie !== null && $cookie != '');
+        } while ($cookie !== null && $cookie != '' && ($count == -1 || $global_count < $count)); // some servers don't even have pagination, and some will give you more results than you asked for, so just see if you have enough.
 
         // Clean up after search
-        $result_set['count'] = $global_count;
+        $result_set['count'] = $global_count; // TODO: I would've figured you could just count the array instead?
         $results = $result_set;
 
         return $results;
