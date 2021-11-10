@@ -852,6 +852,28 @@
         </div>
     </div>
 
+
+    <div class="modal modal-warning fade" id="restoreConfirmModal" tabindex="-1" role="dialog" aria-labelledby="restoreConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="restoreConfirmModalLabel">&nbsp;</h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                <form method="post" id="restoreForm" role="form">
+                    {{ csrf_field() }}
+                    {{ method_field('POST') }}
+
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ trans('general.cancel') }}</button>
+                    <button type="submit" class="btn btn-outline" id="dataConfirmOK">{{ trans('general.yes') }}</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- Javascript files --}}
     <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
 
