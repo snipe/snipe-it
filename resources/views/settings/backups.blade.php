@@ -184,7 +184,7 @@
       /*
       * This just disables the upload button via JS unless they have actually selected a file.
       *
-      * Todo: - key off off of the javascript response for JS file upload info as well, so that if it fails that 
+      * Todo: - key off the javascript response for JS file upload info as well, so that if it fails that 
       * check (file size and type) we should also leave it disabled.
       */
 
