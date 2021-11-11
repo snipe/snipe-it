@@ -90,8 +90,20 @@
 
    <!-- side address column -->
   <div class="col-md-4">
-   <h2 style="margin-top: 0px">Upload Backup</h2>
 
+    <div class="box box-default">
+      <div class="box-header with-border">
+        <h2 class="box-title">
+          <i class="far fa-file-archive" aria-hidden="true"></i>
+          Upload Backup</h2>
+        <div class="box-tools pull-right">
+        </div>
+      </div><!-- /.box-header -->
+
+      <div class="box-body">
+
+        <p>Backup files on the server are stored in: <code>{{ $path }}</code></p>
+        
       {{ Form::open([
         'method' => 'POST',
         'route' => 'settings.backups.upload',
@@ -100,7 +112,7 @@
         @csrf
 
         
-      <div class="form-group {{ $errors->has((isset($fieldname) ? $fieldname : 'image')) ? 'has-error' : '' }}">
+      <div class="form-group {{ $errors->has((isset($fieldname) ? $fieldname : 'image')) ? 'has-error' : '' }}" style="margin-bottom: 0px;">
         <div class="col-md-8 col-xs-8">
             <!-- screen reader only -->
             <input type="file" id="file" name="file" aria-label="file" class="sr-only">
@@ -120,44 +132,40 @@
           
           <p class="label label-default col-md-12" style="font-size: 120%!important; margin-top: 10px; margin-bottom: 10px;" id="uploadFile-info"></p>
           
-          <p class="help-block" style="margin-top: 10px; margin-bottom: 10px;" id="uploadFile-status">{{ trans_choice('general.filetypes_accepted_help', 3, ['size' => Helper::file_upload_max_size_readable(), 'types' => '.zip']) }}</p>     
+          <p class="help-block" style="margin-top: 10px;" id="uploadFile-status">{{ trans_choice('general.filetypes_accepted_help', 1, ['size' => Helper::file_upload_max_size_readable(), 'types' => '.zip']) }}</p>     
           {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
 
         </div>        
     </div>
     
     {{ Form::close() }}
-
-    <h3>Restoring from Backup</h3>
-
-    <div class="alert alert-warning fade in">
-      <p>You can use the restore (<i class="text-white fas fa-retweet" aria-hidden="true"></i>) button to restore from a previous backup, however there are a few things you should know: </p>
+      </div>
     </div>
 
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <h2 class="box-title">
+          <i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i>  Restoring from Backup</h2>
+        <div class="box-tools pull-right">
+        </div>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        
+      <p>
+        Use the restore (<i class="text-white fas fa-retweet" aria-hidden="true"></i>) button to 
+        restore from a previous backup. (This does not currently with with S3 file storage.)<br><br>Your <strong>entire {{ config('app.name') }} database and any uploaded files will be completely replaced</strong> by what's in the backup file.  
+      </p>
+        
+      <p>
+        You will be logged out after your restore is complete.
+      </p>
 
+      <p>
+        Very large backups may time out on the restore attempt and may still need to be run via command line.  
+      </p>
       
-      <ul class="list-unstyled">
-        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
-          Your entire database and any uploaded files will be completely replaced by what's in the backup file.
-          <br><br>
-        </li>
-        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
-            Very large backups may time out on the restore attempt and may still need to be run via command line. 
-            <br><br>
-        </li>
-        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
-          This does not currently work with S3 file storage.
-          <br><br>
-        </li>
-        <li><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> 
-          You will be logged out after your restore is complete.</li>
-      </ul>  
-      
-
-      <br><br>
-    <p>Backup files are located in: <code>{{ $path }}</code></p>
-
-      
+    </div>
+  </div>
     
         </div> <!-- end col-md-12 form div -->
    </div> <!-- end form group div -->
