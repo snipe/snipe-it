@@ -67,13 +67,12 @@
 
                   @can('superadmin')
                       <a data-html="false"
-                         class="btn delete-asset btn-danger btn-sm {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('settings.backups.destroy', $file['filename']) }}" data-content="{{ trans('admin/settings/message.backup.delete_confirm') }}" data-title="{{ trans('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
+                         class="btn delete-asset btn-danger btn-sm {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href="{{ route('settings.backups.destroy', $file['filename']) }}" data-content="{{ trans('admin/settings/message.backup.delete_confirm') }}" data-title="{{ trans('general.delete') }}  {{ e($file['filename']) }} ?" onClick="return false;">
                           <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                           <span class="sr-only">{{ trans('general.delete') }}</span>
                       </a>
 
-                     <a data-html="true" 
-                        href="{{ route('settings.backups.restore', $file['filename']) }}" class="btn btn-warning btn-sm restore-asset {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" data-content="Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This method does not currently support installations that use S3 for file storage. This will also log out all of your existing users (including you)." data-title="Are you sure you wish to restore your database from {{ $file['filename']}}?" onClick="return false;">
+                     <a data-html="true" href="{{ route('settings.backups.restore', $file['filename']) }}" class="btn btn-warning btn-sm restore-asset {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" data-content="Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you)." data-title="Are you sure you wish to restore your database from {{ e($file['filename']) }}?" onClick="return false;">
                       <i class="fas fa-retweet" aria-hidden="true"></i>
                       <span class="sr-only">Restore</span>
                     </a>
@@ -175,17 +174,14 @@
     <script>
       $(document).ready(function() {
         
-        $('#uploadFile').on('keyup', function() {
-          let empty = false;
+        $("#uploadFile").on('change',function(event){
 
-          $('#uploadFile').each(function() {
-            empty = $(this).val().length == 0;
-          });
-
-          if (empty)
-            $('#uploadButton').attr('disabled', 'disabled');
-          else
-            $('#uploadButton').attr('disabled', false);
+            if ($('#uploadFile').val().length == 0) {
+              $("#uploadButton").attr("disabled", true);
+            } else {
+              $('#uploadButton').removeAttr('disabled');
+            }
+            
         });
       });
   </script>
