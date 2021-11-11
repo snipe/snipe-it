@@ -152,12 +152,14 @@
       <div class="box-body">
         
       <p>
-        Use the restore (<i class="text-white fas fa-retweet" aria-hidden="true"></i>) button to 
-        restore from a previous backup. (This does not currently with with S3 file storage.)<br><br>Your <strong>entire {{ config('app.name') }} database and any uploaded files will be completely replaced</strong> by what's in the backup file.  
+        Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to 
+        restore from a previous backup. (This does not currently with with S3 file storage.)</p>
+        
+      <p>Your <strong>entire {{ config('app.name') }} database and any uploaded files will be completely replaced</strong> by what's in the backup file.  
       </p>
         
-      <p class="text-danger" style="font-weight: bold">
-        You will be logged out after your restore is complete.
+      <p class="text-danger" style="font-weight: bold; font-size: 120%;">
+        You will be logged out once your restore is complete.
       </p>
 
       <p>
