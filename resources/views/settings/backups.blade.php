@@ -156,7 +156,7 @@
         restore from a previous backup. (This does not currently with with S3 file storage.)<br><br>Your <strong>entire {{ config('app.name') }} database and any uploaded files will be completely replaced</strong> by what's in the backup file.  
       </p>
         
-      <p>
+      <p class="text-danger" style="font-weight: bold">
         You will be logged out after your restore is complete.
       </p>
 
