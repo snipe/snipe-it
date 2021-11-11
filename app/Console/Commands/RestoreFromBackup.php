@@ -149,7 +149,7 @@ class RestoreFromBackup extends Command
                 continue;
             }
             if (@pathinfo($raw_path)['extension'] == 'sql') {
-                \Log::debug("Found a sql file!\n");
+                \Log::debug("Found a sql file!");
                 $sqlfiles[] = $raw_path;
                 $sqlfile_indices[] = $i;
                 continue;
@@ -213,7 +213,11 @@ class RestoreFromBackup extends Command
         $env_vars['MYSQL_PWD'] = config('database.connections.mysql.password');
         // TODO notes: we are stealing the dump_binary_path (which *probably* also has your copy of the mysql binary in it. But it might not, so we might need to extend this)
         //             we unilaterally prepend a slash to the `mysql` command. This might mean your path could look like /blah/blah/blah//mysql - which should be fine. But maybe in some environments it isn't?
-        $proc_results = proc_open(config('database.connections.mysql.dump.dump_binary_path').'/mysql -h '.escapeshellarg(config('database.connections.mysql.host')).' -u '.escapeshellarg(config('database.connections.mysql.username')).' '.escapeshellarg(config('database.connections.mysql.database')), // yanked -p since we pass via ENV
+        $mysql_binary = config('database.connections.mysql.dump.dump_binary_path').'/mysql';
+        if( ! file_exists($mysql_binary) ) {
+            return $this->error("mysql tool at: '$mysql_binary' does not exist, cannot restore. Please edit DB_DUMP_PATH in your .env to point to a directory that contains the mysqldump and mysql binary");
+        }
+        $proc_results = proc_open("$mysql_binary -h ".escapeshellarg(config('database.connections.mysql.host')).' -u '.escapeshellarg(config('database.connections.mysql.username')).' '.escapeshellarg(config('database.connections.mysql.database')), // yanked -p since we pass via ENV
                                   [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
                                   $pipes,
                                   null,
@@ -240,9 +244,10 @@ class RestoreFromBackup extends Command
 
             return false;
         }
-
+        $bytes_read = 0;
         while (($buffer = fgets($sql_contents, self::$buffer_size)) !== false) {
-            //$this->info("Buffer is: '$buffer'");
+            $bytes_read += strlen($buffer);
+            // \Log::debug("Buffer is: '$buffer'");
             $bytes_written = fwrite($pipes[0], $buffer);
             if ($bytes_written === false) {
                 $stdout = fgets($pipes[1]);
@@ -253,6 +258,10 @@ class RestoreFromBackup extends Command
                 return false;
             }
         }
+        if (!feof($sql_contents) || $bytes_read == 0) {
+            return $this->error("Not at end of file for sql file, or zero bytes read. aborting!");
+        }
+    
         fclose($pipes[0]);
         fclose($sql_contents);
         
