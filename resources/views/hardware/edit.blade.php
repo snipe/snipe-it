@@ -46,6 +46,9 @@
     <div class="input_fields_wrap">
     </div>
 
+	@include ('partials.forms.edit.classified_by', ['translated_name' => trans('admin/hardware/form.classified_by')])
+
+    @include ('partials.forms.edit.derived_from', ['translated_name' => trans('admin/hardware/form.derived_from')])
 
     @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'field_req' => true])
 
