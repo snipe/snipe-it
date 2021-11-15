@@ -50,6 +50,8 @@
 
     @include ('partials.forms.edit.derived_from')
 
+    @include ('partials.forms.edit.classification_level')
+
     @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'field_req' => true])
 
 

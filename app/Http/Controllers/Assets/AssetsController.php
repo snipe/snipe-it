@@ -131,6 +131,7 @@ class AssetsController extends Controller
             $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
             $asset->classified_by           = $request->input('classified_by');
             $asset->derived_from            = $request->input('derived_from');
+            $asset->classification_level    = $request->input('classification_level');
             $asset->model_id                = $request->input('model_id');
             $asset->order_number            = $request->input('order_number');
             $asset->notes                   = $request->input('notes');
