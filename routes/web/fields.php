@@ -7,17 +7,17 @@
 
 Route::group([ 'prefix' => 'fields','middleware' => ['auth'] ], function () {
 
-    Route::get('required/{fieldset_id}/{field_id}',
+    Route::post('required/{fieldset_id}/{field_id}',
         ['uses' => 'CustomFieldsetsController@makeFieldRequired',
             'as' => 'fields.required']
     );
 
-    Route::get('optional/{fieldset_id}/{field_id}',
+    Route::post('optional/{fieldset_id}/{field_id}',
         ['uses' => 'CustomFieldsetsController@makeFieldOptional',
             'as' => 'fields.optional']
     );
 
-    Route::get('{field_id}/fieldset/{fieldset_id}/disassociate',
+    Route::post('{field_id}/fieldset/{fieldset_id}/disassociate',
         ['uses' => 'CustomFieldsController@deleteFieldFromFieldset',
         'as' => 'fields.disassociate']
     );

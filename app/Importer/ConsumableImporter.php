@@ -41,9 +41,12 @@ class ConsumableImporter extends ItemImporter
         $consumable = new Consumable();
         $this->item['model_number'] = $this->findCsvMatch($row, "model_number");;
         $this->item['item_no'] = $this->findCsvMatch($row, "item_number");
+        $this->item['min_amt'] = $this->findCsvMatch($row, "minimum quantity");
+        $this->log("min_amt " . $this->item["min_amt"]);
         $consumable->fill($this->sanitizeItemForStoring($consumable));
         //FIXME: this disables model validation.  Need to find a way to avoid double-logs without breaking everything.
         $consumable->unsetEventDispatcher();
+        $this->log(implode(",", $this->item));
         if ($consumable->save()) {
             $consumable->logCreate('Imported using CSV Importer');
             $this->log("Consumable " . $this->item["name"] . ' was created');
