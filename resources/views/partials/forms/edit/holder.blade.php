@@ -1,5 +1,5 @@
 <!-- Holder -->
-<div class="form-group{{ $errors->has('holder') ? ' has-error' : '' }}">
+<div class="form-group{{ $errors->has('Holder') ? ' has-error' : '' }}">
     <label for="holder" class="col-md-3 control-label">{{ trans('Holder') }}</label>
     <div class="input-group col-md-3">
         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
