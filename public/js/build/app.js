@@ -334,6 +334,9 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           id: 'model_number',
           text: "Model Number"
+        }, {
+          id: 'min_amt',
+          text: "Minimum Quantity"
         }],
         licenses: [{
           id: 'asset_tag',
@@ -427,6 +430,7 @@ __webpack_require__.r(__webpack_exports__);
           return this.columnOptions.general.concat(this.columnOptions.accessories).sort(sorter);
 
         case 'consumable':
+          console.log('Returned consumable');
           return this.columnOptions.general.concat(this.columnOptions.consumables).sort(sorter);
 
         case 'license':
@@ -6317,6 +6321,8 @@ if (typeof jQuery === 'undefined') {
 /***/ ((module, exports, __webpack_require__) => {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
+	"use strict";
+
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
@@ -6325,13 +6331,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else {}
-} ( function( $ ) {
+} )( function( $ ) {
+"use strict";
 
 $.ui = $.ui || {};
 
-return $.ui.version = "1.12.1";
+return $.ui.version = "1.13.0";
 
-} ) );
+} );
 
 
 /***/ }),
@@ -6343,7 +6350,7 @@ return $.ui.version = "1.12.1";
 /***/ ((module, exports, __webpack_require__) => {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery UI Widget 1.12.1
+ * jQuery UI Widget 1.13.0
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -6358,6 +6365,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 //>>demos: http://jqueryui.com/widget/
 
 ( function( factory ) {
+	"use strict";
+
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
@@ -6366,25 +6375,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else {}
-}( function( $ ) {
+} )( function( $ ) {
+"use strict";
 
 var widgetUuid = 0;
+var widgetHasOwnProperty = Array.prototype.hasOwnProperty;
 var widgetSlice = Array.prototype.slice;
 
 $.cleanData = ( function( orig ) {
 	return function( elems ) {
 		var events, elem, i;
 		for ( i = 0; ( elem = elems[ i ] ) != null; i++ ) {
-			try {
 
-				// Only trigger remove when necessary to save time
-				events = $._data( elem, "events" );
-				if ( events && events.remove ) {
-					$( elem ).triggerHandler( "remove" );
-				}
-
-			// Http://bugs.jquery.com/ticket/8235
-			} catch ( e ) {}
+			// Only trigger remove when necessary to save time
+			events = $._data( elem, "events" );
+			if ( events && events.remove ) {
+				$( elem ).triggerHandler( "remove" );
+			}
 		}
 		orig( elems );
 	};
@@ -6406,12 +6413,12 @@ $.widget = function( name, base, prototype ) {
 		base = $.Widget;
 	}
 
-	if ( $.isArray( prototype ) ) {
+	if ( Array.isArray( prototype ) ) {
 		prototype = $.extend.apply( null, [ {} ].concat( prototype ) );
 	}
 
 	// Create selector for plugin
-	$.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
+	$.expr.pseudos[ fullName.toLowerCase() ] = function( elem ) {
 		return !!$.data( elem, fullName );
 	};
 
@@ -6451,7 +6458,7 @@ $.widget = function( name, base, prototype ) {
 	// inheriting from
 	basePrototype.options = $.widget.extend( {}, basePrototype.options );
 	$.each( prototype, function( prop, value ) {
-		if ( !$.isFunction( value ) ) {
+		if ( typeof value !== "function" ) {
 			proxiedPrototype[ prop ] = value;
 			return;
 		}
@@ -6530,7 +6537,7 @@ $.widget.extend = function( target ) {
 	for ( ; inputIndex < inputLength; inputIndex++ ) {
 		for ( key in input[ inputIndex ] ) {
 			value = input[ inputIndex ][ key ];
-			if ( input[ inputIndex ].hasOwnProperty( key ) && value !== undefined ) {
+			if ( widgetHasOwnProperty.call( input[ inputIndex ], key ) && value !== undefined ) {
 
 				// Clone objects
 				if ( $.isPlainObject( value ) ) {
@@ -6579,7 +6586,8 @@ $.widget.bridge = function( name, object ) {
 							"attempted to call method '" + options + "'" );
 					}
 
-					if ( !$.isFunction( instance[ options ] ) || options.charAt( 0 ) === "_" ) {
+					if ( typeof instance[ options ] !== "function" ||
+						options.charAt( 0 ) === "_" ) {
 						return $.error( "no such method '" + options + "' for " + name +
 							" widget instance" );
 					}
@@ -6840,12 +6848,30 @@ $.Widget.prototype = {
 			classes: this.options.classes || {}
 		}, options );
 
+		function bindRemoveEvent() {
+			options.element.each( function( _, element ) {
+				var isTracked = $.map( that.classesElementLookup, function( elements ) {
+					return elements;
+				} )
+					.some( function( elements ) {
+						return elements.is( element );
+					} );
+
+				if ( !isTracked ) {
+					that._on( $( element ), {
+						remove: "_untrackClassesElement"
+					} );
+				}
+			} );
+		}
+
 		function processClassString( classes, checkOption ) {
 			var current, i;
 			for ( i = 0; i < classes.length; i++ ) {
 				current = that.classesElementLookup[ classes[ i ] ] || $();
 				if ( options.add ) {
-					current = $( $.unique( current.get().concat( options.element.get() ) ) );
+					bindRemoveEvent();
+					current = $( $.uniqueSort( current.get().concat( options.element.get() ) ) );
 				} else {
 					current = $( current.not( options.element ).get() );
 				}
@@ -6856,10 +6882,6 @@ $.Widget.prototype = {
 				}
 			}
 		}
-
-		this._on( options.element, {
-			"remove": "_untrackClassesElement"
-		} );
 
 		if ( options.keys ) {
 			processClassString( options.keys.match( /\S+/g ) || [], true );
@@ -6878,6 +6900,8 @@ $.Widget.prototype = {
 				that.classesElementLookup[ key ] = $( value.not( event.target ).get() );
 			}
 		} );
+
+		this._off( $( event.target ) );
 	},
 
 	_removeClass: function( element, keys, extra ) {
@@ -6958,7 +6982,7 @@ $.Widget.prototype = {
 	_off: function( element, eventName ) {
 		eventName = ( eventName || "" ).split( " " ).join( this.eventNamespace + " " ) +
 			this.eventNamespace;
-		element.off( eventName ).off( eventName );
+		element.off( eventName );
 
 		// Clear the stack to avoid memory leaks (#10056)
 		this.bindings = $( this.bindings.not( element ).get() );
@@ -7024,7 +7048,7 @@ $.Widget.prototype = {
 		}
 
 		this.element.trigger( event, data );
-		return !( $.isFunction( callback ) &&
+		return !( typeof callback === "function" &&
 			callback.apply( this.element[ 0 ], [ event ].concat( data ) ) === false ||
 			event.isDefaultPrevented() );
 	}
@@ -7046,6 +7070,8 @@ $.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
 		options = options || {};
 		if ( typeof options === "number" ) {
 			options = { duration: options };
+		} else if ( options === true ) {
+			options = {};
 		}
 
 		hasOptions = !$.isEmptyObject( options );
@@ -7073,7 +7099,7 @@ $.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
 
 return $.widget;
 
-} ) );
+} );
 
 
 /***/ }),
