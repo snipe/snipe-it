@@ -1150,30 +1150,33 @@ class SettingsController extends Controller
 
     public function postUploadBackup(Request $request) {
 
-        if (!$request->hasFile('file')) {
-            return redirect()->route('settings.backups.index')->with('error', 'No file uploaded');
-        } else {
-            $max_file_size = Helper::file_upload_max_size();
-
-            $rules = [
-                'file' => 'required|mimes:zip|max:'.$max_file_size,
-            ];
-
-            $validator = \Validator::make($request->all(), $rules);
-
-            if ($validator->passes()) {
-
-
-
-                    $upload_filename = 'uploaded-'.date('U').'-'.Str::slug(pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME)).'.zip';
-
-                    Storage::putFileAs('app/backups', $request->file('file'), $upload_filename);
-        
-                    return redirect()->route('settings.backups.index')->with('success', 'File uploaded');
+        if (! config('app.lock_passwords')) {
+            if (!$request->hasFile('file')) {
+                return redirect()->route('settings.backups.index')->with('error', 'No file uploaded');
             } else {
-                return redirect()->route('settings.backups.index')->withErrors($request->getErrors());
+                $max_file_size = Helper::file_upload_max_size();
+
+                $rules = [
+                    'file' => 'required|mimes:zip|max:'.$max_file_size,
+                ];
+
+                $validator = \Validator::make($request->all(), $rules);
+
+                if ($validator->passes()) {
+
+                        $upload_filename = 'uploaded-'.date('U').'-'.Str::slug(pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME)).'.zip';
+
+                        Storage::putFileAs('app/backups', $request->file('file'), $upload_filename);
+            
+                        return redirect()->route('settings.backups.index')->with('success', 'File uploaded');
+                } else {
+                    return redirect()->route('settings.backups.index')->withErrors($request->getErrors());
+                }
             }
-        }
+
+        } else {
+            return redirect()->route('settings.backups.index')->with('error', trans('general.feature_disabled'));
+        }    
 
         
         
