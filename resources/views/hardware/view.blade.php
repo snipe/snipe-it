@@ -282,6 +282,17 @@
                                         </div>
                                     @endif
 
+                                    @if ($asset->holder)
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <strong>{{ trans('admin/hardware/form.holder') }}</strong>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ $asset->holder  }}
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     @if ($asset->derived_from)
                                         <div class="row">
                                             <div class="col-md-2">
