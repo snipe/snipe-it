@@ -84,6 +84,37 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
     var Components = {};
     Components.modals = {};
 
+    // confirm restore modal
+    Components.modals.confirmRestore = function() {
+        var $el = $('table');
+
+        var events = {
+            'click': function(evnt) {
+                var $context = $(this);
+                var $restoreConfirmModal = $('#restoreConfirmModal');
+                var href = $context.attr('href');
+                var message = $context.attr('data-content');
+                var title = $context.attr('data-title');
+
+                $('#restoreConfirmModalLabel').text(title);
+                $restoreConfirmModal.find('.modal-body').text(message);
+                $('#restoreForm').attr('action', href);
+                $restoreConfirmModal.modal({
+                    show: true
+                });
+                return false;
+            }
+        };
+
+        var render = function() {
+            $el.on('click', '.restore-asset', events['click']);
+        };
+
+        return {
+            render: render
+        };
+    };
+
     // confirm delete modal
     Components.modals.confirmDelete = function() {
         var $el = $('table');
@@ -121,6 +152,7 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
      * Component definition stays out of load event, execution only happens.
      */
     $(function() {
+        new Components.modals.confirmRestore().render();
         new Components.modals.confirmDelete().render();
     });
 }(jQuery, window.snipeit.settings));
