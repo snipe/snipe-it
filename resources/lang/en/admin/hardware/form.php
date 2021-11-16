@@ -41,7 +41,6 @@ return array(
 		'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'years',
     'classified_by'				=> 'Classified By',
-    ''
     'derived_from'				=> 'Derived From',
 )
 ;
