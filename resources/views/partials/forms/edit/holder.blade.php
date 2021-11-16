@@ -1,6 +1,6 @@
 <!-- Holder -->
 <div class="form-group{{ $errors->has('Holder') ? ' has-error' : '' }}">
-    <label for="holder" class="col-md-3 control-label">{{ trans('Holder') }}</label>
+    <label for="Holder" class="col-md-3 control-label">{{ trans('Holder') }}</label>
     <div class="input-group col-md-3">
         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
             <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="Holder" id="Holder" value="{{ old('Holder', ($item->Holder) ? $item->Holder->format('Y-m-d') : '') }}">
