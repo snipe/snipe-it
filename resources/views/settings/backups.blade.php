@@ -104,6 +104,10 @@
 
         <p>Backup files on the server are stored in: <code>{{ $path }}</code></p>
         
+        @if (config('app.lock_passwords')===true)
+        <p class="alert alert-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
+          @else
+              
       {{ Form::open([
         'method' => 'POST',
         'route' => 'settings.backups.upload',
@@ -114,14 +118,23 @@
         
       <div class="form-group {{ $errors->has((isset($fieldname) ? $fieldname : 'image')) ? 'has-error' : '' }}" style="margin-bottom: 0px;">
         <div class="col-md-8 col-xs-8">
-            <!-- screen reader only -->
-            <input type="file" id="file" name="file" aria-label="file" class="sr-only">
-
+          
+          
              <!-- displayed on screen -->
             <label class="btn btn-default col-md-12 col-xs-12" aria-hidden="true">
               <i class="fas fa-paperclip" aria-hidden="true"></i>
                 {{ trans('button.select_file')  }}
-                <input type="file" name="file" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="application/zip" style="display:none;" aria-label="file" aria-hidden="true">
+
+                
+                 
+               
+                
+                  <!-- screen reader only -->
+                  <input type="file" id="file" name="file" aria-label="file" class="sr-only">
+
+                  <input type="file" name="file" class="js-uploadFile" id="uploadFile" data-maxsize="{{ Helper::file_upload_max_size() }}" accept="application/zip" style="display:none;" aria-label="file" aria-hidden="true">
+                
+                
             </label>   
 
         </div>
@@ -134,11 +147,14 @@
           
           <p class="help-block" style="margin-top: 10px;" id="uploadFile-status">{{ trans_choice('general.filetypes_accepted_help', 1, ['size' => Helper::file_upload_max_size_readable(), 'types' => '.zip']) }}</p>     
           {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+         
 
-        </div>        
+        </div>  
+            
     </div>
     
     {{ Form::close() }}
+    @endif  
       </div>
     </div>
 
