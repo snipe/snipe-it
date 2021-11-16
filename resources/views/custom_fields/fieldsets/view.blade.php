@@ -57,6 +57,7 @@
               <td>{{$field->element}}</td>
               <td>{{ $field->field_encrypted=='1' ?  trans('general.yes') : trans('general.no') }}</td>
                 <td>
+
                     @if ($field->pivot->required)
                     <form method="post" action="{{ route('fields.optional', [$custom_fieldset->id, $field->id]) }}">
                       @csrf 
@@ -70,11 +71,13 @@
                       <button type="submit" class="btn btn-link"><i class="fa fa-times text-danger" aria-hidden="true"></i></button>
                       </form>
                     @endif
+
                 </td>
               <td>
                 @can('update', $custom_fieldset)
-                <a href="{{ route('fields.disassociate', [$field, $custom_fieldset->id]) }}" class="btn btn-sm btn-danger">{{ trans('button.remove') }}</a>
-                @endcan
+                <form method="post" action="{{ route('fields.disassociate', [$field, $custom_fieldset->id]) }}">
+                  @csrf 
+                  <button type="submit" class="btn btn-sm btn-danger">{{ trans('button.remove') }}</button>                @endcan
               </td>
             </tr>
             @endforeach

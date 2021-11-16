@@ -20,4 +20,5 @@ return [
     'bulk_actions'              => 'Bulk Actions',
     'add_maintenance'           => 'Add Maintenance',
     'append'                    => 'Append',
+    'remove'                    => 'Remove',
 ];
