@@ -1,4 +1,9 @@
 <?php
+
+use App\Http\Controllers\CustomFieldsController;
+use App\Http\Controllers\CustomFieldsetsController;
+use Illuminate\Support\Facades\Route;
+
 /*
 * Custom Fields Routes
 */
