@@ -1218,7 +1218,8 @@ class SettingsController extends Controller
             
                 // If it's greater than 300, it probably worked
                 if (strlen($output) > 300) {
-                    return redirect()->route('settings.backups.index')->with('success', 'Your system has been restored.');
+                    \Auth::logout();
+                    return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
                 } else {
                     return redirect()->route('settings.backups.index')->with('error', $output);
 
@@ -1231,7 +1232,7 @@ class SettingsController extends Controller
 
 
                 // log the user out
-                // \Auth::logout();
+                
 
 
             } else {
