@@ -60833,7 +60833,36 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
 
 (function ($, settings) {
   var Components = {};
-  Components.modals = {}; // confirm delete modal
+  Components.modals = {}; // confirm restore modal
+
+  Components.modals.confirmRestore = function () {
+    var $el = $('table');
+    var events = {
+      'click': function click(evnt) {
+        var $context = $(this);
+        var $restoreConfirmModal = $('#restoreConfirmModal');
+        var href = $context.attr('href');
+        var message = $context.attr('data-content');
+        var title = $context.attr('data-title');
+        $('#restoreConfirmModalLabel').text(title);
+        $restoreConfirmModal.find('.modal-body').text(message);
+        $('#restoreForm').attr('action', href);
+        $restoreConfirmModal.modal({
+          show: true
+        });
+        return false;
+      }
+    };
+
+    var render = function render() {
+      $el.on('click', '.restore-asset', events['click']);
+    };
+
+    return {
+      render: render
+    };
+  }; // confirm delete modal
+
 
   Components.modals.confirmDelete = function () {
     var $el = $('table');
@@ -60869,6 +60898,7 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
 
 
   $(function () {
+    new Components.modals.confirmRestore().render();
     new Components.modals.confirmDelete().render();
   });
 })(jQuery, window.snipeit.settings);
@@ -61024,10 +61054,10 @@ $(document).ready(function () {
           return x !== 0;
         }); // makes sure we're not selecting the same thing twice for multiples
 
-        var filteredResponse = response.items.filter(function (item) {
+        var filteredResponse = response.results.filter(function (item) {
           return currentlySelected.indexOf(+item.id) < 0;
         });
-        var first = currentlySelected.length > 0 ? filteredResponse[0] : response.items[0];
+        var first = currentlySelected.length > 0 ? filteredResponse[0] : response.results[0];
 
         if (first && first.id) {
           first.selected = true;
@@ -61233,7 +61263,7 @@ $(document).ready(function () {
 
     for (var i = 0; i < this.files.length; i++) {
       total_size += this.files[i].size;
-      $(id + '-info').append('<span class="label label-default">' + this.files[i].name + ' (' + formatBytes(this.files[i].size) + ')</span> ');
+      $(id + '-info').append('<span class="label label-default">' + htmlEntities(this.files[i].name) + ' (' + formatBytes(this.files[i].size) + ')</span> ');
     }
 
     console.log('Max size is: ' + max_size);
@@ -61249,9 +61279,14 @@ $(document).ready(function () {
     }
   });
 });
+
+function htmlEntities(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 /**
  * Toggle disabled
  */
+
 
 (function ($) {
   $.fn.toggleDisabled = function (callback) {

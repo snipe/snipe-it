@@ -14,7 +14,7 @@ class RestoreFromBackup extends Command
      */
     protected $signature = 'snipeit:restore 
                                             {--force : Skip the danger prompt; assuming you hit "y"} 
-                                            {filename : The zip file to be migrated}
+                                            {filename : The full path of the .zip file to be migrated}
                                             {--no-progress : Don\'t show a progress bar}';
 
     /**
@@ -22,7 +22,7 @@ class RestoreFromBackup extends Command
      *
      * @var string
      */
-    protected $description = 'Restore from a previously created backup';
+    protected $description = 'Restore from a previously created Snipe-IT backup file';
 
     /**
      * Create a new command instance.
@@ -34,6 +34,8 @@ class RestoreFromBackup extends Command
         parent::__construct();
     }
 
+    public static $buffer_size = 1024 * 1024;  // use a 1MB buffer, ought to work fine for most cases?
+
     /**
      * Execute the console command.
      *
@@ -42,7 +44,10 @@ class RestoreFromBackup extends Command
     public function handle()
     {
         $dir = getcwd();
-        echo "Current working directory is: $dir\n";
+        if( $dir != base_path() ) { // usually only the case when running via webserver, not via command-line
+            \Log::debug("Current working directory is: $dir, changing directory to: ".base_path());
+            chdir(base_path()); // TODO - is this *safe* to change on a running script?!
+        }
         //
         $filename = $this->argument('filename');
 
@@ -67,7 +72,7 @@ class RestoreFromBackup extends Command
                 ZipArchive::ER_INCONS => 'Zip archive inconsistent.',
                 ZipArchive::ER_INVAL => 'Invalid argument.',
                 ZipArchive::ER_MEMORY => 'Malloc failure.',
-                ZipArchive::ER_NOENT => 'No such file.',
+                ZipArchive::ER_NOENT => 'No such file ('.$filename.') in directory '.$dir.'.',
                 ZipArchive::ER_NOZIP => 'Not a zip archive.',
                 ZipArchive::ER_OPEN => "Can't open file.",
                 ZipArchive::ER_READ => 'Read error.',
@@ -144,7 +149,7 @@ class RestoreFromBackup extends Command
                 continue;
             }
             if (@pathinfo($raw_path)['extension'] == 'sql') {
-                echo "Found a sql file!\n";
+                \Log::debug("Found a sql file!");
                 $sqlfiles[] = $raw_path;
                 $sqlfile_indices[] = $i;
                 continue;
@@ -206,7 +211,13 @@ class RestoreFromBackup extends Command
 
         $env_vars = getenv();
         $env_vars['MYSQL_PWD'] = config('database.connections.mysql.password');
-        $proc_results = proc_open('mysql -h '.escapeshellarg(config('database.connections.mysql.host')).' -u '.escapeshellarg(config('database.connections.mysql.username')).' '.escapeshellarg(config('database.connections.mysql.database')), // yanked -p since we pass via ENV
+        // TODO notes: we are stealing the dump_binary_path (which *probably* also has your copy of the mysql binary in it. But it might not, so we might need to extend this)
+        //             we unilaterally prepend a slash to the `mysql` command. This might mean your path could look like /blah/blah/blah//mysql - which should be fine. But maybe in some environments it isn't?
+        $mysql_binary = config('database.connections.mysql.dump.dump_binary_path').'/mysql';
+        if( ! file_exists($mysql_binary) ) {
+            return $this->error("mysql tool at: '$mysql_binary' does not exist, cannot restore. Please edit DB_DUMP_PATH in your .env to point to a directory that contains the mysqldump and mysql binary");
+        }
+        $proc_results = proc_open("$mysql_binary -h ".escapeshellarg(config('database.connections.mysql.host')).' -u '.escapeshellarg(config('database.connections.mysql.username')).' '.escapeshellarg(config('database.connections.mysql.database')), // yanked -p since we pass via ENV
                                   [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
                                   $pipes,
                                   null,
@@ -233,9 +244,10 @@ class RestoreFromBackup extends Command
 
             return false;
         }
-
-        while (($buffer = fgets($sql_contents)) !== false) {
-            //$this->info("Buffer is: '$buffer'");
+        $bytes_read = 0;
+        while (($buffer = fgets($sql_contents, self::$buffer_size)) !== false) {
+            $bytes_read += strlen($buffer);
+            // \Log::debug("Buffer is: '$buffer'");
             $bytes_written = fwrite($pipes[0], $buffer);
             if ($bytes_written === false) {
                 $stdout = fgets($pipes[1]);
@@ -246,6 +258,10 @@ class RestoreFromBackup extends Command
                 return false;
             }
         }
+        if (!feof($sql_contents) || $bytes_read == 0) {
+            return $this->error("Not at end of file for sql file, or zero bytes read. aborting!");
+        }
+    
         fclose($pipes[0]);
         fclose($sql_contents);
         
@@ -273,7 +289,7 @@ class RestoreFromBackup extends Command
             $fp = $za->getStream($ugly_file_name);
             //$this->info("Weird problem, here are file details? ".print_r($file_details,true));
             $migrated_file = fopen($file_details['dest'].'/'.basename($pretty_file_name), 'w');
-            while (($buffer = fgets($fp)) !== false) {
+            while (($buffer = fgets($fp, self::$buffer_size)) !== false) {
                 fwrite($migrated_file, $buffer);
             }
             fclose($migrated_file);

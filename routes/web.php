@@ -189,6 +189,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
             [SettingsController::class, 'postBackups']
         )->name('settings.backups.create');
 
+        Route::post('/restore/{filename}', 
+            [SettingsController::class, 'postRestore']
+        )->name('settings.backups.restore');
+
+        Route::post('/upload', 
+            [SettingsController::class, 'postUploadBackup']
+        )->name('settings.backups.upload');
+
         Route::get('/', [SettingsController::class, 'getBackups'])->name('settings.backups.index');
     });
 

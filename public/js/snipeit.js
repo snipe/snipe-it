@@ -175,6 +175,36 @@ pieOptions = {
         return {
             render: render
         };
+
+    // confirm restore modal
+    Components.modals.confirmRestore = function () {
+        var $el = $('table');
+
+        var events = {
+            'click': function click(evnt) {
+                var $context = $(this);
+                var $dataConfirmModal = $('#restoreConfirmModal');
+                var href = $context.attr('href');
+                var message = $context.attr('data-content');
+                var title = $context.attr('data-title');
+
+                $('#myModalLabel').text(title);
+                $dataConfirmModal.find('.modal-body').text(message);
+                $('#confirmRestoreForm').attr('action', href);
+                $dataConfirmModal.modal({
+                    show: true
+                });
+                return false;
+            }
+        };
+
+        var render = function render() {
+            $el.on('click', '.restore-modal', events['click']);
+        };
+
+        return {
+            render: render
+        };
     };
 
     /**
