@@ -171,6 +171,7 @@ class AssetsController extends Controller
         // case we override with the actual count, so we should return 0 items.
         $offset = (($assets) && ($request->get('offset') > $assets->count())) ? $assets->count() : $request->get('offset', 0);
 
+
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
 
@@ -336,6 +337,7 @@ class AssetsController extends Controller
         return (new $transformer)->transformAssets($assets, $total, $request);
     }
 
+
     /**
      * Returns JSON with information about an asset (by tag) for detail view.
      *
@@ -373,9 +375,19 @@ class AssetsController extends Controller
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
 
+        $assets = Asset::with('assetstatus')->with('assignedTo');
 
+        if ($request->input('deleted', 'false') === 'true') {
+            $assets = $assets->withTrashed();
     }
 
+        $assets = $assets->where('serial', $serial)->get();
+        if ($assets) {
+            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+        } else {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+        }
+    }
 
     /**
      * Returns JSON with information about an asset for detail view.
@@ -676,6 +688,8 @@ class AssetsController extends Controller
 
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
+
+    
 
     /**
      * Restore a soft-deleted asset.
