@@ -29,6 +29,7 @@
 | serial number       | serial           | Asset, license                            |
 | status              | status           | Asset ? All                               |
 | supplier            | supplier         | Asset ? All                               |
+| minimum quantity    | min_amt          | Consumable                                |
 | termination date    | termination_date | License                                   |
 | warranty months     | warranty_months  | Asset                                     |
 | User Related Fields | assigned_to      | Asset                                     |

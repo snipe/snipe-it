@@ -47,7 +47,7 @@
               <i class="far fa-list-alt fa-2x" aria-hidden="true"></i>
               </span>
               <span class="hidden-xs hidden-sm">{{ trans('admin/licenses/form.seats') }}</span>
-              <badge class="badge badge-secondary">{{ $license->availCount()->count() }} / {{ $license->seats }}</badge>
+              <span class="badge badge-secondary">{{ $license->availCount()->count() }} / {{ $license->seats }}</span>
 
             </a>
         </li>

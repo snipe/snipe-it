@@ -124,6 +124,8 @@
     'image'                 => 'Image',
     'image_delete'         	=> 'Delete Image',
     'image_upload'         	=> 'Upload Image',
+    'filetypes_accepted_help'    => 'Accepted filetype is :types. Max upload size allowed is :size.|Accepted filetypes are :types. Max upload size allowed is :size.',
+    'filetypes_size_help'   => 'Max upload size allowed is :size.',
     'image_filetypes_help'  => 'Accepted filetypes are jpg, webp, png, gif, and svg. Max upload size allowed is :size.',
     'import'         	    => 'Import',
     'importing'         	=> 'Importing',

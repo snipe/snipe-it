@@ -90,11 +90,6 @@ class ImageUploadRequest extends Request
             $use_db_field = $db_fieldname;
         }
 
-        \Log::info('Image path is: '.$path);
-        \Log::debug('Type is: '.$type);
-        \Log::debug('Form fieldname is: '.$form_fieldname);
-        \Log::debug('DB fieldname is: '.$use_db_field);
-        \Log::debug('Trying to upload to '. $path);
         
         // ConvertBase64ToFiles just changes object type, 
         // as it cannot currently insert files to $this->files
