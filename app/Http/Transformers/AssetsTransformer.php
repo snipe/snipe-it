@@ -93,15 +93,15 @@ class AssetsTransformer
                     $value = (Gate::allows('superadmin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
 
                     $fields_array[$field->name] = [
-                            'field' => $field->convertUnicodeDbSlug(),
-                            'value' => $value,
+                            'field' => e($field->convertUnicodeDbSlug()),
+                            'value' => e($value),
                             'field_format' => $field->format,
                         ];
 
                 } else {
                     $fields_array[$field->name] = [
-                        'field' => $field->convertUnicodeDbSlug(),
-                        'value' => $asset->{$field->convertUnicodeDbSlug()},
+                        'field' => e($field->convertUnicodeDbSlug()),
+                        'value' => e($asset->{$field->convertUnicodeDbSlug()}),
                         'field_format' => $field->format,
                     ];
 
