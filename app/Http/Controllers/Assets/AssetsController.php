@@ -132,6 +132,7 @@ class AssetsController extends Controller
             $asset->classified_by           = $request->input('classified_by');
             $asset->derived_from            = $request->input('derived_from');
             $asset->Declassification_date   = $request->input('declassification_date');
+            $asset->Holder = $request->input('holder');
             $asset->model_id                = $request->input('model_id');
             $asset->order_number            = $request->input('order_number');
             $asset->notes                   = $request->input('notes');
