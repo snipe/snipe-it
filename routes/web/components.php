@@ -23,7 +23,7 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
     Route::post(
         '{componentID}/checkin/{backto?}',
         [Components\ComponentCheckinController::class, 'store']
-    )->name('checkout/component');
+    )->name('component.checkin.save');
 
 });
 
