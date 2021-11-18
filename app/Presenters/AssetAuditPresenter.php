@@ -130,6 +130,7 @@ class AssetAuditPresenter extends Presenter
                 'visible' => false,
                 'title' => trans('general.purchase_cost'),
                 'footerFormatter' => 'sumFormatter',
+                'class' => 'text-right',
             ], [
                 'field' => 'order_number',
                 'searchable' => true,

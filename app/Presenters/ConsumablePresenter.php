@@ -114,6 +114,7 @@ class ConsumablePresenter extends Presenter
                 'title' => trans('general.purchase_cost'),
                 'visible' => true,
                 'footerFormatter' => 'sumFormatter',
+                'class' => 'text-right',
             ], [
                 'field' => 'change',
                 'searchable' => false,
