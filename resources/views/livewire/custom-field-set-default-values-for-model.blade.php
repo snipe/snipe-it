@@ -12,9 +12,10 @@
                 </span>
             </div>
     </div>
-    @if( $this->add_default_values ) {{-- 'if the checkbox is enabled *AND* there are more than 0 fields in the fieldsset' --}}
+    @if ($this->add_default_values ) {{-- 'if the checkbox is enabled *AND* there are more than 0 fields in the fieldsset' --}}
     <div>
         <div class="form-group">
+            @if ($fields)
                 @foreach ($fields as $field)
                     <div class="form-group">
                     
@@ -49,6 +50,7 @@
                         </div>
 
                 @endforeach
+                @endif
 
         </div>
     </div>
