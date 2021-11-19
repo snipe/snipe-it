@@ -1,3 +1,4 @@
+{{-- TODO: Translate --}}
 @if ($errors->any())
 <div class="col-md-12">
     <div class="alert alert-danger fade in">

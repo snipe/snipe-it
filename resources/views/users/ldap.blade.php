@@ -1,5 +1,5 @@
 @extends('layouts/default')
-
+{{-- TODO: Translate --}}
 {{-- Page title --}}
 @section('title')
 LDAP User Sync

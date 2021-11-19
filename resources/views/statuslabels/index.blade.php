@@ -3,6 +3,7 @@
     'helpPosition' => 'right',
 ])
 
+{{-- TODO: Translate --}}
 
 {{-- Page title --}}
 @section('title')

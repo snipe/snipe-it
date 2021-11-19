@@ -30,7 +30,7 @@
     </style>
 </head>
 <body>
-
+{{-- TODO: Translate --}}
 @if ($snipeSettings->logo_print_assets=='1')
     @if ($snipeSettings->brand == '3')
 
