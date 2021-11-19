@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Slack Settings
+    {{ trans('admin/settings/general.slack_title') }}
     @parent
 @stop
 
@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fab fa-slack"></i> Slack
+                        <i class="fab fa-slack"></i> {{ trans('admin/settings/general.slack') }}
                     </h2>
                 </div>
                 <div class="box-body">
@@ -165,7 +165,7 @@
             $("#slacktestrow").removeClass('text-danger');
             $("#slackteststatus").removeClass('text-danger');
             $("#slackteststatus").html('');
-            $("#slacktesticon").html('<i class="fas fa-spinner spin"></i> Sending Slack test message...');
+            $("#slacktesticon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.slack.sending') }}');
             $.ajax({
                 url: '{{ route('api.settings.slacktest') }}',
                 type: 'POST',
@@ -187,7 +187,8 @@
                     $("#slacktesticon").html('');
                     $("#slacktestrow").addClass('text-success');
                     $("#slackteststatus").addClass('text-success');
-                    $("#slackteststatus").html('<i class="fas fa-check text-success"></i> Success! Check the ' + $('#slack_channel').val() + ' channel for your test message, and be sure to click SAVE below to store your settings.');
+                    //TODO: This is a bit hacky...Might need some cleanup
+                    $("#slackteststatus").html('<i class="fas fa-check text-success"></i> {{ trans('admin/settings/message.slack.success_pt1') }} ' + $('#slack_channel').val() + '{{ trans('admin/settings/message.slack.success_pt2') }}');
                 },
 
                 error: function (data) {
@@ -207,7 +208,7 @@
                     $("#slacktesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
 
                     if (data.status == 500) {
-                        $('#slackteststatus').html('500 Server Error');
+                        $('#slackteststatus').html('{{  trans('admin/settings/message.slack.500') }}');
                     } else if (data.status == 400) {
 
                         if (typeof errors != 'string') {
