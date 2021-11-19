@@ -137,6 +137,7 @@ class LicensePresenter extends Presenter
                 'visible' => false,
                 'title' => trans('general.purchase_cost'),
                 'footerFormatter' => 'sumFormatter',
+                'class' => 'text-right',
             ], [
                 'field' => 'purchase_order',
                 'searchable' => true,
