@@ -77,7 +77,9 @@
                 @can('update', $custom_fieldset)
                 <form method="post" action="{{ route('fields.disassociate', [$field, $custom_fieldset->id]) }}">
                   @csrf 
-                  <button type="submit" class="btn btn-sm btn-danger">{{ trans('button.remove') }}</button>                @endcan
+                  <button type="submit" class="btn btn-sm btn-danger">{{ trans('button.remove') }}</button>
+                </form>
+                @endcan
               </td>
             </tr>
             @endforeach

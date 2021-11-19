@@ -4,6 +4,7 @@
 @endpush
 
 @push('js')
+
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
 <script nonce="{{ csrf_token() }}">
 
@@ -64,7 +65,7 @@
                 return newParams;
             },
             formatLoadingMessage: function () {
-                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('general.loading_wait') }} </h4>';
             },
             icons: {
                 advancedSearchIcon: 'fas fa-search-plus',
