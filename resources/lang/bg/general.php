@@ -176,6 +176,7 @@
     'remove_company'        => 'Премахване на асоциация към компания',
     'reports'				=> 'Справки',
     'restored'				=> 'възстановени',
+    'restore'				=> 'Restore',
     'requested'				=> 'Изискан',
     'request_canceled'      => 'Заявка отменена',
     'save'  				=> 'Запис',

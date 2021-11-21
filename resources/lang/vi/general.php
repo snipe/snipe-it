@@ -176,6 +176,7 @@
     'remove_company'        => 'Xóa Hiệp hội Công ty',
     'reports'				=> 'Các báo cáo',
     'restored'				=> 'khôi phục',
+    'restore'				=> 'Restore',
     'requested'				=> 'Đã yêu cầu',
     'request_canceled'      => 'Yêu cầu Đã Hủy',
     'save'  				=> 'Lưu',

@@ -100,6 +100,7 @@ class AssetMaintenancesPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('admin/asset_maintenances/form.cost'),
+                'class' => 'text-right',
             ], [
                 'field' => 'user_id',
                 'searchable' => true,

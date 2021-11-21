@@ -178,7 +178,7 @@ echo "--------------------------------------------------------\n\n";
 // can cause issues with funky caching
 $unused_files = [
     "bootstrap/cache/compiled.php",
-    "bootsrap/cache/services.php",
+    "bootstrap/cache/services.php",
     "bootstrap/cache/config.php",
 ];
 

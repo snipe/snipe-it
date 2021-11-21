@@ -9,7 +9,7 @@ return [
     'asset' => 'Sprzęt:',
     'asset_name' => 'Nazwa sprzętu:',
     'asset_requested' => 'Wystosowane zapotrzebowanie na sprzęt',
-    'asset_tag' => 'Artykół Tag',
+    'asset_tag' => 'Tag sprzętu',
     'assigned_to' => 'Przypisane do',
     'best_regards' => 'Pozdrawiam',
     'canceled' => 'Anulowane:',

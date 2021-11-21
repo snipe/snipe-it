@@ -8,5 +8,6 @@ return [
     'depreciation_name'  					=> 'Igama lokunciphisa',
     'number_of_months'  					=> 'Inani lezinyanga',
     'update'  					            => 'Buyekeza ukwehla kwenani',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 ];

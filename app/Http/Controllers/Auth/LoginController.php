@@ -154,6 +154,9 @@ class LoginController extends Controller
     {
         $header_name = Setting::getSettings()->login_remote_user_header_name ?: 'REMOTE_USER';
         $remote_user = $request->server($header_name);
+        if (!isset($remote_user)) {
+          $remote_user = $request->server('REDIRECT_'.$header_name);
+        }
         if (Setting::getSettings()->login_remote_user_enabled == '1' && isset($remote_user) && ! empty($remote_user)) {
             Log::debug("Authenticating via HTTP header $header_name.");
 

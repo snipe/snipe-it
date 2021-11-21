@@ -9,14 +9,17 @@
 {{-- Right header --}}
 @section('header_right')
 
+    
     @can('manage', \App\Models\Asset::class)
+        @if ($asset->deleted_at=='')
         <div class="dropdown pull-right">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu pull-right" role="menu">
+                
                 @if (($asset->assetstatus) && ($asset->assetstatus->deployable=='1'))
-                    @if ($asset->assigned_to != '')
+                    @if (($asset->assigned_to != '') && ($asset->deleted_at==''))
                         @can('checkin', \App\Models\Asset::class)
                             <li role="menuitem">
                                 <a href="{{ route('checkin/hardware', $asset->id) }}">
@@ -24,7 +27,7 @@
                                 </a>
                             </li>
                         @endcan
-                    @else
+                    @elseif (($asset->assigned_to == '') && ($asset->deleted_at==''))
                         @can('checkout', \App\Models\Asset::class)
                             <li role="menuitem">
                                 <a href="{{ route('checkout/hardware', $asset->id)  }}">
@@ -60,6 +63,7 @@
                 @endcan
             </ul>
         </div>
+        @endif
     @endcan
 @stop
 
@@ -83,7 +87,7 @@
                     <i class="fas fa-exclamation-triangle faa-pulse animated" aria-hidden="true"></i>
                     <strong>WARNING: </strong>
                     This asset has been deleted.
-                    You must <a href="{{ route('restore/hardware', $asset->id) }}">restore it</a> before you can assign it to someone.
+                    You must restore it before you can assign it to someone.
                 </div>
             </div>
         @endif
@@ -192,6 +196,20 @@
 
                                 <!-- start striped rows -->
                                 <div class="container row-striped">
+
+                                    @if ($asset->deleted_at!='')
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <span class="text-danger"><strong>{{ trans('general.deleted') }}</strong></span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ \App\Helpers\Helper::getFormattedDateObject($asset->deleted_at, 'date', false) }}
+
+                                            </div>
+                                        </div>
+                                    @endif
+
+
 
                                     @if ($asset->assetstatus)
 
@@ -782,10 +800,19 @@
                                 @if (($asset->image) || (($asset->model) && ($asset->model->image!='')))
 
 
-                                    <div class="col-md-12 text-center" style="padding-bottom: 15px;">
+                                    <div class="text-center col-md-12" style="padding-bottom: 15px;">
                                         <a href="{{ ($asset->getImageUrl()) ? $asset->getImageUrl() : null }}" data-toggle="lightbox">
                                             <img src="{{ ($asset->getImageUrl()) ? $asset->getImageUrl() : null }}" class="assetimg img-responsive" alt="{{ $asset->getDisplayNameAttribute() }}">
                                         </a>
+                                    </div>
+                                @endif
+
+                                @if ($asset->deleted_at!='')
+                                    <div class="text-center col-md-12" style="padding-bottom: 15px;">
+                                        <form method="POST" action="{{ route('restore/hardware', ['assetId' => $asset->id]) }}">
+                                        @csrf 
+                                        <button class="btn btn-danger col-md-12">{{ trans('general.restore') }}</button>
+                                        </form>
                                     </div>
                                 @endif
 
@@ -905,7 +932,8 @@
                                                         <a href="{{ route('components.show', $component->id) }}">{{ $component->name }}</a>
                                                     </td>
                                                     <td>{{ $component->pivot->assigned_qty }}</td>
-                                                    <td>{{ $component->purchase_cost }} each</td>
+                                                    <td>{{ Helper::formatCurrencyOutput($component->purchase_cost) }} each</td>
+
                                                     <?php $totalCost = $totalCost + ($component->purchase_cost *$component->pivot->assigned_qty) ?>
                                                 </tr>
                                             @endif

@@ -102,6 +102,7 @@ class ComponentPresenter extends Presenter
                 'title' => trans('general.purchase_cost'),
                 'visible' => true,
                 'footerFormatter' => 'sumFormatterQuantity',
+                'class' => 'text-right',
             ],
         ];
 

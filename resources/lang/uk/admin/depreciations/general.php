@@ -8,5 +8,6 @@ return [
     'depreciation_name'  					=> 'Depreciation Name',
     'number_of_months'  					=> 'Кількість місяців',
     'update'  					            => 'Update Depreciation',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 ];

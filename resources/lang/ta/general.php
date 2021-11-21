@@ -176,6 +176,7 @@
     'remove_company'        => 'நிறுவன சங்கத்தை அகற்று',
     'reports'				=> 'அறிக்கைகள்',
     'restored'				=> 'restored',
+    'restore'				=> 'Restore',
     'requested'				=> 'கோரப்பட்டது',
     'request_canceled'      => 'கோரிக்கை ரத்து செய்யப்பட்டது',
     'save'  				=> 'சேமி',

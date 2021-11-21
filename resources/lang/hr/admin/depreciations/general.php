@@ -8,5 +8,6 @@ return [
     'depreciation_name'  					=> 'Naziv amortizacije',
     'number_of_months'  					=> 'Broj mjeseci',
     'update'  					            => 'Ažuriraj amortizaciju',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 ];

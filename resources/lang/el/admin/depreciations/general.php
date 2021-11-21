@@ -8,5 +8,6 @@ return [
     'depreciation_name'  					=> 'Όνομα απόσβεσης',
     'number_of_months'  					=> 'Αριθμός των μηνών',
     'update'  					            => 'Ενημέρωση αποσβέσεων',
+    'depreciation_min'                      => 'Minimum Value after Depreciation'
 
 ];

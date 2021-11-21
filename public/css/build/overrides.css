@@ -91,6 +91,8 @@ a.accordion-header {
 }
 .main-header .sidebar-toggle:before {
   content: "\f0c9";
+  font-weight: 900;
+  font-family: 'Font Awesome\ 5 Free';
 }
 .direct-chat-contacts {
   padding: 10px;

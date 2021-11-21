@@ -223,7 +223,7 @@ class ComponentsController extends Controller
         $this->authorize('checkout', $component);
 
 
-        if ($component->numRemaining() > $request->get('assigned_qty')) {
+        if ($component->numRemaining() >= $request->get('assigned_qty')) {
 
             if (!$asset = Asset::find($request->input('assigned_to'))) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')));

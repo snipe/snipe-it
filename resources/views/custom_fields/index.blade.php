@@ -141,7 +141,7 @@
             <tr>
               <td>{{ $field->name }}</td>
               <td>{{ $field->help_text }}</td>
-              <td>{!! ($field->show_in_email=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
+              <td class='text-center'>{!! ($field->show_in_email=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td>
                  <code>{{ $field->convertUnicodeDbSlug() }}</code>
                 @if ($field->convertUnicodeDbSlug()!=$field->db_column)

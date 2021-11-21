@@ -11,7 +11,6 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
-use Artisan;
 use Auth;
 use Crypt;
 use DB;
@@ -22,6 +21,8 @@ use Image;
 use Input;
 use Redirect;
 use Response;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Artisan;
 
 /**
  * This controller handles all actions related to Settings for
@@ -1018,17 +1019,25 @@ class SettingsController extends Controller
         $backup_files = Storage::files($path);
         $files_raw = [];
 
+
         if (count($backup_files) > 0) {
             for ($f = 0; $f < count($backup_files); $f++) {
 
                 // Skip dotfiles like .gitignore and .DS_STORE
                 if ((substr(basename($backup_files[$f]), 0, 1) != '.')) {
+                    //$lastmodified = Carbon::parse(Storage::lastModified($backup_files[$f]))->toDatetimeString();
+                    $file_timestamp = Storage::lastModified($backup_files[$f]);
+
+
                     $files_raw[] = [
                         'filename' => basename($backup_files[$f]),
                         'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
-                        'modified' => Storage::lastModified($backup_files[$f]),
+                        'modified_value' => $file_timestamp,
+                        'modified_display' => Helper::getFormattedDateObject($file_timestamp, $type = 'datetime', false),
+                        
                     ];
                 }
+               
             }
         }
 
@@ -1120,6 +1129,115 @@ class SettingsController extends Controller
                 } catch (\Exception $e) {
                     \Log::debug($e);
                 }
+            } else {
+                return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
+            }
+        } else {
+            return redirect()->route('settings.backups.index')->with('error', trans('general.feature_disabled'));
+        }
+    }
+
+
+    /**
+     * Uploads a backup file
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
+     * @since [v6.0]
+     *
+     * @return Redirect
+     */
+
+    public function postUploadBackup(Request $request) {
+
+        if (! config('app.lock_passwords')) {
+            if (!$request->hasFile('file')) {
+                return redirect()->route('settings.backups.index')->with('error', 'No file uploaded');
+            } else {
+                $max_file_size = Helper::file_upload_max_size();
+
+                $rules = [
+                    'file' => 'required|mimes:zip|max:'.$max_file_size,
+                ];
+
+                $validator = \Validator::make($request->all(), $rules);
+
+                if ($validator->passes()) {
+
+                        $upload_filename = 'uploaded-'.date('U').'-'.Str::slug(pathinfo($request->file('file')->getClientOriginalName(), PATHINFO_FILENAME)).'.zip';
+
+                        Storage::putFileAs('app/backups', $request->file('file'), $upload_filename);
+            
+                        return redirect()->route('settings.backups.index')->with('success', 'File uploaded');
+                } else {
+                    return redirect()->route('settings.backups.index')->withErrors($request->getErrors());
+                }
+            }
+
+        } else {
+            return redirect()->route('settings.backups.index')->with('error', trans('general.feature_disabled'));
+        }    
+
+        
+        
+    }
+
+    /**
+     * Restore the backup file.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
+     * @since [v6.0]
+     *
+     * @return View
+     */
+    public function postRestore($filename = null)
+    {
+        
+        if (! config('app.lock_passwords')) {
+            $path = 'app/backups';
+
+            if (Storage::exists($path.'/'.$filename)) {
+
+                // grab the user's info so we can make sure they exist in the system
+                $user = User::find(Auth::user()->id);
+
+
+                // TODO: run a backup 
+
+                // TODO: add db:wipe 
+
+
+                // run the restore command
+                Artisan::call('snipeit:restore', 
+                [
+                    '--force' => true, 
+                    '--no-progress' => true, 
+                    'filename' => storage_path($path).'/'.$filename
+                ]);
+
+                $output = Artisan::output();
+                    
+            
+                // If it's greater than 300, it probably worked
+                if (strlen($output) > 300) {
+                    \Auth::logout();
+                    return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
+                } else {
+                    return redirect()->route('settings.backups.index')->with('error', $output);
+
+                }
+                //dd($output);
+
+                // TODO: insert the user if they are not there in the old one
+                
+
+
+
+                // log the user out
+                
+
+
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }

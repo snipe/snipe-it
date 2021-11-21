@@ -176,6 +176,7 @@
     'remove_company'        => 'Компанийн холбоог устгах',
     'reports'				=> 'Тайлан',
     'restored'				=> 'сэргээгдсэн',
+    'restore'				=> 'Restore',
     'requested'				=> 'Хүсэлт гаргасан',
     'request_canceled'      => 'Хүсэлтийг цуцалсан',
     'save'  				=> 'Хадгалах',

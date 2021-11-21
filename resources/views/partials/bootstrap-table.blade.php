@@ -75,12 +75,17 @@
                 export: 'fa-download',
                 clearSearch: 'fa-times'
             },
+            exportOptions: {
+                htmlContent: true,
+            },
+
             exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
             onLoadSuccess: function () {
                 $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
             }
 
         });
+
     });
 
 
@@ -95,24 +100,46 @@
     }
 
 
+    // These methods dynamically add/remove hidden input values in the bulk actions form
+    $('.snipe-table').on('check.bs.table .btSelectItem', function (row, $element) {
+        $('#bulkEdit').removeAttr('disabled');
+        $('#bulkEdit').prepend('<input id="checkbox_' + $element.id + '" type="hidden" name="ids[]" value="' + $element.id + '">');
+    });
+
+    $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
+        $( "#checkbox_" + $element.id).remove();
+    });
+
+
     // Handle whether or not the edit button should be disabled
-    $('.snipe-table').on('check.bs.table', function () {
-        $('#bulkEdit').removeAttr('disabled');
-    });
-
-    $('.snipe-table').on('check-all.bs.table', function () {
-        $('#bulkEdit').removeAttr('disabled');
-    });
-
     $('.snipe-table').on('uncheck.bs.table', function () {
         if ($('.snipe-table').bootstrapTable('getSelections').length == 0) {
             $('#bulkEdit').attr('disabled', 'disabled');
         }
     });
 
-    $('.snipe-table').on('uncheck-all.bs.table', function (e, row) {
+    $('.snipe-table').on('uncheck-all.bs.table', function (event, rowsAfter, rowsBefore) {
         $('#bulkEdit').attr('disabled', 'disabled');
+        //console.dir(rowsBefore);
+
+        for (var i in rowsBefore) {
+            $( "#checkbox_" + rowsBefore[i].id).remove();
+        }
+
     });
+
+    $('.snipe-table').on('check-all.bs.table', function (event, rowsAfter, rowsBefore) {
+        
+        $('#bulkEdit').removeAttr('disabled');
+        //console.dir(rowsAfter);
+        
+        for (var i in rowsAfter) {
+            // console.log(rowsAfter[i].id);
+            $('#bulkEdit').prepend('<input id="checkbox_' + rowsAfter[i].id + '" type="hidden" name="ids[]" value="' + rowsAfter[i].id + '">');
+        }
+    });
+
+    
 
     // This only works for model index pages because it uses the row's model ID
     function genericRowLinkFormatter(destination) {
@@ -209,7 +236,7 @@
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="Update Item"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">Update</span></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
@@ -224,7 +251,10 @@
             }
 
             if ((row.available_actions) && (row.available_actions.restore === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Restore"><i class="far fa-clone"></i></a>&nbsp;';
+                actions += '<form style="display: inline;" method="POST" action="{{ url('/') }}/' + dest + '/' + row.id + '/restore"> ';
+                actions += '@csrf';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ trans('general.restore') }}"><i class="far fa-clone"></i></a>&nbsp;';
+                actions += '<i class="fa fa-retweet" aria-hidden="true"></i><span class="sr-only">{{ trans('general.restore') }}</span></button></form>&nbsp;';
             }
 
             actions +='</nobr>';
@@ -333,7 +363,9 @@
 
     // This is only used by the requestable assets section
     function assetRequestActionsFormatter (row, value) {
-        if (value.available_actions.cancel == true)  {
+        if (value.assigned_to_self == true){
+            return '<button class="btn btn-danger btn-sm disabled" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button>';
+        } else if (value.available_actions.cancel == true)  {
             return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="GET"><button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>';
         } else if (value.available_actions.request == true)  {
             return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="GET"><button class="btn btn-primary btn-sm" data-toggle="tooltip" title="Request this item">{{ trans('button.request') }}</button></form>';
@@ -601,8 +633,8 @@
         }
         if ("{{$snipeSettings->digit_separator}}" == "1.234,56") {
             // yank periods, change commas to periods
-            periodless = number.toString().replace("\.","");
-            decimalfixed = periodless.replace(",",".");
+            periodless = number.toString().replace(/\./g,"");
+            decimalfixed = periodless.replace(/,/g,".");
         } else {
             // yank commas, that's it.
             decimalfixed = number.toString().replace(",","");
