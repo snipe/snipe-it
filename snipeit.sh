@@ -301,7 +301,7 @@ echo '
 '
 
 echo ""
-echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Fedora, Debian and Ubuntu!"
+echo "  Welcome to Snipe-IT Inventory Installer for CentOS, Rocky, Fedora, Debian and Ubuntu!"
 echo ""
 shopt -s nocasematch
 case $distro in
@@ -323,7 +323,7 @@ case $distro in
     apache_group=www-data
     apachefile=/etc/apache2/sites-available/$APP_NAME.conf
     ;;
-  *centos*|*redhat*|*ol*|*rhel*)
+  *centos*|*redhat*|*ol*|*rhel*|*rocky*)
     echo "  The installer has detected $distro version $version."
     distro=centos
     apache_group=apache
