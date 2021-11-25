@@ -196,7 +196,7 @@ class AssetsController extends Controller
                 }
 
                 if (isset($target)) {
-                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', e($request->get('name')), $location);
+                    $asset->checkOut($target, Auth::user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
                 }
 
                 $success = true;
