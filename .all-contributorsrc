@@ -2468,6 +2468,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "leitwerk-ag",
+      "name": "LEITWERK AG",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24418301?v=4",
+      "profile": "https://www.leitwerk.de/",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
