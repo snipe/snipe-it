@@ -82,7 +82,7 @@ class AccessoriesTransformer
                 'first_name'=> e($user->first_name),
                 'last_name'=> e($user->last_name),
                 'employee_number' =>  e($user->employee_num),
-                'checkout_notes' => $user->pivot->note,
+                'checkout_notes' => e($user->pivot->note),
                 'last_checkout' => Helper::getFormattedDateObject($user->pivot->created_at, 'datetime'),
                 'type' => 'user',
                 'available_actions' => ['checkin' => true]
