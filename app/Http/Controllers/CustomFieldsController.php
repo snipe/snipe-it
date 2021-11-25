@@ -92,7 +92,7 @@ class CustomFieldsController extends Controller
         $this->authorize('create', CustomField::class);
 
         $field = new CustomField([
-            "name" => $request->get("name"),
+            "name" => trim($request->get("name")),
             "element" => $request->get("element"),
             "help_text" => $request->get("help_text"),
             "field_values" => $request->get("field_values"),
@@ -212,7 +212,7 @@ class CustomFieldsController extends Controller
  
         $this->authorize('update', $field);
 
-        $field->name          = e($request->get("name"));
+        $field->name          = trim(e($request->get("name")));
         $field->element       = e($request->get("element"));
         $field->field_values  = e($request->get("field_values"));
         $field->user_id       = Auth::id();
