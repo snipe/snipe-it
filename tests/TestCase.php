@@ -1,10 +1,40 @@
 <?php
-
 namespace Tests;
 
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use PHPUnit\Framework\TestCase;
 
-abstract class TestCase extends BaseTestCase
+class TestCase extends TestCase
 {
-    use CreatesApplication;
+    /**
+     * The base URL to use while testing the application.
+     *
+     * @var string
+     */
+    protected $baseUrl = 'http://localhost:8000';
+
+    /**
+     * Creates the application.
+     *
+     * @return \Illuminate\Foundation\Application
+     */
+    public function createApplication()
+    {
+        $app = require __DIR__.'/../bootstrap/app.php';
+        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+        return $app;
+    }
+
+
+    public function setUp() : void
+    {
+        parent::setUp();
+        \Artisan::call('migrate:fresh');
+        $this->seed();
+    }
+
+    public function tearDown() : void 
+    {
+        //Artisan::call('migrate:reset');
+        parent::tearDown();
+    }
 }
