@@ -66,7 +66,7 @@
     "watson/validating": "^6.1"
   },
   "require-dev": {
-    "fzaninotto/faker": "master@dev",
+    "fakerphp/faker": "^1.16",
     "laravel/dusk": "^6.19",
     "overtrue/phplint": "^3.0",
     "phpunit/php-token-stream": "^3.1",
