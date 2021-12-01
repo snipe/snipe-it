@@ -23,12 +23,8 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
-
         <env name="DB_CONNECTION" value="sqlite_testing" />
-
-        <server name="SERVER_NAME" value="http://testing.dev"/>
+        <server name="SERVER_NAME" value="http://127.0.0.1:8000"/>
+        <ini name="display_errors" value="true"/>
     </php>
-    <logging>
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
-    </logging>
 </phpunit>

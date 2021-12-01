@@ -1,4 +1,5 @@
 <?php
+namespace Tests\Unit;
 
 use App\Importer\AccessoryImporter;
 use App\Importer\AssetImporter;
@@ -17,6 +18,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
+use Tests\Unit\BaseTest;
 
 class ImporterTest extends BaseTest
 {

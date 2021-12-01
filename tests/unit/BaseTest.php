@@ -1,11 +1,12 @@
 <?php
+namespace Tests\Unit;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
-class BaseTest extends \Codeception\TestCase\Test
+class BaseTest extends \Tests\TestCase
 {
     use DatabaseTransactions;
 

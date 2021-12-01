@@ -1,6 +1,8 @@
 <?php
+namespace Tests\Unit;
 
 use App\Models\AssetMaintenance;
+use Tests\Unit\BaseTest;
 
 class AssetMaintenanceTest extends BaseTest
 {

@@ -1,4 +1,5 @@
 <?php
+namespace Tests\Unit;
 
 use App\Models\Accessory;
 use App\Models\Asset;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Tests\Unit\BaseTest;
 
 class PermissionsTest extends BaseTest
 {

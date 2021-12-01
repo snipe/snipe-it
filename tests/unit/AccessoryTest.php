@@ -1,4 +1,5 @@
 <?php
+namespace Tests\Unit;
 
 use App\Models\Accessory;
 use App\Models\Category;
@@ -6,6 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
+use Tests\Unit\BaseTest;
 
 class AccessoryTest extends BaseTest
 {

@@ -1,4 +1,5 @@
 <?php
+namespace Tests\Unit;
 
 use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Asset;
@@ -12,6 +13,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
+use Tests\Unit\BaseTest;
 
 class NotificationTest extends BaseTest
 {

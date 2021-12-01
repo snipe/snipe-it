@@ -1,4 +1,5 @@
 <?php
+namespace Tests\Unit;
 
 use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Asset;
@@ -10,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Hash;
+use Tests\Unit\BaseTest;
 
 class AssetTest extends BaseTest
 {

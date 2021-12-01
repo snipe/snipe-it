@@ -66,21 +66,14 @@
     "watson/validating": "^6.1"
   },
   "require-dev": {
-    "codeception/codeception": "^4.1",
-    "codeception/module-asserts": "^1.2",
-    "codeception/module-laravel5": "^1.1",
-    "codeception/module-rest": "^1.2",
-    "codeception/module-webdriver": "^1.0",
     "fzaninotto/faker": "master@dev",
+    "laravel/dusk": "^6.19",
     "overtrue/phplint": "^3.0",
     "phpunit/php-token-stream": "^3.1",
     "phpunit/phpunit": "^8.5",
     "squizlabs/php_codesniffer": "^3.5",
     "symfony/css-selector": "^4.4",
     "symfony/dom-crawler": "^4.4"
-  },
-  "suggest": {
-    "ext-mcrypt": "For upgrading from before v5.1 this is used to re-encrypt data"
   },
   "extra": {
     "laravel": {
@@ -101,9 +94,13 @@
   },
   "autoload-dev": {
     "classmap": [
-      "tests/TestCase.php",
-      "tests/unit/BaseTest.php"
-    ]
+      "tests/DuskTestCase.php",
+      "tests/TestCase.php"
+    ],
+    "psr-4": {
+      "App\\": "app/",
+      "Tests\\": "tests/"
+    }
   },
   "scripts": {
     "post-autoload-dump": [

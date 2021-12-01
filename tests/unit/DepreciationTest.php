@@ -1,9 +1,11 @@
 <?php
+namespace Tests\Unit;
 
 use App\Models\Depreciation;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Tests\Unit\BaseTest;
 
 class DepreciationTest extends BaseTest
 {
