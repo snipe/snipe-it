@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserFactory extends Factory
@@ -22,7 +23,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $password = bcrypt('password');
+        $password = Hash::make('password');
         return [
             'activated' => 1,
             'address' => $this->faker->address,
