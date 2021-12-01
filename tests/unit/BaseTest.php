@@ -5,8 +5,9 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use PHPUnit\Framework\TestCase;
 
-class BaseTest extends \Tests\TestCase
+class BaseTest extends TestCase
 {
     use DatabaseTransactions;
 

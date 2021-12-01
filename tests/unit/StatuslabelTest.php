@@ -5,7 +5,6 @@ use App\Models\Statuslabel;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Hash;
 use Tests\Unit\BaseTest;
 
 class StatuslabelTest extends BaseTest

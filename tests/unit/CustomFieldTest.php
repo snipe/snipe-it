@@ -5,7 +5,6 @@ use App\Models\CustomField;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Hash;
 use Tests\Unit\BaseTest;
 
 /*
