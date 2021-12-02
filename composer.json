@@ -100,7 +100,7 @@
     ],
     "psr-4": {
       "App\\": "app/",
-      "Tests\\": "tests/"
+      "Tests\\": "Tests/"
     }
   },
   "scripts": {
