@@ -95,8 +95,8 @@
   },
   "autoload-dev": {
     "classmap": [
-      "tests/DuskTestCase.php",
-      "tests/TestCase.php"
+      "Tests/DuskTestCase.php",
+      "Tests/TestCase.php"
     ],
     "psr-4": {
       "App\\": "app/",
