@@ -70,7 +70,7 @@
     "laravel/dusk": "^6.19",
     "overtrue/phplint": "^3.0",
     "phpunit/php-token-stream": "^3.1",
-    "phpunit/phpunit": "^8.5",
+    "phpunit/phpunit": "^9.0",
     "squizlabs/php_codesniffer": "^3.5",
     "symfony/css-selector": "^4.4",
     "symfony/dom-crawler": "^4.4"
