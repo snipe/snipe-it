@@ -3,8 +3,7 @@ namespace Tests\Unit;
 
 use App\Models\Location;
 use Tests\Unit\BaseTest;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Tests\TestCase;
+
 
 class LocationTest extends BaseTest
 {

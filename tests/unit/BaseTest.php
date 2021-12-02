@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase; 
+use Auth;
 
 class BaseTest extends TestCase
 {
@@ -25,13 +26,12 @@ class BaseTest extends TestCase
             ]);
         }
         Auth::login($user);
-
         return $user;
     }
 
     protected function createValidAssetModel($state = 'mbp-13-model', $overrides = [])
     {
-        return \App\Models\AssetModel::factory()->state()->create(array_merge([
+        return \App\Models\AssetModel::factory()->state($state)->create(array_merge([
             'category_id' => $this->createValidCategory(),
             'manufacturer_id' => $this->createValidManufacturer(),
             'depreciation_id' => $this->createValidDepreciation(),
