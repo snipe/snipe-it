@@ -35,7 +35,7 @@ class CategoryTest extends BaseTest
 
     public function testACategoryCanHaveAssets()
     {
-       $category = Category::factory()->assetDesktopCategory()->create();
+       $category = Category::factory()->assetDesktopCategory();
 
        // Generate 5 models via factory
        $models =  AssetModel::factory()
@@ -58,7 +58,7 @@ class CategoryTest extends BaseTest
 
                 ]
             );
-            dd($asset);
+            //dd($asset);
         });
 
         $this->assertCount(5, $category->models);
