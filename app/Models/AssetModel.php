@@ -30,7 +30,7 @@ class AssetModel extends SnipeModel
         'name'              => 'required|min:1|max:255',
         'model_number'      => 'max:255|nullable',
         'category_id'       => 'required|integer|exists:categories,id',
-        'manufacturer_id'   => 'required|integer|exists:manufacturers,id',
+        'manufacturer_id'   => 'integer|exists:manufacturers,id|nullable',
         'eol'               => 'integer:min:0|max:240|nullable',
     ];
 

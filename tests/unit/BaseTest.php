@@ -29,35 +29,35 @@ class BaseTest extends TestCase
         return $user;
     }
 
-    protected function createValidAssetModel($state = 'mbp-13-model', $overrides = [])
+    protected function createValidAssetModel()
     {
-        return \App\Models\AssetModel::factory()->state($state)->create(array_merge([
+        return \App\Models\AssetModel::factory()->create([
             'category_id' => $this->createValidCategory(),
             'manufacturer_id' => $this->createValidManufacturer(),
             'depreciation_id' => $this->createValidDepreciation(),
-        ], $overrides));
+        ]);
     }
 
-    protected function createValidCategory($state = 'asset-laptop-category', $overrides = [])
+    protected function createValidCategory()
     {
-        return \App\Models\Category::factory()->state()->create($overrides);
+        return \App\Models\Category::factory()->make();
     }
 
-    protected function createValidCompany($overrides = [])
+    protected function createValidCompany()
     {
-        return \App\Models\Company::factory()->create($overrides);
+        return \App\Models\Company::factory()->create();
     }
 
     protected function createValidDepartment($state = 'engineering', $overrides = [])
     {
-        return \App\Models\Department::factory()->state()->create(array_merge([
+        return \App\Models\Department::factory()->create(array_merge([
             'location_id' => $this->createValidLocation()->id,
         ], $overrides));
     }
 
-    protected function createValidDepreciation($state = 'computer', $overrides = [])
+    protected function createValidDepreciation()
     {
-        return \App\Models\Depreciation::factory()->state()->create($overrides);
+        return \App\Models\Depreciation::factory()->create();
     }
 
     protected function createValidLocation($overrides = [])
@@ -65,9 +65,9 @@ class BaseTest extends TestCase
         return \App\Models\Location::factory()->create($overrides);
     }
 
-    protected function createValidManufacturer($state = 'apple', $overrides = [])
+    protected function createValidManufacturer()
     {
-        return \App\Models\Manufacturer::factory()->state()->create($overrides);
+        return \App\Models\Manufacturer::factory()->create();
     }
 
     protected function createValidSupplier($overrides = [])
