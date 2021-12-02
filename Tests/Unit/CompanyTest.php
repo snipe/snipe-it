@@ -6,7 +6,9 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\Unit\BaseTest;
-use App\Models\Company;
+use App\Models\Component;
+use App\Models\Asset;
+use App\Models\Consumable;
 
 class CompanyTest extends BaseTest
 {
@@ -32,21 +34,21 @@ class CompanyTest extends BaseTest
 
     public function testACompanyCanHaveUsers()
     {
-        $company = Category::factory()->assetDesktopCategory()->create();
+        $company = Company::factory()->assetDesktopCategory()->create();
         $user = $this->createValidUser(['company_id'=>$company->id]);
         $this->assertCount(1, $company->users);
     }
 
     public function testACompanyCanHaveAssets()
     {
-        $company = $this->createValidCompany();
+        $company = Company::factory()->assetDesktopCategory()->create();
         $this->createValidAsset(['company_id' => $company->id]);
         $this->assertCount(1, $company->assets);
     }
 
     public function testACompanyCanHaveLicenses()
     {
-        $company = $this->createValidCompany();
+        $company = Company::factory()->assetDesktopCategory()->create();
         \App\Models\License::factory()->count(1)->acrobat()->create([
              'company_id'=>$company->id,
              'manufacturer_id' => \App\Models\Manufacturer::factory()->adobe()->create()->id,
@@ -57,7 +59,7 @@ class CompanyTest extends BaseTest
 
     public function testACompanyCanHaveAccessories()
     {
-        $company = $this->createValidCompany();
+        $company = Company::factory()->assetDesktopCategory()->create();
         $a = \App\Models\Accessory::factory()->appleBtKeyboard()->create([
              'category_id' => \App\Models\Category::factory()->accessoryKeyboardCategory()->create()->id,
              'company_id' => $company->id,
@@ -68,7 +70,7 @@ class CompanyTest extends BaseTest
 
     public function testACompanyCanHaveConsumables()
     {
-        $company = $this->createValidCompany();
+        $company = Company::factory()->assetDesktopCategory()->create();
         \App\Models\Consumable::factory()->count(1)->cardstock()->create([
              'company_id' => $company->id,
              'category_id' => \App\Models\Category::factory()->consumablePaperCategory()->create()->id,
@@ -78,8 +80,8 @@ class CompanyTest extends BaseTest
 
     public function testACompanyCanHaveComponents()
     {
-        $company = $this->createValidCompany();
-        \App\Models\Component::factory()->count(1)->ramCrucial4()->create([
+        $company = Company::factory()->assetDesktopCategory()->create();
+        Component::factory()->count(1)->ramCrucial4()->create([
              'company_id'=>$company->id,
              'category_id' => \App\Models\Category::factory()->componentRamCategory()->create()->id,
          ]);
