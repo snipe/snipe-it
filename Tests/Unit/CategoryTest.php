@@ -47,15 +47,16 @@ class CategoryTest extends BaseTest
                 ]
         );
 
+        
+
         // Loop through the models and create 2 assets in each model
        $models->each(function ($model) {
+            //dd($model);
             $asset = Asset::factory()
             ->count(2)
             ->create(
                 [
                     'model_id' => $model->id,
-
-
                 ]
             );
             //dd($asset);
