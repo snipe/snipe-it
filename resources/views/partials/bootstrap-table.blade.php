@@ -653,6 +653,31 @@
         return 'not an array';
     }
 
+    function sumFormatterQuantity(data){
+        if(Array.isArray(data)) {
+            
+            // Prevents issues on page load where data is an empty array
+            if(data[0] == undefined){
+                return 0.00
+            }
+            // Check that we are actually trying to sum cost from a table
+            // that has a quantity column. We must perform this check to
+            // support licences which use seats instead of qty
+            if('qty' in data[0]) {
+                var multiplier = 'qty';
+            } else if('seats' in data[0]) {
+                var multiplier = 'seats';
+            } else {
+                return 'no quantity';
+            }
+            var total_sum = data.reduce(function(sum, row) {
+                return (sum) + (cleanFloat(row["purchase_cost"])*row[multiplier] || 0);
+            }, 0);
+            return numberWithCommas(total_sum.toFixed(2));
+        }
+        return 'not an array';
+    }
+
     function numberWithCommas(value) {
         if ((value) && ("{{$snipeSettings->digit_separator}}" == "1.234,56")){
             var parts = value.toString().split(".");

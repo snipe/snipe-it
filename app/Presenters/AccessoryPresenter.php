@@ -102,7 +102,7 @@ class AccessoryPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('general.purchase_cost'),
-                'footerFormatter' => 'sumFormatter',
+                'footerFormatter' => 'sumFormatterQuantity',
                 'class' => 'text-right',
             ], [
                 'field' => 'order_number',
