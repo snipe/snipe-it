@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\Unit\BaseTest;
+use App\Models\Company;
 
 class CompanyTest extends BaseTest
 {
@@ -17,13 +18,13 @@ class CompanyTest extends BaseTest
     public function testFailsEmptyValidation()
     {
         // An Company requires a name, a qty, and a category_id.
-        $a = Company::create();
-        $this->assertFalse($a->isValid());
+        $company = Company::factory()->assetDesktopCategory()->create();
+        $this->assertFalse($company->isValid());
 
         $fields = [
              'name' => 'name',
          ];
-        $errors = $a->getErrors();
+        $errors = $company->getErrors();
         foreach ($fields as $field => $fieldTitle) {
             $this->assertEquals($errors->get($field)[0], "The ${fieldTitle} field is required.");
         }
@@ -31,7 +32,7 @@ class CompanyTest extends BaseTest
 
     public function testACompanyCanHaveUsers()
     {
-        $company = $this->createValidCompany();
+        $company = Category::factory()->assetDesktopCategory()->create();
         $user = $this->createValidUser(['company_id'=>$company->id]);
         $this->assertCount(1, $company->users);
     }
