@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\Unit\BaseTest;
+use App\Models\Category;
+use Carbon;
+use App\Models\License;
 
 class DepreciationTest extends BaseTest
 {
@@ -14,21 +17,7 @@ class DepreciationTest extends BaseTest
      */
     protected $tester;
 
-    public function testFailsEmptyValidation()
-    {
-        // An Asset requires a name, a qty, and a category_id.
-        $a = Depreciation::create();
-        $this->assertFalse($a->isValid());
 
-        $fields = [
-             'name' => 'name',
-             'months' => 'months',
-         ];
-        $errors = $a->getErrors();
-        foreach ($fields as $field => $fieldTitle) {
-            $this->assertEquals($errors->get($field)[0], "The ${fieldTitle} field is required.");
-        }
-    }
 
     public function testADepreciationHasModels()
     {
@@ -40,12 +29,16 @@ class DepreciationTest extends BaseTest
 
     public function testADepreciationHasLicenses()
     {
-        $category = $this->createValidCategory('license-graphics-category');
-        $depreciation = $this->createValidDepreciation('computer', ['name' => 'New Depreciation']);
-        $licenses = \App\Models\License::factory()->count(5)->photoshop()->create([
-             'depreciation_id'=>$depreciation->id,
-             'category_id' => $category->id,
-         ]);
+
+        $depreciation = Depreciation::factory()->create();
+        License::factory()
+                    ->count(5)
+                    ->photoshop()
+                    ->create(
+                        [
+                            'category_id' => Category::factory()->licenseGraphicsCategory(),
+                            'depreciation_id' => $depreciation->id               
+                        ]);
 
         $this->assertEquals(5, $depreciation->licenses()->count());
     }
