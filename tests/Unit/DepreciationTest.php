@@ -2,13 +2,10 @@
 namespace Tests\Unit;
 
 use App\Models\Depreciation;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\Unit\BaseTest;
 use App\Models\Category;
-use Carbon;
 use App\Models\License;
+use App\Models\AssetModel;
 
 class DepreciationTest extends BaseTest
 {
@@ -22,8 +19,18 @@ class DepreciationTest extends BaseTest
     public function testADepreciationHasModels()
     {
         $this->createValidAssetModel();
-        $depreciation = $this->createValidDepreciation('computer', ['name' => 'New Depreciation']);
-        $models = \App\Models\AssetModel::factory()->count(5)->mbp13Model()->create(['depreciation_id'=>$depreciation->id]);
+        $depreciation = Depreciation::factory()->create();
+
+        AssetModel::factory()
+                    ->mbp13Model()
+                    ->count(5)
+                    ->create(
+                        [
+                            'category_id' => Category::factory()->assetLaptopCategory(),
+                            'depreciation_id' => $depreciation->id               
+                        ]);
+
+
         $this->assertEquals(5, $depreciation->models->count());
     }
 
