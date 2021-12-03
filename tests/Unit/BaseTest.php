@@ -2,11 +2,13 @@
 namespace Tests\Unit;
 
 use App\Models\User;
+use App\Models\Setting;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase; 
 use Auth;
+use Artisan;
 
 class BaseTest extends TestCase
 {
@@ -15,7 +17,7 @@ class BaseTest extends TestCase
     protected function _before()
     {
         Artisan::call('migrate');
-        \App\Models\Setting::factory()->create();
+        Setting::factory()->create();
     }
 
     protected function signIn($user = null)
