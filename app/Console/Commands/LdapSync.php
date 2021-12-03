@@ -246,13 +246,14 @@ class LdapSync extends Command
 
                 $user->ldap_import = 1;
 
+                \Log::info("ITEM INFORMATION IS: ".print_r($item,true)); //FIXME - take this out once everything is properly troubleshot
                 if (!(array_key_exists('status', $item) && $item["status"] === 'warning')) {
                     if ($user->save()) {
                         $item["note"] = $item["createorupdate"];
                         $item["status"]='success';
                     } else {
                         $errors = '';
-                        $errors .= $item["note"];
+                        $errors .= ' <this would be whatever $item["note"] is supposed to be.> '; //$item["note"]; //FIXME - do *NOT* leave this like this!
                         foreach ($user->getErrors()->getMessages() as $key => $err) {
                             $errors .= $err[0];
                         }
