@@ -18,8 +18,6 @@ class LoginTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visitRoute('login')
                 ->assertSee(trans('auth/general.login_prompt'));
-            $browser->screenshot('filename'); 
-            $browser->storeSource('login');       
         });
 
         $this->browse(function ($browser) {
