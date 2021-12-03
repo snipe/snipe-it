@@ -41,7 +41,7 @@ class AssetFactory extends Factory
             'name' => null,
             'rtd_location_id' => Location::factory()->create(),
             'serial' => $this->faker->uuid,
-            'status_id' => StatusLabel::factory()->create(),
+            'status_id' => StatusLabel::factory()->create()->id,
             'user_id' => 1,
             'asset_tag' => $this->faker->unixTime('now'),
             'notes'   => 'Created by DB seeder',
