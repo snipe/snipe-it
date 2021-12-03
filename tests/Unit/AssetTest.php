@@ -11,6 +11,9 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\Unit\BaseTest;
+use App\Models\Component;
+use App\Models\ActionLog;
+
 
 class AssetTest extends BaseTest
 {
@@ -178,7 +181,7 @@ class AssetTest extends BaseTest
     {
         $asset = $this->createValidAsset();
 
-        $components = \App\Models\Component::factory()->count(5)->ramCrucial4()->create([
+        $components = Component::factory()->count(5)->ramCrucial4()->create([
              'category_id' => $this->createValidCategory('component-hdd-category')->id,
          ]);
 
@@ -187,7 +190,7 @@ class AssetTest extends BaseTest
                  'asset_id'=>$asset->id,
              ]);
         });
-        $this->assertInstanceOf(App\Models\Component::class, $asset->components()->first());
+        $this->assertInstanceOf(Component::class, $asset->components()->first());
         $this->assertCount(5, $asset->components);
     }
 
@@ -197,7 +200,10 @@ class AssetTest extends BaseTest
             'supplier_id' => $this->createValidSupplier()->id,
          ]);
         $this->assertCount(0, $asset->uploads);
-        \App\Models\Actionlog::factory()->count('asset-upload')->create(['item_id' => $asset->id]);
+        // This is wrong
+        Actionlog::factory()->count('asset-upload')->create(
+            ['item_id' => $asset->id]
+        );
         $this->assertCount(1, $asset->fresh()->uploads);
     }
 
@@ -222,13 +228,13 @@ class AssetTest extends BaseTest
         $asset = $this->createValidAsset();
         $adminUser = $this->signIn();
 
-        $target = \App\Models\User::factory()->create([
-             'location_id' => \App\Models\Location::factory()->create(),
+        $target = User::factory()->create([
+             'location_id' => Location::factory()->create(),
          ]);
         // An Asset Can be checked out to a user, and this should be logged.
         $asset->checkOut($target, $adminUser);
         $asset->save();
-        $this->assertInstanceOf(App\Models\User::class, $asset->assignedTo);
+        $this->assertInstanceOf(User::class, $asset->assignedTo);
 
         $this->assertEquals($asset->location->id, $target->userLoc->id);
         $this->assertEquals('user', $asset->assignedType());

@@ -31,6 +31,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
+            'name' => $this->faker->catchPhrase(),
             'checkin_email' => $this->faker->boolean(),
             'eula_text' => $this->faker->paragraph(),
             'require_acceptance' => false,

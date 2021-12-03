@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,7 @@ class AssetModelFactory extends Factory
     {
         return [
             'user_id' => 1,
+            'name' => $this->faker->catchPhrase(),
             'model_number' => $this->faker->creditCardNumber(),
             'notes' => 'Created by demo seeder',
 
