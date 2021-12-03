@@ -2,10 +2,14 @@
 namespace Tests\Unit;
 
 use App\Models\User;
+use App\Models\Asset;
+use App\Models\AssetModel;
+use App\Models\Category;
+use Carbon\Carbon;
 use App\Notifications\CheckoutAssetNotification;
 use Illuminate\Support\Facades\Notification;
 use Tests\Unit\BaseTest;
-use Auth;
+
 
 class NotificationTest extends BaseTest
 {
@@ -16,15 +20,24 @@ class NotificationTest extends BaseTest
 
     public function testAUserIsEmailedIfTheyCheckoutAnAssetWithEULA()
     {
-        $admin = User::factory()->superuser()->create();
-        Auth::login($admin);
-        $cat = $this->createValidCategory('asset-laptop-category', ['require_acceptance' => true]);
-        $model = $this->createValidAssetModel('mbp-13-model', ['category_id' => $cat->id]);
-        $asset = $this->createValidAsset(['model_id' => $model->id]);
-        $user = $this->createValidUser();
 
+        $user = User::factory()->create();
+        $asset = Asset::factory()
+        ->create(
+            [
+                'model_id' => AssetModel::factory()
+                    ->create(
+                        [
+                            'category_id' => Category::factory()->assetLaptopCategory()->id
+                        ]
+                )->id,   
+                'warranty_months' => 24,
+                'purchase_date' =>   Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0)                  
+            ]);
+
+        //dd($asset);
         Notification::fake();
-        $asset->checkOut($user, 1);
+        $asset->checkOut($user, $asset->id);
         Notification::assertSentTo($user, CheckoutAssetNotification::class);
     }
 }
