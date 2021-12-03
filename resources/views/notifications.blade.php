@@ -124,6 +124,20 @@
 @endif
 
 
+@if ($messages = Session::get('warning_messages'))
+    @foreach ($messages as $message)
+        <div class="col-md-12">
+            <div class="alert alert-warning fade in">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <i class="fa fa-warning faa-pulse animated"></i>
+                <strong>Warning: </strong>
+                {{ $message }}
+            </div>
+        </div>
+    @endforeach
+@endif
+
+
 @if ($message = Session::get('info'))
 <div class="col-md-12">
     <div class="alert alert-info fade in">
