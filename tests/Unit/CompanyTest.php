@@ -22,10 +22,10 @@ class CompanyTest extends BaseTest
     public function testACompanyCanHaveUsers()
     {
         $company = Company::factory()->create();
-        User::factory()
+        $user = User::factory()
                 ->create(
                     [
-                        'company_id'=>$company->id
+                        'company_id'=> $company->id
                     ]
         );
 
