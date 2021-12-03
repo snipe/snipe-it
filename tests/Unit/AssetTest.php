@@ -7,6 +7,7 @@ use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\User;
+use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -22,67 +23,74 @@ class AssetTest extends BaseTest
      */
     protected $tester;
 
-    public function testFailsEmptyValidation()
-    {
-        // An Asset requires a name, a qty, and a category_id.
-        $a = Asset::create();
-        $this->assertFalse($a->isValid());
+    // public function testAutoIncrementMixed()
+    // {
+    //     $expected = '123411';
+    //     $next = Asset::nextAutoIncrement(
+    //         collect([
+    //             ['asset_tag' => '0012345'],
+    //             ['asset_tag' => 'WTF00134'],
+    //             ['asset_tag' => 'WTF-745'],
+    //             ['asset_tag' => '0012346'],
+    //             ['asset_tag' => '00123410'],
+    //             ['asset_tag' => 'U8T7597h77'],
+    //         ])
+    //     );
 
-        $fields = [
-             'model_id' => 'model id',
-             'status_id' => 'status id',
-             'asset_tag' => 'asset tag',
-         ];
-        $errors = $a->getErrors();
-        foreach ($fields as $field => $fieldTitle) {
-            $this->assertEquals($errors->get($field)[0], "The ${fieldTitle} field is required.");
-        }
-    }
+    //     \Log::debug('Next: '.$next);
+    //     $this->assertEquals($expected, $next);
+    // }
 
-    public function testAutoIncrementMixed()
-    {
-        $expected = '123411';
-        $next = Asset::nextAutoIncrement(
-            collect([
-                ['asset_tag' => '0012345'],
-                ['asset_tag' => 'WTF00134'],
-                ['asset_tag' => 'WTF-745'],
-                ['asset_tag' => '0012346'],
-                ['asset_tag' => '00123410'],
-                ['asset_tag' => 'U8T7597h77'],
-            ])
-        );
-
-        \Log::debug(print_r($next));
-        $this->assertEquals($expected, $next);
-    }
-
-    public function testAutoIncrementMixedFullTagNumber()
-    {
-        $expected = '123411';
-        $next = Asset::nextAutoIncrement(
-            [
-                 ['asset_tag' => '0012345'],
-                 ['asset_tag' => 'WTF00134'],
-                 ['asset_tag' => 'WTF-745'],
-                 ['asset_tag' => '0012346'],
-                 ['asset_tag' => '00123410'],
-                 ['asset_tag' => 'U8T7597h77'],
-            ]
-        );
-        $this->assertEquals($expected, $next);
-    }
 
     /**
      * @test
      */
     public function testWarrantyExpiresAttribute()
     {
-        $asset = Asset::factory()->laptopMbp()->create([
-            'model_id' => $this->createValidAssetModel()->id,
-            'supplier_id' => $this->createvalidSupplier()->id,
-            'rtd_location_id' => $this->createValidLocation()->id,
-        ]);
+
+        $category = Category::factory()->assetLaptopCategory()->create();
+
+        dd($category);
+        $model = AssetModel::factory()
+        ->create(
+            [
+                'category_id' => $category->id
+            ]
+            );
+
+        $asset = Asset::factory()
+        ->create(
+            [
+                'model_id' => $model->id,                       
+            ]);
+
+        dd($asset);
+
+
+        // $asset = Asset::factory()
+        // ->create(
+        //     [
+        //         'model_id' => AssetModel::factory()
+        //             ->create(
+        //                 [
+        //                     'category_id' => Category::factory()->assetLaptopCategory()->create()->id
+        //                 ]
+        //         )->id,                       
+        //     ]);
+
+        // dd($asset);
+
+
+        // $asset = Asset::factory()
+        //     ->create(
+        //         [
+        //             'model_id' => AssetModel::factory()
+        //                 ->create(
+        //                     [
+        //                         'category_id' => Category::factory()->assetLaptopCategory()->create()->id
+        //                     ]
+        //             )->id,                       
+        //         ]);
 
         $asset->purchase_date = Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0);
         $asset->warranty_months = 24;
@@ -111,22 +119,7 @@ class AssetTest extends BaseTest
          );
     }
 
-    public function testModelIdMustExist()
-    {
-        $model = $this->createValidAssetModel();
-        $asset = Asset::factory()->make([
-            'model_id' => $model->id,
-            'supplier_id' => $this->createValidSupplier()->id,
-            'rtd_location_id' => $this->createValidLocation()->id,
-        ]);
-        $asset->save();
-        $this->assertTrue($asset->isValid());
-        $newId = $model->id + 1;
-        $asset = Asset::factory()->make(['model_id' => $newId]);
-        $asset->save();
 
-        $this->assertFalse($asset->isValid());
-    }
 
     public function testAnAssetHasRelationships()
     {
