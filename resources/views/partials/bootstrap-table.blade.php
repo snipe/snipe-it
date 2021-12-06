@@ -637,7 +637,7 @@
             decimalfixed = periodless.replace(/,/g,".");
         } else {
             // yank commas, that's it.
-            decimalfixed = number.toString().replace(",","");
+            decimalfixed = number.toString().replace(/\,/g,"");
         }
         return parseFloat(decimalfixed);
     }
@@ -646,8 +646,10 @@
         if (Array.isArray(data)) {
             var field = this.field;
             var total_sum = data.reduce(function(sum, row) {
+                
                 return (sum) + (cleanFloat(row[field]) || 0);
             }, 0);
+            
             return numberWithCommas(total_sum.toFixed(2));
         }
         return 'not an array';
@@ -679,6 +681,7 @@
     }
 
     function numberWithCommas(value) {
+        
         if ((value) && ("{{$snipeSettings->digit_separator}}" == "1.234,56")){
             var parts = value.toString().split(".");
              parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
