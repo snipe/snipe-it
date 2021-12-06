@@ -1,6 +1,8 @@
 <?php
+namespace Tests\Unit;
 
 use App\Models\SnipeModel;
+use Tests\Unit\BaseTest;
 
 class SnipeModelTest extends BaseTest
 {

@@ -135,7 +135,7 @@
     'licenses_available'	=> 'licenses available',
     'licenses'				=> 'Licenses',
     'list_all'				=> 'List All',
-    'loading'				=> 'Loading',
+    'loading'				=> 'Loading... please wait....',
     'lock_passwords'        => 'This field value will not be saved in a demo installation.',
     'feature_disabled'      => 'This feature has been disabled for the demo installation.',
     'location'              => 'Location',

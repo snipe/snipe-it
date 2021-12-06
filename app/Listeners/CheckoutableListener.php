@@ -135,7 +135,7 @@ class CheckoutableListener
         /**
          * Notify Admin users if the settings is activated
          */
-        if (Setting::getSettings()->admin_cc_email != '') {
+        if ((Setting::getSettings()) && (Setting::getSettings()->admin_cc_email != '')) {
             $notifiables->push(new AdminRecipient());
         }
 
