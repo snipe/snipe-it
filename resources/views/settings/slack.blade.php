@@ -194,9 +194,11 @@
 
 
                     if (data.responseJSON) {
-                        var errors = data.responseJSON.message;
+                        var errors = data.responseJSON.errors;
+                        var error_msg = data.responseJSON.message;
                     } else {
                         var errors;
+                        var error_msg = 'Something went wrong.';
                     }
 
                     var error_text = '';
@@ -204,15 +206,20 @@
                     $('#save_slack').attr("disabled", true);
                     $("#slacktesticon").html('');
                     $("#slackteststatus").addClass('text-danger');
-                    $("#slacktesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
+                    $("#slacktesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i><span class="text-danger">' + error_msg+ '</span>');
 
+                    
                     if (data.status == 500) {
                         $('#slackteststatus').html('500 Server Error');
-                    } else if (data.status == 400) {
+                    } else if ((data.status == 400) || (data.status == 422)) {
+                        console.log('Type of errors is '+ typeof errors);
+                        console.log('Data status was 400 or 422');
 
                         if (typeof errors != 'string') {
+                        
+                            console.log(errors.length);
 
-                            for (i = 0; i < errors.length; i++) {
+                            for (i in errors) {
                                 if (errors[i]) {
                                     error_text += '<li>Error: ' + errors[i];
                                 }
@@ -220,6 +227,7 @@
                             }
 
                         } else {
+
                             error_text = errors;
                         }
 
