@@ -162,27 +162,34 @@ class SettingsController extends Controller
 
     public function slacktest(Request $request)
     {
-        $slack = new Client([
-            'base_url' => e($request->input('slack_endpoint')),
-            'defaults' => [
-                'exceptions' => false,
-            ],
-        ]);
 
-        $payload = json_encode(
-            [
-                'channel'    => e($request->input('slack_channel')),
-                'text'       => trans('general.slack_test_msg'),
-                'username'    => e($request->input('slack_botname')),
-                'icon_emoji' => ':heart:',
+        // Only attempt the slack request if the validation passes
+        if ($request->validate([
+            'slack_endpoint'   => 'url|required_with:slack_channel|starts_with:https://hooks.slack.com|nullable',
+            'slack_channel'   => 'required_with:slack_endpoint|starts_with:#|nullable',
+        ])) {
+            $slack = new Client([
+                'base_url' => e($request->input('slack_endpoint')),
+                'defaults' => [
+                    'exceptions' => false,
+                ],
             ]);
 
-        try {
-            $slack->post($request->input('slack_endpoint'), ['body' => $payload]);
+            $payload = json_encode(
+                [
+                    'channel'    => e($request->input('slack_channel')),
+                    'text'       => trans('general.slack_test_msg'),
+                    'username'    => e($request->input('slack_botname')),
+                    'icon_emoji' => ':heart:',
+                ]);
 
-            return response()->json(['message' => 'Success'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Oops! Please check the channel name and webhook endpoint URL. Slack responded with: '.$e->getMessage()], 400);
+            try {
+                $slack->post($request->input('slack_endpoint'), ['body' => $payload]);
+
+                return response()->json(['message' => 'Success'], 200);
+            } catch (\Exception $e) {
+                return response()->json(['message' => 'Oops! Please check the channel name and webhook endpoint URL. Slack responded with: '.$e->getMessage()], 400);
+            }
         }
 
         return response()->json(['message' => 'Something went wrong :( '], 400);
