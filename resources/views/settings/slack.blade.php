@@ -158,7 +158,6 @@
 
         $('input:text').keyup(fieldcheck); // if *any* text field changes, we recalculate button states
 
-
         $("#slacktest").click(function() {
 
             $("#slacktestrow").removeClass('text-success');
@@ -167,10 +166,12 @@
             $("#slackteststatus").html('');
             $("#slacktesticon").html('<i class="fa fa-spinner spin"></i> Sending Slack test message...');
             $.ajax({
+            
                 url: '{{ route('api.settings.slacktest') }}',
                 type: 'POST',
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
                 },
                 data: {
@@ -182,19 +183,24 @@
 
                 dataType: 'json',
 
+                accepts: {
+                    text: "application/json"
+                },
+
                 success: function (data) {
                     $('#save_slack').removeAttr('disabled');
                     $("#slacktesticon").html('');
                     $("#slacktestrow").addClass('text-success');
                     $("#slackteststatus").addClass('text-success');
-                    $("#slackteststatus").html('<i class="fa fa-check text-success"></i> Success! Check the ' + $('#slack_channel').val() + ' channel for your test message, and be sure to click SAVE below to store your settings.');
+                    $("#slackteststatus").html('<i class="fa fa-check text-success"></i> Success! Check the ' + $('#slack_channel').val() + ' channel for your test message, and be sure to click SAVE below to store your settings.'); 
                 },
 
                 error: function (data) {
 
 
                     if (data.responseJSON) {
-                        var errors = data.responseJSON.message;
+                        var errors = data.responseJSON.errors;
+                        var error_msg = data.responseJSON.message;
                     } else {
                         var errors;
                     }
@@ -204,15 +210,15 @@
                     $('#save_slack').attr("disabled", true);
                     $("#slacktesticon").html('');
                     $("#slackteststatus").addClass('text-danger');
-                    $("#slacktesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+                    $("#slacktesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i><span class="text-danger">' + error_msg+ '</span>');
 
                     if (data.status == 500) {
                         $('#slackteststatus').html('500 Server Error');
-                    } else if (data.status == 400) {
+                    } else if ((data.status == 400) || (data.status == 422)) {
 
                         if (typeof errors != 'string') {
 
-                            for (i = 0; i < errors.length; i++) {
+                            for (i in errors) {
                                 if (errors[i]) {
                                     error_text += '<li>Error: ' + errors[i];
                                 }
