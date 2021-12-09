@@ -22,6 +22,7 @@ use Input;
 use Redirect;
 use Response;
 use App\Helpers\StorageHelper;
+use App\Http\Requests\SlackSettingsRequest;
 
 /**
  * This controller handles all actions related to Settings for
@@ -667,23 +668,10 @@ class SettingsController extends Controller
      *
      * @return View
      */
-    public function postSlack(Request $request)
+    public function postSlack(SlackSettingsRequest $request)
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
-        }
-
-        $validatedData = $request->validate([
-            'slack_channel'   => 'regex:/(?<!\w)#\w+/|required_with:slack_endpoint|nullable',
-        ]);
-
-
-        if ($validatedData) {
-
-            $setting->slack_endpoint = $request->input('slack_endpoint');
-            $setting->slack_channel = $request->input('slack_channel');
-            $setting->slack_botname = $request->input('slack_botname');
-
         }
 
         if ($setting->save()) {
