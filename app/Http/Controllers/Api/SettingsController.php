@@ -163,15 +163,25 @@ class SettingsController extends Controller
 
     }
 
-    public function slacktest(SlackSettingsRequest $request)
+    public function slacktest(Request $request)
     {
 
         \Log::error(strncmp($request->input('slack_endpoint'), 'https://hooks.slack.com/', 24));
         \Log::error('Endpoint: '.$request->input('slack_endpoint'));
         \Log::error('Request: '.print_r($request->all(), true));
-        \Log::error('Rules: '.print_r(Setting::rules(), true));
+        // \Log::error('Rules: '.print_r(Setting::rules(), true));
 
        
+
+        $validator = Validator::make($request->all(), [
+            'slack_endpoint'                      => 'url|required_with:slack_channel|starts_with:https://hooks.slack.com|nullable',
+            'slack_channel'                       => 'required_with:slack_endpoint|starts_with:#|nullable',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Validation failed', 'errors' => $validator->errors()], 422);
+        }
+
 
         // if (($request->filled('slack_endpoint')) && ((strncmp($request->input('slack_endpoint'), "https://hooks.slack.com/", 24) !== 0))) {
         //     return response()->json(['message' => 'Oops! Please check the endpoint URL. Slack endpoints should start with https://hooks.slack.com. Your current endpoint is '.$request->input('slack_endpoint'), ['errors' => 'Invalid slack endpoint.']], 422);
@@ -221,7 +231,7 @@ class SettingsController extends Controller
                 return response()->json(['message' => 'Success'], 200);
 
             } catch (\Exception $e) {
-                return response()->json(['message' => 'Oops! Please check the channel name and webhook endpoint URL. Slack responded with: '.$e->getMessage()], 400);
+                return response()->json(['message' => 'FARTS! Please check the channel name and webhook endpoint URL ('.$request->input('slack_endpoint').'). Slack responded with: '.$e->getMessage()], 400);
             }
         
         //} 

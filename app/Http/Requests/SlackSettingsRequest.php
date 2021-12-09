@@ -22,15 +22,12 @@ class SlackSettingsRequest extends Request
     public function rules()
     {
         return [
-            'slack_endpoint' => 'url|required_with:slack_channel|starts_with:https://hooks.slack.com|nullable',
+            'slack_endpoint'                      => 'url|required_with:slack_channel|starts_with:"https://hooks.slack.com"|nullable',
             'slack_channel'                       => 'required_with:slack_endpoint|starts_with:#|nullable',
             'slack_botname'                       => 'string|nullable',
 
         ];
     }
 
-    public function response(array $errors)
-    {
-        return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
-    }
+
 }

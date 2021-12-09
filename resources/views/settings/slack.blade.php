@@ -165,14 +165,23 @@
             $("#slackteststatus").removeClass('text-danger');
             $("#slackteststatus").html('');
             $("#slacktesticon").html('<i class="fa fa-spinner spin"></i> Sending Slack test message...');
-            $.ajax({
+            $.ajax(
+                {
+                // If I comment this back in, I always get a success (200) message
+                // Without it, I get 
+                    //  beforeSend: function (xhr) { 
+                    //  xhr.setRequestHeader("Content-Type","application/json");
+                    // xhr.setRequestHeader("Accept","text/json");
+                    // },
             
+                
                 url: '{{ route('api.settings.slacktest') }}',
                 type: 'POST',
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                //    'Accept': 'application/json',
+                //    'Content-Type': 'application/json',
                 },
                 data: {
                     'slack_endpoint': $('#slack_endpoint').val(),
