@@ -121,6 +121,6 @@ class Handler extends ExceptionHandler
      */
     protected function invalidJson($request, ValidationException $exception)
     {
-        return response()->json(Helper::formatStandardApiResponse('error', null, $exception->errors(), 400));
+        return response()->json(Helper::formatStandardApiResponse('error', null, $exception->errors(), 422));
     }
 }
