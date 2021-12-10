@@ -269,6 +269,7 @@ class AssetModelsController extends Controller
     */
     public function getClone($modelId = null)
     {
+        $this->authorize('create', AssetModel::class);
         // Check if the model exists
         if (is_null($model_to_clone = AssetModel::find($modelId))) {
             return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
