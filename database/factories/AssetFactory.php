@@ -8,7 +8,6 @@ use App\Models\Category;
 use App\Models\Location;
 use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\StatusLabel;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +40,7 @@ class AssetFactory extends Factory
             'name' => null,
             'rtd_location_id' => Location::factory()->create(),
             'serial' => $this->faker->uuid,
-            'status_id' => StatusLabel::factory()->create()->id,
+            'status_id' => 1,
             'user_id' => 1,
             'asset_tag' => $this->faker->unixTime('now'),
             'notes'   => 'Created by DB seeder',
