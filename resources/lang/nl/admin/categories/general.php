@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Categorie Bijwerken',
     'use_default_eula'					=> 'Gebruik de <a href="#" data-toggle="modal" data-target="#eulaModal"> standaard gebruikersovereenkomst</a> anders.',
     'use_default_eula_disabled'			=> '<del>Gebruik de standaard gebruikersovereenkomst anders.</del> Geen standaard gebruikersovereenkomst ingesteld. Voeg er één toe in Instellingen.',
+    'use_default_eula_column'			=> 'Gebruik standaard eindgebruikersovereenkomst',
 
 );

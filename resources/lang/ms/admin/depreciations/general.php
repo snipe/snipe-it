@@ -8,6 +8,6 @@ return array(
     'depreciation_name'  					=> 'Nama Susut Nilai',
     'number_of_months'  					=> 'Bilangan Bulan',
     'update'  					            => 'Kemas kini Susutnilai',
-    'depreciation_min'                      => 'Minimum Value after Depreciation'
+    'depreciation_min'                      => 'Nilai Minimum selepas Susut Nilai'
 
 );

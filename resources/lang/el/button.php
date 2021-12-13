@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'Επιλέξτε Αρχείο ...',
     'select_files'				=> 'Επιλογή αρχείων...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'send_password_link'       => 'Send Password Reset Link',
 );

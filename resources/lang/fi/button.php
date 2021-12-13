@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'Valitse tiedosto...',
     'select_files'				=> 'Valitse tiedostot...',
     'generate_labels'           => '{1} Luo tunniste |[2, *] Luo tunnisteet',
+    'send_password_link'       => 'Lähetä salasanan palautuslinkki',
 );

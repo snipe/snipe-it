@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about_kits_title'                  => 'About Predefined Kits',
-    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
-    'checkout'                          => 'Checkout Kit ',
-    'create_success'                    => 'Kit was successfully created.',
-    'create'                            => 'Create Predefined Kit',
-    'update'                            => 'Update Predefined Kit',
-    'delete_success'                    => 'Kit was successfully deleted.',
-    'update_success'                    => 'Kit was successfully updated.',
-    'none_models'                       => 'There are not enough available assets for :model to checkout. :qty are required. ',
-    'none_licenses'                     => 'There are not enough available seats for :license to checkout. :qty are required. ',
-    'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
-    'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
+    'about_kits_title'                  => 'Om forhåndsdefinerte sett',
+    'about_kits_text'                   => 'Forhåndsdefinerte sett lar deg raskt sjekke ut en samling av utstyr (eiendeler, lisenser, etc) til en bruker. Dette kan være nyttig når onboarding-prosessen er konsistent på tvers av mange brukere, slik at alle brukere skal ha det samme utstyret.',
+    'checkout'                          => 'Sjekk ut sett ',
+    'create_success'                    => 'Settet har blitt opprettet.',
+    'create'                            => 'Opprett forhåndsdefinert sett',
+    'update'                            => 'Oppdater forhåndsdefinert sett',
+    'delete_success'                    => 'Settet har blitt slettet.',
+    'update_success'                    => 'Settet har blitt oppdatert.',
+    'none_models'                       => 'Det er ikke nok tilgjengelige ressurser for å sjekke ut :model. Vi trenger :qty stk. ',
+    'none_licenses'                     => 'Det er ikke nok seter for :license til å sjekke ut. Det trengs :qty ekstra. ',
+    'none_consumables'                  => 'Det er ikke nok tilgjengelige :consumable til å sjekke ut. Det trengs :qty. ',
+    'none_accessory'                    => 'Det er ikke nok tilgjengelige :accessory til å sjekke ut. Det trengs :qty. ',
 
 );

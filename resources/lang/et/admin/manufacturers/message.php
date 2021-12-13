@@ -16,8 +16,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'Tootjad ei taastatud, proovi uuesti',
+        'success' => 'Tootja taastati edukalt.'
     ),
 
     'delete' => array(

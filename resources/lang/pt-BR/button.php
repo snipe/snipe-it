@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'Selecionar arquivo...',
     'select_files'				=> 'Selecionar arquivos...',
     'generate_labels'           => '{1} Gerar Etiqueta|[2,*] Gerar Etiquetas',
+    'send_password_link'       => 'Enviar Link de redefinição de senha',
 );

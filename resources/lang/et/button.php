@@ -13,5 +13,6 @@ return array(
     'upload'                    => 'Lae üles',
 	'select_file'				=> 'Vali fail...',
     'select_files'				=> 'Vali failid...',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'generate_labels'           => '{1} Loo silt|[2,*] Loo silt',
+    'send_password_link'       => 'Saada parooli taastamise link',
 );

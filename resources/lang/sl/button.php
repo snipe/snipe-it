@@ -12,6 +12,7 @@ return array(
     'submit'  	                => 'Pošlji',
     'upload'                    => 'Naloži',
 	'select_file'				=> 'Izberite datoteko...',
-    'select_files'				=> 'Select Files...',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'select_files'				=> 'Izberi datoteke...',
+    'generate_labels'           => '{1} Generiraj Oznako|[2,2] Generiraj Oznaki|[3,*] Generiraj Oznake',
+    'send_password_link'       => 'Pošlji povezavo za ponastavitev gesla',
 );

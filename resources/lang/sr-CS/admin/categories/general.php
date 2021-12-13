@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Ažuriraj Kategoriju',
     'use_default_eula'					=> 'Umesto toga upotrebite <a href="#" data-toggle="modal" data-target="#eulaModal">primarnu, default postavku EULA</a>.',
     'use_default_eula_disabled'			=> '<del>Upotrebi primarnu default EULA.</del> Nije postavljena primarna default EULA. Dodajte jednu u Postavke.',
+    'use_default_eula_column'			=> 'Use default EULA',
 
 );

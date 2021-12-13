@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'Изберете файл...',
     'select_files'				=> 'Изберете файлове...',
     'generate_labels'           => '{1} Генерирай Етикет|[2,*] Генерирай Етикети',
+    'send_password_link'       => 'Send Password Reset Link',
 );

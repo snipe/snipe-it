@@ -20,6 +20,6 @@ return array(
     'title'      	=> 'Sredstvo ',
     'image'		=> 'Slika naprave',
     'days_without_acceptance' => 'Dnevi brez sprejema',
-    'monthly_depreciation' => 'Monthly Depreciation'
+    'monthly_depreciation' => 'Mesečna amortizacija'
 
 );

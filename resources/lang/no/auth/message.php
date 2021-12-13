@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Denne brukerkontoen er ikke aktiv.',
     'account_suspended'      => 'Denne brukerkontoen er deaktivert.',
     'account_banned'         => 'Denne brukerkontoen er forbudt.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'For mange mislykkede påloggingsforsøk. Prøv igjen om :minutes minutter.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Enheten din er allerede registrert.',
+        'success'               => 'Du har logget inn.',
+        'code_required'         => 'To-faktor-kode er påkrevd.',
+        'invalid_code'          => 'To-faktor-koden er ugyldig.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Det oppstod et problem med utlogging, prøv igjen.',
+        'success' => 'Du har logget ut.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Det oppstod et problem under henting av kode for resetting av passord. Prøv igjen.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Hvis den oppgitte e-postadressen finnes i systemet vårt har det blitt sendt en e-post med gjenopprettelse av passord.',
     ),
 
     'forgot-password-confirm' => array(

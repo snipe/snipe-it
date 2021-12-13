@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'Válaszd ki a fájlt...',
     'select_files'				=> 'Fájl kiválasztása...',
     'generate_labels'           => '{1} Címke generálása|[2,*] Címkék generálása',
+    'send_password_link'       => 'Jelszó visszaállítási link küldése',
 );

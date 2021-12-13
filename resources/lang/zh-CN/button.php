@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> '选择文件...',
     'select_files'				=> '选择文件...',
     'generate_labels'           => '{1} 生成标签|[2,*] 生成标签',
+    'send_password_link'       => '发送密码重置链接',
 );

@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about_kits_title'                  => 'About Predefined Kits',
-    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
-    'checkout'                          => 'Checkout Kit ',
-    'create_success'                    => 'Kit was successfully created.',
-    'create'                            => 'Create Predefined Kit',
-    'update'                            => 'Update Predefined Kit',
-    'delete_success'                    => 'Kit was successfully deleted.',
-    'update_success'                    => 'Kit was successfully updated.',
-    'none_models'                       => 'There are not enough available assets for :model to checkout. :qty are required. ',
-    'none_licenses'                     => 'There are not enough available seats for :license to checkout. :qty are required. ',
-    'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
-    'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
+    'about_kits_title'                  => 'O vnaprej določenih kompletih',
+    'about_kits_text'                   => 'Vnaprej določeni kompleti omogočajo hitro izdajo zbirko stvari (sredstev, licenc, ipd.) uporabniku. Zelo uporabno ob konsistentnem vstopnem procesu med velikim številom uporabnikov, kjer vsi uporabniki prejmejo enake stvari.',
+    'checkout'                          => 'Komplet za izdajo ',
+    'create_success'                    => 'Komplet uspešno ustvarjen.',
+    'create'                            => 'Ustvari vnaprej določen komplet',
+    'update'                            => 'Posodobi vnaprej določen komplet',
+    'delete_success'                    => 'Komplet uspešno izbrisan.',
+    'update_success'                    => 'Komplet uspešno posodobljen.',
+    'none_models'                       => 'Na voljo ni dovolj sredstev :model za izdajo. Potrebnih :qty. ',
+    'none_licenses'                     => 'Na voljo ni dovolj sredstev :license za izdajo. Potrebnih :qty. ',
+    'none_consumables'                  => 'Na voljo ni dovolj enot :consumable za izdajo. Potrebnih :qty. ',
+    'none_accessory'                    => 'Na voljo ni dovolj sredstev :model za izdajo. Potrebnih :qty. ',
 
 );

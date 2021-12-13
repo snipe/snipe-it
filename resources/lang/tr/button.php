@@ -13,5 +13,6 @@ return array(
     'upload'                    => 'Yükle',
 	'select_file'				=> 'Dosya Seç...',
     'select_files'				=> 'Dosyaları seçin...',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'generate_labels'           => '{1} Etiket Oluştur|[2,*] Etiket Oluştur',
+    'send_password_link'       => 'Şifre Sıfırlama Bağlantısını Gönder',
 );

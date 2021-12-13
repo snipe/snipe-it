@@ -10,7 +10,7 @@ return array(
     'checkout'  				=> 'ตรวจสอบสินทรัพย์',
     'clone'  					=> 'คัดลอกแบบสินทรัพย์',
     'deployable'  				=> 'สามารถใช้งานได้',
-    'deleted'  					=> 'This asset has been deleted.',
+    'deleted'  					=> 'สินทรัพย์นี้ถูกลบไปแล้ว',
     'edit'  					=> 'แก้ไขสินทรัพย์',
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'ร้องขอได้',

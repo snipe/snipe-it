@@ -8,6 +8,6 @@ return array(
     'depreciation_name'  					=> 'Amortisatsiooni nimi',
     'number_of_months'  					=> 'Kuude arv',
     'update'  					            => 'Kulumi ajakohastamine',
-    'depreciation_min'                      => 'Minimum Value after Depreciation'
+    'depreciation_min'                      => 'Miinimum väärtus pärast amortatsiooni'
 
 );

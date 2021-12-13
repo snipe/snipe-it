@@ -4,13 +4,14 @@ return [
     'send_password_link'	        => 'Pošlji povezavo za ponastavitev gesla',
     'email_reset_password'			=> 'Ponastavitev gesla e-pošte',
     'reset_password'			    => 'Ponastavi geslo',
-    'saml_login'                    => 'Login via SAML',
+    'saml_login'                    => 'Prijava preko SAML',
     'login'                         => 'Prijava',
     'login_prompt'                  => 'Prosimo, prijavite se',
     'forgot_password'               => 'Pozabil sem svoje geslo',
-    'ldap_reset_password'           => 'Please click here to reset your LDAP password',
+    'ldap_reset_password'           => 'Prosim klikni tu za ponastavitev svojega gesla LDAP',
     'remember_me'                   => 'Zapomni si me',
-    'username_help_top'                 => 'Enter your <strong>username</strong> to be emailed a password reset link.',
-    'username_help_bottom'          => 'Your username and email address <em>may</em> be the same, but may not be, depending on your configuration. If you cannot remember your username, contact your administrator. <br><br><strong>Usernames without an associated email address will not be emailed a password reset link.</strong> ',
+    'username_help_top'                 => 'Vnesi svoje <strong>uporabniško ime</strong> za pošiljanje povezave za ponastavitev gesla.',
+    'username_help_bottom'          => 'Uporabniško ime in geslo <em>sta lahko</em> enaki, vendar to ni nujno, odvisno od konfiguracije. Če se ne spomniš uporabniškega imena, kontaktiraj skrbnika.
+<br><br><strong>Uporabniškim imenom brez dodeljenega e-poštnega računa ne bo poslane povezave za ponastavitev gesla.</strong> ',
     ];
 

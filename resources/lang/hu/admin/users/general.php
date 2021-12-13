@@ -19,7 +19,7 @@ return array(
     'ldap_config_text'  => 'Az LDAP konfigurációs beállításai megtalálhatók az Adminisztrálás> Beállítások menüben. Az (opcionális) kiválasztott hely minden importált felhasználó számára be lesz állítva.',
     'print_assigned'    => 'Az összes hozzárendelt nyomtatása',
     'software_user'     => 'Szoftver ellenőrzése: név',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => 'Meg kell adnod egy email címet ehhez a felhasználóhoz, hogy a hitelesítő adatok elküldve legyenek számára. Hitelesítő adatok csak a felhasználó készítésekor kerülnek elküldésre. A jelszavak hashelve kerülnek mentésre így nem lehet őket megszerezni miután elmentödtek.',
     'view_user'         => 'Felhasználó megtekintése: név',
     'usercsv'           => 'CSV fájl',
     'two_factor_admin_optin_help' => 'A jelenlegi adminisztrációs beállításai lehetővé teszik a kétütemű hitelesítés szelektív végrehajtását.',

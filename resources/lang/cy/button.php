@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'Dewis ffeil...',
     'select_files'				=> 'Dewis ffeiliau...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'send_password_link'       => 'Send Password Reset Link',
 );

@@ -13,6 +13,7 @@ return array(
     'user_deleted_warning'      => 'Käyttäjä on jo poistettu. Mikäli haluat muokata tai luovuttaa laitteita hänelle sinun tulee palauttaa käyttäjä.',
     'ldap_not_configured'        => 'LDAP-integraatiota ei ole määritetty tähän asennukseen.',
     'password_resets_sent'      => 'Salasanan resetointilinkki on lähetetty niille käyttäjille, joille on määritetty voimassa oleva sähköpostiosoite.',
+    'password_reset_sent'       => 'Salasanan palautuslinkki on lähetetty osoitteeseen :email!',
 
 
     'success' => array(

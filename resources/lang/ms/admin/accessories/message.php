@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'The accessory [:id] does not exist.',
+    'does_not_exist' => 'Aksesori [:id] tidak wujud.',
     'assoc_users'	 => 'Aksesori ini pada masa ini mempunyai: mengira item yang diperiksa kepada pengguna. Sila semak aksesori dan cuba lagi.',
 
     'create' => array(

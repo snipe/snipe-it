@@ -18,5 +18,6 @@ return array(
     'update'  							=> 'Cập nhật hạng mục',
     'use_default_eula'					=> 'Sử dụng <a href="#" data-toggle="modal" data-target="#eulaModal">giá trị EULA mặc đinh</a> để thay vào.',
     'use_default_eula_disabled'			=> '<del>Sử dụng giá trị EULA mặc định để thay thế.</del> No primary default EULA is set. Please add one in Settings.',
+    'use_default_eula_column'			=> 'Use default EULA',
 
 );

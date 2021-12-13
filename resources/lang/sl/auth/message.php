@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Ta uporabniški račun ni aktiviran.',
     'account_suspended'      => 'Ta uporabniški račun je onemogočen.',
     'account_banned'         => 'Ta uporabniški račun je onemogočen.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Preveč neuspešnih prijav. Prosim poskusi ponovno čez :minutes minut.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Tvoja naprava je že vpisana.',
+        'success'               => 'Uspešna prijava.',
+        'code_required'         => 'Dvo-faktorska koda je obvezna.',
+        'invalid_code'          => 'Dvo-faktorska koda je neveljavna.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Prišlo je do napake ob odjavi, prosim poskusi ponovno.',
+        'success' => 'Odjava uspešna.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Med poskusom ponastavitve gesla za ponastavitev je prišlo do težave, poskusite znova.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'V kolikor ta e-poštni naslov obstaja v sistemu je nanj bilo poslano sporočilo za ponastavitev gesla.',
     ),
 
     'forgot-password-confirm' => array(

@@ -13,6 +13,7 @@ return array(
     'user_deleted_warning'      => 'Pengguna ini sudah dihapus. Anda harus mengembalikan pengguna ini untuk menyuntingnya atau memberikannya aset baru.',
     'ldap_not_configured'        => 'Integrasi LDAP sudah tidak dikonfigurasikan untuk instalasi ini.',
     'password_resets_sent'      => 'Pengguna terpilih yang diaktifkan dan memiliki sebuah alamat email yang valid telah dikirimkan sebuah tautan pengaturan ulang kata sandi.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
 
     'success' => array(

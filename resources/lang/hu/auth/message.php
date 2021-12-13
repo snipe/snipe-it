@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Ez a felhasználó nincs aktiválva.',
     'account_suspended'      => 'Ez a felhasználói fiók fel van függesztve.',
     'account_banned'         => 'Ez a felhasználó ki van tiltva.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Túl sok sikertelen bejelentkezési próbálkozás. Próbáld újra :minutes perc múlva.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Az eszközöd már regisztrálva van.',
+        'success'               => 'Sikeresen bejelentkeztél.',
+        'code_required'         => 'Kétlépcsős azonosító kód szükséges.',
+        'invalid_code'          => 'A kétlépcsős azonosító kód érvénytelen.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Probléma merült fel a kijelentkezésed közben, próbáld meg újra.',
+        'success' => 'Sikeresen kijelentkeztél.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'A jelszó visszaállító kód kiküldése közben probléma lépett fel, kérjük próbálja újra.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Ha az adott email cím létezik a rendszerünkben, abban az esetben elküldtük a jelszó visszaállító linket az adott email címre.',
     ),
 
     'forgot-password-confirm' => array(

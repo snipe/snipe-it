@@ -3,10 +3,10 @@
 return array(
     'about_models_title'     => 'Mudelitest',
     'about_models_text'           => 'Mudelid on selleks, et vahendeid grupeerida. "MBP 2013", "IPhone 6d", jne.',
-    'deleted'  					        => 'This model has been deleted.',
-    'bulk_delete'               => 'Bulk Delete Asset Models',
+    'deleted'  					        => 'See mudel on kustatud.',
+    'bulk_delete'               => 'Kustuta hulgi vara mudeleid',
     'bulk_delete_help'               => 'Use the checkboxes below to confirm the deletion of the selected asset models. Asset models that have assets associated with them cannot be deleted until the assets are associated with a different model.',
-    'bulk_delete_warn'          => 'You are about to delete :model_count asset models.',
+    'bulk_delete_warn'          => 'Sa oled kustutamas :model_count vara mudelit.',
     'restore'                   => 'Taasta mudel',
     'requestable'               => 'Kasutajad võivad seda mudelit tellida',
 	'show_mac_address'			      => 'Näita sellel mudelil MAC aadressi välja',
@@ -14,5 +14,5 @@ return array(
     'view_models'               => 'Vaata mudeleid',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Ei ole lisavälju',
-    'add_default_values'        => 'Add default values',
+    'add_default_values'        => 'Lisa vaikimisi väärtus',
 );

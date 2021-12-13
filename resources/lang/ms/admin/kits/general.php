@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about_kits_title'                  => 'About Predefined Kits',
-    'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
+    'about_kits_title'                  => 'Perihal Kit Pratakrif',
+    'about_kits_text'                   => 'Kit Pratakrif membolehkan anda menyemak koleksi item (aset, lesen, dll) dengan cepat kepada pengguna. Ini boleh membantu apabila proses onboarding anda konsisten merentas ramai pengguna dan semua pengguna menerima item yang sama.',
     'checkout'                          => 'Checkout Kit ',
-    'create_success'                    => 'Kit was successfully created.',
-    'create'                            => 'Create Predefined Kit',
-    'update'                            => 'Update Predefined Kit',
-    'delete_success'                    => 'Kit was successfully deleted.',
-    'update_success'                    => 'Kit was successfully updated.',
-    'none_models'                       => 'There are not enough available assets for :model to checkout. :qty are required. ',
-    'none_licenses'                     => 'There are not enough available seats for :license to checkout. :qty are required. ',
-    'none_consumables'                  => 'There are not enough available units of :consumable to checkout. :qty are required. ',
-    'none_accessory'                    => 'There are not enough available units of :accessory to checkout. :qty are required. ',
+    'create_success'                    => 'Kit berjaya dibuat.',
+    'create'                            => 'Buat Kit Pratakrif',
+    'update'                            => 'Kemas kini Kit Pratakrif',
+    'delete_success'                    => 'Kit berjaya dipadamkan.',
+    'update_success'                    => 'Kit telah berjaya dikemas kini.',
+    'none_models'                       => 'Aset tersedia tidak mencukupi untuk :model untuk checkout. :qty diperlukan. ',
+    'none_licenses'                     => 'Tidak ada ruang yang mencukupi untuk :license untuk checkout. :qty diperlukan. ',
+    'none_consumables'                  => 'Tiada unit tersedia untuk :consumable untuk checkout. :qty diperlukan. ',
+    'none_accessory'                    => 'Unit :aksesori yang tersedia tidak mencukupi untuk daftar keluar. :qty diperlukan. ',
 
 );

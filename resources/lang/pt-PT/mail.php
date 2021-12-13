@@ -9,7 +9,7 @@ return array(
     'asset' => 'Artigo:',
     'asset_name' => 'Nome do Artigo:',
     'asset_requested' => 'Artigo requesitado',
-    'asset_tag' => 'Asset Tag',
+    'asset_tag' => 'Etiqueta do Ativo',
     'assigned_to' => 'Atribuído a',
     'best_regards' => 'Atenciosamente',
     'canceled' => 'Cancelado:',
@@ -63,7 +63,7 @@ return array(
     'license_expiring_alert' => 'Há :count licença a expirar nos próximos :threshold dias. Existem :count licenças que irão expirar nos próximos :threshold dias.',
     'to_reset' => 'Para fazer reset a senha do :web, preencha este formulário:',
     'type' => 'Tipo',
-    'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
+    'upcoming-audits' => 'Existe um :count ativo que está a chegar para ser auditado em :threshold dias.|Existem :count ativos que estão a chegar para serem auditados em :threshold dias.',
     'user' => 'Utilizador',
     'username' => 'Nome de utilizador',
     'welcome' => 'Bem vindo, :name',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
+    'your_assets' => 'Ver seus ativos'
 );

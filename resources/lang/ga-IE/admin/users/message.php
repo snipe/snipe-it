@@ -13,6 +13,7 @@ return array(
     'user_deleted_warning'      => 'Scriosadh an t-úsáideoir seo. Beidh ort an t-úsáideoir seo a athchóiriú chun iad a eagrú nó sócmhainní nua a shannadh dóibh.',
     'ldap_not_configured'        => 'Níl cumasc LDAP cumraithe don suiteáil seo.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
 
     'success' => array(

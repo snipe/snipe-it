@@ -12,6 +12,7 @@ return array(
     'submit'  	                => 'ثبت کردن',
     'upload'                    => 'بارگزاری',
 	'select_file'				=> 'فایل را انتخاب کنید...',
-    'select_files'				=> 'Select Files...',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'select_files'				=> 'انتخاب فایل ها...',
+    'generate_labels'           => '{1} تولید لیبل|[2,*] تولید لیبل ها',
+    'send_password_link'       => 'ارسال لینک بازنشانی کلمه عبور',
 );

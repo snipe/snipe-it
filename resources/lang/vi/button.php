@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'Chọn tập tin...',
     'select_files'				=> 'Chọn files...',
     'generate_labels'           => '{1} Nhãn Chung|[2,*] Nhiều Nhãn Chung',
+    'send_password_link'       => 'Send Password Reset Link',
 );

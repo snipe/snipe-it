@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> '파일 선택...',
     'select_files'				=> '파일 선택...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'send_password_link'       => 'Send Password Reset Link',
 );

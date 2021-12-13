@@ -10,7 +10,7 @@ return array(
     'checkout'  				=> 'Ativo de compras',
     'clone'  					=> 'Clonar Ativo',
     'deployable'  				=> 'Implementável',
-    'deleted'  					=> 'This asset has been deleted.',
+    'deleted'  					=> 'Este ativo foi excluído.',
     'edit'  					=> 'Editar artigo',
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
     'requestable'               => 'Solicitavel',

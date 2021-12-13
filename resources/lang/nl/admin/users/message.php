@@ -13,6 +13,7 @@ return array(
     'user_deleted_warning'      => 'Deze gebruiker is verwijderd. Je zult deze gebruiker moeten herstellen om hem te bewerken of om nieuwe assets toe te wijzen.',
     'ldap_not_configured'        => 'LDAP integratie is niet geconfigureerd voor deze installatie.',
     'password_resets_sent'      => 'De geselecteerde gebruikers die zijn geactiveerd en die een geldig e-mailadres hebben, hebben een wachtwoord reset link ontvangen.',
+    'password_reset_sent'       => 'Een link om het wachtwoord te resetten is verstuurd naar :email!',
 
 
     'success' => array(

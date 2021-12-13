@@ -176,7 +176,7 @@
     'remove_company'        => 'Firmenzuordnung entfernen',
     'reports'				=> 'Berichte',
     'restored'				=> 'wiederhergestellt',
-    'restore'				=> 'Restore',
+    'restore'				=> 'Wiederherstellen',
     'requested'				=> 'Angefragt',
     'request_canceled'      => 'Anfrage abgebrochen',
     'save'  				=> 'Speichern',

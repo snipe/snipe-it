@@ -11,6 +11,6 @@ return [
     'ldap_reset_password'           => 'Please click here to reset your LDAP password',
     'remember_me'                   => '자동 로그인',
     'username_help_top'                 => 'Enter your <strong>username</strong> to be emailed a password reset link.',
-    'username_help_bottom'          => 'Your username and email address <em>may</em> be the same, but may not be, depending on your configuration. If you cannot remember your username, contact your administrator. <br><br><strong>Usernames without an associated email address will not be emailed a password reset link.</strong> ',
+    'username_help_bottom'          => '사용자 계정과  이메일 주소는 구성에 따라 동일할 수 있지만 동일하지 않을 수 있습니다. 사용자 계정을 기억할 수 없는 경우 관리자에게 문의하십시오. 연결된 이메일 주소가 없는 사용자 계정은 암호 재설정 링크가 이메일로 전송되지 않습니다.',
     ];
 

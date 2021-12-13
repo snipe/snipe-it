@@ -19,7 +19,7 @@ return array(
     'ldap_config_text'  => 'Tetapan konfigurasi LDAP boleh didapati Admin> Tetapan. Lokasi (pilihan) yang dipilih akan ditetapkan untuk semua pengguna yang diimport.',
     'print_assigned'    => 'Cetak Semua yang Diperuntukkan',
     'software_user'     => 'Perisian diagihkan kepada :nama',
-    'send_email_help'   => 'You must provide an email address for this user to send them credentials. Emailing credentials can only be done on user creation. Passwords are stored in a one-way hash and cannot be retrieved once saved.',
+    'send_email_help'   => 'Anda mesti memberikan alamat e-mel untuk pengguna ini menghantar bukti kelayakan kepada mereka. Bukti kelayakan e-mel hanya boleh dilakukan pada penciptaan pengguna. Kata laluan disimpan dalam cincang sehala dan tidak boleh diambil semula setelah disimpan.',
     'view_user'         => 'Papar Pengguna :nama',
     'usercsv'           => 'Fail CSV',
     'two_factor_admin_optin_help' => 'Tetapan admin semasa anda membenarkan penguatkuasaan selektif pengesahan dua faktor.',

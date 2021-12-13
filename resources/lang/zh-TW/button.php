@@ -13,5 +13,6 @@ return array(
     'upload'                    => '上傳',
 	'select_file'				=> '選擇檔案…',
     'select_files'				=> '選擇檔案…',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
+    'generate_labels'           => '{1} 產製標籤|[2,*] 產製標籤',
+    'send_password_link'       => '發送密碼重設連結',
 );

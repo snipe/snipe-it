@@ -7,13 +7,13 @@ return array(
     'account_not_activated'  => 'Hesabınız aktif edilmemiş.',
     'account_suspended'      => 'Hesabınız durdurulmuş.',
     'account_banned'         => 'Hesabınız engellenmiş.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Çok fazla başarısız oturum açma girişimi. Lütfen :dakika dakika sonra tekrar deneyin.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
+        'already_enrolled'      => 'Cihazınız zaten kayıtlı.',
+        'success'               => 'Başarıyla giriş yaptınız.',
+        'code_required'         => 'İki faktörlü kod gereklidir.',
+        'invalid_code'          => 'İki faktörlü kod geçersiz.',
     ),
 
     'signin' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Oturumunuzu kapatmaya çalışırken bir sorun oluştu, lütfen tekrar deneyin.',
+        'success' => 'Başarıyla çıkış yaptınız.',
     ),
 
     'signup' => array(
@@ -33,7 +33,7 @@ return array(
 
     'forgot-password' => array(
         'error'   => 'Şifre resetleme kodu oluştururken bir hata oluştu, lütfen tekrar deneyiniz.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'success' => 'Bu e-posta adresi sistemimizde mevcutsa, bir şifre kurtarma e-postası gönderilmiştir.',
     ),
 
     'forgot-password-confirm' => array(

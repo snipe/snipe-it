@@ -13,6 +13,7 @@ return array(
     'user_deleted_warning'      => 'Ang user na ito ay nai-delete na. Kailangang ibalik ang user na ito upang i-edit o mag-assign ng bagong mga asset.',
     'ldap_not_configured'        => 'Ang integrasyon ng LDAP ay hindi nai-configure sa pag-install na ito.',
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
+    'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
 
     'success' => array(

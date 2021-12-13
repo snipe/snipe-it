@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'Bestand selecteren...',
     'select_files'				=> 'Bestanden selecteren...',
     'generate_labels'           => '{1} Genereer label|[2,*] Genereer labels',
+    'send_password_link'       => 'Stuur een wachtwoordherstellink',
 );

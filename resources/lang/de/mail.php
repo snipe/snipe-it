@@ -22,7 +22,7 @@ return array(
     'Confirm_Accessory_Checkin' => 'Zurücknehmen von Zubehör bestätigen',
     'Confirm_accessory_delivery' => 'Zubehör Herausgabe bestätigen',
     'Confirm_license_delivery' => 'Lizenz Herausgabe bestätigen',
-    'Confirm_asset_delivery' => 'Gegenstands Herausgabe bestätigen',
+    'Confirm_asset_delivery' => 'Bestätigung einer Asset Herausgabe',
     'Confirm_consumable_delivery' => 'Verbrauchsmaterial Herausgabe bestätigen',
     'current_QTY' => 'Aktuelle Menge',
     'Days' => 'Tage',

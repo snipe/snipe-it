@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'حدد ملف ...',
     'select_files'				=> 'إختيار ملف...',
     'generate_labels'           => '{1} انشاء تسميات [2,*] توليد تسميات',
+    'send_password_link'       => 'إرسال رابط إعادة تعيين كلمة السر',
 );
