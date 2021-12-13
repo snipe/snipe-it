@@ -170,7 +170,7 @@ class AssetsTransformer
         }
         return $asset->assigned ? [
             'id' => $asset->assigned->id,
-            'name' => $asset->assigned->display_name,
+            'name' => e($asset->assigned->display_name),
             'type' => $asset->assignedType()
         ] : null;
     }
