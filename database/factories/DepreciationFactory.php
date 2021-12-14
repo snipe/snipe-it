@@ -30,7 +30,9 @@ class DepreciationFactory extends Factory
     public function definition()
     {
         return [
+            'name' => $this->faker->catchPhrase(),
             'user_id' => 1,
+            'months' => 36,
         ];
     }
 

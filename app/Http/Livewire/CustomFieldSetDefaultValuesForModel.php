@@ -19,13 +19,22 @@ class CustomFieldSetDefaultValuesForModel extends Component
     {
         $this->model = AssetModel::find($this->model_id); // It's possible to do some clever route-model binding here, but let's keep it simple, shall we?
         $this->fieldset_id = $this->model->fieldset_id;
-        $this->fields = CustomFieldset::find($this->fieldset_id)->fields;
-        $this->add_default_values = ( $this->model->defaultValues->count() > 0);
+
+        $this->fields = null;
+
+        if ($fieldset = CustomFieldset::find($this->fieldset_id)) {
+            $this->fields = CustomFieldset::find($this->fieldset_id)->fields;
+        } 
+
+        $this->add_default_values = ($this->model->defaultValues->count() > 0);
     }
 
     public function updatedFieldsetId()
     {
-        $this->fields = CustomFieldset::find($this->fieldset_id)->fields;
+        if (CustomFieldset::find($this->fieldset_id)) {
+            $this->fields = CustomFieldset::find($this->fieldset_id)->fields;
+        }
+        
     }
 
     public function render()

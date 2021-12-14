@@ -64,7 +64,7 @@
 
                             @if ($snipeSettings->saml_enabled)
                             <div class="row ">
-                                <div class="col-md-12 text-right">
+                                <div class="text-right col-md-12">
                                     <a href="{{ route('saml.login')  }}">{{ trans('auth/general.saml_login')  }}</a>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                         <div class="box-footer">
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
                         </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
+                        <div class="text-right col-md-12 col-sm-12 col-xs-12" style="padding-top: 10px;">
                             @if ($snipeSettings->custom_forgot_pass_url)
                                 <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.forgot_password')  }}</a>
                             @else

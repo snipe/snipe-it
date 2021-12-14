@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,7 @@ class AssetModelFactory extends Factory
     {
         return [
             'user_id' => 1,
+            'name' => $this->faker->catchPhrase(),
             'model_number' => $this->faker->creditCardNumber(),
             'notes' => 'Created by demo seeder',
 
@@ -93,7 +95,6 @@ class AssetModelFactory extends Factory
             return [
                 'name' => 'Macbook Pro 13"',
                 'category_id' => 1,
-                'manufacturer_id' => 1,
                 'eol' => '36',
                 'depreciation_id' => 1,
                 'image' => 'mbp.jpg',
