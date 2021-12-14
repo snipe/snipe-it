@@ -5,7 +5,10 @@ namespace Database\Factories;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
+use App\Models\Location;
+use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\StatusLabel;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,16 +39,16 @@ class AssetFactory extends Factory
     {
         return [
             'name' => null,
-            'rtd_location_id' => rand(1, 10),
+            'rtd_location_id' => Location::factory()->create(),
             'serial' => $this->faker->uuid,
-            'status_id' => 1,
+            'status_id' => StatusLabel::factory()->create()->id,
             'user_id' => 1,
             'asset_tag' => $this->faker->unixTime('now'),
             'notes'   => 'Created by DB seeder',
             'purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
             'purchase_cost' => $this->faker->randomFloat(2, '299.99', '2999.99'),
             'order_number' => $this->faker->numberBetween(1000000, 50000000),
-            'supplier_id' => 1,
+            'supplier_id' => Supplier::factory()->create(),
             'requestable' => $this->faker->boolean(),
             'assigned_to' => null,
             'assigned_type' => null,

@@ -1,10 +1,9 @@
 <?php
+namespace Tests\Unit;
 
 use App\Models\Location;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Hash;
+use Tests\Unit\BaseTest;
+
 
 class LocationTest extends BaseTest
 {
@@ -35,6 +34,6 @@ class LocationTest extends BaseTest
         ]);
 
         $this->assertFalse($a->isValid());
-        $this->assertStringContainsString('The parent id and id must be different', $a->getErrors());
+        $this->assertStringContainsString(trans('validation.non_circular', ['attribute' => 'parent id']), $a->getErrors());
     }
 }
