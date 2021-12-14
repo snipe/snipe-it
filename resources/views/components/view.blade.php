@@ -16,6 +16,7 @@
         {{ trans('button.actions') }}
           <span class="caret"></span>
       </button>
+      
       <ul class="dropdown-menu pull-right" role="menu22">
         @if ($component->assigned_to != '')
           @can('checkin', $component)
