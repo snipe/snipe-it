@@ -235,9 +235,13 @@
               </label>
             </div>
 
-
-
-
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox('title', '1', '1', ['class' => 'minimal']) }}
+                {{ trans('admin/users/table.title') }}
+              </label>
+            </div>
+            
 
             @if ($customfields->count() > 0)
               <div class="checkbox col-md-12">
