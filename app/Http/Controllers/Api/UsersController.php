@@ -15,9 +15,13 @@ use App\Models\Company;
 use App\Models\License;
 use App\Models\User;
 use Auth;
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
+use App\Models\Group;
 
 class UsersController extends Controller
 {
@@ -32,7 +36,14 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', User::class);
+       
+        $myArr =array();
+        $userData = Auth::user()->isAdminofGroup();
 
+        foreach($userData as $id => $group){
+            array_push($myArr,$id);
+        }
+       
         $users = User::select([
             'users.activated',
             'users.address',
@@ -121,6 +132,7 @@ class UsersController extends Controller
 
         if ($request->filled('group_id')) {
             $users = $users->ByGroup($request->get('group_id'));
+            Session::put('grp_id', $request->get('group_id'));
         }
 
         if ($request->filled('department_id')) {
@@ -134,6 +146,15 @@ class UsersController extends Controller
         if ($request->filled('search')) {
             $users = $users->TextSearch($request->input('search'));
         }
+
+        if(Auth::user()->isSuperUser()){
+           
+        }else{
+            $users = $users->whereHas('groups', function($query) use ($myArr){
+                $query->whereIn('group_id', $myArr);
+            });
+        }
+
 
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $offset = (($users) && (request('offset') > $users->count())) ? 0 : request('offset', 0);
@@ -236,6 +257,27 @@ class UsersController extends Controller
     }
 
 
+    public function assignusergroup(Request $request){
+
+        if ($request->filled('assigned_user')) {
+           $user = User::findOrFail($request->input('assigned_user'));
+
+           $test = array(Session::get('grp_id'));
+           $da=array();
+               
+           $grp= DB::table('permission_groups')->select('permissions')->where('id',Session::get('grp_id'))->first();
+   
+           foreach($grp  as $g){
+                   $da[$test[0]] = ['permissions' => $g];
+           }
+   
+           $user->groups()->sync($da,false);
+
+            return redirect()->back()->with('success', 'User added sucessfully');
+        
+        }
+        return redirect()->back()->with('error', 'Please select users or error while adding user');
+    }
 
     /**
      * Store a newly created resource in storage.

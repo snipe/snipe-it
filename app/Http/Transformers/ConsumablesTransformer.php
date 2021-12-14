@@ -7,6 +7,7 @@ use App\Models\Consumable;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ConsumablesTransformer
 {
@@ -55,6 +56,34 @@ class ConsumablesTransformer
             'delete' => Gate::allows('delete', Consumable::class),
         ];
         $array += $permissions_array;
+
+        $numGroups = $consumable->groups->count();
+        if($numGroups > 0)
+        {
+            $groups["total"] = $numGroups; 
+            
+            foreach($consumable->groups as $group)
+            {
+                if(!Auth::user()->isSuperUser()){
+                    $user_groups = Auth::user()->groups;
+                    if($user_groups->contains('id',$group->id)){
+                        $groups["rows"][] = [
+                            'id' => (int) $group->id,
+                            'name' => e($group->name)
+                        ];
+                    }
+                }else{
+                    $groups["rows"][] = [
+                        'id' => (int) $group->id,
+                        'name' => e($group->name)
+                    ];
+                }
+            }
+            $array["groups"] = $groups;
+        }
+        else {
+            $array["groups"] = null;
+        }
 
         return $array;
     }

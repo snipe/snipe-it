@@ -13,7 +13,7 @@ use Slack;
 use Str;
 use TCPDF;
 use View;
-
+use Illuminate\Support\Facades\Log;
 /**
  * This controller handles all actions related to Asset Maintenance for
  * the Snipe-IT Asset Management application.
@@ -65,6 +65,13 @@ class AssetMaintenancesController extends Controller
     public function create()
     {
         $asset = null;
+
+        $myArr = array();
+        $userData = Auth::user()->groups;
+
+        foreach($userData as $userGroup){
+            array_push($myArr,$userGroup->id);
+        }
 
         if ($asset = Asset::find(request('asset_id'))) {
             // We have to set this so that the correct property is set in the select2 ajax dropdown

@@ -21,6 +21,33 @@
             <div class="box box-default">
                 <div class="box-body">
                     <div class="row">
+                    {{ Form::open(['route' => ['api.users.assignusergroup'],'method' => 'GET', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'user-form' ]) }}
+                        <div id="assigned_user" class="form-group"{!!  (isset($style)) ? ' style="'.e($style).'"' : ''  !!}>
+
+                            {{ Form::label('Select User', trans('general.user'), array('class' => 'col-md-2 control-label')) }}
+                            <div class="col-md-6 {{ 'required' }}">
+                                <select class="js-data-ajax" data-endpoint="users" data-placeholder="{{ trans('general.select_user') }}" name="assigned_user" style="width: 100%" id="assigned_user_select" aria-label="assigned_user">
+                                    @if ($user_id = old('assigned_user', (isset($item)) ? $item->{'assigned_user'} : ''))
+                                        <option value="{{ $user_id }}" selected="selected" role="option" aria-selected="true"  role="option">
+                                            {{ (\App\Models\User::find($user_id)) ? \App\Models\User::find($user_id)->present()->fullName : '' }}
+                                        </option>
+                                    @else
+                                        <option value=""  role="option">{{ trans('general.select_user') }}</option>
+                                    @endif
+                                </select>
+                            </div>
+
+
+                            <div class="col-md-1 col-sm-1 text-left">
+                                @can('admin')
+                                    <button type='submit'>Add</button>
+                                @endcan
+                            </div>
+
+                        </div>
+
+                        {{Form::close()}}
+
                         <div class="col-md-12">
                             <div class="table table-responsive">
 

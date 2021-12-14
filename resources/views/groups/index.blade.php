@@ -8,6 +8,12 @@
 
 @section('header_right')
 <a href="{{ route('groups.create') }}" class="btn btn-primary text-right"> {{ trans('general.create') }}</a>
+    @can('create', \App\Models\Group::class)
+        @if ($snipeSettings->ldap_enabled == 1)
+            <a href="{{route('ldap.usergroup')}}" class="btn btn-default pull-right"><span class="fa fa-sitemap"></span> LDAP Sync</a>
+        @endif
+    @endcan
+
 <a href="{{ route('settings.index') }}" class="btn btn-default text-right">{{ trans('general.back') }}</a>
 @stop
 

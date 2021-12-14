@@ -79,6 +79,13 @@ class LicensePresenter extends Presenter
                 'sortable' => true,
                 'title' => trans('general.manufacturer'),
                 'formatter' => 'manufacturersLinkObjFormatter',
+	    ], [
+                'field' => 'groups',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.groups'),
+                'visible' => true,
+                'formatter' => 'groupsFormatter',
             ], [
                 'field' => 'seats',
                 'searchable' => false,

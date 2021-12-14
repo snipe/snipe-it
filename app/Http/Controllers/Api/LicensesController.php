@@ -12,6 +12,7 @@ use App\Models\License;
 use App\Models\LicenseSeat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class LicensesController extends Controller
 {
@@ -26,7 +27,14 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier', 'category')->withCount('freeSeats as free_seats_count'));
+        $myArr = array();
+        $userData = Auth::user()->groups;
+
+        foreach($userData as $userGroup){
+            array_push($myArr,$userGroup->id);
+        }
+        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category', 'groups')->withCount('freeSeats as free_seats_count'));
+
 
         if ($request->filled('company_id')) {
             $licenses->where('company_id', '=', $request->input('company_id'));
@@ -91,6 +99,15 @@ class LicensesController extends Controller
         if ($request->filled('search')) {
             $licenses = $licenses->TextSearch($request->input('search'));
         }
+
+        if(Auth::user()->isSuperUser()){
+        }else{
+            $licenses->whereHas('groups', function($query) use ($myArr){
+                $query->whereIn('group_id', $myArr);
+            })->get();
+            
+        }
+
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.

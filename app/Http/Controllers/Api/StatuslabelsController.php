@@ -9,6 +9,8 @@ use App\Http\Transformers\StatuslabelsTransformer;
 use App\Models\Asset;
 use App\Models\Statuslabel;
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Support\Facades\Log;
 
 class StatuslabelsController extends Controller
 {
@@ -22,9 +24,26 @@ class StatuslabelsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Statuslabel::class);
+
+        $myArr = array();
+        $userData = Auth::user()->isAdminofGroup();
+
+        foreach($userData as $id => $group){
+            array_push($myArr,$id);
+        }
+
         $allowed_columns = ['id', 'name', 'created_at', 'assets_count', 'color', 'notes', 'default_label'];
 
-        $statuslabels = Statuslabel::withCount('assets as assets_count');
+        if(Auth::user()->isSuperUser()){
+            $statuslabels = Statuslabel::withCount('assets as assets_count');
+        }else{
+            $statuslabels = Statuslabel::withCount(['assets as assets_count' => function ($query) use($myArr){
+
+                $query->whereHas('groups', function($query1) use ($myArr){
+                    $query1->whereIn('group_id', $myArr);
+                });
+            }]);
+        }
 
         if ($request->filled('search')) {
             $statuslabels = $statuslabels->TextSearch($request->input('search'));
@@ -172,10 +191,37 @@ class StatuslabelsController extends Controller
     {
         $this->authorize('view', Statuslabel::class);
 
-        $statuslabels = Statuslabel::withCount('assets')->get();
+        $myArr = array();
+        $userData = Auth::user()->isAdminofGroup();
 
-        $labels = [];
-        $points = [];
+        foreach($userData as $id => $group){
+            array_push($myArr,$id);
+        }
+
+        $statuslabels = Statuslabel::with('assets','assets.groups')->groupBy('id');
+        
+        if(Auth::user()->isSuperUser()){
+            $statuslabels = $statuslabels->withCount('assets as assets_count')->get();
+        }else{
+            $statuslabels = $statuslabels->withCount(['assets as assets_count' => function ($query) use($myArr){
+
+                $query->whereHas('groups', function($query1) use ($myArr){
+                    $query1->whereIn('group_id', $myArr);
+                });
+            }])
+    
+            ->get();
+        }
+        
+        // $statuslabels = Statuslabel::with('assets','assets.groups')
+        // ->groupBy('id')
+        // ->withCount('assets as assets_count')
+        // ->get();
+
+
+
+        $labels=[];
+        $points=[];
         $default_color_count = 0;
         $colors_array = [];
 

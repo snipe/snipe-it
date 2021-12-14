@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Import;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ItemImportRequest extends FormRequest
 {
@@ -32,6 +33,7 @@ class ItemImportRequest extends FormRequest
 
     public function import(Import $import)
     {
+        Log::debug('in import');
         ini_set('max_execution_time', env('IMPORT_TIME_LIMIT', 600)); //600 seconds = 10 minutes
         ini_set('memory_limit', env('IMPORT_MEMORY_LIMIT', '500M'));
 
@@ -39,8 +41,10 @@ class ItemImportRequest extends FormRequest
         $import->import_type = $this->input('import-type');
         $class = title_case($import->import_type);
         $classString = "App\\Importer\\{$class}Importer";
+        Log::debug($classString);
         $importer = new $classString($filename);
-        $import->field_map = request('column-mappings');
+        $import->field_map  = request('column-mappings');
+        Log::debug($import->field_map);
         $import->save();
         $fieldMappings = [];
 

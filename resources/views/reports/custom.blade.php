@@ -45,6 +45,12 @@
             </div>
             <div class="checkbox col-md-12">
               <label>
+                {{ Form::checkbox('group', '1', '1', ['class' => 'minimal']) }}
+                Group
+              </label>
+            </div>
+            <div class="checkbox col-md-12">
+              <label>
               {{ Form::checkbox('asset_tag', '1', '1', ['class' => 'minimal']) }}
                 {{ trans('general.asset_tag') }}
               </label>

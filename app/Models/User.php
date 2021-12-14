@@ -19,6 +19,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Support\Facades\Log;
 
 class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
@@ -127,15 +128,51 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             return false;
         }
 
-        $user_permissions = json_decode($this->permissions, true);
+        if($section == 'superuser'){
+            $user_permissions = json_decode($this->permissions, true);
 
-        $is_user_section_permissions_set = ($user_permissions != '') && array_key_exists($section, $user_permissions);
-        //If the user is explicitly granted, return true
-        if ($is_user_section_permissions_set && ($user_permissions[$section] == '1')) {
-            return true;
+            if($user_permissions == null){
+                foreach ($user_groups as $user_group) {
+                    $user_permissions = json_decode($user_group->pivot->permissions, true);
+                    $is_user_section_permissions_set = ($user_permissions != '') && array_key_exists($section, $user_permissions);
+                    //If the user is explicitly granted, return true
+                    if ($is_user_section_permissions_set && ($user_permissions[$section]=='1')) {
+                        //return true;
+                        return true;
+                    }
+                    // If the user is explicitly denied, return false
+                    if ($is_user_section_permissions_set && ($user_permissions[$section]=='-1')) {
+                        //return false;
+                        $admin = -1;
+                    }
+
+                }
+            }
+            $is_user_section_permissions_set = ($user_permissions != '') && array_key_exists($section, $user_permissions);
+            //If the user is explicitly granted, return true
+            if ($is_user_section_permissions_set && ($user_permissions[$section]=='1')) {
+                return true;
+            }
         }
-        // If the user is explicitly denied, return false
-        if ($is_user_section_permissions_set && ($user_permissions[$section] == '-1')) {
+        
+        $admin = 0;
+        foreach ($user_groups as $user_group) {
+            $user_permissions = json_decode($user_group->pivot->permissions, true);
+
+            $is_user_section_permissions_set = ($user_permissions != '') && array_key_exists($section, $user_permissions);
+            //If the user is explicitly granted, return true
+            if ($is_user_section_permissions_set && ($user_permissions[$section]=='1')) {
+                //return true;
+                return true;
+            }
+            // If the user is explicitly denied, return false
+            if ($is_user_section_permissions_set && ($user_permissions[$section]=='-1')) {
+                //return false;
+                $admin = -1;
+            }
+        }
+
+        if($admin == -1){
             return false;
         }
 
@@ -148,6 +185,23 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         }
 
         return false;
+    }
+
+    public function isAdminofGroup(){
+        $user_groups = $this->groups;
+        $userGrp = array();
+        foreach ($user_groups as $user_group) {
+            $user_permissions = json_decode($user_group->pivot->permissions, true);
+            
+            $is_user_section_permissions_set = ($user_permissions != '') && array_key_exists('admin', $user_permissions);
+           
+            if ($is_user_section_permissions_set && ($user_permissions['admin']=='1')) {
+                //$userGrp = array($user_group->id=>$user_group->name);
+                $userGrp[$user_group->id] = $user_group->name;
+            }
+        }
+
+        return $userGrp;
     }
 
     /**
@@ -585,6 +639,16 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return false;
     }
 
+    public function getPermission($grpId){
+        $user_groups = $this->groups;
+       
+        foreach ($user_groups as $user_group) {
+
+            if($user_group->id == $grpId){
+                return json_decode($user_group->pivot->permissions, true);
+            }  
+        }
+    }
 
     public function decodePermissions()
     {

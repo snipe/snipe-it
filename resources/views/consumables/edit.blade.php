@@ -10,6 +10,27 @@
 
 @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/consumables/table.title')])
+<div class="form-group">
+    <label for="groups[]" class="col-md-3 control-label">{{ trans('general.groups') }}</label>
+    <div class="col-md-7 col-sm-12 controls">
+        <select
+            name="groups[]"
+            aria-label="groups[]"
+            id="groups[]"
+            multiple="multiple"
+            class="form-control"
+            data-validation="required">
+
+            <option value="1">General</option>
+            @foreach ($groups as $id => $group)
+                <option value="{{ $id }}">
+                    {{ $group }}
+                </option>
+            @endforeach
+           
+        </select>
+    </div>
+   </div>
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id', 'required' => 'true', 'category_type' => 'consumable'])
 @include ('partials.forms.edit.manufacturer-select', ['translated_name' => trans('general.manufacturer'), 'fieldname' => 'manufacturer_id'])
 @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])

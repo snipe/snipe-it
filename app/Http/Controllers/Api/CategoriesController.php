@@ -10,6 +10,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Support\Facades\Storage;
+use Auth;
+use Illuminate\Support\Facades\Log;
 
 class CategoriesController extends Controller
 {
@@ -23,14 +25,83 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Category::class);
-        $allowed_columns = ['id', 'name', 'category_type', 'category_type', 'use_default_eula', 'eula_text', 'require_acceptance', 'checkin_email', 'assets_count', 'accessories_count', 'consumables_count', 'components_count', 'licenses_count', 'image'];
 
-        $categories = Category::select(['id', 'created_at', 'updated_at', 'name', 'category_type', 'use_default_eula', 'eula_text', 'require_acceptance', 'checkin_email', 'image'])
-            ->withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count');
+        $myArr = array();
+        $userData = Auth::user()->isAdminofGroup();
+
+        foreach($userData as $id => $group){
+            array_push($myArr,$id);
+        }
+
+        $allowed_columns = ['id', 'name','category_type', 'category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email', 'assets_count', 'accessories_count', 'consumables_count', 'components_count','licenses_count', 'image'];
+
+        $categories = Category::select(['id', 'created_at', 'updated_at', 'name','category_type','use_default_eula','eula_text', 'require_acceptance','checkin_email','image']);
 
         if ($request->filled('search')) {
             $categories = $categories->TextSearch($request->input('search'));
         }
+
+        if(Auth::user()->isSuperUser()){
+           $categories = $categories->withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 'components as components_count','licenses as licenses_count');
+        }else{
+        //    $categories = $categories->with('assets','assets.groups')
+        //    ->withCount([
+        //             'assets as assets_count' => function ($query) use ($myArr) {
+        //                 $query->whereIn('group_id', $myArr);
+        //     }]);
+
+        $categories = $categories->withCount(['assets as assets_count' => function ($query) use($myArr){
+
+                $query->whereHas('groups', function($query1) use ($myArr){
+                    $query1->whereIn('group_id', $myArr);
+                });
+            },
+            'accessories as accessories_count' => function ($query) use($myArr){
+
+                $query->whereHas('groups', function($query1) use ($myArr){
+                    $query1->whereIn('group_id', $myArr);
+                });
+            },
+            'consumables as consumables_count' => function ($query) use($myArr){
+
+                $query->whereHas('groups', function($query1) use ($myArr){
+                    $query1->whereIn('group_id', $myArr);
+                });
+            },
+            'components as components_count' => function ($query) use($myArr){
+
+                $query->whereHas('groups', function($query1) use ($myArr){
+                    $query1->whereIn('group_id', $myArr);
+                });
+            },
+            'licenses as licenses_count' => function ($query) use($myArr){
+
+                $query->whereHas('groups', function($query1) use ($myArr){
+                    $query1->whereIn('group_id', $myArr);
+                });
+            },
+        ]);
+
+            // $categories = $categories->with(['assets','assets.groups' => function($query) use($myArr){
+            //     $query->whereIn('group_id', $myArr);
+            // },
+            // 'accessories','accessories.groups' => function($query) use($myArr){
+            //     $query->whereIn('group_id', $myArr);
+            // },
+            // 'consumables','consumables.groups' => function($query) use($myArr){
+            //     $query->whereIn('group_id', $myArr);
+            // },
+            // 'components','components.groups' => function($query) use($myArr){
+            //     $query->whereIn('group_id', $myArr);
+            // },
+            // 'licenses','licenses.groups' => function($query) use($myArr){
+            //     $query->whereIn('group_id', $myArr);
+            // }
+            // ])->withCount('assets as assets_count', 'accessories as accessories_count', 'consumables as consumables_count', 
+            // 'components as components_count','licenses as licenses_count');
+        }
+
+        
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\GroupsTransformer;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Support\Facades\Log;
 
 class GroupsController extends Controller
 {
@@ -20,12 +22,26 @@ class GroupsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Group::class);
-        $allowed_columns = ['id', 'name', 'created_at', 'users_count'];
+        
+        $myArr = array();
+        $userData = Auth::user()->isAdminofGroup();
+
+        foreach($userData as $userGroup){
+            array_push($myArr,$userGroup);
+        }
+
+        $allowed_columns = ['id','name','created_at', 'users_count'];
 
         $groups = Group::select('id', 'name', 'permissions', 'created_at', 'updated_at')->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $groups = $groups->TextSearch($request->input('search'));
+        }
+
+        if(Auth::user()->isSuperUser()){
+           
+        }else{
+            $groups->whereIn('name', $myArr);
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which

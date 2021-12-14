@@ -131,7 +131,9 @@ class PredefinedKit extends SnipeModel
      *
      * @var array
      */
-    protected $searchableRelations = [];
+    protected $searchableRelations = [
+        'groups'       => ['name']
+    ];
 
     /**
      * Establishes the kits -> models relationship
@@ -145,6 +147,11 @@ class PredefinedKit extends SnipeModel
     public function assets()
     {
         return $this->hasManyThrough(\App\Models\Asset::class, \App\Models\AssetModel::class, 'country_id', 'user_id');
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany('\App\Models\Group', 'kits_groups', 'kit_id', 'group_id');
     }
 
     /**

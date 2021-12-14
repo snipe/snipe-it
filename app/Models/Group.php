@@ -53,6 +53,34 @@ class Group extends SnipeModel
         return $this->belongsToMany(\App\Models\User::class, 'users_groups');
     }
 
+    public function assets(){
+        return $this->belongsToMany('\App\Models\Asset','assets_groups');
+    }
+
+    public function accessories()
+    {
+        return $this->belongsToMany('\App\Models\Accessory', 'accessories_groups');
+    }
+
+    public function components()
+    {
+        return $this->belongsToMany('\App\Models\Component', 'components_groups');
+    }
+
+    public function licenses()
+    {
+        return $this->belongsToMany('\App\Models\License', 'licenses_groups');
+    }
+
+    public function consumable()
+    {
+        return $this->belongsToMany('\App\Models\Consumable', 'consumables_groups');
+    }
+
+    public function kits()
+    {
+        return $this->belongsToMany('\App\Models\PredefinedKit', 'kits_groups');
+    }
     /**
      * Decode JSON permissions into array
      *

@@ -91,6 +91,7 @@ class Consumable extends SnipeModel
         'company'      => ['name'],
         'location'     => ['name'],
         'manufacturer' => ['name'],
+        'groups'       => ['name']
     ];
 
     /**
@@ -160,6 +161,10 @@ class Consumable extends SnipeModel
     public function manufacturer()
     {
         return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
+    }
+     public function groups()
+    {
+        return $this->belongsToMany('\App\Models\Group', 'consumables_groups');
     }
 
     /**

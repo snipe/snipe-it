@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Group;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
+use Log;
 
 class GroupsTransformer
 {
@@ -31,8 +32,10 @@ class GroupsTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'update' => Gate::allows('superadmin') ? true : false,
-            'delete' => Gate::allows('superadmin') ? true : false,
+            // 'update' => Gate::allows('superadmin') ? true : false,
+            // 'delete' => Gate::allows('superadmin') ? true : false,
+            'update' =>  Gate::allows('update', Group::class),
+            'delete' =>  Gate::allows('delete', Group::class),
         ];
 
         $array += $permissions_array;

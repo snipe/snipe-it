@@ -12,6 +12,7 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This controller handles all actions related to Asset Maintenance for
@@ -34,7 +35,15 @@ class AssetMaintenancesController extends Controller
      */
     public function index(Request $request)
     {
-        $maintenances = AssetMaintenance::with('asset', 'asset.model', 'asset.location', 'supplier', 'asset.company', 'admin');
+
+        $myArr = array();
+        $userData = Auth::user()->isAdminofGroup();
+
+        foreach($userData as $id => $group){
+            array_push($myArr,$id);
+        }
+
+        $maintenances = AssetMaintenance::with('asset', 'asset.model','asset.location', 'supplier', 'asset.company', 'admin', 'asset.groups');
 
         if ($request->filled('search')) {
             $maintenances = $maintenances->TextSearch($request->input('search'));
@@ -66,6 +75,13 @@ class AssetMaintenancesController extends Controller
                             ];
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'created_at';
+
+        if(Auth::user()->isSuperUser()){
+        }else{
+            $maintenances->whereHas('asset.groups', function($query) use ($myArr){
+                $query->whereIn('group_id', $myArr);
+            })->get();
+        }
 
         switch ($sort) {
             case 'user_id':

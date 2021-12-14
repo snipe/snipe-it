@@ -9,6 +9,7 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Log;
+use DB;
 
 class LdapSync extends Command
 {
@@ -44,7 +45,7 @@ class LdapSync extends Command
     public function handle()
     {
         ini_set('max_execution_time', env('LDAP_TIME_LIM', 600)); //600 seconds = 10 minutes
-        ini_set('memory_limit', env('LDAP_MEM_LIM', '500M'));
+        ini_set('memory_limit', env('LDAP_MEM_LIM', '1024M'));
         $ldap_result_username = Setting::getSettings()->ldap_username_field;
         $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
@@ -170,6 +171,14 @@ class LdapSync extends Command
         $tmp_pass = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 20);
         $pass = bcrypt($tmp_pass);
 
+        $test = array('1');
+        $da=array();
+            
+        $grp= DB::table('permission_groups')->select('permissions')->where('name','General')->first();
+
+        foreach($grp as $g){
+                $da[$test[0]] = ['permissions' => $g];
+        }
         for ($i = 0; $i < $results['count']; $i++) {
             if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == 'TRUE') {
                 $item = [];
@@ -264,6 +273,9 @@ class LdapSync extends Command
                 $errors = '';
 
                 if ($user->save()) {
+
+                    $user->groups()->sync($da,false);
+		    
                     $item['note'] = $item['createorupdate'];
                     $item['status'] = 'success';
                 } else {

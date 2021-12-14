@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Support\Facades\Log;
 
 class License extends Depreciable
 {
@@ -106,6 +107,7 @@ class License extends Depreciable
       'company'      => ['name'],
       'category'     => ['name'],
       'depreciation' => ['name'],
+      'groups'       => ['name']
     ];
 
     /**
@@ -264,6 +266,10 @@ class License extends Depreciable
     {
         return $this->belongsTo(\App\Models\Company::class, 'company_id');
     }
+     public function groups()
+    {
+        return $this->belongsToMany('\App\Models\Group', 'licenses_groups');
+    }
 
     /**
      * Establishes the license -> category relationship
@@ -399,8 +405,30 @@ class License extends Depreciable
      */
     public static function assetcount()
     {
-        return LicenseSeat::whereNull('deleted_at')
-                   ->count();
+        $myArr = array();
+        $userData = Auth::user()->isAdminofGroup();
+
+        foreach($userData as $id => $group){
+            array_push($myArr,$id);
+        }
+
+        if(Auth::user()->isSuperUser()){
+            $license = LicenseSeat::whereNull('deleted_at')
+            ->count();
+
+        }else{
+           $license = LicenseSeat::with('license','license.groups')
+                      ->whereHas('license.groups', function($query) use ($myArr){
+                            $query->whereIn('group_id', $myArr);
+                        })
+                       ->whereNull('deleted_at')
+                       ->count();
+        }
+
+        // return LicenseSeat::whereNull('deleted_at')
+        // ->count();
+
+        return $license;
     }
 
     /**

@@ -3,20 +3,26 @@
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
 use Gate;
+use DB;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class AssetsTransformer
 {
     public function transformAssets(Collection $assets, $total)
     {
-        $array = [];
         foreach ($assets as $asset) {
-            $array[] = self::transformAsset($asset);
-        }
+           // $array[] = self::transformAsset($asset);
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+           $array = array();
+           foreach ($assets as $asset) {
+               $array[] = self::transformAsset($asset);
+           }
+           return (new DatatablesTransformer)->transformDatatables($array, $total);
+        }
     }
 
     public function transformAsset(Asset $asset)
@@ -111,6 +117,35 @@ class AssetsTransformer
             }
         } else {
             $array['custom_fields'] = [];
+        }
+	
+	$numGroups = $asset->groups->count();
+        
+        if($numGroups > 0)
+        {
+            $groups["total"] = $numGroups; 
+            
+            foreach($asset->groups as $group)
+            {
+                if(!Auth::user()->isSuperUser()){
+                    $user_groups = Auth::user()->groups;
+                    if($user_groups->contains('id',$group->id)){
+                        $groups["rows"][] = [
+                            'id' => (int) $group->id,
+                            'name' => e($group->name)
+                        ];
+                    }
+                }else{
+                    $groups["rows"][] = [
+                        'id' => (int) $group->id,
+                        'name' => e($group->name)
+                    ];
+                }
+            }
+            $array["groups"] = $groups;
+        }
+        else {
+            $array["groups"] = null;
         }
 
         $permissions_array['available_actions'] = [
@@ -208,7 +243,36 @@ class AssetsTransformer
             'request' => ($asset->isRequestedBy(\Auth::user())) ? false : true,
         ];
 
-        $array += $permissions_array;
+        $numGroups = $asset->groups->count();
+        
+        if($numGroups > 0)
+        {
+            $groups["total"] = $numGroups; 
+            
+            foreach($asset->groups as $group)
+            {
+                if(!Auth::user()->isSuperUser()){
+                    $user_groups = Auth::user()->groups;
+                    if($user_groups->contains('id',$group->id)){
+                        $groups["rows"][] = [
+                            'id' => (int) $group->id,
+                            'name' => e($group->name)
+                        ];
+                    }
+                }else{
+                    $groups["rows"][] = [
+                        'id' => (int) $group->id,
+                        'name' => e($group->name)
+                    ];
+                }
+            }
+            $array["groups"] = $groups;
+        }
+        else {
+            $array["groups"] = null;
+        }
+
+         $array += $permissions_array;
         return $array;
 
 

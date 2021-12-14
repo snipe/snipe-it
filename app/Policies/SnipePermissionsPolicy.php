@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 /**
  * SnipePermissionsPolicy provides methods for handling the granular permissions used throughout Snipe-IT.
@@ -69,7 +70,11 @@ abstract class SnipePermissionsPolicy
      */
     public function create(User $user)
     {
-        return $user->hasAccess($this->columnName().'.create');
+        if($user->hasAccess('admin') || $user->isSuperUser()){
+            return $user->hasAccess($this->columnName().'.create');
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -80,7 +85,11 @@ abstract class SnipePermissionsPolicy
      */
     public function update(User $user, $item = null)
     {
-        return $user->hasAccess($this->columnName().'.edit');
+        if($user->hasAccess('admin') || $user->isSuperUser()){
+            return $user->hasAccess($this->columnName().'.edit');
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -91,12 +100,16 @@ abstract class SnipePermissionsPolicy
      */
     public function delete(User $user, $item = null)
     {
-        $itemConditional = true;
-        if ($item) {
-            $itemConditional = empty($item->deleted_at);
+        if($user->hasAccess('admin') || $user->isSuperUser()){
+            $itemConditional = true;
+            if ($item) {
+                $itemConditional =  empty($item->deleted_at);
+            }
+            return $itemConditional && $user->hasAccess($this->columnName().'.delete');
+        }else{
+            return false;
         }
-
-        return $itemConditional && $user->hasAccess($this->columnName().'.delete');
+        
     }
 
     /**

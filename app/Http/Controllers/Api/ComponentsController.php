@@ -12,6 +12,8 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Events\CheckoutableCheckedIn;
 use App\Events\ComponentCheckedIn;
 use App\Models\Asset;
+use Auth;
+
 
 class ComponentsController extends Controller
 {
@@ -26,6 +28,12 @@ class ComponentsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Component::class);
+	$myArr = array();
+        $userData = Auth::user()->groups;
+
+        foreach($userData as $userGroup){
+            array_push($myArr,$userGroup->id);
+        }
 
         // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations
         // Relations will be handled in query scopes a little further down.
@@ -44,7 +52,7 @@ class ComponentsController extends Controller
 
 
         $components = Company::scopeCompanyables(Component::select('components.*')
-            ->with('company', 'location', 'category', 'assets'));
+            ->with('company', 'location', 'category', 'assets', 'groups'));
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
@@ -60,6 +68,14 @@ class ComponentsController extends Controller
 
         if ($request->filled('location_id')) {
             $components->where('location_id', '=', $request->input('location_id'));
+        }
+
+        if(Auth::user()->isSuperUser()){
+        }else{
+            $components->whereHas('groups', function($query) use ($myArr){
+                $query->whereIn('group_id', $myArr);
+            })->get();
+            
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which

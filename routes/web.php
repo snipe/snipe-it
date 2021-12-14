@@ -136,6 +136,16 @@ Route::group(['middleware' => 'auth'], function () {
 */
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser']], function () {
+    Route::middleware(['authorize:admin'])->group(function () {
+        Route::get('groups', ['as' => 'settings.groups.index','uses' => 'GroupsController@index' ]);
+
+        Route::resource('groups', 'GroupsController', [
+            'middleware' => ['auth'],
+            'parameters' => ['group' => 'group_id']
+        ]);
+    });
+
+    Route::middleware(['authorize:superuser'])->group(function () {
     Route::get('settings', [SettingsController::class, 'getSettings'])->name('settings.general.index');
     Route::post('settings', [SettingsController::class, 'postSettings'])->name('settings.general.save');
 
@@ -200,12 +210,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
         Route::get('/', [SettingsController::class, 'getBackups'])->name('settings.backups.index');
     });
 
+	
     Route::resource('groups', GroupsController::class, [
         'middleware' => ['auth'],
         'parameters' => ['group' => 'group_id'],
     ]);
+    
+     Route::get('ldapGroup',
+            [
+                'as' => 'ldap.usergroup',
+                'uses' => '\App\Http\Controllers\Users\LDAPGroupImportController@create'
+            ]
+        );
 
     Route::get('/', [SettingsController::class, 'index'])->name('settings.index');
+    });
+    
 });
 
 /*
@@ -348,6 +368,13 @@ Route::get(
     'auth/signin',
     [LoginController::class, 'legacyAuthRedirect']
 );
+
+Route::get('assignusergroup',
+            [
+                'as' => 'api.users.assignusergroup',
+                'uses' => '\App\Http\Controllers\Api\UsersController@assignusergroup'
+            ]
+        );
 
 
 /*

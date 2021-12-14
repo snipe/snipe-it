@@ -472,10 +472,33 @@
                                   </ul>
                               @endif
 
-                              <span class="help-block">Only superadmins may edit group memberships.</p>
-                                  @else
-                                      <div class="controls">
-                        <select
+                              <span class="help-block">Only superadmins may edit group memberships.</span>
+                              
+                          @elseif(Auth::user()->isSuperUser())
+                            <div class="controls">
+                              <select
+                                name="groups[]"
+                                aria-label="groups[]"
+                                id="groups[]"
+                                multiple="multiple"
+                                class="form-control">
+
+                                @foreach ($groups as $id => $group)
+                                  <option value="{{ $id }}"
+                                      {{ ($userGroups->keys()->contains($id) ? ' selected="selected"' : '') }}>
+                                      {{ $group }}
+                                  </option>
+                                @endforeach
+                              </select>
+
+                              <span class="help-block">
+                                {{ trans('admin/users/table.groupnotes') }}
+                              </span>
+                            </div>
+
+                          @elseif(Auth::user()->hasAccess('admin'))
+                            <div class="controls">
+                              <select
                                 name="groups[]"
                                 aria-label="groups[]"
                                 id="groups[]"

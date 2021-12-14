@@ -181,6 +181,7 @@ class Asset extends Depreciable
         'model'              => ['name', 'model_number'],
         'model.category'     => ['name'],
         'model.manufacturer' => ['name'],
+        'groups'       => ['name']
     ];
 
 
@@ -639,7 +640,15 @@ class Asset extends Depreciable
         return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany('\App\Models\Group', 'assets_groups');
+    }
 
+    public function assetProjectid()
+    {
+        //return $this->belongsTo('\App\Models\User', 'grp_id');
+    }
 
     /**
      * Establishes the asset -> status relationship

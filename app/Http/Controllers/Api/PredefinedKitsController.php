@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\PredefinedKitsTransformer;
 use App\Models\PredefinedKit;
 use Illuminate\Http\Request;
+use Auth;
 
 /**
  *  @author [D. Minaev.] [<dmitriy.minaev.v@gmail.com>]
@@ -21,12 +22,27 @@ class PredefinedKitsController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', PredefinedKit::class);
-        $allowed_columns = ['id', 'name'];
+
+        $myArr = array();
+        $userData = Auth::user()->groups;
+
+        foreach($userData as $userGroup){
+            array_push($myArr,$userGroup->id);
+        }
+        
+        $allowed_columns = ['id', 'name', 'groups'];
 
         $kits = PredefinedKit::query();
 
         if ($request->filled('search')) {
             $kits = $kits->TextSearch($request->input('search'));
+        }
+        if(Auth::user()->isSuperUser()){
+        }else{
+            $kits->whereHas('groups', function($query) use ($myArr){
+                $query->whereIn('group_id', $myArr);
+            })->get();
+            
         }
 
         $offset = $request->input('offset', 0);

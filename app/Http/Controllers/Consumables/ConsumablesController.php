@@ -9,6 +9,8 @@ use App\Models\Company;
 use App\Models\Consumable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use App\Models\User;
+use App\Models\Group;
 
 /**
  * This controller handles all actions related to Consumables for
@@ -46,9 +48,17 @@ class ConsumablesController extends Controller
     public function create()
     {
         $this->authorize('create', Consumable::class);
+        $user =  User::find(Auth::id());
+
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
+        }
 
         return view('consumables/edit')->with('category_type', 'consumable')
-            ->with('item', new Consumable);
+            ->with('item', new Consumable)
+            ->with('groups',$userGroups);
     }
 
     /**
@@ -82,6 +92,7 @@ class ConsumablesController extends Controller
         $consumable = $request->handleImages($consumable);
 
         if ($consumable->save()) {
+            $consumable->groups()->sync($request->input('groups'),false);
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.create.success'));
         }
 
@@ -100,10 +111,28 @@ class ConsumablesController extends Controller
      */
     public function edit($consumableId = null)
     {
+
+        $user =  User::find(Auth::id());
+
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
+        }
+
         if ($item = Consumable::find($consumableId)) {
             $this->authorize($item);
 
-            return view('consumables/edit', compact('item'))->with('category_type', 'consumable');
+            $itemGrp= $item->groups()->pluck('name', 'id')->toArray();
+            
+            $result = count(array_intersect($userGroups, $itemGrp));
+
+            if($result|| $item->user_id == Auth::id()){
+                return view('consumables/edit', compact('item'))->with('category_type', 'consumable')
+                ->with('groups',$userGroups);
+            }else{
+                return redirect()->route('consumables.index')->with('error', "You can not edit"); 
+            }
         }
 
         return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
@@ -144,6 +173,7 @@ class ConsumablesController extends Controller
         $consumable = $request->handleImages($consumable);
 
         if ($consumable->save()) {
+            $consumable->groups()->sync($request->input('groups'),false);
             return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.update.success'));
         }
 
@@ -165,7 +195,24 @@ class ConsumablesController extends Controller
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
         }
         $this->authorize($consumable);
-        $consumable->delete();
+
+        $user =  User::find(Auth::id());
+
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
+        }
+
+        $accessoryGrp= $consumable->groups()->pluck('name', 'id')->toArray();
+
+        $result = count(array_intersect($userGroups, $accessoryGrp));
+
+        if($result|| $consumable->user_id == Auth::id()){
+            $consumable->delete();
+        }else{
+            return redirect()->route('consumables.index')->with('error', 'You can not delete');
+        }
         // Redirect to the locations management page
         return redirect()->route('consumables.index')->with('success', trans('admin/consumables/message.delete.success'));
     }

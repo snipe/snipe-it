@@ -13,6 +13,7 @@ use Auth;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\ImageUploadRequest;
 
 class AccessoriesController extends Controller
@@ -27,6 +28,14 @@ class AccessoriesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', Accessory::class);
+
+        $myArr =array();
+        $userData = Auth::user()->groups;
+
+        foreach($userData as $userGroup){
+            array_push($myArr,$userGroup->id);
+        }
+	
         $allowed_columns = ['id', 'name', 'model_number', 'eol', 'notes', 'created_at', 'min_amt', 'company_id'];
         
         // This array is what determines which fields should be allowed to be sorted on ON the table itself, no relations
@@ -44,7 +53,7 @@ class AccessoriesController extends Controller
             ];
 
 
-        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'users', 'location', 'supplier');
+        $accessories = Accessory::select('accessories.*')->with('category', 'company', 'manufacturer', 'users', 'location', 'supplier', 'groups');
 
         if ($request->filled('search')) {
             $accessories = $accessories->TextSearch($request->input('search'));
@@ -68,6 +77,18 @@ class AccessoriesController extends Controller
 
         if ($request->filled('location_id')) {
             $accessories->where('location_id','=',$request->input('location_id'));
+        }
+	
+	if(Auth::user()->isSuperUser()){
+        }else{
+            $accessories->whereHas('groups', function($query) use ($myArr){
+                $query->whereIn('group_id', $myArr);
+            })->get();
+            
+        }
+
+        if ($request->filled('search')) {
+            $accessories = $accessories->TextSearch($request->input('search'));
         }
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
@@ -244,6 +265,7 @@ class AccessoriesController extends Controller
      */
     public function destroy($id)
     {
+        Log::debug('in delete');
         $this->authorize('delete', Accessory::class);
         $accessory = Accessory::findOrFail($id);
         $this->authorize($accessory);

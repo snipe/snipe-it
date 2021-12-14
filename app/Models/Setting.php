@@ -326,6 +326,8 @@ class Setting extends Model
             'ldap_pword',
             'ldap_basedn',
             'ldap_filter',
+            'ldap_grp_basedn',
+            'ldap_grp_filter',
             'ldap_username_field',
             'ldap_lname_field',
             'ldap_fname_field',

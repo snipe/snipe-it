@@ -6,6 +6,7 @@ use App\Models\PredefinedKit;
 use App\Models\SnipeModel;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * transforms collection of models to array with simple typres
@@ -41,6 +42,34 @@ class PredefinedKitsTransformer
         ];
         $array['user_can_checkout'] = true;
         $array += $permissions_array;
+
+        $numGroups = $kit->groups->count();
+        if($numGroups > 0)
+        {
+            $groups["total"] = $numGroups; 
+            
+            foreach($kit->groups as $group)
+            {
+                if(!Auth::user()->isSuperUser()){
+                    $user_groups = Auth::user()->groups;
+                    if($user_groups->contains('id',$group->id)){
+                        $groups["rows"][] = [
+                            'id' => (int) $group->id,
+                            'name' => e($group->name)
+                        ];
+                    }
+                }else{
+                    $groups["rows"][] = [
+                        'id' => (int) $group->id,
+                        'name' => e($group->name)
+                    ];
+                }
+            }
+            $array["groups"] = $groups;
+        }
+        else {
+            $array["groups"] = null;
+        }
 
         return $array;
     }

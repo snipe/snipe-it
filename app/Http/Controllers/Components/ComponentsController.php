@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use App\Models\Group;
 
 /**
  * This class controls all actions related to Components for
@@ -50,9 +52,16 @@ class ComponentsController extends Controller
     public function create()
     {
         $this->authorize('create', Component::class);
+        $user =  User::find(Auth::id());
 
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
+        }
         return view('components/edit')->with('category_type', 'component')
-            ->with('item', new Component);
+            ->with('item', new Component)
+            ->with('groups',$userGroups);
     }
 
     /**
@@ -84,6 +93,7 @@ class ComponentsController extends Controller
         $component = $request->handleImages($component);
 
         if ($component->save()) {
+            $component->groups()->sync($request->input('groups'),false);
             return redirect()->route('components.index')->with('success', trans('admin/components/message.create.success'));
         }
 
@@ -102,12 +112,25 @@ class ComponentsController extends Controller
      */
     public function edit($componentId = null)
     {
+        $user =  User::find(Auth::id());
+
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
+        }
         if ($item = Component::find($componentId)) {
             $this->authorize('update', $item);
+            $componentGrp= $item->groups()->pluck('name', 'id')->toArray();
+            
+            $result = count(array_intersect($userGroups, $componentGrp));
 
-            return view('components/edit', compact('item'))->with('category_type', 'component');
+            if($result|| $item->user_id == Auth::id()){
+                return view('components/edit', compact('item'))->with('category_type', 'component')->with('groups',$userGroups);
+            }else{
+                return redirect()->route('components.index')->with('error', 'You can not edit');
+            }
         }
-
         return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
     }
 
@@ -156,6 +179,7 @@ class ComponentsController extends Controller
         $component = $request->handleImages($component);
 
         if ($component->save()) {
+            $component->groups()->sync($request->input('groups'),false);
             return redirect()->route('components.index')->with('success', trans('admin/components/message.update.success'));
         }
 
@@ -179,18 +203,34 @@ class ComponentsController extends Controller
 
         $this->authorize('delete', $component);
 
-        // Remove the image if one exists
-        if (Storage::disk('public')->exists('components/'.$component->image)) {
-            try {
-                Storage::disk('public')->delete('components/'.$component->image);
-            } catch (\Exception $e) {
-                \Log::debug($e);
-            }
+        $user =  User::find(Auth::id());
+
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
         }
 
-        $component->delete();
+        $componentGrp= $component->groups()->pluck('name', 'id')->toArray();
 
-        return redirect()->route('components.index')->with('success', trans('admin/components/message.delete.success'));
+        $result = count(array_intersect($userGroups, $componentGrp));
+
+        if($result|| $component->user_id == Auth::id()){
+
+            // Remove the image if one exists
+            if (Storage::disk('public')->exists('components/'.$component->image)) {
+                try  {
+                    Storage::disk('public')->delete('components/'.$component->image);
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+                }
+            }
+
+            $component->delete();
+            return redirect()->route('components.index')->with('success', trans('admin/components/message.delete.success'));
+        }else{
+            return redirect()->route('components.index')->with('error', 'You can not delete');
+        }
     }
 
     /**

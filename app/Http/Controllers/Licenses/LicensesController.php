@@ -9,6 +9,9 @@ use App\Models\License;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Group;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This controller handles all actions related to Licenses for
@@ -47,6 +50,13 @@ class LicensesController extends Controller
     public function create()
     {
         $this->authorize('create', License::class);
+        $user =  User::find(Auth::id());
+
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
+        }
         $maintained_list = [
             '' => 'Maintained',
             '1' => 'Yes',
@@ -56,7 +66,9 @@ class LicensesController extends Controller
         return view('licenses/edit')
             ->with('depreciation_list', Helper::depreciationList())
             ->with('maintained_list', $maintained_list)
-            ->with('item', new License);
+            ->with('item', new License)
+            ->with('groups',$userGroups);
+
     }
 
     /**
@@ -99,6 +111,7 @@ class LicensesController extends Controller
         $license->user_id           = Auth::id();
 
         if ($license->save()) {
+	    $license->groups()->sync($request->input('groups'),false);
             return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.create.success'));
         }
 
@@ -123,15 +136,33 @@ class LicensesController extends Controller
 
         $this->authorize('update', $item);
 
-        $maintained_list = [
-            '' => 'Maintained',
-            '1' => 'Yes',
-            '0' => 'No',
-        ];
+        $user =  User::find(Auth::id());
 
-        return view('licenses/edit', compact('item'))
-            ->with('depreciation_list', Helper::depreciationList())
-            ->with('maintained_list', $maintained_list);
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
+        }
+
+        $licenseGrp= $item->groups()->pluck('name', 'id')->toArray();
+            
+        $result = count(array_intersect($userGroups, $licenseGrp));
+
+        if($result|| $item->user_id == Auth::id()){
+
+            $maintained_list = [
+                '' => 'Maintained',
+                '1' => 'Yes',
+                '0' => 'No',
+            ];
+
+            return view('licenses/edit', compact('item'))
+                ->with('depreciation_list', Helper::depreciationList())
+                ->with('maintained_list', $maintained_list)
+                ->with('groups',$userGroups);
+        }else{
+            return redirect()->back()->with('error', 'You can not edit');
+        }
     }
 
     /**
@@ -175,6 +206,7 @@ class LicensesController extends Controller
         $license->category_id       = $request->input('category_id');
 
         if ($license->save()) {
+            $license->groups()->sync($request->input('groups'),false);
             return redirect()->route('licenses.show', ['license' => $licenseId])->with('success', trans('admin/licenses/message.update.success'));
         }
         // If we can't adjust the number of seats, the error is flashed to the session by the event handler in License.php
@@ -201,22 +233,39 @@ class LicensesController extends Controller
 
         $this->authorize('delete', $license);
 
-        if ($license->assigned_seats_count == 0) {
-            // Delete the license and the associated license seats
-            DB::table('license_seats')
-                ->where('id', $license->id)
-                ->update(['assigned_to' => null, 'asset_id' => null]);
+        $user =  User::find(Auth::id());
+
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
+        }
+
+        $licenseGrp= $license->groups()->pluck('name', 'id')->toArray();
+
+        $result = count(array_intersect($userGroups, $licenseGrp));
+
+        if($result|| $license->user_id == Auth::id()){
+            if ($license->assigned_seats_count == 0) {
+                // Delete the license and the associated license seats
+                DB::table('license_seats')
+                    ->where('id', $license->id)
+                    ->update(array('assigned_to' => null,'asset_id' => null));
 
             $licenseSeats = $license->licenseseats();
             $licenseSeats->delete();
             $license->delete();
 
-            // Redirect to the licenses management page
-            return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.delete.success'));
-            // Redirect to the license management page
+                // Redirect to the licenses management page
+                return redirect()->route('licenses.index')->with('success', trans('admin/licenses/message.delete.success'));
+                // Redirect to the license management page
+            }
+            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.assoc_users'));
+        }else{
+            return redirect()->back()->with('error', 'You can not delete');
         }
         // There are still licenses in use.
-        return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.assoc_users'));
+
     }
 
     /**

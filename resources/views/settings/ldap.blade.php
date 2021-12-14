@@ -270,6 +270,34 @@
                             </div>
                         </div>
 
+                        <!-- LDAP Group basedn -->
+                        <div class="form-group {{ $errors->has('ldap_grp_basedn') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_grp_basedn', 'Group Base Bind DN') }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::text('ldap_grp_basedn', Request::old('ldap_grp_basedn', $setting->ldap_grp_basedn), ['class' => 'form-control', 'placeholder' => 'ou=group,dc=example,dc=com', $setting->demoMode]) }}
+                                {!! $errors->first('ldap_grp_basedn', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fa fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- LDAP Group filter -->
+                        <div class="form-group {{ $errors->has('ldap_grp_filter') ? 'error' : '' }}">
+                            <div class="col-md-3">
+                                {{ Form::label('ldap_grp_filter', 'LDAP group filter') }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ Form::text('ldap_grp_filter', Request::old('ldap_grp_filter', $setting->ldap_grp_filter), ['class' => 'form-control','placeholder' => '&(objectclass=group)', $setting->demoMode]) }}
+                                {!! $errors->first('ldap_grp_filter', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning"><i class="fa fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
+                                @endif
+                            </div>
+                        </div>
+
                         <!-- LDAP  username field-->
                         <div class="form-group {{ $errors->has('ldap_username_field') ? 'error' : '' }}">
                             <div class="col-md-3">

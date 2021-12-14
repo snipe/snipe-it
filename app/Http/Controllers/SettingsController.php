@@ -9,6 +9,7 @@ use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Group;
 use App\Notifications\FirstAdminNotification;
 use App\Notifications\MailTest;
 use Auth;
@@ -181,10 +182,24 @@ class SettingsController extends Controller
         $settings->auto_increment_assets = $request->input('auto_increment_assets', 0);
         $settings->auto_increment_prefix = $request->input('auto_increment_prefix');
 
+        $group = new Group();
+        $group->name = 'General';
+      
+        $groupPermissions = ['superuser' => -1, 'admin' => -1, 'assets.view' => 1, 'accessories.view' => 1,
+        'consumables.view' => 1,  'licenses.view' => 1,'components.view' => 1,  'kits.view' => 1, 'users.view' => 1];
+        $group->permissions = json_encode($groupPermissions);
+
         if ((! $user->isValid()) || (! $settings->isValid())) {
             return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
         } else {
             $user->save();
+            $group->save();
+
+            $data = array();
+            
+            $data[1] = ['permissions' => json_encode($groupPermissions)];
+            
+            $user->groups()->sync($data,false);
             Auth::login($user, true);
             $settings->save();
 

@@ -105,6 +105,13 @@ class AccessoryPresenter extends Presenter
                 'footerFormatter' => 'sumFormatterQuantity',
                 'class' => 'text-right',
             ], [
+	    	'field' => 'groups',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.groups'),
+                'visible' => true,
+                'formatter' => 'groupsFormatter',
+	    ], [
                 'field' => 'order_number',
                 'searchable' => true,
                 'sortable' => true,

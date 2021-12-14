@@ -11,6 +11,27 @@
 @section('inputFields')
 
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/components/table.title')])
+<div class="form-group">
+    <label for="groups[]" class="col-md-3 control-label">{{ trans('general.groups') }}</label>
+    <div class="col-md-7 col-sm-12 controls">
+        <select
+            name="groups[]"
+            aria-label="groups[]"
+            id="groups[]"
+            multiple="multiple"
+            class="form-control"
+            data-validation="required">
+
+            <option value="1">General</option>
+            @foreach ($groups as $id => $group)
+                <option value="{{ $id }}">
+                    {{ $group }}
+                </option>
+            @endforeach
+           
+        </select>
+    </div>
+   </div>
 @include ('partials.forms.edit.category-select', ['translated_name' => trans('general.category'), 'fieldname' => 'category_id','category_type' => 'component'])
 @include ('partials.forms.edit.quantity')
 @include ('partials.forms.edit.minimum_quantity')

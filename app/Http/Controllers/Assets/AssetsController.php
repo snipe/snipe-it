@@ -13,6 +13,7 @@ use App\Models\Company;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Group;
 use Auth;
 use Carbon\Carbon;
 use DB;
@@ -20,6 +21,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use Input;
 use Intervention\Image\Facades\Image;
 use League\Csv\Reader;
@@ -80,11 +82,20 @@ class AssetsController extends Controller
      */
     public function create(Request $request)
     {
+        $user =  User::find(Auth::id());
+
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
+        }
+        
         $this->authorize('create', Asset::class);
         $view = View::make('hardware/edit')
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('item', new Asset)
-            ->with('statuslabel_types', Helper::statusTypeList());
+            ->with('statuslabel_types', Helper::statusTypeList())
+            ->with('groups',$userGroups);
 
         if ($request->filled('model_id')) {
             $selected_model = AssetModel::find($request->input('model_id'));
@@ -205,6 +216,7 @@ class AssetsController extends Controller
         }
 
         if ($success) {
+            $asset->groups()->sync($request->input('groups'),false);
             // Redirect to the asset listing page
             return redirect()->route('hardware.index')
                 ->with('success', trans('admin/hardware/message.create.success'));
@@ -223,16 +235,38 @@ class AssetsController extends Controller
      */
     public function edit($assetId = null)
     {
-        if (! $item = Asset::find($assetId)) {
+
+        $user =  User::find(Auth::id());
+
+        // $userGroups = $user->groups()->pluck('name', 'id');
+
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
+        }
+
+        if (!$item = Asset::find($assetId)) {
             // Redirect to the asset management page with error
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
         //Handles company checks and permissions.
         $this->authorize($item);
 
-        return view('hardware/edit', compact('item'))
-            ->with('statuslabel_list', Helper::statusLabelList())
-            ->with('statuslabel_types', Helper::statusTypeList());
+        $assetGrp= $item->groups()->pluck('name', 'id')->toArray();
+            
+        $result = count(array_intersect($userGroups, $assetGrp));
+
+        if($result || $item->user_id == Auth::id()){
+
+            return view('hardware/edit', compact('item','assetGrp'))
+                    ->with('statuslabel_list', Helper::statusLabelList())
+                    ->with('statuslabel_types', Helper::statusTypeList())
+                    ->with('groups',$userGroups);
+
+        }else{
+            return redirect()->route('hardware.index')->with('error', 'You can not edit');
+        }
     }
 
     /**
@@ -359,6 +393,7 @@ class AssetsController extends Controller
 
 
         if ($asset->save()) {
+	    $asset->groups()->sync($request->input('groups'),false);
             return redirect()->route('hardware.show', $assetId)
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
@@ -384,21 +419,36 @@ class AssetsController extends Controller
 
         $this->authorize('delete', $asset);
 
-        DB::table('assets')
-            ->where('id', $asset->id)
-            ->update(['assigned_to' => null]);
+        $user =  User::find(Auth::id());
 
-        if ($asset->image) {
-            try {
-                Storage::disk('public')->delete('assets'.'/'.$asset->image);
-            } catch (\Exception $e) {
-                \Log::debug($e);
-            }
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
         }
+
+        $assetGrp= $asset->groups()->pluck('name', 'id')->toArray();
+
+        $result = count(array_intersect($userGroups, $assetGrp));
+        if($result || $asset->user_id == Auth::id()){
+            DB::table('assets')
+                ->where('id', $asset->id)
+                ->update(array('assigned_to' => null));
+
+            if ($asset->image) {
+                try  {
+                    Storage::disk('public')->delete('assets'.'/'.$asset->image);
+                } catch (\Exception $e) {
+                    \Log::debug($e);
+                }
+            }
 
         $asset->delete();
 
-        return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.delete.success'));
+            return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.delete.success'));
+        }else{
+            return redirect()->route('hardware.index')->with('error', 'You can not delete');
+        }
     }
 
     /**
@@ -534,6 +584,14 @@ class AssetsController extends Controller
 
         $this->authorize('create', $asset_to_clone);
 
+        $user =  User::find(Auth::id());
+
+        if($user->isSuperUser()){
+            $userGroups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $userGroups = $user->isAdminofGroup();
+        }
+
         $asset = clone $asset_to_clone;
         $asset->id = null;
         $asset->asset_tag = '';
@@ -543,7 +601,8 @@ class AssetsController extends Controller
         return view('hardware/edit')
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('statuslabel_types', Helper::statusTypeList())
-            ->with('item', $asset);
+            ->with('item', $asset)
+            ->with('groups',$userGroups);
     }
 
     /**

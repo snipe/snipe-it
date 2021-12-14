@@ -293,4 +293,127 @@ class Ldap extends Model
 
         return $results;
     }
+
+    static function findLdapUsersGroups($base_dn = null)
+    {
+
+        $ldapconn = Ldap::connectToLdap();
+        $ldap_bind = Ldap::bindAdminToLdap($ldapconn);
+        
+        $base_dn = Setting::getSettings()->ldap_grp_basedn;
+        
+        $filter = Setting::getSettings()->ldap_grp_filter;
+
+        // Set up LDAP pagination for very large databases
+        $page_size = 500;
+        $cookie = '';
+        $result_set = array();
+        $global_count = 0;
+
+        // Perform the search
+        do {
+            Log::debug("in do");
+            // Paginate (non-critical, if not supported by server)
+            if (!$ldap_paging = @ldap_control_paged_result($ldapconn, $page_size, false, $cookie)) {
+                throw new Exception('Problem with your LDAP connection. Try checking the Use TLS setting in Admin > Settings. ');
+            }
+
+            if ($filter != '' && substr($filter, 0, 1) != '(') { // wrap parens around NON-EMPTY filters that DON'T have them, for back-compatibility with AdLdap2-based filters
+                $filter = "($filter)";
+            } elseif ($filter == '') {
+                $filter = "(cn=*)";
+            }
+
+
+            $search_results = ldap_search($ldapconn, $base_dn, $filter);
+            
+
+            if (!$search_results) {
+                return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn)); // FIXME this is never called in any routed context - only from the Artisan command. So this redirect will never work.
+            }
+
+            // Get results from page
+            $results = ldap_get_entries($ldapconn, $search_results);
+           
+            if (!$results) {
+                return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn)); // FIXME this is never called in any routed context - only from the Artisan command. So this redirect will never work.
+            }
+
+            // Add results to result set
+            $global_count += $results['count'];
+            $result_set = array_merge($result_set, $results);
+
+            @ldap_control_paged_result_response($ldapconn, $search_results, $cookie);
+
+        } while ($cookie !== null && $cookie != '');
+
+        // Clean up after search
+        $result_set['count'] = $global_count;
+        $results = $result_set;
+        @ldap_control_paged_result($ldapconn, 0);
+
+        return $results;
+
+
+    }
+
+    static function findLdapUsersGroupsMembers($cn = null)
+    {
+
+        $ldapconn = Ldap::connectToLdap();
+        $ldap_bind = Ldap::bindAdminToLdap($ldapconn);
+
+        $base_dn = Setting::getSettings()->ldap_grp_basedn;
+
+        $filter = "&(objectCategory=Person)(sAMAccountName=*)(memberOf=CN=".$cn.",".Setting::getSettings()->ldap_grp_basedn.")";
+
+       // Set up LDAP pagination for very large databases
+       $page_size = 500;
+       $cookie = '';
+       $result_set = array();
+       $global_count = 0;
+
+       // Perform the search
+       do {
+           // Paginate (non-critical, if not supported by server)
+           if (!$ldap_paging = @ldap_control_paged_result($ldapconn, $page_size, false, $cookie)) {
+               throw new Exception('Problem with your LDAP connection. Try checking the Use TLS setting in Admin > Settings. ');
+           }
+
+           if ($filter != '' && substr($filter, 0, 1) != '(') { // wrap parens around NON-EMPTY filters that DON'T have them, for back-compatibility with AdLdap2-based filters
+               $filter = "($filter)";
+           }
+
+           Log::debug('soon search perform');
+           $search_results = ldap_search($ldapconn, $base_dn, $filter);
+           Log::debug('result: ');
+           
+           if (!$search_results) {
+               return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn)); // FIXME this is never called in any routed context - only from the Artisan command. So this redirect will never work.
+           }
+
+           // Get results from page
+           $results = ldap_get_entries($ldapconn, $search_results);
+           Log::debug($results);
+
+           if (!$results) {
+               return redirect()->route('users.index')->with('error', trans('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn)); // FIXME this is never called in any routed context - only from the Artisan command. So this redirect will never work.
+           }
+
+           // Add results to result set
+           $global_count += $results['count'];
+           $result_set = array_merge($result_set, $results);
+
+           @ldap_control_paged_result_response($ldapconn, $search_results, $cookie);
+
+       } while ($cookie !== null && $cookie != '');
+
+       // Clean up after search
+       $result_set['count'] = $global_count;
+       $results = $result_set;
+       @ldap_control_paged_result($ldapconn, 0);
+
+       return $results;
+
+    }
 }

@@ -103,7 +103,14 @@ class ComponentPresenter extends Presenter
                 'visible' => true,
                 'footerFormatter' => 'sumFormatterQuantity',
                 'class' => 'text-right',
-            ],
+            ], [
+	    	'field' => 'groups',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => trans('general.groups'),
+                'visible' => true,
+                'formatter' => 'groupsFormatter',
+	    ],
         ];
 
         $layout[] = [

@@ -23,6 +23,9 @@ use Redirect;
 use Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use View;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+use DB;
 
 /**
  * This controller handles all actions related to Users for
@@ -60,7 +63,12 @@ class UsersController extends Controller
     public function create(Request $request)
     {
         $this->authorize('create', User::class);
-        $groups = Group::pluck('name', 'id');
+
+        if(Auth::user()->isSuperUser()){
+            $groups = Group::pluck('name', 'id')->toArray();
+        }else{
+            $groups = Auth::user()->isAdminofGroup();
+        }
 
         $userGroups = collect();
 
@@ -92,6 +100,8 @@ class UsersController extends Controller
     {
         $this->authorize('create', User::class);
         $user = new User;
+
+        Log::debug('user save');
         //Username, email, and password need to be handled specially because the need to respect config values on an edit.
         $user->email = e($request->input('email'));
         $user->username = e($request->input('username'));
@@ -122,17 +132,39 @@ class UsersController extends Controller
         if (! Auth::user()->isSuperUser()) {
             unset($permissions_array['superuser']);
         }
-        $user->permissions = json_encode($permissions_array);
+        //$user->permissions =  json_encode($permissions_array);
 
         // we have to invoke the
         app(\App\Http\Requests\ImageUploadRequest::class)->handleImages($user, 600, 'image', 'avatars', 'avatar');
 
         if ($user->save()) {
-            if ($request->filled('groups')) {
-                $user->groups()->sync($request->input('groups'));
-            } else {
-                $user->groups()->sync([]);
+
+            $test = array('1');
+            $da=array();
+                
+            $grp= DB::table('permission_groups')->select('permissions')->where('name','General')->first();
+    
+            foreach($grp  as $g){
+                    $da[$test[0]] = ['permissions' => $g];
             }
+    
+            $user->groups()->sync($da,false);
+
+            if ($request->filled('groups')) {
+                //$user->groups()->sync($request->input('groups'));
+                $arr = $request->input('groups');
+                $data = array();
+
+                foreach($arr as $a){
+                
+                    $data[$a] = ['permissions' => json_encode($permissions_array)];
+                }
+                $user->groups()->sync($data,false);
+                
+            } 
+            // else {
+            //     $user->groups()->sync(array());
+            // }
 
             if (($request->input('email_user') == 1) && ($request->filled('email'))) {
                 // Send the credentials through email
@@ -180,10 +212,15 @@ class UsersController extends Controller
             $this->authorize('update', $user);
             $permissions = config('permissions');
 
-            $groups = Group::pluck('name', 'id');
+            if(Auth::user()->isSuperUser()){
+                $groups = Group::pluck('name', 'id')->toArray();
+            }else{
+                $groups = Auth::user()->isAdminofGroup();
+            }
 
             $userGroups = $user->groups()->pluck('name', 'id');
-            $user->permissions = $user->decodePermissions();
+            $user->permissions = $user->getPermission(Session::get('grp_id'));
+            
             $userPermissions = Helper::selectedPermissionsArray($permissions, $user->permissions);
             $permissions = $this->filterDisplayable($permissions);
 
@@ -238,10 +275,6 @@ class UsersController extends Controller
             }
         }
 
-        // Only save groups if the user is a super user
-        if (Auth::user()->isSuperUser()) {
-            $user->groups()->sync($request->input('groups'));
-        }
 
         // Update the user
         if ($request->filled('username')) {
@@ -286,7 +319,28 @@ class UsersController extends Controller
             $permissions_array['superuser'] = $orig_superuser;
         }
 
-        $user->permissions = json_encode($permissions_array);
+        //$user->permissions =  json_encode($permissions_array);
+
+         // Only save groups if the user is a super user
+         if (Auth::user()->isSuperUser() || Auth::user()->hasAccess('admin')) {
+            //$user->groups()->sync($request->input('groups'));
+            Log::debug($request->input('groups'));
+            $arr = $request->input('groups');
+            $data = array();
+            foreach($arr as $a){
+                // $exist = $user->groups()->where('group_id', $a)->exists();
+                // Log::debug('exist '.$exist);
+                //$message->users()->updateExistingPivot($user, array('status' => 1), false);
+                // if($exist == 1){
+                //     $user->groups()->updateExistingPivot($user, array('permissions' => json_encode($permissions_array)), false);
+                // }
+                $data[$a] = ['permissions' => json_encode($permissions_array)];
+            }
+
+            Log::debug($data);
+
+            $user->groups()->sync($data,false);
+        }
 
         // Handle uploaded avatar
         app(\App\Http\Requests\ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
@@ -352,8 +406,9 @@ class UsersController extends Controller
             }
 
             // Delete the user
-            $user->delete();
+            //$user->delete();
 
+            $user->groups()->detach(Session::get('grp_id'));
             // Prepare the success message
             // Redirect to the user management page
             return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));

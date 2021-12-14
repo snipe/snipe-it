@@ -6,17 +6,46 @@ use App\Helpers\Helper;
 use App\Models\Actionlog;
 use App\Models\Setting;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
+use Auth;
 
 class ActionlogsTransformer
 {
     public function transformActionlogs(Collection $actionlogs, $total)
     {
-        $array = [];
+        $array = array();
+        $myArr = array();
+        $userData = Auth::user()->isAdminofGroup();
+
+        foreach($userData as $id => $group){
+            array_push($myArr,$id);
+        }
+       
         $settings = Setting::getSettings();
         foreach ($actionlogs as $actionlog) {
-            $array[] = self::transformActionlog($actionlog, $settings);
-        }
 
+           // Log::debug($actionlog);
+            if(!Auth::user()->isSuperUser()){
+                $asset_grp_id = $actionlog->item->groups;
+                $assetGrpArr = array();
+                
+                foreach ($asset_grp_id as $group){
+                    array_push($assetGrpArr,$group->id);
+                }
+
+                if($assetGrpArr!=null){
+                   
+                    $result = count(array_intersect($myArr, $assetGrpArr));
+                   
+                    if($result!=0){
+                        $array[] = self::transformActionlog($actionlog, $settings);
+                    }
+
+                }
+            }else{
+                $array[] = self::transformActionlog($actionlog, $settings);
+            }
+        }
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 

@@ -92,6 +92,13 @@ class AssetPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'statuslabelsLinkObjFormatter',
             ], [
+	    	'field' => 'groups',
+                'searchable' => false,
+                'sortable' => false,
+                'title' => trans('general.groups'),
+                'visible' => true,
+                'formatter' => 'groupsFormatter',
+	    ], [
                 'field' => 'assigned_to',
                 'searchable' => true,
                 'sortable' => true,

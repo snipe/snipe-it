@@ -17,39 +17,58 @@ class AssetCountForSidebar
      */
     public function handle($request, Closure $next)
     {
-        try {
-            $total_rtd_sidebar = Asset::RTD()->count();
-            view()->share('total_rtd_sidebar', $total_rtd_sidebar);
-        } catch (\Exception $e) {
-            \Log::debug($e);
-        }
+        $myArr = array();
+        if(Auth::user()){
+            $userData = Auth::user()->groups;
 
-        try {
-            $total_deployed_sidebar = Asset::Deployed()->count();
-            view()->share('total_deployed_sidebar', $total_deployed_sidebar);
-        } catch (\Exception $e) {
-            \Log::debug($e);
-        }
-
-        try {
-            $total_archived_sidebar = Asset::Archived()->count();
-            view()->share('total_archived_sidebar', $total_archived_sidebar);
-        } catch (\Exception $e) {
-            \Log::debug($e);
-        }
-
-        try {
-            $total_pending_sidebar = Asset::Pending()->count();
-            view()->share('total_pending_sidebar', $total_pending_sidebar);
-        } catch (\Exception $e) {
-            \Log::debug($e);
-        }
-
-        try {
-            $total_undeployable_sidebar = Asset::Undeployable()->count();
-            view()->share('total_undeployable_sidebar', $total_undeployable_sidebar);
-        } catch (\Exception $e) {
-            \Log::debug($e);
+            foreach($userData as $userGroup){
+                array_push($myArr,$userGroup->id);
+            }
+            try
+            {
+                $total_rtd_sidebar = Asset::whereHas('groups', function($query) use ($myArr){
+                    $query->whereIn('group_id', $myArr);
+                })->RTD()->count();
+                view()->share('total_rtd_sidebar', $total_rtd_sidebar);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
+    
+            try {
+                $total_deployed_sidebar = Asset::whereHas('groups', function($query) use ($myArr){
+                    $query->whereIn('group_id', $myArr);
+                })->Deployed()->count();
+                view()->share('total_deployed_sidebar', $total_deployed_sidebar);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
+    
+            try {
+                $total_archived_sidebar = Asset::whereHas('groups', function($query) use ($myArr){
+                    $query->whereIn('group_id', $myArr);
+                })->Archived()->count();
+                view()->share('total_archived_sidebar', $total_archived_sidebar);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
+    
+            try {
+                $total_pending_sidebar = Asset::whereHas('groups', function($query) use ($myArr){
+                    $query->whereIn('group_id', $myArr);
+                })->Pending()->count();
+                view()->share('total_pending_sidebar', $total_pending_sidebar);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
+    
+            try {
+                $total_undeployable_sidebar = Asset::whereHas('groups', function($query) use ($myArr){
+                    $query->whereIn('group_id', $myArr);
+                })->Undeployable()->count();
+                view()->share('total_undeployable_sidebar', $total_undeployable_sidebar);
+            } catch (\Exception $e) {
+                \Log::debug($e);
+            }
         }
 
         return $next($request);

@@ -1061,6 +1061,9 @@
                         <!-- checked out assets table -->
                         <div class="row">
                             <div class="col-md-12">
+                           <!--<p>"{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}"</p> -->
+                           <!--<p>{{$asset->user_id}}</p>-->
+                           <!--<p>{{Auth::user()}}</p>-->
                                 <table
                                         class="table table-striped snipe-table"
                                         id="assetHistory"

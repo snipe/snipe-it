@@ -42,10 +42,12 @@
 @stop
 
 @section('header_right')
+@can('admin')
   <a href="{{ route('reports/custom') }}" style="margin-right: 5px;" class="btn btn-default">
     Custom Export</a>
   @can('create', \App\Models\Asset::class)
   <a href="{{ route('hardware.create') }}" class="btn btn-primary pull-right"></i> {{ trans('general.create') }}</a>
+  @endcan
   @endcan
 
 @stop
@@ -85,7 +87,9 @@
                     </div>
                    
               @endif
-
+                <!--<p>{{Auth::id()}}</p>-->
+                <!--<p>{{Auth::user()->groups}}</p>-->
+                
               <table
                 data-advanced-search="true"
                 data-click-to-select="true"

@@ -7,6 +7,8 @@ use App\Models\Component;
 use Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ComponentsTransformer
 {
@@ -57,6 +59,34 @@ class ComponentsTransformer
             'delete' => Gate::allows('delete', Component::class),
         ];
         $array += $permissions_array;
+
+        $numGroups = $component->groups->count();
+        if($numGroups > 0)
+        {
+            $groups["total"] = $numGroups; 
+            
+            foreach($component->groups as $group)
+            {
+                if(!Auth::user()->isSuperUser()){
+                    $user_groups = Auth::user()->groups;
+                    if($user_groups->contains('id',$group->id)){
+                        $groups["rows"][] = [
+                            'id' => (int) $group->id,
+                            'name' => e($group->name)
+                        ];
+                    }
+                }else{
+                    $groups["rows"][] = [
+                        'id' => (int) $group->id,
+                        'name' => e($group->name)
+                    ];
+                }
+            }
+            $array["groups"] = $groups;
+        }
+        else {
+            $array["groups"] = null;
+        }
 
         return $array;
     }

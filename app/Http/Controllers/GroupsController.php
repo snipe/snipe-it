@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /**
  * This controller handles all actions related to User Groups for
@@ -26,6 +27,7 @@ class GroupsController extends Controller
     public function index()
     {
         // Show the page
+        $this->authorize('view', Group::class);
         return view('groups/index');
     }
 
