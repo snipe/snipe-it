@@ -18,7 +18,7 @@
       </button>
       
       <ul class="dropdown-menu pull-right" role="menu22">
-        @if ($component->assigned_to != ''))
+        @if ($component->assigned_to != '')
           @can('checkin', $component)
           <li role="menuitem">
             <a href="{{ route('checkin/component', $component->id) }}">
