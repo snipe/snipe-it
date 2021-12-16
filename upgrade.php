@@ -4,14 +4,14 @@
 $required_version = '7.4.0';
 
 if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_getpwuid'))) {
-	echo "Skipping user check as it is not supported on Windows or Posix is not installed on this server. \n";
+    echo "Skipping user check as it is not supported on Windows or Posix is not installed on this server. \n";
 } else {
-	$pwu_data = posix_getpwuid(posix_geteuid());
-	$username = $pwu_data['name'];
+    $pwu_data = posix_getpwuid(posix_geteuid());
+    $username = $pwu_data['name'];
 
-	if (($username=='root') || ($username=='admin')) {
-		die("\nERROR: This script should not be run as root/admin. Exiting.\n\n");
-	}
+    if (($username=='root') || ($username=='admin')) {
+        die("\nERROR: This script should not be run as root/admin. Exiting.\n\n");
+    }
 }
 
 
@@ -91,19 +91,19 @@ foreach ($required_exts_array as $required_ext) {
                 if (in_array($require_either_value, $loaded_exts_array)) {
                     $ext_installed .=  '√ '.$require_either_value." is installed!\n";
                     break;
-                // If no match, add it to the string for errors
+                    // If no match, add it to the string for errors
                 } else {
                     $ext_missing .=  '✘ MISSING PHP EXTENSION: '.str_replace("|", " OR ", $required_ext)."\n";
                     break;
                 }
             }
 
-        // If this isn't an either/or option, just add it to the string of errors conventionally
+            // If this isn't an either/or option, just add it to the string of errors conventionally
         } else {
             $ext_missing .=  '✘ MISSING PHP EXTENSION: '.$required_ext."\n";
         }
 
-    // The required extension string was found in the array of installed extensions - yay!
+        // The required extension string was found in the array of installed extensions - yay!
     } else {
         $ext_installed .=  '√ '.$required_ext." is installed!\n";
     }
@@ -116,7 +116,7 @@ if ($ext_missing!='') {
     echo "--------------------------------------------------------\n";
 
     foreach ($loaded_exts_array as $loaded_ext) {
-       echo "- ".$loaded_ext."\n";
+        echo "- ".$loaded_ext."\n";
     }
 
     echo "--------------------- !! ERROR !! ----------------------\n";
@@ -258,5 +258,4 @@ echo "---------------------- FINISHED! -----------------------\n";
 echo "All done! Clear your browser cookies and re-login to use \n";
 echo "your upgraded Snipe-IT!\n";
 echo "--------------------------------------------------------\n\n";
-
 
