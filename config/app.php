@@ -255,9 +255,11 @@ return [
     | Require SAML Login
     |--------------------------------------------------------------------------
     |
-    | Disable the ability to login via form login, and require all logins to
-    | process via SAML login. (If you are not using SAML, this option should
-    | be left alone.)
+    | Disable the ability to login via form login, and disables the 'nosaml'
+    | workaround. It requires all logins to process via SAML login.
+    | (This is for high security setups. If your SAML configuration is not
+    | working, this option should be set to false. This option is not needed
+    | to successfully configure SAML authentication.)
     |
     */
 

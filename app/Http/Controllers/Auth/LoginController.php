@@ -76,7 +76,7 @@ class LoginController extends Controller
 
         //If the environment is set to ALWAYS require SAML, go straight to the SAML route.
         //We don't need to check other settings, as this should override those.
-        if((env("REQUIRE_SAML", false)))
+        if(config('REQUIRE_SAML'))
         {
             return redirect()->route('saml.login');
         }
@@ -209,7 +209,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         //If the environment is set to ALWAYS require SAML, return access denied
-        if((env("REQUIRE_SAML", false)))
+        if(config('REQUIRE_SAML'))
         {
             return view('errors.403');
         }
