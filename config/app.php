@@ -250,8 +250,19 @@ return [
 
     'enable_csp' => env('ENABLE_CSP', false),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Require SAML Login
+    |--------------------------------------------------------------------------
+    |
+    | Disable the ability to login via form login, and require all logins to
+    | process via SAML login. (If you are not using SAML, this option should
+    | be left alone.)
+    |
+    */
 
-
+    'require_saml' => env('REQUIRE_SAML', false),
+    
 
     /*
     |--------------------------------------------------------------------------

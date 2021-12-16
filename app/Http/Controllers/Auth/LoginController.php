@@ -74,6 +74,12 @@ class LoginController extends Controller
             return redirect()->intended('/');
         }
 
+        //If the environment is set to ALWAYS require SAML, go straight to the SAML route.
+        if((env("REQUIRE_SAML", false)))
+        {
+            return redirect()->route('saml.login');
+        }
+
         if ($this->saml->isEnabled() && Setting::getSettings()->saml_forcelogin == '1' && ! ($request->has('nosaml') || $request->session()->has('error'))) {
             return redirect()->route('saml.login');
         }
