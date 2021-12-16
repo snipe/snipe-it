@@ -243,9 +243,6 @@
             </div>
 
 
-
-
-
             @if ($customfields->count() > 0)
               <div class="checkbox col-md-12">
                 <h2>Custom Fields:</h4>

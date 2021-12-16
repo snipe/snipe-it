@@ -176,7 +176,7 @@
     'remove_company'        => 'Retirer l\'association avec l\'organisation',
     'reports'				=> 'Rapports',
     'restored'				=> 'restauré',
-    'restore'				=> 'Restore',
+    'restore'				=> 'Restaurer',
     'requested'				=> 'Demandé',
     'request_canceled'      => 'Demande annulée',
     'save'  				=> 'Sauvegarder',

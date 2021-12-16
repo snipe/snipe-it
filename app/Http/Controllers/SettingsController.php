@@ -21,6 +21,7 @@ use Image;
 use Input;
 use Redirect;
 use Response;
+use App\Http\Requests\SlackSettingsRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
 
@@ -427,7 +428,9 @@ class SettingsController extends Controller
             // If they are uploading an image, validate it and upload it
         }
 
+
         $setting = $request->handleImages($setting, 600, 'label_logo', '', 'label_logo');
+
 
         if ('1' == $request->input('clear_label_logo')) {
             Storage::disk('public')->delete($setting->label_logo);
@@ -659,11 +662,15 @@ class SettingsController extends Controller
      *
      * @return View
      */
-    public function postSlack(Request $request)
+    public function postSlack(SlackSettingsRequest $request)
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
+
+        $setting->slack_endpoint = $request->input('slack_endpoint');
+        $setting->slack_channel = $request->input('slack_channel');
+        $setting->slack_botname = $request->input('slack_botname');
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
@@ -826,6 +833,8 @@ class SettingsController extends Controller
         $setting->labels_pageheight = $request->input('labels_pageheight');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
+
+
 
         if ($request->filled('labels_display_name')) {
             $setting->labels_display_name = 1;
@@ -1005,10 +1014,10 @@ class SettingsController extends Controller
      */
     public function getBackups()
     {
+
         $path = 'app/backups';
         $backup_files = Storage::files($path);
         $files_raw = [];
-
 
         if (count($backup_files) > 0) {
             for ($f = 0; $f < count($backup_files); $f++) {
@@ -1027,6 +1036,7 @@ class SettingsController extends Controller
                         
                     ];
                 }
+
                
             }
         }

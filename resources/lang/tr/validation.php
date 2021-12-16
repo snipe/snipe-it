@@ -89,7 +89,7 @@ return array(
     'uploaded'             => ': Özniteliği yüklenemedi.',
     'url'                  => ':attribute biçim geçersiz.',
     "unique_undeleted"     => ":attribute benzersiz olmalıdır.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    "non_circular"         => ":attribute döngüsel bir başvuru oluşturmamalıdır.",
 
     /*
     |--------------------------------------------------------------------------
