@@ -19,8 +19,8 @@ if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_get
 // otherwise just use master
 (array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
 
-//Check if the user wants to require a successful backup to proceed with an upgrade
-(array_key_exists('2', $argv)) ? $force_backup = 1 : $force_backup = 0;
+//Check if the user wants to force past any backup errors
+(array_key_exists('2', $argv)) ? $force_backup = 0 : $force_backup = 1;
 
 echo "--------------------------------------------------------\n";
 echo "WELCOME TO THE SNIPE-IT UPGRADER! \n";
@@ -157,8 +157,6 @@ try {
         echo "------------------------- :( ---------------------------\n";
         exit;
     } else {
-        echo "--------------------- !! ERROR !! ----------------------\n";
-        echo $e;
         echo "-----------------------  Notice  -----------------------\n";
         echo "The backup failed, but it technically doesn't affect \n";
         echo "the upgrade process. \n\n";
