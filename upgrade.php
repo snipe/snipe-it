@@ -19,18 +19,22 @@ if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_get
 // otherwise just use master
 (array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
 
+//Check if the user wants to force past any backup errors
+(array_key_exists('2', $argv)) ? $force_backup = 0 : $force_backup = 1;
+
 echo "--------------------------------------------------------\n";
 echo "WELCOME TO THE SNIPE-IT UPGRADER! \n";
 echo "--------------------------------------------------------\n\n";
 echo "This script will attempt to: \n\n";
 echo "- check your PHP version and extension requirements \n";
+echo "- perform a backup of your application data \n";
 echo "- do a git pull to bring you to the latest version \n";
 echo "- run composer install to get your vendors up to date \n";
 echo "- run migrations to get your schema up to date \n";
 echo "- clear out old cache settings\n\n";
 
 echo "--------------------------------------------------------\n";
-echo "STEP 1: Checking PHP requirements: \n";
+echo "Step 1: Checking PHP requirements: \n";
 echo "--------------------------------------------------------\n\n";
 
 if (version_compare(PHP_VERSION, $required_version, '<')) {
@@ -133,20 +137,45 @@ if ($ext_missing!='') {
 
 
 echo "--------------------------------------------------------\n";
-echo "STEP 2: Backing up database: \n";
+echo "Step 2: Backing up database: \n";
 echo "--------------------------------------------------------\n\n";
-$backup = shell_exec('php artisan snipeit:backup');
-echo '-- '.$backup."\n\n";
+try {
+    $backup = shell_exec('php artisan snipeit:backup');
+    echo '-- ' . $backup . "\n\n";
+} catch (Exception $e) {
+    echo "--------------------------------------------------------\n";
+    echo 'BACKUP FAILED!!!';
+    echo "--------------------------------------------------------\n\n";
+    if ($force_backup == 1){
+        echo "--------------------- !! ERROR !! ----------------------\n";
+        echo $e;
+        echo "------------------------- :( ---------------------------\n";
+        echo "ABORTING THE INSTALLER  \n";
+        echo "The backup has failed. Please correct the issue with the backup,\n";
+        echo "or take a manual backup, and proceed with the upgrade using...\n";
+        echo "php upgrade.php master force_upgrade\n";
+        echo "(If you are using an alternative branch,\n";
+        echo " please change 'master' to the branch for your installation.)\n";
+        echo "------------------------- :( ---------------------------\n";
+        exit;
+    } else {
+        echo "-----------------------  Notice  -----------------------\n";
+        echo "The force flag is present.\n";
+        echo "The backup failed but we are proceeding anyway...\n";
+        echo "--------------------------------------------------------\n\n";
+    }
+}
+
 
 echo "--------------------------------------------------------\n";
-echo "STEP 3: Putting application into maintenance mode: \n";
+echo "Step 3: Putting application into maintenance mode: \n";
 echo "--------------------------------------------------------\n\n";
 $down = shell_exec('php artisan down');
 echo '-- '.$down."\n";
 
 
 echo "--------------------------------------------------------\n";
-echo "STEP 4: Pulling latest from Git (".$branch." branch): \n";
+echo "Step 4: Pulling latest from Git (".$branch." branch): \n";
 echo "--------------------------------------------------------\n\n";
 $git_version = shell_exec('git --version');
 
