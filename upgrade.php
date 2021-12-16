@@ -19,8 +19,8 @@ if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_get
 // otherwise just use master
 (array_key_exists('1', $argv)) ? $branch = $argv[1] : $branch = 'master';
 
-//Check if the user wants to force past any backup errors
-(array_key_exists('2', $argv)) ? $force_backup = 0 : $force_backup = 1;
+//Check if the user wants to require a successful backup to proceed with an upgrade
+(array_key_exists('2', $argv)) ? $force_backup = 1 : $force_backup = 0;
 
 echo "--------------------------------------------------------\n";
 echo "WELCOME TO THE SNIPE-IT UPGRADER! \n";
@@ -151,17 +151,21 @@ try {
         echo $e;
         echo "------------------------- :( ---------------------------\n";
         echo "ABORTING THE INSTALLER  \n";
-        echo "The backup has failed. Please correct the issue with the backup,\n";
-        echo "or take a manual backup, and proceed with the upgrade using...\n";
-        echo "php upgrade.php master force_upgrade\n";
-        echo "(If you are using an alternative branch,\n";
-        echo " please change 'master' to the branch for your installation.)\n";
+        echo "The backup has failed. Please correct the issue with the \n";
+        echo "backup, or take a manual backup, and proceed with the \n";
+        echo "upgrade by removing the 'must_backup' flag. \n";
         echo "------------------------- :( ---------------------------\n";
         exit;
     } else {
+        echo "--------------------- !! ERROR !! ----------------------\n";
+        echo $e;
         echo "-----------------------  Notice  -----------------------\n";
-        echo "The force flag is present.\n";
-        echo "The backup failed but we are proceeding anyway...\n";
+        echo "The backup failed, but it technically doesn't affect \n";
+        echo "the upgrade process. \n\n";
+        echo "We will now continue.\n\n";
+        echo "If you would like to have the upgrade process \n";
+        echo "*require* a successful backup to proceed, please \n";
+        echo "refer to the documentation to set this up. \n";
         echo "--------------------------------------------------------\n\n";
     }
 }
