@@ -21,7 +21,6 @@ use Image;
 use Input;
 use Redirect;
 use Response;
-use App\Helpers\StorageHelper;
 use App\Http\Requests\SlackSettingsRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;

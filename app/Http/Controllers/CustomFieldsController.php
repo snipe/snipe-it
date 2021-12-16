@@ -153,10 +153,6 @@ class CustomFieldsController extends Controller
                 ->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
 
-            return redirect()->route('fields.index')
-                ->with('success', trans('admin/custom_fields/message.field.delete.success'));
-        }
-
         return redirect()->back()->withErrors(['message' => 'Field does not exist']);
     }
 

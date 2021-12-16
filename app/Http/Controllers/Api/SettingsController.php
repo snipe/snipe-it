@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator; 
-use App\Models\Ldap; // forward-port of v4 LDAP model for Sync
 use App\Http\Requests\SlackSettingsRequest;
 
 
@@ -166,7 +165,7 @@ class SettingsController extends Controller
         }
     }
 
-    public function slacktest(Request $request)
+    public function slacktest(SlackSettingsRequest $request)
     {
 
         $validator = Validator::make($request->all(), [

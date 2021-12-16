@@ -166,7 +166,7 @@
             $("#slackteststatus").html('');
             $("#slacktesticon").html('<i class="fas fa-spinner spin"></i> Sending Slack test message...');
             $.ajax({
-                {
+                
                 // If I comment this back in, I always get a success (200) message
                 // Without it, I get 
                     //  beforeSend: function (xhr) { 
