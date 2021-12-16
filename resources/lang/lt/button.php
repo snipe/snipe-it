@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'actions' 	                => 'Veiksmai',
     'add'    	                => 'Pridėti naują',
     'cancel'                    => 'Atšaukti',
@@ -11,7 +11,8 @@ return [
     'request'                   => 'Užklausti',
     'submit'  	                => 'Išsaugoti',
     'upload'                    => 'Įkelti',
-    'select_file'				=> 'Pasirinkite failą ...',
+	'select_file'				=> 'Pasirinkite failą ...',
     'select_files'				=> 'Pasirinkite failą...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-];
+    'send_password_link'       => 'Send Password Reset Link',
+);

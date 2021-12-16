@@ -176,7 +176,7 @@
     'remove_company'        => '会社の団体を取り除く',
     'reports'				=> 'レポート',
     'restored'				=> '復元',
-    'restore'				=> 'Restore',
+    'restore'				=> '復元',
     'requested'				=> '要求済',
     'request_canceled'      => 'リクエストキャンセル',
     'save'  				=> '保存',
