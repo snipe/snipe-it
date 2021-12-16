@@ -2479,10 +2479,55 @@
       ]
     },
     {
+      "login": "leitwerk-ag",
+      "name": "LEITWERK AG",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24418301?v=4",
+      "profile": "https://www.leitwerk.de/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "adamboutcher",
+      "name": "Adam",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1911435?v=4",
+      "profile": "http://www.aboutcher.co.uk",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sneak-it",
+      "name": "Ian",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16104273?v=4",
+      "profile": "https://snksrv.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "bestlong",
+      "name": "Shao Yu-Lung (Allen)",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4023909?v=4",
+      "profile": "http://blog.bestlong.idv.tw/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "PlaneNuts",
       "name": "PlaneNuts",
       "avatar_url": "https://avatars.githubusercontent.com/u/88776392?v=4",
       "profile": "https://github.com/PlaneNuts",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "exula",
+      "name": "Bradley Coudriet",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3842948?v=4",
+      "profile": "http://bjcpgd.cias.rit.edu",
       "contributions": [
         "code"
       ]

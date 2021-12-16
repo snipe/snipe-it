@@ -13,6 +13,7 @@ return [
     'user_deleted_warning'      => '利用者が削除されました。これらを編集するにはユーザーを復旧するか、新しい資産を割り当てなければなりません。',
     'ldap_not_configured'        => 'LDAPの統合は、インストール時に設定されません。',
     'password_resets_sent'      => '有効なメールアドレスを持っている選択されたユーザーにパスワードリセットのリンクが送信されました。',
+    'password_reset_sent'       => 'パスワードリセットのURLが:emailに送信されました。',
 
     'success' => [
         'create'    => '利用者が正常に作成されました。',

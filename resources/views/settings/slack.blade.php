@@ -158,7 +158,6 @@
 
         $('input:text').keyup(fieldcheck); // if *any* text field changes, we recalculate button states
 
-
         $("#slacktest").click(function() {
 
             $("#slacktestrow").removeClass('text-success');
@@ -167,11 +166,22 @@
             $("#slackteststatus").html('');
             $("#slacktesticon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.slack.sending') }}');
             $.ajax({
+                
+                // If I comment this back in, I always get a success (200) message
+                // Without it, I get 
+                    //  beforeSend: function (xhr) { 
+                    //  xhr.setRequestHeader("Content-Type","application/json");
+                    // xhr.setRequestHeader("Accept","text/json");
+                    // },
+            
+                
                 url: '{{ route('api.settings.slacktest') }}',
                 type: 'POST',
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
+                //    'Accept': 'application/json',
+                //    'Content-Type': 'application/json',
                 },
                 data: {
                     'slack_endpoint': $('#slack_endpoint').val(),
@@ -181,6 +191,10 @@
                 },
 
                 dataType: 'json',
+
+                accepts: {
+                    text: "application/json"
+                },
 
                 success: function (data) {
                     $('#save_slack').removeAttr('disabled');

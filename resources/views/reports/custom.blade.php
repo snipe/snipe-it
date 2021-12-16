@@ -243,9 +243,6 @@
             </div>
 
 
-
-
-
             @if ($customfields->count() > 0)
               <div class="checkbox col-md-12">
                 <h2>{{ trans('admin/custom_fields/general.custom_fields') }}</h>:</h4>
