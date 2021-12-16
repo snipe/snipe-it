@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'actions' 	                => 'Aktionen',
     'add'    	                => 'Hinzufügen',
     'cancel'                    => 'Abbrechen',
@@ -11,7 +11,8 @@ return [
     'request'                   => 'Anfragen',
     'submit'  	                => 'Abschicken',
     'upload'                    => 'Hochladen',
-    'select_file'				=> 'Datei auswählen...',
+	'select_file'				=> 'Datei auswählen...',
     'select_files'				=> 'Dateien auswählen...',
     'generate_labels'           => '{1} Label generieren|[2,*] Labels generieren',
-];
+    'send_password_link'       => 'Link zum Zurücksetzen des Passworts senden',
+);

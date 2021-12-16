@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'Velja skrá...',
     'select_files'				=> 'Velja skrár...',
     'generate_labels'           => 'Útbúa límmiða',
+    'send_password_link'       => 'Send Password Reset Link',
 );

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'asset_tag'   	=> 'Varade silt',
     'asset_model'       => 'Mudel',
@@ -20,6 +20,6 @@ return [
     'title'      	=> 'Vara',
     'image'		=> 'Seadme pilt',
     'days_without_acceptance' => 'Päeva ilma vastuvõtmiseta',
-    'monthly_depreciation' => 'Monthly Depreciation',
+    'monthly_depreciation' => 'Igakuine amortatsioon'
 
-];
+);

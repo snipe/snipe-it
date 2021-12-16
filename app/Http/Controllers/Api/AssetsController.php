@@ -115,7 +115,8 @@ class AssetsController extends Controller
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
             ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier'); //it's tempting to add assetlogs here, but don't - it blows up update-heavy installations
+                'model.category', 'model.manufacturer', 'model.fieldset','supplier'); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
+
 
         // These are used by the API to query against specific ID numbers.
         // They are also used by the individual searches on detail pages like
