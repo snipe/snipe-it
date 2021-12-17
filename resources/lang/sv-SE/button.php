@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'Välj fil...',
     'select_files'				=> 'Välj filer...',
     'generate_labels'           => '{1} Generera etikett|[2,*]] Generera etiketter',
+    'send_password_link'       => 'Send Password Reset Link',
 );

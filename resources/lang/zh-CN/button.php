@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'actions' 	                => '操作',
     'add'    	                => '新增',
     'cancel'                    => '取消',
@@ -11,7 +11,8 @@ return [
     'request'                   => '申请',
     'submit'  	                => '提交',
     'upload'                    => '上传',
-    'select_file'				=> '选择文件...',
+	'select_file'				=> '选择文件...',
     'select_files'				=> '选择文件...',
     'generate_labels'           => '{1} 生成标签|[2,*] 生成标签',
-];
+    'send_password_link'       => '发送密码重置链接',
+);

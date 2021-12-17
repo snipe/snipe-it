@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator; // forward-port of v4 LDAP model for Sync
+use Illuminate\Support\Facades\Validator; 
+use App\Http\Requests\SlackSettingsRequest;
+
 
 class SettingsController extends Controller
 {
@@ -76,6 +78,7 @@ class SettingsController extends Controller
             ], 400);
         }
 
+
         Log::info('Preparing to get sample user set from LDAP directory');
         // Get a sample of 10 users so user can verify the data is correct
         $settings = Setting::getSettings();
@@ -119,11 +122,12 @@ class SettingsController extends Controller
 
     public function ldaptestlogin(Request $request, LdapAd $ldap)
     {
+
         if (Setting::getSettings()->ldap_enabled != '1') {
             \Log::debug('LDAP is not enabled. Cannot test.');
-
             return response()->json(['message' => 'LDAP is not enabled, cannot test.'], 400);
         }
+
 
         $rules = [
             'ldaptest_user' => 'required',
@@ -137,6 +141,7 @@ class SettingsController extends Controller
 
             return response()->json(['message' => $validator->errors()->all()], 400);
         }
+
 
         \Log::debug('Preparing to test LDAP login');
         try {
@@ -160,14 +165,19 @@ class SettingsController extends Controller
         }
     }
 
-    public function slacktest(Request $request)
+    public function slacktest(SlackSettingsRequest $request)
     {
 
-        // Only attempt the slack request if the validation passes
-        if ($request->validate([
-            'slack_endpoint'   => 'url|required_with:slack_channel|starts_with:https://hooks.slack.com|nullable',
-            'slack_channel'   => 'required_with:slack_endpoint|starts_with:#|nullable',
-        ])) {
+        $validator = Validator::make($request->all(), [
+            'slack_endpoint'                      => 'url|required_with:slack_channel|starts_with:https://hooks.slack.com/|nullable',
+            'slack_channel'                       => 'required_with:slack_endpoint|starts_with:#|nullable',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Validation failed', 'errors' => $validator->errors()], 422);
+        }
+
+        // If validation passes, continue to the curl request
             $slack = new Client([
                 'base_url' => e($request->input('slack_endpoint')),
                 'defaults' => [
@@ -185,15 +195,16 @@ class SettingsController extends Controller
 
             try {
                 $slack->post($request->input('slack_endpoint'), ['body' => $payload]);
-
                 return response()->json(['message' => 'Success'], 200);
-            } catch (\Exception $e) {
-                return response()->json(['message' => 'Oops! Please check the channel name and webhook endpoint URL. Slack responded with: '.$e->getMessage()], 400);
-            }
-        }
 
+            } catch (\Exception $e) {
+                return response()->json(['message' => 'Please check the channel name and webhook endpoint URL ('.e($request->input('slack_endpoint')).'). Slack responded with: '.$e->getMessage()], 400);
+            }
+
+        //} 
         return response()->json(['message' => 'Something went wrong :( '], 400);
     }
+
 
     /**
      * Test the email configuration
@@ -213,9 +224,10 @@ class SettingsController extends Controller
                 return response()->json(['message' => $e->getMessage()], 500);
             }
         }
-
         return response()->json(['message' => 'Mail would have been sent, but this application is in demo mode! '], 200);
+
     }
+
 
     /**
      * Delete server-cached barcodes
@@ -239,6 +251,7 @@ class SettingsController extends Controller
             if ($extension == 'png') {
                 \Log::debug('Deleting: '.$file);
 
+
                 try {
                     Storage::disk('public')->delete($file);
                     \Log::debug('Deleting: '.$file);
@@ -251,6 +264,10 @@ class SettingsController extends Controller
 
         return response()->json(['message' => 'Deleted '.$file_count.' barcodes'], 200);
     }
+
+
+
+
 
     /**
      * Get a list of login attempts
