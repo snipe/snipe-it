@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'actions' 	                => 'aksies',
     'add'    	                => 'Voeg nuwe',
     'cancel'                    => 'kanselleer',
@@ -11,7 +11,8 @@ return [
     'request'                   => 'versoek',
     'submit'  	                => 'Indien',
     'upload'                    => 'oplaai',
-    'select_file'				=> 'Kies lêer ...',
+	'select_file'				=> 'Kies lêer ...',
     'select_files'				=> 'Select Files...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-];
+    'send_password_link'       => 'Send Password Reset Link',
+);

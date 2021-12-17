@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'asset_tag'   	=> 'Tag Harta',
     'asset_model'       => 'Model',
@@ -20,6 +20,6 @@ return [
     'title'      	=> 'Harta ',
     'image'		=> 'Imej Peranti',
     'days_without_acceptance' => 'Hari Tanpa Penerimaan',
-    'monthly_depreciation' => 'Monthly Depreciation',
+    'monthly_depreciation' => 'Susut Nilai Bulanan'
 
-];
+);

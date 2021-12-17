@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'actions' 	                => 'Ενέργειες',
     'add'    	                => 'Προσθήκη Νέου',
     'cancel'                    => 'Ακύρωση',
@@ -11,7 +11,8 @@ return [
     'request'                   => 'Αίτημα',
     'submit'  	                => 'Υποβολή',
     'upload'                    => 'Μεταφόρτωση',
-    'select_file'				=> 'Επιλέξτε Αρχείο ...',
+	'select_file'				=> 'Επιλέξτε Αρχείο ...',
     'select_files'				=> 'Επιλογή αρχείων...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-];
+    'send_password_link'       => 'Send Password Reset Link',
+);

@@ -2,8 +2,8 @@
 
 return [
 
-    'id'         => 'ID',
+    'id'         => 'Id',
     'name'       => 'Nombre',
-    'users'      => '# de Usuarios',
+    'users'      => '# de usuarios',
 
 ];
