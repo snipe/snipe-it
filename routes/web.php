@@ -261,7 +261,7 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['auth']], function () {
         'requestable-assets',
         [ 'as' => 'requestable-assets', 'uses' => 'ViewAssetsController@getRequestableIndex' ]
     );
-    Route::get(
+    Route::post(
         'request-asset/{assetId}',
         [ 'as' => 'account/request-asset', 'uses' => 'ViewAssetsController@getRequestAsset' ]
     );

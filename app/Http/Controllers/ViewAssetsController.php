@@ -179,7 +179,7 @@ class ViewAssetsController extends Controller
             $logaction->logaction('request canceled');
             $settings->notify(new RequestAssetCancelation($data));
             return redirect()->route('requestable-assets')
-                ->with('success')->with('success', trans('admin/hardware/message.requests.cancel-success'));
+                ->with('success')->with('success', trans('admin/hardware/message.requests.cancel'));
         }
 
         $logaction->logaction('requested');
