@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'actions' 	                => 'Akcije',
     'add'    	                => 'Dodaj Novo',
     'cancel'                    => 'Otkaži',
@@ -11,7 +11,8 @@ return [
     'request'                   => 'Zahtev',
     'submit'  	                => 'Submit',
     'upload'                    => 'Upload',
-    'select_file'				=> 'Odaberite datoteku...',
+	'select_file'				=> 'Odaberite datoteku...',
     'select_files'				=> 'Odaberite datoteke...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-];
+    'send_password_link'       => 'Send Password Reset Link',
+);

@@ -86,13 +86,13 @@ class CustomFieldsController extends Controller
         $this->authorize('create', CustomField::class);
 
         $field = new CustomField([
-            'name' => $request->get('name'),
-            'element' => $request->get('element'),
-            'help_text' => $request->get('help_text'),
-            'field_values' => $request->get('field_values'),
-            'field_encrypted' => $request->get('field_encrypted', 0),
-            'show_in_email' => $request->get('show_in_email', 0),
-            'user_id' => Auth::id(),
+            "name" => trim($request->get("name")),
+            "element" => $request->get("element"),
+            "help_text" => $request->get("help_text"),
+            "field_values" => $request->get("field_values"),
+            "field_encrypted" => $request->get("field_encrypted", 0),
+            "show_in_email" => $request->get("show_in_email", 0),
+            "user_id" => Auth::id()
         ]);
 
         if ($request->filled('custom_format')) {
@@ -108,6 +108,7 @@ class CustomFieldsController extends Controller
         return redirect()->back()->withInput()
             ->with('error', trans('admin/custom_fields/message.field.create.error'));
     }
+
 
     /**
      * Detach a custom field from a fieldset.
@@ -148,9 +149,8 @@ class CustomFieldsController extends Controller
                 return redirect()->back()->withErrors(['message' => 'Field is in-use']);
             }
             $field->delete();
-
-            return redirect()->route('fields.index')
-                ->with('success', trans('admin/custom_fields/message.field.delete.success'));
+            return redirect()->route("fields.index")
+                ->with("success", trans('admin/custom_fields/message.field.delete.success'));
         }
 
         return redirect()->back()->withErrors(['message' => 'Field does not exist']);
@@ -200,12 +200,12 @@ class CustomFieldsController extends Controller
 
         $this->authorize('update', $field);
 
-        $field->name = e($request->get('name'));
-        $field->element = e($request->get('element'));
-        $field->field_values = e($request->get('field_values'));
-        $field->user_id = Auth::id();
-        $field->help_text = $request->get('help_text');
-        $field->show_in_email = $request->get('show_in_email', 0);
+        $field->name          = trim(e($request->get("name")));
+        $field->element       = e($request->get("element"));
+        $field->field_values  = e($request->get("field_values"));
+        $field->user_id       = Auth::id();
+        $field->help_text     = $request->get("help_text");
+        $field->show_in_email = $request->get("show_in_email", 0);
 
         if ($request->get('format') == 'CUSTOM REGEX') {
             $field->format = e($request->get('custom_format'));

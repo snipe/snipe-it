@@ -179,7 +179,7 @@ Context | Request Context
     'remove_company'        => 'Firma bağlantısını sil',
     'reports'				=> 'Raporlar',
     'restored'				=> 'geri yüklendi',
-    'restore'				=> 'Restore',
+    'restore'				=> 'Geri Yükle',
     'requested'				=> 'Talep Edilen',
     'request_canceled'      => 'Talep iptal edildi',
     'save'  				=> 'Kaydet',

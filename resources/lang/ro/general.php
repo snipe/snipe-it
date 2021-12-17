@@ -70,7 +70,7 @@
     'debug_warning'         => 'Avertizare!',
     'debug_warning_text'    => 'Această aplicație rulează în modul de producție cu debugging activat. Acest lucru poate expune date sensibile dacă aplicația dvs. este accesibilă lumii exterioare. Dezactivați modul de depanare setând valoarea <code>APP_DEBUG</code> din fișierul <code>.env</code> la <code>false</code>.',
     'delete'  				=> 'Sterge',
-    'delete_confirm'  		=> 'Are you sure you wish to delete :item?',
+    'delete_confirm'  		=> 'Sigur doriți să ștergeți :item?',
     'deleted'  				=> 'Sters',
     'delete_seats'  		=> 'Locurile șterse',
     'departments'           => 'departamente',
