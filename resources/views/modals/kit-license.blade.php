@@ -4,7 +4,7 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Append license{{-- TODO: trans --}}</h4>
+            <h2 class="modal-title">Append license{{-- TODO: trans --}}</h2>
         </div>
         <div class="modal-body">
             <form action="{{ route('api.kits.licenses.store', $kitId) }}" onsubmit="return false">

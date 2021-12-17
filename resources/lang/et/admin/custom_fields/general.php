@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'custom_fields'		        => 'Kohandatud väljad',
     'field'		                => 'Väli',
     'about_fieldsets_title'		=> 'Andmeväljade kohta',
@@ -28,5 +28,5 @@ return [
     'create_fieldset'         => 'New Fieldset',
     'create_field'            => 'Uus kohandatud väli',
     'value_encrypted'      	        => 'Selle välja väärtust krüpteeritakse andmebaasis. Dežrooveeritud väärtust saab vaadata ainult administraatoritel',
-    'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-];
+    'show_in_email'     => 'Kas lisame selle välja väärtuse kasutajale väljastatud emailile? Krüpteerituid välju emailis pole näha.',
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'actions' 	                => 'Handlinger',
     'add'    	                => 'Opprett ny',
     'cancel'                    => 'Avbryt',
@@ -11,7 +11,8 @@ return [
     'request'                   => 'Forespørsel',
     'submit'  	                => 'Send',
     'upload'                    => 'Last opp',
-    'select_file'				=> 'Velg fil...',
+	'select_file'				=> 'Velg fil...',
     'select_files'				=> 'Velg filer...',
-    'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-];
+    'generate_labels'           => '{1} Lag etikett [2,*] Lag etiketter',
+    'send_password_link'       => 'Send lenke for å nullstille passordet',
+);

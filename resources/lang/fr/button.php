@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'actions' 	                => 'Actions',
     'add'    	                => 'Ajouter',
     'cancel'                    => 'Annuler',
@@ -11,7 +11,8 @@ return [
     'request'                   => 'Requête ',
     'submit'  	                => 'Soumettre',
     'upload'                    => 'Uploader',
-    'select_file'				=> 'Sélectionner un fichier...',
+	'select_file'				=> 'Sélectionner un fichier...',
     'select_files'				=> 'Sélectionnez les fichiers ...',
     'generate_labels'           => '{1} Générer une étiquette|[2,*] Générer des étiquettes',
-];
+    'send_password_link'       => 'Envoyer le lien de réinitialisation du mot de passe',
+);

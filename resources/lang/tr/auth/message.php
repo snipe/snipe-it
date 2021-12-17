@@ -1,44 +1,45 @@
 <?php
 
-return [
+return array(
 
     'account_already_exists' => 'Bu email adresi ile tanımlanmış bir hesap var.',
     'account_not_found'      => 'Kullanıcı adı veya şifresi yanlış.',
     'account_not_activated'  => 'Hesabınız aktif edilmemiş.',
     'account_suspended'      => 'Hesabınız durdurulmuş.',
     'account_banned'         => 'Hesabınız engellenmiş.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'throttle'               => 'Çok fazla başarısız oturum açma girişimi. Lütfen :dakika dakika sonra tekrar deneyin.',
 
-    'two_factor' => [
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
-    ],
+    'two_factor' => array(
+        'already_enrolled'      => 'Cihazınız zaten kayıtlı.',
+        'success'               => 'Başarıyla giriş yaptınız.',
+        'code_required'         => 'İki faktörlü kod gereklidir.',
+        'invalid_code'          => 'İki faktörlü kod geçersiz.',
+    ),
 
-    'signin' => [
+    'signin' => array(
         'error'   => 'Bir problem ile karşılaştık, lütfen tekrar deneyin.',
         'success' => 'Başarıyla giriş yaptınız.',
-    ],
+    ),
 
-    'logout' => [
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
-    ],
+    'logout' => array(
+        'error'   => 'Oturumunuzu kapatmaya çalışırken bir sorun oluştu, lütfen tekrar deneyin.',
+        'success' => 'Başarıyla çıkış yaptınız.',
+    ),
 
-    'signup' => [
+    'signup' => array(
         'error'   => 'Hesabınızı oluştururken bir hata oluştu, lütfen tekrar deneyiniz.',
         'success' => 'Hesap başarılı bir şekilde oluşturuldu.',
-    ],
+    ),
 
-    'forgot-password' => [
+    'forgot-password' => array(
         'error'   => 'Şifre resetleme kodu oluştururken bir hata oluştu, lütfen tekrar deneyiniz.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
-    ],
+        'success' => 'Bu e-posta adresi sistemimizde mevcutsa, bir şifre kurtarma e-postası gönderilmiştir.',
+    ),
 
-    'forgot-password-confirm' => [
+    'forgot-password-confirm' => array(
         'error'   => 'Şifrenizi sıfırlarken bir hata oluştu, lütfen tekrar deneyiniz.',
         'success' => 'Şifreniz başarı ile sıfırlandı.',
-    ],
+    ),
 
-];
+
+);

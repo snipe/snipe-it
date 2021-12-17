@@ -14,4 +14,5 @@ return array(
 	'select_file'				=> 'Vybrať súbor...',
     'select_files'				=> 'Vybrať súbory...',
     'generate_labels'           => '{1} Generovať štítok|[2,*] Generovať štítky',
+    'send_password_link'       => 'Send Password Reset Link',
 );
