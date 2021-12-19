@@ -45,26 +45,6 @@
                     @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
     
     
-                    <!-- Update location -->
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-md-9">
-                            <label>
-                                <input type="checkbox" value="1" name="update_location" class="minimal" {{ Request::old('update_location') == '1' ? ' checked="checked"' : '' }}> Update asset location
-                            </label> <a href="#" class="text-dark-gray" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" title="<i class='far fa-life-ring'></i> More Info" data-html="true" data-content="Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the checkin log.<br><br>Note that is this asset is checked out, it will not change the location of the person, asset or location it is checked out to."><i class="far fa-life-ring"></i></a>
-                        </div>
-                    </div>
-    
-    
-                    <!-- Note -->
-                    <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-                        {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
-                        <div class="col-md-8">
-                            <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note') }}</textarea>
-                            {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                        </div>
-                    </div>
-    
-    
 
                 </div> <!--/.box-body-->
                 <div class="box-footer">
@@ -137,7 +117,7 @@
                 data : formData,
                 success : function (data) {
                     if (data.status == 'success') {
-                        $('#checkedin tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i></td></tr>");
+                        $('#checkedin tbody').prepend("<tr class='success'><td>" + data.payload.asset + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i></td></tr>");
                         incrementOnSuccess();
                     } else {
                         handlecheckinFail(data);
@@ -157,17 +137,17 @@
         });
 
         function handlecheckinFail (data) {
-            if (data.payload.asset_tag) {
-                var asset_tag = data.payload.asset_tag;
+            if (data.payload.asset) {
+                var asset = data.payload.asset;
             } else {
-                var asset_tag = '';
+                var asset = '';
             }
             if (data.messages) {
                 var messages = data.messages;
             } else {
                 var messages = '';
             }
-            $('#checkedin tbody').prepend("<tr class='danger'><td>" + asset_tag + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger'></i></td></tr>");
+            $('#checkedin tbody').prepend("<tr class='danger'><td>" + asset + "</td><td>" + messages + "</td><td><i class='fas fa-times text-danger'></i></td></tr>");
         }
 
         function incrementOnSuccess() {

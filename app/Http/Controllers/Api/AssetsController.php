@@ -821,8 +821,8 @@ class AssetsController extends Controller
         $this->authorize('checkin', $asset);
 
 
-        $user = $asset->assignedUser;
-        if (is_null($target = $asset->assignedTo)) {
+        $target = $asset->assignedTo;
+        if (is_null($target)) {
             return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.already_checked_in')));
         }
 
@@ -852,15 +852,15 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.error')));
+        return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.error')));
     }
 
     /**
      * Bulk Checkin an asset
-     * This is the current solution to perform a bulk checkin based on an asset tag, rather than a regular checkin.
+     * This is the current solution to perform a bulk api checkin based on an asset tag, rather than a regular checkin.
      * This is due to the need to find the asset first based on the asset tag.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [A. Janes] [<ajanes@adagiohealth.org>]
      * @param int $assetId
      * @since [v4.0]
      * @return JsonResponse
@@ -871,57 +871,12 @@ class AssetsController extends Controller
         $asset = Asset::with('assetstatus')->where('asset_tag', $request->input('asset_tag'))->first();
 
         if($asset) {
-            \Log::debug('Asset Name: ' . $asset->name);
-            $this->authorize('checkin', $asset);
-
-
-            $target = $asset->assigned_to;
-            \Log::debug('Assigned User: ' . $asset->assigned_to);
-            if (is_null($target)) {
-                return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag' => e($request->input('asset_tag'))], trans('admin/hardware/message.checkin.already_checked_in')));
-            }
-
-            $asset->expected_checkin = null;
-            $asset->last_checkout = null;
-            $asset->assigned_to = null;
-            $asset->assignedTo()->disassociate($asset);
-            $asset->accepted = null;
-
-            if ($request->filled('name')) {
-                $asset->name = $request->input('name');
-            }
-
-            $asset->location_id = $asset->rtd_location_id;
-
-            if ($request->filled('location_id')) {
-                $asset->location_id = $request->input('location_id');
-            }
-
-            if ($request->has('status_id')) {
-                $asset->status_id = $request->input('status_id');
-            }
-
-            if ($asset->save()) {
-                \Log::debug('Asset Saved');
-                //event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note')));
-
-                return response()->json(Helper::formatStandardApiResponse('success', [
-                    'asset_tag'=> e($asset->asset_tag)
-                ], trans('admin/hardware/message.checkin.success')));
-
-                //return response()->json(Helper::formatStandardApiResponse('success', ['asset' => e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
-            }
-
-            return response()->json(Helper::formatStandardApiResponse('error', [
-                'asset_tag'=> e($request->input('asset_tag'))
-            ], trans('admin/hardware/message.checkin.error')));
+            return $this->checkin($request, $asset->id);
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', [
-            'asset_tag'=> e($request->input('asset_tag'))
+            'asset'=> e($request->input('asset_tag'))
         ], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
-
-        return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag'=> e($request->input('asset_tag'))], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
     }
 
 
@@ -984,10 +939,6 @@ class AssetsController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag'=> e($request->input('asset_tag'))], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
-
-
-
-
 
     }
 
