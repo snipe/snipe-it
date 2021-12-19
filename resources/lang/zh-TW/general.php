@@ -30,6 +30,8 @@
     'bulkaudit'             => '批次稽核',
     'bulkaudit_status'      => '稽核狀態',
     'bulk_checkout'  		=> '批次借出',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => '按狀態',
     'cancel'  				=> '取消',
     'categories'			=> '類別',

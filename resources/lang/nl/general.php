@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Bulk Audit',
     'bulkaudit_status'      => 'Audit Status',
     'bulk_checkout'  		=> 'Bulk uitlevering',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'op Status',
     'cancel'  				=> 'Annuleren',
     'categories'			=> 'Categorieën',

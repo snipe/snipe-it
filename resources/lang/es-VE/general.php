@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Auditoría Masiva',
     'bulkaudit_status'      => 'Auditar Estado',
     'bulk_checkout'  		=> 'Asignación Masiva',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'por Estado',
     'cancel'  				=> 'Cancelar',
     'categories'			=> 'Categorías',

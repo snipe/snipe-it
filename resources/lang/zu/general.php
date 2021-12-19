@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Ukuhlola Okukhulu',
     'bulkaudit_status'      => 'Isimo se-Audit',
     'bulk_checkout'  		=> 'Ukuhlola okuningi',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Khansela',
     'categories'			=> 'Izigaba',

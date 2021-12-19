@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Audyt zbiorczy',
     'bulkaudit_status'      => 'Kontrola stanu',
     'bulk_checkout'  		=> 'Zbiorcze Przypisanie',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'wg statusu',
     'cancel'  				=> 'Anuluj',
     'categories'			=> 'Kategorie',

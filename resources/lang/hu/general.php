@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Tömeges ellenőrzés',
     'bulkaudit_status'      => 'Audit állapot',
     'bulk_checkout'  		=> 'Bulk Checkout',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'státusz szerint',
     'cancel'  				=> 'Mégse',
     'categories'			=> 'Kategóriák',

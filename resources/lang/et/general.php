@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Mahuaudit',
     'bulkaudit_status'      => 'Auditi staatus',
     'bulk_checkout'  		=> 'Bulk Checkout',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'staatuse järgi',
     'cancel'  				=> 'Loobu',
     'categories'			=> 'Kategooriad',

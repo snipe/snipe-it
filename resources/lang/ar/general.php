@@ -30,6 +30,8 @@
     'bulkaudit'             => 'تدقيق متعدد',
     'bulkaudit_status'      => 'حالة التدقيق',
     'bulk_checkout'  		=> 'اخراج متعدد',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'حسب الحالة',
     'cancel'  				=> 'إلغاء',
     'categories'			=> 'التصنيفات',

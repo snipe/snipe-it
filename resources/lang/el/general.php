@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Μαζικός έλεγχος',
     'bulkaudit_status'      => 'Κατάσταση ελέγχου',
     'bulk_checkout'  		=> 'Μαζικός έλεγχος',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Ακύρωση',
     'categories'			=> 'Kατηγορίες',

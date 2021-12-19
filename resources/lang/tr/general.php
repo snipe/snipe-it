@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Toplu Denetim',
     'bulkaudit_status'      => 'Denetim Durumu',
     'bulk_checkout'  		=> 'Toplu Atama',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'Duruma göre',
     'cancel'  				=> 'İptal',
     'categories'			=> 'Kategoriler',

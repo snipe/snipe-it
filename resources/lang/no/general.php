@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Bulk revisjon',
     'bulkaudit_status'      => 'Revisjon Status',
     'bulk_checkout'  		=> 'Masseutsjekk',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'etter Status',
     'cancel'  				=> 'Avbryt',
     'categories'			=> 'Kategorier',

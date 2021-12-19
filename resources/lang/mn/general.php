@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Бөөн аудит',
     'bulkaudit_status'      => 'Аудитын статус',
     'bulk_checkout'  		=> 'Бөөнөөр Тооцоо хийх',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Болих',
     'categories'			=> 'Категориуд',

@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Bulk Audit',
     'bulkaudit_status'      => 'Staða úttektar',
     'bulk_checkout'  		=> 'Bulk Checkout',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'eftir stöðu',
     'cancel'  				=> 'Hætta við',
     'categories'			=> 'Vöruflokkar',

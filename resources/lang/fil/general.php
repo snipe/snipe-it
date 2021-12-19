@@ -30,6 +30,8 @@
     'bulkaudit'             => 'Ang Bulk Audit',
     'bulkaudit_status'      => 'Ang Estado ng Audit',
     'bulk_checkout'  		=> 'Ang Bulk Checkout',
+    'bulk_checkin'  		=> 'Bulk Checkin',
+    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'I-kansela',
     'categories'			=> 'Mga kategorya',
