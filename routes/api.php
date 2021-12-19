@@ -467,6 +467,13 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         ]
         )->name('api.asset.checkin');
 
+          Route::post('bulkcheckin',
+              [
+                  Api\AssetsController::class,
+                  'bulkcheckin'
+              ]
+          )->name('api.asset.bulkcheckin');
+
         Route::post('checkout',
         [
             Api\AssetsController::class, 
