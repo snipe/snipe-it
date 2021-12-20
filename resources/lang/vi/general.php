@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Kiểm toán hàng loạt',
     'bulkaudit_status'      => 'Trạng thái kiểm tra',
     'bulk_checkout'  		=> 'Thanh toán hàng loạt',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'Trạng thái',
     'cancel'  				=> 'Hủy',
     'categories'			=> 'Danh mục',

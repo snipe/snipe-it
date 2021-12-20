@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Vérification en bloc',
     'bulkaudit_status'      => 'État de la vérification',
     'bulk_checkout'  		=> 'Attribution par lot',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'par statut',
     'cancel'  				=> 'Annuler',
     'categories'			=> 'Catégories',

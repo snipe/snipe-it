@@ -30,8 +30,6 @@
     'bulkaudit'             => '대량 감사',
     'bulkaudit_status'      => '감사 상태',
     'bulk_checkout'  		=> '대량 반출',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> '취소',
     'categories'			=> '분류',

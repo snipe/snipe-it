@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Masinis auditas',
     'bulkaudit_status'      => 'Audito statusas',
     'bulk_checkout'  		=> '"Bulk Checkout"',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Atšaukti',
     'categories'			=> 'Kategorijos',

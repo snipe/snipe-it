@@ -30,8 +30,6 @@
     'bulkaudit'             => '一括監査',
     'bulkaudit_status'      => '監査ステータス',
     'bulk_checkout'  		=> '一括チェックアウト',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'ステータス別',
     'cancel'  				=> 'キャンセル',
     'categories'			=> 'カテゴリー',

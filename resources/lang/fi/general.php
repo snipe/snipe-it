@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Tarkasta useita',
     'bulkaudit_status'      => 'Tarkastuksen tila',
     'bulk_checkout'  		=> 'Luovuta useita',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'tilan mukaan',
     'cancel'  				=> 'Peruuta',
     'categories'			=> 'Kategoriat',

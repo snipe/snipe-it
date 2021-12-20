@@ -30,8 +30,6 @@
     'bulkaudit'             => '批量审核',
     'bulkaudit_status'      => '盘点状态',
     'bulk_checkout'  		=> '批量借出',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => '按状态',
     'cancel'  				=> '取消',
     'categories'			=> '目录',

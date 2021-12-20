@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Audit di massa',
     'bulkaudit_status'      => 'Stato di controllo',
     'bulk_checkout'  		=> 'Checkout Bulk',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'in base allo stato',
     'cancel'  				=> 'annulla',
     'categories'			=> 'Categorie',

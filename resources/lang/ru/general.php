@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Массовый аудит',
     'bulkaudit_status'      => 'Состояние аудита',
     'bulk_checkout'  		=> 'Массовая выдача',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'по статусу',
     'cancel'  				=> 'Отмена',
     'categories'			=> 'Категории',
