@@ -10,6 +10,7 @@ use App\Http\Controllers\DepreciationsController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\ImportsController;
+use App\Http\Controllers\KioskController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\ManufacturersController;
 use App\Http\Controllers\ModalController;
@@ -348,6 +349,37 @@ Route::get(
     'auth/signin',
     [LoginController::class, 'legacyAuthRedirect']
 );
+
+
+/*
+|--------------------------------------------------------------------------
+| Kiosk Routes
+|--------------------------------------------------------------------------
+|
+|
+|
+*/
+Route::group(['prefix' => 'kiosk', 'middleware' => ['auth']], function () {
+    Route::get('/',
+        [KioskController::class, 'index']
+    )->name('kiosk');
+
+    Route::get('checkin',
+        [KioskController::class, 'checkin']
+    )->name('kiosk/checkin');
+
+    Route::get('checkout',
+        [KioskController::class, 'checkout']
+    )->name('kiosk/checkout');
+
+    Route::post('checkout',
+        [KioskController::class, 'storeCheckout']
+    )->name('kiosk/checkout.save');
+
+    Route::get('audit',
+        [KioskController::class, 'audit']
+    )->name('kiosk/audit');
+});
 
 
 /*
