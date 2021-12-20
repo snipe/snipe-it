@@ -856,16 +856,13 @@ class AssetsController extends Controller
     }
 
     /**
-     * Bulk Checkin an asset
-     * This is the current solution to perform a bulk api checkin based on an asset tag, rather than a regular checkin.
-     * This is due to the need to find the asset first based on the asset tag.
+     * Checkin an asset by asset tag
      *
      * @author [A. Janes] [<ajanes@adagiohealth.org>]
-     * @param int $assetId
-     * @since [v4.0]
+     * @since [v6.0]
      * @return JsonResponse
      */
-    public function bulkCheckin(Request $request)
+    public function checkinByTag(Request $request)
     {
         $this->authorize('checkin', Asset::class);
         $asset = Asset::with('assetstatus')->where('asset_tag', $request->input('asset_tag'))->first();
@@ -875,8 +872,8 @@ class AssetsController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', [
-            'asset'=> e($request->input('asset_tag'))
-        ], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
+            'asset'=> e($request->input('asset'))
+        ], 'Asset with tag '.e($request->input('asset')).' not found'));
     }
 
 

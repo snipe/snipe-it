@@ -467,12 +467,12 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         ]
         )->name('api.asset.checkin');
 
-          Route::post('bulkcheckin',
-              [
-                  Api\AssetsController::class,
-                  'bulkcheckin'
-              ]
-          )->name('api.asset.bulkcheckin');
+        Route::post('checkinbytag',
+            [
+                Api\AssetsController::class,
+                'checkinbytag'
+            ]
+        )->name('api.asset.checkinbytag');
 
         Route::post('checkout',
         [

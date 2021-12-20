@@ -107,7 +107,7 @@
             var formData = $('#checkin-form').serializeArray();
 
             $.ajax({
-                url: "{{ route('api.asset.bulkcheckin') }}",
+                url: "{{ route('api.asset.checkinbytag') }}",
                 type : 'POST',
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
