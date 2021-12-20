@@ -52,7 +52,6 @@ class AssetsController extends Controller
      */
     public function index(Request $request, $audit = null) 
     {
-
         \Log::debug(Route::currentRouteName());
         
 
@@ -328,8 +327,6 @@ class AssetsController extends Controller
             }]);
         }
 
-        
-
 
         /**
          * Here we're just determining which Transformer (via $transformer) to use based on the 
@@ -354,9 +351,8 @@ class AssetsController extends Controller
 
             return (new AssetsTransformer)->transformAsset($asset, $request);
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
-
-
     }
 
     /**
@@ -717,7 +713,6 @@ class AssetsController extends Controller
             $logaction->logaction('restored');
 
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.restore.success')));
-        
 
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
@@ -887,8 +882,6 @@ class AssetsController extends Controller
      */
     public function audit(Request $request)
     {
-
-
         $this->authorize('audit', Asset::class);
         $rules = [
             'asset_tag' => 'required',
@@ -936,7 +929,6 @@ class AssetsController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag'=> e($request->input('asset_tag'))], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
-
     }
 
 
