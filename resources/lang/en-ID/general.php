@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Bulk Audit',
     'bulkaudit_status'      => 'Status Audit',
     'bulk_checkout'  		=> 'Periksa Bulk',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Batal',
     'categories'			=> 'Kategori',

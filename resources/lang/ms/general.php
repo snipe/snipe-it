@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Audit Bulk',
     'bulkaudit_status'      => 'Status Audit',
     'bulk_checkout'  		=> 'Checkout Pukal',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Batalkan',
     'categories'			=> 'Kategori',

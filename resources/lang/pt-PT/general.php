@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Auditoria em massa',
     'bulkaudit_status'      => 'Status da auditoria',
     'bulk_checkout'  		=> 'Saída em massa',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Cancelar',
     'categories'			=> 'Categorias',

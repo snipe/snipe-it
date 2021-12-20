@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Množična revizija',
     'bulkaudit_status'      => 'Stanje revizije',
     'bulk_checkout'  		=> 'Množična izdaja',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'po Statusu',
     'cancel'  				=> 'Prekliči',
     'categories'			=> 'Kategorije',

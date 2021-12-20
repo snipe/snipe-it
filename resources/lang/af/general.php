@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Grootmaat Oudit',
     'bulkaudit_status'      => 'Ouditstatus',
     'bulk_checkout'  		=> 'Grootmaat Checkout',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'kanselleer',
     'categories'			=> 'kategorieë',

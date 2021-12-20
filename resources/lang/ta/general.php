@@ -30,8 +30,6 @@
     'bulkaudit'             => 'மொத்த ஆடிட்',
     'bulkaudit_status'      => 'தணிக்கை நிலை',
     'bulk_checkout'  		=> 'மொத்த புதுப்பிப்பு',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'ரத்து',
     'categories'			=> 'வகைகள்',

@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Групов одит',
     'bulkaudit_status'      => 'Статус на одита',
     'bulk_checkout'  		=> 'Общо отписване',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'по Статус',
     'cancel'  				=> 'Отказ',
     'categories'			=> 'Категории',

@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Iniúchadh Bulc',
     'bulkaudit_status'      => 'Stádas Iniúchta',
     'bulk_checkout'  		=> 'Seiceáil Bulc',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Cealaigh',
     'categories'			=> 'Catagóirí',

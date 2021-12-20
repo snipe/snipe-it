@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Tuhinga Rawa',
     'bulkaudit_status'      => 'Tūnga Arotake',
     'bulk_checkout'  		=> 'Putea Poaka',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Whakakore',
     'categories'			=> 'Ngā Kāwai',

@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Auditoría masiva',
     'bulkaudit_status'      => 'Estado de auditoría',
     'bulk_checkout'  		=> 'Procesar en Lote',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'por Estado',
     'cancel'  				=> 'Cancelar',
     'categories'			=> 'Categorías',

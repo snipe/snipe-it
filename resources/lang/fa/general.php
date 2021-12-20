@@ -30,8 +30,6 @@
     'bulkaudit'             => 'حسابرسی فله',
     'bulkaudit_status'      => 'وضعیت حسابرسی',
     'bulk_checkout'  		=> 'پرداخت بزرگ',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'به ترتیب وضعیت',
     'cancel'  				=> 'انصراف',
     'categories'			=> 'دسته‌بندی‌ها',

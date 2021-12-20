@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Lielapjoma audits',
     'bulkaudit_status'      => 'Revīzijas statuss',
     'bulk_checkout'  		=> 'Bulk Checkout',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Atcelt',
     'categories'			=> 'Kategorijas',

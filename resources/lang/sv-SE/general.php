@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Bulk Inventering',
     'bulkaudit_status'      => 'Inventeringsstatus',
     'bulk_checkout'  		=> 'Bulk Checkout',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'efter status',
     'cancel'  				=> 'Avbryt',
     'categories'			=> 'Kategorier',

@@ -30,8 +30,6 @@
     'bulkaudit'             => 'Auditul în bloc',
     'bulkaudit_status'      => 'Starea auditului',
     'bulk_checkout'  		=> 'Comenzi în numerar',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Anuleaza',
     'categories'			=> 'Categorii',

@@ -30,8 +30,6 @@
     'bulkaudit'             => 'การตรวจสอบเป็นกลุ่ม',
     'bulkaudit_status'      => 'สถานะการตรวจสอบ',
     'bulk_checkout'  		=> 'Checkout เป็นกลุ่ม',
-    'bulk_checkin'  		=> 'Bulk Checkin',
-    'bulk_checkin_status'  	=> 'Bulk Checkin Status',
     'bystatus'              => 'ตามสถานะ',
     'cancel'  				=> 'ยกเลิก',
     'categories'			=> 'ประเภท',
