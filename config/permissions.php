@@ -44,6 +44,15 @@ return [
         ],
     ],
 
+    'Kiosk' => [
+        [
+            'permission' => 'kiosk',
+            'label'      => '',
+            'note'       => 'This allows the user to access the kiosk mode screens.',
+            'display'    => true,
+        ],
+    ],
+
     'Assets' => [
         [
             'permission' => 'assets.view',

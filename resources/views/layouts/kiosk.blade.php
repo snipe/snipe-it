@@ -127,12 +127,14 @@
           <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
               <ul class="nav navbar-nav">
+                  @if(\Request::route()->getName()!='kiosk')
                       <li>
                           <a href="{{ route('kiosk') }}">
-                              <span>Return to Main Menu</span>
-                              <i class="fas fa-exchange-alt"></i>
+                              <i class="fas fa-clipboard"></i>
+                              <span>Return to Kiosk Main Menu</span>
                           </a>
                       </li>
+                  @endif
 
                <!-- User Account: style can be found in dropdown.less -->
                @if (Auth::check())
@@ -152,8 +154,8 @@
 
 
                      <li>
-                         <a href="{{ route('kiosk') }}">
-                             <i class="fas fa-user-secret fa-fw" aria-hidden="true"></i> Return to Kiosk Menu
+                         <a href="{{ route('home') }}">
+                             <i class="fas fa-tachometer-alt fa-fw" aria-hidden="true"></i> Return to Dashboard
                          </a>
                      </li>
 
@@ -175,15 +177,6 @@
                </li>
                @endif
 
-
-               @can('superadmin')
-               <li>
-                   <a href="{{ route('settings.index') }}">
-                       <i class="fa fa-cogs fa-fw" aria-hidden="true"></i>
-                       <span class="sr-only">{{ trans('general.admin') }}</span>
-                   </a>
-               </li>
-               @endcan
             </ul>
           </div>
         </nav>

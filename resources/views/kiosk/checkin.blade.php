@@ -24,7 +24,7 @@
         <div class="col-md-6">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h2 class="box-title"> {{ trans('general.bulk_checkin') }} </h2>
+                    <h2 class="box-title"> {{ trans('admin/hardware/general.checkin') }} </h2>
                 </div>
                 <div class="box-body">
                 {{csrf_field()}}
@@ -48,7 +48,6 @@
 
                 </div> <!--/.box-body-->
                 <div class="box-footer">
-                    <a class="btn btn-link" href="{{ route('hardware.index') }}"> {{ trans('button.cancel') }}</a>
                     <button type="submit" id="checkin_button" class="btn btn-success pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>
                 </div>
 

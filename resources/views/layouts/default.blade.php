@@ -743,6 +743,15 @@
             </li>
             @endcan
 
+            @can('kiosk')
+                <li>
+                    <a href="{{ route('kiosk') }}">
+                        <i class="fas fa-clipboard"></i>
+                        <span>Kiosk Mode</span>
+                    </a>
+                </li>
+            @endcan
+
 
           </ul>
         </section>
