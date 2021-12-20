@@ -860,7 +860,7 @@ class AssetsController extends Controller
     public function checkinByTag(Request $request)
     {
         $this->authorize('checkin', Asset::class);
-        $asset = Asset::with('assetstatus')->where('asset_tag', $request->input('asset_tag'))->first();
+        $asset = Asset::where('asset_tag', $request->input('asset_tag'))->first();
 
         if($asset) {
             return $this->checkin($request, $asset->id);
