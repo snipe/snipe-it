@@ -867,8 +867,8 @@ class AssetsController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', [
-            'asset'=> e($request->input('asset'))
-        ], 'Asset with tag '.e($request->input('asset')).' not found'));
+            'asset'=> e($request->input('asset_tag'))
+        ], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
     }
 
 
