@@ -31,7 +31,7 @@
     'bulkaudit_status'      => 'Audit Status',
     'bulk_checkout'  		=> 'Bulk Checkout',
     'quickscan_checkin'  	=> 'Quick Scan Checkin',
-    'quickscan_checkin_status'  	=> 'Bulk Checkin Status',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Cancel',
     'categories'			=> 'Categories',
