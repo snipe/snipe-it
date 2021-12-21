@@ -28,9 +28,9 @@ Route::group(
             [AssetsController::class, 'quickScan']
         )->name('assets.bulkaudit');
 
-        Route::get('bulkcheckin',
+        Route::get('quickscancheckin',
             [AssetsController::class, 'quickScanCheckin']
-        )->name('hardware/bulkcheckin');
+        )->name('hardware/quickscancheckin');
 
         // Asset Maintenances
         Route::resource('maintenances', 
