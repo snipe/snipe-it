@@ -24,7 +24,7 @@
         <div class="col-md-6">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h2 class="box-title"> {{ trans('admin/hardware/general.checkin') }} </h2>
+                    <h2 class="box-title"> {{ trans('admin/hardware/general.bulk_checkin') }} </h2>
                 </div>
                 <div class="box-body">
                     {{csrf_field()}}
