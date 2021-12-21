@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    {{ trans('general.bulk_checkin') }}
+    {{ trans('general.quickscan_checkin') }}
     @parent
 @stop
 
@@ -64,7 +64,7 @@
         <div class="col-md-6">
             <div class="box box-default" id="checkedin-div" style="display: none">
                 <div class="box-header with-border">
-                    <h2 class="box-title"> {{ trans('general.bulk_checkin_status') }} (<span id="checkin-counter">0</span> assets checked in) </h2>
+                    <h2 class="box-title"> {{ trans('general.quickscan_checkin_status') }} (<span id="checkin-counter">0</span> assets checked in) </h2>
                 </div>
                 <div class="box-body">
     
@@ -72,7 +72,7 @@
                         <thead>
                         <tr>
                             <th>{{ trans('general.asset_tag') }}</th>
-                            <th>{{ trans('general.bulk_checkin_status') }}</th>
+                            <th>{{ trans('general.quickscan_checkin_status') }}</th>
                             <th></th>
                         </tr>
                         <tr id="checkin-loader" style="display: none;">
