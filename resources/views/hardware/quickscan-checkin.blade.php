@@ -43,6 +43,15 @@
     
                     <!-- Locations -->
                     @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
+
+                    <!-- Note -->
+                        <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
+                            {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
+                            <div class="col-md-8">
+                                <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note') }}</textarea>
+                                {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                            </div>
+                        </div>
     
     
 
