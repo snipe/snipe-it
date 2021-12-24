@@ -285,12 +285,9 @@ class BulkAssetsController extends Controller
     public function storeCheckin(Request $request)
     {
         try {
-            $admin = Auth::user();
-
+            $location = null;
             if ($request->filled('assigned_location')) {
                 $location = $request->get('assigned_location');
-            } else {
-                $location = null;
             }
 
             if (! is_array($request->get('selected_assets'))) {
@@ -306,11 +303,11 @@ class BulkAssetsController extends Controller
 
             $errors = [];
 
-            DB::transaction(function () use ($admin, $checkin_at, $errors, $asset_ids, $request, $location) {
+            DB::transaction(function () use ($checkin_at, $errors, $asset_ids, $request, $location) {
                 foreach ($asset_ids as $asset_id) {
                     $asset = Asset::findOrFail($asset_id);
                     $this->authorize('checkin', $asset);
-                    $error = $asset->checkin($admin, $checkin_at, e($request->get('note')), null, $location);
+                    $error = $asset->checkin($checkin_at, e($request->get('note')), null, $location);
 
                     $asset->unsetEventDispatcher();
                     $asset->save();

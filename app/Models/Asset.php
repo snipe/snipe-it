@@ -281,6 +281,7 @@ class Asset extends Depreciable
      * @param Carbon $expected_checkin
      * @param string $note
      * @param null $name
+     * @param null $location
      * @return bool
      * @since [v3.0]
      * @return bool
@@ -338,21 +339,20 @@ class Asset extends Depreciable
     /**
      * Checks the asset in to the target
      *
-     * @todo The admin parameter is never used. Can probably be removed.
+     * @TODO I removed the admin variable when writing this, because it is still unused down here too. Does it need to be added again?
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param User $user
-     * @param User $admin
-     * @param Carbon $checkout_at
+     * @author [A. Janes] [<ajanes@adagiohealth.org>]
+     * @param Carbon $checkin_at
      * @param string $note
      * @param null $name
+     * @param null $location
      * @return bool
      * @since [v3.0]
      * @return bool
      */
-    public function checkIn($admin = null, $checkin_at = null, $note = null, $name = null, $location = null)
+    public function checkIn($checkin_at = null, $note = null, $name = null, $location = null)
     {
-        if (is_null($target = $this->assignedTo)) {
+        if (is_null($target = $this->assigned_to)) {
             return false;
         }
 
@@ -379,7 +379,7 @@ class Asset extends Depreciable
         }
 
         if ($this->save()) {
-            event(new CheckoutableCheckedIn($this, $target, Auth::user(), $note));
+            event(new CheckoutableCheckedIn($this, $target, Auth::user(), $note, $checkin_at));
 
             $this->increment('checkin_counter', 1);
 
