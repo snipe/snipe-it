@@ -305,20 +305,13 @@ class BulkAssetsController extends Controller
             }
 
             $errors = [];
-            $responses = [];
 
-            foreach ($asset_ids as $asset_id) {
-                AssetsController::checkin($request, $asset_id);
-            }
-            
-            
-            DB::transaction(function () use ($admin, $checkin_at, $errors, $asset_ids, $request) {
+            DB::transaction(function () use ($admin, $checkin_at, $errors, $asset_ids, $request, $location) {
                 foreach ($asset_ids as $asset_id) {
                     $asset = Asset::findOrFail($asset_id);
                     $this->authorize('checkin', $asset);
-                    $error = $asset->checkin($admin, $checkin_at, e($request->get('note')), null);
+                    $error = $asset->checkin($admin, $checkin_at, e($request->get('note')), null, $location);
 
-                    $asset->location_id = $target->location_id;
                     $asset->unsetEventDispatcher();
                     $asset->save();
 

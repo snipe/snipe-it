@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\AssetCheckedOut;
+use App\Events\CheckoutableCheckedIn;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Traits\UniqueSerialTrait;
@@ -327,6 +328,60 @@ class Asset extends Depreciable
             event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note));
 
             $this->increment('checkout_counter', 1);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks the asset in to the target
+     *
+     * @todo The admin parameter is never used. Can probably be removed.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param User $user
+     * @param User $admin
+     * @param Carbon $checkout_at
+     * @param string $note
+     * @param null $name
+     * @return bool
+     * @since [v3.0]
+     * @return bool
+     */
+    public function checkIn($admin = null, $checkin_at = null, $note = null, $name = null, $location = null)
+    {
+        if (is_null($target = $this->assignedTo)) {
+            return false;
+        }
+
+        $this->expected_checkin = null;
+
+        $this->last_checkout = null;
+
+        $this->assignedTo()->disassociate();
+
+        $this->accepted = null;
+
+        if ($name != null) {
+            $this->name = $name;
+        }
+
+        if ($checkin_at == null) {
+            $checkin_at = date('Y-m-d');
+        }
+
+        if ($location != null) {
+            $this->location_id = $location;
+        } else {
+            $this->location_id = $this->rtd_location_id;
+        }
+
+        if ($this->save()) {
+            event(new CheckoutableCheckedIn($this, $target, Auth::user(), $note));
+
+            $this->increment('checkin_counter', 1);
 
             return true;
         }
