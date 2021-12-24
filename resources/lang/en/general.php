@@ -30,6 +30,7 @@
     'bulkaudit'             => 'Bulk Audit',
     'bulkaudit_status'      => 'Audit Status',
     'bulk_checkout'  		=> 'Bulk Checkout',
+    'bulk_checkin'  		=> 'Bulk Checkin',
     'bystatus'              => 'by Status',
     'cancel'  				=> 'Cancel',
     'categories'			=> 'Categories',
