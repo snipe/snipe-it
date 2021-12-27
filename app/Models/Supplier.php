@@ -14,8 +14,8 @@ class Supplier extends SnipeModel
 
     protected $rules = array(
         'name'              => 'required|min:1|max:255|unique_undeleted',
-        'address'           => 'max:50|nullable',
-        'address2'          => 'max:50|nullable',
+        'address'           => 'max:250|nullable',
+        'address2'          => 'max:250|nullable',
         'city'              => 'max:255|nullable',
         'state'             => 'max:32|nullable',
         'country'           => 'max:3|nullable',
