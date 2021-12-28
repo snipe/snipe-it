@@ -347,7 +347,7 @@ class Asset extends Depreciable
      * @param null $name
      * @param null $location
      * @return bool
-     * @since [v3.0]
+     * @since
      * @return bool
      */
     public function checkIn($checkin_at = null, $note = null, $name = null, $location = null)

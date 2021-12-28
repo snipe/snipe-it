@@ -7,6 +7,7 @@ return [
     'does_not_exist' 	=> 'Asset does not exist.',
     'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'no_assets_selected' => 'You must select at least one asset from the list',
 
     'create' => [
         'error'   		=> 'Asset was not created, please try again. :(',
@@ -61,7 +62,6 @@ return [
         'success' 		=> 'Asset checked out successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.',
         'not_available' => 'That asset is not available for checkout!',
-        'no_assets_selected' => 'You must select at least one asset from the list',
     ],
 
     'checkin' => [
@@ -69,7 +69,6 @@ return [
         'success' 		=> 'Asset checked in successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.',
         'already_checked_in'  => 'That asset is already checked in.',
-        'no_assets_selected' => 'You must select at least one asset from the list',
 
     ],
 

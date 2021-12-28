@@ -211,7 +211,7 @@ class BulkAssetsController extends Controller
             $target = $this->determineCheckoutTarget();
 
             if (! is_array($request->get('selected_assets'))) {
-                return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));
+                return redirect()->route('hardware/bulkcheckout')->withInput()->with('error', trans('admin/hardware/message.no_assets_selected'));
             }
 
             $asset_ids = array_filter($request->get('selected_assets'));
@@ -289,7 +289,7 @@ class BulkAssetsController extends Controller
             }
 
             if (! is_array($request->get('selected_assets'))) {
-                return redirect()->route('hardware/bulkcheckin')->withInput()->with('error', trans('admin/hardware/message.checkin.no_assets_selected'));
+                return redirect()->route('hardware/bulkcheckin')->withInput()->with('error', trans('admin/hardware/message.no_assets_selected'));
             }
 
             $asset_ids = array_filter($request->get('selected_assets'));
