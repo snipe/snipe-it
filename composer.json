@@ -11,14 +11,14 @@
   "license": "AGPL-3.0-or-later",
   "type": "project",
   "require": {
-    "php": "^7.3",
+    "php": ">=7.4 <8.1",
     "ext-curl": "*",
     "ext-fileinfo": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-pdo": "*",
     "alek13/slack": "^2.0",
-    "bacon/bacon-qr-code": "^1.0",
+    "bacon/bacon-qr-code": "^2.0",
     "barryvdh/laravel-debugbar": "^3.6",
     "doctrine/cache": "^1.10",
     "doctrine/common": "^2.12",
@@ -41,13 +41,13 @@
     "laravel/tinker": "^2.6",
     "laravel/ui": "^3.3",
     "laravelcollective/html": "^6.2",
-    "lcobucci/clock": "1.2.0",
-    "lcobucci/jwt": "^3.4.5",
+    "lcobucci/clock": "1.2.0|2.0.0",
+    "lcobucci/jwt": "^3.4.5|^4.0.4",
     "league/csv": "^9.7",
     "league/flysystem-aws-s3-v3": "^1.0",
     "league/flysystem-cached-adapter": "^1.1",
     "livewire/livewire": "^2.4",
-    "mediconesystems/livewire-datatables": "^0.4.3",
+    "mediconesystems/livewire-datatables": "^0.5.0",
     "neitanod/forceutf8": "^2.0",
     "nesbot/carbon": "^2.32",
     "nunomaduro/collision": "^5.4",
@@ -65,21 +65,15 @@
     "watson/validating": "^6.1"
   },
   "require-dev": {
-    "codeception/codeception": "^4.1",
-    "codeception/module-asserts": "^1.2",
-    "codeception/module-laravel5": "^1.1",
-    "codeception/module-rest": "^1.2",
-    "codeception/module-webdriver": "^1.0",
-    "fzaninotto/faker": "^1.9",
+    "fakerphp/faker": "^1.16",
+    "laravel/dusk": "^6.19",
+    "mockery/mockery": "^1.4",
     "overtrue/phplint": "^3.0",
     "phpunit/php-token-stream": "^3.1",
-    "phpunit/phpunit": "^8.5",
+    "phpunit/phpunit": "^9.0",
     "squizlabs/php_codesniffer": "^3.5",
     "symfony/css-selector": "^4.4",
     "symfony/dom-crawler": "^4.4"
-  },
-  "suggest": {
-    "ext-mcrypt": "For upgrading from before v5.1 this is used to re-encrypt data"
   },
   "extra": {
     "laravel": {
@@ -100,9 +94,13 @@
   },
   "autoload-dev": {
     "classmap": [
-      "tests/TestCase.php",
-      "tests/unit/BaseTest.php"
-    ]
+      "tests/DuskTestCase.php",
+      "tests/TestCase.php"
+    ],
+    "psr-4": {
+      "App\\": "app/",
+      "Tests\\": "tests/"
+    }
   },
   "scripts": {
     "post-autoload-dump": [

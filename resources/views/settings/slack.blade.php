@@ -158,7 +158,6 @@
 
         $('input:text').keyup(fieldcheck); // if *any* text field changes, we recalculate button states
 
-
         $("#slacktest").click(function() {
 
             $("#slacktestrow").removeClass('text-success');
@@ -167,11 +166,22 @@
             $("#slackteststatus").html('');
             $("#slacktesticon").html('<i class="fas fa-spinner spin"></i> Sending Slack test message...');
             $.ajax({
+                
+                // If I comment this back in, I always get a success (200) message
+                // Without it, I get 
+                    //  beforeSend: function (xhr) { 
+                    //  xhr.setRequestHeader("Content-Type","application/json");
+                    // xhr.setRequestHeader("Accept","text/json");
+                    // },
+            
+                
                 url: '{{ route('api.settings.slacktest') }}',
                 type: 'POST',
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
+                //    'Accept': 'application/json',
+                //    'Content-Type': 'application/json',
                 },
                 data: {
                     'slack_endpoint': $('#slack_endpoint').val(),
@@ -181,6 +191,10 @@
                 },
 
                 dataType: 'json',
+
+                accepts: {
+                    text: "application/json"
+                },
 
                 success: function (data) {
                     $('#save_slack').removeAttr('disabled');
@@ -194,9 +208,11 @@
 
 
                     if (data.responseJSON) {
-                        var errors = data.responseJSON.message;
+                        var errors = data.responseJSON.errors;
+                        var error_msg = data.responseJSON.message;
                     } else {
                         var errors;
+                        var error_msg = 'Something went wrong.';
                     }
 
                     var error_text = '';
@@ -204,15 +220,20 @@
                     $('#save_slack').attr("disabled", true);
                     $("#slacktesticon").html('');
                     $("#slackteststatus").addClass('text-danger');
-                    $("#slacktesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
+                    $("#slacktesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i><span class="text-danger">' + error_msg+ '</span>');
 
+                    
                     if (data.status == 500) {
                         $('#slackteststatus').html('500 Server Error');
-                    } else if (data.status == 400) {
+                    } else if ((data.status == 400) || (data.status == 422)) {
+                        console.log('Type of errors is '+ typeof errors);
+                        console.log('Data status was 400 or 422');
 
                         if (typeof errors != 'string') {
+                        
+                            console.log(errors.length);
 
-                            for (i = 0; i < errors.length; i++) {
+                            for (i in errors) {
                                 if (errors[i]) {
                                     error_text += '<li>Error: ' + errors[i];
                                 }
@@ -220,6 +241,7 @@
                             }
 
                         } else {
+
                             error_text = errors;
                         }
 

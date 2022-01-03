@@ -189,6 +189,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
             [SettingsController::class, 'postBackups']
         )->name('settings.backups.create');
 
+        Route::post('/restore/{filename}', 
+            [SettingsController::class, 'postRestore']
+        )->name('settings.backups.restore');
+
+        Route::post('/upload', 
+            [SettingsController::class, 'postUploadBackup']
+        )->name('settings.backups.upload');
+
         Route::get('/', [SettingsController::class, 'getBackups'])->name('settings.backups.index');
     });
 
@@ -251,7 +259,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         'requestable-assets',
         [ViewAssetsController::class, 'getRequestableIndex']
     )->name('requestable-assets');
-    Route::get(
+    Route::post(
         'request-asset/{assetId}',
         [ViewAssetsController::class, 'getRequestAsset']
     )->name('account/request-asset');

@@ -18,12 +18,12 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
     Route::get(
         '{componentID}/checkin/{backto?}',
         [Components\ComponentCheckinController::class, 'create']
-    )->name('checkout/component');
+    )->name('checkin/component');
 
     Route::post(
         '{componentID}/checkin/{backto?}',
         [Components\ComponentCheckinController::class, 'store']
-    )->name('checkout/component');
+    )->name('component.checkin.save');
 
 });
 

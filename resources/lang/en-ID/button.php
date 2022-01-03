@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'actions' 	                => 'Tindakan',
     'add'    	                => 'Tambah Baru',
     'cancel'                    => 'Batal',
@@ -11,7 +11,8 @@ return [
     'request'                   => 'Permintaan',
     'submit'  	                => 'Kirim',
     'upload'                    => 'Unggah',
-    'select_file'				=> 'Pilih Berkas...',
+	'select_file'				=> 'Pilih Berkas...',
     'select_files'				=> 'Pilih file...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-];
+    'send_password_link'       => 'Send Password Reset Link',
+);

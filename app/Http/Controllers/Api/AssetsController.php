@@ -114,8 +114,9 @@ class AssetsController extends Controller
         }
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
-            ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier');
+            ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo',
+                'model.category', 'model.manufacturer', 'model.fieldset','supplier'); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
+
 
         // These are used by the API to query against specific ID numbers.
         // They are also used by the individual searches on detail pages like
@@ -170,6 +171,7 @@ class AssetsController extends Controller
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
         // case we override with the actual count, so we should return 0 items.
         $offset = (($assets) && ($request->get('offset') > $assets->count())) ? $assets->count() : $request->get('offset', 0);
+
 
         // Check to make sure the limit is not higher than the max allowed
         ((config('app.max_results') >= $request->input('limit')) && ($request->filled('limit'))) ? $limit = $request->input('limit') : $limit = config('app.max_results');
@@ -336,6 +338,7 @@ class AssetsController extends Controller
         return (new $transformer)->transformAssets($assets, $total, $request);
     }
 
+
     /**
      * Returns JSON with information about an asset (by tag) for detail view.
      *
@@ -373,9 +376,19 @@ class AssetsController extends Controller
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
 
+        $assets = Asset::with('assetstatus')->with('assignedTo');
 
+        if ($request->input('deleted', 'false') === 'true') {
+            $assets = $assets->withTrashed();
     }
 
+        $assets = $assets->where('serial', $serial)->get();
+        if ($assets) {
+            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+        } else {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
+        }
+    }
 
     /**
      * Returns JSON with information about an asset for detail view.
@@ -677,6 +690,8 @@ class AssetsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
+    
+
     /**
      * Restore a soft-deleted asset.
      *
@@ -899,7 +914,7 @@ class AssetsController extends Controller
             }
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag'=> e($request->input('asset_tag'))], 'Asset with tag '.$request->input('asset_tag').' not found'));
+        return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag'=> e($request->input('asset_tag'))], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
 
 
 

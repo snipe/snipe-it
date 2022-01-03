@@ -59472,6 +59472,9 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           id: 'model_number',
           text: "Model Number"
+        }, {
+          id: 'min_amt',
+          text: "Minimum Quantity"
         }],
         licenses: [{
           id: 'asset_tag',
@@ -59520,9 +59523,6 @@ __webpack_require__.r(__webpack_exports__);
           id: 'manager_last_name',
           text: 'Manager Last Name'
         }, {
-          id: 'department',
-          text: 'Department'
-        }, {
           id: 'activated',
           text: 'Activated'
         }, {
@@ -59565,6 +59565,7 @@ __webpack_require__.r(__webpack_exports__);
           return this.columnOptions.general.concat(this.columnOptions.accessories).sort(sorter);
 
         case 'consumable':
+          console.log('Returned consumable');
           return this.columnOptions.general.concat(this.columnOptions.consumables).sort(sorter);
 
         case 'license':
@@ -59670,7 +59671,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    select2: __webpack_require__(/*! ../select2.vue */ "./resources/assets/js/components/select2.vue")["default"]
+    select2: (__webpack_require__(/*! ../select2.vue */ "./resources/assets/js/components/select2.vue")["default"])
   }
 });
 
@@ -59814,9 +59815,9 @@ __webpack_require__(/*! blueimp-file-upload */ "./node_modules/blueimp-file-uplo
     }
   },
   components: {
-    alert: __webpack_require__(/*! ../alert.vue */ "./resources/assets/js/components/alert.vue")["default"],
-    errors: __webpack_require__(/*! ./importer-errors.vue */ "./resources/assets/js/components/importer/importer-errors.vue")["default"],
-    importFile: __webpack_require__(/*! ./importer-file.vue */ "./resources/assets/js/components/importer/importer-file.vue")["default"]
+    alert: (__webpack_require__(/*! ../alert.vue */ "./resources/assets/js/components/alert.vue")["default"]),
+    errors: (__webpack_require__(/*! ./importer-errors.vue */ "./resources/assets/js/components/importer/importer-errors.vue")["default"]),
+    importFile: (__webpack_require__(/*! ./importer-file.vue */ "./resources/assets/js/components/importer/importer-file.vue")["default"])
   }
 });
 
@@ -59959,7 +59960,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 //
 //
@@ -60318,7 +60319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 //
 //
@@ -60722,7 +60723,7 @@ __webpack_require__(/*! bootstrap-less */ "./node_modules/bootstrap-less/js/boot
  */
 
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"];
+window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
 window.eventHub = new Vue();
 
 __webpack_require__(/*! vue-resource */ "./node_modules/vue-resource/dist/vue-resource.esm.js");
@@ -60833,7 +60834,36 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
 
 (function ($, settings) {
   var Components = {};
-  Components.modals = {}; // confirm delete modal
+  Components.modals = {}; // confirm restore modal
+
+  Components.modals.confirmRestore = function () {
+    var $el = $('table');
+    var events = {
+      'click': function click(evnt) {
+        var $context = $(this);
+        var $restoreConfirmModal = $('#restoreConfirmModal');
+        var href = $context.attr('href');
+        var message = $context.attr('data-content');
+        var title = $context.attr('data-title');
+        $('#restoreConfirmModalLabel').text(title);
+        $restoreConfirmModal.find('.modal-body').text(message);
+        $('#restoreForm').attr('action', href);
+        $restoreConfirmModal.modal({
+          show: true
+        });
+        return false;
+      }
+    };
+
+    var render = function render() {
+      $el.on('click', '.restore-asset', events['click']);
+    };
+
+    return {
+      render: render
+    };
+  }; // confirm delete modal
+
 
   Components.modals.confirmDelete = function () {
     var $el = $('table');
@@ -60869,6 +60899,7 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
 
 
   $(function () {
+    new Components.modals.confirmRestore().render();
     new Components.modals.confirmDelete().render();
   });
 })(jQuery, window.snipeit.settings);
@@ -61024,10 +61055,10 @@ $(document).ready(function () {
           return x !== 0;
         }); // makes sure we're not selecting the same thing twice for multiples
 
-        var filteredResponse = response.items.filter(function (item) {
+        var filteredResponse = response.results.filter(function (item) {
           return currentlySelected.indexOf(+item.id) < 0;
         });
-        var first = currentlySelected.length > 0 ? filteredResponse[0] : response.items[0];
+        var first = currentlySelected.length > 0 ? filteredResponse[0] : response.results[0];
 
         if (first && first.id) {
           first.selected = true;
@@ -61233,7 +61264,7 @@ $(document).ready(function () {
 
     for (var i = 0; i < this.files.length; i++) {
       total_size += this.files[i].size;
-      $(id + '-info').append('<span class="label label-default">' + this.files[i].name + ' (' + formatBytes(this.files[i].size) + ')</span> ');
+      $(id + '-info').append('<span class="label label-default">' + htmlEntities(this.files[i].name) + ' (' + formatBytes(this.files[i].size) + ')</span> ');
     }
 
     console.log('Max size is: ' + max_size);
@@ -61249,9 +61280,14 @@ $(document).ready(function () {
     }
   });
 });
+
+function htmlEntities(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 /**
  * Toggle disabled
  */
+
 
 (function ($) {
   $.fn.toggleDisabled = function (callback) {
@@ -61528,10 +61564,10 @@ __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
  */
 
 
-Vue.component('passport-clients', __webpack_require__(/*! ./components/passport/Clients.vue */ "./resources/assets/js/components/passport/Clients.vue")["default"]);
-Vue.component('passport-authorized-clients', __webpack_require__(/*! ./components/passport/AuthorizedClients.vue */ "./resources/assets/js/components/passport/AuthorizedClients.vue")["default"]);
-Vue.component('passport-personal-access-tokens', __webpack_require__(/*! ./components/passport/PersonalAccessTokens.vue */ "./resources/assets/js/components/passport/PersonalAccessTokens.vue")["default"]);
-Vue.component('importer', __webpack_require__(/*! ./components/importer/importer.vue */ "./resources/assets/js/components/importer/importer.vue")["default"]); // This component has been removed and replaced with a Livewire implementation
+Vue.component('passport-clients', (__webpack_require__(/*! ./components/passport/Clients.vue */ "./resources/assets/js/components/passport/Clients.vue")["default"]));
+Vue.component('passport-authorized-clients', (__webpack_require__(/*! ./components/passport/AuthorizedClients.vue */ "./resources/assets/js/components/passport/AuthorizedClients.vue")["default"]));
+Vue.component('passport-personal-access-tokens', (__webpack_require__(/*! ./components/passport/PersonalAccessTokens.vue */ "./resources/assets/js/components/passport/PersonalAccessTokens.vue")["default"]));
+Vue.component('importer', (__webpack_require__(/*! ./components/importer/importer.vue */ "./resources/assets/js/components/importer/importer.vue")["default"])); // This component has been removed and replaced with a Livewire implementation
 // Vue.component(
 //     'fieldset-default-values',
 //     require('./components/forms/asset-models/fieldset-default-values.vue').default
@@ -65420,6 +65456,8 @@ if (typeof jQuery === 'undefined') {
 /***/ ((module, exports, __webpack_require__) => {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
+	"use strict";
+
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
@@ -65428,13 +65466,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else {}
-} ( function( $ ) {
+} )( function( $ ) {
+"use strict";
 
 $.ui = $.ui || {};
 
-return $.ui.version = "1.12.1";
+return $.ui.version = "1.13.0";
 
-} ) );
+} );
 
 
 /***/ }),
@@ -65446,7 +65485,7 @@ return $.ui.version = "1.12.1";
 /***/ ((module, exports, __webpack_require__) => {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery UI Widget 1.12.1
+ * jQuery UI Widget 1.13.0
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -65461,6 +65500,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 //>>demos: http://jqueryui.com/widget/
 
 ( function( factory ) {
+	"use strict";
+
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
@@ -65469,25 +65510,23 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else {}
-}( function( $ ) {
+} )( function( $ ) {
+"use strict";
 
 var widgetUuid = 0;
+var widgetHasOwnProperty = Array.prototype.hasOwnProperty;
 var widgetSlice = Array.prototype.slice;
 
 $.cleanData = ( function( orig ) {
 	return function( elems ) {
 		var events, elem, i;
 		for ( i = 0; ( elem = elems[ i ] ) != null; i++ ) {
-			try {
 
-				// Only trigger remove when necessary to save time
-				events = $._data( elem, "events" );
-				if ( events && events.remove ) {
-					$( elem ).triggerHandler( "remove" );
-				}
-
-			// Http://bugs.jquery.com/ticket/8235
-			} catch ( e ) {}
+			// Only trigger remove when necessary to save time
+			events = $._data( elem, "events" );
+			if ( events && events.remove ) {
+				$( elem ).triggerHandler( "remove" );
+			}
 		}
 		orig( elems );
 	};
@@ -65509,12 +65548,12 @@ $.widget = function( name, base, prototype ) {
 		base = $.Widget;
 	}
 
-	if ( $.isArray( prototype ) ) {
+	if ( Array.isArray( prototype ) ) {
 		prototype = $.extend.apply( null, [ {} ].concat( prototype ) );
 	}
 
 	// Create selector for plugin
-	$.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
+	$.expr.pseudos[ fullName.toLowerCase() ] = function( elem ) {
 		return !!$.data( elem, fullName );
 	};
 
@@ -65554,7 +65593,7 @@ $.widget = function( name, base, prototype ) {
 	// inheriting from
 	basePrototype.options = $.widget.extend( {}, basePrototype.options );
 	$.each( prototype, function( prop, value ) {
-		if ( !$.isFunction( value ) ) {
+		if ( typeof value !== "function" ) {
 			proxiedPrototype[ prop ] = value;
 			return;
 		}
@@ -65633,7 +65672,7 @@ $.widget.extend = function( target ) {
 	for ( ; inputIndex < inputLength; inputIndex++ ) {
 		for ( key in input[ inputIndex ] ) {
 			value = input[ inputIndex ][ key ];
-			if ( input[ inputIndex ].hasOwnProperty( key ) && value !== undefined ) {
+			if ( widgetHasOwnProperty.call( input[ inputIndex ], key ) && value !== undefined ) {
 
 				// Clone objects
 				if ( $.isPlainObject( value ) ) {
@@ -65682,7 +65721,8 @@ $.widget.bridge = function( name, object ) {
 							"attempted to call method '" + options + "'" );
 					}
 
-					if ( !$.isFunction( instance[ options ] ) || options.charAt( 0 ) === "_" ) {
+					if ( typeof instance[ options ] !== "function" ||
+						options.charAt( 0 ) === "_" ) {
 						return $.error( "no such method '" + options + "' for " + name +
 							" widget instance" );
 					}
@@ -65943,12 +65983,30 @@ $.Widget.prototype = {
 			classes: this.options.classes || {}
 		}, options );
 
+		function bindRemoveEvent() {
+			options.element.each( function( _, element ) {
+				var isTracked = $.map( that.classesElementLookup, function( elements ) {
+					return elements;
+				} )
+					.some( function( elements ) {
+						return elements.is( element );
+					} );
+
+				if ( !isTracked ) {
+					that._on( $( element ), {
+						remove: "_untrackClassesElement"
+					} );
+				}
+			} );
+		}
+
 		function processClassString( classes, checkOption ) {
 			var current, i;
 			for ( i = 0; i < classes.length; i++ ) {
 				current = that.classesElementLookup[ classes[ i ] ] || $();
 				if ( options.add ) {
-					current = $( $.unique( current.get().concat( options.element.get() ) ) );
+					bindRemoveEvent();
+					current = $( $.uniqueSort( current.get().concat( options.element.get() ) ) );
 				} else {
 					current = $( current.not( options.element ).get() );
 				}
@@ -65959,10 +66017,6 @@ $.Widget.prototype = {
 				}
 			}
 		}
-
-		this._on( options.element, {
-			"remove": "_untrackClassesElement"
-		} );
 
 		if ( options.keys ) {
 			processClassString( options.keys.match( /\S+/g ) || [], true );
@@ -65981,6 +66035,8 @@ $.Widget.prototype = {
 				that.classesElementLookup[ key ] = $( value.not( event.target ).get() );
 			}
 		} );
+
+		this._off( $( event.target ) );
 	},
 
 	_removeClass: function( element, keys, extra ) {
@@ -66061,7 +66117,7 @@ $.Widget.prototype = {
 	_off: function( element, eventName ) {
 		eventName = ( eventName || "" ).split( " " ).join( this.eventNamespace + " " ) +
 			this.eventNamespace;
-		element.off( eventName ).off( eventName );
+		element.off( eventName );
 
 		// Clear the stack to avoid memory leaks (#10056)
 		this.bindings = $( this.bindings.not( element ).get() );
@@ -66127,7 +66183,7 @@ $.Widget.prototype = {
 		}
 
 		this.element.trigger( event, data );
-		return !( $.isFunction( callback ) &&
+		return !( typeof callback === "function" &&
 			callback.apply( this.element[ 0 ], [ event ].concat( data ) ) === false ||
 			event.isDefaultPrevented() );
 	}
@@ -66149,6 +66205,8 @@ $.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
 		options = options || {};
 		if ( typeof options === "number" ) {
 			options = { duration: options };
+		} else if ( options === true ) {
+			options = {};
 		}
 
 		hasOptions = !$.isEmptyObject( options );
@@ -66176,7 +66234,7 @@ $.each( { show: "fadeIn", hide: "fadeOut" }, function( method, defaultEffect ) {
 
 return $.widget;
 
-} ) );
+} );
 
 
 /***/ }),
@@ -98532,7 +98590,7 @@ function xhrClient (request) {
  * Http client (Node).
  */
 function nodeClient (request) {
-  var client = __webpack_require__(/*! got */ "?5743");
+  var client = __webpack_require__(/*! got */ "?3cb3");
 
   return new PromiseObj(function (resolve) {
     var url = request.getUrl();
@@ -109194,7 +109252,7 @@ Vue$3.compile = compileToFunctions;
 
 /***/ }),
 
-/***/ "?5743":
+/***/ "?3cb3":
 /*!*********************!*\
   !*** got (ignored) ***!
   \*********************/

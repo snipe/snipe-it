@@ -93,15 +93,15 @@ class AssetsTransformer
                     $value = (Gate::allows('superadmin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
 
                     $fields_array[$field->name] = [
-                            'field' => $field->convertUnicodeDbSlug(),
-                            'value' => $value,
+                            'field' => e($field->convertUnicodeDbSlug()),
+                            'value' => e($value),
                             'field_format' => $field->format,
                         ];
 
                 } else {
                     $fields_array[$field->name] = [
-                        'field' => $field->convertUnicodeDbSlug(),
-                        'value' => $asset->{$field->convertUnicodeDbSlug()},
+                        'field' => e($field->convertUnicodeDbSlug()),
+                        'value' => e($asset->{$field->convertUnicodeDbSlug()}),
                         'field_format' => $field->format,
                     ];
 
@@ -114,24 +114,13 @@ class AssetsTransformer
         }
 
         $permissions_array['available_actions'] = [
-            'checkout' => Gate::allows('checkout', Asset::class),
-            'checkin' => Gate::allows('checkin', Asset::class),
-            'clone' => false,
-            'restore' => false,
-            'update' => (bool) Gate::allows('update', Asset::class),
-            'delete' => ($asset->assigned_to == '' && Gate::allows('delete', Asset::class)),
-        ];
-
-        if ($asset->deleted_at != '') {
-            $permissions_array['available_actions'] = [
-                'checkout' => true,
-                'checkin' => false,
-                'clone' => Gate::allows('create', Asset::class),
-                'restore' => Gate::allows('create', Asset::class),
-                'update' => false,
-                'delete' => false,
-            ];
-        }
+            'checkout'      => ($asset->deleted_at=='' && Gate::allows('checkout', Asset::class)) ? true : false,
+            'checkin'       => ($asset->deleted_at=='' && Gate::allows('checkin', Asset::class)) ? true : false,
+            'clone'         => Gate::allows('create', Asset::class) ? true : false,
+            'restore'       => ($asset->deleted_at!='' && Gate::allows('create', Asset::class)) ? true : false,
+            'update'        => ($asset->deleted_at=='' && Gate::allows('update', Asset::class)) ? true : false,
+            'delete'        => ($asset->deleted_at=='' && $asset->assigned_to =='' && Gate::allows('delete', Asset::class)) ? true : false,
+        ];      
 
 
         if (request('components')=='true') {
@@ -144,7 +133,7 @@ class AssetsTransformer
                         
                             'id' => $component->id,
                             'pivot_id' => $component->pivot->id,
-                            'name' => $component->name,
+                            'name' => e($component->name),
                             'qty' => $component->pivot->assigned_qty,
                             'price_cost' => $component->purchase_cost,
                             'purchase_total' => $component->purchase_cost * $component->pivot->assigned_qty,
@@ -182,8 +171,8 @@ class AssetsTransformer
 
         return $asset->assigned ? [
             'id' => $asset->assigned->id,
-            'name' => $asset->assigned->display_name,
-            'type' => $asset->assignedType(),
+            'name' => e($asset->assigned->display_name),
+            'type' => $asset->assignedType()
         ] : null;
     }
 

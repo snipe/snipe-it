@@ -68,6 +68,7 @@ class Consumable extends SnipeModel
         'purchase_cost',
         'purchase_date',
         'qty',
+        'min_amt',
         'requestable',
     ];
 
@@ -185,6 +186,7 @@ class Consumable extends SnipeModel
         return $this->belongsTo(\App\Models\Category::class, 'category_id');
     }
 
+
     /**
      * Establishes the component -> action logs relationship
      *
@@ -209,8 +211,8 @@ class Consumable extends SnipeModel
         if ($this->image) {
             return Storage::disk('public')->url(app('consumables_upload_path').$this->image);
         }
-
         return false;
+
     }
 
     /**
@@ -224,6 +226,7 @@ class Consumable extends SnipeModel
     {
         return $this->belongsToMany(\App\Models\User::class, 'consumables_users', 'consumable_id', 'assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
     }
+
 
     /**
      * Determine whether to send a checkin/checkout email based on

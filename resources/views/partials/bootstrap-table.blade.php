@@ -64,7 +64,7 @@
                 return newParams;
             },
             formatLoadingMessage: function () {
-                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('general.loading') }} </h4>';
             },
             icons: {
                 advancedSearchIcon: 'fas fa-search-plus',
@@ -145,7 +145,7 @@
     function genericRowLinkFormatter(destination) {
         return function (value,row) {
             if (value) {
-                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '"> ' + value + '</a>';
+                return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '">' + value + '</a>';
             }
         };
     }
@@ -196,7 +196,7 @@
                     var dpolymorphicItemFormatterest = 'fields/';
                 }
 
-                return '<nobr><a href="{{ url('/') }}/' + dpolymorphicItemFormatterest + dest + '/' + value.id + '"> ' + value.name + '</a></span>';
+                return '<nobr><a href="{{ url('/') }}/' + dpolymorphicItemFormatterest + dest + '/' + value.id + '">' + value.name + '</a></span>';
             }
         };
     }
@@ -366,9 +366,9 @@
         if (value.assigned_to_self == true){
             return '<button class="btn btn-danger btn-sm disabled" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button>';
         } else if (value.available_actions.cancel == true)  {
-            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="GET"><button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>';
+            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>';
         } else if (value.available_actions.request == true)  {
-            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="GET"><button class="btn btn-primary btn-sm" data-toggle="tooltip" title="Request this item">{{ trans('button.request') }}</button></form>';
+            return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-primary btn-sm" data-toggle="tooltip" title="Request this item">{{ trans('button.request') }}</button></form>';
         }
 
     }
@@ -467,7 +467,7 @@
         if (value) {
             var groups = '';
             for (var index in value.rows) {
-                groups += '<a href="{{ url('/') }}/admin/groups/' + value.rows[index].id + '" class="label label-default"> ' + value.rows[index].name + '</a> ';
+                groups += '<a href="{{ url('/') }}/admin/groups/' + value.rows[index].id + '" class="label label-default">' + value.rows[index].name + '</a> ';
             }
             return groups;
         }
@@ -496,20 +496,20 @@
 
     function deployedLocationFormatter(row, value) {
         if ((row) && (row!=undefined)) {
-            return '<a href="{{ url('/') }}/locations/' + row.id + '"> ' + row.name + '</a>';
+            return '<a href="{{ url('/') }}/locations/' + row.id + '">' + row.name + '</a>';
         } else if (value.rtd_location) {
-            return '<a href="{{ url('/') }}/locations/' + value.rtd_location.id + '" data-toggle="tooltip" title="Default Location"> ' + value.rtd_location.name + '</a>';
+            return '<a href="{{ url('/') }}/locations/' + value.rtd_location.id + '" data-toggle="tooltip" title="Default Location">' + value.rtd_location.name + '</a>';
         }
 
     }
 
     function groupsAdminLinkFormatter(value, row) {
-        return '<a href="{{ url('/') }}/admin/groups/' + row.id + '"> ' + value + '</a>';
+        return '<a href="{{ url('/') }}/admin/groups/' + row.id + '">' + value + '</a>';
     }
 
     function assetTagLinkFormatter(value, row) {
         if ((row.asset) && (row.asset.id)) {
-            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.asset_tag + '</a>';
+            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '">' + row.asset.asset_tag + '</a>';
         }
         return '';
 
@@ -517,14 +517,14 @@
 
     function departmentNameLinkFormatter(value, row) {
         if ((row.assigned_user) && (row.assigned_user.department) && (row.assigned_user.department.name)) {
-            return '<a href="{{ url('/') }}/department/' + row.assigned_user.department.id + '"> ' + row.assigned_user.department.name + '</a>';
+            return '<a href="{{ url('/') }}/department/' + row.assigned_user.department.id + '">' + row.assigned_user.department.name + '</a>';
         }
 
     }
 
     function assetNameLinkFormatter(value, row) {
         if ((row.asset) && (row.asset.name)) {
-            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '"> ' + row.asset.name + '</a>';
+            return '<a href="{{ url('/') }}/hardware/' + row.asset.id + '">' + row.asset.name + '</a>';
         }
 
     }
@@ -551,31 +551,31 @@
 
     function emailFormatter(value) {
         if (value) {
-            return '<a href="mailto:' + value + '"> ' + value + '</a>';
+            return '<a href="mailto:' + value + '">' + value + '</a>';
         }
     }
 
     function linkFormatter(value) {
         if (value) {
-            return '<a href="' + value + '"> ' + value + '</a>';
+            return '<a href="' + value + '">' + value + '</a>';
         }
     }
 
     function assetCompanyFilterFormatter(value, row) {
         if (value) {
-            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.id + '"> ' + value + '</a>';
+            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.id + '">' + value + '</a>';
         }
     }
 
     function assetCompanyObjFilterFormatter(value, row) {
         if ((row) && (row.company)) {
-            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.company.id + '"> ' + row.company.name + '</a>';
+            return '<a href="{{ url('/') }}/hardware/?company_id=' + row.company.id + '">' + row.company.name + '</a>';
         }
     }
 
     function usersCompanyObjFilterFormatter(value, row) {
         if (value) {
-            return '<a href="{{ url('/') }}/users/?company_id=' + row.id + '"> ' + value + '</a>';
+            return '<a href="{{ url('/') }}/users/?company_id=' + row.id + '">' + value + '</a>';
         } else {
             return value;
         }
@@ -584,13 +584,13 @@
     function employeeNumFormatter(value, row) {
 
         if ((row) && (row.assigned_to) && ((row.assigned_to.employee_number))) {
-            return '<a href="{{ url('/') }}/users/' + row.assigned_to.id + '"> ' + row.assigned_to.employee_number + '</a>';
+            return '<a href="{{ url('/') }}/users/' + row.assigned_to.id + '">' + row.assigned_to.employee_number + '</a>';
         }
     }
 
     function orderNumberObjFilterFormatter(value, row) {
         if (value) {
-            return '<a href="{{ url('/') }}/hardware/?order_number=' + row.order_number + '"> ' + row.order_number + '</a>';
+            return '<a href="{{ url('/') }}/hardware/?order_number=' + row.order_number + '">' + row.order_number + '</a>';
         }
     }
 
@@ -637,7 +637,7 @@
             decimalfixed = periodless.replace(/,/g,".");
         } else {
             // yank commas, that's it.
-            decimalfixed = number.toString().replace(",","");
+            decimalfixed = number.toString().replace(/\,/g,"");
         }
         return parseFloat(decimalfixed);
     }
@@ -646,7 +646,34 @@
         if (Array.isArray(data)) {
             var field = this.field;
             var total_sum = data.reduce(function(sum, row) {
+                
                 return (sum) + (cleanFloat(row[field]) || 0);
+            }, 0);
+            
+            return numberWithCommas(total_sum.toFixed(2));
+        }
+        return 'not an array';
+    }
+
+    function sumFormatterQuantity(data){
+        if(Array.isArray(data)) {
+            
+            // Prevents issues on page load where data is an empty array
+            if(data[0] == undefined){
+                return 0.00
+            }
+            // Check that we are actually trying to sum cost from a table
+            // that has a quantity column. We must perform this check to
+            // support licences which use seats instead of qty
+            if('qty' in data[0]) {
+                var multiplier = 'qty';
+            } else if('seats' in data[0]) {
+                var multiplier = 'seats';
+            } else {
+                return 'no quantity';
+            }
+            var total_sum = data.reduce(function(sum, row) {
+                return (sum) + (cleanFloat(row["purchase_cost"])*row[multiplier] || 0);
             }, 0);
             return numberWithCommas(total_sum.toFixed(2));
         }
@@ -654,6 +681,7 @@
     }
 
     function numberWithCommas(value) {
+        
         if ((value) && ("{{$snipeSettings->digit_separator}}" == "1.234,56")){
             var parts = value.toString().split(".");
              parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");

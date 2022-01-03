@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'actions' 	                => 'Акции',
     'add'    	                => 'Додади ново',
     'cancel'                    => 'Откажи',
@@ -11,7 +11,8 @@ return [
     'request'                   => 'Побарај',
     'submit'  	                => 'Поднеси',
     'upload'                    => 'Прикачи',
-    'select_file'				=> 'Избери датотека...',
+	'select_file'				=> 'Избери датотека...',
     'select_files'				=> 'Избери датотека...',
     'generate_labels'           => '{1} Generate Label|[2,*] Generate Labels',
-];
+    'send_password_link'       => 'Send Password Reset Link',
+);
