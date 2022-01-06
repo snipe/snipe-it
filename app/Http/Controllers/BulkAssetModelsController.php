@@ -32,6 +32,7 @@ class BulkAssetModelsController extends Controller
 
             // If deleting....
             if ($request->input('bulk_actions')=='delete') {
+                $this->authorize('delete', AssetModel::class);
                 $valid_count = 0;
                 foreach ($models as $model) {
                     if ($model->assets_count == 0) {
@@ -42,7 +43,7 @@ class BulkAssetModelsController extends Controller
 
             // Otherwise display the bulk edit screen
             }
-
+            $this->authorize('update', AssetModel::class);
             $nochange = ['NC' => 'No Change'];
             return view('models/bulk-edit', compact('models'))
                 ->with('fieldset_list', $nochange + Helper::customFieldsetList())
@@ -63,7 +64,8 @@ class BulkAssetModelsController extends Controller
      */
     public function update(Request $request)
     {
-
+        $this->authorize('update', AssetModel::class);
+      
         $models_raw_array = $request->input('ids');
         $update_array = array();
 
@@ -103,6 +105,8 @@ class BulkAssetModelsController extends Controller
      */
     public function destroy(Request $request)
     {
+        $this->authorize('delete', AssetModel::class);
+      
         $models_raw_array = $request->input('ids');
 
         if ((is_array($models_raw_array)) && (count($models_raw_array) > 0)) {
