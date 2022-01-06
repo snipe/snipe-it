@@ -73,9 +73,9 @@
         <thead>
             <tr>
             <th style="width: 5px;"></th>
-            <th style="width: 25%;">{{ trans('admin/locations/table.company') }}</th>
+            <th style="width: 25%;">{{ trans('general.company') }}</th>
             <th style="width: 25%;">{{ trans('admin/locations/table.user_name') }}</th>
-            <th style="width: 10%;">{{ trans('admin/locations/table.employee_num') }}</th>
+            <th style="width: 10%;">{{ trans('general.employee_number') }}</th>
 	        <th style="width: 20%;">{{ trans('admin/locations/table.department') }}</th>
 		    <th style="width: 20%;">{{ trans('admin/locations/table.location') }}</th>
             </tr>

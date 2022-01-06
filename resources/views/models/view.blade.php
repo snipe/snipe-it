@@ -51,9 +51,9 @@
                       'id' => 'bulkForm']) }}
                   <div id="toolbar">
                       <select name="bulk_actions" class="form-control select2">
-                          <option value="edit">{{ trans('general.edit') }}</option>
-                          <option value="delete">{{ trans('general.delete') }}</option>
-                          <option value="labels">{{ trans('general.generate_labels') }}</option>
+                          <option value="edit">{{ trans('button.edit') }}</option>
+                          <option value="delete">{{ trans('button.delete') }}</option>
+                          <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
                       </select>
                       <button class="btn btn-primary" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
                   </div>

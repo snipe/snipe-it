@@ -217,7 +217,7 @@
             <div class="checkbox col-md-12">
               <label>
                 {{ Form::checkbox('employee_num', '1', '1', ['class' => 'minimal']) }}
-                {{ trans('admin/users/table.employee_num') }}
+                {{ trans('general.employee_number') }}
               </label>
             </div>
 

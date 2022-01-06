@@ -106,7 +106,7 @@
                                 {{ Form::label('test_slack', 'Test Slack') }}
                             </div>
                             <div class="col-md-10" id="slacktestrow">
-                                <a class="btn btn-default btn-sm pull-left" id="slacktest" style="margin-right: 10px;">Test <i class="fab fa-slack"></i> Integration</a>
+                                <a class="btn btn-default btn-sm pull-left" id="slacktest" style="margin-right: 10px;">{!! trans('admin/settings/general.slack_test') !!}</a>
                             </div>
                             <div class="col-md-10 col-md-offset-2">
                                 <span id="slacktesticon"></span>
@@ -213,7 +213,7 @@
                         var error_msg = data.responseJSON.message;
                     } else {
                         var errors;
-                        var error_msg = 'Something went wrong.';
+                        var error_msg = trans('admin/settings/message.slack.error');
                     }
 
                     var error_text = '';
@@ -227,7 +227,6 @@
                     if (data.status == 500) {
                         $('#slackteststatus').html('{{  trans('admin/settings/message.slack.500') }}');
                     } else if ((data.status == 400) || (data.status == 422)) {
-                        // TODO: Needs translation
                         console.log('Type of errors is '+ typeof errors);
                         console.log('Data status was 400 or 422');
 

@@ -20,9 +20,7 @@ return [
     'parent'                    => 'Parent',
     'currency'                  => 'Location Currency',
     'ldap_ou'                   => 'LDAP Search OU',
-    'company'                   => 'Company',
     'user_name'                 => 'User Name',
-    'employee_num'              => 'Employee No.',
     'department'                => 'Department',
     'location'                  => 'Location',
     'asset_tag'                 => 'Assets Tag',
@@ -37,5 +35,6 @@ return [
     'date'                      => 'Date:',
     'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
     'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
-    'signed_by_location_manager' => 'Signed By (Location Manager):'
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
 ];

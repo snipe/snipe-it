@@ -8,7 +8,6 @@ return [
     'createuser' 			=> 'Create User',
     'deny'  				=> 'Deny',
     'email'      			=> 'Email',
-    'employee_num'      	=> 'Employee No.',
     'first_name' 			=> 'First Name',
     'groupnotes'			=> 'Select a group to assign to the user, remember that a user takes on the permissions of the group they are assigned.',
     'id'         			=> 'Id',

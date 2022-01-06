@@ -454,7 +454,7 @@
                     }'>
             <thead>
               <tr>
-                <th data-visible="true" aria-hidden="true">Icon</th>
+                <th data-visible="true" aria-hidden="true">{{ trans('admin/hardware/table.icon') }}</th>
                 <th class="col-md-3" data-field="file_name" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.file_name') }}</th>
                 <th class="col-md-3" data-field="notes" data-visible="true" data-sortable="true" data-switchable="true">{{ trans('general.notes') }}</th>
                 <th class="col-md-2" data-field="created_at" data-visible="true"  data-sortable="true" data-switchable="true">{{ trans('general.created_at') }}</th>
@@ -498,7 +498,7 @@
                   @endif
                 </td>
                 <td>
-                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{ $file->filename }}?">
+                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', array('item' => $file)) }}" data-title="{{ trans('general.delete') }} {{ $file->filename }}?">
                     <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                     <span class="sr-only">{{ trans('general.delete') }}</span>
                   </a>

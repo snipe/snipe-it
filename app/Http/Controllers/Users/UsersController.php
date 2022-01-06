@@ -529,7 +529,7 @@ class UsersController extends Controller
                         strtolower(trans('general.id')),
                         trans('admin/companies/table.title'),
                         trans('admin/users/table.title'),
-                        trans('admin/users/table.employee_num'),
+                        trans('general.employee_number'),
                         trans('admin/users/table.name'),
                         trans('admin/users/table.username'),
                         trans('admin/users/table.email'),
