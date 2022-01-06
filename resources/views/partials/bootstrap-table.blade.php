@@ -6,10 +6,11 @@
 @push('js')
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
+<script src="{{ url('js/bootstrap-table-locale-all.js') }}"></script>
+
 <script nonce="{{ csrf_token() }}">
-
     $(function () {
-
+        var locale = '{{ config('app.locale') }}';
 
         var stickyHeaderOffsetY = 0;
 
@@ -39,6 +40,7 @@
                 }
             },
             stickyHeader: true,
+            locale: locale,
             stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
             undefinedText: '',
             iconsPrefix: 'fa',
@@ -88,9 +90,6 @@
         });
 
     });
-
-
-
 
 
     function dateRowCheckStyle(value) {
