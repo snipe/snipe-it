@@ -28,7 +28,7 @@
           {{ csrf_field() }}
 
           <!-- Location Selector -->
-          @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'required'=>'true'])
+          @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
 
           <!-- checkin/Checkin Date -->
               <div class="form-group {{ $errors->has('checkin_at') ? 'error' : '' }}">

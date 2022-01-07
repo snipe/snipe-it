@@ -284,8 +284,8 @@ class BulkAssetsController extends Controller
     {
         try {
             $location = null;
-            if ($request->filled('assigned_location')) {
-                $location = $request->get('assigned_location');
+            if ($request->filled('location_id')) {
+                $location = $request->get('location_id');
             }
 
             if (! is_array($request->get('selected_assets'))) {
