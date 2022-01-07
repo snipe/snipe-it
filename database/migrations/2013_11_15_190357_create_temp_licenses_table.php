@@ -6,30 +6,15 @@ class CreateTempLicensesTable extends Migration
 {
     /**
      * Run the migrations.
+     * 
+     * This migration is overwritten by a later migration - 2013_11_25_recreate_licenses_table.php
      *
      * @return void
      */
     public function up()
     {
         
-        if (!Schema::hasTable('licenses')) {
-            Schema::create('licenses', function ($table) {
-                $table->increments('id');
-                $table->string('name');
-                $table->integer('model_id');
-                $table->text('serial');
-                $table->string('license_email');
-                $table->string('license_name');
-                $table->date('purchase_date')->nullable();
-                $table->decimal('purchase_cost', 8, 2)->nullable();
-                $table->string('order_number');
-                $table->integer('assigned_to');
-                $table->text('notes');
-                $table->integer('user_id')->nullable();
-                $table->timestamps();
-                $table->engine = 'InnoDB';
-            });
-        }
+        //
 
        
     }
@@ -41,6 +26,6 @@ class CreateTempLicensesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('licenses');
+        // Schema::dropIfExists('licenses');
     }
 }
