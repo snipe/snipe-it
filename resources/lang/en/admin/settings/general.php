@@ -28,7 +28,12 @@ return [
     'auto_increment_prefix'		=> 'Prefix (optional)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',
     'backups'					=> 'Backups',
-    'backups_help'              => 'Download files &amp; Data',
+    'backups_restoring'         => 'Restoring from Backup',
+    'backups_upload'            => 'Upload Backup',
+    'backups_path'              => 'Backups on the server are stored in <code>:path</code>',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
+    'backups_logged_out'         => 'You will be logged out once your restore is complete.',
+    'backups_large'             => 'Very large backups may time out on the restore attempt and may still need to be run via command line. ',
     'barcode_settings'			=> 'Barcode Settings',
     'confirm_purge'			    => 'Confirm Purge',
     'confirm_purge_help'		=> 'Enter the text "DELETE" in the box below to purge your deleted records. This action cannot be undone and will PERMANENTLY delete all soft-deleted items and users. (You should make a backup first, just to be safe.)',
@@ -269,23 +274,6 @@ return [
     'oauth' => 'OAuth',
     'oauth_help' => 'Oauth Endpoint Settings',
     'asset_tag_title' => 'Update Asset Tag Settings',
-    'backup_upload' => 'Upload Backup',
-    'backup_files_path' => '<p>Backup files on the server are stored in: <code>:path</code></p>',
-    'backup_restore' => 'Restoring from Backup',
-    'backup_restore_info' => '      <p>
-        Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to 
-        restore from a previous backup. (This does not currently with with S3 file storage.)</p>
-        
-      <p>Your <strong>entire :app database and any uploaded files will be completely replaced</strong> by what is in the backup file.  
-      </p>
-        
-      <p class="text-danger" style="font-weight: bold; font-size: 120%;">
-        You will be logged out once your restore is complete.
-      </p>
-
-      <p>
-        Very large backups may time out on the restore attempt and may still need to be run via command line.  
-      </p>',
     'barcode_title' => 'Update Barcode Settings',
     'barcodes' => 'Barcodes',
     'barcodes_help_overview' => 'Barcode &amp; QR settings',

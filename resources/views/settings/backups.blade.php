@@ -105,14 +105,17 @@
       <div class="box-header with-border">
         <h2 class="box-title">
           <i class="far fa-file-archive" aria-hidden="true"></i>
-          {{ trans('admin/settings/general.backup_upload') }}</h2>
+          {{ trans('admin/settings/general.backups_upload') }}
+        </h2>
         <div class="box-tools pull-right">
         </div>
       </div><!-- /.box-header -->
 
       <div class="box-body">
 
-        {!! trans('admin/settings/general.backup_files_path', array('path' => $path)) !!}
+        <p>
+          {!! trans('admin/settings/general.backups_path', ['path'=> $path]) !!}
+        </p>
 
         @if (config('app.lock_passwords')===true)
         <p class="alert alert-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
@@ -171,13 +174,23 @@
     <div class="box box-warning">
       <div class="box-header with-border">
         <h2 class="box-title">
-          <i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i> {{ trans('admin/settings/general.backup_restore') }} </h2>
+          <i class="fas fa-exclamation-triangle text-orange" aria-hidden="true"></i> {{ trans('admin/settings/general.backups_restoring') }}</h2>
         <div class="box-tools pull-right">
         </div>
       </div><!-- /.box-header -->
       <div class="box-body">
         
-        {!! trans('admin/settings/general.backup_restore_info', array('app' => config('app.name'))) !!}
+      <p>
+        {!! trans('admin/settings/general.backups_restore_warning', ['app_name' => config('app.name') ]) !!}
+      </p>
+        
+      <p class="text-danger" style="font-weight: bold; font-size: 120%;">
+        {{ trans('admin/settings/general.backups_logged_out') }}
+      </p>
+
+      <p>
+        {{ trans('admin/settings/general.backups_large') }} 
+      </p>
       
     </div>
   </div>
