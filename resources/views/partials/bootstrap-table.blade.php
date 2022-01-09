@@ -6,7 +6,6 @@
 @push('js')
 
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
-<script src="{{ url('js/bootstrap-table-locale-all.js') }}"></script>
 
 <script nonce="{{ csrf_token() }}">
     $(function () {
