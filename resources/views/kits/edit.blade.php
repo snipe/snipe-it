@@ -41,7 +41,7 @@
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
                 </table>
-                <a href="{{ route('modal.show', ['type' => 'kit-model', 'itemId' => $item->id]) }}" data-refresh="kitModelsTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fas fa-plus icon-white"></i> Append</a>
+                <a href="{{ route('modal.show', ['type' => 'kit-model', 'itemId' => $item->id]) }}" data-refresh="kitModelsTable" data-toggle="modal" data-target="#createModal" class="btn btn-primary pull-right"><i class="fas fa-plus icon-white"></i> {{ trans('button.append')}}</a>
                 </div>
             </div> <!--.box-body-->
         </div> <!-- /.box.box-default-->

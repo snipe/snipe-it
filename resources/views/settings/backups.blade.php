@@ -45,10 +45,10 @@
                     class="table table-striped snipe-table">
             <thead>
               <tr>
-              <th data-sortable="true">File</th>
-              <th data-sortable="true" data-field="modified_display" data-sort-name="modified_value">Created</th>
+              <th data-sortable="true">{{ trans('general.file_name') }}</th>
+              <th data-sortable="true" data-field="modified_display" data-sort-name="modified_value">{{ trans('admin/settings/table.created') }}</th>
               <th data-field="modified_value" data-visible="false"></th>
-              <th data-sortable="true">Size</th>
+              <th data-sortable="true">{{ trans('admin/settings/table.created') }}</th>
               <th><span class="sr-only">{{ trans('general.delete') }}</span></th>
               </tr>
             </thead>
@@ -67,14 +67,24 @@
 
                   @can('superadmin')
                       <a data-html="false"
-                         class="btn delete-asset btn-danger btn-sm {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href="{{ route('settings.backups.destroy', $file['filename']) }}" data-content="{{ trans('admin/settings/message.backup.delete_confirm') }}" data-title="{{ trans('general.delete') }}  {{ e($file['filename']) }} ?" onClick="return false;">
+                         class="btn delete-asset btn-danger btn-sm {{ (config('app.lock_passwords')) ? ' disabled': '' }}" 
+                         data-toggle="modal" href="{{ route('settings.backups.destroy', $file['filename']) }}" 
+                         data-content="{{ trans('admin/settings/message.backup.delete_confirm') }}" 
+                         data-title="{{ trans('general.delete') }}  {{ e($file['filename']) }} ?" 
+                         onClick="return false;">
                           <i class="fas fa-trash icon-white" aria-hidden="true"></i>
                           <span class="sr-only">{{ trans('general.delete') }}</span>
                       </a>
 
-                     <a data-html="true" href="{{ route('settings.backups.restore', $file['filename']) }}" class="btn btn-warning btn-sm restore-asset {{ (config('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" data-content="Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you)." data-title="Are you sure you wish to restore your database from {{ e($file['filename']) }}?" onClick="return false;">
+                     <a data-html="true" 
+                     href="{{ route('settings.backups.restore', $file['filename']) }}" 
+                     class="btn btn-warning btn-sm restore-asset {{ (config('app.lock_passwords')) ? ' disabled': '' }}" 
+                     data-toggle="modal" 
+                     data-content="{{ trans('admin/settings/message.backup.restore_warning') }}" 
+                     data-title="{{ trans('admin/settings/message.backup.restore_confirm', array('filename' => e($file['filename']))) }}"
+                     onClick="return false;">
                       <i class="fas fa-retweet" aria-hidden="true"></i>
-                      <span class="sr-only">Restore</span>
+                      <span class="sr-only">{{ trans('general.restore') }}</span>
                     </a>
                      
                   @endcan
@@ -106,7 +116,7 @@
         <p>
           {!! trans('admin/settings/general.backups_path', ['path'=> $path]) !!}
         </p>
-        
+
         @if (config('app.lock_passwords')===true)
         <p class="alert alert-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
           @else

@@ -1,5 +1,5 @@
 <?php
-
+// TODO: Translate
 if (! empty($greeting)) {
     echo $greeting, "\n\n";
 } else {
