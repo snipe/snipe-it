@@ -91,7 +91,7 @@ class LdapSync extends Command
         }
 
         /* Determine which location to assign users to by default. */
-        $location = null; // FIXME - this would be better called "$default_location", which is more explicit about its purpose
+        $location = null; // TODO - this would be better called "$default_location", which is more explicit about its purpose
 
         if ($this->option('location') != '') {
             $location = Location::where('name', '=', $this->option('location'))->first();
@@ -133,7 +133,7 @@ class LdapSync extends Command
             foreach ($ldap_ou_locations as $ldap_loc) {
                 try {
                     $location_users = Ldap::findLdapUsers($ldap_loc['ldap_ou']);
-                } catch (\Exception $e) { // FIXME: this is stolen from line 77 or so above
+                } catch (\Exception $e) { // TODO: this is stolen from line 77 or so above
                     if ($this->option('json_summary')) {
                         $json_summary = ['error' => true, 'error_message' => trans('admin/users/message.error.ldap_could_not_search').' Location: '.$ldap_loc['name'].' (ID: '.$ldap_loc['id'].') cannot connect to "'.$ldap_loc['ldap_ou'].'" - '.$e->getMessage(), 'summary' => []];
                         $this->info(json_encode($json_summary));
