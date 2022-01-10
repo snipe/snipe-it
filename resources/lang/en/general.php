@@ -342,4 +342,8 @@
     'consumable_name'       => 'Consumable Name:',
     'accessory_information' => 'Accessory Information:',
     'accessory_name'       => 'Accessory Name:',
+    'clone_item'            => 'Clone Item',
+    'checkout_tooltip' => 'Check this item out',
+    'checkin_tooltip' => 'Check this item in',
+    'checkout_user_tooltip' => 'Check this item out to a user',
 ];
