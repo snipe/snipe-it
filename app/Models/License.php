@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use phpDocumentor\Reflection\Types\Collection;
 use Watson\Validating\ValidatingTrait;
 
 class License extends Depreciable
