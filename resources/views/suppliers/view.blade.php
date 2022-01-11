@@ -1,5 +1,4 @@
 @extends('layouts/default')
-
 {{-- Page title --}}
 @section('title')
 {{ trans('admin/suppliers/table.view') }} -
@@ -155,7 +154,7 @@
           @if ($supplier->id)
             <div class="box-header with-border">
               <div class="box-heading">
-                <h2 class="box-title"> Improvements</h2>
+                <h2 class="box-title"> {{ trans('general.improvements') }}</h2>
               </div>
             </div><!-- /.box-header -->
           @endif

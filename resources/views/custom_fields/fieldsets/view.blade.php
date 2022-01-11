@@ -27,7 +27,7 @@
             <tr>
               {{-- Hide the sorting handle if we can't update the fieldset --}}
               @can('update', $custom_fieldset)
-              <th class="col-md-1"><span class="sr-only">Reorder</span></th>
+              <th class="col-md-1"><span class="sr-only">{{ trans('admin/custom_fields/general.reorder') }}</span></th>
               @endcan
               <th class="col-md-1">{{ trans('admin/custom_fields/general.order') }}</th>
               <th class="col-md-3">{{ trans('admin/custom_fields/general.field_name') }}</th>
@@ -35,7 +35,7 @@
               <th class="col-md-2">{{ trans('admin/custom_fields/general.field_element') }}</th>
               <th class="col-md-1">{{ trans('admin/custom_fields/general.encrypted') }}</th>
               <th class="col-md-1">{{ trans('admin/custom_fields/general.required') }}</th>
-              <th class="col-md-1"><span class="sr-only">Remove</span></th>
+              <th class="col-md-1"><span class="sr-only">{{ trans('button.remove') }}</span></th>
             </tr>
           </thead>
           <tbody>
@@ -57,7 +57,7 @@
               <td>{{$field->element}}</td>
               <td>{{ $field->field_encrypted=='1' ?  trans('general.yes') : trans('general.no') }}</td>
                 <td>
-                  
+
                     @if ($field->pivot->required)
                     <form method="post" action="{{ route('fields.optional', [$custom_fieldset->id, $field->id]) }}">
                       @csrf 
@@ -71,13 +71,13 @@
                       <button type="submit" class="btn btn-link"><i class="fa fa-times text-danger" aria-hidden="true"></i></button>
                       </form>
                     @endif
-                    
+
                 </td>
               <td>
                 @can('update', $custom_fieldset)
                 <form method="post" action="{{ route('fields.disassociate', [$field, $custom_fieldset->id]) }}">
                   @csrf 
-                  <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                  <button type="submit" class="btn btn-sm btn-danger">{{ trans('button.remove') }}</button>
                 </form>
                 @endcan
               </td>
@@ -96,7 +96,7 @@
 
                 <div class="form-group col-md-4">
                   <label for="field_id" class="sr-only">
-                   Add Field to Fieldset
+                    {{ trans('admin/custom-field/general.add_field_to_fieldset')}}
                   </label>
                   {{ Form::select("field_id",$custom_fields_list,"",['aria-label'=>'field_id', 'class'=>'select2']) }}
 
@@ -113,7 +113,7 @@
                 <div class="form-group col-md-2">
 
                   {{ Form::text('order', $maxid, array('class' => 'form-control col-sm-1 col-md-1', 'style'=> 'width: 80px; padding-;right: 10px;', 'aria-label'=>'order', 'maxlength'=>'3', 'size'=>'3')) }}
-                  <label for="order">   Order </label>
+                  <label for="order">{{ trans('admin/custom_fields/general.order') }}</label>
                 </div>
 
                 <div class="form-group col-md-3">

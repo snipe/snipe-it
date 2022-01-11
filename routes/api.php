@@ -709,10 +709,10 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         */
         Route::group(['middleware'=> ['auth', 'authorize:superuser'], 'prefix' => 'settings'], function () {
 
-            Route::post('ldaptest',
+            Route::get('ldaptest',
                 [
                     Api\SettingsController::class, 
-                    'ldapAdSettingsTest'
+                    'ldaptest'
                 ]
             )->name('api.settings.ldaptest');
 

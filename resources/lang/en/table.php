@@ -6,5 +6,4 @@ return [
     'action' 		=> 'Action',
     'by'      		=> 'By',
     'item' 			=> 'Item',
-
 ];

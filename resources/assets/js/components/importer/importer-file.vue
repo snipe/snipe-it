@@ -178,7 +178,6 @@
                         {id: 'phone_number', text: 'Phone Number' },
                         {id: 'manager_first_name', text: 'Manager First Name' },
                         {id: 'manager_last_name', text: 'Manager Last Name' },
-                        {id: 'department', text: 'Department' },
                         {id: 'activated', text: 'Activated' },
                         {id: 'address', text: 'Address' },
                         {id: 'city', text: 'City' },

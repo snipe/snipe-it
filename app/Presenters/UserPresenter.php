@@ -157,7 +157,7 @@ class UserPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' => trans('admin/users/table.employee_num'),
+                'title' => trans('general.employee_number'),
                 'visible' => false,
             ],
             [
