@@ -39,7 +39,7 @@
                 <div class="box-header with-border">
                     <h2 class="box-title">
                         <i class="fas fa-sign-in-alt"></i> {{ trans('admin/settings/general.saml') }}
-                    </h4>
+                    </h2>
                 </div>
                 <div class="box-body">
 
