@@ -102,7 +102,7 @@ class AssetPresenter extends Presenter
                 'field' => 'employee_number',
                 'searchable' => false,
                 'sortable' => false,
-                'title' => trans('admin/users/table.employee_num'),
+                'title' => trans('general.employee_number'),
                 'visible' => false,
                 'formatter' => 'employeeNumFormatter',
             ], [

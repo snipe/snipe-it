@@ -59523,9 +59523,6 @@ __webpack_require__.r(__webpack_exports__);
           id: 'manager_last_name',
           text: 'Manager Last Name'
         }, {
-          id: 'department',
-          text: 'Department'
-        }, {
           id: 'activated',
           text: 'Activated'
         }, {
@@ -59674,7 +59671,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    select2: __webpack_require__(/*! ../select2.vue */ "./resources/assets/js/components/select2.vue")["default"]
+    select2: (__webpack_require__(/*! ../select2.vue */ "./resources/assets/js/components/select2.vue")["default"])
   }
 });
 
@@ -59818,9 +59815,9 @@ __webpack_require__(/*! blueimp-file-upload */ "./node_modules/blueimp-file-uplo
     }
   },
   components: {
-    alert: __webpack_require__(/*! ../alert.vue */ "./resources/assets/js/components/alert.vue")["default"],
-    errors: __webpack_require__(/*! ./importer-errors.vue */ "./resources/assets/js/components/importer/importer-errors.vue")["default"],
-    importFile: __webpack_require__(/*! ./importer-file.vue */ "./resources/assets/js/components/importer/importer-file.vue")["default"]
+    alert: (__webpack_require__(/*! ../alert.vue */ "./resources/assets/js/components/alert.vue")["default"]),
+    errors: (__webpack_require__(/*! ./importer-errors.vue */ "./resources/assets/js/components/importer/importer-errors.vue")["default"]),
+    importFile: (__webpack_require__(/*! ./importer-file.vue */ "./resources/assets/js/components/importer/importer-file.vue")["default"])
   }
 });
 
@@ -59963,7 +59960,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 //
 //
@@ -60322,7 +60319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 //
 //
@@ -60726,7 +60723,7 @@ __webpack_require__(/*! bootstrap-less */ "./node_modules/bootstrap-less/js/boot
  */
 
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"];
+window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
 window.eventHub = new Vue();
 
 __webpack_require__(/*! vue-resource */ "./node_modules/vue-resource/dist/vue-resource.esm.js");
@@ -60990,14 +60987,14 @@ $(document).ready(function () {
         },
 
         /* processResults: function (data, params) {
-             params.page = params.page || 1;
-             var answer =  {
+              params.page = params.page || 1;
+              var answer =  {
                 results: data.items,
                 pagination: {
                     more: data.pagination.more
                 }
             };
-             return answer;
+              return answer;
         }, */
         cache: true
       },
@@ -61331,10 +61328,14 @@ function htmlEntities(str) {
 
 /* 
 HOW TO USE
- Create a Button looking like this:
- <a href='{{ route('modal.show', 'user') }}' data-toggle="modal"  data-target="#createModal" data-select='assigned_to' class="btn btn-sm btn-primary">New</a>
- If you don't have access to Blade commands (like {{ and }}, etc), you can hard-code a URL as the 'href'
- data-toggle="modal" - required for Bootstrap Modals
+
+Create a Button looking like this:
+
+<a href='{{ route('modal.show', 'user') }}' data-toggle="modal"  data-target="#createModal" data-select='assigned_to' class="btn btn-sm btn-primary">New</a>
+
+If you don't have access to Blade commands (like {{ and }}, etc), you can hard-code a URL as the 'href'
+
+data-toggle="modal" - required for Bootstrap Modals
 data-target="#createModal" - fixed ID for the modal, do not change
 data-select="assigned_to" - What is the *ID* of the select-dropdown that you're going to be adding to, if the modal-create was a success? Be on the lookout for duplicate ID's, it will confuse this library!
 class="btn btn-sm btn-primary" - makes it look button-ey, feel free to change :)
@@ -61385,14 +61386,14 @@ $(function () {
             },
 
             /*processResults: function (data, params) {
-                 params.page = params.page || 1;
-                 var answer =  {
+                  params.page = params.page || 1;
+                  var answer =  {
                     results: data.items,
                     pagination: {
                         more: data.pagination.more
                     }
                 };
-                 return answer;
+                  return answer;
             },*/
             cache: true
           },
@@ -61567,10 +61568,10 @@ __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
  */
 
 
-Vue.component('passport-clients', __webpack_require__(/*! ./components/passport/Clients.vue */ "./resources/assets/js/components/passport/Clients.vue")["default"]);
-Vue.component('passport-authorized-clients', __webpack_require__(/*! ./components/passport/AuthorizedClients.vue */ "./resources/assets/js/components/passport/AuthorizedClients.vue")["default"]);
-Vue.component('passport-personal-access-tokens', __webpack_require__(/*! ./components/passport/PersonalAccessTokens.vue */ "./resources/assets/js/components/passport/PersonalAccessTokens.vue")["default"]);
-Vue.component('importer', __webpack_require__(/*! ./components/importer/importer.vue */ "./resources/assets/js/components/importer/importer.vue")["default"]); // This component has been removed and replaced with a Livewire implementation
+Vue.component('passport-clients', (__webpack_require__(/*! ./components/passport/Clients.vue */ "./resources/assets/js/components/passport/Clients.vue")["default"]));
+Vue.component('passport-authorized-clients', (__webpack_require__(/*! ./components/passport/AuthorizedClients.vue */ "./resources/assets/js/components/passport/AuthorizedClients.vue")["default"]));
+Vue.component('passport-personal-access-tokens', (__webpack_require__(/*! ./components/passport/PersonalAccessTokens.vue */ "./resources/assets/js/components/passport/PersonalAccessTokens.vue")["default"]));
+Vue.component('importer', (__webpack_require__(/*! ./components/importer/importer.vue */ "./resources/assets/js/components/importer/importer.vue")["default"])); // This component has been removed and replaced with a Livewire implementation
 // Vue.component(
 //     'fieldset-default-values',
 //     require('./components/forms/asset-models/fieldset-default-values.vue').default
@@ -98593,7 +98594,7 @@ function xhrClient (request) {
  * Http client (Node).
  */
 function nodeClient (request) {
-  var client = __webpack_require__(/*! got */ "?5743");
+  var client = __webpack_require__(/*! got */ "?3cb3");
 
   return new PromiseObj(function (resolve) {
     var url = request.getUrl();
@@ -109255,7 +109256,7 @@ Vue$3.compile = compileToFunctions;
 
 /***/ }),
 
-/***/ "?5743":
+/***/ "?3cb3":
 /*!*********************!*\
   !*** got (ignored) ***!
   \*********************/

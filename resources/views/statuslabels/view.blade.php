@@ -1,5 +1,4 @@
 @extends('layouts/default')
-
 {{-- Page title --}}
 @section('title')
     {{ $statuslabel->name }} {{ trans('general.assets') }}
@@ -23,11 +22,11 @@
                             @if (Request::get('status')!='Deleted')
                                 <div id="toolbar">
                                     <select name="bulk_actions" class="form-control select2">
-                                        <option value="edit">Edit</option>
-                                        <option value="delete">Delete</option>
-                                        <option value="labels">Generate Labels</option>
+                                        <option value="edit">{{ trans('button.edit') }}</option>
+                                        <option value="delete">{{ trans('button.delete') }}</option>
+                                        <option value="labels">{{ trans_choice('button.generate_labels', 1) }}</option>
                                     </select>
-                                    <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
+                                    <button class="btn btn-default" id="bulkEdit" disabled>{{ trans('button.go') }}</button>
                                 </div>
                             @endif
 

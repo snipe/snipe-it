@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-View Assets for  {{ $user->present()->fullName() }}
+{{ trans('general.viewassetsfor', array('name' => $user->present()->fullName())) }}
 @parent
 @stop
 
@@ -294,7 +294,7 @@ View Assets for  {{ $user->present()->fullName() }}
       @if ($user->id)
       <div class="box-header with-border">
         <div class="box-heading">
-          <h2 class="box-title"> History</h2>
+          <h2 class="box-title"> {{ trans('general.history') }}</h2>
         </div>
       </div><!-- /.box-header -->
       @endif

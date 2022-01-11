@@ -17,14 +17,16 @@
         "axios": "^0.20.0",
         "babel-preset-latest": "^6.24.1",
         "jquery": "^3.6.0",
-        "laravel-mix": "^6.0.12",
+        "laravel-mix": "^6.0.39",
         "lodash": "^4.17.20",
-        "postcss": "^8.2.8",
+        "postcss": "^8.4.5",
         "vue": "2.4.4",
         "vue-loader": "^15.9.7",
         "vue-template-compiler": "2.4.4"
     },
     "dependencies": {
+        "acorn": "^8.6.0",
+        "acorn-import-assertions": "^1.8.0",
         "admin-lte": "^2.4.18",
         "ajv": "^6.12.6",
         "blueimp-file-upload": "^9.34.0",
@@ -44,14 +46,16 @@
         "jquery-ui": "^1.13.0",
         "jquery-ui-bundle": "^1.12.1",
         "jquery.iframe-transport": "^1.0.0",
-        "less": "^4.1.1",
+        "jspdf-autotable": "^3.5.23",
+        "less": "^4.1.2",
         "less-loader": "^5.0.0",
         "list.js": "^1.5.0",
         "papaparse": "^4.3.3",
         "select2": "4.0.13",
         "sheetjs": "^2.0.0",
-        "tableexport.jquery.plugin": "^1.10.26",
+        "tableexport.jquery.plugin": "^1.21.0",
         "tether": "^1.4.0",
-        "vue-resource": "^1.5.2"
+        "vue-resource": "^1.5.2",
+        "webpack": "^5.65.0"
     }
 }

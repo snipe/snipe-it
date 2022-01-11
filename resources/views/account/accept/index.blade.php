@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Accept assets  {{ $user->present()->fullName() }}
+{{ trans('general.accept_assets', array('name' => $user->present()->fullName())) }}
 @parent
 @stop
 
@@ -34,15 +34,15 @@ Accept assets  {{ $user->present()->fullName() }}
                   }'>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Actions</th>
+                <th>{{ trans('general.name')}}</th>
+                <th>{{ trans('table.actions')}}</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($acceptances as $acceptance)
               <tr>
                 <td>{{ ($acceptance->checkoutable) ? $acceptance->checkoutable->present()->name : '' }}</td>
-                <td><a href="{{ route('account.accept.item', $acceptance) }}" class="btn btn-default btn-sm">Accept/Decline</a></td>
+                <td><a href="{{ route('account.accept.item', $acceptance) }}" class="btn btn-default btn-sm">{{ trans('general.accept_decline') }}</a></td>
               </tr>
               @endforeach
             </tbody>
