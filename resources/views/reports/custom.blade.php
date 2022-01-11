@@ -24,7 +24,7 @@
     <!-- Horizontal Form -->
       <div class="box box-default">
         <div class="box-header with-border">
-          <h2 class="box-title">Customize Report</h2>
+          <h2 class="box-title">{{  trans('general.customize_report') }}</h2>
         </div><!-- /.box-header -->
 
         <div class="box-body">
@@ -34,7 +34,7 @@
             <div class="checkbox col-md-12">
               <label>
                 <input type="checkbox" class="all minimal" checked="checked">
-               Select All
+               {{ trans('general.select_all') }}
               </label>
             </div>
             <div class="checkbox col-md-12">
@@ -199,7 +199,7 @@
 
             <!-- User fields -->
             <div class="checkbox col-md-12">
-              <h2>Checked Out To Fields:</h4>
+              <h2>{{ trans('general.checked_out_to') }} {{ trans('general.fields') }}:</h2>
             </div>
             <div class="checkbox col-md-12">
               <label>
@@ -217,7 +217,7 @@
             <div class="checkbox col-md-12">
               <label>
                 {{ Form::checkbox('employee_num', '1', '1', ['class' => 'minimal']) }}
-                {{ trans('admin/users/table.employee_num') }}
+                {{ trans('general.employee_number') }}
               </label>
             </div>
 
@@ -245,7 +245,7 @@
 
             @if ($customfields->count() > 0)
               <div class="checkbox col-md-12">
-                <h2>Custom Fields:</h4>
+                <h2>{{ trans('admin/custom_fields/general.custom_fields') }}</h>:</h4>
               </div>
               @foreach ($customfields as $customfield)
                 <div class="checkbox col-md-12">
@@ -261,8 +261,7 @@
 
           <div class="col-md-8">
 
-            <p>Select the fields you'd like to include in your custom report, and click Generate. The file (custom-asset-report-YYYY-mm-dd.csv) will download automatically, and you can open it in Excel.</p>
-            <p>If you'd like to export only certain assets, use the options below to fine-tune your results.</p>
+            {!! trans('general.report_fields_info') !!}
 
             @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'by_company_id', 'hide_new' => 'true'])
             @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'by_location_id', 'hide_new' => 'true'])
@@ -292,7 +291,7 @@
 
           <!-- Purchase Date -->
             <div class="form-group purchase-range">
-              <label for="purchase_start" class="col-md-3 control-label">{{ trans('general.purchase_date') }} Range</label>
+              <label for="purchase_start" class="col-md-3 control-label">{{ trans('general.purchase_date') }} {{  trans('general.range') }}</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
                 <input type="text" class="input-sm form-control" name="purchase_start" aria-label="purchase_start">
                 <span class="input-group-addon">to</span>
@@ -302,7 +301,7 @@
 
             <!-- Created Date -->
             <div class="form-group purchase-range">
-              <label for="created_start" class="col-md-3 control-label">{{ trans('general.created_at') }} Range</label>
+              <label for="created_start" class="col-md-3 control-label">{{ trans('general.created_at') }} {{  trans('general.range') }}</label>
               <div class="input-daterange input-group col-md-6" id="datepicker">
                 <input type="text" class="input-sm form-control" name="created_start" aria-label="created_start">
                 <span class="input-group-addon">to</span>
@@ -343,7 +342,7 @@
             <div class="col-md-9 col-md-offset-3">
               <label>
                 {{ Form::checkbox('use_bom', '1') }}
-                Add a BOM (byte-order mark) to this CSV
+                {{ trans('general.bom_remark') }}
               </label>
 
             </div>

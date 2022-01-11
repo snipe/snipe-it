@@ -181,7 +181,7 @@
                         $("#selected_status_status").removeClass('text-danger');
                         $("#selected_status_status").removeClass('text-warning');
                         $("#selected_status_status").addClass('text-success');
-                        $("#selected_status_status").html('<i class="fas fa-check"></i> That status is deployable. This asset can be checked out.');
+                        $("#selected_status_status").html('<i class="fas fa-check"></i> {{ trans('admin/hardware/form.asset_deployable')}}');
 
 
                     } else {
@@ -189,7 +189,7 @@
                         $("#selected_status_status").removeClass('text-danger');
                         $("#selected_status_status").removeClass('text-success');
                         $("#selected_status_status").addClass('text-warning');
-                        $("#selected_status_status").html('<i class="fas fa-exclamation-triangle"></i> That asset status is not deployable. This asset cannot be checked out. ');
+                        $("#selected_status_status").html('<i class="fas fa-exclamation-triangle"></i> {{ trans('admin/hardware/form.asset_not_deployable')}} ');
                     }
                 }
             });

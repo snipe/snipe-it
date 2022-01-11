@@ -61,12 +61,12 @@ class CheckoutKitController extends Controller
 
         $checkout_result = $this->kitService->checkout($request, $kit, $user);
         if (Arr::has($checkout_result, 'errors') && count($checkout_result['errors']) > 0) {
-            return redirect()->back()->with('error', 'Checkout error')->with('error_messages', $checkout_result['errors']);  // TODO: trans
+            return redirect()->back()->with('error', trans('general.checkout_error'))->with('error_messages', $checkout_result['errors']);
         }
 
-        return redirect()->back()->with('success', 'Checkout was successful')
+        return redirect()->back()->with('success', trans('general.checkout_success'))
             ->with('assets', Arr::get($checkout_result, 'assets', null))
             ->with('accessories', Arr::get($checkout_result, 'accessories', null))
-            ->with('consumables', Arr::get($checkout_result, 'consumables', null));                                   // TODO: trans
+            ->with('consumables', Arr::get($checkout_result, 'consumables', null));
     }
 }

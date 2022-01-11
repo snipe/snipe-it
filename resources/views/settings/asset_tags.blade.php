@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Asset Tag Settings
+    {{ trans('admin/settings/general.asset_tag_title') }}
     @parent
 @stop
 
@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-list-ol"></i> Asset Tags
+                        <i class="fas fa-list-ol"></i> {{ trans('general.asset_tags') }}
                     </h4>
                 </div>
                 <div class="box-body">

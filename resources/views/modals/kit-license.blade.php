@@ -4,7 +4,7 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span></button>
-            <h2 class="modal-title">Append license{{-- TODO: trans --}}</h2>
+            <h4 class="modal-title">{{ trans('admin/kits/general.append_license') }}</h4>
         </div>
         <div class="modal-body">
             <form action="{{ route('api.kits.licenses.store', $kitId) }}" onsubmit="return false">
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="dynamic-form-row">
-                        <div class="col-md-4 col-xs-12"><label for="modal-quantity_id">Quantity{{-- TODO: trans --}}:
+                        <div class="col-md-4 col-xs-12"><label for="modal-quantity_id">{{ trans('general.quantity') }}:
                             </label></div>
                         <div class="col-md-8 col-xs-12 required">
                             <input type='text' name='quantity' id='modal-quantity_id' class="form-control" value="1">

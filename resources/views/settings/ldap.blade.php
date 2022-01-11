@@ -25,7 +25,7 @@
             <div class="col-md-12">
                 <div class="col-md-12">
                     <div class="alert alert-danger">
-                       It doesn't look like the LDAP extension is installed or enabled on this server. You can still save your settings, but you will need to enable the LDAP extension for PHP before LDAP syncing or login will work.
+                        {{ trans('admin/settings/general.ldap_extension_warning') }}
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-sitemap"></i> LDAP/AD
+                        <i class="fas fa-sitemap"></i> {{ trans('admin/settings/general.ldap_ad') }}
                     </h4>
                 </div>
                 <div class="box-body">
@@ -122,7 +122,7 @@
                             </div>
                         </div><!-- AD Domain -->
 
-                        <!-- AD Append Domain -->
+                        {{-- NOTICE - this was a feature for AdLdap2-based LDAP syncing, and is already handled in 'classic' LDAP, so we now hide the checkbox (but haven't deleted the field) <!-- AD Append Domain -->
                         <div class="form-group">
                             <div class="col-md-3">
                                 {{ Form::label('ad_append_domain', trans('admin/settings/general.ad_append_domain_label')) }}
@@ -136,7 +136,7 @@
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
 
                         <!-- LDAP Client-Side TLS key -->
                         <div class="form-group {{ $errors->has('ldap_client_tls_key') ? 'error' : '' }}">
@@ -447,7 +447,7 @@
                                     {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
                                 </div>
                                 <div class="col-md-9" id="ldaptestrow">
-                                    <a {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">Test LDAP Synchronization</a>
+                                    <a {{ $setting->demoMode }} class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</a>
                                 </div>
                                 <div class="col-md-9 col-md-offset-3">
                                     <br />
@@ -476,7 +476,7 @@
                                     <input type="password" name="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password">
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">Test LDAP</a>
+                                        <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test') }}</a>
                                     </div>
 
 
@@ -562,7 +562,7 @@
         $("#ldaptest").click(function () {
             $("#ldapad_test_results").removeClass('hidden text-success text-danger');
             $("#ldapad_test_results").html('');
-            $("#ldapad_test_results").html('<i class="fas fa-spinner spin"></i> Testing LDAP Connection, Binding & Query ...');
+            $("#ldapad_test_results").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.ldap.testing') }}');
             $.ajax({
                 url: '{{ route('api.settings.ldaptest') }}',
                 type: 'GET',
@@ -586,7 +586,7 @@
                     $("#ldapad_test_results").addClass('text-danger');
                     let errorIcon = '<i class="fas fa-exclamation-triangle text-danger"></i>' + ' ';
                     if (data.status == 500) {
-                        $('#ldapad_test_results').html(errorIcon + '500 Server Error. Please check your server logs for more information.');
+                        $('#ldapad_test_results').html(errorIcon + '{{ trans('admin/settings/message.ldap.500') }}');
                     } else if (data.status == 400) {
                         let errorMessage = '';
                         if( typeof data.responseJSON.user_sync !== 'undefined') {
@@ -597,7 +597,7 @@
                         }
                         $('#ldapad_test_results').html(errorIcon + errorMessage);
                     } else {
-                        $('#ldapad_test_results').html('Something went wrong :( ');
+                        $('#ldapad_test_results').html('{{ trans('admin/settings/message.ldap.error') }}');
                        // $('#ldapad_test_results').html(errorIcon + data.responseText.message);
                     }
                 }
@@ -614,7 +614,7 @@
             html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.login.message + ' </li>'
             html += '<li class="text-success"><i class="fas fa-check" aria-hidden="true"></i> ' + results.bind.message + ' </li>'
             html += '</ul>'
-            html += '<div>A sample of 10 users returned from the LDAP server based on your settings:</div>'
+            html += '<div>{{ trans('admin/settings/message.ldap.sync_success') }}</div>'
             html += '<table class="table table-bordered table-condensed" style="background-color: #fff">'
             html += buildLdapResultsTableHeader()
             html += buildLdapResultsTableBody(results.user_sync.users)
@@ -624,7 +624,13 @@
 
         function buildLdapResultsTableHeader(user)
         {
-            var keys = ['Employee Number', 'Username', 'First Name', 'Last Name','Email']
+            var keys = [
+                '{{ trans('admin/settings/general.employee_number') }}',
+                '{{ trans('mail.username') }}',
+                '{{ trans('general.first_name') }}',
+                '{{ trans('general.last_name') }}',
+                '{{ trans('general.email') }}'
+            ]
             let header = '<thead><tr>'
             for (var i in keys) {
                 header += '<th>' + keys[i] + '</th>'
@@ -648,7 +654,7 @@
             $("#ldaptestloginrow").removeClass('text-danger');
             $("#ldaptestloginstatus").removeClass('text-danger');
             $("#ldaptestloginstatus").html('');
-            $("#ldaptestloginicon").html('<i class="fas fa-spinner spin"></i> Testing LDAP Authentication...');
+            $("#ldaptestloginicon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.ldap.testing_authentication') }}');
             $.ajax({
                 url: '{{ route('api.settings.ldaptestlogin') }}',
                 type: 'POST',
@@ -667,7 +673,7 @@
                     $("#ldaptestloginicon").html('');
                     $("#ldaptestloginrow").addClass('text-success');
                     $("#ldaptestloginstatus").addClass('text-success');
-                    $("#ldaptestloginstatus").html('<i class="fas fa-check text-success"></i> User authenticated against LDAP successfully!');
+                    $("#ldaptestloginstatus").html('<i class="fas fa-check text-success"></i> {{ trans('admin/settings/message.ldap.authentication_success') }}');
                 },
 
                 error: function (data) {
@@ -685,7 +691,7 @@
                     $("#ldaptestloginicon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
 
                     if (data.status == 500) {
-                        $('#ldaptestloginstatus').html('500 Server Error');
+                        $('#ldaptestloginstatus').html('{{ trans('admin/settings/message.ldap.500') }}');
                     } else if (data.status == 400) {
 
                         if (typeof errors !='string') {

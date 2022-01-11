@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Update Localization Settings
+    {{ trans('admin/settings/general.localization_title') }}
     @parent
 @stop
 
@@ -32,7 +32,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-globe-americas" aria-hidden="true"></i> Localization
+                        <i class="fas fa-globe-americas" aria-hidden="true"></i> {{ trans('admin/settings/general.localization') }}
                     </h2>
                 </div>
                 <div class="box-body">

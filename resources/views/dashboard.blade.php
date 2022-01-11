@@ -1,5 +1,4 @@
 @extends('layouts/default')
-
 {{-- Page title --}}
 @section('title')
 {{ trans('general.dashboard') }}
@@ -147,7 +146,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h2 class="box-title">This is your dashboard. There are many like it, but this one is yours.</h2>
+                    <h2 class="box-title">{{ trans('general.dashboard_info') }}</h2>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -156,34 +155,34 @@
 
                             <div class="progress">
                                 <div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                    <span class="sr-only">60% Complete (warning)</span>
+                                    <span class="sr-only">{{ trans('general.60_percent_warning') }}</span>
                                 </div>
                             </div>
 
 
-                            <p><strong>It looks like you haven't added anything yet, so we don't have anything awesome to display. Get started by adding some assets, accessories, consumables, or licenses now!</strong></p>
+                            <p><strong>{{ trans('general.dashboard_empty') }}</strong></p>
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                             @can('create', \App\Models\Asset::class)
-                            <a class="btn bg-teal" style="width: 100%" href="{{ route('hardware.create') }}">New Asset</a>
+                            <a class="btn bg-teal" style="width: 100%" href="{{ route('hardware.create') }}">{{ trans('general.new_asset') }}</a>
                             @endcan
                         </div>
                         <div class="col-md-3">
                             @can('create', \App\Models\License::class)
-                                <a class="btn bg-maroon" style="width: 100%" href="{{ route('licenses.create') }}">New License</a>
+                                <a class="btn bg-maroon" style="width: 100%" href="{{ route('licenses.create') }}">{{ trans('general.new_license') }}</a>
                             @endcan
                         </div>
                         <div class="col-md-3">
                             @can('create', \App\Models\Accessory::class)
-                                <a class="btn bg-orange" style="width: 100%" href="{{ route('accessories.create') }}">New Accessory</a>
+                                <a class="btn bg-orange" style="width: 100%" href="{{ route('accessories.create') }}">{{ trans('general.new_accessory') }}</a>
                             @endcan
                         </div>
                         <div class="col-md-3">
                             @can('create', \App\Models\Consumable::class)
-                                <a class="btn bg-purple" style="width: 100%" href="{{ route('consumables.create') }}">New Consumable</a>
+                                <a class="btn bg-purple" style="width: 100%" href="{{ route('consumables.create') }}">{{ trans('general.new_consumable') }}</a>
                             @endcan
                         </div>
                     </div>
@@ -203,7 +202,7 @@
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
                 <i class="fas fa-minus" aria-hidden="true"></i>
-                <span class="sr-only">Collapse</span>
+                <span class="sr-only">{{ trans('general.collapse') }}</span>
             </button>
         </div>
       </div><!-- /.box-header -->
@@ -225,7 +224,7 @@
                     data-url="{{ route('api.activity.index', ['limit' => 25]) }}">
                     <thead>
                     <tr>
-                        <th data-field="icon" data-visible="true" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"><span  class="sr-only">Icon</span></th>
+                        <th data-field="icon" data-visible="true" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"><span  class="sr-only">{{ trans('admin/hardware/table.icon') }}</span></th>
                         <th class="col-sm-3" data-visible="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                         <th class="col-sm-2" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                         <th class="col-sm-2" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
@@ -249,11 +248,11 @@
   <div class="col-md-4">
         <div class="box box-default">
             <div class="box-header with-border">
-                <h2 class="box-title">{{ trans('general.assets') }} by Status</h2>
+                <h2 class="box-title">{{ trans('general.assets') }} {{ trans('general.bystatus') }}</h2>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
                         <i class="fas fa-minus" aria-hidden="true"></i>
-                        <span class="sr-only">Collapse</span>
+                        <span class="sr-only">{{ trans('general.collapse') }}</span>
                     </button>
                 </div>
             </div>
@@ -276,11 +275,11 @@
          <!-- Categories -->
          <div class="box box-default">
             <div class="box-header with-border">
-                <h2 class="box-title">Asset {{ trans('general.locations') }}</h2>
+                <h2 class="box-title">{{ trans('general.asset') }} {{ trans('general.locations') }}</h2>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                         <i class="fas fa-minus" aria-hidden="true"></i>
-                        <span class="sr-only">Collapse</span>
+                        <span class="sr-only">{{ trans('general.collapse') }}</span>
                     </button>
                 </div>
             </div>
@@ -306,15 +305,15 @@
                                 
                                 <th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
                                     <i class="fas fa-barcode" aria-hidden="true"></i>
-                                    <span class="sr-only">Asset Count</span>
+                                    <span class="sr-only">{{ trans('general.asset_count') }}</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="assigned_assets_count" data-sortable="true">
                                     
-                                    Assigned
+                                    {{ trans('general.assigned') }}
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="users_count" data-sortable="true">
                                     <i class="fas fa-users" aria-hidden="true"></i>
-                                    <span class="sr-only">People</span>
+                                    <span class="sr-only">{{ trans('general.people') }}</span>
                                     
                                 </th>
                                 
@@ -336,11 +335,11 @@
         <!-- Categories -->
         <div class="box box-default">
             <div class="box-header with-border">
-                <h2 class="box-title">Asset {{ trans('general.categories') }}</h2>
+                <h2 class="box-title">{{ trans('general.asset') }} {{ trans('general.categories') }}</h2>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                         <i class="fas fa-minus" aria-hidden="true"></i>
-                        <span class="sr-only">Collapse</span>
+                        <span class="sr-only">{{ trans('general.collapse') }}</span>
                     </button>
                 </div>
             </div>
@@ -368,23 +367,23 @@
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
                                     <i class="fas fa-barcode" aria-hidden="true"></i>
-                                    <span class="sr-only">Asset Count</span>
+                                    <span class="sr-only">{{ trans('general.asset_count') }}</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="accessories_count" data-sortable="true">
                                     <i class="far fa-keyboard" aria-hidden="true"></i>
-                                    <span class="sr-only">Accessories Count</span>
+                                    <span class="sr-only">{{ trans('general.accessories_count') }}</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="consumables_count" data-sortable="true">
                                     <i class="fas fa-tint" aria-hidden="true"></i>
-                                    <span class="sr-only">Consumables Count</span>
+                                    <span class="sr-only">{{ trans('general.consumables_count') }}</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="components_count" data-sortable="true">
                                     <i class="far fa-hdd" aria-hidden="true"></i>
-                                    <span class="sr-only">Components Count</span>
+                                    <span class="sr-only">{{ trans('general.components_count') }}</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="licenses_count" data-sortable="true">
                                     <i class="far fa-save" aria-hidden="true"></i>
-                                    <span class="sr-only">Licenses Count</span>
+                                    <span class="sr-only">{{ trans('general.licenses_count') }}</span>
                                 </th>
                             </tr>
                             </thead>

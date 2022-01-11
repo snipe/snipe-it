@@ -139,7 +139,7 @@ return array(
     'saml_idp_metadata_help'    => 'You can specify the IdP metadata using a URL or XML file.',
     'saml_attr_mapping_username' => 'Attribute Mapping - Username',
     'saml_attr_mapping_username_help' => 'NameID will be used if attribute mapping is unspecified or invalid.',
-    'saml_forcelogin_label'     => 'SAML Force Login',
+    'saml_forcelogin_label'     => 'SAML Default Login',
     'saml_forcelogin'           => 'Make SAML the primary login',
     'saml_forcelogin_help'      => 'You can use \'/login?nosaml\' to get to the normal login page.',
     'saml_slo_label'            => 'SAML Single Log Out',
