@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Collection;
 
 class GroupsTransformer
 {
-    public function transformGroups(Collection $groups)
+    public function transformGroups (Collection $groups, $total = null)
     {
         $array = [];
         foreach ($groups as $group) {
             $array[] = self::transformGroup($group);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array);
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
     public function transformGroup(Group $group)

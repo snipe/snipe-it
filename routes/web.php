@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     */
 
     Route::group(['prefix' => 'manufacturers', 'middleware' => ['auth']], function () {
-        Route::get('{manufacturers_id}/restore', [ManufacturersController::class, 'restore'] )->name('restore/manufacturer');
+        Route::post('{manufacturers_id}/restore', [ManufacturersController::class, 'restore'] )->name('restore/manufacturer');
     });
 
     Route::resource('manufacturers', ManufacturersController::class, [
@@ -275,7 +275,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     Route::get('accept', [Account\AcceptanceController::class, 'index'])
         ->name('account.accept');
 
-    Route::get('accept/{id}', [Account\AcceptanceController::class, 'create'])
+    Route::post('accept/{id}', [Account\AcceptanceController::class, 'create'])
         ->name('account.accept.item');
 
     Route::post('accept/{id}', [Account\AcceptanceController::class, 'store']);

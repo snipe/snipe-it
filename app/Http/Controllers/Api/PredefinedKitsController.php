@@ -31,8 +31,8 @@ class PredefinedKitsController extends Controller
 
         $offset = $request->input('offset', 0);
         $limit = $request->input('limit', 50);
-        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets_count';
+        $order = $request->input('order') === 'desc' ? 'desc' : 'asc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'name';
         $kits->orderBy($sort, $order);
 
         $total = $kits->count();

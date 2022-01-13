@@ -167,7 +167,7 @@ class CustomFieldsController extends Controller
      */
     public function edit($id)
     {
-        $field = CustomField::find($id);
+        if ($field = CustomField::find($id)) {
 
         $this->authorize('update', $field);
 
@@ -181,6 +181,11 @@ class CustomFieldsController extends Controller
             'customFormat'      => $customFormat,
             'predefinedFormats' => Helper::predefined_formats(),
         ]);
+        } 
+
+        return redirect()->route("fields.index")
+            ->with("error", trans('admin/custom_fields/message.field.invalid'));
+        
     }
 
     /**
