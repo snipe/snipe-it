@@ -1,0 +1,3 @@
+remove Ziggy
+and ziggy-js too
+And what is /public/js/snipeit.js ? That looks like a generated file

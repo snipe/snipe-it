@@ -1,16 +1,13 @@
 
 
 <script>
-    require('blueimp-file-upload');
+    require('blueimp-file-upload'); //FIXME - how do I get this out? Wait, I think it's already there!
     export default {
         /*
          * The component's data.
          */
         data() {
             return {
-                files: [],
-                displayImportModal: false,
-                activeFile: null,
                 alert: {
                     type: null,
                     message: null,
@@ -28,34 +25,6 @@
 
         mounted() {
             window.eventHub.$on('importErrors', this.updateImportErrors);
-            let vm = this;
-            $('#fileupload').fileupload({
-                dataType: 'json',
-                done(e, data) {
-                    vm.progress.currentClass="progress-bar-success";
-                    vm.progress.statusText = "Success!";
-                    vm.files = data.result.files.concat(vm.files);
-                    console.log(data.result.header_row);
-                },
-                add(e, data) {
-                    data.headers = {
-                        "X-Requested-With": 'XMLHttpRequest',
-                        "X-CSRF-TOKEN": Laravel.csrfToken
-                    };
-                    data.process().done( () => {data.submit();});
-                    vm.progress.visible=true;
-                },
-                progress(e, data) {
-                    var progress = parseInt((data.loaded / data.total * 100, 10));
-                    vm.progress.currentPercent = progress;
-                    vm.progress.statusText = progress+'% Complete';
-                },
-                fail(e, data) {
-                    vm.progress.currentClass = "progress-bar-danger";
-                    // Display any errors returned from the $.ajax()
-                    vm.progress.statusText = data.jqXHR.responseJSON.messages;
-                }
-            })
         },
 
         methods: {
@@ -90,11 +59,6 @@
                 return "width: "+this.progress.currentPercent*10+'%';
             }
         },
-
-        components: {
-            alert: require('../alert.vue').default,
-            errors: require('./importer-errors.vue').default,
-        }
     }
 
 </script>

@@ -2,6 +2,79 @@
     {{-- <importer inline-template v-cloak> --}} {{-- like, this, here, that's a literal Vue directive --}}
         <div class="row">
         {{-- <alert v-show="alert.visible" :alert-type="alert.type" v-on:hide="alert.visible = false">@{{ alert.message }}</alert> --}}
+<template>
+    <div class="box" v-if="errors">
+  <div class="box-body">
+    <div class="alert alert-warning">
+      <strong>Warning</strong> Some Errors occured while importing
+    </div>
+
+    <div class="errors-table">
+      <table class="table table-striped table-bordered" id="errors-table">
+        <thead>
+          <th>Item</th>
+          <th>Errors</th>
+        </thead>
+        <tbody>
+          <tr v-for="(error, item) in errors">
+            <td>{{-- item --}}</td>
+            <td v-for="(value, field) in error">
+                <b>{{-- field --}}:</b>
+                <span v-for="errorString in value">{{-- errorString[0] --}}</span>
+              <br />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+    export default {
+        /*
+         * The component's data.
+         */
+         props: ['errors'],
+    }
+
+</script>
+
+{{-- alert --}}
+<template>
+        <div class="col-md-12" :class="alertType">
+            <div class="alert" :class="alertClassName">
+                <button type="button" class="close" @click="hideEvent">&times;</button>
+                <i class="fas fa-check faa-pulse animated" aria-hidden="true" v-show="alertType == 'success'"></i>
+                <strong>{{-- title --}} </strong>
+                <slot></slot>
+            </div>
+        </div>
+</template>
+
+<script>
+    export default {
+        /*
+         * The component's data.
+         */
+        props: ['alertType', 'title'],
+
+        computed: {
+            alertClassName() {
+                return 'alert-' + this.alertType;
+            }
+        },
+
+        methods: {
+            hideEvent() {
+                this.$emit('hide');
+            }
+        }
+    }
+
+</script>
+            {{-- errors thing that's built-in maybe? --}}
             {{-- <errors :errors="importErrors"></errors> --}}
 
             <div class="col-md-9">
@@ -96,4 +169,34 @@
 
         </div>
     {{-- </importer> --}}
+    <script>
+        let vm = this;
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            done: function(e, data) {
+                vm.progress.currentClass="progress-bar-success";
+                vm.progress.statusText = "Success!";
+                vm.files = data.result.files.concat(vm.files); // FIXME - how to get in and out of the Livewire
+                console.log(data.result.header_row);
+            },
+            add: function(e, data) {
+                data.headers = {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": Laravel.csrfToken // FIXME - meta tag? instead?
+                };
+                data.process().done( () => {data.submit();});
+                vm.progress.visible=true;
+            },
+            progress: function(e, data) {
+                var progress = parseInt((data.loaded / data.total * 100, 10));
+                vm.progress.currentPercent = progress;
+                vm.progress.statusText = progress+'% Complete';
+            },
+            fail: function(e, data) {
+                vm.progress.currentClass = "progress-bar-danger";
+                // Display any errors returned from the $.ajax()
+                vm.progress.statusText = data.jqXHR.responseJSON.messages;
+            }
+        })
+    </script>
 </div>
