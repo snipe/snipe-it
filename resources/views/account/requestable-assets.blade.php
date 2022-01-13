@@ -21,15 +21,12 @@
                 <li class="active">
                     <a href="#assets" data-toggle="tab" title="{{ trans('general.assets') }}">{{ trans('general.assets') }}
                         <badge class="badge badge-secondary"> {{ $assets->count()}}</badge>
-                    </a>
-
-                    
+                    </a>               
                 </li>
                 <li>
                     <a href="#models" data-toggle="tab" title="{{ trans('general.asset_models') }}">{{ trans('general.asset_models') }}
                         <badge class="badge badge-secondary"> {{ $models->count()}}</badge>
-                    </a>
-                    
+                    </a>                   
                 </li>
             </ul>
             <div class="tab-content">
