@@ -113,6 +113,12 @@ class ProfileController extends Controller
      * @return View
      */
     public function api() {
+
+        // Make sure the self.api permission has been granted
+        if (!Gate::allows('self.api')) {
+            abort(403);
+        }
+        
         return view('account/api');
     }
 
