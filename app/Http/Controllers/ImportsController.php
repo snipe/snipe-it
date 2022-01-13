@@ -15,8 +15,8 @@ class ImportsController extends Controller
     public function index()
     {
         $this->authorize('import');
-        $imports = (new ImportsTransformer)->transformImports(Import::latest()->get());
+        // $imports = (new ImportsTransformer)->transformImports(Import::latest()->get());
 
-        return view('importer/import')->with('imports', $imports);
+        return view('importer/import'); //->with('imports', $imports);
     }
 }

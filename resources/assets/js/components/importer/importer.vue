@@ -23,14 +23,11 @@
                     statusText: '',
                     visible: false
                 },
-                customFields: [],
             };
         },
 
         mounted() {
             window.eventHub.$on('importErrors', this.updateImportErrors);
-            this.fetchFiles();
-            this.fetchCustomFields();
             let vm = this;
             $('#fileupload').fileupload({
                 dataType: 'json',
@@ -62,28 +59,6 @@
         },
 
         methods: {
-            fetchFiles() {
-                this.$http.get(route('api.imports.index'))
-                .then( ({data}) => this.files = data, // Success
-                    //Fail
-                (response) => {
-                    this.alert.type="danger";
-                    this.alert.visible=true;
-                    this.alert.message="Something went wrong fetching files...";
-                });
-            },
-            fetchCustomFields() {
-                this.$http.get(route('api.customfields.index'))
-                .then( ({data}) => {
-                    data = data.rows;
-                    data.forEach((item) => {
-                        this.customFields.push({
-                            'id': item.db_column_name,
-                            'text': item.name,
-                        })
-                    })
-                });
-            },
             deleteFile(file, key) {
                 this.$http.delete(route('api.imports.destroy', file.id))
                 .then(
@@ -102,9 +77,6 @@
                     }
                 );
             },
-            toggleEvent(fileId) {
-                window.eventHub.$emit('showDetails', fileId)
-            },
             updateAlert(alert) {
                 this.alert = alert;
             },
@@ -122,7 +94,6 @@
         components: {
             alert: require('../alert.vue').default,
             errors: require('./importer-errors.vue').default,
-            importFile: require('./importer-file.vue').default,
         }
     }
 

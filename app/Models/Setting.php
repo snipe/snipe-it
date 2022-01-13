@@ -216,7 +216,7 @@ class Setting extends Model
      *
      * @author Mogilev Arseny
      */
-    public static function fileSizeConvert($bytes): string
+    public static function fileSizeConvert(int $bytes): string
     {
         $bytes = floatval($bytes);
         $arBytes = [
@@ -242,6 +242,7 @@ class Setting extends Model
                 ],
             ];
 
+        $result = $bytes; // handles the zero case
         foreach ($arBytes as $arItem) {
             if ($bytes >= $arItem['VALUE']) {
                 $result = $bytes / $arItem['VALUE'];
