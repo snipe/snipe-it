@@ -77,6 +77,8 @@ COPY . /var/www/html
 
 RUN a2enmod rewrite
 
+COPY docker/.my.cnf /root/.my.cnf
+
 ############ INITIAL APPLICATION SETUP #####################
 
 WORKDIR /var/www/html
