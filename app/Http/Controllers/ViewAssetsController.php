@@ -245,7 +245,9 @@ class ViewAssetsController extends Controller
             $data_uri = e($request->get('signature_output'));
             $encoded_image = explode(',', $data_uri);
             $decoded_image = base64_decode($encoded_image[1]);
-            file_put_contents($path.'/'.$sig_filename, $decoded_image);
+
+            Storage::putFileAs($path, $decoded_image, $sig_filename);
+            //file_put_contents($path.'/'.$sig_filename, $decoded_image);
         }
 
         $logaction = new Actionlog();
