@@ -31,16 +31,6 @@
 </div>
 </template>
 
-<script>
-    export default {
-        /*
-         * The component's data.
-         */
-         props: ['errors'],
-    }
-
-</script>
-
 {{-- alert --}}
 <template>
         <div class="col-md-12" :class="alertType">
@@ -54,7 +44,7 @@
 </template>
 
 <script>
-    export default {
+    fixme = {
         /*
          * The component's data.
          */
@@ -84,10 +74,10 @@
 
                             <div class="col-md-12">
 
-                                <div class="col-md-9" v-show="progress.visible" style="padding-bottom:20px">
-                                    <div class="progress progress-striped-active" style="margin-top: 8px">
-                                        <div class="progress-bar" :class="progress.currentClass" role="progressbar" :style="progressWidth">
-                                            <span>@{{ progress.statusText }}</span>
+                                <div class="col-md-9" style="padding-bottom:20px; display:none" id='progress-container'>
+                                    <div class="progress progress-striped-active" style="margin-top: 8px"> {{-- so someof these values are in importer.vue! --}}
+                                        <div id='progress-bar' class="progress-bar" class="progress-bar-warning" role="progressbar" style="width: 0%">
+                                            <span id='progress-text'></span>
                                         </div>
                                     </div>
                                 </div>
@@ -131,6 +121,9 @@
 
                                     {{-- <template v-for="currentFile in files"> --}}
                                     @foreach($files as $currentFile)
+                                            <?php 
+                                            \Log::error(print_r($currentFile,true))
+                                            ?>
                                     		<tr>
                                     			<td class="col-md-6">{{ $currentFile->file_path }}</td>
                                     			<td class="col-md-3">{{ $currentFile->created_at }} </td>
@@ -169,34 +162,51 @@
 
         </div>
     {{-- </importer> --}}
+</div>
+@push('js')
     <script>
-        let vm = this;
+        document.addEventListener('livewire:load', function () {
+            console.log("OKAY - we are gonna dump us out some files here!")
+             console.dir(Livewire.first().files)
+        })
+
         $('#fileupload').fileupload({
             dataType: 'json',
             done: function(e, data) {
-                vm.progress.currentClass="progress-bar-success";
-                vm.progress.statusText = "Success!";
-                vm.files = data.result.files.concat(vm.files); // FIXME - how to get in and out of the Livewire
+                $('#progress-bar').attr("class", "progress-bar-success");
+                $('#progress-text').text("Success!"); // same here? TODO - internationalize!
+                $('#progress-bar').attr('style', 'width: 100%'); // weird, wasn't needed before....
+                console.log("Dumping livewire files!!!!!!!!!")
+                console.dir(Livewire.first().files)
+                console.log("And now dumping data.result.files!!!!!")
+                console.dir(data.result.files)
+                //Livewire.first().files = data.result.files.concat(Livewire.first().files); // FIXME - how to get in and out of the Livewire.first().something.... (this doesn't work either)
+                // Livewire.first().files = Livewire.first().files.concat(data.result.files) //I don't quite see why this should be like this, but, well, whatever.
+                //fuckit, let's just force a refresh?
+                Livewire.first().forcerefresh = Livewire.first().forcerefresh+1 // this is a horrible hack; please forgive me :(
                 console.log(data.result.header_row);
+                console.dir()
             },
             add: function(e, data) {
                 data.headers = {
                     "X-Requested-With": 'XMLHttpRequest',
-                    "X-CSRF-TOKEN": Laravel.csrfToken // FIXME - meta tag? instead?
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
                 };
-                data.process().done( () => {data.submit();});
-                vm.progress.visible=true;
+                data.process().done( function () {data.submit();});
+                $('#progress-container').show();
             },
             progress: function(e, data) {
                 var progress = parseInt((data.loaded / data.total * 100, 10));
-                vm.progress.currentPercent = progress;
-                vm.progress.statusText = progress+'% Complete';
+                $('#progress-bar').attr('style', 'width: '+progress+'%');
+                $('#progress-text').text(progress+'% Complete');
             },
             fail: function(e, data) {
-                vm.progress.currentClass = "progress-bar-danger";
+                $('#progress-bar').attr("class", "progress-bar-danger");
                 // Display any errors returned from the $.ajax()
-                vm.progress.statusText = data.jqXHR.responseJSON.messages;
+                console.dir(data.jqXHR.responseJSON.messages) // FIXME don't dupm to console
+                $('#progress-bar').attr('style', 'width: 100%');
+                $('#progress-text').text(data.jqXHR.responseJSON.messages);
             }
         })
     </script>
-</div>
+@endpush

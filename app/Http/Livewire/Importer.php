@@ -12,10 +12,18 @@ class Importer extends Component
 {
     public $files;
     public $processDetails;
+    public $forcerefresh;
+
+    protected $rules = [
+        'files.*.file_path' => 'required|string',
+        'files.*.created_at' => 'required|string',
+        'files.*.filesize' => 'required|integer'
+    ];
 
     public function mount()
     {
-        $this->files = Import::all();
+        //$this->files = Import::all(); // this *SHOULD* be how it works, but...it doesn't?
+        $this->forcerefresh = 0;
     }
 
     public function test()
@@ -31,6 +39,7 @@ class Importer extends Component
 
     public function render()
     {
+        $this->files = Import::all(); //HACK - slows down renders.
         return view('livewire.importer');
     }
 }

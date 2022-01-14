@@ -14,12 +14,6 @@
                     visible: false,
                 },
                 importErrors: null,
-                progress: {
-                    currentClass: "progress-bar-warning",
-                    currentPercent: "0",
-                    statusText: '',
-                    visible: false
-                },
             };
         },
 
