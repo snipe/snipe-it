@@ -20,7 +20,7 @@
             <ul class="nav nav-tabs">
                 <li class="active">
                     <a href="#assets" data-toggle="tab" title="{{ trans('general.assets') }}">{{ trans('general.assets') }}
-                        <badge class="badge badge-secondary"> {{ $asset_count }}</badge>
+                        <badge class="badge badge-secondary"> {{ $assets->count()}}</badge>
                     </a>               
                 </li>
                 <li>
