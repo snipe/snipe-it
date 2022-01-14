@@ -1167,9 +1167,10 @@ class Asset extends Depreciable
     {
         return Company::scopeCompanyables($query->where('requestable', '=', 1))
         ->whereHas('assetstatus', function ($query) {
-            $query->where('deployable', '=', 1)
-                 ->where('pending', '=', 0)
-                 ->where('archived', '=', 0);
+            $query->where(function ($query) {
+                $query->where('deployable', '=', 1)
+                      ->where('archived', '=', 0); // you definitely can't request something that's archived
+            })->orWhere('pending', '=', 1); // we've decided that even though an asset may be 'pending', you can still request it
         });
     }
 
