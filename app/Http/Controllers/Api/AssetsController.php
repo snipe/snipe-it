@@ -942,7 +942,9 @@ class AssetsController extends Controller
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $assets->TextSearch($request->input('search'));
+        if ($request->filled('search')) {
+            $assets->TextSearch($request->input('search'));
+        }
 
         switch ($request->input('sort')) {
             case 'model':
