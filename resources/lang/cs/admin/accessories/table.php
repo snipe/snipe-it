@@ -1,10 +1,11 @@
 <?php
 
-return [
-    'dl_csv'      				=> 'Stáhnout CSV',
-    'eula_text'      			=> 'EULA',
+return array(
+	'dl_csv'      				=> 'Stáhnout CSV',
+	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
     'require_acceptance'      	=> 'Přijetí',
     'title'      				=> 'Název příslušenství',
 
-];
+
+);

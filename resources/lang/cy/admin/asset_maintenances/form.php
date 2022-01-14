@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Dyddiau',
         'notes'                  => 'Nodiadau',
         'update'                 => 'Diweddaru',
-        'create'                 => 'Creu',
+        'create'                 => 'Creu'
     ];

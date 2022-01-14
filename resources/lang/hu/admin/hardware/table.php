@@ -4,10 +4,11 @@ return [
 
     'asset_tag'   	=> 'Eszköz cimke',
     'asset_model'       => 'Modell',
-    'book_value'  	=> 'Érték',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Be/ki',
     'checkout_date' => 'Kiadási dátum',
     'checkoutto' 	=> 'Kiadva',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Eltérés',
     'dl_csv' 		=> 'Cvs letöltése',
     'eol' 			=> 'Lejárat',
@@ -18,8 +19,12 @@ return [
     'serial'   		=> 'Sorozatszám',
     'status'   		=> 'Állapot',
     'title'      	=> 'Eszköz ',
-    'image'		=> 'Készülék kép',
+    'image'		    => 'Készülék kép',
     'days_without_acceptance' => 'Nem elfogadás óta eltelt napok száma',
     'monthly_depreciation' => 'Havi értékcsökkenés',
-
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
 ];

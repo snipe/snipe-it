@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Tootjatest',
     'about_manufacturers_text'  => 'Tootjad on need ettevõtted, kes sinu vahendid on tootnud. Sa võid siin hoida enda jaoks olulisi tootja kasutajatoe kontakte, mida kuvatakse vahendite detailide juures.',
     'asset_manufacturers'	=> 'Vahendite tootjad',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Uuenda tootjat',
     'url'   				=> 'URL',
 
-];
+);

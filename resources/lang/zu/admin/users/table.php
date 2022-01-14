@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Isebenza',
     'allow'  				=> 'Vumela',
     'checkedout'  			=> 'Amafa',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Bonisa Abasebenzisi Bamanje',
     'show_deleted'          => 'Bonisa Abasebenzisi Abasusiwe',
     'title' 				=> 'Isihloko',
-    'to_restore_them'		=> 'ukuze ubuyisele.',
+	'to_restore_them'		=> 'ukuze ubuyisele.',
     'updateuser' 			=> 'Buyekeza Umsebenzisi',
     'username' 				=> 'Igama lomsebenzisi',
-    'user_deleted_text' 	=> 'Lo msebenzisi umakwe njengosusiwe.',
+	'user_deleted_text' 	=> 'Lo msebenzisi umakwe njengosusiwe.',
     'username_note' 		=> '(Lokhu kusetshenziselwa i-Active Directory ukubopha kuphela, hhayi ukungena ngemvume.)',
     'cloneuser'             => 'Clone Umsebenzisi',
     'viewusers' 			=> 'Buka Abasebenzisi',
-];
+);

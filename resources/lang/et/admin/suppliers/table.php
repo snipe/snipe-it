@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Tarnijatest',
     'about_suppliers_text'  => 'Tarnijaid kasutatakse selleks, et jälgida asjade hankimise allikaid',
     'address'               => 'Tarnija aadress',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Vaata vahendeid',
     'zip'                   => 'Postiindeks',
 
-];
+);

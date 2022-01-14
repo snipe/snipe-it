@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'I-Checkout Eyayisebenzisela Umsebenzisi',
     'consumable_name'                   => 'Igama elihlekayo',
     'create'                            => 'Dala ukukhishwa',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'Ukuhlala',
     'total' 			                => 'Inani',
     'update'                            => 'Ukuvuselelwa okudliwe',
-];
+);

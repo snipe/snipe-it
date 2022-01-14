@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'تصنيف الملحق',
     'accessory_name'  					=> 'اسم الملحق',
     'checkout'  							=> 'اخراج الملحق',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'قم باستعمال <a href="#" data-toggle="modal" data-target="#eulaModal">اتفاقية ترخيص المستخدم الافتراضية الاساسية</a>.',
     'use_default_eula_disabled'			=> '<del>استخدام (اتفاقية ترخيص المستخدم) الافتراضية الأساسية بدلا من ذلك.</del> لم يتم تحديد (اتفاقية ترخيص المستخدم) الافتراضية الأساسية. الرجاء إضافتها في الإعدادات.',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Litsentside kohta',
     'about_licenses'                  => 'Litsentse kasutatakse tarkvara jälgimiseks. Neil on kindlaksmääratud arv istekohti, mida saab üksikisikutele kontrollida',
     'checkin'  					=> 'Checkin License Seat',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Tarkvara litsentsid',
     'user'  					=> 'Kasutaja',
     'view'  					=> 'Vaadake litsentsi',
-];
+);

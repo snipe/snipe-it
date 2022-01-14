@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Eiendelsmerke',
     'asset_model'       => 'Modell',
-    'book_value'  	=> 'Verdi',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Inne/ute',
     'checkout_date' => 'Utsjekkdato',
     'checkoutto' 	=> 'Utsjekket',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Forskjell',
     'dl_csv' 		=> 'Last ned CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Serienummer',
     'status'   		=> 'Status',
     'title'      	=> 'Eiendel ',
-    'image'		=> 'Enhet bilde',
+    'image'		    => 'Enhet bilde',
     'days_without_acceptance' => 'Dager uten aksept',
-    'monthly_depreciation' => 'Månedlig avskrivning'
-
-);
+    'monthly_depreciation' => 'Månedlig avskrivning',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

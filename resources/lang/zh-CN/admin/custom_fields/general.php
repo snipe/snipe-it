@@ -2,10 +2,11 @@
 
 return [
     'custom_fields'		        => '自定义字段',
+    'manage'                    => 'Manage',
     'field'		                => '字段',
     'about_fieldsets_title'		=> '关于字段集',
-    'about_fieldsets_text'		=> '字段集允许你为常用的资产模型定义一组可重用的字段。',
-    'custom_format'             => '自定义格式',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => '在数据库中加密此字段',
     'encrypt_field_help'      => '警告︰ 对字段的加密将导致该字段无法用于搜索',
     'encrypted'      	        => '已加密',
@@ -26,7 +27,19 @@ return [
     'used_by_models'   		    => '引用模板',
     'order'   		            => '排序',
     'create_fieldset'         => '新增字段集',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => '新增字段',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => '此字段的值已被加密。只有管理员用户能够查看已解密的值',
     'show_in_email'     => '是否在发送给用户的Email中包含此字段的值？邮件中不能包含加密的值。',
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
 ];

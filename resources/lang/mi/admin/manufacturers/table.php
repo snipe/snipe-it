@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Mo nga kaihanga',
     'about_manufacturers_text'  => 'Ko nga kaihanga ko nga kamupene kei te waihanga i o taonga. Ka taea e koe te rokiroki i nga korero whakapiri tautoko nui e pa ana ki a ratou i konei, e whakaatuhia ana ki o raatau tuhinga taipitopito.',
     'asset_manufacturers'	=> 'Kaihanga Ahua',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Whakahōu Kaihanga',
     'url'   				=> 'URL',
 
-];
+);

@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Advertencia:</strong> este activo ha sido marcado actualmente como no enviable.                         Si este estado cambia, por favor actualiza el estado de activos.',
     'does_not_exist' 	=> 'El activo no existe.',
-    'does_not_exist_or_not_requestable' => 'Buen intento. Ese activo no existe o no es solicitable.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Este activo está actualmente asignado a un usuario y no puede ser borrado. Por favor, revisa el activo primero y luego intenta borrarlo. ',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Audoría de activo registrada con éxito.',
     ],
 
+
     'deletefile' => [
         'error'   => 'El archivo no fue borrado. Por favor, inténtalo de nuevo.',
         'success' => 'Archivo borrado con éxito.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Tu archivo ha sido eliminado con éxito',
         'file_delete_error'      => 'El archivo no se pudo eliminar',
     ],
+
 
     'delete' => [
         'confirm'   	=> '¿Estás seguro de que quieres borrar este archivo?',

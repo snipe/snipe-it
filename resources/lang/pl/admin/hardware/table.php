@@ -4,10 +4,11 @@ return [
 
     'asset_tag'   	=> 'Kod',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Treść',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'In/Out',
     'checkout_date' => 'Data przypisania',
     'checkoutto' 	=> 'Data wypisania',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Różnica',
     'dl_csv' 		=> 'Pobierz CSV',
     'eol' 			=> 'Koniec licencji',
@@ -18,8 +19,12 @@ return [
     'serial'   		=> 'Nr. seryjny',
     'status'   		=> 'Status',
     'title'      	=> 'Nabytek',
-    'image'		=> 'Zdjęcie urządzenia',
+    'image'		    => 'Zdjęcie urządzenia',
     'days_without_acceptance' => 'Dni bez akceptacji',
     'monthly_depreciation' => 'Amortyzacja miesięczna',
-
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
 ];

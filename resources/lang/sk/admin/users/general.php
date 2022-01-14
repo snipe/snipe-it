@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Tento používateľ sa môže prihlásiť',
     'activated_disabled_help_text' => 'Nemôžete upraviť stav aktivácie pre Váš vlastný účet.',
     'assets_user'       => 'Majetok priradený :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Upraviť používateľa',
     'filetype_info'     => 'Podporované typy súborov: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip a rar.',
     'history_user'      => 'História pre :name',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Kliknite sem pre obnovenie.',
     'last_login'        => 'Posledné prihlásenie',
     'ldap_config_text'  => 'Nastavenia LDAP-u sa nachádzajú v menu Administrácia => Nastavenia. Vybraná (voliteľná) lokalita bude nastavená pre všetkých importovaných používateľov.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Vaše súčasné nastavenie administrátora umožňujú selektívne vynútenie dvojfaktorovej autentifikácie.  ',
     'two_factor_enrolled' => '2FA prihlásené zariadenie ',
     'two_factor_active'   => '2FA aktívne ',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

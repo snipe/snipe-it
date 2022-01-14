@@ -1,5 +1,5 @@
 <?php
 
-return [
+return array(
     'title'      				=> '소모품 명',
-];
+);

@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'error'   => 'Du skal vælge mindst en mulighed.',
-];
+return array(
+    'error'   => 'Du skal vælge mindst en mulighed.'
+);

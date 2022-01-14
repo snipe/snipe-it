@@ -4,10 +4,11 @@ return [
 
     'asset_tag'   	=> 'Инвентарен номер',
     'asset_model'       => 'Модел',
-    'book_value'  	=> 'Стойност',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Предоставяне',
     'checkout_date' => 'Дата на изписване',
     'checkoutto' 	=> 'Изписан',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Разлика',
     'dl_csv' 		=> 'Сваляне на CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return [
     'serial'   		=> 'Сериен номер',
     'status'   		=> 'Статус',
     'title'      	=> 'Актив ',
-    'image'		=> 'Изображение на устройството',
+    'image'		    => 'Изображение на устройството',
     'days_without_acceptance' => 'Дни без да е предаден',
     'monthly_depreciation' => 'Месечна Амортизация',
-
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
 ];

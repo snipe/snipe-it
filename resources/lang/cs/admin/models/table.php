@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> 'Vytvořit vzor majetku',
     'created_at' 			=> 'Vytvořeno',
@@ -14,4 +14,4 @@ return [
     'update'				=> 'Upravit vzor majetku',
     'clone'				=> 'Kopíruj modelovou řadu',
     'edit'				=> 'Edituj model',
-];
+);

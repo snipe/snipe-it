@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Ativo',
     'allow'  				=> 'Permitir',
     'checkedout'  			=> 'Ativos',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Mostrar Usuários Atuais',
     'show_deleted'          => 'Mostrar Usuários Excluídos',
     'title' 				=> 'Título',
-    'to_restore_them'		=> 'para restaurar ele(a).',
+	'to_restore_them'		=> 'para restaurar ele(a).',
     'updateuser' 			=> 'Atualizar Usuário',
     'username' 				=> 'Usuário',
-    'user_deleted_text' 	=> 'Este usuário foi marcado como deletado.',
+	'user_deleted_text' 	=> 'Este usuário foi marcado como deletado.',
     'username_note' 		=> '(Istó é usado somente para conexão do Active Directory, não para login.)',
     'cloneuser'             => 'Clonar Usuário',
     'viewusers' 			=> 'Ver Usuários',
-];
+);

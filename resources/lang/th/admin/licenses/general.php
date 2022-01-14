@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'เกี่ยวกับใบอนุญาต',
     'about_licenses'                  => 'ใบอนุญาตใช้ในการติดตามซอฟต์แวร์ พวกเขามีจำนวนที่นั่งที่ระบุซึ่งสามารถเช็คเอาท์ให้บุคคลอื่นได้',
     'checkin'  					=> 'Checkin License Seat',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'ใบอนุญาตซอฟต์แวร์',
     'user'  					=> 'ผู้ใช้งาน',
     'view'  					=> 'ดูใบอนุญาต',
-];
+);

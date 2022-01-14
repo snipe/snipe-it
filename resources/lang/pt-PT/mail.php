@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Um utilizador cancelou um pedido de artigo no site',
     'a_user_requested' => 'Um utilizador solicitou um artigo no site',
     'accessory_name' => 'Nome do acessório:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'Isto é um email de teste do Snipe-IT Asset Management System. Se recebeste o recebeste, quer dizer que o email está a funcionar :)',
     'the_following_item' => 'O Item a seguir foi devolvido: ',
     'low_inventory_alert' => 'Há :count que está abaixo do estoque mínimo ou em breve estará baixo. Existem :count itens que estão abaixo do estoque mínimo ou em breve estarão baixos.',
-    'assets_warrantee_alert' => 'Há :count licença a expirar nos próximos :threshold dias. Existem :count licenças que irão expirar nos próximos :threshold dias.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Há :count licença a expirar nos próximos :threshold dias. Existem :count licenças que irão expirar nos próximos :threshold dias.',
     'to_reset' => 'Para fazer reset a senha do :web, preencha este formulário:',
     'type' => 'Tipo',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'Ver seus ativos'
-);
+    'your_assets' => 'Ver seus ativos',
+];

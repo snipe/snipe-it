@@ -1,10 +1,10 @@
 <?php
 
-return [
-    'eula_text'      			=> 'EULA',
+return array(
+	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
     'parent'   					=> 'Överordnad',
     'require_acceptance'      	=> 'Godkännande',
     'title'      				=> 'Namn på kategori',
 
-];
+);

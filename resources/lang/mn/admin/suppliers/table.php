@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Нийлүүлэгчийн талаар',
     'about_suppliers_text'  => 'Нийлүүлэгч нь эд зүйлийн эх сурвалжийг хянахад ашиглагддаг',
     'address'               => 'Нийлүүлэгчийн хаяг',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Активыг харах',
     'zip'                   => 'Шуудангийн код',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Categoriau Asedau',
     'category_name'  					=> 'Enw categori',
     'checkin_email'                     => 'Gyrru ebost i defnyddiwr wrth nodi fewn/allan.',
@@ -20,4 +20,4 @@ return [
     'use_default_eula_disabled'			=> '<del>Defnyddio\'r CTDT diofyn yn lle\'r un presennol.</del>Nid oes prif CTDT diofyn wedi gosod. Ychwanegwch yn ynj gosodiadau os gwelwch yn dda.',
     'use_default_eula_column'			=> 'Use default EULA',
 
-];
+);

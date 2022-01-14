@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Oor Status Etikette',
     'archived'      	=> 'argief',
     'create'      	=> 'Skep statusetiket',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Status etikette',
     'undeployable'  => 'Undeployable',
     'update'      	=> 'Dateer Status Label op',
-];
+);

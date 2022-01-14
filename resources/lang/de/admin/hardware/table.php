@@ -4,10 +4,11 @@ return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Modell',
-    'book_value'  	=> 'Wert',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Zurücknehmen/Herausgeben',
     'checkout_date' => 'Herausgabedatum',
     'checkoutto' 	=> 'Herausgegeben',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Differenz',
     'dl_csv' 		=> 'CSV Herunterladen',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return [
     'serial'   		=> 'Seriennummer',
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
-    'image'		=> 'Geräte-Bild',
+    'image'		    => 'Geräte-Bild',
     'days_without_acceptance' => 'Tage ohne Akzeptierung',
     'monthly_depreciation' => 'Monatliche Abschreibung',
-
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
 ];

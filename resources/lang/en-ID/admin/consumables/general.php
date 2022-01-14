@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'Periksa Comsumable ke pengguna',
     'consumable_name'                   => 'Nama Consumable',
     'create'                            => 'Buat Consumable',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'Tersisa',
     'total' 			                => 'Total',
     'update'                            => 'Update Consumable',
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'ID',
     'name'                      => 'Departement Naam',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'plek',
     'create'                    => 'Skep Departement',
     'update'                    => 'Update Departement',
-    ];
+    );

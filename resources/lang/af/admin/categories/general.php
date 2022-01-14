@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Bate kategorieë',
     'category_name'  					=> 'Kategorie Naam',
     'checkin_email'                     => 'Stuur e-pos aan gebruiker by aanmelding/afmelding.',
@@ -20,4 +20,4 @@ return [
     'use_default_eula_disabled'			=> '<del>Gebruik die primêre standaardverlof in plaas daarvan.</del> Geen primêre standaard EULA is ingestel nie. Voeg asseblief een by Instellings.',
     'use_default_eula_column'			=> 'Use default EULA',
 
-];
+);

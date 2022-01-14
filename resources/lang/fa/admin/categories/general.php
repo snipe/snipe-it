@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'دسته بندی های دارایی',
     'category_name'  					=> 'نام دسته بندی',
     'checkin_email'                     => 'ارسال ایمیل به کاربر در تحویل و استرداد.',
@@ -22,4 +22,4 @@ return [
 در تنظیمات اضافه کنید.',
     'use_default_eula_column'			=> 'استفاده توافق نامه پیشفرض',
 
-];
+);

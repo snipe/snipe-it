@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => '라이선스 란',
     'about_licenses'                  => '라이선스는 소프트웨어를 추적하는데 사용됩니다. 개인에게 반출 할 수 있는 수량이 정의되어 있습니다',
     'checkin'  					=> '라이선스 Seat 확인',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> '소프트웨어 라이선스',
     'user'  					=> '사용자',
     'view'  					=> '라이선스 보기',
-];
+);

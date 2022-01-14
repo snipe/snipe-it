@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> 'Cipta Model Harta',
     'created_at' 			=> 'Cipta Pada',
@@ -14,4 +14,4 @@ return [
     'update'				=> 'Kemaskini Model Harta',
     'clone'				=> 'Pendua Model',
     'edit'				=> 'Kemaskini Model',
-];
+);

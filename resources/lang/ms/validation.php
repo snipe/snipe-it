@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute mesti sekurang2nya :min characters.',
         'array'   => 'The: atribut mesti mempunyai sekurang-kurangnya: item min.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Piliah :attribute tidak sah.',
     'numeric'              => ':attribute mesti nombor.',
     'present'              => 'Yang: bidang atribut mesti ada.',
@@ -88,8 +89,8 @@ return array(
     'unique'               => ':attribute telah diambil.',
     'uploaded'             => 'The: attribute gagal untuk dimuat naik.',
     'url'                  => ':attribute format tidak sah.',
-    "unique_undeleted"     => ":attribute mesti unik.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => ':attribute mesti unik.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Bidang: atribut mengandungi aksara yang tidak dibenarkan.",
-        "email_array"      => "Satu atau lebih alamat e-mel tidak sah.",
-        "hashed_pass"      => "Kata laluan semasa anda tidak betul",
+        'alpha_space' => 'Bidang: atribut mengandungi aksara yang tidak dibenarkan.',
+        'email_array'      => 'Satu atau lebih alamat e-mel tidak sah.',
+        'hashed_pass'      => 'Kata laluan semasa anda tidak betul',
         'dumbpwd'          => 'Kata laluan itu terlalu umum.',
-        "statuslabel_type" => "Anda mesti memilih jenis label status yang sah",
+        'statuslabel_type' => 'Anda mesti memilih jenis label status yang sah',
     ],
 
     /*
@@ -135,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

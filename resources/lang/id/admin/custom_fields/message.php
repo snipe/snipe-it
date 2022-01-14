@@ -1,52 +1,57 @@
 <?php
 
-return [
+return array(
 
-    'field' => [
+    'field' => array(
         'invalid'   => 'Field tersebut tidak ada.',
         'already_added'   => 'Field sudah di tambahkan',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Field gagal di buat, silahkan coba kembali.',
             'success' => 'Field telah sukses di buat.',
-            'assoc_success' => 'Field sukses di tambahkan ke fieldset.',
-        ],
+            'assoc_success' => 'Field sukses di tambahkan ke fieldset.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Field tidak terbaharui, silahkan coba kembali',
-            'success' => 'Field sukses diperbarui.',
-        ],
+            'success' => 'Field sukses diperbarui.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Apakah Anda yakin untuk menghapus field ini?',
             'error'   => 'Terdapat kesalahan pada saat penghapusan field ini. Silahkan coba kembali.',
             'success' => 'Field telah berhasil dihapus.',
             'in_use'   => 'Field sedang digunakan.',
-        ],
+        )
 
-    ],
+    ),
 
-    'fieldset' => [
+    'fieldset' => array(
 
         'does_not_exist' => 'Fieldset tidak ada',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Fieldset gagal di buat, silahkan coba kembali.',
-            'success' => 'Fieldset telah sukses di buat.',
-        ],
+            'success' => 'Fieldset telah sukses di buat.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Fieldset tidak terbaharui, silahkan coba kembali',
-            'success' => 'Fieldset sukses diperbarui.',
-        ],
+            'success' => 'Fieldset sukses diperbarui.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Apakah Anda yakin untuk menghapus fieldset ini?',
             'error'   => 'Terdapat kesalahan pada saat penghapusan fieldset ini. Silahkan coba kembali.',
             'success' => 'Fieldset telah berhasil dihapus.',
             'in_use'   => 'Fieldset sedang digunakan.',
-        ],
+        )
 
-    ],
+    ),
 
-];
+
+
+
+
+
+);

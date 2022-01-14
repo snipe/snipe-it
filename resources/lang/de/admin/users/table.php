@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Active',
     'allow'  				=> 'Erlauben',
     'checkedout'  			=> 'Assets',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Zeige aktuelle Benutzer',
     'show_deleted'          => 'Zeige gelöschte Benutzer',
     'title' 				=> 'Titel',
-    'to_restore_them'		=> 'zum Wiederherstellen.',
+	'to_restore_them'		=> 'zum Wiederherstellen.',
     'updateuser' 			=> 'Benutzer aktualisieren',
     'username' 				=> 'Benutzername',
-    'user_deleted_text' 	=> 'Dieser Benutzer wurde als gelöscht markiert.',
+	'user_deleted_text' 	=> 'Dieser Benutzer wurde als gelöscht markiert.',
     'username_note' 		=> '(Dies wird für den Bind an das Active Directory benutzt, nicht für die Anmeldung.)',
     'cloneuser'             => 'Benutzer kopieren',
     'viewusers' 			=> 'Benutzer anzeigen',
-];
+);

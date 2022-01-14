@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => '부품명',
     'checkin'                             => '반입 부품',
     'checkout'                             => '반출 부품',
@@ -12,4 +12,4 @@ return [
     'remaining' 			             => '잔여수량',
     'total' 			                 => '총계',
     'update'                            => '부품 갱신',
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'فعال کردن',
     'allow'  				=> 'مجاز کردن',
     'checkedout'  			=> 'دارایی ها',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'نمایش کابران کنونی',
     'show_deleted'          => 'نمایش کاربران حذف شده',
     'title' 				=> 'عنوان',
-    'to_restore_them'		=> 'برای بازگرداندن آنها.',
+	'to_restore_them'		=> 'برای بازگرداندن آنها.',
     'updateuser' 			=> 'به روز رسانی کاربر',
     'username' 				=> 'نام کاربری',
-    'user_deleted_text' 	=> 'این کاربر به عنوان حذف شده است.',
+	'user_deleted_text' 	=> 'این کاربر به عنوان حذف شده است.',
     'username_note' 		=> '(این فقط برای فعال سازی راهنمای اتصال است ،نه برای وارد شدن)',
     'cloneuser'             => ' کاربر کلون',
     'viewusers' 			=> 'مشاهده کاربران',
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'ユーザーがアイテムリクエストをキャンセルしました。',
     'a_user_requested' => 'ユーザーがアイテムをリクエストしています',
     'accessory_name' => '付属品名:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'これはSnipe-IT資産管理システムのテストです。あなたがこれを読めているなら、メール機能は動作しています:)',
     'the_following_item' => '次の項目がチェックインされています: ',
     'low_inventory_alert' => '最小在庫を下回っているか、すぐに少なくなる :count のアイテムがあります。',
-    'assets_warrantee_alert' => ':threshold 日後に:count の資産の保証期間が終了します。',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => ':threshold 日後に:count ライセンスが失効します。',
     'to_reset' => 'パスワードをリセットするには、: web のフォームを完了します:',
     'type' => 'タイプ',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'あなたの資産を表示'
-);
+    'your_assets' => 'あなたの資産を表示',
+];

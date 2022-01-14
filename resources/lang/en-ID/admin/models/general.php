@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'Tentang Model Aset',
     'about_models_text'           => 'Model Aset adalah cara untuk mengelompokkan aset identik. "MBP 2013", "IPhone 6s", dll.',
     'deleted'  					        => 'This model has been deleted.',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => 'Anda akan menghapus: model aset model_count.',
     'restore'                   => 'Kembalikan model',
     'requestable'               => 'Pengguna dapat meminta model ini',
-    'show_mac_address'			      => 'Tampilkan bidang alamat MAC dalam aset model ini',
+	'show_mac_address'			      => 'Tampilkan bidang alamat MAC dalam aset model ini',
     'view_deleted'              => 'View dihapus',
     'view_models'               => 'Lihat model',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Tidak ada bidang khusus',
     'add_default_values'        => 'Tambah nilai default',
-];
+);

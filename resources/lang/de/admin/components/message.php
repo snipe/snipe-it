@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Komponente existiert nicht.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Komponente wurde nicht erstellt. Bitte versuchen Sie es erneut.',
-        'success' => 'Komponente wurde erfolgreich erstellt.',
-    ],
+        'success' => 'Komponente wurde erfolgreich erstellt.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Komponente wurde nicht geändert. Bitte versuchen Sie es erneut',
-        'success' => 'Komponente erfolgreich geändert.',
-    ],
+        'success' => 'Komponente erfolgreich geändert.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Sind Sie sicher, dass Sie diese Komponente löschen möchten?',
         'error'   => 'Beim Löschen der Komponente ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
-        'success' => 'Die Komponente wurde erfolgreich gelöscht.',
-    ],
+        'success' => 'Die Komponente wurde erfolgreich gelöscht.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Komponente konnte nicht herausgegeben werden. Bitte versuchen Sie es erneut',
         'success' 		=> 'Komponente wurde erfolgreich herausgegeben.',
-        'user_does_not_exist' => 'Dieser Benutzer ist ungültig. Bitte versuchen Sie es noch einmal.',
-    ],
+        'user_does_not_exist' => 'Dieser Benutzer ist ungültig. Bitte versuchen Sie es noch einmal.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Komponente konnte nicht zurückgenommen werden. Bitte versuchen Sie es erneut',
         'success' 		=> 'Komponente wurde erfolgreich zurückgenommen.',
-        'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.',
-    ],
+        'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.'
+    )
 
-];
+
+);

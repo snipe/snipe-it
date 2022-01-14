@@ -13,3 +13,4 @@ return [
     'username_help_top'                 => 'Inserisci il tuo <strong>nome utente</strong> per ricevere via email il link per reimpostare la password.',
     'username_help_bottom'          => 'Il tuo nome utente e indirizzo email <em>possono</em> essere gli stessi, ma potrebbe non essere così a seconda della tua configurazione. Se non riesci a ricordare il tuo nome utente, contatta l\'amministratore. <br><br><strong>I nomi utente senza un indirizzo email associato non potranno ricevere via email il link di reimpostazione della password.</strong> ',
     ];
+

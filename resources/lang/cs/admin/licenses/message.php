@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Licence neexistuje.',
     'user_does_not_exist' => 'Uživatel neexistuje.',
@@ -10,42 +10,43 @@ return [
     'select_asset_or_person' => 'Musíte vybrat aktivum nebo uživatele, ale ne obojí.',
     'not_found' => 'License not found',
 
-    'create' => [
-        'error'   => 'Licence nebyla vytvořena, zkuste to prosím znovu.',
-        'success' => 'Licence byla úspěšně vytvořena.',
-    ],
 
-    'deletefile' => [
+    'create' => array(
+        'error'   => 'Licence nebyla vytvořena, zkuste to prosím znovu.',
+        'success' => 'Licence byla úspěšně vytvořena.'
+    ),
+
+    'deletefile' => array(
         'error'   => 'Soubor se nepodařilo smazat. Prosím zkuste to znovu.',
         'success' => 'Soubor byl úspěšně smazán.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Soubor(y) se nepodařilo nahrát. Prosím zkuste to znovu.',
         'success' => 'Soubor(y) byly v pořádku nahrány.',
         'nofiles' => 'K nahrání jste nevybrali žádný, nebo příliš velký soubor',
         'invalidfiles' => 'Jeden nebo více označených souborů je příliš velkých nebo nejsou podporované. Povolenými příponami jsou png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, a lic.',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Licence nebyla aktualizována, zkuste to prosím znovu',
-        'success' => 'Licence byla úspěšně aktualizována.',
-    ],
+        'success' => 'Licence byla úspěšně aktualizována.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Jste si jisti, že chcete odstranit tuto licenci?',
         'error'   => 'Vyskytl se problém při mazání licence. Zkuste to znovu prosím.',
-        'success' => 'Licence byla úspěšně smazána.',
-    ],
+        'success' => 'Licence byla úspěšně smazána.'
+    ),
 
-    'checkout' => [
+    'checkout' => array(
         'error'   => 'Vyskytl se problém při výdeji licence. Zkuste to znovu prosím.',
-        'success' => 'Licence byla úspěšně vydána',
-    ],
+        'success' => 'Licence byla úspěšně vydána'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   => 'Vyskytl se problém při ověřování licence. Zkuste to znovu prosím.',
-        'success' => 'Licence byla úspěšně zkontrolována',
-    ],
+        'success' => 'Licence byla úspěšně zkontrolována'
+    ),
 
-];
+);

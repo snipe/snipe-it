@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'He kaha',
     'allow'  				=> 'Tukua',
     'checkedout'  			=> 'Ngā taonga',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Whakaatuhia nga Kaiwhakamahi o Naianei',
     'show_deleted'          => 'Whakaatu Kaiwhakamahi Kua Mukua',
     'title' 				=> 'Taitara',
-    'to_restore_them'		=> 'ki te whakaora ia ratou.',
+	'to_restore_them'		=> 'ki te whakaora ia ratou.',
     'updateuser' 			=> 'Whakahōu Kaiwhakamahi',
     'username' 				=> 'Ingoa Kaiwhakamahi',
-    'user_deleted_text' 	=> 'Kua tohua tenei kaiwhakamahi kia mukua.',
+	'user_deleted_text' 	=> 'Kua tohua tenei kaiwhakamahi kia mukua.',
     'username_note' 		=> '(Ka whakamahia tenei mo te Active Directory anake, kaore i te takiuru.)',
     'cloneuser'             => 'Kaiwhakamahi Tino',
     'viewusers' 			=> 'Kaiwhakamahi Tiro',
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Actief',
     'allow'  				=> 'Toestaan',
     'checkedout'  			=> 'Assets',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Toon de huidige gebruikers',
     'show_deleted'          => 'Toon de verwijderde gebruikers',
     'title' 				=> 'Titel',
-    'to_restore_them'		=> 'om ze te herstellen.',
+	'to_restore_them'		=> 'om ze te herstellen.',
     'updateuser' 			=> 'Gebruiker bijwerken',
     'username' 				=> 'Gebruikersnaam',
-    'user_deleted_text' 	=> 'Deze gebruiker is gemarkeerd als verwijderd.',
+	'user_deleted_text' 	=> 'Deze gebruiker is gemarkeerd als verwijderd.',
     'username_note' 		=> '(Dit wordt enkel gebruikt om te koppelen met de Active Directory, niet om aan te melden.)',
     'cloneuser'             => 'Gebruiker dupliceren',
     'viewusers' 			=> 'Bekijk gebruikers',
-];
+);

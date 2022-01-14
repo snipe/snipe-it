@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'assigned_to'   	=> 'Ανατέθηκε στον',
     'checkout'   		=> 'In/Out',
@@ -14,4 +14,4 @@ return [
     'serial'   			=> 'Σειριακός',
     'title'      		=> 'Άδεια Χρήσεως',
 
-];
+);

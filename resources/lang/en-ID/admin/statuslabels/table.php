@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Tentang Label Status',
     'archived'      	=> 'Diarsipkan',
     'create'      	=> 'Buat label status',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Label status',
     'undeployable'  => 'Tidak dapat disebarkan',
     'update'      	=> 'Perbarui label status',
-];
+);

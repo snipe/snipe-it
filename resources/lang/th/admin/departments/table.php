@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'                        => 'ID',
     'name'                      => 'ชื่อห้างสรรพสินค้า',
@@ -8,4 +8,4 @@ return [
     'location'                  => 'ที่ตั้ง',
     'create'                    => 'สร้างแผนก',
     'update'                    => 'ฝ่ายอัปเดต',
-    ];
+    );

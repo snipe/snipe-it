@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Tentang Pemasok',
     'about_suppliers_text'  => 'Pemasok digunakan untuk melacak sumber barang',
     'address'               => 'Alamat pemasok',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Tampilkan Aset untuk',
     'zip'                   => 'Kode Pos',
 
-];
+);

@@ -1,52 +1,57 @@
 <?php
 
-return [
+return array(
 
-    'field' => [
+    'field' => array(
         'invalid'   => 'Dette felt findes ikke.',
         'already_added'   => 'Feltet allerede tilføjet',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Feltet blev ikke oprettet, prøve igen.',
             'success' => 'Feltet oprettet.',
-            'assoc_success' => 'Felt tilføjet til feltsættet.',
-        ],
+            'assoc_success' => 'Felt tilføjet til feltsættet.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Feltet blev ikke opdateret, prøv igen',
-            'success' => 'Feltet opdateret.',
-        ],
+            'success' => 'Feltet opdateret.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Er du sikker på du ønsker at slette feltet?',
             'error'   => 'Der opstod et problem under sletning af feltet. Prøv venligst igen.',
             'success' => 'Feltet blev slettet.',
             'in_use'   => 'Feltet er stadig i brug.',
-        ],
+        )
 
-    ],
+    ),
 
-    'fieldset' => [
+    'fieldset' => array(
 
         'does_not_exist' => 'Feltsættet findes ikke',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Feltsættet blev ikke opdateret, prøv igen.',
-            'success' => 'Feltsættet oprettet.',
-        ],
+            'success' => 'Feltsættet oprettet.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Feltsættet blev ikke opdateret, prøv igen',
-            'success' => 'Feltsættet opdateret.',
-        ],
+            'success' => 'Feltsættet opdateret.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Er du sikker på du vil slette dette feltsæt?',
             'error'   => 'Der opstod et problem under sletning af feltsættet. Prøv venligst igen.',
             'success' => 'Feltsættet blev slettet.',
             'in_use'   => 'Feltsættet er stadig i brug.',
-        ],
+        )
 
-    ],
+    ),
 
-];
+
+
+
+
+
+);

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Bir kullanıcı web sitede öğe talebinden vazgeçti',
     'a_user_requested' => 'Bir kullanıcı websitede bir öğe talebinde bulundu',
     'accessory_name' => 'Aksesuar Adı:',
@@ -60,7 +60,7 @@ return array(
     'test_mail_text' => 'Snipe-IT varlık yönetim sisteminden bir denemedir',
     'the_following_item' => 'Aşağıdaki varlık geri alındı olarak işaretlendi: ',
     'low_inventory_alert' => 'Şu var: Minimum envanterin altında olan veya yakında düşük olacak olan sayı maddesi. | Şunlar var: Minimum envanterin altında olan veya yakında olacak olan sayım maddeleri.',
-    'assets_warrantee_alert' => 'Şu var: gelecek vadede garanti süresi dolmuş varlık sayımı: eşik günler. | Şunlar var: gelecek yıl sona ermesi garantili varlıklar sayılır: eşik günleri.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Şu var: bir sonraki günlerde süren lisans sayımı: eşik günleri. | Şunlar var: bir sonraki günlerde süren sayım lisansları: eşik günleri.',
     'to_reset' => 'Şifre sıfırlamak için :web password, formu doldurun:',
     'type' => 'Tür',
@@ -76,5 +76,5 @@ return array(
     'Expected_Checkin_Report' => 'Beklenen varlık iade raporu',
     'Expected_Checkin_Notification' => 'Hatırlatma ::name Son seçim zamanı yaklaşıyor',
     'Expected_Checkin_Date' => 'Size teslim edilen bir varlık :date tarihinde tekrar teslim edilecektir',
-    'your_assets' => 'Varlıkları Görüntüleme'
-);
+    'your_assets' => 'Varlıkları Görüntüleme',
+];

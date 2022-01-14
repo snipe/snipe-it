@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Dėmesio: </strong> Ši įranga pažymėta kaip negalima naudoti. Jei būklė  pasikeitė, prašome atnaujinti įrangos būklę.',
     'does_not_exist' 	=> 'Tokios įrangos nėra.',
-    'does_not_exist_or_not_requestable' => 'Tokios įrangos nėra arba jos negalima užklausti.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Ši įranga šiuo metu yra išduota naudotojui ir negali būti ištrinta. Prašome pirmiausia patikrinkite įrangą, tuomet bandykite ištrinti vėl. ',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Turto auditas sėkmingai registruotas.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Failas neištrintas. Prašome bandykite dar kartą.',
         'success' => 'Failas sėkmingai ištrintas.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Jūsų failas buvo sėkmingai ištrintas',
         'file_delete_error'      => 'Nepavyko ištrinti failo',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Ar jūs tikrai norite ištrinti šią įrangą?',

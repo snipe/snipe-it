@@ -59,7 +59,7 @@ return [
     'test_mail_text' => 'Энэ бол Snipe-IT Asset Management System-ийн тест юм. Хэрэв та үүнийг авсан бол имэйл ажиллаж байна :)',
     'the_following_item' => 'Дараах зүйлүүдийг шалгасан байна:',
     'low_inventory_alert' => ':count ширхэг барааны нөөц дуусаж байна.|:count ширхэг барааны нөөц дуусаж байна.',
-    'assets_warrantee_alert' => ':count ширхэг хөрөнгийн баталгаат хугацаа :threshhold өдрийн дотор дуусна.|:count ширхэг хөрөнгийн баталгаат хугацаа :threshhold өдрийн дотор дуусна.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => ':count ширхэг лизенц :threshhold өдрийн дотор дуусна.|:count ширхэг лизенц :threshhold өдрийн дотор дуусна.',
     'to_reset' => 'Та өөрийн: веб нууц үгээ шинэчлэхийн тулд энэ маягтыг бөглөнө үү:',
     'type' => 'Төрөл',

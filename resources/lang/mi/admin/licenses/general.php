@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Mō Ngā Raihana',
     'about_licenses'                  => 'Ka whakamahia nga raihana ki te aroturuki i te rorohiko. Kei a raua he maha o nga nohoanga e taea ana te tirotiro ki nga takitahi',
     'checkin'  					=> 'Waitohu Tika Tono',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Raihana Pūmanawa',
     'user'  					=> 'Kaiwhakamahi',
     'view'  					=> 'Tirohia Raihana',
-];
+);

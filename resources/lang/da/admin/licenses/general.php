@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Om licenser',
     'about_licenses'                  => 'Licenser bruges til at spore software. De har et bestemt antal pladser, der kan tjekkes ud til enkeltpersoner',
     'checkin'  					=> 'Checkin Licenssæde',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Softwarelicenser',
     'user'  					=> 'Bruger',
     'view'  					=> 'Se licens',
-];
+);

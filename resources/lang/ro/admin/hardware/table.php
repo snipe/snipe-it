@@ -4,10 +4,11 @@ return [
 
     'asset_tag'   	=> 'Eticheta activ',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Valoare',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Predat/Primit',
     'checkout_date' => 'Data predare',
     'checkoutto' 	=> 'Predat',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Diferenta',
     'dl_csv' 		=> 'Descarca CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return [
     'serial'   		=> 'Serie',
     'status'   		=> 'Statut',
     'title'      	=> 'Activ ',
-    'image'		=> 'Imagine dispozitiv',
+    'image'		    => 'Imagine dispozitiv',
     'days_without_acceptance' => 'Zile fără acceptare',
     'monthly_depreciation' => 'Depreciere lunară',
-
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
 ];

@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Atención: </strong> Este equipo está marcado como no isntalabre.
                         Si no es correcto, actualiza su estado.',
     'does_not_exist' 	=> 'Equipo inexistente.',
-    'does_not_exist_or_not_requestable' => 'Buen intento. El activo no existe o no es solicitable.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Equipo asignado a un usuario, no se puede eliminar.',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'Auditoría de activos registrada correctamente.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
         'success' => 'Archivo eliminado correctamente.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Tu archivo ha sido eliminado con éxito',
         'file_delete_error'      => 'No pudimos eliminar tu archivo',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Estás seguro que quieres eliminar el equipo?',

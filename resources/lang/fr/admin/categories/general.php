@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Catégories',
     'category_name'  					=> 'Catégorie',
     'checkin_email'                     => 'Envoyer un courriel à l\'utilisateur lors de l\'association/dissociation.',
@@ -20,4 +20,4 @@ return [
     'use_default_eula_disabled'			=> '<del>Utilisez la licence par défaut à la place.</del> Aucune licence d\'utilisation par défaut trouvée. Ajoutez-en une dans la section "Préférences".',
     'use_default_eula_column'			=> 'Utilisez les CGU par défaut',
 
-];
+);

@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> '그룹 관리자',
     'allow' 	 			=> '허용',
     'deny' 	 				=> '거부',
-
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
 ];

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktīvs',
     'allow'  				=> 'Atļaut',
     'checkedout'  			=> 'Aktīvi',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Rādīt pašreizējos lietotājus',
     'show_deleted'          => 'Rādīt izdzēstos lietotājus',
     'title' 				=> 'Nosaukums',
-    'to_restore_them'		=> 'lai tos atjaunotu.',
+	'to_restore_them'		=> 'lai tos atjaunotu.',
     'updateuser' 			=> 'Atjaunināt lietotāju',
     'username' 				=> 'Lietotājvārds',
-    'user_deleted_text' 	=> 'Šis lietotājs ir atzīmēts kā izdzēsts.',
+	'user_deleted_text' 	=> 'Šis lietotājs ir atzīmēts kā izdzēsts.',
     'username_note' 		=> '(To izmanto tikai Active Directory saistošai, nevis pieteikšanās.)',
     'cloneuser'             => 'Klons lietotājs',
     'viewusers' 			=> 'Skatīt lietotājus',
-];
+);

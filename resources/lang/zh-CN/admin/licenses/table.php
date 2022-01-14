@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'assigned_to'   	=> '分配给',
     'checkout'   		=> '进/出',
@@ -14,4 +14,4 @@ return [
     'serial'   			=> '序列号',
     'title'      		=> '授权许可',
 
-];
+);

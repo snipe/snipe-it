@@ -4,10 +4,11 @@ return [
 
     'asset_tag'   	=> 'Demirbaş Etiketi',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Değer',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Giriş/Çıkış',
     'checkout_date' => 'Çıkış Tarihi',
     'checkoutto' 	=> 'Çıkış Yapıldı',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Fark',
     'dl_csv' 		=> 'CSV Dosyasını İndir',
     'eol' 			=> 'Ömür Süresi',
@@ -18,8 +19,12 @@ return [
     'serial'   		=> 'Seri No',
     'status'   		=> 'Durum',
     'title'      	=> 'Demirbaş ',
-    'image'		=> 'Cihaz resmi',
+    'image'		    => 'Cihaz resmi',
     'days_without_acceptance' => 'Kabul edilmeden geçen gün',
     'monthly_depreciation' => 'Aylık Amortisman',
-
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
 ];

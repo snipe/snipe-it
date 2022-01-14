@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute phải ít nhất :min ký tự.',
         'array'   => 'Thuộc tính: phải có ít nhất: min items.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => ':attribute đã chọn không hợp lý.',
     'numeric'              => ':attribute phải là một số.',
     'present'              => 'Trường thuộc tính: phải có mặt.',
@@ -88,8 +89,8 @@ return array(
     'unique'               => ':attribute đã sẵn sàng.',
     'uploaded'             => 'Thuộc tính: không thể tải lên.',
     'url'                  => 'Định dạng :attribute thì không hợp lý.',
-    "unique_undeleted"     => "Thuộc tính: phải là duy nhất.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'Thuộc tính: phải là duy nhất.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Trường: attribute chứa một ký tự không được phép.",
-        "email_array"      => "Một hoặc nhiều địa chỉ email không hợp lệ.",
-        "hashed_pass"      => "Mật khẩu hiện tại của bạn không chính xác",
+        'alpha_space' => 'Trường: attribute chứa một ký tự không được phép.',
+        'email_array'      => 'Một hoặc nhiều địa chỉ email không hợp lệ.',
+        'hashed_pass'      => 'Mật khẩu hiện tại của bạn không chính xác',
         'dumbpwd'          => 'Mật khẩu đó quá phổ biến.',
-        "statuslabel_type" => "Bạn phải chọn một loại nhãn tình trạng hợp lệ",
+        'statuslabel_type' => 'Bạn phải chọn một loại nhãn tình trạng hợp lệ',
     ],
 
     /*
@@ -135,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

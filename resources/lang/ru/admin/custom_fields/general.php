@@ -2,10 +2,11 @@
 
 return [
     'custom_fields'		        => 'Настраиваемые поля',
+    'manage'                    => 'Manage',
     'field'		                => 'Поле',
     'about_fieldsets_title'		=> 'О наборах полей',
-    'about_fieldsets_text'		=> 'Наборы полей позволяют вам создать группы пользовательских полей, которые часто используются для конкретных моделей автивов.',
-    'custom_format'             => 'Пользовательский формат...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Зашифровать значение этого поля в базе данных',
     'encrypt_field_help'      => 'ПРЕДУПРЕЖДЕНИЕ: Шифрование поля исключит возможность его поиска.',
     'encrypted'      	        => 'Зашифровано',
@@ -26,7 +27,19 @@ return [
     'used_by_models'   		    => 'Использован в моделях',
     'order'   		            => 'Порядок',
     'create_fieldset'         => 'Новый набор полей',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Новое настраиваемое поле',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Значение этого поля зашифровано в базе данных. Только администраторам будет доступно для просмотра расшифрованное значение',
     'show_in_email'     => 'Включить значение этого поля в письма, которое будет отправлено пользователю? Зашифрованные поля не могут быть включены в сообщения электронной почты.',
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
 ];

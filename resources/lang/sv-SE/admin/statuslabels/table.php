@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'Om statusetiketter',
     'archived'      	=> 'Arkiverade',
     'create'      	=> 'Skapa statusetikett',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Statusetiketter',
     'undeployable'  => 'Ej tillgänglig',
     'update'      	=> 'Uppdatera statusetikett',
-];
+);

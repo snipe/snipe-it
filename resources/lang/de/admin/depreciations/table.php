@@ -6,5 +6,6 @@ return [
     'months'   => 'Monate',
     'term'   => 'Laufzeit',
     'title'      => 'Name ',
+    'depreciation_min' => 'Floor Value',
 
 ];

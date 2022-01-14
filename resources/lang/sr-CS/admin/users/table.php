@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktivan',
     'allow'  				=> 'Dopustiti',
     'checkedout'  			=> 'Imovina',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Prikaži trenutne korisnike',
     'show_deleted'          => 'Prikaži izbrisane korisnike',
     'title' 				=> 'Title',
-    'to_restore_them'		=> 'to restore them.',
+	'to_restore_them'		=> 'to restore them.',
     'updateuser' 			=> 'Ažuriranje korisnika',
     'username' 				=> 'Korisničko ime',
-    'user_deleted_text' 	=> 'Ovaj je korisnik označen kao izbrisan.',
+	'user_deleted_text' 	=> 'Ovaj je korisnik označen kao izbrisan.',
     'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
     'cloneuser'             => 'Kloniraj korisnika',
     'viewusers' 			=> 'Prikaži korisnike',
-];
+);

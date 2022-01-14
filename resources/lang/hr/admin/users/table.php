@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktivan',
     'allow'  				=> 'dopustiti',
     'checkedout'  			=> 'Imovina',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Prikaži trenutne korisnike',
     'show_deleted'          => 'Prikaži izbrisane korisnike',
     'title' 				=> 'Titula',
-    'to_restore_them'		=> 'vratiti ih.',
+	'to_restore_them'		=> 'vratiti ih.',
     'updateuser' 			=> 'Ažuriranje korisnika',
     'username' 				=> 'Korisničko ime',
-    'user_deleted_text' 	=> 'Ovaj je korisnik označen kao izbrisan.',
+	'user_deleted_text' 	=> 'Ovaj je korisnik označen kao izbrisan.',
     'username_note' 		=> '(Ovo se upotrebljava samo za veze u sustavu Active Directory, a ne za prijavu.)',
     'cloneuser'             => 'Korisnik klona',
     'viewusers' 			=> 'Prikaži korisnike',
-];
+);

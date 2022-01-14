@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Lisatarvikute kategooria',
     'accessory_name'  					=> 'Lisaseade Nimi',
     'checkout'  							=> 'Checkout Lisavarustus',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Selle asemel kasutage <a href="#" data-toggle="modal" data-target="#eulaModal">primaarset EULA</a> vaikimisi.',
     'use_default_eula_disabled'			=> '<del>Võtke kasutusele esmane vaikimisi EULA-d.</del> Ükski esmane vaikimisi EULA ei ole määratud. Lisage see üksus valikut Seaded.',
 
-];
+);

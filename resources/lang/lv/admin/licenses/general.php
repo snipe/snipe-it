@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Par licencēm',
     'about_licenses'                  => 'Licences izmanto, lai izsekotu programmatūru. Viņiem ir noteikts skaits sēdvietu, kurus var pārbaudīt personām',
     'checkin'  					=> 'Checkin License Seat',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Programmatūras licences',
     'user'  					=> 'Lietotājs',
     'view'  					=> 'Skatīt licenci',
-];
+);

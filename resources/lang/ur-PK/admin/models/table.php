@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'create'				=> 'Create Asset Model',
     'created_at' 			=> 'Created at',
@@ -14,4 +14,4 @@ return [
     'update'				=> 'Update Asset Model',
     'clone'				=> 'Clone Model',
     'edit'				=> 'Edit Model',
-];
+);

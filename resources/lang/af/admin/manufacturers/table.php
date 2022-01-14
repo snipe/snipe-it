@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Oor vervaardigers',
     'about_manufacturers_text'  => 'Vervaardigers is die maatskappye wat jou bates skep. U kan belangrike kontakbesonderhede vir ondersteuning hier opberg, wat op u bate detailbladsye vertoon sal word.',
     'asset_manufacturers'	=> 'Bate Vervaardigers',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Update Fabrikant',
     'url'   				=> 'URL',
 
-];
+);

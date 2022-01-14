@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Asset Categorieën',
     'category_name'  					=> 'Categorie Naam',
     'checkin_email'                     => 'Stuur een E-mail naar de gebruiker bij in- of uitchecken.',
@@ -20,4 +20,4 @@ return [
     'use_default_eula_disabled'			=> '<del>Gebruik de standaard gebruikersovereenkomst anders.</del> Geen standaard gebruikersovereenkomst ingesteld. Voeg er één toe in Instellingen.',
     'use_default_eula_column'			=> 'Gebruik standaard eindgebruikersovereenkomst',
 
-];
+);

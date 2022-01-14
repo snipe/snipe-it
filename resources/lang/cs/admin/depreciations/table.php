@@ -6,5 +6,6 @@ return [
     'months'   => 'Měsíců',
     'term'   => 'Podmínka',
     'title'      => 'Název ',
+    'depreciation_min' => 'Floor Value',
 
 ];
