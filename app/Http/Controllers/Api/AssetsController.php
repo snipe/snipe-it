@@ -937,7 +937,7 @@ class AssetsController extends Controller
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'), 'company_id', 'assets')
             ->with('location', 'assetstatus', 'assetlog', 'company', 'defaultLoc','assignedTo',
-                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')->where('assets.requestable', '=', '1');
+                'model.category', 'model.manufacturer', 'model.fieldset', 'supplier')->requestableAssets();
 
         $offset = request('offset', 0);
         $limit = $request->input('limit', 50);
