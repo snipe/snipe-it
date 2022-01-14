@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated_help_text' => 'This user can login',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Assets assigned to :name',
@@ -34,4 +34,4 @@ return [
     'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
     'update_user_asssets_status' => 'Update all assets for these users to this status',
     'checkin_user_properties' => 'Check in all properties associated with these users',
-];
+);

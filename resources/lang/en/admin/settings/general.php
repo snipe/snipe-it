@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory domain',
     'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
@@ -318,4 +318,4 @@ return [
     'setup_migration_create_user' => 'Next: Create User',
     'ldap_settings_link' => 'LDAP Settings Page',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integration',
-];
+);

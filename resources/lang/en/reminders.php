@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -21,4 +21,4 @@ return [
 
     'sent' => 'If a matching email address was found, a password reminder has been sent!',
 
-];
+);

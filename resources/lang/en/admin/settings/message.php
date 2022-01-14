@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'update' => [
         'error'                 => 'An error has occurred while updating. ',
@@ -40,4 +40,4 @@ return [
         '500' => '500 Server Error.',
         'error' => 'Something went wrong.',
     ]
-];
+);

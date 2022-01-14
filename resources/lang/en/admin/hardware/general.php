@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_assets_title'           => 'About Assets',
     'about_assets_text'            => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
     'archived'  				=> 'Archived',
@@ -40,4 +40,4 @@ return [
     'success_messages' => 'Success messages:',
     'alert_details' => 'Please see below for details.',
     'custom_export' => 'Custom Export'
-];
+);

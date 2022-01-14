@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'personal_api_keys' => 'Personal API Keys',
     'api_key_warning' => 'When generating an API token, be sure to copy it down immediately as they
                     will not be visible to you again.',
@@ -9,4 +9,4 @@ return [
     'api_token_expiration_time' => 'API tokens are set to expire in:',
     'api_reference' => 'Please check the <a href="https://snipe-it.readme.io/reference" target="_blank">API reference</a> to
                     find specific API endpoints and additional API documentation.',
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'field' => [
         'invalid'   => 'That field does not exist.',
@@ -49,4 +49,4 @@ return [
 
     ],
 
-];
+);

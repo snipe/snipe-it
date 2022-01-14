@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'id'      => 'ID',
     'months'   => 'Months',
@@ -8,4 +8,4 @@ return [
     'title'      => 'Name ',
     'depreciation_min' => 'Floor Value',
 
-];
+);

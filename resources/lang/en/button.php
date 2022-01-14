@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'actions' 	                => 'Actions',
     'add'    	                => 'Add New',
     'cancel'                    => 'Cancel',
@@ -21,4 +21,4 @@ return [
     'add_maintenance'           => 'Add Maintenance',
     'append'                    => 'Append',
     'new'                       => 'New',
-];
+);
