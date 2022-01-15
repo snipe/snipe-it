@@ -177,7 +177,7 @@ class ItemImporter extends Importer
      */
     public function createOrFetchAssetModel(array $row)
     {
-
+        $condition = array();
         $asset_model_name = $this->findCsvMatch($row, "asset_model");
         $asset_modelNumber = $this->findCsvMatch($row, "model_number");
         // TODO: At the moment, this means  we can't update the model number if the model name stays the same.
@@ -189,8 +189,16 @@ class ItemImporter extends Importer
         } elseif ((empty($asset_model_name))  && (empty($asset_modelNumber))) {
             $asset_model_name ='Unknown';
         }
+
+        if ((!empty($asset_model_name)) && (empty($asset_modelNumber))) {
+            $condition[] = ['name', '=', $asset_model_name];
+        } elseif ((!empty($asset_model_name)) && (!empty($asset_modelNumber))) {
+            $condition[] = ['name', '=', $asset_model_name];
+            $condition[] = ['model_number', '=', $asset_modelNumber];
+        }
+
         $editingModel = $this->updating;
-        $asset_model = AssetModel::where(['name' => $asset_model_name, 'model_number' => $asset_modelNumber])->first();
+        $asset_model = AssetModel::where($condition)->first();
 
         if ($asset_model) {
             if (!$this->updating) {
@@ -200,7 +208,11 @@ class ItemImporter extends Importer
             $this->log("Matching Model found, updating it.");
             $item = $this->sanitizeItemForStoring($asset_model, $editingModel);
             $item['name'] = $asset_model_name;
-            $item['model_number'] = $asset_modelNumber;
+            
+            if(!empty($asset_modelNumber)){
+                $item['model_number'] = $asset_modelNumber;
+            }
+            
             $asset_model->update($item);
             $asset_model->save();
             $this->log("Asset Model Updated");
