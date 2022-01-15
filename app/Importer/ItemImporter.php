@@ -210,6 +210,11 @@ class ItemImporter extends Importer
             $this->log('Matching Model found, updating it.');
             $item = $this->sanitizeItemForStoring($asset_model, $editingModel);
             $item['name'] = $asset_model_name;
+            
+            if(!empty($asset_modelNumber)){
+                $item['model_number'] = $asset_modelNumber;
+            }
+            
             $asset_model->update($item);
             $asset_model->save();
             $this->log('Asset Model Updated');
