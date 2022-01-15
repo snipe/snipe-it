@@ -55,7 +55,7 @@ class AssetsController extends Controller
     {
 
         \Log::debug(Route::currentRouteName());
-        
+        $filter_non_deprecable_assets = false;
 
         /**
          * This looks MAD janky (and it is), but the AssetsController@index does a LOT of heavy lifting throughout the 
@@ -69,6 +69,7 @@ class AssetsController extends Controller
          * which would have been far worse of a mess. *sad face*  - snipe (Sept 1, 2021)
          */
         if (Route::currentRouteName()=='api.depreciation-report.index') {
+            $filter_non_deprecable_assets = true;
             $transformer = 'App\Http\Transformers\DepreciationReportTransformer';
             $this->authorize('reports.view');
         } else {
@@ -118,6 +119,12 @@ class AssetsController extends Controller
             ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo',
                 'model.category', 'model.manufacturer', 'model.fieldset','supplier'); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
 
+        
+        if($filter_non_deprecable_assets) {
+            $non_deprecable_models = AssetModel::select('id')->whereNotNull('depreciation_id')->get();
+        
+            $assets->InModelList($non_deprecable_models->toArray());
+        }
         
         // These are used by the API to query against specific ID numbers.
         // They are also used by the individual searches on detail pages like
