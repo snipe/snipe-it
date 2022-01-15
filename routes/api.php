@@ -296,7 +296,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         ); // end depreciations API routes
 
 
-        Route::post('reports/depreciation',
+        Route::get('reports/depreciation',
         [
             Api\AssetsController::class, 
             'index'
