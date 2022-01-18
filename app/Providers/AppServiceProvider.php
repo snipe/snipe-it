@@ -43,6 +43,13 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
+        // TODO - isn't it somehow 'gauche' to check the environment directly; shouldn't we be using config() somehow?
+        if ( ! env('APP_ALLOW_INSECURE_HOSTS')) {  // unless you set APP_ALLOW_INSECURE_HOSTS, you should PROHIBIT forging domain parts of URL via Host: headers
+            $url_parts = parse_url(config('app.url'));
+            $root_url = $url_parts['scheme'].'://'.$url_parts['host'].( isset($url_parts['port']) ? ':'.$url_parts['port'] : '');
+            \URL::forceRootUrl($root_url);
+        }
+
         \Illuminate\Pagination\Paginator::useBootstrap();
 
         Schema::defaultStringLength(191);
