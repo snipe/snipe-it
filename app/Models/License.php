@@ -627,8 +627,8 @@ class License extends Depreciable
      */
     public static function getExpiringLicenses($days = 60)
     {
-        $days = (is_null($days)) ? 30 : $days;
-        
+        $days = (is_null($days)) ? 60 : $days;
+
         return License::whereNotNull('expiration_date')
         ->whereNull('deleted_at')
         ->whereRaw(DB::raw('DATE_SUB(`expiration_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) '))
