@@ -627,6 +627,7 @@ class License extends Depreciable
      */
     public static function getExpiringLicenses($days = 60)
     {
+        $days = (is_null($days)) ? 60 : $days;
 
         return License::whereNotNull('expiration_date')
         ->whereNull('deleted_at')
