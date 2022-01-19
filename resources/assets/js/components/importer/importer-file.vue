@@ -182,6 +182,7 @@
                         {id: 'address', text: 'Address' },
                         {id: 'city', text: 'City' },
                         {id: 'state', text: 'State' },
+                        {id: 'zip', text: 'ZIP' },
                         {id: 'country', text: 'Country' },
 
                     ],
