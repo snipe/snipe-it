@@ -22,18 +22,18 @@ class LoginTest extends DuskTestCase
 
         $this->browse(function ($browser) {
             $browser->visitRoute('login')
-                    ->type('username', 'snipe')
+                    ->type('username', 'joe')
                     ->type('password', 'password')
                     ->press(trans('auth/general.login'))
                     ->assertPathIs('/');
-            $browser->screenshot('dashboard'); 
+            $browser->screenshot('dashboard');
         });
     }
 
 
     /**
      * Test dashboard loads
-     * 
+     *
      * @todo Flesh this out further to make sure the individual tables actually load with
      * content inside them.
      *
@@ -44,8 +44,8 @@ class LoginTest extends DuskTestCase
         $this->browse(function ($browser) {
             $browser->assertSee(trans('general.dashboard'));
             $browser->assertSee(trans('general.loading'));
-            $browser->screenshot('dashboard-2'); 
+            $browser->screenshot('dashboard-2');
         });
-        
+
     }
 }
