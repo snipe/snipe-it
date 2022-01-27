@@ -43,13 +43,13 @@ class AppServiceProvider extends ServiceProvider
                 \Log::warning("'APP_FORCE_TLS' is set to true, but 'APP_URL' does not start with 'https://'. Will not force TLS on connections.");
             }
         }
-
+        //Commenting out someones TODO because this would not let php artisan to generate a key, and therefore 500 Error on webiste for all users updating or installing snipe-it
         // TODO - isn't it somehow 'gauche' to check the environment directly; shouldn't we be using config() somehow?
-        if ( ! env('APP_ALLOW_INSECURE_HOSTS')) {  // unless you set APP_ALLOW_INSECURE_HOSTS, you should PROHIBIT forging domain parts of URL via Host: headers
-            $url_parts = parse_url(config('app.url'));
-            $root_url = $url_parts['scheme'].'://'.$url_parts['host'].( isset($url_parts['port']) ? ':'.$url_parts['port'] : '');
-            \URL::forceRootUrl($root_url);
-        }
+        //if ( ! env('APP_ALLOW_INSECURE_HOSTS')) {  // unless you set APP_ALLOW_INSECURE_HOSTS, you should PROHIBIT forging domain parts of URL via Host: headers
+          //  $url_parts = parse_url(config('app.url'));
+            //$root_url = $url_parts['scheme'].'://'.$url_parts['host'].( isset($url_parts['port']) ? ':'.$url_parts['port'] : '');
+            //\URL::forceRootUrl($root_url);
+        //}
 
         Schema::defaultStringLength(191);
         Asset::observe(AssetObserver::class);
