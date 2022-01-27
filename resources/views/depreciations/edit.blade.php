@@ -16,11 +16,12 @@
         {{ trans('admin/depreciations/general.number_of_months') }}
     </label>
     <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($item, 'months')) ? ' required' : '' }}">
-        <div class="col-md-2" style="padding-left:0px">
-            <input class="form-control" type="text" name="months" id="months" value="{{ Request::old('months', $item->months) }}" style="width: 80px;" />
+        <div class="col-md-7" style="padding-left:0px">
+            <input class="form-control" type="text" name="months" id="months" value="{{ Request::old('months', $item->months) }}" style="width: 80px;"{!!  (\App\Helpers\Helper::checkIfRequired($item, 'months')) ? ' data-validation="required" required' : '' !!} />
+            {!! $errors->first('months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
-    {!! $errors->first('months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+
 </div>
 <!-- Depreciation Minimum -->
 <div class="form-group {{ $errors->has('depreciation_min') ? ' has-error' : '' }}">
