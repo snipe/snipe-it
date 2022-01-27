@@ -183,6 +183,7 @@
                         {id: 'city', text: 'City' },
                         {id: 'state', text: 'State' },
                         {id: 'country', text: 'Country' },
+                        {id: 'zip', text: 'ZIP' },
 
                     ],
                     customFields: this.customFields,
