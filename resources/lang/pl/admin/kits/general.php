@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_kits_title'                  => 'O zestawach',
     'about_kits_text'                   => 'Zestawy predefiniowane pozwalają na szybkie przydzielenie zbioru pozycji (urządzeń, licencji itd.) użytkownikowi. Może to być pomocne, kiedy twój proces wdrażania jest spójny dla wielu użytkowników i wszyscy użytkownicy otrzymują takie same pozycje.',
     'checkout'                          => 'Wydaj zestaw ',
@@ -13,5 +13,38 @@ return array(
     'none_licenses'                     => 'Brak wystarczającej liczby dostępnych miejsc dla :license do zamówienia. :qty są wymagane. ',
     'none_consumables'                  => 'Nie ma wystarczającej ilości dostępnych jednostek :consumable do zakupu. :qty są wymagane. ',
     'none_accessory'                    => 'Brak wystarczającej liczby dostępnych jednostek z :accessory do zamówienia. :qty są wymagane. ',
-
-);
+    'append_accessory'                  => 'Dołącz Akcesoria',
+    'update_appended_accessory'         => 'Aktualizuj załączone Akcesoria',
+    'append_consumable'                 => 'Append Consumable',
+    'update_appended_consumable'        => 'Update appended Consumable',
+    'append_license'                    => 'Dołącz licencję',
+    'update_appended_license'           => 'Zaktualizuj załączone licencje',
+    'append_model'                      => 'Append model',
+    'update_appended_model'             => 'Update appended model',
+    'license_error'                     => 'Licencja została już dołączona do zestawu',
+    'license_added_success'             => 'License added successfully',
+    'license_updated'                   => 'Licencja zaktualizowana pomyślnie',
+    'license_none'                      => 'Licencja nie istnieje',
+    'license_detached'                  => 'Licencja została pomyślnie odłączona',
+    'consumable_added_success'          => 'Consumable added successfully',
+    'consumable_updated'                => 'Consumable was successfully updated',
+    'consumable_error'                  => 'Consumable already attached to kit',
+    'consumable_deleted'                => 'Delete was successful',
+    'consumable_none'                   => 'Consumable does not exist',
+    'consumable_detached'               => 'Consumable was successfully detached',
+    'accessory_added_success'           => 'Accessory added successfully',
+    'accessory_updated'                 => 'Accessory was successfully updated',
+    'accessory_detached'                => 'Accessory was successfully detached',
+    'accessory_error'                   => 'Accessory already attached to kit',
+    'accessory_deleted'                 => 'Delete was successful',
+    'accessory_none'                    => 'Accessory does not exist',
+    'checkout_success'                  => 'Checkout was successful',
+    'checkout_error'                    => 'Checkout error',
+    'kit_none'                          => 'Kit does not exist',
+    'kit_created'                       => 'Kit was successfully created',
+    'kit_updated'                       => 'Kit was successfully updated',
+    'kit_not_found'                     => 'Kit not found',
+    'kit_deleted'                       => 'Kit was successfully deleted',
+    'kit_model_updated'                 => 'Model was successfully updated',
+    'kit_model_detached'                => 'Model was successfully detached',
+];

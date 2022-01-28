@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Réimsí Saincheaptha',
+    'manage'                    => 'Manage',
     'field'		                => 'Gort',
     'about_fieldsets_title'		=> 'Maidir Fieldsets',
-    'about_fieldsets_text'		=> 'Ceadaíonn Fieldsets duit grúpaí de réimsí saincheaptha a chruthú a athúsáidtear go minic a úsáidtear le haghaidh cineálacha sonracha sócmhainne sonracha.',
-    'custom_format'             => 'Formáid saincheaptha ...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Criptigh luach an réimse seo sa bhunachar sonraí',
     'encrypt_field_help'      => 'RABHADH: Ní chuireann sé clóscríobh ar réimse.',
     'encrypted'      	        => 'Criptithe',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'Úsáidte trí Mhúnlaí',
     'order'   		            => 'Ordú',
     'create_fieldset'         => 'New Fieldset',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Réimse Nua Chustaim',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Tá luach an réimse seo criptithe sa bhunachar sonraí. Ní bheidh ach úsáideoirí riaracháin in ann an luach díchriptithe a fheiceáil',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

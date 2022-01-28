@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Pengguna ini dapat masuk',
     'activated_disabled_help_text' => 'Anda tidak dapat menyunting status aktivasi akun anda sendiri.',
     'assets_user'       => 'Aset pada :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Sunting Pengguna',
     'filetype_info'     => 'Jenis berkas diizinkan adalah png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, dan rar.',
     'history_user'      => 'Riwayat untuk :name',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Klik di sini untuk mengembalikannya.',
     'last_login'        => 'Terakhir masuk',
     'ldap_config_text'  => 'Konfigurasi LDAP terdapat di Admin > Pengaturan. Jika lokasi di pilih, maka akan di impor untuk semua pengguna.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Pengaturan admin Anda saat ini memungkinkan penegakan dua faktor otentikasi selektif.',
     'two_factor_enrolled' => 'Perangkat 2FA Terdaftar',
     'two_factor_active'   => '2FA Aktif',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => 'ویژگی باید حداقل: حداقل کاراکتر باشد.',
         'array'   => 'ویژگی: باید دارای حداقل موارد: min باشد.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'ویژگی انتخاب شده نامعتبر است.',
     'numeric'              => 'ویژگی باید عدد باشد.',
     'present'              => 'فیلد attribute باید باشد.',
@@ -88,8 +89,8 @@ return array(
     'unique'               => 'ویژگی در حال حاضر گرفته شده است.',
     'uploaded'             => 'ویژگی: attribute failed to upload.',
     'url'                  => 'شکل ویژگی نامعتبر است.',
-    "unique_undeleted"     => "The :attribute must be unique.",
-    "non_circular"         => "The :attribute must not create a circular reference.",
+    'unique_undeleted'     => 'The :attribute must be unique.',
+    'non_circular'         => 'The :attribute must not create a circular reference.',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "فیلد attribute شامل یک شخصیت است که مجاز نیست.",
-        "email_array"      => "یک یا چند آدرس ایمیل نامعتبر است",
-        "hashed_pass"      => "رمز عبور فعلی شما اشتباه است",
+        'alpha_space' => 'فیلد attribute شامل یک شخصیت است که مجاز نیست.',
+        'email_array'      => 'یک یا چند آدرس ایمیل نامعتبر است',
+        'hashed_pass'      => 'رمز عبور فعلی شما اشتباه است',
         'dumbpwd'          => 'این رمز عبور خیلی رایج است',
-        "statuslabel_type" => "شما باید نوع برچسب معتبر را انتخاب کنید",
+        'statuslabel_type' => 'شما باید نوع برچسب معتبر را انتخاب کنید',
     ],
 
     /*
@@ -135,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];

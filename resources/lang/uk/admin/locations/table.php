@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'Про розташування',
     'about_locations'           => 'Розташування використовуються для відсліджування інформації про місцеположення для користувачів, активів та іншого',
     'assets_rtd'                => 'Активи', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -20,4 +20,21 @@ return array(
     'parent'                    => 'Батьківський',
     'currency'                  => 'Валюта розташування',
     'ldap_ou'                   => 'Пошук OU в LDAP',
-    );
+    'user_name'                 => 'User Name',
+    'department'                => 'Department',
+    'location'                  => 'Location',
+    'asset_tag'                 => 'Assets Tag',
+    'asset_name'                => 'Name',
+    'asset_category'            => 'Category',
+    'asset_manufacturer'        => 'Manufacturer',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Serial',
+    'asset_location'            => 'Location',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Date:',
+    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
+    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
+];

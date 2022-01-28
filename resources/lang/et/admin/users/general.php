@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'kasutaja saab sisse logida',
     'activated_disabled_help_text' => 'Te ei saa iseenda konto aktiveerimis staatust muuta.',
     'assets_user'       => 'Kasutajaga :nimi seotud vahendid',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Muuda kasutajat',
     'filetype_info'     => 'Lubatud failitüübid on png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, ja rar.',
     'history_user'      => 'Kasutaja :name ajalugu',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Nende taastamiseks klõpsake siin.',
     'last_login'        => 'Viimane sisselogimine',
     'ldap_config_text'  => 'LDAP-i konfiguratsiooniseadeid saab leida Admin> Seaded. (Valikuline) valitud asukoht määratakse kõigi imporditud kasutajate jaoks.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Sinu praegused admin seaded lubavad kahe-astmelist autantimis jõustada valikulselt. ',
     'two_factor_enrolled' => '2FA-seade on registreeritud',
     'two_factor_active'   => '2FA aktiivne ',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

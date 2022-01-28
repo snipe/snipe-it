@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Kod',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Treść',
+    'book_value'  	=> 'Aktualna Wartość',
     'change' 		=> 'In/Out',
     'checkout_date' => 'Data przypisania',
     'checkoutto' 	=> 'Data wypisania',
+    'current_value' => 'Aktualna Wartość',
     'diff' 			=> 'Różnica',
     'dl_csv' 		=> 'Pobierz CSV',
     'eol' 			=> 'Koniec licencji',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Nr. seryjny',
     'status'   		=> 'Status',
     'title'      	=> 'Nabytek',
-    'image'		=> 'Zdjęcie urządzenia',
+    'image'		    => 'Zdjęcie urządzenia',
     'days_without_acceptance' => 'Dni bez akceptacji',
-    'monthly_depreciation' => 'Amortyzacja miesięczna'
-
-);
+    'monthly_depreciation' => 'Amortyzacja miesięczna',
+    'assigned_to'    => 'Przypisany do',
+    'requesting_user' => 'Zapotrzebowanie od użytkownika',
+    'requested_date' => 'Data złożenia zapotrzebowania',
+    'changed'       => 'Zmieniono',
+    'icon' => 'Ikona',
+];

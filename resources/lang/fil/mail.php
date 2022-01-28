@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Ang gumagamit o user ay nag-kansela ng rekwest na aytem sa website',
     'a_user_requested' => 'Ang gumagamit ay nag-rekwest ng aytem sa website',
     'accessory_name' => 'Ang Pangalan ng Aksesorya:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'Ito ay isang test mula sa Snipe-IT Asset Management System. Kung natanggap mo ito, ang mail na ito ay gumagana :)',
     'the_following_item' => 'Ang mga sumusunod na mga aytem ay nai-check in: ',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'Para mai-reset ang iyong :web password, kumpletuhin ang form na ito:',
     'type' => 'Klase',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

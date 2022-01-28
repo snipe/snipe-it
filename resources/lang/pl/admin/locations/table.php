@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'O Lokalizacjach',
     'about_locations'           => 'Lokalizacje są używane do śledzenia informacji o lokalizacji użytkowników, aktywów i innych elementów',
     'assets_rtd'                => 'Aktywa', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -20,4 +20,21 @@ return array(
     'parent'                    => 'Rodzic',
     'currency'                  => 'Waluta lokalna',
     'ldap_ou'                   => 'OU wyszukiwania LDAP',
-    );
+    'user_name'                 => 'Nazwa użytkownika',
+    'department'                => 'Departament',
+    'location'                  => 'Lokalizacja',
+    'asset_tag'                 => 'Tag sprzętu',
+    'asset_name'                => 'Nazwa',
+    'asset_category'            => 'Kategoria',
+    'asset_manufacturer'        => 'Producent',
+    'asset_model'               => 'Model',
+    'asset_serial'              => 'Nr seryjny',
+    'asset_location'            => 'Lokalizacja',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Data:',
+    'signed_by_asset_auditor'   => 'Podpisane przez (Audytor aktywów):',
+    'signed_by_finance_auditor' => 'Podpisane przez (Audytor finansowy):',
+    'signed_by_location_manager' => 'Podpisane przez (Audytor Lokalizacji):',
+    'signed_by'                 => 'Podpisano przez:',
+];

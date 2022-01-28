@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'actions' 	                => 'Tegevused',
     'add'    	                => 'Lisa uus',
     'cancel'                    => 'Loobu',
@@ -8,11 +8,17 @@ return array(
     'delete'  	                => 'Kustuta',
     'edit'    	                => 'Muuda',
     'restore' 	                => 'Taasta',
+    'remove'                    => 'Remove',
     'request'                   => 'Päring',
     'submit'  	                => 'Kinnita',
     'upload'                    => 'Lae üles',
-	'select_file'				=> 'Vali fail...',
+    'select_file'				=> 'Vali fail...',
     'select_files'				=> 'Vali failid...',
     'generate_labels'           => '{1} Loo silt|[2,*] Loo silt',
-    'send_password_link'       => 'Saada parooli taastamise link',
-);
+    'send_password_link'        => 'Saada parooli taastamise link',
+    'go'                        => 'Go',
+    'bulk_actions'              => 'Bulk Actions',
+    'add_maintenance'           => 'Add Maintenance',
+    'append'                    => 'Append',
+    'new'                       => 'New',
+];

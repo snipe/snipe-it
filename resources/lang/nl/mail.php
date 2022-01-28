@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Een gebruiker heeft een verzoek om een item op de website geannuleerd',
     'a_user_requested' => 'Een gebruiker heeft een item op de website aangevraagd',
     'accessory_name' => 'Accessoire Naam:',
@@ -60,7 +60,7 @@ return array(
     'test_mail_text' => 'Dit is een test van het Asset Management Systeem. Als je dit hebt ontvangen, werkt de mail :)',
     'the_following_item' => 'Het volgende item is ingecheckt: ',
     'low_inventory_alert' => 'Er is :count item dat onder de minimumvoorraad ligt of binnenkort laag zal zijn.|Er zijn :count items die onder de minimumvoorraad zijn of binnenkort laag zullen zijn.',
-    'assets_warrantee_alert' => 'Er is :count asset met een garantie die afloopt in de volgende :threshold dagen.|Er zijn :count assets met garanties die vervallen in de volgende :threshold dagen.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Er is :count licentie die afloopt in de volgende :threshold dagen. | Er zijn :count licenties die vervallen in de volgende :threshold dagen.',
     'to_reset' => 'Vul dit formulier in om je :web wachtwoord te resetten:',
     'type' => 'Type',
@@ -76,5 +76,5 @@ return array(
     'Expected_Checkin_Report' => 'Verwachte asset check in rapport',
     'Expected_Checkin_Notification' => 'Herinnering: :name check in deadline nadert',
     'Expected_Checkin_Date' => 'Een asset uitgecheckt aan jou moet worden ingecheckt op :date',
-    'your_assets' => 'Bekijk je assets'
-);
+    'your_assets' => 'Bekijk je assets',
+];

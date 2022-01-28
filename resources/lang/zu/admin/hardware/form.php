@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Qinisekisa u-Bulk Susa amafa',
+return [
+    'bulk_delete'		=> 'Qinisekisa u-Bulk Susa amafa',
   'bulk_delete_help'	=> 'Buyekeza amafa wokususwa okuningi ngezansi. Uma usususiwe, la mafa angabuyiselwa, kodwa ngeke ahlanganiswe nanoma yimuphi abasebenzisi okwamanje abelwe wona.',
   'bulk_delete_warn'	=> 'Uzosusa: impahla ye-asethi_diza.',
-	'bulk_update'		=> 'Ukuvuselela amafa we-Bulk',
-	'bulk_update_help'	=> 'Leli fomu likuvumela ukuthi ubuyekeze amafa amaningi ngesikhathi esisodwa. Gcwalisa kuphela amasimu okudingayo ukuguqula. Noma yiziphi izinkambu ezishiywe zingenakushintshwa.',
-	'bulk_update_warn'	=> 'Usuzohlela izakhiwo ze-asethi_impahla yamanani.',
+    'bulk_update'		=> 'Ukuvuselela amafa we-Bulk',
+    'bulk_update_help'	=> 'Leli fomu likuvumela ukuthi ubuyekeze amafa amaningi ngesikhathi esisodwa. Gcwalisa kuphela amasimu okudingayo ukuguqula. Noma yiziphi izinkambu ezishiywe zingenakushintshwa.',
+    'bulk_update_warn'	=> 'Usuzohlela izakhiwo ze-asethi_impahla yamanani.',
     'checkedout_to'		=> 'Ikhiyiwe Kuzo',
     'checkout_date'		=> 'Usuku lokuhlola',
     'checkin_date'		=> 'Usuku lokuhlola',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Ithegi lefa',
     'update'			=> 'Ukuvuselelwa kwefa',
     'warranty'			=> 'Iwaranti',
-		'warranty_expires'		=> 'Warranty Expires',
+        'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'iminyaka',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

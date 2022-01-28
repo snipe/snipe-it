@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Подвердите массовое удаление активов',
+return [
+    'bulk_delete'		=> 'Подвердите массовое удаление активов',
   'bulk_delete_help'	=> 'Просмотрите активны, выбранные для удаления. После удаления активы могут быть восстановлены, но уже не будет привязаны к пользователям, к которым они привязаны сейчас.',
   'bulk_delete_warn'	=> 'Вы собираетесь удалить :asset_count активов.',
-	'bulk_update'		=> 'Редактировать выбранное',
-	'bulk_update_help'	=> 'Эта форма позволяет Вам обновить несколько объектов за раз. Заполняйте только те поля, которые нужно изменить. Пустые поля останутся без изменений. ',
-	'bulk_update_warn'	=> 'Редактирование свойств :asset_count assets.',
+    'bulk_update'		=> 'Редактировать выбранное',
+    'bulk_update_help'	=> 'Эта форма позволяет Вам обновить несколько объектов за раз. Заполняйте только те поля, которые нужно изменить. Пустые поля останутся без изменений. ',
+    'bulk_update_warn'	=> 'Редактирование свойств :asset_count assets.',
     'checkedout_to'		=> 'Привязан к',
     'checkout_date'		=> 'Дата выдачи',
     'checkin_date'		=> 'Дата возврата',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Тег актива',
     'update'			=> 'Изменить актив',
     'warranty'			=> 'Гарантия',
-		'warranty_expires'		=> 'Срок действия гарантии',
+        'warranty_expires'		=> 'Срок действия гарантии',
     'years'				=> 'Лет',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

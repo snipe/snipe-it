@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Patvirtinkite masinio ištrynimo turinį',
+return [
+    'bulk_delete'		=> 'Patvirtinkite masinio ištrynimo turinį',
   'bulk_delete_help'	=> 'Peržiūrėkite įrangos ištrinimą žemiau. Ištrinus, įranga galima atstatyti, tačiau daugiau nebus priskirta jokiam vartotojam.',
   'bulk_delete_warn'	=> 'Jūs norite ištrinti :asset_count įranga.',
-	'bulk_update'		=> 'Visa atnaujinama įranga',
-	'bulk_update_help'	=> 'Ši forma leidžia jums atnaujinti kelias įrangas vienu metu. Prašome užpildykite laukelius, kuriuos reikia keisti. Visi laukeliai, kuriuos paliksite tuščius liks nepakeisti. ',
-	'bulk_update_warn'	=> 'Jūs ruošiatės keisti sekančius nustatymus :asset_count assets.',
+    'bulk_update'		=> 'Visa atnaujinama įranga',
+    'bulk_update_help'	=> 'Ši forma leidžia jums atnaujinti kelias įrangas vienu metu. Prašome užpildykite laukelius, kuriuos reikia keisti. Visi laukeliai, kuriuos paliksite tuščius liks nepakeisti. ',
+    'bulk_update_warn'	=> 'Jūs ruošiatės keisti sekančius nustatymus :asset_count assets.',
     'checkedout_to'		=> 'Išduota',
     'checkout_date'		=> 'Išdavimo data',
     'checkin_date'		=> 'Priėmimo data',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Įrangos pavadinimas',
     'update'			=> 'Įrangos atnaujinimas',
     'warranty'			=> 'Garantija',
-		'warranty_expires'		=> 'Garantija baigiasi',
+        'warranty_expires'		=> 'Garantija baigiasi',
     'years'				=> 'metai',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

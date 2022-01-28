@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Bir kullanıcı web sitede öğe talebinden vazgeçti',
     'a_user_requested' => 'Bir kullanıcı websitede bir öğe talebinde bulundu',
     'accessory_name' => 'Aksesuar Adı:',
@@ -76,5 +76,5 @@ return array(
     'Expected_Checkin_Report' => 'Beklenen varlık iade raporu',
     'Expected_Checkin_Notification' => 'Hatırlatma ::name Son seçim zamanı yaklaşıyor',
     'Expected_Checkin_Date' => 'Size teslim edilen bir varlık :date tarihinde tekrar teslim edilecektir',
-    'your_assets' => 'Varlıkları Görüntüleme'
-);
+    'your_assets' => 'Varlıkları Görüntüleme',
+];

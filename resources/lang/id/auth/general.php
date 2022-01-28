@@ -8,9 +8,9 @@ return [
     'login'                         => 'Masuk',
     'login_prompt'                  => 'Silahkan masuk',
     'forgot_password'               => 'Lupa kata sandi',
-    'ldap_reset_password'           => 'Please click here to reset your LDAP password',
+    'ldap_reset_password'           => 'Silakan klik di sini untuk mengatur ulang kata sandi LDAP Anda',
     'remember_me'                   => 'Ingat saya',
-    'username_help_top'                 => 'Enter your <strong>username</strong> to be emailed a password reset link.',
-    'username_help_bottom'          => 'Your username and email address <em>may</em> be the same, but may not be, depending on your configuration. If you cannot remember your username, contact your administrator. <br><br><strong>Usernames without an associated email address will not be emailed a password reset link.</strong> ',
+    'username_help_top'                 => 'Masukkan <strong>nama pengguna</strong> Anda untuk dikirimi email tautan setel ulang sandi.',
+    'username_help_bottom'          => 'Nama pengguna dan alamat email Anda <em>mungkin</em> sama, tetapi mungkin tidak, tergantung pada konfigurasi Anda. Jika Anda tidak dapat mengingat nama pengguna Anda, hubungi administrator Anda. <br><br><strong>Nama pengguna tanpa alamat email terkait tidak akan dikirimi email berupa tautan setel ulang sandi.</strong> ',
     ];
 

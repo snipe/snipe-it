@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'This user can login',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'دارایی ها محول شده به :',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'ویرایش کاربر',
     'filetype_info'     => 'پسوند های مجاز:png, gif, jpg, jpeg, doc, docx, pdf, txt, zip,Rar',
     'history_user'      => 'تاریخچه برای:',
-	'info'				=> 'اطلاعات',
+    'info'				=> 'اطلاعات',
     'restore_user'		=> 'برای بازسازی آنها اینجا کلیک کنید.',
     'last_login'        => 'آخرین ورود',
     'ldap_config_text'  => 'تنظشیمات تاییدیه LDPA در فولدر app/config در فایلی به نام idap.php وجود دارد.مکان مشخص شده برای تمامی کاربران وارد شده تنظیم میشود.شما نیاز دارید که حداقل یه مکان را اضافه کرده باشید تا بتوانید از این ویژگی استفاده کنید.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'تنظیمات مدیریت فعلی شما اجازه اجرای مجدد احراز هویت دو عامل را می دهد.',
     'two_factor_enrolled' => 'دستگاه 2FA ثبت شده است',
     'two_factor_active'   => '2FA فعال',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

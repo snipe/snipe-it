@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Mae defnyddiwr wedi canslo cais am eitem ar y wefan',
     'a_user_requested' => 'Mae defnyddiwr wedi gwneud cais am eitem ar y wefan',
     'accessory_name' => 'Enw Ategolyn:',
@@ -60,7 +60,7 @@ return array(
     'test_mail_text' => 'Prawf yw hwn o\'r System Rheoli Asedau Snipe-IT. Os cawsoch chi hwn, mae\'r ebostyn gweithio :)',
     'the_following_item' => 'Mae\'r eitem yma wedi nodi i fewn: ',
     'low_inventory_alert' => 'Mae yna :count eitem sy\'n is na\'r isafswm neu a fydd yn isel cyn bo hir. | Mae yna :count eitemau sy\'n is na\'r isafswm neu a fydd yn isel cyn bo hir.',
-    'assets_warrantee_alert' => 'Mae yna :count ased gyda gwarant yn dod i ben yn ystod y :threshold dydd nesaf | Mae :count asedau gyda gwarantau yn dod i ben yn y :threshold diwrnod nesaf.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Mae yna :count trwydded yn dod i ben yn ystod y :threshold diwrnod nesaf | Mae :count trwyddedau yn dod i ben yn y :threshold diwrnod nesaf.',
     'to_reset' => 'I ailosod eich cyfrinair :web, cwblhewch y ffurflen hon:',
     'type' => 'Math',
@@ -76,5 +76,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Confirma a exclusão de Ativos em Massa',
+return [
+    'bulk_delete'		=> 'Confirma a exclusão de Ativos em Massa',
   'bulk_delete_help'	=> 'Reveja os ativos selecionados para deletar. Depois de deletados, estes ativos podem ser restaurados, mas não estarão associados aos usuários.',
   'bulk_delete_warn'	=> 'Você está prestes a excluir.',
-	'bulk_update'		=> 'Ativos da Atualização em Massa',
-	'bulk_update_help'	=> 'Este formulário lhe permite atualizar múltiplos ativos de uma vez só. Apenas preencha os campos que você precisa alterar. Qualquer campo deixado em branco permanecerá inalterado. ',
-	'bulk_update_warn'	=> 'Você está prestes a editar as propriedades de :asset_count ativos.',
+    'bulk_update'		=> 'Ativos da Atualização em Massa',
+    'bulk_update_help'	=> 'Este formulário lhe permite atualizar múltiplos ativos de uma vez só. Apenas preencha os campos que você precisa alterar. Qualquer campo deixado em branco permanecerá inalterado. ',
+    'bulk_update_warn'	=> 'Você está prestes a editar as propriedades de :asset_count ativos.',
     'checkedout_to'		=> 'Alocado para',
     'checkout_date'		=> 'Data de alocação',
     'checkin_date'		=> 'Data de devolução',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Marcação do Ativo',
     'update'			=> 'Atualização do Ativo',
     'warranty'			=> 'Garantia',
-		'warranty_expires'		=> 'A garantia expira',
+        'warranty_expires'		=> 'A garantia expira',
     'years'				=> 'anos',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

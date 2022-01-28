@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'விருப்ப புலங்கள்',
+    'manage'                    => 'Manage',
     'field'		                => 'களம்',
     'about_fieldsets_title'		=> 'புலங்கள் பற்றி',
-    'about_fieldsets_text'		=> 'குறிப்பிட்ட சொத்து மாதிரி வகைகளுக்கு அடிக்கடி பயன்படுத்தப்படும் மீண்டும் பயன்படுத்தப்படும் தனிபயன் துறைகள் குழுக்களை உருவாக்க புலங்கள் அனுமதிக்கின்றன.',
-    'custom_format'             => 'விருப்ப வடிவமைப்பு ...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'தரவுத்தளத்தில் இந்த களத்தின் மதிப்பை குறியாக்கு',
     'encrypt_field_help'      => 'எச்சரிக்கை: ஒரு புலத்தை குறியாக்காதே அது தெரியாததாக்குகிறது.',
     'encrypted'      	        => 'முறைமையாக்கப்பட்ட',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'மாதிரிகள் பயன்படுத்தப்படுகிறது',
     'order'   		            => 'ஆணை',
     'create_fieldset'         => 'புதிய புலனாய்வு',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'புதிய தனிப்பயன் புலம்',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'இந்த புலத்தின் மதிப்பு தரவுத்தளத்தில் குறியாக்கம் செய்யப்பட்டுள்ளது. நிர்வாக பயனர்கள் மட்டுமே குறியாக்கப்பட்ட மதிப்புகளைக் காண முடியும்',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

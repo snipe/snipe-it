@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'ألغى المستخدم طلب عنصر على الموقع',
     'a_user_requested' => 'طلب مستخدم عنصر على الموقع',
     'accessory_name' => 'اسم الملحق:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'يعتبر هذا اختبارا من نظام إدارة الأصول Snipe-IT. إذا كنت حصلت على هذا، فان البريد يعمل :)',
     'the_following_item' => 'تم ادخال العنصر التالي: ',
     'low_inventory_alert' => 'هنالك :count عناصر أقل من الحد الأدنى للمخزون أول سوف تصبح أقل منه قريباً.',
-    'assets_warrantee_alert' => 'هنالك :count أصل سوف تنتهي فترة الضمان الخاصة به في الأيام :threshold القادمة.| هنالك :count أصول سوف تنتهي فترة الضمان الخاصة بهم في الأيام :threshold القادمة.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'هنالك :count رخص سوف تنتهي في الأيام :threshold القادمة.',
     'to_reset' => 'لإعادة تعيين كلمة مرور على :web، رجاءا أكمل هذا النموذج:',
     'type' => 'اكتب',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'تقرير تسجيل الأصول المتوقع',
     'Expected_Checkin_Notification' => 'تذكير: تاريخ تحقق :name يقترب من الموعد النهائي',
     'Expected_Checkin_Date' => 'من المقرر أن يتم التحقق من الأصول التي تم إخراجها إليك في :date',
-    'your_assets' => 'عرض الأصول الخاصة بك'
-);
+    'your_assets' => 'عرض الأصول الخاصة بك',
+];

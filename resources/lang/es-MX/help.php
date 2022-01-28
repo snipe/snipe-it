@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,9 +13,9 @@ return array(
     |
     */
 
-    "more_info_title" => "Más información",
+    'more_info_title' => 'Más información',
 
-    "audit_help" => "Al marcar esta casilla se editará el activo para reflejar esta nueva ubicación. Dejarla desmarcada simplemente anotará la ubicación en la auditoría.<br><br>Tenga en cuenta que este activo está asignado, no se cambiará la ubicación de la persona, activo o ubicación de donde está asignado.",
+    'audit_help' => 'Al marcar esta casilla se editará el activo para reflejar esta nueva ubicación. Dejarla desmarcada simplemente anotará la ubicación en la auditoría.<br><br>Tenga en cuenta que este activo está asignado, no se cambiará la ubicación de la persona, activo o ubicación de donde está asignado.',
 
     'assets' => 'Los activos son elementos rastreados por número de serie o etiqueta de activos. Suelen ser artículos de alto valor donde la identificación del activo importa.',
 
@@ -31,6 +31,4 @@ return array(
 
     'depreciations' => 'Puede configurar depreciaciones de activos para depreciar activos basados en una depreciación lineal.',
 
-
-
-);
+];

@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Etichetta bene',
     'asset_model'       => 'Modello',
-    'book_value'  	=> 'Valore',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Dentro/Fuori',
     'checkout_date' => 'Data di estrazione',
     'checkoutto' 	=> 'Estratto',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Differenza',
     'dl_csv' 		=> 'Scarica CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Seriale',
     'status'   		=> 'Stato',
     'title'      	=> 'Bene ',
-    'image'		=> 'Immagine dispositivo',
+    'image'		    => 'Immagine dispositivo',
     'days_without_acceptance' => 'Giorni senza accettazione',
-    'monthly_depreciation' => 'Ammortamento Mensile'
-
-);
+    'monthly_depreciation' => 'Ammortamento Mensile',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

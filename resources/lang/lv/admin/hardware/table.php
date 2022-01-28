@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Modelis',
-    'book_value'  	=> 'Vērtība',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Iekšā ārā',
     'checkout_date' => 'Izrakstīšanās datums',
     'checkoutto' 	=> 'Izrakstīts',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Atšķirība',
     'dl_csv' 		=> 'Lejupielādējiet CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Sērijas numurs',
     'status'   		=> 'Statuss',
     'title'      	=> 'Aktīvs',
-    'image'		=> 'Ierīces attēls',
+    'image'		    => 'Ierīces attēls',
     'days_without_acceptance' => 'Dienas bez pieņemšanas',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

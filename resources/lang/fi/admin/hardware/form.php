@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Vahvista laitteiden massapoisto',
+return [
+    'bulk_delete'		=> 'Vahvista laitteiden massapoisto',
   'bulk_delete_help'	=> 'Tarkasta alla olevat massapoistettavat laitteet. Kun nämä laitteet on poistettu, ne voidaan palauttaa, mutta niitä ei enää yhdistetä niihin käyttäjiin, joille ne on tällä hetkellä luovutettuna.',
   'bulk_delete_warn'	=> 'Olet poistamassa :asset_count laitetta.',
-	'bulk_update'		=> 'Massapäivitä laitteita',
-	'bulk_update_help'	=> 'Tämän lomakkeen avulla voit päivittää useita laitteita kerralla. Täytä vain ne kentät joita haluat muuttaa. Tyhjäksi jätettyjä kenttiä ei päivitetä. ',
-	'bulk_update_warn'	=> 'Olet päivittämässä :asset_count laitteen ominaisuuksia.',
+    'bulk_update'		=> 'Massapäivitä laitteita',
+    'bulk_update_help'	=> 'Tämän lomakkeen avulla voit päivittää useita laitteita kerralla. Täytä vain ne kentät joita haluat muuttaa. Tyhjäksi jätettyjä kenttiä ei päivitetä. ',
+    'bulk_update_warn'	=> 'Olet päivittämässä :asset_count laitteen ominaisuuksia.',
     'checkedout_to'		=> 'Luovutettuna',
     'checkout_date'		=> 'Luovutuspäivä',
     'checkin_date'		=> 'Palautuspäivä',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Laitetunniste',
     'update'			=> 'Päivitä laite',
     'warranty'			=> 'Takuu',
-		'warranty_expires'		=> 'Takuu päättyy',
+        'warranty_expires'		=> 'Takuu päättyy',
     'years'				=> 'vuotta',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

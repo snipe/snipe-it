@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Tae Taonga',
     'asset_model'       => 'Tauira',
-    'book_value'  	=> 'Uara',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'In / Out',
     'checkout_date' => 'Rā Rārangi',
     'checkoutto' 	=> 'Kua Mataarahia',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Tuhinga o mua',
     'dl_csv' 		=> 'Tikiake CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Waea',
     'status'   		=> 'Tūnga',
     'title'      	=> 'Tahua',
-    'image'		=> 'Atahanga Pūrere',
+    'image'		    => 'Atahanga Pūrere',
     'days_without_acceptance' => 'Nga Rahui Te Whakaae',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

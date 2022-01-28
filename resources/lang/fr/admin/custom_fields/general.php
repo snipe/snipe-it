@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Champs personnalisés',
+    'manage'                    => 'Manage',
     'field'		                => 'Champ',
     'about_fieldsets_title'		=> 'A propos des fieldsets',
-    'about_fieldsets_text'		=> 'Les fieldsets permettent de créer des groupes de champs personnalisés que vous utilisez fréquemment pour des types de modèles spécifiques.',
-    'custom_format'             => 'Format personnalisé...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Chiffrer la valeur de ce champ dans la base de données',
     'encrypt_field_help'      => 'AVERTISSEMENT: Chiffrer un champ en rend la recherche sur le contenu impossible.',
     'encrypted'      	        => 'Chiffré',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'Utilisé par les modèles',
     'order'   		            => 'Commande',
     'create_fieldset'         => 'Nouveau Fieldset',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Nouveau champ personnalisé',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'La valeur de ce champ est chiffrée dans la base de donnée. Seuls les administrateurs seront capable de voir les données déchiffrées',
     'show_in_email'     => 'Inclure la valeur de ce champ dans les e-mails envoyés à l\'utilisateur? Les champs cryptés ne peuvent pas être inclus dans les e-mails.',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Επιβεβαιώστε μαζική διαγραφή περιουσιακών στοιχείων',
+return [
+    'bulk_delete'		=> 'Επιβεβαιώστε μαζική διαγραφή περιουσιακών στοιχείων',
   'bulk_delete_help'	=> 'Εξετάστε τα περιουσιακά στοιχεία για μαζική διαγραφή παρακάτω. Μόλις διαγραφεί, αυτά τα περιουσιακά στοιχεία μπορούν να αποκατασταθούν, αλλά αυτά δεν θα είναι πλέον συσχετιζόμενα με οποιοσδήποτε χρήστη που τους έχει ανατεθεί.',
   'bulk_delete_warn'	=> 'Πρόκειται να διαγράψετε: asset_count περιουσιακών στοιχείων.',
-	'bulk_update'		=> 'Μαζική ενημέρωση παγίων',
-	'bulk_update_help'	=> 'Αυτή η φόρμα επιτρέπει την ενημέρωση πολλαπλών παγίων ταυτόχρονα. Μόνο συμπληρώστε τα πεδία που θέλετε να αλλάξετε. Οποιαδήποτε πεδίο αριστερά μείνει κενό θα παραμείνει ως αμετάβλητο. ',
-	'bulk_update_warn'	=> 'Είστε έτοιμοι να επεξεργαστείτε τις ιδιότητες του: asset_count περιουσιακών στοιχείων.',
+    'bulk_update'		=> 'Μαζική ενημέρωση παγίων',
+    'bulk_update_help'	=> 'Αυτή η φόρμα επιτρέπει την ενημέρωση πολλαπλών παγίων ταυτόχρονα. Μόνο συμπληρώστε τα πεδία που θέλετε να αλλάξετε. Οποιαδήποτε πεδίο αριστερά μείνει κενό θα παραμείνει ως αμετάβλητο. ',
+    'bulk_update_warn'	=> 'Είστε έτοιμοι να επεξεργαστείτε τις ιδιότητες του: asset_count περιουσιακών στοιχείων.',
     'checkedout_to'		=> 'Ανάθεση σε',
     'checkout_date'		=> 'Ημερομηνία αποχώρησης',
     'checkin_date'		=> 'Ημερομηνία άφιξης',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Ετικέτα πόρων',
     'update'			=> 'Ενημέρωση παγίου',
     'warranty'			=> 'Εγγύηση',
-		'warranty_expires'		=> 'Λήξη Εγγύησης',
+        'warranty_expires'		=> 'Λήξη Εγγύησης',
     'years'				=> 'έτη',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

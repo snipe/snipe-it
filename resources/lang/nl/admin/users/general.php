@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Deze gebruiker kan inloggen',
     'activated_disabled_help_text' => 'U kunt de activeringsstatus niet bewerken voor uw eigen account.',
     'assets_user'       => 'Assets toegewezen aan :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Gebruiker aanpassen',
     'filetype_info'     => 'Toegestane bestandstypes zijn png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Geschiedenis voor :name',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Klik hier om ze te herstellen.',
     'last_login'        => 'Laatst aangemeld',
     'ldap_config_text'  => 'LDAP configuratie kan worden gevonden in Admin > Instellingen. De (optioneel) geselecteerde locatie zal voor alle geimporteerde gebruikers ingesteld worden.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'De huidige beheer instellingen staan selectief gebruik van twee factor authenticatie toe.  ',
     'two_factor_enrolled' => 'Twee factor authenticatie apparaat ingesteld ',
     'two_factor_active'   => 'Twee factor authenticatie actief ',
-    );
+    'user_deactivated'  => 'Gebruiker is ge-deactiveert',
+    'activation_status_warning' => 'Activatiestatus niet wijzigen',
+    'group_memberships_helpblock' => 'Alleen superadmins kunnen leden van groepen bewerken.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

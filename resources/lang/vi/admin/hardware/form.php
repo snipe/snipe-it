@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Xác nhận Hàng loạt Xóa Tài sản',
+return [
+    'bulk_delete'		=> 'Xác nhận Hàng loạt Xóa Tài sản',
   'bulk_delete_help'	=> 'Xem lại tài sản để xóa hàng loạt dưới đây. Sau khi đã xóa, những nội dung này có thể được khôi phục, nhưng chúng sẽ không còn được kết hợp với bất kỳ người dùng nào hiện đang được chỉ định.',
   'bulk_delete_warn'	=> 'Bạn sắp xóa: asset_count tài sản.',
-	'bulk_update'		=> 'Cập nhật tài sản số lượng lớn',
-	'bulk_update_help'	=> 'Form này cho phép bạn cập nhật nhiều tài sản cùng lúc. Chỉ điền vào ô bạn cần thay đổi. Bất kỳ ô nào để trống sẽ thông báo là chưa thay đổi. ',
-	'bulk_update_warn'	=> 'Bạn muốn chỉnh sửa các thuộc tính của :asset_count assets.',
+    'bulk_update'		=> 'Cập nhật tài sản số lượng lớn',
+    'bulk_update_help'	=> 'Form này cho phép bạn cập nhật nhiều tài sản cùng lúc. Chỉ điền vào ô bạn cần thay đổi. Bất kỳ ô nào để trống sẽ thông báo là chưa thay đổi. ',
+    'bulk_update_warn'	=> 'Bạn muốn chỉnh sửa các thuộc tính của :asset_count assets.',
     'checkedout_to'		=> 'Checkout đến',
     'checkout_date'		=> 'Ngày Checkout',
     'checkin_date'		=> 'Ngày Checkin',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Thẻ tài sản',
     'update'			=> 'Cập nhật tài sản',
     'warranty'			=> 'Bảo hành',
-		'warranty_expires'		=> 'Hết hạn bảo hành',
+        'warranty_expires'		=> 'Hết hạn bảo hành',
     'years'				=> 'năm',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Bevestig bulk verwijdering van assets',
+return [
+    'bulk_delete'		=> 'Bevestig bulk verwijdering van assets',
   'bulk_delete_help'	=> 'Bekijk de assets voor bulkverwijdering hieronder. Eenmaal verwijderd, kunnen deze assets worden hersteld, maar ze zullen niet langer geassocieerd worden met gebruikers waaraan ze momenteel zijn toegewezen.',
   'bulk_delete_warn'	=> 'Je staat op het punt om :asset_count assets te verwijderen.',
-	'bulk_update'		=> 'Assets in bulk bijwerken',
-	'bulk_update_help'	=> 'Met dit formulier kun je meerdere assets tegelijk bijwerken. Vul alleen de velden in die je moet wijzigen. Alle lege velden blijven ongewijzigd. ',
-	'bulk_update_warn'	=> 'Je staat op het punt de eigenschappen van :asset_count assets te wijzigen.',
+    'bulk_update'		=> 'Assets in bulk bijwerken',
+    'bulk_update_help'	=> 'Met dit formulier kun je meerdere assets tegelijk bijwerken. Vul alleen de velden in die je moet wijzigen. Alle lege velden blijven ongewijzigd. ',
+    'bulk_update_warn'	=> 'Je staat op het punt de eigenschappen van :asset_count assets te wijzigen.',
     'checkedout_to'		=> 'Uitgecheckt aan',
     'checkout_date'		=> 'Uitgecheckt datum',
     'checkin_date'		=> 'Ingecheckt datum',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Assettag',
     'update'			=> 'Asset update',
     'warranty'			=> 'Garantie',
-		'warranty_expires'		=> 'Garantie vervalt',
+        'warranty_expires'		=> 'Garantie vervalt',
     'years'				=> 'jaar',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

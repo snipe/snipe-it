@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> '資産タグ',
     'asset_model'       => 'モデル',
-    'book_value'  	=> '価値',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'In/Out',
     'checkout_date' => '検査日',
     'checkoutto' 	=> '検査済',
+    'current_value' => 'Current Value',
     'diff' 			=> '差分',
     'dl_csv' 		=> 'CSVダウンロード',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'シリアル',
     'status'   		=> '状態',
     'title'      	=> '資産 ',
-    'image'		=> '写真',
+    'image'		    => '写真',
     'days_without_acceptance' => '未受理期間',
-    'monthly_depreciation' => '毎月の減価償却費（減価償却費）'
-
-);
+    'monthly_depreciation' => '毎月の減価償却費（減価償却費）',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

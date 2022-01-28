@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'ผู้ใช้รายนี้สามารถเข้าระบบได้',
     'activated_disabled_help_text' => 'คุณไม่สามารถแก้ไขสถานะเปิดใช้งานสำหรับบัญชีของคุณเอง',
     'assets_user'       => 'ทรัพย์สินที่กำหนดให้ :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'แก้ไขผู้ใช้',
     'filetype_info'     => 'ประเภทของไฟล์ที่อนุญาตแล้ว มีดังนี้ png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar',
     'history_user'      => 'ประวัติของ :name',
-	'info'				=> 'ข้อมูล',
+    'info'				=> 'ข้อมูล',
     'restore_user'		=> 'คลิกที่นี่เพื่อเรียกคืน',
     'last_login'        => 'เข้าสู่ระบบล่าสุด',
     'ldap_config_text'  => 'คุณสามารถตั้งค่าการกำหนดค่า LDAP ได้ Admin> การตั้งค่า สถานที่ที่เลือก (เลือกได้) จะถูกตั้งค่าสำหรับผู้ใช้ที่นำเข้าทั้งหมด',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'การตั้งค่าผู้ดูแลระบบปัจจุบันช่วยให้สามารถใช้การตรวจสอบสิทธิ์แบบสองปัจจัยได้อย่างมีประสิทธิภาพ',
     'two_factor_enrolled' => 'อุปกรณ์ 2FA ที่ลงทะเบียนแล้ว',
     'two_factor_active'   => '2FA Active',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

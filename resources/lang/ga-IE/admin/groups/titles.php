@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Maidir Grúpaí',
     'about_groups'                  => 'Úsáidtear grúpaí chun ceadanna úsáideora a ghinearálú.',
     'group_management' 	 	=> 'Bainistíocht Grúpa',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Riarachán Grúpa',
     'allow' 	 			=> 'Ceadaigh',
     'deny' 	 				=> 'Diúltaigh',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Lietotājs var pieslēgties sistēmai',
     'activated_disabled_help_text' => 'Jūs nevarat rediģēt sava konta aktivizācijas statusu.',
     'assets_user'       => 'Aktīvi, kas piešķirti: nosaukums',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Rediģēt lietotāju',
     'filetype_info'     => 'Atļautie failu tipi ir png, gif, jpg, jpeg, doc, docx, pdf, txt, zip un rar.',
     'history_user'      => 'Vēsture: vārds',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Noklikšķiniet šeit, lai tos atjaunotu.',
     'last_login'        => 'Pēdējais pieteikšanās',
     'ldap_config_text'  => 'LDAP konfigurācijas iestatījumus var atrast Admin> Settings. Atlasītā atrašanās vieta (izvēles) tiks iestatīta visiem importētajiem lietotājiem.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Jūsu pašreizējie administrēšanas iestatījumi ļauj atlasīt divu faktoru autentifikāciju.',
     'two_factor_enrolled' => 'Reģistrēta 2F ierīce',
     'two_factor_active'   => '2FA aktīvs',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

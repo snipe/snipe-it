@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Προσαρμοσμένα πεδία',
+    'manage'                    => 'Manage',
     'field'		                => 'Πεδίο',
     'about_fieldsets_title'		=> 'Σχετικά με τα σύνολα πεδίων',
-    'about_fieldsets_text'		=> 'Τα πεδία των πεδίων σάς επιτρέπουν να δημιουργείτε ομάδες προσαρμοσμένων πεδίων που χρησιμοποιούνται συχνά ξανά για συγκεκριμένους τύπους μοντέλων στοιχείων ενεργητικού.',
-    'custom_format'             => 'Προσαρμοσμένη μορφή...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Κρυπτογράφηση της αξίας του πεδίου στη βάση δεδομένων',
     'encrypt_field_help'      => 'Προειδοποίηση: H κρυπτογράφηση ενός πεδίου την καθιστά ανεξερεύνητη.',
     'encrypted'      	        => 'Κρυπτογραφημένο',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'Χρησιμοποιήθηκε από τα μοντέλα',
     'order'   		            => 'Σειρά',
     'create_fieldset'         => 'Νέο σύνολο πεδίων',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Νέο προσαρμοσμένο πεδίο',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Η τιμή αυτού του πεδίου είναι κρυπτογραφημένη στη βάση δεδομένων. Μόνο οι διαχειριστές θα μπορούν να δουν την αποκρυπτογραφημένη τιμή',
     'show_in_email'     => 'Να περιλαμβάνεται η τιμή αυτού του πεδίου στα emails χρέωσης ου αποστέλονται στους χρήστες; Κρυπτογραφημένα πεδία δεν μπορούν να περιληφθούν σε emails.',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

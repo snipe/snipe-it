@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Người dùng đã hủy bỏ một khoản mục yêu cầu trên trang web',
     'a_user_requested' => 'Người dùng đã yêu cầu một mục trên trang web',
     'accessory_name' => 'Tên Phụ Kiện:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'Đây là một bài kiểm tra từ Hệ thống Quản lý Tài sản Snipe-IT. Nếu bạn nhận được điều này, mail đang làm việc :)',
     'the_following_item' => 'Mục dưới đây đã được kiểm tra:',
     'low_inventory_alert' => 'Có: mặt hàng tồn dưới mức tối thiểu hoặc sẽ sớm ở mức thấp. | Có nhiều: mặt hàng tồn dưới mức tồn kho tối thiểu hoặc sẽ sớm ở mức thấp.',
-    'assets_warrantee_alert' => 'Có: tài sản có bảo hành sắp hết hạn vào ngày mai: threshold days. | Có nhiều: tài sản có bảo hành sắp hết hạn trong ngày mai: threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Có: giấy phép bản quyền sắp hết hạn trong ngày mai:threshold days. | Có nhiều: giấy phép bản quyên sắp hết hạn trong lần tiếp theo: threshold days.',
     'to_reset' => 'Để đặt lại mật khẩu web của bạn, hãy hoàn thành biểu mẫu này:',
     'type' => 'Kiểu',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Báo cáo mong muốn cấp phát tài sản',
     'Expected_Checkin_Notification' => 'Nhắn nhở: hạn chót cấp phát cho :name gần đến',
     'Expected_Checkin_Date' => 'Một tài sản đã thu hồi về cho bạn vì đã hoàn lại vào ngày :date',
-    'your_assets' => 'Xen qua tài sản của bạn'
-);
+    'your_assets' => 'Xen qua tài sản của bạn',
+];

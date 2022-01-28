@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Σχετικά με τις ομάδες',
     'about_groups'                  => 'Οι ομάδες χρησιμοποιούνται για να γενικεύσουν τα δικαιώματα του χρήστη.',
     'group_management' 	 	=> 'Διαχείριση ομάδων',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Διαχειριστής ομάδας',
     'allow' 	 			=> 'Να επιτραπεί',
     'deny' 	 				=> 'Άρνηση',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

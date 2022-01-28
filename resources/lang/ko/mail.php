@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => '사용자가 웹사이트에서 품목 요청을 취소했습니다',
     'a_user_requested' => '사용자가 웹사이트에서 품목을 요청했습니다',
     'accessory_name' => '액세서리 이름',
@@ -9,7 +9,7 @@ return array(
     'asset' => '자산:',
     'asset_name' => '자산명:',
     'asset_requested' => '자산 요청',
-    'asset_tag' => 'Asset Tag',
+    'asset_tag' => '자산 태그',
     'assigned_to' => '할당',
     'best_regards' => '감사합니다,',
     'canceled' => '취소됨',
@@ -18,8 +18,8 @@ return array(
     'click_to_confirm' => ':web 계정을 확인하려면 다음 링크를 클릭하세요:',
     'click_on_the_link_accessory' => '부속품을 받았다면 아래 링크를 클릭하세요.',
     'click_on_the_link_asset' => '자산을 받았다면 아래 링크를 클릭하세요.',
-    'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
-    'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
+    'Confirm_Asset_Checkin' => '자산 반입 확인',
+    'Confirm_Accessory_Checkin' => '부속품 반입 확인',
     'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
     'Confirm_license_delivery' => '라이센스 전달 확인',
     'Confirm_asset_delivery' => 'Asset delivery confirmation',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => '이것은 Snipe-IT 자산 관리 시스템에서 온 테스트 입니다. 이 것을 받았다면, 메일은 동작중입니다 :)',
     'the_following_item' => '다음의 품목들이 반입되었습니다: ',
     'low_inventory_alert' => '최소 보유량보다 낮거나 소진될 수 있는 품목이 :count 개 있습니다.|최소 보유량보다 낮거나 소진될 수 있는 품목이 :count 개 있습니다.',
-    'assets_warrantee_alert' => '다음 :threshold 일 이내에 보증 기간이 만료되는 자산이 :count 개 있습니다.|다음 :threshold 일 이내에 보증 기간이 만료되는 자산들이 :count 개 있습니다.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => '다음 :threshold 일 내에 만료되는 라이선스가 :count 개 있습니다.|다음 :threshold 일 내에 만료되는 라이선스가 :count 개 있습니다.',
     'to_reset' => ':web 비밀번호를 재설정 하려면, 이 양식을 작성하세요:',
     'type' => '유형',
@@ -69,11 +69,11 @@ return array(
     'welcome' => '환영합니다 :name',
     'welcome_to' => '환영합니다 :web!',
     'your_credentials' => '당신의 Snipe-IT 인증들',
-    'Accessory_Checkin_Notification' => 'Accessory checked in',
-    'Asset_Checkin_Notification' => 'Asset checked in',
+    'Accessory_Checkin_Notification' => '부속품 반입 됨',
+    'Asset_Checkin_Notification' => '자산 반입 됨',
     'License_Checkin_Notification' => '라이센스 확인 됨.',
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => '자산 확인'
-);
+    'your_assets' => '자산 확인',
+];

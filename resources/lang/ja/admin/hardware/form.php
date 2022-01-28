@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> '資産の一括削除',
+return [
+    'bulk_delete'		=> '資産の一括削除',
   'bulk_delete_help'	=> '以下の資産が一括削除されます。削除後のデータは戻すことができませ',
   'bulk_delete_warn'	=> ':asset_cont 件の資産を削除しました',
-	'bulk_update'		=> '資産を一括更新',
-	'bulk_update_help'	=> 'このフォームは一度に複数の資産を更新することが可能です。変更が必要なフィールドにのみ入力をして下さい。ブランクのフィールドは変更されません。 ',
-	'bulk_update_warn'	=> '資産群（:asset_count）のプロパティを編集します。',
+    'bulk_update'		=> '資産を一括更新',
+    'bulk_update_help'	=> 'このフォームは一度に複数の資産を更新することが可能です。変更が必要なフィールドにのみ入力をして下さい。ブランクのフィールドは変更されません。 ',
+    'bulk_update_warn'	=> '資産群（:asset_count）のプロパティを編集します。',
     'checkedout_to'		=> 'チェックアウト先',
     'checkout_date'		=> 'チェックアウト日',
     'checkin_date'		=> 'チェックイン日',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> '資産タグ',
     'update'			=> '資産アップデート',
     'warranty'			=> '保証',
-		'warranty_expires'		=> '保証期限',
+        'warranty_expires'		=> '保証期限',
     'years'				=> '年',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

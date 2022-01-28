@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'حول المجموعات',
     'about_groups'                  => 'تستخدم المجموعات لتعميم صلاحيات المستخدم.',
     'group_management' 	 	=> 'إدارة المجموعة',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'مدير المجموعة',
     'allow' 	 			=> 'سماح',
     'deny' 	 				=> 'منع',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

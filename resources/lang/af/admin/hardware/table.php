@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Bate-tag',
     'asset_model'       => 'model',
-    'book_value'  	=> 'waarde',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'In uit',
     'checkout_date' => 'Checkout Datum',
     'checkoutto' 	=> 'Gekontroleer',
+    'current_value' => 'Current Value',
     'diff' 			=> 'diff',
     'dl_csv' 		=> 'Laai CSV af',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Serial',
     'status'   		=> 'status',
     'title'      	=> 'bate',
-    'image'		=> 'Toestelbeeld',
+    'image'		    => 'Toestelbeeld',
     'days_without_acceptance' => 'Dae sonder aanvaarding',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

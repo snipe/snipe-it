@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Хөрөнгийн шошго',
     'asset_model'       => 'Загвар',
-    'book_value'  	=> 'Утга',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Гадуур нь',
     'checkout_date' => 'Тооцоо хийх өдөр',
     'checkoutto' 	=> 'Нь шалгаж',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'CSV татаж авах',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Цуваа',
     'status'   		=> 'Статус',
     'title'      	=> 'Актив',
-    'image'		=> 'Төхөөрөмжийн дүрс',
+    'image'		    => 'Төхөөрөмжийн дүрс',
     'days_without_acceptance' => 'Хүлээн зөвшөөрөхгүй өдрүүд',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Konfirmasi Penghapusan Aset dalam Jumlah Besar',
+return [
+    'bulk_delete'		=> 'Konfirmasi Penghapusan Aset dalam Jumlah Besar',
   'bulk_delete_help'	=> 'Meninjau aset untuk penghapusan massal di bawah ini. Setelah dihapus, aset-aset ini dapat dipulihkan, tetapi mereka tidak lagi akan dikaitkan dengan setiap pengguna yang mereka saat ini digunakan.',
   'bulk_delete_warn'	=> 'Anda akan menghapus :asset_count aset.',
-	'bulk_update'		=> 'Perbarui aset jumlah besar',
-	'bulk_update_help'	=> 'Formulir ini mengizinkan anda untuk memperbarui kelipatan aset dalam sekali proses. Cukup isi di field yang hendak di rubah. Jika ada yang kosong tidak akan dirubah. ',
-	'bulk_update_warn'	=> 'Anda akan menyunting :asset_count aset.',
+    'bulk_update'		=> 'Perbarui aset jumlah besar',
+    'bulk_update_help'	=> 'Formulir ini mengizinkan anda untuk memperbarui kelipatan aset dalam sekali proses. Cukup isi di field yang hendak di rubah. Jika ada yang kosong tidak akan dirubah. ',
+    'bulk_update_warn'	=> 'Anda akan menyunting :asset_count aset.',
     'checkedout_to'		=> 'Diberikan kepada',
     'checkout_date'		=> 'Tanggal Pemberian',
     'checkin_date'		=> 'Tanggal Pengembalian',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Tag Aset',
     'update'			=> 'Perbarui Aset',
     'warranty'			=> 'Garansi',
-		'warranty_expires'		=> 'Garansi Berakhir',
+        'warranty_expires'		=> 'Garansi Berakhir',
     'years'				=> 'tahun',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Salli kirjautuminen',
     'activated_disabled_help_text' => 'Et voi muokata oman tilisi aktivoinnin tilaa.',
     'assets_user'       => 'Käyttäjälle :name luovutetut laitteet',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Muokkaa käyttäjää',
     'filetype_info'     => 'Sallitut tiedostotyypit ovat png, gif, jpg, jpeg, doc, docx, pdf, txt, zip ja rar.',
     'history_user'      => 'Historia käyttäjälle :name',
-	'info'				=> 'Tiedot',
+    'info'				=> 'Tiedot',
     'restore_user'		=> 'Klikkaa tästä palauttaaksesi ne.',
     'last_login'        => 'Viimeisin kirjautuminen',
     'ldap_config_text'  => 'LDAP-asetukset löytyvät kohdasta Järjestelmänvalvoja> Asetukset. Valittu (valinnainen) sijainti määritetään kaikille tuodulle käyttäjälle.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Nykyiset järjestelmänvalvojan asetukset mahdollistavat kaksivaiheisen tunnistautumisen käyttöönoton valituille käyttäjille.  ',
     'two_factor_enrolled' => 'MFA-laite ilmoittautunut mukaan ',
     'two_factor_active'   => 'MFA aktiivinen',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

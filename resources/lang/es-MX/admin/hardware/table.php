@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Etiqueta',
     'asset_model'       => 'Modelo',
-    'book_value'  	=> 'Valor',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Operación',
     'checkout_date' => 'Fecha de asignación',
     'checkoutto' 	=> 'Asignado',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Diferencia',
     'dl_csv' 		=> 'Descargar CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'N. Serie',
     'status'   		=> 'Estado',
     'title'      	=> 'Equipo ',
-    'image'		=> 'Imagen de dispositivo',
+    'image'		    => 'Imagen de dispositivo',
     'days_without_acceptance' => 'Días Sin Aceptación',
-    'monthly_depreciation' => 'Depreciación Mensual'
-
-);
+    'monthly_depreciation' => 'Depreciación Mensual',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

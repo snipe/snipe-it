@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Egyéni mezők',
+    'manage'                    => 'Manage',
     'field'		                => 'Mező',
     'about_fieldsets_title'		=> 'A mezőcsoportokról',
-    'about_fieldsets_text'		=> 'A mezőcsoportokkal tudsz létrehozni olyan gyakran használt egyedi mezőket csoportosító speciális eszköz modell típusokat.',
-    'custom_format'             => 'Egyéni formátum...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'A mező értékének titkosítása az adatbázisban',
     'encrypt_field_help'      => 'Figyelmeztetés: egy mező titkosítása kereshetetlenné teszi azt.',
     'encrypted'      	        => 'Titkosított',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'Modellek szerint ',
     'order'   		            => 'Rendelés',
     'create_fieldset'         => 'Új mezőcsoportok',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Új egyéni mező',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'A mező értéke titkosítva van az adatbázisban. Csak az adminisztrátor felhasználók láthatják a dekódolt értéket',
     'show_in_email'     => 'Szerepeljen ez a mező az eszköz kiadásakor a felhasználónak küldött emailben? A titkosított mezők nem szerepelhetnek az emailekben.',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

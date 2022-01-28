@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_locations_title'     => 'A Helyekről',
     'about_locations'           => 'A helyek a felhasználók, az eszközök és egyéb elemek helyadatait nyomon követik',
     'assets_rtd'                => 'Eszközök', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
@@ -20,4 +20,21 @@ return array(
     'parent'                    => 'Szülő',
     'currency'                  => 'Helyi valuta',
     'ldap_ou'                   => 'LDAP keresés OU',
-    );
+    'user_name'                 => 'Felhasználónév',
+    'department'                => 'Osztály',
+    'location'                  => 'Location',
+    'asset_tag'                 => 'Assets Tag',
+    'asset_name'                => 'Name',
+    'asset_category'            => 'Category',
+    'asset_manufacturer'        => 'Manufacturer',
+    'asset_model'               => 'Modell',
+    'asset_serial'              => 'Sorozatszám',
+    'asset_location'            => 'Location',
+    'asset_checked_out'         => 'Checked Out',
+    'asset_expected_checkin'    => 'Expected Checkin',
+    'date'                      => 'Dátum:',
+    'signed_by_asset_auditor'   => 'Signed By (Asset Auditor):',
+    'signed_by_finance_auditor' => 'Signed By (Finance Auditor):',
+    'signed_by_location_manager' => 'Signed By (Location Manager):',
+    'signed_by'                 => 'Signed Off By:',
+];

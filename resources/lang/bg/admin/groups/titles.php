@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_groups_title'            => 'Относно групи',
     'about_groups'                  => 'Групите се използват за обобщаване на потребителските разрешения',
     'group_management' 	 	=> 'Управление на групи',
@@ -10,5 +10,7 @@ return array(
     'group_admin' 	 		=> 'Администратор на група',
     'allow' 	 			=> 'Разрешаване',
     'deny' 	 				=> 'Отказ',
-
-);
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
+];

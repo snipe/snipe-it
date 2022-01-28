@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Корисникот го откажал барањето за средство на веб-страницата',
     'a_user_requested' => 'Корисникот побарал средство на веб-страницата',
     'accessory_name' => 'Име на додаток:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'Ова е тест од Snipe-IT Системот за управување со основни средства. Ако го добивте ова, е-поштата работи :)',
     'the_following_item' => 'Следната ставка е раздолжена: ',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'За да ја ресетирате вашата :web лозинка, пополнете го овој формулар:',
     'type' => 'Тип',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

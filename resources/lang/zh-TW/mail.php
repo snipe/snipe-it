@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => '使用者已取消項目申請',
     'a_user_requested' => '使用者已申請項目',
     'accessory_name' => '配件名稱：',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => '這是一封 Snipe-IT 資產管理系統的測試電子郵件，如果您收到，表示郵件通知正常運作 :)',
     'the_following_item' => '以下項目已繳回：',
     'low_inventory_alert' => '有 :count 種物品已經低於或者接近最小庫存。|有 :count 種物品已經低於或者接近最小庫存。',
-    'assets_warrantee_alert' => '有 :count 項資產的保固將在 :threshold 天後到期。|有 :count 項資產的保固將在 :threshold 天後到期。',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => '有 :count 個授權將在 :threshold 天後到期。|有 :count 個授權將在 :threshold 天後到期。',
     'to_reset' => '要重設 :web 的密碼，請完成此表單：',
     'type' => '類型',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => '預計資產繳回報告',
     'Expected_Checkin_Notification' => '提醒: :name 接近繳回最後期限',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => '查看您的資產'
-);
+    'your_assets' => '查看您的資產',
+];

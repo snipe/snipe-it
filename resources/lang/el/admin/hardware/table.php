@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Ετικέτα πόρων',
     'asset_model'       => 'Μοντέλο',
-    'book_value'  	=> 'Τιμή',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Εισερχόμενα/Εξερχόμενα',
     'checkout_date' => 'Ημερομηνία αποχώρησης',
     'checkoutto' 	=> 'Checked Out',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Κατεβάστε το CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Σειριακός',
     'status'   		=> 'Κατάσταση',
     'title'      	=> 'Πάγιο ',
-    'image'		=> 'Φωτογραφία συσκευής',
+    'image'		    => 'Φωτογραφία συσκευής',
     'days_without_acceptance' => 'Ημέρες χωρίς αποδοχή',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

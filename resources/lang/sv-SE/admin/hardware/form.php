@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Bekräfta storlekar för borttagning av bulk',
+return [
+    'bulk_delete'		=> 'Bekräfta storlekar för borttagning av bulk',
   'bulk_delete_help'	=> 'Granska tillgångarna för delad borttagning nedan. En gång raderas kan dessa tillgångar återställas, men de kommer inte längre att vara associerade med några användare de tilldelas för närvarande.',
   'bulk_delete_warn'	=> 'Du håller på att ta bort: asset_count-tillgångar.',
-	'bulk_update'		=> 'Bulk Update Assets',
-	'bulk_update_help'	=> 'I det här formuläret kan du uppdatera flera tillgångar på en gång. Fyll bara i de fält du behöver ändra. Alla fält som lämnas tomma kommer att förbli oförändrade.',
-	'bulk_update_warn'	=> 'Du håller på att redigera egenskaperna hos: asset_count-tillgångar.',
+    'bulk_update'		=> 'Bulk Update Assets',
+    'bulk_update_help'	=> 'I det här formuläret kan du uppdatera flera tillgångar på en gång. Fyll bara i de fält du behöver ändra. Alla fält som lämnas tomma kommer att förbli oförändrade.',
+    'bulk_update_warn'	=> 'Du håller på att redigera egenskaperna hos: asset_count-tillgångar.',
     'checkedout_to'		=> 'Utcheckad till',
     'checkout_date'		=> 'Utcheckningsdatum',
     'checkin_date'		=> 'Incheckningsdatum',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Asset Tag',
     'update'			=> 'Asset Update',
     'warranty'			=> 'Garanti',
-		'warranty_expires'		=> 'Garantin löper ut',
+        'warranty_expires'		=> 'Garantin löper ut',
     'years'				=> 'år',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

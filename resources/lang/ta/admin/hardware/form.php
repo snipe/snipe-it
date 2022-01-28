@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'பெரும்பங்கு சொத்துக்களை நீக்குவதை உறுதிப்படுத்தவும்',
+return [
+    'bulk_delete'		=> 'பெரும்பங்கு சொத்துக்களை நீக்குவதை உறுதிப்படுத்தவும்',
   'bulk_delete_help'	=> 'கீழே மொத்த நீக்குவதற்கான சொத்துக்களை மதிப்பாய்வு செய்யவும். நீக்கப்பட்டவுடன், இந்த சொத்துகள் மீட்டமைக்கப்படலாம், ஆனால் அவை தற்போது எந்த பயனர்களையும் தற்போது ஒதுக்கப்படும்.',
   'bulk_delete_warn'	=> 'நீங்கள் நீக்குவது: asset_count சொத்துகள்.',
-	'bulk_update'		=> 'மொத்த புதுப்பித்தல் சொத்துகள்',
-	'bulk_update_help'	=> 'இந்த படிவம் ஒரே நேரத்தில் பல சொத்துக்களை புதுப்பிக்க உதவுகிறது. நீங்கள் மாற்ற வேண்டிய துறைகள் மட்டுமே நிரப்பவும். காலியாக உள்ள எந்த புலமும் மாறாமல் இருக்கும்.',
-	'bulk_update_warn'	=> 'சொத்துக்களின் திருத்தங்களை நீங்கள் திருத்திக் கொள்ள உள்ளீர்கள்: asset_count assets.',
+    'bulk_update'		=> 'மொத்த புதுப்பித்தல் சொத்துகள்',
+    'bulk_update_help'	=> 'இந்த படிவம் ஒரே நேரத்தில் பல சொத்துக்களை புதுப்பிக்க உதவுகிறது. நீங்கள் மாற்ற வேண்டிய துறைகள் மட்டுமே நிரப்பவும். காலியாக உள்ள எந்த புலமும் மாறாமல் இருக்கும்.',
+    'bulk_update_warn'	=> 'சொத்துக்களின் திருத்தங்களை நீங்கள் திருத்திக் கொள்ள உள்ளீர்கள்: asset_count assets.',
     'checkedout_to'		=> 'அவுட் சரிபார்க்கப்பட்டது',
     'checkout_date'		=> 'புதுப்பிப்பு தேதி',
     'checkin_date'		=> 'சரி தேதி',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'சொத்து டேக்',
     'update'			=> 'சொத்து புதுப்பிப்பு',
     'warranty'			=> 'உத்தரவாதத்தை',
-		'warranty_expires'		=> 'Warranty Expires',
+        'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'ஆண்டுகள்',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

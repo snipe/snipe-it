@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Този потребител може да се логне',
     'activated_disabled_help_text' => 'Не можете да редактирате статуса на активация на собствения си профил.',
     'assets_user'       => 'Активи предадени на :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Редактиране на потребител',
     'filetype_info'     => 'Позволените типове файлове са png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, и rar.',
     'history_user'      => 'История за :name',
-	'info'				=> 'Информация',
+    'info'				=> 'Информация',
     'restore_user'		=> 'Кликнете тук, за да ги възстановите.',
     'last_login'        => 'Последен достъп до системата',
     'ldap_config_text'  => 'LDAP конфигурационните настройки могат да бъдат намерени в  Admin > Settings. Избраното (по изобр) местоположение ще бъде настроено за всички въведени потребители.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Текущите настройки на администратор позволяват избирателно прилагане на двуфакторова автентификация. ',
     'two_factor_enrolled' => '2FA устройство записано',
     'two_factor_active'   => '2FA Активно',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

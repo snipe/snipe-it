@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Bu kullanıcı giriş yapabilir',
     'activated_disabled_help_text' => 'Kendi hesabınız için aktivasyon durumunu düzenleyemezsiniz.',
     'assets_user'       => 'Demirbaşlar şu kişiye atandı :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Kullanıcıyı Düzenle',
     'filetype_info'     => 'İzin verilen dosya türleri; png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar.',
     'history_user'      => ':name Kişisi ile iligli geçmiş',
-	'info'				=> 'Bilgi',
+    'info'				=> 'Bilgi',
     'restore_user'		=> 'Onları geri yüklemek için buraya tıklayın.',
     'last_login'        => 'Son oturum açma tarihi',
     'ldap_config_text'  => 'LDAP yapılandırma ayarları Yönetici> Ayarlar\'da bulunabilir. Seçilen yer (isteğe bağlı), tüm içe aktarılan kullanıcılar için ayarlanır.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Mevcut yönetici ayarlarınız, iki aşamalı kimlik doğrulamasının seçici olarak uygulanmasına izin verir.  ',
     'two_factor_enrolled' => 'Kayıtlı 2FA Cihazı ',
     'two_factor_active'   => '2FA Etkin ',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'UYARILAR:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

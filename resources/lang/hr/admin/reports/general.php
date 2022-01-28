@@ -1,5 +1,10 @@
 <?php
 
-return array(
-    'info'   => 'Odaberite željene opcije za izvješće o imovini.'
-);
+return [
+    'info'   => 'Odaberite željene opcije za izvješće o imovini.',
+    'deleted_user' => 'Deleted user',
+    'send_reminder' => 'Send reminder',
+    'reminder_sent' => 'Reminder sent',
+    'acceptance_deleted' => 'Acceptance request deleted',
+    'acceptance_request' => 'Acceptance request'
+];

@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'משתמש זה יכול להיכנס',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'נכסים שהוקצו ל: שם',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'ערוך משתמש',
     'filetype_info'     => 'סוגי קבצים מותרים הם png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, ו rar.',
     'history_user'      => 'היסטוריה עבור: שם',
-	'info'				=> 'מידע',
+    'info'				=> 'מידע',
     'restore_user'		=> 'לחץ כאן כדי לשחזר אותם.',
     'last_login'        => 'כניסה אחרונה',
     'ldap_config_text'  => 'הגדרות תצורה של LDAP נמצאות \'מנהל\'> \'הגדרות\'. המיקום הנבחר (אופציונלי) ייקבע עבור כל המשתמשים המיובאים.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'הגדרות מנהל המערכת הנוכחיות מאפשרות אכיפה סלקטיבית של אימות דו-גורמי.',
     'two_factor_enrolled' => 'רשם מכשיר 2FA',
     'two_factor_active'   => '2FA פעיל',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Lietotājs vietnē ir atcēlis objekta pieprasījumu',
     'a_user_requested' => 'Lietotājs ir pieprasījis vienumu vietnē',
     'accessory_name' => 'Piederumu nosaukums:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'Šis ir tests no Snipe-IT Asset Management System. Ja jums ir šis, pasts darbojas :)',
     'the_following_item' => 'Šis ieraksts ir atzīmēts:',
     'low_inventory_alert' => ':count vienības skaits ir zemāks par krājuma minimumu vai drīz būs zems.|:count vienību skaits ir zemāks par krājuma minimumu vai drīz būs zems.',
-    'assets_warrantee_alert' => ':count aktīvam beigsies garantijas termiņš pēc :threshold dienām.|:count aktīviem beigsies garantijas termiņš pēc :threshold dienām.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Pēc :threshold dienām beigsies termiņš :count licencei.| Pēc :threshold dienām beigsies termiņš :threshold :count licencēm.',
     'to_reset' => 'Lai atiestatītu: tīmekļa paroli, aizpildiet šo veidlapu:',
     'type' => 'Tips',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

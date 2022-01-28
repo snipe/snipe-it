@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Ang Tag ng Asset',
     'asset_model'       => 'Ang Modelo',
-    'book_value'  	=> 'Ang Balyu',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'Papasok/Palabas',
     'checkout_date' => 'Ang Petsa ng Pagcheck-out',
     'checkoutto' 	=> 'Nai-check Out',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Ang Diff',
     'dl_csv' 		=> 'I-download ang CSV',
     'eol' 			=> 'Ang EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Ang Seryal',
     'status'   		=> 'Ang Katayuan',
     'title'      	=> 'Ang Asset ',
-    'image'		=> 'Ang Imahe ng Device',
+    'image'		    => 'Ang Imahe ng Device',
     'days_without_acceptance' => 'Ang mga Araw na Walang Pagtanggap',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Este usuário pode efetuar login',
     'activated_disabled_help_text' => 'Você não pode alterar o status de ativação da sua própria conta.',
     'assets_user'       => 'Bens atribuidos a :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Editar Usuário',
     'filetype_info'     => 'Tipo de arquivos permitidos são png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, e rar.',
     'history_user'      => 'Histórico para :name',
-	'info'				=> 'Informações',
+    'info'				=> 'Informações',
     'restore_user'		=> 'Clique aqui para restaurá-los.',
     'last_login'        => 'Último Login',
     'ldap_config_text'  => 'As configurações do LDAP podem ser encontradas em \'Administrador > Definições\'. A localização (opcional) selecionada será definida para todos os usuários importados.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'As configurações de admin atuais permitem a aplicação seletiva de autenticação de dois passos.  ',
     'two_factor_enrolled' => 'Dispositivo 2FA Registrado ',
     'two_factor_active'   => 'A2P Ativo ',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

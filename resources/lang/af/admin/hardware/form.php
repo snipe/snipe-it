@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Bevestig bates vir die verwydering van grootmaat',
+return [
+    'bulk_delete'		=> 'Bevestig bates vir die verwydering van grootmaat',
   'bulk_delete_help'	=> 'Hersien die bates vir grootmaatverwydering hieronder. Sodra dit verwyder is, kan hierdie bates herstel word, maar hulle word nie meer geassosieer met enige gebruikers wat hulle tans toegewys is nie.',
   'bulk_delete_warn'	=> 'Jy is op die punt om te verwyder: bate_count bates.',
-	'bulk_update'		=> 'Grootskaalse opdateringsbates',
-	'bulk_update_help'	=> 'Met hierdie vorm kan u verskeie bates gelyktydig bywerk. Vul slegs die velde in wat u moet verander. Enige velde wat leeg is, bly onveranderd.',
-	'bulk_update_warn'	=> 'Jy is op die punt om die eienskappe van: bate_count bates te wysig.',
+    'bulk_update'		=> 'Grootskaalse opdateringsbates',
+    'bulk_update_help'	=> 'Met hierdie vorm kan u verskeie bates gelyktydig bywerk. Vul slegs die velde in wat u moet verander. Enige velde wat leeg is, bly onveranderd.',
+    'bulk_update_warn'	=> 'Jy is op die punt om die eienskappe van: bate_count bates te wysig.',
     'checkedout_to'		=> 'Gekontroleer na',
     'checkout_date'		=> 'Checkout Datum',
     'checkin_date'		=> 'Incheckdatum',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Bate-tag',
     'update'			=> 'Asset Update',
     'warranty'			=> 'waarborg',
-		'warranty_expires'		=> 'Warranty Expires',
+        'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'jaar',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

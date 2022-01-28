@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Mukautetut kentät',
+    'manage'                    => 'Manage',
     'field'		                => 'Kenttä',
     'about_fieldsets_title'		=> 'Tietoja kenttäsarjoista',
-    'about_fieldsets_text'		=> 'Kentäsarjoilla voit luoda ryhmiä mukautetuista kentistä, joita tarvitaan tietyillä laitemalleilla.',
-    'custom_format'             => 'Mukautettu muoto ...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Salaa tämän kentän arvo tietokannassa',
     'encrypt_field_help'      => 'VAROITUS: Kentän salaaminen estää kentän arvolla hakemisen.',
     'encrypted'      	        => 'Salattu',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'Käytetään malleissa',
     'order'   		            => 'Tilata',
     'create_fieldset'         => 'Uusi kenttäsarja',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Uusi mukautettu kenttä',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Kentän arvo salataan tietokannassa. Vain järjestelmänvalvojat voivat tarkastella purettua arvoa',
     'show_in_email'     => 'Käytetäänkö kentän arvoa käyttäjälle lähetettävissä luovutus-sähköposteissa? Salattuja kenttiä ei voi lisätä sähköposteihin.',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

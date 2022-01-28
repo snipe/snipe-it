@@ -1,13 +1,14 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Oznaka imovine',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Vrednost',
+    'book_value'  	=> 'Current Value',
     'change' 		=> 'U/I',
     'checkout_date' => 'Datum odjave',
     'checkoutto' 	=> 'Odjavljen',
+    'current_value' => 'Current Value',
     'diff' 			=> 'Diff',
     'dl_csv' 		=> 'Download CSV',
     'eol' 			=> 'EOL',
@@ -18,8 +19,12 @@ return array(
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',
     'title'      	=> 'Imovina ',
-    'image'		=> 'Slika uređaja',
+    'image'		    => 'Slika uređaja',
     'days_without_acceptance' => 'Days Without Acceptance',
-    'monthly_depreciation' => 'Monthly Depreciation'
-
-);
+    'monthly_depreciation' => 'Monthly Depreciation',
+    'assigned_to'    => 'Assigned To',
+    'requesting_user' => 'Requesting User',
+    'requested_date' => 'Requested Date',
+    'changed'       => 'Changed',
+    'icon' => 'Icon',
+];

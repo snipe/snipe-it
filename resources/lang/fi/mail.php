@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Käyttäjä on peruuttanut nimikkeen pyynnön sivustolla',
     'a_user_requested' => 'Käyttäjä on pyytänyt nimikettä sivustolla',
     'accessory_name' => 'Oheistarvikkeen nimi:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'Tämä on testi Snipe-IT Asset Management -järjestelmästä. Jos saat tämän, sähköposti toimii :)',
     'the_following_item' => 'Seuraava kohde on palautettu: ',
     'low_inventory_alert' => ':count nimikkeen saldomäärä on alle minimirajan tai kohta alhainen.|:count nimikkeen saldomäärä on alle minimirajan tai kohta alhainen.',
-    'assets_warrantee_alert' => ':count laitteen takuu päättyy :threshold päivän sisällä.|:count laitteen takuu päättyy :threshold päivän sisällä.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => ':count lisenssiä vanhenee :threshold päivän sisällä.|:count lisenssiä vanhenee :threshold päivän sisällä.',
     'to_reset' => 'Voit palauttaa :web salasanasi täyttämällä tämän lomakkeen:',
     'type' => 'Tyyppi',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Odotettujen palautuspäivien raportti',
     'Expected_Checkin_Notification' => 'Muistutus: :name palautuspäivä lähestyy',
     'Expected_Checkin_Date' => 'Sinulle luovutettu laite on määrä palauttaa takaisin :date',
-    'your_assets' => 'Omat laitteesi'
-);
+    'your_assets' => 'Omat laitteesi',
+];

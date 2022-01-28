@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Confirmez la suppression du lot d\'objets',
+return [
+    'bulk_delete'		=> 'Confirmez la suppression du lot d\'objets',
   'bulk_delete_help'	=> 'Vérifiez les objets ci-dessous pour la suppression du lot. Une fois supprimés, ces objets peuvent être restaurés, mais ils ne seront plus associés avec les utilisateurs auxquels ils sont actuellement assignés.',
   'bulk_delete_warn'	=> 'Vous allez supprimer :asset_count objets.',
-	'bulk_update'		=> 'Mise à jour en bloc d\'actifs',
-	'bulk_update_help'	=> 'Ce formulaire vous permet de mettre à jour plusieurs actifs à la fois. Seulement remplir les champs que vous devez modifier. Tous les champs laissés vides resteront inchangés. ',
-	'bulk_update_warn'	=> 'Vous êtes sur le point de modifier les propriétés de l\'actif :asset_count .',
+    'bulk_update'		=> 'Mise à jour en bloc d\'actifs',
+    'bulk_update_help'	=> 'Ce formulaire vous permet de mettre à jour plusieurs actifs à la fois. Seulement remplir les champs que vous devez modifier. Tous les champs laissés vides resteront inchangés. ',
+    'bulk_update_warn'	=> 'Vous êtes sur le point de modifier les propriétés de l\'actif :asset_count .',
     'checkedout_to'		=> 'Extrait vers',
     'checkout_date'		=> 'Date d\'attribution',
     'checkin_date'		=> 'Date de dissociation',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Numéro d\'inventaire',
     'update'			=> 'Mise à jour de l\'actif',
     'warranty'			=> 'Garantie',
-		'warranty_expires'		=> 'Expiration de garantie',
+        'warranty_expires'		=> 'Expiration de garantie',
     'years'				=> 'années',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

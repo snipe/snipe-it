@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Rawa Ritenga',
+    'manage'                    => 'Manage',
     'field'		                => 'Āpure',
     'about_fieldsets_title'		=> 'Mō Ngā Āpure',
-    'about_fieldsets_text'		=> 'Ka taea e nga maraahi ki a koe te hanga i nga roopu o nga mahinga ritenga e whakamahia ana mo nga momo waahanga motuhake.',
-    'custom_format'             => 'Taeranga Ritenga ...',
+    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Whakamunahia te uara o tenei mara i roto i te pātengi raraunga',
     'encrypt_field_help'      => 'WARNING: Ko te whakamunatanga o te mara kaore e kitea.',
     'encrypted'      	        => 'Kua whakamunatia',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => 'Kua Whakamahia Ma Nga Tauira',
     'order'   		            => 'Whakatau',
     'create_fieldset'         => 'Nga Pakanga Hou',
+    'create_fieldset_title' => 'Create a new fieldset',
     'create_field'            => 'Rawa Ritenga Hou',
+    'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Ko te uara o tenei mara kei te whakamunatia i roto i te pātengi raraunga. Ka taea anake e nga kaiwhakahaere ka kite i te uara kua tohua',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails.',
-);
+    'help_text' => 'Help Text',
+    'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'about_custom_fields_title' => 'About Custom Fields',
+    'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
+    'add_field_to_fieldset' => 'Add Field to Fieldset',
+    'make_optional' => 'Required - click to make optional',
+    'make_required' => 'Optional - click to make required',
+    'reorder' => 'Reorder',
+    'db_field' => 'DB Field',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
+];

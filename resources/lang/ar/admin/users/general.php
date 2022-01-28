@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'هذا المستخدم تسجيل الدخول',
     'activated_disabled_help_text' => 'لا يمكنك تعديل حالة التنشيط لحسابك الخاص.',
     'assets_user'       => 'الأصول التي تم اخراجها إلى :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'تعديل المستخدم',
     'filetype_info'     => 'انواع صيغ الملفات المسوح بها هي png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'الأرشيف الخاص بـ :name',
-	'info'				=> 'معلومات',
+    'info'				=> 'معلومات',
     'restore_user'		=> 'انقر هنا لاستعادتها.',
     'last_login'        => 'آخر دخول للمستخدم',
     'ldap_config_text'  => 'يمكن العثور على إعدادات تهيئة لداب المشرف> الإعدادات. سيتم تعيين الموقع (اختياري) المحدد لجميع المستخدمين الذين تم استيرادهم.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'تسمح إعدادات المشرف الحالية بإنفاذ انتقائي للمصادقة الثنائية.',
     'two_factor_enrolled' => '2FA الجهاز المسجلين',
     'two_factor_active'   => '2FA نشط',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

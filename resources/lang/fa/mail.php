@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'یک کاربر یک درخواست اقساط در وب سایت را لغو کرده است',
     'a_user_requested' => 'یک کاربر یک مورد را در وبسایت درخواست کرده است',
     'accessory_name' => 'نام لوازم جانبی:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'این آزمون از سیستم مدیریت دارایی Snipe-IT است. اگر شما این کار را کردید، ایمیل کار می کند :)',
     'the_following_item' => 'مورد زیر مورد بررسی قرار گرفته است:',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'برای بازنشانی: رمز عبور وب، این فرم را تکمیل کنید:',
     'type' => 'تایپ کنید',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

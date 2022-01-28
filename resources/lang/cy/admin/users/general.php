@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Fedrith y defnyddiwr yma mewngofnodi',
     'activated_disabled_help_text' => 'Nid yw\'n bosib newid statws eich cyfrif.',
     'assets_user'       => 'Asedu wedi aseinio i :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Golygu Defnyddiwr',
     'filetype_info'     => 'Math o ffeiliau a caniateir yw png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, a rar.',
     'history_user'      => 'Hanes ar gyfer :name',
-	'info'				=> 'Gwybodaeth',
+    'info'				=> 'Gwybodaeth',
     'restore_user'		=> 'Cliciwch yma yw adfer.',
     'last_login'        => 'Mewngofnodi Diwethaf',
     'ldap_config_text'  => 'Gweler Gweinyddiaeth > Gosodiadau am gosodiadau LDAP. Mae\'r lleoliad (dewisol) yn cael ei osod am unrhyw defnyddwyr sydd yn cael ei mewnforio.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Mae eich gosodiadau admin yn caniatau gorfodaeth dewisol o dilysiant dau-factor.  ',
     'two_factor_enrolled' => 'Dyfais D2F Wedi Ymuno ',
     'two_factor_active'   => 'D2F Weithredol ',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

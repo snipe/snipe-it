@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'A felhasználó beléphet',
     'activated_disabled_help_text' => 'Saját felhasználói fiókjának a státuszát nem tudja módosítani.',
     'assets_user'       => 'Eszköz(ök) hozzárendelve: :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Felhasználó szerkesztése',
     'filetype_info'     => 'Az engedélyezett fájltípusok png, gif, jpg, jpeg, doc, docx, pdf, txt, zip és rar.',
     'history_user'      => 'Előzmények a következőhöz: név',
-	'info'				=> 'Info',
+    'info'				=> 'Info',
     'restore_user'		=> 'Kattintson ide a visszaállításhoz.',
     'last_login'        => 'Utolsó bejelentkezés',
     'ldap_config_text'  => 'Az LDAP konfigurációs beállításai megtalálhatók az Adminisztrálás> Beállítások menüben. Az (opcionális) kiválasztott hely minden importált felhasználó számára be lesz állítva.',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'A jelenlegi adminisztrációs beállításai lehetővé teszik a kétütemű hitelesítés szelektív végrehajtását.',
     'two_factor_enrolled' => '2FA eszköz beiratkozott',
     'two_factor_active'   => '2FA aktív',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

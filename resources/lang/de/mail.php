@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Eine Geräte-Anfrage auf der Webseite wurde vom Benutzer abgebrochen',
     'a_user_requested' => 'Ein Benutzer hat ein Gerät auf der Webseite angefordert',
     'accessory_name' => 'Zubehör Name:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'Dies ist ein Test von Snipe-IT-Asset-Management-System. Wenn Sie das erhalten haben, funktioniert das Senden von Mails :)',
     'the_following_item' => 'Der folgende Gegenstand wurde eingecheckt: ',
     'low_inventory_alert' => 'Es gibt :count Artikel, der unter dem Minimum ist oder kurz davor ist.|Es gibt :count Artikel, die unter dem Minimum sind oder kurz davor sind.',
-    'assets_warrantee_alert' => 'Es gibt :count Asset mit einer auslaufenden Garantie in den nächsten :threshold Tagen.| Es gibt :count Assets mit auslaufenden Garantien in den nächsten :threshold Tagen.',
+    'assets_warrantee_alert' => 'Die Garantie von :count Asset wird in :threshold Tagen auslaufen.|Die Garantie von :count Assets wird in :threshold Tagen auslaufen.',
     'license_expiring_alert' => 'Es gibt :count auslaufende Lizenz in den nächsten :threshold Tagen.|Es gibt :count auslaufende Lizenzen in den nächsten :threshold Tagen.',
     'to_reset' => 'Zum Zurücksetzen Ihres :web Passwortes, füllen Sie bitte dieses Formular aus:',
     'type' => 'Typ',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Bericht über erwartete Asset Rückgaben',
     'Expected_Checkin_Notification' => 'Erinnerung: :name Rückgabedatum nähert sich',
     'Expected_Checkin_Date' => 'Ihr ausgebuchtes Asset ist fällig zur Rückgabe am :date',
-    'your_assets' => 'Ihre Assets anzeigen'
-);
+    'your_assets' => 'Ihre Assets anzeigen',
+];

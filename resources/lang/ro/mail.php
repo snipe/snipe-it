@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Un utilizator a anulat o solicitare de element pe site',
     'a_user_requested' => 'Un utilizator a solicitat un element de pe site',
     'accessory_name' => 'Nume accesoriu:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'Acesta este un test de la Snipe-IT Asset Management System. Dacă aveți acest lucru, poșta funcționează :)',
     'the_following_item' => 'Următorul articol a fost verificat în:',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
-    'assets_warrantee_alert' => 'There is :count asset with a warrantee expiring in the next :threshold days.|There are :count assets with warrantees expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'to_reset' => 'Pentru a vă reseta parola web, completați acest formular:',
     'type' => 'Tip',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'Reminder: :name checkin deadline approaching',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'View Your Assets'
-);
+    'your_assets' => 'View Your Assets',
+];

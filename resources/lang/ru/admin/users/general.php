@@ -1,7 +1,6 @@
 <?php
 
-
-return array(
+return [
     'activated_help_text' => 'Этот пользователь может войти в систему',
     'activated_disabled_help_text' => 'Вы не можете редактировать статус активации своей учетной записи.',
     'assets_user'       => 'Актив привязан к :name',
@@ -13,7 +12,7 @@ return array(
     'edit'              => 'Редактировать пользователя',
     'filetype_info'     => 'Разрешенные типы файлов: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, и rar.',
     'history_user'      => 'История для :name',
-	'info'				=> 'Информация',
+    'info'				=> 'Информация',
     'restore_user'		=> 'Нажмите здесь, чтобы восстановить их.',
     'last_login'        => 'Последний вход',
     'ldap_config_text'  => 'Параметры конфигурации LDAP можно найти Администратор > Параметры. Выбранное местоположение будет установлено для всех импортируемых пользователей. (Необязательно).',
@@ -25,4 +24,14 @@ return array(
     'two_factor_admin_optin_help' => 'Ваши текущие параметры администрирования разрешают избирательное применение двухфакторной аутентификации.  ',
     'two_factor_enrolled' => 'Устройства для 2-ух факторной аутентификации настроены ',
     'two_factor_active'   => 'Устройства для 2-ух факторной аутентификации активны ',
-    );
+    'user_deactivated'  => 'User is de-activated',
+    'activation_status_warning' => 'Do not change activation status',
+    'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Un utilisateur a annulé une commande d’article sur le site Web',
     'a_user_requested' => 'Un utilisateur a commandé un article sur le site Web',
     'accessory_name' => 'Nom de l’accessoire :',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'Il s\'agit d\'un test du système de gestion d\'actifs Snipe-IT. Si vous avez obtenu cela, le courrier fonctionne :)',
     'the_following_item' => 'L\'élément suivant a été enregistré : ',
     'low_inventory_alert' => 'Il y a :count item qui est en dessous du minimum d\'inventaire ou qui sera bas sous peu.|Il y a :count articles qui sont en dessous du minimum d\'inventaire ou qui seront bas sous peu.',
-    'assets_warrantee_alert' => 'Il y a :count actifs avec une garantie expirant dans les prochains :threshold jours.|Il y a :count actifs avec des garanties expirant dans les prochains :threshold jours.',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'Il y a :count licence expirant dans les prochains :threshold jours.|Il y a :count licences expirant dans les prochains :threshold jours.',
     'to_reset' => 'Pour réinitialiser votre mot de passe :web, complétez ce formulaire:',
     'type' => 'Type ',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Rapport de vérification de matériel attendu',
     'Expected_Checkin_Notification' => 'Rappel : la date limite de vérification de :name approche',
     'Expected_Checkin_Date' => 'Un matériel que vous avez emprunté doit être vérifié à nouveau le :date',
-    'your_assets' => 'Voir vos matériels'
-);
+    'your_assets' => 'Voir vos matériels',
+];

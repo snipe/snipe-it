@@ -1,12 +1,12 @@
 <?php
 
-return array(
-	'bulk_delete'		=> 'Dearbhaigh Bulk Sócmhainní a Scriosadh',
+return [
+    'bulk_delete'		=> 'Dearbhaigh Bulk Sócmhainní a Scriosadh',
   'bulk_delete_help'	=> 'Athbhreithniú a dhéanamh ar na sócmhainní le haghaidh scriosadh mórchóir thíos. Nuair a bheidh sé scriosta, is féidir na sócmhainní seo a chur ar ais, ach ní bheidh baint acu le haon úsáideoirí a bhfuil siad á sannadh faoi láthair.',
   'bulk_delete_warn'	=> 'Tá tú ar tí a scriosadh: sócmhainní asset_count.',
-	'bulk_update'		=> 'Sócmhainní Nuashonraithe Bulc',
-	'bulk_update_help'	=> 'Ceadaíonn an fhoirm seo duit il-sócmhainní a thabhairt cothrom le dáta ag an am céanna. Líon isteach na réimsí is gá duit a athrú ach amháin. Ní dhéanfar aon réimsí fágtha gan athrú.',
-	'bulk_update_warn'	=> 'Tá tú ar tí na hairíonna a bhaineann le: sócmhainní asset_count a chur in eagar.',
+    'bulk_update'		=> 'Sócmhainní Nuashonraithe Bulc',
+    'bulk_update_help'	=> 'Ceadaíonn an fhoirm seo duit il-sócmhainní a thabhairt cothrom le dáta ag an am céanna. Líon isteach na réimsí is gá duit a athrú ach amháin. Ní dhéanfar aon réimsí fágtha gan athrú.',
+    'bulk_update_warn'	=> 'Tá tú ar tí na hairíonna a bhaineann le: sócmhainní asset_count a chur in eagar.',
     'checkedout_to'		=> 'Seiceáil Amach Chun',
     'checkout_date'		=> 'Dáta Seiceáil',
     'checkin_date'		=> 'Dáta Checkin',
@@ -38,7 +38,12 @@ return array(
     'tag'				=> 'Clib Sócmhainní',
     'update'			=> 'Nuashonrú Sócmhainní',
     'warranty'			=> 'Bharántas',
-		'warranty_expires'		=> 'Warranty Expires',
+        'warranty_expires'		=> 'Warranty Expires',
     'years'				=> 'blianta',
-)
-;
+    'asset_location' => 'Update Asset Location',
+    'asset_location_update_default_current' => 'Update default location AND actual location',
+    'asset_location_update_default' => 'Update only default location',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
+];

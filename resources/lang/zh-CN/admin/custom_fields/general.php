@@ -1,11 +1,12 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => '自定义字段',
+    'manage'                    => '管理',
     'field'		                => '字段',
     'about_fieldsets_title'		=> '关于字段集',
-    'about_fieldsets_text'		=> '字段集允许你为常用的资产模型定义一组可重用的字段。',
-    'custom_format'             => '自定义格式',
+    'about_fieldsets_text'		=> '字段集允许您创建经常重复用于特定资产模型类型的自定义字段组。',
+    'custom_format'             => '自定义正则表达式格式...',
     'encrypt_field'      	        => '在数据库中加密此字段',
     'encrypt_field_help'      => '警告︰ 对字段的加密将导致该字段无法用于搜索',
     'encrypted'      	        => '已加密',
@@ -26,7 +27,19 @@ return array(
     'used_by_models'   		    => '引用模板',
     'order'   		            => '排序',
     'create_fieldset'         => '新增字段集',
+    'create_fieldset_title' => '创建一个新的字段集',
     'create_field'            => '新增字段',
+    'create_field_title' => '创建一个新自定义字段',
     'value_encrypted'      	        => '此字段的值已被加密。只有管理员用户能够查看已解密的值',
     'show_in_email'     => '是否在发送给用户的Email中包含此字段的值？邮件中不能包含加密的值。',
-);
+    'help_text' => '帮助文本',
+    'help_text_description' => '这是可选文本，在编辑一个资产以提供字段上下文时将显示在表单元素下方。',
+    'about_custom_fields_title' => '关于自定义字段',
+    'about_custom_fields_text' => '自定义字段允许您向资产添加任意属性。',
+    'add_field_to_fieldset' => '添加字段到字段集',
+    'make_optional' => '必填 - 点击转为可选项',
+    'make_required' => '可选 - 点击转为必填项',
+    'reorder' => '重新排序',
+    'db_field' => '数据库字段',
+    'db_convert_warning' => '警告。该字段在自定义字段表中为 <code> :db_column </code> 但应该是 :expected </code>'
+];

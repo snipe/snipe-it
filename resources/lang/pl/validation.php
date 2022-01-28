@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -64,6 +64,7 @@ return array(
         'string'  => ':attribute musi być posiadać minimum :min znaki.',
         'array'   => 'Atrybut: musi zawierać co najmniej: min.',
     ],
+    'starts_with'          => 'The :attribute must start with one of the following: :values.',
     'not_in'               => 'Wybrany :attribute jest nieprawidłowy.',
     'numeric'              => ':attribute musi być liczbą.',
     'present'              => ':attribute nie może być puste.',
@@ -88,8 +89,8 @@ return array(
     'unique'               => ':attribute został już wzięty.',
     'uploaded'             => 'Nie udało się przesłać atrybutu:.',
     'url'                  => 'Format pola :attribute jest niewłaściwy.',
-    "unique_undeleted"     => "Wartość :attribute musi być unikalna.",
-    "non_circular"         => ":attribute nie może tworzyć odwołań cyklicznych.",
+    'unique_undeleted'     => 'Wartość :attribute musi być unikalna.',
+    'non_circular'         => ':attribute nie może tworzyć odwołań cyklicznych.',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +102,6 @@ return array(
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +115,11 @@ return array(
     */
 
     'custom' => [
-        'alpha_space' => "Pole: attribute zawiera znak, który nie jest dozwolony.",
-        "email_array"      => "Jeden lub więcej adresów e-mail jest nieprawidłowy.",
-        "hashed_pass"      => "Twoje bieżące hasło jest niepoprawne",
+        'alpha_space' => 'Pole: attribute zawiera znak, który nie jest dozwolony.',
+        'email_array'      => 'Jeden lub więcej adresów e-mail jest nieprawidłowy.',
+        'hashed_pass'      => 'Twoje bieżące hasło jest niepoprawne',
         'dumbpwd'          => 'To hasło jest zbyt powszechne.',
-        "statuslabel_type" => "Musisz wybrać odpowiedni typ etykiety statusu",
+        'statuslabel_type' => 'Musisz wybrać odpowiedni typ etykiety statusu',
     ],
 
     /*
@@ -135,4 +135,4 @@ return array(
 
     'attributes' => [],
 
-);
+];
