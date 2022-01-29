@@ -77,7 +77,7 @@ COPY . /var/www/html
 
 RUN a2enmod rewrite
 
-COPY docker/.my.cnf /root/.my.cnf
+COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
 
 ############ INITIAL APPLICATION SETUP #####################
 

@@ -32,7 +32,7 @@ RUN  apk add --no-cache \
         mysql-client \
         tini
 
-COPY docker/.my.cnf /root/.my.cnf
+COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
 
 # Where apache's PID lives
 RUN mkdir -p /run/apache2 && chown apache:apache /run/apache2
