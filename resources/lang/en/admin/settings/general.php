@@ -139,6 +139,8 @@ return [
     'msteams_integration_help'    => 'Microsoft Teams integration is optional, however the webhook is required if you wish to use it. To configure MS Teams integration, you must first <a href=":msteams_link" target="_new" rel="noopener">create a connector</a> in your Teams channel. Click on the <strong>Test MS Teams Integration</strong> button to confirm your settings are correct before saving. ',
     'msteams_integration_help_button'    => 'Once you have saved your Microsoft Teams information, a test button will appear.',
     'msteams_test_help'           => 'Test whether your MS Teams integration is configured correctly. YOU MUST SAVE YOUR UPDATED MS TEAMS SETTINGS FIRST.',
+    'msteams'                             =>  'Microsoft Teams',
+    'msteams_help'                             =>  'Microsoft Teams settings',
     'full_multiple_companies_support_help_text' => 'Restricting users (including admins) assigned to companies to their company\'s assets.',
     'full_multiple_companies_support_text' => 'Full Multiple Companies Support',
     'show_in_model_list'   => 'Show in Model Dropdowns',

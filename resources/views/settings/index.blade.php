@@ -289,12 +289,12 @@
             <div class="box-body text-center">
               <h5>
                 <a href="{{ route('settings.msteams.index') }}">
-                  <i class="fa fa-windows fa-4x" aria-hidden="true"></i>
+                  <i class="fab fa-windows fa-4x" aria-hidden="true"></i>
                   <br><br>
-                  <span class="name">Microsoft Teams</span>
+                  <span class="name">{{ trans('admin/settings/general.msteams') }}</span>
                 </a>
               </h5>
-              <p class="help-block">Microsoft Teams settings</p>
+              <p class="help-block">{{ trans('admin/settings/general.msteams_help') }}</p>
             </div>
           </div>
         </div>
