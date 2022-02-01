@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Assets;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -120,6 +121,24 @@ class BulkAssetsController extends Controller
                         $this->update_array['location_id'] = $request->input('rtd_location_id');
                     }
                 }
+
+                $changed = [];
+                $asset = Asset::where('id' ,$assetId)->get();
+
+                foreach ($this->update_array as $key => $value) {
+                    if ($this->update_array[$key] != $asset->toArray()[0][$key]) {
+                        $changed[$key]['old'] = $asset->toArray()[0][$key];
+                        $changed[$key]['new'] = $this->update_array[$key];
+                    }
+                }
+
+                $logAction = new Actionlog();
+                $logAction->item_type = Asset::class;
+                $logAction->item_id = $assetId;
+                $logAction->created_at =  date("Y-m-d H:i:s");
+                $logAction->user_id = Auth::id();
+                $logAction->log_meta = json_encode($changed);
+                $logAction->logaction('update');
 
                 DB::table('assets')
                     ->where('id', $assetId)
