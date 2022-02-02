@@ -156,6 +156,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
     Route::get('slack', [SettingsController::class, 'getSlack'])->name('settings.slack.index');
     Route::post('slack', [SettingsController::class, 'postSlack'])->name('settings.slack.save');
 
+    Route::get('outwebhooks', [SettingsController::class, 'getOutwebhooks'])->name('settings.outwebhooks.index');
+    Route::post('outwebhooks', [SettingsController::class, 'postOutwebhooks'])->name('settings.outwebhooks.save');
+
+
     Route::get('msteams', [SettingsController::class, 'getMSTeams'])->name('settings.msteams.index');
     Route::post('msteams', [SettingsController::class, 'postMSTeams'])->name('settings.msteams.save');
 

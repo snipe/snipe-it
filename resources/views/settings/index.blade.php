@@ -151,13 +151,13 @@
           <div class="box box-default">
             <div class="box-body text-center">
               <h5>
-                <a href="{{ route('settings.slack.index') }}">
-                  <i class="fab fa-slack fa-4x" aria-hidden="true"></i>
+                <a href="{{ route('settings.outwebhooks.index') }}">
+                  <i class="fas fa-link fa-4x" aria-hidden="true"></i>
                   <br><br>
-                  <span class="name">{{ trans('admin/settings/general.slack') }}</span>
+                  <span class="name">{{ trans('admin/settings/general.outwebhooks') }}</span>
                 </a>
               </h5>
-              <p class="help-block">{{ trans('admin/settings/general.slack_help') }}</p>
+              <p class="help-block">{{ trans('admin/settings/general.outwebhooks_help') }}</p>
             </div>
           </div>
         </div>
@@ -283,22 +283,6 @@
             </div>
           </div>
         </div>
-
-        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="box box-default">
-            <div class="box-body text-center">
-              <h5>
-                <a href="{{ route('settings.msteams.index') }}">
-                  <i class="fab fa-windows fa-4x" aria-hidden="true"></i>
-                  <br><br>
-                  <span class="name">{{ trans('admin/settings/general.msteams') }}</span>
-                </a>
-              </h5>
-              <p class="help-block">{{ trans('admin/settings/general.msteams_help') }}</p>
-            </div>
-          </div>
-        </div>
-
 
         @if (config('app.debug')=== true)
           <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">

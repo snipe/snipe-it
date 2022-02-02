@@ -640,21 +640,21 @@ class SettingsController extends Controller
     /**
      * Return a form to allow a super admin to update settings.
      *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @author [A.Roth] [<aroth21@mac.com>]
      *
-     * @since [v1.0]
+     * @since [v6.0]
      *
      * @return View
      */
-    public function getSlack()
+    public function getOutwebhooks()
     {
         $setting = Setting::getSettings();
 
-        return view('settings.slack', compact('setting'));
+        return view('settings.outwebhooks', compact('setting'));
     }
 
     /**
-     * Return a form to allow a super admin to update settings.
+     * saves integration settings.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
@@ -662,59 +662,19 @@ class SettingsController extends Controller
      *
      * @return View
      */
-    public function getMSTeams()
-    {
-        $setting = Setting::getSettings();
-
-        return view('settings.msteams', compact('setting'));
-    }
-
-    /**
-     * Return a form to allow a super admin to update settings.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @since [v1.0]
-     *
-     * @return View
-     */
-    public function postSlack(Request $request)
+    public function postOutwebhooks(Request $request)
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
-
+        //TO DO: add toggle for each integration
         $setting->slack_endpoint = $request->input('slack_endpoint');
         $setting->slack_channel = $request->input('slack_channel');
         $setting->slack_botname = $request->input('slack_botname');
 
-        if ($setting->save()) {
-            return redirect()->route('settings.index')
-                ->with('success', trans('admin/settings/message.update.success'));
-        }
-
-        return redirect()->back()->withInput()->withErrors($setting->getErrors());
-    }
-
-    /**
-     * Return a form to allow a super admin to update settings.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @since [v1.0]
-     *
-     * @return View
-     */
-    public function postMSTeams(Request $request)
-    {
-        if (is_null($setting = Setting::getSettings())) {
-            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
-        }
-
         $validatedData = $request->validate([
             'msteams_endpoint'   => 'url|nullable',
         ]);
-
 
         if ($validatedData) {
 
@@ -724,12 +684,11 @@ class SettingsController extends Controller
 
         if ($setting->save()) {
             return redirect()->route('settings.index')
-            ->with('success', trans('admin/settings/message.update.success'));
+                ->with('success', trans('admin/settings/message.update.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($setting->getErrors());
     }
-
 
     /**
      * Return a form to allow a super admin to update settings.
