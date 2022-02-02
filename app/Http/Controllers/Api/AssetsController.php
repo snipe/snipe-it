@@ -52,7 +52,6 @@ class AssetsController extends Controller
      */
     public function index(Request $request, $audit = null) 
     {
-
         \Log::debug(Route::currentRouteName());
         $filter_non_deprecable_assets = false;
 
@@ -345,8 +344,6 @@ class AssetsController extends Controller
             }]);
         }
 
-        
-
 
         /**
          * Here we're just determining which Transformer (via $transformer) to use based on the 
@@ -371,9 +368,8 @@ class AssetsController extends Controller
 
             return (new AssetsTransformer)->transformAsset($asset, $request);
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, 'Asset not found'), 200);
-
-
     }
 
     /**
@@ -734,7 +730,6 @@ class AssetsController extends Controller
             $logaction->logaction('restored');
 
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.restore.success')));
-        
 
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
@@ -838,8 +833,8 @@ class AssetsController extends Controller
         $this->authorize('checkin', $asset);
 
 
-        $user = $asset->assignedUser;
-        if (is_null($target = $asset->assignedTo)) {
+        $target = $asset->assignedTo;
+        if (is_null($target)) {
             return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.already_checked_in')));
         }
 
@@ -852,7 +847,7 @@ class AssetsController extends Controller
         if ($request->filled('name')) {
             $asset->name = $request->input('name');
         }
-        
+
         $asset->location_id = $asset->rtd_location_id;
 
         if ($request->filled('location_id')) {
@@ -869,7 +864,28 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.error')));
+        return response()->json(Helper::formatStandardApiResponse('error', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.error')));
+    }
+
+    /**
+     * Checkin an asset by asset tag
+     *
+     * @author [A. Janes] [<ajanes@adagiohealth.org>]
+     * @since [v6.0]
+     * @return JsonResponse
+     */
+    public function checkinByTag(Request $request)
+    {
+        $this->authorize('checkin', Asset::class);
+        $asset = Asset::where('asset_tag', $request->input('asset_tag'))->first();
+
+        if($asset) {
+            return $this->checkin($request, $asset->id);
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('error', [
+            'asset'=> e($request->input('asset_tag'))
+        ], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
     }
 
 
@@ -883,8 +899,6 @@ class AssetsController extends Controller
      */
     public function audit(Request $request)
     {
-
-
         $this->authorize('audit', Asset::class);
         $rules = [
             'asset_tag' => 'required',
@@ -932,11 +946,6 @@ class AssetsController extends Controller
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', ['asset_tag'=> e($request->input('asset_tag'))], 'Asset with tag '.e($request->input('asset_tag')).' not found'));
-
-
-
-
-
     }
 
 

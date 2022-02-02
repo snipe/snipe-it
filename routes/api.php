@@ -467,6 +467,13 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         ]
         )->name('api.asset.checkin');
 
+        Route::post('checkinbytag',
+            [
+                Api\AssetsController::class,
+                'checkinbytag'
+            ]
+        )->name('api.asset.checkinbytag');
+
         Route::post('checkout',
         [
             Api\AssetsController::class, 

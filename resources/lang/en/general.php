@@ -192,6 +192,8 @@
     'qty'		            => 'QTY',
     'quantity'		        => 'Quantity',
     'quantity_minimum'      => 'You have :count items below or almost below minimum quantity levels',
+    'quickscan_checkin'  	=> 'Quick Scan Checkin',
+    'quickscan_checkin_status'  	=> 'Checkin Status',
     'ready_to_deploy'		=> 'Ready to Deploy',
     'recent_activity'		=> 'Recent Activity',
     'remaining'             => 'Remaining',
