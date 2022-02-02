@@ -4,7 +4,7 @@
 
 @component('mail::table')
 | |{{ trans('mail.name') }}|{{ trans('general.last_audit') }}|{{ trans('general.next_audit_date') }}|{{ trans('mail.Days') }}|{{ trans('mail.supplier') }} | {{ trans('mail.assigned_to') }}
-| |:------------- |:-------------|:---------|:---------|:---------|:---------|
+|-|:------------- |:-------------|:---------|:---------|:---------|:---------|
 @foreach ($assets as $asset)
 @php
 $next_audit_date = \App\Helpers\Helper::getFormattedDateObject($asset->next_audit_date, 'date', false);
