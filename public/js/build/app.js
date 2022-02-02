@@ -327,6 +327,12 @@ __webpack_require__.r(__webpack_exports__);
         }, {
           id: 'warranty_months',
           text: 'Warranty Months'
+        }, {
+          id: 'last_audit_date',
+          text: 'Last Audit Date'
+        }, {
+          id: 'next_audit_date',
+          text: 'Audit Date'
         }],
         consumables: [{
           id: 'item_no',
@@ -397,8 +403,14 @@ __webpack_require__.r(__webpack_exports__);
           id: 'state',
           text: 'State'
         }, {
+          id: 'zip',
+          text: 'ZIP'
+        }, {
           id: 'country',
           text: 'Country'
+        }, {
+          id: 'zip',
+          text: 'ZIP'
         }],
         customFields: this.customFields
       },
