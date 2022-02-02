@@ -751,6 +751,13 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
             ]
             )->name('api.settings.msteamstest');
 
+            Route::post('discordtest',
+            [
+                Api\SettingsController::class, 
+                'discordtest'
+            ]
+            )->name('api.settings.discordtest');
+
             Route::post('mailtest',
             [
                 Api\SettingsController::class, 

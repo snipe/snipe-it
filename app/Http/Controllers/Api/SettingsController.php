@@ -207,6 +207,31 @@ class SettingsController extends Controller
         return response()->json(['message' => 'Something went wrong :( '], 400);
     }
 
+    
+    public function discordtest(Request $request)
+    {
+
+        $discord = new Client([
+                'headers' => ['Content-Type' => 'application/json'],
+                
+        ]);
+
+        $payload = json_encode(
+            [
+                'content'      => trans('general.msteams_test_msg')
+            ]
+        );
+
+        try {
+            $discord->post('https://discord.com/api/webhooks/938487194002260029/5u51Xd0R9gSLLmS6qemqnwGUYQgJnvBbLFW4_MnuZjhYg6ZSyjU3i72hi9mXPikA83TY', ['body' => $payload]);
+            return response()->json(['message' => 'Success'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Oops! Please check the channel name and webhook endpoint URL. Discord responded with: ' . $e->getMessage()], 400);
+        }
+
+        return response()->json(['message' => 'Something went wrong :( '], 400);
+    }
+
     /**
      * Test the email configuration
      *

@@ -271,6 +271,18 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->endpoint;
     }
 
+       /**
+     * The url for Discord notifications.
+     * Used by Notifiable trait.
+     * @return mixed
+     */
+    public function routeNotificationForDiscord()
+    {
+        // At this point the endpoint is the same for everything.
+        //  In the future this may want to be adapted for individual notifications.
+        $this->endpoint = \App\Models\Setting::getSettings()->discord_endpoint;
+        return $this->endpoint;
+    }
 
     /**
      * Establishes the user -> assets relationship

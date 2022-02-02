@@ -681,6 +681,18 @@ class SettingsController extends Controller
             $setting->msteams_endpoint = $request->input('msteams_endpoint');
 
         }
+/*
+        $validatedDataDiscord = $request->validate([
+            'discord_endpoint'   => 'url|nullable',
+        ]);
+
+        if ($validatedDataDiscord) {
+
+            $setting->discord_endpoint = $request->input('discord_endpoint');
+
+        }
+        */
+        $setting->discord_endpoint = $request->input('discord_endpoint');
 
         if ($setting->save()) {
             return redirect()->route('settings.index')

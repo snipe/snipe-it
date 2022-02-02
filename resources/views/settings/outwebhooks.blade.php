@@ -26,6 +26,7 @@
     {{csrf_field()}}
 
     <!-- Slack -->
+
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
 
@@ -222,10 +223,10 @@
 
 
                     <p style="padding: 20px;">
-                        {!! trans('admin/settings/general.msteams_integration_help',array('msteams_link' => 'https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#create-incoming-webhook-1')) !!}
+                        {!! trans('admin/settings/general.discord_integration_help',array('discord_link' => 'https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks')) !!}
 
-                    @if ($setting->msteams_endpoint=='')
-                           {{ trans('admin/settings/general.msteams_integration_help_button') }}
+                    @if ($setting->discord_endpoint=='')
+                           {{ trans('admin/settings/general.discord_integration_help_button') }}
                     @endif
                     </p>
 
@@ -233,36 +234,36 @@
                     <div class="col-md-12" style="border-top: 0px;">
 
 
-                        <!-- MS Teams endpoint -->
-                        <div class="form-group required {{ $errors->has('msteams_endpoint') ? 'error' : '' }}">
+                        <!-- Discord endpoint -->
+                        <div class="form-group required {{ $errors->has('discord_endpoint') ? 'error' : '' }}">
                             <div class="col-md-2">
-                                {{ Form::label('msteams_endpoint', trans('admin/settings/general.msteams_endpoint')) }}
+                                {{ Form::label('discord_endpoint', trans('admin/settings/general.discord_endpoint')) }}
                             </div>
                             <div class="col-md-10">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::text('msteams_endpoint', old('msteams_endpoint', $setting->msteams_endpoint), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'https://organization.webhook.office.com/webhookXX/XXXXXXXXXXXXXXX', 'id' => 'msteams_endpoint')) }}
+                                    {{ Form::text('discord_endpoint', old('discord_endpoint', $setting->discord_endpoint), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'https://discord.com/api/webhooks/XXXXXXXXXXX/XXXXXXXXXXXXXXXXXX', 'id' => 'discord_endpoint')) }}
                                     <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
 
                                 @else
-                                    {{ Form::text('msteams_endpoint', old('msteams_endpoint', $setting->msteams_endpoint), array('class' => 'form-control','placeholder' => 'https://organization.webhook.office.com/webhookXX/XXXXXXXXXXXXXXX', 'id' => 'msteams_endpoint')) }}
+                                    {{ Form::text('discord_endpoint', old('discord_endpoint', $setting->discord_endpoint), array('class' => 'form-control','placeholder' => 'https://discord.com/api/webhooks/XXXXXXXXXXX/XXXXXXXXXXXXXXXXXX', 'id' => 'discord_endpoint')) }}
                                 @endif
-                                {!! $errors->first('msteams_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                {!! $errors->first('discord_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
 
-                       <div class="form-group" id="msteamstestcontainer" style="display: none">
+                       <div class="form-group" id="discordtestcontainer" style="display: none">
                            
                             <div class="col-md-2">
-                                {{ Form::label('test_msteams', 'Test Microsoft Teams') }}
+                                {{ Form::label('test_discord', 'Test Discord') }}
                             </div>
-                            <div class="col-md-10" id="msteamstestrow">
-                                <a class="btn btn-default btn-sm pull-left" id="msteamstest" style="margin-right: 10px;">Test <i class="fab fa-windows"></i> Integration</a>
+                            <div class="col-md-10" id="discordtestrow">
+                                <a class="btn btn-default btn-sm pull-left" id="discordtest" style="margin-right: 10px;">Test <i class="fab fa-discord"></i> Integration</a>
                             </div>
                             <div class="col-md-10 col-md-offset-2">
-                                <span id="msteamstesticon"></span>
-                                <span id="msteamstestresult"></span>
-                                <span id="msteamsteststatus"></span>
+                                <span id="discordtesticon"></span>
+                                <span id="discordtestresult"></span>
+                                <span id="discordteststatus"></span>
                             </div>
 
 
@@ -274,7 +275,7 @@
                         <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                     </div>
                     <div class="text-right col-md-6">
-                        <button type="submit" id="save_msteams" class="btn btn-primary" disabled><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                        <button type="submit" id="save_discord" class="btn btn-primary" disabled><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
                     </div>
 
                 </div>
@@ -306,6 +307,16 @@
                 $('#msteamstestcontainer').fadeOut(500);
             }
 
+            
+            //discord field check
+            if($('#discord_endpoint').val() != "") {
+                //enable test button *only* if field is filled in
+                $('#discordtestcontainer').fadeIn(500);
+            } else {
+                //otherwise it's hidden
+                $('#discordtestcontainer').fadeOut(500);
+            }
+
             if(event) { //on 'initial load' we don't *have* an 'event', but in the regular keyup callback, we *do*. So this only fires on 'real' callback events, not on first load
                 
                 //initial load enable/disable Slack
@@ -318,6 +329,12 @@
                     // if field is blank, the user may want to disable MS Teams integration; enable the Save button
                     $('#save_msteams').removeAttr('disabled');
                 }
+
+                 //initial load enable/disable Discord
+                 if($('#discord_endpoint').val() == "") {
+                    // if field is blank, the user may want to disable MS Teams integration; enable the Save button
+                    $('#save_discord').removeAttr('disabled');
+                }
             }
             
         };
@@ -327,104 +344,105 @@
         $('input:text').keyup(fieldcheck); // if *any* text field changes, we recalculate button states
         $("#slacktest").click(function() {
 
-$("#slacktestrow").removeClass('text-success');
-$("#slacktestrow").removeClass('text-danger');
-$("#slackteststatus").removeClass('text-danger');
-$("#slackteststatus").html('');
-$("#slacktesticon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.slack.sending') }}');
-$.ajax({
-    
-    // If I comment this back in, I always get a success (200) message
-    // Without it, I get 
-        //  beforeSend: function (xhr) { 
-        //  xhr.setRequestHeader("Content-Type","application/json");
-        // xhr.setRequestHeader("Accept","text/json");
-        // },
+            $("#slacktestrow").removeClass('text-success');
+            $("#slacktestrow").removeClass('text-danger');
+            $("#slackteststatus").removeClass('text-danger');
+            $("#slackteststatus").html('');
+            $("#slacktesticon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.slack.sending') }}');
+            $.ajax({
+                
+                // If I comment this back in, I always get a success (200) message
+                // Without it, I get 
+                    //  beforeSend: function (xhr) { 
+                    //  xhr.setRequestHeader("Content-Type","application/json");
+                    // xhr.setRequestHeader("Accept","text/json");
+                    // },
 
-    
-    url: '{{ route('api.settings.slacktest') }}',
-    type: 'POST',
-    headers: {
-        "X-Requested-With": 'XMLHttpRequest',
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
-    //    'Accept': 'application/json',
-    //    'Content-Type': 'application/json',
-    },
-    data: {
-        'slack_endpoint': $('#slack_endpoint').val(),
-        'slack_channel': $('#slack_channel').val(),
-        'slack_botname': $('#slack_botname').val(),
+                
+                url: '{{ route('api.settings.slacktest') }}',
+                type: 'POST',
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
+                //    'Accept': 'application/json',
+                //    'Content-Type': 'application/json',
+                },
+                data: {
+                    'slack_endpoint': $('#slack_endpoint').val(),
+                    'slack_channel': $('#slack_channel').val(),
+                    'slack_botname': $('#slack_botname').val(),
 
-    },
+                },
 
-    dataType: 'json',
+                dataType: 'json',
 
-    accepts: {
-        text: "application/json"
-    },
+                accepts: {
+                    text: "application/json"
+                },
 
-    success: function (data) {
-        $('#save_slack').removeAttr('disabled');
-        $("#slacktesticon").html('');
-        $("#slacktestrow").addClass('text-success');
-        $("#slackteststatus").addClass('text-success');
-        //TODO: This is a bit hacky...Might need some cleanup
-        $("#slackteststatus").html('<i class="fas fa-check text-success"></i> {{ trans('admin/settings/message.slack.success_pt1') }} ' + $('#slack_channel').val() + '{{ trans('admin/settings/message.slack.success_pt2') }}');
-    },
+                success: function (data) {
+                    $('#save_slack').removeAttr('disabled');
+                    $("#slacktesticon").html('');
+                    $("#slacktestrow").addClass('text-success');
+                    $("#slackteststatus").addClass('text-success');
+                    //TODO: This is a bit hacky...Might need some cleanup
+                    $("#slackteststatus").html('<i class="fas fa-check text-success"></i> {{ trans('admin/settings/message.slack.success_pt1') }} ' + $('#slack_channel').val() + '{{ trans('admin/settings/message.slack.success_pt2') }}');
+                },
 
-    error: function (data) {
+                error: function (data) {
 
 
-        if (data.responseJSON) {
-            var errors = data.responseJSON.errors;
-            var error_msg = data.responseJSON.message;
-        } else {
-            var errors;
-            var error_msg = trans('admin/settings/message.slack.error');
-        }
-
-        var error_text = '';
-
-        $('#save_slack').attr("disabled", true);
-        $("#slacktesticon").html('');
-        $("#slackteststatus").addClass('text-danger');
-        $("#slacktesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i><span class="text-danger">' + error_msg+ '</span>');
-
-        
-        if (data.status == 500) {
-            $('#slackteststatus').html('{{  trans('admin/settings/message.slack.500') }}');
-        } else if ((data.status == 400) || (data.status == 422)) {
-            console.log('Type of errors is '+ typeof errors);
-            console.log('Data status was 400 or 422');
-
-            if (typeof errors != 'string') {
-            
-                console.log(errors.length);
-
-                for (i in errors) {
-                    if (errors[i]) {
-                        error_text += '<li>Error: ' + errors[i];
+                    if (data.responseJSON) {
+                        var errors = data.responseJSON.errors;
+                        var error_msg = data.responseJSON.message;
+                    } else {
+                        var errors;
+                        var error_msg = trans('admin/settings/message.slack.error');
                     }
 
+                    var error_text = '';
+
+                    $('#save_slack').attr("disabled", true);
+                    $("#slacktesticon").html('');
+                    $("#slackteststatus").addClass('text-danger');
+                    $("#slacktesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i><span class="text-danger">' + error_msg+ '</span>');
+
+                    
+                    if (data.status == 500) {
+                        $('#slackteststatus').html('{{  trans('admin/settings/message.slack.500') }}');
+                    } else if ((data.status == 400) || (data.status == 422)) {
+                        console.log('Type of errors is '+ typeof errors);
+                        console.log('Data status was 400 or 422');
+
+                        if (typeof errors != 'string') {
+                        
+                            console.log(errors.length);
+
+                            for (i in errors) {
+                                if (errors[i]) {
+                                    error_text += '<li>Error: ' + errors[i];
+                                }
+
+                            }
+
+                        } else {
+
+                            error_text = errors;
+                        }
+
+                        $('#slackteststatus').html(error_text);
+
+                    } else {
+                        $('#slackteststatus').html(data.responseText.message);
+                    }
                 }
 
-            } else {
 
-                error_text = errors;
-            }
-
-            $('#slackteststatus').html(error_text);
-
-        } else {
-            $('#slackteststatus').html(data.responseText.message);
-        }
-    }
-
-
-});
-return false;
+            });
+            return false;
 });
 
+    //ms teams
          $("#msteamstest").click(function() {
 
             $("#msteamstestrow").removeClass('text-success');
@@ -498,6 +516,106 @@ return false;
             });
             return false;
         });
+
+    //discord
+        $("#discordtest").click(function() {
+
+            $("#discordtestrow").removeClass('text-success');
+            $("#discordtestrow").removeClass('text-danger');
+            $("#discordteststatus").removeClass('text-danger');
+            $("#discordteststatus").html('');
+            $("#discordtesticon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.discord.sending') }}');
+            $.ajax({
+                
+                // If I comment this back in, I always get a success (200) message
+                // Without it, I get 
+                    //  beforeSend: function (xhr) { 
+                    //  xhr.setRequestHeader("Content-Type","application/json");
+                    // xhr.setRequestHeader("Accept","text/json");
+                    // },
+
+                
+                 url: '{{ route('api.settings.discordtest') }}',
+              // url: 'https://discord.com/api/webhooks/938487194002260029/5u51Xd0R9gSLLmS6qemqnwGUYQgJnvBbLFW4_MnuZjhYg6ZSyjU3i72hi9mXPikA83TY/slack',
+                type: 'POST',
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
+                //    'Accept': 'application/json',
+                   'Content-Type': 'application/json',
+                },
+                data: {
+                    'discord_endpoint': $('#discord_endpoint').val(),
+
+                },
+
+                dataType: 'json',
+
+                accepts: {
+                    text: "application/json"
+                },
+
+                success: function (data) {
+                    $('#save_discord').removeAttr('disabled');
+                    $("#discordtesticon").html('');
+                    $("#discordtestrow").addClass('text-success');
+                    $("#discordteststatus").addClass('text-success');
+                    //TODO: This is a bit hacky...Might need some cleanup
+                    $("#discordteststatus").html('<i class="fas fa-check text-success"></i> {{ trans('admin/settings/message.discord.success_pt1') }} ' + $('#discord_channel').val() + '{{ trans('admin/settings/message.discord.success_pt2') }}');
+                },
+
+                error: function (data) {
+
+
+                    if (data.responseJSON) {
+                        var errors = data.responseJSON.errors;
+                        var error_msg = data.responseJSON.message;
+                    } else {
+                        var errors;
+                        var error_msg = trans('admin/settings/message.discord.error');
+                    }
+
+                    var error_text = '';
+
+                    $('#save_discord').attr("disabled", true);
+                    $("#discordtesticon").html('');
+                    $("#discordteststatus").addClass('text-danger');
+                    $("#discordtesticon").html('<i class="fas fa-exclamation-triangle text-danger"></i><span class="text-danger">' + error_msg+ '</span>');
+
+                    
+                    if (data.status == 500) {
+                        $('#discordteststatus').html('{{  trans('admin/settings/message.discord.500') }}');
+                    } else if ((data.status == 400) || (data.status == 422)) {
+                        console.log('Type of errors is '+ typeof errors);
+                        console.log('Data status was 400 or 422');
+
+                        if (typeof errors != 'string') {
+                        
+                            console.log(errors.length);
+
+                            for (i in errors) {
+                                if (errors[i]) {
+                                    error_text += '<li>Error: ' + errors[i];
+                                }
+
+                            }
+
+                        } else {
+
+                            error_text = errors;
+                        }
+
+                        $('#discordteststatus').html(error_text);
+
+                    } else {
+                        $('#discordteststatus').html(data.responseText.message);
+                    }
+                }
+
+
+            });
+            return false;
+});
         
     </script>
 
