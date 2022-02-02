@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Tên thành phần',
     'checkin'                             => 'Hợp phần Checkin',
     'checkout'                             => 'Hợp phần thanh toán',
@@ -12,4 +12,4 @@ return [
     'remaining' 			             => 'Còn lại',
     'total' 			                 => 'Tổng số',
     'update'                            => 'Cập nhật Hợp phần',
-];
+);

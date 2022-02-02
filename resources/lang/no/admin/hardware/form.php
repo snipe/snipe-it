@@ -40,4 +40,10 @@ return [
     'warranty'			=> 'Garanti',
         'warranty_expires'		=> 'Garantien utløper',
     'years'				=> 'år',
+    'asset_location' => 'Oppdater lokasjon for eiendelen',
+    'asset_location_update_default_current' => 'Oppdater standardlokasjon OG faktisk lokasjon',
+    'asset_location_update_default' => 'Oppdater bare standardlokasjon',
+    'asset_not_deployable' => 'Den eiendelstatusen gjør at denne eiendelen ikke kan sjekkes ut.',
+    'asset_deployable' => 'Den statusen gjør det mulig å sjekke ut denne eiendelen.',
+    'processing_spinner' => 'Behandler...',
 ];

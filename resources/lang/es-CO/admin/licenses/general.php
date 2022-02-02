@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Acerca de licencias',
     'about_licenses'                  => 'Las licencias son para identificar software. Tienen un número específico de asientos que pueden ser asignados a individuos',
     'checkin'  					=> 'Quitar Instalación',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Licencias Software',
     'user'  					=> 'Usuario',
     'view'  					=> 'Ver Licencias',
-];
+);

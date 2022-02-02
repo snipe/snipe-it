@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Sobre Licenças',
     'about_licenses'                  => 'Licenças são utilizadas para controlar o uso dos softwares. Ela possuem uma quantidade específica que podem ser alocadas para os usuários',
     'checkin'  					=> 'Retorna Licença Compartilhada',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Licenças de Software',
     'user'  					=> 'Usuário',
     'view'  					=> 'Ver Licença',
-];
+);

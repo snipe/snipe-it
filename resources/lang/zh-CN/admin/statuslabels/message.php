@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => '这些资产不能分配给任何人。',
-        'deployable'   => '这些资产可以检出。一旦分配了它们，它们将承担一个元状态<i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>。',
+        'deployable'   => '这些资产可以被借出。一旦分配了它们，它们将成为状态<i class="fas fa-circle text-blue"></i> <strong>已分配</strong>。',
         'archived'   => '这些资产无法签出，只会显示在“存档”视图中。这有助于保留有关资产的预算/历史目的信息，但将其保留在日常资产清单之外。',
         'pending'   => '这些资产不能分配给任何人，经常用于修理的物品，但预计将重新流通。',
     ],

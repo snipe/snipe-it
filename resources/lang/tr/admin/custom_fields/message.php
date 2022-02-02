@@ -1,52 +1,57 @@
 <?php
 
-return [
+return array(
 
-    'field' => [
+    'field' => array(
         'invalid'   => 'Bu alan geçersiz.',
         'already_added'   => 'Alan zaten mevcut',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Alan oluşturulamadı. Lütfen tekrar deneyin.',
             'success' => 'Alan başarıyla oluşturuldu.',
-            'assoc_success' => 'Alan, alan kümesine başarıyla eklendi.',
-        ],
+            'assoc_success' => 'Alan, alan kümesine başarıyla eklendi.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Alan güncellenmedi. Lütfen tekrar deneyin',
-            'success' => 'Alan başarıyla güncellendi.',
-        ],
+            'success' => 'Alan başarıyla güncellendi.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Bu alanı silmek istediğinizden emin misiniz?',
             'error'   => 'Silme işleminde başarısız. Lütfen tekrar deneyiniz.',
             'success' => 'Alan başarıyla silindi.',
             'in_use'   => 'Alan hala kullanımda.',
-        ],
+        )
 
-    ],
+    ),
 
-    'fieldset' => [
+    'fieldset' => array(
 
         'does_not_exist' => 'Alan kümesi yok',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Alan kümesi olşturulamadı, lütfen yeniden deneyin.',
-            'success' => 'Alan kümesi başarıyla oluşturuldu.',
-        ],
+            'success' => 'Alan kümesi başarıyla oluşturuldu.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Alan güncelleştirilmedi, lütfen tekrar deneyin',
-            'success' => 'Alan başarıyla güncelleştirildi.',
-        ],
+            'success' => 'Alan başarıyla güncelleştirildi.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Bu alanı silmek istediğinizden emin misiniz?',
             'error'   => 'Alanı silinirken bir sorun oluştu. Lütfen yeniden deneyin.',
             'success' => 'Alan başarıyla silindi.',
             'in_use'   => 'Alan hala kullanılıyor.',
-        ],
+        )
 
-    ],
+    ),
 
-];
+
+
+
+
+
+);

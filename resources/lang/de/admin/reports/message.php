@@ -1,5 +1,5 @@
 <?php
 
-return [
-    'error'   => 'Sie müssen mindestens eine Option auswählen.',
-];
+return array(
+    'error'   => 'Sie müssen mindestens eine Option auswählen.'
+);

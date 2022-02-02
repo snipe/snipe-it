@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Warning: </strong> Kua tohua tenei taonga i te mea kaore i te rongonui. Mena kua hurihia tenei mana, whakahouhia te mana o te taonga.',
     'does_not_exist' 	=> 'Kaore he tahua.',
-    'does_not_exist_or_not_requestable' => 'He tamata pai. Kaore e noho ana taua taonga, kaore hoki e taea te tuku.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Kei te tirohia tenei taonga i tetahi kaiwhakamahi me te kore e taea te muku. Tirohia koa te taonga i te tuatahi, a ka ngana ki te muku ano.',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Kua pai te takiuru o te kaute.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Kāore te kōnae i mukua. Tena ngana ano.',
         'success' => 'Kua mukua te kōnae.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Kua mukua pai to kōnae',
         'file_delete_error'      => 'Kāore i taea te mukua te kōnae',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Kei te hiahia koe ki te muku i tenei taonga?',

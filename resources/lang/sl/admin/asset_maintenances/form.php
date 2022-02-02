@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Dnevi',
         'notes'                  => 'Opombe',
         'update'                 => 'Posodobi',
-        'create'                 => 'Ustvari',
+        'create'                 => 'Ustvari'
     ];

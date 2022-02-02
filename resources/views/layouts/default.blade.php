@@ -481,6 +481,11 @@
 
                   <li class="divider">&nbsp;</li>
                     @can('checkin', \App\Models\Asset::class)
+                        <li{!! (Request::is('hardware/quickscancheckin') ? ' class="active"' : '') !!}>
+                            <a href="{{ route('hardware/quickscancheckin') }}">
+                                {{ trans('general.quickscan_checkin') }}
+                            </a>
+                        </li>
                         <li{!! (Request::is('hardware/bulkcheckin') ? ' class="active"' : '') !!}>
                             <a href="{{ route('hardware/bulkcheckin') }}">
                                 {{ trans('general.bulk_checkin') }}

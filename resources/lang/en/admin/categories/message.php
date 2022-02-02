@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Category does not exist.',
     'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
@@ -22,4 +22,4 @@ return [
         'success' => 'The category was deleted successfully.',
     ],
 
-];
+);

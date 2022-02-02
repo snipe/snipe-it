@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'O proizvođačima',
     'about_manufacturers_text'  => 'Proizvođači su tvrtke koje stvaraju vašu imovinu. Ovdje možete pohraniti važne informacije o kontaktima o podršci koja će se prikazati na vašim stranicama s pojedinostima o imovini.',
     'asset_manufacturers'	=> 'Prodavači imovine',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Ažuriraj proizvođača',
     'url'   				=> 'URL',
 
-];
+);

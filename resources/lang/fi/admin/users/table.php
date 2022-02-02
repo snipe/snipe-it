@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktiivinen',
     'allow'  				=> 'Salli',
     'checkedout'  			=> 'Laitteet',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Näytä nykyiset käyttäjät',
     'show_deleted'          => 'Näytä poistetut käyttäjät',
     'title' 				=> 'Titteli',
-    'to_restore_them'		=> 'palauttaa ne.',
+	'to_restore_them'		=> 'palauttaa ne.',
     'updateuser' 			=> 'Päivitä käyttäjä',
     'username' 				=> 'Käyttäjätunnus',
-    'user_deleted_text' 	=> 'Tämä käyttäjä on merkitty poistetuksi.',
+	'user_deleted_text' 	=> 'Tämä käyttäjä on merkitty poistetuksi.',
     'username_note' 		=> '(Tätä käytetään vain Active Directory synkronointiin, ei kirjautumista varten.)',
     'cloneuser'             => 'Monista käyttäjä',
     'viewusers' 			=> 'Näytä käyttäjät',
-];
+);

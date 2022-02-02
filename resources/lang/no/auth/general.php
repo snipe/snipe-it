@@ -13,3 +13,4 @@ return [
     'username_help_top'                 => 'Skriv inn ditt <strong>brukernavn</strong> for å få tilsendt en lenke for tilbakestilling av passord.',
     'username_help_bottom'          => 'Ditt brukernavn og e-postadresse <em>kan</em> være det samme, men kan være, avhengig av din konfigurasjon. Dersom du ikke husker brukernavnet ditt, ta kontakt med systemansvarlig. <br><br><strong>Brukernavn uten en tilknyttet e-postadresse vil ikke bli sendt en lenke for tilbakestilling av passordet.</strong> ',
     ];
+

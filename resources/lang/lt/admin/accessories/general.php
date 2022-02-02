@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Įrangos kategorija',
     'accessory_name'  					=> 'Įrangos pavadinimas',
     'checkout'  							=> 'Checkout Accessory',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Naudoti  <a href="#" data-toggle="modal" data-target="#eulaModal"> pirminę EULA </a>  vietoje to.',
     'use_default_eula_disabled'			=> '<del>Naudoti pirminę numatytąją EULA.</del> Nėra nustatytos pirminės numatytosios EULA. Prašome pridėkite ją nustatymuose.',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return [
     |
     */
 
-    'password' => "Rhaid i cyfrineiriau fod yn chwe nod ac cyfateb i'r cadarnhad.",
+    "password" => "Rhaid i cyfrineiriau fod yn chwe nod ac cyfateb i'r cadarnhad.",
 
-    'user'     => 'Enw defnyddiwr neu cyfrinair yn anghywir',
+    "user"     => "Enw defnyddiwr neu cyfrinair yn anghywir",
 
-    'token'    => "Nid yw'r tocyn ail-osod cyfrinair yma yn ddilys.",
+    "token"    => "Nid yw'r tocyn ail-osod cyfrinair yma yn ddilys.",
 
-    'sent' => "Os yw'r cyfeiriad ebost yn ddilys, cewch nodyn atgoffa!",
+    "sent" => "Os yw'r cyfeiriad ebost yn ddilys, cewch nodyn atgoffa!",
 
-];
+);

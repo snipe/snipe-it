@@ -24,4 +24,14 @@ return [
     'two_factor_admin_optin_help' => 'De huidige beheer instellingen staan selectief gebruik van twee factor authenticatie toe.  ',
     'two_factor_enrolled' => 'Twee factor authenticatie apparaat ingesteld ',
     'two_factor_active'   => 'Twee factor authenticatie actief ',
-    ];
+    'user_deactivated'  => 'Gebruiker is ge-deactiveert',
+    'activation_status_warning' => 'Activatiestatus niet wijzigen',
+    'group_memberships_helpblock' => 'Alleen superadmins kunnen leden van groepen bewerken.',
+    'superadmin_permission_warning' => 'Only superadmins may grant a user superadmin access.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant a user admin access.',
+    'remove_group_memberships' => 'Remove Group Memberships',
+    'warning_deletion' => 'WARNING:',
+    'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
+    'update_user_asssets_status' => 'Update all assets for these users to this status',
+    'checkin_user_properties' => 'Check in all properties associated with these users',
+];

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'component_name'                  => 'Nome do Componente',
     'checkin'                             => 'Devolução do componente',
     'checkout'                             => 'Atribuição de componente',
@@ -12,4 +12,4 @@ return [
     'remaining' 			             => 'Restantes',
     'total' 			                 => 'Total',
     'update'                            => 'Atualizar componente',
-];
+);

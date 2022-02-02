@@ -40,4 +40,10 @@ return [
     'warranty'			=> 'Garanti',
         'warranty_expires'		=> 'Garanti Süresi Sona Erdi',
     'years'				=> 'yıl',
+    'asset_location' => 'Varlık konumunu güncelle',
+    'asset_location_update_default_current' => 'Varsayılan konumu ve gerçek konumu güncelle',
+    'asset_location_update_default' => 'Sadece varsayılan konumu güncelle',
+    'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
+    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'processing_spinner' => 'Processing...',
 ];

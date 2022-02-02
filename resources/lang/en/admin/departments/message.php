@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Department does not exist.',
     'assoc_users'	 => 'This department is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this department and try again. ',
@@ -18,4 +18,4 @@ return [
         'success' => 'The department was deleted successfully.',
     ],
 
-];
+);

@@ -40,4 +40,10 @@ return [
     'warranty'			=> 'Garantie',
         'warranty_expires'		=> 'Garanția expiră',
     'years'				=> 'Ani',
+    'asset_location' => 'Actualizați locația activului',
+    'asset_location_update_default_current' => 'Actualizați locația implicită ȘI locația curentă',
+    'asset_location_update_default' => 'Actualizați doar locația implicită',
+    'asset_not_deployable' => 'Activul este indisponibil și nu poate fi eliberat.',
+    'asset_deployable' => 'Activul e disponibil și poate fi eliberat.',
+    'processing_spinner' => 'În curs de procesare...',
 ];

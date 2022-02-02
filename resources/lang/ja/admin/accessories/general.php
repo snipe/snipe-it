@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> '付属品カテゴリー',
     'accessory_name'  					=> '付属品名',
     'checkout'  							=> '付属品の貸し出し',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> '<a href="#" data-toggle="modal" data-target="#eulaModal">初期設定EULA</a> を代わりに利用する。',
     'use_default_eula_disabled'			=> '<del>初期設定EULAを代わりに利用する。</del> 初期設定EULAが設定されていません。一つは追加してください。',
 
-];
+);

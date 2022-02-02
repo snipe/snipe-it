@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'group_exists'        => 'Group already exists!',
     'group_not_found'     => 'Group [:id] does not exist.',
@@ -19,4 +19,4 @@ return [
         'delete' => 'There was an issue deleting the group. Please try again.',
     ],
 
-];
+);

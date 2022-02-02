@@ -16,21 +16,12 @@
         {{ trans('admin/depreciations/general.number_of_months') }}
     </label>
     <div class="col-md-7 col-sm-12 {{  (Helper::checkIfRequired($item, 'months')) ? ' required' : '' }}">
-            <input class="form-control" type="text" name="months" aria-label="months" id="months" value="{{ Request::old('months', $item->months) }}" style="width: 80px;" />
-            {!! $errors->first('months', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+        <div class="col-md-7" style="padding-left:0px">
+            <input class="form-control" type="text" name="months" id="months" value="{{ Request::old('months', $item->months) }}" style="width: 80px;"{!!  (\App\Helpers\Helper::checkIfRequired($item, 'months')) ? ' data-validation="required" required' : '' !!} />
+            {!! $errors->first('months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
 </div>
 
-<!-- Depreciation Minimum -->
-<div class="form-group {{ $errors->has('depreciation_min') ? ' has-error' : '' }}">
-    <label for="depreciation_min" class="col-md-3 control-label">
-        {{ trans('admin/depreciations/general.depreciation_min') }}
-    </label>
-    <div class="col-md-2" style="padding-left:0px">
-        <input class="form-control"  name="depreciation_min" id="depreciation_min" value="{{ Request::old('depreciation_min', $item->depreciation_min) }}" style="width: 80px; margin-left:15px" />
-    </div>
-    {!! $errors->first('depreciation_min', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-</div>
 <!-- Depreciation Minimum -->
 <div class="form-group {{ $errors->has('depreciation_min') ? ' has-error' : '' }}">
     <label for="depreciation_min" class="col-md-3 control-label">

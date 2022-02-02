@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'account_already_exists' => 'Tá cuntas leis an ríomhphost seo ann cheana féin.',
     'account_not_found'      => 'Tá an t-ainm úsáideora nó an focal faire mícheart.',
@@ -9,36 +9,37 @@ return [
     'account_banned'         => 'Tá toirmeasc ar an gcuntas úsáideora seo.',
     'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
 
-    'two_factor' => [
+    'two_factor' => array(
         'already_enrolled'      => 'Your device is already enrolled.',
         'success'               => 'You have successfully logged in.',
         'code_required'         => 'Two-factor code is required.',
         'invalid_code'          => 'Two-factor code is invalid.',
-    ],
+    ),
 
-    'signin' => [
+    'signin' => array(
         'error'   => 'Bhí fadhb ann agus tú ag iarraidh logáil isteach, déan iarracht arís.',
         'success' => 'Rinne tú logáil isteach go rathúil.',
-    ],
+    ),
 
-    'logout' => [
+    'logout' => array(
         'error'   => 'There was a problem while trying to log you out, please try again.',
         'success' => 'You have successfully logged out.',
-    ],
+    ),
 
-    'signup' => [
+    'signup' => array(
         'error'   => 'Bhí fadhb ann agus tú ag iarraidh do chuntas a chruthú, déan iarracht arís.',
         'success' => 'Cruthaigh an cuntas go rathúil.',
-    ],
+    ),
 
-    'forgot-password' => [
+    'forgot-password' => array(
         'error'   => 'Bhí fadhb ann agus tú ag iarraidh cód pasfhocal a athshocrú, déan iarracht arís.',
         'success' => 'If that email address exists in our system, a password recovery email has been sent.',
-    ],
+    ),
 
-    'forgot-password-confirm' => [
+    'forgot-password-confirm' => array(
         'error'   => 'Bhí fadhb ann agus tú ag iarraidh an focal faire a athshocrú, déan iarracht arís.',
         'success' => 'D\'athshocraigh do phasfhocal go rathúil.',
-    ],
+    ),
 
-];
+
+);

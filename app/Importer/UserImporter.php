@@ -50,6 +50,7 @@ class UserImporter extends ItemImporter
         $this->item['city'] = $this->findCsvMatch($row, 'city');
         $this->item['state'] = $this->findCsvMatch($row, 'state');
         $this->item['country'] = $this->findCsvMatch($row, 'country');
+        $this->item['zip'] = $this->findCsvMatch($row, 'zip');
         $this->item['activated'] = ($this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')) == 1) ? '1' : 0;
         $this->item['employee_num'] = $this->findCsvMatch($row, 'employee_num');
         $this->item['department_id'] = $this->createOrFetchDepartment($this->findCsvMatch($row, 'department'));
@@ -73,6 +74,7 @@ class UserImporter extends ItemImporter
             // \Log::debug('UserImporter.php Updated User ' . print_r($user, true));
             return;
         }
+
 
 
         // This needs to be applied after the update logic, otherwise we'll overwrite user passwords
@@ -144,7 +146,6 @@ class UserImporter extends ItemImporter
         return null;
     }
     
-
     public function sendWelcome($send = true)
     {
         $this->send_welcome = $send;

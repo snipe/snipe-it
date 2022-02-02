@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>警告: </strong>此資產目前已標記為不可佈署，如果資產狀態已改變，請更新狀態。',
     'does_not_exist' 	=> '資產不存在',
-    'does_not_exist_or_not_requestable' => '已重試。該資產不存在或不可申領。',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> '此資產目前已借給某個使用者，不能被刪除，請檢查資產狀態，然後再嘗試刪除。',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> '資產稽核成功登錄。',
     ],
 
+
     'deletefile' => [
         'error'   => '刪除檔案失敗，請重試。',
         'success' => '刪除檔案成功。',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => '您的檔案已成功刪除。',
         'file_delete_error'      => '您的檔案無法被刪除。',
     ],
+
 
     'delete' => [
         'confirm'   	=> '您確定要刪除此資產嗎？',

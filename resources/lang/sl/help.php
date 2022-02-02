@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,9 +13,9 @@ return array(
     |
     */
 
-    "more_info_title" => "Več informacij",
+    'more_info_title' => 'Več informacij',
 
-    "audit_help" => "Če potrdite to polje, boste spremenili zapis sredstva, da bo odražal to novo lokacijo. Če je ne potrdite, boste lokacijo preprosto zabeležili v revizijskem dnevniku.<br><br>Upoštevajte, da če je to sredstvo izdano, to ne bo spremenilo lokacije osebe, sredstva ali lokacije, na katero je izdano.",
+    'audit_help' => 'Če potrdite to polje, boste spremenili zapis sredstva, da bo odražal to novo lokacijo. Če je ne potrdite, boste lokacijo preprosto zabeležili v revizijskem dnevniku.<br><br>Upoštevajte, da če je to sredstvo izdano, to ne bo spremenilo lokacije osebe, sredstva ali lokacije, na katero je izdano.',
 
     'assets' => 'Sredstva so stvari, ki so sledene po serijski številki ali oznaki sredstva. Ponavadi so stvari z višjo vrednostjo, pri katerih je opredelitev določenega predmeta pomembna.',
 
@@ -31,6 +31,4 @@ return array(
 
     'depreciations' => 'Za amortizacijo sredstev lahko določite amortizacijo sredstev, ki temelji na enakomerni amortizaciji.',
 
-
-
-);
+];

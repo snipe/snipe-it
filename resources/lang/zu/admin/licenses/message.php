@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Ilayisense ayikho.',
     'user_does_not_exist' => 'Umsebenzisi akakho.',
@@ -10,42 +10,43 @@ return [
     'select_asset_or_person' => 'Kumele ukhethe ifa noma umsebenzisi, kodwa hhayi kokubili.',
     'not_found' => 'License not found',
 
-    'create' => [
-        'error'   => 'Ilayisensi ayidalwanga, sicela uzame futhi.',
-        'success' => 'Ilayisense idaliwe ngempumelelo.',
-    ],
 
-    'deletefile' => [
+    'create' => array(
+        'error'   => 'Ilayisensi ayidalwanga, sicela uzame futhi.',
+        'success' => 'Ilayisense idaliwe ngempumelelo.'
+    ),
+
+    'deletefile' => array(
         'error'   => 'Ifayela alisusiwe. Ngicela uzame futhi.',
         'success' => 'Ifayili isusiwe ngempumelelo.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Amafayela (ama) awalayishiwe. Ngicela uzame futhi.',
         'success' => 'Amafayela (ama) alayishwe ngempumelelo.',
         'nofiles' => 'Awukakhethi noma yimaphi amafayela okulayishwa, noma ifayela ozama ukulilayisha likhulu kakhulu',
         'invalidfiles' => 'Ifayela elilodwa noma ngaphezulu likhulu kakhulu noma ifayelathi engavumelekile. Amafayela afakiwe avunyelwe ama-png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml, nelayisensi.',
-    ],
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Ilayisensi ayizange ibuyekezwe, sicela uzame futhi',
-        'success' => 'Ilayisensi ibuyekezwe ngempumelelo.',
-    ],
+        'success' => 'Ilayisensi ibuyekezwe ngempumelelo.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Uqinisekile ukuthi ufisa ukususa le layisensi?',
         'error'   => 'Kube nenkinga yokususa ilayisense. Ngicela uzame futhi.',
-        'success' => 'Ilayisense isusiwe ngempumelelo.',
-    ],
+        'success' => 'Ilayisense isusiwe ngempumelelo.'
+    ),
 
-    'checkout' => [
+    'checkout' => array(
         'error'   => 'Kube nenkinga yokuhlola ilayisense. Ngicela uzame futhi.',
-        'success' => 'Ilayisensi yahlolwa ngokuphumelelayo',
-    ],
+        'success' => 'Ilayisensi yahlolwa ngokuphumelelayo'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   => 'Kube nenkinga ekuhloleni ilayisense. Ngicela uzame futhi.',
-        'success' => 'Ilayisensi ihlolwe ngempumelelo',
-    ],
+        'success' => 'Ilayisensi ihlolwe ngempumelelo'
+    ),
 
-];
+);

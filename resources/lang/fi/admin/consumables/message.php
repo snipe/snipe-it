@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Kulutustarviketta ei ole.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Kulutustarviketta ei luotu, yritä uudelleen.',
-        'success' => 'Kulutustarvike luotiin onnistuneesti.',
-    ],
+        'success' => 'Kulutustarvike luotiin onnistuneesti.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Kulutustarviketta ei päivitetty, yritä uudelleen',
-        'success' => 'Kulutustarvike päivitettiin onnistuneesti.',
-    ],
+        'success' => 'Kulutustarvike päivitettiin onnistuneesti.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Haluatko varmasti poistaa tämän kulutustarvikkeen?',
         'error'   => 'Kulutustarvikkeen poistamisessa oli ongelma. Yritä uudelleen.',
-        'success' => 'Kulutustarvike poistettiin onnistuneesti.',
-    ],
+        'success' => 'Kulutustarvike poistettiin onnistuneesti.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Kulutustarviketta ei luovutettu, yritä uudelleen',
         'success' 		=> 'Kulutustarvike luovutettiin.',
-        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.',
-    ],
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Kulutustarviketta ei palautettu, yritä uudelleen',
         'success' 		=> 'Kulutustarvike palautettiin.',
-        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.',
-    ],
+        'user_does_not_exist' => 'Kyseinen käyttäjä on virheellinen. Yritä uudelleen.'
+    )
 
-];
+
+);

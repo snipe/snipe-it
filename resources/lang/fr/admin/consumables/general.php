@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'checkout'                          => 'Attribuer une fourniture à un utilisateur',
     'consumable_name'                   => 'Nom de la fourniture',
     'create'                            => 'Créer une fourniture',
@@ -8,4 +8,4 @@ return [
     'remaining' 			            => 'Quantité restante',
     'total' 			                => 'Total',
     'update'                            => 'Actualiser la fourniture',
-];
+);

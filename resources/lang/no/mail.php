@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'Brukeren har avbrutt en element-forespørsel på webområdet',
     'a_user_requested' => 'En bruker har bedt om et element på webområdet',
     'accessory_name' => 'Navn tilbehør:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'Dette er en test fra Snipe-IT eiendelsadministrasjonssystem. Hvis du mottok denne meldingen fungerer e-post.',
     'the_following_item' => 'Følgende enheter har blitt sjekket inn: ',
     'low_inventory_alert' => ':count enhet er under minimumnivå for beholdning, eller vil snart nå dette nivået.|:count enheter er under minimumnivå for beholdning, eller vil snart nå dette nivået.',
-    'assets_warrantee_alert' => ':count eiendel har garanti som utløper de neste :threshold dagene.|:count eiendeler har garanti som utløper de neste :threshold dagene.',
+    'assets_warrantee_alert' => 'En eiendel har garanti som utløper innenfor de neste :treshold dagene.|:count eiendeler har garanti som utløper innenfor de neste :tershold dagene.',
     'license_expiring_alert' => ':count lisens utløper de neste :threshold dagene.|:count lisenser utløper de neste :threshold dagene.',
     'to_reset' => 'Fullfør dette skjemaet for å tilbakestille ditt :web passord:',
     'type' => 'Type',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Rapport over forventet innsjekking av eiendeler',
     'Expected_Checkin_Notification' => 'Påminnelse: Innsjekkingsfrist for :name nærmer seg',
     'Expected_Checkin_Date' => 'En enhet som er sjekket ut til deg skal leveres tilbake den :date',
-    'your_assets' => 'Vis dine eiendeler'
-);
+    'your_assets' => 'Vis dine eiendeler',
+];

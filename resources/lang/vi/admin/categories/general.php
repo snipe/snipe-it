@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Danh mục tài sản',
     'category_name'  					=> 'Tên hạng mục',
     'checkin_email'                     => 'Gửi email đến người dùng khi checkin/checkout.',
@@ -20,4 +20,4 @@ return [
     'use_default_eula_disabled'			=> '<del>Sử dụng giá trị EULA mặc định để thay thế.</del> No primary default EULA is set. Please add one in Settings.',
     'use_default_eula_column'			=> 'Use default EULA',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Accessoire Categorie',
     'accessory_name'  					=> 'Accessoire Naam',
     'checkout'  							=> 'Check uit accessoire',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Gebruik de <a href="#" data-toggle="modal" data-target="#eulaModal"> standaard gebruikersovereenkomst</a> anders.',
     'use_default_eula_disabled'			=> '<del>Gebruik de standaard gebruikersovereenkomst anders.</del> Geen standaard gebruikersovereenkomst ingesteld. Voeg er alsjeblieft één toe in Instellingen.',
 
-];
+);

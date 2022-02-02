@@ -59,7 +59,7 @@ return [
     'test_mail_text' => '這是一封 Snipe-IT 資產管理系統的測試電子郵件，如果您收到，表示郵件通知正常運作 :)',
     'the_following_item' => '以下項目已繳回：',
     'low_inventory_alert' => '有 :count 種物品已經低於或者接近最小庫存。|有 :count 種物品已經低於或者接近最小庫存。',
-    'assets_warrantee_alert' => '有 :count 項資產的保固將在 :threshold 天後到期。|有 :count 項資產的保固將在 :threshold 天後到期。',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => '有 :count 個授權將在 :threshold 天後到期。|有 :count 個授權將在 :threshold 天後到期。',
     'to_reset' => '要重設 :web 的密碼，請完成此表單：',
     'type' => '類型',

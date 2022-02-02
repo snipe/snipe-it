@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Advarsel: </strong> Dette aktiv er blevet markeret som uudnytteligt. Hvis denne status er ændret, skal du opdatere aktivstatus.',
     'does_not_exist' 	=> 'Asset eksisterer ikke.',
-    'does_not_exist_or_not_requestable' => 'Godt forsøgt. Det pågældende aktiv eksisterer ikke eller kan ikke anmodes om.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Dette aktiv er i øjeblikket tjekket ud til en bruger og kan ikke slettes. Kontroller aktivet først, og prøv derefter at slette igen.',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Asset audit succesfuldt logget.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Filen er ikke slettet. Prøv igen.',
         'success' => 'Filen er slettet korrekt.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Din fil er blevet slettet korrekt',
         'file_delete_error'      => 'Filen kunne ikke slettes',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Er du sikker på, at du vil slette dette aktiv?',

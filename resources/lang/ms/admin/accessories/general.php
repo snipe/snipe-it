@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Kategori Aksesori',
     'accessory_name'  					=> 'Nama Aksesori',
     'checkout'  							=> 'Semak keluar aksesori',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Gunakan <a href="#" data-toggle="modal" data-target="#eulaModal">pilihan utama lalai EULA</a> sebaliknya.',
     'use_default_eula_disabled'			=> '<del>Gunakan EULA lalai utama bukannya.</del> Tiada seting utama EULA ditetapkan. Sila tambah satu dalam Tetapan.',
 
-];
+);

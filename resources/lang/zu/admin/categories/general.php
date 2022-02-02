@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Izigaba zefa',
     'category_name'  					=> 'Igama lesigaba',
     'checkin_email'                     => 'Send email to user on checkin/checkout.',
@@ -20,4 +20,4 @@ return [
     'use_default_eula_disabled'			=> '<del>Sebenzisa i-EULA eyinhloko yokuzenzakalela esikhundleni.</del> Ayikho i-EULA eyimilayezo eyisisekelo esethiwe. Sicela ungeze eyodwa kuzilungiselelo.',
     'use_default_eula_column'			=> 'Use default EULA',
 
-];
+);

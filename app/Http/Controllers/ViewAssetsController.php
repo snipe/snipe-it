@@ -57,7 +57,7 @@ class ViewAssetsController extends Controller
      */
     public function getRequestableIndex()
     {
-        $assets = Asset::with('model', 'defaultLoc', 'location', 'assignedTo', 'requests')->Hardware()->RequestableAssets()->get();
+        $assets = Asset::with('model', 'defaultLoc', 'location', 'assignedTo', 'requests')->Hardware()->RequestableAssets();
         $models = AssetModel::with('category', 'requests', 'assets')->RequestableModels()->get();
 
         return view('account/requestable-assets', compact('assets', 'models'));
@@ -165,7 +165,7 @@ class ViewAssetsController extends Controller
             $settings->notify(new RequestAssetCancelation($data));
 
             return redirect()->route('requestable-assets')
-                ->with('success')->with('success', trans('admin/hardware/message.requests.cancel-success'));
+                ->with('success')->with('success', trans('admin/hardware/message.requests.cancel'));
         }
 
         $logaction->logaction('requested');
@@ -245,7 +245,9 @@ class ViewAssetsController extends Controller
             $data_uri = e($request->get('signature_output'));
             $encoded_image = explode(',', $data_uri);
             $decoded_image = base64_decode($encoded_image[1]);
-            file_put_contents($path.'/'.$sig_filename, $decoded_image);
+
+            Storage::putFileAs($path, $decoded_image, $sig_filename);
+            //file_put_contents($path.'/'.$sig_filename, $decoded_image);
         }
 
         $logaction = new Actionlog();

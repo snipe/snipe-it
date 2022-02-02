@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'Over Asset Modellen',
     'about_models_text'           => 'Assetmodellen zijn een manier om identieke assets te groeperen. "MBP 2013", "iPhone 6s", enz.',
     'deleted'  					        => 'Dit model is verwijderd.',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => 'Je staat op het punt om :model_count assetmodellen te verwijderen.',
     'restore'                   => 'Herstel model',
     'requestable'               => 'Gebruikers mogen dit model aanvragen',
-    'show_mac_address'			      => 'Toon MAC-adresveld in de assets van dit model',
+	'show_mac_address'			      => 'Toon MAC-adresveld in de assets van dit model',
     'view_deleted'              => 'Bekijk verwijderde',
     'view_models'               => 'Bekijk modelen',
     'fieldset'                  => 'Veldverzameling',
     'no_custom_field'           => 'Geen aangepaste velden',
     'add_default_values'        => 'Voeg standaardwaarden toe',
-];
+);

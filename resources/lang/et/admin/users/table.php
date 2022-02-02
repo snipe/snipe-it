@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Aktiivne',
     'allow'  				=> 'Luba',
     'checkedout'  			=> 'Vahendid',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Näita praegusi kasutajaid',
     'show_deleted'          => 'Näita kustutatud kasutajaid',
     'title' 				=> 'Pealkiri',
-    'to_restore_them'		=> 'neid taastada.',
+	'to_restore_them'		=> 'neid taastada.',
     'updateuser' 			=> 'Uuenda kasutajat',
     'username' 				=> 'Kasutajanimi',
-    'user_deleted_text' 	=> 'See kasutaja on märgitud kustutatuks.',
+	'user_deleted_text' 	=> 'See kasutaja on märgitud kustutatuks.',
     'username_note' 		=> '(Seda kasutatakse ainult Active Directory sidumisel, mitte sisselogimiseks.)',
     'cloneuser'             => 'Klooni kasutaja',
     'viewusers' 			=> 'Vaata kasutajaid',
-];
+);

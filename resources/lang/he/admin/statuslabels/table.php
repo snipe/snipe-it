@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'על תוויות סטטוס',
     'archived'      	=> 'בארכיון',
     'create'      	=> 'צור תווית סטטוס',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'תוויות סטטוס',
     'undeployable'  => 'לא ניתן לפריסה',
     'update'      	=> 'עדכון תווית סטטוס',
-];
+);

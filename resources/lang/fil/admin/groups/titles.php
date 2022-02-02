@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'Ang Admin ng Grupo',
     'allow' 	 			=> 'Magbigay Pahintulot',
     'deny' 	 				=> 'Tanggihan',
-
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
 ];

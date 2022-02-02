@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'หมวดหมู่อุปกรณ์เสริม',
     'accessory_name'  					=> 'ชื่ออุปกรณ์เสริม',
     'checkout'  							=> 'เชคเอาท์อุปกรณ์เสริม',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'ใช้<a href="#" data-toggle="modal" data-target="#eulaModal">เป็นข้อกำหนดการใช้งานหลัก</a>แทน',
     'use_default_eula_disabled'			=> '<del>ใช้ข้อกำหนดการใช้งานหลักแทน</del> ค่าเริ่มต้นหลักจะตั้งข้อกำหนดการใช้งาน กรุณาเพิ่มในการตั้งค่า',
 
-];
+);

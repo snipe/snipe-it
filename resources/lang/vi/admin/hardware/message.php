@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Cảnh báo: </strong> Tài sản này hiện tại đang được đánh dấu là không cho phép cấp phát.
                         Nếu tình trạng này đã được thay đổi, xin vui lòng cập nhật tình trạng tài sản.',
     'does_not_exist' 	=> 'Tài sản không tồn tại.',
-    'does_not_exist_or_not_requestable' => 'Bạn đã cố gắng. Tài sản đó không tồn tại hoặc không cho phép đề xuất.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Tài sản này hiện tại đã được checkout đến một người dùng và không thể xóa. Đầu tiên xin vui lòng kiểm tra lại tài sản, và cố gắng thử lần nữa. ',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> 'Kiểm tra thành công tài sản.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Tập tin đã không được xoá. Bạn hãy thử lại.',
         'success' => 'Tập tin đã được xoá thành công.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => 'Tập tin của bạn đã được xóa thành công',
         'file_delete_error'      => 'Không thể xóa tệp',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Bạn có chắc chắn muốn xoá bỏ tài sản này?',

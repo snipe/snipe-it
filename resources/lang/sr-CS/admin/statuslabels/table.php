@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'O oznakama statusa',
     'archived'      	=> 'Arhivirano',
     'create'      	=> 'Create Status Label',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Oznake statusa',
     'undeployable'  => 'Undeployable',
     'update'      	=> 'Ažuriranje oznake statusa',
-];
+);

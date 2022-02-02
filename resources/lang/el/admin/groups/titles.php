@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'Διαχειριστής ομάδας',
     'allow' 	 			=> 'Να επιτραπεί',
     'deny' 	 				=> 'Άρνηση',
-
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
 ];

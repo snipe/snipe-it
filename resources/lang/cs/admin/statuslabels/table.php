@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'O označení stavu',
     'archived'      	=> 'Archivováno',
     'create'      	=> 'Vytvořit označení stavu',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Označení stavu',
     'undeployable'  => 'Nemožné připravit',
     'update'      	=> 'Upravit označení stavu',
-];
+);

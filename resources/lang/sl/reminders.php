@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return [
     |
     */
 
-    'password' => 'Gesla morajo biti dolga vsaj šest znakov in ustrezati potrditvi.',
+    "password" => "Gesla morajo biti dolga vsaj šest znakov in ustrezati potrditvi.",
 
-    'user'     => 'Uporabniško ime ali e-poštni naslov je napačno',
+    "user"     => "Uporabniško ime ali e-poštni naslov je napačno",
 
-    'token'    => 'Token za ponastavitev gesla je neveljaven.',
+    "token"    => "Token za ponastavitev gesla je neveljaven.",
 
-    'sent' => 'Če je bil najden ujemajoč e-poštni naslov, je bil poslan opomnik za geslo!',
+    "sent" => "Če je bil najden ujemajoč e-poštni naslov, je bil poslan opomnik za geslo!",
 
-];
+);

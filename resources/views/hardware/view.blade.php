@@ -449,7 +449,7 @@
                                                         @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                             <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
                                                         @else
-                                                            {!! nl2br(e($asset->{$field->db_column_name()})) !!}
+                                                            {!! nl2br(e($asset->{$field->db_column_name()})) !!} &nbsp;
                                                         @endif
                                                     @endif
                                                 </div>
@@ -499,7 +499,6 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="col-md-6" style="margin-left:-15px;">
                                                     @if (($asset->id) && ($asset->location))
                                                         {{ $asset->location->currency }}
                                                     @elseif (($asset->id) && ($asset->location))
@@ -509,7 +508,7 @@
                                                     @endif
                                                     {{ Helper::formatCurrencyOutput($asset->getDepreciatedValue() )}}
 
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     @endif

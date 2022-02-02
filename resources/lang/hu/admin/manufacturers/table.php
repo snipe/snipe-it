@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'A gyártókról',
     'about_manufacturers_text'  => 'A gyártók azok a vállalatok, amelyek létrehozzák a vagyont. Itt fontos támogatási kapcsolattartási információkat tárolhatsz róluk, amelyek az eszköz részletes oldalain fognak megjelenni.',
     'asset_manufacturers'	=> 'Eszköz gyártoi',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Gyártó frissítése',
     'url'   				=> 'URL',
 
-];
+);

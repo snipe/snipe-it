@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> '關於狀態標籤',
     'archived'      	=> '已封存',
     'create'      	=> '新增狀態標籤',
@@ -16,4 +16,4 @@ return [
     'title'      	=> '狀態標籤',
     'undeployable'  => '無法部署',
     'update'      	=> '更新狀態標籤',
-];
+);

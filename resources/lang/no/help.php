@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,9 +13,9 @@ return array(
     |
     */
 
-    "more_info_title" => "Mer info",
+    'more_info_title' => 'Mer info',
 
-    "audit_help" => "Kryss av for å endre eiendelen til å bruke denne nye lokasjonen. Hvis du ikke krysser av vil lokasjonen kun bli notert i revisjonsloggen.<br><br>Merk at hvis denne eiendelen er sjekket ut vil det ikke endre lokasjon for brukeren, eiendelen eller lokasjonen den er sjekket ut til.",
+    'audit_help' => 'Kryss av for å endre eiendelen til å bruke denne nye lokasjonen. Hvis du ikke krysser av vil lokasjonen kun bli notert i revisjonsloggen.<br><br>Merk at hvis denne eiendelen er sjekket ut vil det ikke endre lokasjon for brukeren, eiendelen eller lokasjonen den er sjekket ut til.',
 
     'assets' => 'Eiendeler er enheter som spores på serienummer eller annen merking. Typisk er dette kostbare enheter der det gir mening å spore enkeltenheter.',
 
@@ -31,6 +31,4 @@ return array(
 
     'depreciations' => 'Du kan sette opp avskrivninger for å kostnadsføre eiendeler basert på en lineær avskrivning i perioden.',
 
-
-
-);
+];

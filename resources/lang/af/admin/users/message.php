@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'accepted'                  => 'U het hierdie bate suksesvol aanvaar.',
     'declined'                  => 'Jy het hierdie bate suksesvol geweier.',
@@ -15,7 +15,8 @@ return [
     'password_resets_sent'      => 'The selected users who are activated and have a valid email addresses have been sent a password reset link.',
     'password_reset_sent'       => 'A password reset link has been sent to :email!',
 
-    'success' => [
+
+    'success' => array(
         'create'    => 'Gebruiker is suksesvol geskep.',
         'update'    => 'Gebruiker is suksesvol opgedateer.',
         'update_bulk'    => 'Gebruikers is suksesvol opgedateer!',
@@ -26,9 +27,9 @@ return [
         'unsuspend' => 'Gebruiker is suksesvol ingetrek.',
         'restored'  => 'Gebruiker is suksesvol herstel.',
         'import'    => 'Gebruikers suksesvol ingevoer.',
-    ],
+    ),
 
-    'error' => [
+    'error' => array(
         'create' => 'Kon nie die gebruiker skep nie. Probeer asseblief weer.',
         'update' => 'Kon nie die gebruiker opdateer nie. Probeer asseblief weer.',
         'delete' => 'Daar was \'n probleem met die verwydering van die gebruiker. Probeer asseblief weer.',
@@ -43,18 +44,18 @@ return [
         'ldap_could_not_search' => 'Kon nie die LDAP-bediener soek nie. Gaan asseblief die LDAP-bediener opstelling in die LDAP-konfigurasie lêer. <br>Error van LDAP-bediener:',
         'ldap_could_not_get_entries' => 'Kon nie inskrywings van die LDAP-bediener kry nie. Gaan asseblief die LDAP-bediener opstelling in die LDAP-konfigurasie lêer. <br>Error van LDAP-bediener:',
         'password_ldap' => 'Die wagwoord vir hierdie rekening word bestuur deur LDAP / Active Directory. Kontak asseblief u IT-afdeling om u wagwoord te verander.',
-    ],
+    ),
 
-    'deletefile' => [
+    'deletefile' => array(
         'error'   => 'Lêer nie verwyder nie. Probeer asseblief weer.',
         'success' => 'Lêer suksesvol uitgevee.',
-    ],
+    ),
 
-    'upload' => [
+    'upload' => array(
         'error'   => 'Lêer (s) nie opgelaai nie. Probeer asseblief weer.',
         'success' => 'Lêer (s) suksesvol opgelaai.',
         'nofiles' => 'Jy het nie enige lêers vir oplaai gekies nie',
         'invalidfiles' => 'Een of meer van jou lêers is te groot of is \'n filetipe wat nie toegelaat word nie. Toegelate filetipes is png, gif, jpg, doc, docx, pdf en txt.',
-    ],
+    ),
 
-];
+);

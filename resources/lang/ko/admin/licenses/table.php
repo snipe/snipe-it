@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'assigned_to'   	=> '사용자',
     'checkout'   		=> '입/출',
@@ -14,4 +14,4 @@ return [
     'serial'   			=> '일련번호',
     'title'      		=> '라이선스',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Kategorije sredstev',
     'category_name'  					=> 'Ime kategorije',
     'checkin_email'                     => 'Pošlji e-pošto uporabniku ob sprejemu/izdaji.',
@@ -20,4 +20,4 @@ return [
     'use_default_eula_disabled'			=> '<del>Namesto tega uporabite privzeto EULA.</del> Ni privzete EULA. Dodajte jo v Nastavitvah.',
     'use_default_eula_column'			=> 'Uporabi privzeto EULA',
 
-];
+);

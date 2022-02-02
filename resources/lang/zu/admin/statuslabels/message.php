@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Lezi zimpahla azikwazi ukwabiwa kunoma ubani.',
-        'deployable'   => 'Lezi zimpahla zingahlolwa. Uma sebebelwe, bazobheka isimo se-meta sika <i class="fas fa-circle text-blue"></i> <strong>Ihlisiwe</strong>.',
+        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Lezi zimpahla azikwazi ukuhlolwa, futhi zizovela kuphela ku-Archived view. Lokhu kuyasiza ukugcina ulwazi mayelana nempahla yezinhloso zebhajethi / zomlando kodwa ukuwagcina ohlwini lwamafaji wosuku nosuku.',
         'pending'   => 'Lezi zimpahla azikwazi ukunikezwa kunoma ubani, ngokuvamile okusetshenziselwa izinto ezingaphandle kokulungisa, kodwa kulindeleke ukuthi zibuyele ekusakazweni.',
     ],

@@ -1,36 +1,37 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'The accessory [:id] does not exist.',
     'assoc_users'	 => 'Tato kategorie má nyní :count položek k předání uživatelům. Zkontrolujte převzetí příslušenství a zkuste to znovu. ',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Doplněk nebyl vytvořen, prosím zkuste to znovu.',
-        'success' => 'Doplněk byl úspěšně vytvořen.',
-    ],
+        'success' => 'Doplněk byl úspěšně vytvořen.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Doplněk nebyl upraven, prosím zkuste to znovu',
-        'success' => 'Doplněk byl úspěšně upraven.',
-    ],
+        'success' => 'Doplněk byl úspěšně upraven.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Jste si jisti, že chcete odstranit toto příslušenství?',
         'error'   => 'Vyskytl se problém při mazání kategorie. Zkuste to znovu prosím.',
-        'success' => 'Příslušenství bylo úspěšně odstraněno.',
-    ],
+        'success' => 'Příslušenství bylo úspěšně odstraněno.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Příslušenství nebylo převzato, zkuste to znovu',
         'success' 		=> 'Příslušenství úspěšně předáno.',
-        'user_does_not_exist' => 'Neplatný uživatel. Zkuste to znovu.',
-    ],
+        'user_does_not_exist' => 'Neplatný uživatel. Zkuste to znovu.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Příslušenství nebylo převzato, zkuste to znovu',
         'success' 		=> 'Příslušenství úspěšně předáno.',
-        'user_does_not_exist' => 'Neplatný uživatel. Zkuste to znovu.',
-    ],
+        'user_does_not_exist' => 'Neplatný uživatel. Zkuste to znovu.'
+    )
 
-];
+
+);

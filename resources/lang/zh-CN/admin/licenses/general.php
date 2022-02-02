@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => '关于许可证',
     'about_licenses'                  => '许可证用于跟踪软件。 它们包含特殊位数的数字，可以借出给个人。',
     'checkin'  					=> '接入许可证数量',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> '软件许可证',
     'user'  					=> '用户',
     'view'  					=> '查看许可证',
-];
+);

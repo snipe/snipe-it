@@ -154,6 +154,8 @@
                         {id: 'full_name', text: 'Full Name' },
                         {id: 'status', text: 'Status' },
                         {id: 'warranty_months', text: 'Warranty Months' },
+                        {id: 'last_audit_date', text: 'Last Audit Date' },
+                        {id: 'next_audit_date', text: 'Audit Date' },
                     ],
                     consumables: [
                         {id: 'item_no', text: "Item Number"},
@@ -182,7 +184,9 @@
                         {id: 'address', text: 'Address' },
                         {id: 'city', text: 'City' },
                         {id: 'state', text: 'State' },
+                        {id: 'zip', text: 'ZIP' },
                         {id: 'country', text: 'Country' },
+                        {id: 'zip', text: 'ZIP' },
 
                     ],
                     customFields: this.customFields,

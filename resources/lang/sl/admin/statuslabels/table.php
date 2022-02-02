@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about'      	=> 'O oznakah stanja',
     'archived'      	=> 'Arhivirano',
     'create'      	=> 'Ustvari oznako stanja',
@@ -16,4 +16,4 @@ return [
     'title'      	=> 'Oznake statusa',
     'undeployable'  => 'Nerazporejeno',
     'update'      	=> 'Posodobi statusno oznako',
-];
+);

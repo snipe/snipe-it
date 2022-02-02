@@ -10,5 +10,7 @@ return [
     'group_admin' 	 		=> 'Групп админ',
     'allow' 	 			=> 'Зөвшөөрнө үү',
     'deny' 	 				=> 'Дене',
-
+    'permission'            => 'Permission',
+    'grant'                 => 'Grant',
+    'no_permissions'        => 'This group has no permissions.'
 ];

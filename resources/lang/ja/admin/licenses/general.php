@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'ライセンスについて',
     'about_licenses'                  => 'ライセンスはソフトウェアの追跡に使用されます。指定した数を個人にチェックアウトすることができます。',
     'checkin'  					=> 'ライセンスシートをチェックイン',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'ソフトウェア・ライセンス',
     'user'  					=> '利用者',
     'view'  					=> 'ライセンスを表示',
-];
+);

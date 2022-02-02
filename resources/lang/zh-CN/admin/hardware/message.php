@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>警告: </strong>该资产目前已经被标记为不可被分配，如果该资产状态已经改变，请刷新。',
     'does_not_exist' 	=> '资产不存在',
-    'does_not_exist_or_not_requestable' => '已重试，那个资产不存在或不可申请。',
+    'does_not_exist_or_not_requestable' => '该资产不存在或不可申领。',
     'assoc_users'	 	=> '这个资产目前已经借给某个用户，不能被删除，请检查资产信息，然后再尝试删除。',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> '资产审计已成功记录。',
     ],
 
+
     'deletefile' => [
         'error'   => '文件删除失败，请重试',
         'success' => '文件已成功删除。',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => '您的文件已成功删除',
         'file_delete_error'      => '该文件无法被删除',
     ],
+
 
     'delete' => [
         'confirm'   	=> '你确定要删除这个资产吗？',

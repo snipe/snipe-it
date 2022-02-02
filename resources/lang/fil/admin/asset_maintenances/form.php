@@ -10,5 +10,5 @@
         'asset_maintenance_time' => 'Mga Araw',
         'notes'                  => 'Mga Palatandaan',
         'update'                 => 'I-update',
-        'create'                 => 'Magsagawa',
+        'create'                 => 'Magsagawa'
     ];

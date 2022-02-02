@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_manufacturers_title'    => 'Sobre os fabricantes',
     'about_manufacturers_text'  => 'Os fabricantes são as empresas que criam seus ativos. Você pode armazenar informações de contato de suporte importantes sobre eles aqui, que serão exibidas nas páginas de detalhes do recurso.',
     'asset_manufacturers'	=> 'Fabricantes de Artigos',
@@ -13,4 +13,4 @@ return [
     'update'				=> 'Atualizar Fabricante',
     'url'   				=> 'URL',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'assigned_to'   	=> 'Hozzárendelve',
     'checkout'   		=> 'Be/ki',
@@ -14,4 +14,4 @@ return [
     'serial'   			=> 'Sorozatszám',
     'title'      		=> 'Licensz',
 
-];
+);

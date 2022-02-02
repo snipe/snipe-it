@@ -1,52 +1,57 @@
 <?php
 
-return [
+return array(
 
-    'field' => [
+    'field' => array(
         'invalid'   => 'Feltet finnes ikke.',
         'already_added'   => 'Feltet er allerede lagt til',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Feltet ble ikke opprettet, vennligst prøv igjen.',
             'success' => 'Felt opprettet.',
-            'assoc_success' => 'Feltet ble lagt til.',
-        ],
+            'assoc_success' => 'Feltet ble lagt til.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Feltet ble ikke oppdatert, vennligst prøv igjen',
-            'success' => 'Felt oppdatert.',
-        ],
+            'success' => 'Felt oppdatert.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Er du sikker på at du vil slette dette feltet?',
             'error'   => 'Det oppstod et problem ved sletting av feltet. Vennligst prøv igjen senere.',
             'success' => 'Feltet ble slettet.',
             'in_use'   => 'Feltet er fremdeles i bruk.',
-        ],
+        )
 
-    ],
+    ),
 
-    'fieldset' => [
+    'fieldset' => array(
 
         'does_not_exist' => 'Fieldset eksisterer ikke',
 
-        'create' => [
+        'create' => array(
             'error'   => 'Feltsettet ble ikke opprettet, vennligst prøv igjen.',
-            'success' => 'Feltsettet ble opprettet.',
-        ],
+            'success' => 'Feltsettet ble opprettet.'
+        ),
 
-        'update' => [
+        'update' => array(
             'error'   => 'Feltsettet ble ikke oppdatert, vennligst prøv igjen',
-            'success' => 'Feltsettet ble oppdatert.',
-        ],
+            'success' => 'Feltsettet ble oppdatert.'
+        ),
 
-        'delete' => [
+        'delete' => array(
             'confirm'   	=> 'Er du sikker på at du vil slette feltsettet?',
             'error'   => 'Det oppstod et problem ved sletting av feltsettet. Vennligst prøv igjen.',
             'success' => 'Feltsettet ble slettet.',
             'in_use'   => 'Feltsettet er fortsatt i bruk.',
-        ],
+        )
 
-    ],
+    ),
 
-];
+
+
+
+
+
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_licenses_title'            => 'Tentang Lisensi',
     'about_licenses'                  => 'Lisensi digunakan untuk melacak perangkat lunak. Mereka memiliki sejumlah seat tertentu yang bisa diperiksa ke individu',
     'checkin'  					=> 'Daftar lisensi seat',
@@ -18,4 +18,4 @@ return [
     'software_licenses'  		=> 'Lisensi perangkat lunak',
     'user'  					=> 'Pengguna',
     'view'  					=> 'Lihat lisensi',
-];
+);

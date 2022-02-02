@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'نشط',
     'allow'  				=> 'السماح',
     'checkedout'  			=> 'الأصول',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'عرض المستخدمين الحاليين',
     'show_deleted'          => 'عرض المستخدمين المحذوفين',
     'title' 				=> 'المسمى الوظيفي',
-    'to_restore_them'		=> 'لاستعادتها.',
+	'to_restore_them'		=> 'لاستعادتها.',
     'updateuser' 			=> 'تحديث المستخدم',
     'username' 				=> 'اسم المستخدم',
-    'user_deleted_text' 	=> 'تم وضع علامة على هذا المستخدم على أنه محذوف.',
+	'user_deleted_text' 	=> 'تم وضع علامة على هذا المستخدم على أنه محذوف.',
     'username_note' 		=> '(يستخدم فقط للربط مع الـ Active Directory وليس لغرض تسجيل الدخول.)',
     'cloneuser'             => 'نسخ المستخدم',
     'viewusers' 			=> 'عرض المستخدمين',
-];
+);

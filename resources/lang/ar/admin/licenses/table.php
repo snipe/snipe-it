@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'assigned_to'   	=> 'عينت الى',
     'checkout'   		=> 'داخل\\خارج',
@@ -14,4 +14,4 @@ return [
     'serial'   			=> 'التسلسل',
     'title'      		=> 'الترخيص',
 
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'Mayelana namamodeli asefa',
     'about_models_text'           => 'Amamodeli asefa kuyindlela yokuqoqa amafa afanayo. "MBP 2013", "IPhone 6s", njll.',
     'deleted'  					        => 'This model has been deleted.',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => 'You are about to delete :model_count asset models.',
     'restore'                   => 'Buyisela Isibonelo',
     'requestable'               => 'Abasebenzisi bangacela lesi model',
-    'show_mac_address'			      => 'Khombisa inkambu yekheli le-MAC kumpahla kule model',
+	'show_mac_address'			      => 'Khombisa inkambu yekheli le-MAC kumpahla kule model',
     'view_deleted'              => 'Buka ukususiwe',
     'view_models'               => 'Buka amamodeli',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Awekho amasimu wangokwezifiso',
     'add_default_values'        => 'Add default values',
-];
+);

@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'asset_categories' 					=> 'Kategorije resursa',
     'category_name'  					=> 'Naziv kategorije',
     'checkin_email'                     => 'Send email to user on checkin/checkout.',
@@ -20,4 +20,4 @@ return [
     'use_default_eula_disabled'			=> '<del>Upotrebi primarnu default EULA.</del> Nije postavljena primarna default EULA. Dodajte jednu u Postavke.',
     'use_default_eula_column'			=> 'Use default EULA',
 
-];
+);

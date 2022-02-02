@@ -1,35 +1,36 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Materiał eksploatacyjny nie istnieje.',
 
-    'create' => [
+    'create' => array(
         'error'   => 'Materiał eksploatacyjny nie został utworzony, spróbuj ponownie.',
-        'success' => 'Materiał eksploatacyjny utworzony pomyślnie.',
-    ],
+        'success' => 'Materiał eksploatacyjny utworzony pomyślnie.'
+    ),
 
-    'update' => [
+    'update' => array(
         'error'   => 'Materiał eksploatacyjny nie został uaktualniony, spróbuj ponownie',
-        'success' => 'Materiał eksploatacyjny został zaktualizowany pomyślnie.',
-    ],
+        'success' => 'Materiał eksploatacyjny został zaktualizowany pomyślnie.'
+    ),
 
-    'delete' => [
+    'delete' => array(
         'confirm'   => 'Czy na pewno chcesz usunąć materiał eksploatacyjny?',
         'error'   => 'Wystąpił problem podczas usuwania materiału eksploatacyjnego. Spróbuj ponownie.',
-        'success' => 'Materiał eksploatacyjny został usunięty pomyślnie.',
-    ],
+        'success' => 'Materiał eksploatacyjny został usunięty pomyślnie.'
+    ),
 
-     'checkout' => [
+     'checkout' => array(
         'error'   		=> 'Materiał eksploatacyjny nie został wydany, spróbuj ponownie',
         'success' 		=> 'Materiał eksploatacyjny został wydany pomyślnie.',
-        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.',
-    ],
+        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
+    ),
 
-    'checkin' => [
+    'checkin' => array(
         'error'   		=> 'Materiał eksploatacyjny nie został odebrany, spróbuj ponownie',
         'success' 		=> 'Materiał eksploatacyjny odebrany pomyślnie.',
-        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.',
-    ],
+        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
+    )
 
-];
+
+);

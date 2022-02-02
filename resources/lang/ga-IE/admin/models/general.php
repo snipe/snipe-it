@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => 'Maidir le Múnlaí Sócmhainne',
     'about_models_text'           => 'Tá modhanna sócmhainne ina bhealach chun sócmhainní comhionanna a ghrúpáil. "MBP 2013", "iPhone 6s", etc.',
     'deleted'  					        => 'This model has been deleted.',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => 'You are about to delete :model_count asset models.',
     'restore'                   => 'Múnla Athchóirigh',
     'requestable'               => 'Féadfaidh úsáideoirí an tsamhail seo a iarraidh',
-    'show_mac_address'			      => 'Taispeáin réimse seoladh MAC i sócmhainní sa mhúnla seo',
+	'show_mac_address'			      => 'Taispeáin réimse seoladh MAC i sócmhainní sa mhúnla seo',
     'view_deleted'              => 'Féach Scriosta',
     'view_models'               => 'Amharc ar Mhúnlaí',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'Uimh réimsí saincheaptha',
     'add_default_values'        => 'Add default values',
-];
+);

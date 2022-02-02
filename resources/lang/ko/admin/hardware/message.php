@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>경고: </strong> 이 자산은 현재 사용불가 상태입니다.
                         이 상태를 변경하시려면, 자산 상태를 갱신하세요.',
     'does_not_exist' 	=> '자산이 존재하지 않습니다.',
-    'does_not_exist_or_not_requestable' => '좋은 시도지만, 그 자산은 존재하지 않거나 요청가능하지 않습니다.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> '이 자산은 현재 사용자에게 반출 중이어서 삭제 할 수 없습니다. 먼저 자산을 확인해 보고 다시 삭제를 시도해 주세요. ',
 
     'create' => [
@@ -29,6 +29,7 @@ return [
         'success' 		=> '자산 감사가 성공적으로 기록되었습니다.',
     ],
 
+
     'deletefile' => [
         'error'   => '파일이 삭제되지 않았습니다. 다시 시도해 주세요.',
         'success' => '파일이 삭제되었습니다.',
@@ -48,6 +49,7 @@ return [
         'file_delete_success'   => '파일 삭제가 완료되었습니다',
         'file_delete_error'      => '파일을 삭제할 수 없습니다',
     ],
+
 
     'delete' => [
         'confirm'   	=> '이 자산을 삭제하시겠습니까?',

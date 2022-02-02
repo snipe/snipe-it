@@ -23,7 +23,7 @@ return [
 
     'help' => [
         'undeployable'   => 'Những tài sản này không thể gán cho bất cứ ai.',
-        'deployable'   => 'Những tài sản này có thể được kiểm tra. Khi được chỉ định, họ sẽ giả sử trạng thái meta là <i class="fas fa-circle text-blue"></i> <strong>Doanh tác</strong>.',
+        'deployable'   => 'These assets can be checked out. Once they are assigned, they will assume a meta status of <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
         'archived'   => 'Không thể kiểm tra các tài sản này và sẽ chỉ hiển thị trong chế độ xem Thư mục lưu trữ. Điều này hữu ích cho việc giữ lại thông tin về tài sản cho mục đích lịch sử ngân sách nhưng giữ chúng khỏi danh mục tài sản hằng ngày.',
         'pending'   => 'Những tài sản này không thể được gán cho bất cứ ai, thường được sử dụng cho các vật phẩm được sửa chữa, nhưng dự kiến ​​sẽ quay trở lại lưu thông.',
     ],

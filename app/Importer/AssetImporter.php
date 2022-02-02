@@ -96,6 +96,14 @@ class AssetImporter extends ItemImporter
             $item['rtd_location_id'] = $this->item['location_id'];
         }
 
+        if (isset($this->item['last_audit_date'])) {
+            $item['last_audit_date'] = $this->item['last_audit_date'];
+        }
+
+        if (isset($this->item['next_audit_date'])) {
+            $item['next_audit_date'] = $this->item['next_audit_date'];
+        }
+
         if ($editingAsset) {
             $asset->update($item);
         } else {

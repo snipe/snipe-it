@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong> اخطار: </ strong> این دارایی به برانگیز گزارش شده است که در حال حاضر undeployable. اگر این وضعیت تغییر کرده است، لطفا به روز رسانی وضعیت دارایی.',
     'does_not_exist' 	=> 'دارایی وجود ندارد.',
-    'does_not_exist_or_not_requestable' => 'دوباره تلاش کنید . این دارایی وجود ندارد.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'این دارایی در حال حاضر به یک کاربر چک کردن و پاک نمی شود. لطفا دارایی در اولین بار چک کنید، و سپس سعی کنید دوباره حذف کنید.',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'حسابرسی املاک با موفقیت وارد شد',
     ],
 
+
     'deletefile' => [
         'error'   => 'فایل حذف نمی شود. لطفا دوباره تلاش کنید.',
         'success' => 'فایل با موفقیت حذف شده است.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'فایل شما با موفقیت حذف شده است',
         'file_delete_error'      => 'فایل قابل حذف نشد',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'آیا شما مطمئن هستید که می خواهید این تنظیمات دارایی را حذف کنید؟',

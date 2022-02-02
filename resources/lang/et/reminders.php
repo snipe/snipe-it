@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -13,12 +13,12 @@ return [
     |
     */
 
-    'password' => 'Parool peab olema kuus tähemärki ja peab klappima kinnitusega.',
+    "password" => "Parool peab olema kuus tähemärki ja peab klappima kinnitusega.",
 
-    'user'     => 'Kasutajanimi või parool on vale',
+    "user"     => "Kasutajanimi või parool on vale",
 
-    'token'    => 'See parooli taastamise kood on vale.',
+    "token"    => "See parooli taastamise kood on vale.",
 
-    'sent' => 'Kui me leidsime klappiva e-maili aadressi, siis saatsime sellele parooli meeldetuletuse!',
+    "sent" => "Kui me leidsime klappiva e-maili aadressi, siis saatsime sellele parooli meeldetuletuse!",
 
-];
+);

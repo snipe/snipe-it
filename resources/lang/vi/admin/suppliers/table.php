@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_suppliers_title' => 'Giới thiệu nhà cung cấp',
     'about_suppliers_text'  => 'Các nhà cung cấp được sử dụng để theo dõi nguồn hàng',
     'address'               => 'Địa chỉ nhà cung cấp',
@@ -24,4 +24,4 @@ return [
     'view_assets_for'       => 'Xem những tài sản của',
     'zip'                   => 'Mã bưu điện',
 
-];
+);

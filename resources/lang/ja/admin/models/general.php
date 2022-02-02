@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'about_models_title'     => '資産モデルについて',
     'about_models_text'           => '資産モデルは、同一資産をグループ化する方法です。(例:「MBP 2013」、「IPhone 6」など)',
     'deleted'  					        => 'モデルは削除されました。',
@@ -9,10 +9,10 @@ return [
     'bulk_delete_warn'          => ':model_count 件の資産モデルを削除しようとしています。',
     'restore'                   => '型番を復元',
     'requestable'               => 'ユーザーはこのモデルをリクエスト出来ます',
-    'show_mac_address'			      => 'この型番の資産にMACアドレスフィールドを表示',
+	'show_mac_address'			      => 'この型番の資産にMACアドレスフィールドを表示',
     'view_deleted'              => '削除したものを表示',
     'view_models'               => '型番を表示',
     'fieldset'                  => 'フィールドセット',
     'no_custom_field'           => 'カスタム フィールドなし',
     'add_default_values'        => 'デフォルト値を追加する',
-];
+);

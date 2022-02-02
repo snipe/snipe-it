@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Waarskuwing: </strong> Hierdie bate is gemerk as tans onbruikbaar. As hierdie status verander het, verander asseblief die batestatus.',
     'does_not_exist' 	=> 'Bate bestaan ​​nie.',
-    'does_not_exist_or_not_requestable' => 'Goeie probeerslag. Daardie bate bestaan ​​nie of is nie versoekbaar nie.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Hierdie bate word tans na \'n gebruiker nagegaan en kan nie uitgevee word nie. Gaan asseblief die bate eers in, en probeer dan weer uitvee.',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Bate oudit suksesvol aangemeld.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Lêer nie verwyder nie. Probeer asseblief weer.',
         'success' => 'Lêer suksesvol uitgevee.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Jou lêer is suksesvol verwyder',
         'file_delete_error'      => 'Die lêer kon nie uitgevee word nie',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Is jy seker jy wil hierdie bate uitvee?',

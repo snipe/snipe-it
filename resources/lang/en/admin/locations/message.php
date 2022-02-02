@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     'does_not_exist' => 'Location does not exist.',
     'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
@@ -23,4 +23,4 @@ return [
         'success' => 'The location was deleted successfully.',
     ],
 
-];
+);

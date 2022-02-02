@@ -24,4 +24,14 @@ return [
     'two_factor_admin_optin_help' => '您当前的管理员设置允许使用双重认证。 ',
     'two_factor_enrolled' => '双重认证设备登记',
     'two_factor_active'   => '启用双重认证',
-    ];
+    'user_deactivated'  => '用户已取消激活',
+    'activation_status_warning' => '不要改变激活状态',
+    'group_memberships_helpblock' => '只有超级管理员可以编辑群组成员。',
+    'superadmin_permission_warning' => '只有超级管理员可以授予用户超级管理员访问权限。',
+    'admin_permission_warning' => '只有拥有管理员权限或更大权限的用户才能授予用户管理员权限。',
+    'remove_group_memberships' => '删除群组成员',
+    'warning_deletion' => '警告：',
+    'warning_deletion_information' => '您将要删除下列 :count 用户。超级管理员名称高亮为红色。',
+    'update_user_asssets_status' => '将这些用户的所有资源更新到此状态',
+    'checkin_user_properties' => '检查与这些用户相关的所有属性',
+];

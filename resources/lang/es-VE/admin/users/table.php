@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'activated'  			=> 'Activo',
     'allow'  				=> 'Permitir',
     'checkedout'  			=> 'Activos',
@@ -28,11 +28,11 @@ return [
     'show_current'          => 'Mostrar Usuarios Actuales',
     'show_deleted'          => 'Mostrar Usuarios Eliminados',
     'title' 				=> 'Título',
-    'to_restore_them'		=> 'para restaurarlos.',
+	'to_restore_them'		=> 'para restaurarlos.',
     'updateuser' 			=> 'Actualizar Usuario',
     'username' 				=> 'Nombre de usuario',
-    'user_deleted_text' 	=> 'Este usuario ha sido marcado como borrado.',
+	'user_deleted_text' 	=> 'Este usuario ha sido marcado como borrado.',
     'username_note' 		=> '(Esto es usado sólo para el enlace de Active Directory, no para iniciar sesión.)',
     'cloneuser'             => 'Clonar Usuario',
     'viewusers' 			=> 'Ver Usuarios',
-];
+);

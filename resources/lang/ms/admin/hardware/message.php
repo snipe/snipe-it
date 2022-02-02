@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>Amaran: </strong> Aset ini telah ditandakan sebagai tidak boleh dikehendaki. Jika status ini telah berubah, sila kemas kini status aset.',
     'does_not_exist' 	=> 'Harta tidak wujud.',
-    'does_not_exist_or_not_requestable' => 'Cubaan yang baik. Aset itu tidak wujud atau tidak boleh diminta.',
+    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Harta ini sekarang telah diagihkan kepada pengguna dan tidak boleh dihapuskan. Sila semak status harta ini dahulu, dan kemudian cuba semula. ',
 
     'create' => [
@@ -28,6 +28,7 @@ return [
         'success' 		=> 'Audit aset berjaya log.',
     ],
 
+
     'deletefile' => [
         'error'   => 'Fail tidak dipadam. Sila cuba lagi.',
         'success' => 'Fail berjaya dipadam.',
@@ -47,6 +48,7 @@ return [
         'file_delete_success'   => 'Fail anda telah berjaya dihapuskan',
         'file_delete_error'      => 'Fail tidak dapat dipadamkan',
     ],
+
 
     'delete' => [
         'confirm'   	=> 'Anda pasti anda ingin hapuskan harta ini?',

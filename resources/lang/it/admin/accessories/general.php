@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
     'accessory_category' 				=> 'Categoria Accessorio',
     'accessory_name'  					=> 'Nome Accessorio',
     'checkout'  							=> 'Checkout accessorio',
@@ -17,4 +17,4 @@ return [
     'use_default_eula'					=> 'Usa <a href="#" data-toggle="modal" data-target="#eulaModal">L\'EULA predefinita</a> invece.',
     'use_default_eula_disabled'			=> '<del>Usa L\'EULA predefinita.</del> Nessuna EULA predefinita è in uso. Per favore aggiungine una nei Settaggi.',
 
-];
+);

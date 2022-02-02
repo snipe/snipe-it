@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'a_user_canceled' => 'ผู้ใช้ยกเลิกคำร้องขอสินค้าในเว็บไซต์แล้ว',
     'a_user_requested' => 'ผู้ใช้ร้องขอรายการบนเว็บไซต์',
     'accessory_name' => 'ชื่ออุปกรณ์เสริม:',
@@ -59,7 +59,7 @@ return array(
     'test_mail_text' => 'นี่เป็นการทดสอบจาก Snipe-IT Asset Management System ถ้าคุณได้รับอีเมลนี้จะทำงาน :)',
     'the_following_item' => 'รายการต่อไปนี้ได้รับการตรวจสอบใน:',
     'low_inventory_alert' => 'มี: นับสินค้าที่ต่ำกว่าสินค้าคงคลังขั้นต่ำหรือเร็ว ๆ นี้จะต่ำ|มี: นับสินค้าที่ต่ำกว่าสินค้าคงคลังขั้นต่ำหรือจะเร็วเกินไป',
-    'assets_warrantee_alert' => 'มี: จำนวนสินทรัพย์ที่สิ้นสุดระยะรับประกันในถัดไป: เกณฑ์วัน|มี: นับสินทรัพย์ที่จะสิ้นสุดระยะประกันในถัดไป: เกณฑ์วัน',
+    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'license_expiring_alert' => 'มี: ใบอนุญาตที่จะหมดอายุในวันถัดไป: วันที่กำหนด|มี: ใบอนุญาตที่จะหมดอายุในวันถัดไป: วันที่กำหนด',
     'to_reset' => 'ในการรีเซ็ตรหัสผ่านเว็บของคุณโปรดกรอกแบบฟอร์มนี้:',
     'type' => 'ชนิด',
@@ -75,5 +75,5 @@ return array(
     'Expected_Checkin_Report' => 'Expected asset checkin report',
     'Expected_Checkin_Notification' => 'เตือนความจำ :: ใกล้หมดเวลาเช็คอิน',
     'Expected_Checkin_Date' => 'An asset checked out to you is due to be checked back in on :date',
-    'your_assets' => 'ดูสินทรัพย์ที่มี'
-);
+    'your_assets' => 'ดูสินทรัพย์ที่มี',
+];
