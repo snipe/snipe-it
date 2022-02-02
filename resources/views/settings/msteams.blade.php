@@ -71,10 +71,10 @@
                        <div class="form-group" id="msteamstestcontainer" style="display: none">
                            
                             <div class="col-md-2">
-                                {{ Form::label('test_msteams', 'Test MS Teams') }}
+                                {{ Form::label('test_msteams', 'Test Microsoft Teams') }}
                             </div>
                             <div class="col-md-10" id="msteamstestrow">
-                                <a class="btn btn-default btn-sm pull-left" id="msteamstest" style="margin-right: 10px;">Test <i class="fa fa-windows"></i> Integration</a>
+                                <a class="btn btn-default btn-sm pull-left" id="msteamstest" style="margin-right: 10px;">Test <i class="fab fa-windows"></i> Integration</a>
                             </div>
                             <div class="col-md-10 col-md-offset-2">
                                 <span id="msteamstesticon"></span>
