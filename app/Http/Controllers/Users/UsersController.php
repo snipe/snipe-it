@@ -484,7 +484,6 @@ class UsersController extends Controller
             $user->first_name = '';
             $user->last_name = '';
             $user->email = substr($user->email, ($pos = strpos($user->email, '@')) !== false ? $pos : 0);
-
             $user->id = null;
 
             // Get this user groups
