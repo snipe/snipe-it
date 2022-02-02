@@ -21,7 +21,7 @@ return [
     'currency'                  => 'Gjaldmiðill staðsetningar',
     'ldap_ou'                   => 'LDAP Search OU',
     'user_name'                 => 'User Name',
-    'department'                => 'Department',
+    'department'                => 'Deild',
     'location'                  => 'Location',
     'asset_tag'                 => 'Assets Tag',
     'asset_name'                => 'Name',

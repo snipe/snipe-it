@@ -2,6 +2,6 @@
 
 return [
     'select_company' => 'Velg bedrift',
-    'about_companies' => 'About Companies',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'about_companies' => 'Om bedrifter',
+    'about_companies_description' => '        Du kan bruke bedrifter som et enkelt informasjonsfelt, eller slå på Full Bedriftstøtte i Admin-innstillingene for å kunne begrense tilgangen til brukere fra forskjellige bedrifter.',
 ];

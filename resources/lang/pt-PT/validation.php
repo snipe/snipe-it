@@ -64,7 +64,7 @@ return [
         'string'  => 'O :attribute deve conter pelos menos :min caracteres.',
         'array'   => 'O atributo deve ter pelo menos: itens mínimos.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => 'O :attribute deve começar com um dos seguintes: :values.',
     'not_in'               => 'O :attribute selecionado é inválido.',
     'numeric'              => ':attribute tem que ser um número.',
     'present'              => 'O campo: atributo deve estar presente.',
@@ -90,7 +90,7 @@ return [
     'uploaded'             => 'O atributo: não foi possível carregar.',
     'url'                  => 'O formato do :attribute é inválido.',
     'unique_undeleted'     => 'O :atribute deve ser único.',
-    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'non_circular'         => 'O :attribute não deve criar uma referência circular.',
 
     /*
     |--------------------------------------------------------------------------

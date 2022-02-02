@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'Fișierul de rezervă a fost șters cu succes.',
         'generated'             => 'Un nou dosar de rezervă a fost creat cu succes.',
         'file_not_found'        => 'Acest fișier de rezervă nu a putut fi găsit pe server.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Da, restaurează. Confirm suprascrierea tuturor datelor existente în baza de date. Acest lucru va deconecta și pe toți utilizatorii curenți (inclusiv pe tine).',
+        'restore_confirm'       => 'Sunteți sigur că doriți restaurarea bazei de date din fișierul :filename?'
     ],
     'purge' => [
         'error'     => 'A apărut o eroare în timpul epurării.',
@@ -20,10 +20,10 @@ return [
         'success'               => 'Înregistrările șterse au fost eliminate cu succes.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Se trimite email-ul de test...',
+        'success' => 'Email trimis!',
+        'error' => 'Email-ul nu a putut fi trimis.',
+        'additional' => 'Nu a fost furnizat nici un mesaj de eroare suplimentar. Verificați setările de email și logurile aplicației.'
     ],
     'ldap' => [
         'testing' => 'Testing LDAP Connection, Binding & Query ...',

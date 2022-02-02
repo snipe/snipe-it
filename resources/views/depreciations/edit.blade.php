@@ -16,8 +16,9 @@
         {{ trans('admin/depreciations/general.number_of_months') }}
     </label>
     <div class="col-md-7 col-sm-12 {{  (Helper::checkIfRequired($item, 'months')) ? ' required' : '' }}">
-            <input class="form-control" type="text" name="months" aria-label="months" id="months" value="{{ Request::old('months', $item->months) }}" style="width: 80px;"{!!  (Helper::checkIfRequired($item, 'months')) ? ' data-validation="required" required' : '' !!} />
-            {!! $errors->first('months', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+        <div class="col-md-7" style="padding-left:0px">
+            <input class="form-control" type="text" name="months" id="months" value="{{ Request::old('months', $item->months) }}" style="width: 80px;"{!!  (\App\Helpers\Helper::checkIfRequired($item, 'months')) ? ' data-validation="required" required' : '' !!} />
+            {!! $errors->first('months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
 </div>
 

@@ -11,8 +11,8 @@ return [
         'file_deleted'          => '备份文件已成功删除。 ',
         'generated'             => '成功地创建了一个新的备份文件。',
         'file_not_found'        => '在服务器上找不到备份文件。',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => '是的，还原它。我承认这将覆盖当前数据库中的任何现有数据。 这也将注销您现有的所有用户 (包括您)。',
+        'restore_confirm'       => '您确定要从 :filename还原您的数据库吗？'
     ],
     'purge' => [
         'error'     => '清除过程中出现了错误。 ',
@@ -20,24 +20,24 @@ return [
         'success'               => '删除记录已被成功的清除。',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => '正在发送测试邮件...',
+        'success' => '邮件已发送！',
+        'error' => '邮件无法发送。',
+        'additional' => '没有提供额外的错误信息。请检查您的邮件设置和应用日志。'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => '测试 LDAP 连接，绑定和查询 ...',
+        '500' => '500 服务器错误。请检查您的服务器日志以获取更多信息。',
+        'error' => '出错了:(',
+        'sync_success' => '基于您的设置，从LDAP服务器返回的10个用户样本：',
+        'testing_authentication' => '测试 LDAP 身份验证...',
+        'authentication_success' => '用户已成功通过LDAP认证！'
     ],
     'slack' => [
-        'sending' => 'Sending Slack test message...',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong.',
+        'sending' => '正在发送Slack测试消息...',
+        'success_pt1' => '成功！请检查 ',
+        'success_pt2' => ' 您的测试消息频道，并且一定要点击下面的“保存”来存储您的设置。',
+        '500' => '500 服务器错误。',
+        'error' => '出了错。',
     ]
 ];

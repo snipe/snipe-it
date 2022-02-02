@@ -37,7 +37,7 @@ return [
         'sending' => 'Sending Slack test message...',
         'success_pt1' => 'Success! Check the ',
         'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
+        '500' => '500 Server Fehler.',
         'error' => 'Something went wrong.',
     ]
 ];

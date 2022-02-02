@@ -11,8 +11,8 @@ return [
         'file_deleted'          => 'Den Sikkerhetskopierte filen ble slettet. ',
         'generated'             => 'En ny sikkerhetskopi fil ble opprettet.',
         'file_not_found'        => 'Den backup-filen ble ikke funnet på serveren.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Ja, kjør gjenoppretting. Jeg forstår at dette vil overskive alle eksisterende data som er i databasen. Dette vil også logge ut alle eksisterende brukere (inkludert meg selv).',
+        'restore_confirm'       => 'Er du sikker på at du vil gjenopprette databasen fra :filename?'
     ],
     'purge' => [
         'error'     => 'Det oppstod en feil under fjerning. ',
@@ -20,24 +20,24 @@ return [
         'success'               => 'Slettede rader ble fjernet.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Sender e-post...',
+        'success' => 'E-post er sendt!',
+        'error' => 'E-post kunne ikke sendes.',
+        'additional' => 'Ingen ytterligere feilmelding oppgitt. Sjekk e-postinnstillingene og loggen.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'Tester LDAP-tilkobling, binding og spørring ...',
+        '500' => '500 serverfeil. Sjekk tjenerens logger for mer informasjon.',
+        'error' => 'Noe gikk galt :(',
+        'sync_success' => 'Et utvalg på 10 brukere som returneres fra LDAP-serveren basert på innstillingene:',
+        'testing_authentication' => 'Tester LDAP-autentisering...',
+        'authentication_success' => 'Brukeren ble autentisert mot LDAP!'
     ],
     'slack' => [
-        'sending' => 'Sending Slack test message...',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong.',
+        'sending' => 'Sender testmelding på Slack...',
+        'success_pt1' => 'Suksess! Se etter meldingen i kanalen ',
+        'success_pt2' => ' , og sørg for å klikke på LAGRE nedenfor for å lagre innstillingene.',
+        '500' => '500 Tjenerfeil.',
+        'error' => 'Noe gikk galt.',
     ]
 ];

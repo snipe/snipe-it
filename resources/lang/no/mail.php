@@ -59,7 +59,7 @@ return [
     'test_mail_text' => 'Dette er en test fra Snipe-IT eiendelsadministrasjonssystem. Hvis du mottok denne meldingen fungerer e-post.',
     'the_following_item' => 'Følgende enheter har blitt sjekket inn: ',
     'low_inventory_alert' => ':count enhet er under minimumnivå for beholdning, eller vil snart nå dette nivået.|:count enheter er under minimumnivå for beholdning, eller vil snart nå dette nivået.',
-    'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
+    'assets_warrantee_alert' => 'En eiendel har garanti som utløper innenfor de neste :treshold dagene.|:count eiendeler har garanti som utløper innenfor de neste :tershold dagene.',
     'license_expiring_alert' => ':count lisens utløper de neste :threshold dagene.|:count lisenser utløper de neste :threshold dagene.',
     'to_reset' => 'Fullfør dette skjemaet for å tilbakestille ditt :web passord:',
     'type' => 'Type',

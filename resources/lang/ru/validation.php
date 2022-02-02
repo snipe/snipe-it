@@ -64,7 +64,7 @@ return [
         'string'  => ':attribute должно быть не менее :min символов.',
         'array'   => 'Атрибут: должен содержать не менее: мин.',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => ':attribute должен начинаться с одного из следующих значений: :values.',
     'not_in'               => 'Выбранный :attribute неправильный.',
     'numeric'              => ':attribute должно быть числом.',
     'present'              => 'Поле атрибута: должно присутствовать.',

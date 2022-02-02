@@ -15,29 +15,29 @@ return [
     'model_deleted'  			=> 'Acest model de active a fost șters. Trebuie să restaurați modelul înainte de a putea restaura activul.',
     'requestable'               => 'Requestable',
     'requested'				    => 'Solicitat',
-    'not_requestable'           => 'Not Requestable',
+    'not_requestable'           => 'Nu poate fi solicitat',
     'requestable_status_warning' => 'Do not change  requestable status',
     'restore'  					=> 'Restabilirea activului',
     'pending'  					=> 'In asteptare',
     'undeployable'  			=> 'Nelansabil',
     'view'  					=> 'Vizualizeaza activ',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Aveți o eroare în fișierul dvs. CSV:',
     'import_text' => '
     <p>
-    Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
+    Încărcați un CSV care conține istoricul activelor. Activele și utilizatorii TREBUIE să existe deja în sistem sau acestea vor fi ignorate. Potrivirea activelor pentru importul istoricului  se face pe baza etichetei activului. Vom încerca să găsim un utilizator care se potrivește pe baza numelui de utilizator pe care îl furnizați, și a criteriilor pe care le selectați mai jos. Dacă nu selectați niciun criteriu de mai jos, va încerca potrivirea pe baza formatul numelui de utilizator configurat în Admin &gt; Setări Generale.
     </p>
 
-    <p>Fields included in the CSV must match the headers: <strong>Asset Tag, Name, Checkout Date, Checkin Date</strong>. Any additional fields will be ignored. </p>
+    <p>Câmpurile incluse în CSV trebuie să se potrivească cu antetul: <strong>Etichetă Activ, Nume, Dată Predare, Dată Primire</strong>. Alte câmpuri suplimentare vor fi ignorate. </p>
 
-    <p>Checkin Date: blank or future checkin dates will checkout items to associated user.  Excluding the Checkin Date column will create a checkin date with todays date.</p>
+    <p>Dată Primire: datele de primire în gestiune necompletate sau viitoare vor marca produsele ca predate către utilizatorul asociat. Dacă coloana Dată Primire este exclusă, data primirii în gestiune va fi data curentă.</p>
     ',
-    'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
-    'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
-    'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'csv_import_match_f-l' => 'Încercați potrivirea utilizatorilor după prenume.nume de familie (de ex. jane.smith)',
+    'csv_import_match_initial_last' => 'Încercați potrivirea utilizatorilor după inițiala numelui și numele de familie (de ex. jsmith)',
+    'csv_import_match_first' => 'Încercați potrivirea utilizatorilor după prenume (de ex. jane)',
+    'csv_import_match_email' => 'Încercați potrivirea utilizatorilor folosind emailul ca nume utilizator',
+    'csv_import_match_username' => 'Încercați potrivirea utilizatorilor după numele de utilizator',
+    'error_messages' => 'Mesaje de eroare:',
+    'success_messages' => 'Mesaje de succes:',
+    'alert_details' => 'Vezi mai jos pentru detalii.',
+    'custom_export' => 'Export date personalizat'
 ];

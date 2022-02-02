@@ -2,7 +2,7 @@
 
 return [
     'custom_fields'		        => '사용자 정의 항목들',
-    'manage'                    => 'Manage',
+    'manage'                    => '관리',
     'field'		                => '항목',
     'about_fieldsets_title'		=> '항목세트란',
     'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',

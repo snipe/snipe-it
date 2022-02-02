@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
                         If this status has changed, please update the asset status.',
@@ -80,4 +80,4 @@ return array(
         'canceled'      => 'Checkout request successfully canceled',
     ],
 
-);
+];

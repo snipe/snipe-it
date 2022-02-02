@@ -34,10 +34,10 @@ return [
     'csv_import_match_f-l' => 'Try to match users by firstname.lastname (jane.smith) format',
     'csv_import_match_initial_last' => 'Try to match users by first initial last name (jsmith) format',
     'csv_import_match_first' => 'Try to match users by first name (jane) format',
-    'csv_import_match_email' => 'Try to match users by email as username',
-    'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
+    'csv_import_match_email' => 'Spróbuj dopasować użytkowników po adresie e-mail',
+    'csv_import_match_username' => 'Spróbuj dopasować użytkowników po nazwie użytkownika',
+    'error_messages' => 'Komunikat błędu:',
     'success_messages' => 'Success messages:',
     'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'custom_export' => 'Eksport niestandardowy'
 ];

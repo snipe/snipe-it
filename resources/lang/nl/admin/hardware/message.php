@@ -5,7 +5,7 @@ return [
     'undeployable' 		=> '<strong>Waarschuwing: </strong> Dit bestand is gemarkeerd als niet-uitgeefbaar.
                         Als deze status is veranderd, update dan de asset status.',
     'does_not_exist' 	=> 'Dit asset bestaat niet.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Die asset bestaat niet of is niet aanvraagbaar.',
     'assoc_users'	 	=> 'Dit asset is momenteel toegewezen aan een gebruiker en kan niet worden verwijderd. Controleer het asset eerst en probeer het opnieuw. ',
 
     'create' => [

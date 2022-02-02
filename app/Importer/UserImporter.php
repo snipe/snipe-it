@@ -76,6 +76,7 @@ class UserImporter extends ItemImporter
         }
 
 
+
         // This needs to be applied after the update logic, otherwise we'll overwrite user passwords
         // Issue #5408
         $this->item['password'] = bcrypt($this->tempPassword);
@@ -145,7 +146,6 @@ class UserImporter extends ItemImporter
         return null;
     }
     
-
     public function sendWelcome($send = true)
     {
         $this->send_welcome = $send;

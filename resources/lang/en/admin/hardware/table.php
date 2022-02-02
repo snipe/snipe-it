@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'asset_tag'   	=> 'Asset Tag',
     'asset_model'       => 'Model',
@@ -27,4 +27,4 @@ return array(
     'requested_date' => 'Requested Date',
     'changed'       => 'Changed',
     'icon' => 'Icon',
-);
+];

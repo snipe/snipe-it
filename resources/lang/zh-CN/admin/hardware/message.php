@@ -4,7 +4,7 @@ return [
 
     'undeployable' 		=> '<strong>警告: </strong>该资产目前已经被标记为不可被分配，如果该资产状态已经改变，请刷新。',
     'does_not_exist' 	=> '资产不存在',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => '该资产不存在或不可申领。',
     'assoc_users'	 	=> '这个资产目前已经借给某个用户，不能被删除，请检查资产信息，然后再尝试删除。',
 
     'create' => [

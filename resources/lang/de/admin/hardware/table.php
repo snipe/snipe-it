@@ -22,9 +22,9 @@ return [
     'image'		    => 'Geräte-Bild',
     'days_without_acceptance' => 'Tage ohne Akzeptierung',
     'monthly_depreciation' => 'Monatliche Abschreibung',
-    'assigned_to'    => 'Assigned To',
+    'assigned_to'    => 'Zugewiesen an',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'Requested Date',
-    'changed'       => 'Changed',
-    'icon' => 'Icon',
+    'changed'       => 'Geändert',
+    'icon' => 'Symbol',
 ];

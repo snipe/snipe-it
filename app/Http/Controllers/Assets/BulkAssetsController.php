@@ -6,6 +6,7 @@ use App\Models\Actionlog;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
 use Illuminate\Http\Request;

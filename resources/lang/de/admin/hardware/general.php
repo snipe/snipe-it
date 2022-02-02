@@ -15,13 +15,13 @@ return [
     'model_deleted'  			=> 'Dieses Modell für Assets wurde gelöscht. Sie müssen das Modell wiederherstellen, bevor Sie das Asset wiederherstellen können.',
     'requestable'               => 'Anforderbar',
     'requested'				    => 'Angefordert',
-    'not_requestable'           => 'Not Requestable',
+    'not_requestable'           => 'Kann nicht angefordert werden',
     'requestable_status_warning' => 'Do not change  requestable status',
     'restore'  					=> 'Asset wiederherstellen',
     'pending'  					=> 'Ausstehend',
     'undeployable'  			=> 'Nicht einsetzbar',
     'view'  					=> 'Asset ansehen',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'Es gibt einen Fehler in der CSV-Datei:',
     'import_text' => '
     <p>
     Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.
@@ -36,8 +36,8 @@ return [
     'csv_import_match_first' => 'Try to match users by first name (jane) format',
     'csv_import_match_email' => 'Try to match users by email as username',
     'csv_import_match_username' => 'Try to match users by username',
-    'error_messages' => 'Error messages:',
-    'success_messages' => 'Success messages:',
-    'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'error_messages' => 'Fehlermeldungen:',
+    'success_messages' => 'Erfolgsmeldungen:',
+    'alert_details' => 'Siehe unten für Details.',
+    'custom_export' => 'Benutzerdefinierter Export'
 ];

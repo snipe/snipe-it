@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'ad'				        => 'Active Directory',
     'ad_domain'				    => 'Active Directory domain',
     'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
@@ -17,7 +17,7 @@ return array(
     'alerts_enabled'			=> 'Email Alerts Enabled',
     'alert_interval'			=> 'Expiring Alerts Threshold (in days)',
     'alert_inv_threshold'		=> 'Inventory Alert Threshold',
-    'allow_user_skin'           => 'Allow user skin',
+    'allow_user_skin'           => 'Allow User Skin',
     'allow_user_skin_help_text' => 'Checking this box will allow a user to override the UI skin with a different one.',
     'asset_ids'					=> 'Asset IDs',
     'audit_interval'            => 'Audit Interval',
@@ -174,7 +174,7 @@ return array(
     'saml_idp_metadata_help'    => 'You can specify the IdP metadata using a URL or XML file.',
     'saml_attr_mapping_username' => 'Attribute Mapping - Username',
     'saml_attr_mapping_username_help' => 'NameID will be used if attribute mapping is unspecified or invalid.',
-    'saml_forcelogin_label'     => 'SAML Default Login',
+    'saml_forcelogin_label'     => 'SAML Force Login',
     'saml_forcelogin'           => 'Make SAML the primary login',
     'saml_forcelogin_help'      => 'You can use \'/login?nosaml\' to get to the normal login page.',
     'saml_slo_label'            => 'SAML Single Log Out',
@@ -318,4 +318,4 @@ return array(
     'setup_migration_create_user' => 'Next: Create User',
     'ldap_settings_link' => 'LDAP Settings Page',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integration',
-);
+];

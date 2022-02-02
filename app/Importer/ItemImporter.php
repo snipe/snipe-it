@@ -288,8 +288,7 @@ class ItemImporter extends Importer
 
             return $category->id;
         }
-
-        $this->logError($category, 'Category "'.$asset_category.'"');
+        $this->logError($category, 'Category "'. $asset_category. '"');
 
         return null;
     }
@@ -380,7 +379,6 @@ class ItemImporter extends Importer
         }
 
         $this->logError($status, 'Status "'.$asset_statuslabel_name.'"');
-
         return null;
     }
 

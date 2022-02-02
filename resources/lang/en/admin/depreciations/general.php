@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'about_asset_depreciations'  			=> 'About Asset Depreciations',
     'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
     'asset_depreciations'  					=> 'Asset Depreciations',
@@ -13,4 +13,4 @@ return array(
     'no_depreciations_warning'               => '<strong>Warning: </strong>
                       You do not currently have any depreciations set up.
                       Please set up at least one depreciation to view the depreciation report.',
-);
+];

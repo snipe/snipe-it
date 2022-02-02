@@ -6,6 +6,6 @@ return [
     'months'   => 'Måneder',
     'term'   => 'Avskrivningsperiode',
     'title'      => 'Navn ',
-    'depreciation_min' => 'Floor Value',
+    'depreciation_min' => 'Nedre verdi',
 
 ];

@@ -2,6 +2,6 @@
 
 return [
     'select_company' => 'Selectați Companie',
-    'about_companies' => 'About Companies',
-    'about_companies_description' => '        You can use companies as a simple informative field, or you can use them to restrict asset visibility and availability to users with a specific company by enabling Full Company Support in your Admin Settings.',
+    'about_companies' => 'Despre companii',
+    'about_companies_description' => '        Poți folosi câmpul "Companie" ca un câmp simplu de informare sau le puteți folosi pentru a restricționa vizibilitatea și disponibilitatea activelor la utilizatorii unei anumite companii prin activarea opțiunii "Suport complet companii" din setările administrative.',
 ];

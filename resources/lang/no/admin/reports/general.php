@@ -2,9 +2,9 @@
 
 return [
     'info'   => 'Velg de alternativene du ønsker skal inngå i rapporten.',
-    'deleted_user' => 'Deleted user',
-    'send_reminder' => 'Send reminder',
-    'reminder_sent' => 'Reminder sent',
-    'acceptance_deleted' => 'Acceptance request deleted',
-    'acceptance_request' => 'Acceptance request'
+    'deleted_user' => 'Slettet bruker',
+    'send_reminder' => 'Send påminnelse',
+    'reminder_sent' => 'Påminnelse sendt',
+    'acceptance_deleted' => 'Aksepteringsforespørsel slettet',
+    'acceptance_request' => 'Akseptanseforespørsel'
 ];

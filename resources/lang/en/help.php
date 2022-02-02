@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -31,4 +31,4 @@ return array(
 
     'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
 
-);
+];

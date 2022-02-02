@@ -3,11 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\Department;
-use App\Models\Ldap;
-use App\Models\Location;
-use App\Models\Setting;
-use App\Models\User;
 use Illuminate\Console\Command;
+use App\Models\Setting;
+use App\Models\Ldap;
+use App\Models\User;
+use App\Models\Location;
 use Log;
 
 class LdapSync extends Command
@@ -188,6 +188,7 @@ class LdapSync extends Command
                 $department = Department::firstOrCreate([
                     'name' => $item['department'],
                 ]);
+
 
                 $user = User::where('username', $item['username'])->first();
                 if ($user) {

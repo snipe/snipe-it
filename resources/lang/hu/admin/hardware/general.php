@@ -21,7 +21,7 @@ return [
     'pending'  					=> 'Függőben',
     'undeployable'  			=> 'Nem telepíthető',
     'view'  					=> 'Eszköz megtekintése',
-    'csv_error' => 'You have an error in your CSV file:',
+    'csv_error' => 'A CSV állomány hibás:',
     'import_text' => '
     <p>
     Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user\'s name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &gt; General Settings.

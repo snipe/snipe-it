@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'does_not_exist' => 'Company does not exist.',
     'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
     'create' => [
@@ -16,4 +16,4 @@ return array(
         'error'   => 'There was an issue deleting the company. Please try again.',
         'success' => 'The Company was deleted successfully.',
     ],
-);
+];

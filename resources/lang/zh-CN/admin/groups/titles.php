@@ -10,7 +10,7 @@ return [
     'group_admin' 	 		=> '分组管理员',
     'allow' 	 			=> '允许',
     'deny' 	 				=> '拒绝',
-    'permission'            => 'Permission',
-    'grant'                 => 'Grant',
-    'no_permissions'        => 'This group has no permissions.'
+    'permission'            => '权限',
+    'grant'                 => '授权',
+    'no_permissions'        => '此组没有权限。'
 ];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'activated_help_text' => 'This user can login',
     'activated_disabled_help_text' => 'You cannot edit activation status for your own account.',
     'assets_user'       => 'Assets assigned to :name',
@@ -22,8 +22,8 @@ return array(
     'view_user'         => 'View User :name',
     'usercsv'           => 'CSV file',
     'two_factor_admin_optin_help' => 'Your current admin settings allow selective enforcement of two-factor authentication.  ',
-    'two_factor_enrolled' => '2FA Device Enrolled',
-    'two_factor_active'   => '2FA Active',
+    'two_factor_enrolled' => '2FA Device Enrolled ',
+    'two_factor_active'   => '2FA Active ',
     'user_deactivated'  => 'User is de-activated',
     'activation_status_warning' => 'Do not change activation status',
     'group_memberships_helpblock' => 'Only superadmins may edit group memberships.',
@@ -34,4 +34,4 @@ return array(
     'warning_deletion_information' => 'You are about to delete the :count user(s) listed below. Super admin names are highlighted in red.',
     'update_user_asssets_status' => 'Update all assets for these users to this status',
     'checkin_user_properties' => 'Check in all properties associated with these users',
-);
+];

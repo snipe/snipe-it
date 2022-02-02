@@ -415,6 +415,7 @@ class License extends Depreciable
                    ->count();
     }
 
+
     /**
      * Return the number of seats for this asset
      *
@@ -595,6 +596,7 @@ class License extends Depreciable
         return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
     }
 
+
     /**
      * Gets the next available free seat - used by
      * the API to populate next_seat
@@ -638,6 +640,8 @@ class License extends Depreciable
      */
     public static function getExpiringLicenses($days = 60)
     {
+        $days = (is_null($days)) ? 60 : $days;
+
         return self::whereNotNull('expiration_date')
         ->whereNull('deleted_at')
         ->whereRaw(DB::raw('DATE_SUB(`expiration_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) '))

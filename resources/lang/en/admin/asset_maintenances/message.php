@@ -1,6 +1,6 @@
 <?php
 
-    return array(
+    return [
         'not_found'                    => 'Asset Maintenance you were looking for was not found!',
         'delete'                       => [
             'confirm' => 'Are you sure you wish to delete this asset maintenance?',
@@ -18,4 +18,4 @@
         'asset_maintenance_incomplete' => 'Not Completed Yet',
         'warranty'                     => 'Warranty',
         'not_warranty'                 => 'Not Warranty',
-    );
+    ];

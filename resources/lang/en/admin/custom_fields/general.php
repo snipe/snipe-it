@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'custom_fields'		        => 'Custom Fields',
     'manage'                    => 'Manage',
     'field'		                => 'Field',
@@ -42,4 +42,4 @@ return array(
     'reorder' => 'Reorder',
     'db_field' => 'DB Field',
     'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
-);
+];
