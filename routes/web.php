@@ -162,9 +162,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
     Route::get('msteams', [SettingsController::class, 'getMSTeams'])->name('settings.msteams.index');
     Route::post('msteams', [SettingsController::class, 'postMSTeams'])->name('settings.msteams.save');
 
-
-    Route::get('msteams', [SettingsController::class, 'getDiscord'])->name('settings.discord.index');
-    Route::post('msteams', [SettingsController::class, 'postDiscord'])->name('settings.discord.save');
+    Route::get('discord', [SettingsController::class, 'getDiscord'])->name('settings.discord.index');
+    Route::post('discord', [SettingsController::class, 'postDiscord'])->name('settings.discord.save');
 
     Route::get('asset_tags', [SettingsController::class, 'getAssetTags'])->name('settings.asset_tags.index');
     Route::post('asset_tags', [SettingsController::class, 'postAssetTags'])->name('settings.asset_tags.save');
