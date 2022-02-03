@@ -100,7 +100,7 @@ class CheckinAssetNotification extends Notification
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
-        $note = $this->note;
+        $note = $this->note ?: 'No note provided.';
         $location = ($item->location) ? $item->location->name : '';
 
         return MicrosoftTeamsMessage::create()

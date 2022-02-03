@@ -136,40 +136,49 @@ class CheckoutAssetNotification extends Notification
     }
 
 
-public function toMicrosoftTeams($notifiable)
-{
-        $expectedCheckin = 'None';
-        $target = $this->target;
-        $admin = $this->admin;
-        $item = $this->item;
-        $note = $this->note;
+    public function toMicrosoftTeams($notifiable)
+    {
+            $expectedCheckin = 'None';
+            $target = $this->target;
+            $admin = $this->admin;
+            $item = $this->item;
+            $note = $this->note;
 
-        if (($this->expected_checkin) && ($this->expected_checkin != '')) {
-            $expectedCheckin = $this->expected_checkin;
-        }
+            if (($this->expected_checkin) && ($this->expected_checkin != '')) {
+                $expectedCheckin = $this->expected_checkin;
+            }
 
-    return MicrosoftTeamsMessage::create()
-        ->to(Setting::getSettings()->msteams_endpoint)
-        ->type('success')
-        ->addStartGroupToSection($sectionId = 'action_msteams')
-        ->title('&#x2B06;&#x1F4BB; Asset Checked Out: <a href=' . $item->present()->viewUrl() . '>' . $item->present()->fullName() . '</a>', $params = ['section' => 'action_msteams'])
-        ->content($note, $params = ['section' => 'action_msteams'])
-        ->fact('To','<a href='.$target->present()->viewUrl().'>'.$target->present()->fullName().'</a>', $sectionId = 'action_msteams')
-        ->fact('By', '<a href='.$admin->present()->viewUrl().'>'.$admin->present()->fullName().'</a>', $sectionId = 'action_msteams')
-        ->fact('Expected Checkin', $expectedCheckin, $sectionId = 'action_msteams')
-        ->button('View in Browser', ''.$target->present()->viewUrl().'', $params = ['section' => 'action_msteams']);
-}
+        return MicrosoftTeamsMessage::create()
+            ->to(Setting::getSettings()->msteams_endpoint)
+            ->type('success')
+            ->addStartGroupToSection($sectionId = 'action_msteams')
+            ->title('&#x2B06;&#x1F4BB; Asset Checked Out: <a href=' . $item->present()->viewUrl() . '>' . $item->present()->fullName() . '</a>', $params = ['section' => 'action_msteams'])
+            ->content($note, $params = ['section' => 'action_msteams'])
+            ->fact('To','<a href='.$target->present()->viewUrl().'>'.$target->present()->fullName().'</a>', $sectionId = 'action_msteams')
+            ->fact('By', '<a href='.$admin->present()->viewUrl().'>'.$admin->present()->fullName().'</a>', $sectionId = 'action_msteams')
+            ->fact('Expected Checkin', $expectedCheckin, $sectionId = 'action_msteams')
+            ->button('View in Browser', ''.$target->present()->viewUrl().'', $params = ['section' => 'action_msteams']);
+    }
 
-public function toWebhook($notifiable)
-{
-    return WebhookMessage::create()
-    ->data([
-        'body' => [
-            'content' => 'testing testing 1 2 3'
-        ]
-    ])
-    ->header('Content-Type', 'application/json');
-}
+    public function toWebhook($notifiable)
+    {
+        return WebhookMessage::create()
+        ->data([
+            
+                'content' => 'Asset Checkout',
+                'embeds' => [
+                    'title' => 'Testing',
+                    'url' => 'https://localhost:443',
+                    'fields' => [
+                        'name' => 'checkoutdate',
+                        'value' => '1/2/2023',
+                        'inline' => true
+                    ]
+                ]
+            
+        ])
+        ->header('Content-Type', 'application/json');
+    }
 
 
 
