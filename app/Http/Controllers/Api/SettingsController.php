@@ -182,7 +182,7 @@ class SettingsController extends Controller
 
     public function msteamstest(Request $request)
     {
-
+       
         $msteams = new Client([
             'base_url' => e($request->input('msteams_endpoint')),
             'defaults' => [
@@ -210,7 +210,6 @@ class SettingsController extends Controller
     
     public function discordtest(Request $request)
     {
-
         $discord = new Client([
                 'headers' => ['Content-Type' => 'application/json'],
                 
@@ -218,12 +217,13 @@ class SettingsController extends Controller
 
         $payload = json_encode(
             [
-                'content'      => trans('general.msteams_test_msg')
+                'content'      => trans('general.discord_test_msg')
             ]
         );
 
         try {
-            $discord->post('https://discord.com/api/webhooks/938487194002260029/5u51Xd0R9gSLLmS6qemqnwGUYQgJnvBbLFW4_MnuZjhYg6ZSyjU3i72hi9mXPikA83TY', ['body' => $payload]);
+            
+            $discord->post($request->input('discord_endpoint'), ['body' => $payload]);
             return response()->json(['message' => 'Success'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Oops! Please check the channel name and webhook endpoint URL. Discord responded with: ' . $e->getMessage()], 400);

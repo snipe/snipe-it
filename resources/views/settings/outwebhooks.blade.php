@@ -342,6 +342,8 @@
         fieldcheck(); //run our field-checker once on page-load to set the initial state correctly.
 
         $('input:text').keyup(fieldcheck); // if *any* text field changes, we recalculate button states
+       
+       
         $("#slacktest").click(function() {
 
             $("#slacktestrow").removeClass('text-success');
@@ -440,7 +442,7 @@
 
             });
             return false;
-});
+        });
 
     //ms teams
          $("#msteamstest").click(function() {
@@ -517,32 +519,21 @@
             return false;
         });
 
-    //discord
+    //discord 
         $("#discordtest").click(function() {
-
+           
             $("#discordtestrow").removeClass('text-success');
             $("#discordtestrow").removeClass('text-danger');
             $("#discordteststatus").removeClass('text-danger');
             $("#discordteststatus").html('');
             $("#discordtesticon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/message.discord.sending') }}');
             $.ajax({
-                
-                // If I comment this back in, I always get a success (200) message
-                // Without it, I get 
-                    //  beforeSend: function (xhr) { 
-                    //  xhr.setRequestHeader("Content-Type","application/json");
-                    // xhr.setRequestHeader("Accept","text/json");
-                    // },
-
-                
-                 url: '{{ route('api.settings.discordtest') }}',
-              // url: 'https://discord.com/api/webhooks/938487194002260029/5u51Xd0R9gSLLmS6qemqnwGUYQgJnvBbLFW4_MnuZjhYg6ZSyjU3i72hi9mXPikA83TY/slack',
+               
+               url: '{{ route('api.settings.discordtest') }}',
                 type: 'POST',
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
-                //    'Accept': 'application/json',
-                   'Content-Type': 'application/json',
                 },
                 data: {
                     'discord_endpoint': $('#discord_endpoint').val(),
@@ -551,17 +542,13 @@
 
                 dataType: 'json',
 
-                accepts: {
-                    text: "application/json"
-                },
-
                 success: function (data) {
                     $('#save_discord').removeAttr('disabled');
                     $("#discordtesticon").html('');
                     $("#discordtestrow").addClass('text-success');
                     $("#discordteststatus").addClass('text-success');
-                    //TODO: This is a bit hacky...Might need some cleanup
-                    $("#discordteststatus").html('<i class="fas fa-check text-success"></i> {{ trans('admin/settings/message.discord.success_pt1') }} ' + $('#discord_channel').val() + '{{ trans('admin/settings/message.discord.success_pt2') }}');
+                
+                    $("#discordteststatus").html('<i class="fas fa-check text-success"></i> {{ trans('admin/settings/message.discord.success_pt1') }} ' + '{{ trans('admin/settings/message.discord.success_pt2') }}');
                 },
 
                 error: function (data) {
@@ -569,10 +556,9 @@
 
                     if (data.responseJSON) {
                         var errors = data.responseJSON.errors;
-                        var error_msg = data.responseJSON.message;
+                      
                     } else {
                         var errors;
-                        var error_msg = trans('admin/settings/message.discord.error');
                     }
 
                     var error_text = '';
@@ -615,7 +601,7 @@
 
             });
             return false;
-});
+        });
         
     </script>
 
