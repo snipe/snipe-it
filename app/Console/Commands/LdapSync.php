@@ -170,7 +170,6 @@ class LdapSync extends Command
         $pass = bcrypt($tmp_pass);
 
         for ($i = 0; $i < $results["count"]; $i++) {
-            if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE") {
 
                 $item = array();
                 $item["username"] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : "";
@@ -192,6 +191,11 @@ class LdapSync extends Command
 
 
                 $user = User::where('username', $item["username"])->first();
+
+                // Default to the user not being able to login. We address overriding a little further down
+                // with an an AD and then LDAP check that overrides
+                $user->activated = 0;
+
                 if ($user) {
                     // Updating an existing user.
                     $item["createorupdate"] = 'updated';
@@ -245,10 +249,9 @@ class LdapSync extends Command
                     '1049088',// 0x100200 NORMAL_ACCOUNT, NOT_DELEGATED
                   ];
                   $user->activated = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
-                }
 
                 // If we're not using AD, and there isn't an activated flag set, activate all users
-                elseif (empty($ldap_result_active_flag)) {
+                } elseif ((empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE")) {
                   $user->activated = 1;
                 }
 
@@ -280,7 +283,7 @@ class LdapSync extends Command
                 }
 
                 array_push($summary, $item);
-            }
+            
 
         }
 
