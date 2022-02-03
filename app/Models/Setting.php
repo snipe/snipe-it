@@ -295,6 +295,19 @@ class Setting extends Model
         return self::getSettings()->discord_endpoint;
     }
 
+            /**
+     * The url for msteams notifications.
+     *  Used by Notifiable trait.
+     *
+     * @return string
+     */
+    public function routeNotificationForWebhook(): string
+    {
+        // At this point the endpoint is the same for everything.
+        //  In the future this may want to be adapted for individual notifications.
+        return self::getSettings()->discord_endpoint;
+    }
+
 
     /**
      * Get the mail reply to address from configuration.

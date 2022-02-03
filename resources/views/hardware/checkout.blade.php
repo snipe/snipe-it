@@ -123,19 +123,19 @@
                                         @endif
 
                                         @if ($snipeSettings->slack_endpoint!='')
-<<<<<<< HEAD
                                             <i class="fab fa-slack" aria-hidden="true"></i>
                                             {{ trans('general.slack_msg_note')}}
-=======
-                                            <i class="fa fa-slack" aria-hidden="true"></i>
-                                            A slack message will be sent
                                             <br>
->>>>>>> 5691ed735 (notification and notice of integration on checkout page)
                                         @endif
 
                                         @if ($snipeSettings->msteams_endpoint!='')
                                             <i class="fa fa-windows" aria-hidden="true"></i>
-                                            A Microsoft Teams message will be sent
+                                            {{ trans('general.msteams_msg_note')}}
+                                            <br>
+                                        @endif
+                                        @if ($snipeSettings->msteams_endpoint!='')
+                                            <i class="fa fa-windows" aria-hidden="true"></i>
+                                            {{ trans('general.discord_msg_note')}}
                                             <br>
                                         @endif
 

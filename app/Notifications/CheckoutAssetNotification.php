@@ -12,8 +12,11 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
-use NotificationChannels\Discord\DiscordChannel;
-use NotificationChannels\Discord\DiscordMessage;
+//use NotificationChannels\Discord\DiscordChannel;
+//use NotificationChannels\Discord\DiscordMessage;
+use NotificationChannels\Webhook\WebhookChannel;
+use NotificationChannels\Webhook\WebhookMessage;
+
 
 class CheckoutAssetNotification extends Notification
 {
@@ -71,7 +74,7 @@ class CheckoutAssetNotification extends Notification
         }
         if (Setting::getSettings()->discord_endpoint != '') {
             \Log::debug('use discord');
-            $notifyBy[3] = DiscordChannel::class;
+            $notifyBy[3] = WebhookChannel::class;
         }
 
         /**
@@ -156,6 +159,19 @@ public function toMicrosoftTeams($notifiable)
         ->fact('Expected Checkin', $expectedCheckin, $sectionId = 'action_msteams')
         ->button('View in Browser', ''.$target->present()->viewUrl().'', $params = ['section' => 'action_msteams']);
 }
+
+public function toWebhook($notifiable)
+{
+    return WebhookMessage::create()
+    ->data([
+        'payload' => [
+            'content' => 'testing testing 1 2 3'
+        ]
+    ])
+    ->header('Content-Type', 'application/json');
+}
+
+
 
 //<a href='.$item->present()->viewUrl().'>'.$item->present()->name).'</a>
 
