@@ -164,7 +164,7 @@ public function toWebhook($notifiable)
 {
     return WebhookMessage::create()
     ->data([
-        'payload' => [
+        'body' => [
             'content' => 'testing testing 1 2 3'
         ]
     ])
