@@ -49,7 +49,7 @@ class LdapSync extends Command
         $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
 
-        $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
+        $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
         $ldap_result_phone = Setting::getSettings()->ldap_phone_field;
@@ -192,10 +192,6 @@ class LdapSync extends Command
 
                 $user = User::where('username', $item["username"])->first();
 
-                // Default to the user not being able to login. We address overriding a little further down
-                // with an an AD and then LDAP check that overrides
-                $user->activated = 0;
-
                 if ($user) {
                     // Updating an existing user.
                     $item["createorupdate"] = 'updated';
@@ -203,7 +199,7 @@ class LdapSync extends Command
                     // Creating a new user.
                     $user = new User;
                     $user->password = $pass;
-                    $user->activated = 0;
+                    $user->activated = 1; // newly created users can log in by default, unless AD's UAC is in use, or an active flag is set (below)
                     $item["createorupdate"] = 'created';
                 }
 
@@ -217,8 +213,14 @@ class LdapSync extends Command
                 $user->country = $item["country"];
                 $user->department_id = $department->id;
 
-                // Sync activated state for Active Directory.
-                if ( array_key_exists('useraccountcontrol', $results[$i]) ) {
+                \Log::error("ldap_result_active_flag: $ldap_result_active_flag, value: ".@$results[$i][$ldap_result_active_flag][0]);
+
+                if ( !empty($ldap_result_active_flag)) { // IF we have an 'active' flag set....
+                    $user->activated = @$results[$i][$ldap_result_active_flag][0] ? 1 : 0; // ....then anything truthy will activate the user, period. Anything falsey will deactivate them.
+                } elseif (array_key_exists('useraccountcontrol', $results[$i]) ) {
+                    // ....otherwise, (ie if no 'active' LDAP flag is defined), IF the UAC setting exists, 
+                    // ....then use the UAC setting on the account to determine can-log-in vs. cannot-log-in
+
                     /* The following is _probably_ the correct logic, but we can't use it because
                        some users may have been dependent upon the previous behavior, and this
                        could cause additional access to be available to users they don't want
@@ -250,10 +252,8 @@ class LdapSync extends Command
                   ];
                   $user->activated = ( in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts) ) ? 1 : 0;
 
-                // If we're not using AD, and there isn't an activated flag set, activate all users
-                } elseif ((empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE")) {
-                  $user->activated = 1;
-                }
+                } /* implied 'else' here - leave the $user->activated flag alone. Newly-created accounts will be active.
+                   already-existing accounts will be however the administrator has set them */
 
                 if ($item['ldap_location_override'] == true) {
                     $user->location_id = $item['location_id'];
