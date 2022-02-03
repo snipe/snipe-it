@@ -57,4 +57,8 @@ return [
         'webhook_url' => env('TEAMS_WEBHOOK_URL'),
     ],
 
+    'discord' => [
+        'token' => env('DISCORD_API_TOKEN'),
+    ],
+
 ];

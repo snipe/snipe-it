@@ -12,6 +12,8 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
+use NotificationChannels\Discord\DiscordChannel;
+use NotificationChannels\Discord\DiscordMessage;
 
 class CheckoutAssetNotification extends Notification
 {
@@ -55,7 +57,7 @@ class CheckoutAssetNotification extends Notification
      */
     public function via()
     {
-    
+        //0= slack, 1=mail, 2=teams, 3=discord
         $notifyBy = [];
 
         if ((Setting::getSettings()) && (Setting::getSettings()->slack_endpoint != '')) {
@@ -67,7 +69,10 @@ class CheckoutAssetNotification extends Notification
             \Log::debug('use msteams');
             $notifyBy[2] = MicrosoftTeamsChannel::class;
         }
-
+        if (Setting::getSettings()->discord_endpoint != '') {
+            \Log::debug('use discord');
+            $notifyBy[3] = DiscordChannel::class;
+        }
 
         /**
          * Only send notifications to users that have email addresses
@@ -127,8 +132,6 @@ class CheckoutAssetNotification extends Notification
             });
     }
 
-<<<<<<< HEAD
-=======
 
 public function toMicrosoftTeams($notifiable)
 {
@@ -156,7 +159,6 @@ public function toMicrosoftTeams($notifiable)
 
 //<a href='.$item->present()->viewUrl().'>'.$item->present()->name).'</a>
 
->>>>>>> ec134c091 (undo ad hoc notification in checkoutassetnotification)
     /**
      * Get the mail representation of the notification.
      *
