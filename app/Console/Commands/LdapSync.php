@@ -213,10 +213,23 @@ class LdapSync extends Command
                 $user->country = $item["country"];
                 $user->department_id = $department->id;
 
-                \Log::error("ldap_result_active_flag: $ldap_result_active_flag, value: ".@$results[$i][$ldap_result_active_flag][0]);
+                if(@$results[$i][$ldap_result_active_flag][0]) {
+                    \Log::error("ldap_result_active_flag: $ldap_result_active_flag, value: ".@$results[$i][$ldap_result_active_flag][0]);
+                }
 
                 if ( !empty($ldap_result_active_flag)) { // IF we have an 'active' flag set....
-                    $user->activated = @$results[$i][$ldap_result_active_flag][0] ? 1 : 0; // ....then anything truthy will activate the user, period. Anything falsey will deactivate them.
+                    //\Log::error("WE HAVE AN ACTIVE FLAG! We are going to set activated TO: ".(@$results[$i][$ldap_result_active_flag][0] ? 1 : 0));
+                    // $parsed_active_flag = filter_var(@$results[$i][$ldap_result_active_flag][0], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+                    // $user->activated = $parsed_active_flag ?? true; // ....then anything truthy will activate the user, period. Anything falsey will deactivate them.
+                                                                    //     (and anything even weirder than that will process as 'true' I guess?)
+                    $raw_value = @$results[$i][$ldap_result_active_flag][0];
+                    $filter_var = filter_var($raw_value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+                    $boolean_cast = (bool)$raw_value;
+                    if(!is_null($raw_value)) {
+                        \Log::error("We have an active flag! filter_var for '$raw_value' says: ".(is_null($filter_var) ? 'NULL': ($filter_var ? 'true' : 'false'))." but boolean cast says: ".($boolean_cast ? 'true': 'false')." And string compare is: ".($raw_value > 0 ? 'true' : 'false'));
+                    }
+                    $user->activated = $filter_var ?? $boolean_cast; // this seems clever but it does pretty much exactly what I want. (I think?) No, it doesn't.
+
                 } elseif (array_key_exists('useraccountcontrol', $results[$i]) ) {
                     // ....otherwise, (ie if no 'active' LDAP flag is defined), IF the UAC setting exists, 
                     // ....then use the UAC setting on the account to determine can-log-in vs. cannot-log-in
@@ -272,6 +285,7 @@ class LdapSync extends Command
                 $errors = '';
 
                 if ($user->save()) {
+                    //\Log::info("We have done a save, and it was succesful! Results: ".print_r($user,true));
                     $item["note"] = $item["createorupdate"];
                     $item["status"]='success';
                 } else {
