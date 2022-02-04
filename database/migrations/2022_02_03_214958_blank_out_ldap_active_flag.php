@@ -14,11 +14,12 @@ class BlankOutLdapActiveFlag extends Migration
      */
     public function up()
     {
-        $s = Setting::getSettings();
-        $s->ldap_active_flag = '';
-        $s->save();
+        if ($s = Setting::getSettings()) {
+            $s->ldap_active_flag = '';
+            $s->save();
+        }
     }
-
+    
     /**
      * Reverse the migrations.
      *
