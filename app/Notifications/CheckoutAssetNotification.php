@@ -162,19 +162,18 @@ class CheckoutAssetNotification extends Notification
 
     public function toWebhook($notifiable)
     {
+         $expectedCheckin = 'None';
+            $target = $this->target;
+            $admin = $this->admin;
+            $item = $this->item;
+            $note = $this->note;
+
         return WebhookMessage::create()
         ->data([
-            
-                'content' => 'Asset Checkout',
-                'embeds' => array(
-                    'title' => 'Testing',
-                    /*'url' => 'https://localhost:443',
-                    'fields' => array(
-                        'name' => 'checkoutdate',
-                        'value' => '1/2/2023',
-                        'inline' => true
-                    )*/
-                )
+                'content' => ':arrow_up: :computer:  **Asset Checked Out**
+            *To:* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
+            *By:* ['.$admin->present()->fullName().']('.$admin->present()->viewUrl().')
+            [View in Browser]('.$target->present()->viewUrl().')',
             
         ])
         ->header('Content-Type', 'application/json');
