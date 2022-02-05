@@ -11,6 +11,8 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\Webhook\WebhookChannel;
+use NotificationChannels\Webhook\WebhookMessage;
 
 class CheckinAssetNotification extends Notification
 {
@@ -54,6 +56,10 @@ class CheckinAssetNotification extends Notification
         if (Setting::getSettings()->msteams_endpoint != '') {
             \Log::debug('use msteams');
             $notifyBy[2] = MicrosoftTeamsChannel::class;
+        }
+        if (Setting::getSettings()->discord_endpoint != '') {
+            \Log::debug('use discord');
+            $notifyBy[3] = WebhookChannel::class;
         }
 
 
@@ -115,6 +121,25 @@ class CheckinAssetNotification extends Notification
             ->button('View in Browser', '' . $target->present()->viewUrl() . '', $params = ['section' => 'action_msteams']);
     }
 
+    
+    public function toWebhook($notifiable)
+    {
+         $expectedCheckin = 'None';
+            $target = $this->target;
+            $admin = $this->admin;
+            $item = $this->item;
+            $note = $this->note;
+
+        return WebhookMessage::create()
+        ->data([
+                'content' => ':arrow_down: :computer:  **Asset Checked In**
+            *From:* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
+            *Status:* '.$item->assetstatus->name.'
+            [View in Browser]('.$target->present()->viewUrl().')',
+            
+        ])
+        ->header('Content-Type', 'application/json');
+    }
 
     /**
      * Get the mail representation of the notification.
