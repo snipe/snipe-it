@@ -166,15 +166,15 @@ class CheckoutAssetNotification extends Notification
         ->data([
             
                 'content' => 'Asset Checkout',
-                'embeds' => [
+                'embeds' => array(
                     'title' => 'Testing',
-                    'url' => 'https://localhost:443',
-                    'fields' => [
+                    /*'url' => 'https://localhost:443',
+                    'fields' => array(
                         'name' => 'checkoutdate',
                         'value' => '1/2/2023',
                         'inline' => true
-                    ]
-                ]
+                    )*/
+                )
             
         ])
         ->header('Content-Type', 'application/json');
