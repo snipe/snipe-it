@@ -101,6 +101,32 @@
                         {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                       </div>
                     </div>
+
+                    @if (($snipeSettings->slack_endpoint!='') || ($snipeSettings->msteams_endpoint!='')|| ($snipeSettings->discord_endpoint!=''))
+                    <div class="form-group notification-callout">
+                        <div class="col-md-8 col-md-offset-3">
+                            <div class="callout callout-info">
+
+                            @if ($snipeSettings->slack_endpoint!='')
+                                            <i class="fab fa-slack" aria-hidden="true"></i>
+                                            {{ trans('general.slack_msg_note')}}
+                                            <br>
+                                        @endif
+
+                                        @if ($snipeSettings->msteams_endpoint!='')
+                                            <i class="fab fa-windows" aria-hidden="true"></i>
+                                            {{ trans('general.msteams_msg_note')}}
+                                            <br>
+                                        @endif
+                                        @if ($snipeSettings->discord_endpoint!='')
+                                            <i class="fab fa-discord" aria-hidden="true"></i>
+                                            {{ trans('general.discord_msg_note')}}
+                                            <br>
+                                        @endif
+                            </div>
+                        </div>
+                    </div>
+                @endif
                     <div class="box-footer">
                       <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>
                       <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.checkin') }}</button>

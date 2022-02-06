@@ -11,6 +11,8 @@ use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
+use NotificationChannels\Webhook\WebhookChannel;
+use NotificationChannels\Webhook\WebhookMessage;
 
 class CheckoutLicenseSeatNotification extends Notification
 {
@@ -72,6 +74,11 @@ class CheckoutLicenseSeatNotification extends Notification
             \Log::debug('use msteams');
             $notifyBy[2] = MicrosoftTeamsChannel::class;
         }
+        
+        if (Setting::getSettings()->discord_endpoint != '') {
+            \Log::debug('use discord');
+            $notifyBy[3] = WebhookChannel::class;
+        }
 
         /**
          * Only send notifications to users that have email addresses
@@ -109,7 +116,7 @@ class CheckoutLicenseSeatNotification extends Notification
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
-        $note = $this->note;
+        $note = $this->note ?: 'No note provided.';
         $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
 
         $fields = [
@@ -154,6 +161,24 @@ class CheckoutLicenseSeatNotification extends Notification
     }
 
 
+    public function toWebhook($notifiable)
+    {
+         $expectedCheckin = 'None';
+            $target = $this->target;
+            $admin = $this->admin;
+            $item = $this->item;
+            $note = $this->note ?: 'No note provided.';
+
+        return WebhookMessage::create()
+        ->data([
+                'content' => ':arrow_up: :floppy_disk:  **License Checked Out**
+            *To:* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
+            *By:* ['.$admin->present()->fullName().']('.$admin->present()->viewUrl().')
+            [View in Browser]('.$target->present()->viewUrl().')',
+            
+        ])
+        ->header('Content-Type', 'application/json');
+    }
 
 
     /**

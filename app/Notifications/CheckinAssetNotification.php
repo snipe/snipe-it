@@ -79,7 +79,7 @@ class CheckinAssetNotification extends Notification
     {
         $admin = $this->admin;
         $item = $this->item;
-        $note = $this->note;
+        $note = $this->note ?: 'No note provided.';
         $botname = ($this->settings->slack_botname != '') ? $this->settings->slack_botname : 'Snipe-Bot';
 
         $fields = [
@@ -128,7 +128,7 @@ class CheckinAssetNotification extends Notification
             $target = $this->target;
             $admin = $this->admin;
             $item = $this->item;
-            $note = $this->note;
+            $note = $this->note ?: 'No note provided.';
 
         return WebhookMessage::create()
         ->data([

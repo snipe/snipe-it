@@ -57,22 +57,27 @@
                 </div>
             </div>
 
-             @if (($snipeSettings->slack_endpoint!='') || ($snipeSettings->msteams_endpoint!=''))
+             @if (($snipeSettings->slack_endpoint!='') || ($snipeSettings->msteams_endpoint!='')|| ($snipeSettings->discord_endpoint!=''))
                     <div class="form-group notification-callout">
                         <div class="col-md-8 col-md-offset-3">
                             <div class="callout callout-info">
 
-                                @if ($snipeSettings->slack_endpoint!='')
-                                    <i class="fa fa-slack"></i>
-                                    A slack message will be sent
-                                    <br>
-                                @endif
+                            @if ($snipeSettings->slack_endpoint!='')
+                                            <i class="fab fa-slack" aria-hidden="true"></i>
+                                            {{ trans('general.slack_msg_note')}}
+                                            <br>
+                                        @endif
 
-                                @if ($snipeSettings->msteams_endpoint!='')
-                                    <i class="fa fa-windows" aria-hidden="true"></i>
-                                     A Microsoft Teams message will be sent
-                                    <br>
-                                @endif
+                                        @if ($snipeSettings->msteams_endpoint!='')
+                                            <i class="fab fa-windows" aria-hidden="true"></i>
+                                            {{ trans('general.msteams_msg_note')}}
+                                            <br>
+                                        @endif
+                                        @if ($snipeSettings->discord_endpoint!='')
+                                            <i class="fab fa-discord" aria-hidden="true"></i>
+                                            {{ trans('general.discord_msg_note')}}
+                                            <br>
+                                        @endif
                             </div>
                         </div>
                     </div>

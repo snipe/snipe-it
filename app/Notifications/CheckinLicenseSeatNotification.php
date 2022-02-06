@@ -11,6 +11,8 @@ use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NotificationChannels\Webhook\WebhookChannel;
+use NotificationChannels\Webhook\WebhookMessage;
 
 class CheckinLicenseSeatNotification extends Notification
 {
@@ -51,6 +53,10 @@ class CheckinLicenseSeatNotification extends Notification
             \Log::debug('use msteams');
             $notifyBy[2] = MicrosoftTeamsChannel::class;
         }
+        if (Setting::getSettings()->discord_endpoint != '') {
+            \Log::debug('use discord');
+            $notifyBy[3] = WebhookChannel::class;
+        }
 
         /**
          * Only send checkin notifications to users if the category
@@ -68,7 +74,7 @@ class CheckinLicenseSeatNotification extends Notification
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
-        $note = $this->note;
+        $note = $this->note ?: 'No note provided.';
         $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
 
         if ($admin) {
@@ -115,7 +121,24 @@ class CheckinLicenseSeatNotification extends Notification
             ->button('View in Browser', '' . $target->present()->viewUrl() . '', $params = ['section' => 'action_msteams']);
     }
 
+    public function toWebhook($notifiable)
+    {
+         $expectedCheckin = 'None';
+            $target = $this->target;
+            $admin = $this->admin;
+            $item = $this->item;
+            $note = $this->note ?: 'No note provided.';
 
+        return WebhookMessage::create()
+        ->data([
+                'content' => ':arrow_down: :floppy_disk:  **License Checked In**
+            *From:* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
+            *Status:* '.$item->assetstatus->name.'
+            [View in Browser]('.$target->present()->viewUrl().')',
+            
+        ])
+        ->header('Content-Type', 'application/json');
+    }
 
 
     /**

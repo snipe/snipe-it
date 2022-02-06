@@ -113,7 +113,7 @@ class CheckoutAssetNotification extends Notification
         $target = $this->target;
         $admin = $this->admin;
         $item = $this->item;
-        $note = $this->note;
+        $note = $this->note ?: 'No note provided.';
         $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
 
         $fields = [
@@ -142,7 +142,7 @@ class CheckoutAssetNotification extends Notification
             $target = $this->target;
             $admin = $this->admin;
             $item = $this->item;
-            $note = $this->note;
+            $note = $this->note ?: 'No note provided.';
 
             if (($this->expected_checkin) && ($this->expected_checkin != '')) {
                 $expectedCheckin = $this->expected_checkin;
@@ -166,7 +166,7 @@ class CheckoutAssetNotification extends Notification
             $target = $this->target;
             $admin = $this->admin;
             $item = $this->item;
-            $note = $this->note;
+            $note = $this->note ?: 'No note provided.';
 
         return WebhookMessage::create()
         ->data([
@@ -178,10 +178,6 @@ class CheckoutAssetNotification extends Notification
         ])
         ->header('Content-Type', 'application/json');
     }
-
-
-
-//<a href='.$item->present()->viewUrl().'>'.$item->present()->name).'</a>
 
     /**
      * Get the mail representation of the notification.
