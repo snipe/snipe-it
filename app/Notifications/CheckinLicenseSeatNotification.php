@@ -131,9 +131,9 @@ class CheckinLicenseSeatNotification extends Notification
 
         return WebhookMessage::create()
         ->data([
-                'content' => ':arrow_down: :floppy_disk:  **License Checked In**
+                'content' => ':arrow_down: :floppy_disk:  **License Checked In:** ['. $item->present()->fullName() .']('.$item->present()->viewUrl().')
             *From:* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
-            *Status:* '.$item->assetstatus->name.'
+            *Note*: '.$note.'
             [View in Browser]('.$target->present()->viewUrl().')',
             
         ])

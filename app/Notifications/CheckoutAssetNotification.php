@@ -170,9 +170,10 @@ class CheckoutAssetNotification extends Notification
 
         return WebhookMessage::create()
         ->data([
-                'content' => ':arrow_up: :computer:  **Asset Checked Out**
+                'content' => ':arrow_up: :computer:  **Asset Checked Out: **['. $item->present()->fullName() .']('.$item->present()->viewUrl().')
             *To:* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
             *By:* ['.$admin->present()->fullName().']('.$admin->present()->viewUrl().')
+            *Note*: '.$note.'
             [View in Browser]('.$target->present()->viewUrl().')',
             
         ])
