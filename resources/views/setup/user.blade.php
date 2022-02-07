@@ -37,7 +37,7 @@ Create a User ::
     </div>
 
     <!-- Currency -->
-    <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'default_currency')) ? ' required' : '' }} {{$errors->has('default_currency') ? 'error' : ''}}">
+    <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\Setting::class, 'default_currency')) ? ' required' : '' }} {{$errors->has('default_currency') ? 'error' : ''}}">
       {{ Form::label('default_currency', trans('admin/settings/general.default_currency')) }}
       {{ Form::text('default_currency', Request::old('default_currency'), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
 
