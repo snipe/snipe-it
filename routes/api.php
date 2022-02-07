@@ -460,7 +460,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
         ]
         )->name('api.asset.audit');
 
-        Route::post('checkin',
+        Route::post('{id}/checkin',
         [
             Api\AssetsController::class, 
             'checkin'
@@ -474,7 +474,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api'], function () {
             ]
         )->name('api.asset.checkinbytag');
 
-        Route::post('checkout',
+        Route::post('{id}/checkout',
         [
             Api\AssetsController::class, 
             'checkout'
