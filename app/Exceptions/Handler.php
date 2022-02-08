@@ -8,6 +8,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Helper;
 use Illuminate\Validation\ValidationException;
 use Log;
+use JsonException;
 
 
 class Handler extends ExceptionHandler
@@ -26,6 +27,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Validation\ValidationException::class,
         \Intervention\Image\Exception\NotSupportedException::class,
         \League\OAuth2\Server\Exception\OAuthServerException::class,
+        JsonException::class
     ];
 
     /**
@@ -58,6 +60,12 @@ class Handler extends ExceptionHandler
         // CSRF token mismatch error
         if ($e instanceof \Illuminate\Session\TokenMismatchException) {
             return redirect()->back()->with('error', trans('general.token_expired'));
+        }
+
+        // Invalid JSON exception
+        // TODO: don't understand why we have to do this when we have the invalidJson() method, below, but, well, whatever
+        if ($e instanceof JsonException) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'invalid JSON'), 422);
         }
 
 
