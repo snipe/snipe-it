@@ -36,7 +36,11 @@ class ActionlogsTransformer
 
                         if (is_array($meta_value)) {
                             foreach ($meta_value as $meta_value_key => $meta_value_value) {
-                                $clean_meta[$key][$meta_value_key] = e($meta_value_value);
+                                if (is_scalar($meta_value_value)) {
+                                    $clean_meta[$key][$meta_value_key] = e($meta_value_value);
+                                } else {
+                                    $clean_meta[$key][$meta_value_key] = 'invalid scalar: '.print_r($meta_value_value, true);
+                                }
                             }
                         } else {
 
