@@ -462,7 +462,7 @@ class AssetModelsController extends Controller
     {
         foreach ($defaultValues as $customFieldId => $defaultValue) {
             if(is_array($defaultValue)){
-                $model->defaultValues()->attach($customFieldId, ['default_value' => implode(',', $defaultValue)]);
+                $model->defaultValues()->attach($customFieldId, ['default_value' => implode(', ', $defaultValue)]);
             }elseif ($defaultValue) {
                 $model->defaultValues()->attach($customFieldId, ['default_value' => $defaultValue]);
             }
