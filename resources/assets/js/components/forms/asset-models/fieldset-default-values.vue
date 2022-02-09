@@ -47,7 +47,7 @@
                                 <textarea v-if="field.type == 'textarea'" class="form-control" :value="getValue(field)" :id="'default-value' + field.id" :name="'default_values[' + field.id + ']'"></textarea><br>
 
                               <div v-for="field_value in field.field_values_array">
-                                <input v-if="field.type == 'checkbox'" class="" type="checkbox" :name="'default_values[' + field.id + '][]'" :value="field_value"> <label>{{ field_value }}</label>
+                                <input v-if="field.type == 'checkbox'" class="" type="checkbox" :name="'default_values[' + field.id + '][]'" :value="field_value" :checked="getValue(field).split(',').includes(field_value)"> <label>{{ field_value }}</label>
                               </div>
 
                                 <select v-if="field.type == 'listbox'" class="form-control m-b-xs" :name="'default_values[' + field.id + ']'">

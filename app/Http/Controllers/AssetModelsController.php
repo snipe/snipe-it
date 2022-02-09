@@ -155,7 +155,6 @@ class AssetModelsController extends Controller
         $model->requestable         = $request->input('requestable', '0');
 
 
-
         $this->removeCustomFieldsDefaultValues($model);
 
         if ($request->input('custom_fieldset')=='') {
@@ -464,8 +463,7 @@ class AssetModelsController extends Controller
         foreach ($defaultValues as $customFieldId => $defaultValue) {
             if(is_array($defaultValue)){
                 $model->defaultValues()->attach($customFieldId, ['default_value' => implode(',', $defaultValue)]);
-            }
-            if ($defaultValue) {
+            }elseif ($defaultValue) {
                 $model->defaultValues()->attach($customFieldId, ['default_value' => $defaultValue]);
             }
         }
