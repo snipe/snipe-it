@@ -168,7 +168,6 @@ class AssetModelsController extends Controller
             }
         }
 
-
         if ($model->save()) {
             return redirect()->route("models.index")->with('success', trans('admin/models/message.update.success'));
         }
@@ -463,6 +462,9 @@ class AssetModelsController extends Controller
     private function assignCustomFieldsDefaultValues(AssetModel $model, array $defaultValues)
     {
         foreach ($defaultValues as $customFieldId => $defaultValue) {
+            if(is_array($defaultValue)){
+                $model->defaultValues()->attach($customFieldId, ['default_value' => implode(',', $defaultValue)]);
+            }
             if ($defaultValue) {
                 $model->defaultValues()->attach($customFieldId, ['default_value' => $defaultValue]);
             }

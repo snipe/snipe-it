@@ -45,7 +45,10 @@
                             <div class="col-sm-12 col-lg-6">
                                 <input v-if="field.type == 'text'" class="form-control m-b-xs" type="text" :value="getValue(field)" :id="'default-value' + field.id" :name="'default_values[' + field.id + ']'">
                                 <textarea v-if="field.type == 'textarea'" class="form-control" :value="getValue(field)" :id="'default-value' + field.id" :name="'default_values[' + field.id + ']'"></textarea><br>
-                                <input v-if="field.type == 'checkbox'" v-for="field_value in field.field_values_array" class="" type="checkbox" :value="field_value">
+
+                              <div v-for="field_value in field.field_values_array">
+                                <input v-if="field.type == 'checkbox'" class="" type="checkbox" :name="'default_values[' + field.id + '][]'" :value="field_value"> <label>{{ field_value }}</label>
+                              </div>
 
                                 <select v-if="field.type == 'listbox'" class="form-control m-b-xs" :name="'default_values[' + field.id + ']'">
                                     <option value=""></option>
