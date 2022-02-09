@@ -70,8 +70,9 @@ class FixDoubleEscape extends Command
                     $count[$classname][$field] = 0;
 
                     foreach($classname::where("$field",'LIKE','%&%')->get() as $row) {
-                        $this->info('Updating '.$field.' for '.$classname);
-                        $row->{$field} = html_entity_decode($row->{$field});
+                       
+                        $fixed = html_entity_decode($row->{$field});
+                        $this->info('Updating '.$field.' for '.$classname.' to '.$row->{$field}.' to '.$fixed);
                         $row->save();
                         $count[$classname][$field]++;
 
