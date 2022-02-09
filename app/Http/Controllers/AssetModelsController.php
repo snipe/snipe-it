@@ -155,7 +155,6 @@ class AssetModelsController extends Controller
         $model->requestable         = $request->input('requestable', '0');
 
 
-
         $this->removeCustomFieldsDefaultValues($model);
 
         if ($request->input('custom_fieldset')=='') {
@@ -167,7 +166,6 @@ class AssetModelsController extends Controller
                 $this->assignCustomFieldsDefaultValues($model, $request->input('default_values'));
             }
         }
-
 
         if ($model->save()) {
             return redirect()->route("models.index")->with('success', trans('admin/models/message.update.success'));
@@ -463,7 +461,9 @@ class AssetModelsController extends Controller
     private function assignCustomFieldsDefaultValues(AssetModel $model, array $defaultValues)
     {
         foreach ($defaultValues as $customFieldId => $defaultValue) {
-            if ($defaultValue) {
+            if(is_array($defaultValue)){
+                $model->defaultValues()->attach($customFieldId, ['default_value' => implode(', ', $defaultValue)]);
+            }elseif ($defaultValue) {
                 $model->defaultValues()->attach($customFieldId, ['default_value' => $defaultValue]);
             }
         }
