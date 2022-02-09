@@ -72,8 +72,11 @@ class FixDoubleEscape extends Command
                     foreach($classname::where("$field",'LIKE','%&%')->get() as $row) {
                        
                         $fixed = html_entity_decode($row->{$field});
-                        $this->info('Updating '.$field.' for '.$classname.' to '.$row->{$field}.' to '.$fixed);
-                        $row->save();
+                        if ($row->save()) {
+                            $this->info('Updating '.$field.' for '.$classname.' to '.$row->{$field}.' to '.$fixed);
+                        } else {
+                            $this->error('Could NOT update '.$field.' for '.$classname.' to '.$row->{$field}.' to '.$fixed.': '.$row->getErrors());
+                        }
                         $count[$classname][$field]++;
 
                     }
