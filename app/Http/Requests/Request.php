@@ -8,6 +8,14 @@ abstract class Request extends FormRequest
 {
     protected $rules = [];
 
+    public function json($key = null, $default = null)
+    {
+        if ($this->ajax() || $this->wantsJson()) {
+            json_decode($this->getContent(), false, 512, JSON_THROW_ON_ERROR); // ignore output, just throw
+        }
+        return parent::json($key, $default);
+    }
+
     public function rules()
     {
         return $this->rules;
