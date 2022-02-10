@@ -8,6 +8,8 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
+
+use Illuminate\Notifications\Messages\SlackMessage;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsChannel;
 use NotificationChannels\MicrosoftTeams\MicrosoftTeamsMessage;
 //use NotificationChannels\Discord\DiscordChannel;
@@ -124,10 +126,10 @@ class NotificationIntegrations extends Notification
     
     }
 
-    public static function slackMessageBuilder($item, $target, $admin, $botname = '', $direction = null, $note = 'No note provided.')
+    public static function slackMessageBuilder($item, $target, $admin, $direction, $note = 'No note provided.', $expectedCheckin = 'none', $botname = 'Snipe-Bot')
     {
         
-            $type = get_class($item);
+            $type = class_basename($item);
 
             $typeicon = [
                 "Asset" => ":computer:",
@@ -135,14 +137,32 @@ class NotificationIntegrations extends Notification
                 "License" => ":floppy_disk:",
                 "Consumable" => ":paperclip:"
             ];
-            $directionicon = ($direction =="out" ? ":arrow_up:" : ":arrow_down");;
 
+            $directionicon = ($direction =="out" ? ":arrow_up:" : ":arrow_down");;
+            
+            $fields = [
+                'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
+                'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
+            ];
+    
+            if ($expectedCheckin && $expectedCheckin != '') {
+                $fields['Expected Checkin'] = $expectedCheckin;
+            }
+    
+            return (new SlackMessage)
+                ->content(''.$directionicon.''.$typeicon[$type].' '.$type.' Checked '.$direction.'')
+                ->from($botname)
+                ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
+                    $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
+                        ->fields($fields)
+                        ->content($note);
+                });
     }
 
-    public static function webhookMessageBuilder($item, $target, $admin, $botname = '', $direction = null, $note = 'No note provided.')
+    public static function webhookMessageBuilder($item, $target, $admin, $direction, $note = 'No note provided.', $expectedCheckin = 'none', $botname = '')
     {
         
-        $type = get_class($item);
+        $type = class_basename($item);
 
         $typeicon = [
             "Asset" => ":computer:",
@@ -151,14 +171,24 @@ class NotificationIntegrations extends Notification
             "Consumable" => ":paperclip:"
         ];
         $directionicon = ($direction =="out" ? ":arrow_up:" : ":arrow_down");;
-
+  
+      return WebhookMessage::create()
+        ->data([
+                'content' => ''.$directionicon.''.$typeicon[$type].' **'.$type.' Checked '.$direction.'**['. $item->present()->fullName() .']('.$item->present()->viewUrl().')
+            *To:* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
+            *By:* ['.$admin->present()->fullName().']('.$admin->present()->viewUrl().')
+            *Note*: '.$note.'
+            [View in Browser]('.$target->present()->viewUrl().')',
+            
+        ])
+        ->header('Content-Type', 'application/json');
 
     }
 
-    public static function customWebhookMessageBuilder($item, $target, $admin, $botname = '', $direction = null, $note = 'No note provided.')
+    public static function customWebhookMessageBuilder($item, $target, $admin, $direction, $note = 'No note provided.', $expectedCheckin = 'none', $botname = '')
     {
         
-        $type = get_class($item);
+        $type = class_basename($item);
 
         $typeicon = [
             "Asset" => ":computer:",

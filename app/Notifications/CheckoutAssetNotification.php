@@ -8,7 +8,6 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use App\Notifications\NotificationIntegrations;
 
@@ -47,7 +46,7 @@ class CheckoutAssetNotification extends Notification
     }
 
     /**
-     * Get the notification's delivery channels.
+     * Get the notification's delivery channels from NotificationIntegrations class.
      * 
      *
      * @return array
@@ -55,85 +54,29 @@ class CheckoutAssetNotification extends Notification
 
     public function via()
     {
-       // return $notifyBy[];
-       //
+       
        return NotificationIntegrations::notifyByChannels($this->item, $this->target);
     }
 
+
+    /****
+     * Laravel Notifications Channels uses these to return message.
+     * We build messages in NotificationIntegration to keep formatting consistent.
+     */
+
     public function toSlack()
     {
-        $target = $this->target;
-        $admin = $this->admin;
-        $item = $this->item;
-        $note = $this->note ?: 'No note provided.';
-        $botname = ($this->settings->slack_botname) ? $this->settings->slack_botname : 'Snipe-Bot';
-
-        $fields = [
-            'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
-            'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
-        ];
-
-        if (($this->expected_checkin) && ($this->expected_checkin != '')) {
-            $fields['Expected Checkin'] = $this->expected_checkin;
-        }
-
-        return (new SlackMessage)
-            ->content(':arrow_up: :computer: Asset Checked Out')
-            ->from($botname)
-            ->attachment(function ($attachment) use ($item, $note, $admin, $fields) {
-                $attachment->title(htmlspecialchars_decode($item->present()->name), $item->present()->viewUrl())
-                    ->fields($fields)
-                    ->content($note);
-            });
+        return NotificationIntegrations::slackMessageBuilder($this->item, $this->target, $this->admin, "out", $this->note = 'No note provided.', $this->expected_checkin, $this->settings->slack_botname);
     }
-
 
     public function toMicrosoftTeams($notifiable)
     {
        return NotificationIntegrations::msteamsMessageBuilder($this->item, $this->target, $this->admin, "out", $this->note = 'No note provided.', $this->expected_checkin);
-  
-        /*
-            $expectedCheckin = 'None';
-            $target = $this->target;
-            $admin = $this->admin;
-            $item = $this->item;
-            $note = $this->note ?: 'No note provided.';
-
-            if (($this->expected_checkin) && ($this->expected_checkin != '')) {
-                $expectedCheckin = $this->expected_checkin;
-            }
-
-        return MicrosoftTeamsMessage::create()
-            ->to(Setting::getSettings()->msteams_endpoint)
-            ->type('success')
-            ->addStartGroupToSection($sectionId = 'action_msteams')
-            ->title('&#x2B06;&#x1F4BB; Asset Checked Out: <a href=' . $item->present()->viewUrl() . '>' . $item->present()->fullName() . '</a>', $params = ['section' => 'action_msteams'])
-            ->content($note, $params = ['section' => 'action_msteams'])
-            ->fact('To','<a href='.$target->present()->viewUrl().'>'.$target->present()->fullName().'</a>', $sectionId = 'action_msteams')
-            ->fact('By', '<a href='.$admin->present()->viewUrl().'>'.$admin->present()->fullName().'</a>', $sectionId = 'action_msteams')
-            ->fact('Expected Checkin', $expectedCheckin, $sectionId = 'action_msteams')
-            ->button('View in Browser', ''.$target->present()->viewUrl().'', $params = ['section' => 'action_msteams']);
-   */
-        }
+    }
 
     public function toWebhook($notifiable)
     {
-         $expectedCheckin = 'None';
-            $target = $this->target;
-            $admin = $this->admin;
-            $item = $this->item;
-            $note = $this->note ?: 'No note provided.';
-
-        return WebhookMessage::create()
-        ->data([
-                'content' => ':arrow_up: :computer:  **Asset Checked Out: **['. $item->present()->fullName() .']('.$item->present()->viewUrl().')
-            *To:* ['.$target->present()->fullName().']('.$target->present()->viewUrl().')
-            *By:* ['.$admin->present()->fullName().']('.$admin->present()->viewUrl().')
-            *Note*: '.$note.'
-            [View in Browser]('.$target->present()->viewUrl().')',
-            
-        ])
-        ->header('Content-Type', 'application/json');
+        return NotificationIntegrations::webhookMessageBuilder($this->item, $this->target, $this->admin, "out", $this->note = 'No note provided.', $this->expected_checkin, $this->settings->slack_botname);
     }
 
     /**
