@@ -17,6 +17,9 @@
 <!-- Manager-->
 @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/users/table.manager'), 'fieldname' => 'manager_id'])
 
+<!-- Company -->
+@include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
+
 <!-- Currency -->
 <div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
     <label for="currency" class="col-md-3 control-label">

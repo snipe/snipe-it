@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Asset;
+use App\Models\Company;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -78,6 +79,7 @@ class LocationsController extends Controller
         $location->zip = $request->input('zip');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
+        $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
         $location->user_id = Auth::id();
 
         $location = $request->handleImages($location);
@@ -141,6 +143,7 @@ class LocationsController extends Controller
         $location->zip = $request->input('zip');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
+        $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
 
         $location = $request->handleImages($location);
 
@@ -214,10 +217,16 @@ class LocationsController extends Controller
         $location = Location::where('id', $id)->first();
         $parent = Location::where('id', $location->parent_id)->first();
         $manager = User::where('id', $location->manager_id)->first();
+        $company = Company::where('id', $location->company_id)->first();
         $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
         $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
-
-        return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
+        return view('locations/print')
+            ->with('assets', $assets)
+            ->with('users',$users)
+            ->with('location', $location)
+            ->with('parent', $parent)
+            ->with('manager', $manager)
+            ->with('company', $company);
     }
 
     public function print_all_assigned($id)
@@ -225,9 +234,15 @@ class LocationsController extends Controller
         $location = Location::where('id', $id)->first();
         $parent = Location::where('id', $location->parent_id)->first();
         $manager = User::where('id', $location->manager_id)->first();
+        $company = Company::where('id', $location->company_id)->first();
         $users = User::where('location_id', $id)->with('company', 'department', 'location')->get();
         $assets = Asset::where('location_id', $id)->with('model', 'model.category')->get();
-
-        return view('locations/print')->with('assets', $assets)->with('users', $users)->with('location', $location)->with('parent', $parent)->with('manager', $manager);
+        return view('locations/print')
+            ->with('assets', $assets)
+            ->with('users',$users)
+            ->with('location', $location)
+            ->with('parent', $parent)
+            ->with('manager', $manager)
+            ->with('company', $company);
     }
 }
