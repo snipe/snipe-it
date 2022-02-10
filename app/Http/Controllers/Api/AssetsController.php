@@ -860,8 +860,13 @@ class AssetsController extends Controller
             $asset->status_id =  $request->input('status_id');
         }
 
+        $checkin_at = null;
+        if ($request->filled('checkin_at')) {
+            $checkin_at = $request->input('checkin_at');
+        }
+
         if ($asset->save()) {
-            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note')));
+            event(new CheckoutableCheckedIn($asset, $target, Auth::user(), $request->input('note'), $checkin_at));
 
             return response()->json(Helper::formatStandardApiResponse('success', ['asset'=> e($asset->asset_tag)], trans('admin/hardware/message.checkin.success')));
         }
